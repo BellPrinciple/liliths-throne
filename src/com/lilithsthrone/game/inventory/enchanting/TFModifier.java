@@ -11,7 +11,6 @@ import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
-import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.SvgUtil;
@@ -1778,7 +1777,7 @@ public enum TFModifier {
 		if(SVGString==null) {
 			// Set this item's file image:
 			try {
-				InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/crafting/" + path + ".svg");
+				InputStream is = TFModifier.class.getResourceAsStream("/com/lilithsthrone/res/crafting/" + path + ".svg");
 				if(is==null) {
 					System.err.println("Error! TFModifier icon file does not exist (Trying to read from '"+path+"')! (Code 2)");
 				}
@@ -1788,7 +1787,7 @@ public enum TFModifier {
 				
 				if(path.contains("flavour")) {
 					String SVGStringBackground = "";
-					is = Subspecies.class.getClassLoader().getResourceAsStream("com/lilithsthrone/res/crafting/flavours/background.svg");
+					is = TFModifier.class.getResourceAsStream("/com/lilithsthrone/res/crafting/flavours/background.svg");
 					if(is==null) {
 						System.err.println("Error! Subspecies background icon file does not exist (Trying to read from 'flavours/background')!");
 					}

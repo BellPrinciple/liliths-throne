@@ -48,7 +48,7 @@ public abstract class AbstractFetish {
 	
 	static {
 		try {
-			InputStream is = Subspecies.class.getClassLoader().getResourceAsStream("com/lilithsthrone/res/fetishes/fetish_bimbo.svg");
+			InputStream is = Subspecies.class.getResourceAsStream("/com/lilithsthrone/res/fetishes/fetish_bimbo.svg");
 			if(is==null) {
 				System.err.println("Error! Fetish icon file does not exist (Trying to read from 'com/lilithsthrone/res/fetishes/fetish_bimbo')!");
 			}
@@ -59,7 +59,7 @@ public abstract class AbstractFetish {
 			e.printStackTrace();
 		}
 		try {
-			InputStream is = Subspecies.class.getClassLoader().getResourceAsStream("com/lilithsthrone/res/fetishes/fetish_bro.svg");
+			InputStream is = Subspecies.class.getResourceAsStream("/com/lilithsthrone/res/fetishes/fetish_bro.svg");
 			broString = Util.inputStreamToString(is);
 			broString = SvgUtil.colourReplacement("FETISH_BRO", PresetColour.BASE_BLUE, broString);
 			is.close();
