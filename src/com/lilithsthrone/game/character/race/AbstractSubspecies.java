@@ -187,7 +187,7 @@ public abstract class AbstractSubspecies {
 		for(int i=1; i<=9; i++) {
 			try {
 				String SVGStringBackground = "";
-				InputStream is = Subspecies.class.getClassLoader().getResourceAsStream("com/lilithsthrone/res/statusEffects/race/raceBackground.svg");
+				InputStream is = Subspecies.class.getResourceAsStream("com/lilithsthrone/res/statusEffects/race/raceBackground.svg");
 				if(is==null) {
 					System.err.println("Error! Subspecies background icon file does not exist (Trying to read from 'statusEffects/race/raceBackground')! (Code 1f)");
 				}
@@ -214,7 +214,7 @@ public abstract class AbstractSubspecies {
 		for(int i=1; i<=9; i++) {
 			try {
 				String SVGStringBackground = "";
-				InputStream is = Subspecies.class.getClassLoader().getResourceAsStream("com/lilithsthrone/res/statusEffects/race/raceBackground.svg");
+				InputStream is = Subspecies.class.getResourceAsStream("com/lilithsthrone/res/statusEffects/race/raceBackground.svg");
 				if(is==null) {
 					System.err.println("Error! Subspecies background icon file does not exist (Trying to read from 'statusEffects/race/raceBackground')! (Code 2f)");
 				}
