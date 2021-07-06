@@ -214,8 +214,8 @@ import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
-import jdk.nashorn.api.scripting.NashornScriptEngine;
-import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
 /**
  * @since 0.1.0
@@ -9780,7 +9780,7 @@ public class UtilText {
 		for(Entry<DialogueNode, String> dn: DialogueManager.getDialogueToIdMap().entrySet()) {
 			engine.put("DN_"+dn.getValue(), dn.getKey());
 		}
-		
+
 		// Bodies:
 		for(AbstractRace race : Race.getAllRaces()) {
 			engine.put("RACE_"+Race.getIdFromRace(race), race);
@@ -10021,8 +10021,8 @@ public class UtilText {
 		for(OrgasmCumTarget oct : OrgasmCumTarget.values()) {
 			engine.put("OCT_"+oct.toString(), oct);
 		}
-		
-		
+
+
 		// Other:
 		for(Season season : Season.values()) {
 			engine.put("SEASON_"+season.toString(), season);

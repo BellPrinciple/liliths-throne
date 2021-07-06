@@ -1883,22 +1883,18 @@ public enum Fetish {
 	private static String bimboString = "";
 	private static String broString = "";
 	static {
-		try {
-			InputStream is = Subspecies.class.getResourceAsStream("com/lilithsthrone/res/fetishes/fetish_bimbo.svg");
+		try(InputStream is = Subspecies.class.getResourceAsStream("/com/lilithsthrone/res/fetishes/fetish_bimbo.svg")) {
 			if(is==null) {
 				System.err.println("Error! Fetish icon file does not exist (Trying to read from 'com/lilithsthrone/res/fetishes/fetish_bimbo')!");
 			}
 			bimboString = Util.inputStreamToString(is);
 			bimboString = SvgUtil.colourReplacement("FETISH_BIMBO", PresetColour.BASE_PINK, bimboString);
-			is.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		try {
-			InputStream is = Subspecies.class.getResourceAsStream("com/lilithsthrone/res/fetishes/fetish_bro.svg");
+		try(InputStream is = Subspecies.class.getResourceAsStream("/com/lilithsthrone/res/fetishes/fetish_bro.svg")) {
 			broString = Util.inputStreamToString(is);
 			broString = SvgUtil.colourReplacement("FETISH_BRO", PresetColour.BASE_BLUE, broString);
-			is.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

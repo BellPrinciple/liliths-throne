@@ -189,16 +189,12 @@ public abstract class AbstractSubspecies {
 		youkoIconMap = new HashMap<>();
 		youkoHalfDemonIconMap = new HashMap<>();
 		for(int i=1; i<=9; i++) {
-			try {
+			try(InputStream is = Subspecies.class.getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceBackground.svg")) {
 				String SVGStringBackground = "";
-				InputStream is = Subspecies.class.getResourceAsStream("com/lilithsthrone/res/statusEffects/race/raceBackground.svg");
 				if(is==null) {
 					System.err.println("Error! Subspecies background icon file does not exist (Trying to read from 'statusEffects/race/raceBackground')! (Code 1f)");
 				}
 				SVGStringBackground = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+Util.inputStreamToString(is)+"</div>";
-
-				is.close();
-				
 				String baseSVGString = SVGStringBackground + "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getFoxTail(i)+"</div>";
 				youkoIconMap.put(i, baseSVGString);
 
@@ -216,16 +212,12 @@ public abstract class AbstractSubspecies {
 		}
 		youkoDesaturatedIconMap = new HashMap<>();
 		for(int i=1; i<=9; i++) {
-			try {
-				String SVGStringBackground = "";
-				InputStream is = Subspecies.class.getResourceAsStream("com/lilithsthrone/res/statusEffects/race/raceBackground.svg");
+			try(InputStream is = Subspecies.class.getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceBackground.svg")) {
+				String SVGStringBackground;
 				if(is==null) {
 					System.err.println("Error! Subspecies background icon file does not exist (Trying to read from 'statusEffects/race/raceBackground')! (Code 2f)");
 				}
 				SVGStringBackground = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+Util.inputStreamToString(is)+"</div>";
-				
-				is.close();
-				
 				String baseSVGString = SVGStringBackground + "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getFoxTailDesaturated(i)+"</div>";
 				
 				baseSVGString = SvgUtil.colourReplacement("youkoGradient"+i,
