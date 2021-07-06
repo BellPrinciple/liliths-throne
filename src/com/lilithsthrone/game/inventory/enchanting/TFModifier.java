@@ -1728,7 +1728,7 @@ public enum TFModifier {
 				
 				if(path.contains("flavour")) {
 					String SVGStringBackground = "";
-					is = Subspecies.class.getClassLoader().getResourceAsStream("com/lilithsthrone/res/crafting/flavours/background.svg");
+					is = Subspecies.class.getResourceAsStream("com/lilithsthrone/res/crafting/flavours/background.svg");
 					if(is==null) {
 						System.err.println("Error! Subspecies background icon file does not exist (Trying to read from 'flavours/background')!");
 					}
