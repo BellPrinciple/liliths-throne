@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -223,7 +224,7 @@ public class Sex {
 	private Map<GameCharacter, List<CoverableArea>> areasExposed;
 
 	/**Maps: character -> character's areas -> Map of characters mapped to sets of sexAreas that are contacting character's sexArea*/
-	private Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<SexAreaInterface>>>> ongoingActionsMap;
+	private final HashMap<SexArea,HashSet<SexArea>> ongoingActionsMap = new HashMap<>();
 	
 	/** Maps: character who is doing the knotting -> character they are knotted to */
 	private Map<GameCharacter, GameCharacter> charactersKnottedTogether;
@@ -2776,49 +2777,35 @@ public class Sex {
 				&& !sexAction.endsSex()) {
 
 //			GameCharacter character = activeCharacter;
-			for(GameCharacter character : Main.sex.getAllParticipants()) {
-				if(character.equals(activeCharacter) || character.equals(targetCharacter)) { //TODO For every character?
-					for(Entry<SexAreaInterface, Map<GameCharacter, Set<SexAreaInterface>>> entry : ongoingActionsMap.get(character).entrySet()) {
-						for(GameCharacter characterTarget : Main.sex.getAllParticipants()) {
-							
-							// Reset loose areas ready to be re-applied in applyPenetrationEffects()
-							for(SexAreaOrifice o : SexAreaOrifice.values()) {
-								if(!Main.sex.isOrificeNonSelfOngoingAction(characterTarget, o)) {
-									areasTooLoose.get(characterTarget).remove(o);
-								}
-							}
-							
-							if(entry.getValue().containsKey(characterTarget)) {
-								for(SexAreaInterface sArea : entry.getValue().get(characterTarget)) {
-									if(entry.getKey().isPenetration()) {
-//										if(activeCharacter.equals(targetCharacter)) {
-//											System.out.println(activeCharacter.getNameIgnoresPlayerKnowledge());
-//										}
-										stringBuilderForAppendingDescriptions.append(applyPenetrationEffects(sexAction, character, (SexAreaPenetration)entry.getKey(), characterTarget, sArea));
-									}
-									
-									SexType ongoingSexType = new SexType(SexParticipantType.NORMAL, entry.getKey(), sArea);
-									
-									int weight = character.calculateSexTypeWeighting(ongoingSexType, characterTarget, null, true);
-									int targetWeight = characterTarget.calculateSexTypeWeighting(ongoingSexType.getReversedSexType(), character, null, true);
-									
-									character.incrementLust(Math.max(-2.5f, Math.min(2.5f, (weight*0.25f))), false);
-									characterTarget.incrementLust(Math.max(-2.5f, Math.min(2.5f, (targetWeight*0.25f))), false);
-									
-									// Half xp from ongoing:
-									List<Fetish> selfFetishes = sexAction.getFetishesFromPenetrationAndOrificeTypes(character, entry.getKey(), characterTarget, sArea, true);
-									List<Fetish> targetFetishes = sexAction.getFetishesFromPenetrationAndOrificeTypes(character, entry.getKey(), characterTarget, sArea, false);
-									
-									for(Fetish f : selfFetishes) {
-										character.incrementFetishExperience(f, f.getExperienceGainFromSexAction()/2);
-									}
-									for(Fetish f : targetFetishes) {
-										characterTarget.incrementFetishExperience(f, f.getExperienceGainFromSexAction()/2);
-									}
-								}
-							}
-						}
-					}
+
+			// Reset loose areas ready to be re-applied in applyPenetrationEffects()
+			for(GameCharacter characterTarget : Main.sex.getAllParticipants())
+				for(SexAreaOrifice o : SexAreaOrifice.values())
+					if(!Main.sex.isOrificeNonSelfOngoingAction(characterTarget, o))
+						areasTooLoose.get(characterTarget).remove(o);
+
+			for(var ongoingAction : ongoingActionsMap.entrySet()) {
+				var character = ongoingAction.getKey().character();
+				var area = ongoingAction.getKey().type();
+				if(!character.equals(activeCharacter) && !character.equals(targetCharacter))
+					continue;
+				for(var t : ongoingAction.getValue()) {
+					var characterTarget = t.character();
+					var sArea = t.type();
+					if(area.isPenetration())
+						stringBuilderForAppendingDescriptions.append(applyPenetrationEffects(sexAction,character,(SexAreaPenetration)area,characterTarget,sArea));
+					var ongoingSexType = new SexType(SexParticipantType.NORMAL,area,sArea);
+					int weight = character.calculateSexTypeWeighting(ongoingSexType,characterTarget,null,true);
+					int targetWeight = characterTarget.calculateSexTypeWeighting(ongoingSexType.getReversedSexType(),character,null,true);
+					character.incrementLust(Math.max(-10,Math.min(10,weight))*0.25f,false);
+					characterTarget.incrementLust(Math.max(-10,Math.min(10,targetWeight))*0.25f,false);
+					// Half xp from ongoing:
+					var selfFetishes = sexAction.getFetishesFromPenetrationAndOrificeTypes(character,area,characterTarget,sArea,true);
+					var targetFetishes = sexAction.getFetishesFromPenetrationAndOrificeTypes(character,area,characterTarget,sArea,false);
+					for(var f : selfFetishes)
+						character.incrementFetishExperience(f,f.getExperienceGainFromSexAction()/2);
+					for(var f : targetFetishes)
+						characterTarget.incrementFetishExperience(f,f.getExperienceGainFromSexAction()/2);
 				}
 			}
 			
@@ -3018,17 +3005,9 @@ public class Sex {
 		}
 		
 		// Calculate lubrication transfers:
-		for(GameCharacter characterPenetrating : Main.sex.getAllParticipants()) {
-			for(GameCharacter characterPenetrated : Main.sex.getAllParticipants()) {
-				for(Entry<SexAreaInterface, Map<GameCharacter, Set<SexAreaInterface>>> entry : ongoingActionsMap.get(characterPenetrating).entrySet()) {
-					if(entry.getValue().containsKey(characterPenetrated)) {
-						for(SexAreaInterface sArea : entry.getValue().get(characterPenetrated)) {
-							wetSB.append(transferLubricationNoAppend(characterPenetrating, entry.getKey(), characterPenetrated, sArea));
-						}
-					}
-				}
-			}
-		}
+		for(var k : ongoingActionsMap.entrySet())
+			for(var v : k.getValue())
+				wetSB.append(transferLubricationNoAppend(k.getKey(),v));
 		if(onSexInit && !sexManager.isAppendStartingWetDescriptions()) {
 			return "";
 		}
@@ -3036,20 +3015,19 @@ public class Sex {
 	}
 	
 
-	private String transferLubricationNoAppend(GameCharacter character, SexAreaInterface characterArea, GameCharacter targetCharacter, SexAreaInterface targetArea) {
+	private String transferLubricationNoAppend(SexArea a0, SexArea a1) {
 		StringBuilder lubeSB = new StringBuilder();
-		transferLubricationNoAppend(character,characterArea,targetCharacter,targetArea,lubeSB);
-		transferLubricationNoAppend(targetCharacter,targetArea,character,characterArea,lubeSB);
+		transferLubricationNoAppend(a0,a1,lubeSB);
+		transferLubricationNoAppend(a1,a0,lubeSB);
 		return lubeSB.toString();
 	}
 
-	private void transferLubricationNoAppend(GameCharacter c0, SexAreaInterface a0, GameCharacter c1, SexAreaInterface a1, StringBuilder b) {
-		var a = new SexArea(c0, a0);
+	private void transferLubricationNoAppend(SexArea a0, SexArea a1, StringBuilder b) {
 		var ll = lubrication.stream()
-		.filter(l->l.area().equals(a))
-		.map(l->new Lubrication(a,l.owner(),l.type()))
-		.filter(a0==SexAreaPenetration.PENIS && c0.isWearingCondom()
-			? l->!lubrication.contains(l) && (l.type()!=LubricationType.PRECUM && l.type()!=LubricationType.CUM || c0.equals(l.owner()))
+		.filter(l->l.area().equals(a0))
+		.map(l->new Lubrication(a1,l.owner(),l.type()))
+		.filter(a0.type()==SexAreaPenetration.PENIS && a0.character().isWearingCondom()
+			? l->!lubrication.contains(l) && (l.type()!=LubricationType.PRECUM && l.type()!=LubricationType.CUM || a0.character().equals(l.owner()))
 			: l->!lubrication.contains(l))
 		.collect(Collectors.toList());
 		if(ll.isEmpty())
@@ -3062,13 +3040,13 @@ public class Sex {
 			+(sexInitFinished
 				?" quickly lubricate"+(ll.size()>1||!ll.get(ll.size()-1).type().isPlural()?"s ":" ")
 				:" has already lubricated ")
-			+(c1.isPlayer()?"your ":c1.getName("the")+"'s ")
-			+a1.getName(c1)
+			+(a1.character().isPlayer()?"your ":a1.character().getName("the")+"'s ")
+			+a1.type().getName(a1.character())
 			+"."));
 	}
 	
 	public void transferLubrication(GameCharacter character, SexAreaInterface characterArea, GameCharacter targetCharacter, SexAreaInterface targetArea) {
-		sexSB.append(transferLubricationNoAppend(character, characterArea, targetCharacter, targetArea));
+		sexSB.append(transferLubricationNoAppend(new SexArea(character,characterArea),new SexArea(targetCharacter,targetArea)));
 	}
 	
 	private String getLubricationDescription(GameCharacter character, SexAreaInterface area) {
@@ -3204,11 +3182,10 @@ public class Sex {
 			}
 		}
 
-		ongoingActionsMap.get(characterPerformingAction).get(performerArea).putIfAbsent(characterTargeted, new HashSet<>());
-		ongoingActionsMap.get(characterPerformingAction).get(performerArea).get(characterTargeted).add(targetedArea);
-
-		ongoingActionsMap.get(characterTargeted).get(targetedArea).putIfAbsent(characterPerformingAction, new HashSet<>());
-		ongoingActionsMap.get(characterTargeted).get(targetedArea).get(characterPerformingAction).add(performerArea);
+		var a0 = new SexArea(characterPerformingAction,performerArea);
+		var a1 = new SexArea(characterTargeted,targetedArea);
+		ongoingActionsMap.computeIfAbsent(a0,k->new HashSet<>()).add(a1);
+		ongoingActionsMap.computeIfAbsent(a1,k->new HashSet<>()).add(a0);
 		
 		initialPenetrations.putIfAbsent(characterTargeted, new HashSet<>());
 		initialPenetrations.get(characterTargeted).add(targetedArea);
@@ -3235,87 +3212,64 @@ public class Sex {
 			System.err.println("Warning! Main.sex.applyPenetration() is finding 'characterPenetrated' or 'characterPenetrating' to be null!!!");
 		}
 	}
-	
+
+	private void stopAllOngoingActions(SexArea a) {
+		for(var e : Optional.ofNullable(Main.sex.ongoingActionsMap.get(a)).map(List::copyOf).orElseGet(List::of))
+			stopOngoingAction(a,e,true);
+	}
+
 	public void stopAllOngoingActions(GameCharacter characterPerformingAction, SexAreaInterface area) {
-		for(Entry<GameCharacter, Set<SexAreaInterface>> e : new HashSet<>(Main.sex.ongoingActionsMap.get(characterPerformingAction).get(area).entrySet())) {
-			for(SexAreaInterface sa : e.getValue()) {
-				stopOngoingAction(characterPerformingAction, area, e.getKey(), sa, true);
-			}
-		}
-		if(area==SexAreaPenetration.TONGUE) {
-			for(Entry<GameCharacter, Set<SexAreaInterface>> e : new HashSet<>(Main.sex.ongoingActionsMap.get(characterPerformingAction).get(SexAreaOrifice.MOUTH).entrySet())) {
-				for(SexAreaInterface sa : e.getValue()) {
-					stopOngoingAction(characterPerformingAction, SexAreaOrifice.MOUTH, e.getKey(), sa, true);
-				}
-			}
-		}
-		if(area==SexAreaOrifice.MOUTH) {
-			for(Entry<GameCharacter, Set<SexAreaInterface>> e : new HashSet<>(Main.sex.ongoingActionsMap.get(characterPerformingAction).get(SexAreaPenetration.TONGUE).entrySet())) {
-				for(SexAreaInterface sa : e.getValue()) {
-					stopOngoingAction(characterPerformingAction, SexAreaPenetration.TONGUE, e.getKey(), sa, true);
-				}
-			}
-		}
+		stopAllOngoingActions(new SexArea(characterPerformingAction,area));
+		if(area==SexAreaPenetration.TONGUE)
+			stopAllOngoingActions(new SexArea(characterPerformingAction,SexAreaOrifice.MOUTH));
+		if(area==SexAreaOrifice.MOUTH)
+			stopAllOngoingActions(new SexArea(characterPerformingAction,SexAreaPenetration.TONGUE));
 	}
 
 	public void stopFirstOngoingAction(GameCharacter characterPerformingAction, SexAreaInterface area) {
-		outer:
-		for(Entry<GameCharacter, Set<SexAreaInterface>> e : new HashSet<>(Main.sex.ongoingActionsMap.get(characterPerformingAction).get(area).entrySet())) {
-			for(SexAreaInterface sa : e.getValue()) {
-				stopOngoingAction(characterPerformingAction, area, e.getKey(), sa, true);
-				break outer;
-			}
-		}
-		
-		if(area==SexAreaPenetration.TONGUE) {
-			for(Entry<GameCharacter, Set<SexAreaInterface>> e : new HashSet<>(Main.sex.ongoingActionsMap.get(characterPerformingAction).get(SexAreaOrifice.MOUTH).entrySet())) {
-				for(SexAreaInterface sa : e.getValue()) {
-					stopOngoingAction(characterPerformingAction, SexAreaOrifice.MOUTH, e.getKey(), sa, true);
-				}
-			}
-		}
-		if(area==SexAreaOrifice.MOUTH) {
-			for(Entry<GameCharacter, Set<SexAreaInterface>> e : new HashSet<>(Main.sex.ongoingActionsMap.get(characterPerformingAction).get(SexAreaPenetration.TONGUE).entrySet())) {
-				for(SexAreaInterface sa : e.getValue()) {
-					stopOngoingAction(characterPerformingAction, SexAreaPenetration.TONGUE, e.getKey(), sa, true);
-				}
-			}
-		}
+		var a = new SexArea(characterPerformingAction,area);
+		var v = Main.sex.ongoingActionsMap.get(a);
+		assert null==v || !v.isEmpty();
+		if(null!=v)
+			stopOngoingAction(a,v.iterator().next(),true);
+		if(area==SexAreaPenetration.TONGUE)
+			stopAllOngoingActions(new SexArea(characterPerformingAction,SexAreaOrifice.MOUTH));
+		if(area==SexAreaOrifice.MOUTH)
+			stopAllOngoingActions(new SexArea(characterPerformingAction,SexAreaPenetration.TONGUE));
 	}
 	
 	public void stopAllOngoingActions(GameCharacter characterPerformingAction, GameCharacter characterTargeted) {
-		for(SexAreaOrifice orifice : SexAreaOrifice.values()) {
-			ongoingActionsMap.get(characterPerformingAction).get(orifice).remove(characterTargeted);
-			ongoingActionsMap.get(characterTargeted).get(orifice).remove(characterPerformingAction);
-		}
-		for(SexAreaPenetration penetration : SexAreaPenetration.values()) {
-			ongoingActionsMap.get(characterPerformingAction).get(penetration).remove(characterTargeted);
-			ongoingActionsMap.get(characterTargeted).get(penetration).remove(characterPerformingAction);
-		}
+		ongoingActionsMap.entrySet().removeIf(e->{
+			if(e.getKey().character().equals(characterPerformingAction)) {
+				e.getValue().removeIf(a->a.character().equals(characterTargeted));
+				return e.getValue().isEmpty();
+			}
+			if(e.getKey().character().equals(characterTargeted)) {
+				e.getValue().removeIf(a->a.character().equals(characterPerformingAction));
+				return e.getValue().isEmpty();
+			}
+			return false;
+		});
 	}
 	
 	public void stopAllOngoingActions(GameCharacter characterPerformingAction, SexAreaInterface performerArea, GameCharacter characterTargeted, boolean appendRemovalText) {
-		if(ongoingActionsMap.get(characterPerformingAction).get(performerArea).containsKey(characterTargeted)) {
-			List<SexAreaInterface> areasToClear = new ArrayList<>(ongoingActionsMap.get(characterPerformingAction).get(performerArea).get(characterTargeted));
-			
-			for(SexAreaInterface targetedArea : areasToClear) {
-				if(ongoingActionsMap.get(characterPerformingAction).get(performerArea).get(characterTargeted).remove(targetedArea)) {
-					ongoingActionsMap.get(characterTargeted).get(targetedArea).get(characterPerformingAction).remove(performerArea);
-					if(appendRemovalText && characterTargeted!=null) {
-						sexSB.append(formatStopPenetration(characterTargeted.getStopPenetrationDescription(characterPerformingAction, performerArea, characterTargeted, targetedArea)));
-					}
-				}
-				
-				if(ongoingActionsMap.get(characterPerformingAction).get(performerArea).containsKey(characterTargeted)
-						&& ongoingActionsMap.get(characterPerformingAction).get(performerArea).get(characterTargeted).isEmpty()) {
-					ongoingActionsMap.get(characterPerformingAction).get(performerArea).remove(characterTargeted);
-				}
-				if(ongoingActionsMap.get(characterTargeted).get(targetedArea).containsKey(characterPerformingAction)
-						&& ongoingActionsMap.get(characterTargeted).get(targetedArea).get(characterPerformingAction).isEmpty()) {
-					ongoingActionsMap.get(characterTargeted).get(targetedArea).remove(characterPerformingAction);
-				}
-			}
+		var a = new SexArea(characterPerformingAction,performerArea);
+		var v = ongoingActionsMap.get(a);
+		if(null==v)
+			return;
+		for(var b : v.stream().filter(x->x.character().equals(characterTargeted)).toArray(SexArea[]::new)) {
+			var w = ongoingActionsMap.get(b);
+			if(null==w)
+				continue;
+			w.remove(a);
+			if(appendRemovalText)
+				sexSB.append(formatStopPenetration(characterTargeted.getStopPenetrationDescription(characterPerformingAction,performerArea,characterTargeted,b.type())));
+			if(w.isEmpty())
+				ongoingActionsMap.remove(b);
 		}
+		v.removeIf(x->x.character().equals(characterTargeted));
+		if(v.isEmpty())
+			ongoingActionsMap.remove(a);
 	}
 
 	/**
@@ -3329,26 +3283,25 @@ public class Sex {
 	 * @return The description of this action being stopped.
 	 */
 	public String stopOngoingAction(GameCharacter characterPerformingAction, SexAreaInterface performerArea, GameCharacter characterTargeted, SexAreaInterface targetedArea, boolean appendRemovalText) {
+		return stopOngoingAction(new SexArea(characterPerformingAction,performerArea),new SexArea(characterTargeted,targetedArea),appendRemovalText);
+	}
+
+	private String stopOngoingAction(SexArea a0, SexArea a1, boolean appendRemovalText) {
+		var characterPerformingAction = a0.character();
+		var performerArea = a0.type();
+		var characterTargeted = a1.character();
+		var targetedArea = a1.type();
 		String removalText = "";
-		if(ongoingActionsMap.get(characterPerformingAction).get(performerArea).containsKey(characterTargeted)) {
-			if(ongoingActionsMap.get(characterPerformingAction).get(performerArea).get(characterTargeted).remove(targetedArea)) {
-				ongoingActionsMap.get(characterTargeted).get(targetedArea).get(characterPerformingAction).remove(performerArea);
-				if(characterTargeted!=null) {
-					removalText = formatStopPenetration(characterTargeted.getStopPenetrationDescription(characterPerformingAction, performerArea, characterTargeted, targetedArea));
-					if(appendRemovalText) {
-						sexSB.append(removalText);
-					}
-				}
-			}
-			
-			if(ongoingActionsMap.get(characterPerformingAction).get(performerArea).containsKey(characterTargeted)
-					&& ongoingActionsMap.get(characterPerformingAction).get(performerArea).get(characterTargeted).isEmpty()) {
-				ongoingActionsMap.get(characterPerformingAction).get(performerArea).remove(characterTargeted);
-			}
-			if(ongoingActionsMap.get(characterTargeted).get(targetedArea).containsKey(characterPerformingAction)
-					&& ongoingActionsMap.get(characterTargeted).get(targetedArea).get(characterPerformingAction).isEmpty()) {
-				ongoingActionsMap.get(characterTargeted).get(targetedArea).remove(characterPerformingAction);
-			}
+		var v = ongoingActionsMap.get(a0);
+		if(null!=v && v.remove(a1)) {
+			if(v.isEmpty())
+				ongoingActionsMap.remove(a0);
+			var w = ongoingActionsMap.get(a1);
+			if(null!=w && w.remove(a0) && w.isEmpty())
+				ongoingActionsMap.remove(a1);
+			removalText = formatStopPenetration(characterTargeted.getStopPenetrationDescription(characterPerformingAction, performerArea, characterTargeted, targetedArea));
+			if(appendRemovalText)
+				sexSB.append(removalText);
 		}
 		if(performerArea==SexAreaPenetration.TONGUE && targetedArea==SexAreaOrifice.MOUTH
 				&& Main.sex.getOngoingCharactersUsingAreas(characterTargeted, performerArea, targetedArea).contains(characterPerformingAction)) {
@@ -4388,12 +4341,10 @@ public class Sex {
 			return false;
 		}
 
-		for(Entry<SexAreaInterface, Map<GameCharacter, Set<SexAreaInterface>>> entry : ongoingActionsMap.get(character).entrySet()) {
-			if(entry.getValue().containsKey(target)) {
-				return true;
-			}
-		}
-		return false;
+		return ongoingActionsMap.entrySet().stream()
+		.filter(e->e.getKey().character().equals(character))
+		.flatMap(e->e.getValue().stream())
+		.anyMatch(v->v.character().equals(target));
 	}
 	
 	public boolean isCharacterEngagedInOngoingAction(GameCharacter character) {
@@ -4401,59 +4352,33 @@ public class Sex {
 			System.err.println("isCharacterEngagedInOngoingAction("+character.getId()+") 2: This character is not in Sex!"); 
 			return false;
 		}
-
-		for(Entry<SexAreaInterface, Map<GameCharacter, Set<SexAreaInterface>>> entry : ongoingActionsMap.get(character).entrySet()) {
-			for(GameCharacter penetrator : Main.sex.getAllParticipants()) {
-				if(entry.getValue().containsKey(penetrator)) {
-					return true;
-				}
-			}
-		}
-		return false;
+		return ongoingActionsMap.keySet().stream().anyMatch(k->k.character().equals(character));
 	}
 
 	public boolean isAnyNonSelfOngoingActionHappening() {
-		for(GameCharacter penetrator : Main.sex.getAllParticipants()) {
-			for(GameCharacter penetrated : Main.sex.getAllParticipants()) {
-				if(!penetrator.equals(penetrated)) {
-					for(Entry<SexAreaInterface, Map<GameCharacter, Set<SexAreaInterface>>> entry : ongoingActionsMap.get(penetrator).entrySet()) {
-						if(entry.getValue().containsKey(penetrated)) {
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
+		return ongoingActionsMap.entrySet().stream()
+		.anyMatch(e->e.getValue().stream().anyMatch(v->!v.character().equals(e.getKey().character())));
 	}
 
 	public boolean isCharacterSelfOngoingActionHappening(GameCharacter character) {
-		for(Entry<SexAreaInterface, Map<GameCharacter, Set<SexAreaInterface>>> entry : ongoingActionsMap.get(character).entrySet()) {
-			if(entry.getValue().containsKey(character)) {
-				return true;
-			}
-		}
-		return false;
+		return ongoingActionsMap.entrySet().stream()
+		.filter(e->e.getKey().character().equals(character))
+		.flatMap(e->e.getValue().stream())
+		.anyMatch(e->e.character().equals(character));
 	}
 
 
 	// Free area convenience methods:
 
 	public boolean isOrificeFree(GameCharacter character, SexAreaOrifice orifice) {
-		return ongoingActionsMap.get(character).get(orifice).isEmpty();
+		return !ongoingActionsMap.containsKey(new SexArea(character,orifice));
 	}
 	
 	public boolean isOrificeNonSelfOngoingAction(GameCharacter characterOrifice, SexAreaOrifice orifice) {
-		for(GameCharacter penetrator : Main.sex.allParticipants) {
-			if(!penetrator.equals(characterOrifice)) {
-				for(Entry<SexAreaInterface, Map<GameCharacter, Set<SexAreaInterface>>> entry : ongoingActionsMap.get(penetrator).entrySet()) {
-					if(entry.getValue().containsKey(characterOrifice) && entry.getValue().get(characterOrifice)!=null && entry.getValue().get(characterOrifice).contains(orifice)) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
+		var a = new SexArea(characterOrifice,orifice);
+		return ongoingActionsMap.entrySet().stream()
+		.filter(e->!e.getKey().character().equals(characterOrifice))
+		.anyMatch(e->e.getValue().contains(a));
 	}
 	
 	
@@ -4508,12 +4433,8 @@ public class Sex {
 				penetrationTypesAvailable+=restrictionMap.get(penetrationType);
 			}
 		}
-		int totalAreasUsed = 0;
-		for(GameCharacter target : Main.sex.allParticipants) {
-			if(ongoingActionsMap.get(penetrator).get(penetrationType).containsKey(target)) {
-				totalAreasUsed += ongoingActionsMap.get(penetrator).get(penetrationType).get(target).size();
-			}
-		}
+		var v = ongoingActionsMap.get(new SexArea(penetrator,penetrationType));
+		int totalAreasUsed = null==v ? 0 : v.size();
 		return penetrationTypesAvailable-totalAreasUsed;
 	}
 	
@@ -4525,16 +4446,8 @@ public class Sex {
 	 * @return true if the penetrator is using their penetrationType on another character.
 	 */
 	public boolean isPenetrationNonSelfOngoingAction(GameCharacter penetrator, SexAreaPenetration penetrationType) {
-		for(GameCharacter target : Main.sex.allParticipants) {
-			if(!penetrator.equals(target)) {
-				if(ongoingActionsMap.get(penetrator).containsKey(penetrationType)) {
-					if(ongoingActionsMap.get(penetrator).get(penetrationType).containsKey(target)) {
-						return !ongoingActionsMap.get(penetrator).get(penetrationType).get(target).isEmpty();
-					}
-				}
-			}
-		}
-		return false;
+		var v = ongoingActionsMap.get(new SexArea(penetrator,penetrationType));
+		return null==v && v.stream().anyMatch(x->!x.character().equals(penetrator));
 	}
 
 	
@@ -4620,16 +4533,33 @@ public class Sex {
 	public void setCharacterLayingEggs(GameCharacter characterLayingEggs) {
 		this.characterLayingEggs = characterLayingEggs;
 	}
-	
+
+	@Deprecated
 	public Map<SexAreaInterface, Map<GameCharacter, Set<SexAreaInterface>>> getOngoingActionsMap(GameCharacter characterHavingOngoingActions) {
-		return ongoingActionsMap.get(characterHavingOngoingActions);
+		var r = new HashMap<SexAreaInterface,Map<GameCharacter,Set<SexAreaInterface>>>();
+		for(var e : ongoingActionsMap.entrySet()) {
+			if(!e.getKey().character().equals(characterHavingOngoingActions))
+				continue;
+			var rr = new HashMap<GameCharacter,Set<SexAreaInterface>>();
+			r.put(e.getKey().type(),rr);
+			for(var v : e.getValue())
+				rr.computeIfAbsent(v.character(),k->new HashSet<>()).add(v.type());
+		}
+		return r;
 	}
 	
 	/**
 	 * @return A map of characters, with a set of SexAreas holding SexAreaInterfaces which are in contact with the passed-in character's sexArea.
 	 */
+	@Deprecated
 	public Map<GameCharacter, Set<SexAreaInterface>> getOngoingSexAreas(GameCharacter character, SexAreaInterface sexArea) {
-		return ongoingActionsMap.get(character).get(sexArea);
+		var v = ongoingActionsMap.get(new SexArea(character,sexArea));
+		if(null==v)
+			return Map.of();
+		var r = new HashMap<GameCharacter,Set<SexAreaInterface>>();
+		for(var vv: v)
+			r.computeIfAbsent(vv.character(),k->new HashSet<>()).add(vv.type());
+		return r;
 	}
 	
 	/**
@@ -4640,142 +4570,117 @@ public class Sex {
 	 * @param targetedCharacter The character who is being interacted with.
 	 * @param targetsSexArea The area which is being interacted with.
 	 */
+	@Deprecated
 	public void setPrimaryOngoingCharacter(GameCharacter character, GameCharacter targetedCharacter, SexAreaInterface targetsSexArea) {
-		Set<Entry<GameCharacter, Set<SexAreaInterface>>> entrySet = new HashSet<>(ongoingActionsMap.get(targetedCharacter).get(targetsSexArea).entrySet());
-		
-		Map<GameCharacter, Set<SexAreaInterface>> entries = new HashMap<>();
-		for(Entry<GameCharacter, Set<SexAreaInterface>> e : entrySet) {
-			entries.put(e.getKey(), e.getValue());
-		}
-		
-		ongoingActionsMap.get(targetedCharacter).get(targetsSexArea).clear();
-		
-		ongoingActionsMap.get(targetedCharacter).get(targetsSexArea).put(character, entries.get(character));
-
-		for(Entry<GameCharacter, Set<SexAreaInterface>> e : entrySet) {
-			if(!e.getKey().equals(character)) {
-				ongoingActionsMap.get(targetedCharacter).get(targetsSexArea).put(e.getKey(), e.getValue());
-			}
-		}
 	}
 	
 	/**
 	 * Get all of the SexAreaInterfaces that this character's area is in contact with.
 	 */
 	public List<SexAreaInterface> getAllOngoingSexAreas(GameCharacter character, SexAreaInterface sexArea) {
-		List<SexAreaInterface> returnList = new ArrayList<>();
-		for(Set<SexAreaInterface> set : ongoingActionsMap.get(character).get(sexArea).values()) {
-			returnList.addAll(set);
-		}
-		return returnList;
+		return Optional.ofNullable(ongoingActionsMap.get(new SexArea(character,sexArea)))
+		.map(x->x.stream()
+			.map(SexArea::type)
+			.collect(Collectors.toList()))
+		.orElseGet(List::of);
 	}
 	
 	public List<SexAreaInterface> getOngoingSexAreas(GameCharacter character, SexAreaInterface sexArea, GameCharacter characterInteractingWith) {
-		if(ongoingActionsMap.get(character).get(sexArea).containsKey(characterInteractingWith)) {
-			return new ArrayList<>(ongoingActionsMap.get(character).get(sexArea).get(characterInteractingWith));
-		} else {
-			return new ArrayList<>();
-		}
+		return Optional.ofNullable(ongoingActionsMap.get(new SexArea(character,sexArea)))
+		.map(x->x.stream()
+			.filter(a->a.character().equals(characterInteractingWith))
+			.map(SexArea::type)
+			.collect(Collectors.toList()))
+		.orElseGet(List::of);
 	}
 	
 	public SexAreaInterface getFirstOngoingSexArea(GameCharacter character, SexAreaInterface sexArea) {
-		for(Entry<GameCharacter, Set<SexAreaInterface>> entry : Main.sex.getOngoingSexAreas(character, sexArea).entrySet()) {
-			for(SexAreaInterface sArea : entry.getValue()) {
-				return sArea;
-			}
-		}
-		return null;
+		return Optional.ofNullable(ongoingActionsMap.get(new SexArea(character,sexArea)))
+		.flatMap(x->x.stream()
+			.map(SexArea::type)
+			.findFirst())
+		.orElse(null);
 	}
 	
 	public SexAreaPenetration getFirstOngoingSexAreaPenetration(GameCharacter character, SexAreaInterface sexArea) {
-		for(Entry<GameCharacter, Set<SexAreaInterface>> entry : Main.sex.getOngoingSexAreas(character, sexArea).entrySet()) {
-			for(SexAreaInterface sArea : entry.getValue()) {
-				if(sArea.isPenetration()) {
-					return (SexAreaPenetration) sArea;
-				}
-			}
-		}
-		return null;
+		return Optional.ofNullable(ongoingActionsMap.get(new SexArea(character,sexArea)))
+		.flatMap(x->x.stream()
+			.map(SexArea::type)
+			.filter(SexAreaPenetration.class::isInstance)
+			.map(SexAreaPenetration.class::cast)
+			.findFirst())
+		.orElse(null);
 	}
 	
 	public SexAreaOrifice getFirstOngoingSexAreaOrifice(GameCharacter character, SexAreaInterface sexArea) {
-		for(Entry<GameCharacter, Set<SexAreaInterface>> entry : Main.sex.getOngoingSexAreas(character, sexArea).entrySet()) {
-			for(SexAreaInterface sArea : entry.getValue()) {
-				if(sArea.isOrifice()) {
-					return (SexAreaOrifice) sArea;
-				}
-			}
-		}
-		return null;
+		return Optional.ofNullable(ongoingActionsMap.get(new SexArea(character,sexArea)))
+		.flatMap(x->x.stream()
+			.map(SexArea::type)
+			.filter(SexAreaOrifice.class::isInstance)
+			.map(SexAreaOrifice.class::cast)
+			.findFirst())
+		.orElse(null);
 	}
 	
 	/**
 	 * @return The characters who are currently involved in an ongoing action with this target's sexArea.
 	 */
 	public List<GameCharacter> getCharacterOngoingSexArea(GameCharacter target, SexAreaInterface sexArea) {
-		return new ArrayList<>(getOngoingSexAreas(target, sexArea).keySet());
+		return Optional.ofNullable(ongoingActionsMap.get(new SexArea(target,sexArea)))
+		.map(x->x.stream()
+			.map(SexArea::character)
+			.distinct()
+			.collect(Collectors.toList()))
+		.orElseGet(List::of);
 	}
 	
 	/**
 	 * @return The characters who are currently using their sexAreaUsing to contact this character's sexAreaBeingUsed.
 	 */
 	public Set<GameCharacter> getOngoingCharactersUsingAreas(GameCharacter character, SexAreaInterface sexAreaBeingUsed, SexAreaInterface sexAreaUsing) {
-		Set<GameCharacter> characters = new HashSet<>();
-		
-		if(!ongoingActionsMap.get(character).containsKey(sexAreaBeingUsed)) {
-			return characters;
-		}
-		
-		for(Entry<GameCharacter, Set<SexAreaInterface>> entry : ongoingActionsMap.get(character).get(sexAreaBeingUsed).entrySet()) {
-			if(entry.getValue().contains(sexAreaUsing)) {
-				characters.add(entry.getKey());
-			}
-		}
-		
-		return characters;
+		return Optional.ofNullable(ongoingActionsMap.get(new SexArea(character,sexAreaBeingUsed)))
+		.map(x->x.stream()
+			.filter(a->a.type().equals(sexAreaUsing))
+			.map(SexArea::character)
+			.collect(Collectors.toSet()))
+		.orElseGet(Set::of);
 	}
 	
 	/**
 	 * Returns a list, not a single instance of GameCharacter, as the 'characterPenetrating' could be penetrating multiple characters with tentacles, tails, hands, etc.
 	 */
 	public List<SexAreaOrifice> getOrificesBeingPenetratedBy(GameCharacter characterPenetrating, SexAreaPenetration penetration, GameCharacter characterPenetrated) {
-		if(ongoingActionsMap.get(characterPenetrating).get(penetration).containsKey(characterPenetrated)) {
-			List<SexAreaOrifice> returnList = new ArrayList<>();
-			for(SexAreaInterface sArea : ongoingActionsMap.get(characterPenetrating).get(penetration).get(characterPenetrated)) {
-				if(sArea.isOrifice()) {
-					returnList.add((SexAreaOrifice)sArea);
-				}
-			}
-			return returnList;
-			
-		} else {
-			return new ArrayList<>();
-		}
+		return Optional.ofNullable(ongoingActionsMap.get(new SexArea(characterPenetrated,penetration)))
+		.map(x->x.stream()
+			.filter(a->a.character().equals(characterPenetrated))
+			.map(SexArea::type)
+			.filter(SexAreaOrifice.class::isInstance)
+			.map(SexAreaOrifice.class::cast)
+			.collect(Collectors.toList()))
+		.orElseGet(List::of);
 	}
 
 	public List<GameCharacter> getCharactersHavingOngoingActionWith(GameCharacter character, SexAreaInterface area) {
-		if(area.isOrifice()) {
-			return getCharactersHavingOngoingActionWith(character, (SexAreaOrifice) area);
-		} else {
-			return getCharactersHavingOngoingActionWith(character, (SexAreaPenetration) area);
-		}
+		return Optional.ofNullable(ongoingActionsMap.get(new SexArea(character,area)))
+			.map(x->x.stream()
+				.map(SexArea::character)
+				.distinct()
+				.collect(Collectors.toList()))
+			.orElseGet(List::of);
 	}
 	
 	/**
 	 * Returns a set, not a single instance of GameCharacter, as the 'characterPenetrating' could be penetrating multiple characters with tentacles, tails, hands, etc.
 	 */
 	public List<GameCharacter> getCharactersHavingOngoingActionWith(GameCharacter characterPenetrating, SexAreaPenetration penetration) {
-		return new ArrayList<>(ongoingActionsMap.get(characterPenetrating).get(penetration).keySet());
+		return getCharactersHavingOngoingActionWith(characterPenetrating,(SexAreaInterface)penetration);
 	}
 	
 	/**
 	 * Returns a set, not a single instance of GameCharacter, as the 'characterPenetrating' could be penetrating multiple characters with tentacles, tails, hands, etc.
 	 */
 	public List<GameCharacter> getCharactersHavingOngoingActionWith(GameCharacter characterPenetrated, SexAreaOrifice orifice) {
-		if(ongoingActionsMap==null || ongoingActionsMap.get(characterPenetrated)==null || ongoingActionsMap.get(characterPenetrated).get(orifice)==null) {
-			return new ArrayList<>();
-		}
-		return new ArrayList<>(ongoingActionsMap.get(characterPenetrated).get(orifice).keySet());
+		return getCharactersHavingOngoingActionWith(characterPenetrated,(SexAreaInterface)orifice);
 	}
 
 	public List<Lubrication> lubrication() {
@@ -4971,20 +4876,7 @@ public class Sex {
 	}
 	
 	public void resetAllOngoingActions(boolean includeSpectators) {
-		if(ongoingActionsMap==null) {
-			ongoingActionsMap = new LinkedHashMap<>();
-		}
-		for(GameCharacter character : Main.sex.getAllParticipants()) {
-			if(!Main.sex.isSpectator(character) || includeSpectators) {
-				ongoingActionsMap.put(character, new LinkedHashMap<>());
-				for(SexAreaOrifice orifice : SexAreaOrifice.values()) {
-					ongoingActionsMap.get(character).put(orifice, new LinkedHashMap<>());
-				}
-				for(SexAreaPenetration penetration : SexAreaPenetration.values()) {
-					ongoingActionsMap.get(character).put(penetration, new LinkedHashMap<>());
-				}
-			}
-		}
+		ongoingActionsMap.clear();
 	}
 	
 	public void updateAvailableActions() {
