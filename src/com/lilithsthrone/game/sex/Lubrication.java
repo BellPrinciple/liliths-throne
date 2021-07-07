@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.sex;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
 
 import java.util.Objects;
 
@@ -37,6 +38,10 @@ public final class Lubrication {
 
 	public boolean hasOwner() {
 		return null!=owner;
+	}
+
+	public String getName() {
+		return null==owner ? type.nameNullOwner() : UtilText.parse(owner,(owner==character?"[npc.her]":"[npc.namePos]")+" <span style='color="+type.getColour().toWebHexString()+"'>"+type.nameOwner()+"</span>");
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 import javax.script.ScriptException;
 
+import com.lilithsthrone.game.sex.Lubrication;
 import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
@@ -828,9 +829,7 @@ public abstract class AbstractStatusEffect {
 		.append(penetration.isPlural() ? "have" : "has")
 		.append(" been [style.boldSex(lubricated)] by:<br/>")
 		.append(Util.capitaliseSentence(Util.stringsToStringList(ll.stream()
-			.map(l->l.hasOwner()
-				? UtilText.parse(l.owner(),"[npc.namePos] <span style='"+l.type().getColour().toWebHexString()+"'>"+l.type().getName(l.owner())+"</span>")
-				: l.type().getName(null))
+			.map(Lubrication::getName)
 			.collect(Collectors.toList()),false)))
 		.append(".</p>");
 	}
@@ -886,9 +885,7 @@ public abstract class AbstractStatusEffect {
 		.append(orificePlural ? "have" : "has")
 		.append(" been [style.boldSex(lubricated)] by:<br/>")
 		.append(Util.capitaliseSentence(Util.stringsToStringList(ll.stream()
-			.map(l->l.hasOwner()
-				? UtilText.parse(l.owner(),"[npc.namePos] "+l.type().getName(l.owner()))
-				: l.type().getName(null))
+			.map(Lubrication::getName)
 			.collect(Collectors.toList()),false)))
 		.append(".</p>");
 	}

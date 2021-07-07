@@ -3056,7 +3056,7 @@ public class Sex {
 		lubrication.addAll(ll);
 		b.append(formatCoverableAreaGettingWet(
 			Util.capitaliseSentence(Util.stringsToStringList(ll.stream()
-				.map(l->l.hasOwner()?UtilText.parse(l.owner(),"[npc.namePos] ")+l.type().getName(l.owner()):l.type().getName(null))
+				.map(Lubrication::getName)
 				.collect(Collectors.toList()),false))
 			+(sexInitFinished
 				?" quickly lubricate"+(ll.size()>1||!ll.get(ll.size()-1).type().isPlural()?"s ":" ")
@@ -3073,9 +3073,7 @@ public class Sex {
 	private String getLubricationDescription(GameCharacter character, SexAreaInterface area) {
 		var lubes = lubrication.stream()
 		.filter(l->l.character().equals(character)&&l.area().equals(area))
-		.map(l->l.hasOwner()
-			? UtilText.parse(l.owner(),l.owner().equals(character)?"[npc.her] ":"[npc.namePos] ")+l.type().getName(l.owner())
-			: l.type().getName(null))
+		.map(Lubrication::getName)
 		.collect(Collectors.toList());
 		List<GameCharacter> lubricationCharacters = Main.sex.getAllParticipants();
 		lubricationCharacters.add(null);
@@ -3121,8 +3119,8 @@ public class Sex {
 										|| (lubrication != LubricationType.PRECUM && lubrication != LubricationType.CUM));
 			}
 		}
-		
-		if(this.lubrication.add(new Lubrication(characterGettingLubricated,sexArea,characterProvidingLubrication,lubrication))) {
+		var l = new Lubrication(characterGettingLubricated,sexArea,characterProvidingLubrication,lubrication);
+		if(this.lubrication.add(l)) {
 			if(appendDescription
 					&& (sexArea!=SexAreaPenetration.TONGUE || lubrication!=LubricationType.SALIVA)) {
 				if(characterProvidingLubrication==null) {
@@ -3132,7 +3130,8 @@ public class Sex {
 							+(sexInitFinished
 									?" quickly lubricated by "
 									:" already lubricated by ")
-							+lubrication.getName(characterProvidingLubrication)+".")));
+							+lubrication.nameNullOwner()
+							+".")));
 					
 				} else {
 					lubeSB.append(formatCoverableAreaGettingWet(UtilText.parse(characterGettingLubricated, characterProvidingLubrication,
@@ -3141,7 +3140,8 @@ public class Sex {
 							+(sexInitFinished
 									?" quickly lubricated by "
 									:" already lubricated by ")
-							+(characterProvidingLubrication.equals(characterGettingLubricated)?"[npc.her] ":"[npc2.namePos] ")+lubrication.getName(characterProvidingLubrication)+".")));
+							+l.getName()
+							+".")));
 					
 				}
 			}

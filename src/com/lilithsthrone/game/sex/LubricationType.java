@@ -45,7 +45,16 @@ public enum LubricationType {
 	public boolean isPlural() {
 		return plural;
 	}
-	
+
+	public String nameNullOwner() {
+		return nullOwnerName;
+	}
+
+	public String nameOwner() {
+		return name;
+	}
+
+	@Deprecated
 	public String getName(GameCharacter owner) {
 		if(owner==null) {
 			return nullOwnerName;
