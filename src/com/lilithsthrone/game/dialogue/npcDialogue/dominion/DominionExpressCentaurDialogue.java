@@ -1,11 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -14,6 +8,7 @@ import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.InitialSexActionInformation;
+import com.lilithsthrone.game.sex.Lubrication;
 import com.lilithsthrone.game.sex.LubricationType;
 import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
@@ -32,6 +27,8 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
+
+import java.util.List;
 
 /**
  * @since 0.3.7.7
@@ -138,12 +135,8 @@ public class DominionExpressCentaurDialogue {
 											new Value<>(centaur(), Util.newArrayListOfValues(CoverableArea.PENIS)),
 											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
 								@Override
-								public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-									Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-									map.put(centaur(), new HashMap<>());
-									map.get(centaur()).put(SexAreaOrifice.ANUS, new HashMap<>());
-									map.get(centaur()).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-									return map;
+								public List<Lubrication> startingLubrication() {
+									return List.of(new Lubrication(centaur(),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA));
 								}
 							},
 							null,
@@ -194,12 +187,8 @@ public class DominionExpressCentaurDialogue {
 											new Value<>(centaur(), Util.newArrayListOfValues(CoverableArea.PENIS)),
 											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS)))) {
 								@Override
-								public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-									Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-									map.put(centaur(), new HashMap<>());
-									map.get(centaur()).put(SexAreaOrifice.ANUS, new HashMap<>());
-									map.get(centaur()).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-									return map;
+								public List<Lubrication> startingLubrication() {
+									return List.of(new Lubrication(centaur(),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA));
 								}
 							},
 							null,

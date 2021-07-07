@@ -3,7 +3,6 @@ package com.lilithsthrone.game.dialogue.places.dominion.warehouseDistrict;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -41,6 +40,7 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.InitialSexActionInformation;
+import com.lilithsthrone.game.sex.Lubrication;
 import com.lilithsthrone.game.sex.LubricationType;
 import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
@@ -360,7 +360,7 @@ public class KaysWarehouse {
 			List<CoverableArea> kayExposedParts,
 			List<CoverableArea> playerExposedParts,
 			List<InitialSexActionInformation> initialActions,
-			Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> startingWetAreas) {
+			List<Lubrication> startingWetAreas) {
 		return new ResponseSex(title,
 				description,
 				true, false,
@@ -406,9 +406,9 @@ public class KaysWarehouse {
 							}
 						}
 						@Override
-						public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
+						public List<Lubrication> startingLubrication() {
 							if(startingWetAreas==null) {
-								return super.getStartingWetAreas();
+								return super.startingLubrication();
 							}
 							return startingWetAreas;
 						}
@@ -1647,16 +1647,7 @@ public class KaysWarehouse {
 						Util.newArrayListOfValues(CoverableArea.PENIS),
 						Util.newArrayListOfValues(CoverableArea.VAGINA),
 						Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true)),
-						Util.newHashMapOfValues(
-								new Value<>(
-										Main.game.getPlayer(),
-										Util.newHashMapOfValues(
-												new Value<>(
-													SexAreaOrifice.VAGINA,
-													Util.newHashMapOfValues(
-														new Value<>(
-															Main.game.getNpc(Kay.class),
-															Util.newHashSetOfValues(LubricationType.PRECUM)))))))));
+						List.of(new Lubrication(Main.game.getPlayer(),SexAreaOrifice.VAGINA,Main.game.getNpc(Kay.class),LubricationType.PRECUM))));
 				
 			}
 			
@@ -1685,16 +1676,7 @@ public class KaysWarehouse {
 							Util.newArrayListOfValues(CoverableArea.PENIS),
 							Util.newArrayListOfValues(CoverableArea.ANUS),
 							Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true)),
-							Util.newHashMapOfValues(
-									new Value<>(
-											Main.game.getPlayer(),
-											Util.newHashMapOfValues(
-													new Value<>(
-														SexAreaOrifice.ANUS,
-														Util.newHashMapOfValues(
-															new Value<>(
-																Main.game.getNpc(Kay.class),
-																Util.newHashSetOfValues(LubricationType.PRECUM)))))))));
+							List.of(new Lubrication(Main.game.getPlayer(),SexAreaOrifice.ANUS,Main.game.getNpc(Kay.class),LubricationType.PRECUM))));
 					
 				}
 			}

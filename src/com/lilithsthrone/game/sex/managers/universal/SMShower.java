@@ -1,15 +1,13 @@
 package com.lilithsthrone.game.sex.managers.universal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.sex.Lubrication;
 import com.lilithsthrone.game.sex.LubricationType;
-import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
@@ -18,7 +16,6 @@ import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.8.8
@@ -71,26 +68,25 @@ public class SMShower extends SexManagerDefault {
 	}
 	
 	@Override
-	public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-		Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
+	public List<Lubrication> startingLubrication() {
+		var r = new ArrayList<Lubrication>();
 		
 		List<GameCharacter> allCharacters = new ArrayList<>(this.getDominants().keySet());
 		allCharacters.addAll(this.getSubmissives().keySet());
 		
 		for(GameCharacter character : allCharacters) {
-			map.put(character, new HashMap<>());
 			for(SexAreaPenetration penetration : SexAreaPenetration.values()) {
-				map.get(character).put(penetration, Util.newHashMapOfValues(new Value<>(null, Util.newHashSetOfValues(LubricationType.WATER))));
+				r.add(new Lubrication(character,penetration,null,LubricationType.WATER));
 			}
 			for(SexAreaOrifice orifice : SexAreaOrifice.values()) {
 				if(!orifice.isInternalOrifice()
 						 || orifice == SexAreaOrifice.NIPPLE
 						 || orifice == SexAreaOrifice.NIPPLE_CROTCH) {
-					map.get(character).put(orifice, Util.newHashMapOfValues(new Value<>(null, Util.newHashSetOfValues(LubricationType.WATER))));
+					r.add(new Lubrication(character,orifice,null,LubricationType.WATER));
 				}
 			}
 		}
 		
-		return map;
+		return r;
 	}
 }

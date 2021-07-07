@@ -1,10 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.dominion.warehouseDistrict;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -51,6 +48,7 @@ import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.item.TransformativePotion;
 import com.lilithsthrone.game.sex.InitialSexActionInformation;
+import com.lilithsthrone.game.sex.Lubrication;
 import com.lilithsthrone.game.sex.LubricationType;
 import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
@@ -1009,12 +1007,8 @@ public class DominionExpress {
 										new Value<>(activeSlave, Util.newArrayListOfValues(CoverableArea.PENIS)),
 										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
 							@Override
-							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-								map.put(activeSlave, new HashMap<>());
-								map.get(activeSlave).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(activeSlave).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								return map;
+							public List<Lubrication> startingLubrication() {
+								return List.of(new Lubrication(activeSlave,SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA));
 							}
 						},
 						null,
@@ -1068,12 +1062,8 @@ public class DominionExpress {
 										new Value<>(activeSlave, Util.newArrayListOfValues(CoverableArea.PENIS)),
 										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS)))) {
 							@Override
-							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-								map.put(activeSlave, new HashMap<>());
-								map.get(activeSlave).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(activeSlave).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								return map;
+							public List<Lubrication> startingLubrication() {
+								return List.of(new Lubrication(activeSlave,SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA));
 							}
 						},
 						null,
@@ -1886,12 +1876,8 @@ public class DominionExpress {
 								return super.getCharacterOrgasmBehaviour(character);
 							}
 							@Override
-							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-								map.put(Main.game.getNpc(Natalya.class), new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								return map;
+							public List<Lubrication> startingLubrication() {
+								return List.of(new Lubrication(Main.game.getNpc(Natalya.class),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA));
 							}
 						},
 						null,
@@ -1926,12 +1912,8 @@ public class DominionExpress {
 								return super.getCharacterOrgasmBehaviour(character);
 							}
 							@Override
-							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-								map.put(Main.game.getNpc(Natalya.class), new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								return map;
+							public List<Lubrication> startingLubrication() {
+								return List.of(new Lubrication(Main.game.getNpc(Natalya.class),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA));
 							}
 						},
 						null,
@@ -2217,12 +2199,8 @@ public class DominionExpress {
 										new Value<>(getSadistSlave(), Util.newArrayListOfValues(CoverableArea.PENIS)),
 										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
 							@Override
-							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-								map.put(getSadistSlave(), new HashMap<>());
-								map.get(getSadistSlave()).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(getSadistSlave()).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								return map;
+							public List<Lubrication> startingLubrication() {
+								return List.of(new Lubrication(getSadistSlave(),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA));
 							}
 						},
 						null,
@@ -2427,12 +2405,8 @@ public class DominionExpress {
 										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.ANUS)),
 										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
 							@Override
-							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-								map.put(Main.game.getNpc(Natalya.class), new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								return map;
+							public List<Lubrication> startingLubrication() {
+								return List.of(new Lubrication(Main.game.getNpc(Natalya.class),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA));
 							}
 						},
 						null,
@@ -2588,22 +2562,11 @@ public class DominionExpress {
 								return super.getCharacterOrgasmBehaviour(character);
 							}
 							@Override
-							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-
-								map.put(getSadistSlave(), new HashMap<>());
-								map.get(getSadistSlave()).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(getSadistSlave()).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								
-								map.put(Main.game.getNpc(Natalya.class), new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								
-								map.put(Main.game.getPlayer(), new HashMap<>());
-								map.get(Main.game.getPlayer()).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(Main.game.getPlayer()).get(SexAreaOrifice.ANUS).put(Main.game.getNpc(Natalya.class), Util.newHashSetOfValues(LubricationType.PRECUM));
-								
-								return map;
+							public List<Lubrication> startingLubrication() {
+								return List.of(
+									new Lubrication(getSadistSlave(),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA),
+									new Lubrication(Main.game.getNpc(Natalya.class),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA),
+									new Lubrication(Main.game.getPlayer(),SexAreaOrifice.ANUS,Main.game.getNpc(Natalya.class),LubricationType.PRECUM));
 							}
 						},
 						null,
@@ -2651,18 +2614,12 @@ public class DominionExpress {
 										new Value<>(getSadistSlave(), Util.newArrayListOfValues(CoverableArea.PENIS)),
 										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS)))) {
 							@Override
-							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-								
-								map.put(getSadistSlave(), new HashMap<>());
-								map.get(getSadistSlave()).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(getSadistSlave()).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								
-								map.put(Main.game.getPlayer(), new HashMap<>());
-								map.get(Main.game.getPlayer()).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(Main.game.getPlayer()).get(SexAreaOrifice.ANUS).put(Main.game.getNpc(Natalya.class), Util.newHashSetOfValues(LubricationType.SALIVA, LubricationType.PRECUM, LubricationType.CUM));
-								
-								return map;
+							public List<Lubrication> startingLubrication() {
+								return List.of(
+									new Lubrication(getSadistSlave(),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA),
+									new Lubrication(Main.game.getNpc(Natalya.class),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA),
+									new Lubrication(Main.game.getNpc(Natalya.class),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.PRECUM),
+									new Lubrication(Main.game.getNpc(Natalya.class),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.CUM));
 							}
 						},
 						null,
@@ -2799,12 +2756,8 @@ public class DominionExpress {
 								return super.getCharacterOrgasmBehaviour(character);
 							}
 							@Override
-							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-								map.put(Main.game.getNpc(Natalya.class), new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								return map;
+							public List<Lubrication> startingLubrication() {
+								return List.of(new Lubrication(Main.game.getNpc(Natalya.class),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA));
 							}
 						},
 						null,
@@ -2846,12 +2799,8 @@ public class DominionExpress {
 										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.ANUS)),
 										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
 							@Override
-							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-								map.put(Main.game.getNpc(Natalya.class), new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								return map;
+							public List<Lubrication> startingLubrication() {
+								return List.of(new Lubrication(Main.game.getNpc(Natalya.class),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA));
 							}
 						},
 						null,
@@ -2900,18 +2849,10 @@ public class DominionExpress {
 								return super.getCharacterOrgasmBehaviour(character);
 							}
 							@Override
-							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-
-								map.put(Main.game.getPlayer(), new HashMap<>());
-								map.get(Main.game.getPlayer()).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(Main.game.getPlayer()).get(SexAreaOrifice.ANUS).put(Main.game.getNpc(Natalya.class), Util.newHashSetOfValues(LubricationType.SALIVA));
-								
-								map.put(Main.game.getNpc(Natalya.class), new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).put(SexAreaOrifice.ANUS, new HashMap<>());
-								map.get(Main.game.getNpc(Natalya.class)).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-								
-								return map;
+							public List<Lubrication> startingLubrication() {
+								return List.of(
+									new Lubrication(Main.game.getPlayer(),SexAreaOrifice.ANUS,Main.game.getNpc(Natalya.class),LubricationType.SALIVA),
+									new Lubrication(Main.game.getNpc(Natalya.class),SexAreaOrifice.ANUS,Main.game.getPlayer(),LubricationType.SALIVA));
 							}
 						},
 						null,

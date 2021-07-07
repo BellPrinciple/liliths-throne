@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -41,9 +40,9 @@ import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.sex.GenericSexFlag;
 import com.lilithsthrone.game.sex.InitialSexActionInformation;
+import com.lilithsthrone.game.sex.Lubrication;
 import com.lilithsthrone.game.sex.LubricationType;
 import com.lilithsthrone.game.sex.OrgasmCumTarget;
-import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexControl;
@@ -411,14 +410,11 @@ public class RatWarrensCaptiveDialogue {
 				return false;
 			}
 			@Override
-			public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
+			public List<Lubrication> startingLubrication() {
 				if(spitOnAsshole) {
-					Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-					map.put(Main.game.getPlayer(), new HashMap<>());
-					map.get(Main.game.getPlayer()).put(SexAreaOrifice.ANUS, Util.newHashMapOfValues(new Value<>(getMurk(), Util.newHashSetOfValues(LubricationType.SALIVA))));
-					return map;
+					return List.of(new Lubrication(Main.game.getPlayer(),SexAreaOrifice.ANUS,getMurk(),LubricationType.SALIVA));
 				}
-				return super.getStartingWetAreas();
+				return super.startingLubrication();
 			}
 			@Override
 			public SexType getForeplayPreference(GameCharacter character, GameCharacter targetedCharacter) {

@@ -1852,7 +1852,7 @@ public interface SexActionInterface {
 		//TODO saliva
 		
 		if(Main.sex.getOrificesBeingPenetratedBy(condomWearer, SexAreaPenetration.PENIS, cumTarget).contains(SexAreaOrifice.URETHRA_PENIS)
-				&& Main.sex.getWetAreas(cumTarget).get(SexAreaOrifice.URETHRA_PENIS).get(cumTarget).contains(LubricationType.CUM)
+				&& Main.sex.contains(new Lubrication(cumTarget,SexAreaOrifice.URETHRA_PENIS,cumTarget,LubricationType.CUM))
 				&& cumTarget.getCumModifiers().contains(FluidModifier.MINERAL_OIL)) {
 			return CondomFailure.MINERAL_OIL_CUM;
 		}

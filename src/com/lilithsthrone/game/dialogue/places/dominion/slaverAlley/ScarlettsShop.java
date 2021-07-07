@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -64,6 +63,7 @@ import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.game.sex.InitialSexActionInformation;
+import com.lilithsthrone.game.sex.Lubrication;
 import com.lilithsthrone.game.sex.LubricationType;
 import com.lilithsthrone.game.sex.OrgasmCumTarget;
 import com.lilithsthrone.game.sex.SexAreaInterface;
@@ -222,15 +222,11 @@ public class ScarlettsShop {
 				return character.getMainSexPreference(targetedCharacter);
 			}
 			@Override
-			public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
+			public List<Lubrication> startingLubrication() {
 				if(scarlettPreference.getPerformingSexArea()==SexAreaPenetration.PENIS && scarlettPreference.getTargetedSexArea()==SexAreaOrifice.ANUS) {
-					Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
-					map.put(Main.game.getPlayer(), new HashMap<>());
-					map.get(Main.game.getPlayer()).put(SexAreaOrifice.ANUS, new HashMap<>());
-					map.get(Main.game.getPlayer()).get(SexAreaOrifice.ANUS).put(Main.game.getNpc(Scarlett.class), Util.newHashSetOfValues(LubricationType.SALIVA));
-					return map;
+					return List.of(new Lubrication(Main.game.getPlayer(),SexAreaOrifice.ANUS,Main.game.getNpc(Scarlett.class),LubricationType.SALIVA));
 				}
-				return super.getStartingWetAreas();
+				return super.startingLubrication();
 			}
 			@Override
 			public boolean isPartnerWantingToStopSex(GameCharacter partner) {

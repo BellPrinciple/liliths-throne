@@ -216,8 +216,7 @@ public class Sex {
 	
 	// Tracking statuses:
 	
-	/**Maps: character who is lubricated -> Map of areas -> Map of owner of lubrication -> lubrications*/
-	private Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> wetAreas;
+	private final HashSet<Lubrication> lubrication = new HashSet<>();
 	private Map<GameCharacter, Set<SexAreaOrifice>> areasCurrentlyStretching;
 	private Map<GameCharacter, Set<SexAreaOrifice>> areasStretched;
 	private Map<GameCharacter, Set<SexAreaOrifice>> areasTooLoose;
@@ -569,47 +568,9 @@ public class Sex {
 		}
 		
 		// Set starting wetness values:
-		wetAreas = new HashMap<>();
-		
-		for(GameCharacter character : Main.sex.getAllParticipants()) {
-			wetAreas.putIfAbsent(character, new HashMap<>());
-			
-			for(GameCharacter characterLubricationOwner : Main.sex.getAllParticipants()) {
-				for(SexAreaPenetration penetration : SexAreaPenetration.values()) {
-					wetAreas.get(character).putIfAbsent(penetration, new HashMap<>());
-					wetAreas.get(character).get(penetration).put(characterLubricationOwner, new HashSet<>());
-				}
-				for(SexAreaOrifice orifice : SexAreaOrifice.values()) {
-					wetAreas.get(character).putIfAbsent(orifice, new HashMap<>());
-					wetAreas.get(character).get(orifice).put(characterLubricationOwner, new HashSet<>());
-				}
-			}
-			for(SexAreaPenetration penetration : SexAreaPenetration.values()) {
-				wetAreas.get(character).putIfAbsent(penetration, new HashMap<>());
-				wetAreas.get(character).get(penetration).put(null, new HashSet<>());
-			}
-			for(SexAreaOrifice orifice : SexAreaOrifice.values()) {
-				wetAreas.get(character).putIfAbsent(orifice, new HashMap<>());
-				wetAreas.get(character).get(orifice).put(null, new HashSet<>());
-			}
-		}
-		
 		// Add all lubrication types that need to be applied at the start of this scene:
-		if(sexManager.getStartingWetAreas()!=null) {
-			for(Entry<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> entry : sexManager.getStartingWetAreas().entrySet()) {
-				if(wetAreas.containsKey(entry.getKey())) { // Make sure that the character is actually in this sex scene
-					for(SexAreaInterface area : entry.getValue().keySet()) {
-						for(GameCharacter owner : sexManager.getStartingWetAreas().get(entry.getKey()).get(area).keySet()) {
-							wetAreas.get(entry.getKey()).get(area).putIfAbsent(owner, new HashSet<>());
-//							if(wetAreas.get(entry.getKey()).get(area).containsKey(owner)) {
-								wetAreas.get(entry.getKey()).get(area).get(owner).addAll(entry.getValue().get(area).get(owner));
-//							}
-						}
-					}
-				}
-			}
-		}
-		
+		lubrication.addAll(sexManager.startingLubrication());
+
 		// Starting text:
 		sexSB = new StringBuilder(sexStartDescription);
 
@@ -3076,57 +3037,33 @@ public class Sex {
 	
 
 	private String transferLubricationNoAppend(GameCharacter character, SexAreaInterface characterArea, GameCharacter targetCharacter, SexAreaInterface targetArea) {
-		List<String> lubricationTransferred = new ArrayList<>();
-		boolean lastLubricationPlural = false;
 		StringBuilder lubeSB = new StringBuilder();
-		List<GameCharacter> lubricationCharacters = Main.sex.getAllParticipants();
-		lubricationCharacters.add(null);
-		
-		for(GameCharacter lubricantProvider : lubricationCharacters) {
-			for(LubricationType lt : wetAreas.get(character).get(characterArea).get(lubricantProvider)) {
-				if(!wetAreas.get(targetCharacter).get(targetArea).get(lubricantProvider).contains(lt)
-						// Cannot lubricate with self cum or precum via penis through a condom:
-						&& ((lt!=LubricationType.PRECUM && lt!=LubricationType.CUM) || characterArea!=SexAreaPenetration.PENIS || !character.isWearingCondom() || !character.equals(lubricantProvider))) {
-					wetAreas.get(targetCharacter).get(targetArea).get(lubricantProvider).add(lt);
-					lubricationTransferred.add((lubricantProvider==null?"":UtilText.parse(lubricantProvider, "[npc.namePos] "))+lt.getName(lubricantProvider));
-					lastLubricationPlural = lt.isPlural();
-				}
-			}
-		}
-		
-		if(!lubricationTransferred.isEmpty()) {
-			lubeSB.append(formatCoverableAreaGettingWet(
-					Util.capitaliseSentence(Util.stringsToStringList(lubricationTransferred, false))
-						+(sexInitFinished
-							?" quickly lubricate"+(lubricationTransferred.size()>1 || !lastLubricationPlural?"s ":" ")
-							:" has already lubricated ")
-						+(targetCharacter.isPlayer()?"your ":targetCharacter.getName("the")+"'s ")+targetArea.getName(targetCharacter)+"."));
-		}
-		
-		lubricationTransferred.clear();
-		
-		for(GameCharacter lubricantProvider : lubricationCharacters) {
-			for(LubricationType lt : wetAreas.get(targetCharacter).get(targetArea).get(lubricantProvider)) {
-				if(!wetAreas.get(character).get(characterArea).get(lubricantProvider).contains(lt)
-						// Cannot lubricate with self cum or precum via penis through a condom:
-						&& ((lt!=LubricationType.PRECUM && lt!=LubricationType.CUM) || targetArea!=SexAreaPenetration.PENIS || !targetCharacter.isWearingCondom() || !targetCharacter.equals(lubricantProvider))) {
-					wetAreas.get(character).get(characterArea).get(lubricantProvider).add(lt);
-					lubricationTransferred.add((lubricantProvider==null?"":UtilText.parse(lubricantProvider, "[npc.namePos] "))+lt.getName(lubricantProvider));
-					lastLubricationPlural = lt.isPlural();
-				}
-			}
-		}
-		
-		if(!lubricationTransferred.isEmpty()) {
-			lubeSB.append(formatCoverableAreaGettingWet(
-					Util.capitaliseSentence(Util.stringsToStringList(lubricationTransferred, false))
-						+(sexInitFinished
-							?" quickly lubricate"+(lubricationTransferred.size()>1 || !lastLubricationPlural?"s ":" ")
-							:" has already lubricated ")
-						+(character.isPlayer()?"your ":character.getName("the")+"'s ")+characterArea.getName(character)+"."));
-		}
-		
+		transferLubricationNoAppend(character,characterArea,targetCharacter,targetArea,lubeSB);
+		transferLubricationNoAppend(targetCharacter,targetArea,character,characterArea,lubeSB);
 		return lubeSB.toString();
+	}
+
+	private void transferLubricationNoAppend(GameCharacter c0, SexAreaInterface a0, GameCharacter c1, SexAreaInterface a1, StringBuilder b) {
+		var ll = lubrication.stream()
+		.filter(l->l.character().equals(c0)&&l.area().equals(a0))
+		.map(l->new Lubrication(c1,a1,l.owner(),l.type()))
+		.filter(a0==SexAreaPenetration.PENIS && c0.isWearingCondom()
+			? l->!lubrication.contains(l) && (l.type()!=LubricationType.PRECUM && l.type()!=LubricationType.CUM || c0.equals(l.owner()))
+			: l->!lubrication.contains(l))
+		.collect(Collectors.toList());
+		if(ll.isEmpty())
+			return;
+		lubrication.addAll(ll);
+		b.append(formatCoverableAreaGettingWet(
+			Util.capitaliseSentence(Util.stringsToStringList(ll.stream()
+				.map(l->l.hasOwner()?UtilText.parse(l.owner(),"[npc.namePos] ")+l.type().getName(l.owner()):l.type().getName(null))
+				.collect(Collectors.toList()),false))
+			+(sexInitFinished
+				?" quickly lubricate"+(ll.size()>1||!ll.get(ll.size()-1).type().isPlural()?"s ":" ")
+				:" has already lubricated ")
+			+(c1.isPlayer()?"your ":c1.getName("the")+"'s ")
+			+a1.getName(c1)
+			+"."));
 	}
 	
 	public void transferLubrication(GameCharacter character, SexAreaInterface characterArea, GameCharacter targetCharacter, SexAreaInterface targetArea) {
@@ -3134,18 +3071,14 @@ public class Sex {
 	}
 	
 	private String getLubricationDescription(GameCharacter character, SexAreaInterface area) {
-		List<String> lubes = new ArrayList<>();
+		var lubes = lubrication.stream()
+		.filter(l->l.character().equals(character)&&l.area().equals(area))
+		.map(l->l.hasOwner()
+			? UtilText.parse(l.owner(),l.owner().equals(character)?"[npc.her] ":"[npc.namePos] ")+l.type().getName(l.owner())
+			: l.type().getName(null))
+		.collect(Collectors.toList());
 		List<GameCharacter> lubricationCharacters = Main.sex.getAllParticipants();
 		lubricationCharacters.add(null);
-		
-		for(GameCharacter lubricantProvider : lubricationCharacters) {
-			for(LubricationType lube : wetAreas.get(character).get(area).get(lubricantProvider)) {
-				lubes.add((lubricantProvider==null
-							?""
-							:UtilText.parse(lubricantProvider, character.equals(lubricantProvider)?"[npc.her] ":"[npc.namePos] "))
-						+lube.getName(lubricantProvider));
-			}
-		}
 		
 		if(lubes.isEmpty()) {
 			return "";
@@ -3158,12 +3091,7 @@ public class Sex {
 	}
 	
 	public void clearLubrication(GameCharacter character, SexAreaInterface sexArea) {
-		for(Entry<GameCharacter, Set<LubricationType>> entry : wetAreas.get(character).get(sexArea).entrySet()) {
-			try {
-				entry.getValue().clear();
-			} catch(Exception ex) {
-			}
-		}
+		lubrication.removeIf(l->l.character().equals(character)&&l.area().equals(sexArea));
 	}
 	
 	private String addLubricationNoAppend(GameCharacter characterGettingLubricated, SexAreaInterface sexArea, GameCharacter characterProvidingLubrication, LubricationType lubrication) {
@@ -3194,7 +3122,7 @@ public class Sex {
 			}
 		}
 		
-		if(wetAreas.get(characterGettingLubricated).get(sexArea).get(characterProvidingLubrication).add(lubrication)) {
+		if(this.lubrication.add(new Lubrication(characterGettingLubricated,sexArea,characterProvidingLubrication,lubrication))) {
 			if(appendDescription
 					&& (sexArea!=SexAreaPenetration.TONGUE || lubrication!=LubricationType.SALIVA)) {
 				if(characterProvidingLubrication==null) {
@@ -3795,16 +3723,7 @@ public class Sex {
 		if(penetrationType == SexAreaPenetration.PENIS
 				 || penetrationType == SexAreaPenetration.TAIL
 				 || penetrationType == SexAreaPenetration.TENTACLE) {
-			boolean lubed = false;
-			List<GameCharacter> lubricationCharacters = Main.sex.getAllParticipants();
-			lubricationCharacters.add(null);
-			for(GameCharacter lubricantProvider : lubricationCharacters) {
-				if(!wetAreas.get(characterPenetrated).get(orifice).get(lubricantProvider).isEmpty()) {
-					lubed = true;
-					break;
-				}
-			}
-			
+			boolean lubed = lubrication.stream().anyMatch(l->l.character().equals(characterPenetrated)&&l.area().equals(orifice));
 			float minimumStretchPercentage = 0.05f;
 			
 			knotted = false;
@@ -4854,39 +4773,43 @@ public class Sex {
 		}
 		return new ArrayList<>(ongoingActionsMap.get(characterPenetrated).get(orifice).keySet());
 	}
-	
+
+	public List<Lubrication> lubrication() {
+		return List.copyOf(lubrication);
+	}
+
+	public boolean contains(Lubrication l) {
+		return lubrication.contains(l);
+	}
+
+	@Deprecated
 	public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getAllWetAreas() {
-		return wetAreas;
+		var r = new HashMap<GameCharacter,Map<SexAreaInterface,Map<GameCharacter,Set<LubricationType>>>>();
+		for(var l : lubrication)
+			r.computeIfAbsent(l.character(),k->new HashMap<>())
+			.computeIfAbsent(l.area(),k->new HashMap<>())
+			.computeIfAbsent(l.owner(),k->new HashSet<>())
+			.add(l.type());
+		return r;
 	}
-	
+
+	@Deprecated
 	public Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>> getWetAreas(GameCharacter character) {
-		return wetAreas.get(character);
+		var r = new HashMap<SexAreaInterface,Map<GameCharacter,Set<LubricationType>>>();
+		for(var l : lubrication)
+			if(l.character().equals(character))
+				r.computeIfAbsent(l.area(),k->new HashMap<>())
+				.computeIfAbsent(l.owner(),k->new HashSet<>())
+				.add(l.type());
+		return r;
 	}
 	
-	public boolean hasLubricationTypeFromAnyone(GameCharacter characterHavingLubrication, SexAreaInterface sexArea) {
-		if(getWetAreas(characterHavingLubrication)==null) {
-			return false;
-		}
-		for(GameCharacter lubricantProvider : Main.sex.getAllParticipants()) {
-			if(!getWetAreas(characterHavingLubrication).get(sexArea).get(lubricantProvider).isEmpty()) {
-				return true;
-			}
-		}
-		
-		return !getWetAreas(characterHavingLubrication).get(sexArea).get(null).isEmpty();
+	public boolean hasLubricationTypeFromAnyone(GameCharacter c, SexAreaInterface a) {
+		return lubrication.stream().anyMatch(l->l.character().equals(c)&&l.area().equals(a));
 	}
 	
-	public boolean hasLubricationTypeFromAnyone(GameCharacter characterHavingLubrication, SexAreaInterface sexArea, LubricationType lubrication) {
-		if(getWetAreas(characterHavingLubrication)==null) {
-			return false;
-		}
-		for(GameCharacter lubricantProvider : Main.sex.getAllParticipants()) {
-			if(getWetAreas(characterHavingLubrication).get(sexArea).get(lubricantProvider).contains(lubrication)) {
-				return true;
-			}
-		}
-		
-		return getWetAreas(characterHavingLubrication).get(sexArea).get(null).contains(lubrication);
+	public boolean hasLubricationTypeFromAnyone(GameCharacter c, SexAreaInterface a, LubricationType t) {
+		return lubrication.stream().anyMatch(l->l.character().equals(c)&&l.area().equals(a)&&l.type().equals(t));
 	}
 
 	public AbstractClothing getSelectedClothing() {

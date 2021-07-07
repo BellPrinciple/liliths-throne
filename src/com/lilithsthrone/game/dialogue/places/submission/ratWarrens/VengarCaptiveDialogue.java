@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -64,8 +63,7 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.sex.GenericSexFlag;
 import com.lilithsthrone.game.sex.InitialSexActionInformation;
-import com.lilithsthrone.game.sex.LubricationType;
-import com.lilithsthrone.game.sex.SexAreaInterface;
+import com.lilithsthrone.game.sex.Lubrication;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexParticipantType;
@@ -519,7 +517,7 @@ public class VengarCaptiveDialogue {
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> previousWetAreas = new HashMap<>(Main.sex.getAllWetAreas()); // Starting lube from saliva
+			var previousWetAreas = Main.sex.lubrication(); // Starting lube from saliva
 			
 			if(index==1) {
 				if(Main.sex.getSexPositionSlot(Main.game.getPlayer())!=SexSlotAllFours.ALL_FOURS) {
@@ -535,7 +533,7 @@ public class VengarCaptiveDialogue {
 											new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS),
 											new Value<>(getMainCompanion(), SexSlotAllFours.IN_FRONT))) {
 								@Override
-								public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
+								public List<Lubrication> startingLubrication() {
 									return previousWetAreas;
 								}
 							},
@@ -576,7 +574,7 @@ public class VengarCaptiveDialogue {
 											new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS),
 											new Value<>(Main.game.getPlayer(), SexSlotAllFours.IN_FRONT))) {
 								@Override
-								public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
+								public List<Lubrication> startingLubrication() {
 									return previousWetAreas;
 								}
 							},

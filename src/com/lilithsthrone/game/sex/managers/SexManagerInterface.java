@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.sex.managers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.sex.ImmobilisationType;
+import com.lilithsthrone.game.sex.Lubrication;
 import com.lilithsthrone.game.sex.LubricationType;
 import com.lilithsthrone.game.sex.OrgasmCumTarget;
 import com.lilithsthrone.game.sex.SexAreaInterface;
@@ -104,9 +106,23 @@ public interface SexManagerInterface {
 		return "";
 	}
 
-	/**Maps: character who is lubricated -> Map of areas -> Map of owner of lubrication -> lubrications*/
-	public default Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
-		return null;
+	default List<Lubrication> startingLubrication() {
+		return List.of();
+	}
+
+	/**
+	Maps: character who is lubricated -> Map of areas -> Map of owner of lubrication -> lubrications
+	@deprecated Instead use {@link #startingLubrication()}.
+	*/
+	@Deprecated
+	default Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
+		var r = new HashMap<GameCharacter,Map<SexAreaInterface,Map<GameCharacter,Set<LubricationType>>>>();
+		for(var l : startingLubrication())
+			r.computeIfAbsent(l.character(),k->new HashMap<>())
+			.computeIfAbsent(l.area(),k->new HashMap<>())
+			.computeIfAbsent(l.owner(),k->new HashSet<>())
+			.add(l.type());
+		return r;
 	}
 	
 	/**
