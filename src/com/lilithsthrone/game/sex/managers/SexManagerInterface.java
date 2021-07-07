@@ -1,7 +1,6 @@
 package com.lilithsthrone.game.sex.managers;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -118,8 +117,8 @@ public interface SexManagerInterface {
 	default Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 		var r = new HashMap<GameCharacter,Map<SexAreaInterface,Map<GameCharacter,Set<LubricationType>>>>();
 		for(var l : startingLubrication())
-			r.computeIfAbsent(l.character(),k->new HashMap<>())
-			.computeIfAbsent(l.area(),k->new HashMap<>())
+			r.computeIfAbsent(l.area().character(),k->new HashMap<>())
+			.computeIfAbsent(l.area().type(),k->new HashMap<>())
 			.computeIfAbsent(l.owner(),k->new HashSet<>())
 			.add(l.type());
 		return r;

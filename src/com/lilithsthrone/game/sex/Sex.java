@@ -3044,9 +3044,10 @@ public class Sex {
 	}
 
 	private void transferLubricationNoAppend(GameCharacter c0, SexAreaInterface a0, GameCharacter c1, SexAreaInterface a1, StringBuilder b) {
+		var a = new SexArea(c0, a0);
 		var ll = lubrication.stream()
-		.filter(l->l.character().equals(c0)&&l.area().equals(a0))
-		.map(l->new Lubrication(c1,a1,l.owner(),l.type()))
+		.filter(l->l.area().equals(a))
+		.map(l->new Lubrication(a,l.owner(),l.type()))
 		.filter(a0==SexAreaPenetration.PENIS && c0.isWearingCondom()
 			? l->!lubrication.contains(l) && (l.type()!=LubricationType.PRECUM && l.type()!=LubricationType.CUM || c0.equals(l.owner()))
 			: l->!lubrication.contains(l))
@@ -3071,8 +3072,9 @@ public class Sex {
 	}
 	
 	private String getLubricationDescription(GameCharacter character, SexAreaInterface area) {
+		var a = new SexArea(character, area);
 		var lubes = lubrication.stream()
-		.filter(l->l.character().equals(character)&&l.area().equals(area))
+		.filter(l->l.area().equals(a))
 		.map(Lubrication::getName)
 		.collect(Collectors.toList());
 		List<GameCharacter> lubricationCharacters = Main.sex.getAllParticipants();
@@ -3089,7 +3091,8 @@ public class Sex {
 	}
 	
 	public void clearLubrication(GameCharacter character, SexAreaInterface sexArea) {
-		lubrication.removeIf(l->l.character().equals(character)&&l.area().equals(sexArea));
+		var a = new SexArea(character, sexArea);
+		lubrication.removeIf(l->l.area().equals(a));
 	}
 	
 	private String addLubricationNoAppend(GameCharacter characterGettingLubricated, SexAreaInterface sexArea, GameCharacter characterProvidingLubrication, LubricationType lubrication) {
@@ -3723,7 +3726,8 @@ public class Sex {
 		if(penetrationType == SexAreaPenetration.PENIS
 				 || penetrationType == SexAreaPenetration.TAIL
 				 || penetrationType == SexAreaPenetration.TENTACLE) {
-			boolean lubed = lubrication.stream().anyMatch(l->l.character().equals(characterPenetrated)&&l.area().equals(orifice));
+			var a = new SexArea(characterPenetrated, orifice);
+			boolean lubed = lubrication.stream().anyMatch(l->l.area().equals(a));
 			float minimumStretchPercentage = 0.05f;
 			
 			knotted = false;
@@ -4786,8 +4790,8 @@ public class Sex {
 	public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getAllWetAreas() {
 		var r = new HashMap<GameCharacter,Map<SexAreaInterface,Map<GameCharacter,Set<LubricationType>>>>();
 		for(var l : lubrication)
-			r.computeIfAbsent(l.character(),k->new HashMap<>())
-			.computeIfAbsent(l.area(),k->new HashMap<>())
+			r.computeIfAbsent(l.area().character(),k->new HashMap<>())
+			.computeIfAbsent(l.area().type(),k->new HashMap<>())
 			.computeIfAbsent(l.owner(),k->new HashSet<>())
 			.add(l.type());
 		return r;
@@ -4797,19 +4801,21 @@ public class Sex {
 	public Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>> getWetAreas(GameCharacter character) {
 		var r = new HashMap<SexAreaInterface,Map<GameCharacter,Set<LubricationType>>>();
 		for(var l : lubrication)
-			if(l.character().equals(character))
-				r.computeIfAbsent(l.area(),k->new HashMap<>())
+			if(l.area().character().equals(character))
+				r.computeIfAbsent(l.area().type(),k->new HashMap<>())
 				.computeIfAbsent(l.owner(),k->new HashSet<>())
 				.add(l.type());
 		return r;
 	}
 	
-	public boolean hasLubricationTypeFromAnyone(GameCharacter c, SexAreaInterface a) {
-		return lubrication.stream().anyMatch(l->l.character().equals(c)&&l.area().equals(a));
+	public boolean hasLubricationTypeFromAnyone(GameCharacter c, SexAreaInterface aa) {
+		var a = new SexArea(c, aa);
+		return lubrication.stream().anyMatch(l->l.area().equals(a));
 	}
 	
-	public boolean hasLubricationTypeFromAnyone(GameCharacter c, SexAreaInterface a, LubricationType t) {
-		return lubrication.stream().anyMatch(l->l.character().equals(c)&&l.area().equals(a)&&l.type().equals(t));
+	public boolean hasLubricationTypeFromAnyone(GameCharacter c, SexAreaInterface aa, LubricationType t) {
+		var a = new SexArea(c, aa);
+		return lubrication.stream().anyMatch(l->l.area().equals(a)&&l.type().equals(t));
 	}
 
 	public AbstractClothing getSelectedClothing() {

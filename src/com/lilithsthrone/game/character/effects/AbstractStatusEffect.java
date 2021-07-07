@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 import javax.script.ScriptException;
 
-import com.lilithsthrone.game.sex.Lubrication;
 import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
@@ -33,6 +32,8 @@ import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.ItemTag;
+import com.lilithsthrone.game.sex.Lubrication;
+import com.lilithsthrone.game.sex.SexArea;
 import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
@@ -811,9 +812,10 @@ public abstract class AbstractStatusEffect {
 	}
 	
 	public void appendPenetrationAdditionGenericDescriptions(GameCharacter owner, SexAreaPenetration penetration, String penetrationName, StringBuilder stringBuilderToAppendTo) {
+		var a = new SexArea(owner, penetration);
 		var ll = Main.sex.lubrication().stream()
-		.filter(l->l.character().equals(owner)&&l.area().equals(penetration))
-		.sorted((a,b)->a.hasOwner()?b.hasOwner()?a.owner().hashCode()-b.owner().hashCode():1:b.hasOwner()?-1:0)
+		.filter(l->l.area().equals(a))
+		.sorted((x,y)->x.hasOwner()?y.hasOwner()?x.owner().hashCode()-y.owner().hashCode():1:y.hasOwner()?-1:0)
 		.collect(Collectors.toList());
 		if(ll.isEmpty()) {
 			stringBuilderToAppendTo.append("<br/>")
@@ -867,9 +869,10 @@ public abstract class AbstractStatusEffect {
 				stringBuilderToAppendTo.append("<br/>"+orificeName+" "+(orificePlural?"are":"is")+" [style.boldPinkLight(not being penetrated deep enough)]!");
 			}
 		}
+		var a = new SexArea(owner, orificeType);
 		var ll = Main.sex.lubrication().stream()
-		.filter(l->l.character().equals(owner)&&l.area().equals(orificeType))
-		.sorted((a,b)->a.hasOwner()?b.hasOwner()?a.owner().hashCode()-b.owner().hashCode():1:b.hasOwner()?-1:0)
+		.filter(l->l.area().equals(a))
+		.sorted((x,y)->x.hasOwner()?y.hasOwner()?x.owner().hashCode()-y.owner().hashCode():1:y.hasOwner()?-1:0)
 		.collect(Collectors.toList());
 		if(ll.isEmpty()) {
 			stringBuilderToAppendTo.append("<br/>")
