@@ -70,7 +70,7 @@ public class SvgUtil {
 	}
 
 	public static String colourReplacement(String gradientReplacementID, Colour colour, Colour colourSecondary, Colour colourTertiary, String inputString) {
-		return colourReplacement(gradientReplacementID, Util.newArrayListOfValues(colour, colourSecondary, colourTertiary), null, inputString);
+		return colourReplacement(gradientReplacementID,null==colourSecondary?List.of(colour):null==colourTertiary?List.of(colour,colourSecondary):List.of(colour,colourSecondary,colourTertiary),null,inputString);
 	}
 
 	public static String colourReplacement(String gradientReplacementID, Colour colour, Colour colourSecondary, Colour colourTertiary, Colour colourQuaternary, String inputString) {

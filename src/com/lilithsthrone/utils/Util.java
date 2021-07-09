@@ -25,6 +25,7 @@ import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.w3c.dom.Document;
 
@@ -384,16 +385,25 @@ public class Util {
 		}
 		return "Unknown";
 	}
-	
+
+	/**
+	 * @param values Sequence of values.
+	 * @return {@code values} if already in order.
+	 * An ordered copy, otherwise.
+	 */
+	public static <U extends Comparable<U>> List<U> getOrderedCopyOrJust(List<U> values) {
+		if(IntStream.range(0,values.size()-1).noneMatch(i->0<values.get(i).compareTo(values.get(i+1))))
+			return values;
+		return values.stream().sorted().collect(Collectors.toList());
+	}
+
 	/**
 	 * @param values The values to add to the new list.
 	 * @return A list of provided values, with nulls stripped.
 	 */
 	@SafeVarargs
-	public static <U> ArrayList<U> newArrayListOfValues(U... values) {
-		ArrayList<U> list = new ArrayList<>(Arrays.asList(values));
-		list.removeIf(e -> e==null);
-		return list;
+	public static <U> List<U> newArrayListOfValues(U... values) {
+		return List.of(values);
 	}
 	
 	@SafeVarargs

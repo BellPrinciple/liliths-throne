@@ -149,9 +149,7 @@ public class SexActionPresets {
 			SexAreaPenetration.TAIL,
 			SexAreaPenetration.TENTACLE);
 	
-	public static List<SexAreaInterface> lowerHalf = Util.newArrayListOfValues( // Populated in static block
-			SexAreaPenetration.TAIL,
-			SexAreaPenetration.TENTACLE);
+	public static List<SexAreaInterface> lowerHalf = new ArrayList<>();// Populated in static block
 
 	public static List<SexAreaInterface> upperHalf = Util.newArrayListOfValues(
 			SexAreaPenetration.FINGER,
@@ -281,8 +279,10 @@ public class SexActionPresets {
 		feetToGroin = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FOOT, groinAreas));
 		
 		handHolding = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, Util.mergeLists(mouthAreas, Util.newArrayListOfValues(SexAreaPenetration.FINGER))));
-		
-		
+
+
+		lowerHalf.add(SexAreaPenetration.TAIL);
+		lowerHalf.add(SexAreaPenetration.TENTACLE);
 		lowerHalf.addAll(groinAreas);
 		lowerHalf.addAll(thighAreas);
 		lowerHalf.addAll(feetAreas);

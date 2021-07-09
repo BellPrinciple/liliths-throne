@@ -1120,7 +1120,7 @@ public class PlaceUpgrade {
 	
 	
 	static {
-		coreRoomUpgrades = Util.newArrayListOfValues(
+		coreRoomUpgrades = new ArrayList<>(Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_GUEST_ROOM,
 				PlaceUpgrade.LILAYA_SPA,
 				
@@ -1131,13 +1131,13 @@ public class PlaceUpgrade {
 				PlaceUpgrade.LILAYA_OFFICE,
 				PlaceUpgrade.LILAYA_MILKING_ROOM,
 				
-				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
+				PlaceUpgrade.LILAYA_ARTHUR_ROOM));
 
-		guestRoomUpgrades = Util.newArrayListOfValues(
-				PlaceUpgrade.LILAYA_EMPTY_ROOM);
+		guestRoomUpgrades = new ArrayList<>(Util.newArrayListOfValues(
+				PlaceUpgrade.LILAYA_EMPTY_ROOM));
 				
 				
-		slaveQuartersUpgradesSingle = Util.newArrayListOfValues(
+		slaveQuartersUpgradesSingle = new ArrayList<>(Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
 				
@@ -1150,9 +1150,9 @@ public class PlaceUpgrade {
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOUBLE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_QUADRUPLE,
 				PlaceUpgrade.LILAYA_EMPTY_ROOM,
-				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
+				PlaceUpgrade.LILAYA_ARTHUR_ROOM));
 		
-		slaveQuartersUpgradesDouble = Util.newArrayListOfValues(
+		slaveQuartersUpgradesDouble = new ArrayList<>(Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
 				
@@ -1164,9 +1164,9 @@ public class PlaceUpgrade {
 
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_QUADRUPLE,
 				PlaceUpgrade.LILAYA_EMPTY_ROOM,
-				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
+				PlaceUpgrade.LILAYA_ARTHUR_ROOM));
 		
-		slaveQuartersUpgradesQuadruple = Util.newArrayListOfValues(
+		slaveQuartersUpgradesQuadruple = new ArrayList<>(Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
 				
@@ -1177,9 +1177,9 @@ public class PlaceUpgrade {
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_OBEDIENCE_TRAINER,
 				
 				PlaceUpgrade.LILAYA_EMPTY_ROOM,
-				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
+				PlaceUpgrade.LILAYA_ARTHUR_ROOM));
 		
-		milkingRoomUpgrades = Util.newArrayListOfValues(
+		milkingRoomUpgrades = new ArrayList<>(Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_MILKING_ROOM_ARTISAN_MILKERS,
 				PlaceUpgrade.LILAYA_MILKING_ROOM_INDUSTRIAL_MILKERS,
 
@@ -1187,20 +1187,20 @@ public class PlaceUpgrade {
 				PlaceUpgrade.LILAYA_MILKING_ROOM_CUM_EFFICIENCY,
 				PlaceUpgrade.LILAYA_MILKING_ROOM_GIRLCUM_EFFICIENCY,
 				
-				PlaceUpgrade.LILAYA_EMPTY_ROOM);
+				PlaceUpgrade.LILAYA_EMPTY_ROOM));
 		
-		officeUpgrades = Util.newArrayListOfValues(
+		officeUpgrades = new ArrayList<>(Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_OFFICE_EXECUTIVE_UPGRADE,
 				PlaceUpgrade.LILAYA_OFFICE_COFFEE_MACHINE,
 				PlaceUpgrade.LILAYA_OFFICE_PARTITIONING_WALLS,
 				
-				PlaceUpgrade.LILAYA_EMPTY_ROOM);
+				PlaceUpgrade.LILAYA_EMPTY_ROOM));
 		
-		spaUpgrades = Util.newArrayListOfValues(
+		spaUpgrades = new ArrayList<>(Util.newArrayListOfValues(
 				//TODO
 //				PlaceUpgrade.LILAYA_SPA_SAUNA,
 //				PlaceUpgrade.LILAYA_SPA_POOL,
-				PlaceUpgrade.LILAYA_SPA_BAR);
+				PlaceUpgrade.LILAYA_SPA_BAR));
 	}
 	
 

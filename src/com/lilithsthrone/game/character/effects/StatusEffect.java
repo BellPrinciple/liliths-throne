@@ -8129,7 +8129,6 @@ public class StatusEffect {
 			"potionEffects",
 			PresetColour.GENERIC_ARCANE,
 			PresetColour.BASE_PINK_LIGHT,
-			null,
 			false,
 			null,
 			Util.newArrayListOfValues("[style.italicsMinorGood(Maximum values are 25)]")) {
@@ -8459,7 +8458,7 @@ public class StatusEffect {
 			return true;
 		}
 		@Override
-		public ArrayList<ItemTag> getTags() {
+		public List<ItemTag> getTags() {
 			return Util.newArrayListOfValues(
 					ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT,
@@ -8551,7 +8550,7 @@ public class StatusEffect {
 			return true;
 		}
 		@Override
-		public ArrayList<ItemTag> getTags() {
+		public List<ItemTag> getTags() {
 			return Util.newArrayListOfValues(
 					ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT);
@@ -8578,7 +8577,7 @@ public class StatusEffect {
 			return true;
 		}
 		@Override
-		public ArrayList<ItemTag> getTags() {
+		public List<ItemTag> getTags() {
 			return Util.newArrayListOfValues(
 					ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT,
@@ -8649,7 +8648,6 @@ public class StatusEffect {
 			"restrain_tentacles_1",
 			PresetColour.GENERIC_BAD,
 			PresetColour.getColourFromId("NoStepOnSnek_octopus"),
-			null,
 			false,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_PHYSICAL, -25f),
@@ -8671,7 +8669,6 @@ public class StatusEffect {
 			"restrain_tentacles_2",
 			PresetColour.GENERIC_BAD,
 			PresetColour.getColourFromId("NoStepOnSnek_octopus"),
-			null,
 			false,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_PHYSICAL, -50f),
@@ -8688,7 +8685,7 @@ public class StatusEffect {
 			return true;
 		}
 		@Override
-		public ArrayList<ItemTag> getTags() {
+		public List<ItemTag> getTags() {
 			return Util.newArrayListOfValues(
 					ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT);
@@ -8700,7 +8697,6 @@ public class StatusEffect {
 			"restrain_tentacles_3",
 			PresetColour.GENERIC_BAD,
 			PresetColour.getColourFromId("NoStepOnSnek_octopus"),
-			null,
 			false,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_PHYSICAL, -75f),
@@ -8717,7 +8713,7 @@ public class StatusEffect {
 			return true;
 		}
 		@Override
-		public ArrayList<ItemTag> getTags() {
+		public List<ItemTag> getTags() {
 			return Util.newArrayListOfValues(
 					ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT,
@@ -8760,7 +8756,6 @@ public class StatusEffect {
 			"restrain_tail_1",
 			PresetColour.GENERIC_BAD,
 			PresetColour.BASE_GREEN_DARK,
-			null,
 			false,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_PHYSICAL, -25f),
@@ -8782,7 +8777,6 @@ public class StatusEffect {
 			"restrain_tail_2",
 			PresetColour.GENERIC_BAD,
 			PresetColour.BASE_GREEN_DARK,
-			null,
 			false,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_PHYSICAL, -50f),
@@ -8799,7 +8793,7 @@ public class StatusEffect {
 			return true;
 		}
 		@Override
-		public ArrayList<ItemTag> getTags() {
+		public List<ItemTag> getTags() {
 			return Util.newArrayListOfValues(
 					ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT);
@@ -8811,7 +8805,6 @@ public class StatusEffect {
 			"restrain_tail_3",
 			PresetColour.GENERIC_BAD,
 			PresetColour.BASE_GREEN_DARK,
-			null,
 			false,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_PHYSICAL, -75f),
@@ -8828,7 +8821,7 @@ public class StatusEffect {
 			return true;
 		}
 		@Override
-		public ArrayList<ItemTag> getTags() {
+		public List<ItemTag> getTags() {
 			return Util.newArrayListOfValues(
 					ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT,

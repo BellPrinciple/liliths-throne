@@ -1,7 +1,6 @@
 package com.lilithsthrone.game.occupantManagement.slave;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -895,10 +894,9 @@ public enum SlaveJob {
 		if(flags == null) {
 			this.flags = new ArrayList<>();
 		} else {
-			this.flags = flags;
+			this.flags = Util.getOrderedCopyOrJust(flags);
 		}
-		Collections.sort(this.flags);
-		
+
 		this.worldLocation = worldLocation;
 		this.placeLocation = placeLocation;
 	}

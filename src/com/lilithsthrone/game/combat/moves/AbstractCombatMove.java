@@ -8,6 +8,9 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.w3c.dom.Document;
 
@@ -265,17 +268,9 @@ public abstract class AbstractCombatMove {
 				String pathName = XMLFile.getParentFile().getAbsolutePath() + "/" + coreElement.getMandatoryFirstOf("imageName").getTextContent();
 				SVGString = null;
 				
-				Colour colourShade = PresetColour.getColourFromId(coreElement.getMandatoryFirstOf("colourPrimary").getTextContent());
-				Colour colourShadeSecondary = null;
-				if(coreElement.getOptionalFirstOf("colourSecondary").isPresent() && !coreElement.getMandatoryFirstOf("colourSecondary").getTextContent().isEmpty()) {
-					colourShadeSecondary = PresetColour.getColourFromId(coreElement.getMandatoryFirstOf("colourSecondary").getTextContent());
-				}
-				Colour colourShadeTertiary = null;
-				if(coreElement.getOptionalFirstOf("colourTertiary").isPresent() && !coreElement.getMandatoryFirstOf("colourTertiary").getTextContent().isEmpty()) {
-					colourShadeTertiary = PresetColour.getColourFromId(coreElement.getMandatoryFirstOf("colourTertiary").getTextContent());
-				}
-				List<Colour> colourShades = Util.newArrayListOfValues(colourShade, colourShadeSecondary, colourShadeTertiary);
-				
+				var colourShades = Stream.of("colourPrimary","colourSecondary","colourTertiary")
+					.map(x->coreElement.getOptionalFirstOf(x).flatMap(y->Optional.ofNullable(PresetColour.getColourFromId(y.getTextContent()))))
+					.filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 
 		        try {
 					List<String> lines = Files.readAllLines(Paths.get(pathName));

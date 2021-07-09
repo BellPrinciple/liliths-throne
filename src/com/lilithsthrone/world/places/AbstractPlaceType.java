@@ -703,11 +703,11 @@ public class AbstractPlaceType {
 		return false;
 	}
 	
-	public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+	public List<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
 		return new ArrayList<>();
 	}
 	
-	public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+	public List<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
 		return new ArrayList<>();
 	}
 

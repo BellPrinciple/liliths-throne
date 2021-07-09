@@ -6064,7 +6064,7 @@ public class ClothingType {
 	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemaleIncludingAndrogynous;
 	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMaleIncludingAndrogynous;
 	
-	private static Map<Occupation, ArrayList<AbstractClothingType>> suitableFeminineClothing = new HashMap<>();
+	private static Map<Occupation,List<AbstractClothingType>> suitableFeminineClothing = new HashMap<>();
 	
 	private static Map<AbstractClothingType, String> clothingToIdMap = new HashMap<>();
 	private static Map<String, AbstractClothingType> idToClothingMap = new HashMap<>();
@@ -6110,7 +6110,7 @@ public class ClothingType {
 		return clothingToIdMap.get(clothingType);
 	}
 
-	public static Map<Occupation, ArrayList<AbstractClothingType>> getSuitableFeminineClothing() {
+	public static Map<Occupation,List<AbstractClothingType>> getSuitableFeminineClothing() {
 		return suitableFeminineClothing;
 	}
 

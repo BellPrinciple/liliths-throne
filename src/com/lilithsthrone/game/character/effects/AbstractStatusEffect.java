@@ -12,7 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.script.ScriptException;
 
@@ -226,18 +229,11 @@ public abstract class AbstractStatusEffect {
 
 				this.pathName = XMLFile.getParentFile().getAbsolutePath() + "/" + coreElement.getMandatoryFirstOf("imageName").getTextContent();
 				SVGString = null;
-				
-				Colour colourShade = PresetColour.getColourFromId(coreElement.getMandatoryFirstOf("colourPrimary").getTextContent());
-				Colour colourShadeSecondary = null;
-				if(coreElement.getOptionalFirstOf("colourSecondary").isPresent() && !coreElement.getMandatoryFirstOf("colourSecondary").getTextContent().isEmpty()) {
-					colourShadeSecondary = PresetColour.getColourFromId(coreElement.getMandatoryFirstOf("colourSecondary").getTextContent());
-				}
-				Colour colourShadeTertiary = null;
-				if(coreElement.getOptionalFirstOf("colourTertiary").isPresent() && !coreElement.getMandatoryFirstOf("colourTertiary").getTextContent().isEmpty()) {
-					colourShadeTertiary = PresetColour.getColourFromId(coreElement.getMandatoryFirstOf("colourTertiary").getTextContent());
-				}
-				this.colourShades = Util.newArrayListOfValues(colourShade, colourShadeSecondary, colourShadeTertiary);
-				
+
+				colourShades = Stream.of("colourPrimary","colourSecondary","colourTertiary")
+					.map(x->coreElement.getOptionalFirstOf(x).flatMap(y->Optional.ofNullable(PresetColour.getColourFromId(y.getTextContent()))))
+					.filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
+
 				this.attributeModifiers = new HashMap<>();
 				if(coreElement.getOptionalFirstOf("attributeModifiers").isPresent()) {
 					for(Element e : coreElement.getMandatoryFirstOf("attributeModifiers").getAllOf("modifier")) {

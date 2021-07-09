@@ -2623,7 +2623,8 @@ public class ItemType {
 				continue;
 			}
 			
-			List<String> effectsString = Util.newArrayListOfValues(
+			List<String> effectsString = new ArrayList<>();
+			effectsString.add(
 					"[style.boldExcellent(Permanently)] gain the spell '<b style='color:"+s.getSpellSchool().getColour().toWebHexString()+";'>"+s.getName()+"</b>'.");
 			
 			if(s == Spell.ELEMENTAL_EARTH) {

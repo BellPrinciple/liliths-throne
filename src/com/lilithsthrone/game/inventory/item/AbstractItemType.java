@@ -12,8 +12,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.controller.xmlParsing.XMLLoadException;
@@ -162,12 +164,10 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		
 		try{
 			Element itemElement = Element.getDocumentRootElement(itemXMLFile); // Loads the document and returns the root element - in item mods it's <item>
-			Element coreAttributes = null;
-			try {
-				coreAttributes = itemElement.getMandatoryFirstOf("coreAtributes");
-			} catch (XMLMissingTagException ex) {
-				coreAttributes = itemElement.getMandatoryFirstOf("coreAttributes");
-			}
+			var coreAttributesOptional = itemElement.getOptionalFirstOf("coreAttributes");
+			Element coreAttributes = coreAttributesOptional.isPresent()
+				? coreAttributesOptional.get()
+				: itemElement.getMandatoryFirstOf("coreAtributes");
 
 			if(debug) {
 				System.out.println("1");
@@ -239,18 +239,10 @@ public abstract class AbstractItemType extends AbstractCoreType {
 				svgPathInformation.add(new SvgInformation(zLayer, pathName, imageSize, imageRotation, replacements));
 			}
 			SVGString = null;
-			
-			Colour colourShade = PresetColour.getColourFromId(coreAttributes.getMandatoryFirstOf("colourPrimary").getTextContent());
-			Colour colourShadeSecondary = null;
-			if(coreAttributes.getOptionalFirstOf("colourSecondary").isPresent() && !coreAttributes.getMandatoryFirstOf("colourSecondary").getTextContent().isEmpty()) {
-				colourShadeSecondary = PresetColour.getColourFromId(coreAttributes.getMandatoryFirstOf("colourSecondary").getTextContent());
-			}
-			Colour colourShadeTertiary = null;
-			if(coreAttributes.getOptionalFirstOf("colourTertiary").isPresent() && !coreAttributes.getMandatoryFirstOf("colourTertiary").getTextContent().isEmpty()) {
-				colourShadeTertiary = PresetColour.getColourFromId(coreAttributes.getMandatoryFirstOf("colourTertiary").getTextContent());
-			}
-			this.colourShades = Util.newArrayListOfValues(colourShade, colourShadeSecondary, colourShadeTertiary);
-			
+
+			colourShades = Stream.of("colourPrimary","colourSecondary","colourTertiary")
+				.map(x->coreAttributes.getOptionalFirstOf(x).flatMap(y->Optional.ofNullable(PresetColour.getColourFromId(y.getTextContent()))))
+				.filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 			
 			if(debug) {
 				System.out.println("2");

@@ -71,35 +71,35 @@ public class ColourListPresets {
 		be referenced in code, the remainder are created dynamically.
 	 */
 	
-	public static ArrayList<Colour> JUST_WHITE = Util.newArrayListOfValues(
+	public static List<Colour> JUST_WHITE = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_WHITE);
 	
-	public static ArrayList<Colour> JUST_BLACK = Util.newArrayListOfValues(
+	public static List<Colour> JUST_BLACK = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_BLACK);
 
-	public static ArrayList<Colour> JUST_RED_DARK = Util.newArrayListOfValues(
+	public static List<Colour> JUST_RED_DARK = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_RED_DARK);
 	
-	public static ArrayList<Colour> JUST_RED = Util.newArrayListOfValues(
+	public static List<Colour> JUST_RED = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_RED);
 
-	public static ArrayList<Colour> JUST_GREY = Util.newArrayListOfValues(
+	public static List<Colour> JUST_GREY = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_GREY);
 	
-	public static ArrayList<Colour> JUST_GOLD = Util.newArrayListOfValues(
+	public static List<Colour> JUST_GOLD = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_GOLD);
 	
-	public static ArrayList<Colour> JUST_ROSE_GOLD = Util.newArrayListOfValues(
+	public static List<Colour> JUST_ROSE_GOLD = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_ROSE_GOLD);
 	
-	public static ArrayList<Colour> JUST_STEEL = Util.newArrayListOfValues(
+	public static List<Colour> JUST_STEEL = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_STEEL);
 
-	public static ArrayList<Colour> BLACK_OR_WHITE = Util.newArrayListOfValues(
+	public static List<Colour> BLACK_OR_WHITE = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_BLACK,
 			PresetColour.CLOTHING_WHITE);
 
-	public static ArrayList<Colour> SHADES_OF_GREY = Util.newArrayListOfValues(
+	public static List<Colour> SHADES_OF_GREY = Util.newArrayListOfValues(
 //			PresetColour.CLOTHING_BLACK_JET,
 			PresetColour.CLOTHING_BLACK,
 			PresetColour.CLOTHING_GREY_DARK,
@@ -108,7 +108,7 @@ public class ColourListPresets {
 //			PresetColour.CLOTHING_WHITE
 			);
 	
-	public static ArrayList<Colour> DARK_SHADES = Util.newArrayListOfValues(
+	public static List<Colour> DARK_SHADES = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_GREY,
 			PresetColour.CLOTHING_GREY_DARK,
 			PresetColour.CLOTHING_BLACK,
@@ -118,7 +118,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_GREEN_VERY_DARK,
 			PresetColour.CLOTHING_BLUE_VERY_DARK);
 	
-	public static ArrayList<Colour> DENIM = Util.newArrayListOfValues(
+	public static List<Colour> DENIM = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_BLUE_GREY,
 			PresetColour.CLOTHING_BLUE_NAVY,
 			PresetColour.CLOTHING_PINK_LIGHT,
@@ -128,7 +128,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_GREY,
 			PresetColour.CLOTHING_BLACK);
 	
-	public static ArrayList<Colour> KIMONO = Util.newArrayListOfValues(
+	public static List<Colour> KIMONO = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_BLUE_LIGHT,
 			PresetColour.CLOTHING_PINK_LIGHT,
 			PresetColour.CLOTHING_PINK,
@@ -139,12 +139,12 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_WHITE,
 			PresetColour.CLOTHING_YELLOW);
 	
-	public static ArrayList<Colour> MAID = Util.newArrayListOfValues(
+	public static List<Colour> MAID = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_PINK_LIGHT,
 			PresetColour.CLOTHING_PINK,
 			PresetColour.CLOTHING_BLACK);
 	
-	public static ArrayList<Colour> MILK_MAID = Util.newArrayListOfValues(
+	public static List<Colour> MILK_MAID = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_PINK_LIGHT,
 			PresetColour.CLOTHING_BLUE_LIGHT,
 			PresetColour.CLOTHING_PURPLE_LIGHT,
@@ -154,7 +154,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_BROWN,
 			PresetColour.CLOTHING_BLACK);
 	
-	public static ArrayList<Colour> LEATHER = Util.newArrayListOfValues(
+	public static List<Colour> LEATHER = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_WHITE,
 			PresetColour.CLOTHING_BLACK,
 			PresetColour.CLOTHING_BLACK_JET,
@@ -167,7 +167,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_TAN,
 			PresetColour.CLOTHING_KHAKI);
 	
-	public static ArrayList<Colour> LINGERIE = Util.newArrayListOfValues(
+	public static List<Colour> LINGERIE = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_WHITE,
 			PresetColour.CLOTHING_GREY_LIGHT,
 			PresetColour.CLOTHING_GREY,
@@ -213,7 +213,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_PINK_HOT,
 			PresetColour.CLOTHING_PINK_DARK);
 	
-	public static ArrayList<Colour> ALL_METAL = Util.newArrayListOfValues(
+	public static List<Colour> ALL_METAL = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_BLACK_STEEL,
 			PresetColour.CLOTHING_GUNMETAL,
 			PresetColour.CLOTHING_STEEL,
@@ -227,7 +227,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_PLATINUM);
 			
 	
-	public static ArrayList<Colour> ALL = Util.newArrayListOfValues(
+	public static List<Colour> ALL = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_WHITE,
 			PresetColour.CLOTHING_GREY_LIGHT,
 			PresetColour.CLOTHING_GREY,
@@ -275,7 +275,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_PINK_HOT,
 			PresetColour.CLOTHING_PINK_DARK);
 	
-	public static ArrayList<Colour> ALL_WITH_METALS = Util.newArrayListOfValues(
+	public static List<Colour> ALL_WITH_METALS = Util.newArrayListOfValues(
 			PresetColour.CLOTHING_BLACK_STEEL,
 			PresetColour.CLOTHING_GUNMETAL,
 			PresetColour.CLOTHING_STEEL,
@@ -338,10 +338,10 @@ public class ColourListPresets {
         public static ArrayList<Colour> NOT_WHITE = new ArrayList<>(ALL);
 	
 	public static ArrayList<Colour> NOT_BLACK = new ArrayList<>(ALL);
-	
+
         //Speshul debug color list with added damage and BaseColours
         //Modders don't use this in your items rrrrreeeeee
-        public static ArrayList<Colour> DEBUG_ALL = Util.newArrayListOfValues(
+        public static ArrayList<Colour> DEBUG_ALL = new ArrayList<>(List.of(
                 PresetColour.BASE_WHITE,
                 PresetColour.BASE_GREY_LIGHT,
                 PresetColour.BASE_GREY,
@@ -395,7 +395,7 @@ public class ColourListPresets {
                 PresetColour.DAMAGE_TYPE_COLD,
                 PresetColour.DAMAGE_TYPE_POISON,
                 PresetColour.DAMAGE_TYPE_PURE
-                );
+                ));
         
 	static {
 		NOT_WHITE.remove(PresetColour.CLOTHING_WHITE);
@@ -404,13 +404,13 @@ public class ColourListPresets {
                 DEBUG_ALL.addAll(ALL_WITH_METALS);
 	}
 
-	private static Map<String, ArrayList<Colour>> idToColourListMap = new HashMap<>();
+	private static Map<String,List<Colour>> idToColourListMap = new HashMap<>();
 	
-	public static Map<String, ArrayList<Colour>> getIdToColourListMap() {
+	public static Map<String,List<Colour>> getIdToColourListMap() {
 		return idToColourListMap;
 	}
 
-	public static ArrayList<Colour> getColourListFromId(String id) {
+	public static List<Colour> getColourListFromId(String id) {
 		// Fix inconsistent naming:
 		if(id.equals("ALL_METALS")) {
 			id = "ALL_METAL";
@@ -428,14 +428,10 @@ public class ColourListPresets {
 	
 		for(Field f : fields){
 			
-			if (ArrayList.class.isAssignableFrom(f.getType())) {
+			if(List.class.isAssignableFrom(f.getType())) {
 				
-				ArrayList<Colour> ct;
 				try {
-					ct = ((ArrayList<Colour>) f.get(null));
-	
-					idToColourListMap.put(f.getName(), ct);
-					
+					idToColourListMap.put(f.getName(),(List<Colour>)f.get(null));
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
@@ -447,7 +443,7 @@ public class ColourListPresets {
 			String presetName = "JUST_" + PresetColour.getIdFromColour(c).substring("CLOTHING_".length());
 			
 			if (!idToColourListMap.containsKey(presetName)) {
-				ArrayList<Colour> preset = Util.newArrayListOfValues(c);
+				List<Colour> preset = Util.newArrayListOfValues(c);
 				idToColourListMap.put(presetName, preset);
 			}
 		}

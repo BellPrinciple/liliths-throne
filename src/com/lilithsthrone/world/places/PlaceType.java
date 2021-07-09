@@ -1769,7 +1769,7 @@ public class PlaceType {
 			return LilayaHomeGeneric.ROOM_WINDOW;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public List<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
@@ -1830,11 +1830,11 @@ public class PlaceType {
 			return LilayaHomeGeneric.ROOM_GARDEN_GROUND_FLOOR;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public List<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public List<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
 			return LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR.getAvailablePlaceUpgrades(upgrades);
 		}
 		@Override
@@ -1869,11 +1869,11 @@ public class PlaceType {
 			return LilayaHomeGeneric.ROOM_WINDOW;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public List<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public List<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
 			return LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR.getAvailablePlaceUpgrades(upgrades);
 		}
 		@Override
@@ -1908,11 +1908,11 @@ public class PlaceType {
 			return LilayaHomeGeneric.ROOM_GARDEN;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public List<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public List<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
 			return LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR.getAvailablePlaceUpgrades(upgrades);
 		}
 		@Override
@@ -2149,7 +2149,7 @@ public class PlaceType {
 			null, "in your room"
 			) {
 				@Override
-				public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+				public List<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
 					return Util.newArrayListOfValues(
 							PlaceUpgrade.LILAYA_PLAYER_ROOM_BED);
 				}
@@ -3138,7 +3138,7 @@ public class PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in Slaver Alley"){
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public List<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.SLAVERY_ADMINISTRATION_CELLS);
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
