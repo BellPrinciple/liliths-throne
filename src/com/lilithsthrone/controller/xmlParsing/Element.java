@@ -4,6 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import com.lilithsthrone.main.Main;
 import org.w3c.dom.DOMException;
@@ -92,6 +97,52 @@ public class Element {
 	}
 
 	/**
+	 * Parses an attribute into a boolean.
+	 * @param name Identifies an attribute of this element.
+	 * @return The attribute is present and contains the value {@code "true"}.
+	 */
+	public boolean attributeTrue(String name) {
+		return Boolean.parseBoolean(getAttribute(name));
+	}
+
+	/**
+	 * Parses an attribute into a boolean.
+	 * @param name Identifies an attribute of this element.
+	 * @return The attribute is not present or it contains the value {@code "true"}.
+	 */
+	public boolean attributeNotFalse(String name) {
+		var v = getAttribute(name);
+		return v.isEmpty() || !Boolean.parseBoolean(v);
+	}
+
+	/**
+	 * Parses an attribute into an integer.
+	 * @param name Identifies an attribute of this element.
+	 * @return The parsed integer, if the attribute is present and denotes a decimal value.
+	 */
+	public OptionalInt attributeInt(String name) {
+		return parseInt(getAttribute(name));
+	}
+
+	/**
+	 * Parses an attribute into a floating-point number.
+	 * @param name Identifies an attribute of this element.
+	 * @return The parsed number, if successful.
+	 */
+	public OptionalDouble attributeDouble(String name) {
+		return parseDouble(getAttribute(name));
+	}
+
+	/**
+	 * Parses an attribute.
+	 * @param name Identifies an attribute of this element.
+	 * @param f Parser, throw
+	 */
+	public <T> Optional<T> attributeValue(String name, Function<String,T> f) {
+		return parseValue(f,getAttribute(name));
+	}
+
+	/**
 	 * <p>
 	 * Returns raw text inside the element.</p>
 	 *
@@ -112,6 +163,31 @@ public class Element {
 			getTagName()));
 			return "";
 		}
+	}
+
+	/**
+	 * Parses the text content as an integer.
+	 * @return Just the parsed integer, if successfully parsed.
+	 */
+	public OptionalInt textInt() {
+		return parseInt(getTextContent());
+	}
+
+	/**
+	 * Parses the text content as a double-precision floating-point number.
+	 * @return Just the parsed number, if successfully parsed.
+	 */
+	public OptionalDouble textDouble() {
+		return parseDouble(getTextContent());
+	}
+
+	/**
+	 * Parses the text content.
+	 * @param f Parser, throwing {@link RuntimeException} on syntax violation.
+	 * @return Just the value represented by the text, if successful.
+	 */
+	public <T> Optional<T> textValue(Function<String,T> f) {
+		return parseValue(f,getTextContent());
 	}
 	
 	/**
@@ -215,5 +291,91 @@ public class Element {
 			}
 		}
 		return returnList;
+	}
+
+	/**
+	 * Iterates all direct child elements with the specified tag name.
+	 * @param tag Identifies a class of elements.
+	 * @return All direct child elements of the class in order of appearance.
+	 */
+	public Stream<Element> all(String tag) {
+		var l = innerElement.getElementsByTagName(tag);
+		return IntStream.range(0,l.getLength()).mapToObj(x->new Element((org.w3c.dom.Element)l.item(x),fileDirectory,document));
+	}
+
+	/**
+	 * Iterates just the first child element.
+	 * @param tag Identifies a class of elements.
+	 * @return Parsed element, if successful.
+	 */
+	public Stream<Element> first(String tag) {
+		return getOptionalFirstOf(tag).stream();
+	}
+
+	/**
+	 * Parses the text content of the first direct child with a given tag name into an integer.
+	 * @param tag Identifies a class of elements.
+	 * @return Just the parsed integer, if successful.
+	 * Whether the element did not exist, or the integer could not be parsed, is not distinguishable.
+	 */
+	public OptionalInt asInt(String tag) {
+		return asString(tag).map(Element::parseInt).orElseGet(OptionalInt::empty);
+	}
+
+	/**
+	 * Parses the text content of the first direct child with a given tag name into a floating-point number.
+	 * @param tag Identifies a class of elements.
+	 * @return Just the parsed number, if successful.
+	 * Whether the element did not exist, or the number could not be parsed, is not distinguishable.
+	 */
+	public OptionalDouble asDouble(String tag) {
+		return asString(tag).map(Element::parseDouble).orElseGet(OptionalDouble::empty);
+	}
+
+	/**
+	 * Accesses the text content of the first direct child with a given tag name.
+	 * @param tag Identifies a class of elements.
+	 * @return Just the text content, if successful.
+	 */
+	public Optional<String> asString(String tag) {
+		return getOptionalFirstOf(tag).map(Element::getTextContent);
+	}
+
+	/**
+	 * Parses the text content of the first direct child with a given tag name into a floating-point number.
+	 * @param tag Identifies a class of elements.
+	 * @param f Parser, throwing {@code RuntimeException} on syntax violation.
+	 * @return Just the parsed number, if successful.
+	 * Whether the element did not exist, or the number could not be parsed, is not distinguishable.
+	 */
+	public <T> Optional<T> asValue(String tag, Function<String,T> f) {
+		return first(tag).map(x->x.textValue(f)).filter(Optional::isPresent).map(Optional::get).findFirst();
+	}
+
+	private static OptionalInt parseInt(String s) {
+		try {
+			return OptionalInt.of(Integer.parseInt(s));
+		}
+		catch(NumberFormatException ex) {
+			return OptionalInt.empty();
+		}
+	}
+
+	private static OptionalDouble parseDouble(String s) {
+		try {
+			return OptionalDouble.of(Double.parseDouble(s));
+		}
+		catch(NumberFormatException ex) {
+			return OptionalDouble.empty();
+		}
+	}
+
+	private static <T> Optional<T> parseValue(Function<String,T> f, String s) {
+		try {
+			return Optional.ofNullable(f.apply(s));
+		}
+		catch(RuntimeException ex) {
+			return Optional.empty();
+		}
 	}
 }
