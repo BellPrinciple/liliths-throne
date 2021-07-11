@@ -11,8 +11,10 @@ import com.lilithsthrone.game.inventory.InventorySlot;
  */
 public interface SexAreaInterface {
 	
-	public boolean isOrifice();
-	
+	default boolean isOrifice() {
+		return false;
+	}
+
 	public CoverableArea getRelatedCoverableArea(GameCharacter owner);
 	
 	public InventorySlot getRelatedInventorySlot(GameCharacter owner);
@@ -30,8 +32,8 @@ public interface SexAreaInterface {
 	
 	public boolean isFree(GameCharacter owner);
 
-	public default boolean isPenetration() {
-		return !isOrifice();
+	default boolean isPenetration() {
+		return false;
 	}
 	
 	public default boolean isPlural() {
@@ -39,5 +41,32 @@ public interface SexAreaInterface {
 	}
 	
 	public String getSexDescription(boolean pastTense, GameCharacter performer, SexPace performerPace, GameCharacter target, SexPace targetPace, SexAreaInterface targetArea);
-	
+
+	SexAreaInterface NULL = new SexAreaInterface() {
+
+		@Override
+		public CoverableArea getRelatedCoverableArea(GameCharacter owner) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public InventorySlot getRelatedInventorySlot(GameCharacter owner) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public String getName(GameCharacter owner, boolean standardName) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public boolean isFree(GameCharacter owner) {
+			return false;
+		}
+
+		@Override
+		public String getSexDescription(boolean pastTense, GameCharacter performer, SexPace performerPace, GameCharacter target, SexPace targetPace, SexAreaInterface targetArea) {
+			throw new UnsupportedOperationException();
+		}
+	};
 }

@@ -1604,7 +1604,7 @@ public class Perk {
 			null) {
 		
 		@Override
-		public HashMap<AbstractAttribute, Integer> getAttributeModifiers(GameCharacter character) {
+		public Map<AbstractAttribute, Integer> getAttributeModifiers(GameCharacter character) {
 			if(character!=null && character.isPlayer()) {
 				return Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, 20));
 			} else {

@@ -310,7 +310,7 @@ public class Util {
 		}
 	}
 	
-	public static class Value<T, S> {
+	public static class Value<T, S> implements Map.Entry<T,S> {
 		private T key;
 		private S value;
 		
@@ -326,19 +326,16 @@ public class Util {
 		public S getValue() {
 			return value;
 		}
+
+		@Override
+		public S setValue(S s) {
+			throw new UnsupportedOperationException();
+		}
 	}
 
 	@SafeVarargs
-	public static <T, S> LinkedHashMap<T, S> newHashMapOfValues(Value<T, S>... values) {
-		LinkedHashMap<T, S> map = new LinkedHashMap<>();
-
-		for (Value<T, S> v : values) {
-			if(v!=null) {
-				map.put(v.getKey(), v.getValue());
-			}
-		}
-		
-		return map;
+	public static <T, S> Map<T, S> newHashMapOfValues(Map.Entry<T, S>... values) {
+		return Map.ofEntries(values);
 	}
 
 

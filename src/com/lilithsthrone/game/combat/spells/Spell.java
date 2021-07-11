@@ -3005,7 +3005,7 @@ public enum Spell {
 	private List<SpellUpgrade> upgradeList;
 	private Map<Integer, List<TreeEntry<SpellSchool, SpellUpgrade>>> spellUpgradeTree;
 	
-	private HashMap<AbstractAttribute, Integer> attributeModifiers;
+	private Map<AbstractAttribute, Integer> attributeModifiers;
 	private List<String> extraEffects;
 	private List<String> modifiersList;
 
@@ -3025,7 +3025,7 @@ public enum Spell {
 			int spellCost,
 			Map<AbstractStatusEffect, Integer> statusEffects,
 			List<SpellUpgrade> upgradeList,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			Map<AbstractAttribute, Integer> attributeModifiers,
 			List<String> extraEffects) {
 		
 		this.forbiddenSpell = forbiddenSpell;
@@ -3193,7 +3193,7 @@ public enum Spell {
 		return spellUpgradeTree;
 	}
 
-	public HashMap<AbstractAttribute, Integer> getAttributeModifiers() {
+	public Map<AbstractAttribute, Integer> getAttributeModifiers() {
 		return attributeModifiers;
 	}
 

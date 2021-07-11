@@ -779,8 +779,8 @@ public class ImpFortressDialogue {
 	}
 	
 	private static SexManagerInterface getAlphaSexManager(GameCharacter sub1, GameCharacter sub2, ResponseTag... tags) {
-		HashMap<GameCharacter, SexSlot> doms = new HashMap<>();
-		HashMap<GameCharacter, SexSlot> subs = new HashMap<>();
+		Map<GameCharacter, SexSlot> doms;
+		Map<GameCharacter, SexSlot> subs;
 		
 		boolean doggy = true;
 		
@@ -788,49 +788,51 @@ public class ImpFortressDialogue {
 			if(isAlphaBossWantingOral(sub1)) {
 				if(isAlphaBossWantingOral(sub2)) {
 					doggy = false;
-					subs = Util.newHashMapOfValues(
-							new Value<>(sub1, SexSlotStanding.PERFORMING_ORAL),
-							new Value<>(sub2, SexSlotStanding.PERFORMING_ORAL_TWO));
-					doms = Util.newHashMapOfValues(
-							new Value<>(getBoss(), SexSlotStanding.STANDING_DOMINANT));
+					subs = Map.of(
+						sub1,SexSlotStanding.PERFORMING_ORAL,
+						sub2,SexSlotStanding.PERFORMING_ORAL_TWO);
+					doms = Map.of(
+						getBoss(),SexSlotStanding.STANDING_DOMINANT);
 					
 				} else {
-					subs = Util.newHashMapOfValues(
-							new Value<>(sub1, SexSlotAllFours.ALL_FOURS),
-							new Value<>(sub2, SexSlotAllFours.ALL_FOURS_TWO));
-					doms = Util.newHashMapOfValues(
-							new Value<>(getBoss(), SexSlotAllFours.IN_FRONT),
-							new Value<>(getImpBossGroup(false).get(0), SexSlotAllFours.BEHIND),
-							new Value<>(getImpBossGroup(false).get(1), SexSlotAllFours.IN_FRONT_TWO),
-							new Value<>(getImpBossGroup(false).get(2), SexSlotAllFours.BEHIND_TWO));
+					subs = Map.of(
+						sub1,SexSlotAllFours.ALL_FOURS,
+						sub2,SexSlotAllFours.ALL_FOURS_TWO);
+					doms = Map.of(
+						getBoss(),SexSlotAllFours.IN_FRONT,
+						getImpBossGroup(false).get(0),SexSlotAllFours.BEHIND,
+						getImpBossGroup(false).get(1),SexSlotAllFours.IN_FRONT_TWO,
+						getImpBossGroup(false).get(2),SexSlotAllFours.BEHIND_TWO);
 				}
 					
 			} else if(isAlphaBossWantingOral(sub2)) {
-				doms = Util.newHashMapOfValues(
-						new Value<>(getBoss(), SexSlotAllFours.IN_FRONT_TWO),
-						new Value<>(getImpBossGroup(false).get(0), SexSlotAllFours.BEHIND_TWO),
-						new Value<>(getImpBossGroup(false).get(1), SexSlotAllFours.IN_FRONT),
-						new Value<>(getImpBossGroup(false).get(2), SexSlotAllFours.BEHIND));
-				
+				subs = Map.of();
+				doms = Map.of(
+					getBoss(),SexSlotAllFours.IN_FRONT_TWO,
+					getImpBossGroup(false).get(0),SexSlotAllFours.BEHIND_TWO,
+					getImpBossGroup(false).get(1),SexSlotAllFours.IN_FRONT,
+					getImpBossGroup(false).get(2),SexSlotAllFours.BEHIND);
+
 			} else {
-				doms = Util.newHashMapOfValues(
-						new Value<>(getImpBossGroup(false).get(0), SexSlotAllFours.BEHIND),
-						new Value<>(getImpBossGroup(false).get(1), SexSlotAllFours.BEHIND_TWO),
-						new Value<>(getImpBossGroup(false).get(2), SexSlotAllFours.HUMPING));
+				subs = Map.of();
+				doms = Map.of(
+					getImpBossGroup(false).get(0),SexSlotAllFours.BEHIND,
+					getImpBossGroup(false).get(1),SexSlotAllFours.BEHIND_TWO,
+					getImpBossGroup(false).get(2),SexSlotAllFours.HUMPING);
 			}
 			
 		} else {
 			if(isAlphaBossWantingOral(sub1)) {
 				doggy = false;
-				subs = Util.newHashMapOfValues(new Value<>(sub1, SexSlotStanding.PERFORMING_ORAL));
-				doms = Util.newHashMapOfValues(new Value<>(getBoss(), SexSlotStanding.STANDING_DOMINANT));
+				subs = Map.of(sub1,SexSlotStanding.PERFORMING_ORAL);
+				doms = Map.of(getBoss(),SexSlotStanding.STANDING_DOMINANT);
 					
 			} else {
-				subs = Util.newHashMapOfValues(new Value<>(sub1, SexSlotAllFours.ALL_FOURS));
-				doms = Util.newHashMapOfValues(
-						new Value<>(getImpBossGroup(false).get(0), SexSlotAllFours.BEHIND),
-						new Value<>(getImpBossGroup(false).get(1), SexSlotAllFours.BEHIND_TWO),
-						new Value<>(getImpBossGroup(false).get(2), SexSlotAllFours.HUMPING));
+				subs = Map.of(sub1,SexSlotAllFours.ALL_FOURS);
+				doms = Map.of(
+					getImpBossGroup(false).get(0), SexSlotAllFours.BEHIND,
+					getImpBossGroup(false).get(1), SexSlotAllFours.BEHIND_TWO,
+					getImpBossGroup(false).get(2), SexSlotAllFours.HUMPING);
 			}
 		}
 		
@@ -929,8 +931,8 @@ public class ImpFortressDialogue {
 	}
 	
 	private static SexManagerInterface getMalesSexManager(GameCharacter sub1, GameCharacter sub2, ResponseTag... tags) {
-		HashMap<GameCharacter, SexSlot> doms = new HashMap<>();
-		HashMap<GameCharacter, SexSlot> subs = new HashMap<>();
+		Map<GameCharacter, SexSlot> doms;
+		Map<GameCharacter, SexSlot> subs;
 		
 		if(sub2!=null) {
 			subs = Util.newHashMapOfValues(

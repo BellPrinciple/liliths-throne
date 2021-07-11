@@ -3,8 +3,8 @@ package com.lilithsthrone.game.character.effects;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
@@ -34,7 +34,7 @@ public abstract class AbstractPerk {
 	private SpellSchool school;
 
 	// Attributes modified by this Virtue:
-	private HashMap<AbstractAttribute, Integer> attributeModifiers;
+	private Map<AbstractAttribute, Integer> attributeModifiers;
 
 	private PerkCategory perkCategory;
 
@@ -51,7 +51,7 @@ public abstract class AbstractPerk {
 			PerkCategory perkCategory,
 			String pathName,
 			Colour colour,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			Map<AbstractAttribute, Integer> attributeModifiers,
 			List<String> extraEffects) {
 		this(renderingPriority,
 				major,
@@ -73,7 +73,7 @@ public abstract class AbstractPerk {
 			PerkCategory perkCategory,
 			String pathName,
 			Colour colour,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			Map<AbstractAttribute, Integer> attributeModifiers,
 			List<String> extraEffects,
 			Spell spell,
 			SpellUpgrade spellUpgrade,
@@ -97,7 +97,7 @@ public abstract class AbstractPerk {
 			PerkCategory perkCategory,
 			String pathName,
 			List<Colour> colours,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			Map<AbstractAttribute, Integer> attributeModifiers,
 			List<String> extraEffects,
 			Spell spell,
 			SpellUpgrade spellUpgrade,
@@ -214,7 +214,7 @@ public abstract class AbstractPerk {
 		return Util.mergeLists(modifiersList, getExtraEffects());
 	}
 
-	public HashMap<AbstractAttribute, Integer> getAttributeModifiers(GameCharacter character) {
+	public Map<AbstractAttribute, Integer> getAttributeModifiers(GameCharacter character) {
 		return attributeModifiers;
 	}
 

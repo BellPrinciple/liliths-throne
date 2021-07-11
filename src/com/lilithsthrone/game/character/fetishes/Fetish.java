@@ -3,8 +3,8 @@ package com.lilithsthrone.game.character.fetishes;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
@@ -1828,7 +1828,7 @@ public enum Fetish {
 	protected String name;
 	protected String shortDescriptor;
 	private int experienceGainFromSexAction;
-	private HashMap<AbstractAttribute, Integer> attributeModifiers;
+	private Map<AbstractAttribute, Integer> attributeModifiers;
 
 	private String SVGString;
 
@@ -1866,7 +1866,7 @@ public enum Fetish {
 			String pathName,
 			FetishExperience experienceGainFromSexAction,
 			Colour colourShade,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			Map<AbstractAttribute, Integer> attributeModifiers,
 			List<String> extraEffects,
 			List<Fetish> fetishesForAutomaticUnlock) {
 		this(renderingPriority,
@@ -1887,7 +1887,7 @@ public enum Fetish {
 			String pathName,
 			FetishExperience experienceGainFromSexAction,
 			List<Colour> colourShade,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			Map<AbstractAttribute, Integer> attributeModifiers,
 			List<String> extraEffects,
 			List<Fetish> fetishesForAutomaticUnlock) {
 
@@ -1990,7 +1990,7 @@ public enum Fetish {
 		return modList;
 	}
 
-	public HashMap<AbstractAttribute, Integer> getAttributeModifiers() {
+	public Map<AbstractAttribute, Integer> getAttributeModifiers() {
 		return attributeModifiers;
 	}
 

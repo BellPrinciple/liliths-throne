@@ -2333,7 +2333,7 @@ public class GenericActions {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.SPINNERET, null)),
+			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.SPINNERET,SexAreaInterface.NULL)),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionPriority getPriority() {
@@ -2471,7 +2471,7 @@ public class GenericActions {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.ZERO_NONE,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE, null)),
+			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE,SexAreaInterface.NULL)),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionPriority getPriority() {

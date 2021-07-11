@@ -1,7 +1,6 @@
 package com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +77,7 @@ public class SuccubisSecrets {
 	public static final int BASE_ANAL_BLEACHING_COST = 100;
 	public static final int BASE_BODY_HAIR_COST = 50;
 	
-	public static final HashMap<AbstractBodyCoveringType, Integer> cosmeticCostsMap = Util.newHashMapOfValues(
+	public static final Map<AbstractBodyCoveringType, Integer> cosmeticCostsMap = Util.newHashMapOfValues(
 			new Value<>(BodyCoveringType.MAKEUP_BLUSHER, 25),
 			new Value<>(BodyCoveringType.MAKEUP_EYE_LINER, 25),
 			new Value<>(BodyCoveringType.MAKEUP_EYE_SHADOW, 25),
@@ -86,7 +85,7 @@ public class SuccubisSecrets {
 			new Value<>(BodyCoveringType.MAKEUP_NAIL_POLISH_FEET, 25),
 			new Value<>(BodyCoveringType.MAKEUP_NAIL_POLISH_HANDS, 25));
 
-	public static final HashMap<PiercingType, Integer> piercingCostsMap = Util.newHashMapOfValues(
+	public static final Map<PiercingType, Integer> piercingCostsMap = Util.newHashMapOfValues(
 			new Value<>(PiercingType.EAR, 10),
 			new Value<>(PiercingType.LIP, 25),
 			new Value<>(PiercingType.NAVEL, 25),

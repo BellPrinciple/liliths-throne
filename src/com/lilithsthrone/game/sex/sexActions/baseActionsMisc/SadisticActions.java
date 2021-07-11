@@ -5,6 +5,7 @@ import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.ArousalIncrease;
+import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexPace;
@@ -32,7 +33,7 @@ public class SadisticActions {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, null)),
+			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER,SexAreaInterface.NULL)),
 			SexParticipantType.NORMAL) {
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -143,7 +144,7 @@ public class SadisticActions {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, null)),
+			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER,SexAreaInterface.NULL)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 
@@ -291,7 +292,7 @@ public class SadisticActions {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.FOUR_LUSTFUL,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, null)),
+			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER,SexAreaInterface.NULL)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -484,7 +485,7 @@ public class SadisticActions {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.FOUR_LUSTFUL,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, null)),
+			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER,SexAreaInterface.NULL)),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		

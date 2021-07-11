@@ -291,8 +291,8 @@ public abstract class AbstractSubspecies {
 		this.statusEffectDescription = statusEffectDescription;
 		
 		this.statusEffectAttributeModifiers = statusEffectAttributeModifiers;
-		if(this.statusEffectAttributeModifiers!=null) {
-			this.statusEffectAttributeModifiers.entrySet().removeIf((entry) -> entry.getValue()==0);
+		if(statusEffectAttributeModifiers!=null && statusEffectAttributeModifiers.containsValue(0)) {
+			throw new IllegalArgumentException("statusEffectAttributeModifiers must not contain value 0");
 		}
 		
 		if(perkWeightingFeminine!=null) {

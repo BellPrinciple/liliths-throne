@@ -3210,8 +3210,8 @@ public enum SexAreaPenetration implements SexAreaInterface {
 	}
 
 	@Override
-	public boolean isOrifice() {
-		return false;
+	public boolean isPenetration() {
+		return true;
 	}
 	
 	public boolean appliesStretchEffects(GameCharacter owner) {

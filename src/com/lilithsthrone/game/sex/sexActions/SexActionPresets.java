@@ -80,7 +80,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTongueMouth;
 import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTongueNipple;
 import com.lilithsthrone.game.sex.sexActions.baseActionsSelf.SelfTongueVagina;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.97
@@ -248,22 +247,22 @@ public class SexActionPresets {
 		allAreas = Util.mergeLists(appendageAreas, groinAreas, assAreas, mouthAreas, breastAreas);
 		
 		for(SexAreaInterface tailArea : tailAreas) {
-			tailToAllAreas = Util.newHashMapOfValues(new Value<>(tailArea, allAreas));
-			tailToUpperTorso = Util.newHashMapOfValues(new Value<>(tailArea, Util.mergeLists(mouthAreas, breastAreas)));
-			tailToLowerHalf = Util.newHashMapOfValues(new Value<>(tailArea, Util.mergeLists(groinAreas, lowerHalf, assAreas)));
+			tailToAllAreas.put(tailArea, allAreas);
+			tailToUpperTorso.put(tailArea, Util.mergeLists(mouthAreas, breastAreas));
+			tailToLowerHalf.put(tailArea, Util.mergeLists(groinAreas, lowerHalf, assAreas));
 		}
 		
-		tentacleToAllAreas = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE, allAreas));
+		tentacleToAllAreas.put(SexAreaPenetration.TENTACLE, allAreas);
 		
-		tentacleToUpperTorso = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE, Util.mergeLists(mouthAreas, breastAreas)));
-		tentacleToLowerHalf = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE, Util.mergeLists(groinAreas, lowerHalf, assAreas)));
+		tentacleToUpperTorso.put(SexAreaPenetration.TENTACLE, Util.mergeLists(mouthAreas, breastAreas));
+		tentacleToLowerHalf.put(SexAreaPenetration.TENTACLE, Util.mergeLists(groinAreas, lowerHalf, assAreas));
 		
-		fingerToUpperTorso = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, Util.mergeLists(mouthAreas, breastAreas)));
-		fingerToLowerHalf = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, Util.mergeLists(groinAreas, lowerHalf, assAreas)));
+		fingerToUpperTorso.put(SexAreaPenetration.FINGER, Util.mergeLists(mouthAreas, breastAreas));
+		fingerToLowerHalf.put(SexAreaPenetration.FINGER, Util.mergeLists(groinAreas, lowerHalf, assAreas));
 		
-		feetToGroin = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FOOT, groinAreas));
+		feetToGroin.put(SexAreaPenetration.FOOT, groinAreas);
 		
-		handHolding = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, Util.mergeLists(mouthAreas, List.of(SexAreaPenetration.FINGER))));
+		handHolding.put(SexAreaPenetration.FINGER, Util.mergeLists(mouthAreas, List.of(SexAreaPenetration.FINGER)));
 
 
 		lowerHalf.add(SexAreaPenetration.TAIL);

@@ -8,6 +8,7 @@ import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.ArousalIncrease;
+import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexParticipantType;
@@ -82,7 +83,7 @@ public class SelfNoPen {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, null)),
+			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER,SexAreaInterface.NULL)),
 			SexParticipantType.SELF) {
 
 		@Override
