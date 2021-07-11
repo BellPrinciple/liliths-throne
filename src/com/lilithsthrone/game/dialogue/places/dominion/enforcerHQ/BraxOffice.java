@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.dialogue.places.dominion.enforcerHQ;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -118,7 +119,7 @@ public class BraxOffice {
 			} else if (index == 2) {
 				return new Response("Lie", "You notice that all of the models in the posters are wolf-girls. Perhaps you could pretend that Arthur is a patron of an exclusive wolf-girl themed brothel that you so happen to own...",
 						INTERIOR_BRAX_LIE,
-						null, null, Util.newArrayListOfValues(Perk.OBSERVANT), null, null) {
+						null, null, List.of(Perk.OBSERVANT), null, null) {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.braxEncountered, true);
@@ -127,7 +128,7 @@ public class BraxOffice {
 					
 			} else if (index == 3) {
 				return new Response("Wolf-tease", "Use your feminine wolf-like body to tease [brax.name] into giving you information about Arthur.", INTERIOR_BRAX_GETTING_TEASED,
-						null, null, null, Femininity.FEMININE, Util.newArrayListOfValues(Subspecies.WOLF_MORPH)){
+						null, null, null, Femininity.FEMININE, List.of(Subspecies.WOLF_MORPH)){
 					@Override
 					public void effects(){
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.braxEncountered, true);
@@ -345,12 +346,12 @@ public class BraxOffice {
 						UtilText.parseFromXMLFile("places/dominion/enforcerHQ/brax", "INTERIOR_BRAX_GETTING_TEASED_UH_OH_GET_FUCKED"));
 					
 			} else if (index == 3) {
-				return new ResponseSex("Take control", "Take control of the situation and turn [brax.name] into your little bitch.", Util.newArrayListOfValues(Fetish.FETISH_DOMINANT),
+				return new ResponseSex("Take control", "Take control of the situation and turn [brax.name] into your little bitch.", List.of(Fetish.FETISH_DOMINANT),
 						null, null, null, null, null,
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(Brax.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Brax.class)),
 								null,
 								null),
 						AFTER_DOMINANT_SEX,
@@ -414,7 +415,7 @@ public class BraxOffice {
 			} else if (index == 2) {
 				return new ResponseSex("Dominate Brax",
 						"Brax's broken, horny form is too much for you to resist, and you can't help but smile down deviously at the wolf-boy as you prepare to make him your bitch.",
-						Util.newArrayListOfValues(Fetish.FETISH_DOMINANT), null, CorruptionLevel.TWO_HORNY, null, null, null,
+						List.of(Fetish.FETISH_DOMINANT), null, CorruptionLevel.TWO_HORNY, null, null, null,
 						false, false,
 						new SMStanding(
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
@@ -427,7 +428,7 @@ public class BraxOffice {
 			} else if (index == 3) {
 				return new ResponseSex("Submit to Brax",
 						"Although you've defeated him, your submissive nature is causing you to consider letting Brax dominantly fuck you...",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, Femininity.FEMININE, null,
+						List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, Femininity.FEMININE, null,
 						false, true,
 						new SMBraxDoggy(
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotAllFours.BEHIND)),
@@ -497,7 +498,7 @@ public class BraxOffice {
 				return new Response("Swallow",
 						"Do as Brax says and swallow the strange liquid.",
 						AFTER_DEFEAT_TRANSFORMATION,
-						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING),
+						List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING),
 						Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel(),
 						null,
 						null,

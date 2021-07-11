@@ -247,9 +247,9 @@ public class CharacterUtils {
 			case MINIMUM:
 				return RaceStage.PARTIAL;
 			case REDUCED:
-				return Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER));
+				return Util.randomItemFrom(List.of(RaceStage.PARTIAL, RaceStage.LESSER));
 			case NORMAL:
-				return Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER));
+				return Util.randomItemFrom(List.of(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER));
 			case MAXIMUM:
 				return RaceStage.GREATER;
 		}
@@ -1524,10 +1524,10 @@ public class CharacterUtils {
 				raceStage = RaceStage.PARTIAL;
 				break;
 			case 3:
-				raceStage = Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER));
+				raceStage = Util.randomItemFrom(List.of(RaceStage.PARTIAL, RaceStage.LESSER));
 				break;
 			case 4:
-				raceStage = Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER));
+				raceStage = Util.randomItemFrom(List.of(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER));
 				break;
 			case 5:
 				raceStage = RaceStage.GREATER;
@@ -1813,7 +1813,7 @@ public class CharacterUtils {
 			characterAdjectives.removeAll(exclusiveAdjectives);
 		}
 		if(characterAdjectives.isEmpty()) {
-			characterAdjectives = Util.newArrayListOfValues("cheeky", "excitable", "energetic", "cunning", "rude", "cocky", "smug");
+			characterAdjectives = List.of("cheeky", "excitable", "energetic", "cunning", "rude", "cocky", "smug");
 			if(exclusiveAdjectives!=null) {
 				characterAdjectives.removeAll(exclusiveAdjectives);
 			}
@@ -2902,8 +2902,7 @@ public class CharacterUtils {
 	
 	public void applyMakeup(GameCharacter character, boolean overrideExistingMakeup) {
 		if((character.isFeminine() && !character.hasFetish(Fetish.FETISH_CROSS_DRESSER)) || (!character.isFeminine() && character.hasFetish(Fetish.FETISH_CROSS_DRESSER))) {
-			List<Colour> colours = Util.newArrayListOfValues(
-					PresetColour.COVERING_NONE,
+			List<Colour> colours = List.of(PresetColour.COVERING_NONE,
 					PresetColour.COVERING_CLEAR,
 					PresetColour.COVERING_RED,
 					PresetColour.COVERING_PINK,

@@ -101,8 +101,7 @@ import com.lilithsthrone.utils.Util;
  */
 public class ParserTarget {
 	
-	public static AbstractParserTarget STYLE = new AbstractParserTarget(Util.newArrayListOfValues(
-			"style",
+	public static AbstractParserTarget STYLE = new AbstractParserTarget(List.of("style",
 			"game",
 			"util"),
 			"Returns the same as 'pc', but should be used for style methods such as style.bold or style.italics or conditional methods such as game.isArcaneStorm.") {
@@ -112,8 +111,7 @@ public class ParserTarget {
 				}
 			};
 
-	public static AbstractParserTarget UNIT = new AbstractParserTarget(Util.newArrayListOfValues(
-			"unit",
+	public static AbstractParserTarget UNIT = new AbstractParserTarget(List.of("unit",
 			"units",
 			"game"),
 			"Returns the same as 'pc', but should be used for unit methods such as unit.size.") {
@@ -123,8 +121,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget PC = new AbstractParserTarget(Util.newArrayListOfValues(
-			"pc",
+	public static AbstractParserTarget PC = new AbstractParserTarget(List.of("pc",
 			"player"),
 			"The player character.") {
 				@Override
@@ -139,8 +136,7 @@ public class ParserTarget {
 	 * You should instead use the 'ncom' (standing for Non-COMpanion) parser tags to access npcs which are not members of the player's party, and 'com' (standing for COMpanion) tags for npcs which are members of the player's party.
 	 * These parser tags will always return characters in the same order, so they are far safer to use than this 'npc' tag, which should only be used in the context of UtilText's {@code parseFromXMLFile()} method.
 	 */
-	public static AbstractParserTarget NPC = new AbstractParserTarget(Util.newArrayListOfValues(
-			"npc",
+	public static AbstractParserTarget NPC = new AbstractParserTarget(List.of("npc",
 			"npc1",
 			"npc2",
 			"npc3",
@@ -198,8 +194,7 @@ public class ParserTarget {
 	 * Returns npcs which are members of the player's party.
 	 * Ordering is based on the order in which companions were added to the party.
 	 */
-	public static AbstractParserTarget COMPANION = new AbstractParserTarget(Util.newArrayListOfValues(
-			"com",
+	public static AbstractParserTarget COMPANION = new AbstractParserTarget(List.of("com",
 			"com1",
 			"com2",
 			"com3",
@@ -229,8 +224,7 @@ public class ParserTarget {
 	 * Returns npcs which are not members of the player's party and which are present in the player's cell.
 	 * Ordering is based on the npcs' id, so ordering will remain consistent across multiple parsing calls.
 	 */
-	public static AbstractParserTarget NON_COMPANION = new AbstractParserTarget(Util.newArrayListOfValues(
-			"ncom",
+	public static AbstractParserTarget NON_COMPANION = new AbstractParserTarget(List.of("ncom",
 			"ncom1",
 			"ncom2",
 			"ncom3",
@@ -259,8 +253,7 @@ public class ParserTarget {
 				}
 			};
 
-	public static AbstractParserTarget ELEMENTAL = new AbstractParserTarget(Util.newArrayListOfValues(
-			"el",
+	public static AbstractParserTarget ELEMENTAL = new AbstractParserTarget(List.of("el",
 			"elemental"),
 			"The player's elemental. <b>Should only ever be used when you know for certain that the player's elemental has been created!</b>") {
 		@Override
@@ -273,7 +266,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget PROLOGUE_MALE = new AbstractParserTarget(Util.newArrayListOfValues("prologueMale"), "") {
+	public static AbstractParserTarget PROLOGUE_MALE = new AbstractParserTarget(List.of("prologueMale"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(PrologueMale.class).getDescription();
 		}
@@ -284,7 +277,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget PROLOGUE_FEMALE = new AbstractParserTarget(Util.newArrayListOfValues("prologueFemale"), "") {
+	public static AbstractParserTarget PROLOGUE_FEMALE = new AbstractParserTarget(List.of("prologueFemale"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(PrologueFemale.class).getDescription();
 		}
@@ -295,8 +288,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget NPC_MALE = new AbstractParserTarget(Util.newArrayListOfValues(
-			"NPCmale",
+	public static AbstractParserTarget NPC_MALE = new AbstractParserTarget(List.of("NPCmale",
 			"maleNPC",
 			"genericMale",
 			"maleGeneric"), "") {
@@ -310,8 +302,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget NPC_FEMALE = new AbstractParserTarget(Util.newArrayListOfValues(
-			"NPCfemale",
+	public static AbstractParserTarget NPC_FEMALE = new AbstractParserTarget(List.of("NPCfemale",
 			"femaleNPC",
 			"genericFemale",
 			"femaleGeneric"), "") {
@@ -325,8 +316,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget NPC_ANDROGYNOUS = new AbstractParserTarget(Util.newArrayListOfValues(
-			"NPCandrogynous",
+	public static AbstractParserTarget NPC_ANDROGYNOUS = new AbstractParserTarget(List.of("NPCandrogynous",
 			"androgynousNPC",
 			"NPCambiguous",
 			"ambiguousNPC"), "") {
@@ -340,8 +330,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget NPC_TRADER = new AbstractParserTarget(Util.newArrayListOfValues(
-			"trader",
+	public static AbstractParserTarget NPC_TRADER = new AbstractParserTarget(List.of("trader",
 			"genericTrader"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(GenericTrader.class).getDescription();
@@ -352,8 +341,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget TEST_NPC = new AbstractParserTarget(Util.newArrayListOfValues(
-			"testNPC",
+	public static AbstractParserTarget TEST_NPC = new AbstractParserTarget(List.of("testNPC",
 			"test"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(TestNPC.class).getDescription();
@@ -365,8 +353,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget LILAYA = new AbstractParserTarget(Util.newArrayListOfValues(
-			"lilaya",
+	public static AbstractParserTarget LILAYA = new AbstractParserTarget(List.of("lilaya",
 			"aunt"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Lilaya.class).getDescription();
@@ -378,7 +365,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget ROSE = new AbstractParserTarget(Util.newArrayListOfValues("rose"), "") {
+	public static AbstractParserTarget ROSE = new AbstractParserTarget(List.of("rose"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Rose.class).getDescription();
 		}
@@ -389,7 +376,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget KATE = new AbstractParserTarget(Util.newArrayListOfValues("kate"), "") {
+	public static AbstractParserTarget KATE = new AbstractParserTarget(List.of("kate"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Kate.class).getDescription();
 		}
@@ -400,7 +387,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget RALPH = new AbstractParserTarget(Util.newArrayListOfValues("ralph"), "") {
+	public static AbstractParserTarget RALPH = new AbstractParserTarget(List.of("ralph"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Ralph.class).getDescription();
 		}
@@ -411,7 +398,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget NYAN = new AbstractParserTarget(Util.newArrayListOfValues("nyan"), "") {
+	public static AbstractParserTarget NYAN = new AbstractParserTarget(List.of("nyan"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Nyan.class).getDescription();
 		}
@@ -422,7 +409,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget NYAN_MUM = new AbstractParserTarget(Util.newArrayListOfValues("nyanmum", "nyanmom", "leotie"), "") {
+	public static AbstractParserTarget NYAN_MUM = new AbstractParserTarget(List.of("nyanmum", "nyanmom", "leotie"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(NyanMum.class).getDescription();
 		}
@@ -433,7 +420,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget VICKY = new AbstractParserTarget(Util.newArrayListOfValues("vicky"), "") {
+	public static AbstractParserTarget VICKY = new AbstractParserTarget(List.of("vicky"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Vicky.class).getDescription();
 		}
@@ -444,7 +431,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget PIX = new AbstractParserTarget(Util.newArrayListOfValues("pix"), "") {
+	public static AbstractParserTarget PIX = new AbstractParserTarget(List.of("pix"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Pix.class).getDescription();
 		}
@@ -455,7 +442,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget BRAX = new AbstractParserTarget(Util.newArrayListOfValues("brax"), "") {
+	public static AbstractParserTarget BRAX = new AbstractParserTarget(List.of("brax"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Brax.class).getDescription();
 		}
@@ -466,7 +453,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget CANDI = new AbstractParserTarget(Util.newArrayListOfValues("candi"), "") {
+	public static AbstractParserTarget CANDI = new AbstractParserTarget(List.of("candi"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(CandiReceptionist.class).getDescription();
 		}
@@ -477,7 +464,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget VANESSA = new AbstractParserTarget(Util.newArrayListOfValues("vanessa"), "") {
+	public static AbstractParserTarget VANESSA = new AbstractParserTarget(List.of("vanessa"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Vanessa.class).getDescription();
 		}
@@ -488,7 +475,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget SCARLETT = new AbstractParserTarget(Util.newArrayListOfValues("scarlett"), "") {
+	public static AbstractParserTarget SCARLETT = new AbstractParserTarget(List.of("scarlett"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Scarlett.class).getDescription();
 		}
@@ -499,7 +486,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget HELENA = new AbstractParserTarget(Util.newArrayListOfValues("helena"), "") {
+	public static AbstractParserTarget HELENA = new AbstractParserTarget(List.of("helena"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Helena.class).getDescription();
 		}
@@ -510,8 +497,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget HARPY_BIMBO = new AbstractParserTarget(Util.newArrayListOfValues(
-			"brittany",
+	public static AbstractParserTarget HARPY_BIMBO = new AbstractParserTarget(List.of("brittany",
 			"bimboHarpy",
 			"harpyBimbo"), "") {
 		public String getDescription() {
@@ -524,8 +510,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget HARPY_BIMBO_COMPANION = new AbstractParserTarget(Util.newArrayListOfValues(
-			"lauren",
+	public static AbstractParserTarget HARPY_BIMBO_COMPANION = new AbstractParserTarget(List.of("lauren",
 			"bimboHarpyCompanion",
 			"harpyBimboCompanion"), "") {
 		public String getDescription() {
@@ -538,8 +523,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget HARPY_DOMINANT = new AbstractParserTarget(Util.newArrayListOfValues(
-			"diana",
+	public static AbstractParserTarget HARPY_DOMINANT = new AbstractParserTarget(List.of("diana",
 			"dominantHarpy",
 			"harpyDominant"), "") {
 		public String getDescription() {
@@ -552,8 +536,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget HARPY_DOMINANT_COMPANION = new AbstractParserTarget(Util.newArrayListOfValues(
-			"harley",
+	public static AbstractParserTarget HARPY_DOMINANT_COMPANION = new AbstractParserTarget(List.of("harley",
 			"dominantHarpyCompanion",
 			"harpyDominantCompanion"), "") {
 		public String getDescription() {
@@ -566,8 +549,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget HARPY_NYMPHO = new AbstractParserTarget(Util.newArrayListOfValues(
-			"lexi",
+	public static AbstractParserTarget HARPY_NYMPHO = new AbstractParserTarget(List.of("lexi",
 			"nymphoHarpy",
 			"harpyNympho"), "") {
 		public String getDescription() {
@@ -580,8 +562,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget HARPY_NYMPHO_COMPANION = new AbstractParserTarget(Util.newArrayListOfValues(
-			"max",
+	public static AbstractParserTarget HARPY_NYMPHO_COMPANION = new AbstractParserTarget(List.of("max",
 			"nymphoHarpyCompanion",
 			"harpyNymphoCompanion"), "") {
 		public String getDescription() {
@@ -594,7 +575,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget PAZU = new AbstractParserTarget(Util.newArrayListOfValues("pazu"), "") {
+	public static AbstractParserTarget PAZU = new AbstractParserTarget(List.of("pazu"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Pazu.class).getDescription();
 		}
@@ -605,7 +586,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget FINCH = new AbstractParserTarget(Util.newArrayListOfValues("finch"), "") {
+	public static AbstractParserTarget FINCH = new AbstractParserTarget(List.of("finch"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Finch.class).getDescription();
 		}
@@ -616,7 +597,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget ZARANIX = new AbstractParserTarget(Util.newArrayListOfValues("zaranix"), "") {
+	public static AbstractParserTarget ZARANIX = new AbstractParserTarget(List.of("zaranix"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Zaranix.class).getDescription();
 		}
@@ -627,7 +608,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget AMBER = new AbstractParserTarget(Util.newArrayListOfValues("amber"), "") {
+	public static AbstractParserTarget AMBER = new AbstractParserTarget(List.of("amber"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Amber.class).getDescription();
 		}
@@ -638,7 +619,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget ARTHUR = new AbstractParserTarget(Util.newArrayListOfValues("arthur"), "") {
+	public static AbstractParserTarget ARTHUR = new AbstractParserTarget(List.of("arthur"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Arthur.class).getDescription();
 		}
@@ -649,7 +630,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget KELLY = new AbstractParserTarget(Util.newArrayListOfValues("kelly"), "") {
+	public static AbstractParserTarget KELLY = new AbstractParserTarget(List.of("kelly"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(ZaranixMaidKelly.class).getDescription();
 		}
@@ -660,7 +641,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget KATHERINE = new AbstractParserTarget(Util.newArrayListOfValues("katherine"), "") {
+	public static AbstractParserTarget KATHERINE = new AbstractParserTarget(List.of("katherine"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(ZaranixMaidKatherine.class).getDescription();
 		}
@@ -671,7 +652,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget ASHLEY = new AbstractParserTarget(Util.newArrayListOfValues("ashley"), "") {
+	public static AbstractParserTarget ASHLEY = new AbstractParserTarget(List.of("ashley"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Ashley.class).getDescription();
 		}
@@ -682,8 +663,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget WOLFGANG = new AbstractParserTarget(Util.newArrayListOfValues(
-			"wolfgang",
+	public static AbstractParserTarget WOLFGANG = new AbstractParserTarget(List.of("wolfgang",
 			"supplierLeader"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(SupplierLeader.class).getDescription();
@@ -695,8 +675,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget KARL = new AbstractParserTarget(Util.newArrayListOfValues(
-			"karl",
+	public static AbstractParserTarget KARL = new AbstractParserTarget(List.of("karl",
 			"supplierPartner"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(SupplierPartner.class).getDescription();
@@ -708,7 +687,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget ANGEL = new AbstractParserTarget(Util.newArrayListOfValues("angel"), "") {
+	public static AbstractParserTarget ANGEL = new AbstractParserTarget(List.of("angel"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Angel.class).getDescription();
 		}
@@ -719,7 +698,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget BUNNY = new AbstractParserTarget(Util.newArrayListOfValues("bunny"), "") {
+	public static AbstractParserTarget BUNNY = new AbstractParserTarget(List.of("bunny"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Bunny.class).getDescription();
 		}
@@ -730,7 +709,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget LOPPY = new AbstractParserTarget(Util.newArrayListOfValues("loppy"), "") {
+	public static AbstractParserTarget LOPPY = new AbstractParserTarget(List.of("loppy"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Loppy.class).getDescription();
 		}
@@ -741,7 +720,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget LUMI = new AbstractParserTarget(Util.newArrayListOfValues("lumi"), "") {
+	public static AbstractParserTarget LUMI = new AbstractParserTarget(List.of("lumi"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Lumi.class).getDescription();
 		}
@@ -752,7 +731,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget CLAIRE = new AbstractParserTarget(Util.newArrayListOfValues("claire"), "") {
+	public static AbstractParserTarget CLAIRE = new AbstractParserTarget(List.of("claire"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Claire.class).getDescription();
 		}
@@ -763,7 +742,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget SLIME_QUEEN = new AbstractParserTarget(Util.newArrayListOfValues("slimeQueen"), "") {
+	public static AbstractParserTarget SLIME_QUEEN = new AbstractParserTarget(List.of("slimeQueen"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(SlimeQueen.class).getDescription();
 		}
@@ -774,7 +753,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget SLIME_GUARD_ICE = new AbstractParserTarget(Util.newArrayListOfValues("slimeGuardIce", "slimeIce", "crystal"), "") {
+	public static AbstractParserTarget SLIME_GUARD_ICE = new AbstractParserTarget(List.of("slimeGuardIce", "slimeIce", "crystal"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(SlimeGuardIce.class).getDescription();
 		}
@@ -785,7 +764,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget SLIME_GUARD_FIRE = new AbstractParserTarget(Util.newArrayListOfValues("slimeGuardFire", "slimeFire", "blaze"), "") {
+	public static AbstractParserTarget SLIME_GUARD_FIRE = new AbstractParserTarget(List.of("slimeGuardFire", "slimeFire", "blaze"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(SlimeGuardFire.class).getDescription();
 		}
@@ -796,7 +775,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget SLIME_ROYAL_GUARD = new AbstractParserTarget(Util.newArrayListOfValues("slimeRoyalGuard", "royalGuardSlime"), "") {
+	public static AbstractParserTarget SLIME_ROYAL_GUARD = new AbstractParserTarget(List.of("slimeRoyalGuard", "royalGuardSlime"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(SlimeRoyalGuard.class).getDescription();
 		}
@@ -807,7 +786,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget ROXY = new AbstractParserTarget(Util.newArrayListOfValues("roxy"), "") {
+	public static AbstractParserTarget ROXY = new AbstractParserTarget(List.of("roxy"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Roxy.class).getDescription();
 		}
@@ -818,7 +797,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget AXEL = new AbstractParserTarget(Util.newArrayListOfValues("axel", "lexa"), "") {
+	public static AbstractParserTarget AXEL = new AbstractParserTarget(List.of("axel", "lexa"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Axel.class).getDescription();
 		}
@@ -829,7 +808,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget EPONA = new AbstractParserTarget(Util.newArrayListOfValues("epona"), "") {
+	public static AbstractParserTarget EPONA = new AbstractParserTarget(List.of("epona"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Epona.class).getDescription();
 		}
@@ -840,7 +819,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget JULES = new AbstractParserTarget(Util.newArrayListOfValues("jules"), "") {
+	public static AbstractParserTarget JULES = new AbstractParserTarget(List.of("jules"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Jules.class).getDescription();
 		}
@@ -851,7 +830,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget KRUGER = new AbstractParserTarget(Util.newArrayListOfValues("kruger"), "") {
+	public static AbstractParserTarget KRUGER = new AbstractParserTarget(List.of("kruger"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Kruger.class).getDescription();
 		}
@@ -862,7 +841,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget KALAHARI = new AbstractParserTarget(Util.newArrayListOfValues("kalahari"), "") {
+	public static AbstractParserTarget KALAHARI = new AbstractParserTarget(List.of("kalahari"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Kalahari.class).getDescription();
 		}
@@ -873,7 +852,7 @@ public class ParserTarget {
 		}
 	};
 
-	public static AbstractParserTarget RENTAL_MOMMY = new AbstractParserTarget(Util.newArrayListOfValues("rentalMommy"), "") {
+	public static AbstractParserTarget RENTAL_MOMMY = new AbstractParserTarget(List.of("rentalMommy"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(RentalMommy.class).getDescription();
 		}
@@ -884,7 +863,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget DADDY = new AbstractParserTarget(Util.newArrayListOfValues("daddy", "desryth"), "") {
+	public static AbstractParserTarget DADDY = new AbstractParserTarget(List.of("daddy", "desryth"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Daddy.class).getDescription();
 		}
@@ -898,7 +877,7 @@ public class ParserTarget {
 	
 	// Submission:
 	
-	public static AbstractParserTarget IMP_FORTRESS_ALPHA_LEADER = new AbstractParserTarget(Util.newArrayListOfValues("impAlphaLeader"), "") {
+	public static AbstractParserTarget IMP_FORTRESS_ALPHA_LEADER = new AbstractParserTarget(List.of("impAlphaLeader"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(FortressAlphaLeader.class).getDescription();
 		}
@@ -909,7 +888,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget IMP_FORTRESS_FEMALES_LEADER = new AbstractParserTarget(Util.newArrayListOfValues("impFemalesLeader", "impFemaleLeader"), "") {
+	public static AbstractParserTarget IMP_FORTRESS_FEMALES_LEADER = new AbstractParserTarget(List.of("impFemalesLeader", "impFemaleLeader"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(FortressFemalesLeader.class).getDescription();
 		}
@@ -920,7 +899,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget IMP_FORTRESS_MALES_LEADER = new AbstractParserTarget(Util.newArrayListOfValues("impMalesLeader", "impMaleLeader"), "") {
+	public static AbstractParserTarget IMP_FORTRESS_MALES_LEADER = new AbstractParserTarget(List.of("impMalesLeader", "impMaleLeader"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(FortressMalesLeader.class).getDescription();
 		}
@@ -931,7 +910,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget DARK_SIREN = new AbstractParserTarget(Util.newArrayListOfValues("darkSiren", "siren", "meraxis"), "") {
+	public static AbstractParserTarget DARK_SIREN = new AbstractParserTarget(List.of("darkSiren", "siren", "meraxis"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(DarkSiren.class).getDescription();
 		}
@@ -942,7 +921,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget CITADEL_ARCANIST = new AbstractParserTarget(Util.newArrayListOfValues("citadelArcanist", "youkoGuide", "hitomi", "takahashi"), "") {
+	public static AbstractParserTarget CITADEL_ARCANIST = new AbstractParserTarget(List.of("citadelArcanist", "youkoGuide", "hitomi", "takahashi"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(SubmissionCitadelArcanist.class).getDescription();
 		}
@@ -953,7 +932,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget LYSSIETH = new AbstractParserTarget(Util.newArrayListOfValues("lyssieth"), "") {
+	public static AbstractParserTarget LYSSIETH = new AbstractParserTarget(List.of("lyssieth"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Lyssieth.class).getDescription();
 		}
@@ -964,7 +943,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget ELIZABETH = new AbstractParserTarget(Util.newArrayListOfValues("elizabeth"), "") {
+	public static AbstractParserTarget ELIZABETH = new AbstractParserTarget(List.of("elizabeth"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Elizabeth.class).getDescription();
 		}
@@ -975,7 +954,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget VENGAR = new AbstractParserTarget(Util.newArrayListOfValues("vengar"), "") {
+	public static AbstractParserTarget VENGAR = new AbstractParserTarget(List.of("vengar"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Vengar.class).getDescription();
 		}
@@ -986,7 +965,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget SHADOW = new AbstractParserTarget(Util.newArrayListOfValues("shadow"), "") {
+	public static AbstractParserTarget SHADOW = new AbstractParserTarget(List.of("shadow"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Shadow.class).getDescription();
 		}
@@ -997,7 +976,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget SILENCE = new AbstractParserTarget(Util.newArrayListOfValues("silence"), "") {
+	public static AbstractParserTarget SILENCE = new AbstractParserTarget(List.of("silence"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Silence.class).getDescription();
 		}
@@ -1008,7 +987,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget MURK = new AbstractParserTarget(Util.newArrayListOfValues("murk"), "") {
+	public static AbstractParserTarget MURK = new AbstractParserTarget(List.of("murk"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Murk.class).getDescription();
 		}
@@ -1019,7 +998,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget SEAN = new AbstractParserTarget(Util.newArrayListOfValues("sean"), "") {
+	public static AbstractParserTarget SEAN = new AbstractParserTarget(List.of("sean"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Sean.class).getDescription();
 		}
@@ -1030,7 +1009,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget NATALYA = new AbstractParserTarget(Util.newArrayListOfValues("natalya"), "") {
+	public static AbstractParserTarget NATALYA = new AbstractParserTarget(List.of("natalya"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Natalya.class).getDescription();
 		}
@@ -1041,7 +1020,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget WES = new AbstractParserTarget(Util.newArrayListOfValues("wes", "wesley"), "") {
+	public static AbstractParserTarget WES = new AbstractParserTarget(List.of("wes", "wesley"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Wes.class).getDescription();
 		}
@@ -1052,7 +1031,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget ELLE = new AbstractParserTarget(Util.newArrayListOfValues("elle", "aellasys"), "") {
+	public static AbstractParserTarget ELLE = new AbstractParserTarget(List.of("elle", "aellasys"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Elle.class).getDescription();
 		}
@@ -1063,7 +1042,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget KAY = new AbstractParserTarget(Util.newArrayListOfValues("kay"), "") {
+	public static AbstractParserTarget KAY = new AbstractParserTarget(List.of("kay"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Kay.class).getDescription();
 		}
@@ -1073,7 +1052,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget FLASH = new AbstractParserTarget(Util.newArrayListOfValues("flash"), "") {
+	public static AbstractParserTarget FLASH = new AbstractParserTarget(List.of("flash"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Flash.class).getDescription();
 		}
@@ -1083,7 +1062,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget JESS = new AbstractParserTarget(Util.newArrayListOfValues("jess"), "") {
+	public static AbstractParserTarget JESS = new AbstractParserTarget(List.of("jess"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Jess.class).getDescription();
 		}
@@ -1093,7 +1072,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget ASTRAPI = new AbstractParserTarget(Util.newArrayListOfValues("astrapi"), "") {
+	public static AbstractParserTarget ASTRAPI = new AbstractParserTarget(List.of("astrapi"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Astrapi.class).getDescription();
 		}
@@ -1103,7 +1082,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget VRONTI = new AbstractParserTarget(Util.newArrayListOfValues("vronti"), "") {
+	public static AbstractParserTarget VRONTI = new AbstractParserTarget(List.of("vronti"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Vronti.class).getDescription();
 		}
@@ -1113,7 +1092,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget ARION = new AbstractParserTarget(Util.newArrayListOfValues("arion"), "") {
+	public static AbstractParserTarget ARION = new AbstractParserTarget(List.of("arion"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Arion.class).getDescription();
 		}
@@ -1123,7 +1102,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget MINOTALLYS = new AbstractParserTarget(Util.newArrayListOfValues("minotallys"), "") {
+	public static AbstractParserTarget MINOTALLYS = new AbstractParserTarget(List.of("minotallys"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Minotallys.class).getDescription();
 		}
@@ -1133,7 +1112,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget FAE = new AbstractParserTarget(Util.newArrayListOfValues("fae"), "") {
+	public static AbstractParserTarget FAE = new AbstractParserTarget(List.of("fae"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Fae.class).getDescription();
 		}
@@ -1143,7 +1122,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget SILVIA = new AbstractParserTarget(Util.newArrayListOfValues("silvia"), "") {
+	public static AbstractParserTarget SILVIA = new AbstractParserTarget(List.of("silvia"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Silvia.class).getDescription();
 		}
@@ -1153,7 +1132,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget KHEIRON = new AbstractParserTarget(Util.newArrayListOfValues("kheiron"), "") {
+	public static AbstractParserTarget KHEIRON = new AbstractParserTarget(List.of("kheiron"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Kheiron.class).getDescription();
 		}
@@ -1163,7 +1142,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget KAZIK = new AbstractParserTarget(Util.newArrayListOfValues("kazik"), "") {
+	public static AbstractParserTarget KAZIK = new AbstractParserTarget(List.of("kazik"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Kazik.class).getDescription();
 		}
@@ -1173,7 +1152,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget YUI = new AbstractParserTarget(Util.newArrayListOfValues("yui"), "") {
+	public static AbstractParserTarget YUI = new AbstractParserTarget(List.of("yui"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Yui.class).getDescription();
 		}
@@ -1183,7 +1162,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget NIZHONI = new AbstractParserTarget(Util.newArrayListOfValues("nizhoni"), "") {
+	public static AbstractParserTarget NIZHONI = new AbstractParserTarget(List.of("nizhoni"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Nizhoni.class).getDescription();
 		}
@@ -1193,7 +1172,7 @@ public class ParserTarget {
 		}
 	};
 	
-	public static AbstractParserTarget MORENO = new AbstractParserTarget(Util.newArrayListOfValues("moreno"), "") {
+	public static AbstractParserTarget MORENO = new AbstractParserTarget(List.of("moreno"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(Moreno.class).getDescription();
 		}
@@ -1230,7 +1209,7 @@ public class ParserTarget {
 	 * @return The NPC which was previously assigned to this tag, or null if no NPC was previously assigned.
 	 */
 	public static void addAdditionalParserTarget(String tag, NPC target) {
-		AbstractParserTarget newParserTarget = new AbstractParserTarget(Util.newArrayListOfValues(tag), "") {
+		AbstractParserTarget newParserTarget = new AbstractParserTarget(List.of(tag), "") {
 			public String getDescription() {
 				return target.getDescription();
 			}

@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.submission;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.PlayerCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -146,7 +148,7 @@ public class SALyssiethSpecials {
 
 		@Override
 		public String getDescription() {
-			return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_1_CHOICE_GET_FUCKED");
+			return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_1_CHOICE_GET_FUCKED");
 		}
 
 		@Override
@@ -220,7 +222,7 @@ public class SALyssiethSpecials {
 
 		@Override
 		public String getDescription() {
-			return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_1_CHOICE_GET_FUCKED_ANALLY");
+			return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_1_CHOICE_GET_FUCKED_ANALLY");
 		}
 
 		@Override
@@ -312,7 +314,7 @@ public class SALyssiethSpecials {
 
 		@Override
 		public String getDescription() {
-			return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_1_CHOICE_FUCK_LYSSIETH");
+			return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_1_CHOICE_FUCK_LYSSIETH");
 		}
 
 		@Override
@@ -393,7 +395,7 @@ public class SALyssiethSpecials {
 		}
 		@Override
 		public String getDescription() {
-			return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_1_CHOICE_SCISSOR_BOTTOM");
+			return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_1_CHOICE_SCISSOR_BOTTOM");
 		}
 		@Override
 		public void applyEffects() {
@@ -462,7 +464,7 @@ public class SALyssiethSpecials {
 		}
 		@Override
 		public String getDescription() {
-			return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_1_CHOICE_SCISSOR_TOP");
+			return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_1_CHOICE_SCISSOR_TOP");
 		}
 		@Override
 		public void applyEffects() {
@@ -541,9 +543,9 @@ public class SALyssiethSpecials {
 		@Override
 		public String getDescription() {
 			if(Main.game.getPlayer().hasPenis() && Main.game.getPlayer().getPenisType().getRace()==Race.DEMON && Main.game.getPlayer().getPenisRawSizeValue()<=4) {
-				return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_FUCK_LYSSIETH_AS_SISSY");
+				return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_FUCK_LYSSIETH_AS_SISSY");
 			} else {
-				return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_FUCK_LYSSIETH");
+				return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_FUCK_LYSSIETH");
 			}
 		}
 
@@ -603,9 +605,9 @@ public class SALyssiethSpecials {
 		@Override
 		public String getDescription() {
 			if(Main.game.getPlayer().hasPenis() && Main.game.getPlayer().getPenisType().getRace()==Race.DEMON && Main.game.getPlayer().getPenisRawSizeValue()<=4) {
-				return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_LYSSIETH_ORAL_AS_SISSY");
+				return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_LYSSIETH_ORAL_AS_SISSY");
 			} else {
-				return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_LYSSIETH_ORAL");
+				return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_LYSSIETH_ORAL");
 			}
 		}
 
@@ -675,9 +677,9 @@ public class SALyssiethSpecials {
 		@Override
 		public String getDescription() {
 			if(Main.game.getNpc(Lyssieth.class).getForeplayPreference(Main.game.getPlayer()).getTargetedSexArea()==SexAreaOrifice.ANUS) {
-				return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_ASK_FOR_MORE_GETTING_FUCKED_ANAL");
+				return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_ASK_FOR_MORE_GETTING_FUCKED_ANAL");
 			}
-			return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_ASK_FOR_MORE_GETTING_FUCKED");
+			return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_ASK_FOR_MORE_GETTING_FUCKED");
 		}
 
 		@Override
@@ -783,7 +785,7 @@ public class SALyssiethSpecials {
 
 		@Override
 		public String getDescription() {
-			return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_GET_FUCKED");
+			return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_GET_FUCKED");
 		}
 
 		@Override
@@ -851,7 +853,7 @@ public class SALyssiethSpecials {
 
 		@Override
 		public String getDescription() {
-			return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_GET_FUCKED_ANALLY");
+			return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_GET_FUCKED_ANALLY");
 		}
 
 		@Override
@@ -937,7 +939,7 @@ public class SALyssiethSpecials {
 
 		@Override
 		public String getDescription() {
-			return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_MATING_PRESS");
+			return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_MATING_PRESS");
 		}
 
 		@Override
@@ -999,7 +1001,7 @@ public class SALyssiethSpecials {
 		}
 		@Override
 		public String getDescription() {
-			return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_SIXTY_NINE_LYSSIETH_TOP");
+			return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_SIXTY_NINE_LYSSIETH_TOP");
 		}
 		@Override
 		public void applyEffects() {
@@ -1050,7 +1052,7 @@ public class SALyssiethSpecials {
 		}
 		@Override
 		public String getDescription() {
-			return UtilText.parseFromXMLFile(Util.newArrayListOfValues(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_SIXTY_NINE_LYSSIETH_BOTTOM");
+			return UtilText.parseFromXMLFile(List.of(ParserTag.SEX_ALLOW_MUFFLED_SPEECH), "characters/submission/lyssieth", "DEMON_TF_STAGE_2_CHOICE_SIXTY_NINE_LYSSIETH_BOTTOM");
 		}
 		@Override
 		public void applyEffects() {

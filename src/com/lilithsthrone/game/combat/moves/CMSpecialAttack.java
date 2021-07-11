@@ -40,7 +40,7 @@ public class CMSpecialAttack {
             DamageType.UNARMED,
             DamageVariance.NONE,
             "moves/hoof_kick",
-            Util.newArrayListOfValues(PresetColour.RACE_HORSE_MORPH),
+            List.of(PresetColour.RACE_HORSE_MORPH),
             false,
             true,
             false,
@@ -103,8 +103,7 @@ public class CMSpecialAttack {
 
         @Override
         public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-        	return Util.newArrayListOfValues(
-        			 "Hoof-kick fails to break "+(target!=null?UtilText.parse(target,"[npc.namePos]"):"the target's")+" shielding.");
+        	return List.of("Hoof-kick fails to break "+(target!=null?UtilText.parse(target,"[npc.namePos]"):"the target's")+" shielding.");
         }
         
         @Override
@@ -387,8 +386,7 @@ public class CMSpecialAttack {
 
         @Override
         public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-        	return Util.newArrayListOfValues(
-        			 "Used in the first turn of combat.");
+        	return List.of("Used in the first turn of combat.");
         }
         
         @Override
@@ -565,12 +563,10 @@ public class CMSpecialAttack {
         @Override
         public Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
             return new Value<>(
-				!Collections.disjoint(source.getFaceTypeTags(), Util.newArrayListOfValues(
-						BodyPartTag.FACE_MUZZLE,
+				!Collections.disjoint(source.getFaceTypeTags(), List.of(BodyPartTag.FACE_MUZZLE,
 						BodyPartTag.FACE_FANGS,
 //						BodyPartTag.FACE_SHARK_TEETH,
-						BodyPartTag.FACE_BEAK
-				)),
+						BodyPartTag.FACE_BEAK)),
 				"Available to characters with an anthropomorphic face.");
         }
 
@@ -642,7 +638,7 @@ public class CMSpecialAttack {
             DamageType.PHYSICAL,
             DamageVariance.HIGH,
             "moves/talon_slash",
-            Util.newArrayListOfValues(PresetColour.RACE_HARPY),
+            List.of(PresetColour.RACE_HARPY),
             false,
             true,
             false,
@@ -706,8 +702,7 @@ public class CMSpecialAttack {
 
         @Override
         public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-            return Util.newArrayListOfValues(
-                    "Slashing with the talons breaks "+(target!=null?UtilText.parse(target,"[npc.namePos]"):"the target's")+" shielding.");
+            return List.of("Slashing with the talons breaks "+(target!=null?UtilText.parse(target,"[npc.namePos]"):"the target's")+" shielding.");
         }
 
         @Override

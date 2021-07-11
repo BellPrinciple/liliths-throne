@@ -996,8 +996,7 @@ public class Game implements XMLSaving {
 					Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_FIRST_FLOOR).getCell(PlaceType.LILAYA_HOME_ROOM_PLAYER).getInventory().addItem(spellBook);
 				}
 				if(Main.isVersionOlderThan(loadingVersion, "0.3.8.8")) {
-					List<Vector2i> vecs = Util.newArrayListOfValues(
-							new Vector2i(2, 5),
+					List<Vector2i> vecs = List.of(new Vector2i(2, 5),
 							new Vector2i(5, 8),
 							new Vector2i(8, 5));
 					for(Vector2i vec : vecs) {
@@ -2280,7 +2279,7 @@ public class Game implements XMLSaving {
 						&& !npc.isAllowingPlayerToManageInventory()
 						&& (Main.game.getCurrentDialogueNode().equals(Main.game.getPlayerCell().getDialogue(false)) || !(getCharactersPresent().contains(npc)))) {
 					if(hoursPassed>0 && npc.isPendingClothingDressing()) {
-						npc.equipClothing(Util.newArrayListOfValues(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_WEAPONS));
+						npc.equipClothing(List.of(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_WEAPONS));
 						npc.setPendingClothingDressing(false);
 						
 					} else if(!npc.isSlave()
@@ -2294,7 +2293,7 @@ public class Game implements XMLSaving {
 							npc.calculateStatusEffects(0);
 							// If still exposed after this, get new clothes:
 							if(npc.hasStatusEffect(StatusEffect.EXPOSED) || npc.hasStatusEffect(StatusEffect.EXPOSED_BREASTS) || npc.hasStatusEffect(StatusEffect.EXPOSED_PLUS_BREASTS)) {
-								npc.equipClothing(Util.newArrayListOfValues(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_WEAPONS));
+								npc.equipClothing(List.of(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_WEAPONS));
 	
 								if(loopDebug) {
 									System.out.println(npc.getName(true)+" "+npc.getClass().getName()+" got dressed");
@@ -2352,7 +2351,7 @@ public class Game implements XMLSaving {
 					npc.endPregnancy(true);
 					
 					if(npc.isSlave() && npc.getOwner().isPlayer()) {
-						List<String> events = Util.newArrayListOfValues(UtilText.parse(npc, "[npc.She] gave birth to:<br/>")+npc.getLastLitterBirthed().getBirthedDescription());
+						List<String> events = List.of(UtilText.parse(npc, "[npc.She] gave birth to:<br/>")+npc.getLastLitterBirthed().getBirthedDescription());
 						SlaveryEventLogEntry entry = new SlaveryEventLogEntry(getHourOfDay(),
 								npc,
 								null,
@@ -2407,7 +2406,7 @@ public class Game implements XMLSaving {
 								case URETHRA_VAGINA:
 									break;
 							}
-							List<String> events = Util.newArrayListOfValues(UtilText.parse(npc, "[npc.She] completed [npc.her] "+areaEgged+" incubation and gave birth to:<br/>")+npc.getLastLitterIncubated().getBirthedDescription());
+							List<String> events = List.of(UtilText.parse(npc, "[npc.She] completed [npc.her] "+areaEgged+" incubation and gave birth to:<br/>")+npc.getLastLitterIncubated().getBirthedDescription());
 							SlaveryEventLogEntry incubationBirthEntry = new SlaveryEventLogEntry(getHourOfDay(),
 									npc,
 									null,
@@ -5025,7 +5024,7 @@ public class Game implements XMLSaving {
 				return;
 			}
 		}
-		slaveryEventLog.push(new Value<>(day, Util.newArrayListOfValues(event)));
+		slaveryEventLog.push(new Value<>(day, List.of(event)));
 	}
 	
 

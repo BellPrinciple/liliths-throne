@@ -36,17 +36,16 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine"),
-			Util.newArrayListOfValues("feminine"),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of("masculine"),
+			List.of("feminine"),
+			List.of(""),
+			List.of(""),
+			List.of(""),
+			List.of(""),
 			"They rapidly shift into normal-looking human legs, complete with human feet.<br/>"
 				+ "[npc.She] now [npc.has] [style.boldHuman(human legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs and feet are human, and are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)].",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL), false) {
+			List.of(LegConfiguration.BIPEDAL), false) {
 	};
 	
 	public static AbstractLegType ANGEL = new AbstractLegType(BodyCoveringType.ANGEL,
@@ -56,19 +55,18 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "radiant", "angelic"),
-			Util.newArrayListOfValues("feminine", "radiant", "angelic"),
-			Util.newArrayListOfValues("angelic"),
-			Util.newArrayListOfValues("angelic"),
-			Util.newArrayListOfValues("angelic"),
-			Util.newArrayListOfValues("angelic"),
+			List.of("masculine", "radiant", "angelic"),
+			List.of("feminine", "radiant", "angelic"),
+			List.of("angelic"),
+			List.of("angelic"),
+			List.of("angelic"),
+			List.of("angelic"),
 			"They quickly shift into a pair of smooth, slender legs, and [npc.she] [npc.verb(let)] out a gasp as a layer of flawless, angelic skin rapidly grows to cover them."
 				+ " As they finish transforming, [npc.she] almost [npc.verb(lose)] [npc.her] balance as the bones in [npc.her] feet start to shift and rearrange themselves."
 				+ " After a moment, they've transformed into slender, human-like feet, ending in soft, delicate toes.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldAngel(angelic legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs and feet are human in shape, but are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)].",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL), false) {
+			List.of(LegConfiguration.BIPEDAL), false) {
 	};
 
 	public static AbstractLegType DEMON_COMMON = new AbstractLegType(BodyCoveringType.DEMON_COMMON,
@@ -78,16 +76,15 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "demonic"),
-			Util.newArrayListOfValues("feminine", "flawless", "demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
+			List.of("masculine", "demonic"),
+			List.of("feminine", "flawless", "demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
 			"-",
 			"[npc.Her] legs and feet are human in shape, but are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)].",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL), false) {
+			List.of(LegConfiguration.BIPEDAL), false) {
 		@Override
 		public String getTransformationDescription(GameCharacter owner) {
 			if (!owner.isShortStature()) {
@@ -115,16 +112,15 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "demonic"),
-			Util.newArrayListOfValues("feminine", "flawless", "demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
+			List.of("masculine", "demonic"),
+			List.of("feminine", "flawless", "demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
 			"-",
 			"[npc.Her] demonic legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into hard hoofs.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL), false) {
+			List.of(LegConfiguration.BIPEDAL), false) {
 		@Override
 		public String getTransformationDescription(GameCharacter owner) {
 			if (!owner.isShortStature()) {
@@ -158,16 +154,15 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "hair-coated", "demonic-horse"),
-			Util.newArrayListOfValues("feminine", "hair-coated", "demonic-horse"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
+			List.of("masculine", "hair-coated", "demonic-horse"),
+			List.of("feminine", "hair-coated", "demonic-horse"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
 			"-",
 			"[npc.Her] demonic, horse-like legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into hard hoofs.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 		@Override
 		public String getTransformationDescription(GameCharacter owner) {
@@ -194,16 +189,15 @@ public class LegType {
 			"a",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("masculine", "scaly", "demonic-snake"),
-			Util.newArrayListOfValues("feminine", "scaly", "demonic-snake"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
+			List.of("masculine", "scaly", "demonic-snake"),
+			List.of("feminine", "scaly", "demonic-snake"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
 			"-",
 			"[npc.Her] demonic, snake-like lower body is [npc.materialCompositionDescriptor] [npc.legFullDescription(true)].",
-			Util.newArrayListOfValues(
-					LegConfiguration.TAIL_LONG),
+			List.of(LegConfiguration.TAIL_LONG),
 			false) {
 		@Override
 		public boolean isDefaultPlural(GameCharacter gc) {
@@ -236,16 +230,15 @@ public class LegType {
 			"a",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "arachnid", "demonic-spider"),
-			Util.newArrayListOfValues("feminine", "arachnid", "demonic-spider"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
+			List.of("masculine", "arachnid", "demonic-spider"),
+			List.of("feminine", "arachnid", "demonic-spider"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
 			"-",
 			"[npc.Her] demonic, spider-like lower body is [npc.materialCompositionDescriptor] [npc.legFullDescription(true)].",
-			Util.newArrayListOfValues(
-					LegConfiguration.ARACHNID),
+			List.of(LegConfiguration.ARACHNID),
 			true) {
 		@Override
 		public String getTransformationDescription(GameCharacter owner) {
@@ -274,16 +267,15 @@ public class LegType {
 			"a",
 			"tentacle",
 			"tentacles",
-			Util.newArrayListOfValues("masculine", "cephalopod", "demonic-octopus"),
-			Util.newArrayListOfValues("feminine", "cephalopod", "demonic-octopus"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
+			List.of("masculine", "cephalopod", "demonic-octopus"),
+			List.of("feminine", "cephalopod", "demonic-octopus"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
 			"-",
 			"[npc.Her] demonic, octopus-like lower body is [npc.materialCompositionDescriptor] [npc.legFullDescription(true)].",
-			Util.newArrayListOfValues(
-					LegConfiguration.CEPHALOPOD),
+			List.of(LegConfiguration.CEPHALOPOD),
 			false) {
 		@Override
 		public String getTransformationDescription(GameCharacter owner) {
@@ -319,16 +311,15 @@ public class LegType {
 			"a",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("masculine", "scaly", "demonic-fish"),
-			Util.newArrayListOfValues("feminine", "scaly", "demonic-fish"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
+			List.of("masculine", "scaly", "demonic-fish"),
+			List.of("feminine", "scaly", "demonic-fish"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
 			"-",
 			"[npc.Her] demonic, fish-like lower body is [npc.materialCompositionDescriptor] [npc.legFullDescription(true)].",
-			Util.newArrayListOfValues(
-					LegConfiguration.TAIL),
+			List.of(LegConfiguration.TAIL),
 			false) {
 		@Override
 		public boolean isDefaultPlural(GameCharacter gc) {
@@ -377,16 +368,15 @@ public class LegType {
 			"a",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "clawed", "anthropomorphic, bird-like"),
-			Util.newArrayListOfValues("feminine", "clawed", "anthropomorphic, bird-like"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
+			List.of("masculine", "clawed", "anthropomorphic, bird-like"),
+			List.of("feminine", "clawed", "anthropomorphic, bird-like"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
 			"-",
 			"[npc.Her] demonic, bird-like lower body is [npc.materialCompositionDescriptor] [npc.legFullDescription(true)].",
-			Util.newArrayListOfValues(
-					LegConfiguration.AVIAN),
+			List.of(LegConfiguration.AVIAN),
 			false) {
 		@Override
 		public String getTransformationDescription(GameCharacter owner) {
@@ -415,20 +405,19 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "hoofed", "furry", "fur-coated", "anthropomorphic, cow-like"),
-			Util.newArrayListOfValues("feminine", "hoofed", "furry", "fur-coated", "anthropomorphic, cow-like"),
-			Util.newArrayListOfValues("cow-like", "bovine"),
-			Util.newArrayListOfValues("cow-like", "bovine"),
-			Util.newArrayListOfValues("cow-like", "bovine"),
-			Util.newArrayListOfValues("cow-like", "bovine"),
+			List.of("masculine", "hoofed", "furry", "fur-coated", "anthropomorphic, cow-like"),
+			List.of("feminine", "hoofed", "furry", "fur-coated", "anthropomorphic, cow-like"),
+			List.of("cow-like", "bovine"),
+			List.of("cow-like", "bovine"),
+			List.of("cow-like", "bovine"),
+			List.of("cow-like", "bovine"),
 			"A layer of short, cow-like hair quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] [npc.verb(let)] out a cry as a thick, hoof-like nail grows in their place,"
 					+ " before quickly transforming to turn [npc.her] feet into cow-like hoofs."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldCowMorph(cow-like legs and hoofed feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic cow-like hoofs.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
@@ -439,19 +428,18 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "furry", "fur-coated", "anthropomorphic, dog-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "anthropomorphic, dog-like"),
-			Util.newArrayListOfValues("dog-like", "canine"),
-			Util.newArrayListOfValues("dog-like", "canine"),
-			Util.newArrayListOfValues("dog-like", "canine"),
-			Util.newArrayListOfValues("dog-like", "canine"),
+			List.of("masculine", "furry", "fur-coated", "anthropomorphic, dog-like"),
+			List.of("feminine", "furry", "fur-coated", "anthropomorphic, dog-like"),
+			List.of("dog-like", "canine"),
+			List.of("dog-like", "canine"),
+			List.of("dog-like", "canine"),
+			List.of("dog-like", "canine"),
 			"A layer of dog-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into little blunt claws, and leathery pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldDogMorph(dog-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic dog-like paws, complete with little blunt claws and leathery pads.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
@@ -462,19 +450,18 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "furry", "fur-coated", "anthropomorphic, wolf-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "anthropomorphic, wolf-like"),
-			Util.newArrayListOfValues("wolf-like", "lupine"),
-			Util.newArrayListOfValues("wolf-like", "lupine"),
-			Util.newArrayListOfValues("wolf-like", "lupine"),
-			Util.newArrayListOfValues("wolf-like", "lupine"),
+			List.of("masculine", "furry", "fur-coated", "anthropomorphic, wolf-like"),
+			List.of("feminine", "furry", "fur-coated", "anthropomorphic, wolf-like"),
+			List.of("wolf-like", "lupine"),
+			List.of("wolf-like", "lupine"),
+			List.of("wolf-like", "lupine"),
+			List.of("wolf-like", "lupine"),
 			"A layer of wolf-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and tough leathery pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldWolfMorph(wolf-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic wolf-like paws, complete with sharp claws and tough leathery pads.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
@@ -485,19 +472,18 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "furry", "fur-coated", "anthropomorphic, fox-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "anthropomorphic, fox-like"),
-			Util.newArrayListOfValues("fox-like", "vulpine"),
-			Util.newArrayListOfValues("fox-like", "vulpine"),
-			Util.newArrayListOfValues("fox-like", "vulpine"),
-			Util.newArrayListOfValues("fox-like", "vulpine"),
+			List.of("masculine", "furry", "fur-coated", "anthropomorphic, fox-like"),
+			List.of("feminine", "furry", "fur-coated", "anthropomorphic, fox-like"),
+			List.of("fox-like", "vulpine"),
+			List.of("fox-like", "vulpine"),
+			List.of("fox-like", "vulpine"),
+			List.of("fox-like", "vulpine"),
 			"A layer of fox-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and little pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.</br>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldFoxMorph(fox-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic fox-like paws, complete with sharp claws and tough leathery pads.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
@@ -508,19 +494,18 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "furry", "fur-coated", "anthropomorphic, squirrel-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "anthropomorphic, squirrel-like"),
-			Util.newArrayListOfValues("squirrel-like"),
-			Util.newArrayListOfValues("squirrel-like"),
-			Util.newArrayListOfValues("squirrel-like"),
-			Util.newArrayListOfValues("squirrel-like"),
+			List.of("masculine", "furry", "fur-coated", "anthropomorphic, squirrel-like"),
+			List.of("feminine", "furry", "fur-coated", "anthropomorphic, squirrel-like"),
+			List.of("squirrel-like"),
+			List.of("squirrel-like"),
+			List.of("squirrel-like"),
+			List.of("squirrel-like"),
 			"A layer of squirrel-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and little pink pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldSquirrelMorph(squirrel-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic squirrel-like paws, complete with claws and pink pads.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
@@ -531,19 +516,18 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "furry", "fur-coated", "anthropomorphic, rat-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "anthropomorphic, rat-like"),
-			Util.newArrayListOfValues("rat-like"),
-			Util.newArrayListOfValues("rat-like"),
-			Util.newArrayListOfValues("rat-like"),
-			Util.newArrayListOfValues("rat-like"),
+			List.of("masculine", "furry", "fur-coated", "anthropomorphic, rat-like"),
+			List.of("feminine", "furry", "fur-coated", "anthropomorphic, rat-like"),
+			List.of("rat-like"),
+			List.of("rat-like"),
+			List.of("rat-like"),
+			List.of("rat-like"),
 			"A layer of rat-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and little pink pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldRatMorph(rat-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic rat-like paws, complete with claws and leathery pads.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
@@ -554,19 +538,18 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "furry", "fur-coated", "anthropomorphic, rabbit-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "anthropomorphic, rabbit-like"),
-			Util.newArrayListOfValues("rabbit-like"),
-			Util.newArrayListOfValues("rabbit-like"),
-			Util.newArrayListOfValues("rabbit-like"),
-			Util.newArrayListOfValues("rabbit-like"),
+			List.of("masculine", "furry", "fur-coated", "anthropomorphic, rabbit-like"),
+			List.of("feminine", "furry", "fur-coated", "anthropomorphic, rabbit-like"),
+			List.of("rabbit-like"),
+			List.of("rabbit-like"),
+			List.of("rabbit-like"),
+			List.of("rabbit-like"),
 			"A layer of rabbit-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into blunt claws, and soft little pads grow to cover [npc.her] soles, leaving [npc.herHim] with long, paw-like feet."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldRabbitMorph(rabbit-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into long, anthropomorphic, rabbit-like paws, complete with blunt claws and soft pads.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
@@ -577,19 +560,18 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "furry", "fur-coated", "anthropomorphic, bat-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "anthropomorphic, bat-like"),
-			Util.newArrayListOfValues("bat-like"),
-			Util.newArrayListOfValues("bat-like"),
-			Util.newArrayListOfValues("bat-like"),
-			Util.newArrayListOfValues("bat-like"),
+			List.of("masculine", "furry", "fur-coated", "anthropomorphic, bat-like"),
+			List.of("feminine", "furry", "fur-coated", "anthropomorphic, bat-like"),
+			List.of("bat-like"),
+			List.of("bat-like"),
+			List.of("bat-like"),
+			List.of("bat-like"),
 			"A layer of bat-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and little pink pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldBatMorph(bat-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic bat-like paws, complete with claws and leathery pads.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL), false) {
+			List.of(LegConfiguration.BIPEDAL), false) {
 	};
 	
 	public static AbstractLegType CAT_MORPH = new AbstractLegType(BodyCoveringType.FELINE_FUR,
@@ -599,19 +581,18 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "furry", "fur-coated", "anthropomorphic, cat-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "anthropomorphic, cat-like"),
-			Util.newArrayListOfValues("cat-like", "feline"),
-			Util.newArrayListOfValues("cat-like", "feline"),
-			Util.newArrayListOfValues("cat-like", "feline"),
-			Util.newArrayListOfValues("cat-like", "feline"),
+			List.of("masculine", "furry", "fur-coated", "anthropomorphic, cat-like"),
+			List.of("feminine", "furry", "fur-coated", "anthropomorphic, cat-like"),
+			List.of("cat-like", "feline"),
+			List.of("cat-like", "feline"),
+			List.of("cat-like", "feline"),
+			List.of("cat-like", "feline"),
 			"A layer of cat-like fur quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp, retractable claws, and little pink pads grow to cover [npc.her] soles, leaving [npc.herHim] with paw-like feet."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldCatMorph(cat-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic cat-like paws, complete with retractable claws and pink pads.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
@@ -622,19 +603,18 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "scaly", "reptilian", "anthropomorphic, alligator-like"),
-			Util.newArrayListOfValues("feminine", "scaly", "reptilian", "anthropomorphic, alligator-like"),
-			Util.newArrayListOfValues("alligator-like", "scaly", "reptilian"),
-			Util.newArrayListOfValues("alligator-like", "scaly", "reptilian"),
-			Util.newArrayListOfValues("alligator-like", "scaly", "reptilian"),
-			Util.newArrayListOfValues("alligator-like", "scaly", "reptilian"),
+			List.of("masculine", "scaly", "reptilian", "anthropomorphic, alligator-like"),
+			List.of("feminine", "scaly", "reptilian", "anthropomorphic, alligator-like"),
+			List.of("alligator-like", "scaly", "reptilian"),
+			List.of("alligator-like", "scaly", "reptilian"),
+			List.of("alligator-like", "scaly", "reptilian"),
+			List.of("alligator-like", "scaly", "reptilian"),
 			"A layer of alligator-like scales quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new scales spread down to the ends of [npc.her] toes, [npc.her] toenails thicken into sharp claws, and little scales grow to cover [npc.her] soles, leaving [npc.herHim] with alligator-like feet."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new scales smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldGatorMorph(alligator-like legs and feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic alligator-like feet, complete with sharp claws.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
@@ -645,20 +625,19 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "hair-coated", "anthropomorphic, horse-like"),
-			Util.newArrayListOfValues("feminine", "hair-coated", "anthropomorphic, horse-like"),
-			Util.newArrayListOfValues("horse-like", "equine"),
-			Util.newArrayListOfValues("horse-like", "equine"),
-			Util.newArrayListOfValues("horse-like", "equine"),
-			Util.newArrayListOfValues("horse-like", "equine"),
+			List.of("masculine", "hair-coated", "anthropomorphic, horse-like"),
+			List.of("feminine", "hair-coated", "anthropomorphic, horse-like"),
+			List.of("horse-like", "equine"),
+			List.of("horse-like", "equine"),
+			List.of("horse-like", "equine"),
+			List.of("horse-like", "equine"),
 			"A layer of short, horse-like hair quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] [npc.verb(let)] out a cry as a thick, hoof-like nail grows in their place,"
 					+ " before quickly transforming to turn [npc.her] feet into horse-like hoofs."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new hair smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldHorseMorph(horse-like legs and hoofed feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic horse-like hoofs.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 
@@ -720,20 +699,19 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "fur-coated", "anthropomorphic, reindeer-like"),
-			Util.newArrayListOfValues("feminine", "fur-coated", "anthropomorphic, reindeer-like"),
-			Util.newArrayListOfValues("reindeer-like"),
-			Util.newArrayListOfValues("reindeer-like"),
-			Util.newArrayListOfValues("reindeer-like"),
-			Util.newArrayListOfValues("reindeer-like"),
+			List.of("masculine", "fur-coated", "anthropomorphic, reindeer-like"),
+			List.of("feminine", "fur-coated", "anthropomorphic, reindeer-like"),
+			List.of("reindeer-like"),
+			List.of("reindeer-like"),
+			List.of("reindeer-like"),
+			List.of("reindeer-like"),
 			"A layer of furry, reindeer-like hair quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new fur spreads down to the ends of [npc.her] toes, they suddenly push together, and [npc.she] [npc.verb(let)] out a cry as a crescent-shaped, cloven hoof grows in their place,"
 					+ " before quickly transforming to turn [npc.her] feet into reindeer-like hoofs."
 				+ " As the transformation ends, [npc.she] [npc.verb(see)] that [npc.her] new fur smoothly transitions into the [npc.skin] covering the rest of [npc.her] body at [npc.her] upper-thigh.<br/>"
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldReindeerMorph(reindeer-like legs and hoofed feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], and [npc.her] feet are formed into anthropomorphic reindeer-like hoofs.",
-			Util.newArrayListOfValues(
-					LegConfiguration.BIPEDAL,
+			List.of(LegConfiguration.BIPEDAL,
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
@@ -744,12 +722,12 @@ public class LegType {
 			"a pair of",
 			"leg",
 			"legs",
-			Util.newArrayListOfValues("masculine", "clawed", "anthropomorphic, bird-like"),
-			Util.newArrayListOfValues("feminine", "clawed", "anthropomorphic, bird-like"),
-			Util.newArrayListOfValues("bird-like"),
-			Util.newArrayListOfValues("bird-like"),
-			Util.newArrayListOfValues("bird-like"),
-			Util.newArrayListOfValues("bird-like"),
+			List.of("masculine", "clawed", "anthropomorphic, bird-like"),
+			List.of("feminine", "clawed", "anthropomorphic, bird-like"),
+			List.of("bird-like"),
+			List.of("bird-like"),
+			List.of("bird-like"),
+			List.of("bird-like"),
 			"A layer of scaly, bird-like leather quickly grows over [npc.her] legs as they shift into a new form."
 				+ " As [npc.her] new leathery skin spreads down to the ends of [npc.her] toes, [npc.her] feet start to undergo an extreme transformation."
 				+ " [npc.Her] toes combine together and re-shape themselves into three forward-facing talons, as a fourth, thumb-like talon branches out behind them."
@@ -757,8 +735,7 @@ public class LegType {
 				+ "[npc.Name] now [npc.has] anthropomorphic, [style.boldHarpy(bird-like legs and talons in place of feet)], which are [npc.materialDescriptor] [npc.legFullDescription].",
 			"[npc.Her] bird-like legs are [npc.materialCompositionDescriptor] [npc.legFullDescription(true)], which sharply transitions into [npc.her] body's [helena.skinColour] [npc.skin] at [npc.her] upper-thigh."
 				+ " At the end of each of [npc.her] [npc.legs], [npc.she] [npc.has] sharp, bird-like talons.",
-				Util.newArrayListOfValues(
-						LegConfiguration.BIPEDAL,
+				List.of(LegConfiguration.BIPEDAL,
 						LegConfiguration.AVIAN), false) {
 	};
 	

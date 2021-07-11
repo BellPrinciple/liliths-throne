@@ -63,7 +63,7 @@ public abstract class AbstractCoreItem implements XMLSaving {
 		super();
 		this.name = name;
 		this.namePlural = namePlural;
-		this.colours = Util.newArrayListOfValues(colour);
+		this.colours = List.of(colour);
 		this.rarity = rarity;
 		this.SVGString = SVGString;
 

@@ -120,7 +120,7 @@ public class Claire extends NPC {
 	@Override
 	public void setupPerks(boolean autoSelectPerks) {
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 3),
 						new Value<>(PerkCategory.LUST, 1),
@@ -304,7 +304,7 @@ public class Claire extends NPC {
 
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(SAClaireDangerSex.class);
+		return List.of(SAClaireDangerSex.class);
 	}
 
 }

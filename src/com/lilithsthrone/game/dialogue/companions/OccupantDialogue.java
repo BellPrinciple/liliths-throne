@@ -453,8 +453,8 @@ public class OccupantDialogue {
 								UtilText.parse(characterForSex, "Have sex with [npc.name]."), 
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(characterForSex),
+										List.of(Main.game.getPlayer()),
+										List.of(characterForSex),
 										Main.game.getPlayer().getCompanions(),
 										null) {
 									@Override
@@ -506,8 +506,8 @@ public class OccupantDialogue {
 								null, null, null, null, null, null,
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(characterForSexSecondary, Main.game.getPlayer()),
-										Util.newArrayListOfValues(characterForSex),
+										List.of(characterForSexSecondary, Main.game.getPlayer()),
+										List.of(characterForSex),
 										null,
 										null,
 										ResponseTag.PREFER_DOGGY) {
@@ -559,8 +559,8 @@ public class OccupantDialogue {
 								null, null, null, null, null, null,
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer(), characterForSexSecondary),
-										Util.newArrayListOfValues(characterForSex),
+										List.of(Main.game.getPlayer(), characterForSexSecondary),
+										List.of(characterForSex),
 										null,
 										null,
 										ResponseTag.PREFER_DOGGY) {
@@ -601,8 +601,8 @@ public class OccupantDialogue {
 								null, null, null, null, null, null,
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(characterForSex, characterForSexSecondary),
+										List.of(Main.game.getPlayer()),
+										List.of(characterForSex, characterForSexSecondary),
 										null,
 										null,
 										ResponseTag.PREFER_DOGGY) {
@@ -629,11 +629,11 @@ public class OccupantDialogue {
 					} else {
 						return new ResponseSex("Submissive sex",
 								UtilText.parse(characterForSex, "Have submissive sex with [npc.name]."), 
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+								List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(characterForSex),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(characterForSex),
+										List.of(Main.game.getPlayer()),
 										null,
 										Main.game.getPlayer().getCompanions()) {
 									@Override
@@ -676,8 +676,8 @@ public class OccupantDialogue {
 								null, null, null, null, null, null,
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(characterForSexSecondary, characterForSex),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(characterForSexSecondary, characterForSex),
+										List.of(Main.game.getPlayer()),
 										null,
 										null,
 										ResponseTag.PREFER_DOGGY) {
@@ -719,8 +719,8 @@ public class OccupantDialogue {
 								null, null, null, null, null, null,
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(characterForSex, characterForSexSecondary),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(characterForSex, characterForSexSecondary),
+										List.of(Main.game.getPlayer()),
 										null,
 										null,
 										ResponseTag.PREFER_DOGGY) {
@@ -771,8 +771,8 @@ public class OccupantDialogue {
 								null, null, null, null, null, null,
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(characterForSex),
-										Util.newArrayListOfValues(Main.game.getPlayer(), characterForSexSecondary),
+										List.of(characterForSex),
+										List.of(Main.game.getPlayer(), characterForSexSecondary),
 										null,
 										null,
 										ResponseTag.PREFER_DOGGY) {

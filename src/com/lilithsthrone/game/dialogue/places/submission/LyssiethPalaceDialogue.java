@@ -924,9 +924,9 @@ public class LyssiethPalaceDialogue {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
 						if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.lyssiethNoCockDemonTF)) {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 						} else {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 						}
 					}
 				};
@@ -955,9 +955,9 @@ public class LyssiethPalaceDialogue {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
 						if(Main.game.getPlayer().hasPenis() || (!Main.game.getPlayer().hasPenis() && !Main.game.getPlayer().hasVagina() && !Main.game.getPlayer().isFeminine())) {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lyssieth.class), PenisMouth.BLOWJOB_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lyssieth.class), PenisMouth.BLOWJOB_START, false, true));
 						} else {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lyssieth.class), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lyssieth.class), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 						}
 					}
 					@Override
@@ -1279,7 +1279,7 @@ public class LyssiethPalaceDialogue {
 										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
 						null,
 						isMeraxisBeingTransformed()
-							?Util.newArrayListOfValues(Main.game.getNpc(DarkSiren.class))
+							?List.of(Main.game.getNpc(DarkSiren.class))
 							:null,
 						AFTER_LILAYA_DEMON_TF_SEX,
 						UtilText.parseFromXMLFile("places/submission/lyssiethsPalace", "LILAYA_DEMON_TF_SEX_START_FUCK_PUSSY")) {
@@ -1293,8 +1293,7 @@ public class LyssiethPalaceDialogue {
 					}
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lilaya.class), PenisVagina.PENIS_FUCKING_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lilaya.class), PenisVagina.PENIS_FUCKING_START, false, true),
 								new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getNpc(Lilaya.class), PenisAnus.PENIS_FUCKING_START, false, true));
 					}
 					@Override
@@ -1332,7 +1331,7 @@ public class LyssiethPalaceDialogue {
 										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
 						null,
 						isMeraxisBeingTransformed()
-							?Util.newArrayListOfValues(Main.game.getNpc(DarkSiren.class))
+							?List.of(Main.game.getNpc(DarkSiren.class))
 							:null,
 						AFTER_LILAYA_DEMON_TF_SEX,
 						UtilText.parseFromXMLFile("places/submission/lyssiethsPalace", "LILAYA_DEMON_TF_SEX_START_FUCK_ASS")) {
@@ -1346,8 +1345,7 @@ public class LyssiethPalaceDialogue {
 					}
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lilaya.class), PenisAnus.PENIS_FUCKING_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lilaya.class), PenisAnus.PENIS_FUCKING_START, false, true),
 								new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getNpc(Lilaya.class), PenisVagina.PENIS_FUCKING_START, false, true));
 					}
 					@Override
@@ -1379,14 +1377,13 @@ public class LyssiethPalaceDialogue {
 										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
 						null,
 						isMeraxisBeingTransformed()
-							?Util.newArrayListOfValues(Main.game.getNpc(DarkSiren.class))
+							?List.of(Main.game.getNpc(DarkSiren.class))
 							:null,
 						AFTER_LILAYA_DEMON_TF_SEX,
 						UtilText.parseFromXMLFile("places/submission/lyssiethsPalace", "LILAYA_DEMON_TF_SEX_START_GIVE_CUNNILINGUS")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lilaya.class), TongueVagina.CUNNILINGUS_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lilaya.class), TongueVagina.CUNNILINGUS_START, false, true),
 								new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getNpc(Lilaya.class), PenisAnus.PENIS_FUCKING_START, false, true));
 					}
 					@Override
@@ -1419,7 +1416,7 @@ public class LyssiethPalaceDialogue {
 										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
 						null,
 						isMeraxisBeingTransformed()
-							?Util.newArrayListOfValues(Main.game.getNpc(DarkSiren.class))
+							?List.of(Main.game.getNpc(DarkSiren.class))
 							:null,
 						AFTER_LILAYA_DEMON_TF_SEX,
 						UtilText.parseFromXMLFile("places/submission/lyssiethsPalace", "LILAYA_DEMON_TF_SEX_START_GIVE_BLOWJOB")) {
@@ -1434,8 +1431,7 @@ public class LyssiethPalaceDialogue {
 					}
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getNpc(Lilaya.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Lilaya.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true),
 								new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getNpc(Lilaya.class), PenisVagina.PENIS_FUCKING_START, false, true));
 					}
 					@Override
@@ -1467,14 +1463,13 @@ public class LyssiethPalaceDialogue {
 										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
 						null,
 						isMeraxisBeingTransformed()
-							?Util.newArrayListOfValues(Main.game.getNpc(DarkSiren.class))
+							?List.of(Main.game.getNpc(DarkSiren.class))
 							:null,
 						AFTER_LILAYA_DEMON_TF_SEX,
 						UtilText.parseFromXMLFile("places/submission/lyssiethsPalace", "LILAYA_DEMON_TF_SEX_START_GIVE_ANILINGUS")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lilaya.class), TongueAnus.ANILINGUS_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lilaya.class), TongueAnus.ANILINGUS_START, false, true),
 								new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getNpc(Lilaya.class), PenisVagina.PENIS_FUCKING_START, false, true));
 					}
 					@Override
@@ -1505,14 +1500,13 @@ public class LyssiethPalaceDialogue {
 										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
 						null,
 						isMeraxisBeingTransformed()
-							?Util.newArrayListOfValues(Main.game.getNpc(DarkSiren.class))
+							?List.of(Main.game.getNpc(DarkSiren.class))
 							:null,
 						AFTER_LILAYA_DEMON_TF_SEX,
 						UtilText.parseFromXMLFile("places/submission/lyssiethsPalace", "LILAYA_DEMON_TF_SEX_START_FINGERING")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lilaya.class), FingerVagina.FINGERING_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Lilaya.class), FingerVagina.FINGERING_START, false, true),
 								new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getNpc(Lilaya.class), PenisAnus.PENIS_FUCKING_START, false, true));
 					}
 					@Override
@@ -1590,8 +1584,7 @@ public class LyssiethPalaceDialogue {
 						}
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(DarkSiren.class), PenisVagina.PENIS_FUCKING_START, false, true),
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(DarkSiren.class), PenisVagina.PENIS_FUCKING_START, false, true),
 									new InitialSexActionInformation(Main.game.getNpc(DarkSiren.class), Main.game.getNpc(Lilaya.class), TongueVagina.CUNNILINGUS_START, false, true),
 									new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getNpc(DarkSiren.class), PenisAnus.PENIS_FUCKING_START, false, true));
 						}
@@ -1651,8 +1644,7 @@ public class LyssiethPalaceDialogue {
 						}
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(DarkSiren.class), PenisAnus.PENIS_FUCKING_START, false, true),
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(DarkSiren.class), PenisAnus.PENIS_FUCKING_START, false, true),
 									new InitialSexActionInformation(Main.game.getNpc(DarkSiren.class), Main.game.getNpc(Lilaya.class), TongueVagina.CUNNILINGUS_START, false, true),
 									new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getNpc(DarkSiren.class), PenisVagina.PENIS_FUCKING_START, false, true));
 						}
@@ -1710,8 +1702,7 @@ public class LyssiethPalaceDialogue {
 						}
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getNpc(DarkSiren.class), Main.game.getPlayer(), TongueVagina.CUNNILINGUS_START, false, true),
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(DarkSiren.class), Main.game.getPlayer(), TongueVagina.CUNNILINGUS_START, false, true),
 									new InitialSexActionInformation(Main.game.getNpc(Lilaya.class), Main.game.getNpc(DarkSiren.class), PenisAnus.PENIS_FUCKING_START, false, true),
 									new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getNpc(DarkSiren.class), PenisVagina.PENIS_FUCKING_START, false, true));
 						}
@@ -1771,8 +1762,7 @@ public class LyssiethPalaceDialogue {
 						}
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(DarkSiren.class), PenisMouth.BLOWJOB_START, false, true),
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(DarkSiren.class), PenisMouth.BLOWJOB_START, false, true),
 									new InitialSexActionInformation(Main.game.getNpc(Lilaya.class), Main.game.getNpc(DarkSiren.class), PenisAnus.PENIS_FUCKING_START, false, true),
 									new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getNpc(DarkSiren.class), PenisVagina.PENIS_FUCKING_START, false, true));
 						}
@@ -1823,8 +1813,7 @@ public class LyssiethPalaceDialogue {
 						}
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getNpc(Lilaya.class), Main.game.getNpc(DarkSiren.class), PenisAnus.PENIS_FUCKING_START, false, true),
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Lilaya.class), Main.game.getNpc(DarkSiren.class), PenisAnus.PENIS_FUCKING_START, false, true),
 									new InitialSexActionInformation(Main.game.getNpc(Lyssieth.class), Main.game.getNpc(DarkSiren.class), PenisVagina.PENIS_FUCKING_START, false, true));
 						}
 						@Override

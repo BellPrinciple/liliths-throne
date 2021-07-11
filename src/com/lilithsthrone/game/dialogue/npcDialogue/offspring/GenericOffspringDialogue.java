@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.offspring;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -192,7 +194,7 @@ public class GenericOffspringDialogue {
 					
 				} else if (index == 4 && Main.game.isIncestEnabled()) {
 					return new Response("Passionate kiss", UtilText.parse(offspring(), "Passionately kiss [npc.name] on the lips, and feel [npc.herHim] up as you do so."), OFFSPRING_ENCOUNTER_TALKING,
-							Util.newArrayListOfValues(Fetish.FETISH_INCEST),
+							List.of(Fetish.FETISH_INCEST),
 							CorruptionLevel.FOUR_LUSTFUL,
 							null,
 							null,
@@ -487,7 +489,7 @@ public class GenericOffspringDialogue {
 					
 				} else if (index == 8 && Main.game.isIncestEnabled()) {
 					return new Response("Sex", UtilText.parse(offspring(), "Tell [npc.name] that you want to have sex with [npc.herHim]."), OFFSPRING_ENCOUNTER_SEX,
-							Util.newArrayListOfValues(Fetish.FETISH_INCEST),
+							List.of(Fetish.FETISH_INCEST),
 							CorruptionLevel.FIVE_CORRUPT,
 							null,
 							null,
@@ -821,8 +823,8 @@ public class GenericOffspringDialogue {
 							"It's time to show your [npc.daughter] what [npc.her] [pc.mother] can do!",
 							true, false,
 							new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(offspring()),
+								List.of(Main.game.getPlayer()),
+								List.of(offspring()),
 								null,
 								null),
 							AFTER_SEX_CONSENSUAL,
@@ -833,8 +835,8 @@ public class GenericOffspringDialogue {
 							"It's time to let your [npc.daughter] show you what [npc.she] can do!",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(offspring()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(offspring()),
+									List.of(Main.game.getPlayer()),
 									null,
 									null),
 							AFTER_SEX_CONSENSUAL,
@@ -851,8 +853,8 @@ public class GenericOffspringDialogue {
 								"Pay your [npc.daughter] 100 flames to get what you want!",
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(offspring()),
+										List.of(Main.game.getPlayer()),
+										List.of(offspring()),
 										null,
 										null) {
 									public SexPace getStartingSexPaceModifier(GameCharacter character) {
@@ -874,8 +876,8 @@ public class GenericOffspringDialogue {
 								"Pay your [npc.daughter] 100 flames to get what you want!",
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(offspring()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(offspring()),
+									List.of(Main.game.getPlayer()),
 									null,
 									null) {
 									public SexPace getStartingSexPaceModifier(GameCharacter character) {
@@ -963,11 +965,11 @@ public class GenericOffspringDialogue {
 				if(offspring().isAttractedTo(Main.game.getPlayer()) || !Main.game.isNonConEnabled()) {
 					return new ResponseSex("Sex",
 							"Well, [npc.she] <i>is</i> asking for it!",
-							Util.newArrayListOfValues(Fetish.FETISH_INCEST), null, Fetish.FETISH_INCEST.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_INCEST), null, Fetish.FETISH_INCEST.getAssociatedCorruptionLevel(), null, null, null,
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(offspring()),
+									List.of(Main.game.getPlayer()),
+									List.of(offspring()),
 							null,
 							null),
 							AFTER_SEX_VICTORY,
@@ -976,11 +978,11 @@ public class GenericOffspringDialogue {
 				} else {
 					return new ResponseSex(
 							"Rape [npc.herHim]", "[npc.She] needs to be punished for attacking you like that...",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM, Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM, Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(offspring()),
+									List.of(Main.game.getPlayer()),
+									List.of(offspring()),
 							null,
 							null),
 							AFTER_SEX_VICTORY,
@@ -996,11 +998,11 @@ public class GenericOffspringDialogue {
 				if(offspring().isAttractedTo(Main.game.getPlayer()) || !Main.game.isNonConEnabled()) {
 					return new ResponseSex("Gentle sex",
 							"Well, [npc.she] <i>is</i> asking for it! (Start the sex scene in the 'gentle' pace.)",
-							Util.newArrayListOfValues(Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
+							List.of(Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(offspring()),
+									List.of(Main.game.getPlayer()),
+									List.of(offspring()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
@@ -1010,11 +1012,11 @@ public class GenericOffspringDialogue {
 				} else {
 					return new ResponseSex("Rape [npc.herHim] (gentle)",
 							"[npc.She] needs to be punished for attacking you like that... (Start the sex scene in the 'gentle' pace.)",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM, Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM, Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(offspring()),
+									List.of(Main.game.getPlayer()),
+									List.of(offspring()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
@@ -1031,11 +1033,11 @@ public class GenericOffspringDialogue {
 				if(offspring().isAttractedTo(Main.game.getPlayer()) || !Main.game.isNonConEnabled()) {
 					return new ResponseSex("Rough sex",
 							"Well, [npc.she] <i>is</i> asking for it! (Start the sex scene in the 'rough' pace.)",
-							Util.newArrayListOfValues(Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
+							List.of(Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(offspring()),
+									List.of(Main.game.getPlayer()),
+									List.of(offspring()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
@@ -1045,11 +1047,11 @@ public class GenericOffspringDialogue {
 				} else {
 					return new ResponseSex("Rape [npc.herHim] (rough)",
 							"[npc.She] needs to be punished for attacking you like that... (Start the sex scene in the 'rough' pace.)",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM, Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM, Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(offspring()),
+									List.of(Main.game.getPlayer()),
+									List.of(offspring()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
@@ -1067,11 +1069,11 @@ public class GenericOffspringDialogue {
 					return new ResponseSex("Submit",
 							"You're not really sure what to do now...<br/>"
 								+ "Perhaps it would be best to let [npc.name] choose what to do next?",
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
+							List.of(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(offspring()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(offspring()),
+									List.of(Main.game.getPlayer()),
 									null,
 									null),
 							AFTER_SEX_DEFEAT,
@@ -1156,8 +1158,8 @@ public class GenericOffspringDialogue {
 							"[npc.Name] forces [npc.herself] on you...",
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(offspring()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(offspring()),
+									List.of(Main.game.getPlayer()),
 							null,
 							null), AFTER_SEX_DEFEAT,
 							UtilText.parseFromXMLFile(getTextFilePath(), "AFTER_COMBAT_DEFEAT_SEX", offspring())) {
@@ -1170,11 +1172,11 @@ public class GenericOffspringDialogue {
 				} else if (index == 2) {
 					return new ResponseSex("Eager Sex",
 							"[npc.Name] forces [npc.herself] on you...",
-							Util.newArrayListOfValues(Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
+							List.of(Fetish.FETISH_INCEST), null, CorruptionLevel.FIVE_CORRUPT, null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(offspring()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(offspring()),
+									List.of(Main.game.getPlayer()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_SUB_EAGER),
@@ -1191,8 +1193,8 @@ public class GenericOffspringDialogue {
 							"[npc.Name] forces [npc.herself] on you...",
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(offspring()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(offspring()),
+									List.of(Main.game.getPlayer()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_SUB_RESISTING),

@@ -51,14 +51,13 @@ public enum LegConfiguration {
 			"") {
 		@Override
 		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.NORMAL,
+			return List.of(GenitalArrangement.NORMAL,
 					GenitalArrangement.CLOACA,
 					GenitalArrangement.CLOACA_BEHIND);
 		}
 		@Override
 		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues();
+			return List.of();
 		}
 		@Override
 		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
@@ -93,22 +92,19 @@ public enum LegConfiguration {
 			"statusEffects/race/raceBackgroundLegQuadrupedal") {
 		@Override
 		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, BreastCrotch.class, Leg.class, Tail.class, Tentacle.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
+			return List.of(Ass.class, Anus.class, BreastCrotch.class, Leg.class, Tail.class, Tentacle.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
 		}
 		@Override
 		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.NORMAL,
+			return List.of(GenitalArrangement.NORMAL,
 					GenitalArrangement.CLOACA,
 					GenitalArrangement.CLOACA_BEHIND);
 		}
 		@Override
 		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
 			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
+				return List.of(new BodyPartClothingBlock(
+									List.of(InventorySlot.TORSO_OVER,
 											InventorySlot.TORSO_UNDER,
 											InventorySlot.CHEST,
 											InventorySlot.STOMACH,
@@ -120,15 +116,13 @@ public enum LegConfiguration {
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for quadrupedal-taurs or quadrupedal-ferals can be worn in this slot.",
-									Util.newArrayListOfValues(
-											ItemTag.FITS_TAUR_BODY,
+									List.of(ItemTag.FITS_TAUR_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
 											ItemTag.FITS_FERAL_QUADRUPED_BODY,
 											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
 											ItemTag.ONLY_FITS_FERAL_QUADRUPED_BODY)),
 							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
+									List.of(InventorySlot.WEAPON_MAIN_1,
 											InventorySlot.WEAPON_MAIN_2,
 											InventorySlot.WEAPON_MAIN_3,
 											InventorySlot.WEAPON_OFFHAND_1,
@@ -136,19 +130,15 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
+									List.of(ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
 			} else {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.LEG,
+				return List.of(new BodyPartClothingBlock(
+									List.of(InventorySlot.LEG,
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only taur-suitable clothing can be worn in this slot.",
-									Util.newArrayListOfValues(
-											ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+									List.of(ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
 											ItemTag.FITS_TAUR_BODY)));
 			}
 		}
@@ -181,21 +171,18 @@ public enum LegConfiguration {
 			"statusEffects/race/raceBackgroundLegTailLong") {
 		@Override
 		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
+			return List.of(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
 		}
 		@Override
 		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.CLOACA,
+			return List.of(GenitalArrangement.CLOACA,
 					GenitalArrangement.CLOACA_BEHIND); // Shouldn't ever spawn by default, but give player the option
 		}
 		@Override
 		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
 			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
+				return List.of(new BodyPartClothingBlock(
+									List.of(InventorySlot.TORSO_OVER,
 											InventorySlot.TORSO_UNDER,
 											InventorySlot.CHEST,
 											InventorySlot.STOMACH,
@@ -207,15 +194,13 @@ public enum LegConfiguration {
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for long-tails or long-tail-ferals can be worn in this slot.",
-									Util.newArrayListOfValues(
-											ItemTag.FITS_LONG_TAIL_BODY,
+									List.of(ItemTag.FITS_LONG_TAIL_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
 											ItemTag.FITS_FERAL_LONG_TAIL_BODY,
 											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
 											ItemTag.ONLY_FITS_FERAL_LONG_TAIL_BODY)),
 							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
+									List.of(InventorySlot.WEAPON_MAIN_1,
 											InventorySlot.WEAPON_MAIN_2,
 											InventorySlot.WEAPON_MAIN_3,
 											InventorySlot.WEAPON_OFFHAND_1,
@@ -223,19 +208,15 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
+									List.of(ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
 			} else {
-				return Util.newArrayListOfValues(
-						new BodyPartClothingBlock(
-								Util.newArrayListOfValues(
-										InventorySlot.LEG,
+				return List.of(new BodyPartClothingBlock(
+								List.of(InventorySlot.LEG,
 										InventorySlot.GROIN),
 								character.getLegType().getRace(),
 								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only long-tail-suitable clothing can be worn in this slot.",
-								Util.newArrayListOfValues(
-										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+								List.of(ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
 										ItemTag.FITS_LONG_TAIL_BODY)));
 			}
 		}
@@ -308,21 +289,18 @@ public enum LegConfiguration {
 			"statusEffects/race/raceBackgroundLegTailShort") {
 		@Override
 		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
+			return List.of(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
 		}
 		@Override
 		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.CLOACA,
+			return List.of(GenitalArrangement.CLOACA,
 					GenitalArrangement.CLOACA_BEHIND); // Shouldn't ever spawn by default, but give player the option
 		}
 		@Override
 		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
 			if(character.isFeral()) { // Tail races will never be feral, but just in case...
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
+				return List.of(new BodyPartClothingBlock(
+									List.of(InventorySlot.TORSO_OVER,
 											InventorySlot.TORSO_UNDER,
 											InventorySlot.CHEST,
 											InventorySlot.STOMACH,
@@ -334,15 +312,13 @@ public enum LegConfiguration {
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for tails or tail-ferals can be worn in this slot.",
-									Util.newArrayListOfValues(
-											ItemTag.FITS_TAIL_BODY,
+									List.of(ItemTag.FITS_TAIL_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
 											ItemTag.FITS_FERAL_TAIL_BODY,
 											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
 											ItemTag.ONLY_FITS_FERAL_TAIL_BODY)),
 							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
+									List.of(InventorySlot.WEAPON_MAIN_1,
 											InventorySlot.WEAPON_MAIN_2,
 											InventorySlot.WEAPON_MAIN_3,
 											InventorySlot.WEAPON_OFFHAND_1,
@@ -350,19 +326,15 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
+									List.of(ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
 			} else if(character.hasStatusEffect(StatusEffect.AQUATIC_POSITIVE)) {
-				return Util.newArrayListOfValues(
-						new BodyPartClothingBlock(
-								Util.newArrayListOfValues(
-										InventorySlot.LEG,
+				return List.of(new BodyPartClothingBlock(
+								List.of(InventorySlot.LEG,
 										InventorySlot.GROIN),
 								character.getLegType().getRace(),
 								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only tail-suitable clothing can be worn in this slot.",
-								Util.newArrayListOfValues(
-										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+								List.of(ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
 										ItemTag.FITS_TAIL_BODY)));
 				
 			} else {
@@ -406,24 +378,21 @@ public enum LegConfiguration {
 			"statusEffects/race/raceBackgroundLegArachnid") {
 		@Override
 		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
+			return List.of(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
 		}
 		@Override
 		public List<FootStructure> getPermittedFootStructuresOverride() {
-			return Util.newArrayListOfValues(FootStructure.ARACHNOID);
+			return List.of(FootStructure.ARACHNOID);
 		}
 		@Override
 		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.NORMAL);
+			return List.of(GenitalArrangement.NORMAL);
 		}
 		@Override
 		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
 			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
+				return List.of(new BodyPartClothingBlock(
+									List.of(InventorySlot.TORSO_OVER,
 											InventorySlot.TORSO_UNDER,
 											InventorySlot.CHEST,
 											InventorySlot.STOMACH,
@@ -435,15 +404,13 @@ public enum LegConfiguration {
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for arachnids or arachnid-ferals can be worn in this slot.",
-									Util.newArrayListOfValues(
-											ItemTag.FITS_ARACHNID_BODY,
+									List.of(ItemTag.FITS_ARACHNID_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
 											ItemTag.FITS_FERAL_ARACHNID_BODY,
 											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
 											ItemTag.ONLY_FITS_FERAL_ARACHNID_BODY)),
 							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
+									List.of(InventorySlot.WEAPON_MAIN_1,
 											InventorySlot.WEAPON_MAIN_2,
 											InventorySlot.WEAPON_MAIN_3,
 											InventorySlot.WEAPON_OFFHAND_1,
@@ -451,22 +418,18 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
+									List.of(ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
 			} else {
-				return Util.newArrayListOfValues(
-						new BodyPartClothingBlock(
-								Util.newArrayListOfValues(
-										InventorySlot.LEG,
+				return List.of(new BodyPartClothingBlock(
+								List.of(InventorySlot.LEG,
 										InventorySlot.GROIN,
 		//								InventorySlot.ANKLE,
 										InventorySlot.FOOT,
 										InventorySlot.SOCK),
 								character.getLegType().getRace(),
 								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only arachnid-suitable clothing can be worn in this slot.",
-								Util.newArrayListOfValues(
-										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+								List.of(ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
 										ItemTag.FITS_ARACHNID_BODY)));
 			}
 		}
@@ -524,20 +487,17 @@ public enum LegConfiguration {
 			"statusEffects/race/raceBackgroundLegCephalopod") {
 		@Override
 		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
+			return List.of(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
 		}
 		@Override
 		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.CLOACA);
+			return List.of(GenitalArrangement.CLOACA);
 		}
 		@Override
 		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
 			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
+				return List.of(new BodyPartClothingBlock(
+									List.of(InventorySlot.TORSO_OVER,
 											InventorySlot.TORSO_UNDER,
 											InventorySlot.CHEST,
 											InventorySlot.STOMACH,
@@ -549,15 +509,13 @@ public enum LegConfiguration {
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for cephalopods or cephalopod-ferals can be worn in this slot.",
-									Util.newArrayListOfValues(
-											ItemTag.FITS_CEPHALOPOD_BODY,
+									List.of(ItemTag.FITS_CEPHALOPOD_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
 											ItemTag.FITS_FERAL_CEPHALOPOD_BODY,
 											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
 											ItemTag.ONLY_FITS_FERAL_CEPHALOPOD_BODY)),
 							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
+									List.of(InventorySlot.WEAPON_MAIN_1,
 											InventorySlot.WEAPON_MAIN_2,
 											InventorySlot.WEAPON_MAIN_3,
 											InventorySlot.WEAPON_OFFHAND_1,
@@ -565,22 +523,18 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
+									List.of(ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
 			} else {
-				return Util.newArrayListOfValues(
-						new BodyPartClothingBlock(
-								Util.newArrayListOfValues(
-										InventorySlot.LEG,
+				return List.of(new BodyPartClothingBlock(
+								List.of(InventorySlot.LEG,
 										InventorySlot.GROIN,
 		//								InventorySlot.ANKLE,
 										InventorySlot.FOOT,
 										InventorySlot.SOCK),
 								character.getLegType().getRace(),
 								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only cephalopod-suitable clothing can be worn in this slot.",
-								Util.newArrayListOfValues(
-										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+								List.of(ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
 										ItemTag.FITS_CEPHALOPOD_BODY)));
 			}
 		}
@@ -651,20 +605,17 @@ public enum LegConfiguration {
 			"statusEffects/race/raceBackgroundLegAvian") {
 		@Override
 		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.CLOACA_BEHIND);
+			return List.of(GenitalArrangement.CLOACA_BEHIND);
 		}
 		@Override
 		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, BreastCrotch.class, Leg.class, Tail.class, Tentacle.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
+			return List.of(Ass.class, Anus.class, BreastCrotch.class, Leg.class, Tail.class, Tentacle.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
 		}
 		@Override
 		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
 			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
+				return List.of(new BodyPartClothingBlock(
+									List.of(InventorySlot.TORSO_OVER,
 											InventorySlot.TORSO_UNDER,
 											InventorySlot.CHEST,
 											InventorySlot.STOMACH,
@@ -676,15 +627,13 @@ public enum LegConfiguration {
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for avians or avian-ferals can be worn in this slot.",
-									Util.newArrayListOfValues(
-											ItemTag.FITS_CEPHALOPOD_BODY,
+									List.of(ItemTag.FITS_CEPHALOPOD_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
 											ItemTag.FITS_FERAL_CEPHALOPOD_BODY,
 											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
 											ItemTag.ONLY_FITS_FERAL_CEPHALOPOD_BODY)),
 							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
+									List.of(InventorySlot.WEAPON_MAIN_1,
 											InventorySlot.WEAPON_MAIN_2,
 											InventorySlot.WEAPON_MAIN_3,
 											InventorySlot.WEAPON_OFFHAND_1,
@@ -692,30 +641,16 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
+									List.of(ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
 			} else {
-				return Util.newArrayListOfValues(
-						new BodyPartClothingBlock(
-								Util.newArrayListOfValues(
-										InventorySlot.LEG,
+				return List.of(new BodyPartClothingBlock(
+								List.of(InventorySlot.LEG,
 										InventorySlot.GROIN),
 								character.getLegType().getRace(),
 								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only avian-suitable clothing can be worn in this slot.",
-								Util.newArrayListOfValues(
-										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
-										ItemTag.FITS_AVIAN_BODY))
-//						new BodyPartClothingBlock(
-//								Util.newArrayListOfValues(
-//										InventorySlot.FOOT,
-//										InventorySlot.SOCK),
-//								character.getLegType().getRace(),
-//								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only avian-suitable clothing can be worn in this slot.",
-//								Util.newArrayListOfValues(
-//										ItemTag.FITS_TALONS_EXCLUSIVE,
-//										ItemTag.FITS_TALONS))
-						);
+								List.of(ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+										ItemTag.FITS_AVIAN_BODY)));
 			}
 		}
 		@Override
@@ -748,22 +683,19 @@ public enum LegConfiguration {
 			"statusEffects/race/raceBackgroundLegAvian") {
 		@Override
 		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.NORMAL,
+			return List.of(GenitalArrangement.NORMAL,
 					GenitalArrangement.CLOACA,
 					GenitalArrangement.CLOACA_BEHIND);
 		}
 		@Override
 		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, BreastCrotch.class, Leg.class, Tail.class, Tentacle.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
+			return List.of(Ass.class, Anus.class, BreastCrotch.class, Leg.class, Tail.class, Tentacle.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
 		}
 		@Override
 		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
 			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
+				return List.of(new BodyPartClothingBlock(
+									List.of(InventorySlot.WEAPON_MAIN_1,
 											InventorySlot.WEAPON_MAIN_2,
 											InventorySlot.WEAPON_MAIN_3,
 											InventorySlot.WEAPON_OFFHAND_1,
@@ -771,8 +703,7 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
 									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
-									Util.newArrayListOfValues(
-											ItemTag.FITS_ARM_WINGS,
+									List.of(ItemTag.FITS_ARM_WINGS,
 											ItemTag.FITS_ARM_WINGS_EXCLUSIVE)));
 				
 			} else {

@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.sex.sexActions.submission;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -138,7 +139,7 @@ public class FortressAlphaLeaderSA {
 
 		@Override
 		public String getDescription() {
-			return UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getOtherTarget()),
+			return UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getOtherTarget()),
 					"Grabbing the sides of [npc2.namePos] head, [npc.name] pushes [npc2.herHim] back, sliding [npc.her] [npc.cock+] out from [npc2.her] mouth and leaving a thick trail of cummy saliva drooling from [npc2.her] [npc2.lips].<br/>"
 					+ "Focusing [npc.her] attention on [npc3.name], [npc.name] pushes the cum-coated tip of [npc.her] [npc.cock+] up against [npc3.her] [npc3.lips+],"
 						+ " before roughly slamming [npc.her] hips forwards and hilting it fully down [npc3.her] throat."
@@ -257,7 +258,7 @@ public class FortressAlphaLeaderSA {
 
 		@Override
 		public String getDescription() {
-			return UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getOtherTarget()),
+			return UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getOtherTarget()),
 					"Focusing [npc.her] attention on [npc3.name], [npc.name] pushes the cum-coated tip of [npc.her] [npc.cock+] up against [npc3.her] [npc3.lips+],"
 						+ " before roughly slamming [npc.her] hips forwards and hilting it fully down [npc3.her] throat."
 					+ " Letting out a deep groan as [npc.she] feels [npc3.namePos] [npc3.lips] bump up against the base of [npc.her] cock, [npc.she] growls,"

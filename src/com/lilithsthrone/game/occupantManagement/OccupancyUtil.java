@@ -391,7 +391,7 @@ public class OccupancyUtil implements XMLSaving {
 						slave,
 						null,
 						SlaveEvent.WASHED_CLOTHES,
-						Util.newArrayListOfValues(SlaveEventTag.WASHED_CLOTHES),
+						List.of(SlaveEventTag.WASHED_CLOTHES),
 						true));
 			}
 			
@@ -708,16 +708,14 @@ public class OccupancyUtil implements XMLSaving {
 						if(!milkingSold.isEmpty()) {
 							events.add(new SlaveryEventLogEntry(hour, slave, null,
 									SlaveEvent.JOB_MILK_MILKED,
-									Util.newArrayListOfValues(
-											SlaveEventTag.JOB_MILK_SOLD),
+									List.of(SlaveEventTag.JOB_MILK_SOLD),
 									milkingSold,
 									true));
 						}
 						if(!milkingStored.isEmpty()) {
 							events.add(new SlaveryEventLogEntry(hour, slave, null,
 									SlaveEvent.JOB_MILK_MILKED,
-									Util.newArrayListOfValues(
-											SlaveEventTag.JOB_MILK_STORED),
+									List.of(SlaveEventTag.JOB_MILK_STORED),
 									milkingStored,
 									true));
 						}
@@ -731,10 +729,8 @@ public class OccupancyUtil implements XMLSaving {
 							slave.incrementAffection(Main.game.getNpc(Lilaya.class), 5);
 							events.add(new SlaveryEventLogEntry(hour, slave, null,
 									SlaveEvent.JOB_TEST_SUBJECT,
-									Util.newArrayListOfValues(
-											SlaveEventTag.JOB_LILAYA_INTRUSIVE_TESTING),
-									Util.newArrayListOfValues(
-                      "[style.boldGood(+1)] [style.boldAffection(Affection)]",
+									List.of(SlaveEventTag.JOB_LILAYA_INTRUSIVE_TESTING),
+									List.of("[style.boldGood(+1)] [style.boldAffection(Affection)]",
 											"[style.boldGood(+5)] [style.boldAffection(Affection towards Lilaya)]"),
 									true));
 
@@ -745,10 +741,8 @@ public class OccupancyUtil implements XMLSaving {
 							slave.incrementAffection(Main.game.getNpc(Lilaya.class), -5);
 							events.add(new SlaveryEventLogEntry(hour, slave, null,
 									SlaveEvent.JOB_TEST_SUBJECT,
-									Util.newArrayListOfValues(
-											SlaveEventTag.JOB_LILAYA_INTRUSIVE_TESTING),
-									Util.newArrayListOfValues(
-											"[style.boldBad(-1)] [style.boldAffection(Affection)]",
+									List.of(SlaveEventTag.JOB_LILAYA_INTRUSIVE_TESTING),
+									List.of("[style.boldBad(-1)] [style.boldAffection(Affection)]",
 											"[style.boldBad(-5)] [style.boldAffection(Affection towards Lilaya)]"),
 									true));
 							return events;
@@ -784,7 +778,7 @@ public class OccupancyUtil implements XMLSaving {
 								}
 								events.add(new SlaveryEventLogEntry(hour, slave, null,
 										SlaveEvent.JOB_TEST_SUBJECT,
-										Util.newArrayListOfValues(tag),
+										List.of(tag),
 										list,
 										true));
 								return events;
@@ -816,7 +810,7 @@ public class OccupancyUtil implements XMLSaving {
 								}
 								events.add(new SlaveryEventLogEntry(hour, slave, null,
 										SlaveEvent.JOB_TEST_SUBJECT,
-										Util.newArrayListOfValues(mascTag),
+										List.of(mascTag),
 										list2,
 										true));
 								return events;
@@ -952,8 +946,7 @@ public class OccupancyUtil implements XMLSaving {
 						
 						events.add(new SlaveryEventLogEntry(hour, slave, null,
 								SlaveEvent.JOB_PUBLIC_STOCKS,
-								Util.newArrayListOfValues(
-										SlaveEventTag.JOB_STOCKS_USED),
+								List.of(SlaveEventTag.JOB_STOCKS_USED),
 								effects,
 								true));
 					}
@@ -1177,8 +1170,7 @@ public class OccupancyUtil implements XMLSaving {
 
 					events.add(new SlaveryEventLogEntry(hour, slave, null,
 							SlaveEvent.JOB_PROSTITUTE,
-							Util.newArrayListOfValues(
-									SlaveEventTag.JOB_PROSTITUTE_USED),
+							List.of(SlaveEventTag.JOB_PROSTITUTE_USED),
 							effects,
 							true));
 					return events;
@@ -1497,50 +1489,50 @@ public class OccupancyUtil implements XMLSaving {
 		
 		switch(currentJob) {
 			case CLEANING:
-				descriptions = Util.newArrayListOfValues(UtilText.parse(slave, npc,
+				descriptions = List.of(UtilText.parse(slave, npc,
 								"While dusting one of the first-floor corridors, [npc1.name] caught sight of [npc2.name],"
 								+ " and couldn't resist pulling [npc2.herHim] into an empty room for some "+paceName+" sex.")
 								+ "<br/>[style.italicsSex("+sexDescription+")]");
 				break;
 			case IDLE:
-				descriptions = Util.newArrayListOfValues(UtilText.parse(slave, npc,
+				descriptions = List.of(UtilText.parse(slave, npc,
 								"[npc1.name] had some "+paceName+" fun with [npc2.name].")
 								+ "<br/>[style.italicsSex("+sexDescription+")]");
 				break;
 			case KITCHEN:
-				descriptions = Util.newArrayListOfValues(UtilText.parse(slave, npc,
+				descriptions = List.of(UtilText.parse(slave, npc,
 								"While working in the kitchen, [npc1.name] saw [npc2.name] enter the pantry alone,"
 										+ " and couldn't resist following [npc2.herHim] inside, before locking the door and having some "+paceName+" sex with [npc2.herHim].")
 								+ "<br/>[style.italicsSex("+sexDescription+")]");
 				break;
 			case LAB_ASSISTANT: case TEST_SUBJECT:
-				descriptions = Util.newArrayListOfValues(UtilText.parse(slave, npc,
+				descriptions = List.of(UtilText.parse(slave, npc,
 								"When Lilaya left to take a break, [npc1.name] used the opportunity to have some "+paceName+" sex with [npc2.name] on one of the lab's tables.")
 								+ "<br/>[style.italicsSex("+sexDescription+")]");
 				break;
 			case LIBRARY:
-				descriptions = Util.newArrayListOfValues(UtilText.parse(slave, npc,
+				descriptions = List.of(UtilText.parse(slave, npc,
 								"[npc1.Name] pulled [npc2.name] behind one of the shelves in the Library, before having some "+paceName+" sex with [npc2.herHim].")
 								+ "<br/>[style.italicsSex("+sexDescription+")]");
 				break;
 			case OFFICE:
-				descriptions = Util.newArrayListOfValues(UtilText.parse(slave, npc,
+				descriptions = List.of(UtilText.parse(slave, npc,
 								"Taking a small break from the paperwork assigned to [npc.herHim],"
 								+ " [npc.name] pushed [npc2.name] down over [npc.her] desk and had some "+paceName+" sex with [npc2.herHim].")
 								+ "<br/>[style.italicsSex("+sexDescription+")]");
 				break;
 			case BEDROOM:
-				descriptions = Util.newArrayListOfValues(UtilText.parse(slave, npc,
+				descriptions = List.of(UtilText.parse(slave, npc,
 								"[npc1.Name] took advantage of being in your bedroom with [npc2.name], and had some "+paceName+" sex with [npc2.herHim].")
 								+ "<br/>[style.italicsSex("+sexDescription+")]");
 				break;
 			case SPA:
-				descriptions = Util.newArrayListOfValues(UtilText.parse(slave, npc,
+				descriptions = List.of(UtilText.parse(slave, npc,
 								"[npc1.Name] took advantage of being in the spa with [npc2.name], and had some "+paceName+" sex with [npc2.herHim].")
 								+ "<br/>[style.italicsSex("+sexDescription+")]");
 				break;
 			case SPA_RECEPTIONIST:
-				descriptions = Util.newArrayListOfValues(UtilText.parse(slave, npc,
+				descriptions = List.of(UtilText.parse(slave, npc,
 								"[npc1.Name] took advantage of being assigned to the spa's reception desk with [npc2.name], and had some "+paceName+" sex with [npc2.herHim].")
 								+ "<br/>[style.italicsSex("+sexDescription+")]");
 				break;
@@ -1565,7 +1557,7 @@ public class OccupancyUtil implements XMLSaving {
 			}
 			return new SlaveryEventLogEntry(hourOfDay,
 					slave,
-					Util.newArrayListOfValues(npc.getId()),
+					List.of(npc.getId()),
 					SlaveEvent.SLAVE_SEX,
 					null,
 					descriptions,
@@ -1669,7 +1661,7 @@ public class OccupancyUtil implements XMLSaving {
 						if(!descriptions.isEmpty()) {
 							return new SlaveryEventLogEntry(hour,
 									slave,
-									Util.newArrayListOfValues(npc.getId()),
+									List.of(npc.getId()),
 									SlaveEvent.SLAVE_BONDING,
 									null,
 									descriptions,

@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.sex.positions;
 
+import java.util.List;
 import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
@@ -26,8 +27,7 @@ public class StandardSexActionInteractions {
 	
 	public static SexActionInteractions spectator = new SexActionInteractions(
 		null,
-		Util.newArrayListOfValues(
-				OrgasmCumTarget.SELF_STOMACH,
+		List.of(OrgasmCumTarget.SELF_STOMACH,
 				OrgasmCumTarget.SELF_GROIN,
 				OrgasmCumTarget.SELF_LEGS,
 				OrgasmCumTarget.SELF_FEET,
@@ -43,8 +43,7 @@ public class StandardSexActionInteractions {
 				return new Value<>(performerSlot, Util.newHashMapOfValues(new Value<>(targetSlot,
 						new SexActionInteractions(
 						null,
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_STOMACH,
+						List.of(OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_FEET,
@@ -52,7 +51,7 @@ public class StandardSexActionInteractions {
 								OrgasmCumTarget.SELF_FACE,
 								OrgasmCumTarget.SELF_BREASTS,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues()))));
+						List.of()))));
 			}
 	};
 	
@@ -94,15 +93,13 @@ public class StandardSexActionInteractions {
 								SexActionPresets.kissing,
 								SexActionPresets.mouthToBreasts,
 								SexActionPresets.breastsToMouth),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.STOMACH,
+						List.of(OrgasmCumTarget.STOMACH,
 								!target.isTaur() && !performer.isTaur()
 									?OrgasmCumTarget.GROIN
 									:null,
 								OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.STOMACH,
+						List.of(OrgasmCumTarget.STOMACH,
 								!target.isTaur() && !performer.isTaur()
 									?OrgasmCumTarget.GROIN
 									:null,
@@ -135,11 +132,9 @@ public class StandardSexActionInteractions {
 								SexActionPresets.kissing,
 								SexActionPresets.mouthToBreasts,
 								SexActionPresets.breastsToMouth),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_LEGS,
+						List.of(OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_LEGS,
+						List.of(OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.FLOOR)))));
 			}
 	};
@@ -179,16 +174,14 @@ public class StandardSexActionInteractions {
 									:Util.mergeMaps(
 											SexActionPresets.appendagesToLowerHalf,
 											SexActionPresets.allAreasToTailAndTentacle)),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.BACK,
+					List.of(OrgasmCumTarget.BACK,
 							target.isTaur() && !performer.isTaur()
 								?OrgasmCumTarget.GROIN
 								:null,
 							OrgasmCumTarget.ASS,
 							OrgasmCumTarget.LEGS,
 							OrgasmCumTarget.FLOOR),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.FLOOR)))));
+					List.of(OrgasmCumTarget.FLOOR)))));
 		}
 	};
 
@@ -212,15 +205,13 @@ public class StandardSexActionInteractions {
 									:null,
 								SexActionPresets.groinToFeet,
 								SexActionPresets.mouthToFeet),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FEET,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_FEET,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FACE,
+						List.of(OrgasmCumTarget.FACE,
 								OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.STOMACH,
@@ -244,15 +235,13 @@ public class StandardSexActionInteractions {
 									:SexActionPresets.mouthToTailAndTentacle,
 								SexActionPresets.groinToFeet,
 								SexActionPresets.mouthToFeet),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FEET,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_FEET,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR)))));
+						List.of(OrgasmCumTarget.FLOOR)))));
 			}
 	};
 
@@ -272,15 +261,13 @@ public class StandardSexActionInteractions {
 									!target.isTaur()
 										?SexActionPresets.mouthToAppendages
 										:SexActionPresets.mouthToTailAndTentacle),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.LEGS,
+							List.of(OrgasmCumTarget.LEGS,
 									OrgasmCumTarget.FEET,
 									OrgasmCumTarget.SELF_LEGS,
 									OrgasmCumTarget.SELF_GROIN,
 									OrgasmCumTarget.SELF_FEET,
 									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.WALL,
+							List.of(OrgasmCumTarget.WALL,
 									OrgasmCumTarget.FLOOR)))));
 				}
 				if(target.isSizeDifferenceShorterThan(performer)) { // If significantly shorter, they're basically standing to perform oral.
@@ -298,11 +285,9 @@ public class StandardSexActionInteractions {
 										?SexActionPresets.fingerToLowerHalf
 										:null,
 									SexActionPresets.mouthToAppendages),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.WALL,
+							List.of(OrgasmCumTarget.WALL,
 									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.ASS,
+							List.of(OrgasmCumTarget.ASS,
 									OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.LEGS,
 									OrgasmCumTarget.WALL,
@@ -336,14 +321,12 @@ public class StandardSexActionInteractions {
 											?Util.mergeMaps(
 												SexActionPresets.crotchBoobsToAppendages)
 											:null)),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.ASS,
+						List.of(OrgasmCumTarget.ASS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.WALL,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.WALL,
+						List.of(OrgasmCumTarget.WALL,
 								OrgasmCumTarget.FLOOR)))));
 			}
 	};
@@ -388,16 +371,14 @@ public class StandardSexActionInteractions {
 											?SexActionPresets.groinToCrotchBoobs
 											:null))
 									:null),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.STOMACH,
+						List.of(OrgasmCumTarget.STOMACH,
 								!target.isTaur() && !performer.isTaur()
 									?OrgasmCumTarget.GROIN
 									:null,
 								OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.WALL,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.STOMACH,
+						List.of(OrgasmCumTarget.STOMACH,
 								!target.isTaur() && !performer.isTaur()
 									?OrgasmCumTarget.GROIN
 									:null,
@@ -423,14 +404,12 @@ public class StandardSexActionInteractions {
 								SexActionPresets.groinToGroin,
 								SexActionPresets.groinToCrotchBoobs,
 								SexActionPresets.penisToAss),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.BREASTS,
+						List.of(OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.STOMACH,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.STOMACH,
+						List.of(OrgasmCumTarget.STOMACH,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.SELF_GROIN,
@@ -454,14 +433,12 @@ public class StandardSexActionInteractions {
 								SexActionPresets.vaginaToVagina,
 								SexActionPresets.penisToVagina,
 								SexActionPresets.penisToThighs),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.BACK,
+						List.of(OrgasmCumTarget.BACK,
 								OrgasmCumTarget.ASS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_LEGS,
+						List.of(OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.FLOOR)))));
 			}
 	};
@@ -483,13 +460,11 @@ public class StandardSexActionInteractions {
 								SexActionPresets.fingerToLowerHalf,
 								SexActionPresets.mouthToAppendages,
 								SexActionPresets.upperHalfToAppendages),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_LEGS,
+						List.of(OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FACE,
+						List.of(OrgasmCumTarget.FACE,
 								OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.FLOOR,
@@ -506,10 +481,8 @@ public class StandardSexActionInteractions {
 								SexActionPresets.kissing,
 								SexActionPresets.appendagesToUpperHalf,
 								SexActionPresets.upperHalfToAppendages),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR)))));
+						List.of(OrgasmCumTarget.FLOOR),
+						List.of(OrgasmCumTarget.FLOOR)))));
 			}
 	};
 	
@@ -530,14 +503,12 @@ public class StandardSexActionInteractions {
 							!performer.isTaur()
 								?SexActionPresets.vaginaToVagina
 								:null),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.ASS,
+					List.of(OrgasmCumTarget.ASS,
 							OrgasmCumTarget.GROIN,
 							OrgasmCumTarget.BACK,
 							OrgasmCumTarget.LEGS,
 							OrgasmCumTarget.FLOOR),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.FLOOR)))));
+					List.of(OrgasmCumTarget.FLOOR)))));
 		}
 	};
 
@@ -556,14 +527,12 @@ public class StandardSexActionInteractions {
 							!performer.isTaur()
 								?SexActionPresets.vaginaToVagina
 								:null),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.ASS,
+					List.of(OrgasmCumTarget.ASS,
 							OrgasmCumTarget.GROIN,
 							OrgasmCumTarget.BACK,
 							OrgasmCumTarget.LEGS,
 							OrgasmCumTarget.FLOOR),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.FLOOR)))));
+					List.of(OrgasmCumTarget.FLOOR)))));
 		}
 	};
 	
@@ -575,10 +544,8 @@ public class StandardSexActionInteractions {
 					Util.mergeMaps(
 							SexActionPresets.vaginaToPenis,
 							SexActionPresets.assToPenis),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.FLOOR),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.ASS,
+					List.of(OrgasmCumTarget.FLOOR),
+					List.of(OrgasmCumTarget.ASS,
 							OrgasmCumTarget.GROIN,
 							OrgasmCumTarget.BACK,
 							OrgasmCumTarget.LEGS,
@@ -605,15 +572,13 @@ public class StandardSexActionInteractions {
 								SexActionPresets.appendagesToLowerHalf,
 								SexActionPresets.groinToFeet,
 								SexActionPresets.mouthToFeet),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FEET,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_FEET,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FACE,
+						List.of(OrgasmCumTarget.FACE,
 								OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.STOMACH,
@@ -631,10 +596,8 @@ public class StandardSexActionInteractions {
 								SexActionPresets.mouthToLowerHalf,
 								SexActionPresets.mouthToCrotchBoobs,
 								SexActionPresets.upperHalfToAppendages),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FACE,
+						List.of(OrgasmCumTarget.FLOOR),
+						List.of(OrgasmCumTarget.FACE,
 								OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.FLOOR,
@@ -665,14 +628,12 @@ public class StandardSexActionInteractions {
 								isAbleToReachTargetUpperTorso
 									?SexActionPresets.fingerToUpperTorso
 									:null),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.ASS,
+						List.of(OrgasmCumTarget.ASS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.BACK,
 								OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR)))));
+						List.of(OrgasmCumTarget.FLOOR)))));
 			}
 	};
 	
@@ -698,14 +659,12 @@ public class StandardSexActionInteractions {
 							isAbleToReachTargetUpperTorso
 								?SexActionPresets.fingerToUpperTorso
 								:null),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.ASS,
+					List.of(OrgasmCumTarget.ASS,
 							OrgasmCumTarget.GROIN,
 							OrgasmCumTarget.BACK,
 							OrgasmCumTarget.LEGS,
 							OrgasmCumTarget.FLOOR),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.FLOOR)))));
+					List.of(OrgasmCumTarget.FLOOR)))));
 		}
 	};
 	
@@ -718,10 +677,8 @@ public class StandardSexActionInteractions {
 								SexActionPresets.fingerToUpperTorso,
 								SexActionPresets.kissing,
 								SexActionPresets.upperHalfToFinger),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR)))));
+						List.of(OrgasmCumTarget.FLOOR),
+						List.of(OrgasmCumTarget.FLOOR)))));
 			}
 	};
 
@@ -746,14 +703,12 @@ public class StandardSexActionInteractions {
 								isAbleToReachTargetUpperTorso
 									?SexActionPresets.fingerToUpperTorso
 									:null),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.ASS,
+						List.of(OrgasmCumTarget.ASS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.BACK,
 								OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR)))));
+						List.of(OrgasmCumTarget.FLOOR)))));
 			}
 	};
 	
@@ -766,12 +721,10 @@ public class StandardSexActionInteractions {
 					Util.mergeMaps(
 							SexActionPresets.groinToFeet,
 							SexActionPresets.mouthToFeet),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.LEGS,
+					List.of(OrgasmCumTarget.LEGS,
 							OrgasmCumTarget.FEET,
 							OrgasmCumTarget.FLOOR),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.FLOOR)))));
+					List.of(OrgasmCumTarget.FLOOR)))));
 		}
 	};
 
@@ -797,11 +750,9 @@ public class StandardSexActionInteractions {
 											SexActionPresets.fingerToLowerHalf)
 									:null,
 								SexActionPresets.mouthToFeet),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_LEGS,
+						List.of(OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FACE,
+						List.of(OrgasmCumTarget.FACE,
 								OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.BACK,
 								OrgasmCumTarget.FLOOR,
@@ -828,11 +779,9 @@ public class StandardSexActionInteractions {
 									?SexActionPresets.fingerToLowerHalf
 									:null,
 								SexActionPresets.mouthToFeet),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_LEGS,
+						List.of(OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR)))));
+						List.of(OrgasmCumTarget.FLOOR)))));
 			}
 	};
 	
@@ -843,8 +792,7 @@ public class StandardSexActionInteractions {
 						new SexActionInteractions(
 						Util.mergeMaps(
 								SexActionPresets.kissing),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR),
+						List.of(OrgasmCumTarget.FLOOR),
 						null))));
 			}
 	};
@@ -867,8 +815,7 @@ public class StandardSexActionInteractions {
 								isAbleToReachTargetUpperTorso
 									?SexActionPresets.fingerToUpperTorso
 									:null),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.ASS,
+						List.of(OrgasmCumTarget.ASS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.BACK,
 								OrgasmCumTarget.LEGS,
@@ -907,15 +854,13 @@ public class StandardSexActionInteractions {
 									SexActionPresets.breastsToMouth,
 									SexActionPresets.vaginaToPenis,
 									SexActionPresets.assToGroin),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.LEGS,
+							List.of(OrgasmCumTarget.LEGS,
 									OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.STOMACH,
 									OrgasmCumTarget.BREASTS,
 									OrgasmCumTarget.SELF_LEGS,
 									OrgasmCumTarget.SELF_GROIN),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.LEGS,
+							List.of(OrgasmCumTarget.LEGS,
 									OrgasmCumTarget.ASS,
 									OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.STOMACH,
@@ -929,11 +874,9 @@ public class StandardSexActionInteractions {
 									SexActionPresets.vaginaToPenis,
 									SexActionPresets.vaginaToVagina,
 									SexActionPresets.assToGroin),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.SELF_LEGS,
+							List.of(OrgasmCumTarget.SELF_LEGS,
 									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.LEGS,
+							List.of(OrgasmCumTarget.LEGS,
 									OrgasmCumTarget.ASS,
 									OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.STOMACH,
@@ -954,15 +897,13 @@ public class StandardSexActionInteractions {
 								SexActionPresets.appendagesToAllAreas,
 								SexActionPresets.allAreasToAppendages,
 								SexActionPresets.vaginaToPenis),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.STOMACH,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_GROIN),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.STOMACH,
 								OrgasmCumTarget.BREASTS,
@@ -981,11 +922,9 @@ public class StandardSexActionInteractions {
 								SexActionPresets.appendagesToAllAreas,
 								SexActionPresets.allAreasToAppendages,
 								SexActionPresets.assToPenis),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_LEGS,
+						List.of(OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_GROIN),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.BACK,
 								OrgasmCumTarget.SELF_LEGS,
@@ -1020,15 +959,13 @@ public class StandardSexActionInteractions {
 								SexActionPresets.vaginaToPenis,
 								SexActionPresets.assToGroin,
 								SexActionPresets.penisToBreasts),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.STOMACH,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_GROIN),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.ASS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.STOMACH,
@@ -1042,14 +979,12 @@ public class StandardSexActionInteractions {
 								SexActionPresets.vaginaToPenis,
 								SexActionPresets.vaginaToVagina,
 								SexActionPresets.assToGroin),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.STOMACH,
+						List.of(OrgasmCumTarget.STOMACH,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.FACE,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.ARMPITS),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.ASS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.SELF_STOMACH,
@@ -1074,13 +1009,11 @@ public class StandardSexActionInteractions {
 								SexActionPresets.vaginaToPenis,
 								SexActionPresets.assToGroin,
 								SexActionPresets.feetToMouth),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_GROIN),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.ASS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.STOMACH,
@@ -1094,12 +1027,10 @@ public class StandardSexActionInteractions {
 								SexActionPresets.vaginaToPenis,
 								SexActionPresets.vaginaToVagina,
 								SexActionPresets.assToGroin),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.SELF_LEGS),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.ASS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.SELF_STOMACH,
@@ -1121,15 +1052,13 @@ public class StandardSexActionInteractions {
 									SexActionPresets.assToMouth,
 									SexActionPresets.groinToMouth,
 									SexActionPresets.appendagesToUpperHalf),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FACE,
+							List.of(OrgasmCumTarget.FACE,
 									OrgasmCumTarget.HAIR,
 									OrgasmCumTarget.SELF_GROIN,
 									OrgasmCumTarget.SELF_LEGS,
 									OrgasmCumTarget.FLOOR,
 									OrgasmCumTarget.ARMPITS),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.SELF_STOMACH,
+							List.of(OrgasmCumTarget.SELF_STOMACH,
 									OrgasmCumTarget.SELF_LEGS,
 									OrgasmCumTarget.FLOOR)))));
 				} else {
@@ -1138,14 +1067,12 @@ public class StandardSexActionInteractions {
 							Util.mergeMaps(
 									SexActionPresets.assToMouth,
 									SexActionPresets.groinToMouth),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FACE,
+							List.of(OrgasmCumTarget.FACE,
 									OrgasmCumTarget.HAIR,
 									OrgasmCumTarget.SELF_LEGS,
 									OrgasmCumTarget.FLOOR,
 									OrgasmCumTarget.ARMPITS),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.SELF_STOMACH,
+							List.of(OrgasmCumTarget.SELF_STOMACH,
 									OrgasmCumTarget.SELF_LEGS,
 									OrgasmCumTarget.FLOOR)))));
 				}
@@ -1165,16 +1092,14 @@ public class StandardSexActionInteractions {
 								SexActionPresets.groinToMouth,
 								SexActionPresets.appendagesToAllAreas,
 								SexActionPresets.feetToGroin),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FACE,
+						List.of(OrgasmCumTarget.FACE,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.STOMACH,
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.FLOOR,
 								OrgasmCumTarget.ARMPITS),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_STOMACH,
+						List.of(OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.FLOOR)))));
 				} else {
@@ -1183,15 +1108,13 @@ public class StandardSexActionInteractions {
 							Util.mergeMaps(
 									SexActionPresets.assToMouth,
 									SexActionPresets.groinToMouth),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FACE,
+							List.of(OrgasmCumTarget.FACE,
 									OrgasmCumTarget.BREASTS,
 									OrgasmCumTarget.STOMACH,
 									OrgasmCumTarget.SELF_LEGS,
 									OrgasmCumTarget.FLOOR,
 									OrgasmCumTarget.ARMPITS),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.SELF_STOMACH,
+							List.of(OrgasmCumTarget.SELF_STOMACH,
 									OrgasmCumTarget.SELF_LEGS,
 									OrgasmCumTarget.FLOOR)))));
 				}
@@ -1214,15 +1137,13 @@ public class StandardSexActionInteractions {
 								SexActionPresets.tailToUpperTorso,
 								SexActionPresets.tentacleToUpperTorso,
 								SexActionPresets.fingerToLowerHalf),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FACE,
+						List.of(OrgasmCumTarget.FACE,
 								OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.STOMACH,
 								OrgasmCumTarget.FLOOR,
 								OrgasmCumTarget.ARMPITS),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FACE,
+						List.of(OrgasmCumTarget.FACE,
 								OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.FLOOR,
@@ -1249,15 +1170,13 @@ public class StandardSexActionInteractions {
 									SexActionPresets.tentacleToLowerHalf,
 									SexActionPresets.appendagesToAllAreas,
 									SexActionPresets.mouthToFeet),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.ASS,
+							List.of(OrgasmCumTarget.ASS,
 									OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.STOMACH,
 									OrgasmCumTarget.BREASTS,
 									OrgasmCumTarget.LEGS,
 									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.GROIN,
+							List.of(OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.SELF_FACE,
 									OrgasmCumTarget.SELF_BREASTS,
 									OrgasmCumTarget.SELF_STOMACH,
@@ -1273,14 +1192,12 @@ public class StandardSexActionInteractions {
 									performer.isTaur()
 										?null
 										:SexActionPresets.appendagesToLowerHalf),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.ASS,
+							List.of(OrgasmCumTarget.ASS,
 									OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.STOMACH,
 									OrgasmCumTarget.LEGS,
 									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.GROIN,
+							List.of(OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.SELF_FACE,
 									OrgasmCumTarget.SELF_BREASTS,
 									OrgasmCumTarget.SELF_STOMACH,
@@ -1304,15 +1221,13 @@ public class StandardSexActionInteractions {
 									SexActionPresets.tailToLowerHalf,
 									SexActionPresets.tentacleToLowerHalf,
 									SexActionPresets.appendagesToAllAreas),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.ASS,
+							List.of(OrgasmCumTarget.ASS,
 									OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.STOMACH,
 									OrgasmCumTarget.BREASTS,
 									OrgasmCumTarget.LEGS,
 									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.GROIN,
+							List.of(OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.SELF_FACE,
 									OrgasmCumTarget.SELF_BREASTS,
 									OrgasmCumTarget.SELF_STOMACH,
@@ -1327,14 +1242,12 @@ public class StandardSexActionInteractions {
 									SexActionPresets.tailToLowerHalf,
 									SexActionPresets.tentacleToLowerHalf,
 									SexActionPresets.appendagesToLowerHalf),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.ASS,
+							List.of(OrgasmCumTarget.ASS,
 									OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.STOMACH,
 									OrgasmCumTarget.LEGS,
 									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.GROIN,
+							List.of(OrgasmCumTarget.GROIN,
 									OrgasmCumTarget.SELF_FACE,
 									OrgasmCumTarget.SELF_BREASTS,
 									OrgasmCumTarget.SELF_STOMACH,
@@ -1354,12 +1267,10 @@ public class StandardSexActionInteractions {
 								SexActionPresets.lowerHalfToAppendages,
 								SexActionPresets.mouthToFeet,
 								SexActionPresets.feetToMouth),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_STOMACH,
+						List.of(OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_STOMACH,
+						List.of(OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.FLOOR)))));
 			}
@@ -1374,16 +1285,14 @@ public class StandardSexActionInteractions {
 								SexActionPresets.appendagesToAllAreas,
 								SexActionPresets.upperHalfToAppendages,
 								SexActionPresets.breastsToMouth),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.HAIR,
+						List.of(OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.FACE,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.FLOOR,
 								OrgasmCumTarget.ARMPITS),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_STOMACH,
+						List.of(OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.FLOOR)))));
 			}
 	};
@@ -1409,15 +1318,13 @@ public class StandardSexActionInteractions {
 									:SexActionPresets.mouthToTailAndTentacle,
 								SexActionPresets.groinToFeet,
 								SexActionPresets.mouthToFeet),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FEET,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_FEET,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_GROIN,
+						List.of(OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.FLOOR)))));
 			}
@@ -1432,8 +1339,7 @@ public class StandardSexActionInteractions {
 								SexActionPresets.kissing,
 								SexActionPresets.upperHalfToAppendages,
 								SexActionPresets.appendagesToUpperHalf),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR),
+						List.of(OrgasmCumTarget.FLOOR),
 						null))));
 			}
 	};
@@ -1449,19 +1355,15 @@ public class StandardSexActionInteractions {
 							Util.mergeMaps(
 									SexActionPresets.fingerToLowerHalf,
 									SexActionPresets.fingerToUpperTorso),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR)))));
+							List.of(OrgasmCumTarget.FLOOR),
+							List.of(OrgasmCumTarget.FLOOR)))));
 				} else {
 					return new Value<>(performerSlot, Util.newHashMapOfValues(new Value<>(targetSlot,
 							new SexActionInteractions(
 							Util.mergeMaps(
 									SexActionPresets.appendagesToLowerHalf),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR)))));
+							List.of(OrgasmCumTarget.FLOOR),
+							List.of(OrgasmCumTarget.FLOOR)))));
 				}
 			}
 	};
@@ -1480,20 +1382,16 @@ public class StandardSexActionInteractions {
 									SexActionPresets.fingerToUpperTorso,
 									SexActionPresets.groinToAss,
 									SexActionPresets.penisToVagina),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR)))));
+							List.of(OrgasmCumTarget.FLOOR),
+							List.of(OrgasmCumTarget.FLOOR)))));
 				} else {
 					return new Value<>(performerSlot, Util.newHashMapOfValues(new Value<>(targetSlot,
 							new SexActionInteractions(
 							Util.mergeMaps(
 									SexActionPresets.groinToAss,
 									SexActionPresets.penisToVagina),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR)))));
+							List.of(OrgasmCumTarget.FLOOR),
+							List.of(OrgasmCumTarget.FLOOR)))));
 				}
 			}
 	};
@@ -1512,19 +1410,15 @@ public class StandardSexActionInteractions {
 									SexActionPresets.kissing,
 									SexActionPresets.lowerHalfToFinger,
 									SexActionPresets.upperHalfToFinger),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR)))));
+							List.of(OrgasmCumTarget.FLOOR),
+							List.of(OrgasmCumTarget.FLOOR)))));
 				} else {
 					return new Value<>(performerSlot, Util.newHashMapOfValues(new Value<>(targetSlot,
 							new SexActionInteractions(
 							Util.mergeMaps(
 									SexActionPresets.appendagesToLowerHalf),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR),
-							Util.newArrayListOfValues(
-									OrgasmCumTarget.FLOOR)))));
+							List.of(OrgasmCumTarget.FLOOR),
+							List.of(OrgasmCumTarget.FLOOR)))));
 				}
 			}
 	};
@@ -1538,10 +1432,8 @@ public class StandardSexActionInteractions {
 								SexActionPresets.kissing,
 								SexActionPresets.upperHalfToAppendages,
 								SexActionPresets.appendagesToUpperHalf),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR)))));
+						List.of(OrgasmCumTarget.FLOOR),
+						List.of(OrgasmCumTarget.FLOOR)))));
 			}
 	};
 	
@@ -1554,8 +1446,7 @@ public class StandardSexActionInteractions {
 								SexActionPresets.kissing,
 								SexActionPresets.allAreasToAppendages,
 								SexActionPresets.appendagesToAllAreas),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR),
+						List.of(OrgasmCumTarget.FLOOR),
 						null))));
 			}
 	};
@@ -1567,16 +1458,14 @@ public class StandardSexActionInteractions {
 						new SexActionInteractions(
 						Util.mergeMaps(
 								SexActionPresets.lowerHalfToAppendages),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.HAIR,
+						List.of(OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.FACE,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FEET,
 								OrgasmCumTarget.ARMPITS),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_STOMACH,
+						List.of(OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.FLOOR)))));
 			}
 	};
@@ -1589,16 +1478,14 @@ public class StandardSexActionInteractions {
 						Util.mergeMaps(
 								SexActionPresets.groinToMouth,
 								SexActionPresets.lowerHalfToAppendages),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.HAIR,
+						List.of(OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.FACE,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FEET,
 								OrgasmCumTarget.ARMPITS),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_STOMACH,
+						List.of(OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.FLOOR)))));
 			}
 	};
@@ -1612,10 +1499,8 @@ public class StandardSexActionInteractions {
 						new SexActionInteractions(
 						Util.mergeMaps(
 								SexActionPresets.handHolding),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR)))));
+						List.of(OrgasmCumTarget.FLOOR),
+						List.of(OrgasmCumTarget.FLOOR)))));
 			}
 	};
 	
@@ -1629,17 +1514,14 @@ public class StandardSexActionInteractions {
 							SexActionPresets.groinToGroin,
 							SexActionPresets.groinToAss,
 							SexActionPresets.allAreasToTailAndTentacle),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.ASS,
+					List.of(OrgasmCumTarget.ASS,
 							OrgasmCumTarget.GROIN,
 							OrgasmCumTarget.LEGS,
 							OrgasmCumTarget.FEET,
 							OrgasmCumTarget.FLOOR),
 					targetSlot==SexSlotBreedingStall.BREEDING_STALL_FRONT
-						?Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR)
-						:Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_STOMACH,
+						?List.of(OrgasmCumTarget.FLOOR)
+						:List.of(OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.GROIN,
 								OrgasmCumTarget.STOMACH,
@@ -1669,15 +1551,13 @@ public class StandardSexActionInteractions {
 								SexActionPresets.groinToFeet,
 								SexActionPresets.assToGroin,
 								SexActionPresets.groinToGroin),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.LEGS,
+						List.of(OrgasmCumTarget.LEGS,
 								OrgasmCumTarget.FEET,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_FEET,
 								OrgasmCumTarget.FLOOR),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.FACE,
+						List.of(OrgasmCumTarget.FACE,
 								OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.STOMACH,
@@ -1707,16 +1587,13 @@ public class StandardSexActionInteractions {
 								SexActionPresets.mouthToVagina,
 								SexActionPresets.fingerToVagina
 								),
-						Util.newArrayListOfValues(
-								OrgasmCumTarget.SELF_STOMACH,
+						List.of(OrgasmCumTarget.SELF_STOMACH,
 								OrgasmCumTarget.SELF_GROIN,
 								OrgasmCumTarget.SELF_LEGS,
 								OrgasmCumTarget.FLOOR),
 						target.isTaur()
-							?Util.newArrayListOfValues(
-								OrgasmCumTarget.FLOOR)
-							:Util.newArrayListOfValues(
-								OrgasmCumTarget.BREASTS,
+							?List.of(OrgasmCumTarget.FLOOR)
+							:List.of(OrgasmCumTarget.BREASTS,
 								OrgasmCumTarget.HAIR,
 								OrgasmCumTarget.FACE,
 								OrgasmCumTarget.FLOOR,
@@ -1736,11 +1613,9 @@ public class StandardSexActionInteractions {
 								?SexActionPresets.vaginaToPenis
 								:SexActionPresets.vaginaToAppendages
 							),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.SELF_LEGS,
+					List.of(OrgasmCumTarget.SELF_LEGS,
 							OrgasmCumTarget.FLOOR),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.ASS,
+					List.of(OrgasmCumTarget.ASS,
 							OrgasmCumTarget.GROIN,
 							OrgasmCumTarget.LEGS,
 							OrgasmCumTarget.FLOOR)))));
@@ -1759,11 +1634,9 @@ public class StandardSexActionInteractions {
 								?SexActionPresets.assToPenis
 								:SexActionPresets.assToAppendages
 							),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.SELF_LEGS,
+					List.of(OrgasmCumTarget.SELF_LEGS,
 							OrgasmCumTarget.FLOOR),
-					Util.newArrayListOfValues(
-							OrgasmCumTarget.ASS,
+					List.of(OrgasmCumTarget.ASS,
 							OrgasmCumTarget.GROIN,
 							OrgasmCumTarget.LEGS,
 							OrgasmCumTarget.FLOOR)))));

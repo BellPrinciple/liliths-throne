@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -65,8 +67,8 @@ public class ReindeerOverseerDialogue {
 							UtilText.parse(getReindeer(), "Ask [npc.name] if [npc.she]'d like to blow off some steam with you."),
 							true, true,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getReindeer()),
+									List.of(Main.game.getPlayer()),
+									List.of(getReindeer()),
 							null,
 							null) {
 								@Override

@@ -829,9 +829,9 @@ public abstract class AbstractCombatMove {
 
 	public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
     	if(fromExternalFile) {
-        	return Util.newArrayListOfValues(criticalDescription);
+        	return List.of(criticalDescription);
     	}
-    	return Util.newArrayListOfValues("It's the third time being used.");
+    	return List.of("It's the third time being used.");
     }
     
     public boolean canCrit(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
@@ -871,7 +871,7 @@ public abstract class AbstractCombatMove {
     }
 
 	public Colour getColourByDamageType(GameCharacter source) {
-		if (Util.newArrayListOfValues(CombatMoveType.SPELL, CombatMoveType.POWER).contains(type)) {
+		if (List.of(CombatMoveType.SPELL, CombatMoveType.POWER).contains(type)) {
 			return getDamageType(source).getColour();
 		}
 

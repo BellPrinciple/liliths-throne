@@ -139,19 +139,19 @@ public class ZaranixHomeFirstFloor {
 					return new ResponseSex("Use Kelly", "Have some fun with this maid.",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKelly.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(ZaranixMaidKelly.class)),
 							null,
 							null), ZaranixMaidKelly.AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloor", "CORRIDOR_MAID_KELLY_SEX"));
 					
 				} else if(index==2) {
 					return new ResponseSex("Submit",
 							"You can't bring yourself to take the dominant role, but you <i>do</i> want to have sex with Kelly. Perhaps if you submitted, she'd be willing to fuck you?",
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
+							List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKelly.class)),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(ZaranixMaidKelly.class)),
+									List.of(Main.game.getPlayer()),
 							null,
 							null), ZaranixMaidKelly.AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloor", "CORRIDOR_MAID_KELLY_SEX_SUBMIT"));
 					
@@ -338,7 +338,7 @@ public class ZaranixHomeFirstFloor {
 				
 			} else if(index==2) {
 				return new Response("'Thank' Zaranix", "You feel a little sorry for Zaranix. Perhaps you could offer to give him a blowjob as thanks...", ZARANIX_ROOM_EXPLANATION_THANK_ZARANIX,
-						Util.newArrayListOfValues(Fetish.FETISH_ORAL_GIVING), CorruptionLevel.TWO_HORNY, null, null, null) {
+						List.of(Fetish.FETISH_ORAL_GIVING), CorruptionLevel.TWO_HORNY, null, null, null) {
 					@Override
 					public boolean isSexHighlight() {
 						return true;
@@ -377,8 +377,7 @@ public class ZaranixHomeFirstFloor {
 						UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloor", "ZARANIX_ROOM_EXPLANATION_SEXY_THANKS_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 				};
 			} else {

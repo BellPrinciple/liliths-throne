@@ -128,7 +128,7 @@ public class Scarlett extends NPC {
 			
 		} else {
 			PerkManager.initialisePerks(this,
-					Util.newArrayListOfValues(),
+					List.of(),
 					Util.newHashMapOfValues(
 							new Value<>(PerkCategory.PHYSICAL, 5),
 							new Value<>(PerkCategory.LUST, 1),
@@ -474,7 +474,7 @@ public class Scarlett extends NPC {
 	
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(SAScarlett.class);
+		return List.of(SAScarlett.class);
 	}
 	
 	public boolean isLikesPlayer() {

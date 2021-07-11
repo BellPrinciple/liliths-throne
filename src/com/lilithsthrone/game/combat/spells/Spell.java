@@ -61,8 +61,7 @@ public enum Spell {
 			DamageVariance.LOW,
 			75,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.FIREBALL_1,
+			List.of(SpellUpgrade.FIREBALL_1,
 					SpellUpgrade.FIREBALL_2,
 					SpellUpgrade.FIREBALL_3),
 			null, null) {
@@ -101,8 +100,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"By the fires of eternity, I release this seal upon the maelstrom within! Come forth, flames of destruction!",
+											List.of("By the fires of eternity, I release this seal upon the maelstrom within! Come forth, flames of destruction!",
 													"From beyond the veil of flames, I hear the arcane's call! Through me, now is hell unleashed!",
 													"May the dark void shatter the ancient seals which keep the fires of hell itself at bay! Go forth, flaming fury!"),
 											"Summoning a swirling vortex of arcane fire around your [pc.arm], you focus its raw power into a ball of roiling flames before launching it at yourself!",
@@ -169,12 +167,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			50,
 			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.FLASH, 1)),
-			Util.newArrayListOfValues(
-					SpellUpgrade.FLASH_1,
+			List.of(SpellUpgrade.FLASH_1,
 					SpellUpgrade.FLASH_2,
 					SpellUpgrade.FLASH_3),
 			null,
-			Util.newArrayListOfValues("[style.colourExcellent(Dazzles)] the target for [style.colourTerrible(-1)] [style.colourActionPoints(action points)]!")) {
+			List.of("[style.colourExcellent(Dazzles)] the target for [style.colourTerrible(-1)] [style.colourActionPoints(action points)]!")) {
 		
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
@@ -213,8 +210,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Locked away for a thousand years, the powers lying dormant within me have awoken! Now, bear witness to the blinding fury of a universe being born!",
+											List.of("Locked away for a thousand years, the powers lying dormant within me have awoken! Now, bear witness to the blinding fury of a universe being born!",
 													"The light of a million stars are as nothing to the power that I now unleash! May my arcane seals be broken, and blind all who dare stand before me!",
 													"By fury of sun, and gaze of moon, may the heavens themselves bear witness to the power that I now unleash! Gaze upon the end of worlds, and despair!"),
 											"With a flick of your wrist, you summon a blinding flash of light right in front of your own face!",
@@ -277,14 +273,13 @@ public enum Spell {
 			DamageVariance.LOW,
 			50,
 			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.CLOAK_OF_FLAMES, 3)),
-			Util.newArrayListOfValues(
-					SpellUpgrade.CLOAK_OF_FLAMES_1,
+			List.of(SpellUpgrade.CLOAK_OF_FLAMES_1,
 					SpellUpgrade.CLOAK_OF_FLAMES_2,
 					SpellUpgrade.CLOAK_OF_FLAMES_3),
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.RESISTANCE_FIRE, 5),
 					new Value<>(Attribute.RESISTANCE_ICE, 10)),
-			Util.newArrayListOfValues("Lasts for [style.colourGood(3 turns)]")) {
+			List.of("Lasts for [style.colourGood(3 turns)]")) {
 
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
@@ -318,8 +313,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"By my power, shall glaciers melt, and a thousand suns be extinguished! Oh, fury of the stars, I call upon thee to shield your [npc.master]!",
+											List.of("By my power, shall glaciers melt, and a thousand suns be extinguished! Oh, fury of the stars, I call upon thee to shield your [npc.master]!",
 													"Know now that the flames of hell itself obey my every command, and from the fiery chasm of the dimension of flame, I summon forth the power to shield me from all harm!",
 													"By fire and fury, I unleash the infernal flames of the sun itself! Come now, arcane inferno, shield your [npc.master] from all that dare harm [npc.herHim]!"),
 											"With a swipe of your [pc.arm], you summon a protective cloak of arcane fire around yourself!",
@@ -358,12 +352,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			200,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.ELEMENTAL_FIRE_1,
+			List.of(SpellUpgrade.ELEMENTAL_FIRE_1,
 					SpellUpgrade.ELEMENTAL_FIRE_2,
 					SpellUpgrade.ELEMENTAL_FIRE_3A,
 					SpellUpgrade.ELEMENTAL_FIRE_3B),
-			null, Util.newArrayListOfValues("Summons [style.colourArcane(Elemental)] in form of [style.colourSchoolFire(Fire)]")) {
+			null, List.of("Summons [style.colourArcane(Elemental)] in form of [style.colourSchoolFire(Fire)]")) {
 		@Override
 		public Value<Boolean, String> getSpellCastOutOfCombatDescription(GameCharacter owner, GameCharacter target) {
 			if(!owner.hasSpell(this)) {
@@ -419,8 +412,7 @@ public enum Spell {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
 									?Util.randomItemFrom(
-									Util.newArrayListOfValues(
-										"[npc.speech(By the ancient rites of flame, I summon forth hell and fury incarnate! Answer your [npc.master]'s call, [npc2.name], and, by the incineration of a million dimensions, be bound to my will!)] ",
+									List.of("[npc.speech(By the ancient rites of flame, I summon forth hell and fury incarnate! Answer your [npc.master]'s call, [npc2.name], and, by the incineration of a million dimensions, be bound to my will!)] ",
 										"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! I call upon the dimension of flame itself, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
 										"[npc.speech(Let fire consume, and the inferno within me be unleashed! Flame and fury, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
 									:"")
@@ -433,8 +425,7 @@ public enum Spell {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
 										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
-											"[npc.speech(By the ancient rites of flame, I summon forth hell and fury incarnate! Answer your [npc.master]'s call, [npc2.name], and, by the incineration of a million dimensions, be bound to my will!)] ",
+										List.of("[npc.speech(By the ancient rites of flame, I summon forth hell and fury incarnate! Answer your [npc.master]'s call, [npc2.name], and, by the incineration of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! I call upon the dimension of flame itself, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
 											"[npc.speech(Let fire consume, and the inferno within me be unleashed! Flame and fury, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
 										:"")
@@ -471,8 +462,7 @@ public enum Spell {
 			25,
 			DamageVariance.LOW,
 			35,
-			null, Util.newArrayListOfValues(
-							SpellUpgrade.ICE_SHARD_1,
+			null, List.of(SpellUpgrade.ICE_SHARD_1,
 							SpellUpgrade.ICE_SHARD_2,
 							SpellUpgrade.ICE_SHARD_3), null, null) {
 
@@ -506,8 +496,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Witness now, the terror of the starless void! By hail of ice, and fury of the blizzard, let my arcane power be unleashed!",
+											List.of("Witness now, the terror of the starless void! By hail of ice, and fury of the blizzard, let my arcane power be unleashed!",
 													"The seals within me have been broken, and by my power, now will the universe itself freeze! Hail, sleet, and ice, hear my call, and come forth!",
 													"From beyond the frozen void, now is my power unleashed! Crossing the boundary from the frozen realm of chaos, let my power be manifest!"),
 											"Summoning a swirling vortex of water from the moisture in the air, you focus your energy on freezing it in place, creating a shard of ice that you then launch at yourself!",
@@ -546,7 +535,7 @@ public enum Spell {
 		}
 		
 		public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-	    	return Util.newArrayListOfValues("Target has the 'freezing fog' status effect.");
+	    	return List.of("Target has the 'freezing fog' status effect.");
 	    }
 		
 		//Differs from normal version; spells have special crit requirements.
@@ -567,12 +556,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			33,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.RAIN_CLOUD_1,
+			List.of(SpellUpgrade.RAIN_CLOUD_1,
 					SpellUpgrade.RAIN_CLOUD_2,
 					SpellUpgrade.RAIN_CLOUD_3),
 			Util.newHashMapOfValues(
-					new Value<>(Attribute.SPELL_COST_MODIFIER, -25)), Util.newArrayListOfValues("Lasts for [style.colourGood(3 turns)]")) {
+					new Value<>(Attribute.SPELL_COST_MODIFIER, -25)), List.of("Lasts for [style.colourGood(3 turns)]")) {
 		
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
@@ -606,8 +594,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(//TODO chuuni three from here
-													"May the heavens burst, and floods sweep the Earth! By the powers manifest within me, I tear open the skies, and deliver unto you your watery grave!"),
+											List.of("May the heavens burst, and floods sweep the Earth! By the powers manifest within me, I tear open the skies, and deliver unto you your watery grave!"),
 											"With an upwards thrust of your [pc.arm], you summon forth a cloud of rain above your own head!",
 											"With an upwards thrust of your [pc.arm], you summon forth a cloud of rain above [npc.namePos] head!",
 											"",
@@ -647,13 +634,12 @@ public enum Spell {
 			DamageVariance.LOW,
 			100,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.SOOTHING_WATERS_1_CLEAN,
+			List.of(SpellUpgrade.SOOTHING_WATERS_1_CLEAN,
 					SpellUpgrade.SOOTHING_WATERS_2_CLEAN,
 					SpellUpgrade.SOOTHING_WATERS_1,
 					SpellUpgrade.SOOTHING_WATERS_2,
 					SpellUpgrade.SOOTHING_WATERS_3),
-			null, Util.newArrayListOfValues("[style.boldGood(Restores)] 20% [style.boldHealth("+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
+			null, List.of("[style.boldGood(Restores)] 20% [style.boldHealth("+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public Map<Integer, List<TreeEntry<SpellSchool, SpellUpgrade>>> getSpellUpgradeTree() {
 			return Spell.soothingWatersUpgradeTree;
@@ -703,8 +689,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"By stream and brook, river and sea, I call upon the eternal currents that know no end! I cast my power unto thee, and bring forth the fountain of eternal life!"),
+											List.of("By stream and brook, river and sea, I call upon the eternal currents that know no end! I cast my power unto thee, and bring forth the fountain of eternal life!"),
 											"With a gentle swish of your [pc.hand], you summon forth an orb of healing water, which you quickly drink.",
 											"With a gentle swish of your [pc.hand], you summon forth an orb of healing water, which you send to [npc.name] to drink.",
 											"With a gentle swish of [npc.her] [npc.hand], [npc.name] summons forth an orb of healing water, which [npc.she] quickly drinks.",
@@ -820,12 +805,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			200,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.ELEMENTAL_WATER_1,
+			List.of(SpellUpgrade.ELEMENTAL_WATER_1,
 					SpellUpgrade.ELEMENTAL_WATER_2,
 					SpellUpgrade.ELEMENTAL_WATER_3A,
 					SpellUpgrade.ELEMENTAL_WATER_3B),
-			null, Util.newArrayListOfValues("Summons [style.colourArcane(Elemental)] in form of [style.colourSchoolWater(Water)]")) {
+			null, List.of("Summons [style.colourArcane(Elemental)] in form of [style.colourSchoolWater(Water)]")) {
 		@Override
 		public Value<Boolean, String> getSpellCastOutOfCombatDescription(GameCharacter owner, GameCharacter target) {
 			if(!owner.hasSpell(this)) {
@@ -875,8 +859,7 @@ public enum Spell {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
 										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
-											"[npc.speech(By the ancient rite of sea and sky, I summon forth the eternal torrent! Answer your [npc.master]'s call, [npc2.name], and, by the drowning of a million dimensions, be bound to my will!)] ",
+										List.of("[npc.speech(By the ancient rite of sea and sky, I summon forth the eternal torrent! Answer your [npc.master]'s call, [npc2.name], and, by the drowning of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May all waters be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
 											"[npc.speech(Let the seas rise, and the tsunami within me be unleashed! Flood and deluge, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
 										:"")
@@ -889,8 +872,7 @@ public enum Spell {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
 										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
-											"[npc.speech(By the ancient rite of sea and sky, I summon forth the eternal torrent! Answer your [npc.master]'s call, [npc2.name], and, by the drowning of a million dimensions, be bound to my will!)] ",
+										List.of("[npc.speech(By the ancient rite of sea and sky, I summon forth the eternal torrent! Answer your [npc.master]'s call, [npc2.name], and, by the drowning of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May all waters be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
 											"[npc.speech(Let the seas rise, and the tsunami within me be unleashed! Flood and deluge, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
 										:"")
@@ -929,12 +911,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			50,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.POISON_VAPOURS_1,
+			List.of(SpellUpgrade.POISON_VAPOURS_1,
 					SpellUpgrade.POISON_VAPOURS_2,
 					SpellUpgrade.POISON_VAPOURS_3),
 			null,
-			Util.newArrayListOfValues("<b>25</b> [style.colourPoison(Poison Damage)] per turn for [style.colourGood(3 turns)]")) {
+			List.of("<b>25</b> [style.colourPoison(Poison Damage)] per turn for [style.colourGood(3 turns)]")) {
 
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
@@ -968,8 +949,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Let seal be broken, and by true power be unleashed! Now, by haze and smog, the air itself obeys my command!"),
+											List.of("Let seal be broken, and by true power be unleashed! Now, by haze and smog, the air itself obeys my command!"),
 											"With a sweeping motion of your [pc.arm], you summon forth a cloud of poison vapours around yourself!",
 											"With a sweeping motion of your [pc.arm], you summon forth a cloud of poison vapours around [npc.name]!",
 											"",
@@ -1008,12 +988,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			60,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.VACUUM_1,
+			List.of(SpellUpgrade.VACUUM_1,
 					SpellUpgrade.VACUUM_2,
 					SpellUpgrade.VACUUM_3),
 			Util.newHashMapOfValues(
-					new Value<>(Attribute.ENERGY_SHIELDING, -5)), Util.newArrayListOfValues("Lasts for [style.colourGood(4 turns)]")) {
+					new Value<>(Attribute.ENERGY_SHIELDING, -5)), List.of("Lasts for [style.colourGood(4 turns)]")) {
 
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
@@ -1048,8 +1027,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Darkness blacker than black! I call upon the eternal void, and by rift through time and space, is my power made manifest!"),
+											List.of("Darkness blacker than black! I call upon the eternal void, and by rift through time and space, is my power made manifest!"),
 											"With a clench of your fist, you summon forth a vacuum right next to yourself!",
 											"With a clench of your fist, you summon forth a vacuum right next to [npc.name]!",
 											"",
@@ -1089,14 +1067,13 @@ public enum Spell {
 			DamageVariance.LOW,
 			50,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.PROTECTIVE_GUSTS_1,
+			List.of(SpellUpgrade.PROTECTIVE_GUSTS_1,
 					SpellUpgrade.PROTECTIVE_GUSTS_2,
 					SpellUpgrade.PROTECTIVE_GUSTS_3),
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.RESISTANCE_POISON, 5),
 					new Value<>(Attribute.ENERGY_SHIELDING, 1)),
-			Util.newArrayListOfValues("Lasts for [style.colourGood(3 turns)]")) {
+			List.of("Lasts for [style.colourGood(3 turns)]")) {
 		
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
@@ -1129,8 +1106,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"The very air itself obeys my command! Now, may my true power be unleashed, and bind the wind itself to my will!"),
+											List.of("The very air itself obeys my command! Now, may my true power be unleashed, and bind the wind itself to my will!"),
 											"Swishing both of your [pc.arms] up into the air, you summon forth a benevolent wind to help protect you!",
 											"Swishing both of your [pc.arms] up into the air, you summon forth a benevolent wind to help protect [npc.name]!",
 											"Swishing both of [npc.her] [npc.arms] up into the air, [npc.name] summons forth a benevolent wind to help protect [npc.herHim]!",
@@ -1168,12 +1144,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			200,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.ELEMENTAL_AIR_1,
+			List.of(SpellUpgrade.ELEMENTAL_AIR_1,
 					SpellUpgrade.ELEMENTAL_AIR_2,
 					SpellUpgrade.ELEMENTAL_AIR_3A,
 					SpellUpgrade.ELEMENTAL_AIR_3B),
-			null, Util.newArrayListOfValues("Summons [style.colourArcane(Elemental)] in form of [style.colourSchoolAir(Air)]")) {
+			null, List.of("Summons [style.colourArcane(Elemental)] in form of [style.colourSchoolAir(Air)]")) {
 		@Override
 		public Value<Boolean, String> getSpellCastOutOfCombatDescription(GameCharacter owner, GameCharacter target) {
 			if(!owner.hasSpell(this)) {
@@ -1223,8 +1198,7 @@ public enum Spell {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
 										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
-											"[npc.speech(By the ancient rite of wind and gale, I summon forth the hurricane itself! Answer your [npc.master]'s call, [npc2.name], and, by the offering of a million dimensions, be bound to my will!)] ",
+										List.of("[npc.speech(By the ancient rite of wind and gale, I summon forth the hurricane itself! Answer your [npc.master]'s call, [npc2.name], and, by the offering of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the air itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
 											"[npc.speech(Let the winds rise, and the hurricane within me be unleashed! Storm and chaos, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
 										:"")
@@ -1237,8 +1211,7 @@ public enum Spell {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
 										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
-											"[npc.speech(By the ancient rite of wind and gale, I summon forth the hurricane itself! Answer your [npc.master]'s call, [npc2.name], and, by the offering of a million dimensions, be bound to my will!)] ",
+										List.of("[npc.speech(By the ancient rite of wind and gale, I summon forth the hurricane itself! Answer your [npc.master]'s call, [npc2.name], and, by the offering of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the air itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
 											"[npc.speech(Let the winds rise, and the hurricane within me be unleashed! Storm and chaos, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
 										:"")
@@ -1275,8 +1248,7 @@ public enum Spell {
 			40,
 			DamageVariance.LOW,
 			60,
-			null, Util.newArrayListOfValues(
-							SpellUpgrade.SLAM_1,
+			null, List.of(SpellUpgrade.SLAM_1,
 							SpellUpgrade.SLAM_2,
 							SpellUpgrade.SLAM_3), null, null) {
 		
@@ -1308,8 +1280,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"May the mountains shake, and the earth be split asunder! My power now shall be unleashed, and the cosmic forces at my command deliver unto you your demise!"),
+											List.of("May the mountains shake, and the earth be split asunder! My power now shall be unleashed, and the cosmic forces at my command deliver unto you your demise!"),
 											"With a downward, striking gesture, you summon forth a huge wave of pure force, which slams down on yourself!",
 											"With a downward, striking gesture, you summon forth a huge wave of pure force, which slams down on [npc.name]!",
 											"",
@@ -1364,11 +1335,10 @@ public enum Spell {
 			DamageVariance.LOW,
 			125,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.TELEKENETIC_SHOWER_1,
+			List.of(SpellUpgrade.TELEKENETIC_SHOWER_1,
 					SpellUpgrade.TELEKENETIC_SHOWER_2,
 					SpellUpgrade.TELEKENETIC_SHOWER_3),
-			null, Util.newArrayListOfValues("<b>25</b> [style.colourPhysical(Physical Damage)] per turn for [style.colourGood(3 turns)]")) {
+			null, List.of("<b>25</b> [style.colourPhysical(Physical Damage)] per turn for [style.colourGood(3 turns)]")) {
 		
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
@@ -1402,8 +1372,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"The cosmic forces of the universe obey my every command! With this dimensional vortex, shall I warp the boundaries of space and time!"),
+											List.of("The cosmic forces of the universe obey my every command! With this dimensional vortex, shall I warp the boundaries of space and time!"),
 											"Raising your [pc.arms], you lift all manner of small objects in the immediate vicinity up into the air, before hurling them at yourself!",
 											"Raising your [pc.arms], you lift all manner of small objects in the immediate vicinity up into the air, before hurling them at [npc.name]!",
 											"",
@@ -1441,12 +1410,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			25,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.STONE_SHELL_1,
+			List.of(SpellUpgrade.STONE_SHELL_1,
 					SpellUpgrade.STONE_SHELL_2,
 					SpellUpgrade.STONE_SHELL_3),
 			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 5)), Util.newArrayListOfValues("Lasts for [style.colourGood(3 turns)]")) {
+					new Value<>(Attribute.RESISTANCE_PHYSICAL, 5)), List.of("Lasts for [style.colourGood(3 turns)]")) {
 		
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
@@ -1478,8 +1446,7 @@ public enum Spell {
 			
 			descriptionSB.setLength(0);
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"The confinement of my astral powers is at an end! By my power unleashed, the very Earth itself serves its [npc.master]'s call!"),
+											List.of("The confinement of my astral powers is at an end! By my power unleashed, the very Earth itself serves its [npc.master]'s call!"),
 											"Thrusting your [pc.hand] forwards, you summon forth a levitating stone shell to protect you from incoming attacks!",
 											"Thrusting your [pc.hand] forwards, you summon forth a levitating stone shell to protect [npc.name] from incoming attacks!",
 											"Thrusting [npc.her] [npc.hand] forwards, [npc.name] summons forth a levitating stone shell to protect [npc.herHim] from incoming attacks!",
@@ -1517,12 +1484,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			200,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.ELEMENTAL_EARTH_1,
+			List.of(SpellUpgrade.ELEMENTAL_EARTH_1,
 					SpellUpgrade.ELEMENTAL_EARTH_2,
 					SpellUpgrade.ELEMENTAL_EARTH_3A,
 					SpellUpgrade.ELEMENTAL_EARTH_3B),
-			null, Util.newArrayListOfValues("Summons [style.colourArcane(Elemental)] in form of [style.colourSchoolEarth(Earth)]")) {
+			null, List.of("Summons [style.colourArcane(Elemental)] in form of [style.colourSchoolEarth(Earth)]")) {
 		@Override
 		public Value<Boolean, String> getSpellCastOutOfCombatDescription(GameCharacter owner, GameCharacter target) {
 			if(!owner.hasSpell(this)) {
@@ -1572,8 +1538,7 @@ public enum Spell {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
 										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
-											"[npc.speech(By the ancient rite of sand and stone, I summon forth the earthquake itself! Answer your [npc.master]'s call, [npc2.name], and, by the crushing of a million dimensions, be bound to my will!)] ",
+										List.of("[npc.speech(By the ancient rite of sand and stone, I summon forth the earthquake itself! Answer your [npc.master]'s call, [npc2.name], and, by the crushing of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the earth itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
 											"[npc.speech(Let the earth shake, and the power within me be unleashed! Boulder and mountain, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
 										:"")
@@ -1586,8 +1551,7 @@ public enum Spell {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
 										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
-											"[npc.speech(By the ancient rite of sand and stone, I summon forth the earthquake itself! Answer your [npc.master]'s call, [npc2.name], and, by the crushing of a million dimensions, be bound to my will!)] ",
+										List.of("[npc.speech(By the ancient rite of sand and stone, I summon forth the earthquake itself! Answer your [npc.master]'s call, [npc2.name], and, by the crushing of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the earth itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
 											"[npc.speech(Let the earth shake, and the power within me be unleashed! Boulder and mountain, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
 										:"")
@@ -1624,8 +1588,7 @@ public enum Spell {
 			15,
 			DamageVariance.LOW,
 			50,
-			null, Util.newArrayListOfValues(
-							SpellUpgrade.ARCANE_AROUSAL_1,
+			null, List.of(SpellUpgrade.ARCANE_AROUSAL_1,
 							SpellUpgrade.ARCANE_AROUSAL_2,
 							SpellUpgrade.ARCANE_AROUSAL_3), null, null) {
 
@@ -1665,8 +1628,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"By the true nature of the arcane, do I deliver unto you the prophecy of Lilith herself! Behold, the fate that awaits all mortals who dare stand against me!"),
+											List.of("By the true nature of the arcane, do I deliver unto you the prophecy of Lilith herself! Behold, the fate that awaits all mortals who dare stand against me!"),
 											"You focus your arcane energy on projecting an arousing vision into your own mind",
 											"You focus your arcane energy on projecting an arousing vision into [npc.namePos] mind.",
 											"",
@@ -1709,12 +1671,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			75,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.TELEPATHIC_COMMUNICATION_1,
+			List.of(SpellUpgrade.TELEPATHIC_COMMUNICATION_1,
 					SpellUpgrade.TELEPATHIC_COMMUNICATION_2,
 					SpellUpgrade.TELEPATHIC_COMMUNICATION_3),
 			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_LUST, 15)), Util.newArrayListOfValues("Lasts for [style.colourGood(5 turns)]")) {
+					new Value<>(Attribute.DAMAGE_LUST, 15)), List.of("Lasts for [style.colourGood(5 turns)]")) {
 		
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
@@ -1747,8 +1708,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"By my mastery of all dimensions, I now shatter the boundaries of space and time! The heavens themselves shall hear my voice, and despair!"),
+											List.of("By my mastery of all dimensions, I now shatter the boundaries of space and time! The heavens themselves shall hear my voice, and despair!"),
 											"You focus your arcane energy on enabling your thoughts to be projected into others' minds!",
 											"You focus your arcane energy on enabling [npc.namePos] thoughts to be projected into others' minds!",
 											"[npc.Name] focuses [npc.her] arcane energy on enabling [npc.her] thoughts to be projected into others' minds!",
@@ -1785,12 +1745,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			150,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.ARCANE_CLOUD_1,
+			List.of(SpellUpgrade.ARCANE_CLOUD_1,
 					SpellUpgrade.ARCANE_CLOUD_2,
 					SpellUpgrade.ARCANE_CLOUD_3),
 			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_LUST, -25)), Util.newArrayListOfValues("Lasts for [style.colourGood(3 turns)]")) {
+					new Value<>(Attribute.RESISTANCE_LUST, -25)), List.of("Lasts for [style.colourGood(3 turns)]")) {
 
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
@@ -1824,8 +1783,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Oh, dark seals containing my ultimate power, now be rend to pieces! Let arcane manifestations be summoned forth, to deliver unto my enemies their final judgement!"),
+											List.of("Oh, dark seals containing my ultimate power, now be rend to pieces! Let arcane manifestations be summoned forth, to deliver unto my enemies their final judgement!"),
 											"With an upwards thrust of your [pc.arm], you summon forth an arcane cloud above your own head!",
 											"With an upwards thrust of your [pc.arm], you summon forth an arcane cloud above [npc.namePos] head!",
 											"",
@@ -1863,11 +1821,10 @@ public enum Spell {
 			DamageVariance.LOW,
 			200,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.CLEANSE_1,
+			List.of(SpellUpgrade.CLEANSE_1,
 					SpellUpgrade.CLEANSE_2,
 					SpellUpgrade.CLEANSE_3),
-			null, Util.newArrayListOfValues("[style.colourGood(Removes all)] combat status effects from both the targeted ally and enemy")) {
+			null, List.of("[style.colourGood(Removes all)] combat status effects from both the targeted ally and enemy")) {
 		
 		@Override
 		public String getBasicEffectsString(GameCharacter caster, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
@@ -1902,8 +1859,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"By Lilith's power, I do shatter the world's illusions! Let time and space be torn asunder, and by my arcane dominance, shall reality itself be warped to my will!"),
+											List.of("By Lilith's power, I do shatter the world's illusions! Let time and space be torn asunder, and by my arcane dominance, shall reality itself be warped to my will!"),
 											"Thrusting your [pc.hand] forwards, you summon forth an explosion of cleansing arcane energy upon yourself!",
 											"Thrusting your [pc.hand] forwards, you summon forth an explosion of cleansing arcane energy upon [npc.name]!",
 											"Thrusting [npc.her] [npc.hand] forwards, [npc.name] summons forth an explosion of cleansing arcane energy upon [npc.herself]!",
@@ -1961,12 +1917,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			100,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.STEAL_1,
+			List.of(SpellUpgrade.STEAL_1,
 					SpellUpgrade.STEAL_2,
 					SpellUpgrade.STEAL_3A,
 					SpellUpgrade.STEAL_3B),
-			null, Util.newArrayListOfValues("[style.colourExcellent(Steals)] a random item from the target's inventory")) {
+			null, List.of("[style.colourExcellent(Steals)] a random item from the target's inventory")) {
 		
 		@Override
 		public String getBasicEffectsString(GameCharacter caster, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
@@ -1981,8 +1936,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"The fabric of space and time is mine to command! Cosmic dimensions, obey my command, and deliver unto me the assets of my hated foes!"),
+											List.of("The fabric of space and time is mine to command! Cosmic dimensions, obey my command, and deliver unto me the assets of my hated foes!"),
 											"Thrusting out your [pc.hand] and clenching your fist, you channel your arcane power into stealing one of your own items...", // ...
 											"Thrusting out your [pc.hand] and clenching your fist, you channel your arcane power into stealing one of [npc.namePos] items!",
 											"",
@@ -2195,13 +2149,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			200,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.TELEPORT_1,
+			List.of(SpellUpgrade.TELEPORT_1,
 					SpellUpgrade.TELEPORT_2,
 					SpellUpgrade.TELEPORT_3),
 			Util.newHashMapOfValues(
-					new Value<>(Attribute.ENERGY_SHIELDING, 100)), Util.newArrayListOfValues(
-					"Lasts for [style.colourGood(1 turn)]",
+					new Value<>(Attribute.ENERGY_SHIELDING, 100)), List.of("Lasts for [style.colourGood(1 turn)]",
 					"[style.colourExcellent(Unlocks)] map teleport",
 					"Map teleport [style.colourTerrible(blocked)] by companions")) {
 		
@@ -2234,8 +2186,7 @@ public enum Spell {
 
 			if(caster.hasSpellUpgrade(SpellUpgrade.TELEPORT_2) && !allies.isEmpty()) {
 				descriptionSB.append(getCastDescription(caster, target,
-						Util.newArrayListOfValues(
-								"Through a thousand dimensions, and across a million worlds, have I wandered! Distance and time are nothing more than the insignificant trappings of the ignorant masses!"),
+						List.of("Through a thousand dimensions, and across a million worlds, have I wandered! Distance and time are nothing more than the insignificant trappings of the ignorant masses!"),
 						"With a quick, cutting motion from one of your [pc.hands], you teleport both yourself and your allies behind your enemies!",
 						"With a quick, cutting motion from one of your [pc.hands], you teleport both yourself and your allies behind your enemies!",
 						"With a quick, cutting motion from one of [npc.her] [npc.hands], [npc.name] teleports both [npc.herself] and [npc.her] allies behind [npc.her] enemies!",
@@ -2244,8 +2195,7 @@ public enum Spell {
 				
 			} else {
 				descriptionSB.append(getCastDescription(caster, target,
-						Util.newArrayListOfValues(
-								"Through a thousand dimensions, and across a million worlds, have I wandered! Distance and time are nothing more than the insignificant trappings of the ignorant masses!"),
+						List.of("Through a thousand dimensions, and across a million worlds, have I wandered! Distance and time are nothing more than the insignificant trappings of the ignorant masses!"),
 						"With a quick, cutting motion from one of your [pc.hands], you teleport behind your enemies!",
 						"With a quick, cutting motion from one of your [pc.hands], you teleport [npc.name] behind [npc.her] enemies!",
 						"With a quick, cutting motion from one of [npc.her] [npc.hands], [npc.name] teleports behind [npc.her] enemies!",
@@ -2292,12 +2242,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			400,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.LILITHS_COMMAND_1,
+			List.of(SpellUpgrade.LILITHS_COMMAND_1,
 					SpellUpgrade.LILITHS_COMMAND_2,
 					SpellUpgrade.LILITHS_COMMAND_3),
 			null,
-			Util.newArrayListOfValues("[style.colourGood(25%)] chance for target to [style.colourExcellent(instantly submit)]")) {
+			List.of("[style.colourGood(25%)] chance for target to [style.colourExcellent(instantly submit)]")) {
 		
 		@Override
 		public String getBasicEffectsString(GameCharacter caster, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
@@ -2311,8 +2260,7 @@ public enum Spell {
 			descriptionSB.setLength(0);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Through me, is Lilith made manifest! Across the gulf of time and space, her command is infinite, and does order you to obey!"),
+											List.of("Through me, is Lilith made manifest! Across the gulf of time and space, her command is infinite, and does order you to obey!"),
 											"",
 											"Drawing an immense amount of power from your arcane aura, you project the words of Lilith herself into the mind of [npc.name], ordering [npc.herHim] to submit.",
 											"",
@@ -2385,12 +2333,11 @@ public enum Spell {
 			DamageVariance.LOW,
 			200,
 			null,
-			Util.newArrayListOfValues(
-					SpellUpgrade.ELEMENTAL_ARCANE_1,
+			List.of(SpellUpgrade.ELEMENTAL_ARCANE_1,
 					SpellUpgrade.ELEMENTAL_ARCANE_2,
 					SpellUpgrade.ELEMENTAL_ARCANE_3A,
 					SpellUpgrade.ELEMENTAL_ARCANE_3B),
-			null, Util.newArrayListOfValues("Summons [style.colourArcane(Elemental)] in form of [style.colourArcane(Arcane)]")) {
+			null, List.of("Summons [style.colourArcane(Elemental)] in form of [style.colourArcane(Arcane)]")) {
 		@Override
 		public Value<Boolean, String> getSpellCastOutOfCombatDescription(GameCharacter owner, GameCharacter target) {
 			if(!owner.hasSpell(this)) {
@@ -2439,8 +2386,7 @@ public enum Spell {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
 										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
-											"[npc.speech(By the ancient rite of devil and demon, I summon forth the arcane itself! Answer your [npc.master]'s call, [npc2.name], and, by the conquest of a million dimensions, be bound to my will!)] ",
+										List.of("[npc.speech(By the ancient rite of devil and demon, I summon forth the arcane itself! Answer your [npc.master]'s call, [npc2.name], and, by the conquest of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the arcane itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
 											"[npc.speech(Let the arcane be mine, and the power within me be unleashed! The spirit of arcane itself, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
 										:"")
@@ -2453,8 +2399,7 @@ public enum Spell {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
 										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
-											"[npc.speech(By the ancient rite of devil and demon, I summon forth the arcane itself! Answer your [npc.master]'s call, [npc2.name], and, by the conquest of a million dimensions, be bound to my will!)] ",
+										List.of("[npc.speech(By the ancient rite of devil and demon, I summon forth the arcane itself! Answer your [npc.master]'s call, [npc2.name], and, by the conquest of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the arcane itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
 											"[npc.speech(Let the arcane be mine, and the power within me be unleashed! The spirit of arcane itself, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
 										:"")
@@ -2494,8 +2439,7 @@ public enum Spell {
 			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.WITCH_SEAL, 1)),
 			null,
 			null,
-			Util.newArrayListOfValues(
-					"[style.colourExcellent(Seals)] the target for [style.colourTerrible(-3)] [style.colourActionPoints(action points)]!")) {
+			List.of("[style.colourExcellent(Seals)] the target for [style.colourTerrible(-3)] [style.colourActionPoints(action points)]!")) {
 		
 		@Override
 		public boolean isSpellBook() {
@@ -2514,8 +2458,7 @@ public enum Spell {
 			float cost = getModifiedCost(caster);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Let the seal which once contained my arcane power now obey my command! Render unto my foe the debilitating darkness of absolute submission, and bind them to their fate!"),
+											List.of("Let the seal which once contained my arcane power now obey my command! Render unto my foe the debilitating darkness of absolute submission, and bind them to their fate!"),
 										"",
 										"Concentrating on the arcane power within your broomstick, you summon forth a powerful seal, which traps [npc.name] in place!",
 										"",
@@ -2549,7 +2492,7 @@ public enum Spell {
 			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.WITCH_CHARM, 5)),
 			null,
 			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_LUST, 25)), Util.newArrayListOfValues("Lasts for [style.colourGood(5 turns)]")) {
+					new Value<>(Attribute.DAMAGE_LUST, 25)), List.of("Lasts for [style.colourGood(5 turns)]")) {
 		
 		@Override
 		public boolean isSpellBook() {
@@ -2568,8 +2511,7 @@ public enum Spell {
 			float cost = getModifiedCost(caster);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Let reality itself be warped by my ultimate power! All who gaze upon my visage be bewitched, and see their heart's true desire!"),
+											List.of("Let reality itself be warped by my ultimate power! All who gaze upon my visage be bewitched, and see their heart's true desire!"),
 										"Concentrating on the arcane power within your broomstick, you cast a bewitching charm upon yourself!",
 										"Concentrating on the arcane power within your broomstick, you cast a bewitching charm upon [npc.name]!",
 										"Concentrating on the arcane power within [npc.her] broomstick, [npc.name] casts a bewitching charm upon [npc.herself]!",
@@ -2605,8 +2547,7 @@ public enum Spell {
 			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.BANEFUL_FISSURE, 10)),
 			null,
 			null,
-			Util.newArrayListOfValues(
-					"<b>25</b> [style.colourPoison(Poison Damage)] per turn for [style.colourGood(10 turns)]",
+			List.of("<b>25</b> [style.colourPoison(Poison Damage)] per turn for [style.colourGood(10 turns)]",
 					"Affects [style.colourExcellent(all enemies)]")) {
 
 		@Override
@@ -2627,8 +2568,7 @@ public enum Spell {
 			float cost = getModifiedCost(caster);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Powers beneath the earth, obey your [npc.master]'s command! Rend unto the end of time a chasm of darkness, from which the suffocating miasma of toxic dimensions may pour forth!"),
+											List.of("Powers beneath the earth, obey your [npc.master]'s command! Rend unto the end of time a chasm of darkness, from which the suffocating miasma of toxic dimensions may pour forth!"),
 										"",
 										"Concentrating on the immense arcane power within your scythe, you smite down into the ground beneath [npc.namePos] [npc.feet], splitting the earth and summoning forth poison fumes!",
 										"",
@@ -2671,8 +2611,7 @@ public enum Spell {
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues(
-					"Affects [style.colourExcellent(all enemies)]",
+			List.of("Affects [style.colourExcellent(all enemies)]",
 					"Affects [style.colourTerrible(the caster)]",
 					"Affects [style.colourTerrible(all allies)]")) {
 
@@ -2708,8 +2647,7 @@ public enum Spell {
 			float cost = getModifiedCost(caster);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Sealed away for countless millennia, this infinite cosmic power shall now be unleashed! Witness the arcane maelstrom I call forth, then submit to your fate as my lust-crazed puppet!"),
+											List.of("Sealed away for countless millennia, this infinite cosmic power shall now be unleashed! Witness the arcane maelstrom I call forth, then submit to your fate as my lust-crazed puppet!"),
 										"Channelling some of your aura into the arcane lightning globe, you force it to unleash a portion of its power in the form of a lightning discharge!",
 										"Channelling some of your aura into the arcane lightning globe, you force it to unleash a portion of its power in the form of a lightning discharge!",
 										"Channelling some of [npc.her] aura into the arcane lightning globe, [npc.name] [npc.verb(force)] it to unleash a portion of its power in the form of a lightning discharge!",
@@ -2738,7 +2676,7 @@ public enum Spell {
 		
 		@Override
 	    public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-	    	return Util.newArrayListOfValues("Cannot crit.");
+	    	return List.of("Cannot crit.");
 	    }
 
 		@Override
@@ -2761,8 +2699,7 @@ public enum Spell {
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues(
-					"Affects [style.colourExcellent(all enemies)]",
+			List.of("Affects [style.colourExcellent(all enemies)]",
 					"Affects [style.colourTerrible(the caster)]",
 					"Affects [style.colourTerrible(all allies)]")) {
 
@@ -2798,8 +2735,7 @@ public enum Spell {
 			float cost = getModifiedCost(caster);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Sealed away for countless millennia, this infinite cosmic power shall now be unleashed! Witness the arcane maelstrom I call forth, then submit to your fate as my lust-crazed puppet!"),
+											List.of("Sealed away for countless millennia, this infinite cosmic power shall now be unleashed! Witness the arcane maelstrom I call forth, then submit to your fate as my lust-crazed puppet!"),
 										"Channelling your aura into the arcane lightning globe, you force it to unleash its power in the form of an almighty lightning discharge!",
 										"Channelling your aura into the arcane lightning globe, you force it to unleash its power in the form of an almighty lightning discharge!",
 										"Channelling [npc.her] aura into the arcane lightning globe, [npc.name] [npc.verb(force)] it to unleash its power in the form of an almighty lightning discharge!",
@@ -2829,7 +2765,7 @@ public enum Spell {
 		
 		@Override
 	    public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-	    	return Util.newArrayListOfValues("Cannot crit.");
+	    	return List.of("Cannot crit.");
 	    }
 
 		@Override
@@ -2852,8 +2788,7 @@ public enum Spell {
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues(
-					"Affects [style.colourExcellent(all enemies)]")) {
+			List.of("Affects [style.colourExcellent(all enemies)]")) {
 		@Override
 		public int getAPCost() {
 			return 1;
@@ -2882,8 +2817,7 @@ public enum Spell {
 			float cost = getModifiedCost(caster);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Sealed away for countless millennia, this infinite cosmic power shall now be unleashed! Witness the arcane maelstrom I call forth, then submit to your fate as my lust-crazed puppet!"),
+											List.of("Sealed away for countless millennia, this infinite cosmic power shall now be unleashed! Witness the arcane maelstrom I call forth, then submit to your fate as my lust-crazed puppet!"),
 													"After taking a moment to focus your aura, you summon forth a crackling manifestation of arcane lightning!",
 													"After taking a moment to focus your aura, you summon forth a crackling manifestation of arcane lightning!",
 													"After taking a moment to focus [npc.her] aura, [npc.name] [npc.verb(summon)] forth a crackling manifestation of arcane lightning!",
@@ -2913,7 +2847,7 @@ public enum Spell {
 		}
 		@Override
 	    public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-	    	return Util.newArrayListOfValues("Cannot crit.");
+	    	return List.of("Cannot crit.");
 	    }
 		@Override
 		public boolean canCrit(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
@@ -2935,7 +2869,7 @@ public enum Spell {
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public int getAPCost() {
 			return 3;
@@ -2965,8 +2899,7 @@ public enum Spell {
 			float cost = getModifiedCost(caster);
 			
 			descriptionSB.append(getCastDescription(caster, target,
-											Util.newArrayListOfValues(
-													"Sealed away for countless millennia, this infinite cosmic power shall now be unleashed! Witness the arcane apocalypse I call forth, then submit to your fate as my lust-crazed puppet!"),
+											List.of("Sealed away for countless millennia, this infinite cosmic power shall now be unleashed! Witness the arcane apocalypse I call forth, then submit to your fate as my lust-crazed puppet!"),
 													"After taking a moment to focus your aura, you summon forth an almighty arcane lightning superbolt, before launching it directly at yourself!",
 													"After taking a moment to focus your aura, you summon forth an almighty arcane lightning superbolt, before launching it directly at [npc.name]!",
 													"After taking a moment to focus [npc.her] aura, [npc.name] [npc.verb(summon)] forth an almighty arcane lightning superbolt, before launching it directly at [npc.herself]!",
@@ -2992,7 +2925,7 @@ public enum Spell {
 		
 		@Override
 	    public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-	    	return Util.newArrayListOfValues("Cannot crit.");
+	    	return List.of("Cannot crit.");
 	    }
 
 		@Override
@@ -3991,7 +3924,7 @@ public enum Spell {
     	if(this.getSpellSchool() == SpellSchool.FIRE) {
     		critReqs.add(UtilText.parse(source, "[npc.NamePos] "+Attribute.HEALTH_MAXIMUM.getName()+" is below 25%."));
     	} else {
-        	return Util.newArrayListOfValues("It's the only action being used.");
+        	return List.of("It's the only action being used.");
     	}
     	
     	return critReqs;

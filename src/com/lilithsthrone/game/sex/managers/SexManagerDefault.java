@@ -263,8 +263,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 				// Choose a random position:
 				if (!highPriorityActions.isEmpty()) {
 					if(partner.isFeral()) {
-						List<SexActionInterface> actions = Util.newArrayListOfValues(
-								GenericPositioning.POSITION_ALL_FOURS_FUCKING,
+						List<SexActionInterface> actions = List.of(GenericPositioning.POSITION_ALL_FOURS_FUCKING,
 								GenericPositioning.POSITION_ALL_FOURS_GETTING_FUCKED,
 								GenericPositioning.POSITION_ORAL_RECEIVING,
 								GenericPositioning.POSITION_ORAL_PERFORMING);

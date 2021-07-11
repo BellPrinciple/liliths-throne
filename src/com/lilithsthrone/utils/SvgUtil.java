@@ -66,7 +66,7 @@ public class SvgUtil {
 	}
 	
 	public static String colourReplacement(String gradientReplacementID, Colour colour, String inputString) {
-		return colourReplacement(gradientReplacementID, Util.newArrayListOfValues(colour), null, inputString);
+		return colourReplacement(gradientReplacementID, List.of(colour), null, inputString);
 	}
 
 	public static String colourReplacement(String gradientReplacementID, Colour colour, Colour colourSecondary, Colour colourTertiary, String inputString) {
@@ -74,7 +74,7 @@ public class SvgUtil {
 	}
 
 	public static String colourReplacement(String gradientReplacementID, Colour colour, Colour colourSecondary, Colour colourTertiary, Colour colourQuaternary, String inputString) {
-		return colourReplacement(gradientReplacementID, Util.newArrayListOfValues(colour, colourSecondary, colourTertiary, colourQuaternary), null, inputString);
+		return colourReplacement(gradientReplacementID, List.of(colour, colourSecondary, colourTertiary, colourQuaternary), null, inputString);
 	}
 
 	public static String colourReplacement(String gradientReplacementID, List<Colour> colours, List<ColourReplacement> colourReplacements, String inputString) {

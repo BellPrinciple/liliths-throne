@@ -66,9 +66,9 @@ public class CitadelYoukoSA {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_DENIAL_SELF);
+				return List.of(Fetish.FETISH_DENIAL_SELF);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_DENIAL);
+				return List.of(Fetish.FETISH_DENIAL);
 			}
 		}
 	};

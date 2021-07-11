@@ -380,7 +380,7 @@ public class CityHallDemographics {
 						UtilText.parseFromXMLFile("places/dominion/cityHall/demographics", "START_ORAL")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Vanessa.class), TongueVagina.CUNNILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Vanessa.class), TongueVagina.CUNNILINGUS_START, false, true));
 					}
 					@Override
 					public void effects() {
@@ -440,7 +440,7 @@ public class CityHallDemographics {
 								UtilText.parseFromXMLFile("places/dominion/cityHall/demographics", "START_SEX_FUCKING_VANESSA")){
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Vanessa.class), PenisVagina.PENIS_FUCKING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Vanessa.class), PenisVagina.PENIS_FUCKING_START, false, true));
 							}
 							@Override
 							public void effects() {
@@ -475,7 +475,7 @@ public class CityHallDemographics {
 								UtilText.parseFromXMLFile("places/dominion/cityHall/demographics", "START_SEX_EATEN_OUT")){
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vanessa.class), Main.game.getPlayer(), TongueVagina.CUNNILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Vanessa.class), Main.game.getPlayer(), TongueVagina.CUNNILINGUS_START, false, true));
 							}
 							@Override
 							public void effects() {
@@ -721,7 +721,7 @@ public class CityHallDemographics {
 	};
 	
 	private static void applyNameChange(boolean applyOffspringSurnames) {
-		List<String> fieldsList = Util.newArrayListOfValues("nameMasculineInput", "nameAndrogynousInput", "nameFeminineInput");
+		List<String> fieldsList = List.of("nameMasculineInput", "nameAndrogynousInput", "nameFeminineInput");
 		List<String> namesList = new ArrayList<>();
 		for(String s : fieldsList) {
 			Main.mainController.getWebEngine().executeScript("document.getElementById('hiddenFieldName').innerHTML=document.getElementById('"+s+"').value;");

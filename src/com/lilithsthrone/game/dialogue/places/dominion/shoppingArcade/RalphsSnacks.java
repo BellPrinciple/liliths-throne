@@ -254,7 +254,7 @@ public class RalphsSnacks {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new ResponseSex("Agree", "Agree to do as Ralph says and suck his cock.", Util.newArrayListOfValues(Fetish.FETISH_ORAL_GIVING),
+				return new ResponseSex("Agree", "Agree to do as Ralph says and suck his cock.", List.of(Fetish.FETISH_ORAL_GIVING),
 						null, CorruptionLevel.TWO_HORNY, null, null, null,
 						true, true,
 						new SexManagerRalphDiscount(
@@ -422,7 +422,7 @@ public class RalphsSnacks {
 				}
 				return new ResponseSex("Accept breeding",
 						"Tell Ralph that you'll let him breed you in exchange for the box of 'A Hundred Kisses'.",
-						Util.newArrayListOfValues(Fetish.FETISH_PREGNANCY),
+						List.of(Fetish.FETISH_PREGNANCY),
 						null, CorruptionLevel.THREE_DIRTY, null, null, null,
 						true,
 						false,
@@ -444,8 +444,8 @@ public class RalphsSnacks {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								return Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Ralph.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA)));
+										new Value<>(Main.game.getNpc(Ralph.class), List.of(CoverableArea.PENIS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)));
 							}
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {
@@ -461,8 +461,7 @@ public class RalphsSnacks {
 						UtilText.parseFromXMLFile("places/dominion/shoppingArcade/ralphsSnacks", "CANDI_LIPSTICK_START_BREEDING")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getNpc(Ralph.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Ralph.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 					}
 					@Override
 					public void effects() {

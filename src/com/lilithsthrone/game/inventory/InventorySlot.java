@@ -335,10 +335,10 @@ public enum InventorySlot {
 			}
 			if(!isPhysicallyAvailable(character)) {
 				return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(this),
+					List.of(this),
 					null,
 					this.getPhysicallyUnavailableReason(character),
-					Util.newArrayListOfValues(ItemTag.REQUIRES_NO_PENIS));
+					List.of(ItemTag.REQUIRES_NO_PENIS));
 			}
 			// Leg configuration (takes into account feral):
 			List<BodyPartClothingBlock> blockedList = character.getLegConfiguration().getBodyPartClothingBlock(character);
@@ -383,10 +383,10 @@ public enum InventorySlot {
 			}
 			if(!isPhysicallyAvailable(character)) {
 				return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(this),
+					List.of(this),
 					null,
 					this.getPhysicallyUnavailableReason(character),
-					Util.newArrayListOfValues(ItemTag.REQUIRES_NO_VAGINA));
+					List.of(ItemTag.REQUIRES_NO_VAGINA));
 			}
 			// Leg configuration (takes into account feral):
 			List<BodyPartClothingBlock> blockedList = character.getLegConfiguration().getBodyPartClothingBlock(character);
@@ -745,10 +745,10 @@ public enum InventorySlot {
 //		}
 		if(!isPhysicallyAvailable(character)) {
 			return new BodyPartClothingBlock(
-				Util.newArrayListOfValues(this),
+				List.of(this),
 				null,
 				this.getPhysicallyUnavailableReason(character),
-				Util.newArrayListOfValues());
+				List.of());
 		}
 		
 		// Leg configuration (takes into account feral):

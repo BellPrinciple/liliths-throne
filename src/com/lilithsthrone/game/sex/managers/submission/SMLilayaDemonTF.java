@@ -106,6 +106,6 @@ public class SMLilayaDemonTF extends SexManagerDefault {
 	@Override
 	public Map<GameCharacter, List<SexAreaInterface>> getAreasBannedMap() {
 		// Do not let Meraxis take her own virginity using her tail:
-		return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(DarkSiren.class), Util.newArrayListOfValues(SexAreaPenetration.TAIL)));
+		return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(DarkSiren.class), List.of(SexAreaPenetration.TAIL)));
 	}
 }

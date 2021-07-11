@@ -827,11 +827,11 @@ public class Lab {
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
 				return new ResponseSex("Sex", "Start having sex with Lilaya.",
-						Util.newArrayListOfValues(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
+						List.of(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(Lilaya.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Lilaya.class)),
 						null,
 						null),
 						END_SEX_GEISHA,
@@ -844,11 +844,11 @@ public class Lab {
 
 			} if (index == 2) {
 				return new ResponseSex("Submissive Sex", "Start having submissive sex with Lilaya.",
-						Util.newArrayListOfValues(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
+						List.of(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(Lilaya.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Lilaya.class)),
+								List.of(Main.game.getPlayer()),
 						null,
 						null),
 						END_SEX_GEISHA,
@@ -1341,7 +1341,7 @@ public class Lab {
 				if(!Main.game.getPlayer().isTaur()) {
 					return new ResponseSex("Sex",
 							"Start having sex with Lilaya.",
-							Util.newArrayListOfValues(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
+							List.of(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 							true, true,
 							new SMSitting(
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.SITTING)),
@@ -1359,11 +1359,11 @@ public class Lab {
 				} else {
 					return new ResponseSex("Sex",
 							"Start having sex with Lilaya.",
-							Util.newArrayListOfValues(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
+							List.of(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 							true, true,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(Lilaya.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(Lilaya.class)),
 									null,
 									null,
 									ResponseTag.PREFER_ORAL),
@@ -1468,7 +1468,7 @@ public class Lab {
 							Main.game.getPlayer().hasFetish(Fetish.FETISH_INCEST)
 								?"You know that this can only end one way, and the fact that Lilaya reminds you of your aunt Lily only makes it all the more exciting..."
 								:"You know that this can only end one way. Although Lilaya reminds you of your [lilaya.relation(pc)] Lily, you don't think it will get in the way of you enjoying this...",
-							Util.newArrayListOfValues(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
+							List.of(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 							true, true,
 							new SMSitting(
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.SITTING)),
@@ -1489,11 +1489,11 @@ public class Lab {
 							Main.game.getPlayer().hasFetish(Fetish.FETISH_INCEST)
 								?"You know that this can only end one way, and the fact that Lilaya reminds you of your aunt Lily only makes it all the more exciting..."
 								:"You know that this can only end one way. Although Lilaya reminds you of your [lilaya.relation(pc)] Lily, you don't think it will get in the way of you enjoying this...",
-							Util.newArrayListOfValues(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
+							List.of(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 							true, true,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(Lilaya.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(Lilaya.class)),
 									null,
 									null,
 									ResponseTag.PREFER_ORAL),

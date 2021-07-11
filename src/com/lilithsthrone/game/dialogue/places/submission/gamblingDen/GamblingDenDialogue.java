@@ -335,8 +335,8 @@ public class GamblingDenDialogue {
 							new SMAxel(
 									SexPosition.STANDING,
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
-									Util.newArrayListOfValues(CoverableArea.PENIS),
-									Util.newArrayListOfValues(CoverableArea.MOUTH),
+									List.of(CoverableArea.PENIS),
+									List.of(CoverableArea.MOUTH),
 									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotStanding.STANDING_DOMINANT)),
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
 							null,
@@ -370,10 +370,10 @@ public class GamblingDenDialogue {
 									cockAccess
 										?new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)
 										:new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.VAGINA),
-									Util.newArrayListOfValues(CoverableArea.MOUTH),
+									List.of(CoverableArea.MOUTH),
 									cockAccess
-										?Util.newArrayListOfValues(CoverableArea.PENIS)
-										:Util.newArrayListOfValues(CoverableArea.VAGINA),
+										?List.of(CoverableArea.PENIS)
+										:List.of(CoverableArea.VAGINA),
 									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotStanding.STANDING_DOMINANT)),
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
 							null,
@@ -404,8 +404,8 @@ public class GamblingDenDialogue {
 							new SMAxel(
 									SexPosition.OVER_DESK,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE),
-									Util.newArrayListOfValues(CoverableArea.ANUS, CoverableArea.PENIS),
-									Util.newArrayListOfValues(CoverableArea.MOUTH),
+									List.of(CoverableArea.ANUS, CoverableArea.PENIS),
+									List.of(CoverableArea.MOUTH),
 									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotDesk.OVER_DESK_ON_FRONT)),
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.PERFORMING_ORAL))),
 							null,
@@ -433,12 +433,12 @@ public class GamblingDenDialogue {
 							new SMAxel(
 									SexPosition.AGAINST_WALL,
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS),
-									Util.newArrayListOfValues(CoverableArea.MOUTH),
+									List.of(CoverableArea.MOUTH),
 									Main.game.getPlayer().hasPenis()
-										?Util.newArrayListOfValues(CoverableArea.ANUS, CoverableArea.PENIS)
+										?List.of(CoverableArea.ANUS, CoverableArea.PENIS)
 										:(Main.game.getPlayer().hasVagina()
-											?Util.newArrayListOfValues(CoverableArea.ANUS, CoverableArea.VAGINA)
-											:Util.newArrayListOfValues(CoverableArea.ANUS)),
+											?List.of(CoverableArea.ANUS, CoverableArea.VAGINA)
+											:List.of(CoverableArea.ANUS)),
 									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotAgainstWall.PERFORMING_ORAL_WALL)),
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.FACE_TO_WALL))),
 							null,
@@ -1131,8 +1131,7 @@ public class GamblingDenDialogue {
 										new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
 								Util.newHashMapOfValues(
 										new Value<>(Main.game.getNpc(Axel.class), SexSlotAllFours.ALL_FOURS))),
-						Util.newArrayListOfValues(
-								Main.game.getNpc(Vengar.class),
+						List.of(Main.game.getNpc(Vengar.class),
 								Main.game.getNpc(Shadow.class),
 								Main.game.getNpc(Silence.class)),
 						null,
@@ -1150,8 +1149,7 @@ public class GamblingDenDialogue {
 										new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
 								Util.newHashMapOfValues(
 										new Value<>(Main.game.getNpc(Axel.class), SexSlotAllFours.ALL_FOURS))),
-						Util.newArrayListOfValues(
-								Main.game.getPlayer(),
+						List.of(Main.game.getPlayer(),
 								Main.game.getNpc(Shadow.class),
 								Main.game.getNpc(Silence.class)),
 						null,

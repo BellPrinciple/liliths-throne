@@ -36,8 +36,7 @@ public class SMMilkingStall extends SexManagerDefault {
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		return Util.newArrayListOfValues(
-				SexPosition.MILKING_STALL);
+		return List.of(SexPosition.MILKING_STALL);
 	}
 	
 	@Override

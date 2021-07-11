@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.sex.sexActions.submission;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -158,7 +159,7 @@ public class FortressMalesLeaderSA {
 
 		@Override
 		public String getDescription() {
-			return UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getOtherTarget()),
+			return UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getOtherTarget()),
 					"Grabbing [npc2.namePos] [npc2.hips+], [npc.name] pulls back and slides [npc.her] [npc.cock+] out of [npc2.her] cum-stuffed cunt."
 					+(getOtherTarget().isAbleToAccessCoverableArea(CoverableArea.VAGINA, false)
 							?" Shuffling to one side, [npc.she] then quickly removes the clothing blocking [npc3.namePos] [npc3.pussy], before starting to rub the head of [npc.her] cock up and down between [npc3.her] [npc3.labia+]."
@@ -295,7 +296,7 @@ public class FortressMalesLeaderSA {
 
 		@Override
 		public String getDescription() {
-			return UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getOtherTarget()),
+			return UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getOtherTarget()),
 					(getOtherTarget().isAbleToAccessCoverableArea(CoverableArea.VAGINA, false)
 							?" Shuffling to one side, [npc.she] quickly removes the clothing blocking [npc3.namePos] [npc3.pussy], before starting to rub the head of [npc.her] cock up and down between [npc3.her] [npc3.labia+]."
 							:" Shuffling to one side, [npc.she] quickly lines [npc.her] [npc.cock+] up to [npc3.namePos] [npc3.pussy], before starting to rub the head up and down between [npc3.her] [npc3.labia+].")

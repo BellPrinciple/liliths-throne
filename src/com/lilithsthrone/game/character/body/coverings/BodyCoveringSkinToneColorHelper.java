@@ -19,7 +19,7 @@ import com.lilithsthrone.utils.colours.Colour;
  */
 public class BodyCoveringSkinToneColorHelper {
 	private static final List<AbstractBodyCoveringType> NOT_FOR_THESE_BCTS = 
-			Util.newArrayListOfValues(BodyCoveringType.MAKEUP_BLUSHER,
+			List.of(BodyCoveringType.MAKEUP_BLUSHER,
 					BodyCoveringType.MAKEUP_EYE_LINER,
 					BodyCoveringType.MAKEUP_EYE_SHADOW,
 					BodyCoveringType.MAKEUP_LIPSTICK,

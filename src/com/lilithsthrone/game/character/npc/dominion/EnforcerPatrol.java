@@ -116,8 +116,7 @@ public class EnforcerPatrol extends NPC {
 			
 			Main.game.getCharacterUtils().addFetishes(this, Fetish.FETISH_CROSS_DRESSER, Fetish.FETISH_EXHIBITIONIST); // Do not allow cross-dressing or exhibitionist, as otherwise it will mess with uniforms.
 			
-			List<Fetish> fetishesForNonNegative = Util.newArrayListOfValues(
-					Fetish.FETISH_ANAL_GIVING,
+			List<Fetish> fetishesForNonNegative = List.of(Fetish.FETISH_ANAL_GIVING,
 					Fetish.FETISH_ORAL_RECEIVING,
 					Fetish.FETISH_VAGINAL_GIVING,
 					Fetish.FETISH_VAGINAL_RECEIVING,
@@ -271,7 +270,7 @@ public class EnforcerPatrol extends NPC {
 	
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(EnforcerPatrolSA.class);
+		return List.of(EnforcerPatrolSA.class);
 	}
 	
 	@Override

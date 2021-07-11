@@ -104,7 +104,7 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		this.namePlural = namePlural;
 		this.description = description;
 		this.useDescriptor = "use";
-		this.svgPathInformation = Util.newArrayListOfValues(new SvgInformation(1, pathName==null?"":pathName, 100, 0, new HashMap<>()));
+		this.svgPathInformation = List.of(new SvgInformation(1, pathName==null?"":pathName, 100, 0, new HashMap<>()));
 		this.authorDescription = "";
 
 		this.sexUse = true;
@@ -122,8 +122,8 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		
 		this.effectTooltipLines = new ArrayList<>();
 		
-		this.useDescriptionsSelf = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item.");
-		this.useDescriptionsOther = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item on [npc2.name].");
+		this.useDescriptionsSelf = List.of("[npc.Name] [npc.verb(use)] the item.");
+		this.useDescriptionsOther = List.of("[npc.Name] [npc.verb(use)] the item on [npc2.name].");
 		
 		specialEffect = "";
 		
@@ -296,7 +296,7 @@ public abstract class AbstractItemType extends AbstractCoreType {
 						.map(o -> o.getTextContent())
 						.collect(Collectors.toList());
 				if(useDescriptionsSelf.isEmpty()) {
-					this.useDescriptionsSelf = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item.");
+					this.useDescriptionsSelf = List.of("[npc.Name] [npc.verb(use)] the item.");
 				}
 				
 				this.useDescriptionsOther = itemElement
@@ -305,12 +305,12 @@ public abstract class AbstractItemType extends AbstractCoreType {
 						.map(o -> o.getTextContent())
 						.collect(Collectors.toList());
 				if(useDescriptionsOther.isEmpty()) {
-					this.useDescriptionsOther = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item on [npc2.name].");
+					this.useDescriptionsOther = List.of("[npc.Name] [npc.verb(use)] the item on [npc2.name].");
 				}
 				
 			} else {
-				this.useDescriptionsSelf = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item.");
-				this.useDescriptionsOther = Util.newArrayListOfValues("[npc.Name] [npc.verb(use)] the item on [npc2.name].");
+				this.useDescriptionsSelf = List.of("[npc.Name] [npc.verb(use)] the item.");
+				this.useDescriptionsOther = List.of("[npc.Name] [npc.verb(use)] the item on [npc2.name].");
 			}
 			
 		}

@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.dominion;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.sex.ArousalIncrease;
@@ -14,7 +16,6 @@ import com.lilithsthrone.game.sex.sexActions.SexActionPriority;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericPositioning;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
 
 /**
  * Contains all positional changes for both sub and dom.
@@ -98,8 +99,8 @@ public class ToiletStall {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.AGAINST_WALL,
-				Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL),
-				Util.newArrayListOfValues(SexSlotAgainstWall.FACE_TO_WALL));
+				List.of(SexSlotAgainstWall.STANDING_WALL),
+				List.of(SexSlotAgainstWall.FACE_TO_WALL));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -135,8 +136,8 @@ public class ToiletStall {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.AGAINST_WALL,
-				Util.newArrayListOfValues(SexSlotAgainstWall.FACE_TO_WALL),
-				Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL));
+				List.of(SexSlotAgainstWall.FACE_TO_WALL),
+				List.of(SexSlotAgainstWall.STANDING_WALL));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -171,8 +172,8 @@ public class ToiletStall {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.AGAINST_WALL,
-				Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL),
-				Util.newArrayListOfValues(SexSlotAgainstWall.BACK_TO_WALL));
+				List.of(SexSlotAgainstWall.STANDING_WALL),
+				List.of(SexSlotAgainstWall.BACK_TO_WALL));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -208,8 +209,8 @@ public class ToiletStall {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.AGAINST_WALL,
-				Util.newArrayListOfValues(SexSlotAgainstWall.BACK_TO_WALL),
-				Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL));
+				List.of(SexSlotAgainstWall.BACK_TO_WALL),
+				List.of(SexSlotAgainstWall.STANDING_WALL));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -244,8 +245,8 @@ public class ToiletStall {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.STANDING,
-				Util.newArrayListOfValues(SexSlotStanding.STANDING_DOMINANT),
-				Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL));
+				List.of(SexSlotStanding.STANDING_DOMINANT),
+				List.of(SexSlotStanding.PERFORMING_ORAL));
 
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -281,8 +282,8 @@ public class ToiletStall {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.STANDING,
-				Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL),
-				Util.newArrayListOfValues(SexSlotStanding.STANDING_DOMINANT));
+				List.of(SexSlotStanding.PERFORMING_ORAL),
+				List.of(SexSlotStanding.STANDING_DOMINANT));
 
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -316,8 +317,8 @@ public class ToiletStall {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.STANDING,
-				Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL),
-				Util.newArrayListOfValues(SexSlotStanding.STANDING_DOMINANT));
+				List.of(SexSlotStanding.PERFORMING_ORAL),
+				List.of(SexSlotStanding.STANDING_DOMINANT));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -353,8 +354,8 @@ public class ToiletStall {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.STANDING,
-				Util.newArrayListOfValues(SexSlotStanding.STANDING_DOMINANT),
-				Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL));
+				List.of(SexSlotStanding.STANDING_DOMINANT),
+				List.of(SexSlotStanding.PERFORMING_ORAL));
 
 		@Override
 		public boolean isBaseRequirementsMet() {

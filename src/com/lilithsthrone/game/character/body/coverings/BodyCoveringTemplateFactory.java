@@ -22,7 +22,7 @@ public class BodyCoveringTemplateFactory {
 				false,
 				"skin",
 				"skin",
-				Util.newArrayListOfValues(CoveringModifier.SMOOTH),
+				List.of(CoveringModifier.SMOOTH),
 				null,
 				coverPatterns,
 				CoveringPattern.allStandardCoveringPatterns,
@@ -45,7 +45,7 @@ public class BodyCoveringTemplateFactory {
 				false,
 				"slime",
 				"slime",
-				Util.newArrayListOfValues(CoveringModifier.GOOEY),
+				List.of(CoveringModifier.GOOEY),
 				null,
 				Util.newHashMapOfValues(new Value<>(basePattern, 1)),
 				coverPatterns,
@@ -90,7 +90,7 @@ public class BodyCoveringTemplateFactory {
 	}
 	
 	private static BodyCoveringTemplate createHairWithoutPatterns(String determiner, String name, CoveringModifier modifier) {
-		return createHair(determiner, name, Util.newArrayListOfValues(modifier), Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)));
+		return createHair(determiner, name, List.of(modifier), Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)));
 	}
 	
 	public static BodyCoveringTemplate createHeadHair(CoveringModifier modifier) {
@@ -110,7 +110,7 @@ public class BodyCoveringTemplateFactory {
 				false,
 				name,
 				name,
-				Util.newArrayListOfValues(modifier),
+				List.of(modifier),
 				null,
 				Util.newHashMapOfValues(new Value<>(pattern, 1)),
 				null,
@@ -125,7 +125,7 @@ public class BodyCoveringTemplateFactory {
 				false,
 				"skin",
 				"skin",
-				Util.newArrayListOfValues(CoveringModifier.SMOOTH),
+				List.of(CoveringModifier.SMOOTH),
 				null,
 				pattern==null
 					?null
@@ -133,7 +133,7 @@ public class BodyCoveringTemplateFactory {
 				null,
 				PresetColour.allSkinColours,
 				null,
-				Util.newArrayListOfValues(PresetColour.ORIFICE_INTERIOR),
+				List.of(PresetColour.ORIFICE_INTERIOR),
 				PresetColour.allSkinColours);
 	}
 	
@@ -142,7 +142,7 @@ public class BodyCoveringTemplateFactory {
 				false,
 				"skin",
 				"skin",
-				Util.newArrayListOfValues(CoveringModifier.SMOOTH),
+				List.of(CoveringModifier.SMOOTH),
 				null,
 				Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 10)),
 				Util.newHashMapOfValues(
@@ -152,7 +152,7 @@ public class BodyCoveringTemplateFactory {
 						new Value<>(CoveringPattern.STRIPED, 1)),
 				PresetColour.allSkinColours,
 				null,
-				Util.newArrayListOfValues(PresetColour.ORIFICE_INTERIOR),
+				List.of(PresetColour.ORIFICE_INTERIOR),
 				PresetColour.allSkinColours);
 	}
 	
@@ -171,7 +171,7 @@ public class BodyCoveringTemplateFactory {
 				true,
 				"eyes",
 				"eye",
-				Util.newArrayListOfValues(CoveringModifier.EYE),
+				List.of(CoveringModifier.EYE),
 				null,
 				natural,
 				extra,

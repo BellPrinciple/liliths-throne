@@ -37,7 +37,7 @@ public class CombatMove {
             CombatMoveType.DEFEND,
             DamageType.HEALTH,
             "moves/block",
-            Util.newArrayListOfValues(PresetColour.GENERIC_MINOR_GOOD),
+            List.of(PresetColour.GENERIC_MINOR_GOOD),
             false,
             false,
             true,
@@ -112,7 +112,7 @@ public class CombatMove {
         
         @Override
     	public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-        	return Util.newArrayListOfValues("This move can never crit.");
+        	return List.of("This move can never crit.");
         }
 
         @Override

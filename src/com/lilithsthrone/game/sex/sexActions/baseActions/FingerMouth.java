@@ -135,8 +135,7 @@ public class FingerMouth {
 		public String getDescription() {
 			if(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())==SexPace.DOM_ROUGH) {
 				return UtilText.parse(
-						Util.newArrayListOfValues(
-								Main.sex.getCharacterPerformingAction(),
+						List.of(Main.sex.getCharacterPerformingAction(),
 								Main.sex.getCharacterTargetedForSexAction(this),
 								getBlowjobReceiver()),
 						UtilText.returnStringAtRandom(
@@ -149,8 +148,7 @@ public class FingerMouth {
 				
 			} else {
 				return UtilText.parse(
-						Util.newArrayListOfValues(
-								Main.sex.getCharacterPerformingAction(),
+						List.of(Main.sex.getCharacterPerformingAction(),
 								Main.sex.getCharacterTargetedForSexAction(this),
 								getBlowjobReceiver()),
 						UtilText.returnStringAtRandom(

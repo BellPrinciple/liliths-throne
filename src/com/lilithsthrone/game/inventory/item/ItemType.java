@@ -91,9 +91,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.EPIC,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.MYSTERY_KINK)),
-			Util.newArrayListOfValues(
-					ItemTag.DOMINION_ALLEYWAY_SPAWN,
+			List.of(new ItemEffect(ItemEffectType.MYSTERY_KINK)),
+			List.of(ItemTag.DOMINION_ALLEYWAY_SPAWN,
 					ItemTag.SUBMISSION_TUNNEL_SPAWN,
 					ItemTag.BAT_CAVERNS_SPAWN,
 					ItemTag.MISC_TF_ITEM,
@@ -175,9 +174,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.LEGENDARY,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.ADDICTION_REMOVAL)),
-			Util.newArrayListOfValues(
-					ItemTag.DOMINION_ALLEYWAY_SPAWN,
+			List.of(new ItemEffect(ItemEffectType.ADDICTION_REMOVAL)),
+			List.of(ItemTag.DOMINION_ALLEYWAY_SPAWN,
 					ItemTag.SUBMISSION_TUNNEL_SPAWN,
 					ItemTag.BAT_CAVERNS_SPAWN,
 					ItemTag.SOLD_BY_RALPH)) {
@@ -271,9 +269,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.EPIC,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.MUSHROOMS)),
-			Util.newArrayListOfValues(
-					ItemTag.BAT_CAVERNS_SPAWN,
+			List.of(new ItemEffect(ItemEffectType.MUSHROOMS)),
+			List.of(ItemTag.BAT_CAVERNS_SPAWN,
 					ItemTag.CONTRABAND_LIGHT)) {
 		@Override
 		public boolean isTransformative() {
@@ -411,8 +408,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.EPIC,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.BOTTLED_ESSENCE_ARCANE)),
-			Util.newArrayListOfValues(ItemTag.ESSENCE)) {
+			List.of(new ItemEffect(ItemEffectType.BOTTLED_ESSENCE_ARCANE)),
+			List.of(ItemTag.ESSENCE)) {
 		@Override
 		public String getUseName() {
 			return "absorb";
@@ -442,9 +439,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.LEGENDARY,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.BIMBO_LOLLIPOP)),
-			Util.newArrayListOfValues(
-					ItemTag.RACIAL_TF_ITEM,
+			List.of(new ItemEffect(ItemEffectType.BIMBO_LOLLIPOP)),
+			List.of(ItemTag.RACIAL_TF_ITEM,
 					ItemTag.NOT_FOR_SALE)) {
 
 		
@@ -487,9 +483,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.LEGENDARY,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.NYMPHO_LOLLIPOP)),
-			Util.newArrayListOfValues(
-					ItemTag.RACIAL_TF_ITEM,
+			List.of(new ItemEffect(ItemEffectType.NYMPHO_LOLLIPOP)),
+			List.of(ItemTag.RACIAL_TF_ITEM,
 					ItemTag.NOT_FOR_SALE)) {
 
 		
@@ -531,9 +526,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.LEGENDARY,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.DOMINANT_PERFUME)),
-			Util.newArrayListOfValues(
-					ItemTag.RACIAL_TF_ITEM,
+			List.of(new ItemEffect(ItemEffectType.DOMINANT_PERFUME)),
+			List.of(ItemTag.RACIAL_TF_ITEM,
 					ItemTag.NOT_FOR_SALE)) {
 
 		
@@ -653,9 +647,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.EPIC,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.DYE_BRUSH)),
-			Util.newArrayListOfValues(
-					ItemTag.DOMINION_ALLEYWAY_SPAWN,
+			List.of(new ItemEffect(ItemEffectType.DYE_BRUSH)),
+			List.of(ItemTag.DOMINION_ALLEYWAY_SPAWN,
 					ItemTag.SUBMISSION_TUNNEL_SPAWN)) {
 		@Override
 		public String getUseName() {
@@ -697,9 +690,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.EPIC,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.REFORGE_HAMMER)),
-			Util.newArrayListOfValues(
-					ItemTag.DOMINION_ALLEYWAY_SPAWN,
+			List.of(new ItemEffect(ItemEffectType.REFORGE_HAMMER)),
+			List.of(ItemTag.DOMINION_ALLEYWAY_SPAWN,
 					ItemTag.SUBMISSION_TUNNEL_SPAWN)) {
 		@Override
 		public String getUseName() {
@@ -740,9 +732,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.COMMON,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.USED_CONDOM_DRINK)),
-			Util.newArrayListOfValues(
-					ItemTag.REMOVE_FROM_DEBUG_SPAWNER)) {
+			List.of(new ItemEffect(ItemEffectType.USED_CONDOM_DRINK)),
+			List.of(ItemTag.REMOVE_FROM_DEBUG_SPAWNER)) {
 		@Override
 		public String getUseName() {
 			return "drink";
@@ -781,9 +772,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.COMMON,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.USED_CONDOM_DRINK)),
-			Util.newArrayListOfValues(
-					ItemTag.REMOVE_FROM_DEBUG_SPAWNER)) {
+			List.of(new ItemEffect(ItemEffectType.USED_CONDOM_DRINK)),
+			List.of(ItemTag.REMOVE_FROM_DEBUG_SPAWNER)) {
 		@Override
 		public String getUseName() {
 			return "drink";
@@ -822,7 +812,7 @@ public class ItemType {
 			null,
 			null,
 			Rarity.QUEST,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.ORIENTATION_CHANGE)),
+			List.of(new ItemEffect(ItemEffectType.ORIENTATION_CHANGE)),
 			null) {
 
 		
@@ -960,9 +950,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.COMMON,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.MOO_MILKER)),
-			Util.newArrayListOfValues(
-					ItemTag.DOMINION_ALLEYWAY_SPAWN,
+			List.of(new ItemEffect(ItemEffectType.MOO_MILKER)),
+			List.of(ItemTag.DOMINION_ALLEYWAY_SPAWN,
 					ItemTag.SUBMISSION_TUNNEL_SPAWN,
 					ItemTag.BAT_CAVERNS_SPAWN,
 					ItemTag.SOLD_BY_RALPH)) {
@@ -1022,9 +1011,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.COMMON,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.FILLED_MOO_MILKER_DRINK)),
-			Util.newArrayListOfValues(
-					ItemTag.REMOVE_FROM_DEBUG_SPAWNER)) {
+			List.of(new ItemEffect(ItemEffectType.FILLED_MOO_MILKER_DRINK)),
+			List.of(ItemTag.REMOVE_FROM_DEBUG_SPAWNER)) {
 		
 
 		@Override
@@ -1054,9 +1042,8 @@ public class ItemType {
 			PresetColour.GENERIC_ARCANE,
 			null,
 			Rarity.COMMON,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.PREGNANCY_TEST)),
-			Util.newArrayListOfValues(
-					ItemTag.DOMINION_ALLEYWAY_SPAWN,
+			List.of(new ItemEffect(ItemEffectType.PREGNANCY_TEST)),
+			List.of(ItemTag.DOMINION_ALLEYWAY_SPAWN,
 					ItemTag.SUBMISSION_TUNNEL_SPAWN,
 					ItemTag.SOLD_BY_RALPH)) {
 
@@ -1088,9 +1075,8 @@ public class ItemType {
 			null,
 			null,
 			Rarity.COMMON,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.MOTHERS_MILK)),
-			Util.newArrayListOfValues(
-					ItemTag.DOMINION_ALLEYWAY_SPAWN,
+			List.of(new ItemEffect(ItemEffectType.MOTHERS_MILK)),
+			List.of(ItemTag.DOMINION_ALLEYWAY_SPAWN,
 					ItemTag.SUBMISSION_TUNNEL_SPAWN,
 					ItemTag.SOLD_BY_RALPH)) {
 
@@ -1122,9 +1108,8 @@ public class ItemType {
 			PresetColour.CLOTHING_BRONZE,
 			PresetColour.CLOTHING_BLUE_GREY,
 			Rarity.COMMON,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.REJUVENATION_POTION)),
-			Util.newArrayListOfValues(
-					ItemTag.DOMINION_ALLEYWAY_SPAWN,
+			List.of(new ItemEffect(ItemEffectType.REJUVENATION_POTION)),
+			List.of(ItemTag.DOMINION_ALLEYWAY_SPAWN,
 					ItemTag.SUBMISSION_TUNNEL_SPAWN,
 					ItemTag.SOLD_BY_RALPH)) {
 		@Override
@@ -1153,9 +1138,8 @@ public class ItemType {
 			PresetColour.CLOTHING_GOLD,
 			null,
 			Rarity.COMMON,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.CIGARETTE_PACK)),
-			Util.newArrayListOfValues(
-					ItemTag.DOMINION_ALLEYWAY_SPAWN,
+			List.of(new ItemEffect(ItemEffectType.CIGARETTE_PACK)),
+			List.of(ItemTag.DOMINION_ALLEYWAY_SPAWN,
 					ItemTag.SUBMISSION_TUNNEL_SPAWN,
 					ItemTag.SOLD_BY_RALPH)) {
 
@@ -1186,9 +1170,8 @@ public class ItemType {
 			PresetColour.CLOTHING_BRASS,
 			PresetColour.CLOTHING_WHITE,
 			Rarity.COMMON,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.CIGARETTE)),
-			Util.newArrayListOfValues(
-					ItemTag.DOMINION_ALLEYWAY_SPAWN,
+			List.of(new ItemEffect(ItemEffectType.CIGARETTE)),
+			List.of(ItemTag.DOMINION_ALLEYWAY_SPAWN,
 					ItemTag.SUBMISSION_TUNNEL_SPAWN,
 					ItemTag.SOLD_BY_RALPH)) {
 
@@ -1224,9 +1207,8 @@ public class ItemType {
 			PresetColour.CLOTHING_BLACK,
 			PresetColour.CLOTHING_BLACK,
 			Rarity.EPIC,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.MAKEUP_SET)),
-			Util.newArrayListOfValues(
-					ItemTag.SOLD_BY_RALPH,
+			List.of(new ItemEffect(ItemEffectType.MAKEUP_SET)),
+			List.of(ItemTag.SOLD_BY_RALPH,
 					ItemTag.SOLD_BY_KATE)) {
 		@Override
 		public boolean isAbleToBeUsedInSex() {
@@ -1272,7 +1254,7 @@ public class ItemType {
 			null,
 			null,
 			Rarity.RARE,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.PRESENT)),
+			List.of(new ItemEffect(ItemEffectType.PRESENT)),
 			null) {
 
 		
@@ -1316,7 +1298,7 @@ public class ItemType {
 			PresetColour.BASE_YELLOW,
 			Rarity.UNCOMMON,
 			null,
-			Util.newArrayListOfValues(ItemTag.GIFT)) {
+			List.of(ItemTag.GIFT)) {
 
 
 		@Override
@@ -1361,8 +1343,8 @@ public class ItemType {
 			PresetColour.BASE_BROWN_DARK,
 			PresetColour.BASE_YELLOW,
 			Rarity.UNCOMMON,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.GIFT_CHOCOLATES)),
-			Util.newArrayListOfValues(ItemTag.GIFT)) {
+			List.of(new ItemEffect(ItemEffectType.GIFT_CHOCOLATES)),
+			List.of(ItemTag.GIFT)) {
 
 
 		@Override
@@ -1402,8 +1384,8 @@ public class ItemType {
 			PresetColour.BASE_PURPLE_LIGHT,
 			null,
 			Rarity.UNCOMMON,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.GIFT_PERFUME)),
-			Util.newArrayListOfValues(ItemTag.GIFT)) {
+			List.of(new ItemEffect(ItemEffectType.GIFT_PERFUME)),
+			List.of(ItemTag.GIFT)) {
 
 
 		@Override
@@ -1445,7 +1427,7 @@ public class ItemType {
 			null,
 			Rarity.UNCOMMON,
 			null,
-			Util.newArrayListOfValues(ItemTag.GIFT)) {
+			List.of(ItemTag.GIFT)) {
 
 
 		@Override
@@ -1491,7 +1473,7 @@ public class ItemType {
 			null,
 			null,
 			Rarity.LEGENDARY,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.EGGPLANT)),
+			List.of(new ItemEffect(ItemEffectType.EGGPLANT)),
 			null) {
 
 		
@@ -1724,7 +1706,7 @@ public class ItemType {
 			null,
 			null,
 			Rarity.QUEST,
-			Util.newArrayListOfValues(new ItemEffect(ItemEffectType.OFFSPRING_MAP)),
+			List.of(new ItemEffect(ItemEffectType.OFFSPRING_MAP)),
 			null) {
 		@Override
 		public String getUseName() {
@@ -1904,7 +1886,7 @@ public class ItemType {
 		}
 		@Override
 		public List<AbstractCoreType> getAdditionalDiscoveryTypes() {
-			return Util.newArrayListOfValues(PAINT_CAN);
+			return List.of(PAINT_CAN);
 		}
 	};
 
@@ -1936,7 +1918,7 @@ public class ItemType {
 		}
 		@Override
 		public List<AbstractCoreType> getAdditionalDiscoveryTypes() {
-			return Util.newArrayListOfValues(PAINT_CAN_PREMIUM);
+			return List.of(PAINT_CAN_PREMIUM);
 		}
 	};
 
@@ -2802,8 +2784,8 @@ public class ItemType {
 					null,
 					null,
 					Rarity.LEGENDARY,
-					Util.newArrayListOfValues(new ItemEffect(effectType)),
-					Util.newArrayListOfValues(ItemTag.SPELL_BOOK)) {
+					List.of(new ItemEffect(effectType)),
+					List.of(ItemTag.SPELL_BOOK)) {
 		
 				@Override
 				public String getSVGString() {
@@ -2861,8 +2843,7 @@ public class ItemType {
 		
 		for(SpellSchool school : SpellSchool.values()) {
 			
-			AbstractItemEffectType effectType = new AbstractItemEffectType(Util.newArrayListOfValues(
-							"[style.boldExcellent(+1)] to <span style='color:"+school.getColour().toWebHexString()+";'>"+school.getName()+"</span> upgrade points."),
+			AbstractItemEffectType effectType = new AbstractItemEffectType(List.of("[style.boldExcellent(+1)] to <span style='color:"+school.getColour().toWebHexString()+";'>"+school.getName()+"</span> upgrade points."),
 							school.getColour()) {
 						
 						@Override
@@ -2888,8 +2869,8 @@ public class ItemType {
 					null,
 					null,
 					Rarity.EPIC,
-					Util.newArrayListOfValues(new ItemEffect(effectType)),
-					Util.newArrayListOfValues(ItemTag.SPELL_SCROLL)) {
+					List.of(new ItemEffect(effectType)),
+					List.of(ItemTag.SPELL_SCROLL)) {
 				@Override
 				public boolean isAbleToBeUsed(GameCharacter target) {
 					return (target.isPlayer() || target.getAttributeValue(Attribute.MAJOR_ARCANE)>=IntelligenceLevel.ONE_AVERAGE.getMinimumValue())
@@ -2973,7 +2954,7 @@ public class ItemType {
 							mainSubspecies.getColour(null),
 							Rarity.LEGENDARY,
 							null,
-							Util.newArrayListOfValues(ItemTag.BOOK)) {
+							List.of(ItemTag.BOOK)) {
 				@Override
 				public List<ItemEffect> getEffects() {
 					AbstractSubspecies mainSubspecies = entry.getValue().contains(AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace()))
@@ -2988,7 +2969,7 @@ public class ItemType {
 						ItemEffectType.idToItemEffectTypeMap.put(id, bookType);
 					}
 					
-					return Util.newArrayListOfValues(new ItemEffect(ItemEffectType.getBookEffectFromSubspecies(mainSubspecies)));
+					return List.of(new ItemEffect(ItemEffectType.getBookEffectFromSubspecies(mainSubspecies)));
 				}
 				@Override
 				public String getSVGString() {
@@ -3084,8 +3065,7 @@ public class ItemType {
 				StatusEffect.idToStatusEffectMap.put(effect_id, statusEffect);
 				StatusEffect.allStatusEffects.add(statusEffect);
 
-				AbstractItemEffectType effectType = new AbstractItemEffectType(Util.newArrayListOfValues(
-						"[style.boldGood(+1)] [style.boldArcane(Arcane essence)]"),
+				AbstractItemEffectType effectType = new AbstractItemEffectType(List.of("[style.boldGood(+1)] [style.boldArcane(Arcane essence)]"),
 						mainSubspecies.getColour(null)) {
 					@Override
 					public List<String> getEffectsDescription(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target) {
@@ -3125,10 +3105,10 @@ public class ItemType {
 						null,
 						null,
 						Rarity.EPIC,
-						Util.newArrayListOfValues(new ItemEffect(effectType)),
+						List.of(new ItemEffect(effectType)),
 						(((mainSubspecies.getRace()==Race.DEMON && mainSubspecies.getSubspeciesOverridePriority()>5) || mainSubspecies.getRace()==Race.ANGEL) // Demon+ (and Angels) are contraband
-								?Util.newArrayListOfValues(ItemTag.ESSENCE, ItemTag.CONTRABAND_HEAVY)
-								:Util.newArrayListOfValues(ItemTag.ESSENCE))) {
+								?List.of(ItemTag.ESSENCE, ItemTag.CONTRABAND_HEAVY)
+								:List.of(ItemTag.ESSENCE))) {
 						
 					@Override
 					public String getUseName() {
@@ -3158,8 +3138,7 @@ public class ItemType {
 	}
 	
 	private static AbstractItemEffectType generateBookEffect(AbstractSubspecies subspecies) {
-		return new AbstractItemEffectType(Util.newArrayListOfValues(
-				"Adds "+subspecies.getName(null)+" encyclopedia entry.",
+		return new AbstractItemEffectType(List.of("Adds "+subspecies.getName(null)+" encyclopedia entry.",
 				"[style.boldExcellent(+10)] <b style='color:"+subspecies.getColour(null).toWebHexString()+";'>"+subspecies.getDamageMultiplier().getName()+"</b>"),
 				subspecies.getColour(null)) {
 			@Override

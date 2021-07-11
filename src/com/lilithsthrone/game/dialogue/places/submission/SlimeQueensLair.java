@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.submission;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
@@ -143,7 +145,7 @@ public class SlimeQueensLair {
 					return new ResponseCombat("Fight",
 							"Decide to drop the act and attack [slimeFire.name] and [slimeIce.name]!",
 							Main.game.getNpc(SlimeGuardFire.class),
-							Util.newArrayListOfValues(Main.game.getNpc(SlimeGuardFire.class), Main.game.getNpc(SlimeGuardIce.class)),
+							List.of(Main.game.getNpc(SlimeGuardFire.class), Main.game.getNpc(SlimeGuardIce.class)),
 							Util.newHashMapOfValues(
 									new Value<>(Main.game.getPlayer(), "[pc.speech(I can't believe you fell for my tale!)] You laugh, getting ready to fight the slime siblings. [pc.speech(I'll teach you not to be so gullible!)]"),
 									new Value<>(Main.game.getNpc(SlimeGuardFire.class), "[slimeFire.speech(Sis' and I are gonna have so much fun with you!)] [slimeFire.name] sneers, gripping his fire-enchanted sword in one hand."),
@@ -171,7 +173,7 @@ public class SlimeQueensLair {
 				} else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE)?index==3:index==4) {
 					return new ResponseSex("Get Spitroasted",
 							"Let [slimeFire.name] and [slimeIce.name] spitroast you.",
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 							true, true,
 							new SMAllFours(
 									Util.newHashMapOfValues(
@@ -211,7 +213,7 @@ public class SlimeQueensLair {
 				} else if(index==2) {
 					return new ResponseSex("Get Spitroasted",
 							"Let [slimeFire.name] and [slimeIce.name] spitroast you.",
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 							true, true,
 							new SMAllFours(
 									Util.newHashMapOfValues(
@@ -234,7 +236,7 @@ public class SlimeQueensLair {
 					return new ResponseCombat("Fight",
 							"Fight your way past these slimes!",
 							Main.game.getNpc(SlimeGuardFire.class),
-							Util.newArrayListOfValues(Main.game.getNpc(SlimeGuardFire.class), Main.game.getNpc(SlimeGuardIce.class)),
+							List.of(Main.game.getNpc(SlimeGuardFire.class), Main.game.getNpc(SlimeGuardIce.class)),
 							Util.newHashMapOfValues(
 									new Value<>(Main.game.getPlayer(), "[pc.speech(If it's a fight you want, it's a fight you're going to get!)] you cry out, ready to fight the slime siblings."),
 									new Value<>(Main.game.getNpc(SlimeGuardFire.class), "[slimeFire.speech(Sis' and I are gonna have so much fun with you!)] [slimeFire.name] sneers, gripping his fire-enchanted sword in one hand."),
@@ -400,7 +402,7 @@ public class SlimeQueensLair {
 			if(index==1) {
 				return new ResponseSex("Spitroasted",
 						"[slimeFire.name] and [slimeIce.name] move to have some fun with you...",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+						List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 						false, false,
 						new SMAllFours(
 								Util.newHashMapOfValues(
@@ -598,8 +600,8 @@ public class SlimeQueensLair {
 							null, null, null, null, null, null,
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(SlimeRoyalGuard.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(SlimeRoyalGuard.class)),
 							null,
 							null), AFTER_SLIME_ROYAL_GUARD_SEX_AS_DOM, UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_ROYAL_GUARD_BEGIN_SEX_AS_DOM")) {
 						@Override
@@ -611,11 +613,11 @@ public class SlimeQueensLair {
 				} else if(index==2) {
 					return new ResponseSex("Submit",
 							UtilText.parse(Main.game.getNpc(SlimeRoyalGuard.class), "Let [slimeRoyalGuard.name] fuck you."),
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getNpc(SlimeRoyalGuard.class)),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(SlimeRoyalGuard.class)),
+									List.of(Main.game.getPlayer()),
 							null,
 							null), AFTER_SLIME_ROYAL_GUARD_SEX_AS_SUB, UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_ROYAL_GUARD_BEGIN_SEX_AS_SUB")) {
 						@Override
@@ -845,11 +847,11 @@ public class SlimeQueensLair {
 			} else if(index==2) {
 				return new ResponseSex("Submissive sex",
 						UtilText.parse(Main.game.getNpc(SlimeRoyalGuard.class), "Push [slimeRoyalGuard.name] over the edge and tire him out through sex."),
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+						List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(SlimeRoyalGuard.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(SlimeRoyalGuard.class)),
+								List.of(Main.game.getPlayer()),
 						null,
 						null) {
 							@Override
@@ -947,11 +949,11 @@ public class SlimeQueensLair {
 			if(index==1) {
 				return new ResponseSex("Sex",
 						"[slimeRoyalGuard.Name] moves to have some fun with you...",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+						List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(SlimeRoyalGuard.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(SlimeRoyalGuard.class)),
+								List.of(Main.game.getPlayer()),
 						null,
 						null), AFTER_SLIME_ROYAL_GUARD_SEX_DEFEATED, UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_ROYAL_GUARD_COMBAT_PLAYER_DEFEAT_SEX"));
 				
@@ -976,19 +978,19 @@ public class SlimeQueensLair {
 						null, null, null, null, null, null,
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(SlimeRoyalGuard.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(SlimeRoyalGuard.class)),
 						null,
 						null), AFTER_SLIME_ROYAL_GUARD_SEX_AS_DOM, UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_ROYAL_GUARD_BEGIN_SEX_AS_DOM"));
 			
 			} else if(index==2) {
 				return new ResponseSex("Submit",
 						UtilText.parse(Main.game.getNpc(SlimeRoyalGuard.class), "Let [slimeRoyalGuard.name] fuck you."),
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+						List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(SlimeRoyalGuard.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(SlimeRoyalGuard.class)),
+								List.of(Main.game.getPlayer()),
 						null,
 						null), AFTER_SLIME_ROYAL_GUARD_SEX_AS_SUB, UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_ROYAL_GUARD_BEGIN_SEX_AS_SUB"));
 			} else {
@@ -1009,11 +1011,11 @@ public class SlimeQueensLair {
 			if(index==1) {
 				return new ResponseSex("Sex",
 						"[slimeRoyalGuard.Name] moves to have some fun with you...",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+						List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(SlimeRoyalGuard.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(SlimeRoyalGuard.class)),
+								List.of(Main.game.getPlayer()),
 						null,
 						null),
 						AFTER_SLIME_ROYAL_GUARD_SEX_SPARRING_DEFEATED,
@@ -1109,7 +1111,7 @@ public class SlimeQueensLair {
 					
 				} else if(index==2) {
 					return new Response("Force", "If she really wants to be treated roughly, then that's what [slimeQueen.namePos] going to get. Push her down on her bed and force her to give up her plans.", SLIME_QUEEN_FORCE,
-							Util.newArrayListOfValues(Fetish.FETISH_SADIST), Fetish.FETISH_SADIST.getAssociatedCorruptionLevel(), null, null, null) {
+							List.of(Fetish.FETISH_SADIST), Fetish.FETISH_SADIST.getAssociatedCorruptionLevel(), null, null, null) {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeQueenForced, true);
@@ -1127,7 +1129,7 @@ public class SlimeQueensLair {
 					
 				} else if(index==3) {
 					return new Response("Help", "Instead of stopping her, offer Catherine your assistance instead. <b>This will greatly increase the number of slime encounters in Submission.</b>", SLIME_QUEEN_SUBMIT,
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null) {
+							List.of(Fetish.FETISH_SUBMISSIVE), Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null) {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeQueenHelped, true);

@@ -77,7 +77,7 @@ public class MasturbationPanties {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter characterPerformingAction) {
 			if(characterPerformingAction.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_INCEST);
+				return List.of(Fetish.FETISH_INCEST);
 			} else {
 				return null;
 			}
@@ -133,7 +133,7 @@ public class MasturbationPanties {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter characterPerformingAction) {
 			if(characterPerformingAction.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_INCEST);
+				return List.of(Fetish.FETISH_INCEST);
 			} else {
 				return null;
 			}
@@ -177,7 +177,7 @@ public class MasturbationPanties {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter characterPerformingAction) {
 			if(characterPerformingAction.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_MASTURBATION);
+				return List.of(Fetish.FETISH_MASTURBATION);
 			} else {
 				return null;
 			}
@@ -219,8 +219,7 @@ public class MasturbationPanties {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter characterPerformingAction) {
 			if(characterPerformingAction.isPlayer()) {
-				return Util.newArrayListOfValues(
-						Fetish.FETISH_INCEST,
+				return List.of(Fetish.FETISH_INCEST,
 						Fetish.FETISH_MASTURBATION);
 			} else {
 				return null;

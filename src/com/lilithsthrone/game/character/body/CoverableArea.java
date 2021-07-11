@@ -21,44 +21,38 @@ public enum CoverableArea {
 
 	HANDS(false,
 			"hands",
-			Util.newArrayListOfValues(
-					InventorySlot.FINGER,
+			List.of(InventorySlot.FINGER,
 					InventorySlot.HAND,
 					InventorySlot.WRIST)),
 	
 	ASS(true,
 			"ass",
-			Util.newArrayListOfValues(
-					InventorySlot.GROIN,
+			List.of(InventorySlot.GROIN,
 					InventorySlot.ANUS,
 					InventorySlot.LEG,
 					InventorySlot.TAIL)),
 	
 	ANUS(true,
 			"asshole",
-			Util.newArrayListOfValues(
-					InventorySlot.GROIN,
+			List.of(InventorySlot.GROIN,
 					InventorySlot.ANUS)),
 
 	STOMACH(false,
 			"stomach",
-			Util.newArrayListOfValues(
-					InventorySlot.STOMACH,
+			List.of(InventorySlot.STOMACH,
 					InventorySlot.TORSO_UNDER,
 					InventorySlot.TORSO_OVER)),
 	
 	BACK(false,
 			"back",
-			Util.newArrayListOfValues(
-					InventorySlot.TORSO_UNDER,
+			List.of(InventorySlot.TORSO_UNDER,
 					InventorySlot.TORSO_OVER,
 					InventorySlot.WINGS,
 					InventorySlot.TAIL)),
 	
 	LEGS(false,
 			"legs",
-			Util.newArrayListOfValues(
-					InventorySlot.LEG,
+			List.of(InventorySlot.LEG,
 					InventorySlot.SOCK)) {
 //		public boolean isPhysicallyAvailable(GameCharacter owner) {
 //			return owner.hasLegs();
@@ -67,8 +61,7 @@ public enum CoverableArea {
 	
 	FEET(false,
 			"feet",
-			Util.newArrayListOfValues(
-					InventorySlot.FOOT,
+			List.of(InventorySlot.FOOT,
 					InventorySlot.ANKLE,
 					InventorySlot.SOCK)) {
 		public boolean isPhysicallyAvailable(GameCharacter owner) {
@@ -78,8 +71,7 @@ public enum CoverableArea {
 	
 	THIGHS(false,
 			"thighs",
-			Util.newArrayListOfValues(
-					InventorySlot.LEG,
+			List.of(InventorySlot.LEG,
 					InventorySlot.GROIN)) {
 		public boolean isPhysicallyAvailable(GameCharacter owner) {
 			return owner.hasLegs();
@@ -88,8 +80,7 @@ public enum CoverableArea {
 	
 	ARMPITS(false,
 			"armpits",
-			Util.newArrayListOfValues(
-					InventorySlot.TORSO_UNDER,
+			List.of(InventorySlot.TORSO_UNDER,
 					InventorySlot.TORSO_OVER)) {
 //		public boolean isPhysicallyAvailable(GameCharacter owner) {
 //			return owner.hasArms();
@@ -98,8 +89,7 @@ public enum CoverableArea {
 	
 	TAIL(false,
 			"tail",
-			Util.newArrayListOfValues(
-					InventorySlot.TAIL)) {
+			List.of(InventorySlot.TAIL)) {
 		public boolean isPhysicallyAvailable(GameCharacter owner) {
 			return owner.hasTail();
 		}
@@ -107,8 +97,7 @@ public enum CoverableArea {
 	
 	VAGINA(true,
 			"pussy",
-			Util.newArrayListOfValues(
-					InventorySlot.VAGINA,
+			List.of(InventorySlot.VAGINA,
 					InventorySlot.GROIN,
 					InventorySlot.LEG)) {
 		public boolean isPhysicallyAvailable(GameCharacter owner) {
@@ -118,8 +107,7 @@ public enum CoverableArea {
 	
 	MOUND(true,
 			"mound",
-			Util.newArrayListOfValues(
-					InventorySlot.GROIN,
+			List.of(InventorySlot.GROIN,
 					InventorySlot.LEG)) {
 		public boolean isPhysicallyAvailable(GameCharacter owner) {
 			return !owner.hasVagina() && !owner.hasPenis();
@@ -128,8 +116,7 @@ public enum CoverableArea {
 	
 	PENIS(true,
 			"cock",
-			Util.newArrayListOfValues(
-					InventorySlot.PENIS,
+			List.of(InventorySlot.PENIS,
 					InventorySlot.GROIN,
 					InventorySlot.LEG)) {
 		public boolean isPhysicallyAvailable(GameCharacter owner) {
@@ -139,8 +126,7 @@ public enum CoverableArea {
 	
 	TESTICLES(true,
 			"balls",
-			Util.newArrayListOfValues(
-					InventorySlot.GROIN,
+			List.of(InventorySlot.GROIN,
 					InventorySlot.LEG)) {
 		public boolean isPhysicallyAvailable(GameCharacter owner) {
 			return owner.hasPenis();
@@ -149,24 +135,21 @@ public enum CoverableArea {
 	
 	BREASTS(true,
 			"breasts",
-			Util.newArrayListOfValues(
-					InventorySlot.CHEST,
+			List.of(InventorySlot.CHEST,
 					InventorySlot.NIPPLE,
 					InventorySlot.TORSO_UNDER,
 					InventorySlot.TORSO_OVER)),
 	
 	NIPPLES(true,
 			"nipples",
-			Util.newArrayListOfValues(
-					InventorySlot.CHEST,
+			List.of(InventorySlot.CHEST,
 					InventorySlot.NIPPLE,
 					InventorySlot.TORSO_UNDER,
 					InventorySlot.TORSO_OVER)),
 	
 	BREASTS_CROTCH(true,
 			"crotch-breasts",
-			Util.newArrayListOfValues(
-					InventorySlot.STOMACH,
+			List.of(InventorySlot.STOMACH,
 					InventorySlot.GROIN,
 					InventorySlot.TORSO_UNDER,
 					InventorySlot.TORSO_OVER)) {
@@ -177,8 +160,7 @@ public enum CoverableArea {
 			if(owner.getLegConfiguration().isBipedalPositionedCrotchBoobs()) {
 				return super.getAssociatedInventorySlots(owner);
 			} else {
-				return Util.newArrayListOfValues(
-						InventorySlot.STOMACH,
+				return List.of(InventorySlot.STOMACH,
 						InventorySlot.GROIN,
 						InventorySlot.LEG);
 			}
@@ -198,15 +180,13 @@ public enum CoverableArea {
 
 	HAIR(false,
 			"hair",
-			Util.newArrayListOfValues(
-					InventorySlot.HAIR,
+			List.of(InventorySlot.HAIR,
 					InventorySlot.HORNS,
 					InventorySlot.HEAD)),
 	
 	MOUTH(true,
 			"mouth",
-			Util.newArrayListOfValues(
-					InventorySlot.HAIR,
+			List.of(InventorySlot.HAIR,
 					InventorySlot.HORNS,
 					InventorySlot.HEAD,
 					InventorySlot.EYES,

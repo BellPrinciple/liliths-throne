@@ -360,8 +360,8 @@ public class PregnancyRoulette {
 								null, null, null, null, null, null,
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(Main.game.getNpc(Epona.class)),
+										List.of(Main.game.getPlayer()),
+										List.of(Main.game.getNpc(Epona.class)),
 										null,
 										null) {
 									@Override
@@ -387,8 +387,8 @@ public class PregnancyRoulette {
 								null, null, null, null, null, null,
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getNpc(Epona.class)),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(Main.game.getNpc(Epona.class)),
+										List.of(Main.game.getPlayer()),
 										null,
 										null) {
 									@Override
@@ -551,7 +551,7 @@ public class PregnancyRoulette {
 		
 		@Override
 		public String getContent() {
-			return UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_MOTHER_START", Util.newArrayListOfValues(selectedBreeder));
+			return UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_MOTHER_START", List.of(selectedBreeder));
 		}
 
 		@Override
@@ -580,7 +580,7 @@ public class PregnancyRoulette {
 							}
 						},
 						null,
-						null, AFTER_ROULETTE_SEX, UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "ROULETTE_STARTING", Util.newArrayListOfValues(breeder))){
+						null, AFTER_ROULETTE_SEX, UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "ROULETTE_STARTING", List.of(breeder))){
 					@Override
 					public void effects() {
 						breederIndex++;
@@ -617,7 +617,7 @@ public class PregnancyRoulette {
 							}
 						},
 						null,
-						null, AFTER_ROULETTE_SEX, UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "ROULETTE_STARTING", Util.newArrayListOfValues(breeder))){
+						null, AFTER_ROULETTE_SEX, UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "ROULETTE_STARTING", List.of(breeder))){
 					@Override
 					public void effects() {
 						breederIndex++;
@@ -642,7 +642,7 @@ public class PregnancyRoulette {
 		@Override
 		public String getContent() {
 			NPC breeder = breeders.get(breederIndex-1);
-			return UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "AFTER_ROULETTE_SEX", Util.newArrayListOfValues(breeder));
+			return UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "AFTER_ROULETTE_SEX", List.of(breeder));
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
@@ -665,7 +665,7 @@ public class PregnancyRoulette {
 								}
 							},
 							null,
-							null, AFTER_ROULETTE_SEX, UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "ROULETTE_STARTING", Util.newArrayListOfValues(breeder))){
+							null, AFTER_ROULETTE_SEX, UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "ROULETTE_STARTING", List.of(breeder))){
 						@Override
 						public void effects() {
 							breederIndex++;
@@ -696,7 +696,7 @@ public class PregnancyRoulette {
 								}
 							},
 							null,
-							null, AFTER_ROULETTE_SEX, UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "ROULETTE_STARTING", Util.newArrayListOfValues(breeder))){
+							null, AFTER_ROULETTE_SEX, UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "ROULETTE_STARTING", List.of(breeder))){
 						@Override
 						public void effects() {
 							breederIndex++;
@@ -827,9 +827,9 @@ public class PregnancyRoulette {
 			UtilText.nodeContentSB.setLength(0);
 			
 			if(Main.game.getPlayer().isFeminine()) {
-				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_BREEDER_FUTA", Util.newArrayListOfValues(mother)));
+				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_BREEDER_FUTA", List.of(mother)));
 			} else {
-				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_BREEDER", Util.newArrayListOfValues(mother)));
+				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_BREEDER", List.of(mother)));
 			}
 			
 			UtilText.nodeContentSB.append(
@@ -876,8 +876,8 @@ public class PregnancyRoulette {
 						null,
 						PREGNANCY_ROULETTE_BREEDER_POST_SEX,
 						roll==1
-							?UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_BREEDER_FIRST", Util.newArrayListOfValues(mother))
-							:UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_BREEDER_MIDDLE", Util.newArrayListOfValues(mother))){
+							?UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_BREEDER_FIRST", List.of(mother))
+							:UtilText.parseFromXMLFile("places/submission/gamblingDen/pregnancyRoulette", "PREGNANCY_ROULETTE_BREEDER_MIDDLE", List.of(mother))){
 					@Override
 					public void effects() {
 						for(int i=0; i<roll-1; i++) {
@@ -1248,16 +1248,16 @@ public class PregnancyRoulette {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
 									
 									if(murkPreference.getTargetedSexArea()==SexAreaOrifice.VAGINA) {
-										map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA));
+										map.put(Main.game.getPlayer(), List.of(CoverableArea.VAGINA));
 										
 									} else if(murkPreference.getTargetedSexArea()==SexAreaOrifice.ANUS) {
-										map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS));
+										map.put(Main.game.getPlayer(), List.of(CoverableArea.ANUS));
 										
 									} else if(murkPreference.getTargetedSexArea()==SexAreaOrifice.MOUTH) {
-										map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH));
+										map.put(Main.game.getPlayer(), List.of(CoverableArea.MOUTH));
 									}
 									
-									map.put(Main.game.getNpc(Murk.class), Util.newArrayListOfValues(CoverableArea.PENIS));
+									map.put(Main.game.getNpc(Murk.class), List.of(CoverableArea.PENIS));
 									
 									return map;
 								}
@@ -1281,16 +1281,16 @@ public class PregnancyRoulette {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
 							if(murkPreference.getTargetedSexArea()==SexAreaOrifice.VAGINA) {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 								
 							} else if(murkPreference.getTargetedSexArea()==SexAreaOrifice.ANUS){
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
 								
 							} else if(murkPreference.getTargetedSexArea()==SexAreaOrifice.MOUTH) {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 								
 							} else {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), FingerPenis.COCK_MASTURBATED_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), FingerPenis.COCK_MASTURBATED_START, false, true));
 							}
 						}
 					};
@@ -1492,16 +1492,16 @@ public class PregnancyRoulette {
 								Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
 								
 								if(murkPreference.getTargetedSexArea()==SexAreaOrifice.VAGINA) {
-									map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA));
+									map.put(Main.game.getPlayer(), List.of(CoverableArea.VAGINA));
 									
 								} else if(murkPreference.getTargetedSexArea()==SexAreaOrifice.ANUS) {
-									map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS));
+									map.put(Main.game.getPlayer(), List.of(CoverableArea.ANUS));
 									
 								} else if(murkPreference.getTargetedSexArea()==SexAreaOrifice.MOUTH) {
-									map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH));
+									map.put(Main.game.getPlayer(), List.of(CoverableArea.MOUTH));
 								}
 								
-								map.put(Main.game.getNpc(Murk.class), Util.newArrayListOfValues(CoverableArea.PENIS));
+								map.put(Main.game.getNpc(Murk.class), List.of(CoverableArea.PENIS));
 								
 								return map;
 							}
@@ -1525,16 +1525,16 @@ public class PregnancyRoulette {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
 						if(murkPreference.getTargetedSexArea()==SexAreaOrifice.VAGINA) {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 							
 						} else if(murkPreference.getTargetedSexArea()==SexAreaOrifice.ANUS){
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
 							
 						} else if(murkPreference.getTargetedSexArea()==SexAreaOrifice.MOUTH) {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 							
 						} else {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), FingerPenis.COCK_MASTURBATED_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Murk.class), Main.game.getPlayer(), FingerPenis.COCK_MASTURBATED_START, false, true));
 						}
 					}
 				};

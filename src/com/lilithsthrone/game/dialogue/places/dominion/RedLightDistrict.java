@@ -271,10 +271,10 @@ public class RedLightDistrict {
 //					}
 //					System.out.println(currentSex.getTags().get(0));
 					
-					return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_OCCUPIED_SLAVE_SEX", Util.newArrayListOfValues(prostitute, client)); //TODO need obedience/affection variations
+					return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_OCCUPIED_SLAVE_SEX", List.of(prostitute, client)); //TODO need obedience/affection variations
 
 				} else {
-					return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_OCCUPIED_SEX", Util.newArrayListOfValues(prostitute, client));
+					return UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_OCCUPIED_SEX", List.of(prostitute, client));
 				}
 				
 			} else if(charactersPresent.isEmpty()) {
@@ -291,9 +291,9 @@ public class RedLightDistrict {
 			} else {
 				Main.game.setActiveNPC(charactersPresent.get(0));
 				if(charactersPresent.get(0).isSlave() && charactersPresent.get(0).getOwner().isPlayer()) {
-					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_OCCUPIED_SLAVE", Util.newArrayListOfValues(charactersPresent.get(0)))); //TODO need obedience/affection variations
+					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_OCCUPIED_SLAVE", List.of(charactersPresent.get(0)))); //TODO need obedience/affection variations
 				} else {
-					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_OCCUPIED", Util.newArrayListOfValues(charactersPresent.get(0))));
+					UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_OCCUPIED", List.of(charactersPresent.get(0))));
 				}
 			}
 			
@@ -317,8 +317,8 @@ public class RedLightDistrict {
 										UtilText.parse(npc, "Have sex with [npc.name], with you as the dominant partner."),
 										true, false,
 										new SMGeneric(
-												Util.newArrayListOfValues(Main.game.getPlayer()),
-												Util.newArrayListOfValues(npc),
+												List.of(Main.game.getPlayer()),
+												List.of(npc),
 										null,
 										null) {
 											public SexPace getStartingSexPaceModifier(GameCharacter character) {
@@ -336,8 +336,8 @@ public class RedLightDistrict {
 										UtilText.parse(npc, "Let [npc.name] take charge, allowing you to have submissive sex with [npc.herHim]."),
 										true, false,
 										new SMGeneric(
-												Util.newArrayListOfValues(npc),
-												Util.newArrayListOfValues(Main.game.getPlayer()),
+												List.of(npc),
+												List.of(Main.game.getPlayer()),
 										null,
 										null){
 											public SexPace getStartingSexPaceModifier(GameCharacter character) {
@@ -364,8 +364,8 @@ public class RedLightDistrict {
 										UtilText.parse(npc, "Pay "+cost+" flames to have sex with [npc.name], with you as the dominant partner."),
 										true, false,
 										new SMGeneric(
-												Util.newArrayListOfValues(Main.game.getPlayer()),
-												Util.newArrayListOfValues(npc),
+												List.of(Main.game.getPlayer()),
+												List.of(npc),
 										null,
 										null){
 											public SexPace getStartingSexPaceModifier(GameCharacter character) {
@@ -394,8 +394,8 @@ public class RedLightDistrict {
 										UtilText.parse(npc, "Pay "+cost+" flames to let [npc.name] take charge, allowing you to have submissive sex with [npc.herHim]."),
 										true, false,
 										new SMGeneric(
-												Util.newArrayListOfValues(npc),
-												Util.newArrayListOfValues(Main.game.getPlayer()),
+												List.of(npc),
+												List.of(Main.game.getPlayer()),
 										null,
 										null){
 											public SexPace getStartingSexPaceModifier(GameCharacter character) {
@@ -520,8 +520,8 @@ public class RedLightDistrict {
 						"Accept the price of "+2000+" flames to have sex with [npc.name].",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getActiveNPC()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getActiveNPC()),
+								List.of(Main.game.getPlayer()),
 						null,
 						null),
 						AFTER_SEX_SELL_SELF_SUB,
@@ -570,8 +570,8 @@ public class RedLightDistrict {
 						"Accept the price of "+2000+" flames to have sex with [npc.name].",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getActiveNPC()),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getActiveNPC()),
 						null,
 						null), AFTER_SEX_SELL_SELF_DOM, UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "SELL_SELF_DOM_START")) {
 					@Override
@@ -736,8 +736,8 @@ public class RedLightDistrict {
 							"Pay "+cost+" flames to have sex with Bunny.",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(Bunny.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(Bunny.class)),
 							null,
 							null), AFTER_SEX_BUNNY, UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_BUNNY_SEX")) {
 						@Override
@@ -760,8 +760,8 @@ public class RedLightDistrict {
 							"Pay "+threesomeCost+" flames to have sex with both Bunny and Loppy at the same time.",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(Bunny.class), Main.game.getNpc(Loppy.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(Bunny.class), Main.game.getNpc(Loppy.class)),
 									null,
 									null,
 									ResponseTag.PREFER_DOGGY),
@@ -893,8 +893,8 @@ public class RedLightDistrict {
 							"Pay "+cost+" flames to have sex with Loppy.",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(Loppy.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(Loppy.class)),
 							null,
 							null), AFTER_SEX_LOPPY, UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_SEX")) {
 						@Override
@@ -917,8 +917,8 @@ public class RedLightDistrict {
 							"Pay "+dominantCost+" flames to let Loppy take charge and fuck you.",
 							true, true,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getNpc(Loppy.class)),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(Loppy.class)),
+									List.of(Main.game.getPlayer()),
 							null,
 							null), AFTER_SEX_LOPPY, UtilText.parseFromXMLFile("places/dominion/redLightDistrict/angelsKiss", "BEDROOM_LOPPY_SEX_SUBMISSIVE")) {
 						@Override
@@ -941,8 +941,8 @@ public class RedLightDistrict {
 							"Pay "+threesomeCost+" flames to have sex with both Loppy and Bunny at the same time.",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(Loppy.class), Main.game.getNpc(Bunny.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(Loppy.class), Main.game.getNpc(Bunny.class)),
 									null,
 									null,
 									ResponseTag.PREFER_DOGGY),

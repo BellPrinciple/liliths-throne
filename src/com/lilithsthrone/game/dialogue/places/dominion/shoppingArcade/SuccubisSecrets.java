@@ -139,7 +139,7 @@ public class SuccubisSecrets {
 					if(coveringsNamesMap.containsKey(coveringType)) {
 						coveringsNamesMap.get(coveringType).getValue().add(name);
 					} else {
-						coveringsNamesMap.put(coveringType, new Value<>(race, Util.newArrayListOfValues(name)));
+						coveringsNamesMap.put(coveringType, new Value<>(race, List.of(name)));
 					}
 					
 					if(bp instanceof Face) {
@@ -147,13 +147,13 @@ public class SuccubisSecrets {
 						if(coveringsNamesMap.containsKey(coveringType)) {
 							coveringsNamesMap.get(coveringType).getValue().add(name);
 						} else {
-							coveringsNamesMap.put(coveringType, new Value<>(race, Util.newArrayListOfValues(name)));
+							coveringsNamesMap.put(coveringType, new Value<>(race, List.of(name)));
 						}
 						coveringType = BodyCoveringType.TONGUE;
 						if(coveringsNamesMap.containsKey(coveringType)) {
 							coveringsNamesMap.get(coveringType).getValue().add(name);
 						} else {
-							coveringsNamesMap.put(coveringType, new Value<>(race, Util.newArrayListOfValues(name)));
+							coveringsNamesMap.put(coveringType, new Value<>(race, List.of(name)));
 						}
 					}
 				}
@@ -161,17 +161,17 @@ public class SuccubisSecrets {
 		}
 		
 		if(target.getTailType()==TailType.DEMON_HAIR_TIP && !coveringsNamesMap.containsKey(BodyCoveringType.HAIR_DEMON)) {
-			coveringsNamesMap.put(BodyCoveringType.HAIR_DEMON, new Value<>(Race.DEMON, Util.newArrayListOfValues(BodyCoveringType.HAIR_DEMON.getName(target))));
+			coveringsNamesMap.put(BodyCoveringType.HAIR_DEMON, new Value<>(Race.DEMON, List.of(BodyCoveringType.HAIR_DEMON.getName(target))));
 		}
 		
 		if(target.hasNipples()) {
-			coveringsNamesMap.putIfAbsent(BodyCoveringType.MILK, new Value<>(Race.NONE, Util.newArrayListOfValues("milk")));
+			coveringsNamesMap.putIfAbsent(BodyCoveringType.MILK, new Value<>(Race.NONE, List.of("milk")));
 		}
 		if(target.hasPenisIgnoreDildo()) {
-			coveringsNamesMap.putIfAbsent(BodyCoveringType.CUM, new Value<>(Race.NONE, Util.newArrayListOfValues("cum")));
+			coveringsNamesMap.putIfAbsent(BodyCoveringType.CUM, new Value<>(Race.NONE, List.of("cum")));
 		}
 		if(target.hasVagina()) {
-			coveringsNamesMap.putIfAbsent(BodyCoveringType.GIRL_CUM, new Value<>(Race.NONE, Util.newArrayListOfValues("girlcum")));
+			coveringsNamesMap.putIfAbsent(BodyCoveringType.GIRL_CUM, new Value<>(Race.NONE, List.of("girlcum")));
 		}
 		
 		
@@ -386,7 +386,7 @@ public class SuccubisSecrets {
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), SexSlotSitting.SITTING))) {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-								return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), Util.newArrayListOfValues(CoverableArea.VAGINA)));
+								return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), List.of(CoverableArea.VAGINA)));
 							}
 						},
 						null,
@@ -418,7 +418,7 @@ public class SuccubisSecrets {
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), SexSlotSitting.SITTING))) {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-								return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), Util.newArrayListOfValues(CoverableArea.VAGINA)));
+								return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), List.of(CoverableArea.VAGINA)));
 							}
 						},
 						null,
@@ -574,7 +574,7 @@ public class SuccubisSecrets {
 							Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), SexSlotSitting.SITTING))) {
 						@Override
 						public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-							return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), Util.newArrayListOfValues(CoverableArea.VAGINA)));
+							return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), List.of(CoverableArea.VAGINA)));
 						}
 					},
 					null,

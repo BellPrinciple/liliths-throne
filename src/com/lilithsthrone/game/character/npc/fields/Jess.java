@@ -107,7 +107,7 @@ public class Jess extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_SLUT);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(Perk.BARREN),
+				List.of(Perk.BARREN),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 0),
 						new Value<>(PerkCategory.LUST, 1),

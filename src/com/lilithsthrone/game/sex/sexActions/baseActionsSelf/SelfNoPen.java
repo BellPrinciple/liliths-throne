@@ -128,7 +128,7 @@ public class SelfNoPen {
 			if(character.isPlayer()) {
 				return null;
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_MASTURBATION);
+				return List.of(Fetish.FETISH_MASTURBATION);
 			}
 		}
 	};

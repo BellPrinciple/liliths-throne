@@ -162,10 +162,9 @@ public class KaysWarehouse {
 						@Override
 						public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 							return Util.newHashMapOfValues(
-									new Value<>(Main.game.getNpc(SupplierLeader.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-									new Value<>(Main.game.getNpc(SupplierPartner.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-									new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(
-											sexTypeWolfgang.getTargetedSexArea()==SexAreaOrifice.NIPPLE
+									new Value<>(Main.game.getNpc(SupplierLeader.class), List.of(CoverableArea.PENIS)),
+									new Value<>(Main.game.getNpc(SupplierPartner.class), List.of(CoverableArea.PENIS)),
+									new Value<>(Main.game.getPlayer(), List.of(sexTypeWolfgang.getTargetedSexArea()==SexAreaOrifice.NIPPLE
 												|| sexTypeKarl.getTargetedSexArea()==SexAreaOrifice.NIPPLE
 												?CoverableArea.NIPPLES
 												:null,
@@ -718,7 +717,7 @@ public class KaysWarehouse {
 							null,
 							null,
 							null,
-							Util.newArrayListOfValues(Subspecies.DEMON)) {
+							List.of(Subspecies.DEMON)) {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.suppliersEncountered, true);
@@ -736,7 +735,7 @@ public class KaysWarehouse {
 						DOBERMANNS_SEDUCE,
 						null,
 						null,
-						Util.newArrayListOfValues(Perk.MALE_ATTRACTION, Perk.OBJECT_OF_DESIRE),
+						List.of(Perk.MALE_ATTRACTION, Perk.OBJECT_OF_DESIRE),
 						null,
 						null) {
 					@Override
@@ -757,8 +756,7 @@ public class KaysWarehouse {
 				} else {
 					return new ResponseCombat("Fight", "Immediately launch into combat!",
 							Main.game.getNpc(SupplierLeader.class),
-							Util.newArrayListOfValues(
-									Main.game.getNpc(SupplierLeader.class),
+							List.of(Main.game.getNpc(SupplierLeader.class),
 									Main.game.getNpc(SupplierPartner.class)),
 							Util.newHashMapOfValues(
 									new Value<>(Main.game.getPlayer(), "[pc.speech(I'll soon have the two of you cleared out from here,)]"
@@ -888,8 +886,8 @@ public class KaysWarehouse {
 						null, null, null, null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(SupplierLeader.class), Main.game.getNpc(SupplierPartner.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(SupplierLeader.class), Main.game.getNpc(SupplierPartner.class)),
 								null,
 								null,
 								ResponseTag.PREFER_DOGGY),
@@ -915,16 +913,16 @@ public class KaysWarehouse {
 						null, null, null, null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(SupplierLeader.class), Main.game.getNpc(SupplierPartner.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(SupplierLeader.class), Main.game.getNpc(SupplierPartner.class)),
+								List.of(Main.game.getPlayer()),
 								null,
 								null,
 								ResponseTag.PREFER_DOGGY) {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								return Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(SupplierLeader.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(Main.game.getNpc(SupplierPartner.class), Util.newArrayListOfValues(CoverableArea.PENIS)));
+										new Value<>(Main.game.getNpc(SupplierLeader.class), List.of(CoverableArea.PENIS)),
+										new Value<>(Main.game.getNpc(SupplierPartner.class), List.of(CoverableArea.PENIS)));
 							}
 						},
 						AFTER_SEX_FUCKED,
@@ -936,16 +934,16 @@ public class KaysWarehouse {
 						null, null, null, null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(SupplierLeader.class), Main.game.getNpc(SupplierPartner.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(SupplierLeader.class), Main.game.getNpc(SupplierPartner.class)),
+								List.of(Main.game.getPlayer()),
 								null,
 								null,
 								ResponseTag.PREFER_DOGGY, ResponseTag.START_PACE_PLAYER_SUB_EAGER) {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								return Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(SupplierLeader.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(Main.game.getNpc(SupplierPartner.class), Util.newArrayListOfValues(CoverableArea.PENIS)));
+										new Value<>(Main.game.getNpc(SupplierLeader.class), List.of(CoverableArea.PENIS)),
+										new Value<>(Main.game.getNpc(SupplierPartner.class), List.of(CoverableArea.PENIS)));
 							}
 						},
 						AFTER_SEX_FUCKED,
@@ -967,16 +965,16 @@ public class KaysWarehouse {
 							null, null, null, null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getNpc(SupplierLeader.class), Main.game.getNpc(SupplierPartner.class)),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(SupplierLeader.class), Main.game.getNpc(SupplierPartner.class)),
+									List.of(Main.game.getPlayer()),
 									null,
 									null,
 									ResponseTag.PREFER_DOGGY, ResponseTag.START_PACE_PLAYER_SUB_RESISTING) {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									return Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(SupplierLeader.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-											new Value<>(Main.game.getNpc(SupplierPartner.class), Util.newArrayListOfValues(CoverableArea.PENIS)));
+											new Value<>(Main.game.getNpc(SupplierLeader.class), List.of(CoverableArea.PENIS)),
+											new Value<>(Main.game.getNpc(SupplierPartner.class), List.of(CoverableArea.PENIS)));
 								}
 							},
 							AFTER_SEX_FUCKED,
@@ -1119,8 +1117,7 @@ public class KaysWarehouse {
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "OFFICE_TALK"));
 							
-							List<String> topics = Util.newArrayListOfValues(
-									"KAY_MACHINES",
+							List<String> topics = List.of("KAY_MACHINES",
 									"KAY_INTERCOM",
 									"KAY_BUSINESS",
 									"KAY_BOUNTY_HUNTERS");
@@ -1178,7 +1175,7 @@ public class KaysWarehouse {
 					return new Response("Dominate",
 							"Dominate [kay.name] and make [kay.herHim] submit to you.",
 							KAY_OFFICE_DOMINATE,
-							Util.newArrayListOfValues(Fetish.FETISH_DOMINANT),
+							List.of(Fetish.FETISH_DOMINANT),
 							Fetish.FETISH_DOMINANT.getAssociatedCorruptionLevel(),
 							null,
 							null,
@@ -1319,9 +1316,9 @@ public class KaysWarehouse {
 							SexSlotStanding.STANDING_SUBMISSIVE,
 							null,
 							SexSlotStanding.STANDING_DOMINANT,
-							Util.newArrayListOfValues(),
-							Util.newArrayListOfValues(),
-							Util.newArrayListOfValues());
+							List.of(),
+							List.of(),
+							List.of());
 				}
 				
 				// Toys and behaviour changes:
@@ -1446,9 +1443,9 @@ public class KaysWarehouse {
 						Main.game.getPlayer().isTaur()
 							?SexSlotStanding.STANDING_DOMINANT
 							:SexSlotSitting.SITTING,
-						Util.newArrayListOfValues(CoverableArea.MOUTH),
-						Util.newArrayListOfValues(CoverableArea.PENIS),
-						Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), PenisMouth.BLOWJOB_START, false, true))));
+						List.of(CoverableArea.MOUTH),
+						List.of(CoverableArea.PENIS),
+						List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), PenisMouth.BLOWJOB_START, false, true))));
 				
 			} else {
 				responses.add(new Response("Receive blowjob", "You require a penis and access to it in able to receive a blowjob from [kay.name].", null));
@@ -1471,9 +1468,9 @@ public class KaysWarehouse {
 						Main.game.getPlayer().isTaur()
 							?SexSlotStanding.STANDING_DOMINANT
 							:SexSlotSitting.SITTING,
-						Util.newArrayListOfValues(CoverableArea.MOUTH),
-						Util.newArrayListOfValues(CoverableArea.VAGINA),
-						Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true))));
+						List.of(CoverableArea.MOUTH),
+						List.of(CoverableArea.VAGINA),
+						List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true))));
 				
 				if(Main.game.getPlayer().isClitorisPseudoPenis()) {
 					responses.add(getKaySexResponse("Clit sucked",
@@ -1492,9 +1489,9 @@ public class KaysWarehouse {
 							Main.game.getPlayer().isTaur()
 								?SexSlotStanding.STANDING_DOMINANT
 								:SexSlotSitting.SITTING,
-							Util.newArrayListOfValues(CoverableArea.MOUTH),
-							Util.newArrayListOfValues(CoverableArea.VAGINA),
-							Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), ClitMouth.CLIT_ORAL_START, false, true))));
+							List.of(CoverableArea.MOUTH),
+							List.of(CoverableArea.VAGINA),
+							List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), ClitMouth.CLIT_ORAL_START, false, true))));
 				} else {
 					responses.add(new Response("Clit sucked", "You require a clit of at least size '"+ClitorisSize.getMinimumClitorisSizeForPseudoPenis()+"' before you are able to get it sucked by [kay.name].", null));
 				}
@@ -1560,10 +1557,9 @@ public class KaysWarehouse {
 						Main.game.getPlayer().isTaur()
 							?SexSlotAllFours.ALL_FOURS
 							:SexSlotDesk.OVER_DESK_ON_FRONT,
-						Util.newArrayListOfValues(),
-						Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.VAGINA),
-						Util.newArrayListOfValues(
-								(isPlayerPenisFree()
+						List.of(),
+						List.of(CoverableArea.PENIS, CoverableArea.VAGINA),
+						List.of((isPlayerPenisFree()
 									?new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), FingerPenis.COCK_MASTURBATING_START, false, true)
 									:null),
 								(isPlayerVaginaFree()
@@ -1589,9 +1585,9 @@ public class KaysWarehouse {
 						Main.game.getPlayer().isTaur()
 							?SexSlotAllFours.ALL_FOURS
 							:SexSlotDesk.OVER_DESK_ON_FRONT,
-						Util.newArrayListOfValues(CoverableArea.MOUTH),
-						Util.newArrayListOfValues(CoverableArea.VAGINA),
-						Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), TongueVagina.CUNNILINGUS_START, false, true))));
+						List.of(CoverableArea.MOUTH),
+						List.of(CoverableArea.VAGINA),
+						List.of(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), TongueVagina.CUNNILINGUS_START, false, true))));
 				
 			} else {
 				responses.add(new Response("Cunnilingus", "You require a vagina, as well as access to it, before you're able to receive cunnilingus from [kay.name].", null));
@@ -1613,9 +1609,9 @@ public class KaysWarehouse {
 							Main.game.getPlayer().isTaur()
 								?SexSlotAllFours.ALL_FOURS
 								:SexSlotDesk.OVER_DESK_ON_FRONT,
-							Util.newArrayListOfValues(CoverableArea.MOUTH),
-							Util.newArrayListOfValues(CoverableArea.ANUS),
-							Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), TongueAnus.ANILINGUS_START, false, true))));
+							List.of(CoverableArea.MOUTH),
+							List.of(CoverableArea.ANUS),
+							List.of(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), TongueAnus.ANILINGUS_START, false, true))));
 					
 				} else {
 					responses.add(new Response("Anilingus", "You require access to your anus in order to receive cunnilingus from [kay.name].", null));
@@ -1643,9 +1639,9 @@ public class KaysWarehouse {
 						Main.game.getPlayer().isTaur()
 							?SexSlotAllFours.ALL_FOURS
 							:SexSlotDesk.OVER_DESK_ON_FRONT,
-						Util.newArrayListOfValues(CoverableArea.PENIS),
-						Util.newArrayListOfValues(CoverableArea.VAGINA),
-						Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true)),
+						List.of(CoverableArea.PENIS),
+						List.of(CoverableArea.VAGINA),
+						List.of(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true)),
 						Util.newHashMapOfValues(
 								new Value<>(
 										Main.game.getPlayer(),
@@ -1681,9 +1677,9 @@ public class KaysWarehouse {
 							Main.game.getPlayer().isTaur()
 								?SexSlotAllFours.ALL_FOURS
 								:SexSlotDesk.OVER_DESK_ON_FRONT,
-							Util.newArrayListOfValues(CoverableArea.PENIS),
-							Util.newArrayListOfValues(CoverableArea.ANUS),
-							Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true)),
+							List.of(CoverableArea.PENIS),
+							List.of(CoverableArea.ANUS),
+							List.of(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true)),
 							Util.newHashMapOfValues(
 									new Value<>(
 											Main.game.getPlayer(),
@@ -1746,9 +1742,9 @@ public class KaysWarehouse {
 						Main.game.getPlayer().isTaur()
 							?SexSlotAllFours.ALL_FOURS
 							:SexSlotSitting.SITTING,
-						Util.newArrayListOfValues(CoverableArea.MOUTH),
-						Util.newArrayListOfValues(CoverableArea.FEET),
-						Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), FootMouth.FOOT_ORAL_RECEIVING_START, false, true)));
+						List.of(CoverableArea.MOUTH),
+						List.of(CoverableArea.FEET),
+						List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), FootMouth.FOOT_ORAL_RECEIVING_START, false, true)));
 				
 			} else if(index==3) {
 				if(!Main.game.getNpc(Kay.class).isAbleToAccessCoverableArea(CoverableArea.PENIS, true)) {
@@ -1769,9 +1765,9 @@ public class KaysWarehouse {
 							Main.game.getPlayer().isTaur()
 								?SexSlotAllFours.ALL_FOURS
 								:SexSlotSitting.SITTING,
-							Util.newArrayListOfValues(CoverableArea.PENIS),
-							Util.newArrayListOfValues(CoverableArea.FEET),
-							Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), PenisFeet.FOOT_JOB_DOUBLE_GIVING_START, false, true)));
+							List.of(CoverableArea.PENIS),
+							List.of(CoverableArea.FEET),
+							List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), PenisFeet.FOOT_JOB_DOUBLE_GIVING_START, false, true)));
 					
 				}
 			}
@@ -1826,9 +1822,9 @@ public class KaysWarehouse {
 							SexSlotSitting.SITTING_IN_LAP,
 							null,
 							SexSlotSitting.SITTING,
-							Util.newArrayListOfValues(CoverableArea.PENIS),
-							Util.newArrayListOfValues(),
-							Util.newArrayListOfValues()));
+							List.of(CoverableArea.PENIS),
+							List.of(),
+							List.of()));
 				} else {
 					responses.add(new Response("Pull into lap", "As you have the lower body of [pc.a_legRace], you cannot pull [kay.name] into your lap!", null));
 				}
@@ -1842,9 +1838,9 @@ public class KaysWarehouse {
 							SexSlotDesk.OVER_DESK_ON_FRONT,
 							null,
 							SexSlotDesk.BETWEEN_LEGS,
-							Util.newArrayListOfValues(CoverableArea.PENIS),
-							Util.newArrayListOfValues(),
-							Util.newArrayListOfValues()));
+							List.of(CoverableArea.PENIS),
+							List.of(),
+							List.of()));
 				}
 
 				responses.add(getKaySexResponse("Handjob",
@@ -1855,9 +1851,9 @@ public class KaysWarehouse {
 						SexSlotStanding.STANDING_DOMINANT,
 						new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaPenetration.FINGER),
 						SexSlotStanding.PERFORMING_ORAL,
-						Util.newArrayListOfValues(CoverableArea.PENIS),
-						Util.newArrayListOfValues(),
-						Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), FingerPenis.COCK_MASTURBATING_START, false, true))));
+						List.of(CoverableArea.PENIS),
+						List.of(),
+						List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), FingerPenis.COCK_MASTURBATING_START, false, true))));
 
 				if(isPlayerMouthFree()) {
 					responses.add(getKaySexResponse("Suck cock",
@@ -1868,9 +1864,9 @@ public class KaysWarehouse {
 							SexSlotStanding.STANDING_DOMINANT,
 							new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
 							SexSlotStanding.PERFORMING_ORAL,
-							Util.newArrayListOfValues(CoverableArea.PENIS),
-							Util.newArrayListOfValues(CoverableArea.MOUTH),
-							Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), PenisMouth.GIVING_BLOWJOB_START, false, true))));
+							List.of(CoverableArea.PENIS),
+							List.of(CoverableArea.MOUTH),
+							List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), PenisMouth.GIVING_BLOWJOB_START, false, true))));
 					
 				} else {
 					responses.add(new Response("Suck cock", "You cannot gain access to your mouth, and so are not able to suck [kay.namePos] cock.", null));
@@ -1888,9 +1884,9 @@ public class KaysWarehouse {
 							SexSlotAllFours.HUMPING,
 							new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA),
 							SexSlotAllFours.ALL_FOURS,
-							Util.newArrayListOfValues(CoverableArea.PENIS),
-							Util.newArrayListOfValues(CoverableArea.VAGINA),
-							Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true))));
+							List.of(CoverableArea.PENIS),
+							List.of(CoverableArea.VAGINA),
+							List.of(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true))));
 				}
 				
 				if(Main.game.isAnalContentEnabled()) {
@@ -1906,9 +1902,9 @@ public class KaysWarehouse {
 								SexSlotAllFours.HUMPING,
 								new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS),
 								SexSlotAllFours.ALL_FOURS,
-								Util.newArrayListOfValues(CoverableArea.PENIS),
-								Util.newArrayListOfValues(CoverableArea.ANUS),
-								Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true))));
+								List.of(CoverableArea.PENIS),
+								List.of(CoverableArea.ANUS),
+								List.of(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true))));
 					}
 				}
 
@@ -1973,9 +1969,9 @@ public class KaysWarehouse {
 							SexSlotSitting.SITTING_IN_LAP,
 							null,
 							SexSlotSitting.SITTING,
-							Util.newArrayListOfValues(CoverableArea.ANUS),
-							Util.newArrayListOfValues(),
-							Util.newArrayListOfValues()));
+							List.of(CoverableArea.ANUS),
+							List.of(),
+							List.of()));
 				} else {
 					responses.add(new Response("Pull into lap", "As you have the lower body of [pc.a_legRace], you cannot pull [kay.name] into your lap!", null));
 				}
@@ -1990,9 +1986,9 @@ public class KaysWarehouse {
 								SexSlotDesk.OVER_DESK_ON_FRONT,
 								new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE),
 								SexSlotDesk.PERFORMING_ORAL,
-								Util.newArrayListOfValues(CoverableArea.ANUS),
-								Util.newArrayListOfValues(CoverableArea.MOUTH),
-								Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), TongueAnus.ANILINGUS_START, false, true))));
+								List.of(CoverableArea.ANUS),
+								List.of(CoverableArea.MOUTH),
+								List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), TongueAnus.ANILINGUS_START, false, true))));
 						
 					} else {
 						responses.add(new Response("Desk anilingus", "You cannot gain access to your mouth, and so are not able to perform anilingus on [kay.name].", null));
@@ -2007,9 +2003,9 @@ public class KaysWarehouse {
 								SexSlotDesk.OVER_DESK_ON_FRONT,
 								new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
 								SexSlotDesk.BETWEEN_LEGS,
-								Util.newArrayListOfValues(CoverableArea.ANUS),
-								Util.newArrayListOfValues(CoverableArea.PENIS),
-								Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), PenisAnus.PENIS_FUCKING_START, false, true))));
+								List.of(CoverableArea.ANUS),
+								List.of(CoverableArea.PENIS),
+								List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Kay.class), PenisAnus.PENIS_FUCKING_START, false, true))));
 						
 					} else {
 						responses.add(new Response("Desk fuck", "You require a penis, as well as access to it, in order to anally fuck [kay.name].", null));

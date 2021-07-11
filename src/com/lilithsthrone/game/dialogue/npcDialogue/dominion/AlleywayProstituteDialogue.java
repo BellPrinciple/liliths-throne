@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
+import java.util.List;
+
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -100,8 +102,8 @@ public class AlleywayProstituteDialogue {
 										:("Pay [npc.name] "+cost+" flames to have dominant sex with [npc.herHim].")),
 							true, true,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getProstitute()),
+									List.of(Main.game.getPlayer()),
+									List.of(getProstitute()),
 							null,
 							null) {
 								public SexPace getStartingSexPaceModifier(GameCharacter character) {
@@ -142,8 +144,8 @@ public class AlleywayProstituteDialogue {
 										:("Pay [npc.name] "+cost+" flames to have submissive sex with [npc.herHim].")),
 							true, true,
 							new SMGeneric(
-									Util.newArrayListOfValues(getProstitute()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(getProstitute()),
+									List.of(Main.game.getPlayer()),
 							null,
 							null) {
 								public SexPace getStartingSexPaceModifier(GameCharacter character) {
@@ -228,10 +230,9 @@ public class AlleywayProstituteDialogue {
 											:("Pay [npc.name] "+threesomeCost+" flames to have a threesome with you and [com.name].")),
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(
-												Main.game.getPlayer(),
+										List.of(Main.game.getPlayer(),
 												Main.game.getPlayer().getMainCompanion()),
-										Util.newArrayListOfValues(getProstitute()),
+										List.of(getProstitute()),
 								null,
 								null) {
 									public SexPace getStartingSexPaceModifier(GameCharacter character) {
@@ -277,9 +278,9 @@ public class AlleywayProstituteDialogue {
 											:("Pay [npc.name] "+cost+" flames to let [com.name] dominantly fuck [npc.herHim].")),
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer().getMainCompanion()),
-										Util.newArrayListOfValues(getProstitute()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(Main.game.getPlayer().getMainCompanion()),
+										List.of(getProstitute()),
+										List.of(Main.game.getPlayer()),
 										null) {
 									@Override
 									public boolean isPositionChangingAllowed(GameCharacter character) {
@@ -329,10 +330,10 @@ public class AlleywayProstituteDialogue {
 											:("Pay [npc.name] "+cost+" flames to dominantly fuck [com.name].")),
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(getProstitute()),
-										Util.newArrayListOfValues(Main.game.getPlayer().getMainCompanion()),
+										List.of(getProstitute()),
+										List.of(Main.game.getPlayer().getMainCompanion()),
 										null,
-										Util.newArrayListOfValues(Main.game.getPlayer())) {
+										List.of(Main.game.getPlayer())) {
 									public SexPace getStartingSexPaceModifier(GameCharacter character) {
 										if(character.equals(getProstitute())) {
 											return SexPace.DOM_NORMAL;
@@ -561,8 +562,8 @@ public class AlleywayProstituteDialogue {
 						UtilText.parse(getProstitute(), "It's clear that [npc.name] wants you to fuck [npc.herHim], so maybe you should give [npc.herHim] what [npc.she] wants..."),
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(getProstitute()),
+								List.of(Main.game.getPlayer()),
+								List.of(getProstitute()),
 						null,
 						null),
 						AFTER_SEX_VICTORY,
@@ -574,8 +575,8 @@ public class AlleywayProstituteDialogue {
 								+ "<br/>[style.italicsPinkLight(Starts the sex scene in the 'gentle' pace.)]"),
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(getProstitute()),
+								List.of(Main.game.getPlayer()),
+								List.of(getProstitute()),
 								null, null,
 								ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
 						AFTER_SEX_VICTORY,
@@ -587,8 +588,8 @@ public class AlleywayProstituteDialogue {
 								+ "<br/>[style.italicsCrimson(Starts the sex scene in the 'rough' pace.)]"),
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(getProstitute()),
+								List.of(Main.game.getPlayer()),
+								List.of(getProstitute()),
 								null, null,
 								ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
 						AFTER_SEX_VICTORY,
@@ -597,11 +598,11 @@ public class AlleywayProstituteDialogue {
 			} else if (index == 5) {
 				return new ResponseSex("Submit",
 						UtilText.parse(getProstitute(), "You feel bad for having beaten [npc.name]. Perhaps submitting to [npc.herHim] and letting [npc.herHim] dominantly fuck you would make [npc.herHim] feel better?"),
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
+						List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getProstitute()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getProstitute()),
+								List.of(Main.game.getPlayer()),
 						null,
 						null),
 						AFTER_SEX_DEFEAT,
@@ -646,8 +647,8 @@ public class AlleywayProstituteDialogue {
 							UtilText.parse(getProstitute(), "Have dominant sex with [npc.name], and get [com.name] to join in with the fun."),
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer(), companion),
-									Util.newArrayListOfValues(getProstitute()),
+									List.of(Main.game.getPlayer(), companion),
+									List.of(getProstitute()),
 									null,
 									null,
 									ResponseTag.PREFER_DOGGY),
@@ -667,10 +668,10 @@ public class AlleywayProstituteDialogue {
 							UtilText.parse(getProstitute(), "Tell [com.name] that [com.she] can have some fun with [npc.name] while you watch."),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(companion),
-									Util.newArrayListOfValues(getProstitute()),
+									List.of(companion),
+									List.of(getProstitute()),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer())),
+									List.of(Main.game.getPlayer())),
 							AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_COMBAT_VICTORY_GIVE_TO_COMPANION", getProstitute()));
 				}
 				
@@ -692,10 +693,10 @@ public class AlleywayProstituteDialogue {
 							UtilText.parse(getProstitute(), "Tell [npc.name] that [npc.she] can use [com.name]."),
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getProstitute()),
-									Util.newArrayListOfValues(companion),
+									List.of(getProstitute()),
+									List.of(companion),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer())),
+									List.of(Main.game.getPlayer())),
 							AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_COMBAT_VICTORY_OFFER_COMPANION", getProstitute())) {
 						@Override
 						public void effects() {
@@ -728,8 +729,8 @@ public class AlleywayProstituteDialogue {
 							"[npc.Name] forces [npc.herself] on you...",
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getProstitute()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(getProstitute()),
+									List.of(Main.game.getPlayer()),
 									null,
 									null),
 							AFTER_SEX_DEFEAT,
@@ -741,8 +742,8 @@ public class AlleywayProstituteDialogue {
 									+ "<br/>[style.italicsPinkLight(Starts the sex scene in the 'eager' pace.)]"),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getProstitute()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(getProstitute()),
+									List.of(Main.game.getPlayer()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_SUB_EAGER),
@@ -755,8 +756,8 @@ public class AlleywayProstituteDialogue {
 									+ "<br/>[style.italicsCrimson(Starts the sex scene in the 'resisting' pace.)]"),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getProstitute()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(getProstitute()),
+									List.of(Main.game.getPlayer()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_SUB_RESISTING),

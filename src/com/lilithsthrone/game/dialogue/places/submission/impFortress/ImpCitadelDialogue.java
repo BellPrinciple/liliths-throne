@@ -591,7 +591,7 @@ public class ImpCitadelDialogue {
 					} else if (index == 5) {
 						return new ResponseSex("Submit",
 								"You're not really sure what to do now... Perhaps it would be best to let the imps choose what to do next...",
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+								List.of(Fetish.FETISH_SUBMISSIVE),
 								null,
 								Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null,
@@ -656,9 +656,9 @@ public class ImpCitadelDialogue {
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you have sex with the imps."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpGroup(),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								IMP_AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "IMP_COMBAT_VICTORY_SEX", getImpGroup()));
 						
@@ -667,9 +667,9 @@ public class ImpCitadelDialogue {
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you have sex with the imps."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpGroup(),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								IMP_AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "IMP_COMBAT_VICTORY_SEX_GENTLE", getImpGroup()), ResponseTag.START_PACE_PLAYER_DOM_GENTLE);
@@ -679,9 +679,9 @@ public class ImpCitadelDialogue {
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you have sex with the imps."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpGroup(),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								IMP_AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "IMP_COMBAT_VICTORY_SEX_ROUGH", getImpGroup()), ResponseTag.START_PACE_PLAYER_DOM_ROUGH);
@@ -689,7 +689,7 @@ public class ImpCitadelDialogue {
 					} else if (index == 5) {
 						return new ResponseSex("Solo submission",
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you submit to the imps, allowing them to have dominant sex with you."),
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+								List.of(Fetish.FETISH_SUBMISSIVE),
 								null,
 								Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null,
@@ -698,9 +698,9 @@ public class ImpCitadelDialogue {
 								true,
 								false,
 								getImpGroup(),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								null,
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								IMP_AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "IMP_COMBAT_VICTORY_SEX_SUBMIT", getImpGroup()));
 						
 					} else if (index == 6) {
@@ -753,10 +753,10 @@ public class ImpCitadelDialogue {
 									UtilText.parse(companion, "Tell [npc.name] that [npc.she] can have some fun with the imps while you watch."),
 									false,
 									false,
-									Util.newArrayListOfValues(getMainCompanion()),
+									List.of(getMainCompanion()),
 									getImpGroup(),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									IMP_AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "IMP_COMBAT_VICTORY_GIVE_TO_COMPANION", getImpGroup()));
 						}
 						
@@ -774,9 +774,9 @@ public class ImpCitadelDialogue {
 									true,
 									false,
 									getImpGroup(),
-									Util.newArrayListOfValues(getMainCompanion()),
+									List.of(getMainCompanion()),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									IMP_AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "IMP_COMBAT_VICTORY_OFFER_COMPANION", getImpGroup())) {
 								@Override
 								public void effects() {
@@ -1330,7 +1330,7 @@ public class ImpCitadelDialogue {
 									}
 								},
 								null,
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								LABORATORY_ARCANIST_POST_SEX,
 								UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "ARCANIST_SOLO_START_SEX", getAllCharacters()));
 					}
@@ -1390,7 +1390,7 @@ public class ImpCitadelDialogue {
 									}
 								},
 								null,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								LABORATORY_ARCANIST_POST_SEX,
 								UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "ARCANIST_COMPANION_START_SEX", getAllCharacters()));
 					}
@@ -1617,7 +1617,7 @@ public class ImpCitadelDialogue {
 							}
 						},
 						null,
-						Util.newArrayListOfValues(getMainCompanion()),
+						List.of(getMainCompanion()),
 						LABORATORY_ARCANIST_POST_SEX,
 						UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "LABORATORY_ARCANIST_SOLO_TF_SEX_ACCEPTED", getAllCharacters()));
 				
@@ -1667,7 +1667,7 @@ public class ImpCitadelDialogue {
 							}
 						},
 						null,
-						Util.newArrayListOfValues(Main.game.getPlayer()),
+						List.of(Main.game.getPlayer()),
 						LABORATORY_ARCANIST_POST_SEX,
 						UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "LABORATORY_ARCANIST_COMPANION_TF_SEX_ACCEPTED", getAllCharacters()));
 			}
@@ -1803,7 +1803,7 @@ public class ImpCitadelDialogue {
 								false));
 
 						Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addWeapon(
-								Main.game.getItemGen().generateWeapon(WeaponType.getWeaponTypeFromId("innoxia_scythe_scythe"), DamageType.PHYSICAL, Util.newArrayListOfValues(PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_RED_DARK)),
+								Main.game.getItemGen().generateWeapon(WeaponType.getWeaponTypeFromId("innoxia_scythe_scythe"), DamageType.PHYSICAL, List.of(PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_RED_DARK)),
 								false));
 					}
 				};
@@ -1946,7 +1946,7 @@ public class ImpCitadelDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new ResponseCombat("Fight", UtilText.parse(getBoss(), "Now that [npc.her] demon companions have been defeated, it's time fight [npc.name]!"), (NPC) getBoss(), Util.newArrayListOfValues(getBoss()), null);
+				return new ResponseCombat("Fight", UtilText.parse(getBoss(), "Now that [npc.her] demon companions have been defeated, it's time fight [npc.name]!"), (NPC) getBoss(), List.of(getBoss()), null);
 
 			} else if(index==2 && Main.game.getPlayer().hasItemType(ItemType.LYSSIETHS_RING)) {
 				return new Response("Use ring",
@@ -1985,7 +1985,7 @@ public class ImpCitadelDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new ResponseCombat("Duel", UtilText.parse(getBoss(), "Accept [npc.namePos] offer, and fight [npc.herHim] one-on-one!"), null, (NPC) getBoss(), Util.newArrayListOfValues(getBoss()), null);
+				return new ResponseCombat("Duel", UtilText.parse(getBoss(), "Accept [npc.namePos] offer, and fight [npc.herHim] one-on-one!"), null, (NPC) getBoss(), List.of(getBoss()), null);
 
 			} else if(index==2 && Main.game.getPlayer().hasItemType(ItemType.LYSSIETHS_RING)) {
 				return new Response("Use ring",
@@ -2247,7 +2247,7 @@ public class ImpCitadelDialogue {
 							false,
 							false,
 							manager,
-							Util.newArrayListOfValues(getBoss()),
+							List.of(getBoss()),
 							null,
 							KEEP_AFTER_COMBAT_DEFEAT_POST_SEX,
 							UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "KEEP_AFTER_COMBAT_DEFEAT_SEX", getAllCharacters()));
@@ -2261,7 +2261,7 @@ public class ImpCitadelDialogue {
 							false,
 							false,
 							manager,
-							Util.newArrayListOfValues(getBoss()),
+							List.of(getBoss()),
 							null,
 							KEEP_AFTER_COMBAT_DEFEAT_POST_SEX,
 							UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "KEEP_AFTER_COMBAT_DEFEAT_SEX_EAGER", getAllCharacters()));
@@ -2273,7 +2273,7 @@ public class ImpCitadelDialogue {
 							false,
 							false,
 							manager,
-							Util.newArrayListOfValues(getBoss()),
+							List.of(getBoss()),
 							null,
 							KEEP_AFTER_COMBAT_DEFEAT_POST_SEX,
 							UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "KEEP_AFTER_COMBAT_DEFEAT_SEX_RESIST", getAllCharacters()));
@@ -2598,7 +2598,7 @@ public class ImpCitadelDialogue {
 						false,
 						false,
 						manager,
-						Util.newArrayListOfValues(getBoss()),
+						List.of(getBoss()),
 						null,
 						PRISONER_STRIPPED_AFTER_SEX,
 						UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "PRISONER_STRIPPED_START_ORAL"+getOwnerDialogueIdEnding(), getAllCharacters()));
@@ -2612,7 +2612,7 @@ public class ImpCitadelDialogue {
 						false,
 						false,
 						manager,
-						Util.newArrayListOfValues(getBoss()),
+						List.of(getBoss()),
 						null,
 						PRISONER_STRIPPED_AFTER_SEX,
 						UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "PRISONER_STRIPPED_START_ORAL_EAGER"+getOwnerDialogueIdEnding(), getAllCharacters()));
@@ -2624,7 +2624,7 @@ public class ImpCitadelDialogue {
 						false,
 						false,
 						manager,
-						Util.newArrayListOfValues(getBoss()),
+						List.of(getBoss()),
 						null,
 						PRISONER_STRIPPED_AFTER_SEX,
 						UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "PRISONER_STRIPPED_START_ORAL_RESIST"+getOwnerDialogueIdEnding(), getAllCharacters()));

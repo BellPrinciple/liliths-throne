@@ -203,12 +203,12 @@ public class HarpyAttackerDialogue {
 				} else if (index == 3) {
 					if(getHarpy().isAttractedTo(Main.game.getPlayer())) {
 						return new ResponseSex("Offer body", "Offer your body to [npc.name] so that you can avoid a violent confrontation.",
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
+								List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null, null, null,
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getHarpy()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(getHarpy()),
+										List.of(Main.game.getPlayer()),
 										null,
 										Main.game.getPlayer().getCompanions()) {
 									@Override
@@ -254,8 +254,8 @@ public class HarpyAttackerDialogue {
 								UtilText.parse(getHarpy(), companion, "Offer [npc.name] the opportunity to have sex with both you and [npc2.name] in order to avoid a violent confrontation."),
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getHarpy()),
-										Util.newArrayListOfValues(Main.game.getPlayer(), companion),
+										List.of(getHarpy()),
+										List.of(Main.game.getPlayer(), companion),
 										null,
 										null,
 										ResponseTag.PREFER_DOGGY),
@@ -286,10 +286,10 @@ public class HarpyAttackerDialogue {
 								UtilText.parse(getHarpy(), companion, "Tell [npc.name] that [npc.she] can use [npc2.namePos] body in order to avoid a violent confrontation."),
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getHarpy()),
-										Util.newArrayListOfValues(companion),
+										List.of(getHarpy()),
+										List.of(companion),
 										null,
-										Util.newArrayListOfValues(Main.game.getPlayer())),
+										List.of(Main.game.getPlayer())),
 								AFTER_SEX_DEFEAT,
 								UtilText.parseFromXMLFile("encounters/dominion/"+getFileLocation(), "HARPY_ATTACK_OFFER_COMPANION", getHarpy(), companion)) {
 							@Override
@@ -353,12 +353,12 @@ public class HarpyAttackerDialogue {
 				} else if (index == 3) {
 					if(getHarpy().isAttractedTo(Main.game.getPlayer())) {
 						return new ResponseSex("Sex (dom)", "Take the dominant role and have sex with [npc.name].",
-								Util.newArrayListOfValues(Fetish.FETISH_DOMINANT), null, Fetish.FETISH_DOMINANT.getAssociatedCorruptionLevel(),
+								List.of(Fetish.FETISH_DOMINANT), null, Fetish.FETISH_DOMINANT.getAssociatedCorruptionLevel(),
 								null, null, null,
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(getHarpy()),
+										List.of(Main.game.getPlayer()),
+										List.of(getHarpy()),
 										Main.game.getPlayer().getCompanions(),
 										null),
 								AFTER_SEX_PEACEFUL, UtilText.parseFromXMLFile("encounters/dominion/"+getFileLocation(), "HARPY_ATTACK_PEACEFUL_SEX_AS_DOM", getAllCharacters())) {
@@ -375,12 +375,12 @@ public class HarpyAttackerDialogue {
 				} else if (index == 4) {
 					if(getHarpy().isAttractedTo(Main.game.getPlayer())) {
 						return new ResponseSex("Sex (sub)", "Offer your body to [npc.name].",
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
+								List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null, null, null,
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(getHarpy()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(getHarpy()),
+										List.of(Main.game.getPlayer()),
 										null,
 										Main.game.getPlayer().getCompanions()),
 								AFTER_SEX_PEACEFUL, UtilText.parseFromXMLFile("encounters/dominion/"+getFileLocation(), "HARPY_ATTACK_PEACEFUL_SEX_AS_SUB", getAllCharacters())) {
@@ -449,8 +449,8 @@ public class HarpyAttackerDialogue {
 								UtilText.parse(getHarpy(), companion, "Offer [npc.name] the opportunity to have sex with both you and [npc2.name]."),
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getHarpy()),
-										Util.newArrayListOfValues(Main.game.getPlayer(), companion),
+										List.of(getHarpy()),
+										List.of(Main.game.getPlayer(), companion),
 										null,
 										null,
 										ResponseTag.PREFER_DOGGY),
@@ -481,10 +481,10 @@ public class HarpyAttackerDialogue {
 								UtilText.parse(getHarpy(), companion, "Tell [npc.name] that [npc.she] can use [npc2.namePos] body."),
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getHarpy()),
-										Util.newArrayListOfValues(companion),
+										List.of(getHarpy()),
+										List.of(companion),
 										null,
-										Util.newArrayListOfValues(Main.game.getPlayer())),
+										List.of(Main.game.getPlayer())),
 								AFTER_SEX_PEACEFUL_OFFERED_COMPANION, UtilText.parseFromXMLFile("encounters/dominion/"+getFileLocation(), "HARPY_ATTACK_PEACEFUL_OFFER_COMPANION", getHarpy(), companion)) {
 							@Override
 							public void effects() {
@@ -733,8 +733,8 @@ public class HarpyAttackerDialogue {
 							"Well, [npc.she] <i>is</i> asking for it!",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getHarpy()),
+									List.of(Main.game.getPlayer()),
+									List.of(getHarpy()),
 									Main.game.getPlayer().getCompanions(),
 									null),
 							AFTER_SEX_VICTORY,
@@ -743,11 +743,11 @@ public class HarpyAttackerDialogue {
 					return new ResponseSex(
 							"Rape [npc.herHim]",
 							"[npc.She] needs to be punished for attacking you like that...",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getHarpy()),
+									List.of(Main.game.getPlayer()),
+									List.of(getHarpy()),
 									Main.game.getPlayer().getCompanions(),
 									null),
 							AFTER_SEX_VICTORY,
@@ -763,8 +763,8 @@ public class HarpyAttackerDialogue {
 							"Well, [npc.she] <i>is</i> asking for it! (Start the sex scene in the 'gentle' pace.)",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getHarpy()),
+									List.of(Main.game.getPlayer()),
+									List.of(getHarpy()),
 									Main.game.getPlayer().getCompanions(),
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
@@ -774,11 +774,11 @@ public class HarpyAttackerDialogue {
 				} else {
 					return new ResponseSex("Rape [npc.herHim] (gentle)",
 							"[npc.She] needs to be punished for attacking you like that... (Start the sex scene in the 'gentle' pace.)",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getHarpy()),
+									List.of(Main.game.getPlayer()),
+									List.of(getHarpy()),
 									Main.game.getPlayer().getCompanions(),
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
@@ -795,8 +795,8 @@ public class HarpyAttackerDialogue {
 							"Well, [npc.she] <i>is</i> asking for it! (Start the sex scene in the 'rough' pace.)",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getHarpy()),
+									List.of(Main.game.getPlayer()),
+									List.of(getHarpy()),
 									Main.game.getPlayer().getCompanions(),
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
@@ -806,11 +806,11 @@ public class HarpyAttackerDialogue {
 				} else {
 					return new ResponseSex("Rape [npc.herHim] (rough)",
 							"[npc.She] needs to be punished for attacking you like that... (Start the sex scene in the 'rough' pace.)",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getHarpy()),
+									List.of(Main.game.getPlayer()),
+									List.of(getHarpy()),
 									Main.game.getPlayer().getCompanions(),
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
@@ -826,14 +826,14 @@ public class HarpyAttackerDialogue {
 				} else {
 					return new ResponseSex("Submit",
 							"You're not really sure what to do now... Perhaps it would be best to let [npc.name] choose what to do next?",
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+							List.of(Fetish.FETISH_SUBMISSIVE),
 							null, CorruptionLevel.THREE_DIRTY, null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getHarpy()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(getHarpy()),
+									List.of(Main.game.getPlayer()),
 									null,
-									Util.newArrayListOfValues(getMainCompanion())),
+									List.of(getMainCompanion())),
 							AFTER_SEX_DEFEAT, UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "AFTER_COMBAT_VICTORY_SEX_SUBMIT", getAllCharacters()));
 				}
 				
@@ -912,8 +912,8 @@ public class HarpyAttackerDialogue {
 							UtilText.parse(getHarpy(), companion, "Have dominant sex with [npc.name], and get [npc2.name] to join in with the fun."),
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer(), companion),
-									Util.newArrayListOfValues(getHarpy()),
+									List.of(Main.game.getPlayer(), companion),
+									List.of(getHarpy()),
 									null,
 									null,
 									ResponseTag.PREFER_DOGGY),
@@ -934,10 +934,10 @@ public class HarpyAttackerDialogue {
 							UtilText.parse(companion, getHarpy(), "Tell [npc.name] that [npc.she] can have some fun with [npc2.name] while you watch."),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(companion),
-									Util.newArrayListOfValues(getHarpy()),
+									List.of(companion),
+									List.of(getHarpy()),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer())),
+									List.of(Main.game.getPlayer())),
 							AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "AFTER_COMBAT_VICTORY_GIVE_TO_COMPANION", getHarpy(), companion));
 				}
 				
@@ -960,10 +960,10 @@ public class HarpyAttackerDialogue {
 							UtilText.parse(getHarpy(), companion, "Tell [npc.name] that [npc.she] can use [npc2.name]."),
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getHarpy()),
-									Util.newArrayListOfValues(companion),
+									List.of(getHarpy()),
+									List.of(companion),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer())),
+									List.of(Main.game.getPlayer())),
 							AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "AFTER_COMBAT_VICTORY_OFFER_COMPANION", getHarpy(), companion)) {
 						@Override
 						public void effects() {
@@ -1147,8 +1147,7 @@ public class HarpyAttackerDialogue {
 			// Response variables:
 			boolean forcedTF = getHarpy().isUsingForcedTransform(Main.game.getPlayer());
 			boolean forcedFetish = getHarpy().isUsingForcedFetish(Main.game.getPlayer());
-			List<Fetish> applicableFetishes = Util.newArrayListOfValues(
-					forcedTF && potion!=null
+			List<Fetish> applicableFetishes = List.of(forcedTF && potion!=null
 						?Fetish.FETISH_TRANSFORMATION_RECEIVING
 						:null,
 					forcedFetish && fetishPotion!=null
@@ -1492,15 +1491,13 @@ public class HarpyAttackerDialogue {
 												:"Tell [npc.name] that you"+(companionSex?UtilText.parse(getMainCompanion(), " and [npc.name]"):"")+" would like to have sex with [npc.herHim]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getHarpy()),
-											Util.newArrayListOfValues(
-													Main.game.getPlayer(),
+											List.of(getHarpy()),
+											List.of(Main.game.getPlayer(),
 													companionSex
 														?getMainCompanion()
 														:null),
 											null,
-											Util.newArrayListOfValues(
-												companionSex
+											List.of(companionSex
 													?null
 													:getMainCompanion())),
 									AFTER_SEX_DEFEAT,
@@ -1514,15 +1511,13 @@ public class HarpyAttackerDialogue {
 												:"Tell [npc.name] that you"+(companionSex?UtilText.parse(getMainCompanion(), " and [npc.name]"):"")+" are more than happy to have sex with [npc.herHim]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getHarpy()),
-											Util.newArrayListOfValues(
-													Main.game.getPlayer(),
+											List.of(getHarpy()),
+											List.of(Main.game.getPlayer(),
 													companionSex
 														?getMainCompanion()
 														:null),
 											null,
-											Util.newArrayListOfValues(
-												companionSex
+											List.of(companionSex
 													?null
 													:getMainCompanion()),
 											ResponseTag.START_PACE_PLAYER_SUB_EAGER),
@@ -1534,15 +1529,13 @@ public class HarpyAttackerDialogue {
 									UtilText.parse(getHarpy(), "[npc.Name] forces [npc.herself] on you"+(companionSex?UtilText.parse(getMainCompanion(), " and [npc.name]"):"")+"..."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getHarpy()),
-											Util.newArrayListOfValues(
-													Main.game.getPlayer(),
+											List.of(getHarpy()),
+											List.of(Main.game.getPlayer(),
 													companionSex
 														?getMainCompanion()
 														:null),
 											null,
-											Util.newArrayListOfValues(
-												companionSex
+											List.of(companionSex
 													?null
 													:getMainCompanion()),
 											ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
@@ -1570,10 +1563,10 @@ public class HarpyAttackerDialogue {
 												:"Tell [npc.name] that you would like to have sex with [npc.herHim]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getHarpy()),
-											Util.newArrayListOfValues(Main.game.getPlayer()),
+											List.of(getHarpy()),
+											List.of(Main.game.getPlayer()),
 											null,
-											Util.newArrayListOfValues(getMainCompanion())),
+											List.of(getMainCompanion())),
 									AFTER_SEX_DEFEAT,
 									UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "START_DEFEATED_SEX_SOLO", getAllCharacters()));
 							
@@ -1585,10 +1578,10 @@ public class HarpyAttackerDialogue {
 												:"Tell [npc.name] that you are more than happy to have sex with [npc.herHim]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getHarpy()),
-											Util.newArrayListOfValues(Main.game.getPlayer()),
+											List.of(getHarpy()),
+											List.of(Main.game.getPlayer()),
 											null,
-											Util.newArrayListOfValues(getMainCompanion()),
+											List.of(getMainCompanion()),
 											ResponseTag.START_PACE_PLAYER_SUB_EAGER),
 									AFTER_SEX_DEFEAT,
 									UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "START_DEFEATED_SEX_SOLO", getAllCharacters()));
@@ -1598,10 +1591,10 @@ public class HarpyAttackerDialogue {
 									UtilText.parse(getHarpy(), "[npc.Name] forces [npc.herself] on you..."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getHarpy()),
-											Util.newArrayListOfValues(Main.game.getPlayer()),
+											List.of(getHarpy()),
+											List.of(Main.game.getPlayer()),
 											null,
-											Util.newArrayListOfValues(getMainCompanion()),
+											List.of(getMainCompanion()),
 											ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
 									AFTER_SEX_DEFEAT,
 									UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "START_DEFEATED_SEX_SOLO_RESIST", getAllCharacters()));
@@ -1628,10 +1621,10 @@ public class HarpyAttackerDialogue {
 											"You can do nothing but watch as [npc.name] forces [npc.herself] on [npc2.name]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getHarpy()),
-											Util.newArrayListOfValues(getMainCompanion()),
+											List.of(getHarpy()),
+											List.of(getMainCompanion()),
 											null,
-											Util.newArrayListOfValues(Main.game.getPlayer())),
+											List.of(Main.game.getPlayer())),
 									AFTER_SEX_DEFEAT,
 									UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "START_DEFEATED_SEX_SOLO_COMPANION_RAPE", getAllCharacters()));
 						}
@@ -1643,10 +1636,10 @@ public class HarpyAttackerDialogue {
 											"You can do nothing but watch as [npc2.name] happily agrees to let [npc.name] fuck [npc2.herHim]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getHarpy()),
-											Util.newArrayListOfValues(getMainCompanion()),
+											List.of(getHarpy()),
+											List.of(getMainCompanion()),
 											null,
-											Util.newArrayListOfValues(Main.game.getPlayer())),
+											List.of(Main.game.getPlayer())),
 									AFTER_SEX_DEFEAT,
 									UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "START_DEFEATED_SEX_SOLO_COMPANION", getAllCharacters()));
 						}
@@ -1674,10 +1667,10 @@ public class HarpyAttackerDialogue {
 											:"Tell [npc.name] that you would like to have sex with [npc.herHim]."),
 								false, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getHarpy()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(getHarpy()),
+										List.of(Main.game.getPlayer()),
 										null,
-										Util.newArrayListOfValues(getMainCompanion())),
+										List.of(getMainCompanion())),
 								AFTER_SEX_DEFEAT,
 								UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "START_DEFEATED_SEX", getAllCharacters()));
 						
@@ -1689,10 +1682,10 @@ public class HarpyAttackerDialogue {
 											:"Tell [npc.name] that you are more than happy to have sex with [npc.herHim]."),
 								false, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getHarpy()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(getHarpy()),
+										List.of(Main.game.getPlayer()),
 										null,
-										Util.newArrayListOfValues(getMainCompanion()),
+										List.of(getMainCompanion()),
 										ResponseTag.START_PACE_PLAYER_SUB_EAGER),
 								AFTER_SEX_DEFEAT,
 								UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "START_DEFEATED_SEX", getAllCharacters()));
@@ -1702,10 +1695,10 @@ public class HarpyAttackerDialogue {
 								UtilText.parse(getHarpy(), "[npc.Name] forces [npc.herself] on you..."),
 								false, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getHarpy()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(getHarpy()),
+										List.of(Main.game.getPlayer()),
 										null,
-										Util.newArrayListOfValues(getMainCompanion()),
+										List.of(getMainCompanion()),
 										ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
 								AFTER_SEX_DEFEAT,
 								UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "START_DEFEATED_SEX_RESIST", getAllCharacters()));

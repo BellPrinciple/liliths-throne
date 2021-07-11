@@ -117,8 +117,8 @@ public class PrologueDialogue {
 							null, null, null,
 							true, true,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(PrologueFemale.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(PrologueFemale.class)),
 							null,
 							null),
 							AFTER_SEX,
@@ -140,8 +140,8 @@ public class PrologueDialogue {
 							null, null, null,
 							true, true,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getNpc(PrologueMale.class)),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(PrologueMale.class)),
+									List.of(Main.game.getPlayer()),
 							null,
 							null),
 							AFTER_SEX,

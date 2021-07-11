@@ -176,7 +176,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 				description,
 				physicalResistance,
 				femininityRestriction,
-				Util.newArrayListOfValues(equipSlot),
+				List.of(equipSlot),
 				rarity,
 				clothingSet,
 				pathName,
@@ -364,7 +364,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 				
 			} catch(Exception ex) { // Old version single slot support:
 				InventorySlot slot = InventorySlot.valueOf(coreAttributes.getMandatoryFirstOf("slot").getTextContent());
-				this.equipSlots = Util.newArrayListOfValues(slot);
+				this.equipSlots = List.of(slot);
 			}
 			
 			if(coreAttributes.getOptionalFirstOf("clothingAuthorTag").isPresent()) {
@@ -2101,8 +2101,8 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 										s += "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>" + Util.inputStreamToString(is) + "</div>";
 										s = getSVGWithHandledPattern(s, pattern, patternColours);
 										s = SvgUtil.colourReplacement(this.getId(),
-												Util.newArrayListOfValues(item.getColour(0)),
-												Util.newArrayListOfValues(new ColourReplacement(true, ColourReplacement.DEFAULT_PRIMARY_REPLACEMENTS, ColourListPresets.ALL, null)),
+												List.of(item.getColour(0)),
+												List.of(new ColourReplacement(true, ColourReplacement.DEFAULT_PRIMARY_REPLACEMENTS, ColourListPresets.ALL, null)),
 												s);
 										is.close();
 									}
@@ -2123,8 +2123,8 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 							s += "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>" + Util.inputStreamToString(is) + "</div>";
 							s = getSVGWithHandledPattern(s, pattern, patternColours);
 							s = SvgUtil.colourReplacement(this.getId(),
-									Util.newArrayListOfValues(c),
-									Util.newArrayListOfValues(new ColourReplacement(true, ColourReplacement.DEFAULT_PRIMARY_REPLACEMENTS, ColourListPresets.ALL, null)),
+									List.of(c),
+									List.of(new ColourReplacement(true, ColourReplacement.DEFAULT_PRIMARY_REPLACEMENTS, ColourListPresets.ALL, null)),
 									s);
 							is.close();
 							i++;

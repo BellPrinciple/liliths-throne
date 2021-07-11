@@ -106,8 +106,7 @@ public class Sean extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_MEGA_SLUT);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.RANGED_DAMAGE,
+				List.of(Perk.RANGED_DAMAGE,
 						Perk.FETISH_SEEDER),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 3),

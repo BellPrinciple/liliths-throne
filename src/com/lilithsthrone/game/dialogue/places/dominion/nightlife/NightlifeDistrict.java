@@ -559,7 +559,7 @@ public class NightlifeDistrict {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Jules.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, true, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Jules.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, true, true));
 							}
 						};
 						
@@ -1315,7 +1315,7 @@ public class NightlifeDistrict {
 							}
 							@Override
 							public List<AbstractSexPosition> getAllowedSexPositions() {
-								return Util.newArrayListOfValues(SexPosition.SITTING);
+								return List.of(SexPosition.SITTING);
 							}
 						};
 						
@@ -1330,7 +1330,7 @@ public class NightlifeDistrict {
 								}
 								@Override
 								public List<AbstractSexPosition> getAllowedSexPositions() {
-									return Util.newArrayListOfValues(SexPosition.STANDING, SexPosition.SITTING);
+									return List.of(SexPosition.STANDING, SexPosition.SITTING);
 								}
 							};
 						}
@@ -1375,7 +1375,7 @@ public class NightlifeDistrict {
 							}
 							@Override
 							public List<AbstractSexPosition> getAllowedSexPositions() {
-								return Util.newArrayListOfValues(SexPosition.SITTING);
+								return List.of(SexPosition.SITTING);
 							}
 						};
 						
@@ -1391,7 +1391,7 @@ public class NightlifeDistrict {
 									}
 									@Override
 									public List<AbstractSexPosition> getAllowedSexPositions() {
-										return Util.newArrayListOfValues(SexPosition.STANDING, SexPosition.SITTING);
+										return List.of(SexPosition.STANDING, SexPosition.SITTING);
 									}
 								};
 							}
@@ -1407,7 +1407,7 @@ public class NightlifeDistrict {
 								}
 								@Override
 								public List<AbstractSexPosition> getAllowedSexPositions() {
-									return Util.newArrayListOfValues(SexPosition.STANDING, SexPosition.SITTING);
+									return List.of(SexPosition.STANDING, SexPosition.SITTING);
 								}
 							};
 						}
@@ -3506,7 +3506,7 @@ public class NightlifeDistrict {
 					return new Response("Toilet", "Use the toilet.", WATERING_HOLE_TOILETS_USE);
 					
 				} else if(index==2) {
-					List<InventorySlot> washSlots = Util.newArrayListOfValues(InventorySlot.HEAD, InventorySlot.EYES, InventorySlot.MOUTH, InventorySlot.NECK, InventorySlot.HAIR, InventorySlot.FINGER, InventorySlot.HAND, InventorySlot.WRIST);
+					List<InventorySlot> washSlots = List.of(InventorySlot.HEAD, InventorySlot.EYES, InventorySlot.MOUTH, InventorySlot.NECK, InventorySlot.HAIR, InventorySlot.FINGER, InventorySlot.HAND, InventorySlot.WRIST);
 					return new Response("Wash",
 							"Use the sinks to wash your hands and face."
 								+ "<br/>[style.italicsGood(This will clean your "+Util.inventorySlotsToParsedStringList(washSlots, Main.game.getPlayer())+", as well as any clothing worn in these slots.)]"
@@ -3803,7 +3803,7 @@ public class NightlifeDistrict {
 			npc.setGenericName("tipsy "+genericName);
 			
 		} else {
-			gloryholeNpcNameDescriptor = Main.game.getCharacterUtils().setGenericName(npc, genericName, Util.newArrayListOfValues(gloryholeNpcNameDescriptor));
+			gloryholeNpcNameDescriptor = Main.game.getCharacterUtils().setGenericName(npc, genericName, List.of(gloryholeNpcNameDescriptor));
 		}
 		
 		npc.setDescription("[npc.Name] is one of the Water Hole's patrons, who, seeking to take a break from the club floor, has wandered into the toilets to find you servicing the glory holes...");
@@ -3854,19 +3854,19 @@ public class NightlifeDistrict {
 		if(rnd<0.1f) {
 			npc.useItem(Main.game.getItemGen().generateItem("innoxia_race_rat_black_rats_rum"), npc, false);
 			npc.useItem(Main.game.getItemGen().generateItem("innoxia_race_rat_black_rats_rum"), npc, false);
-			descriptors = Util.newArrayListOfValues("wasted", "intoxicated");
+			descriptors = List.of("wasted", "intoxicated");
 			
 		} else if(Math.random()<0.3f) {
 			npc.useItem(Main.game.getItemGen().generateItem("innoxia_race_wolf_wolf_whiskey"), npc, false);
 			npc.useItem(Main.game.getItemGen().generateItem("innoxia_race_horse_equine_cider"), npc, false);
-			descriptors = Util.newArrayListOfValues("drunk");
+			descriptors = List.of("drunk");
 			
 		} else if(Math.random()<0.4f) {
 			npc.useItem(Main.game.getItemGen().generateItem("innoxia_race_horse_equine_cider"), npc, false);
-			descriptors = Util.newArrayListOfValues("tipsy");
+			descriptors = List.of("tipsy");
 			
 		} else {
-			descriptors = Util.newArrayListOfValues("horny", "desperate", "horny");
+			descriptors = List.of("horny", "desperate", "horny");
 		}
 		npc.setGenericName(Util.randomItemFrom(descriptors)+" "+genericName);
 		
@@ -4946,7 +4946,7 @@ public class NightlifeDistrict {
 							}
 							@Override
 							public List<AbstractSexPosition> getAllowedSexPositions() {
-								return Util.newArrayListOfValues(SexPosition.SITTING);
+								return List.of(SexPosition.SITTING);
 							}
 						};
 
@@ -4961,7 +4961,7 @@ public class NightlifeDistrict {
 								}
 								@Override
 								public List<AbstractSexPosition> getAllowedSexPositions() {
-									return Util.newArrayListOfValues(SexPosition.STANDING, SexPosition.SITTING);
+									return List.of(SexPosition.STANDING, SexPosition.SITTING);
 								}
 							};
 						}
@@ -5167,8 +5167,8 @@ public class NightlifeDistrict {
 				return new ResponseSex("Sex", UtilText.parse(NightlifeDistrict.getClubbersPresent(), "Have submissive sex with [npc.name]."),
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(NightlifeDistrict.getClubbersPresent().get(0)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(NightlifeDistrict.getClubbersPresent().get(0)),
+								List.of(Main.game.getPlayer()),
 						null,
 						null) {
 							@Override

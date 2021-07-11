@@ -16,85 +16,68 @@ import com.lilithsthrone.utils.colours.PresetColour;
 public enum FluidFlavour {
 	
 	CUM("cum", PresetColour.CUM,
-			Util.newArrayListOfValues(
-					"salty")),
+			List.of("salty")),
 	
 	MILK("milk", PresetColour.MILK,
-			Util.newArrayListOfValues(
-					"creamy")),
+			List.of("creamy")),
 	
 	GIRL_CUM("girlcum", PresetColour.GIRLCUM,
-			Util.newArrayListOfValues(
-					"sweet")),
+			List.of("sweet")),
 
 	BUBBLEGUM("bubblegum", PresetColour.BASE_PINK_LIGHT,
-			Util.newArrayListOfValues(
-					"sweet")),
+			List.of("sweet")),
 	
 	BEER("beer", PresetColour.BASE_TAN,
-			Util.newArrayListOfValues(
-					"yeasty",
+			List.of("yeasty",
 					"beer-flavoured")),
 	
 	VANILLA("vanilla", PresetColour.BASE_YELLOW_PALE,
-			Util.newArrayListOfValues(
-					"sweet",
+			List.of("sweet",
 					"vanilla-flavoured")),
 	
 	STRAWBERRY("strawberry", PresetColour.BASE_CRIMSON,
-			Util.newArrayListOfValues(
-					"sweet",
+			List.of("sweet",
 					"strawberry-flavoured")),
 	
 	CHOCOLATE("chocolate", PresetColour.BASE_BROWN,
-			Util.newArrayListOfValues(
-					"chocolatey",
+			List.of("chocolatey",
 					"chocolate-flavoured")),
 	
 	PINEAPPLE("pineapple", PresetColour.BASE_YELLOW_LIGHT,
-			Util.newArrayListOfValues(
-					"tart",
+			List.of("tart",
 					"sour",
 					"tangy",
 					"pineapple-flavoured")),
 	
 	HONEY("honey", PresetColour.BASE_YELLOW,
-			Util.newArrayListOfValues(
-					"sweet",
+			List.of("sweet",
 					"honey-flavoured")),
 	
 	MINT("mint", PresetColour.BASE_GREEN_LIME,
-			Util.newArrayListOfValues(
-					"minty")),
+			List.of("minty")),
 	
 	CHERRY("cherry", PresetColour.BASE_RED_DARK,
-			Util.newArrayListOfValues(
-					"sweet",
+			List.of("sweet",
 					"cherry-flavoured")),
 	
 	// ------ Icons for these made by 'Charisma is my Dump Stat': ------ //
 	
 	COFFEE("coffee", PresetColour.BASE_BROWN_DARK,
-			Util.newArrayListOfValues(
-					"bitter",
+			List.of("bitter",
 					"coffee-flavoured")),
 	
 	TEA("tea", PresetColour.BASE_GREEN,
-			Util.newArrayListOfValues(
-					"tea-flavoured")),
+			List.of("tea-flavoured")),
 	
 	MAPLE("maple", PresetColour.BASE_RED,
-			Util.newArrayListOfValues(
-					"sweet",
+			List.of("sweet",
 					"maple-flavoured")),
 	
 	CINNAMON("cinnamon", PresetColour.BASE_BROWN,
-			Util.newArrayListOfValues(
-					"cinnamon-flavoured")),
+			List.of("cinnamon-flavoured")),
 
 	LEMON("lemon", PresetColour.BASE_YELLOW,
-			Util.newArrayListOfValues(
-					"sour",
+			List.of("sour",
 					"lemon-flavoured")),
 	
 	// ------------ //
@@ -102,24 +85,19 @@ public enum FluidFlavour {
 	// ------ Icons for these made by 'DSG': ------ //
 	
 	ORANGE("orange", PresetColour.BASE_ORANGE,
-			Util.newArrayListOfValues(
-					"orange-flavoured")),
+			List.of("orange-flavoured")),
 	
 	GRAPE("grape", PresetColour.BASE_PURPLE,
-			Util.newArrayListOfValues(
-					"grape-flavoured")),
+			List.of("grape-flavoured")),
 	
 	MELON("melon", PresetColour.BASE_GREEN_LIGHT,
-			Util.newArrayListOfValues(
-					"melon-flavoured")),
+			List.of("melon-flavoured")),
 	
 	COCONUT("coconut", PresetColour.BASE_BROWN_DARK,
-			Util.newArrayListOfValues(
-					"coconut-flavoured")),
+			List.of("coconut-flavoured")),
 	
 	BLUEBERRY("blueberry", PresetColour.BASE_BLUE_DARK,
-			Util.newArrayListOfValues(
-					"blueberry-flavoured"))
+			List.of("blueberry-flavoured"))
 	
 	// ------------ //
 	

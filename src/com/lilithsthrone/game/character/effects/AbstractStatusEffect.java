@@ -147,7 +147,7 @@ public abstract class AbstractStatusEffect {
 		this.pathName = pathName;
 		SVGString = null;
 		
-		this.colourShades = Util.newArrayListOfValues(colourShade, colourShadeSecondary, colourShadeTertiary);
+		this.colourShades = List.of(colourShade, colourShadeSecondary, colourShadeTertiary);
 		
 		if(beneficial) { // As all new status effects should be added via xml files, not giving the option to set as NEUTRAL shouldn't be an issue.
 			this.beneficial = EffectBenefit.BENEFICIAL;
@@ -324,13 +324,13 @@ public abstract class AbstractStatusEffect {
 	public boolean isConditionsMet(GameCharacter target) {
 		if(this.isFromExternalFile() && target!=null && Main.game.isStarted()) {
 			if(!shortConditionalCheck) {
-				String parsedResult = UtilText.parse(Util.newArrayListOfValues(target), applicationCondition, true, new ArrayList<>());
+				String parsedResult = UtilText.parse(List.of(target), applicationCondition, true, new ArrayList<>());
 				parsedResult = parsedResult.replaceAll("\\s", "");
 				return Boolean.valueOf(parsedResult.trim());
 				
 			} else {
 				try {
-					return UtilText.evaluateConditional(Util.newArrayListOfValues(target), applicationCondition, true);
+					return UtilText.evaluateConditional(List.of(target), applicationCondition, true);
 				} catch (ScriptException e) {
 					System.err.println("Conditional parsing (from status effect) error: "+applicationCondition);
 					e.printStackTrace();
@@ -474,7 +474,7 @@ public abstract class AbstractStatusEffect {
 	public List<Value<Integer, String>> getAdditionalDescriptions(GameCharacter target) {
 		Value<Integer, String> additional = getAdditionalDescription(target);
 		if(additional!=null) {
-			return Util.newArrayListOfValues(additional);
+			return List.of(additional);
 		}
 		return null;
 	}
@@ -599,7 +599,7 @@ public abstract class AbstractStatusEffect {
 		List<String> modifiersList = new ArrayList<>();
 
 		if(!Main.sex.getOngoingSexAreas(target, penetration).isEmpty()
-				&& !Collections.disjoint(Main.sex.getOngoingSexAreas(target, penetration).get(Main.sex.getCharacterOngoingSexArea(target, penetration).get(0)), Util.newArrayListOfValues(SexAreaPenetration.values()))) {
+				&& !Collections.disjoint(Main.sex.getOngoingSexAreas(target, penetration).get(Main.sex.getCharacterOngoingSexArea(target, penetration).get(0)), List.of(SexAreaPenetration.values()))) {
 
 			modifiersList.add("[style.boldSex(Arousal/turn:)]");
 

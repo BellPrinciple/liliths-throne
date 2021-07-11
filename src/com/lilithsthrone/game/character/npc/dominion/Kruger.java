@@ -110,7 +110,7 @@ public class Kruger extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_DIRTY_MINDED);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 5),
 						new Value<>(PerkCategory.LUST, 1),

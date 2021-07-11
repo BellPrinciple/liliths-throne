@@ -157,8 +157,7 @@ public class Amber extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_DIRTY_MINDED);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.ORGASMIC_LEVEL_DRAIN,
+				List.of(Perk.ORGASMIC_LEVEL_DRAIN,
 						Perk.UNARMED_TRAINING),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 3),
@@ -435,8 +434,8 @@ public class Amber extends NPC {
 						true,
 						false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(Amber.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Amber.class)),
 						null,
 						null),
 						AFTER_SEX_VICTORY,
@@ -453,11 +452,11 @@ public class Amber extends NPC {
 			} else if(index==3) {
 				return new ResponseSex("Submit",
 						"Amber's fiery personality is seriously turning you on. You can't bring yourself to take the dominant role, but you <i>do</i> want to have sex with her. Perhaps if you submitted, she'd be willing to fuck you?",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
+						List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(Amber.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Amber.class)),
+								List.of(Main.game.getPlayer()),
 						null,
 						null),
 						AFTER_SEX_VICTORY,
@@ -656,7 +655,7 @@ public class Amber extends NPC {
 	
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(AmberSpecials.class);
+		return List.of(AmberSpecials.class);
 	}
 
 	@Override

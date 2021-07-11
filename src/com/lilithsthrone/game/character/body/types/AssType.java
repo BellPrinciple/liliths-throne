@@ -27,8 +27,8 @@ public class AssType {
 			AnusType.HUMAN,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] a [style.boldHuman(human)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a human, [npc.anusFullDescription(true)]"){
 	};
@@ -38,8 +38,8 @@ public class AssType {
 			AnusType.ANGEL,
 			null,
 			null,
-			Util.newArrayListOfValues("angelic"),
-			Util.newArrayListOfValues("angelic", "perfect"),
+			List.of("angelic"),
+			List.of("angelic", "perfect"),
 			"[npc.She] now [npc.has] an [style.boldAngel(angelic)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] an angelic, [npc.anusFullDescription(true)]"){
 	};
@@ -49,8 +49,8 @@ public class AssType {
 			AnusType.DEMON_COMMON,
 			null,
 			null,
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic", "perfect"),
+			List.of("demonic"),
+			List.of("demonic", "perfect"),
 			"[npc.She] now [npc.has] a [style.boldDemon(demonic)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a demonic, [npc.anusFullDescription(true)]"){
 	};
@@ -60,8 +60,8 @@ public class AssType {
 			AnusType.DOG_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] a [style.boldDogMorph(canine)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a canine, [npc.anusFullDescription(true)]"){
 	};
@@ -71,8 +71,8 @@ public class AssType {
 			AnusType.COW_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] a [style.boldCowMorph(bovine)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a bovine, [npc.anusFullDescription(true)]"){
 	};
@@ -82,8 +82,8 @@ public class AssType {
 			AnusType.SQUIRREL_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] a [style.boldSquirrelMorph(squirrel-like)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a squirrel-like, [npc.anusFullDescription(true)]"){
 	};
@@ -93,8 +93,8 @@ public class AssType {
 			AnusType.RAT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] a [style.boldRatMorph(rat-like)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a rat-like, [npc.anusFullDescription(true)]"){
 	};
@@ -104,8 +104,8 @@ public class AssType {
 			AnusType.RABBIT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] a [style.boldRabbitMorph(rabbit-like)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a rabbit-like, [npc.anusFullDescription(true)]"){
 	};
@@ -115,8 +115,8 @@ public class AssType {
 			AnusType.BAT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] a [style.boldBatMorph(bat-like)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a bat-like, [npc.anusFullDescription(true)]"){
 	};
@@ -126,8 +126,8 @@ public class AssType {
 			AnusType.ALLIGATOR_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] an [style.boldGatorMorph(alligator-like)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] an alligator-like, [npc.anusFullDescription(true)]"){
 	};
@@ -137,8 +137,8 @@ public class AssType {
 			AnusType.WOLF_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] a [style.boldWolfMorph(lupine)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a lupine, [npc.anusFullDescription(true)]"){
 	};
@@ -148,8 +148,8 @@ public class AssType {
 			AnusType.FOX_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] a [style.boldFoxMorph(vulpine)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a vulpine, [npc.anusFullDescription(true)]"){
 	};
@@ -159,8 +159,8 @@ public class AssType {
 			AnusType.CAT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] a [style.boldCatMorph(feline)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a feline, [npc.anusFullDescription(true)]"){
 	};
@@ -170,8 +170,8 @@ public class AssType {
 			AnusType.HORSE_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] an [style.boldHorseMorph(equine)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] an equine, [npc.anusFullDescription(true)]"){
 	};
@@ -181,8 +181,8 @@ public class AssType {
 			AnusType.REINDEER_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] a [style.boldReindeerMorph(reindeer-like)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] a reindeer-like, [npc.anusFullDescription(true)]"){
 	};
@@ -192,8 +192,8 @@ public class AssType {
 			AnusType.HARPY,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] now [npc.has] an [style.boldHarpy(avian)], [npc.assholeFullDescription].",
 			"[npc.SheHasFull] an avian, [npc.anusFullDescription(true)]"){
 	};

@@ -111,8 +111,7 @@ public class Astrapi extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_RANGED_EXPERT);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.RANGED_DAMAGE,
+				List.of(Perk.RANGED_DAMAGE,
 						Perk.BARREN),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),

@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade;
 
+import java.util.List;
 import java.util.Map.Entry;
 
 import com.lilithsthrone.game.PropertyValue;
@@ -155,7 +156,7 @@ public class ArcaneArts {
 						
 					} else {
 						return new ResponseSex("Offer body", "Let Vicky use your body.",
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
+								List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
 								true, false,
 								new SMVickyOverDesk(
 										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vicky.class), SexSlotDesk.BETWEEN_LEGS)),
@@ -178,8 +179,7 @@ public class ArcaneArts {
 					
 				} else {
 					return new ResponseSex("Nervously leave", "Vicky is far too intimidating for you... Turn around and try to escape from her gaze. [style.boldBad(You get the feeling that this will result in non-consensual sex...)]",
-							Util.newArrayListOfValues(
-									Fetish.FETISH_SUBMISSIVE,
+							List.of(Fetish.FETISH_SUBMISSIVE,
 									Fetish.FETISH_NON_CON_SUB), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 							false, false,
 							new SMVickyOverDesk(
@@ -248,7 +248,7 @@ public class ArcaneArts {
 					
 				} else {
 					return new ResponseSex("Offer body", "Let Vicky use your body as payment for the fee.",
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
+							List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
 							true, false,
 							new SMVickyOverDesk(
 									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vicky.class), SexSlotDesk.BETWEEN_LEGS)),
@@ -274,8 +274,7 @@ public class ArcaneArts {
 							"Weakly refuse",
 							"You can't bring yourself to say no to such an intimidating person... Try to wriggle free and leave..."
 									+ "<br/>[style.boldBad(You get the feeling that this will result in non-consensual sex...)]",
-							Util.newArrayListOfValues(
-									Fetish.FETISH_SUBMISSIVE,
+							List.of(Fetish.FETISH_SUBMISSIVE,
 									Fetish.FETISH_NON_CON_SUB),
 							null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 							false, false,

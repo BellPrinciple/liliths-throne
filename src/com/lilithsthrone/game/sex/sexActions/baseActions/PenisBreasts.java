@@ -145,10 +145,10 @@ public class PenisBreasts {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_ORAL_RECEIVING);
+				return List.of(Fetish.FETISH_ORAL_RECEIVING);
 			}
 			if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_ORAL_GIVING);
+				return List.of(Fetish.FETISH_ORAL_GIVING);
 			}
 			return null;
 		}
@@ -284,10 +284,10 @@ public class PenisBreasts {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_ORAL_GIVING);
+				return List.of(Fetish.FETISH_ORAL_GIVING);
 			}
 			if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_ORAL_RECEIVING);
+				return List.of(Fetish.FETISH_ORAL_RECEIVING);
 			}
 			return null;
 		}

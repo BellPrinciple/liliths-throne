@@ -91,8 +91,7 @@ public class EnforcerWarehouse {
 		Map<AbstractSubspecies, Integer> subspeciesMap = new HashMap<>();
 		
 		// Make SWORD guards a predator subspecies:
-		List <AbstractSubspecies> subspeciesAvailable = Util.newArrayListOfValues(
-				Subspecies.getSubspeciesFromId("innoxia_panther_subspecies_tiger"),
+		List <AbstractSubspecies> subspeciesAvailable = List.of(Subspecies.getSubspeciesFromId("innoxia_panther_subspecies_tiger"),
 				Subspecies.getSubspeciesFromId("innoxia_panther_subspecies_lion"),
 				Subspecies.getSubspeciesFromId("innoxia_panther_subspecies_leopard"),
 				Subspecies.DOG_MORPH_DOBERMANN,
@@ -165,7 +164,7 @@ public class EnforcerWarehouse {
 	}
 	
 	public static void initWarehouse() {
-		List<String> usedAdjectives = Util.newArrayListOfValues("nervous", "cowardly");
+		List<String> usedAdjectives = List.of("nervous", "cowardly");
 		
 		// Add an Enforcer onto each of the Enforcer post tiles:
 		for(Cell c : Main.game.getWorlds().get(WorldType.ENFORCER_WAREHOUSE).getCells(PlaceType.ENFORCER_WAREHOUSE_ENFORCER_GUARD_POST)) {
@@ -610,7 +609,7 @@ public class EnforcerWarehouse {
 								Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addWeapon(weapon, 1, false, true));
 								
 							} else {
-								List<AbstractItemType> itemTypes = Util.newArrayListOfValues(ItemType.getItemTypeFromId("BOTTLED_ESSENCE_DEMON"), ItemType.getItemTypeFromId("innoxia_race_demon_liliths_gift"), ItemType.FETISH_UNREFINED);
+								List<AbstractItemType> itemTypes = List.of(ItemType.getItemTypeFromId("BOTTLED_ESSENCE_DEMON"), ItemType.getItemTypeFromId("innoxia_race_demon_liliths_gift"), ItemType.FETISH_UNREFINED);
 								AbstractItem item = Main.game.getItemGen().generateItem(Util.randomItemFrom(itemTypes));
 								Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addItem(item, 3+Util.random.nextInt(6), false, true));
 							}

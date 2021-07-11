@@ -827,8 +827,7 @@ public class DaddyDialogue {
 								}
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getNpc(Daddy.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, true, true),
+									return List.of(new InitialSexActionInformation(Main.game.getNpc(Daddy.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, true, true),
 											isLilayaPresent()
 												?new InitialSexActionInformation(Main.game.getNpc(Daddy.class), Main.game.getNpc(Lilaya.class), PenisMouth.BLOWJOB_START_ADDITIONAL, true, true)
 												:null);
@@ -979,10 +978,8 @@ public class DaddyDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(
-										Main.game.getNpc(Daddy.class)),
-								Util.newArrayListOfValues(
-										Main.game.getPlayer(),
+								List.of(Main.game.getNpc(Daddy.class)),
+								List.of(Main.game.getPlayer(),
 										isLilayaPresent()
 											?Main.game.getNpc(Lilaya.class)
 											:null),
@@ -1008,14 +1005,14 @@ public class DaddyDialogue {
 								if(isLilayaPresent()) {
 									map.get(true).put(Main.game.getNpc(Lilaya.class),
 											Util.newHashMapOfValues(
-													new Value<>(CoverableArea.VAGINA, Util.newArrayListOfValues(InventorySlot.GROIN)),
-													new Value<>(CoverableArea.FEET, Util.newArrayListOfValues(InventorySlot.SOCK)),
+													new Value<>(CoverableArea.VAGINA, List.of(InventorySlot.GROIN)),
+													new Value<>(CoverableArea.FEET, List.of(InventorySlot.SOCK)),
 													new Value<>(CoverableArea.STOMACH, null)));
 								}
 								map.get(true).put(Main.game.getPlayer(),
 										Util.newHashMapOfValues(
-												new Value<>(CoverableArea.VAGINA, Util.newArrayListOfValues(InventorySlot.GROIN)),
-												new Value<>(CoverableArea.FEET, Util.newArrayListOfValues(InventorySlot.SOCK)),
+												new Value<>(CoverableArea.VAGINA, List.of(InventorySlot.GROIN)),
+												new Value<>(CoverableArea.FEET, List.of(InventorySlot.SOCK)),
 												new Value<>(CoverableArea.STOMACH, null)));
 								return map;
 							}
@@ -1026,8 +1023,7 @@ public class DaddyDialogue {
 						UtilText.parseFromXMLFile("characters/dominion/daddy", getDialoguePrefix()+"AFTER_DINNER_SEX")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								isLilayaPresent()
+						return List.of(isLilayaPresent()
 									?new InitialSexActionInformation(Main.game.getNpc(Lilaya.class), Main.game.getPlayer(), TongueMouth.KISS_START, true, true)
 									:null);
 					}
@@ -1055,13 +1051,11 @@ public class DaddyDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(
-										Main.game.getPlayer(),
+								List.of(Main.game.getPlayer(),
 										isLilayaPresent()
 											?Main.game.getNpc(Lilaya.class)
 											:null),
-								Util.newArrayListOfValues(
-										Main.game.getNpc(Daddy.class)),
+								List.of(Main.game.getNpc(Daddy.class)),
 								null,
 								null,
 								ResponseTag.PREFER_COW_GIRL) {
@@ -1088,15 +1082,15 @@ public class DaddyDialogue {
 								if(isLilayaPresent()) {
 									map.get(true).put(Main.game.getNpc(Lilaya.class),
 											Util.newHashMapOfValues(
-													new Value<>(CoverableArea.VAGINA, Util.newArrayListOfValues(InventorySlot.GROIN)),
-													new Value<>(CoverableArea.FEET, Util.newArrayListOfValues(InventorySlot.SOCK)),
+													new Value<>(CoverableArea.VAGINA, List.of(InventorySlot.GROIN)),
+													new Value<>(CoverableArea.FEET, List.of(InventorySlot.SOCK)),
 													new Value<>(CoverableArea.STOMACH, null),
 													new Value<>(CoverableArea.VAGINA, null)));
 								}
 								map.get(true).put(Main.game.getPlayer(),
 										Util.newHashMapOfValues(
-												new Value<>(CoverableArea.VAGINA, Util.newArrayListOfValues(InventorySlot.GROIN)),
-												new Value<>(CoverableArea.FEET, Util.newArrayListOfValues(InventorySlot.SOCK)),
+												new Value<>(CoverableArea.VAGINA, List.of(InventorySlot.GROIN)),
+												new Value<>(CoverableArea.FEET, List.of(InventorySlot.SOCK)),
 												new Value<>(CoverableArea.STOMACH, null)));
 								return map;
 							}
@@ -1114,8 +1108,7 @@ public class DaddyDialogue {
 						UtilText.parseFromXMLFile("characters/dominion/daddy", getDialoguePrefix()+"AFTER_DINNER_DOMINATE")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								isLilayaPresent()
+						return List.of(isLilayaPresent()
 									?new InitialSexActionInformation(Main.game.getNpc(Lilaya.class), Main.game.getNpc(Daddy.class), TongueVagina.RECEIVING_CUNNILINGUS_START, true, true)
 									:null);
 					}

@@ -115,7 +115,7 @@ public class Shadow extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_SLUT);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(Perk.BESERK),
+				List.of(Perk.BESERK),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 0),
@@ -239,8 +239,8 @@ public class Shadow extends NPC {
 		this.unequipAllClothingIntoVoid(true, true);
 
 		if(settings!=null && settings.contains(EquipClothingSetting.ADD_WEAPONS)) {
-			this.equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_kerambit_kerambit", DamageType.POISON, Util.newArrayListOfValues(PresetColour.CLOTHING_BLACK, PresetColour.CLOTHING_STEEL)));
-			this.equipOffhandWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_kerambit_kerambit", DamageType.POISON, Util.newArrayListOfValues(PresetColour.CLOTHING_BLACK, PresetColour.CLOTHING_STEEL)));
+			this.equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_kerambit_kerambit", DamageType.POISON, List.of(PresetColour.CLOTHING_BLACK, PresetColour.CLOTHING_STEEL)));
+			this.equipOffhandWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_kerambit_kerambit", DamageType.POISON, List.of(PresetColour.CLOTHING_BLACK, PresetColour.CLOTHING_STEEL)));
 		}
 		
 		if(settings!=null && settings.contains(EquipClothingSetting.ADD_TATTOOS)) {

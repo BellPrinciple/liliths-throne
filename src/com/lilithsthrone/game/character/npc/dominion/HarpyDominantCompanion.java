@@ -99,7 +99,7 @@ public class HarpyDominantCompanion extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_DIRTY_MINDED);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 0),

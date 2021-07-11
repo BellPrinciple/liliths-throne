@@ -58,8 +58,7 @@ public enum SlaveJob {
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues(
-					SlaveJobFlag.INTERACTION_SEX,
+			List.of(SlaveJobFlag.INTERACTION_SEX,
 					SlaveJobFlag.INTERACTION_BONDING),
 			null, null) {
 		@Override
@@ -86,8 +85,7 @@ public enum SlaveJob {
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS,
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_SEX,
 					SlaveJobFlag.INTERACTION_BONDING),
 			WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_CORRIDOR) {
@@ -127,8 +125,7 @@ public enum SlaveJob {
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS,
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_SEX,
 					SlaveJobFlag.INTERACTION_BONDING),
 			WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LIBRARY),
@@ -147,8 +144,7 @@ public enum SlaveJob {
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS,
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_SEX,
 					SlaveJobFlag.INTERACTION_BONDING),
 			WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_KITCHEN),
@@ -167,8 +163,7 @@ public enum SlaveJob {
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS,
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_BONDING),
 			WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB) {
 		@Override
@@ -197,14 +192,12 @@ public enum SlaveJob {
 			-0.5f, 0.5f,
 			150,
 			0, 0,
-			Util.newArrayListOfValues(
-					SlaveJobSetting.TEST_SUBJECT_ALLOW_TRANSFORMATIONS_FEMALE,
+			List.of(SlaveJobSetting.TEST_SUBJECT_ALLOW_TRANSFORMATIONS_FEMALE,
 					SlaveJobSetting.TEST_SUBJECT_ALLOW_TRANSFORMATIONS_MALE),
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS),
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS),
 			WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_LAB) {
 		@Override
 		public float getAffectionGain(int hour, GameCharacter slave) {
@@ -240,19 +233,16 @@ public enum SlaveJob {
 			-5f, 1f,
 			0,
 			0, 0,
-			Util.newArrayListOfValues(
-					SlaveJobSetting.SEX_ORAL,
+			List.of(SlaveJobSetting.SEX_ORAL,
 					SlaveJobSetting.SEX_VAGINAL,
 					SlaveJobSetting.SEX_ANAL,
 					SlaveJobSetting.SEX_NIPPLES),
-			Util.newArrayListOfValues(
-					SlaveJobSetting.SEX_ORAL,
+			List.of(SlaveJobSetting.SEX_ORAL,
 					SlaveJobSetting.SEX_VAGINAL,
 					SlaveJobSetting.SEX_ANAL),
 			null,
 			null,
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS),
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS),
 			WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_PUBLIC_STOCKS) {
 		@Override
 		public float getAffectionGain(int hour, GameCharacter slave) {
@@ -274,19 +264,16 @@ public enum SlaveJob {
 			-0.25f, 0.5f,
 			200,
 			0, 0.5f,
-			Util.newArrayListOfValues(
-					SlaveJobSetting.SEX_ORAL,
+			List.of(SlaveJobSetting.SEX_ORAL,
 					SlaveJobSetting.SEX_VAGINAL,
 					SlaveJobSetting.SEX_ANAL,
 					SlaveJobSetting.SEX_NIPPLES),
-			Util.newArrayListOfValues(
-					SlaveJobSetting.SEX_ORAL,
+			List.of(SlaveJobSetting.SEX_ORAL,
 					SlaveJobSetting.SEX_VAGINAL,
 					SlaveJobSetting.SEX_ANAL),
 			null,
 			null,
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS,
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_BONDING),
 			WorldType.ANGELS_KISS_FIRST_FLOOR, PlaceType.ANGELS_KISS_BEDROOM) {
 		
@@ -334,8 +321,7 @@ public enum SlaveJob {
 			-0.25f, 1f,
 			0,
 			0, 0,
-			Util.newArrayListOfValues(
-					SlaveJobSetting.MILKING_MILK,
+			List.of(SlaveJobSetting.MILKING_MILK,
 					SlaveJobSetting.MILKING_MILK_CROTCH,
 					SlaveJobSetting.MILKING_CUM,
 					SlaveJobSetting.MILKING_GIRLCUM,
@@ -344,21 +330,17 @@ public enum SlaveJob {
 					SlaveJobSetting.MILKING_CUM_AUTO_SELL,
 					SlaveJobSetting.MILKING_GIRLCUM_AUTO_SELL,
 					SlaveJobSetting.MILKING_TEAR_HYMEN),
-			Util.newArrayListOfValues(
-					SlaveJobSetting.MILKING_MILK,
+			List.of(SlaveJobSetting.MILKING_MILK,
 					SlaveJobSetting.MILKING_MILK_CROTCH,
 					SlaveJobSetting.MILKING_CUM,
 					SlaveJobSetting.MILKING_GIRLCUM),
 			Util.newHashMapOfValues(
-					new Value<>("Room Preference", Util.newArrayListOfValues(
-							SlaveJobSetting.MILKING_INDUSTRIAL,
+					new Value<>("Room Preference", List.of(SlaveJobSetting.MILKING_INDUSTRIAL,
 							SlaveJobSetting.MILKING_REGULAR,
 							SlaveJobSetting.MILKING_ARTISAN,
 							SlaveJobSetting.MILKING_NO_PREFERENCE))),
-			Util.newArrayListOfValues(
-					SlaveJobSetting.MILKING_NO_PREFERENCE),
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS,
+			List.of(SlaveJobSetting.MILKING_NO_PREFERENCE),
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_BONDING),
 			WorldType.LILAYAS_HOUSE_GROUND_FLOOR,
 			PlaceType.LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR) {
@@ -570,8 +552,7 @@ public enum SlaveJob {
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS,
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_SEX,
 					SlaveJobFlag.INTERACTION_BONDING),
 			WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR) {
@@ -658,24 +639,19 @@ public enum SlaveJob {
 			0, 0.25f,
 			0,
 			0, 0,
-			Util.newArrayListOfValues(
-					SlaveJobSetting.BEDROOM_GREETING,
+			List.of(SlaveJobSetting.BEDROOM_GREETING,
 					SlaveJobSetting.BEDROOM_CLEAN,
 					SlaveJobSetting.BEDROOM_WAKE_UP,
 					SlaveJobSetting.BEDROOM_HELP_WASH),
-			Util.newArrayListOfValues(
-					SlaveJobSetting.BEDROOM_GREETING,
+			List.of(SlaveJobSetting.BEDROOM_GREETING,
 					SlaveJobSetting.BEDROOM_CLEAN),
 			Util.newHashMapOfValues(
 					new Value<>("Sleeping Arrangements",
-						Util.newArrayListOfValues(
-							SlaveJobSetting.BEDROOM_SLEEP_FLOOR,
+						List.of(SlaveJobSetting.BEDROOM_SLEEP_FLOOR,
 							SlaveJobSetting.BEDROOM_SLEEP_ON_BED,
 							SlaveJobSetting.BEDROOM_SLEEP_IN_BED))),
-			Util.newArrayListOfValues(
-					SlaveJobSetting.BEDROOM_SLEEP_ON_BED),
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS,
+			List.of(SlaveJobSetting.BEDROOM_SLEEP_ON_BED),
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_SEX,
 					SlaveJobFlag.INTERACTION_BONDING),
 			WorldType.LILAYAS_HOUSE_FIRST_FLOOR,
@@ -691,21 +667,15 @@ public enum SlaveJob {
 			0.5f, -0.1f,
 			0,
 			0, 0,
-			Util.newArrayListOfValues(
-					SlaveJobSetting.SPA_BATHING,
+			List.of(SlaveJobSetting.SPA_BATHING,
 					SlaveJobSetting.SPA_STRIP_TO_BATHE,
-					SlaveJobSetting.SPA_MASSAGE
-//					SlaveJobSetting.SPA_SAUNA,
-//					SlaveJobSetting.SPA_POOL
-					),
-			Util.newArrayListOfValues(
-					SlaveJobSetting.SPA_BATHING,
+					SlaveJobSetting.SPA_MASSAGE),
+			List.of(SlaveJobSetting.SPA_BATHING,
 					SlaveJobSetting.SPA_STRIP_TO_BATHE,
 					SlaveJobSetting.SPA_MASSAGE),
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(),
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS,
+			List.of(),
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_SEX,
 					SlaveJobFlag.INTERACTION_BONDING),
 			WorldType.LILAYAS_HOUSE_GROUND_FLOOR,
@@ -747,13 +717,11 @@ public enum SlaveJob {
 			0, 0.05f,
 			0,
 			0, 0,
-			Util.newArrayListOfValues(
-					SlaveJobSetting.SPA_SHOWERING),
+			List.of(SlaveJobSetting.SPA_SHOWERING),
 			null,
 			null,
 			null,
-			Util.newArrayListOfValues(
-					SlaveJobFlag.EXPERIENCE_GAINS,
+			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_SEX,
 					SlaveJobFlag.INTERACTION_BONDING),
 			WorldType.LILAYAS_HOUSE_GROUND_FLOOR,

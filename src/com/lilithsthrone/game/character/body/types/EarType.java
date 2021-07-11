@@ -28,8 +28,8 @@ public class EarType {
 			"human",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues("soft", "feminine"),
+			List.of(""),
+			List.of("soft", "feminine"),
 			"The hot itching feeling passes after a few moments, leaving [npc.herHim] with normal-looking human ears.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldHuman(human ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of normal, human ears, which are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)]#IF(npc.isPiercedEar()), and which have been pierced#ENDIF.") {
@@ -40,8 +40,8 @@ public class EarType {
 			"angel",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("pointed", "delicate", "angelic"),
-			Util.newArrayListOfValues("soft", "feminine", "pointed", "delicate", "angelic"),
+			List.of("pointed", "delicate", "angelic"),
+			List.of("soft", "feminine", "pointed", "delicate", "angelic"),
 			"The hot itching feeling passes after a few moments, leaving [npc.herHim] with delicate, humanoid ears, with long, pointed tips.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldAngel(pointed, angelic ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of pointed angelic ears, which are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)]#IF(npc.isPiercedEar()), and which have been pierced#ENDIF.") {
@@ -52,8 +52,8 @@ public class EarType {
 			"demonic",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("pointed", "demonic"),
-			Util.newArrayListOfValues("soft", "feminine", "pointed", "demonic"),
+			List.of("pointed", "demonic"),
+			List.of("soft", "feminine", "pointed", "demonic"),
 			"The hot itching feeling passes after a few moments, leaving [npc.herHim] with delicate, humanoid ears, with long, pointed tips.<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldDemon(pointed, demonic ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of pointed demonic ears, which are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)]#IF(npc.isPiercedEar()), and which have been pierced#ENDIF.") {
@@ -64,8 +64,8 @@ public class EarType {
 			"floppy dog",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("floppy", "furry", "fur-coated", "dog-like"),
-			Util.newArrayListOfValues("feminine", "floppy", "furry", "fur-coated", "dog-like"),
+			List.of("floppy", "furry", "fur-coated", "dog-like"),
+			List.of("feminine", "floppy", "furry", "fur-coated", "dog-like"),
 			"They quickly expand in size, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -77,7 +77,7 @@ public class EarType {
 			"[npc.She] [npc.has] a pair of floppy,#IF(npc.isPiercedEar()) pierced,#ENDIF dog-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.EAR_HANDLES_IN_SEX);
+			return List.of(BodyPartTag.EAR_HANDLES_IN_SEX);
 		}
 	};
 
@@ -86,8 +86,8 @@ public class EarType {
 			"pointed dog",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("pointed", "furry", "fur-coated", "dog-like"),
-			Util.newArrayListOfValues("feminine", "pointed", "furry", "fur-coated", "dog-like"),
+			List.of("pointed", "furry", "fur-coated", "dog-like"),
+			List.of("feminine", "pointed", "furry", "fur-coated", "dog-like"),
 			"They quickly grow into upright points, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -104,8 +104,8 @@ public class EarType {
 			"folded dog",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("folded", "furry", "fur-coated", "dog-like"),
-			Util.newArrayListOfValues("feminine", "folded", "furry", "fur-coated", "dog-like"),
+			List.of("folded", "furry", "fur-coated", "dog-like"),
+			List.of("feminine", "folded", "furry", "fur-coated", "dog-like"),
 			"They quickly grow into upright points, before folding over at the top and shifting to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -122,8 +122,8 @@ public class EarType {
 			"wolf",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("furry", "fur-coated", "wolf-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "wolf-like"),
+			List.of("furry", "fur-coated", "wolf-like"),
+			List.of("feminine", "furry", "fur-coated", "wolf-like"),
 			"They quickly grow into large, upright points, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -140,8 +140,8 @@ public class EarType {
 			"fox",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("pointed", "furry", "fur-coated", "fox-like"),
-			Util.newArrayListOfValues("feminine", "pointed", "furry", "fur-coated", "fox-like"),
+			List.of("pointed", "furry", "fur-coated", "fox-like"),
+			List.of("feminine", "pointed", "furry", "fur-coated", "fox-like"),
 			"They quickly grow into large, upright points, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -158,8 +158,8 @@ public class EarType {
 			"fennec fox",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("pointed", "furry", "fur-coated", "large", "fennec-fox-like"),
-			Util.newArrayListOfValues("feminine", "pointed", "furry", "fur-coated", "large", "fennec-fox-like"),
+			List.of("pointed", "furry", "fur-coated", "large", "fennec-fox-like"),
+			List.of("feminine", "pointed", "furry", "fur-coated", "large", "fennec-fox-like"),
 			"They quickly grow into massive, upright points, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -171,7 +171,7 @@ public class EarType {
 			"[npc.She] [npc.has] a pair of massive,#IF(npc.isPiercedEar()) pierced,#ENDIF fennec-fox-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.EAR_HANDLES_IN_SEX);
+			return List.of(BodyPartTag.EAR_HANDLES_IN_SEX);
 		}
 	};
 
@@ -180,8 +180,8 @@ public class EarType {
 			"cow",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("furry", "fur-coated", "cow-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "cow-like"),
+			List.of("furry", "fur-coated", "cow-like"),
+			List.of("feminine", "furry", "fur-coated", "cow-like"),
 			"They quickly take on a distinctly bovine shape by growing out and narrowing down into long, slightly-folded ovals."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -198,8 +198,8 @@ public class EarType {
 			"cat",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("furry", "fur-coated", "cat-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "cat-like"),
+			List.of("furry", "fur-coated", "cat-like"),
+			List.of("feminine", "furry", "fur-coated", "cat-like"),
 			"They quickly grow into upright points, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -216,8 +216,8 @@ public class EarType {
 			"tufted cat",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("tufted", "furry", "fur-coated", "cat-like"),
-			Util.newArrayListOfValues("feminine", "tufted", "furry", "fur-coated", "cat-like"),
+			List.of("tufted", "furry", "fur-coated", "cat-like"),
+			List.of("feminine", "tufted", "furry", "fur-coated", "cat-like"),
 			"They quickly grow into upright points, which are topped off with a small patch of sensitive fur, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -234,8 +234,8 @@ public class EarType {
 			"squirrel",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("furry", "fur-coated", "squirrel-like"),
-			Util.newArrayListOfValues("feminine", "furry", "fur-coated", "squirrel-like"),
+			List.of("furry", "fur-coated", "squirrel-like"),
+			List.of("feminine", "furry", "fur-coated", "squirrel-like"),
 			"They quickly grow into small, upright ovals, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -252,8 +252,8 @@ public class EarType {
 			"rat",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("rat-like"),
-			Util.newArrayListOfValues("feminine", "rat-like"),
+			List.of("rat-like"),
+			List.of("feminine", "rat-like"),
 			"They quickly grow into small, upright ovals, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -270,8 +270,8 @@ public class EarType {
 			"upright rabbit",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("upright", "furry", "fur-coated", "rabbit-like"),
-			Util.newArrayListOfValues("feminine", "upright", "furry", "fur-coated", "rabbit-like"),
+			List.of("upright", "furry", "fur-coated", "rabbit-like"),
+			List.of("feminine", "upright", "furry", "fur-coated", "rabbit-like"),
 			"They quickly grow into large, upright points, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -283,7 +283,7 @@ public class EarType {
 			"[npc.She] [npc.has] a pair of upright,#IF(npc.isPiercedEar()) pierced,#ENDIF rabbit-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.EAR_HANDLES_IN_SEX);
+			return List.of(BodyPartTag.EAR_HANDLES_IN_SEX);
 		}
 	};
 
@@ -292,8 +292,8 @@ public class EarType {
 			"floppy rabbit",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("floppy", "furry", "fur-coated", "rabbit-like"),
-			Util.newArrayListOfValues("feminine", "floppy", "furry", "fur-coated", "rabbit-like"),
+			List.of("floppy", "furry", "fur-coated", "rabbit-like"),
+			List.of("feminine", "floppy", "furry", "fur-coated", "rabbit-like"),
 			"They quickly grow into large, upright points, and shift to sit higher up than a normal pair of human ears would, before suddenly collapsing and flopping down on either side of [npc.her] head."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -305,7 +305,7 @@ public class EarType {
 			"[npc.She] [npc.has] a pair of floppy,#IF(npc.isPiercedEar()) pierced,#ENDIF rabbit-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.EAR_HANDLES_IN_SEX);
+			return List.of(BodyPartTag.EAR_HANDLES_IN_SEX);
 		}
 	};
 
@@ -314,8 +314,8 @@ public class EarType {
 			"bat",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("large", "bat-like"),
-			Util.newArrayListOfValues("feminine", "large", "bat-like"),
+			List.of("large", "bat-like"),
+			List.of("feminine", "large", "bat-like"),
 			"They quickly grow into large, upright points, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -326,7 +326,7 @@ public class EarType {
 				+ "[npc.Name] now [npc.has] [style.boldBat(large, bat-like ears)], which are [npc.materialCompositionDescriptor] [npc.earFullDescription].",
 			"[npc.She] [npc.has] a pair of large,#IF(npc.isPiercedEar()) pierced,#ENDIF bat-like ears, which are positioned high up on [npc.her] head and are [npc.materialCompositionDescriptor] [npc.earFullDescription(true)].") {
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.ECHO_LOCATION);
+			return List.of(BodyPartTag.ECHO_LOCATION);
 		}
 	};
 
@@ -335,8 +335,8 @@ public class EarType {
 			"horse",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("furry", "upright", "horse-like"),
-			Util.newArrayListOfValues("feminine", "furry", "upright", "horse-like"),
+			List.of("furry", "upright", "horse-like"),
+			List.of("feminine", "furry", "upright", "horse-like"),
 			"They quickly grow into sturdy little upright points, and shift to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -353,8 +353,8 @@ public class EarType {
 			"reindeer",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("furry", "reindeer-like"),
-			Util.newArrayListOfValues("feminine", "furry", "reindeer-like"),
+			List.of("furry", "reindeer-like"),
+			List.of("feminine", "furry", "reindeer-like"),
 			"They quickly take on a distinctly reindeer-like shape by growing out and narrowing down into long, slightly-folded ovals, before shifting to sit higher up on [npc.her] head than a normal pair of human ears would."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] quickly grows to cover them,"
@@ -371,8 +371,8 @@ public class EarType {
 			"alligator",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("scaled", "scale-covered", "alligator-like"),
-			Util.newArrayListOfValues("feminine", "scaled", "scale-covered", "alligator-like"),
+			List.of("scaled", "scale-covered", "alligator-like"),
+			List.of("feminine", "scaled", "scale-covered", "alligator-like"),
 			"They quickly shrink down into little nubs as most of the external cartilage shifts down into the sides of [npc.her] head."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] grow to cover [npc.her] now-fully-internal ears,"
@@ -390,8 +390,8 @@ public class EarType {
 			"harpy",
 			"ear",
 			"ears",
-			Util.newArrayListOfValues("feathered", "feather-covered", "bird-like"),
-			Util.newArrayListOfValues("feminine", "feathered", "feather-covered", "bird-like"),
+			List.of("feathered", "feather-covered", "bird-like"),
+			List.of("feminine", "feathered", "feather-covered", "bird-like"),
 			"They quickly shrink down into little nubs as most of the external cartilage shifts down into the sides of [npc.her] head."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 				+ " A layer of [npc.earFullDescriptionColour] grow to cover [npc.her] now-fully-internal ears,"

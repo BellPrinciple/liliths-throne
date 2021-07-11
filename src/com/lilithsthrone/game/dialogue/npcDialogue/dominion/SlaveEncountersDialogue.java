@@ -103,8 +103,8 @@ public class SlaveEncountersDialogue {
 			@Override
 			public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 				return Util.newHashMapOfValues(
-						new Value<>(slave, Util.newArrayListOfValues(CoverableArea.VAGINA, CoverableArea.PENIS)),
-						new Value<>(characterForSex, Util.newArrayListOfValues(CoverableArea.VAGINA, CoverableArea.PENIS)));
+						new Value<>(slave, List.of(CoverableArea.VAGINA, CoverableArea.PENIS)),
+						new Value<>(characterForSex, List.of(CoverableArea.VAGINA, CoverableArea.PENIS)));
 			}
 		};
 	}
@@ -121,8 +121,8 @@ public class SlaveEncountersDialogue {
 						"[npc.Name] forces [npc.herself] on you...",
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getSlave()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getSlave()),
+								List.of(Main.game.getPlayer()),
 								null,
 								null),
 						SLAVE_USES_YOU_POST_SEX,
@@ -133,8 +133,8 @@ public class SlaveEncountersDialogue {
 						"[npc.Name] forces [npc.herself] on you...",
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getSlave()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getSlave()),
+								List.of(Main.game.getPlayer()),
 								null,
 								null,
 								ResponseTag.START_PACE_PLAYER_SUB_EAGER),
@@ -146,8 +146,8 @@ public class SlaveEncountersDialogue {
 						"[npc.Name] forces [npc.herself] on you...",
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getSlave()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getSlave()),
+								List.of(Main.game.getPlayer()),
 								null,
 								null,
 								ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
@@ -193,8 +193,8 @@ public class SlaveEncountersDialogue {
 						"[npc.Name] forces [npc.herself] on you...",
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getSlave()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getSlave()),
+								List.of(Main.game.getPlayer()),
 								null,
 								null),
 						SLAVE_USES_YOU_POST_SEX_STREETS,
@@ -205,8 +205,8 @@ public class SlaveEncountersDialogue {
 						"[npc.Name] forces [npc.herself] on you...",
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getSlave()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getSlave()),
+								List.of(Main.game.getPlayer()),
 								null,
 								null,
 								ResponseTag.START_PACE_PLAYER_SUB_EAGER),
@@ -218,8 +218,8 @@ public class SlaveEncountersDialogue {
 						"[npc.Name] forces [npc.herself] on you...",
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getSlave()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getSlave()),
+								List.of(Main.game.getPlayer()),
 								null,
 								null,
 								ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
@@ -265,8 +265,8 @@ public class SlaveEncountersDialogue {
 						"[npc.Name] forces [npc.herself] on you...",
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getSlave()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getSlave()),
+								List.of(Main.game.getPlayer()),
 								null,
 								null),
 						SLAVE_USES_YOU_POST_SEX_ALLEYWAY,
@@ -277,8 +277,8 @@ public class SlaveEncountersDialogue {
 						"[npc.Name] forces [npc.herself] on you...",
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getSlave()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getSlave()),
+								List.of(Main.game.getPlayer()),
 								null,
 								null,
 								ResponseTag.START_PACE_PLAYER_SUB_EAGER),
@@ -290,8 +290,8 @@ public class SlaveEncountersDialogue {
 						"[npc.Name] forces [npc.herself] on you...",
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getSlave()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getSlave()),
+								List.of(Main.game.getPlayer()),
 								null,
 								null,
 								ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
@@ -375,7 +375,7 @@ public class SlaveEncountersDialogue {
 				return new ResponseSex("Join (dom)",
 						UtilText.parse(slave, characterForSex, "Announce your presence and take charge of fucking [npc.name] and [npc2.name]."),
 						true, false,
-						getSlaveOnSlaveSexManager(Util.newArrayListOfValues(Main.game.getPlayer()), Util.newArrayListOfValues(slave, characterForSex), null),
+						getSlaveOnSlaveSexManager(List.of(Main.game.getPlayer()), List.of(slave, characterForSex), null),
 						SLAVE_USES_OTHER_SLAVE_ALLEYWAY_POST_SEX,
 						UtilText.parseFromXMLFile("encounters/dominion/slaveEncounters", "SLAVE_USES_OTHER_SLAVE_ALLEYWAY_START_SEX_DOM", slave, characterForSex));
 				
@@ -386,7 +386,7 @@ public class SlaveEncountersDialogue {
 				return new ResponseSex("Join (sub)",
 						UtilText.parse(slave, characterForSex, "Announce your presence and submit to [npc.name], allowing [npc.herHim] to dominate both you and [npc2.name]."),
 						true, false,
-						getSlaveOnSlaveSexManager(Util.newArrayListOfValues(slave), Util.newArrayListOfValues(Main.game.getPlayer(), characterForSex), null),
+						getSlaveOnSlaveSexManager(List.of(slave), List.of(Main.game.getPlayer(), characterForSex), null),
 						SLAVE_USES_OTHER_SLAVE_ALLEYWAY_POST_SEX,
 						UtilText.parseFromXMLFile("encounters/dominion/slaveEncounters", "SLAVE_USES_OTHER_SLAVE_ALLEYWAY_START_SEX_SUB", slave, characterForSex));
 					
@@ -394,7 +394,7 @@ public class SlaveEncountersDialogue {
 				return new ResponseSex("Watch",
 						UtilText.parse(slave, characterForSex, "Stay hidden around the corner and watch as [npc.name] fucks [npc2.name]..."),
 						true, false,
-						getSlaveOnSlaveSexManager(Util.newArrayListOfValues(slave), Util.newArrayListOfValues(characterForSex), Util.newArrayListOfValues(Main.game.getPlayer())),
+						getSlaveOnSlaveSexManager(List.of(slave), List.of(characterForSex), List.of(Main.game.getPlayer())),
 						SLAVE_USES_OTHER_SLAVE_ALLEYWAY_POST_SEX,
 						UtilText.parseFromXMLFile("encounters/dominion/slaveEncounters", "SLAVE_USES_OTHER_SLAVE_ALLEYWAY_START_SEX_WATCHING", slave, characterForSex));
 				
@@ -433,10 +433,10 @@ public class SlaveEncountersDialogue {
 					public void effects() {
 						SlaveryEventLogEntry event = new SlaveryEventLogEntry(Main.game.getHourOfDay(),
 									slave,
-									Util.newArrayListOfValues(characterForSex.getId()),
+									List.of(characterForSex.getId()),
 									SlaveEvent.SLAVE_SEX,
 									null,
-									Util.newArrayListOfValues(UtilText.parse(slave,  characterForSex, "You caught [npc.name] having sex with [npc2.name] in one of Dominion's alleyways.")),
+									List.of(UtilText.parse(slave,  characterForSex, "You caught [npc.name] having sex with [npc2.name] in one of Dominion's alleyways.")),
 									true);
 						Main.game.addSlaveryEvent(Main.game.getDayNumber(), event);
 						slave.returnToHome();
@@ -511,7 +511,7 @@ public class SlaveEncountersDialogue {
 				return new ResponseSex("Join (dom)",
 						UtilText.parse(slave, characterForSex, "Announce your presence and take charge of fucking [npc.name] and [npc2.name]."),
 						true, false,
-						getSlaveOnSlaveSexManager(Util.newArrayListOfValues(Main.game.getPlayer()), Util.newArrayListOfValues(slave, characterForSex), null),
+						getSlaveOnSlaveSexManager(List.of(Main.game.getPlayer()), List.of(slave, characterForSex), null),
 						SLAVE_USES_OTHER_SLAVE_LILAYA_CORRIDOR_POST_SEX,
 						UtilText.parseFromXMLFile("encounters/dominion/slaveEncounters", "SLAVE_USES_OTHER_SLAVE_LILAYA_CORRIDOR_START_SEX_DOM", slave, characterForSex));
 				
@@ -522,7 +522,7 @@ public class SlaveEncountersDialogue {
 				return new ResponseSex("Join (sub)",
 						UtilText.parse(slave, characterForSex, "Announce your presence and submit to [npc.name], allowing [npc.herHim] to dominate both you and [npc2.name]."),
 						true, false,
-						getSlaveOnSlaveSexManager(Util.newArrayListOfValues(slave), Util.newArrayListOfValues(Main.game.getPlayer(), characterForSex), null),
+						getSlaveOnSlaveSexManager(List.of(slave), List.of(Main.game.getPlayer(), characterForSex), null),
 						SLAVE_USES_OTHER_SLAVE_LILAYA_CORRIDOR_POST_SEX,
 						UtilText.parseFromXMLFile("encounters/dominion/slaveEncounters", "SLAVE_USES_OTHER_SLAVE_LILAYA_CORRIDOR_START_SEX_SUB", slave, characterForSex));
 					
@@ -530,7 +530,7 @@ public class SlaveEncountersDialogue {
 				return new ResponseSex("Watch",
 						UtilText.parse(slave, characterForSex, "Stay hidden and watch as [npc.name] fucks [npc2.name]..."),
 						true, false,
-						getSlaveOnSlaveSexManager(Util.newArrayListOfValues(slave), Util.newArrayListOfValues(characterForSex), Util.newArrayListOfValues(Main.game.getPlayer())),
+						getSlaveOnSlaveSexManager(List.of(slave), List.of(characterForSex), List.of(Main.game.getPlayer())),
 						SLAVE_USES_OTHER_SLAVE_LILAYA_CORRIDOR_POST_SEX,
 						UtilText.parseFromXMLFile("encounters/dominion/slaveEncounters", "SLAVE_USES_OTHER_SLAVE_LILAYA_CORRIDOR_START_SEX_WATCHING", slave, characterForSex));
 				
@@ -568,10 +568,10 @@ public class SlaveEncountersDialogue {
 					public void effects() {
 						SlaveryEventLogEntry event = new SlaveryEventLogEntry(Main.game.getHourOfDay(),
 									slave,
-									Util.newArrayListOfValues(characterForSex.getId()),
+									List.of(characterForSex.getId()),
 									SlaveEvent.SLAVE_SEX,
 									null,
-									Util.newArrayListOfValues(UtilText.parse(slave,  characterForSex, "You caught [npc.name] having sex with [npc2.name] in one of the corridors in Lilaya's home.")),
+									List.of(UtilText.parse(slave,  characterForSex, "You caught [npc.name] having sex with [npc2.name] in one of the corridors in Lilaya's home.")),
 									true);
 						Main.game.addSlaveryEvent(Main.game.getDayNumber(), event);
 						returnSlavesToHomeLilayasCorridor();

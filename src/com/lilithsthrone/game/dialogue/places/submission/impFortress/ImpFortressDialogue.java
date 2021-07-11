@@ -309,7 +309,7 @@ public class ImpFortressDialogue {
 			
 			// Move boss back to fortress:
 			Main.game.getNpc(FortressAlphaLeader.class).setLocation(WorldType.IMP_FORTRESS_ALPHA, PlaceType.FORTRESS_ALPHA_KEEP);
-			Main.game.getNpc(FortressAlphaLeader.class).equipClothing(Util.newArrayListOfValues(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_WEAPONS, EquipClothingSetting.ADD_ACCESSORIES));
+			Main.game.getNpc(FortressAlphaLeader.class).equipClothing(List.of(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_WEAPONS, EquipClothingSetting.ADD_ACCESSORIES));
 			
 			// Move NPCs into hiding:
 			Cell[][] cells = Main.game.getWorlds().get(WorldType.SUBMISSION).getCellGrid();
@@ -376,7 +376,7 @@ public class ImpFortressDialogue {
 			
 			// Move boss back to fortress:
 			Main.game.getNpc(FortressFemalesLeader.class).setLocation(WorldType.IMP_FORTRESS_FEMALES, PlaceType.FORTRESS_FEMALES_KEEP);
-			Main.game.getNpc(FortressFemalesLeader.class).equipClothing(Util.newArrayListOfValues(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_WEAPONS, EquipClothingSetting.ADD_ACCESSORIES));
+			Main.game.getNpc(FortressFemalesLeader.class).equipClothing(List.of(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_WEAPONS, EquipClothingSetting.ADD_ACCESSORIES));
 			
 			// Move NPCs into hiding:
 			Cell[][] cells = Main.game.getWorlds().get(WorldType.SUBMISSION).getCellGrid();
@@ -444,7 +444,7 @@ public class ImpFortressDialogue {
 			
 			// Move boss back to fortress:
 			Main.game.getNpc(FortressMalesLeader.class).setLocation(WorldType.IMP_FORTRESS_MALES, PlaceType.FORTRESS_MALES_KEEP);
-			Main.game.getNpc(FortressMalesLeader.class).equipClothing(Util.newArrayListOfValues(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_WEAPONS, EquipClothingSetting.ADD_ACCESSORIES));
+			Main.game.getNpc(FortressMalesLeader.class).equipClothing(List.of(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_WEAPONS, EquipClothingSetting.ADD_ACCESSORIES));
 			
 			// Move NPCs into hiding:
 			Cell[][] cells = Main.game.getWorlds().get(WorldType.SUBMISSION).getCellGrid();
@@ -580,9 +580,9 @@ public class ImpFortressDialogue {
 	
 	private static List<GameCharacter> getPartyForSex() {
 		if(isCompanionDialogue()) {
-			return Util.newArrayListOfValues(Main.game.getPlayer(), getMainCompanion());
+			return List.of(Main.game.getPlayer(), getMainCompanion());
 		} else {
-			return Util.newArrayListOfValues(Main.game.getPlayer());
+			return List.of(Main.game.getPlayer());
 		}
 	}
 	
@@ -840,7 +840,7 @@ public class ImpFortressDialogue {
 				public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 					if(getDominants().containsKey(getBoss())) {
 						Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-						map.put(Main.game.getNpc(FortressAlphaLeader.class), Util.newArrayListOfValues(CoverableArea.PENIS));
+						map.put(Main.game.getNpc(FortressAlphaLeader.class), List.of(CoverableArea.PENIS));
 						return map;
 					}
 					return super.exposeAtStartOfSexMap();
@@ -883,7 +883,7 @@ public class ImpFortressDialogue {
 				public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 					if(getDominants().containsKey(getBoss())) {
 						Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-						map.put(Main.game.getNpc(FortressAlphaLeader.class), Util.newArrayListOfValues(CoverableArea.PENIS));
+						map.put(Main.game.getNpc(FortressAlphaLeader.class), List.of(CoverableArea.PENIS));
 						return map;
 					}
 					return super.exposeAtStartOfSexMap();
@@ -1057,7 +1057,7 @@ public class ImpFortressDialogue {
 				
 			} else if(Main.game.getPlayer().isElementalSummoned()) {
 				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "ENTRANCE_ELEMENTAL",
-						Util.mergeLists(Util.newArrayListOfValues(Main.game.getPlayer().getElemental()), getImpGuards())));
+						Util.mergeLists(List.of(Main.game.getPlayer().getElemental()), getImpGuards())));
 				
 			} else {
 				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "ENTRANCE", getAllCharacters()));
@@ -1092,9 +1092,9 @@ public class ImpFortressDialogue {
 								true,
 								false,
 								getImpGuards(),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								null,
-								isCompanionDialogue()?Util.newArrayListOfValues(getMainCompanion()):null,
+								isCompanionDialogue()?List.of(getMainCompanion()):null,
 								GUARDS_AFTER_ORAL_FOR_ENTRY,
 								UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "ENTRANCE_GIVE_ORAL_PACIFIED", getAllCharacters()),
 								ResponseTag.PREFER_ORAL,
@@ -1168,7 +1168,7 @@ public class ImpFortressDialogue {
 							@Override
 							public void effects() {
 								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "ENTRANCE_ELEMENTAL_INTIMIDATE",
-										Util.mergeLists(Util.newArrayListOfValues(Main.game.getPlayer().getElemental()), getImpGuards())));
+										Util.mergeLists(List.of(Main.game.getPlayer().getElemental()), getImpGuards())));
 								setGuardsPacified();
 							}
 						};
@@ -1181,9 +1181,9 @@ public class ImpFortressDialogue {
 						return new Response("Elemental", UtilText.parse(getBoss(), "Intimidate the imps by summoning your elemental in front of them."), ENTRANCE_ELEMENTAL) {
 							@Override
 							public void effects() {
-								List<Spell> elementalSpells = Util.newArrayListOfValues(Spell.ELEMENTAL_AIR, Spell.ELEMENTAL_ARCANE, Spell.ELEMENTAL_FIRE, Spell.ELEMENTAL_EARTH, Spell.ELEMENTAL_WATER);
+								List<Spell> elementalSpells = List.of(Spell.ELEMENTAL_AIR, Spell.ELEMENTAL_ARCANE, Spell.ELEMENTAL_FIRE, Spell.ELEMENTAL_EARTH, Spell.ELEMENTAL_WATER);
 								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "ENTRANCE_ELEMENTAL_SUMMON",
-										Util.mergeLists(Util.newArrayListOfValues(Main.game.getPlayer().getElemental()), getImpGuards())));
+										Util.mergeLists(List.of(Main.game.getPlayer().getElemental()), getImpGuards())));
 								for(Spell spell : elementalSpells) {
 									if(Main.game.getPlayer().hasSpell(spell) && Main.game.getPlayer().getMana()>=spell.getModifiedCost(Main.game.getPlayer())) {
 										Main.game.getTextStartStringBuilder().append(spell.applyEffect(Main.game.getPlayer(), Main.game.getPlayer(), true, false));
@@ -1191,7 +1191,7 @@ public class ImpFortressDialogue {
 									}
 								}
 								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "ENTRANCE_ELEMENTAL_SUMMON_END",
-										Util.mergeLists(Util.newArrayListOfValues(Main.game.getPlayer().getElemental()), getImpGuards())));
+										Util.mergeLists(List.of(Main.game.getPlayer().getElemental()), getImpGuards())));
 								setGuardsPacified();
 							}
 						};
@@ -1212,9 +1212,9 @@ public class ImpFortressDialogue {
 							true,
 							false,
 							getImpGuards(),
-							Util.newArrayListOfValues(Main.game.getPlayer()),
+							List.of(Main.game.getPlayer()),
 							null,
-							isCompanionDialogue()?Util.newArrayListOfValues(getMainCompanion()):null,
+							isCompanionDialogue()?List.of(getMainCompanion()):null,
 							GUARDS_AFTER_ORAL_FOR_ENTRY,
 							UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "ENTRANCE_GIVE_ORAL", getAllCharacters()),
 							ResponseTag.PREFER_ORAL,
@@ -1429,7 +1429,7 @@ public class ImpFortressDialogue {
 					} else if (index == 5) {
 						return new ResponseSex("Submit",
 								"You're not really sure what to do now... Perhaps it would be best to let the imps choose what to do next...",
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+								List.of(Fetish.FETISH_SUBMISSIVE),
 								null,
 								Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null,
@@ -1493,9 +1493,9 @@ public class ImpFortressDialogue {
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you have sex with the imps."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpGuards(),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								GUARDS_AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "GUARDS_COMBAT_VICTORY_SEX", getAllCharacters()));
 						
@@ -1504,9 +1504,9 @@ public class ImpFortressDialogue {
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you have sex with the imps."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpGuards(),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								GUARDS_AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "GUARDS_COMBAT_VICTORY_SEX_GENTLE", getAllCharacters()), ResponseTag.START_PACE_PLAYER_DOM_GENTLE);
@@ -1516,9 +1516,9 @@ public class ImpFortressDialogue {
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you have sex with the imps."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpGuards(),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								GUARDS_AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "GUARDS_COMBAT_VICTORY_SEX_ROUGH", getAllCharacters()), ResponseTag.START_PACE_PLAYER_DOM_ROUGH);
@@ -1526,7 +1526,7 @@ public class ImpFortressDialogue {
 					} else if (index == 5) {
 						return new ResponseSex("Solo submission",
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you submit to the imps, allowing them to have dominant sex with you."),
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+								List.of(Fetish.FETISH_SUBMISSIVE),
 								null,
 								Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null,
@@ -1535,9 +1535,9 @@ public class ImpFortressDialogue {
 								true,
 								false,
 								getImpGuards(),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								null,
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								GUARDS_AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "GUARDS_COMBAT_VICTORY_SEX_SUBMIT", getAllCharacters()));
 						
@@ -1591,10 +1591,10 @@ public class ImpFortressDialogue {
 									UtilText.parse(companion, "Tell [npc.name] that [npc.she] can have some fun with the imps while you watch."),
 									false,
 									false,
-									Util.newArrayListOfValues(getMainCompanion()),
+									List.of(getMainCompanion()),
 									getImpGuards(),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									GUARDS_AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "GUARDS_COMBAT_VICTORY_GIVE_TO_COMPANION", getAllCharacters()));
 						}
 						
@@ -1612,9 +1612,9 @@ public class ImpFortressDialogue {
 									true,
 									false,
 									getImpGuards(),
-									Util.newArrayListOfValues(getMainCompanion()),
+									List.of(getMainCompanion()),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									GUARDS_AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/submission/fortressImpGuards"+getGuardsDialogueEncounterId(), "GUARDS_COMBAT_VICTORY_OFFER_COMPANION", getAllCharacters())) {
 								@Override
 								public void effects() {
@@ -2441,7 +2441,7 @@ public class ImpFortressDialogue {
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								if(getSubmissives().containsKey(getBoss())) {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-									map.put(Main.game.getNpc(FortressAlphaLeader.class), Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.ASS, CoverableArea.VAGINA));
+									map.put(Main.game.getNpc(FortressAlphaLeader.class), List.of(CoverableArea.PENIS, CoverableArea.ASS, CoverableArea.VAGINA));
 									return map;
 								}
 								return super.exposeAtStartOfSexMap();
@@ -2484,7 +2484,7 @@ public class ImpFortressDialogue {
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								if(getSubmissives().containsKey(getBoss())) {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-									map.put(Main.game.getNpc(FortressAlphaLeader.class), Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.ASS, CoverableArea.VAGINA));
+									map.put(Main.game.getNpc(FortressAlphaLeader.class), List.of(CoverableArea.PENIS, CoverableArea.ASS, CoverableArea.VAGINA));
 									return map;
 								}
 								return super.exposeAtStartOfSexMap();
@@ -2497,7 +2497,7 @@ public class ImpFortressDialogue {
 								return null;
 							}
 						},
-						Util.newArrayListOfValues(Main.game.getPlayer()),
+						List.of(Main.game.getPlayer()),
 						null,
 						KEEP_AFTER_SEX_ALPHA_FORCED,
 						UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_ALPHA_BRAWLER_SEX_WITH_COMPANION", getAllCharacters())) {
@@ -2529,7 +2529,7 @@ public class ImpFortressDialogue {
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								if(getSubmissives().containsKey(getBoss())) {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-									map.put(Main.game.getNpc(FortressAlphaLeader.class), Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.ASS, CoverableArea.VAGINA));
+									map.put(Main.game.getNpc(FortressAlphaLeader.class), List.of(CoverableArea.PENIS, CoverableArea.ASS, CoverableArea.VAGINA));
 									return map;
 								}
 								return super.exposeAtStartOfSexMap();
@@ -2677,7 +2677,7 @@ public class ImpFortressDialogue {
 						new SMLyingDown(
 								Util.newHashMapOfValues(new Value<>(getMainCompanion(), SexSlotLyingDown.MISSIONARY)),
 								Util.newHashMapOfValues(new Value<>(getBoss(), SexSlotLyingDown.LYING_DOWN))),
-						Util.newArrayListOfValues(Main.game.getPlayer()),
+						List.of(Main.game.getPlayer()),
 						null,
 						KEEP_AFTER_SEX_FEMALES_NYMPHO,
 						UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_FEMALES_NYMPHO_SEX_WITH_COMPANION", getAllCharacters()));
@@ -3168,7 +3168,7 @@ public class ImpFortressDialogue {
 							SexManagerInterface manager = getAlphaSexManager(Main.game.getPlayer());
 							return new ResponseSex("Submit",
 									UtilText.parse(getBoss(), "Feeling sorry for [npc.name] and [npc.her] imps, you decide to let them have some fun with your body before you force them to flee their fortress..."),
-									Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+									List.of(Fetish.FETISH_SUBMISSIVE),
 									null,
 									Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 									null,
@@ -3187,7 +3187,7 @@ public class ImpFortressDialogue {
 								SexManagerInterface manager = getMalesSexManager(Main.game.getPlayer());
 								return new ResponseSex("Submit",
 										UtilText.parse(getBoss(), "Feeling sorry for [npc.name] and [npc.her] imps, you decide to let them have some fun with your body before you force them to flee their fortress..."),
-										Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+										List.of(Fetish.FETISH_SUBMISSIVE),
 										null,
 										Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 										null,
@@ -3205,7 +3205,7 @@ public class ImpFortressDialogue {
 							}
 						return new ResponseSex("Submit",
 								UtilText.parse(getBoss(), "Feeling sorry for [npc.name] and [npc.her] imps, you decide to let them have some fun with your body before you force them to flee their fortress..."),
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+								List.of(Fetish.FETISH_SUBMISSIVE),
 								null,
 								Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null,
@@ -3282,9 +3282,9 @@ public class ImpFortressDialogue {
 								UtilText.parse(getMainCompanion(), getBoss(), "Tell [npc.name] to stand to one side and watch as you have sex with [npc2.name] and [npc2.her] imp gang."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpBossGroup(true),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								KEEP_AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_COMBAT_VICTORY_SEX", getAllCharacters()));
 						
@@ -3293,9 +3293,9 @@ public class ImpFortressDialogue {
 								UtilText.parse(getMainCompanion(), getBoss(), "Tell [npc.name] to stand to one side and watch as you have sex with [npc2.name] and [npc2.her] imp gang."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpBossGroup(true),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								KEEP_AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_COMBAT_VICTORY_SEX_GENTLE", getAllCharacters()), ResponseTag.START_PACE_PLAYER_DOM_GENTLE);
@@ -3305,9 +3305,9 @@ public class ImpFortressDialogue {
 								UtilText.parse(getMainCompanion(), getBoss(), "Tell [npc.name] to stand to one side and watch as you have sex with [npc2.name] and [npc2.her] imp gang."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpBossGroup(true),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								KEEP_AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_COMBAT_VICTORY_SEX_ROUGH", getAllCharacters()), ResponseTag.START_PACE_PLAYER_DOM_ROUGH);
@@ -3318,7 +3318,7 @@ public class ImpFortressDialogue {
 							return new ResponseSex("Solo submission",
 									UtilText.parse(getMainCompanion(), getBoss(),
 											"Tell [npc.name] to stand to one side, and then let [npc2.name] and [npc2.her] gang have some fun with your body, before forcing them to flee their fortress..."),
-									Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+									List.of(Fetish.FETISH_SUBMISSIVE),
 									null,
 									Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 									null,
@@ -3338,7 +3338,7 @@ public class ImpFortressDialogue {
 								return new ResponseSex("Solo submission",
 										UtilText.parse(getMainCompanion(), getBoss(),
 												"Tell [npc.name] to stand to one side, and then let [npc2.name] and [npc2.her] gang have some fun with your body, before forcing them to flee their fortress..."),
-										Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+										List.of(Fetish.FETISH_SUBMISSIVE),
 										null,
 										Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 										null,
@@ -3357,7 +3357,7 @@ public class ImpFortressDialogue {
 						return new ResponseSex("Solo submission",
 								UtilText.parse(getMainCompanion(), getBoss(),
 										"Tell [npc.name] to stand to one side, and then let [npc2.name] and [npc2.her] gang have some fun with your body, before forcing them to flee their fortress..."),
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+								List.of(Fetish.FETISH_SUBMISSIVE),
 								null,
 								Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null,
@@ -3374,7 +3374,7 @@ public class ImpFortressDialogue {
 									Util.newHashMapOfValues(
 											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))),
 								null,
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								KEEP_AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_COMBAT_VICTORY_SEX_SUBMIT", getAllCharacters())){
 							@Override
 							public void effects() {
@@ -3489,10 +3489,10 @@ public class ImpFortressDialogue {
 									UtilText.parse(companion, getBoss(), "Tell [npc.name] that [npc.she] can have some fun with [npc2.name] and [npc2.her] imps while you watch."),
 									false,
 									false,
-									Util.newArrayListOfValues(getMainCompanion()),
+									List.of(getMainCompanion()),
 									getImpBossGroup(true),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									KEEP_AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_COMBAT_VICTORY_GIVE_TO_COMPANION", getAllCharacters()));
 						}
 						
@@ -3551,7 +3551,7 @@ public class ImpFortressDialogue {
 											Util.newHashMapOfValues(
 													new Value<>(getMainCompanion(), SexSlotLyingDown.LYING_DOWN))),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									KEEP_AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_COMBAT_VICTORY_OFFER_COMPANION", getAllCharacters())) {
 								@Override
 								public void effects() {
@@ -3881,8 +3881,7 @@ public class ImpFortressDialogue {
 					@Override
 					public void effects() {
 						if(isAlphaFortress() || Main.game.getPlayer().getLocationPlace().getPlaceType().equals(PlaceType.SUBMISSION_IMP_FORTRESS_ALPHA)) {
-							List<ItemEffect> effects = Util.newArrayListOfValues(
-									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MINOR_DRAIN, 0),
+							List<ItemEffect> effects = List.of(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MINOR_DRAIN, 0),
 									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BODY_PART, TFModifier.TF_MOD_FETISH_ORAL_GIVING, TFPotency.MAJOR_BOOST, 0),
 									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BODY_PART, TFModifier.TF_MOD_FETISH_PENIS_RECEIVING, TFPotency.MAJOR_BOOST, 0),
 									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BEHAVIOUR, TFModifier.TF_MOD_FETISH_SUBMISSIVE, TFPotency.BOOST, 0),
@@ -3909,8 +3908,7 @@ public class ImpFortressDialogue {
 							}
 							
 						} else if(isFemalesFortress() || Main.game.getPlayer().getLocationPlace().getPlaceType().equals(PlaceType.SUBMISSION_IMP_FORTRESS_FEMALES)) {
-							List<ItemEffect> effects = Util.newArrayListOfValues(
-									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MINOR_DRAIN, 0),
+							List<ItemEffect> effects = List.of(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MINOR_DRAIN, 0),
 									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BEHAVIOUR, TFModifier.TF_MOD_FETISH_SUBMISSIVE, TFPotency.MAJOR_BOOST, 0),
 									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BEHAVIOUR, TFModifier.TF_MOD_FETISH_MASTURBATION, TFPotency.MAJOR_BOOST, 0),
 									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BEHAVIOUR, TFModifier.TF_MOD_FETISH_EXHIBITIONIST, TFPotency.MAJOR_BOOST, 0),
@@ -3939,8 +3937,7 @@ public class ImpFortressDialogue {
 							}
 							
 						} else if(isMalesFortress() || Main.game.getPlayer().getLocationPlace().getPlaceType().equals(PlaceType.SUBMISSION_IMP_FORTRESS_MALES)) {
-							List<ItemEffect> effects = Util.newArrayListOfValues(
-									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MINOR_DRAIN, 0),
+							List<ItemEffect> effects = List.of(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MINOR_DRAIN, 0),
 									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BEHAVIOUR, TFModifier.TF_MOD_FETISH_PREGNANCY, TFPotency.MAJOR_BOOST, 0),
 									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_ASS, TFModifier.TF_MOD_SIZE_SECONDARY, TFPotency.BOOST, HipSize.FIVE_VERY_WIDE.getValue()),
 									new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, TFModifier.FERTILITY, TFPotency.MAJOR_BOOST, 0),
@@ -3957,7 +3954,7 @@ public class ImpFortressDialogue {
 							}
 							if(boss.isAbleToEquipDildo(Main.game.getPlayer())) {
 								AbstractClothing dildo = Main.game.getItemGen().generateClothing("innoxia_vagina_insertable_dildo", PresetColour.CLOTHING_BLACK,
-										Util.newArrayListOfValues(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MINOR_BOOST, 0)));
+										List.of(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MINOR_BOOST, 0)));
 								Main.game.getPlayer().equipClothingFromNowhere(dildo, true, boss);
 								Main.game.getTextStartStringBuilder().append("<p style='text-align:center;'>"+UtilText.parse(boss,"[npc.Name]")+" has forced you to wear:<br/>"
 										+Main.game.getPlayer().getClothingInSlot(dildo.getClothingType().getEquipSlots().get(0)).getDisplayName(true)+ "</p>");
@@ -3974,7 +3971,7 @@ public class ImpFortressDialogue {
 							}
 							if(ImpFortressDialogue.getMainCompanion()!=null && boss.isAbleToEquipDildo(ImpFortressDialogue.getMainCompanion())) {
 								AbstractClothing dildo = Main.game.getItemGen().generateClothing("innoxia_vagina_insertable_dildo", PresetColour.CLOTHING_WHITE,
-										Util.newArrayListOfValues(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MINOR_BOOST, 0)));
+										List.of(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MINOR_BOOST, 0)));
 								ImpFortressDialogue.getMainCompanion().equipClothingFromNowhere(dildo, true, boss);
 								Main.game.getTextStartStringBuilder().append("<p style='text-align:center;'>"+UtilText.parse(boss,"[npc.Name]")+" has forced "
 										+UtilText.parse(ImpFortressDialogue.getMainCompanion(), "[npc.name]")+" to wear:<br/>"

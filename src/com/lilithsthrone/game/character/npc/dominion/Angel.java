@@ -104,8 +104,7 @@ public class Angel extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_SLUT);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.FEMALE_ATTRACTION,
+				List.of(Perk.FEMALE_ATTRACTION,
 						Perk.MALE_ATTRACTION),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 0),

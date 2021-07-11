@@ -34,12 +34,12 @@ public class TailType {
 			"",
 			"",
 			"",
-			Util.newArrayListOfValues(),
-			Util.newArrayListOfValues(),
+			List.of(),
+			List.of(),
 			"",
 			"",
-			Util.newArrayListOfValues(),
-			Util.newArrayListOfValues(),
+			List.of(),
+			List.of(),
 			"#IF(npc.getTailCount()==1)"
 				+ " [npc.She] gasps as [npc.she] feels [npc.her] [npc.tail] shrinking down and disappearing into [npc.her] lower back."
 			+ "#ELSE"
@@ -48,7 +48,7 @@ public class TailType {
 			+ "<br/>"
 			+ "[npc.Name] now [npc.has] [style.boldTfGeneric(no tail)].",
 			"[style.colourDisabled([npc.She] [npc.do] not have a tail.)]",
-			Util.newArrayListOfValues(), false) {
+			List.of(), false) {
 	};
 	
 	public static final AbstractTailType DEMON_COMMON = new AbstractTailType(
@@ -61,12 +61,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("spaded", "demonic"),
-			Util.newArrayListOfValues("spaded", "demonic"),
+			List.of("spaded", "demonic"),
+			List.of("spaded", "demonic"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("spaded"),
-			Util.newArrayListOfValues("spaded"),
+			List.of("spaded"),
+			List.of("spaded"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A demonic, spaded tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
@@ -96,8 +96,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] spaded, [npc.tailColour(true)] #IF(npc.isShortStature())impish#ELSEdemonic#ENDIF tails, over which [npc.sheHasFull] complete control, allowing [npc.herHim] to use them to grip and hold objects."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_PREHENSILE,
+			List.of(BodyPartTag.TAIL_PREHENSILE,
 					BodyPartTag.TAIL_SUTABLE_FOR_PENETRATION,
 					BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TYPE_SKIN,
@@ -114,12 +113,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("hair-tipped", "demonic"),
-			Util.newArrayListOfValues("hair-tipped", "demonic"),
+			List.of("hair-tipped", "demonic"),
+			List.of("hair-tipped", "demonic"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("hair-tufted"),
-			Util.newArrayListOfValues("hair-tufted"),
+			List.of("hair-tufted"),
+			List.of("hair-tufted"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A demonic tail, tipped with a tuft of hair, sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
@@ -151,8 +150,7 @@ public class TailType {
 					+ " [npc.tailCount] [npc.tailColour(true)], #IF(npc.isShortStature())impish#ELSEdemonic#ENDIF tails, tipped with [#npc.getCovering(BODY_COVERING_TYPE_HAIR_DEMON).getFullDescription(npc, true)],"
 						+ " over which [npc.sheHasFull] complete control, allowing [npc.herHim] to use them to grip and hold objects."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_PREHENSILE,
+			List.of(BodyPartTag.TAIL_PREHENSILE,
 					BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TYPE_SKIN,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
@@ -168,12 +166,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("tapered", "demonic"),
-			Util.newArrayListOfValues("tapered", "demonic"),
+			List.of("tapered", "demonic"),
+			List.of("tapered", "demonic"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("tapered"),
-			Util.newArrayListOfValues("tapered"),
+			List.of("tapered"),
+			List.of("tapered"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A demonic, tapered tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
@@ -203,8 +201,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] tapered, [npc.tailColour(true)] #IF(npc.isShortStature())impish#ELSEdemonic#ENDIF tails, over which [npc.sheHasFull] complete control, allowing [npc.herHim] to use them to grip and hold objects."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_PREHENSILE,
+			List.of(BodyPartTag.TAIL_PREHENSILE,
 					BodyPartTag.TAIL_SUTABLE_FOR_PENETRATION,
 					BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TYPE_SKIN,
@@ -221,12 +218,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("horse-like"),
-			Util.newArrayListOfValues("horse-like"),
+			List.of("horse-like"),
+			List.of("horse-like"),
 			"end",
 			"ends",
-			Util.newArrayListOfValues("loose"),
-			Util.newArrayListOfValues("loose"),
+			List.of("loose"),
+			List.of("loose"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A horse-like tail sprouts from just above [npc.her] ass, rapidly growing in length until it hangs down about [npc.tailLength] behind [npc.herHim]."
 				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over it is limited to swishing it from side to side."
@@ -258,8 +255,7 @@ public class TailType {
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] #IF(npc.isShortStature())impish#ELSEdemonic#ENDIF-horse tails,"
 						+ " which [npc.she] can swipe from side to side, but other than that, [npc.she] doesn't have much control over them."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_TYPE_HAIR,
+			List.of(BodyPartTag.TAIL_TYPE_HAIR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
@@ -273,12 +269,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("alligator-like"),
-			Util.newArrayListOfValues("alligator-like"),
+			List.of("alligator-like"),
+			List.of("alligator-like"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"#IF(npc.getTailCount()==1)"
 				+ " A scaly, alligator-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(discover)] that [npc.she] can swish it from side to side with considerable force."
@@ -296,8 +292,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] alligator tails, which [npc.she] can swipe from side to side with considerable force."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_SUTABLE_FOR_PENETRATION,
+			List.of(BodyPartTag.TAIL_SUTABLE_FOR_PENETRATION,
 					BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TYPE_SCALES,
 					BodyPartTag.TAIL_TAPERING_LINEAR,
@@ -314,12 +309,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("bat-like"),
-			Util.newArrayListOfValues("bat-like"),
+			List.of("bat-like"),
+			List.of("bat-like"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("furry"),
-			Util.newArrayListOfValues("furry"),
+			List.of("furry"),
+			List.of("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A small, bat-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over it, and can twist it almost anywhere [npc.she] [npc.verb(please)]."
@@ -339,8 +334,7 @@ public class TailType {
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] bat tails,"
 						+ " which [npc.she] can rapidly move up and down to help [npc.herHim] keep [npc.her] balance and to control [npc.her] path when in flight."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_TYPE_GENERIC,
+			List.of(BodyPartTag.TAIL_TYPE_GENERIC,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
@@ -354,12 +348,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("cat-like", "furry"),
-			Util.newArrayListOfValues("cat-like", "furry"),
+			List.of("cat-like", "furry"),
+			List.of("cat-like", "furry"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("furry"),
-			Util.newArrayListOfValues("furry"),
+			List.of("furry"),
+			List.of("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A furry, cat-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over it, and can twist it almost anywhere [npc.she] [npc.verb(please)]."
@@ -377,8 +371,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] cat tails, which [npc.she] can control well enough to grant [npc.herHim] significantly improved balance."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_PREHENSILE,
+			List.of(BodyPartTag.TAIL_PREHENSILE,
 					BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
@@ -394,12 +387,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("cat-like", "short", "furry"),
-			Util.newArrayListOfValues("cat-like", "short", "furry"),
+			List.of("cat-like", "short", "furry"),
+			List.of("cat-like", "short", "furry"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("furry"),
-			Util.newArrayListOfValues("furry"),
+			List.of("furry"),
+			List.of("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A short, furry, cat-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ "Although [npc.she] [npc.has] a decent amount of control over it, it's too short to really do anything with."
@@ -417,8 +410,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)], short cat tails."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_PREHENSILE,
+			List.of(BodyPartTag.TAIL_PREHENSILE,
 					BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
@@ -433,12 +425,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("cat-like", "tufted", "furry"),
-			Util.newArrayListOfValues("cat-like", "tufted", "furry"),
+			List.of("cat-like", "tufted", "furry"),
+			List.of("cat-like", "tufted", "furry"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("tufted"),
-			Util.newArrayListOfValues("tufted"),
+			List.of("tufted"),
+			List.of("tufted"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A short, furry, cat-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " At the end of it there's a fluffy tuft of fur, and [npc.she] can control it well enough to grant [npc.herHim] significantly improved balance."
@@ -458,8 +450,7 @@ public class TailType {
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] cat tails, which each have a tuft of fur on the end."
 					+ " [npc.She] can control them well enough to grant [npc.herHim] significantly improved balance."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_PREHENSILE,
+			List.of(BodyPartTag.TAIL_PREHENSILE,
 					BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
@@ -474,12 +465,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("cow-like"),
-			Util.newArrayListOfValues("cow-like"),
+			List.of("cow-like"),
+			List.of("cow-like"),
 			"end",
 			"ends",
-			Util.newArrayListOfValues("hair-tufted"),
-			Util.newArrayListOfValues("hair-tufted"),
+			List.of("hair-tufted"),
+			List.of("hair-tufted"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A cow-like tail sprouts from just above [npc.her] ass, rapidly growing in length until it hangs down about [npc.tailLength] behind [npc.herHim]."
 				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over it is limited to swishing it from side to side."
@@ -497,8 +488,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] cow tails, which [npc.she] can swipe from side to side, but other than that, [npc.she] doesn't have much control over them."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_TYPE_FUR,
+			List.of(BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
@@ -512,12 +502,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("dog-like"),
-			Util.newArrayListOfValues("dog-like"),
+			List.of("dog-like"),
+			List.of("dog-like"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("furry"),
-			Util.newArrayListOfValues("furry"),
+			List.of("furry"),
+			List.of("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A furry, dog-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] little control over it, and it wags with a mind of its own whenever [npc.she] [npc.verb(get)] excited."
@@ -535,8 +525,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] dog tails, which wag uncontrollably when [npc.she] [npc.verb(get)] excited."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_TYPE_FUR,
+			List.of(BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
@@ -550,12 +539,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("stubby", "dog-like"),
-			Util.newArrayListOfValues("stubby", "dog-like"),
+			List.of("stubby", "dog-like"),
+			List.of("stubby", "dog-like"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("stubby"),
-			Util.newArrayListOfValues("stubby"),
+			List.of("stubby"),
+			List.of("stubby"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A furry, dog-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] little control over it, and it wags with a mind of its own whenever [npc.she] [npc.verb(get)] excited."
@@ -573,8 +562,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF stubby, [npc.tailColour(true)] dog tails, which wag uncontrollably when [npc.she] [npc.verb(get)] excited."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_TYPE_FUR,
+			List.of(BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
@@ -588,12 +576,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("fox-like", "fluffy", "bushy"),
-			Util.newArrayListOfValues("fox-like", "fluffy", "bushy"),
+			List.of("fox-like", "fluffy", "bushy"),
+			List.of("fox-like", "fluffy", "bushy"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("furry"),
-			Util.newArrayListOfValues("furry"),
+			List.of("furry"),
+			List.of("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A bushy, fox-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over it, and [npc.is] able to wrap its fluffy length around [npc.her] lower body."
@@ -611,8 +599,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] fox tails, which [npc.she] can freely swish this way and that."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_SLEEP_HUGGING,
+			List.of(BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
@@ -627,12 +614,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("arcane", "fox-like", "fluffy"),
-			Util.newArrayListOfValues("arcane", "fox-like", "fluffy"),
+			List.of("arcane", "fox-like", "fluffy"),
+			List.of("arcane", "fox-like", "fluffy"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("furry"),
-			Util.newArrayListOfValues("furry"),
+			List.of("furry"),
+			List.of("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A bushy, fox-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over it, and [npc.is] able to wrap its fluffy length around [npc.her] lower body."
@@ -661,8 +648,7 @@ public class TailType {
 						+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] [style.boldArcane(arcane)] fox tails, which are granting [npc.herHim] [style.italicsArcane(arcane powers)]!"
 					+ "#ENDIF"
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_PREHENSILE,
+			List.of(BodyPartTag.TAIL_PREHENSILE,
 					BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
@@ -678,12 +664,12 @@ public class TailType {
 			"plumes of",
 			"tail feathers",
 			"tail feathers",
-			Util.newArrayListOfValues("magnificent", "bird-like"),
-			Util.newArrayListOfValues("magnificent", "bird-like"),
+			List.of("magnificent", "bird-like"),
+			List.of("magnificent", "bird-like"),
 			"end",
 			"ends",
-			Util.newArrayListOfValues("feathered"),
-			Util.newArrayListOfValues("feathered"),
+			List.of("feathered"),
+			List.of("feathered"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A pretty plume of tail feathers sprouts from just above [npc.her] ass, with each feather quickly growing to be about [npc.tailLength] long."
 				+ " [npc.She] [npc.verb(discover)] that [npc.she] can quickly raise and lower [npc.her] new bird-like tail, which helps [npc.herHim] to keep [npc.her] balance."
@@ -703,8 +689,7 @@ public class TailType {
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF plumes of beautiful, [npc.tailColour(true)] tail-feathers,"
 						+ " which [npc.she] can rapidly move up and down to help [npc.herHim] keep [npc.her] balance and to control [npc.her] path when in flight."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_SLEEP_HUGGING,
+			List.of(BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TYPE_FEATHER,
 					BodyPartTag.TAIL_TAPERING_NONE,
 					BodyPartTag.TAIL_NEVER_SUTABLE_FOR_PENETRATION), false) {
@@ -720,12 +705,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("horse-like"),
-			Util.newArrayListOfValues("horse-like"),
+			List.of("horse-like"),
+			List.of("horse-like"),
 			"end",
 			"ends",
-			Util.newArrayListOfValues("loose"),
-			Util.newArrayListOfValues("loose"),
+			List.of("loose"),
+			List.of("loose"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A horse-like tail sprouts from just above [npc.her] ass, rapidly growing in length until it hangs down about [npc.tailLength] behind [npc.herHim]."
 				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over it is limited to swishing it from side to side."
@@ -743,8 +728,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] horse tails, which [npc.she] can swipe from side to side, but other than that, [npc.she] doesn't have much control over them."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_TYPE_HAIR,
+			List.of(BodyPartTag.TAIL_TYPE_HAIR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
@@ -758,12 +742,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("zebra-like"),
-			Util.newArrayListOfValues("zebra-like"),
+			List.of("zebra-like"),
+			List.of("zebra-like"),
 			"end",
 			"ends",
-			Util.newArrayListOfValues("hair-tipped"),
-			Util.newArrayListOfValues("hair-tipped"),
+			List.of("hair-tipped"),
+			List.of("hair-tipped"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A zebra-like tail sprouts from just above [npc.her] ass, rapidly growing in length until it hangs down about [npc.tailLength] behind [npc.herHim]."
 				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over it is limited to swishing it from side to side."
@@ -781,8 +765,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] zebra tails, which [npc.she] can swipe from side to side, but other than that, [npc.she] doesn't have much control over them."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_TYPE_HAIR,
+			List.of(BodyPartTag.TAIL_TYPE_HAIR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
@@ -796,12 +779,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("rat-like"),
-			Util.newArrayListOfValues("rat-like"),
+			List.of("rat-like"),
+			List.of("rat-like"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"#IF(npc.getTailCount()==1)"
 				+ " A thick, rat-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a decent amount of control over it, and can twist it almost anywhere [npc.she] [npc.verb(please)]."
@@ -819,8 +802,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] rat tails, over which [npc.she] [npc.has] complete control, allowing [npc.herHim] to use them to grip and hold objects."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_PREHENSILE,
+			List.of(BodyPartTag.TAIL_PREHENSILE,
 					BodyPartTag.TAIL_SUTABLE_FOR_PENETRATION,
 					BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TYPE_SKIN,
@@ -837,12 +819,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("rabbit-like", "fluffy"),
-			Util.newArrayListOfValues("rabbit-like", "fluffy"),
+			List.of("rabbit-like", "fluffy"),
+			List.of("rabbit-like", "fluffy"),
 			"bush",
 			"bushes",
-			Util.newArrayListOfValues("fluffy"),
-			Util.newArrayListOfValues("fluffy"),
+			List.of("fluffy"),
+			List.of("fluffy"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A furry, round, rabbit-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] no control over it whatsoever, what with it being no more than a ball of downy fluff."
@@ -860,8 +842,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] rabbit tails, which really are no more than large balls of downy fluff."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_TYPE_FUR,
+			List.of(BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE,
 					BodyPartTag.TAIL_NEVER_SUTABLE_FOR_PENETRATION), false) {
 	};
@@ -876,12 +857,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("reindeer-like"),
-			Util.newArrayListOfValues("reindeer-like"),
+			List.of("reindeer-like"),
+			List.of("reindeer-like"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("furry"),
-			Util.newArrayListOfValues("furry"),
+			List.of("furry"),
+			List.of("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A reindeer-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(discover)] that [npc.her] control over it is limited to simply twitching it up and down."
@@ -899,8 +880,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] reindeer tails, which [npc.she] can twitch up and down."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_TYPE_FUR,
+			List.of(BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
@@ -914,12 +894,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("squirrel-like", "fluffy", "bushy"),
-			Util.newArrayListOfValues("squirrel-like", "fluffy", "bushy"),
+			List.of("squirrel-like", "fluffy", "bushy"),
+			List.of("squirrel-like", "fluffy", "bushy"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("furry"),
-			Util.newArrayListOfValues("furry"),
+			List.of("furry"),
+			List.of("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ " A furry, squirrel-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's an impressive [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] a reasonable amount of control over it, and can use it to help balance [npc.herHim] out while moving quickly."
@@ -937,8 +917,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] squirrel tails, which [npc.she] can control well enough to grant [npc.herHim] significantly improved balance."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_SLEEP_HUGGING,
+			List.of(BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
@@ -953,12 +932,12 @@ public class TailType {
 			"",
 			"tail",
 			"tails",
-			Util.newArrayListOfValues("wolf-like", "fluffy"),
-			Util.newArrayListOfValues("wolf-like", "fluffy"),
+			List.of("wolf-like", "fluffy"),
+			List.of("wolf-like", "fluffy"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("furry"),
-			Util.newArrayListOfValues("furry"),
+			List.of("furry"),
+			List.of("furry"),
 			"#IF(npc.getTailCount()==1)"
 				+ "  A furry, wolf-like tail sprouts from just above [npc.her] ass, rapidly growing in size until it's about [npc.tailLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] limited control over it, and it takes a lot of effort to stop it from betraying [npc.her] emotions."
@@ -976,8 +955,7 @@ public class TailType {
 				+ "#ELSE"
 					+ " [npc.tailCount] #IF(npc.isTailFeral()) [style.colourFeral(feral)],#ENDIF [npc.tailColour(true)] wolf tails, which swish from side to side when [npc.she] [npc.verb(get)] excited."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_SLEEP_HUGGING,
+			List.of(BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TYPE_FUR,
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};

@@ -77,8 +77,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public class ItemEffectType {
 	
-	public static AbstractItemEffectType TESTING = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"Test item."),
+	public static AbstractItemEffectType TESTING = new AbstractItemEffectType(List.of("Test item."),
 		PresetColour.GENERIC_ARCANE) {
 		
 		@Override
@@ -89,8 +88,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType DYE_BRUSH = new AbstractItemEffectType(Util.newArrayListOfValues(
-				"Recolours a piece of clothing."),
+	public static AbstractItemEffectType DYE_BRUSH = new AbstractItemEffectType(List.of("Recolours a piece of clothing."),
 			PresetColour.GENERIC_ARCANE) {
 		
 		@Override
@@ -101,8 +99,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType REFORGE_HAMMER = new AbstractItemEffectType(Util.newArrayListOfValues(
-				"Changes a weapon's damage type."),
+	public static AbstractItemEffectType REFORGE_HAMMER = new AbstractItemEffectType(List.of("Changes a weapon's damage type."),
 			PresetColour.GENERIC_ARCANE) {
 		
 		@Override
@@ -113,8 +110,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType USED_CONDOM_DRINK = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"Provides a slimy snack."),
+	public static AbstractItemEffectType USED_CONDOM_DRINK = new AbstractItemEffectType(List.of("Provides a slimy snack."),
 			PresetColour.GENERIC_SEX) {
 		
 		@Override
@@ -123,8 +119,7 @@ public class ItemEffectType {
 		}
 	};
 
-	public static AbstractItemEffectType FILLED_MOO_MILKER_DRINK = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"Provides a milky drink."),
+	public static AbstractItemEffectType FILLED_MOO_MILKER_DRINK = new AbstractItemEffectType(List.of("Provides a milky drink."),
 			PresetColour.GENERIC_SEX) {
 		
 		@Override
@@ -135,15 +130,13 @@ public class ItemEffectType {
 	};
 	
 	
-	public static AbstractItemEffectType ORIENTATION_CHANGE = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"Sets orientation to gynephilic.",
+	public static AbstractItemEffectType ORIENTATION_CHANGE = new AbstractItemEffectType(List.of("Sets orientation to gynephilic.",
 			Attribute.MAJOR_CORRUPTION.getFormattedValue(50)),
 			PresetColour.FEMININE_PLUS) {
 		
 		@Override
 		public List<TFModifier> getPrimaryModifiers() {
-			return Util.newArrayListOfValues(
-					TFModifier.REMOVAL,
+			return List.of(TFModifier.REMOVAL,
 					TFModifier.ORIENTATION_GYNEPHILIC,
 					TFModifier.ORIENTATION_AMBIPHILIC,
 					TFModifier.ORIENTATION_ANDROPHILIC,
@@ -154,8 +147,7 @@ public class ItemEffectType {
 
 		@Override
 		public List<TFModifier> getSecondaryModifiers(AbstractCoreItem targetItem, TFModifier primaryModifier) {
-			return Util.newArrayListOfValues(
-					TFModifier.ARCANE_BOOST);
+			return List.of(TFModifier.ARCANE_BOOST);
 		}
 
 		@Override
@@ -163,11 +155,10 @@ public class ItemEffectType {
 			if(primaryModifier==TFModifier.PERSONALITY_TRAIT_SPEECH_LISP
 					|| primaryModifier==TFModifier.PERSONALITY_TRAIT_SPEECH_STUTTER
 					|| primaryModifier==TFModifier.PERSONALITY_TRAIT_SPEECH_SLOVENLY) {
-				return Util.newArrayListOfValues(
-						TFPotency.MINOR_DRAIN,
+				return List.of(TFPotency.MINOR_DRAIN,
 						TFPotency.MINOR_BOOST);
 			}
-			return Util.newArrayListOfValues(TFPotency.MINOR_BOOST);
+			return List.of(TFPotency.MINOR_BOOST);
 		}
 		
 		@Override
@@ -386,8 +377,7 @@ public class ItemEffectType {
 //	};
 	
 
-	public static AbstractItemEffectType MOO_MILKER = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"Milks breasts."),
+	public static AbstractItemEffectType MOO_MILKER = new AbstractItemEffectType(List.of("Milks breasts."),
 			PresetColour.GENERIC_SEX) {
 		
 		@Override
@@ -411,8 +401,7 @@ public class ItemEffectType {
 	};
 	
 
-	public static AbstractItemEffectType PREGNANCY_TEST = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"Reveals pregnancy info."),
+	public static AbstractItemEffectType PREGNANCY_TEST = new AbstractItemEffectType(List.of("Reveals pregnancy info."),
 			PresetColour.GENERIC_SEX) {
 		
 		@Override
@@ -467,8 +456,7 @@ public class ItemEffectType {
 	};
 	
 	
-	public static AbstractItemEffectType MOTHERS_MILK = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"Advances pregnancy and incubations."),
+	public static AbstractItemEffectType MOTHERS_MILK = new AbstractItemEffectType(List.of("Advances pregnancy and incubations."),
 			PresetColour.GENERIC_SEX) {
 		
 		@Override
@@ -480,11 +468,11 @@ public class ItemEffectType {
 			sb.append("[npc.Name] eagerly [npc.verb(gulp)] down the rich, creamy liquid; its delicious taste spurs [npc.herHim] on into quickly draining the entire bottle.");
 
 			Map<SexAreaOrifice, List<AbstractStatusEffect>> incubationEffectMap = Util.newHashMapOfValues(
-					new Value<>(SexAreaOrifice.VAGINA, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_WOMB_1, StatusEffect.INCUBATING_EGGS_WOMB_2, StatusEffect.INCUBATING_EGGS_WOMB_3)),
-					new Value<>(SexAreaOrifice.ANUS, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_STOMACH_1, StatusEffect.INCUBATING_EGGS_STOMACH_2, StatusEffect.INCUBATING_EGGS_STOMACH_3)),
-					new Value<>(SexAreaOrifice.NIPPLE, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_NIPPLES_1, StatusEffect.INCUBATING_EGGS_NIPPLES_2, StatusEffect.INCUBATING_EGGS_NIPPLES_3)),
-					new Value<>(SexAreaOrifice.NIPPLE_CROTCH, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_1, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_2, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_3)),
-					new Value<>(SexAreaOrifice.SPINNERET, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_SPINNERET_1, StatusEffect.INCUBATING_EGGS_SPINNERET_2, StatusEffect.INCUBATING_EGGS_SPINNERET_3)));
+					new Value<>(SexAreaOrifice.VAGINA, List.of(StatusEffect.INCUBATING_EGGS_WOMB_1, StatusEffect.INCUBATING_EGGS_WOMB_2, StatusEffect.INCUBATING_EGGS_WOMB_3)),
+					new Value<>(SexAreaOrifice.ANUS, List.of(StatusEffect.INCUBATING_EGGS_STOMACH_1, StatusEffect.INCUBATING_EGGS_STOMACH_2, StatusEffect.INCUBATING_EGGS_STOMACH_3)),
+					new Value<>(SexAreaOrifice.NIPPLE, List.of(StatusEffect.INCUBATING_EGGS_NIPPLES_1, StatusEffect.INCUBATING_EGGS_NIPPLES_2, StatusEffect.INCUBATING_EGGS_NIPPLES_3)),
+					new Value<>(SexAreaOrifice.NIPPLE_CROTCH, List.of(StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_1, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_2, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_3)),
+					new Value<>(SexAreaOrifice.SPINNERET, List.of(StatusEffect.INCUBATING_EGGS_SPINNERET_1, StatusEffect.INCUBATING_EGGS_SPINNERET_2, StatusEffect.INCUBATING_EGGS_SPINNERET_3)));
 			
 			for(Entry<SexAreaOrifice, List<AbstractStatusEffect>> entry : incubationEffectMap.entrySet()) {
 				Litter litter = target.getIncubationLitter(entry.getKey());
@@ -652,8 +640,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType CIGARETTE_PACK = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"Provides 20 Starr Cigarettes."),
+	public static AbstractItemEffectType CIGARETTE_PACK = new AbstractItemEffectType(List.of("Provides 20 Starr Cigarettes."),
 			PresetColour.BASE_PURPLE) {
 		
 		@Override
@@ -686,8 +673,7 @@ public class ItemEffectType {
 		}
 	};
 
-	public static AbstractItemEffectType MAKEUP_SET = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"[style.boldPink(Opens cosmetics screen)]",
+	public static AbstractItemEffectType MAKEUP_SET = new AbstractItemEffectType(List.of("[style.boldPink(Opens cosmetics screen)]",
 			"[style.boldSex(Automatically re-applies heavy lipstick after sex)]"),
 			PresetColour.BASE_PURPLE) {
 		@Override
@@ -710,8 +696,7 @@ public class ItemEffectType {
 	
 	// Ingredients and potions:
 	
-	public static AbstractItemEffectType MYSTERY_KINK = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"[style.boldFetish(Random fetish addition or removal)]"),
+	public static AbstractItemEffectType MYSTERY_KINK = new AbstractItemEffectType(List.of("[style.boldFetish(Random fetish addition or removal)]"),
 			PresetColour.FETISH) {
 		
 		@Override
@@ -792,8 +777,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType ADDICTION_REMOVAL = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"[style.boldMinorGood(Removes)] [style.boldExcellent(all)] [style.colourBad(addictions)]",
+	public static AbstractItemEffectType ADDICTION_REMOVAL = new AbstractItemEffectType(List.of("[style.boldMinorGood(Removes)] [style.boldExcellent(all)] [style.colourBad(addictions)]",
 			"[style.boldMinorGood(Removes)] [style.colourAlcohol(alcohol intoxication)]",
 			"[style.boldMinorGood(Removes)] [style.colourPsychoactive(psychoactive effects)]"),
 			PresetColour.BASE_GOLD) {
@@ -831,8 +815,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType MUSHROOMS = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"[style.boldTfGeneric(Makes slime and orifice interiors glow)]",
+	public static AbstractItemEffectType MUSHROOMS = new AbstractItemEffectType(List.of("[style.boldTfGeneric(Makes slime and orifice interiors glow)]",
 			"Causes a [style.boldPsychoactive(psychoactive trip)]"),
 			PresetColour.ATTRIBUTE_CORRUPTION) {
 		
@@ -882,8 +865,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType EGGPLANT = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"[style.boldGood(Restores)] 5% [style.boldHealth("+Attribute.HEALTH_MAXIMUM.getName()+")]",
+	public static AbstractItemEffectType EGGPLANT = new AbstractItemEffectType(List.of("[style.boldGood(Restores)] 5% [style.boldHealth("+Attribute.HEALTH_MAXIMUM.getName()+")]",
 			"[style.boldGood(Restores)] 5% [style.boldAura(aura)]"),
 			PresetColour.ATTRIBUTE_CORRUPTION) {
 		
@@ -907,7 +889,7 @@ public class ItemEffectType {
 
 		@Override
 		public List<TFModifier> getPrimaryModifiers() {
-			return Util.newArrayListOfValues(TFModifier.TF_PENIS);
+			return List.of(TFModifier.TF_PENIS);
 		}
 
 		@Override
@@ -922,7 +904,7 @@ public class ItemEffectType {
 		
 		@Override
 		public List<String> getEffectsDescription(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target) {
-			return Util.newArrayListOfValues(getRacialEffect(Race.HUMAN, primaryModifier, secondaryModifier, potency, user, target).getDescription());
+			return List.of(getRacialEffect(Race.HUMAN, primaryModifier, secondaryModifier, potency, user, target).getDescription());
 		}
 		
 		@Override
@@ -936,26 +918,23 @@ public class ItemEffectType {
 
 		@Override
 		public List<TFModifier> getPrimaryModifiers() {
-			return Util.newArrayListOfValues(
-					TFModifier.CORRUPTION,
+			return List.of(TFModifier.CORRUPTION,
 					TFModifier.TF_MOD_HYMEN);
 		}
 
 		@Override
 		public List<TFModifier> getSecondaryModifiers(AbstractCoreItem targetItem, TFModifier primaryModifier) {
-			return Util.newArrayListOfValues(TFModifier.ARCANE_BOOST);
+			return List.of(TFModifier.ARCANE_BOOST);
 		}
 		
 		@Override
 		public List<TFPotency> getPotencyModifiers(TFModifier primaryModifier, TFModifier secondaryModifier) {
 			if(primaryModifier==TFModifier.CORRUPTION) {
-				return Util.newArrayListOfValues(
-						TFPotency.MINOR_BOOST,
+				return List.of(TFPotency.MINOR_BOOST,
 						TFPotency.BOOST,
 						TFPotency.MAJOR_BOOST);
 			} else {
-				return Util.newArrayListOfValues(
-						TFPotency.MINOR_DRAIN,
+				return List.of(TFPotency.MINOR_DRAIN,
 						TFPotency.MINOR_BOOST);
 			}
 		}
@@ -965,23 +944,23 @@ public class ItemEffectType {
 			if(primaryModifier==TFModifier.CORRUPTION) {
 				switch(potency) {
 					case MINOR_BOOST:
-						return Util.newArrayListOfValues("[style.boldMinorGood(-5)] [style.boldCorruption(Corruption)]");
+						return List.of("[style.boldMinorGood(-5)] [style.boldCorruption(Corruption)]");
 					case BOOST:
-						return Util.newArrayListOfValues("[style.boldGood(-10)] [style.boldCorruption(Corruption)]");
+						return List.of("[style.boldGood(-10)] [style.boldCorruption(Corruption)]");
 					case MAJOR_BOOST:
-						return Util.newArrayListOfValues("[style.boldExcellent(-15)] [style.boldCorruption(Corruption)]");
+						return List.of("[style.boldExcellent(-15)] [style.boldCorruption(Corruption)]");
 					case MINOR_DRAIN:
 					case DRAIN:
 					case MAJOR_DRAIN:
 						break;
 				}
-				return Util.newArrayListOfValues("");
+				return List.of("");
 				
 			} else {
 				if(potency.isNegative()) {
-					return Util.newArrayListOfValues("[style.boldMinorBad(Removes)] [style.boldSex(hymen)]");
+					return List.of("[style.boldMinorBad(Removes)] [style.boldSex(hymen)]");
 				} else {
-					return Util.newArrayListOfValues("[style.boldMinorGood(Regenerates)] [style.boldSex(hymen)]");
+					return List.of("[style.boldMinorGood(Regenerates)] [style.boldSex(hymen)]");
 				}
 			}
 		}
@@ -1023,8 +1002,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType GIFT_CHOCOLATES = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"[style.boldGood(Restores)] 30% [style.boldHealth("+Attribute.HEALTH_MAXIMUM.getName()+")]"),
+	public static AbstractItemEffectType GIFT_CHOCOLATES = new AbstractItemEffectType(List.of("[style.boldGood(Restores)] 30% [style.boldHealth("+Attribute.HEALTH_MAXIMUM.getName()+")]"),
 			PresetColour.ATTRIBUTE_HEALTH) {
 		
 		@Override
@@ -1041,8 +1019,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType GIFT_PERFUME = new AbstractItemEffectType(Util.newArrayListOfValues(
-			Attribute.DAMAGE_LUST.getFormattedValue(5)+" to 'potion effects'"),
+	public static AbstractItemEffectType GIFT_PERFUME = new AbstractItemEffectType(List.of(Attribute.DAMAGE_LUST.getFormattedValue(5)+" to 'potion effects'"),
 			PresetColour.ATTRIBUTE_LUST) {
 		
 		@Override
@@ -1058,8 +1035,7 @@ public class ItemEffectType {
 	};
 	
 	
-	public static AbstractItemEffectType PRESENT = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"Contains a random item."),
+	public static AbstractItemEffectType PRESENT = new AbstractItemEffectType(List.of("Contains a random item."),
 			PresetColour.GENERIC_EXCELLENT) {
 		
 		@Override
@@ -1124,8 +1100,7 @@ public class ItemEffectType {
 	
 	// Racial:
 	
-	public static AbstractItemEffectType RACE_INNOXIAS_GIFT = new AbstractItemEffectType(Util.newArrayListOfValues(
-			Attribute.MAJOR_PHYSIQUE.getFormattedValue(2)+" to 'potion effects'",
+	public static AbstractItemEffectType RACE_INNOXIAS_GIFT = new AbstractItemEffectType(List.of(Attribute.MAJOR_PHYSIQUE.getFormattedValue(2)+" to 'potion effects'",
 			Attribute.MAJOR_ARCANE.getFormattedValue(2)+" to 'potion effects'",
 			Attribute.MAJOR_CORRUPTION.getFormattedValue(5)+" to 'potion effects'"),
 			PresetColour.RACE_HUMAN) {
@@ -1443,8 +1418,7 @@ public class ItemEffectType {
 	
 	// Essences:
 	
-	public static AbstractItemEffectType BOTTLED_ESSENCE_ARCANE = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"[style.boldGood(+1)] [style.boldArcane(Arcane essence)]"),
+	public static AbstractItemEffectType BOTTLED_ESSENCE_ARCANE = new AbstractItemEffectType(List.of("[style.boldGood(+1)] [style.boldArcane(Arcane essence)]"),
 			PresetColour.GENERIC_ARCANE) {
 		
 		@Override
@@ -1457,8 +1431,7 @@ public class ItemEffectType {
 
 	// Specials:
 	
-	public static AbstractItemEffectType BIMBO_LOLLIPOP = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"<b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>Bimbo</b> <b style='color:"+PresetColour.RACE_HARPY.toWebHexString()+";'>harpy</b> <b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>transformation</b>",
+	public static AbstractItemEffectType BIMBO_LOLLIPOP = new AbstractItemEffectType(List.of("<b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>Bimbo</b> <b style='color:"+PresetColour.RACE_HARPY.toWebHexString()+";'>harpy</b> <b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>transformation</b>",
 			"Applies [style.boldSex('Sucking lollipop')] status effect"),
 			PresetColour.RACE_HARPY) {
 		
@@ -1555,8 +1528,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType NYMPHO_LOLLIPOP = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"<b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>Nympho</b> <b style='color:"+PresetColour.RACE_HARPY.toWebHexString()+";'>harpy</b> <b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>transformation</b>",
+	public static AbstractItemEffectType NYMPHO_LOLLIPOP = new AbstractItemEffectType(List.of("<b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>Nympho</b> <b style='color:"+PresetColour.RACE_HARPY.toWebHexString()+";'>harpy</b> <b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>transformation</b>",
 			"Applies [style.boldSex('Sucking lollipop')] status effect"),
 			PresetColour.RACE_HARPY) {
 		
@@ -1658,8 +1630,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType DOMINANT_PERFUME = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"<b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>Dominant</b> <b style='color:"+PresetColour.RACE_HARPY.toWebHexString()+";'>harpy</b> <b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>transformation</b>"),
+	public static AbstractItemEffectType DOMINANT_PERFUME = new AbstractItemEffectType(List.of("<b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>Dominant</b> <b style='color:"+PresetColour.RACE_HARPY.toWebHexString()+";'>harpy</b> <b style='color:"+PresetColour.GENERIC_SEX.toWebHexString()+";'>transformation</b>"),
 			PresetColour.RACE_HARPY) {
 		
 		@Override
@@ -1913,8 +1884,7 @@ public class ItemEffectType {
 
 		@Override
 		public List<TFModifier> getPrimaryModifiers() {
-			return Util.newArrayListOfValues(
-					TFModifier.TF_MOD_FETISH_BODY_PART,
+			return List.of(TFModifier.TF_MOD_FETISH_BODY_PART,
 					TFModifier.TF_MOD_FETISH_BEHAVIOUR);
 		}
 
@@ -1933,8 +1903,7 @@ public class ItemEffectType {
 		
 		@Override
 		public List<TFPotency> getPotencyModifiers(TFModifier primaryModifier, TFModifier secondaryModifier) {
-			return Util.newArrayListOfValues(
-					TFPotency.BOOST,
+			return List.of(TFPotency.BOOST,
 					TFPotency.MINOR_BOOST,
 					TFPotency.MINOR_DRAIN,
 					TFPotency.DRAIN);
@@ -1946,30 +1915,30 @@ public class ItemEffectType {
 			
 			if(potency==TFPotency.BOOST) {
 				if(secondaryModifier == TFModifier.NONE) {
-					return Util.newArrayListOfValues("Adds a [style.boldFetish(random "+descriptor+" fetish)].");
+					return List.of("Adds a [style.boldFetish(random "+descriptor+" fetish)].");
 				} else {
-					return Util.newArrayListOfValues("Adds the [style.boldFetish("+secondaryModifier.getName()+" fetish)].");
+					return List.of("Adds the [style.boldFetish("+secondaryModifier.getName()+" fetish)].");
 				}
 				
 			} else if(potency==TFPotency.MINOR_BOOST) {
 				if(secondaryModifier == TFModifier.NONE) {
-					return Util.newArrayListOfValues("Boosts [style.boldLust(desire)] for a [style.boldFetish(random "+descriptor+" fetish)].");
+					return List.of("Boosts [style.boldLust(desire)] for a [style.boldFetish(random "+descriptor+" fetish)].");
 				} else {
-					return Util.newArrayListOfValues("Boosts [style.boldLust(desire)] for the [style.boldFetish("+secondaryModifier.getName()+" fetish)].");
+					return List.of("Boosts [style.boldLust(desire)] for the [style.boldFetish("+secondaryModifier.getName()+" fetish)].");
 				}
 				
 			} else if(potency==TFPotency.MINOR_DRAIN) {
 				if(secondaryModifier == TFModifier.NONE) {
-					return Util.newArrayListOfValues("Lowers [style.boldLust(desire)] for a [style.boldFetish(random "+descriptor+" fetish)] (if that fetish is not already owned).");
+					return List.of("Lowers [style.boldLust(desire)] for a [style.boldFetish(random "+descriptor+" fetish)] (if that fetish is not already owned).");
 				} else {
-					return Util.newArrayListOfValues("Lowers [style.boldLust(desire)] for the [style.boldFetish("+secondaryModifier.getName()+" fetish)] (if that fetish is not already owned).");
+					return List.of("Lowers [style.boldLust(desire)] for the [style.boldFetish("+secondaryModifier.getName()+" fetish)] (if that fetish is not already owned).");
 				}
 				
 			} else {
 				if(secondaryModifier == TFModifier.NONE) {
-					return Util.newArrayListOfValues("Removes a [style.boldFetish(random "+descriptor+" fetish)].");
+					return List.of("Removes a [style.boldFetish(random "+descriptor+" fetish)].");
 				} else {
-					return Util.newArrayListOfValues("Removes the [style.boldFetish("+secondaryModifier.getName()+" fetish)].");
+					return List.of("Removes the [style.boldFetish("+secondaryModifier.getName()+" fetish)].");
 				}
 			}
 		}
@@ -2173,7 +2142,7 @@ public class ItemEffectType {
 				return TFModifier.getTFBodyPartFetishList();
 				
 			} else if(primaryModifier == TFModifier.CLOTHING_SPECIAL) {
-				List<TFModifier> mods =  Util.newArrayListOfValues(TFModifier.CLOTHING_SEALING, TFModifier.CLOTHING_SERVITUDE);
+				List<TFModifier> mods =  List.of(TFModifier.CLOTHING_SEALING, TFModifier.CLOTHING_SERVITUDE);
 				if(targetItem instanceof AbstractClothing) {
 					 //If this clothing is a 'sex toy' or groin/nipple clothing, then allow vibration and orgasm denial enchantments:
 					if(((AbstractClothing)targetItem).getItemTags().contains(ItemTag.ENABLE_SEX_EQUIP)
@@ -2213,7 +2182,7 @@ public class ItemEffectType {
 				return mods;
 				
 			} else if(primaryModifier == TFModifier.CLOTHING_CONDOM) {
-				return Util.newArrayListOfValues(TFModifier.ARCANE_BOOST);
+				return List.of(TFModifier.ARCANE_BOOST);
 				
 			} else {
 				return getClothingTFSecondaryModifiers(primaryModifier);
@@ -2223,12 +2192,12 @@ public class ItemEffectType {
 		@Override
 		public List<TFPotency> getPotencyModifiers(TFModifier primaryModifier, TFModifier secondaryModifier) {
 			 if(secondaryModifier == TFModifier.CLOTHING_SEALING) {
-				return Util.newArrayListOfValues(TFPotency.MINOR_BOOST, TFPotency.MINOR_DRAIN, TFPotency.DRAIN, TFPotency.MAJOR_DRAIN);
+				return List.of(TFPotency.MINOR_BOOST, TFPotency.MINOR_DRAIN, TFPotency.DRAIN, TFPotency.MAJOR_DRAIN);
 				
 			} else if(secondaryModifier == TFModifier.CLOTHING_VIBRATION
 						|| secondaryModifier == TFModifier.REMOVAL
 						|| secondaryModifier == TFModifier.TF_TYPE_1) {
-				return Util.newArrayListOfValues(TFPotency.MINOR_BOOST, TFPotency.BOOST, TFPotency.MAJOR_BOOST);
+				return List.of(TFPotency.MINOR_BOOST, TFPotency.BOOST, TFPotency.MAJOR_BOOST);
 				
 			} else if(primaryModifier == TFModifier.CLOTHING_ATTRIBUTE
 						|| primaryModifier == TFModifier.CLOTHING_MAJOR_ATTRIBUTE
@@ -2239,7 +2208,7 @@ public class ItemEffectType {
 				return TFPotency.getAllPotencies();
 				
 			} else {
-				return Util.newArrayListOfValues(TFPotency.MINOR_BOOST);
+				return List.of(TFPotency.MINOR_BOOST);
 			}
 		}
 		
@@ -2386,7 +2355,7 @@ public class ItemEffectType {
 			 if(secondaryModifier == TFModifier.CLOTHING_VIBRATION
 					|| secondaryModifier == TFModifier.REMOVAL
 					|| secondaryModifier == TFModifier.TF_TYPE_1) {
-				return Util.newArrayListOfValues(TFPotency.MINOR_BOOST, TFPotency.BOOST, TFPotency.MAJOR_BOOST);
+				return List.of(TFPotency.MINOR_BOOST, TFPotency.BOOST, TFPotency.MAJOR_BOOST);
 				
 			} else if(primaryModifier == TFModifier.CLOTHING_ATTRIBUTE
 					|| primaryModifier == TFModifier.CLOTHING_MAJOR_ATTRIBUTE
@@ -2396,7 +2365,7 @@ public class ItemEffectType {
 				return TFPotency.getAllPotencies();
 				
 			} else {
-				return Util.newArrayListOfValues(TFPotency.MINOR_BOOST);
+				return List.of(TFPotency.MINOR_BOOST);
 			}
 		}
 		
@@ -2496,8 +2465,7 @@ public class ItemEffectType {
 		}
 	};
 	
-	public static AbstractItemEffectType OFFSPRING_MAP = new AbstractItemEffectType(Util.newArrayListOfValues(
-			"Facilitates the discovery of offspring."),
+	public static AbstractItemEffectType OFFSPRING_MAP = new AbstractItemEffectType(List.of("Facilitates the discovery of offspring."),
 			PresetColour.RARITY_LEGENDARY) {
 		@Override
 		public boolean isBreakOutOfInventory() {
@@ -2579,19 +2547,19 @@ public class ItemEffectType {
 							}
 							@Override
 							public List<TFModifier> getPrimaryModifiers() {
-								return Util.newArrayListOfValues(TFModifier.TF_MATERIAL_FLESH);
+								return List.of(TFModifier.TF_MATERIAL_FLESH);
 							}
 							@Override
 							public List<TFModifier> getSecondaryModifiers(AbstractCoreItem targetItem, TFModifier primaryModifier) {
-								return Util.newArrayListOfValues(TFModifier.ARCANE_BOOST);
+								return List.of(TFModifier.ARCANE_BOOST);
 							}
 							@Override
 							public List<TFPotency> getPotencyModifiers(TFModifier primaryModifier, TFModifier secondaryModifier) {
-								return Util.newArrayListOfValues(TFPotency.MINOR_BOOST);
+								return List.of(TFPotency.MINOR_BOOST);
 							}
 							@Override
 							public List<String> getEffectsDescription(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target) {
-								return Util.newArrayListOfValues("Changes the target's body material to flesh.");
+								return List.of("Changes the target's body material to flesh.");
 							}
 							@Override
 							public String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
@@ -2622,7 +2590,7 @@ public class ItemEffectType {
 							}
 							@Override
 							public List<String> getEffectsDescription(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target) {
-								return Util.newArrayListOfValues(getRacialEffect(race, primaryModifier, secondaryModifier, potency, user, target).getDescription());
+								return List.of(getRacialEffect(race, primaryModifier, secondaryModifier, potency, user, target).getDescription());
 							}
 							@Override
 							public String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {

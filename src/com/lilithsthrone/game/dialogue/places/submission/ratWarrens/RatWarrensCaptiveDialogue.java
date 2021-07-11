@@ -297,7 +297,7 @@ public class RatWarrensCaptiveDialogue {
 					public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {
 						if(!performer.isPlayer()
 								&& (murkSexInfo.getValue().getPerformingSexArea()==SexAreaPenetration.PENIS || murkSexInfo.getValue().getPerformingSexArea()==SexAreaOrifice.VAGINA)) {
-							return Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.VAGINA);
+							return List.of(CoverableArea.PENIS, CoverableArea.VAGINA);
 						}
 						return new ArrayList<>();
 					}
@@ -323,16 +323,16 @@ public class RatWarrensCaptiveDialogue {
 			@Override
 			public List<InitialSexActionInformation> getInitialSexActions() {
 				if(murkSexInfo.getValue().getTargetedSexArea()==SexAreaOrifice.ANUS) {
-					return Util.newArrayListOfValues(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
+					return List.of(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
 					
 				} else if(murkSexInfo.getValue().getTargetedSexArea()==SexAreaOrifice.VAGINA) {
-					return Util.newArrayListOfValues(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+					return List.of(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 
 				} else if(murkSexInfo.getValue().getTargetedSexArea()==SexAreaOrifice.MOUTH) {
-					return Util.newArrayListOfValues(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+					return List.of(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 					
 				} else {
-					return Util.newArrayListOfValues(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), FingerPenis.COCK_MASTURBATED_START, false, true));
+					return List.of(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), FingerPenis.COCK_MASTURBATED_START, false, true));
 					
 				}
 			}
@@ -398,7 +398,7 @@ public class RatWarrensCaptiveDialogue {
 			public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 				Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
 				for(GameCharacter dom : dominants.keySet()) {
-					map.put(dom, Util.newArrayListOfValues(CoverableArea.PENIS));
+					map.put(dom, List.of(CoverableArea.PENIS));
 				}
 				return map;
 			}
@@ -450,7 +450,7 @@ public class RatWarrensCaptiveDialogue {
 		Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensCaptiveWashed, false);
 		Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensCaptiveInitialNightDescription, false);
 		for(GameCharacter milker : getMilkers()) {
-			((RatWarrensCaptive)milker).applyMilkingEquipment(true, Util.newArrayListOfValues(InventorySlot.NIPPLE, InventorySlot.VAGINA));
+			((RatWarrensCaptive)milker).applyMilkingEquipment(true, List.of(InventorySlot.NIPPLE, InventorySlot.VAGINA));
 		}
 	}
 	
@@ -1095,7 +1095,7 @@ public class RatWarrensCaptiveDialogue {
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_DAY_1_AFTER_TRANSFORMATION_MURK_COCK_BLOWJOB")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 					}
 					@Override
 					public void effects() {
@@ -1118,7 +1118,7 @@ public class RatWarrensCaptiveDialogue {
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_DAY_1_AFTER_TRANSFORMATION_MURK_COCK_BLOWJOB_EAGER")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 					}
 					@Override
 					public void effects() {
@@ -1385,7 +1385,7 @@ public class RatWarrensCaptiveDialogue {
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_DAY_2_AFTER_POTION_BLOWJOB")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 					}
 					@Override
 					public void effects() {
@@ -1407,7 +1407,7 @@ public class RatWarrensCaptiveDialogue {
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_DAY_2_AFTER_POTION_BLOWJOB_EAGER")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 					}
 					@Override
 					public void effects() {
@@ -1920,7 +1920,7 @@ public class RatWarrensCaptiveDialogue {
 	public static final DialogueNode CAPTIVE_DAY_3_MILKING = new DialogueNode("", "", true, true) {
 		@Override
 		public void applyPreParsingEffects() {
-			applyPlayerMilkingPumps(true, Util.newArrayListOfValues(InventorySlot.NIPPLE, InventorySlot.STOMACH, InventorySlot.PENIS)); // No vagina as Murk is going to fuck it first
+			applyPlayerMilkingPumps(true, List.of(InventorySlot.NIPPLE, InventorySlot.STOMACH, InventorySlot.PENIS)); // No vagina as Murk is going to fuck it first
 		}
 		@Override
 		public int getSecondsPassed() {
@@ -1987,7 +1987,7 @@ public class RatWarrensCaptiveDialogue {
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_DAY_3_MILKING_FIRST_SEX")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), Main.game.getPlayer().hasVagina()?PenisVagina.PENIS_FUCKING_START:PenisAnus.PENIS_FUCKING_START, false, true));
+						return List.of(new InitialSexActionInformation(getMurk(), Main.game.getPlayer(), Main.game.getPlayer().hasVagina()?PenisVagina.PENIS_FUCKING_START:PenisAnus.PENIS_FUCKING_START, false, true));
 					}
 					@Override
 					public void effects() {
@@ -2008,7 +2008,7 @@ public class RatWarrensCaptiveDialogue {
 		public void applyPreParsingEffects() {
 			if(Main.game.getPlayer().hasVagina()) {
 				Main.game.getPlayer().clearFluidsStored(SexAreaOrifice.VAGINA);
-				applyPlayerMilkingPumps(true, Util.newArrayListOfValues(InventorySlot.VAGINA));
+				applyPlayerMilkingPumps(true, List.of(InventorySlot.VAGINA));
 			}
 		}
 		@Override
@@ -2061,8 +2061,7 @@ public class RatWarrensCaptiveDialogue {
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_DAY_3_AFTER_SEX_MILKED_SEX")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(getMurk(),
+						return List.of(new InitialSexActionInformation(getMurk(),
 										Main.game.getPlayer(),
 										Main.game.getPlayer().hasVagina() && !Main.game.isAnalContentEnabled()
 											?PenisVagina.PENIS_FUCKING_START
@@ -2073,7 +2072,7 @@ public class RatWarrensCaptiveDialogue {
 					@Override
 					public void effects() {
 						Main.game.getTextEndStringBuilder().append(incrementPlayerObedience(25));
-						applyPlayerMilkingPumps(false, Util.newArrayListOfValues(InventorySlot.VAGINA));
+						applyPlayerMilkingPumps(false, List.of(InventorySlot.VAGINA));
 					}
 					@Override
 					public void postSexInitEffects() {
@@ -2091,7 +2090,7 @@ public class RatWarrensCaptiveDialogue {
 		@Override
 		public void applyPreParsingEffects() {
 			getMurk().returnToHome();
-			applyPlayerMilkingPumps(true, Util.newArrayListOfValues(InventorySlot.VAGINA));
+			applyPlayerMilkingPumps(true, List.of(InventorySlot.VAGINA));
 		}
 		@Override
 		public int getSecondsPassed() {
@@ -2176,7 +2175,7 @@ public class RatWarrensCaptiveDialogue {
 			getMurk().setLocation(Main.game.getPlayer(), false);
 			spawnRat(false, true);
 			getCharacters(false).get(0).setGenericName("gang-member");
-			applyPlayerMilkingPumps(false, Util.newArrayListOfValues(InventorySlot.VAGINA));
+			applyPlayerMilkingPumps(false, List.of(InventorySlot.VAGINA));
 		}
 		@Override
 		public int getSecondsPassed() {
@@ -2208,7 +2207,7 @@ public class RatWarrensCaptiveDialogue {
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_DAY_3_AFTERNOON_SEX", getCharacters(false))) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(
+						return List.of(new InitialSexActionInformation(
 								getCharacters(false).get(0), Main.game.getPlayer(), Main.game.getPlayer().hasVagina()?PenisVagina.PENIS_FUCKING_START:PenisAnus.PENIS_FUCKING_START, false, true));
 					}
 					@Override
@@ -2231,7 +2230,7 @@ public class RatWarrensCaptiveDialogue {
 			Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_DAY_3_AFTERNOON_AFTER_SEX", getCharacters(false)));
 			banishRats();
 			getMurk().returnToHome();
-			applyPlayerMilkingPumps(true, Util.newArrayListOfValues(InventorySlot.VAGINA));
+			applyPlayerMilkingPumps(true, List.of(InventorySlot.VAGINA));
 		}
 		@Override
 		public int getSecondsPassed() {
@@ -2257,7 +2256,7 @@ public class RatWarrensCaptiveDialogue {
 			spawnRat(false, true);
 			getCharacters(false).get(0).setGenericName("gang-member");
 			getCharacters(false).get(0).addFetish(Fetish.FETISH_SADIST);
-			applyPlayerMilkingPumps(false, Util.newArrayListOfValues(InventorySlot.VAGINA));
+			applyPlayerMilkingPumps(false, List.of(InventorySlot.VAGINA));
 		}
 		@Override
 		public int getSecondsPassed() {
@@ -2289,8 +2288,7 @@ public class RatWarrensCaptiveDialogue {
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_DAY_3_AFTERNOON_SECOND_SEX_START", getCharacters(false))) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(getCharacters(false).get(0), Main.game.getPlayer(), Main.game.getPlayer().hasVagina()?PenisVagina.PENIS_FUCKING_START:PenisAnus.PENIS_FUCKING_START, false, true));
+						return List.of(new InitialSexActionInformation(getCharacters(false).get(0), Main.game.getPlayer(), Main.game.getPlayer().hasVagina()?PenisVagina.PENIS_FUCKING_START:PenisAnus.PENIS_FUCKING_START, false, true));
 					}
 					@Override
 					public void effects() {
@@ -2312,7 +2310,7 @@ public class RatWarrensCaptiveDialogue {
 			Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_DAY_3_AFTERNOON_AFTER_SECOND_SEX", getCharacters(false)));
 			banishRats();
 			getMurk().returnToHome();
-			applyPlayerMilkingPumps(true, Util.newArrayListOfValues(InventorySlot.VAGINA));
+			applyPlayerMilkingPumps(true, List.of(InventorySlot.VAGINA));
 		}
 		@Override
 		public int getSecondsPassed() {
@@ -2335,7 +2333,7 @@ public class RatWarrensCaptiveDialogue {
 		@Override
 		public void applyPreParsingEffects() {
 			getMurk().setLocation(Main.game.getPlayer(), false);
-			applyPlayerMilkingPumps(false, Util.newArrayListOfValues(InventorySlot.VAGINA, InventorySlot.NIPPLE, InventorySlot.STOMACH, InventorySlot.PENIS));
+			applyPlayerMilkingPumps(false, List.of(InventorySlot.VAGINA, InventorySlot.NIPPLE, InventorySlot.STOMACH, InventorySlot.PENIS));
 			Main.game.getPlayer().addDirtySlot(InventorySlot.MOUTH);
 		}
 		@Override
@@ -2405,8 +2403,7 @@ public class RatWarrensCaptiveDialogue {
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/captive", "CAPTIVE_DAY_3_AFTERNOON_END_SUBMIT_SEX")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(getMurk(),
+						return List.of(new InitialSexActionInformation(getMurk(),
 										Main.game.getPlayer(),
 										Main.game.getPlayer().hasVagina()
 											?PenisVagina.PENIS_FUCKING_START
@@ -2478,7 +2475,7 @@ public class RatWarrensCaptiveDialogue {
 		public void applyPreParsingEffects() {
 			getMurk().returnToHome();
 			for(GameCharacter milker : getMilkers()) {
-				((RatWarrensCaptive)milker).applyMilkingEquipment(false, Util.newArrayListOfValues(InventorySlot.NIPPLE, InventorySlot.VAGINA));
+				((RatWarrensCaptive)milker).applyMilkingEquipment(false, List.of(InventorySlot.NIPPLE, InventorySlot.VAGINA));
 			}
 		}
 		@Override
@@ -2960,7 +2957,7 @@ public class RatWarrensCaptiveDialogue {
 						UtilText.parse(getMurk(), "Now that you're free of your collar, you can finally attack [npc.name]!"),
 						null,
 						(NPC) getMurk(),
-						Util.newArrayListOfValues(getMurk()),
+						List.of(getMurk()),
 						Util.newHashMapOfValues(new Value<>(getMurk(), "[npc.speech(Y-Yer gonna pay fer this!)] [npc.name] shouts in panic, wielding his bat."))) {
 					@Override
 					public void effects() {

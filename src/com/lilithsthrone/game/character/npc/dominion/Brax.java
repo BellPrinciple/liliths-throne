@@ -156,8 +156,7 @@ public class Brax extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_DIRTY_MINDED);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.ENCHANTMENT_STABILITY,
+				List.of(Perk.ENCHANTMENT_STABILITY,
 						Perk.UNARMED_DAMAGE,
 						Perk.ARCANE_BOOST),
 				Util.newHashMapOfValues(

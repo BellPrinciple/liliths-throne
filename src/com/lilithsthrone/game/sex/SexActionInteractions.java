@@ -44,13 +44,13 @@ public class SexActionInteractions {
 		}
 
 		if(availableCumTargets==null) {
-			this.availableCumTargets = Util.newArrayListOfValues(OrgasmCumTarget.FLOOR);
+			this.availableCumTargets = List.of(OrgasmCumTarget.FLOOR);
 		} else {
 			this.availableCumTargets = availableCumTargets;
 		}
 
 		if(providedCumTargets==null) {
-			this.providedCumTargets = Util.newArrayListOfValues(OrgasmCumTarget.FLOOR);
+			this.providedCumTargets = List.of(OrgasmCumTarget.FLOOR);
 		} else {
 			this.providedCumTargets = providedCumTargets;
 		}

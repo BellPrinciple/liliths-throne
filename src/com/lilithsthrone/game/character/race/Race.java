@@ -445,11 +445,9 @@ public class Race {
 		public void applyRaceChanges(Body body) {
 			// 75% chance for genitals to be dark:
 			if(Math.random()<0.75f) {
-				Colour lightColour = Util.randomItemFrom(Util.newArrayListOfValues(
-						PresetColour.SKIN_PALE,
+				Colour lightColour = Util.randomItemFrom(List.of(PresetColour.SKIN_PALE,
 						PresetColour.SKIN_LIGHT));
-				Colour darkColour = Util.randomItemFrom(Util.newArrayListOfValues(
-						PresetColour.SKIN_DARK,
+				Colour darkColour = Util.randomItemFrom(List.of(PresetColour.SKIN_DARK,
 						PresetColour.SKIN_CHOCOLATE,
 						PresetColour.SKIN_EBONY));
 				if(body.getPenis().getType()==PenisType.EQUINE) {

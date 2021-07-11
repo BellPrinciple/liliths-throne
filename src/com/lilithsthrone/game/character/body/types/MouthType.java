@@ -55,12 +55,12 @@ public class MouthType {
 	public static AbstractMouthType HARPY = new AbstractMouthType(BodyCoveringType.MOUTH,
 			Race.HARPY,
 			TongueType.HARPY,
-			Util.newArrayListOfValues("beak"),
-			Util.newArrayListOfValues("beaks"),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of("beak"),
+			List.of("beaks"),
+			List.of(""),
+			List.of(""),
 			null,
-			Util.newArrayListOfValues()) {
+			List.of()) {
 	};
 	
 	private static List<AbstractMouthType> allMouthTypes;

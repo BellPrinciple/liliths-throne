@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.character.race;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -460,9 +462,9 @@ public enum RaceStage {
 			case MINIMUM:
 				return RaceStage.PARTIAL;
 			case REDUCED:
-				return Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER));
+				return Util.randomItemFrom(List.of(RaceStage.PARTIAL, RaceStage.LESSER));
 			case NORMAL:
-				return Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER));
+				return Util.randomItemFrom(List.of(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER));
 			case MAXIMUM:
 				return RaceStage.GREATER;
 		}

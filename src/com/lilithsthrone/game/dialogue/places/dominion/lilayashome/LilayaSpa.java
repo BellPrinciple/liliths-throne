@@ -76,7 +76,7 @@ public class LilayaSpa {
 	private static boolean massageSlaveSex = false;
 	
     private static List<AbstractItemType> getDrinks() {
-    	return Util.newArrayListOfValues(
+    	return List.of(
     			ItemType.getItemTypeFromId("innoxia_race_human_vanilla_water"),
     			ItemType.getItemTypeFromId("innoxia_race_bat_fruit_bats_juice_box"),
     			ItemType.getItemTypeFromId("innoxia_race_dog_canine_crush"),
@@ -102,7 +102,7 @@ public class LilayaSpa {
 	private static Map<SlavePermissionSetting, List<String>> receptionGreetings = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] professionally curtsies as [npc.she] sees you enter the reception area, before asking,"
 						+ "#ELSE"
@@ -111,7 +111,7 @@ public class LilayaSpa {
 						"Flashing you a professional smile, [npc.name] asks,")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SEDUCTIVE,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] leans forwards over the counter and puts on [npc.her] most seductive tone of voice as [npc.she] asks,"
 						+ "#ELSE"
@@ -120,7 +120,7 @@ public class LilayaSpa {
 						"Flashing you a seductive smile, [npc.name] asks,")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SLUTTY,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] bites [npc.her] lip and lets out an inappropriate, slutty moan as [npc.she] asks,"
 						+ "#ELSE"
@@ -129,7 +129,7 @@ public class LilayaSpa {
 						"Flashing you a lewd smile, [npc.name] asks,")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_STANDARD,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] curtsies as [npc.she] sees you enter the reception area, before asking,"
 						+ "#ELSE"
@@ -138,7 +138,7 @@ public class LilayaSpa {
 						"Flashing you a quick smile, [npc.name] asks,")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_WHOLESOME,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] lets out a happy little cry as [npc.she] sees you enter the reception area, before eagerly asking,"
 						+ "#ELSE"
@@ -149,7 +149,7 @@ public class LilayaSpa {
 	private static Map<SlavePermissionSetting, List<String>> receptionGreetingsMute = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] professionally curtsies as [npc.she] sees you enter the reception area, before dutifully waiting to see if you'll ask anything of [npc.herHim]."
 						+ "#ELSE"
@@ -158,7 +158,7 @@ public class LilayaSpa {
 						"Flashing you a professional smile, [npc.name] obediently waits to see if [npc.she]'ll be able to help you with anything.")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SEDUCTIVE,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] leans forwards over the counter and flashes you [npc.her] most seductive smile as [npc.she] waits to see if you'll ask anything of [npc.herHim]."
 						+ "#ELSE"
@@ -167,7 +167,7 @@ public class LilayaSpa {
 						"Flashing you a seductive smile, [npc.name] waits to see if [npc.she]'ll be able to help you with anything.")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SLUTTY,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] bites [npc.her] lip and lets out an inappropriate, slutty moan as [npc.she] waits to see if you'll ask anything of [npc.herHim]."
 						+ "#ELSE"
@@ -176,7 +176,7 @@ public class LilayaSpa {
 						"Flashing you a lustful grin, [npc.name] waits to see if [npc.she]'ll be able to help you with anything.")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_STANDARD,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] curtsies as [npc.she] sees you enter the reception area, before dutifully waiting to see if you'll ask anything of [npc.herHim]."
 						+ "#ELSE"
@@ -185,7 +185,7 @@ public class LilayaSpa {
 						"Flashing you a quick smile, [npc.name] waits to see if [npc.she]'ll be able to help you with anything.")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_WHOLESOME,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] lets out a happy little cry as [npc.she] sees you enter the reception area, before dutifully waiting to see if you'll ask anything of [npc.herHim]."
 						+ "#ELSE"
@@ -196,19 +196,19 @@ public class LilayaSpa {
 	private static Map<SlavePermissionSetting, List<String>> receptionSpeech = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
-					Util.newArrayListOfValues(
+					List.of(
 						"How may I help you, [pc.name]?",
 						"Is there anything I may assist you with, [pc.name]?",
 						"Would you care for a shower before entering the spa, [pc.name]?")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SEDUCTIVE,
-					Util.newArrayListOfValues(
+					List.of(
 						"Would you care for some <i>personal</i> assistance?",
 						"Is there <i>anything</i> I can help you with, [pc.name]?",
 						"How may I <i>assist</i> you today, [pc.name]?")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SLUTTY,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.hasFetish(FETISH_SUBMISSIVE))"
 							+ "How about you bend me over this desk and fuck me senseless?"
 						+ "#ELSE"
@@ -218,28 +218,28 @@ public class LilayaSpa {
 						"Let's fuck, [pc.name]!")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_STANDARD,
-					Util.newArrayListOfValues(
+					List.of(
 						"Can I help you with anything, [pc.name]?",
 						"What can I do for you, [pc.name]?",
 						"Is there anything I can help you with, [pc.name]?")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_WHOLESOME,
-					Util.newArrayListOfValues(
+					List.of(
 						"Hi, [pc.name], can I do anything to help you?! I'm so happy to see you again!",
 						"What can I do for you, [pc.name]?!",
 						"Hi, [pc.name], what can I do for you today?!")));
 	
-	private static List<String> receptionRudeGreetings = Util.newArrayListOfValues(
+	private static List<String> receptionRudeGreetings = List.of(
 			"Glaring angrily at you, [npc.name] disobediently scowls, ",
 			"With [npc.her] [npc.eyes+] full of resentment, [npc.name] glares at you and snaps,",
 			"Clearly not at all happy with being forced to work in the spa, [npc.name] angrily growls,");
 
-	private static List<String> receptionRudeGreetingsMute = Util.newArrayListOfValues(
+	private static List<String> receptionRudeGreetingsMute = List.of(
 			"Glaring angrily at you, [npc.name] lets out a disobedient scowl, making it quite clear that [npc.sheHasFull] no interest in helping you with anything...",
 			"With [npc.her] [npc.eyes+] full of resentment, [npc.name] glares at you and lets out a disobedient growl.",
 			"Clearly not at all happy with being forced to work in the spa, [npc.name] angrily growls at you, before crossing [npc.her] [npc.arms] and refusing to offer you any assistance.");
 	
-	private static List<String> receptionRudeSpeech = Util.newArrayListOfValues(
+	private static List<String> receptionRudeSpeech = List.of(
 			"What the fuck do you want now, <i>[pc.name]</i>?",
 			"Just hurry the fuck up and get out of here.",
 			"How about you turn around and fuck off?");
@@ -250,12 +250,12 @@ public class LilayaSpa {
 	private static Map<SlavePermissionSetting, List<String>> showerGreetings = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
-					Util.newArrayListOfValues(
+					List.of(
 						"Lathering soap over [npc.her] [npc.hands], [npc.name] sets about washing your back, saying,",
 						"Acting in a professional manner, [npc.name] sets about rubbing soap over your body, saying,")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SEDUCTIVE,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] leans in and presses [npc.her] [npc.breasts+] against your back, teasing,"
 						+ "#ELSE"
@@ -268,7 +268,7 @@ public class LilayaSpa {
 						+ "#ENDIF")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SLUTTY,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "Shamelessly rubbing [npc.her] soapy [npc.breasts] over your back, [npc.name] crudely asks,"
 						+ "#ELSE"
@@ -277,12 +277,12 @@ public class LilayaSpa {
 						"Giving your body a good grope as [npc.she] rubs [npc.her] soapy [npc.hands] over your [pc.skin], [npc.name] pointedly asks,")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_STANDARD,
-					Util.newArrayListOfValues(
+					List.of(
 						"Lathering soap over [npc.her] [npc.hands], [npc.name] sets about washing your back, saying,",
 						"Setting about [npc.her] job with all due diligence, [npc.name] rubs soap over your body, saying,")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_WHOLESOME,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] lovingly runs [npc.her] soapy hands over your body, before leaning in against you and sighing,"
 						+ "#ELSE"
@@ -293,12 +293,12 @@ public class LilayaSpa {
 	private static Map<SlavePermissionSetting, List<String>> showerGreetingsMute = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
-					Util.newArrayListOfValues(
+					List.of(
 						"Lathering soap over [npc.her] [npc.hands], [npc.name] sets about washing your back in a professional manner.",
 						"Acting in a professional manner, [npc.name] sets about rubbing soap over your body and helping to clean yourself.")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SEDUCTIVE,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] leans in and seductively presses [npc.her] [npc.breasts+] against your back as [npc.she] helps to clean you."
 						+ "#ELSE"
@@ -311,7 +311,7 @@ public class LilayaSpa {
 						+ "#ENDIF")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SLUTTY,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "Shamelessly rubbing [npc.her] soapy [npc.breasts] over your back, [npc.name] reaches down to give your groin a good grope and lets out a hungry [npc.moan]."
 						+ "#ELSE"
@@ -320,12 +320,12 @@ public class LilayaSpa {
 						"Giving your body a good grope as [npc.she] rubs [npc.her] soapy [npc.hands] over your [pc.skin], [npc.name] lets out a hungry [npc.moan] as [npc.she] helps to clean you.")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_STANDARD,
-					Util.newArrayListOfValues(
+					List.of(
 						"Lathering soap over [npc.her] [npc.hands], [npc.name] dutifully sets about washing your back.",
 						"Setting about [npc.her] job with all due diligence, [npc.name] rubs soap over your body as [npc.she] helps to clean you.")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_WHOLESOME,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] lovingly runs [npc.her] soapy hands over your body, before leaning in against you and letting out a happy sigh."
 						+ "#ELSE"
@@ -336,17 +336,17 @@ public class LilayaSpa {
 	private static Map<SlavePermissionSetting, List<String>> showerSpeech = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
-					Util.newArrayListOfValues(
+					List.of(
 						"I'll have you nice and clean in no time, [pc.name].",
 						"This will only take a moment, [pc.name].")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SEDUCTIVE,
-					Util.newArrayListOfValues(
+					List.of(
 						"You know, there's more we can do in here than just getting clean...",
 						"Perhaps we could spend a little more time in here together...")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SLUTTY,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.hasFetish(FETISH_SUBMISSIVE))"
 							+ "Come on, [pc.name], push me against the wall and give me a good fucking!"
 						+ "#ELSE"
@@ -355,26 +355,26 @@ public class LilayaSpa {
 						"Come on and fuck me already!")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_STANDARD,
-					Util.newArrayListOfValues(
+					List.of(
 						"You'll be sparkling clean after this, [pc.name].",
 						"I'll have you nice and clean in just a moment, [pc.name].")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_WHOLESOME,
-					Util.newArrayListOfValues(
+					List.of(
 						"I hope this is to your liking, [pc.name]...",
 						"Is this how you like it, [pc.name]?")));
 	
-	private static List<String> showerRudeGreetings = Util.newArrayListOfValues(
+	private static List<String> showerRudeGreetings = List.of(
 			"[npc.Name] angrily scowls as [npc.she] reluctantly helps you to clean yourself,",
 			"Glaring angrily at you as [npc.she] half-heartedly helps to wash your body, [npc.name] growls,",
 			"Resenting the fact that [npc.sheHasFull] to help you clean yourself, [npc.name] angrily sneers,");
 
-	private static List<String> showerRudeGreetingsMute = Util.newArrayListOfValues(
+	private static List<String> showerRudeGreetingsMute = List.of(
 			"[npc.Name] angrily scowls as [npc.she] reluctantly helps you to clean yourself...",
 			"Glaring angrily at you the entire time, [npc.name] half-heartedly helps to wash your body...",
 			"Resenting the fact that [npc.sheHasFull] to help you clean yourself, [npc.name] angrily glares at you...");
 	
-	private static List<String> showerRudeSpeech = Util.newArrayListOfValues(
+	private static List<String> showerRudeSpeech = List.of(
 			"Just fucking hurry up so I can get out of here...",
 			"I hate this so much...",
 			"Why the fuck do I have to do this?");
@@ -385,12 +385,12 @@ public class LilayaSpa {
 	private static Map<SlavePermissionSetting, List<String>> bathingGreetings = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
-					Util.newArrayListOfValues(
+					List.of(
 						"Sinking down into the pool's warm warm water, [npc.name] sighs,",
 						"Letting out a deep sigh as [npc.she] enters the pool, [npc.name] remarks,")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SEDUCTIVE,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] bites [npc.her] [npc.lip] and flashes you a seductive look as [npc.she] teases,"
 						+ "#ELSE"
@@ -403,29 +403,29 @@ public class LilayaSpa {
 						+ "#ENDIF")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SLUTTY,
-					Util.newArrayListOfValues(
+					List.of(
 						"Splashing through the pool's water to rub up against you, [npc.name] crudely asks,",
 						"Sliding up next to you, [npc.name] gives your body a good grope as [npc.she] pointedly asks,")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_STANDARD,
-					Util.newArrayListOfValues(
+					List.of(
 						"Sinking down into the pool's warm warm water, [npc.name] sighs,",
 						"Letting out a deep sigh as [npc.she] enters the pool, [npc.name] remarks,")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_WHOLESOME,
-					Util.newArrayListOfValues(
+					List.of(
 						"[npc.Name] blushes a little as [npc.she] sinks down into the warm water and sighs,",
 						"Happily humming to [npc.herself] as [npc.she] slides down into the warm water, [npc.name] sighs,")));
 
 	private static Map<SlavePermissionSetting, List<String>> bathingGreetingsMute = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
-					Util.newArrayListOfValues(
+					List.of(
 						"Sinking down into the pool's warm warm water, [npc.name] lets out a quiet sigh and simply enjoys this opportunity to relax.",
 						"Letting out a barely-audible sigh as [npc.she] enters the pool, [npc.name] closes [npc.her] [npc.eyes] and relaxes in the warm water.")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SEDUCTIVE,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.isFeminine())"
 							+ "[npc.Name] bites [npc.her] [npc.lip] and flashes you a seductive look as [npc.she] moves up close to where you're sitting."
 						+ "#ELSE"
@@ -434,34 +434,34 @@ public class LilayaSpa {
 						"[npc.Name] makes a show of seductively running [npc.her] wet [npc.hands] over [npc.her] body, before suggestively winking at you.")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SLUTTY,
-					Util.newArrayListOfValues(
+					List.of(
 						"Splashing through the pool's water to rub up against you, [npc.name] crudely motions for you to fuck [npc.herHim]...",
 						"Sliding up next to you, [npc.name] gives your body a good grope as [npc.she] lets out a hungry whine.")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_STANDARD,
-					Util.newArrayListOfValues(
+					List.of(
 							"Sinking down into the pool's warm warm water, [npc.name] lets out a quiet sigh and simply enjoys this opportunity to relax.",
 							"Letting out a barely-audible sigh as [npc.she] enters the pool, [npc.name] closes [npc.her] [npc.eyes] and relaxes in the warm water.")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_WHOLESOME,
-					Util.newArrayListOfValues(
+					List.of(
 						"[npc.Name] blushes a little as [npc.she] sinks down into the warm water and smiles at you.",
 						"[npc.Name] happily hums to [npc.herself] as [npc.she] slides down into the warm water and flashes you a loving smile.")));
 
 	private static Map<SlavePermissionSetting, List<String>> bathingSpeech = Util.newHashMapOfValues(
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_PROFESSIONAL,
-					Util.newArrayListOfValues(
+					List.of(
 						"Please let me know if you require anything of me, [pc.name]...",
 						"This is most pleasing...")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SEDUCTIVE,
-					Util.newArrayListOfValues(
+					List.of(
 						"You know, we could be doing things other than just relaxing right now...",
 						"Perhaps we could find a way to make this more exciting?")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_SLUTTY,
-					Util.newArrayListOfValues(
+					List.of(
 						"#IF(npc.hasFetish(FETISH_SUBMISSIVE))"
 							+ "Come on, [pc.name], give me a good fucking already!"
 						+ "#ELSE"
@@ -470,26 +470,26 @@ public class LilayaSpa {
 						"Hey, how about we fuck in the pool? Sounds good, right?")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_STANDARD,
-					Util.newArrayListOfValues(
+					List.of(
 						"This feels so good...",
 						"Thanks for letting me join you in here, [pc.name]...")),
 			new Value<>(
 					SlavePermissionSetting.BEHAVIOUR_WHOLESOME,
-					Util.newArrayListOfValues(
+					List.of(
 						"This feels great... Thank you so much for letting me be with you, [pc.name]...",
 						"Thank you for sharing this with me, [pc.name]...")));
 	
-	private static List<String> bathingRudeGreetings = Util.newArrayListOfValues(
+	private static List<String> bathingRudeGreetings = List.of(
 			"[npc.Name] angrily scowls as [npc.she] reluctantly joins you in the pool,",
 			"Glaring angrily at you as [npc.she] splashes down into the pool's warm water, [npc.name] scowls,",
 			"Resenting the fact that [npc.sheHasFull] to join you in the pool, [npc.name] angrily sneers,");
 
-	private static List<String> bathingRudeGreetingsMute = Util.newArrayListOfValues(
+	private static List<String> bathingRudeGreetingsMute = List.of(
 			"[npc.Name] angrily scowls as [npc.she] reluctantly joins you in the pool...",
 			"Glaring angrily at you, [npc.name] reluctantly splashes down into the pool's warm water...",
 			"Resenting the fact that [npc.sheHasFull] to join you in the pool, [npc.name] angrily glares at you...");
 	
-	private static List<String> bathingRudeSpeech = Util.newArrayListOfValues(
+	private static List<String> bathingRudeSpeech = List.of(
 			"The spa's nice, but it's much better when you're not here...",
 			"Hurry up and leave so that I can enjoy this by myself again...",
 			"Just hurry up and get out of here...");
@@ -1345,7 +1345,8 @@ public class LilayaSpa {
 							"Cycle the targeted character to receive a drink.") {
 						@Override
 						public void effects() {
-							List<GameCharacter> characters = Util.newArrayListOfValues(Main.game.getPlayer());
+							List<GameCharacter> characters = new ArrayList<>();
+							characters.add(Main.game.getPlayer());
 							characters.addAll(getSlaves());
 							for(int i=0; i<characters.size();i++) {
 								if(characters.get(i).equals(drinksCharacter)) {

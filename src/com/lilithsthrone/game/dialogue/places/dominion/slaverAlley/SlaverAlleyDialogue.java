@@ -210,7 +210,7 @@ public class SlaverAlleyDialogue {
 			Main.game.getNpc(Finch.class).addSlave(slave);
 			slave.setPlayerKnowsName(true);
 			
-			slave.setAssWetness(Util.randomItemFrom(Util.newArrayListOfValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
+			slave.setAssWetness(Util.randomItemFrom(List.of(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
 			slave.setAssBleached(true);
 			slave.setAssCapacity(Util.random.nextInt((int) Capacity.ONE_EXTREMELY_TIGHT.getMaximumValue(false)), true);
 			slave.setAssVirgin(false);
@@ -237,7 +237,7 @@ public class SlaverAlleyDialogue {
 			Main.game.getNpc(Finch.class).addSlave(slave);
 			slave.setPlayerKnowsName(true);
 			
-			slave.setVaginaWetness(Util.randomItemFrom(Util.newArrayListOfValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
+			slave.setVaginaWetness(Util.randomItemFrom(List.of(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
 			slave.setVaginaCapacity(Util.random.nextInt((int) Capacity.ONE_EXTREMELY_TIGHT.getMaximumValue(false)), true);
 			slave.setVaginaVirgin(true);
 			
@@ -265,7 +265,7 @@ public class SlaverAlleyDialogue {
 			Main.game.getNpc(Finch.class).addSlave(slave);
 			slave.setPlayerKnowsName(true);
 
-			slave.setFaceWetness(Util.randomItemFrom(Util.newArrayListOfValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
+			slave.setFaceWetness(Util.randomItemFrom(List.of(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
 			slave.setFaceCapacity(Capacity.THREE_SLIGHTLY_LOOSE.getMedianValue(), true);
 			slave.setFaceElasticity(OrificeElasticity.SEVEN_ELASTIC.getValue());
 			slave.setLipSize(LipSize.FOUR_HUGE.getValue());
@@ -388,8 +388,7 @@ public class SlaverAlleyDialogue {
 		partners.get(0).removeFetish(Fetish.FETISH_ORAL_RECEIVING);
 		partners.get(0).removeFetish(Fetish.FETISH_VAGINAL_GIVING);
 		partners.get(0).removeFetish(Fetish.FETISH_ANAL_GIVING);
-		List<Fetish> fetishes = Util.newArrayListOfValues(
-				target.isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)
+		List<Fetish> fetishes = List.of(target.isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)
 				&& !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slaverAlleyTwoPartners)
 					?Fetish.FETISH_ORAL_RECEIVING
 					:null,
@@ -550,11 +549,11 @@ public class SlaverAlleyDialogue {
 			public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 				if(twoPartners) {
 					return Util.newHashMapOfValues(
-							new Value<>(randomSexPartners.get(0), Util.newArrayListOfValues(CoverableArea.PENIS)),
-							new Value<>(randomSexPartners.get(1), Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.VAGINA)));
+							new Value<>(randomSexPartners.get(0), List.of(CoverableArea.PENIS)),
+							new Value<>(randomSexPartners.get(1), List.of(CoverableArea.PENIS, CoverableArea.VAGINA)));
 				} else {
 					return Util.newHashMapOfValues(
-							new Value<>(randomSexPartners.get(0), Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.VAGINA)));
+							new Value<>(randomSexPartners.get(0), List.of(CoverableArea.PENIS, CoverableArea.VAGINA)));
 				}
 			}
 			@Override
@@ -716,7 +715,7 @@ public class SlaverAlleyDialogue {
 							return new Response("Groped",
 									"Let the guards grope your exposed breasts in exchange for them letting you put up the posters.",
 									GATEWAY_POSTER_PERMISSION_GROPED,
-									Util.newArrayListOfValues(Fetish.FETISH_BREASTS_SELF, Fetish.FETISH_EXHIBITIONIST),
+									List.of(Fetish.FETISH_BREASTS_SELF, Fetish.FETISH_EXHIBITIONIST),
 									CorruptionLevel.THREE_DIRTY,
 									null,
 									null,
@@ -732,7 +731,7 @@ public class SlaverAlleyDialogue {
 							return new Response("Flash breasts",
 									"Fully expose your breasts to the guards in exchange for them letting you put up the posters.",
 									GATEWAY_POSTER_PERMISSION_GROPED,
-									Util.newArrayListOfValues(Fetish.FETISH_BREASTS_SELF, Fetish.FETISH_EXHIBITIONIST),
+									List.of(Fetish.FETISH_BREASTS_SELF, Fetish.FETISH_EXHIBITIONIST),
 									CorruptionLevel.THREE_DIRTY,
 									null,
 									null,
@@ -1122,8 +1121,7 @@ public class SlaverAlleyDialogue {
 	};
 
 	private static List<AbstractItemType> getCafeItems() {
-		return Util.newArrayListOfValues(
-				ItemType.getItemTypeFromId("innoxia_race_human_vanilla_water"),
+		return List.of(ItemType.getItemTypeFromId("innoxia_race_human_vanilla_water"),
 				ItemType.getItemTypeFromId("innoxia_race_bat_fruit_bats_juice_box"),
 				ItemType.getItemTypeFromId("innoxia_race_rabbit_bunny_juice"),
 				ItemType.getItemTypeFromId("innoxia_race_squirrel_squirrel_java"),
@@ -1624,7 +1622,7 @@ public class SlaverAlleyDialogue {
 										ownedByPlayer || slave.hasSlaveJobSetting(SlaveJob.PUBLIC_STOCKS, SlaveJobSetting.SEX_ORAL),
 										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStocks.BEHIND_STOCKS)),
 										Util.newHashMapOfValues(new Value<>(slave, SexSlotStocks.LOCKED_IN_STOCKS))),
-								Util.newArrayListOfValues(companion),
+								List.of(companion),
 								null,
 								AFTER_STOCKS_SEX,
 								UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_SEX_SOLO", slave, companion)) {
@@ -1871,7 +1869,7 @@ public class SlaverAlleyDialogue {
 							?"Alleyway (solo)"
 							:"Alleyway",
 						"Tell [sean.name] that you want to go to the hidden alleyway and have sex with him there...",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+						List.of(Fetish.FETISH_SUBMISSIVE),
 						null,
 						CorruptionLevel.TWO_HORNY,
 						null,
@@ -1880,9 +1878,9 @@ public class SlaverAlleyDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(Sean.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(Main.game.getNpc(Sean.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(getMainCompanion()),
 								null),
 						AFTER_SEAN_SEDUCE_ALLEYWAY_SEX,
 						UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_SEAN_SEDUCE_ALLEYWAY")) {
@@ -1914,7 +1912,7 @@ public class SlaverAlleyDialogue {
 				}
 				return new ResponseSex("Stocks breeding",
 						"Ask [sean.name] if he'd like to lock you in the stocks and breed you in front of members of the public.",
-						Util.newArrayListOfValues(Fetish.FETISH_EXHIBITIONIST, Fetish.FETISH_PREGNANCY, Fetish.FETISH_SUBMISSIVE),
+						List.of(Fetish.FETISH_EXHIBITIONIST, Fetish.FETISH_PREGNANCY, Fetish.FETISH_SUBMISSIVE),
 						null,
 						CorruptionLevel.FOUR_LUSTFUL,
 						null,
@@ -1955,7 +1953,7 @@ public class SlaverAlleyDialogue {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								return Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Sean.class), Util.newArrayListOfValues(CoverableArea.PENIS)));
+										new Value<>(Main.game.getNpc(Sean.class), List.of(CoverableArea.PENIS)));
 							}
 							@Override
 							public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {
@@ -1972,8 +1970,7 @@ public class SlaverAlleyDialogue {
 						UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_SEAN_SEDUCE_BREEDING")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getNpc(Sean.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Sean.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 					}
 					@Override
 					public void effects() {
@@ -2007,7 +2004,7 @@ public class SlaverAlleyDialogue {
 				return new ResponseSex(
 						"Alleyway (threesome)",
 						"Tell [sean.name] that you and [com.name] want to go to the hidden alleyway and have sex with him there...",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+						List.of(Fetish.FETISH_SUBMISSIVE),
 						null,
 						CorruptionLevel.TWO_HORNY,
 						null,
@@ -2016,8 +2013,8 @@ public class SlaverAlleyDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(Sean.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer(), getMainCompanion()),
+								List.of(Main.game.getNpc(Sean.class)),
+								List.of(Main.game.getPlayer(), getMainCompanion()),
 								null,
 								null),
 						AFTER_SEAN_SEDUCE_ALLEYWAY_SEX,
@@ -2085,7 +2082,7 @@ public class SlaverAlleyDialogue {
 //				}
 				return new ResponseSex("Double breeding",
 						"Ask [sean.name] if he'd like to lock you and [com.name] in the stocks and breed the two of you in front of members of the public.",
-						Util.newArrayListOfValues(Fetish.FETISH_EXHIBITIONIST, Fetish.FETISH_PREGNANCY, Fetish.FETISH_SUBMISSIVE),
+						List.of(Fetish.FETISH_EXHIBITIONIST, Fetish.FETISH_PREGNANCY, Fetish.FETISH_SUBMISSIVE),
 						null,
 						CorruptionLevel.FOUR_LUSTFUL,
 						null,
@@ -2126,7 +2123,7 @@ public class SlaverAlleyDialogue {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								return Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Sean.class), Util.newArrayListOfValues(CoverableArea.PENIS)));
+										new Value<>(Main.game.getNpc(Sean.class), List.of(CoverableArea.PENIS)));
 							}
 							@Override
 							public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {
@@ -2143,8 +2140,7 @@ public class SlaverAlleyDialogue {
 						UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_SEAN_SEDUCE_BREEDING_THREESOME")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getNpc(Sean.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Sean.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 					}
 					@Override
 					public void effects() {
@@ -2573,9 +2569,9 @@ public class SlaverAlleyDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(Sean.class)),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Sean.class)),
+								List.of(getMainCompanion()),
 								null),
 						AFTER_SEAN_ALLEYWAY_SEX,
 						UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_COMPLAIN_CHALLENGE_VICTORY_SEX"));
@@ -2611,11 +2607,9 @@ public class SlaverAlleyDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(
-										Main.game.getPlayer(),
+								List.of(Main.game.getPlayer(),
 										getMainCompanion()),
-								Util.newArrayListOfValues(
-										Main.game.getNpc(Sean.class)),
+								List.of(Main.game.getNpc(Sean.class)),
 								null,
 								null),
 						AFTER_SEAN_ALLEYWAY_SEX,
@@ -2901,7 +2895,7 @@ public class SlaverAlleyDialogue {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									return Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Sean.class), Util.newArrayListOfValues(CoverableArea.PENIS)));
+											new Value<>(Main.game.getNpc(Sean.class), List.of(CoverableArea.PENIS)));
 								}
 								@Override
 								public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {
@@ -2918,8 +2912,7 @@ public class SlaverAlleyDialogue {
 							UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_FIRST_SEX_START_BREEDING")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getNpc(Sean.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Sean.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 						}
 					};
 				}
@@ -3121,7 +3114,7 @@ public class SlaverAlleyDialogue {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									return Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Sean.class), Util.newArrayListOfValues(CoverableArea.PENIS)));
+											new Value<>(Main.game.getNpc(Sean.class), List.of(CoverableArea.PENIS)));
 								}
 								@Override
 								public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {
@@ -3138,8 +3131,7 @@ public class SlaverAlleyDialogue {
 							UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_LOCKED_UP_SECOND_SEX_START_BREEDING")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getNpc(Sean.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Sean.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 						}
 					};
 				}
@@ -3337,8 +3329,7 @@ public class SlaverAlleyDialogue {
 					return new Response("More",
 							"Tell [sean.name] that you want to stay in the stocks for a little longer...",
 							PUBLIC_STOCKS_LOCKED_UP_FINISHED_REPEAT,
-							Util.newArrayListOfValues(
-									Fetish.FETISH_EXHIBITIONIST,
+							List.of(Fetish.FETISH_EXHIBITIONIST,
 									Fetish.FETISH_SUBMISSIVE,
 									Fetish.FETISH_MASOCHIST),
 							CorruptionLevel.THREE_DIRTY,

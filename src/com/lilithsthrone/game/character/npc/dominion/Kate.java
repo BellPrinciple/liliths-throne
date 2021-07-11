@@ -135,7 +135,7 @@ public class Kate extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_MEGA_SLUT);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 0),
 						new Value<>(PerkCategory.LUST, 5),

@@ -175,8 +175,7 @@ public interface SexManagerInterface {
 	}
 	
 	public default List<AbstractSexPosition> getAllowedSexPositions() {
-		List<AbstractSexPosition> positions = Util.newArrayListOfValues(
-				SexPosition.ALL_FOURS,
+		List<AbstractSexPosition> positions = List.of(SexPosition.ALL_FOURS,
 				SexPosition.LYING_DOWN,
 				SexPosition.STANDING);
 
@@ -381,7 +380,7 @@ public interface SexManagerInterface {
 		if((performer.equals(target) || Main.sex.isConsensual())
 				&& (target.hasBreasts() || target.isFeminine())
 				&& (!target.isFeral() || target.getFeralAttributes().isBreastsPresent())) {
-			return Util.newArrayListOfValues(CoverableArea.NIPPLES);
+			return List.of(CoverableArea.NIPPLES);
 		}
 		
 		return new ArrayList<>();

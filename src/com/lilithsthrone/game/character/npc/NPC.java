@@ -952,10 +952,10 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		double rnd = Math.random();
 		
 		if(rnd<=0.05) {
-			return Util.newArrayListOfValues(Main.game.getItemGen().generateItem(ItemType.FETISH_UNREFINED));
+			return List.of(Main.game.getItemGen().generateItem(ItemType.FETISH_UNREFINED));
 			
 		} else if(rnd<=0.1) {
-			return Util.newArrayListOfValues(Main.game.getItemGen().generateItem(ItemType.ADDICTION_REMOVAL));
+			return List.of(Main.game.getItemGen().generateItem(ItemType.ADDICTION_REMOVAL));
 			
 		} else {
 			AbstractItemType raceIngredient = getSubspecies().getAttributeItem(this);
@@ -964,16 +964,16 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			
 			
 			if(rnd<0.6 && raceTFIngredient!=null) {
-				return Util.newArrayListOfValues(Main.game.getItemGen().generateItem(raceTFIngredient));
+				return List.of(Main.game.getItemGen().generateItem(raceTFIngredient));
 			
 			} else if(rnd <= 0.8 && !Main.game.getPlayer().getRacesDiscoveredFromBook().contains(getSubspecies())) {
-				return Util.newArrayListOfValues(Main.game.getItemGen().generateItem(book));
+				return List.of(Main.game.getItemGen().generateItem(book));
 				
 			} else if(raceIngredient!=null) {
-				return Util.newArrayListOfValues(Main.game.getItemGen().generateItem(raceIngredient));
+				return List.of(Main.game.getItemGen().generateItem(raceIngredient));
 				
 			} else {
-				return Util.newArrayListOfValues(Main.game.getItemGen().generateItem(ItemType.DYE_BRUSH));
+				return List.of(Main.game.getItemGen().generateItem(ItemType.DYE_BRUSH));
 			}
 		}
 	}
@@ -1235,7 +1235,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 	}
 	
 	public AbstractItemEffectType getItemEnchantmentEffect(AbstractItemType itemType, BodyPartInterface bodyPart) {
-		if (Util.newArrayListOfValues(Race.HUMAN, Race.NONE).contains(bodyPart.getType().getRace())) {
+		if (List.of(Race.HUMAN, Race.NONE).contains(bodyPart.getType().getRace())) {
 			return ItemEffectType.getRacialEffectType(Race.HUMAN);
 		}
 		return itemType.getEnchantmentEffect();
@@ -2593,7 +2593,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		
 		// finally, build and return our fetish potion
 		return new FetishPotion(itemType,
-				Util.newArrayListOfValues(new PossibleItemEffect(selectedEffect, selectedEffectString)));
+				List.of(new PossibleItemEffect(selectedEffect, selectedEffectString)));
 	}
 	
 	

@@ -513,7 +513,7 @@ public class EnforcerAlleywayDialogue {
 			SexType sexType,
 			boolean consensual,
 			DialogueNode postSexNode) {
-		List<GameCharacter> enforcersParsingOrdered = Util.newArrayListOfValues(partner, spectator);
+		List<GameCharacter> enforcersParsingOrdered = List.of(partner, spectator);
 		
 		if(sexType.equals(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA))) {
 			return new ResponseSex(title,
@@ -529,15 +529,15 @@ public class EnforcerAlleywayDialogue {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
 								sexType,
 								Util.newHashMapOfValues(
-										new Value<>(partner, Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(spectator, Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.VAGINA))))
+										new Value<>(partner, List.of(CoverableArea.PENIS)),
+										new Value<>(spectator, List.of(CoverableArea.PENIS, CoverableArea.VAGINA))))
 						:getSexManager(
 								SexPosition.AGAINST_WALL,
 								Util.newHashMapOfValues(new Value<>(partner, SexSlotAgainstWall.STANDING_WALL)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.FACE_TO_WALL)),
 								sexType,
-								Util.newHashMapOfValues(new Value<>(partner, Util.newArrayListOfValues(CoverableArea.PENIS)))),
-					Util.newArrayListOfValues(spectator),
+								Util.newHashMapOfValues(new Value<>(partner, List.of(CoverableArea.PENIS)))),
+					List.of(spectator),
 					Main.game.getPlayer().getCompanions(),
 					postSexNode,
 					UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "ENFORCER_ALLEYWAY_SEX_START_PENIS_PUSSY"+(threesome?"_THREESOME":""), enforcersParsingOrdered)) {
@@ -572,15 +572,15 @@ public class EnforcerAlleywayDialogue {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
 								sexType,
 								Util.newHashMapOfValues(
-										new Value<>(partner, Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(spectator, Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.VAGINA))))
+										new Value<>(partner, List.of(CoverableArea.PENIS)),
+										new Value<>(spectator, List.of(CoverableArea.PENIS, CoverableArea.VAGINA))))
 						:getSexManager(
 							SexPosition.AGAINST_WALL,
 							Util.newHashMapOfValues(new Value<>(partner, SexSlotAgainstWall.STANDING_WALL)),
 							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.FACE_TO_WALL)),
 							sexType,
-							Util.newHashMapOfValues(new Value<>(partner, Util.newArrayListOfValues(CoverableArea.PENIS)))),
-					Util.newArrayListOfValues(spectator),
+							Util.newHashMapOfValues(new Value<>(partner, List.of(CoverableArea.PENIS)))),
+					List.of(spectator),
 					Main.game.getPlayer().getCompanions(),
 					postSexNode,
 					UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "ENFORCER_ALLEYWAY_SEX_START_PENIS_ASSHOLE"+(threesome?"_THREESOME":""), enforcersParsingOrdered)) {
@@ -615,15 +615,15 @@ public class EnforcerAlleywayDialogue {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
 								sexType,
 								Util.newHashMapOfValues(
-										new Value<>(partner, Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(spectator, Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.VAGINA))))
+										new Value<>(partner, List.of(CoverableArea.PENIS)),
+										new Value<>(spectator, List.of(CoverableArea.PENIS, CoverableArea.VAGINA))))
 						:getSexManager(
 							SexPosition.AGAINST_WALL,
 							Util.newHashMapOfValues(new Value<>(partner, SexSlotAgainstWall.STANDING_WALL)),
 							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.FACE_TO_WALL)),
 							sexType,
 							Util.newHashMapOfValues()),
-					Util.newArrayListOfValues(spectator),
+					List.of(spectator),
 					Main.game.getPlayer().getCompanions(),
 					postSexNode,
 					UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "ENFORCER_ALLEYWAY_SEX_START_FINGER_PUSSY"+(threesome?"_THREESOME":""), enforcersParsingOrdered)) {
@@ -652,15 +652,15 @@ public class EnforcerAlleywayDialogue {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
 								sexType,
 								Util.newHashMapOfValues(
-										new Value<>(partner, Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(spectator, Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.VAGINA))))
+										new Value<>(partner, List.of(CoverableArea.PENIS)),
+										new Value<>(spectator, List.of(CoverableArea.PENIS, CoverableArea.VAGINA))))
 						:getSexManager(
 							SexPosition.AGAINST_WALL,
 							Util.newHashMapOfValues(new Value<>(partner, SexSlotAgainstWall.STANDING_WALL)),
 							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.FACE_TO_WALL)),
 							sexType,
 							Util.newHashMapOfValues()),
-					Util.newArrayListOfValues(spectator),
+					List.of(spectator),
 					Main.game.getPlayer().getCompanions(),
 					postSexNode,
 					UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "ENFORCER_ALLEYWAY_SEX_START_FINGER_PENIS"+(threesome?"_THREESOME":""), enforcersParsingOrdered)) {
@@ -959,10 +959,8 @@ public class EnforcerAlleywayDialogue {
 											:"")),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(
-													Main.game.getPlayer()),
-											Util.newArrayListOfValues(
-													getEnforcerLeader(),
+											List.of(Main.game.getPlayer()),
+											List.of(getEnforcerLeader(),
 													getEnforcerSubordinate().isAttractedTo(Main.game.getPlayer())
 														?getEnforcerSubordinate()
 														:null),
@@ -1605,13 +1603,13 @@ public class EnforcerAlleywayDialogue {
 						return new ResponseSex(
 								UtilText.parse(getEnforcerLeader(), "Rape ([npc.Surname])"),
 								UtilText.parse(getEnforcerLeader(), "Although [npc.name] doesn't want to have sex with you, [npc.she] really has no say in the matter..."),
-								Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+								List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 								false, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(getEnforcerLeader()),
+										List.of(Main.game.getPlayer()),
+										List.of(getEnforcerLeader()),
 										null,
-										Util.newArrayListOfValues(getEnforcerSubordinate())),
+										List.of(getEnforcerSubordinate())),
 								AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_VICTORY_RAPE_LEADER", getEnforcers()));
 						
@@ -1621,10 +1619,10 @@ public class EnforcerAlleywayDialogue {
 								UtilText.parse(getEnforcers(), "If it's sex that [npc.nameIs] after, then you're more than happy to give it to [npc.herHim]!"),
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(getEnforcerLeader()),
+										List.of(Main.game.getPlayer()),
+										List.of(getEnforcerLeader()),
 										null,
-										Util.newArrayListOfValues(getEnforcerSubordinate())),
+										List.of(getEnforcerSubordinate())),
 								AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_VICTORY_SEX_LEADER", getEnforcers()));
 					}
@@ -1634,13 +1632,13 @@ public class EnforcerAlleywayDialogue {
 						return new ResponseSex(
 								UtilText.parse(getEnforcerSubordinate(), "Rape ([npc.Surname])"),
 								UtilText.parse(getEnforcerSubordinate(), "Although [npc.name] doesn't want to have sex with you, [npc.she] really has no say in the matter..."),
-								Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+								List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 								false, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(getEnforcerSubordinate()),
+										List.of(Main.game.getPlayer()),
+										List.of(getEnforcerSubordinate()),
 										null,
-										Util.newArrayListOfValues(getEnforcerLeader())),
+										List.of(getEnforcerLeader())),
 								AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_VICTORY_RAPE_SUBORDINATE", getEnforcers()));
 						
@@ -1650,10 +1648,10 @@ public class EnforcerAlleywayDialogue {
 								UtilText.parse(getEnforcers(), "If it's sex that [npc.nameIs] after, then you're more than happy to give it to [npc.herHim]!"),
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(getEnforcerSubordinate()),
+										List.of(Main.game.getPlayer()),
+										List.of(getEnforcerSubordinate()),
 										null,
-										Util.newArrayListOfValues(getEnforcerLeader())),
+										List.of(getEnforcerLeader())),
 								AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_VICTORY_SEX_SUBORDINATE", getEnforcers()));
 					}
@@ -1663,13 +1661,13 @@ public class EnforcerAlleywayDialogue {
 						return new ResponseSex(
 								"Threesome (rape)",
 								"Although they don't want to have sex with you, these Enforcers really has no say in the matter...",
-								Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+								List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 								false, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(getEnforcerSubordinate()),
+										List.of(Main.game.getPlayer()),
+										List.of(getEnforcerSubordinate()),
 										null,
-										Util.newArrayListOfValues(getEnforcerLeader())),
+										List.of(getEnforcerLeader())),
 								AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_VICTORY_RAPE_THREESOME", getEnforcers()));
 						
@@ -1679,10 +1677,10 @@ public class EnforcerAlleywayDialogue {
 								"If it's sex that these two Enforcers are after, then you're more than happy to give it to them!",
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(getEnforcerSubordinate()),
+										List.of(Main.game.getPlayer()),
+										List.of(getEnforcerSubordinate()),
 										null,
-										Util.newArrayListOfValues(getEnforcerLeader())),
+										List.of(getEnforcerLeader())),
 								AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_COMBAT_VICTORY_SEX_THREESOME", getEnforcers()));
 					}
@@ -1701,20 +1699,18 @@ public class EnforcerAlleywayDialogue {
 										:(getEnforcerLeader().isAttractedTo(Main.game.getPlayer())
 											?"<br/>[style.italicsSex(This will result in just [npc.name] dominantly fucking you!)]"
 											:"<br/>[style.italicsSex(This will result in just [npc2.name] dominantly fucking you!)]"))),
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+								List.of(Fetish.FETISH_SUBMISSIVE),
 								null, CorruptionLevel.THREE_DIRTY, null, null, null,
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(
-												getEnforcerLeader().isAttractedTo(Main.game.getPlayer())
+										List.of(getEnforcerLeader().isAttractedTo(Main.game.getPlayer())
 													?getEnforcerLeader()
 													:null,
 												getEnforcerSubordinate().isAttractedTo(Main.game.getPlayer())
 													?getEnforcerSubordinate()
 													:null),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(
-												!getEnforcerLeader().isAttractedTo(Main.game.getPlayer())
+										List.of(Main.game.getPlayer()),
+										List.of(!getEnforcerLeader().isAttractedTo(Main.game.getPlayer())
 													?getEnforcerLeader()
 													:null,
 												!getEnforcerSubordinate().isAttractedTo(Main.game.getPlayer())
@@ -1777,8 +1773,7 @@ public class EnforcerAlleywayDialogue {
 		
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			List<GameCharacter> enforcersWantingSex = Util.newArrayListOfValues(
-					getEnforcerLeader().isAttractedTo(Main.game.getPlayer())
+			List<GameCharacter> enforcersWantingSex = List.of(getEnforcerLeader().isAttractedTo(Main.game.getPlayer())
 						?getEnforcerLeader()
 						:null,
 					getEnforcerSubordinate().isAttractedTo(Main.game.getPlayer())
@@ -1801,7 +1796,7 @@ public class EnforcerAlleywayDialogue {
 							false, false,
 							new SMGeneric(
 									enforcersWantingSex,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									enforcersSpectating,
 									null),
 							AFTER_DEFEAT_SEX,
@@ -1820,7 +1815,7 @@ public class EnforcerAlleywayDialogue {
 							false, false,
 							new SMGeneric(
 									enforcersWantingSex,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									enforcersSpectating,
 									null,
 									ResponseTag.START_PACE_PLAYER_SUB_EAGER),
@@ -1836,7 +1831,7 @@ public class EnforcerAlleywayDialogue {
 							false, false,
 							new SMGeneric(
 									enforcersWantingSex,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									enforcersSpectating,
 									null,
 									ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
@@ -1926,7 +1921,7 @@ public class EnforcerAlleywayDialogue {
 			if(Main.sex.getAllParticipants(false).contains(getEnforcerLeader())) {
 				return UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_SEX_VICTORY", getEnforcers());
 			} else {
-				return UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_SEX_VICTORY", Util.newArrayListOfValues(getEnforcerSubordinate(), getEnforcerLeader()));
+				return UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_SEX_VICTORY", List.of(getEnforcerSubordinate(), getEnforcerLeader()));
 			}
 		}
 		@Override
@@ -1977,7 +1972,7 @@ public class EnforcerAlleywayDialogue {
 			if(Main.sex.getAllParticipants(false).contains(getEnforcerLeader())) {
 				sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_DEFEAT_SEX", getEnforcers()));
 			} else {
-				sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_DEFEAT_SEX", Util.newArrayListOfValues(getEnforcerSubordinate(), getEnforcerLeader())));
+				sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_DEFEAT_SEX", List.of(getEnforcerSubordinate(), getEnforcerLeader())));
 			}
 			
 			sb.append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "AFTER_DEFEAT_SEX_CONTINUE", getEnforcers()));

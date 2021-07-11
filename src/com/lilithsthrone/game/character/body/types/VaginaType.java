@@ -76,9 +76,9 @@ public class VaginaType {
 			FluidType.GIRL_CUM_HUMAN,
 			Race.HUMAN,
 			false,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
+			List.of(""),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 				+ " Within moments, the feeling starts to fade away, and with a surprised gasp, [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] shaped itself into a regular human vagina."
 				+ " A warm, tingling feeling spreads up through [npc.her] lower abdomen, and as the transformation comes to an end, [npc.she] [npc.verb(realise)] that [npc.her] internal reproductive organs have also transformed into those of a human."
@@ -91,24 +91,24 @@ public class VaginaType {
 			FluidType.GIRL_CUM_ANGEL,
 			Race.ANGEL,
 			false,
-			Util.newArrayListOfValues("angel-"),
-			Util.newArrayListOfValues("angel-"),
-			Util.newArrayListOfValues("irresistible", "perfect"),
+			List.of("angel-"),
+			List.of("angel-"),
+			List.of("irresistible", "perfect"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 				+ " Within moments, the feeling starts to fade away, and with a surprised gasp, [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] shaped itself into an absolutely perfect-looking angelic vagina."
 				+ " A warm, tingling feeling spreads up through [npc.her] lower abdomen, and as the transformation comes to an end, [npc.she] [npc.verb(realise)] that [npc.her] internal reproductive organs have also transformed into those of an angel."
 				+ "<br/>[npc.Name] now [npc.has] an [style.boldAngel(angel vagina)], with [npc.pussyColourPrimary(true)] labia and [npc.pussyColourSecondary(true)] internal walls.",
 			"[npc.she] [npc.has] #IF(npc.isPiercedVagina())a pierced,#ELSEan#ENDIF angelic pussy, with [npc.labiaSize], [npc.pussyPrimaryColour(true)] labia and [npc.pussySecondaryColour(true)] inner-walls.",
-			Util.newArrayListOfValues()) {
+			List.of()) {
 	};
 
 	public static AbstractVaginaType DEMON_COMMON = new AbstractVaginaType(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_DEMON,
 			Race.DEMON,
 			false,
-			Util.newArrayListOfValues("succubus-"),
-			Util.newArrayListOfValues("succubus-"),
-			Util.newArrayListOfValues("irresistible", "perfect"),
+			List.of("succubus-"),
+			List.of("succubus-"),
+			List.of("irresistible", "perfect"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " A strange, bubbling sensation starts running down deep into [npc.her] cunt,"
 						+ " and [npc.she] [npc.verb(let)] out a lewd moan as [npc.she] [npc.verb(feel)] a new set of muscles forming all along the inner-walls of [npc.her] pussy."
@@ -129,8 +129,7 @@ public class VaginaType {
 						+ "[npc.Name] now [npc.has] a [style.boldDemon(demonic vagina)], with [npc.pussyColourPrimary(true)] labia and [npc.pussyColourSecondary(true)] internal walls."
 					+"#ENDIF",
 			"[npc.she] [npc.has] #IF(npc.isPiercedVagina())a pierced,#ELSEa#ENDIF demonic pussy, with [npc.labiaSize], [npc.pussyPrimaryColour(true)] labia and [npc.pussySecondaryColour(true)] inner-walls.",
-			Util.newArrayListOfValues(
-				OrificeModifier.MUSCLE_CONTROL)) {
+			List.of(OrificeModifier.MUSCLE_CONTROL)) {
 	};
 
 //	public static AbstractVaginaType DEMON_EGGS = new AbstractVaginaType(BodyCoveringType.VAGINA,
@@ -172,9 +171,9 @@ public class VaginaType {
 			FluidType.GIRL_CUM_DOG_MORPH,
 			Race.DOG_MORPH,
 			false,
-			Util.newArrayListOfValues("dog-", "bitch-"),
-			Util.newArrayListOfValues("dog-", "bitch-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("dog-", "bitch-"),
+			List.of("dog-", "bitch-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed and puffed up into a distinctly dog-like form."
 				+ "</p>"
@@ -187,17 +186,16 @@ public class VaginaType {
 						+ " [npc.she] [npc.verb(feel)] [npc.her] female reproductive organs finishing their transformation."
 					+ "<br/>[npc.Name] now [npc.has] a [style.boldDogMorph(dog vagina)], with [npc.pussyColourPrimary(true)] labia and [npc.pussyColourSecondary(true)] internal walls.",
 			"[npc.she] [npc.has] #IF(npc.isPiercedVagina())a pierced,#ELSEa#ENDIF dog-pussy, with [npc.labiaSize], [npc.pussyPrimaryColour(true)] labia and [npc.pussySecondaryColour(true)] inner-walls.",
-			Util.newArrayListOfValues(
-				OrificeModifier.PUFFY)) {
+			List.of(OrificeModifier.PUFFY)) {
 	};
 
 	public static AbstractVaginaType WOLF_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_WOLF_MORPH,
 			Race.WOLF_MORPH,
 			false,
-			Util.newArrayListOfValues("wolf-"),
-			Util.newArrayListOfValues("wolf-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("wolf-"),
+			List.of("wolf-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed and puffed up into a distinctly wolf-like form."
 				+ "</p>"
@@ -210,17 +208,16 @@ public class VaginaType {
 						+ " [npc.she] [npc.verb(feel)] [npc.her] female reproductive organs finishing their transformation."
 					+ "<br/>[npc.Name] now [npc.has] a [style.boldWolfMorph(wolf vagina)], with [npc.pussyColourPrimary(true)] labia and [npc.pussyColourSecondary(true)] internal walls.",
 			"[npc.she] [npc.has] #IF(npc.isPiercedVagina())a pierced#ELSEa#ENDIF wolf-pussy, with [npc.labiaSize], [npc.pussyPrimaryColour(true)] labia and [npc.pussySecondaryColour(true)] inner-walls.",
-			Util.newArrayListOfValues(
-				OrificeModifier.PUFFY)) {
+			List.of(OrificeModifier.PUFFY)) {
 	};
 	
 	public static AbstractVaginaType FOX_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_FOX_MORPH,
 			Race.FOX_MORPH,
 			false,
-			Util.newArrayListOfValues("fox-", "vixen-"),
-			Util.newArrayListOfValues("fox-", "vixen-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("fox-", "vixen-"),
+			List.of("fox-", "vixen-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed and puffed up into a distinctly fox-like form."
 				+ "</p>"
@@ -233,17 +230,16 @@ public class VaginaType {
 						+ " [npc.she] [npc.verb(feel)] [npc.her] female reproductive organs finishing their transformation."
 					+ "<br/>[npc.Name] now [npc.has] a [style.boldFoxMorph(fox vagina)], with [npc.pussyColourPrimary(true)] labia and [npc.pussyColourSecondary(true)] internal walls.",
 			"[npc.she] [npc.has] #IF(npc.isPiercedVagina())a pierced#ELSEa#ENDIF fox-pussy, with [npc.labiaSize], [npc.pussyPrimaryColour(true)] labia and [npc.pussySecondaryColour(true)] inner-walls.",
-			Util.newArrayListOfValues(
-				OrificeModifier.PUFFY)) {
+			List.of(OrificeModifier.PUFFY)) {
 	};
 	
 	public static AbstractVaginaType CAT_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_CAT_MORPH,
 			Race.CAT_MORPH,
 			false,
-			Util.newArrayListOfValues("cat-"),
-			Util.newArrayListOfValues("cat-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("cat-"),
+			List.of("cat-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed into a distinctly cat-like form."
 				+ "</p>"
@@ -263,9 +259,9 @@ public class VaginaType {
 			FluidType.GIRL_CUM_SQUIRREL_MORPH,
 			Race.SQUIRREL_MORPH,
 			false,
-			Util.newArrayListOfValues("squirrel-"),
-			Util.newArrayListOfValues("squirrel-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("squirrel-"),
+			List.of("squirrel-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed into a distinctly squirrel-like form."
 				+ "</p>"
@@ -285,9 +281,9 @@ public class VaginaType {
 			FluidType.GIRL_CUM_RAT_MORPH,
 			Race.RAT_MORPH,
 			false,
-			Util.newArrayListOfValues("rat-"),
-			Util.newArrayListOfValues("rat-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("rat-"),
+			List.of("rat-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed into a distinctly rat-like form."
 				+ "</p>"
@@ -307,9 +303,9 @@ public class VaginaType {
 			FluidType.GIRL_CUM_RABBIT_MORPH,
 			Race.RABBIT_MORPH,
 			false,
-			Util.newArrayListOfValues("rabbit-"),
-			Util.newArrayListOfValues("rabbit-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("rabbit-"),
+			List.of("rabbit-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed into a distinctly rabbit-like form."
 				+ "</p>"
@@ -329,9 +325,9 @@ public class VaginaType {
 			FluidType.GIRL_CUM_BAT_MORPH,
 			Race.BAT_MORPH,
 			false,
-			Util.newArrayListOfValues("bat-"),
-			Util.newArrayListOfValues("bat-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("bat-"),
+			List.of("bat-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed into a distinctly bat-like form."
 				+ "</p>"
@@ -351,9 +347,9 @@ public class VaginaType {
 			FluidType.GIRL_CUM_ALLIGATOR_MORPH,
 			Race.ALLIGATOR_MORPH,
 			true,
-			Util.newArrayListOfValues("alligator-"),
-			Util.newArrayListOfValues("alligator-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("alligator-"),
+			List.of("alligator-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed into a distinctly alligator-like form."
 				+ "</p>"
@@ -373,9 +369,9 @@ public class VaginaType {
 			FluidType.GIRL_CUM_COW_MORPH,
 			Race.COW_MORPH,
 			false,
-			Util.newArrayListOfValues("cow-"),
-			Util.newArrayListOfValues("cow-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("cow-"),
+			List.of("cow-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed into a distinctly cow-like form."
 				+ "</p>"
@@ -395,9 +391,9 @@ public class VaginaType {
 			FluidType.GIRL_CUM_HORSE_MORPH,
 			Race.HORSE_MORPH,
 			false,
-			Util.newArrayListOfValues("horse-", "mare-"),
-			Util.newArrayListOfValues("horse-", "mare-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("horse-", "mare-"),
+			List.of("horse-", "mare-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " A strange, bubbling sensation starts running down deep into [npc.her] cunt,"
 						+ " and [npc.she] [npc.verb(let)] out a lewd moan as [npc.she] [npc.verb(feel)] a new set of muscles forming all along the inner-walls of [npc.her] pussy."
@@ -413,8 +409,7 @@ public class VaginaType {
 						+ " [npc.she] [npc.verb(feel)] [npc.her] female reproductive organs finishing their transformation."
 					+ "<br/>[npc.Name] now [npc.has] a [style.boldHorseMorph(horse vagina)], with [npc.pussyColourPrimary(true)] labia and [npc.pussyColourSecondary(true)] internal walls.",
 			"[npc.she] [npc.has] #IF(npc.isPiercedVagina())a pierced#ELSEa#ENDIF horse-pussy, with [npc.labiaSize], [npc.pussyPrimaryColour(true)] labia and [npc.pussySecondaryColour(true)] inner-walls.",
-			Util.newArrayListOfValues(
-				OrificeModifier.PUFFY,
+			List.of(OrificeModifier.PUFFY,
 				OrificeModifier.MUSCLE_CONTROL)) {
 	};
 
@@ -422,9 +417,9 @@ public class VaginaType {
 			FluidType.GIRL_CUM_REINDEER_MORPH,
 			Race.REINDEER_MORPH,
 			false,
-			Util.newArrayListOfValues("reindeer-"),
-			Util.newArrayListOfValues("reindeer-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("reindeer-"),
+			List.of("reindeer-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed itself and puffed up into a distinctly reindeer-like form."
 				+ "</p>"
@@ -437,17 +432,16 @@ public class VaginaType {
 						+ " [npc.she] [npc.verb(feel)] [npc.her] female reproductive organs finishing their transformation."
 					+ "<br/>[npc.Name] now [npc.has] a [style.boldReindeerMorph(reindeer vagina)], with [npc.pussyColourPrimary(true)] labia and [npc.pussyColourSecondary(true)] internal walls.",
 			"[npc.she] [npc.has] #IF(npc.isPiercedVagina())a pierced#ELSEa#ENDIF reindeer-pussy, with [npc.labiaSize], [npc.pussyPrimaryColour(true)] labia and [npc.pussySecondaryColour(true)] inner-walls.",
-			Util.newArrayListOfValues(
-				OrificeModifier.PUFFY)) {
+			List.of(OrificeModifier.PUFFY)) {
 	};
 
 	public static AbstractVaginaType HARPY = new AbstractVaginaType(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_HARPY,
 			Race.HARPY,
 			true,
-			Util.newArrayListOfValues("bird-"),
-			Util.newArrayListOfValues("bird-"),
-			Util.newArrayListOfValues("hot"),
+			List.of("bird-"),
+			List.of("bird-"),
+			List.of("hot"),
 			"[npc.She] [npc.verb(let)] out a squeal of excitement as a wave of pleasure runs up through [npc.her] groin, which increases in intensity as [npc.she] [npc.verb(feel)] [npc.her] slit uncontrollably shifting and contracting."
 					+ " Within moments, the feeling fades away, and [npc.she] [npc.verb(discover)] that [npc.her] pussy [npc.has] reformed itself into a distinctly bird-like form."
 				+ "</p>"

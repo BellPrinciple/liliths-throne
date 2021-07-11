@@ -27,144 +27,144 @@ public class AnusType {
 			Race.HUMAN,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 	
 	public static AbstractAnusType ANGEL = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.ANGEL,
 			null,
 			null,
-			Util.newArrayListOfValues("angelic", "perfect"),
-			Util.newArrayListOfValues("angelic", "perfect"),
-			Util.newArrayListOfValues()){
+			List.of("angelic", "perfect"),
+			List.of("angelic", "perfect"),
+			List.of()){
 	};
 	
 	public static AbstractAnusType DEMON_COMMON = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.DEMON,
 			null,
 			null,
-			Util.newArrayListOfValues("demonic", "irresistible"),
-			Util.newArrayListOfValues("demonic", "irresistible"),
-			Util.newArrayListOfValues(OrificeModifier.MUSCLE_CONTROL)){
+			List.of("demonic", "irresistible"),
+			List.of("demonic", "irresistible"),
+			List.of(OrificeModifier.MUSCLE_CONTROL)){
 	};
 	
 	public static AbstractAnusType COW_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.COW_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("cow-like", "bovine"),
-			Util.newArrayListOfValues("cow-like", "bovine"),
-			Util.newArrayListOfValues(OrificeModifier.PUFFY)){
+			List.of("cow-like", "bovine"),
+			List.of("cow-like", "bovine"),
+			List.of(OrificeModifier.PUFFY)){
 	};
 	
 	public static AbstractAnusType DOG_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.DOG_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 	
 	public static AbstractAnusType FOX_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.FOX_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 	
 	public static AbstractAnusType SQUIRREL_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.SQUIRREL_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 	
 	public static AbstractAnusType RAT_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.RAT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 	
 	public static AbstractAnusType RABBIT_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.RABBIT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 	
 	public static AbstractAnusType BAT_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.BAT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 	
 	public static AbstractAnusType WOLF_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.BAT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 	
 	public static AbstractAnusType CAT_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.CAT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 	
 	public static AbstractAnusType HORSE_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.HORSE_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("horse-like", "equine"),
-			Util.newArrayListOfValues("horse-like", "equine"),
-			Util.newArrayListOfValues(OrificeModifier.PUFFY)){
+			List.of("horse-like", "equine"),
+			List.of("horse-like", "equine"),
+			List.of(OrificeModifier.PUFFY)){
 	};
 	
 	public static AbstractAnusType REINDEER_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.REINDEER_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(OrificeModifier.PUFFY)){
+			List.of(""),
+			List.of(""),
+			List.of(OrificeModifier.PUFFY)){
 	};
 	
 	public static AbstractAnusType ALLIGATOR_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.ALLIGATOR_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 	
 	public static AbstractAnusType HARPY = new AbstractAnusType(BodyCoveringType.ANUS,
 			Race.HARPY,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 	
 	

@@ -115,7 +115,7 @@ public class Daddy extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_HEALTH_FANATIC);
 		this.addSpecialPerk(Perk.SPECIAL_CLOTHING_MASCULINITY_INDIFFERENCE);
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(Perk.FETISH_SEEDER),
+				List.of(Perk.FETISH_SEEDER),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 5),
 						new Value<>(PerkCategory.LUST, 1),
@@ -342,7 +342,7 @@ public class Daddy extends NPC {
 	
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(DaddySexActions.class);
+		return List.of(DaddySexActions.class);
 	}
 	
 	@Override

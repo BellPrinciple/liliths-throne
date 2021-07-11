@@ -28,17 +28,17 @@ public class FaceType {
 			MouthType.HUMAN,
 			null,
 			null,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, the transformation only lasts a matter of moments, leaving [npc.herHim] with a normal human face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldHuman(human face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldHuman(human tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], human face, [npc.materialDescriptor] [npc.faceFullDescription(true)].",
-			Util.newArrayListOfValues()){
+			List.of()){
 	};
 
 	public static AbstractFaceType ANGEL = new AbstractFaceType(BodyCoveringType.ANGEL,
@@ -46,17 +46,17 @@ public class FaceType {
 			MouthType.ANGEL,
 			null,
 			null,
-			Util.newArrayListOfValues("perfect", "flawless", "angelic"),
-			Util.newArrayListOfValues("perfect", "flawless", "angelic"),
+			List.of("perfect", "flawless", "angelic"),
+			List.of("perfect", "flawless", "angelic"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, the transformation only lasts a matter of moments, leaving [npc.herHim] with an angelic, human-looking face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
 					+ "[npc.Name] now [npc.has] an [style.boldAngel(angelic face)], [npc.materialDescriptor] [npc.faceFullDescription]."
 					+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] an [style.boldAngel(angelic tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], angelic face, [npc.materialDescriptor] [npc.faceFullDescription(true)].",
-			Util.newArrayListOfValues()){
+			List.of()){
 	};
 
 	public static AbstractFaceType DEMON_COMMON = new AbstractFaceType(BodyCoveringType.DEMON_COMMON,
@@ -64,12 +64,12 @@ public class FaceType {
 			MouthType.DEMON_COMMON,
 			null,
 			null,
-			Util.newArrayListOfValues("perfect", "flawless", "demonic"),
-			Util.newArrayListOfValues("perfect", "flawless", "demonic"),
+			List.of("perfect", "flawless", "demonic"),
+			List.of("perfect", "flawless", "demonic"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"#IF(npc.isShortStature())"
 				+ "Thankfully#IF(!npc.isPlayer())for [npc.herHim]#ENDIF, the transformation only lasts a matter of moments, leaving [npc.herHim] with an impish, human-looking face, [npc.materialDescriptor] [npc.faceSkin+].<br/>"
 				+ "[npc.Name] now [npc.has] a [style.boldImp(impish face)], [npc.materialDescriptor] [npc.faceFullDescription]."
@@ -80,7 +80,7 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldDemon(demonic tongue)]."
 			+ "#ENDIF",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], #IF(npc.isShortStature())impish#ELSEdemonic#ENDIF face, [npc.materialDescriptor] [npc.faceFullDescription(true)].",
-			Util.newArrayListOfValues()){
+			List.of()){
 	};
 
 	public static AbstractFaceType ALLIGATOR_MORPH = new AbstractFaceType(BodyCoveringType.ALLIGATOR_SCALES,
@@ -88,12 +88,12 @@ public class FaceType {
 			MouthType.ALLIGATOR_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic alligator-like", "alligator-like", "reptile"),
-			Util.newArrayListOfValues("anthropomorphic alligator-like", "alligator-like", "reptile"),
+			List.of("anthropomorphic alligator-like", "alligator-like", "reptile"),
+			List.of("anthropomorphic alligator-like", "alligator-like", "reptile"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic reptilian muzzle, and [npc.her] tongue transforms into a strong, alligator-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -105,11 +105,9 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldAlligatorMorph(strong, alligator-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, alligator-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a long, flat muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a long, flat muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
+			List.of(BodyPartTag.FACE_MUZZLE,
 					BodyPartTag.FACE_FANGS,
-					BodyPartTag.FACE_NATURAL_BALDNESS_SCALY
-				)){
+					BodyPartTag.FACE_NATURAL_BALDNESS_SCALY)){
 	};
 
 	public static AbstractFaceType BAT_MORPH = new AbstractFaceType(BodyCoveringType.BAT_FUR,
@@ -117,12 +115,12 @@ public class FaceType {
 			MouthType.BAT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic bat-like", "bat-like"),
-			Util.newArrayListOfValues("anthropomorphic bat-like", "bat-like"),
+			List.of("anthropomorphic bat-like", "bat-like"),
+			List.of("anthropomorphic bat-like", "bat-like"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic bat-like muzzle, and [npc.her] tongue transforms into a thin, bat-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -134,11 +132,9 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldBatMorph(thin, bat-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, bat-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a short muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a short muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
+			List.of(BodyPartTag.FACE_MUZZLE,
 					BodyPartTag.FACE_FANGS,
-					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY
-				)){
+					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY)){
 	};
 
 	public static AbstractFaceType CAT_MORPH = new AbstractFaceType(BodyCoveringType.FELINE_FUR,
@@ -146,12 +142,12 @@ public class FaceType {
 			MouthType.CAT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic cat-like", "cat-like", "feline"),
-			Util.newArrayListOfValues("anthropomorphic cat-like", "cat-like", "feline"),
+			List.of("anthropomorphic cat-like", "cat-like", "feline"),
+			List.of("anthropomorphic cat-like", "cat-like", "feline"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic feline muzzle, and [npc.her] tongue flattens and transforms into a cat-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -163,11 +159,9 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldCatMorph(flat, cat-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, cat-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a cute little feline muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a cute little feline muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
+			List.of(BodyPartTag.FACE_MUZZLE,
 					BodyPartTag.FACE_FANGS,
-					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY
-				)){
+					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY)){
 	};
 
 //	public static AbstractFaceType CAT_MORPH_PANTHER = new AbstractFaceType(BodyCoveringType.FELINE_FUR,
@@ -204,12 +198,12 @@ public class FaceType {
 			MouthType.COW_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic cow-like", "cow-like", "bovine"),
-			Util.newArrayListOfValues("anthropomorphic cow-like", "cow-like", "bovine"),
+			List.of("anthropomorphic cow-like", "cow-like", "bovine"),
+			List.of("anthropomorphic cow-like", "cow-like", "bovine"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic bovine-like muzzle, and [npc.her] tongue transforms into a strong, cow-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -221,10 +215,8 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldCowMorph(strong, cow-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, cow-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a bovine muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a bovine muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
-					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY
-				)){
+			List.of(BodyPartTag.FACE_MUZZLE,
+					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY)){
 	};
 
 	public static AbstractFaceType DOG_MORPH = new AbstractFaceType(BodyCoveringType.CANINE_FUR,
@@ -232,12 +224,12 @@ public class FaceType {
 			MouthType.DOG_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic dog-like", "dog-like", "canine"),
-			Util.newArrayListOfValues("anthropomorphic dog-like", "dog-like", "canine"),
+			List.of("anthropomorphic dog-like", "dog-like", "canine"),
+			List.of("anthropomorphic dog-like", "dog-like", "canine"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic canine muzzle, and [npc.her] tongue flattens and grows wider, turning into a dog-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -249,11 +241,9 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldDogMorph(flat, dog-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, dog-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a canine muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a canine muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
+			List.of(BodyPartTag.FACE_MUZZLE,
 					BodyPartTag.FACE_FANGS,
-					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY
-				)){
+					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY)){
 	};
 
 	public static AbstractFaceType FOX_MORPH = new AbstractFaceType(BodyCoveringType.FOX_FUR,
@@ -261,12 +251,12 @@ public class FaceType {
 			MouthType.FOX_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic fox-like", "fox-like"),
-			Util.newArrayListOfValues("anthropomorphic fox-like", "fox-like"),
+			List.of("anthropomorphic fox-like", "fox-like"),
+			List.of("anthropomorphic fox-like", "fox-like"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic vulpine muzzle, and [npc.her] tongue flattens and transforms into a fox-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -278,11 +268,9 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldFoxMorph(flat, fox-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, fox-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a slender, vulpine muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a slender, vulpine muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
+			List.of(BodyPartTag.FACE_MUZZLE,
 					BodyPartTag.FACE_FANGS,
-					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY
-				)){
+					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY)){
 	};
 
 	public static AbstractFaceType HARPY = new AbstractFaceType(BodyCoveringType.FEATHERS,
@@ -290,12 +278,12 @@ public class FaceType {
 			MouthType.HARPY,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic bird-like", "bird-like"),
-			Util.newArrayListOfValues("anthropomorphic bird-like", "bird-like"),
+			List.of("anthropomorphic bird-like", "bird-like"),
+			List.of("anthropomorphic bird-like", "bird-like"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they fuse together and push out into a short beak, and [npc.her] tongue thins down, turning into a bird-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -309,10 +297,8 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldHarpy(thin, bird-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, bird-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a beak.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a beak.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_BEAK,
-					BodyPartTag.FACE_NATURAL_BALDNESS_AVIAN
-				)){
+			List.of(BodyPartTag.FACE_BEAK,
+					BodyPartTag.FACE_NATURAL_BALDNESS_AVIAN)){
 	};
 
 	public static AbstractFaceType HORSE_MORPH = new AbstractFaceType(BodyCoveringType.HORSE_HAIR,
@@ -320,12 +306,12 @@ public class FaceType {
 			MouthType.HORSE_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic horse-like", "horse-like", "equine"),
-			Util.newArrayListOfValues("anthropomorphic horse-like", "horse-like", "equine"),
+			List.of("anthropomorphic horse-like", "horse-like", "equine"),
+			List.of("anthropomorphic horse-like", "horse-like", "equine"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic equine muzzle, and [npc.her] tongue transforms into a strong, horse-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -337,10 +323,8 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldHorseMorph(strong, horse-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, horse-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a long, equine muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a long, equine muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
-					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY // Note: Some horse races only have hair on the neck aka a mane so its not totally unnatural to have a bald face
-				)){
+			List.of(BodyPartTag.FACE_MUZZLE,
+					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY)){
 	};
 
 	public static AbstractFaceType RABBIT_MORPH = new AbstractFaceType(BodyCoveringType.RABBIT_FUR,
@@ -348,12 +332,12 @@ public class FaceType {
 			MouthType.RABBIT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic rabbit-like", "rabbit-like"),
-			Util.newArrayListOfValues("anthropomorphic rabbit-like", "rabbit-like"),
+			List.of("anthropomorphic rabbit-like", "rabbit-like"),
+			List.of("anthropomorphic rabbit-like", "rabbit-like"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic rabbit-like muzzle, and [npc.her] tongue transforms into a thin, rabbit-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -365,10 +349,8 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldRabbitMorph(thin, rabbit-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, rabbit-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a short muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a short muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
-					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY
-				)){
+			List.of(BodyPartTag.FACE_MUZZLE,
+					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY)){
 	};
 
 	public static AbstractFaceType RAT_MORPH = new AbstractFaceType(BodyCoveringType.RAT_FUR,
@@ -376,12 +358,12 @@ public class FaceType {
 			MouthType.RAT_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic rat-like", "rat-like", "rodent"),
-			Util.newArrayListOfValues("anthropomorphic rat-like", "rat-like", "rodent"),
+			List.of("anthropomorphic rat-like", "rat-like", "rodent"),
+			List.of("anthropomorphic rat-like", "rat-like", "rodent"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic rat-like muzzle, and [npc.her] tongue transforms into a thin, rat-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -393,10 +375,8 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldRatMorph(thin, rat-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, rat-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a long, rodent muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a long, rodent muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
-					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY
-				)){
+			List.of(BodyPartTag.FACE_MUZZLE,
+					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY)){
 	};
 
 	public static AbstractFaceType REINDEER_MORPH = new AbstractFaceType(BodyCoveringType.REINDEER_FUR,
@@ -404,12 +384,12 @@ public class FaceType {
 			MouthType.REINDEER_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic reindeer-like", "reindeer-like", "reindeer"),
-			Util.newArrayListOfValues("anthropomorphic reindeer-like", "reindeer-like", "reindeer"),
+			List.of("anthropomorphic reindeer-like", "reindeer-like", "reindeer"),
+			List.of("anthropomorphic reindeer-like", "reindeer-like", "reindeer"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic reindeer muzzle, and [npc.her] tongue transforms into a strong, reindeer-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -421,10 +401,8 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldReindeerMorph(strong, reindeer-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, reindeer-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a long muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a long muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
-					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY
-				)){
+			List.of(BodyPartTag.FACE_MUZZLE,
+					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY)){
 	};
 
 	public static AbstractFaceType SQUIRREL_MORPH = new AbstractFaceType(BodyCoveringType.SQUIRREL_FUR,
@@ -432,12 +410,12 @@ public class FaceType {
 			MouthType.SQUIRREL_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic squirrel-like", "squirrel-like", "rodent"),
-			Util.newArrayListOfValues("anthropomorphic squirrel-like", "squirrel-like", "rodent"),
+			List.of("anthropomorphic squirrel-like", "squirrel-like", "rodent"),
+			List.of("anthropomorphic squirrel-like", "squirrel-like", "rodent"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic squirrel-like muzzle, and [npc.her] tongue transforms into a thin, squirrel-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -449,10 +427,8 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldSquirrelMorph(thin, squirrel-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, squirrel-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a short muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a short muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
-					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY
-				)){
+			List.of(BodyPartTag.FACE_MUZZLE,
+					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY)){
 	};
 
 	public static AbstractFaceType WOLF_MORPH = new AbstractFaceType(BodyCoveringType.LYCAN_FUR,
@@ -460,12 +436,12 @@ public class FaceType {
 			MouthType.WOLF_MORPH,
 			null,
 			null,
-			Util.newArrayListOfValues("anthropomorphic wolf-like", "wolf-like"),
-			Util.newArrayListOfValues("anthropomorphic wolf-like", "wolf-like"),
+			List.of("anthropomorphic wolf-like", "wolf-like"),
+			List.of("anthropomorphic wolf-like", "wolf-like"),
 			"nose",
 			"noses",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"[npc.Her] nose and mouth twitch and transform as they push out into an anthropomorphic lupine muzzle, and [npc.her] tongue flattens and grows wider, turning into a wolf-like one."
 				+ "#IF(npc.getBodyMaterial()==BODY_MATERIAL_FLESH)"
 					+ " A layer of [npc.faceSkin+] quickly grows to cover [npc.her] new face"
@@ -477,11 +453,9 @@ public class FaceType {
 				+ " Within [npc.her] [npc.mouth], [npc.sheHasFull] a [style.boldWolfMorph(flat, wolf-like tongue)].",
 			"[npc.SheHasFull] [npc.a_feminineDescriptor(true)], anthropomorphic, wolf-like face [npc.materialCompositionDescriptor] [npc.faceFullDescription(true)] and complete with a long muzzle.",
 			"[npc.SheHasFull] the [npc.feminineDescriptor(true)] face of a feral [npc.legRace], which is [npc.materialDescriptor] [npc.faceFullDescription(true)] and complete with a long muzzle.",
-			Util.newArrayListOfValues(
-					BodyPartTag.FACE_MUZZLE,
+			List.of(BodyPartTag.FACE_MUZZLE,
 					BodyPartTag.FACE_FANGS,
-					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY
-				)){
+					BodyPartTag.FACE_NATURAL_BALDNESS_FURRY)){
 	};
 	
 

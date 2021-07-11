@@ -131,8 +131,8 @@ public class HelenaHotel {
 			@Override
 			public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 				return Util.newHashMapOfValues(
-						new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.VAGINA)),
-						new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)));
+						new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS, CoverableArea.VAGINA)),
+						new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)));
 			}
 			@Override
 			public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {
@@ -597,7 +597,7 @@ public class HelenaHotel {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 							}
 						};
 						
@@ -621,7 +621,7 @@ public class HelenaHotel {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 							}
 						};
 					}
@@ -1363,8 +1363,8 @@ public class HelenaHotel {
 								SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.MISSIONARY_ORAL,
 								new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))),
+										new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
 						null,
 						null,
 						DATE_APARTMENT_BEDROOM_AFTER_ROMANCE_SEX,
@@ -1375,7 +1375,7 @@ public class HelenaHotel {
 					}
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueVagina.CUNNILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueVagina.CUNNILINGUS_START, false, true));
 					}
 				});
 				
@@ -1397,8 +1397,8 @@ public class HelenaHotel {
 									:SexSlotSitting.SITTING,
 								new SexType(SexParticipantType.NORMAL, SexAreaOrifice.BREAST, SexAreaPenetration.TONGUE),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.NIPPLES, CoverableArea.VAGINA)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))),
+										new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.NIPPLES, CoverableArea.VAGINA)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
 						null,
 						null,
 						DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1416,8 +1416,7 @@ public class HelenaHotel {
 					}
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueNipple.SUCKLE_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueNipple.SUCKLE_START, false, true),
 								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), FingerVagina.FINGERING_START, false, true));
 					}
 				});
@@ -1439,8 +1438,8 @@ public class HelenaHotel {
 										SexPosition.SITTING, SexSlotSitting.PERFORMING_ORAL, SexSlotSitting.SITTING,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.BREAST, SexAreaPenetration.PENIS),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.NIPPLES)),
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.NIPPLES)),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1458,7 +1457,7 @@ public class HelenaHotel {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisBreasts.FUCKING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisBreasts.FUCKING_START, false, true));
 							}
 						});
 					}
@@ -1477,8 +1476,8 @@ public class HelenaHotel {
 									SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.MISSIONARY_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))),
+											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1496,7 +1495,7 @@ public class HelenaHotel {
 						}
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueVagina.CUNNILINGUS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueVagina.CUNNILINGUS_START, false, true));
 						}
 					});
 				}
@@ -1526,7 +1525,7 @@ public class HelenaHotel {
 											:SexSlotLyingDown.LYING_DOWN,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.VAGINA),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA)))),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1544,7 +1543,7 @@ public class HelenaHotel {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 							}
 						});
 					}
@@ -1575,7 +1574,7 @@ public class HelenaHotel {
 											:SexSlotSitting.SITTING,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1593,7 +1592,7 @@ public class HelenaHotel {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisMouth.BLOWJOB_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisMouth.BLOWJOB_START, false, true));
 							}
 						});
 					}
@@ -1617,8 +1616,8 @@ public class HelenaHotel {
 									SexPosition.LYING_DOWN, SexSlotLyingDown.SIXTY_NINE, SexSlotLyingDown.LYING_DOWN,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, sixtyNinePenisFocus?SexAreaPenetration.PENIS:SexAreaOrifice.VAGINA),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.MOUTH, CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH, sixtyNinePenisFocus?CoverableArea.PENIS:CoverableArea.VAGINA)))),
+											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH, CoverableArea.VAGINA)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH, sixtyNinePenisFocus?CoverableArea.PENIS:CoverableArea.VAGINA)))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1636,8 +1635,7 @@ public class HelenaHotel {
 						}
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), sixtyNinePenisFocus?PenisMouth.GIVING_BLOWJOB_START:TongueVagina.CUNNILINGUS_START, false, true),
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), sixtyNinePenisFocus?PenisMouth.GIVING_BLOWJOB_START:TongueVagina.CUNNILINGUS_START, false, true),
 									new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 						}
 					});
@@ -1651,8 +1649,8 @@ public class HelenaHotel {
 									SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.SIXTY_NINE,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, sixtyNinePenisFocus?SexAreaPenetration.PENIS:SexAreaOrifice.VAGINA),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.MOUTH, CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH, sixtyNinePenisFocus?CoverableArea.PENIS:CoverableArea.VAGINA)))),
+											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH, CoverableArea.VAGINA)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH, sixtyNinePenisFocus?CoverableArea.PENIS:CoverableArea.VAGINA)))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1670,8 +1668,7 @@ public class HelenaHotel {
 						}
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), sixtyNinePenisFocus?PenisMouth.BLOWJOB_START:TongueVagina.RECEIVING_CUNNILINGUS_START, false, true),
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), sixtyNinePenisFocus?PenisMouth.BLOWJOB_START:TongueVagina.RECEIVING_CUNNILINGUS_START, false, true),
 									new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueVagina.CUNNILINGUS_START, false, true));
 						}
 					});
@@ -1699,8 +1696,8 @@ public class HelenaHotel {
 										SexPosition.LYING_DOWN, SexSlotLyingDown.SCISSORING, SexSlotLyingDown.LYING_DOWN,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.CLIT, SexAreaPenetration.CLIT),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA)))),
+												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1718,7 +1715,7 @@ public class HelenaHotel {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), ClitClit.TRIBBING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), ClitClit.TRIBBING_START, false, true));
 							}
 						});
 						
@@ -1731,8 +1728,8 @@ public class HelenaHotel {
 										SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.SCISSORING,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.CLIT, SexAreaPenetration.CLIT),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA)))),
+												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1750,7 +1747,7 @@ public class HelenaHotel {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), ClitClit.TRIBBING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), ClitClit.TRIBBING_START, false, true));
 							}
 						});
 					}
@@ -1773,15 +1770,15 @@ public class HelenaHotel {
 											SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 									null,
 									null,
 									DATE_APARTMENT_BEDROOM_AFTER_SEX,
 									UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_BEDROOM_COWGIRL")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true));
 								}
 							});
 						}
@@ -1802,15 +1799,15 @@ public class HelenaHotel {
 											SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.MISSIONARY,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 									null,
 									null,
 									DATE_APARTMENT_BEDROOM_AFTER_SEX,
 									UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_BEDROOM_MISSIONARY")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisVagina.PENIS_FUCKING_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisVagina.PENIS_FUCKING_START, false, true));
 								}
 							});
 						}
@@ -1830,15 +1827,15 @@ public class HelenaHotel {
 											SexPosition.ALL_FOURS, SexSlotAllFours.ALL_FOURS, SexSlotAllFours.BEHIND,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 									null,
 									null,
 									DATE_APARTMENT_BEDROOM_AFTER_SEX,
 									UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_BEDROOM_DOGGY")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisVagina.PENIS_FUCKING_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisVagina.PENIS_FUCKING_START, false, true));
 								}
 							});
 						}
@@ -1861,8 +1858,8 @@ public class HelenaHotel {
 											SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.MATING_PRESS,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 									null,
 									null,
 									DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1875,7 +1872,7 @@ public class HelenaHotel {
 								}
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisVagina.PENIS_FUCKING_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisVagina.PENIS_FUCKING_START, false, true));
 								}
 							});
 						}
@@ -1918,8 +1915,8 @@ public class HelenaHotel {
 										SexPosition.LYING_DOWN, SexSlotLyingDown.FACE_SITTING_REVERSE, SexSlotLyingDown.LYING_DOWN,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.ANUS)),
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))),
+												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1934,7 +1931,7 @@ public class HelenaHotel {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), TongueAnus.RECEIVING_ANILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), TongueAnus.RECEIVING_ANILINGUS_START, false, true));
 							}
 						});
 						
@@ -1947,8 +1944,8 @@ public class HelenaHotel {
 										SexPosition.ALL_FOURS, SexSlotAllFours.ALL_FOURS, SexSlotAllFours.BEHIND_ORAL,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.ANUS)),
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))),
+												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1966,7 +1963,7 @@ public class HelenaHotel {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueAnus.ANILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueAnus.ANILINGUS_START, false, true));
 							}
 						});
 					}
@@ -1997,8 +1994,8 @@ public class HelenaHotel {
 												:SexSlotAllFours.BEHIND,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
 											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.ANUS)),
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 									null,
 									null,
 									DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2013,9 +2010,9 @@ public class HelenaHotel {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
 									if(Main.game.getNpc(Helena.class).hasFetish(Fetish.FETISH_DOMINANT)) {
-										return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), PenisAnus.USING_PENIS_START, false, true));
+										return List.of(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), PenisAnus.USING_PENIS_START, false, true));
 									} else {
-										return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisAnus.PENIS_FUCKING_START, false, true));
+										return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisAnus.PENIS_FUCKING_START, false, true));
 									}
 								}
 							});
@@ -2034,15 +2031,15 @@ public class HelenaHotel {
 												SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 												new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
 												Util.newHashMapOfValues(
-														new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.ANUS)),
-														new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+														new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
+														new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 										null,
 										null,
 										DATE_APARTMENT_BEDROOM_AFTER_SEX,
 										UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_BEDROOM_COWGIRL_ANAL")) {
 									@Override
 									public List<InitialSexActionInformation> getInitialSexActions() {
-										return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), PenisAnus.USING_PENIS_START, false, true));
+										return List.of(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), PenisAnus.USING_PENIS_START, false, true));
 									}
 								});
 							}
@@ -2059,15 +2056,15 @@ public class HelenaHotel {
 												SexPosition.ALL_FOURS, SexSlotAllFours.ALL_FOURS, SexSlotAllFours.BEHIND,
 												new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
 												Util.newHashMapOfValues(
-														new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.ANUS)),
-														new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+														new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
+														new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 										null,
 										null,
 										DATE_APARTMENT_BEDROOM_AFTER_SEX,
 										UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_BEDROOM_DOGGY_ANAL")) {
 									@Override
 									public List<InitialSexActionInformation> getInitialSexActions() {
-										return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisAnus.PENIS_FUCKING_START, false, true));
+										return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisAnus.PENIS_FUCKING_START, false, true));
 									}
 								});
 							}
@@ -2088,7 +2085,7 @@ public class HelenaHotel {
 										SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.FOOT, SexAreaPenetration.PENIS),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2104,7 +2101,7 @@ public class HelenaHotel {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), PenisFoot.FOOT_JOB_SINGLE_GIVING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), PenisFoot.FOOT_JOB_SINGLE_GIVING_START, false, true));
 							}
 						});
 					}
@@ -2168,8 +2165,8 @@ public class HelenaHotel {
 									SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2185,7 +2182,7 @@ public class HelenaHotel {
 						}
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true));
 						}
 					};
 					
@@ -2209,8 +2206,8 @@ public class HelenaHotel {
 										:SexSlotLyingDown.MISSIONARY,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2226,7 +2223,7 @@ public class HelenaHotel {
 						}
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisVagina.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisVagina.PENIS_FUCKING_START, false, true));
 						}
 					};
 					
@@ -2237,7 +2234,7 @@ public class HelenaHotel {
 									?"Mount Helena and sadistically take her virginity in the doggy-style position."
 									:"Sadistically take Helena's virginity in the missionary position.")
 								+ "<br/>[style.italicsSub(This will cause Helena to permanently gain the submissive and masochistic fetishes!)]",
-							Util.newArrayListOfValues(Fetish.FETISH_SADIST),
+							List.of(Fetish.FETISH_SADIST),
 							null,
 							CorruptionLevel.FIVE_CORRUPT,
 							null,
@@ -2256,8 +2253,8 @@ public class HelenaHotel {
 										:SexSlotLyingDown.MISSIONARY,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))),
+											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2274,7 +2271,7 @@ public class HelenaHotel {
 						}
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisVagina.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), PenisVagina.PENIS_FUCKING_START, false, true));
 						}
 					};
 				}
@@ -2420,7 +2417,7 @@ public class HelenaHotel {
 							UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotelDate", "DATE_APARTMENT_BEDROOM_AFTER_SEX_MORNING_COWGIRL")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), TongueMouth.KISS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Helena.class), Main.game.getPlayer(), TongueMouth.KISS_START, false, true));
 						}
 					};
 					
@@ -2440,7 +2437,7 @@ public class HelenaHotel {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
 							if(!Main.game.getPlayer().isTaur()) {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueMouth.KISS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Helena.class), TongueMouth.KISS_START, false, true));
 							}
 							return super.getInitialSexActions();
 						}

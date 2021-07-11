@@ -370,9 +370,9 @@ public class RalphOral {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_PREGNANCY);
+				return List.of(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_PREGNANCY);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_IMPREGNATION);
+				return List.of(Fetish.FETISH_IMPREGNATION);
 			}
 		}
 	};
@@ -436,9 +436,9 @@ public class RalphOral {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_ANAL_RECEIVING);
+				return List.of(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_ANAL_RECEIVING);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_ANAL_GIVING);
+				return List.of(Fetish.FETISH_ANAL_GIVING);
 			}
 		}
 	};
@@ -1952,16 +1952,16 @@ public class RalphOral {
 		public List<SexAreaInterface> getAreasCummedIn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(!cumProvider.isPlayer() && cumTarget.equals(Main.sex.getTargetedPartner(cumProvider))) {
 				if (Main.sex.getAllOngoingSexAreas(cumTarget, SexAreaOrifice.VAGINA).contains(SexAreaPenetration.PENIS) && Main.sex.getCharacterOngoingSexArea(cumTarget, SexAreaOrifice.VAGINA).contains(cumProvider)) {
-					return Util.newArrayListOfValues(SexAreaOrifice.VAGINA);
+					return List.of(SexAreaOrifice.VAGINA);
 					
 				} else if (Main.sex.getAllOngoingSexAreas(cumTarget, SexAreaOrifice.ANUS).contains(SexAreaPenetration.PENIS) && Main.sex.getCharacterOngoingSexArea(cumTarget, SexAreaOrifice.ANUS).contains(cumProvider)) {
-					return Util.newArrayListOfValues(SexAreaOrifice.ANUS);
+					return List.of(SexAreaOrifice.ANUS);
 					
 				} else if (Main.sex.getAllOngoingSexAreas(cumTarget, SexAreaOrifice.MOUTH).contains(SexAreaPenetration.PENIS) && Main.sex.getCharacterOngoingSexArea(cumTarget, SexAreaOrifice.MOUTH).contains(cumProvider)) {
-					return Util.newArrayListOfValues(SexAreaOrifice.MOUTH);
+					return List.of(SexAreaOrifice.MOUTH);
 					
 				} else if (Main.sex.getAllOngoingSexAreas(cumTarget, SexAreaOrifice.NIPPLE).contains(SexAreaPenetration.PENIS) && Main.sex.getCharacterOngoingSexArea(cumTarget, SexAreaOrifice.NIPPLE).contains(cumProvider)) {
-					return Util.newArrayListOfValues(SexAreaOrifice.NIPPLE);
+					return List.of(SexAreaOrifice.NIPPLE);
 					
 				} else {
 					return null;

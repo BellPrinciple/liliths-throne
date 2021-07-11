@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.dominion.harpyNests;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.dominion.HarpyBimbo;
@@ -16,7 +18,6 @@ import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.world.Weather;
 
 /**
@@ -188,8 +189,8 @@ public class HarpyNestBimbo {
 					return new ResponseSex("Sex", "Have dominant sex with [bimboHarpy.name].",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(HarpyBimbo.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(HarpyBimbo.class)),
 							null,
 							null), HARPY_NEST_BIMBO_AFTER_SEX, "<p>"
 								+ "Eager to put [harpyBimbo.name] in her place in front of her inner-circle, you reach down and grab her by her wings."
@@ -230,7 +231,7 @@ public class HarpyNestBimbo {
 						
 				} else if (index == 2) {
 					return new Response("Bimbo queen", "This bitch is, like, super not cool. You should totally convince the nest that you should be their queen!", HARPY_NEST_BIMBO_QUEEN,
-							Util.newArrayListOfValues(Fetish.FETISH_BIMBO), null, null, Femininity.FEMININE_STRONG, null) {
+							List.of(Fetish.FETISH_BIMBO), null, null, Femininity.FEMININE_STRONG, null) {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().values.add(DialogueFlagValue.bimboEncountered);
@@ -313,7 +314,7 @@ public class HarpyNestBimbo {
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
 				return new Response("Bimbo queen", "Well, you, like, tried to talk and stuff, but this bitch isn't listening! You should totally convince the nest that you should be their queen!", HARPY_NEST_BIMBO_QUEEN,
-						Util.newArrayListOfValues(Fetish.FETISH_BIMBO), null, null, Femininity.FEMININE_STRONG, null) {
+						List.of(Fetish.FETISH_BIMBO), null, null, Femininity.FEMININE_STRONG, null) {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().values.add(DialogueFlagValue.bimboPacified);
@@ -461,8 +462,8 @@ public class HarpyNestBimbo {
 				return new ResponseSex("Sex", "Have dominant sex with [bimboHarpy.name] in front of her flock.",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(HarpyBimbo.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(HarpyBimbo.class)),
 						null,
 						null), HARPY_NEST_BIMBO_AFTER_SEX, "<p>"
 							+ "Eager to put [harpyBimbo.name] in her place in front of her inner-circle, you reach down and grab her by her wings."
@@ -584,7 +585,7 @@ public class HarpyNestBimbo {
 				return new Response("Open wide",
 						"Allow [bimboHarpy.Name] to push the lollipop into your mouth... [style.boldBad(Warning:)] <b>Due to the nature of harpies needing a special form, this transformation bypasses TF preferences!</b>",
 						HARPY_NEST_BIMBO_FIGHT_LOSE_PUNISHMENT,
-						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING),
+						List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING),
 						Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel(),
 						null,
 						null,
@@ -698,7 +699,7 @@ public class HarpyNestBimbo {
 				return new Response("Open wide",
 						"Allow [bimboHarpy.Name] to push the lollipop into your mouth... [style.boldBad(Warning:)] <b>Due to the nature of harpies needing a special form, this transformation bypasses TF preferences!</b>",
 						HARPY_NEST_BIMBO_FIGHT_LOSE_PUNISHMENT,
-						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING),
+						List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING),
 						Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel(),
 						null,
 						null,
@@ -767,8 +768,8 @@ public class HarpyNestBimbo {
 				return new ResponseSex("Sex", "Have dominant sex with [bimboHarpy.name].",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(HarpyBimbo.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(HarpyBimbo.class)),
 						null,
 						null), HARPY_NEST_BIMBO_AFTER_SEX, "<p>"
 							+ "Eager to put [harpyBimbo.name] in her place in front of her inner-circle, you reach down and grab her by her wings."

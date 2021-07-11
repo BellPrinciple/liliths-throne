@@ -6458,6 +6458,6 @@ public class Body implements XMLSaving {
 	 * @return The randomly chosen type of the corresponding BodyPart
 	 */
 	public BodyPartTypeInterface randomTypeFrom(BodyPartTypeInterface... values) {
-		return Util.randomItemFrom(Util.newArrayListOfValues(values));
+		return Util.randomItemFrom(List.of(values));
 	}
 }

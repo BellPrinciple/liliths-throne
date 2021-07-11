@@ -233,12 +233,12 @@ public class PartnerTalk {
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
 				if(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())==SexPace.SUB_RESISTING) {
-					return Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM);
+					return List.of(Fetish.FETISH_NON_CON_DOM);
 				}
 				
 			} else {
 				if(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())==SexPace.SUB_RESISTING) {
-					return Util.newArrayListOfValues(Fetish.FETISH_NON_CON_SUB);
+					return List.of(Fetish.FETISH_NON_CON_SUB);
 				}
 			}
 

@@ -238,7 +238,7 @@ public class RatWarrensCaptive extends NPC {
 		collar.addEffect(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MAJOR_DRAIN, 0));
 		this.equipClothingFromNowhere(collar, true, this);
 		
-		applyMilkingEquipment(true, Util.newArrayListOfValues(InventorySlot.NIPPLE, InventorySlot.VAGINA));
+		applyMilkingEquipment(true, List.of(InventorySlot.NIPPLE, InventorySlot.VAGINA));
 	}
 	
 	

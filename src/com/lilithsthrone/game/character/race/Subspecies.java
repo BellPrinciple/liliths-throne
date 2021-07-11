@@ -165,8 +165,7 @@ public class Subspecies {
 					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.FOUR_COMMON)),
 			Util.newHashMapOfValues(
 					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesWeighting(Body body, AbstractRace race) {
 			if(race==Race.HUMAN) {
@@ -218,8 +217,7 @@ public class Subspecies {
 			"A typical angel.",
 			null,
 			Util.newHashMapOfValues(),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 10;
@@ -277,8 +275,7 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_CORRUPTION, 1000f),
 					new Value<>(Attribute.HEALTH_MAXIMUM, 1000f),
 					new Value<>(Attribute.MANA_MAXIMUM, 1000f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
+			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Lilith's Spawn",
 			"Lilith's Spawns",
@@ -298,8 +295,7 @@ public class Subspecies {
 			"One of the seven elder lilin.",
 			null,
 			Util.newHashMapOfValues(),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 10_000;
@@ -339,8 +335,7 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_CORRUPTION, 500f),
 					new Value<>(Attribute.HEALTH_MAXIMUM, 500f),
 					new Value<>(Attribute.MANA_MAXIMUM, 500f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
+			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Lilith's Brood",
 			"Lilith's Broods",
@@ -360,8 +355,7 @@ public class Subspecies {
 			"A lilin.",
 			null,
 			null,
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 5_000;
@@ -402,8 +396,7 @@ public class Subspecies {
 					new Value<>(Attribute.SPELL_COST_MODIFIER, 25f),
 					new Value<>(Attribute.DAMAGE_LUST, 25f),
 					new Value<>(Attribute.DAMAGE_SPELLS, 75f)),
-			Util.newArrayListOfValues(
-					"[style.boldDemon(Demonic)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
+			List.of("[style.boldDemon(Demonic)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Demonic Origins",
 			"Demonic Origins'",
@@ -428,8 +421,7 @@ public class Subspecies {
 					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.TWO_RARE)),
 			Util.newHashMapOfValues(
 					new Value<>(WorldType.NIGHTLIFE_CLUB,  SubspeciesSpawnRarity.TWO_RARE)),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 20;
@@ -578,8 +570,7 @@ public class Subspecies {
 					new Value<>(Attribute.SPELL_COST_MODIFIER, 20f),
 					new Value<>(Attribute.DAMAGE_LUST, 20f),
 					new Value<>(Attribute.DAMAGE_SPELLS, 60f)),
-			Util.newArrayListOfValues(
-					"<b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'>Limited self-transformations</b>",
+			List.of("<b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'>Limited self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Demonic Half-breeds",
 			"Demonic Half-breeds'",
@@ -606,8 +597,7 @@ public class Subspecies {
 			Util.newHashMapOfValues(
 					new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.ONE_VERY_RARE),
 					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ONE_VERY_RARE)),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 5;
@@ -726,8 +716,7 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_CORRUPTION, 200f),
 					new Value<>(Attribute.RESISTANCE_LUST, -25f),
 					new Value<>(Attribute.DAMAGE_LUST, -75f)),
-			Util.newArrayListOfValues(
-					"[style.boldDemon(Demonic)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
+			List.of("[style.boldDemon(Demonic)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Impish Fiends",
 			"Impish Fiends'",
@@ -748,8 +737,7 @@ public class Subspecies {
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.FOUR_COMMON)),
 			Util.newHashMapOfValues(),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 1;
@@ -799,8 +787,7 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_CORRUPTION, 200f),
 					new Value<>(Attribute.RESISTANCE_LUST, -50f),
 					new Value<>(Attribute.DAMAGE_LUST, -50f)),
-			Util.newArrayListOfValues(
-					"[style.boldDemon(Demonic)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
+			List.of("[style.boldDemon(Demonic)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Impish Fiends",
 			"Impish Fiends'",
@@ -821,8 +808,7 @@ public class Subspecies {
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.FOUR_COMMON)),
 			Util.newHashMapOfValues(),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 2;
@@ -1457,8 +1443,7 @@ public class Subspecies {
 		}
 		@Override
 		public void applySpeciesChanges(Body body) {
-			List<Colour> naturalWolfFurColours = Util.newArrayListOfValues(
-					PresetColour.COVERING_WHITE,
+			List<Colour> naturalWolfFurColours = List.of(PresetColour.COVERING_WHITE,
 					PresetColour.COVERING_GREY,
 					PresetColour.COVERING_BLACK,
 					PresetColour.COVERING_JET_BLACK);
@@ -1707,7 +1692,7 @@ public class Subspecies {
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
-			Colour fennecColour = Util.randomItemFrom(Util.newArrayListOfValues(PresetColour.COVERING_DIRTY_BLONDE, PresetColour.COVERING_BLEACH_BLONDE, PresetColour.COVERING_TAN));
+			Colour fennecColour = Util.randomItemFrom(List.of(PresetColour.COVERING_DIRTY_BLONDE, PresetColour.COVERING_BLEACH_BLONDE, PresetColour.COVERING_TAN));
 			
 			body.getCoverings().put(BodyCoveringType.FOX_FUR, new Covering(BodyCoveringType.FOX_FUR, CoveringPattern.NONE, fennecColour, false, fennecColour, false));
 			body.getCoverings().put(BodyCoveringType.HAIR_FOX_FUR, new Covering(BodyCoveringType.FOX_FUR, CoveringPattern.NONE, fennecColour, false, fennecColour, false));
@@ -1726,7 +1711,7 @@ public class Subspecies {
 			if(race==Race.FOX_MORPH) {
 				AbstractBodyCoveringType foxFur = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_FUR):BodyCoveringType.FOX_FUR;
 				Covering fox_fur = body.getCoverings().get(foxFur);
-				List<Colour> fennecColours = Util.newArrayListOfValues(PresetColour.COVERING_DIRTY_BLONDE, PresetColour.COVERING_BLEACH_BLONDE, PresetColour.COVERING_TAN);
+				List<Colour> fennecColours = List.of(PresetColour.COVERING_DIRTY_BLONDE, PresetColour.COVERING_BLEACH_BLONDE, PresetColour.COVERING_TAN);
 				
 				if (fennecColours.contains(fox_fur.getPrimaryColour())
 						&& (fennecColours.contains(fox_fur.getSecondaryColour()) || fox_fur.getPattern()==CoveringPattern.NONE)
@@ -1794,8 +1779,7 @@ public class Subspecies {
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.YOUKO_FOREST, SubspeciesSpawnRarity.TWO_RARE)),
 			Util.newHashMapOfValues(),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.DISABLE_SPAWN_PREFERENCE)) {
+			null, List.of(SubspeciesFlag.DISABLE_SPAWN_PREFERENCE)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 40;
@@ -1931,8 +1915,7 @@ public class Subspecies {
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.YOUKO_FOREST, SubspeciesSpawnRarity.ONE_VERY_RARE)),
 			Util.newHashMapOfValues(),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.DISABLE_SPAWN_PREFERENCE)) {
+			null, List.of(SubspeciesFlag.DISABLE_SPAWN_PREFERENCE)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 40;
@@ -2058,8 +2041,7 @@ public class Subspecies {
 			Util.newHashMapOfValues(
 					new Value<>(WorldRegion.YOUKO_FOREST, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE)),
 			Util.newHashMapOfValues(),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.DISABLE_SPAWN_PREFERENCE)) {
+			null, List.of(SubspeciesFlag.DISABLE_SPAWN_PREFERENCE)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 40;
@@ -2136,7 +2118,7 @@ public class Subspecies {
 			if(race==Race.FOX_MORPH) {
 				AbstractBodyCoveringType foxFur = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_FUR):BodyCoveringType.FOX_FUR;
 				Covering fox_fur = body.getCoverings().get(foxFur);
-				List<Colour> fennecColours = Util.newArrayListOfValues(PresetColour.COVERING_DIRTY_BLONDE, PresetColour.COVERING_BLEACH_BLONDE, PresetColour.COVERING_TAN);
+				List<Colour> fennecColours = List.of(PresetColour.COVERING_DIRTY_BLONDE, PresetColour.COVERING_BLEACH_BLONDE, PresetColour.COVERING_TAN);
 				
 				if (fennecColours.contains(fox_fur.getPrimaryColour())
 						&& (fennecColours.contains(fox_fur.getSecondaryColour()) || fox_fur.getPattern()==CoveringPattern.NONE)
@@ -2385,7 +2367,7 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
 					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 25f)),
-			Util.newArrayListOfValues("[style.boldExcellent(100%)] chance of escape vs non-cheetah-morphs"),
+			List.of("[style.boldExcellent(100%)] chance of escape vs non-cheetah-morphs"),
 			"Curious Kitties",
 			"Curious Kitties",
 			"CAT_MORPH_BASIC",
@@ -3937,7 +3919,7 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 0f),
 					new Value<>(Attribute.MAJOR_ARCANE, 0f),
 					new Value<>(Attribute.MAJOR_CORRUPTION, 25f)),
-			Util.newArrayListOfValues(),
+			List.of(),
 			"Slimy Fun",
 			"Slimy Funs",
 			"SLIME_BASIC",
@@ -3958,8 +3940,7 @@ public class Subspecies {
 					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.FOUR_COMMON)),
 			Util.newHashMapOfValues(
 					new Value<>(WorldType.BAT_CAVERNS, SubspeciesSpawnRarity.FOUR_COMMON)),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public AbstractItemType getTransformativeItem(GameCharacter owner) {
 			if(getTransformativeItemId()==null || getTransformativeItemId().isEmpty()) {
@@ -4544,8 +4525,7 @@ public class Subspecies {
 			Util.newHashMapOfValues(
 				new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.FOUR_COMMON),
 				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
-			null, Util.newArrayListOfValues(
-				SubspeciesFlag.DISABLE_SPAWN_PREFERENCE,
+			null, List.of(SubspeciesFlag.DISABLE_SPAWN_PREFERENCE,
 				SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
 		@Override
 		public String getName(GameCharacter character) {
@@ -4666,8 +4646,7 @@ public class Subspecies {
 			Util.newHashMapOfValues(
 				new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.TWO_RARE),
 				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
-			null, Util.newArrayListOfValues(
-				SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
+			null, List.of(SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
 		@Override
 		public void applySpeciesChanges(Body body) {
 			Colour ravenColour = PresetColour.COVERING_BLACK;
@@ -4771,8 +4750,7 @@ public class Subspecies {
 			Util.newHashMapOfValues(
 				new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.TWO_RARE),
 				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
-			null, Util.newArrayListOfValues(
-				SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
+			null, List.of(SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
 		@Override
 		public void applySpeciesChanges(Body body) {
 			body.getCoverings().put(BodyCoveringType.FEATHERS, new Covering(BodyCoveringType.FEATHERS, CoveringPattern.NONE, PresetColour.COVERING_WHITE, false, PresetColour.COVERING_WHITE, false));
@@ -4875,8 +4853,7 @@ public class Subspecies {
 			Util.newHashMapOfValues(
 					new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.ONE_VERY_RARE),
 					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
+			null, List.of(SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
 		@Override
 		public void applySpeciesChanges(Body body) {
 			body.getCoverings().put(BodyCoveringType.FEATHERS, new Covering(BodyCoveringType.FEATHERS, CoveringPattern.NONE, PresetColour.COVERING_BROWN_DARK, false, PresetColour.COVERING_BROWN_DARK, false));
@@ -4991,8 +4968,7 @@ public class Subspecies {
 					new Value<>(WorldRegion.VOLCANO, SubspeciesSpawnRarity.TWO_RARE)),
 			Util.newHashMapOfValues(
 					new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE)),
-			null, Util.newArrayListOfValues(
-					SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
+			null, List.of(SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
 		@Override
 		public void applySpeciesChanges(Body body) {
 			CoveringPattern pattern = CoveringPattern.OMBRE;
@@ -5065,8 +5041,7 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 15f),
 					new Value<>(Attribute.DAMAGE_FIRE, 50f),
 					new Value<>(Attribute.RESISTANCE_FIRE, 50f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
+			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
 			"Fire Elementals",
 			"Fire Elementals'",
 			"ELEMENTAL_FIRE_BASIC",
@@ -5082,8 +5057,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 5)),
 			PresetColour.SPELL_SCHOOL_FIRE,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An arcane elemental bound to the school of Fire.", null, Util.newHashMapOfValues(), null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			"An arcane elemental bound to the school of Fire.", null, Util.newHashMapOfValues(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 50_000;
@@ -5146,8 +5120,7 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 50f),
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 50f),
 					new Value<>(Attribute.RESISTANCE_PHYSICAL, 50f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
+			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
 			"Earth Elementals",
 			"Earth Elementals'",
 			"ELEMENTAL_EARTH_BASIC",
@@ -5163,8 +5136,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 5)),
 			PresetColour.SPELL_SCHOOL_EARTH,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An arcane elemental bound to the school of Earth.", null, Util.newHashMapOfValues(), null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			"An arcane elemental bound to the school of Earth.", null, Util.newHashMapOfValues(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return ELEMENTAL_FIRE.getSubspeciesOverridePriority();
@@ -5225,8 +5197,7 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 15f),
 					new Value<>(Attribute.DAMAGE_ICE, 50f),
 					new Value<>(Attribute.RESISTANCE_ICE, 50f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
+			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
 			"Water Elementals",
 			"Water Elementals'",
 			"ELEMENTAL_WATER_BASIC",
@@ -5242,8 +5213,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 5)),
 			PresetColour.SPELL_SCHOOL_WATER,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An arcane elemental bound to the school of Water.", null, Util.newHashMapOfValues(), null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			"An arcane elemental bound to the school of Water.", null, Util.newHashMapOfValues(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return ELEMENTAL_FIRE.getSubspeciesOverridePriority();
@@ -5303,8 +5273,7 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
 					new Value<>(Attribute.DAMAGE_POISON, 50f),
 					new Value<>(Attribute.RESISTANCE_POISON, 50f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
+			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
 			"Air Elementals",
 			"Air Elementals'",
 			"ELEMENTAL_AIR_BASIC",
@@ -5320,8 +5289,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 5)),
 			PresetColour.SPELL_SCHOOL_AIR,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An arcane elemental bound to the school of Air.", null, Util.newHashMapOfValues(), null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			"An arcane elemental bound to the school of Air.", null, Util.newHashMapOfValues(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return ELEMENTAL_FIRE.getSubspeciesOverridePriority();
@@ -5381,8 +5349,7 @@ public class Subspecies {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 15f),
 					new Value<>(Attribute.DAMAGE_LUST, 50f),
 					new Value<>(Attribute.RESISTANCE_LUST, 50f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
+			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
 			"Arcane Elementals",
 			"Arcane Elementals'",
 			"ELEMENTAL_ARCANE_BASIC",
@@ -5398,8 +5365,7 @@ public class Subspecies {
 					new Value<>(PerkCategory.ARCANE, 5)),
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An arcane elemental bound to the school of Arcane.", null, Util.newHashMapOfValues(), null, Util.newArrayListOfValues(
-					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			"An arcane elemental bound to the school of Arcane.", null, Util.newHashMapOfValues(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return ELEMENTAL_FIRE.getSubspeciesOverridePriority();

@@ -111,7 +111,7 @@ public class SMNyanSex extends SexManagerDefault {
 		for(GameCharacter participant : Main.sex.getAllParticipants()) {
 			if((participant instanceof Nyan && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanAnalTalk))
 					|| participant instanceof NyanMum && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.nyanmumAnalTalk)) {
-				bannedMap.put(participant, Util.newArrayListOfValues(SexAreaOrifice.ANUS));
+				bannedMap.put(participant, List.of(SexAreaOrifice.ANUS));
 			}
 		}
 		
@@ -121,8 +121,7 @@ public class SMNyanSex extends SexManagerDefault {
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
 		//return Util.newArrayListOfValues(allowedPosition);
-		List<AbstractSexPosition> positions = Util.newArrayListOfValues(
-				SexPosition.AGAINST_WALL,
+		List<AbstractSexPosition> positions = List.of(SexPosition.AGAINST_WALL,
 				SexPosition.ALL_FOURS,
 				SexPosition.LYING_DOWN,
 				SexPosition.STANDING,
@@ -151,7 +150,7 @@ public class SMNyanSex extends SexManagerDefault {
 		Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
 		for(GameCharacter participant : Main.sex.getAllParticipants()) {
 			if(!participant.isPlayer()) {
-				map.put(participant, Util.newArrayListOfValues(CoverableArea.VAGINA));
+				map.put(participant, List.of(CoverableArea.VAGINA));
 			}
 		}
 		return map;

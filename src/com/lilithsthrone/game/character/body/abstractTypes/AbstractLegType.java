@@ -984,19 +984,17 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 	public BodyPartClothingBlock getBodyPartClothingBlock() {
 		if(this.getFootType()==FootType.HOOFS) {
 			return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(
-							InventorySlot.FOOT),
+					List.of(InventorySlot.FOOT),
 					this.getRace(),
 					"Due to the shape of [npc.namePos] hoofs, only hoof-compatible clothing can be worn in this slot.",
-					Util.newArrayListOfValues(ItemTag.FITS_HOOFS, ItemTag.FITS_HOOFS_EXCLUSIVE));
+					List.of(ItemTag.FITS_HOOFS, ItemTag.FITS_HOOFS_EXCLUSIVE));
 		}
 		if(this.getFootType()==FootType.TALONS) {
 			return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(
-							InventorySlot.FOOT),
+					List.of(InventorySlot.FOOT),
 					this.getRace(),
 					"Due to the shape of [npc.namePos] talons, only talon-compatible clothing can be worn in this slot.",
-					Util.newArrayListOfValues(ItemTag.FITS_TALONS, ItemTag.FITS_TALONS_EXCLUSIVE));
+					List.of(ItemTag.FITS_TALONS, ItemTag.FITS_TALONS_EXCLUSIVE));
 		}
 		return null;
 	}

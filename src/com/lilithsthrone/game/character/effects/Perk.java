@@ -102,9 +102,9 @@ public class Perk {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			if(owner.isFeminine()) {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_PINK));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_PINK));
 			} else {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_BLUE));
 			}
 			return super.getSVGString(owner);
 		}
@@ -129,9 +129,9 @@ public class Perk {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			if(owner.isFeminine()) {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_PINK));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_PINK));
 			} else {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_BLUE));
 			}
 			return super.getSVGString(owner);
 		}
@@ -156,9 +156,9 @@ public class Perk {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			if(owner.isFeminine()) {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_PINK));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_PINK));
 			} else {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_BLUE));
 			}
 			return super.getSVGString(owner);
 		}
@@ -184,9 +184,9 @@ public class Perk {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			if(owner.isFeminine()) {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_PINK));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_PINK));
 			} else {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_BLUE));
 			}
 			return super.getSVGString(owner);
 		}
@@ -212,9 +212,9 @@ public class Perk {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			if(owner.isFeminine()) {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_PINK));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_PINK));
 			} else {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_BLUE));
 			}
 			return super.getSVGString(owner);
 		}
@@ -240,9 +240,9 @@ public class Perk {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			if(owner.isFeminine()) {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_PINK));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_PINK));
 			} else {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_BLUE));
 			}
 			return super.getSVGString(owner);
 		}
@@ -268,9 +268,9 @@ public class Perk {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			if(owner.isFeminine()) {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_PINK));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_PINK));
 			} else {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_BLUE));
 			}
 			return super.getSVGString(owner);
 		}
@@ -296,9 +296,9 @@ public class Perk {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			if(owner.isFeminine()) {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_PINK));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_PINK));
 			} else {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_BLUE));
 			}
 			return super.getSVGString(owner);
 		}
@@ -326,9 +326,9 @@ public class Perk {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			if(owner.isFeminine()) {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_PINK));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_PINK));
 			} else {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_BLUE));
 			}
 			return super.getSVGString(owner);
 		}
@@ -356,9 +356,9 @@ public class Perk {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			if(owner.isFeminine()) {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_PINK));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_PINK));
 			} else {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_BLUE));
 			}
 			return super.getSVGString(owner);
 		}
@@ -386,9 +386,9 @@ public class Perk {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			if(owner.isFeminine()) {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_PINK));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_PINK));
 			} else {
-				generateSVGImage(this.pathName, Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE));
+				generateSVGImage(this.pathName, List.of(PresetColour.CLOTHING_BLUE));
 			}
 			return super.getSVGString(owner);
 		}
@@ -627,7 +627,7 @@ public class Perk {
 			"royal jelly",
 			PerkCategory.JOB,
 			"perks/jobs/npc_slime_queen",
-			Util.newArrayListOfValues(PresetColour.CLOTHING_GOLD, PresetColour.CLOTHING_RED_VERY_DARK, PresetColour.CLOTHING_GOLD),
+			List.of(PresetColour.CLOTHING_GOLD, PresetColour.CLOTHING_RED_VERY_DARK, PresetColour.CLOTHING_GOLD),
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_LUST, 50)),
 			null,
@@ -680,8 +680,7 @@ public class Perk {
 			"ruthless leadership",
 			PerkCategory.JOB,
 			"perks/jobs/npc_rat_gang",
-			Util.newArrayListOfValues(
-					PresetColour.CLOTHING_BLACK,
+			List.of(PresetColour.CLOTHING_BLACK,
 					PresetColour.CLOTHING_BLACK,
 					PresetColour.CLOTHING_GOLD),
 			Util.newHashMapOfValues(
@@ -703,8 +702,7 @@ public class Perk {
 			"sharpest fangs",
 			PerkCategory.JOB,
 			"perks/jobs/npc_rat_gang",
-			Util.newArrayListOfValues(
-					PresetColour.CLOTHING_BLACK,
+			List.of(PresetColour.CLOTHING_BLACK,
 					PresetColour.CLOTHING_BLACK,
 					PresetColour.CLOTHING_SILVER),
 			Util.newHashMapOfValues(
@@ -726,8 +724,7 @@ public class Perk {
 			"one of us",
 			PerkCategory.JOB,
 			"perks/jobs/npc_rat_gang",
-			Util.newArrayListOfValues(
-					PresetColour.CLOTHING_BLACK,
+			List.of(PresetColour.CLOTHING_BLACK,
 					PresetColour.CLOTHING_BLACK,
 					PresetColour.CLOTHING_COPPER),
 			Util.newHashMapOfValues(
@@ -749,8 +746,7 @@ public class Perk {
 			"horse trainer",
 			PerkCategory.JOB,
 			"perks/jobs/npc_stable_mistress",
-			Util.newArrayListOfValues(
-					PresetColour.RACE_HORSE_MORPH),
+			List.of(PresetColour.RACE_HORSE_MORPH),
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.HEALTH_MAXIMUM, 25),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 10),
@@ -770,8 +766,7 @@ public class Perk {
 			"dutiful daughter",
 			PerkCategory.JOB,
 			"perks/jobs/npc_lyssieth_guard",
-			Util.newArrayListOfValues(
-					PresetColour.DAMAGE_TYPE_PHYSICAL,
+			List.of(PresetColour.DAMAGE_TYPE_PHYSICAL,
 					PresetColour.CLOTHING_STEEL,
 					PresetColour.CLOTHING_BLACK),
 			Util.newHashMapOfValues(
@@ -811,8 +806,7 @@ public class Perk {
 			"Weight of Responsibility",
 			PerkCategory.JOB,
 			"perks/jobs/mayor",
-			Util.newArrayListOfValues(
-					PresetColour.BASE_GOLD,
+			List.of(PresetColour.BASE_GOLD,
 					PresetColour.BASE_AQUA,
 					PresetColour.BASE_GOLD),
 			Util.newHashMapOfValues(
@@ -849,8 +843,7 @@ public class Perk {
 			"Merciless Raider",
 			PerkCategory.JOB,
 			"perks/jobs/lunette_raider",
-			Util.newArrayListOfValues(
-					PresetColour.BASE_PURPLE,
+			List.of(PresetColour.BASE_PURPLE,
 					PresetColour.BASE_CRIMSON),
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 15),
@@ -913,7 +906,7 @@ public class Perk {
 					new Value<>(Attribute.MAJOR_CORRUPTION, 50),
 					new Value<>(Attribute.DAMAGE_LUST, 25),
 					new Value<>(Attribute.RESISTANCE_LUST, 2)),
-			Util.newArrayListOfValues("[style.boldExcellent(Doubles)] all slave and self-prostitution income")) {
+			List.of("[style.boldExcellent(Doubles)] all slave and self-prostitution income")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.NameIsFull] experienced at selling [npc.her] body to strangers in order to make a living. After having sex so many times, it takes a lot to get [npc.herHim] really turned on.");
@@ -929,7 +922,7 @@ public class Perk {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 10),
 					new Value<>(Attribute.HEALTH_MAXIMUM, 15)),
-			Util.newArrayListOfValues("[style.boldExcellent(Triples)] all mugging income")) {
+			List.of("[style.boldExcellent(Triples)] all mugging income")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.Name] [npc.verb(live)] a life of crime, stealing from the rich and poor alike.");
@@ -945,7 +938,7 @@ public class Perk {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.CRITICAL_DAMAGE, 25),
 					new Value<>(Attribute.HEALTH_MAXIMUM, 15)),
-			Util.newArrayListOfValues("[style.boldExcellent(-50%)] chance of enemy escape")) {
+			List.of("[style.boldExcellent(-50%)] chance of enemy escape")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.NameIsFull] an expert at tracking down and capturing fugitives, and as such, enemies have a hard time escaping from [npc.herHim] in combat.");
@@ -957,7 +950,7 @@ public class Perk {
 			"Builder",
 			PerkCategory.JOB,
 			"perks/jobs/npc_construction",
-			Util.newArrayListOfValues(PresetColour.CLOTHING_YELLOW, PresetColour.CLOTHING_BLACK),
+			List.of(PresetColour.CLOTHING_YELLOW, PresetColour.CLOTHING_BLACK),
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 5),
 					new Value<>(Attribute.HEALTH_MAXIMUM, 15)),
@@ -974,7 +967,7 @@ public class Perk {
 			"Matter manipulation",
 			PerkCategory.JOB,
 			"perks/jobs/npc_construction",
-			Util.newArrayListOfValues(PresetColour.CLOTHING_PURPLE, PresetColour.CLOTHING_BLACK),
+			List.of(PresetColour.CLOTHING_PURPLE, PresetColour.CLOTHING_BLACK),
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_ARCANE, 10),
 					new Value<>(Attribute.MANA_MAXIMUM, 25)),
@@ -1001,7 +994,7 @@ public class Perk {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 2),
 					new Value<>(Attribute.DAMAGE_UNARMED, 5),
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 5)),
-			Util.newArrayListOfValues("[style.boldExcellent(Boosts)] 'Well Rested' bonus")) {
+			List.of("[style.boldExcellent(Boosts)] 'Well Rested' bonus")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "With so much free time on [npc.herPos] hands, [npc.nameHas] managed to improve [npc.herself] in several different ways."
@@ -1017,7 +1010,7 @@ public class Perk {
 			PresetColour.BASE_BROWN,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.CRITICAL_DAMAGE, 50)),
-			Util.newArrayListOfValues("[style.boldExcellent(+25%)] all slave income")) {
+			List.of("[style.boldExcellent(+25%)] all slave income")) {
 		@Override
 		public String getName(GameCharacter owner) {
 			if(owner!=null && owner.isFeminine()) {
@@ -1041,7 +1034,7 @@ public class Perk {
 			PresetColour.BASE_YELLOW,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_ARCANE, 10)),
-			Util.newArrayListOfValues("[style.boldExcellent(25%)] discount in all stores")) {
+			List.of("[style.boldExcellent(25%)] discount in all stores")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.NamePos] student discount has never failed [npc.herPro] before!"
@@ -1057,7 +1050,7 @@ public class Perk {
 			PresetColour.BASE_GREY,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_LUST, 25)),
-			Util.newArrayListOfValues("[style.boldExcellent(Double)] length of all spell effects")) {
+			List.of("[style.boldExcellent(Double)] length of all spell effects")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.Name] [npc.verb(find)] that [npc.herPos] abilities as a musician translate quite well into the art of seduction."
@@ -1073,7 +1066,7 @@ public class Perk {
 			PresetColour.BASE_BLUE_LIGHT,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.SPELL_COST_MODIFIER, 10)),
-			Util.newArrayListOfValues("[style.boldExcellent(Triple)] all slave obedience gains")) {
+			List.of("[style.boldExcellent(Triple)] all slave obedience gains")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.Name] [npc.verb(know)] exactly how to deal with unruly students."
@@ -1089,7 +1082,7 @@ public class Perk {
 			PresetColour.BASE_PURPLE,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_SPELLS, 25)),
-			Util.newArrayListOfValues("[style.boldExcellent(+25%)] to all experience gains")) {
+			List.of("[style.boldExcellent(+25%)] to all experience gains")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.Name] [npc.verb(keep)] a diary of [npc.herPos] personal thoughts and encounters, allowing [npc.herPro] to reflect upon and learn from [npc.herPos] experiences."
@@ -1105,8 +1098,7 @@ public class Perk {
 			PresetColour.BASE_ORANGE,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.RESISTANCE_POISON, 25)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Double)] duration of all potion effects",
+			List.of("[style.boldExcellent(Double)] duration of all potion effects",
 					"[style.boldExcellent(Doubles)] potion effect limit")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1119,12 +1111,12 @@ public class Perk {
 			"Project Manager",
 			PerkCategory.JOB,
 			"perks/jobs/construction",
-			Util.newArrayListOfValues(PresetColour.CLOTHING_YELLOW, PresetColour.CLOTHING_BLACK),
+			List.of(PresetColour.CLOTHING_YELLOW, PresetColour.CLOTHING_BLACK),
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 5),
 					new Value<>(Attribute.HEALTH_MAXIMUM, 10),
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 5)),
-			Util.newArrayListOfValues("[style.boldExcellent(Halves)] cost of all room upgrades"),
+			List.of("[style.boldExcellent(Halves)] cost of all room upgrades"),
 			null, null, null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1145,7 +1137,7 @@ public class Perk {
 					new Value<>(Attribute.HEALTH_MAXIMUM, 25),
 					new Value<>(Attribute.RESISTANCE_PHYSICAL, 5),
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 10)),
-			Util.newArrayListOfValues("Your first strike in combat deals [style.boldExcellent(double)] damage")) {
+			List.of("Your first strike in combat deals [style.boldExcellent(double)] damage")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.NameHas] spent a considerable amount of time training to fight, and as a result, [npc.she] [npc.is] far stronger and healthier than a normal person."
@@ -1161,7 +1153,7 @@ public class Perk {
 			PresetColour.BASE_TEAL,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 10)),
-			Util.newArrayListOfValues("All non-zero escape chances in combat are boosted to [style.boldExcellent(100%)]")) {
+			List.of("All non-zero escape chances in combat are boosted to [style.boldExcellent(100%)]")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.Name] [npc.is] a world-class sprinter, and [npc.has] a guaranteed 100% success of escaping any combat situation where running away is an option.");
@@ -1178,8 +1170,7 @@ public class Perk {
 					new Value<>(Attribute.HEALTH_MAXIMUM, 10),
 					new Value<>(Attribute.DAMAGE_MELEE_WEAPON, 25),
 					new Value<>(Attribute.DAMAGE_RANGED_WEAPON, 25)),
-			Util.newArrayListOfValues(
-					"All [style.colourCorruption(corruption)] gains are [style.colourBad(doubled)]",
+			List.of("All [style.colourCorruption(corruption)] gains are [style.colourBad(doubled)]",
 					"[style.colourGood(+0.25)] to [style.colourExcellent(all resistances)] per 1 corruption")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1198,8 +1189,7 @@ public class Perk {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_LUST, 5),
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 5)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Boosted)] Maid's set bonuses",
+			List.of("[style.boldExcellent(Boosted)] Maid's set bonuses",
 					"[style.boldExcellent(Double)] slave income from maids and butlers")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1217,8 +1207,7 @@ public class Perk {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 5),
 					new Value<>(Attribute.RESISTANCE_LUST, 25)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Boosted)] Butler's set bonuses",
+			List.of("[style.boldExcellent(Boosted)] Butler's set bonuses",
 					"[style.boldExcellent(Double)] slave income from maids and butlers")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1235,8 +1224,7 @@ public class Perk {
 			PresetColour.BASE_BLUE_DARK,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.HEALTH_MAXIMUM, 25)),
-			Util.newArrayListOfValues(
-					"All incorrect English spellings are [style.boldExcellent(automatically fixed)]",
+			List.of("All incorrect English spellings are [style.boldExcellent(automatically fixed)]",
 					"Enemies are blinded by your [style.colourFreedom(freedom)] for [style.colourExcellent(-1)] <span style='color:"+Attribute.ACTION_POINTS.getColour().toWebHexString()+";'>"+Attribute.ACTION_POINTS.getName()+"</span>",
 					"Burger effects are [style.colourGood(doubled)]")) {
 		@Override
@@ -1866,8 +1854,7 @@ public class Perk {
 			PresetColour.ATTRIBUTE_MANA,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MANA_MAXIMUM, -25)),
-			Util.newArrayListOfValues(
-					"[style.colourExcellent(Absorb 50%)] of any combatant's remaining [style.colourMana("+Attribute.MANA_MAXIMUM.getName()+")] when they are defeated")) {
+			List.of("[style.colourExcellent(Absorb 50%)] of any combatant's remaining [style.colourMana("+Attribute.MANA_MAXIMUM.getName()+")] when they are defeated")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1904,8 +1891,7 @@ public class Perk {
 			"perks/misc_observant",
 			PresetColour.GENERIC_ARCANE,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 5)),
-			Util.newArrayListOfValues(
-					"<span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>Gender detection</span>")) {
+			List.of("<span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>Gender detection</span>")) {
 		@Override
 		public String applyPerkGained(GameCharacter character) {
 			return UtilText.parsePlayerThought("");
@@ -1936,7 +1922,7 @@ public class Perk {
 			"perks/physical_accurate",
 			PresetColour.GENERIC_ARCANE,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_SPELLS, 5)),
-			Util.newArrayListOfValues("<span style='color:"+ PresetColour.GENERIC_COMBAT.toWebHexString()+ ";'>Critical</span> spells apply <b style='color:"+PresetColour.ATTRIBUTE_LUST.toWebHexString()+";'>Arcane weakness</b>")) {
+			List.of("<span style='color:"+ PresetColour.GENERIC_COMBAT.toWebHexString()+ ";'>Critical</span> spells apply <b style='color:"+PresetColour.ATTRIBUTE_LUST.toWebHexString()+";'>Arcane weakness</b>")) {
 		@Override
 		public String applyPerkGained(GameCharacter character) {
 			return UtilText.parsePlayerThought("");
@@ -2150,7 +2136,7 @@ public class Perk {
 			"perks/fitness_runner",
 			PresetColour.ATTRIBUTE_PHYSIQUE,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 3)),
-			Util.newArrayListOfValues("<span style='color:"+ PresetColour.ATTRIBUTE_PHYSIQUE.toWebHexString()+ ";'>Improved escape chance</span>")) {
+			List.of("<span style='color:"+ PresetColour.ATTRIBUTE_PHYSIQUE.toWebHexString()+ ";'>Improved escape chance</span>")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2168,7 +2154,7 @@ public class Perk {
 			"perks/fitness_runner_2",
 			PresetColour.ATTRIBUTE_PHYSIQUE,
 			Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, 5)),
-			Util.newArrayListOfValues("<span style='color:"+ PresetColour.ATTRIBUTE_PHYSIQUE.toWebHexString()+ ";'>Improved escape chance</span>")) {
+			List.of("<span style='color:"+ PresetColour.ATTRIBUTE_PHYSIQUE.toWebHexString()+ ";'>Improved escape chance</span>")) {
 		@Override
 		public String getName(GameCharacter character) {
 			if (character!=null && character.isFeminine()) {
@@ -2191,7 +2177,7 @@ public class Perk {
 			"perks/regeneration",
 			PresetColour.ATTRIBUTE_PHYSIQUE,
 			Util.newHashMapOfValues(new Value<>(Attribute.MANA_MAXIMUM, -25)),
-			Util.newArrayListOfValues("[style.boldExcellent(Regenerate 5%)] total [style.boldHealth("+Attribute.HEALTH_MAXIMUM.getName()+")] per turn in combat")) {
+			List.of("[style.boldExcellent(Regenerate 5%)] total [style.boldHealth("+Attribute.HEALTH_MAXIMUM.getName()+")] per turn in combat")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "At the expense of some of [npc.namePos] "+Attribute.MANA_MAXIMUM.getName()+", the arcane's natural healing properties will now be amplified when in the presence of [npc.her] adrenaline.");
@@ -2206,7 +2192,7 @@ public class Perk {
 			"perks/unarmed_training",
 			PresetColour.ATTRIBUTE_PHYSIQUE,
 			Util.newHashMapOfValues(new Value<>(Attribute.CRITICAL_DAMAGE, 25)),
-			Util.newArrayListOfValues("[style.colourUnarmed(Base unarmed damage)] [style.colourExcellent(doubled)]")) {
+			List.of("[style.colourUnarmed(Base unarmed damage)] [style.colourExcellent(doubled)]")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.NameHasFull] received formal training in martial arts, allowing [npc.herHim] to deal just as much damage in unarmed combat as [npc.her] strongest foe.");
@@ -2219,7 +2205,7 @@ public class Perk {
 			PerkCategory.LUST,
 			"perks/fitness_female_attraction",
 			PresetColour.FEMININE,
-			null, Util.newArrayListOfValues("+10% <span style='color:" + Attribute.DAMAGE_LUST.getColour().toWebHexString() + ";'>lust damage</span>"
+			null, List.of("+10% <span style='color:" + Attribute.DAMAGE_LUST.getColour().toWebHexString() + ";'>lust damage</span>"
 					+ " vs <span style='color:" + PresetColour.FEMININE.toWebHexString()+ ";'>feminine opponents</span>")) {
 		@Override
 		public String applyPerkGained(GameCharacter character) {
@@ -2244,7 +2230,7 @@ public class Perk {
 			PerkCategory.LUST,
 			"perks/fitness_male_attraction",
 			PresetColour.MASCULINE,
-			null, Util.newArrayListOfValues("+10% <span style='color:" + Attribute.DAMAGE_LUST.getColour().toWebHexString() + ";'>lust damage</span>"
+			null, List.of("+10% <span style='color:" + Attribute.DAMAGE_LUST.getColour().toWebHexString() + ";'>lust damage</span>"
 					+ " vs <span style='color:" + PresetColour.MASCULINE.toWebHexString()+ ";'>masculine opponents</span>")) {
 		@Override
 		public String applyPerkGained(GameCharacter character) {
@@ -2267,11 +2253,10 @@ public class Perk {
 			"irresistible appeals",
 			PerkCategory.LUST,
 			"perks/convincing_requests",
-			Util.newArrayListOfValues(PresetColour.GENERIC_SEX, PresetColour.BASE_GOLD),
+			List.of(PresetColour.GENERIC_SEX, PresetColour.BASE_GOLD),
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_LUST, 1)),
-			Util.newArrayListOfValues(
-					"Requests made during normal sex scenes are always granted",
+			List.of("Requests made during normal sex scenes are always granted",
 					"Unlocks positioning actions in all normal sex scenes"),
 			null, null, null) {
 		@Override
@@ -2288,7 +2273,7 @@ public class Perk {
 			PresetColour.GENERIC_SEX,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_LUST, 1)),
-			Util.newArrayListOfValues("All partners in sex require [style.colourSex(+1 orgasm)] before being satisfied")) {
+			List.of("All partners in sex require [style.colourSex(+1 orgasm)] before being satisfied")) {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "[npc.NameIsFull] so astoundingly "+(owner.getFemininity()==Femininity.ANDROGYNOUS?"attractive":(owner.isFeminine()?"beautiful":"handsome"))
@@ -2301,10 +2286,9 @@ public class Perk {
 			"orgasmic level drain",
 			PerkCategory.LUST,
 			"perks/orgasmic_level_drain",
-			Util.newArrayListOfValues(PresetColour.GENERIC_SEX, PresetColour.GENERIC_EXPERIENCE),
+			List.of(PresetColour.GENERIC_SEX, PresetColour.GENERIC_EXPERIENCE),
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(
-					"[style.boldTerrible(-95% to all)] [style.boldExperience(experience gains)]",
+			List.of("[style.boldTerrible(-95% to all)] [style.boldExperience(experience gains)]",
 					"In all [style.boldSex(sex scenes)]:",
 					"Can choose to [style.boldTerrible(drain 1 level)]",
 					"from orgasming partners",
@@ -2328,7 +2312,7 @@ public class Perk {
 			PresetColour.GENERIC_SEX,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.RESISTANCE_LUST, -2)),
-			Util.newArrayListOfValues("Doubles <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>arcane essence gain</span> from each orgasm")) {
+			List.of("Doubles <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>arcane essence gain</span> from each orgasm")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2346,7 +2330,7 @@ public class Perk {
 			"perks/lustful_leech",
 			PresetColour.ATTRIBUTE_MANA,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 2)),
-			Util.newArrayListOfValues("[style.boldExcellent(Absorb 2%)] of target's maximum "+Attribute.MANA_MAXIMUM.getName()+" on each attack which deals [style.boldLust("+Attribute.DAMAGE_LUST.getName()+")]")) {
+			List.of("[style.boldExcellent(Absorb 2%)] of target's maximum "+Attribute.MANA_MAXIMUM.getName()+" on each attack which deals [style.boldLust("+Attribute.DAMAGE_LUST.getName()+")]")) {
 		
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2361,7 +2345,7 @@ public class Perk {
 			"perks/pure_mind",
 			PresetColour.DAMAGE_TYPE_LUST,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, 2)),
-			Util.newArrayListOfValues("[style.boldExcellent(Regain 2%)] of your maximum "+Attribute.MANA_MAXIMUM.getName()+" on each attack in which you take [style.boldLust("+Attribute.DAMAGE_LUST.getName()+")]")) {
+			List.of("[style.boldExcellent(Regain 2%)] of your maximum "+Attribute.MANA_MAXIMUM.getName()+" on each attack in which you take [style.boldLust("+Attribute.DAMAGE_LUST.getName()+")]")) {
 		
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2378,7 +2362,7 @@ public class Perk {
 			"perks/arcaneWeaver",
 			PresetColour.GENERIC_ARCANE,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENCHANTMENT_LIMIT, 15)),
-			Util.newArrayListOfValues("<span style='color:"+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Halves cost of all clothing enchantments</span>")) {
+			List.of("<span style='color:"+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Halves cost of all clothing enchantments</span>")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2393,7 +2377,7 @@ public class Perk {
 			"perks/arcaneSmith",
 			PresetColour.GENERIC_ARCANE,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENCHANTMENT_LIMIT, 15)),
-			Util.newArrayListOfValues("<span style='color:"+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Halves cost of all weapon enchantments</span>")) {
+			List.of("<span style='color:"+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Halves cost of all weapon enchantments</span>")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2438,7 +2422,7 @@ public class Perk {
 			"perks/barren",
 			PresetColour.GENERIC_SEX,
 			Util.newHashMapOfValues(new Value<>(Attribute.FERTILITY, -200)),
-			Util.newArrayListOfValues("While "+Attribute.FERTILITY.getName()+" value is 0 or less, pregnancy is [style.colourTerrible(impossible)]")) {
+			List.of("While "+Attribute.FERTILITY.getName()+" value is 0 or less, pregnancy is [style.colourTerrible(impossible)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2453,7 +2437,7 @@ public class Perk {
 			"perks/firing_blanks",
 			PresetColour.GENERIC_SEX,
 			Util.newHashMapOfValues(new Value<>(Attribute.VIRILITY, -200)),
-			Util.newArrayListOfValues("While "+Attribute.VIRILITY.getName()+" value is 0 or less, impregnation is [style.colourTerrible(impossible)]")) {
+			List.of("While "+Attribute.VIRILITY.getName()+" value is 0 or less, impregnation is [style.colourTerrible(impossible)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2470,7 +2454,7 @@ public class Perk {
 			"fetishes/fetish_broodmother",
 			PresetColour.GENERIC_SEX,
 			Util.newHashMapOfValues(new Value<>(Attribute.FERTILITY, 20)),
-			Util.newArrayListOfValues("2x <span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>Maximum offspring in mothered litters</span>")) {
+			List.of("2x <span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>Maximum offspring in mothered litters</span>")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2496,7 +2480,7 @@ public class Perk {
 			"fetishes/fetish_seeder",
 			PresetColour.GENERIC_SEX,
 			Util.newHashMapOfValues(new Value<>(Attribute.VIRILITY, 20)),
-			Util.newArrayListOfValues("2x <span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>Maximum offspring in fathered litters</span>")) {
+			List.of("2x <span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>Maximum offspring in fathered litters</span>")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2522,7 +2506,7 @@ public class Perk {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_SPELLS, 20),
 					new Value<>(Attribute.SPELL_COST_MODIFIER, 20)),
-			Util.newArrayListOfValues("<span style='color:"+ PresetColour.GENERIC_BAD.toWebHexString()+ ";'>Embarrassing spell dialogue</span>")) {
+			List.of("<span style='color:"+ PresetColour.GENERIC_BAD.toWebHexString()+ ";'>Embarrassing spell dialogue</span>")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2580,9 +2564,9 @@ public class Perk {
 			"masculine clothing indifference",
 			PerkCategory.PHYSICAL,
 			"perks/clothingIndifferenceMasculinity",
-			Util.newArrayListOfValues(PresetColour.MASCULINE, PresetColour.CLOTHING_GREY),
+			List.of(PresetColour.MASCULINE, PresetColour.CLOTHING_GREY),
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("<span style='color:"+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to 'clothing too masculine' status effect</span>"),
+			List.of("<span style='color:"+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to 'clothing too masculine' status effect</span>"),
 			null, null, null) {
 
 		@Override
@@ -2600,9 +2584,9 @@ public class Perk {
 			"feminine clothing indifference",
 			PerkCategory.PHYSICAL,
 			"perks/clothingIndifferenceFemininity",
-			Util.newArrayListOfValues(PresetColour.FEMININE, PresetColour.CLOTHING_GREY),
+			List.of(PresetColour.FEMININE, PresetColour.CLOTHING_GREY),
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("<span style='color:"+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to 'clothing too feminine' status effect</span>"),
+			List.of("<span style='color:"+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to 'clothing too feminine' status effect</span>"),
 			null, null, null) {
 
 		@Override
@@ -2900,7 +2884,7 @@ public class Perk {
 			PresetColour.ATTRIBUTE_ARCANE,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MANA_MAXIMUM, 50)),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldLightBlue(aquatic transformations)] if a [style.boldDemon(demon)]")) {
+			List.of("[style.boldExcellent(Unlocks)] [style.boldLightBlue(aquatic transformations)] if a [style.boldDemon(demon)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2925,7 +2909,7 @@ public class Perk {
 			PresetColour.ATTRIBUTE_ARCANE,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MANA_MAXIMUM, 50)),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]")) { //TODO
+			List.of("[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]")) { //TODO
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2950,7 +2934,7 @@ public class Perk {
 			PresetColour.ATTRIBUTE_ARCANE,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MANA_MAXIMUM, 50)),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]")) { //TODO
+			List.of("[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]")) { //TODO
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2975,8 +2959,7 @@ public class Perk {
 			PresetColour.ATTRIBUTE_ARCANE,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MANA_MAXIMUM, 50)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]",
+			List.of("[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]",
 					"[style.boldExcellent(Immunity)] to [style.boldArcane(Lilith's Command)]")) {
 
 		@Override
@@ -3002,7 +2985,7 @@ public class Perk {
 			PresetColour.ATTRIBUTE_ARCANE,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MANA_MAXIMUM, 50)),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]")) { //TODO
+			List.of("[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]")) { //TODO
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3027,7 +3010,7 @@ public class Perk {
 			PresetColour.ATTRIBUTE_ARCANE,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MANA_MAXIMUM, 50)),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]")) { //TODO
+			List.of("[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]")) { //TODO
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3052,7 +3035,7 @@ public class Perk {
 			PresetColour.ATTRIBUTE_ARCANE,
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MANA_MAXIMUM, 50)),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]")) { //TODO
+			List.of("[style.boldExcellent(Unlocks)] [style.boldHuman(human transformations)] if a [style.boldDemon(demon)]")) { //TODO
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3076,7 +3059,7 @@ public class Perk {
 			"statusEffects/race/raceFoxTail1",
 			PresetColour.RACE_FOX_MORPH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
+			List.of("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3094,7 +3077,7 @@ public class Perk {
 			"statusEffects/race/raceFoxTail2",
 			PresetColour.RACE_FOX_MORPH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
+			List.of("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3112,7 +3095,7 @@ public class Perk {
 			"statusEffects/race/raceFoxTail3",
 			PresetColour.RACE_FOX_MORPH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
+			List.of("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3130,7 +3113,7 @@ public class Perk {
 			"statusEffects/race/raceFoxTail4",
 			PresetColour.RACE_FOX_MORPH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
+			List.of("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3148,7 +3131,7 @@ public class Perk {
 			"statusEffects/race/raceFoxTail5",
 			PresetColour.RACE_FOX_MORPH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
+			List.of("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3166,7 +3149,7 @@ public class Perk {
 			"statusEffects/race/raceFoxTail6",
 			PresetColour.RACE_FOX_MORPH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
+			List.of("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3184,7 +3167,7 @@ public class Perk {
 			"statusEffects/race/raceFoxTail7",
 			PresetColour.RACE_FOX_MORPH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
+			List.of("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3202,7 +3185,7 @@ public class Perk {
 			"statusEffects/race/raceFoxTail8",
 			PresetColour.RACE_FOX_MORPH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
+			List.of("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3220,7 +3203,7 @@ public class Perk {
 			"statusEffects/race/raceFoxTail9",
 			PresetColour.RACE_FOX_MORPH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
+			List.of("[style.boldExcellent(Unlocks)] [style.boldFox(youko transformations!)]")) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -3372,7 +3355,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.FIREBALL,
 			null,
 			SpellSchool.FIRE) {
@@ -3384,7 +3367,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -3406,7 +3389,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.FIREBALL,
 			SpellUpgrade.FIREBALL_1,
 			SpellSchool.FIRE) {
@@ -3418,7 +3401,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3440,7 +3423,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.FIREBALL,
 			SpellUpgrade.FIREBALL_2,
 			SpellSchool.FIRE) {
@@ -3452,7 +3435,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3474,7 +3457,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.FIREBALL,
 			SpellUpgrade.FIREBALL_3,
 			SpellSchool.FIRE) {
@@ -3486,7 +3469,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3508,7 +3491,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.FLASH,
 			null,
 			SpellSchool.FIRE) {
@@ -3520,7 +3503,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -3542,7 +3525,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.FLASH,
 			SpellUpgrade.FLASH_1,
 			SpellSchool.FIRE) {
@@ -3554,7 +3537,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3576,7 +3559,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.FLASH,
 			SpellUpgrade.FLASH_2,
 			SpellSchool.FIRE) {
@@ -3588,7 +3571,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3610,7 +3593,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.FLASH,
 			SpellUpgrade.FLASH_3,
 			SpellSchool.FIRE) {
@@ -3622,7 +3605,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3644,7 +3627,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.CLOAK_OF_FLAMES,
 			null,
 			SpellSchool.FIRE) {
@@ -3656,7 +3639,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -3678,7 +3661,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.CLOAK_OF_FLAMES,
 			SpellUpgrade.CLOAK_OF_FLAMES_1,
 			SpellSchool.FIRE) {
@@ -3690,7 +3673,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3712,7 +3695,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.CLOAK_OF_FLAMES,
 			SpellUpgrade.CLOAK_OF_FLAMES_2,
 			SpellSchool.FIRE) {
@@ -3724,7 +3707,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3746,7 +3729,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_FIRE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.CLOAK_OF_FLAMES,
 			SpellUpgrade.CLOAK_OF_FLAMES_3,
 			SpellSchool.FIRE) {
@@ -3758,7 +3741,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3852,7 +3835,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.SLAM,
 			null,
 			SpellSchool.EARTH) {
@@ -3864,7 +3847,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -3886,7 +3869,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.SLAM,
 			SpellUpgrade.SLAM_1,
 			SpellSchool.EARTH) {
@@ -3898,7 +3881,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3920,7 +3903,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.SLAM,
 			SpellUpgrade.SLAM_2,
 			SpellSchool.EARTH) {
@@ -3932,7 +3915,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3954,7 +3937,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.SLAM,
 			SpellUpgrade.SLAM_3,
 			SpellSchool.EARTH) {
@@ -3966,7 +3949,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -3988,7 +3971,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.TELEKENETIC_SHOWER,
 			null,
 			SpellSchool.EARTH) {
@@ -4000,7 +3983,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -4022,7 +4005,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.TELEKENETIC_SHOWER,
 			SpellUpgrade.TELEKENETIC_SHOWER_1,
 			SpellSchool.EARTH) {
@@ -4034,7 +4017,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4056,7 +4039,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.TELEKENETIC_SHOWER,
 			SpellUpgrade.TELEKENETIC_SHOWER_2,
 			SpellSchool.EARTH) {
@@ -4068,7 +4051,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4090,7 +4073,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.TELEKENETIC_SHOWER,
 			SpellUpgrade.TELEKENETIC_SHOWER_3,
 			SpellSchool.EARTH) {
@@ -4102,7 +4085,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4124,7 +4107,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.STONE_SHELL,
 			null,
 			SpellSchool.EARTH) {
@@ -4136,7 +4119,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -4158,7 +4141,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.STONE_SHELL,
 			SpellUpgrade.STONE_SHELL_1,
 			SpellSchool.EARTH) {
@@ -4170,7 +4153,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4192,7 +4175,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.STONE_SHELL,
 			SpellUpgrade.STONE_SHELL_2,
 			SpellSchool.EARTH) {
@@ -4204,7 +4187,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4226,7 +4209,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_EARTH,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.STONE_SHELL,
 			SpellUpgrade.STONE_SHELL_3,
 			SpellSchool.EARTH) {
@@ -4238,7 +4221,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4332,7 +4315,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ICE_SHARD,
 			null,
 			SpellSchool.WATER) {
@@ -4344,7 +4327,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -4366,7 +4349,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ICE_SHARD,
 			SpellUpgrade.ICE_SHARD_1,
 			SpellSchool.WATER) {
@@ -4378,7 +4361,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4400,7 +4383,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ICE_SHARD,
 			SpellUpgrade.ICE_SHARD_2,
 			SpellSchool.WATER) {
@@ -4412,7 +4395,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4434,7 +4417,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ICE_SHARD,
 			SpellUpgrade.ICE_SHARD_3,
 			SpellSchool.WATER) {
@@ -4446,7 +4429,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4468,7 +4451,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.RAIN_CLOUD,
 			null,
 			SpellSchool.WATER) {
@@ -4480,7 +4463,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -4502,7 +4485,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.RAIN_CLOUD,
 			SpellUpgrade.RAIN_CLOUD_1,
 			SpellSchool.WATER) {
@@ -4514,7 +4497,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4536,7 +4519,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.RAIN_CLOUD,
 			SpellUpgrade.RAIN_CLOUD_2,
 			SpellSchool.WATER) {
@@ -4548,7 +4531,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4570,7 +4553,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.RAIN_CLOUD,
 			SpellUpgrade.RAIN_CLOUD_3,
 			SpellSchool.WATER) {
@@ -4582,7 +4565,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4604,7 +4587,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.SOOTHING_WATERS,
 			null,
 			SpellSchool.WATER) {
@@ -4616,7 +4599,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -4638,7 +4621,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.SOOTHING_WATERS,
 			SpellUpgrade.SOOTHING_WATERS_1,
 			SpellSchool.WATER) {
@@ -4650,7 +4633,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4672,7 +4655,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.SOOTHING_WATERS,
 			SpellUpgrade.SOOTHING_WATERS_2,
 			SpellSchool.WATER) {
@@ -4684,7 +4667,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4706,7 +4689,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_WATER,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.SOOTHING_WATERS,
 			SpellUpgrade.SOOTHING_WATERS_3,
 			SpellSchool.WATER) {
@@ -4718,7 +4701,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4812,7 +4795,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.POISON_VAPOURS,
 			null,
 			SpellSchool.AIR) {
@@ -4824,7 +4807,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -4846,7 +4829,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.POISON_VAPOURS,
 			SpellUpgrade.POISON_VAPOURS_1,
 			SpellSchool.AIR) {
@@ -4858,7 +4841,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4880,7 +4863,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.POISON_VAPOURS,
 			SpellUpgrade.POISON_VAPOURS_2,
 			SpellSchool.AIR) {
@@ -4892,7 +4875,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4914,7 +4897,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.POISON_VAPOURS,
 			SpellUpgrade.POISON_VAPOURS_3,
 			SpellSchool.AIR) {
@@ -4926,7 +4909,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -4948,7 +4931,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.VACUUM,
 			null,
 			SpellSchool.AIR) {
@@ -4960,7 +4943,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -4982,7 +4965,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.VACUUM,
 			SpellUpgrade.VACUUM_1,
 			SpellSchool.AIR) {
@@ -4994,7 +4977,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5016,7 +4999,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.VACUUM,
 			SpellUpgrade.VACUUM_2,
 			SpellSchool.AIR) {
@@ -5028,7 +5011,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5050,7 +5033,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.VACUUM,
 			SpellUpgrade.VACUUM_3,
 			SpellSchool.AIR) {
@@ -5062,7 +5045,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5084,7 +5067,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.PROTECTIVE_GUSTS,
 			null,
 			SpellSchool.AIR) {
@@ -5096,7 +5079,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -5118,7 +5101,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.PROTECTIVE_GUSTS,
 			SpellUpgrade.PROTECTIVE_GUSTS_1,
 			SpellSchool.AIR) {
@@ -5130,7 +5113,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5152,7 +5135,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.PROTECTIVE_GUSTS,
 			SpellUpgrade.PROTECTIVE_GUSTS_2,
 			SpellSchool.AIR) {
@@ -5164,7 +5147,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5186,7 +5169,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_AIR,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.PROTECTIVE_GUSTS,
 			SpellUpgrade.PROTECTIVE_GUSTS_3,
 			SpellSchool.AIR) {
@@ -5198,7 +5181,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5293,7 +5276,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ARCANE_AROUSAL,
 			null,
 			SpellSchool.ARCANE) {
@@ -5305,7 +5288,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -5327,7 +5310,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ARCANE_AROUSAL,
 			SpellUpgrade.ARCANE_AROUSAL_1,
 			SpellSchool.ARCANE) {
@@ -5339,7 +5322,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5361,7 +5344,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ARCANE_AROUSAL,
 			SpellUpgrade.ARCANE_AROUSAL_2,
 			SpellSchool.ARCANE) {
@@ -5373,7 +5356,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5395,7 +5378,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ARCANE_AROUSAL,
 			SpellUpgrade.ARCANE_AROUSAL_3,
 			SpellSchool.ARCANE) {
@@ -5407,7 +5390,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5429,7 +5412,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.TELEPATHIC_COMMUNICATION,
 			null,
 			SpellSchool.ARCANE) {
@@ -5441,7 +5424,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -5463,7 +5446,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.TELEPATHIC_COMMUNICATION,
 			SpellUpgrade.TELEPATHIC_COMMUNICATION_1,
 			SpellSchool.ARCANE) {
@@ -5475,7 +5458,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5497,7 +5480,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.TELEPATHIC_COMMUNICATION,
 			SpellUpgrade.TELEPATHIC_COMMUNICATION_2,
 			SpellSchool.ARCANE) {
@@ -5509,7 +5492,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5531,7 +5514,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.TELEPATHIC_COMMUNICATION,
 			SpellUpgrade.TELEPATHIC_COMMUNICATION_3,
 			SpellSchool.ARCANE) {
@@ -5543,7 +5526,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5565,7 +5548,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ARCANE_CLOUD,
 			null,
 			SpellSchool.ARCANE) {
@@ -5577,7 +5560,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Gain spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Gain spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " when bound to <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSchool().getName()+"</span>");
 		}
 		
@@ -5599,7 +5582,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ARCANE_CLOUD,
 			SpellUpgrade.ARCANE_CLOUD_1,
 			SpellSchool.ARCANE) {
@@ -5611,7 +5594,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5633,7 +5616,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ARCANE_CLOUD,
 			SpellUpgrade.ARCANE_CLOUD_2,
 			SpellSchool.ARCANE) {
@@ -5645,7 +5628,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		
@@ -5667,7 +5650,7 @@ public class Perk {
 			null,
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues(""),
+			List.of(""),
 			Spell.ARCANE_CLOUD,
 			SpellUpgrade.ARCANE_CLOUD_3,
 			SpellSchool.ARCANE) {
@@ -5679,7 +5662,7 @@ public class Perk {
 
 		@Override
 		public List<String> getExtraEffects() {
-			return Util.newArrayListOfValues("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
+			return List.of("Upgrades spell '<span style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>"+getSpell().getName()+"</span>'"
 					+ " with <span style='color:"+ getSchool().getColour().toWebHexString()+ ";'>"+getSpellUpgrade().getName()+"</span>");
 		}
 		

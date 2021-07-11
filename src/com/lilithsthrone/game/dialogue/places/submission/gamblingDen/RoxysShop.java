@@ -152,7 +152,7 @@ public class RoxysShop {
 					} else {
 						return new ResponseSex("Get fix ("+UtilText.formatAsMoney(1000, "span")+")",
 								"Desperate to get another fix of her addictive girl cum, you agree to <b>pay Roxy 1000 flames</b> to get her to sit on your face for an hour.",
-								Util.newArrayListOfValues(Fetish.FETISH_ORAL_GIVING), null, CorruptionLevel.TWO_HORNY, null, null, null,
+								List.of(Fetish.FETISH_ORAL_GIVING), null, CorruptionLevel.TWO_HORNY, null, null, null,
 								true, false,
 								new SMRoxyPussyLicker(
 										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Roxy.class), SexSlotLyingDown.FACE_SITTING)),
@@ -168,7 +168,7 @@ public class RoxysShop {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Roxy.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Roxy.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 							}
 						};
 					}
@@ -176,7 +176,7 @@ public class RoxysShop {
 				} else { // Perform oral:
 					if(Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)) {
 						return new ResponseSex("Lick for item", "Agree to let Roxy sit on your face and eat her out until she cums in exchange for a random item from her shop.",
-								Util.newArrayListOfValues(Fetish.FETISH_ORAL_GIVING), null, CorruptionLevel.TWO_HORNY, null, null, null,
+								List.of(Fetish.FETISH_ORAL_GIVING), null, CorruptionLevel.TWO_HORNY, null, null, null,
 								true, false,
 								new SMRoxyPussyLicker(
 										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Roxy.class), SexSlotLyingDown.FACE_SITTING)),
@@ -191,7 +191,7 @@ public class RoxysShop {
 							}
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Roxy.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Roxy.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 							}
 						};
 						
@@ -433,10 +433,8 @@ public class RoxysShop {
 						true,
 						false,
 						new SMGeneric(
-								Util.newArrayListOfValues(
-										Main.game.getPlayer()),
-								Util.newArrayListOfValues(
-										Main.game.getNpc(Vengar.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Vengar.class)),
 								null,
 								null){
 							@Override
@@ -472,15 +470,13 @@ public class RoxysShop {
 						true,
 						false,
 						new SMGeneric(
-								Util.newArrayListOfValues(
-										Main.game.getNpc(Vengar.class)),
-								Util.newArrayListOfValues(
-										Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Vengar.class)),
+								List.of(Main.game.getPlayer()),
 								null,
 								null){
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-								return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vengar.class), Util.newArrayListOfValues(CoverableArea.PENIS)));
+								return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vengar.class), List.of(CoverableArea.PENIS)));
 							}
 							@Override
 							public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {

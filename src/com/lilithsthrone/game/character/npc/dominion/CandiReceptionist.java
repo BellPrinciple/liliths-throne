@@ -106,8 +106,7 @@ public class CandiReceptionist extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_MEGA_SLUT);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.MALE_ATTRACTION),
+				List.of(Perk.MALE_ATTRACTION),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 2),

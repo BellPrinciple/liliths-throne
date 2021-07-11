@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.dominion.harpyNests;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.dominion.HarpyDominant;
@@ -16,7 +18,6 @@ import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.world.Weather;
 
 /**
@@ -230,8 +231,8 @@ public class HarpyNestDominant {
 					return new ResponseSex("Sex", "Have dominant sex with [harpyDominant.name].",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(HarpyDominant.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(HarpyDominant.class)),
 							null,
 							null), HARPY_NEST_DOMINANT_AFTER_SEX, "<p>"
 								+ "Eager to put [harpyDominant.name] in her place in front of her flock, you reach down and grab her wings."
@@ -272,7 +273,7 @@ public class HarpyNestDominant {
 						
 				} else if (index == 2) {
 					return new Response("Usurp throne", "How <i>dare</i> she speak to you like that! It's time to show her who's really in control here!", HARPY_NEST_DOMINANT_QUEEN,
-							Util.newArrayListOfValues(Fetish.FETISH_DOMINANT), null, null, Femininity.FEMININE_STRONG, null) {
+							List.of(Fetish.FETISH_DOMINANT), null, null, Femininity.FEMININE_STRONG, null) {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().values.add(DialogueFlagValue.dominantEncountered);
@@ -355,7 +356,7 @@ public class HarpyNestDominant {
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
 				return new Response("Usurp throne", "Your patience has run out. It's time to show this bitch who's really in control here!", HARPY_NEST_DOMINANT_QUEEN,
-						Util.newArrayListOfValues(Fetish.FETISH_DOMINANT), null, null, Femininity.FEMININE_STRONG, null) {
+						List.of(Fetish.FETISH_DOMINANT), null, null, Femininity.FEMININE_STRONG, null) {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().values.add(DialogueFlagValue.dominantPacified);
@@ -508,8 +509,8 @@ public class HarpyNestDominant {
 				return new ResponseSex("Sex", "Have dominant sex with [harpyDominant.name].",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(HarpyDominant.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(HarpyDominant.class)),
 						null,
 						null), HARPY_NEST_DOMINANT_AFTER_SEX, "<p>"
 							+ "Eager to put [harpyDominant.name] in her place in front of your new flock, you reach down and grab her wings."
@@ -627,7 +628,7 @@ public class HarpyNestDominant {
 				return new Response("Stay still",
 						"Allow [harpyDominant.Name] to spray you with the strange perfume... [style.boldBad(Warning:)] <b>Due to the nature of harpies needing a special form, this transformation bypasses TF preferences!</b>",
 						HARPY_NEST_DOMINANT_FIGHT_LOSE_PUNISHMENT,
-						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING),
+						List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING),
 						Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel(),
 						null,
 						null,
@@ -736,7 +737,7 @@ public class HarpyNestDominant {
 				return new Response("Stay still",
 						"Allow [harpyDominant.Name] to spray you with the strange perfume... [style.boldBad(Warning:)] <b>Due to the nature of harpies needing a special form, this transformation bypasses TF preferences!</b>",
 						HARPY_NEST_DOMINANT_FIGHT_LOSE_PUNISHMENT,
-						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING),
+						List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING),
 						Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel(),
 						null,
 						null,
@@ -816,8 +817,8 @@ public class HarpyNestDominant {
 				return new ResponseSex("Sex", "Have dominant sex with [harpyDominant.name].",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(HarpyDominant.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(HarpyDominant.class)),
 						null,
 						null), HARPY_NEST_DOMINANT_AFTER_SEX, "<p>"
 							+ "Eager to put [harpyDominant.name] in her place in front of your new flock, you reach down and grab her wings."

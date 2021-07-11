@@ -51,11 +51,11 @@ public class WesQuest {
 	}
 	
 	private static void resetBackgroundIds() {
-		backgroundTalkIds = Util.newArrayListOfValues("1", "2", "3", "4", "5");
+		backgroundTalkIds = List.of("1", "2", "3", "4", "5");
 	}
 
 	private static void resetWorkTalkIds() {
-		workTalkIds = Util.newArrayListOfValues("1", "2", "3", "4", "5");
+		workTalkIds = List.of("1", "2", "3", "4", "5");
 	}
 	
 	public static final DialogueNode WES_QUEST_START = new DialogueNode("A Sudden Interruption", "", true) {
@@ -961,8 +961,8 @@ public class WesQuest {
 				return new ResponseSex("Take charge", "Dominantly have sex with Elle.",
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(Elle.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Elle.class)),
 								null,
 								null) {
 							@Override
@@ -977,8 +977,8 @@ public class WesQuest {
 				return new ResponseSex("Submit", "Let Elle take charge and be dominantly fucked by her.",
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(Elle.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Elle.class)),
+								List.of(Main.game.getPlayer()),
 								null,
 								null) {
 							@Override
@@ -1109,8 +1109,8 @@ public class WesQuest {
 				return new ResponseSex("Take charge", "Dominantly have sex with Wes.",
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(Wes.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Wes.class)),
 								null,
 								null),
 						WES_END_SEX,
@@ -1120,8 +1120,8 @@ public class WesQuest {
 				return new ResponseSex("Submit", "Let Wes take charge and be dominantly fucked by him.",
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(Wes.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Wes.class)),
+								List.of(Main.game.getPlayer()),
 								null,
 								null),
 						WES_END_SEX,
@@ -1174,10 +1174,8 @@ public class WesQuest {
 				return new ResponseSex("Take charge", "Dominantly have sex with Wes and Elle.",
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(
-										Main.game.getPlayer()),
-								Util.newArrayListOfValues(
-										Main.game.getNpc(Wes.class),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Wes.class),
 										Main.game.getNpc(Elle.class)),
 								null,
 								null) {
@@ -1193,11 +1191,9 @@ public class WesQuest {
 				return new ResponseSex("Dominate Elle", "Join Wes in dominantly fucking Elle.",
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(
-										Main.game.getPlayer(),
+								List.of(Main.game.getPlayer(),
 										Main.game.getNpc(Wes.class)),
-								Util.newArrayListOfValues(
-										Main.game.getNpc(Elle.class)),
+								List.of(Main.game.getNpc(Elle.class)),
 								null,
 								null) {
 							@Override
@@ -1321,8 +1317,8 @@ public class WesQuest {
 				return new ResponseSex("Take charge", "Dominantly have sex with Elle.",
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(Elle.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Elle.class)),
 								null,
 								null) {
 							@Override
@@ -1337,8 +1333,8 @@ public class WesQuest {
 				return new ResponseSex("Submit", "Let Elle take charge and be dominantly fucked by her.",
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(Elle.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Elle.class)),
+								List.of(Main.game.getPlayer()),
 								null,
 								null) {
 							@Override

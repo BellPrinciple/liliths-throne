@@ -828,12 +828,12 @@ public class SlaveDialogue {
 							return new ResponseSex("Rape", UtilText.parse(characterForSex, "[npc.Name] is definitely not interested in having sex with you, but it's not like [npc.sheHasFull] a choice in the matter..."), 
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(Main.game.getPlayer()),
-											Util.newArrayListOfValues(characterForSex),
+											List.of(Main.game.getPlayer()),
+											List.of(characterForSex),
 									getDominantSpectators(),
 									getSubmissiveSpectators(),
 									(characterForSex.hasSlavePermissionSetting(SlavePermissionSetting.GENERAL_CRAWLING)
-										?Util.newArrayListOfValues(ResponseTag.PREFER_DOGGY)
+										?List.of(ResponseTag.PREFER_DOGGY)
 										:new ArrayList<>())),
 									getAfterSexDialogue(),
 									UtilText.parseFromXMLFile(getTextFilePath(), "RAPE_START", characterForSex)) {
@@ -852,12 +852,12 @@ public class SlaveDialogue {
 							return new ResponseSex("Sex", UtilText.parse(characterForSex, "Have sex with [npc.name]."), 
 									true, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(Main.game.getPlayer()),
-											Util.newArrayListOfValues(characterForSex),
+											List.of(Main.game.getPlayer()),
+											List.of(characterForSex),
 									getDominantSpectators(),
 									getSubmissiveSpectators(),
 									(characterForSex.hasSlavePermissionSetting(SlavePermissionSetting.GENERAL_CRAWLING)
-											?Util.newArrayListOfValues(ResponseTag.PREFER_DOGGY)
+											?List.of(ResponseTag.PREFER_DOGGY)
 											:new ArrayList<>())),
 									getAfterSexDialogue(),
 									UtilText.parseFromXMLFile(getTextFilePath(), "SEX_START", characterForSex)) {
@@ -904,8 +904,8 @@ public class SlaveDialogue {
 									null, null, null, null, null, null,
 									!isRape, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(characterForSexSecondary, Main.game.getPlayer()),
-											Util.newArrayListOfValues(characterForSex),
+											List.of(characterForSexSecondary, Main.game.getPlayer()),
+											List.of(characterForSex),
 											getDominantSpectators(),
 											getSubmissiveSpectators(),
 											ResponseTag.PREFER_DOGGY) {
@@ -960,8 +960,8 @@ public class SlaveDialogue {
 										null, null, null, null, null, null,
 										!isRape, false,
 										new SMGeneric(
-												Util.newArrayListOfValues(Main.game.getPlayer(), characterForSexSecondary),
-												Util.newArrayListOfValues(characterForSex),
+												List.of(Main.game.getPlayer(), characterForSexSecondary),
+												List.of(characterForSex),
 												getDominantSpectators(),
 												getSubmissiveSpectators(),
 												ResponseTag.PREFER_DOGGY) {
@@ -1009,8 +1009,8 @@ public class SlaveDialogue {
 									null, null, null, null, null, null,
 									!isRape, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(Main.game.getPlayer()),
-											Util.newArrayListOfValues(characterForSex, characterForSexSecondary),
+											List.of(Main.game.getPlayer()),
+											List.of(characterForSex, characterForSexSecondary),
 											getDominantSpectators(),
 											getSubmissiveSpectators(),
 											ResponseTag.PREFER_DOGGY) {
@@ -1041,15 +1041,15 @@ public class SlaveDialogue {
 						} else {
 							return new ResponseSex("Submissive sex",
 									UtilText.parse(characterForSex, "Have submissive sex with [npc.name]."), 
-									Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
+									List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 									true, true,
 									new SMGeneric(
-											Util.newArrayListOfValues(characterForSex),
-											Util.newArrayListOfValues(Main.game.getPlayer()),
+											List.of(characterForSex),
+											List.of(Main.game.getPlayer()),
 											getDominantSpectators(),
 											getSubmissiveSpectators(),
 									(characterForSex.hasSlavePermissionSetting(SlavePermissionSetting.GENERAL_CRAWLING)
-											?Util.newArrayListOfValues(ResponseTag.PREFER_DOGGY)
+											?List.of(ResponseTag.PREFER_DOGGY)
 											:new ArrayList<>())),
 										getAfterSexDialogue(),
 										UtilText.parseFromXMLFile(getTextFilePath(), "SEX_AS_SUB_START", characterForSex)) {
@@ -1103,8 +1103,8 @@ public class SlaveDialogue {
 									null, null, null, null, null, null,
 									true, true,
 									new SMGeneric(
-											Util.newArrayListOfValues(characterForSexSecondary, characterForSex),
-											Util.newArrayListOfValues(Main.game.getPlayer()),
+											List.of(characterForSexSecondary, characterForSex),
+											List.of(Main.game.getPlayer()),
 											getDominantSpectators(),
 											getSubmissiveSpectators(),
 											ResponseTag.PREFER_DOGGY) {
@@ -1165,8 +1165,8 @@ public class SlaveDialogue {
 									null, null, null, null, null, null,
 									true, true,
 									new SMGeneric(
-											Util.newArrayListOfValues(characterForSex, characterForSexSecondary),
-											Util.newArrayListOfValues(Main.game.getPlayer()),
+											List.of(characterForSex, characterForSexSecondary),
+											List.of(Main.game.getPlayer()),
 											getDominantSpectators(),
 											getSubmissiveSpectators(),
 											ResponseTag.PREFER_DOGGY) {
@@ -1217,8 +1217,8 @@ public class SlaveDialogue {
 									null, null, null, null, null, null,
 									true, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(characterForSex),
-											Util.newArrayListOfValues(Main.game.getPlayer(), characterForSexSecondary),
+											List.of(characterForSex),
+											List.of(Main.game.getPlayer(), characterForSexSecondary),
 											getDominantSpectators(),
 											getSubmissiveSpectators(),
 											ResponseTag.PREFER_DOGGY) {

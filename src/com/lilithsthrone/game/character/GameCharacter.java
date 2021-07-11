@@ -1750,7 +1750,7 @@ public abstract class GameCharacter implements XMLSaving {
 					if(attribute!=null) {
 						if(!version.isEmpty() && (!Main.isVersionOlderThan(version, "0.3.3.6") && (!character.isPlayer() || !Main.isVersionOlderThan(version, "0.3.3.9")))) { // Reset all attributes at version 0.3.3.6
 							if(!version.isEmpty() && Main.isVersionOlderThan(version, "0.2.0")) {
-								List<AbstractAttribute> damageAtts = Util.newArrayListOfValues(Attribute.DAMAGE_FIRE, Attribute.DAMAGE_ICE, Attribute.DAMAGE_LUST, Attribute.DAMAGE_PHYSICAL, Attribute.DAMAGE_POISON, Attribute.DAMAGE_SPELLS);
+								List<AbstractAttribute> damageAtts = List.of(Attribute.DAMAGE_FIRE, Attribute.DAMAGE_ICE, Attribute.DAMAGE_LUST, Attribute.DAMAGE_PHYSICAL, Attribute.DAMAGE_POISON, Attribute.DAMAGE_SPELLS);
 								if(damageAtts.contains(attribute)) {
 									character.setAttribute(attribute, Float.valueOf(e.getAttribute("value"))-100, false);
 								} else {
@@ -9272,12 +9272,10 @@ public abstract class GameCharacter implements XMLSaving {
 			if(debug)
 				System.out.println("foreplay empty");
 			// Player penetrates:
-			List<SexAreaPenetration> penTypes = Util.newArrayListOfValues(
-					SexAreaPenetration.FINGER,
+			List<SexAreaPenetration> penTypes = List.of(SexAreaPenetration.FINGER,
 					SexAreaPenetration.TONGUE);
 
-			List<SexAreaOrifice> orificeTypes = Util.newArrayListOfValues(
-					SexAreaOrifice.BREAST,
+			List<SexAreaOrifice> orificeTypes = List.of(SexAreaOrifice.BREAST,
 					SexAreaOrifice.NIPPLE,
 					SexAreaOrifice.VAGINA);
 			
@@ -9297,12 +9295,10 @@ public abstract class GameCharacter implements XMLSaving {
 			if(debug)
 				System.out.println("main sex empty");
 			// Player penetrates:
-			List<SexAreaPenetration> penTypes = Util.newArrayListOfValues(
-					SexAreaPenetration.PENIS,
+			List<SexAreaPenetration> penTypes = List.of(SexAreaPenetration.PENIS,
 					SexAreaPenetration.TAIL);
 
-			List<SexAreaOrifice> orificeTypes = Util.newArrayListOfValues(
-					SexAreaOrifice.BREAST,
+			List<SexAreaOrifice> orificeTypes = List.of(SexAreaOrifice.BREAST,
 					SexAreaOrifice.VAGINA);
 			
 			if(!target.hasVagina() || !target.isAbleToAccessCoverableArea(CoverableArea.VAGINA, true)) {
@@ -14686,10 +14682,10 @@ public abstract class GameCharacter implements XMLSaving {
 						return UtilText.parse(characterReacting, characterBeingRevealed,
 								"[npc.Name] [npc.verb(try)] to make a move as [npc2.namePos] [npc2.asshole+] is revealed, but [npc.her] cocoon's strong webbing keeps [npc.herHim] locked in place.");
 					case TAIL_CONSTRICTION:
-						return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+						return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 								"[npc.Name] tries to make a move as [npc2.namePos] [npc2.asshole+] is revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] long tail to keep [npc.herHim] constricted and firmly locked in place.");
 					case TENTACLE_RESTRICTION:
-						return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+						return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 								"[npc.Name] tries to make a move as [npc2.namePos] [npc2.asshole+] is revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] [npc3.tentacles] to keep [npc.herHim] firmly held in place.");
 					case WITCH_SEAL:
 						return UtilText.parse(characterReacting, characterBeingRevealed,
@@ -14955,10 +14951,10 @@ public abstract class GameCharacter implements XMLSaving {
 						return UtilText.parse(characterReacting, characterBeingRevealed,
 								"[npc.Name] [npc.verb(try)] to make a move as [npc2.namePos] [npc2.breasts+] are revealed, but [npc.her] cocoon's strong webbing keeps [npc.herHim] locked in place.");
 					case TAIL_CONSTRICTION:
-						return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+						return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 								"[npc.Name] tries to make a move as [npc2.namePos] [npc2.breasts+] are revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] long tail to keep [npc.herHim] constricted and firmly locked in place.");
 					case TENTACLE_RESTRICTION:
-						return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+						return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 								"[npc.Name] tries to make a move as [npc2.namePos] [npc2.breasts+] are revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] [npc3.tentacles] to keep [npc.herHim] firmly held in place.");
 					case WITCH_SEAL:
 						return UtilText.parse(characterReacting, characterBeingRevealed,
@@ -15027,10 +15023,10 @@ public abstract class GameCharacter implements XMLSaving {
 						return UtilText.parse(characterReacting, characterBeingRevealed,
 								"[npc.Name] [npc.verb(try)] to make a move as [npc2.namePos] [npc2.crotchBoobs+] are revealed, but [npc.her] cocoon's strong webbing keeps [npc.herHim] locked in place.");
 					case TAIL_CONSTRICTION:
-						return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+						return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 								"[npc.Name] tries to make a move as [npc2.namePos] [npc2.crotchBoobs+] are revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] long tail to keep [npc.herHim] constricted and firmly locked in place.");
 					case TENTACLE_RESTRICTION:
-						return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+						return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 								"[npc.Name] tries to make a move as [npc2.namePos] [npc2.crotchBoobs+] are revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] [npc3.tentacles] to keep [npc.herHim] firmly held in place.");
 					case WITCH_SEAL:
 						return UtilText.parse(characterReacting, characterBeingRevealed,
@@ -15081,10 +15077,10 @@ public abstract class GameCharacter implements XMLSaving {
 					return UtilText.parse(characterReacting, characterBeingRevealed,
 							"[npc.Name] [npc.verb(try)] to make a move as [npc2.namePos] [npc2.cock+] is revealed, but [npc.her] cocoon's strong webbing keeps [npc.herHim] locked in place.");
 				case TAIL_CONSTRICTION:
-					return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+					return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 							"[npc.Name] tries to make a move as [npc2.namePos] [npc2.cock+] is revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] long tail to keep [npc.herHim] constricted and firmly locked in place.");
 				case TENTACLE_RESTRICTION:
-					return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+					return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 							"[npc.Name] tries to make a move as [npc2.namePos] [npc2.cock+] is revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] [npc3.tentacles] to keep [npc.herHim] firmly held in place.");
 				case WITCH_SEAL:
 					return UtilText.parse(characterReacting, characterBeingRevealed,
@@ -15432,10 +15428,10 @@ public abstract class GameCharacter implements XMLSaving {
 					return UtilText.parse(characterReacting, characterBeingRevealed,
 							"[npc.Name] [npc.verb(try)] to make a move as [npc2.namePos] [npc2.pussy+] is revealed, but [npc.her] cocoon's strong webbing keeps [npc.herHim] locked in place.");
 				case TAIL_CONSTRICTION:
-					return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+					return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 							"[npc.Name] tries to make a move as [npc2.namePos] [npc2.pussy+] is revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] long tail to keep [npc.herHim] constricted and firmly locked in place.");
 				case TENTACLE_RESTRICTION:
-					return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+					return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 							"[npc.Name] tries to make a move as [npc2.namePos] [npc2.pussy+] is revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] [npc3.tentacles] to keep [npc.herHim] firmly held in place.");
 				case WITCH_SEAL:
 					return UtilText.parse(characterReacting, characterBeingRevealed,
@@ -15580,10 +15576,10 @@ public abstract class GameCharacter implements XMLSaving {
 					return UtilText.parse(characterReacting, characterBeingRevealed,
 							"[npc.Name] [npc.verb(try)] to make a move as [npc2.namePos] genderless mound is revealed, but [npc.her] cocoon's strong webbing keeps [npc.herHim] locked in place.");
 				case TAIL_CONSTRICTION:
-					return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+					return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 							"[npc.Name] tries to make a move as [npc2.namePos] genderless mound is revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] long tail to keep [npc.herHim] constricted and firmly locked in place.");
 				case TENTACLE_RESTRICTION:
-					return UtilText.parse(Util.newArrayListOfValues(characterReacting, characterBeingRevealed, immobilisation.getValue()),
+					return UtilText.parse(List.of(characterReacting, characterBeingRevealed, immobilisation.getValue()),
 							"[npc.Name] tries to make a move as [npc2.namePos] genderless mound is revealed, but [npc3.name] [npc3.verb(use)] [npc3.her] [npc3.tentacles] to keep [npc.herHim] firmly held in place.");
 				case WITCH_SEAL:
 					return UtilText.parse(characterReacting, characterBeingRevealed,
@@ -19378,7 +19374,7 @@ public abstract class GameCharacter implements XMLSaving {
 			orificesToCheck = new ArrayList<>();
 			Collections.addAll(orificesToCheck, SexAreaOrifice.values());
 		} else {
-			orificesToCheck = Util.newArrayListOfValues(SexAreaOrifice.VAGINA);
+			orificesToCheck = List.of(SexAreaOrifice.VAGINA);
 		}
 		
 		for(SexAreaOrifice ot : orificesToCheck) {
@@ -19687,7 +19683,7 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 		
 		// Clear pregnancy status effects and descriptions:
-		List<AbstractStatusEffect> pregnancyStatusEffects = Util.newArrayListOfValues(StatusEffect.PREGNANT_1, StatusEffect.PREGNANT_2, StatusEffect.PREGNANT_3);
+		List<AbstractStatusEffect> pregnancyStatusEffects = List.of(StatusEffect.PREGNANT_1, StatusEffect.PREGNANT_2, StatusEffect.PREGNANT_3);
 		for(AbstractStatusEffect se : pregnancyStatusEffects) {
 			removeStatusEffect(se);
 			this.removeStatusEffectDescription(se);
@@ -19911,7 +19907,7 @@ public abstract class GameCharacter implements XMLSaving {
 		
 
 		// Clear pregnancy status effects and descriptions:
-		List<AbstractStatusEffect> pregnancyStatusEffects = Util.newArrayListOfValues(StatusEffect.PREGNANT_0, StatusEffect.PREGNANT_1, StatusEffect.PREGNANT_2, StatusEffect.PREGNANT_3);
+		List<AbstractStatusEffect> pregnancyStatusEffects = List.of(StatusEffect.PREGNANT_0, StatusEffect.PREGNANT_1, StatusEffect.PREGNANT_2, StatusEffect.PREGNANT_3);
 		for(AbstractStatusEffect se : pregnancyStatusEffects) {
 			removeStatusEffect(se);
 			this.removeStatusEffectDescription(se);
@@ -23210,10 +23206,10 @@ public abstract class GameCharacter implements XMLSaving {
 	public boolean isOrificePlugged(SexAreaOrifice ot) {
 		HashMap<SexAreaOrifice, List<ItemTag>> plugMap = new HashMap<>();
 		
-		plugMap.put(SexAreaOrifice.ANUS, Util.newArrayListOfValues(ItemTag.PLUGS_ANUS, ItemTag.SEALS_ANUS));
-		plugMap.put(SexAreaOrifice.VAGINA, Util.newArrayListOfValues(ItemTag.PLUGS_VAGINA, ItemTag.SEALS_VAGINA));
-		plugMap.put(SexAreaOrifice.URETHRA_VAGINA, Util.newArrayListOfValues(ItemTag.SEALS_VAGINA));
-		plugMap.put(SexAreaOrifice.NIPPLE, Util.newArrayListOfValues(ItemTag.PLUGS_NIPPLES, ItemTag.SEALS_NIPPLES));
+		plugMap.put(SexAreaOrifice.ANUS, List.of(ItemTag.PLUGS_ANUS, ItemTag.SEALS_ANUS));
+		plugMap.put(SexAreaOrifice.VAGINA, List.of(ItemTag.PLUGS_VAGINA, ItemTag.SEALS_VAGINA));
+		plugMap.put(SexAreaOrifice.URETHRA_VAGINA, List.of(ItemTag.SEALS_VAGINA));
+		plugMap.put(SexAreaOrifice.NIPPLE, List.of(ItemTag.PLUGS_NIPPLES, ItemTag.SEALS_NIPPLES));
 		
 		List<ItemTag> lookingFor = plugMap.get(ot);
 		

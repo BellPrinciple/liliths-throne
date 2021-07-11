@@ -492,9 +492,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM);
+				return List.of(Fetish.FETISH_NON_CON_DOM);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_NON_CON_SUB);
+				return List.of(Fetish.FETISH_NON_CON_SUB);
 			}
 		}
 	};
@@ -943,9 +943,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_DENIAL);
+				return List.of(Fetish.FETISH_DENIAL);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_DENIAL_SELF);
+				return List.of(Fetish.FETISH_DENIAL_SELF);
 			}
 		}
 	};
@@ -2171,9 +2171,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2220,9 +2220,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2269,9 +2269,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2318,9 +2318,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2377,9 +2377,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2458,7 +2458,7 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2514,9 +2514,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2622,9 +2622,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_SADIST, Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_SADIST, Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_MASOCHIST, Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_MASOCHIST, Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2679,9 +2679,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_DOMINANT, Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_DOMINANT, Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2721,7 +2721,7 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2772,9 +2772,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2825,7 +2825,7 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -2927,9 +2927,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -3035,9 +3035,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_SADIST, Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_SADIST, Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_MASOCHIST, Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_MASOCHIST, Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -3092,9 +3092,9 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_DOMINANT, Fetish.FETISH_BONDAGE_APPLIER);
+				return List.of(Fetish.FETISH_DOMINANT, Fetish.FETISH_BONDAGE_APPLIER);
 			} else if(character.equals(Main.sex.getCharacterTargetedForSexAction(this))) {
-				return Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}
@@ -3134,7 +3134,7 @@ public class GenericActions {
 		@Override
 		public List<Fetish> getExtraFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BONDAGE_VICTIM);
+				return List.of(Fetish.FETISH_BONDAGE_VICTIM);
 			}
 			return null;
 		}

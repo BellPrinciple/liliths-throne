@@ -852,7 +852,7 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 //				is.close();
 //			}
 			
-			List<Colour> coloursPlusDT = Util.newArrayListOfValues(dt.getColour());
+			List<Colour> coloursPlusDT = List.of(dt.getColour());
 			coloursPlusDT.addAll(colours);
 			s = SvgUtil.colourReplacement(this.getId(), coloursPlusDT, this.getColourReplacements(true), s);
 			
@@ -922,7 +922,7 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 //				is.close();
 //			}
 			
-			List<Colour> coloursPlusDT = Util.newArrayListOfValues(dt.getColour());
+			List<Colour> coloursPlusDT = List.of(dt.getColour());
 			coloursPlusDT.addAll(colours);
 			s = SvgUtil.colourReplacement(this.getId()+"Equipped", coloursPlusDT, this.getColourReplacements(true), s);
 			

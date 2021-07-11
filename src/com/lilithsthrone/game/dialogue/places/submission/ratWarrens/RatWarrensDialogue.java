@@ -110,7 +110,7 @@ public class RatWarrensDialogue {
 				rat.setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_ENTRANCE, true);
 				Main.game.getCharacterUtils().setGenericName(rat, "lieutenant", null);
 				rat.unequipOffhandWeaponIntoVoid(0, false);
-				rat.equipOffhandWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bow_pistol_crossbow", DamageType.POISON, Util.newArrayListOfValues(PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_GREEN_DRAB, PresetColour.CLOTHING_GUNMETAL)));
+				rat.equipOffhandWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bow_pistol_crossbow", DamageType.POISON, List.of(PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_GREEN_DRAB, PresetColour.CLOTHING_GUNMETAL)));
 				rat.incrementEssenceCount(8, false);
 				
 				rat = new RatGangMember(Gender.getGenderFromUserPreferences(false, false));
@@ -119,7 +119,7 @@ public class RatWarrensDialogue {
 				rat.setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_ENTRANCE, true);
 				Main.game.getCharacterUtils().setGenericName(rat, "sidekick", null);
 				rat.unequipOffhandWeaponIntoVoid(0, false);
-				rat.equipOffhandWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bow_pistol_crossbow", DamageType.PHYSICAL, Util.newArrayListOfValues(PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_KHAKI, PresetColour.CLOTHING_STEEL)));
+				rat.equipOffhandWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bow_pistol_crossbow", DamageType.PHYSICAL, List.of(PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_KHAKI, PresetColour.CLOTHING_STEEL)));
 				rat.incrementEssenceCount(3, false);
 				
 			} catch (Exception e) {
@@ -283,7 +283,7 @@ public class RatWarrensDialogue {
 				rat.setLocation(Main.game.getPlayer(), true);
 				rat.addSpecialPerk(Perk.SPECIAL_HEALTH_FANATIC);
 				rat.setMuscle(Muscle.FOUR_RIPPED.getMedianValue());
-				rat.setGenericName(Util.randomItemFrom(Util.newArrayListOfValues("buff", "strong", "muscular", "muscly"))+" lieutenant");
+				rat.setGenericName(Util.randomItemFrom(List.of("buff", "strong", "muscular", "muscly"))+" lieutenant");
 
 				rat = new RatGangMember(Gender.getGenderFromUserPreferences(false, false));
 				Main.game.addNPC(rat, false);
@@ -480,8 +480,7 @@ public class RatWarrensDialogue {
 						isCompanionDialogue()
 							?UtilText.parse(getMainCompanion(), "Tell the gang members that you'd be happy to show them what you're capable of, but that [npc.name] is going to save [npc.herself] for Vengar...")
 							:"Tell the gang members that you'd be happy to show them what you're capable of...",
-						Util.newArrayListOfValues(
-								Fetish.FETISH_SUBMISSIVE),
+						List.of(Fetish.FETISH_SUBMISSIVE),
 						null,
 						CorruptionLevel.THREE_DIRTY,
 						null,
@@ -491,11 +490,9 @@ public class RatWarrensDialogue {
 						true,
 						new SMGeneric(
 								getGuards(false),
-								Util.newArrayListOfValues(
-										Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								null,
-								Util.newArrayListOfValues(
-										getMainCompanion())) {
+								List.of(getMainCompanion())) {
 								@Override
 								public boolean isPlayerAbleToStopSex() {
 									return false;
@@ -515,8 +512,7 @@ public class RatWarrensDialogue {
 				} else {
 					return new ResponseSex(UtilText.parse(companion, "Sex (both)"),
 							UtilText.parse(getGuards(true), "Tell the gang members that both you and [npc.name] would be happy to show them what you're capable of."),
-							Util.newArrayListOfValues(
-									Fetish.FETISH_SUBMISSIVE),
+							List.of(Fetish.FETISH_SUBMISSIVE),
 							null,
 							CorruptionLevel.THREE_DIRTY,
 							null,
@@ -526,8 +522,7 @@ public class RatWarrensDialogue {
 							true,
 							new SMGeneric(
 									getGuards(false),
-									Util.newArrayListOfValues(
-											Main.game.getPlayer(),
+									List.of(Main.game.getPlayer(),
 											companion),
 									null,
 									null) {
@@ -551,8 +546,7 @@ public class RatWarrensDialogue {
 				} else {
 					return new ResponseSex(UtilText.parse(companion, "Offer [npc.name]"),
 							UtilText.parse(getMainCompanion(), "Tell the gang members that you'd be happy to let [npc.name] show them what [npc.sheIs] capable of, but that you're going to save yourself for Vengar..."),
-							Util.newArrayListOfValues(
-									Fetish.FETISH_VOYEURIST),
+							List.of(Fetish.FETISH_VOYEURIST),
 							null,
 							CorruptionLevel.THREE_DIRTY,
 							null,
@@ -562,9 +556,9 @@ public class RatWarrensDialogue {
 							true,
 							new SMGeneric(
 									getGuards(false),
-									Util.newArrayListOfValues(companion),
+									List.of(companion),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer())) {
+									List.of(Main.game.getPlayer())) {
 								@Override
 								public boolean isPlayerAbleToStopSex() {
 									return false;
@@ -695,9 +689,9 @@ public class RatWarrensDialogue {
 								:"Have sex with the gang members.",
 							true,
 							false,
-							Util.newArrayListOfValues(Main.game.getPlayer()),
+							List.of(Main.game.getPlayer()),
 							getGuards(false),
-							Util.newArrayListOfValues(getMainCompanion()),
+							List.of(getMainCompanion()),
 							null,
 							GUARD_COMBAT_VICTORY_AFTER_SEX,
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_SEX", getGuards(false)));
@@ -712,9 +706,9 @@ public class RatWarrensDialogue {
 								:"Have sex with the gang members.",
 							true,
 							false,
-							Util.newArrayListOfValues(Main.game.getPlayer()),
+							List.of(Main.game.getPlayer()),
 							getGuards(false),
-							Util.newArrayListOfValues(getMainCompanion()),
+							List.of(getMainCompanion()),
 							null,
 							GUARD_COMBAT_VICTORY_AFTER_SEX,
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_SEX_GENTLE", getGuards(false)),
@@ -730,9 +724,9 @@ public class RatWarrensDialogue {
 								:"Have sex with the gang members.",
 							true,
 							false,
-							Util.newArrayListOfValues(Main.game.getPlayer()),
+							List.of(Main.game.getPlayer()),
 							getGuards(false),
-							Util.newArrayListOfValues(getMainCompanion()),
+							List.of(getMainCompanion()),
 							null,
 							GUARD_COMBAT_VICTORY_AFTER_SEX,
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_SEX_ROUGH", getGuards(false)),
@@ -746,7 +740,7 @@ public class RatWarrensDialogue {
 							isCompanionDialogue()
 								?UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you submit to the gang members, allowing them to have dominant sex with you.")
 								:"Tell the gang members that they can have their way with you...",
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+							List.of(Fetish.FETISH_SUBMISSIVE),
 							null,
 							Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 							null,
@@ -755,9 +749,9 @@ public class RatWarrensDialogue {
 							true,
 							false,
 							getGuards(false),
-							Util.newArrayListOfValues(Main.game.getPlayer()),
+							List.of(Main.game.getPlayer()),
 							null,
-							Util.newArrayListOfValues(getMainCompanion()),
+							List.of(getMainCompanion()),
 							GUARD_COMBAT_VICTORY_AFTER_SEX,
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_SEX_SUBMIT", getGuards(false)));
 					
@@ -813,10 +807,10 @@ public class RatWarrensDialogue {
 								UtilText.parse(companion, "Tell [npc.name] that [npc.she] can have some fun with the gang members while you watch."),
 								false,
 								false,
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								getGuards(false),
 								null,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								GUARD_COMBAT_VICTORY_AFTER_SEX,
 								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_SEX_GIVE_TO_COMPANION", getGuards(false)));
 					}
@@ -835,9 +829,9 @@ public class RatWarrensDialogue {
 								true,
 								false,
 								getGuards(false),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								GUARD_COMBAT_VICTORY_AFTER_SEX,
 								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_SEX_OFFER_COMPANION", getGuards(false))) {
 							@Override
@@ -1049,7 +1043,7 @@ public class RatWarrensDialogue {
 			public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 				Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
 				for(GameCharacter guard : guards) {
-					map.put(guard, Util.newArrayListOfValues(CoverableArea.PENIS, CoverableArea.VAGINA));
+					map.put(guard, List.of(CoverableArea.PENIS, CoverableArea.VAGINA));
 				}
 				return map;
 			}
@@ -1749,12 +1743,12 @@ public class RatWarrensDialogue {
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								if(bartender.hasPenis()) {
 									return Util.newHashMapOfValues(
-											new Value<>(bartender, Util.newArrayListOfValues(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)));
+											new Value<>(bartender, List.of(CoverableArea.PENIS)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)));
 								} else {
 									return Util.newHashMapOfValues(
-											new Value<>(bartender, Util.newArrayListOfValues(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)));
+											new Value<>(bartender, List.of(CoverableArea.VAGINA)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)));
 								}
 							}
 							@Override
@@ -1778,15 +1772,15 @@ public class RatWarrensDialogue {
 							}	
 						},
 						null,
-						Util.newArrayListOfValues(getMainCompanion()),
+						List.of(getMainCompanion()),
 						AFTER_DICE_DEN_ORAL,
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "DICE_DEN_RUM_ORAL", getGuards(true))) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
 						if(bartender.hasPenis()) {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(bartender, Main.game.getPlayer(), PenisMouth.BLOWJOB_START, true, true));
+							return List.of(new InitialSexActionInformation(bartender, Main.game.getPlayer(), PenisMouth.BLOWJOB_START, true, true));
 						} else {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(bartender, Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, true, true));
+							return List.of(new InitialSexActionInformation(bartender, Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, true, true));
 						}
 					}
 				};
@@ -1841,12 +1835,12 @@ public class RatWarrensDialogue {
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 											if(bartender.hasPenis()) {
 												return Util.newHashMapOfValues(
-														new Value<>(bartender, Util.newArrayListOfValues(CoverableArea.PENIS)),
-														new Value<>(companion, Util.newArrayListOfValues(CoverableArea.MOUTH)));
+														new Value<>(bartender, List.of(CoverableArea.PENIS)),
+														new Value<>(companion, List.of(CoverableArea.MOUTH)));
 											} else {
 												return Util.newHashMapOfValues(
-														new Value<>(bartender, Util.newArrayListOfValues(CoverableArea.VAGINA)),
-														new Value<>(companion, Util.newArrayListOfValues(CoverableArea.MOUTH)));
+														new Value<>(bartender, List.of(CoverableArea.VAGINA)),
+														new Value<>(companion, List.of(CoverableArea.MOUTH)));
 											}
 										}
 										@Override
@@ -1870,15 +1864,15 @@ public class RatWarrensDialogue {
 										}	
 									},
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									AFTER_DICE_DEN_ORAL,
 									UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "DICE_DEN_RUM_ORAL_COMPANION", getGuards(true))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
 									if(bartender.hasPenis()) {
-										return Util.newArrayListOfValues(new InitialSexActionInformation(bartender, companion, PenisMouth.BLOWJOB_START, true, true));
+										return List.of(new InitialSexActionInformation(bartender, companion, PenisMouth.BLOWJOB_START, true, true));
 									} else {
-										return Util.newArrayListOfValues(new InitialSexActionInformation(bartender, companion, TongueVagina.RECEIVING_CUNNILINGUS_START, true, true));
+										return List.of(new InitialSexActionInformation(bartender, companion, TongueVagina.RECEIVING_CUNNILINGUS_START, true, true));
 									}
 								}
 							};
@@ -1990,7 +1984,7 @@ public class RatWarrensDialogue {
 							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().incrementMoney(-500));
 							Main.game.getNpc(Murk.class).incrementMoney(500);
 							for(GameCharacter milker : getMilkers()) {
-								((RatWarrensCaptive)milker).applyMilkingEquipment(false, Util.newArrayListOfValues(InventorySlot.VAGINA));
+								((RatWarrensCaptive)milker).applyMilkingEquipment(false, List.of(InventorySlot.VAGINA));
 							}
 						}
 					};
@@ -2097,7 +2091,7 @@ public class RatWarrensDialogue {
 								Main.game.getPlayer().getParty(),
 								null,
 								AFTER_MILKER_SEX,
-								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
+								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX", List.of(isCompanionDialogue()?getMainCompanion():null, milker))) {
 							@Override
 							public void effects() {
 								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
@@ -2129,7 +2123,7 @@ public class RatWarrensDialogue {
 								Main.game.getPlayer().getParty(),
 								null,
 								AFTER_MILKER_SEX,
-								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_AFTER_CLEARED", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
+								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_AFTER_CLEARED", List.of(isCompanionDialogue()?getMainCompanion():null, milker))) {
 							@Override
 							public void effects() {
 								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
@@ -2175,10 +2169,10 @@ public class RatWarrensDialogue {
 										}
 									}
 								},
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								null,
 								AFTER_MILKER_SEX,
-								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_COMPANION", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
+								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_COMPANION", List.of(isCompanionDialogue()?getMainCompanion():null, milker))) {
 							@Override
 							public void effects() {
 								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
@@ -2207,10 +2201,10 @@ public class RatWarrensDialogue {
 										}
 									}
 								},
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								null,
 								AFTER_MILKER_SEX,
-								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_COMPANION_AFTER_CLEARED", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
+								UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_COMPANION_AFTER_CLEARED", List.of(isCompanionDialogue()?getMainCompanion():null, milker))) {
 							@Override
 							public void effects() {
 								Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
@@ -2256,7 +2250,7 @@ public class RatWarrensDialogue {
 							null,
 							null,
 							AFTER_MILKER_SEX,
-							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_BOTH_AFTER_CLEARED", Util.newArrayListOfValues(isCompanionDialogue()?getMainCompanion():null, milker))) {
+							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "MILKING_ROOM_SEX_BOTH_AFTER_CLEARED", List.of(isCompanionDialogue()?getMainCompanion():null, milker))) {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensSeenMilkers, true);
@@ -2323,7 +2317,7 @@ public class RatWarrensDialogue {
 						Main.game.getPlayer().setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_STORAGE);
 						Main.game.getNpc(Murk.class).setLocation(WorldType.RAT_WARRENS, PlaceType.RAT_WARRENS_MILKING_STORAGE);
 						for(GameCharacter milker : getMilkers()) {
-							((RatWarrensCaptive)milker).applyMilkingEquipment(true, Util.newArrayListOfValues(InventorySlot.NIPPLE, InventorySlot.VAGINA));
+							((RatWarrensCaptive)milker).applyMilkingEquipment(true, List.of(InventorySlot.NIPPLE, InventorySlot.VAGINA));
 						}
 					}
 				};
@@ -2701,7 +2695,7 @@ public class RatWarrensDialogue {
 				return new ResponseCombat("Fight",
 						"Fight Vengar's rat-girl bodyguards.",
 						Main.game.getNpc(Shadow.class),
-						Util.newArrayListOfValues(Main.game.getNpc(Shadow.class), Main.game.getNpc(Silence.class)),
+						List.of(Main.game.getNpc(Shadow.class), Main.game.getNpc(Silence.class)),
 						Util.newHashMapOfValues(
 								new Value<>(Main.game.getNpc(Shadow.class), ""),
 								new Value<>(Main.game.getNpc(Silence.class), "")));
@@ -2938,20 +2932,18 @@ public class RatWarrensDialogue {
 														new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
 												Util.newHashMapOfValues(
 														new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS))),
-										Util.newArrayListOfValues(
-												Main.game.getNpc(Shadow.class),
+										List.of(Main.game.getNpc(Shadow.class),
 												Main.game.getNpc(Silence.class)),
-										Util.newArrayListOfValues(
-												Main.game.getPlayer()),
+										List.of(Main.game.getPlayer()),
 										VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX,
 										UtilText.parseFromXMLFile("places/submission/ratWarrens/core", isVaginaAccess(getMainCompanion())?"VENGARS_HALL_SUB_SEX_WATCH":"VENGARS_HALL_SUB_SEX_WATCH_ANAL", getGuards(true))) {
 									@Override
 									public List<InitialSexActionInformation> getInitialSexActions() {
 										if(isVaginaAccess(getMainCompanion())) {
-											return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisVagina.PENIS_FUCKING_START, false, true));
+											return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisVagina.PENIS_FUCKING_START, false, true));
 											
 										} else if(isAssAccess(getMainCompanion())) {
-											return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisAnus.PENIS_FUCKING_START, false, true));
+											return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisAnus.PENIS_FUCKING_START, false, true));
 										}
 										return super.getInitialSexActions();
 									}
@@ -3004,20 +2996,18 @@ public class RatWarrensDialogue {
 										new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
 								Util.newHashMapOfValues(
 										new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
-						Util.newArrayListOfValues(
-								Main.game.getNpc(Shadow.class),
+						List.of(Main.game.getNpc(Shadow.class),
 								Main.game.getNpc(Silence.class)),
-						Util.newArrayListOfValues(
-								getMainCompanion()),
+						List.of(getMainCompanion()),
 						VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX,
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/core", isVaginaAccess(Main.game.getPlayer())?"VENGARS_HALL_SUB_SEX_SOLO_START":"VENGARS_HALL_SUB_SEX_SOLO_START_ANAL", getGuards(true))) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
 						if(isVaginaAccess(Main.game.getPlayer())) {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 							
 						} else if(isAssAccess(Main.game.getPlayer())) {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
 						}
 						return super.getInitialSexActions();
 					}
@@ -3062,20 +3052,18 @@ public class RatWarrensDialogue {
 											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
 									Util.newHashMapOfValues(
 											new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS))),
-							Util.newArrayListOfValues(
-									Main.game.getNpc(Shadow.class),
+							List.of(Main.game.getNpc(Shadow.class),
 									Main.game.getNpc(Silence.class)),
-							Util.newArrayListOfValues(
-									Main.game.getPlayer()),
+							List.of(Main.game.getPlayer()),
 							VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX,
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", isVaginaAccess(getMainCompanion())?"VENGARS_HALL_SUB_SEX_WATCH":"VENGARS_HALL_SUB_SEX_WATCH_ANAL", getGuards(true))) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
 							if(isVaginaAccess(getMainCompanion())) {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisVagina.PENIS_FUCKING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisVagina.PENIS_FUCKING_START, false, true));
 								
 							} else if(isAssAccess(getMainCompanion())) {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisAnus.PENIS_FUCKING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisAnus.PENIS_FUCKING_START, false, true));
 							}
 							return super.getInitialSexActions();
 						}
@@ -3122,11 +3110,9 @@ public class RatWarrensDialogue {
 												isVaginaAccess(getMainCompanion())
 													?SexSlotAllFours.IN_FRONT
 													:SexSlotAllFours.IN_FRONT_ANAL))),
-						Util.newArrayListOfValues(
-								Main.game.getNpc(Shadow.class),
+						List.of(Main.game.getNpc(Shadow.class),
 								Main.game.getNpc(Silence.class)),
-						Util.newArrayListOfValues(
-								!isMouthAccess(Main.game.getPlayer())
+						List.of(!isMouthAccess(Main.game.getPlayer())
 									?getMainCompanion()
 									:isVaginaAccess(getMainCompanion())
 										?null
@@ -3189,11 +3175,9 @@ public class RatWarrensDialogue {
 												isVaginaAccess(Main.game.getPlayer())
 													?SexSlotAllFours.IN_FRONT
 													:SexSlotAllFours.IN_FRONT_ANAL))),
-						Util.newArrayListOfValues(
-								Main.game.getNpc(Shadow.class),
+						List.of(Main.game.getNpc(Shadow.class),
 								Main.game.getNpc(Silence.class)),
-						Util.newArrayListOfValues(
-								!isMouthAccess(getMainCompanion())
+						List.of(!isMouthAccess(getMainCompanion())
 									?Main.game.getPlayer()
 									:isVaginaAccess(Main.game.getPlayer())
 										?null
@@ -3280,11 +3264,9 @@ public class RatWarrensDialogue {
 									return previousWetAreas;
 								}
 							},
-							Util.newArrayListOfValues(
-									Main.game.getNpc(Shadow.class),
+							List.of(Main.game.getNpc(Shadow.class),
 									Main.game.getNpc(Silence.class)),
-							Util.newArrayListOfValues(
-								!isMouthAccess(Main.game.getPlayer())
+							List.of(!isMouthAccess(Main.game.getPlayer())
 									?getMainCompanion()
 									:isVaginaAccess(getMainCompanion())
 										?null
@@ -3349,11 +3331,9 @@ public class RatWarrensDialogue {
 													isVaginaAccess(Main.game.getPlayer())
 														?SexSlotAllFours.IN_FRONT
 														:SexSlotAllFours.IN_FRONT_ANAL))),
-							Util.newArrayListOfValues(
-									Main.game.getNpc(Shadow.class),
+							List.of(Main.game.getNpc(Shadow.class),
 									Main.game.getNpc(Silence.class)),
-							Util.newArrayListOfValues(
-								!isMouthAccess(getMainCompanion())
+							List.of(!isMouthAccess(getMainCompanion())
 									?Main.game.getPlayer()
 									:isVaginaAccess(Main.game.getPlayer())
 										?null
@@ -3640,8 +3620,8 @@ public class RatWarrensDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(Vengar.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Vengar.class)),
+								List.of(Main.game.getPlayer()),
 								null,
 								null),
 						VENGARS_HALL_APPROACH_SEDUCE_AFTER_SEX,
@@ -3654,8 +3634,8 @@ public class RatWarrensDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(Vengar.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Vengar.class)),
 								null,
 								null),
 						VENGARS_HALL_APPROACH_SEDUCE_AFTER_SEX,
@@ -3778,7 +3758,7 @@ public class RatWarrensDialogue {
 				return new ResponseCombat("Silence",
 						"It looks like you'll have to deal with both Silence and her newly-summoned elemental!",
 						Main.game.getNpc(Silence.class),
-						Util.newArrayListOfValues(Main.game.getNpc(Silence.class), Main.game.getNpc(Silence.class).getElemental()),
+						List.of(Main.game.getNpc(Silence.class), Main.game.getNpc(Silence.class).getElemental()),
 						null);
 			}
 			return null;
@@ -3806,7 +3786,7 @@ public class RatWarrensDialogue {
 				return new ResponseCombat("Shadow",
 						"It looks like you'll have to deal with an enraged Shadow!",
 						Main.game.getNpc(Shadow.class),
-						Util.newArrayListOfValues(Main.game.getNpc(Shadow.class)),
+						List.of(Main.game.getNpc(Shadow.class)),
 						null);
 			}
 			return null;
@@ -3992,14 +3972,14 @@ public class RatWarrensDialogue {
 						"Do what's expected of you and obediently give Vengar a blowjob.",
 						false,
 						false,
-						getStocksManager(Util.newArrayListOfValues(Main.game.getNpc(Vengar.class)), null),
+						getStocksManager(List.of(Main.game.getNpc(Vengar.class)), null),
 						null,
 						null,
 						BODYGUARDS_COMBAT_DEFEAT_AFTER_MILKING_ROOM_SEX,
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "BODYGUARDS_COMBAT_DEFEAT_STRIPPED_END_SEX")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 					}
 				};
 				
@@ -4008,14 +3988,14 @@ public class RatWarrensDialogue {
 						"Make a show of how willing you are to obediently give Vengar a blowjob.",
 						false,
 						false,
-						getStocksManager(Util.newArrayListOfValues(Main.game.getNpc(Vengar.class)), SexPace.SUB_EAGER),
+						getStocksManager(List.of(Main.game.getNpc(Vengar.class)), SexPace.SUB_EAGER),
 						null,
 						null,
 						BODYGUARDS_COMBAT_DEFEAT_AFTER_MILKING_ROOM_SEX,
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "BODYGUARDS_COMBAT_DEFEAT_STRIPPED_END_SEX_EAGER")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 					}
 				};
 				
@@ -4024,14 +4004,14 @@ public class RatWarrensDialogue {
 						"Do your best to resist performing giving Vengar a blowjob.",
 						false,
 						false,
-						getStocksManager(Util.newArrayListOfValues(Main.game.getNpc(Vengar.class)), SexPace.SUB_RESISTING),
+						getStocksManager(List.of(Main.game.getNpc(Vengar.class)), SexPace.SUB_RESISTING),
 						null,
 						null,
 						BODYGUARDS_COMBAT_DEFEAT_AFTER_MILKING_ROOM_SEX,
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "BODYGUARDS_COMBAT_DEFEAT_STRIPPED_END_SEX_RESIST")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 					}
 				};
 				
@@ -4122,8 +4102,8 @@ public class RatWarrensDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(Vengar.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Vengar.class)),
+								List.of(Main.game.getPlayer()),
 								null,
 								null) {
 								@Override
@@ -4141,8 +4121,8 @@ public class RatWarrensDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(Vengar.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Vengar.class)),
 								null,
 								null) {
 								@Override
@@ -4203,11 +4183,9 @@ public class RatWarrensDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(
-										Main.game.getPlayer(),
+								List.of(Main.game.getPlayer(),
 										Main.game.getNpc(Vengar.class)),
-								Util.newArrayListOfValues(
-										Main.game.getNpc(Axel.class)),
+								List.of(Main.game.getNpc(Axel.class)),
 								null,
 								null){
 							@Override
@@ -4225,9 +4203,9 @@ public class RatWarrensDialogue {
 						true,
 						true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(Vengar.class)),
-								Util.newArrayListOfValues(Main.game.getNpc(Axel.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Vengar.class)),
+								List.of(Main.game.getNpc(Axel.class)),
+								List.of(Main.game.getPlayer()),
 								null) {
 								@Override
 								public boolean isPlayerAbleToStopSex() {

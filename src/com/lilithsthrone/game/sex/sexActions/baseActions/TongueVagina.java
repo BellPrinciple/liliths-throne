@@ -38,7 +38,7 @@ public class TongueVagina {
 	}
 
 	private static List<GameCharacter> getCharactersForParsing(GameCharacter characterReceivingCunnilingus) {
-		List<GameCharacter> characters = Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()));
+		List<GameCharacter> characters = List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()));
 		for(GameCharacter c : getOngoingCharacters(characterReceivingCunnilingus)) {
 			if(!characters.contains(c)) {
 				characters.add(c);

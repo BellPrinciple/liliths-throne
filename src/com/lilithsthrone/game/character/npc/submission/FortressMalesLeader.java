@@ -116,8 +116,7 @@ public class FortressMalesLeader extends NPC {
 	public void setupPerks(boolean autoSelectPerks) {
 		this.addSpecialPerk(Perk.SPECIAL_MARTIAL_BACKGROUND);
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.FETISH_SEEDER,
+				List.of(Perk.FETISH_SEEDER,
 						Perk.MELEE_DAMAGE),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 5),
@@ -345,7 +344,7 @@ public class FortressMalesLeader extends NPC {
 
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(FortressMalesLeaderSA.class);
+		return List.of(FortressMalesLeaderSA.class);
 	}
 	
 	// Combat:

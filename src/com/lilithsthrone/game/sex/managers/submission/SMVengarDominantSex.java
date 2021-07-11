@@ -39,21 +39,21 @@ public class SMVengarDominantSex extends SexManagerDefault {
 		
 		for(GameCharacter dom : this.getDominants().keySet()) {
 			if(dom.equals(Main.game.getNpc(Vengar.class))) {
-				map.put(Main.game.getNpc(Vengar.class), Util.newArrayListOfValues(CoverableArea.PENIS));
+				map.put(Main.game.getNpc(Vengar.class), List.of(CoverableArea.PENIS));
 				
 			} else if(dom.equals(Main.game.getNpc(Shadow.class))) {
-				map.put(Main.game.getNpc(Shadow.class), Util.newArrayListOfValues(CoverableArea.VAGINA));
+				map.put(Main.game.getNpc(Shadow.class), List.of(CoverableArea.VAGINA));
 				
 			} else if(dom.equals(Main.game.getNpc(Silence.class))) {
-				map.put(Main.game.getNpc(Silence.class), Util.newArrayListOfValues(CoverableArea.VAGINA));
+				map.put(Main.game.getNpc(Silence.class), List.of(CoverableArea.VAGINA));
 				
 			} else {
-				map.put(dom, Util.newArrayListOfValues(CoverableArea.PENIS));
+				map.put(dom, List.of(CoverableArea.PENIS));
 			}
 		}
 		
 		if(this.getSubmissives().containsKey(Main.game.getPlayer())) {
-			map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH));
+			map.put(Main.game.getPlayer(), List.of(CoverableArea.MOUTH));
 			if(Main.game.getPlayer().hasVagina() && Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.VAGINA, true)) {
 				map.get(Main.game.getPlayer()).add(CoverableArea.VAGINA);
 			} else {
@@ -63,7 +63,7 @@ public class SMVengarDominantSex extends SexManagerDefault {
 		
 		GameCharacter companion = Main.game.getPlayer().getMainCompanion();
 		if(companion!=null && this.getSubmissives().containsKey(companion)) {
-			map.put(companion, Util.newArrayListOfValues(CoverableArea.MOUTH));
+			map.put(companion, List.of(CoverableArea.MOUTH));
 			if(companion.hasVagina() && companion.isAbleToAccessCoverableArea(CoverableArea.VAGINA, true)) {
 				map.get(companion).add(CoverableArea.VAGINA);
 			} else {

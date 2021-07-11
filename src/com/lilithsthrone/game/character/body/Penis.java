@@ -116,8 +116,7 @@ public class Penis implements BodyPartInterface {
 		}
 		
 		if(owner.isPenisFeral()) {
-			list.add(Util.randomItemFrom(Util.newArrayListOfValues(
-					"feral",
+			list.add(Util.randomItemFrom(List.of("feral",
 					"bestial",
 					"animalistic")));
 		} else {

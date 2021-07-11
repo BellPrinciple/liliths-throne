@@ -1279,7 +1279,7 @@ public class InventoryDialogue {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Opponent)",
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
 											Main.combat.ENEMY_ATTACK,
-											Util.newArrayListOfValues(Fetish.FETISH_KINK_GIVING),
+											List.of(Fetish.FETISH_KINK_GIVING),
 											Fetish.FETISH_KINK_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -1296,7 +1296,7 @@ public class InventoryDialogue {
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Opponent)",
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
 											Main.combat.ENEMY_ATTACK,
-											Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
+											List.of(Fetish.FETISH_TRANSFORMATION_GIVING),
 											Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -1476,7 +1476,7 @@ public class InventoryDialogue {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
 											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_KINK_GIVING),
+											List.of(Fetish.FETISH_KINK_GIVING),
 											Fetish.FETISH_KINK_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -1491,7 +1491,7 @@ public class InventoryDialogue {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
 											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
+											List.of(Fetish.FETISH_TRANSFORMATION_GIVING),
 											Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -1529,7 +1529,7 @@ public class InventoryDialogue {
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC)
 												+"<br/>[style.italicsMinorGood(Repeat this for all of the " + item.getNamePlural() + " which are in your inventory.)]",
 											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_KINK_GIVING),
+											List.of(Fetish.FETISH_KINK_GIVING),
 											Fetish.FETISH_KINK_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -1548,7 +1548,7 @@ public class InventoryDialogue {
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC)
 												+"<br/>[style.italicsMinorGood(Repeat this for all of the " + item.getNamePlural() + " which are in your inventory.)]",
 											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
+											List.of(Fetish.FETISH_TRANSFORMATION_GIVING),
 											Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -1649,7 +1649,7 @@ public class InventoryDialogue {
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)",
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
 											Main.sex.SEX_DIALOGUE,
-											Util.newArrayListOfValues(Fetish.FETISH_KINK_GIVING),
+											List.of(Fetish.FETISH_KINK_GIVING),
 											Fetish.FETISH_KINK_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -1669,7 +1669,7 @@ public class InventoryDialogue {
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)",
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
 											Main.sex.SEX_DIALOGUE,
-											Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
+											List.of(Fetish.FETISH_TRANSFORMATION_GIVING),
 											Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -2176,7 +2176,7 @@ public class InventoryDialogue {
 											Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
 											item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), inventoryNPC),
 											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_KINK_GIVING),
+											List.of(Fetish.FETISH_KINK_GIVING),
 											Fetish.FETISH_KINK_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -2192,7 +2192,7 @@ public class InventoryDialogue {
 											Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
 											item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), inventoryNPC),
 											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
+											List.of(Fetish.FETISH_TRANSFORMATION_GIVING),
 											Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -2233,7 +2233,7 @@ public class InventoryDialogue {
 											item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), inventoryNPC)
 												+"<br/>[style.italicsMinorGood(Repeat this for all of the " + item.getNamePlural() + " which are in [npc.namePos] inventory.)]",
 											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_KINK_GIVING),
+											List.of(Fetish.FETISH_KINK_GIVING),
 											Fetish.FETISH_KINK_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -2254,7 +2254,7 @@ public class InventoryDialogue {
 											item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), inventoryNPC)
 												+"<br/>[style.italicsMinorGood(Repeat this for all of the " + item.getNamePlural() + " which are in [npc.namePos] inventory.)]",
 											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
+											List.of(Fetish.FETISH_TRANSFORMATION_GIVING),
 											Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
 											null,
 											null,
@@ -8819,7 +8819,7 @@ public class InventoryDialogue {
 			return new Response("Sabotage", "By making a small tear in the end of this condom, you can ensure that it will break at the moment of orgasm!", CLOTHING_INVENTORY) {
 				@Override
 				public void effects(){
-					AbstractClothing c = (AbstractClothing) EnchantmentDialogue.craftAndApplyFullInventoryEffects(clothing, Util.newArrayListOfValues(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_CONDOM, TFModifier.ARCANE_BOOST, TFPotency.MAJOR_DRAIN, 0)));
+					AbstractClothing c = (AbstractClothing) EnchantmentDialogue.craftAndApplyFullInventoryEffects(clothing, List.of(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_CONDOM, TFModifier.ARCANE_BOOST, TFPotency.MAJOR_DRAIN, 0)));
 					
 					Main.game.getPlayer().removeClothing(c);
 					c.setName(c.getClothingType().getName());

@@ -35,7 +35,7 @@ public class PenisVagina {
 	}
 
 	private static List<GameCharacter> getCharactersForParsing(GameCharacter characterReceivingDP) {
-		List<GameCharacter> characters = Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()));
+		List<GameCharacter> characters = List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()));
 		for(GameCharacter c : getOngoingCharacters(characterReceivingDP)) {
 			if(!characters.contains(c)) {
 				characters.add(c);
@@ -81,7 +81,7 @@ public class PenisVagina {
 			if(!getOngoingCharacters(Main.sex.getCharacterTargetedForSexAction(this)).isEmpty()) {
 				switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 					case DOM_GENTLE:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
 								UtilText.returnStringAtRandom(
 								"Not deterred by the fact that [npc3.namePos] [npc3.cock] is already deep in [npc2.namePos] [npc2.pussy+],"
 										+ " [npc.name] [npc.verb(start)] slowly teasing the [npc.cockTip+] of [npc.her] own [npc.cock+] up against [npc2.her] [npc2.labia+], threatening to start double-penetrating [npc.herHim] at any moment.",
@@ -91,7 +91,7 @@ public class PenisVagina {
 										+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(signal)] that [npc.she] might join [npc3.name] in some double-penetration.")));
 						break;
 					case DOM_ROUGH:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
 								UtilText.returnStringAtRandom(
 								"Not deterred by the fact that [npc3.namePos] [npc3.cock] is already deep in [npc2.namePos] [npc2.pussy+],"
 										+ " [npc.name] [npc.verb(start)] roughly grinding the [npc.cockTip+] of [npc.her] own [npc.cock+] up against [npc2.her] [npc2.labia+], threatening to start double-penetrating [npc.herHim] at any moment.",
@@ -101,7 +101,7 @@ public class PenisVagina {
 										+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(signal)] that [npc.she] might join [npc3.name] in some double-penetration.")));
 						break;
 					case SUB_NORMAL:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
 								UtilText.returnStringAtRandom(
 								"Not deterred by the fact that [npc3.namePos] [npc3.cock] is already deep in [npc2.namePos] [npc2.pussy+],"
 										+ " [npc.name] [npc.verb(start)] grinding the [npc.cockTip+] of [npc.her] own [npc.cock+] up against [npc2.her] [npc2.labia+], threatening to start double-penetrating [npc.herHim] at any moment.",
@@ -111,7 +111,7 @@ public class PenisVagina {
 										+ " [npc.name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(signal)] that [npc.she] might join [npc3.name] in some double-penetration.")));
 						break;
 					default:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
 								UtilText.returnStringAtRandom(
 								"Not deterred by the fact that [npc3.namePos] [npc3.cock] is already deep in [npc2.namePos] [npc2.pussy+],"
 										+ " [npc.name] [npc.verb(start)] eagerly grinding the [npc.cockTip+] of [npc.her] own [npc.cock+] up against [npc2.her] [npc2.labia+], threatening to start double-penetrating [npc.herHim] at any moment.",
@@ -289,7 +289,7 @@ public class PenisVagina {
 				switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 					case DOM_GENTLE:
 						UtilText.nodeContentSB.append(
-								UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
+								UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
 								UtilText.returnStringAtRandom(
 								"Not satisfied with having just [npc3.namePos] [npc3.cock] penetrating [npc.herHim], [npc.name] [npc.verb(take)] hold of [npc2.namePos] [npc2.cock+],"
 										+ " before guiding it up to an exposed part of [npc.her] [npc.pussy] and gently teasing the [npc.cockHead] between [npc.her] [npc.labia+].",
@@ -300,7 +300,7 @@ public class PenisVagina {
 						break;
 					case DOM_ROUGH:
 						UtilText.nodeContentSB.append
-						(UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
+						(UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
 								UtilText.returnStringAtRandom(
 								"Not satisfied with having just [npc3.namePos] [npc3.cock] penetrating [npc.herHim], [npc.name] roughly [npc.verb(grab)] hold of [npc2.namePos] [npc2.cock+],"
 										+ " before guiding it up to an exposed part of [npc.her] [npc.pussy] and forcefully rubbing the [npc.cockHead] between [npc.her] [npc.labia+].",
@@ -311,7 +311,7 @@ public class PenisVagina {
 						break;
 					case SUB_NORMAL:
 						UtilText.nodeContentSB.append(
-								UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
+								UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
 								UtilText.returnStringAtRandom(
 								"Not satisfied with having just [npc3.namePos] [npc3.cock] penetrating [npc.herHim], [npc.name] [npc.verb(take)] hold of [npc2.namePos] [npc2.cock+],"
 										+ " before guiding it up to an exposed part of [npc.her] [npc.pussy] and rubbing the [npc.cockHead] between [npc.her] [npc.labia+].",
@@ -322,7 +322,7 @@ public class PenisVagina {
 						break;
 					default:
 						UtilText.nodeContentSB.append(
-								UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
+								UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getPrimaryDPPerformer(Main.sex.getCharacterTargetedForSexAction(this))),
 								UtilText.returnStringAtRandom(
 								"Not satisfied with having just [npc3.namePos] [npc3.cock] penetrating [npc.herHim], [npc.name] eagerly [npc.verb(grab)] hold of [npc2.namePos] [npc2.cock+],"
 										+ " before guiding it up to an exposed part of [npc.her] [npc.pussy] and desperately rubbing the [npc.cockHead] between [npc.her] [npc.labia+].",

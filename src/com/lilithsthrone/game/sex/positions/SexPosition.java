@@ -70,8 +70,7 @@ public class SexPosition {
 			8,
 			true,
 			SexActionPresets.positioningActionsNew,
-			Util.newArrayListOfValues(
-					MasturbationPanties.class,
+			List.of(MasturbationPanties.class,
 					Masturbation.class)) {
 		@Override
 		public Set<SexSlot> getAllAvailableSexPositions() {
@@ -106,7 +105,7 @@ public class SexPosition {
 		public Map<SexSlot, Map<SexSlot, SexActionInteractions>> getSlotTargets() {
 			List<Value<SexSlot, Map<SexSlot, SexActionInteractions>>> interactions = new ArrayList<>();
 
-			List<SexSlot> masturbationSlots = Util.newArrayListOfValues(SexSlotMasturbation.KNEELING, SexSlotMasturbation.STANDING, SexSlotMasturbation.SITTING);
+			List<SexSlot> masturbationSlots = List.of(SexSlotMasturbation.KNEELING, SexSlotMasturbation.STANDING, SexSlotMasturbation.SITTING);
 			
 			if(Main.sex.getCharacterInPosition(SexSlotMasturbation.KNEELING_PANTIES)!=null) {
 				interactions.add(StandardSexActionInteractions.masturbation.getSexActionInteractions(SexSlotMasturbation.KNEELING_PANTIES, SexSlotMasturbation.KNEELING_PANTIES));
@@ -124,19 +123,19 @@ public class SexPosition {
 	public static final AbstractSexPosition STANDING = new AbstractSexPosition("Standing",
 			8,
 			true,
-			SexActionPresets.positioningActionsNew, Util.newArrayListOfValues(KneelingOral.class)) {
+			SexActionPresets.positioningActionsNew, List.of(KneelingOral.class)) {
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {
 			List<List<SexSlot>> mutuallyExclusiveSlots = new ArrayList<>();
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL, SexSlotStanding.STANDING_SUBMISSIVE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL_TWO, SexSlotStanding.STANDING_SUBMISSIVE_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL_THREE, SexSlotStanding.STANDING_SUBMISSIVE_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL_FOUR, SexSlotStanding.STANDING_SUBMISSIVE_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStanding.PERFORMING_ORAL, SexSlotStanding.STANDING_SUBMISSIVE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStanding.PERFORMING_ORAL_TWO, SexSlotStanding.STANDING_SUBMISSIVE_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStanding.PERFORMING_ORAL_THREE, SexSlotStanding.STANDING_SUBMISSIVE_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStanding.PERFORMING_ORAL_FOUR, SexSlotStanding.STANDING_SUBMISSIVE_FOUR));
 			
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL_BEHIND, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL_BEHIND_TWO, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL_BEHIND_THREE, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStanding.PERFORMING_ORAL_BEHIND_FOUR, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStanding.PERFORMING_ORAL_BEHIND, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStanding.PERFORMING_ORAL_BEHIND_TWO, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStanding.PERFORMING_ORAL_BEHIND_THREE, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStanding.PERFORMING_ORAL_BEHIND_FOUR, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_FOUR));
 			
 			for(List<SexSlot> entry : mutuallyExclusiveSlots) {
 				for(SexSlot s : entry) {
@@ -509,16 +508,11 @@ public class SexPosition {
 		public Map<SexSlot, Map<SexSlot, SexActionInteractions>> getSlotTargets() {
 			List<Value<SexSlot, Map<SexSlot, SexActionInteractions>>> interactions = new ArrayList<>();
 			
-			List<SexSlot> domStanding = Util.newArrayListOfValues(
-					SexSlotStanding.STANDING_DOMINANT, SexSlotStanding.STANDING_DOMINANT_TWO, SexSlotStanding.STANDING_DOMINANT_THREE, SexSlotStanding.STANDING_DOMINANT_FOUR);
-			List<SexSlot> subStanding = Util.newArrayListOfValues(
-					SexSlotStanding.STANDING_SUBMISSIVE, SexSlotStanding.STANDING_SUBMISSIVE_TWO, SexSlotStanding.STANDING_SUBMISSIVE_THREE, SexSlotStanding.STANDING_SUBMISSIVE_FOUR);
-			List<SexSlot> subStandingBehind = Util.newArrayListOfValues(
-					SexSlotStanding.STANDING_SUBMISSIVE_BEHIND, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_TWO, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_THREE, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_FOUR);
-			List<SexSlot> performingOral = Util.newArrayListOfValues(
-					SexSlotStanding.PERFORMING_ORAL, SexSlotStanding.PERFORMING_ORAL_TWO, SexSlotStanding.PERFORMING_ORAL_THREE, SexSlotStanding.PERFORMING_ORAL_FOUR);
-			List<SexSlot> performingOralBehind = Util.newArrayListOfValues(
-					SexSlotStanding.PERFORMING_ORAL_BEHIND, SexSlotStanding.PERFORMING_ORAL_BEHIND_TWO, SexSlotStanding.PERFORMING_ORAL_BEHIND_THREE, SexSlotStanding.PERFORMING_ORAL_BEHIND_FOUR);
+			List<SexSlot> domStanding = List.of(SexSlotStanding.STANDING_DOMINANT, SexSlotStanding.STANDING_DOMINANT_TWO, SexSlotStanding.STANDING_DOMINANT_THREE, SexSlotStanding.STANDING_DOMINANT_FOUR);
+			List<SexSlot> subStanding = List.of(SexSlotStanding.STANDING_SUBMISSIVE, SexSlotStanding.STANDING_SUBMISSIVE_TWO, SexSlotStanding.STANDING_SUBMISSIVE_THREE, SexSlotStanding.STANDING_SUBMISSIVE_FOUR);
+			List<SexSlot> subStandingBehind = List.of(SexSlotStanding.STANDING_SUBMISSIVE_BEHIND, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_TWO, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_THREE, SexSlotStanding.STANDING_SUBMISSIVE_BEHIND_FOUR);
+			List<SexSlot> performingOral = List.of(SexSlotStanding.PERFORMING_ORAL, SexSlotStanding.PERFORMING_ORAL_TWO, SexSlotStanding.PERFORMING_ORAL_THREE, SexSlotStanding.PERFORMING_ORAL_FOUR);
+			List<SexSlot> performingOralBehind = List.of(SexSlotStanding.PERFORMING_ORAL_BEHIND, SexSlotStanding.PERFORMING_ORAL_BEHIND_TWO, SexSlotStanding.PERFORMING_ORAL_BEHIND_THREE, SexSlotStanding.PERFORMING_ORAL_BEHIND_FOUR);
 			
 			// Adding faceToFace for every dominant to every submissive:
 			for(SexSlot slotD : domStanding) {
@@ -588,14 +582,14 @@ public class SexPosition {
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {
 			List<List<SexSlot>> mutuallyExclusiveSlots = new ArrayList<>();
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAgainstWall.FACE_TO_WALL, SexSlotAgainstWall.BACK_TO_WALL));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAgainstWall.FACE_TO_WALL_TWO, SexSlotAgainstWall.BACK_TO_WALL_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAgainstWall.FACE_TO_WALL_THREE, SexSlotAgainstWall.BACK_TO_WALL_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAgainstWall.FACE_TO_WALL_FOUR, SexSlotAgainstWall.BACK_TO_WALL_FOUR));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL, SexSlotAgainstWall.PERFORMING_ORAL_WALL));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL_TWO, SexSlotAgainstWall.PERFORMING_ORAL_WALL_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL_THREE, SexSlotAgainstWall.PERFORMING_ORAL_WALL_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL_FOUR, SexSlotAgainstWall.PERFORMING_ORAL_WALL_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAgainstWall.FACE_TO_WALL, SexSlotAgainstWall.BACK_TO_WALL));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAgainstWall.FACE_TO_WALL_TWO, SexSlotAgainstWall.BACK_TO_WALL_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAgainstWall.FACE_TO_WALL_THREE, SexSlotAgainstWall.BACK_TO_WALL_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAgainstWall.FACE_TO_WALL_FOUR, SexSlotAgainstWall.BACK_TO_WALL_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAgainstWall.STANDING_WALL, SexSlotAgainstWall.PERFORMING_ORAL_WALL));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAgainstWall.STANDING_WALL_TWO, SexSlotAgainstWall.PERFORMING_ORAL_WALL_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAgainstWall.STANDING_WALL_THREE, SexSlotAgainstWall.PERFORMING_ORAL_WALL_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAgainstWall.STANDING_WALL_FOUR, SexSlotAgainstWall.PERFORMING_ORAL_WALL_FOUR));
 			
 			for(List<SexSlot> entry : mutuallyExclusiveSlots) {
 				for(SexSlot s : entry) {
@@ -800,10 +794,10 @@ public class SexPosition {
 		public Map<SexSlot, Map<SexSlot, SexActionInteractions>> getSlotTargets() {
 			List<Value<SexSlot, Map<SexSlot, SexActionInteractions>>> interactions = new ArrayList<>();
 
-			List<SexSlot> facingWall = Util.newArrayListOfValues(SexSlotAgainstWall.FACE_TO_WALL, SexSlotAgainstWall.FACE_TO_WALL_TWO, SexSlotAgainstWall.FACE_TO_WALL_THREE, SexSlotAgainstWall.FACE_TO_WALL_FOUR);
-			List<SexSlot> backToWall = Util.newArrayListOfValues(SexSlotAgainstWall.BACK_TO_WALL, SexSlotAgainstWall.BACK_TO_WALL_TWO, SexSlotAgainstWall.BACK_TO_WALL_THREE, SexSlotAgainstWall.BACK_TO_WALL_FOUR);
-			List<SexSlot> standing = Util.newArrayListOfValues(SexSlotAgainstWall.STANDING_WALL, SexSlotAgainstWall.STANDING_WALL_TWO, SexSlotAgainstWall.STANDING_WALL_THREE, SexSlotAgainstWall.STANDING_WALL_FOUR);
-			List<SexSlot> performingOral = Util.newArrayListOfValues(SexSlotAgainstWall.PERFORMING_ORAL_WALL, SexSlotAgainstWall.PERFORMING_ORAL_WALL_TWO, SexSlotAgainstWall.PERFORMING_ORAL_WALL_THREE, SexSlotAgainstWall.PERFORMING_ORAL_WALL_FOUR);
+			List<SexSlot> facingWall = List.of(SexSlotAgainstWall.FACE_TO_WALL, SexSlotAgainstWall.FACE_TO_WALL_TWO, SexSlotAgainstWall.FACE_TO_WALL_THREE, SexSlotAgainstWall.FACE_TO_WALL_FOUR);
+			List<SexSlot> backToWall = List.of(SexSlotAgainstWall.BACK_TO_WALL, SexSlotAgainstWall.BACK_TO_WALL_TWO, SexSlotAgainstWall.BACK_TO_WALL_THREE, SexSlotAgainstWall.BACK_TO_WALL_FOUR);
+			List<SexSlot> standing = List.of(SexSlotAgainstWall.STANDING_WALL, SexSlotAgainstWall.STANDING_WALL_TWO, SexSlotAgainstWall.STANDING_WALL_THREE, SexSlotAgainstWall.STANDING_WALL_FOUR);
+			List<SexSlot> performingOral = List.of(SexSlotAgainstWall.PERFORMING_ORAL_WALL, SexSlotAgainstWall.PERFORMING_ORAL_WALL_TWO, SexSlotAgainstWall.PERFORMING_ORAL_WALL_THREE, SexSlotAgainstWall.PERFORMING_ORAL_WALL_FOUR);
 			
 			// Assign all actions to all recipients.
 			// It might make more sense to limit actions to just the target "in front" of the standing or oral-performing character, but then it would require a bit of micro-management for the player to move into the correct slot.
@@ -866,7 +860,7 @@ public class SexPosition {
 	public static final AbstractSexPosition OVER_DESK = new AbstractSexPosition("Over desk",
 			8,
 			true,
-			SexActionPresets.positioningActionsNew, Util.newArrayListOfValues(MissionaryDesk.class)) {
+			SexActionPresets.positioningActionsNew, List.of(MissionaryDesk.class)) {
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {
 			Map<SexSlot, GameCharacter> reversedPositioningSlotsMap = new HashMap<>();
@@ -875,15 +869,15 @@ public class SexPosition {
 			}
 			
 			List<List<SexSlot>> mutuallyExclusiveSlots = new ArrayList<>();
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotDesk.BETWEEN_LEGS, SexSlotDesk.PERFORMING_ORAL));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotDesk.BETWEEN_LEGS_TWO, SexSlotDesk.PERFORMING_ORAL_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotDesk.BETWEEN_LEGS_THREE, SexSlotDesk.PERFORMING_ORAL_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotDesk.BETWEEN_LEGS_FOUR, SexSlotDesk.PERFORMING_ORAL_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotDesk.BETWEEN_LEGS, SexSlotDesk.PERFORMING_ORAL));
+			mutuallyExclusiveSlots.add(List.of(SexSlotDesk.BETWEEN_LEGS_TWO, SexSlotDesk.PERFORMING_ORAL_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotDesk.BETWEEN_LEGS_THREE, SexSlotDesk.PERFORMING_ORAL_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotDesk.BETWEEN_LEGS_FOUR, SexSlotDesk.PERFORMING_ORAL_FOUR));
 			
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotDesk.OVER_DESK_ON_FRONT, SexSlotDesk.OVER_DESK_ON_BACK));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotDesk.OVER_DESK_ON_FRONT_TWO, SexSlotDesk.OVER_DESK_ON_BACK_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotDesk.OVER_DESK_ON_FRONT_THREE, SexSlotDesk.OVER_DESK_ON_BACK_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotDesk.OVER_DESK_ON_FRONT_FOUR, SexSlotDesk.OVER_DESK_ON_BACK_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotDesk.OVER_DESK_ON_FRONT, SexSlotDesk.OVER_DESK_ON_BACK));
+			mutuallyExclusiveSlots.add(List.of(SexSlotDesk.OVER_DESK_ON_FRONT_TWO, SexSlotDesk.OVER_DESK_ON_BACK_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotDesk.OVER_DESK_ON_FRONT_THREE, SexSlotDesk.OVER_DESK_ON_BACK_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotDesk.OVER_DESK_ON_FRONT_FOUR, SexSlotDesk.OVER_DESK_ON_BACK_FOUR));
 			
 			for(List<SexSlot> entry : mutuallyExclusiveSlots) {
 				for(SexSlot s : entry) {
@@ -1276,11 +1270,11 @@ public class SexPosition {
 		public Map<SexSlot, Map<SexSlot, SexActionInteractions>> getSlotTargets() {
 			List<Value<SexSlot, Map<SexSlot, SexActionInteractions>>> interactions = new ArrayList<>();
 
-			List<SexSlot> onDeskBack = Util.newArrayListOfValues(SexSlotDesk.OVER_DESK_ON_BACK, SexSlotDesk.OVER_DESK_ON_BACK_TWO, SexSlotDesk.OVER_DESK_ON_BACK_THREE, SexSlotDesk.OVER_DESK_ON_BACK_FOUR);
-			List<SexSlot> onDeskFront = Util.newArrayListOfValues(SexSlotDesk.OVER_DESK_ON_FRONT, SexSlotDesk.OVER_DESK_ON_FRONT_TWO, SexSlotDesk.OVER_DESK_ON_FRONT_THREE, SexSlotDesk.OVER_DESK_ON_FRONT_FOUR);
-			List<SexSlot> standing = Util.newArrayListOfValues(SexSlotDesk.BETWEEN_LEGS, SexSlotDesk.BETWEEN_LEGS_TWO, SexSlotDesk.BETWEEN_LEGS_THREE, SexSlotDesk.BETWEEN_LEGS_FOUR);
-			List<SexSlot> performingOral = Util.newArrayListOfValues(SexSlotDesk.PERFORMING_ORAL, SexSlotDesk.PERFORMING_ORAL_TWO, SexSlotDesk.PERFORMING_ORAL_THREE, SexSlotDesk.PERFORMING_ORAL_FOUR);
-			List<SexSlot> receivingOral = Util.newArrayListOfValues(SexSlotDesk.RECEIVING_ORAL, SexSlotDesk.RECEIVING_ORAL_TWO, SexSlotDesk.RECEIVING_ORAL_THREE, SexSlotDesk.RECEIVING_ORAL_FOUR);
+			List<SexSlot> onDeskBack = List.of(SexSlotDesk.OVER_DESK_ON_BACK, SexSlotDesk.OVER_DESK_ON_BACK_TWO, SexSlotDesk.OVER_DESK_ON_BACK_THREE, SexSlotDesk.OVER_DESK_ON_BACK_FOUR);
+			List<SexSlot> onDeskFront = List.of(SexSlotDesk.OVER_DESK_ON_FRONT, SexSlotDesk.OVER_DESK_ON_FRONT_TWO, SexSlotDesk.OVER_DESK_ON_FRONT_THREE, SexSlotDesk.OVER_DESK_ON_FRONT_FOUR);
+			List<SexSlot> standing = List.of(SexSlotDesk.BETWEEN_LEGS, SexSlotDesk.BETWEEN_LEGS_TWO, SexSlotDesk.BETWEEN_LEGS_THREE, SexSlotDesk.BETWEEN_LEGS_FOUR);
+			List<SexSlot> performingOral = List.of(SexSlotDesk.PERFORMING_ORAL, SexSlotDesk.PERFORMING_ORAL_TWO, SexSlotDesk.PERFORMING_ORAL_THREE, SexSlotDesk.PERFORMING_ORAL_FOUR);
+			List<SexSlot> receivingOral = List.of(SexSlotDesk.RECEIVING_ORAL, SexSlotDesk.RECEIVING_ORAL_TWO, SexSlotDesk.RECEIVING_ORAL_THREE, SexSlotDesk.RECEIVING_ORAL_FOUR);
 
 			for(SexSlot slotStanding : standing) {
 				for(SexSlot slotBack : onDeskBack) {
@@ -1407,7 +1401,7 @@ public class SexPosition {
 			8,
 			true,
 			SexActionPresets.positioningActionsNew,
-			Util.newArrayListOfValues(StocksSex.class)) {
+			List.of(StocksSex.class)) {
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {
 			if(slot!= positioningSlots.get(characterToTakeSlot)) {
@@ -1426,10 +1420,10 @@ public class SexPosition {
 			}
 			
 			List<List<SexSlot>> mutuallyExclusiveSlots = new ArrayList<>();
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStocks.BENEATH_STOCKS, SexSlotStocks.PERFORMING_ORAL));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStocks.BENEATH_STOCKS_TWO, SexSlotStocks.PERFORMING_ORAL_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStocks.BENEATH_STOCKS_THREE, SexSlotStocks.PERFORMING_ORAL_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotStocks.BENEATH_STOCKS_FOUR, SexSlotStocks.PERFORMING_ORAL_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStocks.BENEATH_STOCKS, SexSlotStocks.PERFORMING_ORAL));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStocks.BENEATH_STOCKS_TWO, SexSlotStocks.PERFORMING_ORAL_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStocks.BENEATH_STOCKS_THREE, SexSlotStocks.PERFORMING_ORAL_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotStocks.BENEATH_STOCKS_FOUR, SexSlotStocks.PERFORMING_ORAL_FOUR));
 			
 			for(List<SexSlot> entry : mutuallyExclusiveSlots) {
 				for(SexSlot s : entry) {
@@ -1712,12 +1706,12 @@ public class SexPosition {
 		public Map<SexSlot, Map<SexSlot, SexActionInteractions>> getSlotTargets() {
 			List<Value<SexSlot, Map<SexSlot, SexActionInteractions>>> interactions = new ArrayList<>();
 
-			List<SexSlot> inStocks = Util.newArrayListOfValues(SexSlotStocks.LOCKED_IN_STOCKS, SexSlotStocks.LOCKED_IN_STOCKS_TWO, SexSlotStocks.LOCKED_IN_STOCKS_THREE, SexSlotStocks.LOCKED_IN_STOCKS_FOUR);
-			List<SexSlot> standing = Util.newArrayListOfValues(SexSlotStocks.BEHIND_STOCKS, SexSlotStocks.BEHIND_STOCKS_TWO, SexSlotStocks.BEHIND_STOCKS_THREE, SexSlotStocks.BEHIND_STOCKS_FOUR);
-			List<SexSlot> humping = Util.newArrayListOfValues(SexSlotStocks.HUMPING, SexSlotStocks.HUMPING_TWO, SexSlotStocks.HUMPING_THREE, SexSlotStocks.HUMPING_FOUR);
-			List<SexSlot> beneath = Util.newArrayListOfValues(SexSlotStocks.BENEATH_STOCKS, SexSlotStocks.BENEATH_STOCKS_TWO, SexSlotStocks.BENEATH_STOCKS_THREE, SexSlotStocks.BENEATH_STOCKS_FOUR);
-			List<SexSlot> performingOral = Util.newArrayListOfValues(SexSlotStocks.PERFORMING_ORAL, SexSlotStocks.PERFORMING_ORAL_TWO, SexSlotStocks.PERFORMING_ORAL_THREE, SexSlotStocks.PERFORMING_ORAL_FOUR);
-			List<SexSlot> receivingOral = Util.newArrayListOfValues(SexSlotStocks.RECEIVING_ORAL, SexSlotStocks.RECEIVING_ORAL_TWO, SexSlotStocks.RECEIVING_ORAL_THREE, SexSlotStocks.RECEIVING_ORAL_FOUR);
+			List<SexSlot> inStocks = List.of(SexSlotStocks.LOCKED_IN_STOCKS, SexSlotStocks.LOCKED_IN_STOCKS_TWO, SexSlotStocks.LOCKED_IN_STOCKS_THREE, SexSlotStocks.LOCKED_IN_STOCKS_FOUR);
+			List<SexSlot> standing = List.of(SexSlotStocks.BEHIND_STOCKS, SexSlotStocks.BEHIND_STOCKS_TWO, SexSlotStocks.BEHIND_STOCKS_THREE, SexSlotStocks.BEHIND_STOCKS_FOUR);
+			List<SexSlot> humping = List.of(SexSlotStocks.HUMPING, SexSlotStocks.HUMPING_TWO, SexSlotStocks.HUMPING_THREE, SexSlotStocks.HUMPING_FOUR);
+			List<SexSlot> beneath = List.of(SexSlotStocks.BENEATH_STOCKS, SexSlotStocks.BENEATH_STOCKS_TWO, SexSlotStocks.BENEATH_STOCKS_THREE, SexSlotStocks.BENEATH_STOCKS_FOUR);
+			List<SexSlot> performingOral = List.of(SexSlotStocks.PERFORMING_ORAL, SexSlotStocks.PERFORMING_ORAL_TWO, SexSlotStocks.PERFORMING_ORAL_THREE, SexSlotStocks.PERFORMING_ORAL_FOUR);
+			List<SexSlot> receivingOral = List.of(SexSlotStocks.RECEIVING_ORAL, SexSlotStocks.RECEIVING_ORAL_TWO, SexSlotStocks.RECEIVING_ORAL_THREE, SexSlotStocks.RECEIVING_ORAL_FOUR);
 
 			for(SexSlot slotStanding : standing) {
 				for(SexSlot stockSlot : inStocks) {
@@ -1798,7 +1792,7 @@ public class SexPosition {
 			8,
 			true,
 			SexActionPresets.positioningActionsNew,
-			Util.newArrayListOfValues(MilkingStall.class)) {
+			List.of(MilkingStall.class)) {
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {
 			if(slot!= positioningSlots.get(characterToTakeSlot)) {
@@ -1817,10 +1811,10 @@ public class SexPosition {
 			}
 			
 			List<List<SexSlot>> mutuallyExclusiveSlots = new ArrayList<>();
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotMilkingStall.BEHIND_MILKING_STALL, SexSlotMilkingStall.PERFORMING_ORAL));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotMilkingStall.BEHIND_MILKING_STALL_TWO, SexSlotMilkingStall.PERFORMING_ORAL_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotMilkingStall.BEHIND_MILKING_STALL_THREE, SexSlotMilkingStall.PERFORMING_ORAL_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotMilkingStall.BEHIND_MILKING_STALL_FOUR, SexSlotMilkingStall.PERFORMING_ORAL_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotMilkingStall.BEHIND_MILKING_STALL, SexSlotMilkingStall.PERFORMING_ORAL));
+			mutuallyExclusiveSlots.add(List.of(SexSlotMilkingStall.BEHIND_MILKING_STALL_TWO, SexSlotMilkingStall.PERFORMING_ORAL_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotMilkingStall.BEHIND_MILKING_STALL_THREE, SexSlotMilkingStall.PERFORMING_ORAL_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotMilkingStall.BEHIND_MILKING_STALL_FOUR, SexSlotMilkingStall.PERFORMING_ORAL_FOUR));
 			
 			for(List<SexSlot> entry : mutuallyExclusiveSlots) {
 				for(SexSlot s : entry) {
@@ -2105,12 +2099,12 @@ public class SexPosition {
 		public Map<SexSlot, Map<SexSlot, SexActionInteractions>> getSlotTargets() {
 			List<Value<SexSlot, Map<SexSlot, SexActionInteractions>>> interactions = new ArrayList<>();
 
-			List<SexSlot> inStocks = Util.newArrayListOfValues(SexSlotMilkingStall.LOCKED_IN_MILKING_STALL, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_TWO, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_THREE, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_FOUR);
-			List<SexSlot> standing = Util.newArrayListOfValues(SexSlotMilkingStall.BEHIND_MILKING_STALL, SexSlotMilkingStall.BEHIND_MILKING_STALL_TWO, SexSlotMilkingStall.BEHIND_MILKING_STALL_THREE, SexSlotMilkingStall.BEHIND_MILKING_STALL_FOUR);
-			List<SexSlot> humping = Util.newArrayListOfValues(SexSlotMilkingStall.HUMPING, SexSlotMilkingStall.HUMPING_TWO, SexSlotMilkingStall.HUMPING_THREE, SexSlotMilkingStall.HUMPING_FOUR);
-			List<SexSlot> beneath = Util.newArrayListOfValues(SexSlotMilkingStall.BENEATH_MILKING_STALL, SexSlotMilkingStall.BENEATH_MILKING_STALL_TWO, SexSlotMilkingStall.BENEATH_MILKING_STALL_THREE, SexSlotMilkingStall.BENEATH_MILKING_STALL_FOUR);
-			List<SexSlot> performingOral = Util.newArrayListOfValues(SexSlotMilkingStall.PERFORMING_ORAL, SexSlotMilkingStall.PERFORMING_ORAL_TWO, SexSlotMilkingStall.PERFORMING_ORAL_THREE, SexSlotMilkingStall.PERFORMING_ORAL_FOUR);
-			List<SexSlot> receivingOral = Util.newArrayListOfValues(SexSlotMilkingStall.RECEIVING_ORAL, SexSlotMilkingStall.RECEIVING_ORAL_TWO, SexSlotMilkingStall.RECEIVING_ORAL_THREE, SexSlotMilkingStall.RECEIVING_ORAL_FOUR);
+			List<SexSlot> inStocks = List.of(SexSlotMilkingStall.LOCKED_IN_MILKING_STALL, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_TWO, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_THREE, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_FOUR);
+			List<SexSlot> standing = List.of(SexSlotMilkingStall.BEHIND_MILKING_STALL, SexSlotMilkingStall.BEHIND_MILKING_STALL_TWO, SexSlotMilkingStall.BEHIND_MILKING_STALL_THREE, SexSlotMilkingStall.BEHIND_MILKING_STALL_FOUR);
+			List<SexSlot> humping = List.of(SexSlotMilkingStall.HUMPING, SexSlotMilkingStall.HUMPING_TWO, SexSlotMilkingStall.HUMPING_THREE, SexSlotMilkingStall.HUMPING_FOUR);
+			List<SexSlot> beneath = List.of(SexSlotMilkingStall.BENEATH_MILKING_STALL, SexSlotMilkingStall.BENEATH_MILKING_STALL_TWO, SexSlotMilkingStall.BENEATH_MILKING_STALL_THREE, SexSlotMilkingStall.BENEATH_MILKING_STALL_FOUR);
+			List<SexSlot> performingOral = List.of(SexSlotMilkingStall.PERFORMING_ORAL, SexSlotMilkingStall.PERFORMING_ORAL_TWO, SexSlotMilkingStall.PERFORMING_ORAL_THREE, SexSlotMilkingStall.PERFORMING_ORAL_FOUR);
+			List<SexSlot> receivingOral = List.of(SexSlotMilkingStall.RECEIVING_ORAL, SexSlotMilkingStall.RECEIVING_ORAL_TWO, SexSlotMilkingStall.RECEIVING_ORAL_THREE, SexSlotMilkingStall.RECEIVING_ORAL_FOUR);
 
 			for(SexSlot slotStanding : standing) {
 				for(SexSlot stockSlot : inStocks) {
@@ -2192,18 +2186,18 @@ public class SexPosition {
 			8,
 			true,
 			SexActionPresets.positioningActionsNew,
-			Util.newArrayListOfValues(DoggyStyle.class)) {
+			List.of(DoggyStyle.class)) {
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {
 			List<List<SexSlot>> mutuallyExclusiveSlots = new ArrayList<>();
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAllFours.BEHIND, SexSlotAllFours.BEHIND_ORAL));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAllFours.BEHIND_TWO, SexSlotAllFours.BEHIND_ORAL_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAllFours.BEHIND_THREE, SexSlotAllFours.BEHIND_ORAL_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAllFours.BEHIND_FOUR, SexSlotAllFours.BEHIND_ORAL_FOUR));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAllFours.IN_FRONT, SexSlotAllFours.IN_FRONT_ANAL));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAllFours.IN_FRONT_TWO, SexSlotAllFours.IN_FRONT_ANAL_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAllFours.IN_FRONT_THREE, SexSlotAllFours.IN_FRONT_ANAL_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotAllFours.IN_FRONT_FOUR, SexSlotAllFours.IN_FRONT_ANAL_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAllFours.BEHIND, SexSlotAllFours.BEHIND_ORAL));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAllFours.BEHIND_TWO, SexSlotAllFours.BEHIND_ORAL_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAllFours.BEHIND_THREE, SexSlotAllFours.BEHIND_ORAL_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAllFours.BEHIND_FOUR, SexSlotAllFours.BEHIND_ORAL_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAllFours.IN_FRONT, SexSlotAllFours.IN_FRONT_ANAL));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAllFours.IN_FRONT_TWO, SexSlotAllFours.IN_FRONT_ANAL_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAllFours.IN_FRONT_THREE, SexSlotAllFours.IN_FRONT_ANAL_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotAllFours.IN_FRONT_FOUR, SexSlotAllFours.IN_FRONT_ANAL_FOUR));
 			
 			for(List<SexSlot> entry : mutuallyExclusiveSlots) {
 				for(SexSlot s : entry) {
@@ -2306,14 +2300,10 @@ public class SexPosition {
 			
 			// For each character on all fours, describe them and those who are interacting with them:
 
-			List<SexSlot> position1 = Util.newArrayListOfValues(
-					SexSlotAllFours.ALL_FOURS, SexSlotAllFours.BEHIND, SexSlotAllFours.BEHIND_ORAL, SexSlotAllFours.USING_FEET, SexSlotAllFours.HUMPING, SexSlotAllFours.IN_FRONT, SexSlotAllFours.IN_FRONT_ANAL);
-			List<SexSlot> position2 = Util.newArrayListOfValues(
-					SexSlotAllFours.ALL_FOURS_TWO, SexSlotAllFours.BEHIND_TWO, SexSlotAllFours.BEHIND_ORAL_TWO, SexSlotAllFours.USING_FEET_TWO, SexSlotAllFours.HUMPING_TWO, SexSlotAllFours.IN_FRONT_TWO, SexSlotAllFours.IN_FRONT_ANAL_TWO);
-			List<SexSlot> position3 = Util.newArrayListOfValues(
-					SexSlotAllFours.ALL_FOURS_THREE, SexSlotAllFours.BEHIND_THREE, SexSlotAllFours.BEHIND_ORAL_THREE, SexSlotAllFours.USING_FEET_THREE, SexSlotAllFours.HUMPING_THREE, SexSlotAllFours.IN_FRONT_THREE, SexSlotAllFours.IN_FRONT_ANAL_THREE);
-			List<SexSlot> position4 = Util.newArrayListOfValues(
-					SexSlotAllFours.ALL_FOURS_FOUR, SexSlotAllFours.BEHIND_FOUR, SexSlotAllFours.BEHIND_ORAL_FOUR, SexSlotAllFours.USING_FEET_FOUR, SexSlotAllFours.HUMPING_FOUR, SexSlotAllFours.IN_FRONT_FOUR, SexSlotAllFours.IN_FRONT_ANAL_FOUR);
+			List<SexSlot> position1 = List.of(SexSlotAllFours.ALL_FOURS, SexSlotAllFours.BEHIND, SexSlotAllFours.BEHIND_ORAL, SexSlotAllFours.USING_FEET, SexSlotAllFours.HUMPING, SexSlotAllFours.IN_FRONT, SexSlotAllFours.IN_FRONT_ANAL);
+			List<SexSlot> position2 = List.of(SexSlotAllFours.ALL_FOURS_TWO, SexSlotAllFours.BEHIND_TWO, SexSlotAllFours.BEHIND_ORAL_TWO, SexSlotAllFours.USING_FEET_TWO, SexSlotAllFours.HUMPING_TWO, SexSlotAllFours.IN_FRONT_TWO, SexSlotAllFours.IN_FRONT_ANAL_TWO);
+			List<SexSlot> position3 = List.of(SexSlotAllFours.ALL_FOURS_THREE, SexSlotAllFours.BEHIND_THREE, SexSlotAllFours.BEHIND_ORAL_THREE, SexSlotAllFours.USING_FEET_THREE, SexSlotAllFours.HUMPING_THREE, SexSlotAllFours.IN_FRONT_THREE, SexSlotAllFours.IN_FRONT_ANAL_THREE);
+			List<SexSlot> position4 = List.of(SexSlotAllFours.ALL_FOURS_FOUR, SexSlotAllFours.BEHIND_FOUR, SexSlotAllFours.BEHIND_ORAL_FOUR, SexSlotAllFours.USING_FEET_FOUR, SexSlotAllFours.HUMPING_FOUR, SexSlotAllFours.IN_FRONT_FOUR, SexSlotAllFours.IN_FRONT_ANAL_FOUR);
 			
 			List<List<SexSlot>> positionLists = new ArrayList<>();
 			positionLists.add(position1);
@@ -2395,13 +2385,13 @@ public class SexPosition {
 										:"In a similar manner to [npc2.name], [npc.nameHasFull] knelt down with the front half of [npc.her] [npc.legRace] body, while raising [npc.her] [npc.ass+] up in order to be fucked like an animal. ")));
 							break;
 						case 2:
-							sb.append(UtilText.parse(Util.newArrayListOfValues(allFours, fallBackAllFours3, fallBackAllFours2),
+							sb.append(UtilText.parse(List.of(allFours, fallBackAllFours3, fallBackAllFours2),
 									(!allFours.isTaur()
 										?"Just like [npc2.name] and [npc3.name], [npc.nameHasFull] sunk down onto [npc.her] [npc.hands] and knees. "
 										:"Just like [npc2.name] and [npc3.name], [npc.nameHasFull] sunk down onto [npc.her] front [npc.legs], while lifting [npc.her] [npc.ass+] up and presenting [npc.her] lower [npc.legRace]'s body to be rutted. ")));
 							break;
 						case 3:
-							sb.append(UtilText.parse(Util.newArrayListOfValues(allFours, fallBackAllFours3, fallBackAllFours2, fallBackAllFours1),
+							sb.append(UtilText.parse(List.of(allFours, fallBackAllFours3, fallBackAllFours2, fallBackAllFours1),
 									(!allFours.isTaur()
 										?"Finishing off the group of four, [npc.nameIsFull] down on all fours beside [npc2.name], [npc3.name], and [npc4.name]. "
 										:"Finishing off the group of four, [npc.nameIsFull] down beside [npc2.name], [npc3.name], and [npc4.name], and [npc.is] presenting [npc.her] feral [npc.legRace]'s body like a horny animal. ")));
@@ -2468,13 +2458,13 @@ public class SexPosition {
 		public Map<SexSlot, Map<SexSlot, SexActionInteractions>> getSlotTargets() {
 			List<Value<SexSlot, Map<SexSlot, SexActionInteractions>>> interactions = new ArrayList<>();
 
-			List<SexSlot> allFoursList = Util.newArrayListOfValues(SexSlotAllFours.ALL_FOURS, SexSlotAllFours.ALL_FOURS_TWO, SexSlotAllFours.ALL_FOURS_THREE, SexSlotAllFours.ALL_FOURS_FOUR);
-			List<SexSlot> behindList = Util.newArrayListOfValues(SexSlotAllFours.BEHIND, SexSlotAllFours.BEHIND_TWO, SexSlotAllFours.BEHIND_THREE, SexSlotAllFours.BEHIND_FOUR);
-			List<SexSlot> behindOralList = Util.newArrayListOfValues(SexSlotAllFours.BEHIND_ORAL, SexSlotAllFours.BEHIND_ORAL_TWO, SexSlotAllFours.BEHIND_ORAL_THREE, SexSlotAllFours.BEHIND_ORAL_FOUR);
-			List<SexSlot> humpingList = Util.newArrayListOfValues(SexSlotAllFours.HUMPING, SexSlotAllFours.HUMPING_TWO, SexSlotAllFours.HUMPING_THREE, SexSlotAllFours.HUMPING_FOUR);
-			List<SexSlot> feetList = Util.newArrayListOfValues(SexSlotAllFours.USING_FEET, SexSlotAllFours.USING_FEET_TWO, SexSlotAllFours.USING_FEET_THREE, SexSlotAllFours.USING_FEET_FOUR);
-			List<SexSlot> inFrontList = Util.newArrayListOfValues(SexSlotAllFours.IN_FRONT, SexSlotAllFours.IN_FRONT_TWO, SexSlotAllFours.IN_FRONT_THREE, SexSlotAllFours.IN_FRONT_FOUR);
-			List<SexSlot> inFrontAnalList = Util.newArrayListOfValues(SexSlotAllFours.IN_FRONT_ANAL, SexSlotAllFours.IN_FRONT_ANAL_TWO, SexSlotAllFours.IN_FRONT_ANAL_THREE, SexSlotAllFours.IN_FRONT_ANAL_FOUR);
+			List<SexSlot> allFoursList = List.of(SexSlotAllFours.ALL_FOURS, SexSlotAllFours.ALL_FOURS_TWO, SexSlotAllFours.ALL_FOURS_THREE, SexSlotAllFours.ALL_FOURS_FOUR);
+			List<SexSlot> behindList = List.of(SexSlotAllFours.BEHIND, SexSlotAllFours.BEHIND_TWO, SexSlotAllFours.BEHIND_THREE, SexSlotAllFours.BEHIND_FOUR);
+			List<SexSlot> behindOralList = List.of(SexSlotAllFours.BEHIND_ORAL, SexSlotAllFours.BEHIND_ORAL_TWO, SexSlotAllFours.BEHIND_ORAL_THREE, SexSlotAllFours.BEHIND_ORAL_FOUR);
+			List<SexSlot> humpingList = List.of(SexSlotAllFours.HUMPING, SexSlotAllFours.HUMPING_TWO, SexSlotAllFours.HUMPING_THREE, SexSlotAllFours.HUMPING_FOUR);
+			List<SexSlot> feetList = List.of(SexSlotAllFours.USING_FEET, SexSlotAllFours.USING_FEET_TWO, SexSlotAllFours.USING_FEET_THREE, SexSlotAllFours.USING_FEET_FOUR);
+			List<SexSlot> inFrontList = List.of(SexSlotAllFours.IN_FRONT, SexSlotAllFours.IN_FRONT_TWO, SexSlotAllFours.IN_FRONT_THREE, SexSlotAllFours.IN_FRONT_FOUR);
+			List<SexSlot> inFrontAnalList = List.of(SexSlotAllFours.IN_FRONT_ANAL, SexSlotAllFours.IN_FRONT_ANAL_TWO, SexSlotAllFours.IN_FRONT_ANAL_THREE, SexSlotAllFours.IN_FRONT_ANAL_FOUR);
 			
 			// Those down on all fours can kiss the ones next to them:
 			interactions.add(StandardSexActionInteractions.allFoursToAllFours.getSexActionInteractions(SexSlotAllFours.ALL_FOURS, SexSlotAllFours.ALL_FOURS_TWO));
@@ -2573,8 +2563,8 @@ public class SexPosition {
 			// Restrict anal actions if the one humping is in the way:
 			if(Main.sex.getSexPositionSlot(target).hasTag(SexSlotTag.ALL_FOURS)
 					&& Main.sex.getSexPositionSlot(performer).hasTag(SexSlotTag.BEHIND_ALL_FOURS)) {
-				List<SexSlot> allFoursList = Util.newArrayListOfValues(SexSlotAllFours.ALL_FOURS, SexSlotAllFours.ALL_FOURS_TWO, SexSlotAllFours.ALL_FOURS_THREE, SexSlotAllFours.ALL_FOURS_FOUR);
-				List<SexSlot> humpingList = Util.newArrayListOfValues(SexSlotAllFours.HUMPING, SexSlotAllFours.HUMPING_TWO, SexSlotAllFours.HUMPING_THREE, SexSlotAllFours.HUMPING_FOUR);
+				List<SexSlot> allFoursList = List.of(SexSlotAllFours.ALL_FOURS, SexSlotAllFours.ALL_FOURS_TWO, SexSlotAllFours.ALL_FOURS_THREE, SexSlotAllFours.ALL_FOURS_FOUR);
+				List<SexSlot> humpingList = List.of(SexSlotAllFours.HUMPING, SexSlotAllFours.HUMPING_TWO, SexSlotAllFours.HUMPING_THREE, SexSlotAllFours.HUMPING_FOUR);
 				for(int i=0; i<4; i++) {
 					GameCharacter humper = Main.sex.getCharacterInPosition(humpingList.get(i));
 					GameCharacter allFours = Main.sex.getCharacterInPosition(allFoursList.get(i));
@@ -2606,42 +2596,38 @@ public class SexPosition {
 			8,
 			true,
 			SexActionPresets.positioningActionsNew,
-			Util.newArrayListOfValues(Cowgirl.class, FaceSitting.class, MatingPress.class, Missionary.class, SixtyNine.class)) {
+			List.of(Cowgirl.class, FaceSitting.class, MatingPress.class, Missionary.class, SixtyNine.class)) {
 		
-		private List<SexSlot> position1 = Util.newArrayListOfValues(
-				SexSlotLyingDown.LYING_DOWN, //0
+		private List<SexSlot> position1 = List.of(SexSlotLyingDown.LYING_DOWN, //0
 				SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_REVERSE, SexSlotLyingDown.MISSIONARY, SexSlotLyingDown.MATING_PRESS, SexSlotLyingDown.SCISSORING, //1-5
 				SexSlotLyingDown.FACE_SITTING, SexSlotLyingDown.FACE_SITTING_REVERSE, SexSlotLyingDown.SIXTY_NINE, SexSlotLyingDown.LAP_PILLOW, SexSlotLyingDown.MISSIONARY_ORAL, SexSlotLyingDown.BESIDE); //6-11
-		private List<SexSlot> position2 = Util.newArrayListOfValues(
-				SexSlotLyingDown.LYING_DOWN_TWO, //0
+		private List<SexSlot> position2 = List.of(SexSlotLyingDown.LYING_DOWN_TWO, //0
 				SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_REVERSE_TWO, SexSlotLyingDown.MISSIONARY_TWO, SexSlotLyingDown.MATING_PRESS_TWO, SexSlotLyingDown.SCISSORING_TWO, //1-5
 				SexSlotLyingDown.FACE_SITTING_TWO, SexSlotLyingDown.FACE_SITTING_REVERSE_TWO, SexSlotLyingDown.SIXTY_NINE_TWO, SexSlotLyingDown.LAP_PILLOW_TWO, SexSlotLyingDown.MISSIONARY_ORAL_TWO, SexSlotLyingDown.BESIDE_TWO); //6-11
-		private List<SexSlot> position3 = Util.newArrayListOfValues(
-				SexSlotLyingDown.LYING_DOWN_THREE, //0
+		private List<SexSlot> position3 = List.of(SexSlotLyingDown.LYING_DOWN_THREE, //0
 				SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_REVERSE_THREE, SexSlotLyingDown.MISSIONARY_THREE, SexSlotLyingDown.MATING_PRESS_THREE, SexSlotLyingDown.SCISSORING_THREE, //1-5
 				SexSlotLyingDown.FACE_SITTING_THREE, SexSlotLyingDown.FACE_SITTING_REVERSE_THREE, SexSlotLyingDown.SIXTY_NINE_THREE, SexSlotLyingDown.LAP_PILLOW_THREE, SexSlotLyingDown.MISSIONARY_ORAL_THREE, SexSlotLyingDown.BESIDE_THREE); //6-11
-		private List<SexSlot> position4 = Util.newArrayListOfValues(
-				SexSlotLyingDown.LYING_DOWN_FOUR, //0
+		private List<SexSlot> position4 = List.of(SexSlotLyingDown.LYING_DOWN_FOUR, //0
 				SexSlotLyingDown.COWGIRL_FOUR, SexSlotLyingDown.COWGIRL_REVERSE_FOUR, SexSlotLyingDown.MISSIONARY_FOUR, SexSlotLyingDown.MATING_PRESS_FOUR, SexSlotLyingDown.SCISSORING_FOUR, //1-5
 				SexSlotLyingDown.FACE_SITTING_FOUR, SexSlotLyingDown.FACE_SITTING_REVERSE_FOUR, SexSlotLyingDown.SIXTY_NINE_FOUR, SexSlotLyingDown.LAP_PILLOW_FOUR, SexSlotLyingDown.MISSIONARY_ORAL_FOUR, SexSlotLyingDown.BESIDE_FOUR); //6-11
 		
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {
 			List<List<SexSlot>> mutuallyExclusiveSlots = new ArrayList<>();
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_REVERSE, SexSlotLyingDown.SCISSORING));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_REVERSE_TWO, SexSlotLyingDown.SCISSORING_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_REVERSE_THREE, SexSlotLyingDown.SCISSORING_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.COWGIRL_FOUR, SexSlotLyingDown.COWGIRL_REVERSE_FOUR, SexSlotLyingDown.SCISSORING_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_REVERSE, SexSlotLyingDown.SCISSORING));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_REVERSE_TWO, SexSlotLyingDown.SCISSORING_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_REVERSE_THREE, SexSlotLyingDown.SCISSORING_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.COWGIRL_FOUR, SexSlotLyingDown.COWGIRL_REVERSE_FOUR, SexSlotLyingDown.SCISSORING_FOUR));
 			
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.FACE_SITTING, SexSlotLyingDown.FACE_SITTING_REVERSE, SexSlotLyingDown.LAP_PILLOW, SexSlotLyingDown.SIXTY_NINE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.FACE_SITTING_TWO, SexSlotLyingDown.FACE_SITTING_REVERSE_TWO, SexSlotLyingDown.LAP_PILLOW_TWO, SexSlotLyingDown.SIXTY_NINE_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.FACE_SITTING_THREE, SexSlotLyingDown.FACE_SITTING_REVERSE_THREE, SexSlotLyingDown.LAP_PILLOW_THREE, SexSlotLyingDown.SIXTY_NINE_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.FACE_SITTING_FOUR, SexSlotLyingDown.FACE_SITTING_REVERSE_FOUR, SexSlotLyingDown.LAP_PILLOW_FOUR, SexSlotLyingDown.SIXTY_NINE_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.FACE_SITTING, SexSlotLyingDown.FACE_SITTING_REVERSE, SexSlotLyingDown.LAP_PILLOW, SexSlotLyingDown.SIXTY_NINE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.FACE_SITTING_TWO, SexSlotLyingDown.FACE_SITTING_REVERSE_TWO, SexSlotLyingDown.LAP_PILLOW_TWO, SexSlotLyingDown.SIXTY_NINE_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.FACE_SITTING_THREE, SexSlotLyingDown.FACE_SITTING_REVERSE_THREE, SexSlotLyingDown.LAP_PILLOW_THREE, SexSlotLyingDown.SIXTY_NINE_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.FACE_SITTING_FOUR, SexSlotLyingDown.FACE_SITTING_REVERSE_FOUR, SexSlotLyingDown.LAP_PILLOW_FOUR, SexSlotLyingDown.SIXTY_NINE_FOUR));
 
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.MISSIONARY, SexSlotLyingDown.MISSIONARY_ORAL, SexSlotLyingDown.SCISSORING));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.MISSIONARY_TWO, SexSlotLyingDown.MISSIONARY_ORAL_TWO, SexSlotLyingDown.SCISSORING_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.MISSIONARY_THREE, SexSlotLyingDown.MISSIONARY_ORAL_THREE, SexSlotLyingDown.SCISSORING_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotLyingDown.MISSIONARY_FOUR, SexSlotLyingDown.MISSIONARY_ORAL_FOUR, SexSlotLyingDown.SCISSORING_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.MISSIONARY, SexSlotLyingDown.MISSIONARY_ORAL, SexSlotLyingDown.SCISSORING));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.MISSIONARY_TWO, SexSlotLyingDown.MISSIONARY_ORAL_TWO, SexSlotLyingDown.SCISSORING_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.MISSIONARY_THREE, SexSlotLyingDown.MISSIONARY_ORAL_THREE, SexSlotLyingDown.SCISSORING_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.MISSIONARY_FOUR, SexSlotLyingDown.MISSIONARY_ORAL_FOUR, SexSlotLyingDown.SCISSORING_FOUR));
 			
 			for(List<SexSlot> entry : mutuallyExclusiveSlots) {
 				for(SexSlot s : entry) {
@@ -2660,17 +2646,13 @@ public class SexPosition {
 
 			// Mating press is only compatible with missionary & oral:
 			mutuallyExclusiveSlots.clear();
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(
-					SexSlotLyingDown.MATING_PRESS, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_REVERSE, SexSlotLyingDown.FACE_SITTING_REVERSE,
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.MATING_PRESS, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_REVERSE, SexSlotLyingDown.FACE_SITTING_REVERSE,
 					SexSlotLyingDown.FACE_SITTING, SexSlotLyingDown.LAP_PILLOW, SexSlotLyingDown.SCISSORING, SexSlotLyingDown.SIXTY_NINE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(
-					SexSlotLyingDown.MATING_PRESS_TWO, SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_REVERSE_TWO, SexSlotLyingDown.FACE_SITTING_REVERSE_TWO,
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.MATING_PRESS_TWO, SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_REVERSE_TWO, SexSlotLyingDown.FACE_SITTING_REVERSE_TWO,
 					SexSlotLyingDown.FACE_SITTING_TWO, SexSlotLyingDown.LAP_PILLOW_TWO, SexSlotLyingDown.SCISSORING_TWO, SexSlotLyingDown.SIXTY_NINE_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(
-					SexSlotLyingDown.MATING_PRESS_THREE, SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_REVERSE_THREE, SexSlotLyingDown.FACE_SITTING_REVERSE_THREE,
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.MATING_PRESS_THREE, SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_REVERSE_THREE, SexSlotLyingDown.FACE_SITTING_REVERSE_THREE,
 					SexSlotLyingDown.FACE_SITTING_THREE, SexSlotLyingDown.LAP_PILLOW_THREE, SexSlotLyingDown.SCISSORING_THREE, SexSlotLyingDown.SIXTY_NINE_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(
-					SexSlotLyingDown.MATING_PRESS_FOUR, SexSlotLyingDown.COWGIRL_FOUR, SexSlotLyingDown.COWGIRL_REVERSE_FOUR, SexSlotLyingDown.FACE_SITTING_REVERSE_FOUR,
+			mutuallyExclusiveSlots.add(List.of(SexSlotLyingDown.MATING_PRESS_FOUR, SexSlotLyingDown.COWGIRL_FOUR, SexSlotLyingDown.COWGIRL_REVERSE_FOUR, SexSlotLyingDown.FACE_SITTING_REVERSE_FOUR,
 					SexSlotLyingDown.FACE_SITTING_FOUR, SexSlotLyingDown.LAP_PILLOW_FOUR, SexSlotLyingDown.SCISSORING_FOUR, SexSlotLyingDown.SIXTY_NINE_FOUR));
 
 			for(List<SexSlot> entry : mutuallyExclusiveSlots) {
@@ -2911,13 +2893,13 @@ public class SexPosition {
 										:"In a similar manner to [npc2.name], [npc.nameHasFull] knelt down onto [npc.her] feral [npc.legRace]'s body, before rolling over and presenting [npc.her] underside. ")));
 							break;
 						case 2:
-							sb.append(UtilText.parse(Util.newArrayListOfValues(lyingDown, fallBackLyingDown3, fallBackLyingDown2),
+							sb.append(UtilText.parse(List.of(lyingDown, fallBackLyingDown3, fallBackLyingDown2),
 									(!lyingDown.isTaur()
 										?"Just like [npc2.name] and [npc3.name], [npc.nameHasFull] sunk down onto the floor, before lying down on [npc.her] back. "
 										:"Just like [npc2.name] and [npc3.name], [npc.nameHasFull] sunk down onto [npc.her] feral [npc.legRace]'s body, before rolling over onto [npc.her] back and presenting [npc.herself]. ")));
 							break;
 						case 3:
-							sb.append(UtilText.parse(Util.newArrayListOfValues(lyingDown, fallBackLyingDown3, fallBackLyingDown2, fallBackLyingDown1),
+							sb.append(UtilText.parse(List.of(lyingDown, fallBackLyingDown3, fallBackLyingDown2, fallBackLyingDown1),
 									(!lyingDown.isTaur()
 										?"Finishing off the group of four, [npc.nameIsFull] lying down on [npc.her] back beside [npc2.name], [npc3.name], and [npc4.name]. "
 										:"Finishing off the group of four, [npc.nameIsFull] lying down beside [npc2.name], [npc3.name], and [npc4.name], and [npc.has] rolled over to present the underside of [npc.her] feral [npc.legRace]'s body. ")));
@@ -3061,7 +3043,7 @@ public class SexPosition {
 			positionLists.add(position3);
 			positionLists.add(position4);
 			
-			List<SexSlot> besideSlots = Util.newArrayListOfValues(SexSlotLyingDown.BESIDE, SexSlotLyingDown.BESIDE_TWO, SexSlotLyingDown.BESIDE_THREE, SexSlotLyingDown.BESIDE_FOUR);
+			List<SexSlot> besideSlots = List.of(SexSlotLyingDown.BESIDE, SexSlotLyingDown.BESIDE_TWO, SexSlotLyingDown.BESIDE_THREE, SexSlotLyingDown.BESIDE_FOUR);
 			
 			for(int i=0; i<positionLists.size(); i++) {
 				List<SexSlot> positions = positionLists.get(i);
@@ -3227,8 +3209,8 @@ public class SexPosition {
 		}
 		@Override
 		public Map<SexAreaPenetration, Integer> getRestrictedPenetrationCounts(GameCharacter penetrator) {
-			List<SexSlot> slotsTop = Util.newArrayListOfValues(SexSlotLyingDown.MATING_PRESS, SexSlotLyingDown.MATING_PRESS_TWO, SexSlotLyingDown.MATING_PRESS_THREE, SexSlotLyingDown.MATING_PRESS_FOUR);
-			List<SexSlot> slotsBottom = Util.newArrayListOfValues(SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.LYING_DOWN_TWO, SexSlotLyingDown.LYING_DOWN_THREE, SexSlotLyingDown.LYING_DOWN_FOUR);
+			List<SexSlot> slotsTop = List.of(SexSlotLyingDown.MATING_PRESS, SexSlotLyingDown.MATING_PRESS_TWO, SexSlotLyingDown.MATING_PRESS_THREE, SexSlotLyingDown.MATING_PRESS_FOUR);
+			List<SexSlot> slotsBottom = List.of(SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.LYING_DOWN_TWO, SexSlotLyingDown.LYING_DOWN_THREE, SexSlotLyingDown.LYING_DOWN_FOUR);
 			
 			for(int i=0;i<4;i++) {
 				GameCharacter top = Main.sex.getCharacterInPosition(slotsTop.get(i));
@@ -3272,7 +3254,7 @@ public class SexPosition {
 			
 			// Restrict fucking breasts if cowgirl character is riding cock.
 			if(Main.sex.getSexPositionSlot(performer).hasTag(SexSlotTag.COWGIRL) && Main.sex.getSexPositionSlot(target).hasTag(SexSlotTag.MISSIONARY)) {
-				List<SexSlot> cowgirlList = Util.newArrayListOfValues(SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_FOUR);
+				List<SexSlot> cowgirlList = List.of(SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_FOUR);
 				for(int i=0; i<4; i++) {
 					GameCharacter cowgirl = Main.sex.getCharacterInPosition(cowgirlList.get(i));
 					if(performer.equals(cowgirl)
@@ -3288,7 +3270,7 @@ public class SexPosition {
 			
 			// Restrict vaginal actions if cowgirl is riding cock anally.
 			if(Main.sex.getSexPositionSlot(target).hasTag(SexSlotTag.COWGIRL) && Main.sex.getSexPositionSlot(performer).hasTag(SexSlotTag.MISSIONARY)) {
-				List<SexSlot> cowgirlList = Util.newArrayListOfValues(SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_FOUR);
+				List<SexSlot> cowgirlList = List.of(SexSlotLyingDown.COWGIRL, SexSlotLyingDown.COWGIRL_TWO, SexSlotLyingDown.COWGIRL_THREE, SexSlotLyingDown.COWGIRL_FOUR);
 				for(int i=0; i<4; i++) {
 					GameCharacter cowgirl = Main.sex.getCharacterInPosition(cowgirlList.get(i));
 					if(target.equals(cowgirl)
@@ -3301,7 +3283,7 @@ public class SexPosition {
 			
 			// Restrict anal actions if reverse cowgirl is riding cock.
 			if(Main.sex.getSexPositionSlot(target).hasTag(SexSlotTag.COWGIRL_REVERSE) && Main.sex.getSexPositionSlot(performer).hasTag(SexSlotTag.MISSIONARY)) {
-				List<SexSlot> cowgirlList = Util.newArrayListOfValues(SexSlotLyingDown.COWGIRL_REVERSE, SexSlotLyingDown.COWGIRL_REVERSE_TWO, SexSlotLyingDown.COWGIRL_REVERSE_THREE, SexSlotLyingDown.COWGIRL_REVERSE_FOUR);
+				List<SexSlot> cowgirlList = List.of(SexSlotLyingDown.COWGIRL_REVERSE, SexSlotLyingDown.COWGIRL_REVERSE_TWO, SexSlotLyingDown.COWGIRL_REVERSE_THREE, SexSlotLyingDown.COWGIRL_REVERSE_FOUR);
 				for(int i=0; i<4; i++) {
 					GameCharacter cowgirl = Main.sex.getCharacterInPosition(cowgirlList.get(i));
 					if(target.equals(cowgirl)
@@ -3321,19 +3303,19 @@ public class SexPosition {
 			true,
 			Util.mergeLists(
 					SexActionPresets.positioningActionsNew,
-					Util.newArrayListOfValues(ChairSex.class)), new ArrayList<>()) {
+					List.of(ChairSex.class)), new ArrayList<>()) {
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {
 			List<List<SexSlot>> mutuallyExclusiveSlots = new ArrayList<>();
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP, SexSlotSitting.PERFORMING_ORAL));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP_TWO, SexSlotSitting.PERFORMING_ORAL_TWO, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP_THREE, SexSlotSitting.PERFORMING_ORAL_THREE, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP_FOUR, SexSlotSitting.PERFORMING_ORAL_FOUR, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotSitting.SITTING_IN_LAP, SexSlotSitting.PERFORMING_ORAL));
+			mutuallyExclusiveSlots.add(List.of(SexSlotSitting.SITTING_IN_LAP_TWO, SexSlotSitting.PERFORMING_ORAL_TWO, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL));
+			mutuallyExclusiveSlots.add(List.of(SexSlotSitting.SITTING_IN_LAP_THREE, SexSlotSitting.PERFORMING_ORAL_THREE, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotSitting.SITTING_IN_LAP_FOUR, SexSlotSitting.PERFORMING_ORAL_FOUR, SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_FOUR));
 
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL, SexSlotSitting.SITTING_BETWEEN_LEGS));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_TWO, SexSlotSitting.SITTING_BETWEEN_LEGS_TWO));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_THREE, SexSlotSitting.SITTING_BETWEEN_LEGS_THREE));
-			mutuallyExclusiveSlots.add(Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_FOUR, SexSlotSitting.SITTING_BETWEEN_LEGS_FOUR));
+			mutuallyExclusiveSlots.add(List.of(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL, SexSlotSitting.SITTING_BETWEEN_LEGS));
+			mutuallyExclusiveSlots.add(List.of(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_TWO, SexSlotSitting.SITTING_BETWEEN_LEGS_TWO));
+			mutuallyExclusiveSlots.add(List.of(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_THREE, SexSlotSitting.SITTING_BETWEEN_LEGS_THREE));
+			mutuallyExclusiveSlots.add(List.of(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL_FOUR, SexSlotSitting.SITTING_BETWEEN_LEGS_FOUR));
 			
 			for(List<SexSlot> entry : mutuallyExclusiveSlots) {
 				for(SexSlot s : entry) {
@@ -3821,7 +3803,7 @@ public class SexPosition {
 	public static final AbstractSexPosition BREEDING_STALL = new AbstractSexPosition("Breeding Stall",
 			2,
 			true,
-			null, Util.newArrayListOfValues()) {
+			null, List.of()) {
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {
 			if(characterToTakeSlot.isTaur() && (slot==SexSlotBreedingStall.BREEDING_STALL_BACK)) {
@@ -3899,11 +3881,10 @@ public class SexPosition {
 	public static final AbstractSexPosition GLORY_HOLE = new AbstractSexPosition("Glory hole oral",
 			3,
 			true,
-			null, Util.newArrayListOfValues(GloryHole.class)) {
+			null, List.of(GloryHole.class)) {
 		@Override
 		public boolean isActionBlocked(GameCharacter performer, GameCharacter target, SexActionInterface action) {
-			List<SexActionInterface> blockedActions = Util.newArrayListOfValues(
-					GenericOrgasms.GENERIC_PREPARATION_DENIAL,
+			List<SexActionInterface> blockedActions = List.of(GenericOrgasms.GENERIC_PREPARATION_DENIAL,
 					PlayerTalk.PLAYER_OFFER_ANAL,
 					PlayerTalk.PLAYER_OFFER_NAIZURI,
 					PlayerTalk.PLAYER_OFFER_NIPPLE,
@@ -3996,7 +3977,7 @@ public class SexPosition {
 	public static final AbstractSexPosition GLORY_HOLE_SEX = new AbstractSexPosition("Glory hole sex",
 			3,
 			true,
-			null, Util.newArrayListOfValues(GloryHole.class)) {
+			null, List.of(GloryHole.class)) {
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
 			List<GameCharacter> characters = new ArrayList<>();

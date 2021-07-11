@@ -79,8 +79,7 @@ public class SlaveAuctionBidder {
 	
 	public static SlaveAuctionBidder generateNewSlaveAuctionBidder(NPC slave) {
 		
-		List<AbstractSubspecies> races = Util.newArrayListOfValues(
-				Subspecies.CAT_MORPH,
+		List<AbstractSubspecies> races = List.of(Subspecies.CAT_MORPH,
 				Subspecies.COW_MORPH, 
 				Subspecies.DEMON,
 				Subspecies.DOG_MORPH,
@@ -90,25 +89,22 @@ public class SlaveAuctionBidder {
 				Subspecies.SQUIRREL_MORPH,
 				Subspecies.WOLF_MORPH);
 		
-		List<Gender> genders = Util.newArrayListOfValues(Gender.F_V_B_FEMALE, Gender.F_P_V_B_FUTANARI, Gender.M_P_MALE);
+		List<Gender> genders = List.of(Gender.F_V_B_FEMALE, Gender.F_P_V_B_FUTANARI, Gender.M_P_MALE);
 		
 		AbstractSubspecies race = Util.randomItemFrom(races);
 		Gender gender = Util.randomItemFrom(genders);
 		
-		List<String> biddingComments = Util.newArrayListOfValues(
-				"I deserve a new fucktoy...",
+		List<String> biddingComments = List.of("I deserve a new fucktoy...",
 				"My slaves need a new toy...",
 				UtilText.parse(slave, "I could put [npc.herHim] to work in the brothel..."),
 				UtilText.parse(slave, "I could put [npc.herHim] to work in the milking sheds..."),
 				UtilText.parse(slave, "[npc.She] looks like [npc.she]'d make a good maid..."));
 		
-		List<String> failedBidComments = Util.newArrayListOfValues(
-				"I can't afford that...",
+		List<String> failedBidComments = List.of("I can't afford that...",
 				"That's too much for me...",
 				"Maybe I'll bid on the next one...");
 		
-		List<String> successfulBidComments = Util.newArrayListOfValues(
-				UtilText.parse(slave, "I'm going to break [npc.herHim] in as soon as I get home..."),
+		List<String> successfulBidComments = List.of(UtilText.parse(slave, "I'm going to break [npc.herHim] in as soon as I get home..."),
 				UtilText.parse(slave, "I'll get my other slaves to break [npc.herHim] in..."),
 				UtilText.parse(slave, "I'm sure [npc.she]'ll love [npc.her] new life in my brothel..."),
 				UtilText.parse(slave, "I'm sure [npc.she]'ll love [npc.her] new life in the milking sheds..."));

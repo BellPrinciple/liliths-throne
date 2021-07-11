@@ -802,7 +802,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		}
 
 		if(Main.game.isStarted() && Main.game.getActiveWorld().getCell(this.getLocation()).getPlace().isItemsDisappear()) {
-			Main.game.getActiveWorld().getCell(this.getLocation()).resetInventory(Util.newArrayListOfValues(Rarity.LEGENDARY, Rarity.QUEST));
+			Main.game.getActiveWorld().getCell(this.getLocation()).resetInventory(List.of(Rarity.LEGENDARY, Rarity.QUEST));
 		}
 		
 		if(this.getWorldLocation()==WorldType.NIGHTLIFE_CLUB) {

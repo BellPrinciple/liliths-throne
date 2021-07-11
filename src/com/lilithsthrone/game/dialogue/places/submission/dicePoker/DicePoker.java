@@ -513,8 +513,8 @@ public class DicePoker {
 						UtilText.parse(gambler, "Allow [npc.name] to publicly fuck you in order to get your money back."),
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(gambler),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(gambler),
+								List.of(Main.game.getPlayer()),
 						null,
 						null),
 						END_LOSS_AFTER_SEX,

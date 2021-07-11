@@ -117,7 +117,7 @@ public class ZaranixMaidKatherine extends NPC {
 	@Override
 	public void setupPerks(boolean autoSelectPerks) {
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 5),
@@ -369,8 +369,8 @@ public class ZaranixMaidKatherine extends NPC {
 				return new ResponseSex("Use Katherine", "Have some fun with the horny maid.",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKatherine.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(ZaranixMaidKatherine.class)),
 						null,
 						null),
 						AFTER_SEX_VICTORY, "<p>"
@@ -386,11 +386,11 @@ public class ZaranixMaidKatherine extends NPC {
 			} else if(index==3) {
 				return new ResponseSex("Submit",
 						"You can't bring yourself to take the dominant role, but you <i>do</i> want to have sex with Katherine. Perhaps if you submitted, she'd be willing to fuck you?",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
+						List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKatherine.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(ZaranixMaidKatherine.class)),
+								List.of(Main.game.getPlayer()),
 						null,
 						null),
 						AFTER_SEX_VICTORY, "<p>"
@@ -494,8 +494,8 @@ public class ZaranixMaidKatherine extends NPC {
 				return new ResponseSex("Used", "Katherine uses you.",
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKatherine.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(ZaranixMaidKatherine.class)),
+								List.of(Main.game.getPlayer()),
 								null,
 								null),
 						AFTER_SEX_DEFEAT,

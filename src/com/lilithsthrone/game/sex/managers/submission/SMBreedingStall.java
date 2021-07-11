@@ -68,7 +68,7 @@ public class SMBreedingStall extends SexManagerDefault {
 	
 	@Override
 	public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {
-		return Util.newArrayListOfValues();
+		return List.of();
 	}
 
 	@Override
@@ -76,11 +76,11 @@ public class SMBreedingStall extends SexManagerDefault {
 		Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
 		
 		for(GameCharacter dom : this.getDominants().keySet()) {
-			map.put(dom, Util.newArrayListOfValues(CoverableArea.PENIS));
+			map.put(dom, List.of(CoverableArea.PENIS));
 		}
 
 		for(GameCharacter sub : this.getSubmissives().keySet()) {
-			map.put(sub, Util.newArrayListOfValues(CoverableArea.VAGINA));
+			map.put(sub, List.of(CoverableArea.VAGINA));
 		}
 		
 		return map;

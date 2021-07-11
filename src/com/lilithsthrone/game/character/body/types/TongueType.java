@@ -28,10 +28,10 @@ public class TongueType {
 			3,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)] [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues()) {
+			List.of()) {
 	};
 	
 	public static AbstractTongueType ANGEL = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -39,10 +39,10 @@ public class TongueType {
 			3,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("angelic"),
-			Util.newArrayListOfValues("angelic"),
+			List.of("angelic"),
+			List.of("angelic"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)] [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues()) {
+			List.of()) {
 	};
 	
 	public static AbstractTongueType DEMON_COMMON = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -50,10 +50,10 @@ public class TongueType {
 			6,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)] [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues()) {
+			List.of()) {
 	};
 	
 	public static AbstractTongueType DOG_MORPH = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -61,11 +61,10 @@ public class TongueType {
 			8,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("dog-like"),
-			Util.newArrayListOfValues("dog-like"),
+			List.of("dog-like"),
+			List.of("dog-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], dog-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues(
-					TongueModifier.WIDE,
+			List.of(TongueModifier.WIDE,
 					TongueModifier.FLAT)) {
 	};
 	
@@ -74,11 +73,10 @@ public class TongueType {
 			8,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("wolf-like"),
-			Util.newArrayListOfValues("wolf-like"),
+			List.of("wolf-like"),
+			List.of("wolf-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], wolf-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues(
-					TongueModifier.WIDE,
+			List.of(TongueModifier.WIDE,
 					TongueModifier.FLAT)) {
 	};
 	
@@ -87,11 +85,10 @@ public class TongueType {
 			6,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("fox-like"),
-			Util.newArrayListOfValues("fox-like"),
+			List.of("fox-like"),
+			List.of("fox-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], fox-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues(
-					TongueModifier.FLAT)) {
+			List.of(TongueModifier.FLAT)) {
 	};
 	
 	public static AbstractTongueType CAT_MORPH = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -99,11 +96,10 @@ public class TongueType {
 			6,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("cat-like"),
-			Util.newArrayListOfValues("cat-like"),
+			List.of("cat-like"),
+			List.of("cat-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], cat-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues(
-					TongueModifier.FLAT)) {
+			List.of(TongueModifier.FLAT)) {
 	};
 	
 	public static AbstractTongueType COW_MORPH = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -111,11 +107,10 @@ public class TongueType {
 			12,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("cow-like"),
-			Util.newArrayListOfValues("cow-like"),
+			List.of("cow-like"),
+			List.of("cow-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], cow-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues(
-					TongueModifier.STRONG)) {
+			List.of(TongueModifier.STRONG)) {
 	};
 	
 	public static AbstractTongueType ALLIGATOR_MORPH = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -123,11 +118,10 @@ public class TongueType {
 			6,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("alligator-like"),
-			Util.newArrayListOfValues("alligator-like"),
+			List.of("alligator-like"),
+			List.of("alligator-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], alligator-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues(
-					TongueModifier.STRONG)) {
+			List.of(TongueModifier.STRONG)) {
 	};
 	
 	public static AbstractTongueType HORSE_MORPH = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -135,11 +129,10 @@ public class TongueType {
 			8,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("horse-like"),
-			Util.newArrayListOfValues("horse-like"),
+			List.of("horse-like"),
+			List.of("horse-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], horse-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues(
-					TongueModifier.STRONG)) {
+			List.of(TongueModifier.STRONG)) {
 	};
 	
 	public static AbstractTongueType REINDEER_MORPH = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -147,11 +140,10 @@ public class TongueType {
 			8,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("reindeer-like"),
-			Util.newArrayListOfValues("reindeer-like"),
+			List.of("reindeer-like"),
+			List.of("reindeer-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], reindeer-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues(
-					TongueModifier.STRONG)) {
+			List.of(TongueModifier.STRONG)) {
 	};
 	
 	public static AbstractTongueType HARPY = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -159,11 +151,10 @@ public class TongueType {
 			6,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("bird-like"),
-			Util.newArrayListOfValues("bird-like"),
+			List.of("bird-like"),
+			List.of("bird-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], bird-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues(
-					TongueModifier.FLAT)) {
+			List.of(TongueModifier.FLAT)) {
 	};
 	
 	public static AbstractTongueType SQUIRREL_MORPH = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -171,10 +162,10 @@ public class TongueType {
 			6,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("squirrel-like"),
-			Util.newArrayListOfValues("squirrel-like"),
+			List.of("squirrel-like"),
+			List.of("squirrel-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], squirrel-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues()) {
+			List.of()) {
 	};
 	
 	public static AbstractTongueType RAT_MORPH = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -182,10 +173,10 @@ public class TongueType {
 			6,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("rat-like"),
-			Util.newArrayListOfValues("rat-like"),
+			List.of("rat-like"),
+			List.of("rat-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], rat-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues()) {
+			List.of()) {
 	};
 	
 	public static AbstractTongueType RABBIT_MORPH = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -193,10 +184,10 @@ public class TongueType {
 			6,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("rabbit-like"),
-			Util.newArrayListOfValues("rabbit-like"),
+			List.of("rabbit-like"),
+			List.of("rabbit-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], rabbit-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues()) {
+			List.of()) {
 	};
 	
 	public static AbstractTongueType BAT_MORPH = new AbstractTongueType(BodyCoveringType.TONGUE,
@@ -204,10 +195,10 @@ public class TongueType {
 			6,
 			"tongue",
 			"tongues",
-			Util.newArrayListOfValues("bat-like"),
-			Util.newArrayListOfValues("bat-like"),
+			List.of("bat-like"),
+			List.of("bat-like"),
 			" [npc.Her] mouth holds [npc.a_tongueLength], [npc.tongueColour(true)], bat-like [npc.tongue]#IF(npc.isPiercedTongue()), which has been pierced#ENDIF.",
-			Util.newArrayListOfValues()) {
+			List.of()) {
 	};
 	
 	private static List<AbstractTongueType> allTongueTypes;

@@ -154,7 +154,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	}
 
 	public AbstractClothing(AbstractClothingType clothingType, Colour colour, Colour secondaryColour, Colour tertiaryColour, List<ItemEffect> effects) {
-		this(clothingType, Util.newArrayListOfValues(colour, secondaryColour, tertiaryColour), effects);
+		this(clothingType, List.of(colour, secondaryColour, tertiaryColour), effects);
 	}
 	
 	public AbstractClothing(AbstractClothingType clothingType, List<Colour> colours, List<ItemEffect> effects) {

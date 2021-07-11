@@ -130,8 +130,7 @@ public class DaddySexActions {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumTarget.equals(Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()))) {
-				return Util.newArrayListOfValues(
-						CoverableArea.BACK);
+				return List.of(CoverableArea.BACK);
 			}
 			return null; 
 		}
@@ -186,8 +185,7 @@ public class DaddySexActions {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumProvider.equals(cumTarget)) {
-				return Util.newArrayListOfValues(
-						CoverableArea.STOMACH);
+				return List.of(CoverableArea.STOMACH);
 			}
 			return null; 
 		}

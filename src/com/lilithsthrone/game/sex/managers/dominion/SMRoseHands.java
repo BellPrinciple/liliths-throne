@@ -47,8 +47,7 @@ public class SMRoseHands extends SexManagerDefault {
 
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		return Util.newArrayListOfValues(
-				SexPositionUnique.HANDS_ROSE);
+		return List.of(SexPositionUnique.HANDS_ROSE);
 	}
 	
 	@Override

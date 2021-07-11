@@ -2720,7 +2720,7 @@ public class Sex {
 						charactersEatingOut.addAll(getOngoingCharactersUsingAreas(Main.sex.getCharacterPerformingAction(), SexAreaOrifice.VAGINA, SexAreaOrifice.MOUTH));
 						
 						for(GameCharacter character : charactersEatingOut) {
-							List<InventorySlot> squirterSlots = Util.newArrayListOfValues(InventorySlot.MOUTH, InventorySlot.EYES, InventorySlot.HAIR);
+							List<InventorySlot> squirterSlots = List.of(InventorySlot.MOUTH, InventorySlot.EYES, InventorySlot.HAIR);
 							for(InventorySlot slot : squirterSlots) {
 								List<AbstractClothing> dirtyClothing = new ArrayList<>(character.getVisibleClothingConcealingSlot(slot));
 								if(!dirtyClothing.isEmpty()) {

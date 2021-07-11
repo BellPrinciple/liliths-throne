@@ -50,10 +50,10 @@ public abstract class AbstractMouthType implements BodyPartTypeInterface {
 				tongueType,
 				null,
 				null,
-				Util.newArrayListOfValues(""),
-				Util.newArrayListOfValues(""),
+				List.of(""),
+				List.of(""),
 				null,
-				Util.newArrayListOfValues());
+				List.of());
 	}
 	
 	/**

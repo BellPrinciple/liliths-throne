@@ -77,8 +77,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class Roxy extends NPC {
 
-	private static List<AbstractItemType> itemsForSale = Util.newArrayListOfValues(
-			ItemType.CIGARETTE_PACK,
+	private static List<AbstractItemType> itemsForSale = List.of(ItemType.CIGARETTE_PACK,
 			ItemType.FETISH_UNREFINED,
 			ItemType.MOO_MILKER_EMPTY,
 			ItemType.getItemTypeFromId("innoxia_pills_fertility"),
@@ -154,7 +153,7 @@ public class Roxy extends NPC {
 	public void setupPerks(boolean autoSelectPerks) {
 		this.addSpecialPerk(Perk.SPECIAL_SLUT);
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 5),
@@ -418,6 +417,6 @@ public class Roxy extends NPC {
 	
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(SARoxySpecials.class);
+		return List.of(SARoxySpecials.class);
 	}
 }

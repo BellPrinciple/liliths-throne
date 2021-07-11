@@ -36,11 +36,9 @@ public class SMZaranixCockSucking extends SexManagerDefault {
 	public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 		return Util.newHashMapOfValues(
 				new Value<>(Main.game.getPlayer(),
-						Util.newArrayListOfValues(
-								CoverableArea.MOUTH)),
+						List.of(CoverableArea.MOUTH)),
 				new Value<>(Main.game.getNpc(Zaranix.class),
-						Util.newArrayListOfValues(
-								CoverableArea.PENIS,
+						List.of(CoverableArea.PENIS,
 								Main.game.getNpc(Zaranix.class).isFeminine()
 									?CoverableArea.NIPPLES
 									:null)));

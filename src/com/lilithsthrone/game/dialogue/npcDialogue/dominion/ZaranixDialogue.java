@@ -62,8 +62,8 @@ public class ZaranixDialogue {
 				return new ResponseSex("Use Zaranix", "Have some fun with this incubus.",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(Zaranix.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Zaranix.class)),
 						null,
 						null),
 						AFTER_SEX_VICTORY,
@@ -72,11 +72,11 @@ public class ZaranixDialogue {
 			} else if(index==3) {
 				return new ResponseSex("Submit",
 						"Allow Zaranix to fuck you.",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
+						List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(Zaranix.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(Zaranix.class)),
+								List.of(Main.game.getPlayer()),
 						null,
 						null),
 						AFTER_SEX_VICTORY,
@@ -221,8 +221,7 @@ public class ZaranixDialogue {
 						UtilText.parseFromXMLFile("characters/dominion/zaranix", "AFTER_COMBAT_DEFEAT_SPIT_SEX_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 				};
 				
@@ -246,8 +245,7 @@ public class ZaranixDialogue {
 						UtilText.parseFromXMLFile("characters/dominion/zaranix", "AFTER_COMBAT_DEFEAT_SPIT_SEX_START_EAGER")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 				};
 				
@@ -271,8 +269,7 @@ public class ZaranixDialogue {
 						UtilText.parseFromXMLFile("characters/dominion/zaranix", "AFTER_COMBAT_DEFEAT_SPIT_SEX_START_RESIST")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getNpc(Zaranix.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Zaranix.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 					}
 				};
 			}
@@ -316,8 +313,7 @@ public class ZaranixDialogue {
 						UtilText.parseFromXMLFile("characters/dominion/zaranix", "AFTER_COMBAT_DEFEAT_SWALLOW_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 				};
 			}
@@ -361,8 +357,7 @@ public class ZaranixDialogue {
 						UtilText.parseFromXMLFile("characters/dominion/zaranix", "AFTER_COMBAT_DEFEAT_SWALLOW_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 				};
 				

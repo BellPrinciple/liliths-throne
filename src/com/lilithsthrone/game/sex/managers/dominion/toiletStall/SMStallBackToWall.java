@@ -25,8 +25,7 @@ public class SMStallBackToWall extends SexManagerDefault {
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		return Util.newArrayListOfValues(
-				SexPosition.STANDING,
+		return List.of(SexPosition.STANDING,
 				SexPosition.AGAINST_WALL);
 	}
 }

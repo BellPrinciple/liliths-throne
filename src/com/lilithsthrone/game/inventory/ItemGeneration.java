@@ -147,7 +147,7 @@ public class ItemGeneration {
 	}
 	
 	public AbstractClothing generateClothing(AbstractClothingType clothingType, Colour primaryColour, Colour secondaryColour, Colour tertiaryColour, boolean allowRandomEnchantment) {
-		List<Colour> colours = Util.newArrayListOfValues(primaryColour, secondaryColour, tertiaryColour);
+		List<Colour> colours = List.of(primaryColour, secondaryColour, tertiaryColour);
 		
 		int index = 0;
 		ColourReplacement cr = clothingType.getColourReplacement(index);
@@ -235,7 +235,7 @@ public class ItemGeneration {
 	 * Generates clothing with the provided enchantments.
 	 */
 	public AbstractClothing generateClothing(AbstractClothingType clothingType, Colour primaryColour, Colour secondaryColour, Colour tertiaryColour, List<ItemEffect> effects) {
-		return generateClothing(clothingType, Util.newArrayListOfValues(primaryColour, secondaryColour, tertiaryColour), effects);
+		return generateClothing(clothingType, List.of(primaryColour, secondaryColour, tertiaryColour), effects);
 	}
 	
 	/**

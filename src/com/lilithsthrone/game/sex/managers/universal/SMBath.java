@@ -71,8 +71,7 @@ public class SMBath extends SexManagerDefault {
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		List<AbstractSexPosition> positions = Util.newArrayListOfValues(
-				SexPosition.LYING_DOWN,
+		List<AbstractSexPosition> positions = List.of(SexPosition.LYING_DOWN,
 				SexPosition.SITTING,
 				SexPosition.ALL_FOURS);
 		

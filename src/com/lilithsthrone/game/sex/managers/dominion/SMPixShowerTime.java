@@ -45,8 +45,7 @@ public class SMPixShowerTime extends SexManagerDefault {
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		return Util.newArrayListOfValues(
-				SexPositionUnique.SHOWER_TIME_PIX);
+		return List.of(SexPositionUnique.SHOWER_TIME_PIX);
 	}
 	
 	@Override

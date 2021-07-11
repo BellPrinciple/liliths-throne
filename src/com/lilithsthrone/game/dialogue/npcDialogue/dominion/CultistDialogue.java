@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -120,7 +121,7 @@ public class CultistDialogue {
 				
 			} else if(index == 3) {
 				if(Main.game.getPlayer().hasVagina()) {
-					return new ResponseSex("Offer Pussy", "Offer [npc.name] your pussy instead.", Util.newArrayListOfValues(Fetish.FETISH_PREGNANCY),
+					return new ResponseSex("Offer Pussy", "Offer [npc.name] your pussy instead.", List.of(Fetish.FETISH_PREGNANCY),
 							null, Fetish.FETISH_PREGNANCY.getAssociatedCorruptionLevel(), null, null, null,
 							true, false,
 							new SMAltarMissionary(
@@ -156,7 +157,7 @@ public class CultistDialogue {
 				}
 				
 			} else if(index==4) {
-				return new ResponseSex("Offer Ass", "Offer [npc.name] your ass instead.", Util.newArrayListOfValues(Fetish.FETISH_ANAL_RECEIVING),
+				return new ResponseSex("Offer Ass", "Offer [npc.name] your ass instead.", List.of(Fetish.FETISH_ANAL_RECEIVING),
 						null, Fetish.FETISH_ANAL_RECEIVING.getAssociatedCorruptionLevel(), null, null, null,
 						true, false,
 						new SMAltarMissionary(

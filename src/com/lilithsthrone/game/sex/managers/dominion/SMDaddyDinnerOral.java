@@ -32,7 +32,7 @@ public class SMDaddyDinnerOral extends SexManagerDefault {
 	public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 		Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
 		map.put(Main.game.getNpc(Daddy.class),
-				Util.newArrayListOfValues(CoverableArea.PENIS));
+				List.of(CoverableArea.PENIS));
 		return map;
 	}
 	

@@ -401,6 +401,7 @@ public class Util {
 	 * @param values The values to add to the new list.
 	 * @return A list of provided values, with nulls stripped.
 	 */
+	@Deprecated
 	@SafeVarargs
 	public static <U> List<U> newArrayListOfValues(U... values) {
 		return List.of(values);

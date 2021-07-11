@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.submission;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
@@ -106,8 +108,8 @@ public class TunnelSlimeDialogue {
 									null, null, null,
 									true, true,
 									new SMGeneric(
-											Util.newArrayListOfValues(Main.game.getPlayer()),
-											Util.newArrayListOfValues(getSlime()),
+											List.of(Main.game.getPlayer()),
+											List.of(getSlime()),
 									null,
 									null), AFTER_SLIME_SEX_AS_DOM, UtilText.parseFromXMLFile("places/submission/tunnelSlime", "SLIME_SEX_AS_DOM"));
 						}
@@ -125,8 +127,8 @@ public class TunnelSlimeDialogue {
 									null, null, null,
 									true, true,
 									new SMGeneric(
-											Util.newArrayListOfValues(getSlime()),
-											Util.newArrayListOfValues(Main.game.getPlayer()),
+											List.of(getSlime()),
+											List.of(Main.game.getPlayer()),
 									null,
 									null), AFTER_SLIME_SEX_AS_SUB, UtilText.parseFromXMLFile("places/submission/tunnelSlime", "SLIME_SEX_AS_SUB"));
 						}
@@ -194,12 +196,12 @@ public class TunnelSlimeDialogue {
 				} else if (index == 3) {
 					if(Main.game.getActiveNPC().isAttractedTo(Main.game.getPlayer())) {
 						return new ResponseSex("Offer body", "Offer your body to [npc.name] so that you can avoid a violent confrontation.",
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
+								List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null, null, null,
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getSlime()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(getSlime()),
+										List.of(Main.game.getPlayer()),
 										null,
 										null) {
 									@Override
@@ -398,8 +400,8 @@ public class TunnelSlimeDialogue {
 							null, null, null,
 							true, true,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getSlime()),
+									List.of(Main.game.getPlayer()),
+									List.of(getSlime()),
 							null,
 							null), AFTER_SLIME_SEX_AS_DOM, UtilText.parseFromXMLFile("places/submission/tunnelSlime", "SLIME_SEX_AS_DOM"));
 				}
@@ -417,8 +419,8 @@ public class TunnelSlimeDialogue {
 							null, null, null,
 							true, true,
 							new SMGeneric(
-									Util.newArrayListOfValues(getSlime()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(getSlime()),
+									List.of(Main.game.getPlayer()),
 							null,
 							null), AFTER_SLIME_SEX_AS_SUB, UtilText.parseFromXMLFile("places/submission/tunnelSlime", "SLIME_SEX_AS_SUB"));
 				}
@@ -603,8 +605,8 @@ public class TunnelSlimeDialogue {
 							"Well, [npc.she] <i>is</i> asking for it!",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getSlime()),
+									List.of(Main.game.getPlayer()),
+									List.of(getSlime()),
 							null,
 							null),
 							AFTER_SEX_VICTORY,
@@ -614,11 +616,11 @@ public class TunnelSlimeDialogue {
 					return new ResponseSex(
 							"Rape [npc.herHim]",
 							"[npc.She] needs to be punished for attacking you like that...",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getSlime()),
+									List.of(Main.game.getPlayer()),
+									List.of(getSlime()),
 							null,
 							null),
 							AFTER_SEX_VICTORY,
@@ -634,8 +636,8 @@ public class TunnelSlimeDialogue {
 							"Well, [npc.she] <i>is</i> asking for it! (Start the sex scene in the 'gentle' pace.)",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getSlime()),
+									List.of(Main.game.getPlayer()),
+									List.of(getSlime()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
@@ -644,11 +646,11 @@ public class TunnelSlimeDialogue {
 					
 				} else {
 					return new ResponseSex("Rape [npc.herHim] (gentle)", "[npc.She] needs to be punished for attacking you like that... (Start the sex scene in the 'gentle' pace.)",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getSlime()),
+									List.of(Main.game.getPlayer()),
+									List.of(getSlime()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
@@ -665,8 +667,8 @@ public class TunnelSlimeDialogue {
 							"Well, [npc.she] <i>is</i> asking for it! (Start the sex scene in the 'rough' pace.)",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getSlime()),
+									List.of(Main.game.getPlayer()),
+									List.of(getSlime()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
@@ -675,11 +677,11 @@ public class TunnelSlimeDialogue {
 					
 				} else {
 					return new ResponseSex("Rape [npc.herHim] (rough)", "[npc.She] needs to be punished for attacking you like that... (Start the sex scene in the 'rough' pace.)",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getSlime()),
+									List.of(Main.game.getPlayer()),
+									List.of(getSlime()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
@@ -694,12 +696,12 @@ public class TunnelSlimeDialogue {
 				} else {
 					return new ResponseSex("Submit",
 							"You're not really sure what to do now... Perhaps it would be best to let [npc.name] choose what to do next?",
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+							List.of(Fetish.FETISH_SUBMISSIVE),
 							null, CorruptionLevel.THREE_DIRTY, null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getSlime()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(getSlime()),
+									List.of(Main.game.getPlayer()),
 							null,
 							null),
 							AFTER_SLIME_SEX_AS_SUB,
@@ -831,8 +833,8 @@ public class TunnelSlimeDialogue {
 							"[npc.Name] forces [npc.herself] on you...",
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getActiveNPC()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getActiveNPC()),
+									List.of(Main.game.getPlayer()),
 							null,
 							null), AFTER_SLIME_SEX_AS_SUB, "<p>"
 								+ "You surrender yourself to [npc.name], lying back and offering no resistance as [npc.she] tongue-fucks your throat."
@@ -845,8 +847,8 @@ public class TunnelSlimeDialogue {
 							"[npc.Name] forces [npc.herself] on you...",
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getActiveNPC()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getActiveNPC()),
+									List.of(Main.game.getPlayer()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_SUB_EAGER), AFTER_SLIME_SEX_AS_SUB, "<p>"
@@ -860,8 +862,8 @@ public class TunnelSlimeDialogue {
 							"[npc.Name] forces [npc.herself] on you...",
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getActiveNPC()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getActiveNPC()),
+									List.of(Main.game.getPlayer()),
 									null,
 									null,
 									ResponseTag.START_PACE_PLAYER_SUB_RESISTING), AFTER_SLIME_SEX_AS_SUB, "<p>"

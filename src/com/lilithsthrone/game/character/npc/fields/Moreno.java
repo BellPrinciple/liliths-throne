@@ -79,7 +79,7 @@ public class Moreno extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_HEALTH_FANATIC);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 0),

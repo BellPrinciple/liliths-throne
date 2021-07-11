@@ -52,8 +52,7 @@ public class SexManagerRalphDiscount extends SexManagerDefault {
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		return Util.newArrayListOfValues(
-				SexPositionUnique.UNDER_DESK_RALPH);
+		return List.of(SexPositionUnique.UNDER_DESK_RALPH);
 	}
 	
 	@Override

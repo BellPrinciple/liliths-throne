@@ -176,8 +176,7 @@ public class Attribute {
 			PresetColour.ATTRIBUTE_PHYSIQUE,
 			"power",
 			"weakness",
-			Util.newArrayListOfValues(
-					"<b>+2</b> <b style='color: " + PresetColour.ATTRIBUTE_HEALTH.toWebHexString() + "'>Energy</b> per 1 physique")) {
+			List.of("<b>+2</b> <b style='color: " + PresetColour.ATTRIBUTE_HEALTH.toWebHexString() + "'>Energy</b> per 1 physique")) {
 		@Override
 		public boolean hasStatusEffect() {
 			return true;
@@ -200,8 +199,7 @@ public class Attribute {
 			PresetColour.ATTRIBUTE_ARCANE,
 			"arcane-boost",
 			"arcane-drain",
-			Util.newArrayListOfValues(
-					"<b>+2</b> <b style='color: " + PresetColour.ATTRIBUTE_MANA.toWebHexString() + "'>Aura</b> per 1 arcane")) {
+			List.of("<b>+2</b> <b style='color: " + PresetColour.ATTRIBUTE_MANA.toWebHexString() + "'>Aura</b> per 1 arcane")) {
 		@Override
 		public boolean hasStatusEffect() {
 			return true;
@@ -224,8 +222,7 @@ public class Attribute {
 			PresetColour.ATTRIBUTE_CORRUPTION,
 			"corruption",
 			"purity",
-			Util.newArrayListOfValues(
-					"<b>-0.5</b> <b style='color: " + PresetColour.ATTRIBUTE_MANA.toWebHexString() + "'>arousal resistance</b> per 1 physical corruption",
+			List.of("<b>-0.5</b> <b style='color: " + PresetColour.ATTRIBUTE_MANA.toWebHexString() + "'>arousal resistance</b> per 1 physical corruption",
 					"<b>+0.5</b> <b style='color: " + PresetColour.DAMAGE_TYPE_MANA.toWebHexString() + "'>arousal damage</b> per 1 physical corruption")) {
 		@Override
 		public boolean hasStatusEffect() {

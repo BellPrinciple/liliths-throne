@@ -150,7 +150,7 @@ public class Murk extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_DIRTY_MINDED);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 0),
@@ -271,7 +271,7 @@ public class Murk extends NPC {
 			this.setScar(InventorySlot.LEG, new Scar(ScarType.CLAW_MARKS, true));
 		}
 		if(settings.contains(EquipClothingSetting.ADD_WEAPONS)) {
-			this.equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bat_metal", DamageType.PHYSICAL, Util.newArrayListOfValues(PresetColour.CLOTHING_GUNMETAL, PresetColour.CLOTHING_BLACK)));
+			this.equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bat_metal", DamageType.PHYSICAL, List.of(PresetColour.CLOTHING_GUNMETAL, PresetColour.CLOTHING_BLACK)));
 		}
 		
 		this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ClothingType.GROIN_CROTCHLESS_BRIEFS, PresetColour.CLOTHING_BLACK, false), true, this);
@@ -463,7 +463,7 @@ public class Murk extends NPC {
 	
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(SAMurkSpecials.class);
+		return List.of(SAMurkSpecials.class);
 	}
 
 	@Override

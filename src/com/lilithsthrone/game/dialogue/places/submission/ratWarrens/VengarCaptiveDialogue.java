@@ -342,7 +342,7 @@ public class VengarCaptiveDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				List<Fetish> applicableFetishes = Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING);
+				List<Fetish> applicableFetishes = List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING);
 				CorruptionLevel applicableCorruptionLevel = Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel();
 				return new Response(
 						"Obey",
@@ -421,7 +421,7 @@ public class VengarCaptiveDialogue {
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "START_VENGAR_PUBLIC_FUCK")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 						}
 					};
 				}
@@ -632,7 +632,7 @@ public class VengarCaptiveDialogue {
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			List<String> tattooNames = Util.newArrayListOfValues("Public cum dump", "Public cock sleeve", "Free fuck", "Free use");
+			List<String> tattooNames = List.of("Public cum dump", "Public cock sleeve", "Free fuck", "Free use");
 			
 			if(index==1) {
 				return new Response("Stay quiet",
@@ -910,7 +910,7 @@ public class VengarCaptiveDialogue {
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_HALL_CHOOSE_VENGAR_SITTING_SEX")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 					}
 				};
 			}
@@ -1041,7 +1041,7 @@ public class VengarCaptiveDialogue {
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_HALL_CHOOSE_SHADOW_SPANKING_START_SEX")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Shadow.class), Main.game.getPlayer(), TongueVagina.CUNNILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Shadow.class), Main.game.getPlayer(), TongueVagina.CUNNILINGUS_START, false, true));
 					}
 				};
 			}
@@ -1100,7 +1100,7 @@ public class VengarCaptiveDialogue {
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_HALL_CHOOSE_SILENCE_START_SEX")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Silence.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Silence.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 						}
 					};
 				
@@ -1275,9 +1275,9 @@ public class VengarCaptiveDialogue {
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
 								if(getCharactersPresent(true).get(1).hasPenis()) {
-									map.put(getCharactersPresent(true).get(1), Util.newArrayListOfValues(CoverableArea.PENIS));
+									map.put(getCharactersPresent(true).get(1), List.of(CoverableArea.PENIS));
 								} else {
-									map.put(getCharactersPresent(true).get(1), Util.newArrayListOfValues(CoverableArea.VAGINA));
+									map.put(getCharactersPresent(true).get(1), List.of(CoverableArea.VAGINA));
 								}
 								return map;
 							}
@@ -1403,9 +1403,9 @@ public class VengarCaptiveDialogue {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-									map.put(getCharactersPresent(true).get(1), Util.newArrayListOfValues(CoverableArea.PENIS));
-									map.put(getCharactersPresent(true).get(0), Util.newArrayListOfValues(CoverableArea.VAGINA));
-									map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA));
+									map.put(getCharactersPresent(true).get(1), List.of(CoverableArea.PENIS));
+									map.put(getCharactersPresent(true).get(0), List.of(CoverableArea.VAGINA));
+									map.put(Main.game.getPlayer(), List.of(CoverableArea.VAGINA));
 									return map;
 								}
 								@Override
@@ -1486,8 +1486,8 @@ public class VengarCaptiveDialogue {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-									map.put(getCharactersPresent(true).get(1), Util.newArrayListOfValues(CoverableArea.VAGINA));
-									map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA));
+									map.put(getCharactersPresent(true).get(1), List.of(CoverableArea.VAGINA));
+									map.put(Main.game.getPlayer(), List.of(CoverableArea.VAGINA));
 									return map;
 								}
 								@Override
@@ -1550,8 +1550,8 @@ public class VengarCaptiveDialogue {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-									map.put(getCharactersPresent(true).get(1), Util.newArrayListOfValues(CoverableArea.VAGINA));
-									map.put(getCharactersPresent(true).get(1), Util.newArrayListOfValues(CoverableArea.ANUS));
+									map.put(getCharactersPresent(true).get(1), List.of(CoverableArea.VAGINA));
+									map.put(getCharactersPresent(true).get(1), List.of(CoverableArea.ANUS));
 									return map;
 								}
 								@Override
@@ -1667,13 +1667,13 @@ public class VengarCaptiveDialogue {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-								map.put(getCharactersPresent(true).get(1), Util.newArrayListOfValues(CoverableArea.PENIS));
-								map.put(getCharactersPresent(true).get(2), Util.newArrayListOfValues(CoverableArea.PENIS));
-								map.put(getCharactersPresent(true).get(3), Util.newArrayListOfValues(CoverableArea.VAGINA));
-								map.put(getCharactersPresent(true).get(4), Util.newArrayListOfValues(CoverableArea.VAGINA));
+								map.put(getCharactersPresent(true).get(1), List.of(CoverableArea.PENIS));
+								map.put(getCharactersPresent(true).get(2), List.of(CoverableArea.PENIS));
+								map.put(getCharactersPresent(true).get(3), List.of(CoverableArea.VAGINA));
+								map.put(getCharactersPresent(true).get(4), List.of(CoverableArea.VAGINA));
 								
-								map.put(getCharactersPresent(true).get(0), Util.newArrayListOfValues(CoverableArea.VAGINA));
-								map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA));
+								map.put(getCharactersPresent(true).get(0), List.of(CoverableArea.VAGINA));
+								map.put(Main.game.getPlayer(), List.of(CoverableArea.VAGINA));
 								return map;
 							}
 							@Override
@@ -1934,12 +1934,12 @@ public class VengarCaptiveDialogue {
 								Util.newHashMapOfValues(
 										new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
 						null,
-						Util.newArrayListOfValues(getMainCompanion()),
+						List.of(getMainCompanion()),
 						AFTER_SILENCE_ORAL,
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_HALL_CHOOSE_COMPANION_SILENCE_PLAYER_CLEANS", getCharactersPresent(true))) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Silence.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Silence.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 					}
 				};
 				
@@ -1956,12 +1956,12 @@ public class VengarCaptiveDialogue {
 								Util.newHashMapOfValues(
 										new Value<>(getMainCompanion(), SexSlotStanding.PERFORMING_ORAL))),
 						null,
-						Util.newArrayListOfValues(Main.game.getPlayer()),
+						List.of(Main.game.getPlayer()),
 						AFTER_SILENCE_ORAL,
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_HALL_CHOOSE_COMPANION_SILENCE_COMPANION_CLEANS", getCharactersPresent(true))) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Silence.class), getMainCompanion(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Silence.class), getMainCompanion(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 					}
 				};
 				
@@ -2490,17 +2490,17 @@ public class VengarCaptiveDialogue {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-									map.put(getCharactersPresent(false).get(0), Util.newArrayListOfValues(CoverableArea.PENIS));
+									map.put(getCharactersPresent(false).get(0), List.of(CoverableArea.PENIS));
 									if(Main.game.isAnalContentEnabled()) {
-										map.put(getCharactersPresent(false).get(1), Util.newArrayListOfValues(CoverableArea.PENIS));
+										map.put(getCharactersPresent(false).get(1), List.of(CoverableArea.PENIS));
 									} else {
-										map.put(getCharactersPresent(false).get(1), Util.newArrayListOfValues(CoverableArea.VAGINA));
+										map.put(getCharactersPresent(false).get(1), List.of(CoverableArea.VAGINA));
 										map.get(getCharactersPresent(false).get(0)).add(CoverableArea.MOUTH);
 									}
-									map.put(getCharactersPresent(false).get(2), Util.newArrayListOfValues(CoverableArea.VAGINA));
-									map.put(getCharactersPresent(false).get(3), Util.newArrayListOfValues(CoverableArea.VAGINA));
+									map.put(getCharactersPresent(false).get(2), List.of(CoverableArea.VAGINA));
+									map.put(getCharactersPresent(false).get(3), List.of(CoverableArea.VAGINA));
 									
-									map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA));
+									map.put(Main.game.getPlayer(), List.of(CoverableArea.VAGINA));
 									if(Main.game.isAnalContentEnabled()) {
 										map.get(Main.game.getPlayer()).add(CoverableArea.ANUS);
 									}
@@ -2585,9 +2585,9 @@ public class VengarCaptiveDialogue {
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
 									if(getCharactersPresent(false).get(0).hasPenis()) {
-										map.put(getCharactersPresent(false).get(0), Util.newArrayListOfValues(CoverableArea.PENIS));
+										map.put(getCharactersPresent(false).get(0), List.of(CoverableArea.PENIS));
 									} else {
-										map.put(getCharactersPresent(false).get(0), Util.newArrayListOfValues(CoverableArea.VAGINA));
+										map.put(getCharactersPresent(false).get(0), List.of(CoverableArea.VAGINA));
 									}
 									return map;
 								}
@@ -2647,7 +2647,7 @@ public class VengarCaptiveDialogue {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-									map.put(getCharactersPresent(false).get(0), Util.newArrayListOfValues(CoverableArea.PENIS));
+									map.put(getCharactersPresent(false).get(0), List.of(CoverableArea.PENIS));
 									return map;
 								}
 								@Override
@@ -2796,8 +2796,8 @@ public class VengarCaptiveDialogue {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-									map.put(getCharactersPresent(false).get(0), Util.newArrayListOfValues(CoverableArea.PENIS));
-									map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA));
+									map.put(getCharactersPresent(false).get(0), List.of(CoverableArea.PENIS));
+									map.put(Main.game.getPlayer(), List.of(CoverableArea.VAGINA));
 									return map;
 								}
 								@Override
@@ -2861,7 +2861,7 @@ public class VengarCaptiveDialogue {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-									map.put(getCharactersPresent(false).get(0), Util.newArrayListOfValues(CoverableArea.VAGINA));
+									map.put(getCharactersPresent(false).get(0), List.of(CoverableArea.VAGINA));
 									return map;
 								}
 								@Override
@@ -2970,17 +2970,17 @@ public class VengarCaptiveDialogue {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-								map.put(getCharactersPresent(false).get(0), Util.newArrayListOfValues(CoverableArea.PENIS));
+								map.put(getCharactersPresent(false).get(0), List.of(CoverableArea.PENIS));
 								if(Main.game.isAnalContentEnabled()) {
-									map.put(getCharactersPresent(false).get(1), Util.newArrayListOfValues(CoverableArea.PENIS));
+									map.put(getCharactersPresent(false).get(1), List.of(CoverableArea.PENIS));
 								} else {
-									map.put(getCharactersPresent(false).get(1), Util.newArrayListOfValues(CoverableArea.VAGINA));
+									map.put(getCharactersPresent(false).get(1), List.of(CoverableArea.VAGINA));
 									map.get(getCharactersPresent(false).get(0)).add(CoverableArea.MOUTH);
 								}
-								map.put(getCharactersPresent(false).get(2), Util.newArrayListOfValues(CoverableArea.VAGINA));
-								map.put(getCharactersPresent(false).get(3), Util.newArrayListOfValues(CoverableArea.VAGINA));
+								map.put(getCharactersPresent(false).get(2), List.of(CoverableArea.VAGINA));
+								map.put(getCharactersPresent(false).get(3), List.of(CoverableArea.VAGINA));
 								
-								map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA));
+								map.put(Main.game.getPlayer(), List.of(CoverableArea.VAGINA));
 								if(Main.game.isAnalContentEnabled()) {
 									map.get(Main.game.getPlayer()).add(CoverableArea.ANUS);
 								}
@@ -3146,7 +3146,7 @@ public class VengarCaptiveDialogue {
 								UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_BEDROOM_CLEAN_FINISH_SHADOW_ORAL_START")) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Shadow.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Shadow.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 							}
 						};
 					
@@ -3178,7 +3178,7 @@ public class VengarCaptiveDialogue {
 								UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_BEDROOM_CLEAN_FINISH_SILENCE_ORAL_START")) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Silence.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Silence.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 							}
 						};
 					
@@ -3280,12 +3280,12 @@ public class VengarCaptiveDialogue {
 								Util.newHashMapOfValues(
 										new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))),
 						null,
-						Util.newArrayListOfValues(getMainCompanion()),
+						List.of(getMainCompanion()),
 						VENGARS_BEDROOM_AFTER_RAT_GIRL_ORAL,
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_BEDROOM_CLEAN_FINISH_IGNORE_SHADOW_FACE_SITTING_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Shadow.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Shadow.class), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 					}
 				};
 			}
@@ -3429,7 +3429,7 @@ public class VengarCaptiveDialogue {
 									Util.newHashMapOfValues(
 											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))),
 							null,
-							Util.newArrayListOfValues(getMainCompanion()),
+							List.of(getMainCompanion()),
 							VENGARS_BEDROOM_SHADOW_SILENCE_AFTER_SEX,
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_BEDROOM_SHADOW_SILENCE_SOLO_START")) {
 						@Override
@@ -3552,12 +3552,12 @@ public class VengarCaptiveDialogue {
 									Util.newHashMapOfValues(
 											new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
 							null,
-							Util.newArrayListOfValues(getMainCompanion()),
+							List.of(getMainCompanion()),
 							VENGARS_BEDROOM_NIGHT_TIME_AFTER_SEX,
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_BEDROOM_NIGHT_TIME_SEX_START", getCharactersPresent(true))) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 						}
 					};
 					
@@ -3574,12 +3574,12 @@ public class VengarCaptiveDialogue {
 									Util.newHashMapOfValues(
 											new Value<>(getMainCompanion(), SexSlotLyingDown.LYING_DOWN))),
 							null,
-							Util.newArrayListOfValues(Main.game.getPlayer()),
+							List.of(Main.game.getPlayer()),
 							VENGARS_BEDROOM_NIGHT_TIME_AFTER_SEX,
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_BEDROOM_NIGHT_TIME_SEX_COMPANION_START", getCharactersPresent(true))) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisVagina.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getNpc(Vengar.class), getMainCompanion(), PenisVagina.PENIS_FUCKING_START, false, true));
 						}
 					};
 				}
@@ -3706,12 +3706,12 @@ public class VengarCaptiveDialogue {
 								Util.newHashMapOfValues(
 										new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
 						null,
-						Util.newArrayListOfValues(getMainCompanion()),
+						List.of(getMainCompanion()),
 						VENGARS_BEDROOM_NIGHT_TIME_PRETEND_ESCAPE_AFTER_ORAL,
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/vengarCaptive", "VENGARS_BEDROOM_NIGHT_TIME_PRETEND_ESCAPE_SILENCE_ORAL_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Silence.class), TongueVagina.CUNNILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Silence.class), TongueVagina.CUNNILINGUS_START, false, true));
 					}
 				};
 				

@@ -72,8 +72,7 @@ public class GenericOrgasms {
 	public static boolean isTakingCock(GameCharacter character, GameCharacter penetrator) {
 		return !Collections.disjoint(
 				Main.sex.getOngoingSexAreas(penetrator, SexAreaPenetration.PENIS, character),
-				Util.newArrayListOfValues(
-						SexAreaOrifice.VAGINA,
+				List.of(SexAreaOrifice.VAGINA,
 						SexAreaOrifice.ANUS,
 						SexAreaOrifice.NIPPLE,
 						SexAreaOrifice.MOUTH,
@@ -184,12 +183,12 @@ public class GenericOrgasms {
 				case SPINNERET:
 					break;
 				case ANUS:
-					genericOrgasmSB.append(UtilText.parse(Util.newArrayListOfValues(characterOrgasming, characterPenetrated, characterTargeted),
+					genericOrgasmSB.append(UtilText.parse(List.of(characterOrgasming, characterPenetrated, characterTargeted),
 							"With half of [npc.her] load being pumped into [npc2.namePos] [npc2.asshole+], and still in the middle of [npc.her] orgasm, [npc.name] suddenly [npc.verb(pull)] out,"
 									+ " before quickly moving over to [npc3.name] and lining the [npc.cockHead+] of [npc.her] [npc.cock+] up to [npc3.her] [npc3.asshole+]."));
 					break;
 				case VAGINA:
-					genericOrgasmSB.append(UtilText.parse(Util.newArrayListOfValues(characterOrgasming, characterPenetrated, characterTargeted),
+					genericOrgasmSB.append(UtilText.parse(List.of(characterOrgasming, characterPenetrated, characterTargeted),
 							"With half of [npc.her] load being pumped into [npc2.namePos] [npc2.pussy+], and still in the middle of [npc.her] orgasm, [npc.name] suddenly [npc.verb(pull)] out,"
 									+ " before quickly moving over to [npc3.name] and lining the [npc.cockHead+] of [npc.her] [npc.cock+] up to [npc3.her] [npc3.pussy+]."));
 					break;
@@ -803,12 +802,12 @@ public class GenericOrgasms {
 					case MOUTH:
 						GameCharacter primary = PenisMouth.getPrimaryBlowjobPerformer(characterOrgasming);
 						if(Main.sex.getCreampieLockedBy()==null && !characterTargeted.equals(primary)) {
-							genericOrgasmSB.append(UtilText.parse(Util.newArrayListOfValues(characterOrgasming, characterTargeted, primary),
+							genericOrgasmSB.append(UtilText.parse(List.of(characterOrgasming, characterTargeted, primary),
 									" Not wanting [npc3.herHim] to be the one to bear the brunt of [npc.her] orgasm, [npc.name] [npc.verb(draw)] [npc.her] [npc.cock+] from out of [npc3.namePos] throat."));
 									
 							if(characterOrgasming.hasPenisModifier(PenetrationModifier.KNOTTED)) {
 								if(Objects.equals(Main.sex.getCharacterKnotting(characterOrgasming), characterTargeted)) {
-									genericOrgasmSB.append(UtilText.parse(Util.newArrayListOfValues(characterOrgasming, characterTargeted, primary),
+									genericOrgasmSB.append(UtilText.parse(List.of(characterOrgasming, characterTargeted, primary),
 											" Moving the [npc.cockHead+] over to point directly at [npc2.namePos] mouth, [npc.she] [npc.verb(thrust)] forwards and "
 												+ " [npc.verb(hilt)] [npc.her] [npc.cock+] down [npc2.namePos] throat, ramming [npc.her] rapidly-growing knot against [npc2.her] [npc2.lips+] in the process."
 											+ " It's already started to swell up so much that [npc.she] [npc.do]n't manage to get it into [npc2.her] [npc2.mouth] on the first thrust,"
@@ -845,7 +844,7 @@ public class GenericOrgasms {
 						} else {
 							if(characterOrgasming.hasPenisModifier(PenetrationModifier.KNOTTED)) {
 								if(Objects.equals(Main.sex.getCharacterKnotting(characterOrgasming), characterTargeted)) {
-									genericOrgasmSB.append(UtilText.parse(Util.newArrayListOfValues(characterOrgasming, characterTargeted, primary),
+									genericOrgasmSB.append(UtilText.parse(List.of(characterOrgasming, characterTargeted, primary),
 											" Letting out [npc.a_moan+], [npc.name] [npc.verb(thrust)] forwards and [npc.verb(hilt)] [npc.her] [npc.cock+] down [npc2.namePos] throat,"
 													+ " ramming [npc.her] rapidly-growing knot against [npc2.her] [npc2.lips+] in the process."
 											+ " It's already started to swell up so much that [npc.she] [npc.do]n't manage to get it into [npc2.her] [npc2.mouth] on the first thrust,"
@@ -3114,7 +3113,7 @@ public class GenericOrgasms {
 			SexAreaInterface areaContacted = getAreaToBeCreampied();
 			
 			if(cumTarget.equals(characterPenetrated)) {
-				return Util.newArrayListOfValues(areaContacted);
+				return List.of(areaContacted);
 				
 			} else {
 				return null;
@@ -3133,11 +3132,9 @@ public class GenericOrgasms {
 						case CLIT:
 							break;
 						case FINGER:
-							return Util.newArrayListOfValues(
-									CoverableArea.HANDS);
+							return List.of(CoverableArea.HANDS);
 						case FOOT:
-							return Util.newArrayListOfValues(
-									CoverableArea.FEET);
+							return List.of(CoverableArea.FEET);
 						case PENIS:
 							break;
 						case TAIL:
@@ -3150,27 +3147,22 @@ public class GenericOrgasms {
 				} else {
 					switch((SexAreaOrifice)areaContacted) {
 						case ARMPITS:
-							return Util.newArrayListOfValues(
-									CoverableArea.ARMPITS);
+							return List.of(CoverableArea.ARMPITS);
 						case ANUS:
 							break;
 						case ASS:
 							if(cumTarget.getGenitalArrangement()==GenitalArrangement.CLOACA) {
-								return Util.newArrayListOfValues(
-										CoverableArea.ASS);
+								return List.of(CoverableArea.ASS);
 							} else {
-								return Util.newArrayListOfValues(
-										CoverableArea.ASS,
+								return List.of(CoverableArea.ASS,
 										CoverableArea.ANUS);
 							}
 						case BREAST:
-							return Util.newArrayListOfValues(
-									CoverableArea.BREASTS,
+							return List.of(CoverableArea.BREASTS,
 									CoverableArea.NIPPLES,
 									CoverableArea.MOUTH);
 						case BREAST_CROTCH:
-							return Util.newArrayListOfValues(
-									CoverableArea.BREASTS_CROTCH,
+							return List.of(CoverableArea.BREASTS_CROTCH,
 									CoverableArea.NIPPLES_CROTCH,
 									CoverableArea.STOMACH,
 									CoverableArea.PENIS,
@@ -3182,8 +3174,7 @@ public class GenericOrgasms {
 						case NIPPLE_CROTCH:
 							break;
 						case THIGHS:
-							return Util.newArrayListOfValues(
-									CoverableArea.LEGS);
+							return List.of(CoverableArea.LEGS);
 						case URETHRA_PENIS:
 							break;
 						case URETHRA_VAGINA:
@@ -3428,7 +3419,7 @@ public class GenericOrgasms {
 			GameCharacter characterPenetrated = getCharacterToBeKnotted();
 			
 			if(cumTarget.equals(characterPenetrated)) {
-				return Util.newArrayListOfValues(areaContacted);
+				return List.of(areaContacted);
 					
 			} else {
 				return null;
@@ -3829,7 +3820,7 @@ public class GenericOrgasms {
 			GameCharacter characterPenetrated = getCharacterToBeEgged();
 			SexAreaInterface areaContacted = getAreaToBeEgged();
 			if(cumTarget.equals(characterPenetrated)) {
-				return Util.newArrayListOfValues(areaContacted);
+				return List.of(areaContacted);
 				
 			} else {
 				return null;
@@ -3844,21 +3835,17 @@ public class GenericOrgasms {
 						break;
 					case ASS:
 						if(cumTarget.getGenitalArrangement()==GenitalArrangement.CLOACA) {
-							return Util.newArrayListOfValues(
-									CoverableArea.ASS);
+							return List.of(CoverableArea.ASS);
 						} else {
-							return Util.newArrayListOfValues(
-									CoverableArea.ASS,
+							return List.of(CoverableArea.ASS,
 									CoverableArea.ANUS);
 						}
 					case BREAST:
-						return Util.newArrayListOfValues(
-								CoverableArea.BREASTS,
+						return List.of(CoverableArea.BREASTS,
 								CoverableArea.NIPPLES,
 								CoverableArea.MOUTH);
 					case BREAST_CROTCH:
-						return Util.newArrayListOfValues(
-								CoverableArea.BREASTS_CROTCH,
+						return List.of(CoverableArea.BREASTS_CROTCH,
 								CoverableArea.NIPPLES_CROTCH,
 								CoverableArea.STOMACH,
 								CoverableArea.PENIS,
@@ -3870,8 +3857,7 @@ public class GenericOrgasms {
 					case NIPPLE_CROTCH:
 						break;
 					case THIGHS:
-						return Util.newArrayListOfValues(
-								CoverableArea.LEGS);
+						return List.of(CoverableArea.LEGS);
 					case URETHRA_PENIS:
 						break;
 					case URETHRA_VAGINA:
@@ -4473,7 +4459,7 @@ public class GenericOrgasms {
 			GameCharacter secondaryTarget = getSecondaryCreampieTarget(Main.sex.getCharacterTargetedForSexAction(this), (SexAreaOrifice) areaContacted);
 			
 			if(cumTarget.equals(characterPenetrated) || cumTarget.equals(secondaryTarget)) {
-				return Util.newArrayListOfValues(areaContacted);
+				return List.of(areaContacted);
 					
 			} else {
 				return null;
@@ -4493,11 +4479,9 @@ public class GenericOrgasms {
 						case CLIT:
 							break;
 						case FINGER:
-							return Util.newArrayListOfValues(
-									CoverableArea.HANDS);
+							return List.of(CoverableArea.HANDS);
 						case FOOT:
-							return Util.newArrayListOfValues(
-									CoverableArea.FEET);
+							return List.of(CoverableArea.FEET);
 						case PENIS:
 							break;
 						case TAIL:
@@ -4514,21 +4498,17 @@ public class GenericOrgasms {
 							break;
 						case ASS:
 							if(cumTarget.getGenitalArrangement()==GenitalArrangement.CLOACA) {
-								return Util.newArrayListOfValues(
-										CoverableArea.ASS);
+								return List.of(CoverableArea.ASS);
 							} else {
-								return Util.newArrayListOfValues(
-										CoverableArea.ASS,
+								return List.of(CoverableArea.ASS,
 										CoverableArea.ANUS);
 							}
 						case BREAST:
-							return Util.newArrayListOfValues(
-									CoverableArea.BREASTS,
+							return List.of(CoverableArea.BREASTS,
 									CoverableArea.NIPPLES,
 									CoverableArea.MOUTH);
 						case BREAST_CROTCH:
-							return Util.newArrayListOfValues(
-									CoverableArea.BREASTS_CROTCH,
+							return List.of(CoverableArea.BREASTS_CROTCH,
 									CoverableArea.NIPPLES_CROTCH,
 									CoverableArea.STOMACH,
 									CoverableArea.PENIS,
@@ -4540,8 +4520,7 @@ public class GenericOrgasms {
 						case NIPPLE_CROTCH:
 							break;
 						case THIGHS:
-							return Util.newArrayListOfValues(
-									CoverableArea.LEGS);
+							return List.of(CoverableArea.LEGS);
 						case URETHRA_PENIS:
 							break;
 						case URETHRA_VAGINA:
@@ -4767,7 +4746,7 @@ public class GenericOrgasms {
 			GameCharacter secondaryTarget = getSecondaryCreampieTarget(Main.sex.getCharacterTargetedForSexAction(this), (SexAreaOrifice) areaContacted);
 			
 			if(cumTarget.equals(characterPenetrated) || cumTarget.equals(secondaryTarget)) {
-				return Util.newArrayListOfValues(areaContacted);
+				return List.of(areaContacted);
 					
 			} else {
 				return null;
@@ -4787,11 +4766,9 @@ public class GenericOrgasms {
 						case CLIT:
 							break;
 						case FINGER:
-							return Util.newArrayListOfValues(
-									CoverableArea.HANDS);
+							return List.of(CoverableArea.HANDS);
 						case FOOT:
-							return Util.newArrayListOfValues(
-									CoverableArea.FEET);
+							return List.of(CoverableArea.FEET);
 						case PENIS:
 							break;
 						case TAIL:
@@ -4808,21 +4785,17 @@ public class GenericOrgasms {
 							break;
 						case ASS:
 							if(cumTarget.getGenitalArrangement()==GenitalArrangement.CLOACA) {
-								return Util.newArrayListOfValues(
-										CoverableArea.ASS);
+								return List.of(CoverableArea.ASS);
 							} else {
-								return Util.newArrayListOfValues(
-										CoverableArea.ASS,
+								return List.of(CoverableArea.ASS,
 										CoverableArea.ANUS);
 							}
 						case BREAST:
-							return Util.newArrayListOfValues(
-									CoverableArea.BREASTS,
+							return List.of(CoverableArea.BREASTS,
 									CoverableArea.NIPPLES,
 									CoverableArea.MOUTH);
 						case BREAST_CROTCH:
-							return Util.newArrayListOfValues(
-									CoverableArea.BREASTS_CROTCH,
+							return List.of(CoverableArea.BREASTS_CROTCH,
 									CoverableArea.NIPPLES_CROTCH,
 									CoverableArea.STOMACH,
 									CoverableArea.PENIS,
@@ -4834,8 +4807,7 @@ public class GenericOrgasms {
 						case NIPPLE_CROTCH:
 							break;
 						case THIGHS:
-							return Util.newArrayListOfValues(
-									CoverableArea.LEGS);
+							return List.of(CoverableArea.LEGS);
 						case URETHRA_PENIS:
 							break;
 						case URETHRA_VAGINA:
@@ -5003,17 +4975,14 @@ public class GenericOrgasms {
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumTarget.equals(Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()))) {
 				if(cumTarget.getGenitalArrangement()==GenitalArrangement.CLOACA) {
-					return Util.newArrayListOfValues(
-							CoverableArea.ASS);
+					return List.of(CoverableArea.ASS);
 				} else if(cumTarget.getGenitalArrangement()==GenitalArrangement.CLOACA_BEHIND) {
-					return Util.newArrayListOfValues(
-							CoverableArea.ASS,
+					return List.of(CoverableArea.ASS,
 							CoverableArea.ANUS,
 							CoverableArea.PENIS,
 							CoverableArea.VAGINA);
 				} else {
-					return Util.newArrayListOfValues(
-							CoverableArea.ASS,
+					return List.of(CoverableArea.ASS,
 							CoverableArea.ANUS);
 				}
 			}
@@ -5067,18 +5036,15 @@ public class GenericOrgasms {
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumTarget.equals(Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()))) {
 				if(cumTarget.getGenitalArrangement()==GenitalArrangement.CLOACA) {
-					return Util.newArrayListOfValues(
-							CoverableArea.ANUS,
+					return List.of(CoverableArea.ANUS,
 							CoverableArea.PENIS,
 							CoverableArea.VAGINA);
 					
 				} else if(cumTarget.getGenitalArrangement()==GenitalArrangement.CLOACA_BEHIND) {
-					return Util.newArrayListOfValues(
-							CoverableArea.THIGHS);
+					return List.of(CoverableArea.THIGHS);
 					
 				} else if(cumTarget.getGenitalArrangement()==GenitalArrangement.NORMAL) {
-					return Util.newArrayListOfValues(
-							CoverableArea.PENIS,
+					return List.of(CoverableArea.PENIS,
 							CoverableArea.VAGINA);
 				}
 			}
@@ -5128,13 +5094,11 @@ public class GenericOrgasms {
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumProvider.equals(cumTarget)) {
 				if(cumTarget.getGenitalArrangement()==GenitalArrangement.CLOACA) {
-					return Util.newArrayListOfValues(
-							CoverableArea.ANUS,
+					return List.of(CoverableArea.ANUS,
 							CoverableArea.PENIS,
 							CoverableArea.VAGINA);
 				} else if(cumTarget.getGenitalArrangement()==GenitalArrangement.NORMAL) {
-					return Util.newArrayListOfValues(
-							CoverableArea.PENIS,
+					return List.of(CoverableArea.PENIS,
 							CoverableArea.VAGINA);
 				}
 			}
@@ -5192,8 +5156,7 @@ public class GenericOrgasms {
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction())
 					&& cumTarget.equals(Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()))) {
-				return Util.newArrayListOfValues(
-						CoverableArea.NIPPLES,
+				return List.of(CoverableArea.NIPPLES,
 						CoverableArea.BREASTS);
 			}
 			return null; 
@@ -5245,8 +5208,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumProvider.equals(cumTarget)) {
-				return Util.newArrayListOfValues(
-						CoverableArea.NIPPLES,
+				return List.of(CoverableArea.NIPPLES,
 						CoverableArea.BREASTS);
 			}
 			return null; 
@@ -5298,8 +5260,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumTarget.equals(Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()))) {
-				return Util.newArrayListOfValues(
-						CoverableArea.MOUTH);
+				return List.of(CoverableArea.MOUTH);
 			}
 			return null; 
 		}
@@ -5346,8 +5307,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumProvider.equals(cumTarget)) {
-				return Util.newArrayListOfValues(
-						CoverableArea.MOUTH);
+				return List.of(CoverableArea.MOUTH);
 			}
 			return null; 
 		}
@@ -5394,8 +5354,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumProvider.equals(cumTarget)) {
-				return Util.newArrayListOfValues(
-						CoverableArea.HANDS);
+				return List.of(CoverableArea.HANDS);
 			}
 			return null;
 		}
@@ -5446,8 +5405,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumTarget.equals(Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()))) {
-				return Util.newArrayListOfValues(
-						CoverableArea.HAIR);
+				return List.of(CoverableArea.HAIR);
 			}
 			return null; 
 		}
@@ -5498,8 +5456,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumTarget.equals(Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()))) {
-				return Util.newArrayListOfValues(
-						CoverableArea.STOMACH);
+				return List.of(CoverableArea.STOMACH);
 			}
 			return null; 
 		}
@@ -5546,8 +5503,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumProvider.equals(cumTarget)) {
-				return Util.newArrayListOfValues(
-						CoverableArea.STOMACH);
+				return List.of(CoverableArea.STOMACH);
 			}
 			return null; 
 		}
@@ -5598,8 +5554,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumTarget.equals(Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()))) {
-				return Util.newArrayListOfValues(
-						CoverableArea.LEGS);
+				return List.of(CoverableArea.LEGS);
 			}
 			return null; 
 		}
@@ -5646,8 +5601,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumProvider.equals(cumTarget)) {
-				return Util.newArrayListOfValues(
-						CoverableArea.LEGS,
+				return List.of(CoverableArea.LEGS,
 						CoverableArea.THIGHS);
 			}
 			return null; 
@@ -5699,8 +5653,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumTarget.equals(Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()))) {
-				return Util.newArrayListOfValues(
-						CoverableArea.FEET);
+				return List.of(CoverableArea.FEET);
 			}
 			return null; 
 		}
@@ -5747,8 +5700,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumProvider.equals(cumTarget)) {
-				return Util.newArrayListOfValues(
-						CoverableArea.FEET);
+				return List.of(CoverableArea.FEET);
 			}
 			return null; 
 		}
@@ -5799,8 +5751,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumTarget.equals(Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()))) {
-				return Util.newArrayListOfValues(
-						CoverableArea.BACK);
+				return List.of(CoverableArea.BACK);
 			}
 			return null; 
 		}
@@ -5851,8 +5802,7 @@ public class GenericOrgasms {
 		@Override
 		public List<CoverableArea> getAreasCummedOn(GameCharacter cumProvider, GameCharacter cumTarget) {
 			if(cumProvider.equals(Main.sex.getCharacterPerformingAction()) && cumTarget.equals(Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()))) {
-				return Util.newArrayListOfValues(
-						CoverableArea.ARMPITS);
+				return List.of(CoverableArea.ARMPITS);
 			}
 			return null; 
 		}
@@ -7860,9 +7810,9 @@ public class GenericOrgasms {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_DENIAL);
+				return List.of(Fetish.FETISH_DENIAL);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_DENIAL_SELF);
+				return List.of(Fetish.FETISH_DENIAL_SELF);
 			}
 		}
 	};
@@ -7954,7 +7904,7 @@ public class GenericOrgasms {
 					&& !Main.sex.getInitialSexManager().isHidden(Main.sex.getCharacterPerformingAction())
 					&& !isTakingCock(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this))
 					&& !Collections.disjoint(
-							Util.newArrayListOfValues(SexAreaOrifice.VAGINA, SexAreaOrifice.ANUS, SexAreaOrifice.MOUTH, SexAreaOrifice.SPINNERET, SexAreaOrifice.BREAST, SexAreaPenetration.FOOT, SexAreaOrifice.ARMPITS),
+							List.of(SexAreaOrifice.VAGINA, SexAreaOrifice.ANUS, SexAreaOrifice.MOUTH, SexAreaOrifice.SPINNERET, SexAreaOrifice.BREAST, SexAreaPenetration.FOOT, SexAreaOrifice.ARMPITS),
 							Main.sex.getOngoingSexAreas(Main.sex.getCharacterTargetedForSexAction(this), SexAreaPenetration.PENIS, getCharacterBeingFucked()))
 					&& (Main.sex.getCharacterPerformingAction().isPlayer() || Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())!=SexPace.SUB_RESISTING)) {
 				OrgasmEncourageBehaviour behaviour = Main.sex.getSexManager().getCharacterOrgasmEncourageBehaviour(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getCharacterBeingFucked());
@@ -8192,7 +8142,7 @@ public class GenericOrgasms {
 			}
 			
 			return UtilText.parse(
-					Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getCharacterBeingFucked()),
+					List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getCharacterBeingFucked()),
 					sb.toString());
 		}
 
@@ -8263,7 +8213,7 @@ public class GenericOrgasms {
 					&& Main.sex.getCreampieLockedBy()==null
 					&& !isTakingCock(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this))
 					&& !Collections.disjoint(
-							Util.newArrayListOfValues(SexAreaOrifice.VAGINA, SexAreaOrifice.ANUS, SexAreaOrifice.MOUTH, SexAreaOrifice.SPINNERET, SexAreaOrifice.BREAST, SexAreaPenetration.FOOT, SexAreaOrifice.ARMPITS),
+							List.of(SexAreaOrifice.VAGINA, SexAreaOrifice.ANUS, SexAreaOrifice.MOUTH, SexAreaOrifice.SPINNERET, SexAreaOrifice.BREAST, SexAreaPenetration.FOOT, SexAreaOrifice.ARMPITS),
 							Main.sex.getOngoingSexAreas(Main.sex.getCharacterTargetedForSexAction(this), SexAreaPenetration.PENIS, getCharacterBeingFucked()))
 					&& (Main.sex.getCharacterPerformingAction().isPlayer() || Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())!=SexPace.SUB_RESISTING)) {
 				OrgasmEncourageBehaviour behaviour = Main.sex.getSexManager().getCharacterOrgasmEncourageBehaviour(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getCharacterBeingFucked());
@@ -8515,7 +8465,7 @@ public class GenericOrgasms {
 			}
 			
 			return UtilText.parse(
-					Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getCharacterBeingFucked()),
+					List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), getCharacterBeingFucked()),
 					sb.toString());
 		}
 
@@ -8637,9 +8587,9 @@ public class GenericOrgasms {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_DENIAL_SELF);
+				return List.of(Fetish.FETISH_DENIAL_SELF);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_DENIAL);
+				return List.of(Fetish.FETISH_DENIAL);
 			}
 		}
 	};

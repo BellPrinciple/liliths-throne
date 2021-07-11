@@ -57,7 +57,7 @@ public class ShoppingArcadeDialogue {
 		};
 		
 		npc.setRaceConcealed(true);
-		Main.game.getCharacterUtils().setGenericName(npc, genericName, Util.newArrayListOfValues());
+		Main.game.getCharacterUtils().setGenericName(npc, genericName, List.of());
 		
 		npc.setDescription("[npc.Name] is a random stranger, and after wandering in to use the Shopping Arcade's toilet, found you offering to service [npc.her] cock at a gloryhole...");
 		
@@ -102,7 +102,7 @@ public class ShoppingArcadeDialogue {
 		NPC npc = new GenericSexualPartner(Gender.getGenderFromUserPreferences(false, false), Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false, (s)->s.isNonBiped());
 		
 		npc.setRaceConcealed(true);
-		Main.game.getCharacterUtils().setGenericName(npc, genericName, Util.newArrayListOfValues());
+		Main.game.getCharacterUtils().setGenericName(npc, genericName, List.of());
 		
 		npc.setDescription("[npc.Name] is a random stranger, and after wandering in to use the Shopping Arcade's toilet, decided to spend some time servicing the gloryhole [npc.she] found there...");
 		
@@ -565,7 +565,7 @@ public class ShoppingArcadeDialogue {
 				return new Response("Toilet", "Use the toilet.", TOILETS_USE);
 				
 			} else if(index==2) {
-				List<InventorySlot> washSlots = Util.newArrayListOfValues(InventorySlot.HEAD, InventorySlot.EYES, InventorySlot.MOUTH, InventorySlot.NECK, InventorySlot.HAIR, InventorySlot.FINGER, InventorySlot.HAND, InventorySlot.WRIST);
+				List<InventorySlot> washSlots = List.of(InventorySlot.HEAD, InventorySlot.EYES, InventorySlot.MOUTH, InventorySlot.NECK, InventorySlot.HAIR, InventorySlot.FINGER, InventorySlot.HAND, InventorySlot.WRIST);
 				return new Response("Wash",
 						"Use the sinks to wash your hands and face."
 							+ "<br/>[style.italicsGood(This will clean your "+Util.inventorySlotsToParsedStringList(washSlots, Main.game.getPlayer())+", as well as any clothing worn in these slots.)]"

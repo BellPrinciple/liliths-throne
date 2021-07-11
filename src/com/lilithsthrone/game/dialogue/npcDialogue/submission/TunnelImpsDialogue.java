@@ -124,7 +124,7 @@ public class TunnelImpsDialogue {
 					return new Response("Offer body",
 							"Offer your body to the imps so that you can avoid a violent confrontation.",
 							IMP_ATTACK_OFFER_BODY,
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+							List.of(Fetish.FETISH_SUBMISSIVE),
 							Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 							null,
 							null,
@@ -150,7 +150,7 @@ public class TunnelImpsDialogue {
 					return new Response("Offer body (solo)",
 							UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand aside as you offer your body to the imps in order to avoid a violent confrontation."),
 							IMP_ATTACK_OFFER_BODY,
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+							List.of(Fetish.FETISH_SUBMISSIVE),
 							Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 							null,
 							null,
@@ -173,7 +173,7 @@ public class TunnelImpsDialogue {
 						return new Response("Offer threesome",
 								UtilText.parse(companion, "Offer the imps the opportunity to have sex with both you and [npc.name] in order to avoid a violent confrontation."),
 								IMP_ATTACK_OFFER_THREESOME,
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+								List.of(Fetish.FETISH_SUBMISSIVE),
 								Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null,
 								null,
@@ -255,7 +255,7 @@ public class TunnelImpsDialogue {
 					}
 					
 				} else if (index == 2) {
-					var applicableFetishes = Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING);
+					var applicableFetishes = List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING);
 					CorruptionLevel applicableCorruptionLevel = Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel();
 
 					return new Response("Swallow",
@@ -344,7 +344,7 @@ public class TunnelImpsDialogue {
 					};
 					
 				} else if (index == 2) {
-					var applicableFetishes = Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING);
+					var applicableFetishes = List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING);
 					CorruptionLevel applicableCorruptionLevel = Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel();
 	
 						return new Response("Order swallow",
@@ -451,7 +451,7 @@ public class TunnelImpsDialogue {
 					}
 					
 				} else if (index == 2) {
-					var applicableFetishes = Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING);
+					var applicableFetishes = List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING);
 					CorruptionLevel applicableCorruptionLevel = Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel();
 					
 					return new Response("Swallow",
@@ -545,7 +545,7 @@ public class TunnelImpsDialogue {
 					}
 					
 				} else if (index == 7) {
-					var applicableFetishes = Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING);
+					var applicableFetishes = List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING);
 					CorruptionLevel applicableCorruptionLevel = Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel();
 
 						return new Response("Swallow (both)",
@@ -623,7 +623,7 @@ public class TunnelImpsDialogue {
 					}
 					
 				} else if (index == 2) {
-					var applicableFetishes = Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING);
+					var applicableFetishes = List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING);
 					CorruptionLevel applicableCorruptionLevel = Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel();
 					
 					return new Response("Swallow",
@@ -704,7 +704,7 @@ public class TunnelImpsDialogue {
 					};
 					
 				} else if (index == 7) {
-					var applicableFetishes = Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING);
+					var applicableFetishes = List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING);
 					CorruptionLevel applicableCorruptionLevel = Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel();
 	
 						return new Response("Order swallow",
@@ -843,7 +843,7 @@ public class TunnelImpsDialogue {
 					} else if (index == 5) {
 						return new ResponseSex("Submit",
 								"You're not really sure what to do now... Perhaps it would be best to let the imps choose what to do next...",
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+								List.of(Fetish.FETISH_SUBMISSIVE),
 								null,
 								Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null,
@@ -908,9 +908,9 @@ public class TunnelImpsDialogue {
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you have sex with the imps."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpGroup(),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("encounters/submission/impAttackCombatVictory"+(isCompanionDialogue()?"Companions":""), "IMP_ATTACK_COMBAT_VICTORY_SEX", getImpGroup()));
 						
@@ -919,9 +919,9 @@ public class TunnelImpsDialogue {
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you have sex with the imps."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpGroup(),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("encounters/submission/impAttackCombatVictory"+(isCompanionDialogue()?"Companions":""), "IMP_ATTACK_COMBAT_VICTORY_SEX_GENTLE", getImpGroup()), ResponseTag.START_PACE_PLAYER_DOM_GENTLE);
@@ -931,9 +931,9 @@ public class TunnelImpsDialogue {
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you have sex with the imps."),
 								true,
 								false,
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								getImpGroup(),
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								null,
 								AFTER_SEX_VICTORY,
 								UtilText.parseFromXMLFile("encounters/submission/impAttackCombatVictory"+(isCompanionDialogue()?"Companions":""), "IMP_ATTACK_COMBAT_VICTORY_SEX_ROUGH", getImpGroup()), ResponseTag.START_PACE_PLAYER_DOM_ROUGH);
@@ -941,7 +941,7 @@ public class TunnelImpsDialogue {
 					} else if (index == 5) {
 						return new ResponseSex("Solo submission",
 								UtilText.parse(getMainCompanion(), "Tell [npc.name] to stand to one side and watch as you submit to the imps, allowing them to have dominant sex with you."),
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+								List.of(Fetish.FETISH_SUBMISSIVE),
 								null,
 								Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null,
@@ -950,9 +950,9 @@ public class TunnelImpsDialogue {
 								true,
 								false,
 								getImpGroup(),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getPlayer()),
 								null,
-								Util.newArrayListOfValues(getMainCompanion()),
+								List.of(getMainCompanion()),
 								AFTER_SEX_DEFEAT, UtilText.parseFromXMLFile("encounters/submission/impAttackCombatVictory"+(isCompanionDialogue()?"Companions":""), "IMP_ATTACK_COMBAT_VICTORY_SEX_SUBMIT", getImpGroup()));
 						
 					} else if (index == 6) {
@@ -1005,10 +1005,10 @@ public class TunnelImpsDialogue {
 									UtilText.parse(companion, "Tell [npc.name] that [npc.she] can have some fun with the imps while you watch."),
 									false,
 									false,
-									Util.newArrayListOfValues(getMainCompanion()),
+									List.of(getMainCompanion()),
 									getImpGroup(),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("encounters/submission/impAttackCombatVictory"+(isCompanionDialogue()?"Companions":""), "IMP_ATTACK_COMBAT_VICTORY_GIVE_TO_COMPANION", getImpGroup()));
 						}
 						
@@ -1026,9 +1026,9 @@ public class TunnelImpsDialogue {
 									true,
 									false,
 									getImpGroup(),
-									Util.newArrayListOfValues(getMainCompanion()),
+									List.of(getMainCompanion()),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("encounters/submission/impAttackCombatVictory"+(isCompanionDialogue()?"Companions":""), "IMP_ATTACK_COMBAT_VICTORY_OFFER_COMPANION", getImpGroup())) {
 								@Override
 								public void effects() {
@@ -1132,9 +1132,9 @@ public class TunnelImpsDialogue {
 						true,
 						false,
 						getImpGroup(),
-						Util.newArrayListOfValues(getMainCompanion()),
+						List.of(getMainCompanion()),
 						null,
-						Util.newArrayListOfValues(Main.game.getPlayer()),
+						List.of(Main.game.getPlayer()),
 						AFTER_SEX_WATCHING_COMPANION,
 						UtilText.parseFromXMLFile("encounters/submission/impAttack"+getImpEncounterId(), "IMP_ATTACK_OFFER_COMPANION_START_SEX", getAllCharacters()));
 			} else {
@@ -1158,9 +1158,9 @@ public class TunnelImpsDialogue {
 						false,
 						false,
 						getImpGroup(),
-						Util.newArrayListOfValues(Main.game.getPlayer()),
+						List.of(Main.game.getPlayer()),
 						null,
-						isCompanionDialogue()?Util.newArrayListOfValues(getMainCompanion()):null,
+						isCompanionDialogue()?List.of(getMainCompanion()):null,
 						AFTER_SEX_DEFEAT,
 						UtilText.parseFromXMLFile("encounters/submission/impAttack"+getImpEncounterId(), "AFTER_COMBAT_DEFEAT_SEX", getAllCharacters()));
 				
@@ -1170,9 +1170,9 @@ public class TunnelImpsDialogue {
 						false,
 						false,
 						getImpGroup(),
-						Util.newArrayListOfValues(Main.game.getPlayer()),
+						List.of(Main.game.getPlayer()),
 						null,
-						isCompanionDialogue()?Util.newArrayListOfValues(getMainCompanion()):null,
+						isCompanionDialogue()?List.of(getMainCompanion()):null,
 						AFTER_SEX_DEFEAT,
 						UtilText.parseFromXMLFile("encounters/submission/impAttack"+getImpEncounterId(), "AFTER_COMBAT_DEFEAT_SEX_EAGER", getAllCharacters()),
 						ResponseTag.START_PACE_PLAYER_SUB_EAGER);
@@ -1183,9 +1183,9 @@ public class TunnelImpsDialogue {
 						false,
 						false,
 						getImpGroup(),
-						Util.newArrayListOfValues(Main.game.getPlayer()),
+						List.of(Main.game.getPlayer()),
 						null,
-						isCompanionDialogue()?Util.newArrayListOfValues(getMainCompanion()):null,
+						isCompanionDialogue()?List.of(getMainCompanion()):null,
 						AFTER_SEX_DEFEAT,
 						UtilText.parseFromXMLFile("encounters/submission/impAttack"+getImpEncounterId(), "AFTER_COMBAT_DEFEAT_SEX_RESIST", getAllCharacters()),
 						ResponseTag.START_PACE_PLAYER_SUB_RESISTING);

@@ -86,8 +86,8 @@ public class ZaranixHomeFirstFloorRepeat {
 						return new ResponseSex("Sex", "Have some fun with Kelly.",
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKelly.class)),
+										List.of(Main.game.getPlayer()),
+										List.of(Main.game.getNpc(ZaranixMaidKelly.class)),
 								null,
 								null), AFTER_KELLY_SEX, UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloorRepeat", "KELLY_SEX")) {
 							@Override
@@ -99,11 +99,11 @@ public class ZaranixHomeFirstFloorRepeat {
 					} else if(index==3) {
 						return new ResponseSex("Submit",
 								"You can't bring yourself to take the dominant role, but you <i>do</i> want to have sex with Kelly. Perhaps if you submitted, [kelly.she]'d be willing to fuck you?",
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
+								List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 								false, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKelly.class)),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(Main.game.getNpc(ZaranixMaidKelly.class)),
+										List.of(Main.game.getPlayer()),
 								null,
 								null), AFTER_KELLY_SEX, UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloorRepeat", "KELLY_SEX_SUB")) {
 							@Override
@@ -196,8 +196,8 @@ public class ZaranixHomeFirstFloorRepeat {
 					return new ResponseSex("Sex", "Have some fun with Kelly.",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKelly.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(ZaranixMaidKelly.class)),
 							null,
 							null), AFTER_KELLY_SEX, UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloorRepeat", "KELLY_SEX")) {
 						@Override
@@ -209,11 +209,11 @@ public class ZaranixHomeFirstFloorRepeat {
 				} else if(index==2) {
 					return new ResponseSex("Submit",
 							"You can't bring yourself to take the dominant role, but you <i>do</i> want to have sex with Kelly. Perhaps if you submitted, [kelly.she]'d be willing to fuck you?",
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
+							List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKelly.class)),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(ZaranixMaidKelly.class)),
+									List.of(Main.game.getPlayer()),
 							null,
 							null), AFTER_KELLY_SEX, UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloorRepeat", "KELLY_SEX_SUB")) {
 						@Override
@@ -430,8 +430,7 @@ public class ZaranixHomeFirstFloorRepeat {
 						UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloorRepeat", "ZARANIX_ROOM_BLOWJOB")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 				};
 				
@@ -525,8 +524,7 @@ public class ZaranixHomeFirstFloorRepeat {
 						UtilText.parseFromXMLFile("places/dominion/zaranixHome/firstFloorRepeat", "ZARANIX_ROOM_BLOWJOB_TF_SEX")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Zaranix.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 				};
 			}

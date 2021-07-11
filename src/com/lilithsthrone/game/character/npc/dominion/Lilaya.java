@@ -166,7 +166,7 @@ public class Lilaya extends NPC {
 	@Override
 	public void setupPerks(boolean autoSelectPerks) {
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 0),
 						new Value<>(PerkCategory.LUST, 1),
@@ -531,7 +531,7 @@ public class Lilaya extends NPC {
 	
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(SALilayaSpecials.class);
+		return List.of(SALilayaSpecials.class);
 	}
 
 	/**

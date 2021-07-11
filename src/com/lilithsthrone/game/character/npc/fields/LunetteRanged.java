@@ -62,7 +62,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class LunetteRanged extends NPC {
 
-	private static List<String> defaultNamePrefixes = Util.newArrayListOfValues("malevolent", "malicious", "spiteful");
+	private static List<String> defaultNamePrefixes = List.of("malevolent", "malicious", "spiteful");
 	private static String defaultName = "raider";
 	
 	public LunetteRanged() {
@@ -123,7 +123,7 @@ public class LunetteRanged extends NPC {
 				Perk.SPECIAL_HEALTH_FANATIC
 		}));
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 10),
 						new Value<>(PerkCategory.LUST, 1),
@@ -406,7 +406,7 @@ public class LunetteRanged extends NPC {
 			this.setVaginaWetness(Wetness.THREE_WET.getValue() + Util.random.nextInt(5));
 			this.setVaginaSquirter(true);
 		}
-		this.setVaginaCapacity(Util.randomItemFrom(Util.newArrayListOfValues(Capacity.TWO_TIGHT, Capacity.THREE_SLIGHTLY_LOOSE, Capacity.FOUR_LOOSE)), true);
+		this.setVaginaCapacity(Util.randomItemFrom(List.of(Capacity.TWO_TIGHT, Capacity.THREE_SLIGHTLY_LOOSE, Capacity.FOUR_LOOSE)), true);
 		this.setVaginaElasticity(OrificeElasticity.TWO_FIRM.getValue() + Util.random.nextInt(3));
 		this.setVaginaPlasticity(OrificePlasticity.ZERO_RUBBERY.getValue() + Util.random.nextInt(3));
 	}

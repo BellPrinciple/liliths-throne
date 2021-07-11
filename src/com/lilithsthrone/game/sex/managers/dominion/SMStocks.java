@@ -63,8 +63,7 @@ public class SMStocks extends SexManagerDefault {
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		return Util.newArrayListOfValues(
-				SexPosition.STOCKS);
+		return List.of(SexPosition.STOCKS);
 	}
 	
 	@Override

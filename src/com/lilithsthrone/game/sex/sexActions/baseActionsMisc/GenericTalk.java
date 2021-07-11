@@ -156,7 +156,7 @@ public class GenericTalk {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE);
+				return List.of(Fetish.FETISH_SUBMISSIVE);
 			} else {
 				return null;
 			}

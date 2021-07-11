@@ -841,7 +841,7 @@ public class CharacterCreation {
 					}
 					@Override
 					public void effects() {
-						List<String> fieldsList = Util.newArrayListOfValues("nameMasculineInput", "nameAndrogynousInput", "nameFeminineInput");
+						List<String> fieldsList = List.of("nameMasculineInput", "nameAndrogynousInput", "nameFeminineInput");
 						List<String> namesList = new ArrayList<>();
 						for(String s : fieldsList) {
 							Main.mainController.getWebEngine().executeScript("document.getElementById('hiddenFieldName').innerHTML=document.getElementById('"+s+"').value;");
@@ -907,7 +907,7 @@ public class CharacterCreation {
 				return new Response("Random Surname", "Generate a random surname.", CHOOSE_NAME){
 					@Override
 					public void effects() {
-						List<String> fieldsList = Util.newArrayListOfValues("nameMasculineInput", "nameAndrogynousInput", "nameFeminineInput");
+						List<String> fieldsList = List.of("nameMasculineInput", "nameAndrogynousInput", "nameFeminineInput");
 						List<String> namesList = new ArrayList<>();
 						for(String s : fieldsList) {
 							Main.mainController.getWebEngine().executeScript("document.getElementById('hiddenFieldName').innerHTML=document.getElementById('"+s+"').value;");

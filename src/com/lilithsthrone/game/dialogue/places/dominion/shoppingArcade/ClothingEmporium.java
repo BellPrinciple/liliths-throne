@@ -269,8 +269,7 @@ public class ClothingEmporium {
 								public void effects() {
 									UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("characters/dominion/nyan", "NYAN_TALK_BASE"));
 									
-									List<String> topics = Util.newArrayListOfValues(
-											"NYAN_NOVELS",
+									List<String> topics = List.of("NYAN_NOVELS",
 											"NYAN_WORK",
 											"NYAN_HOBBIES",
 											"NYAN_HOME");
@@ -1254,8 +1253,7 @@ public class ClothingEmporium {
 						UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_MAKE_OUT_CUNNILINGUS")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true));
 					}
 				};
 				
@@ -1285,8 +1283,7 @@ public class ClothingEmporium {
 						UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_MAKE_OUT_FINGERING")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueMouth.KISS_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueMouth.KISS_START, false, true),
 								new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), FingerVagina.FINGERING_START, false, true));
 					}
 				};
@@ -1320,7 +1317,7 @@ public class ClothingEmporium {
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)));
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)));
 										}
 										@Override
 										public boolean isExposeAtStartOfSexMapRemoval(GameCharacter character) {
@@ -1333,8 +1330,7 @@ public class ClothingEmporium {
 									UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_MAKE_OUT_RECEIVE_BLOWJOB")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), PenisMouth.BLOWJOB_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), PenisMouth.BLOWJOB_START, false, true));
 								}
 							});
 				}
@@ -1363,7 +1359,7 @@ public class ClothingEmporium {
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA)));
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)));
 										}
 										@Override
 										public boolean isExposeAtStartOfSexMapRemoval(GameCharacter character) {
@@ -1376,8 +1372,7 @@ public class ClothingEmporium {
 									UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_MAKE_OUT_RECEIVE_CUNNILINGUS")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 								}
 							});
 				}
@@ -1408,7 +1403,7 @@ public class ClothingEmporium {
 									@Override
 									public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 										return Util.newHashMapOfValues(
-												new Value<>(getNyan(), Util.newArrayListOfValues(CoverableArea.ANUS)));
+												new Value<>(getNyan(), List.of(CoverableArea.ANUS)));
 									}
 									@Override
 									public boolean isExposeAtStartOfSexMapRemoval(GameCharacter character) {
@@ -1421,8 +1416,7 @@ public class ClothingEmporium {
 								UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_MAKE_OUT_PERFORM_ANILINGUS")) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(
-										new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueAnus.ANILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueAnus.ANILINGUS_START, false, true));
 							}
 						});
 				}

@@ -89,8 +89,7 @@ import com.lilithsthrone.utils.Util.Value;
  */
 public class SexActionPresets {
 	
-	public static List<SexAreaInterface> groinAreas = Util.newArrayListOfValues(
-			SexAreaPenetration.PENIS,
+	public static List<SexAreaInterface> groinAreas = List.of(SexAreaPenetration.PENIS,
 			SexAreaPenetration.CLIT,
 			SexAreaOrifice.THIGHS,
 			SexAreaOrifice.URETHRA_PENIS,
@@ -99,67 +98,53 @@ public class SexActionPresets {
 			SexAreaOrifice.NIPPLE_CROTCH,
 			SexAreaOrifice.BREAST_CROTCH);
 
-	public static List<SexAreaInterface> crotchBoobAreas = Util.newArrayListOfValues(
-			SexAreaOrifice.NIPPLE_CROTCH,
+	public static List<SexAreaInterface> crotchBoobAreas = List.of(SexAreaOrifice.NIPPLE_CROTCH,
 			SexAreaOrifice.BREAST_CROTCH);
 
-	public static List<SexAreaInterface> thighAreas = Util.newArrayListOfValues(
-			SexAreaOrifice.THIGHS);
+	public static List<SexAreaInterface> thighAreas = List.of(SexAreaOrifice.THIGHS);
 
-	public static List<SexAreaInterface> feetAreas = Util.newArrayListOfValues(
-			SexAreaPenetration.FOOT);
+	public static List<SexAreaInterface> feetAreas = List.of(SexAreaPenetration.FOOT);
 	
-	public static List<SexAreaInterface> vaginaAreas = Util.newArrayListOfValues(
-			SexAreaPenetration.CLIT,
+	public static List<SexAreaInterface> vaginaAreas = List.of(SexAreaPenetration.CLIT,
 			SexAreaOrifice.URETHRA_VAGINA,
 			SexAreaOrifice.VAGINA);
 
-	public static List<SexAreaInterface> penisAreas = Util.newArrayListOfValues(
-			SexAreaPenetration.CLIT, // Add clit here as clit actions are related to when the clit is a penetrative object, and should be acting like a penis (position-wise)
+	public static List<SexAreaInterface> penisAreas = List.of(SexAreaPenetration.CLIT, // Add clit here as clit actions are related to when the clit is a penetrative object, and should be acting like a penis (position-wise)
 			SexAreaPenetration.PENIS,
 			SexAreaOrifice.URETHRA_PENIS);
 	
-	public static List<SexAreaInterface> assAreas = Util.newArrayListOfValues(
-			SexAreaOrifice.ANUS,
+	public static List<SexAreaInterface> assAreas = List.of(SexAreaOrifice.ANUS,
 			SexAreaOrifice.ASS,
 			SexAreaOrifice.SPINNERET);
 	
-	public static List<SexAreaInterface> mouthAreas = Util.newArrayListOfValues(
-			SexAreaPenetration.TONGUE,
+	public static List<SexAreaInterface> mouthAreas = List.of(SexAreaPenetration.TONGUE,
 			SexAreaOrifice.MOUTH);
 
-	public static List<SexAreaInterface> breastAreas = Util.newArrayListOfValues(
-			SexAreaOrifice.NIPPLE,
+	public static List<SexAreaInterface> breastAreas = List.of(SexAreaOrifice.NIPPLE,
 			SexAreaOrifice.BREAST,
 			SexAreaOrifice.ARMPITS); // Add armpits to breast areas as they seem the closest in terms of being able to physical reach them
 
-	public static List<SexAreaInterface> appendageAreas = Util.newArrayListOfValues(
-			SexAreaPenetration.FINGER,
+	public static List<SexAreaInterface> appendageAreas = List.of(SexAreaPenetration.FINGER,
 			SexAreaPenetration.TAIL,
 			SexAreaPenetration.TENTACLE);
 
-	public static List<SexAreaInterface> handAreas = Util.newArrayListOfValues(
-			SexAreaPenetration.FINGER);
+	public static List<SexAreaInterface> handAreas = List.of(SexAreaPenetration.FINGER);
 
-	public static List<SexAreaInterface> tailAreas = Util.newArrayListOfValues(
-			SexAreaPenetration.TAIL,
+	public static List<SexAreaInterface> tailAreas = List.of(SexAreaPenetration.TAIL,
 			SexAreaOrifice.SPINNERET);
 	
-	public static List<SexAreaInterface> tailAndTentacle = Util.newArrayListOfValues(
-			SexAreaPenetration.TAIL,
+	public static List<SexAreaInterface> tailAndTentacle = List.of(SexAreaPenetration.TAIL,
 			SexAreaPenetration.TENTACLE);
 	
 	public static List<SexAreaInterface> lowerHalf = new ArrayList<>();// Populated in static block
 
-	public static List<SexAreaInterface> upperHalf = Util.newArrayListOfValues(
-			SexAreaPenetration.FINGER,
+	public static List<SexAreaInterface> upperHalf = List.of(SexAreaPenetration.FINGER,
 			SexAreaOrifice.NIPPLE,
 			SexAreaOrifice.BREAST,
 			SexAreaPenetration.TONGUE,
 			SexAreaOrifice.MOUTH);
 
-	public static List<SexAreaInterface> allowedInterPenetrationAreas = Util.newArrayListOfValues(
-			SexAreaPenetration.FOOT,
+	public static List<SexAreaInterface> allowedInterPenetrationAreas = List.of(SexAreaPenetration.FOOT,
 			SexAreaPenetration.FINGER,
 			SexAreaPenetration.TAIL,
 			SexAreaPenetration.TENTACLE,
@@ -278,7 +263,7 @@ public class SexActionPresets {
 		
 		feetToGroin = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FOOT, groinAreas));
 		
-		handHolding = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, Util.mergeLists(mouthAreas, Util.newArrayListOfValues(SexAreaPenetration.FINGER))));
+		handHolding = Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, Util.mergeLists(mouthAreas, List.of(SexAreaPenetration.FINGER))));
 
 
 		lowerHalf.add(SexAreaPenetration.TAIL);

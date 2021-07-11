@@ -185,11 +185,9 @@ public class DarkSiren extends NPC {
 	public void setupPerks(boolean autoSelectPerks) {
 		this.addSpecialPerk(Perk.SPECIAL_MERAXIS);
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.CHUUNI,
+				List.of(Perk.CHUUNI,
 						Perk.CLOTHING_ENCHANTER,
-						Perk.WEAPON_ENCHANTER
-						),
+						Perk.WEAPON_ENCHANTER),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 0),

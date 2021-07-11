@@ -2495,8 +2495,8 @@ public class MainController implements Initializable {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									return Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)),
-											new Value<>(target, Util.newArrayListOfValues(CoverableArea.VAGINA)));
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)),
+											new Value<>(target, List.of(CoverableArea.VAGINA)));
 								}
 								@Override
 								public void initStartingLustAndArousal(GameCharacter character) {
@@ -2529,7 +2529,7 @@ public class MainController implements Initializable {
 							UtilText.parseFromXMLFile("misc/misc", "START_SEX_2KOMA", Main.game.getPlayer(), target)) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), target, PenisVagina.PENIS_FUCKING_START, true, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), target, PenisVagina.PENIS_FUCKING_START, true, true));
 						}
 					});
 					
@@ -2574,8 +2574,8 @@ public class MainController implements Initializable {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									return Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-											new Value<>(target, Util.newArrayListOfValues(CoverableArea.PENIS)));
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)),
+											new Value<>(target, List.of(CoverableArea.PENIS)));
 								}
 								@Override
 								public void initStartingLustAndArousal(GameCharacter character) {
@@ -2615,7 +2615,7 @@ public class MainController implements Initializable {
 							UtilText.parseFromXMLFile("misc/misc", "START_SEX_2KOMA", target, Main.game.getPlayer())) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(target, Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, true, true));
+							return List.of(new InitialSexActionInformation(target, Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, true, true));
 						}
 					});
 					

@@ -40,7 +40,7 @@ public class SexPositionUnique {
 	public static final AbstractSexPosition PET_MOUNTING = new AbstractSexPosition("Mounted",
 			2,
 			true,
-			null, Util.newArrayListOfValues(PetMounting.class)) {
+			null, List.of(PetMounting.class)) {
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
 			return UtilText.parse(Main.sex.getCharacterInPosition(SexSlotUnique.PET_MOUNTING_ON_ALL_FOURS), Main.sex.getCharacterInPosition(SexSlotUnique.PET_MOUNTING_HUMPING),
@@ -68,7 +68,7 @@ public class SexPositionUnique {
 	public static final AbstractSexPosition PET_ORAL = new AbstractSexPosition("Pet Oral",
 			2,
 			true,
-			null, Util.newArrayListOfValues(PetOral.class)) {
+			null, List.of(PetOral.class)) {
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
 			return UtilText.parse(Main.sex.getCharacterInPosition(SexSlotUnique.PET_ORAL_ON_ALL_FOURS), Main.sex.getCharacterInPosition(SexSlotUnique.PET_ORAL_COCKED_LEG),
@@ -85,7 +85,7 @@ public class SexPositionUnique {
 	public static final AbstractSexPosition UNDER_DESK_RALPH = new AbstractSexPosition("Under desk",
 			2,
 			false,
-			null, Util.newArrayListOfValues(RalphOral.class)) {
+			null, List.of(RalphOral.class)) {
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
 			return "You're kneeling under Ralph's counter, with your face just [unit.sizes] away from his crotch.";
@@ -117,7 +117,7 @@ public class SexPositionUnique {
 	public static final AbstractSexPosition SHOWER_TIME_PIX = new AbstractSexPosition("Shower sex",
 			2,
 			false,
-			null, Util.newArrayListOfValues(PixShower.class)) {
+			null, List.of(PixShower.class)) {
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
 			return "You're standing with your face pressed up against one wall of the shower, and behind you, Pix is growling hungrily into your ear.";
@@ -133,7 +133,7 @@ public class SexPositionUnique {
 	public static final AbstractSexPosition HANDS_ROSE = new AbstractSexPosition("Hand-holding",
 			2,
 			false,
-			null, Util.newArrayListOfValues(HandHolding.class, GenericOrgasms.class)) {
+			null, List.of(HandHolding.class, GenericOrgasms.class)) {
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
 			return "You and the cat-girl maid, Rose, are standing facing one another, ready to perform lewd acts with one another's hands.";
@@ -150,7 +150,7 @@ public class SexPositionUnique {
 	public static final AbstractSexPosition KNEELING_ORAL_CULTIST = new AbstractSexPosition("Kneeling",
 			2,
 			true,
-			null, Util.newArrayListOfValues(CultistSexActions.class)) {
+			null, List.of(CultistSexActions.class)) {
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {
 			return "You're kneeling at the feet of [npc.name], with your [pc.face+] hovering just [unit.sizes] away from [npc.her] groin.";
@@ -176,7 +176,7 @@ public class SexPositionUnique {
 	public static final AbstractSexPosition MISSIONARY_ALTAR_CULTIST = new AbstractSexPosition("Missionary on altar",
 			2,
 			true,
-			null, Util.newArrayListOfValues(CultistSexActions.class)) {
+			null, List.of(CultistSexActions.class)) {
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {//TODO
 			if(Main.sex.getSexPositionSlot(Main.game.getPlayer())==SexSlotUnique.MISSIONARY_ALTAR_LYING_ON_ALTAR) {
@@ -223,7 +223,7 @@ public class SexPositionUnique {
 	public static final AbstractSexPosition MISSIONARY_ALTAR_SEALED_CULTIST = new AbstractSexPosition("Missionary on altar",
 			2,
 			true,
-			null, Util.newArrayListOfValues(CultistSexActions.class)) {
+			null, List.of(CultistSexActions.class)) {
 		@Override
 		public String getDescription(Map<GameCharacter, SexSlot> occupiedSlots) {//TODO
 			if(Main.sex.getSexPositionSlot(Main.game.getPlayer())==SexSlotUnique.MISSIONARY_ALTAR_SEALED_LYING_ON_ALTAR) {

@@ -36,9 +36,9 @@ public class SMVanessaOral extends SexManagerDefault {
 	@Override
 	public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 		if(Main.sex.isDom(Main.game.getPlayer())) {
-			return Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA)));
+			return Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)));
 		}
-		return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vanessa.class), Util.newArrayListOfValues(CoverableArea.VAGINA)));
+		return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vanessa.class), List.of(CoverableArea.VAGINA)));
 	}
 	
 	@Override

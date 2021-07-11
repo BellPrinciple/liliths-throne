@@ -34,12 +34,12 @@ public class TentacleType {
 			"",
 			"",
 			"",
-			Util.newArrayListOfValues(),
-			Util.newArrayListOfValues(),
+			List.of(),
+			List.of(),
 			"",
 			"",
-			Util.newArrayListOfValues(),
-			Util.newArrayListOfValues(),
+			List.of(),
+			List.of(),
 			"#IF(npc.getTentacleCount()==1)"
 					+ " [npc.She] gasps as [npc.she] feels [npc.her] [npc.tentacle] shrinking down and disappearing into [npc.her] body."
 				+ "#ELSE"
@@ -48,7 +48,7 @@ public class TentacleType {
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldTfGeneric(no tentacles)].",
 			"[style.colourDisabled([npc.She] [npc.do] not have any tentacles.)]",
-			Util.newArrayListOfValues()) {
+			List.of()) {
 	};
 	
 	public static final AbstractTentacleType DEMON_COMMON = new AbstractTentacleType(
@@ -61,12 +61,12 @@ public class TentacleType {
 			"",
 			"tentacle",
 			"tentacles",
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("rounded"),
-			Util.newArrayListOfValues("rounded"),
+			List.of("rounded"),
+			List.of("rounded"),
 			"#IF(npc.getTentacleCount()==1)"
 				+ " A demonic tentacle sprouts from [npc.her] back, rapidly growing in size until it's about [npc.tentacleLength] long."
 				+ " [npc.She] quickly [npc.verb(realise)] that [npc.she] [npc.has] complete control over where it goes, allowing [npc.herHim] to use it like a third limb."
@@ -96,8 +96,7 @@ public class TentacleType {
 				+ "#ELSE"
 					+ " [npc.tentacleCount] spaded, [npc.tentacleColour(true)] #IF(npc.isShortStature())impish#ELSEdemonic#ENDIF tentacles, over which [npc.sheHasFull] complete control, allowing [npc.herHim] to use them to grip and hold objects."
 				+ "#ENDIF",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_PREHENSILE,
+			List.of(BodyPartTag.TAIL_PREHENSILE,
 					BodyPartTag.TAIL_SUTABLE_FOR_PENETRATION,
 					BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TAPERING_NONE)) {
@@ -113,16 +112,15 @@ public class TentacleType {
 			"",
 			"tentacle",
 			"tentacles",
-			Util.newArrayListOfValues("demonic"),
-			Util.newArrayListOfValues("demonic"),
+			List.of("demonic"),
+			List.of("demonic"),
 			"tip",
 			"tips",
-			Util.newArrayListOfValues("rounded"),
-			Util.newArrayListOfValues("rounded"),
+			List.of("rounded"),
+			List.of("rounded"),
 			"",
 			"In place of legs, [npc.sheHasFull] [npc.tentacleCount] [npc.tentacleColour(true)], octopus-like tentacles, over which [npc.sheHasFull] complete control, allowing [npc.herHim] to use them to grip and hold objects.",
-			Util.newArrayListOfValues(
-					BodyPartTag.TAIL_PREHENSILE,
+			List.of(BodyPartTag.TAIL_PREHENSILE,
 					BodyPartTag.TAIL_SUTABLE_FOR_PENETRATION,
 					BodyPartTag.TAIL_SLEEP_HUGGING,
 					BodyPartTag.TAIL_TAPERING_NONE)) {

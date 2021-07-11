@@ -75,9 +75,9 @@ public class DominionExpressCentaur extends NPC {
 
 			List<String> names;
 			if(this.isFeminine()) {
-				names = Util.newArrayListOfValues("horny centauress", "lustful centauress", "desperate centauress");
+				names = List.of("horny centauress", "lustful centauress", "desperate centauress");
 			} else {
-				names = Util.newArrayListOfValues("horny centaur", "lustful centaur", "desperate centaur");
+				names = List.of("horny centaur", "lustful centaur", "desperate centaur");
 			}
 			this.setGenericName(Util.randomItemFrom(names));
 			setName(Name.getRandomTriplet(this.getRace()));

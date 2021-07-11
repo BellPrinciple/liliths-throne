@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.sex.sexActions.universal;
 
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,6 @@ import com.lilithsthrone.game.sex.sexActions.SexActionPriority;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericPositioning;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.2.8
@@ -89,13 +89,11 @@ public class ChairSex {
 		
 		private PositioningData data = new PositioningData(
 				SexPosition.STANDING,
-				Util.newArrayListOfValues(
-						SexSlotStanding.STANDING_DOMINANT,
+				List.of(SexSlotStanding.STANDING_DOMINANT,
 						SexSlotStanding.STANDING_DOMINANT_TWO,
 						SexSlotStanding.STANDING_DOMINANT_THREE,
 						SexSlotStanding.STANDING_DOMINANT_FOUR),
-				Util.newArrayListOfValues(
-						SexSlotStanding.STANDING_SUBMISSIVE,
+				List.of(SexSlotStanding.STANDING_SUBMISSIVE,
 						SexSlotStanding.STANDING_SUBMISSIVE_TWO,
 						SexSlotStanding.STANDING_SUBMISSIVE_THREE,
 						SexSlotStanding.STANDING_SUBMISSIVE_FOUR));
@@ -134,8 +132,8 @@ public class ChairSex {
 		
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.PERFORMING_ORAL),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING));
+				List.of(SexSlotSitting.PERFORMING_ORAL),
+				List.of(SexSlotSitting.SITTING));
 
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -177,8 +175,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.PERFORMING_ORAL),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING));
+				List.of(SexSlotSitting.PERFORMING_ORAL),
+				List.of(SexSlotSitting.SITTING));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -213,8 +211,8 @@ public class ChairSex {
 		
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL));
+				List.of(SexSlotSitting.SITTING),
+				List.of(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL));
 
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -256,8 +254,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL));
+				List.of(SexSlotSitting.SITTING),
+				List.of(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -293,8 +291,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING),
-				Util.newArrayListOfValues(SexSlotSitting.PERFORMING_ORAL));
+				List.of(SexSlotSitting.SITTING),
+				List.of(SexSlotSitting.PERFORMING_ORAL));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -336,8 +334,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING),
-				Util.newArrayListOfValues(SexSlotSitting.PERFORMING_ORAL));
+				List.of(SexSlotSitting.SITTING),
+				List.of(SexSlotSitting.PERFORMING_ORAL));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -372,8 +370,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING));
+				List.of(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL),
+				List.of(SexSlotSitting.SITTING));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -415,8 +413,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING));
+				List.of(SexSlotSitting.SITTING_TAUR_PRESENTING_ORAL),
+				List.of(SexSlotSitting.SITTING));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -452,8 +450,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP));
+				List.of(SexSlotSitting.SITTING),
+				List.of(SexSlotSitting.SITTING_IN_LAP));
 
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -495,8 +493,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP));
+				List.of(SexSlotSitting.SITTING),
+				List.of(SexSlotSitting.SITTING_IN_LAP));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -531,8 +529,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING));
+				List.of(SexSlotSitting.SITTING_IN_LAP),
+				List.of(SexSlotSitting.SITTING));
 
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -583,8 +581,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING_IN_LAP),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING));
+				List.of(SexSlotSitting.SITTING_IN_LAP),
+				List.of(SexSlotSitting.SITTING));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -618,8 +616,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING_BETWEEN_LEGS),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING));
+				List.of(SexSlotSitting.SITTING_BETWEEN_LEGS),
+				List.of(SexSlotSitting.SITTING));
 
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -663,8 +661,8 @@ public class ChairSex {
 
 		private PositioningData data = new PositioningData(
 				SexPosition.SITTING,
-				Util.newArrayListOfValues(SexSlotSitting.SITTING_BETWEEN_LEGS),
-				Util.newArrayListOfValues(SexSlotSitting.SITTING));
+				List.of(SexSlotSitting.SITTING_BETWEEN_LEGS),
+				List.of(SexSlotSitting.SITTING));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {

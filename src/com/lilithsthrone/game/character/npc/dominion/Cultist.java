@@ -152,8 +152,7 @@ public class Cultist extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_SLUT);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.LUSTPYRE,
+				List.of(Perk.LUSTPYRE,
 						Perk.FETISH_SEEDER,
 						Perk.ARCANE_COMBATANT),
 				Util.newHashMapOfValues(
@@ -225,8 +224,7 @@ public class Cultist extends NPC {
 		}
 		
 		// Makeup:
-		colours = Util.newArrayListOfValues(
-				PresetColour.COVERING_NONE,
+		colours = List.of(PresetColour.COVERING_NONE,
 				PresetColour.COVERING_ORANGE,
 				PresetColour.COVERING_PURPLE,
 				PresetColour.COVERING_BLACK);

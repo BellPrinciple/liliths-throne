@@ -96,7 +96,7 @@ public class Elizabeth extends NPC {
 			this.resetPerksMap(true);
 		}
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.3.3.9")) {
-			this.equipClothing(Util.newArrayListOfValues(EquipClothingSetting.ADD_WEAPONS));
+			this.equipClothing(List.of(EquipClothingSetting.ADD_WEAPONS));
 		}
 		if(Main.isVersionOlderThan(Game.loadingVersion, "0.3.5.1")) {
 			this.setHistory(Occupation.NPC_LYSSIETH_GUARD);
@@ -112,7 +112,7 @@ public class Elizabeth extends NPC {
 	public void setupPerks(boolean autoSelectPerks) {
 		this.addSpecialPerk(Perk.SPECIAL_MARTIAL_BACKGROUND);
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 5),
 						new Value<>(PerkCategory.LUST, 0),

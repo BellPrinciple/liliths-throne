@@ -305,8 +305,8 @@ public class GloryHole {
 		
 		private PositioningData data = new PositioningData(
 				SexPosition.GLORY_HOLE_SEX,
-				Util.newArrayListOfValues(SexSlotUnique.GLORY_HOLE_FUCKED),
-				Util.newArrayListOfValues(SexSlotUnique.GLORY_HOLE_FUCKING, SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_ONE));
+				List.of(SexSlotUnique.GLORY_HOLE_FUCKED),
+				List.of(SexSlotUnique.GLORY_HOLE_FUCKING, SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_ONE));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -336,10 +336,10 @@ public class GloryHole {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(Main.sex.getCharacterPerformingAction().equals(character)) {
-				return Util.newArrayListOfValues(Fetish.FETISH_VAGINAL_GIVING);
+				return List.of(Fetish.FETISH_VAGINAL_GIVING);
 				
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_VAGINAL_RECEIVING);
+				return List.of(Fetish.FETISH_VAGINAL_RECEIVING);
 			}
 		}
 	};
@@ -354,8 +354,8 @@ public class GloryHole {
 		
 		private PositioningData data = new PositioningData(
 				SexPosition.GLORY_HOLE_SEX,
-				Util.newArrayListOfValues(SexSlotUnique.GLORY_HOLE_ANALLY_FUCKED),
-				Util.newArrayListOfValues(SexSlotUnique.GLORY_HOLE_FUCKING, SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_ONE));
+				List.of(SexSlotUnique.GLORY_HOLE_ANALLY_FUCKED),
+				List.of(SexSlotUnique.GLORY_HOLE_FUCKING, SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_ONE));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -385,10 +385,10 @@ public class GloryHole {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(Main.sex.getCharacterPerformingAction().equals(character)) {
-				return Util.newArrayListOfValues(Fetish.FETISH_ANAL_GIVING);
+				return List.of(Fetish.FETISH_ANAL_GIVING);
 				
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_ANAL_RECEIVING);
+				return List.of(Fetish.FETISH_ANAL_RECEIVING);
 			}
 		}
 	};
@@ -403,8 +403,8 @@ public class GloryHole {
 		
 		private PositioningData data = new PositioningData(
 				SexPosition.GLORY_HOLE,
-				Util.newArrayListOfValues(SexSlotUnique.GLORY_HOLE_KNEELING),
-				Util.newArrayListOfValues(SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_ONE, SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_TWO));
+				List.of(SexSlotUnique.GLORY_HOLE_KNEELING),
+				List.of(SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_ONE, SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_TWO));
 		
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -431,10 +431,10 @@ public class GloryHole {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(Main.sex.getCharacterPerformingAction().equals(character)) {
-				return Util.newArrayListOfValues(Fetish.FETISH_ORAL_GIVING);
+				return List.of(Fetish.FETISH_ORAL_GIVING);
 				
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_ORAL_RECEIVING);
+				return List.of(Fetish.FETISH_ORAL_RECEIVING);
 			}
 		}
 	};
@@ -501,13 +501,13 @@ public class GloryHole {
 					|| (Main.sex.getPositionRequest().getPerformerSlots().get(0)==SexSlotUnique.GLORY_HOLE_ANALLY_FUCKED && !Main.sex.getCharacterPerformingAction().getFetishDesire(Fetish.FETISH_ANAL_RECEIVING).isNegative()))
 					|| Main.sex.getPositionRequest().getPerformerSlots().get(0)==SexSlotUnique.GLORY_HOLE_KNEELING) {
 				if(Main.sex.getPositionRequest().getPerformerSlots().get(0)==SexSlotUnique.GLORY_HOLE_FUCKED) {
-					((NPC)Main.sex.getCharacterPerformingAction()).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, null)));
+					((NPC)Main.sex.getCharacterPerformingAction()).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, null)));
 					
 				} else if(Main.sex.getPositionRequest().getPerformerSlots().get(0)==SexSlotUnique.GLORY_HOLE_ANALLY_FUCKED) {
-					((NPC)Main.sex.getCharacterPerformingAction()).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, null)));
+					((NPC)Main.sex.getCharacterPerformingAction()).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, null)));
 					
 				} else {
-					((NPC)Main.sex.getCharacterPerformingAction()).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, null)));
+					((NPC)Main.sex.getCharacterPerformingAction()).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, null)));
 				}
 				applyChangeSlotEffects();
 				

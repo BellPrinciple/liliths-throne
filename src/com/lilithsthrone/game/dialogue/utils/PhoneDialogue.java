@@ -2223,11 +2223,11 @@ public class PhoneDialogue {
 		}
 		
 		Map<SexAreaOrifice, List<AbstractStatusEffect>> incubationEffectMap = Util.newHashMapOfValues(
-				new Value<>(SexAreaOrifice.VAGINA, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_WOMB_1, StatusEffect.INCUBATING_EGGS_WOMB_2, StatusEffect.INCUBATING_EGGS_WOMB_3)),
-				new Value<>(SexAreaOrifice.ANUS, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_STOMACH_1, StatusEffect.INCUBATING_EGGS_STOMACH_2, StatusEffect.INCUBATING_EGGS_STOMACH_3)),
-				new Value<>(SexAreaOrifice.NIPPLE, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_NIPPLES_1, StatusEffect.INCUBATING_EGGS_NIPPLES_2, StatusEffect.INCUBATING_EGGS_NIPPLES_3)),
-				new Value<>(SexAreaOrifice.NIPPLE_CROTCH, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_1, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_2, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_3)),
-				new Value<>(SexAreaOrifice.SPINNERET, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_SPINNERET_1, StatusEffect.INCUBATING_EGGS_SPINNERET_2, StatusEffect.INCUBATING_EGGS_SPINNERET_3)));
+				new Value<>(SexAreaOrifice.VAGINA, List.of(StatusEffect.INCUBATING_EGGS_WOMB_1, StatusEffect.INCUBATING_EGGS_WOMB_2, StatusEffect.INCUBATING_EGGS_WOMB_3)),
+				new Value<>(SexAreaOrifice.ANUS, List.of(StatusEffect.INCUBATING_EGGS_STOMACH_1, StatusEffect.INCUBATING_EGGS_STOMACH_2, StatusEffect.INCUBATING_EGGS_STOMACH_3)),
+				new Value<>(SexAreaOrifice.NIPPLE, List.of(StatusEffect.INCUBATING_EGGS_NIPPLES_1, StatusEffect.INCUBATING_EGGS_NIPPLES_2, StatusEffect.INCUBATING_EGGS_NIPPLES_3)),
+				new Value<>(SexAreaOrifice.NIPPLE_CROTCH, List.of(StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_1, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_2, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_3)),
+				new Value<>(SexAreaOrifice.SPINNERET, List.of(StatusEffect.INCUBATING_EGGS_SPINNERET_1, StatusEffect.INCUBATING_EGGS_SPINNERET_2, StatusEffect.INCUBATING_EGGS_SPINNERET_3)));
 		
 		for(Entry<SexAreaOrifice, List<AbstractStatusEffect>> incubationEntry : incubationEffectMap.entrySet()) {
 			if(Main.game.getPlayer().hasStatusEffect(incubationEntry.getValue().get(0))
@@ -2858,60 +2858,50 @@ public class PhoneDialogue {
 		clothingSlotCategories = new LinkedHashMap<>();
 		
 		clothingSlotCategories.put("Head",
-				Util.newArrayListOfValues(
-				InventorySlot.HEAD,
+				List.of(InventorySlot.HEAD,
 				InventorySlot.EYES,
 				InventorySlot.HAIR,
 				InventorySlot.MOUTH,
 				InventorySlot.NECK));
 		
 		clothingSlotCategories.put("Torso",
-				Util.newArrayListOfValues(
-				InventorySlot.TORSO_OVER,
+				List.of(InventorySlot.TORSO_OVER,
 				InventorySlot.TORSO_UNDER));
 		
 		clothingSlotCategories.put("Chest",
-				Util.newArrayListOfValues(
-				InventorySlot.CHEST,
+				List.of(InventorySlot.CHEST,
 				InventorySlot.NIPPLE));
 		
 		clothingSlotCategories.put("Arms",
-				Util.newArrayListOfValues(
-				InventorySlot.HAND,
+				List.of(InventorySlot.HAND,
 				InventorySlot.WRIST,
 				InventorySlot.FINGER));
 		
 		clothingSlotCategories.put("Waist",
-				Util.newArrayListOfValues(
-				InventorySlot.STOMACH,
+				List.of(InventorySlot.STOMACH,
 				InventorySlot.HIPS));
 		
 		clothingSlotCategories.put("Groin",
-				Util.newArrayListOfValues(
-				InventorySlot.GROIN,
+				List.of(InventorySlot.GROIN,
 				InventorySlot.PENIS,
 				InventorySlot.VAGINA,
 				InventorySlot.ANUS));
 		
 		clothingSlotCategories.put("Legs",
-				Util.newArrayListOfValues(
-				InventorySlot.LEG,
+				List.of(InventorySlot.LEG,
 				InventorySlot.SOCK));
 		
 		clothingSlotCategories.put("Feet",
-				Util.newArrayListOfValues(
-				InventorySlot.FOOT,
+				List.of(InventorySlot.FOOT,
 				InventorySlot.ANKLE));
 		
 		clothingSlotCategories.put("Extra",
-				Util.newArrayListOfValues(
-				InventorySlot.HORNS,
+				List.of(InventorySlot.HORNS,
 				InventorySlot.WINGS,
 				InventorySlot.TAIL));
 		
 		clothingSlotCategories.put("Piercings",
-				Util.newArrayListOfValues(
-				InventorySlot.PIERCING_EAR,
+				List.of(InventorySlot.PIERCING_EAR,
 				InventorySlot.PIERCING_LIP,
 				InventorySlot.PIERCING_NOSE,
 				InventorySlot.PIERCING_TONGUE,

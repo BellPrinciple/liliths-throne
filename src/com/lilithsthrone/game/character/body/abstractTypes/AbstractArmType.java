@@ -123,7 +123,7 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 		this.armTransformationDescription = armTransformationDescription;
 		this.armBodyDescription = armBodyDescription;
 		
-		this.armTags = Util.newArrayListOfValues(BodyPartTag.ARM_STANDARD);
+		this.armTags = List.of(BodyPartTag.ARM_STANDARD);
 	}
 	
 	public AbstractArmType(File XMLFile, String author, boolean mod) {
@@ -316,35 +316,29 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 	public BodyPartClothingBlock getBodyPartClothingBlock() {
 		if(this.getTags().contains(BodyPartTag.ARM_WINGS_FEATHERED)) {
 			return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(
-							InventorySlot.HAND,
+					List.of(InventorySlot.HAND,
 							InventorySlot.WRIST,
 							InventorySlot.TORSO_OVER,
 							InventorySlot.TORSO_UNDER),
 					Race.HARPY,
 					"Due to the fact that [npc.nameHasFull] bird-like wings instead of arms, only specialist clothing can be worn in this slot.",
-					Util.newArrayListOfValues(
-						ItemTag.FITS_FEATHERED_ARM_WINGS,
+					List.of(ItemTag.FITS_FEATHERED_ARM_WINGS,
 						ItemTag.FITS_FEATHERED_ARM_WINGS_EXCLUSIVE,
 						ItemTag.FITS_ARM_WINGS,
-						ItemTag.FITS_ARM_WINGS_EXCLUSIVE
-					));
+						ItemTag.FITS_ARM_WINGS_EXCLUSIVE));
 		}
 		if(this.getTags().contains(BodyPartTag.ARM_WINGS_LEATHERY)) {
 			return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(
-							InventorySlot.HAND,
+					List.of(InventorySlot.HAND,
 							InventorySlot.WRIST,
 							InventorySlot.TORSO_OVER,
 							InventorySlot.TORSO_UNDER),
 					Race.BAT_MORPH,
 					"Due to the fact that [npc.nameHasFull] leathery wings instead of arms, only specialist clothing can be worn in this slot.",
-					Util.newArrayListOfValues(
-						ItemTag.FITS_LEATHERY_ARM_WINGS,
+					List.of(ItemTag.FITS_LEATHERY_ARM_WINGS,
 						ItemTag.FITS_LEATHERY_ARM_WINGS_EXCLUSIVE,
 						ItemTag.FITS_ARM_WINGS,
-						ItemTag.FITS_ARM_WINGS_EXCLUSIVE
-					));
+						ItemTag.FITS_ARM_WINGS_EXCLUSIVE));
 		}
 		return null;
 	}

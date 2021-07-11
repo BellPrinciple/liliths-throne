@@ -83,8 +83,7 @@ public class Kay extends NPC {
 	@Override
 	public void setupPerks(boolean autoSelectPerks) {
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.CLOTHING_ENCHANTER,
+				List.of(Perk.CLOTHING_ENCHANTER,
 						Perk.WEAPON_ENCHANTER),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 0),

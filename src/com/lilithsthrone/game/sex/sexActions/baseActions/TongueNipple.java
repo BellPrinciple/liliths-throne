@@ -88,11 +88,11 @@ public class TongueNipple {
 		public String getDescription() {
 			UtilText.nodeContentSB.setLength(0);
 			Map<SexPace, List<String>> descriptors = Util.newHashMapOfValues(
-					new Value<>(SexPace.DOM_GENTLE, Util.newArrayListOfValues("slowly", "gently")),
-					new Value<>(SexPace.SUB_NORMAL, Util.newArrayListOfValues("eagerly", "greedily")),
-					new Value<>(SexPace.SUB_EAGER, Util.newArrayListOfValues("eagerly", "greedily")),
-					new Value<>(SexPace.DOM_NORMAL, Util.newArrayListOfValues("eagerly", "greedily")),
-					new Value<>(SexPace.DOM_ROUGH, Util.newArrayListOfValues("forcefully", "roughly")));
+					new Value<>(SexPace.DOM_GENTLE, List.of("slowly", "gently")),
+					new Value<>(SexPace.SUB_NORMAL, List.of("eagerly", "greedily")),
+					new Value<>(SexPace.SUB_EAGER, List.of("eagerly", "greedily")),
+					new Value<>(SexPace.DOM_NORMAL, List.of("eagerly", "greedily")),
+					new Value<>(SexPace.DOM_ROUGH, List.of("forcefully", "roughly")));
 			
 			List<String> desList = descriptors.get(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction()));
 			int index = Util.random.nextInt(desList.size());
@@ -1177,11 +1177,11 @@ public class TongueNipple {
 
 			UtilText.nodeContentSB.setLength(0);
 			Map<SexPace, List<String>> descriptors = Util.newHashMapOfValues(
-					new Value<>(SexPace.DOM_GENTLE, Util.newArrayListOfValues("slowly", "gently")),
-					new Value<>(SexPace.SUB_NORMAL, Util.newArrayListOfValues("eagerly", "greedily")),
-					new Value<>(SexPace.SUB_EAGER, Util.newArrayListOfValues("eagerly", "greedily")),
-					new Value<>(SexPace.DOM_NORMAL, Util.newArrayListOfValues("eagerly", "greedily")),
-					new Value<>(SexPace.DOM_ROUGH, Util.newArrayListOfValues("forcefully", "roughly")));
+					new Value<>(SexPace.DOM_GENTLE, List.of("slowly", "gently")),
+					new Value<>(SexPace.SUB_NORMAL, List.of("eagerly", "greedily")),
+					new Value<>(SexPace.SUB_EAGER, List.of("eagerly", "greedily")),
+					new Value<>(SexPace.DOM_NORMAL, List.of("eagerly", "greedily")),
+					new Value<>(SexPace.DOM_ROUGH, List.of("forcefully", "roughly")));
 			
 			List<String> desList = descriptors.get(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction()));
 			int index = Util.random.nextInt(desList.size());

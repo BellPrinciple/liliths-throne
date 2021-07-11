@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.dominion.harpyNests;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -18,7 +20,6 @@ import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.world.Weather;
 
 /**
@@ -214,8 +215,8 @@ public class HarpyNestNympho {
 					return new ResponseSex("Sex", "Have dominant sex with [harpyNympho.name].",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(Main.game.getNpc(HarpyNympho.class)),
+									List.of(Main.game.getPlayer()),
+									List.of(Main.game.getNpc(HarpyNympho.class)),
 							null,
 							null), HARPY_NEST_NYMPHO_AFTER_SEX, "<p>"
 								+ "Eager to help satisfy [harpyNympho.namePos] craving for sex, you reach down and grab her wings."
@@ -256,7 +257,7 @@ public class HarpyNestNympho {
 						
 				} else if (index == 2) {
 					return new Response("Nympho Queen", "You feel sorry for this matriarch, only getting to have sex with the same males over and over again. Tell her how a real nympho behaves!", HARPY_NEST_NYMPHO_QUEEN,
-							null, null, Util.newArrayListOfValues(Perk.NYMPHOMANIAC), Femininity.FEMININE_STRONG, null) {
+							null, null, List.of(Perk.NYMPHOMANIAC), Femininity.FEMININE_STRONG, null) {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().values.add(DialogueFlagValue.nymphoEncountered);
@@ -330,7 +331,7 @@ public class HarpyNestNympho {
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
 				return new Response("Nympho Queen", "You feel sorry for this matriarch, only getting to have sex with the same males over and over again. Tell her how a real nympho behaves!", HARPY_NEST_NYMPHO_QUEEN,
-						null, null, Util.newArrayListOfValues(Perk.NYMPHOMANIAC), Femininity.FEMININE_STRONG, null) {
+						null, null, List.of(Perk.NYMPHOMANIAC), Femininity.FEMININE_STRONG, null) {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().values.add(DialogueFlagValue.nymphoPacified);
@@ -497,8 +498,8 @@ public class HarpyNestNympho {
 				return new ResponseSex("Sex", "Have dominant sex with [harpyNympho.name].",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(HarpyNympho.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(HarpyNympho.class)),
 						null,
 						null), HARPY_NEST_NYMPHO_AFTER_SEX, "<p>"
 							+ "Eager to help satisfy [harpyNympho.namePos] craving for sex, you reach down and grab her wings."
@@ -624,7 +625,7 @@ public class HarpyNestNympho {
 				return new Response("Open wide",
 						"Allow [harpyNympho.Name] to push the lollipop into your mouth... [style.boldBad(Warning:)] <b>Due to the nature of harpies needing a special form, this transformation bypasses TF preferences!</b>",
 						HARPY_NEST_NYMPHO_FIGHT_LOSE_PUNISHMENT,
-						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING),
+						List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING),
 						Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel(),
 						null,
 						null,
@@ -737,7 +738,7 @@ public class HarpyNestNympho {
 				return new Response("Open wide",
 						"Allow [harpyNympho.Name] to push the lollipop into your mouth... [style.boldBad(Warning:)] <b>Due to the nature of harpies needing a special form, this transformation bypasses TF preferences!</b>",
 						HARPY_NEST_NYMPHO_FIGHT_LOSE_PUNISHMENT,
-						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_RECEIVING),
+						List.of(Fetish.FETISH_TRANSFORMATION_RECEIVING),
 						Fetish.FETISH_TRANSFORMATION_RECEIVING.getAssociatedCorruptionLevel(),
 						null,
 						null,
@@ -809,8 +810,8 @@ public class HarpyNestNympho {
 				return new ResponseSex("Sex", "Have dominant sex with [harpyNympho.name].",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(HarpyNympho.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(HarpyNympho.class)),
 						null,
 						null), HARPY_NEST_NYMPHO_AFTER_SEX, "<p>"
 							+ "Eager to show this nest who's in charge, you reach down and grab [harpyNympho.namePos] wings."

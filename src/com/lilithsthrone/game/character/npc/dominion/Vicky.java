@@ -336,7 +336,7 @@ public class Vicky extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_DIRTY_MINDED);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 5),
 						new Value<>(PerkCategory.LUST, 1),
@@ -522,7 +522,7 @@ public class Vicky extends NPC {
 		for(int i=0; i<10;i++) {
 			try {
 				if(ingredient.getEnchantmentEffect().getEffectsDescription(primaryMod, TFModifier.NONE, TFPotency.MINOR_BOOST, 0, Main.game.getPlayer(), Main.game.getPlayer())!=null) {
-					AbstractItem potion = EnchantingUtils.craftItem(ingredient, Util.newArrayListOfValues(new ItemEffect(ingredient.getEnchantmentEffect(), primaryMod, TFModifier.NONE, TFPotency.MINOR_BOOST, 0)));
+					AbstractItem potion = EnchantingUtils.craftItem(ingredient, List.of(new ItemEffect(ingredient.getEnchantmentEffect(), primaryMod, TFModifier.NONE, TFPotency.MINOR_BOOST, 0)));
 					itemsForSale.putIfAbsent(potion, 0);
 					itemsForSale.put(potion, 1+itemsForSale.get(potion));
 					potion.setName(EnchantingUtils.getPotionName(ingredient, potion.getEffects()));

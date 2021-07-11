@@ -149,10 +149,10 @@ public class PenisAss {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_ANAL_GIVING);
+				return List.of(Fetish.FETISH_ANAL_GIVING);
 				
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_ANAL_RECEIVING);
+				return List.of(Fetish.FETISH_ANAL_RECEIVING);
 			}
 		}
 	};
@@ -308,10 +308,10 @@ public class PenisAss {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.equals(Main.sex.getCharacterPerformingAction())) {
-				return Util.newArrayListOfValues(Fetish.FETISH_ANAL_RECEIVING);
+				return List.of(Fetish.FETISH_ANAL_RECEIVING);
 				
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_ANAL_GIVING);
+				return List.of(Fetish.FETISH_ANAL_GIVING);
 			}
 		}
 	};

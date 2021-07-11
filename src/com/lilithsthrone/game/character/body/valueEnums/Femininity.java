@@ -14,15 +14,15 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public enum Femininity {
 	
-	MASCULINE_STRONG(Util.newArrayListOfValues("very masculine", "manly"), 0, 19, PresetColour.MASCULINE_PLUS),
+	MASCULINE_STRONG(List.of("very masculine", "manly"), 0, 19, PresetColour.MASCULINE_PLUS),
 	
-	MASCULINE(Util.newArrayListOfValues("masculine", "boyish"), 20, 39, PresetColour.MASCULINE),
+	MASCULINE(List.of("masculine", "boyish"), 20, 39, PresetColour.MASCULINE),
 	
-	ANDROGYNOUS(Util.newArrayListOfValues("androgynous"), 40, 59, PresetColour.ANDROGYNOUS),
+	ANDROGYNOUS(List.of("androgynous"), 40, 59, PresetColour.ANDROGYNOUS),
 	
-	FEMININE(Util.newArrayListOfValues("feminine", "girly"), 60, 79, PresetColour.FEMININE),
+	FEMININE(List.of("feminine", "girly"), 60, 79, PresetColour.FEMININE),
 	
-	FEMININE_STRONG(Util.newArrayListOfValues("very feminine", "womanly"), 80, 100, PresetColour.FEMININE_PLUS);
+	FEMININE_STRONG(List.of("very feminine", "womanly"), 80, 100, PresetColour.FEMININE_PLUS);
 
 	private List<String> names;
 	private int minimumFemininity;

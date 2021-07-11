@@ -27,8 +27,7 @@ public class SMMasturbation extends SexManagerDefault {
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		return Util.newArrayListOfValues(
-				SexPosition.MASTURBATION);
+		return List.of(SexPosition.MASTURBATION);
 	}
 	
 	@Override

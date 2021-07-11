@@ -71,45 +71,31 @@ public class ColourListPresets {
 		be referenced in code, the remainder are created dynamically.
 	 */
 	
-	public static List<Colour> JUST_WHITE = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_WHITE);
+	public static List<Colour> JUST_WHITE = List.of(PresetColour.CLOTHING_WHITE);
 	
-	public static List<Colour> JUST_BLACK = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_BLACK);
+	public static List<Colour> JUST_BLACK = List.of(PresetColour.CLOTHING_BLACK);
 
-	public static List<Colour> JUST_RED_DARK = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_RED_DARK);
+	public static List<Colour> JUST_RED_DARK = List.of(PresetColour.CLOTHING_RED_DARK);
 	
-	public static List<Colour> JUST_RED = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_RED);
+	public static List<Colour> JUST_RED = List.of(PresetColour.CLOTHING_RED);
 
-	public static List<Colour> JUST_GREY = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_GREY);
+	public static List<Colour> JUST_GREY = List.of(PresetColour.CLOTHING_GREY);
 	
-	public static List<Colour> JUST_GOLD = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_GOLD);
+	public static List<Colour> JUST_GOLD = List.of(PresetColour.CLOTHING_GOLD);
 	
-	public static List<Colour> JUST_ROSE_GOLD = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_ROSE_GOLD);
+	public static List<Colour> JUST_ROSE_GOLD = List.of(PresetColour.CLOTHING_ROSE_GOLD);
 	
-	public static List<Colour> JUST_STEEL = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_STEEL);
+	public static List<Colour> JUST_STEEL = List.of(PresetColour.CLOTHING_STEEL);
 
-	public static List<Colour> BLACK_OR_WHITE = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_BLACK,
+	public static List<Colour> BLACK_OR_WHITE = List.of(PresetColour.CLOTHING_BLACK,
 			PresetColour.CLOTHING_WHITE);
 
-	public static List<Colour> SHADES_OF_GREY = Util.newArrayListOfValues(
-//			PresetColour.CLOTHING_BLACK_JET,
-			PresetColour.CLOTHING_BLACK,
+	public static List<Colour> SHADES_OF_GREY = List.of(PresetColour.CLOTHING_BLACK,
 			PresetColour.CLOTHING_GREY_DARK,
 			PresetColour.CLOTHING_GREY,
-			PresetColour.CLOTHING_GREY_LIGHT
-//			PresetColour.CLOTHING_WHITE
-			);
+			PresetColour.CLOTHING_GREY_LIGHT);
 	
-	public static List<Colour> DARK_SHADES = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_GREY,
+	public static List<Colour> DARK_SHADES = List.of(PresetColour.CLOTHING_GREY,
 			PresetColour.CLOTHING_GREY_DARK,
 			PresetColour.CLOTHING_BLACK,
 			PresetColour.CLOTHING_BLACK_JET,
@@ -118,8 +104,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_GREEN_VERY_DARK,
 			PresetColour.CLOTHING_BLUE_VERY_DARK);
 	
-	public static List<Colour> DENIM = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_BLUE_GREY,
+	public static List<Colour> DENIM = List.of(PresetColour.CLOTHING_BLUE_GREY,
 			PresetColour.CLOTHING_BLUE_NAVY,
 			PresetColour.CLOTHING_PINK_LIGHT,
 			PresetColour.CLOTHING_DESATURATED_BROWN,
@@ -128,8 +113,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_GREY,
 			PresetColour.CLOTHING_BLACK);
 	
-	public static List<Colour> KIMONO = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_BLUE_LIGHT,
+	public static List<Colour> KIMONO = List.of(PresetColour.CLOTHING_BLUE_LIGHT,
 			PresetColour.CLOTHING_PINK_LIGHT,
 			PresetColour.CLOTHING_PINK,
 			PresetColour.CLOTHING_PURPLE,
@@ -139,13 +123,11 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_WHITE,
 			PresetColour.CLOTHING_YELLOW);
 	
-	public static List<Colour> MAID = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_PINK_LIGHT,
+	public static List<Colour> MAID = List.of(PresetColour.CLOTHING_PINK_LIGHT,
 			PresetColour.CLOTHING_PINK,
 			PresetColour.CLOTHING_BLACK);
 	
-	public static List<Colour> MILK_MAID = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_PINK_LIGHT,
+	public static List<Colour> MILK_MAID = List.of(PresetColour.CLOTHING_PINK_LIGHT,
 			PresetColour.CLOTHING_BLUE_LIGHT,
 			PresetColour.CLOTHING_PURPLE_LIGHT,
 			PresetColour.CLOTHING_GREEN,
@@ -154,8 +136,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_BROWN,
 			PresetColour.CLOTHING_BLACK);
 	
-	public static List<Colour> LEATHER = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_WHITE,
+	public static List<Colour> LEATHER = List.of(PresetColour.CLOTHING_WHITE,
 			PresetColour.CLOTHING_BLACK,
 			PresetColour.CLOTHING_BLACK_JET,
 			PresetColour.CLOTHING_GREY,
@@ -167,8 +148,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_TAN,
 			PresetColour.CLOTHING_KHAKI);
 	
-	public static List<Colour> LINGERIE = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_WHITE,
+	public static List<Colour> LINGERIE = List.of(PresetColour.CLOTHING_WHITE,
 			PresetColour.CLOTHING_GREY_LIGHT,
 			PresetColour.CLOTHING_GREY,
 			PresetColour.CLOTHING_GREY_DARK,
@@ -213,8 +193,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_PINK_HOT,
 			PresetColour.CLOTHING_PINK_DARK);
 	
-	public static List<Colour> ALL_METAL = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_BLACK_STEEL,
+	public static List<Colour> ALL_METAL = List.of(PresetColour.CLOTHING_BLACK_STEEL,
 			PresetColour.CLOTHING_GUNMETAL,
 			PresetColour.CLOTHING_STEEL,
 			PresetColour.CLOTHING_IRON,
@@ -227,8 +206,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_PLATINUM);
 			
 	
-	public static List<Colour> ALL = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_WHITE,
+	public static List<Colour> ALL = List.of(PresetColour.CLOTHING_WHITE,
 			PresetColour.CLOTHING_GREY_LIGHT,
 			PresetColour.CLOTHING_GREY,
 			PresetColour.CLOTHING_GREY_DARK,
@@ -275,8 +253,7 @@ public class ColourListPresets {
 			PresetColour.CLOTHING_PINK_HOT,
 			PresetColour.CLOTHING_PINK_DARK);
 	
-	public static List<Colour> ALL_WITH_METALS = Util.newArrayListOfValues(
-			PresetColour.CLOTHING_BLACK_STEEL,
+	public static List<Colour> ALL_WITH_METALS = List.of(PresetColour.CLOTHING_BLACK_STEEL,
 			PresetColour.CLOTHING_GUNMETAL,
 			PresetColour.CLOTHING_STEEL,
 			PresetColour.CLOTHING_IRON,
@@ -443,7 +420,7 @@ public class ColourListPresets {
 			String presetName = "JUST_" + PresetColour.getIdFromColour(c).substring("CLOTHING_".length());
 			
 			if (!idToColourListMap.containsKey(presetName)) {
-				List<Colour> preset = Util.newArrayListOfValues(c);
+				List<Colour> preset = List.of(c);
 				idToColourListMap.put(presetName, preset);
 			}
 		}

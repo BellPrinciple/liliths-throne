@@ -110,7 +110,7 @@ public class SpellManagement {
 					"Cycle the targeted character for casting spells on.") {
 				@Override
 				public void effects() {
-					List<GameCharacter> companions = Util.newArrayListOfValues(Main.game.getPlayer());
+					List<GameCharacter> companions = List.of(Main.game.getPlayer());
 					companions.addAll(Main.game.getPlayer().getCompanions());
 					if(!companions.isEmpty()) {
 						for(int i=0; i<companions.size();i++) {

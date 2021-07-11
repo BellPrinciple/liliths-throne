@@ -36,7 +36,7 @@ public class CMBasicAttack {
             CombatMoveType.ATTACK,
             DamageType.UNARMED,
             "moves/strike",
-            Util.newArrayListOfValues(PresetColour.BASE_CRIMSON),
+            List.of(PresetColour.BASE_CRIMSON),
             false,
             true,
             false,
@@ -300,7 +300,7 @@ public class CMBasicAttack {
             CombatMoveType.ATTACK,
             DamageType.UNARMED,
             "moves/strike_offhand",
-            Util.newArrayListOfValues(PresetColour.BASE_ORANGE),
+            List.of(PresetColour.BASE_ORANGE),
             false,
             true,
             false,
@@ -606,7 +606,7 @@ public class CMBasicAttack {
             CombatMoveType.ATTACK,
             DamageType.UNARMED,
             "moves/strike_twin",
-            Util.newArrayListOfValues(PresetColour.BASE_CRIMSON, PresetColour.BASE_ORANGE),
+            List.of(PresetColour.BASE_CRIMSON, PresetColour.BASE_ORANGE),
             false,
             true,
             false,
@@ -916,7 +916,7 @@ public class CMBasicAttack {
             CombatMoveType.DEFEND,
             DamageType.HEALTH,
             "moves/block",
-            Util.newArrayListOfValues(PresetColour.BASE_GREY),
+            List.of(PresetColour.BASE_GREY),
             false,
             false,
             true,
@@ -1132,7 +1132,7 @@ public class CMBasicAttack {
             CombatMoveType.ATTACK,
             DamageType.PHYSICAL,
             "moves/arcane_strike",
-            Util.newArrayListOfValues(PresetColour.GENERIC_ARCANE),
+            List.of(PresetColour.GENERIC_ARCANE),
             false,
             true,
             false,
@@ -1223,8 +1223,7 @@ public class CMBasicAttack {
 
         @Override
         public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-        	return Util.newArrayListOfValues(
-        			UtilText.parse(source, "[npc.NameIsFull] casting no spells."));
+        	return List.of(UtilText.parse(source, "[npc.NameIsFull] casting no spells."));
         }
         
         @Override

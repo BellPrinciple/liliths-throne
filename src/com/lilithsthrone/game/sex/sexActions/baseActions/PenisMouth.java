@@ -42,7 +42,7 @@ public class PenisMouth {
 	}
 
 	private static List<GameCharacter> getCharactersForParsing(GameCharacter characterReceivingBlowjob) {
-		List<GameCharacter> characters = Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()));
+		List<GameCharacter> characters = List.of(Main.sex.getCharacterPerformingAction(), Main.sex.getTargetedPartner(Main.sex.getCharacterPerformingAction()));
 		for(GameCharacter c : getOngoingCharacters(characterReceivingBlowjob)) {
 			if(!characters.contains(c)) {
 				characters.add(c);
@@ -100,7 +100,7 @@ public class PenisMouth {
 		public String getActionDescription() {
 			GameCharacter primary = PenisMouth.getPrimaryBlowjobPerformer(Main.sex.getCharacterPerformingAction());
 			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
-			return UtilText.parse(Util.newArrayListOfValues(Main.sex.getCharacterPerformingAction(), primary, target),
+			return UtilText.parse(List.of(Main.sex.getCharacterPerformingAction(), primary, target),
 					"Pull your [npc.cock] out of [npc2.namePos] mouth and slap "+(primary.equals(target)?"[npc2.her]":"[npc3.namePos]")+" face with it.");
 		}
 
@@ -111,7 +111,7 @@ public class PenisMouth {
 			GameCharacter target = Main.sex.getCharacterTargetedForSexAction(this);
 			
 			if(Main.sex.getSexPositionSlot(performer).hasTag(SexSlotTag.PERFORMING_ORAL)) {
-				return UtilText.parse(Util.newArrayListOfValues(performer, primary, target),
+				return UtilText.parse(List.of(performer, primary, target),
 						UtilText.returnStringAtRandom(
 							"Grinning down at "+PenisMouth.getOngoingNames(performer)+", [npc.name] [npc.verb(pull)] back, sliding [npc.her] [npc.cock+] out of [npc2.namePos] mouth."
 								+ " As [npc3.name] [npc3.verb(look)] up at [npc.herHim], [npc.she] quickly [npc.verb(slap)] [npc.her] hard shaft against [npc3.her] cheek, splattering "
@@ -134,7 +134,7 @@ public class PenisMouth {
 								+ " As [npc3.name] [npc3.verb(open)] [npc3.her] mouth in shock, [npc.name] [npc.verb(use)] the opportunity to thrust [npc.her] [npc.cock+] down [npc3.her] throat."));
 				
 			} else {
-				return UtilText.parse(Util.newArrayListOfValues(performer, primary, target),
+				return UtilText.parse(List.of(performer, primary, target),
 						UtilText.returnStringAtRandom(
 							"Pulling [npc.her] [npc.hips] back, [npc.name] [npc.verb(slide)] [npc.her] [npc.cock+] out of [npc2.namePos] mouth."
 								+ " Before "+(primary.equals(target)?"[npc2.she]":"[npc3.name]")+" can react, [npc.she] quickly [npc.verb(slap)] [npc.her] hard shaft against [npc3.her] cheek, splattering saliva "
@@ -214,7 +214,7 @@ public class PenisMouth {
 							"Thrusting [npc.her] [npc.cock+] down [npc2.namePos] throat,",
 							"[npc.Name] [npc.verb(slide)] [npc.her] [npc.cock+] into [npc2.namePos] mouth,",
 							"Sliding [npc.her] [npc.cock+] down [npc2.namePos] throat,"};
-					UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, primary),
+					UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, primary),
 							start[rnd]));
 					
 				} else {
@@ -223,7 +223,7 @@ public class PenisMouth {
 							"After pulling back from [npc2.name] and then thrusting [npc.her] [npc.cock+] down [npc3.namePos] throat,",
 							"[npc.Name] [npc.verb(slide)] [npc.her] [npc.cock+] out of [npc2.namePos] mouth and then down [npc3.namePos] throat,",
 							"Sliding [npc.her] [npc.cock+] out of [npc2.namePos] throat, and into [npc3.namePos] mouth,"};
-					UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, primary, secondary),
+					UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, primary, secondary),
 							start[rnd]));
 				}
 
@@ -257,7 +257,7 @@ public class PenisMouth {
 								" [npc.name] [npc.verb(reposition)] [npc.herself] until [npc.sheIs] forcing [npc.her] [npc.balls+] against [npc3.namePos] [npc3.lips+]."};
 						break;
 				}
-				UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, primary, target),
+				UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, primary, target),
 						mid[rnd]));
 				
 			} else {
@@ -395,7 +395,7 @@ public class PenisMouth {
 							"As [npc3.name] [npc3.verb(bob)] [npc3.her] head up in [npc2.namePos] lap, [npc.name] [npc.verb(lean)] in to plant a kiss on the side of [npc2.her] [npc2.cock+],",
 							"As [npc2.name] [npc2.verb(slide)] [npc2.her] [npc2.cock+] into [npc3.namePos] mouth,",
 							"Making sure not to get in the way of [npc3.name] as [npc3.her] head bobs up and down on [npc2.namePos] [npc2.cock+],"};
-					UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+					UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 							start[rnd]));
 					
 				} else {
@@ -404,7 +404,7 @@ public class PenisMouth {
 							"[npc.Name] [npc.verb(swap)] with [npc3.name], allowing [npc3.herHim] to take [npc2.namePos] [npc2.cock+] into [npc3.her] mouth,",
 							"Sliding [npc2.namePos] [npc2.cock+] out from [npc.her] mouth, and then getting [npc3.name] to swallow the slimy shaft,",
 							"First sliding [npc2.namePos] [npc2.cock+] out from [npc.her] mouth, then getting [npc3.name] to start sucking on it,"};
-					UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, secondary),
+					UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, secondary),
 							start[rnd]));
 				}
 				
@@ -522,9 +522,9 @@ public class PenisMouth {
 						break;
 				}
 				
-				return UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+				return UtilText.parse(List.of(performer, target, primary),
 						Util.randomItemFrom(descriptions))
-						+ UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						+ UtilText.parse(List.of(performer, target, primary),
 								Util.randomItemFrom(descriptionsEnd));
 				
 			} else {
@@ -778,7 +778,7 @@ public class PenisMouth {
 			if(PenisMouth.getOngoingCharacters(Main.sex.getCharacterPerformingAction()).size()>1 && !primary.equals(target)) {
 				switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 					case DOM_GENTLE:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First sliding [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] [npc.verb(reach)] forwards to grab hold of [npc2.namePos] "+style+","
 										+ " before gently [npc.verb(pull)] [npc2.her] forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -789,7 +789,7 @@ public class PenisMouth {
 										+(Main.sex.getCharacterPerformingAction().hasPenisModifier(PenetrationModifier.KNOTTED)?"[npc.her] knot":"the base")+".")));
 						break;
 					case DOM_ROUGH:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First pushing [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] roughly [npc.verb(grasp)] [npc2.namePos] "+style+","
 										+ " before violently jerking [npc2.her] head forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -800,7 +800,7 @@ public class PenisMouth {
 										+(Main.sex.getCharacterPerformingAction().hasPenisModifier(PenetrationModifier.KNOTTED)?"[npc.her] knot":"the base")+".")));
 						break;
 					default: // For dom normal, sub normal, and sub eager:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First sliding [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] [npc.verb(reach)] forwards to take hold of [npc2.namePos] "+style+","
 										+ " before firmly pulling [npc2.her] head forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -952,7 +952,7 @@ public class PenisMouth {
 			if(PenisMouth.getOngoingCharacters(Main.sex.getCharacterPerformingAction()).size()>1 && !primary.equals(target)) {
 				switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 					case DOM_GENTLE:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First sliding [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] [npc.verb(reach)] forwards to grab hold of [npc2.namePos] [npc2.ears+],"
 										+ " before gently [npc.verb(pull)] [npc2.her] forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -963,7 +963,7 @@ public class PenisMouth {
 										+(Main.sex.getCharacterPerformingAction().hasPenisModifier(PenetrationModifier.KNOTTED)?"[npc.her] knot":"the base")+".")));
 						break;
 					case DOM_ROUGH:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First pushing [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] roughly [npc.verb(grasp)] [npc2.namePos] [npc2.ears+],"
 										+ " before violently jerking [npc2.her] head forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -974,7 +974,7 @@ public class PenisMouth {
 										+(Main.sex.getCharacterPerformingAction().hasPenisModifier(PenetrationModifier.KNOTTED)?"[npc.her] knot":"the base")+".")));
 						break;
 					default: // For dom normal, sub normal, and sub eager:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First sliding [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] [npc.verb(reach)] forwards to take hold of [npc2.namePos] [npc2.ears+],"
 										+ " before firmly pulling [npc2.her] head forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -1125,7 +1125,7 @@ public class PenisMouth {
 			if(PenisMouth.getOngoingCharacters(Main.sex.getCharacterPerformingAction()).size()>1 && !primary.equals(target)) {
 				switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 					case DOM_GENTLE:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First sliding [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] [npc.verb(reach)] forwards to grab hold of [npc2.namePos] [npc2.horns+],"
 										+ " before gently [npc.verb(pull)] [npc2.her] forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -1136,7 +1136,7 @@ public class PenisMouth {
 										+(Main.sex.getCharacterPerformingAction().hasPenisModifier(PenetrationModifier.KNOTTED)?"[npc.her] knot":"the base")+".")));
 						break;
 					case DOM_ROUGH:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First pushing [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] roughly [npc.verb(grasp)] [npc2.namePos] [npc2.horns+],"
 										+ " before violently jerking [npc2.her] head forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -1147,7 +1147,7 @@ public class PenisMouth {
 										+(Main.sex.getCharacterPerformingAction().hasPenisModifier(PenetrationModifier.KNOTTED)?"[npc.her] knot":"the base")+".")));
 						break;
 					default: // For dom normal, sub normal, and sub eager:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First sliding [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] [npc.verb(reach)] forwards to take hold of [npc2.namePos] [npc2.horns+],"
 										+ " before firmly pulling [npc2.her] head forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -1298,7 +1298,7 @@ public class PenisMouth {
 			if(PenisMouth.getOngoingCharacters(Main.sex.getCharacterPerformingAction()).size()>1 && !primary.equals(target)) {
 				switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 					case DOM_GENTLE:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First sliding [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] [npc.verb(reach)] forwards to grab hold of [npc2.namePos] [npc2.antennae+],"
 										+ " before gently [npc.verb(pull)] [npc2.her] forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -1309,7 +1309,7 @@ public class PenisMouth {
 										+(Main.sex.getCharacterPerformingAction().hasPenisModifier(PenetrationModifier.KNOTTED)?"[npc.her] knot":"the base")+".")));
 						break;
 					case DOM_ROUGH:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First pushing [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] roughly [npc.verb(grasp)] [npc2.namePos] [npc2.antennae+],"
 										+ " before violently jerking [npc2.her] head forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -1320,7 +1320,7 @@ public class PenisMouth {
 										+(Main.sex.getCharacterPerformingAction().hasPenisModifier(PenetrationModifier.KNOTTED)?"[npc.her] knot":"the base")+".")));
 						break;
 					default: // For dom normal, sub normal, and sub eager:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 								"First sliding [npc3.name] back off of [npc.her] [npc.cock+], [npc.name] [npc.verb(reach)] forwards to take hold of [npc2.namePos] [npc2.antennae+],"
 										+ " before firmly pulling [npc2.her] head forwards and forcing [npc2.herHim] to swallow [npc.her] [npc.cock+] all the way down to the base.",
@@ -2179,7 +2179,7 @@ public class PenisMouth {
 			if(PenisMouth.getOngoingCharacters(Main.sex.getCharacterPerformingAction()).size()>1 && !primary.equals(target)) {
 				switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(this))) {
 					case DOM_GENTLE:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 									"Letting out [npc.a_sob+], [npc.name] frantically [npc.verb(try)] to pull [npc.her] hips away from [npc2.namePos] face, but [npc.her] efforts prove to be in vain as [npc2.she] gently, but firmly,"
 											+ " [npc2.verb(hold)] [npc.herHim] in place, planting kiss after gentle kiss on the sides of [npc.her] [npc.cock+] and [npc.balls] as [npc3.name] [npc3.verb(continue)] giving [npc.herHim] an unwanted blowjob.",
@@ -2191,7 +2191,7 @@ public class PenisMouth {
 											+ " gently kissing the sides and base of [npc.her] [npc.cock] while [npc3.name] [npc3.verb(bob)] [npc3.her] head up and down in [npc.her] lap.")));
 						break;
 					case DOM_ROUGH:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 									"Letting out [npc.a_sob+], [npc.name] frantically [npc.verb(try)] to pull [npc.her] hips away from [npc2.namePos] face, but [npc.her] efforts prove to be in vain as [npc2.she] roughly"
 											+ " [npc2.verb(hold)] [npc.herHim] in place, planting kiss after forceful kiss on the sides of [npc.her] [npc.cock+] and [npc.balls] as [npc3.name] [npc3.verb(continue)] giving [npc.herHim] an unwanted blowjob.",
@@ -2203,7 +2203,7 @@ public class PenisMouth {
 											+ " roughly kissing the sides and base of [npc.her] [npc.cock] while [npc3.name] [npc3.verb(bob)] [npc3.her] head up and down in [npc.her] lap.")));
 						break;
 					default: // DOM_NORMAL and in case anything goes wrong:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 									"Letting out [npc.a_sob+], [npc.name] frantically [npc.verb(try)] to pull [npc.her] hips away from [npc2.namePos] face, but [npc.her] efforts prove to be in vain as [npc2.she] firmly"
 											+ " [npc2.verb(hold)] [npc.herHim] in place, planting kiss after eager kiss on the sides of [npc.her] [npc.cock+] and [npc.balls] as [npc3.name] [npc3.verb(continue)] giving [npc.herHim] an unwanted blowjob.",
@@ -2763,7 +2763,7 @@ public class PenisMouth {
 			if(PenisMouth.getOngoingCharacters(Main.sex.getCharacterTargetedForSexAction(this)).size()>1 && !primary.equals(performer)) {
 				switch(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction())) {
 					case DOM_GENTLE:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 									"Getting [npc3.name] to pull back, [npc.name] gently [npc.verb(wrap)] [npc.her] [npc.lips+] around [npc2.namePos] [npc2.cock+],"
 											+ " before pushing [npc.her] head forwards and taking it as deep down [npc.her] throat as [npc.she] possibly can.",
@@ -2773,7 +2773,7 @@ public class PenisMouth {
 											+ " before gently parting [npc.her] [npc.lips+] and taking [npc2.namePos] [npc2.cock+] deep down [npc.her] throat.")));
 						break;
 					case DOM_ROUGH:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 									"Unceremoniously pushing [npc3.name] out of the way, [npc.name] roughly [npc.verb(wrap)] [npc.her] [npc.lips+] around [npc2.namePos] [npc2.cock+],"
 											+ " before forcing [npc.her] head forwards and forcing it as deep down [npc.her] throat as [npc.she] possibly can.",
@@ -2783,7 +2783,7 @@ public class PenisMouth {
 											+ " before greedily parting [npc.her] [npc.lips+] and forcing [npc2.namePos] [npc2.cock+] deep down [npc.her] throat.")));
 						break;
 					case SUB_NORMAL:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 									"Getting [npc3.name] to pull back, [npc.name] [npc.verb(wrap)] [npc.her] [npc.lips+] around [npc2.namePos] [npc2.cock+],"
 											+ " before pushing [npc.her] head forwards and taking it as deep down [npc.her] throat as [npc.she] possibly can.",
@@ -2793,7 +2793,7 @@ public class PenisMouth {
 											+ " before parting [npc.her] [npc.lips+] and taking [npc2.namePos] [npc2.cock+] deep down [npc.her] throat.")));
 						break;
 					default: // Dom normal and sub eager:
-						UtilText.nodeContentSB.append(UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+						UtilText.nodeContentSB.append(UtilText.parse(List.of(performer, target, primary),
 								UtilText.returnStringAtRandom(
 									"Getting [npc3.name] to pull back, [npc.name] eagerly [npc.verb(wrap)] [npc.her] [npc.lips+] around [npc2.namePos] [npc2.cock+],"
 											+ " before quickly pushing [npc.her] head forwards and greedily taking it as deep down [npc.her] throat as [npc.she] possibly can.",
@@ -2869,14 +2869,14 @@ public class PenisMouth {
 		if(PenisMouth.getOngoingCharacters(Main.sex.getCharacterTargetedForSexAction(action)).size()>1) {
 			switch(Main.sex.getSexPace(Main.sex.getCharacterTargetedForSexAction(action))) {
 				default:
-					return UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+					return UtilText.parse(List.of(performer, target, primary),
 							UtilText.returnStringAtRandom(
 								" [npc2.Name] greedily [npc2.verb(thrust)] [npc2.her] [npc2.cock+] deep into [npc3.namePos] throat,"
 										+ " letting out [npc2.a_moan+] as [npc2.she] enthusiastically [npc2.verb(receive)] [npc2.her] group blowjob.",
 								" [npc2.A_moan+] bursts out from [npc2.namePos] mouth, before [npc2.she] [npc2.verb(start)] thrusting [npc2.her] [npc2.cock+] deep down [npc3.namePos] throat.",
 								" [npc2.Moaning] in delight, [npc2.name] eagerly [npc2.verb(drive)] [npc2.her] [npc2.cock+] as deep as possible into [npc3.namePos] throat."));
 				case SUB_RESISTING:
-					return UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+					return UtilText.parse(List.of(performer, target, primary),
 							UtilText.returnStringAtRandom(
 							" Failing to pull [npc2.her] [npc2.cock] away from "+PenisMouth.getOngoingNames(target)+","
 									+ " [npc2.name] [npc2.verb(let)] out [npc2.a_sob+] as [npc2.she] weakly [npc2.verb(try)] to struggle free.",
@@ -2884,21 +2884,21 @@ public class PenisMouth {
 									+ " squirming and protesting as [npc2.her] [npc2.cock+] continues to be mercilessly played with.",
 							" [npc2.Sobbing] in distress, [npc2.name] [npc2.verb(try)], in vain, to pull [npc2.her] [npc2.cock] away from "+PenisMouth.getOngoingNames(target)+"."));
 				case DOM_GENTLE:
-					return UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+					return UtilText.parse(List.of(performer, target, primary),
 							UtilText.returnStringAtRandom(
 							" [npc2.Name] gently [npc2.verb(slide)] [npc2.her] [npc2.cock+] deep into [npc3.namePos] throat,"
 									+ " letting out a soft, muffled [npc2.moan] as [npc2.she] [npc2.verb(receive)] [npc2.her] group blowjob.",
 							" A soft [npc2.moan] drifts out from [npc2.namePos] mouth, before [npc2.she] [npc2.verb(start)] slowly sliding [npc2.her] [npc2.cock+] deep into [npc3.namePos] throat.",
 							" [npc2.Moaning] in delight, [npc2.name] gently [npc2.verb(slide)] [npc2.her] [npc2.cock+] deep into [npc3.namePos] throat."));
 				case DOM_ROUGH:
-					return UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+					return UtilText.parse(List.of(performer, target, primary),
 							UtilText.returnStringAtRandom(
 							" [npc2.Name] violently [npc2.verb(thrust)] [npc2.her] [npc2.cock+] deep into [npc3.namePos] throat,"
 									+ " letting out a muffled [npc2.moan] as [npc2.she] [npc2.verb(receive)] [npc2.her] group blowjob.",
 							" [npc2.A_moan+] bursts out from [npc2.namePos] mouth, before [npc2.she] [npc2.verb(start)] violently thrusting [npc2.her] [npc2.cock+] deep into [npc3.namePos] throat.",
 							" [npc2.Moaning] in delight, [npc2.name] roughly [npc2.verb(slam)] [npc2.her] [npc2.cock+] as deep as possible into [npc3.namePos] throat."));
 				case SUB_NORMAL:
-					return UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
+					return UtilText.parse(List.of(performer, target, primary),
 							UtilText.returnStringAtRandom(
 							" [npc2.Name] [npc2.verb(thrust)] [npc2.her] [npc2.cock+] deep into [npc3.namePos] throat,"
 									+ " letting out a muffled [npc2.moan] as [npc2.she] [npc2.verb(receive)] [npc2.her] group blowjob.",

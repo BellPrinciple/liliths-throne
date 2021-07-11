@@ -51,8 +51,8 @@ public class WingType {
 			"angelic feathered",
 			"wing",
 			"wings",
-			Util.newArrayListOfValues("angelic", "feathered"),
-			Util.newArrayListOfValues("angelic", "feathered"),
+			List.of("angelic", "feathered"),
+			List.of("angelic", "feathered"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
 				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered, angelic wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"
@@ -72,8 +72,8 @@ public class WingType {
 			"demonic leathery",
 			"wing",
 			"wings",
-			Util.newArrayListOfValues("demonic", "leathery"),
-			Util.newArrayListOfValues("demonic", "leathery"),
+			List.of("demonic", "leathery"),
+			List.of("demonic", "leathery"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
 				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], leathery, demonic wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"
@@ -95,8 +95,8 @@ public class WingType {
 			"demonic feathered",
 			"wing",
 			"wings",
-			Util.newArrayListOfValues("demonic", "feathered"),
-			Util.newArrayListOfValues("demonic", "feathered"),
+			List.of("demonic", "feathered"),
+			List.of("demonic", "feathered"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
 				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered, demonic wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"
@@ -120,8 +120,8 @@ public class WingType {
 			"leathery",
 			"wing",
 			"wings",
-			Util.newArrayListOfValues("leathery"),
-			Util.newArrayListOfValues("leathery"),
+			List.of("leathery"),
+			List.of("leathery"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
 				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], leathery wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"
@@ -143,8 +143,8 @@ public class WingType {
 			"feathered",
 			"wing",
 			"wings",
-			Util.newArrayListOfValues("feathered"),
-			Util.newArrayListOfValues("feathered"),
+			List.of("feathered"),
+			List.of("feathered"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
 				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], feathered wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"
@@ -166,8 +166,8 @@ public class WingType {
 			"insect",
 			"wing",
 			"wings",
-			Util.newArrayListOfValues("chitinous"),
-			Util.newArrayListOfValues("chitinous"),
+			List.of("chitinous"),
+			List.of("chitinous"),
 			"#IF(npc.getLegConfiguration().isWingsOnLegConfiguration())"
 				+ "[npc.She] [npc.verb(bite)] [npc.her] [npc.lip] to try and suppress an unexpected moan of pleasure as a pair of [npc.wingSize], insect-like wings push out from the sides of [npc.her] [npc.legConfiguration] body."
 			+ "#ELSE"

@@ -50,8 +50,8 @@ public abstract class AbstractSexPosition {
 	private List<Class<?>> positioningClasses;
 	private List<Class<?>> specialClasses;
 	
-	public static List<SexAreaOrifice> genericGroinForceCreampieAreas = Util.newArrayListOfValues(SexAreaOrifice.ANUS, SexAreaOrifice.VAGINA, SexAreaOrifice.URETHRA_VAGINA, SexAreaOrifice.URETHRA_PENIS, SexAreaOrifice.SPINNERET);
-	public static List<SexAreaOrifice> genericFaceForceCreampieAreas = Util.newArrayListOfValues(SexAreaOrifice.MOUTH);
+	public static List<SexAreaOrifice> genericGroinForceCreampieAreas = List.of(SexAreaOrifice.ANUS, SexAreaOrifice.VAGINA, SexAreaOrifice.URETHRA_VAGINA, SexAreaOrifice.URETHRA_PENIS, SexAreaOrifice.SPINNERET);
+	public static List<SexAreaOrifice> genericFaceForceCreampieAreas = List.of(SexAreaOrifice.MOUTH);
 	
 	public AbstractSexPosition(String name,
 			int maximumSlots,
@@ -254,8 +254,8 @@ public abstract class AbstractSexPosition {
 		
 		// If the targeted sex position is not defined, allow cumming on floor:
 		return new SexActionInteractions(null,
-				Util.newArrayListOfValues(OrgasmCumTarget.FLOOR),
-				Util.newArrayListOfValues(OrgasmCumTarget.FLOOR));
+				List.of(OrgasmCumTarget.FLOOR),
+				List.of(OrgasmCumTarget.FLOOR));
 	}
 	
 	/**

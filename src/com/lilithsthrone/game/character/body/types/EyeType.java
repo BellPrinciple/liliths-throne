@@ -32,8 +32,8 @@ public class EyeType {
 			"human",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			" By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into human eyes, with normally-proportioned irises and pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldHuman(human eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -48,8 +48,8 @@ public class EyeType {
 			"angel",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			" By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into angelic eyes, with normally-proportioned irises and pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldAngel(angelic eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -64,8 +64,8 @@ public class EyeType {
 			"demonic",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"#IF(npc.isShortStature())"
 				+ "By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into impish eyes, with vertical pupils and large irises."
 				+ "<br/>"
@@ -78,7 +78,7 @@ public class EyeType {
 			"[npc.SheHasFull] [npc.eyePairs] #IF(npc.isShortStature())impish#ELSEdemonic#ENDIF eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
+			return List.of(BodyPartTag.NIGHT_VISION);
 		}
 	};
 
@@ -90,8 +90,8 @@ public class EyeType {
 			"cat",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into cat-like eyes, with large irises and vertical pupils."
 					+ "<br/>"
 					+ "[npc.Name] now [npc.has] [style.boldCatMorph(cat-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -99,7 +99,7 @@ public class EyeType {
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
+			return List.of(BodyPartTag.NIGHT_VISION);
 		}
 	};
 
@@ -111,8 +111,8 @@ public class EyeType {
 			"cow",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into cow-like eyes, with large pupils and horizontal irises."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldCowMorph(cow-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -120,7 +120,7 @@ public class EyeType {
 			+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
+			return List.of(BodyPartTag.NIGHT_VISION);
 		}
 	};
 
@@ -132,8 +132,8 @@ public class EyeType {
 			"dog",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into dog-like eyes, with large pupils and irises."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldDogMorph(dog-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -141,7 +141,7 @@ public class EyeType {
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
+			return List.of(BodyPartTag.NIGHT_VISION);
 		}
 	};
 
@@ -153,8 +153,8 @@ public class EyeType {
 			"fox",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into fox-like eyes, with large irises and vertical pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldFoxMorph(fox-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -162,7 +162,7 @@ public class EyeType {
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
+			return List.of(BodyPartTag.NIGHT_VISION);
 		}
 	};
 
@@ -174,8 +174,8 @@ public class EyeType {
 			"wolf",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into wolf-like eyes, with large irises and pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldWolfMorph(wolf-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -183,7 +183,7 @@ public class EyeType {
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
+			return List.of(BodyPartTag.NIGHT_VISION);
 		}
 	};
 
@@ -195,8 +195,8 @@ public class EyeType {
 			"squirrel",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into squirrel-like eyes, with large irises and pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldSquirrelMorph(squirrel-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -212,8 +212,8 @@ public class EyeType {
 			"rat",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into rat-like eyes, with large irises and pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldRatMorph(rat-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -229,8 +229,8 @@ public class EyeType {
 			"rabbit",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into rabbit-like eyes, with large irises and pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldRabbitMorph(rabbit-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -246,8 +246,8 @@ public class EyeType {
 			"bat",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into bat-like eyes, with large irises and pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldBatMorph(bat-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -263,8 +263,8 @@ public class EyeType {
 			"alligator",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into alligator-like eyes, with large irises and vertical pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldAlligatorMorph(alligator-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -272,7 +272,7 @@ public class EyeType {
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
+			return List.of(BodyPartTag.NIGHT_VISION);
 		}
 	};
 
@@ -284,8 +284,8 @@ public class EyeType {
 			"horse",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into horse-like eyes, with large irises and horizontal pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldHorseMorph(horse-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -293,7 +293,7 @@ public class EyeType {
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
+			return List.of(BodyPartTag.NIGHT_VISION);
 		}
 	};
 
@@ -305,8 +305,8 @@ public class EyeType {
 			"reindeer",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into reindeer-like eyes, with large irises and horizontal pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldReindeerMorph(reindeer-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",
@@ -314,7 +314,7 @@ public class EyeType {
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 		@Override
 		public List<BodyPartTag> getTags() {
-			return Util.newArrayListOfValues(BodyPartTag.NIGHT_VISION);
+			return List.of(BodyPartTag.NIGHT_VISION);
 		}
 	};
 
@@ -326,8 +326,8 @@ public class EyeType {
 			"harpy",
 			"eye",
 			"eyes",
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
+			List.of(""),
+			List.of(""),
 			"By the time [npc.she] hesitantly [npc.verb(open)] them again, they've changed into bird-like eyes, with large irises and horizontal pupils."
 				+ "<br/>"
 				+ "[npc.Name] now [npc.has] [style.boldHarpy(bird-like eyes)] with [style.boldGenericTF([npc.irisShape])], [npc.irisFullDescription(true)] and [style.boldGenericTF([npc.pupilShape])], [npc.pupilFullDescription(true)].",

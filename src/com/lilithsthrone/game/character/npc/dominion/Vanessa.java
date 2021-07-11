@@ -115,7 +115,7 @@ public class Vanessa extends NPC {
 		this.setAttribute(Attribute.MAJOR_CORRUPTION, 15);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 5),
@@ -308,7 +308,7 @@ public class Vanessa extends NPC {
 	public void endSex() {
 		if(!(Main.sex.getSexManager() instanceof SMVanessaOral) || !Main.sex.isDom(Main.game.getNpc(Vanessa.class))) {
 			Main.game.getNpc(Vanessa.class).cleanAllDirtySlots(true);
-			Main.game.getNpc(Vanessa.class).equipClothing(Util.newArrayListOfValues(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_ACCESSORIES));
+			Main.game.getNpc(Vanessa.class).equipClothing(List.of(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_ACCESSORIES));
 		}
 	}
 	

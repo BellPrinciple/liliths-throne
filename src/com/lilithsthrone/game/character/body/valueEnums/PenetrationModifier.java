@@ -27,14 +27,14 @@ public enum PenetrationModifier {
 	TAPERED("tapered", "Reduces effective diameter by 5%. (Mutually exclusive with 'flared'.)") {
 		@Override
 		public List<PenetrationModifier> getMutuallyExclusivePenetrationModifiers() {
-			return Util.newArrayListOfValues(FLARED);
+			return List.of(FLARED);
 		}
 	},
 	
 	FLARED("flared", "Increases effective diameter by 5%. (Mutually exclusive with 'tapered'.)") {
 		@Override
 		public List<PenetrationModifier> getMutuallyExclusivePenetrationModifiers() {
-			return Util.newArrayListOfValues(TAPERED);
+			return List.of(TAPERED);
 		}
 	},
 	
@@ -46,8 +46,7 @@ public enum PenetrationModifier {
 	
 	OVIPOSITOR("ovipositor",
 			"Grants ability to lay eggs in the currently-penetrated orifice at the moment of orgasm. (Requires an egg-laying vagina and for the eggs to already be fertilised. Eggs cannot be laid in an already-pregnant target's vagina.)",
-			Util.newArrayListOfValues(
-					SexAreaPenetration.PENIS,
+			List.of(SexAreaPenetration.PENIS,
 					SexAreaPenetration.CLIT));
 	
 	private String name;

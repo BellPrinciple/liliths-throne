@@ -83,7 +83,7 @@ public class Kheiron extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_MELEE_EXPERT);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(Perk.MELEE_DAMAGE),
+				List.of(Perk.MELEE_DAMAGE),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 0),

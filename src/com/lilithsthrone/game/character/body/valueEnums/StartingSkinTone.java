@@ -13,18 +13,17 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public enum StartingSkinTone {
 	
-	VERY_LIGHT(Util.newArrayListOfValues(
-			PresetColour.SKIN_PALE,
+	VERY_LIGHT(List.of(PresetColour.SKIN_PALE,
 			PresetColour.SKIN_PINK,
 			PresetColour.SKIN_BLUE,
 			PresetColour.SKIN_IVORY,
-			
+
 			PresetColour.COVERING_BLEACH_BLONDE,
 			PresetColour.COVERING_GINGER,
 			PresetColour.COVERING_LILAC,
 			PresetColour.COVERING_PINK,
 			PresetColour.COVERING_WHITE,
-			
+
 			PresetColour.ORIFICE_INTERIOR,
 			PresetColour.TONGUE,
 
@@ -34,7 +33,7 @@ public enum StartingSkinTone {
 			PresetColour.COVERING_GINGER,
 			PresetColour.COVERING_WHITE,
 			PresetColour.COVERING_PINK,
-			
+
 			PresetColour.COVERING_CLEAR,
 			PresetColour.COVERING_NONE,
 
@@ -47,14 +46,13 @@ public enum StartingSkinTone {
 			PresetColour.EYE_ORANGE,
 			PresetColour.EYE_BLACK)),
 			
-	LIGHT(Util.newArrayListOfValues(
-			PresetColour.SKIN_LIGHT,
+	LIGHT(List.of(PresetColour.SKIN_LIGHT,
 			PresetColour.SKIN_ROSY,
 			PresetColour.SKIN_PINK,
 			PresetColour.SKIN_BLUE,
 			PresetColour.SKIN_IVORY,
 			PresetColour.SKIN_LILAC,
-			
+
 			PresetColour.COVERING_WHITE,
 			PresetColour.COVERING_BLUE,
 			PresetColour.COVERING_LILAC,
@@ -65,7 +63,7 @@ public enum StartingSkinTone {
 			PresetColour.COVERING_ORANGE,
 			PresetColour.COVERING_GINGER,
 			PresetColour.COVERING_BLEACH_BLONDE,
-			
+
 			PresetColour.ORIFICE_INTERIOR,
 			PresetColour.TONGUE,
 
@@ -79,7 +77,7 @@ public enum StartingSkinTone {
 			PresetColour.COVERING_PURPLE,
 			PresetColour.COVERING_PINK,
 			PresetColour.COVERING_GREEN,
-			
+
 			PresetColour.COVERING_CLEAR,
 			PresetColour.COVERING_NONE,
 
@@ -92,8 +90,7 @@ public enum StartingSkinTone {
 			PresetColour.EYE_ORANGE,
 			PresetColour.EYE_BLACK)),
 			
-	OLIVE(Util.newArrayListOfValues(
-			PresetColour.SKIN_OLIVE,
+	OLIVE(List.of(PresetColour.SKIN_OLIVE,
 			PresetColour.SKIN_TANNED,
 			PresetColour.SKIN_RED,
 			PresetColour.SKIN_BROWN,
@@ -114,7 +111,7 @@ public enum StartingSkinTone {
 			PresetColour.COVERING_ORANGE,
 			PresetColour.COVERING_GINGER,
 			PresetColour.COVERING_BLEACH_BLONDE,
-			
+
 			PresetColour.ORIFICE_INTERIOR,
 			PresetColour.TONGUE,
 
@@ -129,7 +126,7 @@ public enum StartingSkinTone {
 			PresetColour.COVERING_PURPLE,
 			PresetColour.COVERING_PINK,
 			PresetColour.COVERING_GREEN,
-			
+
 			PresetColour.COVERING_CLEAR,
 			PresetColour.COVERING_NONE,
 
@@ -142,8 +139,7 @@ public enum StartingSkinTone {
 			PresetColour.EYE_ORANGE,
 			PresetColour.EYE_BLACK)),
 			
-	DARK(Util.newArrayListOfValues(
-			PresetColour.SKIN_DARK,
+	DARK(List.of(PresetColour.SKIN_DARK,
 			PresetColour.SKIN_RED,
 			PresetColour.SKIN_BROWN,
 			PresetColour.SKIN_LILAC,
@@ -158,7 +154,7 @@ public enum StartingSkinTone {
 			PresetColour.COVERING_GREEN,
 			PresetColour.COVERING_YELLOW,
 			PresetColour.COVERING_ORANGE,
-			
+
 			PresetColour.ORIFICE_INTERIOR,
 			PresetColour.TONGUE,
 
@@ -171,7 +167,7 @@ public enum StartingSkinTone {
 			PresetColour.COVERING_PURPLE,
 			PresetColour.COVERING_PINK,
 			PresetColour.COVERING_GREEN,
-			
+
 			PresetColour.COVERING_CLEAR,
 			PresetColour.COVERING_NONE,
 
@@ -182,8 +178,7 @@ public enum StartingSkinTone {
 			PresetColour.EYE_ORANGE,
 			PresetColour.EYE_BLACK)),
 			
-	VERY_DARK(Util.newArrayListOfValues(
-			PresetColour.SKIN_EBONY,
+	VERY_DARK(List.of(PresetColour.SKIN_EBONY,
 			PresetColour.SKIN_CHOCOLATE,
 			PresetColour.SKIN_RED,
 			PresetColour.SKIN_BROWN,
@@ -196,7 +191,7 @@ public enum StartingSkinTone {
 			PresetColour.COVERING_GREEN,
 			PresetColour.COVERING_YELLOW,
 			PresetColour.COVERING_ORANGE,
-			
+
 			PresetColour.ORIFICE_INTERIOR,
 			PresetColour.TONGUE,
 
@@ -208,7 +203,7 @@ public enum StartingSkinTone {
 			PresetColour.COVERING_BLUE,
 			PresetColour.COVERING_PURPLE,
 			PresetColour.COVERING_GREEN,
-			
+
 			PresetColour.COVERING_CLEAR,
 			PresetColour.COVERING_NONE,
 

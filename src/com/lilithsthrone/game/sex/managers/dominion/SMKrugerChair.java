@@ -30,8 +30,7 @@ public class SMKrugerChair extends SexManagerDefault {
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		return Util.newArrayListOfValues(
-				SexPosition.SITTING);
+		return List.of(SexPosition.SITTING);
 	}
 	
 	@Override
@@ -58,8 +57,7 @@ public class SMKrugerChair extends SexManagerDefault {
 
 	@Override
 	public String getRandomPublicSexDescription() {
-		List<String> descriptions = Util.newArrayListOfValues(
-				"One of the lionesses lifts up her skirt, and, pulling her thong to one side, starts to finger herself while watching you and Kruger.",
+		List<String> descriptions = List.of("One of the lionesses lifts up her skirt, and, pulling her thong to one side, starts to finger herself while watching you and Kruger.",
 				"Two of the zebra-girls lean back on the sofa and start making out with one another.",
 				"You hear several of the lionesses who are watching you being to share some comments on your performance.",
 				"You hear one of the zebra-girls let out an erotic moan as she watches Kruger having fun with you.",

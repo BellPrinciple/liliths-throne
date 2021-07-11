@@ -34,7 +34,7 @@ public class SMShadowSilence extends SexManagerDefault {
 	@Override
 	public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 		Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-		map.put(Main.game.getNpc(Silence.class), Util.newArrayListOfValues(CoverableArea.VAGINA));
+		map.put(Main.game.getNpc(Silence.class), List.of(CoverableArea.VAGINA));
 		return map;
 	}
 	

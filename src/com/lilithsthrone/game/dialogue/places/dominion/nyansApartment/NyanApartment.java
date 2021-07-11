@@ -280,8 +280,7 @@ public class NyanApartment {
 					UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_FOREPLAY_CUNNILINGUS" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 				@Override
 				public List<InitialSexActionInformation> getInitialSexActions() {
-					return Util.newArrayListOfValues(
-							new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.CUNNILINGUS_START, false, true));
+					return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.CUNNILINGUS_START, false, true));
 				}
 			});
 			
@@ -310,8 +309,7 @@ public class NyanApartment {
 					UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_FOREPLAY_FINGERING" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 				@Override
 				public List<InitialSexActionInformation> getInitialSexActions() {
-					return Util.newArrayListOfValues(
-							new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueMouth.KISS_START, false, true),
+					return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueMouth.KISS_START, false, true),
 							new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), FingerVagina.FINGERING_START, false, true));
 				}
 			});
@@ -352,8 +350,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_FOREPLAY_SIXTY_NINE_BLOWJOB" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.CUNNILINGUS_START, false, true),
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.CUNNILINGUS_START, false, true),
 											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), PenisMouth.BLOWJOB_START, false, true));
 								}
 							});
@@ -395,8 +392,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_FOREPLAY_SIXTY_NINE_CUNNILINGUS" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.CUNNILINGUS_START, false, true),
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.CUNNILINGUS_START, false, true),
 											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 								}
 							});
@@ -438,8 +434,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_FOREPLAY_BLOWJOB" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), PenisMouth.BLOWJOB_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), PenisMouth.BLOWJOB_START, false, true));
 								}
 							});
 				}
@@ -472,7 +467,7 @@ public class NyanApartment {
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 											return Util.newHashMapOfValues(
-													new Value<>(getNyan(), Util.newArrayListOfValues(CoverableArea.NIPPLES)));
+													new Value<>(getNyan(), List.of(CoverableArea.NIPPLES)));
 										}
 										@Override
 										public boolean isCharacterStartNaked(GameCharacter character) {
@@ -485,8 +480,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_FOREPLAY_PAIZURI" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), PenisBreasts.FUCKING_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), PenisBreasts.FUCKING_START, false, true));
 								}
 							});
 				}
@@ -526,8 +520,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_FOREPLAY_RECEIVE_CUNNILINGUS" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 								}
 							});
 				}
@@ -559,8 +552,7 @@ public class NyanApartment {
 							UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_FOREPLAY_FACE_SITTING" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.CUNNILINGUS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.CUNNILINGUS_START, false, true));
 						}
 					});
 
@@ -608,8 +600,7 @@ public class NyanApartment {
 								UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_FOREPLAY_PERFORM_ANILINGUS"+(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(
-										new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueAnus.ANILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueAnus.ANILINGUS_START, false, true));
 							}
 						});
 				}
@@ -707,8 +698,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_MAIN_MISSIONARY" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), PenisVagina.PENIS_FUCKING_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), PenisVagina.PENIS_FUCKING_START, false, true));
 								}
 							});
 				}
@@ -754,8 +744,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_MAIN_DOGGY" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), PenisVagina.PENIS_FUCKING_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), PenisVagina.PENIS_FUCKING_START, false, true));
 								}
 							});
 				}
@@ -804,8 +793,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_MAIN_COWGIRL" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(getActiveSexPartner(), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true));
+									return List.of(new InitialSexActionInformation(getActiveSexPartner(), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true));
 								}
 							});
 				}
@@ -849,8 +837,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_MAIN_BLOWJOB" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(getActiveSexPartner(), Main.game.getPlayer(), PenisMouth.GIVING_BLOWJOB_START, false, true));
+									return List.of(new InitialSexActionInformation(getActiveSexPartner(), Main.game.getPlayer(), PenisMouth.GIVING_BLOWJOB_START, false, true));
 								}
 							});
 				}
@@ -901,8 +888,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_MAIN_SCISSOR_TOP" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), ClitClit.TRIBBING_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), ClitClit.TRIBBING_START, false, true));
 								}
 							});
 				}
@@ -949,8 +935,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_MAIN_SCISSOR_BOTTOM" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), ClitClit.TRIBBING_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), ClitClit.TRIBBING_START, false, true));
 								}
 							});
 				}
@@ -996,8 +981,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_MAIN_RECEIVE_CUNNILINGUS" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 								}
 							});
 				}
@@ -1037,8 +1021,7 @@ public class NyanApartment {
 							UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_MAIN_PERFORM_CUNNILINGUS" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.CUNNILINGUS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueVagina.CUNNILINGUS_START, false, true));
 						}
 					});
 			}
@@ -1087,8 +1070,7 @@ public class NyanApartment {
 								UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_MAIN_PERFORM_ANILINGUS"+(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(
-										new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueAnus.ANILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), TongueAnus.ANILINGUS_START, false, true));
 							}
 						});
 					if(Main.game.getPlayer().hasPenis()) {
@@ -1134,8 +1116,7 @@ public class NyanApartment {
 											UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "SOLO_SEX_MAIN_ANAL" +(getActiveSexPartner() instanceof Nyan?"_NYAN":"_NYANMUM"))) {
 										@Override
 										public List<InitialSexActionInformation> getInitialSexActions() {
-											return Util.newArrayListOfValues(
-													new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), PenisAnus.PENIS_FUCKING_START, false, true));
+											return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getActiveSexPartner(), PenisAnus.PENIS_FUCKING_START, false, true));
 										}
 									});
 						}
@@ -1367,8 +1348,7 @@ public class NyanApartment {
 						UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_FOREPLAY_CUNNILINGUS")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true),
 								new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true));
 					}
 				};
@@ -1406,8 +1386,7 @@ public class NyanApartment {
 						UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_FOREPLAY_FINGERING")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueMouth.KISS_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueMouth.KISS_START, false, true),
 								new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), FingerVagina.FINGERING_START, false, true),
 								new InitialSexActionInformation(Main.game.getPlayer(), getNyanMum(), FingerVagina.FINGERING_START, false, true));
 					}
@@ -1452,8 +1431,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_FOREPLAY_RECEIVE_BLOWJOB")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(getNyan(), Main.game.getPlayer(), PenisMouth.GIVING_BLOWJOB_START, false, true),
+									return List.of(new InitialSexActionInformation(getNyan(), Main.game.getPlayer(), PenisMouth.GIVING_BLOWJOB_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), Main.game.getPlayer(), PenisMouth.GIVING_BLOWJOB_START_ADDITIONAL, false, true));
 								}
 							});
@@ -1498,8 +1476,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_FOREPLAY_RECEIVE_CUNNILINGUS")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true),
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), Main.game.getPlayer(), TongueVagina.CUNNILINGUS_START_ADDITIONAL, false, true));
 								}
 							});
@@ -1553,8 +1530,7 @@ public class NyanApartment {
 								UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_FOREPLAY_ANILINGUS")) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(
-										new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueAnus.ANILINGUS_START, false, true),
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueAnus.ANILINGUS_START, false, true),
 										new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true));
 							}
 						});
@@ -1662,8 +1638,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_MISSIONARY_NYAN")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), PenisVagina.PENIS_FUCKING_START, false, true),
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), PenisVagina.PENIS_FUCKING_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), getNyanMum(), SelfFingerVagina.SELF_FINGER_VAGINA_PENETRATION, false, true));
 								}
@@ -1723,8 +1698,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_MISSIONARY_NYANMUM")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyanMum(), PenisVagina.PENIS_FUCKING_START, false, true),
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyanMum(), PenisVagina.PENIS_FUCKING_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true),
 											new InitialSexActionInformation(getNyan(), getNyan(), SelfFingerVagina.SELF_FINGER_VAGINA_PENETRATION, false, true));
 								}
@@ -1787,8 +1761,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_DOGGY_NYAN")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), PenisVagina.PENIS_FUCKING_START, false, true),
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), PenisVagina.PENIS_FUCKING_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), getNyanMum(), SelfFingerVagina.SELF_FINGER_VAGINA_PENETRATION, false, true));
 								}
@@ -1848,8 +1821,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_DOGGY_NYANMUM")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyanMum(), PenisVagina.PENIS_FUCKING_START, false, true),
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyanMum(), PenisVagina.PENIS_FUCKING_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true),
 											new InitialSexActionInformation(getNyan(), getNyan(), SelfFingerVagina.SELF_FINGER_VAGINA_PENETRATION, false, true));
 								}
@@ -1915,8 +1887,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_COWGIRL_NYAN")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(getNyan(), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true),
+									return List.of(new InitialSexActionInformation(getNyan(), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 								}
@@ -1979,8 +1950,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_COWGIRL_NYANMUM")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(getNyanMum(), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true),
+									return List.of(new InitialSexActionInformation(getNyanMum(), Main.game.getPlayer(), PenisVagina.USING_PENIS_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true),
 											new InitialSexActionInformation(getNyan(), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 								}
@@ -2041,8 +2011,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_BLOWJOB")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(getNyan(), Main.game.getPlayer(), PenisMouth.GIVING_BLOWJOB_START, false, true),
+									return List.of(new InitialSexActionInformation(getNyan(), Main.game.getPlayer(), PenisMouth.GIVING_BLOWJOB_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), Main.game.getPlayer(), PenisMouth.GIVING_BLOWJOB_START_ADDITIONAL, false, true));
 								}
 							});
@@ -2106,8 +2075,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_SCISSOR_NYAN")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), ClitClit.TRIBBING_START, false, true),
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), ClitClit.TRIBBING_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), getNyan(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), Main.game.getPlayer(), TongueMouth.KISS_START, false, true));
 								}
@@ -2170,8 +2138,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_SCISSOR_NYANMUM")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyanMum(), ClitClit.TRIBBING_START, false, true),
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyanMum(), ClitClit.TRIBBING_START, false, true),
 											new InitialSexActionInformation(getNyan(), getNyanMum(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true),
 											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueMouth.KISS_START, false, true));
 								}
@@ -2234,8 +2201,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_SCISSORED_NYAN")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(getNyan(), Main.game.getPlayer(), ClitClit.TRIBBING_START, false, true),
+									return List.of(new InitialSexActionInformation(getNyan(), Main.game.getPlayer(), ClitClit.TRIBBING_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true));
 								}
@@ -2298,8 +2264,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_SCISSORED_NYANMUM")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(getNyanMum(), Main.game.getPlayer(), ClitClit.TRIBBING_START, false, true),
+									return List.of(new InitialSexActionInformation(getNyanMum(), Main.game.getPlayer(), ClitClit.TRIBBING_START, false, true),
 											new InitialSexActionInformation(getNyan(), Main.game.getPlayer(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true),
 											new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true));
 								}
@@ -2357,8 +2322,7 @@ public class NyanApartment {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_RECEIVE_CUNNILINGUS")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 								}
 							});
 				}
@@ -2408,8 +2372,7 @@ public class NyanApartment {
 							UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_CUNNILINGUS")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getPlayer(), getNyanMum(), TongueVagina.CUNNILINGUS_START, false, true),
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyanMum(), TongueVagina.CUNNILINGUS_START, false, true),
 									new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true));
 						}
 					});
@@ -2466,8 +2429,7 @@ public class NyanApartment {
 								UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_ANILINGUS")) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(
-										new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueAnus.ANILINGUS_START, false, true),
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueAnus.ANILINGUS_START, false, true),
 										new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true));
 							}
 						});
@@ -2530,8 +2492,7 @@ public class NyanApartment {
 											UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_ANAL_NYAN")) {
 										@Override
 										public List<InitialSexActionInformation> getInitialSexActions() {
-											return Util.newArrayListOfValues(
-													new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), PenisAnus.PENIS_FUCKING_START, false, true),
+											return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), PenisAnus.PENIS_FUCKING_START, false, true),
 													new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true),
 													new InitialSexActionInformation(getNyanMum(), getNyanMum(), SelfFingerVagina.SELF_FINGER_VAGINA_PENETRATION, false, true));
 										}
@@ -2592,8 +2553,7 @@ public class NyanApartment {
 											UtilText.parseFromXMLFile("places/dominion/nyansApartment/core", "DOUBLE_SEX_MAIN_ANAL_NYANMUM")) {
 										@Override
 										public List<InitialSexActionInformation> getInitialSexActions() {
-											return Util.newArrayListOfValues(
-													new InitialSexActionInformation(Main.game.getPlayer(), getNyanMum(), PenisAnus.PENIS_FUCKING_START, false, true),
+											return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyanMum(), PenisAnus.PENIS_FUCKING_START, false, true),
 													new InitialSexActionInformation(getNyanMum(), getNyan(), TongueMouth.KISS_START, false, true),
 													new InitialSexActionInformation(getNyan(), getNyan(), SelfFingerVagina.SELF_FINGER_VAGINA_PENETRATION, false, true));
 										}

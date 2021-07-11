@@ -150,8 +150,7 @@ public class SubmissionCitadelArcanist extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_DIRTY_MINDED);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.WEAPON_ENCHANTER),
+				List.of(Perk.WEAPON_ENCHANTER),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 1),
@@ -303,7 +302,7 @@ public class SubmissionCitadelArcanist extends NPC {
 	
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(CitadelYoukoSA.class);
+		return List.of(CitadelYoukoSA.class);
 	}
 
 	@Override

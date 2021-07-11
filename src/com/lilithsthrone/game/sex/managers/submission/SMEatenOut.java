@@ -34,11 +34,11 @@ public class SMEatenOut extends SexManagerDefault {
 		Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
 
 		for(GameCharacter dom : this.getDominants().keySet()) {
-			map.put(dom, Util.newArrayListOfValues(CoverableArea.MOUTH));
+			map.put(dom, List.of(CoverableArea.MOUTH));
 		}
 		
 		for(GameCharacter sub : this.getSubmissives().keySet()) {
-			map.put(sub, Util.newArrayListOfValues(CoverableArea.VAGINA));
+			map.put(sub, List.of(CoverableArea.VAGINA));
 		}
 		
 		return map;

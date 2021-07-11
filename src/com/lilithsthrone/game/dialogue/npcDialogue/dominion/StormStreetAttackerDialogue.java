@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
+import java.util.List;
+
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -18,7 +20,6 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.SexControl;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -60,12 +61,12 @@ public class StormStreetAttackerDialogue {
 				
 			} else if (index == 3) {
 				return new ResponseSex("Offer body", "Offer your body to [npc.name] so that you can avoid a violent confrontation.",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
+						List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 						null, null, null,
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getMugger()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getMugger()),
+								List.of(Main.game.getPlayer()),
 								null,
 								Main.game.getPlayer().getCompanions()) {
 							@Override
@@ -102,8 +103,8 @@ public class StormStreetAttackerDialogue {
 							UtilText.parse(getMugger(), "Offer [npc.name] the opportunity to have sex with both you and [com.name] in order to avoid a violent confrontation."),
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(Main.game.getPlayer(), companion),
+									List.of(getMugger()),
+									List.of(Main.game.getPlayer(), companion),
 									null,
 									null,
 									ResponseTag.PREFER_DOGGY),
@@ -129,10 +130,10 @@ public class StormStreetAttackerDialogue {
 							UtilText.parse(getMugger(), "Tell [npc.name] that [npc.she] can use [com.namePos] body in order to avoid a violent confrontation."),
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(companion),
+									List.of(getMugger()),
+									List.of(companion),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer())),
+									List.of(Main.game.getPlayer())),
 							AFTER_SEX_DEFEAT,
 							UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "STORM_ATTACK_OFFER_COMPANION", getMugger())) {
 						@Override
@@ -185,8 +186,8 @@ public class StormStreetAttackerDialogue {
 						"Well, [npc.she] <i>is</i> asking for it!",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(getMugger()),
+								List.of(Main.game.getPlayer()),
+								List.of(getMugger()),
 								Main.game.getPlayer().getCompanions(),
 								null),
 						AFTER_SEX_VICTORY,
@@ -197,8 +198,8 @@ public class StormStreetAttackerDialogue {
 						"Well, [npc.she] <i>is</i> asking for it! (Start the sex scene in the 'gentle' pace.)",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(getMugger()),
+								List.of(Main.game.getPlayer()),
+								List.of(getMugger()),
 								Main.game.getPlayer().getCompanions(),
 								null,
 								ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
@@ -210,8 +211,8 @@ public class StormStreetAttackerDialogue {
 						"Well, [npc.she] <i>is</i> asking for it! (Start the sex scene in the 'rough' pace.)",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(getMugger()),
+								List.of(Main.game.getPlayer()),
+								List.of(getMugger()),
 								Main.game.getPlayer().getCompanions(),
 								null,
 								ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
@@ -221,14 +222,14 @@ public class StormStreetAttackerDialogue {
 			} else if (index == 5) {
 				return new ResponseSex("Submit",
 						"You're not really sure what to do now... Perhaps it would be best to let [npc.name] choose what to do next?",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+						List.of(Fetish.FETISH_SUBMISSIVE),
 						null, CorruptionLevel.THREE_DIRTY, null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(getMugger()),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(getMugger()),
+								List.of(Main.game.getPlayer()),
 								null,
-								Util.newArrayListOfValues(getMainCompanion())),
+								List.of(getMainCompanion())),
 						AFTER_SEX_DEFEAT, UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "AFTER_COMBAT_VICTORY_SEX_SUBMIT", getMugger()));
 				
 			} else if (index == 6) {
@@ -267,8 +268,8 @@ public class StormStreetAttackerDialogue {
 							UtilText.parse(getMugger(), companion, "Have dominant sex with [npc.name], and get [npc2.name] to join in with the fun."),
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer(), companion),
-									Util.newArrayListOfValues(getMugger()),
+									List.of(Main.game.getPlayer(), companion),
+									List.of(getMugger()),
 									null,
 									null,
 									ResponseTag.PREFER_DOGGY),
@@ -289,10 +290,10 @@ public class StormStreetAttackerDialogue {
 							UtilText.parse(getMugger(), "Tell [com.name] that [com.she] can have some fun with [npc.name] while you watch."),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(companion),
-									Util.newArrayListOfValues(getMugger()),
+									List.of(companion),
+									List.of(getMugger()),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer())),
+									List.of(Main.game.getPlayer())),
 							AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "AFTER_COMBAT_VICTORY_GIVE_TO_COMPANION", getMugger()));
 				}
 				
@@ -315,10 +316,10 @@ public class StormStreetAttackerDialogue {
 							UtilText.parse(getMugger(), "Tell [npc.name] that [npc.she] can use [com.name]."),
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(companion),
+									List.of(getMugger()),
+									List.of(companion),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer())),
+									List.of(Main.game.getPlayer())),
 							AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "AFTER_COMBAT_VICTORY_OFFER_COMPANION", getMugger())) {
 						@Override
 						public void effects() {
@@ -379,15 +380,13 @@ public class StormStreetAttackerDialogue {
 										:"Tell [npc.name] that you"+(companionSex?" and [com.name]":"")+" would like to have sex with [npc.herHim]."),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(
-											Main.game.getPlayer(),
+									List.of(getMugger()),
+									List.of(Main.game.getPlayer(),
 											companionSex
 												?getMainCompanion()
 												:null),
 									null,
-									Util.newArrayListOfValues(
-										companionSex
+									List.of(companionSex
 											?null
 											:getMainCompanion())),
 							AFTER_SEX_DEFEAT,
@@ -401,15 +400,13 @@ public class StormStreetAttackerDialogue {
 										:"Tell [npc.name] that you"+(companionSex?" and [com.name]":"")+" are more than happy to have sex with [npc.herHim]."),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(
-											Main.game.getPlayer(),
+									List.of(getMugger()),
+									List.of(Main.game.getPlayer(),
 											companionSex
 												?getMainCompanion()
 												:null),
 									null,
-									Util.newArrayListOfValues(
-										companionSex
+									List.of(companionSex
 											?null
 											:getMainCompanion()),
 									ResponseTag.START_PACE_PLAYER_SUB_EAGER),
@@ -421,15 +418,13 @@ public class StormStreetAttackerDialogue {
 							UtilText.parse(getMugger(), "[npc.Name] forces [npc.herself] on you"+(companionSex?" and [com.name]":"")+"..."),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(
-											Main.game.getPlayer(),
+									List.of(getMugger()),
+									List.of(Main.game.getPlayer(),
 											companionSex
 												?getMainCompanion()
 												:null),
 									null,
-									Util.newArrayListOfValues(
-										companionSex
+									List.of(companionSex
 											?null
 											:getMainCompanion()),
 									ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
@@ -458,10 +453,10 @@ public class StormStreetAttackerDialogue {
 										:"Tell [npc.name] that you would like to have sex with [npc.herHim]."),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(getMugger()),
+									List.of(Main.game.getPlayer()),
 									null,
-									Util.newArrayListOfValues(getMainCompanion())),
+									List.of(getMainCompanion())),
 							AFTER_SEX_DEFEAT,
 							UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "START_DEFEATED_SEX", getMugger()));
 					
@@ -473,10 +468,10 @@ public class StormStreetAttackerDialogue {
 										:"Tell [npc.name] that you are more than happy to have sex with [npc.herHim]."),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(getMugger()),
+									List.of(Main.game.getPlayer()),
 									null,
-									Util.newArrayListOfValues(getMainCompanion()),
+									List.of(getMainCompanion()),
 									ResponseTag.START_PACE_PLAYER_SUB_EAGER),
 							AFTER_SEX_DEFEAT,
 							UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "START_DEFEATED_SEX", getMugger()));
@@ -486,10 +481,10 @@ public class StormStreetAttackerDialogue {
 							UtilText.parse(getMugger(), "[npc.Name] forces [npc.herself] on you..."),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(getMugger()),
+									List.of(Main.game.getPlayer()),
 									null,
-									Util.newArrayListOfValues(getMainCompanion()),
+									List.of(getMainCompanion()),
 									ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
 							AFTER_SEX_DEFEAT,
 							UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "START_DEFEATED_SEX_RESIST", getMugger()));

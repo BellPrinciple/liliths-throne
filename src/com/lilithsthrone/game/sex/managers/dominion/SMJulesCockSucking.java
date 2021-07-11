@@ -51,8 +51,8 @@ public class SMJulesCockSucking extends SexManagerDefault {
 	@Override
 	public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 		return Util.newHashMapOfValues(
-				new Value<>(Main.game.getNpc(Jules.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-				new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)));
+				new Value<>(Main.game.getNpc(Jules.class), List.of(CoverableArea.PENIS)),
+				new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)));
 	}
 	
 	@Override

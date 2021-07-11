@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.dominion.enforcerHQ;
 
+import java.util.List;
+
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
@@ -497,7 +499,7 @@ public class EnforcerHQDialogue {
 						
 					} else if (index == 2) {
 						if(!Main.game.getDialogueFlags().values.contains(DialogueFlagValue.feminisedBrax)) {
-							return new ResponseSex("Get punished by [brax.name]", "Get [brax.name] to take out [brax.his] frustration on you.", Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+							return new ResponseSex("Get punished by [brax.name]", "Get [brax.name] to take out [brax.his] frustration on you.", List.of(Fetish.FETISH_SUBMISSIVE),
 									null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 									true, false,
 									new SMBraxDoggy(
@@ -783,7 +785,7 @@ public class EnforcerHQDialogue {
 				return new Response("Bree",
 						"You and Candi force-feed [brax.name] his own potion, turning him into a wolf-girl named Bree.",
 						INTERIOR_SECRETARY_BRAX_FEMINISE_COMPLETED,
-						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
+						List.of(Fetish.FETISH_TRANSFORMATION_GIVING),
 						Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
 						null,
 						null,
@@ -814,7 +816,7 @@ public class EnforcerHQDialogue {
 						
 						Main.game.getNpc(Brax.class).setVaginaVirgin(true);
 
-						Main.game.getNpc(Brax.class).equipClothing(Util.newArrayListOfValues(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_ACCESSORIES));
+						Main.game.getNpc(Brax.class).equipClothing(List.of(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_ACCESSORIES));
 					}
 				};
 				
@@ -822,7 +824,7 @@ public class EnforcerHQDialogue {
 				return new Response("Bree (futa)",
 						"You and Candi force-feed [brax.name] his own potion, turning him into a wolf-girl futanari named Bree.",
 						INTERIOR_SECRETARY_BRAX_FEMINISE_COMPLETED,
-						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
+						List.of(Fetish.FETISH_TRANSFORMATION_GIVING),
 						Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
 						null,
 						null,
@@ -853,7 +855,7 @@ public class EnforcerHQDialogue {
 						
 						Main.game.getNpc(Brax.class).setVaginaVirgin(true);
 
-						Main.game.getNpc(Brax.class).equipClothing(Util.newArrayListOfValues(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_ACCESSORIES));
+						Main.game.getNpc(Brax.class).equipClothing(List.of(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_ACCESSORIES));
 					}
 				};
 				
@@ -918,7 +920,7 @@ public class EnforcerHQDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
 				return new Response("Brandi", "Transform Bree into a brain-dead bimbo, called Brandi.", INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED,
-						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
+						List.of(Fetish.FETISH_TRANSFORMATION_GIVING),
 						Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
 						null,
 						null,
@@ -945,14 +947,14 @@ public class EnforcerHQDialogue {
 //						Main.game.getNpc(Brax.class).setHairLength(HairLength.FIVE_ABOVE_ASS.getMedianValue());
 //						Main.game.getNpc(Brax.class).setSkinCovering(new Covering(BodyCoveringType.HAIR_LYCAN_FUR, CoveringPattern.NONE, PresetColour.COVERING_BLEACH_BLONDE, false, PresetColour.COVERING_BLEACH_BLONDE, false), true);
 						
-						Main.game.getNpc(Brax.class).equipClothing(Util.newArrayListOfValues(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_ACCESSORIES));
+						Main.game.getNpc(Brax.class).equipClothing(List.of(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_ACCESSORIES));
 					}
 				};
 				
 			} else if (index == 2) {
 				return new Response("Brandi (futa)", "Transform Bree into a brain-dead futanari bimbo, called Brandi.",
 						INTERIOR_SECRETARY_BRAX_BIMBOFY_COMPLETED,
-						Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
+						List.of(Fetish.FETISH_TRANSFORMATION_GIVING),
 						Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
 						null,
 						null,
@@ -980,7 +982,7 @@ public class EnforcerHQDialogue {
 //						Main.game.getNpc(Brax.class).setHairLength(HairLength.FIVE_ABOVE_ASS.getMedianValue());
 //						Main.game.getNpc(Brax.class).setSkinCovering(new Covering(BodyCoveringType.HAIR_LYCAN_FUR, CoveringPattern.NONE, PresetColour.COVERING_BLEACH_BLONDE, false, PresetColour.COVERING_BLEACH_BLONDE, false), true);
 						
-						Main.game.getNpc(Brax.class).equipClothing(Util.newArrayListOfValues(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_ACCESSORIES));
+						Main.game.getNpc(Brax.class).equipClothing(List.of(EquipClothingSetting.REPLACE_CLOTHING, EquipClothingSetting.ADD_ACCESSORIES));
 					}
 				};
 				

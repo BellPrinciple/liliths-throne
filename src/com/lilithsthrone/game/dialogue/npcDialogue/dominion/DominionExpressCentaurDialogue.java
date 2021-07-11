@@ -68,7 +68,7 @@ public class DominionExpressCentaurDialogue {
 		
 		slavePointsReward = 5+Util.random.nextInt(6); // Slaves give the player 5-10 points to service them.
 		
-		List<SexAreaInterface> list = Util.newArrayListOfValues(SexAreaOrifice.MOUTH, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS);
+		List<SexAreaInterface> list = List.of(SexAreaOrifice.MOUTH, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS);
 		if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.ANUS, true)) {
 			list.remove(SexAreaOrifice.ANUS);
 		}
@@ -135,8 +135,8 @@ public class DominionExpressCentaurDialogue {
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
 									Util.newHashMapOfValues(new Value<>(centaur(), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
 									Util.newHashMapOfValues(
-											new Value<>(centaur(), Util.newArrayListOfValues(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
+											new Value<>(centaur(), List.of(CoverableArea.PENIS)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
 								@Override
 								public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 									Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -152,7 +152,7 @@ public class DominionExpressCentaurDialogue {
 							UtilText.parseFromXMLFile("characters/dominion/dominionExpressCentaur", "INITIAL_ENCOUNTER_BLOWJOB_START", centaur())) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), centaur(), PenisMouth.GIVING_BLOWJOB_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), centaur(), PenisMouth.GIVING_BLOWJOB_START, false, true));
 						}
 					};
 					
@@ -167,16 +167,15 @@ public class DominionExpressCentaurDialogue {
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL_BEHIND)),
 									Util.newHashMapOfValues(new Value<>(centaur(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
 									Util.newHashMapOfValues(
-											new Value<>(centaur(), Util.newArrayListOfValues(CoverableArea.ANUS, CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))),
+											new Value<>(centaur(), List.of(CoverableArea.ANUS, CoverableArea.PENIS)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
 							null,
 							null,
 							AFTER_SEX,
 							UtilText.parseFromXMLFile("characters/dominion/dominionExpressCentaur", "INITIAL_ENCOUNTER_RIMJOB_START", centaur())) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(
-									new InitialSexActionInformation(Main.game.getPlayer(), centaur(), TongueAnus.ANILINGUS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), centaur(), TongueAnus.ANILINGUS_START, false, true));
 						}
 					};
 					
@@ -191,8 +190,8 @@ public class DominionExpressCentaurDialogue {
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
 									Util.newHashMapOfValues(new Value<>(centaur(), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS))),
 									Util.newHashMapOfValues(
-											new Value<>(centaur(), Util.newArrayListOfValues(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS)))) {
+											new Value<>(centaur(), List.of(CoverableArea.PENIS)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))) {
 								@Override
 								public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 									Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -208,7 +207,7 @@ public class DominionExpressCentaurDialogue {
 							UtilText.parseFromXMLFile("characters/dominion/dominionExpressCentaur", "INITIAL_ENCOUNTER_MOUNTED_START", centaur())) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(centaur(), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(centaur(), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
 						}
 					};
 					

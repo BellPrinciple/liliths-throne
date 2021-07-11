@@ -19,14 +19,14 @@ public class ColourReplacement {
 
 	public static final Colour DEFAULT_COLOUR_VALUE = PresetColour.CLOTHING_BLACK;
 
-	public static final List<String> DEFAULT_PRIMARY_REPLACEMENTS = Util.newArrayListOfValues("#ff2a2a", "#ff5555", "#ff8080", "#ffaaaa", "#ffd5d5");
-	public static final List<String> DEFAULT_SECONDARY_REPLACEMENTS = Util.newArrayListOfValues("#ff7f2a", "#ff9955", "#ffb380", "#ffccaa", "#ffe6d5");
-	public static final List<String> DEFAULT_TERTIARY_REPLACEMENTS = Util.newArrayListOfValues("#ffd42a", "#ffdd55", "#ffe680", "#ffeeaa", "#fff6d5");
-	public static final List<String> DEFAULT_QUATERNARY_REPLACEMENTS = Util.newArrayListOfValues("#abc837", "#bcd35f", "#cdde87", "#dde9af", "#eef4d7");
+	public static final List<String> DEFAULT_PRIMARY_REPLACEMENTS = List.of("#ff2a2a", "#ff5555", "#ff8080", "#ffaaaa", "#ffd5d5");
+	public static final List<String> DEFAULT_SECONDARY_REPLACEMENTS = List.of("#ff7f2a", "#ff9955", "#ffb380", "#ffccaa", "#ffe6d5");
+	public static final List<String> DEFAULT_TERTIARY_REPLACEMENTS = List.of("#ffd42a", "#ffdd55", "#ffe680", "#ffeeaa", "#fff6d5");
+	public static final List<String> DEFAULT_QUATERNARY_REPLACEMENTS = List.of("#abc837", "#bcd35f", "#cdde87", "#dde9af", "#eef4d7");
 	
-	public static final List<String> DEFAULT_PATTERN_PRIMARY_REPLACEMENTS = Util.newArrayListOfValues("#c83737", "#d35f5f", "#de8787", "#e9afaf", "#f4d7d7");
-	public static final List<String> DEFAULT_PATTERN_SECONDARY_REPLACEMENTS = Util.newArrayListOfValues("#c87137", "#d38d5f", "#deaa87", "#e9c6af", "#f4e3d7");
-	public static final List<String> DEFAULT_PATTERN_TERTIARY_REPLACEMENTS = Util.newArrayListOfValues("#c8ab37", "#d3bc5f", "#decd87", "#e9ddaf", "#f4eed7");
+	public static final List<String> DEFAULT_PATTERN_PRIMARY_REPLACEMENTS = List.of("#c83737", "#d35f5f", "#de8787", "#e9afaf", "#f4d7d7");
+	public static final List<String> DEFAULT_PATTERN_SECONDARY_REPLACEMENTS = List.of("#c87137", "#d38d5f", "#deaa87", "#e9c6af", "#f4e3d7");
+	public static final List<String> DEFAULT_PATTERN_TERTIARY_REPLACEMENTS = List.of("#c8ab37", "#d3bc5f", "#decd87", "#e9ddaf", "#f4eed7");
 	
 	private boolean recolouringAllowed;
 	private List<String> colourReplacements;

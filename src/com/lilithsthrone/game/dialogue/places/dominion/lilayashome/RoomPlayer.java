@@ -302,7 +302,7 @@ public class RoomPlayer {
 						"Cycle the targeted character for applying makeup to.") {
 					@Override
 					public void effects() {
-						List<GameCharacter> companions = Util.newArrayListOfValues(Main.game.getPlayer());
+						List<GameCharacter> companions = List.of(Main.game.getPlayer());
 						companions.addAll(Main.game.getCharactersPresent());
 //						companions.removeIf((c) -> !c.isPlayer() && (!c.isSlave() || !c.getOwner().isPlayer()));
 						if(!companions.isEmpty()) {
@@ -1611,7 +1611,7 @@ public class RoomPlayer {
 							false,
 							new SMGeneric(
 									hornySlaves,
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(Main.game.getPlayer()),
 									spectators,
 									null,
 									ResponseTag.PREFER_MISSIONARY),
@@ -2374,8 +2374,8 @@ public class RoomPlayer {
 				return new ResponseSex("Sex (dom)", UtilText.parse(NightlifeDistrict.getClubbersPresent(), "Have dominant sex with [npc.name]."),
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(NightlifeDistrict.getClubbersPresent().get(0)),
+								List.of(Main.game.getPlayer()),
+								List.of(NightlifeDistrict.getClubbersPresent().get(0)),
 						null,
 						null), BACK_HOME_AFTER_CLUBBER_SEX, UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME_SEX_AS_DOM", NightlifeDistrict.getClubbersPresent()));
 				
@@ -2383,8 +2383,8 @@ public class RoomPlayer {
 				return new ResponseSex("Sex (sub)", UtilText.parse(NightlifeDistrict.getClubbersPresent(), "Have submissive sex with [npc.name]."),
 						true, true,
 						new SMGeneric(
-								Util.newArrayListOfValues(NightlifeDistrict.getClubbersPresent().get(0)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(NightlifeDistrict.getClubbersPresent().get(0)),
+								List.of(Main.game.getPlayer()),
 						null,
 						null), BACK_HOME_AFTER_CLUBBER_SEX, UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "AUNT_HOME_PLAYERS_ROOM_CLUBBER_TAKEN_HOME_SEX_AS_SUB", NightlifeDistrict.getClubbersPresent()));
 				

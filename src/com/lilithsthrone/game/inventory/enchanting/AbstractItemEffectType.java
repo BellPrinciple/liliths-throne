@@ -203,8 +203,7 @@ public abstract class AbstractItemEffectType {
 	protected static List<TFModifier> getClothingTFSecondaryModifiers(TFModifier primaryModifier) {
 		switch(primaryModifier) {
 			case TF_ASS:
-				List<TFModifier> assMods = Util.newArrayListOfValues(
-						TFModifier.TF_MOD_SIZE,// ass size
+				List<TFModifier> assMods = List.of(TFModifier.TF_MOD_SIZE,// ass size
 						TFModifier.TF_MOD_SIZE_SECONDARY,// hip size
 						Main.game.isAssHairEnabled()
 							?TFModifier.TF_MOD_BODY_HAIR
@@ -224,13 +223,11 @@ public abstract class AbstractItemEffectType {
 				}
 				return assMods;
 			case TF_ARMS:
-				return Util.newArrayListOfValues(
-						Main.game.isBodyHairEnabled()
+				return List.of(Main.game.isBodyHairEnabled()
 							?TFModifier.TF_MOD_BODY_HAIR
 							:null);
 			case TF_BREASTS: case TF_BREASTS_CROTCH:
-				return Util.newArrayListOfValues(
-						TFModifier.TF_MOD_SIZE,// breast size
+				return List.of(TFModifier.TF_MOD_SIZE,// breast size
 						TFModifier.TF_MOD_SIZE_SECONDARY,// nipple size
 						TFModifier.TF_MOD_SIZE_TERTIARY,// areolae size
 						TFModifier.TF_MOD_CAPACITY,
@@ -248,21 +245,17 @@ public abstract class AbstractItemEffectType {
 						TFModifier.TF_MOD_ORIFICE_PUFFY,
 						TFModifier.TF_MOD_ORIFICE_RIBBED,
 						TFModifier.TF_MOD_ORIFICE_MUSCLED,
-						TFModifier.TF_MOD_ORIFICE_TENTACLED
-						);
+						TFModifier.TF_MOD_ORIFICE_TENTACLED);
 			case TF_CORE:
-				return Util.newArrayListOfValues(
-						TFModifier.TF_MOD_SIZE,// height
+				return List.of(TFModifier.TF_MOD_SIZE,// height
 						TFModifier.TF_MOD_SIZE_SECONDARY,// muscle mass
 						TFModifier.TF_MOD_SIZE_TERTIARY,// body size
 						TFModifier.TF_MOD_FEMININITY,
 						Main.game.isPubicHairEnabled()
 							?TFModifier.TF_MOD_BODY_HAIR
-							:null
-						);
+							:null);
 			case TF_FACE:
-				return Util.newArrayListOfValues(
-						TFModifier.TF_MOD_SIZE, // lip size
+				return List.of(TFModifier.TF_MOD_SIZE, // lip size
 						TFModifier.TF_MOD_SIZE_SECONDARY, // tongue size
 						TFModifier.TF_MOD_CAPACITY,
 						Main.game.isPenetrationLimitationsEnabled()
@@ -276,25 +269,21 @@ public abstract class AbstractItemEffectType {
 						TFModifier.TF_MOD_ORIFICE_RIBBED,
 						TFModifier.TF_MOD_ORIFICE_MUSCLED,
 						TFModifier.TF_MOD_ORIFICE_TENTACLED,
-						
+
 						TFModifier.TF_MOD_TONGUE_RIBBED,
 						TFModifier.TF_MOD_TONGUE_TENTACLED,
 						TFModifier.TF_MOD_TONGUE_BIFURCATED,
 						TFModifier.TF_MOD_TONGUE_WIDE,
 						TFModifier.TF_MOD_TONGUE_FLAT,
 						TFModifier.TF_MOD_TONGUE_STRONG,
-						
+
 						Main.game.isFacialHairEnabled()
 							?TFModifier.TF_MOD_BODY_HAIR
-							:null
-						);
+							:null);
 			case TF_HAIR:
-				return Util.newArrayListOfValues(
-						TFModifier.TF_MOD_SIZE// hair length
-						);
+				return List.of(TFModifier.TF_MOD_SIZE);
 			case TF_PENIS:
-				List<TFModifier> penisMods = Util.newArrayListOfValues(
-						TFModifier.TF_TYPE_1,
+				List<TFModifier> penisMods = List.of(TFModifier.TF_TYPE_1,
 						TFModifier.REMOVAL,
 						TFModifier.TF_MOD_SIZE,
 						TFModifier.TF_MOD_SIZE_SECONDARY);
@@ -324,8 +313,7 @@ public abstract class AbstractItemEffectType {
 				return penisMods;
 				
 			case TF_VAGINA:
-				List<TFModifier> mods = Util.newArrayListOfValues(
-						TFModifier.TF_TYPE_1,
+				List<TFModifier> mods = List.of(TFModifier.TF_TYPE_1,
 						TFModifier.REMOVAL,
 						TFModifier.TF_MOD_SIZE,// clit size
 						TFModifier.TF_MOD_SIZE_SECONDARY,// labia size
@@ -342,8 +330,7 @@ public abstract class AbstractItemEffectType {
 						TFModifier.TF_MOD_ORIFICE_TENTACLED,
 						Main.game.isPubicHairEnabled()
 							?TFModifier.TF_MOD_BODY_HAIR
-							:null
-						);
+							:null);
 
 				if(Main.getProperties().hasValue(PropertyValue.urethralContent)) {
 					mods.add(TFModifier.TF_MOD_CAPACITY_2);
@@ -2165,20 +2152,20 @@ public abstract class AbstractItemEffectType {
 		
 		switch(primaryModifier) {
 			case TF_ANTENNA:
-				secondaryModPotencyMap.put(TFModifier.REMOVAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.REMOVAL, List.of(TFPotency.MINOR_BOOST));
 				for(int i=0; i< RacialBody.valueOfRace(race).getAntennaTypes(true).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT_SECONDARY, TFPotency.getAllPotencies());
 				break;
 			
 			case TF_ARMS:
 				for(int i=0; i< ArmType.getArmTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				if(Main.game.isBodyHairEnabled()) {
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_BODY_HAIR, TFPotency.getAllPotencies());
 				}
@@ -2186,7 +2173,7 @@ public abstract class AbstractItemEffectType {
 				
 			case TF_ASS:
 				for(int i=0; i< AssType.getAssTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
@@ -2205,46 +2192,46 @@ public abstract class AbstractItemEffectType {
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_PLASTICITY, TFPotency.getAllPotencies());
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_WETNESS, TFPotency.getAllPotencies());
 	
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				}
 				break;
 				
 			case TF_BREASTS: case TF_BREASTS_CROTCH:
 				for(int i=0; i< BreastType.getBreastTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				
-				secondaryModPotencyMap.put(TFModifier.REMOVAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.REMOVAL, List.of(TFPotency.MINOR_BOOST));
 				
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT_SECONDARY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT_SECONDARY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
 				
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE_SECONDARY, TFPotency.getAllPotencies());
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE_TERTIARY, TFPotency.getAllPotencies());
 
 				if(primaryModifier==TFModifier.TF_BREASTS_CROTCH) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_UDDERS, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_UDDERS, List.of(TFPotency.MINOR_BOOST));
 				}
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_ROUND, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_POINTY, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_PERKY, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_SIDESET, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_WIDE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_NARROW, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_ROUND, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_POINTY, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_PERKY, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_SIDESET, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_WIDE, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_BREAST_SHAPE_NARROW, List.of(TFPotency.MINOR_BOOST));
 				
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_NIPPLE_NORMAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_NIPPLE_INVERTED, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_NIPPLE_NORMAL, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_NIPPLE_INVERTED, List.of(TFPotency.MINOR_BOOST));
 				if(Main.game.isNipplePenEnabled()) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_NIPPLE_VAGINA, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_NIPPLE_LIPS, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_NIPPLE_VAGINA, List.of(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_NIPPLE_LIPS, List.of(TFPotency.MINOR_BOOST));
 				}
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_AREOLAE_CIRCLE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_AREOLAE_HEART, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_AREOLAE_STAR, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_AREOLAE_CIRCLE, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_AREOLAE_HEART, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_AREOLAE_STAR, List.of(TFPotency.MINOR_BOOST));
 
 				if(Main.game.isNipplePenEnabled()) {
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_CAPACITY, TFPotency.getAllPotencies());
@@ -2259,16 +2246,16 @@ public abstract class AbstractItemEffectType {
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_REGENERATION, TFPotency.getAllPotencies());
 				}
 				
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				if(Main.game.isNipplePenEnabled()) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				}
 				break;
 				
 			case TF_CORE:
-				secondaryModPotencyMap.put(TFModifier.TF_TYPE_1, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_TYPE_1, List.of(TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE_SECONDARY, TFPotency.getAllPotencies());
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE_TERTIARY, TFPotency.getAllPotencies());
@@ -2276,44 +2263,44 @@ public abstract class AbstractItemEffectType {
 				if(Main.game.isPubicHairEnabled()) {
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_BODY_HAIR, TFPotency.getAllPotencies());
 				}
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_INTERNAL, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST, TFPotency.BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_INTERNAL, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST, TFPotency.BOOST));
 				break;
 				
 			case TF_EARS:
 				for(int i=0; i< EarType.getEarTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				break;
 				
 			case TF_EYES:
 				for(int i=0; i< EyeType.getEyeTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_IRIS_CIRCLE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_IRIS_VERTICAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_IRIS_HORIZONTAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_IRIS_HEART, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_IRIS_STAR, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_IRIS_CIRCLE, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_IRIS_VERTICAL, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_IRIS_HORIZONTAL, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_IRIS_HEART, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_IRIS_STAR, List.of(TFPotency.MINOR_BOOST));
 				
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_PUPIL_CIRCLE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_PUPIL_VERTICAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_PUPIL_HORIZONTAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_PUPIL_HEART, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_PUPIL_STAR, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_PUPIL_CIRCLE, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_PUPIL_VERTICAL, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_PUPIL_HORIZONTAL, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_PUPIL_HEART, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_EYE_PUPIL_STAR, List.of(TFPotency.MINOR_BOOST));
 				break;
 				
 			case TF_FACE:
 				for(int i=0; i< FaceType.getFaceTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_CAPACITY, TFPotency.getAllPotencies());
 				if(Main.game.isPenetrationLimitationsEnabled()) {
@@ -2324,12 +2311,12 @@ public abstract class AbstractItemEffectType {
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_WETNESS, TFPotency.getAllPotencies());
 
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE_SECONDARY, TFPotency.getAllPotencies());
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_RIBBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_TENTACLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_BIFURCATED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_WIDE, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_FLAT, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_STRONG, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_RIBBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_TENTACLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_BIFURCATED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_WIDE, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_FLAT, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_TONGUE_STRONG, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				
 				if(Main.game.isFacialHairEnabled()) {
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_BODY_HAIR, TFPotency.getAllPotencies());
@@ -2338,62 +2325,62 @@ public abstract class AbstractItemEffectType {
 				
 			case TF_HAIR:
 				for(int i=0; i< HairType.getHairTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
 				break;
 				
 			case TF_HORNS:
-				secondaryModPotencyMap.put(TFModifier.REMOVAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.REMOVAL, List.of(TFPotency.MINOR_BOOST));
 //				for(int i=0; i< RacialBody.valueOfRace(race).getHornTypes(true).size();i++) {
 				for(int i=0; i< HornType.getHornTypes(race, false).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT_SECONDARY, TFPotency.getAllPotencies());
 				break;
 				
 			case TF_LEGS:
 				for(int i=0; i< LegType.getLegTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				if(LegType.getLegTypes(race).stream().anyMatch(lt->lt.isLegConfigurationAvailable(LegConfiguration.BIPEDAL))) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_BIPEDAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_BIPEDAL, List.of(TFPotency.MINOR_BOOST));
 				}
 				if(LegType.getLegTypes(race).stream().anyMatch(lt->lt.isLegConfigurationAvailable(LegConfiguration.QUADRUPEDAL))) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_TAUR, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_TAUR, List.of(TFPotency.MINOR_BOOST));
 				}
 				if(LegType.getLegTypes(race).stream().anyMatch(lt->lt.isLegConfigurationAvailable(LegConfiguration.TAIL_LONG))) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_TAIL_LONG, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_TAIL_LONG, List.of(TFPotency.MINOR_BOOST));
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
 				}
 				if(LegType.getLegTypes(race).stream().anyMatch(lt->lt.isLegConfigurationAvailable(LegConfiguration.TAIL))) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_TAIL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_TAIL, List.of(TFPotency.MINOR_BOOST));
 				}
 				if(LegType.getLegTypes(race).stream().anyMatch(lt->lt.isLegConfigurationAvailable(LegConfiguration.ARACHNID))) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_ARACHNID, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_ARACHNID, List.of(TFPotency.MINOR_BOOST));
 				}
 				if(LegType.getLegTypes(race).stream().anyMatch(lt->lt.isLegConfigurationAvailable(LegConfiguration.CEPHALOPOD))) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_CEPHALOPOD, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_CEPHALOPOD, List.of(TFPotency.MINOR_BOOST));
 				}
 				if(LegType.getLegTypes(race).stream().anyMatch(lt->lt.isLegConfigurationAvailable(LegConfiguration.AVIAN))) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_AVIAN, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_LEG_CONFIG_AVIAN, List.of(TFPotency.MINOR_BOOST));
 				}
 				if(LegType.getLegTypes(race).stream().anyMatch(lt->lt.getFootType().getPermittedFootStructures(null).contains(FootStructure.PLANTIGRADE))) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_FOOT_STRUCTURE_PLANTIGRADE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_FOOT_STRUCTURE_PLANTIGRADE, List.of(TFPotency.MINOR_BOOST));
 				}
 				if(LegType.getLegTypes(race).stream().anyMatch(lt->lt.getFootType().getPermittedFootStructures(null).contains(FootStructure.DIGITIGRADE))) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_FOOT_STRUCTURE_DIGITIGRADE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_FOOT_STRUCTURE_DIGITIGRADE, List.of(TFPotency.MINOR_BOOST));
 				}
 				if(LegType.getLegTypes(race).stream().anyMatch(lt->lt.getFootType().getPermittedFootStructures(null).contains(FootStructure.UNGULIGRADE))) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_FOOT_STRUCTURE_UNGULIGRADE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_FOOT_STRUCTURE_UNGULIGRADE, List.of(TFPotency.MINOR_BOOST));
 				}
 				if(LegType.getLegTypes(race).stream().anyMatch(lt->lt.hasSpinneret())) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_CAPACITY, TFPotency.getAllPotencies());
 					if(Main.game.isPenetrationLimitationsEnabled()) {
@@ -2407,32 +2394,32 @@ public abstract class AbstractItemEffectType {
 				
 			case TF_PENIS:
 				for(int i=0; i< PenisType.getPenisTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
-				secondaryModPotencyMap.put(TFModifier.REMOVAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.REMOVAL, List.of(TFPotency.MINOR_BOOST));
 				
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE_SECONDARY, TFPotency.getAllPotencies());
 
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_BARBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_FLARED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_BLUNT, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_KNOTTED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_PREHENSILE, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_RIBBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_SHEATHED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_TAPERED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_TENTACLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_VEINY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_OVIPOSITOR, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_BARBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_FLARED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_BLUNT, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_KNOTTED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_PREHENSILE, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_RIBBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_SHEATHED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_TAPERED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_TENTACLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_VEINY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_OVIPOSITOR, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				
 				
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE_TERTIARY, TFPotency.getAllPotencies());
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_WETNESS, TFPotency.getAllPotencies());
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_REGENERATION, TFPotency.getAllPotencies());
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_CUM_EXPULSION, TFPotency.getAllPotencies());
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_INTERNAL, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_INTERNAL, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				
 				if(Main.game.isPubicHairEnabled()) {
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_BODY_HAIR, TFPotency.getAllPotencies());
@@ -2446,33 +2433,33 @@ public abstract class AbstractItemEffectType {
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_ELASTICITY, TFPotency.getAllPotencies());
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_PLASTICITY, TFPotency.getAllPotencies());
 	
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				}
 				break;
 				
 			case TF_SKIN:
 				for(int i=0; i< TorsoType.getTorsoTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				break;
 				
 			case TF_TAIL:
-				secondaryModPotencyMap.put(TFModifier.REMOVAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.REMOVAL, List.of(TFPotency.MINOR_BOOST));
 				for(int i=0; i< TailType.getTailTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE_SECONDARY, TFPotency.getAllPotencies());
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_COUNT, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 
 				if(RacialBody.valueOfRace(race).getTailType().stream().anyMatch(tt->tt.hasSpinneret())) {
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_CAPACITY, TFPotency.getAllPotencies());
 					if(Main.game.isPenetrationLimitationsEnabled()) {
@@ -2491,16 +2478,16 @@ public abstract class AbstractItemEffectType {
 				
 			case TF_VAGINA:
 				for(int i=0; i< VaginaType.getVaginaTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
-				secondaryModPotencyMap.put(TFModifier.REMOVAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.REMOVAL, List.of(TFPotency.MINOR_BOOST));
 				
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE_SECONDARY, TFPotency.getAllPotencies());
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE_TERTIARY, TFPotency.getAllPotencies());
 
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_VAGINA_SQUIRTER, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_VAGINA_EGG_LAYER, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_VAGINA_SQUIRTER, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_VAGINA_EGG_LAYER, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_CAPACITY, TFPotency.getAllPotencies());
 				if(Main.game.isPenetrationLimitationsEnabled()) {
@@ -2514,10 +2501,10 @@ public abstract class AbstractItemEffectType {
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_BODY_HAIR, TFPotency.getAllPotencies());
 				}
 				
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				
 				if(Main.getProperties().hasValue(PropertyValue.urethralContent)) {
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_CAPACITY_2, TFPotency.getAllPotencies());
@@ -2527,30 +2514,30 @@ public abstract class AbstractItemEffectType {
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_ELASTICITY_2, TFPotency.getAllPotencies());
 					secondaryModPotencyMap.put(TFModifier.TF_MOD_PLASTICITY_2, TFPotency.getAllPotencies());
 	
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY_2, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED_2, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED_2, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED_2, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_PUFFY_2, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_RIBBED_2, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_MUSCLED_2, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.TF_MOD_ORIFICE_TENTACLED_2, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				}
 
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_BARBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_FLARED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_BLUNT, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_KNOTTED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_PREHENSILE, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_RIBBED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_SHEATHED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_TAPERED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_TENTACLED, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_VEINY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_OVIPOSITOR, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_BARBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_FLARED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_BLUNT, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_KNOTTED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_PREHENSILE, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_RIBBED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_SHEATHED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_TAPERED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_TENTACLED, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_VEINY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_PENIS_OVIPOSITOR, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				
 				break;
 				
 			case TF_WINGS:
-				secondaryModPotencyMap.put(TFModifier.REMOVAL, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.REMOVAL, List.of(TFPotency.MINOR_BOOST));
 				for(int i=0; i< WingType.getWingTypes(race).size();i++) {
-					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+					secondaryModPotencyMap.put(TFModifier.valueOf("TF_TYPE_"+(i+1)), List.of(TFPotency.MINOR_BOOST));
 				}
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_SIZE, TFPotency.getAllPotencies());
 				break;
@@ -2558,43 +2545,43 @@ public abstract class AbstractItemEffectType {
 			case TF_CUM: case TF_MILK: case TF_MILK_CROTCH: case TF_GIRLCUM:
 				secondaryModPotencyMap.put(TFModifier.TF_MOD_WETNESS, TFPotency.getAllPotencies());
 				
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_ADDICTIVE, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_ALCOHOLIC, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_BUBBLING, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_HALLUCINOGENIC, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_MINERAL_OIL, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_MUSKY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_SLIMY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_STICKY, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_VISCOUS, Util.newArrayListOfValues(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_ADDICTIVE, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_ALCOHOLIC, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_BUBBLING, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_HALLUCINOGENIC, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_MINERAL_OIL, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_MUSKY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_SLIMY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_STICKY, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLUID_VISCOUS, List.of(TFPotency.MINOR_DRAIN, TFPotency.MINOR_BOOST));
 				
 
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_CUM, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_GIRLCUM, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_MILK, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_BEER, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_CHOCOLATE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_HONEY, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_MINT, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_PINEAPPLE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_BUBBLEGUM, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_STRAWBERRY, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_CHERRY, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_VANILLA, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_COFFEE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_TEA, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_MAPLE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_CINNAMON, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_LEMON, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_ORANGE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_GRAPE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_MELON, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_COCONUT, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
-				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_BLUEBERRY, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_CUM, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_GIRLCUM, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_MILK, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_BEER, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_CHOCOLATE, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_HONEY, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_MINT, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_PINEAPPLE, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_BUBBLEGUM, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_STRAWBERRY, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_CHERRY, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_VANILLA, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_COFFEE, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_TEA, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_MAPLE, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_CINNAMON, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_LEMON, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_ORANGE, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_GRAPE, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_MELON, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_COCONUT, List.of(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.TF_MOD_FLAVOUR_BLUEBERRY, List.of(TFPotency.MINOR_BOOST));
 				break;
 				
 			default:
-				secondaryModPotencyMap.put(TFModifier.NONE, Util.newArrayListOfValues(TFPotency.MINOR_BOOST));
+				secondaryModPotencyMap.put(TFModifier.NONE, List.of(TFPotency.MINOR_BOOST));
 				break;
 		}
 		
@@ -2637,8 +2624,7 @@ public abstract class AbstractItemEffectType {
 	private static int singleBoost = 1;
 	
 	private static int modifierTypeToInt(TFModifier modifier) {
-		List<TFModifier> modifierList = Util.newArrayListOfValues(
-				TFModifier.TF_TYPE_1,
+		List<TFModifier> modifierList = List.of(TFModifier.TF_TYPE_1,
 				TFModifier.TF_TYPE_2,
 				TFModifier.TF_TYPE_3,
 				TFModifier.TF_TYPE_4,

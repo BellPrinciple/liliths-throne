@@ -1006,8 +1006,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
 								Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
 								Util.newHashMapOfValues(
-										new Value<>(activeSlave, Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
+										new Value<>(activeSlave, List.of(CoverableArea.PENIS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -1023,7 +1023,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLE_SEX_ORAL")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), activeSlave, PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), activeSlave, PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 				};
 				
@@ -1038,16 +1038,15 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL_BEHIND)),
 								Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
 								Util.newHashMapOfValues(
-										new Value<>(activeSlave, Util.newArrayListOfValues(CoverableArea.ANUS, CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))),
+										new Value<>(activeSlave, List.of(CoverableArea.ANUS, CoverableArea.PENIS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
 						null,
 						null,
 						AFTER_STABLE_SEX,
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLE_SEX_ANILINGUS")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), activeSlave, TongueAnus.ANILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), activeSlave, TongueAnus.ANILINGUS_START, false, true));
 					}
 				};
 				
@@ -1065,8 +1064,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
 								Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS))),
 								Util.newHashMapOfValues(
-										new Value<>(activeSlave, Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS)))) {
+										new Value<>(activeSlave, List.of(CoverableArea.PENIS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -1082,7 +1081,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLE_SEX_MOUNTED")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(activeSlave, Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
+						return List.of(new InitialSexActionInformation(activeSlave, Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
 					}
 				};
 				
@@ -1154,7 +1153,7 @@ public class DominionExpress {
 	public static final DialogueNode AFTER_STABLE_SEX_SLEEP = new DialogueNode("", "", true, true) {
 		@Override
 		public void applyPreParsingEffects() {
-			List<SexAreaInterface> list = Util.newArrayListOfValues(SexAreaOrifice.MOUTH, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS);
+			List<SexAreaInterface> list = List.of(SexAreaOrifice.MOUTH, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS);
 			if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)) {
 				list.remove(SexAreaOrifice.MOUTH);
 				list.remove(SexAreaPenetration.TONGUE);
@@ -1238,15 +1237,15 @@ public class DominionExpress {
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
 									Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
 									Util.newHashMapOfValues(
-											new Value<>(activeSlave, Util.newArrayListOfValues(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))),
+											new Value<>(activeSlave, List.of(CoverableArea.PENIS)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
 							null,
 							null,
 							AFTER_STABLE_SEX_SLEEP_AFTER_WAKEUP_SEX,
 							UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "AFTER_STABLE_SEX_SLEEP_START_BLOWJOB", activeSlave)) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(activeSlave, Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
+							return List.of(new InitialSexActionInformation(activeSlave, Main.game.getPlayer(), PenisMouth.BLOWJOB_START, false, true));
 						}
 					};
 				}
@@ -1263,15 +1262,15 @@ public class DominionExpress {
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN)),
 									Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
 									Util.newHashMapOfValues(
-											new Value<>(activeSlave, Util.newArrayListOfValues(CoverableArea.ANUS)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))),
+											new Value<>(activeSlave, List.of(CoverableArea.ANUS)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
 							null,
 							null,
 							AFTER_STABLE_SEX_SLEEP_AFTER_WAKEUP_SEX,
 							UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "AFTER_STABLE_SEX_SLEEP_START_ANILINGUS", activeSlave)) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(activeSlave, Main.game.getPlayer(), TongueAnus.RECEIVING_ANILINGUS_START, false, true));
+							return List.of(new InitialSexActionInformation(activeSlave, Main.game.getPlayer(), TongueAnus.RECEIVING_ANILINGUS_START, false, true));
 						}
 					};
 				}
@@ -1288,15 +1287,15 @@ public class DominionExpress {
 									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
 									Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS))),
 									Util.newHashMapOfValues(
-											new Value<>(activeSlave, Util.newArrayListOfValues(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS)))),
+											new Value<>(activeSlave, List.of(CoverableArea.PENIS)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))),
 							null,
 							null,
 							AFTER_STABLE_SEX_SLEEP_AFTER_WAKEUP_SEX,
 							UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "AFTER_STABLE_SEX_SLEEP_START_MOUNTED", activeSlave)) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(activeSlave, Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
+							return List.of(new InitialSexActionInformation(activeSlave, Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
 						}
 					};
 				}
@@ -1876,8 +1875,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
+										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.PENIS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -1901,7 +1900,7 @@ public class DominionExpress {
 						+ UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_INTERVIEW_BLOWJOB_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 				};
 				
@@ -1916,8 +1915,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
+										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.PENIS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -1941,7 +1940,7 @@ public class DominionExpress {
 						+ UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_INTERVIEW_BLOWJOB_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 					@Override
 					public void effects() {
@@ -2214,8 +2213,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
 								Util.newHashMapOfValues(new Value<>(getSadistSlave(), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
 								Util.newHashMapOfValues(
-										new Value<>(getSadistSlave(), Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
+										new Value<>(getSadistSlave(), List.of(CoverableArea.PENIS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -2231,7 +2230,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_TRAINING_1_SEX_SUCK_COCK")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), getSadistSlave(), PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getSadistSlave(), PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 					@Override
 					public void effects() {
@@ -2424,8 +2423,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL_BEHIND)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.ANUS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
+										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.ANUS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -2441,7 +2440,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_TRAINING_2_MAKEUP_ANILINGUS_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), TongueAnus.ANILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), TongueAnus.ANILINGUS_START, false, true));
 					}
 				};
 			}
@@ -2577,9 +2576,9 @@ public class DominionExpress {
 										new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS)),
 										new Value<>(getSadistSlave(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(getSadistSlave(), Util.newArrayListOfValues(CoverableArea.ANUS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH, CoverableArea.ANUS)))) {
+										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.PENIS)),
+										new Value<>(getSadistSlave(), List.of(CoverableArea.ANUS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH, CoverableArea.ANUS)))) {
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -2612,8 +2611,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_TRAINING_3_FUCKED_START", getSadistSlave())) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getNpc(Natalya.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Natalya.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true),
 								new InitialSexActionInformation(Main.game.getPlayer(), getSadistSlave(), TongueAnus.ANILINGUS_START, false, true));
 					}
 				};
@@ -2648,8 +2646,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
 								Util.newHashMapOfValues(new Value<>(getSadistSlave(), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS))),
 								Util.newHashMapOfValues(
-										new Value<>(getSadistSlave(), Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS)))) {
+										new Value<>(getSadistSlave(), List.of(CoverableArea.PENIS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -2671,7 +2669,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_TRAINING_3_AFTER_SEX_ROUND_TWO", getSadistSlave())) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(getSadistSlave(), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
+						return List.of(new InitialSexActionInformation(getSadistSlave(), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
 					}
 				};
 			}
@@ -2738,7 +2736,7 @@ public class DominionExpress {
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_TRAINING_3_CHOKER_EQUIPPED_LEAVE"));
 						Main.game.getPlayer().setNearestLocation(WorldType.DOMINION_EXPRESS, PlaceType.DOMINION_EXPRESS_CORRIDOR, false);
-						Main.game.getPlayer().equipAllClothingFromHoldingInventory(Util.newArrayListOfValues(InventorySlot.NECK));
+						Main.game.getPlayer().equipAllClothingFromHoldingInventory(List.of(InventorySlot.NECK));
 						if(Main.game.getPlayer().getHoldingClothing().containsKey(InventorySlot.NECK)) {
 							Main.game.getPlayer().addClothing(Main.game.getPlayer().getHoldingClothing().get(InventorySlot.NECK), false);
 						}
@@ -2789,8 +2787,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
+										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.PENIS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -2813,7 +2811,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_FILLY_GIVE_BLOWJOB_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 					}
 				};
 			}
@@ -2843,8 +2841,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL_BEHIND)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.ANUS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH)))) {
+										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.ANUS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -2860,7 +2858,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_FILLY_GIVE_RIMJOB_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), TongueAnus.ANILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), TongueAnus.ANILINGUS_START, false, true));
 					}
 				};
 			}
@@ -2890,8 +2888,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS))),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS)))) {
+										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.PENIS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))) {
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -2920,7 +2918,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_FILLY_GET_MOUNTED_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Natalya.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getNpc(Natalya.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
 					}
 				};
 			}
@@ -2950,8 +2948,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotStanding.PERFORMING_ORAL)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS))),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.MOUTH)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))) {
+										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.MOUTH)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))) {
 							@Override
 							public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
 								return true;
@@ -2963,7 +2961,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_FILLY_RECEIVE_BLOWJOB_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), PenisMouth.BLOWJOB_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), PenisMouth.BLOWJOB_START, false, true));
 					}
 				};
 			}
@@ -2993,8 +2991,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotStanding.PERFORMING_ORAL_BEHIND)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS))),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.MOUTH)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS)))) {
+										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.MOUTH)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))) {
 							@Override
 							public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
 								return true;
@@ -3006,7 +3004,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_FILLY_RECEIVE_RIMJOB_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), TongueAnus.RECEIVING_ANILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), TongueAnus.RECEIVING_ANILINGUS_START, false, true));
 					}
 				};
 			}
@@ -3036,8 +3034,8 @@ public class DominionExpress {
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotAllFours.ALL_FOURS)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS))),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), Util.newArrayListOfValues(CoverableArea.ANUS)),
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)))) {
+										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.ANUS)),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))) {
 							@Override
 							public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
 								return true;
@@ -3049,7 +3047,7 @@ public class DominionExpress {
 						UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "OFFICE_STABLE_FILLY_MOUNT_HER_START")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), PenisAnus.PENIS_FUCKING_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Natalya.class), PenisAnus.PENIS_FUCKING_START, false, true));
 					}
 				};
 			}

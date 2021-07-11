@@ -244,7 +244,7 @@ public class BountyHunterLodge {
 							DOBERMANNS_UPSTAIRS,
 							null,
 							null,
-							Util.newArrayListOfValues(Perk.MALE_ATTRACTION, Perk.OBJECT_OF_DESIRE),
+							List.of(Perk.MALE_ATTRACTION, Perk.OBJECT_OF_DESIRE),
 							null,
 							null) {
 						@Override
@@ -291,12 +291,12 @@ public class BountyHunterLodge {
 			if(index==1) {
 				return new ResponseSex("Fuck Them",
 						"Push Wolfgang and Karl down side-by-side in the doggy-style position, ready to have some fun with them...",
-						Util.newArrayListOfValues(Fetish.FETISH_DOMINANT),
+						List.of(Fetish.FETISH_DOMINANT),
 						null, null, null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(SupplierLeader.class), Main.game.getNpc(SupplierPartner.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(SupplierLeader.class), Main.game.getNpc(SupplierPartner.class)),
 								null,
 								null,
 								ResponseTag.PREFER_DOGGY),

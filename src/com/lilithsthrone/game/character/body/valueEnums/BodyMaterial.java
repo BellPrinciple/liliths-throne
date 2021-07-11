@@ -60,8 +60,7 @@ public enum BodyMaterial {
 		}
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
-			return Util.newArrayListOfValues(
-					"<b>[style.boldBad(-75%)] base [style.colourUnarmed(unarmed damage)]</b>",
+			return List.of("<b>[style.boldBad(-75%)] base [style.colourUnarmed(unarmed damage)]</b>",
 					"<b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'>Can morph body at will</b>",
 					"<b style='color: "+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>Impregnated through any orifice</b>");
 		}

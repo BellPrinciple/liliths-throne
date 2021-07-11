@@ -645,12 +645,12 @@ public class Combat {
 						StringBuilder sb = new StringBuilder();
 						
 						sb.append(getCharactersTurnDiv(Main.game.getPlayer(), "Submit",
-								Util.newArrayListOfValues(UtilText.parse(enemyLeader,
+								List.of(UtilText.parse(enemyLeader,
 									"You kneel in front of [npc.name], lowering your head in submission as you mutter,"
 										+ " [pc.speech(I don't want to fight any more, I submit.)]"))));
 
 						sb.append(getCharactersTurnDiv(enemyLeader, "Victory",
-								Util.newArrayListOfValues(UtilText.parse(enemyLeader,
+								List.of(UtilText.parse(enemyLeader,
 									"[npc.Name] lets out a triumphant laugh, before moving forwards to take advantage of your submission..."))));
 						
 						Main.game.getTextStartStringBuilder().append(sb.toString());
@@ -808,7 +808,7 @@ public class Combat {
 					return new Response("Stunned!", "You are unable to make an action this turn!", ENEMY_ATTACK){
 						@Override
 						public void effects() {
-							combatContent.put(Main.game.getPlayer(), Util.newArrayListOfValues("You are stunned, and are unable to make a move!"));
+							combatContent.put(Main.game.getPlayer(), List.of("You are stunned, and are unable to make a move!"));
 							endCombatTurn();
 						}
 					};
@@ -820,7 +820,7 @@ public class Combat {
 					return new Response("Watch", "You have been defeated, and can only watch as your allies fight on!", ENEMY_ATTACK){
 						@Override
 						public void effects() {
-							combatContent.put(Main.game.getPlayer(), Util.newArrayListOfValues("You have been defeated, and can only watch as your allies continue the fight!"));
+							combatContent.put(Main.game.getPlayer(), List.of("You have been defeated, and can only watch as your allies continue the fight!"));
 							endCombatTurn();
 						}
 					};
@@ -994,7 +994,7 @@ public class Combat {
 						"You can cycle through your targeted allied combatant by either using this action, or clicking on their name on the right-hand side of the screen.") {
 					@Override
 					public void effects() {
-						List<GameCharacter> alliesPlusPlayer = Util.newArrayListOfValues(Main.game.getPlayer());
+						List<GameCharacter> alliesPlusPlayer = List.of(Main.game.getPlayer());
 						alliesPlusPlayer.addAll(getAllies(Main.game.getPlayer()));
 						if(alliesPlusPlayer.size()==1) {
 							return;
@@ -1213,7 +1213,7 @@ public class Combat {
 		} else {
 			escapeDescription.append("You failed to escape!");
 		}
-		escapeDescriptionMap.put(escapee, Util.newArrayListOfValues(escapeDescription.toString()));
+		escapeDescriptionMap.put(escapee, List.of(escapeDescription.toString()));
 		
 		for(GameCharacter combatant : getAllCombatants(true)) {
 			if(getAllies(escapee).contains(combatant) || combatant.equals(escapee)) {
@@ -1232,12 +1232,12 @@ public class Combat {
 				predictionContent.put(combatant, new ArrayList<>());
 				if(escaped && !combatant.equals(escapee)) {
 					escapeDescriptionMap.put(combatant,
-							Util.newArrayListOfValues(UtilText.parse(combatant, "[npc.Name] manages to escape with you!")));
+							List.of(UtilText.parse(combatant, "[npc.Name] manages to escape with you!")));
 				}
 			} else {
 				if(escaped) {
 					escapeDescriptionMap.put(combatant,
-							Util.newArrayListOfValues(UtilText.parse(combatant, "[npc.Name] tries to block your escape, but fails!")));
+							List.of(UtilText.parse(combatant, "[npc.Name] tries to block your escape, but fails!")));
 				}
 			}
 		}
@@ -1271,12 +1271,12 @@ public class Combat {
 		if(character.isPlayer()) {
 			if (!activeCombatants.contains(character)) {
 				combatContent.put(character,
-						Util.newArrayListOfValues(UtilText.parse(character, "<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>[npc.NameHasFull] been defeated!</span>")));
+						List.of(UtilText.parse(character, "<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>[npc.NameHasFull] been defeated!</span>")));
 				return false;
 				
 			} else if(attemptedEscape) {
 				combatContent.put(character,
-						Util.newArrayListOfValues(UtilText.parse(character, "<span style='color:"+PresetColour.GENERIC_MINOR_BAD.toWebHexString()+";'>You fail to escape!</span>")));
+						List.of(UtilText.parse(character, "<span style='color:"+PresetColour.GENERIC_MINOR_BAD.toWebHexString()+";'>You fail to escape!</span>")));
 				return false;
 				
 			}
@@ -1284,12 +1284,12 @@ public class Combat {
 		} else if(allies.contains(character)) {
 			if (!activeCombatants.contains(character)) {
 				combatContent.put(character,
-						Util.newArrayListOfValues(UtilText.parse(character, "<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>[npc.NameHasFull] been defeated!</span>")));
+						List.of(UtilText.parse(character, "<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>[npc.NameHasFull] been defeated!</span>")));
 				return false;
 				
 			} else if(attemptedEscape) {
 				combatContent.put(character,
-						Util.newArrayListOfValues(UtilText.parse(character, "<span style='color:"+PresetColour.GENERIC_MINOR_BAD.toWebHexString()+";'>[npc.Name] fails to escape with you!</span>")));
+						List.of(UtilText.parse(character, "<span style='color:"+PresetColour.GENERIC_MINOR_BAD.toWebHexString()+";'>[npc.Name] fails to escape with you!</span>")));
 				return false;
 				
 			}
@@ -1297,14 +1297,14 @@ public class Combat {
 		} else {
 			if (!activeCombatants.contains(character)) {
 				combatContent.put(character,
-						Util.newArrayListOfValues(UtilText.parse(character, "<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>[npc.NameHasFull] been defeated!</span>")));
+						List.of(UtilText.parse(character, "<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>[npc.NameHasFull] been defeated!</span>")));
 				return false;
 			}
 		}
 		
 		if(character.isStunned()) {
 			combatContent.put(character,
-					Util.newArrayListOfValues(UtilText.parse(character, "[npc.NameIsFull] stunned, and [npc.is] unable to make a move!")));
+					List.of(UtilText.parse(character, "[npc.NameIsFull] stunned, and [npc.is] unable to make a move!")));
 
 			character.resetSelectedMoves();
 			return false;
@@ -1398,8 +1398,7 @@ public class Combat {
 					if(!vampyres.isEmpty()) {
 						character.setMana(manaAbsorbed);
 	
-						predictionContent.put(character, Util.newArrayListOfValues(
-										UtilText.parse(character,
+						predictionContent.put(character, List.of(UtilText.parse(character,
 												"[style.boldArcane("+(Util.capitaliseSentence(Perk.ARCANE_VAMPYRISM.getName(Main.game.getPlayer())))+":)]<br/>"
 														+Util.capitaliseSentence(Util.stringsToStringList(vampyres, false))+(vampyres.size()>1 || playerVampyre?" absorb":" absorbs")
 														+" half of [npc.namePos] remaining aura,"
@@ -1408,15 +1407,15 @@ public class Combat {
 																:"[style.colourBad(")
 														+" gaining "+manaAbsorbed+" aura)]!")));
 					} else {
-						predictionContent.put(character, Util.newArrayListOfValues("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Defeated...</span>"));
+						predictionContent.put(character, List.of("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Defeated...</span>"));
 					}
 					
 				} else {
-					predictionContent.put(character, Util.newArrayListOfValues("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Defeated...</span>"));
+					predictionContent.put(character, List.of("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Defeated...</span>"));
 				}
 				
 			} else if(character.isStunned()) {
-				predictionContent.put(character, Util.newArrayListOfValues("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Stunned!</span>"));
+				predictionContent.put(character, List.of("<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Stunned!</span>"));
 				
 			} else {
 				if(character.isPlayer()) {

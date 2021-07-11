@@ -165,7 +165,7 @@ public class Lyssieth extends NPC {
 	@Override
 	public void setupPerks(boolean autoSelectPerks) {
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 1),
@@ -392,7 +392,7 @@ public class Lyssieth extends NPC {
 	
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(SALyssiethSpecials.class);
+		return List.of(SALyssiethSpecials.class);
 	}
 
 	private void setPlayerToPartialDemon() {

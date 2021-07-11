@@ -309,7 +309,7 @@ public class HarpyNestHelena {
 				
 			} else if(index==2) {
 				return new Response("Take punishment", "Offer to take Scarlett's punishment for her.", HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT,
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_MASOCHIST),
+						List.of(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_MASOCHIST),
 						CorruptionLevel.THREE_DIRTY,
 						null,
 						null,
@@ -396,7 +396,7 @@ public class HarpyNestHelena {
 				
 			} else if(index==3) {
 				return new Response("Beg for more", "Beg to be punished.", HELENAS_NEST_MAIN_QUEST_TAKE_PUNISHMENT_ENJOY,
-						Util.newArrayListOfValues(Fetish.FETISH_MASOCHIST),
+						List.of(Fetish.FETISH_MASOCHIST),
 						CorruptionLevel.THREE_DIRTY,
 						null,
 						null,
@@ -793,7 +793,7 @@ public class HarpyNestHelena {
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 											Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-											map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS));
+											map.put(Main.game.getPlayer(), List.of(CoverableArea.ANUS));
 											return map;
 										}
 									},
@@ -802,8 +802,7 @@ public class HarpyNestHelena {
 									AFTER_SCARLETT_SEX,
 									UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "START_SCARLETT_SEX")) {
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, true, true));
+									return List.of(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, true, true));
 								}
 							});
 						}
@@ -845,7 +844,7 @@ public class HarpyNestHelena {
 											@Override
 											public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 												Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-												map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA));
+												map.put(Main.game.getPlayer(), List.of(CoverableArea.VAGINA));
 												return map;
 											}
 										},
@@ -854,8 +853,7 @@ public class HarpyNestHelena {
 										AFTER_SCARLETT_SEX,
 										UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "START_SCARLETT_SEX_VAGINA")) {
 									public List<InitialSexActionInformation> getInitialSexActions() {
-										return Util.newArrayListOfValues(
-												new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, true, true));
+										return List.of(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, true, true));
 									}
 								});
 							}
@@ -896,7 +894,7 @@ public class HarpyNestHelena {
 											@Override
 											public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 												Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-												map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH));
+												map.put(Main.game.getPlayer(), List.of(CoverableArea.MOUTH));
 												return map;
 											}
 										},
@@ -905,8 +903,7 @@ public class HarpyNestHelena {
 										AFTER_SCARLETT_SEX,
 										UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "START_SCARLETT_SEX_ORAL")) {
 									public List<InitialSexActionInformation> getInitialSexActions() {
-										return Util.newArrayListOfValues(
-												new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, true, true));
+										return List.of(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisMouth.BLOWJOB_START, true, true));
 									}
 								});
 							}
@@ -1129,8 +1126,8 @@ public class HarpyNestHelena {
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH))),
+											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
 									"Scarlett's harpy followers continue to pamper her while you get started on sucking her cock..."),
 							null,
 							null,
@@ -1138,7 +1135,7 @@ public class HarpyNestHelena {
 							UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_BACK_MASSAGE_BLOWJOB")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 						}
 					};
 					
@@ -1154,8 +1151,8 @@ public class HarpyNestHelena {
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH))),
+											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
 									"Scarlett's harpy followers continue to pamper her while you get started on licking her pussy..."),
 							null,
 							null,
@@ -1163,7 +1160,7 @@ public class HarpyNestHelena {
 							UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_BACK_MASSAGE_CUNNILINGUS")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), TongueVagina.CUNNILINGUS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), TongueVagina.CUNNILINGUS_START, false, true));
 						}
 					};
 				}
@@ -1201,7 +1198,7 @@ public class HarpyNestHelena {
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaPenetration.FINGER),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.PENIS))),
+											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS))),
 									"Scarlett's harpy followers continue to pamper her while you get started on jerking off her cock..."),
 							null,
 							null,
@@ -1209,7 +1206,7 @@ public class HarpyNestHelena {
 							UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_GROOM_WINGS_HANDJOB")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), FingerPenis.COCK_MASTURBATING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), FingerPenis.COCK_MASTURBATING_START, false, true));
 						}
 					};
 					
@@ -1222,7 +1219,7 @@ public class HarpyNestHelena {
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.FINGER),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.VAGINA))),
+											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA))),
 									"Scarlett's harpy followers continue to pamper her while you get started on fingering her pussy..."),
 							null,
 							null,
@@ -1230,7 +1227,7 @@ public class HarpyNestHelena {
 							UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_GROOM_WINGS_FINGERING")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), FingerVagina.FINGERING_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), FingerVagina.FINGERING_START, false, true));
 						}
 					};
 				}
@@ -1272,8 +1269,8 @@ public class HarpyNestHelena {
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH))),
+											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
 									"Scarlett's harpy followers continue to pamper her while you get started on sucking her cock..."),
 							null,
 							null,
@@ -1281,7 +1278,7 @@ public class HarpyNestHelena {
 							UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_FOOT_MASSAGE_BLOWJOB")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 						}
 					};
 					
@@ -1297,8 +1294,8 @@ public class HarpyNestHelena {
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH))),
+											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
 									"Scarlett's harpy followers continue to pamper her while you get started on licking her pussy..."),
 							null,
 							null,
@@ -1306,7 +1303,7 @@ public class HarpyNestHelena {
 							UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_FOOT_MASSAGE_CUNNILINGUS")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), TongueVagina.CUNNILINGUS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), TongueVagina.CUNNILINGUS_START, false, true));
 						}
 					};
 				}
@@ -1326,7 +1323,7 @@ public class HarpyNestHelena {
 						getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 								new SexType(SexParticipantType.NORMAL, SexAreaPenetration.FOOT, SexAreaPenetration.PENIS),
 								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS))),
+										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS))),
 								"Scarlett's harpy followers continue to pamper her while she jerks you off using her bird-like talons..."),
 						null,
 						null,
@@ -1334,7 +1331,7 @@ public class HarpyNestHelena {
 						UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_FOOT_MASSAGE_TALONJOB")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisFeet.FOOT_JOB_DOUBLE_RECEIVING_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisFeet.FOOT_JOB_DOUBLE_RECEIVING_START, false, true));
 					}
 				};
 			}
@@ -1545,8 +1542,8 @@ public class HarpyNestHelena {
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH))),
+											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
 									""),
 							null,
 							null,
@@ -1554,7 +1551,7 @@ public class HarpyNestHelena {
 							UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_FINAL_REWARD_SEX_BLOWJOB")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisMouth.GIVING_BLOWJOB_START, false, true));
 						}
 					});
 				}
@@ -1572,8 +1569,8 @@ public class HarpyNestHelena {
 								getScarlettSexManager(SexPosition.ALL_FOURS, SexSlotAllFours.BEHIND, SexSlotAllFours.ALL_FOURS,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.ANUS))),
+												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS))),
 										""),
 								null,
 								null,
@@ -1581,7 +1578,7 @@ public class HarpyNestHelena {
 								UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_FINAL_REWARD_SEX_ANAL")) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true));
 							}
 						});
 					}
@@ -1600,8 +1597,8 @@ public class HarpyNestHelena {
 								getScarlettSexManager(SexPosition.ALL_FOURS, SexSlotAllFours.BEHIND, SexSlotAllFours.ALL_FOURS,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.PENIS)),
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA))),
+												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA))),
 										""),
 								null,
 								null,
@@ -1609,7 +1606,7 @@ public class HarpyNestHelena {
 								UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_FINAL_REWARD_SEX_VAGINAL")) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true));
 							}
 						});
 					}
@@ -1628,8 +1625,8 @@ public class HarpyNestHelena {
 							getScarlettSexManager(SexPosition.LYING_DOWN, SexSlotLyingDown.FACE_SITTING, SexSlotLyingDown.LYING_DOWN,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
 									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH))),
+											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
+											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
 									""),
 							null,
 							null,
@@ -1637,7 +1634,7 @@ public class HarpyNestHelena {
 							UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_FINAL_REWARD_SEX_CUNNILINGUS")) {
 						@Override
 						public List<InitialSexActionInformation> getInitialSexActions() {
-							return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), TongueVagina.CUNNILINGUS_START, false, true));
+							return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), TongueVagina.CUNNILINGUS_START, false, true));
 						}
 					});
 				}
@@ -1658,8 +1655,8 @@ public class HarpyNestHelena {
 								getScarlettSexManager(SexPosition.LYING_DOWN, SexSlotLyingDown.SCISSORING, SexSlotLyingDown.LYING_DOWN,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.CLIT, SexAreaPenetration.CLIT),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA))),
+												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA))),
 										""),
 								null,
 								null,
@@ -1667,7 +1664,7 @@ public class HarpyNestHelena {
 								UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_FINAL_REWARD_SCISSORING")) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), ClitClit.TRIBBING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getNpc(Scarlett.class), Main.game.getPlayer(), ClitClit.TRIBBING_START, false, true));
 							}
 						});
 					}
@@ -1686,8 +1683,8 @@ public class HarpyNestHelena {
 								getScarlettSexManager(SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.MISSIONARY,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS))),
+												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
+												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS))),
 										""),
 								null,
 								null,
@@ -1695,7 +1692,7 @@ public class HarpyNestHelena {
 								UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_FINAL_REWARD_SEX_FUCK_HER")) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisVagina.PENIS_FUCKING_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisVagina.PENIS_FUCKING_START, false, true));
 							}
 						});
 					}
@@ -1717,8 +1714,8 @@ public class HarpyNestHelena {
 									getScarlettSexManager(SexPosition.ALL_FOURS, SexSlotAllFours.ALL_FOURS, SexSlotAllFours.BEHIND,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
 											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.ANUS)),
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS))),
+													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.ANUS)),
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS))),
 											""),
 									null,
 									null,
@@ -1726,7 +1723,7 @@ public class HarpyNestHelena {
 									UtilText.parseFromXMLFile("places/dominion/harpyNests/helena", "HELENAS_NEST_SCARLETTS_SERVANT_FINAL_REWARD_SEX_FUCK_HER_ASS")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisAnus.PENIS_FUCKING_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), Main.game.getNpc(Scarlett.class), PenisAnus.PENIS_FUCKING_START, false, true));
 								}
 							});
 						}

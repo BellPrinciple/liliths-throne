@@ -64,7 +64,7 @@ public class PixShower {
 
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
-			return Util.newArrayListOfValues(Fetish.FETISH_DENIAL);
+			return List.of(Fetish.FETISH_DENIAL);
 		}
 	};
 	
@@ -106,7 +106,7 @@ public class PixShower {
 		
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
-			return Util.newArrayListOfValues(Fetish.FETISH_DENIAL);
+			return List.of(Fetish.FETISH_DENIAL);
 		}
 	};
 	
@@ -149,7 +149,7 @@ public class PixShower {
 		
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
-			return Util.newArrayListOfValues(Fetish.FETISH_DENIAL);
+			return List.of(Fetish.FETISH_DENIAL);
 		}
 	};
 	
@@ -190,7 +190,7 @@ public class PixShower {
 
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
-			return Util.newArrayListOfValues(Fetish.FETISH_DENIAL);
+			return List.of(Fetish.FETISH_DENIAL);
 		}
 	};
 	
@@ -237,9 +237,9 @@ public class PixShower {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE);
+				return List.of(Fetish.FETISH_SUBMISSIVE);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_DOMINANT);
+				return List.of(Fetish.FETISH_DOMINANT);
 			}
 		}
 	};
@@ -282,9 +282,9 @@ public class PixShower {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE);
+				return List.of(Fetish.FETISH_SUBMISSIVE);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_DOMINANT);
+				return List.of(Fetish.FETISH_DOMINANT);
 			}
 		}
 	};
@@ -476,9 +476,9 @@ public class PixShower {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BREASTS_SELF);
+				return List.of(Fetish.FETISH_BREASTS_SELF);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_BREASTS_OTHERS);
+				return List.of(Fetish.FETISH_BREASTS_OTHERS);
 			}
 		}
 		
@@ -646,9 +646,9 @@ public class PixShower {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE);
+				return List.of(Fetish.FETISH_SUBMISSIVE);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_DOMINANT);
+				return List.of(Fetish.FETISH_DOMINANT);
 			}
 		}
 	};
@@ -975,9 +975,9 @@ public class PixShower {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_DENIAL_SELF);
+				return List.of(Fetish.FETISH_DENIAL_SELF);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_DENIAL);
+				return List.of(Fetish.FETISH_DENIAL);
 			}
 		}
 	};

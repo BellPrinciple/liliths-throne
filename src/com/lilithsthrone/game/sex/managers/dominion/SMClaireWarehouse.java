@@ -31,8 +31,7 @@ public class SMClaireWarehouse extends SexManagerDefault {
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		return Util.newArrayListOfValues(
-				SexPosition.AGAINST_WALL);
+		return List.of(SexPosition.AGAINST_WALL);
 	}
 	
 	@Override

@@ -107,7 +107,7 @@ public class SupplierPartner extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_DIRTY_MINDED);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 3),
 						new Value<>(PerkCategory.LUST, 0),
@@ -291,7 +291,7 @@ public class SupplierPartner extends NPC {
 	}
 
 	public List<AbstractCoreItem> getLootItems() {
-		return Util.newArrayListOfValues(Main.game.getItemGen().generateItem("innoxia_race_dog_canine_crush"));
+		return List.of(Main.game.getItemGen().generateItem("innoxia_race_dog_canine_crush"));
 	}
 
 	// Sex:

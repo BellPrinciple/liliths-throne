@@ -24,114 +24,114 @@ public class NippleType {
 
 	public static AbstractNippleType HUMAN = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.HUMAN,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType ANGEL = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.ANGEL,
-			Util.newArrayListOfValues("perfect", "flawless"),
-			Util.newArrayListOfValues("perfect", "flawless"),
-			Util.newArrayListOfValues()){
+			List.of("perfect", "flawless"),
+			List.of("perfect", "flawless"),
+			List.of()){
 	};
 
 	public static AbstractNippleType DEMON = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.DEMON,
-			Util.newArrayListOfValues("perfect", "flawless"),
-			Util.newArrayListOfValues("perfect", "flawless"),
-			Util.newArrayListOfValues()){
+			List.of("perfect", "flawless"),
+			List.of("perfect", "flawless"),
+			List.of()){
 	};
 
 	public static AbstractNippleType DOG_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.DOG_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType WOLF_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.WOLF_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType FOX_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.FOX_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType CAT_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.CAT_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType COW_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.COW_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType SQUIRREL_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.SQUIRREL_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType RAT_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.RAT_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType BAT_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.BAT_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType RABBIT_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.RABBIT_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType ALLIGATOR_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.ALLIGATOR_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType HORSE_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.HORSE_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType REINDEER_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.REINDEER_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	public static AbstractNippleType HARPY = new AbstractNippleType(BodyCoveringType.NIPPLES,
 			Race.HARPY,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
+			List.of(""),
+			List.of(""),
+			List.of()){
 	};
 
 	

@@ -117,7 +117,7 @@ public class ZaranixMaidKelly extends NPC {
 	@Override
 	public void setupPerks(boolean autoSelectPerks) {
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(),
+				List.of(),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 5),
@@ -367,8 +367,8 @@ public class ZaranixMaidKelly extends NPC {
 				return new ResponseSex("Use Kelly", "Have some fun with the horny maid.",
 						true, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKelly.class)),
+								List.of(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(ZaranixMaidKelly.class)),
 						null,
 						null), AFTER_SEX_VICTORY, "<p>"
 							+ "It doesn't look like any of the other maids of the household will interrupt you, so you decide to take this opportunity to have a little fun with Kelly."
@@ -383,11 +383,11 @@ public class ZaranixMaidKelly extends NPC {
 			} else if(index==3) {
 				return new ResponseSex("Submit",
 						"You can't bring yourself to take the dominant role, but you <i>do</i> want to have sex with Kelly. Perhaps if you submitted, she'd be willing to fuck you?",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
+						List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKelly.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(ZaranixMaidKelly.class)),
+								List.of(Main.game.getPlayer()),
 						null,
 						null), AFTER_SEX_VICTORY, "<p>"
 							+ "Not willing to take the dominant role, but with a deep desire to have sex with the horny succubus, you walk up to where Kelly's collapsed against the wall, and sigh,"
@@ -490,8 +490,8 @@ public class ZaranixMaidKelly extends NPC {
 				return new ResponseSex("Used", "Kelly uses you.",
 						false, false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getNpc(ZaranixMaidKelly.class)),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(Main.game.getNpc(ZaranixMaidKelly.class)),
+								List.of(Main.game.getPlayer()),
 								null,
 								null),
 						AFTER_SEX_DEFEAT,

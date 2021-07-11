@@ -111,8 +111,7 @@ public class Kazik extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_MEGA_SLUT);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(
-						Perk.CLOTHING_ENCHANTER),
+				List.of(Perk.CLOTHING_ENCHANTER),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 0),
@@ -267,7 +266,7 @@ public class Kazik extends NPC {
 		clearNonEquippedInventory(false);
 
 		List<AbstractClothingType> clothingTypesToSell = new ArrayList<>();
-		List<InventorySlot> extraSlots = Util.newArrayListOfValues(InventorySlot.NECK, InventorySlot.WRIST, InventorySlot.FINGER, InventorySlot.ANKLE);
+		List<InventorySlot> extraSlots = List.of(InventorySlot.NECK, InventorySlot.WRIST, InventorySlot.FINGER, InventorySlot.ANKLE);
 		
 		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
 			if((clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_KATE) || (clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN) && extraSlots.contains(clothing.getEquipSlots().get(0))))
@@ -331,7 +330,7 @@ public class Kazik extends NPC {
 
 	@Override
 	public boolean willBuy(AbstractCoreItem item) {
-		List<InventorySlot> extraSlots = Util.newArrayListOfValues(InventorySlot.NECK, InventorySlot.WRIST, InventorySlot.FINGER, InventorySlot.ANKLE);
+		List<InventorySlot> extraSlots = List.of(InventorySlot.NECK, InventorySlot.WRIST, InventorySlot.FINGER, InventorySlot.ANKLE);
 		
 		return (item instanceof AbstractClothing)
 				&& (((AbstractClothing)item).getClothingType().getDefaultItemTags().contains(ItemTag.SOLD_BY_KATE)

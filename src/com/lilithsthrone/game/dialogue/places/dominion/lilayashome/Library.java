@@ -52,7 +52,7 @@ public class Library {
 		Set<AbstractSubspecies> aisleSubspecies = new HashSet<>();
 
 		for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
-			List<WorldRegion> mostCommonRegion = Util.newArrayListOfValues(WorldRegion.DOMINION);
+			List<WorldRegion> mostCommonRegion = List.of(WorldRegion.DOMINION);
 			SubspeciesSpawnRarity highestRarity = SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE;
 			for(Entry<WorldRegion, SubspeciesSpawnRarity> entry : subspecies.getRegionLocations().entrySet()) {
 				if(entry.getValue().getChanceMultiplier()>=highestRarity.getChanceMultiplier()) {

@@ -43,8 +43,8 @@ public class SMScarlettShopOral extends SexManagerDefault {
 	@Override
 	public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 		Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-		map.put(Main.game.getNpc(Scarlett.class), Util.newArrayListOfValues(CoverableArea.VAGINA));
-		map.put(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.MOUTH));
+		map.put(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA));
+		map.put(Main.game.getPlayer(), List.of(CoverableArea.MOUTH));
 		return map;
 	}
 

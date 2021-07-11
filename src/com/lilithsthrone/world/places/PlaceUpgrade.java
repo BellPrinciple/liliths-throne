@@ -1120,30 +1120,27 @@ public class PlaceUpgrade {
 	
 	
 	static {
-		coreRoomUpgrades = new ArrayList<>(Util.newArrayListOfValues(
-				PlaceUpgrade.LILAYA_GUEST_ROOM,
+		coreRoomUpgrades = new ArrayList<>(List.of(PlaceUpgrade.LILAYA_GUEST_ROOM,
 				PlaceUpgrade.LILAYA_SPA,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOUBLE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_QUADRUPLE,
 
 				PlaceUpgrade.LILAYA_OFFICE,
 				PlaceUpgrade.LILAYA_MILKING_ROOM,
-				
+
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM));
 
-		guestRoomUpgrades = new ArrayList<>(Util.newArrayListOfValues(
-				PlaceUpgrade.LILAYA_EMPTY_ROOM));
+		guestRoomUpgrades = new ArrayList<>(List.of(PlaceUpgrade.LILAYA_EMPTY_ROOM));
 				
 				
-		slaveQuartersUpgradesSingle = new ArrayList<>(Util.newArrayListOfValues(
-				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
+		slaveQuartersUpgradesSingle = new ArrayList<>(List.of(PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_UPGRADE_BED,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOWNGRADE_BED,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ARCANE_INSTRUMENTS,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_OBEDIENCE_TRAINER,
 
@@ -1152,13 +1149,12 @@ public class PlaceUpgrade {
 				PlaceUpgrade.LILAYA_EMPTY_ROOM,
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM));
 		
-		slaveQuartersUpgradesDouble = new ArrayList<>(Util.newArrayListOfValues(
-				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
+		slaveQuartersUpgradesDouble = new ArrayList<>(List.of(PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_UPGRADE_BED,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOWNGRADE_BED,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ARCANE_INSTRUMENTS,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_OBEDIENCE_TRAINER,
 
@@ -1166,41 +1162,34 @@ public class PlaceUpgrade {
 				PlaceUpgrade.LILAYA_EMPTY_ROOM,
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM));
 		
-		slaveQuartersUpgradesQuadruple = new ArrayList<>(Util.newArrayListOfValues(
-				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
+		slaveQuartersUpgradesQuadruple = new ArrayList<>(List.of(PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_UPGRADE_BED,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOWNGRADE_BED,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ARCANE_INSTRUMENTS,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_OBEDIENCE_TRAINER,
-				
+
 				PlaceUpgrade.LILAYA_EMPTY_ROOM,
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM));
 		
-		milkingRoomUpgrades = new ArrayList<>(Util.newArrayListOfValues(
-				PlaceUpgrade.LILAYA_MILKING_ROOM_ARTISAN_MILKERS,
+		milkingRoomUpgrades = new ArrayList<>(List.of(PlaceUpgrade.LILAYA_MILKING_ROOM_ARTISAN_MILKERS,
 				PlaceUpgrade.LILAYA_MILKING_ROOM_INDUSTRIAL_MILKERS,
 
 				PlaceUpgrade.LILAYA_MILKING_ROOM_MILK_EFFICIENCY,
 				PlaceUpgrade.LILAYA_MILKING_ROOM_CUM_EFFICIENCY,
 				PlaceUpgrade.LILAYA_MILKING_ROOM_GIRLCUM_EFFICIENCY,
-				
+
 				PlaceUpgrade.LILAYA_EMPTY_ROOM));
 		
-		officeUpgrades = new ArrayList<>(Util.newArrayListOfValues(
-				PlaceUpgrade.LILAYA_OFFICE_EXECUTIVE_UPGRADE,
+		officeUpgrades = new ArrayList<>(List.of(PlaceUpgrade.LILAYA_OFFICE_EXECUTIVE_UPGRADE,
 				PlaceUpgrade.LILAYA_OFFICE_COFFEE_MACHINE,
 				PlaceUpgrade.LILAYA_OFFICE_PARTITIONING_WALLS,
-				
+
 				PlaceUpgrade.LILAYA_EMPTY_ROOM));
 		
-		spaUpgrades = new ArrayList<>(Util.newArrayListOfValues(
-				//TODO
-//				PlaceUpgrade.LILAYA_SPA_SAUNA,
-//				PlaceUpgrade.LILAYA_SPA_POOL,
-				PlaceUpgrade.LILAYA_SPA_BAR));
+		spaUpgrades = new ArrayList<>(List.of(PlaceUpgrade.LILAYA_SPA_BAR));
 	}
 	
 

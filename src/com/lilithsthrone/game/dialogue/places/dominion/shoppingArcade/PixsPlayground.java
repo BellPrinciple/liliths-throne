@@ -620,8 +620,7 @@ public class PixsPlayground {
 								}
 								@Override
 								public List<AbstractSexPosition> getAllowedSexPositions() {
-									return Util.newArrayListOfValues(
-											SexPosition.AGAINST_WALL);
+									return List.of(SexPosition.AGAINST_WALL);
 								}
 							},
 							null,

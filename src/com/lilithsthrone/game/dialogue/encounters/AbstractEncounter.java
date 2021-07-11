@@ -394,15 +394,13 @@ public abstract class AbstractEncounter {
 			}
 			// exposure: 50% or 75% boost
 			if(!Collections.disjoint(
-					Util.newArrayListOfValues(
-						StatusEffect.EXPOSED_PLUS_BREASTS,
+					List.of(StatusEffect.EXPOSED_PLUS_BREASTS,
 						StatusEffect.FETISH_EXHIBITIONIST_PLUS_BREASTS),
 					Main.game.getPlayer().getStatusEffects())) {
 				opportunisticMultiplier += 0.75f;
 				
 			} else if(!Collections.disjoint(
-					Util.newArrayListOfValues(
-						StatusEffect.EXPOSED,
+					List.of(StatusEffect.EXPOSED,
 						StatusEffect.EXPOSED_BREASTS,
 						StatusEffect.FETISH_EXHIBITIONIST,
 						StatusEffect.FETISH_EXHIBITIONIST_BREASTS),
@@ -411,8 +409,7 @@ public abstract class AbstractEncounter {
 			}
 			// drunk: 50% boost
 			if(!Collections.disjoint(
-					Util.newArrayListOfValues(
-						StatusEffect.DRUNK_3,
+					List.of(StatusEffect.DRUNK_3,
 						StatusEffect.DRUNK_4,
 						StatusEffect.DRUNK_5),
 					Main.game.getPlayer().getStatusEffects())) {

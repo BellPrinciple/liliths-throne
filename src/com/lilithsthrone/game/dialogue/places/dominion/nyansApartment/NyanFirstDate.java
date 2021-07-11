@@ -563,11 +563,9 @@ public class NyanFirstDate {
 				};
 				
 			} else if(index==4) {
-				if(!Util.newArrayListOfValues(
-						Occupation.CHEF,
+				if(!List.of(Occupation.CHEF,
 						Occupation.MUSICIAN,
-						Occupation.ARISTOCRAT
-						).contains(Main.game.getPlayer().getOccupation())) {
+						Occupation.ARISTOCRAT).contains(Main.game.getPlayer().getOccupation())) {
 					return new Response("Occupation", "You do not have a suitable occupation for impressing [nyanmum.name]...", null);
 				}
 				return new Response("Occupation",
@@ -965,8 +963,7 @@ public class NyanFirstDate {
 						UtilText.parseFromXMLFile("places/dominion/nyansApartment/firstDate", "POST_DATE_APARTMENT_BEDROOM_KISS_CUNNILINGUS")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true));
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true));
 					}
 				};
 				
@@ -995,8 +992,7 @@ public class NyanFirstDate {
 						UtilText.parseFromXMLFile("places/dominion/nyansApartment/firstDate", "POST_DATE_APARTMENT_BEDROOM_KISS_FINGERING")) {
 					@Override
 					public List<InitialSexActionInformation> getInitialSexActions() {
-						return Util.newArrayListOfValues(
-								new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueMouth.KISS_START, false, true),
+						return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueMouth.KISS_START, false, true),
 								new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), FingerVagina.FINGERING_START, false, true));
 					}
 				};
@@ -1046,8 +1042,8 @@ public class NyanFirstDate {
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)),
-													new Value<>(getNyan(), Util.newArrayListOfValues(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)),
+													new Value<>(getNyan(), List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
 										}
 									},
 									null,
@@ -1056,8 +1052,7 @@ public class NyanFirstDate {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/firstDate", "POST_DATE_APARTMENT_BEDROOM_POST_SEX_SIXTY_NINE_BLOWJOB")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true),
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true),
 											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), PenisMouth.BLOWJOB_START, false, true));
 								}
 							});
@@ -1088,8 +1083,8 @@ public class NyanFirstDate {
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-													new Value<>(getNyan(), Util.newArrayListOfValues(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)),
+													new Value<>(getNyan(), List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
 										}
 									},
 									null,
@@ -1098,8 +1093,7 @@ public class NyanFirstDate {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/firstDate", "POST_DATE_APARTMENT_BEDROOM_POST_SEX_SIXTY_NINE_CUNNILINGUS")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true),
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true),
 											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 								}
 							});
@@ -1130,8 +1124,8 @@ public class NyanFirstDate {
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.PENIS)),
-													new Value<>(getNyan(), Util.newArrayListOfValues(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)),
+													new Value<>(getNyan(), List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
 										}
 									},
 									null,
@@ -1140,8 +1134,7 @@ public class NyanFirstDate {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/firstDate", "POST_DATE_APARTMENT_BEDROOM_POST_SEX_BLOWJOB")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), PenisMouth.BLOWJOB_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), PenisMouth.BLOWJOB_START, false, true));
 								}
 							});
 				}
@@ -1170,8 +1163,8 @@ public class NyanFirstDate {
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), Util.newArrayListOfValues(CoverableArea.VAGINA)),
-													new Value<>(getNyan(), Util.newArrayListOfValues(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
+													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)),
+													new Value<>(getNyan(), List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
 										}
 									},
 									null,
@@ -1180,8 +1173,7 @@ public class NyanFirstDate {
 									UtilText.parseFromXMLFile("places/dominion/nyansApartment/firstDate", "POST_DATE_APARTMENT_BEDROOM_POST_SEX_CUNNILINGUS")) {
 								@Override
 								public List<InitialSexActionInformation> getInitialSexActions() {
-									return Util.newArrayListOfValues(
-											new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
+									return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.RECEIVING_CUNNILINGUS_START, false, true));
 								}
 							});
 				}
@@ -1214,7 +1206,7 @@ public class NyanFirstDate {
 									@Override
 									public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 										return Util.newHashMapOfValues(
-												new Value<>(getNyan(), Util.newArrayListOfValues(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
+												new Value<>(getNyan(), List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
 									}
 								},
 								null,
@@ -1223,8 +1215,7 @@ public class NyanFirstDate {
 								UtilText.parseFromXMLFile("places/dominion/nyansApartment/firstDate", "POST_DATE_APARTMENT_BEDROOM_POST_SEX_FACE_SITTING")) {
 							@Override
 							public List<InitialSexActionInformation> getInitialSexActions() {
-								return Util.newArrayListOfValues(
-										new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true));
+								return List.of(new InitialSexActionInformation(Main.game.getPlayer(), getNyan(), TongueVagina.CUNNILINGUS_START, false, true));
 							}
 						};
 			

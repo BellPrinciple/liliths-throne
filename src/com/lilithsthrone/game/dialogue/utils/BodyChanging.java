@@ -244,7 +244,7 @@ public class BodyChanging {
 	private static final List<AbstractRace> allRaces = new ArrayList<>(Race.getAllRaces());
 
 	private static List<AbstractRace> getFaceSkinDemonRaces() {
-		List<AbstractRace> faceSkinOptions = Util.newArrayListOfValues();
+		List<AbstractRace> faceSkinOptions = List.of();
 		GameCharacter target = BodyChanging.getTarget();
 		
 		if(target.isElemental()) {
@@ -273,7 +273,7 @@ public class BodyChanging {
 	}
 	
 	private static List<AbstractRace> getArmLegDemonRaces() {
-		List<AbstractRace> armLegOptions = Util.newArrayListOfValues();
+		List<AbstractRace> armLegOptions = List.of();
 		GameCharacter target = BodyChanging.getTarget();
 		
 		if(target.isElemental()) {
@@ -304,7 +304,7 @@ public class BodyChanging {
 	 * @return List of races available to the target.
 	 */
 	private static List<AbstractRace> getMinorPartsDemonRaces(boolean isHalfSpeciesReplacement) {
-		List<AbstractRace> minorPartsOptions = Util.newArrayListOfValues();
+		List<AbstractRace> minorPartsOptions = List.of();
 		GameCharacter target = BodyChanging.getTarget();
 		
 		if(target.isElemental()) {
@@ -642,7 +642,7 @@ public class BodyChanging {
 											?allRaces
 											:(removeNoneFromTailChoices()||isSelfTFMenu()
 												?getMinorPartsDemonRaces(true)
-												:Util.newArrayListOfValues(Race.DEMON))),
+												:List.of(Race.DEMON))),
 									removeNoneFromTailChoices())
 							+ CharacterModificationUtils.getSelfTransformTailLengthDiv()
 							+"</div>"
@@ -665,7 +665,7 @@ public class BodyChanging {
 										(getTarget().isElemental())
 											?allRaces
 											:(!removeNoneFromWingChoices()
-												?Util.newArrayListOfValues(Race.DEMON)
+												?List.of(Race.DEMON)
 												:getMinorPartsDemonRaces(true)),
 										removeNoneFromWingChoices())
 									+ CharacterModificationUtils.getSelfTransformWingSizeDiv()
@@ -1194,7 +1194,7 @@ public class BodyChanging {
 							+ CharacterModificationUtils.getSelfTransformHornChoiceDiv(
 							(getTarget().isElemental())
 									?allRaces
-									:Util.mergeLists(getMinorPartsDemonRaces(true), Util.newArrayListOfValues(Race.NONE, Race.DEMON)))
+									:Util.mergeLists(getMinorPartsDemonRaces(true), List.of(Race.NONE, Race.DEMON)))
 							+ CharacterModificationUtils.getSelfTransformHornSizeDiv()
 							+"</div>"
 

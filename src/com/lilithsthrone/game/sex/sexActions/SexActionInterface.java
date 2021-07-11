@@ -478,7 +478,7 @@ public interface SexActionInterface {
 		try { // Wrap in try/catch block as some sex actions may make calls to ongoing actions that aren't ongoing yet
 			footAllowed = Main.game.isFootContentEnabled()
 					|| Collections.disjoint(Util.mergeLists(this.getFetishes(Main.sex.getCharacterPerformingAction()), this.getFetishesForTargetedPartner(Main.sex.getCharacterPerformingAction())),
-						Util.newArrayListOfValues(Fetish.FETISH_FOOT_GIVING, Fetish.FETISH_FOOT_RECEIVING));
+						List.of(Fetish.FETISH_FOOT_GIVING, Fetish.FETISH_FOOT_RECEIVING));
 		} catch(Exception ex) {
 		}
 		
@@ -1576,8 +1576,7 @@ public interface SexActionInterface {
 		return false;
 	}
 
-	static List<SexAreaInterface> prohibitedNonBipedFingerSelfAreas = Util.newArrayListOfValues(
-			SexAreaPenetration.CLIT,
+	static List<SexAreaInterface> prohibitedNonBipedFingerSelfAreas = List.of(SexAreaPenetration.CLIT,
 			SexAreaPenetration.PENIS,
 			SexAreaOrifice.ANUS,
 			SexAreaOrifice.ASS,

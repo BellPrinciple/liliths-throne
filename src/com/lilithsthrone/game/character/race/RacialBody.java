@@ -66,7 +66,7 @@ import com.lilithsthrone.utils.Util;
 public class RacialBody {
 	
 	public static AbstractRacialBody HUMAN = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.HUMAN, 1,
 			AssType.HUMAN, AssSize.TWO_SMALL, AssSize.FOUR_LARGE, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.HUMAN, BreastShape.getNonUdderBreastShapes(),
@@ -87,17 +87,17 @@ public class RacialBody {
 			TorsoType.HUMAN,
 			BodyMaterial.FLESH,
 			BodyCoveringType.BODY_HAIR_HUMAN,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 			PenisType.HUMAN, 15, PenetrationGirth.THREE_AVERAGE, TesticleSize.TWO_AVERAGE, 2, CumProduction.THREE_AVERAGE,
-			Util.newArrayListOfValues(TailType.NONE),
+			List.of(TailType.NONE),
 			TentacleType.NONE,
 			VaginaType.HUMAN, Wetness.TWO_MOIST, Capacity.TWO_TIGHT, OrificeDepth.TWO_AVERAGE, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 	};
 
 	public static AbstractRacialBody ANGEL = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.ANGEL, 1,
 			AssType.ANGEL, AssSize.TWO_SMALL, AssSize.TWO_SMALL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.ANGEL, BreastShape.getNonUdderBreastShapes(),
@@ -118,12 +118,12 @@ public class RacialBody {
 			TorsoType.ANGEL,
 			BodyMaterial.FLESH,
 			BodyCoveringType.BODY_HAIR_ANGEL,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 			PenisType.ANGEL, 13, PenetrationGirth.THREE_AVERAGE,TesticleSize.FOUR_HUGE, 2, CumProduction.SEVEN_MONSTROUS,
-			Util.newArrayListOfValues(TailType.NONE),
+			List.of(TailType.NONE),
 			TentacleType.NONE,
 			VaginaType.ANGEL,Wetness.ONE_SLIGHTLY_MOIST,Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.SEVEN_ELASTIC, OrificePlasticity.ZERO_RUBBERY,
-			Util.newArrayListOfValues(WingType.ANGEL), WingSize.THREE_LARGE, WingSize.THREE_LARGE,
+			List.of(WingType.ANGEL), WingSize.THREE_LARGE, WingSize.THREE_LARGE,
 			GenitalArrangement.NORMAL) {
 		@Override
 		public Map<PersonalityTrait, Float> getPersonalityTraitChances() {
@@ -152,7 +152,7 @@ public class RacialBody {
 	};
 
 	public static AbstractRacialBody DEMON = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.DEMON_COMMON, 1,
 			AssType.DEMON_COMMON, AssSize.TWO_SMALL, AssSize.FOUR_LARGE, Wetness.FOUR_SLIMY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.FOUR_DEEP, OrificeElasticity.SEVEN_ELASTIC, OrificePlasticity.ZERO_RUBBERY,
 			BreastType.DEMON_COMMON, BreastShape.getNonUdderBreastShapes(),
@@ -173,12 +173,12 @@ public class RacialBody {
 			TorsoType.DEMON_COMMON,
 			BodyMaterial.FLESH,
 			BodyCoveringType.BODY_HAIR_DEMON,
-			HornLength.ONE_SMALL, HornLength.TWO_LONG, Util.newArrayListOfValues(HornType.CURLED, HornType.SPIRAL, HornType.SWEPT_BACK, HornType.CURVED, HornType.STRAIGHT),
+			HornLength.ONE_SMALL, HornLength.TWO_LONG, List.of(HornType.CURLED, HornType.SPIRAL, HornType.SWEPT_BACK, HornType.CURVED, HornType.STRAIGHT),
 			PenisType.DEMON_COMMON, 25, PenetrationGirth.FOUR_GIRTHY, TesticleSize.FOUR_HUGE, 2, CumProduction.SIX_EXTREME,
-			Util.newArrayListOfValues(TailType.DEMON_COMMON, TailType.DEMON_HAIR_TIP, TailType.DEMON_HORSE),
+			List.of(TailType.DEMON_COMMON, TailType.DEMON_HAIR_TIP, TailType.DEMON_HORSE),
 			TentacleType.NONE, 
 			VaginaType.DEMON_COMMON, Wetness.SEVEN_DROOLING, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.FOUR_DEEP, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.SEVEN_ELASTIC, OrificePlasticity.ZERO_RUBBERY,
-			Util.newArrayListOfValues(WingType.DEMON_COMMON, WingType.DEMON_FEATHERED), WingSize.THREE_LARGE, WingSize.THREE_LARGE,
+			List.of(WingType.DEMON_COMMON, WingType.DEMON_FEATHERED), WingSize.THREE_LARGE, WingSize.THREE_LARGE,
 			GenitalArrangement.NORMAL) {
 		@Override
 		public Map<PersonalityTrait, Float> getPersonalityTraitChances() {
@@ -202,7 +202,7 @@ public class RacialBody {
 	};
 	
 	public static AbstractRacialBody COW_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.COW_MORPH, 1,
 			AssType.COW_MORPH, AssSize.TWO_SMALL, AssSize.FIVE_HUGE, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.THREE_SPACIOUS, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.COW_MORPH, BreastShape.getNonUdderBreastShapes(),
@@ -223,17 +223,17 @@ public class RacialBody {
 			TorsoType.COW_MORPH,
 			BodyMaterial.FLESH,
 			BodyCoveringType.BODY_HAIR_BOVINE_FUR,
-			HornLength.TWO_LONG, HornLength.ONE_SMALL, Util.newArrayListOfValues(HornType.CURVED, HornType.STRAIGHT),
+			HornLength.TWO_LONG, HornLength.ONE_SMALL, List.of(HornType.CURVED, HornType.STRAIGHT),
 			PenisType.COW_MORPH, 18, PenetrationGirth.FOUR_GIRTHY, TesticleSize.THREE_LARGE, 2, CumProduction.FOUR_LARGE,
-			Util.newArrayListOfValues(TailType.COW_MORPH),
+			List.of(TailType.COW_MORPH),
 			TentacleType.NONE,
 			VaginaType.COW_MORPH, Wetness.THREE_WET, Capacity.TWO_TIGHT, OrificeDepth.THREE_SPACIOUS, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 	};
 	
 	public static AbstractRacialBody DOG_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.DOG_MORPH, 1,
 			AssType.DOG_MORPH, AssSize.TWO_SMALL, AssSize.THREE_NORMAL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.DOG_MORPH, BreastShape.getNonUdderBreastShapes(), 
@@ -254,12 +254,12 @@ public class RacialBody {
 			TorsoType.DOG_MORPH,
 			BodyMaterial.FLESH,
 			BodyCoveringType.BODY_HAIR_CANINE_FUR,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 			PenisType.DOG_MORPH, 15, PenetrationGirth.THREE_AVERAGE, TesticleSize.THREE_LARGE, 2, CumProduction.FOUR_LARGE,
-			Util.newArrayListOfValues(TailType.DOG_MORPH),
+			List.of(TailType.DOG_MORPH),
 			TentacleType.NONE,
 			VaginaType.DOG_MORPH, Wetness.THREE_WET, Capacity.TWO_TIGHT, OrificeDepth.TWO_AVERAGE, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 		@Override
 		public Map<PersonalityTrait, Float> getPersonalityTraitChances() {
@@ -270,7 +270,7 @@ public class RacialBody {
 	};
 	
 	public static AbstractRacialBody FOX_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.FOX_MORPH, 1,
 			AssType.FOX_MORPH, AssSize.TWO_SMALL, AssSize.THREE_NORMAL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.FOX_MORPH, BreastShape.getNonUdderBreastShapes(),
@@ -291,17 +291,17 @@ public class RacialBody {
 			TorsoType.FOX_MORPH,
 			BodyMaterial.FLESH,
 			BodyCoveringType.BODY_HAIR_FOX_FUR,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 			PenisType.FOX_MORPH, 15, PenetrationGirth.THREE_AVERAGE, TesticleSize.TWO_AVERAGE, 2, CumProduction.FOUR_LARGE,
-			Util.newArrayListOfValues(TailType.FOX_MORPH),
+			List.of(TailType.FOX_MORPH),
 			TentacleType.NONE,
 			VaginaType.FOX_MORPH, Wetness.THREE_WET, Capacity.TWO_TIGHT, OrificeDepth.TWO_AVERAGE, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 	};
 	
 	public static AbstractRacialBody WOLF_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.WOLF_MORPH, 1,
 			AssType.WOLF_MORPH, AssSize.TWO_SMALL, AssSize.THREE_NORMAL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.WOLF_MORPH, BreastShape.getNonUdderBreastShapes(),
@@ -323,17 +323,17 @@ public class RacialBody {
 			TorsoType.WOLF_MORPH,
 			BodyMaterial.FLESH,
 			BodyCoveringType.BODY_HAIR_LYCAN_FUR,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 			PenisType.WOLF_MORPH, 18, PenetrationGirth.FOUR_GIRTHY, TesticleSize.THREE_LARGE, 2, CumProduction.FIVE_HUGE,
-			Util.newArrayListOfValues(TailType.WOLF_MORPH),
+			List.of(TailType.WOLF_MORPH),
 			TentacleType.NONE,
 			VaginaType.WOLF_MORPH, Wetness.FOUR_SLIMY, Capacity.TWO_TIGHT, OrificeDepth.TWO_AVERAGE, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 	};
 
 	public static AbstractRacialBody CAT_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.CAT_MORPH, 1,
 			AssType.CAT_MORPH, AssSize.TWO_SMALL, AssSize.THREE_NORMAL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.CAT_MORPH, BreastShape.getNonUdderBreastShapes(),
@@ -354,17 +354,17 @@ public class RacialBody {
 			TorsoType.CAT_MORPH,
 			BodyMaterial.FLESH,
 			BodyCoveringType.BODY_HAIR_FELINE_FUR,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 			PenisType.CAT_MORPH, 13, PenetrationGirth.THREE_AVERAGE, TesticleSize.TWO_AVERAGE, 2, CumProduction.THREE_AVERAGE,
-			Util.newArrayListOfValues(TailType.CAT_MORPH),
+			List.of(TailType.CAT_MORPH),
 			TentacleType.NONE,
 			VaginaType.CAT_MORPH, Wetness.TWO_MOIST, Capacity.TWO_TIGHT, OrificeDepth.TWO_AVERAGE, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 	};
 
 	public static AbstractRacialBody HORSE_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.HORSE_MORPH, 1,
 			AssType.HORSE_MORPH, AssSize.TWO_SMALL, AssSize.FOUR_LARGE, Wetness.ZERO_DRY, Capacity.THREE_SLIGHTLY_LOOSE, OrificeDepth.THREE_SPACIOUS, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.HORSE_MORPH, BreastShape.getNonUdderBreastShapes(),
@@ -385,16 +385,16 @@ public class RacialBody {
 			TorsoType.HORSE_MORPH,
 			BodyMaterial.FLESH,
 			BodyCoveringType.BODY_HAIR_HORSE_HAIR,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE, HornType.HORSE_STRAIGHT),
-			PenisType.EQUINE, 23, PenetrationGirth.FIVE_THICK, TesticleSize.FOUR_HUGE, 2, CumProduction.FIVE_HUGE, Util.newArrayListOfValues(TailType.HORSE_MORPH),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE, HornType.HORSE_STRAIGHT),
+			PenisType.EQUINE, 23, PenetrationGirth.FIVE_THICK, TesticleSize.FOUR_HUGE, 2, CumProduction.FIVE_HUGE, List.of(TailType.HORSE_MORPH),
 			TentacleType.NONE,
 			VaginaType.HORSE_MORPH, Wetness.THREE_WET, Capacity.THREE_SLIGHTLY_LOOSE, OrificeDepth.THREE_SPACIOUS, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 	};
 
 	public static AbstractRacialBody REINDEER_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.REINDEER_MORPH, 1,
 			AssType.REINDEER_MORPH, AssSize.TWO_SMALL, AssSize.FOUR_LARGE, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.THREE_SPACIOUS, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.REINDEER_MORPH, BreastShape.getNonUdderBreastShapes(),
@@ -415,17 +415,17 @@ public class RacialBody {
 			TorsoType.REINDEER_MORPH,
 			BodyMaterial.FLESH,
 			BodyCoveringType.BODY_HAIR_REINDEER_HAIR,
-			HornLength.THREE_HUGE, HornLength.TWO_LONG, Util.newArrayListOfValues(HornType.REINDEER_RACK),
+			HornLength.THREE_HUGE, HornLength.TWO_LONG, List.of(HornType.REINDEER_RACK),
 			PenisType.REINDEER_MORPH, 20, PenetrationGirth.FOUR_GIRTHY, TesticleSize.THREE_LARGE, 2, CumProduction.THREE_AVERAGE,
-			Util.newArrayListOfValues(TailType.REINDEER_MORPH),
+			List.of(TailType.REINDEER_MORPH),
 			TentacleType.NONE,
 			VaginaType.REINDEER_MORPH, Wetness.TWO_MOIST, Capacity.THREE_SLIGHTLY_LOOSE, OrificeDepth.THREE_SPACIOUS, ClitorisSize.ONE_BIG, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 	};
 
 	public static AbstractRacialBody ALLIGATOR_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 		    ArmType.ALLIGATOR_MORPH, 1,
 		    AssType.ALLIGATOR_MORPH, AssSize.TWO_SMALL, AssSize.TWO_SMALL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 		    BreastType.ALLIGATOR_MORPH, BreastShape.getNonUdderBreastShapes(),
@@ -446,17 +446,17 @@ public class RacialBody {
 		    TorsoType.ALLIGATOR_MORPH,
 		    BodyMaterial.FLESH,
 		    BodyCoveringType.BODY_HAIR_SCALES_ALLIGATOR,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 		    PenisType.ALLIGATOR_MORPH, 18, PenetrationGirth.FOUR_GIRTHY, TesticleSize.FOUR_HUGE, 2, CumProduction.FIVE_HUGE,
-		    Util.newArrayListOfValues(TailType.ALLIGATOR_MORPH),
+		    List.of(TailType.ALLIGATOR_MORPH),
 		    TentacleType.NONE,
 		    VaginaType.ALLIGATOR_MORPH, Wetness.SEVEN_DROOLING, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.SEVEN_ELASTIC, OrificePlasticity.ZERO_RUBBERY,
-		    Util.newArrayListOfValues(WingType.NONE),  WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+		    List.of(WingType.NONE),  WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 		    GenitalArrangement.CLOACA) {
 	};
 	
 	public static AbstractRacialBody SQUIRREL_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.SQUIRREL_MORPH, 1,
 			AssType.SQUIRREL_MORPH, AssSize.TWO_SMALL, AssSize.THREE_NORMAL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.SQUIRREL_MORPH,
@@ -478,17 +478,17 @@ public class RacialBody {
 			TorsoType.SQUIRREL_MORPH,
 			BodyMaterial.FLESH,
 		    BodyCoveringType.BODY_HAIR_SQUIRREL_FUR,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 			PenisType.SQUIRREL_MORPH, 20, PenetrationGirth.FOUR_GIRTHY, TesticleSize.THREE_LARGE, 2, CumProduction.THREE_AVERAGE,
-			Util.newArrayListOfValues(TailType.SQUIRREL_MORPH),
+			List.of(TailType.SQUIRREL_MORPH),
 			TentacleType.NONE,
 			VaginaType.SQUIRREL_MORPH, Wetness.TWO_MOIST, Capacity.THREE_SLIGHTLY_LOOSE, OrificeDepth.THREE_SPACIOUS, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 	};
 
 	public static AbstractRacialBody RAT_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.RAT_MORPH, 1,
 			AssType.RAT_MORPH, AssSize.TWO_SMALL, AssSize.THREE_NORMAL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.RAT_MORPH, BreastShape.getNonUdderBreastShapes(),
@@ -509,13 +509,13 @@ public class RacialBody {
 			TorsoType.RAT_MORPH,
 			BodyMaterial.FLESH,
 		    BodyCoveringType.BODY_HAIR_RAT_FUR,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 			PenisType.RAT_MORPH, 15, PenetrationGirth.THREE_AVERAGE,
 			TesticleSize.TWO_AVERAGE, 2, CumProduction.THREE_AVERAGE,
-			Util.newArrayListOfValues(TailType.RAT_MORPH),
+			List.of(TailType.RAT_MORPH),
 			TentacleType.NONE,
 			VaginaType.RAT_MORPH, Wetness.TWO_MOIST, Capacity.TWO_TIGHT, OrificeDepth.TWO_AVERAGE, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 		@Override
 		public Map<PersonalityTrait, Float> getPersonalityTraitChances() {
@@ -527,7 +527,7 @@ public class RacialBody {
 	};
 
 	public static AbstractRacialBody RABBIT_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.RABBIT_MORPH, 1,
 			AssType.RABBIT_MORPH, AssSize.TWO_SMALL, AssSize.THREE_NORMAL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.RABBIT_MORPH, BreastShape.getNonUdderBreastShapes(),
@@ -548,17 +548,17 @@ public class RacialBody {
 			TorsoType.RABBIT_MORPH,
 			BodyMaterial.FLESH,
 		    BodyCoveringType.BODY_HAIR_RABBIT_FUR,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 			PenisType.RABBIT_MORPH, 18, PenetrationGirth.THREE_AVERAGE, TesticleSize.TWO_AVERAGE, 2, CumProduction.THREE_AVERAGE,
-			Util.newArrayListOfValues(TailType.RABBIT_MORPH),
+			List.of(TailType.RABBIT_MORPH),
 			TentacleType.NONE,
 			VaginaType.RABBIT_MORPH, Wetness.TWO_MOIST, Capacity.TWO_TIGHT, OrificeDepth.TWO_AVERAGE, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 	};
 
 	public static AbstractRacialBody BAT_MORPH = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.BAT_MORPH, 1,
 			AssType.BAT_MORPH, AssSize.TWO_SMALL, AssSize.THREE_NORMAL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.BAT_MORPH, BreastShape.getNonUdderBreastShapes(),
@@ -579,12 +579,12 @@ public class RacialBody {
 			TorsoType.BAT_MORPH,
 			BodyMaterial.FLESH,
 		    BodyCoveringType.BODY_HAIR_BAT_FUR,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 			PenisType.BAT_MORPH, 13, PenetrationGirth.THREE_AVERAGE, TesticleSize.TWO_AVERAGE, 2, CumProduction.THREE_AVERAGE,
-			Util.newArrayListOfValues(TailType.BAT_MORPH),
+			List.of(TailType.BAT_MORPH),
 			TentacleType.NONE,
 			VaginaType.BAT_MORPH, Wetness.TWO_MOIST, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.NORMAL) {
 		@Override
 		public Map<PersonalityTrait, Float> getPersonalityTraitChances() {
@@ -595,7 +595,7 @@ public class RacialBody {
 	};
 	
 	public static AbstractRacialBody HARPY = new AbstractRacialBody(
-			Util.newArrayListOfValues(AntennaType.NONE),
+			List.of(AntennaType.NONE),
 			ArmType.HARPY, 1,
 			AssType.HARPY, AssSize.TWO_SMALL, AssSize.THREE_NORMAL, Wetness.ZERO_DRY, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, OrificeElasticity.THREE_FLEXIBLE, OrificePlasticity.THREE_RESILIENT,
 			BreastType.HARPY, BreastShape.getNonUdderBreastShapes(),
@@ -616,12 +616,12 @@ public class RacialBody {
 			TorsoType.HARPY,
 			BodyMaterial.FLESH,
 		    BodyCoveringType.BODY_HAIR_HARPY,
-			HornLength.ZERO_TINY, HornLength.ZERO_TINY, Util.newArrayListOfValues(HornType.NONE),
+			HornLength.ZERO_TINY, HornLength.ZERO_TINY, List.of(HornType.NONE),
 			PenisType.HARPY, 5, PenetrationGirth.TWO_NARROW, TesticleSize.ZERO_VESTIGIAL, 2, CumProduction.ONE_TRICKLE,
-			Util.newArrayListOfValues(TailType.HARPY),
+			List.of(TailType.HARPY),
 			TentacleType.NONE,
 			VaginaType.HARPY, Wetness.THREE_WET, Capacity.ONE_EXTREMELY_TIGHT, OrificeDepth.TWO_AVERAGE, ClitorisSize.ZERO_AVERAGE, OrificeElasticity.FOUR_LIMBER, OrificePlasticity.THREE_RESILIENT,
-			Util.newArrayListOfValues(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
+			List.of(WingType.NONE), WingSize.ZERO_TINY, WingSize.ZERO_TINY,
 			GenitalArrangement.CLOACA) {
 		@Override
 		public Map<PersonalityTrait, Float> getPersonalityTraitChances() {

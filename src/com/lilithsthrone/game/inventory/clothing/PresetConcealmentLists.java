@@ -15,50 +15,42 @@ public enum PresetConcealmentLists {
 
 	NONE(new ArrayList<>()),
 	
-	CONCEALED_PARTIAL_TORSO(Util.newArrayListOfValues(
+	CONCEALED_PARTIAL_TORSO(List.of(InventorySlot.STOMACH,
+			InventorySlot.CHEST,
+			InventorySlot.NIPPLE,
+			InventorySlot.PIERCING_NIPPLE,
+			InventorySlot.PIERCING_STOMACH)),
+
+	CONCEALED_PARTIAL_TORSO_STOMACH_VISIBLE(List.of(InventorySlot.CHEST,
+			InventorySlot.NIPPLE,
+			InventorySlot.PIERCING_NIPPLE)),
+
+	CONCEALED_STOMACH(List.of(InventorySlot.PIERCING_STOMACH)),
+
+	CONCEALED_BREASTS(List.of(InventorySlot.NIPPLE,
+			InventorySlot.PIERCING_NIPPLE)),
+
+	CONCEALED_FULL_TORSO(List.of(InventorySlot.TORSO_UNDER,
 			InventorySlot.STOMACH,
 			InventorySlot.CHEST,
 			InventorySlot.NIPPLE,
 			InventorySlot.PIERCING_NIPPLE,
 			InventorySlot.PIERCING_STOMACH)),
 
-	CONCEALED_PARTIAL_TORSO_STOMACH_VISIBLE(Util.newArrayListOfValues(
-			InventorySlot.CHEST,
-			InventorySlot.NIPPLE,
-			InventorySlot.PIERCING_NIPPLE)),
+	CONCEALED_GENITALS(List.of(InventorySlot.VAGINA,
+			InventorySlot.ANUS,
+			InventorySlot.PENIS,
+			InventorySlot.PIERCING_PENIS,
+			InventorySlot.PIERCING_VAGINA)),
 
-	CONCEALED_STOMACH(Util.newArrayListOfValues(
-			InventorySlot.PIERCING_STOMACH)),
-
-	CONCEALED_BREASTS(Util.newArrayListOfValues(
-			InventorySlot.NIPPLE,
-			InventorySlot.PIERCING_NIPPLE)),
-
-	CONCEALED_FULL_TORSO(Util.newArrayListOfValues(
-			InventorySlot.TORSO_UNDER,
-			InventorySlot.STOMACH,
-			InventorySlot.CHEST,
-			InventorySlot.NIPPLE,
-			InventorySlot.PIERCING_NIPPLE,
-			InventorySlot.PIERCING_STOMACH)),
-
-	CONCEALED_GENITALS(Util.newArrayListOfValues(
+	CONCEALED_GROIN(List.of(InventorySlot.GROIN,
 			InventorySlot.VAGINA,
 			InventorySlot.ANUS,
 			InventorySlot.PENIS,
 			InventorySlot.PIERCING_PENIS,
 			InventorySlot.PIERCING_VAGINA)),
 
-	CONCEALED_GROIN(Util.newArrayListOfValues(
-			InventorySlot.GROIN,
-			InventorySlot.VAGINA,
-			InventorySlot.ANUS,
-			InventorySlot.PENIS,
-			InventorySlot.PIERCING_PENIS,
-			InventorySlot.PIERCING_VAGINA)),
-
-	CONCEALED_TAUR(Util.newArrayListOfValues(
-			InventorySlot.STOMACH,
+	CONCEALED_TAUR(List.of(InventorySlot.STOMACH,
 			InventorySlot.PIERCING_STOMACH,
 			InventorySlot.GROIN,
 			InventorySlot.VAGINA,
@@ -67,8 +59,7 @@ public enum PresetConcealmentLists {
 			InventorySlot.PIERCING_PENIS,
 			InventorySlot.PIERCING_VAGINA)),
 	
-	CONCEALED_DRESS_FRONT_FULL(Util.newArrayListOfValues(
-			InventorySlot.STOMACH,
+	CONCEALED_DRESS_FRONT_FULL(List.of(InventorySlot.STOMACH,
 			InventorySlot.CHEST,
 			InventorySlot.NIPPLE,
 			InventorySlot.PIERCING_NIPPLE,
@@ -79,13 +70,11 @@ public enum PresetConcealmentLists {
 			InventorySlot.PIERCING_PENIS,
 			InventorySlot.PIERCING_VAGINA)),
 
-	CONCEALED_UNZIPS_GROIN(Util.newArrayListOfValues(
-			InventorySlot.GROIN,
+	CONCEALED_UNZIPS_GROIN(List.of(InventorySlot.GROIN,
 			InventorySlot.PENIS,
 			InventorySlot.PIERCING_PENIS)),
 
-	CONCEALED_ANKLES_FROM_TROUSERS(Util.newArrayListOfValues(
-			InventorySlot.ANKLE,
+	CONCEALED_ANKLES_FROM_TROUSERS(List.of(InventorySlot.ANKLE,
 			InventorySlot.SOCK));
 	
 	private List<InventorySlot> presetInventorySlotList;

@@ -141,7 +141,7 @@ public class FortressAlphaLeader extends NPC {
 	public void setupPerks(boolean autoSelectPerks) {
 		this.addSpecialPerk(Perk.SPECIAL_MARTIAL_BACKGROUND);
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(Perk.UNARMED_DAMAGE),
+				List.of(Perk.UNARMED_DAMAGE),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 5),
 						new Value<>(PerkCategory.LUST, 1),
@@ -429,7 +429,7 @@ public class FortressAlphaLeader extends NPC {
 
 	@Override
 	public List<Class<?>> getUniqueSexClasses() {
-		return Util.newArrayListOfValues(FortressAlphaLeaderSA.class);
+		return List.of(FortressAlphaLeaderSA.class);
 	}
 	
 	// Combat:

@@ -97,7 +97,7 @@ public class LilayasRoom {
 
 			} else if (index == 1) {
 				return new Response("Panties", "Look through Lilaya's pile of panties.", PANTIES,
-						Util.newArrayListOfValues(Fetish.FETISH_INCEST), CorruptionLevel.TWO_HORNY,
+						List.of(Fetish.FETISH_INCEST), CorruptionLevel.TWO_HORNY,
 						null, null, null) {
 					@Override
 					public void effects() {
@@ -344,7 +344,7 @@ public class LilayasRoom {
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
 				return new ResponseSex("Submit", "Let Rose push you back on to the bed and fuck you.",
-						Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+						List.of(Fetish.FETISH_SUBMISSIVE),
 						null, CorruptionLevel.THREE_DIRTY, null, null, null,
 						true, false,
 						new SMLyingDown(
@@ -367,8 +367,7 @@ public class LilayasRoom {
 								return Util.newHashMapOfValues(
 										new Value<>(
 												Main.game.getNpc(Rose.class),
-												Util.newArrayListOfValues(
-														SexAreaOrifice.VAGINA,
+												List.of(SexAreaOrifice.VAGINA,
 														SexAreaOrifice.ANUS,
 														SexAreaOrifice.MOUTH)));
 							}

@@ -274,12 +274,12 @@ public class BatCavernDialogue {
 				} else if (index == 3) {
 					if(getMugger().isAttractedTo(Main.game.getPlayer())) {
 						return new ResponseSex("Offer body", "Offer your body to [npc.name] so that you can avoid a violent confrontation.",
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
+								List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null, null, null,
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getMugger()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(getMugger()),
+										List.of(Main.game.getPlayer()),
 										null,
 										Main.game.getPlayer().getCompanions()) {
 									@Override
@@ -325,8 +325,8 @@ public class BatCavernDialogue {
 								UtilText.parse(getMugger(), companion, "Offer [npc.name] the opportunity to have sex with both you and [npc2.name] in order to avoid a violent confrontation."),
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getMugger()),
-										Util.newArrayListOfValues(Main.game.getPlayer(), companion),
+										List.of(getMugger()),
+										List.of(Main.game.getPlayer(), companion),
 										null,
 										null,
 										ResponseTag.PREFER_DOGGY),
@@ -357,10 +357,10 @@ public class BatCavernDialogue {
 								UtilText.parse(getMugger(), companion, "Tell [npc.name] that [npc.she] can use [npc2.namePos] body in order to avoid a violent confrontation."),
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getMugger()),
-										Util.newArrayListOfValues(companion),
+										List.of(getMugger()),
+										List.of(companion),
 										null,
-										Util.newArrayListOfValues(Main.game.getPlayer())),
+										List.of(Main.game.getPlayer())),
 								AFTER_SEX_DEFEAT, UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "CAVERN_ATTACK_OFFER_COMPANION", getMugger(), companion)) {
 							@Override
 							public void effects() {
@@ -432,12 +432,12 @@ public class BatCavernDialogue {
 				} else if (index == 3) {
 					if(getMugger().isAttractedTo(Main.game.getPlayer())) {
 						return new ResponseSex("Sex (dom)", "Take the dominant role and have sex with [npc.name].",
-								Util.newArrayListOfValues(Fetish.FETISH_DOMINANT), null, Fetish.FETISH_DOMINANT.getAssociatedCorruptionLevel(),
+								List.of(Fetish.FETISH_DOMINANT), null, Fetish.FETISH_DOMINANT.getAssociatedCorruptionLevel(),
 								null, null, null,
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(Main.game.getPlayer()),
-										Util.newArrayListOfValues(getMugger()),
+										List.of(Main.game.getPlayer()),
+										List.of(getMugger()),
 										Main.game.getPlayer().getCompanions(),
 										null),
 								AFTER_SEX_PEACEFUL, UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "CAVERN_ATTACK_PEACEFUL_SEX_AS_DOM", getAllCharacters())) {
@@ -454,12 +454,12 @@ public class BatCavernDialogue {
 				} else if (index == 4) {
 					if(getMugger().isAttractedTo(Main.game.getPlayer())) {
 						return new ResponseSex("Sex (sub)", "Offer your body to [npc.name].",
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
+								List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(),
 								null, null, null,
 								true, true,
 								new SMGeneric(
-										Util.newArrayListOfValues(getMugger()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(getMugger()),
+										List.of(Main.game.getPlayer()),
 										null,
 										Main.game.getPlayer().getCompanions()),
 								AFTER_SEX_PEACEFUL, UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "CAVERN_ATTACK_PEACEFUL_SEX_AS_SUB", getAllCharacters())) {
@@ -523,8 +523,8 @@ public class BatCavernDialogue {
 								UtilText.parse(getMugger(), companion, "Offer [npc.name] the opportunity to have sex with both you and [npc2.name]."),
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getMugger()),
-										Util.newArrayListOfValues(Main.game.getPlayer(), companion),
+										List.of(getMugger()),
+										List.of(Main.game.getPlayer(), companion),
 										null,
 										null,
 										ResponseTag.PREFER_DOGGY),
@@ -554,10 +554,10 @@ public class BatCavernDialogue {
 								UtilText.parse(getMugger(), companion, "Tell [npc.name] that [npc.she] can use [npc2.namePos] body."),
 								true, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getMugger()),
-										Util.newArrayListOfValues(companion),
+										List.of(getMugger()),
+										List.of(companion),
 										null,
-										Util.newArrayListOfValues(Main.game.getPlayer())),
+										List.of(Main.game.getPlayer())),
 								AFTER_SEX_PEACEFUL_OFFERED_COMPANION, UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "CAVERN_ATTACK_PEACEFUL_OFFER_COMPANION", getMugger(), companion)) {
 							@Override
 							public void effects() {
@@ -825,8 +825,8 @@ public class BatCavernDialogue {
 							"Well, [npc.she] <i>is</i> asking for it!",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getMugger()),
+									List.of(Main.game.getPlayer()),
+									List.of(getMugger()),
 									Main.game.getPlayer().getCompanions(),
 									null),
 							AFTER_SEX_VICTORY,
@@ -835,11 +835,11 @@ public class BatCavernDialogue {
 					return new ResponseSex(
 							"Rape [npc.herHim]",
 							"[npc.She] needs to be punished for attacking you like that...",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getMugger()),
+									List.of(Main.game.getPlayer()),
+									List.of(getMugger()),
 									Main.game.getPlayer().getCompanions(),
 									null),
 							AFTER_SEX_VICTORY,
@@ -855,8 +855,8 @@ public class BatCavernDialogue {
 							"Well, [npc.she] <i>is</i> asking for it! (Start the sex scene in the 'gentle' pace.)",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getMugger()),
+									List.of(Main.game.getPlayer()),
+									List.of(getMugger()),
 									Main.game.getPlayer().getCompanions(),
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
@@ -866,11 +866,11 @@ public class BatCavernDialogue {
 				} else {
 					return new ResponseSex("Rape [npc.herHim] (gentle)",
 							"[npc.She] needs to be punished for attacking you like that... (Start the sex scene in the 'gentle' pace.)",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getMugger()),
+									List.of(Main.game.getPlayer()),
+									List.of(getMugger()),
 									Main.game.getPlayer().getCompanions(),
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
@@ -887,8 +887,8 @@ public class BatCavernDialogue {
 							"Well, [npc.she] <i>is</i> asking for it! (Start the sex scene in the 'rough' pace.)",
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getMugger()),
+									List.of(Main.game.getPlayer()),
+									List.of(getMugger()),
 									Main.game.getPlayer().getCompanions(),
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
@@ -898,11 +898,11 @@ public class BatCavernDialogue {
 				} else {
 					return new ResponseSex("Rape [npc.herHim] (rough)",
 							"[npc.She] needs to be punished for attacking you like that... (Start the sex scene in the 'rough' pace.)",
-							Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
+							List.of(Fetish.FETISH_NON_CON_DOM), null, Fetish.FETISH_NON_CON_DOM.getAssociatedCorruptionLevel(), null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer()),
-									Util.newArrayListOfValues(getMugger()),
+									List.of(Main.game.getPlayer()),
+									List.of(getMugger()),
 									Main.game.getPlayer().getCompanions(),
 									null,
 									ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
@@ -918,14 +918,14 @@ public class BatCavernDialogue {
 				} else {
 					return new ResponseSex("Submit",
 							"You're not really sure what to do now... Perhaps it would be best to let [npc.name] choose what to do next?",
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),
+							List.of(Fetish.FETISH_SUBMISSIVE),
 							null, CorruptionLevel.THREE_DIRTY, null, null, null,
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(Main.game.getPlayer()),
+									List.of(getMugger()),
+									List.of(Main.game.getPlayer()),
 									null,
-									Util.newArrayListOfValues(getMainCompanion())),
+									List.of(getMainCompanion())),
 							AFTER_SEX_DEFEAT, UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "AFTER_COMBAT_VICTORY_SEX_SUBMIT", getAllCharacters()));
 				}
 				
@@ -999,8 +999,8 @@ public class BatCavernDialogue {
 							UtilText.parse(getMugger(), companion, "Have dominant sex with [npc.name], and get [npc2.name] to join in with the fun."),
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(Main.game.getPlayer(), companion),
-									Util.newArrayListOfValues(getMugger()),
+									List.of(Main.game.getPlayer(), companion),
+									List.of(getMugger()),
 									null,
 									null,
 									ResponseTag.PREFER_DOGGY),
@@ -1021,10 +1021,10 @@ public class BatCavernDialogue {
 							UtilText.parse(companion, getMugger(), "Tell [npc.name] that [npc.she] can have some fun with [npc2.name] while you watch."),
 							false, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(companion),
-									Util.newArrayListOfValues(getMugger()),
+									List.of(companion),
+									List.of(getMugger()),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer())),
+									List.of(Main.game.getPlayer())),
 							AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "AFTER_COMBAT_VICTORY_GIVE_TO_COMPANION", getMugger(), companion));
 				}
 				
@@ -1047,10 +1047,10 @@ public class BatCavernDialogue {
 							UtilText.parse(getMugger(), companion, "Tell [npc.name] that [npc.she] can use [npc2.name]."),
 							true, false,
 							new SMGeneric(
-									Util.newArrayListOfValues(getMugger()),
-									Util.newArrayListOfValues(companion),
+									List.of(getMugger()),
+									List.of(companion),
 									null,
-									Util.newArrayListOfValues(Main.game.getPlayer())),
+									List.of(Main.game.getPlayer())),
 							AFTER_SEX_VICTORY, UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "AFTER_COMBAT_VICTORY_OFFER_COMPANION", getMugger(), companion)) {
 						@Override
 						public void effects() {
@@ -1237,8 +1237,7 @@ public class BatCavernDialogue {
 			// Response variables:
 			boolean forcedTF = getMugger().isUsingForcedTransform(Main.game.getPlayer());
 			boolean forcedFetish = getMugger().isUsingForcedFetish(Main.game.getPlayer());
-			List<Fetish> applicableFetishes = Util.newArrayListOfValues(
-					forcedTF && potion!=null
+			List<Fetish> applicableFetishes = List.of(forcedTF && potion!=null
 						?Fetish.FETISH_TRANSFORMATION_RECEIVING
 						:null,
 					forcedFetish && fetishPotion!=null
@@ -1584,15 +1583,13 @@ public class BatCavernDialogue {
 												:"Tell [npc.name] that you"+(companionSex?UtilText.parse(getMainCompanion(), " and [npc.name]"):"")+" would like to have sex with [npc.herHim]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getMugger()),
-											Util.newArrayListOfValues(
-													Main.game.getPlayer(),
+											List.of(getMugger()),
+											List.of(Main.game.getPlayer(),
 													companionSex
 														?getMainCompanion()
 														:null),
 											null,
-											Util.newArrayListOfValues(
-												companionSex
+											List.of(companionSex
 													?null
 													:getMainCompanion())),
 									AFTER_SEX_DEFEAT,
@@ -1606,15 +1603,13 @@ public class BatCavernDialogue {
 												:"Tell [npc.name] that you"+(companionSex?UtilText.parse(getMainCompanion(), " and [npc.name]"):"")+" are more than happy to have sex with [npc.herHim]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getMugger()),
-											Util.newArrayListOfValues(
-													Main.game.getPlayer(),
+											List.of(getMugger()),
+											List.of(Main.game.getPlayer(),
 													companionSex
 														?getMainCompanion()
 														:null),
 											null,
-											Util.newArrayListOfValues(
-												companionSex
+											List.of(companionSex
 													?null
 													:getMainCompanion()),
 											ResponseTag.START_PACE_PLAYER_SUB_EAGER),
@@ -1626,15 +1621,13 @@ public class BatCavernDialogue {
 									UtilText.parse(getMugger(), "[npc.Name] forces [npc.herself] on you"+(companionSex?UtilText.parse(getMainCompanion(), " and [npc.name]"):"")+"..."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getMugger()),
-											Util.newArrayListOfValues(
-													Main.game.getPlayer(),
+											List.of(getMugger()),
+											List.of(Main.game.getPlayer(),
 													companionSex
 														?getMainCompanion()
 														:null),
 											null,
-											Util.newArrayListOfValues(
-												companionSex
+											List.of(companionSex
 													?null
 													:getMainCompanion()),
 											ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
@@ -1662,10 +1655,10 @@ public class BatCavernDialogue {
 												:"Tell [npc.name] that you would like to have sex with [npc.herHim]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getMugger()),
-											Util.newArrayListOfValues(Main.game.getPlayer()),
+											List.of(getMugger()),
+											List.of(Main.game.getPlayer()),
 											null,
-											Util.newArrayListOfValues(getMainCompanion())),
+											List.of(getMainCompanion())),
 									AFTER_SEX_DEFEAT,
 									UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "START_DEFEATED_SEX_SOLO", getAllCharacters()));
 							
@@ -1677,10 +1670,10 @@ public class BatCavernDialogue {
 												:"Tell [npc.name] that you are more than happy to have sex with [npc.herHim]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getMugger()),
-											Util.newArrayListOfValues(Main.game.getPlayer()),
+											List.of(getMugger()),
+											List.of(Main.game.getPlayer()),
 											null,
-											Util.newArrayListOfValues(getMainCompanion()),
+											List.of(getMainCompanion()),
 											ResponseTag.START_PACE_PLAYER_SUB_EAGER),
 									AFTER_SEX_DEFEAT,
 									UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "START_DEFEATED_SEX_SOLO", getAllCharacters()));
@@ -1690,10 +1683,10 @@ public class BatCavernDialogue {
 									UtilText.parse(getMugger(), "[npc.Name] forces [npc.herself] on you..."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getMugger()),
-											Util.newArrayListOfValues(Main.game.getPlayer()),
+											List.of(getMugger()),
+											List.of(Main.game.getPlayer()),
 											null,
-											Util.newArrayListOfValues(getMainCompanion()),
+											List.of(getMainCompanion()),
 											ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
 									AFTER_SEX_DEFEAT,
 									UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "START_DEFEATED_SEX_SOLO_RESIST", getAllCharacters()));
@@ -1720,10 +1713,10 @@ public class BatCavernDialogue {
 											"You can do nothing but watch as [npc.name] forces [npc.herself] on [npc2.name]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getMugger()),
-											Util.newArrayListOfValues(getMainCompanion()),
+											List.of(getMugger()),
+											List.of(getMainCompanion()),
 											null,
-											Util.newArrayListOfValues(Main.game.getPlayer())),
+											List.of(Main.game.getPlayer())),
 									AFTER_SEX_DEFEAT,
 									UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "START_DEFEATED_SEX_SOLO_COMPANION_RAPE", getAllCharacters()));
 						}
@@ -1735,10 +1728,10 @@ public class BatCavernDialogue {
 											"You can do nothing but watch as [npc2.name] happily agrees to let [npc.name] fuck [npc2.herHim]."),
 									false, false,
 									new SMGeneric(
-											Util.newArrayListOfValues(getMugger()),
-											Util.newArrayListOfValues(getMainCompanion()),
+											List.of(getMugger()),
+											List.of(getMainCompanion()),
 											null,
-											Util.newArrayListOfValues(Main.game.getPlayer())),
+											List.of(Main.game.getPlayer())),
 									AFTER_SEX_DEFEAT,
 									UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "START_DEFEATED_SEX_SOLO_COMPANION", getAllCharacters()));
 						}
@@ -1766,10 +1759,10 @@ public class BatCavernDialogue {
 											:"Tell [npc.name] that you would like to have sex with [npc.herHim]."),
 								false, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getMugger()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(getMugger()),
+										List.of(Main.game.getPlayer()),
 										null,
-										Util.newArrayListOfValues(getMainCompanion())),
+										List.of(getMainCompanion())),
 								AFTER_SEX_DEFEAT,
 								UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "START_DEFEATED_SEX", getAllCharacters()));
 						
@@ -1781,10 +1774,10 @@ public class BatCavernDialogue {
 											:"Tell [npc.name] that you are more than happy to have sex with [npc.herHim]."),
 								false, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getMugger()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(getMugger()),
+										List.of(Main.game.getPlayer()),
 										null,
-										Util.newArrayListOfValues(getMainCompanion()),
+										List.of(getMainCompanion()),
 										ResponseTag.START_PACE_PLAYER_SUB_EAGER),
 								AFTER_SEX_DEFEAT,
 								UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "START_DEFEATED_SEX", getAllCharacters()));
@@ -1794,10 +1787,10 @@ public class BatCavernDialogue {
 								UtilText.parse(getMugger(), "[npc.Name] forces [npc.herself] on you..."),
 								false, false,
 								new SMGeneric(
-										Util.newArrayListOfValues(getMugger()),
-										Util.newArrayListOfValues(Main.game.getPlayer()),
+										List.of(getMugger()),
+										List.of(Main.game.getPlayer()),
 										null,
-										Util.newArrayListOfValues(getMainCompanion()),
+										List.of(getMainCompanion()),
 										ResponseTag.START_PACE_PLAYER_SUB_RESISTING),
 								AFTER_SEX_DEFEAT,
 								UtilText.parseFromXMLFile("encounters/submission/batCavern/"+getDialogueId(), "START_DEFEATED_SEX_RESIST", getAllCharacters()));

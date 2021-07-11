@@ -36,7 +36,7 @@ public class SMRoxyPussyLicker extends SexManagerDefault {
 	@Override
 	public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 		Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-		map.put(Main.game.getNpc(Roxy.class), Util.newArrayListOfValues(CoverableArea.VAGINA));
+		map.put(Main.game.getNpc(Roxy.class), List.of(CoverableArea.VAGINA));
 		return map;
 	}
 

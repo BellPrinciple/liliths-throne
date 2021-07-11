@@ -83,7 +83,7 @@ public abstract class AbstractPerk {
 				name,
 				perkCategory,
 				pathName,
-				Util.newArrayListOfValues(colour),
+				List.of(colour),
 				attributeModifiers,
 				extraEffects,
 				spell,

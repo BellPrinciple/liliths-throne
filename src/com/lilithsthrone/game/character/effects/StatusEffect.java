@@ -98,8 +98,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_PHYSICAL, -15f),
 					new Value<>(Attribute.RESISTANCE_PHYSICAL, -15f)),
-			Util.newArrayListOfValues(
-					"Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
+			List.of("Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(PhysiqueLevel.ZERO_WEAK.getName());
@@ -127,8 +126,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			true,
 			null,
-			Util.newArrayListOfValues(
-					"Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
+			List.of("Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(PhysiqueLevel.ONE_AVERAGE.getName());
@@ -157,8 +155,7 @@ public class StatusEffect {
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 5f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 10f)),
-			Util.newArrayListOfValues(
-					"Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
+			List.of("Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(PhysiqueLevel.TWO_STRONG.getName());
@@ -187,8 +184,7 @@ public class StatusEffect {
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 20f)),
-			Util.newArrayListOfValues(
-					"Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
+			List.of("Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(PhysiqueLevel.THREE_POWERFUL.getName());
@@ -217,8 +213,7 @@ public class StatusEffect {
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 15f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 30f)),
-			Util.newArrayListOfValues(
-					"Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
+			List.of("Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(PhysiqueLevel.FOUR_MIGHTY.getName());
@@ -247,8 +242,7 @@ public class StatusEffect {
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 20f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 50f)),
-			Util.newArrayListOfValues(
-					"Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
+			List.of("Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(PhysiqueLevel.FIVE_HERCULEAN.getName());
@@ -302,7 +296,7 @@ public class StatusEffect {
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_SPELLS, -75f),
 					new Value<>(Attribute.SPELL_COST_MODIFIER, -75f)),
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.GENERIC_TERRIBLE.toWebHexString() + "'>Surrender in combat at maximum lust</b>",
+			List.of("<b style='color: " + PresetColour.GENERIC_TERRIBLE.toWebHexString() + "'>Surrender in combat at maximum lust</b>",
 					"[style.boldMana(Maximum "+Attribute.MANA_MAXIMUM.getName()+")] [style.boldBad(limited to 5)]",
 					"[style.boldBad(Vulnerable)] to [style.boldArcane(arcane storms)]")) {
 		@Override
@@ -338,8 +332,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_SPELLS, 10f),
 					new Value<>(Attribute.SPELL_COST_MODIFIER, 10f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
+			List.of("[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(IntelligenceLevel.ONE_AVERAGE.getName());
@@ -373,8 +366,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.DAMAGE_SPELLS, 10f),
 					new Value<>(Attribute.SPELL_COST_MODIFIER, 10f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
+			List.of("[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(IntelligenceLevel.TWO_SMART.getName());
@@ -406,8 +398,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_FIRE, 5f),
 					new Value<>(Attribute.DAMAGE_ICE, 5f),
 					new Value<>(Attribute.DAMAGE_POISON, 5f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
+			List.of("[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(IntelligenceLevel.THREE_BRAINY.getName());
@@ -443,8 +434,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_FIRE, 10f),
 					new Value<>(Attribute.DAMAGE_ICE, 10f),
 					new Value<>(Attribute.DAMAGE_POISON, 10f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
+			List.of("[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(IntelligenceLevel.FOUR_GENIUS.getName());
@@ -481,8 +471,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_FIRE, 15f),
 					new Value<>(Attribute.DAMAGE_ICE, 15f),
 					new Value<>(Attribute.DAMAGE_POISON, 15f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
+			List.of("[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(IntelligenceLevel.FIVE_POLYMATH.getName());
@@ -729,7 +718,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_LUST, 50f),
 					new Value<>(Attribute.FERTILITY, 75f),
 					new Value<>(Attribute.VIRILITY, 75f)),
-			Util.newArrayListOfValues("<b style='color: "+ PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString()+ "'>Demonic mindset</b>")) {
+			List.of("<b style='color: "+ PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString()+ "'>Demonic mindset</b>")) {
 		@Override
 		public String getName(GameCharacter target) {
 			return Util.capitaliseSentence(CorruptionLevel.FIVE_CORRUPT.getName());
@@ -1157,7 +1146,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_WHITE,
 			false,
 			null,
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>")) {
+			List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return "There's a strange atmosphere surrounding the museum this evening, and you inexplicably find yourself feeling incredibly aroused...";
@@ -1199,12 +1188,12 @@ public class StatusEffect {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				return Util.newArrayListOfValues(	"<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>",
+				return List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>",
 						"Time until next <b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>arcane storm</b>:",
 						Main.game.getNextStormTimeAsTimeString());
 				
 			} else {
-				return Util.newArrayListOfValues(	"<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>");
+				return List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>");
 			}
 		}
 	};
@@ -1215,7 +1204,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_WHITE,
 			false,
 			null,
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>")) {
+			List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return "The weather seems to change at a moment's notice, and is currently overcast, with a chance of rain."
@@ -1235,12 +1224,12 @@ public class StatusEffect {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				return Util.newArrayListOfValues(	"<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>",
+				return List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>",
 						"Time until next <b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>arcane storm</b>:",
 						Main.game.getNextStormTimeAsTimeString());
 				
 			} else {
-				return Util.newArrayListOfValues(	"<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>");
+				return List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>");
 			}
 		}
 	};
@@ -1251,7 +1240,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_WHITE,
 			false,
 			null,
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>")) {
+			List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return "The heavy rain clouds overhead have finally burst, unleashing a sudden, and torrential, downpour."
@@ -1271,12 +1260,12 @@ public class StatusEffect {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				return Util.newArrayListOfValues(	"<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>",
+				return List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>",
 						"Time until next <b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>arcane storm</b>:",
 						Main.game.getNextStormTimeAsTimeString());
 				
 			} else {
-				return Util.newArrayListOfValues(	"<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>");
+				return List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>");
 			}
 		}
 	};
@@ -1287,7 +1276,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_WHITE,
 			false,
 			null,
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>")) {
+			List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			if(target.isPlayer() && !Main.game.getDialogueFlags().values.contains(DialogueFlagValue.hasSnowedThisWinter)) {
@@ -1353,12 +1342,12 @@ public class StatusEffect {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				return Util.newArrayListOfValues(	"<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>",
+				return List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>",
 						"Time until next <b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>arcane storm</b>:",
 						Main.game.getNextStormTimeAsTimeString());
 				
 			} else {
-				return Util.newArrayListOfValues(	"<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>");
+				return List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>");
 			}
 		}
 	};
@@ -1369,7 +1358,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_WHITE,
 			false,
 			null,
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>")) {
+			List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return "A roiling mass of thick black storm clouds hang heavy in the skies above you."
@@ -1389,12 +1378,12 @@ public class StatusEffect {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				return Util.newArrayListOfValues(	"<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>",
+				return List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>",
 						"Time until next <b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>arcane storm</b>:",
 						Main.game.getNextStormTimeAsTimeString());
 				
 			} else {
-				return Util.newArrayListOfValues(	"<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>");
+				return List.of("<b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>Enhanced libido</b>");
 			}
 		}
 	};
@@ -1405,7 +1394,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_WHITE,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -5f)),
-			Util.newArrayListOfValues("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
+			List.of("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
 					"[style.boldExcellent(Double)] all <b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Essence gains</b> from sex & combat")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -1500,13 +1489,13 @@ public class StatusEffect {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				return Util.newArrayListOfValues(	"<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
+				return List.of("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
 						"[style.boldExcellent(Double)] all <b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Essence gains</b> from sex & combat",
 						"Time until <b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>storm ends</b>:",
 						Main.game.getWeatherTimeRemainingAsTimeString());
 				
 			} else {
-				return Util.newArrayListOfValues(	"<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
+				return List.of("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
 						"[style.boldExcellent(Double)] all <b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Essence gains</b> from sex & combat");
 			}
 		}
@@ -1520,8 +1509,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.RESISTANCE_LUST, -100f),
 					new Value<>(Attribute.RESTING_LUST, 50f)),
-			Util.newArrayListOfValues(
-					"<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
+			List.of("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
 					"[style.boldExcellent(Double)] <b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Essence gains</b> from sex & combat")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -1571,14 +1559,14 @@ public class StatusEffect {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				return Util.newArrayListOfValues(	"<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
+				return List.of("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
 						"<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Overwhelming Lust</b>",
 						"[style.boldExcellent(Double)] <b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Essence gains</b> from sex & combat",
 						"Time until <b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>storm ends</b>:",
 						Main.game.getWeatherTimeRemainingAsTimeString());
 				
 			} else {
-				return Util.newArrayListOfValues(	"<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
+				return List.of("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
 						"<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Overwhelming Lust</b>",
 						"[style.boldExcellent(Double)] <b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Essence gains</b> from sex & combat");
 			}
@@ -1591,7 +1579,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_GOOD,
 			true,
 			null,
-			Util.newArrayListOfValues("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>")) {
+			List.of("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			if(target.isPlayer() && Main.game.getDialogueFlags().values.contains(DialogueFlagValue.stormTextUpdateRequired)) {
@@ -1641,12 +1629,12 @@ public class StatusEffect {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			if(Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.ARCANE)) {
-				return Util.newArrayListOfValues(	"<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
+				return List.of("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
 						"Time until <b style='color: " + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>storm ends</b>:",
 						Main.game.getWeatherTimeRemainingAsTimeString());
 				
 			} else {
-				return Util.newArrayListOfValues(	"<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>");
+				return List.of("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>");
 			}
 		}
 	};
@@ -1663,7 +1651,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_MELEE_WEAPON, -25f),
 					new Value<>(Attribute.DAMAGE_RANGED_WEAPON, -25f),
 					new Value<>(Attribute.DAMAGE_SPELLS, -25f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
@@ -1686,7 +1674,7 @@ public class StatusEffect {
 			PresetColour.BASE_GREY_LIGHT,
 			true,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public EffectBenefit getBeneficialStatus() {
 			return EffectBenefit.NEUTRAL;
@@ -1868,8 +1856,7 @@ public class StatusEffect {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 15f),
 					new Value<>(Attribute.ENERGY_SHIELDING, 5f)),
-			Util.newArrayListOfValues(
-					"[style.boldBlueLight(Lost legs)]")) {
+			List.of("[style.boldBlueLight(Lost legs)]")) {
 		@Override
 		public String applyAdditionEffect(GameCharacter target) {
 			if(!target.isPlayer()) {
@@ -1910,8 +1897,7 @@ public class StatusEffect {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, -10f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, -15f),
 					new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
-			Util.newArrayListOfValues(
-					"[style.boldTan(Grown two legs)]")) {
+			List.of("[style.boldTan(Grown two legs)]")) {
 		@Override
 		public String applyAdditionEffect(GameCharacter target) {
 			if(!target.isPlayer()) {
@@ -1951,7 +1937,7 @@ public class StatusEffect {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, 15f),
 					new Value<>(Attribute.ENERGY_SHIELDING, 5f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
@@ -1978,7 +1964,7 @@ public class StatusEffect {
 					new Value<>(Attribute.MAJOR_PHYSIQUE, -10f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, -15f),
 					new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
@@ -2039,7 +2025,7 @@ public class StatusEffect {
 			PresetColour.MASCULINE,
 			true,
 			null,
-			Util.newArrayListOfValues("<b>-50%</b> <b style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>Lust damage</b> both to and from <b style='color:"+ PresetColour.FEMININE.toWebHexString()+ ";'>feminine opponents</b>")) {
+			List.of("<b>-50%</b> <b style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>Lust damage</b> both to and from <b style='color:"+ PresetColour.FEMININE.toWebHexString()+ ";'>feminine opponents</b>")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target.isPlayer()) {
@@ -2064,7 +2050,7 @@ public class StatusEffect {
 			PresetColour.FEMININE,
 			true,
 			null,
-			Util.newArrayListOfValues("<b>-50%</b> <b style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>Lust damage</b> both to and from <b style='color:"+ PresetColour.MASCULINE.toWebHexString()+ ";'>masculine opponents</b>")) {
+			List.of("<b>-50%</b> <b style='color:"+ PresetColour.DAMAGE_TYPE_LUST.toWebHexString()+ ";'>Lust damage</b> both to and from <b style='color:"+ PresetColour.MASCULINE.toWebHexString()+ ";'>masculine opponents</b>")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target.isPlayer()) {
@@ -2195,7 +2181,7 @@ public class StatusEffect {
 					if (c.isDirty()
 							&& Collections.disjoint(
 									c.getItemTags(),
-									Util.newArrayListOfValues(ItemTag.PLUGS_ANUS, ItemTag.SEALS_ANUS, ItemTag.PLUGS_VAGINA, ItemTag.SEALS_VAGINA, ItemTag.PLUGS_NIPPLES, ItemTag.SEALS_NIPPLES))) {
+									List.of(ItemTag.PLUGS_ANUS, ItemTag.SEALS_ANUS, ItemTag.PLUGS_VAGINA, ItemTag.SEALS_VAGINA, ItemTag.PLUGS_NIPPLES, ItemTag.SEALS_NIPPLES))) {
 						return true;
 					}
 				}
@@ -2239,7 +2225,7 @@ public class StatusEffect {
 					if (c.isDirty()
 							&& Collections.disjoint(
 									c.getItemTags(),
-									Util.newArrayListOfValues(ItemTag.PLUGS_ANUS, ItemTag.SEALS_ANUS, ItemTag.PLUGS_VAGINA, ItemTag.SEALS_VAGINA, ItemTag.PLUGS_NIPPLES, ItemTag.SEALS_NIPPLES))) {
+									List.of(ItemTag.PLUGS_ANUS, ItemTag.SEALS_ANUS, ItemTag.PLUGS_VAGINA, ItemTag.SEALS_VAGINA, ItemTag.PLUGS_NIPPLES, ItemTag.SEALS_NIPPLES))) {
 						return true;
 					}
 				}
@@ -2379,7 +2365,7 @@ public class StatusEffect {
 			PresetColour.ATTRIBUTE_CORRUPTION,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_CORRUPTION, 25f)),
-			Util.newArrayListOfValues("[style.boldMinorBad(-10%)] [style.boldHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]",
+			List.of("[style.boldMinorBad(-10%)] [style.boldHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]",
 					"[style.boldMinorBad(-10%)] [style.boldMana(Maximum "+Attribute.MANA_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2404,7 +2390,7 @@ public class StatusEffect {
 			PresetColour.ATTRIBUTE_CORRUPTION,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_CORRUPTION, 50f)),
-			Util.newArrayListOfValues("[style.boldBad(-50%)] [style.boldHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]",
+			List.of("[style.boldBad(-50%)] [style.boldHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]",
 					"[style.boldBad(-50%)] [style.boldMana(Maximum "+Attribute.MANA_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2429,7 +2415,7 @@ public class StatusEffect {
 			PresetColour.ATTRIBUTE_CORRUPTION,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_CORRUPTION, 100f)),
-			Util.newArrayListOfValues("[style.boldHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")] [style.boldTerrible(set to 1)]",
+			List.of("[style.boldHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")] [style.boldTerrible(set to 1)]",
 					"[style.boldMana(Maximum "+Attribute.MANA_MAXIMUM.getName()+")] [style.boldTerrible(set to 1)]",
 					"[style.boldTerrible(All shielding set to 0)]")) {
 		@Override
@@ -2675,7 +2661,7 @@ public class StatusEffect {
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, -10f),
 					new Value<>(Attribute.MANA_MAXIMUM, -10f)),
-			Util.newArrayListOfValues("While working:",
+			List.of("While working:",
 					"[style.boldBad(-0.05)] [style.colourAffection(Affection/hour)]",
 					"[style.boldBad(-25%)] [style.colourExperience(experience)] gain chance")) {
 		@Override
@@ -2703,7 +2689,7 @@ public class StatusEffect {
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, -25f),
 					new Value<>(Attribute.MANA_MAXIMUM, -25f)),
-			Util.newArrayListOfValues("[style.boldBad(-0.1)] [style.colourAffection(Affection/hour)]",
+			List.of("[style.boldBad(-0.1)] [style.colourAffection(Affection/hour)]",
 					"[style.boldBad(-50%)] [style.colourExperience(experience)] gain chance")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2730,7 +2716,7 @@ public class StatusEffect {
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -50f),
 					new Value<>(Attribute.MANA_MAXIMUM, -50f)),
-			Util.newArrayListOfValues("[style.boldBad(-0.15)] [style.colourAffection(Affection/hour)]",
+			List.of("[style.boldBad(-0.15)] [style.colourAffection(Affection/hour)]",
 					"[style.boldBad(-75%)] [style.colourExperience(experience)] gain chance")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2757,7 +2743,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.HEALTH_MAXIMUM, -15f),
 					new Value<>(Attribute.RESISTANCE_PHYSICAL, -5f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target!=null) {
@@ -2798,7 +2784,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -5f),
 					new Value<>(Attribute.MAJOR_ARCANE, -5f),
 					new Value<>(Attribute.RESISTANCE_LUST, -25f)),
-			Util.newArrayListOfValues("Open to <b style='color: " + PresetColour.PSYCHOACTIVE.toWebHexString() + ";'>Hypnotic Suggestion</b>")) {
+			List.of("Open to <b style='color: " + PresetColour.PSYCHOACTIVE.toWebHexString() + ";'>Hypnotic Suggestion</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			if(target.isPlayer() && Math.random()<=Util.getModifiedDropoffValue((secondsPassed/60)*0.0075f, 0.5f)) {
@@ -2946,8 +2932,7 @@ public class StatusEffect {
 					new Value<>(Attribute.HEALTH_MAXIMUM, 5f),
 					new Value<>(Attribute.MANA_MAXIMUM, 5f),
 					new Value<>(Attribute.DAMAGE_LUST, 5f)),
-			Util.newArrayListOfValues(
-					"[style.boldMinorGood(Doubles)] [style.colourHealth(health)] and [style.colourMana(aura)] regeneration rate")) {
+			List.of("[style.boldMinorGood(Doubles)] [style.colourHealth(health)] and [style.colourMana(aura)] regeneration rate")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target,
@@ -2965,8 +2950,7 @@ public class StatusEffect {
 					new Value<>(Attribute.HEALTH_MAXIMUM, 10f),
 					new Value<>(Attribute.MANA_MAXIMUM, 10f),
 					new Value<>(Attribute.DAMAGE_LUST, 10f)),
-			Util.newArrayListOfValues(
-					"[style.boldGood(Triples)] [style.colourHealth(health)] and [style.colourMana(aura)] regeneration rate")) {
+			List.of("[style.boldGood(Triples)] [style.colourHealth(health)] and [style.colourMana(aura)] regeneration rate")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target,
@@ -2985,8 +2969,7 @@ public class StatusEffect {
 					new Value<>(Attribute.HEALTH_MAXIMUM, 25f),
 					new Value<>(Attribute.MANA_MAXIMUM, 25f),
 					new Value<>(Attribute.DAMAGE_LUST, 15f)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Quadruples)] [style.colourHealth(health)] and [style.colourMana(aura)] regeneration rate")) {
+			List.of("[style.boldExcellent(Quadruples)] [style.colourHealth(health)] and [style.colourMana(aura)] regeneration rate")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target,
@@ -3588,7 +3571,7 @@ public class StatusEffect {
 			PresetColour.BASE_CRIMSON,
 			false,
 			null,
-			Util.newArrayListOfValues("[style.colourBad(Total infertility)]")) {
+			List.of("[style.colourBad(Total infertility)]")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			return "";
@@ -3811,7 +3794,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
-			Util.newArrayListOfValues("-5% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
+			List.of("-5% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target,
@@ -3926,7 +3909,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
-			Util.newArrayListOfValues("-10% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
+			List.of("-10% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target,
@@ -4049,7 +4032,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
-			Util.newArrayListOfValues("-15% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
+			List.of("-15% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target,
@@ -4087,11 +4070,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.ANUS).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4132,11 +4115,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.ANUS).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4184,11 +4167,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.ANUS).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4216,11 +4199,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.NIPPLE).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4262,11 +4245,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.NIPPLE).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4313,11 +4296,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.NIPPLE).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4345,11 +4328,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.NIPPLE_CROTCH).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getName(GameCharacter target) {
@@ -4398,11 +4381,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.NIPPLE_CROTCH).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getName(GameCharacter target) {
@@ -4456,11 +4439,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.NIPPLE_CROTCH).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getName(GameCharacter target) {
@@ -4496,11 +4479,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.SPINNERET).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4542,11 +4525,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.SPINNERET).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4593,11 +4576,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.SPINNERET).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4626,11 +4609,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.VAGINA).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4672,11 +4655,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.VAGINA).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4723,11 +4706,11 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
-			Util.newArrayListOfValues()) {
+			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			int count = target.getIncubationLitter(SexAreaOrifice.VAGINA).getTotalLitterCount();
-			return Util.newArrayListOfValues("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
+			return List.of("[style.colourYellowLight(Incubating)] [style.colourGood("+Util.intToString(count)+")] [style.colourYellowLight(egg"+(count>1?"s":"")+")]");
 		}
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4794,8 +4777,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.FERTILITY, 100f),
 					new Value<>(Attribute.VIRILITY, 100f)),
-			Util.newArrayListOfValues(
-					"[style.colourExcellent(Doubles)] offspring conceived")) {
+			List.of("[style.colourExcellent(Doubles)] offspring conceived")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target,
@@ -5497,7 +5479,7 @@ public class StatusEffect {
 			PresetColour.CUM,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
+			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
@@ -5617,7 +5599,7 @@ public class StatusEffect {
 			PresetColour.CUM,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
+			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
@@ -5732,7 +5714,7 @@ public class StatusEffect {
 			PresetColour.CUM,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
+			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
@@ -5842,7 +5824,7 @@ public class StatusEffect {
 			PresetColour.CUM,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
+			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
@@ -5947,7 +5929,7 @@ public class StatusEffect {
 			PresetColour.CUM,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
+			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
@@ -6063,7 +6045,7 @@ public class StatusEffect {
 			PresetColour.CUM,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
+			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public String getName(GameCharacter owner) {
 			if(owner.getBreastCrotchShape()==BreastShape.UDDERS) {
@@ -6256,7 +6238,7 @@ public class StatusEffect {
 			PresetColour.CUM,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
-			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
+			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
@@ -6712,7 +6694,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_SEX,
 			false,
 			Util.newHashMapOfValues(),
-			Util.newArrayListOfValues("[style.colourSex(Increasing in intensity...)]")) {
+			List.of("[style.colourSex(Increasing in intensity...)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {//TODO if one key-holder, mention them
 			return UtilText.parse(target, "[npc.Name] [npc.has] been locked in chastity, and will sooner or later start to feel frustrated at not being able to have a proper orgasm...");
@@ -6772,7 +6754,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_SEX,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -5f)),
-			Util.newArrayListOfValues("[style.colourSex(Increasing in intensity...)]")) {
+			List.of("[style.colourSex(Increasing in intensity...)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, "[npc.Name] [npc.has] been locked in chastity for over two days now, and [npc.is] already starting to feel frustrated at not being able to have a proper orgasm...");
@@ -6796,7 +6778,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_SEX,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -15f)),
-			Util.newArrayListOfValues("[style.colourSex(Increasing in intensity...)]")) {
+			List.of("[style.colourSex(Increasing in intensity...)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, "[npc.Name] [npc.has] been locked in chastity for over a week now, and [npc.is] feeling very frustrated and pent-up at not being able to have a proper orgasm...");
@@ -6820,7 +6802,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_SEX,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -50f)),
-			Util.newArrayListOfValues("[style.colourSex(Maximum intensity)]")) {
+			List.of("[style.colourSex(Maximum intensity)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, "[npc.Name] [npc.has] been locked in chastity for over two weeks now, and [npc.is] feeling extremely frustrated and pent-up at not being able to have a proper orgasm...");
@@ -6857,8 +6839,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.RESISTANCE_LUST, -5f),
 					new Value<>(Attribute.RESTING_LUST, 5f)),
-			Util.newArrayListOfValues(
-					"[style.colourSex(Orgasming)] will remove this effect!")) {
+			List.of("[style.colourSex(Orgasming)] will remove this effect!")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			StringBuilder sb = new StringBuilder();
@@ -6908,8 +6889,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.RESISTANCE_LUST, -15f),
 					new Value<>(Attribute.RESTING_LUST, 10f)),
-			Util.newArrayListOfValues(
-					"[style.colourSex(Orgasming)] will remove this effect!")) {
+			List.of("[style.colourSex(Orgasming)] will remove this effect!")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			StringBuilder sb = new StringBuilder();
@@ -6959,8 +6939,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.RESISTANCE_LUST, -50f),
 					new Value<>(Attribute.RESTING_LUST, 15f)),
-			Util.newArrayListOfValues(
-					"[style.colourSex(Orgasming)] will remove this effect!")) {
+			List.of("[style.colourSex(Orgasming)] will remove this effect!")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			StringBuilder sb = new StringBuilder();
@@ -8131,7 +8110,7 @@ public class StatusEffect {
 			PresetColour.BASE_PINK_LIGHT,
 			false,
 			null,
-			Util.newArrayListOfValues("[style.italicsMinorGood(Maximum values are 25)]")) {
+			List.of("[style.italicsMinorGood(Maximum values are 25)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			if(target.hasTrait(Perk.JOB_CHEF, true)) {
@@ -8160,7 +8139,7 @@ public class StatusEffect {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
 			if(target.hasTrait(Perk.JOB_CHEF, true)) {
-				return Util.newArrayListOfValues("[style.italicsGood(Maximum values are 50)]");
+				return List.of("[style.italicsGood(Maximum values are 50)]");
 			}
 			return super.getExtraEffects(target);
 		}
@@ -8178,7 +8157,7 @@ public class StatusEffect {
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, 5f),
 					new Value<>(Attribute.MANA_MAXIMUM, 5f)),
-			Util.newArrayListOfValues("[style.italicsGood(Happiness!)]")) {
+			List.of("[style.italicsGood(Happiness!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return "The silver-furred fox, <i>Happiness</i>, is following you around wherever you go."
@@ -8298,7 +8277,7 @@ public class StatusEffect {
 			PresetColour.ATTRIBUTE_LUST,
 			false,
 			null,
-			Util.newArrayListOfValues("Incoming <b style='color:"+PresetColour.ATTRIBUTE_LUST.toWebHexString()+";'>Lust damage</b> dealt as"
+			List.of("Incoming <b style='color:"+PresetColour.ATTRIBUTE_LUST.toWebHexString()+";'>Lust damage</b> dealt as"
 							+ " <b style='color:"+PresetColour.ATTRIBUTE_HEALTH.toWebHexString()+";'>2*Energy damage</b>"
 							+ " and <b style='color:"+PresetColour.ATTRIBUTE_MANA.toWebHexString()+";'>1*Aura damage</b>",
 					"<b style='color: " + PresetColour.GENERIC_TERRIBLE.toWebHexString() + "'>Incoming damage ignores all shielding</b>")) {
@@ -8398,7 +8377,7 @@ public class StatusEffect {
 			PresetColour.ATTRIBUTE_HEALTH,
 			false,
 			null,
-			Util.newArrayListOfValues("<b>15</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>")) {
+			List.of("<b>15</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			Value<String, Integer> damageValue = DamageType.POISON.damageTarget(null, target, 15);
@@ -8421,8 +8400,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -25f)),
-			Util.newArrayListOfValues(
-					"<b>5</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>",
+			List.of("<b>5</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>",
 					"<b>10</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -8448,7 +8426,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.ACTION_POINTS, -3f)),
-			Util.newArrayListOfValues("[style.colourTerrible(Cannot attempt to escape!)]")) {
+			List.of("[style.colourTerrible(Cannot attempt to escape!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, "A powerful arcane seal is holding [npc.name] firmly in place, preventing [npc.herHim] from taking any action!");
@@ -8459,8 +8437,7 @@ public class StatusEffect {
 		}
 		@Override
 		public List<ItemTag> getTags() {
-			return Util.newArrayListOfValues(
-					ItemTag.HINDERS_ARM_MOVEMENT,
+			return List.of(ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT,
 					ItemTag.PREVENTS_COMBAT_ESCAPE);
 		}
@@ -8551,8 +8528,7 @@ public class StatusEffect {
 		}
 		@Override
 		public List<ItemTag> getTags() {
-			return Util.newArrayListOfValues(
-					ItemTag.HINDERS_ARM_MOVEMENT,
+			return List.of(ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT);
 		}
 	};
@@ -8566,7 +8542,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_PHYSICAL, -75f),
 					new Value<>(Attribute.RESISTANCE_PHYSICAL, -15f),
 					new Value<>(Attribute.ACTION_POINTS, -2f)),
-			Util.newArrayListOfValues("[style.colourTerrible(Cannot attempt to escape!)]")) {
+			List.of("[style.colourTerrible(Cannot attempt to escape!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 				return UtilText.parse(target, "A huge amount of thick, sticky webbing is clinging to [npc.namePos] body, making it all but impossible for [npc.herHim] to move [npc.her] [npc.arms] and [npc.legs]!"
@@ -8578,8 +8554,7 @@ public class StatusEffect {
 		}
 		@Override
 		public List<ItemTag> getTags() {
-			return Util.newArrayListOfValues(
-					ItemTag.HINDERS_ARM_MOVEMENT,
+			return List.of(ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT,
 					ItemTag.PREVENTS_COMBAT_ESCAPE);
 		}
@@ -8591,7 +8566,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			false,
 			null,
-			Util.newArrayListOfValues("[style.colourTerrible(Cannot move!)]")) {
+			List.of("[style.colourTerrible(Cannot move!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 				return UtilText.parse(target, "A huge amount of thick, sticky webbing is clinging to [npc.namePos] body, making it all but impossible for [npc.herHim] to move!");
@@ -8620,7 +8595,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			false,
 			null,
-			Util.newArrayListOfValues("[style.colourTerrible(Cannot move!)]")) {
+			List.of("[style.colourTerrible(Cannot move!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, "A powerful arcane seal is holding [npc.name] firmly in place, preventing [npc.herHim] from taking any action!");
@@ -8686,8 +8661,7 @@ public class StatusEffect {
 		}
 		@Override
 		public List<ItemTag> getTags() {
-			return Util.newArrayListOfValues(
-					ItemTag.HINDERS_ARM_MOVEMENT,
+			return List.of(ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT);
 		}
 	};
@@ -8702,7 +8676,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_PHYSICAL, -75f),
 					new Value<>(Attribute.RESISTANCE_PHYSICAL, -15f),
 					new Value<>(Attribute.ACTION_POINTS, -2f)),
-			Util.newArrayListOfValues("[style.colourTerrible(Cannot attempt to escape!)]")) {
+			List.of("[style.colourTerrible(Cannot attempt to escape!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 				return UtilText.parse(target, "Strong tentacles have constricted [npc.namePos] in a vice-like grip, making it all but impossible for [npc.herHim] to move [npc.her] [npc.arms] and [npc.legs]!"
@@ -8714,8 +8688,7 @@ public class StatusEffect {
 		}
 		@Override
 		public List<ItemTag> getTags() {
-			return Util.newArrayListOfValues(
-					ItemTag.HINDERS_ARM_MOVEMENT,
+			return List.of(ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT,
 					ItemTag.PREVENTS_COMBAT_ESCAPE);
 		}
@@ -8727,7 +8700,7 @@ public class StatusEffect {
 			PresetColour.getColourFromId("NoStepOnSnek_octopus"),
 			false,
 			null,
-			Util.newArrayListOfValues("[style.colourTerrible(Cannot move!)]")) {
+			List.of("[style.colourTerrible(Cannot move!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			Value<ImmobilisationType, GameCharacter> type = Main.sex.getImmobilisationType(target);
@@ -8794,8 +8767,7 @@ public class StatusEffect {
 		}
 		@Override
 		public List<ItemTag> getTags() {
-			return Util.newArrayListOfValues(
-					ItemTag.HINDERS_ARM_MOVEMENT,
+			return List.of(ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT);
 		}
 	};
@@ -8810,7 +8782,7 @@ public class StatusEffect {
 					new Value<>(Attribute.DAMAGE_PHYSICAL, -75f),
 					new Value<>(Attribute.RESISTANCE_PHYSICAL, -15f),
 					new Value<>(Attribute.ACTION_POINTS, -2f)),
-			Util.newArrayListOfValues("[style.colourTerrible(Cannot attempt to escape!)]")) {
+			List.of("[style.colourTerrible(Cannot attempt to escape!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 				return UtilText.parse(target, "A strong, snake-like tail has constricted [npc.namePos] in a vice-like grip, making it all but impossible for [npc.herHim] to move [npc.her] [npc.arms] and [npc.legs]!"
@@ -8822,8 +8794,7 @@ public class StatusEffect {
 		}
 		@Override
 		public List<ItemTag> getTags() {
-			return Util.newArrayListOfValues(
-					ItemTag.HINDERS_ARM_MOVEMENT,
+			return List.of(ItemTag.HINDERS_ARM_MOVEMENT,
 					ItemTag.HINDERS_LEG_MOVEMENT,
 					ItemTag.PREVENTS_COMBAT_ESCAPE);
 		}
@@ -8835,7 +8806,7 @@ public class StatusEffect {
 			PresetColour.BASE_GREEN_DARK,
 			false,
 			null,
-			Util.newArrayListOfValues("[style.colourTerrible(Cannot move!)]")) {
+			List.of("[style.colourTerrible(Cannot move!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			Value<ImmobilisationType, GameCharacter> type = Main.sex.getImmobilisationType(target);
@@ -8865,7 +8836,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_POISON,
 			false,
 			null,
-			Util.newArrayListOfValues("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>")) {
+			List.of("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			Value<String, Integer> damageValue = DamageType.POISON.damageTarget(null, target, 25);
@@ -8893,7 +8864,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_FIRE,
 			true,
 			null,
-			Util.newArrayListOfValues("[style.boldFire(Fire Spells)] can be cast at a cost of "+Attribute.HEALTH_MAXIMUM.getName()+" when out of aura",
+			List.of("[style.boldFire(Fire Spells)] can be cast at a cost of "+Attribute.HEALTH_MAXIMUM.getName()+" when out of aura",
 					"[style.boldGood(Will not reduce "+Attribute.HEALTH_MAXIMUM.getName()+" below 1)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8916,7 +8887,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_FIRE,
 			false,
 			null,
-			Util.newArrayListOfValues("<b>5</b> [style.boldFire(Fire Damage)] per turn</b>")) {
+			List.of("<b>5</b> [style.boldFire(Fire Damage)] per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			Value<String, Integer> damageValue = DamageType.FIRE.damageTarget(null, target, 5);
@@ -9015,7 +8986,7 @@ public class StatusEffect {
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_FIRE, 5f),
 					new Value<>(Attribute.RESISTANCE_ICE, 10f)),
-			Util.newArrayListOfValues("Unarmed attacks deal +1 damage per caster level",
+			List.of("Unarmed attacks deal +1 damage per caster level",
 					"Unarmed attacks deal [style.boldFire(Fire Damage)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9040,7 +9011,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_FIRE, 25f),
 					new Value<>(Attribute.RESISTANCE_FIRE, 5f),
 					new Value<>(Attribute.RESISTANCE_ICE, 10f)),
-			Util.newArrayListOfValues("Unarmed attacks deal +1 damage per caster level",
+			List.of("Unarmed attacks deal +1 damage per caster level",
 					"Unarmed attacks deal [style.boldFire(Fire Damage)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9065,7 +9036,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_FIRE, 25f),
 					new Value<>(Attribute.RESISTANCE_FIRE, 10f),
 					new Value<>(Attribute.RESISTANCE_ICE, 20f)),
-			Util.newArrayListOfValues("Unarmed attacks deal +1 damage per caster level",
+			List.of("Unarmed attacks deal +1 damage per caster level",
 					"Unarmed attacks deal [style.boldFire(Fire Damage)]",
 					"Attackers take <b>5</b> [style.colourFire(Fire Damage)]")) {
 		@Override
@@ -9158,7 +9129,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_FIRE,
 			false,
 			null,
-			Util.newArrayListOfValues("-50% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
+			List.of("-50% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, target.getElemental(),
@@ -9182,7 +9153,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_FIRE,
 			true,
 			null,
-			Util.newArrayListOfValues("+100% [style.colourExcellent(Non-Seduction Damage)]")) {
+			List.of("+100% [style.colourExcellent(Non-Seduction Damage)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, ((Elemental)target).getSummoner(), "[npc.Name] is siphoning off as much of [npc2.namePos] energy as [npc.she] wants, enabling [npc.herHim] to deal a huge amount of damage!");
@@ -9463,7 +9434,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_COLD,
 			false,
 			null,
-			Util.newArrayListOfValues("-50% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
+			List.of("-50% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, target.getElemental(),
@@ -9487,7 +9458,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_COLD,
 			true,
 			null,
-			Util.newArrayListOfValues("+100% [style.colourExcellent(Non-Seduction Damage)]")) {
+			List.of("+100% [style.colourExcellent(Non-Seduction Damage)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, ((Elemental)target).getSummoner(), "[npc.Name] is siphoning off as much of [npc2.namePos] energy as [npc.she] wants, enabling [npc.herHim] to deal a huge amount of damage!");
@@ -9536,7 +9507,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_POISON,
 			false,
 			null,
-			Util.newArrayListOfValues("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>")) {
+			List.of("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			Value<String, Integer> damageValue = DamageType.POISON.damageTarget(null, target, 25);
@@ -9563,7 +9534,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_POISON,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
-			Util.newArrayListOfValues("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>")) {
+			List.of("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>")) {
 				@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			Value<String, Integer> damageValue = DamageType.POISON.damageTarget(null, target, 25);
@@ -9590,7 +9561,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_POISON,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
-			Util.newArrayListOfValues("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>",
+			List.of("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>",
 					"<b>10</b> "+Attribute.MANA_MAXIMUM.getColouredName("b")+" [style.boldTerrible(drained)] per turn</b>")) {
 				@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -9625,7 +9596,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -5f),
 					new Value<>(Attribute.DAMAGE_PHYSICAL, -15f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, -25f)),
-			Util.newArrayListOfValues("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>",
+			List.of("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>",
 					"<b>10</b> "+Attribute.MANA_MAXIMUM.getColouredName("b")+" [style.boldTerrible(drained)] per turn</b>")) {
 				@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -9704,7 +9675,7 @@ public class StatusEffect {
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -20f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, -25f)),
-			Util.newArrayListOfValues("<b>10%</b> chance per turn of [style.boldExcellent(stripping)] clothing")) {
+			List.of("<b>10%</b> chance per turn of [style.boldExcellent(stripping)] clothing")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			if(Math.random()<(target.isPlayer()?0.1f:0.166f)) { // I purposefully boost the chance in secret to make the player feel better about the RNG
@@ -9750,7 +9721,7 @@ public class StatusEffect {
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -20f),
 					new Value<>(Attribute.CRITICAL_DAMAGE, -25f)),
-			Util.newArrayListOfValues("<b>25%</b> chance per turn of [style.boldExcellent(stripping)] clothing")) {
+			List.of("<b>25%</b> chance per turn of [style.boldExcellent(stripping)] clothing")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			if(Math.random()<(target.isPlayer()?0.25f:0.33f)) { // I purposefully boost the chance in secret to make the player feel better about the RNG
@@ -9940,7 +9911,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
 			null,
-			Util.newArrayListOfValues("-50% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
+			List.of("-50% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, target.getElemental(),
@@ -9964,7 +9935,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
 			null,
-			Util.newArrayListOfValues("+100% [style.colourExcellent(Non-Seduction Damage)]")) {
+			List.of("+100% [style.colourExcellent(Non-Seduction Damage)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, ((Elemental)target).getSummoner(), "[npc.Name] is siphoning off as much of [npc2.namePos] energy as [npc.she] wants, enabling [npc.herHim] to deal a huge amount of damage!");
@@ -10064,7 +10035,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
 			null,
-			Util.newArrayListOfValues("<b>25</b> "+Attribute.DAMAGE_PHYSICAL.getColouredName("b")+" per turn</b>")) {
+			List.of("<b>25</b> "+Attribute.DAMAGE_PHYSICAL.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			Value<String, Integer> damageValue = DamageType.PHYSICAL.damageTarget(null, target, 25);
@@ -10092,7 +10063,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, -20f)),
-			Util.newArrayListOfValues("<b>25</b> "+Attribute.DAMAGE_PHYSICAL.getColouredName("b")+" per turn</b>")) {
+			List.of("<b>25</b> "+Attribute.DAMAGE_PHYSICAL.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			Value<String, Integer> damageValue = DamageType.PHYSICAL.damageTarget(null, target, 25);
@@ -10120,7 +10091,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, -20f)),
-			Util.newArrayListOfValues("<b>50</b> "+Attribute.DAMAGE_PHYSICAL.getColouredName("b")+" per turn</b>")) {
+			List.of("<b>50</b> "+Attribute.DAMAGE_PHYSICAL.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			Value<String, Integer> damageValue = DamageType.PHYSICAL.damageTarget(null, target, 50);
@@ -10219,7 +10190,7 @@ public class StatusEffect {
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, 10f),
 					new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
-			Util.newArrayListOfValues("[style.colourExcellent(All enemies)] take <b>10</b> "+Attribute.DAMAGE_PHYSICAL.getColouredName("b")+" when Stone Shell ends")) {
+			List.of("[style.colourExcellent(All enemies)] take <b>10</b> "+Attribute.DAMAGE_PHYSICAL.getColouredName("b")+" when Stone Shell ends")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target,
@@ -10325,7 +10296,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
 			null,
-			Util.newArrayListOfValues("-50% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
+			List.of("-50% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, target.getElemental(),
@@ -10349,7 +10320,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
 			null,
-			Util.newArrayListOfValues("+100% [style.colourExcellent(Non-Seduction Damage)]")) {
+			List.of("+100% [style.colourExcellent(Non-Seduction Damage)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, ((Elemental)target).getSummoner(), "[npc.Name] is siphoning off as much of [npc2.namePos] energy as [npc.she] wants, enabling [npc.herHim] to deal a huge amount of damage!");
@@ -10490,7 +10461,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_LUST,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 30f)),
-			Util.newArrayListOfValues("[style.boldLust(Tease)] [style.boldExcellent(applies)] -25 "+Attribute.RESISTANCE_PHYSICAL.getColouredName("b")+" to the target for [style.boldGood(2 turns)]")) {
+			List.of("[style.boldLust(Tease)] [style.boldExcellent(applies)] -25 "+Attribute.RESISTANCE_PHYSICAL.getColouredName("b")+" to the target for [style.boldGood(2 turns)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target,
@@ -10554,7 +10525,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -25f)),
-			Util.newArrayListOfValues("<b>5</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn</b>")) {
+			List.of("<b>5</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			Value<String, Integer> damageValue = DamageType.LUST.damageTarget(null, target, 5);
@@ -10582,7 +10553,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -25f)),
-			Util.newArrayListOfValues("<b>15</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn</b>")) {
+			List.of("<b>15</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			Value<String, Integer> damageValue = DamageType.LUST.damageTarget(null, target, 15);
@@ -10610,7 +10581,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -25f)),
-			Util.newArrayListOfValues("[style.boldTerrible(All party members)] take <b>15</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn</b>")) {
+			List.of("[style.boldTerrible(All party members)] take <b>15</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			StringBuilder sb = new StringBuilder();
@@ -10718,7 +10689,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
 			null,
-			Util.newArrayListOfValues("-50% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
+			List.of("-50% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, target.getElemental(),
@@ -10742,7 +10713,7 @@ public class StatusEffect {
 			PresetColour.DAMAGE_TYPE_LUST,
 			true,
 			null,
-			Util.newArrayListOfValues("+100% [style.colourExcellent(Non-Seduction Damage)]")) {
+			List.of("+100% [style.colourExcellent(Non-Seduction Damage)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
 			return UtilText.parse(target, ((Elemental)target).getSummoner(), "[npc.Name] is siphoning off as much of [npc2.namePos] energy as [npc.she] wants, enabling [npc.herHim] to deal a huge amount of damage!");
@@ -10857,7 +10828,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_ARCANE,
 			true,
 			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 100f)),
-			Util.newArrayListOfValues("<b>5</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn to a random enemy")) {
+			List.of("<b>5</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn to a random enemy")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 			GameCharacter randomEnemy = Main.combat.getEnemies(target).get(Util.random.nextInt(Main.combat.getEnemies(target).size()));
@@ -10928,8 +10899,7 @@ public class StatusEffect {
 			PresetColour.BASE_AQUA,
 			true,
 			null,
-			Util.newArrayListOfValues(
-					"[style.colourDirty(Dirty body parts)] are [style.colourAqua(quickly cleaned)]")) {
+			List.of("[style.colourDirty(Dirty body parts)] are [style.colourAqua(quickly cleaned)]")) {
 		public EffectBenefit getBeneficialStatus() {
 			return EffectBenefit.NEUTRAL;
 		}
@@ -11240,7 +11210,7 @@ public class StatusEffect {
 					&& !Main.sex.getOngoingSexAreas(target, SexAreaPenetration.PENIS).isEmpty()
 					&& !Collections.disjoint(
 							Main.sex.getOngoingSexAreas(target, SexAreaPenetration.PENIS).get(Main.sex.getCharacterOngoingSexArea(target, SexAreaPenetration.PENIS).get(0)),
-							Util.newArrayListOfValues(SexAreaPenetration.values()));
+							List.of(SexAreaPenetration.values()));
 		}
 		@Override
 		public boolean isSexEffect() {
@@ -11371,7 +11341,7 @@ public class StatusEffect {
 					&& !Main.sex.getOngoingSexAreas(target, SexAreaPenetration.CLIT).isEmpty()
 					&& !Collections.disjoint(
 							Main.sex.getOngoingSexAreas(target, SexAreaPenetration.CLIT).get(Main.sex.getCharacterOngoingSexArea(target, SexAreaPenetration.CLIT).get(0)),
-							Util.newArrayListOfValues(SexAreaPenetration.values()));
+							List.of(SexAreaPenetration.values()));
 		}
 		@Override
 		public boolean isSexEffect() {

@@ -112,8 +112,7 @@ public class Vagina implements BodyPartInterface {
 		}
 		
 		if(owner.isVaginaFeral()) {
-			descriptorList.add(Util.randomItemFrom(Util.newArrayListOfValues(
-					"feral",
+			descriptorList.add(Util.randomItemFrom(List.of("feral",
 					"bestial",
 					"animalistic")));
 		} else {

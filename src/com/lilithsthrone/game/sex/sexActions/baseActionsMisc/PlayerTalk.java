@@ -236,11 +236,11 @@ public class PlayerTalk {
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
 				if(Main.sex.getSexPace(Main.game.getPlayer())==SexPace.SUB_RESISTING) {
-					return Util.newArrayListOfValues(Fetish.FETISH_NON_CON_SUB);
+					return List.of(Fetish.FETISH_NON_CON_SUB);
 				}
 			} else {
 				if(Main.sex.getSexPace(Main.game.getPlayer())==SexPace.SUB_RESISTING) {
-					return Util.newArrayListOfValues(Fetish.FETISH_NON_CON_DOM);
+					return List.of(Fetish.FETISH_NON_CON_DOM);
 				}
 			}
 			
@@ -474,7 +474,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.VAGINA))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.VAGINA)));
+				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.VAGINA)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.VAGINA));
@@ -542,7 +542,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, null))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, null)));
+				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, null)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, null));
@@ -607,7 +607,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.ANUS))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.ANUS)));
+				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.ANUS)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.ANUS));
@@ -618,14 +618,14 @@ public class PlayerTalk {
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
 				if(Main.game.getPlayer().getVaginaType()!=VaginaType.NONE) {
-					return Util.newArrayListOfValues(Fetish.FETISH_ANAL_RECEIVING, Fetish.FETISH_PURE_VIRGIN);
+					return List.of(Fetish.FETISH_ANAL_RECEIVING, Fetish.FETISH_PURE_VIRGIN);
 					
 				} else {
-					return Util.newArrayListOfValues(Fetish.FETISH_ANAL_RECEIVING);
+					return List.of(Fetish.FETISH_ANAL_RECEIVING);
 				}
 				
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_ANAL_GIVING);
+				return List.of(Fetish.FETISH_ANAL_GIVING);
 			}
 		}
 	};
@@ -688,7 +688,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, null))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, null)));
+				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, null)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, null));
@@ -698,10 +698,10 @@ public class PlayerTalk {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_ANAL_GIVING);
+				return List.of(Fetish.FETISH_ANAL_GIVING);
 				
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_ANAL_RECEIVING);
+				return List.of(Fetish.FETISH_ANAL_RECEIVING);
 			}
 		}
 	};
@@ -752,8 +752,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.MOUTH))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(
-						new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.MOUTH),
+				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.MOUTH),
 						new SexType(SexParticipantType.NORMAL, null, SexAreaPenetration.TONGUE)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
@@ -764,10 +763,10 @@ public class PlayerTalk {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_ORAL_GIVING);
+				return List.of(Fetish.FETISH_ORAL_GIVING);
 				
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_ORAL_RECEIVING);
+				return List.of(Fetish.FETISH_ORAL_RECEIVING);
 			}
 		}
 	};
@@ -830,8 +829,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, null))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(
-						new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, null),
+				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, null),
 						new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, null)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
@@ -842,10 +840,10 @@ public class PlayerTalk {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_ORAL_RECEIVING);
+				return List.of(Fetish.FETISH_ORAL_RECEIVING);
 				
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_ORAL_GIVING);
+				return List.of(Fetish.FETISH_ORAL_GIVING);
 			}
 		}
 	};
@@ -908,7 +906,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.NIPPLE))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.NIPPLE)));
+				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.NIPPLE)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.NIPPLE));
@@ -918,10 +916,10 @@ public class PlayerTalk {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BREASTS_SELF);
+				return List.of(Fetish.FETISH_BREASTS_SELF);
 				
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_BREASTS_OTHERS);
+				return List.of(Fetish.FETISH_BREASTS_OTHERS);
 			}
 		}
 	};
@@ -986,7 +984,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST)));
+				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST));
@@ -996,10 +994,10 @@ public class PlayerTalk {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BREASTS_SELF);
+				return List.of(Fetish.FETISH_BREASTS_SELF);
 				
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_BREASTS_OTHERS);
+				return List.of(Fetish.FETISH_BREASTS_OTHERS);
 			}
 		}
 	};
@@ -1064,7 +1062,7 @@ public class PlayerTalk {
 		@Override
 		public void applyEffects() {
 			if(!((NPC)Main.sex.getCharacterTargetedForSexAction(this)).getSexBehaviourDeniesRequests(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST))) {
-				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), Util.newArrayListOfValues(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST)));
+				((NPC)Main.sex.getCharacterTargetedForSexAction(this)).generateSexChoices(true, Main.game.getPlayer(), List.of(new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST)));
 				
 			} else if(!Main.sex.isDom(Main.game.getPlayer())) {
 				Main.sex.addRequestsBlocked(Main.game.getPlayer(), new SexType(SexParticipantType.NORMAL, null, SexAreaOrifice.BREAST));
@@ -1074,9 +1072,9 @@ public class PlayerTalk {
 		@Override
 		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
-				return Util.newArrayListOfValues(Fetish.FETISH_BREASTS_SELF);
+				return List.of(Fetish.FETISH_BREASTS_SELF);
 			} else {
-				return Util.newArrayListOfValues(Fetish.FETISH_BREASTS_OTHERS);
+				return List.of(Fetish.FETISH_BREASTS_OTHERS);
 			}
 		}
 	};

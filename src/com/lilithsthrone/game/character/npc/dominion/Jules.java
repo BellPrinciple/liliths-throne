@@ -114,7 +114,7 @@ public class Jules extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_SLUT);
 		
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(Perk.UNARMED_DAMAGE),
+				List.of(Perk.UNARMED_DAMAGE),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 1),
 						new Value<>(PerkCategory.LUST, 0),

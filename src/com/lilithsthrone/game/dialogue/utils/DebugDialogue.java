@@ -166,13 +166,11 @@ public class DebugDialogue {
 					};
 					
 				} else if (index == 5) {
-					if(!Util.newArrayListOfValues(
-							PlaceType.DOMINION_BACK_ALLEYS,
+					if(!List.of(PlaceType.DOMINION_BACK_ALLEYS,
 							PlaceType.DOMINION_CANAL,
 							PlaceType.DOMINION_CANAL_END,
 							PlaceType.DOMINION_ALLEYS_CANAL_CROSSING,
-							PlaceType.SUBMISSION_TUNNELS
-							).contains(Main.game.getPlayer().getLocationPlace().getPlaceType())) {
+							PlaceType.SUBMISSION_TUNNELS).contains(Main.game.getPlayer().getLocationPlace().getPlaceType())) {
 						return new Response("Spawn attacker", "You can only spawn an attacker on: Dominion's alleyway & canal tiles; Submission's tunnel tiles.", null);
 					}
 					if(!Main.game.getNonCompanionCharactersPresent().isEmpty()) {
@@ -1998,8 +1996,8 @@ public class DebugDialogue {
 						true,
 						false,
 						new SMGeneric(
-								Util.newArrayListOfValues(Main.game.getPlayer()),
-								Util.newArrayListOfValues(centaur),
+								List.of(Main.game.getPlayer()),
+								List.of(centaur),
 								Main.game.getPlayer().getCompanions(),
 								null),
 						DebugDialogue.POST_SEX_CENTAUR,
@@ -2015,8 +2013,8 @@ public class DebugDialogue {
 						true,
 						false,
 						new SMGeneric(
-								Util.newArrayListOfValues(centaur),
-								Util.newArrayListOfValues(Main.game.getPlayer()),
+								List.of(centaur),
+								List.of(Main.game.getPlayer()),
 								null,
 								Main.game.getPlayer().getCompanions()),
 						DebugDialogue.POST_SEX_CENTAUR,

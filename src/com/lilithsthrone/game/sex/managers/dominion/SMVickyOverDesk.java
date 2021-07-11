@@ -30,8 +30,7 @@ public class SMVickyOverDesk extends SexManagerDefault {
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		return Util.newArrayListOfValues(
-				SexPosition.OVER_DESK);
+		return List.of(SexPosition.OVER_DESK);
 	}
 	
 	@Override

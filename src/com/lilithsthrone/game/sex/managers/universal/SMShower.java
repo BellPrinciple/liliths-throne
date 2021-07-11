@@ -53,8 +53,7 @@ public class SMShower extends SexManagerDefault {
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {
-		List<AbstractSexPosition> positions = Util.newArrayListOfValues(
-				SexPosition.AGAINST_WALL,
+		List<AbstractSexPosition> positions = List.of(SexPosition.AGAINST_WALL,
 				SexPosition.STANDING);
 		
 		return positions;

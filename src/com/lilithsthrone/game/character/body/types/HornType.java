@@ -77,8 +77,8 @@ public class HornType {
 			"multi-branched",
 			"antler",
 			"antlers",
-			Util.newArrayListOfValues("multi-branched", "reindeer"),
-			Util.newArrayListOfValues("multi-branched", "reindeer"),
+			List.of("multi-branched", "reindeer"),
+			List.of("multi-branched", "reindeer"),
 			"branching, multi-pronged #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF."
 					+ "<br/>[npc.Name] now [npc.has] [npc.hornsDeterminer] [style.boldTfGeneric(reindeer-like #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF)].",
 			"[npc.HornsDeterminer] [npc.hornSize], [npc.hornColour(true)], multi-branched #IFnpc.getTotalHorns()==1#THEN[npc.horn] grows#ELSE[npc.horns] grow#ENDIF out of the #IFnpc.getHornsPerRow()==1#THENmiddle#ELSEupper sides#ENDIF of [npc.her] forehead.") {
@@ -93,8 +93,8 @@ public class HornType {
 			"unicorn",
 			"horn",
 			"horns",
-			Util.newArrayListOfValues("straight", "twirling", "unicorn"),
-			Util.newArrayListOfValues("straight", "twirling", "unicorn"),
+			List.of("straight", "twirling", "unicorn"),
+			List.of("straight", "twirling", "unicorn"),
 			"straight, twirling unicorn's #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF."
 					+ "<br/>[npc.Name] now [npc.has] [npc.hornsDeterminer] [style.boldTfGeneric(unicorn #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF)].",
 			"[npc.HornsDeterminer] [npc.hornSize], [npc.hornColour(true)], unicorn's #IFnpc.getTotalHorns()==1#THEN[npc.horn] grows#ELSE[npc.horns] grow#ENDIF out of the #IFnpc.getHornsPerRow()==1#THENmiddle#ELSEupper sides#ENDIF of [npc.her] forehead.") {
@@ -109,8 +109,8 @@ public class HornType {
 			"curled",
 			"horn",
 			"horns",
-			Util.newArrayListOfValues("curled"),
-			Util.newArrayListOfValues("curled", "smooth"),
+			List.of("curled"),
+			List.of("curled", "smooth"),
 			"circular-curling #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF."
 					+ "<br/>[npc.Name] now [npc.has] [npc.hornsDeterminer] [style.boldTfGeneric(curled #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF)].",
 			"[npc.HornsDeterminer] [npc.hornSize], [npc.hornColour(true)], circular-curling #IFnpc.getTotalHorns()==1#THEN[npc.horn] grows#ELSE[npc.horns] grow#ENDIF out of the #IFnpc.getHornsPerRow()==1#THENmiddle#ELSEupper sides#ENDIF of [npc.her] forehead.") {
@@ -127,8 +127,8 @@ public class HornType {
 			"spiral", //Rasen no Chikara
 			"horn",
 			"horns",
-			Util.newArrayListOfValues("spiral"),
-			Util.newArrayListOfValues("spiral", "smooth"),
+			List.of("spiral"),
+			List.of("spiral", "smooth"),
 			"twisted, spiralling #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF."
 					+ "<br/>[npc.Name] now [npc.has] [npc.hornsDeterminer] [style.boldTfGeneric(spiral #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF)].",
 			"[npc.HornsDeterminer] [npc.hornSize], [npc.hornColour(true)], spiralling #IFnpc.getTotalHorns()==1#THEN[npc.horn] grows#ELSE[npc.horns] grow#ENDIF out of the #IFnpc.getHornsPerRow()==1#THENmiddle#ELSEupper sides#ENDIF of [npc.her] forehead.") {
@@ -145,8 +145,8 @@ public class HornType {
 			"curved",
 			"horn",
 			"horns",
-			Util.newArrayListOfValues("curved"),
-			Util.newArrayListOfValues("curved", "smooth"),
+			List.of("curved"),
+			List.of("curved", "smooth"),
 			"slightly-curved #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF."
 					+ "<br/>[npc.Name] now [npc.has] [npc.hornsDeterminer] [style.boldTfGeneric(curved #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF)].",
 			"[npc.HornsDeterminer] [npc.hornSize], [npc.hornColour(true)], curved #IFnpc.getTotalHorns()==1#THEN[npc.horn] grows#ELSE[npc.horns] grow#ENDIF out of the #IFnpc.getHornsPerRow()==1#THENmiddle#ELSEupper sides#ENDIF of [npc.her] forehead.") {
@@ -163,8 +163,8 @@ public class HornType {
 			"swept-back",
 			"horn",
 			"horns",
-			Util.newArrayListOfValues("swept-back"),
-			Util.newArrayListOfValues("swept-back", "smooth"),
+			List.of("swept-back"),
+			List.of("swept-back", "smooth"),
 			"sleek #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF, before sweeping back and curving over [npc.her] head."
 					+ "<br/>[npc.Name] now [npc.has] [npc.hornsDeterminer] [style.boldTfGeneric(swept-back #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF)].",
 			"[npc.HornsDeterminer] [npc.hornSize], [npc.hornColour(true)], swept-back #IFnpc.getTotalHorns()==1#THEN[npc.horn] grows#ELSE[npc.horns] grow#ENDIF out of the #IFnpc.getHornsPerRow()==1#THENmiddle#ELSEupper sides#ENDIF of [npc.her] forehead.") {
@@ -181,8 +181,8 @@ public class HornType {
 			"straight",
 			"horn",
 			"horns",
-			Util.newArrayListOfValues("straight"),
-			Util.newArrayListOfValues("straight", "smooth"),
+			List.of("straight"),
+			List.of("straight", "smooth"),
 			"sleek, straight horns."
 					+ "<br/>[npc.Name] now [npc.has] [npc.hornsDeterminer] [style.boldTfGeneric(straight #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF)].",
 			"[npc.HornsDeterminer] [npc.hornSize], [npc.hornColour(true)], straight #IFnpc.getTotalHorns()==1#THEN[npc.horn] grows#ELSE[npc.horns] grow#ENDIF out of the #IFnpc.getHornsPerRow()==1#THENmiddle#ELSEupper sides#ENDIF of [npc.her] forehead.") {

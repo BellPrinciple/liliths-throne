@@ -36,7 +36,7 @@ public class SMMeraxisMasturbation extends SexManagerDefault {
 	@Override
 	public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 		Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
-		map.put(Main.game.getNpc(DarkSiren.class), Util.newArrayListOfValues(CoverableArea.NIPPLES));
+		map.put(Main.game.getNpc(DarkSiren.class), List.of(CoverableArea.NIPPLES));
 		return map;
 	}
 

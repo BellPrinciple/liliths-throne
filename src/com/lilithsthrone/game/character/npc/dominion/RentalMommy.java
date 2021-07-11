@@ -114,7 +114,7 @@ public class RentalMommy extends NPC {
 	public void setupPerks(boolean autoSelectPerks) {
 		this.addSpecialPerk(Perk.SPECIAL_SLUT);
 		PerkManager.initialisePerks(this,
-				Util.newArrayListOfValues(Perk.FETISH_BROODMOTHER),
+				List.of(Perk.FETISH_BROODMOTHER),
 				Util.newHashMapOfValues(
 						new Value<>(PerkCategory.PHYSICAL, 0),
 						new Value<>(PerkCategory.LUST, 1),
