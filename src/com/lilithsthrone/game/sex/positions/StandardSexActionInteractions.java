@@ -91,18 +91,12 @@ public class StandardSexActionInteractions {
 								SexActionPresets.kissing,
 								SexActionPresets.mouthToBreasts,
 								SexActionPresets.breastsToMouth),
-						List.of(OrgasmCumTarget.STOMACH,
-								!target.isTaur() && !performer.isTaur()
-									?OrgasmCumTarget.GROIN
-									:null,
-								OrgasmCumTarget.LEGS,
-								OrgasmCumTarget.FLOOR),
-						List.of(OrgasmCumTarget.STOMACH,
-								!target.isTaur() && !performer.isTaur()
-									?OrgasmCumTarget.GROIN
-									:null,
-								OrgasmCumTarget.LEGS,
-								OrgasmCumTarget.FLOOR))));
+						target.isTaur() || performer.isTaur()
+							?List.of(OrgasmCumTarget.STOMACH,OrgasmCumTarget.LEGS,OrgasmCumTarget.FLOOR)
+							:List.of(OrgasmCumTarget.STOMACH,OrgasmCumTarget.GROIN,OrgasmCumTarget.LEGS,OrgasmCumTarget.FLOOR),
+						target.isTaur() || performer.isTaur()
+							?List.of(OrgasmCumTarget.STOMACH,OrgasmCumTarget.LEGS,OrgasmCumTarget.FLOOR)
+							:List.of(OrgasmCumTarget.STOMACH,OrgasmCumTarget.GROIN,OrgasmCumTarget.LEGS,OrgasmCumTarget.FLOOR))));
 			}
 	};
 
@@ -170,13 +164,9 @@ public class StandardSexActionInteractions {
 									:Util.mergeMaps(
 											SexActionPresets.appendagesToLowerHalf,
 											SexActionPresets.allAreasToTailAndTentacle)),
-					List.of(OrgasmCumTarget.BACK,
-							target.isTaur() && !performer.isTaur()
-								?OrgasmCumTarget.GROIN
-								:null,
-							OrgasmCumTarget.ASS,
-							OrgasmCumTarget.LEGS,
-							OrgasmCumTarget.FLOOR),
+					target.isTaur() && !performer.isTaur()
+						?List.of(OrgasmCumTarget.BACK,OrgasmCumTarget.GROIN,OrgasmCumTarget.ASS,OrgasmCumTarget.LEGS,OrgasmCumTarget.FLOOR)
+						:List.of(OrgasmCumTarget.BACK,OrgasmCumTarget.ASS,OrgasmCumTarget.LEGS,OrgasmCumTarget.FLOOR),
 					List.of(OrgasmCumTarget.FLOOR))));
 		}
 	};
@@ -361,19 +351,12 @@ public class StandardSexActionInteractions {
 											?SexActionPresets.groinToCrotchBoobs
 											:null))
 									:null),
-						List.of(OrgasmCumTarget.STOMACH,
-								!target.isTaur() && !performer.isTaur()
-									?OrgasmCumTarget.GROIN
-									:null,
-								OrgasmCumTarget.LEGS,
-								OrgasmCumTarget.WALL,
-								OrgasmCumTarget.FLOOR),
-						List.of(OrgasmCumTarget.STOMACH,
-								!target.isTaur() && !performer.isTaur()
-									?OrgasmCumTarget.GROIN
-									:null,
-								OrgasmCumTarget.LEGS,
-								OrgasmCumTarget.FLOOR))));
+						target.isTaur() || performer.isTaur()
+							?List.of(OrgasmCumTarget.STOMACH,OrgasmCumTarget.LEGS,OrgasmCumTarget.WALL,OrgasmCumTarget.FLOOR)
+							:List.of(OrgasmCumTarget.STOMACH,OrgasmCumTarget.GROIN,OrgasmCumTarget.LEGS,OrgasmCumTarget.WALL,OrgasmCumTarget.FLOOR),
+						target.isTaur() || performer.isTaur()
+							?List.of(OrgasmCumTarget.STOMACH,OrgasmCumTarget.LEGS,OrgasmCumTarget.FLOOR)
+							:List.of(OrgasmCumTarget.STOMACH,OrgasmCumTarget.GROIN,OrgasmCumTarget.LEGS,OrgasmCumTarget.FLOOR))));
 			}
 	};
 

@@ -51,11 +51,11 @@ public class WesQuest {
 	}
 	
 	private static void resetBackgroundIds() {
-		backgroundTalkIds = List.of("1", "2", "3", "4", "5");
+		backgroundTalkIds = new ArrayList<>(List.of("1", "2", "3", "4", "5"));
 	}
 
 	private static void resetWorkTalkIds() {
-		workTalkIds = List.of("1", "2", "3", "4", "5");
+		workTalkIds = new ArrayList<>(List.of("1", "2", "3", "4", "5"));
 	}
 	
 	public static final DialogueNode WES_QUEST_START = new DialogueNode("A Sudden Interruption", "", true) {

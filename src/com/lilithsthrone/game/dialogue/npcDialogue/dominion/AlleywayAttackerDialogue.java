@@ -833,7 +833,7 @@ public class AlleywayAttackerDialogue {
 									List.of(getMugger()),
 									List.of(Main.game.getPlayer()),
 									null,
-									List.of(getMainCompanion())),
+									isCompanionDialogue() ? List.of(getMainCompanion()) : List.of()),
 							AFTER_SEX_DEFEAT, UtilText.parseFromXMLFile("encounters/dominion/alleywayAttack", "AFTER_COMBAT_VICTORY_SEX_SUBMIT", getAllCharacters()));
 				}
 				
