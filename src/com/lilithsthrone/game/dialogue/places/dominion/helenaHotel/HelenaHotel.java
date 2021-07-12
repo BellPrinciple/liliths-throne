@@ -55,7 +55,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -111,8 +110,8 @@ public class HelenaHotel {
 		return new SexManagerDefault(
 				false,
 				SexPosition.SITTING,
-				Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Scarlett.class), SexSlotSitting.SITTING)),
-				Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL))) {
+				Map.of(Main.game.getNpc(Scarlett.class),SexSlotSitting.SITTING),
+				Map.of(Main.game.getPlayer(),SexSlotSitting.PERFORMING_ORAL)) {
 			@Override
 			public boolean isPublicSex() {
 				return false;
@@ -130,9 +129,7 @@ public class HelenaHotel {
 			}
 			@Override
 			public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-				return Util.newHashMapOfValues(
-						new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS, CoverableArea.VAGINA)),
-						new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)));
+				return Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS, CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH));
 			}
 			@Override
 			public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {
@@ -200,29 +197,16 @@ public class HelenaHotel {
 			SexType scarlettToPlayerPreference,
 			SexType scarlettToHelenaPreference,
 			Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap) {
+		var dominants = new HashMap<GameCharacter,SexSlot>();
+		var submissives = new HashMap<GameCharacter,SexSlot>();
+		(helenaDom ? dominants : submissives).put(Main.game.getNpc(Helena.class),helenaSlot);
+		(scarlettDom ? dominants : submissives).put(Main.game.getNpc(Scarlett.class),scarlettSlot);
+		(playerDom ? dominants : submissives).put(Main.game.getPlayer(),playerSlot);
 		return new SexManagerDefault(
 				false,
 				position,
-				Util.newHashMapOfValues(
-						(helenaDom
-							?new Value<>(Main.game.getNpc(Helena.class), helenaSlot)
-							:null),
-						(scarlettDom && scarlettSlot!=null
-								?new Value<>(Main.game.getNpc(Scarlett.class), scarlettSlot)
-								:null),
-						(playerDom
-								?new Value<>(Main.game.getPlayer(), playerSlot)
-								:null)),
-				Util.newHashMapOfValues(
-						(!helenaDom
-							?new Value<>(Main.game.getNpc(Helena.class), helenaSlot)
-							:null),
-						(!scarlettDom && scarlettSlot!=null
-								?new Value<>(Main.game.getNpc(Scarlett.class), scarlettSlot)
-								:null),
-						(!playerDom
-								?new Value<>(Main.game.getPlayer(), playerSlot)
-								:null))) {
+				dominants,
+				submissives) {
 			@Override
 			public boolean isPlayerAbleToStopSex() {
 				return helenaToPlayerPreference==null;
@@ -1362,9 +1346,7 @@ public class HelenaHotel {
 						getHelenaSexManager(false,
 								SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.MISSIONARY_ORAL,
 								new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+								Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 						null,
 						null,
 						DATE_APARTMENT_BEDROOM_AFTER_ROMANCE_SEX,
@@ -1396,9 +1378,7 @@ public class HelenaHotel {
 									?SexSlotStanding.STANDING_DOMINANT
 									:SexSlotSitting.SITTING,
 								new SexType(SexParticipantType.NORMAL, SexAreaOrifice.BREAST, SexAreaPenetration.TONGUE),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.NIPPLES, CoverableArea.VAGINA)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+								Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.NIPPLES, CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 						null,
 						null,
 						DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1437,9 +1417,7 @@ public class HelenaHotel {
 								getHelenaSexManager(false,
 										SexPosition.SITTING, SexSlotSitting.PERFORMING_ORAL, SexSlotSitting.SITTING,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.BREAST, SexAreaPenetration.PENIS),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.NIPPLES)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.NIPPLES),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1475,9 +1453,7 @@ public class HelenaHotel {
 							getHelenaSexManager(false,
 									SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.MISSIONARY_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+									Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1524,8 +1500,7 @@ public class HelenaHotel {
 											?SexSlotStanding.STANDING_DOMINANT
 											:SexSlotLyingDown.LYING_DOWN,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.VAGINA),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)))),
+										Map.of(Main.game.getPlayer(),List.of(CoverableArea.VAGINA))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1573,8 +1548,7 @@ public class HelenaHotel {
 											?SexSlotStanding.STANDING_DOMINANT
 											:SexSlotSitting.SITTING,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+										Map.of(Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1615,9 +1589,7 @@ public class HelenaHotel {
 							getHelenaSexManager(true,
 									SexPosition.LYING_DOWN, SexSlotLyingDown.SIXTY_NINE, SexSlotLyingDown.LYING_DOWN,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, sixtyNinePenisFocus?SexAreaPenetration.PENIS:SexAreaOrifice.VAGINA),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH, CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH, sixtyNinePenisFocus?CoverableArea.PENIS:CoverableArea.VAGINA)))),
+									Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH, CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH, sixtyNinePenisFocus?CoverableArea.PENIS:CoverableArea.VAGINA))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1648,9 +1620,7 @@ public class HelenaHotel {
 							getHelenaSexManager(false,
 									SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.SIXTY_NINE,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, sixtyNinePenisFocus?SexAreaPenetration.PENIS:SexAreaOrifice.VAGINA),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH, CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH, sixtyNinePenisFocus?CoverableArea.PENIS:CoverableArea.VAGINA)))),
+									Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH, CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH, sixtyNinePenisFocus?CoverableArea.PENIS:CoverableArea.VAGINA))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1695,9 +1665,7 @@ public class HelenaHotel {
 								getHelenaSexManager(true,
 										SexPosition.LYING_DOWN, SexSlotLyingDown.SCISSORING, SexSlotLyingDown.LYING_DOWN,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.CLIT, SexAreaPenetration.CLIT),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.VAGINA))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1727,9 +1695,7 @@ public class HelenaHotel {
 								getHelenaSexManager(false,
 										SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.SCISSORING,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.CLIT, SexAreaPenetration.CLIT),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.VAGINA))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1769,9 +1735,7 @@ public class HelenaHotel {
 									getHelenaSexManager(true,
 											SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+											Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 									null,
 									null,
 									DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1798,9 +1762,7 @@ public class HelenaHotel {
 									getHelenaSexManager(false,
 											SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.MISSIONARY,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+											Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 									null,
 									null,
 									DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1826,9 +1788,7 @@ public class HelenaHotel {
 									getHelenaSexManager(false,
 											SexPosition.ALL_FOURS, SexSlotAllFours.ALL_FOURS, SexSlotAllFours.BEHIND,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+											Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 									null,
 									null,
 									DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1857,9 +1817,7 @@ public class HelenaHotel {
 									getHelenaSexManager(false,
 											SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.MATING_PRESS,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+											Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 									null,
 									null,
 									DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1914,9 +1872,7 @@ public class HelenaHotel {
 								getHelenaSexManager(true,
 										SexPosition.LYING_DOWN, SexSlotLyingDown.FACE_SITTING_REVERSE, SexSlotLyingDown.LYING_DOWN,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1943,9 +1899,7 @@ public class HelenaHotel {
 								getHelenaSexManager(false,
 										SexPosition.ALL_FOURS, SexSlotAllFours.ALL_FOURS, SexSlotAllFours.BEHIND_ORAL,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -1993,9 +1947,7 @@ public class HelenaHotel {
 												?SexSlotLyingDown.LYING_DOWN
 												:SexSlotAllFours.BEHIND,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+											Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 									null,
 									null,
 									DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2030,9 +1982,7 @@ public class HelenaHotel {
 										getHelenaSexManager(false,
 												SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 												new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
-												Util.newHashMapOfValues(
-														new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
-														new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+												Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 										null,
 										null,
 										DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2055,9 +2005,7 @@ public class HelenaHotel {
 										getHelenaSexManager(false,
 												SexPosition.ALL_FOURS, SexSlotAllFours.ALL_FOURS, SexSlotAllFours.BEHIND,
 												new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
-												Util.newHashMapOfValues(
-														new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
-														new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+												Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 										null,
 										null,
 										DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2084,8 +2032,7 @@ public class HelenaHotel {
 								getHelenaSexManager(true,
 										SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.FOOT, SexAreaPenetration.PENIS),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+										Map.of(Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 								null,
 								null,
 								DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2164,9 +2111,7 @@ public class HelenaHotel {
 							getHelenaSexManager(true,
 									SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+									Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2205,9 +2150,7 @@ public class HelenaHotel {
 										?SexSlotAllFours.BEHIND
 										:SexSlotLyingDown.MISSIONARY,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+									Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2252,9 +2195,7 @@ public class HelenaHotel {
 										?SexSlotAllFours.BEHIND
 										:SexSlotLyingDown.MISSIONARY,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+									Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX,
@@ -2410,7 +2351,7 @@ public class HelenaHotel {
 							getHelenaSexManager(true,
 									SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 									null,
-									Util.newHashMapOfValues()),
+									Map.of()),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX_MORNING,
@@ -2429,7 +2370,7 @@ public class HelenaHotel {
 							getHelenaSexManager(false,
 									SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.MISSIONARY,
 									null,
-									Util.newHashMapOfValues()),
+									Map.of()),
 							null,
 							null,
 							DATE_APARTMENT_BEDROOM_AFTER_SEX_MORNING,

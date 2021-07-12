@@ -36,7 +36,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.TongueMouth;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
@@ -946,8 +945,8 @@ public class NyanFirstDate {
 						true, true,
 						new SMNyanSex(
 								SexPosition.SITTING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL)),
-								Util.newHashMapOfValues(new Value<>(getNyan(), SexSlotSitting.SITTING))) {
+								Map.of(Main.game.getPlayer(),SexSlotSitting.PERFORMING_ORAL),
+								Map.of(getNyan(),SexSlotSitting.SITTING)) {
 							@Override
 							public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 								if(character.isPlayer()) {
@@ -971,8 +970,8 @@ public class NyanFirstDate {
 				return new ResponseSex("Fingering", "Gently push Nyan down on her bed and finger her while kissing her.",
 						true, true,
 						new SMNyanSex(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN_TWO)),
-								Util.newHashMapOfValues(new Value<>(getNyan(), SexSlotLyingDown.LYING_DOWN))) {
+								Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN_TWO),
+								Map.of(getNyan(),SexSlotLyingDown.LYING_DOWN)) {
 							@Override
 							public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 								if(character.isPlayer()) {
@@ -1029,8 +1028,8 @@ public class NyanFirstDate {
 							new ResponseSex("Sixty-nine"+(Main.game.getPlayer().hasVagina()?" (blowjob)":""), "Get Nyan to straddle your face and bend down to suck your cock while you're eating her out for a second time.",
 									true, true,
 									new SMNyanSex(
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN)),
-											Util.newHashMapOfValues(new Value<>(getNyan(), SexSlotLyingDown.SIXTY_NINE))) {
+											Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN),
+											Map.of(getNyan(),SexSlotLyingDown.SIXTY_NINE)) {
 										@Override
 										public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 											if(character.isPlayer()) {
@@ -1041,9 +1040,7 @@ public class NyanFirstDate {
 										}
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)),
-													new Value<>(getNyan(), List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
+											return Map.of(Main.game.getPlayer(),List.of(CoverableArea.PENIS),getNyan(),List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES));
 										}
 									},
 									null,
@@ -1070,8 +1067,8 @@ public class NyanFirstDate {
 							new ResponseSex("Sixty-nine"+(Main.game.getPlayer().hasPenisIgnoreDildo()?" (cunnilingus)":""), "Get Nyan to straddle your face and bend down to eat you out while you're returning the favour.",
 									true, true,
 									new SMNyanSex(
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN)),
-											Util.newHashMapOfValues(new Value<>(getNyan(), SexSlotLyingDown.SIXTY_NINE))) {
+											Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN),
+											Map.of(getNyan(),SexSlotLyingDown.SIXTY_NINE)) {
 										@Override
 										public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 											if(character.isPlayer()) {
@@ -1082,9 +1079,7 @@ public class NyanFirstDate {
 										}
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)),
-													new Value<>(getNyan(), List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
+											return Map.of(Main.game.getPlayer(),List.of(CoverableArea.VAGINA),getNyan(),List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES));
 										}
 									},
 									null,
@@ -1111,8 +1106,8 @@ public class NyanFirstDate {
 											Main.game.getPlayer().isTaur()
 												?SexPosition.STANDING
 												:SexPosition.LYING_DOWN,
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), Main.game.getPlayer().isTaur()?SexSlotStanding.STANDING_DOMINANT:SexSlotLyingDown.LYING_DOWN)),
-											Util.newHashMapOfValues(new Value<>(getNyan(), Main.game.getPlayer().isTaur()?SexSlotStanding.PERFORMING_ORAL:SexSlotLyingDown.MISSIONARY_ORAL))) {
+											Map.of(Main.game.getPlayer(),Main.game.getPlayer().isTaur()?SexSlotStanding.STANDING_DOMINANT:SexSlotLyingDown.LYING_DOWN),
+											Map.of(getNyan(),Main.game.getPlayer().isTaur()?SexSlotStanding.PERFORMING_ORAL:SexSlotLyingDown.MISSIONARY_ORAL)) {
 										@Override
 										public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 											if(character.isPlayer()) {
@@ -1123,9 +1118,7 @@ public class NyanFirstDate {
 										}
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)),
-													new Value<>(getNyan(), List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
+											return Map.of(Main.game.getPlayer(),List.of(CoverableArea.PENIS),getNyan(),List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES));
 										}
 									},
 									null,
@@ -1150,8 +1143,8 @@ public class NyanFirstDate {
 											Main.game.getPlayer().isTaur()
 												?SexPosition.STANDING
 												:SexPosition.LYING_DOWN,
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), Main.game.getPlayer().isTaur()?SexSlotStanding.STANDING_DOMINANT:SexSlotLyingDown.LYING_DOWN)),
-											Util.newHashMapOfValues(new Value<>(getNyan(), Main.game.getPlayer().isTaur()?SexSlotStanding.PERFORMING_ORAL_BEHIND:SexSlotLyingDown.MISSIONARY_ORAL))) {
+											Map.of(Main.game.getPlayer(),Main.game.getPlayer().isTaur()?SexSlotStanding.STANDING_DOMINANT:SexSlotLyingDown.LYING_DOWN),
+											Map.of(getNyan(),Main.game.getPlayer().isTaur()?SexSlotStanding.PERFORMING_ORAL_BEHIND:SexSlotLyingDown.MISSIONARY_ORAL)) {
 										@Override
 										public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 											if(character.isPlayer()) {
@@ -1162,9 +1155,7 @@ public class NyanFirstDate {
 										}
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)),
-													new Value<>(getNyan(), List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
+											return Map.of(Main.game.getPlayer(),List.of(CoverableArea.VAGINA),getNyan(),List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES));
 										}
 									},
 									null,
@@ -1193,8 +1184,8 @@ public class NyanFirstDate {
 				return new ResponseSex("Face-sitting", "Get Nyan to sit on your face and eat her out for a second time.", 
 								true, true,
 								new SMNyanSex(
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN)),
-										Util.newHashMapOfValues(new Value<>(getNyan(), SexSlotLyingDown.FACE_SITTING))) {
+										Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN),
+										Map.of(getNyan(),SexSlotLyingDown.FACE_SITTING)) {
 									@Override
 									public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 										if(character.isPlayer()) {
@@ -1205,8 +1196,7 @@ public class NyanFirstDate {
 									}
 									@Override
 									public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-										return Util.newHashMapOfValues(
-												new Value<>(getNyan(), List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES)));
+										return Map.of(getNyan(),List.of(CoverableArea.VAGINA, CoverableArea.NIPPLES));
 									}
 								},
 								null,

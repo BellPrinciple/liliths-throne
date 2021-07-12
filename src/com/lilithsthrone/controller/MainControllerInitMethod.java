@@ -7610,10 +7610,7 @@ public class MainControllerInitMethod {
 		
 		String fluidName = fluid.getFluid().getName(fluidOwner);
 		
-		Map<CoverableArea, SexAreaOrifice> areas = Util.newHashMapOfValues(
-				new Value<>(CoverableArea.MOUTH, SexAreaOrifice.MOUTH),
-				new Value<>(CoverableArea.VAGINA, SexAreaOrifice.VAGINA),
-				new Value<>(CoverableArea.ANUS, SexAreaOrifice.ANUS));
+		Map<CoverableArea, SexAreaOrifice> areas = Map.of(CoverableArea.MOUTH,SexAreaOrifice.MOUTH,CoverableArea.VAGINA,SexAreaOrifice.VAGINA,CoverableArea.ANUS,SexAreaOrifice.ANUS);
 		
 		for(Entry<CoverableArea, SexAreaOrifice> area : areas.entrySet()) {
 			String id = idModifier+"_"+area.getKey()+"_"+fluid.hashCode();

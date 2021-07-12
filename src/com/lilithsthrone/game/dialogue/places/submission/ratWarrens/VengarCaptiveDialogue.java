@@ -94,7 +94,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -409,12 +408,8 @@ public class VengarCaptiveDialogue {
 							false,
 							new SMVengarDominantSex(
 									SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND),
-											new Value<>(Main.game.getNpc(Shadow.class), SexSlotAllFours.IN_FRONT),
-											new Value<>(Main.game.getNpc(Silence.class), SexSlotAllFours.IN_FRONT_TWO)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+									Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND,Main.game.getNpc(Shadow.class),SexSlotAllFours.IN_FRONT,Main.game.getNpc(Silence.class),SexSlotAllFours.IN_FRONT_TWO),
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 							null,
 							null,
 							START_VENGAR_PUBLIC_FUCK_AFTER_SEX,
@@ -435,13 +430,8 @@ public class VengarCaptiveDialogue {
 							false,
 							new SMVengarDominantSex(
 									SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND),
-											new Value<>(Main.game.getNpc(Shadow.class), SexSlotAllFours.IN_FRONT),
-											new Value<>(Main.game.getNpc(Silence.class), SexSlotAllFours.IN_FRONT_TWO)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS),
-											new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS_TWO))),
+									Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND,Main.game.getNpc(Shadow.class),SexSlotAllFours.IN_FRONT,Main.game.getNpc(Silence.class),SexSlotAllFours.IN_FRONT_TWO),
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS,getMainCompanion(),SexSlotAllFours.ALL_FOURS_TWO)),
 							null,
 							null,
 							START_VENGAR_PUBLIC_FUCK_AFTER_SEX_DOUBLE,
@@ -472,13 +462,8 @@ public class VengarCaptiveDialogue {
 							false,
 							new SMVengarDominantSex(
 									SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND),
-											new Value<>(Main.game.getNpc(Shadow.class), SexSlotAllFours.IN_FRONT),
-											new Value<>(Main.game.getNpc(Silence.class), SexSlotAllFours.IN_FRONT_TWO)),
-									Util.newHashMapOfValues(
-											new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS),
-											new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS_TWO))),
+									Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND,Main.game.getNpc(Shadow.class),SexSlotAllFours.IN_FRONT,Main.game.getNpc(Silence.class),SexSlotAllFours.IN_FRONT_TWO),
+									Map.of(getMainCompanion(),SexSlotAllFours.ALL_FOURS,Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS_TWO)),
 							null,
 							null,
 							START_VENGAR_PUBLIC_FUCK_AFTER_SEX_DOUBLE,
@@ -529,11 +514,8 @@ public class VengarCaptiveDialogue {
 							false,
 							new SMVengarDominantSex(
 									SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS),
-											new Value<>(getMainCompanion(), SexSlotAllFours.IN_FRONT))) {
+									Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND),
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS,getMainCompanion(),SexSlotAllFours.IN_FRONT)) {
 								@Override
 								public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 									return previousWetAreas;
@@ -570,11 +552,8 @@ public class VengarCaptiveDialogue {
 							false,
 							new SMVengarDominantSex(
 									SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(
-											new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS),
-											new Value<>(Main.game.getPlayer(), SexSlotAllFours.IN_FRONT))) {
+									Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND),
+									Map.of(getMainCompanion(),SexSlotAllFours.ALL_FOURS,Main.game.getPlayer(),SexSlotAllFours.IN_FRONT)) {
 								@Override
 								public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 									return previousWetAreas;
@@ -900,10 +879,8 @@ public class VengarCaptiveDialogue {
 						false,
 						new SMVengarDominantSex(
 								SexPosition.SITTING,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Vengar.class), SexSlotSitting.SITTING)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotSitting.SITTING_IN_LAP))),
+								Map.of(Main.game.getNpc(Vengar.class),SexSlotSitting.SITTING),
+								Map.of(Main.game.getPlayer(),SexSlotSitting.SITTING_IN_LAP)),
 						null,
 						null,
 						VENGARS_HALL_VENGAR_FUCK_AFTER_SEX,
@@ -1031,10 +1008,8 @@ public class VengarCaptiveDialogue {
 						false,
 						new SMEatenOut(
 								SexPosition.OVER_DESK,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Shadow.class), SexSlotDesk.PERFORMING_ORAL)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT))),
+								Map.of(Main.game.getNpc(Shadow.class),SexSlotDesk.PERFORMING_ORAL),
+								Map.of(Main.game.getPlayer(),SexSlotDesk.OVER_DESK_ON_FRONT)),
 						null,
 						null,
 						AFTER_SHADOW_ORAL,
@@ -1090,10 +1065,8 @@ public class VengarCaptiveDialogue {
 							false,
 							new SMEatingOut(
 									SexPosition.AGAINST_WALL,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Silence.class), SexSlotAgainstWall.BACK_TO_WALL)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.PERFORMING_ORAL_WALL))),
+									Map.of(Main.game.getNpc(Silence.class),SexSlotAgainstWall.BACK_TO_WALL),
+									Map.of(Main.game.getPlayer(),SexSlotAgainstWall.PERFORMING_ORAL_WALL)),
 							null,
 							null,
 							AFTER_SILENCE_ORAL,
@@ -1266,11 +1239,8 @@ public class VengarCaptiveDialogue {
 						true,
 						false,
 						new SMSitting(
-								Util.newHashMapOfValues(
-										new Value<>(getCharactersPresent(true).get(1), SexSlotSitting.SITTING)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL),
-										new Value<>(getCharactersPresent(true).get(0), SexSlotSitting.PERFORMING_ORAL_TWO))) {
+								Map.of(getCharactersPresent(true).get(1),SexSlotSitting.SITTING),
+								Map.of(Main.game.getPlayer(),SexSlotSitting.PERFORMING_ORAL,getCharactersPresent(true).get(0),SexSlotSitting.PERFORMING_ORAL_TWO)) {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
@@ -1395,11 +1365,8 @@ public class VengarCaptiveDialogue {
 							true,
 							false,
 							new SMLyingDown(
-									Util.newHashMapOfValues(
-											new Value<>(getCharactersPresent(true).get(1), SexSlotLyingDown.MISSIONARY)),
-									Util.newHashMapOfValues(
-											new Value<>(getCharactersPresent(true).get(0), SexSlotLyingDown.FACE_SITTING_REVERSE),
-											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))) {
+									Map.of(getCharactersPresent(true).get(1),SexSlotLyingDown.MISSIONARY),
+									Map.of(getCharactersPresent(true).get(0),SexSlotLyingDown.FACE_SITTING_REVERSE,Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)) {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
@@ -1478,11 +1445,8 @@ public class VengarCaptiveDialogue {
 							true,
 							false,
 							new SMLyingDown(
-									Util.newHashMapOfValues(
-											new Value<>(getCharactersPresent(true).get(1), SexSlotLyingDown.FACE_SITTING_REVERSE)),
-									Util.newHashMapOfValues(
-											new Value<>(getCharactersPresent(true).get(0), SexSlotLyingDown.MISSIONARY_ORAL),
-											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))) {
+									Map.of(getCharactersPresent(true).get(1),SexSlotLyingDown.FACE_SITTING_REVERSE),
+									Map.of(getCharactersPresent(true).get(0),SexSlotLyingDown.MISSIONARY_ORAL,Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)) {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
@@ -1542,11 +1506,8 @@ public class VengarCaptiveDialogue {
 							true,
 							false,
 							new SMStanding(
-									Util.newHashMapOfValues(
-											new Value<>(getCharactersPresent(true).get(1), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(
-											new Value<>(getCharactersPresent(true).get(0), SexSlotStanding.PERFORMING_ORAL),
-											new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL_BEHIND))) {
+									Map.of(getCharactersPresent(true).get(1),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(getCharactersPresent(true).get(0),SexSlotStanding.PERFORMING_ORAL,Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL_BEHIND)) {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
@@ -1656,14 +1617,8 @@ public class VengarCaptiveDialogue {
 						true,
 						false,
 						new SMLyingDown(
-								Util.newHashMapOfValues(
-										new Value<>(getCharactersPresent(true).get(1), SexSlotLyingDown.MISSIONARY),
-										new Value<>(getCharactersPresent(true).get(2), SexSlotLyingDown.MISSIONARY_TWO),
-										new Value<>(getCharactersPresent(true).get(3), SexSlotLyingDown.FACE_SITTING_REVERSE),
-										new Value<>(getCharactersPresent(true).get(4), SexSlotLyingDown.FACE_SITTING_REVERSE_TWO)),
-								Util.newHashMapOfValues(
-										new Value<>(getCharactersPresent(true).get(0), SexSlotLyingDown.LYING_DOWN),
-										new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN_TWO))) {
+								Map.of(getCharactersPresent(true).get(1),SexSlotLyingDown.MISSIONARY,getCharactersPresent(true).get(2),SexSlotLyingDown.MISSIONARY_TWO,getCharactersPresent(true).get(3),SexSlotLyingDown.FACE_SITTING_REVERSE,getCharactersPresent(true).get(4),SexSlotLyingDown.FACE_SITTING_REVERSE_TWO),
+								Map.of(getCharactersPresent(true).get(0),SexSlotLyingDown.LYING_DOWN,Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN_TWO)) {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
@@ -1869,11 +1824,8 @@ public class VengarCaptiveDialogue {
 						false,
 						new SMEatenOut(
 								SexPosition.OVER_DESK,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Shadow.class), SexSlotDesk.PERFORMING_ORAL)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT),
-										new Value<>(getMainCompanion(), SexSlotDesk.OVER_DESK_ON_FRONT_TWO))),
+								Map.of(Main.game.getNpc(Shadow.class),SexSlotDesk.PERFORMING_ORAL),
+								Map.of(Main.game.getPlayer(),SexSlotDesk.OVER_DESK_ON_FRONT,getMainCompanion(),SexSlotDesk.OVER_DESK_ON_FRONT_TWO)),
 						null,
 						null,
 						AFTER_SHADOW_COMPANION_ORAL,
@@ -1929,10 +1881,8 @@ public class VengarCaptiveDialogue {
 						false,
 						new SMEatingOut(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Silence.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
+								Map.of(Main.game.getNpc(Silence.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL)),
 						null,
 						List.of(getMainCompanion()),
 						AFTER_SILENCE_ORAL,
@@ -1951,10 +1901,8 @@ public class VengarCaptiveDialogue {
 						false,
 						new SMEatingOut(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Silence.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(
-										new Value<>(getMainCompanion(), SexSlotStanding.PERFORMING_ORAL))),
+								Map.of(Main.game.getNpc(Silence.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(getMainCompanion(),SexSlotStanding.PERFORMING_ORAL)),
 						null,
 						List.of(Main.game.getPlayer()),
 						AFTER_SILENCE_ORAL,
@@ -2053,12 +2001,8 @@ public class VengarCaptiveDialogue {
 						false,
 						new SMVengarDominantSex(
 								SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND),
-										new Value<>(getCharactersPresent(true).get(1), SexSlotAllFours.BEHIND_TWO)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS),
-										new Value<>(getCharactersPresent(true).get(0), SexSlotAllFours.ALL_FOURS_TWO))),
+								Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND,getCharactersPresent(true).get(1),SexSlotAllFours.BEHIND_TWO),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS,getCharactersPresent(true).get(0),SexSlotAllFours.ALL_FOURS_TWO)),
 						null,
 						null,
 						VENGARS_HALL_CHOOSE_COMPANION_VENGAR_AFTER_SEX,
@@ -2101,12 +2045,8 @@ public class VengarCaptiveDialogue {
 						false,
 						new SMVengarDominantSex(
 								SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND),
-										new Value<>(getCharactersPresent(true).get(1), SexSlotAllFours.BEHIND_TWO)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS),
-										new Value<>(getCharactersPresent(true).get(0), SexSlotAllFours.ALL_FOURS_TWO))),
+								Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND,getCharactersPresent(true).get(1),SexSlotAllFours.BEHIND_TWO),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS,getCharactersPresent(true).get(0),SexSlotAllFours.ALL_FOURS_TWO)),
 						null,
 						null,
 						VENGARS_HALL_CHOOSE_COMPANION_VENGAR_AFTER_SEX,
@@ -2480,13 +2420,8 @@ public class VengarCaptiveDialogue {
 							true,
 							false,
 							new SMLyingDown(
-									Util.newHashMapOfValues(
-											new Value<>(getCharactersPresent(false).get(0), SexSlotLyingDown.LYING_DOWN),
-											new Value<>(getCharactersPresent(false).get(1), Main.game.isAnalContentEnabled()?SexSlotLyingDown.MISSIONARY:SexSlotLyingDown.FACE_SITTING),
-											new Value<>(getCharactersPresent(false).get(2), SexSlotLyingDown.BESIDE),
-											new Value<>(getCharactersPresent(false).get(3), SexSlotLyingDown.BESIDE_TWO)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.COWGIRL))) {
+									Map.of(getCharactersPresent(false).get(0),SexSlotLyingDown.LYING_DOWN,getCharactersPresent(false).get(1),Main.game.isAnalContentEnabled()?SexSlotLyingDown.MISSIONARY:SexSlotLyingDown.FACE_SITTING,getCharactersPresent(false).get(2),SexSlotLyingDown.BESIDE,getCharactersPresent(false).get(3),SexSlotLyingDown.BESIDE_TWO),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.COWGIRL)) {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
@@ -2577,10 +2512,8 @@ public class VengarCaptiveDialogue {
 							true,
 							false,
 							new SMSitting(
-									Util.newHashMapOfValues(
-											new Value<>(getCharactersPresent(false).get(0), SexSlotSitting.SITTING)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL))) {
+									Map.of(getCharactersPresent(false).get(0),SexSlotSitting.SITTING),
+									Map.of(Main.game.getPlayer(),SexSlotSitting.PERFORMING_ORAL)) {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
@@ -2640,10 +2573,8 @@ public class VengarCaptiveDialogue {
 							true,
 							false,
 							new SMOverDesk(
-									Util.newHashMapOfValues(
-											new Value<>(getCharactersPresent(false).get(0), SexSlotDesk.BETWEEN_LEGS)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_BACK))) {
+									Map.of(getCharactersPresent(false).get(0),SexSlotDesk.BETWEEN_LEGS),
+									Map.of(Main.game.getPlayer(),SexSlotDesk.OVER_DESK_ON_BACK)) {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
@@ -2789,10 +2720,8 @@ public class VengarCaptiveDialogue {
 							true,
 							false,
 							new SMOverDesk(
-									Util.newHashMapOfValues(
-											new Value<>(getCharactersPresent(false).get(0), SexSlotDesk.BETWEEN_LEGS)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT))) {
+									Map.of(getCharactersPresent(false).get(0),SexSlotDesk.BETWEEN_LEGS),
+									Map.of(Main.game.getPlayer(),SexSlotDesk.OVER_DESK_ON_FRONT)) {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
@@ -2854,10 +2783,8 @@ public class VengarCaptiveDialogue {
 							true,
 							false,
 							new SMAgainstWall(
-									Util.newHashMapOfValues(
-											new Value<>(getCharactersPresent(false).get(0), SexSlotAgainstWall.BACK_TO_WALL)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.PERFORMING_ORAL_WALL))) {
+									Map.of(getCharactersPresent(false).get(0),SexSlotAgainstWall.BACK_TO_WALL),
+									Map.of(Main.game.getPlayer(),SexSlotAgainstWall.PERFORMING_ORAL_WALL)) {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 									Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
@@ -2960,13 +2887,8 @@ public class VengarCaptiveDialogue {
 						true,
 						false,
 						new SMLyingDown(
-								Util.newHashMapOfValues(
-										new Value<>(getCharactersPresent(false).get(0), SexSlotLyingDown.LYING_DOWN),
-										new Value<>(getCharactersPresent(false).get(1), Main.game.isAnalContentEnabled()?SexSlotLyingDown.MISSIONARY:SexSlotLyingDown.FACE_SITTING),
-										new Value<>(getCharactersPresent(false).get(2), SexSlotLyingDown.BESIDE),
-										new Value<>(getCharactersPresent(false).get(3), SexSlotLyingDown.BESIDE_TWO)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotLyingDown.COWGIRL))) {
+								Map.of(getCharactersPresent(false).get(0),SexSlotLyingDown.LYING_DOWN,getCharactersPresent(false).get(1),Main.game.isAnalContentEnabled()?SexSlotLyingDown.MISSIONARY:SexSlotLyingDown.FACE_SITTING,getCharactersPresent(false).get(2),SexSlotLyingDown.BESIDE,getCharactersPresent(false).get(3),SexSlotLyingDown.BESIDE_TWO),
+								Map.of(Main.game.getPlayer(),SexSlotLyingDown.COWGIRL)) {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								Map<GameCharacter, List<CoverableArea>> map = new HashMap<>();
@@ -3136,10 +3058,8 @@ public class VengarCaptiveDialogue {
 								false,
 								new SMEatingOut(
 										SexPosition.ALL_FOURS,
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Shadow.class), SexSlotAllFours.BEHIND_ORAL)),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+										Map.of(Main.game.getNpc(Shadow.class),SexSlotAllFours.BEHIND_ORAL),
+										Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 								null,
 								null,
 								VENGARS_BEDROOM_AFTER_RAT_GIRL_ORAL,
@@ -3168,10 +3088,8 @@ public class VengarCaptiveDialogue {
 								false,
 								new SMEatingOut(
 										SexPosition.STANDING,
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Silence.class), SexSlotStanding.STANDING_DOMINANT)),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
+										Map.of(Main.game.getNpc(Silence.class),SexSlotStanding.STANDING_DOMINANT),
+										Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL)),
 								null,
 								null,
 								VENGARS_BEDROOM_AFTER_RAT_GIRL_ORAL,
@@ -3275,10 +3193,8 @@ public class VengarCaptiveDialogue {
 						false,
 						new SMEatingOut(
 								SexPosition.LYING_DOWN,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Shadow.class), SexSlotLyingDown.FACE_SITTING)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))),
+								Map.of(Main.game.getNpc(Shadow.class),SexSlotLyingDown.FACE_SITTING),
+								Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)),
 						null,
 						List.of(getMainCompanion()),
 						VENGARS_BEDROOM_AFTER_RAT_GIRL_ORAL,
@@ -3361,12 +3277,8 @@ public class VengarCaptiveDialogue {
 							false,
 							new SMShadowSilence(
 									SexPosition.AGAINST_WALL,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Silence.class), SexSlotAgainstWall.BACK_TO_WALL),
-											new Value<>(Main.game.getNpc(Shadow.class), SexSlotAgainstWall.PERFORMING_ORAL_WALL_TWO)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.BACK_TO_WALL_TWO),
-											new Value<>(getMainCompanion(), SexSlotAgainstWall.PERFORMING_ORAL_WALL))),
+									Map.of(Main.game.getNpc(Silence.class),SexSlotAgainstWall.BACK_TO_WALL,Main.game.getNpc(Shadow.class),SexSlotAgainstWall.PERFORMING_ORAL_WALL_TWO),
+									Map.of(Main.game.getPlayer(),SexSlotAgainstWall.BACK_TO_WALL_TWO,getMainCompanion(),SexSlotAgainstWall.PERFORMING_ORAL_WALL)),
 							null,
 							null,
 							VENGARS_BEDROOM_SHADOW_SILENCE_AFTER_SEX,
@@ -3391,12 +3303,8 @@ public class VengarCaptiveDialogue {
 							false,
 							new SMShadowSilence(
 									SexPosition.AGAINST_WALL,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Silence.class), SexSlotAgainstWall.BACK_TO_WALL),
-											new Value<>(Main.game.getNpc(Shadow.class), SexSlotAgainstWall.PERFORMING_ORAL_WALL_TWO)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.PERFORMING_ORAL_WALL),
-											new Value<>(getMainCompanion(), SexSlotAgainstWall.BACK_TO_WALL_TWO))),
+									Map.of(Main.game.getNpc(Silence.class),SexSlotAgainstWall.BACK_TO_WALL,Main.game.getNpc(Shadow.class),SexSlotAgainstWall.PERFORMING_ORAL_WALL_TWO),
+									Map.of(Main.game.getPlayer(),SexSlotAgainstWall.PERFORMING_ORAL_WALL,getMainCompanion(),SexSlotAgainstWall.BACK_TO_WALL_TWO)),
 							null,
 							null,
 							VENGARS_BEDROOM_SHADOW_SILENCE_AFTER_SEX,
@@ -3423,11 +3331,8 @@ public class VengarCaptiveDialogue {
 							false,
 							new SMEatingOut(
 									SexPosition.LYING_DOWN,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Silence.class), SexSlotLyingDown.FACE_SITTING),
-											new Value<>(Main.game.getNpc(Shadow.class), SexSlotLyingDown.MISSIONARY_ORAL)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))),
+									Map.of(Main.game.getNpc(Silence.class),SexSlotLyingDown.FACE_SITTING,Main.game.getNpc(Shadow.class),SexSlotLyingDown.MISSIONARY_ORAL),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)),
 							null,
 							List.of(getMainCompanion()),
 							VENGARS_BEDROOM_SHADOW_SILENCE_AFTER_SEX,
@@ -3547,10 +3452,8 @@ public class VengarCaptiveDialogue {
 							false,
 							new SMVengarDominantSex(
 									SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+									Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND),
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 							null,
 							List.of(getMainCompanion()),
 							VENGARS_BEDROOM_NIGHT_TIME_AFTER_SEX,
@@ -3569,10 +3472,8 @@ public class VengarCaptiveDialogue {
 							false,
 							new SMVengarDominantSex(
 									SexPosition.LYING_DOWN,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Vengar.class), getMainCompanion().isVisiblyPregnant()?SexSlotLyingDown.MISSIONARY:SexSlotLyingDown.MATING_PRESS)),
-									Util.newHashMapOfValues(
-											new Value<>(getMainCompanion(), SexSlotLyingDown.LYING_DOWN))),
+									Map.of(Main.game.getNpc(Vengar.class),getMainCompanion().isVisiblyPregnant()?SexSlotLyingDown.MISSIONARY:SexSlotLyingDown.MATING_PRESS),
+									Map.of(getMainCompanion(),SexSlotLyingDown.LYING_DOWN)),
 							null,
 							List.of(Main.game.getPlayer()),
 							VENGARS_BEDROOM_NIGHT_TIME_AFTER_SEX,
@@ -3701,10 +3602,8 @@ public class VengarCaptiveDialogue {
 						false,
 						new SMEatingOut(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Silence.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
+								Map.of(Main.game.getNpc(Silence.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL)),
 						null,
 						List.of(getMainCompanion()),
 						VENGARS_BEDROOM_NIGHT_TIME_PRETEND_ESCAPE_AFTER_ORAL,

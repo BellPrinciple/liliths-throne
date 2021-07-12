@@ -2,6 +2,7 @@ package com.lilithsthrone.game.character.npc.dominion;
 
 import java.time.Month;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -27,7 +28,6 @@ import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -65,7 +65,7 @@ public class DominionExpressCentaur extends NPC {
 			
 			// RACE & NAME:
 			
-			this.setBodyFromSubspeciesPreference(gender, Util.newHashMapOfValues(new Value<>(Subspecies.CENTAUR, 1)), true, false);
+			this.setBodyFromSubspeciesPreference(gender, Map.of(Subspecies.CENTAUR,1), true, false);
 			
 			if(Math.random()<0.4f) {
 				setSexualOrientation(SexualOrientation.AMBIPHILIC);

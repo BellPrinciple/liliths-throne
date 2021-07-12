@@ -3,6 +3,7 @@ package com.lilithsthrone.game.character.npc.submission;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -166,10 +167,7 @@ public class Lyssieth extends NPC {
 	public void setupPerks(boolean autoSelectPerks) {
 		PerkManager.initialisePerks(this,
 				List.of(),
-				Util.newHashMapOfValues(
-						new Value<>(PerkCategory.PHYSICAL, 1),
-						new Value<>(PerkCategory.LUST, 1),
-						new Value<>(PerkCategory.ARCANE, 1)));
+				Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,1,PerkCategory.ARCANE,1));
 	}
 	
 	@Override

@@ -74,7 +74,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Season;
@@ -127,17 +126,7 @@ public class Nyan extends NPC {
 	}
 	
 	private Map<String, List<AbstractClothing>> getAllClothingListsMap() {
-		return Util.newHashMapOfValues(
-				new Value<>("commonFemaleClothing", commonFemaleClothing),
-				new Value<>("commonFemaleUnderwear", commonFemaleUnderwear),
-				new Value<>("commonFemaleAccessories", commonFemaleAccessories),
-				new Value<>("commonMaleClothing", commonMaleClothing),
-				new Value<>("commonMaleLingerie", commonMaleLingerie),
-				new Value<>("commonMaleAccessories", commonMaleAccessories),
-				new Value<>("commonAndrogynousClothing", commonAndrogynousClothing),
-				new Value<>("commonAndrogynousLingerie", commonAndrogynousLingerie),
-				new Value<>("commonAndrogynousAccessories", commonAndrogynousAccessories),
-				new Value<>("specials", specials));
+		return Map.of("commonFemaleClothing",commonFemaleClothing,"commonFemaleUnderwear",commonFemaleUnderwear,"commonFemaleAccessories",commonFemaleAccessories,"commonMaleClothing",commonMaleClothing,"commonMaleLingerie",commonMaleLingerie,"commonMaleAccessories",commonMaleAccessories,"commonAndrogynousClothing",commonAndrogynousClothing,"commonAndrogynousLingerie",commonAndrogynousLingerie,"commonAndrogynousAccessories",commonAndrogynousAccessories,"specials",specials);
 	}
 	
 	public List<AbstractClothing> getCommonFemaleClothing() {
@@ -259,10 +248,7 @@ public class Nyan extends NPC {
 	public void setupPerks(boolean autoSelectPerks) {
 		PerkManager.initialisePerks(this,
 				List.of(),
-				Util.newHashMapOfValues(
-						new Value<>(PerkCategory.PHYSICAL, 1),
-						new Value<>(PerkCategory.LUST, 0),
-						new Value<>(PerkCategory.ARCANE, 0)));
+				Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,0,PerkCategory.ARCANE,0));
 	}
 
 	@Override

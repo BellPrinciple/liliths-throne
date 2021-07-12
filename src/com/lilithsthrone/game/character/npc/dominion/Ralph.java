@@ -2,6 +2,7 @@ package com.lilithsthrone.game.character.npc.dominion;
 
 import java.time.Month;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -113,10 +114,7 @@ public class Ralph extends NPC {
 		
 		PerkManager.initialisePerks(this,
 				List.of(),
-				Util.newHashMapOfValues(
-						new Value<>(PerkCategory.PHYSICAL, 3),
-						new Value<>(PerkCategory.LUST, 1),
-						new Value<>(PerkCategory.ARCANE, 0)));
+				Map.of(PerkCategory.PHYSICAL,3,PerkCategory.LUST,1,PerkCategory.ARCANE,0));
 	}
 
 	@Override

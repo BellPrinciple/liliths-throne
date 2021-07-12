@@ -77,23 +77,9 @@ public class SuccubisSecrets {
 	public static final int BASE_ANAL_BLEACHING_COST = 100;
 	public static final int BASE_BODY_HAIR_COST = 50;
 	
-	public static final Map<AbstractBodyCoveringType, Integer> cosmeticCostsMap = Util.newHashMapOfValues(
-			new Value<>(BodyCoveringType.MAKEUP_BLUSHER, 25),
-			new Value<>(BodyCoveringType.MAKEUP_EYE_LINER, 25),
-			new Value<>(BodyCoveringType.MAKEUP_EYE_SHADOW, 25),
-			new Value<>(BodyCoveringType.MAKEUP_LIPSTICK, 25),
-			new Value<>(BodyCoveringType.MAKEUP_NAIL_POLISH_FEET, 25),
-			new Value<>(BodyCoveringType.MAKEUP_NAIL_POLISH_HANDS, 25));
+	public static final Map<AbstractBodyCoveringType, Integer> cosmeticCostsMap = Map.of(BodyCoveringType.MAKEUP_BLUSHER,25,BodyCoveringType.MAKEUP_EYE_LINER,25,BodyCoveringType.MAKEUP_EYE_SHADOW,25,BodyCoveringType.MAKEUP_LIPSTICK,25,BodyCoveringType.MAKEUP_NAIL_POLISH_FEET,25,BodyCoveringType.MAKEUP_NAIL_POLISH_HANDS,25);
 
-	public static final Map<PiercingType, Integer> piercingCostsMap = Util.newHashMapOfValues(
-			new Value<>(PiercingType.EAR, 10),
-			new Value<>(PiercingType.LIP, 25),
-			new Value<>(PiercingType.NAVEL, 25),
-			new Value<>(PiercingType.NIPPLE, 50),
-			new Value<>(PiercingType.NOSE, 25),
-			new Value<>(PiercingType.PENIS, 100),
-			new Value<>(PiercingType.TONGUE, 50),
-			new Value<>(PiercingType.VAGINA, 100));
+	public static final Map<PiercingType, Integer> piercingCostsMap = Map.of(PiercingType.EAR,10,PiercingType.LIP,25,PiercingType.NAVEL,25,PiercingType.NIPPLE,50,PiercingType.NOSE,25,PiercingType.PENIS,100,PiercingType.TONGUE,50,PiercingType.VAGINA,100);
 	
 	public static void initCoveringsMap(GameCharacter target) {
 		coveringsNamesMap = new LinkedHashMap<>();
@@ -381,11 +367,11 @@ public class SuccubisSecrets {
 				return new ResponseSex("Sex", "You can't resist the horny succubus's request...",
 						true, true,
 						new SMSitting(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.SITTING_BETWEEN_LEGS)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), SexSlotSitting.SITTING))) {
+								Map.of(Main.game.getPlayer(),SexSlotSitting.SITTING_BETWEEN_LEGS),
+								Map.of(Main.game.getNpc(Kate.class),SexSlotSitting.SITTING)) {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-								return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), List.of(CoverableArea.VAGINA)));
+								return Map.of(Main.game.getNpc(Kate.class),List.of(CoverableArea.VAGINA));
 							}
 						},
 						null,
@@ -413,11 +399,11 @@ public class SuccubisSecrets {
 				return new ResponseSex("Fuck her", "Do as she says and start having sex with her.",
 						true, true,
 						new SMSitting(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.SITTING_BETWEEN_LEGS)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), SexSlotSitting.SITTING))) {
+								Map.of(Main.game.getPlayer(),SexSlotSitting.SITTING_BETWEEN_LEGS),
+								Map.of(Main.game.getNpc(Kate.class),SexSlotSitting.SITTING)) {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-								return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), List.of(CoverableArea.VAGINA)));
+								return Map.of(Main.game.getNpc(Kate.class),List.of(CoverableArea.VAGINA));
 							}
 						},
 						null,
@@ -569,11 +555,11 @@ public class SuccubisSecrets {
 							+ " On a double-page spread, there's an extremely lewd collection of pictures of Kate inserting her tail into her various orifices, with the suggestive caption 'Don't make me do it myself...'",
 					true, true,
 					new SMSitting(
-							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.SITTING_BETWEEN_LEGS)),
-							Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), SexSlotSitting.SITTING))) {
+							Map.of(Main.game.getPlayer(),SexSlotSitting.SITTING_BETWEEN_LEGS),
+							Map.of(Main.game.getNpc(Kate.class),SexSlotSitting.SITTING)) {
 						@Override
 						public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-							return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Kate.class), List.of(CoverableArea.VAGINA)));
+							return Map.of(Main.game.getNpc(Kate.class),List.of(CoverableArea.VAGINA));
 						}
 					},
 					null,

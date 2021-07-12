@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.submission;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -46,8 +47,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.game.sex.sexActions.submission.SALyssiethSpecials;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -517,8 +516,8 @@ public class LyssiethPalaceDialogue {
 						true,
 						new SMLyssiethSex(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_SUBMISSIVE))) {
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_SUBMISSIVE)) {
 							@Override
 							public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 								if(!character.isPlayer()) {
@@ -547,8 +546,8 @@ public class LyssiethPalaceDialogue {
 						true,
 						new SMLyssiethSex(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_SUBMISSIVE))) {
+								Map.of(Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_SUBMISSIVE)) {
 							@Override
 							public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 								if(!character.isPlayer()) {
@@ -582,8 +581,8 @@ public class LyssiethPalaceDialogue {
 							true,
 							new SMLyssiethSex(
 									SexPosition.STANDING,
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_SUBMISSIVE))) {
+									Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_SUBMISSIVE)) {
 								@Override
 								public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 									if(!character.isPlayer()) {
@@ -632,8 +631,8 @@ public class LyssiethPalaceDialogue {
 						true,
 						new SMLyssiethSex(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_SUBMISSIVE))) {
+								Map.of(Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_SUBMISSIVE)) {
 							@Override
 							public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 								if(!character.isPlayer()) {
@@ -915,8 +914,8 @@ public class LyssiethPalaceDialogue {
 						false,
 						new SMLyssiethDemonTF(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
+								Map.of(Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL)),
 						null,
 						null,
 						AFTER_DEMON_TF_SEX,
@@ -946,8 +945,8 @@ public class LyssiethPalaceDialogue {
 						true,
 						new SMLyssiethDemonTF(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.PERFORMING_ORAL))),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getNpc(Lyssieth.class),SexSlotStanding.PERFORMING_ORAL)),
 						null,
 						null,
 						AFTER_DEMON_TF_SEX,
@@ -1272,11 +1271,8 @@ public class LyssiethPalaceDialogue {
 						false,
 						new SMLilayaDemonTF(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_SUBMISSIVE),
-										new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_SUBMISSIVE_BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_SUBMISSIVE,Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_SUBMISSIVE_BEHIND),
+								Map.of(Main.game.getNpc(Lilaya.class),SexSlotStanding.STANDING_DOMINANT)),
 						null,
 						isMeraxisBeingTransformed()
 							?List.of(Main.game.getNpc(DarkSiren.class))
@@ -1324,11 +1320,8 @@ public class LyssiethPalaceDialogue {
 						false,
 						new SMLilayaDemonTF(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_SUBMISSIVE_BEHIND),
-										new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_SUBMISSIVE)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_SUBMISSIVE_BEHIND,Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_SUBMISSIVE),
+								Map.of(Main.game.getNpc(Lilaya.class),SexSlotStanding.STANDING_DOMINANT)),
 						null,
 						isMeraxisBeingTransformed()
 							?List.of(Main.game.getNpc(DarkSiren.class))
@@ -1370,11 +1363,8 @@ public class LyssiethPalaceDialogue {
 						false,
 						new SMLilayaDemonTF(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL),
-										new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_SUBMISSIVE_BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL,Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_SUBMISSIVE_BEHIND),
+								Map.of(Main.game.getNpc(Lilaya.class),SexSlotStanding.STANDING_DOMINANT)),
 						null,
 						isMeraxisBeingTransformed()
 							?List.of(Main.game.getNpc(DarkSiren.class))
@@ -1409,11 +1399,8 @@ public class LyssiethPalaceDialogue {
 						false,
 						new SMLilayaDemonTF(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL),
-										new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_SUBMISSIVE_BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL,Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_SUBMISSIVE_BEHIND),
+								Map.of(Main.game.getNpc(Lilaya.class),SexSlotStanding.STANDING_DOMINANT)),
 						null,
 						isMeraxisBeingTransformed()
 							?List.of(Main.game.getNpc(DarkSiren.class))
@@ -1456,11 +1443,8 @@ public class LyssiethPalaceDialogue {
 						false,
 						new SMLilayaDemonTF(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL_BEHIND),
-										new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_SUBMISSIVE)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL_BEHIND,Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_SUBMISSIVE),
+								Map.of(Main.game.getNpc(Lilaya.class),SexSlotStanding.STANDING_DOMINANT)),
 						null,
 						isMeraxisBeingTransformed()
 							?List.of(Main.game.getNpc(DarkSiren.class))
@@ -1493,11 +1477,8 @@ public class LyssiethPalaceDialogue {
 						false,
 						new SMLilayaDemonTF(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_SUBMISSIVE),
-										new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_SUBMISSIVE_BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotStanding.STANDING_DOMINANT))),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_SUBMISSIVE,Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_SUBMISSIVE_BEHIND),
+								Map.of(Main.game.getNpc(Lilaya.class),SexSlotStanding.STANDING_DOMINANT)),
 						null,
 						isMeraxisBeingTransformed()
 							?List.of(Main.game.getNpc(DarkSiren.class))
@@ -1563,12 +1544,8 @@ public class LyssiethPalaceDialogue {
 							false,
 							new SMLilayaDemonTF(
 									SexPosition.LYING_DOWN,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN),
-											new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotLyingDown.MISSIONARY),
-											new Value<>(Main.game.getNpc(Lilaya.class), SexSlotLyingDown.BESIDE)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(DarkSiren.class), SexSlotLyingDown.COWGIRL))),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN,Main.game.getNpc(Lyssieth.class),SexSlotLyingDown.MISSIONARY,Main.game.getNpc(Lilaya.class),SexSlotLyingDown.BESIDE),
+									Map.of(Main.game.getNpc(DarkSiren.class),SexSlotLyingDown.COWGIRL)),
 							null,
 							null,
 							AFTER_MERAXIS_DEMON_TF_SEX,
@@ -1623,12 +1600,8 @@ public class LyssiethPalaceDialogue {
 							false,
 							new SMLilayaDemonTF(
 									SexPosition.LYING_DOWN,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.MISSIONARY),
-											new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotLyingDown.LYING_DOWN),
-											new Value<>(Main.game.getNpc(Lilaya.class), SexSlotLyingDown.BESIDE)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(DarkSiren.class), SexSlotLyingDown.COWGIRL))),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.MISSIONARY,Main.game.getNpc(Lyssieth.class),SexSlotLyingDown.LYING_DOWN,Main.game.getNpc(Lilaya.class),SexSlotLyingDown.BESIDE),
+									Map.of(Main.game.getNpc(DarkSiren.class),SexSlotLyingDown.COWGIRL)),
 							null,
 							null,
 							AFTER_MERAXIS_DEMON_TF_SEX,
@@ -1678,12 +1651,8 @@ public class LyssiethPalaceDialogue {
 							false,
 							new SMLilayaDemonTF(
 									SexPosition.LYING_DOWN,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.BESIDE),
-											new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotLyingDown.LYING_DOWN),
-											new Value<>(Main.game.getNpc(Lilaya.class), SexSlotLyingDown.MISSIONARY)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(DarkSiren.class), SexSlotLyingDown.COWGIRL))),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.BESIDE,Main.game.getNpc(Lyssieth.class),SexSlotLyingDown.LYING_DOWN,Main.game.getNpc(Lilaya.class),SexSlotLyingDown.MISSIONARY),
+									Map.of(Main.game.getNpc(DarkSiren.class),SexSlotLyingDown.COWGIRL)),
 							null,
 							null,
 							AFTER_MERAXIS_DEMON_TF_SEX,
@@ -1736,12 +1705,8 @@ public class LyssiethPalaceDialogue {
 							false,
 							new SMLilayaDemonTF(
 									SexPosition.LYING_DOWN,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.BESIDE),
-											new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotLyingDown.LYING_DOWN),
-											new Value<>(Main.game.getNpc(Lilaya.class), SexSlotLyingDown.MISSIONARY)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(DarkSiren.class), SexSlotLyingDown.COWGIRL))),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.BESIDE,Main.game.getNpc(Lyssieth.class),SexSlotLyingDown.LYING_DOWN,Main.game.getNpc(Lilaya.class),SexSlotLyingDown.MISSIONARY),
+									Map.of(Main.game.getNpc(DarkSiren.class),SexSlotLyingDown.COWGIRL)),
 							null,
 							null,
 							AFTER_MERAXIS_DEMON_TF_SEX,
@@ -1792,12 +1757,8 @@ public class LyssiethPalaceDialogue {
 							false,
 							new SMLilayaDemonTF(
 									SexPosition.LYING_DOWN,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.BESIDE),
-											new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotLyingDown.LYING_DOWN),
-											new Value<>(Main.game.getNpc(Lilaya.class), SexSlotLyingDown.MISSIONARY)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(DarkSiren.class), SexSlotLyingDown.COWGIRL))),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.BESIDE,Main.game.getNpc(Lyssieth.class),SexSlotLyingDown.LYING_DOWN,Main.game.getNpc(Lilaya.class),SexSlotLyingDown.MISSIONARY),
+									Map.of(Main.game.getNpc(DarkSiren.class),SexSlotLyingDown.COWGIRL)),
 							null,
 							null,
 							AFTER_MERAXIS_DEMON_TF_SEX,

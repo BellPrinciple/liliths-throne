@@ -35,7 +35,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.TongueMouth;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -997,14 +996,7 @@ public class ClothingEmporium {
 				Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_WALK_INITIAL"));
 				
 			} else {
-				Map<AbstractPlaceType, String> places = Util.newHashMapOfValues(
-						new Value<>(PlaceType.SHOPPING_ARCADE_ASHLEYS_SHOP, "ASHLEY"),
-						new Value<>(PlaceType.SHOPPING_ARCADE_ANTIQUES, "ANTIQUES"),
-						new Value<>(PlaceType.SHOPPING_ARCADE_KATES_SHOP, "KATE"),
-						new Value<>(PlaceType.SHOPPING_ARCADE_PIXS_GYM, "PIX"),
-						new Value<>(PlaceType.SHOPPING_ARCADE_RALPHS_SHOP, "RALPH"),
-						new Value<>(PlaceType.SHOPPING_ARCADE_RESTAURANT, "RESTAURANT"),
-						new Value<>(PlaceType.SHOPPING_ARCADE_VICKYS_SHOP, "VICKY"));
+				Map<AbstractPlaceType, String> places = Map.of(PlaceType.SHOPPING_ARCADE_ASHLEYS_SHOP,"ASHLEY",PlaceType.SHOPPING_ARCADE_ANTIQUES,"ANTIQUES",PlaceType.SHOPPING_ARCADE_KATES_SHOP,"KATE",PlaceType.SHOPPING_ARCADE_PIXS_GYM,"PIX",PlaceType.SHOPPING_ARCADE_RALPHS_SHOP,"RALPH",PlaceType.SHOPPING_ARCADE_RESTAURANT,"RESTAURANT",PlaceType.SHOPPING_ARCADE_VICKYS_SHOP,"VICKY");
 				AbstractPlaceType place = Util.randomItemFrom(places.keySet());
 				destination = Main.game.getWorlds().get(WorldType.SHOPPING_ARCADE).getCell(place);
 				Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_WALK_REPEAT_START"));
@@ -1223,8 +1215,8 @@ public class ClothingEmporium {
 						true, true,
 						new SMNyanSex(
 								SexPosition.AGAINST_WALL,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.PERFORMING_ORAL_WALL)),
-								Util.newHashMapOfValues(new Value<>(getNyan(), SexSlotAgainstWall.BACK_TO_WALL))) {
+								Map.of(Main.game.getPlayer(),SexSlotAgainstWall.PERFORMING_ORAL_WALL),
+								Map.of(getNyan(),SexSlotAgainstWall.BACK_TO_WALL)) {
 							@Override
 							public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 								if(character.isPlayer()) {
@@ -1262,8 +1254,8 @@ public class ClothingEmporium {
 						true, true,
 						new SMNyanSex(
 								SexPosition.AGAINST_WALL,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.STANDING_WALL)),
-								Util.newHashMapOfValues(new Value<>(getNyan(), SexSlotAgainstWall.BACK_TO_WALL))) {
+								Map.of(Main.game.getPlayer(),SexSlotAgainstWall.STANDING_WALL),
+								Map.of(getNyan(),SexSlotAgainstWall.BACK_TO_WALL)) {
 							@Override
 							public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 								if(character.isPlayer()) {
@@ -1304,8 +1296,8 @@ public class ClothingEmporium {
 											Main.game.getPlayer().isTaur()
 												?SexPosition.STANDING
 												:SexPosition.AGAINST_WALL,
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), Main.game.getPlayer().isTaur()?SexSlotStanding.STANDING_DOMINANT:SexSlotAgainstWall.BACK_TO_WALL)),
-											Util.newHashMapOfValues(new Value<>(getNyan(), Main.game.getPlayer().isTaur()?SexSlotStanding.PERFORMING_ORAL:SexSlotAgainstWall.PERFORMING_ORAL_WALL))) {
+											Map.of(Main.game.getPlayer(),Main.game.getPlayer().isTaur()?SexSlotStanding.STANDING_DOMINANT:SexSlotAgainstWall.BACK_TO_WALL),
+											Map.of(getNyan(),Main.game.getPlayer().isTaur()?SexSlotStanding.PERFORMING_ORAL:SexSlotAgainstWall.PERFORMING_ORAL_WALL)) {
 										@Override
 										public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 											if(character.isPlayer()) {
@@ -1316,8 +1308,7 @@ public class ClothingEmporium {
 										}
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)));
+											return Map.of(Main.game.getPlayer(),List.of(CoverableArea.PENIS));
 										}
 										@Override
 										public boolean isExposeAtStartOfSexMapRemoval(GameCharacter character) {
@@ -1346,8 +1337,8 @@ public class ClothingEmporium {
 											Main.game.getPlayer().isTaur()
 												?SexPosition.STANDING
 												:SexPosition.AGAINST_WALL,
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), Main.game.getPlayer().isTaur()?SexSlotStanding.STANDING_DOMINANT:SexSlotAgainstWall.BACK_TO_WALL)),
-											Util.newHashMapOfValues(new Value<>(getNyan(), Main.game.getPlayer().isTaur()?SexSlotStanding.PERFORMING_ORAL_BEHIND:SexSlotAgainstWall.PERFORMING_ORAL_WALL))) {
+											Map.of(Main.game.getPlayer(),Main.game.getPlayer().isTaur()?SexSlotStanding.STANDING_DOMINANT:SexSlotAgainstWall.BACK_TO_WALL),
+											Map.of(getNyan(),Main.game.getPlayer().isTaur()?SexSlotStanding.PERFORMING_ORAL_BEHIND:SexSlotAgainstWall.PERFORMING_ORAL_WALL)) {
 										@Override
 										public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 											if(character.isPlayer()) {
@@ -1358,8 +1349,7 @@ public class ClothingEmporium {
 										}
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-											return Util.newHashMapOfValues(
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)));
+											return Map.of(Main.game.getPlayer(),List.of(CoverableArea.VAGINA));
 										}
 										@Override
 										public boolean isExposeAtStartOfSexMapRemoval(GameCharacter character) {
@@ -1388,10 +1378,8 @@ public class ClothingEmporium {
 								true, true,
 								new SMNyanSex(
 										SexPosition.AGAINST_WALL,
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.STANDING_WALL)),
-										Util.newHashMapOfValues(
-												new Value<>(getNyan(), SexSlotAgainstWall.FACE_TO_WALL))) {
+										Map.of(Main.game.getPlayer(),SexSlotAgainstWall.STANDING_WALL),
+										Map.of(getNyan(),SexSlotAgainstWall.FACE_TO_WALL)) {
 									@Override
 									public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {
 										if(character.isPlayer()) {
@@ -1402,8 +1390,7 @@ public class ClothingEmporium {
 									}
 									@Override
 									public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-										return Util.newHashMapOfValues(
-												new Value<>(getNyan(), List.of(CoverableArea.ANUS)));
+										return Map.of(getNyan(),List.of(CoverableArea.ANUS));
 									}
 									@Override
 									public boolean isExposeAtStartOfSexMapRemoval(GameCharacter character) {

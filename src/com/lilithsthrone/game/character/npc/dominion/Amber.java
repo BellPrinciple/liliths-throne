@@ -3,6 +3,7 @@ package com.lilithsthrone.game.character.npc.dominion;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -88,8 +89,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.PartnerTalk;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.SadisticActions;
 import com.lilithsthrone.game.sex.sexActions.dominion.AmberSpecials;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -159,10 +158,7 @@ public class Amber extends NPC {
 		PerkManager.initialisePerks(this,
 				List.of(Perk.ORGASMIC_LEVEL_DRAIN,
 						Perk.UNARMED_TRAINING),
-				Util.newHashMapOfValues(
-						new Value<>(PerkCategory.PHYSICAL, 3),
-						new Value<>(PerkCategory.LUST, 1),
-						new Value<>(PerkCategory.ARCANE, 2)));
+				Map.of(PerkCategory.PHYSICAL,3,PerkCategory.LUST,1,PerkCategory.ARCANE,2));
 	}
 	
 	@Override
@@ -564,8 +560,8 @@ public class Amber extends NPC {
 				return new ResponseSex("Used", "Amber starts fucking you.",
 						false, false,
 						new SMAmberDoggyFucked(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Amber.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Amber.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 						null,
 						null,
 						AFTER_SEX_DEFEAT,

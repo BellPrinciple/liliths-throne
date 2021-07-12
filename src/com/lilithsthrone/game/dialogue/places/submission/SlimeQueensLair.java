@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.submission;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -32,8 +33,6 @@ import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -146,10 +145,7 @@ public class SlimeQueensLair {
 							"Decide to drop the act and attack [slimeFire.name] and [slimeIce.name]!",
 							Main.game.getNpc(SlimeGuardFire.class),
 							List.of(Main.game.getNpc(SlimeGuardFire.class), Main.game.getNpc(SlimeGuardIce.class)),
-							Util.newHashMapOfValues(
-									new Value<>(Main.game.getPlayer(), "[pc.speech(I can't believe you fell for my tale!)] You laugh, getting ready to fight the slime siblings. [pc.speech(I'll teach you not to be so gullible!)]"),
-									new Value<>(Main.game.getNpc(SlimeGuardFire.class), "[slimeFire.speech(Sis' and I are gonna have so much fun with you!)] [slimeFire.name] sneers, gripping his fire-enchanted sword in one hand."),
-									new Value<>(Main.game.getNpc(SlimeGuardIce.class), "[slimeIce.speech(You'll be sorry for tricking us!)] [slimeIce.name] calls out, stepping up beside her brother as she prepares to fight.")));
+							Map.of(Main.game.getPlayer(),"[pc.speech(I can't believe you fell for my tale!)] You laugh, getting ready to fight the slime siblings. [pc.speech(I'll teach you not to be so gullible!)]",Main.game.getNpc(SlimeGuardFire.class),"[slimeFire.speech(Sis' and I are gonna have so much fun with you!)] [slimeFire.name] sneers, gripping his fire-enchanted sword in one hand.",Main.game.getNpc(SlimeGuardIce.class),"[slimeIce.speech(You'll be sorry for tricking us!)] [slimeIce.name] calls out, stepping up beside her brother as she prepares to fight."));
 					
 					
 				} else if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FIVE_CONVINCE)?index==2:index==3) {
@@ -158,10 +154,8 @@ public class SlimeQueensLair {
 							null, null, null, null, null, null,
 							true, false,
 							new SMAllFours(
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(SlimeGuardIce.class), SexSlotAllFours.ALL_FOURS),
-											new Value<>(Main.game.getNpc(SlimeGuardFire.class), SexSlotAllFours.ALL_FOURS_TWO))) {
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.BEHIND),
+									Map.of(Main.game.getNpc(SlimeGuardIce.class),SexSlotAllFours.ALL_FOURS,Main.game.getNpc(SlimeGuardFire.class),SexSlotAllFours.ALL_FOURS_TWO)) {
 								@Override
 								public boolean isPositionChangingAllowed(GameCharacter character) {
 									return false;
@@ -176,10 +170,8 @@ public class SlimeQueensLair {
 							List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 							true, true,
 							new SMAllFours(
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(SlimeGuardIce.class), SexSlotAllFours.IN_FRONT),
-											new Value<>(Main.game.getNpc(SlimeGuardFire.class), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))) {
+									Map.of(Main.game.getNpc(SlimeGuardIce.class),SexSlotAllFours.IN_FRONT,Main.game.getNpc(SlimeGuardFire.class),SexSlotAllFours.BEHIND),
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)) {
 								@Override
 								public boolean isPositionChangingAllowed(GameCharacter character) {
 									return false;
@@ -198,10 +190,8 @@ public class SlimeQueensLair {
 							null, null, null, null, null, null,
 							true, false,
 							new SMAllFours(
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(SlimeGuardIce.class), SexSlotAllFours.ALL_FOURS),
-											new Value<>(Main.game.getNpc(SlimeGuardFire.class), SexSlotAllFours.ALL_FOURS_TWO))) {
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.BEHIND),
+									Map.of(Main.game.getNpc(SlimeGuardIce.class),SexSlotAllFours.ALL_FOURS,Main.game.getNpc(SlimeGuardFire.class),SexSlotAllFours.ALL_FOURS_TWO)) {
 								@Override
 								public boolean isPositionChangingAllowed(GameCharacter character) {
 									return false;
@@ -216,10 +206,8 @@ public class SlimeQueensLair {
 							List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 							true, true,
 							new SMAllFours(
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(SlimeGuardIce.class), SexSlotAllFours.IN_FRONT),
-											new Value<>(Main.game.getNpc(SlimeGuardFire.class), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))) {
+									Map.of(Main.game.getNpc(SlimeGuardIce.class),SexSlotAllFours.IN_FRONT,Main.game.getNpc(SlimeGuardFire.class),SexSlotAllFours.BEHIND),
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)) {
 								@Override
 								public boolean isPositionChangingAllowed(GameCharacter character) {
 									return false;
@@ -237,10 +225,7 @@ public class SlimeQueensLair {
 							"Fight your way past these slimes!",
 							Main.game.getNpc(SlimeGuardFire.class),
 							List.of(Main.game.getNpc(SlimeGuardFire.class), Main.game.getNpc(SlimeGuardIce.class)),
-							Util.newHashMapOfValues(
-									new Value<>(Main.game.getPlayer(), "[pc.speech(If it's a fight you want, it's a fight you're going to get!)] you cry out, ready to fight the slime siblings."),
-									new Value<>(Main.game.getNpc(SlimeGuardFire.class), "[slimeFire.speech(Sis' and I are gonna have so much fun with you!)] [slimeFire.name] sneers, gripping his fire-enchanted sword in one hand."),
-									new Value<>(Main.game.getNpc(SlimeGuardIce.class), "[slimeIce.speech(You'll be sorry!)] [slimeIce.name] calls out, stepping up beside her brother as she prepares to fight."))){
+							Map.of(Main.game.getPlayer(),"[pc.speech(If it's a fight you want, it's a fight you're going to get!)] you cry out, ready to fight the slime siblings.",Main.game.getNpc(SlimeGuardFire.class),"[slimeFire.speech(Sis' and I are gonna have so much fun with you!)] [slimeFire.name] sneers, gripping his fire-enchanted sword in one hand.",Main.game.getNpc(SlimeGuardIce.class),"[slimeIce.speech(You'll be sorry!)] [slimeIce.name] calls out, stepping up beside her brother as she prepares to fight.")){
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.slimeGuardsIntroduced, true);
@@ -405,10 +390,8 @@ public class SlimeQueensLair {
 						List.of(Fetish.FETISH_SUBMISSIVE), null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 						false, false,
 						new SMAllFours(
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(SlimeGuardIce.class), SexSlotAllFours.IN_FRONT),
-										new Value<>(Main.game.getNpc(SlimeGuardFire.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))) {
+								Map.of(Main.game.getNpc(SlimeGuardIce.class),SexSlotAllFours.IN_FRONT,Main.game.getNpc(SlimeGuardFire.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)) {
 							@Override
 							public boolean isPositionChangingAllowed(GameCharacter character) {
 								return false;
@@ -649,9 +632,7 @@ public class SlimeQueensLair {
 					return new ResponseCombat("Spar",
 							"Accept [slimeRoyalGuard.namePos] offer of a sparring match, with the agreement that the winner can do whatever they like with the loser's body.",
 							Main.game.getNpc(SlimeRoyalGuard.class),
-							Util.newHashMapOfValues(
-									new Value<>(Main.game.getPlayer(), "[pc.speech(Fine, I'll spar with you,)] you say, readying yourself for a fight, [pc.speech(but remember what you said about your body being mine when you lose!)]"),
-									new Value<>(Main.game.getNpc(SlimeRoyalGuard.class), "[slimeRoyalGuard.speech(Hah!)] [slimeRoyalGuard.name] booms. [slimeRoyalGuard.speech(I'm looking forward to claiming my prize!)]")));
+							Map.of(Main.game.getPlayer(),"[pc.speech(Fine, I'll spar with you,)] you say, readying yourself for a fight, [pc.speech(but remember what you said about your body being mine when you lose!)]",Main.game.getNpc(SlimeRoyalGuard.class),"[slimeRoyalGuard.speech(Hah!)] [slimeRoyalGuard.name] booms. [slimeRoyalGuard.speech(I'm looking forward to claiming my prize!)]"));
 				} else {
 					return null;
 				}
@@ -661,9 +642,7 @@ public class SlimeQueensLair {
 					return new ResponseCombat("Fight",
 							"Defend yourself against [slimeRoyalGuard.name].",
 							Main.game.getNpc(SlimeRoyalGuard.class),
-							Util.newHashMapOfValues(
-									new Value<>(Main.game.getPlayer(), "[pc.speech(I've fought and defeated mightier foes than you!)] you cry out, readying yourself for a fight."),
-									new Value<>(Main.game.getNpc(SlimeRoyalGuard.class), "[slimeRoyalGuard.speech(No-one is mightier than I!)] [slimeRoyalGuard.name] bellows in response. [slimeRoyalGuard.speech(Prepare to be defeated!)]")));
+							Map.of(Main.game.getPlayer(),"[pc.speech(I've fought and defeated mightier foes than you!)] you cry out, readying yourself for a fight.",Main.game.getNpc(SlimeRoyalGuard.class),"[slimeRoyalGuard.speech(No-one is mightier than I!)] [slimeRoyalGuard.name] bellows in response. [slimeRoyalGuard.speech(Prepare to be defeated!)]"));
 					
 				} else if(index==2) {
 					if(Main.game.getNpc(SlimeRoyalGuard.class).getFoughtPlayerCount()>0) {
@@ -721,9 +700,7 @@ public class SlimeQueensLair {
 				return new ResponseCombat("Fight",
 						"Defend yourself against [slimeRoyalGuard.name].",
 						Main.game.getNpc(SlimeRoyalGuard.class),
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getPlayer(), "[pc.speech(Very well, I'll fight you,)] you say, stepping back and preparing for combat."),
-								new Value<>(Main.game.getNpc(SlimeRoyalGuard.class), "[slimeRoyalGuard.speech(Excellent! Now, defend yourself!)] [slimeRoyalGuard.name] booms, before moving forwards to attack.")));
+						Map.of(Main.game.getPlayer(),"[pc.speech(Very well, I'll fight you,)] you say, stepping back and preparing for combat.",Main.game.getNpc(SlimeRoyalGuard.class),"[slimeRoyalGuard.speech(Excellent! Now, defend yourself!)] [slimeRoyalGuard.name] booms, before moving forwards to attack."));
 				
 			} else if(index==2) {
 				if(Main.game.getPlayer().hasTraitActivated(Perk.FEROCIOUS_WARRIOR) || Main.game.getPlayer().getHistory()==Occupation.SOLDIER) {
@@ -775,9 +752,7 @@ public class SlimeQueensLair {
 				return new ResponseCombat("Fight",
 						"Now that you've worn [slimeRoyalGuard.name] out, [slimeRoyalGuard.he] should be easier to beat!",
 						Main.game.getNpc(SlimeRoyalGuard.class),
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getPlayer(), "[pc.speech(Sure, I'll take you on,)] you reply, reading yourself for a fight."),
-								new Value<>(Main.game.getNpc(SlimeRoyalGuard.class), "[slimeRoyalGuard.speech(Prepare... Prepare to... defend yourself!)] [slimeRoyalGuard.name] pants, struggling to catch his breath.")));
+						Map.of(Main.game.getPlayer(),"[pc.speech(Sure, I'll take you on,)] you reply, reading yourself for a fight.",Main.game.getNpc(SlimeRoyalGuard.class),"[slimeRoyalGuard.speech(Prepare... Prepare to... defend yourself!)] [slimeRoyalGuard.name] pants, struggling to catch his breath."));
 				
 			} else if(index==2) {
 				if(Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_PHYSIQUE) > Main.game.getNpc(SlimeRoyalGuard.class).getAttributeValue(Attribute.MAJOR_PHYSIQUE)) {
@@ -840,9 +815,7 @@ public class SlimeQueensLair {
 				return new ResponseCombat("Fight",
 						"Now that you've worn [slimeRoyalGuard.name] out, [slimeRoyalGuard.he] should be easier to beat!",
 						Main.game.getNpc(SlimeRoyalGuard.class),
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getPlayer(), "[pc.speech(Ok, I'll fight you...)] you sigh, preparing for combat."),
-								new Value<>(Main.game.getNpc(SlimeRoyalGuard.class), "[slimeRoyalGuard.speech(E-Excellent!)] [slimeRoyalGuard.name] replies, already flustered and turned on from your teasing.")));
+						Map.of(Main.game.getPlayer(),"[pc.speech(Ok, I'll fight you...)] you sigh, preparing for combat.",Main.game.getNpc(SlimeRoyalGuard.class),"[slimeRoyalGuard.speech(E-Excellent!)] [slimeRoyalGuard.name] replies, already flustered and turned on from your teasing."));
 				
 			} else if(index==2) {
 				return new ResponseSex("Submissive sex",
@@ -1170,9 +1143,8 @@ public class SlimeQueensLair {
 						null, null, null, null, null, null,
 						true, false,
 						new SMLyingDown(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.MISSIONARY)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(SlimeQueen.class), SexSlotLyingDown.LYING_DOWN))),
+								Map.of(Main.game.getPlayer(),SexSlotLyingDown.MISSIONARY),
+								Map.of(Main.game.getNpc(SlimeQueen.class),SexSlotLyingDown.LYING_DOWN)),
 						null,
 						null,
 						AFTER_SLIME_QUEEN_SEX, UtilText.parseFromXMLFile("places/submission/slimeQueensLair", "SLIME_QUEEN_SEX_START"));
@@ -1256,9 +1228,8 @@ public class SlimeQueensLair {
 						null, null, null, null, null, null,
 						true, false,
 						new SMBath(SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(SlimeQueen.class), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getNpc(SlimeQueen.class),SexSlotAllFours.ALL_FOURS)),
 						null,
 						null,
 						AFTER_SLIME_QUEEN_SEX_BATH,

@@ -19,8 +19,6 @@ import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.7.1
@@ -31,8 +29,8 @@ public class SMScarlettShopOral extends SexManagerDefault {
 	
 	public SMScarlettShopOral() {
 		super(SexPosition.STANDING,
-				Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Scarlett.class), SexSlotStanding.STANDING_DOMINANT)),
-				Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)));
+				Map.of(Main.game.getNpc(Scarlett.class),SexSlotStanding.STANDING_DOMINANT),
+				Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL));
 	}
 
 	@Override

@@ -95,9 +95,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -15f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -15f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-15f,Attribute.RESISTANCE_PHYSICAL,-15f),
 			List.of("Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -153,8 +151,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 5f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 10f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,5f,Attribute.CRITICAL_DAMAGE,10f),
 			List.of("Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -182,8 +179,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 20f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,10f,Attribute.CRITICAL_DAMAGE,20f),
 			List.of("Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -211,8 +207,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 15f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 30f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,15f,Attribute.CRITICAL_DAMAGE,30f),
 			List.of("Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -240,8 +235,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 20f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 50f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,20f,Attribute.CRITICAL_DAMAGE,50f),
 			List.of("Base [style.colourUnarmed(unarmed damage)] equals [style.colourMinorGood(20% of physique)]")) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -294,8 +288,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_SPELLS, -75f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, -75f)),
+			Map.of(Attribute.DAMAGE_SPELLS,-75f,Attribute.SPELL_COST_MODIFIER,-75f),
 			List.of("<b style='color: " + PresetColour.GENERIC_TERRIBLE.toWebHexString() + "'>Surrender in combat at maximum lust</b>",
 					"[style.boldMana(Maximum "+Attribute.MANA_MAXIMUM.getName()+")] [style.boldBad(limited to 5)]",
 					"[style.boldBad(Vulnerable)] to [style.boldArcane(arcane storms)]")) {
@@ -329,9 +322,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			true,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_SPELLS, 10f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 10f)),
+			Map.of(Attribute.DAMAGE_SPELLS,10f,Attribute.SPELL_COST_MODIFIER,10f),
 			List.of("[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -363,9 +354,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			true,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_SPELLS, 10f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 10f)),
+			Map.of(Attribute.DAMAGE_SPELLS,10f,Attribute.SPELL_COST_MODIFIER,10f),
 			List.of("[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -393,11 +382,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_SPELLS, 15f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 15f),
-					new Value<>(Attribute.DAMAGE_FIRE, 5f),
-					new Value<>(Attribute.DAMAGE_ICE, 5f),
-					new Value<>(Attribute.DAMAGE_POISON, 5f)),
+			Map.of(Attribute.DAMAGE_SPELLS,15f,Attribute.SPELL_COST_MODIFIER,15f,Attribute.DAMAGE_FIRE,5f,Attribute.DAMAGE_ICE,5f,Attribute.DAMAGE_POISON,5f),
 			List.of("[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -429,11 +414,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_SPELLS, 20f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 20f),
-					new Value<>(Attribute.DAMAGE_FIRE, 10f),
-					new Value<>(Attribute.DAMAGE_ICE, 10f),
-					new Value<>(Attribute.DAMAGE_POISON, 10f)),
+			Map.of(Attribute.DAMAGE_SPELLS,20f,Attribute.SPELL_COST_MODIFIER,20f,Attribute.DAMAGE_FIRE,10f,Attribute.DAMAGE_ICE,10f,Attribute.DAMAGE_POISON,10f),
 			List.of("[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -466,11 +447,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_SPELLS, 25f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 25f),
-					new Value<>(Attribute.DAMAGE_FIRE, 15f),
-					new Value<>(Attribute.DAMAGE_ICE, 15f),
-					new Value<>(Attribute.DAMAGE_POISON, 15f)),
+			Map.of(Attribute.DAMAGE_SPELLS,25f,Attribute.SPELL_COST_MODIFIER,25f,Attribute.DAMAGE_FIRE,15f,Attribute.DAMAGE_ICE,15f,Attribute.DAMAGE_POISON,15f),
 			List.of("[style.boldExcellent(Immune)] to [style.boldArcane(arcane storms)]")) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -503,8 +480,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			true,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_LUST, 25f)),
+			Map.of(Attribute.RESISTANCE_LUST,25f),
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -536,9 +512,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_LUST, 15f),
-					new Value<>(Attribute.DAMAGE_LUST, 5f)),
+			Map.of(Attribute.RESISTANCE_LUST,15f,Attribute.DAMAGE_LUST,5f),
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -570,9 +544,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_LUST, 5f),
-					new Value<>(Attribute.DAMAGE_LUST, 15f)),
+			Map.of(Attribute.RESISTANCE_LUST,5f,Attribute.DAMAGE_LUST,15f),
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -604,10 +576,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -5f),
-					new Value<>(Attribute.DAMAGE_LUST, 30f),
-					new Value<>(Attribute.FERTILITY, 25f),
-					new Value<>(Attribute.VIRILITY, 25f)),
+			Map.of(Attribute.RESISTANCE_LUST,-5f,Attribute.DAMAGE_LUST,30f,Attribute.FERTILITY,25f,Attribute.VIRILITY,25f),
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -657,10 +626,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -15f),
-					new Value<>(Attribute.DAMAGE_LUST, 40f),
-					new Value<>(Attribute.FERTILITY, 50f),
-					new Value<>(Attribute.VIRILITY, 50f)),
+			Map.of(Attribute.RESISTANCE_LUST,-15f,Attribute.DAMAGE_LUST,40f,Attribute.FERTILITY,50f,Attribute.VIRILITY,50f),
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -714,10 +680,7 @@ public class StatusEffect {
 			PresetColour.BASE_BLACK,
 			PresetColour.BASE_BLACK,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -25f),
-					new Value<>(Attribute.DAMAGE_LUST, 50f),
-					new Value<>(Attribute.FERTILITY, 75f),
-					new Value<>(Attribute.VIRILITY, 75f)),
+			Map.of(Attribute.RESISTANCE_LUST,-25f,Attribute.DAMAGE_LUST,50f,Attribute.FERTILITY,75f,Attribute.VIRILITY,75f),
 			List.of("<b style='color: "+ PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString()+ "'>Demonic mindset</b>")) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -1393,7 +1356,7 @@ public class StatusEffect {
 			"weatherDayStorm",
 			PresetColour.CLOTHING_WHITE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -5f)),
+			Map.of(Attribute.RESISTANCE_LUST,-5f),
 			List.of("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
 					"[style.boldExcellent(Double)] all <b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Essence gains</b> from sex & combat")) {
 		@Override
@@ -1506,9 +1469,7 @@ public class StatusEffect {
 			"weatherDayStorm",
 			PresetColour.CLOTHING_WHITE,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_LUST, -100f),
-					new Value<>(Attribute.RESTING_LUST, 50f)),
+			Map.of(Attribute.RESISTANCE_LUST,-100f,Attribute.RESTING_LUST,50f),
 			List.of("<b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Enhanced libido</b>",
 					"[style.boldExcellent(Double)] <b style='color: "+ PresetColour.GENERIC_ARCANE.toWebHexString()+ ";'>Essence gains</b> from sex & combat")) {
 		@Override
@@ -1646,11 +1607,7 @@ public class StatusEffect {
 			PresetColour.BASE_RED,
 			PresetColour.BASE_GREY_LIGHT,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_UNARMED, -25f),
-					new Value<>(Attribute.DAMAGE_MELEE_WEAPON, -25f),
-					new Value<>(Attribute.DAMAGE_RANGED_WEAPON, -25f),
-					new Value<>(Attribute.DAMAGE_SPELLS, -25f)),
+			Map.of(Attribute.DAMAGE_UNARMED,-25f,Attribute.DAMAGE_MELEE_WEAPON,-25f,Attribute.DAMAGE_RANGED_WEAPON,-25f,Attribute.DAMAGE_SPELLS,-25f),
 			List.of()) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -1673,7 +1630,7 @@ public class StatusEffect {
 			PresetColour.BASE_GREEN,
 			PresetColour.BASE_GREY_LIGHT,
 			true,
-			Util.newHashMapOfValues(),
+			Map.of(),
 			List.of()) {
 		@Override
 		public EffectBenefit getBeneficialStatus() {
@@ -1701,8 +1658,7 @@ public class StatusEffect {
 			null,
 			PresetColour.CLOTHING_WHITE,
 			true,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -1851,11 +1807,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_GOOD,
 			PresetColour.BASE_BLUE_LIGHT,
 			true,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.ACTION_POINTS, 1f),
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 15f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 5f)),
+			Map.of(Attribute.ACTION_POINTS,1f,Attribute.MAJOR_PHYSIQUE,10f,Attribute.CRITICAL_DAMAGE,15f,Attribute.ENERGY_SHIELDING,5f),
 			List.of("[style.boldBlueLight(Lost legs)]")) {
 		@Override
 		public String applyAdditionEffect(GameCharacter target) {
@@ -1892,11 +1844,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			PresetColour.BASE_TAN,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.ACTION_POINTS, -1f),
-					new Value<>(Attribute.MAJOR_PHYSIQUE, -10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, -15f),
-					new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
+			Map.of(Attribute.ACTION_POINTS,-1f,Attribute.MAJOR_PHYSIQUE,-10f,Attribute.CRITICAL_DAMAGE,-15f,Attribute.ENERGY_SHIELDING,-5f),
 			List.of("[style.boldTan(Grown two legs)]")) {
 		@Override
 		public String applyAdditionEffect(GameCharacter target) {
@@ -1933,10 +1881,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_GOOD,
 			PresetColour.BASE_BLUE_LIGHT,
 			true,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 15f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,10f,Attribute.CRITICAL_DAMAGE,15f,Attribute.ENERGY_SHIELDING,5f),
 			List.of()) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -1960,10 +1905,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			PresetColour.BASE_TAN,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, -10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, -15f),
-					new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-10f,Attribute.CRITICAL_DAMAGE,-15f,Attribute.ENERGY_SHIELDING,-5f),
 			List.of()) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2101,7 +2043,7 @@ public class StatusEffect {
 			"clothingFemininity",
 			PresetColour.CLOTHING_PINK_LIGHT,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, -15f)),
+			Map.of(Attribute.DAMAGE_LUST,-15f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2128,7 +2070,7 @@ public class StatusEffect {
 			"clothingMasculinity",
 			PresetColour.CLOTHING_BLUE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, -15f)),
+			Map.of(Attribute.DAMAGE_LUST,-15f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2155,7 +2097,7 @@ public class StatusEffect {
 			"clothingCummedIn",
 			PresetColour.CLOTHING_WHITE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_CORRUPTION, 5f)),
+			Map.of(Attribute.MAJOR_CORRUPTION,5f),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -2195,7 +2137,7 @@ public class StatusEffect {
 			"clothingCummedInMasochist",
 			PresetColour.CLOTHING_WHITE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 2f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,2f),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -2239,7 +2181,7 @@ public class StatusEffect {
 			"dirtyBody",
 			PresetColour.CLOTHING_WHITE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_CORRUPTION, 5f)),
+			Map.of(Attribute.MAJOR_CORRUPTION,5f),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -2329,7 +2271,7 @@ public class StatusEffect {
 			"dirtyBodyMasochist",
 			PresetColour.CLOTHING_WHITE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 2f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,2f),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -2364,7 +2306,7 @@ public class StatusEffect {
 			"unstable_enchantment_1",
 			PresetColour.ATTRIBUTE_CORRUPTION,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_CORRUPTION, 25f)),
+			Map.of(Attribute.MAJOR_CORRUPTION,25f),
 			List.of("[style.boldMinorBad(-10%)] [style.boldHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]",
 					"[style.boldMinorBad(-10%)] [style.boldMana(Maximum "+Attribute.MANA_MAXIMUM.getName()+")]")) {
 		@Override
@@ -2389,7 +2331,7 @@ public class StatusEffect {
 			"unstable_enchantment_2",
 			PresetColour.ATTRIBUTE_CORRUPTION,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_CORRUPTION, 50f)),
+			Map.of(Attribute.MAJOR_CORRUPTION,50f),
 			List.of("[style.boldBad(-50%)] [style.boldHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]",
 					"[style.boldBad(-50%)] [style.boldMana(Maximum "+Attribute.MANA_MAXIMUM.getName()+")]")) {
 		@Override
@@ -2414,7 +2356,7 @@ public class StatusEffect {
 			"unstable_enchantment_3",
 			PresetColour.ATTRIBUTE_CORRUPTION,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_CORRUPTION, 100f)),
+			Map.of(Attribute.MAJOR_CORRUPTION,100f),
 			List.of("[style.boldHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")] [style.boldTerrible(set to 1)]",
 					"[style.boldMana(Maximum "+Attribute.MANA_MAXIMUM.getName()+")] [style.boldTerrible(set to 1)]",
 					"[style.boldTerrible(All shielding set to 0)]")) {
@@ -2439,7 +2381,7 @@ public class StatusEffect {
 			"jinxed_clothing",
 			PresetColour.ATTRIBUTE_CORRUPTION,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MANA_MAXIMUM, -5f)),
+			Map.of(Attribute.MANA_MAXIMUM,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2532,8 +2474,7 @@ public class StatusEffect {
 			PresetColour.ATTRIBUTE_HEALTH,
 			PresetColour.ATTRIBUTE_MANA,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, 10f),
-					new Value<>(Attribute.MANA_MAXIMUM, 10f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,10f,Attribute.MANA_MAXIMUM,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2551,8 +2492,7 @@ public class StatusEffect {
 			PresetColour.ATTRIBUTE_HEALTH,
 			PresetColour.ATTRIBUTE_MANA,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, 30f),
-					new Value<>(Attribute.MANA_MAXIMUM, 30f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,30f,Attribute.MANA_MAXIMUM,30f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2575,8 +2515,7 @@ public class StatusEffect {
 			PresetColour.ATTRIBUTE_MANA,
 			PresetColour.GENERIC_EXCELLENT,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, 60f),
-					new Value<>(Attribute.MANA_MAXIMUM, 60f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,60f,Attribute.MANA_MAXIMUM,60f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2659,8 +2598,7 @@ public class StatusEffect {
 			"overworked1",
 			PresetColour.BASE_RED,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, -10f),
-					new Value<>(Attribute.MANA_MAXIMUM, -10f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,-10f,Attribute.MANA_MAXIMUM,-10f),
 			List.of("While working:",
 					"[style.boldBad(-0.05)] [style.colourAffection(Affection/hour)]",
 					"[style.boldBad(-25%)] [style.colourExperience(experience)] gain chance")) {
@@ -2687,8 +2625,7 @@ public class StatusEffect {
 			"overworked2",
 			PresetColour.BASE_RED,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, -25f),
-					new Value<>(Attribute.MANA_MAXIMUM, -25f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,-25f,Attribute.MANA_MAXIMUM,-25f),
 			List.of("[style.boldBad(-0.1)] [style.colourAffection(Affection/hour)]",
 					"[style.boldBad(-50%)] [style.colourExperience(experience)] gain chance")) {
 		@Override
@@ -2714,8 +2651,7 @@ public class StatusEffect {
 			"overworked3",
 			PresetColour.BASE_RED,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -50f),
-					new Value<>(Attribute.MANA_MAXIMUM, -50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-50f,Attribute.MANA_MAXIMUM,-50f),
 			List.of("[style.boldBad(-0.15)] [style.colourAffection(Affection/hour)]",
 					"[style.boldBad(-75%)] [style.colourExperience(experience)] gain chance")) {
 		@Override
@@ -2740,9 +2676,7 @@ public class StatusEffect {
 			"gym_fatigue",
 			PresetColour.ATTRIBUTE_HEALTH,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.HEALTH_MAXIMUM, -15f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -5f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,-15f,Attribute.RESISTANCE_PHYSICAL,-5f),
 			List.of()) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2781,9 +2715,7 @@ public class StatusEffect {
 			"psychoactive",
 			PresetColour.BASE_YELLOW,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -5f),
-					new Value<>(Attribute.MAJOR_ARCANE, -5f),
-					new Value<>(Attribute.RESISTANCE_LUST, -25f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-5f,Attribute.MAJOR_ARCANE,-5f,Attribute.RESISTANCE_LUST,-25f),
 			List.of("Open to <b style='color: " + PresetColour.PSYCHOACTIVE.toWebHexString() + ";'>Hypnotic Suggestion</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -2910,10 +2842,7 @@ public class StatusEffect {
 			PresetColour.ATTRIBUTE_HEALTH,
 			PresetColour.GENERIC_EXCELLENT,
 			true,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.HEALTH_MAXIMUM, 25f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 5f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,25f,Attribute.DAMAGE_PHYSICAL,10f,Attribute.RESISTANCE_PHYSICAL,5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2928,10 +2857,7 @@ public class StatusEffect {
 			PresetColour.ATTRIBUTE_HEALTH,
 			PresetColour.BASE_AQUA,
 			true,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.HEALTH_MAXIMUM, 5f),
-					new Value<>(Attribute.MANA_MAXIMUM, 5f),
-					new Value<>(Attribute.DAMAGE_LUST, 5f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,5f,Attribute.MANA_MAXIMUM,5f,Attribute.DAMAGE_LUST,5f),
 			List.of("[style.boldMinorGood(Doubles)] [style.colourHealth(health)] and [style.colourMana(aura)] regeneration rate")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2946,10 +2872,7 @@ public class StatusEffect {
 			PresetColour.ATTRIBUTE_HEALTH,
 			PresetColour.BASE_AQUA,
 			true,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.HEALTH_MAXIMUM, 10f),
-					new Value<>(Attribute.MANA_MAXIMUM, 10f),
-					new Value<>(Attribute.DAMAGE_LUST, 10f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,10f,Attribute.MANA_MAXIMUM,10f,Attribute.DAMAGE_LUST,10f),
 			List.of("[style.boldGood(Triples)] [style.colourHealth(health)] and [style.colourMana(aura)] regeneration rate")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2965,10 +2888,7 @@ public class StatusEffect {
 			PresetColour.BASE_AQUA,
 			PresetColour.ATTRIBUTE_MANA,
 			true,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.HEALTH_MAXIMUM, 25f),
-					new Value<>(Attribute.MANA_MAXIMUM, 25f),
-					new Value<>(Attribute.DAMAGE_LUST, 15f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,25f,Attribute.MANA_MAXIMUM,25f,Attribute.DAMAGE_LUST,15f),
 			List.of("[style.boldExcellent(Quadruples)] [style.colourHealth(health)] and [style.colourMana(aura)] regeneration rate")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -2982,7 +2902,7 @@ public class StatusEffect {
 			"lollipop",
 			PresetColour.CLOTHING_PINK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 5f)),
+			Map.of(Attribute.DAMAGE_LUST,5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -3001,8 +2921,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_BRASS,
 			PresetColour.CLOTHING_WHITE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MANA_MAXIMUM, 10f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, -5f)),
+			Map.of(Attribute.MANA_MAXIMUM,10f,Attribute.HEALTH_MAXIMUM,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -3027,8 +2946,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_BRASS,
 			PresetColour.CLOTHING_WHITE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MANA_MAXIMUM, 10f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, -5f)),
+			Map.of(Attribute.MANA_MAXIMUM,10f,Attribute.HEALTH_MAXIMUM,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -3042,10 +2960,7 @@ public class StatusEffect {
 			"drunk1",
 			PresetColour.BASE_YELLOW,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 2f),
-					new Value<>(Attribute.MAJOR_ARCANE, -2f),
-					new Value<>(Attribute.DAMAGE_LUST, 5f),
-					new Value<>(Attribute.RESISTANCE_LUST, -1f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,2f,Attribute.MAJOR_ARCANE,-2f,Attribute.DAMAGE_LUST,5f,Attribute.RESISTANCE_LUST,-1f),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -3072,10 +2987,7 @@ public class StatusEffect {
 			"drunk2",
 			PresetColour.BASE_YELLOW,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, -5f),
-					new Value<>(Attribute.DAMAGE_LUST, 10f),
-					new Value<>(Attribute.RESISTANCE_LUST, -5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,-5f,Attribute.DAMAGE_LUST,10f,Attribute.RESISTANCE_LUST,-5f),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -3101,9 +3013,7 @@ public class StatusEffect {
 			"drunk3",
 			PresetColour.BASE_YELLOW,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, -5f),
-					new Value<>(Attribute.DAMAGE_LUST, 5f),
-					new Value<>(Attribute.RESISTANCE_LUST, -10f)),
+			Map.of(Attribute.MAJOR_ARCANE,-5f,Attribute.DAMAGE_LUST,5f,Attribute.RESISTANCE_LUST,-10f),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -3136,10 +3046,7 @@ public class StatusEffect {
 			"drunk4",
 			PresetColour.BASE_YELLOW,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -5f),
-					new Value<>(Attribute.MAJOR_ARCANE, -10f),
-					new Value<>(Attribute.DAMAGE_LUST, -5f),
-					new Value<>(Attribute.RESISTANCE_LUST, -15f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-5f,Attribute.MAJOR_ARCANE,-10f,Attribute.DAMAGE_LUST,-5f,Attribute.RESISTANCE_LUST,-15f),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -3172,10 +3079,7 @@ public class StatusEffect {
 			"drunk5",
 			PresetColour.BASE_YELLOW,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -10f),
-					new Value<>(Attribute.MAJOR_ARCANE, -15f),
-					new Value<>(Attribute.DAMAGE_LUST, -10f),
-					new Value<>(Attribute.RESISTANCE_LUST, -20f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-10f,Attribute.MAJOR_ARCANE,-15f,Attribute.DAMAGE_LUST,-10f,Attribute.RESISTANCE_LUST,-20f),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -3261,10 +3165,7 @@ public class StatusEffect {
 			"withdrawal1",
 			PresetColour.CORRUPTION_STAGE_ONE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, -2f),
-					new Value<>(Attribute.MAJOR_PHYSIQUE, -2f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, -2f),
-					new Value<>(Attribute.MANA_MAXIMUM, -2f)),
+			Map.of(Attribute.MAJOR_ARCANE,-2f,Attribute.MAJOR_PHYSIQUE,-2f,Attribute.HEALTH_MAXIMUM,-2f,Attribute.MANA_MAXIMUM,-2f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -3324,10 +3225,7 @@ public class StatusEffect {
 			"withdrawal2",
 			PresetColour.CORRUPTION_STAGE_TWO,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, -5f),
-					new Value<>(Attribute.MAJOR_PHYSIQUE, -5f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, -5f),
-					new Value<>(Attribute.MANA_MAXIMUM, -5f)),
+			Map.of(Attribute.MAJOR_ARCANE,-5f,Attribute.MAJOR_PHYSIQUE,-5f,Attribute.HEALTH_MAXIMUM,-5f,Attribute.MANA_MAXIMUM,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -3387,10 +3285,7 @@ public class StatusEffect {
 			"withdrawal3",
 			PresetColour.CORRUPTION_STAGE_THREE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, -10f),
-					new Value<>(Attribute.MAJOR_PHYSIQUE, -10f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, -10f),
-					new Value<>(Attribute.MANA_MAXIMUM, -10f)),
+			Map.of(Attribute.MAJOR_ARCANE,-10f,Attribute.MAJOR_PHYSIQUE,-10f,Attribute.HEALTH_MAXIMUM,-10f,Attribute.MANA_MAXIMUM,-10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -3450,10 +3345,7 @@ public class StatusEffect {
 			"withdrawal4",
 			PresetColour.CORRUPTION_STAGE_FOUR,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, -25f),
-					new Value<>(Attribute.MAJOR_PHYSIQUE, -25f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, -25f),
-					new Value<>(Attribute.MANA_MAXIMUM, -25f)),
+			Map.of(Attribute.MAJOR_ARCANE,-25f,Attribute.MAJOR_PHYSIQUE,-25f,Attribute.HEALTH_MAXIMUM,-25f,Attribute.MANA_MAXIMUM,-25f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -3513,10 +3405,7 @@ public class StatusEffect {
 			"withdrawal5",
 			PresetColour.CORRUPTION_STAGE_FIVE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, -50f),
-					new Value<>(Attribute.MAJOR_PHYSIQUE, -50f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, -50f),
-					new Value<>(Attribute.MANA_MAXIMUM, -50f)),
+			Map.of(Attribute.MAJOR_ARCANE,-50f,Attribute.MAJOR_PHYSIQUE,-50f,Attribute.HEALTH_MAXIMUM,-50f,Attribute.MANA_MAXIMUM,-50f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -3793,7 +3682,7 @@ public class StatusEffect {
 			"pregnancy1",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
+			Map.of(Attribute.ENERGY_SHIELDING,2f),
 			List.of("-5% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -3908,7 +3797,7 @@ public class StatusEffect {
 			"pregnancy2",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
+			Map.of(Attribute.ENERGY_SHIELDING,4f),
 			List.of("-10% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4031,7 +3920,7 @@ public class StatusEffect {
 			"pregnancy3",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
+			Map.of(Attribute.ENERGY_SHIELDING,6f),
 			List.of("-15% [style.colourHealth(Maximum "+Attribute.HEALTH_MAXIMUM.getName()+")]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4069,7 +3958,7 @@ public class StatusEffect {
 			"incubation1",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
+			Map.of(Attribute.ENERGY_SHIELDING,2f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4114,7 +4003,7 @@ public class StatusEffect {
 			"incubation2",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
+			Map.of(Attribute.ENERGY_SHIELDING,4f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4166,7 +4055,7 @@ public class StatusEffect {
 			"incubation3",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
+			Map.of(Attribute.ENERGY_SHIELDING,6f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4198,7 +4087,7 @@ public class StatusEffect {
 			"incubation1",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
+			Map.of(Attribute.ENERGY_SHIELDING,2f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4244,7 +4133,7 @@ public class StatusEffect {
 			"incubation2",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
+			Map.of(Attribute.ENERGY_SHIELDING,4f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4295,7 +4184,7 @@ public class StatusEffect {
 			"incubation3",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
+			Map.of(Attribute.ENERGY_SHIELDING,6f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4327,7 +4216,7 @@ public class StatusEffect {
 			"incubation1",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
+			Map.of(Attribute.ENERGY_SHIELDING,2f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4380,7 +4269,7 @@ public class StatusEffect {
 			"incubation2",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
+			Map.of(Attribute.ENERGY_SHIELDING,4f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4438,7 +4327,7 @@ public class StatusEffect {
 			"incubation3",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
+			Map.of(Attribute.ENERGY_SHIELDING,6f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4478,7 +4367,7 @@ public class StatusEffect {
 			"incubation1",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
+			Map.of(Attribute.ENERGY_SHIELDING,2f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4524,7 +4413,7 @@ public class StatusEffect {
 			"incubation2",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
+			Map.of(Attribute.ENERGY_SHIELDING,4f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4575,7 +4464,7 @@ public class StatusEffect {
 			"incubation3",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
+			Map.of(Attribute.ENERGY_SHIELDING,6f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4608,7 +4497,7 @@ public class StatusEffect {
 			"incubation1",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
+			Map.of(Attribute.ENERGY_SHIELDING,2f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4654,7 +4543,7 @@ public class StatusEffect {
 			"incubation2",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 4f)),
+			Map.of(Attribute.ENERGY_SHIELDING,4f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4705,7 +4594,7 @@ public class StatusEffect {
 			"incubation3",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 6f)),
+			Map.of(Attribute.ENERGY_SHIELDING,6f),
 			List.of()) {
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -4737,8 +4626,7 @@ public class StatusEffect {
 			"vixensVirility",
 			PresetColour.GENERIC_SEX,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.FERTILITY, 50f),
-					new Value<>(Attribute.VIRILITY, 50f)),
+			Map.of(Attribute.FERTILITY,50f,Attribute.VIRILITY,50f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4755,8 +4643,7 @@ public class StatusEffect {
 			"promiscuityPill",
 			PresetColour.GENERIC_SEX,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.FERTILITY, -100f),
-					new Value<>(Attribute.VIRILITY, -100f)),
+			Map.of(Attribute.FERTILITY,-100f,Attribute.VIRILITY,-100f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4774,9 +4661,7 @@ public class StatusEffect {
 			"broodmother_pill",
 			PresetColour.CLOTHING_PINK,
 			true,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.FERTILITY, 100f),
-					new Value<>(Attribute.VIRILITY, 100f)),
+			Map.of(Attribute.FERTILITY,100f,Attribute.VIRILITY,100f),
 			List.of("[style.colourExcellent(Doubles)] offspring conceived")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -4828,7 +4713,7 @@ public class StatusEffect {
 			"cumFull",
 			PresetColour.GENERIC_SEX,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 5f)),
+			Map.of(Attribute.DAMAGE_LUST,5f),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -4892,7 +4777,7 @@ public class StatusEffect {
 			"milkFull",
 			PresetColour.GENERIC_SEX,
 			true,
-			Util.newHashMapOfValues(),
+			Map.of(),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -4964,7 +4849,7 @@ public class StatusEffect {
 			"milkCrotchFull",
 			PresetColour.GENERIC_SEX,
 			true,
-			Util.newHashMapOfValues(),
+			Map.of(),
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -5004,7 +4889,7 @@ public class StatusEffect {
 			"sexEffects/combinationStretching",
 			PresetColour.BASE_MAGENTA,
 			false,
-			Util.newHashMapOfValues(),
+			Map.of(),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -5059,10 +4944,7 @@ public class StatusEffect {
 		public List<String> getExtraEffects(GameCharacter target) {
 			List<String> effects = new ArrayList<>();
 			
-			Map<SexAreaOrifice, String> orifices = Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, "[style.boldVagina(Vagina)]:"),
-					new Value<>(SexAreaOrifice.ANUS, "[style.boldAsshole(Asshole)]:"),
-					new Value<>(SexAreaOrifice.MOUTH, "[style.boldMouth(Throat)]:"),
-					new Value<>(SexAreaOrifice.NIPPLE, "[style.boldNipple(Nipples)]:"));
+			Map<SexAreaOrifice, String> orifices = Map.of(SexAreaOrifice.VAGINA,"[style.boldVagina(Vagina)]:",SexAreaOrifice.ANUS,"[style.boldAsshole(Asshole)]:",SexAreaOrifice.MOUTH,"[style.boldMouth(Throat)]:",SexAreaOrifice.NIPPLE,"[style.boldNipple(Nipples)]:");
 			List<SexAreaOrifice> orificesFound = new ArrayList<>();
 			for(Entry<SexAreaOrifice, String> orifice : orifices.entrySet()) {
 				if(target.getSexToyOrificeStretching().containsKey(orifice.getKey())) {
@@ -5208,7 +5090,7 @@ public class StatusEffect {
 			"recoveringOrifice",
 			PresetColour.GENERIC_SEX,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -2f), new Value<>(Attribute.HEALTH_MAXIMUM, -5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-2f,Attribute.HEALTH_MAXIMUM,-5f),
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -5478,15 +5360,15 @@ public class StatusEffect {
 			"creampie",
 			PresetColour.CUM,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-1f),
 			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,1f);
 				
 			} else {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, -1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,-1f);
 			}
 		}
 		@Override
@@ -5598,15 +5480,15 @@ public class StatusEffect {
 			"creampie",
 			PresetColour.CUM,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-1f),
 			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,1f);
 				
 			} else {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, -1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,-1f);
 			}
 		}
 		@Override
@@ -5713,15 +5595,15 @@ public class StatusEffect {
 			"creampie",
 			PresetColour.CUM,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-1f),
 			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,1f);
 				
 			} else {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, -1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,-1f);
 			}
 		}
 		@Override
@@ -5823,15 +5705,15 @@ public class StatusEffect {
 			"creampie",
 			PresetColour.CUM,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-1f),
 			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,1f);
 				
 			} else {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, -1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,-1f);
 			}
 		}
 		@Override
@@ -5928,15 +5810,15 @@ public class StatusEffect {
 			"creampie",
 			PresetColour.CUM,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-1f),
 			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,1f);
 				
 			} else {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, -1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,-1f);
 			}
 		}
 		@Override
@@ -6044,7 +5926,7 @@ public class StatusEffect {
 			"creampie",
 			PresetColour.CUM,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-1f),
 			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public String getName(GameCharacter owner) {
@@ -6057,10 +5939,10 @@ public class StatusEffect {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,1f);
 				
 			} else {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, -1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,-1f);
 			}
 		}
 		@Override
@@ -6162,7 +6044,7 @@ public class StatusEffect {
 			"creampie",
 			PresetColour.CUM,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-1f),
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -6173,10 +6055,10 @@ public class StatusEffect {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,1f);
 				
 			} else {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, -1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,-1f);
 			}
 		}
 		@Override
@@ -6237,15 +6119,15 @@ public class StatusEffect {
 			"creampie",
 			PresetColour.CUM,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-1f),
 			List.of("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,1f);
 				
 			} else {
-				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, -1f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,-1f);
 			}
 		}
 		@Override
@@ -6318,7 +6200,7 @@ public class StatusEffect {
 			"inflation_stomach_1",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -2f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-2f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6352,7 +6234,7 @@ public class StatusEffect {
 			"inflation_stomach_2",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6387,7 +6269,7 @@ public class StatusEffect {
 			"inflation_stomach_3",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6422,7 +6304,7 @@ public class StatusEffect {
 			"inflation_breasts_1",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -2f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-2f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6456,7 +6338,7 @@ public class StatusEffect {
 			"inflation_breasts_2",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6491,7 +6373,7 @@ public class StatusEffect {
 			"inflation_breasts_3",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6525,7 +6407,7 @@ public class StatusEffect {
 			"inflation_spinneret_1",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -2f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-2f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6564,7 +6446,7 @@ public class StatusEffect {
 			"inflation_spinneret_2",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6603,7 +6485,7 @@ public class StatusEffect {
 			"inflation_spinneret_3",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6641,7 +6523,7 @@ public class StatusEffect {
 			"frustrated",
 			PresetColour.GENERIC_BAD,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -15f)),
+			Map.of(Attribute.RESISTANCE_LUST,-15f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6670,7 +6552,7 @@ public class StatusEffect {
 			"frustrated",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -15f)),
+			Map.of(Attribute.RESISTANCE_LUST,-15f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6693,7 +6575,7 @@ public class StatusEffect {
 			"chastity1",
 			PresetColour.GENERIC_SEX,
 			false,
-			Util.newHashMapOfValues(),
+			Map.of(),
 			List.of("[style.colourSex(Increasing in intensity...)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {//TODO if one key-holder, mention them
@@ -6753,7 +6635,7 @@ public class StatusEffect {
 			"chastity2",
 			PresetColour.GENERIC_SEX,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -5f)),
+			Map.of(Attribute.RESISTANCE_LUST,-5f),
 			List.of("[style.colourSex(Increasing in intensity...)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6777,7 +6659,7 @@ public class StatusEffect {
 			"chastity3",
 			PresetColour.GENERIC_SEX,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -15f)),
+			Map.of(Attribute.RESISTANCE_LUST,-15f),
 			List.of("[style.colourSex(Increasing in intensity...)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6801,7 +6683,7 @@ public class StatusEffect {
 			"chastity4",
 			PresetColour.GENERIC_SEX,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -50f)),
+			Map.of(Attribute.RESISTANCE_LUST,-50f),
 			List.of("[style.colourSex(Maximum intensity)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6836,9 +6718,7 @@ public class StatusEffect {
 			"chastityRemoved2",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_LUST, -5f),
-					new Value<>(Attribute.RESTING_LUST, 5f)),
+			Map.of(Attribute.RESISTANCE_LUST,-5f,Attribute.RESTING_LUST,5f),
 			List.of("[style.colourSex(Orgasming)] will remove this effect!")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6886,9 +6766,7 @@ public class StatusEffect {
 			"chastityRemoved3",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_LUST, -15f),
-					new Value<>(Attribute.RESTING_LUST, 10f)),
+			Map.of(Attribute.RESISTANCE_LUST,-15f,Attribute.RESTING_LUST,10f),
 			List.of("[style.colourSex(Orgasming)] will remove this effect!")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6936,9 +6814,7 @@ public class StatusEffect {
 			"chastityRemoved4",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_LUST, -50f),
-					new Value<>(Attribute.RESTING_LUST, 15f)),
+			Map.of(Attribute.RESISTANCE_LUST,-50f,Attribute.RESTING_LUST,15f),
 			List.of("[style.colourSex(Orgasming)] will remove this effect!")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -6985,7 +6861,7 @@ public class StatusEffect {
 			"recoveringAura",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, 5f)),
+			Map.of(Attribute.RESISTANCE_LUST,5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7014,8 +6890,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			PresetColour.GENERIC_BAD,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, -5f)),
+			Map.of(Attribute.DAMAGE_LUST,10f,Attribute.CRITICAL_DAMAGE,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7051,7 +6926,7 @@ public class StatusEffect {
 			PresetColour.BASE_TAN,
 			PresetColour.BASE_TAN,
 			false,
-			Util.newHashMapOfValues(),
+			Map.of(),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7089,8 +6964,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			PresetColour.GENERIC_BAD,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 5f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, -2f)),
+			Map.of(Attribute.DAMAGE_LUST,5f,Attribute.CRITICAL_DAMAGE,-2f),
 			null) {
 		@Override
 		public String getName(GameCharacter target) {
@@ -7134,8 +7008,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			PresetColour.GENERIC_BAD,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 20f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, -10f)),
+			Map.of(Attribute.DAMAGE_LUST,20f,Attribute.CRITICAL_DAMAGE,-10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7171,7 +7044,7 @@ public class StatusEffect {
 			PresetColour.BASE_PINK_DEEP,
 			PresetColour.BASE_PINK_DEEP,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 25f)),
+			Map.of(Attribute.DAMAGE_LUST,25f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7205,7 +7078,7 @@ public class StatusEffect {
 			PresetColour.BASE_PINK_DEEP,
 			PresetColour.BASE_PINK_DEEP,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 10f)),
+			Map.of(Attribute.DAMAGE_LUST,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7239,7 +7112,7 @@ public class StatusEffect {
 			PresetColour.BASE_PINK_DEEP,
 			PresetColour.BASE_PINK_DEEP,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 30f)),
+			Map.of(Attribute.DAMAGE_LUST,30f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7271,8 +7144,7 @@ public class StatusEffect {
 			"virginPure",
 			PresetColour.GENERIC_EXCELLENT,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, 15f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, -15f)),
+			Map.of(Attribute.RESISTANCE_LUST,15f,Attribute.MAJOR_CORRUPTION,-15f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7298,8 +7170,7 @@ public class StatusEffect {
 			"virginPureNoHymen",
 			PresetColour.GENERIC_GOOD,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, 10f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, -10f)),
+			Map.of(Attribute.RESISTANCE_LUST,10f,Attribute.MAJOR_CORRUPTION,-10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7325,7 +7196,7 @@ public class StatusEffect {
 			"virginPureRepaired",
 			PresetColour.GENERIC_GOOD,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, 5f)),
+			Map.of(Attribute.RESISTANCE_LUST,5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7351,8 +7222,7 @@ public class StatusEffect {
 			"virginBroken",
 			PresetColour.GENERIC_TERRIBLE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -50f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 50f)),
+			Map.of(Attribute.RESISTANCE_LUST,-50f,Attribute.MAJOR_CORRUPTION,50f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7379,8 +7249,7 @@ public class StatusEffect {
 			"virginLustyMaidenPure",
 			PresetColour.GENERIC_EXCELLENT,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 10f),
-					new Value<>(Attribute.RESISTANCE_LUST, 10f)),
+			Map.of(Attribute.DAMAGE_LUST,10f,Attribute.RESISTANCE_LUST,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7406,8 +7275,7 @@ public class StatusEffect {
 			"virginLustyMaidenNoHymen",
 			PresetColour.GENERIC_GOOD,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 10f),
-					new Value<>(Attribute.RESISTANCE_LUST, 5f)),
+			Map.of(Attribute.DAMAGE_LUST,10f,Attribute.RESISTANCE_LUST,5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7433,7 +7301,7 @@ public class StatusEffect {
 			"virginLustyMaidenRepaired",
 			PresetColour.GENERIC_GOOD,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, 5f)),
+			Map.of(Attribute.RESISTANCE_LUST,5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7459,9 +7327,7 @@ public class StatusEffect {
 			"virginLustyMaidenBroken",
 			PresetColour.GENERIC_TERRIBLE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, -25f),
-					new Value<>(Attribute.RESISTANCE_LUST, -50f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 50f)),
+			Map.of(Attribute.DAMAGE_LUST,-25f,Attribute.RESISTANCE_LUST,-50f,Attribute.MAJOR_CORRUPTION,50f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -7490,8 +7356,7 @@ public class StatusEffect {
 			"clothingSets/maid",
 			PresetColour.CLOTHING_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
-					new Value<>(Attribute.DAMAGE_LUST, 10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,10f,Attribute.DAMAGE_LUST,10f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7518,10 +7383,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_BLACK,
 			PresetColour.BASE_GOLD,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 5f),
-					new Value<>(Attribute.DAMAGE_LUST, 25f),
-					new Value<>(Attribute.RESISTANCE_LUST, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,25f,Attribute.RESISTANCE_PHYSICAL,5f,Attribute.DAMAGE_LUST,25f,Attribute.RESISTANCE_LUST,5f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7547,8 +7409,7 @@ public class StatusEffect {
 			"clothingSets/milk_maid",
 			PresetColour.BASE_WHITE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
-					new Value<>(Attribute.DAMAGE_LUST, 10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,10f,Attribute.DAMAGE_LUST,10f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7575,10 +7436,7 @@ public class StatusEffect {
 			PresetColour.BASE_WHITE,
 			PresetColour.BASE_GOLD,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 5f),
-					new Value<>(Attribute.DAMAGE_LUST, 25f),
-					new Value<>(Attribute.RESISTANCE_LUST, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,25f,Attribute.RESISTANCE_PHYSICAL,5f,Attribute.DAMAGE_LUST,25f,Attribute.RESISTANCE_LUST,5f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7604,8 +7462,7 @@ public class StatusEffect {
 			"clothingSets/butler",
 			PresetColour.CLOTHING_WHITE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,10f,Attribute.DAMAGE_PHYSICAL,10f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7632,10 +7489,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_WHITE,
 			PresetColour.BASE_GOLD,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 5f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 25f),
-					new Value<>(Attribute.RESISTANCE_LUST, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,25f,Attribute.RESISTANCE_PHYSICAL,5f,Attribute.DAMAGE_PHYSICAL,25f,Attribute.RESISTANCE_LUST,5f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7661,9 +7515,7 @@ public class StatusEffect {
 			"clothingSets/witch",
 			PresetColour.CLOTHING_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.DAMAGE_SPELLS, 10f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 10f)),
+			Map.of(Attribute.MAJOR_ARCANE,5f,Attribute.DAMAGE_SPELLS,10f,Attribute.SPELL_COST_MODIFIER,10f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7694,10 +7546,7 @@ public class StatusEffect {
 			"clothingSets/scientist",
 			PresetColour.CLOTHING_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.RESISTANCE_FIRE, 2f),
-					new Value<>(Attribute.RESISTANCE_POISON, 2f),
-					new Value<>(Attribute.RESISTANCE_ICE, 2f)),
+			Map.of(Attribute.MAJOR_ARCANE,5f,Attribute.RESISTANCE_FIRE,2f,Attribute.RESISTANCE_POISON,2f,Attribute.RESISTANCE_ICE,2f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7728,8 +7577,7 @@ public class StatusEffect {
 			"clothingSets/slutty_enforcer",
 			PresetColour.BASE_PINK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 15f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 5f)),
+			Map.of(Attribute.DAMAGE_LUST,15f,Attribute.MAJOR_CORRUPTION,5f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7755,7 +7603,7 @@ public class StatusEffect {
 			"clothingSets/rainbow",
 			PresetColour.CLOTHING_RED,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 10f)),
+			Map.of(Attribute.DAMAGE_LUST,10f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7778,8 +7626,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_BLACK_STEEL,
 			PresetColour.CLOTHING_RED_DARK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_SPELLS, 10f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 10f)),
+			Map.of(Attribute.DAMAGE_SPELLS,10f,Attribute.SPELL_COST_MODIFIER,10f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7802,8 +7649,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_BROWN_DARK,
 			PresetColour.CLOTHING_OLIVE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, 25f),
-					new Value<>(Attribute.RESISTANCE_LUST, 5f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,25f,Attribute.RESISTANCE_LUST,5f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7824,15 +7670,12 @@ public class StatusEffect {
 			"clothingSets/bdsm",
 			PresetColour.CLOTHING_BLACK,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -15f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-15f),
 			null) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(target!=null && target.hasFetish(Fetish.FETISH_BONDAGE_VICTIM)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Attribute.HEALTH_MAXIMUM, 10f),
-						new Value<>(Attribute.RESISTANCE_PHYSICAL, 10f),
-						new Value<>(Attribute.DAMAGE_LUST, 10f));
+				return Map.of(Attribute.HEALTH_MAXIMUM,10f,Attribute.RESISTANCE_PHYSICAL,10f,Attribute.DAMAGE_LUST,10f);
 			}
 			return super.getAttributeModifiers(target);
 		}
@@ -7862,7 +7705,7 @@ public class StatusEffect {
 			"clothingSets/cattle",
 			PresetColour.BASE_TAN,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7893,8 +7736,7 @@ public class StatusEffect {
 			"clothingSets/snowflake",
 			PresetColour.BASE_BLUE_LIGHT,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.DAMAGE_ICE, 15f)),
+			Map.of(Attribute.MAJOR_ARCANE,5f,Attribute.DAMAGE_ICE,15f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7918,8 +7760,7 @@ public class StatusEffect {
 			"clothingSets/sun",
 			PresetColour.BASE_ORANGE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.DAMAGE_FIRE, 15f)),
+			Map.of(Attribute.MAJOR_ARCANE,5f,Attribute.DAMAGE_FIRE,15f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7943,7 +7784,7 @@ public class StatusEffect {
 			"clothingSets/geisha",
 			PresetColour.BASE_ROSE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 15f)),
+			Map.of(Attribute.DAMAGE_LUST,15f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -7968,8 +7809,7 @@ public class StatusEffect {
 			"clothingSets/ronin",
 			PresetColour.BASE_ROSE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 15f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.DAMAGE_PHYSICAL,15f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -8001,8 +7841,7 @@ public class StatusEffect {
 			"clothingSets/daisho",
 			PresetColour.BASE_ROSE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.DAMAGE_MELEE_WEAPON, 15f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.DAMAGE_MELEE_WEAPON,15f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -8028,9 +7867,7 @@ public class StatusEffect {
 			"clothingSets/jolnir",
 			PresetColour.BASE_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, 15f),
-					new Value<>(Attribute.DAMAGE_ICE, 15f),
-					new Value<>(Attribute.RESISTANCE_ICE, 5f)),
+			Map.of(Attribute.MAJOR_ARCANE,15f,Attribute.DAMAGE_ICE,15f,Attribute.RESISTANCE_ICE,5f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -8062,7 +7899,7 @@ public class StatusEffect {
 			PresetColour.CLOTHING_PINK_LIGHT,
 			PresetColour.CLOTHING_BLACK,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 10f)),
+			Map.of(Attribute.DAMAGE_LUST,10f),
 			null) {
 		@Override
 		public StatusEffectCategory getCategory() {
@@ -8155,8 +7992,7 @@ public class StatusEffect {
 			"happinessFox",
 			PresetColour.CLOTHING_SILVER,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, 5f),
-					new Value<>(Attribute.MANA_MAXIMUM, 5f)),
+			Map.of(Attribute.HEALTH_MAXIMUM,5f,Attribute.MANA_MAXIMUM,5f),
 			List.of("[style.italicsGood(Happiness!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8177,10 +8013,7 @@ public class StatusEffect {
 			"glowingEyes",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ACTION_POINTS, 1f),
-					new Value<>(Attribute.MANA_MAXIMUM, 100f),
-					new Value<>(Attribute.DAMAGE_SPELLS, 50f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 5f)),
+			Map.of(Attribute.ACTION_POINTS,1f,Attribute.MANA_MAXIMUM,100f,Attribute.DAMAGE_SPELLS,50f,Attribute.ENERGY_SHIELDING,5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8203,10 +8036,7 @@ public class StatusEffect {
 			"glowingEyes",
 			PresetColour.BASE_CRIMSON,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ACTION_POINTS, 3f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, 150f),
-					new Value<>(Attribute.DAMAGE_MELEE_WEAPON, 50f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 10f)),
+			Map.of(Attribute.ACTION_POINTS,3f,Attribute.HEALTH_MAXIMUM,150f,Attribute.DAMAGE_MELEE_WEAPON,50f,Attribute.ENERGY_SHIELDING,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8229,7 +8059,7 @@ public class StatusEffect {
 			"american_freedom",
 			PresetColour.BASE_RED,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ACTION_POINTS, -1f)),
+			Map.of(Attribute.ACTION_POINTS,-1f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8303,11 +8133,7 @@ public class StatusEffect {
 			"negativeCombatEffect",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, -2f),
-					new Value<>(Attribute.RESISTANCE_LUST, -2f),
-					new Value<>(Attribute.RESISTANCE_FIRE, -2f),
-					new Value<>(Attribute.RESISTANCE_ICE, -2f),
-					new Value<>(Attribute.RESISTANCE_POISON, -2f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,-2f,Attribute.RESISTANCE_LUST,-2f,Attribute.RESISTANCE_FIRE,-2f,Attribute.RESISTANCE_ICE,-2f,Attribute.RESISTANCE_POISON,-2f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8324,8 +8150,7 @@ public class StatusEffect {
 			"dazed",
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, -25f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -2f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-25f,Attribute.RESISTANCE_PHYSICAL,-2f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8342,7 +8167,7 @@ public class StatusEffect {
 			"negativeCombatEffect",
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, -15f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-15f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8359,7 +8184,7 @@ public class StatusEffect {
 			"negativeCombatEffect",
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, -2f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,-2f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8399,7 +8224,7 @@ public class StatusEffect {
 			"combat_poisoned",
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -25f)),
+			Map.of(Attribute.RESISTANCE_LUST,-25f),
 			List.of("<b>5</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>",
 					"<b>10</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn</b>")) {
 		@Override
@@ -8425,7 +8250,7 @@ public class StatusEffect {
 			"combat_witch_seal",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ACTION_POINTS, -3f)),
+			Map.of(Attribute.ACTION_POINTS,-3f),
 			List.of("[style.colourTerrible(Cannot attempt to escape!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8448,7 +8273,7 @@ public class StatusEffect {
 			"combat_witch_charm",
 			PresetColour.GENERIC_SEX,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 25f)),
+			Map.of(Attribute.DAMAGE_LUST,25f),
 			null) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -8492,9 +8317,7 @@ public class StatusEffect {
 			"restrain_webbed_1",
 			PresetColour.GENERIC_BAD,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -25f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -5f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-25f,Attribute.RESISTANCE_PHYSICAL,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8512,10 +8335,7 @@ public class StatusEffect {
 			"restrain_webbed_2",
 			PresetColour.GENERIC_BAD,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -50f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -10f),
-					new Value<>(Attribute.ACTION_POINTS, -1f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-50f,Attribute.RESISTANCE_PHYSICAL,-10f,Attribute.ACTION_POINTS,-1f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8538,10 +8358,7 @@ public class StatusEffect {
 			"restrain_webbed_3",
 			PresetColour.GENERIC_BAD,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -75f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -15f),
-					new Value<>(Attribute.ACTION_POINTS, -2f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-75f,Attribute.RESISTANCE_PHYSICAL,-15f,Attribute.ACTION_POINTS,-2f),
 			List.of("[style.colourTerrible(Cannot attempt to escape!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8624,9 +8441,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			PresetColour.getColourFromId("NoStepOnSnek_octopus"),
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -25f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -5f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-25f,Attribute.RESISTANCE_PHYSICAL,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8645,10 +8460,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			PresetColour.getColourFromId("NoStepOnSnek_octopus"),
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -50f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -10f),
-					new Value<>(Attribute.ACTION_POINTS, -1f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-50f,Attribute.RESISTANCE_PHYSICAL,-10f,Attribute.ACTION_POINTS,-1f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8672,10 +8484,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			PresetColour.getColourFromId("NoStepOnSnek_octopus"),
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -75f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -15f),
-					new Value<>(Attribute.ACTION_POINTS, -2f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-75f,Attribute.RESISTANCE_PHYSICAL,-15f,Attribute.ACTION_POINTS,-2f),
 			List.of("[style.colourTerrible(Cannot attempt to escape!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8730,9 +8539,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			PresetColour.BASE_GREEN_DARK,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -25f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -5f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-25f,Attribute.RESISTANCE_PHYSICAL,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8751,10 +8558,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			PresetColour.BASE_GREEN_DARK,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -50f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -10f),
-					new Value<>(Attribute.ACTION_POINTS, -1f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-50f,Attribute.RESISTANCE_PHYSICAL,-10f,Attribute.ACTION_POINTS,-1f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8778,10 +8582,7 @@ public class StatusEffect {
 			PresetColour.GENERIC_BAD,
 			PresetColour.BASE_GREEN_DARK,
 			false,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -75f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, -15f),
-					new Value<>(Attribute.ACTION_POINTS, -2f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,-75f,Attribute.RESISTANCE_PHYSICAL,-15f,Attribute.ACTION_POINTS,-2f),
 			List.of("[style.colourTerrible(Cannot attempt to escape!)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8918,7 +8719,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ACTION_POINTS, -1f)),
+			Map.of(Attribute.ACTION_POINTS,-1f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8940,7 +8741,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ACTION_POINTS, -2f)),
+			Map.of(Attribute.ACTION_POINTS,-2f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8961,8 +8762,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_FIRE, 5f),
-					new Value<>(Attribute.RESISTANCE_ICE, 10f)),
+			Map.of(Attribute.RESISTANCE_FIRE,5f,Attribute.RESISTANCE_ICE,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -8984,8 +8784,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_FIRE, 5f),
-					new Value<>(Attribute.RESISTANCE_ICE, 10f)),
+			Map.of(Attribute.RESISTANCE_FIRE,5f,Attribute.RESISTANCE_ICE,10f),
 			List.of("Unarmed attacks deal +1 damage per caster level",
 					"Unarmed attacks deal [style.boldFire(Fire Damage)]")) {
 		@Override
@@ -9008,9 +8807,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_FIRE, 25f),
-					new Value<>(Attribute.RESISTANCE_FIRE, 5f),
-					new Value<>(Attribute.RESISTANCE_ICE, 10f)),
+			Map.of(Attribute.DAMAGE_FIRE,25f,Attribute.RESISTANCE_FIRE,5f,Attribute.RESISTANCE_ICE,10f),
 			List.of("Unarmed attacks deal +1 damage per caster level",
 					"Unarmed attacks deal [style.boldFire(Fire Damage)]")) {
 		@Override
@@ -9033,9 +8830,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_FIRE, 25f),
-					new Value<>(Attribute.RESISTANCE_FIRE, 10f),
-					new Value<>(Attribute.RESISTANCE_ICE, 20f)),
+			Map.of(Attribute.DAMAGE_FIRE,25f,Attribute.RESISTANCE_FIRE,10f,Attribute.RESISTANCE_ICE,20f),
 			List.of("Unarmed attacks deal +1 damage per caster level",
 					"Unarmed attacks deal [style.boldFire(Fire Damage)]",
 					"Attackers take <b>5</b> [style.colourFire(Fire Damage)]")) {
@@ -9060,7 +8855,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_FIRE, 20f)),
+			Map.of(Attribute.DAMAGE_FIRE,20f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9092,7 +8887,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -25f)),
+			Map.of(Attribute.RESISTANCE_LUST,-25f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9176,8 +8971,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_FIRE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_FIRE, 25f),
-					new Value<>(Attribute.RESISTANCE_FIRE, 10f)),
+			Map.of(Attribute.DAMAGE_FIRE,25f,Attribute.RESISTANCE_FIRE,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9201,7 +8995,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.SPELL_COST_MODIFIER, -20f)),
+			Map.of(Attribute.SPELL_COST_MODIFIER,-20f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9223,7 +9017,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ACTION_POINTS, -1f)),
+			Map.of(Attribute.ACTION_POINTS,-1f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9244,7 +9038,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.SPELL_COST_MODIFIER, -25f)),
+			Map.of(Attribute.SPELL_COST_MODIFIER,-25f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9266,8 +9060,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.SPELL_COST_MODIFIER, -25f),
-					new Value<>(Attribute.RESISTANCE_ICE, -25f)),
+			Map.of(Attribute.SPELL_COST_MODIFIER,-25f,Attribute.RESISTANCE_ICE,-25f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9289,9 +9082,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.SPELL_COST_MODIFIER, -25f),
-					new Value<>(Attribute.RESISTANCE_ICE, -25f),
-					new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
+			Map.of(Attribute.SPELL_COST_MODIFIER,-25f,Attribute.RESISTANCE_ICE,-25f,Attribute.ENERGY_SHIELDING,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9314,9 +9105,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.SPELL_COST_MODIFIER, -25f),
-					new Value<>(Attribute.RESISTANCE_ICE, -25f),
-					new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
+			Map.of(Attribute.SPELL_COST_MODIFIER,-25f,Attribute.RESISTANCE_ICE,-25f,Attribute.ENERGY_SHIELDING,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9339,9 +9128,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.SPELL_COST_MODIFIER, -50f),
-					new Value<>(Attribute.RESISTANCE_ICE, -25f),
-					new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
+			Map.of(Attribute.SPELL_COST_MODIFIER,-50f,Attribute.RESISTANCE_ICE,-25f,Attribute.ENERGY_SHIELDING,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9364,7 +9151,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_ICE, 20f)),
+			Map.of(Attribute.DAMAGE_ICE,20f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9397,7 +9184,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, 5f)),
+			Map.of(Attribute.RESISTANCE_LUST,5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9481,8 +9268,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_COLD,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_ICE, 25f),
-					new Value<>(Attribute.RESISTANCE_ICE, 10f)),
+			Map.of(Attribute.DAMAGE_ICE,25f,Attribute.RESISTANCE_ICE,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9533,7 +9319,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_POISON,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-5f),
 			List.of("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>")) {
 				@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -9560,7 +9346,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_POISON,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-5f),
 			List.of("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>",
 					"<b>10</b> "+Attribute.MANA_MAXIMUM.getColouredName("b")+" [style.boldTerrible(drained)] per turn</b>")) {
 				@Override
@@ -9593,9 +9379,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_POISON,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -5f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -15f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, -25f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-5f,Attribute.DAMAGE_PHYSICAL,-15f,Attribute.CRITICAL_DAMAGE,-25f),
 			List.of("<b>25</b> "+Attribute.DAMAGE_POISON.getColouredName("b")+" per turn</b>",
 					"<b>10</b> "+Attribute.MANA_MAXIMUM.getColouredName("b")+" [style.boldTerrible(drained)] per turn</b>")) {
 				@Override
@@ -9628,7 +9412,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -10f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9649,8 +9433,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -5f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, -15f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-5f,Attribute.CRITICAL_DAMAGE,-15f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9673,8 +9456,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -20f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, -25f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-20f,Attribute.CRITICAL_DAMAGE,-25f),
 			List.of("<b>10%</b> chance per turn of [style.boldExcellent(stripping)] clothing")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -9719,8 +9501,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -20f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, -25f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-20f,Attribute.CRITICAL_DAMAGE,-25f),
 			List.of("<b>25%</b> chance per turn of [style.boldExcellent(stripping)] clothing")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -9765,8 +9546,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_POISON, 5f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 1f)),
+			Map.of(Attribute.RESISTANCE_POISON,5f,Attribute.ENERGY_SHIELDING,1f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9788,9 +9568,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_POISON, 5f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 2f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f)),
+			Map.of(Attribute.RESISTANCE_POISON,5f,Attribute.ENERGY_SHIELDING,2f,Attribute.DAMAGE_PHYSICAL,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9813,10 +9591,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_POISON, 5f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 3f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 25f)),
+			Map.of(Attribute.RESISTANCE_POISON,5f,Attribute.ENERGY_SHIELDING,3f,Attribute.DAMAGE_PHYSICAL,10f,Attribute.CRITICAL_DAMAGE,25f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9839,7 +9614,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -5f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9876,8 +9651,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 5f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f)),
+			Map.of(Attribute.ENERGY_SHIELDING,5f,Attribute.DAMAGE_PHYSICAL,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9958,8 +9732,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_POISON, 25f),
-					new Value<>(Attribute.RESISTANCE_POISON, 10f)),
+			Map.of(Attribute.DAMAGE_POISON,25f,Attribute.RESISTANCE_POISON,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -9983,7 +9756,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -10f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10005,7 +9778,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -10f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10062,7 +9835,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, -20f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,-20f),
 			List.of("<b>25</b> "+Attribute.DAMAGE_PHYSICAL.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -10090,7 +9863,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, -20f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,-20f),
 			List.of("<b>50</b> "+Attribute.DAMAGE_PHYSICAL.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -10118,7 +9891,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, 5f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10140,8 +9913,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, 5f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,5f,Attribute.ENERGY_SHIELDING,2f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10164,8 +9936,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, 10f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,10f,Attribute.ENERGY_SHIELDING,2f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10188,8 +9959,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, 10f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 2f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,10f,Attribute.ENERGY_SHIELDING,2f),
 			List.of("[style.colourExcellent(All enemies)] take <b>10</b> "+Attribute.DAMAGE_PHYSICAL.getColouredName("b")+" when Stone Shell ends")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10228,8 +9998,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 15f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 25f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,15f,Attribute.CRITICAL_DAMAGE,25f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10262,7 +10031,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, 10f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10343,8 +10112,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_PHYSICAL,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 25f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 10f)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,25f,Attribute.RESISTANCE_PHYSICAL,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10369,7 +10137,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -15f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-15f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10391,8 +10159,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, -15f),
-					new Value<>(Attribute.RESISTANCE_LUST, -25f)),
+			Map.of(Attribute.ENERGY_SHIELDING,-15f,Attribute.RESISTANCE_LUST,-25f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10415,7 +10182,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 15f)),
+			Map.of(Attribute.DAMAGE_LUST,15f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10437,7 +10204,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 30f)),
+			Map.of(Attribute.DAMAGE_LUST,30f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10460,7 +10227,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 30f)),
+			Map.of(Attribute.DAMAGE_LUST,30f),
 			List.of("[style.boldLust(Tease)] [style.boldExcellent(applies)] -25 "+Attribute.RESISTANCE_PHYSICAL.getColouredName("b")+" to the target for [style.boldGood(2 turns)]")) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10483,7 +10250,7 @@ public class StatusEffect {
 			"telepathic_communication_power_of_suggestion_targeted",
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, -25f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,-25f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10502,7 +10269,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -25f)),
+			Map.of(Attribute.RESISTANCE_LUST,-25f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10524,7 +10291,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -25f)),
+			Map.of(Attribute.RESISTANCE_LUST,-25f),
 			List.of("<b>5</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -10552,7 +10319,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -25f)),
+			Map.of(Attribute.RESISTANCE_LUST,-25f),
 			List.of("<b>15</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -10580,7 +10347,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -25f)),
+			Map.of(Attribute.RESISTANCE_LUST,-25f),
 			List.of("[style.boldTerrible(All party members)] take <b>15</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn</b>")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
@@ -10618,7 +10385,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 15f)),
+			Map.of(Attribute.DAMAGE_LUST,15f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10651,7 +10418,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_LUST, -15f)),
+			Map.of(Attribute.RESISTANCE_LUST,-15f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10736,8 +10503,7 @@ public class StatusEffect {
 			null,
 			PresetColour.DAMAGE_TYPE_LUST,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 25f),
-					new Value<>(Attribute.RESISTANCE_LUST, 10f)),
+			Map.of(Attribute.DAMAGE_LUST,25f,Attribute.RESISTANCE_LUST,10f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10761,11 +10527,7 @@ public class StatusEffect {
 			"cleanse_positive",
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, 5f),
-					new Value<>(Attribute.RESISTANCE_LUST, 5f),
-					new Value<>(Attribute.RESISTANCE_FIRE, 5f),
-					new Value<>(Attribute.RESISTANCE_ICE, 5f),
-					new Value<>(Attribute.RESISTANCE_POISON, 5f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,5f,Attribute.RESISTANCE_LUST,5f,Attribute.RESISTANCE_FIRE,5f,Attribute.RESISTANCE_ICE,5f,Attribute.RESISTANCE_POISON,5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10783,11 +10545,7 @@ public class StatusEffect {
 			"cleanse_negative",
 			PresetColour.GENERIC_ARCANE,
 			false,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, -5f),
-					new Value<>(Attribute.RESISTANCE_LUST, -5f),
-					new Value<>(Attribute.RESISTANCE_FIRE, -5f),
-					new Value<>(Attribute.RESISTANCE_ICE, -5f),
-					new Value<>(Attribute.RESISTANCE_POISON, -5f)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,-5f,Attribute.RESISTANCE_LUST,-5f,Attribute.RESISTANCE_FIRE,-5f,Attribute.RESISTANCE_ICE,-5f,Attribute.RESISTANCE_POISON,-5f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10805,7 +10563,7 @@ public class StatusEffect {
 			null,
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 100f)),
+			Map.of(Attribute.ENERGY_SHIELDING,100f),
 			null) {
 		@Override
 		public String getDescription(GameCharacter target) {
@@ -10827,7 +10585,7 @@ public class StatusEffect {
 			null,
 			PresetColour.GENERIC_ARCANE,
 			true,
-			Util.newHashMapOfValues(new Value<>(Attribute.ENERGY_SHIELDING, 100f)),
+			Map.of(Attribute.ENERGY_SHIELDING,100f),
 			List.of("<b>5</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn to a random enemy")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {

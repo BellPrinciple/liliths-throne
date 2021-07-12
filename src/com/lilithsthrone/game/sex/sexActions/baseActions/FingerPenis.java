@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActions;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -11,8 +13,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotTag;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.79
@@ -32,7 +32,7 @@ public class FingerPenis {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -72,7 +72,7 @@ public class FingerPenis {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -270,7 +270,7 @@ public class FingerPenis {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		@Override
@@ -315,7 +315,7 @@ public class FingerPenis {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		@Override
@@ -361,7 +361,7 @@ public class FingerPenis {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		@Override
@@ -407,7 +407,7 @@ public class FingerPenis {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		@Override
@@ -453,7 +453,7 @@ public class FingerPenis {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		@Override
@@ -499,7 +499,7 @@ public class FingerPenis {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		@Override
@@ -555,7 +555,7 @@ public class FingerPenis {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public String getActionTitle() {
@@ -609,7 +609,7 @@ public class FingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL) {
 		@Override
 		public String getActionTitle() {
@@ -724,7 +724,7 @@ public class FingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		@Override
@@ -757,7 +757,7 @@ public class FingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		@Override
@@ -790,7 +790,7 @@ public class FingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		@Override
@@ -823,7 +823,7 @@ public class FingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		@Override
@@ -856,7 +856,7 @@ public class FingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		@Override
@@ -889,7 +889,7 @@ public class FingerPenis {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		@Override
@@ -949,7 +949,7 @@ public class FingerPenis {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL) {
 		@Override
 		public String getActionTitle() {

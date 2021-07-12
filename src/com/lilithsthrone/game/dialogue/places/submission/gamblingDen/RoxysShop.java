@@ -39,7 +39,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -155,8 +154,8 @@ public class RoxysShop {
 								List.of(Fetish.FETISH_ORAL_GIVING), null, CorruptionLevel.TWO_HORNY, null, null, null,
 								true, false,
 								new SMRoxyPussyLicker(
-										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Roxy.class), SexSlotLyingDown.FACE_SITTING)),
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))),
+										Map.of(Main.game.getNpc(Roxy.class),SexSlotLyingDown.FACE_SITTING),
+										Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)),
 								null,
 								null,
 								AFTER_ROXY_SEX_ADDICT,
@@ -179,8 +178,8 @@ public class RoxysShop {
 								List.of(Fetish.FETISH_ORAL_GIVING), null, CorruptionLevel.TWO_HORNY, null, null, null,
 								true, false,
 								new SMRoxyPussyLicker(
-										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Roxy.class), SexSlotLyingDown.FACE_SITTING)),
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))),
+										Map.of(Main.game.getNpc(Roxy.class),SexSlotLyingDown.FACE_SITTING),
+										Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)),
 								null,
 								null,
 								AFTER_ROXY_SEX,
@@ -336,7 +335,7 @@ public class RoxysShop {
 				return new Response("Roll", "Watch Roxy roll her dice.", AFTER_ROXY_SEX_ITEM_OBTAINED) {
 					@Override
 					public void effects() {
-						Dice d = new Dice(Util.newHashMapOfValues(new Value<>(DiceFace.ONE, 8f), new Value<>(DiceFace.TWO, 4f), new Value<>(DiceFace.THREE, 2f)));
+						Dice d = new Dice(Map.of(DiceFace.ONE,8f,DiceFace.TWO,4f,DiceFace.THREE,2f));
 						d.roll();
 						int d1 = d.getFace().getValue();
 						d.roll();
@@ -476,7 +475,7 @@ public class RoxysShop {
 								null){
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-								return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vengar.class), List.of(CoverableArea.PENIS)));
+								return Map.of(Main.game.getNpc(Vengar.class),List.of(CoverableArea.PENIS));
 							}
 							@Override
 							public SexType getMainSexPreference(GameCharacter character, GameCharacter targetedCharacter) {

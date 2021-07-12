@@ -293,7 +293,7 @@ public class PhoneDialogue {
 								true,
 								true,
 								new SMMasturbation(
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMasturbation.STANDING))),
+										Map.of(Main.game.getPlayer(),SexSlotMasturbation.STANDING)),
 								Main.game.getPlayer().hasFetish(Fetish.FETISH_EXHIBITIONIST)
 									?Main.game.getPlayer().getParty()
 									:null,
@@ -2222,12 +2222,7 @@ public class PhoneDialogue {
 			noPregnancies=false;
 		}
 		
-		Map<SexAreaOrifice, List<AbstractStatusEffect>> incubationEffectMap = Util.newHashMapOfValues(
-				new Value<>(SexAreaOrifice.VAGINA, List.of(StatusEffect.INCUBATING_EGGS_WOMB_1, StatusEffect.INCUBATING_EGGS_WOMB_2, StatusEffect.INCUBATING_EGGS_WOMB_3)),
-				new Value<>(SexAreaOrifice.ANUS, List.of(StatusEffect.INCUBATING_EGGS_STOMACH_1, StatusEffect.INCUBATING_EGGS_STOMACH_2, StatusEffect.INCUBATING_EGGS_STOMACH_3)),
-				new Value<>(SexAreaOrifice.NIPPLE, List.of(StatusEffect.INCUBATING_EGGS_NIPPLES_1, StatusEffect.INCUBATING_EGGS_NIPPLES_2, StatusEffect.INCUBATING_EGGS_NIPPLES_3)),
-				new Value<>(SexAreaOrifice.NIPPLE_CROTCH, List.of(StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_1, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_2, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_3)),
-				new Value<>(SexAreaOrifice.SPINNERET, List.of(StatusEffect.INCUBATING_EGGS_SPINNERET_1, StatusEffect.INCUBATING_EGGS_SPINNERET_2, StatusEffect.INCUBATING_EGGS_SPINNERET_3)));
+		Map<SexAreaOrifice, List<AbstractStatusEffect>> incubationEffectMap = Map.of(SexAreaOrifice.VAGINA,List.of(StatusEffect.INCUBATING_EGGS_WOMB_1, StatusEffect.INCUBATING_EGGS_WOMB_2, StatusEffect.INCUBATING_EGGS_WOMB_3),SexAreaOrifice.ANUS,List.of(StatusEffect.INCUBATING_EGGS_STOMACH_1, StatusEffect.INCUBATING_EGGS_STOMACH_2, StatusEffect.INCUBATING_EGGS_STOMACH_3),SexAreaOrifice.NIPPLE,List.of(StatusEffect.INCUBATING_EGGS_NIPPLES_1, StatusEffect.INCUBATING_EGGS_NIPPLES_2, StatusEffect.INCUBATING_EGGS_NIPPLES_3),SexAreaOrifice.NIPPLE_CROTCH,List.of(StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_1, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_2, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_3),SexAreaOrifice.SPINNERET,List.of(StatusEffect.INCUBATING_EGGS_SPINNERET_1, StatusEffect.INCUBATING_EGGS_SPINNERET_2, StatusEffect.INCUBATING_EGGS_SPINNERET_3));
 		
 		for(Entry<SexAreaOrifice, List<AbstractStatusEffect>> incubationEntry : incubationEffectMap.entrySet()) {
 			if(Main.game.getPlayer().hasStatusEffect(incubationEntry.getValue().get(0))

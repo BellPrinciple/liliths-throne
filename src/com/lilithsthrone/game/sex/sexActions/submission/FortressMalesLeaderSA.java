@@ -21,8 +21,6 @@ import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionPriority;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.2.11
@@ -77,7 +75,7 @@ public class FortressMalesLeaderSA {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -129,7 +127,7 @@ public class FortressMalesLeaderSA {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -214,7 +212,7 @@ public class FortressMalesLeaderSA {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -266,7 +264,7 @@ public class FortressMalesLeaderSA {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		
 		@Override

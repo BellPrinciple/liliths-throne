@@ -2,6 +2,7 @@ package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -32,8 +33,6 @@ import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.game.sex.managers.universal.SMSitting;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -1344,8 +1343,8 @@ public class Lab {
 							List.of(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 							true, true,
 							new SMSitting(
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.SITTING)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lilaya.class), SexSlotSitting.SITTING_IN_LAP))),
+									Map.of(Main.game.getPlayer(),SexSlotSitting.SITTING),
+									Map.of(Main.game.getNpc(Lilaya.class),SexSlotSitting.SITTING_IN_LAP)),
 							null,
 							null,
 							LILAYA_END_SEX,
@@ -1471,8 +1470,8 @@ public class Lab {
 							List.of(Fetish.FETISH_INCEST), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 							true, true,
 							new SMSitting(
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.SITTING)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lilaya.class), SexSlotSitting.SITTING_IN_LAP))),
+									Map.of(Main.game.getPlayer(),SexSlotSitting.SITTING),
+									Map.of(Main.game.getNpc(Lilaya.class),SexSlotSitting.SITTING_IN_LAP)),
 							null,
 							null,
 							LILAYA_END_SEX,

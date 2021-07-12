@@ -3,6 +3,7 @@ package com.lilithsthrone.game.character.npc.dominion;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.w3c.dom.Document;
@@ -73,8 +74,6 @@ import com.lilithsthrone.game.inventory.item.TransformativePotion;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -159,10 +158,7 @@ public class Brax extends NPC {
 				List.of(Perk.ENCHANTMENT_STABILITY,
 						Perk.UNARMED_DAMAGE,
 						Perk.ARCANE_BOOST),
-				Util.newHashMapOfValues(
-						new Value<>(PerkCategory.PHYSICAL, 2),
-						new Value<>(PerkCategory.LUST, 0),
-						new Value<>(PerkCategory.ARCANE, 1)));
+				Map.of(PerkCategory.PHYSICAL,2,PerkCategory.LUST,0,PerkCategory.ARCANE,1));
 	}
 	
 	@Override

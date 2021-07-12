@@ -19,7 +19,6 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -868,7 +867,7 @@ public enum Fetish {
 			"fetish_pregnancy",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.FERTILITY, 5)),
+			Map.of(Attribute.FERTILITY,5),
 			List.of("<span style='color:"
 					+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Unlocks</span> <span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>fertility tease</span> (Requires vagina)",
 					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>virility tease</span>"),
@@ -904,7 +903,7 @@ public enum Fetish {
 			"fetish_impregnation",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.VIRILITY, 5)),
+			Map.of(Attribute.VIRILITY,5),
 			List.of("<span style='color:"
 					+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Unlocks</span> <span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>virility tease</span> (Requires penis)",
 					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>fertility tease</span>"),
@@ -1116,9 +1115,7 @@ public enum Fetish {
 			"fetish_denial_self",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 1),
-					new Value<>(Attribute.RESISTANCE_LUST, 2)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,1,Attribute.RESISTANCE_LUST,2),
 			null,
 			null) {
 
@@ -1152,7 +1149,7 @@ public enum Fetish {
 			"fetish_dominant",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.MANA_MAXIMUM, 5)),
+			Map.of(Attribute.MANA_MAXIMUM,5),
 			List.of("<span style='color:"+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Unlocks</span> <span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>dominant tease</span>",
 					"<span style='color:"+ PresetColour.GENERIC_BAD.toWebHexString()+ ";'>Weak to</span> <span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>submissive tease</span>"),
 			null) {
@@ -1186,7 +1183,7 @@ public enum Fetish {
 			"fetish_submissive",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 2)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,2),
 			List.of("<span style='color:"+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Unlocks</span> <span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>submissive tease</span>",
 					"<span style='color:"+ PresetColour.GENERIC_BAD.toWebHexString()+ ";'>Weak to</span> <span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>dominant tease</span>"),
 			null) {
@@ -1257,7 +1254,7 @@ public enum Fetish {
 			"fetish_masochist",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, 2)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,2),
 			List.of("[style.boldSex(Enjoys)] [style.boldTerrible(painful sex actions)]",
 					"25% of all incoming",
 					"<span style='color:"+ PresetColour.ATTRIBUTE_HEALTH.toWebHexString()+ ";'>"+Attribute.HEALTH_MAXIMUM.getName()+" damage</span>"+ " is converted",
@@ -1294,7 +1291,7 @@ public enum Fetish {
 			"fetish_sadist",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 5)),
+			Map.of(Attribute.DAMAGE_PHYSICAL,5),
 			List.of("[style.boldExcellent(Unlocks)] sadistic [style.colourSex(sex actions)]",
 					"[style.boldExcellent(+5%)] to all [style.colourHealth("+Attribute.HEALTH_MAXIMUM.getName()+" damage)]",
 					"10% of all inflicted",
@@ -1535,7 +1532,7 @@ public enum Fetish {
 			null,
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 10)),
+			Map.of(Attribute.DAMAGE_LUST,10),
 			List.of("<span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>Talk like a bimbo</span>"),
 			null) {
 		
@@ -1643,8 +1640,7 @@ public enum Fetish {
 			"fetish_size_queen",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			List.of(PresetColour.BASE_YELLOW, PresetColour.BASE_PINK),
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 1)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,1),
 			List.of("[style.colourGood(Enjoys)] [style.colourSex(being stretched)]",
 					"Treats [style.colourSex('uncomfortably deep')] insertions as being [style.colourGood('comfortable')]"),
 			null) {
@@ -1678,8 +1674,7 @@ public enum Fetish {
 			"fetish_switch",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5),
 			null,
 			List.of(Fetish.FETISH_DOMINANT,
 					Fetish.FETISH_SUBMISSIVE)) {
@@ -1714,9 +1709,7 @@ public enum Fetish {
 			"fetish_breeder",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.FERTILITY, 25),
-					new Value<>(Attribute.VIRILITY, 25)),
+			Map.of(Attribute.FERTILITY,25,Attribute.VIRILITY,25),
 			null,
 			List.of(Fetish.FETISH_PREGNANCY,
 					Fetish.FETISH_IMPREGNATION)) {
@@ -1751,9 +1744,7 @@ public enum Fetish {
 			"fetish_sadomasochist",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 3),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10)),
+			Map.of(Attribute.RESISTANCE_PHYSICAL,3,Attribute.DAMAGE_PHYSICAL,10),
 			null,
 			List.of(Fetish.FETISH_SADIST,
 					Fetish.FETISH_MASOCHIST)) {

@@ -15,8 +15,6 @@ import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.combat.CombatBehaviour;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -75,8 +73,8 @@ public abstract class AbstractRace {
 			boolean affectedByFurryPreference) {
 		this(name,
 				namePlural,
-				Util.newHashMapOfValues(new Value<>(LegConfiguration.BIPEDAL, nameFeral)),
-				Util.newHashMapOfValues(new Value<>(LegConfiguration.BIPEDAL, nameFeralPlural)),
+				Map.of(LegConfiguration.BIPEDAL,nameFeral),
+				Map.of(LegConfiguration.BIPEDAL,nameFeralPlural),
 				defaultTransformName,
 				colour,
 				disposition,

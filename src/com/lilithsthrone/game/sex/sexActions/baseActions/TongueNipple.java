@@ -14,7 +14,6 @@ import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.88
@@ -28,7 +27,7 @@ public class TongueNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -87,12 +86,7 @@ public class TongueNipple {
 		@Override
 		public String getDescription() {
 			UtilText.nodeContentSB.setLength(0);
-			Map<SexPace, List<String>> descriptors = Util.newHashMapOfValues(
-					new Value<>(SexPace.DOM_GENTLE, List.of("slowly", "gently")),
-					new Value<>(SexPace.SUB_NORMAL, List.of("eagerly", "greedily")),
-					new Value<>(SexPace.SUB_EAGER, List.of("eagerly", "greedily")),
-					new Value<>(SexPace.DOM_NORMAL, List.of("eagerly", "greedily")),
-					new Value<>(SexPace.DOM_ROUGH, List.of("forcefully", "roughly")));
+			Map<SexPace, List<String>> descriptors = Map.of(SexPace.DOM_GENTLE,List.of("slowly", "gently"),SexPace.SUB_NORMAL,List.of("eagerly", "greedily"),SexPace.SUB_EAGER,List.of("eagerly", "greedily"),SexPace.DOM_NORMAL,List.of("eagerly", "greedily"),SexPace.DOM_ROUGH,List.of("forcefully", "roughly"));
 			
 			List<String> desList = descriptors.get(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction()));
 			int index = Util.random.nextInt(desList.size());
@@ -319,7 +313,7 @@ public class TongueNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -447,7 +441,7 @@ public class TongueNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 
@@ -575,7 +569,7 @@ public class TongueNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 
@@ -704,7 +698,7 @@ public class TongueNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -797,7 +791,7 @@ public class TongueNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 
@@ -925,7 +919,7 @@ public class TongueNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 
@@ -1053,7 +1047,7 @@ public class TongueNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -1142,7 +1136,7 @@ public class TongueNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -1176,12 +1170,7 @@ public class TongueNipple {
 			
 
 			UtilText.nodeContentSB.setLength(0);
-			Map<SexPace, List<String>> descriptors = Util.newHashMapOfValues(
-					new Value<>(SexPace.DOM_GENTLE, List.of("slowly", "gently")),
-					new Value<>(SexPace.SUB_NORMAL, List.of("eagerly", "greedily")),
-					new Value<>(SexPace.SUB_EAGER, List.of("eagerly", "greedily")),
-					new Value<>(SexPace.DOM_NORMAL, List.of("eagerly", "greedily")),
-					new Value<>(SexPace.DOM_ROUGH, List.of("forcefully", "roughly")));
+			Map<SexPace, List<String>> descriptors = Map.of(SexPace.DOM_GENTLE,List.of("slowly", "gently"),SexPace.SUB_NORMAL,List.of("eagerly", "greedily"),SexPace.SUB_EAGER,List.of("eagerly", "greedily"),SexPace.DOM_NORMAL,List.of("eagerly", "greedily"),SexPace.DOM_ROUGH,List.of("forcefully", "roughly"));
 			
 			List<String> desList = descriptors.get(Main.sex.getSexPace(Main.sex.getCharacterPerformingAction()));
 			int index = Util.random.nextInt(desList.size());
@@ -1409,7 +1398,7 @@ public class TongueNipple {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -1484,7 +1473,7 @@ public class TongueNipple {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		
@@ -1559,7 +1548,7 @@ public class TongueNipple {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -1634,7 +1623,7 @@ public class TongueNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -1696,7 +1685,7 @@ public class TongueNipple {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		
@@ -1771,7 +1760,7 @@ public class TongueNipple {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		
@@ -1846,7 +1835,7 @@ public class TongueNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		
 		@Override

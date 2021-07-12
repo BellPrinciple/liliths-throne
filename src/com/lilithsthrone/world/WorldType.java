@@ -128,11 +128,7 @@ public class WorldType {
 			false,
 			true,
 			TeleportPermissions.NONE,
-			"/com/lilithsthrone/res/map/empty.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.GENERIC_EMPTY_TILE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0xff0000), PlaceType.GENERIC_EMPTY_TILE),
-					new Value<>(new Color(0xffff00), PlaceType.GENERIC_HOLDING_CELL),
-					new Value<>(new Color(0x0080ff), PlaceType.GENERIC_MUSEUM))) {
+			"/com/lilithsthrone/res/map/empty.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.GENERIC_EMPTY_TILE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0xff0000),PlaceType.GENERIC_EMPTY_TILE,new Color(0xffff00),PlaceType.GENERIC_HOLDING_CELL,new Color(0x0080ff),PlaceType.GENERIC_MUSEUM)) {
 	};
 
 	public static AbstractWorldType MUSEUM = new AbstractWorldType(WorldRegion.OLD_WORLD,
@@ -141,15 +137,7 @@ public class WorldType {
 			false,
 			true,
 			TeleportPermissions.NONE,
-			"/com/lilithsthrone/res/map/prologue/museum.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.MUSEUM_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0xff0000), PlaceType.MUSEUM_ENTRANCE),
-					new Value<>(new Color(0x8000ff), PlaceType.MUSEUM_CROWDS),
-					new Value<>(new Color(0x0080ff), PlaceType.MUSEUM_OFFICE),
-					new Value<>(new Color(0xffff00), PlaceType.MUSEUM_STAGE),
-					new Value<>(new Color(0xff8000), PlaceType.MUSEUM_ROOM),
-					new Value<>(new Color(0x00ff00), PlaceType.MUSEUM_STAIRS),
-					new Value<>(new Color(0x808080), PlaceType.MUSEUM_LOBBY))){
+			"/com/lilithsthrone/res/map/prologue/museum.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.MUSEUM_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0xff0000),PlaceType.MUSEUM_ENTRANCE,new Color(0x8000ff),PlaceType.MUSEUM_CROWDS,new Color(0x0080ff),PlaceType.MUSEUM_OFFICE,new Color(0xffff00),PlaceType.MUSEUM_STAGE,new Color(0xff8000),PlaceType.MUSEUM_ROOM,new Color(0x00ff00),PlaceType.MUSEUM_STAIRS,new Color(0x808080),PlaceType.MUSEUM_LOBBY)){
 		@Override
 		public boolean isRevealedOnStart() {
 			return true;
@@ -166,11 +154,7 @@ public class WorldType {
 			false,
 			true,
 			TeleportPermissions.NONE,
-			"/com/lilithsthrone/res/map/prologue/museum_lost.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.MUSEUM_MIRROR, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0xff8000), PlaceType.MUSEUM_ROOM),
-					new Value<>(new Color(0x00ff00), PlaceType.MUSEUM_MIRROR),
-					new Value<>(new Color(0x808080), PlaceType.MUSEUM_CORRIDOR))){
+			"/com/lilithsthrone/res/map/prologue/museum_lost.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.MUSEUM_MIRROR, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0xff8000),PlaceType.MUSEUM_ROOM,new Color(0x00ff00),PlaceType.MUSEUM_MIRROR,new Color(0x808080),PlaceType.MUSEUM_CORRIDOR)){
 		@Override
 		public boolean isRevealedOnStart() {
 			return true;
@@ -217,16 +201,7 @@ public class WorldType {
 			true,
 			false,
 			TeleportPermissions.BOTH,
-			"/com/lilithsthrone/res/map/dominion/lilayasHome/lilayas_home_first_floor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.LILAYA_HOME_STAIR_DOWN, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.LILAYA_HOME_CORRIDOR),
-					new Value<>(new Color(0xff00ff), PlaceType.LILAYA_HOME_ROOM_WINDOW_FIRST_FLOOR),
-					new Value<>(new Color(0xff0080), PlaceType.LILAYA_HOME_ROOM_GARDEN_FIRST_FLOOR),
-					new Value<>(new Color(0xff80ff), PlaceType.LILAYA_HOME_ROOM_LILAYA),
-					new Value<>(new Color(0x0080ff), PlaceType.LILAYA_HOME_ROOM_ROSE),
-					new Value<>(new Color(0x00ffff), PlaceType.LILAYA_HOME_ROOM_PLAYER),
-					new Value<>(new Color(0xff0000), PlaceType.LILAYA_HOME_STAIR_DOWN),
-					new Value<>(new Color(0xff8000), PlaceType.LILAYA_HOME_STAIR_DOWN_SECONDARY))){
+			"/com/lilithsthrone/res/map/dominion/lilayasHome/lilayas_home_first_floor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.LILAYA_HOME_STAIR_DOWN, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.LILAYA_HOME_CORRIDOR,new Color(0xff00ff),PlaceType.LILAYA_HOME_ROOM_WINDOW_FIRST_FLOOR,new Color(0xff0080),PlaceType.LILAYA_HOME_ROOM_GARDEN_FIRST_FLOOR,new Color(0xff80ff),PlaceType.LILAYA_HOME_ROOM_LILAYA,new Color(0x0080ff),PlaceType.LILAYA_HOME_ROOM_ROSE,new Color(0x00ffff),PlaceType.LILAYA_HOME_ROOM_PLAYER,new Color(0xff0000),PlaceType.LILAYA_HOME_STAIR_DOWN,new Color(0xff8000),PlaceType.LILAYA_HOME_STAIR_DOWN_SECONDARY)){
 		@Override
 		public boolean isRevealedOnStart() {
 			return true;
@@ -243,13 +218,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/dominion/zaranixHome/first_floor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.ZARANIX_FF_STAIRS, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.ZARANIX_FF_CORRIDOR),
-					new Value<>(new Color(0x00ff00), PlaceType.ZARANIX_FF_STAIRS),
-					new Value<>(new Color(0xff80ff), PlaceType.ZARANIX_FF_OFFICE),
-					new Value<>(new Color(0xff00ff), PlaceType.ZARANIX_FF_ROOM),
-					new Value<>(new Color(0x8000ff), PlaceType.ZARANIX_FF_MAID))) {
+			"/com/lilithsthrone/res/map/dominion/zaranixHome/first_floor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.ZARANIX_FF_STAIRS, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.ZARANIX_FF_CORRIDOR,new Color(0x00ff00),PlaceType.ZARANIX_FF_STAIRS,new Color(0xff80ff),PlaceType.ZARANIX_FF_OFFICE,new Color(0xff00ff),PlaceType.ZARANIX_FF_ROOM,new Color(0x8000ff),PlaceType.ZARANIX_FF_MAID)) {
 		@Override
 		public String getSexBlockedReason(GameCharacter character) {
 			return "You can't have sex while in Zaranix's house!";
@@ -266,17 +235,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/dominion/zaranixHome/ground_floor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.ZARANIX_GF_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.ZARANIX_GF_CORRIDOR),
-					new Value<>(new Color(0x00ff00), PlaceType.ZARANIX_GF_STAIRS),
-					new Value<>(new Color(0xff0000), PlaceType.ZARANIX_GF_ENTRANCE),
-					new Value<>(new Color(0xffff00), PlaceType.ZARANIX_GF_LOUNGE),
-					new Value<>(new Color(0xff00ff), PlaceType.ZARANIX_GF_ROOM),
-					new Value<>(new Color(0x8000ff), PlaceType.ZARANIX_GF_MAID),
-					new Value<>(new Color(0x00ffff), PlaceType.ZARANIX_GF_GARDEN_ROOM),
-					new Value<>(new Color(0x008000), PlaceType.ZARANIX_GF_GARDEN),
-					new Value<>(new Color(0xff8000), PlaceType.ZARANIX_GF_GARDEN_ENTRY))) {
+			"/com/lilithsthrone/res/map/dominion/zaranixHome/ground_floor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.ZARANIX_GF_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.ZARANIX_GF_CORRIDOR,new Color(0x00ff00),PlaceType.ZARANIX_GF_STAIRS,new Color(0xff0000),PlaceType.ZARANIX_GF_ENTRANCE,new Color(0xffff00),PlaceType.ZARANIX_GF_LOUNGE,new Color(0xff00ff),PlaceType.ZARANIX_GF_ROOM,new Color(0x8000ff),PlaceType.ZARANIX_GF_MAID,new Color(0x00ffff),PlaceType.ZARANIX_GF_GARDEN_ROOM,new Color(0x008000),PlaceType.ZARANIX_GF_GARDEN,new Color(0xff8000),PlaceType.ZARANIX_GF_GARDEN_ENTRY)) {
 		@Override
 		public String getSexBlockedReason(GameCharacter character) {
 			return "You can't have sex while in Zaranix's house!";
@@ -293,17 +252,7 @@ public class WorldType {
 			true,
 			true,
 			TeleportPermissions.BOTH,
-			"/com/lilithsthrone/res/map/dominion/harpyNests/harpyNests.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.HARPY_NESTS_ENTRANCE_ENFORCER_POST, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					
-					new Value<>(new Color(0x808080), PlaceType.HARPY_NESTS_WALKWAYS),
-					new Value<>(new Color(0x404040), PlaceType.HARPY_NESTS_WALKWAYS_BRIDGE),
-					
-					new Value<>(new Color(0x00ff80), PlaceType.HARPY_NESTS_ENTRANCE_ENFORCER_POST),
-					new Value<>(new Color(0xff0000), PlaceType.HARPY_NESTS_HARPY_NEST_RED),
-					new Value<>(new Color(0xff00ff), PlaceType.HARPY_NESTS_HARPY_NEST_PINK),
-					new Value<>(new Color(0xffff00), PlaceType.HARPY_NESTS_HARPY_NEST_YELLOW),
-					new Value<>(new Color(0xff9100), PlaceType.HARPY_NESTS_HELENAS_NEST))) {
+			"/com/lilithsthrone/res/map/dominion/harpyNests/harpyNests.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.HARPY_NESTS_ENTRANCE_ENFORCER_POST, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.HARPY_NESTS_WALKWAYS,new Color(0x404040),PlaceType.HARPY_NESTS_WALKWAYS_BRIDGE,new Color(0x00ff80),PlaceType.HARPY_NESTS_ENTRANCE_ENFORCER_POST,new Color(0xff0000),PlaceType.HARPY_NESTS_HARPY_NEST_RED,new Color(0xff00ff),PlaceType.HARPY_NESTS_HARPY_NEST_PINK,new Color(0xffff00),PlaceType.HARPY_NESTS_HARPY_NEST_YELLOW,new Color(0xff9100),PlaceType.HARPY_NESTS_HELENAS_NEST)) {
 	};
 	
 	public static AbstractWorldType SLAVER_ALLEY = new AbstractWorldType(WorldRegion.DOMINION,
@@ -344,16 +293,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.BOTH,
-			"/com/lilithsthrone/res/map/dominion/slaverAlley/bountyHunterLodge/bountyHunterLodge.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.BOUNTY_HUNTER_LODGE_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.BOUNTY_HUNTER_LODGE_FLOOR),
-					new Value<>(new Color(0xff0000), PlaceType.BOUNTY_HUNTER_LODGE_ENTRANCE),
-					
-					new Value<>(new Color(0xff8000), PlaceType.BOUNTY_HUNTER_LODGE_BOUNTY_BOARD),
-					
-					new Value<>(new Color(0x00ff00), PlaceType.BOUNTY_HUNTER_LODGE_BAR),
-					new Value<>(new Color(0xffff00), PlaceType.BOUNTY_HUNTER_LODGE_SEATING),
-					new Value<>(new Color(0x00ffff), PlaceType.BOUNTY_HUNTER_LODGE_STAIRS))) {
+			"/com/lilithsthrone/res/map/dominion/slaverAlley/bountyHunterLodge/bountyHunterLodge.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.BOUNTY_HUNTER_LODGE_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.BOUNTY_HUNTER_LODGE_FLOOR,new Color(0xff0000),PlaceType.BOUNTY_HUNTER_LODGE_ENTRANCE,new Color(0xff8000),PlaceType.BOUNTY_HUNTER_LODGE_BOUNTY_BOARD,new Color(0x00ff00),PlaceType.BOUNTY_HUNTER_LODGE_BAR,new Color(0xffff00),PlaceType.BOUNTY_HUNTER_LODGE_SEATING,new Color(0x00ffff),PlaceType.BOUNTY_HUNTER_LODGE_STAIRS)) {
 	};
 	
 	public static AbstractWorldType BOUNTY_HUNTER_LODGE_UPSTAIRS = new AbstractWorldType(WorldRegion.DOMINION,
@@ -362,13 +302,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.BOTH,
-			"/com/lilithsthrone/res/map/dominion/slaverAlley/bountyHunterLodge/bountyHunterLodgeUpstairs.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.BOUNTY_HUNTER_LODGE_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.BOUNTY_HUNTER_LODGE_UPSTAIRS_CORRIDOR),
-					new Value<>(new Color(0xffff00), PlaceType.BOUNTY_HUNTER_LODGE_UPSTAIRS_ROOM),
-					new Value<>(new Color(0xff8000), PlaceType.BOUNTY_HUNTER_LODGE_UPSTAIRS_ROOM_DOBERMANNS),
-					new Value<>(new Color(0xff80ff), PlaceType.BOUNTY_HUNTER_LODGE_UPSTAIRS_ROOM_SHADOW_SILENCE),
-					new Value<>(new Color(0x00ffff), PlaceType.BOUNTY_HUNTER_LODGE_UPSTAIRS_STAIRS))) {
+			"/com/lilithsthrone/res/map/dominion/slaverAlley/bountyHunterLodge/bountyHunterLodgeUpstairs.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.BOUNTY_HUNTER_LODGE_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.BOUNTY_HUNTER_LODGE_UPSTAIRS_CORRIDOR,new Color(0xffff00),PlaceType.BOUNTY_HUNTER_LODGE_UPSTAIRS_ROOM,new Color(0xff8000),PlaceType.BOUNTY_HUNTER_LODGE_UPSTAIRS_ROOM_DOBERMANNS,new Color(0xff80ff),PlaceType.BOUNTY_HUNTER_LODGE_UPSTAIRS_ROOM_SHADOW_SILENCE,new Color(0x00ffff),PlaceType.BOUNTY_HUNTER_LODGE_UPSTAIRS_STAIRS)) {
 	};
 	
 	public static AbstractWorldType SHOPPING_ARCADE = new AbstractWorldType(WorldRegion.DOMINION,
@@ -416,14 +350,7 @@ public class WorldType {
 			false,
 			TeleportPermissions.OUTGOING_ONLY,
 			"/com/lilithsthrone/res/map/dominion/textilesWarehouse/textilesWarehouse.png",
-			PlaceType.WORLD_MAP_DOMINION, PlaceType.TEXTILE_WAREHOUSE_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.TEXTILE_WAREHOUSE_CORRIDOR),
-					new Value<>(new Color(0xff0000), PlaceType.TEXTILE_WAREHOUSE_ENTRANCE),
-					new Value<>(new Color(0xff00ff), PlaceType.TEXTILE_WAREHOUSE_STORAGE_ROOM),
-					new Value<>(new Color(0xff8000), PlaceType.TEXTILE_WAREHOUSE_ENCHANTING),
-					new Value<>(new Color(0x00ffff), PlaceType.TEXTILE_WAREHOUSE_OVERSEER_STATION),
-					new Value<>(new Color(0x00ff00), PlaceType.TEXTILE_WAREHOUSE_OFFICE))) {
+			PlaceType.WORLD_MAP_DOMINION, PlaceType.TEXTILE_WAREHOUSE_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.TEXTILE_WAREHOUSE_CORRIDOR,new Color(0xff0000),PlaceType.TEXTILE_WAREHOUSE_ENTRANCE,new Color(0xff00ff),PlaceType.TEXTILE_WAREHOUSE_STORAGE_ROOM,new Color(0xff8000),PlaceType.TEXTILE_WAREHOUSE_ENCHANTING,new Color(0x00ffff),PlaceType.TEXTILE_WAREHOUSE_OVERSEER_STATION,new Color(0x00ff00),PlaceType.TEXTILE_WAREHOUSE_OFFICE)) {
 		@Override
 		public String getSexBlockedReason(GameCharacter character) {
 			return "This isn't a suitable place in which to be having sex!";
@@ -514,17 +441,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/dominion/cityHall/city_hall.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.CITY_HALL_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.CITY_HALL_CORRIDOR),
-					new Value<>(new Color(0xff0000), PlaceType.CITY_HALL_ENTRANCE),
-					new Value<>(new Color(0xffff00), PlaceType.CITY_HALL_INFORMATION_DESK),
-					new Value<>(new Color(0x8000ff), PlaceType.CITY_HALL_WAITING_AREA),
-					new Value<>(new Color(0xff8000), PlaceType.CITY_HALL_OFFICE),
-					new Value<>(new Color(0x00ff00), PlaceType.CITY_HALL_STAIRS),
-					new Value<>(new Color(0xff0080), PlaceType.CITY_HALL_BUREAU_OF_DEMOGRAPHICS),
-					new Value<>(new Color(0xff00ff), PlaceType.CITY_HALL_ARCHIVES),
-					new Value<>(new Color(0xffff80), PlaceType.CITY_HALL_BUREAU_OF_PROPERTY_RIGHTS_AND_COMMERCE))) {
+			"/com/lilithsthrone/res/map/dominion/cityHall/city_hall.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.CITY_HALL_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.CITY_HALL_CORRIDOR,new Color(0xff0000),PlaceType.CITY_HALL_ENTRANCE,new Color(0xffff00),PlaceType.CITY_HALL_INFORMATION_DESK,new Color(0x8000ff),PlaceType.CITY_HALL_WAITING_AREA,new Color(0xff8000),PlaceType.CITY_HALL_OFFICE,new Color(0x00ff00),PlaceType.CITY_HALL_STAIRS,new Color(0xff0080),PlaceType.CITY_HALL_BUREAU_OF_DEMOGRAPHICS,new Color(0xff00ff),PlaceType.CITY_HALL_ARCHIVES,new Color(0xffff80),PlaceType.CITY_HALL_BUREAU_OF_PROPERTY_RIGHTS_AND_COMMERCE)) {
 		@Override
 		public String getSexBlockedReason(GameCharacter character) {
 			return "This isn't a suitable place in which to be having sex!";
@@ -542,15 +459,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/dominion/homeImprovements/homeImprovements.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.HOME_IMPROVEMENTS_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.HOME_IMPROVEMENTS_CORRIDOR),
-					new Value<>(new Color(0x00ff00), PlaceType.HOME_IMPROVEMENTS_ENTRANCE),
-					new Value<>(new Color(0xffff00), PlaceType.HOME_IMPROVEMENTS_SHELVING_PREMIUM),
-					new Value<>(new Color(0xff80ff), PlaceType.HOME_IMPROVEMENTS_SHELVING_STANDARD),
-					new Value<>(new Color(0xff8000), PlaceType.HOME_IMPROVEMENTS_BUILDING_SUPPLIES),
-					new Value<>(new Color(0xff0080), PlaceType.HOME_IMPROVEMENTS_OFFICE),
-					new Value<>(new Color(0x00ffff), PlaceType.HOME_IMPROVEMENTS_TOILETS))) {
+			"/com/lilithsthrone/res/map/dominion/homeImprovements/homeImprovements.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.HOME_IMPROVEMENTS_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.HOME_IMPROVEMENTS_CORRIDOR,new Color(0x00ff00),PlaceType.HOME_IMPROVEMENTS_ENTRANCE,new Color(0xffff00),PlaceType.HOME_IMPROVEMENTS_SHELVING_PREMIUM,new Color(0xff80ff),PlaceType.HOME_IMPROVEMENTS_SHELVING_STANDARD,new Color(0xff8000),PlaceType.HOME_IMPROVEMENTS_BUILDING_SUPPLIES,new Color(0xff0080),PlaceType.HOME_IMPROVEMENTS_OFFICE,new Color(0x00ffff),PlaceType.HOME_IMPROVEMENTS_TOILETS)) {
 		@Override
 		public String getSexBlockedReason(GameCharacter character) {
 			return "This isn't a suitable place in which to be having sex!";
@@ -564,15 +473,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/dominion/dominionExpress/dominionExpress.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.HOME_IMPROVEMENTS_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.DOMINION_EXPRESS_CORRIDOR),
-					new Value<>(new Color(0xff0000), PlaceType.DOMINION_EXPRESS_EXIT),
-					new Value<>(new Color(0xff00ff), PlaceType.DOMINION_EXPRESS_STORAGE),
-					new Value<>(new Color(0x00ffff), PlaceType.DOMINION_EXPRESS_OFFICE),
-					new Value<>(new Color(0x0000ff), PlaceType.DOMINION_EXPRESS_FILLY_STATION),
-					new Value<>(new Color(0xffff00), PlaceType.DOMINION_EXPRESS_OFFICE_STABLE),
-					new Value<>(new Color(0xff8000), PlaceType.DOMINION_EXPRESS_STABLES))) {
+			"/com/lilithsthrone/res/map/dominion/dominionExpress/dominionExpress.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.HOME_IMPROVEMENTS_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.DOMINION_EXPRESS_CORRIDOR,new Color(0xff0000),PlaceType.DOMINION_EXPRESS_EXIT,new Color(0xff00ff),PlaceType.DOMINION_EXPRESS_STORAGE,new Color(0x00ffff),PlaceType.DOMINION_EXPRESS_OFFICE,new Color(0x0000ff),PlaceType.DOMINION_EXPRESS_FILLY_STATION,new Color(0xffff00),PlaceType.DOMINION_EXPRESS_OFFICE_STABLE,new Color(0xff8000),PlaceType.DOMINION_EXPRESS_STABLES)) {
 		@Override
 		public String getSexBlockedReason(GameCharacter character) {
 			return "This isn't a suitable place in which to be having sex!";
@@ -590,13 +491,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.BOTH,
-			"/com/lilithsthrone/res/map/dominion/angelsKiss/angelsKissGroundFloor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.ANGELS_KISS_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.ANGELS_KISS_CORRIDOR),
-					new Value<>(new Color(0x00ff00), PlaceType.ANGELS_KISS_ENTRANCE),
-					new Value<>(new Color(0xff0000), PlaceType.ANGELS_KISS_STAIRCASE_UP),
-					new Value<>(new Color(0x00ffff), PlaceType.ANGELS_KISS_OFFICE),
-					new Value<>(new Color(0xff00ff), PlaceType.ANGELS_KISS_BEDROOM))) {
+			"/com/lilithsthrone/res/map/dominion/angelsKiss/angelsKissGroundFloor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.ANGELS_KISS_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.ANGELS_KISS_CORRIDOR,new Color(0x00ff00),PlaceType.ANGELS_KISS_ENTRANCE,new Color(0xff0000),PlaceType.ANGELS_KISS_STAIRCASE_UP,new Color(0x00ffff),PlaceType.ANGELS_KISS_OFFICE,new Color(0xff00ff),PlaceType.ANGELS_KISS_BEDROOM)) {
 		@Override
 		public boolean isFurniturePresent() {
 			return true;
@@ -609,13 +504,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.BOTH,
-			"/com/lilithsthrone/res/map/dominion/angelsKiss/angelsKissFirstFloor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.ANGELS_KISS_STAIRCASE_DOWN, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.ANGELS_KISS_CORRIDOR),
-					new Value<>(new Color(0xff0000), PlaceType.ANGELS_KISS_STAIRCASE_DOWN),
-					new Value<>(new Color(0xff00ff), PlaceType.ANGELS_KISS_BEDROOM),
-					new Value<>(new Color(0xffff00), PlaceType.ANGELS_KISS_BEDROOM_BUNNY),
-					new Value<>(new Color(0xff8000), PlaceType.ANGELS_KISS_BEDROOM_LOPPY))) {
+			"/com/lilithsthrone/res/map/dominion/angelsKiss/angelsKissFirstFloor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.ANGELS_KISS_STAIRCASE_DOWN, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.ANGELS_KISS_CORRIDOR,new Color(0xff0000),PlaceType.ANGELS_KISS_STAIRCASE_DOWN,new Color(0xff00ff),PlaceType.ANGELS_KISS_BEDROOM,new Color(0xffff00),PlaceType.ANGELS_KISS_BEDROOM_BUNNY,new Color(0xff8000),PlaceType.ANGELS_KISS_BEDROOM_LOPPY)) {
 		@Override
 		public boolean isFurniturePresent() {
 			return true;
@@ -628,19 +517,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.NONE,
-			"/com/lilithsthrone/res/map/dominion/nightLife/wateringHole.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.WATERING_HOLE_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					
-					new Value<>(new Color(0x00ff00), PlaceType.WATERING_HOLE_ENTRANCE),
-					
-					new Value<>(new Color(0x808080), PlaceType.WATERING_HOLE_MAIN_AREA),
-					
-					new Value<>(new Color(0x0080ff), PlaceType.WATERING_HOLE_SEATING_AREA),
-					new Value<>(new Color(0xff00ff), PlaceType.WATERING_HOLE_VIP_AREA),
-					new Value<>(new Color(0xff8000), PlaceType.WATERING_HOLE_BAR),
-					new Value<>(new Color(0xffff00), PlaceType.WATERING_HOLE_DANCE_FLOOR),
-					new Value<>(new Color(0xff0000), PlaceType.WATERING_HOLE_TOILETS)
-					)){
+			"/com/lilithsthrone/res/map/dominion/nightLife/wateringHole.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.WATERING_HOLE_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x00ff00),PlaceType.WATERING_HOLE_ENTRANCE,new Color(0x808080),PlaceType.WATERING_HOLE_MAIN_AREA,new Color(0x0080ff),PlaceType.WATERING_HOLE_SEATING_AREA,new Color(0xff00ff),PlaceType.WATERING_HOLE_VIP_AREA,new Color(0xff8000),PlaceType.WATERING_HOLE_BAR,new Color(0xffff00),PlaceType.WATERING_HOLE_DANCE_FLOOR,new Color(0xff0000),PlaceType.WATERING_HOLE_TOILETS)){
 		@Override
 		public boolean isRevealedOnStart() {
 			return true;
@@ -653,14 +530,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.NONE,
-			"/com/lilithsthrone/res/map/dominion/daddy/apartment.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.DOMINION_DEMON_HOME_DADDY, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					
-					new Value<>(new Color(0x00ff00), PlaceType.DADDY_APARTMENT_ENTRANCE),
-					new Value<>(new Color(0xffff00), PlaceType.DADDY_APARTMENT_LOUNGE),
-					new Value<>(new Color(0x00ffff), PlaceType.DADDY_APARTMENT_KITCHEN),
-					new Value<>(new Color(0xff00ff), PlaceType.DADDY_APARTMENT_BEDROOM)
-					)){
+			"/com/lilithsthrone/res/map/dominion/daddy/apartment.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.DOMINION_DEMON_HOME_DADDY, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x00ff00),PlaceType.DADDY_APARTMENT_ENTRANCE,new Color(0xffff00),PlaceType.DADDY_APARTMENT_LOUNGE,new Color(0x00ffff),PlaceType.DADDY_APARTMENT_KITCHEN,new Color(0xff00ff),PlaceType.DADDY_APARTMENT_BEDROOM)){
 		@Override
 		public String getName() {
 			return UtilText.parse("[daddy.NamePos] apartment");
@@ -722,22 +592,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.NONE,
-			"/com/lilithsthrone/res/map/dominion/nyanApartment/apartment.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.DOMINION_NYAN_APARTMENT, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					
-					new Value<>(new Color(0x808080), PlaceType.NYAN_APARTMENT_HALLWAY),
-					new Value<>(new Color(0x00ff00), PlaceType.NYAN_APARTMENT_ENTRANCE),
-
-					new Value<>(new Color(0xff8000), PlaceType.NYAN_APARTMENT_DINING_ROOM),
-					new Value<>(new Color(0xffff00), PlaceType.NYAN_APARTMENT_KITCHEN),
-					
-					new Value<>(new Color(0x0000ff), PlaceType.NYAN_APARTMENT_BATHROOM),
-					new Value<>(new Color(0x00ff80), PlaceType.NYAN_APARTMENT_LOUNGE),
-					
-					new Value<>(new Color(0xff00ff), PlaceType.NYAN_APARTMENT_SPARE_BEDROOM),
-					new Value<>(new Color(0xff0000), PlaceType.NYAN_APARTMENT_NYAN_BEDROOM),
-					new Value<>(new Color(0x00ffff), PlaceType.NYAN_APARTMENT_ENSUITE)
-					)){
+			"/com/lilithsthrone/res/map/dominion/nyanApartment/apartment.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.DOMINION_NYAN_APARTMENT, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.NYAN_APARTMENT_HALLWAY,new Color(0x00ff00),PlaceType.NYAN_APARTMENT_ENTRANCE,new Color(0xff8000),PlaceType.NYAN_APARTMENT_DINING_ROOM,new Color(0xffff00),PlaceType.NYAN_APARTMENT_KITCHEN,new Color(0x0000ff),PlaceType.NYAN_APARTMENT_BATHROOM,new Color(0x00ff80),PlaceType.NYAN_APARTMENT_LOUNGE,new Color(0xff00ff),PlaceType.NYAN_APARTMENT_SPARE_BEDROOM,new Color(0xff0000),PlaceType.NYAN_APARTMENT_NYAN_BEDROOM,new Color(0x00ffff),PlaceType.NYAN_APARTMENT_ENSUITE)){
 		@Override
 		public boolean isRevealedOnStart() {
 			return true;
@@ -796,19 +651,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/submission/lyssiethsPalace/groundFloor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.LYSSIETH_PALACE_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.LYSSIETH_PALACE_CORRIDOR),
-					new Value<>(new Color(0x404040), PlaceType.LYSSIETH_PALACE_WINDOWS),
-
-					new Value<>(new Color(0x00ff00), PlaceType.LYSSIETH_PALACE_ENTRANCE),
-					new Value<>(new Color(0xff80ff), PlaceType.LYSSIETH_PALACE_ROOM),
-					new Value<>(new Color(0xff8000), PlaceType.LYSSIETH_PALACE_HALL),
-					new Value<>(new Color(0x8000ff), PlaceType.LYSSIETH_PALACE_OFFICE),
-					new Value<>(new Color(0xff0080), PlaceType.LYSSIETH_PALACE_SIREN_OFFICE),
-					
-					new Value<>(new Color(0xff0000), PlaceType.LYSSIETH_PALACE_STAIRS_1),
-					new Value<>(new Color(0x0000ff), PlaceType.LYSSIETH_PALACE_STAIRS_2))) {
+			"/com/lilithsthrone/res/map/submission/lyssiethsPalace/groundFloor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.LYSSIETH_PALACE_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.LYSSIETH_PALACE_CORRIDOR,new Color(0x404040),PlaceType.LYSSIETH_PALACE_WINDOWS,new Color(0x00ff00),PlaceType.LYSSIETH_PALACE_ENTRANCE,new Color(0xff80ff),PlaceType.LYSSIETH_PALACE_ROOM,new Color(0xff8000),PlaceType.LYSSIETH_PALACE_HALL,new Color(0x8000ff),PlaceType.LYSSIETH_PALACE_OFFICE,new Color(0xff0080),PlaceType.LYSSIETH_PALACE_SIREN_OFFICE,new Color(0xff0000),PlaceType.LYSSIETH_PALACE_STAIRS_1,new Color(0x0000ff),PlaceType.LYSSIETH_PALACE_STAIRS_2)) {
 		@Override
 		public String getSexBlockedReason(GameCharacter character) {
 			return "You can't have sex while in Lyssieth's Palace!";
@@ -825,11 +668,7 @@ public class WorldType {
 			false,
 			true,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/submission/impFortress/fortress1Map.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.FORTRESS_ALPHA_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.FORTRESS_ALPHA_COURTYARD),
-					new Value<>(new Color(0x00ff00), PlaceType.FORTRESS_ALPHA_ENTRANCE),
-					new Value<>(new Color(0xff8000), PlaceType.FORTRESS_ALPHA_KEEP))){
+			"/com/lilithsthrone/res/map/submission/impFortress/fortress1Map.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.FORTRESS_ALPHA_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.FORTRESS_ALPHA_COURTYARD,new Color(0x00ff00),PlaceType.FORTRESS_ALPHA_ENTRANCE,new Color(0xff8000),PlaceType.FORTRESS_ALPHA_KEEP)){
 		@Override
 		public boolean isRevealedOnStart() {
 			return true;
@@ -846,17 +685,7 @@ public class WorldType {
 			false,
 			true,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/submission/impFortress/fortress2Map.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.FORTRESS_DEMON_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.FORTRESS_DEMON_COURTYARD),
-					new Value<>(new Color(0x00ff00), PlaceType.FORTRESS_DEMON_ENTRANCE),
-					new Value<>(new Color(0x65b0c9), PlaceType.FORTRESS_DEMON_WELL),
-					new Value<>(new Color(0xff8000), PlaceType.FORTRESS_DEMON_KEEP),
-					new Value<>(new Color(0x8000ff), PlaceType.FORTRESS_DEMON_CELLS),
-					
-					new Value<>(new Color(0x80ff00), PlaceType.FORTRESS_LAB),
-					
-					new Value<>(new Color(0xff00ff), PlaceType.FORTRESS_DEMON_TREASURY))){
+			"/com/lilithsthrone/res/map/submission/impFortress/fortress2Map.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.FORTRESS_DEMON_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.FORTRESS_DEMON_COURTYARD,new Color(0x00ff00),PlaceType.FORTRESS_DEMON_ENTRANCE,new Color(0x65b0c9),PlaceType.FORTRESS_DEMON_WELL,new Color(0xff8000),PlaceType.FORTRESS_DEMON_KEEP,new Color(0x8000ff),PlaceType.FORTRESS_DEMON_CELLS,new Color(0x80ff00),PlaceType.FORTRESS_LAB,new Color(0xff00ff),PlaceType.FORTRESS_DEMON_TREASURY)){
 		@Override
 		public boolean isRevealedOnStart() {
 			return true;
@@ -873,11 +702,7 @@ public class WorldType {
 			false,
 			true,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/submission/impFortress/fortress3Map.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.FORTRESS_FEMALES_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.FORTRESS_FEMALES_COURTYARD),
-					new Value<>(new Color(0x00ff00), PlaceType.FORTRESS_FEMALES_ENTRANCE),
-					new Value<>(new Color(0xff8000), PlaceType.FORTRESS_FEMALES_KEEP))){
+			"/com/lilithsthrone/res/map/submission/impFortress/fortress3Map.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.FORTRESS_FEMALES_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.FORTRESS_FEMALES_COURTYARD,new Color(0x00ff00),PlaceType.FORTRESS_FEMALES_ENTRANCE,new Color(0xff8000),PlaceType.FORTRESS_FEMALES_KEEP)){
 		@Override
 		public boolean isRevealedOnStart() {
 			return true;
@@ -894,11 +719,7 @@ public class WorldType {
 			false,
 			true,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/submission/impFortress/fortress4Map.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.FORTRESS_MALES_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.FORTRESS_MALES_COURTYARD),
-					new Value<>(new Color(0x00ff00), PlaceType.FORTRESS_MALES_ENTRANCE),
-					new Value<>(new Color(0xff8000), PlaceType.FORTRESS_MALES_KEEP))){
+			"/com/lilithsthrone/res/map/submission/impFortress/fortress4Map.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.FORTRESS_MALES_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.FORTRESS_MALES_COURTYARD,new Color(0x00ff00),PlaceType.FORTRESS_MALES_ENTRANCE,new Color(0xff8000),PlaceType.FORTRESS_MALES_KEEP)){
 		@Override
 		public boolean isRevealedOnStart() {
 			return true;
@@ -915,19 +736,7 @@ public class WorldType {
 			true,
 			true,
 			TeleportPermissions.BOTH,
-			"/com/lilithsthrone/res/map/submission/batCaverns/batCaverns.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.BAT_CAVERN_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-
-					new Value<>(new Color(0x00ff00), PlaceType.BAT_CAVERN_ENTRANCE),
-					
-					new Value<>(new Color(0x008080), PlaceType.BAT_CAVERN_DARK),
-					new Value<>(new Color(0x808080), PlaceType.BAT_CAVERN_LIGHT),
-					
-					new Value<>(new Color(0x0080ff), PlaceType.BAT_CAVERN_RIVER),
-					new Value<>(new Color(0x40b4ff), PlaceType.BAT_CAVERN_RIVER_CROSSING),
-					new Value<>(new Color(0x004080), PlaceType.BAT_CAVERN_RIVER_END),
-					
-					new Value<>(new Color(0xff80ff), PlaceType.BAT_CAVERN_SLIME_QUEEN_LAIR))) {
+			"/com/lilithsthrone/res/map/submission/batCaverns/batCaverns.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.BAT_CAVERN_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x00ff00),PlaceType.BAT_CAVERN_ENTRANCE,new Color(0x008080),PlaceType.BAT_CAVERN_DARK,new Color(0x808080),PlaceType.BAT_CAVERN_LIGHT,new Color(0x0080ff),PlaceType.BAT_CAVERN_RIVER,new Color(0x40b4ff),PlaceType.BAT_CAVERN_RIVER_CROSSING,new Color(0x004080),PlaceType.BAT_CAVERN_RIVER_END,new Color(0xff80ff),PlaceType.BAT_CAVERN_SLIME_QUEEN_LAIR)) {
 	};
 
 	public static AbstractWorldType SLIME_QUEENS_LAIR_GROUND_FLOOR = new AbstractWorldType(WorldRegion.SUBMISSION,
@@ -936,20 +745,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/submission/slimeQueensLair/slimeQueensLairGroundFloor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.SLIME_QUEENS_LAIR_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-
-					new Value<>(new Color(0x808080), PlaceType.SLIME_QUEENS_LAIR_CORRIDOR),
-					
-					new Value<>(new Color(0x00ff00), PlaceType.SLIME_QUEENS_LAIR_ENTRANCE),
-					new Value<>(new Color(0xff0000), PlaceType.SLIME_QUEENS_LAIR_STAIRS_UP),
-					
-					new Value<>(new Color(0xff8000), PlaceType.SLIME_QUEENS_LAIR_STORAGE_VATS),
-					new Value<>(new Color(0x40b4ff), PlaceType.SLIME_QUEENS_LAIR_ROOM),
-					
-					new Value<>(new Color(0xff80ff), PlaceType.SLIME_QUEENS_LAIR_ENTRANCE_GUARDS),
-					
-					new Value<>(new Color(0xffff00), PlaceType.SLIME_QUEENS_LAIR_SLIME_QUEEN))) {
+			"/com/lilithsthrone/res/map/submission/slimeQueensLair/slimeQueensLairGroundFloor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.SLIME_QUEENS_LAIR_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.SLIME_QUEENS_LAIR_CORRIDOR,new Color(0x00ff00),PlaceType.SLIME_QUEENS_LAIR_ENTRANCE,new Color(0xff0000),PlaceType.SLIME_QUEENS_LAIR_STAIRS_UP,new Color(0xff8000),PlaceType.SLIME_QUEENS_LAIR_STORAGE_VATS,new Color(0x40b4ff),PlaceType.SLIME_QUEENS_LAIR_ROOM,new Color(0xff80ff),PlaceType.SLIME_QUEENS_LAIR_ENTRANCE_GUARDS,new Color(0xffff00),PlaceType.SLIME_QUEENS_LAIR_SLIME_QUEEN)) {
 		@Override
 		public String getSexBlockedReason(GameCharacter character) {
 			return "This isn't a suitable place in which to be having sex!";
@@ -962,17 +758,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/submission/slimeQueensLair/slimeQueensLairFirstFloor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.SLIME_QUEENS_LAIR_STAIRS_DOWN, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-
-					new Value<>(new Color(0x808080), PlaceType.SLIME_QUEENS_LAIR_CORRIDOR),
-					
-					new Value<>(new Color(0x00ff00), PlaceType.SLIME_QUEENS_LAIR_STAIRS_DOWN),
-					
-					new Value<>(new Color(0x40b4ff), PlaceType.SLIME_QUEENS_LAIR_ROOM),
-					
-					new Value<>(new Color(0xff00ff), PlaceType.SLIME_QUEENS_LAIR_ROYAL_GUARD),
-					new Value<>(new Color(0xffff00), PlaceType.SLIME_QUEENS_LAIR_SLIME_QUEEN))) {
+			"/com/lilithsthrone/res/map/submission/slimeQueensLair/slimeQueensLairFirstFloor.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.SLIME_QUEENS_LAIR_STAIRS_DOWN, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.SLIME_QUEENS_LAIR_CORRIDOR,new Color(0x00ff00),PlaceType.SLIME_QUEENS_LAIR_STAIRS_DOWN,new Color(0x40b4ff),PlaceType.SLIME_QUEENS_LAIR_ROOM,new Color(0xff00ff),PlaceType.SLIME_QUEENS_LAIR_ROYAL_GUARD,new Color(0xffff00),PlaceType.SLIME_QUEENS_LAIR_SLIME_QUEEN)) {
 		@Override
 		public String getSexBlockedReason(GameCharacter character) {
 			return "This isn't a suitable place in which to be having sex!";
@@ -985,22 +771,7 @@ public class WorldType {
 			false,
 			false,
 			TeleportPermissions.OUTGOING_ONLY,
-			"/com/lilithsthrone/res/map/submission/gamblingDen/gamblingDen.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.GAMBLING_DEN_ENTRANCE, Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0x808080), PlaceType.GAMBLING_DEN_CORRIDOR),
-					
-					new Value<>(new Color(0x00ff00), PlaceType.GAMBLING_DEN_ENTRANCE),
-					
-					new Value<>(new Color(0x4bb1d0), PlaceType.GAMBLING_DEN_OFFICE),
-					
-					new Value<>(new Color(0xffff00), PlaceType.GAMBLING_DEN_TRADER),
-					
-					new Value<>(new Color(0x0080ff), PlaceType.GAMBLING_DEN_GAMBLING),
-					
-					new Value<>(new Color(0xff80ff), PlaceType.GAMBLING_DEN_PREGNANCY),
-					new Value<>(new Color(0xff00ff), PlaceType.GAMBLING_DEN_FUTA_PREGNANCY),
-					new Value<>(new Color(0xff8000), PlaceType.GAMBLING_DEN_PREGNANCY_ROULETTE)
-					)){
+			"/com/lilithsthrone/res/map/submission/gamblingDen/gamblingDen.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.GAMBLING_DEN_ENTRANCE, Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0x808080),PlaceType.GAMBLING_DEN_CORRIDOR,new Color(0x00ff00),PlaceType.GAMBLING_DEN_ENTRANCE,new Color(0x4bb1d0),PlaceType.GAMBLING_DEN_OFFICE,new Color(0xffff00),PlaceType.GAMBLING_DEN_TRADER,new Color(0x0080ff),PlaceType.GAMBLING_DEN_GAMBLING,new Color(0xff80ff),PlaceType.GAMBLING_DEN_PREGNANCY,new Color(0xff00ff),PlaceType.GAMBLING_DEN_FUTA_PREGNANCY,new Color(0xff8000),PlaceType.GAMBLING_DEN_PREGNANCY_ROULETTE)){
 		@Override
 		public boolean isRevealedOnStart() {
 			return true;
@@ -1060,14 +831,7 @@ public class WorldType {
 			"/com/lilithsthrone/res/map/submission/rebelBase/rebelBase.png",
 			PlaceType.WORLD_MAP_DOMINION,
 			PlaceType.REBEL_BASE_ENTRANCE,
-			Util.newHashMapOfValues(
-					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					new Value<>(new Color(0xed1c24), PlaceType.REBEL_BASE_ENTRANCE),
-					new Value<>(new Color(0x22b14c), PlaceType.REBEL_BASE_CORRIDOR),
-					new Value<>(new Color(0xf8941d), PlaceType.REBEL_BASE_SLEEPING_AREA),
-					new Value<>(new Color(0x662d91), PlaceType.REBEL_BASE_COMMON_AREA),
-                    new Value<>(new Color(0x6dd0f7), PlaceType.REBEL_BASE_ARMORY),
-                    new Value<>(new Color(0x3f48cc), PlaceType.REBEL_BASE_CAVED_IN_ROOM))) {
+			Map.of(new Color(0xFFFFFF),PlaceType.GENERIC_IMPASSABLE,new Color(0xed1c24),PlaceType.REBEL_BASE_ENTRANCE,new Color(0x22b14c),PlaceType.REBEL_BASE_CORRIDOR,new Color(0xf8941d),PlaceType.REBEL_BASE_SLEEPING_AREA,new Color(0x662d91),PlaceType.REBEL_BASE_COMMON_AREA,new Color(0x6dd0f7),PlaceType.REBEL_BASE_ARMORY,new Color(0x3f48cc),PlaceType.REBEL_BASE_CAVED_IN_ROOM)) {
 		@Override
 		public String getSexBlockedReason(GameCharacter character) {
 			return "A structurally unsound cave is hardly the place for sex!";

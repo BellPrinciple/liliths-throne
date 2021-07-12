@@ -12,8 +12,6 @@ import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.2.8
@@ -50,9 +48,7 @@ public class SMJulesCockSucking extends SexManagerDefault {
 	
 	@Override
 	public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-		return Util.newHashMapOfValues(
-				new Value<>(Main.game.getNpc(Jules.class), List.of(CoverableArea.PENIS)),
-				new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)));
+		return Map.of(Main.game.getNpc(Jules.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH));
 	}
 	
 	@Override

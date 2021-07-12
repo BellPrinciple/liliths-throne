@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.universal;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -23,8 +24,6 @@ import com.lilithsthrone.game.sex.sexActions.SexActionCategory;
 import com.lilithsthrone.game.sex.sexActions.SexActionPriority;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.2.8
@@ -38,7 +37,7 @@ public class DoggyStyle {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, null)),
+			Map.of(SexAreaPenetration.FINGER,null),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -186,7 +185,7 @@ public class DoggyStyle {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, null)),
+			Map.of(SexAreaPenetration.FINGER,null),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -332,7 +331,7 @@ public class DoggyStyle {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, null)),
+			Map.of(SexAreaPenetration.FINGER,null),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -480,7 +479,7 @@ public class DoggyStyle {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, null)),
+			Map.of(SexAreaPenetration.FINGER,null),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -671,7 +670,7 @@ public class DoggyStyle {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.ANUS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 
@@ -814,7 +813,7 @@ public class DoggyStyle {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 

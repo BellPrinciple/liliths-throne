@@ -19,7 +19,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotTag;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.8.8
@@ -98,13 +97,13 @@ public class SMBath extends SexManagerDefault {
 		for(GameCharacter character : allCharacters) {
 			map.put(character, new HashMap<>());
 			for(SexAreaPenetration penetration : SexAreaPenetration.values()) {
-				map.get(character).put(penetration, Util.newHashMapOfValues(new Value<>(null, Util.newHashSetOfValues(LubricationType.WATER))));
+				map.get(character).put(penetration, Map.of(null,Util.newHashSetOfValues(LubricationType.WATER)));
 			}
 			for(SexAreaOrifice orifice : SexAreaOrifice.values()) {
 				if(!orifice.isInternalOrifice()
 						 || orifice == SexAreaOrifice.NIPPLE
 						 || orifice == SexAreaOrifice.NIPPLE_CROTCH) {
-					map.get(character).put(orifice, Util.newHashMapOfValues(new Value<>(null, Util.newHashSetOfValues(LubricationType.WATER))));
+					map.get(character).put(orifice, Map.of(null,Util.newHashSetOfValues(LubricationType.WATER)));
 				}
 			}
 		}

@@ -46,7 +46,6 @@ import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.1
@@ -132,7 +131,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 
 		this.transformationName = null; // Use default race transformation name
 		
-		this.defaultFootStructure = Util.newHashMapOfValues(new Value<>(LegConfiguration.BIPEDAL, defaultFootStructure));
+		this.defaultFootStructure = Map.of(LegConfiguration.BIPEDAL,defaultFootStructure);
 		this.footType = footType;
 		
 		this.allowedLegConfigurations = allowedLegConfigurations;

@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActions;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
@@ -14,8 +16,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.1
@@ -29,7 +29,7 @@ public class FingerBreastsCrotch {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.BREAST_CROTCH)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.BREAST_CROTCH),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -367,7 +367,7 @@ public class FingerBreastsCrotch {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.BREAST_CROTCH, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.BREAST_CROTCH,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL) {
 		
 		@Override

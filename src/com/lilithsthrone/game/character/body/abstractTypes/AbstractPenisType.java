@@ -21,7 +21,6 @@ import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.8.9
@@ -34,8 +33,8 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 	private boolean fromExternalFile;
 	
 	// Maps the name to weighting for use in random selection:
-	protected static final Map<String, Integer> BASE_NAMES_SINGULAR = Util.newHashMapOfValues(new Value<>("cock", 3), new Value<>("dick", 2), new Value<>("shaft", 1));
-	protected static final Map<String, Integer> BASE_NAMES_PLURAL = Util.newHashMapOfValues(new Value<>("cocks", 3), new Value<>("dicks", 2), new Value<>("shafts", 1));
+	protected static final Map<String, Integer> BASE_NAMES_SINGULAR = Map.of("cock",3,"dick",2,"shaft",1);
+	protected static final Map<String, Integer> BASE_NAMES_PLURAL = Map.of("cocks",3,"dicks",2,"shafts",1);
 	
 	private AbstractBodyCoveringType coveringType;
 	private AbstractRace race;

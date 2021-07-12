@@ -50,7 +50,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.time.DateAndTime;
@@ -1785,7 +1784,7 @@ public class RoomPlayer {
 							:"Have dominant sex with your slaves in the shower.",
 						true, false,
 						new SMShower(SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
 								slaveSlots),
 						null,
 						null,
@@ -1816,7 +1815,7 @@ public class RoomPlayer {
 						true, true,
 						new SMShower(SexPosition.STANDING,
 								slaveSlots,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT))),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT)),
 						null,
 						null,
 						AFTER_SHOWER_SEX,
@@ -2003,7 +2002,7 @@ public class RoomPlayer {
 							:"Have dominant sex with your slaves in the bath.",
 						true, false,
 						new SMBath(SexPosition.LYING_DOWN,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.MISSIONARY)),
+								Map.of(Main.game.getPlayer(),SexSlotLyingDown.MISSIONARY),
 								slaveSlots),
 						null,
 						null,
@@ -2034,7 +2033,7 @@ public class RoomPlayer {
 						true, true,
 						new SMBath(SexPosition.LYING_DOWN,
 								slaveSlots,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))),
+								Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)),
 						null,
 						null,
 						AFTER_BATH_SEX,

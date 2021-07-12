@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -72,7 +73,6 @@ import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.sexActions.submission.SAMurkSpecials;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -151,10 +151,7 @@ public class Murk extends NPC {
 		
 		PerkManager.initialisePerks(this,
 				List.of(),
-				Util.newHashMapOfValues(
-						new Value<>(PerkCategory.PHYSICAL, 1),
-						new Value<>(PerkCategory.LUST, 0),
-						new Value<>(PerkCategory.ARCANE, 0)));
+				Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,0,PerkCategory.ARCANE,0));
 	}
 
 	@Override

@@ -2051,7 +2051,7 @@ public class GenericActions {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.SPINNERET, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.SPINNERET,SexAreaPenetration.PENIS),
 			SexParticipantType.SELF) {
 		@Override
 		public SexActionCategory getCategory() {
@@ -2093,7 +2093,7 @@ public class GenericActions {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.SPINNERET, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.SPINNERET,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionCategory getCategory() {
@@ -2135,7 +2135,7 @@ public class GenericActions {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.SPINNERET, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaOrifice.SPINNERET,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionCategory getCategory() {
@@ -2184,7 +2184,7 @@ public class GenericActions {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.SPINNERET, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaOrifice.SPINNERET,SexAreaOrifice.ANUS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionCategory getCategory() {
@@ -2233,7 +2233,7 @@ public class GenericActions {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.SPINNERET, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaOrifice.SPINNERET,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionCategory getCategory() {
@@ -2282,7 +2282,7 @@ public class GenericActions {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.SPINNERET, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaOrifice.SPINNERET,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionCategory getCategory() {
@@ -2333,7 +2333,7 @@ public class GenericActions {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.SPINNERET,SexAreaInterface.NULL)),
+			Map.of(SexAreaOrifice.SPINNERET,SexAreaInterface.NULL),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionPriority getPriority() {
@@ -2471,7 +2471,7 @@ public class GenericActions {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.ZERO_NONE,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TENTACLE,SexAreaInterface.NULL)),
+			Map.of(SexAreaPenetration.TENTACLE,SexAreaInterface.NULL),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionPriority getPriority() {

@@ -2,6 +2,7 @@ package com.lilithsthrone.game.character.npc.submission;
 
 import java.time.Month;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -44,7 +45,6 @@ import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -125,10 +125,7 @@ public class RebelBaseInsaneSurvivor extends NPC {
     public void setupPerks(boolean autoSelectPerks) {
             PerkManager.initialisePerks(this,
                 List.of(),
-                Util.newHashMapOfValues(
-                    new Value<>(PerkCategory.PHYSICAL, 5),
-                    new Value<>(PerkCategory.LUST, 0),
-                    new Value<>(PerkCategory.ARCANE, 0)));
+                Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,0,PerkCategory.ARCANE,0));
     }
 
 

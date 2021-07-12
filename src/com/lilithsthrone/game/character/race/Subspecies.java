@@ -50,7 +50,6 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.SVGImages;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.AbstractWorldType;
@@ -135,36 +134,20 @@ public class Subspecies {
 			"women",
 			null,
 			"Humans have a much higher resistance to the arousing effects of the arcane than any other race.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.RESISTANCE_LUST, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.RESISTANCE_LUST,5f),
 			null,
 			"Concerning Humans",
 			"Concerning Humans",
 			"HUMAN_BASIC",
 			"HUMAN_ADVANCED",
 			Race.HUMAN,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 10),
-					new Value<>(PerkCategory.ARCANE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 1)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,10,PerkCategory.ARCANE,1),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,5,PerkCategory.ARCANE,1),
 			PresetColour.RACE_HUMAN,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"A typical human.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.FOUR_COMMON)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.SUBMISSION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.JUNGLE_CITY,SubspeciesSpawnRarity.FOUR_COMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesWeighting(Body body, AbstractRace race) {
@@ -191,32 +174,20 @@ public class Subspecies {
 			null,
 			"As an angel, [npc.nameIsFull] highly resistant to the arousing effects of the arcane, and [npc.is] particularly adept at fighting demons."
 					+ " [npc.Her] natural instinct to protect humans, however, leaves [npc.her] quite vulnerable to them...",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 0f),
-					new Value<>(Attribute.MAJOR_ARCANE, 15f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, -100f),
-					new Value<>(Attribute.RESISTANCE_LUST, 50f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.DEMON), 50f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.HUMAN), -50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,0f,Attribute.MAJOR_ARCANE,15f,Attribute.MAJOR_CORRUPTION,-100f,Attribute.RESISTANCE_LUST,50f,Attribute.getRacialDamageAttribute(Race.DEMON),50f,Attribute.getRacialDamageAttribute(Race.HUMAN),-50f),
 			null,
 			"The Protectors",
 			"The Protectors",
 			"ANGEL_BASIC",
 			"ANGEL_ADVANCED",
 			Race.ANGEL,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 0),
-					new Value<>(PerkCategory.ARCANE, 5)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 0),
-					new Value<>(PerkCategory.ARCANE, 2)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,0,PerkCategory.ARCANE,5),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,0,PerkCategory.ARCANE,2),
 			PresetColour.RACE_ANGEL,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"A typical angel.",
 			null,
-			Util.newHashMapOfValues(),
+			Map.of(),
 			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
@@ -269,12 +240,7 @@ public class Subspecies {
 			"elder lilin",
 			null,
 			"[npc.NameIsFull] one of the seven elder lilin, and [npc.is] one of the most powerful beings in existence. [npc.She] can transform [npc.her] body into any form [npc.she] [npc.verb(desire)], and [npc.has] absolute mastery over the arcane.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 1000f),
-					new Value<>(Attribute.MAJOR_ARCANE, 1000f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 1000f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, 1000f),
-					new Value<>(Attribute.MANA_MAXIMUM, 1000f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,1000f,Attribute.MAJOR_ARCANE,1000f,Attribute.MAJOR_CORRUPTION,1000f,Attribute.HEALTH_MAXIMUM,1000f,Attribute.MANA_MAXIMUM,1000f),
 			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Lilith's Spawn",
@@ -282,19 +248,13 @@ public class Subspecies {
 			"ELDER_LILIN_BASIC",
 			"ELDER_LILIN_ADVANCED",
 			Race.DEMON,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 1)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,1,PerkCategory.ARCANE,1),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,1,PerkCategory.ARCANE,1),
 			PresetColour.RACE_LILIN,
 			SubspeciesPreference.ONE_LOW,
 			"One of the seven elder lilin.",
 			null,
-			Util.newHashMapOfValues(),
+			Map.of(),
 			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
@@ -329,12 +289,7 @@ public class Subspecies {
 			"lilin",
 			null,
 			"[npc.Name] is a lilin, and as such is far more powerful than a regular demon. [npc.She] can transform [npc.her] body into any form [npc.she] desires, and has a vast amount of arcane power.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 500f),
-					new Value<>(Attribute.MAJOR_ARCANE, 500f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 500f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, 500f),
-					new Value<>(Attribute.MANA_MAXIMUM, 500f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,500f,Attribute.MAJOR_ARCANE,500f,Attribute.MAJOR_CORRUPTION,500f,Attribute.HEALTH_MAXIMUM,500f,Attribute.MANA_MAXIMUM,500f),
 			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Lilith's Brood",
@@ -342,14 +297,8 @@ public class Subspecies {
 			"LILIN_BASIC",
 			"LILIN_ADVANCED",
 			Race.DEMON,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 1)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,1,PerkCategory.ARCANE,1),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,1,PerkCategory.ARCANE,1),
 			PresetColour.RACE_LILIN,
 			SubspeciesPreference.ONE_LOW,
 			"A lilin.",
@@ -389,13 +338,7 @@ public class Subspecies {
 			"succubi",
 			null,
 			"Due to the fact that demons are very easily able to harness arcane power, [npc.namePos] spell-casting abilities are truly a terrifying force to behold!",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
-					new Value<>(Attribute.MAJOR_ARCANE, 30f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 100f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 25f),
-					new Value<>(Attribute.DAMAGE_LUST, 25f),
-					new Value<>(Attribute.DAMAGE_SPELLS, 75f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,25f,Attribute.MAJOR_ARCANE,30f,Attribute.MAJOR_CORRUPTION,100f,Attribute.SPELL_COST_MODIFIER,25f,Attribute.DAMAGE_LUST,25f,Attribute.DAMAGE_SPELLS,75f),
 			List.of("[style.boldDemon(Demonic)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Demonic Origins",
@@ -403,24 +346,13 @@ public class Subspecies {
 			"DEMON_BASIC",
 			"DEMON_ADVANCED",
 			Race.DEMON,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 2),
-					new Value<>(PerkCategory.LUST, 10),
-					new Value<>(PerkCategory.ARCANE, 5)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 2),
-					new Value<>(PerkCategory.ARCANE, 5)),
+			Map.of(PerkCategory.PHYSICAL,2,PerkCategory.LUST,10,PerkCategory.ARCANE,5),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,2,PerkCategory.ARCANE,5),
 			PresetColour.RACE_DEMON,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"A typical demon.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.NIGHTLIFE_CLUB,  SubspeciesSpawnRarity.TWO_RARE)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.JUNGLE_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.TWO_RARE),
 			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
@@ -563,13 +495,7 @@ public class Subspecies {
 			"half-succubi",
 			null,
 			"Half-demons are almost as capable as regular demons at harnessing arcane power, and as a result, [npc.namePos] spell-casting abilities are exceptionally powerful!",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
-					new Value<>(Attribute.MAJOR_ARCANE, 20f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 50f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 20f),
-					new Value<>(Attribute.DAMAGE_LUST, 20f),
-					new Value<>(Attribute.DAMAGE_SPELLS, 60f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,10f,Attribute.MAJOR_ARCANE,20f,Attribute.MAJOR_CORRUPTION,50f,Attribute.SPELL_COST_MODIFIER,20f,Attribute.DAMAGE_LUST,20f,Attribute.DAMAGE_SPELLS,60f),
 			List.of("<b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'>Limited self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Demonic Half-breeds",
@@ -577,26 +503,13 @@ public class Subspecies {
 			"HALF_DEMON_BASIC",
 			"HALF_DEMON_ADVANCED",
 			Race.DEMON,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 3),
-					new Value<>(PerkCategory.ARCANE, 2)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 3),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 2)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,3,PerkCategory.ARCANE,2),
+			Map.of(PerkCategory.PHYSICAL,3,PerkCategory.LUST,1,PerkCategory.ARCANE,2),
 			PresetColour.RACE_HALF_DEMON,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"The result of copulation between a demon and a non-demonic partner.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.ONE_VERY_RARE)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ONE_VERY_RARE)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.SUBMISSION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.JUNGLE_CITY,SubspeciesSpawnRarity.ONE_VERY_RARE),
+			Map.of(WorldType.HARPY_NEST,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.ONE_VERY_RARE),
 			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
@@ -710,12 +623,7 @@ public class Subspecies {
 			"imps",
 			null,
 			"[npc.NamePos] impish body has a deep, insatiable craving for sex. Due to imps' uncouth mannerisms and reputation as being on the very bottom rung of society, [npc.she] [npc.verb(find)] it difficult to seduce others...",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, -5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 200f),
-					new Value<>(Attribute.RESISTANCE_LUST, -25f),
-					new Value<>(Attribute.DAMAGE_LUST, -75f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,-5f,Attribute.MAJOR_ARCANE,5f,Attribute.MAJOR_CORRUPTION,200f,Attribute.RESISTANCE_LUST,-25f,Attribute.DAMAGE_LUST,-75f),
 			List.of("[style.boldDemon(Demonic)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Impish Fiends",
@@ -723,20 +631,13 @@ public class Subspecies {
 			"IMP_BASIC",
 			"IMP_ADVANCED",
 			Race.DEMON,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 4),
-					new Value<>(PerkCategory.LUST, 10),
-					new Value<>(PerkCategory.ARCANE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 8),
-					new Value<>(PerkCategory.LUST, 4),
-					new Value<>(PerkCategory.ARCANE, 1)),
+			Map.of(PerkCategory.PHYSICAL,4,PerkCategory.LUST,10,PerkCategory.ARCANE,1),
+			Map.of(PerkCategory.PHYSICAL,8,PerkCategory.LUST,4,PerkCategory.ARCANE,1),
 			PresetColour.RACE_IMP,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"A typical imp.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.FOUR_COMMON)),
-			Util.newHashMapOfValues(),
+			Map.of(WorldRegion.SUBMISSION,SubspeciesSpawnRarity.FOUR_COMMON),
+			Map.of(),
 			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
@@ -781,12 +682,7 @@ public class Subspecies {
 			"alpha-imps",
 			null,
 			"[npc.NamePos] impish body has a deep, insatiable craving for sex. Due to imps' uncouth mannerisms and reputation as being on the very bottom rung of society, [npc.she] [npc.verb(find)] it difficult to seduce others...",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 0f),
-					new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 200f),
-					new Value<>(Attribute.RESISTANCE_LUST, -50f),
-					new Value<>(Attribute.DAMAGE_LUST, -50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,0f,Attribute.MAJOR_ARCANE,5f,Attribute.MAJOR_CORRUPTION,200f,Attribute.RESISTANCE_LUST,-50f,Attribute.DAMAGE_LUST,-50f),
 			List.of("[style.boldDemon(Demonic)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>",
 					"<b style='color: "+ PresetColour.GENERIC_GOOD.toWebHexString()+ ";'>Immune to race transformations</b>"),
 			"Impish Fiends",
@@ -794,20 +690,13 @@ public class Subspecies {
 			"IMP_BASIC",
 			"IMP_ADVANCED",
 			Race.DEMON,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 4),
-					new Value<>(PerkCategory.LUST, 10),
-					new Value<>(PerkCategory.ARCANE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 8),
-					new Value<>(PerkCategory.LUST, 4),
-					new Value<>(PerkCategory.ARCANE, 1)),
+			Map.of(PerkCategory.PHYSICAL,4,PerkCategory.LUST,10,PerkCategory.ARCANE,1),
+			Map.of(PerkCategory.PHYSICAL,8,PerkCategory.LUST,4,PerkCategory.ARCANE,1),
 			PresetColour.RACE_IMP,
 			SubspeciesPreference.ONE_LOW,
 			"A more powerful form of imp, standing at over 3'6\" tall.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.FOUR_COMMON)),
-			Util.newHashMapOfValues(),
+			Map.of(WorldRegion.SUBMISSION,SubspeciesSpawnRarity.FOUR_COMMON),
+			Map.of(),
 			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
@@ -865,36 +754,19 @@ public class Subspecies {
 					1,
 					4, false),
 			"Although [npc.namePos] body possesses a great strength and toughness, [npc.her] mind isn't exactly the quickest...",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 30f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, -5f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 2f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,30f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.SPELL_COST_MODIFIER,-5f,Attribute.DAMAGE_PHYSICAL,10f,Attribute.RESISTANCE_PHYSICAL,2f),
 			null,
 			"Milking Cows",
 			"Milking Cows'",
 			"COW_MORPH_BASIC",
 			"COW_MORPH_ADVANCED",
 			Race.COW_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 10),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,10,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_COW_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT, "An anthropomorphic cow, known as a 'cattle-morph' when bipedal, and a 'cattletaur' when the lower body is that of a feral cow or bull.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.ONE_VERY_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.TWO_RARE)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELDS,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.WOODLAND,SubspeciesSpawnRarity.ONE_VERY_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.TWO_RARE),
 			null, null) {
 		@Override
 		public String[] getHalfDemonName(GameCharacter character) {
@@ -944,39 +816,19 @@ public class Subspecies {
 					1, false),
 			"[npc.Name] always [npc.has] lots of energy, and [npc.she] [npc.verb(get)] excited about new things very easily."
 					+ " [npc.She] also [npc.has] an instinctive desire to display [npc.her] dominance over innocent cat-morphs...",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, 5f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.CAT_MORPH), 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,10f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.HEALTH_MAXIMUM,5f,Attribute.getRacialDamageAttribute(Race.CAT_MORPH),5f),
 			null,
 			"Canine Culture",
 			"Canine Cultures",
 			"DOG_MORPH_BASIC",
 			"DOG_MORPH_ADVANCED",
 			Race.DOG_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 3),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,3,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_DOG_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT, "An anthropomorphic dog, known as a 'dog-morph' when bipedal, and a 'dogtaur' when the lower body is that of an oversized feral dog.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.SAVANNAH, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.FOUR_COMMON)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.SUBMISSION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELDS,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.SAVANNAH,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.WOODLAND,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.JUNGLE_CITY,SubspeciesSpawnRarity.FOUR_COMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public String[] getHalfDemonName(GameCharacter character) {
@@ -1038,37 +890,21 @@ public class Subspecies {
 					1, false),
 			"[npc.NameIsFull] more intelligent than an average dog-morph, and [npc.has] strong urges to try and herd people around."
 					+ " [npc.She] also [npc.has] an instinctive desire to display [npc.her] dominance over innocent sheep-morphs...",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
-					new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 5f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, 5f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.getRaceFromId("innoxia_sheep")), 25f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,10f,Attribute.MAJOR_ARCANE,5f,Attribute.MAJOR_CORRUPTION,0f,Attribute.SPELL_COST_MODIFIER,5f,Attribute.HEALTH_MAXIMUM,5f,Attribute.getRacialDamageAttribute(Race.getRaceFromId("innoxia_sheep")),25f),
 			null,
 			"Canine Culture",
 			"Canine Cultures",
 			"DOG_MORPH_BASIC",
 			"DOG_MORPH_ADVANCED",
 			Race.DOG_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 6),
-					new Value<>(PerkCategory.LUST, 3),
-					new Value<>(PerkCategory.ARCANE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 6),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 1)),
+			Map.of(PerkCategory.PHYSICAL,6,PerkCategory.LUST,3,PerkCategory.ARCANE,1),
+			Map.of(PerkCategory.PHYSICAL,6,PerkCategory.LUST,1,PerkCategory.ARCANE,1),
 			PresetColour.RACE_DOG_MORPH,
 			SubspeciesPreference.TWO_AVERAGE, "A particularly energetic and intelligent dog-morph, which resembles an anthropomorphised border-collie."
 							+ " They are known as 'border-collie-morphs' when bipedal, and 'border-collie-taurs' when the lower body is that of an oversized feral border-collie."
 							+ " To be identified as a border-collie-morph, a character must be a dog-morph that has either upright or folded ears, and fluffy, black fur with white markings.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.FOUR_COMMON)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELDS,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.FOUR_COMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -1151,36 +987,22 @@ public class Subspecies {
 					1, false),
 			"[npc.NameIsFull] always ready to defend those [npc.she] [npc.verb(call)] [npc.her] friend, and, thanks to [npc.her] powerful dobermann's body, [npc.sheIs] able to do just that."
 					+ " [npc.She] also [npc.has] an instinctive desire to display [npc.her] dominance over innocent cat-morphs...",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 15f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 15f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.CAT_MORPH), 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,15f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.DAMAGE_PHYSICAL,15f,Attribute.getRacialDamageAttribute(Race.CAT_MORPH),5f),
 			null,
 			"Canine Culture",
 			"Canine Cultures",
 			"DOG_MORPH_BASIC",
 			"DOG_MORPH_ADVANCED",
 			Race.DOG_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 6),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,6,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_DOG_MORPH,
 			SubspeciesPreference.TWO_AVERAGE,
 			"A dog-morph which resembles an anthropomorphised dobermann."
 				+ " They are known as 'dobermanns' when bipedal, and 'dobermanntaurs' when the lower body is that of an oversized feral dobermann."
 				+ " To be identified as a dobermann, a character must be a dog-morph that has short, black fur, with either brown, dark-brown, or tan markings.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -1273,38 +1095,22 @@ public class Subspecies {
 					5,
 					1, false),
 			"[npc.NameHasFull] a primitive, wolf-like appearance, and possesses levels of strength and intelligence above that of most other dog-morphs.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 15f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 5f),
-					new Value<>(Attribute.HEALTH_MAXIMUM, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,15f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.DAMAGE_PHYSICAL,5f,Attribute.HEALTH_MAXIMUM,5f),
 			null,
 			"Canine Culture",
 			"Canine Cultures",
 			"DOG_MORPH_BASIC",
 			"DOG_MORPH_ADVANCED",
 			Race.DOG_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 6),
-					new Value<>(PerkCategory.LUST, 3),
-					new Value<>(PerkCategory.ARCANE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 6),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 1)),
+			Map.of(PerkCategory.PHYSICAL,6,PerkCategory.LUST,3,PerkCategory.ARCANE,1),
+			Map.of(PerkCategory.PHYSICAL,6,PerkCategory.LUST,1,PerkCategory.ARCANE,1),
 			PresetColour.RACE_DOG_MORPH,
 			SubspeciesPreference.TWO_AVERAGE,
 			"A strong, intelligent, and loyal subspecies of dog-morph, which resembles an anthropomorphised German-shepherd."
 				+ " They are known as 'German-shepherd-morphs' when bipedal, and 'German-shepherd-taurs' when the lower body is that of an oversized feral German-shepherd."
 				+ " To be identified as a German-shepherd-morph, a character must be a dog-morph that has upright ears, and fluffy, black fur with tan markings.",
-				Util.newHashMapOfValues(
-						new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.THREE_UNCOMMON),
-						new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TWO_RARE),
-						new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.THREE_UNCOMMON)),
-			Util.newHashMapOfValues(
-			new Value<>(WorldType.DOMINION, SubspeciesSpawnRarity.FOUR_COMMON),
-			new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+				Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELDS,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.THREE_UNCOMMON),
+			Map.of(WorldType.DOMINION,SubspeciesSpawnRarity.FOUR_COMMON,WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -1381,37 +1187,20 @@ public class Subspecies {
 					4,
 					1, false),
 			"[npc.NamePos] wolf-like body is very strong, and [npc.she] often [npc.verb(get)] powerful urges to try and dominate people [npc.she] [npc.verb(meet)].",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 20f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 5f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.DAMAGE_UNARMED, 25f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.getRaceFromId("innoxia_sheep")), 25f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,20f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,5f,Attribute.DAMAGE_PHYSICAL,10f,Attribute.DAMAGE_UNARMED,25f,Attribute.getRacialDamageAttribute(Race.getRaceFromId("innoxia_sheep")),25f),
 			null,
 			"Prowling Lupines",
 			"Prowling Lupines'",
 			"WOLF_MORPH_BASIC",
 			"WOLF_MORPH_ADVANCED",
 			Race.WOLF_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_WOLF_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic wolf, known as a 'wolf-morph' when bipedal, and a 'wolftaur' when the lower body is that of a typically-oversized feral wolf.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.THREE_UNCOMMON)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELDS,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.WOODLAND,SubspeciesSpawnRarity.THREE_UNCOMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public String getName(GameCharacter character) {
@@ -1510,35 +1299,19 @@ public class Subspecies {
 					4,
 					1, false),
 			"[npc.NameIsFull] very sly and nimble, and [npc.sheIs] able to use [npc.her] heightened senses to detect opportune moments in which to attack.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 1f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,5f,Attribute.MAJOR_CORRUPTION,0f,Attribute.ENERGY_SHIELDING,1f,Attribute.CRITICAL_DAMAGE,10f),
 			null,
 			"Skulking Vulpines",
 			"Skulking Vulpines",
 			"FOX_MORPH_BASIC",
 			"FOX_MORPH_ADVANCED",
 			Race.FOX_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 6),
-					new Value<>(PerkCategory.LUST, 3),
-					new Value<>(PerkCategory.ARCANE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 6),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 1)),
+			Map.of(PerkCategory.PHYSICAL,6,PerkCategory.LUST,3,PerkCategory.ARCANE,1),
+			Map.of(PerkCategory.PHYSICAL,6,PerkCategory.LUST,1,PerkCategory.ARCANE,1),
 			PresetColour.RACE_FOX_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT, "An anthropomorphic fox, known as a 'fox-morph' when bipedal, and a 'foxtaur' when the lower body is that of a typically-oversized feral fox.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.FOUR_COMMON)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELDS,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.WOODLAND,SubspeciesSpawnRarity.FOUR_COMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -1581,35 +1354,20 @@ public class Subspecies {
 					1, false),
 			"[npc.NameIsFull] very sly and nimble, and [npc.sheIs] able to use [npc.her] heightened senses to detect opportune moments in which to attack."
 					+ " As [npc.sheIsFull] adapted to arctic conditions, [npc.sheIs] also better able to resist incoming cold damage.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 1f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 10f),
-					new Value<>(Attribute.RESISTANCE_ICE, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,5f,Attribute.MAJOR_CORRUPTION,0f,Attribute.ENERGY_SHIELDING,1f,Attribute.CRITICAL_DAMAGE,10f,Attribute.RESISTANCE_ICE,5f),
 			null,
 			"Skulking Vulpines",
 			"Skulking Vulpines",
 			"FOX_MORPH_BASIC",
 			"FOX_MORPH_ADVANCED",
 			Race.FOX_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 1)),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,5,PerkCategory.ARCANE,1),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,1,PerkCategory.ARCANE,1),
 			PresetColour.RACE_FOX_MORPH_ARCTIC,
 			SubspeciesPreference.ONE_LOW,
 			"An anthropomorphic fox with white fur, known as an 'arctic-fox-morph' when bipedal, and an 'arctic-foxtaur' when the lower body is that of a typically-oversized feral fox.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.SNOW, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.TWO_RARE)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.SNOW,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.TWO_RARE),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -1659,36 +1417,21 @@ public class Subspecies {
 					4,
 					1, false),
 			"[npc.NameIsFull] very sly and nimble, and [npc.sheIs] able to use [npc.her] heightened senses to detect opportune moments in which to attack.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 1f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,5f,Attribute.MAJOR_CORRUPTION,0f,Attribute.ENERGY_SHIELDING,1f,Attribute.CRITICAL_DAMAGE,10f),
 			null,
 			"Skulking Vulpines",
 			"Skulking Vulpines",
 			"FOX_MORPH_BASIC",
 			"FOX_MORPH_ADVANCED",
 			Race.FOX_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 1)),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,5,PerkCategory.ARCANE,1),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,1,PerkCategory.ARCANE,1),
 			PresetColour.RACE_FOX_MORPH_FENNEC,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic fox with distinctive large ears, and with either tan, dirty blonde, or bleach-blonde fur."
 					+ " They are known as a 'fennec-morph' when bipedal, and a 'fennectaur' when the lower body is that of a typically-oversized feral fennec fox.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.DESERT, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.THREE_UNCOMMON)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.DESERT,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.THREE_UNCOMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -1765,20 +1508,13 @@ public class Subspecies {
 			"FOX_MORPH_BASIC",
 			"FOX_MORPH_ADVANCED",
 			Race.FOX_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 10)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 5)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,10),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,5),
 			PresetColour.RACE_FOX_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"A fox-morph, empowered by the gifts of a Lilin.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.YOUKO_FOREST, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(),
+			Map.of(WorldRegion.YOUKO_FOREST,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(),
 			null, List.of(SubspeciesFlag.DISABLE_SPAWN_PREFERENCE)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
@@ -1817,19 +1553,9 @@ public class Subspecies {
 		public Map<AbstractAttribute, Float> getStatusEffectAttributeModifiers(GameCharacter character) {
 			//TODO move the variable racial bonuses out of Subspecies and put them in the special youko perks
 			if(character!=null && character.getMaxTailCount()<9) {
-				return Util.newHashMapOfValues(
-						new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-						new Value<>(Attribute.MAJOR_ARCANE, (float) (10*character.getMaxTailCount())),
-//						new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-						new Value<>(Attribute.SPELL_COST_MODIFIER, (float) (10 + 5*character.getMaxTailCount())),
-						new Value<>(Attribute.CRITICAL_DAMAGE, (float) (20 + 5*character.getMaxTailCount())));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,(float) (10*character.getMaxTailCount()),Attribute.SPELL_COST_MODIFIER,(float) (10 + 5*character.getMaxTailCount()),Attribute.CRITICAL_DAMAGE,(float) (20 + 5*character.getMaxTailCount()));
 			} else {
-				return Util.newHashMapOfValues(
-						new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-						new Value<>(Attribute.MAJOR_ARCANE, 100f),
-//						new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-						new Value<>(Attribute.SPELL_COST_MODIFIER, 60f),
-						new Value<>(Attribute.CRITICAL_DAMAGE, 100f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,100f,Attribute.SPELL_COST_MODIFIER,60f,Attribute.CRITICAL_DAMAGE,100f);
 			}
 		}
 
@@ -1901,20 +1627,13 @@ public class Subspecies {
 			"FOX_MORPH_BASIC",
 			"FOX_MORPH_ADVANCED",
 			Race.FOX_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 10)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 5)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,10),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,5),
 			PresetColour.RACE_FOX_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An arctic-fox-morph, empowered by the gifts of a Lilin.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.YOUKO_FOREST, SubspeciesSpawnRarity.ONE_VERY_RARE)),
-			Util.newHashMapOfValues(),
+			Map.of(WorldRegion.YOUKO_FOREST,SubspeciesSpawnRarity.ONE_VERY_RARE),
+			Map.of(),
 			null, List.of(SubspeciesFlag.DISABLE_SPAWN_PREFERENCE)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
@@ -1955,19 +1674,9 @@ public class Subspecies {
 		@Override
 		public Map<AbstractAttribute, Float> getStatusEffectAttributeModifiers(GameCharacter character) {
 			if(character!=null && character.getMaxTailCount()<9) {
-				return Util.newHashMapOfValues(
-						new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-						new Value<>(Attribute.MAJOR_ARCANE, (float) (10*character.getMaxTailCount())),
-//						new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-						new Value<>(Attribute.SPELL_COST_MODIFIER, (float) (10 + 5*character.getMaxTailCount())),
-						new Value<>(Attribute.CRITICAL_DAMAGE, (float) (20 + 5*character.getMaxTailCount())));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,(float) (10*character.getMaxTailCount()),Attribute.SPELL_COST_MODIFIER,(float) (10 + 5*character.getMaxTailCount()),Attribute.CRITICAL_DAMAGE,(float) (20 + 5*character.getMaxTailCount()));
 			} else {
-				return Util.newHashMapOfValues(
-						new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-						new Value<>(Attribute.MAJOR_ARCANE, 100f),
-//						new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-						new Value<>(Attribute.SPELL_COST_MODIFIER, 60f),
-						new Value<>(Attribute.CRITICAL_DAMAGE, 100f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,100f,Attribute.SPELL_COST_MODIFIER,60f,Attribute.CRITICAL_DAMAGE,100f);
 			}
 		}
 		
@@ -2027,20 +1736,13 @@ public class Subspecies {
 			"FOX_MORPH_BASIC",
 			"FOX_MORPH_ADVANCED",
 			Race.FOX_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 10)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 5)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,10),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,5),
 			PresetColour.RACE_FOX_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"A fennec-morph, empowered by the gifts of a Lilin.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.YOUKO_FOREST, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE)),
-			Util.newHashMapOfValues(),
+			Map.of(WorldRegion.YOUKO_FOREST,SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE),
+			Map.of(),
 			null, List.of(SubspeciesFlag.DISABLE_SPAWN_PREFERENCE)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
@@ -2090,19 +1792,9 @@ public class Subspecies {
 		@Override
 		public Map<AbstractAttribute, Float> getStatusEffectAttributeModifiers(GameCharacter character) {
 			if(character!=null && character.getMaxTailCount()<9) {
-				return Util.newHashMapOfValues(
-						new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-						new Value<>(Attribute.MAJOR_ARCANE, (float) (10*character.getMaxTailCount())),
-//						new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-						new Value<>(Attribute.SPELL_COST_MODIFIER, (float) (10 + 5*character.getMaxTailCount())),
-						new Value<>(Attribute.CRITICAL_DAMAGE, (float) (20 + 5*character.getMaxTailCount())));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,(float) (10*character.getMaxTailCount()),Attribute.SPELL_COST_MODIFIER,(float) (10 + 5*character.getMaxTailCount()),Attribute.CRITICAL_DAMAGE,(float) (20 + 5*character.getMaxTailCount()));
 			} else {
-				return Util.newHashMapOfValues(
-						new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-						new Value<>(Attribute.MAJOR_ARCANE, 100f),
-//						new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-						new Value<>(Attribute.SPELL_COST_MODIFIER, 60f),
-						new Value<>(Attribute.CRITICAL_DAMAGE, 100f));
+				return Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,100f,Attribute.SPELL_COST_MODIFIER,60f,Attribute.CRITICAL_DAMAGE,100f);
 			}
 		}
 		@Override
@@ -2160,42 +1852,20 @@ public class Subspecies {
 					1, false),
 			"[npc.NamePos] body is incredibly agile, and [npc.she] [npc.verb(possess)] lightning reflexes."
 					+ " [npc.She] also [npc.has] an instinctive desire to display [npc.her] dominance over innocent harpies and rodent-morphs...",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 10f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.HARPY), 5f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.RAT_MORPH), 5f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.SQUIRREL_MORPH), 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.CRITICAL_DAMAGE,10f,Attribute.getRacialDamageAttribute(Race.HARPY),5f,Attribute.getRacialDamageAttribute(Race.RAT_MORPH),5f,Attribute.getRacialDamageAttribute(Race.SQUIRREL_MORPH),5f),
 			null,
 			"Curious Kitties",
 			"Curious Kitties",
 			"CAT_MORPH_BASIC",
 			"CAT_MORPH_ADVANCED",
 			Race.CAT_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 2),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 2),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,2,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,2,PerkCategory.ARCANE,0),
 			PresetColour.RACE_CAT_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic cat, known as a 'cat-morph' when bipedal, and a 'cat-taur' when the lower body is that of a typically-oversized feral cat.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.SAVANNAH, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.FOUR_COMMON)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.SUBMISSION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELDS,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.SAVANNAH,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.WOODLAND,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.JUNGLE_CITY,SubspeciesSpawnRarity.FOUR_COMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public String getName(GameCharacter character) {
@@ -2261,39 +1931,21 @@ public class Subspecies {
 					1, false),
 			"[npc.NamePos] body is incredibly agile, and [npc.she] [npc.verb(possess)] lightning reflexes."
 					+ " [npc.She] also [npc.has] an instinctive desire to display [npc.her] dominance over innocent harpies and rodent-morphs...",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 10f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 10f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.HARPY), 5f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.RAT_MORPH), 5f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.SQUIRREL_MORPH), 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,10f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.CRITICAL_DAMAGE,10f,Attribute.getRacialDamageAttribute(Race.HARPY),5f,Attribute.getRacialDamageAttribute(Race.RAT_MORPH),5f,Attribute.getRacialDamageAttribute(Race.SQUIRREL_MORPH),5f),
 			null,
 			"Curious Kitties",
 			"Curious Kitties",
 			"CAT_MORPH_BASIC",
 			"CAT_MORPH_ADVANCED",
 			Race.CAT_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 2),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,2,PerkCategory.ARCANE,0),
 			PresetColour.RACE_CAT_MORPH_LYNX,
 			SubspeciesPreference.TWO_AVERAGE,
 			"An anthropomorphic lynx, known as a 'lynx-morph' when bipedal, and a 'lynxtaur' when the lower body is that of a typically-oversized feral lynx."
 				+ " To be identified as a Lynx-morph, a character must be a cat-morph that has fluffy fur, tufted ears, a short tail, and side-fluff hair type.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELDS,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.WOODLAND,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -2362,35 +2014,21 @@ public class Subspecies {
 					4,
 					1, false),
 			"[npc.NameIsFull] extremely fast, and in short bursts, is capable of running at speeds far greater than any other race.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 25f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.CRITICAL_DAMAGE,25f),
 			List.of("[style.boldExcellent(100%)] chance of escape vs non-cheetah-morphs"),
 			"Curious Kitties",
 			"Curious Kitties",
 			"CAT_MORPH_BASIC",
 			"CAT_MORPH_ADVANCED",
 			Race.CAT_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 2),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,2,PerkCategory.ARCANE,0),
 			PresetColour.RACE_CAT_MORPH_CHEETAH,
 			SubspeciesPreference.TWO_AVERAGE,
 			"An anthropomorphic cheetah, known as a 'cheetah-morph' when bipedal, and a 'cheetahtaur' when the lower body is that of a typically-oversized feral cheetah."
 				+ " To be identified as a cheetah-morph, a character must be a cat-morph that has short, spotted fur and not identified as other feline morphs.",
-				Util.newHashMapOfValues(
-						new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-						new Value<>(WorldRegion.SAVANNAH, SubspeciesSpawnRarity.TWO_RARE),
-						new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+				Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.SAVANNAH,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -2467,38 +2105,21 @@ public class Subspecies {
 					1, false),
 			"[npc.NamePos] body is incredibly agile, and [npc.she] [npc.verb(possess)] lightning reflexes."
 					+ " [npc.She] also [npc.has] an instinctive desire to display [npc.her] dominance over innocent harpies and rodent-morphs...",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 10f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.HARPY), 5f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.RAT_MORPH), 5f),
-					new Value<>(Attribute.getRacialDamageAttribute(Race.SQUIRREL_MORPH), 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.CRITICAL_DAMAGE,10f,Attribute.getRacialDamageAttribute(Race.HARPY),5f,Attribute.getRacialDamageAttribute(Race.RAT_MORPH),5f,Attribute.getRacialDamageAttribute(Race.SQUIRREL_MORPH),5f),
 			null,
 			"Curious Kitties",
 			"Curious Kitties",
 			"CAT_MORPH_BASIC",
 			"CAT_MORPH_ADVANCED",
 			Race.CAT_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 2),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,2,PerkCategory.ARCANE,0),
 			PresetColour.RACE_CAT_MORPH_CARACAL,
 			SubspeciesPreference.TWO_AVERAGE,
 			"An anthropomorphic caracal, known as a 'caracal-morph' when bipedal, and a 'caracaltaur' when the lower body is that of a typically-oversized feral caracal."
 				+ " To be identified as a caracal-morph, a character must be a cat-morph with tufted ears.",
-				Util.newHashMapOfValues(
-						new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-						new Value<>(WorldRegion.SAVANNAH, SubspeciesSpawnRarity.TWO_RARE),
-						new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+				Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.SAVANNAH,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -2946,38 +2567,20 @@ public class Subspecies {
 					1,
 					true),
 			"While [npc.namePos] body possesses remarkable strength and speed, [npc.sheIs] not the sharpest tool in the shed, and [npc.verb(struggle)] more than most when it comes to harnessing the arcane.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
-					new Value<>(Attribute.MAJOR_ARCANE, -5f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, -10f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 25f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 25f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,25f,Attribute.MAJOR_ARCANE,-5f,Attribute.MAJOR_CORRUPTION,0f,Attribute.SPELL_COST_MODIFIER,-10f,Attribute.DAMAGE_PHYSICAL,25f,Attribute.CRITICAL_DAMAGE,25f),
 			null,
 			"Equine Encyclopedia",
 			"Equine Encyclopedias",
 			"HORSE_MORPH_BASIC",
 			"HORSE_MORPH_ADVANCED",
 			Race.HORSE_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 2),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,2,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_HORSE_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic, bipedal horse.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.FOUR_COMMON)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELDS,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.JUNGLE_CITY,SubspeciesSpawnRarity.FOUR_COMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -3045,37 +2648,20 @@ public class Subspecies {
 					1,
 					true),
 			"Although physically weaker than a regular horse-morph, [npc.nameHasFull] a special bond with the arcane, and [npc.is] able to cast many spells before exhausting [npc.her] aura.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 20f),
-					new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 50f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 5f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,20f,Attribute.MAJOR_ARCANE,5f,Attribute.MAJOR_CORRUPTION,0f,Attribute.SPELL_COST_MODIFIER,50f,Attribute.DAMAGE_PHYSICAL,5f,Attribute.CRITICAL_DAMAGE,10f),
 			null,
 			"Equine Encyclopedia",
 			"Equine Encyclopedias",
 			"HORSE_MORPH_BASIC",
 			"HORSE_MORPH_ADVANCED",
 			Race.HORSE_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 3),
-					new Value<>(PerkCategory.LUST, 2),
-					new Value<>(PerkCategory.ARCANE, 3)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 4),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 3)),
+			Map.of(PerkCategory.PHYSICAL,3,PerkCategory.LUST,2,PerkCategory.ARCANE,3),
+			Map.of(PerkCategory.PHYSICAL,4,PerkCategory.LUST,1,PerkCategory.ARCANE,3),
 			PresetColour.RACE_UNICORN,
 			SubspeciesPreference.ONE_LOW,
 			"An anthropomorphic, bipedal horse, who has a single magical horn growing from their forehead.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.DOMINION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ONE_VERY_RARE)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.WOODLAND,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.DOMINION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.ONE_VERY_RARE),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -3148,35 +2734,20 @@ public class Subspecies {
 					1,
 					true),
 			"Although physically weaker than a regular horse-morph, [npc.nameIsFull] a lot more agile, allowing [npc.herHim] to avoid incoming damage.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 15f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,15f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.DAMAGE_PHYSICAL,10f,Attribute.CRITICAL_DAMAGE,10f),
 			null,
 			"Equine Encyclopedia",
 			"Equine Encyclopedias",
 			"HORSE_MORPH_BASIC",
 			"HORSE_MORPH_ADVANCED",
 			Race.HORSE_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_PEGASUS,
 			SubspeciesPreference.ONE_LOW,
 			"An anthropomorphic, bipedal horse, who has a pair of feathered wings growing from their back.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ONE_VERY_RARE)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.FIELDS,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.ONE_VERY_RARE),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -3246,35 +2817,20 @@ public class Subspecies {
 					1,
 					true),
 			"Possessing both feathered wings and a unicorn horn, [npc.nameIsFull] classified as a powerful alicorn, and [npc.verb(find)] it almost effortlessly trivial to cast spells.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 15f),
-					new Value<>(Attribute.MAJOR_ARCANE, 15f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 75f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,15f,Attribute.MAJOR_ARCANE,15f,Attribute.MAJOR_CORRUPTION,0f,Attribute.SPELL_COST_MODIFIER,75f,Attribute.DAMAGE_PHYSICAL,10f,Attribute.CRITICAL_DAMAGE,50f),
 			null,
 			"Equine Encyclopedia",
 			"Equine Encyclopedias",
 			"HORSE_MORPH_BASIC",
 			"HORSE_MORPH_ADVANCED",
 			Race.HORSE_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 3)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 3)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,1,PerkCategory.ARCANE,3),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,1,PerkCategory.ARCANE,3),
 			PresetColour.RACE_ALICORN,
 			SubspeciesPreference.ONE_LOW,
 			"An anthropomorphic, bipedal horse, who has both a pair of feathered wings growing from their back, as well as a single magical horn growing from their forehead.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -3338,38 +2894,20 @@ public class Subspecies {
 			"centauresses",
 			null,
 			"Thanks to having the lower body of a horse, [npc.nameIsFull] capable of running at great speed, and [npc.is] also capable of dealing significant physical damage.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 35f),
-					new Value<>(Attribute.MAJOR_ARCANE, -5f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, -10f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 25f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,35f,Attribute.MAJOR_ARCANE,-5f,Attribute.MAJOR_CORRUPTION,0f,Attribute.SPELL_COST_MODIFIER,-10f,Attribute.DAMAGE_PHYSICAL,25f,Attribute.CRITICAL_DAMAGE,50f),
 			null,
 			"Centaurs & More",
 			"Centaurs & More",
 			"CENTAUR_BASIC",
 			"CENTAUR_ADVANCED",
 			Race.HORSE_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 2),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,2,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_CENTAUR,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"Anyone who has the feral, quadrupedal lower body of a horse is classified as a centaur.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.FOUR_COMMON)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ONE_VERY_RARE)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELDS,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.JUNGLE_CITY,SubspeciesSpawnRarity.FOUR_COMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.ONE_VERY_RARE),
 			null, null) {
 		@Override
 		public boolean isNonBiped() {
@@ -3419,35 +2957,20 @@ public class Subspecies {
 			"pegatauresses",
 			null,
 			"Although physically weaker than a regular centaur, [npc.nameIsFull] a lot more agile, allowing [npc.herHim] to avoid incoming damage.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 30f),
-					new Value<>(Attribute.MAJOR_ARCANE, 5f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,30f,Attribute.MAJOR_ARCANE,5f,Attribute.MAJOR_CORRUPTION,0f,Attribute.DAMAGE_PHYSICAL,10f,Attribute.CRITICAL_DAMAGE,10f),
 			null,
 			"Centaurs & More",
 			"Centaurs & More",
 			"CENTAUR_BASIC",
 			"CENTAUR_ADVANCED",
 			Race.HORSE_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_PEGATAUR,
 			SubspeciesPreference.ONE_LOW,
 			"Anyone who has the feral, winged, quadrupedal lower body of a horse is classified as a pegataur.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.FIELDS,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE),
 			null, null) {
 		@Override
 		public boolean isNonBiped() {
@@ -3499,36 +3022,20 @@ public class Subspecies {
 			"unitauresses",
 			null,
 			"Although physically weaker than a regular horse-morph, [npc.nameHasFull] a special bond with the arcane, and [npc.is] able to cast many spells before exhausting [npc.her] aura.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 50f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 5f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 10f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,25f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.SPELL_COST_MODIFIER,50f,Attribute.DAMAGE_PHYSICAL,5f,Attribute.CRITICAL_DAMAGE,10f),
 			null,
 			"Centaurs & More",
 			"Centaurs & More",
 			"CENTAUR_BASIC",
 			"CENTAUR_ADVANCED",
 			Race.HORSE_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 1)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,5,PerkCategory.ARCANE,1),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,1),
 			PresetColour.RACE_UNICORN,
 			SubspeciesPreference.ONE_LOW,
 			"Anyone who has the feral, quadrupedal lower body of a horse, along with a single unicorn horn, is classified as a unitaur.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.FIELDS,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE),
 			null, null) {
 		@Override
 		public boolean isNonBiped() {
@@ -3583,35 +3090,20 @@ public class Subspecies {
 			"alitauresses",
 			null,
 			"Possessing both feathered wings and a unicorn horn, [npc.nameIsFull] classified as a powerful alicorn, and [npc.verb(find)] it almost effortlessly trivial to cast spells.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
-					new Value<>(Attribute.MAJOR_ARCANE, 15f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 75f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,25f,Attribute.MAJOR_ARCANE,15f,Attribute.MAJOR_CORRUPTION,0f,Attribute.SPELL_COST_MODIFIER,75f,Attribute.DAMAGE_PHYSICAL,10f,Attribute.CRITICAL_DAMAGE,50f),
 			null,
 			"Centaurs & More",
 			"Centaurs & More",
 			"CENTAUR_BASIC",
 			"CENTAUR_ADVANCED",
 			Race.HORSE_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 2)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 2)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,1,PerkCategory.ARCANE,2),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,1,PerkCategory.ARCANE,2),
 			PresetColour.RACE_ALICORN,
 			SubspeciesPreference.ONE_LOW,
 			"Anyone who has the feral, winged, quadrupedal lower body of a horse, along with a single unicorn horn, is classified as an alitaur.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE),
 			null, null) {
 		@Override
 		public boolean isNonBiped() {
@@ -3684,38 +3176,21 @@ public class Subspecies {
 					true),
 			"While [npc.namePos] body possesses an impressive level of both strength and speed, [npc.sheIs] not the sharpest tool in the shed, and [npc.verb(struggle)] more than most when it comes to harnessing the arcane."
 					+ " [npc.She] also [npc.has] a high resistance to both natural and arcane heat.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
-					new Value<>(Attribute.MAJOR_ARCANE, -5f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, -10f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 20f),
-					new Value<>(Attribute.RESISTANCE_FIRE, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,25f,Attribute.MAJOR_ARCANE,-5f,Attribute.MAJOR_CORRUPTION,0f,Attribute.SPELL_COST_MODIFIER,-10f,Attribute.DAMAGE_PHYSICAL,10f,Attribute.CRITICAL_DAMAGE,20f,Attribute.RESISTANCE_FIRE,5f),
 			null,
 			"Equine Encyclopedia",
 			"Equine Encyclopedias",
 			"HORSE_MORPH_BASIC",
 			"HORSE_MORPH_ADVANCED",
 			Race.HORSE_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 2),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,2,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.BASE_BLACK,
 			SubspeciesPreference.ONE_LOW,
 			"An anthropomorphic horse with black-and-white striped fur, known as a 'zebra-morph' when bipedal, and a 'zebrataur' when the lower body is that of a feral zebra."
 					+" To be identified as a zebra-morph, a character must be a horse-morph that has black-and-white striped hair, with a zebra-morph's tail.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.SAVANNAH, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.THREE_UNCOMMON)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.SAVANNAH,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.THREE_UNCOMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -3798,34 +3273,20 @@ public class Subspecies {
 					1,
 					4, false),
 			"[npc.NamePos] body is very well suited to resisting both natural and arcane cold, and is also particularly strong and hardy.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 25f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 2f),
-					new Value<>(Attribute.RESISTANCE_ICE, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,25f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.DAMAGE_PHYSICAL,10f,Attribute.RESISTANCE_PHYSICAL,2f,Attribute.RESISTANCE_ICE,5f),
 			null,
 			"Reindeer Migrations",
 			"Reindeer Migrations",
 			"REINDEER_MORPH_BASIC",
 			"REINDEER_MORPH_ADVANCED",
 			Race.REINDEER_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 2),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,2,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_REINDEER_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic reindeer, known as a 'reindeer-morph' when bipedal, and a 'reindeertaur' when the lower body is that of a feral reindeer.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.SNOW, SubspeciesSpawnRarity.THREE_UNCOMMON)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.TWO_RARE)),
+			Map.of(WorldRegion.SNOW,SubspeciesSpawnRarity.THREE_UNCOMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.TWO_RARE),
 			null, null) {
 		@Override
 		public int getSubspeciesWeighting(Body body, AbstractRace race) {
@@ -3860,35 +3321,20 @@ public class Subspecies {
 					0,
 					1, false),
 			"[npc.NamePos] body is incredibly tough, and [npc.she] [npc.verb(possess)] lightning reflexes, as well as the strength required to make the most of any sudden attacks.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 30f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 25f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,30f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.DAMAGE_PHYSICAL,10f,Attribute.CRITICAL_DAMAGE,25f,Attribute.RESISTANCE_PHYSICAL,5f),
 			null,
 			"Rasselin' Gators",
 			"Rasselin' Gators",
 			"ALLIGATOR_MORPH_BASIC",
 			"ALLIGATOR_MORPH_ADVANCED",
 			Race.ALLIGATOR_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 10),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,10,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_ALLIGATOR_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic alligator, known as an 'alligator-morph' when bipedal, and an 'alligatortaur' when the lower body is that of a typically-oversized feral alligator.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.RIVER, SubspeciesSpawnRarity.ONE_VERY_RARE)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ONE_VERY_RARE)),
+			Map.of(WorldRegion.SUBMISSION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.RIVER,SubspeciesSpawnRarity.ONE_VERY_RARE),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.ONE_VERY_RARE),
 			null, null) {
 		@Override
 		public int getSubspeciesWeighting(Body body, AbstractRace race) {
@@ -3915,31 +3361,20 @@ public class Subspecies {
 			null,
 			"Due to [npc.her] soft, slimy body, [npc.nameIsFull] almost completely immune to physical damage, but [npc.she] is also unable to inflict any significant damage while unarmed."
 					+ " [npc.She] can also morph [npc.her] body at will, allowing [npc.herHim] to take on any form that [npc.she] [npc.verb(desire)].",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 0f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 25f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,0f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,25f),
 			List.of(),
 			"Slimy Fun",
 			"Slimy Funs",
 			"SLIME_BASIC",
 			"SLIME_ADVANCED",
 			Race.SLIME,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 2),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,2,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
 			PresetColour.RACE_SLIME,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"Someone who is made completely of slime, with a sold core suspended in the place where their heart should be.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.FOUR_COMMON)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.BAT_CAVERNS, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.SUBMISSION,SubspeciesSpawnRarity.FOUR_COMMON),
+			Map.of(WorldType.BAT_CAVERNS,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public AbstractItemType getTransformativeItem(GameCharacter owner) {
@@ -4105,35 +3540,20 @@ public class Subspecies {
 					4,
 					1, false),
 			"[npc.NameIsFull] very agile and alert, and [npc.is] capable of leaping great distances with [npc.her] powerful [npc.legs].",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 0f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.ENERGY_SHIELDING, 1f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,0f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.ENERGY_SHIELDING,1f),
 			null,
 			"Chasing Squirrels",
 			"Chasing Squirrels'",
 			"SQUIRREL_MORPH_BASIC",
 			"SQUIRREL_MORPH_ADVANCED",
 			Race.SQUIRREL_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 2),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,2,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_SQUIRREL_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic squirrel, known as a 'squirrel-morph' when bipedal, and a 'squirreltaur' when the lower body is that of an oversized feral squirrel.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.FOUR_COMMON)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELDS,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.WOODLAND,SubspeciesSpawnRarity.FOUR_COMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public int getSubspeciesWeighting(Body body, AbstractRace race) {
@@ -4169,38 +3589,20 @@ public class Subspecies {
 					6,
 					1, false),
 			"[npc.NamePos] body is very hardy, and [npc.she] [npc.has] both a high resistance to, and affinity with, arcane poison.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 0f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 10f),
-					new Value<>(Attribute.DAMAGE_POISON, 15f),
-					new Value<>(Attribute.RESISTANCE_POISON, 5f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,0f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,10f,Attribute.DAMAGE_POISON,15f,Attribute.RESISTANCE_POISON,5f),
 			null,
 			"Causing Mischief",
 			"Causing Mischiefs",
 			"RAT_MORPH_BASIC",
 			"RAT_MORPH_ADVANCED",
 			Race.RAT_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 2),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,2,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_RAT_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic rat, known as a 'rat-morph' when bipedal, and a 'rat-taur' when the lower body is that of an oversized feral rat.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.THREE_UNCOMMON)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ONE_VERY_RARE)), null, null) {
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.SUBMISSION,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELDS,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.JUNGLE_CITY,SubspeciesSpawnRarity.THREE_UNCOMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.ONE_VERY_RARE), null, null) {
 		@Override
 		public int getSubspeciesWeighting(Body body, AbstractRace race) {
 			if(race==Race.RAT_MORPH) {
@@ -4233,37 +3635,20 @@ public class Subspecies {
 					1, false),
 			"[npc.NameIsFull] very agile and alert, and [npc.is] capable of short bursts of incredible speed."
 					+ " [npc.Her] body, whether [npc.she] [npc.verb(like)] it or not, is also adapted for producing as many offspring as possible.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 5f),
-					new Value<>(Attribute.FERTILITY, 50f),
-					new Value<>(Attribute.VIRILITY, 50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.CRITICAL_DAMAGE,5f,Attribute.FERTILITY,50f,Attribute.VIRILITY,50f),
 			null,
 			"Bunny Litters",
 			"Bunny Litters'",
 			"RABBIT_MORPH_BASIC",
 			"RABBIT_MORPH_ADVANCED",
 			Race.RABBIT_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 2),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,2,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_RABBIT_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic rabbit, known as a 'rabbit-morph' when bipedal, and a 'rabbit-taur' when the lower body is that of an oversized feral rabbit.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.THREE_UNCOMMON)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELDS,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.WOODLAND,SubspeciesSpawnRarity.THREE_UNCOMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public String[] getHalfDemonName(GameCharacter character) {
@@ -4321,38 +3706,21 @@ public class Subspecies {
 					1, false),
 			"[npc.NameIsFull] very agile and alert, and [npc.is] capable of short bursts of incredible speed."
 					+ " [npc.Her] body, whether [npc.she] [npc.verb(like)] it or not, is also adapted for producing as many offspring as possible.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.CRITICAL_DAMAGE, 5f),
-					new Value<>(Attribute.FERTILITY, 50f),
-					new Value<>(Attribute.VIRILITY, 50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.CRITICAL_DAMAGE,5f,Attribute.FERTILITY,50f,Attribute.VIRILITY,50f),
 			null,
 			"Bunny Litters",
 			"Bunny Litters'",
 			"RABBIT_MORPH_BASIC",
 			"RABBIT_MORPH_ADVANCED",
 			Race.RABBIT_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 2),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,2,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_RABBIT_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic rabbit which has floppy ears instead of the usual upright ones."
 					+ " Known as a 'lop-rabbit-morph' when bipedal, and a 'lop-rabbit-taur' when the lower body is that of an oversized feral lop-rabbit.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.DOMINION, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.FOUR_COMMON),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.THREE_UNCOMMON)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.DOMINION,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELDS,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.FOUR_COMMON,WorldRegion.WOODLAND,SubspeciesSpawnRarity.THREE_UNCOMMON),
+			Map.of(WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, null) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -4420,39 +3788,20 @@ public class Subspecies {
 			},
 			"Due to their unique echolocation ability, all bat-morphs have a natural desire to talk as much as possible."
 					+ " Due to this, [npc.name] continuously [npc.verb(play)] out conversations in [npc.her] head, allowing [npc.herHim] to think up new and exciting ways to seduce people before having ever met them.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 0f),
-					new Value<>(Attribute.DAMAGE_LUST, 15f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,0f,Attribute.DAMAGE_LUST,15f),
 			null,
 			"Flying Foxes",
 			"Flying Foxes'",
 			"BAT_MORPH_BASIC",
 			"BAT_MORPH_ADVANCED",
 			Race.BAT_MORPH,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 2),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,2,PerkCategory.LUST,1,PerkCategory.ARCANE,0),
 			PresetColour.RACE_BAT_MORPH,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic, bipedal bat.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.SUBMISSION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.JUNGLE, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.SUBMISSION, SubspeciesSpawnRarity.ONE_VERY_RARE),
-				new Value<>(WorldType.BAT_CAVERNS, SubspeciesSpawnRarity.FOUR_COMMON),
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE)),
+			Map.of(WorldRegion.SUBMISSION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldRegion.FIELDS,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.WOODLAND,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.JUNGLE,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.JUNGLE_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.SUBMISSION,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldType.BAT_CAVERNS,SubspeciesSpawnRarity.FOUR_COMMON,WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE),
 			null, null) {
 		@Override
 		public int getSubspeciesWeighting(Body body, AbstractRace race) {
@@ -4492,39 +3841,20 @@ public class Subspecies {
 				}
 			},
 			"[npc.NameIsFull] obsessed with [npc.her] appearance, and wouldn't think it unusual for someone to want to spend at least half of their waking hours preening themselves in order to look as attractive as possible.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 0f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 5f),
-					new Value<>(Attribute.DAMAGE_LUST, 15f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,0f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,5f,Attribute.DAMAGE_LUST,15f),
 			null,
 			"All About Harpies",
 			"All About Harpies'",
 			"HARPY_BASIC",
 			"HARPY_ADVANCED",
 			Race.HARPY,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
 			PresetColour.RACE_HARPY,
 			SubspeciesPreference.FOUR_ABUNDANT,
 			"An anthropomorphic, bipedal bird. Typically only possessing non-human arms, legs, eyes, ears, and hair.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.SAVANNAH, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.DESERT_CITY, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.JUNGLE, SubspeciesSpawnRarity.TWO_RARE),
-					new Value<>(WorldRegion.JUNGLE_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.FOUR_COMMON),
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.FIELDS,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.WOODLAND,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.SAVANNAH,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.DESERT_CITY,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.JUNGLE,SubspeciesSpawnRarity.TWO_RARE,WorldRegion.JUNGLE_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.HARPY_NEST,SubspeciesSpawnRarity.FOUR_COMMON,WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, List.of(SubspeciesFlag.DISABLE_SPAWN_PREFERENCE,
 				SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
 		@Override
@@ -4617,35 +3947,20 @@ public class Subspecies {
 				}
 			},
 			"[npc.NameIsFull] obsessed with [npc.her] appearance, and wouldn't think it unusual for someone to want to spend at least half of their waking hours preening themselves in order to look as attractive as possible.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 0f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 5f),
-					new Value<>(Attribute.DAMAGE_LUST, 15f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,0f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,5f,Attribute.DAMAGE_LUST,15f),
 			null,
 			"All About Harpies",
 			"All About Harpies'",
 			"HARPY_BASIC",
 			"HARPY_ADVANCED",
 			Race.HARPY,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
 			PresetColour.BASE_BLACK,
 			SubspeciesPreference.ONE_LOW,
 			"An anthropomorphic, bipedal raven, with dark black feathers. Typically only possessing non-human arms, legs, eyes, ears, and hair.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.TWO_RARE),
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.FIELDS,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.WOODLAND,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.HARPY_NEST,SubspeciesSpawnRarity.TWO_RARE,WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, List.of(SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -4721,35 +4036,20 @@ public class Subspecies {
 				}
 			},
 			"[npc.NameIsFull] obsessed with [npc.her] appearance, and wouldn't think it unusual for someone to want to spend at least half of their waking hours preening themselves in order to look as attractive as possible.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 0f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 5f),
-					new Value<>(Attribute.DAMAGE_LUST, 15f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,0f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,5f,Attribute.DAMAGE_LUST,15f),
 			null,
 			"All About Harpies",
 			"All About Harpies'",
 			"HARPY_BASIC",
 			"HARPY_ADVANCED",
 			Race.HARPY,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
 			PresetColour.BASE_WHITE,
 			SubspeciesPreference.ONE_LOW,
 			"An anthropomorphic, bipedal swan, with white feathers and either ebony or grey leg skin. Typically only possessing non-human arms, legs, eyes, ears, and hair.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.RIVER, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-				new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.TWO_RARE),
-				new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.FIELDS,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.RIVER,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.HARPY_NEST,SubspeciesSpawnRarity.TWO_RARE,WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, List.of(SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -4824,35 +4124,20 @@ public class Subspecies {
 				}
 			},
 			"[npc.NameIsFull] obsessed with [npc.her] appearance, and wouldn't think it unusual for someone to want to spend at least half of their waking hours preening themselves in order to look as attractive as possible.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 0f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 5f),
-					new Value<>(Attribute.DAMAGE_LUST, 15f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,0f,Attribute.MAJOR_CORRUPTION,5f,Attribute.DAMAGE_LUST,15f),
 			null,
 			"All About Harpies",
 			"All About Harpies'",
 			"HARPY_BASIC",
 			"HARPY_ADVANCED",
 			Race.HARPY,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 2),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 2),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 0)),
+			Map.of(PerkCategory.PHYSICAL,2,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
+			Map.of(PerkCategory.PHYSICAL,2,PerkCategory.LUST,5,PerkCategory.ARCANE,0),
 			PresetColour.BASE_GREY_LIGHT,
 			SubspeciesPreference.ONE_LOW,
 			"An anthropomorphic, bipedal bald eagle, dark brown feathers covering their body and white feathers on their head. Typically only possessing non-human arms, legs, eyes, ears, and hair.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.FIELDS, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.WOODLAND, SubspeciesSpawnRarity.THREE_UNCOMMON),
-					new Value<>(WorldRegion.FIELD_CITY, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.ONE_VERY_RARE),
-					new Value<>(WorldType.NIGHTLIFE_CLUB, SubspeciesSpawnRarity.FOUR_COMMON)),
+			Map.of(WorldRegion.FIELDS,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.WOODLAND,SubspeciesSpawnRarity.THREE_UNCOMMON,WorldRegion.FIELD_CITY,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.HARPY_NEST,SubspeciesSpawnRarity.ONE_VERY_RARE,WorldType.NIGHTLIFE_CLUB,SubspeciesSpawnRarity.FOUR_COMMON),
 			null, List.of(SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -4939,35 +4224,21 @@ public class Subspecies {
 			},
 			"While just as obsessed with [npc.her] looks as other harpies, [npc.nameIsFull] also naturally talented at harnessing the arcane, allowing [npc.herHim] to learn and cast spells with relative ease."
 				+ " In particular, [npc.she] [npc.has] an exceptionally high affinity with arcane fire...",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.MAJOR_ARCANE, 10f),
-					new Value<>(Attribute.MAJOR_CORRUPTION, 10f),
-					new Value<>(Attribute.DAMAGE_FIRE, 75f),
-					new Value<>(Attribute.RESISTANCE_FIRE, 5f),
-					new Value<>(Attribute.DAMAGE_LUST, 15f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.MAJOR_ARCANE,10f,Attribute.MAJOR_CORRUPTION,10f,Attribute.DAMAGE_FIRE,75f,Attribute.RESISTANCE_FIRE,5f,Attribute.DAMAGE_LUST,15f),
 			null,
 			"All About Harpies",
 			"All About Harpies'",
 			"HARPY_BASIC",
 			"HARPY_ADVANCED",
 			Race.HARPY,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 3),
-					new Value<>(PerkCategory.ARCANE, 5)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 1),
-					new Value<>(PerkCategory.LUST, 3),
-					new Value<>(PerkCategory.ARCANE, 5)),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,3,PerkCategory.ARCANE,5),
+			Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,3,PerkCategory.ARCANE,5),
 			PresetColour.BASE_ORANGE,
 			SubspeciesPreference.ONE_LOW,
 			"An anthropomorphic, bipedal, mythological bird, whose feathers are either glowing red, orange, or yellow, or are actually made out of arcane fire."
 					+ " They are extremely rare and typically only possess non-human arms, legs, eyes, ears, and hair.",
-			Util.newHashMapOfValues(
-					new Value<>(WorldRegion.VOLCANO, SubspeciesSpawnRarity.TWO_RARE)),
-			Util.newHashMapOfValues(
-					new Value<>(WorldType.HARPY_NEST, SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE)),
+			Map.of(WorldRegion.VOLCANO,SubspeciesSpawnRarity.TWO_RARE),
+			Map.of(WorldType.HARPY_NEST,SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE),
 			null, List.of(SubspeciesFlag.DISABLE_FURRY_PREFERENCE)) {
 		@Override
 		public void applySpeciesChanges(Body body) {
@@ -5037,27 +4308,18 @@ public class Subspecies {
 			"fire elementals",
 			null,
 			"[npc.NameIsFull] a summoned elemental, currently bound to the school of Fire.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 15f),
-					new Value<>(Attribute.DAMAGE_FIRE, 50f),
-					new Value<>(Attribute.RESISTANCE_FIRE, 50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,15f,Attribute.DAMAGE_FIRE,50f,Attribute.RESISTANCE_FIRE,50f),
 			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
 			"Fire Elementals",
 			"Fire Elementals'",
 			"ELEMENTAL_FIRE_BASIC",
 			"ELEMENTAL_FIRE_ADVANCED",
 			Race.ELEMENTAL,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 5)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 5)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,5),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,5),
 			PresetColour.SPELL_SCHOOL_FIRE,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An arcane elemental bound to the school of Fire.", null, Util.newHashMapOfValues(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			"An arcane elemental bound to the school of Fire.", null, Map.of(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return 50_000;
@@ -5116,27 +4378,18 @@ public class Subspecies {
 			"earth elementals",
 			null,
 			"[npc.NameIsFull] a summoned elemental, currently bound to the school of Earth.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 50f),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 50f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,50f,Attribute.DAMAGE_PHYSICAL,50f,Attribute.RESISTANCE_PHYSICAL,50f),
 			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
 			"Earth Elementals",
 			"Earth Elementals'",
 			"ELEMENTAL_EARTH_BASIC",
 			"ELEMENTAL_EARTH_ADVANCED",
 			Race.ELEMENTAL,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 5)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 1),
-					new Value<>(PerkCategory.ARCANE, 5)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,5),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,5),
 			PresetColour.SPELL_SCHOOL_EARTH,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An arcane elemental bound to the school of Earth.", null, Util.newHashMapOfValues(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			"An arcane elemental bound to the school of Earth.", null, Map.of(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return ELEMENTAL_FIRE.getSubspeciesOverridePriority();
@@ -5193,27 +4446,18 @@ public class Subspecies {
 			"water elementals",
 			null,
 			"[npc.NameIsFull] a summoned elemental, currently bound to the school of Water.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 15f),
-					new Value<>(Attribute.DAMAGE_ICE, 50f),
-					new Value<>(Attribute.RESISTANCE_ICE, 50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,15f,Attribute.DAMAGE_ICE,50f,Attribute.RESISTANCE_ICE,50f),
 			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
 			"Water Elementals",
 			"Water Elementals'",
 			"ELEMENTAL_WATER_BASIC",
 			"ELEMENTAL_WATER_ADVANCED",
 			Race.ELEMENTAL,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 3),
-					new Value<>(PerkCategory.ARCANE, 5)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 3),
-					new Value<>(PerkCategory.ARCANE, 5)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,3,PerkCategory.ARCANE,5),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,3,PerkCategory.ARCANE,5),
 			PresetColour.SPELL_SCHOOL_WATER,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An arcane elemental bound to the school of Water.", null, Util.newHashMapOfValues(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			"An arcane elemental bound to the school of Water.", null, Map.of(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return ELEMENTAL_FIRE.getSubspeciesOverridePriority();
@@ -5269,27 +4513,18 @@ public class Subspecies {
 			"air elementals",
 			null,
 			"[npc.NameIsFull] a summoned elemental, currently bound to the school of Air.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
-					new Value<>(Attribute.DAMAGE_POISON, 50f),
-					new Value<>(Attribute.RESISTANCE_POISON, 50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,5f,Attribute.DAMAGE_POISON,50f,Attribute.RESISTANCE_POISON,50f),
 			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
 			"Air Elementals",
 			"Air Elementals'",
 			"ELEMENTAL_AIR_BASIC",
 			"ELEMENTAL_AIR_ADVANCED",
 			Race.ELEMENTAL,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 5)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 5)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,5,PerkCategory.ARCANE,5),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,5,PerkCategory.ARCANE,5),
 			PresetColour.SPELL_SCHOOL_AIR,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An arcane elemental bound to the school of Air.", null, Util.newHashMapOfValues(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			"An arcane elemental bound to the school of Air.", null, Map.of(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return ELEMENTAL_FIRE.getSubspeciesOverridePriority();
@@ -5345,27 +4580,18 @@ public class Subspecies {
 			"arcane elementals",
 			null,
 			"[npc.NameIsFull] a summoned elemental, currently bound to the school of Arcane.",
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 15f),
-					new Value<>(Attribute.DAMAGE_LUST, 50f),
-					new Value<>(Attribute.RESISTANCE_LUST, 50f)),
+			Map.of(Attribute.MAJOR_PHYSIQUE,15f,Attribute.DAMAGE_LUST,50f,Attribute.RESISTANCE_LUST,50f),
 			List.of("[style.boldExcellent(Unlimited)] <b style='color: "+ PresetColour.TRANSFORMATION_GENERIC.toWebHexString()+ ";'> self-transformations</b>"),
 			"Arcane Elementals",
 			"Arcane Elementals'",
 			"ELEMENTAL_ARCANE_BASIC",
 			"ELEMENTAL_ARCANE_ADVANCED",
 			Race.ELEMENTAL,
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 5)),
-			Util.newHashMapOfValues(
-					new Value<>(PerkCategory.PHYSICAL, 5),
-					new Value<>(PerkCategory.LUST, 5),
-					new Value<>(PerkCategory.ARCANE, 5)),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,5,PerkCategory.ARCANE,5),
+			Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,5,PerkCategory.ARCANE,5),
 			PresetColour.SPELL_SCHOOL_ARCANE,
 			SubspeciesPreference.FOUR_ABUNDANT,
-			"An arcane elemental bound to the school of Arcane.", null, Util.newHashMapOfValues(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
+			"An arcane elemental bound to the school of Arcane.", null, Map.of(), null, List.of(SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
 		public int getSubspeciesOverridePriority() {
 			return ELEMENTAL_FIRE.getSubspeciesOverridePriority();

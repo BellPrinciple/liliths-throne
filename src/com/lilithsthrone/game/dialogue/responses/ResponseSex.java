@@ -37,8 +37,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotManager;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotMasturbation;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -234,7 +232,7 @@ public class ResponseSex extends Response {
 		 // Masturbation check:
 		if(dominants==null || dominants.isEmpty() || submissives==null || submissives.isEmpty()) {
 			boolean dominantMasturbation = submissives==null || submissives.isEmpty();
-			this.sexManager = new SMMasturbation(Util.newHashMapOfValues(new Value<>(dominantMasturbation?dominants.get(0):submissives.get(0), SexSlotMasturbation.STANDING))) {
+			this.sexManager = new SMMasturbation(Map.of(dominantMasturbation?dominants.get(0):submissives.get(0),SexSlotMasturbation.STANDING)) {
 				@Override
 				public SexPace getStartingSexPaceModifier(GameCharacter character) {
 					if(character.isPlayer()) {
@@ -297,8 +295,8 @@ public class ResponseSex extends Response {
 			
 			if(!sexManagerSet) {
 				this.sexManager = new SMStanding(
-						Util.newHashMapOfValues(new Value<>(dominants.get(0), SexSlotStanding.STANDING_DOMINANT)),
-						Util.newHashMapOfValues(new Value<>(submissives.get(0), SexSlotStanding.STANDING_SUBMISSIVE))) {
+						Map.of(dominants.get(0),SexSlotStanding.STANDING_DOMINANT),
+						Map.of(submissives.get(0),SexSlotStanding.STANDING_SUBMISSIVE)) {
 					@Override
 					public SexPace getStartingSexPaceModifier(GameCharacter character) {
 						if(character.isPlayer()) {

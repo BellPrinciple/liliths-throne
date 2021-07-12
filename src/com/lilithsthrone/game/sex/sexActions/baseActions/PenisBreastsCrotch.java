@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActions;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
@@ -14,7 +16,6 @@ import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.1
@@ -44,7 +45,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.BREAST_CROTCH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.BREAST_CROTCH),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -472,7 +473,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.BREAST_CROTCH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.BREAST_CROTCH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -540,7 +541,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.BREAST_CROTCH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.BREAST_CROTCH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		
@@ -608,7 +609,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.BREAST_CROTCH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.BREAST_CROTCH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -675,7 +676,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.BREAST_CROTCH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.BREAST_CROTCH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		
@@ -743,7 +744,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.BREAST_CROTCH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.BREAST_CROTCH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		
@@ -811,7 +812,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.BREAST_CROTCH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.BREAST_CROTCH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -955,7 +956,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.BREAST_CROTCH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.BREAST_CROTCH),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -1057,7 +1058,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.BREAST_CROTCH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.BREAST_CROTCH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -1438,7 +1439,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.BREAST_CROTCH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.BREAST_CROTCH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -1508,7 +1509,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.BREAST_CROTCH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.BREAST_CROTCH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		
@@ -1578,7 +1579,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.BREAST_CROTCH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.BREAST_CROTCH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -1648,7 +1649,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.BREAST_CROTCH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.BREAST_CROTCH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		
@@ -1718,7 +1719,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.BREAST_CROTCH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.BREAST_CROTCH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		
@@ -1788,7 +1789,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.BREAST_CROTCH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.BREAST_CROTCH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -1856,7 +1857,7 @@ public class PenisBreastsCrotch {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.BREAST_CROTCH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.BREAST_CROTCH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		
 		@Override

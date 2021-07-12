@@ -70,7 +70,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -146,11 +145,8 @@ public class KaysWarehouse {
 				true, false,
 				new SexManagerDefault(
 						position,
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getNpc(SupplierLeader.class), slotWolfgang),
-								new Value<>(Main.game.getNpc(SupplierPartner.class), slotKarl)),
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getPlayer(), slotPlayer))) {
+						Map.of(Main.game.getNpc(SupplierLeader.class),slotWolfgang,Main.game.getNpc(SupplierPartner.class),slotKarl),
+						Map.of(Main.game.getPlayer(),slotPlayer)) {
 						@Override
 						public boolean isPositionChangingAllowed(GameCharacter character) {
 							return false;
@@ -161,10 +157,7 @@ public class KaysWarehouse {
 						}
 						@Override
 						public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-							return Util.newHashMapOfValues(
-									new Value<>(Main.game.getNpc(SupplierLeader.class), List.of(CoverableArea.PENIS)),
-									new Value<>(Main.game.getNpc(SupplierPartner.class), List.of(CoverableArea.PENIS)),
-									new Value<>(Main.game.getPlayer(), List.of(sexTypeWolfgang.getTargetedSexArea()==SexAreaOrifice.NIPPLE
+							return Map.of(Main.game.getNpc(SupplierLeader.class),List.of(CoverableArea.PENIS),Main.game.getNpc(SupplierPartner.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(sexTypeWolfgang.getTargetedSexArea()==SexAreaOrifice.NIPPLE
 												|| sexTypeKarl.getTargetedSexArea()==SexAreaOrifice.NIPPLE
 												?CoverableArea.NIPPLES
 												:null,
@@ -179,7 +172,7 @@ public class KaysWarehouse {
 											sexTypeWolfgang.getTargetedSexArea()==SexAreaOrifice.VAGINA
 												|| sexTypeKarl.getTargetedSexArea()==SexAreaOrifice.VAGINA
 												?CoverableArea.VAGINA
-												:null)));
+												:null));
 						}
 						@Override
 						public SexType getForeplayPreference(GameCharacter character, GameCharacter targetedCharacter) {
@@ -364,10 +357,8 @@ public class KaysWarehouse {
 				true, false,
 				new SexManagerDefault(
 						position,
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getPlayer(), slotPlayer)),
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getNpc(Kay.class), slotKay))) {
+						Map.of(Main.game.getPlayer(),slotPlayer),
+						Map.of(Main.game.getNpc(Kay.class),slotKay)) {
 						@Override
 						public SexPace getForcedSexPace(GameCharacter character) {
 							if(character==Main.game.getNpc(Kay.class)) {
@@ -381,9 +372,7 @@ public class KaysWarehouse {
 						}
 						@Override
 						public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-							return Util.newHashMapOfValues(
-									new Value<>(Main.game.getNpc(Kay.class), kayExposedParts),
-									new Value<>(Main.game.getPlayer(), playerExposedParts));
+							return Map.of(Main.game.getNpc(Kay.class),kayExposedParts,Main.game.getPlayer(),playerExposedParts);
 						}
 						@Override
 						public SexType getForeplayPreference(GameCharacter character, GameCharacter targetedCharacter) {
@@ -758,12 +747,9 @@ public class KaysWarehouse {
 							Main.game.getNpc(SupplierLeader.class),
 							List.of(Main.game.getNpc(SupplierLeader.class),
 									Main.game.getNpc(SupplierPartner.class)),
-							Util.newHashMapOfValues(
-									new Value<>(Main.game.getPlayer(), "[pc.speech(I'll soon have the two of you cleared out from here,)]"
+							Map.of(Main.game.getPlayer(),"[pc.speech(I'll soon have the two of you cleared out from here,)]"
 											+ " you declare, readying yourself for a fight,"
-											+ " [pc.speech(but I know that people like you only respect force, so I'm left with no choice but to do this!)]"),
-									new Value<>(Main.game.getNpc(SupplierLeader.class), "[wolfgang.speech(Hah!)] Wolfgang shouts, [wolfgang.speech(If it's a fight you want, we'll give you one!)]"),
-									new Value<>(Main.game.getNpc(SupplierPartner.class), "[karl.speech(You're gonna pay for this, bitch!)] Karl snarls."))) {
+											+ " [pc.speech(but I know that people like you only respect force, so I'm left with no choice but to do this!)]",Main.game.getNpc(SupplierLeader.class),"[wolfgang.speech(Hah!)] Wolfgang shouts, [wolfgang.speech(If it's a fight you want, we'll give you one!)]",Main.game.getNpc(SupplierPartner.class),"[karl.speech(You're gonna pay for this, bitch!)] Karl snarls.")) {
 						@Override
 						public void effects() {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.suppliersEncountered, true);
@@ -920,9 +906,7 @@ public class KaysWarehouse {
 								ResponseTag.PREFER_DOGGY) {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-								return Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(SupplierLeader.class), List.of(CoverableArea.PENIS)),
-										new Value<>(Main.game.getNpc(SupplierPartner.class), List.of(CoverableArea.PENIS)));
+								return Map.of(Main.game.getNpc(SupplierLeader.class),List.of(CoverableArea.PENIS),Main.game.getNpc(SupplierPartner.class),List.of(CoverableArea.PENIS));
 							}
 						},
 						AFTER_SEX_FUCKED,
@@ -941,9 +925,7 @@ public class KaysWarehouse {
 								ResponseTag.PREFER_DOGGY, ResponseTag.START_PACE_PLAYER_SUB_EAGER) {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-								return Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(SupplierLeader.class), List.of(CoverableArea.PENIS)),
-										new Value<>(Main.game.getNpc(SupplierPartner.class), List.of(CoverableArea.PENIS)));
+								return Map.of(Main.game.getNpc(SupplierLeader.class),List.of(CoverableArea.PENIS),Main.game.getNpc(SupplierPartner.class),List.of(CoverableArea.PENIS));
 							}
 						},
 						AFTER_SEX_FUCKED,
@@ -972,9 +954,7 @@ public class KaysWarehouse {
 									ResponseTag.PREFER_DOGGY, ResponseTag.START_PACE_PLAYER_SUB_RESISTING) {
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-									return Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(SupplierLeader.class), List.of(CoverableArea.PENIS)),
-											new Value<>(Main.game.getNpc(SupplierPartner.class), List.of(CoverableArea.PENIS)));
+									return Map.of(Main.game.getNpc(SupplierLeader.class),List.of(CoverableArea.PENIS),Main.game.getNpc(SupplierPartner.class),List.of(CoverableArea.PENIS));
 								}
 							},
 							AFTER_SEX_FUCKED,
@@ -1642,16 +1622,13 @@ public class KaysWarehouse {
 						List.of(CoverableArea.PENIS),
 						List.of(CoverableArea.VAGINA),
 						List.of(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisVagina.PENIS_FUCKING_START, false, true)),
-						Util.newHashMapOfValues(
-								new Value<>(
-										Main.game.getPlayer(),
-										Util.newHashMapOfValues(
-												new Value<>(
-													SexAreaOrifice.VAGINA,
-													Util.newHashMapOfValues(
-														new Value<>(
-															Main.game.getNpc(Kay.class),
-															Util.newHashSetOfValues(LubricationType.PRECUM)))))))));
+						Map.of(
+							Main.game.getPlayer(),
+							Map.of(
+								SexAreaOrifice.VAGINA,
+								Map.of(
+									Main.game.getNpc(Kay.class),
+									Util.newHashSetOfValues(LubricationType.PRECUM))))));
 				
 			}
 			
@@ -1680,16 +1657,13 @@ public class KaysWarehouse {
 							List.of(CoverableArea.PENIS),
 							List.of(CoverableArea.ANUS),
 							List.of(new InitialSexActionInformation(Main.game.getNpc(Kay.class), Main.game.getPlayer(), PenisAnus.PENIS_FUCKING_START, false, true)),
-							Util.newHashMapOfValues(
-									new Value<>(
-											Main.game.getPlayer(),
-											Util.newHashMapOfValues(
-													new Value<>(
-														SexAreaOrifice.ANUS,
-														Util.newHashMapOfValues(
-															new Value<>(
-																Main.game.getNpc(Kay.class),
-																Util.newHashSetOfValues(LubricationType.PRECUM)))))))));
+							Map.of(
+								Main.game.getPlayer(),
+								Map.of(
+									SexAreaOrifice.ANUS,
+									Map.of(
+										Main.game.getNpc(Kay.class),
+										Util.newHashSetOfValues(LubricationType.PRECUM))))));
 					
 				}
 			}

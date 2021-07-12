@@ -18,8 +18,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.82
@@ -55,7 +53,7 @@ public class PenisVagina {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -246,7 +244,7 @@ public class PenisVagina {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -452,7 +450,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FIVE_EXTREME,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -503,7 +501,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -641,7 +639,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		
 		private List<GameCharacter> getCharactersForParsing() {
@@ -845,7 +843,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -893,7 +891,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		
@@ -941,7 +939,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 
@@ -989,7 +987,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		
@@ -1037,7 +1035,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		
@@ -1085,7 +1083,7 @@ public class PenisVagina {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -1176,7 +1174,7 @@ public class PenisVagina {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -1264,7 +1262,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -1406,7 +1404,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 
 		private List<GameCharacter> getCharactersForParsing() {
@@ -1632,7 +1630,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -1675,7 +1673,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		
@@ -1718,7 +1716,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -1761,7 +1759,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		
@@ -1804,7 +1802,7 @@ public class PenisVagina {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		
@@ -1847,7 +1845,7 @@ public class PenisVagina {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -1938,7 +1936,7 @@ public class PenisVagina {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 
 		@Override

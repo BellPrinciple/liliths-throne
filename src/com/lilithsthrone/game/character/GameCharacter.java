@@ -27889,7 +27889,8 @@ public abstract class GameCharacter implements XMLSaving {
 		return hasPenisIgnoreDildo();
 	}
 	public boolean hasPenisIgnoreDildo() {
-		return getCurrentPenis().getType()!=PenisType.NONE && getCurrentPenis().getType()!=PenisType.DILDO;
+		var penis = getCurrentPenis();
+		return null==penis || penis.getType()!=PenisType.NONE && penis.getType()!=PenisType.DILDO;
 	}
     public boolean hasPenis() {
         return getCurrentPenis()!=null && getCurrentPenis().getType() != PenisType.NONE;

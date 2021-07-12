@@ -10,8 +10,6 @@ import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.2
@@ -28,9 +26,7 @@ public class SMVanessaSex extends SexManagerDefault {
 
 	@Override
 	public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-		return Util.newHashMapOfValues(
-				new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)),
-				new Value<>(Main.game.getNpc(Vanessa.class), List.of(CoverableArea.VAGINA)));
+		return Map.of(Main.game.getPlayer(),List.of(CoverableArea.PENIS),Main.game.getNpc(Vanessa.class),List.of(CoverableArea.VAGINA));
 	}
 	
 	@Override

@@ -7,8 +7,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.combat.DamageType;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -55,8 +53,7 @@ public enum BodyMaterial {
 	SLIME("slime", PresetColour.RACE_SLIME, DamageType.PHYSICAL, false, true, false) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
-			return Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 100f));
+			return Map.of(Attribute.RESISTANCE_PHYSICAL,100f);
 		}
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -71,10 +68,7 @@ public enum BodyMaterial {
 	FIRE("fire", "burning", PresetColour.BASE_ORANGE, DamageType.FIRE, false, false, false) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
-			return Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_FIRE, 50f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 50f),
-					new Value<>(Attribute.RESISTANCE_FIRE, 500f));
+			return Map.of(Attribute.DAMAGE_FIRE,50f,Attribute.RESISTANCE_PHYSICAL,50f,Attribute.RESISTANCE_FIRE,500f);
 		}
 
 		@Override
@@ -88,10 +82,7 @@ public enum BodyMaterial {
 	WATER("water", "cool", PresetColour.BASE_AQUA, DamageType.ICE, false, true, false) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
-			return Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -25f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 50f),
-					new Value<>(Attribute.RESISTANCE_ICE, 50f));
+			return Map.of(Attribute.DAMAGE_PHYSICAL,-25f,Attribute.RESISTANCE_PHYSICAL,50f,Attribute.RESISTANCE_ICE,50f);
 		}
 
 		@Override
@@ -103,9 +94,7 @@ public enum BodyMaterial {
 	ICE("ice", "freezing", PresetColour.BASE_BLUE_LIGHT, DamageType.ICE, true, true, true) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
-			return Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_ICE, 50f),
-					new Value<>(Attribute.RESISTANCE_ICE, 500f));
+			return Map.of(Attribute.DAMAGE_ICE,50f,Attribute.RESISTANCE_ICE,500f);
 		}
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -118,9 +107,7 @@ public enum BodyMaterial {
 	AIR("storm-clouds", "swirling", PresetColour.BASE_BLUE_STEEL, DamageType.POISON, false, false, false) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
-			return Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_PHYSICAL, -100f),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 100f));
+			return Map.of(Attribute.DAMAGE_PHYSICAL,-100f,Attribute.RESISTANCE_PHYSICAL,100f);
 		}
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -133,9 +120,7 @@ public enum BodyMaterial {
 	STONE("stone", "hard", PresetColour.BASE_GREY, DamageType.PHYSICAL, true, false, true) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
-			return Util.newHashMapOfValues(
-						new Value<>(Attribute.DAMAGE_PHYSICAL, 25f),
-						new Value<>(Attribute.RESISTANCE_PHYSICAL, 50f));
+			return Map.of(Attribute.DAMAGE_PHYSICAL,25f,Attribute.RESISTANCE_PHYSICAL,50f);
 		}
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -146,8 +131,7 @@ public enum BodyMaterial {
 	RUBBER("rubber", PresetColour.BASE_BLACK, DamageType.PHYSICAL, true, false, true) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
-			return Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 50f));
+			return Map.of(Attribute.RESISTANCE_PHYSICAL,50f);
 		}
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {
@@ -160,11 +144,7 @@ public enum BodyMaterial {
 	ARCANE("energy", PresetColour.GENERIC_ARCANE, DamageType.PHYSICAL, false, false, false) {
 		@Override
 		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
-			return Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_SPELLS, 50f),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 50f),
-					new Value<>(Attribute.DAMAGE_LUST, 50f),
-					new Value<>(Attribute.RESISTANCE_LUST, -50f));
+			return Map.of(Attribute.DAMAGE_SPELLS,50f,Attribute.SPELL_COST_MODIFIER,50f,Attribute.DAMAGE_LUST,50f,Attribute.RESISTANCE_LUST,-50f);
 		}
 		@Override
 		public List<String> getExtraEffects(GameCharacter target) {

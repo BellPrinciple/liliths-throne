@@ -67,8 +67,6 @@ import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -81,14 +79,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class Minotallys extends NPC {
 	
-	private Map<DayOfWeek, FlavourInformation> flavourInformationMap = Util.newHashMapOfValues(
-			new Value<>(DayOfWeek.MONDAY, new FlavourInformation(FluidFlavour.MILK, PresetColour.COVERING_BLACK, PresetColour.COVERING_BLACK, PresetColour.COVERING_BLACK, PresetColour.CLOTHING_BLACK)),
-			new Value<>(DayOfWeek.TUESDAY, new FlavourInformation(FluidFlavour.STRAWBERRY, PresetColour.COVERING_PINK_LIGHT, PresetColour.COVERING_PINK, PresetColour.COVERING_PINK_DARK, PresetColour.CLOTHING_PINK_HOT)),
-			new Value<>(DayOfWeek.WEDNESDAY, new FlavourInformation(FluidFlavour.BLUEBERRY, PresetColour.COVERING_BLUE_LIGHT, PresetColour.COVERING_BLUE, PresetColour.COVERING_BLUE_DARK, PresetColour.CLOTHING_BLUE_LIGHT)),
-			new Value<>(DayOfWeek.THURSDAY, new FlavourInformation(FluidFlavour.CHOCOLATE, PresetColour.COVERING_BROWN_LIGHT, PresetColour.COVERING_BROWN, PresetColour.COVERING_BROWN_DARK, PresetColour.CLOTHING_BROWN_DARK)),
-			new Value<>(DayOfWeek.FRIDAY, new FlavourInformation(FluidFlavour.HONEY, PresetColour.COVERING_AMBER, PresetColour.COVERING_YELLOW, PresetColour.COVERING_AMBER, PresetColour.CLOTHING_YELLOW)),
-			new Value<>(DayOfWeek.SATURDAY, new FlavourInformation(FluidFlavour.MINT, PresetColour.COVERING_GREEN_LIGHT, PresetColour.COVERING_GREEN, PresetColour.COVERING_GREEN_DARK, PresetColour.CLOTHING_GREEN)),
-			new Value<>(DayOfWeek.SUNDAY, new FlavourInformation(FluidFlavour.GRAPE, PresetColour.COVERING_PURPLE_LIGHT, PresetColour.COVERING_PURPLE, PresetColour.COVERING_PURPLE_DARK, PresetColour.CLOTHING_PURPLE)));
+	private Map<DayOfWeek, FlavourInformation> flavourInformationMap = Map.of(DayOfWeek.MONDAY,new FlavourInformation(FluidFlavour.MILK, PresetColour.COVERING_BLACK, PresetColour.COVERING_BLACK, PresetColour.COVERING_BLACK, PresetColour.CLOTHING_BLACK),DayOfWeek.TUESDAY,new FlavourInformation(FluidFlavour.STRAWBERRY, PresetColour.COVERING_PINK_LIGHT, PresetColour.COVERING_PINK, PresetColour.COVERING_PINK_DARK, PresetColour.CLOTHING_PINK_HOT),DayOfWeek.WEDNESDAY,new FlavourInformation(FluidFlavour.BLUEBERRY, PresetColour.COVERING_BLUE_LIGHT, PresetColour.COVERING_BLUE, PresetColour.COVERING_BLUE_DARK, PresetColour.CLOTHING_BLUE_LIGHT),DayOfWeek.THURSDAY,new FlavourInformation(FluidFlavour.CHOCOLATE, PresetColour.COVERING_BROWN_LIGHT, PresetColour.COVERING_BROWN, PresetColour.COVERING_BROWN_DARK, PresetColour.CLOTHING_BROWN_DARK),DayOfWeek.FRIDAY,new FlavourInformation(FluidFlavour.HONEY, PresetColour.COVERING_AMBER, PresetColour.COVERING_YELLOW, PresetColour.COVERING_AMBER, PresetColour.CLOTHING_YELLOW),DayOfWeek.SATURDAY,new FlavourInformation(FluidFlavour.MINT, PresetColour.COVERING_GREEN_LIGHT, PresetColour.COVERING_GREEN, PresetColour.COVERING_GREEN_DARK, PresetColour.CLOTHING_GREEN),DayOfWeek.SUNDAY,new FlavourInformation(FluidFlavour.GRAPE, PresetColour.COVERING_PURPLE_LIGHT, PresetColour.COVERING_PURPLE, PresetColour.COVERING_PURPLE_DARK, PresetColour.CLOTHING_PURPLE));
 
 	private static FluidFlavour milkFlavour = FluidFlavour.MILK;
 	private static Colour coveringColour = PresetColour.COVERING_BLACK;
@@ -158,10 +149,7 @@ public class Minotallys extends NPC {
 	public void setupPerks(boolean autoSelectPerks) {
 		PerkManager.initialisePerks(this,
 				List.of(),
-				Util.newHashMapOfValues(
-						new Value<>(PerkCategory.PHYSICAL, 0),
-						new Value<>(PerkCategory.LUST, 1),
-						new Value<>(PerkCategory.ARCANE, 1)));
+				Map.of(PerkCategory.PHYSICAL,0,PerkCategory.LUST,1,PerkCategory.ARCANE,1));
 	}
 	
 	@Override

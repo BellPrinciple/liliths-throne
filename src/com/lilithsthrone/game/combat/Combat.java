@@ -187,15 +187,15 @@ public class Combat {
 		
 		if(Main.game.getPlayer().hasSpellUpgrade(SpellUpgrade.TELEPATHIC_COMMUNICATION_3)) {
 			Main.game.getPlayer().addStatusEffect(StatusEffect.TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION, 11);
-			startingEffect = Spell.getBasicStatusEffectApplication(Main.game.getPlayer(), true, Util.newHashMapOfValues(new Value<>(StatusEffect.TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION, 10)));
+			startingEffect = Spell.getBasicStatusEffectApplication(Main.game.getPlayer(), true, Map.of(StatusEffect.TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION,10));
 			
 		} else if(Main.game.getPlayer().hasSpellUpgrade(SpellUpgrade.TELEPATHIC_COMMUNICATION_2)) {
 			Main.game.getPlayer().addStatusEffect(StatusEffect.TELEPATHIC_COMMUNICATION_PROJECTED_TOUCH, 11);
-			startingEffect = Spell.getBasicStatusEffectApplication(Main.game.getPlayer(), true, Util.newHashMapOfValues(new Value<>(StatusEffect.TELEPATHIC_COMMUNICATION_PROJECTED_TOUCH, 10)));
+			startingEffect = Spell.getBasicStatusEffectApplication(Main.game.getPlayer(), true, Map.of(StatusEffect.TELEPATHIC_COMMUNICATION_PROJECTED_TOUCH,10));
 			
 		} else if(Main.game.getPlayer().hasSpellUpgrade(SpellUpgrade.TELEPATHIC_COMMUNICATION_1)) {
 			Main.game.getPlayer().addStatusEffect(StatusEffect.TELEPATHIC_COMMUNICATION, 11);
-			startingEffect = Spell.getBasicStatusEffectApplication(Main.game.getPlayer(), true, Util.newHashMapOfValues(new Value<>(StatusEffect.TELEPATHIC_COMMUNICATION, 10)));
+			startingEffect = Spell.getBasicStatusEffectApplication(Main.game.getPlayer(), true, Map.of(StatusEffect.TELEPATHIC_COMMUNICATION,10));
 		}
 		
 		combatContent.get(Main.game.getPlayer()).add(
@@ -220,15 +220,15 @@ public class Combat {
 			startingEffect="";
 			if(combatant.hasSpellUpgrade(SpellUpgrade.TELEPATHIC_COMMUNICATION_3)) {
 				combatant.addStatusEffect(StatusEffect.TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION, 11);
-				startingEffect = Spell.getBasicStatusEffectApplication(combatant, true, Util.newHashMapOfValues(new Value<>(StatusEffect.TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION, 10)));
+				startingEffect = Spell.getBasicStatusEffectApplication(combatant, true, Map.of(StatusEffect.TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION,10));
 				
 			} else if(combatant.hasSpellUpgrade(SpellUpgrade.TELEPATHIC_COMMUNICATION_2)) {
 				combatant.addStatusEffect(StatusEffect.TELEPATHIC_COMMUNICATION_PROJECTED_TOUCH, 11);
-				startingEffect = Spell.getBasicStatusEffectApplication(combatant, true, Util.newHashMapOfValues(new Value<>(StatusEffect.TELEPATHIC_COMMUNICATION_PROJECTED_TOUCH, 10)));
+				startingEffect = Spell.getBasicStatusEffectApplication(combatant, true, Map.of(StatusEffect.TELEPATHIC_COMMUNICATION_PROJECTED_TOUCH,10));
 				
 			} else if(combatant.hasSpellUpgrade(SpellUpgrade.TELEPATHIC_COMMUNICATION_1)) {
 				combatant.addStatusEffect(StatusEffect.TELEPATHIC_COMMUNICATION, 11);
-				startingEffect = Spell.getBasicStatusEffectApplication(combatant, true, Util.newHashMapOfValues(new Value<>(StatusEffect.TELEPATHIC_COMMUNICATION, 10)));
+				startingEffect = Spell.getBasicStatusEffectApplication(combatant, true, Map.of(StatusEffect.TELEPATHIC_COMMUNICATION,10));
 			}
 			
 			combatContent.get(combatant).add(UtilText.parse(combatant,
@@ -1162,7 +1162,7 @@ public class Combat {
 			
 			extraAttackEffects.add(UtilText.parse(target, "As [npc.name] is critically hit, the rain cloud above [npc.her] head grows in size, and suddenly erupts into a torrential cloudburst!"));
 			
-			extraAttackEffects.add(Spell.getBasicStatusEffectApplication(target, false, Util.newHashMapOfValues(new Value<>(StatusEffect.RAIN_CLOUD_CLOUDBURST, 6))));
+			extraAttackEffects.add(Spell.getBasicStatusEffectApplication(target, false, Map.of(StatusEffect.RAIN_CLOUD_CLOUDBURST,6)));
 			
 		}
 		

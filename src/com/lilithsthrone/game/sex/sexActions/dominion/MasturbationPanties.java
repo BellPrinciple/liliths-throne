@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.dominion;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -19,8 +20,6 @@ import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericOrgasms;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.2.8
@@ -34,7 +33,7 @@ public class MasturbationPanties {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.VAGINA),
 			SexParticipantType.SELF) {
 
 		@Override
@@ -90,7 +89,7 @@ public class MasturbationPanties {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.SELF) {
 
 		@Override
@@ -145,7 +144,7 @@ public class MasturbationPanties {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, null)),
+			Map.of(SexAreaPenetration.FINGER,null),
 			SexParticipantType.SELF) {
 
 		@Override
@@ -189,7 +188,7 @@ public class MasturbationPanties {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, null)),
+			Map.of(SexAreaPenetration.FINGER,null),
 			SexParticipantType.SELF) {
 
 		@Override

@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.dominion.enforcerHQ;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -31,8 +32,6 @@ import com.lilithsthrone.game.sex.managers.universal.SMStanding;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -338,8 +337,8 @@ public class BraxOffice {
 				return new ResponseSex("Get fucked", "Let [brax.name] take control and fuck you.",
 						true, false, 
 						new SMBraxDoggy(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Brax.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 						null,
 						null,
 						AFTER_SUBMISSIVE_SEX,
@@ -418,8 +417,8 @@ public class BraxOffice {
 						List.of(Fetish.FETISH_DOMINANT), null, CorruptionLevel.TWO_HORNY, null, null, null,
 						false, false,
 						new SMStanding(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotStanding.PERFORMING_ORAL))),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getNpc(Brax.class),SexSlotStanding.PERFORMING_ORAL)),
 						null,
 						null,
 						AFTER_DOMINANT_SEX,
@@ -431,8 +430,8 @@ public class BraxOffice {
 						List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, Femininity.FEMININE, null,
 						false, true,
 						new SMBraxDoggy(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Brax.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 						null,
 						null,
 						AFTER_SUBMISSIVE_SEX,
@@ -547,8 +546,8 @@ public class BraxOffice {
 				return new ResponseSex("Dominated", "Brax is far too strong for you to resist...",
 						false, false,
 						new SMBraxDoggy(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Brax.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 						null,
 						null, AFTER_SUBMISSIVE_SEX,
 						UtilText.parseFromXMLFile("places/dominion/enforcerHQ/brax", "AFTER_DEFEAT_TRANSFORMATION_REFUSED_DOMINATED"));
@@ -573,8 +572,8 @@ public class BraxOffice {
 						"The arousing liquid you've just been forced to drink is forcing you to obey, and you eagerly fall down on all fours so that Brax can fuck you, doggy-style.",
 						false, false,
 						new SMBraxDoggy(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Brax.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 						null,
 						null,
 						AFTER_SUBMISSIVE_SEX,

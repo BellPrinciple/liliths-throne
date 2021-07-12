@@ -21,7 +21,6 @@ import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.8.9
@@ -31,22 +30,8 @@ import com.lilithsthrone.utils.Util.Value;
 public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 	
 	// Maps the name to weighting for use in random selection:
-	protected static final Map<String, Integer> BASE_NAMES_SINGULAR = Util.newHashMapOfValues(
-			new Value<>("cherry", 2),
-			new Value<>("cunt", 2),
-			new Value<>("kitty", 1),
-			new Value<>("pussy", 4),
-			new Value<>("sex", 1),
-			new Value<>("slit", 1),
-			new Value<>("twat", 2));
-	protected static final Map<String, Integer> BASE_NAMES_PLURAL = Util.newHashMapOfValues(
-			new Value<>("cherries", 2),
-			new Value<>("cunts", 2),
-			new Value<>("kitties", 1),
-			new Value<>("pussies", 4),
-			new Value<>("sexes", 1),
-			new Value<>("slits", 1),
-			new Value<>("twats", 2));
+	protected static final Map<String, Integer> BASE_NAMES_SINGULAR = Map.of("cherry",2,"cunt",2,"kitty",1,"pussy",4,"sex",1,"slit",1,"twat",2);
+	protected static final Map<String, Integer> BASE_NAMES_PLURAL = Map.of("cherries",2,"cunts",2,"kitties",1,"pussies",4,"sexes",1,"slits",1,"twats",2);
 
 	private boolean mod;
 	private boolean fromExternalFile;

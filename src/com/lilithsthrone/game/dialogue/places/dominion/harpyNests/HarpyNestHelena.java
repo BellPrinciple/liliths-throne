@@ -52,8 +52,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
 import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
@@ -77,8 +75,8 @@ public class HarpyNestHelena {
 		return new SexManagerDefault(
 				false,
 				position,
-				Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Scarlett.class), scarlettSlot)),
-				Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), playerSlot))) {
+				Map.of(Main.game.getNpc(Scarlett.class),scarlettSlot),
+				Map.of(Main.game.getPlayer(),playerSlot)) {
 			@Override 
 			public String getPublicSexStartingDescription() {
 				return "<p style='color:"+PresetColour.BASE_ORANGE.toWebHexString()+"; font-style:italic; text-align:center;'>"
@@ -769,8 +767,8 @@ public class HarpyNestHelena {
 									"Tell Scarlett that if that's what she wants, then of course she can fuck your ass.",
 									true, false,
 									new SMAllFours(
-											Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Scarlett.class), SexSlotAllFours.BEHIND)),
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))) {
+											Map.of(Main.game.getNpc(Scarlett.class),SexSlotAllFours.BEHIND),
+											Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)) {
 										@Override
 										public boolean isPublicSex() {
 											return false;
@@ -820,8 +818,8 @@ public class HarpyNestHelena {
 										"Tell Scarlett that if that's what she wants, then of course she can fuck your pussy.",
 										true, false,
 										new SMAllFours(
-												Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Scarlett.class), SexSlotAllFours.BEHIND)),
-												Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))) {
+												Map.of(Main.game.getNpc(Scarlett.class),SexSlotAllFours.BEHIND),
+												Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)) {
 											@Override
 											public boolean isPublicSex() {
 												return false;
@@ -870,8 +868,8 @@ public class HarpyNestHelena {
 										"Tell Scarlett that if that's what she wants, then of course you'll suck her cock.",
 										true, false,
 										new SMStanding(
-												Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Scarlett.class), SexSlotStanding.STANDING_DOMINANT)),
-												Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))) {
+												Map.of(Main.game.getNpc(Scarlett.class),SexSlotStanding.STANDING_DOMINANT),
+												Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL)) {
 											@Override
 											public boolean isPublicSex() {
 												return false;
@@ -1125,9 +1123,7 @@ public class HarpyNestHelena {
 							false,
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
+									Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH)),
 									"Scarlett's harpy followers continue to pamper her while you get started on sucking her cock..."),
 							null,
 							null,
@@ -1150,9 +1146,7 @@ public class HarpyNestHelena {
 							false,
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
+									Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH)),
 									"Scarlett's harpy followers continue to pamper her while you get started on licking her pussy..."),
 							null,
 							null,
@@ -1197,8 +1191,7 @@ public class HarpyNestHelena {
 							false,
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaPenetration.FINGER),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS))),
+									Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS)),
 									"Scarlett's harpy followers continue to pamper her while you get started on jerking off her cock..."),
 							null,
 							null,
@@ -1218,8 +1211,7 @@ public class HarpyNestHelena {
 							false,
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.FINGER),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA))),
+									Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA)),
 									"Scarlett's harpy followers continue to pamper her while you get started on fingering her pussy..."),
 							null,
 							null,
@@ -1268,9 +1260,7 @@ public class HarpyNestHelena {
 							false,
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
+									Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH)),
 									"Scarlett's harpy followers continue to pamper her while you get started on sucking her cock..."),
 							null,
 							null,
@@ -1293,9 +1283,7 @@ public class HarpyNestHelena {
 							false,
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
+									Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH)),
 									"Scarlett's harpy followers continue to pamper her while you get started on licking her pussy..."),
 							null,
 							null,
@@ -1322,8 +1310,7 @@ public class HarpyNestHelena {
 						false,
 						getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 								new SexType(SexParticipantType.NORMAL, SexAreaPenetration.FOOT, SexAreaPenetration.PENIS),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS))),
+								Map.of(Main.game.getPlayer(),List.of(CoverableArea.PENIS)),
 								"Scarlett's harpy followers continue to pamper her while she jerks you off using her bird-like talons..."),
 						null,
 						null,
@@ -1521,7 +1508,7 @@ public class HarpyNestHelena {
 					false,
 					getScarlettSexManager(SexPosition.STANDING, SexSlotStanding.STANDING_DOMINANT, SexSlotStanding.STANDING_SUBMISSIVE,
 							null,
-							Util.newHashMapOfValues(),
+							Map.of(),
 							""),
 					null,
 					null,
@@ -1541,9 +1528,7 @@ public class HarpyNestHelena {
 							false,
 							getScarlettSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
+									Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH)),
 									""),
 							null,
 							null,
@@ -1568,9 +1553,7 @@ public class HarpyNestHelena {
 								false,
 								getScarlettSexManager(SexPosition.ALL_FOURS, SexSlotAllFours.BEHIND, SexSlotAllFours.ALL_FOURS,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS))),
+										Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.ANUS)),
 										""),
 								null,
 								null,
@@ -1596,9 +1579,7 @@ public class HarpyNestHelena {
 								false,
 								getScarlettSexManager(SexPosition.ALL_FOURS, SexSlotAllFours.BEHIND, SexSlotAllFours.ALL_FOURS,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA))),
+										Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.VAGINA)),
 										""),
 								null,
 								null,
@@ -1624,9 +1605,7 @@ public class HarpyNestHelena {
 							false,
 							getScarlettSexManager(SexPosition.LYING_DOWN, SexSlotLyingDown.FACE_SITTING, SexSlotLyingDown.LYING_DOWN,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
+									Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH)),
 									""),
 							null,
 							null,
@@ -1654,9 +1633,7 @@ public class HarpyNestHelena {
 								false,
 								getScarlettSexManager(SexPosition.LYING_DOWN, SexSlotLyingDown.SCISSORING, SexSlotLyingDown.LYING_DOWN,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.CLIT, SexAreaPenetration.CLIT),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA))),
+										Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.VAGINA)),
 										""),
 								null,
 								null,
@@ -1682,9 +1659,7 @@ public class HarpyNestHelena {
 								false,
 								getScarlettSexManager(SexPosition.LYING_DOWN, SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.MISSIONARY,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS))),
+										Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.PENIS)),
 										""),
 								null,
 								null,
@@ -1713,9 +1688,7 @@ public class HarpyNestHelena {
 									false,
 									getScarlettSexManager(SexPosition.ALL_FOURS, SexSlotAllFours.ALL_FOURS, SexSlotAllFours.BEHIND,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.ANUS)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS))),
+											Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.PENIS)),
 											""),
 									null,
 									null,

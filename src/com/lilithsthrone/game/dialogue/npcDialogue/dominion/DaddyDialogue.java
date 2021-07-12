@@ -28,8 +28,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueMouth;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -806,13 +804,13 @@ public class DaddyDialogue {
 							true,
 							true,
 							new SMDaddyDinnerOral(
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Daddy.class), SexSlotSitting.SITTING)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL),
-											isLilayaPresent()
-												?new Value<>(Main.game.getNpc(Lilaya.class), SexSlotSitting.PERFORMING_ORAL_TWO)
-												:null)),
+									Map.of(Main.game.getNpc(Daddy.class),SexSlotSitting.SITTING),
+									isLilayaPresent()
+										? Map.of(
+												Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL)
+										: Map.of(
+												Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL,
+												Main.game.getNpc(Lilaya.class), SexSlotSitting.PERFORMING_ORAL_TWO)),
 							null,
 							null,
 							AFTER_UNDER_TABLE_SEX,
@@ -1004,16 +1002,10 @@ public class DaddyDialogue {
 								map.put(true, new HashMap<>());
 								if(isLilayaPresent()) {
 									map.get(true).put(Main.game.getNpc(Lilaya.class),
-											Util.newHashMapOfValues(
-													new Value<>(CoverableArea.VAGINA, List.of(InventorySlot.GROIN)),
-													new Value<>(CoverableArea.FEET, List.of(InventorySlot.SOCK)),
-													new Value<>(CoverableArea.STOMACH, null)));
+											Map.of(CoverableArea.VAGINA,List.of(InventorySlot.GROIN),CoverableArea.FEET,List.of(InventorySlot.SOCK),CoverableArea.STOMACH,null));
 								}
 								map.get(true).put(Main.game.getPlayer(),
-										Util.newHashMapOfValues(
-												new Value<>(CoverableArea.VAGINA, List.of(InventorySlot.GROIN)),
-												new Value<>(CoverableArea.FEET, List.of(InventorySlot.SOCK)),
-												new Value<>(CoverableArea.STOMACH, null)));
+										Map.of(CoverableArea.VAGINA,List.of(InventorySlot.GROIN),CoverableArea.FEET,List.of(InventorySlot.SOCK),CoverableArea.STOMACH,null));
 								return map;
 							}
 						},
@@ -1081,17 +1073,10 @@ public class DaddyDialogue {
 								map.put(true, new HashMap<>());
 								if(isLilayaPresent()) {
 									map.get(true).put(Main.game.getNpc(Lilaya.class),
-											Util.newHashMapOfValues(
-													new Value<>(CoverableArea.VAGINA, List.of(InventorySlot.GROIN)),
-													new Value<>(CoverableArea.FEET, List.of(InventorySlot.SOCK)),
-													new Value<>(CoverableArea.STOMACH, null),
-													new Value<>(CoverableArea.VAGINA, null)));
+											Map.of(CoverableArea.VAGINA,List.of(InventorySlot.GROIN),CoverableArea.FEET,List.of(InventorySlot.SOCK),CoverableArea.STOMACH,null,CoverableArea.VAGINA,null));
 								}
 								map.get(true).put(Main.game.getPlayer(),
-										Util.newHashMapOfValues(
-												new Value<>(CoverableArea.VAGINA, List.of(InventorySlot.GROIN)),
-												new Value<>(CoverableArea.FEET, List.of(InventorySlot.SOCK)),
-												new Value<>(CoverableArea.STOMACH, null)));
+										Map.of(CoverableArea.VAGINA,List.of(InventorySlot.GROIN),CoverableArea.FEET,List.of(InventorySlot.SOCK),CoverableArea.STOMACH,null));
 								return map;
 							}
 							@Override

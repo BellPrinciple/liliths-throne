@@ -2,6 +2,7 @@ package com.lilithsthrone.game.dialogue.places.dominion.cityHall;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -28,8 +29,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -372,8 +371,8 @@ public class CityHallDemographics {
 						true, true,
 						new SMVanessaOral(
 								SexPosition.SITTING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vanessa.class), SexSlotSitting.SITTING)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL))),
+								Map.of(Main.game.getNpc(Vanessa.class),SexSlotSitting.SITTING),
+								Map.of(Main.game.getPlayer(),SexSlotSitting.PERFORMING_ORAL)),
 						null,
 						null,
 						END_ORAL_SEX,
@@ -428,12 +427,12 @@ public class CityHallDemographics {
 								biped
 									?new SMVanessaSex(
 											SexPosition.OVER_DESK,
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.BETWEEN_LEGS)),
-											Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vanessa.class), SexSlotDesk.OVER_DESK_ON_BACK)))
+											Map.of(Main.game.getPlayer(),SexSlotDesk.BETWEEN_LEGS),
+											Map.of(Main.game.getNpc(Vanessa.class),SexSlotDesk.OVER_DESK_ON_BACK))
 									:new SMVanessaSex(
 											SexPosition.ALL_FOURS,
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
-											Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vanessa.class), SexSlotAllFours.ALL_FOURS))),
+											Map.of(Main.game.getPlayer(),SexSlotAllFours.BEHIND),
+											Map.of(Main.game.getNpc(Vanessa.class),SexSlotAllFours.ALL_FOURS)),
 								null,
 								null,
 								END_SEX,
@@ -463,12 +462,12 @@ public class CityHallDemographics {
 								biped
 									?new SMVanessaOral(
 											SexPosition.SITTING,
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.SITTING)),
-											Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vanessa.class), SexSlotSitting.PERFORMING_ORAL)))
+											Map.of(Main.game.getPlayer(),SexSlotSitting.SITTING),
+											Map.of(Main.game.getNpc(Vanessa.class),SexSlotSitting.PERFORMING_ORAL))
 									:new SMVanessaOral(
 											SexPosition.STANDING,
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-											Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vanessa.class), SexSlotStanding.PERFORMING_ORAL_BEHIND))),
+											Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+											Map.of(Main.game.getNpc(Vanessa.class),SexSlotStanding.PERFORMING_ORAL_BEHIND)),
 								null,
 								null,
 								END_SEX_ORAL_RECEIVING,
@@ -498,12 +497,12 @@ public class CityHallDemographics {
 								biped
 									?new SMVanessaOral(
 											SexPosition.SITTING,
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.SITTING)),
-											Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vanessa.class), SexSlotSitting.PERFORMING_ORAL)))
+											Map.of(Main.game.getPlayer(),SexSlotSitting.SITTING),
+											Map.of(Main.game.getNpc(Vanessa.class),SexSlotSitting.PERFORMING_ORAL))
 									:new SMVanessaOral(
 											SexPosition.STANDING,
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-											Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vanessa.class), SexSlotStanding.PERFORMING_ORAL_BEHIND))),
+											Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+											Map.of(Main.game.getNpc(Vanessa.class),SexSlotStanding.PERFORMING_ORAL_BEHIND)),
 								null,
 								null,
 								END_SEX_ORAL_RECEIVING,

@@ -24,7 +24,6 @@ import com.lilithsthrone.game.sex.sexActions.SexActionCategory;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.79
@@ -38,7 +37,7 @@ public class ClitMouth {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -106,7 +105,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT),
 			SexParticipantType.NORMAL) {
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -115,9 +114,9 @@ public class ClitMouth {
 		@Override
 		public Map<SexAreaInterface, SexAreaInterface> getSexAreaInteractions() {
 			if(Main.sex.getCharactersHavingOngoingActionWith(Main.sex.getCharacterTargetedForSexAction(this), SexAreaOrifice.VAGINA).contains(Main.sex.getCharacterPerformingAction())) {
-				return Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.VAGINA));
+				return Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.VAGINA);
 			} else {
-				return Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT));
+				return Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT);
 			}
 		}
 		@Override
@@ -269,7 +268,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionCategory getCategory() {
@@ -406,7 +405,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -534,7 +533,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -661,7 +660,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -789,7 +788,7 @@ public class ClitMouth {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FIVE_EXTREME,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -828,7 +827,7 @@ public class ClitMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -1083,7 +1082,7 @@ public class ClitMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -1125,7 +1124,7 @@ public class ClitMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		
@@ -1167,7 +1166,7 @@ public class ClitMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -1312,7 +1311,7 @@ public class ClitMouth {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -1383,7 +1382,7 @@ public class ClitMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		
@@ -1425,7 +1424,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		
@@ -1467,7 +1466,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.CLIT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.CLIT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -1534,7 +1533,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT),
 			SexParticipantType.NORMAL) {
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -1686,7 +1685,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -1808,7 +1807,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -1844,7 +1843,7 @@ public class ClitMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		
@@ -1880,7 +1879,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -1916,7 +1915,7 @@ public class ClitMouth {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -1974,7 +1973,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		
@@ -2010,7 +2009,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		
@@ -2046,7 +2045,7 @@ public class ClitMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.CLIT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.CLIT),
 			SexParticipantType.NORMAL) {
 		
 		@Override

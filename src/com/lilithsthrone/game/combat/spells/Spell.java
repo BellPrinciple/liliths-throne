@@ -69,7 +69,7 @@ public enum Spell {
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null && caster.hasSpellUpgrade(SpellUpgrade.FIREBALL_1)) {
-				return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.LINGERING_FLAMES, 2));
+				return Map.of(StatusEffect.LINGERING_FLAMES,2);
 			} else {
 				return new HashMap<>();
 			}
@@ -166,7 +166,7 @@ public enum Spell {
 			0,
 			DamageVariance.LOW,
 			50,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.FLASH, 1)),
+			Map.of(StatusEffect.FLASH,1),
 			List.of(SpellUpgrade.FLASH_1,
 					SpellUpgrade.FLASH_2,
 					SpellUpgrade.FLASH_3),
@@ -176,9 +176,9 @@ public enum Spell {
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null && caster.hasSpellUpgrade(SpellUpgrade.FLASH_1)) {
-				return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.FLASH_1, 1));
+				return Map.of(StatusEffect.FLASH_1,1);
 			} else {
-				return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.FLASH, 1));
+				return Map.of(StatusEffect.FLASH,1);
 			}
 		}
 		
@@ -272,28 +272,26 @@ public enum Spell {
 			0,
 			DamageVariance.LOW,
 			50,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.CLOAK_OF_FLAMES, 3)),
+			Map.of(StatusEffect.CLOAK_OF_FLAMES,3),
 			List.of(SpellUpgrade.CLOAK_OF_FLAMES_1,
 					SpellUpgrade.CLOAK_OF_FLAMES_2,
 					SpellUpgrade.CLOAK_OF_FLAMES_3),
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_FIRE, 5),
-					new Value<>(Attribute.RESISTANCE_ICE, 10)),
+			Map.of(Attribute.RESISTANCE_FIRE,5,Attribute.RESISTANCE_ICE,10),
 			List.of("Lasts for [style.colourGood(3 turns)]")) {
 
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null && caster.hasSpellUpgrade(SpellUpgrade.CLOAK_OF_FLAMES_3)) {
-				return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.CLOAK_OF_FLAMES_3, 3));
+				return Map.of(StatusEffect.CLOAK_OF_FLAMES_3,3);
 				
 			} else if(caster!=null && caster.hasSpellUpgrade(SpellUpgrade.CLOAK_OF_FLAMES_2)) {
-				return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.CLOAK_OF_FLAMES_2, 3));
+				return Map.of(StatusEffect.CLOAK_OF_FLAMES_2,3);
 				
 			} else if(caster!=null && caster.hasSpellUpgrade(SpellUpgrade.CLOAK_OF_FLAMES_1)) {
-				return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.CLOAK_OF_FLAMES_1, 3));
+				return Map.of(StatusEffect.CLOAK_OF_FLAMES_1,3);
 				
 			} else {
-				return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.CLOAK_OF_FLAMES, 3));
+				return Map.of(StatusEffect.CLOAK_OF_FLAMES,3);
 			}
 		}
 		
@@ -470,13 +468,10 @@ public enum Spell {
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.ICE_SHARD_3) && isCritical) {
-					return Util.newHashMapOfValues(
-							new Value<AbstractStatusEffect, Integer>(StatusEffect.FREEZING_FOG, 3),
-							new Value<AbstractStatusEffect, Integer>(StatusEffect.FROZEN, 1));
+					return Map.of(StatusEffect.FREEZING_FOG,3,StatusEffect.FROZEN,1);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.ICE_SHARD_1)){
-					return Util.newHashMapOfValues(
-							new Value<AbstractStatusEffect, Integer>(StatusEffect.FREEZING_FOG, 3));
+					return Map.of(StatusEffect.FREEZING_FOG,3);
 				}
 			}
 			return new HashMap<>();
@@ -559,23 +554,22 @@ public enum Spell {
 			List.of(SpellUpgrade.RAIN_CLOUD_1,
 					SpellUpgrade.RAIN_CLOUD_2,
 					SpellUpgrade.RAIN_CLOUD_3),
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.SPELL_COST_MODIFIER, -25)), List.of("Lasts for [style.colourGood(3 turns)]")) {
+			Map.of(Attribute.SPELL_COST_MODIFIER,-25), List.of("Lasts for [style.colourGood(3 turns)]")) {
 		
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.RAIN_CLOUD_3)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.RAIN_CLOUD_DOWNPOUR_FOR_CLOUDBURST, 3));
+					return Map.of(StatusEffect.RAIN_CLOUD_DOWNPOUR_FOR_CLOUDBURST,3);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.RAIN_CLOUD_2)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.RAIN_CLOUD_DOWNPOUR, 3));
+					return Map.of(StatusEffect.RAIN_CLOUD_DOWNPOUR,3);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.RAIN_CLOUD_1)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.RAIN_CLOUD_DEEP_CHILL, 3));
+					return Map.of(StatusEffect.RAIN_CLOUD_DEEP_CHILL,3);
 					
 				} else {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.RAIN_CLOUD, 3));
+					return Map.of(StatusEffect.RAIN_CLOUD,3);
 				}
 			}
 			return new HashMap<>();
@@ -921,16 +915,16 @@ public enum Spell {
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.POISON_VAPOURS_3)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.POISON_VAPOURS_WEAKENING_CLOUD, 3));
+					return Map.of(StatusEffect.POISON_VAPOURS_WEAKENING_CLOUD,3);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.POISON_VAPOURS_2)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.POISON_VAPOURS_ARCANE_SICKNESS, 3));
+					return Map.of(StatusEffect.POISON_VAPOURS_ARCANE_SICKNESS,3);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.POISON_VAPOURS_1)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.POISON_VAPOURS_CHOKING_HAZE, 3));
+					return Map.of(StatusEffect.POISON_VAPOURS_CHOKING_HAZE,3);
 					
 				} else {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.POISON_VAPOURS, 3));
+					return Map.of(StatusEffect.POISON_VAPOURS,3);
 				}
 			}
 			return new HashMap<>();
@@ -991,23 +985,22 @@ public enum Spell {
 			List.of(SpellUpgrade.VACUUM_1,
 					SpellUpgrade.VACUUM_2,
 					SpellUpgrade.VACUUM_3),
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.ENERGY_SHIELDING, -5)), List.of("Lasts for [style.colourGood(4 turns)]")) {
+			Map.of(Attribute.ENERGY_SHIELDING,-5), List.of("Lasts for [style.colourGood(4 turns)]")) {
 
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.VACUUM_3)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.VACUUM_TOTAL_VOID, 4));
+					return Map.of(StatusEffect.VACUUM_TOTAL_VOID,4);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.VACUUM_2)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.VACUUM_SUCTION, 4));
+					return Map.of(StatusEffect.VACUUM_SUCTION,4);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.VACUUM_1)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.VACUUM_SECONDARY_VOIDS, 4));
+					return Map.of(StatusEffect.VACUUM_SECONDARY_VOIDS,4);
 					
 				} else {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.VACUUM, 4));
+					return Map.of(StatusEffect.VACUUM,4);
 				}
 			}
 			return new HashMap<>();
@@ -1070,25 +1063,23 @@ public enum Spell {
 			List.of(SpellUpgrade.PROTECTIVE_GUSTS_1,
 					SpellUpgrade.PROTECTIVE_GUSTS_2,
 					SpellUpgrade.PROTECTIVE_GUSTS_3),
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_POISON, 5),
-					new Value<>(Attribute.ENERGY_SHIELDING, 1)),
+			Map.of(Attribute.RESISTANCE_POISON,5,Attribute.ENERGY_SHIELDING,1),
 			List.of("Lasts for [style.colourGood(3 turns)]")) {
 		
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.PROTECTIVE_GUSTS_3)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.PROTECTIVE_GUSTS_FOCUSED_BLAST, 5));
+					return Map.of(StatusEffect.PROTECTIVE_GUSTS_FOCUSED_BLAST,5);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.PROTECTIVE_GUSTS_2)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.PROTECTIVE_GUSTS_FOCUSED_BLAST, 3));
+					return Map.of(StatusEffect.PROTECTIVE_GUSTS_FOCUSED_BLAST,3);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.PROTECTIVE_GUSTS_1)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.PROTECTIVE_GUSTS_GUIDING_WIND, 3));
+					return Map.of(StatusEffect.PROTECTIVE_GUSTS_GUIDING_WIND,3);
 					
 				} else {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.PROTECTIVE_GUSTS, 3));
+					return Map.of(StatusEffect.PROTECTIVE_GUSTS,3);
 				}
 			}
 			return new HashMap<>();
@@ -1256,10 +1247,10 @@ public enum Spell {
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.SLAM_2)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.SLAM_AFTER_SHOCK, 2));
+					return Map.of(StatusEffect.SLAM_AFTER_SHOCK,2);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.SLAM_1)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.SLAM_GROUND_SHAKE, 2));
+					return Map.of(StatusEffect.SLAM_GROUND_SHAKE,2);
 					
 				}
 			}
@@ -1344,16 +1335,16 @@ public enum Spell {
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.TELEKENETIC_SHOWER_3)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.TELEKENETIC_SHOWER_UNSEEN_FORCE, 6));
+					return Map.of(StatusEffect.TELEKENETIC_SHOWER_UNSEEN_FORCE,6);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.TELEKENETIC_SHOWER_2)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.TELEKENETIC_SHOWER_PRECISION_STRIKES, 6));
+					return Map.of(StatusEffect.TELEKENETIC_SHOWER_PRECISION_STRIKES,6);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.TELEKENETIC_SHOWER_1)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.TELEKENETIC_SHOWER, 6));
+					return Map.of(StatusEffect.TELEKENETIC_SHOWER,6);
 					
 				} else {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.TELEKENETIC_SHOWER, 3));
+					return Map.of(StatusEffect.TELEKENETIC_SHOWER,3);
 				}
 			}
 			return new HashMap<>();
@@ -1413,23 +1404,22 @@ public enum Spell {
 			List.of(SpellUpgrade.STONE_SHELL_1,
 					SpellUpgrade.STONE_SHELL_2,
 					SpellUpgrade.STONE_SHELL_3),
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 5)), List.of("Lasts for [style.colourGood(3 turns)]")) {
+			Map.of(Attribute.RESISTANCE_PHYSICAL,5), List.of("Lasts for [style.colourGood(3 turns)]")) {
 		
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.STONE_SHELL_3)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.STONE_SHELL_EXPLOSIVE_FINISH, 3));
+					return Map.of(StatusEffect.STONE_SHELL_EXPLOSIVE_FINISH,3);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.STONE_SHELL_2)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.STONE_SHELL_HARDENED_CARAPACE, 3));
+					return Map.of(StatusEffect.STONE_SHELL_HARDENED_CARAPACE,3);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.STONE_SHELL_1)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.STONE_SHELL_SHIFTING_SANDS, 3));
+					return Map.of(StatusEffect.STONE_SHELL_SHIFTING_SANDS,3);
 					
 				} else {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.STONE_SHELL, 3));
+					return Map.of(StatusEffect.STONE_SHELL,3);
 				}
 			}
 			return new HashMap<>();
@@ -1596,10 +1586,10 @@ public enum Spell {
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.ARCANE_AROUSAL_3)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.ARCANE_AROUSAL_DIRTY_PROMISES, 3));
+					return Map.of(StatusEffect.ARCANE_AROUSAL_DIRTY_PROMISES,3);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.ARCANE_AROUSAL_2)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.ARCANE_AROUSAL_LUSTFUL_DISTRACTION, 2));
+					return Map.of(StatusEffect.ARCANE_AROUSAL_LUSTFUL_DISTRACTION,2);
 					
 				}
 			}
@@ -1674,23 +1664,22 @@ public enum Spell {
 			List.of(SpellUpgrade.TELEPATHIC_COMMUNICATION_1,
 					SpellUpgrade.TELEPATHIC_COMMUNICATION_2,
 					SpellUpgrade.TELEPATHIC_COMMUNICATION_3),
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_LUST, 15)), List.of("Lasts for [style.colourGood(5 turns)]")) {
+			Map.of(Attribute.DAMAGE_LUST,15), List.of("Lasts for [style.colourGood(5 turns)]")) {
 		
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.TELEPATHIC_COMMUNICATION_3)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION, 10));
+					return Map.of(StatusEffect.TELEPATHIC_COMMUNICATION_POWER_OF_SUGGESTION,10);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.TELEPATHIC_COMMUNICATION_2)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.TELEPATHIC_COMMUNICATION_PROJECTED_TOUCH, 10));
+					return Map.of(StatusEffect.TELEPATHIC_COMMUNICATION_PROJECTED_TOUCH,10);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.TELEPATHIC_COMMUNICATION_1)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.TELEPATHIC_COMMUNICATION, 10));
+					return Map.of(StatusEffect.TELEPATHIC_COMMUNICATION,10);
 					
 				} else {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.TELEPATHIC_COMMUNICATION, 5));
+					return Map.of(StatusEffect.TELEPATHIC_COMMUNICATION,5);
 				}
 			}
 			return new HashMap<>();
@@ -1748,23 +1737,22 @@ public enum Spell {
 			List.of(SpellUpgrade.ARCANE_CLOUD_1,
 					SpellUpgrade.ARCANE_CLOUD_2,
 					SpellUpgrade.ARCANE_CLOUD_3),
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_LUST, -25)), List.of("Lasts for [style.colourGood(3 turns)]")) {
+			Map.of(Attribute.RESISTANCE_LUST,-25), List.of("Lasts for [style.colourGood(3 turns)]")) {
 
 		@Override
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.ARCANE_CLOUD_3)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.ARCANE_CLOUD_LOCALISED_STORM, 3));
+					return Map.of(StatusEffect.ARCANE_CLOUD_LOCALISED_STORM,3);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.ARCANE_CLOUD_2)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.ARCANE_CLOUD_ARCANE_THUNDER, 3));
+					return Map.of(StatusEffect.ARCANE_CLOUD_ARCANE_THUNDER,3);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.ARCANE_CLOUD_1)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.ARCANE_CLOUD_ARCANE_LIGHTNING, 3));
+					return Map.of(StatusEffect.ARCANE_CLOUD_ARCANE_LIGHTNING,3);
 					
 				} else {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.ARCANE_CLOUD, 3));
+					return Map.of(StatusEffect.ARCANE_CLOUD,3);
 				}
 			}
 			return new HashMap<>();
@@ -1842,10 +1830,10 @@ public enum Spell {
 				
 				
 				if(caster.hasSpellUpgrade(SpellUpgrade.CLEANSE_3)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(effect, 6));
+					return Map.of(effect,6);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.CLEANSE_2)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(effect, 3));
+					return Map.of(effect,3);
 					
 				}
 			}
@@ -2152,8 +2140,7 @@ public enum Spell {
 			List.of(SpellUpgrade.TELEPORT_1,
 					SpellUpgrade.TELEPORT_2,
 					SpellUpgrade.TELEPORT_3),
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.ENERGY_SHIELDING, 100)), List.of("Lasts for [style.colourGood(1 turn)]",
+			Map.of(Attribute.ENERGY_SHIELDING,100), List.of("Lasts for [style.colourGood(1 turn)]",
 					"[style.colourExcellent(Unlocks)] map teleport",
 					"Map teleport [style.colourTerrible(blocked)] by companions")) {
 		
@@ -2166,13 +2153,13 @@ public enum Spell {
 		public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 			if(caster!=null) {
 				if(caster.hasSpellUpgrade(SpellUpgrade.TELEPORT_3)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.TELEPORT_ARCANE_ARRIVAL, 2));
+					return Map.of(StatusEffect.TELEPORT_ARCANE_ARRIVAL,2);
 					
 				} else if(caster.hasSpellUpgrade(SpellUpgrade.TELEPORT_1)) {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.TELEPORT_ARCANE_ARRIVAL, 1));
+					return Map.of(StatusEffect.TELEPORT_ARCANE_ARRIVAL,1);
 					
 				} else {
-					return Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.TELEPORT, 1));
+					return Map.of(StatusEffect.TELEPORT,1);
 				}
 			}
 			return new HashMap<>();
@@ -2436,7 +2423,7 @@ public enum Spell {
 			0,
 			DamageVariance.NONE,
 			80,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.WITCH_SEAL, 1)),
+			Map.of(StatusEffect.WITCH_SEAL,1),
 			null,
 			null,
 			List.of("[style.colourExcellent(Seals)] the target for [style.colourTerrible(-3)] [style.colourActionPoints(action points)]!")) {
@@ -2489,10 +2476,9 @@ public enum Spell {
 			0,
 			DamageVariance.NONE,
 			40,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.WITCH_CHARM, 5)),
+			Map.of(StatusEffect.WITCH_CHARM,5),
 			null,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_LUST, 25)), List.of("Lasts for [style.colourGood(5 turns)]")) {
+			Map.of(Attribute.DAMAGE_LUST,25), List.of("Lasts for [style.colourGood(5 turns)]")) {
 		
 		@Override
 		public boolean isSpellBook() {
@@ -2544,7 +2530,7 @@ public enum Spell {
 			10,
 			DamageVariance.NONE,
 			200,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.BANEFUL_FISSURE, 10)),
+			Map.of(StatusEffect.BANEFUL_FISSURE,10),
 			null,
 			null,
 			List.of("<b>25</b> [style.colourPoison(Poison Damage)] per turn for [style.colourGood(10 turns)]",

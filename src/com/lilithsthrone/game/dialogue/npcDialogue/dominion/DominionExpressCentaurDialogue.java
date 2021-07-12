@@ -29,7 +29,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
@@ -131,12 +130,10 @@ public class DominionExpressCentaurDialogue {
 							true,
 							false,
 							new SMDominionExpressEncounter(SexPosition.STANDING,
-									Util.newHashMapOfValues(new Value<>(centaur(), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
-									Util.newHashMapOfValues(new Value<>(centaur(), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
-									Util.newHashMapOfValues(
-											new Value<>(centaur(), List.of(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
+									Map.of(centaur(),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL),
+									Map.of(centaur(),new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+									Map.of(centaur(),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))) {
 								@Override
 								public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 									Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -163,12 +160,10 @@ public class DominionExpressCentaurDialogue {
 							true,
 							false,
 							new SMDominionExpressEncounter(SexPosition.STANDING,
-									Util.newHashMapOfValues(new Value<>(centaur(), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL_BEHIND)),
-									Util.newHashMapOfValues(new Value<>(centaur(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
-									Util.newHashMapOfValues(
-											new Value<>(centaur(), List.of(CoverableArea.ANUS, CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+									Map.of(centaur(),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL_BEHIND),
+									Map.of(centaur(),new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE)),
+									Map.of(centaur(),List.of(CoverableArea.ANUS, CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 							null,
 							null,
 							AFTER_SEX,
@@ -186,12 +181,10 @@ public class DominionExpressCentaurDialogue {
 							true,
 							false,
 							new SMDominionExpressEncounter(SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(new Value<>(centaur(), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
-									Util.newHashMapOfValues(new Value<>(centaur(), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS))),
-									Util.newHashMapOfValues(
-											new Value<>(centaur(), List.of(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))) {
+									Map.of(centaur(),SexSlotAllFours.BEHIND),
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS),
+									Map.of(centaur(),new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS)),
+									Map.of(centaur(),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.ANUS))) {
 								@Override
 								public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 									Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();

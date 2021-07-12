@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.story;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.npc.dominion.Arthur;
@@ -23,8 +25,6 @@ import com.lilithsthrone.game.sex.managers.submission.SMLyssiethSex;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -654,8 +654,8 @@ public class LyssiethReveal {
 						true,
 						new SMLyssiethSex(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_SUBMISSIVE))),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_SUBMISSIVE)),
 						null,
 						null,
 						POWER_VISION,
@@ -668,8 +668,8 @@ public class LyssiethReveal {
 						true,
 						new SMLyssiethSex(
 								SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lyssieth.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_SUBMISSIVE))),
+								Map.of(Main.game.getNpc(Lyssieth.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_SUBMISSIVE)),
 						null,
 						null,
 						POWER_VISION,

@@ -97,7 +97,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -173,8 +172,8 @@ public class ScarlettsShop {
 		return new SexManagerDefault(
 				false,
 				position,
-				Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Scarlett.class), scarlettSlot)),
-				Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), playerSlot))) {
+				Map.of(Main.game.getNpc(Scarlett.class),scarlettSlot),
+				Map.of(Main.game.getPlayer(),playerSlot)) {
 			@Override
 			public boolean isPublicSex() {
 				return false;
@@ -265,8 +264,8 @@ public class ScarlettsShop {
 		return new SexManagerDefault(
 				false,
 				position,
-				Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Scarlett.class), scarlettSlot)),
-				Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), playerSlot))) {
+				Map.of(Main.game.getNpc(Scarlett.class),scarlettSlot),
+				Map.of(Main.game.getPlayer(),playerSlot)) {
 			@Override
 			public boolean isPublicSex() {
 				return false;
@@ -1700,8 +1699,8 @@ public class ScarlettsShop {
 						true,
 						false,
 						new SMStanding(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))) {
+								Map.of(Main.game.getNpc(Natalya.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL)) {
 							@Override
 							public boolean isAbleToSkipSexScene() {
 								return false;
@@ -2454,9 +2453,7 @@ public class ScarlettsShop {
 									false,
 									getScarlettSleepoverSexManager(SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+											Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 									null,
 									null,
 									ROMANCE_7_AFTER_SEX,
@@ -2479,9 +2476,7 @@ public class ScarlettsShop {
 									false,
 									getScarlettSleepoverSexManager(SexPosition.LYING_DOWN, SexSlotLyingDown.FACE_SITTING, SexSlotLyingDown.LYING_DOWN,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+											Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 									null,
 									null,
 									ROMANCE_7_AFTER_SEX,
@@ -2504,8 +2499,7 @@ public class ScarlettsShop {
 									false,
 									getScarlettSleepoverSexManager(SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.FINGER),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)))),
+											Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA))),
 									null,
 									null,
 									ROMANCE_7_AFTER_SEX,
@@ -2535,9 +2529,7 @@ public class ScarlettsShop {
 									false,
 									getScarlettSleepoverSexManager(SexPosition.ALL_FOURS, SexSlotAllFours.BEHIND, SexSlotAllFours.ALL_FOURS,
 											new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS, CoverableArea.PENIS, CoverableArea.VAGINA)))),
+											Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.ANUS, CoverableArea.PENIS, CoverableArea.VAGINA))),
 									null,
 									null,
 									ROMANCE_7_AFTER_SEX,
@@ -2572,9 +2564,7 @@ public class ScarlettsShop {
 									false,
 									getScarlettSleepoverSexManager(SexPosition.ALL_FOURS, SexSlotAllFours.IN_FRONT, SexSlotAllFours.ALL_FOURS,
 											new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+											Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 									null,
 									null,
 									ROMANCE_7_AFTER_SEX,
@@ -2597,8 +2587,7 @@ public class ScarlettsShop {
 									false,
 									getScarlettSleepoverSexManager(SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 											new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaPenetration.FINGER),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)))),
+											Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS))),
 									null,
 									null,
 									ROMANCE_7_AFTER_SEX,
@@ -2690,9 +2679,7 @@ public class ScarlettsShop {
 								false,
 								getScarlettSleepoverSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
-										Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+										Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 								null,
 								null,
 								ROMANCE_7_MORNING_AFTER_SEX,
@@ -2715,9 +2702,7 @@ public class ScarlettsShop {
 								false,
 								getScarlettSleepoverSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.PERFORMING_ORAL,
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+										Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 								null,
 								null,
 								ROMANCE_7_MORNING_AFTER_SEX,
@@ -3575,9 +3560,7 @@ public class ScarlettsShop {
 						HelenaHotel.getHelenaSexManager(false,
 								SexPosition.AGAINST_WALL, SexSlotAgainstWall.BACK_TO_WALL, SexSlotAgainstWall.PERFORMING_ORAL_WALL,
 								new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+								Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 						null,
 						null,
 						HELENAS_SHOP_BACK_ROOM_AFTER_SEX,
@@ -3600,9 +3583,7 @@ public class ScarlettsShop {
 							HelenaHotel.getHelenaSexManager(false,
 									SexPosition.AGAINST_WALL, SexSlotAgainstWall.FACE_TO_WALL, SexSlotAgainstWall.PERFORMING_ORAL_WALL,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+									Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 							null,
 							null,
 							HELENAS_SHOP_BACK_ROOM_AFTER_SEX,
@@ -3641,9 +3622,7 @@ public class ScarlettsShop {
 											?SexSlotStanding.STANDING_DOMINANT
 											:SexSlotAgainstWall.BACK_TO_WALL,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 								null,
 								null,
 								HELENAS_SHOP_BACK_ROOM_AFTER_SEX,
@@ -3686,9 +3665,7 @@ public class ScarlettsShop {
 											?SexSlotStanding.STANDING_DOMINANT
 											:SexSlotAgainstWall.BACK_TO_WALL,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaOrifice.VAGINA),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH),Main.game.getPlayer(),List.of(CoverableArea.VAGINA))),
 								null,
 								null,
 								HELENAS_SHOP_BACK_ROOM_AFTER_SEX,
@@ -3728,9 +3705,7 @@ public class ScarlettsShop {
 								HelenaHotel.getHelenaSexManager(true,
 										SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 								null,
 								null,
 								HELENAS_SHOP_BACK_ROOM_AFTER_SEX,
@@ -3759,9 +3734,7 @@ public class ScarlettsShop {
 									HelenaHotel.getHelenaSexManager(true,
 											SexPosition.LYING_DOWN, SexSlotLyingDown.COWGIRL, SexSlotLyingDown.LYING_DOWN,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+											Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 									null,
 									null,
 									HELENAS_SHOP_BACK_ROOM_AFTER_SEX,
@@ -3789,9 +3762,7 @@ public class ScarlettsShop {
 								HelenaHotel.getHelenaSexManager(false,
 										SexPosition.OVER_DESK, Main.game.getNpc(Helena.class).isVisiblyPregnant()?SexSlotDesk.OVER_DESK_ON_BACK:SexSlotDesk.OVER_DESK_ON_FRONT, SexSlotDesk.BETWEEN_LEGS,
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 								null,
 								null,
 								HELENAS_SHOP_BACK_ROOM_AFTER_SEX,
@@ -3820,9 +3791,7 @@ public class ScarlettsShop {
 									HelenaHotel.getHelenaSexManager(false,
 											SexPosition.OVER_DESK, Main.game.getNpc(Helena.class).isVisiblyPregnant()?SexSlotDesk.OVER_DESK_ON_BACK:SexSlotDesk.OVER_DESK_ON_FRONT, SexSlotDesk.BETWEEN_LEGS,
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+											Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 									null,
 									null,
 									HELENAS_SHOP_BACK_ROOM_AFTER_SEX,
@@ -3910,12 +3879,10 @@ public class ScarlettsShop {
 									Main.game.getNpc(Scarlett.class).hasVagina()
 										?new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)
 										:new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-											Main.game.getNpc(Scarlett.class).hasVagina()
-												?new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA))
-												:new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+									Map.of(
+											Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA),
+											Main.game.getNpc(Scarlett.class), List.of(Main.game.getNpc(Scarlett.class).hasVagina() ? CoverableArea.VAGINA : CoverableArea.PENIS),
+											Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
 							null,
 							null,
 							HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -3954,12 +3921,10 @@ public class ScarlettsShop {
 										Main.game.getNpc(Scarlett.class).hasVagina()
 											?new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)
 											:new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS)),
-												Main.game.getNpc(Scarlett.class).hasVagina()
-													?new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA))
-													:new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+										Map.of(
+												Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS),
+												Main.game.getNpc(Scarlett.class), List.of(Main.game.getNpc(Scarlett.class).hasVagina() ? CoverableArea.VAGINA : CoverableArea.PENIS),
+												Main.game.getPlayer(), List.of(CoverableArea.MOUTH))),
 								null,
 								null,
 								HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4008,10 +3973,7 @@ public class ScarlettsShop {
 													new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
 													null,
 													new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS),
-													Util.newHashMapOfValues(
-															new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH, CoverableArea.ANUS)),
-															new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-															new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+													Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH, CoverableArea.ANUS),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 											null,
 											null,
 											HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4038,10 +4000,7 @@ public class ScarlettsShop {
 													new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 													null,
 													new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA),
-													Util.newHashMapOfValues(
-															new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH, CoverableArea.VAGINA)),
-															new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-															new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+													Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH, CoverableArea.VAGINA),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 											null,
 											null,
 											HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4069,10 +4028,7 @@ public class ScarlettsShop {
 												new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
 												null,
 												new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.VAGINA),
-												Util.newHashMapOfValues(
-														new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH, CoverableArea.VAGINA)),
-														new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.MOUTH)),
-														new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+												Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH, CoverableArea.VAGINA),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.MOUTH),Main.game.getPlayer(),List.of(CoverableArea.PENIS))),
 										null,
 										null,
 										HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4117,10 +4073,7 @@ public class ScarlettsShop {
 													new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.PENIS),
 													null,
 													new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS),
-													Util.newHashMapOfValues(
-															new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH, CoverableArea.ANUS)),
-															new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-															new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)))),
+													Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH, CoverableArea.ANUS),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.VAGINA))),
 											null,
 											null,
 											HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4147,10 +4100,7 @@ public class ScarlettsShop {
 													new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 													null,
 													new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA),
-													Util.newHashMapOfValues(
-															new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH, CoverableArea.VAGINA)),
-															new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-															new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)))),
+													Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH, CoverableArea.VAGINA),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.VAGINA))),
 											null,
 											null,
 											HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4178,10 +4128,7 @@ public class ScarlettsShop {
 												new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
 												null,
 												new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.VAGINA),
-												Util.newHashMapOfValues(
-														new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH, CoverableArea.VAGINA)),
-														new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.MOUTH)),
-														new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)))),
+												Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH, CoverableArea.VAGINA),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.MOUTH),Main.game.getPlayer(),List.of(CoverableArea.VAGINA))),
 										null,
 										null,
 										HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4233,12 +4180,10 @@ public class ScarlettsShop {
 												?new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)
 												:new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.TONGUE),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH)),
-													Main.game.getNpc(Scarlett.class).hasVagina()
-														?new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH))
-														:new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS, CoverableArea.MOUTH)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS, CoverableArea.MOUTH)))),
+											Map.of(
+												Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH),
+												Main.game.getNpc(Scarlett.class), List.of(Main.game.getNpc(Scarlett.class).hasVagina() ? CoverableArea.VAGINA : CoverableArea.PENIS, CoverableArea.MOUTH),
+												Main.game.getPlayer(), List.of(CoverableArea.PENIS, CoverableArea.MOUTH))),
 									null,
 									null,
 									HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4279,12 +4224,10 @@ public class ScarlettsShop {
 													?new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)
 													:new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
 												new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.TONGUE),
-												Util.newHashMapOfValues(
-														new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS, CoverableArea.MOUTH)),
-														Main.game.getNpc(Scarlett.class).hasVagina()
-															?new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH))
-															:new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS, CoverableArea.MOUTH)),
-														new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS, CoverableArea.MOUTH)))),
+												Map.of(
+													Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS, CoverableArea.MOUTH),
+													Main.game.getNpc(Scarlett.class), List.of(Main.game.getNpc(Scarlett.class).hasVagina() ? CoverableArea.VAGINA : CoverableArea.PENIS, CoverableArea.MOUTH),
+													Main.game.getPlayer(), List.of(CoverableArea.PENIS, CoverableArea.MOUTH))),
 										null,
 										null,
 										HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4329,12 +4272,10 @@ public class ScarlettsShop {
 											Main.game.getNpc(Scarlett.class).hasVagina()
 												?new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)
 												:new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH)),
-													Main.game.getNpc(Scarlett.class).hasVagina()
-														?new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA))
-														:new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+											Map.of(
+												Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH),
+												Main.game.getNpc(Scarlett.class), List.of(Main.game.getNpc(Scarlett.class).hasVagina() ? CoverableArea.VAGINA : CoverableArea.PENIS),
+												Main.game.getPlayer(), List.of(CoverableArea.PENIS))),
 									null,
 									null,
 									HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4376,12 +4317,10 @@ public class ScarlettsShop {
 												Main.game.getNpc(Scarlett.class).hasVagina()
 													?new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)
 													:new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
-												Util.newHashMapOfValues(
-														new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS, CoverableArea.MOUTH)),
-														Main.game.getNpc(Scarlett.class).hasVagina()
-															?new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA))
-															:new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-														new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))),
+												Map.of(
+													Main.game.getNpc(Helena.class), List.of(CoverableArea.ANUS, CoverableArea.MOUTH),
+													Main.game.getNpc(Scarlett.class), List.of(Main.game.getNpc(Scarlett.class).hasVagina() ? CoverableArea.VAGINA : CoverableArea.PENIS),
+													Main.game.getPlayer(), List.of(CoverableArea.PENIS))),
 										null,
 										null,
 										HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4420,10 +4359,7 @@ public class ScarlettsShop {
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS),
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH)),
-												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 								null,
 								null,
 								HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4454,10 +4390,7 @@ public class ScarlettsShop {
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.VAGINA),
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.MOUTH)),
-												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.MOUTH),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 								null,
 								null,
 								HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4489,10 +4422,7 @@ public class ScarlettsShop {
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE),
 										new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE),
 										new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.VAGINA),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA)),
-												new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.ANUS)),
-												new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+										Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 								null,
 								null,
 								HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4528,10 +4458,7 @@ public class ScarlettsShop {
 											new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.MOUTH),
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.TONGUE),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH)),
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS, CoverableArea.MOUTH)))),
+											Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA, CoverableArea.MOUTH),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA, CoverableArea.MOUTH),Main.game.getPlayer(),List.of(CoverableArea.PENIS, CoverableArea.MOUTH))),
 									null,
 									null,
 									HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4567,10 +4494,7 @@ public class ScarlettsShop {
 											new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.MOUTH),
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS),
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.TONGUE),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH)),
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS, CoverableArea.MOUTH)))),
+											Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA, CoverableArea.MOUTH),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA, CoverableArea.MOUTH),Main.game.getPlayer(),List.of(CoverableArea.PENIS, CoverableArea.MOUTH))),
 									null,
 									null,
 									HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4606,10 +4530,7 @@ public class ScarlettsShop {
 											new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.MOUTH),
 											new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA),
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.TONGUE),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH)),
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS, CoverableArea.MOUTH)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH)))),
+											Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA, CoverableArea.MOUTH),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS, CoverableArea.MOUTH),Main.game.getPlayer(),List.of(CoverableArea.VAGINA, CoverableArea.MOUTH))),
 									null,
 									null,
 									HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -4642,10 +4563,7 @@ public class ScarlettsShop {
 											new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.MOUTH),
 											new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS),
 											new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.TONGUE),
-											Util.newHashMapOfValues(
-													new Value<>(Main.game.getNpc(Helena.class), List.of(CoverableArea.VAGINA, CoverableArea.MOUTH)),
-													new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS, CoverableArea.MOUTH)),
-													new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS, CoverableArea.MOUTH)))),
+											Map.of(Main.game.getNpc(Helena.class),List.of(CoverableArea.VAGINA, CoverableArea.MOUTH),Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS, CoverableArea.MOUTH),Main.game.getPlayer(),List.of(CoverableArea.ANUS, CoverableArea.MOUTH))),
 									null,
 									null,
 									HELENAS_SHOP_BACK_ROOM_AFTER_SEX_THREESOME,
@@ -5133,8 +5051,7 @@ public class ScarlettsShop {
 							false,
 							getScarlettCafeSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.SITTING_TWO,
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaPenetration.FINGER),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.PENIS)))),
+									Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.PENIS))),
 							null,
 							null,
 							HELENAS_SHOP_SCARLETT_CAFE_AFTER_SEX,
@@ -5157,8 +5074,7 @@ public class ScarlettsShop {
 							false,
 							getScarlettCafeSexManager(SexPosition.SITTING, SexSlotSitting.SITTING, SexSlotSitting.SITTING_TWO,
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.FINGER),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Scarlett.class), List.of(CoverableArea.VAGINA)))),
+									Map.of(Main.game.getNpc(Scarlett.class),List.of(CoverableArea.VAGINA))),
 							null,
 							null,
 							HELENAS_SHOP_SCARLETT_CAFE_AFTER_SEX,

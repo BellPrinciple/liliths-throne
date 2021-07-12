@@ -3034,16 +3034,13 @@ public class ItemType {
 						null,
 						mainSubspecies.getColour(null),
 						true,
-						Util.newHashMapOfValues(new Util.Value<>(Attribute.MAJOR_PHYSIQUE, 2f),
-								new Util.Value<>(
-									mainSubspecies.getRace()==Race.DEMON && override <= 2
+						Map.of(Attribute.MAJOR_PHYSIQUE,2f,mainSubspecies.getRace()==Race.DEMON && override <= 2
 										?Attribute.DAMAGE_IMP
 										:(mainSubspecies==Subspecies.LILIN
 											?Attribute.DAMAGE_LILIN
 											:mainSubspecies==Subspecies.ELDER_LILIN
 												?Attribute.DAMAGE_ELDER_LILIN
-												:Attribute.getRacialDamageAttribute(mainSubspecies.getRace())),
-									25f)),
+												:Attribute.getRacialDamageAttribute(mainSubspecies.getRace())),25f),
 						null) {
 					@Override
 					public String getDescription(GameCharacter target) {

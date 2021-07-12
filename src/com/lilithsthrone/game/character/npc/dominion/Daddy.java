@@ -3,6 +3,7 @@ package com.lilithsthrone.game.character.npc.dominion;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -57,7 +58,6 @@ import com.lilithsthrone.game.sex.sexActions.dominion.DaddySexActions;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -116,10 +116,7 @@ public class Daddy extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_CLOTHING_MASCULINITY_INDIFFERENCE);
 		PerkManager.initialisePerks(this,
 				List.of(Perk.FETISH_SEEDER),
-				Util.newHashMapOfValues(
-						new Value<>(PerkCategory.PHYSICAL, 5),
-						new Value<>(PerkCategory.LUST, 1),
-						new Value<>(PerkCategory.ARCANE, 0)));
+				Map.of(PerkCategory.PHYSICAL,5,PerkCategory.LUST,1,PerkCategory.ARCANE,0));
 	}
 
 	@Override

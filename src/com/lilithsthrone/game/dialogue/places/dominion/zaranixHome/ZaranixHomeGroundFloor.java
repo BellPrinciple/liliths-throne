@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.dominion.zaranixHome;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -31,8 +32,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
 import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Pathing;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -697,11 +696,8 @@ public class ZaranixHomeGroundFloor {
 						true,
 						true,
 						new SMZaranixCockSucking(
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Zaranix.class), SexSlotSitting.SITTING),
-										new Value<>(Main.game.getNpc(Amber.class), SexSlotSitting.PERFORMING_ORAL_TWO)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL))),
+								Map.of(Main.game.getNpc(Zaranix.class),SexSlotSitting.SITTING,Main.game.getNpc(Amber.class),SexSlotSitting.PERFORMING_ORAL_TWO),
+								Map.of(Main.game.getPlayer(),SexSlotSitting.PERFORMING_ORAL)),
 						null,
 						null,
 						AFTER_SEX_THANKING_ZARANIX,
@@ -735,8 +731,8 @@ public class ZaranixHomeGroundFloor {
 				return new ResponseSex("Lift ass", "Do as Amber commands and lift your ass towards her.",
 						true, true,
 						new SMAmberDoggyFucked(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Amber.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Amber.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 						null,
 						null,
 						AFTER_SEX_THANKING_AMBER,

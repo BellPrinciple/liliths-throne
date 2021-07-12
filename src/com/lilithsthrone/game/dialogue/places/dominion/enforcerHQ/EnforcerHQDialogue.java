@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.dominion.enforcerHQ;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -36,7 +37,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Vector2i;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -424,8 +424,8 @@ public class EnforcerHQDialogue {
 								true,
 								true,
 								new SMStanding(
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(CandiReceptionist.class), SexSlotStanding.STANDING_SUBMISSIVE))),
+										Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+										Map.of(Main.game.getNpc(CandiReceptionist.class),SexSlotStanding.STANDING_SUBMISSIVE)),
 								null,
 								null,
 								AFTER_SEX_CANDI,
@@ -452,8 +452,8 @@ public class EnforcerHQDialogue {
 							return new ResponseSex("Punish [brax.name]", "Have dominant sex with [brax.name].",
 									false, false,
 									new SMStanding(
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-											Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotStanding.PERFORMING_ORAL))),
+											Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+											Map.of(Main.game.getNpc(Brax.class),SexSlotStanding.PERFORMING_ORAL)),
 									null,
 									null,
 									AFTER_SEX,
@@ -468,8 +468,8 @@ public class EnforcerHQDialogue {
 							return new ResponseSex("Punish [brax.name]", "Have dominant sex with [brax.name].",
 									false, false,
 									new SMStanding(
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-											Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotStanding.PERFORMING_ORAL))),
+											Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+											Map.of(Main.game.getNpc(Brax.class),SexSlotStanding.PERFORMING_ORAL)),
 									null,
 									null,
 									AFTER_SEX,
@@ -484,8 +484,8 @@ public class EnforcerHQDialogue {
 							return new ResponseSex("Punish [brax.name]", "Have dominant sex with [brax.name].",
 									false, false,
 									new SMStanding(
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-											Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotStanding.PERFORMING_ORAL))),
+											Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+											Map.of(Main.game.getNpc(Brax.class),SexSlotStanding.PERFORMING_ORAL)),
 									null,
 									null,
 									AFTER_SEX,
@@ -503,8 +503,8 @@ public class EnforcerHQDialogue {
 									null, Fetish.FETISH_SUBMISSIVE.getAssociatedCorruptionLevel(), null, null, null,
 									true, false,
 									new SMBraxDoggy(
-											Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotAllFours.BEHIND)),
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+											Map.of(Main.game.getNpc(Brax.class),SexSlotAllFours.BEHIND),
+											Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 									null,
 									null,
 									AFTER_SEX,
@@ -887,8 +887,8 @@ public class EnforcerHQDialogue {
 				return new ResponseSex("Sex with [brax.name]", "Have sex with [brax.name].",
 						false, false,
 						new SMStanding(
-							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-							Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotStanding.PERFORMING_ORAL))),
+							Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+							Map.of(Main.game.getNpc(Brax.class),SexSlotStanding.PERFORMING_ORAL)),
 						null,
 						null,
 						AFTER_SEX,
@@ -1014,8 +1014,8 @@ public class EnforcerHQDialogue {
 				return new ResponseSex("Sex with Brandi", "Have sex with Brandi.",
 						true, false,
 						new SMStanding(
-							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-							Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Brax.class), SexSlotStanding.PERFORMING_ORAL))),
+							Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+							Map.of(Main.game.getNpc(Brax.class),SexSlotStanding.PERFORMING_ORAL)),
 						null,
 						null,
 						AFTER_SEX,
@@ -1129,8 +1129,8 @@ public class EnforcerHQDialogue {
 							true,
 							true,
 							new SMStanding(
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(CandiReceptionist.class), SexSlotStanding.STANDING_SUBMISSIVE))),
+									Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getNpc(CandiReceptionist.class),SexSlotStanding.STANDING_SUBMISSIVE)),
 							null,
 							null,
 							AFTER_SEX_CANDI,

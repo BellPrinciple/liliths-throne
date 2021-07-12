@@ -35,7 +35,6 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.SVGImages;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.AbstractWorldType;
@@ -123,63 +122,63 @@ public abstract class AbstractSubspecies {
 	protected static Map<Integer, String> youkoDesaturatedIconMap;
 	protected static Map<Integer, String> youkoHalfDemonIconMap;
 	
-	public static Map<LegConfiguration, String[]> demonLegConfigurationNames = Util.newHashMapOfValues(
-			new Value<>(LegConfiguration.ARACHNID,
+	public static Map<LegConfiguration, String[]> demonLegConfigurationNames = Map.of(
+			LegConfiguration.ARACHNID,
 					new String[] {
 						"demonid",
 						"demonids",
 						"incunid",
 						"succunid",
 						"incunids",
-						"succunids"}),
-			new Value<>(LegConfiguration.BIPEDAL,
+						"succunids"},
+			LegConfiguration.BIPEDAL,
 					new String[] {
 						"demon",
 						"demons",
 						"incubus",
 						"succubus",
 						"incubi",
-						"succubi"}),
-			new Value<>(LegConfiguration.CEPHALOPOD,
+						"succubi"},
+			LegConfiguration.CEPHALOPOD,
 					new String[] {
 						"demopus",
 						"demopuses",
 						"incupus",
 						"succupus",
 						"incupuses",
-						"succupuses"}),
-			new Value<>(LegConfiguration.QUADRUPEDAL,
+						"succupuses"},
+			LegConfiguration.QUADRUPEDAL,
 					new String[] {
 						"demotaur",
 						"demotaurs",
 						"incutaur",
 						"succutaur",
 						"incutaurs",
-						"succutaurs"}),
-			new Value<>(LegConfiguration.TAIL,
+						"succutaurs"},
+			LegConfiguration.TAIL,
 					new String[] {
 						"demomer",
 						"demomers",
 						"incumer",
 						"succumer",
 						"incumers",
-						"succumers"}),
-			new Value<>(LegConfiguration.TAIL_LONG,
+						"succumers"},
+			LegConfiguration.TAIL_LONG,
 					new String[] {
 						"demomia",
 						"demomias",
 						"incumia",
 						"succumia",
 						"incumias",
-						"succumias"}),
-			new Value<>(LegConfiguration.AVIAN,
+						"succumias"},
+			LegConfiguration.AVIAN,
 					new String[] {
 						"demoa",
 						"demoas",
 						"incumoa",
 						"succumoa",
 						"incumoas",
-						"succumoas"}));
+						"succumoas"});
 	
 	static {
 		youkoIconMap = new HashMap<>();

@@ -147,7 +147,13 @@ public class ItemGeneration {
 	}
 	
 	public AbstractClothing generateClothing(AbstractClothingType clothingType, Colour primaryColour, Colour secondaryColour, Colour tertiaryColour, boolean allowRandomEnchantment) {
-		List<Colour> colours = List.of(primaryColour, secondaryColour, tertiaryColour);
+		var colours = new ArrayList<Colour>();
+		if(null!=primaryColour)
+			colours.add(primaryColour);
+		if(null!=secondaryColour)
+			colours.add(secondaryColour);
+		if(null!=tertiaryColour)
+			colours.add(tertiaryColour);
 		
 		int index = 0;
 		ColourReplacement cr = clothingType.getColourReplacement(index);

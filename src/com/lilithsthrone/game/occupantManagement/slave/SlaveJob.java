@@ -19,7 +19,6 @@ import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.game.occupantManagement.MilkingRoom;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.AbstractWorldType;
@@ -334,11 +333,10 @@ public enum SlaveJob {
 					SlaveJobSetting.MILKING_MILK_CROTCH,
 					SlaveJobSetting.MILKING_CUM,
 					SlaveJobSetting.MILKING_GIRLCUM),
-			Util.newHashMapOfValues(
-					new Value<>("Room Preference", List.of(SlaveJobSetting.MILKING_INDUSTRIAL,
+			Map.of("Room Preference",List.of(SlaveJobSetting.MILKING_INDUSTRIAL,
 							SlaveJobSetting.MILKING_REGULAR,
 							SlaveJobSetting.MILKING_ARTISAN,
-							SlaveJobSetting.MILKING_NO_PREFERENCE))),
+							SlaveJobSetting.MILKING_NO_PREFERENCE)),
 			List.of(SlaveJobSetting.MILKING_NO_PREFERENCE),
 			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_BONDING),
@@ -645,11 +643,9 @@ public enum SlaveJob {
 					SlaveJobSetting.BEDROOM_HELP_WASH),
 			List.of(SlaveJobSetting.BEDROOM_GREETING,
 					SlaveJobSetting.BEDROOM_CLEAN),
-			Util.newHashMapOfValues(
-					new Value<>("Sleeping Arrangements",
-						List.of(SlaveJobSetting.BEDROOM_SLEEP_FLOOR,
+			Map.of("Sleeping Arrangements",List.of(SlaveJobSetting.BEDROOM_SLEEP_FLOOR,
 							SlaveJobSetting.BEDROOM_SLEEP_ON_BED,
-							SlaveJobSetting.BEDROOM_SLEEP_IN_BED))),
+							SlaveJobSetting.BEDROOM_SLEEP_IN_BED)),
 			List.of(SlaveJobSetting.BEDROOM_SLEEP_ON_BED),
 			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_SEX,
@@ -673,7 +669,7 @@ public enum SlaveJob {
 			List.of(SlaveJobSetting.SPA_BATHING,
 					SlaveJobSetting.SPA_STRIP_TO_BATHE,
 					SlaveJobSetting.SPA_MASSAGE),
-			Util.newHashMapOfValues(),
+			Map.of(),
 			List.of(),
 			List.of(SlaveJobFlag.EXPERIENCE_GAINS,
 					SlaveJobFlag.INTERACTION_SEX,

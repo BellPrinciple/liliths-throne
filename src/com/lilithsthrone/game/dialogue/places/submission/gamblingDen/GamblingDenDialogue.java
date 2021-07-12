@@ -57,7 +57,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.TongueAnus;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -193,8 +192,8 @@ public class GamblingDenDialogue {
 							true,
 							new SexManagerDefault(
 									SexPosition.STANDING,
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotStanding.STANDING_SUBMISSIVE))) {
+									Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getNpc(Axel.class),SexSlotStanding.STANDING_SUBMISSIVE)) {
 							},
 							null,
 							null,
@@ -213,8 +212,8 @@ public class GamblingDenDialogue {
 							true,
 							new SexManagerDefault(
 									SexPosition.STANDING,
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_SUBMISSIVE))) {
+									Map.of(Main.game.getNpc(Axel.class),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_SUBMISSIVE)) {
 							},
 							null,
 							null,
@@ -297,8 +296,8 @@ public class GamblingDenDialogue {
 							true,
 							new SexManagerDefault(
 									SexPosition.STANDING,
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotStanding.STANDING_SUBMISSIVE))) {
+									Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getNpc(Axel.class),SexSlotStanding.STANDING_SUBMISSIVE)) {
 							},
 							null,
 							null,
@@ -314,8 +313,8 @@ public class GamblingDenDialogue {
 							true,
 							new SexManagerDefault(
 									SexPosition.STANDING,
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_SUBMISSIVE))) {
+									Map.of(Main.game.getNpc(Axel.class),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_SUBMISSIVE)) {
 							},
 							null,
 							null,
@@ -337,8 +336,8 @@ public class GamblingDenDialogue {
 									new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH),
 									List.of(CoverableArea.PENIS),
 									List.of(CoverableArea.MOUTH),
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
+									Map.of(Main.game.getNpc(Axel.class),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL)),
 							null,
 							null,
 							AFTER_AXEL_SEX,
@@ -374,8 +373,8 @@ public class GamblingDenDialogue {
 									cockAccess
 										?List.of(CoverableArea.PENIS)
 										:List.of(CoverableArea.VAGINA),
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))),
+									Map.of(Main.game.getNpc(Axel.class),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL)),
 							null,
 							null,
 							AFTER_AXEL_SEX,
@@ -406,8 +405,8 @@ public class GamblingDenDialogue {
 									new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE),
 									List.of(CoverableArea.ANUS, CoverableArea.PENIS),
 									List.of(CoverableArea.MOUTH),
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotDesk.OVER_DESK_ON_FRONT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.PERFORMING_ORAL))),
+									Map.of(Main.game.getNpc(Axel.class),SexSlotDesk.OVER_DESK_ON_FRONT),
+									Map.of(Main.game.getPlayer(),SexSlotDesk.PERFORMING_ORAL)),
 							null,
 							null,
 							AFTER_AXEL_SEX,
@@ -439,8 +438,8 @@ public class GamblingDenDialogue {
 										:(Main.game.getPlayer().hasVagina()
 											?List.of(CoverableArea.ANUS, CoverableArea.VAGINA)
 											:List.of(CoverableArea.ANUS)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Axel.class), SexSlotAgainstWall.PERFORMING_ORAL_WALL)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.FACE_TO_WALL))),
+									Map.of(Main.game.getNpc(Axel.class),SexSlotAgainstWall.PERFORMING_ORAL_WALL),
+									Map.of(Main.game.getPlayer(),SexSlotAgainstWall.FACE_TO_WALL)),
 							null,
 							null,
 							AFTER_AXEL_SEX,
@@ -1127,10 +1126,8 @@ public class GamblingDenDialogue {
 						true,
 						false,
 						new SMAllFours(
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Axel.class), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getNpc(Axel.class),SexSlotAllFours.ALL_FOURS)),
 						List.of(Main.game.getNpc(Vengar.class),
 								Main.game.getNpc(Shadow.class),
 								Main.game.getNpc(Silence.class)),
@@ -1145,10 +1142,8 @@ public class GamblingDenDialogue {
 						true,
 						false,
 						new SMAllFours(
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Axel.class), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getNpc(Axel.class),SexSlotAllFours.ALL_FOURS)),
 						List.of(Main.game.getPlayer(),
 								Main.game.getNpc(Shadow.class),
 								Main.game.getNpc(Silence.class)),
@@ -1334,23 +1329,9 @@ public class GamblingDenDialogue {
 						@Override
 						public void effects() {
 							
-							Map<AbstractSubspecies, Integer> slotMachineValues = Util.newHashMapOfValues(
-									new Value<>(Subspecies.HUMAN, 5),
-									new Value<>(Subspecies.IMP, 10),
-									new Value<>(Subspecies.DOG_MORPH, 25),
-									new Value<>(Subspecies.CAT_MORPH, 25),
-									new Value<>(Subspecies.COW_MORPH, 50),
-									new Value<>(Subspecies.DEMON, 100),
-									new Value<>(Subspecies.ELEMENTAL_ARCANE, 500));
+							Map<AbstractSubspecies, Integer> slotMachineValues = Map.of(Subspecies.HUMAN,5,Subspecies.IMP,10,Subspecies.DOG_MORPH,25,Subspecies.CAT_MORPH,25,Subspecies.COW_MORPH,50,Subspecies.DEMON,100,Subspecies.ELEMENTAL_ARCANE,500);
 							
-							Map<AbstractSubspecies, Integer> slotMachineValueProbabilities = Util.newHashMapOfValues(
-									new Value<>(Subspecies.HUMAN, 16),
-									new Value<>(Subspecies.IMP, 8),
-									new Value<>(Subspecies.DOG_MORPH, 2),
-									new Value<>(Subspecies.CAT_MORPH, 2),
-									new Value<>(Subspecies.COW_MORPH, 2),
-									new Value<>(Subspecies.DEMON, 1),
-									new Value<>(Subspecies.ELEMENTAL_ARCANE, 1));
+							Map<AbstractSubspecies, Integer> slotMachineValueProbabilities = Map.of(Subspecies.HUMAN,16,Subspecies.IMP,8,Subspecies.DOG_MORPH,2,Subspecies.CAT_MORPH,2,Subspecies.COW_MORPH,2,Subspecies.DEMON,1,Subspecies.ELEMENTAL_ARCANE,1);
 							
 							Main.game.getTextEndStringBuilder().append(
 									"<p>"

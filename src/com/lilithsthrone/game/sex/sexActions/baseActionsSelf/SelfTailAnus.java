@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActionsSelf;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.ArousalIncrease;
@@ -10,8 +12,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.79
@@ -25,7 +25,7 @@ public class SelfTailAnus {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.ANUS),
 			SexParticipantType.SELF) {
 
 		@Override
@@ -53,7 +53,7 @@ public class SelfTailAnus {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.ANUS),
 			SexParticipantType.SELF,
 			SexPace.DOM_GENTLE) {
 		
@@ -86,7 +86,7 @@ public class SelfTailAnus {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.ANUS),
 			SexParticipantType.SELF,
 			SexPace.DOM_NORMAL) {
 		
@@ -118,7 +118,7 @@ public class SelfTailAnus {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.ANUS),
 			SexParticipantType.SELF,
 			SexPace.DOM_ROUGH) {
 		
@@ -151,7 +151,7 @@ public class SelfTailAnus {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.ANUS),
 			SexParticipantType.SELF,
 			SexPace.SUB_NORMAL) {
 		
@@ -183,7 +183,7 @@ public class SelfTailAnus {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.ANUS),
 			SexParticipantType.SELF,
 			SexPace.SUB_EAGER) {
 		
@@ -215,7 +215,7 @@ public class SelfTailAnus {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.ANUS),
 			SexParticipantType.SELF) {
 
 		@Override

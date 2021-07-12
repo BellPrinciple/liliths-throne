@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.universal;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -12,8 +14,6 @@ import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionPriority;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.2.8
@@ -27,7 +27,7 @@ public class KneelingOral {
 			ArousalIncrease.FIVE_EXTREME,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 
 		@Override

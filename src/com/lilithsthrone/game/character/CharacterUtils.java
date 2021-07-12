@@ -2902,17 +2902,18 @@ public class CharacterUtils {
 	
 	public void applyMakeup(GameCharacter character, boolean overrideExistingMakeup) {
 		if((character.isFeminine() && !character.hasFetish(Fetish.FETISH_CROSS_DRESSER)) || (!character.isFeminine() && character.hasFetish(Fetish.FETISH_CROSS_DRESSER))) {
-			List<Colour> colours = List.of(PresetColour.COVERING_NONE,
+			List<Colour> colours = character.getHistory()==Occupation.NPC_PROSTITUTE
+				?List.of(
+					PresetColour.COVERING_RED,
+					PresetColour.COVERING_PINK,
+					PresetColour.COVERING_BLUE)
+				:List.of(
+					PresetColour.COVERING_NONE,
 					PresetColour.COVERING_CLEAR,
 					PresetColour.COVERING_RED,
 					PresetColour.COVERING_PINK,
 					PresetColour.COVERING_BLUE);
-			
-			if(character.getHistory()==Occupation.NPC_PROSTITUTE) {
-				colours.remove(PresetColour.COVERING_NONE);
-				colours.remove(PresetColour.COVERING_CLEAR);
-			}
-			
+
 			Colour colourForCoordination = Util.randomItemFrom(colours);
 			Colour colourForNails = Util.randomItemFrom(colours);
 			

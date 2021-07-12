@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.unique;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.npc.dominion.Lumi;
@@ -14,8 +16,6 @@ import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.managers.universal.SMLyingDown;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
@@ -185,9 +185,7 @@ public class LumiDialogue {
 				return new ResponseCombat("Fight",
 						"You're not going to let this thief escape!",
 						Main.game.getNpc(Lumi.class),
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getPlayer(), UtilText.parseFromXMLFile("characters/dominion/lumi", "LUMI_COMBAT_PC_OPENING")),
-								new Value<>(Main.game.getNpc(Lumi.class), UtilText.parseFromXMLFile("characters/dominion/lumi", "LUMI_COMBAT_LUMI_OPENING")))) {
+						Map.of(Main.game.getPlayer(),UtilText.parseFromXMLFile("characters/dominion/lumi", "LUMI_COMBAT_PC_OPENING"),Main.game.getNpc(Lumi.class),UtilText.parseFromXMLFile("characters/dominion/lumi", "LUMI_COMBAT_LUMI_OPENING"))) {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.lumiDisabled, true);
@@ -259,8 +257,8 @@ public class LumiDialogue {
 						"Now that she's been subdued, it's time to have some fun with this helpless wolf-girl!",
 						false, false,
 						new SMLyingDown(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.MISSIONARY)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lumi.class), SexSlotLyingDown.LYING_DOWN))) {
+								Map.of(Main.game.getPlayer(),SexSlotLyingDown.MISSIONARY),
+								Map.of(Main.game.getNpc(Lumi.class),SexSlotLyingDown.LYING_DOWN)) {
 							@Override
 							public SexPace getStartingSexPaceModifier(GameCharacter character) {
 								if(character.isPlayer()) {

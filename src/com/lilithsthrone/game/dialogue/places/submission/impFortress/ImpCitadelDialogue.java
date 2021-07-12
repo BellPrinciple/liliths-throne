@@ -54,7 +54,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
@@ -873,24 +872,22 @@ public class ImpCitadelDialogue {
 				
 				if(!Main.game.getPlayer().isFeminine()) {
 					spectators.add(Main.game.getPlayer());
-					subSlots = Util.newHashMapOfValues(new Value<>(getMainCompanion(), SexSlotStanding.PERFORMING_ORAL));
+					subSlots = Map.of(getMainCompanion(),SexSlotStanding.PERFORMING_ORAL);
 					
 				} else if(isCompanionDialogue () && !getMainCompanion().isFeminine()) {
 					spectators.add(getMainCompanion());
-					subSlots = Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL));
+					subSlots = Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL);
 					
 				} else {
 					if(isCompanionDialogue()) {
-						subSlots = Util.newHashMapOfValues(
-								new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL),
-								new Value<>(getMainCompanion(), SexSlotStanding.PERFORMING_ORAL_TWO));
+						subSlots = Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL,getMainCompanion(),SexSlotStanding.PERFORMING_ORAL_TWO);
 					} else {
-						subSlots = Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL));
+						subSlots = Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL);
 					}
 				}
 
 				SexManagerInterface manager = new SMStanding(
-						Util.newHashMapOfValues(new Value<>(getArcanist(), SexSlotStanding.STANDING_DOMINANT)),
+						Map.of(getArcanist(),SexSlotStanding.STANDING_DOMINANT),
 						subSlots) {
 					@Override
 					public boolean isPositionChangingAllowed(GameCharacter character) {
@@ -1322,8 +1319,8 @@ public class ImpCitadelDialogue {
 								true,
 								false,
 								new SMStanding(
-										Util.newHashMapOfValues(new Value<>(getArcanist(), SexSlotStanding.STANDING_DOMINANT)),
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))){
+										Map.of(getArcanist(),SexSlotStanding.STANDING_DOMINANT),
+										Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL)){
 									@Override
 									public boolean isPositionChangingAllowed(GameCharacter character) {
 										return false;
@@ -1382,8 +1379,8 @@ public class ImpCitadelDialogue {
 								true,
 								false,
 								new SMStanding(
-										Util.newHashMapOfValues(new Value<>(getArcanist(), SexSlotStanding.STANDING_DOMINANT)),
-										Util.newHashMapOfValues(new Value<>(getMainCompanion(), SexSlotStanding.PERFORMING_ORAL))) {
+										Map.of(getArcanist(),SexSlotStanding.STANDING_DOMINANT),
+										Map.of(getMainCompanion(),SexSlotStanding.PERFORMING_ORAL)) {
 									@Override
 									public boolean isPositionChangingAllowed(GameCharacter character) {
 										return false;
@@ -1471,10 +1468,8 @@ public class ImpCitadelDialogue {
 								true,
 								false,
 								new SMStanding(
-										Util.newHashMapOfValues(new Value<>(getArcanist(), SexSlotStanding.STANDING_DOMINANT)),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL),
-												new Value<>(getMainCompanion(), SexSlotStanding.PERFORMING_ORAL_TWO))) {
+										Map.of(getArcanist(),SexSlotStanding.STANDING_DOMINANT),
+										Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL,getMainCompanion(),SexSlotStanding.PERFORMING_ORAL_TWO)) {
 									@Override
 									public boolean isPositionChangingAllowed(GameCharacter character) {
 										return false;
@@ -1609,8 +1604,8 @@ public class ImpCitadelDialogue {
 						true,
 						false,
 						new SMStanding(
-								Util.newHashMapOfValues(new Value<>(getArcanist(), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))){
+								Map.of(getArcanist(),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL)){
 							@Override
 							public boolean isPositionChangingAllowed(GameCharacter character) {
 								return false;
@@ -1659,8 +1654,8 @@ public class ImpCitadelDialogue {
 						true,
 						false,
 						new SMStanding(
-								Util.newHashMapOfValues(new Value<>(getArcanist(), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(getMainCompanion(), SexSlotStanding.PERFORMING_ORAL))){
+								Map.of(getArcanist(),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(getMainCompanion(),SexSlotStanding.PERFORMING_ORAL)){
 							@Override
 							public boolean isPositionChangingAllowed(GameCharacter character) {
 								return false;
@@ -1709,10 +1704,8 @@ public class ImpCitadelDialogue {
 						true,
 						false,
 						new SMStanding(
-								Util.newHashMapOfValues(new Value<>(getArcanist(), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL),
-										new Value<>(getMainCompanion(), SexSlotStanding.PERFORMING_ORAL_TWO))){
+								Map.of(getArcanist(),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL,getMainCompanion(),SexSlotStanding.PERFORMING_ORAL_TWO)){
 							@Override
 							public boolean isPositionChangingAllowed(GameCharacter character) {
 								return false;
@@ -2562,15 +2555,13 @@ public class ImpCitadelDialogue {
 			
 			Map<GameCharacter, SexSlot> subSlots;
 			if(isCompanionDialogue()) {
-				subSlots = Util.newHashMapOfValues(
-						new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL),
-						new Value<>(getMainCompanion(), SexSlotStanding.PERFORMING_ORAL_TWO));
+				subSlots = Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL,getMainCompanion(),SexSlotStanding.PERFORMING_ORAL_TWO);
 			} else {
-				subSlots = Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL));
+				subSlots = Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL);
 			}
 			
 			SexManagerInterface manager = new SMStanding(
-					Util.newHashMapOfValues(new Value<>(getOwner(), SexSlotStanding.STANDING_DOMINANT)),
+					Map.of(getOwner(),SexSlotStanding.STANDING_DOMINANT),
 					subSlots) {
 				@Override
 				public boolean isPositionChangingAllowed(GameCharacter character) {

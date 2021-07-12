@@ -14,6 +14,8 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 
+import java.util.Map;
+
 /**
  * @since 0.1.88
  * @version 0.3.4
@@ -62,13 +64,13 @@ public class CultistSexActions {
 			if((value!=null && value.getKey()==ImmobilisationType.WITCH_SEAL)
 					|| (value2!=null && value2.getKey()==ImmobilisationType.WITCH_SEAL)) {
 				Main.sex.setSexManager(new SMAltarMissionarySealed(
-						Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotUnique.MISSIONARY_ALTAR_SEALED_STANDING_BETWEEN_LEGS)),
-						Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterTargetedForSexAction(this), SexSlotUnique.MISSIONARY_ALTAR_SEALED_LYING_ON_ALTAR))));
+						Map.of(Main.sex.getCharacterPerformingAction(),SexSlotUnique.MISSIONARY_ALTAR_SEALED_STANDING_BETWEEN_LEGS),
+						Map.of(Main.sex.getCharacterTargetedForSexAction(this),SexSlotUnique.MISSIONARY_ALTAR_SEALED_LYING_ON_ALTAR)));
 				
 			} else {
 				Main.sex.setSexManager(new SMAltarMissionary(
-						Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotUnique.MISSIONARY_ALTAR_STANDING_BETWEEN_LEGS)),
-						Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterTargetedForSexAction(this), SexSlotUnique.MISSIONARY_ALTAR_LYING_ON_ALTAR))));
+						Map.of(Main.sex.getCharacterPerformingAction(),SexSlotUnique.MISSIONARY_ALTAR_STANDING_BETWEEN_LEGS),
+						Map.of(Main.sex.getCharacterTargetedForSexAction(this),SexSlotUnique.MISSIONARY_ALTAR_LYING_ON_ALTAR)));
 				
 			}
 		}
@@ -115,13 +117,13 @@ public class CultistSexActions {
 			if((value!=null && value.getKey()==ImmobilisationType.WITCH_SEAL)
 					|| (value2!=null && value2.getKey()==ImmobilisationType.WITCH_SEAL)) {
 				Main.sex.setSexManager(new SMAltarMissionarySealed(
-						Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotUnique.MISSIONARY_ALTAR_SEALED_KNEELING_BETWEEN_LEGS)),
-						Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterTargetedForSexAction(this), SexSlotUnique.MISSIONARY_ALTAR_SEALED_LYING_ON_ALTAR))));
+						Map.of(Main.sex.getCharacterPerformingAction(),SexSlotUnique.MISSIONARY_ALTAR_SEALED_KNEELING_BETWEEN_LEGS),
+						Map.of(Main.sex.getCharacterTargetedForSexAction(this),SexSlotUnique.MISSIONARY_ALTAR_SEALED_LYING_ON_ALTAR)));
 				
 			} else {
 				Main.sex.setSexManager(new SMAltarMissionary(
-						Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotUnique.MISSIONARY_ALTAR_KNEELING_BETWEEN_LEGS)),
-						Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterTargetedForSexAction(this), SexSlotUnique.MISSIONARY_ALTAR_LYING_ON_ALTAR))));
+						Map.of(Main.sex.getCharacterPerformingAction(),SexSlotUnique.MISSIONARY_ALTAR_KNEELING_BETWEEN_LEGS),
+						Map.of(Main.sex.getCharacterTargetedForSexAction(this),SexSlotUnique.MISSIONARY_ALTAR_LYING_ON_ALTAR)));
 			}
 		}
 	};

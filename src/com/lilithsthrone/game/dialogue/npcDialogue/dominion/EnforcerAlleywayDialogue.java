@@ -61,7 +61,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -523,20 +522,16 @@ public class EnforcerAlleywayDialogue {
 					threesome
 						?getSexManager(
 								SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(
-										new Value<>(partner, SexSlotAllFours.BEHIND),
-										new Value<>(spectator, SexSlotAllFours.IN_FRONT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
+								Map.of(partner,SexSlotAllFours.BEHIND,spectator,SexSlotAllFours.IN_FRONT),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS),
 								sexType,
-								Util.newHashMapOfValues(
-										new Value<>(partner, List.of(CoverableArea.PENIS)),
-										new Value<>(spectator, List.of(CoverableArea.PENIS, CoverableArea.VAGINA))))
+								Map.of(partner,List.of(CoverableArea.PENIS),spectator,List.of(CoverableArea.PENIS, CoverableArea.VAGINA)))
 						:getSexManager(
 								SexPosition.AGAINST_WALL,
-								Util.newHashMapOfValues(new Value<>(partner, SexSlotAgainstWall.STANDING_WALL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.FACE_TO_WALL)),
+								Map.of(partner,SexSlotAgainstWall.STANDING_WALL),
+								Map.of(Main.game.getPlayer(),SexSlotAgainstWall.FACE_TO_WALL),
 								sexType,
-								Util.newHashMapOfValues(new Value<>(partner, List.of(CoverableArea.PENIS)))),
+								Map.of(partner,List.of(CoverableArea.PENIS))),
 					List.of(spectator),
 					Main.game.getPlayer().getCompanions(),
 					postSexNode,
@@ -566,20 +561,16 @@ public class EnforcerAlleywayDialogue {
 					threesome
 						?getSexManager(
 								SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(
-										new Value<>(partner, SexSlotAllFours.BEHIND),
-										new Value<>(spectator, SexSlotAllFours.IN_FRONT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
+								Map.of(partner,SexSlotAllFours.BEHIND,spectator,SexSlotAllFours.IN_FRONT),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS),
 								sexType,
-								Util.newHashMapOfValues(
-										new Value<>(partner, List.of(CoverableArea.PENIS)),
-										new Value<>(spectator, List.of(CoverableArea.PENIS, CoverableArea.VAGINA))))
+								Map.of(partner,List.of(CoverableArea.PENIS),spectator,List.of(CoverableArea.PENIS, CoverableArea.VAGINA)))
 						:getSexManager(
 							SexPosition.AGAINST_WALL,
-							Util.newHashMapOfValues(new Value<>(partner, SexSlotAgainstWall.STANDING_WALL)),
-							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.FACE_TO_WALL)),
+							Map.of(partner,SexSlotAgainstWall.STANDING_WALL),
+							Map.of(Main.game.getPlayer(),SexSlotAgainstWall.FACE_TO_WALL),
 							sexType,
-							Util.newHashMapOfValues(new Value<>(partner, List.of(CoverableArea.PENIS)))),
+							Map.of(partner,List.of(CoverableArea.PENIS))),
 					List.of(spectator),
 					Main.game.getPlayer().getCompanions(),
 					postSexNode,
@@ -609,20 +600,16 @@ public class EnforcerAlleywayDialogue {
 					threesome
 						?getSexManager(
 								SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(
-										new Value<>(partner, SexSlotAllFours.BEHIND),
-										new Value<>(spectator, SexSlotAllFours.IN_FRONT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
+								Map.of(partner,SexSlotAllFours.BEHIND,spectator,SexSlotAllFours.IN_FRONT),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS),
 								sexType,
-								Util.newHashMapOfValues(
-										new Value<>(partner, List.of(CoverableArea.PENIS)),
-										new Value<>(spectator, List.of(CoverableArea.PENIS, CoverableArea.VAGINA))))
+								Map.of(partner,List.of(CoverableArea.PENIS),spectator,List.of(CoverableArea.PENIS, CoverableArea.VAGINA)))
 						:getSexManager(
 							SexPosition.AGAINST_WALL,
-							Util.newHashMapOfValues(new Value<>(partner, SexSlotAgainstWall.STANDING_WALL)),
-							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.FACE_TO_WALL)),
+							Map.of(partner,SexSlotAgainstWall.STANDING_WALL),
+							Map.of(Main.game.getPlayer(),SexSlotAgainstWall.FACE_TO_WALL),
 							sexType,
-							Util.newHashMapOfValues()),
+							Map.of()),
 					List.of(spectator),
 					Main.game.getPlayer().getCompanions(),
 					postSexNode,
@@ -646,20 +633,16 @@ public class EnforcerAlleywayDialogue {
 					threesome
 						?getSexManager(
 								SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(
-										new Value<>(partner, SexSlotAllFours.BEHIND),
-										new Value<>(spectator, SexSlotAllFours.IN_FRONT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
+								Map.of(partner,SexSlotAllFours.BEHIND,spectator,SexSlotAllFours.IN_FRONT),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS),
 								sexType,
-								Util.newHashMapOfValues(
-										new Value<>(partner, List.of(CoverableArea.PENIS)),
-										new Value<>(spectator, List.of(CoverableArea.PENIS, CoverableArea.VAGINA))))
+								Map.of(partner,List.of(CoverableArea.PENIS),spectator,List.of(CoverableArea.PENIS, CoverableArea.VAGINA)))
 						:getSexManager(
 							SexPosition.AGAINST_WALL,
-							Util.newHashMapOfValues(new Value<>(partner, SexSlotAgainstWall.STANDING_WALL)),
-							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.FACE_TO_WALL)),
+							Map.of(partner,SexSlotAgainstWall.STANDING_WALL),
+							Map.of(Main.game.getPlayer(),SexSlotAgainstWall.FACE_TO_WALL),
 							sexType,
-							Util.newHashMapOfValues()),
+							Map.of()),
 					List.of(spectator),
 					Main.game.getPlayer().getCompanions(),
 					postSexNode,
@@ -735,9 +718,7 @@ public class EnforcerAlleywayDialogue {
 									+ "<br/>[style.italicsBad(Beating the Enforcers in combat will result in them being removed from the game!)]",
 							(NPC)getEnforcerLeader(),
 							getEnforcers(),
-							Util.newHashMapOfValues(
-									new Value<>(getEnforcerLeader(), UtilText.parse(getEnforcerLeader(), "[npc.speech(You won't escape this time!)] [npc.name] shouts.")),
-									new Value<>(getEnforcerSubordinate(), UtilText.parse(getEnforcerSubordinate(), "[npc.speech(Now we've got you!)] [npc.name] exclaims."))));
+							Map.of(getEnforcerLeader(),UtilText.parse(getEnforcerLeader(), "[npc.speech(You won't escape this time!)] [npc.name] shouts."),getEnforcerSubordinate(),UtilText.parse(getEnforcerSubordinate(), "[npc.speech(Now we've got you!)] [npc.name] exclaims.")));
 				}
 				
 			} else if (Main.game.getPlayer().hasAnyEnforcerStatusEffect() && uniformPassable < 0) {
@@ -747,9 +728,7 @@ public class EnforcerAlleywayDialogue {
 									+ "<br/>[style.italicsBad(Beating the Enforcers in combat will result in them being removed from the game!)]",
 							(NPC)getEnforcerLeader(),
 							getEnforcers(),
-							Util.newHashMapOfValues(
-									new Value<>(getEnforcerLeader(), UtilText.parse(getEnforcerLeader(), "[npc.speech(Try play us for fools, will you!)] [npc.name] shouts.")),
-									new Value<>(getEnforcerSubordinate(), UtilText.parse(getEnforcerSubordinate(), "[npc.speech(You just made a big mistake!)] [npc.name] exclaims."))));
+							Map.of(getEnforcerLeader(),UtilText.parse(getEnforcerLeader(), "[npc.speech(Try play us for fools, will you!)] [npc.name] shouts."),getEnforcerSubordinate(),UtilText.parse(getEnforcerSubordinate(), "[npc.speech(You just made a big mistake!)] [npc.name] exclaims.")));
 					
 				} else if(index==2) {
 					return new Response(UtilText.parse(getEnforcerLeader(), "Searched (<span style='color:"+getEnforcerLeader().getFemininity().getColour().toWebHexString()+";'>[npc.surname]</span>)"),
@@ -982,10 +961,7 @@ public class EnforcerAlleywayDialogue {
 									+ "<br/>[style.italicsBad(Beating the Enforcers in combat will result in them being removed from the game!)]",
 							(NPC)getEnforcerLeader(),
 							getEnforcers(),
-							Util.newHashMapOfValues(
-									new Value<>(Main.game.getPlayer(), "[pc.speech(I'm going to show you who's <i>really</i> in charge here!)] you declare, getting ready to attack the Enforcers."),
-									new Value<>(getEnforcerLeader(), UtilText.parse(getEnforcerLeader(), "[npc.speech(You're in for it now!)] [npc.name] shouts.")),
-									new Value<>(getEnforcerSubordinate(), UtilText.parse(getEnforcerSubordinate(), "[npc.speech(This is the last mistake you'll ever make!)] [npc.name] exclaims."))));
+							Map.of(Main.game.getPlayer(),"[pc.speech(I'm going to show you who's <i>really</i> in charge here!)] you declare, getting ready to attack the Enforcers.",getEnforcerLeader(),UtilText.parse(getEnforcerLeader(), "[npc.speech(You're in for it now!)] [npc.name] shouts."),getEnforcerSubordinate(),UtilText.parse(getEnforcerSubordinate(), "[npc.speech(This is the last mistake you'll ever make!)] [npc.name] exclaims.")));
 	
 					
 				} else if(index==6) {
@@ -1217,10 +1193,7 @@ public class EnforcerAlleywayDialogue {
 									+ "<br/>[style.italicsBad(Beating the Enforcers in combat will result in them being removed from the game!)]",
 							(NPC)getEnforcerLeader(),
 							getEnforcers(),
-							Util.newHashMapOfValues(
-									new Value<>(Main.game.getPlayer(), "[pc.speech(I'm not going quietly!)] you shout, getting ready to defend yourself against the Enforcers."),
-									new Value<>(getEnforcerLeader(), UtilText.parse(getEnforcerLeader(), "[npc.speech(Looks like we'll have to do this the hard way!)] [npc.name] shouts.")),
-									new Value<>(getEnforcerSubordinate(), UtilText.parse(getEnforcerSubordinate(), "[npc.speech(This is the last mistake you'll ever make!)] [npc.name] exclaims."))));
+							Map.of(Main.game.getPlayer(),"[pc.speech(I'm not going quietly!)] you shout, getting ready to defend yourself against the Enforcers.",getEnforcerLeader(),UtilText.parse(getEnforcerLeader(), "[npc.speech(Looks like we'll have to do this the hard way!)] [npc.name] shouts."),getEnforcerSubordinate(),UtilText.parse(getEnforcerSubordinate(), "[npc.speech(This is the last mistake you'll ever make!)] [npc.name] exclaims.")));
 				}
 				
 				
@@ -1280,10 +1253,7 @@ public class EnforcerAlleywayDialogue {
 										+ "<br/>[style.italicsBad(Beating the Enforcers in combat will result in them being removed from the game!)]",
 								(NPC)getEnforcerLeader(),
 								getEnforcers(),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), "[pc.speech(Get away from me!)] you shout, getting ready to defend yourself against the Enforcers."),
-										new Value<>(getEnforcerLeader(), UtilText.parse(getEnforcerLeader(), "[npc.speech(I knew you were up to no good!)] [npc.name] shouts.")),
-										new Value<>(getEnforcerSubordinate(), UtilText.parse(getEnforcerSubordinate(), "[npc.speech(This is the last mistake you'll ever make!)] [npc.name] exclaims."))));
+								Map.of(Main.game.getPlayer(),"[pc.speech(Get away from me!)] you shout, getting ready to defend yourself against the Enforcers.",getEnforcerLeader(),UtilText.parse(getEnforcerLeader(), "[npc.speech(I knew you were up to no good!)] [npc.name] shouts."),getEnforcerSubordinate(),UtilText.parse(getEnforcerSubordinate(), "[npc.speech(This is the last mistake you'll ever make!)] [npc.name] exclaims.")));
 						
 					} else {
 						return new Response("Refuse",
@@ -1407,13 +1377,9 @@ public class EnforcerAlleywayDialogue {
 						+ "<br/>[style.italicsBad(Beating the Enforcers in combat will result in them being removed from the game!)]",
 						(NPC)getEnforcerLeader(),
 						getEnforcers(),
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getPlayer(),
-										Main.game.getPlayer().getOccupation()==Occupation.TOURIST
+						Map.of(Main.game.getPlayer(),Main.game.getPlayer().getOccupation()==Occupation.TOURIST
 											?"[pc.speech(U.S.A.! U.S.A.! U.S.A.!)] you loudly chant as you prepare to defend yourself against these commie bastards."
-											:"[pc.speech(I am a Sovereign Citizen! Am I being detained?! I do not consent!)] you screech as you prepare to defend yourself against these tyrants."),
-								new Value<>(getEnforcerLeader(), UtilText.parse(getEnforcerLeader(), "[npc.speech(You're in for it now!)] [npc.name] shouts.")),
-								new Value<>(getEnforcerSubordinate(), UtilText.parse(getEnforcerSubordinate(), "[npc.speech(This is the last mistake you'll ever make!)] [npc.name] exclaims."))));
+											:"[pc.speech(I am a Sovereign Citizen! Am I being detained?! I do not consent!)] you screech as you prepare to defend yourself against these tyrants.",getEnforcerLeader(),UtilText.parse(getEnforcerLeader(), "[npc.speech(You're in for it now!)] [npc.name] shouts."),getEnforcerSubordinate(),UtilText.parse(getEnforcerSubordinate(), "[npc.speech(This is the last mistake you'll ever make!)] [npc.name] exclaims.")));
 				
 			} else if(index==2) {
 				return new Response(UtilText.parse(getEnforcerLeader(), "Searched (<span style='color:"+getEnforcerLeader().getFemininity().getColour().toWebHexString()+";'>[npc.surname]</span>)"),

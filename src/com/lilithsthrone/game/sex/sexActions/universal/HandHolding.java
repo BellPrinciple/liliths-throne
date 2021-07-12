@@ -14,6 +14,8 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 
+import java.util.Map;
+
 /**
  * @since 0.2.8
  * @version 0.2.8
@@ -206,7 +208,7 @@ public class HandHolding {
 			ArousalIncrease.FIVE_EXTREME,
 			ArousalIncrease.FIVE_EXTREME,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -238,7 +240,7 @@ public class HandHolding {
 			ArousalIncrease.FIVE_EXTREME,
 			ArousalIncrease.FIVE_EXTREME,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -267,7 +269,7 @@ public class HandHolding {
 			ArousalIncrease.FIVE_EXTREME,
 			ArousalIncrease.FIVE_EXTREME,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -296,7 +298,7 @@ public class HandHolding {
 			ArousalIncrease.FIVE_EXTREME,
 			ArousalIncrease.FIVE_EXTREME,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -424,7 +426,7 @@ public class HandHolding {
 			ArousalIncrease.FIVE_EXTREME,
 			ArousalIncrease.FIVE_EXTREME,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {

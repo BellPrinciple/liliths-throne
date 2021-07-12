@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -22,8 +23,6 @@ import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
 import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -213,8 +212,8 @@ public class ZaranixDialogue {
 				return new ResponseSex("Obey", "Zaranix forces you to orally service him.",
 						false, false,
 						new SMZaranixCockSucking(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Zaranix.class), SexSlotSitting.SITTING)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL))),
+								Map.of(Main.game.getNpc(Zaranix.class),SexSlotSitting.SITTING),
+								Map.of(Main.game.getPlayer(),SexSlotSitting.PERFORMING_ORAL)),
 						null,
 						null,
 						AFTER_SEX_DEFEAT,
@@ -229,8 +228,8 @@ public class ZaranixDialogue {
 				return new ResponseSex("Eagerly obey", "Zaranix forces you to orally service him.",
 						false, false,
 						new SMZaranixCockSucking(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Zaranix.class), SexSlotSitting.SITTING)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL))) {
+								Map.of(Main.game.getNpc(Zaranix.class),SexSlotSitting.SITTING),
+								Map.of(Main.game.getPlayer(),SexSlotSitting.PERFORMING_ORAL)) {
 							@Override
 							public SexPace getStartingSexPaceModifier(GameCharacter character) {
 								if(character.isPlayer()) {
@@ -253,8 +252,8 @@ public class ZaranixDialogue {
 				return new ResponseSex("Resist", "Zaranix forces you to orally service him.",
 						false, false,
 						new SMZaranixCockSucking(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Zaranix.class), SexSlotSitting.SITTING)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL))) {
+								Map.of(Main.game.getNpc(Zaranix.class),SexSlotSitting.SITTING),
+								Map.of(Main.game.getPlayer(),SexSlotSitting.PERFORMING_ORAL)) {
 							@Override
 							public SexPace getStartingSexPaceModifier(GameCharacter character) {
 								if(character.isPlayer()) {
@@ -297,8 +296,8 @@ public class ZaranixDialogue {
 				return new ResponseSex("Need... Cock...", "Zaranix's potion has had quite a strong effect... You really need to suck his cock, then maybe you'll be able to think clearly again?",
 						true, false,
 						new SMZaranixCockSucking(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Zaranix.class), SexSlotSitting.SITTING)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL))) {
+								Map.of(Main.game.getNpc(Zaranix.class),SexSlotSitting.SITTING),
+								Map.of(Main.game.getPlayer(),SexSlotSitting.PERFORMING_ORAL)) {
 							@Override
 							public SexPace getStartingSexPaceModifier(GameCharacter character) {
 								if(character.isPlayer()) {
@@ -349,8 +348,8 @@ public class ZaranixDialogue {
 				return new ResponseSex("Need... Cock...", "Having got what you wanted, all you can now think about is sucking Zaranix's cock...",
 						true, false,
 						new SMZaranixCockSucking(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Zaranix.class), SexSlotSitting.SITTING)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotSitting.PERFORMING_ORAL))),
+								Map.of(Main.game.getNpc(Zaranix.class),SexSlotSitting.SITTING),
+								Map.of(Main.game.getPlayer(),SexSlotSitting.PERFORMING_ORAL)),
 						null,
 						null,
 						AFTER_SEX_DEFEAT,

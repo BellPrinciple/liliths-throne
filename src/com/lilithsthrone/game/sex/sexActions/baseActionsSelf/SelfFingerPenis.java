@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActionsSelf;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -10,8 +12,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.4
@@ -25,7 +25,7 @@ public class SelfFingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.SELF) {
 		@Override
 		public String getActionTitle() {
@@ -69,7 +69,7 @@ public class SelfFingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.SELF) {
 		@Override
 		public String getActionTitle() {
@@ -93,7 +93,7 @@ public class SelfFingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.SELF,
 			SexPace.DOM_GENTLE) {
 		@Override
@@ -119,7 +119,7 @@ public class SelfFingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.SELF,
 			SexPace.DOM_NORMAL) {
 		@Override
@@ -145,7 +145,7 @@ public class SelfFingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.SELF,
 			SexPace.DOM_ROUGH) {
 		@Override
@@ -171,7 +171,7 @@ public class SelfFingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.SELF,
 			SexPace.SUB_NORMAL) {
 		@Override
@@ -198,7 +198,7 @@ public class SelfFingerPenis {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.SELF,
 			SexPace.SUB_EAGER) {
 		@Override
@@ -224,7 +224,7 @@ public class SelfFingerPenis {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaPenetration.PENIS),
 			SexParticipantType.SELF) {
 		@Override
 		public String getActionTitle() {

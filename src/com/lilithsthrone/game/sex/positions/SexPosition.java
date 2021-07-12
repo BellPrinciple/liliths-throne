@@ -566,8 +566,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotStanding.STANDING_DOMINANT_TWO
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotStanding.STANDING_DOMINANT_THREE
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotStanding.STANDING_DOMINANT_FOUR)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Arm.class, genericFaceForceCreampieAreas));
+				return Map.of(Arm.class,genericFaceForceCreampieAreas);
 			}
 			return null;
 		}
@@ -837,8 +836,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAgainstWall.FACE_TO_WALL_TWO
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAgainstWall.FACE_TO_WALL_THREE
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAgainstWall.FACE_TO_WALL_FOUR)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Arm.class, genericFaceForceCreampieAreas));
+				return Map.of(Arm.class,genericFaceForceCreampieAreas);
 			}
 			// The character pressing another against the wall can use body weight to force a creampie:
 			if((Main.sex.getSexPositionSlot(cumTarget)==SexSlotAgainstWall.STANDING_WALL
@@ -849,8 +847,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAgainstWall.BACK_TO_WALL_TWO
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAgainstWall.BACK_TO_WALL_THREE
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAgainstWall.BACK_TO_WALL_FOUR)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Torso.class, genericGroinForceCreampieAreas));
+				return Map.of(Torso.class,genericGroinForceCreampieAreas);
 			}
 			return null;
 		}
@@ -1332,10 +1329,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.PERFORMING_ORAL_TWO
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.PERFORMING_ORAL_THREE
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.PERFORMING_ORAL_FOUR)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Leg.class, genericFaceForceCreampieAreas),
-						new Value<>(Tail.class, genericFaceForceCreampieAreas),
-						new Value<>(Tentacle.class, genericFaceForceCreampieAreas));
+				return Map.of(Leg.class,genericFaceForceCreampieAreas,Tail.class,genericFaceForceCreampieAreas,Tentacle.class,genericFaceForceCreampieAreas);
 			}
 			// The character lying back can use their legs, tails, or tentacles to force a creampie on characters fucking them:
 			if((Main.sex.getSexPositionSlot(cumTarget)==SexSlotDesk.OVER_DESK_ON_BACK
@@ -1346,10 +1340,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.BETWEEN_LEGS_TWO
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.BETWEEN_LEGS_THREE
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.BETWEEN_LEGS_FOUR)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Leg.class, genericGroinForceCreampieAreas),
-						new Value<>(Tail.class, genericGroinForceCreampieAreas),
-						new Value<>(Tentacle.class, genericGroinForceCreampieAreas));
+				return Map.of(Leg.class,genericGroinForceCreampieAreas,Tail.class,genericGroinForceCreampieAreas,Tentacle.class,genericGroinForceCreampieAreas);
 			}
 			// The character lying on their front can use their tails, or tentacles to force a creampie on characters fucking them:
 			if((Main.sex.getSexPositionSlot(cumTarget)==SexSlotDesk.OVER_DESK_ON_FRONT
@@ -1360,9 +1351,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.BETWEEN_LEGS_TWO
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.BETWEEN_LEGS_THREE
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.BETWEEN_LEGS_FOUR)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Tail.class, genericGroinForceCreampieAreas),
-						new Value<>(Tentacle.class, genericGroinForceCreampieAreas));
+				return Map.of(Tail.class,genericGroinForceCreampieAreas,Tentacle.class,genericGroinForceCreampieAreas);
 			}
 			// The character between legs can use their weight to force a creampie on characters fucking them:
 			if((Main.sex.getSexPositionSlot(cumTarget)==SexSlotDesk.BETWEEN_LEGS
@@ -1373,8 +1362,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.OVER_DESK_ON_BACK_TWO
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.OVER_DESK_ON_BACK_THREE
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.OVER_DESK_ON_BACK_FOUR)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Torso.class, genericGroinForceCreampieAreas));
+				return Map.of(Torso.class,genericGroinForceCreampieAreas);
 			}
 			// The character lying back or on front can use their arms to force a facial creampie on characters receiving oral from them:
 			if((Main.sex.getSexPositionSlot(cumTarget)==SexSlotDesk.OVER_DESK_ON_BACK
@@ -1389,8 +1377,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.RECEIVING_ORAL_TWO
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.RECEIVING_ORAL_THREE
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotDesk.RECEIVING_ORAL_FOUR)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Arm.class, genericFaceForceCreampieAreas));
+				return Map.of(Arm.class,genericFaceForceCreampieAreas);
 			}
 			return null;
 		}
@@ -1763,15 +1750,12 @@ public class SexPosition {
 			if((Main.sex.getSexPositionSlot(cumProvider).hasTag(SexSlotTag.BEHIND_STOCKS)
 					|| Main.sex.getSexPositionSlot(cumProvider).hasTag(SexSlotTag.HUMPING_STOCKS))
 				&& (Main.sex.getSexPositionSlot(cumTarget).hasTag(SexSlotTag.LOCKED_IN_STOCKS))) {
-				return Util.newHashMapOfValues(
-						new Value<>(Tail.class, genericGroinForceCreampieAreas),
-						new Value<>(Tentacle.class, genericGroinForceCreampieAreas));
+				return Map.of(Tail.class,genericGroinForceCreampieAreas,Tentacle.class,genericGroinForceCreampieAreas);
 			}
 			// The character performing oral can use their arms to force a facial creampie from those locked in stocks:
 			if((Main.sex.getSexPositionSlot(cumTarget).hasTag(SexSlotTag.PERFORMING_ORAL_STOCKS))
 					&& (Main.sex.getSexPositionSlot(cumProvider).hasTag(SexSlotTag.LOCKED_IN_STOCKS))) {
-				return Util.newHashMapOfValues(
-						new Value<>(Arm.class, genericFaceForceCreampieAreas));
+				return Map.of(Arm.class,genericFaceForceCreampieAreas);
 			}
 			return null;
 		}
@@ -1782,7 +1766,7 @@ public class SexPosition {
 					|| Main.sex.getSexPositionSlot(penetrator)==SexSlotStocks.LOCKED_IN_STOCKS_TWO
 					|| Main.sex.getSexPositionSlot(penetrator)==SexSlotStocks.LOCKED_IN_STOCKS_THREE
 					|| Main.sex.getSexPositionSlot(penetrator)==SexSlotStocks.LOCKED_IN_STOCKS_FOUR) {
-				return Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, -(penetrator.getArmRows()*2)));
+				return Map.of(SexAreaPenetration.FINGER,-(penetrator.getArmRows()*2));
 			}
 			return super.getRestrictedPenetrationCounts(penetrator);
 		}
@@ -2156,15 +2140,12 @@ public class SexPosition {
 			if((Main.sex.getSexPositionSlot(cumProvider).hasTag(SexSlotTag.BEHIND_STOCKS)
 					|| Main.sex.getSexPositionSlot(cumProvider).hasTag(SexSlotTag.HUMPING_STOCKS))
 				&& (Main.sex.getSexPositionSlot(cumTarget).hasTag(SexSlotTag.LOCKED_IN_STOCKS))) {
-				return Util.newHashMapOfValues(
-						new Value<>(Tail.class, genericGroinForceCreampieAreas),
-						new Value<>(Tentacle.class, genericGroinForceCreampieAreas));
+				return Map.of(Tail.class,genericGroinForceCreampieAreas,Tentacle.class,genericGroinForceCreampieAreas);
 			}
 			// The character performing oral can use their arms to force a facial creampie from those locked in stocks:
 			if((Main.sex.getSexPositionSlot(cumTarget).hasTag(SexSlotTag.PERFORMING_ORAL_STOCKS))
 				&& (Main.sex.getSexPositionSlot(cumProvider).hasTag(SexSlotTag.LOCKED_IN_STOCKS))) {
-				return Util.newHashMapOfValues(
-						new Value<>(Arm.class, genericFaceForceCreampieAreas));
+				return Map.of(Arm.class,genericFaceForceCreampieAreas);
 			}
 			return null;
 		}
@@ -2175,7 +2156,7 @@ public class SexPosition {
 					|| Main.sex.getSexPositionSlot(penetrator)==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_TWO
 					|| Main.sex.getSexPositionSlot(penetrator)==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_THREE
 					|| Main.sex.getSexPositionSlot(penetrator)==SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_FOUR) {
-				return Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, -(penetrator.getArmRows()*2)));
+				return Map.of(SexAreaPenetration.FINGER,-(penetrator.getArmRows()*2));
 			}
 			return super.getRestrictedPenetrationCounts(penetrator);
 		}
@@ -2537,9 +2518,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAllFours.HUMPING_TWO
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAllFours.HUMPING_THREE
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAllFours.HUMPING_FOUR) {
-					return Util.newHashMapOfValues(
-							new Value<>(Tail.class, genericGroinForceCreampieAreas),
-							new Value<>(Tentacle.class, genericGroinForceCreampieAreas));
+					return Map.of(Tail.class,genericGroinForceCreampieAreas,Tentacle.class,genericGroinForceCreampieAreas);
 				}
 			}
 			// Non-bipedal characters performing oral can use their arm(s) to force a mouth creampie:
@@ -2552,8 +2531,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAllFours.IN_FRONT_TWO
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAllFours.IN_FRONT_THREE
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotAllFours.IN_FRONT_FOUR) {
-					return Util.newHashMapOfValues(
-							new Value<>(Arm.class, genericFaceForceCreampieAreas));
+					return Map.of(Arm.class,genericFaceForceCreampieAreas);
 				}
 			}
 			return null;
@@ -3151,8 +3129,7 @@ public class SexPosition {
 							|| Main.sex.getSexPositionSlot(cumTarget)==SexSlotLyingDown.MATING_PRESS_TWO
 							|| Main.sex.getSexPositionSlot(cumTarget)==SexSlotLyingDown.MATING_PRESS_THREE
 							|| Main.sex.getSexPositionSlot(cumTarget)==SexSlotLyingDown.MATING_PRESS_FOUR) {
-						return Util.newHashMapOfValues(
-								new Value<>(Torso.class, genericGroinForceCreampieAreas));
+						return Map.of(Torso.class,genericGroinForceCreampieAreas);
 					}
 			}
 			// Characters performing sixty-nine or lying down oral can use weight to force a facial creampie:
@@ -3168,8 +3145,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotLyingDown.LYING_DOWN_TWO
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotLyingDown.LYING_DOWN_THREE
 						|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotLyingDown.LYING_DOWN_FOUR) {
-					return Util.newHashMapOfValues(
-							new Value<>(Torso.class, genericFaceForceCreampieAreas));
+					return Map.of(Torso.class,genericFaceForceCreampieAreas);
 				}
 			}
 			// Characters lying down can use their legs to force a creampie:
@@ -3185,10 +3161,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumTarget)==SexSlotLyingDown.LYING_DOWN_TWO
 						|| Main.sex.getSexPositionSlot(cumTarget)==SexSlotLyingDown.LYING_DOWN_THREE
 						|| Main.sex.getSexPositionSlot(cumTarget)==SexSlotLyingDown.LYING_DOWN_FOUR) {
-					return Util.newHashMapOfValues(
-							new Value<>(Leg.class, genericGroinForceCreampieAreas),
-							new Value<>(Tail.class, genericGroinForceCreampieAreas),
-							new Value<>(Tentacle.class, genericGroinForceCreampieAreas));
+					return Map.of(Leg.class,genericGroinForceCreampieAreas,Tail.class,genericGroinForceCreampieAreas,Tentacle.class,genericGroinForceCreampieAreas);
 				}
 			}
 			// Characters performing oral on sixty-nine can use arms to force a facial creampie:
@@ -3200,8 +3173,7 @@ public class SexPosition {
 						|| Main.sex.getSexPositionSlot(cumTarget)==SexSlotLyingDown.LYING_DOWN_TWO
 						|| Main.sex.getSexPositionSlot(cumTarget)==SexSlotLyingDown.LYING_DOWN_THREE
 						|| Main.sex.getSexPositionSlot(cumTarget)==SexSlotLyingDown.LYING_DOWN_FOUR) {
-					return Util.newHashMapOfValues(
-							new Value<>(Arm.class, genericFaceForceCreampieAreas));
+					return Map.of(Arm.class,genericFaceForceCreampieAreas);
 				}
 			}
 			
@@ -3217,10 +3189,10 @@ public class SexPosition {
 				GameCharacter bottom = Main.sex.getCharacterInPosition(slotsBottom.get(i));
 				
 				if(penetrator.equals(top) && bottom!=null) {
-					return Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, -(bottom.getArmRows()*2)));
+					return Map.of(SexAreaPenetration.FINGER,-(bottom.getArmRows()*2));
 				}
 				if(penetrator.equals(bottom)&& top!=null) {
-					return Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, -(top.getArmRows()*2)));
+					return Map.of(SexAreaPenetration.FINGER,-(top.getArmRows()*2));
 				}
 			}
 			
@@ -3761,8 +3733,7 @@ public class SexPosition {
 					|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotSitting.SITTING_TWO
 					|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotSitting.SITTING_THREE
 					|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotSitting.SITTING_FOUR)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Arm.class, genericFaceForceCreampieAreas));
+				return Map.of(Arm.class,genericFaceForceCreampieAreas);
 			}
 			// The character riding cock can use their body weight to force a creampie:
 			if((Main.sex.getSexPositionSlot(cumTarget)==SexSlotSitting.SITTING_IN_LAP
@@ -3773,8 +3744,7 @@ public class SexPosition {
 					|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotSitting.SITTING_TWO
 					|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotSitting.SITTING_THREE
 					|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotSitting.SITTING_FOUR)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Torso.class, genericGroinForceCreampieAreas));
+				return Map.of(Torso.class,genericGroinForceCreampieAreas);
 			}
 			// The character sitting getting fucked can use their legs, tail, or tentacles to force a creampie:
 			if((Main.sex.getSexPositionSlot(cumTarget)==SexSlotSitting.SITTING
@@ -3785,10 +3755,7 @@ public class SexPosition {
 					|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotSitting.SITTING_BETWEEN_LEGS_TWO
 					|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotSitting.SITTING_BETWEEN_LEGS_THREE
 					|| Main.sex.getSexPositionSlot(cumProvider)==SexSlotSitting.SITTING_BETWEEN_LEGS_FOUR)) {
-				return Util.newHashMapOfValues(
-						new Value<>(Leg.class, genericGroinForceCreampieAreas),
-						new Value<>(Tail.class, genericGroinForceCreampieAreas),
-						new Value<>(Tentacle.class, genericGroinForceCreampieAreas));
+				return Map.of(Leg.class,genericGroinForceCreampieAreas,Tail.class,genericGroinForceCreampieAreas,Tentacle.class,genericGroinForceCreampieAreas);
 			}
 			
 			return null;
@@ -3869,8 +3836,7 @@ public class SexPosition {
 		protected Map<Class<? extends BodyPartInterface>,  List<SexAreaOrifice>> getForcedCreampieMap(GameCharacter cumTarget, GameCharacter cumProvider) {
 			if(Main.sex.getSexPositionSlot(cumTarget)==SexSlotBreedingStall.BREEDING_STALL_BACK
 					&& Main.sex.getSexPositionSlot(cumProvider)==SexSlotBreedingStall.BREEDING_STALL_FUCKING) {
-				return Util.newHashMapOfValues(
-						new Value<>(Leg.class, genericGroinForceCreampieAreas));
+				return Map.of(Leg.class,genericGroinForceCreampieAreas);
 			}
 			return null;
 		}

@@ -244,8 +244,8 @@ public class RatWarrensCaptiveDialogue {
 				false,
 				new SexManagerDefault(
 						position,
-						Util.newHashMapOfValues(new Value<>(getMurk(), murkSexInfo.getKey())),
-						Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), playerSlot))) {
+						Map.of(getMurk(),murkSexInfo.getKey()),
+						Map.of(Main.game.getPlayer(),playerSlot)) {
 					@Override
 					public boolean isAppendStartingExposedDescriptions(GameCharacter character) {
 						return false;
@@ -345,8 +345,8 @@ public class RatWarrensCaptiveDialogue {
 
 	private static SexManagerDefault getPlayerMurkMilkingStallSM(SexSlot murkSlot, SexType murkSexPreference, int murkOrgasms, SexPace startingSexPace) {
 		return getBasicSexManager(SexPosition.MILKING_STALL,
-				Util.newHashMapOfValues(new Value<>(getMurk(), murkSlot)),
-				Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)),
+				Map.of(getMurk(),murkSlot),
+				Map.of(Main.game.getPlayer(),SexSlotMilkingStall.LOCKED_IN_MILKING_STALL),
 				murkSexPreference, murkOrgasms, startingSexPace, false);
 	}
 	
@@ -415,7 +415,7 @@ public class RatWarrensCaptiveDialogue {
 				if(spitOnAsshole) {
 					Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
 					map.put(Main.game.getPlayer(), new HashMap<>());
-					map.get(Main.game.getPlayer()).put(SexAreaOrifice.ANUS, Util.newHashMapOfValues(new Value<>(getMurk(), Util.newHashSetOfValues(LubricationType.SALIVA))));
+					map.get(Main.game.getPlayer()).put(SexAreaOrifice.ANUS, Map.of(getMurk(),Util.newHashSetOfValues(LubricationType.SALIVA)));
 					return map;
 				}
 				return super.getStartingWetAreas();
@@ -2049,8 +2049,8 @@ public class RatWarrensCaptiveDialogue {
 						true,
 						false,
 						getBasicSexManager(SexPosition.MILKING_STALL,
-								Util.newHashMapOfValues(new Value<>(getMurk(), SexSlotMilkingStall.HUMPING)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)),
+								Map.of(getMurk(),SexSlotMilkingStall.HUMPING),
+								Map.of(Main.game.getPlayer(),SexSlotMilkingStall.LOCKED_IN_MILKING_STALL),
 								new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, Main.game.getPlayer().hasVagina() && !Main.game.isAnalContentEnabled()?SexAreaOrifice.VAGINA:SexAreaOrifice.ANUS),
 								2,
 								null,
@@ -2195,8 +2195,8 @@ public class RatWarrensCaptiveDialogue {
 						true,
 						false,
 						getBasicSexManager(SexPosition.MILKING_STALL,
-								Util.newHashMapOfValues(new Value<>(getCharacters(false).get(0), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)),
+								Map.of(getCharacters(false).get(0),SexSlotMilkingStall.BEHIND_MILKING_STALL),
+								Map.of(Main.game.getPlayer(),SexSlotMilkingStall.LOCKED_IN_MILKING_STALL),
 								new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, Main.game.getPlayer().hasVagina()?SexAreaOrifice.VAGINA:SexAreaOrifice.ANUS),
 								0,
 								null,
@@ -2276,8 +2276,8 @@ public class RatWarrensCaptiveDialogue {
 						true,
 						false,
 						getBasicSexManager(SexPosition.MILKING_STALL,
-								Util.newHashMapOfValues(new Value<>(getCharacters(false).get(0), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)),
+								Map.of(getCharacters(false).get(0),SexSlotMilkingStall.BEHIND_MILKING_STALL),
+								Map.of(Main.game.getPlayer(),SexSlotMilkingStall.LOCKED_IN_MILKING_STALL),
 								new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, Main.game.getPlayer().hasVagina()?SexAreaOrifice.VAGINA:SexAreaOrifice.ANUS),
 								0,
 								null,
@@ -2383,16 +2383,14 @@ public class RatWarrensCaptiveDialogue {
 								allFours
 									?SexPosition.ALL_FOURS
 									:SexPosition.LYING_DOWN,
-								Util.newHashMapOfValues(new Value<>(getMurk(),
-										allFours
+								Map.of(getMurk(),allFours
 											?SexSlotAllFours.HUMPING
 											:(Main.game.getPlayer().isVisiblyPregnant()
 												?SexSlotLyingDown.MISSIONARY
-												:SexSlotLyingDown.MATING_PRESS))),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(),
-										allFours
+												:SexSlotLyingDown.MATING_PRESS)),
+								Map.of(Main.game.getPlayer(),allFours
 											?SexSlotAllFours.ALL_FOURS
-											:SexSlotLyingDown.LYING_DOWN)),
+											:SexSlotLyingDown.LYING_DOWN),
 								new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, Main.game.getPlayer().hasVagina()?SexAreaOrifice.VAGINA:SexAreaOrifice.ANUS),
 								0,
 								null,
@@ -2811,7 +2809,7 @@ public class RatWarrensCaptiveDialogue {
 				return new ResponseCombat("Attack",
 						"Now that you're free of your chain, you can finally attack Murk!",
 						(NPC) getMurk(),
-						Util.newHashMapOfValues(new Value<>(getMurk(), "[murk.speech(Yer gonna pay fer this!)] Murk shouts as he prepares to fight you."))) {
+						Map.of(getMurk(),"[murk.speech(Yer gonna pay fer this!)] Murk shouts as he prepares to fight you.")) {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensCaptiveAttemptingEscape, true);
@@ -2958,7 +2956,7 @@ public class RatWarrensCaptiveDialogue {
 						null,
 						(NPC) getMurk(),
 						List.of(getMurk()),
-						Util.newHashMapOfValues(new Value<>(getMurk(), "[npc.speech(Y-Yer gonna pay fer this!)] [npc.name] shouts in panic, wielding his bat."))) {
+						Map.of(getMurk(),"[npc.speech(Y-Yer gonna pay fer this!)] [npc.name] shouts in panic, wielding his bat.")) {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.ratWarrensCaptiveAttemptingEscape, true);

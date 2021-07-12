@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActions;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.ArousalIncrease;
@@ -10,8 +12,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.4.1
@@ -25,7 +25,7 @@ public class TongueArmpit {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.ARMPITS)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.ARMPITS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public String getActionTitle() {
@@ -190,7 +190,7 @@ public class TongueArmpit {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.ARMPITS)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.ARMPITS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		@Override
@@ -226,7 +226,7 @@ public class TongueArmpit {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.ARMPITS)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.ARMPITS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		@Override
@@ -262,7 +262,7 @@ public class TongueArmpit {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.FOUR_LUSTFUL,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.ARMPITS)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.ARMPITS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		@Override
@@ -298,7 +298,7 @@ public class TongueArmpit {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.ARMPITS)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.ARMPITS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		@Override
@@ -358,7 +358,7 @@ public class TongueArmpit {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.ARMPITS)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.ARMPITS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		@Override
@@ -394,7 +394,7 @@ public class TongueArmpit {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.ARMPITS)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.ARMPITS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		@Override
@@ -430,7 +430,7 @@ public class TongueArmpit {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.ARMPITS)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.ARMPITS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public String getActionTitle() {
@@ -486,7 +486,7 @@ public class TongueArmpit {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ARMPITS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ARMPITS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public String getActionTitle() {
@@ -658,7 +658,7 @@ public class TongueArmpit {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ARMPITS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ARMPITS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		@Override
@@ -691,7 +691,7 @@ public class TongueArmpit {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ARMPITS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ARMPITS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		@Override
@@ -724,7 +724,7 @@ public class TongueArmpit {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.FOUR_LUSTFUL,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ARMPITS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ARMPITS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		@Override
@@ -757,7 +757,7 @@ public class TongueArmpit {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ARMPITS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ARMPITS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		@Override
@@ -820,7 +820,7 @@ public class TongueArmpit {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ARMPITS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ARMPITS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		@Override
@@ -853,7 +853,7 @@ public class TongueArmpit {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ARMPITS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ARMPITS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		@Override
@@ -886,7 +886,7 @@ public class TongueArmpit {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ARMPITS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ARMPITS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public String getActionTitle() {

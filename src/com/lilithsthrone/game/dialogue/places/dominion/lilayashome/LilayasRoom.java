@@ -30,7 +30,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotMasturbation;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -143,7 +142,7 @@ public class LilayasRoom {
 				return new ResponseSex("Panty Masturbation", "Use Lilaya's panties to help you masturbate.",
 						true, true,
 						new SMMasturbation(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMasturbation.KNEELING_PANTIES))) {
+								Map.of(Main.game.getPlayer(),SexSlotMasturbation.KNEELING_PANTIES)) {
 							@Override
 							public String applyEndSexEffects() {
 								return Main.game.getPlayer().addClothing(LilayasRoom.lilayasPanties, 1, false, true);
@@ -348,8 +347,8 @@ public class LilayasRoom {
 						null, CorruptionLevel.THREE_DIRTY, null, null, null,
 						true, false,
 						new SMLyingDown(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Rose.class), SexSlotLyingDown.MISSIONARY)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))) {
+								Map.of(Main.game.getNpc(Rose.class),SexSlotLyingDown.MISSIONARY),
+								Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)) {
 							@Override
 							public boolean isPositionChangingAllowed(GameCharacter character) {
 								return false;
@@ -364,12 +363,9 @@ public class LilayasRoom {
 							}
 							@Override
 							public Map<GameCharacter, List<SexAreaInterface>> getAreasBannedMap() {
-								return Util.newHashMapOfValues(
-										new Value<>(
-												Main.game.getNpc(Rose.class),
-												List.of(SexAreaOrifice.VAGINA,
+								return Map.of(Main.game.getNpc(Rose.class),List.of(SexAreaOrifice.VAGINA,
 														SexAreaOrifice.ANUS,
-														SexAreaOrifice.MOUTH)));
+														SexAreaOrifice.MOUTH));
 							}
 						},
 						null,
@@ -534,10 +530,8 @@ public class LilayasRoom {
 				return new ResponseSex("Sex", "Have dominant sex with Rose and Lilaya.",
 						true, false,
 						new SMAllFours(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Lilaya.class), SexSlotAllFours.ALL_FOURS),
-										new Value<>(Main.game.getNpc(Rose.class), SexSlotAllFours.ALL_FOURS_TWO))) {
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getNpc(Lilaya.class),SexSlotAllFours.ALL_FOURS,Main.game.getNpc(Rose.class),SexSlotAllFours.ALL_FOURS_TWO)) {
 							@Override
 							public boolean isPositionChangingAllowed(GameCharacter character) {
 								return false;

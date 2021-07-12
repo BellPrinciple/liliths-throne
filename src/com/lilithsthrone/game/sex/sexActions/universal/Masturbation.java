@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.universal;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.sex.ArousalIncrease;
 import com.lilithsthrone.game.sex.SexParticipantType;
@@ -9,8 +11,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotMasturbation;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.2.8
@@ -56,10 +56,10 @@ public class Masturbation {
 			Main.sex.setSexManager(new SexManagerDefault(
 					SexPosition.MASTURBATION,
 					Main.sex.isDom(Main.sex.getCharacterPerformingAction())
-						?Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotMasturbation.STANDING))
+						?Map.of(Main.sex.getCharacterPerformingAction(),SexSlotMasturbation.STANDING)
 						:null,
 					!Main.sex.isDom(Main.sex.getCharacterPerformingAction())
-						?Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotMasturbation.STANDING))
+						?Map.of(Main.sex.getCharacterPerformingAction(),SexSlotMasturbation.STANDING)
 						:null){
 			});
 		}
@@ -97,10 +97,10 @@ public class Masturbation {
 			Main.sex.setSexManager(new SexManagerDefault(
 					SexPosition.MASTURBATION,
 					Main.sex.isDom(Main.sex.getCharacterPerformingAction())
-						?Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotMasturbation.SITTING))
+						?Map.of(Main.sex.getCharacterPerformingAction(),SexSlotMasturbation.SITTING)
 						:null,
 					!Main.sex.isDom(Main.sex.getCharacterPerformingAction())
-						?Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotMasturbation.SITTING))
+						?Map.of(Main.sex.getCharacterPerformingAction(),SexSlotMasturbation.SITTING)
 						:null){
 			});
 		}
@@ -143,10 +143,10 @@ public class Masturbation {
 			Main.sex.setSexManager(new SexManagerDefault(
 					SexPosition.MASTURBATION,
 					Main.sex.isDom(Main.sex.getCharacterPerformingAction())
-						?Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotMasturbation.KNEELING))
+						?Map.of(Main.sex.getCharacterPerformingAction(),SexSlotMasturbation.KNEELING)
 						:null,
 					!Main.sex.isDom(Main.sex.getCharacterPerformingAction())
-						?Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotMasturbation.KNEELING))
+						?Map.of(Main.sex.getCharacterPerformingAction(),SexSlotMasturbation.KNEELING)
 						:null){
 			});
 		}

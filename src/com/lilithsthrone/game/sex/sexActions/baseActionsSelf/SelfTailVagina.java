@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActionsSelf;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.ArousalIncrease;
@@ -9,8 +11,6 @@ import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.79
@@ -24,7 +24,7 @@ public class SelfTailVagina {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.VAGINA),
 			SexParticipantType.SELF) {
 
 		@Override
@@ -52,7 +52,7 @@ public class SelfTailVagina {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.VAGINA),
 			SexParticipantType.SELF,
 			SexPace.DOM_GENTLE) {
 
@@ -82,7 +82,7 @@ public class SelfTailVagina {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.VAGINA),
 			SexParticipantType.SELF,
 			SexPace.DOM_NORMAL) {
 		
@@ -111,7 +111,7 @@ public class SelfTailVagina {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.VAGINA),
 			SexParticipantType.SELF,
 			SexPace.DOM_ROUGH) {
 		
@@ -140,7 +140,7 @@ public class SelfTailVagina {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.VAGINA),
 			SexParticipantType.SELF,
 			SexPace.SUB_NORMAL) {
 		
@@ -170,7 +170,7 @@ public class SelfTailVagina {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.VAGINA),
 			SexParticipantType.SELF,
 			SexPace.SUB_EAGER) {
 		
@@ -199,7 +199,7 @@ public class SelfTailVagina {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TAIL, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.TAIL,SexAreaOrifice.VAGINA),
 			SexParticipantType.SELF) {
 		
 		@Override

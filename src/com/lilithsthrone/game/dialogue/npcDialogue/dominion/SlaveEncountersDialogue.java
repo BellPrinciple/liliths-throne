@@ -102,9 +102,7 @@ public class SlaveEncountersDialogue {
 			}
 			@Override
 			public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-				return Util.newHashMapOfValues(
-						new Value<>(slave, List.of(CoverableArea.VAGINA, CoverableArea.PENIS)),
-						new Value<>(characterForSex, List.of(CoverableArea.VAGINA, CoverableArea.PENIS)));
+				return Map.of(slave,List.of(CoverableArea.VAGINA, CoverableArea.PENIS),characterForSex,List.of(CoverableArea.VAGINA, CoverableArea.PENIS));
 			}
 		};
 	}

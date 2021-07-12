@@ -16,8 +16,6 @@ import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3
@@ -100,12 +98,12 @@ public class SMLyssiethDemonTF extends SexManagerDefault {
 	public Map<GameCharacter, List<SexAreaInterface>> getAreasBannedMap() {
 		// Limit finger during giving the player head, so that she can use hug-lock and prevent the player from pulling out:
 		if(Main.sex.getOngoingSexAreas(Main.game.getNpc(Lyssieth.class), SexAreaOrifice.MOUTH, Main.game.getPlayer()).contains(SexAreaPenetration.PENIS)) {
-			return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lyssieth.class), List.of(SexAreaPenetration.FINGER)));
+			return Map.of(Main.game.getNpc(Lyssieth.class),List.of(SexAreaPenetration.FINGER));
 		}
 		// Limit tail during doggy style, so that she can use tail-lock and prevent the player from pulling out:
 		if(Main.sex.getOngoingSexAreas(Main.game.getNpc(Lyssieth.class), SexAreaOrifice.VAGINA, Main.game.getPlayer()).contains(SexAreaPenetration.PENIS)
 				&& Main.sex.getPosition()==SexPosition.ALL_FOURS) {
-			return Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Lyssieth.class), List.of(SexAreaPenetration.TAIL)));
+			return Map.of(Main.game.getNpc(Lyssieth.class),List.of(SexAreaPenetration.TAIL));
 		}
 		return super.getAreasBannedMap();
 	}

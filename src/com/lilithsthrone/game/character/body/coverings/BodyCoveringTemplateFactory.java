@@ -5,8 +5,6 @@ import java.util.Map;
 
 import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -37,7 +35,7 @@ public class BodyCoveringTemplateFactory {
 	}
 	
 	public static BodyCoveringTemplate createBottomSkin(List<Colour> skinColors) {
-		return createSkin(Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)), skinColors, null, PresetColour.allSkinColours);
+		return createSkin(Map.of(CoveringPattern.NONE,1), skinColors, null, PresetColour.allSkinColours);
 	}
 	
 	public static BodyCoveringTemplate createSlime(CoveringPattern basePattern, Map<CoveringPattern, Integer> coverPatterns) {
@@ -47,7 +45,7 @@ public class BodyCoveringTemplateFactory {
 				"slime",
 				List.of(CoveringModifier.GOOEY),
 				null,
-				Util.newHashMapOfValues(new Value<>(basePattern, 1)),
+				Map.of(basePattern,1),
 				coverPatterns,
 				PresetColour.naturalSlimeColours,
 				PresetColour.dyeSlimeColours,
@@ -90,7 +88,7 @@ public class BodyCoveringTemplateFactory {
 	}
 	
 	private static BodyCoveringTemplate createHairWithoutPatterns(String determiner, String name, CoveringModifier modifier) {
-		return createHair(determiner, name, List.of(modifier), Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)));
+		return createHair(determiner, name, List.of(modifier), Map.of(CoveringPattern.NONE,1));
 	}
 	
 	public static BodyCoveringTemplate createHeadHair(CoveringModifier modifier) {
@@ -112,7 +110,7 @@ public class BodyCoveringTemplateFactory {
 				name,
 				List.of(modifier),
 				null,
-				Util.newHashMapOfValues(new Value<>(pattern, 1)),
+				Map.of(pattern,1),
 				null,
 				naturalColours,
 				PresetColour.allCoveringColours,
@@ -129,7 +127,7 @@ public class BodyCoveringTemplateFactory {
 				null,
 				pattern==null
 					?null
-					:Util.newHashMapOfValues(new Value<>(pattern, 1)),
+					:Map.of(pattern,1),
 				null,
 				PresetColour.allSkinColours,
 				null,
@@ -144,12 +142,8 @@ public class BodyCoveringTemplateFactory {
 				"skin",
 				List.of(CoveringModifier.SMOOTH),
 				null,
-				Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 10)),
-				Util.newHashMapOfValues(
-						new Value<>(CoveringPattern.MARKED, 1),
-						new Value<>(CoveringPattern.MOTTLED, 1),
-						new Value<>(CoveringPattern.SPOTTED, 1),
-						new Value<>(CoveringPattern.STRIPED, 1)),
+				Map.of(CoveringPattern.NONE,10),
+				Map.of(CoveringPattern.MARKED,1,CoveringPattern.MOTTLED,1,CoveringPattern.SPOTTED,1,CoveringPattern.STRIPED,1),
 				PresetColour.allSkinColours,
 				null,
 				List.of(PresetColour.ORIFICE_INTERIOR),
@@ -157,15 +151,13 @@ public class BodyCoveringTemplateFactory {
 	}
 	
 	public static BodyCoveringTemplate createEyeIrisesWithCustomColors(List<Colour> naturalIrisColors, List<Colour> dyeIrisColours, boolean heteroIsExtra) {
-		Map<CoveringPattern, Integer> natural = Util.newHashMapOfValues(
-				new Value<>(CoveringPattern.EYE_IRISES, 5),
-				new Value<>(CoveringPattern.EYE_IRISES_HETEROCHROMATIC, 1));
+		Map<CoveringPattern, Integer> natural = Map.of(CoveringPattern.EYE_IRISES,5,CoveringPattern.EYE_IRISES_HETEROCHROMATIC,1);
 		
 		Map<CoveringPattern, Integer> extra = null;
 		
 		if(heteroIsExtra) {
-			natural = Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_IRISES, 1));
-			extra = Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_IRISES_HETEROCHROMATIC, 1));
+			natural = Map.of(CoveringPattern.EYE_IRISES,1);
+			extra = Map.of(CoveringPattern.EYE_IRISES_HETEROCHROMATIC,1);
 		}
 		return new BodyCoveringTemplate("a pair of",
 				true,

@@ -46,7 +46,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.PenisMouth;
 import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -313,13 +312,7 @@ public class PregnancyRoulette {
 								Main.game.getDialogueFlags().eponaStamps+=1;
 								
 								// Skew the dice roll in the player's favour (lowest number goes first):
-								Dice d = new Dice(Util.newHashMapOfValues(
-										new Value<>(DiceFace.ONE, 4f),
-										new Value<>(DiceFace.TWO, 3f),
-										new Value<>(DiceFace.THREE, 2f),
-										new Value<>(DiceFace.FOUR, 1f),
-										new Value<>(DiceFace.FIVE, 0.5f),
-										new Value<>(DiceFace.SIX, 0.25f)));
+								Dice d = new Dice(Map.of(DiceFace.ONE,4f,DiceFace.TWO,3f,DiceFace.THREE,2f,DiceFace.FOUR,1f,DiceFace.FIVE,0.5f,DiceFace.SIX,0.25f));
 								d.roll();
 								roll = d.getFace().getValue();
 								
@@ -569,8 +562,8 @@ public class PregnancyRoulette {
 						null, null, null, null, null, null,
 						true, false,
 						new SMBreedingStall(
-								Util.newHashMapOfValues(new Value<>(breeder, SexSlotBreedingStall.BREEDING_STALL_FUCKING)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotBreedingStall.BREEDING_STALL_FRONT))) {
+								Map.of(breeder,SexSlotBreedingStall.BREEDING_STALL_FUCKING),
+								Map.of(Main.game.getPlayer(),SexSlotBreedingStall.BREEDING_STALL_FRONT)) {
 							@Override
 							public void initStartingLustAndArousal(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -606,8 +599,8 @@ public class PregnancyRoulette {
 						null, null, null, null, null, null,
 						true, false,
 						new SMBreedingStall(
-								Util.newHashMapOfValues(new Value<>(breeder, SexSlotBreedingStall.BREEDING_STALL_FUCKING)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotBreedingStall.BREEDING_STALL_BACK))) {
+								Map.of(breeder,SexSlotBreedingStall.BREEDING_STALL_FUCKING),
+								Map.of(Main.game.getPlayer(),SexSlotBreedingStall.BREEDING_STALL_BACK)) {
 							@Override
 							public void initStartingLustAndArousal(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -654,8 +647,8 @@ public class PregnancyRoulette {
 							null, null, null, null, null, null,
 							true, false,
 							new SMBreedingStall(
-									Util.newHashMapOfValues(new Value<>(breeder, SexSlotBreedingStall.BREEDING_STALL_FUCKING)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotBreedingStall.BREEDING_STALL_FRONT))) {
+									Map.of(breeder,SexSlotBreedingStall.BREEDING_STALL_FUCKING),
+									Map.of(Main.game.getPlayer(),SexSlotBreedingStall.BREEDING_STALL_FRONT)) {
 								@Override
 								public void initStartingLustAndArousal(GameCharacter character) {
 									if(!character.isPlayer()) {
@@ -685,8 +678,8 @@ public class PregnancyRoulette {
 							null, null, null, null, null, null,
 							true, false,
 							new SMBreedingStall(
-									Util.newHashMapOfValues(new Value<>(breeder, SexSlotBreedingStall.BREEDING_STALL_FUCKING)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotBreedingStall.BREEDING_STALL_BACK))) {
+									Map.of(breeder,SexSlotBreedingStall.BREEDING_STALL_FUCKING),
+									Map.of(Main.game.getPlayer(),SexSlotBreedingStall.BREEDING_STALL_BACK)) {
 								@Override
 								public void initStartingLustAndArousal(GameCharacter character) {
 									if(!character.isPlayer()) {
@@ -861,11 +854,10 @@ public class PregnancyRoulette {
 						null, null, null, null, null, null,
 						true, false,
 						new SMBreedingStall(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotBreedingStall.BREEDING_STALL_FUCKING)),
-								Util.newHashMapOfValues(new Value<>(mother,
-										mother.hasLegs() || mother.getGenitalArrangement()!=GenitalArrangement.CLOACA_BEHIND
+								Map.of(Main.game.getPlayer(),SexSlotBreedingStall.BREEDING_STALL_FUCKING),
+								Map.of(mother,mother.hasLegs() || mother.getGenitalArrangement()!=GenitalArrangement.CLOACA_BEHIND
 											?SexSlotBreedingStall.BREEDING_STALL_BACK
-											:SexSlotBreedingStall.BREEDING_STALL_FRONT))) {
+											:SexSlotBreedingStall.BREEDING_STALL_FRONT)) {
 							@Override
 							public void initStartingLustAndArousal(GameCharacter character) {
 								character.setArousal(50);
@@ -1184,10 +1176,8 @@ public class PregnancyRoulette {
 							true,
 							false,
 							new SMLyingDown(
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.MISSIONARY)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Murk.class), SexSlotLyingDown.LYING_DOWN))) {
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.MISSIONARY),
+									Map.of(Main.game.getNpc(Murk.class),SexSlotLyingDown.LYING_DOWN)) {
 								@Override
 								public boolean isPublicSex() {
 									return false;
@@ -1210,13 +1200,10 @@ public class PregnancyRoulette {
 							true,
 							false,
 							new SMAllFours(
-									Util.newHashMapOfValues(
-										new Value<>(
-											Main.game.getNpc(Murk.class),
-											murkPreference.getTargetedSexArea()==SexAreaOrifice.VAGINA || murkPreference.getTargetedSexArea()==SexAreaOrifice.ANUS
+									Map.of(Main.game.getNpc(Murk.class),murkPreference.getTargetedSexArea()==SexAreaOrifice.VAGINA || murkPreference.getTargetedSexArea()==SexAreaOrifice.ANUS
 												?SexSlotAllFours.HUMPING
-												:SexSlotAllFours.IN_FRONT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))) {
+												:SexSlotAllFours.IN_FRONT),
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)) {
 								@Override
 								public boolean isPublicSex() {
 									return false;
@@ -1454,13 +1441,10 @@ public class PregnancyRoulette {
 						true,
 						false,
 						new SMAllFours(
-								Util.newHashMapOfValues(
-									new Value<>(
-										Main.game.getNpc(Murk.class),
-										murkPreference.getTargetedSexArea()==SexAreaOrifice.VAGINA || murkPreference.getTargetedSexArea()==SexAreaOrifice.ANUS
+								Map.of(Main.game.getNpc(Murk.class),murkPreference.getTargetedSexArea()==SexAreaOrifice.VAGINA || murkPreference.getTargetedSexArea()==SexAreaOrifice.ANUS
 											?SexSlotAllFours.HUMPING
-											:SexSlotAllFours.IN_FRONT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))) {
+											:SexSlotAllFours.IN_FRONT),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)) {
 							@Override
 							public boolean isPublicSex() {
 								return false;

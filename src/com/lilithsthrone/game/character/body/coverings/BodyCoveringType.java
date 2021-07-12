@@ -12,7 +12,6 @@ import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -27,10 +26,7 @@ public class BodyCoveringType {
 	public static AbstractBodyCoveringType HUMAN = new AbstractBodyCoveringType(
 			BodyCoveringCategory.MAIN_SKIN,
 			BodyCoveringTemplateFactory.createSkin(
-			Util.newHashMapOfValues(
-					new Value<>(CoveringPattern.NONE, 30),
-					new Value<>(CoveringPattern.FRECKLED_FACE, 2),
-					new Value<>(CoveringPattern.FRECKLED, 1)),
+			Map.of(CoveringPattern.NONE,30,CoveringPattern.FRECKLED_FACE,2,CoveringPattern.FRECKLED,1),
 			PresetColour.humanSkinColours,
 			PresetColour.humanSkinColours,
 			PresetColour.allSkinColours)) {
@@ -46,7 +42,7 @@ public class BodyCoveringType {
 					CoveringModifier.FLUFFY,
 					CoveringModifier.SMOOTH),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.MARKED, 1)), // Foxes always have white markings on their undersides
+			Map.of(CoveringPattern.MARKED,1), // Foxes always have white markings on their undersides
 			CoveringPattern.allHairCoveringPatterns,
 			List.of(
 					PresetColour.COVERING_ORANGE,
@@ -62,7 +58,7 @@ public class BodyCoveringType {
 	public static AbstractBodyCoveringType ANGEL = new AbstractBodyCoveringType(
 			BodyCoveringCategory.MAIN_SKIN,
 			BodyCoveringTemplateFactory.createTopSkin(
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			PresetColour.humanSkinColours)) {
 	};
 
@@ -74,7 +70,7 @@ public class BodyCoveringType {
 			"feather",
 			List.of(CoveringModifier.SMOOTH),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			CoveringPattern.allHairCoveringPatterns,
 			List.of(PresetColour.COVERING_WHITE),
 			Util.mergeLists(PresetColour.dyeFeatherColours, PresetColour.naturalFeatherColours),
@@ -85,7 +81,7 @@ public class BodyCoveringType {
 	public static AbstractBodyCoveringType DEMON_COMMON = new AbstractBodyCoveringType(
 			BodyCoveringCategory.MAIN_SKIN,
 			BodyCoveringTemplateFactory.createTopSkin(
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			PresetColour.demonSkinColours)) {
 	};
 
@@ -97,7 +93,7 @@ public class BodyCoveringType {
 			"feather",
 			List.of(CoveringModifier.SMOOTH),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			CoveringPattern.allHairCoveringPatterns,
 			List.of(PresetColour.COVERING_BLACK),
 			Util.mergeLists(PresetColour.dyeFeatherColours, PresetColour.naturalFeatherColours),
@@ -134,7 +130,7 @@ public class BodyCoveringType {
 			BodyCoveringCategory.MAIN_FUR,
 			BodyCoveringTemplateFactory.createFurSkin(
 			List.of(CoveringModifier.SHORT),
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)))) {
+			Map.of(CoveringPattern.NONE,1))) {
 	};
 	
 	public static AbstractBodyCoveringType CANINE_FUR = new AbstractBodyCoveringType(
@@ -144,10 +140,7 @@ public class BodyCoveringType {
 					CoveringModifier.FLUFFY,
 					CoveringModifier.SHORT,
 					CoveringModifier.SHAGGY),
-			Util.newHashMapOfValues(
-					new Value<>(CoveringPattern.NONE, 30),
-					new Value<>(CoveringPattern.SPOTTED, 5),
-					new Value<>(CoveringPattern.MARKED, 5)))) {
+			Map.of(CoveringPattern.NONE,30,CoveringPattern.SPOTTED,5,CoveringPattern.MARKED,5))) {
 	};
 	
 	public static AbstractBodyCoveringType LYCAN_FUR = new AbstractBodyCoveringType(
@@ -162,13 +155,7 @@ public class BodyCoveringType {
 					CoveringModifier.SMOOTH,
 					CoveringModifier.SHORT,
 					CoveringModifier.FLUFFY),
-			Util.newHashMapOfValues(
-					new Value<>(CoveringPattern.NONE, 50),
-					new Value<>(CoveringPattern.MOTTLED, 5),
-					new Value<>(CoveringPattern.SPOTTED, 5),
-					new Value<>(CoveringPattern.MARKED, 5),
-					new Value<>(CoveringPattern.STRIPED, 5),
-					new Value<>(CoveringPattern.HIGHLIGHTS, 5)))) {
+			Map.of(CoveringPattern.NONE,50,CoveringPattern.MOTTLED,5,CoveringPattern.SPOTTED,5,CoveringPattern.MARKED,5,CoveringPattern.STRIPED,5,CoveringPattern.HIGHLIGHTS,5))) {
 	};
 
 	public static AbstractBodyCoveringType SQUIRREL_FUR = new AbstractBodyCoveringType(
@@ -199,11 +186,7 @@ public class BodyCoveringType {
 			"hair",
 			List.of(CoveringModifier.SHORT),
 			null,
-			Util.newHashMapOfValues(
-					new Value<>(CoveringPattern.NONE, 30),
-					new Value<>(CoveringPattern.MOTTLED, 5),
-					new Value<>(CoveringPattern.SPOTTED, 5),
-					new Value<>(CoveringPattern.MARKED, 5)),
+			Map.of(CoveringPattern.NONE,30,CoveringPattern.MOTTLED,5,CoveringPattern.SPOTTED,5,CoveringPattern.MARKED,5),
 			CoveringPattern.allHairCoveringPatterns,
 			PresetColour.naturalFurColours,
 			PresetColour.allCoveringColours,
@@ -215,7 +198,7 @@ public class BodyCoveringType {
 			BodyCoveringCategory.MAIN_FUR,
 			BodyCoveringTemplateFactory.createFurSkin(
 			List.of(CoveringModifier.SMOOTH),
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)))) {
+			Map.of(CoveringPattern.NONE,1))) {
 	};
 	
 	public static AbstractBodyCoveringType BOVINE_FUR = new AbstractBodyCoveringType(
@@ -224,11 +207,7 @@ public class BodyCoveringType {
 			List.of(
 					CoveringModifier.SHORT,
 					CoveringModifier.SMOOTH),
-			Util.newHashMapOfValues(
-					new Value<>(CoveringPattern.NONE, 10),
-					new Value<>(CoveringPattern.SPOTTED, 5),
-					new Value<>(CoveringPattern.MOTTLED, 1),
-					new Value<>(CoveringPattern.MARKED, 1)))) {
+			Map.of(CoveringPattern.NONE,10,CoveringPattern.SPOTTED,5,CoveringPattern.MOTTLED,1,CoveringPattern.MARKED,1))) {
 	};
 
 	/** Used for their leg covering */
@@ -313,7 +292,7 @@ public class BodyCoveringType {
 			"scale",
 			List.of(CoveringModifier.SMOOTH),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			CoveringPattern.allScalesCoveringPatterns,
 			PresetColour.naturalScaleColours,
 			PresetColour.allCoveringColours,
@@ -329,7 +308,7 @@ public class BodyCoveringType {
 			"scale",
 			List.of(CoveringModifier.SMOOTH),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			CoveringPattern.allScalesCoveringPatterns,
 			PresetColour.naturalScaleColours,
 			PresetColour.allCoveringColours,
@@ -345,7 +324,7 @@ public class BodyCoveringType {
 			"chitin",
 			List.of(CoveringModifier.SMOOTH),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			CoveringPattern.allScalesCoveringPatterns,
 			PresetColour.naturalScaleColours,
 			PresetColour.allCoveringColours,
@@ -361,10 +340,8 @@ public class BodyCoveringType {
 			"skin",
 			List.of(CoveringModifier.SMOOTH),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(CoveringPattern.NONE, 5),
-					new Value<>(CoveringPattern.SPOTTED, 1)),
+			Map.of(CoveringPattern.NONE,1),
+			Map.of(CoveringPattern.NONE,5,CoveringPattern.SPOTTED,1),
 			PresetColour.allSkinColours,
 			PresetColour.allCoveringColours,
 			PresetColour.allSkinColours,
@@ -379,7 +356,7 @@ public class BodyCoveringType {
 			"scale",
 			List.of(CoveringModifier.SMOOTH),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			CoveringPattern.allScalesCoveringPatterns,
 			PresetColour.naturalScaleColours,
 			PresetColour.allCoveringColours,
@@ -446,13 +423,7 @@ public class BodyCoveringType {
 			List.of(CoveringModifier.SMOOTH),
 			null,
 			null,
-			Util.newHashMapOfValues(
-					new Value<>(CoveringPattern.NONE, 1),
-					new Value<>(CoveringPattern.HIGHLIGHTS, 1),
-					new Value<>(CoveringPattern.STRIPED, 1),
-					new Value<>(CoveringPattern.SPOTTED, 1),
-					new Value<>(CoveringPattern.MOTTLED, 1),
-					new Value<>(CoveringPattern.MARKED, 1)),
+			Map.of(CoveringPattern.NONE,1,CoveringPattern.HIGHLIGHTS,1,CoveringPattern.STRIPED,1,CoveringPattern.SPOTTED,1,CoveringPattern.MOTTLED,1,CoveringPattern.MARKED,1),
 			List.of(PresetColour.ORIFICE_INTERIOR),
 			PresetColour.allSkinColours,
 			List.of(PresetColour.ORIFICE_INTERIOR),
@@ -467,12 +438,7 @@ public class BodyCoveringType {
 			"feather",
 			List.of(CoveringModifier.SMOOTH),
 			null,
-			Util.newHashMapOfValues(
-					new Value<>(CoveringPattern.NONE, 10),
-					new Value<>(CoveringPattern.MARKED, 10),
-					new Value<>(CoveringPattern.SPOTTED, 5),
-					new Value<>(CoveringPattern.MOTTLED, 2),
-					new Value<>(CoveringPattern.STRIPED, 1)),
+			Map.of(CoveringPattern.NONE,10,CoveringPattern.MARKED,10,CoveringPattern.SPOTTED,5,CoveringPattern.MOTTLED,2,CoveringPattern.STRIPED,1),
 			CoveringPattern.allHairCoveringPatterns,
 			PresetColour.naturalFeatherColours,
 			PresetColour.dyeFeatherColours,
@@ -488,7 +454,7 @@ public class BodyCoveringType {
 			"skin",
 			List.of(CoveringModifier.LEATHERY),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			CoveringPattern.allStandardCoveringPatterns,
 			List.of(PresetColour.COVERING_BLACK),
 			PresetColour.allCoveringColours,
@@ -504,7 +470,7 @@ public class BodyCoveringType {
 			"chitin",
 			List.of(CoveringModifier.SMOOTH),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			CoveringPattern.allScalesCoveringPatterns,
 			List.of(PresetColour.COVERING_CLEAR),
 			PresetColour.allCoveringColours,
@@ -531,7 +497,7 @@ public class BodyCoveringType {
 			List.of(
 					CoveringModifier.FURRY),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			CoveringPattern.allHairCoveringPatterns,
 			PresetColour.naturalHairColours,
 			PresetColour.allCoveringColours,
@@ -719,8 +685,8 @@ public class BodyCoveringType {
 			List.of(
 					CoveringModifier.EYE),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_IRISES, 1)),
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_IRISES_HETEROCHROMATIC, 1)),
+			Map.of(CoveringPattern.EYE_IRISES,1),
+			Map.of(CoveringPattern.EYE_IRISES_HETEROCHROMATIC,1),
 			PresetColour.naturalPredatorIrisColours,
 			PresetColour.dyePredatorIrisColours,
 			PresetColour.naturalPredatorIrisColours,
@@ -777,8 +743,8 @@ public class BodyCoveringType {
 			"pupil",
 			List.of(CoveringModifier.EYE),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_PUPILS, 1)),
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_PUPILS_HETEROCHROMATIC, 1)),
+			Map.of(CoveringPattern.EYE_PUPILS,1),
+			Map.of(CoveringPattern.EYE_PUPILS_HETEROCHROMATIC,1),
 			PresetColour.naturalPupilColours,
 			PresetColour.dyePupilColours,
 			PresetColour.naturalPupilColours,
@@ -793,8 +759,8 @@ public class BodyCoveringType {
 			"sclera",
 			List.of(CoveringModifier.EYE),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_SCLERA, 1)),
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_SCLERA_HETEROCHROMATIC, 1)),
+			Map.of(CoveringPattern.EYE_SCLERA,1),
+			Map.of(CoveringPattern.EYE_SCLERA_HETEROCHROMATIC,1),
 			PresetColour.naturalScleraColours,
 			PresetColour.dyeScleraColours,
 			PresetColour.naturalScleraColours,
@@ -812,7 +778,7 @@ public class BodyCoveringType {
 			"cum",
 			List.of(CoveringModifier.FLUID),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.FLUID, 1)),
+			Map.of(CoveringPattern.FLUID,1),
 			null,
 			List.of(PresetColour.COVERING_WHITE),
 			PresetColour.allCoveringColours,
@@ -828,7 +794,7 @@ public class BodyCoveringType {
 			"girlcum",
 			List.of(CoveringModifier.FLUID),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.FLUID, 1)),
+			Map.of(CoveringPattern.FLUID,1),
 			null,
 			List.of(PresetColour.COVERING_CLEAR),
 			PresetColour.allCoveringColours,
@@ -844,7 +810,7 @@ public class BodyCoveringType {
 			"milk",
 			List.of(CoveringModifier.FLUID),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.FLUID, 1)),
+			Map.of(CoveringPattern.FLUID,1),
 			null,
 			List.of(PresetColour.COVERING_WHITE),
 			PresetColour.allCoveringColours,
@@ -863,7 +829,7 @@ public class BodyCoveringType {
 			"blusher",
 			List.of(CoveringModifier.MAKEUP),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			null,
 			List.of(PresetColour.COVERING_NONE),
 			PresetColour.allMakeupColours,
@@ -879,7 +845,7 @@ public class BodyCoveringType {
 			"eye liner",
 			List.of(CoveringModifier.MAKEUP),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			null,
 			List.of(PresetColour.COVERING_NONE),
 			PresetColour.allMakeupColours,
@@ -898,7 +864,7 @@ public class BodyCoveringType {
 					CoveringModifier.SPARKLY,
 					CoveringModifier.METALLIC),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
+			Map.of(CoveringPattern.NONE,1),
 			null,
 			List.of(PresetColour.COVERING_NONE),
 			PresetColour.allMakeupColours,
@@ -918,10 +884,8 @@ public class BodyCoveringType {
 					CoveringModifier.SPARKLY,
 					CoveringModifier.METALLIC),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(CoveringPattern.SPOTTED, 1),
-					new Value<>(CoveringPattern.STRIPED, 1)),
+			Map.of(CoveringPattern.NONE,1),
+			Map.of(CoveringPattern.SPOTTED,1,CoveringPattern.STRIPED,1),
 			List.of(PresetColour.COVERING_NONE),
 			PresetColour.allMakeupColours,
 			null,
@@ -939,10 +903,8 @@ public class BodyCoveringType {
 					CoveringModifier.SPARKLY,
 					CoveringModifier.METALLIC),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(CoveringPattern.SPOTTED, 1),
-					new Value<>(CoveringPattern.STRIPED, 1)),
+			Map.of(CoveringPattern.NONE,1),
+			Map.of(CoveringPattern.SPOTTED,1,CoveringPattern.STRIPED,1),
 			List.of(PresetColour.COVERING_NONE),
 			PresetColour.allMakeupColours,
 			null,
@@ -960,10 +922,8 @@ public class BodyCoveringType {
 					CoveringModifier.SPARKLY,
 					CoveringModifier.METALLIC),
 			null,
-			Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1)),
-			Util.newHashMapOfValues(
-					new Value<>(CoveringPattern.SPOTTED, 1),
-					new Value<>(CoveringPattern.STRIPED, 1)),
+			Map.of(CoveringPattern.NONE,1),
+			Map.of(CoveringPattern.SPOTTED,1,CoveringPattern.STRIPED,1),
 			List.of(PresetColour.COVERING_NONE),
 			PresetColour.allMakeupColours,
 			null,
@@ -1134,17 +1094,17 @@ public class BodyCoveringType {
 								break;
 							case EYE_IRIS:
 								bct = new AbstractBodyCoveringType(cat,
-										BodyCoveringTemplateFactory.createSlime(CoveringPattern.EYE_IRISES, Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_IRISES_HETEROCHROMATIC, 1)))) {
+										BodyCoveringTemplateFactory.createSlime(CoveringPattern.EYE_IRISES, Map.of(CoveringPattern.EYE_IRISES_HETEROCHROMATIC,1))) {
 								};
 								break;
 							case EYE_PUPIL:
 								bct = new AbstractBodyCoveringType(cat,
-										BodyCoveringTemplateFactory.createSlime(CoveringPattern.EYE_PUPILS, Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_IRISES_HETEROCHROMATIC, 1)))) {
+										BodyCoveringTemplateFactory.createSlime(CoveringPattern.EYE_PUPILS, Map.of(CoveringPattern.EYE_IRISES_HETEROCHROMATIC,1))) {
 								};
 								break;
 							case EYE_SCLERA:
 								bct = new AbstractBodyCoveringType(cat,
-										BodyCoveringTemplateFactory.createSlime(CoveringPattern.EYE_SCLERA, Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_IRISES_HETEROCHROMATIC, 1)))) {
+										BodyCoveringTemplateFactory.createSlime(CoveringPattern.EYE_SCLERA, Map.of(CoveringPattern.EYE_IRISES_HETEROCHROMATIC,1))) {
 								};
 								break;
 								

@@ -182,15 +182,15 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 				pathName,
 				null,
 				effects,
-				Util.newHashMapOfValues(new Value<>(equipSlot, blockedPartsList==null?new ArrayList<>():blockedPartsList)),
-				Util.newHashMapOfValues(new Value<>(equipSlot, incompatibleSlotsList==null?new ArrayList<>():incompatibleSlotsList)),
+				Map.of(equipSlot,blockedPartsList==null?new ArrayList<>():blockedPartsList),
+				Map.of(equipSlot,incompatibleSlotsList==null?new ArrayList<>():incompatibleSlotsList),
 				availablePrimaryColours,
 				availablePrimaryDyeColours,
 				availableSecondaryColours,
 				availableSecondaryDyeColours,
 				availableTertiaryColours,
 				availableTertiaryDyeColours,
-				Util.newHashMapOfValues(new Value<>(equipSlot, itemTags==null?new ArrayList<>():itemTags)));
+				Map.of(equipSlot,itemTags==null?new ArrayList<>():itemTags));
 	}
 	
 	public AbstractClothingType(
@@ -413,7 +413,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 						.map( e -> BlockedParts.loadFromXML(e.getInnerElement(), e.getDocument(), clothingXMLFile.getAbsolutePath()))
 						.collect(Collectors.toList());
 					
-				this.blockedPartsMap = Util.newHashMapOfValues(new Value<>(this.getEquipSlots().get(0), blockedPartsList));
+				this.blockedPartsMap = Map.of(this.getEquipSlots().get(0),blockedPartsList);
 			}
 
 			try {
@@ -435,7 +435,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 						.map(Element::getTextContent).map(InventorySlot::valueOf)
 						.collect(Collectors.toList());
 
-					this.incompatibleSlotsMap = Util.newHashMapOfValues(new Value<>(this.getEquipSlots().get(0), incompatibleSlotsList));
+					this.incompatibleSlotsMap = Map.of(this.getEquipSlots().get(0),incompatibleSlotsList);
 			}
 			
 

@@ -73,7 +73,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.SVGImages;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
@@ -485,11 +484,9 @@ public class SlaverAlleyDialogue {
 		return new SexManagerDefault(
 				SexPosition.STOCKS,
 				!twoPartners
-					?Util.newHashMapOfValues(new Value<>(randomSexPartners.get(0), randomSexPartners.get(0).hasFetish(Fetish.FETISH_ORAL_RECEIVING)?SexSlotStocks.RECEIVING_ORAL:SexSlotStocks.BEHIND_STOCKS))
-					:Util.newHashMapOfValues(
-								new Value<>(randomSexPartners.get(0), SexSlotStocks.BEHIND_STOCKS),
-								new Value<>(randomSexPartners.get(1), SexSlotStocks.RECEIVING_ORAL)),
-				Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStocks.LOCKED_IN_STOCKS))) {
+					?Map.of(randomSexPartners.get(0),randomSexPartners.get(0).hasFetish(Fetish.FETISH_ORAL_RECEIVING)?SexSlotStocks.RECEIVING_ORAL:SexSlotStocks.BEHIND_STOCKS)
+					:Map.of(randomSexPartners.get(0),SexSlotStocks.BEHIND_STOCKS,randomSexPartners.get(1),SexSlotStocks.RECEIVING_ORAL),
+				Map.of(Main.game.getPlayer(),SexSlotStocks.LOCKED_IN_STOCKS)) {
 			@Override
 			public SexType getForeplayPreference(GameCharacter character, GameCharacter targetedCharacter) {
 				return getMainSexPreference(character, targetedCharacter);
@@ -548,12 +545,9 @@ public class SlaverAlleyDialogue {
 			@Override
 			public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 				if(twoPartners) {
-					return Util.newHashMapOfValues(
-							new Value<>(randomSexPartners.get(0), List.of(CoverableArea.PENIS)),
-							new Value<>(randomSexPartners.get(1), List.of(CoverableArea.PENIS, CoverableArea.VAGINA)));
+					return Map.of(randomSexPartners.get(0),List.of(CoverableArea.PENIS),randomSexPartners.get(1),List.of(CoverableArea.PENIS, CoverableArea.VAGINA));
 				} else {
-					return Util.newHashMapOfValues(
-							new Value<>(randomSexPartners.get(0), List.of(CoverableArea.PENIS, CoverableArea.VAGINA)));
+					return Map.of(randomSexPartners.get(0),List.of(CoverableArea.PENIS, CoverableArea.VAGINA));
 				}
 			}
 			@Override
@@ -1620,8 +1614,8 @@ public class SlaverAlleyDialogue {
 										ownedByPlayer || slave.hasSlaveJobSetting(SlaveJob.PUBLIC_STOCKS, SlaveJobSetting.SEX_VAGINAL),
 										ownedByPlayer || slave.hasSlaveJobSetting(SlaveJob.PUBLIC_STOCKS, SlaveJobSetting.SEX_ANAL),
 										ownedByPlayer || slave.hasSlaveJobSetting(SlaveJob.PUBLIC_STOCKS, SlaveJobSetting.SEX_ORAL),
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStocks.BEHIND_STOCKS)),
-										Util.newHashMapOfValues(new Value<>(slave, SexSlotStocks.LOCKED_IN_STOCKS))),
+										Map.of(Main.game.getPlayer(),SexSlotStocks.BEHIND_STOCKS),
+										Map.of(slave,SexSlotStocks.LOCKED_IN_STOCKS)),
 								List.of(companion),
 								null,
 								AFTER_STOCKS_SEX,
@@ -1665,10 +1659,8 @@ public class SlaverAlleyDialogue {
 										ownedByPlayer || slave.hasSlaveJobSetting(SlaveJob.PUBLIC_STOCKS, SlaveJobSetting.SEX_VAGINAL),
 										ownedByPlayer || slave.hasSlaveJobSetting(SlaveJob.PUBLIC_STOCKS, SlaveJobSetting.SEX_ANAL),
 										ownedByPlayer || slave.hasSlaveJobSetting(SlaveJob.PUBLIC_STOCKS, SlaveJobSetting.SEX_ORAL),
-										Util.newHashMapOfValues(
-												new Value<>(Main.game.getPlayer(), SexSlotStocks.BEHIND_STOCKS),
-												new Value<>(companion, SexSlotStocks.RECEIVING_ORAL)),
-										Util.newHashMapOfValues(new Value<>(slave, SexSlotStocks.LOCKED_IN_STOCKS))),
+										Map.of(Main.game.getPlayer(),SexSlotStocks.BEHIND_STOCKS,companion,SexSlotStocks.RECEIVING_ORAL),
+										Map.of(slave,SexSlotStocks.LOCKED_IN_STOCKS)),
 								null,
 								null,
 								AFTER_STOCKS_SEX,
@@ -1922,8 +1914,8 @@ public class SlaverAlleyDialogue {
 						false,
 						new SexManagerDefault(
 								SexPosition.STOCKS,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Sean.class), SexSlotStocks.BEHIND_STOCKS)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStocks.LOCKED_IN_STOCKS))) {
+								Map.of(Main.game.getNpc(Sean.class),SexSlotStocks.BEHIND_STOCKS),
+								Map.of(Main.game.getPlayer(),SexSlotStocks.LOCKED_IN_STOCKS)) {
 							@Override
 							public SexControl getSexControl(GameCharacter character) {
 								if(character.isPlayer()) {
@@ -1952,8 +1944,7 @@ public class SlaverAlleyDialogue {
 							}
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-								return Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Sean.class), List.of(CoverableArea.PENIS)));
+								return Map.of(Main.game.getNpc(Sean.class),List.of(CoverableArea.PENIS));
 							}
 							@Override
 							public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {
@@ -2092,8 +2083,8 @@ public class SlaverAlleyDialogue {
 						false,
 						new SexManagerDefault(
 								SexPosition.STOCKS,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Sean.class), SexSlotStocks.BEHIND_STOCKS)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStocks.LOCKED_IN_STOCKS))) {
+								Map.of(Main.game.getNpc(Sean.class),SexSlotStocks.BEHIND_STOCKS),
+								Map.of(Main.game.getPlayer(),SexSlotStocks.LOCKED_IN_STOCKS)) {
 							@Override
 							public SexControl getSexControl(GameCharacter character) {
 								if(character.isPlayer()) {
@@ -2122,8 +2113,7 @@ public class SlaverAlleyDialogue {
 							}
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-								return Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Sean.class), List.of(CoverableArea.PENIS)));
+								return Map.of(Main.game.getNpc(Sean.class),List.of(CoverableArea.PENIS));
 							}
 							@Override
 							public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {
@@ -2864,8 +2854,8 @@ public class SlaverAlleyDialogue {
 							false,
 							new SexManagerDefault(
 									SexPosition.STOCKS,
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Sean.class), SexSlotStocks.BEHIND_STOCKS)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStocks.LOCKED_IN_STOCKS))) {
+									Map.of(Main.game.getNpc(Sean.class),SexSlotStocks.BEHIND_STOCKS),
+									Map.of(Main.game.getPlayer(),SexSlotStocks.LOCKED_IN_STOCKS)) {
 								@Override
 								public SexControl getSexControl(GameCharacter character) {
 									if(character.isPlayer()) {
@@ -2894,8 +2884,7 @@ public class SlaverAlleyDialogue {
 								}
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-									return Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Sean.class), List.of(CoverableArea.PENIS)));
+									return Map.of(Main.game.getNpc(Sean.class),List.of(CoverableArea.PENIS));
 								}
 								@Override
 								public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {
@@ -3083,8 +3072,8 @@ public class SlaverAlleyDialogue {
 							false,
 							new SexManagerDefault(
 									SexPosition.STOCKS,
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Sean.class), SexSlotStocks.BEHIND_STOCKS)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStocks.LOCKED_IN_STOCKS))) {
+									Map.of(Main.game.getNpc(Sean.class),SexSlotStocks.BEHIND_STOCKS),
+									Map.of(Main.game.getPlayer(),SexSlotStocks.LOCKED_IN_STOCKS)) {
 								@Override
 								public SexControl getSexControl(GameCharacter character) {
 									if(character.isPlayer()) {
@@ -3113,8 +3102,7 @@ public class SlaverAlleyDialogue {
 								}
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-									return Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Sean.class), List.of(CoverableArea.PENIS)));
+									return Map.of(Main.game.getNpc(Sean.class),List.of(CoverableArea.PENIS));
 								}
 								@Override
 								public List<CoverableArea> getAdditionalAreasToExposeDuringSex(GameCharacter performer, GameCharacter target) {

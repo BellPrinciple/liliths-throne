@@ -2,6 +2,7 @@ package com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -31,7 +32,6 @@ import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotUnique;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -691,8 +691,8 @@ public class ShoppingArcadeDialogue {
 						true, false,
 						new SMGloryHole(
 								SexPosition.GLORY_HOLE,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_ONE)),
-								Util.newHashMapOfValues(new Value<>(getGloryHoleCharacter(), SexSlotUnique.GLORY_HOLE_KNEELING))) {
+								Map.of(Main.game.getPlayer(),SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_ONE),
+								Map.of(getGloryHoleCharacter(),SexSlotUnique.GLORY_HOLE_KNEELING)) {
 							@Override
 							public boolean isPublicSex() {
 								return false;
@@ -759,8 +759,8 @@ public class ShoppingArcadeDialogue {
 						true, false,
 						new SMGloryHole(
 								SexPosition.GLORY_HOLE,
-								Util.newHashMapOfValues(new Value<>(getGloryHoleCharacter(), SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_ONE)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.GLORY_HOLE_KNEELING))) {
+								Map.of(getGloryHoleCharacter(),SexSlotUnique.GLORY_HOLE_RECEIVING_ORAL_ONE),
+								Map.of(Main.game.getPlayer(),SexSlotUnique.GLORY_HOLE_KNEELING)) {
 							@Override
 							public boolean isPublicSex() {
 								return false;

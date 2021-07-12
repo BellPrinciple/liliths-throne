@@ -1002,12 +1002,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(activeSlave, SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
-								Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
-								Util.newHashMapOfValues(
-										new Value<>(activeSlave, List.of(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
+								Map.of(activeSlave,SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL),
+								Map.of(activeSlave,new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+								Map.of(activeSlave,List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -1034,12 +1032,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(activeSlave, SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL_BEHIND)),
-								Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
-								Util.newHashMapOfValues(
-										new Value<>(activeSlave, List.of(CoverableArea.ANUS, CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+								Map.of(activeSlave,SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL_BEHIND),
+								Map.of(activeSlave,new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE)),
+								Map.of(activeSlave,List.of(CoverableArea.ANUS, CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 						null,
 						null,
 						AFTER_STABLE_SEX,
@@ -1060,12 +1056,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(new Value<>(activeSlave, SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
-								Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS))),
-								Util.newHashMapOfValues(
-										new Value<>(activeSlave, List.of(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))) {
+								Map.of(activeSlave,SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS),
+								Map.of(activeSlave,new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS)),
+								Map.of(activeSlave,List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.ANUS))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -1233,12 +1227,10 @@ public class DominionExpress {
 							true,
 							false,
 							new SMDominionExpress(SexPosition.STANDING,
-									Util.newHashMapOfValues(new Value<>(activeSlave, SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
-									Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
-									Util.newHashMapOfValues(
-											new Value<>(activeSlave, List.of(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+									Map.of(activeSlave,SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL),
+									Map.of(activeSlave,new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+									Map.of(activeSlave,List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 							null,
 							null,
 							AFTER_STABLE_SEX_SLEEP_AFTER_WAKEUP_SEX,
@@ -1258,12 +1250,10 @@ public class DominionExpress {
 							true,
 							false,
 							new SMDominionExpress(SexPosition.LYING_DOWN,
-									Util.newHashMapOfValues(new Value<>(activeSlave, SexSlotLyingDown.FACE_SITTING)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN)),
-									Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
-									Util.newHashMapOfValues(
-											new Value<>(activeSlave, List.of(CoverableArea.ANUS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))),
+									Map.of(activeSlave,SexSlotLyingDown.FACE_SITTING),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN),
+									Map.of(activeSlave,new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE)),
+									Map.of(activeSlave,List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))),
 							null,
 							null,
 							AFTER_STABLE_SEX_SLEEP_AFTER_WAKEUP_SEX,
@@ -1283,12 +1273,10 @@ public class DominionExpress {
 							true,
 							false,
 							new SMDominionExpress(SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(new Value<>(activeSlave, SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
-									Util.newHashMapOfValues(new Value<>(activeSlave, new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS))),
-									Util.newHashMapOfValues(
-											new Value<>(activeSlave, List.of(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))),
+									Map.of(activeSlave,SexSlotAllFours.BEHIND),
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS),
+									Map.of(activeSlave,new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS)),
+									Map.of(activeSlave,List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.ANUS))),
 							null,
 							null,
 							AFTER_STABLE_SEX_SLEEP_AFTER_WAKEUP_SEX,
@@ -1871,12 +1859,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
+								Map.of(Main.game.getNpc(Natalya.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL),
+								Map.of(Main.game.getNpc(Natalya.class),new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+								Map.of(Main.game.getNpc(Natalya.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))) {
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -1911,12 +1897,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
+								Map.of(Main.game.getNpc(Natalya.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL),
+								Map.of(Main.game.getNpc(Natalya.class),new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+								Map.of(Main.game.getNpc(Natalya.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))) {
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -2209,12 +2193,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(getSadistSlave(), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
-								Util.newHashMapOfValues(new Value<>(getSadistSlave(), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
-								Util.newHashMapOfValues(
-										new Value<>(getSadistSlave(), List.of(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
+								Map.of(getSadistSlave(),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL),
+								Map.of(getSadistSlave(),new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+								Map.of(getSadistSlave(),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -2419,12 +2401,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL_BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.ANUS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
+								Map.of(Main.game.getNpc(Natalya.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL_BEHIND),
+								Map.of(Main.game.getNpc(Natalya.class),new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE)),
+								Map.of(Main.game.getNpc(Natalya.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -2567,18 +2547,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), SexSlotAllFours.BEHIND),
-										new Value<>(getSadistSlave(), SexSlotAllFours.IN_FRONT_ANAL)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS)),
-										new Value<>(getSadistSlave(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.PENIS)),
-										new Value<>(getSadistSlave(), List.of(CoverableArea.ANUS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH, CoverableArea.ANUS)))) {
+								Map.of(Main.game.getNpc(Natalya.class),SexSlotAllFours.BEHIND,getSadistSlave(),SexSlotAllFours.IN_FRONT_ANAL),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS),
+								Map.of(Main.game.getNpc(Natalya.class),new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS),getSadistSlave(),new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE)),
+								Map.of(Main.game.getNpc(Natalya.class),List.of(CoverableArea.PENIS),getSadistSlave(),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH, CoverableArea.ANUS))) {
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -2642,12 +2614,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(new Value<>(getSadistSlave(), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
-								Util.newHashMapOfValues(new Value<>(getSadistSlave(), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS))),
-								Util.newHashMapOfValues(
-										new Value<>(getSadistSlave(), List.of(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))) {
+								Map.of(getSadistSlave(),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS),
+								Map.of(getSadistSlave(),new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS)),
+								Map.of(getSadistSlave(),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.ANUS))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -2783,12 +2753,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH))),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
+								Map.of(Main.game.getNpc(Natalya.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL),
+								Map.of(Main.game.getNpc(Natalya.class),new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+								Map.of(Main.game.getNpc(Natalya.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))) {
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -2837,12 +2805,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL_BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE))),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.ANUS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)))) {
+								Map.of(Main.game.getNpc(Natalya.class),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL_BEHIND),
+								Map.of(Main.game.getNpc(Natalya.class),new SexType(SexParticipantType.NORMAL, SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE)),
+								Map.of(Main.game.getNpc(Natalya.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH))) {
 							@Override
 							public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 								Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
@@ -2884,12 +2850,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS))),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))) {
+								Map.of(Main.game.getNpc(Natalya.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS),
+								Map.of(Main.game.getNpc(Natalya.class),new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS)),
+								Map.of(Main.game.getNpc(Natalya.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.ANUS))) {
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {
 								if(!character.isPlayer()) {
@@ -2944,12 +2908,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotStanding.PERFORMING_ORAL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS))),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.MOUTH)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))) {
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getNpc(Natalya.class),SexSlotStanding.PERFORMING_ORAL),
+								Map.of(Main.game.getNpc(Natalya.class),new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+								Map.of(Main.game.getNpc(Natalya.class),List.of(CoverableArea.MOUTH),Main.game.getPlayer(),List.of(CoverableArea.PENIS))) {
 							@Override
 							public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
 								return true;
@@ -2987,12 +2949,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.STANDING,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotStanding.PERFORMING_ORAL_BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS))),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.MOUTH)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS)))) {
+								Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getNpc(Natalya.class),SexSlotStanding.PERFORMING_ORAL_BEHIND),
+								Map.of(Main.game.getNpc(Natalya.class),new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS)),
+								Map.of(Main.game.getNpc(Natalya.class),List.of(CoverableArea.MOUTH),Main.game.getPlayer(),List.of(CoverableArea.ANUS))) {
 							@Override
 							public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
 								return true;
@@ -3030,12 +2990,10 @@ public class DominionExpress {
 						true,
 						false,
 						new SMDominionExpress(SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), SexSlotAllFours.ALL_FOURS)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Natalya.class), new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS))),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Natalya.class), List.of(CoverableArea.ANUS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)))) {
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getNpc(Natalya.class),SexSlotAllFours.ALL_FOURS),
+								Map.of(Main.game.getNpc(Natalya.class),new SexType(SexParticipantType.NORMAL, SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS)),
+								Map.of(Main.game.getNpc(Natalya.class),List.of(CoverableArea.ANUS),Main.game.getPlayer(),List.of(CoverableArea.PENIS))) {
 							@Override
 							public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
 								return true;

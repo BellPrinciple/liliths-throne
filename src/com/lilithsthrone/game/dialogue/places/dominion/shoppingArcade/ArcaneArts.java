@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.lilithsthrone.game.PropertyValue;
@@ -25,8 +26,6 @@ import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.managers.dominion.SMVickyOverDesk;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotDesk;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.82
@@ -159,8 +158,8 @@ public class ArcaneArts {
 								List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
 								true, false,
 								new SMVickyOverDesk(
-										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vicky.class), SexSlotDesk.BETWEEN_LEGS)),
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT))),
+										Map.of(Main.game.getNpc(Vicky.class),SexSlotDesk.BETWEEN_LEGS),
+										Map.of(Main.game.getPlayer(),SexSlotDesk.OVER_DESK_ON_FRONT)),
 								null,
 								null,
 								VICKY_POST_SEX,
@@ -183,8 +182,8 @@ public class ArcaneArts {
 									Fetish.FETISH_NON_CON_SUB), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 							false, false,
 							new SMVickyOverDesk(
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vicky.class), SexSlotDesk.BETWEEN_LEGS)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT))) {
+									Map.of(Main.game.getNpc(Vicky.class),SexSlotDesk.BETWEEN_LEGS),
+									Map.of(Main.game.getPlayer(),SexSlotDesk.OVER_DESK_ON_FRONT)) {
 								@Override
 								public SexPace getStartingSexPaceModifier(GameCharacter character) {
 									if(character.isPlayer()) {
@@ -251,8 +250,8 @@ public class ArcaneArts {
 							List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
 							true, false,
 							new SMVickyOverDesk(
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vicky.class), SexSlotDesk.BETWEEN_LEGS)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT))),
+									Map.of(Main.game.getNpc(Vicky.class),SexSlotDesk.BETWEEN_LEGS),
+									Map.of(Main.game.getPlayer(),SexSlotDesk.OVER_DESK_ON_FRONT)),
 							null,
 							null,
 							VICKY_POST_SEX_PACKAGE,
@@ -279,8 +278,8 @@ public class ArcaneArts {
 							null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
 							false, false,
 							new SMVickyOverDesk(
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vicky.class), SexSlotDesk.BETWEEN_LEGS)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT))) {
+									Map.of(Main.game.getNpc(Vicky.class),SexSlotDesk.BETWEEN_LEGS),
+									Map.of(Main.game.getPlayer(),SexSlotDesk.OVER_DESK_ON_FRONT)) {
 								@Override
 								public SexPace getStartingSexPaceModifier(GameCharacter character) {
 									if(character.isPlayer()) {

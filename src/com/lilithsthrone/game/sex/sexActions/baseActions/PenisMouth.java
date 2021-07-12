@@ -26,7 +26,6 @@ import com.lilithsthrone.game.sex.sexActions.SexActionCategory;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.79
@@ -77,7 +76,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -162,7 +161,7 @@ public class PenisMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -343,7 +342,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -459,7 +458,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -558,7 +557,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -702,7 +701,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -888,7 +887,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -1061,7 +1060,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -1234,7 +1233,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -1406,7 +1405,7 @@ public class PenisMouth {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FIVE_EXTREME,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -1445,7 +1444,7 @@ public class PenisMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -1635,7 +1634,7 @@ public class PenisMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -1828,7 +1827,7 @@ public class PenisMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -1885,7 +1884,7 @@ public class PenisMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		
@@ -1942,7 +1941,7 @@ public class PenisMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -2148,7 +2147,7 @@ public class PenisMouth {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -2264,7 +2263,7 @@ public class PenisMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		
@@ -2322,7 +2321,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		
@@ -2381,7 +2380,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -2448,7 +2447,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -2596,7 +2595,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 
 		@Override
@@ -2729,7 +2728,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -2948,7 +2947,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -2999,7 +2998,7 @@ public class PenisMouth {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		
@@ -3050,7 +3049,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -3101,7 +3100,7 @@ public class PenisMouth {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -3197,7 +3196,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		
@@ -3248,7 +3247,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		
@@ -3299,7 +3298,7 @@ public class PenisMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		
 		@Override

@@ -30,7 +30,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotUnique;
 import com.lilithsthrone.game.sex.sexActions.baseActions.PenisVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 
 /**
@@ -258,8 +257,8 @@ public class RalphsSnacks {
 						null, CorruptionLevel.TWO_HORNY, null, null, null,
 						true, true,
 						new SexManagerRalphDiscount(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Ralph.class), SexSlotUnique.RALPH_DOM)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.RALPH_SUB))),
+								Map.of(Main.game.getNpc(Ralph.class),SexSlotUnique.RALPH_DOM),
+								Map.of(Main.game.getPlayer(),SexSlotUnique.RALPH_SUB)),
 						null,
 						null,
 						AFTER_SEX,
@@ -428,8 +427,8 @@ public class RalphsSnacks {
 						false,
 						new SexManagerDefault(
 								SexPosition.OVER_DESK,
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Ralph.class), SexSlotDesk.BETWEEN_LEGS)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT))) {
+								Map.of(Main.game.getNpc(Ralph.class),SexSlotDesk.BETWEEN_LEGS),
+								Map.of(Main.game.getPlayer(),SexSlotDesk.OVER_DESK_ON_FRONT)) {
 							@Override
 							public SexControl getSexControl(GameCharacter character) {
 								if(character.isPlayer()) {
@@ -443,9 +442,7 @@ public class RalphsSnacks {
 							}
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-								return Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Ralph.class), List.of(CoverableArea.PENIS)),
-										new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)));
+								return Map.of(Main.game.getNpc(Ralph.class),List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.VAGINA));
 							}
 							@Override
 							public OrgasmBehaviour getCharacterOrgasmBehaviour(GameCharacter character) {

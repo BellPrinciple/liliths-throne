@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActions;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.types.FootType;
@@ -12,8 +14,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.4
@@ -29,7 +29,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FOOT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FOOT),
 			SexParticipantType.NORMAL) {
 		@Override
 		public String getActionTitle() {
@@ -150,7 +150,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FOOT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FOOT),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		@Override
@@ -181,7 +181,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FOOT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FOOT),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		@Override
@@ -212,7 +212,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FOOT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FOOT),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		@Override
@@ -243,7 +243,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FOOT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FOOT),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		@Override
@@ -274,7 +274,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FOOT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FOOT),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		@Override
@@ -305,7 +305,7 @@ public class FootMouth {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FOOT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FOOT),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		@Override
@@ -355,7 +355,7 @@ public class FootMouth {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.MOUTH, SexAreaPenetration.FOOT)),
+			Map.of(SexAreaOrifice.MOUTH,SexAreaPenetration.FOOT),
 			SexParticipantType.NORMAL) {
 		@Override
 		public String getActionTitle() {
@@ -407,7 +407,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FOOT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FOOT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		@Override
 		public String getActionTitle() {
@@ -492,7 +492,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FOOT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FOOT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		@Override
@@ -523,7 +523,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FOOT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FOOT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		@Override
@@ -554,7 +554,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FOOT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FOOT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		@Override
@@ -585,7 +585,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FOOT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FOOT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		@Override
@@ -616,7 +616,7 @@ public class FootMouth {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FOOT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FOOT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		@Override
@@ -647,7 +647,7 @@ public class FootMouth {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FOOT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FOOT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		@Override
@@ -697,7 +697,7 @@ public class FootMouth {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FOOT, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FOOT,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		@Override
 		public String getActionTitle() {

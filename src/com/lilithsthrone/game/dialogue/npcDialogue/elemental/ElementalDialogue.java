@@ -2,6 +2,7 @@ package com.lilithsthrone.game.dialogue.npcDialogue.elemental;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -23,7 +24,6 @@ import com.lilithsthrone.game.sex.managers.universal.SMStanding;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.9
@@ -106,8 +106,8 @@ public class ElementalDialogue {
 							"Have dominant sex with [el.name].",
 							true, true,
 							new SMStanding(
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(getElemental(), SexSlotStanding.STANDING_SUBMISSIVE))),
+									Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(getElemental(),SexSlotStanding.STANDING_SUBMISSIVE)),
 							null,
 							null,
 							ELEMENTAL_AFTER_SEX,
@@ -129,8 +129,8 @@ public class ElementalDialogue {
 							"Let [el.name] take charge and have submissive sex with [el.herHim].",
 							true, true,
 							new SMStanding(
-									Util.newHashMapOfValues(new Value<>(getElemental(), SexSlotStanding.STANDING_DOMINANT)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.STANDING_SUBMISSIVE))),
+									Map.of(getElemental(),SexSlotStanding.STANDING_DOMINANT),
+									Map.of(Main.game.getPlayer(),SexSlotStanding.STANDING_SUBMISSIVE)),
 							null,
 							null,
 							ELEMENTAL_AFTER_SEX,

@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActionsSelf;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.valueEnums.Lactation;
@@ -8,8 +10,6 @@ import com.lilithsthrone.game.sex.*;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.4.5
@@ -23,7 +23,7 @@ public class SelfFingerBreasts {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.BREAST)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.BREAST),
 			SexParticipantType.SELF) {
 		
 		@Override

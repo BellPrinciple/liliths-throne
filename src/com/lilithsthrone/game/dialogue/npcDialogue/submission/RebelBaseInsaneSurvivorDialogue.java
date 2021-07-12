@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.submission;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -7,8 +9,6 @@ import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.21
@@ -39,8 +39,7 @@ public class RebelBaseInsaneSurvivorDialogue {
 			if (index == 1) {
 				return new ResponseCombat("Fight", "[npc.She] seems determined to fight you. Oblige [npc.herHim].",
 						getAttacker(), 
-						Util.newHashMapOfValues(
-						new Value<>(getAttacker(), UtilText.parse(getAttacker(), "[npc.speech(I'll fucking end you, demon scum!)]"))));
+						Map.of(getAttacker(),UtilText.parse(getAttacker(), "[npc.speech(I'll fucking end you, demon scum!)]")));
 			}
 			else if (index == 2) {
 				return new Response("Talk", "You get the feeling [npc.she] is beyond reason but it might be worth a try.", INSANE_SURVIVOR_TALK_ATTEMPT);
@@ -78,8 +77,7 @@ public class RebelBaseInsaneSurvivorDialogue {
 			if (index == 1) {
 				return new ResponseCombat("Fight", "[npc.She] can't be reasoned with. Defend yourself!",
 						getAttacker(), 
-						Util.newHashMapOfValues(
-						new Value<>(getAttacker(), UtilText.parse(getAttacker(), "[npc.speech(I'll fucking end you, demon scum!)]"))));
+						Map.of(getAttacker(),UtilText.parse(getAttacker(), "[npc.speech(I'll fucking end you, demon scum!)]")));
 			}
 			return null;
 		}
@@ -103,8 +101,7 @@ public class RebelBaseInsaneSurvivorDialogue {
 			if (index == 1) {
 				return new ResponseCombat("Fight", "[npc.She] can't be bought. Defend yourself!",
 						getAttacker(), 
-						Util.newHashMapOfValues(
-						new Value<>(getAttacker(), UtilText.parse(getAttacker(), "[npc.speech(I'll fucking end you, demon scum!)]"))));
+						Map.of(getAttacker(),UtilText.parse(getAttacker(), "[npc.speech(I'll fucking end you, demon scum!)]")));
 			}
 			return null;
 		}
@@ -128,8 +125,7 @@ public class RebelBaseInsaneSurvivorDialogue {
 			if (index == 1) {
 				return new ResponseCombat("Defend yourself", "[npc.She] doesn't think your surrender is genuine, leaving you with little choice.",
 						getAttacker(), 
-						Util.newHashMapOfValues(
-						new Value<>(getAttacker(), UtilText.parse(getAttacker(), "[npc.speech(I'll fucking end you, demon scum!)]"))));
+						Map.of(getAttacker(),UtilText.parse(getAttacker(), "[npc.speech(I'll fucking end you, demon scum!)]")));
 			}
 			return null;
 		}

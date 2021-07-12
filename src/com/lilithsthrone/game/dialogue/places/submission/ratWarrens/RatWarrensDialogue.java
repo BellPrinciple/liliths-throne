@@ -321,7 +321,7 @@ public class RatWarrensDialogue {
 			List<Dice> dice = new ArrayList<>();
 			int weightedFace = Util.random.nextInt(6)+1;
 			for(int i=0; i<5; i++) {
-				dice.add(new Dice(Util.newHashMapOfValues(new Value<>(DiceFace.getFaceFromInt(weightedFace), 5f))));
+				dice.add(new Dice(Map.of(DiceFace.getFaceFromInt(weightedFace),5f)));
 			}
 			gambler.setDice(dice);
 		}
@@ -1011,18 +1011,18 @@ public class RatWarrensDialogue {
 	};
 	
 	private static SexManagerInterface getStocksManager(List<GameCharacter> guards, SexPace pace) {
+		var dominant = new HashMap<GameCharacter,SexSlot>();
+		dominant.put(guards.get(0), SexSlotMilkingStall.RECEIVING_ORAL);
+		if(isCompanionDialogue())
+			dominant.put(guards.get(1),SexSlotMilkingStall.RECEIVING_ORAL_TWO);
+		var submissive = new HashMap<GameCharacter,SexSlot>();
+		submissive.put(Main.game.getPlayer(), SexSlotMilkingStall.LOCKED_IN_MILKING_STALL);
+		if(isCompanionDialogue())
+			submissive.put(getMainCompanion(),SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_TWO);
 		return new SexManagerDefault(
 				SexPosition.MILKING_STALL,
-				Util.newHashMapOfValues(
-						new Value<>(guards.get(0), SexSlotMilkingStall.RECEIVING_ORAL),
-						isCompanionDialogue()
-							?new Value<>(guards.get(1), SexSlotMilkingStall.RECEIVING_ORAL_TWO)
-							:null),
-				Util.newHashMapOfValues(
-						new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.LOCKED_IN_MILKING_STALL),
-						isCompanionDialogue()
-							?new Value<>(getMainCompanion(), SexSlotMilkingStall.LOCKED_IN_MILKING_STALL_TWO)
-							:null)) {
+				dominant,
+				submissive) {
 			@Override
 			public SexType getForeplayPreference(GameCharacter character, GameCharacter targetedCharacter) {
 				if(guards.contains(character)) {
@@ -1710,8 +1710,8 @@ public class RatWarrensDialogue {
 						true,
 						false,
 						new SMStanding(
-								Util.newHashMapOfValues(new Value<>(bartender, SexSlotStanding.STANDING_DOMINANT)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStanding.PERFORMING_ORAL))) {
+								Map.of(bartender,SexSlotStanding.STANDING_DOMINANT),
+								Map.of(Main.game.getPlayer(),SexSlotStanding.PERFORMING_ORAL)) {
 							@Override
 							public boolean isPublicSex() {
 								return false;
@@ -1742,13 +1742,9 @@ public class RatWarrensDialogue {
 							@Override
 							public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 								if(bartender.hasPenis()) {
-									return Util.newHashMapOfValues(
-											new Value<>(bartender, List.of(CoverableArea.PENIS)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)));
+									return Map.of(bartender,List.of(CoverableArea.PENIS),Main.game.getPlayer(),List.of(CoverableArea.MOUTH));
 								} else {
-									return Util.newHashMapOfValues(
-											new Value<>(bartender, List.of(CoverableArea.VAGINA)),
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.MOUTH)));
+									return Map.of(bartender,List.of(CoverableArea.VAGINA),Main.game.getPlayer(),List.of(CoverableArea.MOUTH));
 								}
 							}
 							@Override
@@ -1802,8 +1798,8 @@ public class RatWarrensDialogue {
 									true,
 									false,
 									new SMStanding(
-											Util.newHashMapOfValues(new Value<>(bartender, SexSlotStanding.STANDING_DOMINANT)),
-											Util.newHashMapOfValues(new Value<>(companion, SexSlotStanding.PERFORMING_ORAL))) {
+											Map.of(bartender,SexSlotStanding.STANDING_DOMINANT),
+											Map.of(companion,SexSlotStanding.PERFORMING_ORAL)) {
 										@Override
 										public boolean isPublicSex() {
 											return false;
@@ -1834,13 +1830,9 @@ public class RatWarrensDialogue {
 										@Override
 										public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
 											if(bartender.hasPenis()) {
-												return Util.newHashMapOfValues(
-														new Value<>(bartender, List.of(CoverableArea.PENIS)),
-														new Value<>(companion, List.of(CoverableArea.MOUTH)));
+												return Map.of(bartender,List.of(CoverableArea.PENIS),companion,List.of(CoverableArea.MOUTH));
 											} else {
-												return Util.newHashMapOfValues(
-														new Value<>(bartender, List.of(CoverableArea.VAGINA)),
-														new Value<>(companion, List.of(CoverableArea.MOUTH)));
+												return Map.of(bartender,List.of(CoverableArea.VAGINA),companion,List.of(CoverableArea.MOUTH));
 											}
 										}
 										@Override
@@ -2069,8 +2061,8 @@ public class RatWarrensDialogue {
 								true,
 								false,
 								new SMMilkingStall(
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
+										Map.of(Main.game.getPlayer(),SexSlotMilkingStall.BEHIND_MILKING_STALL),
+										Map.of(milker,SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)) {
 									@Override
 									public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
 										return false;
@@ -2105,8 +2097,8 @@ public class RatWarrensDialogue {
 								true,
 								false,
 								new SMMilkingStall(
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
+										Map.of(Main.game.getPlayer(),SexSlotMilkingStall.BEHIND_MILKING_STALL),
+										Map.of(milker,SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)) {
 									@Override
 									public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
 										return false;
@@ -2150,8 +2142,8 @@ public class RatWarrensDialogue {
 								true,
 								false,
 								new SMMilkingStall(
-										Util.newHashMapOfValues(new Value<>(getMainCompanion(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
+										Map.of(getMainCompanion(),SexSlotMilkingStall.BEHIND_MILKING_STALL),
+										Map.of(milker,SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)) {
 									@Override
 									public boolean isAbleToRemoveOthersClothing(GameCharacter character, AbstractClothing clothing){
 										return false;
@@ -2186,8 +2178,8 @@ public class RatWarrensDialogue {
 								true,
 								false,
 								new SMMilkingStall(
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-										Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
+										Map.of(Main.game.getPlayer(),SexSlotMilkingStall.BEHIND_MILKING_STALL),
+										Map.of(milker,SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)) {
 									@Override
 									public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
 										return false;
@@ -2230,10 +2222,8 @@ public class RatWarrensDialogue {
 							true,
 							false,
 							new SMMilkingStall(
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL),
-											new Value<>(getMainCompanion(), SexSlotMilkingStall.RECEIVING_ORAL)),
-									Util.newHashMapOfValues(new Value<>(milker, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))) {
+									Map.of(Main.game.getPlayer(),SexSlotMilkingStall.BEHIND_MILKING_STALL,getMainCompanion(),SexSlotMilkingStall.RECEIVING_ORAL),
+									Map.of(milker,SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)) {
 								@Override
 								public boolean isSwapPositionAllowed(GameCharacter character, GameCharacter target) {
 									return false;
@@ -2696,9 +2686,7 @@ public class RatWarrensDialogue {
 						"Fight Vengar's rat-girl bodyguards.",
 						Main.game.getNpc(Shadow.class),
 						List.of(Main.game.getNpc(Shadow.class), Main.game.getNpc(Silence.class)),
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getNpc(Shadow.class), ""),
-								new Value<>(Main.game.getNpc(Silence.class), "")));
+						Map.of(Main.game.getNpc(Shadow.class),"",Main.game.getNpc(Silence.class),""));
 			}
 			return null;
 		}
@@ -2928,10 +2916,8 @@ public class RatWarrensDialogue {
 										false,
 										new SMVengarDominantSex(
 												SexPosition.ALL_FOURS,
-												Util.newHashMapOfValues(
-														new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-												Util.newHashMapOfValues(
-														new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS))),
+												Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND),
+												Map.of(getMainCompanion(),SexSlotAllFours.ALL_FOURS)),
 										List.of(Main.game.getNpc(Shadow.class),
 												Main.game.getNpc(Silence.class)),
 										List.of(Main.game.getPlayer()),
@@ -2992,10 +2978,8 @@ public class RatWarrensDialogue {
 						false,
 						new SMVengarDominantSex(
 								SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 						List.of(Main.game.getNpc(Shadow.class),
 								Main.game.getNpc(Silence.class)),
 						List.of(getMainCompanion()),
@@ -3048,10 +3032,8 @@ public class RatWarrensDialogue {
 							false,
 							new SMVengarDominantSex(
 									SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(
-											new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS))),
+									Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND),
+									Map.of(getMainCompanion(),SexSlotAllFours.ALL_FOURS)),
 							List.of(Main.game.getNpc(Shadow.class),
 									Main.game.getNpc(Silence.class)),
 							List.of(Main.game.getPlayer()),
@@ -3100,25 +3082,19 @@ public class RatWarrensDialogue {
 						false,
 						new SMVengarDominantSex(
 								SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS),
-										!isMouthAccess(Main.game.getPlayer()) || (!isVaginaAccess(getMainCompanion()) && !isAssAccess(getMainCompanion()))
-											?null
-											:new Value<>(getMainCompanion(),
-												isVaginaAccess(getMainCompanion())
-													?SexSlotAllFours.IN_FRONT
-													:SexSlotAllFours.IN_FRONT_ANAL))),
-						List.of(Main.game.getNpc(Shadow.class),
+								Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND),
+								isMouthAccess(Main.game.getPlayer()) && (isVaginaAccess(getMainCompanion()) || isAssAccess(getMainCompanion()))
+									? Map.of(
+										Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS,
+										getMainCompanion(),isVaginaAccess(getMainCompanion())?SexSlotAllFours.IN_FRONT:SexSlotAllFours.IN_FRONT_ANAL)
+									: Map.of(
+										Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
+						List.of(
+								Main.game.getNpc(Shadow.class),
 								Main.game.getNpc(Silence.class)),
-						List.of(!isMouthAccess(Main.game.getPlayer())
-									?getMainCompanion()
-									:isVaginaAccess(getMainCompanion())
-										?null
-										:(isAssAccess(getMainCompanion())
-											?null
-											:getMainCompanion())),
+						isMouthAccess(Main.game.getPlayer()) && (isVaginaAccess(getMainCompanion()) || isAssAccess(getMainCompanion()))
+							?List.of()
+							:List.of(getMainCompanion()),
 						VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX_DOUBLE,
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_BOTH_PLAYER_FIRST", getGuards(true))) {
 					
@@ -3165,25 +3141,18 @@ public class RatWarrensDialogue {
 						false,
 						new SMVengarDominantSex(
 								SexPosition.ALL_FOURS,
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS),
-										!isMouthAccess(getMainCompanion()) || (!isVaginaAccess(Main.game.getPlayer()) && !isAssAccess(Main.game.getPlayer()))
-											?null
-											:new Value<>(Main.game.getPlayer(),
-												isVaginaAccess(Main.game.getPlayer())
-													?SexSlotAllFours.IN_FRONT
-													:SexSlotAllFours.IN_FRONT_ANAL))),
+								Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND),
+								isMouthAccess(getMainCompanion()) && (isVaginaAccess(Main.game.getPlayer()) || isAssAccess(Main.game.getPlayer()))
+									?Map.of(
+										getMainCompanion(),SexSlotAllFours.ALL_FOURS,
+										Main.game.getPlayer(),isVaginaAccess(Main.game.getPlayer())?SexSlotAllFours.IN_FRONT:SexSlotAllFours.IN_FRONT_ANAL)
+									:Map.of(
+										getMainCompanion(),SexSlotAllFours.ALL_FOURS)),
 						List.of(Main.game.getNpc(Shadow.class),
 								Main.game.getNpc(Silence.class)),
-						List.of(!isMouthAccess(getMainCompanion())
-									?Main.game.getPlayer()
-									:isVaginaAccess(Main.game.getPlayer())
-										?null
-										:(isAssAccess(Main.game.getPlayer())
-											?null
-											:Main.game.getPlayer())),
+						isMouthAccess(getMainCompanion()) && (isVaginaAccess(Main.game.getPlayer()) || isAssAccess(Main.game.getPlayer()))
+							?List.of()
+							:List.of(Main.game.getPlayer()),
 						VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX_DOUBLE,
 						UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_BOTH_COMPANION_FIRST", getGuards(true))) {
 					@Override
@@ -3249,30 +3218,24 @@ public class RatWarrensDialogue {
 							false,
 							new SMVengarDominantSex(
 									SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS),
-											!isMouthAccess(Main.game.getPlayer()) || (!isVaginaAccess(getMainCompanion()) && !isAssAccess(getMainCompanion()))
-												?null
-												:new Value<>(getMainCompanion(),
-													isVaginaAccess(getMainCompanion())
-														?SexSlotAllFours.IN_FRONT
-														:SexSlotAllFours.IN_FRONT_ANAL))) {
+									Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND),
+									isMouthAccess(Main.game.getPlayer()) && (isVaginaAccess(getMainCompanion()) || isAssAccess(getMainCompanion()))
+										?Map.of(
+											Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS,
+											getMainCompanion(),isVaginaAccess(getMainCompanion())?SexSlotAllFours.IN_FRONT:SexSlotAllFours.IN_FRONT_ANAL)
+										:Map.of(
+											Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)) {
 								@Override
 								public Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> getStartingWetAreas() {
 									return previousWetAreas;
 								}
 							},
-							List.of(Main.game.getNpc(Shadow.class),
+							List.of(
+									Main.game.getNpc(Shadow.class),
 									Main.game.getNpc(Silence.class)),
-							List.of(!isMouthAccess(Main.game.getPlayer())
-									?getMainCompanion()
-									:isVaginaAccess(getMainCompanion())
-										?null
-										:(isAssAccess(getMainCompanion())
-											?null
-											:getMainCompanion())),
+							isMouthAccess(Main.game.getPlayer()) && (isVaginaAccess(getMainCompanion()) || isAssAccess(getMainCompanion()))
+								?List.of()
+								:List.of(getMainCompanion()),
 							VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX,
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_BOTH_PLAYER_SECOND_START", getGuards(true))) {
 						
@@ -3321,25 +3284,19 @@ public class RatWarrensDialogue {
 							false,
 							new SMVengarDominantSex(
 									SexPosition.ALL_FOURS,
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Vengar.class), SexSlotAllFours.BEHIND)),
-									Util.newHashMapOfValues(
-											new Value<>(getMainCompanion(), SexSlotAllFours.ALL_FOURS),
-											!isMouthAccess(getMainCompanion()) || (!isVaginaAccess(Main.game.getPlayer()) && !isAssAccess(Main.game.getPlayer()))
-												?null
-												:new Value<>(Main.game.getPlayer(),
-													isVaginaAccess(Main.game.getPlayer())
-														?SexSlotAllFours.IN_FRONT
-														:SexSlotAllFours.IN_FRONT_ANAL))),
-							List.of(Main.game.getNpc(Shadow.class),
+									Map.of(Main.game.getNpc(Vengar.class),SexSlotAllFours.BEHIND),
+									isMouthAccess(getMainCompanion()) && (isVaginaAccess(Main.game.getPlayer()) || isAssAccess(Main.game.getPlayer()))
+									?Map.of(
+										getMainCompanion(),SexSlotAllFours.ALL_FOURS,
+										Main.game.getPlayer(),isVaginaAccess(Main.game.getPlayer())?SexSlotAllFours.IN_FRONT:SexSlotAllFours.IN_FRONT_ANAL)
+									:Map.of(
+										getMainCompanion(),SexSlotAllFours.ALL_FOURS)),
+							List.of(
+									Main.game.getNpc(Shadow.class),
 									Main.game.getNpc(Silence.class)),
-							List.of(!isMouthAccess(getMainCompanion())
-									?Main.game.getPlayer()
-									:isVaginaAccess(Main.game.getPlayer())
-										?null
-										:(isAssAccess(Main.game.getPlayer())
-											?null
-											:Main.game.getPlayer())),
+							isMouthAccess(getMainCompanion()) && (isVaginaAccess(Main.game.getPlayer()) || isAssAccess(Main.game.getPlayer()))
+								?List.of()
+								:List.of(Main.game.getPlayer()),
 							VENGARS_HALL_APPROACH_PERSUADE_AFTER_SEX,
 							UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "VENGARS_HALL_SUB_SEX_BOTH_COMPANION_SECOND_START", getGuards(true))) {
 						@Override

@@ -74,13 +74,12 @@ public class Encounter {
 	public static AbstractEncounter LILAYAS_HOME_CORRIDOR = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(
-					(Main.game.getCharactersPresent().isEmpty()
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USES_YOU, 5f)
-						:null),
-					(getSlaveUsingOtherSlaveInLilayaCorridor()!=null && Main.game.getCharactersPresent().isEmpty()
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USING_OTHER_SLAVE, 5f)
-						:null));
+			var map = new HashMap<EncounterType,Float>();
+			if(Main.game.getCharactersPresent().isEmpty())
+				map.put(EncounterType.SLAVE_USES_YOU, 5f);
+			if(getSlaveUsingOtherSlaveInLilayaCorridor()!=null && Main.game.getCharactersPresent().isEmpty())
+				map.put(EncounterType.SLAVE_USING_OTHER_SLAVE, 5f);
+			return map;
 		}
 		@Override
 		protected DialogueNode initialiseEncounter(EncounterType node) {
@@ -161,26 +160,20 @@ public class Encounter {
 										&& Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_HARPY_PACIFICATION)
 										&& Main.game.getHourOfDay()>=17 && Main.game.getHourOfDay()<=21;
 			}
-			
-			return Util.newHashMapOfValues(
-					Main.game.getCurrentWeather()==Weather.MAGIC_STORM
-						?new Value<EncounterType, Float>(EncounterType.DOMINION_STORM_ATTACK, 15f)
-						:null,
-					cultistAvailable
-						?new Value<EncounterType, Float>(EncounterType.SPECIAL_DOMINION_CULTIST, 5f)
-						:null,
-					Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
-						?new Value<EncounterType, Float>(EncounterType.DOMINION_EXPRESS_CENTAUR, 1f)
-						:null,
-					getSlaveWantingToUseYouInDominion()!=null
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USES_YOU, 5f)
-						:null,
-					wesQuestAvailable
-						?new Value<EncounterType, Float>(EncounterType.WES_QUEST_START, 50f)
-						:null,
-					Main.game.getPlayer().getName(false).equalsIgnoreCase("Kinariu") && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.foundHappiness)
-						?new Value<EncounterType, Float>(EncounterType.DOMINION_STREET_FIND_HAPPINESS, 10f)
-						:null);
+			var result = new HashMap<EncounterType,Float>();
+			if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM)
+				result.put(EncounterType.DOMINION_STORM_ATTACK,15f);
+			if(cultistAvailable)
+				result.put(EncounterType.SPECIAL_DOMINION_CULTIST,5f);
+			if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM)
+				result.put(EncounterType.DOMINION_EXPRESS_CENTAUR,1f);
+			if(getSlaveWantingToUseYouInDominion()!=null)
+				result.put(EncounterType.SLAVE_USES_YOU,5f);
+			if(wesQuestAvailable)
+				result.put(EncounterType.WES_QUEST_START,50f);
+			if(Main.game.getPlayer().getName(false).equalsIgnoreCase("Kinariu") && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.foundHappiness))
+				result.put(EncounterType.DOMINION_STREET_FIND_HAPPINESS,10f);
+			return result;
 		}
 		
 		@Override
@@ -251,13 +244,13 @@ public class Encounter {
 	public static AbstractEncounter DOMINION_BOULEVARD = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(
-					new Value<EncounterType, Float>(EncounterType.DOMINION_STREET_RENTAL_MOMMY, 10f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_STREET_PILL_HANDOUT, 5f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_EXPRESS_CENTAUR, 1f),
-					getSlaveWantingToUseYouInDominion()!=null
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USES_YOU, 5f)
-						:null);
+			var r = new HashMap<EncounterType,Float>();
+			r.put(EncounterType.DOMINION_STREET_RENTAL_MOMMY, 10f);
+			r.put(EncounterType.DOMINION_STREET_PILL_HANDOUT, 5f);
+			r.put(EncounterType.DOMINION_EXPRESS_CENTAUR, 1f);
+			if(getSlaveWantingToUseYouInDominion()!=null)
+				r.put(EncounterType.SLAVE_USES_YOU, 5f);
+			return r;
 		}
 		
 		@Override
@@ -317,17 +310,15 @@ public class Encounter {
 	public static AbstractEncounter DOMINION_ALLEY = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			Map<EncounterType, Float> map = Util.newHashMapOfValues(
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_ITEM, 3f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_CLOTHING, 2f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_WEAPON, 1f),
-					(getSlaveWantingToUseYouInDominion()!=null && Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USES_YOU, 5f)
-						:null),
-					(getSlaveUsingOtherSlaveInDominion()!=null && Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USING_OTHER_SLAVE, 5f)
-						:null));
-			
+			var map = new HashMap<EncounterType,Float>();
+			map.put(EncounterType.DOMINION_FIND_ITEM, 3f);
+			map.put(EncounterType.DOMINION_FIND_CLOTHING, 2f);
+			map.put(EncounterType.DOMINION_FIND_WEAPON, 1f);
+			if(getSlaveWantingToUseYouInDominion()!=null && Main.game.getCurrentWeather()!=Weather.MAGIC_STORM)
+				map.put(EncounterType.SLAVE_USES_YOU, 5f);
+			if(getSlaveUsingOtherSlaveInDominion()!=null && Main.game.getCurrentWeather()!=Weather.MAGIC_STORM)
+				map.put(EncounterType.SLAVE_USING_OTHER_SLAVE, 5f);
+
 			if(Main.game.isStarted() && DominionPlaces.isCloseToEnforcerHQ()) {
 				map.put(EncounterType.DOMINION_ALLEY_ATTACK, 10f);
 				if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
@@ -484,18 +475,18 @@ public class Encounter {
 	public static AbstractEncounter DOMINION_CANAL = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(
-					new Value<EncounterType, Float>(EncounterType.DOMINION_ALLEY_ATTACK, 10f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_ITEM, 3f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_CLOTHING, 2f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_WEAPON, 1f),
-					Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
-							&& (!Main.game.getDialogueFlags().hasSavedLong("enforcer_encounter_minutes") || Main.game.getDialogueFlags().getSavedLong("enforcer_encounter_minutes")+(4*60)<Main.game.getMinutesPassed())
-						?new Value<EncounterType, Float>(EncounterType.DOMINION_ALLEY_ENFORCERS, 2.5f)
-						:null,
-					getSlaveWantingToUseYouInDominion()!=null && Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USES_YOU, 5f)
-						:null);
+			var map = new HashMap<EncounterType,Float>();
+			map.put(EncounterType.DOMINION_ALLEY_ATTACK, 10f);
+			map.put(EncounterType.DOMINION_FIND_ITEM, 3f);
+			map.put(EncounterType.DOMINION_FIND_CLOTHING, 2f);
+			map.put(EncounterType.DOMINION_FIND_WEAPON, 1f);
+			if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
+							&& (!Main.game.getDialogueFlags().hasSavedLong("enforcer_encounter_minutes")
+					|| Main.game.getDialogueFlags().getSavedLong("enforcer_encounter_minutes")+(4*60)<Main.game.getMinutesPassed()))
+				map.put(EncounterType.DOMINION_ALLEY_ENFORCERS, 2.5f);
+			if(getSlaveWantingToUseYouInDominion()!=null && Main.game.getCurrentWeather()!=Weather.MAGIC_STORM)
+				map.put(EncounterType.SLAVE_USES_YOU, 5f);
+			return map;
 		}
 		
 		@Override
@@ -596,7 +587,7 @@ public class Encounter {
 	public static AbstractEncounter DOMINION_EXPRESS = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(new Value<EncounterType, Float>(EncounterType.DOMINION_EXPRESS_CENTAUR, 10f));
+			return Map.of(EncounterType.DOMINION_EXPRESS_CENTAUR,10f);
 		}
 		@Override
 		protected DialogueNode initialiseEncounter(EncounterType node) {
@@ -613,9 +604,7 @@ public class Encounter {
 	public static AbstractEncounter HARPY_NEST_WALKWAYS = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(
-					new Value<EncounterType, Float>(EncounterType.HARPY_NEST_ATTACK, 12f),
-					new Value<EncounterType, Float>(EncounterType.HARPY_NEST_FIND_ITEM, 4f));
+			return Map.of(EncounterType.HARPY_NEST_ATTACK,12f,EncounterType.HARPY_NEST_FIND_ITEM,4f);
 		}
 		
 		@Override
@@ -673,9 +662,7 @@ public class Encounter {
 	public static AbstractEncounter HARPY_NEST_LOOK_FOR_TROUBLE = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(
-					new Value<EncounterType, Float>(EncounterType.HARPY_NEST_ATTACK, 12f),
-					new Value<EncounterType, Float>(EncounterType.HARPY_NEST_FIND_ITEM, 4f));
+			return Map.of(EncounterType.HARPY_NEST_ATTACK,12f,EncounterType.HARPY_NEST_FIND_ITEM,4f);
 		}
 
 		@Override

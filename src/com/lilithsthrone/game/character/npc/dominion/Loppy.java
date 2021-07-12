@@ -3,6 +3,7 @@ package com.lilithsthrone.game.character.npc.dominion;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -112,10 +113,7 @@ public class Loppy extends NPC {
 		PerkManager.initialisePerks(this,
 				List.of(Perk.FEMALE_ATTRACTION,
 						Perk.MALE_ATTRACTION),
-				Util.newHashMapOfValues(
-						new Value<>(PerkCategory.PHYSICAL, 1),
-						new Value<>(PerkCategory.LUST, 2),
-						new Value<>(PerkCategory.ARCANE, 0)));
+				Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,2,PerkCategory.ARCANE,0));
 	}
 	
 	@Override

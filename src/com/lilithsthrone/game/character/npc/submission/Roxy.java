@@ -4,6 +4,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -64,7 +65,6 @@ import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.sexActions.submission.SARoxySpecials;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -77,16 +77,17 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class Roxy extends NPC {
 
-	private static List<AbstractItemType> itemsForSale = List.of(ItemType.CIGARETTE_PACK,
-			ItemType.FETISH_UNREFINED,
-			ItemType.MOO_MILKER_EMPTY,
-			ItemType.getItemTypeFromId("innoxia_pills_fertility"),
-			ItemType.getItemTypeFromId("innoxia_pills_broodmother"),
-			ItemType.getItemTypeFromId("innoxia_pills_sterility"),
-			ItemType.MOTHERS_MILK,
-			ItemType.PREGNANCY_TEST);
+	private static final ArrayList<AbstractItemType> itemsForSale = new ArrayList<>();;
 
 	static {
+		itemsForSale.add(ItemType.CIGARETTE_PACK);
+		itemsForSale.add(ItemType.FETISH_UNREFINED);
+		itemsForSale.add(ItemType.MOO_MILKER_EMPTY);
+		itemsForSale.add(ItemType.getItemTypeFromId("innoxia_pills_fertility"));
+		itemsForSale.add(ItemType.getItemTypeFromId("innoxia_pills_broodmother"));
+		itemsForSale.add(ItemType.getItemTypeFromId("innoxia_pills_sterility"));
+		itemsForSale.add(ItemType.MOTHERS_MILK);
+		itemsForSale.add(ItemType.PREGNANCY_TEST);
 		for(AbstractItemType itemType : ItemType.getAllItems()) {
 			if(!itemType.getItemTags().contains(ItemTag.NOT_FOR_SALE)
 					&& (itemType.getItemTags().contains(ItemTag.ATTRIBUTE_TF_ITEM) || itemType.getItemTags().contains(ItemTag.RACIAL_TF_ITEM))
@@ -154,10 +155,7 @@ public class Roxy extends NPC {
 		this.addSpecialPerk(Perk.SPECIAL_SLUT);
 		PerkManager.initialisePerks(this,
 				List.of(),
-				Util.newHashMapOfValues(
-						new Value<>(PerkCategory.PHYSICAL, 1),
-						new Value<>(PerkCategory.LUST, 5),
-						new Value<>(PerkCategory.ARCANE, 0)));
+				Map.of(PerkCategory.PHYSICAL,1,PerkCategory.LUST,5,PerkCategory.ARCANE,0));
 	}
 
 	@Override

@@ -10,8 +10,6 @@ import java.util.Optional;
 
 import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 
 /**
@@ -61,7 +59,7 @@ public class BodyCoveringTemplate {
 //		this.dyePatterns = Collections.unmodifiableList(dyePatternsList);
 		
 		if(naturalPatterns==null) {
-			this.naturalPatterns = Util.newHashMapOfValues(new Value<>(CoveringPattern.NONE, 1));
+			this.naturalPatterns = Map.of(CoveringPattern.NONE,1);
 		} else {
 			this.naturalPatterns = Collections.unmodifiableMap(naturalPatterns);
 		}

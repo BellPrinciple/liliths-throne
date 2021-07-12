@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.submission;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -25,7 +26,6 @@ import com.lilithsthrone.game.sex.managers.universal.SMLyingDown;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -75,9 +75,7 @@ public class TunnelSlimeDialogue {
 					if (index == 1) {
 						return new ResponseCombat("Fight",
 								"You aren't going to stand for [npc.name] transforming people into slimes. Teach [npc.herHim] a lesson!", Main.game.getActiveNPC(),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), "[pc.speech(You aren't going to be stalking these tunnels on my watch!)] you shout, launching into an attack!"),
-										new Value<>(getSlime(), "[npc.speech(Traitor! You'll pay for this!)] [npc.Name] cries out as [npc.she] prepares to defend [npc.herself].")));
+								Map.of(Main.game.getPlayer(),"[pc.speech(You aren't going to be stalking these tunnels on my watch!)] you shout, launching into an attack!",getSlime(),"[npc.speech(Traitor! You'll pay for this!)] [npc.Name] cries out as [npc.she] prepares to defend [npc.herself]."));
 						
 					} else if (index == 2) {
 						return new Response("Leave", "Continue on your journey.", ATTACK) {
@@ -141,9 +139,7 @@ public class TunnelSlimeDialogue {
 					if (index == 1) {
 						return new ResponseCombat("Fight",
 								"Stand up for yourself and fight [npc.name]!", Main.game.getActiveNPC(),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), ""),
-										new Value<>(getSlime(), "")));
+								Map.of(Main.game.getPlayer(),"",getSlime(),""));
 						
 					} else if (index == 2) {
 						return new Response("Offer Money", "[npc.Name] isn't interested in your money! All [npc.she] wants to do is turn you into a slime!", null);
@@ -175,9 +171,7 @@ public class TunnelSlimeDialogue {
 				if (index == 1) {
 					return new ResponseCombat("Fight",
 							"Stand up for yourself and fight [npc.name]!", Main.game.getActiveNPC(),
-							Util.newHashMapOfValues(
-									new Value<>(Main.game.getPlayer(), ""),
-									new Value<>(getSlime(), "")));
+							Map.of(Main.game.getPlayer(),"",getSlime(),""));
 				
 				} else if (index == 2) {
 					if(Main.game.getPlayer().getMoney()<DialogueFlags.MUGGER_DEMAND_2) {
@@ -461,8 +455,8 @@ public class TunnelSlimeDialogue {
 							"[npc.Name] forces [npc.herself] on you...",
 							false, false,
 							new SMLyingDown(
-									Util.newHashMapOfValues(new Value<>(Main.game.getActiveNPC(), SexSlotLyingDown.MISSIONARY)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))),
+									Map.of(Main.game.getActiveNPC(),SexSlotLyingDown.MISSIONARY),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)),
 							null,
 							null, AFTER_SLIME_SEX_AS_SUB, "<p>"
 								+ "You surrender yourself to [npc.name], lying back and offering no resistance as [npc.she] tongue-fucks your throat."
@@ -475,8 +469,8 @@ public class TunnelSlimeDialogue {
 							"[npc.Name] forces [npc.herself] on you...",
 							false, false,
 							new SMLyingDown(
-									Util.newHashMapOfValues(new Value<>(Main.game.getActiveNPC(), SexSlotLyingDown.MISSIONARY)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))) {
+									Map.of(Main.game.getActiveNPC(),SexSlotLyingDown.MISSIONARY),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)) {
 								@Override
 								public SexPace getStartingSexPaceModifier(GameCharacter character) {
 									if(character.isPlayer()) {
@@ -497,8 +491,8 @@ public class TunnelSlimeDialogue {
 							"[npc.Name] forces [npc.herself] on you...",
 							false, false,
 							new SMLyingDown(
-									Util.newHashMapOfValues(new Value<>(Main.game.getActiveNPC(), SexSlotLyingDown.MISSIONARY)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))) {
+									Map.of(Main.game.getActiveNPC(),SexSlotLyingDown.MISSIONARY),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)) {
 								@Override
 								public SexPace getStartingSexPaceModifier(GameCharacter character) {
 									if(character.isPlayer()) {

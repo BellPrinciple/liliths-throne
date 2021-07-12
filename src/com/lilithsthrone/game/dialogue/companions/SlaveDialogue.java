@@ -2,6 +2,7 @@ package com.lilithsthrone.game.dialogue.companions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -36,7 +37,6 @@ import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotMilkingStall;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
@@ -780,8 +780,8 @@ public class SlaveDialogue {
 							return new ResponseSex("Rape", UtilText.parse(characterForSex, "[npc.Name] is definitely not interested in having sex with you, but it's not like [npc.sheHasFull] a choice in the matter..."), 
 									false, false,
 									new SMMilkingStall(
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-											Util.newHashMapOfValues(new Value<>(characterForSex, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))),
+											Map.of(Main.game.getPlayer(),SexSlotMilkingStall.BEHIND_MILKING_STALL),
+											Map.of(characterForSex,SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)),
 									getDominantSpectators(),
 									getSubmissiveSpectators(),
 									getAfterSexDialogue(),
@@ -801,8 +801,8 @@ public class SlaveDialogue {
 							return new ResponseSex("Sex", UtilText.parse(characterForSex, "Have sex with [npc.name]."), 
 									true, false,
 									new SMMilkingStall(
-											Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-											Util.newHashMapOfValues(new Value<>(characterForSex, SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))),
+											Map.of(Main.game.getPlayer(),SexSlotMilkingStall.BEHIND_MILKING_STALL),
+											Map.of(characterForSex,SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)),
 									getDominantSpectators(),
 									getSubmissiveSpectators(),
 									getAfterSexDialogue(),

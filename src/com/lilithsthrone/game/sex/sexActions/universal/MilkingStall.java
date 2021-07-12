@@ -2,6 +2,7 @@ package com.lilithsthrone.game.sex.sexActions.universal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -21,7 +22,6 @@ import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -192,8 +192,8 @@ public class MilkingStall {
 		@Override
 		public void applyEffects() {
 			Main.sex.setSexManager(new SMMilkingStall(
-					Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotMilkingStall.BEHIND_MILKING_STALL)),
-					Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterTargetedForSexAction(this), SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))));
+					Map.of(Main.sex.getCharacterPerformingAction(),SexSlotMilkingStall.BEHIND_MILKING_STALL),
+					Map.of(Main.sex.getCharacterTargetedForSexAction(this),SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)));
 			
 		}
 	};
@@ -236,8 +236,8 @@ public class MilkingStall {
 		@Override
 		public void applyEffects() {
 			Main.sex.setSexManager(new SMMilkingStall(
-					Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotMilkingStall.BENEATH_MILKING_STALL)),
-					Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterTargetedForSexAction(this), SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))));
+					Map.of(Main.sex.getCharacterPerformingAction(),SexSlotMilkingStall.BENEATH_MILKING_STALL),
+					Map.of(Main.sex.getCharacterTargetedForSexAction(this),SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)));
 		}
 	};
 	
@@ -277,8 +277,8 @@ public class MilkingStall {
 		@Override
 		public void applyEffects() {
 			Main.sex.setSexManager(new SMMilkingStall(
-					Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotMilkingStall.PERFORMING_ORAL)),
-					Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterTargetedForSexAction(this), SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))));
+					Map.of(Main.sex.getCharacterPerformingAction(),SexSlotMilkingStall.PERFORMING_ORAL),
+					Map.of(Main.sex.getCharacterTargetedForSexAction(this),SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)));
 			
 		}
 	};
@@ -319,8 +319,8 @@ public class MilkingStall {
 		@Override
 		public void applyEffects() {
 			Main.sex.setSexManager(new SMMilkingStall(
-					Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterPerformingAction(), SexSlotMilkingStall.RECEIVING_ORAL)),
-					Util.newHashMapOfValues(new Value<>(Main.sex.getCharacterTargetedForSexAction(this), SexSlotMilkingStall.LOCKED_IN_MILKING_STALL))));
+					Map.of(Main.sex.getCharacterPerformingAction(),SexSlotMilkingStall.RECEIVING_ORAL),
+					Map.of(Main.sex.getCharacterTargetedForSexAction(this),SexSlotMilkingStall.LOCKED_IN_MILKING_STALL)));
 			
 		}
 	};

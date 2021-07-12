@@ -28,7 +28,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
@@ -41,13 +40,7 @@ public class BountyHunterLodge {
 
 	private static final float BARMAN_BUY_MODIFIER = 0.75f;
 	
-	private static final Map<String, String> barConsumablesMap = Util.newHashMapOfValues(
-			new Value<>("innoxia_race_squirrel_round_nuts", "BAR_NUTS"),
-			new Value<>("innoxia_race_dog_canine_crush", "BAR_BEER"),
-			new Value<>("innoxia_race_horse_equine_cider", "BAR_CIDER"),
-			new Value<>("dsg_race_bear_vodka", "BAR_VODKA"),
-			new Value<>("innoxia_race_wolf_wolf_whiskey", "BAR_WHISKEY"),
-			new Value<>("innoxia_race_rat_black_rats_rum", "BAR_RUM"));
+	private static final Map<String, String> barConsumablesMap = Map.of("innoxia_race_squirrel_round_nuts","BAR_NUTS","innoxia_race_dog_canine_crush","BAR_BEER","innoxia_race_horse_equine_cider","BAR_CIDER","dsg_race_bear_vodka","BAR_VODKA","innoxia_race_wolf_wolf_whiskey","BAR_WHISKEY","innoxia_race_rat_black_rats_rum","BAR_RUM");
 
 	private static Response getDobermannsUpstairsSexResponse(int startIndex, int index, String title) {
 		if(index == startIndex) {

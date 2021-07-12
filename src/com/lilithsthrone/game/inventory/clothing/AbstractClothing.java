@@ -543,6 +543,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 			clothing = Main.game.getItemGen().generateClothing(ClothingType.getClothingTypeFromId(loadedId, slotHint), false);
 		} catch(Exception ex) {
 			System.err.println("Warning: An instance of AbstractClothing was unable to be imported. ("+parentElement.getAttribute("id")+")");
+			ex.printStackTrace();
 			return null;
 		}
 		

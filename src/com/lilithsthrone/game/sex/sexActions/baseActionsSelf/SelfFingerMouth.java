@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActionsSelf;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.sex.ArousalIncrease;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
@@ -9,8 +11,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.79
@@ -24,7 +24,7 @@ public class SelfFingerMouth {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.MOUTH),
 			SexParticipantType.SELF) {
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -61,7 +61,7 @@ public class SelfFingerMouth {
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.MOUTH),
 			SexParticipantType.SELF) {
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -89,7 +89,7 @@ public class SelfFingerMouth {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.MOUTH),
 			SexParticipantType.SELF) {
 
 		@Override

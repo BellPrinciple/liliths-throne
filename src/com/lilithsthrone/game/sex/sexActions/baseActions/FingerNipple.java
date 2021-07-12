@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActions;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.ArousalIncrease;
@@ -10,8 +12,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.79
@@ -25,7 +25,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -197,7 +197,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -339,7 +339,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -485,7 +485,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -667,7 +667,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -705,7 +705,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		
@@ -745,7 +745,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -785,7 +785,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		
@@ -824,7 +824,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		
@@ -864,7 +864,7 @@ public class FingerNipple {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -930,7 +930,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -989,7 +989,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL) {
 		
 		@Override
@@ -1111,7 +1111,7 @@ public class FingerNipple {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_GENTLE) {
 		
@@ -1148,7 +1148,7 @@ public class FingerNipple {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_NORMAL) {
 		
@@ -1185,7 +1185,7 @@ public class FingerNipple {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.THREE_DIRTY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -1222,7 +1222,7 @@ public class FingerNipple {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_NORMAL) {
 		
@@ -1259,7 +1259,7 @@ public class FingerNipple {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_EAGER) {
 		
@@ -1296,7 +1296,7 @@ public class FingerNipple {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL,
 			SexPace.SUB_RESISTING) {
 		
@@ -1367,7 +1367,7 @@ public class FingerNipple {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL) {
 		
 		@Override

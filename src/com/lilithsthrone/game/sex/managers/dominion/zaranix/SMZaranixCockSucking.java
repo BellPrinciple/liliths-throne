@@ -16,8 +16,6 @@ import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.95
@@ -34,14 +32,10 @@ public class SMZaranixCockSucking extends SexManagerDefault {
 	
 	@Override
 	public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-		return Util.newHashMapOfValues(
-				new Value<>(Main.game.getPlayer(),
-						List.of(CoverableArea.MOUTH)),
-				new Value<>(Main.game.getNpc(Zaranix.class),
-						List.of(CoverableArea.PENIS,
+		return Map.of(Main.game.getPlayer(),List.of(CoverableArea.MOUTH),Main.game.getNpc(Zaranix.class),List.of(CoverableArea.PENIS,
 								Main.game.getNpc(Zaranix.class).isFeminine()
 									?CoverableArea.NIPPLES
-									:null)));
+									:null));
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -27,7 +28,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Pathing;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
@@ -1208,11 +1208,8 @@ public class WesQuest {
 				return new ResponseSex("Join Elle", "Let Wes take charge and join Elle in being dominantly fucked by him.",
 						true, true,
 						new SMAllFours(
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Wes.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS),
-										new Value<>(Main.game.getNpc(Elle.class), SexSlotAllFours.ALL_FOURS))) {
+								Map.of(Main.game.getNpc(Wes.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS,Main.game.getNpc(Elle.class),SexSlotAllFours.ALL_FOURS)) {
 							@Override
 							public boolean isSelfTransformDisabled(GameCharacter character) {
 								return character.equals(Main.game.getNpc(Elle.class));
@@ -1228,17 +1225,11 @@ public class WesQuest {
 						true, true,
 						Main.game.getPlayer().isTaur()
 							?new SMAllFours(
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Wes.class), SexSlotAllFours.BEHIND),
-											new Value<>(Main.game.getNpc(Elle.class), SexSlotAllFours.IN_FRONT)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS)))
+									Map.of(Main.game.getNpc(Wes.class),SexSlotAllFours.BEHIND,Main.game.getNpc(Elle.class),SexSlotAllFours.IN_FRONT),
+									Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS))
 							:new SMLyingDown(
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getNpc(Wes.class), SexSlotLyingDown.MISSIONARY),
-											new Value<>(Main.game.getNpc(Elle.class), SexSlotLyingDown.FACE_SITTING_REVERSE)),
-									Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))) {
+									Map.of(Main.game.getNpc(Wes.class),SexSlotLyingDown.MISSIONARY,Main.game.getNpc(Elle.class),SexSlotLyingDown.FACE_SITTING_REVERSE),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)) {
 								@Override
 								public boolean isSelfTransformDisabled(GameCharacter character) {
 									return character.equals(Main.game.getNpc(Elle.class));
@@ -1253,11 +1244,8 @@ public class WesQuest {
 				return new ResponseSex("Elle's revenge", "Let Elle take charge and join Wes in being dominantly fucked by her.",
 						true, true,
 						new SMLyingDown(
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getNpc(Elle.class), SexSlotLyingDown.COWGIRL)),
-								Util.newHashMapOfValues(
-										new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN),
-										new Value<>(Main.game.getNpc(Wes.class), SexSlotLyingDown.LYING_DOWN_TWO))) {
+								Map.of(Main.game.getNpc(Elle.class),SexSlotLyingDown.COWGIRL),
+								Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN,Main.game.getNpc(Wes.class),SexSlotLyingDown.LYING_DOWN_TWO)) {
 							@Override
 							public boolean isSelfTransformDisabled(GameCharacter character) {
 								return character.equals(Main.game.getNpc(Elle.class));

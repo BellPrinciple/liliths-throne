@@ -60,7 +60,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -108,10 +107,7 @@ public class Jess extends NPC {
 		
 		PerkManager.initialisePerks(this,
 				List.of(Perk.BARREN),
-				Util.newHashMapOfValues(
-						new Value<>(PerkCategory.PHYSICAL, 0),
-						new Value<>(PerkCategory.LUST, 1),
-						new Value<>(PerkCategory.ARCANE, 0)));
+				Map.of(PerkCategory.PHYSICAL,0,PerkCategory.LUST,1,PerkCategory.ARCANE,0));
 	}
 
 	@Override
@@ -271,11 +267,7 @@ public class Jess extends NPC {
 				if(this.getLocationPlace().getPlaceType()!=PlaceType.getPlaceTypeFromId("innoxia_fields_elis_tavern_f1_room_sex") && Math.random()<=0.5f) {
 					// 50% chance to entertain someone in her room
 					this.setLocation(WorldType.getWorldTypeFromId("innoxia_fields_elis_tavern_f1"), PlaceType.getPlaceTypeFromId("innoxia_fields_elis_tavern_f1_room_sex"), true);
-					Map<Gender, Integer> genders = Util.newHashMapOfValues(
-							new Value<>(Gender.F_V_B_FEMALE, 40),
-							new Value<>(Gender.F_P_B_SHEMALE, 5),
-							new Value<>(Gender.F_P_V_B_FUTANARI, 5),
-							new Value<>(Gender.M_P_MALE, 50));
+					Map<Gender, Integer> genders = Map.of(Gender.F_V_B_FEMALE,40,Gender.F_P_B_SHEMALE,5,Gender.F_P_V_B_FUTANARI,5,Gender.M_P_MALE,50);
 					GenericSexualPartner partner = new GenericSexualPartner(Util.getRandomObjectFromWeightedMap(genders),
 							WorldType.getWorldTypeFromId("innoxia_fields_elis_tavern_f1"),
 							PlaceType.getPlaceTypeFromId("innoxia_fields_elis_tavern_f1_room_sex"),

@@ -22,7 +22,6 @@ import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.combat.CombatBehaviour;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -113,20 +112,8 @@ public class Race {
 	// DEMON:
 	public static AbstractRace DEMON = new AbstractRace("demon",
 			"demons",
-			Util.newHashMapOfValues(
-					new Value<>(LegConfiguration.BIPEDAL, "demon"),
-					new Value<>(LegConfiguration.ARACHNID, "demonic-spider"),
-					new Value<>(LegConfiguration.CEPHALOPOD, "demonic-octopus"),
-					new Value<>(LegConfiguration.QUADRUPEDAL, "demonic-horse"),
-					new Value<>(LegConfiguration.TAIL, "demonic-fish"),
-					new Value<>(LegConfiguration.TAIL_LONG, "demonic-snake")),
-			Util.newHashMapOfValues(
-					new Value<>(LegConfiguration.BIPEDAL, "demons"),
-					new Value<>(LegConfiguration.ARACHNID, "demonic-spiders"),
-					new Value<>(LegConfiguration.CEPHALOPOD, "demonic-octopuses"),
-					new Value<>(LegConfiguration.QUADRUPEDAL, "demonic-horses"),
-					new Value<>(LegConfiguration.TAIL, "demonic-fish"),
-					new Value<>(LegConfiguration.TAIL_LONG, "demonic-snakes")),
+			Map.of(LegConfiguration.BIPEDAL,"demon",LegConfiguration.ARACHNID,"demonic-spider",LegConfiguration.CEPHALOPOD,"demonic-octopus",LegConfiguration.QUADRUPEDAL,"demonic-horse",LegConfiguration.TAIL,"demonic-fish",LegConfiguration.TAIL_LONG,"demonic-snake"),
+			Map.of(LegConfiguration.BIPEDAL,"demons",LegConfiguration.ARACHNID,"demonic-spiders",LegConfiguration.CEPHALOPOD,"demonic-octopuses",LegConfiguration.QUADRUPEDAL,"demonic-horses",LegConfiguration.TAIL,"demonic-fish",LegConfiguration.TAIL_LONG,"demonic-snakes"),
 			"demonic",
 			PresetColour.RACE_DEMON,
 			Disposition.CIVILIZED,

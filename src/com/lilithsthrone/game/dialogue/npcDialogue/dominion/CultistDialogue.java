@@ -25,7 +25,6 @@ import com.lilithsthrone.game.sex.managers.dominion.cultist.SMCultistKneeling;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotUnique;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -86,16 +85,14 @@ public class CultistDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new ResponseCombat("Fight", "You're left with no choice but to fight!", getCultist(), Util.newHashMapOfValues(
-						new Value<>(Main.game.getPlayer(), "You tell the succubus that you're not interested, and just as you expected, she moves to attack!"),
-						new Value<>(getCultist(), "[npc.Name] readies her broomstick and shouts, [npc.speech(How <i>dare</i> you try to refuse my gift! I'll give it to you by force!)]")));
+				return new ResponseCombat("Fight", "You're left with no choice but to fight!", getCultist(), Map.of(Main.game.getPlayer(),"You tell the succubus that you're not interested, and just as you expected, she moves to attack!",getCultist(),"[npc.Name] readies her broomstick and shouts, [npc.speech(How <i>dare</i> you try to refuse my gift! I'll give it to you by force!)]"));
 				
 			} else if(index==2) {
 				return new ResponseSex("Accept", "Drop to your knees and prepare to service her orally.",
 						true, true,
 						new SMCultistKneeling(
-								Util.newHashMapOfValues(new Value<>(getCultist(), SexSlotUnique.KNEELING_RECEIVING_ORAL_CULTIST)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.KNEELING_PERFORMING_ORAL_CULTIST))) {
+								Map.of(getCultist(),SexSlotUnique.KNEELING_RECEIVING_ORAL_CULTIST),
+								Map.of(Main.game.getPlayer(),SexSlotUnique.KNEELING_PERFORMING_ORAL_CULTIST)) {
 							@Override
 							public boolean isPublicSex() {
 								return false;
@@ -125,8 +122,8 @@ public class CultistDialogue {
 							null, Fetish.FETISH_PREGNANCY.getAssociatedCorruptionLevel(), null, null, null,
 							true, false,
 							new SMAltarMissionary(
-									Util.newHashMapOfValues(new Value<>(getCultist(), SexSlotUnique.MISSIONARY_ALTAR_STANDING_BETWEEN_LEGS)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.MISSIONARY_ALTAR_LYING_ON_ALTAR))) {
+									Map.of(getCultist(),SexSlotUnique.MISSIONARY_ALTAR_STANDING_BETWEEN_LEGS),
+									Map.of(Main.game.getPlayer(),SexSlotUnique.MISSIONARY_ALTAR_LYING_ON_ALTAR)) {
 								@Override
 								public boolean isPublicSex() {
 									return false;
@@ -161,8 +158,8 @@ public class CultistDialogue {
 						null, Fetish.FETISH_ANAL_RECEIVING.getAssociatedCorruptionLevel(), null, null, null,
 						true, false,
 						new SMAltarMissionary(
-								Util.newHashMapOfValues(new Value<>(getCultist(), SexSlotUnique.MISSIONARY_ALTAR_STANDING_BETWEEN_LEGS)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.MISSIONARY_ALTAR_LYING_ON_ALTAR))) {
+								Map.of(getCultist(),SexSlotUnique.MISSIONARY_ALTAR_STANDING_BETWEEN_LEGS),
+								Map.of(Main.game.getPlayer(),SexSlotUnique.MISSIONARY_ALTAR_LYING_ON_ALTAR)) {
 							@Override
 							public boolean isPublicSex() {
 								return false;
@@ -289,8 +286,8 @@ public class CultistDialogue {
 				return new ResponseSex("Sex", "Decide against using [npc.namePos] broomstick to seal [npc.herHim] in place and just have normal, dominant sex with [npc.herHim] instead...",
 						true, false,
 						new SMAltarMissionary(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.MISSIONARY_ALTAR_STANDING_BETWEEN_LEGS)),
-								Util.newHashMapOfValues(new Value<>(getCultist(), SexSlotUnique.MISSIONARY_ALTAR_LYING_ON_ALTAR))) {
+								Map.of(Main.game.getPlayer(),SexSlotUnique.MISSIONARY_ALTAR_STANDING_BETWEEN_LEGS),
+								Map.of(getCultist(),SexSlotUnique.MISSIONARY_ALTAR_LYING_ON_ALTAR)) {
 							@Override
 							public boolean isPublicSex() {
 								return false;
@@ -306,8 +303,8 @@ public class CultistDialogue {
 				return new ResponseSex("Witch's Seal", "Use her broomstick to cast Witch's Seal on her.",
 						false, false,
 						new SMAltarMissionarySealed(
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.MISSIONARY_ALTAR_SEALED_STANDING_BETWEEN_LEGS)),
-								Util.newHashMapOfValues(new Value<>(getCultist(), SexSlotUnique.MISSIONARY_ALTAR_SEALED_LYING_ON_ALTAR))) {
+								Map.of(Main.game.getPlayer(),SexSlotUnique.MISSIONARY_ALTAR_SEALED_STANDING_BETWEEN_LEGS),
+								Map.of(getCultist(),SexSlotUnique.MISSIONARY_ALTAR_SEALED_LYING_ON_ALTAR)) {
 							@Override
 							public boolean isPublicSex() {
 								return false;
@@ -315,7 +312,7 @@ public class CultistDialogue {
 							@Override
 							public Map<ImmobilisationType, Map<GameCharacter, Set<GameCharacter>>> getStartingCharactersImmobilised() {
 								Map<ImmobilisationType, Map<GameCharacter, Set<GameCharacter>>> map = new HashMap<>();
-								map.put(ImmobilisationType.WITCH_SEAL, Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), Util.newHashSetOfValues(getCultist()))));
+								map.put(ImmobilisationType.WITCH_SEAL, Map.of(Main.game.getPlayer(),Util.newHashSetOfValues(getCultist())));
 								return map;
 							}
 						},
@@ -355,8 +352,8 @@ public class CultistDialogue {
 				return new ResponseSex("Witch's Toy", "You're completely immobilised, and can do nothing as the witch prepares to use you as her toy.",
 						false, false,
 						new SMAltarMissionarySealed(
-								Util.newHashMapOfValues(new Value<>(getCultist(), SexSlotUnique.MISSIONARY_ALTAR_SEALED_STANDING_BETWEEN_LEGS)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.MISSIONARY_ALTAR_SEALED_LYING_ON_ALTAR))) {
+								Map.of(getCultist(),SexSlotUnique.MISSIONARY_ALTAR_SEALED_STANDING_BETWEEN_LEGS),
+								Map.of(Main.game.getPlayer(),SexSlotUnique.MISSIONARY_ALTAR_SEALED_LYING_ON_ALTAR)) {
 							@Override
 							public boolean isPublicSex() {
 								return false;
@@ -364,7 +361,7 @@ public class CultistDialogue {
 							@Override
 							public Map<ImmobilisationType, Map<GameCharacter, Set<GameCharacter>>> getStartingCharactersImmobilised() {
 								Map<ImmobilisationType, Map<GameCharacter, Set<GameCharacter>>> map = new HashMap<>();
-								map.put(ImmobilisationType.WITCH_SEAL, Util.newHashMapOfValues(new Value<>(getCultist(), Util.newHashSetOfValues(Main.game.getPlayer()))));
+								map.put(ImmobilisationType.WITCH_SEAL, Map.of(getCultist(),Util.newHashSetOfValues(Main.game.getPlayer())));
 								return map;
 							}
 						},

@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.baseActionsMisc;
 
+import java.util.Map;
+
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -15,8 +17,6 @@ import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionCategory;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.3.4
@@ -33,7 +33,7 @@ public class SadisticActions {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER,SexAreaInterface.NULL)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaInterface.NULL),
 			SexParticipantType.NORMAL) {
 		@Override
 		public boolean isBaseRequirementsMet() {
@@ -144,7 +144,7 @@ public class SadisticActions {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER,SexAreaInterface.NULL)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaInterface.NULL),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 
@@ -292,7 +292,7 @@ public class SadisticActions {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.FOUR_LUSTFUL,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER,SexAreaInterface.NULL)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaInterface.NULL),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		
@@ -485,7 +485,7 @@ public class SadisticActions {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.FOUR_LUSTFUL,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER,SexAreaInterface.NULL)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaInterface.NULL),
 			SexParticipantType.NORMAL,
 			SexPace.DOM_ROUGH) {
 		

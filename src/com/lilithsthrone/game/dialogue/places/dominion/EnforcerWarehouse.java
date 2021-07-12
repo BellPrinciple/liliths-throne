@@ -52,7 +52,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotAgainstWall;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStocks;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
@@ -197,8 +196,8 @@ public class EnforcerWarehouse {
 					true,
 					true,
 					new SMClaireWarehouse(
-							Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAgainstWall.STANDING_WALL)),
-							Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Claire.class), SexSlotAgainstWall.BACK_TO_WALL))),
+							Map.of(Main.game.getPlayer(),SexSlotAgainstWall.STANDING_WALL),
+							Map.of(Main.game.getNpc(Claire.class),SexSlotAgainstWall.BACK_TO_WALL)),
 					null,
 					null,
 					AFTER_CLAIRE_SEX,
@@ -886,9 +885,7 @@ public class EnforcerWarehouse {
 					return new ResponseCombat("Defend yourself",
 							UtilText.parse(guard, "Defend yourself against the trigger-happy [npc.race] SWORD guard."),
 							(NPC) guard,
-							Util.newHashMapOfValues(
-									new Value<>(Main.game.getPlayer(), UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_PLAYER_FIGHT_START", getEnforcersPresent())),
-									new Value<>(guard, UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_GUARD_FIGHT_START", getEnforcersPresent()))));
+							Map.of(Main.game.getPlayer(),UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_PLAYER_FIGHT_START", getEnforcersPresent()),guard,UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENFORCER_GUARD_POST_GUARD_FIGHT_START", getEnforcersPresent())));
 				}
 			}
 			return null;
@@ -1025,12 +1022,7 @@ public class EnforcerWarehouse {
 						"There's only way to get out of this mess, and that's by besting these SWORD Enforcers in combat!",
 						(NPC) getEnforcersPresent().get(0),
 						getEnforcersPresent(),
-						Util.newHashMapOfValues(
-								new Value<>(Main.game.getPlayer(), UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENTRANCE_PLAYER_CHALLENGE", getEnforcersPresent())),
-								new Value<>(getEnforcersPresent().get(0), UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENTRANCE_GUARD_RESPONSE_1", getEnforcersPresent().get(0))),
-								new Value<>(getEnforcersPresent().get(1), UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENTRANCE_GUARD_RESPONSE_2", getEnforcersPresent().get(1))),
-								new Value<>(getEnforcersPresent().get(2), UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENTRANCE_GUARD_RESPONSE_3", getEnforcersPresent().get(2))),
-								new Value<>(getEnforcersPresent().get(3), UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENTRANCE_GUARD_RESPONSE_4", getEnforcersPresent().get(3)))));
+						Map.of(Main.game.getPlayer(),UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENTRANCE_PLAYER_CHALLENGE", getEnforcersPresent()),getEnforcersPresent().get(0),UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENTRANCE_GUARD_RESPONSE_1", getEnforcersPresent().get(0)),getEnforcersPresent().get(1),UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENTRANCE_GUARD_RESPONSE_2", getEnforcersPresent().get(1)),getEnforcersPresent().get(2),UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENTRANCE_GUARD_RESPONSE_3", getEnforcersPresent().get(2)),getEnforcersPresent().get(3),UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ENTRANCE_GUARD_RESPONSE_4", getEnforcersPresent().get(3))));
 				
 			} else if(index==2) {
 				if(!Main.game.getPlayer().hasWeaponType(WeaponType.getWeaponTypeFromId("innoxia_lightningGlobe_lightning_globe"), true)) {
@@ -1240,11 +1232,10 @@ public class EnforcerWarehouse {
 						false,
 						new SexManagerDefault(
 								SexPosition.STOCKS,
-								Util.newHashMapOfValues(new Value<>(arrestingGuard,
-										arrestingGuard.hasPenis()||!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)
+								Map.of(arrestingGuard,arrestingGuard.hasPenis()||!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)
 											?SexSlotStocks.BEHIND_STOCKS
-											:SexSlotStocks.RECEIVING_ORAL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStocks.LOCKED_IN_STOCKS))) {
+											:SexSlotStocks.RECEIVING_ORAL),
+								Map.of(Main.game.getPlayer(),SexSlotStocks.LOCKED_IN_STOCKS)) {
 							@Override
 							public boolean isCharacterStartNaked(GameCharacter character) {
 								return character.isPlayer();
@@ -1340,10 +1331,8 @@ public class EnforcerWarehouse {
 						false,
 						new SexManagerDefault(
 								SexPosition.STOCKS,
-								Util.newHashMapOfValues(
-										new Value<>(randomSexPartners.get(0), SexSlotStocks.BEHIND_STOCKS),
-										new Value<>(randomSexPartners.get(1), SexSlotStocks.RECEIVING_ORAL)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotStocks.LOCKED_IN_STOCKS))) {
+								Map.of(randomSexPartners.get(0),SexSlotStocks.BEHIND_STOCKS,randomSexPartners.get(1),SexSlotStocks.RECEIVING_ORAL),
+								Map.of(Main.game.getPlayer(),SexSlotStocks.LOCKED_IN_STOCKS)) {
 							@Override
 							public boolean isCharacterStartNaked(GameCharacter character) {
 								return character.isPlayer();

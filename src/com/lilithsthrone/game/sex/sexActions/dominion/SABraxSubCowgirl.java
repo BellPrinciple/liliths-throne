@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.sex.sexActions.dominion;
 
 import java.util.List;
+import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -21,7 +22,6 @@ import com.lilithsthrone.game.sex.sexActions.SexActionLimitation;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.68
@@ -163,7 +163,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.TWO_LOW,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -245,7 +245,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -341,7 +341,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ANUS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -430,7 +430,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -469,7 +469,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ANUS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -508,7 +508,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -560,7 +560,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ANUS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -600,7 +600,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -642,7 +642,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.TWO_HORNY,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ANUS, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.ANUS,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -688,7 +688,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -721,7 +721,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ANUS, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.ANUS,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -749,7 +749,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -782,7 +782,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.ONE_MINIMUM,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ANUS, SexAreaPenetration.TONGUE)),
+			Map.of(SexAreaOrifice.ANUS,SexAreaPenetration.TONGUE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -815,7 +815,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.NIPPLE, SexAreaPenetration.FINGER)),
+			Map.of(SexAreaOrifice.NIPPLE,SexAreaPenetration.FINGER),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -876,7 +876,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -912,7 +912,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ANUS, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.ANUS,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -952,7 +952,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.VAGINA,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -990,7 +990,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ONE_VANILLA,
-			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.ANUS, SexAreaPenetration.PENIS)),
+			Map.of(SexAreaOrifice.ANUS,SexAreaPenetration.PENIS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -1027,7 +1027,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.FOUR_LUSTFUL,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -1087,7 +1087,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.TWO_LOW,
 			CorruptionLevel.FOUR_LUSTFUL,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.MOUTH)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.MOUTH),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -1261,7 +1261,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -1300,7 +1300,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.TONGUE, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaPenetration.TONGUE,SexAreaOrifice.ANUS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -1339,7 +1339,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -1373,7 +1373,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.ANUS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -1413,7 +1413,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.ONE_MINIMUM,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, null)),
+			Map.of(SexAreaPenetration.PENIS,null),
 			SexParticipantType.SELF) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -1461,7 +1461,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.VAGINA)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.VAGINA),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -1495,7 +1495,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.FOUR_HIGH,
 			ArousalIncrease.FOUR_HIGH,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.PENIS, SexAreaOrifice.ANUS)),
+			Map.of(SexAreaPenetration.PENIS,SexAreaOrifice.ANUS),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {
@@ -1529,7 +1529,7 @@ public class SABraxSubCowgirl {
 			ArousalIncrease.THREE_NORMAL,
 			ArousalIncrease.THREE_NORMAL,
 			CorruptionLevel.ZERO_PURE,
-			Util.newHashMapOfValues(new Value<>(SexAreaPenetration.FINGER, SexAreaOrifice.NIPPLE)),
+			Map.of(SexAreaPenetration.FINGER,SexAreaOrifice.NIPPLE),
 			SexParticipantType.NORMAL) {
 		@Override
 		public SexActionLimitation getLimitation() {

@@ -37,7 +37,6 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotUnique;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
@@ -848,8 +847,8 @@ public class ZaranixHomeGroundFloorRepeat {
 								List.of(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_MASOCHIST), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 								true, false,
 								new SMAmberDoggyFucked(
-										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Amber.class), SexSlotAllFours.BEHIND)),
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+										Map.of(Main.game.getNpc(Amber.class),SexSlotAllFours.BEHIND),
+										Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 								null,
 								null,
 								AMBER_LOUNGE_POST_CONSENSUAL_SEX,
@@ -914,8 +913,8 @@ public class ZaranixHomeGroundFloorRepeat {
 								List.of(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_MASOCHIST), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 								true, false,
 								new SMAmberDoggyFucked(
-										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Amber.class), SexSlotAllFours.BEHIND)),
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+										Map.of(Main.game.getNpc(Amber.class),SexSlotAllFours.BEHIND),
+										Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 								null,
 								null,
 								AMBER_LOUNGE_POST_CONSENSUAL_SEX,
@@ -1182,8 +1181,8 @@ public class ZaranixHomeGroundFloorRepeat {
 						List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 						!Main.getProperties().hasValue(PropertyValue.nonConContent), false,
 						new SMAmberDoggyFucked(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Amber.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Amber.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 						null,
 						null,
 						AMBER_LOUNGE_POST_SEX,
@@ -1279,8 +1278,8 @@ public class ZaranixHomeGroundFloorRepeat {
 				return new ResponseSex("Used", "Amber starts fucking you.",
 						false, false,
 						new SMAmberDoggyFucked(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Amber.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Amber.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 						null,
 						null,
 						AFTER_AMBER_SEX_LOSS,
@@ -1348,8 +1347,8 @@ public class ZaranixHomeGroundFloorRepeat {
 						List.of(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.THREE_DIRTY, null, null, null,
 						false, false,
 						new SMAmberDoggyFucked(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Amber.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Amber.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 						null,
 						null,
 						AFTER_AMBER_SEX_SUB_VICTORY,
@@ -1686,8 +1685,8 @@ public class ZaranixHomeGroundFloorRepeat {
 						null, null, null, null, null, null,
 						true, false,
 						new SMAmberDoggyFucked(
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Amber.class), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.ALL_FOURS))),
+								Map.of(Main.game.getNpc(Amber.class),SexSlotAllFours.BEHIND),
+								Map.of(Main.game.getPlayer(),SexSlotAllFours.ALL_FOURS)),
 						null,
 						null,
 						WALKIES_AMBER_FUCKS_POST_SEX,
@@ -1898,11 +1897,11 @@ public class ZaranixHomeGroundFloorRepeat {
 								null, null, null, null, null, null,
 								true, false,
 								new SMPetMounting(
-										Util.newHashMapOfValues(new Value<>(pet, SexSlotUnique.PET_MOUNTING_HUMPING)),
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.PET_MOUNTING_ON_ALL_FOURS))) {
+										Map.of(pet,SexSlotUnique.PET_MOUNTING_HUMPING),
+										Map.of(Main.game.getPlayer(),SexSlotUnique.PET_MOUNTING_ON_ALL_FOURS)) {
 									@Override
 									public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-										return Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), List.of(CoverableArea.ANUS, CoverableArea.VAGINA)));
+										return Map.of(Main.game.getPlayer(),List.of(CoverableArea.ANUS, CoverableArea.VAGINA));
 									}
 								},
 								null,
@@ -1926,8 +1925,8 @@ public class ZaranixHomeGroundFloorRepeat {
 								null, null, null, null, null, null,
 								true, false,
 								new SMPetOral(
-										Util.newHashMapOfValues(new Value<>(pet, SexSlotUnique.PET_ORAL_COCKED_LEG)),
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotUnique.PET_ORAL_ON_ALL_FOURS))),
+										Map.of(pet,SexSlotUnique.PET_ORAL_COCKED_LEG),
+										Map.of(Main.game.getPlayer(),SexSlotUnique.PET_ORAL_ON_ALL_FOURS)),
 								null,
 								null, WALKIES_PET_FUCKS_POST_SEX_ORAL, UtilText.parseFromXMLFile("places/dominion/zaranixHome/groundFloorRepeat", "WALKIES_PET_FUCKS_START_ORAL", List.of(owner, pet))) {
 							@Override

@@ -104,7 +104,6 @@ import com.lilithsthrone.rendering.RenderingEngine;
 import com.lilithsthrone.utils.Pathing;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -2482,8 +2481,8 @@ public class MainController implements Initializable {
 							new SexManagerDefault(
 									true,
 									SexPosition.LYING_DOWN,
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.MATING_PRESS)),
-									Util.newHashMapOfValues(new Value<>(target, SexSlotLyingDown.LYING_DOWN))) {
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.MATING_PRESS),
+									Map.of(target,SexSlotLyingDown.LYING_DOWN)) {
 								@Override
 								public boolean isPositionChangingAllowed(GameCharacter character) {
 									return false;
@@ -2494,9 +2493,7 @@ public class MainController implements Initializable {
 								}
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-									return Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.PENIS)),
-											new Value<>(target, List.of(CoverableArea.VAGINA)));
+									return Map.of(Main.game.getPlayer(),List.of(CoverableArea.PENIS),target,List.of(CoverableArea.VAGINA));
 								}
 								@Override
 								public void initStartingLustAndArousal(GameCharacter character) {
@@ -2561,8 +2558,8 @@ public class MainController implements Initializable {
 							new SexManagerDefault(
 									true,
 									SexPosition.LYING_DOWN,
-									Util.newHashMapOfValues(new Value<>(target, SexSlotLyingDown.MATING_PRESS)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotLyingDown.LYING_DOWN))) {
+									Map.of(target,SexSlotLyingDown.MATING_PRESS),
+									Map.of(Main.game.getPlayer(),SexSlotLyingDown.LYING_DOWN)) {
 								@Override
 								public boolean isPositionChangingAllowed(GameCharacter character) {
 									return false;
@@ -2573,9 +2570,7 @@ public class MainController implements Initializable {
 								}
 								@Override
 								public Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap() {
-									return Util.newHashMapOfValues(
-											new Value<>(Main.game.getPlayer(), List.of(CoverableArea.VAGINA)),
-											new Value<>(target, List.of(CoverableArea.PENIS)));
+									return Map.of(Main.game.getPlayer(),List.of(CoverableArea.VAGINA),target,List.of(CoverableArea.PENIS));
 								}
 								@Override
 								public void initStartingLustAndArousal(GameCharacter character) {
