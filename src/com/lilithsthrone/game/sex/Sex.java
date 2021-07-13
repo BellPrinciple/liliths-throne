@@ -3,6 +3,7 @@ package com.lilithsthrone.game.sex;
 import java.lang.reflect.Field;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -5162,8 +5163,8 @@ public class Sex {
 	private void addSexAction(GameCharacter character, GameCharacter target, SexActionInteractions interactions, SexActionInterface action, boolean addedForCharacter, boolean addedForTarget) {
 		if(!addedForCharacter) {
 			if(action.getSexAreaInteractions().isEmpty()
-					|| action.getSexAreaInteractions().keySet().contains(null)
-					|| action.getSexAreaInteractions().values().contains(null)) {
+					|| action.getSexAreaInteractions().containsKey(SexAreaInterface.NULL)
+					|| action.getSexAreaInteractions().containsValue(SexAreaInterface.NULL)) {
 				// If no sex interactions are defined, or if there is an "interaction-to-null" defined (signifying that the action is performing a simple availability check), then add the action
 				addedForCharacter = true;
 			} else {
@@ -5187,8 +5188,8 @@ public class Sex {
 
 		if(!addedForTarget) {
 			if(action.getSexAreaInteractions().isEmpty()
-					|| action.getSexAreaInteractions().keySet().contains(null)
-					|| action.getSexAreaInteractions().values().contains(null)) {
+					|| action.getSexAreaInteractions().containsKey(SexAreaInterface.NULL)
+					|| action.getSexAreaInteractions().containsValue(SexAreaInterface.NULL)) {
 				// If no sex interactions are defined, or if there is an "interaction-to-null" defined (signifying that the action is performing a simple availability check), then add the action
 				addedForTarget = true;
 			} else {
@@ -5332,10 +5333,10 @@ public class Sex {
 	}
 	
 	public SexSlot getSexPositionSlot(GameCharacter character) {
-		if(Main.sex.dominants.keySet().contains(character)) {
+		if(Main.sex.dominants.containsKey(character)) {
 			return Main.sex.dominants.get(character);
 			
-		} else if(Main.sex.submissives.keySet().contains(character)) {
+		} else if(Main.sex.submissives.containsKey(character)) {
 			return Main.sex.submissives.get(character);
 		}
 		
@@ -5346,17 +5347,17 @@ public class Sex {
 		SexSlot characterSlot1 = Main.sex.getSexPositionSlot(character1);
 		SexSlot characterSlot2 = Main.sex.getSexPositionSlot(character2);
 		
-		if(Main.sex.dominants.keySet().contains(character1)) {
+		if(Main.sex.dominants.containsKey(character1)) {
 			Main.sex.dominants.put(character1, characterSlot2);
 		}
-		if(Main.sex.submissives.keySet().contains(character1)) {
+		if(Main.sex.submissives.containsKey(character1)) {
 			Main.sex.submissives.put(character1, characterSlot2);
 		}
 		
-		if(Main.sex.dominants.keySet().contains(character2)) {
+		if(Main.sex.dominants.containsKey(character2)) {
 			Main.sex.dominants.put(character2, characterSlot1);
 		}
-		if(Main.sex.submissives.keySet().contains(character2)) {
+		if(Main.sex.submissives.containsKey(character2)) {
 			Main.sex.submissives.put(character2, characterSlot1);
 		}
 		
@@ -5387,7 +5388,7 @@ public class Sex {
 	}
 	
 	public boolean isDom(GameCharacter character) {
-		return Main.sex.dominants.keySet().contains(character);
+		return Main.sex.dominants.containsKey(character);
 	}
 	
 	public boolean isPublicSex() {
@@ -5957,16 +5958,9 @@ public class Sex {
 	}
 	
 	public boolean isOngoingActionsBlockingSpeech(GameCharacter character) {
-		try {
-			for(Set<SexAreaInterface> saList : Main.sex.getOngoingActionsMap(character).get(SexAreaOrifice.MOUTH).values()) {
-				for(SexAreaInterface sa : saList) {
-					if(sa.isPenetration() && ((SexAreaPenetration)sa).isTakesVirginity()) {
-						return true;
-					}
-				}
-			}
-		} catch(Exception ex) {}
-		return false;
+		return Main.sex.getOngoingActionsMap(character).get(SexAreaOrifice.MOUTH).values().stream()
+		.flatMap(Collection::stream)
+		.anyMatch(a->a.isPenetration()&&((SexAreaPenetration)a).isTakesVirginity());
 	}
 	
 	/**

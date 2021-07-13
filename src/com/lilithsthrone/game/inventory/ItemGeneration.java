@@ -248,11 +248,11 @@ public class ItemGeneration {
 	 * Generates clothing with the provided enchantments.
 	 */
 	public AbstractClothing generateClothing(AbstractClothingType clothingType, Colour colour, List<ItemEffect> effects) {
-		return generateClothing(clothingType, colour, null, null, effects);
+		return generateClothing(clothingType,List.of(colour),effects);
 	}
 	
 	public AbstractClothing generateClothing(String clothingTypeId, Colour colour, List<ItemEffect> effects) {
-		return generateClothing(ClothingType.getClothingTypeFromId(clothingTypeId), colour, null, null, effects);
+		return generateClothing(ClothingType.getClothingTypeFromId(clothingTypeId),List.of(colour),effects);
 	}
 	
 	/**
