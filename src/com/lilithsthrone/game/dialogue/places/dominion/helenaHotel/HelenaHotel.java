@@ -54,7 +54,6 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.TongueNipple;
 import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
-import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -299,7 +298,7 @@ public class HelenaHotel {
 					Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
 					map.put(Main.game.getNpc(Helena.class), new HashMap<>());
 					map.get(Main.game.getNpc(Helena.class)).put(SexAreaOrifice.ANUS, new HashMap<>());
-					map.get(Main.game.getNpc(Helena.class)).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
+					map.get(Main.game.getNpc(Helena.class)).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(),Set.of(LubricationType.SALIVA));
 					return map;
 				}
 				if(helenaToScarlettPreference!=null
@@ -308,7 +307,7 @@ public class HelenaHotel {
 					Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
 					map.put(Main.game.getNpc(Helena.class), new HashMap<>());
 					map.get(Main.game.getNpc(Helena.class)).put(SexAreaOrifice.ANUS, new HashMap<>());
-					map.get(Main.game.getNpc(Helena.class)).get(SexAreaOrifice.ANUS).put(Main.game.getNpc(Scarlett.class), Util.newHashSetOfValues(LubricationType.SALIVA));
+					map.get(Main.game.getNpc(Helena.class)).get(SexAreaOrifice.ANUS).put(Main.game.getNpc(Scarlett.class),Set.of(LubricationType.SALIVA));
 					return map;
 				}
 				if(Main.game.getNpc(Helena.class).isVaginaVirgin()
@@ -318,8 +317,8 @@ public class HelenaHotel {
 					Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
 					map.put(Main.game.getNpc(Helena.class), new HashMap<>());
 					map.get(Main.game.getNpc(Helena.class)).put(SexAreaOrifice.VAGINA, new HashMap<>());
-					map.get(Main.game.getNpc(Helena.class)).get(SexAreaOrifice.VAGINA).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
-					map.get(Main.game.getNpc(Helena.class)).get(SexAreaOrifice.VAGINA).put(Main.game.getNpc(Helena.class), Util.newHashSetOfValues(LubricationType.GIRLCUM));
+					map.get(Main.game.getNpc(Helena.class)).get(SexAreaOrifice.VAGINA).put(Main.game.getPlayer(),Set.of(LubricationType.SALIVA));
+					map.get(Main.game.getNpc(Helena.class)).get(SexAreaOrifice.VAGINA).put(Main.game.getNpc(Helena.class),Set.of(LubricationType.GIRLCUM));
 					return map;
 				}
 				return super.getStartingWetAreas();

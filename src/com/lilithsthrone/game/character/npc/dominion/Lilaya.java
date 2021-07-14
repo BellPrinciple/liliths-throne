@@ -421,7 +421,7 @@ public class Lilaya extends NPC {
 				rSet.add(Relationship.Pibling);
 				return rSet;
 			}
-			return Util.newHashSetOfValues(Relationship.Pibling);
+			return Set.of(Relationship.Pibling);
 		}
 		return super.getRelationshipsTo(character, excludedRelationships);
 	}

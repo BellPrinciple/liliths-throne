@@ -1628,7 +1628,7 @@ public class KaysWarehouse {
 								SexAreaOrifice.VAGINA,
 								Map.of(
 									Main.game.getNpc(Kay.class),
-									Util.newHashSetOfValues(LubricationType.PRECUM))))));
+									Set.of(LubricationType.PRECUM))))));
 				
 			}
 			
@@ -1663,7 +1663,7 @@ public class KaysWarehouse {
 									SexAreaOrifice.ANUS,
 									Map.of(
 										Main.game.getNpc(Kay.class),
-										Util.newHashSetOfValues(LubricationType.PRECUM))))));
+										Set.of(LubricationType.PRECUM))))));
 					
 				}
 			}

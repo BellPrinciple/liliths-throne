@@ -24,7 +24,6 @@ import com.lilithsthrone.game.sex.managers.dominion.cultist.SMAltarMissionarySea
 import com.lilithsthrone.game.sex.managers.dominion.cultist.SMCultistKneeling;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotUnique;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -312,7 +311,7 @@ public class CultistDialogue {
 							@Override
 							public Map<ImmobilisationType, Map<GameCharacter, Set<GameCharacter>>> getStartingCharactersImmobilised() {
 								Map<ImmobilisationType, Map<GameCharacter, Set<GameCharacter>>> map = new HashMap<>();
-								map.put(ImmobilisationType.WITCH_SEAL, Map.of(Main.game.getPlayer(),Util.newHashSetOfValues(getCultist())));
+								map.put(ImmobilisationType.WITCH_SEAL, Map.of(Main.game.getPlayer(),Set.of(getCultist())));
 								return map;
 							}
 						},
@@ -361,7 +360,7 @@ public class CultistDialogue {
 							@Override
 							public Map<ImmobilisationType, Map<GameCharacter, Set<GameCharacter>>> getStartingCharactersImmobilised() {
 								Map<ImmobilisationType, Map<GameCharacter, Set<GameCharacter>>> map = new HashMap<>();
-								map.put(ImmobilisationType.WITCH_SEAL, Map.of(getCultist(),Util.newHashSetOfValues(Main.game.getPlayer())));
+								map.put(ImmobilisationType.WITCH_SEAL, Map.of(getCultist(),Set.of(Main.game.getPlayer())));
 								return map;
 							}
 						},

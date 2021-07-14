@@ -69,7 +69,6 @@ import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -465,7 +464,7 @@ public class DarkSiren extends NPC {
 	@Override
 	public Set<Relationship> getRelationshipsTo(GameCharacter character, Relationship... excludedRelationships) {
 		if(character.isPlayer() && character.getSubspeciesOverrideRace()==Race.DEMON) {
-			return Util.newHashSetOfValues(Relationship.HalfSibling);
+			return Set.of(Relationship.HalfSibling);
 		}
 		return super.getRelationshipsTo(character, excludedRelationships);
 	}

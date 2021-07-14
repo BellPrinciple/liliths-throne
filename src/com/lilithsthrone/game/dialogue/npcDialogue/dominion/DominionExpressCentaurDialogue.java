@@ -139,7 +139,7 @@ public class DominionExpressCentaurDialogue {
 									Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
 									map.put(centaur(), new HashMap<>());
 									map.get(centaur()).put(SexAreaOrifice.ANUS, new HashMap<>());
-									map.get(centaur()).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
+									map.get(centaur()).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(),Set.of(LubricationType.SALIVA));
 									return map;
 								}
 							},
@@ -190,7 +190,7 @@ public class DominionExpressCentaurDialogue {
 									Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
 									map.put(centaur(), new HashMap<>());
 									map.get(centaur()).put(SexAreaOrifice.ANUS, new HashMap<>());
-									map.get(centaur()).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(), Util.newHashSetOfValues(LubricationType.SALIVA));
+									map.get(centaur()).get(SexAreaOrifice.ANUS).put(Main.game.getPlayer(),Set.of(LubricationType.SALIVA));
 									return map;
 								}
 							},

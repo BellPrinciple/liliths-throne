@@ -279,7 +279,7 @@ public class SlimeGuardIce extends NPC {
 	@Override
 	public Set<Relationship> getRelationshipsTo(GameCharacter character, Relationship... excludedRelationships) {
 		if(character instanceof SlimeGuardFire) {
-			return Util.newHashSetOfValues(Relationship.Sibling);
+			return Set.of(Relationship.Sibling);
 		}
 		return super.getRelationshipsTo(character, excludedRelationships);
 	}

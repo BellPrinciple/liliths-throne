@@ -74,7 +74,7 @@ public class SexPosition {
 					Masturbation.class)) {
 		@Override
 		public Set<SexSlot> getAllAvailableSexPositions() {
-			return Util.newHashSetOfValues(SexSlotMasturbation.KNEELING, SexSlotMasturbation.KNEELING_PANTIES, SexSlotMasturbation.SITTING, SexSlotMasturbation.STANDING);
+			return Set.of(SexSlotMasturbation.KNEELING, SexSlotMasturbation.KNEELING_PANTIES, SexSlotMasturbation.SITTING, SexSlotMasturbation.STANDING);
 		}
 		@Override
 		public Value<Boolean, String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter, SexSlot> positioningSlots) {

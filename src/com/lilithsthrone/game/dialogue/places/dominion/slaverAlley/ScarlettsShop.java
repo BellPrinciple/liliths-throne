@@ -226,7 +226,7 @@ public class ScarlettsShop {
 					Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
 					map.put(Main.game.getPlayer(), new HashMap<>());
 					map.get(Main.game.getPlayer()).put(SexAreaOrifice.ANUS, new HashMap<>());
-					map.get(Main.game.getPlayer()).get(SexAreaOrifice.ANUS).put(Main.game.getNpc(Scarlett.class), Util.newHashSetOfValues(LubricationType.SALIVA));
+					map.get(Main.game.getPlayer()).get(SexAreaOrifice.ANUS).put(Main.game.getNpc(Scarlett.class),Set.of(LubricationType.SALIVA));
 					return map;
 				}
 				return super.getStartingWetAreas();

@@ -887,14 +887,14 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 				rSet.add(Relationship.Nibling);
 				return rSet;
 			}
-			return Util.newHashSetOfValues(Relationship.Nibling);
+			return Set.of(Relationship.Nibling);
 		}
 		if(character.getRace()==Race.DEMON) {
 			if(character instanceof Lyssieth) {
-				return Util.newHashSetOfValues(Relationship.Parent);
+				return Set.of(Relationship.Parent);
 			}
 			if(character instanceof DarkSiren) {
-				return Util.newHashSetOfValues(Relationship.HalfSibling);
+				return Set.of(Relationship.HalfSibling);
 			}
 		}
 		return super.getRelationshipsTo(character, excludedRelationships);

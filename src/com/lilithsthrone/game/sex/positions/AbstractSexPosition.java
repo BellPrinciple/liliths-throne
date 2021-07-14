@@ -22,7 +22,6 @@ import com.lilithsthrone.game.sex.sexActions.SexActionInterface;
 import com.lilithsthrone.game.sex.sexActions.SexActionPresets;
 import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 
 /**
@@ -142,14 +141,14 @@ public abstract class AbstractSexPosition {
 			
 			
 			// Block tribbing and thigh sex if ongoing penis/vagina or penis/anus penetration:
-			Set<SexAreaOrifice> impossibleTribbingAreas = Util.newHashSetOfValues(SexAreaOrifice.ANUS, SexAreaOrifice.VAGINA, SexAreaOrifice.THIGHS);
-			if(action.getSexAreaInteractions().containsKey(SexAreaPenetration.CLIT) && action.getSexAreaInteractions().values().contains(SexAreaPenetration.CLIT)
+			var impossibleTribbingAreas = Set.of(SexAreaOrifice.ANUS, SexAreaOrifice.VAGINA, SexAreaOrifice.THIGHS);
+			if(action.getSexAreaInteractions().containsKey(SexAreaPenetration.CLIT) && action.getSexAreaInteractions().containsValue(SexAreaPenetration.CLIT)
 				&& ((Main.sex.getOngoingActionsMap(performer).containsKey(SexAreaPenetration.PENIS) && Main.sex.getOngoingActionsMap(performer).get(SexAreaPenetration.PENIS).values().stream().anyMatch((set)->!Collections.disjoint(set, impossibleTribbingAreas)))
 					|| (Main.sex.getOngoingActionsMap(target).containsKey(SexAreaPenetration.PENIS) && Main.sex.getOngoingActionsMap(target).get(SexAreaPenetration.PENIS).values().stream().anyMatch((set)->!Collections.disjoint(set, impossibleTribbingAreas))))) {
 				return true;
 			}
 			if(((action.getSexAreaInteractions().containsKey(SexAreaPenetration.PENIS) && !Collections.disjoint(action.getSexAreaInteractions().values(), impossibleTribbingAreas))
-					|| (!Collections.disjoint(action.getSexAreaInteractions().keySet(), impossibleTribbingAreas) && action.getSexAreaInteractions().values().contains(SexAreaPenetration.PENIS)))
+					|| (!Collections.disjoint(action.getSexAreaInteractions().keySet(), impossibleTribbingAreas) && action.getSexAreaInteractions().containsValue(SexAreaPenetration.PENIS)))
 				&& ((Main.sex.getOngoingActionsMap(performer).containsKey(SexAreaPenetration.CLIT) && Main.sex.getOngoingActionsMap(performer).get(SexAreaPenetration.CLIT).values().stream().anyMatch((set)->set.contains(SexAreaPenetration.CLIT)))
 					|| (Main.sex.getOngoingActionsMap(target).containsKey(SexAreaPenetration.CLIT) && Main.sex.getOngoingActionsMap(target).get(SexAreaPenetration.CLIT).values().stream().anyMatch((set)->set.contains(SexAreaPenetration.CLIT))))) {
 				return true;
@@ -223,7 +222,7 @@ public abstract class AbstractSexPosition {
 	public Set<SexSlot> getAllAvailableSexPositions() {
 		Set<SexSlot> positions = new HashSet<>(getSlotTargets().keySet());
 		
-		getSlotTargets().entrySet().stream().forEach(e -> positions.addAll(e.getValue().keySet()));
+		getSlotTargets().values().forEach(v->positions.addAll(v.keySet()));
 		
 		return positions;
 	}

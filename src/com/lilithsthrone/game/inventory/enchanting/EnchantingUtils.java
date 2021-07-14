@@ -192,8 +192,8 @@ public class EnchantingUtils {
 	
 	
 	
-	private static Set<TFModifier> freePrimaryModifiers = Util.newHashSetOfValues(TFModifier.TF_MOD_WETNESS, TFModifier.TF_MILK, TFModifier.TF_MILK_CROTCH, TFModifier.TF_CUM, TFModifier.TF_GIRLCUM);
-	private static Set<TFModifier> freeSecondaryModifiers = Util.newHashSetOfValues(TFModifier.TF_MOD_WETNESS, TFModifier.TF_MOD_REGENERATION, TFModifier.TF_MOD_CUM_EXPULSION);
+	private static final Set<TFModifier> freePrimaryModifiers = Set.of(TFModifier.TF_MOD_WETNESS,TFModifier.TF_MILK,TFModifier.TF_MILK_CROTCH,TFModifier.TF_CUM,TFModifier.TF_GIRLCUM);
+	private static final Set<TFModifier> freeSecondaryModifiers = Set.of(TFModifier.TF_MOD_WETNESS,TFModifier.TF_MOD_REGENERATION,TFModifier.TF_MOD_CUM_EXPULSION);
 	
 	private static boolean isEffectFreeForWaterSchool(ItemEffect effect) {
 		return freePrimaryModifiers.contains(effect.getPrimaryModifier())

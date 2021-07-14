@@ -415,7 +415,7 @@ public class RatWarrensCaptiveDialogue {
 				if(spitOnAsshole) {
 					Map<GameCharacter, Map<SexAreaInterface, Map<GameCharacter, Set<LubricationType>>>> map = new HashMap<>();
 					map.put(Main.game.getPlayer(), new HashMap<>());
-					map.get(Main.game.getPlayer()).put(SexAreaOrifice.ANUS, Map.of(getMurk(),Util.newHashSetOfValues(LubricationType.SALIVA)));
+					map.get(Main.game.getPlayer()).put(SexAreaOrifice.ANUS, Map.of(getMurk(),Set.of(LubricationType.SALIVA)));
 					return map;
 				}
 				return super.getStartingWetAreas();
