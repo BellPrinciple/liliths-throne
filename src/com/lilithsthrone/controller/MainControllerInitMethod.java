@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import static java.util.Map.entry;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.events.EventTarget;
@@ -6604,52 +6605,52 @@ public class MainControllerInitMethod {
 				}
 			}
 			
-			Map<String, PropertyValue> settingsMap = Util.newHashMapOfValues(
-					new Value<>("ENCHANTMENT_LIMITS", PropertyValue.enchantmentLimits),
-					new Value<>("LEVEL_DRAIN", PropertyValue.levelDrain),
-					new Value<>("ARTWORK", PropertyValue.artwork),
-					new Value<>("THUMBNAIL", PropertyValue.thumbnail),
-					new Value<>("SILLY", PropertyValue.sillyMode),
-					new Value<>("WEATHER_INTERRUPTION", PropertyValue.weatherInterruptions),
-					new Value<>("DIALOGUE_COPY", PropertyValue.automaticDialogueCopy),
-					new Value<>("AUTO_SEX_CLOTHING_STRIP", PropertyValue.autoSexStrip),
-					new Value<>("AUTO_SEX_CLOTHING_MANAGEMENT", PropertyValue.autoSexClothingManagement),
-					new Value<>("NON_CON", PropertyValue.nonConContent),
-					new Value<>("SADISTIC_SEX", PropertyValue.sadisticSexContent),
-					new Value<>("VOLUNTARY_NTR", PropertyValue.voluntaryNTR),
-					new Value<>("INVOLUNTARY_NTR", PropertyValue.involuntaryNTR),
-					new Value<>("INCEST", PropertyValue.incestContent),
-					new Value<>("LACTATION", PropertyValue.lactationContent),
-					new Value<>("CUM_REGENERATION", PropertyValue.cumRegenerationContent),
-					new Value<>("URETHRAL", PropertyValue.urethralContent),
-					new Value<>("NIPPLE_PEN", PropertyValue.nipplePenContent),
-					new Value<>("HAIR_FACIAL", PropertyValue.facialHairContent),
-					new Value<>("ANAL", PropertyValue.analContent),
-					new Value<>("GAPE", PropertyValue.gapeContent),
-					new Value<>("PENETRATION_LIMITATION", PropertyValue.penetrationLimitations),
-					new Value<>("PENETRATION_LIMITATION_DYNAMIC", PropertyValue.elasticityAffectDepth),
-					new Value<>("FOOT", PropertyValue.footContent),
-					new Value<>("ARMPIT", PropertyValue.armpitContent),
-					new Value<>("FUTA_BALLS", PropertyValue.futanariTesticles),
-					new Value<>("CLOACA", PropertyValue.bipedalCloaca),
-					new Value<>("COMPANION", PropertyValue.companionContent),
-					new Value<>("BAD_END", PropertyValue.badEndContent),
-					new Value<>("AGE", PropertyValue.ageContent),
-					new Value<>("LIPSTICK_MARKING", PropertyValue.lipstickMarkingContent),
-					new Value<>("HAIR_PUBIC", PropertyValue.pubicHairContent),
-					new Value<>("HAIR_BODY", PropertyValue.bodyHairContent),
-					new Value<>("HAIR_ASS", PropertyValue.assHairContent),
-					new Value<>("FEMININE_BEARD", PropertyValue.feminineBeardsContent),
-					new Value<>("FURRY_HAIR", PropertyValue.furryHairContent),
-					new Value<>("SCALY_HAIR", PropertyValue.scalyHairContent),
-					new Value<>("FURRY_TAIL_PENETRATION", PropertyValue.furryTailPenetrationContent),
-					new Value<>("INFLATION_CONTENT", PropertyValue.inflationContent),
-					new Value<>("SPITTING_ENABLED", PropertyValue.spittingEnabled),
-					new Value<>("OPPORTUNISTIC_ATTACKERS", PropertyValue.opportunisticAttackers),
-					new Value<>("SHARED_ENCYCLOPEDIA", PropertyValue.sharedEncyclopedia)
+			Map<String,PropertyValue> settingsMap = Map.ofEntries(
+					entry("ENCHANTMENT_LIMITS", PropertyValue.enchantmentLimits),
+					entry("LEVEL_DRAIN", PropertyValue.levelDrain),
+					entry("ARTWORK", PropertyValue.artwork),
+					entry("THUMBNAIL", PropertyValue.thumbnail),
+					entry("SILLY", PropertyValue.sillyMode),
+					entry("WEATHER_INTERRUPTION", PropertyValue.weatherInterruptions),
+					entry("DIALOGUE_COPY", PropertyValue.automaticDialogueCopy),
+					entry("AUTO_SEX_CLOTHING_STRIP", PropertyValue.autoSexStrip),
+					entry("AUTO_SEX_CLOTHING_MANAGEMENT", PropertyValue.autoSexClothingManagement),
+					entry("NON_CON", PropertyValue.nonConContent),
+					entry("SADISTIC_SEX", PropertyValue.sadisticSexContent),
+					entry("VOLUNTARY_NTR", PropertyValue.voluntaryNTR),
+					entry("INVOLUNTARY_NTR", PropertyValue.involuntaryNTR),
+					entry("INCEST", PropertyValue.incestContent),
+					entry("LACTATION", PropertyValue.lactationContent),
+					entry("CUM_REGENERATION", PropertyValue.cumRegenerationContent),
+					entry("URETHRAL", PropertyValue.urethralContent),
+					entry("NIPPLE_PEN", PropertyValue.nipplePenContent),
+					entry("HAIR_FACIAL", PropertyValue.facialHairContent),
+					entry("ANAL", PropertyValue.analContent),
+					entry("GAPE", PropertyValue.gapeContent),
+					entry("PENETRATION_LIMITATION", PropertyValue.penetrationLimitations),
+					entry("PENETRATION_LIMITATION_DYNAMIC", PropertyValue.elasticityAffectDepth),
+					entry("FOOT", PropertyValue.footContent),
+					entry("ARMPIT", PropertyValue.armpitContent),
+					entry("FUTA_BALLS", PropertyValue.futanariTesticles),
+					entry("CLOACA", PropertyValue.bipedalCloaca),
+					entry("COMPANION", PropertyValue.companionContent),
+					entry("BAD_END", PropertyValue.badEndContent),
+					entry("AGE", PropertyValue.ageContent),
+					entry("LIPSTICK_MARKING", PropertyValue.lipstickMarkingContent),
+					entry("HAIR_PUBIC", PropertyValue.pubicHairContent),
+					entry("HAIR_BODY", PropertyValue.bodyHairContent),
+					entry("HAIR_ASS", PropertyValue.assHairContent),
+					entry("FEMININE_BEARD", PropertyValue.feminineBeardsContent),
+					entry("FURRY_HAIR", PropertyValue.furryHairContent),
+					entry("SCALY_HAIR", PropertyValue.scalyHairContent),
+					entry("FURRY_TAIL_PENETRATION", PropertyValue.furryTailPenetrationContent),
+					entry("INFLATION_CONTENT", PropertyValue.inflationContent),
+					entry("SPITTING_ENABLED", PropertyValue.spittingEnabled),
+					entry("OPPORTUNISTIC_ATTACKERS", PropertyValue.opportunisticAttackers),
+					entry("SHARED_ENCYCLOPEDIA", PropertyValue.sharedEncyclopedia)
 					);
 			
-			for(Entry<String, PropertyValue> entry : settingsMap.entrySet()) {
+			for(var entry : settingsMap.entrySet()) {
 				createToggleListener(entry.getKey()+"_ON", entry.getValue(), true);
 				createToggleListener(entry.getKey()+"_OFF", entry.getValue(), false);
 			}

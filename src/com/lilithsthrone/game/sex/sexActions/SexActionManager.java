@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import static java.util.Map.entry;
 
 import com.lilithsthrone.game.sex.sexActions.baseActions.ClitAnus;
 import com.lilithsthrone.game.sex.sexActions.baseActions.ClitClit;
@@ -160,99 +161,99 @@ public class SexActionManager {
 
 		// Add in hard-coded sex actions:
 		
-		Map<String, Field[]> sexActionClassIdToFields = Util.newHashMapOfValues(
-				new Value<>("PositioningMenu", PositioningMenu.class.getFields()),
-				new Value<>("GenericPositioning", GenericPositioning.class.getFields()),
-				
-				new Value<>("GenericActions", GenericActions.class.getFields()),
-				new Value<>("GenericOrgasms", GenericOrgasms.class.getFields()),
-				new Value<>("PlayerTalk", PlayerTalk.class.getFields()),
-				new Value<>("PartnerTalk", PartnerTalk.class.getFields()),
-				new Value<>("GenericTalk", GenericTalk.class.getFields()),
+		Map<String, Field[]> sexActionClassIdToFields = Map.<String,Field[]>ofEntries(
+				entry("PositioningMenu", PositioningMenu.class.getFields()),
+				entry("GenericPositioning", GenericPositioning.class.getFields()),
+
+				entry("GenericActions", GenericActions.class.getFields()),
+				entry("GenericOrgasms", GenericOrgasms.class.getFields()),
+				entry("PlayerTalk", PlayerTalk.class.getFields()),
+				entry("PartnerTalk", PartnerTalk.class.getFields()),
+				entry("GenericTalk", GenericTalk.class.getFields()),
 
 				// Sadistic actions:
-				new Value<>("SadisticActions", SadisticActions.class.getFields()),
-				
+				entry("SadisticActions", SadisticActions.class.getFields()),
+
 				// Finger actions:
-				new Value<>("FingerAnus", FingerAnus.class.getFields()),
-				new Value<>("FingerBreasts", FingerBreasts.class.getFields()),
-				new Value<>("FingerBreastsCrotch", FingerBreastsCrotch.class.getFields()),
-				new Value<>("FingerMouth", FingerMouth.class.getFields()),
-				new Value<>("FingerNipple", FingerNipple.class.getFields()),
-				new Value<>("FingerNippleCrotch", FingerNippleCrotch.class.getFields()),
-				new Value<>("FingerVagina", FingerVagina.class.getFields()),
-				new Value<>("FingerClit", FingerClit.class.getFields()),
-				new Value<>("FingerPenis", FingerPenis.class.getFields()),
+				entry("FingerAnus", FingerAnus.class.getFields()),
+				entry("FingerBreasts", FingerBreasts.class.getFields()),
+				entry("FingerBreastsCrotch", FingerBreastsCrotch.class.getFields()),
+				entry("FingerMouth", FingerMouth.class.getFields()),
+				entry("FingerNipple", FingerNipple.class.getFields()),
+				entry("FingerNippleCrotch", FingerNippleCrotch.class.getFields()),
+				entry("FingerVagina", FingerVagina.class.getFields()),
+				entry("FingerClit", FingerClit.class.getFields()),
+				entry("FingerPenis", FingerPenis.class.getFields()),
 
 				// Oral actions:
-				new Value<>("TongueMouth", TongueMouth.class.getFields()),
-				new Value<>("TongueAnus", TongueAnus.class.getFields()),
-				new Value<>("TongueVagina", TongueVagina.class.getFields()),
-				new Value<>("ClitMouth", ClitMouth.class.getFields()),
-				new Value<>("TongueMound", TongueMound.class.getFields()),
-				new Value<>("TongueBreasts", TongueBreasts.class.getFields()),
-				new Value<>("TongueBreastsCrotch", TongueBreastsCrotch.class.getFields()),
-				new Value<>("TongueNipple", TongueNipple.class.getFields()),
-				new Value<>("TongueNippleCrotch", TongueNippleCrotch.class.getFields()),
-				new Value<>("FootMouth", FootMouth.class.getFields()),
-				new Value<>("PenisMouth", PenisMouth.class.getFields()),
-				new Value<>("TongueArmpits", TongueArmpit.class.getFields()),
+				entry("TongueMouth", TongueMouth.class.getFields()),
+				entry("TongueAnus", TongueAnus.class.getFields()),
+				entry("TongueVagina", TongueVagina.class.getFields()),
+				entry("ClitMouth", ClitMouth.class.getFields()),
+				entry("TongueMound", TongueMound.class.getFields()),
+				entry("TongueBreasts", TongueBreasts.class.getFields()),
+				entry("TongueBreastsCrotch", TongueBreastsCrotch.class.getFields()),
+				entry("TongueNipple", TongueNipple.class.getFields()),
+				entry("TongueNippleCrotch", TongueNippleCrotch.class.getFields()),
+				entry("FootMouth", FootMouth.class.getFields()),
+				entry("PenisMouth", PenisMouth.class.getFields()),
+				entry("TongueArmpits", TongueArmpit.class.getFields()),
 
 				// Tail actions:
-				new Value<>("TailAnus", TailAnus.class.getFields()),
-				new Value<>("TailVagina", TailVagina.class.getFields()),
-				new Value<>("TailMouth", TailMouth.class.getFields()),
+				entry("TailAnus", TailAnus.class.getFields()),
+				entry("TailVagina", TailVagina.class.getFields()),
+				entry("TailMouth", TailMouth.class.getFields()),
 
 				// Tentacle actions:
-				new Value<>("TentacleAnus", TentacleAnus.class.getFields()),
-				new Value<>("TentacleVagina", TentacleVagina.class.getFields()),
-				new Value<>("TentacleMouth", TentacleMouth.class.getFields()),
-				
+				entry("TentacleAnus", TentacleAnus.class.getFields()),
+				entry("TentacleVagina", TentacleVagina.class.getFields()),
+				entry("TentacleMouth", TentacleMouth.class.getFields()),
+
 				// Penis actions:
-				new Value<>("PenisAss", PenisAss.class.getFields()),
-				new Value<>("PenisAnus", PenisAnus.class.getFields()),
-				new Value<>("PenisNipple", PenisNipple.class.getFields()),
-				new Value<>("PenisNippleCrotch", PenisNippleCrotch.class.getFields()),
-				new Value<>("PenisVagina", PenisVagina.class.getFields()),
-				new Value<>("PenisBreasts", PenisBreasts.class.getFields()),
-				new Value<>("PenisBreastsCrotch", PenisBreastsCrotch.class.getFields()),
-				new Value<>("PenisThighs", PenisThighs.class.getFields()),
-				new Value<>("PenisFoot", PenisFoot.class.getFields()),
-				new Value<>("PenisFeet", PenisFeet.class.getFields()),
-				new Value<>("PenisUrethraVagina", PenisUrethraVagina.class.getFields()),
-				new Value<>("PenisUrethraPenis", PenisUrethraPenis.class.getFields()),
-				new Value<>("PenisSpinneret", PenisSpinneret.class.getFields()),
-				new Value<>("PenisArmpit", PenisArmpit.class.getFields()),
-				
+				entry("PenisAss", PenisAss.class.getFields()),
+				entry("PenisAnus", PenisAnus.class.getFields()),
+				entry("PenisNipple", PenisNipple.class.getFields()),
+				entry("PenisNippleCrotch", PenisNippleCrotch.class.getFields()),
+				entry("PenisVagina", PenisVagina.class.getFields()),
+				entry("PenisBreasts", PenisBreasts.class.getFields()),
+				entry("PenisBreastsCrotch", PenisBreastsCrotch.class.getFields()),
+				entry("PenisThighs", PenisThighs.class.getFields()),
+				entry("PenisFoot", PenisFoot.class.getFields()),
+				entry("PenisFeet", PenisFeet.class.getFields()),
+				entry("PenisUrethraVagina", PenisUrethraVagina.class.getFields()),
+				entry("PenisUrethraPenis", PenisUrethraPenis.class.getFields()),
+				entry("PenisSpinneret", PenisSpinneret.class.getFields()),
+				entry("PenisArmpit", PenisArmpit.class.getFields()),
+
 				// Vagina/clit actions:
-				new Value<>("ClitClit", ClitClit.class.getFields()),
-				new Value<>("ClitVagina", ClitVagina.class.getFields()),
-				new Value<>("ClitAnus", ClitAnus.class.getFields()),
-		
+				entry("ClitClit", ClitClit.class.getFields()),
+				entry("ClitVagina", ClitVagina.class.getFields()),
+				entry("ClitAnus", ClitAnus.class.getFields()),
+
 				// Self actions
-				new Value<>("SelfNoPen", SelfNoPen.class.getFields()),
-				new Value<>("SelfFingerAnus", SelfFingerAnus.class.getFields()),
-				new Value<>("SelfFingerBreasts", SelfFingerBreasts.class.getFields()),
-				new Value<>("SelfFingerCrotchNipple", SelfFingerCrotchNipple.class.getFields()),
-				new Value<>("SelfFingerMouth", SelfFingerMouth.class.getFields()),
-				new Value<>("SelfFingerNipple", SelfFingerNipple.class.getFields()),
-				new Value<>("SelfFingerPenis", SelfFingerPenis.class.getFields()),
-				new Value<>("SelfFingerVagina", SelfFingerVagina.class.getFields()),
-				
-				new Value<>("SelfPenisAnus", SelfPenisAnus.class.getFields()),
-				new Value<>("SelfPenisMouth", SelfPenisMouth.class.getFields()),
-				new Value<>("SelfPenisNipple", SelfPenisNipple.class.getFields()),
-				new Value<>("SelfPenisVagina", SelfPenisVagina.class.getFields()),
+				entry("SelfNoPen", SelfNoPen.class.getFields()),
+				entry("SelfFingerAnus", SelfFingerAnus.class.getFields()),
+				entry("SelfFingerBreasts", SelfFingerBreasts.class.getFields()),
+				entry("SelfFingerCrotchNipple", SelfFingerCrotchNipple.class.getFields()),
+				entry("SelfFingerMouth", SelfFingerMouth.class.getFields()),
+				entry("SelfFingerNipple", SelfFingerNipple.class.getFields()),
+				entry("SelfFingerPenis", SelfFingerPenis.class.getFields()),
+				entry("SelfFingerVagina", SelfFingerVagina.class.getFields()),
 
-				new Value<>("SelfTailAnus", SelfTailAnus.class.getFields()),
-				new Value<>("SelfTailMouth", SelfTailMouth.class.getFields()),
-				new Value<>("SelfTailNipple", SelfTailNipple.class.getFields()),
-				new Value<>("SelfTailVagina", SelfTailVagina.class.getFields()),
+				entry("SelfPenisAnus", SelfPenisAnus.class.getFields()),
+				entry("SelfPenisMouth", SelfPenisMouth.class.getFields()),
+				entry("SelfPenisNipple", SelfPenisNipple.class.getFields()),
+				entry("SelfPenisVagina", SelfPenisVagina.class.getFields()),
 
-				new Value<>("SelfTongueAnus", SelfTongueAnus.class.getFields()),
-				new Value<>("SelfTongueMouth", SelfTongueMouth.class.getFields()),
-				new Value<>("SelfTongueNipple", SelfTongueNipple.class.getFields()),
-				new Value<>("SelfTongueVagina", SelfTongueVagina.class.getFields()));
+				entry("SelfTailAnus", SelfTailAnus.class.getFields()),
+				entry("SelfTailMouth", SelfTailMouth.class.getFields()),
+				entry("SelfTailNipple", SelfTailNipple.class.getFields()),
+				entry("SelfTailVagina", SelfTailVagina.class.getFields()),
+
+				entry("SelfTongueAnus", SelfTongueAnus.class.getFields()),
+				entry("SelfTongueMouth", SelfTongueMouth.class.getFields()),
+				entry("SelfTongueNipple", SelfTongueNipple.class.getFields()),
+				entry("SelfTongueVagina", SelfTongueVagina.class.getFields()));
 				
 		for(Entry<String, Field[]> entry : sexActionClassIdToFields.entrySet()) {
 			for(Field f : entry.getValue()) {

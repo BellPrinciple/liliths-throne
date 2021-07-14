@@ -333,9 +333,13 @@ public class Util {
 		}
 	}
 
+	@Deprecated
 	@SafeVarargs
-	public static <T, S> Map<T, S> newHashMapOfValues(Map.Entry<T, S>... values) {
-		return Map.ofEntries(values);
+	public static <T, S> Map<T, S> newHashMapOfValues(Value<T, S>... values) {
+		var r = new HashMap<T,S>();
+		for(var v : values)
+			r.put(v.key,v.value);
+		return r;
 	}
 
 

@@ -508,23 +508,23 @@ public class Perk {
 			PerkCategory.JOB,
 			"perks/jobs/elder_lilin",
 			PresetColour.RACE_LILIN,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.DAMAGE_UNARMED, 100),
-					new Value<>(Attribute.DAMAGE_MELEE_WEAPON, 100),
-					new Value<>(Attribute.DAMAGE_RANGED_WEAPON, 100),
-					new Value<>(Attribute.DAMAGE_SPELLS, 100),
-					new Value<>(Attribute.SPELL_COST_MODIFIER, 100),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 100),
-					new Value<>(Attribute.DAMAGE_FIRE, 100),
-					new Value<>(Attribute.DAMAGE_ICE, 100),
-					new Value<>(Attribute.DAMAGE_POISON, 100),
-					new Value<>(Attribute.DAMAGE_LUST, 100),
-					new Value<>(Attribute.ENERGY_SHIELDING, 250),
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 250),
-					new Value<>(Attribute.RESISTANCE_FIRE, 250),
-					new Value<>(Attribute.RESISTANCE_ICE, 250),
-					new Value<>(Attribute.RESISTANCE_POISON, 250),
-					new Value<>(Attribute.RESISTANCE_LUST, 250)),
+			Map.ofEntries(
+					Map.entry(Attribute.DAMAGE_UNARMED, 100),
+					Map.entry(Attribute.DAMAGE_MELEE_WEAPON, 100),
+					Map.entry(Attribute.DAMAGE_RANGED_WEAPON, 100),
+					Map.entry(Attribute.DAMAGE_SPELLS, 100),
+					Map.entry(Attribute.SPELL_COST_MODIFIER, 100),
+					Map.entry(Attribute.DAMAGE_PHYSICAL, 100),
+					Map.entry(Attribute.DAMAGE_FIRE, 100),
+					Map.entry(Attribute.DAMAGE_ICE, 100),
+					Map.entry(Attribute.DAMAGE_POISON, 100),
+					Map.entry(Attribute.DAMAGE_LUST, 100),
+					Map.entry(Attribute.ENERGY_SHIELDING, 250),
+					Map.entry(Attribute.RESISTANCE_PHYSICAL, 250),
+					Map.entry(Attribute.RESISTANCE_FIRE, 250),
+					Map.entry(Attribute.RESISTANCE_ICE, 250),
+					Map.entry(Attribute.RESISTANCE_POISON, 250),
+					Map.entry(Attribute.RESISTANCE_LUST, 250)),
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1750,7 +1750,7 @@ public class Perk {
 //			PerkCategory.ARCANE,
 //			"perks/misc_observant",
 //			PresetColour.GENERIC_ARCANE,
-//			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 5)),
+//			Map.of(Attribute.DAMAGE_LUST, 5),
 //			Util.newArrayListOfValues("<span style='color:"+ PresetColour.GENERIC_SEX.toWebHexString()+ ";'>Telepathic seduction</span>")) {
 //		@Override
 //		public String applyPerkGained(GameCharacter character) {
@@ -1778,7 +1778,7 @@ public class Perk {
 //			PerkCategory.ARCANE,
 //			"perks/arcane_power_1",
 //			PresetColour.ATTRIBUTE_ARCANE,
-//			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_SPELLS, 5)), null) {
+//			Map.of(Attribute.DAMAGE_SPELLS, 5), null) {
 //
 //		@Override
 //		public String getDescription(GameCharacter owner) {
@@ -1794,7 +1794,7 @@ public class Perk {
 //			PerkCategory.ARCANE,
 //			"perks/arcane_power_2",
 //			PresetColour.ATTRIBUTE_ARCANE,
-//			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_SPELLS, 10)), null) {
+//			Map.of(Attribute.DAMAGE_SPELLS, 10), null) {
 //
 //		@Override
 //		public String getDescription(GameCharacter owner) {
@@ -1810,7 +1810,7 @@ public class Perk {
 //			PerkCategory.ARCANE,
 //			"perks/arcane_power_3",
 //			PresetColour.ATTRIBUTE_ARCANE,
-//			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_SPELLS, 15)), null) {
+//			Map.of(Attribute.DAMAGE_SPELLS, 15), null) {
 //
 //		@Override
 //		public String getDescription(GameCharacter owner) {
@@ -2984,10 +2984,10 @@ public class Perk {
 //			PerkCategory.JOB,
 //			"combat/spell/elemental_earth",
 //			PresetColour.SPELL_SCHOOL_EARTH,
-//			Util.newHashMapOfValues(
-//					new Value<>(Attribute.MAJOR_PHYSIQUE, 50),
-//					new Value<>(Attribute.DAMAGE_PHYSICAL, 50),
-//					new Value<>(Attribute.RESISTANCE_PHYSICAL, 50)),
+//			Map.of(
+//					Attribute.MAJOR_PHYSIQUE, 50,
+//					Attribute.DAMAGE_PHYSICAL, 50,
+//					Attribute.RESISTANCE_PHYSICAL, 50),
 //			null) {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
@@ -3002,10 +3002,10 @@ public class Perk {
 //			PerkCategory.JOB,
 //			"combat/spell/elemental_fire",
 //			PresetColour.SPELL_SCHOOL_FIRE,
-//			Util.newHashMapOfValues(
-//					new Value<>(Attribute.MAJOR_PHYSIQUE, 10),
-//					new Value<>(Attribute.DAMAGE_FIRE, 50),
-//					new Value<>(Attribute.RESISTANCE_FIRE, 50)),
+//			Map.of(
+//					Attribute.MAJOR_PHYSIQUE, 10,
+//					Attribute.DAMAGE_FIRE, 50,
+//					Attribute.RESISTANCE_FIRE, 50),
 //			null) {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
@@ -3020,10 +3020,10 @@ public class Perk {
 //			PerkCategory.JOB,
 //			"combat/spell/elemental_water",
 //			PresetColour.SPELL_SCHOOL_WATER,
-//			Util.newHashMapOfValues(
-//					new Value<>(Attribute.MAJOR_PHYSIQUE, 20),
-//					new Value<>(Attribute.DAMAGE_ICE, 50),
-//					new Value<>(Attribute.RESISTANCE_ICE, 50)),
+//			Map.of(
+//					Attribute.MAJOR_PHYSIQUE, 20,
+//					Attribute.DAMAGE_ICE, 50,
+//					Attribute.RESISTANCE_ICE, 50),
 //			null) {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
@@ -3038,10 +3038,10 @@ public class Perk {
 //			PerkCategory.JOB,
 //			"combat/spell/elemental_air",
 //			PresetColour.SPELL_SCHOOL_AIR,
-//			Util.newHashMapOfValues(
-//					new Value<>(Attribute.MAJOR_PHYSIQUE, 5),
-//					new Value<>(Attribute.DAMAGE_POISON, 50),
-//					new Value<>(Attribute.RESISTANCE_POISON, 50)),
+//			Map.of(
+//					Attribute.MAJOR_PHYSIQUE, 5,
+//					Attribute.DAMAGE_POISON, 50,
+//					Attribute.RESISTANCE_POISON, 50),
 //			null) {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
@@ -3056,12 +3056,12 @@ public class Perk {
 //			PerkCategory.JOB,
 //			"combat/spell/elemental_arcane",
 //			PresetColour.SPELL_SCHOOL_AIR,
-//			Util.newHashMapOfValues(
-//					new Value<>(Attribute.MAJOR_PHYSIQUE, 5),
-//					new Value<>(Attribute.DAMAGE_LUST, 50),
-//					new Value<>(Attribute.DAMAGE_SPELLS, 25),
-//					new Value<>(Attribute.SPELL_COST_MODIFIER, 25),
-//					new Value<>(Attribute.RESISTANCE_LUST, -50)),
+//			Map.of(
+//					Attribute.MAJOR_PHYSIQUE, 5,
+//					Attribute.DAMAGE_LUST, 50,
+//					Attribute.DAMAGE_SPELLS, 25,
+//					Attribute.SPELL_COST_MODIFIER, 25,
+//					Attribute.RESISTANCE_LUST, -50),
 //			null) {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
@@ -3092,8 +3092,8 @@ public class Perk {
 //			PerkCategory.LUST,
 //			"perks/elemental/coreCorruption",
 //			PresetColour.GENERIC_ARCANE,
-//			Util.newHashMapOfValues(
-//					new Value<>(Attribute.MAJOR_CORRUPTION, 100)
+//			Map.of(
+//					Attribute.MAJOR_CORRUPTION, 100
 //					), null) {
 //
 //		@Override
