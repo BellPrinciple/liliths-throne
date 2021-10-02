@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
-import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Function;
@@ -51,7 +50,7 @@ import javafx.scene.paint.Color;
  */
 public class Util {
 	
-	public static Random random = new Random();
+	public static final Random random = new Random();
 
 	private static StringBuilder utilitiesStringBuilder = new StringBuilder();
 	
@@ -453,28 +452,10 @@ public class Util {
 	public static <T> T getRandomObjectFromWeightedMap(Map<T, Integer> map) {
 		return getRandomObjectFromWeightedMap(map, Util.random);
 	}
-	
-	public static <T> T getRandomObjectFromWeightedMap(Map<T, Integer> map, Random rnd) {
-		int total = 0;
-		for(int i : map.values()) {
-			total+=i;
-		}
-		
-		if(total==0) {
-			return null;
-		}
-		
-		int choice = rnd.nextInt(total) + 1;
-		
-		total = 0;
-		for(Entry<T, Integer> entry : map.entrySet()) {
-			total+=entry.getValue();
-			if(choice<=total) {
-				return entry.getKey();
-			}
-		}
 
-		return null;
+	@Deprecated
+	public static <T> T getRandomObjectFromWeightedMap(Map<T, Integer> map, Random rnd) {
+		return rnd.of(map);
 	}
 	
 	public static <T> T getRandomObjectFromWeightedFloatMap(Map<T, Float> map) {

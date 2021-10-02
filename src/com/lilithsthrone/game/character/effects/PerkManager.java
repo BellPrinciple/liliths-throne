@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
@@ -15,6 +14,7 @@ import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Pathing;
+import com.lilithsthrone.utils.Random;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
@@ -467,7 +467,7 @@ public enum PerkManager {
 	}
 	
 	public static void initialiseSpecialPerksUponCreation(GameCharacter character) {
-		Random rnd = new Random((character.getId()).hashCode());
+		Random rnd = new Random(character.getId().hashCode());
 
 		// Add a unique background perk based on weighting:
 		if(!character.isUnique() && !(character.isElemental()) && rnd.nextInt(100)<=50) {
@@ -482,7 +482,7 @@ public enum PerkManager {
 						new Value<>(PerkCategory.ARCANE, 1));
 			}
 			
-			PerkCategory pc = Util.getRandomObjectFromWeightedMap(perkWeightingMap, rnd);
+			PerkCategory pc = rnd.of(perkWeightingMap);
 			
 			Set<AbstractPerk> specialPerks = character.getSpecialPerks();
 			for(AbstractPerk perk : new HashSet<>(specialPerks)) {
@@ -614,7 +614,7 @@ public enum PerkManager {
 				List<TreeEntry<PerkCategory, AbstractPerk>> traits = new ArrayList<>();
 				while(character.getPerkPoints()>0) {
 					PerkCategory category;
-					category = Util.getRandomObjectFromWeightedMap(perkWeightingMap, rnd);
+					category = rnd.of(perkWeightingMap);
 					Map<TreeEntry<PerkCategory, AbstractPerk>, Integer> weightedAvailabilityMap = new HashMap<>();
 					
 					for(Map<PerkCategory, List<TreeEntry<PerkCategory, AbstractPerk>>> map : MANAGER.perkTree.values()) {
@@ -637,7 +637,7 @@ public enum PerkManager {
 							break;
 						}
 					} else {
-						TreeEntry<PerkCategory, AbstractPerk> entryToAdd = Util.getRandomObjectFromWeightedMap(weightedAvailabilityMap, rnd);
+						TreeEntry<PerkCategory, AbstractPerk> entryToAdd = rnd.of(weightedAvailabilityMap);
 						if(character.addPerk(entryToAdd.getRow(), entryToAdd.getEntry())) {
 							perksAdded.add(entryToAdd.getEntry());
 						}

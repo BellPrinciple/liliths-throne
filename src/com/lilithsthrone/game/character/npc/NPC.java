@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
 
 import org.w3c.dom.Document;
@@ -105,6 +104,7 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionInterface;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Random;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.XMLSaving;
@@ -1353,7 +1353,8 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		boolean skipGenitalsTF = false;
 		
 		Body body;
-		Util.random = new Random((this.getId()).hashCode()); // Set random with seed of this character's id hash so that it's consistent across multiple calls (as some methods inside generateBody() use random).
+		var seed = Util.random.nextLong();
+		Util.random.setSeed((this.getId()).hashCode()); // Set random with seed of this character's id hash so that it's consistent across multiple calls (as some methods inside generateBody() use random).
 		if(cannotTransformPreference) { // As demons and angels cannot be created via transformation, use the target's current body as Subspecies preference (so that gender changes use that Subspecies' body parts) 
 			body = Main.game.getCharacterUtils().generateBody(null, this.getGenderPreference(), target.getSubspecies(), target.getRaceStage());
 			
@@ -1383,7 +1384,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			
 			body = Main.game.getCharacterUtils().generateBody(null, this.getGenderPreference(), this.getSubspeciesPreference(), targetedRaceStage);
 		}
-		Util.random = new Random();
+		Util.random.setSeed(seed);
 
 		boolean vaginaSet = target.getVaginaType()==body.getVagina().getType();
 		boolean penisSet = target.getPenisType()==body.getPenis().getType();
