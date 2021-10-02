@@ -111,7 +111,6 @@ import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Builder;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.XMLSaving;
@@ -176,7 +175,7 @@ public class Body implements XMLSaving {
 	private boolean takesAfterMother = true;
 	
 	
-	public static class BodyBuilder implements Builder<Body> {
+	public static class BodyBuilder {
 		// Required parameters:
 		private final Arm arm;
 		private final Ass ass;
@@ -272,7 +271,6 @@ public class Body implements XMLSaving {
 			return this;
 		}
 
-		@Override
 		public Body build() {
 			return new Body(this);
 		}
