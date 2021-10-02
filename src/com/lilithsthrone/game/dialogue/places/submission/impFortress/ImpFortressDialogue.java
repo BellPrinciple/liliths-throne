@@ -295,7 +295,7 @@ public class ImpFortressDialogue {
 				imp.setGenericName("alpha-imp archer");
 				imp.setLevel(8+Util.random.nextInt(3)); // 8-10
 				Main.game.addNPC(imp, false);
-				imp.equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bow_shortbow", Util.randomItemFrom(new DamageType[] {DamageType.POISON, DamageType.FIRE})));
+				imp.equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bow_shortbow", Util.random.ofValues(DamageType.POISON, DamageType.FIRE)));
 				impGroup.add(imp);
 				
 				for(GameCharacter impCharacter : impGroup) {
@@ -362,7 +362,7 @@ public class ImpFortressDialogue {
 				imp.setGenericName("alpha-imp archer");
 				imp.setLevel(8+Util.random.nextInt(3)); // 8-10
 				Main.game.addNPC(imp, false);
-				imp.equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bow_shortbow", Util.randomItemFrom(new DamageType[] {DamageType.POISON, DamageType.FIRE})));
+				imp.equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bow_shortbow", Util.random.ofValues(DamageType.POISON, DamageType.FIRE)));
 				impGroup.add(imp);
 				
 				for(GameCharacter impCharacter : impGroup) {
@@ -626,7 +626,7 @@ public class ImpFortressDialogue {
 				imp.setGenericName("alpha-imp archer");
 				imp.setLevel(8+Util.random.nextInt(3)); // 8-10
 				Main.game.addNPC(imp, false);
-				imp.equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bow_shortbow", Util.randomItemFrom(new DamageType[] {DamageType.POISON, DamageType.FIRE})));
+				imp.equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bow_shortbow", Util.random.ofValues(DamageType.POISON, DamageType.FIRE)));
 				impGroup.add(imp);
 				
 				for(GameCharacter impCharacter : impGroup) {

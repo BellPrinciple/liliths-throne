@@ -2495,8 +2495,7 @@ public class CharacterUtils {
 		availableFetishes.removeAll(character.getFetishes(false));
 		availableFetishes.removeAll(Arrays.asList(exclusions));
 		
-		int[] numberProb = new int[] {1, 1, 2, 2, 2, 2, 3, 3, 3, 4, 4, 5};
-		int numberOfFetishes = Util.randomItemFrom(numberProb) - character.getFetishes(false).size();
+		int numberOfFetishes = Util.random.ofValues(1, 1, 2, 2, 2, 2, 3, 3, 3, 4, 4, 5) - character.getFetishes(false).size();
 		
 		int fetishesAssigned = 0;
 		
@@ -2563,10 +2562,8 @@ public class CharacterUtils {
 		}
 
 		// Desires:
-		int[] posDesireProb = new int[] {1, 1, 2, 2, 2, 3, 3};
-		int[] negDesireProb = new int[] {3, 3, 4, 4, 4, 5, 5};
-		int numberOfPositiveDesires = Util.randomItemFrom(posDesireProb);
-		int numberOfNegativeDesires = Util.randomItemFrom(negDesireProb);
+		int numberOfPositiveDesires = Util.random.ofValues(1, 1, 2, 2, 2, 3, 3);
+		int numberOfNegativeDesires = Util.random.ofValues(3, 3, 4, 4, 4, 5, 5);
 		
 		int desiresAssigned = 0;
 		List<Fetish> fetishesLiked = new ArrayList<>(character.getFetishes(false));

@@ -111,7 +111,7 @@ public class RatWarrensCaptiveDialogue {
 			Main.game.addNPC(rat, false);
 			rat.setLevel(4+Util.random.nextInt(5));
 			rat.setLocation(Main.game.getPlayer(), true);
-			adjectives.add(Main.game.getCharacterUtils().setGenericName(rat, Util.randomItemFrom(names), adjectives));
+			adjectives.add(Main.game.getCharacterUtils().setGenericName(rat, Util.random.ofValues(names), adjectives));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

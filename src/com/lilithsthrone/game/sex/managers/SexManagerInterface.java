@@ -559,7 +559,7 @@ public interface SexManagerInterface {
 								"Several members of the crowd cheer you on as you and [npc.name] carry on having sex in front of them.")));
 			
 		} else {
-			GameCharacter target = Util.randomItemFrom(Main.sex.getDominantParticipants(false).keySet());
+			GameCharacter target = Util.random.of(Main.sex.getDominantParticipants(false).keySet());
 			return applyPublicSexFormatting(
 					UtilText.parse(target, Main.sex.getTargetedPartner(target),
 						UtilText.returnStringAtRandom(

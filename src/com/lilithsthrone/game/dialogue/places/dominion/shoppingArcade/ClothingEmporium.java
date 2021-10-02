@@ -1006,7 +1006,7 @@ public class ClothingEmporium {
 						new Value<>(PlaceType.SHOPPING_ARCADE_RALPHS_SHOP, "RALPH"),
 						new Value<>(PlaceType.SHOPPING_ARCADE_RESTAURANT, "RESTAURANT"),
 						new Value<>(PlaceType.SHOPPING_ARCADE_VICKYS_SHOP, "VICKY"));
-				AbstractPlaceType place = Util.randomItemFrom(places.keySet());
+				AbstractPlaceType place = Util.random.of(places.keySet());
 				destination = Main.game.getWorlds().get(WorldType.SHOPPING_ARCADE).getCell(place);
 				Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_WALK_REPEAT_START"));
 				Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_WALK_REPEAT_"+places.get(place)));

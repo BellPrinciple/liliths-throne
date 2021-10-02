@@ -450,7 +450,7 @@ public class Util {
 	}
 	
 	public static <T> T getRandomObjectFromWeightedMap(Map<T, Integer> map) {
-		return getRandomObjectFromWeightedMap(map, Util.random);
+		return random.of(map);
 	}
 
 	@Deprecated
@@ -878,7 +878,7 @@ public class Util {
 					&& openingCurly==closingCurly
 					&& openingSquare==closingSquare) {
 				if(Math.random()<chance) {
-					String word = Util.randomItemFrom(inserts);
+					String word = random.ofValues(inserts);
 					char[] charArray = word.toCharArray();
 					for(int cIndex=charArray.length-1; cIndex>=0; cIndex--) {
 						modifiedSentence.append(charArray[cIndex]);
@@ -982,7 +982,7 @@ public class Util {
 		StringBuilder muteSB = new StringBuilder();
 		for(int i=0; i<length; i++) {
 			if(sexMoans) {
-				muteSB.append(muteSexSounds[random.nextInt(muteSexSounds.length)]+" ");
+				muteSB.append(random.ofValues(muteSexSounds)).append(" ");
 				
 			} else {
 				muteSB.append("... ");
@@ -1014,7 +1014,7 @@ public class Util {
 		int muffles = sentence.split(" ").length/wordToMuffleRatio;
 		StringBuilder muffleSB = new StringBuilder();
 		for(int i=0; i<muffles; i++) {
-			muffleSB.append(muffledSounds[random.nextInt(muffledSounds.length)]);
+			muffleSB.append(random.ofValues(muffledSounds));
 		}
 		muffleSB.delete(0, 1); // Remove space at start
 		return muffleSB.toString();
@@ -1403,19 +1403,23 @@ public class Util {
 		return list.get(Util.random.nextInt(list.size()));
 	}
 
+	@Deprecated
 	public static <Any> Any randomItemFrom(Set<Any> set) {
 		List<Any> list = new ArrayList<>(set);
 		return randomItemFrom(list);
 	}
 
+	@Deprecated
 	public static <Any> Any randomItemFrom(Any[] array) {
 		return array[Util.random.nextInt(array.length)];
 	}
 
+	@Deprecated
 	public static int randomItemFrom(int[] array) {
 		return array[Util.random.nextInt(array.length)];
 	}
 
+	@Deprecated
 	@SafeVarargs
 	public static <Any> Any randomItemFromValues(Any... values) {
 		return values[Util.random.nextInt(values.length)];

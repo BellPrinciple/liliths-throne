@@ -76,7 +76,7 @@ public class LunetteMelee extends NPC {
 	public LunetteMelee(List<String> namePrefixes, String name, boolean isImported) {
 		super(isImported,
 				null, null, "",
-				Util.random.nextInt(100)+18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
+				Util.random.nextInt(100)+18, Util.random.ofValues(Month.values()), 1+Util.random.nextInt(25),
 				30,
 				null, null, null,
 				new CharacterInventory(10),
@@ -118,10 +118,10 @@ public class LunetteMelee extends NPC {
 	@Override
 	public void setupPerks(boolean autoSelectPerks) {
 		this.addSpecialPerk(Perk.SPECIAL_MELEE_EXPERT);
-		this.addSpecialPerk(Util.randomItemFrom(new AbstractPerk[] {
+		this.addSpecialPerk(Util.random.ofValues(
 				Perk.SPECIAL_MARTIAL_BACKGROUND,
 				Perk.SPECIAL_HEALTH_FANATIC
-		}));
+		));
 		PerkManager.initialisePerks(this,
 				Util.newArrayListOfValues(),
 				Util.newHashMapOfValues(
@@ -143,14 +143,13 @@ public class LunetteMelee extends NPC {
 	
 	@Override
 	public void setStartingBody(boolean setPersona) {
-		Gender gender = Util.randomItemFrom(new Gender[] {
+		Gender gender = Util.random.ofValues(
 				Gender.F_P_V_B_FUTANARI,
 				Gender.F_P_V_B_FUTANARI,
 				Gender.F_P_B_SHEMALE,
 				Gender.F_P_B_SHEMALE,
 				Gender.F_V_B_FEMALE,
-				Gender.F_V_B_FEMALE,
-		});
+				Gender.F_V_B_FEMALE);
 		
 		this.setBody(gender, Subspecies.DEMON, RaceStage.GREATER, true);
 		this.setWingType(WingType.NONE);
@@ -246,7 +245,7 @@ public class LunetteMelee extends NPC {
 		
 		Util.random.setSeed(this.getDayOfBirth()*this.getBirthMonth().getValue()); // Set seed based on birthday so that the clothing is always the same
 		
-		Colour clothingColour = Util.randomItemFromValues(
+		Colour clothingColour = Util.random.ofValues(
 				PresetColour.CLOTHING_BLACK,
 				PresetColour.CLOTHING_BLACK,
 				PresetColour.CLOTHING_BLACK_JET,
@@ -256,13 +255,13 @@ public class LunetteMelee extends NPC {
 				PresetColour.CLOTHING_RED_VERY_DARK
 		);
 		
-		Colour accessoryColour = Util.randomItemFromValues(
+		Colour accessoryColour = Util.random.ofValues(
 				PresetColour.CLOTHING_BLACK_STEEL,
 				PresetColour.CLOTHING_SILVER
 		);
 
 		if(!this.hasFetish(Fetish.FETISH_EXHIBITIONIST)) {
-			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(Util.randomItemFromValues(ClothingType.CHEST_TUBE_TOP, ClothingType.CHEST_SPORTS_BRA), clothingColour, false), true, this);
+			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(Util.random.ofValues(ClothingType.CHEST_TUBE_TOP, ClothingType.CHEST_SPORTS_BRA), clothingColour, false), true, this);
 		}
 
 		if(Math.random()<0.5f) {
@@ -282,7 +281,7 @@ public class LunetteMelee extends NPC {
 		if(this.hasFetish(Fetish.FETISH_ANAL_RECEIVING) && Math.random()<0.1f) {
 			if(Math.random()<0.5f) {
 				this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(
-						Util.randomItemFromValues("innoxia_buttPlugs_butt_plug_jewel", "innoxia_buttPlugs_butt_plug_heart"), accessoryColour, clothingColour, accessoryColour, false), true, this);
+						Util.random.ofValues("innoxia_buttPlugs_butt_plug_jewel", "innoxia_buttPlugs_butt_plug_heart"), accessoryColour, clothingColour, accessoryColour, false), true, this);
 			} else {
 				this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_anus_ribbed_dildo", PresetColour.CLOTHING_BLACK, false), true, this);
 			}
@@ -290,7 +289,7 @@ public class LunetteMelee extends NPC {
 		
 		// Piercings:
 		if(this.isPiercedEar()) {
-			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(Util.randomItemFromValues("innoxia_piercing_ear_ball_studs", "innoxia_piercing_ear_ring"), accessoryColour, false), true, this);
+			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(Util.random.ofValues("innoxia_piercing_ear_ball_studs", "innoxia_piercing_ear_ring"), accessoryColour, false), true, this);
 		}
 		if(this.isPiercedNose() && Math.random()<0.5f) {
 			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_piercing_nose_ring", accessoryColour, false), true, this);
@@ -302,11 +301,11 @@ public class LunetteMelee extends NPC {
 			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_piercing_lip_double_ring", accessoryColour, false), true, this);
 		}
 		if(this.isPiercedNavel() && Math.random()<0.5f) {
-			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(Util.randomItemFromValues("innoxia_piercing_gemstone_barbell", "innoxia_piercing_ringed_barbell"), accessoryColour, false), true, this);
+			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(Util.random.ofValues("innoxia_piercing_gemstone_barbell", "innoxia_piercing_ringed_barbell"), accessoryColour, false), true, this);
 		}
 		if(this.isPiercedNipple() && this.hasFetish(Fetish.FETISH_EXHIBITIONIST)) {
 			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(
-					Util.randomItemFromValues("innoxia_piercing_basic_barbell_pair", "norin_piercings_piercing_nipple_rings", "norin_piercings_piercing_nipple_chain"), accessoryColour, false), true, this);
+					Util.random.ofValues("innoxia_piercing_basic_barbell_pair", "norin_piercings_piercing_nipple_rings", "norin_piercings_piercing_nipple_chain"), accessoryColour, false), true, this);
 		}
 		
 		

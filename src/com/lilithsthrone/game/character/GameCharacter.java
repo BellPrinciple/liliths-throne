@@ -5822,14 +5822,14 @@ public abstract class GameCharacter implements XMLSaving {
 				
 				// Remove perk/trait and return description of losing it
 				if(!removalPerks.isEmpty()) {
-					int rndKey = Util.randomItemFrom(removalPerks.keySet());
-					AbstractPerk rndPerk = Util.randomItemFrom(removalPerks.get(rndKey));
+					int rndKey = Util.random.of(removalPerks.keySet());
+					AbstractPerk rndPerk = Util.random.of(removalPerks.get(rndKey));
 					this.removePerk(rndKey, rndPerk);
 					sb.append("<br/>[npc.She] [style.italicsTerrible(lost)] [npc.her] '<i style='color:"+rndPerk.getColour().toWebHexString()+";'>"+rndPerk.getName(this)+"</i>' [style.italicsPerk(perk)]!");
 					
 				} else if(!removalTraits.isEmpty()) {
-					int rndKey = Util.randomItemFrom(removalTraits.keySet());
-					AbstractPerk rndPerk = Util.randomItemFrom(removalTraits.get(rndKey));
+					int rndKey = Util.random.of(removalTraits.keySet());
+					AbstractPerk rndPerk = Util.random.of(removalTraits.get(rndKey));
 					this.removeTrait(rndPerk);
 					this.removePerk(rndKey, rndPerk);
 					sb.append("<br/>[npc.She] [style.italicsTerrible(lost)] [npc.her] '<i style='color:"+rndPerk.getColour().toWebHexString()+";'>"+rndPerk.getName(this)+"</i>' [style.italicsTrait(trait)]!");

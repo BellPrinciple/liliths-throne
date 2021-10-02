@@ -206,10 +206,10 @@ public class Flash extends NPC {
 		this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ClothingType.GROIN_BOXERS, PresetColour.CLOTHING_BLACK, false), true, this);
 		this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_torso_short_sleeved_shirt", PresetColour.CLOTHING_WHITE, false), true, this);
 
-		Colour trousersColour = Util.randomItemFrom(new Colour[] {
+		Colour trousersColour = Util.random.ofValues(
 				PresetColour.CLOTHING_GREY_DARK,
 				PresetColour.CLOTHING_DESATURATED_BROWN_DARK
-		});
+		);
 		this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_leg_trousers", trousersColour, false), true, this);
 		this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_hips_leather_belt", PresetColour.CLOTHING_DESATURATED_BROWN_DARK, false), true, this);
 		
@@ -217,11 +217,11 @@ public class Flash extends NPC {
 		this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ClothingType.WRIST_MENS_WATCH, PresetColour.CLOTHING_STEEL, PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_STEEL, false), true, this);
 		
 		if(Main.game.getSeason()==Season.WINTER) {
-			Colour sweaterColour = Util.randomItemFrom(new Colour[] {
+			Colour sweaterColour = Util.random.ofValues(
 					PresetColour.CLOTHING_GREEN_DRAB,
 					PresetColour.CLOTHING_BLUE_NAVY,
 					PresetColour.CLOTHING_BLUE_GREY
-			});
+			);
 			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ClothingType.TORSO_RIBBED_SWEATER, sweaterColour, false), true, this);
 		}
 	}

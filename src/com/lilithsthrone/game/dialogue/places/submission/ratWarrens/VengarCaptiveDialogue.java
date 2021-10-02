@@ -134,7 +134,7 @@ public class VengarCaptiveDialogue {
 			rat.setLevel(4+Util.random.nextInt(5));
 			rat.setLocation(Main.game.getPlayer(), true);
 			String[] names = new String[] {"thug", "gangster", "gang-member", "mobster"};
-			Main.game.getCharacterUtils().setGenericName(rat, Util.randomItemFrom(names), null);
+			Main.game.getCharacterUtils().setGenericName(rat, Util.random.ofValues(names), null);
 			return rat;
 
 		} catch (Exception e) {

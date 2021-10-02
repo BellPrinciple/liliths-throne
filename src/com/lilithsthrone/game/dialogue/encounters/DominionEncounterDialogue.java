@@ -134,7 +134,7 @@ public class DominionEncounterDialogue {
 		public String getContent() {
 			if(Main.game.getDateNow().getMonth()==Month.MAY) { // Mother's day:
 				String name = Util.randomItemFrom(Subspecies.getWorldSpecies(WorldType.DOMINION, PlaceType.DOMINION_STREET, false).keySet()).getSingularFemaleName(null);
-				String litter = Util.randomItemFrom(new String[] {"twins", "triplets", "quadruplets", "quintuplets", "sextuplets"});
+				String litter = Util.random.ofValues("twins", "triplets", "quadruplets", "quintuplets", "sextuplets");
 				UtilText.addSpecialParsingString(name, true);
 				UtilText.addSpecialParsingString(litter, false);
 

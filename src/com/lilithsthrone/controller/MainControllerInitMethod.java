@@ -2696,7 +2696,7 @@ public class MainControllerInitMethod {
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							int age = 18;
-							Month month = Util.randomItemFrom(Month.values());
+							Month month = Util.random.ofValues(Month.values());
 							BodyChanging.getTarget().setBirthday(LocalDateTime.of(Main.game.getStartingDate().getYear()-age, month, 1+Util.random.nextInt(27), 12, 0));
 							Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
 						}, false);

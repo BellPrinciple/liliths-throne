@@ -63,7 +63,7 @@ public class EvelyxMilker extends NPC {
 
 	public EvelyxMilker(Gender gender, boolean isImported) {
 		super(isImported, null, null, "",
-				Util.random.nextInt(28)+18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
+				Util.random.nextInt(28)+18, Util.random.ofValues(Month.values()), 1+Util.random.nextInt(25),
 				3,
 				null, null, null,
 				new CharacterInventory(10), WorldType.DOMINION, PlaceType.DOMINION_BACK_ALLEYS, false);
@@ -229,28 +229,28 @@ public class EvelyxMilker extends NPC {
 			}
 			// Mileage preference:
 			if(Main.game.getDialogueFlags().hasFlag("innoxia_evelyx_cow_search_high_mileage")) {
-				this.setVaginaLabiaSize(Util.randomItemFromValues(LabiaSize.THREE_LARGE, LabiaSize.FOUR_MASSIVE));
+				this.setVaginaLabiaSize(Util.random.ofValues(LabiaSize.THREE_LARGE, LabiaSize.FOUR_MASSIVE));
 				this.setVaginaSquirter(Math.random()<0.5f);
-				this.setVaginaCapacity(Util.randomItemFromValues(Capacity.FOUR_LOOSE, Capacity.FIVE_ROOMY, Capacity.SIX_STRETCHED_OPEN, Capacity.SEVEN_GAPING), true);
-				this.setVaginaWetness(Util.randomItemFromValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING));
+				this.setVaginaCapacity(Util.random.ofValues(Capacity.FOUR_LOOSE, Capacity.FIVE_ROOMY, Capacity.SIX_STRETCHED_OPEN, Capacity.SEVEN_GAPING), true);
+				this.setVaginaWetness(Util.random.ofValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING));
 				this.setVaginaElasticity(OrificeElasticity.FIVE_STRETCHY.getValue());
 				this.setVaginaPlasticity(OrificePlasticity.SIX_MALLEABLE.getValue());
 
-				this.setAssCapacity(Util.randomItemFromValues(Capacity.FOUR_LOOSE, Capacity.FIVE_ROOMY, Capacity.SIX_STRETCHED_OPEN, Capacity.SEVEN_GAPING), true);
-				this.setAssWetness(Util.randomItemFromValues(Wetness.TWO_MOIST, Wetness.THREE_WET, Wetness.FOUR_SLIMY));
+				this.setAssCapacity(Util.random.ofValues(Capacity.FOUR_LOOSE, Capacity.FIVE_ROOMY, Capacity.SIX_STRETCHED_OPEN, Capacity.SEVEN_GAPING), true);
+				this.setAssWetness(Util.random.ofValues(Wetness.TWO_MOIST, Wetness.THREE_WET, Wetness.FOUR_SLIMY));
 				this.setAssElasticity(OrificeElasticity.FIVE_STRETCHY.getValue());
 				this.setAssPlasticity(OrificePlasticity.SIX_MALLEABLE.getValue());
 				
 			} else {
-				this.setVaginaLabiaSize(Util.randomItemFromValues(LabiaSize.TWO_AVERAGE, LabiaSize.THREE_LARGE));
+				this.setVaginaLabiaSize(Util.random.ofValues(LabiaSize.TWO_AVERAGE, LabiaSize.THREE_LARGE));
 				this.setVaginaSquirter(Math.random()<0.25f);
-				this.setVaginaCapacity(Util.randomItemFromValues(Capacity.TWO_TIGHT, Capacity.THREE_SLIGHTLY_LOOSE), true);
-				this.setVaginaWetness(Util.randomItemFromValues(Wetness.TWO_MOIST, Wetness.THREE_WET, Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY));
+				this.setVaginaCapacity(Util.random.ofValues(Capacity.TWO_TIGHT, Capacity.THREE_SLIGHTLY_LOOSE), true);
+				this.setVaginaWetness(Util.random.ofValues(Wetness.TWO_MOIST, Wetness.THREE_WET, Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY));
 				this.setVaginaElasticity(OrificeElasticity.THREE_FLEXIBLE.getValue());
 				this.setVaginaPlasticity(OrificePlasticity.FOUR_ACCOMMODATING.getValue());
 
-				this.setAssCapacity(Util.randomItemFromValues(Capacity.TWO_TIGHT, Capacity.THREE_SLIGHTLY_LOOSE), true);
-				this.setAssWetness(Util.randomItemFromValues(Wetness.ZERO_DRY, Wetness.ONE_SLIGHTLY_MOIST, Wetness.TWO_MOIST));
+				this.setAssCapacity(Util.random.ofValues(Capacity.TWO_TIGHT, Capacity.THREE_SLIGHTLY_LOOSE), true);
+				this.setAssWetness(Util.random.ofValues(Wetness.ZERO_DRY, Wetness.ONE_SLIGHTLY_MOIST, Wetness.TWO_MOIST));
 				this.setAssElasticity(OrificeElasticity.THREE_FLEXIBLE.getValue());
 				this.setAssPlasticity(OrificePlasticity.FOUR_ACCOMMODATING.getValue());
 			}

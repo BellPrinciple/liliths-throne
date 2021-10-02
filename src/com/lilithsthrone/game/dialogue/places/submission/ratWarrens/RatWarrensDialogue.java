@@ -308,7 +308,7 @@ public class RatWarrensDialogue {
 				Main.game.addNPC(rat, false);
 				rat.setLevel(8-i);
 				rat.setLocation(Main.game.getPlayer(), true);
-				adjectives.add(Main.game.getCharacterUtils().setGenericName(rat, Util.randomItemFrom(names), adjectives));
+				adjectives.add(Main.game.getCharacterUtils().setGenericName(rat, Util.random.ofValues(names), adjectives));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

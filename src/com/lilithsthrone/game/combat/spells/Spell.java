@@ -2102,15 +2102,15 @@ public enum Spell {
 					} else if(stealItem && (rnd<0.5 || (clothingToSteal==null))) {
 						AbstractItem item = null;
 						if(!target.getAllItemsInInventory().isEmpty()) {
-							item = Util.randomItemFrom(target.getAllItemsInInventory().keySet());
+							item = Util.random.of(target.getAllItemsInInventory().keySet());
 						}
 						AbstractWeapon weapon = null;
 						if(!target.getAllWeaponsInInventory().isEmpty()) {
-							weapon = Util.randomItemFrom(target.getAllWeaponsInInventory().keySet());
+							weapon = Util.random.of(target.getAllWeaponsInInventory().keySet());
 						}
 						AbstractClothing clothing = null;
 						if(!target.getAllClothingInInventory().isEmpty()) {
-							clothing = Util.randomItemFrom(target.getAllClothingInInventory().keySet());
+							clothing = Util.random.of(target.getAllClothingInInventory().keySet());
 						}
 						double itemStealRnd = Math.random();
 						if(item!=null && (itemStealRnd<0.33 || (weapon==null && clothing==null))) {

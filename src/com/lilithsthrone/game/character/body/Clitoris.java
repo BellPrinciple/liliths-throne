@@ -89,7 +89,7 @@ public class Clitoris implements BodyPartInterface {
 		}
 		
 		if(!this.getClitorisModifiers().isEmpty()) {
-			PenetrationModifier mod = Util.randomItemFrom(this.getClitorisModifiers());
+			PenetrationModifier mod = Util.random.of(getClitorisModifiers());
 			if(mod!=PenetrationModifier.OVIPOSITOR) {
 				descriptors.add(mod.getName());
 			}
