@@ -841,7 +841,7 @@ public class OccupancyUtil implements XMLSaving {
 						AbstractSubspecies subspecies = Subspecies.HUMAN;
 						AbstractSubspecies halfDemonSubspecies = null;
 						if(!availableRaces.isEmpty()) {
-							subspecies = Util.getRandomObjectFromWeightedMap(availableRaces);
+							subspecies = Util.random.of(availableRaces);
 						}
 						String name;
 						if(gender.isFeminine()) {
@@ -998,7 +998,7 @@ public class OccupancyUtil implements XMLSaving {
 						availablePartnerRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(partnerGender);
 						
 						if(!availablePartnerRaces.isEmpty()) {
-							partnerSubspecies = Util.getRandomObjectFromWeightedMap(availablePartnerRaces);
+							partnerSubspecies = Util.random.of(availablePartnerRaces);
 						}
 						if(partnerGender.isFeminine()) {
 							partnerName = partnerSubspecies.getSingularFemaleName(null);

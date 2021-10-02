@@ -1154,7 +1154,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 		if(weightedTargets.isEmpty()) {
 			Main.sex.setTargetedPartner(targeter, Util.randomItemFrom(availableTargets));
 		} else {
-			Main.sex.setTargetedPartner(targeter, Util.getRandomObjectFromWeightedMap(weightedTargets));
+			Main.sex.setTargetedPartner(targeter, Util.random.of(weightedTargets));
 		}
 	}
 	

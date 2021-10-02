@@ -3939,7 +3939,7 @@ public abstract class GameCharacter implements XMLSaving {
 			setBody(gender, RacialBody.HUMAN, RaceStage.HUMAN, additionalSetups);
 			
 		} else {
-			AbstractSubspecies species = Util.getRandomObjectFromWeightedMap(subspeciesMap);
+			AbstractSubspecies species = Util.random.of(subspeciesMap);
 			
 			if(gender.isFeminine()) {
 				RaceStage stage = Main.game.getCharacterUtils().getRaceStageFromPreferences(Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().get(species), gender, species);
@@ -9567,11 +9567,11 @@ public abstract class GameCharacter implements XMLSaving {
 				Map<SexType, Integer> requestedSexTypes = new HashMap<>(foreplaySexTypes);
 				requestedSexTypes.keySet().removeIf((type) -> type.getTargetedSexArea()!=request);
 				if(!requestedSexTypes.isEmpty()) {
-					foreplayPreference.put(target, Util.getRandomObjectFromWeightedMap(requestedSexTypes));
+					foreplayPreference.put(target, Util.random.of(requestedSexTypes));
 				}
 			}
 			if(foreplayPreference.get(target)==null) {
-				foreplayPreference.put(target, Util.getRandomObjectFromWeightedMap(foreplaySexTypes));
+				foreplayPreference.put(target, Util.random.of(foreplaySexTypes));
 			}
 			if(debug) {
 				System.out.println("Foreplay: "+foreplayPreference.get(target).getPerformingSexArea().toString()+" "+foreplayPreference.get(target).getTargetedSexArea().toString());
@@ -9595,7 +9595,7 @@ public abstract class GameCharacter implements XMLSaving {
 				Map<SexType, Integer> requestedSexTypes = new HashMap<>(mainSexTypes);
 				requestedSexTypes.keySet().removeIf((type) -> type.getTargetedSexArea()!=request);
 				if(!requestedSexTypes.isEmpty()) {
-					mainSexPreference.put(target, Util.getRandomObjectFromWeightedMap(requestedSexTypes));
+					mainSexPreference.put(target, Util.random.of(requestedSexTypes));
 				}
 			}
 //			if(debug) {
@@ -9619,7 +9619,7 @@ public abstract class GameCharacter implements XMLSaving {
 				}
 			}
 			if(mainSexPreference.get(target)==null) {
-				mainSexPreference.put(target, Util.getRandomObjectFromWeightedMap(mainSexTypes));
+				mainSexPreference.put(target, Util.random.of(mainSexTypes));
 			}
 			if(debug)
 				System.out.println("Main: "+mainSexPreference.get(target).getPerformingSexArea().toString()+" "+mainSexPreference.get(target).getTargetedSexArea().toString());
@@ -18667,7 +18667,7 @@ public abstract class GameCharacter implements XMLSaving {
 				}
 				while(this.getEquippedMoves().size()<GameCharacter.MAX_COMBAT_MOVES
 						&& !availables.isEmpty()) {
-					AbstractCombatMove selectedMove = Util.getRandomObjectFromWeightedMap(availables);
+					AbstractCombatMove selectedMove = Util.random.of(availables);
 					equipMove(selectedMove.getIdentifier());
 					availables.remove(selectedMove);
 				}

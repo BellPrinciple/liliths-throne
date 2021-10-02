@@ -276,7 +276,7 @@ public class Jess extends NPC {
 							new Value<>(Gender.F_P_B_SHEMALE, 5),
 							new Value<>(Gender.F_P_V_B_FUTANARI, 5),
 							new Value<>(Gender.M_P_MALE, 50));
-					GenericSexualPartner partner = new GenericSexualPartner(Util.getRandomObjectFromWeightedMap(genders),
+					GenericSexualPartner partner = new GenericSexualPartner(Util.random.of(genders),
 							WorldType.getWorldTypeFromId("innoxia_fields_elis_tavern_f1"),
 							PlaceType.getPlaceTypeFromId("innoxia_fields_elis_tavern_f1_room_sex"),
 							false,

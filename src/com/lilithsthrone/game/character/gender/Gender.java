@@ -183,8 +183,8 @@ public enum Gender {
 				return Gender.M_P_MALE;
 			}
 		}
-		
-		return Util.getRandomObjectFromWeightedMap(genderMap);
+
+		return Util.random.of(genderMap);
 	}
 	
 	public static Gender getGenderFromUserPreferences(Femininity femininity) {
@@ -204,8 +204,8 @@ public enum Gender {
 				return Gender.M_P_MALE;
 			}
 		}
-		
-		return Util.getRandomObjectFromWeightedMap(genderMap);
+
+		return Util.random.of(genderMap);
 	}
 	
 }

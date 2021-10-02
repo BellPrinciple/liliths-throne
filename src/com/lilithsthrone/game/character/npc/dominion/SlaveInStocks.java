@@ -184,7 +184,7 @@ public class SlaveInStocks extends NPC {
 					AbstractSubspecies subspecies = Subspecies.HUMAN;
 					AbstractSubspecies halfDemonSubspecies = null;
 					if(!availableRaces.isEmpty()) {
-						subspecies = Util.getRandomObjectFromWeightedMap(availableRaces);
+						subspecies = Util.random.of(availableRaces);
 					}
 					if(Math.random()<0.05f) {
 						halfDemonSubspecies = subspecies;

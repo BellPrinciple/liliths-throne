@@ -37,8 +37,8 @@ public enum SexualOrientationPreference {
 //		System.out.println(Main.getProperties().orientationPreferencesMap.get(SexualOrientation.GYNEPHILIC));
 //		System.out.println(Main.getProperties().orientationPreferencesMap.get(SexualOrientation.AMBIPHILIC));
 //		System.out.println(Main.getProperties().orientationPreferencesMap.get(SexualOrientation.ANDROPHILIC));
-		
-		SexualOrientation orientation = Util.getRandomObjectFromWeightedMap(orientationPreferencesMap);
+
+		SexualOrientation orientation = Util.random.of(orientationPreferencesMap);
 		
 //		System.out.println("set to "+orientation);
 		

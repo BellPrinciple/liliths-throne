@@ -448,7 +448,8 @@ public class Util {
 		}
 		return top;
 	}
-	
+
+	@Deprecated
 	public static <T> T getRandomObjectFromWeightedMap(Map<T, Integer> map) {
 		return random.of(map);
 	}

@@ -285,14 +285,14 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 		
 		if(gc.isFeminine()) {
 			if(namesFeminine==null || namesFeminine.isEmpty()) {
-				name = Util.getRandomObjectFromWeightedMap(returnNames);
+				name = Util.random.of(returnNames);
 				
 			} else {
 				name = Util.randomItemFrom(namesFeminine);
 			}
 		} else {
 			if(namesMasculine==null || namesMasculine.isEmpty()) {
-				name = Util.getRandomObjectFromWeightedMap(returnNames);
+				name = Util.random.of(returnNames);
 				
 			} else {
 				name = Util.randomItemFrom(namesMasculine);
@@ -305,13 +305,13 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 		
 		if(name.endsWith("-")) {
 			if(Math.random()<0.25f) { // 25% chance to return this '-' name.
-				return UtilText.parse(gc, name + Util.getRandomObjectFromWeightedMap(returnNames));
+				return UtilText.parse(gc, name + Util.random.of(returnNames));
 			} else {
-				return UtilText.parse(gc, Util.getRandomObjectFromWeightedMap(returnNames));
+				return UtilText.parse(gc, Util.random.of(returnNames));
 			}
 		}
 		if(name.isEmpty()) {
-			return UtilText.parse(gc, Util.getRandomObjectFromWeightedMap(returnNames));
+			return UtilText.parse(gc, Util.random.of(returnNames));
 		}
 		
 		return UtilText.parse(gc, name);
@@ -327,14 +327,14 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 		
 		if(gc.isFeminine()) {
 			if(namesPluralFeminine==null || namesPluralFeminine.isEmpty()) {
-				name = Util.getRandomObjectFromWeightedMap(returnNames);
+				name = Util.random.of(returnNames);
 				
 			} else {
 				name = Util.randomItemFrom(namesPluralFeminine);
 			}
 		} else {
 			if(namesPluralMasculine==null || namesPluralMasculine.isEmpty()) {
-				name = Util.getRandomObjectFromWeightedMap(returnNames);
+				name = Util.random.of(returnNames);
 				
 			} else {
 				name = Util.randomItemFrom(namesPluralMasculine);
@@ -347,13 +347,13 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 		
 		if(name.endsWith("-")) {
 			if(Math.random()<0.25f) { // 25% chance to return this '-' name.
-				return UtilText.parse(gc, name + Util.getRandomObjectFromWeightedMap(returnNames));
+				return UtilText.parse(gc, name + Util.random.of(returnNames));
 			} else {
-				return UtilText.parse(gc, name + Util.getRandomObjectFromWeightedMap(returnNames));
+				return UtilText.parse(gc, name + Util.random.of(returnNames));
 			}
 		}
 		if(name.isEmpty()) {
-			return UtilText.parse(gc, Util.getRandomObjectFromWeightedMap(returnNames));
+			return UtilText.parse(gc, Util.random.of(returnNames));
 		}
 		
 		return UtilText.parse(gc, name);

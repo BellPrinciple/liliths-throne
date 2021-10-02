@@ -1082,7 +1082,7 @@ public class ItemEffectType {
 						+ user.addItem(Main.game.getItemGen().generateItem(itemType), false);
 				
 			} else {
-				AbstractClothingType clothingType = Util.getRandomObjectFromWeightedMap(clothingMap);
+				AbstractClothingType clothingType = Util.random.of(clothingMap);
 				AbstractClothing clothing = Main.game.getItemGen().generateClothing(clothingType);
 				
 				if(!Main.game.getPlayerCell().getInventory().isInventoryFull()) {

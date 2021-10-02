@@ -2004,8 +2004,7 @@ public class CharacterUtils {
 		if(Math.random()<=0.1f && !character.getCovering(character.getHairCovering()).getType().getDyePatterns().isEmpty()) { // 10% chance to have a non-natural hair colour:
 			Covering currentCovering = character.getCovering(character.getHairCovering());
 			character.setHairCovering(new Covering(
-					currentCovering.getType(),
-					Util.getRandomObjectFromWeightedMap(currentCovering.getType().getDyePatterns()),
+					currentCovering.getType(), Util.random.of(currentCovering.getType().getDyePatterns()),
 					currentCovering.getType().getAllPrimaryColours().isEmpty()
 						?currentCovering.getPrimaryColour()
 						:Util.randomItemFrom(currentCovering.getType().getAllPrimaryColours()),
@@ -2534,7 +2533,7 @@ public class CharacterUtils {
 			}
 		}
 		while(fetishesAssigned < numberOfFetishes && !fetishMap.isEmpty()) {
-			Fetish f = Util.getRandomObjectFromWeightedMap(fetishMap);
+			Fetish f = Util.random.of(fetishMap);
 			character.addFetish(f);
 			fetishMap.remove(f);
 			fetishesAssigned++;
@@ -2583,7 +2582,7 @@ public class CharacterUtils {
 			}
 		}
 		while(desiresAssigned < numberOfPositiveDesires && !desireMap.isEmpty()) {
-			Fetish f = Util.getRandomObjectFromWeightedMap(desireMap);
+			Fetish f = Util.random.of(desireMap);
 			character.setFetishDesire(f, FetishDesire.THREE_LIKE);
 			availableFetishes.remove(f);
 			desireMap.remove(f);
@@ -2652,7 +2651,7 @@ public class CharacterUtils {
 			}
 		}
 		while(desiresAssigned < numberOfNegativeDesires && !negativeMap.isEmpty()) {
-			Fetish f = Util.getRandomObjectFromWeightedMap(negativeMap);
+			Fetish f = Util.random.of(negativeMap);
 			int rnd = Util.random.nextInt(negativeMap.get(f))+1;
 			int weight = FetishPreference.valueOf(Main.getProperties().fetishPreferencesMap.get(f)).getHate();
 			if(raceModifiers.containsKey(f)) {
@@ -2695,7 +2694,7 @@ public class CharacterUtils {
 		if(weightedOutfits.isEmpty()) {
 			equipClothingFromOutfit(character, null, settings);
 		} else {
-			equipClothingFromOutfit(character, Util.getRandomObjectFromWeightedMap(weightedOutfits), settings);
+			equipClothingFromOutfit(character, Util.random.of(weightedOutfits), settings);
 		}
 	}
 

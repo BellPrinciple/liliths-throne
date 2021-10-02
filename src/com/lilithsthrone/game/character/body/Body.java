@@ -417,8 +417,8 @@ public class Body implements XMLSaving {
 //			if(availablePatterns.size()>1) {
 //				availablePatterns.remove(CoveringPattern.FRECKLED); // Do not start with freckles
 //			}
-			
-			CoveringPattern pattern = Util.getRandomObjectFromWeightedMap(s.getNaturalPatterns());//availablePatterns.get(Util.random.nextInt(availablePatterns.size()));
+//			CoveringPattern pattern = Util.random.of(availablePatterns);
+			CoveringPattern pattern = Util.random.of(s.getNaturalPatterns());
 			if(pattern==CoveringPattern.EYE_IRISES) {
 				pattern = CoveringPattern.EYE_IRISES_HETEROCHROMATIC;
 			}
@@ -1937,7 +1937,7 @@ public class Body implements XMLSaving {
 				AbstractBodyCoveringType coveringType = BodyCoveringType.getBodyCoveringTypeFromId(type);
 				CoveringPattern loadedPattern = CoveringPattern.valueOf(e.getAttribute("pattern"));
 				if(!coveringType.getAllPatterns().containsKey(loadedPattern)) {
-					loadedPattern = Util.getRandomObjectFromWeightedMap(coveringType.getNaturalPatterns());
+					loadedPattern = Util.random.of(coveringType.getNaturalPatterns());
 				}
 				if(e.getAttribute("modifier").isEmpty()) {
 					body.setBodyCoveringForXMLImport(coveringType,

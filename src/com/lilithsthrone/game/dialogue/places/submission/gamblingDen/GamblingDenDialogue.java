@@ -1375,7 +1375,7 @@ public class GamblingDenDialogue {
 	
 								boolean winner = false;
 								if(Math.random()<0.32f) {
-									AbstractSubspecies s = Util.getRandomObjectFromWeightedMap(slotMachineValueProbabilities);
+									AbstractSubspecies s = Util.random.of(slotMachineValueProbabilities);
 									for(int i=0; i<3; i++) {
 										results.add(s);
 									}

@@ -77,10 +77,7 @@ public class RatGangMember extends NPC {
 					subspeciesMap.put(entry.getKey(), entry.getValue().getValue());
 				}
 			}
-			AbstractSubspecies subspecies = Util.getRandomObjectFromWeightedMap(subspeciesMap);
-			if(subspecies==null) {
-				subspecies = Subspecies.RAT_MORPH;
-			}
+			var subspecies = subspeciesMap.isEmpty() ? Subspecies.RAT_MORPH : Util.random.of(subspeciesMap);
 			RaceStage stage = RaceStage.getRaceStageFromUserPreferences(gender, subspecies);
 			if(stage==RaceStage.HUMAN) {
 				stage = RaceStage.PARTIAL;

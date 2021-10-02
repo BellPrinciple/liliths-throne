@@ -138,7 +138,7 @@ public class HarpyNestsAttacker extends NPC {
 
 		AbstractSubspecies species = Subspecies.HARPY;
 		if(!subspeciesMap.isEmpty() && total>0) {
-			species = Util.getRandomObjectFromWeightedMap(subspeciesMap);
+			species = Util.random.of(subspeciesMap);
 		}
 		setBody(gender, species, RaceStage.LESSER, true);
 //		if(gender.getGenderName().isHasPenis()) {

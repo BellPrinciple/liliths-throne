@@ -1098,7 +1098,7 @@ public class PregnancyRoulette {
 			if(sexMap.isEmpty()) {
 				murkPreference = new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaPenetration.FINGER);
 			} else {
-				murkPreference = Util.getRandomObjectFromWeightedMap(sexMap);
+				murkPreference = Util.random.of(sexMap);
 			}
 		}
 		@Override

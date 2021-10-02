@@ -54,8 +54,7 @@ public class Covering implements XMLSaving {
 	 * @param type The BodyCoveringType to set this skin to.
 	 */
 	public Covering(AbstractBodyCoveringType type) {
-		this(type,
-				Util.getRandomObjectFromWeightedMap(type.getNaturalPatterns()),
+		this(type, Util.random.of(type.getNaturalPatterns()),
 				Util.random.of(type.getNaturalColoursPrimary()), false,
 				Util.random.of(type.getNaturalColoursSecondary().isEmpty()?type.getNaturalColoursPrimary():type.getNaturalColoursSecondary()), false);
 	}

@@ -527,7 +527,7 @@ public class EnforcerAlleywayDialogue {
 		}
 		
 		if(!sexTypeMap.isEmpty()) {
-			return Util.getRandomObjectFromWeightedMap(sexTypeMap);
+			return Util.random.of(sexTypeMap);
 		}
 		
 		return null;

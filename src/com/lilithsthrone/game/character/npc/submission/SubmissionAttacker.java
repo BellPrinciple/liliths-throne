@@ -94,7 +94,7 @@ public class SubmissionAttacker extends NPC {
 				}
 			}
 
-			AbstractSubspecies randomSpecies = Util.getRandomObjectFromWeightedMap(availableRaces);
+			AbstractSubspecies randomSpecies = Util.random.of(availableRaces);
 			if(randomSpecies==Subspecies.SLIME || randomSpecies==Subspecies.IMP || randomSpecies==Subspecies.IMP_ALPHA) {
 				this.setBody(gender, randomSpecies, RaceStage.GREATER, true);
 				

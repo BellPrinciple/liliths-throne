@@ -250,7 +250,7 @@ public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 		}
 		
 		if(names==null || names.isEmpty()) {
-			name = Util.getRandomObjectFromWeightedMap(returnNames);
+			name = Util.random.of(returnNames);
 			
 		} else {
 			name = Util.randomItemFrom(names);
@@ -259,20 +259,20 @@ public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 		if(!Main.game.isStarted()) {
 			return name;
 		}
-		
+
 		if(!Main.game.isStarted()) {
 			return name;
 		}
-		
+
 		if(name.endsWith("-")) {
 			if(Math.random()<0.25f) { // 25% chance to return this '-' name.
-				return UtilText.parse(gc, name + Util.getRandomObjectFromWeightedMap(returnNames));
+				return UtilText.parse(gc, name + Util.random.of(returnNames));
 			} else {
-				return UtilText.parse(gc, Util.getRandomObjectFromWeightedMap(returnNames));
+				return UtilText.parse(gc, Util.random.of(returnNames));
 			}
 		}
 		if(name.isEmpty()) {
-			return UtilText.parse(gc, Util.getRandomObjectFromWeightedMap(returnNames));
+			return UtilText.parse(gc, Util.random.of(returnNames));
 		}
 		
 		return UtilText.parse(gc, name);
@@ -287,7 +287,7 @@ public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 		}
 		
 		if(namesPlural==null || namesPlural.isEmpty()) {
-			name = Util.getRandomObjectFromWeightedMap(returnNames);
+			name = Util.random.of(returnNames);
 			
 		} else {
 			name = Util.randomItemFrom(namesPlural);
@@ -295,13 +295,13 @@ public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 		
 		if(name.endsWith("-")) {
 			if(Math.random()<0.25f) { // 25% chance to return this '-' name.
-				return UtilText.parse(gc, name + Util.getRandomObjectFromWeightedMap(returnNames));
+				return UtilText.parse(gc, name + Util.random.of(returnNames));
 			} else {
-				return UtilText.parse(gc, name + Util.getRandomObjectFromWeightedMap(returnNames));
+				return UtilText.parse(gc, name + Util.random.of(returnNames));
 			}
 		}
 		if(name.isEmpty()) {
-			return UtilText.parse(gc, Util.getRandomObjectFromWeightedMap(returnNames));
+			return UtilText.parse(gc, Util.random.of(returnNames));
 		}
 
 		return UtilText.parse(gc, name);
