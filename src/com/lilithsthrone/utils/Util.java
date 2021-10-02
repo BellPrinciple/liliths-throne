@@ -458,7 +458,8 @@ public class Util {
 	public static <T> T getRandomObjectFromWeightedMap(Map<T, Integer> map, Random rnd) {
 		return rnd.of(map);
 	}
-	
+
+	@Deprecated
 	public static <T> T getRandomObjectFromWeightedFloatMap(Map<T, Float> map) {
 		float total = 0;
 		for(float f : map.values()) {

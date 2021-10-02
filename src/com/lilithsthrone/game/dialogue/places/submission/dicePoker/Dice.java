@@ -1,8 +1,7 @@
 package com.lilithsthrone.game.dialogue.places.submission.dicePoker;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.utils.Util;
 
@@ -14,11 +13,10 @@ import com.lilithsthrone.utils.Util;
 public class Dice {
 	
 	private DiceFace face;
-	private Map<DiceFace, Float> diceBias;
+	private final EnumMap<DiceFace, Float> diceBias = new EnumMap<>(DiceFace.class);
 	
 	public Dice() {
 		face = DiceFace.SIX;
-		diceBias = new HashMap<>();
 		for(DiceFace face : DiceFace.values()) {
 			diceBias.put(face, 1f);
 		}
@@ -26,13 +24,11 @@ public class Dice {
 	
 	public Dice(Map<DiceFace, Float> diceBias) {
 		this();
-		for(Entry<DiceFace, Float> entry : diceBias.entrySet()) {
-			this.diceBias.put(entry.getKey(), entry.getValue());
-		}
+		this.diceBias.putAll(diceBias);
 	}
 
 	public void roll() {
-		face = Util.getRandomObjectFromWeightedFloatMap(diceBias);
+		face = Util.random.of(diceBias);
 	}
 	
 	public DiceFace getFace() {

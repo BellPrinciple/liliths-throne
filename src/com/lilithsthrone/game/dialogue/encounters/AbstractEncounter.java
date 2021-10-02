@@ -178,7 +178,7 @@ public abstract class AbstractEncounter {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} else {
 			List<String> enforcerIds = Util.randomItemFrom(savedEnforcerIds);
 			for(String id : enforcerIds) {
@@ -429,19 +429,19 @@ public abstract class AbstractEncounter {
 			Main.game.encounterAtSeconds = new Value<>(Main.game.getSecondsPassed(), dialogueNode);
 		}
 	}
-	
+
 	protected DialogueNode getBaseRandomEncounter(boolean forceEncounter) {
 		if(forceEncounter) {
 			if(Main.game.forcedEncounterAtSeconds.getKey()==Main.game.getSecondsPassed()) {
 				return Main.game.forcedEncounterAtSeconds.getValue();
 			}
-			
+
 		} else {
 			if(Main.game.encounterAtSeconds.getKey()==Main.game.getSecondsPassed()) {
 				return Main.game.encounterAtSeconds.getValue();
 			}
 		}
-		
+
 		float opportunisticMultiplier = 1;
 		if(Main.game.isOpportunisticAttackersEnabled()) {
 			// lust: linear boost; 25% max
@@ -507,14 +507,14 @@ public abstract class AbstractEncounter {
 			}
 //			System.out.println("Final total: "+total);
 //			System.out.println("Final opportunisticIncrease: "+opportunisticIncrease);
-			
+
 			if(forceEncounter || Math.random()*(100+opportunisticIncrease)<total) {
 				ExternalEncounterData encounter;
 				DialogueNode dn = null;
 				int tries = 0;
 				while(dn==null && tries<=3) { // As some Encounters rarely return null, try 3 times to get an Encounter. Yes this is not ideal, but it was either this or suffer performance issues in calculating Encounter availabilities.
 					tries++;
-					encounter = Util.getRandomObjectFromWeightedFloatMap(finalMap);
+					encounter = Util.random.of(finalMap);
 					finalMap.remove(encounter);
 					dn = DialogueManager.getDialogueFromId(UtilText.parse(encounter.getDialogueId()).trim());
 				}
@@ -524,7 +524,7 @@ public abstract class AbstractEncounter {
 				return dn;
 			}
 //			System.out.println("--- END ---");
-			
+
 		} else {
 			float total = 0;
 			float opportunisticIncrease = 0;
@@ -551,7 +551,7 @@ public abstract class AbstractEncounter {
 				int tries = 0;
 				while(dn==null && tries<=3) { // As some Encounters rarely return null, try 3 times to get an Encounter. Yes this is not ideal, but it was either this or suffer performance issues in calculating Encounter availabilities.
 					tries++;
-					encounter = Util.getRandomObjectFromWeightedFloatMap(finalMap);
+					encounter = Util.random.of(finalMap);
 					finalMap.remove(encounter);
 					dn = initialiseEncounter(encounter);
 				}
@@ -563,7 +563,7 @@ public abstract class AbstractEncounter {
 		setEncounterDialogue(null, forceEncounter);
 		return null;
 	}
-	
+
 	public static AbstractCoreItem getRandomItem() {
 		return randomItem;
 	}

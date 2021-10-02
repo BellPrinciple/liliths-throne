@@ -18579,17 +18579,14 @@ public abstract class GameCharacter implements XMLSaving {
 			}
 			
 			// Determining move based on weight:
-			AbstractCombatMove selectedMove = null;
 			Map<AbstractCombatMove, Float> weightedMoves = new HashMap<>();
 			for(AbstractCombatMove move : potentialMoves) {
 				weightedMoves.put(move, getMoveWeight(move, enemies, allies));
 			}
-			selectedMove = Util.getRandomObjectFromWeightedFloatMap(weightedMoves);
-			if(selectedMove == null) {
+			if(weightedMoves.isEmpty())
 				break;
-			} else {
-				selectMove(turnIndex, selectedMove, selectedMove.getPreferredTarget(this, enemies, allies), enemies, allies);
-			}
+			var selectedMove = Util.random.of(weightedMoves);
+			selectMove(turnIndex, selectedMove, selectedMove.getPreferredTarget(this, enemies, allies), enemies, allies);
 			turnIndex++;
 		}
 	}

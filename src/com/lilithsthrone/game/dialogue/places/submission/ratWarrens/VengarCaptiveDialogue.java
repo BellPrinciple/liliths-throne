@@ -772,7 +772,7 @@ public class VengarCaptiveDialogue {
 				return new Response(UtilText.parse(getMainCompanion(), "[npc.Name]"), UtilText.parse(getMainCompanion(), "Decide to seek out your companion, [npc.name], and see what [npc.she] is up to."), VENGARS_HALL_CHOOSE_COMPANION) {
 					@Override
 					public void effects() {
-						currentCompanionBehaviour = Util.getRandomObjectFromWeightedFloatMap(dailyCompanionBehaviours);
+						currentCompanionBehaviour = Util.random.of(dailyCompanionBehaviours);
 						if(currentCompanionBehaviour.isDailyLimited()) {
 							dailyCompanionBehaviours.remove(currentCompanionBehaviour);
 						}
