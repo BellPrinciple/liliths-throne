@@ -381,7 +381,7 @@ public class Body implements XMLSaving {
 	private void applyStartingCoveringValues() {
 		
 		// Everything is based on human skin value:
-		StartingSkinTone tone = StartingSkinTone.values()[Util.random.nextInt(StartingSkinTone.values().length)];
+		StartingSkinTone tone = Util.random.ofValues(StartingSkinTone.values());
 		
 		for(AbstractBodyCoveringType s : BodyCoveringType.getAllBodyCoveringTypes()) {
 			// Specials:
@@ -401,7 +401,7 @@ public class Body implements XMLSaving {
 			}
 			
 			List<Colour> colourApplicationList = BodyCoveringSkinToneColorHelper.getAcceptableColoursForPrimary(tone, s);
-			Colour primary = colourApplicationList.get(Util.random.nextInt(colourApplicationList.size()));
+			Colour primary = Util.random.of(colourApplicationList);
 			
 			Colour secondary = primary;
 			
@@ -409,7 +409,7 @@ public class Body implements XMLSaving {
 				colourApplicationList = new ArrayList<>(BodyCoveringSkinToneColorHelper.getAcceptableColoursForSecondary(tone, s));
 				colourApplicationList.remove(primary);
 				if(!colourApplicationList.isEmpty()) {
-					secondary = colourApplicationList.get(Util.random.nextInt(colourApplicationList.size()));
+					secondary = Util.random.of(colourApplicationList);
 				}
 			}
 			

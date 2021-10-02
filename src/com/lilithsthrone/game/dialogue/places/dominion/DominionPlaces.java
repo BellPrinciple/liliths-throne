@@ -712,8 +712,8 @@ public class DominionPlaces {
 									possibleSubspecies.add(Subspecies.HORSE_MORPH);
 									possibleSubspecies.add(Subspecies.WOLF_MORPH);
 									
-									String randomFemalePerson = possibleSubspecies.get(Util.random.nextInt(possibleSubspecies.size())).getSingularFemaleName(null);
-									String randomMalePerson = possibleSubspecies.get(Util.random.nextInt(possibleSubspecies.size())).getSingularMaleName(null);
+									String randomFemalePerson = Util.random.of(possibleSubspecies).getSingularFemaleName(null);
+									String randomMalePerson = Util.random.of(possibleSubspecies).getSingularMaleName(null);
 									
 									Main.game.getTextEndStringBuilder().append("<p>"
 											+UtilText.returnStringAtRandom(

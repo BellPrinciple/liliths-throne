@@ -2022,7 +2022,7 @@ public enum Spell {
 							}
 						}
 						if(!nonSealedClothing.isEmpty()) {
-							clothingToSteal = nonSealedClothing.get(Util.random.nextInt(nonSealedClothing.size()));
+							clothingToSteal = Util.random.of(nonSealedClothing);
 						}
 						
 					} else if(caster.hasSpellUpgrade(SpellUpgrade.STEAL_1)) {
@@ -2033,7 +2033,7 @@ public enum Spell {
 							}
 						}
 						if(!nonSealedOuterClothing.isEmpty()) {
-							clothingToSteal = nonSealedOuterClothing.get(Util.random.nextInt(nonSealedOuterClothing.size()));
+							clothingToSteal = Util.random.of(nonSealedOuterClothing);
 						}
 						
 					}
@@ -3819,7 +3819,7 @@ public enum Spell {
 		}
 		if(isCanTargetEnemies()) {
 			if(AbstractCombatMove.shouldBlunder()) {
-				return enemies.get(Util.random.nextInt(enemies.size()));
+				return Util.random.of(enemies);
 				
 			} else {
 				float lowestHP = -1;
@@ -3864,7 +3864,7 @@ public enum Spell {
 		}
 		if(isCanTargetAllies() && !allies.isEmpty()) {
 			if(AbstractCombatMove.shouldBlunder()) {
-				return allies.get(Util.random.nextInt(allies.size()));
+				return Util.random.of(allies);
 				
 			} else {
 				float lowestHP = -1;

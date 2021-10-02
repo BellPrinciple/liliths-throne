@@ -550,7 +550,7 @@ public class Lilaya extends NPC {
 			speech.add("Wait, you still see me as your aunt, right? I guess I can go along with that...");
 		}
 		
-		return speech.get(Util.random.nextInt(speech.size()));
+		return Util.random.of(speech);
 	}
 	
 	/**
@@ -563,7 +563,7 @@ public class Lilaya extends NPC {
 		speech.add("You're so hot!");
 		speech.add("I've wanted this for so long...");
 		
-		return speech.get(Util.random.nextInt(speech.size()));
+		return Util.random.of(speech);
 	}
 
 }

@@ -2931,7 +2931,7 @@ public class StatusEffect {
 							+target.incrementLust(25, false);
 				} else {
 					List<AbstractFluidType> list = new ArrayList<>(target.getPsychoactiveFluidsIngested());
-					AbstractFluidType fluid = list.get(Util.random.nextInt(list.size()));
+					AbstractFluidType fluid = Util.random.of(list);
 					String npcName = UtilText.generateSingularDeterminer(fluid.getRace().getName(false))+" "+fluid.getRace().getName(false);
 					switch(fluid.getBaseType()) {
 						case CUM:
@@ -9991,7 +9991,7 @@ public class StatusEffect {
 					}
 				}
 				if(!suitableClothing.isEmpty()) {
-					AbstractClothing clothingBlownOff = suitableClothing.get(Util.random.nextInt(suitableClothing.size()));
+					AbstractClothing clothingBlownOff = Util.random.of(suitableClothing);
 					target.unequipClothingOntoFloor(clothingBlownOff, true, target);
 					if(target.isPlayer()) {
 						return "Your "+clothingBlownOff.getName()+" "+(clothingBlownOff.getClothingType().isPlural()?"are":"is")+" sucked off and blown to the floor!";
@@ -10037,7 +10037,7 @@ public class StatusEffect {
 					}
 				}
 				if(!suitableClothing.isEmpty()) {
-					AbstractClothing clothingBlownOff = suitableClothing.get(Util.random.nextInt(suitableClothing.size()));
+					AbstractClothing clothingBlownOff = Util.random.of(suitableClothing);
 					target.unequipClothingOntoFloor(clothingBlownOff, true, target);
 					if(target.isPlayer()) {
 						return "Your "+clothingBlownOff.getName()+" "+(clothingBlownOff.getClothingType().isPlural()?"are":"is")+" sucked off and blown to the floor!";
@@ -11135,7 +11135,7 @@ public class StatusEffect {
 			Util.newArrayListOfValues("<b>5</b> "+Attribute.DAMAGE_LUST.getColouredName("b")+" per turn to a random enemy")) {
 		@Override
 		public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
-			GameCharacter randomEnemy = Main.combat.getEnemies(target).get(Util.random.nextInt(Main.combat.getEnemies(target).size()));
+			GameCharacter randomEnemy = Util.random.of(Main.combat.getEnemies(target));
 			
 			Value<String, Integer> damageValue = DamageType.LUST.damageTarget(null, randomEnemy, 15);
 

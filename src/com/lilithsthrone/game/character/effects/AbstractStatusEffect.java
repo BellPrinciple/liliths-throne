@@ -762,7 +762,7 @@ public abstract class AbstractStatusEffect {
 		}
 		
 		List<GameCharacter> ongoingCharacters = Main.sex.getCharactersHavingOngoingActionWith(target, orifice);
-		GameCharacter partner = ongoingCharacters.get(Util.random.nextInt(ongoingCharacters.size()));
+		GameCharacter partner = Util.random.of(ongoingCharacters);
 		
 		List<Value<Integer, String>> additionalDescriptions = new ArrayList<>();
 		

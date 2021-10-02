@@ -37,7 +37,7 @@ public enum LabiaSize {
 	}
 	
 	public static LabiaSize getRandomLabiaSize() {
-		return LabiaSize.values()[Util.random.nextInt(LabiaSize.values().length)];
+		return Util.random.ofValues(LabiaSize.values());
 	}
 	
 	public static LabiaSize getLabiaSizeFromInt(int size) {

@@ -214,7 +214,7 @@ public class World implements XMLSaving {
 //			}
 			return getRandomCell(place);
 		}
-		return cells.get(Util.random.nextInt(cells.size()));
+		return Util.random.of(cells);
 	}
 	
 	/**
@@ -234,7 +234,7 @@ public class World implements XMLSaving {
 			return null;
 		}
 		
-		return corridorCells.get(Util.random.nextInt(corridorCells.size()));
+		return Util.random.of(corridorCells);
 	}
 	
 	public Cell[][] getCellGrid() {

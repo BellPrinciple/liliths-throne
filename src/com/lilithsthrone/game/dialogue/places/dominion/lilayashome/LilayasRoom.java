@@ -107,7 +107,7 @@ public class LilayasRoom {
 						panties.add(ClothingType.GROIN_SHIMAPAN);
 						panties.add(ClothingType.GROIN_CROTCHLESS_PANTIES);
 						
-						lilayasPanties = Main.game.getItemGen().generateClothing(panties.get(Util.random.nextInt(panties.size())), false);
+						lilayasPanties = Main.game.getItemGen().generateClothing(Util.random.of(panties), false);
 					}
 				};
 

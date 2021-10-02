@@ -1953,7 +1953,7 @@ public class Combat {
 		if(possibleTargets.size() == 0) {
 			return target;
 		}
-		return possibleTargets.get(Util.random.nextInt(possibleTargets.size()));
+		return Util.random.of(possibleTargets);
 	}
 
 	public int getTurn() {

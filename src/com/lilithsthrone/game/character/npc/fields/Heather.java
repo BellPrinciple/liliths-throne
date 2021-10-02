@@ -317,7 +317,7 @@ public class Heather extends NPC {
 		// Transformative potions:
 		// 10 generic potions:
 		AbstractItem ingredient = Main.game.getItemGen().generateItem(ItemType.getItemTypeFromId("innoxia_race_rabbit_bunny_carrot_cake"));
-		TFModifier primaryMod = TFModifier.getTFRacialBodyPartsList().get(Util.random.nextInt(TFModifier.getTFRacialBodyPartsList().size()));
+		TFModifier primaryMod = Util.random.of(TFModifier.getTFRacialBodyPartsList());
 		for(int i=0; i<10; i++) {
 			try {
 				if(ingredient.getEnchantmentEffect().getEffectsDescription(primaryMod, TFModifier.NONE, TFPotency.MINOR_BOOST, 0, Main.game.getPlayer(), Main.game.getPlayer())!=null) {
@@ -325,7 +325,7 @@ public class Heather extends NPC {
 					potion.setName(EnchantingUtils.getPotionName(ingredient, potion.getEffects()));
 					this.addItem(potion);
 				}
-				primaryMod = TFModifier.getTFRacialBodyPartsList().get(Util.random.nextInt(TFModifier.getTFRacialBodyPartsList().size()));
+				primaryMod = Util.random.of(TFModifier.getTFRacialBodyPartsList());
 			} catch(Exception ex) {
 			}
 		}

@@ -641,14 +641,14 @@ public class VengarCaptiveDialogue {
 						START_VENGAR_PUBLIC_FUCK_AFTER_SEX_TATTOOED_END) {
 					@Override
 					public void effects() {
-						String name = tattooNames.get(Util.random.nextInt(tattooNames.size()));
+						String name = Util.random.of(tattooNames);
 						applyTattoo(Main.game.getPlayer(), name);
 						UtilText.addSpecialParsingString(name, true);
 						
 						if(isCompanionDialogue()) {
 							List<String> companionTattooNames = new ArrayList<>(tattooNames);
 							companionTattooNames.remove(name);
-							String companionTattooName = companionTattooNames.get(Util.random.nextInt(companionTattooNames.size()));
+							String companionTattooName = Util.random.of(companionTattooNames);
 							applyTattoo(getMainCompanion(), companionTattooName);
 							UtilText.addSpecialParsingString(companionTattooName, false);
 						}
@@ -670,7 +670,7 @@ public class VengarCaptiveDialogue {
 						if(isCompanionDialogue()) {
 							List<String> companionTattooNames = new ArrayList<>(tattooNames);
 							companionTattooNames.remove(name);
-							String companionTattooName = companionTattooNames.get(Util.random.nextInt(companionTattooNames.size()));
+							String companionTattooName = Util.random.of(companionTattooNames);
 							applyTattoo(getMainCompanion(), companionTattooName);
 							UtilText.addSpecialParsingString(companionTattooName, false);
 						}

@@ -1383,7 +1383,7 @@ public class GamblingDenDialogue {
 									
 								} else {
 									for(int i=0; i<3; i++) {
-										AbstractSubspecies s = races.get(Util.random.nextInt(races.size()));
+										AbstractSubspecies s = Util.random.of(races);
 										results.add(s);
 										if(i==0) {
 											races.remove(s);

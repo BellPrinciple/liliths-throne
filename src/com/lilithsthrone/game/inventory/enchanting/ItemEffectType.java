@@ -746,7 +746,7 @@ public class ItemEffectType {
 			}
 
 			if((Math.random()>0.33f && !fetishesToAdd.isEmpty()) || fetishesToRemove.isEmpty()) {
-				Fetish f = fetishesToAdd.get(Util.random.nextInt(fetishesToAdd.size()));
+				Fetish f = Util.random.of(fetishesToAdd);
 				target.addFetish(f);
 				
 				return "<p style='text-align:center;'>"
@@ -758,7 +758,7 @@ public class ItemEffectType {
 						+"</p>";
 				
 			} else {
-				Fetish f = fetishesToRemove.get(Util.random.nextInt(fetishesToRemove.size()));
+				Fetish f = Util.random.of(fetishesToRemove);
 				target.removeFetish(f);
 				
 				return "<p style='text-align:center;'>"
@@ -1074,7 +1074,7 @@ public class ItemEffectType {
 			
 			// 50% chance for consumable, 50% for clothing:
 			if(Math.random()<0.5f) {
-				AbstractItemType itemType = items.get(Util.random.nextInt(items.size()));
+				AbstractItemType itemType = Util.random.of(items);
 				
 				return "<p>"
 							+ "The present contained: <b>"+itemType.getDisplayName(true)+"</b>!"
@@ -2005,7 +2005,7 @@ public class ItemEffectType {
 					}
 					
 					if(!fetishesToAdd.isEmpty()) {
-						Fetish f = fetishesToAdd.get(Util.random.nextInt(fetishesToAdd.size()));
+						Fetish f = Util.random.of(fetishesToAdd);
 						return target.addFetish(f);
 						
 					} else {
@@ -2032,7 +2032,7 @@ public class ItemEffectType {
 					}
 					
 					if(!fetishesToBoost.isEmpty()) {
-						Fetish f = fetishesToBoost.get(Util.random.nextInt(fetishesToBoost.size()));
+						Fetish f = Util.random.of(fetishesToBoost);
 						FetishDesire newDesire = target.getFetishDesire(f).getNextDesire();
 						
 						return target.setFetishDesire(f, newDesire);
@@ -2062,7 +2062,7 @@ public class ItemEffectType {
 					}
 					
 					if(!fetishesToDrain.isEmpty()) {
-						Fetish f = fetishesToDrain.get(Util.random.nextInt(fetishesToDrain.size()));
+						Fetish f = Util.random.of(fetishesToDrain);
 						FetishDesire newDesire = target.getFetishDesire(f).getPreviousDesire();
 						
 						return target.setFetishDesire(f, newDesire);
@@ -2092,7 +2092,7 @@ public class ItemEffectType {
 					}
 					
 					if(!fetishesToRemove.isEmpty()) {
-						Fetish f = fetishesToRemove.get(Util.random.nextInt(fetishesToRemove.size()));
+						Fetish f = Util.random.of(fetishesToRemove);
 						return target.removeFetish(f);
 						
 					} else {

@@ -517,8 +517,8 @@ public class Vicky extends NPC {
 			}
 		}
 		
-		AbstractItem ingredient = Main.game.getItemGen().generateItem(availableIngredients[Util.random.nextInt(availableIngredients.length)]);
-		TFModifier primaryMod = TFModifier.getTFRacialBodyPartsList().get(Util.random.nextInt(TFModifier.getTFRacialBodyPartsList().size()));
+		AbstractItem ingredient = Main.game.getItemGen().generateItem(Util.random.ofValues(availableIngredients));
+		TFModifier primaryMod = Util.random.of(TFModifier.getTFRacialBodyPartsList());
 		for(int i=0; i<10;i++) {
 			try {
 				if(ingredient.getEnchantmentEffect().getEffectsDescription(primaryMod, TFModifier.NONE, TFPotency.MINOR_BOOST, 0, Main.game.getPlayer(), Main.game.getPlayer())!=null) {
@@ -528,8 +528,8 @@ public class Vicky extends NPC {
 					potion.setName(EnchantingUtils.getPotionName(ingredient, potion.getEffects()));
 				}
 				
-				ingredient = Main.game.getItemGen().generateItem(availableIngredients[Util.random.nextInt(availableIngredients.length)]);
-				primaryMod = TFModifier.getTFRacialBodyPartsList().get(Util.random.nextInt(TFModifier.getTFRacialBodyPartsList().size()));
+				ingredient = Main.game.getItemGen().generateItem(Util.random.ofValues(availableIngredients));
+				primaryMod = Util.random.of(TFModifier.getTFRacialBodyPartsList());
 			} catch(Exception ex) {
 			}
 		}

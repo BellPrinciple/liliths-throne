@@ -182,14 +182,14 @@ public abstract class AbstractItemEffectType {
 		if(additionalUnlockSubspecies!=null) {
 			subsPlusMain.addAll(additionalUnlockSubspecies);
 		}
-		
+
 		for(AbstractSubspecies subspecies : subsPlusMain) {
 			Main.getProperties().addRaceDiscovered(subspecies);
 			if(Main.getProperties().addAdvancedRaceKnowledge(subspecies) && ItemType.getLoreBook(subspecies)!=null) {
 				Main.game.addEvent(new EventLogEntryBookAddedToLibrary(ItemType.getLoreBook(subspecies)), true);
 			}
 		}
-		
+
 		AbstractPerk perk = Perk.getSubspeciesRelatedPerk(mainSubspecies);
 		if(!reader.isPlayer() || ((PlayerCharacter) reader).addRaceDiscoveredFromBook(mainSubspecies) || !reader.hasPerkAnywhereInTree(perk)) {
 			return (withDescription
@@ -3515,7 +3515,7 @@ public abstract class AbstractItemEffectType {
 							@Override
 							public String applyEffect() {
 								List<TFModifier> availableModifiers = new ArrayList<>();
-								
+
 								// Only add TFModifiers which will do something:
 								for(TFModifier tfMod : TFModifier.getTFRacialBodyPartsList()) {
 									boolean add = false;
@@ -3579,14 +3579,14 @@ public abstract class AbstractItemEffectType {
 										availableModifiers.add(tfMod);
 									}
 								}
-								
+
 								if(availableModifiers.isEmpty()) {
 									return UtilText.parse(target, "<p style='text-align:center'>[style.italicsDisabled([npc.NameHasFull] no more random "+race.getName(true)+" transformations available, so nothing happens...)]</p>");
 								}
-								
-								
+
+
 								TFModifier mod = availableModifiers.get(Util.random.nextInt(availableModifiers.size()));
-								
+
 								// If race does not have antenna, horns, tail, wings, or crotch-boobs, make sure that the TF is to remove:
 								if((mod==TFModifier.TF_ANTENNA && race.getRacialBody().getAntennaTypes(false).size()==1 && race.getRacialBody().getAntennaTypes(false).contains(AntennaType.NONE))
 										|| (mod==TFModifier.TF_HORNS && race.getRacialBody().getHornTypes(false).size()==1 && race.getRacialBody().getHornTypes(false).contains(HornType.NONE))
@@ -5589,11 +5589,11 @@ public abstract class AbstractItemEffectType {
 				TFModifier mod = TFModifier.NONE, modSecondary = TFModifier.NONE;
 
 				while (mod == TFModifier.NONE || modSecondary == TFModifier.NONE) {
-					mod = TFModifier.getTFRacialBodyPartsList().get(Util.random.nextInt(TFModifier.getTFRacialBodyPartsList().size()));
-					modSecondary = getRacialSecondaryModifiers(race, mod).get(Util.random.nextInt(getRacialSecondaryModifiers(race, mod).size()));
+					mod = Util.random.of(TFModifier.getTFRacialBodyPartsList());
+					modSecondary = Util.random.of(getRacialSecondaryModifiers(race, mod));
 				}
 
-				TFPotency pot = getRacialPotencyModifiers(race, mod, modSecondary).get(Util.random.nextInt(getRacialPotencyModifiers(race, mod, modSecondary).size()));
+				TFPotency pot = Util.random.of(getRacialPotencyModifiers(race, mod, modSecondary));
 
 				return getRacialEffect(race, mod, modSecondary, pot, user, target).applyEffect();
 			}

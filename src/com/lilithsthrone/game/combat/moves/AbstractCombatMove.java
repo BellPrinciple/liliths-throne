@@ -493,7 +493,7 @@ public abstract class AbstractCombatMove {
         
         if(isCanTargetEnemies()) {
             if(shouldBlunder()) {
-                return enemies.get(Util.random.nextInt(enemies.size()));
+                return Util.random.of(enemies);
             } else {
                 float lowestHP = -1;
                 GameCharacter potentialCharacter = null;
@@ -508,7 +508,7 @@ public abstract class AbstractCombatMove {
         }
         if(isCanTargetAllies() && !allies.isEmpty()) {
             if(shouldBlunder()) {
-                return allies.get(Util.random.nextInt(allies.size()));
+                return Util.random.of(allies);
             }
             else {
                 float lowestHP = -1;

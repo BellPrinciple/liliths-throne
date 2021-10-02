@@ -43,7 +43,7 @@ public enum BodyHair {
 	}
 	
 	public static BodyHair getRandomBodyHair() {
-		return BodyHair.values()[Util.random.nextInt(BodyHair.values().length)];
+		return Util.random.ofValues(BodyHair.values());
 	}
 	
 	public static BodyHair getBodyHairFromValue(int value) {

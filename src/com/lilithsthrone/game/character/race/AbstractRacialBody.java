@@ -736,10 +736,10 @@ public abstract class AbstractRacialBody {
 		List<AbstractAntennaType> antennaList = new ArrayList<>(antennaTypes);
 		
 		if(includeTypeNONE || antennaTypes.size()==1) {
-			return antennaTypes.get(Util.random.nextInt(antennaTypes.size()));
+			return Util.random.of(antennaTypes);
 		} else {
 			antennaList.remove(AntennaType.NONE);
-			return antennaList.get(Util.random.nextInt(antennaList.size()));
+			return Util.random.of(antennaList);
 		}
 	}
 	
@@ -831,10 +831,10 @@ public abstract class AbstractRacialBody {
 		List<AbstractHornType> hornList = new ArrayList<>(hornTypes);
 		
 		if(includeTypeNONE || hornTypes.size()==1) {
-			return hornTypes.get(Util.random.nextInt(hornTypes.size()));
+			return Util.random.of(hornTypes);
 		} else {
 			hornList.remove(HornType.NONE);
-			return hornList.get(Util.random.nextInt(hornList.size()));
+			return Util.random.of(hornList);
 		}
 	}
 	
@@ -859,10 +859,10 @@ public abstract class AbstractRacialBody {
 		List<AbstractTailType> tailList = new ArrayList<>(tailTypes);
 		
 		if(includeTypeNONE || tailTypes.size()==1) {
-			return tailTypes.get(Util.random.nextInt(tailTypes.size()));
+			return Util.random.of(tailTypes);
 		} else {
 			tailList.remove(TailType.NONE);
-			return tailList.get(Util.random.nextInt(tailList.size()));
+			return Util.random.of(tailList);
 		}
 	}
 	
@@ -886,10 +886,10 @@ public abstract class AbstractRacialBody {
 		List<AbstractWingType> wingList = new ArrayList<>(wingTypes);
 		
 		if(includeTypeNONE || wingTypes.size()==1) {
-			return wingTypes.get(Util.random.nextInt(wingTypes.size()));
+			return Util.random.of(wingTypes);
 		} else {
 			wingList.remove(WingType.NONE);
-			return wingList.get(Util.random.nextInt(wingList.size()));
+			return Util.random.of(wingList);
 		}
 	}
 	

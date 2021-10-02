@@ -152,7 +152,7 @@ public enum FluidFlavour {
 	}
 	
 	public String getRandomFlavourDescriptor() {
-		return flavourDescriptors.get(Util.random.nextInt(flavourDescriptors.size()));
+		return Util.random.of(flavourDescriptors);
 	}
 	
 	public static List<FluidFlavour> getUnnaturalFlavourings() {

@@ -413,6 +413,6 @@ public class DominionSuccubusAttacker extends NPC {
 			return super.getDirtyTalkNoPenetration(target, isPlayerDom);
 		}
 		
-		return speech.get(Util.random.nextInt(speech.size()));
+		return Util.random.of(speech);
 	}
 }

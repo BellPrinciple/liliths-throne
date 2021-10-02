@@ -63,7 +63,7 @@ public class ItemGeneration {
 	}
 
 	public AbstractWeapon generateWeapon(AbstractWeaponType wt) {
-		return this.generateWeapon(wt, wt.getAvailableDamageTypes().get(Util.random.nextInt(wt.getAvailableDamageTypes().size())));
+		return this.generateWeapon(wt, Util.random.of(wt.getAvailableDamageTypes()));
 	}
 	
 	public AbstractWeapon generateWeapon(AbstractWeaponType wt, DamageType dt) {
@@ -273,7 +273,7 @@ public class ItemGeneration {
 	public AbstractClothing generateClothingWithEnchantment(AbstractClothingType clothingType, Colour colour) {
 		List<ItemEffect> effects = new ArrayList<>();
 
-		TFModifier rndMod = TFModifier.getClothingAttributeList().get(Util.random.nextInt(TFModifier.getClothingAttributeList().size()));
+		TFModifier rndMod = Util.random.of(TFModifier.getClothingAttributeList());
 		effects.add(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, rndMod, TFPotency.getRandomWeightedPositivePotency(), 0));
 		
 		return generateClothing(clothingType, colour, effects);
@@ -289,7 +289,7 @@ public class ItemGeneration {
 	public AbstractClothing generateClothingWithNegativeEnchantment(AbstractClothingType clothingType, Colour colour) {
 		List<ItemEffect> effects = new ArrayList<>();
 
-		TFModifier rndMod = TFModifier.getClothingAttributeList().get(Util.random.nextInt(TFModifier.getClothingAttributeList().size()));
+		TFModifier rndMod = Util.random.of(TFModifier.getClothingAttributeList());
 		effects.add(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, rndMod, TFPotency.getRandomWeightedNegativePotency(), 0));
 		
 		return generateClothing(clothingType, colour, effects);
@@ -304,9 +304,9 @@ public class ItemGeneration {
 		
 		List<TFModifier> attributeMods = new ArrayList<>(TFModifier.getClothingAttributeList());
 		
-		TFModifier rndMod = attributeMods.get(Util.random.nextInt(attributeMods.size()));
+		TFModifier rndMod = Util.random.of(attributeMods);
 		attributeMods.remove(rndMod);
-		TFModifier rndMod2 = attributeMods.get(Util.random.nextInt(attributeMods.size()));
+		TFModifier rndMod2 = Util.random.of(attributeMods);
 		
 		effects.add(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, rndMod, TFPotency.MAJOR_BOOST, 0));
 		effects.add(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, rndMod2, TFPotency.MAJOR_BOOST, 0));

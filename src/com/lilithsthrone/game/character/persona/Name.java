@@ -680,7 +680,7 @@ public class Name {
 			}
 			
 		} else {
-			surname = lilinNames[Util.random.nextInt(lilinNames.length)]+"martu";
+			surname = Util.random.ofValues(lilinNames)+"martu";
 		}
 		
 		return surname;
@@ -699,14 +699,14 @@ public class Name {
 				&& (gc.getSubspecies()==Subspecies.FOX_ASCENDANT
 						|| gc.getSubspecies()==Subspecies.FOX_ASCENDANT_ARCTIC
 						|| gc.getSubspecies()==Subspecies.FOX_ASCENDANT_FENNEC)) {
-			return youkoSurnames[Util.random.nextInt(youkoSurnames.length)];
+			return Util.random.ofValues(youkoSurnames);
 		}
 		if(gc.getBody()!=null) {
 			if(gc.getRace()==Race.DEMON || gc.getRace()==Race.ELEMENTAL) {
 				return getDemonSurname(gc);
 			}
 		}
-		return surnames[Util.random.nextInt(surnames.length)];
+		return Util.random.ofValues(surnames);
 	}
 	
 	public static NameTriplet getRandomTriplet(AbstractRace r) {
@@ -734,10 +734,10 @@ public class Name {
 		String[] postfixFem = new String[] {"jyx", "ryth", "ney", "nix", "sys", "trix"};
 		String[] postfixMas = new String[] {"jyx", "ryth", "ney", "nix", "sys", "trix"};
 		
-		String femName = prefixFem[Util.random.nextInt(prefixFem.length)] + postfixFem[Util.random.nextInt(postfixFem.length)];
+		String femName = Util.random.ofValues(prefixFem) + Util.random.ofValues(postfixFem);
 		char startingChar = femName.charAt(0);
 
-		String masName = prefixMas[Util.random.nextInt(prefixMas.length)] + postfixMas[Util.random.nextInt(postfixMas.length)];
+		String masName = Util.random.ofValues(prefixMas) + Util.random.ofValues(postfixMas);
 		
 		List<String> masculineNames = new ArrayList<>();
 		for(String s : prefixMas) {
@@ -746,7 +746,7 @@ public class Name {
 			}
 		}
 		if(!masculineNames.isEmpty()) {
-			masName = masculineNames.get(Util.random.nextInt(masculineNames.size())) + postfixMas[Util.random.nextInt(postfixMas.length)];
+			masName = Util.random.of(masculineNames) + Util.random.ofValues(postfixMas);
 		}
 		
 		return new NameTriplet(masName, femName, femName);

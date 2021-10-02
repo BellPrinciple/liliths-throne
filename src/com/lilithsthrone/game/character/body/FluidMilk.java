@@ -151,7 +151,7 @@ public class FluidMilk implements FluidInterface {
 	public String getDescriptor(GameCharacter gc) {
 		String modifierDescriptor = "";
 		if(!fluidModifiers.isEmpty()) {
-			modifierDescriptor = fluidModifiers.get(Util.random.nextInt(fluidModifiers.size())).getName();
+			modifierDescriptor = Util.random.of(fluidModifiers).getName();
 		}
 		
 		return UtilText.returnStringAtRandom(

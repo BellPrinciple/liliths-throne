@@ -758,7 +758,7 @@ public class OccupancyUtil implements XMLSaving {
 						}
 						
 					} else {
-						switch(new ArrayList<>(slave.getSlaveJobSettings(currentJob)).get(Util.random.nextInt(slave.getSlaveJobSettings(currentJob).size()))) {
+						switch(Util.random.of(slave.getSlaveJobSettings(currentJob))) {
 							case TEST_SUBJECT_ALLOW_TRANSFORMATIONS_FEMALE:
 								List<String> list = new ArrayList<>();
 								if(slave.hasFetish(Fetish.FETISH_TRANSFORMATION_RECEIVING)) {
@@ -872,7 +872,7 @@ public class OccupancyUtil implements XMLSaving {
 							effectDescriptions.setLength(0);
 							
 						} else {
-							SlaveJobSetting eventGenerated = settingsEnabled.get(Util.random.nextInt(settingsEnabled.size()));
+							SlaveJobSetting eventGenerated = Util.random.of(settingsEnabled);
 							
 							switch(eventGenerated) {
 								case SEX_ANAL:
@@ -1030,7 +1030,7 @@ public class OccupancyUtil implements XMLSaving {
 						effectDescriptions.setLength(0);
 						
 					} else {
-						SlaveJobSetting eventGenerated = settingsEnabled.get(Util.random.nextInt(settingsEnabled.size()));
+						SlaveJobSetting eventGenerated = Util.random.of(settingsEnabled);
 						
 						switch(eventGenerated) {
 							case SEX_ANAL:

@@ -266,7 +266,7 @@ public class GenericOrgasms {
 				} else {
 					genericOrgasmSB.append(" The");
 				}
-				genericOrgasmSB.append(modifiers.get(Util.random.nextInt(modifiers.size())));
+				genericOrgasmSB.append(Util.random.of(modifiers));
 				
 			} else {
 				if(!ongoingProstateStimulators.isEmpty()) {
@@ -340,7 +340,7 @@ public class GenericOrgasms {
 					}
 				
 					if(!characterOrgasming.getPenisModifiers().isEmpty()) {
-						switch(characterOrgasming.getPenisModifiers().get(Util.random.nextInt(characterOrgasming.getPenisModifiers().size()))) {
+						switch(Util.random.of(characterOrgasming.getPenisModifiers())) {
 							case BARBED:
 								genericOrgasmSB.append(", before reaching down and sliding [npc.her] [npc.hand] up and down over [npc.her] sensitive little barbs.");
 								break;
@@ -572,7 +572,7 @@ public class GenericOrgasms {
 						}
 						
 						if(!modifiers.isEmpty()) {
-							genericOrgasmSB.append(modifiers.get(Util.random.nextInt(modifiers.size())));
+							genericOrgasmSB.append(Util.random.of(modifiers));
 						}
 						
 						if(characterOrgasming.hasPenisModifier(PenetrationModifier.KNOTTED)) {
@@ -966,7 +966,7 @@ public class GenericOrgasms {
 						}
 						
 						if(!modifiers.isEmpty()) {
-							genericOrgasmSB.append(modifiers.get(Util.random.nextInt(modifiers.size())));
+							genericOrgasmSB.append(Util.random.of(modifiers));
 						}
 						break;
 						
@@ -1830,7 +1830,7 @@ public class GenericOrgasms {
 						}
 						cumTargetSB.append(" gulp down as much of the");
 						if(!characterOrgasming.getCumModifiers().isEmpty()) {
-							switch(characterOrgasming.getCumModifiers().get(Util.random.nextInt(characterOrgasming.getCumModifiers().size()))) { //TODO specials for ALCOHOLIC & HALLUCINOGENIC
+							switch(Util.random.of(characterOrgasming.getCumModifiers())) { //TODO specials for ALCOHOLIC & HALLUCINOGENIC
 								case ADDICTIVE:
 									cumTargetSB.append(" delicious, highly-addictive [npc.cum] as you possibly can.");
 									break;

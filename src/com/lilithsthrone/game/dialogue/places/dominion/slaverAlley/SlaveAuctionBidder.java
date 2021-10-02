@@ -58,7 +58,7 @@ public class SlaveAuctionBidder {
 	}
 
 	public String getRandomBiddingComment() {
-		return biddingComments.get(Util.random.nextInt(biddingComments.size()));
+		return Util.random.of(biddingComments);
 	}
 	
 	public List<String> getFailedBidComments() {
@@ -66,7 +66,7 @@ public class SlaveAuctionBidder {
 	}
 
 	public String getRandomFailedBiddingComment() {
-		return failedBidComments.get(Util.random.nextInt(failedBidComments.size()));
+		return Util.random.of(failedBidComments);
 	}
 	
 	public List<String> getSuccessfulBidComments() {
@@ -74,7 +74,7 @@ public class SlaveAuctionBidder {
 	}
 	
 	public String getRandomSuccessfulBiddingComment() {
-		return successfulBidComments.get(Util.random.nextInt(successfulBidComments.size()));
+		return Util.random.of(successfulBidComments);
 	}
 	
 	public static SlaveAuctionBidder generateNewSlaveAuctionBidder(NPC slave) {

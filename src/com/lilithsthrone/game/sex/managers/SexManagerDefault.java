@@ -169,14 +169,14 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 			}
 			
 			if(!priorityOrgasms.isEmpty()) {
-				return priorityOrgasms.get(Util.random.nextInt(priorityOrgasms.size()));
+				return Util.random.of(priorityOrgasms);
 				
 			} else {
 				if(availableActions.isEmpty()) {
 					System.err.println(partner.getName(true)+" has no orgasm actions!!!");
 					return GenericOrgasms.PARTNER_GENERIC_ORGASM;
 				}
-				return availableActions.get(Util.random.nextInt(availableActions.size()));
+				return Util.random.of(availableActions);
 			}
 		}
 		
@@ -205,7 +205,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 			possibleActions.addAll(Main.sex.getAvailableSexActionsPartner());
 			
 			if (!possibleActions.isEmpty()) {
-				return possibleActions.get(Util.random.nextInt(possibleActions.size()));
+				return Util.random.of(possibleActions);
 			} else {
 				return SexActionUtility.PARTNER_NONE;
 			}
@@ -579,7 +579,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 		possibleActions.removeAll(bannedActions);
 		
 		if (!possibleActions.isEmpty()) {
-			return possibleActions.get(Util.random.nextInt(possibleActions.size()));
+			return Util.random.of(possibleActions);
 		}
 		
 		// Priority 9 (last resort):
@@ -669,7 +669,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 			}
 			
 			if(!highPriorityList.isEmpty() && Math.random()<0.66f) {
-				return (SexAction) highPriorityList.get(Util.random.nextInt(highPriorityList.size()));
+				return (SexAction) Util.random.of(highPriorityList);
 			}
 		}
 		
@@ -686,11 +686,11 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 		}
 		
 		if(!highPriorityList.isEmpty()) {
-			return (SexAction) highPriorityList.get(Util.random.nextInt(highPriorityList.size()));
+			return (SexAction) Util.random.of(highPriorityList);
 		}
 
 		if(!mediumPriorityList.isEmpty()) {
-			return (SexAction) mediumPriorityList.get(Util.random.nextInt(mediumPriorityList.size()));
+			return (SexAction) Util.random.of(mediumPriorityList);
 		}
 		
 		// --- Banning actions ---
@@ -865,11 +865,11 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 						}
 						
 						if(!penetrativeActionList.isEmpty()) {
-							return (SexAction) penetrativeActionList.get(Util.random.nextInt(penetrativeActionList.size()));
+							return (SexAction) Util.random.of(penetrativeActionList);
 						}
 						
 						if(penetrativeActionList.isEmpty() && !highPriorityList.isEmpty() && Math.random()<0.66f) { // 2/3 chance, so that there is some chance of using other actions as well:
-							return (SexAction) highPriorityList.get(Util.random.nextInt(highPriorityList.size()));
+							return (SexAction) Util.random.of(highPriorityList);
 						}
 					}
 				// -------
@@ -898,7 +898,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 						Main.sex.removeCharacterBannedFromPositioning(performingCharacter);
 					}
 					if(!returnableActions.isEmpty()) {
-						return (SexAction) returnableActions.get(Util.random.nextInt(returnableActions.size()));
+						return (SexAction) Util.random.of(returnableActions);
 					}
 				// -------
 				
@@ -965,10 +965,10 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 				nonPenetrativeOrifices.removeAll(actualOrifices);
 				
 				if(!actualOrifices.isEmpty()) {
-					return (SexAction) actualOrifices.get(Util.random.nextInt(actualOrifices.size()));
+					return (SexAction) Util.random.of(actualOrifices);
 					
 				} else if(!nonPenetrativeOrifices.isEmpty()) {
-					return (SexAction) nonPenetrativeOrifices.get(Util.random.nextInt(nonPenetrativeOrifices.size()));
+					return (SexAction) Util.random.of(nonPenetrativeOrifices);
 				}
 				
 				// If no entries in penetrativeActionList, use returnableActions:
@@ -982,10 +982,10 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 				nonPenetrativeOrifices.removeAll(actualOrifices);
 				
 				if(!actualOrifices.isEmpty()) {
-					return (SexAction) actualOrifices.get(Util.random.nextInt(actualOrifices.size()));
+					return (SexAction) Util.random.of(actualOrifices);
 					
 				} else if(!nonPenetrativeOrifices.isEmpty()) {
-					return (SexAction) nonPenetrativeOrifices.get(Util.random.nextInt(nonPenetrativeOrifices.size()));
+					return (SexAction) Util.random.of(nonPenetrativeOrifices);
 				}
 				
 			} else { // If there is no sex penetration available, just use foreplay:

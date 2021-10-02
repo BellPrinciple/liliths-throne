@@ -778,7 +778,7 @@ public class UtilText {
 	private static String[] femaleCumNames = new String[] { "juices" };
 
 	public static String getFemaleCumName() {
-		return femaleCumNames[Util.random.nextInt(femaleCumNames.length)];
+		return Util.random.ofValues(femaleCumNames);
 	}
 
 	/**
@@ -794,7 +794,7 @@ public class UtilText {
 		}
 		
 		if(!randomStrings.isEmpty()) {
-			return randomStrings.get(Util.random.nextInt(randomStrings.size()));
+			return Util.random.of(randomStrings);
 		} else {
 			return "";
 		}
@@ -871,7 +871,7 @@ public class UtilText {
 			return "<p><span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Dialogue for '"+tag+"' not found! (Make sure that the 'res' folder is in the same directory as the .jar or .exe.)</span></p>";
 
 		} else {
-			return parse(new ArrayList<>(specialNPC), strings.get(Util.random.nextInt(strings.size())), true, parserTags);
+			return parse(new ArrayList<>(specialNPC), Util.random.of(strings), true, parserTags);
 		}
 	}
 	
@@ -7398,7 +7398,7 @@ public class UtilText {
 			@Override
 			public String parse(List<GameCharacter> specialNPCs, String command, String arguments, String target, GameCharacter character) {
 				if(!character.getCumModifiers().isEmpty()) {
-					return character.getCumModifiers().get(Util.random.nextInt(character.getCumModifiers().size())).getName() + " precum";
+					return Util.random.of(character.getCumModifiers()).getName() + " precum";
 				}
 				
 				return "precum";

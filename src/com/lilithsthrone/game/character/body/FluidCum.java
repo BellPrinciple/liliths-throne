@@ -148,7 +148,7 @@ public class FluidCum implements FluidInterface, XMLSaving {
 	public String getDescriptor(GameCharacter gc) {
 		String modifierDescriptor = "";
 		if(!fluidModifiers.isEmpty()) {
-			modifierDescriptor = fluidModifiers.get(Util.random.nextInt(fluidModifiers.size())).getName();
+			modifierDescriptor = Util.random.of(fluidModifiers).getName();
 		}
 		
 		return UtilText.returnStringAtRandom(

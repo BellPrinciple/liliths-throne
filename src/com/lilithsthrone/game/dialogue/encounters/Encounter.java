@@ -438,7 +438,7 @@ public class Encounter {
 				
 			} else if(node == EncounterType.DOMINION_FIND_ITEM) {
 				if(!Main.game.isSillyModeEnabled() || Math.random()<0.99f) {
-					randomItem = Main.game.getItemGen().generateItem(ItemType.getDominionAlleywayItems().get(Util.random.nextInt(ItemType.getDominionAlleywayItems().size())));
+					randomItem = Main.game.getItemGen().generateItem(Util.random.of(ItemType.getDominionAlleywayItems()));
 					
 				} else {
 					if(Math.random()<0.5f) {
@@ -465,7 +465,7 @@ public class Encounter {
 							|| clothing.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN)
 							|| clothing.getRarity()==Rarity.EPIC
 							|| clothing.getRarity()==Rarity.LEGENDARY);
-					randomItem = Main.game.getItemGen().generateClothing(randomClothingList.get(Util.random.nextInt(randomClothingList.size())));
+					randomItem = Main.game.getItemGen().generateClothing(Util.random.of(randomClothingList));
 					Main.game.getPlayerCell().getInventory().addClothing((AbstractClothing) randomItem);
 				}
 				return DominionEncounterDialogue.ALLEY_FIND_ITEM;
@@ -473,7 +473,7 @@ public class Encounter {
 			} else if(node == EncounterType.DOMINION_FIND_WEAPON) {
 				List<AbstractWeaponType> weapons = new ArrayList<>(WeaponType.getAllWeapons());
 				weapons.removeIf(w -> !w.getItemTags().contains(ItemTag.DOMINION_ALLEYWAY_SPAWN));
-				randomItem = Main.game.getItemGen().generateWeapon(weapons.get(Util.random.nextInt(weapons.size())));
+				randomItem = Main.game.getItemGen().generateWeapon(Util.random.of(weapons));
 				
 				Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getInventory().addWeapon((AbstractWeapon) randomItem);
 				return DominionEncounterDialogue.ALLEY_FIND_ITEM;
@@ -588,7 +588,7 @@ public class Encounter {
 				
 			}else if(node == EncounterType.DOMINION_FIND_ITEM) {
 				if(!Main.game.isSillyModeEnabled() || Math.random()<0.99f) {
-					randomItem = Main.game.getItemGen().generateItem(ItemType.getDominionAlleywayItems().get(Util.random.nextInt(ItemType.getDominionAlleywayItems().size())));
+					randomItem = Main.game.getItemGen().generateItem(Util.random.of(ItemType.getDominionAlleywayItems()));
 					
 				} else {
 					if(Math.random()<0.5f) {
@@ -615,7 +615,7 @@ public class Encounter {
 							|| clothing.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN)
 							|| clothing.getRarity()==Rarity.EPIC
 							|| clothing.getRarity()==Rarity.LEGENDARY);
-					randomItem = Main.game.getItemGen().generateClothing(randomClothingList.get(Util.random.nextInt(randomClothingList.size())));
+					randomItem = Main.game.getItemGen().generateClothing(Util.random.of(randomClothingList));
 					Main.game.getPlayerCell().getInventory().addClothing((AbstractClothing) randomItem);
 				}
 				return DominionEncounterDialogue.ALLEY_FIND_ITEM;
@@ -623,7 +623,7 @@ public class Encounter {
 			} else if(node == EncounterType.DOMINION_FIND_WEAPON) {
 				List<AbstractWeaponType> weapons = new ArrayList<>(WeaponType.getAllWeapons());
 				weapons.removeIf(w -> !w.getItemTags().contains(ItemTag.DOMINION_ALLEYWAY_SPAWN));
-				randomItem = Main.game.getItemGen().generateWeapon(weapons.get(Util.random.nextInt(weapons.size())));
+				randomItem = Main.game.getItemGen().generateWeapon(Util.random.of(weapons));
 				
 				Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getInventory().addWeapon((AbstractWeapon) randomItem);
 				return DominionEncounterDialogue.ALLEY_FIND_ITEM;
@@ -1011,7 +1011,7 @@ public class Encounter {
 				
 			} else if (node == EncounterType.SUBMISSION_FIND_ITEM) {
 				
-				randomItem = Main.game.getItemGen().generateItem(ItemType.getSubmissionTunnelItems().get(Util.random.nextInt(ItemType.getSubmissionTunnelItems().size())));
+				randomItem = Main.game.getItemGen().generateItem(Util.random.of(ItemType.getSubmissionTunnelItems()));
 				
 				Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getInventory().addItem((AbstractItem) randomItem);
 				return SubmissionEncounterDialogue.FIND_ITEM;
@@ -1145,7 +1145,7 @@ public class Encounter {
 				if(Main.game.getPlayerCell().getPlace().getPlaceType()==PlaceType.BAT_CAVERN_LIGHT && Math.random()<0.8f) {
 					randomItem = Main.game.getItemGen().generateItem(ItemType.MUSHROOM);
 				} else {
-					randomItem = Main.game.getItemGen().generateItem(ItemType.getBatCavernItems().get(Util.random.nextInt(ItemType.getBatCavernItems().size())));
+					randomItem = Main.game.getItemGen().generateItem(Util.random.of(ItemType.getBatCavernItems()));
 				}
 				Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getInventory().addItem((AbstractItem) randomItem);
 				

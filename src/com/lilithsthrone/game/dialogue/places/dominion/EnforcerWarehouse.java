@@ -595,7 +595,7 @@ public class EnforcerWarehouse {
 								
 								AbstractClothing clothing = Main.game.getItemGen().generateClothing(Util.randomItemFrom(clothingToGenerate), false);
 								for(int i=0; i<Util.random.nextInt(4); i++) {
-									TFModifier rndMod = TFModifier.getClothingAttributeList().get(Util.random.nextInt(TFModifier.getClothingAttributeList().size()));
+									TFModifier rndMod = Util.random.of(TFModifier.getClothingAttributeList());
 									clothing.addEffect(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, rndMod, TFPotency.getRandomWeightedPositivePotency(), 0));
 								}
 								

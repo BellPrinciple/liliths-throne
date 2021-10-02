@@ -2042,7 +2042,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 				availableRaces.add(Subspecies.HARPY);
 				availableRaces.add(Subspecies.COW_MORPH);
 				availableRaces.add(Subspecies.SQUIRREL_MORPH);
-				species = availableRaces.get(Util.random.nextInt(availableRaces.size()));
+				species = Util.random.of(availableRaces);
 			}
 			
 			// Chance for race to be random:
@@ -2056,7 +2056,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 				availableRaces.add(Subspecies.SQUIRREL_MORPH);
 				availableRaces.add(Subspecies.COW_MORPH);
 				availableRaces.add(Subspecies.WOLF_MORPH);
-				species = availableRaces.get(Util.random.nextInt(availableRaces.size()));
+				species = Util.random.of(availableRaces);
 			}
 			
 			// Preferred race stage:

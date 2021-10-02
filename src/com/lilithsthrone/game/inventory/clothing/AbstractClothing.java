@@ -120,9 +120,9 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 			
 			List<TFModifier> attributeMods = new ArrayList<>(TFModifier.getClothingAttributeList());
 			
-			TFModifier rndMod = attributeMods.get(Util.random.nextInt(attributeMods.size()));
+			TFModifier rndMod = Util.random.of(attributeMods);
 			attributeMods.remove(rndMod);
-			TFModifier rndMod2 = attributeMods.get(Util.random.nextInt(attributeMods.size()));
+			TFModifier rndMod2 = Util.random.of(attributeMods);
 			
 			if(chance <= 20) { // Jinxed:
 				if(chance <= 1) {

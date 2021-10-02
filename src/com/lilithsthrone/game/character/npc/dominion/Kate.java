@@ -587,7 +587,7 @@ public class Kate extends NPC {
 		speech.add("Please, let's get started!");
 		speech.add("My little pussy needs you so bad!");
 		
-		return speech.get(Util.random.nextInt(speech.size()));
+		return Util.random.of(speech);
 	}
 	
 	/**
@@ -599,6 +599,6 @@ public class Kate extends NPC {
 		speech.add("You're so hot!");
 		speech.add("What a cute little demon you are!");
 		
-		return speech.get(Util.random.nextInt(speech.size()));
+		return Util.random.of(speech);
 	}
 }

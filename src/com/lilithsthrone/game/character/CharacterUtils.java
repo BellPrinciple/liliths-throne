@@ -2288,7 +2288,7 @@ public class CharacterUtils {
 		for(int i=0; i<Util.random.nextInt(4)+2; i++) {
 			items = new ArrayList<>(character.getLootItems());
 			if(!items.isEmpty()) {
-				AbstractCoreItem item = items.get(Util.random.nextInt(items.size()));
+				AbstractCoreItem item = Util.random.of(items);
 				if(!itemsRemoved.contains(item)) {
 					if(item instanceof AbstractItem
 							&& ((AbstractItem)item).getItemType() == ItemType.getLoreBook(character.getSubspecies())) {
@@ -2717,9 +2717,9 @@ public class CharacterUtils {
 			}
 		}
 		
-		Colour primaryColour = ColourListPresets.ALL.get(Util.random.nextInt(ColourListPresets.ALL.size()));
-		Colour secondaryColour = ColourListPresets.ALL.get(Util.random.nextInt(ColourListPresets.ALL.size()));
-		Colour lingerieColour = ColourListPresets.LINGERIE.get(Util.random.nextInt(ColourListPresets.LINGERIE.size()));
+		Colour primaryColour = Util.random.of(ColourListPresets.ALL);
+		Colour secondaryColour = Util.random.of(ColourListPresets.ALL);
+		Colour lingerieColour = Util.random.of(ColourListPresets.LINGERIE);
 		
 		// Remove exposing underwear if replaceUnsuitableClothing and is exposed:
 		if(settings.contains(EquipClothingSetting.REPLACE_CLOTHING)

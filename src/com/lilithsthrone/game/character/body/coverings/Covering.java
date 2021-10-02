@@ -56,10 +56,8 @@ public class Covering implements XMLSaving {
 	public Covering(AbstractBodyCoveringType type) {
 		this(type,
 				Util.getRandomObjectFromWeightedMap(type.getNaturalPatterns()),
-				type.getNaturalColoursPrimary().get(Util.random.nextInt(type.getNaturalColoursPrimary().size())), false,
-				(type.getNaturalColoursSecondary().isEmpty()
-					?type.getNaturalColoursPrimary().get(Util.random.nextInt(type.getNaturalColoursPrimary().size()))
-					:type.getNaturalColoursSecondary().get(Util.random.nextInt(type.getNaturalColoursSecondary().size()))), false);
+				Util.random.of(type.getNaturalColoursPrimary()), false,
+				Util.random.of(type.getNaturalColoursSecondary().isEmpty()?type.getNaturalColoursPrimary():type.getNaturalColoursSecondary()), false);
 	}
 	
 	/**
@@ -74,7 +72,7 @@ public class Covering implements XMLSaving {
 				primaryColour, false,
 				(type.getNaturalColoursSecondary().contains(primaryColour) || type.getNaturalColoursSecondary().isEmpty()
 						?primaryColour
-						:type.getNaturalColoursSecondary().get(Util.random.nextInt(type.getNaturalColoursSecondary().size()))), false);
+						:Util.random.of(type.getNaturalColoursSecondary())), false);
 	}
 	
 	/**

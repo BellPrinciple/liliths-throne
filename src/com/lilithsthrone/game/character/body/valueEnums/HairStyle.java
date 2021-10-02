@@ -106,6 +106,6 @@ public enum HairStyle {
 			availableStyles.remove(HairStyle.DRILLS);
 		}
 		
-		return availableStyles.get(Util.random.nextInt(availableStyles.size()));
+		return Util.random.of(availableStyles);
 	}
 }

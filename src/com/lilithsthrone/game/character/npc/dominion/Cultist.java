@@ -185,28 +185,28 @@ public class Cultist extends NPC {
 		colours.add(PresetColour.CLOTHING_BLACK);
 		colours.add(PresetColour.CLOTHING_PURPLE);
 		colours.add(PresetColour.CLOTHING_PURPLE_LIGHT);
-		Colour underwearColour = colours.get(Util.random.nextInt(colours.size()));
+		Colour underwearColour = Util.random.of(colours);
 
 		colours.clear();
 		colours.add(PresetColour.CLOTHING_WHITE);
 		colours.add(PresetColour.CLOTHING_BLACK);
-		Colour witchColour = colours.get(Util.random.nextInt(colours.size()));
+		Colour witchColour = Util.random.of(colours);
 		
 		
 		List<AbstractClothingType> clothingChoices = new ArrayList<>();
 		
 		clothingChoices.add(ClothingType.GROIN_CROTCHLESS_PANTIES);
 		clothingChoices.add(ClothingType.GROIN_CROTCHLESS_THONG);
-		equipClothingFromNowhere(Main.game.getItemGen().generateClothing(clothingChoices.get(Util.random.nextInt(clothingChoices.size())), underwearColour, false), true, this);
+		equipClothingFromNowhere(Main.game.getItemGen().generateClothing(Util.random.of(clothingChoices), underwearColour, false), true, this);
 		
 		clothingChoices.clear();
 		clothingChoices.add(ClothingType.getClothingTypeFromId("innoxia_chest_lacy_plunge_bra"));
 		clothingChoices.add(ClothingType.CHEST_PLUNGE_BRA);
-		equipClothingFromNowhere(Main.game.getItemGen().generateClothing(clothingChoices.get(Util.random.nextInt(clothingChoices.size())), underwearColour, false), true, this);
+		equipClothingFromNowhere(Main.game.getItemGen().generateClothing(Util.random.of(clothingChoices), underwearColour, false), true, this);
 		
 		clothingChoices.clear();
 		clothingChoices.add(ClothingType.getClothingTypeFromId("innoxia_sock_thighhigh_socks"));
-		equipClothingFromNowhere(Main.game.getItemGen().generateClothing(clothingChoices.get(Util.random.nextInt(clothingChoices.size())), witchColour, false), true, this);
+		equipClothingFromNowhere(Main.game.getItemGen().generateClothing(Util.random.of(clothingChoices), witchColour, false), true, this);
 
 		equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_witch_witch_dress", witchColour, false), true, this);
 		if(Math.random()<0.5) {
@@ -231,8 +231,8 @@ public class Cultist extends NPC {
 				PresetColour.COVERING_PURPLE,
 				PresetColour.COVERING_BLACK);
 		
-		Colour colourForCoordination = colours.get(Util.random.nextInt(colours.size()));
-		Colour colourForNails = colours.get(Util.random.nextInt(colours.size()));
+		Colour colourForCoordination = Util.random.of(colours);
+		Colour colourForNails = Util.random.of(colours);
 		
 		setLipstick(new Covering(BodyCoveringType.MAKEUP_LIPSTICK, colourForCoordination));
 		setEyeLiner(new Covering(BodyCoveringType.MAKEUP_EYE_LINER, PresetColour.COVERING_BLACK));

@@ -16654,7 +16654,7 @@ public abstract class GameCharacter implements XMLSaving {
 									break;
 							}
 						}
-						penetrationSB.append(initialDescriptions.get(Util.random.nextInt(initialDescriptions.size())));
+						penetrationSB.append(Util.random.of(initialDescriptions));
 						
 						initialDescriptions.clear();
 						initialDescriptions.add(" [npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc2.namePos] [npc2.asshole+] squeezes down around [npc.her] [npc.cock+].");
@@ -16676,7 +16676,7 @@ public abstract class GameCharacter implements XMLSaving {
 									break;
 							}
 						}
-						penetrationSB.append(initialDescriptions.get(Util.random.nextInt(initialDescriptions.size())));
+						penetrationSB.append(Util.random.of(initialDescriptions));
 						
 						return UtilText.parse(characterPenetrating, characterPenetrated, penetrationSB.toString());
 					default:
@@ -16730,7 +16730,7 @@ public abstract class GameCharacter implements XMLSaving {
 									break;
 							}
 						}
-						penetrationSB.append(initialDescriptions.get(Util.random.nextInt(initialDescriptions.size())));
+						penetrationSB.append(Util.random.of(initialDescriptions));
 						
 						initialDescriptions.clear();
 						initialDescriptions.add(" [npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc2.namePos] [npc2.vagina+] squeezes down around [npc.her] [npc.cock+].");
@@ -16752,7 +16752,7 @@ public abstract class GameCharacter implements XMLSaving {
 									break;
 							}
 						}
-						penetrationSB.append(initialDescriptions.get(Util.random.nextInt(initialDescriptions.size())));
+						penetrationSB.append(Util.random.of(initialDescriptions));
 						
 						return UtilText.parse(characterPenetrating, characterPenetrated, penetrationSB.toString());
 					default:
@@ -16805,7 +16805,7 @@ public abstract class GameCharacter implements XMLSaving {
 									break;
 							}
 						}
-						penetrationSB.append(initialDescriptions.get(Util.random.nextInt(initialDescriptions.size())));
+						penetrationSB.append(Util.random.of(initialDescriptions));
 						
 						initialDescriptions.clear();
 						initialDescriptions.add(" [npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc2.namePos] [npc2.nipple+] squeezes down around [npc.her] [npc.cock+].");
@@ -16827,7 +16827,7 @@ public abstract class GameCharacter implements XMLSaving {
 									break;
 							}
 						}
-						penetrationSB.append(initialDescriptions.get(Util.random.nextInt(initialDescriptions.size())));
+						penetrationSB.append(Util.random.of(initialDescriptions));
 						
 						return UtilText.parse(characterPenetrating, characterPenetrated, penetrationSB.toString());
 					
@@ -16902,7 +16902,7 @@ public abstract class GameCharacter implements XMLSaving {
 									break;
 							}
 						}
-						penetrationSB.append(initialDescriptions.get(Util.random.nextInt(initialDescriptions.size())));
+						penetrationSB.append(Util.random.of(initialDescriptions));
 						
 						initialDescriptions.clear();
 						initialDescriptions.add(" [npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc2.namePos] throat squeezes down around [npc.her] [npc.cock+].");
@@ -16926,7 +16926,7 @@ public abstract class GameCharacter implements XMLSaving {
 									break;
 							}
 						}
-						penetrationSB.append(initialDescriptions.get(Util.random.nextInt(initialDescriptions.size())));
+						penetrationSB.append(Util.random.of(initialDescriptions));
 						
 						return UtilText.parse(characterPenetrating, characterPenetrated, penetrationSB.toString());
 					default:
@@ -20827,7 +20827,7 @@ public abstract class GameCharacter implements XMLSaving {
 		if(availableLocations.isEmpty()) {
 			return false;
 		} else {
-			this.setLocation(availableLocations.get(Util.random.nextInt(availableLocations.size())));
+			this.setLocation(Util.random.of(availableLocations));
 			if(setAsHome) {
 				this.setHomeLocation();
 			}
