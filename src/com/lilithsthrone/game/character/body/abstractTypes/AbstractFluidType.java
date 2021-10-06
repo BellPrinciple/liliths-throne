@@ -176,25 +176,25 @@ public abstract class AbstractFluidType implements BodyPartTypeInterface {
 		
 		if(gc==null || gc.isFeminine()) {
 			if(namesFeminine==null || namesFeminine.isEmpty()) {
-				return Util.randomItemFrom(baseFluidType.getNames());
+				return Util.random.of(baseFluidType.getNames());
 			}
-			name = Util.randomItemFrom(namesFeminine);
+			name = Util.random.of(namesFeminine);
 			
 		} else {
 			if(namesMasculine==null || namesMasculine.isEmpty()) {
-				return Util.randomItemFrom(baseFluidType.getNames());
+				return Util.random.of(baseFluidType.getNames());
 			}
-			name = Util.randomItemFrom(namesMasculine);
+			name = Util.random.of(namesMasculine);
 		}
-		
-		if(name==null || name.isEmpty()) {
-			return Util.randomItemFrom(baseFluidType.getNames());
+
+		if(name.isEmpty()) {
+			return Util.random.of(baseFluidType.getNames());
 		}
 		if(name.endsWith("-")) {
 			if(Math.random()<0.25f) { // 25% chance to return this '-' name.
-				return name + Util.randomItemFrom(baseFluidType.getNames());
+				return name + Util.random.of(baseFluidType.getNames());
 			} else {
-				return Util.randomItemFrom(baseFluidType.getNames());
+				return Util.random.of(baseFluidType.getNames());
 			}
 		}
 		return name;
@@ -211,13 +211,13 @@ public abstract class AbstractFluidType implements BodyPartTypeInterface {
 			if(descriptorsFeminine==null || descriptorsFeminine.isEmpty()) {
 				return "";
 			}
-			return Util.randomItemFrom(descriptorsFeminine);
+			return Util.random.of(descriptorsFeminine);
 			
 		} else {
 			if(descriptorsMasculine==null || descriptorsMasculine.isEmpty()) {
 				return "";
 			}
-			return Util.randomItemFrom(descriptorsMasculine);
+			return Util.random.of(descriptorsMasculine);
 		}
 	}
 

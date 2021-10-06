@@ -89,7 +89,7 @@ public class LunetteMelee extends NPC {
 			// RACE & NAME:
 			this.setStartingBody(true);
 			
-			this.setGenericName(Util.randomItemFrom(namePrefixes)+" "+name);
+			this.setGenericName(Util.random.of(namePrefixes)+" "+name);
 			setName(Name.getRandomTriplet(this.getRace()));
 			this.setSurname("Lunettemartu");
 			this.setPlayerKnowsName(false);
@@ -407,7 +407,7 @@ public class LunetteMelee extends NPC {
 			this.setVaginaWetness(Wetness.THREE_WET.getValue() + Util.random.nextInt(5));
 			this.setVaginaSquirter(true);
 		}
-		this.setVaginaCapacity(Util.randomItemFrom(Util.newArrayListOfValues(Capacity.TWO_TIGHT, Capacity.THREE_SLIGHTLY_LOOSE, Capacity.FOUR_LOOSE)), true);
+		this.setVaginaCapacity(Util.random.ofValues(Capacity.TWO_TIGHT, Capacity.THREE_SLIGHTLY_LOOSE, Capacity.FOUR_LOOSE), true);
 		this.setVaginaElasticity(OrificeElasticity.TWO_FIRM.getValue() + Util.random.nextInt(3));
 		this.setVaginaPlasticity(OrificePlasticity.ZERO_RUBBERY.getValue() + Util.random.nextInt(3));
 	}

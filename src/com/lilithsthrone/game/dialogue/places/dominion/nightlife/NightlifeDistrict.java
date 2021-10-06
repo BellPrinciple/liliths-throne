@@ -3896,7 +3896,7 @@ public class NightlifeDistrict {
 		} else {
 			descriptors = Util.newArrayListOfValues("horny", "desperate", "horny");
 		}
-		npc.setGenericName(Util.randomItemFrom(descriptors)+" "+genericName);
+		npc.setGenericName(Util.random.of(descriptors)+" "+genericName);
 		
 		npc.setDescription("[npc.Name] is one of the Water Hole's patrons, who, seeking to take a break from the club floor, has wandered into the toilets to service the glory holes...");
 		

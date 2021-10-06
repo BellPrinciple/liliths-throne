@@ -1293,7 +1293,7 @@ public class OccupancyUtil implements XMLSaving {
 		}
 		
 		if(!effects.isEmpty()) {
-			TestSubjectTransformation tst = Util.randomItemFrom(effects);
+			TestSubjectTransformation tst = Util.random.of(effects);
 			return tst.applyEffects();
 		}
 		
@@ -1377,7 +1377,7 @@ public class OccupancyUtil implements XMLSaving {
 		}
 		
 		if(!effects.isEmpty()) {
-			TestSubjectTransformation tst = Util.randomItemFrom(effects);
+			TestSubjectTransformation tst = Util.random.of(effects);
 			return tst.applyEffects();
 		}
 		
@@ -1461,7 +1461,7 @@ public class OccupancyUtil implements XMLSaving {
 		}
 		
 		if(!effects.isEmpty()) {
-			TestSubjectTransformation tst = Util.randomItemFrom(effects);
+			TestSubjectTransformation tst = Util.random.of(effects);
 			return tst.applyEffects();
 		}
 		

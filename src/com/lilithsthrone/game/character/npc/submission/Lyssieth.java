@@ -1229,7 +1229,7 @@ public class Lyssieth extends NPC {
 			return null;
 		}
 		
-		String returnedLine = Util.randomItemFrom(availableLines);
+		String returnedLine = Util.random.of(availableLines);
 		return UtilText.parse(this, target, "[npc.speech("+returnedLine+")]");
 	}
 
@@ -1300,7 +1300,7 @@ public class Lyssieth extends NPC {
 			return null;
 		}
 		
-		String returnedLine = Util.randomItemFrom(availableLines);
+		String returnedLine = Util.random.of(availableLines);
 		return UtilText.parse(this, target, "[npc.speech("+returnedLine+")]");
 	}
 }

@@ -288,14 +288,14 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 				name = Util.random.of(returnNames);
 				
 			} else {
-				name = Util.randomItemFrom(namesFeminine);
+				name = Util.random.of(namesFeminine);
 			}
 		} else {
 			if(namesMasculine==null || namesMasculine.isEmpty()) {
 				name = Util.random.of(returnNames);
 				
 			} else {
-				name = Util.randomItemFrom(namesMasculine);
+				name = Util.random.of(namesMasculine);
 			}
 		}
 		
@@ -330,14 +330,14 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 				name = Util.random.of(returnNames);
 				
 			} else {
-				name = Util.randomItemFrom(namesPluralFeminine);
+				name = Util.random.of(namesPluralFeminine);
 			}
 		} else {
 			if(namesPluralMasculine==null || namesPluralMasculine.isEmpty()) {
 				name = Util.random.of(returnNames);
 				
 			} else {
-				name = Util.randomItemFrom(namesPluralMasculine);
+				name = Util.random.of(namesPluralMasculine);
 			}
 		}
 		
@@ -362,7 +362,7 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 	@Override
 	public String getDescriptor(GameCharacter gc) {
 		if(descriptors!=null && !descriptors.isEmpty()) {
-			return Util.randomItemFrom(descriptors);
+			return Util.random.of(descriptors);
 		}
 		return "";
 	}

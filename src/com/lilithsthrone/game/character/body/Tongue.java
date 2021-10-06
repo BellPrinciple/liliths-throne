@@ -70,7 +70,7 @@ public class Tongue implements BodyPartInterface {
 		}
 		list.add(type.getDescriptor(owner));
 
-		return Util.randomItemFrom(list);
+		return Util.random.of(list);
 	}
 	
 	/**

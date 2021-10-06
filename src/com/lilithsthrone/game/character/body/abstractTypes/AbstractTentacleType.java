@@ -263,11 +263,7 @@ public abstract class AbstractTentacleType implements BodyPartTypeInterface {
 
 	@Override
 	public String getDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(descriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(descriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? descriptorsFeminine : descriptorsMasculine);
 	}
 	
 	public String getTentacleTipNameSingular(GameCharacter gc) {
@@ -279,11 +275,7 @@ public abstract class AbstractTentacleType implements BodyPartTypeInterface {
 	}
 	
 	public String getTentacleTipDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(tipDescriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(tipDescriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? tipDescriptorsFeminine : tipDescriptorsMasculine);
 	}
 	
 	@Override

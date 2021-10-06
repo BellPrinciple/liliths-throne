@@ -208,11 +208,7 @@ public abstract class AbstractWingType implements BodyPartTypeInterface {
 
 	@Override
 	public String getDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(descriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(descriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? descriptorsFeminine : descriptorsMasculine);
 	}
 
 	@Override

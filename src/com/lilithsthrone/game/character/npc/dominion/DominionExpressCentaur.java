@@ -73,13 +73,9 @@ public class DominionExpressCentaur extends NPC {
 				setSexualOrientation(SexualOrientation.GYNEPHILIC);
 			}
 
-			List<String> names;
-			if(this.isFeminine()) {
-				names = Util.newArrayListOfValues("horny centauress", "lustful centauress", "desperate centauress");
-			} else {
-				names = Util.newArrayListOfValues("horny centaur", "lustful centaur", "desperate centaur");
-			}
-			this.setGenericName(Util.randomItemFrom(names));
+			setGenericName(isFeminine()
+					? Util.random.ofValues("horny centauress", "lustful centauress", "desperate centauress")
+					: Util.random.ofValues("horny centaur", "lustful centaur", "desperate centaur"));
 			setName(Name.getRandomTriplet(this.getRace()));
 			this.setPlayerKnowsName(false);
 			

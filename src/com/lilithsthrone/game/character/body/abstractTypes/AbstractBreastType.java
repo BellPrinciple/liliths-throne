@@ -231,13 +231,13 @@ public abstract class AbstractBreastType implements BodyPartTypeInterface {
 			if(namesBreasts==null || namesBreasts.isEmpty()) {
 				return UtilText.returnStringAtRandom("breast", "boob", "tit");
 			}
-			return Util.randomItemFrom(namesBreasts);
+			return Util.random.of(namesBreasts);
 			
 		} else {
 			if(namesFlat==null || namesFlat.isEmpty()) {
 				return UtilText.returnStringAtRandom("pec");
 			}
-			return Util.randomItemFrom(namesFlat);
+			return Util.random.of(namesFlat);
 		}
 	}
 	
@@ -247,13 +247,13 @@ public abstract class AbstractBreastType implements BodyPartTypeInterface {
 			if(namesBreastsPlural==null || namesBreastsPlural.isEmpty()) {
 				return UtilText.returnStringAtRandom("breasts", "boobs", "mammaries", "tits");
 			}
-			return Util.randomItemFrom(namesBreastsPlural);
+			return Util.random.of(namesBreastsPlural);
 			
 		} else {
 			if(namesFlatPlural==null || namesFlatPlural.isEmpty()) {
 				return UtilText.returnStringAtRandom("pecs");
 			}
-			return Util.randomItemFrom(namesFlatPlural);
+			return Util.random.of(namesFlatPlural);
 		}
 	}
 
@@ -263,12 +263,12 @@ public abstract class AbstractBreastType implements BodyPartTypeInterface {
 			if(descriptorsBreasts==null || descriptorsBreasts.isEmpty()) {
 				return "";
 			}
-			return Util.randomItemFrom(descriptorsBreasts);
+			return Util.random.of(descriptorsBreasts);
 		} else {
 			if(descriptorsFlat==null || descriptorsFlat.isEmpty()) {
 				return "";
 			}
-			return Util.randomItemFrom(descriptorsFlat);
+			return Util.random.of(descriptorsFlat);
 		}
 	}
 

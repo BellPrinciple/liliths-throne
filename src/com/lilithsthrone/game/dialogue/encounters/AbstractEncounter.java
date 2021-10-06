@@ -180,8 +180,7 @@ public abstract class AbstractEncounter {
 			}
 
 		} else {
-			List<String> enforcerIds = Util.randomItemFrom(savedEnforcerIds);
-			for(String id : enforcerIds) {
+			for(String id : Util.random.of(savedEnforcerIds)) {
 				try {
 					Main.game.getNPCById(id).setLocation(Main.game.getPlayer(), false);
 				} catch (Exception e) {
@@ -298,7 +297,7 @@ public abstract class AbstractEncounter {
 		
 		if(!hornySlaves.isEmpty()) {
 			Collections.shuffle(keys);
-			return new Value<>(keys.get(0), Util.randomItemFrom(hornySlaves.get(keys.get(0))));
+			return new Value<>(keys.get(0), Util.random.of(hornySlaves.get(keys.get(0))));
 		}
 		
 		return null;
@@ -361,7 +360,7 @@ public abstract class AbstractEncounter {
 		
 		if(!hornySlaves.isEmpty()) {
 			Collections.shuffle(keys);
-			return new Value<>(keys.get(0), Util.randomItemFrom(hornySlaves.get(keys.get(0))));
+			return new Value<>(keys.get(0), Util.random.of(hornySlaves.get(keys.get(0))));
 		}
 		
 		return null;

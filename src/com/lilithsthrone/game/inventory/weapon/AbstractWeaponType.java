@@ -568,15 +568,11 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 	}
 
 	public String getHitText(GameCharacter character, GameCharacter target, boolean critical) {
-		if(critical && !hitCriticalDescriptions.isEmpty()) {
-			return UtilText.parse(character, target, Util.randomItemFrom(hitCriticalDescriptions));
-		} else {
-			return UtilText.parse(character, target, Util.randomItemFrom(hitDescriptions));
-		}
+		return UtilText.parse(character, target, Util.random.of(critical && !hitCriticalDescriptions.isEmpty() ? hitCriticalDescriptions : hitDescriptions));
 	}
 
 	public String getMissText(GameCharacter character, GameCharacter target) {
-		return UtilText.parse(character, target, Util.randomItemFrom(missDescriptions));
+		return UtilText.parse(character, target, Util.random.of(missDescriptions));
 	}
 
 	public String getOneShotEndTurnRecoveryDescription(GameCharacter character) {

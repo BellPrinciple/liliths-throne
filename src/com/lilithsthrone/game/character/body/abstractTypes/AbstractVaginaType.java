@@ -253,7 +253,7 @@ public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 			name = Util.random.of(returnNames);
 			
 		} else {
-			name = Util.randomItemFrom(names);
+			name = Util.random.of(names);
 		}
 
 		if(!Main.game.isStarted()) {
@@ -290,7 +290,7 @@ public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 			name = Util.random.of(returnNames);
 			
 		} else {
-			name = Util.randomItemFrom(namesPlural);
+			name = Util.random.of(namesPlural);
 		}
 		
 		if(name.endsWith("-")) {
@@ -310,7 +310,7 @@ public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 	@Override
 	public String getDescriptor(GameCharacter gc) {
 		if(descriptors!=null) {
-			return Util.randomItemFrom(descriptors);
+			return Util.random.of(descriptors);
 		}
 		return "";
 	}

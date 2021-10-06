@@ -172,7 +172,7 @@ public class RatWarrensCaptive extends NPC {
 		this.setAreolaeSize(AreolaeSize.FOUR_MASSIVE);
 		this.setNippleCapacity(0, true);
 		
-		this.setMilkFlavour(Util.randomItemFrom(FluidFlavour.getUnnaturalFlavourings()));
+		this.setMilkFlavour(Util.random.of(FluidFlavour.getUnnaturalFlavourings()));
 		this.setBreastMilkStorage(Lactation.SIX_EXTREME_AMOUNT_DRIPPING.getMedianValue()+Util.random.nextInt(Lactation.SIX_EXTREME_AMOUNT_DRIPPING.getMedianValue()));
 		this.setBreastLactationRegeneration(FluidRegeneration.THREE_RAPID.getMedianRegenerationValuePerDay()+Util.random.nextInt(FluidRegeneration.THREE_RAPID.getMedianRegenerationValuePerDay()));
 
@@ -201,7 +201,7 @@ public class RatWarrensCaptive extends NPC {
 		this.setVaginaLabiaSize(LabiaSize.FOUR_MASSIVE);
 		
 		this.setVaginaWetness(Wetness.SEVEN_DROOLING);
-		this.setGirlcumFlavour(Util.randomItemFrom(FluidFlavour.getUnnaturalFlavourings()));
+		this.setGirlcumFlavour(Util.random.of(FluidFlavour.getUnnaturalFlavourings()));
 		this.addGirlcumModifier(FluidModifier.MUSKY);
 		this.setVaginaSquirter(true);
 		

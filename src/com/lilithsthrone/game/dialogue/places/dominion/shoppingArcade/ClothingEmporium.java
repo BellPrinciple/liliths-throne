@@ -282,7 +282,7 @@ public class ClothingEmporium {
 									}
 									long thanksJava = lowestValue;
 									topics.removeIf(s -> Main.game.getDialogueFlags().getSavedLong(s)>thanksJava);
-									String topicSelected = Util.randomItemFrom(topics);
+									String topicSelected = Util.random.of(topics);
 									if(Main.game.getDialogueFlags().getSavedLong("NYAN_NOVELS")==-1) { // Make sure that novels is first topic
 										topicSelected = "NYAN_NOVELS";
 									}

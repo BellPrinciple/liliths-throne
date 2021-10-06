@@ -271,11 +271,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 
 	@Override
 	public String getDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(descriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(descriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? descriptorsFeminine : descriptorsMasculine);
 	}
 	
 	public String getTailTipNameSingular(GameCharacter gc) {
@@ -287,11 +283,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 	}
 	
 	public String getTailTipDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(tipDescriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(tipDescriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? tipDescriptorsFeminine : tipDescriptorsMasculine);
 	}
 	
 	@Override

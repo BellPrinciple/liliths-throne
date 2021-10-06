@@ -140,7 +140,7 @@ public class Breast implements BodyPartInterface {
 		list.add(this.getSize().getDescriptor());
 		list.add(this.getShape().getDescriptor());
 		
-		return Util.randomItemFrom(list);
+		return Util.random.of(list);
 	}
 
 	public boolean hasBreasts() {

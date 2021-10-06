@@ -248,9 +248,9 @@ public class CharacterUtils {
 			case MINIMUM:
 				return RaceStage.PARTIAL;
 			case REDUCED:
-				return Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER));
+				return Util.random.ofValues(RaceStage.PARTIAL, RaceStage.LESSER);
 			case NORMAL:
-				return Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER));
+				return Util.random.ofValues(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER);
 			case MAXIMUM:
 				return RaceStage.GREATER;
 		}
@@ -1023,7 +1023,7 @@ public class CharacterUtils {
 				true));
 		
 		body.setBreast(new Breast(BreastType.DEMON_COMMON,
-				Util.randomItemFrom(demonBody.getBreastShapes()),
+				Util.random.of(demonBody.getBreastShapes()),
 				(startingGender.getGenderName().isHasBreasts()
 						? Math.max(CupSize.getMinimumCupSizeForBreasts().getMeasurement(), demonBody.getBreastSize()+Main.getProperties().breastSizePreference)
 						: demonBody.getNoBreastSize()),
@@ -1044,7 +1044,7 @@ public class CharacterUtils {
 				new BreastCrotch(startingGender.isFeminine()
 					?demonBody.getBreastCrotchType()
 					:BreastType.NONE,
-				Util.randomItemFrom(demonBody.getBreastCrotchShapes()),
+				Util.random.of(demonBody.getBreastCrotchShapes()),
 				demonBody.getBreastCrotchSize()+Main.getProperties().udderSizePreference,
 				demonBody.getBreastCrotchLactationRate(),
 				demonBody.getBreastCrotchCount(),
@@ -1231,7 +1231,7 @@ public class CharacterUtils {
 						startingBodyType.getAnusPlasticity(),
 						true),
 				new Breast(stage.isBreastFurry()?startingBodyType.getBreastType():BreastType.HUMAN,
-						Util.randomItemFrom(startingBodyType.getBreastShapes()),
+						Util.random.of(startingBodyType.getBreastShapes()),
 						(hasBreasts
 								? Math.max(CupSize.getMinimumCupSizeForBreasts().getMeasurement(), startingBodyType.getBreastSize()+Main.getProperties().breastSizePreference)
 								: startingBodyType.getNoBreastSize()),
@@ -1294,7 +1294,7 @@ public class CharacterUtils {
 							startingGender.isFeminine()
 								?startingBodyType.getBreastCrotchType()
 								:BreastType.NONE,
-							Util.randomItemFrom(startingBodyType.getBreastCrotchShapes()),
+							Util.random.of(startingBodyType.getBreastCrotchShapes()),
 							startingBodyType.getBreastCrotchSize()+Main.getProperties().udderSizePreference,
 							startingBodyType.getBreastCrotchLactationRate(),
 							startingBodyType.getBreastCrotchCount(),
@@ -1372,7 +1372,7 @@ public class CharacterUtils {
 						true));
 		
 		body.setBreast(new Breast(stage.isBreastFurry()?startingBodyType.getBreastType():BreastType.HUMAN,
-				Util.randomItemFrom(startingBodyType.getBreastShapes()),
+				Util.random.of(startingBodyType.getBreastShapes()),
 				(hasBreasts
 						? Math.max(CupSize.getMinimumCupSizeForBreasts().getMeasurement(), startingBodyType.getBreastSize()+Main.getProperties().breastSizePreference)
 						: startingBodyType.getNoBreastSize()),
@@ -1394,7 +1394,7 @@ public class CharacterUtils {
 					startingGender.isFeminine()
 						?startingBodyType.getBreastCrotchType()
 						:BreastType.NONE,
-					Util.randomItemFrom(startingBodyType.getBreastCrotchShapes()),
+					Util.random.of(startingBodyType.getBreastCrotchShapes()),
 					startingBodyType.getBreastCrotchSize()+Main.getProperties().udderSizePreference,
 					startingBodyType.getBreastCrotchLactationRate(),
 					startingBodyType.getBreastCrotchCount(),
@@ -1527,10 +1527,10 @@ public class CharacterUtils {
 				raceStage = RaceStage.PARTIAL;
 				break;
 			case 3:
-				raceStage = Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER));
+				raceStage = Util.random.ofValues(RaceStage.PARTIAL, RaceStage.LESSER);
 				break;
 			case 4:
-				raceStage = Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER));
+				raceStage = Util.random.ofValues(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER);
 				break;
 			case 5:
 				raceStage = RaceStage.GREATER;
@@ -1544,7 +1544,7 @@ public class CharacterUtils {
 		}
 		
 		boolean halfDemon = character.getSubspeciesOverride()==Subspecies.HALF_DEMON;
-		AbstractHairType furryHairType = Util.randomItemFrom(HairType.getHairTypes(character.getLegRace()));
+		AbstractHairType furryHairType = Util.random.of(HairType.getHairTypes(character.getLegRace()));
 		
 		switch(raceStage) {
 			case FERAL:
@@ -1571,12 +1571,12 @@ public class CharacterUtils {
 			case PARTIAL_FULL:
 				if(!halfDemon) {
 					character.setBreastType(BreastType.HUMAN);
-					character.setEyeType(Util.randomItemFrom(EyeType.getEyeTypes(character.getLegRace())));
-					character.setHornType(Util.randomItemFrom(character.getLegRace().getRacialBody().getHornTypes(false)));
+					character.setEyeType(Util.random.of(EyeType.getEyeTypes(character.getLegRace())));
+					character.setHornType(Util.random.of(character.getLegRace().getRacialBody().getHornTypes(false)));
 				}
-				character.setAntennaType(Util.randomItemFrom(AntennaType.getAntennaTypes(character.getLegRace())));
+				character.setAntennaType(Util.random.of(AntennaType.getAntennaTypes(character.getLegRace())));
 				character.setArmType(ArmType.HUMAN);
-				character.setEarType(Util.randomItemFrom(EarType.getEarTypes(character.getLegRace())));
+				character.setEarType(Util.random.of(EarType.getEarTypes(character.getLegRace())));
 				character.setFaceType(FaceType.HUMAN);
 				character.setTorsoType(TorsoType.HUMAN);
 				// Reset hair length:
@@ -1586,13 +1586,13 @@ public class CharacterUtils {
 				break;
 			case LESSER:
 				if(!halfDemon) {
-					character.setBreastType(Util.randomItemFrom(BreastType.getBreastTypes(character.getLegRace())));
-					character.setEyeType(Util.randomItemFrom(EyeType.getEyeTypes(character.getLegRace())));
-					character.setHornType(Util.randomItemFrom(character.getLegRace().getRacialBody().getHornTypes(false)));
+					character.setBreastType(Util.random.of(BreastType.getBreastTypes(character.getLegRace())));
+					character.setEyeType(Util.random.of(EyeType.getEyeTypes(character.getLegRace())));
+					character.setHornType(Util.random.of(character.getLegRace().getRacialBody().getHornTypes(false)));
 				}
-				character.setAntennaType(Util.randomItemFrom(AntennaType.getAntennaTypes(character.getLegRace())));
-				character.setArmType(Util.randomItemFrom(ArmType.getArmTypes(character.getLegRace())));
-				character.setEarType(Util.randomItemFrom(EarType.getEarTypes(character.getLegRace())));
+				character.setAntennaType(Util.random.of(AntennaType.getAntennaTypes(character.getLegRace())));
+				character.setArmType(Util.random.of(ArmType.getArmTypes(character.getLegRace())));
+				character.setEarType(Util.random.of(EarType.getEarTypes(character.getLegRace())));
 				character.setFaceType(FaceType.HUMAN);
 				character.setHairType(furryHairType);
 				character.setTorsoType(TorsoType.HUMAN);
@@ -1603,21 +1603,21 @@ public class CharacterUtils {
 				break;
 			case GREATER:
 				if(!halfDemon) {
-					character.setBreastType(Util.randomItemFrom(BreastType.getBreastTypes(character.getLegRace())));
-					character.setEyeType(Util.randomItemFrom(EyeType.getEyeTypes(character.getLegRace())));
-					character.setHornType(Util.randomItemFrom(character.getLegRace().getRacialBody().getHornTypes(false)));
+					character.setBreastType(Util.random.of(BreastType.getBreastTypes(character.getLegRace())));
+					character.setEyeType(Util.random.of(EyeType.getEyeTypes(character.getLegRace())));
+					character.setHornType(Util.random.of(character.getLegRace().getRacialBody().getHornTypes(false)));
 				}
 				
-				AbstractFaceType faceType = Util.randomItemFrom(FaceType.getFaceTypes(character.getLegRace()));
+				AbstractFaceType faceType = Util.random.of(FaceType.getFaceTypes(character.getLegRace()));
 				boolean furryHairCheck = faceType.getTags().contains(BodyPartTag.FACE_NATURAL_BALDNESS_FURRY) && !furryHairType.getTags().contains(BodyPartTag.HAIR_IGNORE_PLAYER_SETTINGS);
 				boolean scalyHairCheck = faceType.getTags().contains(BodyPartTag.FACE_NATURAL_BALDNESS_SCALY) && !furryHairType.getTags().contains(BodyPartTag.HAIR_IGNORE_PLAYER_SETTINGS);
 				
-				character.setAntennaType(Util.randomItemFrom(AntennaType.getAntennaTypes(character.getLegRace())));
-				character.setArmType(Util.randomItemFrom(ArmType.getArmTypes(character.getLegRace())));
-				character.setEarType(Util.randomItemFrom(EarType.getEarTypes(character.getLegRace())));
+				character.setAntennaType(Util.random.of(AntennaType.getAntennaTypes(character.getLegRace())));
+				character.setArmType(Util.random.of(ArmType.getArmTypes(character.getLegRace())));
+				character.setEarType(Util.random.of(EarType.getEarTypes(character.getLegRace())));
 				character.setFaceType(faceType);
-				character.setHairType(Util.randomItemFrom(HairType.getHairTypes(character.getLegRace())));
-				character.setTorsoType(Util.randomItemFrom(TorsoType.getTorsoTypes(character.getLegRace())));
+				character.setHairType(Util.random.of(HairType.getHairTypes(character.getLegRace())));
+				character.setTorsoType(Util.random.of(TorsoType.getTorsoTypes(character.getLegRace())));
 				// Reset hair length:
 				if((scalyHairCheck && !Main.game.isScalyHairEnabled()) || (furryHairCheck && !Main.game.isFurryHairEnabled())) {
 					character.setHairLength(0);
@@ -1822,7 +1822,7 @@ public class CharacterUtils {
 			}
 		}
 		
-		String adjective = Util.randomItemFrom(characterAdjectives);
+		String adjective = Util.random.of(characterAdjectives);
 		
 		if(baseName==null || baseName.isEmpty()) {
 			character.setGenericName(adjective+" "+character.getSubspecies().getName(character.getBody()));
@@ -2007,11 +2007,11 @@ public class CharacterUtils {
 					currentCovering.getType(), Util.random.of(currentCovering.getType().getDyePatterns()),
 					currentCovering.getType().getAllPrimaryColours().isEmpty()
 						?currentCovering.getPrimaryColour()
-						:Util.randomItemFrom(currentCovering.getType().getAllPrimaryColours()),
+						:Util.random.of(currentCovering.getType().getAllPrimaryColours()),
 					Math.random()<=0.05f,
 					currentCovering.getType().getAllSecondaryColours().isEmpty()
 						?currentCovering.getSecondaryColour()
-						:Util.randomItemFrom(currentCovering.getType().getAllSecondaryColours()),
+						:Util.random.of(currentCovering.getType().getAllSecondaryColours()),
 					Math.random()<=0.05f),
 					true);
 		}
@@ -2407,7 +2407,7 @@ public class CharacterUtils {
 		} else {
 			List<Occupation> histories = Occupation.getAvailableHistories(character);
 			histories.removeIf((his) -> his.isLowlife());
-			character.setHistory(Util.randomItemFrom(histories));
+			character.setHistory(Util.random.of(histories));
 		}
 			
 	}
@@ -2919,7 +2919,7 @@ public class CharacterUtils {
 			return null;
 			
 		} else {
-			return Util.randomItemFrom(availableClothing);
+			return Util.random.of(availableClothing);
 		}
 	}
 	
@@ -2941,8 +2941,8 @@ public class CharacterUtils {
 				colours.remove(PresetColour.COVERING_CLEAR);
 			}
 			
-			Colour colourForCoordination = Util.randomItemFrom(colours);
-			Colour colourForNails = Util.randomItemFrom(colours);
+			Colour colourForCoordination = Util.random.of(colours);
+			Colour colourForNails = Util.random.of(colours);
 			
 			character.setLipstick(new Covering(BodyCoveringType.MAKEUP_LIPSTICK, colourForCoordination));
 			character.setEyeLiner(new Covering(BodyCoveringType.MAKEUP_EYE_LINER, PresetColour.COVERING_BLACK));
@@ -2970,7 +2970,7 @@ public class CharacterUtils {
 			if(enchantedClothingTypes.isEmpty()) {
 				break;
 			}
-			AbstractClothingType type = Util.randomItemFrom(enchantedClothingTypes);
+			AbstractClothingType type = Util.random.of(enchantedClothingTypes);
 			enchantedClothingTypes.remove(type);
 			AbstractClothing c = Main.game.getItemGen().generateClothingWithEnchantment(type);
 			c.setEnchantmentKnown(trader, true);
@@ -2980,7 +2980,7 @@ public class CharacterUtils {
 			if(enchantedClothingTypes.isEmpty()) {
 				break;
 			}
-			AbstractClothingType type = Util.randomItemFrom(enchantedClothingTypes);
+			AbstractClothingType type = Util.random.of(enchantedClothingTypes);
 			enchantedClothingTypes.remove(type);
 			AbstractClothing c = Main.game.getItemGen().generateRareClothing(type);
 			c.setEnchantmentKnown(trader, true);

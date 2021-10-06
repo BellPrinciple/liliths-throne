@@ -76,18 +76,18 @@ public class Anus implements BodyPartInterface {
 		}
 		
 		if(owner.isAnusFeral()) {
-			descriptorList.add(Util.randomItemFrom(Util.newArrayListOfValues(
+			descriptorList.add(Util.random.ofValues(
 					"feral",
 					owner.getAssRace().getName(owner.getBody(), true)+"-",
 					"bestial",
-					"animalistic")));
+					"animalistic"));
 		} else {
 			descriptorList.add(type.getDescriptor(owner));
 		}
 
 		descriptorList.add(Capacity.getCapacityFromValue(orificeAnus.getStretchedCapacity()).getDescriptor().replaceAll(" ", "-"));
 
-		return Util.randomItemFrom(descriptorList);
+		return Util.random.of(descriptorList);
 	}
 
 	@Override

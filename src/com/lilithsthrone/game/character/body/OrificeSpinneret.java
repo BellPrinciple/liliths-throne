@@ -63,7 +63,7 @@ public class OrificeSpinneret implements OrificeInterface {
 		
 		descriptorList.add(Capacity.getCapacityFromValue(this.getStretchedCapacity()).getDescriptor().replaceAll(" ", "-"));
 
-		return Util.randomItemFrom(descriptorList);
+		return Util.random.of(descriptorList);
 	}
 	
 	@Override

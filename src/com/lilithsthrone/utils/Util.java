@@ -1398,22 +1398,22 @@ public class Util {
 		return Util.toStringList(displacedList, DisplacementType::getDescriptionPast, "and");
 	}
 
+	@Deprecated
 	public static <Any> Any randomItemFrom(List<Any> list) {
 		if(list.isEmpty()) {
 			return null;
 		}
-		return list.get(Util.random.nextInt(list.size()));
+		return random.of(list);
 	}
 
 	@Deprecated
 	public static <Any> Any randomItemFrom(Set<Any> set) {
-		List<Any> list = new ArrayList<>(set);
-		return randomItemFrom(list);
+		return random.of(set);
 	}
 
 	@Deprecated
 	public static <Any> Any randomItemFrom(Any[] array) {
-		return array[Util.random.nextInt(array.length)];
+		return random.ofValues(array);
 	}
 
 	@Deprecated

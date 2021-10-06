@@ -63,7 +63,7 @@ public class Ass implements BodyPartInterface {
 		list.add(type.getDescriptor(gc));
 		list.add(this.getAssSize().getDescriptor());
 		
-		return Util.randomItemFrom(list);
+		return Util.random.of(list);
 	}
 
 	@Override

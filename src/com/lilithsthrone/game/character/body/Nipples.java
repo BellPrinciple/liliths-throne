@@ -153,7 +153,7 @@ public class Nipples implements BodyPartInterface {
 		
 		descriptorList.removeIf(d->d==null || d.isEmpty());
 		
-		return Util.randomItemFrom(descriptorList);
+		return Util.random.of(descriptorList);
 	}
 
 	@Override

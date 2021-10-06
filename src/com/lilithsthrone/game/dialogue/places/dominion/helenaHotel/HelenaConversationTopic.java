@@ -38,7 +38,7 @@ public enum HelenaConversationTopic {
 			Collections.addAll(topics, values());
 		}
 		
-		return Util.randomItemFrom(topics);
+		return Util.random.of(topics);
 	}
 	
 }

@@ -710,18 +710,18 @@ public class Name {
 	}
 	
 	public static NameTriplet getRandomTriplet(AbstractRace r) {
-		NameTriplet name = Util.randomItemFrom(human);
+		NameTriplet name = Util.random.of(human);
 		// occasionally throw some "prostitute" names in there - about 10% of the time
 		if(Math.random()<0.1) {
-			name = Util.randomItemFrom(prostitute); 
+			name = Util.random.of(prostitute);
 		}
 		
 		if(r==Race.DEMON || r==Race.ELEMENTAL) {
 			name = getDemonName();
 		} else if(r==Race.REINDEER_MORPH) {
-			name = Util.randomItemFrom(reindeer);
+			name = Util.random.of(reindeer);
 		} else if(r==Race.HORSE_MORPH) {
-			name = Util.randomItemFrom(equine);
+			name = Util.random.of(equine);
 		}
 		
 		return name;
@@ -754,12 +754,6 @@ public class Name {
 	
 	public static NameTriplet getRandomProstituteTriplet() {
 		// occasionally throw some "regular" names in there - 25% of the time
-		if(Math.random()<0.25) {
-			return Util.randomItemFrom(human);
-		}
-		else
-		{
-			return Util.randomItemFrom(prostitute);
-		}
+		return Util.random.of(Math.random()<0.25 ? human : prostitute);
 	}
 }

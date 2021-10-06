@@ -2762,7 +2762,7 @@ public abstract class AbstractItemEffectType {
 							
 					default:
 						List<AbstractAntennaType> antennaTypes = RacialBody.valueOfRace(race).getAntennaTypes(true);
-						AbstractAntennaType antennaType = antennaTypes.isEmpty()?AntennaType.NONE:Util.randomItemFrom(antennaTypes);
+						AbstractAntennaType antennaType = antennaTypes.isEmpty()?AntennaType.NONE:Util.random.of(antennaTypes);
 						return new RacialEffectUtil(antennaType.equals(AntennaType.NONE)?"Removes antennae.":Util.capitaliseSentence(race.getName(false))+" antenna transformation.") {
 							@Override public String applyEffect() { return target.setAntennaType(antennaType); } };
 				}
@@ -3951,7 +3951,7 @@ public abstract class AbstractItemEffectType {
 						
 					default:
 						List<AbstractHornType> defaultHornTypes = RacialBody.valueOfRace(race).getHornTypes(true);
-						AbstractHornType hornType = defaultHornTypes.isEmpty()?HornType.NONE:Util.randomItemFrom(defaultHornTypes);
+						AbstractHornType hornType = defaultHornTypes.isEmpty()?HornType.NONE:Util.random.of(defaultHornTypes);
 						return new RacialEffectUtil(hornType.equals(HornType.NONE)?"Removes horns.":Util.capitaliseSentence(race.getName(false))+" horn transformation.") {
 							@Override public String applyEffect() { return target.setHornType(hornType); } };
 				}

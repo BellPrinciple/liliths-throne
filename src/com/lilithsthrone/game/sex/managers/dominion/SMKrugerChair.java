@@ -113,7 +113,7 @@ public class SMKrugerChair extends SexManagerDefault {
 		}
 		
 		return "<p style='color:"+PresetColour.BASE_ORANGE.toWebHexString()+"; font-style:italic; text-align:center;'>"
-					+Util.randomItemFrom(descriptions)
+					+Util.random.of(descriptions)
 				+"</p>";
 	}
 	

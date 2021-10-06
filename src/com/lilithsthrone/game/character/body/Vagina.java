@@ -112,10 +112,10 @@ public class Vagina implements BodyPartInterface {
 		}
 		
 		if(owner.isVaginaFeral()) {
-			descriptorList.add(Util.randomItemFrom(Util.newArrayListOfValues(
+			descriptorList.add(Util.random.ofValues(
 					"feral",
 					"bestial",
-					"animalistic")));
+					"animalistic"));
 		} else {
 			descriptorList.add(type.getDescriptor(owner));
 		}
@@ -126,7 +126,7 @@ public class Vagina implements BodyPartInterface {
 		if(descriptorList.isEmpty()) {
 			return "";
 		}
-		return Util.randomItemFrom(descriptorList);
+		return Util.random.of(descriptorList);
 	}
 	
 	public String getUrethraDescriptor(GameCharacter owner) {
@@ -140,7 +140,7 @@ public class Vagina implements BodyPartInterface {
 		
 		descriptorList.add(Capacity.getCapacityFromValue(orificeUrethra.getStretchedCapacity()).getDescriptor().replaceAll(" ", "-"));
 
-		return Util.randomItemFrom(descriptorList);
+		return Util.random.of(descriptorList);
 	}
 	
 	public String setType(GameCharacter owner, AbstractVaginaType type) {

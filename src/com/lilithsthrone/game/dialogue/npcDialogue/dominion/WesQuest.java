@@ -808,7 +808,7 @@ public class WesQuest {
 					if(backgroundTalkIds.isEmpty()) {
 						resetBackgroundIds();
 					}
-					String idAddition = Util.randomItemFrom(backgroundTalkIds);
+					String idAddition = Util.random.of(backgroundTalkIds);
 					dialogueId = dialogueId + idAddition;
 					backgroundTalkIds.remove(idAddition);
 					
@@ -834,7 +834,7 @@ public class WesQuest {
 					if(backgroundTalkIds.isEmpty()) {
 						resetBackgroundIds();
 					}
-					String idAddition = Util.randomItemFrom(backgroundTalkIds);
+					String idAddition = Util.random.of(backgroundTalkIds);
 					dialogueId = dialogueId + idAddition;
 					backgroundTalkIds.remove(idAddition);
 					
@@ -874,7 +874,7 @@ public class WesQuest {
 			if(workTalkIds.isEmpty()) {
 				resetWorkTalkIds();
 			}
-			String idAddition = Util.randomItemFrom(workTalkIds);
+			String idAddition = Util.random.of(workTalkIds);
 			dialogueId = dialogueId + idAddition;
 			workTalkIds.remove(idAddition);
 

@@ -433,7 +433,7 @@ public class Body implements XMLSaving {
 							pattern = CoveringPattern.EYE_IRISES;
 							secondary = primary;
 						} else {
-							secondary = Util.randomItemFrom(secondaryIrisColours);
+							secondary = Util.random.of(secondaryIrisColours);
 						}
 					}
 				}
@@ -2910,7 +2910,7 @@ public class Body implements XMLSaving {
 			}
 			
 			if (!(owner.isFeral() && owner.getArmType().allowsFlight())) {
-				sb.append(" [npc.Her] [npc.arms] are "+(Util.randomItemFrom(owner.getBodyShape().getLimbDescriptors()))
+				sb.append(" [npc.Her] [npc.arms] are "+(Util.random.of(owner.getBodyShape().getLimbDescriptors()))
 						+", and are <span style='color:"+owner.getFemininity().getColour().toWebHexString()+";'>"+owner.getFemininity().getName(false)+" in appearance.");
 			}
 			
@@ -3056,7 +3056,7 @@ public class Body implements XMLSaving {
 		sb.append("<br/>");
 		
 		if(owner.getLegCount()>0) {
-			sb.append(" [npc.Her] [npc.legs] are "+(Util.randomItemFrom(owner.getBodyShape().getLimbDescriptors()))+", and ");
+			sb.append(" [npc.Her] [npc.legs] are "+(Util.random.of(owner.getBodyShape().getLimbDescriptors()))+", and ");
 			if (femininity <= Femininity.MASCULINE_STRONG.getMaximumFemininity()) {
 				sb.append("[style.colourMasculineStrong(have a very masculine shape to them)].");
 				
@@ -3074,7 +3074,7 @@ public class Body implements XMLSaving {
 			}
 			
 		} else if(!owner.isFeral()) {
-			sb.append(" [npc.Her] [npc.leg(true)] is "+(Util.randomItemFrom(owner.getBodyShape().getLimbDescriptors()))+", and ");
+			sb.append(" [npc.Her] [npc.leg(true)] is "+(Util.random.of(owner.getBodyShape().getLimbDescriptors()))+", and ");
 			if (femininity <= Femininity.MASCULINE_STRONG.getMaximumFemininity()) {
 				sb.append("[style.colourMasculineStrong(has a very masculine shape to it)].");
 				
@@ -6620,7 +6620,7 @@ public class Body implements XMLSaving {
 	 * @return The randomly chosen type of the corresponding BodyPart
 	 */
 	public BodyPartTypeInterface randomTypeFrom(BodyPartTypeInterface... values) {
-		return Util.randomItemFrom(Util.newArrayListOfValues(values));
+		return Util.random.ofValues(values);
 	}
 
 	/**

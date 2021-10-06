@@ -460,9 +460,9 @@ public enum RaceStage {
 			case MINIMUM:
 				return RaceStage.PARTIAL;
 			case REDUCED:
-				return Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER));
+				return Util.random.ofValues(RaceStage.PARTIAL, RaceStage.LESSER);
 			case NORMAL:
-				return Util.randomItemFrom(Util.newArrayListOfValues(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER));
+				return Util.random.ofValues(RaceStage.PARTIAL, RaceStage.LESSER, RaceStage.GREATER);
 			case MAXIMUM:
 				return RaceStage.GREATER;
 		}

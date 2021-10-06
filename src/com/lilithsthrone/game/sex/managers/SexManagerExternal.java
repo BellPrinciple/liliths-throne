@@ -1351,7 +1351,7 @@ public class SexManagerExternal extends SexManagerDefault {
 		if(randomPublicSexDescriptions==null || randomPublicSexDescriptions.isEmpty()) {
 			return super.getRandomPublicSexDescription();
 		}
-		return applyPublicSexFormatting(UtilText.parse(Util.randomItemFrom(randomPublicSexDescriptions)));
+		return applyPublicSexFormatting(UtilText.parse(Util.random.of(randomPublicSexDescriptions)));
 	}
 	
 	// Character-specific methods, in the order in which they appear in the xml file:
@@ -1609,7 +1609,7 @@ public class SexManagerExternal extends SexManagerDefault {
 				}
 				lines.removeIf(l->l.isEmpty());
 				if(!lines.isEmpty() && (!characterBehaviours.get(character.getId()).additionToDefaultDirtyTalk || Math.random()<0.5f)) {
-					return Util.randomItemFrom(lines);
+					return Util.random.of(lines);
 				}
 			}
 		}
@@ -1629,7 +1629,7 @@ public class SexManagerExternal extends SexManagerDefault {
 				}
 				lines.removeIf(l->l.isEmpty());
 				if(!lines.isEmpty() && (!characterBehaviours.get(character.getId()).additionToDefaultRoughTalk || Math.random()<0.5f)) {
-					return Util.randomItemFrom(lines);
+					return Util.random.of(lines);
 				}
 			}
 		}
@@ -1649,7 +1649,7 @@ public class SexManagerExternal extends SexManagerDefault {
 				}
 				lines.removeIf(l->l.isEmpty());
 				if(!lines.isEmpty() && (!characterBehaviours.get(character.getId()).additionToDefaultSubmissiveTalk || Math.random()<0.5f)) {
-					return Util.randomItemFrom(lines);
+					return Util.random.of(lines);
 				}
 			}
 		}

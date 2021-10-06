@@ -39,7 +39,7 @@ public enum Femininity {
 	}
 	
 	public String getName(boolean withDeterminer) {
-		String name = Util.randomItemFrom(names);
+		String name = Util.random.of(names);
 		
 		if(withDeterminer) {
 			return UtilText.generateSingularDeterminer(name)+" "+name;

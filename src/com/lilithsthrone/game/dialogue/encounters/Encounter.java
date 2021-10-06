@@ -403,7 +403,7 @@ public class Encounter {
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
 				encounterPossibilities.removeIf(npc -> npc instanceof Lumi);
 				if(!encounterPossibilities.isEmpty()) {
-					NPC encounterNpc = Util.randomItemFrom(encounterPossibilities);
+					NPC encounterNpc = Util.random.of(encounterPossibilities);
 					Main.game.setActiveNPC(encounterNpc);
 					return Main.game.getActiveNPC().getEncounterDialogue();
 				}
@@ -516,7 +516,7 @@ public class Encounter {
 			// Prioritise re-encountering the NPC on this tile:
 			List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
 			if(!encounterPossibilities.isEmpty()) {
-				NPC encounterNpc = Util.randomItemFrom(encounterPossibilities);
+				NPC encounterNpc = Util.random.of(encounterPossibilities);
 				Main.game.setActiveNPC(encounterNpc);
 				return Main.game.getActiveNPC().getEncounterDialogue();
 			}
@@ -555,7 +555,7 @@ public class Encounter {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
 				if(!encounterPossibilities.isEmpty()) {
-					NPC encounterNpc = Util.randomItemFrom(encounterPossibilities);
+					NPC encounterNpc = Util.random.of(encounterPossibilities);
 					Main.game.setActiveNPC(encounterNpc);
 					return Main.game.getActiveNPC().getEncounterDialogue();
 				}
@@ -675,7 +675,7 @@ public class Encounter {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
 				if(!encounterPossibilities.isEmpty()) {
-					NPC encounterNpc = Util.randomItemFrom(encounterPossibilities);
+					NPC encounterNpc = Util.random.of(encounterPossibilities);
 					Main.game.setActiveNPC(encounterNpc);
 					return Main.game.getActiveNPC().getEncounterDialogue();
 				}
@@ -735,7 +735,7 @@ public class Encounter {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
 				if(!encounterPossibilities.isEmpty()) {
-					NPC encounterNpc = Util.randomItemFrom(encounterPossibilities);
+					NPC encounterNpc = Util.random.of(encounterPossibilities);
 					Main.game.setActiveNPC(encounterNpc);
 					return Main.game.getActiveNPC().getEncounterDialogue();
 				}
@@ -984,7 +984,7 @@ public class Encounter {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
 				if(!encounterPossibilities.isEmpty()) {
-					NPC encounterNpc = Util.randomItemFrom(encounterPossibilities);
+					NPC encounterNpc = Util.random.of(encounterPossibilities);
 					Main.game.setActiveNPC(encounterNpc);
 					return Main.game.getActiveNPC().getEncounterDialogue();
 				}
@@ -1107,7 +1107,7 @@ public class Encounter {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
 				if(!encounterPossibilities.isEmpty()) {
-					NPC encounterNpc = Util.randomItemFrom(encounterPossibilities);
+					NPC encounterNpc = Util.random.of(encounterPossibilities);
 					Main.game.setActiveNPC(encounterNpc);
 					return Main.game.getActiveNPC().getEncounterDialogue();
 				}

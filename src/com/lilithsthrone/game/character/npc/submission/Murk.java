@@ -544,7 +544,7 @@ public class Murk extends NPC {
 		}
 
 		if(!availableLines.isEmpty()) {
-			String returnedLine = Util.randomItemFrom(availableLines);
+			String returnedLine = Util.random.of(availableLines);
 			return UtilText.parse(this, target, "[npc.speech("+returnedLine+")]");
 		}
 		return super.getDirtyTalkPenisPenetrating(target, isPlayerDom);

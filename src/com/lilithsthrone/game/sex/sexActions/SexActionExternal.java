@@ -314,7 +314,7 @@ public class SexActionExternal extends SexAction {
 			if(descriptionContainer.conditional==null
 					|| descriptionContainer.conditional.isEmpty()
 					|| Boolean.valueOf(UtilText.parse(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), descriptionContainer.conditional).trim())) {
-				return UtilText.parse(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), Util.randomItemFrom(descriptionContainer.descriptions));
+				return UtilText.parse(Main.sex.getCharacterPerformingAction(), Main.sex.getCharacterTargetedForSexAction(this), Util.random.of(descriptionContainer.descriptions));
 			}
 		}
 		return "[style.italicsRed(Error: No suitable description found for this action!)]";

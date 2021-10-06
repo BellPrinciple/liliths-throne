@@ -263,7 +263,7 @@ public abstract class AbstractMouthType implements BodyPartTypeInterface {
 		if(names==null || names.isEmpty()) {
 			return UtilText.returnStringAtRandom("mouth");
 		}
-		return Util.randomItemFrom(names);
+		return Util.random.of(names);
 	}
 	
 	@Override
@@ -271,16 +271,12 @@ public abstract class AbstractMouthType implements BodyPartTypeInterface {
 		if(namesPlural==null || names.isEmpty()) {
 			return UtilText.returnStringAtRandom("mouths");
 		}
-		return Util.randomItemFrom(namesPlural);
+		return Util.random.of(namesPlural);
 	}
 
 	@Override
 	public String getDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(descriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(descriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? descriptorsFeminine : descriptorsMasculine);
 	}
 
 	public String getLipsNameSingular(GameCharacter gc) {

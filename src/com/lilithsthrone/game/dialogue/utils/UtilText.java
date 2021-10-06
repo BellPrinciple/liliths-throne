@@ -1468,7 +1468,7 @@ public class UtilText {
 				if(strings.isEmpty()) {
 					return "";
 				}
-				return Util.randomItemFrom(strings);
+				return Util.random.of(strings);
 			}
 		});
 		
@@ -3984,7 +3984,7 @@ public class UtilText {
 							lastDescriptors[i] = lastDescriptors[i-1];
 						}
 					}
-					String returnString = Util.randomItemFrom(descriptors);
+					String returnString = Util.random.of(descriptors);
 					
 					lastDescriptors[0] = returnString;
 
@@ -5596,7 +5596,7 @@ public class UtilText {
 					descriptors.add("chubby");
 				}
 				return applyDescriptor(
-						Util.randomItemFrom(descriptors),
+						Util.random.of(descriptors),
 						UtilText.returnStringAtRandom("armpit", "underarm"));
 			}
 		});
@@ -5646,7 +5646,7 @@ public class UtilText {
 					descriptors.add("masculine");
 				}
 				return applyDescriptor(
-						Util.randomItemFrom(descriptors),
+						Util.random.of(descriptors),
 						UtilText.returnStringAtRandom("armpits", "underarms"));
 			}
 		});
@@ -8552,7 +8552,7 @@ public class UtilText {
 					descriptors.add(character.getCovering(character.getVaginaCovering()).getPrimaryColour().getName());
 				}
 				
-				return Util.randomItemFrom(descriptors)+" labia";
+				return Util.random.of(descriptors)+" labia";
 			}
 		});
 

@@ -76,7 +76,7 @@ public class DominionExpressCentaurDialogue {
 		if(list.isEmpty() || Math.random()<0.25f) {
 			sexAreaWanted = null;
 		} else {
-			sexAreaWanted = Util.randomItemFrom(list);
+			sexAreaWanted = Util.random.of(list);
 		}
 		
 		if(sexAreaWanted!=null) {

@@ -418,11 +418,10 @@ public enum Spell {
 			if(elementalAlreadySummoned) {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
-									?Util.randomItemFrom(
-									Util.newArrayListOfValues(
+									?Util.random.ofValues(
 										"[npc.speech(By the ancient rites of flame, I summon forth hell and fury incarnate! Answer your [npc.master]'s call, [npc2.name], and, by the incineration of a million dimensions, be bound to my will!)] ",
 										"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! I call upon the dimension of flame itself, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
-										"[npc.speech(Let fire consume, and the inferno within me be unleashed! Flame and fury, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
+										"[npc.speech(Let fire consume, and the inferno within me be unleashed! Flame and fury, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] ")
 									:"")
 								+(caster.isPlayer()
 									?"With a flash of light and a burst of flames, you bind your elemental, [npc2.name], to the school of Fire!"
@@ -432,11 +431,10 @@ public enum Spell {
 				//caster.addCompanion(caster.getElemental());
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
-										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
+										?Util.random.ofValues(
 											"[npc.speech(By the ancient rites of flame, I summon forth hell and fury incarnate! Answer your [npc.master]'s call, [npc2.name], and, by the incineration of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! I call upon the dimension of flame itself, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
-											"[npc.speech(Let fire consume, and the inferno within me be unleashed! Flame and fury, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
+											"[npc.speech(Let fire consume, and the inferno within me be unleashed! Flame and fury, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] ")
 										:"")
 								+(caster.isPlayer()
 									?"With a flash of light and a burst of flames, you summon forth your elemental, [npc2.name], by binding [npc2.herHim] to the school of Fire!"
@@ -874,11 +872,10 @@ public enum Spell {
 			if(elementalAlreadySummoned) {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
-										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
+										?Util.random.ofValues(
 											"[npc.speech(By the ancient rite of sea and sky, I summon forth the eternal torrent! Answer your [npc.master]'s call, [npc2.name], and, by the drowning of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May all waters be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
-											"[npc.speech(Let the seas rise, and the tsunami within me be unleashed! Flood and deluge, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
+											"[npc.speech(Let the seas rise, and the tsunami within me be unleashed! Flood and deluge, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] ")
 										:"")
 								+ (caster.isPlayer()
 									?"With a huge splash, you bind your elemental, [npc2.name], to the school of Water!"
@@ -888,11 +885,10 @@ public enum Spell {
 				//caster.addCompanion(caster.getElemental());
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
-										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
+										?Util.random.ofValues(
 											"[npc.speech(By the ancient rite of sea and sky, I summon forth the eternal torrent! Answer your [npc.master]'s call, [npc2.name], and, by the drowning of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May all waters be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
-											"[npc.speech(Let the seas rise, and the tsunami within me be unleashed! Flood and deluge, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
+											"[npc.speech(Let the seas rise, and the tsunami within me be unleashed! Flood and deluge, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] ")
 										:"")
 								+ (caster.isPlayer()
 									?"With a huge splash, you summon forth your elemental, [npc2.name], by binding [npc2.herHim] to the school of Water!"
@@ -1222,11 +1218,10 @@ public enum Spell {
 			if(elementalAlreadySummoned) {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
-										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
+										?Util.random.ofValues(
 											"[npc.speech(By the ancient rite of wind and gale, I summon forth the hurricane itself! Answer your [npc.master]'s call, [npc2.name], and, by the offering of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the air itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
-											"[npc.speech(Let the winds rise, and the hurricane within me be unleashed! Storm and chaos, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
+											"[npc.speech(Let the winds rise, and the hurricane within me be unleashed! Storm and chaos, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] ")
 										:"")
 								+ (caster.isPlayer()
 									?"With a tremendous gust of wind, you bind your elemental, [npc2.name], to the school of Air!"
@@ -1236,11 +1231,10 @@ public enum Spell {
 				//caster.addCompanion(caster.getElemental());
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
-										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
+										?Util.random.ofValues(
 											"[npc.speech(By the ancient rite of wind and gale, I summon forth the hurricane itself! Answer your [npc.master]'s call, [npc2.name], and, by the offering of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the air itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
-											"[npc.speech(Let the winds rise, and the hurricane within me be unleashed! Storm and chaos, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
+											"[npc.speech(Let the winds rise, and the hurricane within me be unleashed! Storm and chaos, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] ")
 										:"")
 								+ (caster.isPlayer()
 									?"With a tremendous gust of wind, you summon forth your elemental, [npc2.name], by binding [npc2.herHim] to the school of Air!"
@@ -1571,11 +1565,10 @@ public enum Spell {
 			if(elementalAlreadySummoned) {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
-										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
+										?Util.random.ofValues(
 											"[npc.speech(By the ancient rite of sand and stone, I summon forth the earthquake itself! Answer your [npc.master]'s call, [npc2.name], and, by the crushing of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the earth itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
-											"[npc.speech(Let the earth shake, and the power within me be unleashed! Boulder and mountain, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
+											"[npc.speech(Let the earth shake, and the power within me be unleashed! Boulder and mountain, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] ")
 										:"")
 								+ (caster.isPlayer()
 									?"With a burst of rocks and debris, you bind your elemental, [npc2.name], to the school of Earth!"
@@ -1585,11 +1578,10 @@ public enum Spell {
 				//caster.addCompanion(caster.getElemental());
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
-										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
+										?Util.random.ofValues(
 											"[npc.speech(By the ancient rite of sand and stone, I summon forth the earthquake itself! Answer your [npc.master]'s call, [npc2.name], and, by the crushing of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the earth itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
-											"[npc.speech(Let the earth shake, and the power within me be unleashed! Boulder and mountain, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
+											"[npc.speech(Let the earth shake, and the power within me be unleashed! Boulder and mountain, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] ")
 										:"")
 								+ (caster.isPlayer()
 									?"With a burst of rocks and debris, you summon forth your elemental, [npc2.name], by binding [npc2.herHim] to the school of Earth!"
@@ -2049,7 +2041,7 @@ public enum Spell {
 						}
 					}
 					if(!weaponIndexes.isEmpty()) {
-						mainWeaponIndex = Util.randomItemFrom(weaponIndexes);
+						mainWeaponIndex = Util.random.of(weaponIndexes);
 						mainWeapon = target.getMainWeapon(mainWeaponIndex);
 					}
 					weaponIndexes = new ArrayList<>();
@@ -2059,7 +2051,7 @@ public enum Spell {
 						}
 					}
 					if(!weaponIndexes.isEmpty()) {
-						offhandWeaponIndex = Util.randomItemFrom(weaponIndexes);
+						offhandWeaponIndex = Util.random.of(weaponIndexes);
 						offhandWeapon = target.getOffhandWeapon(offhandWeaponIndex);
 					}
 						
@@ -2438,11 +2430,10 @@ public enum Spell {
 			if(elementalAlreadySummoned) {
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
-										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
+										?Util.random.ofValues(
 											"[npc.speech(By the ancient rite of devil and demon, I summon forth the arcane itself! Answer your [npc.master]'s call, [npc2.name], and, by the conquest of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the arcane itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
-											"[npc.speech(Let the arcane be mine, and the power within me be unleashed! The spirit of arcane itself, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
+											"[npc.speech(Let the arcane be mine, and the power within me be unleashed! The spirit of arcane itself, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] ")
 										:"")
 								+ (caster.isPlayer()
 									?"With a flash of purple arcane lightning, you bind your elemental, [npc2.name], to the school of Arcane!"
@@ -2452,11 +2443,10 @@ public enum Spell {
 				//caster.addCompanion(caster.getElemental());
 				descriptionSB.append(UtilText.parse(caster, caster.getElemental(),
 								(caster.hasTraitActivated(Perk.CHUUNI)
-										?Util.randomItemFrom(
-										Util.newArrayListOfValues(
+										?Util.random.ofValues(
 											"[npc.speech(By the ancient rite of devil and demon, I summon forth the arcane itself! Answer your [npc.master]'s call, [npc2.name], and, by the conquest of a million dimensions, be bound to my will!)] ",
 											"[npc.speech(May the powers sealed away within me for a thousand years now be unleashed! May the arcane itself be at my command, and, through our eternal contract, I summon you forth, [npc2.name]!)] ",
-											"[npc.speech(Let the arcane be mine, and the power within me be unleashed! The spirit of arcane itself, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] "))
+											"[npc.speech(Let the arcane be mine, and the power within me be unleashed! The spirit of arcane itself, your [npc.master] calls! Obey, and be summoned forth, [npc2.name]!)] ")
 										:"")
 								+ (caster.isPlayer()
 									?"With a flash of purple arcane lightning, you summon forth your elemental, [npc2.name], by binding [npc2.herHim] to the school of Arcane!"
@@ -3436,7 +3426,7 @@ public enum Spell {
 		StringBuilder sb = new StringBuilder();
 		
 		if(caster.hasTraitActivated(Perk.CHUUNI) && chuuniDialogue!=null) {
-			sb.append(UtilText.parse(caster, target, "[npc.speech("+Util.randomItemFrom(chuuniDialogue)+")]</br>"));
+			sb.append(UtilText.parse(caster, target, "[npc.speech("+Util.random.of(chuuniDialogue)+")]</br>"));
 		}
 		if(caster.isPlayer()) {
 			if(target.isPlayer()) {

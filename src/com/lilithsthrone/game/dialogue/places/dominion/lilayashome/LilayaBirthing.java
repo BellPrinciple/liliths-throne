@@ -39,7 +39,7 @@ public class LilayaBirthing {
 		descriptors.add(offspring.getBodyShape().getName(false));
 		descriptors.add(offspring.getHeight().getDescriptor());
 		descriptors.add(offspring.getFemininity().getName(false));
-		return Util.randomItemFrom(descriptors);
+		return Util.random.of(descriptors);
 	}
 
 	public static String getOffspringDescriptor(OffspringSeed offspring) {
@@ -292,7 +292,7 @@ public class LilayaBirthing {
 				UtilText.nodeContentSB.append("You feel a weight on your chest, and you're vaguely aware of something greedily drinking a bottle of milk as you cradle it in your arms...");
 			}
 			
-			String offspringId = Util.randomItemFrom(Main.game.getPlayer().getLastLitterBirthed().getOffspring());
+			String offspringId = Util.random.of(Main.game.getPlayer().getLastLitterBirthed().getOffspring());
 			try {
 				if(offspringId.contains("NPCOffspring")) { // If the offspring is from the pre-offspring seed PR, handle them in the old way:
 					GameCharacter offspring = Main.game.getNPCById(offspringId);
@@ -477,7 +477,7 @@ public class LilayaBirthing {
 			
 			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayaBirthing", "LILAYA_ASSISTS_EGG_LAYING_PROTECT_THE_EGGS"));
 			
-			String offspringId = Util.randomItemFrom(Main.game.getPlayer().getLastLitterBirthed().getOffspring());
+			String offspringId = Util.random.of(Main.game.getPlayer().getLastLitterBirthed().getOffspring());
 			try {
 				if(offspringId.contains("NPCOffspring")) { // If the offspring is from the pre-offspring seed PR, handle them in the old way:
 					GameCharacter offspring = Main.game.getNPCById(offspringId);

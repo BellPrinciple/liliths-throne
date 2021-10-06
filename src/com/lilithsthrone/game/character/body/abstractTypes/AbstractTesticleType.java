@@ -157,7 +157,7 @@ public abstract class AbstractTesticleType implements BodyPartTypeInterface {
 		if(names==null || names.isEmpty()) {
 			return UtilText.returnStringAtRandom("ball", "testicle");
 		}
-		return Util.randomItemFrom(names);
+		return Util.random.of(names);
 	}
 	
 	@Override
@@ -165,7 +165,7 @@ public abstract class AbstractTesticleType implements BodyPartTypeInterface {
 		if(namesPlural==null || namesPlural.isEmpty()) {
 			return UtilText.returnStringAtRandom("balls", "testicles");
 		}
-		return Util.randomItemFrom(namesPlural);
+		return Util.random.of(namesPlural);
 	}
 
 	@Override
@@ -173,7 +173,7 @@ public abstract class AbstractTesticleType implements BodyPartTypeInterface {
 		if(descriptors==null || descriptors.isEmpty()) {
 			return "";
 		}
-		return Util.randomItemFrom(descriptors);
+		return Util.random.of(descriptors);
 	}
 
 	@Override

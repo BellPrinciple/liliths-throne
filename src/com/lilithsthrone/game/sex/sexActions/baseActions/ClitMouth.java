@@ -1226,7 +1226,7 @@ public class ClitMouth {
 									+ " As a slimy stream of saliva "+(Main.sex.hasLubricationTypeFromAnyone(Main.sex.getCharacterPerformingAction(), SexAreaPenetration.CLIT, LubricationType.PRECUM)?"and precum ":"")
 									+"drools from the corners of [npc2.her] mouth, [npc.name] bucks back, letting [npc2.name] gasp for air for a brief moment before starting to aggressively fuck [npc2.her] [npc2.face].");
 				
-				return Util.randomItemFrom(descriptions);
+				return Util.random.of(descriptions);
 				
 				
 			} else if(Main.sex.getSexPositionSlot(Main.sex.getCharacterPerformingAction()).hasTag(SexSlotTag.SIXTY_NINE)) {
@@ -1286,7 +1286,7 @@ public class ClitMouth {
 									+"saliva drools from the corners of [npc2.her] mouth, [npc.name] lifts [npc.herself] up,"
 										+ " letting [npc2.name] gasp for air for a brief moment before sinking down once more and starting to aggressively fuck [npc2.her] face.");
 
-				return Util.randomItemFrom(descriptions);
+				return Util.random.of(descriptions);
 				
 			} else {
 				UtilText.nodeContentSB.setLength(0);

@@ -593,11 +593,11 @@ public abstract class AbstractItemType extends AbstractCoreType {
 	public String getUseDescription(GameCharacter user, GameCharacter target) {
 		if(user.equals(target)) {
 			return "<p>"
-						+ UtilText.parse(user, target, Util.randomItemFrom(useDescriptionsSelf))
+						+ UtilText.parse(user, target, Util.random.of(useDescriptionsSelf))
 					+ "</p>";
 		} else {
 			return "<p>"
-					+ UtilText.parse(user, target, Util.randomItemFrom(useDescriptionsOther))
+					+ UtilText.parse(user, target, Util.random.of(useDescriptionsOther))
 				+ "</p>";
 		}
 	}

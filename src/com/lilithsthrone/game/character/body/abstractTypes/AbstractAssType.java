@@ -167,7 +167,7 @@ public abstract class AbstractAssType implements BodyPartTypeInterface {
 		if(names==null || names.isEmpty()) {
 			return UtilText.returnStringAtRandom("ass", "rear end", "butt", "rump");
 		}
-		return Util.randomItemFrom(names);
+		return Util.random.of(names);
 	}
 	
 	@Override
@@ -175,16 +175,12 @@ public abstract class AbstractAssType implements BodyPartTypeInterface {
 		if(namesPlural==null || namesPlural.isEmpty()) {
 			return UtilText.returnStringAtRandom("asses", "rear ends", "butts", "rumps");
 		}
-		return Util.randomItemFrom(namesPlural);
+		return Util.random.of(namesPlural);
 	}
 
 	@Override
 	public String getDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(descriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(descriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? descriptorsFeminine : descriptorsMasculine);
 	}
 
 	@Override

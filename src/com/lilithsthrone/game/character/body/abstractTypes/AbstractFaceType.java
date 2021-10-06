@@ -265,7 +265,7 @@ public abstract class AbstractFaceType implements BodyPartTypeInterface {
 			}
 			return "face";
 		}
-		return Util.randomItemFrom(names);
+		return Util.random.of(names);
 	}
 	
 	@Override
@@ -276,16 +276,12 @@ public abstract class AbstractFaceType implements BodyPartTypeInterface {
 			}
 			return "faces";
 		}
-		return Util.randomItemFrom(namesPlural);
+		return Util.random.of(namesPlural);
 	}
 
 	@Override
 	public String getDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(descriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(descriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? descriptorsFeminine : descriptorsMasculine);
 	}
 
 	@Override
@@ -313,11 +309,7 @@ public abstract class AbstractFaceType implements BodyPartTypeInterface {
 	}
 
 	public String getNoseDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(noseDescriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(noseDescriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? noseDescriptorsFeminine : noseDescriptorsMasculine);
 	}
 	
 //	@Override

@@ -593,7 +593,7 @@ public class EnforcerWarehouse {
 								List<AbstractClothingType> clothingToGenerate = new ArrayList<>(ClothingType.getAllClothing());
 								clothingToGenerate.removeIf((clothing) -> !clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN));
 								
-								AbstractClothing clothing = Main.game.getItemGen().generateClothing(Util.randomItemFrom(clothingToGenerate), false);
+								AbstractClothing clothing = Main.game.getItemGen().generateClothing(Util.random.of(clothingToGenerate), false);
 								for(int i=0; i<Util.random.nextInt(4); i++) {
 									TFModifier rndMod = Util.random.of(TFModifier.getClothingAttributeList());
 									clothing.addEffect(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_ATTRIBUTE, rndMod, TFPotency.getRandomWeightedPositivePotency(), 0));
@@ -605,13 +605,13 @@ public class EnforcerWarehouse {
 								List<AbstractWeaponType> weaponToGenerate = new ArrayList<>(WeaponType.getAllWeapons());
 								weaponToGenerate.removeIf((weapon) -> (weapon.getRarity()!=Rarity.RARE && weapon.getRarity()!=Rarity.EPIC) || !weapon.getItemTags().contains(ItemTag.SOLD_BY_VICKY));
 								
-								AbstractWeapon weapon = Main.game.getItemGen().generateWeapon(Util.randomItemFrom(weaponToGenerate));
+								AbstractWeapon weapon = Main.game.getItemGen().generateWeapon(Util.random.of(weaponToGenerate));
 								
 								Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addWeapon(weapon, 1, false, true));
 								
 							} else {
 								List<AbstractItemType> itemTypes = Util.newArrayListOfValues(ItemType.getItemTypeFromId("BOTTLED_ESSENCE_DEMON"), ItemType.getItemTypeFromId("innoxia_race_demon_liliths_gift"), ItemType.FETISH_UNREFINED);
-								AbstractItem item = Main.game.getItemGen().generateItem(Util.randomItemFrom(itemTypes));
+								AbstractItem item = Main.game.getItemGen().generateItem(Util.random.of(itemTypes));
 								Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addItem(item, 3+Util.random.nextInt(6), false, true));
 							}
 

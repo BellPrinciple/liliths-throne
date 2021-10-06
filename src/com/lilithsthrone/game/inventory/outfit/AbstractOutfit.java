@@ -285,7 +285,7 @@ public abstract class AbstractOutfit {
 							weapons.add(getWeapon(e));
 						}
 						if(!weapons.isEmpty()) {
-							AbstractWeapon wep = Util.randomItemFrom(weapons);
+							AbstractWeapon wep = Util.random.of(weapons);
 							character.equipMainWeaponFromNowhere(wep);
 							if(wep.getWeaponType().getArcaneCost()>0) {
 								character.incrementEssenceCount(wep.getWeaponType().getArcaneCost()*(10+Util.random.nextInt(21)), false); // Give them enough essences for 10-20 shots
@@ -309,7 +309,7 @@ public abstract class AbstractOutfit {
 							weapons.add(getWeapon(e));
 						}
 						if(!weapons.isEmpty()) {
-							AbstractWeapon wep = Util.randomItemFrom(weapons);
+							AbstractWeapon wep = Util.random.of(weapons);
 							character.equipOffhandWeaponFromNowhere(wep);
 							if(wep.getWeaponType().getArcaneCost()>0) {
 								character.incrementEssenceCount(wep.getWeaponType().getArcaneCost()*(10+Util.random.nextInt(21)), false); // Give them enough essences for 10-20 shots
@@ -350,7 +350,7 @@ public abstract class AbstractOutfit {
 										List<Colour> colours = presetColourGroups.get(index);
 										colours.removeIf(c->!ac.getClothingType().getColourReplacement(0).getAllColours().contains(c));
 										if(!colours.isEmpty()) {
-											ac.setColour(0, Util.randomItemFrom(colours));
+											ac.setColour(0, Util.random.of(colours));
 										}
 									}
 	
@@ -360,7 +360,7 @@ public abstract class AbstractOutfit {
 										List<Colour> colours = presetColourGroups.get(index);
 										colours.removeIf(c->!ac.getClothingType().getColourReplacement(1).getAllColours().contains(c));
 										if(!colours.isEmpty()) {
-											ac.setColour(1, Util.randomItemFrom(colours));
+											ac.setColour(1, Util.random.of(colours));
 										}
 									}
 	
@@ -370,7 +370,7 @@ public abstract class AbstractOutfit {
 										List<Colour> colours = presetColourGroups.get(index);
 										colours.removeIf(c->!ac.getClothingType().getColourReplacement(2).getAllColours().contains(c));
 										if(!colours.isEmpty()) {
-											ac.setColour(2, Util.randomItemFrom(colours));
+											ac.setColour(2, Util.random.of(colours));
 										}
 									}
 									
@@ -749,7 +749,7 @@ public abstract class AbstractOutfit {
 			DamageType dt = null;
 			
 			if(baseElement.getOptionalFirstOf("types").isPresent()) {
-				wt = Util.randomItemFrom(baseElement
+				wt = Util.random.of(baseElement
 						.getMandatoryFirstOf("types")
 						.getAllOf("type")
 						.stream()
@@ -771,7 +771,7 @@ public abstract class AbstractOutfit {
 					.collect(Collectors.toList());
 			
 			if(!dtList.isEmpty()) {
-				dt = Util.randomItemFrom(dtList);
+				dt = Util.random.of(dtList);
 			}
 			
 			List<List<Colour>> coloursList = new ArrayList<>();
@@ -839,14 +839,14 @@ public abstract class AbstractOutfit {
 
 			List<Colour> coloursForGeneration = new ArrayList<>();
 			for(List<Colour> c : coloursList) {
-				coloursForGeneration.add(Util.randomItemFrom(c));
+				coloursForGeneration.add(Util.random.of(c));
 			}
 			
 			AbstractWeapon weapon;
 			if(dt!=null) {
 				weapon = Main.game.getItemGen().generateWeapon(wt, dt, coloursForGeneration);
 			} else {
-				weapon = Main.game.getItemGen().generateWeapon(wt, Util.randomItemFrom(wt.getAvailableDamageTypes()), coloursForGeneration);
+				weapon = Main.game.getItemGen().generateWeapon(wt, Util.random.of(wt.getAvailableDamageTypes()), coloursForGeneration);
 			}
 			
 			return weapon;

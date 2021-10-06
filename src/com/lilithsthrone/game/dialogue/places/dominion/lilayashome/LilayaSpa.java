@@ -541,14 +541,14 @@ public class LilayaSpa {
 			sb.append("<p>");
 				// Append random text and remove from maps so that it's not used for the next npcs:
 				if(mute) {
-					greetingText = Util.randomItemFrom(greetingsMute.get(behaviour));
+					greetingText = Util.random.of(greetingsMute.get(behaviour));
 					greetingsMute.get(behaviour).remove(greetingText);
 					sb.append(UtilText.parse(npc, greetingText));
 					
 				} else {
-					greetingText = Util.randomItemFrom(greetings.get(behaviour));
+					greetingText = Util.random.of(greetings.get(behaviour));
 					greetings.get(behaviour).remove(greetingText);
-					String speechText = Util.randomItemFrom(speech.get(behaviour));
+					String speechText = Util.random.of(speech.get(behaviour));
 					speech.get(behaviour).remove(speechText);
 					sb.append(UtilText.parse(npc, greetingText+" [npc.speech("+speechText+")]"));
 				}
@@ -582,14 +582,14 @@ public class LilayaSpa {
 			sb.append("<p>");
 				// Get random text and remove from maps so that it's not used for the next npcs:
 				if(mute) {
-					greetingText = Util.randomItemFrom(rudeGreetingsMute);
+					greetingText = Util.random.of(rudeGreetingsMute);
 					rudeGreetingsMute.remove(greetingText);
 					sb.append(UtilText.parse(npc, greetingText));
 					
 				} else {
-					greetingText = Util.randomItemFrom(rudeGreetings);
+					greetingText = Util.random.of(rudeGreetings);
 					rudeGreetings.remove(greetingText);
-					String speechText = Util.randomItemFrom(rudeSpeech);
+					String speechText = Util.random.of(rudeSpeech);
 					rudeSpeech.remove(speechText);
 					sb.append(UtilText.parse(npc, greetingText+" [npc.speech("+speechText+")]"));
 				}
@@ -645,14 +645,14 @@ public class LilayaSpa {
 			sb.append("<p>");
 				// Append random text and remove from maps so that it's not used for the next npcs:
 				if(mute) {
-					greetingText = Util.randomItemFrom(greetingsMute.get(behaviour));
+					greetingText = Util.random.of(greetingsMute.get(behaviour));
 					greetingsMute.get(behaviour).remove(greetingText);
 					sb.append(UtilText.parse(npc, greetingText));
 					
 				} else {
-					greetingText = Util.randomItemFrom(greetings.get(behaviour));
+					greetingText = Util.random.of(greetings.get(behaviour));
 					greetings.get(behaviour).remove(greetingText);
-					String speechText = Util.randomItemFrom(speech.get(behaviour));
+					String speechText = Util.random.of(speech.get(behaviour));
 					speech.get(behaviour).remove(speechText);
 					sb.append(UtilText.parse(npc, greetingText+" [npc.speech("+speechText+")]"));
 				}
@@ -686,14 +686,14 @@ public class LilayaSpa {
 			sb.append("<p>");
 				// Get random text and remove from maps so that it's not used for the next npcs:
 				if(mute) {
-					greetingText = Util.randomItemFrom(rudeGreetingsMute);
+					greetingText = Util.random.of(rudeGreetingsMute);
 					rudeGreetingsMute.remove(greetingText);
 					sb.append(UtilText.parse(npc, greetingText));
 					
 				} else {
-					greetingText = Util.randomItemFrom(rudeGreetings);
+					greetingText = Util.random.of(rudeGreetings);
 					rudeGreetings.remove(greetingText);
-					String speechText = Util.randomItemFrom(rudeSpeech);
+					String speechText = Util.random.of(rudeSpeech);
 					rudeSpeech.remove(speechText);
 					sb.append(UtilText.parse(npc, greetingText+" [npc.speech("+speechText+")]"));
 				}
@@ -830,14 +830,14 @@ public class LilayaSpa {
 			sb.append("<p>");
 				// Append random text and remove from maps so that it's not used for the next npcs:
 				if(mute) {
-					greetingText = Util.randomItemFrom(greetingsMute.get(behaviour));
+					greetingText = Util.random.of(greetingsMute.get(behaviour));
 					greetingsMute.get(behaviour).remove(greetingText);
 					sb.append(UtilText.parse(npc, greetingText));
 					
 				} else {
-					greetingText = Util.randomItemFrom(greetings.get(behaviour));
+					greetingText = Util.random.of(greetings.get(behaviour));
 					greetings.get(behaviour).remove(greetingText);
-					String speechText = Util.randomItemFrom(speech.get(behaviour));
+					String speechText = Util.random.of(speech.get(behaviour));
 					speech.get(behaviour).remove(speechText);
 					sb.append(UtilText.parse(npc, greetingText+" [npc.speech("+speechText+")]"));
 				}
@@ -871,14 +871,14 @@ public class LilayaSpa {
 			sb.append("<p>");
 				// Get random text and remove from maps so that it's not used for the next npcs:
 				if(mute) {
-					greetingText = Util.randomItemFrom(rudeGreetingsMute);
+					greetingText = Util.random.of(rudeGreetingsMute);
 					rudeGreetingsMute.remove(greetingText);
 					sb.append(UtilText.parse(npc, greetingText));
 					
 				} else {
-					greetingText = Util.randomItemFrom(rudeGreetings);
+					greetingText = Util.random.of(rudeGreetings);
 					rudeGreetings.remove(greetingText);
-					String speechText = Util.randomItemFrom(rudeSpeech);
+					String speechText = Util.random.of(rudeSpeech);
 					rudeSpeech.remove(speechText);
 					sb.append(UtilText.parse(npc, greetingText+" [npc.speech("+speechText+")]"));
 				}

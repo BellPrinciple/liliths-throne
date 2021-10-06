@@ -525,9 +525,9 @@ public class PenisMouth {
 				}
 				
 				return UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
-						Util.randomItemFrom(descriptions))
+						Util.random.of(descriptions))
 						+ UtilText.parse(Util.newArrayListOfValues(performer, target, primary),
-								Util.randomItemFrom(descriptionsEnd));
+								Util.random.of(descriptionsEnd));
 				
 			} else {
 				for(PenetrationModifier pm : Main.sex.getCharacterTargetedForSexAction(this).getPenisModifiers()) {
@@ -549,7 +549,7 @@ public class PenisMouth {
 				descriptions.add("Pulling [npc.her] head back a little, [npc.name] [npc.verb(let)] most of [npc2.namePos] [npc2.cock+] slide out of [npc.her] mouth, and,"
 						+ " focusing on using [npc.her] [npc.tongue+], [npc.she] [npc.verb(start)] licking and kissing the [npc2.cockHead+] that's left poking past [npc.her] [npc.lips+].");
 				
-				return Util.randomItemFrom(descriptions);
+				return Util.random.of(descriptions);
 			}
 		}
 		
@@ -2018,7 +2018,7 @@ public class PenisMouth {
 
 					
 					return UtilText.nodeContentSB.toString()
-							+Util.randomItemFrom(descriptions);
+							+Util.random.of(descriptions);
 					
 				} else {
 					for(PenetrationModifier pm : Main.sex.getCharacterPerformingAction().getPenisModifiers()) {
@@ -2054,7 +2054,7 @@ public class PenisMouth {
 										+ " As a slimy stream of saliva "+(Main.sex.hasLubricationTypeFromAnyone(Main.sex.getCharacterPerformingAction(), SexAreaPenetration.PENIS, LubricationType.PRECUM)?"and precum ":"")
 										+"drools from the corners of [npc2.her] mouth, [npc.name] bucks back, letting [npc2.name] gasp for air for a brief moment before starting to aggressively fuck [npc2.her] [npc2.face].");
 					
-					return Util.randomItemFrom(descriptions);
+					return Util.random.of(descriptions);
 				}
 				
 				
@@ -2114,7 +2114,7 @@ public class PenisMouth {
 									+"saliva drools from the corners of [npc2.her] mouth, [npc.name] lifts [npc.herself] up,"
 										+ " letting [npc2.name] gasp for air for a brief moment before sinking down once more and starting to aggressively fuck [npc2.her] face.");
 
-				return Util.randomItemFrom(descriptions);
+				return Util.random.of(descriptions);
 				
 			} else {
 				UtilText.nodeContentSB.setLength(0);

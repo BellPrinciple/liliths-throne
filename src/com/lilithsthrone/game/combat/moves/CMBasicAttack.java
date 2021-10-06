@@ -254,7 +254,7 @@ public class CMBasicAttack {
     					if(aoeAvailableTargets.isEmpty()) {
     						break;
     					}
-    					GameCharacter aoeTarget = Util.randomItemFrom(aoeAvailableTargets);
+    					GameCharacter aoeTarget = Util.random.of(aoeAvailableTargets);
     					if(Math.random()*100<=aoe.getKey()) {
             				maxLust = isTargetAtMaximumLust(target);
             				damage = Attack.calculateDamage(source, target, Attack.MAIN, weapon, aoe.getValue(), isCrit);
@@ -626,7 +626,7 @@ public class CMBasicAttack {
     					if(aoeAvailableTargets.isEmpty()) {
     						break;
     					}
-    					GameCharacter aoeTarget = Util.randomItemFrom(aoeAvailableTargets);
+    					GameCharacter aoeTarget = Util.random.of(aoeAvailableTargets);
     					if(Math.random()*100<=aoe.getKey()) {
             				maxLust = isTargetAtMaximumLust(target);
             				damage = Attack.calculateDamage(source, target, Attack.OFFHAND, weapon, aoe.getValue(), isCrit);
@@ -973,7 +973,7 @@ public class CMBasicAttack {
     					if(aoeAvailableTargets.isEmpty()) {
     						break;
     					}
-    					GameCharacter aoeTarget = Util.randomItemFrom(aoeAvailableTargets);
+    					GameCharacter aoeTarget = Util.random.of(aoeAvailableTargets);
     					if(Math.random()*100<=aoe.getKey()) {
             				maxLust = isTargetAtMaximumLust(target);
             				damage = Attack.calculateDamage(source, target, Attack.MAIN, weapon, aoe.getValue(), isCrit);
@@ -1014,7 +1014,7 @@ public class CMBasicAttack {
     					if(aoeAvailableTargets.isEmpty()) {
     						break;
     					}
-    					GameCharacter aoeTarget = Util.randomItemFrom(aoeAvailableTargets);
+    					GameCharacter aoeTarget = Util.random.of(aoeAvailableTargets);
     					if(Math.random()*100<=aoe.getKey()) {
             				maxLust = isTargetAtMaximumLust(target);
             				damage = Attack.calculateDamage(source, target, Attack.OFFHAND, weapon, aoe.getValue(), isCrit);

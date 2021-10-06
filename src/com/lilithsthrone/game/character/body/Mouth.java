@@ -78,7 +78,7 @@ public class Mouth implements BodyPartInterface {
 		
 		descriptorList.add(type.getDescriptor(owner));
 		
-		return Util.randomItemFrom(descriptorList);
+		return Util.random.of(descriptorList);
 	}
 	
 	public String getLipsNameSingular(GameCharacter gc) {
@@ -98,7 +98,7 @@ public class Mouth implements BodyPartInterface {
 		
 		descriptorList.addAll(type.getLipsDescriptors(gc));
 
-		return Util.randomItemFrom(descriptorList);
+		return Util.random.of(descriptorList);
 	}
 
 	public void setType(AbstractMouthType type) {

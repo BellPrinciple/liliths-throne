@@ -2148,7 +2148,7 @@ public class RatWarrensCaptiveDialogue {
 	public static final DialogueNode CAPTIVE_DAY_3_LUNCH_END = new DialogueNode("", "", true, true) {
 		@Override
 		public void applyPreParsingEffects() {
-			GameCharacter milker = Util.randomItemFrom(getMilkers());
+			GameCharacter milker = Util.random.of(getMilkers());
 			milker.calculateGenericSexEffects(false, true, getMurk(), new SexType(SexParticipantType.NORMAL, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS), GenericSexFlag.FORCE_CREAMPIE);
 			Main.game.getPlayer().addDirtySlot(InventorySlot.MOUTH);
 			getMurk().returnToHome();

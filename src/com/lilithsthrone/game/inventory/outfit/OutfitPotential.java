@@ -35,7 +35,7 @@ public class OutfitPotential {
 	public List<Colour> getColoursForClothingGeneration() {
 		List<Colour> coloursForGeneration = new ArrayList<>();
 		for(List<Colour> c : colours) {
-			coloursForGeneration.add(Util.randomItemFrom(c));
+			coloursForGeneration.add(Util.random.of(c));
 		}
 		return coloursForGeneration;
 	}

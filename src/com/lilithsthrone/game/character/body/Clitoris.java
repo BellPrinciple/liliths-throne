@@ -95,7 +95,7 @@ public class Clitoris implements BodyPartInterface {
 			}
 		}
 		
-		return Util.randomItemFrom(descriptors);
+		return Util.random.of(descriptors);
 	}
 	
 	public String getClitTipNameSingular(GameCharacter gc) {
@@ -133,7 +133,7 @@ public class Clitoris implements BodyPartInterface {
 		if(descriptors.isEmpty()) {
 			return "";
 		}
-		return Util.randomItemFrom(descriptors);
+		return Util.random.of(descriptors);
 	}
 	
 	public ClitorisSize getClitorisSize() {

@@ -541,10 +541,10 @@ public class KaysWarehouse {
 							clothingToGenerate.removeIf((clothing) -> clothing.getRarity()!=Rarity.COMMON || !clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN) || clothing.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN));
 							
 							Main.game.getTextEndStringBuilder().append(
-									Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing(Util.randomItemFrom(clothingToGenerate), false), false)
-									+ Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing(Util.randomItemFrom(clothingToGenerate), true), false)
-									+ (Math.random()>0.5?Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing(Util.randomItemFrom(clothingToGenerate), true), false):"")
-									+ (Math.random()>0.5?Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing(Util.randomItemFrom(clothingToGenerate), true), false):"")
+									Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing(Util.random.of(clothingToGenerate), false), false)
+									+ Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing(Util.random.of(clothingToGenerate), true), false)
+									+ (Math.random()>0.5?Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing(Util.random.of(clothingToGenerate), true), false):"")
+									+ (Math.random()>0.5?Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing(Util.random.of(clothingToGenerate), true), false):"")
 							        + UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "STORAGE_AREA_SEARCHED"));
 						}
 					};
@@ -1133,7 +1133,7 @@ public class KaysWarehouse {
 							}
 							long thanksJava = lowestValue;
 							topics.removeIf(s -> Main.game.getDialogueFlags().getSavedLong(s)>thanksJava);
-							String topicSelected = Util.randomItemFrom(topics);
+							String topicSelected = Util.random.of(topics);
 							
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/kaysTextiles", "OFFICE_TALK_"+topicSelected));
 							Main.game.getDialogueFlags().incrementSavedLong(topicSelected, 1);

@@ -198,7 +198,7 @@ public class SlaverAlleyDialogue {
 			}
 			Main.game.getNpc(Finch.class).addSlave(slave);
 			
-			slave.setAssWetness(Util.randomItemFrom(Util.newArrayListOfValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
+			slave.setAssWetness(Util.random.ofValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING).getValue());
 			slave.setAssBleached(true);
 			slave.setAssCapacity(Util.random.nextInt((int) Capacity.ONE_EXTREMELY_TIGHT.getMaximumValue(false)), true);
 			slave.setAssVirgin(false);
@@ -221,7 +221,7 @@ public class SlaverAlleyDialogue {
 			slave.setLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_STALL_VAGINAL, true);
 			Main.game.getNpc(Finch.class).addSlave(slave);
 			
-			slave.setVaginaWetness(Util.randomItemFrom(Util.newArrayListOfValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
+			slave.setVaginaWetness(Util.random.ofValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING).getValue());
 			slave.setVaginaCapacity(Util.random.nextInt((int) Capacity.ONE_EXTREMELY_TIGHT.getMaximumValue(false)), true);
 			slave.setVaginaVirgin(true);
 			
@@ -245,7 +245,7 @@ public class SlaverAlleyDialogue {
 			}
 			Main.game.getNpc(Finch.class).addSlave(slave);
 
-			slave.setFaceWetness(Util.randomItemFrom(Util.newArrayListOfValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
+			slave.setFaceWetness(Util.random.ofValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING).getValue());
 			slave.setFaceCapacity(Capacity.THREE_SLIGHTLY_LOOSE.getMedianValue(), true);
 			slave.setFaceElasticity(OrificeElasticity.SEVEN_ELASTIC.getValue());
 			slave.setLipSize(LipSize.FOUR_HUGE.getValue());
@@ -384,7 +384,7 @@ public class SlaverAlleyDialogue {
 					?Fetish.FETISH_ANAL_GIVING
 					:null);
 		if(!fetishes.isEmpty()) {
-			partners.get(0).addFetish(Util.randomItemFrom(fetishes));
+			partners.get(0).addFetish(Util.random.of(fetishes));
 		}
 		
 		return partners;

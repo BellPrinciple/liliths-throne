@@ -283,7 +283,7 @@ public class RatWarrensDialogue {
 				rat.setLocation(Main.game.getPlayer(), true);
 				rat.addSpecialPerk(Perk.SPECIAL_HEALTH_FANATIC);
 				rat.setMuscle(Muscle.FOUR_RIPPED.getMedianValue());
-				rat.setGenericName(Util.randomItemFrom(Util.newArrayListOfValues("buff", "strong", "muscular", "muscly"))+" lieutenant");
+				rat.setGenericName(Util.random.ofValues("buff", "strong", "muscular", "muscly")+" lieutenant");
 
 				rat = new RatGangMember(Gender.getGenderFromUserPreferences(false, false));
 				Main.game.addNPC(rat, false);

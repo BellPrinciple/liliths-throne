@@ -263,11 +263,7 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 
 	@Override
 	public String getDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(descriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(descriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? descriptorsFeminine : descriptorsMasculine);
 	}
 
 	@Override
@@ -289,11 +285,7 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 	}
 
 	public String getHandsDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(handDescriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(handDescriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? handDescriptorsFeminine : handDescriptorsMasculine);
 	}
 	
 	public String getFingersNameSingular(GameCharacter gc) {
@@ -305,11 +297,7 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 	}
 
 	public String getFingersDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(fingerDescriptorsFeminine);
-		} else {
-			return Util.randomItemFrom(fingerDescriptorsMasculine);
-		}
+		return Util.random.of(gc.isFeminine() ? fingerDescriptorsFeminine : fingerDescriptorsMasculine);
 	}
 	
 	@Override

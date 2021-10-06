@@ -274,7 +274,7 @@ public enum CaptiveTransformation {
 				}
 			}
 			
-			FluidFlavour flavour = Util.randomItemFrom(FluidFlavour.getUnnaturalFlavourings());
+			FluidFlavour flavour = Util.random.of(FluidFlavour.getUnnaturalFlavourings());
 			
 			map.put("It ain't so easy ta shift fluids wot 'ave the usual flavours, so let's make yer cum a nice an' yummy "+flavour.getName()+" flavour!",
 					target.setCumFlavour(flavour));
@@ -566,12 +566,12 @@ public enum CaptiveTransformation {
 				}
 			}
 			
-			FluidFlavour flavour = Util.randomItemFrom(FluidFlavour.getUnnaturalFlavourings());
+			FluidFlavour flavour = Util.random.of(FluidFlavour.getUnnaturalFlavourings());
 
 			map.put("We're gonna want ta get a good price fer ya fluids, so yer flavourin' is gonna 'ave ta be changed!",
-					target.setGirlcumFlavour(Util.randomItemFrom(FluidFlavour.getUnnaturalFlavourings()))
+					target.setGirlcumFlavour(Util.random.of(FluidFlavour.getUnnaturalFlavourings()))
 					+ (futa
-						?target.setCumFlavour(Util.randomItemFrom(FluidFlavour.getUnnaturalFlavourings()))
+						?target.setCumFlavour(Util.random.of(FluidFlavour.getUnnaturalFlavourings()))
 						:"")
 					+ target.setMilkFlavour(flavour)
 					+ (target.hasBreastsCrotch()

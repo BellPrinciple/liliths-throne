@@ -160,7 +160,7 @@ public class BreastCrotch implements BodyPartInterface {
 		
 		list.add(this.getShape().getDescriptor());
 		
-		return Util.randomItemFrom(list);
+		return Util.random.of(list);
 	}
 
 	public boolean hasBreasts() {
@@ -168,7 +168,7 @@ public class BreastCrotch implements BodyPartInterface {
 	}
 
 	public String setType(GameCharacter owner, AbstractBreastType type) {
-		this.shape = Util.randomItemFrom(RacialBody.valueOfRace(type.getRace()).getBreastCrotchShapes());
+		this.shape = Util.random.of(RacialBody.valueOfRace(type.getRace()).getBreastCrotchShapes());
 		
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;

@@ -276,10 +276,10 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 							highPriorityActions.retainAll(actions);
 						}
 					}
-					return Util.randomItemFrom(highPriorityActions);
+					return Util.random.of(highPriorityActions);
 				}
 				if (!possibleActions.isEmpty()) {
-					return Util.randomItemFrom(possibleActions);
+					return Util.random.of(possibleActions);
 				}
 				
 			} else {
@@ -1065,7 +1065,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 					Main.sex.setTargetedPartner(targeter, preferredTarget);
 					return;
 				}
-				Main.sex.setTargetedPartner(targeter, Util.randomItemFrom(availableTargets));
+				Main.sex.setTargetedPartner(targeter, Util.random.of(availableTargets));
 				return;
 			}
 		}
@@ -1151,11 +1151,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 			}
 		}
 		
-		if(weightedTargets.isEmpty()) {
-			Main.sex.setTargetedPartner(targeter, Util.randomItemFrom(availableTargets));
-		} else {
-			Main.sex.setTargetedPartner(targeter, Util.random.of(weightedTargets));
-		}
+		Main.sex.setTargetedPartner(targeter, weightedTargets.isEmpty() ? Util.random.of(availableTargets) : Util.random.of(weightedTargets));
 	}
 	
 }

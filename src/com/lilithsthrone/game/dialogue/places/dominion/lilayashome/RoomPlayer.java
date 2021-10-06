@@ -510,9 +510,9 @@ public class RoomPlayer {
 					}
 				}
 			}
-			sb.append(UtilText.parse(npc,Util.randomItemFrom(start)));
+			sb.append(UtilText.parse(npc,Util.random.of(start)));
 			sb.append(" ");
-			sb.append(UtilText.parse(npc,Util.randomItemFrom(speech)));
+			sb.append(UtilText.parse(npc,Util.random.of(speech)));
 			sb.append("</p>");
 			firstWashing = false;
 		}
@@ -564,9 +564,9 @@ public class RoomPlayer {
 					speech.add("[npc.speech(I really hate having to do this, you know?)]");
 				}
 
-			sb.append(UtilText.parse(npc,Util.randomItemFrom(start)));
+			sb.append(UtilText.parse(npc,Util.random.of(start)));
 			sb.append(" ");
-			sb.append(UtilText.parse(npc,Util.randomItemFrom(speech)));
+			sb.append(UtilText.parse(npc,Util.random.of(speech)));
 			sb.append("</p>");
 			firstWashing = false;
 		}
@@ -746,9 +746,9 @@ public class RoomPlayer {
 					}
 				}
 			}
-			sb.append(UtilText.parse(npc,Util.randomItemFrom(start)));
+			sb.append(UtilText.parse(npc,Util.random.of(start)));
 			sb.append(" ");
-			sb.append(UtilText.parse(npc,Util.randomItemFrom(speech)));
+			sb.append(UtilText.parse(npc,Util.random.of(speech)));
 			sb.append("</p>");
 			firstWashing = false;
 		}
@@ -800,9 +800,9 @@ public class RoomPlayer {
 					speech.add("[npc.speech(I really hate having to do this, you know?)]");
 				}
 
-			sb.append(UtilText.parse(npc,Util.randomItemFrom(start)));
+			sb.append(UtilText.parse(npc,Util.random.of(start)));
 			sb.append(" ");
-			sb.append(UtilText.parse(npc,Util.randomItemFrom(speech)));
+			sb.append(UtilText.parse(npc,Util.random.of(speech)));
 			sb.append("</p>");
 			firstWashing = false;
 		}
@@ -1114,12 +1114,12 @@ public class RoomPlayer {
 								endSpeechGreetings.add("[npc.speech(I hope you aren't gone for so long next time! I miss you, you know?)]");
 							}
 						}
-						sb.append(UtilText.parse(npc,Util.randomItemFrom(speechGreetings)));
+						sb.append(UtilText.parse(npc,Util.random.of(speechGreetings)));
 						sb.append(" ");
-						sb.append(UtilText.parse(npc,Util.randomItemFrom(endGreetings)));
+						sb.append(UtilText.parse(npc,Util.random.of(endGreetings)));
 						if(!endSpeechGreetings.isEmpty()) {
 							sb.append(" ");
-							sb.append(UtilText.parse(npc,Util.randomItemFrom(endSpeechGreetings)));
+							sb.append(UtilText.parse(npc,Util.random.of(endSpeechGreetings)));
 						}
 						sb.append("</p>");
 					}
@@ -1165,9 +1165,9 @@ public class RoomPlayer {
 								endGreetings.add("[npc.name] says, crossing [npc.her] [npc.arms] and letting out an annoyed sigh.");
 							}
 
-						sb.append(UtilText.parse(npc,Util.randomItemFrom(speechGreetings)));
+						sb.append(UtilText.parse(npc,Util.random.of(speechGreetings)));
 						sb.append(" ");
-						sb.append(UtilText.parse(npc,Util.randomItemFrom(endGreetings)));
+						sb.append(UtilText.parse(npc,Util.random.of(endGreetings)));
 						sb.append("</p>");
 					}
 				}
@@ -1383,12 +1383,12 @@ public class RoomPlayer {
 									UtilText.parse(npc, "Displaying an impressive level of control over [npc.her] [npc.tail+], the [npc.race] swiftly moves it up and wraps it around your lower body, before snuggling in even closer against you."));
 						}
 						
-						sb.append(UtilText.parse(npc,Util.randomItemFrom(speechGreetings)));
+						sb.append(UtilText.parse(npc,Util.random.of(speechGreetings)));
 						sb.append(" ");
-						sb.append(UtilText.parse(npc,Util.randomItemFrom(endGreetings)));
+						sb.append(UtilText.parse(npc,Util.random.of(endGreetings)));
 						if(!endSpeechGreetings.isEmpty()) {
 							sb.append(" ");
-							sb.append(UtilText.parse(npc,Util.randomItemFrom(endSpeechGreetings)));
+							sb.append(UtilText.parse(npc,Util.random.of(endSpeechGreetings)));
 						}
 						sb.append("</p>");
 					}
@@ -1426,9 +1426,9 @@ public class RoomPlayer {
 								endGreetings.add(UtilText.parse(npc, "[npc.name] sighs, shuffling away a little before rolling over and turning [npc.her] back on you."));
 								endGreetings.add(UtilText.parse(npc, "[npc.name] sighs, before turning [npc.her] back to you and shuffling over to the edge of the bed."));
 							}
-							sb.append(UtilText.parse(npc,Util.randomItemFrom(speechGreetings)));
+							sb.append(UtilText.parse(npc,Util.random.of(speechGreetings)));
 							sb.append(" ");
-							sb.append(UtilText.parse(npc,Util.randomItemFrom(endGreetings)));
+							sb.append(UtilText.parse(npc,Util.random.of(endGreetings)));
 						sb.append("</p>");
 					}
 				}
@@ -1446,7 +1446,7 @@ public class RoomPlayer {
 				List<GameCharacter> hornySlaves = slavesWantingToSexPlayer(Main.game.getHourOfDay());
 				
 				if(!slavesToWakePlayer.isEmpty()) {
-					GameCharacter slaveWaking = Util.randomItemFrom(slavesToWakePlayer);
+					GameCharacter slaveWaking = Util.random.of(slavesToWakePlayer);
 					sb.append("<p>"
 							+ (soloSlave
 								?UtilText.parse(slaveWaking,

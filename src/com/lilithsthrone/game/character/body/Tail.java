@@ -74,7 +74,7 @@ public class Tail implements BodyPartInterface {
 			descriptors.add(gc.getTailGirth().getName());
 		}
 		
-		return Util.randomItemFrom(descriptors);
+		return Util.random.of(descriptors);
 	}
 
 	public String setType(GameCharacter owner, AbstractTailType type) {

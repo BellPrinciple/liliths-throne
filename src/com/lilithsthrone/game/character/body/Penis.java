@@ -116,10 +116,10 @@ public class Penis implements BodyPartInterface {
 		}
 		
 		if(owner.isPenisFeral()) {
-			list.add(Util.randomItemFrom(Util.newArrayListOfValues(
+			list.add(Util.random.ofValues(
 					"feral",
 					"bestial",
-					"animalistic")));
+					"animalistic"));
 		} else {
 			list.add(type.getDescriptor(owner));
 		}
@@ -142,7 +142,7 @@ public class Penis implements BodyPartInterface {
 		if(list.isEmpty()) {
 			return "";
 		}
-		return Util.randomItemFrom(list);
+		return Util.random.of(list);
 	}
 	
 	public String getUrethraDescriptor(GameCharacter owner) {
@@ -156,7 +156,7 @@ public class Penis implements BodyPartInterface {
 		
 		descriptorList.add(Capacity.getCapacityFromValue(orificeUrethra.getStretchedCapacity()).getDescriptor().replaceAll(" ", "-"));
 
-		return Util.randomItemFrom(descriptorList);
+		return Util.random.of(descriptorList);
 	}
 	
 	public String getPenisHeadName(GameCharacter gc) {
@@ -167,7 +167,7 @@ public class Penis implements BodyPartInterface {
 			list.add("tip");
 		}
 
-		return Util.randomItemFrom(list);
+		return Util.random.of(list);
 	}
 	
 	public String getPenisHeadDescriptor(GameCharacter gc) {
@@ -183,7 +183,7 @@ public class Penis implements BodyPartInterface {
 			list.add("flat");
 		}
 
-		return Util.randomItemFrom(list);
+		return Util.random.of(list);
 	}
 	
 	public String setType(GameCharacter owner, AbstractPenisType type) {

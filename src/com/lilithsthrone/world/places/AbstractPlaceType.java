@@ -521,7 +521,7 @@ public class AbstractPlaceType {
 		}
 		return backgroundColour;
 	}
-	
+
 	public AbstractEncounter getEncounterType() {
 		Map<AbstractEncounter, Float> possibleEncountersMap = new HashMap<>();
 		
@@ -541,8 +541,8 @@ public class AbstractPlaceType {
 			possibleEncountersMap.keySet().removeIf(en->!en.isAnyBaseTriggerChanceOverOneHundred());
 		}
 		
-		AbstractEncounter ae = Util.getRandomObjectFromWeightedFloatMap(possibleEncountersMap);
-		
+		AbstractEncounter ae = Util.random.of(possibleEncountersMap);
+
 		return ae;
 	}
 	

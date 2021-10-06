@@ -72,7 +72,7 @@ public class Tentacle implements BodyPartInterface {
 			descriptors.add(gc.getTentacleGirth().getName());
 		}
 		
-		return Util.randomItemFrom(descriptors);
+		return Util.random.of(descriptors);
 	}
 	
 	/**

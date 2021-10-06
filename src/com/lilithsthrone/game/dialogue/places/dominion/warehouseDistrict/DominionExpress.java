@@ -1165,7 +1165,7 @@ public class DominionExpress {
 			if(list.isEmpty() || Math.random()<0.1f) {
 				sleepSexAreaWanted = null;
 			} else {
-				sleepSexAreaWanted = Util.randomItemFrom(list);
+				sleepSexAreaWanted = Util.random.of(list);
 			}
 			if(sleepSexAreaWanted==null) {
 				Main.game.getTextEndStringBuilder().append(Main.game.getDialogueFlags().incrementNatalyaPoints(2));

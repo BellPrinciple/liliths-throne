@@ -1777,7 +1777,7 @@ public class ZaranixHomeGroundFloorRepeat {
 						Gender petGender = Gender.getGenderFromUserPreferences(false, false);
 						pet = new GenericSexualPartner(
 								petGender.getGenderName().isHasPenis()?petGender:(petGender.isFeminine()?Gender.F_P_V_B_FUTANARI:Gender.M_P_MALE), Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
-						pet.setName(Util.randomItemFrom(Name.petNames));
+						pet.setName(Util.random.of(Name.petNames));
 						pet.setPlayerKnowsName(true);
 						owner = new GenericSexualPartner(Gender.F_P_V_B_FUTANARI, Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocation(), false);
 						owner.setBody(Gender.getGenderFromUserPreferences(false, false), RacialBody.DEMON, RaceStage.GREATER, false);

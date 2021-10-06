@@ -95,7 +95,7 @@ public class ColourReplacement {
 		if(getDefaultColours()==null || getDefaultColours().isEmpty()) {
 			return DEFAULT_COLOUR_VALUE;
 		}
-		return Util.randomItemFrom(getDefaultColours());
+		return Util.random.of(getDefaultColours());
 	}
 
 	// Extra colours:
@@ -115,7 +115,7 @@ public class ColourReplacement {
 		if(getExtraColours()==null || getExtraColours().isEmpty()) {
 			return DEFAULT_COLOUR_VALUE;
 		}
-		return Util.randomItemFrom(getExtraColours());
+		return Util.random.of(getExtraColours());
 	}
 
 	// All colours:
@@ -135,7 +135,7 @@ public class ColourReplacement {
 		if(getAllColours()==null || getAllColours().isEmpty()) {
 			return DEFAULT_COLOUR_VALUE;
 		}
-		return Util.randomItemFrom(getAllColours());
+		return Util.random.of(getAllColours());
 	}
 	
 }

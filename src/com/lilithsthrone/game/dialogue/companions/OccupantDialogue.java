@@ -1011,7 +1011,7 @@ public class OccupantDialogue {
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);
 			
-			String id = Util.randomItemFrom(Main.game.getPlayer().getSlavesOwned());
+			String id = Util.random.of(Main.game.getPlayer().getSlavesOwned());
 			try {
 				NPC slave = (NPC) Main.game.getNPCById(id);
 				UtilText.nodeContentSB.append(UtilText.parseFromXMLFile(getTextFilePath(), "OCCUPANT_TALK_SLAVES", occupant(), slave));

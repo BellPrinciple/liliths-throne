@@ -93,7 +93,7 @@ public class Testicle implements BodyPartInterface {
 		
 		list.add(type.getDescriptor(owner));
 		
-		return Util.randomItemFrom(list);
+		return Util.random.of(list);
 	}
 	
 	public void setType(GameCharacter owner, AbstractTesticleType type) {

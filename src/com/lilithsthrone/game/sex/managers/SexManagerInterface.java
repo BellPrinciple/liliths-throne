@@ -459,7 +459,7 @@ public interface SexManagerInterface {
 			}
 		}
 		if(!orgasmTargets.isEmpty()) {
-			return Util.randomItemFrom(orgasmTargets);
+			return Util.random.of(orgasmTargets);
 		}
 		return null;
 	}

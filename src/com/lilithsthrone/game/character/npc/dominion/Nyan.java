@@ -389,7 +389,7 @@ public class Nyan extends NPC {
 			this.setEyeLiner(new Covering(BodyCoveringType.MAKEUP_EYE_LINER, PresetColour.COVERING_NONE));
 			this.setEyeShadow(new Covering(BodyCoveringType.MAKEUP_EYE_SHADOW, PresetColour.COVERING_NONE));
 			
-			Colour lingerieColour = Util.randomItemFrom(Util.newArrayListOfValues(
+			Colour lingerieColour = Util.random.of(Util.newArrayListOfValues(
 					PresetColour.CLOTHING_WHITE,
 					PresetColour.CLOTHING_WHITE,
 					PresetColour.CLOTHING_WHITE,
@@ -399,7 +399,7 @@ public class Nyan extends NPC {
 			
 			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_head_headband", PresetColour.CLOTHING_BLACK, false), true, this);
 			
-			Colour dressColour = Util.randomItemFrom(Util.newArrayListOfValues(
+			Colour dressColour = Util.random.of(Util.newArrayListOfValues(
 					PresetColour.CLOTHING_WHITE,
 					PresetColour.CLOTHING_YELLOW,
 					PresetColour.CLOTHING_PURPLE_LIGHT));
@@ -413,7 +413,7 @@ public class Nyan extends NPC {
 			this.setEyeLiner(new Covering(BodyCoveringType.MAKEUP_EYE_LINER, PresetColour.COVERING_NONE));
 			this.setEyeShadow(new Covering(BodyCoveringType.MAKEUP_EYE_SHADOW, PresetColour.COVERING_NONE));
 			
-			Colour lingerieColour = Util.randomItemFrom(Util.newArrayListOfValues(
+			Colour lingerieColour = Util.random.of(Util.newArrayListOfValues(
 					PresetColour.CLOTHING_WHITE,
 					PresetColour.CLOTHING_WHITE,
 					PresetColour.CLOTHING_WHITE,
@@ -426,7 +426,7 @@ public class Nyan extends NPC {
 			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_foot_heels", PresetColour.CLOTHING_BLACK, false), true, this);
 			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_head_headband", PresetColour.CLOTHING_BLACK, false), true, this);
 			
-			Colour blouseColour = Util.randomItemFrom(Util.newArrayListOfValues(
+			Colour blouseColour = Util.random.of(Util.newArrayListOfValues(
 					PresetColour.CLOTHING_WHITE,
 					PresetColour.CLOTHING_PINK_LIGHT,
 					PresetColour.CLOTHING_PINK_LIGHT,
@@ -501,7 +501,7 @@ public class Nyan extends NPC {
 		AbstractClothing dress;
 		int rndGen = Util.random.nextInt(100);
 		if(rndGen<33) {
-			Colour dressColour = Util.randomItemFrom(Util.newArrayListOfValues(
+			Colour dressColour = Util.random.of(Util.newArrayListOfValues(
 					PresetColour.CLOTHING_BLUE_GREY,
 					PresetColour.CLOTHING_PURPLE_VERY_DARK,
 					PresetColour.CLOTHING_YELLOW));
@@ -516,7 +516,7 @@ public class Nyan extends NPC {
 			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ClothingType.CHEST_FULLCUP_BRA, PresetColour.CLOTHING_BLACK, false), true, this);
 			
 		} else if(rndGen<66) {
-			Colour dressColour = Util.randomItemFrom(Util.newArrayListOfValues(
+			Colour dressColour = Util.random.of(Util.newArrayListOfValues(
 					PresetColour.CLOTHING_PINK_HOT,
 					PresetColour.CLOTHING_PURPLE_ROYAL,
 					PresetColour.CLOTHING_RED_BURGUNDY));
@@ -529,7 +529,7 @@ public class Nyan extends NPC {
 			this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_chest_strapless_bra", PresetColour.CLOTHING_BLACK, false), true, this);
 			
 		} else {
-			Colour dressColour = Util.randomItemFrom(Util.newArrayListOfValues(
+			Colour dressColour = Util.random.of(Util.newArrayListOfValues(
 					PresetColour.CLOTHING_GREEN_LIME,
 					PresetColour.CLOTHING_PURPLE_LIGHT,
 					PresetColour.CLOTHING_BLACK));
@@ -543,7 +543,7 @@ public class Nyan extends NPC {
 		this.equipClothingFromNowhere(dress, true, this);
 		
 		// Wrist:
-		Colour bangleColour = Util.randomItemFrom(Util.newArrayListOfValues(
+		Colour bangleColour = Util.random.of(Util.newArrayListOfValues(
 				PresetColour.CLOTHING_SILVER,
 				PresetColour.CLOTHING_ROSE_GOLD));
 		this.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ClothingType.WRIST_BANGLE, bangleColour, false), true, this);

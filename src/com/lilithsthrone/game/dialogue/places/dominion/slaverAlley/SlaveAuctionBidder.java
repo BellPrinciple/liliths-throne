@@ -93,7 +93,7 @@ public class SlaveAuctionBidder {
 		List<Gender> genders = Util.newArrayListOfValues(Gender.F_V_B_FEMALE, Gender.F_P_V_B_FUTANARI, Gender.M_P_MALE);
 		
 		AbstractSubspecies race = Util.randomItemFrom(races);
-		Gender gender = Util.randomItemFrom(genders);
+		Gender gender = Util.random.of(genders);
 		
 		List<String> biddingComments = Util.newArrayListOfValues(
 				"I deserve a new fucktoy...",

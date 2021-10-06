@@ -332,11 +332,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 
 	@Override
 	public String getDescriptor(GameCharacter gc) {
-		if(gc!=null && !gc.isFeminine()) {
-			return Util.randomItemFrom(descriptorsMasculine);
-		} else {
-			return Util.randomItemFrom(descriptorsFeminine);
-		}
+		return Util.random.of(gc!=null && !gc.isFeminine() ? descriptorsMasculine : descriptorsFeminine);
 	}
 
 	@Override
@@ -375,11 +371,9 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 	}
 
 	public String getFootDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(Util.mergeLists(this.getFootType().getFootDescriptorsFeminine(), footDescriptorsFeminine));
-		} else {
-			return Util.randomItemFrom(Util.mergeLists(this.getFootType().getFootDescriptorsMasculine(), footDescriptorsMasculine));
-		}
+		return Util.random.of(gc.isFeminine()
+				? Util.mergeLists(this.getFootType().getFootDescriptorsFeminine(), footDescriptorsFeminine)
+				: Util.mergeLists(this.getFootType().getFootDescriptorsMasculine(), footDescriptorsMasculine));
 	}
 	
 
@@ -392,11 +386,9 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 	}
 
 	public String getToeDescriptor(GameCharacter gc) {
-		if (gc.isFeminine()) {
-			return Util.randomItemFrom(Util.mergeLists(this.getFootType().getToeDescriptorsFeminine(), toeDescriptorsFeminine));
-		} else {
-			return Util.randomItemFrom(Util.mergeLists(this.getFootType().getToeDescriptorsMasculine(), toeDescriptorsMasculine));
-		}
+		return Util.random.of(gc.isFeminine()
+				? Util.mergeLists(this.getFootType().getToeDescriptorsFeminine(), toeDescriptorsFeminine)
+				: Util.mergeLists(this.getFootType().getToeDescriptorsMasculine(), toeDescriptorsMasculine));
 	}
 	
 	
@@ -521,7 +513,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 						body.setBreastCrotch(
 								new BreastCrotch(
 									BreastType.NONE,
-									Util.randomItemFrom(startingBodyType.getBreastCrotchShapes()),
+									Util.random.of(startingBodyType.getBreastCrotchShapes()),
 									startingBodyType.getBreastCrotchSize(),
 									startingBodyType.getBreastCrotchLactationRate(),
 									startingBodyType.getBreastCrotchCount(),
@@ -685,7 +677,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 			body.setBreastCrotch(
 					new BreastCrotch(
 						BreastType.NONE,
-						Util.randomItemFrom(startingBodyType.getBreastCrotchShapes()),
+						Util.random.of(startingBodyType.getBreastCrotchShapes()),
 						startingBodyType.getBreastCrotchSize(),
 						startingBodyType.getBreastCrotchLactationRate(),
 						startingBodyType.getBreastCrotchCount(),
@@ -855,7 +847,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 				body.setBreastCrotch(
 						new BreastCrotch(
 							crotchBoobType,
-							Util.randomItemFrom(startingBodyType.getBreastCrotchShapes()),
+							Util.random.of(startingBodyType.getBreastCrotchShapes()),
 							startingBodyType.getBreastCrotchSize(),
 							startingBodyType.getBreastCrotchLactationRate(),
 							startingBodyType.getBreastCrotchCount(),
