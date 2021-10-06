@@ -782,22 +782,10 @@ public class UtilText {
 	}
 
 	/**
-	 * @return Returns one of the supplied Strings, randomly chosen by using Random's nextInt() method. <b>Automatically removes empty Strings and null entries.</b>
+	 * @return Returns one of the supplied Strings, randomly chosen by using Random's nextInt() method.
 	 */
 	public static String returnStringAtRandom(String... strings) {
-		List<String> randomStrings = new ArrayList<>();
-		
-		for(String s : strings) {
-			if(s!=null && !s.isEmpty()) {
-				randomStrings.add(s);
-			}
-		}
-		
-		if(!randomStrings.isEmpty()) {
-			return Util.random.of(randomStrings);
-		} else {
-			return "";
-		}
+		return Util.random.ofValues(strings);
 	}
 
 	/**
