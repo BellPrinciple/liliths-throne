@@ -58,7 +58,6 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.population.Population;
 
@@ -4189,7 +4188,7 @@ public class NightlifeDistrict {
 		buyingDrinks = true;
 	}
 	
-	private static AbstractPlaceType getCurrentPlaceType() {
+	private static PlaceType getCurrentPlaceType() {
 		return Main.game.getPlayer().getLocationPlace().getPlaceType();
 	}
 	

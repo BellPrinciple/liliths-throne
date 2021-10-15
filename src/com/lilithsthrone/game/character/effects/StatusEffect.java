@@ -77,7 +77,6 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -1457,7 +1456,7 @@ public class StatusEffect {
 							+ " they find themselves unable to think of anything but sex."
 						+ "</p>");
 				
-				AbstractPlaceType place = target.getGlobalLocationPlace().getPlaceType();
+				var place = target.getGlobalLocationPlace().getPlaceType();
 				
 				if(!place.equals(PlaceType.WORLD_MAP_DOMINION)){
 					sb.append("<p>"

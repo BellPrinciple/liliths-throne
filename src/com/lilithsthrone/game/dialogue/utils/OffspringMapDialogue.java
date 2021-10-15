@@ -16,7 +16,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 
 /**
  * @since 0.3.2
@@ -27,7 +26,7 @@ public class OffspringMapDialogue {
 	
 	private static List<OffspringSeed> getOffspringList() {
 		AbstractWorldType worldType = Main.game.getPlayer().getWorldLocation();
-		AbstractPlaceType placeType = Main.game.getPlayer().getLocationPlace().getPlaceType();
+		var placeType = Main.game.getPlayer().getLocationPlace().getPlaceType();
 		
 		return Main.game.getOffspringNotSpawned(os->
 			os.getSubspecies().isAbleToNaturallySpawnInLocation(worldType, placeType)

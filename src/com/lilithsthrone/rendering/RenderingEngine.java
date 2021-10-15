@@ -68,7 +68,6 @@ import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.World;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.population.Population;
 
@@ -1179,7 +1178,7 @@ public enum RenderingEngine {
 						+ "</div>";
 				
 			} else {
-				AbstractPlaceType place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
+				var place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
 				
 				if(Main.game.getPlayer().getLocationPlace()!=null) {
 					place = Main.game.getPlayer().getLocationPlace().getPlaceType();
@@ -1215,7 +1214,7 @@ public enum RenderingEngine {
 			String mainTitle = Main.game.getPlayer().getWorldLocation().getName();
 			String mainTitleColour = Main.game.getPlayer().getWorldLocation().getColour().toWebHexString();
 	
-			AbstractPlaceType place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
+			var place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
 			
 			if(Main.game.getPlayer().getLocationPlace()!=null) {
 				place = Main.game.getPlayer().getLocationPlace().getPlaceType();
@@ -1583,7 +1582,7 @@ public enum RenderingEngine {
 		} else {
 			uiAttributeSB.append("<div class='full'>");
 			
-			AbstractPlaceType place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
+			var place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
 			if(Main.game.getPlayer().getLocationPlace()!=null) {
 				place = Main.game.getPlayer().getLocationPlace().getPlaceType();
 			}
@@ -1826,7 +1825,7 @@ public enum RenderingEngine {
 				boolean path = Pathing.getPathingCells().contains(c);
 				boolean endPath = Pathing.getEndPoint()!=null && new Vector2i(j, i).equals(Pathing.getEndPoint());
 				boolean dangerousTile = c.getPlace().getPlaceType().isDangerous();
-				AbstractPlaceType placeType = c.getPlace().getPlaceType();
+				var placeType = c.getPlace().getPlaceType();
 				
 				String background;
 				if(placeType.equals(PlaceType.GENERIC_IMPASSABLE)) {
@@ -2018,7 +2017,7 @@ public enum RenderingEngine {
 		}
 	}
 	
-	private static String getDangerousBackground(AbstractPlaceType placeType) {
+	private static String getDangerousBackground(PlaceType placeType) {
 		if(placeType.isGlobalMapTile()) {
 			return "background:"+placeType.getBackgroundColour().toWebHexString()+";";
 		}
@@ -2093,7 +2092,7 @@ public enum RenderingEngine {
 				boolean cellTravelDisabled = cellFocused!=null && cellFocused.getDialogue(false)==null && Main.game.isInNewWorld();
 				
 				if (x < Main.game.getActiveWorld().WORLD_WIDTH && x >= 0 && y < Main.game.getActiveWorld().WORLD_HEIGHT && y >= 0) {// If within  bounds of map:
-					AbstractPlaceType placeType = cellFocused.getPlace().getPlaceType();
+					var placeType = cellFocused.getPlace().getPlaceType();
 
 					if (cellFocused.isDiscovered() || Main.game.isMapReveal()) { // If the tile is discovered:
 						if (placeType.equals(PlaceType.GENERIC_IMPASSABLE)) {

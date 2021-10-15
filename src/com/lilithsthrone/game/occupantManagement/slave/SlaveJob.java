@@ -26,7 +26,6 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
 
@@ -395,7 +394,7 @@ public enum SlaveJob {
 			return c.getType();
 		}
 		@Override
-		public AbstractPlaceType getPlaceLocation(GameCharacter character) {
+		public PlaceType getPlaceLocation(GameCharacter character) {
 			Cell c = MilkingRoom.getMilkingCell(character, false);
 			if(c==null) {
 				return null;
@@ -619,7 +618,7 @@ public enum SlaveJob {
 		}
 		
 		@Override
-		public AbstractPlaceType getPlaceLocation(GameCharacter character) {
+		public PlaceType getPlaceLocation(GameCharacter character) {
 			Cell c = getOfficeCell();
 			if(c==null) {
 				return null;
@@ -781,7 +780,7 @@ public enum SlaveJob {
 			return WorldType.LILAYAS_HOUSE_GROUND_FLOOR;
 		}
 		@Override
-		public AbstractPlaceType getPlaceLocation(GameCharacter character) {
+		public PlaceType getPlaceLocation(GameCharacter character) {
 			if(Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_GROUND_FLOOR).getCells(PlaceUpgrade.LILAYA_SPA).isEmpty()) {
 				return PlaceType.LILAYA_HOME_FOUNTAIN;
 			}
@@ -829,7 +828,7 @@ public enum SlaveJob {
 	private List<SlaveJobSetting> defaultMutuallyExclusiveSettings;
 	private List<SlaveJobFlag> flags;
 	private AbstractWorldType worldLocation;
-	private AbstractPlaceType placeLocation;
+	private PlaceType placeLocation;
 	
 	private SlaveJob(
 			Colour colour,
@@ -850,7 +849,7 @@ public enum SlaveJob {
 			List<SlaveJobSetting> defaultMutuallyExclusiveSettings,
 			List<SlaveJobFlag> flags,
 			AbstractWorldType worldLocation,
-			AbstractPlaceType placeLocation) {
+			PlaceType placeLocation) {
 		this.colour = colour;
 		this.hourlyEventChance = hourlyEventChance;
 		this.slaveLimit = slaveLimit;
@@ -1029,7 +1028,7 @@ public enum SlaveJob {
 		return worldLocation;
 	}
 
-	public AbstractPlaceType getPlaceLocation(GameCharacter character) {
+	public PlaceType getPlaceLocation(GameCharacter character) {
 		return placeLocation;
 	}
 	

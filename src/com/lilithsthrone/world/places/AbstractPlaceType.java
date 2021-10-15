@@ -27,13 +27,10 @@ import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.Bearing;
 import com.lilithsthrone.world.Cell;
-import com.lilithsthrone.world.EntranceType;
 import com.lilithsthrone.world.TeleportPermissions;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldRegion;
-import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.population.AbstractPopulationType;
 import com.lilithsthrone.world.population.Population;
 import com.lilithsthrone.world.population.PopulationDensity;
@@ -44,8 +41,9 @@ import com.lilithsthrone.world.population.PopulationType;
  * @version 0.4
  * @author Innoxia
  */
-public class AbstractPlaceType {
+public class AbstractPlaceType implements PlaceType {
 
+	String id;
 	private boolean mod;
 	private boolean fromExternalFile;
 	private String author;
@@ -173,6 +171,7 @@ public class AbstractPlaceType {
 	}
 	
 	public AbstractPlaceType(File XMLFile, String author, String id, boolean mod) {
+		this.id = id;
 		if (XMLFile.exists()) {
 			try {
 				Document doc = Main.getDocBuilder().parse(XMLFile);
@@ -495,33 +494,40 @@ public class AbstractPlaceType {
 		return author;
 	}
 
+	@Override
 	public String getId() {
-		return PlaceType.getIdFromPlaceType(this);
+		return id;
 	}
-	
+
+	@Override
 	public WorldRegion getWorldRegion() {
 		return worldRegion;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public String getTooltipDescription() {
 		return UtilText.parse(tooltipDescription);
 	}
 
+	@Override
 	public Colour getColour() {
 		return colour;
 	}
 
+	@Override
 	public Colour getBackgroundColour() {
 		if(backgroundColour==PresetColour.MAP_BACKGROUND && this.isDangerous()) {
 			return PresetColour.MAP_BACKGROUND_DANGEROUS;
 		}
 		return backgroundColour;
 	}
-	
+
+	@Override
 	public AbstractEncounter getEncounterType() {
 		Map<AbstractEncounter, Float> possibleEncountersMap = new HashMap<>();
 		
@@ -542,7 +548,7 @@ public class AbstractPlaceType {
 		}
 		
 		AbstractEncounter ae = Util.getRandomObjectFromWeightedFloatMap(possibleEncountersMap);
-		
+
 		return ae;
 	}
 	
@@ -550,14 +556,7 @@ public class AbstractPlaceType {
 		return dialogue;
 	}
 
-	public DialogueNode getDialogue(boolean withRandomEncounter) {
-		return getDialogue(null, withRandomEncounter, false);
-	}
-	
-	public DialogueNode getDialogue(Cell cell, boolean withRandomEncounter) {
-		return getDialogue(cell, withRandomEncounter, false);
-	}
-	
+	@Override
 	public DialogueNode getDialogue(Cell cell, boolean withRandomEncounter, boolean forceEncounter) {
 		if(withRandomEncounter) {
 			AbstractEncounter encounterType = getEncounterType();
@@ -570,7 +569,8 @@ public class AbstractPlaceType {
 		}
 		return getBaseDialogue(cell);
 	}
-	
+
+	@Override
 	public List<Population> getPopulation() {
 		List<Population> returnPopulation = new ArrayList<>();
 		
@@ -589,37 +589,21 @@ public class AbstractPlaceType {
 		
 		return returnPopulation;
 	}
-	
-	public boolean isPopulated() {
-		if(getPopulation()!=null) {
-			for(Population pop : getPopulation()) {
-				if(!pop.getSpecies().isEmpty()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 
+	@Override
 	public boolean isStormImmune() {
 		return weatherImmunities.contains(Weather.MAGIC_STORM);
 	}
 
-	public boolean isLand() {
-		return getAquatic().isLand();
-	}
-
-	public boolean isWater() {
-		return getAquatic().isWater();
-	}
-	
+	@Override
 	public boolean isDangerous() {
 		if(this.isFromExternalFile()) {
 			return Boolean.valueOf(UtilText.parse(dangerousString));
 		}
 		return dangerous;
 	}
-	
+
+	@Override
 	public boolean isItemsDisappear() {
 		if(this.isFromExternalFile()) {
 			return Boolean.valueOf(UtilText.parse(itemsDisappearString));
@@ -627,6 +611,7 @@ public class AbstractPlaceType {
 		return itemsDisappear;
 	}
 
+	@Override
 	public Aquatic getAquatic() {
 		if(this.isFromExternalFile()) {
 			return Aquatic.valueOf(UtilText.parse(aquaticString));
@@ -634,6 +619,7 @@ public class AbstractPlaceType {
 		return aquatic;
 	}
 
+	@Override
 	public Darkness getDarkness() {
 		if(this.isFromExternalFile()) {
 			String parsedDarkness = UtilText.parse(darknessString);
@@ -675,7 +661,8 @@ public class AbstractPlaceType {
 		
 		return SVGOverrides.get(pathName+colour.getId());
 	}
-	
+
+	@Override
 	public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
 		for(AbstractPlaceUpgrade upgrade : upgrades) {
 			String s = upgrade.getSVGOverride();
@@ -685,148 +672,89 @@ public class AbstractPlaceType {
 		}
 		return SVGString;
 	}
-	
+
+	@Override
 	public void applyInventoryInit(CharacterInventory inventory) {
 		if(this.isFromExternalFile() && !inventoryInitString.isEmpty()) {
 			UtilText.setInventoryForParsing("inventory", inventory);
 			UtilText.parse(inventoryInitString);
 		}
 	}
-	
-	// For determining where this place should be placed:
-	
-	public Bearing getBearing() {
-		return null;
-	}
-	
-	public WorldType getParentWorldType() {
-		return null;
-	}
-	
-	public AbstractPlaceType getParentPlaceType() {
-		return null;
-	}
-	
-	public EntranceType getParentAlignment() {
-		return null;
-	}
-	
-	public String getPlaceNameAppendFormat(int count) {
-		return "";
-	}
-	
-	public boolean isAbleToBeUpgraded() {
-		return false;
-	}
-	
-	public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
-		return new ArrayList<>();
-	}
-	
-	public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
-		return new ArrayList<>();
-	}
 
-	public boolean isSexBlockedOverride(GameCharacter character) {
-		return getSexBlockedReason(character)!=null;
-	}
-	
-	public boolean isSexBlocked(GameCharacter character) {
-		return getSexBlockedReason(character)!=null && !getSexBlockedReason(character).isEmpty();
-	}
-	
+	@Override
 	public String getSexBlockedReason(GameCharacter character) {
 		if(this.isFromExternalFile()) {
 			return UtilText.parse(character, sexBlockedReason);
 		}
 		return sexBlockedReason;
 	}
-	
+
+	@Override
 	public String getVirginityLossDescription() {
 		return virginityLossDescription;
 	}
 
+	@Override
 	public boolean isGlobalMapTile() {
 		return globalMapTile;
 	}
 
-	/**
-	 * TeleportPermissions are also defined in WorldType, so this will only work in special cases where a world allows teleporting, but not on some tiles (such as Lyssieth's palace in Submission).
-	 */
+	@Override
 	public TeleportPermissions getTeleportPermissions() {
 		return teleportPermissions;
 	}
 
-	/**
-	 * @return true if this place type's isFurniturePresent() method should be used instead of the parent world type's.
-	 */
+	@Override
 	public boolean isFurniturePresentOverride() {
 		return furniturePresentOverride;
 	}
 
-	/**
-	 * @return true if over-desk and on chair sex positions are available in this location. This overrides AbstractWorldType's method of the same name.
-	 */
+	@Override
 	public boolean isFurniturePresent() {
 		return furniturePresent;
 	}
 
-	/**
-	 * @return true if this place type's getDeskName() method should be used instead of the parent world type's.
-	 */
+	@Override
 	public boolean isDeskNameOverride() {
 		return deskNameOverride;
 	}
-	
-	/**
-	 * @return The name which should be used in the against desk sex position, in the X place in: 'Against X'. This overrides AbstractWorldType's method of the same name.
-	 */
+
+	@Override
 	public String getDeskName() {
 		return deskName;
 	}
-	
-	/**
-	 * @return true if this place type's isLoiteringEnabled() method should be used instead of the parent world type's.
-	 */
+
+	@Override
 	public boolean isLoiteringEnabledOverride() {
 		return loiteringEnabledOverride;
 	}
 
-	/**
-	 * @return true if the player is able to loiter in this location. This overrides AbstractWorldType's method of the same name.
-	 */
+	@Override
 	public boolean isLoiteringEnabled() {
 		return loiteringEnabled;
 	}
 
+	@Override
 	public boolean isSexBlockedFromCharacterPresent() {
 		return sexBlockedFromCharacterPresent;
 	}
 
-	/**
-	 * @return true if this place type's isWallsPresent() method should be used instead of the parent world type's.
-	 */
+	@Override
 	public boolean isWallsPresentOverride() {
 		return wallsPresentOverride;
 	}
 
-	/**
-	 * @return true if against wall position is available in this location. This overrides AbstractWorldType's method of the same name.
-	 */
+	@Override
 	public boolean isWallsPresent() {
 		return wallsPresent;
 	}
-	
-	/**
-	 * @return true if this place type's getWallName() method should be used instead of the parent world type's.
-	 */
+
+	@Override
 	public boolean isWallNameOverride() {
 		return wallNameOverride;
 	}
-	
-	/**
-	 * @return The name which should be used in the against wall sex position, in the X place in: 'Against X'. This overrides AbstractWorldType's method of the same name.
-	 */
+
+	@Override
 	public String getWallName() {
 		return wallName;
 	}

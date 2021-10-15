@@ -32,7 +32,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -46,7 +45,7 @@ public class AlleywayDemonDialogue {
 	private static boolean transformationsApplied = false;
 	
 	private static boolean isCanal() {
-		AbstractPlaceType pt = getDemon().getLocationPlace().getPlaceType();
+		var pt = getDemon().getLocationPlace().getPlaceType();
 		return pt.equals(PlaceType.DOMINION_ALLEYS_CANAL_CROSSING)
 				|| pt.equals(PlaceType.DOMINION_CANAL)
 				|| pt.equals(PlaceType.DOMINION_CANAL_END);

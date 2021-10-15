@@ -41,7 +41,6 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -998,7 +997,7 @@ public class ClothingEmporium {
 				Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_WALK_INITIAL"));
 				
 			} else {
-				Map<AbstractPlaceType, String> places = Util.newHashMapOfValues(
+				Map<PlaceType, String> places = Util.newHashMapOfValues(
 						new Value<>(PlaceType.SHOPPING_ARCADE_ASHLEYS_SHOP, "ASHLEY"),
 						new Value<>(PlaceType.SHOPPING_ARCADE_ANTIQUES, "ANTIQUES"),
 						new Value<>(PlaceType.SHOPPING_ARCADE_KATES_SHOP, "KATE"),
@@ -1006,7 +1005,7 @@ public class ClothingEmporium {
 						new Value<>(PlaceType.SHOPPING_ARCADE_RALPHS_SHOP, "RALPH"),
 						new Value<>(PlaceType.SHOPPING_ARCADE_RESTAURANT, "RESTAURANT"),
 						new Value<>(PlaceType.SHOPPING_ARCADE_VICKYS_SHOP, "VICKY"));
-				AbstractPlaceType place = Util.randomItemFrom(places.keySet());
+				var place = Util.randomItemFrom(places.keySet());
 				destination = Main.game.getWorlds().get(WorldType.SHOPPING_ARCADE).getCell(place);
 				Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_WALK_REPEAT_START"));
 				Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_WALK_REPEAT_"+places.get(place)));

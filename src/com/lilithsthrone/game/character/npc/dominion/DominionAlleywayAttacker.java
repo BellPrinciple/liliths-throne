@@ -41,7 +41,6 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Season;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -76,7 +75,7 @@ public class DominionAlleywayAttacker extends NPC {
 
 		if(!isImported) {
 			boolean canalSpecies = false;
-			AbstractPlaceType pt = Main.game.getPlayerCell().getPlace().getPlaceType();
+			var pt = Main.game.getPlayerCell().getPlace().getPlaceType();
 			if(pt.equals(PlaceType.DOMINION_ALLEYS_CANAL_CROSSING)
 					|| pt.equals(PlaceType.DOMINION_CANAL)
 					|| pt.equals(PlaceType.DOMINION_CANAL_END)) {
@@ -330,7 +329,7 @@ public class DominionAlleywayAttacker extends NPC {
 	}
 	
 	public boolean isStormAttacker() {
-		AbstractPlaceType pt = this.getLocationPlace().getPlaceType();
+		var pt = this.getLocationPlace().getPlaceType();
 		return this.getWorldLocation().equals(WorldType.DOMINION)
 				&& !pt.equals(PlaceType.DOMINION_BACK_ALLEYS)
 				&& !pt.equals(PlaceType.DOMINION_ALLEYS_CANAL_CROSSING)

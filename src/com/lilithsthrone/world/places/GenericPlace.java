@@ -28,12 +28,12 @@ import com.lilithsthrone.world.EntranceType;
 public class GenericPlace implements XMLSaving {
 	
 	private String name;
-	private AbstractPlaceType placeType;
+	private PlaceType placeType;
 	private Set<AbstractPlaceUpgrade> placeUpgrades;
 	
-	public static Map<AbstractPlaceType, Integer> placeCountMap = new HashMap<>();
+	public static Map<PlaceType, Integer> placeCountMap = new HashMap<>();
 
-	public GenericPlace(AbstractPlaceType placeType) {
+	public GenericPlace(PlaceType placeType) {
 		this.placeType=placeType;
 		placeUpgrades = new HashSet<>();
 		
@@ -82,7 +82,7 @@ public class GenericPlace implements XMLSaving {
 	public static GenericPlace loadFromXML(Element parentElement, Document doc, Cell c) {
 		String placeType = parentElement.getAttribute("type");
 		
-		AbstractPlaceType pt = PlaceType.getPlaceTypeFromId(placeType);
+		var pt = PlaceType.getPlaceTypeFromId(placeType);
 		GenericPlace place = new GenericPlace(pt);
 		
 		if(!parentElement.getAttribute("name").isEmpty()
@@ -216,7 +216,7 @@ public class GenericPlace implements XMLSaving {
 	
 	// For determining where this place should be placed:
 	
-	public AbstractPlaceType getParentPlaceType() {
+	public PlaceType getParentPlaceType() {
 		return placeType.getParentPlaceType();
 	}
 	
@@ -295,11 +295,11 @@ public class GenericPlace implements XMLSaving {
 	}
 	
 
-	public AbstractPlaceType getPlaceType() {
+	public PlaceType getPlaceType() {
 		return placeType;
 	}
 
-	public void setPlaceType(AbstractPlaceType placeType) {
+	public void setPlaceType(PlaceType placeType) {
 		this.placeType = placeType;
 	}
 

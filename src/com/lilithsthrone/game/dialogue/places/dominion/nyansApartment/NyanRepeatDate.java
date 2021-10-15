@@ -14,7 +14,6 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -36,7 +35,7 @@ public class NyanRepeatDate {
 		return ((NyanMum)Main.game.getNpc(NyanMum.class));
 	}
 
-	private static void travelTo(AbstractWorldType worldType, AbstractPlaceType placeType) {
+	private static void travelTo(AbstractWorldType worldType, PlaceType placeType) {
 		Main.game.getPlayer().setLocation(worldType, placeType);
 		getNyan().setLocation(Main.game.getPlayer(), false);
 	}

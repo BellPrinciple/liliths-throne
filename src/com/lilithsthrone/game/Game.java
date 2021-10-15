@@ -249,7 +249,6 @@ import com.lilithsthrone.world.Season;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.World;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
 
@@ -4028,7 +4027,7 @@ public class Game implements XMLSaving {
 		return charactersHome;
 	}
 	
-	public List<NPC> getCharactersPresent(AbstractWorldType worldType, AbstractPlaceType placeType) {
+	public List<NPC> getCharactersPresent(AbstractWorldType worldType, PlaceType placeType) {
 		Cell cell = worlds.get(worldType).getCell(placeType);
 		
 		return getCharactersPresent(cell);

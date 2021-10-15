@@ -1,14 +1,11 @@
 package com.lilithsthrone.world.places;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.npc.dominion.Daddy;
 import com.lilithsthrone.game.character.npc.dominion.Elle;
 import com.lilithsthrone.game.character.npc.dominion.Helena;
@@ -86,12 +83,14 @@ import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Bearing;
 import com.lilithsthrone.world.Cell;
+import com.lilithsthrone.world.EntranceType;
 import com.lilithsthrone.world.TeleportPermissions;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldRegion;
@@ -105,8 +104,193 @@ import com.lilithsthrone.world.population.PopulationType;
  * @version 0.4
  * @author Innoxia
  */
-public class PlaceType {
-	
+public interface PlaceType {
+
+	String getId();
+
+	WorldRegion getWorldRegion();
+
+	String getName();
+
+	String getTooltipDescription();
+
+	Colour getColour();
+
+	Colour getBackgroundColour();
+
+	AbstractEncounter getEncounterType();
+
+	default DialogueNode getDialogue(boolean withRandomEncounter) {
+		return getDialogue(null, withRandomEncounter, false);
+	}
+
+	default DialogueNode getDialogue(Cell cell, boolean withRandomEncounter) {
+		return getDialogue(cell, withRandomEncounter, false);
+	}
+
+	DialogueNode getDialogue(Cell cell, boolean withRandomEncounter, boolean forceEncounter);
+
+	List<Population> getPopulation();
+
+	default boolean isPopulated() {
+		if(getPopulation()!=null) {
+			for(Population pop : getPopulation()) {
+				if(!pop.getSpecies().isEmpty()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	boolean isStormImmune();
+
+	Aquatic getAquatic();
+
+	default boolean isLand() {
+		return getAquatic().isLand();
+	}
+
+	default boolean isWater() {
+		return getAquatic().isWater();
+	}
+
+	boolean isDangerous();
+
+	boolean isItemsDisappear();
+
+	Darkness getDarkness();
+
+	String getSVGString(Set<AbstractPlaceUpgrade> upgrades);
+
+	default void applyInventoryInit(CharacterInventory inventory) {
+	}
+
+	default boolean isAbleToBeUpgraded() {
+		return false;
+	}
+
+	// For determining where this place should be placed:
+
+	default Bearing getBearing() {
+		return null;
+	}
+
+	default WorldType getParentWorldType() {
+		return null;
+	}
+
+	default PlaceType getParentPlaceType() {
+		return null;
+	}
+
+	default EntranceType getParentAlignment() {
+		return null;
+	}
+
+	default String getPlaceNameAppendFormat(int count) {
+		return "";
+	}
+
+	default ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		return new ArrayList<>();
+	}
+
+	default ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		return new ArrayList<>();
+	}
+
+	String getSexBlockedReason(GameCharacter character);
+
+	default boolean isSexBlockedOverride(GameCharacter character) {
+		return getSexBlockedReason(character)!=null;
+	}
+
+	default boolean isSexBlocked(GameCharacter character) {
+		return getSexBlockedReason(character)!=null && !getSexBlockedReason(character).isEmpty();
+	}
+
+	String getVirginityLossDescription();
+
+	default boolean isGlobalMapTile() {
+		return false;
+	}
+
+	/**
+	 * TeleportPermissions are also defined in WorldType, so this will only work in special cases where a world allows teleporting, but not on some tiles (such as Lyssieth's palace in Submission).
+	 */
+	default TeleportPermissions getTeleportPermissions() {
+		return TeleportPermissions.BOTH;
+	}
+
+	/**
+	 * @return true if this place type's isFurniturePresent() method should be used instead of the parent world type's.
+	 */
+	default boolean isFurniturePresentOverride() {
+		return false;
+	}
+
+	/**
+	 * @return true if over-desk and on chair sex positions are available in this location. This overrides AbstractWorldType's method of the same name.
+	 */
+	default boolean isFurniturePresent() {
+		return false;
+	}
+
+	/**
+	 * @return true if this place type's getDeskName() method should be used instead of the parent world type's.
+	 */
+	default boolean isDeskNameOverride() {
+		return false;
+	}
+
+	/**
+	 * @return The name which should be used in the against desk sex position, in the X place in: 'Against X'. This overrides AbstractWorldType's method of the same name.
+	 */
+	default String getDeskName() {
+		return "desk";
+	}
+
+	/**
+	 * @return true if this place type's isLoiteringEnabled() method should be used instead of the parent world type's.
+	 */
+	boolean isLoiteringEnabledOverride();
+
+	/**
+	 * @return true if the player is able to loiter in this location. This overrides AbstractWorldType's method of the same name.
+	 */
+	boolean isLoiteringEnabled();
+
+	boolean isSexBlockedFromCharacterPresent();
+
+	/**
+	 * @return true if this place type's isWallsPresent() method should be used instead of the parent world type's.
+	 */
+	default boolean isWallsPresentOverride() {
+		return false;
+	}
+
+	/**
+	 * @return true if against wall position is available in this location. This overrides AbstractWorldType's method of the same name.
+	 */
+	default boolean isWallsPresent() {
+		return false;
+	}
+
+	/**
+	 * @return true if this place type's getWallName() method should be used instead of the parent world type's.
+	 */
+	default boolean isWallNameOverride() {
+		return null!=getWallName();
+	}
+
+	/**
+	 * @return The name which should be used in the against wall sex position, in the X place in: 'Against X'. This overrides AbstractWorldType's method of the same name.
+	 */
+	default String getWallName() {
+		return "wall";
+	}
+
 	// Generic holding map:
 	
 	public static final AbstractPlaceType GENERIC_IMPASSABLE = new AbstractPlaceType(
@@ -522,7 +706,7 @@ public class PlaceType {
 			return DOMINION_STREET.getPopulation();
 		}
 	};
-	
+
 	public static final AbstractPlaceType DOMINION_STREET_HARPY_NESTS = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Dominion Streets",
@@ -5718,15 +5902,18 @@ public class PlaceType {
 	
 	
 	
-	private static List<AbstractPlaceType> allPlaceTypes = new ArrayList<>();
-	private static Map<AbstractPlaceType, String> placeToIdMap = new HashMap<>();
-	private static Map<String, AbstractPlaceType> idToPlaceMap = new HashMap<>();
 
-	public static List<AbstractPlaceType> getAllPlaceTypes() {
-		return allPlaceTypes;
+	@Deprecated
+	static List<PlaceType> getAllPlaceTypes() {
+		return table.list();
 	}
-	
-	public static AbstractPlaceType getPlaceTypeFromId(String id) {
+
+	@Deprecated
+	static PlaceType getPlaceTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	static String sanitize(String id) {
 		id = id.replaceAll("ALEXA", "HELENA");
 		id = id.replaceAll("SUPPLIER_DEPOT", "TEXTILE_WAREHOUSE");
 		
@@ -5762,74 +5949,29 @@ public class PlaceType {
 			id = "SHOPPING_ARCADE_RESTAURANT";
 		}
 		
-		id = Util.getClosestStringMatch(id, idToPlaceMap.keySet());
-		return idToPlaceMap.get(id);
+		return id;
 	}
 
-	public static String getIdFromPlaceType(AbstractPlaceType placeType) {
-		return placeToIdMap.get(placeType);
+	@Deprecated
+	static String getIdFromPlaceType(PlaceType placeType) {
+		return placeType.getId();
 	}
-	
-	static {
+
+	Table<PlaceType> table = new Table<>(PlaceType::sanitize) {{
 		// Modded place types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/maps", "placeTypes", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey().replace("_placeTypes", "");
-					AbstractPlaceType placeType = new AbstractPlaceType(innerEntry.getValue(), entry.getKey(), id, true) {};
-					allPlaceTypes.add(placeType);
-					placeToIdMap.put(placeType, id);
-					idToPlaceMap.put(id, placeType);
-//					System.out.println("modded PT: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading modded place type failed at 'PlaceType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+		forEachMod("/maps","placeTypes",null,(f,n,a)->{
+			var k = n.replace("_placeTypes","");
+			add(k,new AbstractPlaceType(f,a,k,true));
+		});
+
 		// External res place types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/maps", "placeTypes", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey().replace("_placeTypes", "");
-					AbstractPlaceType placeType = new AbstractPlaceType(innerEntry.getValue(), entry.getKey(), id, false) {};
-					allPlaceTypes.add(placeType);
-					placeToIdMap.put(placeType, id);
-					idToPlaceMap.put(id, placeType);
-//					System.out.println("res PT: "+innerEntry.getKey()+" | "+id);
-				} catch(Exception ex) {
-					System.err.println("Loading place type failed at 'PlaceType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
+		forEachExternal("res/maps","placeTypes",null,(f,n,a)->{
+			var k = n.replace("_placeTypes","");
+			add(k,new AbstractPlaceType(f,a,k,false));
+		});
 
 		// Hard-coded place types (all those up above):
-		
-		Field[] fields = PlaceType.class.getFields();
-		
-		for(Field f : fields) {
-			if(AbstractPlaceType.class.isAssignableFrom(f.getType())) {
-				AbstractPlaceType placeType;
-				try {
-					placeType = ((AbstractPlaceType) f.get(null));
-
-					placeToIdMap.put(placeType, f.getName());
-					idToPlaceMap.put(f.getName(), placeType);
-					allPlaceTypes.add(placeType);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+		addFields(PlaceType.class,AbstractPlaceType.class,(k,v)->v.id=k);
+	}};
 
 }

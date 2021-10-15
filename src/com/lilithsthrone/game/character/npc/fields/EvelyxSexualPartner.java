@@ -30,7 +30,6 @@ import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -65,7 +64,7 @@ public class EvelyxSexualPartner extends NPC {
 			// RACE & NAME:
 			
 			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			AbstractPlaceType placeType = Main.game.getPlayer().getLocationPlace().getPlaceType();
+			var placeType = Main.game.getPlayer().getLocationPlace().getPlaceType();
 			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;

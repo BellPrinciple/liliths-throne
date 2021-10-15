@@ -14,7 +14,6 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -46,13 +45,13 @@ public abstract class AbstractWorldType {
 	private boolean wallsPresent;
 	private String wallName;
 
-	private AbstractPlaceType globalMapLocation;
-	private AbstractPlaceType standardPlace;
-	private AbstractPlaceType entryFromGlobalMapLocation;
+	private PlaceType globalMapLocation;
+	private PlaceType standardPlace;
+	private PlaceType entryFromGlobalMapLocation;
 	
 	private TeleportPermissions teleportPermissions;
 	
-	private Map<Color, AbstractPlaceType> placesMap;
+	private Map<Color,PlaceType> placesMap;
 	
 	public AbstractWorldType(WorldRegion worldRegion,
 			String name,
@@ -61,9 +60,9 @@ public abstract class AbstractWorldType {
 			boolean flightEnabled,
 			TeleportPermissions teleportPermissions,
 			String fileLocation,
-			AbstractPlaceType globalMapLocation,
-			AbstractPlaceType entryFromGlobalMapLocation,
-			Map<Color, AbstractPlaceType> placesMap) {
+			PlaceType globalMapLocation,
+			PlaceType entryFromGlobalMapLocation,
+			Map<Color,PlaceType> placesMap) {
 		this.worldRegion = worldRegion;
 		
 		this.name = name;
@@ -246,15 +245,15 @@ public abstract class AbstractWorldType {
 		return revealedOnStart;
 	}
 
-	public AbstractPlaceType getStandardPlace() {
+	public PlaceType getStandardPlace() {
 		return standardPlace;
 	}
 
-	public AbstractPlaceType getGlobalMapLocation() {
+	public PlaceType getGlobalMapLocation() {
 		return globalMapLocation;
 	}
 
-	public AbstractPlaceType getEntryFromGlobalMapLocation() {
+	public PlaceType getEntryFromGlobalMapLocation() {
 		return entryFromGlobalMapLocation;
 	}
 
@@ -266,7 +265,7 @@ public abstract class AbstractWorldType {
 		return usesFile;
 	}
 
-	public Map<Color, AbstractPlaceType> getPlacesMap() {
+	public Map<Color,PlaceType> getPlacesMap() {
 		return placesMap;
 	}
 

@@ -57,7 +57,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
+import com.lilithsthrone.world.places.PlaceType;
 
 /**
  * @since 0.1.91
@@ -5590,7 +5590,7 @@ public class Subspecies {
 
 	private static Map<WorldRegion, Map<AbstractSubspecies, SubspeciesSpawnRarity>> regionSpecies;
 	private static Map<AbstractWorldType, Map<AbstractSubspecies, SubspeciesSpawnRarity>> worldSpecies;
-	private static Map<AbstractPlaceType, Map<AbstractSubspecies, SubspeciesSpawnRarity>> placeSpecies;
+	private static Map<PlaceType, Map<AbstractSubspecies, SubspeciesSpawnRarity>> placeSpecies;
 	
 	protected static Map<AbstractSubspecies, SubspeciesSpawnRarity> dominionStormImmuneSpecies;
 	protected static Map<AbstractRace, List<AbstractSubspecies>> subspeciesFromRace;
@@ -5710,7 +5710,7 @@ public class Subspecies {
 				}
 			}
 			
-			for(Entry<AbstractPlaceType, SubspeciesSpawnRarity> type : species.getPlaceLocations().entrySet()) {
+			for(var type : species.getPlaceLocations().entrySet()) {
 				placeSpecies.putIfAbsent(type.getKey(), new HashMap<>());
 				placeSpecies.get(type.getKey()).put(species, type.getValue());
 			}
@@ -5727,11 +5727,11 @@ public class Subspecies {
 		return allSubspecies;
 	}
 
-	public static Map<AbstractSubspecies, SubspeciesSpawnRarity> getWorldSpecies(AbstractWorldType worldType, AbstractPlaceType placeType, boolean onlyCoreRaceSpecies, AbstractSubspecies... subspeciesToExclude) {
+	public static Map<AbstractSubspecies, SubspeciesSpawnRarity> getWorldSpecies(AbstractWorldType worldType, PlaceType placeType, boolean onlyCoreRaceSpecies, AbstractSubspecies... subspeciesToExclude) {
 		return getWorldSpecies(worldType, placeType, onlyCoreRaceSpecies, true, subspeciesToExclude);
 	}
 
-	public static Map<AbstractSubspecies, SubspeciesSpawnRarity> getWorldSpecies(AbstractWorldType worldType, AbstractPlaceType placeType, boolean onlyCoreRaceSpecies, boolean includeRegionSpecies, AbstractSubspecies... subspeciesToExclude) {
+	public static Map<AbstractSubspecies, SubspeciesSpawnRarity> getWorldSpecies(AbstractWorldType worldType, PlaceType placeType, boolean onlyCoreRaceSpecies, boolean includeRegionSpecies, AbstractSubspecies... subspeciesToExclude) {
 		return getWorldSpecies(worldType, placeType, onlyCoreRaceSpecies, includeRegionSpecies, Arrays.asList(subspeciesToExclude));
 	}
 	
@@ -5743,7 +5743,7 @@ public class Subspecies {
 	 * @param subspeciesToExclude Any Subspecies that should be excluded from the returned map.
 	 * @return A weighted map of subspecies that can spawn in that world, region and/or place.
 	 */
-	public static Map<AbstractSubspecies, SubspeciesSpawnRarity> getWorldSpecies(AbstractWorldType worldType, AbstractPlaceType placeType, boolean onlyCoreRaceSpecies, boolean includeRegionSpecies, List<AbstractSubspecies> subspeciesToExclude) {
+	public static Map<AbstractSubspecies, SubspeciesSpawnRarity> getWorldSpecies(AbstractWorldType worldType, PlaceType placeType, boolean onlyCoreRaceSpecies, boolean includeRegionSpecies, List<AbstractSubspecies> subspeciesToExclude) {
 		worldSpecies.putIfAbsent(worldType, new HashMap<>());
 		regionSpecies.putIfAbsent(worldType.getWorldRegion(), new HashMap<>());
 		

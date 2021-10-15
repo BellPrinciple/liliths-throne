@@ -44,7 +44,6 @@ import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Season;
 import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -119,7 +118,7 @@ public abstract class AbstractSubspecies {
 
 	private Map<WorldRegion, SubspeciesSpawnRarity> regionLocations;
 	private Map<AbstractWorldType, SubspeciesSpawnRarity> worldLocations;
-	private Map<AbstractPlaceType, SubspeciesSpawnRarity> placeLocations;
+	private Map<PlaceType,SubspeciesSpawnRarity> placeLocations;
 	
 	private List<SubspeciesFlag> flags;
 
@@ -263,7 +262,7 @@ public abstract class AbstractSubspecies {
 			String description,
 			Map<WorldRegion, SubspeciesSpawnRarity> regionLocations,
 			Map<AbstractWorldType, SubspeciesSpawnRarity> worldLocations,
-			Map<AbstractPlaceType, SubspeciesSpawnRarity> placeLocations,
+			Map<PlaceType,SubspeciesSpawnRarity> placeLocations,
 			List<SubspeciesFlag> flags) {
 		
 		this.mainSubspecies = mainSubspecies;
@@ -1634,7 +1633,7 @@ public abstract class AbstractSubspecies {
 		return worldLocations;
 	}
 
-	public Map<AbstractPlaceType, SubspeciesSpawnRarity> getPlaceLocations() {
+	public Map<PlaceType,SubspeciesSpawnRarity> getPlaceLocations() {
 		return placeLocations;
 	}
 	
@@ -1643,7 +1642,7 @@ public abstract class AbstractSubspecies {
 	 * @param placeType An optional place type, which can be null if not needed. If a non-null argument is passed in, this method will return true if either the worldType or the placeType allows for this subspecies to spawn.
 	 * @return true if this subspecies is able to spawn in the worldType, either due to having a spawn chance in that worldType directly, or in the WorldRegion in which that worldType is located.
 	 */
-	public boolean isAbleToNaturallySpawnInLocation(AbstractWorldType worldType, AbstractPlaceType placeType) {
+	public boolean isAbleToNaturallySpawnInLocation(AbstractWorldType worldType, PlaceType placeType) {
 		return getRegionLocations().containsKey(worldType.getWorldRegion())
 				|| getWorldLocations().containsKey(worldType)
 				|| (placeType!=null && getPlaceLocations().containsKey(placeType));
