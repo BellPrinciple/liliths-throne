@@ -68,7 +68,6 @@ import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.World;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractGlobalPlaceType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.population.Population;
@@ -2020,7 +2019,7 @@ public enum RenderingEngine {
 	}
 	
 	private static String getDangerousBackground(AbstractPlaceType placeType) {
-		if(placeType instanceof AbstractGlobalPlaceType) {
+		if(placeType.isGlobalMapTile()) {
 			return "background:"+placeType.getBackgroundColour().toWebHexString()+";";
 		}
 		

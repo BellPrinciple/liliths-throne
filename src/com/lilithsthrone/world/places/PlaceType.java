@@ -90,7 +90,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Bearing;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.TeleportPermissions;
@@ -5476,104 +5475,71 @@ public class PlaceType {
 	
 	// World map tiles:
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_THICK_JUNGLE = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_THICK_JUNGLE = new AbstractGlobalPlaceType(
 			WorldRegion.JUNGLE,
 			"thick jungle",
 			null,
 			"The further into the jungle one travels, the thicker the vegetation becomes, which allows particularly wild and dangerous predators to conceal themselves...",
-			new Colour(Util.newColour(0x6b8f7e)), null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			new Colour(Util.newColour(0x6b8f7e)), null, null, "")
+	.initDangerous();
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_JUNGLE = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_JUNGLE = new AbstractGlobalPlaceType(
 			WorldRegion.JUNGLE,
 			"jungle",
 			null,
 			"Sparse, tropical foliage is home to many different jungle animal-morphs, not all of which are friendly.",
-			new Colour(Util.newColour(0x8fbfa8)), null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			new Colour(Util.newColour(0x8fbfa8)), null, null, "")
+	.initDangerous();
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_JUNGLE_CITY = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_JUNGLE_CITY = new AbstractGlobalPlaceType(
 			WorldRegion.JUNGLE_CITY,
 			"Itza'aak",
 			null,
 			"A sprawling, Mayan-like city, Itza'aak is the last bastion of civilisation before the sprawling, wild jungles of the north.",
-			new Colour(Util.newColour(0xb377b0)), null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	};
+			new Colour(Util.newColour(0xb377b0)), null, null, "");
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_FOOTHILLS = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_FOOTHILLS = new AbstractGlobalPlaceType(
 			WorldRegion.MOUNTAINS,
 			"foothills",
 			null,
 			"A steady increase in elevation leads to the rolling hills at the base of the mountains of the moon.",
-			PresetColour.BASE_BLACK, null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			PresetColour.BASE_BLACK, null, null, "")
+	.initDangerous();
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_MOUNTAINS = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_MOUNTAINS = new AbstractGlobalPlaceType(
 			WorldRegion.MOUNTAINS,
 			"mountains",
 			null,
 			"The mountain range to the far west is known as the 'Mountains of the Moon', and is home to many alpine animal-morphs.",
-			PresetColour.BASE_GREY_DARK, null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			PresetColour.BASE_GREY_DARK, null, null, "")
+	.initDangerous();
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_SNOWY_MOUNTAINS = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_SNOWY_MOUNTAINS = new AbstractGlobalPlaceType(
 			WorldRegion.MOUNTAINS,
 			"mountain peaks",
 			null,
 			"The highest peaks of the Mountains of the Moon are capped in snow, and are home to several wild and aggressive races...",
-			PresetColour.BASE_GREY_LIGHT, null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			PresetColour.BASE_GREY_LIGHT, null, null, "")
+	.initDangerous();
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_SNOWY_VALLEY = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_SNOWY_VALLEY = new AbstractGlobalPlaceType(
 			WorldRegion.SNOW,
 			"snowstorm valley",
 			null,
 			"This sheltered valley sees regular, heavy snowfall, and is home to numerous arctic races.",
-			new Colour(Util.newColour(0xeeeeee)), null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			new Colour(Util.newColour(0xeeeeee)), null, null, "")
+	.initDangerous();
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_GLACIAL_LAKE = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_GLACIAL_LAKE = new AbstractGlobalPlaceType(
 			WorldRegion.SNOW,
 			"selkie lake",
 			null,
 			"On the western side of snowstorm valley, there can be found a huge, partially-frozen lake.",
-			new Colour(Util.newColour(0xbbf0f1)), null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous()
+			new Colour(Util.newColour(0xbbf0f1)), null, null, "")
+	.initDangerous()
 	.initAquatic(Aquatic.MIXED);
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_DOMINION = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_DOMINION = new AbstractGlobalPlaceType(
 			WorldRegion.DOMINION,
 			"Dominion Suburbs",
 			"The capital city of Lilith's realm, Dominion is the succubus queen's seat of power.",
@@ -5590,10 +5556,7 @@ public class PlaceType {
 				return DialogueManager.getDialogueFromId("innoxia_places_fields_leaving_dominion_start");
 			}
 		}
-		@Override
-		public AbstractWorldType getGlobalLinkedWorldType() {
-			return WorldType.DOMINION;
-		}
+
 		@Override
 		public List<Population> getPopulation() {
 			List<Population> pop = new ArrayList<>();
@@ -5611,35 +5574,27 @@ public class PlaceType {
 		}
 	}.initAquatic(Aquatic.MIXED);
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_GRASSLANDS = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_GRASSLANDS = new AbstractGlobalPlaceType(
 			WorldRegion.FIELDS,
 			"grassland wilderness",//"global/grassland",
 			null,
 			"The grassland wilderness is home to many different races, the vast majority of which are just as wild and untamed as the land they inhabit.",
 			new Colour(Util.newColour(0x688255)),
 			FieldsDialogue.GRASSLAND_WILDERNESS,
-			null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			null, "")
+	.initDangerous();
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_FIELDS = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_FIELDS = new AbstractGlobalPlaceType(
 			WorldRegion.FIELDS,
 			"Foloi Fields",
 			null,
 			"The farmland surrounding Dominion is known as the 'Foloi Fields', and is primarily inhabited by farmyard animal-morphs.",
 			new Colour(Util.newColour(0xB9E3A1)),
 			FieldsDialogue.FOLOI_FIELDS,
-			null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			null, "")
+	.initDangerous();
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_FOREST = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_FOREST = new AbstractGlobalPlaceType(
 			WorldRegion.WOODLAND,
 			"Foloi forests",
 			"The thick forests surrounding the Foloi Fields are particularly dangerous, as they are home to the wild, predatory morphs of wolves, foxes, and bears.",
@@ -5647,14 +5602,10 @@ public class PlaceType {
 			new Colour(Util.newColour(0x51A468)),
 			new Colour(Util.newColour(0x5E685E)),
 			FieldsDialogue.FOLOI_FOREST,
-			null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			null, "")
+	.initDangerous();
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_FIELDS_CITY = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_FIELDS_CITY = new AbstractGlobalPlaceType(
 			WorldRegion.FIELD_CITY,
 			"Elis",
 			"The largest and most prosperous of all settlements in the Foloi Fields, Elis acts as a trading hub for both the youko and the races inhabiting the mountains.",
@@ -5662,14 +5613,9 @@ public class PlaceType {
 			new Colour(Util.newColour(0xd544ae)),
 			new Colour(Util.newColour(0x859871)),
 			FieldsDialogue.ELIS,
-			null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	};
+			null, "");
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_RIVER = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_RIVER = new AbstractGlobalPlaceType(
 			WorldRegion.RIVER,
 			"river Hubur",
 			"The river Hubur runs from the west, through Dominion, and flows out into the endless sea. Those parts of it which border the Foloi Fields are considered safe.",
@@ -5677,147 +5623,98 @@ public class PlaceType {
 			new Colour(Util.newColour(0x61BDFF)),
 			new Colour(Util.newColour(0x98B4CD)),
 			FieldsDialogue.RIVER_HUBUR,
-			null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initAquatic(Aquatic.MIXED)
+			null, "")
+	.initAquatic(Aquatic.MIXED)
 	.initDangerous();
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_WILD_RIVER = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_WILD_RIVER = new AbstractGlobalPlaceType(
 			WorldRegion.RIVER,
 			"river Hubur (wild)",
 			null,
 			"Far from Dominion, the river Hubur is a dangerous place in which to swim, as it is home to many wild freshwater races.",
-			new Colour(Util.newColour(0xc1f1ee)), null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous()
+			new Colour(Util.newColour(0xc1f1ee)), null, null, "")
+	.initDangerous()
 	.initAquatic(Aquatic.MIXED);
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_YOUKO_FOREST = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_YOUKO_FOREST = new AbstractGlobalPlaceType(
 			WorldRegion.YOUKO_FOREST,
 			"shinrin highlands",
 			null,
 			"The Shinrin highlands are a range of low, forest-covered hills, which steadily increase in elevation the further west you go. The elusive youko live here.",
-			new Colour(Util.newColour(0x6ccc74)), null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			new Colour(Util.newColour(0x6ccc74)), null, null, "")
+	.initDangerous();
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_SEA = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_SEA = new AbstractGlobalPlaceType(
 			WorldRegion.SEA,
 			"endless sea",
 			null,
 			"The aquatic races inhabiting Lilith's realm do not like to stray too far from shore, and so to them, the sea is considered to be endless.",
-			PresetColour.BASE_BLUE_DARK, null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous()
+			PresetColour.BASE_BLUE_DARK, null, null, "")
+	.initDangerous()
 	.initAquatic(Aquatic.WATER_SURFACE);
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_SEA_CITY = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_SEA_CITY = new AbstractGlobalPlaceType(
 			WorldRegion.SEA_CITY,
 			"Lyonesse",
 			null,
 			"The underwater city of Lyonesse is situated off the eastern coast, and, unsurprisingly, is particularly difficult for non-aquatic races to visit.",
-			new Colour(Util.newColour(0x8264b0)), null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initAquatic(Aquatic.WATER_UNDER);
+			new Colour(Util.newColour(0x8264b0)), null, null, "")
+	.initAquatic(Aquatic.WATER_UNDER);
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_ARID_GRASSLAND = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_ARID_GRASSLAND = new AbstractGlobalPlaceType(
 			WorldRegion.SAVANNAH,
 			"arid grassland",
 			null,
 			"To the south, the wild grassland starts to dry out, and is the preferred home for morphs such as lions, leopard, and zebras.",
-			PresetColour.BASE_YELLOW_LIGHT, null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			PresetColour.BASE_YELLOW_LIGHT, null, null, "")
+	.initDangerous();
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_ARID_SAVANNAH = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_ARID_SAVANNAH = new AbstractGlobalPlaceType(
 			WorldRegion.SAVANNAH,
 			"savannah",
 			null,
 			"Sparse, open-canopy woodlands are scattered across this area, and are inhabited by the same races as those found in the arid grasslands.",
-			PresetColour.BASE_TAN, null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			PresetColour.BASE_TAN, null, null, "")
+	.initDangerous();
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_DESERT = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_DESERT = new AbstractGlobalPlaceType(
 			WorldRegion.DESERT,
 			"desert",
 			null,
 			"To the south of the arid grassland, all vegetation dies out, creating a hot, barren wasteland.",
-			new Colour(Util.newColour(0xffe7a7)), null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			new Colour(Util.newColour(0xffe7a7)), null, null, "")
+	.initDangerous();
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_SAND_DUNES = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_SAND_DUNES = new AbstractGlobalPlaceType(
 			WorldRegion.DESERT,
 			"sand dunes",
 			null,
 			"At the southern edge of the desert, there lies a huge range of sand dunes, which are home to many dangerous races.",
-			new Colour(Util.newColour(0xffdb7a)), null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			new Colour(Util.newColour(0xffdb7a)), null, null, "")
+	.initDangerous();
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_DESERT_CITY = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_DESERT_CITY = new AbstractGlobalPlaceType(
 			WorldRegion.DESERT_CITY,
 			"Thinis",
 			null,
 			"A city resembling one of ancient Egypt, Thinis is the southern-most settlement in Lilith's realm, and is well known for its prestigious arcane university.",
-			new Colour(Util.newColour(0xd5445e)), null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	};
+			new Colour(Util.newColour(0xd5445e)), null, null, "");
 
-	public static final AbstractGlobalPlaceType WORLD_MAP_VOLCANO = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_VOLCANO = new AbstractGlobalPlaceType(
 			WorldRegion.VOLCANO,
 			"dragon's breath volcano",
 			null,
 			"A huge volcano, perpetually oozing red-hot lava. Despite its name, dragons are no more common here than they are elsewhere in Lilith's realm.",
-			PresetColour.BASE_ORANGE, null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			PresetColour.BASE_ORANGE, null, null, "")
+	.initDangerous();
 	
-	public static final AbstractGlobalPlaceType WORLD_MAP_LAVA_FLOWS = new AbstractGlobalPlaceType(
+	public static final AbstractPlaceType WORLD_MAP_LAVA_FLOWS = new AbstractGlobalPlaceType(
 			WorldRegion.VOLCANO,
 			"lava flows",
 			null,
 			"The lava which pours forth from the volcano slowly runs off in a southern direction.",
-			PresetColour.BASE_BLACK, null, null, "") {
-				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
-					return null;
-				}
-	}.initDangerous();
+			PresetColour.BASE_BLACK, null, null, "")
+	.initDangerous();
 	
 	
 	
