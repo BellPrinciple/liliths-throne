@@ -3,8 +3,7 @@ package com.lilithsthrone.world;
 import java.awt.Color;
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -13,6 +12,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
+import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.places.PlaceType;
 
@@ -21,7 +21,85 @@ import com.lilithsthrone.world.places.PlaceType;
  * @version 0.3.7.2
  * @author Innoxia
  */
-public class WorldType {
+public interface WorldType {
+
+	String getId();
+
+	boolean isFromExternalFile();
+
+	WorldRegion getWorldRegion();
+
+	String getName();
+
+	Colour getColour();
+
+	default boolean isLoiteringEnabled() {
+		return true;
+	}
+
+	/**
+	 * Reveals all tiles as though the player knows about them, but has not travelled to them. Behaviour may be overridden by isRevealedOnStart().
+	 */
+	default boolean isDiscoveredOnStart() {
+		return false;
+	}
+
+	/**
+	 * Reveals all tiles as though the player has already travelled to them.
+	 */
+	default boolean isRevealedOnStart() {
+		return false;
+	}
+
+	PlaceType getStandardPlace();
+
+	PlaceType getGlobalMapLocation();
+
+	PlaceType getEntryFromGlobalMapLocation();
+
+	String getFileLocation();
+
+	boolean isUsesFile();
+
+	Map<Color,PlaceType> getPlacesMap();
+
+	TeleportPermissions getTeleportPermissions();
+
+	boolean isFlightEnabled();
+
+	default boolean isSexBlocked(GameCharacter character) {
+		return getSexBlockedReason(character)!=null && !getSexBlockedReason(character).isEmpty();
+	}
+
+	String getSexBlockedReason(GameCharacter character);
+
+	/**
+	 * @return true if over-desk and on chair sex positions are available in this location. This can be overridden in AbstractPlaceType's method of the same name.
+	 */
+	default boolean isFurniturePresent() {
+		return false;
+	}
+
+	/**
+	 * @return The name which should be used in the over desk sex position, in the X place in: 'Over X'
+	 */
+	default String getDeskName() {
+		return "desk";
+	}
+
+	/**
+	 * @return true if against wall sex positions are available in this location. This can be overridden in AbstractPlaceType's method of the same name.
+	 */
+	default boolean isWallsPresent() {
+		return false;
+	}
+
+	/**
+	 * @return The name which should be used in the against wall sex position, in the X place in: 'Against X'
+	 */
+	default String getWallName() {
+		return "wall";
+	}
 	
 	// Dominion:
 	
@@ -1107,16 +1185,14 @@ public class WorldType {
 			return true;
 		}
 	};
-	
-	private static List<AbstractWorldType> allWorldTypes = new ArrayList<>();
-	private static Map<AbstractWorldType, String> worldToIdMap = new HashMap<>();
-	private static Map<String, AbstractWorldType> idToWorldMap = new HashMap<>();
 
-	public static List<AbstractWorldType> getAllWorldTypes() {
-		return new ArrayList<>(allWorldTypes);
+	LinkedHashMap<String,AbstractWorldType> idToWorldMap = init();
+
+	static List<AbstractWorldType> getAllWorldTypes() {
+		return List.copyOf(idToWorldMap.values());
 	}
-	
-	public static AbstractWorldType getWorldTypeFromId(String id) {
+
+	static AbstractWorldType getWorldTypeFromId(String id) {
 		id = id.replace("_worldType", "");
 		id.replaceAll("SEWERS", "SUBMISSION");
 		if(id.equals("SUPPLIER_DEN")) {
@@ -1126,11 +1202,12 @@ public class WorldType {
 		return idToWorldMap.get(id);
 	}
 
-	public static String getIdFromWorldType(AbstractWorldType placeType) {
-		return worldToIdMap.get(placeType);
+	static String getIdFromWorldType(AbstractWorldType placeType) {
+		return placeType.getId();
 	}
-	
-	static {
+
+	static LinkedHashMap<String,AbstractWorldType> init() {
+		var idToWorldMap = new LinkedHashMap<String,AbstractWorldType>();
 		// Modded world types:
 		
 		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/maps", null, "worldType");
@@ -1139,8 +1216,7 @@ public class WorldType {
 				try {
 					AbstractWorldType worldType = new AbstractWorldType(innerEntry.getValue(), entry.getKey(), true) {};
 					String id = innerEntry.getKey().replace("_worldType", "");
-					allWorldTypes.add(worldType);
-					worldToIdMap.put(worldType, id);
+					worldType.id = id;
 					idToWorldMap.put(id, worldType);
 //					System.out.println("modded WT: "+innerEntry.getKey());
 				} catch(Exception ex) {
@@ -1159,8 +1235,7 @@ public class WorldType {
 				try {
 					AbstractWorldType worldType = new AbstractWorldType(innerEntry.getValue(), entry.getKey(), false) {};
 					String id = innerEntry.getKey().replace("_worldType", "");
-					allWorldTypes.add(worldType);
-					worldToIdMap.put(worldType, id);
+					worldType.id = id;
 					idToWorldMap.put(id, worldType);
 //					System.out.println("res WT: "+innerEntry.getKey());
 				} catch(Exception ex) {
@@ -1177,18 +1252,15 @@ public class WorldType {
 		
 		for(Field f : fields) {
 			if(AbstractWorldType.class.isAssignableFrom(f.getType())) {
-				AbstractWorldType worldType;
 				try {
-					worldType = ((AbstractWorldType) f.get(null));
-
-					worldToIdMap.put(worldType, f.getName());
+					var worldType = ((AbstractWorldType) f.get(null));
+					worldType.id = f.getName();
 					idToWorldMap.put(f.getName(), worldType);
-					allWorldTypes.add(worldType);
-					
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
 			}
 		}
+		return idToWorldMap;
 	}
 }
