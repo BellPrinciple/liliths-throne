@@ -35,7 +35,6 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldRegion;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
 
 /**
@@ -51,7 +50,7 @@ public abstract class AbstractOutfit {
 	private String name;
 	private String description;
 	private List<WorldRegion> worldRegions;
-	private List<AbstractWorldType> worldTypes;
+	private List<WorldType> worldTypes;
 	private Femininity femininity;
 	private List<OutfitType> outfitTypes;
 	private List<LegConfiguration> acceptableLegConfigurations;
@@ -877,7 +876,7 @@ public abstract class AbstractOutfit {
 		return worldRegions;
 	}
 
-	public List<AbstractWorldType> getWorldTypes() {
+	public List<WorldType> getWorldTypes() {
 		return worldTypes;
 	}
 

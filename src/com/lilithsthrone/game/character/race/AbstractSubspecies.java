@@ -40,7 +40,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Season;
 import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
@@ -117,7 +116,7 @@ public abstract class AbstractSubspecies {
 	protected String bookSVGString;
 
 	private Map<WorldRegion, SubspeciesSpawnRarity> regionLocations;
-	private Map<AbstractWorldType, SubspeciesSpawnRarity> worldLocations;
+	private Map<WorldType, SubspeciesSpawnRarity> worldLocations;
 	private Map<PlaceType,SubspeciesSpawnRarity> placeLocations;
 	
 	private List<SubspeciesFlag> flags;
@@ -261,7 +260,7 @@ public abstract class AbstractSubspecies {
 			SubspeciesPreference subspeciesPreferenceDefault,
 			String description,
 			Map<WorldRegion, SubspeciesSpawnRarity> regionLocations,
-			Map<AbstractWorldType, SubspeciesSpawnRarity> worldLocations,
+			Map<WorldType, SubspeciesSpawnRarity> worldLocations,
 			Map<PlaceType,SubspeciesSpawnRarity> placeLocations,
 			List<SubspeciesFlag> flags) {
 		
@@ -1629,7 +1628,7 @@ public abstract class AbstractSubspecies {
 		return regionLocations;
 	}
 
-	public Map<AbstractWorldType, SubspeciesSpawnRarity> getWorldLocations() {
+	public Map<WorldType, SubspeciesSpawnRarity> getWorldLocations() {
 		return worldLocations;
 	}
 
@@ -1642,7 +1641,7 @@ public abstract class AbstractSubspecies {
 	 * @param placeType An optional place type, which can be null if not needed. If a non-null argument is passed in, this method will return true if either the worldType or the placeType allows for this subspecies to spawn.
 	 * @return true if this subspecies is able to spawn in the worldType, either due to having a spawn chance in that worldType directly, or in the WorldRegion in which that worldType is located.
 	 */
-	public boolean isAbleToNaturallySpawnInLocation(AbstractWorldType worldType, PlaceType placeType) {
+	public boolean isAbleToNaturallySpawnInLocation(WorldType worldType, PlaceType placeType) {
 		return getRegionLocations().containsKey(worldType.getWorldRegion())
 				|| getWorldLocations().containsKey(worldType)
 				|| (placeType!=null && getPlaceLocations().containsKey(placeType));

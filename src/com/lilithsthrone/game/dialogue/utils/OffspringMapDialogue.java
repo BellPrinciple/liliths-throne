@@ -14,7 +14,6 @@ import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
 
 /**
@@ -25,7 +24,7 @@ import com.lilithsthrone.world.WorldType;
 public class OffspringMapDialogue {
 	
 	private static List<OffspringSeed> getOffspringList() {
-		AbstractWorldType worldType = Main.game.getPlayer().getWorldLocation();
+		var worldType = Main.game.getPlayer().getWorldLocation();
 		var placeType = Main.game.getPlayer().getLocationPlace().getPlaceType();
 		
 		return Main.game.getOffspringNotSpawned(os->
@@ -64,7 +63,7 @@ public class OffspringMapDialogue {
 			
 			if(Main.game.getOffspringNotSpawned(os->true).isEmpty()) {
 				UtilText.nodeContentSB.append("[style.colourDisabled(No offspring available)]");
-				
+
 			} else {
 				boolean foundAnyInArea = false;
 				List<OffspringSeed> offspringToShow = Main.game.getOffspringNotSpawned(npc->getOffspringList().contains(npc));
@@ -74,7 +73,7 @@ public class OffspringMapDialogue {
 				}
 				for(OffspringSeed os : offspringToShow) {
 					UtilText.nodeContentSB.append("<span style='color:"+os.getFemininity().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(os.getName())+"</span>");
-					
+
 					String unknownMotherName = "Unknown";
 					if(os.getMother()==null && !os.getMotherName().equals("???")) {
 						unknownMotherName = os.getMotherName();
@@ -83,13 +82,13 @@ public class OffspringMapDialogue {
 					if(os.getFather()==null && !os.getFatherName().equals("???")) {
 						unknownFatherName = os.getFatherName();
 					}
-					
+
 					UtilText.nodeContentSB.append(" (<span style='color:"+os.getSubspecies().getColour(null).toWebHexString()+";'>"+Util.capitaliseSentence(os.getSubspecies().getName(os.getBody()))+"</span>)"
 							+ " Mother: "+(os.getMother()==null?unknownMotherName:(os.getMother().isPlayer()?"[style.colourExcellent(You)]":os.getMother().getName(true)))
 							+ " Father: "+(os.getFather()==null?unknownFatherName:(os.getFather().isPlayer()?"[style.colourExcellent(You)]":os.getFather().getName(true)))
 							+ "<br/>");
 				}
-				
+
 				offspringToShow = Main.game.getOffspringNotSpawned(npc->!getOffspringList().contains(npc));
 				if(!offspringToShow.isEmpty()) {
 					if(foundAnyInArea) {
@@ -99,7 +98,7 @@ public class OffspringMapDialogue {
 				}
 				for(OffspringSeed os : offspringToShow) {
 					UtilText.nodeContentSB.append("[style.colourDisabled("+Util.capitaliseSentence(os.getName())+")]");
-					
+
 					String unknownMotherName = "Unknown";
 					if(os.getMother()==null && !os.getMotherName().equals("???")) {
 						unknownMotherName = os.getMotherName();
@@ -108,7 +107,7 @@ public class OffspringMapDialogue {
 					if(os.getFather()==null && !os.getFatherName().equals("???")) {
 						unknownFatherName = os.getFatherName();
 					}
-					
+
 					UtilText.nodeContentSB.append(" (<span style='color:"+os.getSubspecies().getColour(null).toWebHexString()+";'>"+Util.capitaliseSentence(os.getSubspecies().getName(os.getBody()))+"</span>)"
 							+ " Mother: "+(os.getMother()==null?unknownMotherName:(os.getMother().isPlayer()?"[style.colourExcellent(You)]":os.getMother().getName(true)))
 							+ " Father: "+(os.getFather()==null?unknownFatherName:(os.getFather().isPlayer()?"[style.colourExcellent(You)]":os.getFather().getName(true)))

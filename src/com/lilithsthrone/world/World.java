@@ -27,9 +27,9 @@ public class World implements XMLSaving {
 	public static final int CELL_SIZE = 64;
 	
 	private Cell[][] grid;
-	private AbstractWorldType worldType;
+	private WorldType worldType;
 
-	public World(int worldWidth, int worldHeight, Cell[][] grid, AbstractWorldType worldType) {
+	public World(int worldWidth, int worldHeight, Cell[][] grid, WorldType worldType) {
 		WORLD_WIDTH = worldWidth;
 		WORLD_HEIGHT = worldHeight;
 
@@ -60,9 +60,8 @@ public class World implements XMLSaving {
 	}
 	
 	public static World loadFromXML(Element parentElement, Document doc) {
-		AbstractWorldType type = WorldType.EMPTY;
 		String worldType = parentElement.getAttribute("worldType");
-		type = WorldType.getWorldTypeFromId(worldType);
+		var type = WorldType.getWorldTypeFromId(worldType);
 		
 		int width = Integer.valueOf(parentElement.getAttribute("width"));
 		int height = Integer.valueOf(parentElement.getAttribute("height"));
@@ -240,11 +239,11 @@ public class World implements XMLSaving {
 		return grid;
 	}
 
-	public AbstractWorldType getWorldType() {
+	public WorldType getWorldType() {
 		return worldType;
 	}
 
-	public void setCellType(AbstractWorldType worldType) {
+	public void setCellType(WorldType worldType) {
 		this.worldType = worldType;
 	}
 

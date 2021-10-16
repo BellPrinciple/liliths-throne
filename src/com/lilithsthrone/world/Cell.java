@@ -37,7 +37,7 @@ public class Cell implements XMLSaving {
 	
 	public static int refundMoney = 0;
 	
-	private AbstractWorldType type;
+	private WorldType type;
 
 	private Vector2i location;
 
@@ -49,7 +49,7 @@ public class Cell implements XMLSaving {
 	private Set<String> charactersHomeIds;
 	private Set<String> charactersGlobalIds;
 
-	public Cell(AbstractWorldType type, Vector2i location) {
+	public Cell(WorldType type, Vector2i location) {
 		this.type = type;
 		this.location = location;
 		
@@ -81,7 +81,7 @@ public class Cell implements XMLSaving {
 		return element;
 	}
 	
-	public static Cell loadFromXML(Element parentElement, Document doc, AbstractWorldType type) {
+	public static Cell loadFromXML(Element parentElement, Document doc, WorldType type) {
 		
 		Element locationElement = ((Element)parentElement.getElementsByTagName("location").item(0));
 		
@@ -135,11 +135,11 @@ public class Cell implements XMLSaving {
 		return WorldType.getIdFromWorldType(type)+"-X:"+location.getX()+"-Y:"+location.getY();
 	}
 
-	public AbstractWorldType getType() {
+	public WorldType getType() {
 		return type;
 	}
 
-	public void setType(AbstractWorldType type) {
+	public void setType(WorldType type) {
 		this.type = type;
 	}
 	

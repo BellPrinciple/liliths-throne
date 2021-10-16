@@ -53,7 +53,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
 
@@ -3818,10 +3817,10 @@ public class PhoneDialogue {
 			+ "</div>";
 	}
 	
-	public static AbstractWorldType worldTypeMap = WorldType.DOMINION;
+	public static WorldType worldTypeMap = WorldType.DOMINION;
 
 	private static void setMapResponseTabToCurrentMap() {
-		AbstractWorldType world = Main.game.getPlayer().getWorldLocation();
+		var world = Main.game.getPlayer().getWorldLocation();
 		if(world.getWorldRegion()==WorldRegion.SUBMISSION) {
 			Main.game.setResponseTab(1);
 		} else if(world.getWorldRegion()==WorldRegion.FIELD_CITY) {
@@ -3864,11 +3863,11 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			int i=2;
-			List<AbstractWorldType> worldTypes = new ArrayList<>(Main.getProperties().hasValue(PropertyValue.mapReveal)?WorldType.getAllWorldTypes():Main.game.getPlayer().getWorldsVisited());
+			var worldTypes = new ArrayList<>(Main.getProperties().hasValue(PropertyValue.mapReveal)?WorldType.getAllWorldTypes():Main.game.getPlayer().getWorldsVisited());
 			
 			worldTypes.sort((w1, w2) -> w1.getName().compareTo(w2.getName()));
 			
-			for(AbstractWorldType world : worldTypes) {
+			for(var world : worldTypes) {
 				boolean correctRegion = false;
 				if(world.getWorldRegion()==WorldRegion.SUBMISSION) {
 					correctRegion = responseTab==1;

@@ -23,7 +23,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -99,7 +98,7 @@ public enum SlaveJob {
 			
 			} else {
 				// 50/50 of being upstairs or downstairs:
-				AbstractWorldType worldTypeToUse = WorldType.LILAYAS_HOUSE_FIRST_FLOOR;
+				var worldTypeToUse = WorldType.LILAYAS_HOUSE_FIRST_FLOOR;
 				if(Math.random()>0.5f) {
 					worldTypeToUse = WorldType.LILAYAS_HOUSE_GROUND_FLOOR;
 				}
@@ -386,7 +385,7 @@ public enum SlaveJob {
 			return super.getAvailabilityText(hour, character);
 		}
 		@Override
-		public AbstractWorldType getWorldLocation(GameCharacter character) {
+		public WorldType getWorldLocation(GameCharacter character) {
 			Cell c = MilkingRoom.getMilkingCell(character, false);
 			if(c==null) {
 				return null;
@@ -609,7 +608,7 @@ public enum SlaveJob {
 		}
 		
 		@Override
-		public AbstractWorldType getWorldLocation(GameCharacter character) {
+		public WorldType getWorldLocation(GameCharacter character) {
 			Cell c = getOfficeCell();
 			if(c==null) {
 				return null;
@@ -728,7 +727,7 @@ public enum SlaveJob {
 			return super.getAvailabilityText(hour, character);
 		}
 		@Override
-		public AbstractWorldType getWorldLocation(GameCharacter character) {
+		public WorldType getWorldLocation(GameCharacter character) {
 			return WorldType.LILAYAS_HOUSE_GROUND_FLOOR;
 		}
 	},
@@ -776,7 +775,7 @@ public enum SlaveJob {
 			return super.getAvailabilityText(hour, character);
 		}
 		@Override
-		public AbstractWorldType getWorldLocation(GameCharacter character) {
+		public WorldType getWorldLocation(GameCharacter character) {
 			return WorldType.LILAYAS_HOUSE_GROUND_FLOOR;
 		}
 		@Override
@@ -827,7 +826,7 @@ public enum SlaveJob {
 	private Map<String, List<SlaveJobSetting>> mutuallyExclusiveSettings;
 	private List<SlaveJobSetting> defaultMutuallyExclusiveSettings;
 	private List<SlaveJobFlag> flags;
-	private AbstractWorldType worldLocation;
+	private WorldType worldLocation;
 	private PlaceType placeLocation;
 	
 	private SlaveJob(
@@ -848,7 +847,7 @@ public enum SlaveJob {
 			Map<String, List<SlaveJobSetting>> mutuallyExclusiveSettings,
 			List<SlaveJobSetting> defaultMutuallyExclusiveSettings,
 			List<SlaveJobFlag> flags,
-			AbstractWorldType worldLocation,
+			WorldType worldLocation,
 			PlaceType placeLocation) {
 		this.colour = colour;
 		this.hourlyEventChance = hourlyEventChance;
@@ -1024,7 +1023,7 @@ public enum SlaveJob {
 		return flags.contains(flag);
 	}
 	
-	public AbstractWorldType getWorldLocation(GameCharacter character) {
+	public WorldType getWorldLocation(GameCharacter character) {
 		return worldLocation;
 	}
 
@@ -1033,7 +1032,7 @@ public enum SlaveJob {
 	}
 	
 	public Cell getWorkDestinationCell(int hour, GameCharacter slave) {
-		AbstractWorldType wType = slave.getSlaveJob(hour).getWorldLocation(slave);
+		var wType = slave.getSlaveJob(hour).getWorldLocation(slave);
 		if(wType==null) {
 			return null;
 		}

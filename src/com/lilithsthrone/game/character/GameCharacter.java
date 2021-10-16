@@ -283,7 +283,6 @@ import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.World;
 import com.lilithsthrone.world.WorldType;
@@ -345,8 +344,8 @@ public abstract class GameCharacter implements XMLSaving {
 	
 	
 	// Location:
-	protected AbstractWorldType worldLocation;
-	protected AbstractWorldType homeWorldLocation;
+	protected WorldType worldLocation;
+	protected WorldType homeWorldLocation;
 	protected Vector2i location;
 	protected Vector2i homeLocation;
 	protected Vector2i globalLocation;
@@ -524,7 +523,7 @@ public abstract class GameCharacter implements XMLSaving {
 			AbstractSubspecies startingSubspecies,
 			RaceStage stage,
 			CharacterInventory inventory,
-			AbstractWorldType worldLocation,
+			WorldType worldLocation,
 			PlaceType startingPlace) {
 		
 		id = "NOT_SET"; // id gets set in Game's addNPC method, so it doesn't matter if this is unique or not... Right?
@@ -1905,7 +1904,7 @@ public abstract class GameCharacter implements XMLSaving {
 							true);
 					
 				} else {
-					AbstractWorldType worldType = WorldType.getWorldTypeFromId(worldName);
+					var worldType = WorldType.getWorldTypeFromId(worldName);
 					
 					if((worldType==WorldType.DOMINION || worldType==WorldType.SUBMISSION || worldType==WorldType.HARPY_NEST) && Main.isVersionOlderThan(version, "0.2.1.5")) {
 						PlaceType placeType = PlaceType.DOMINION_BACK_ALLEYS;
@@ -20633,11 +20632,11 @@ public abstract class GameCharacter implements XMLSaving {
 		return homeLocation;
 	}
 	
-	public AbstractWorldType getWorldLocation() {
+	public WorldType getWorldLocation() {
 		return worldLocation;
 	}
 	
-	public AbstractWorldType getHomeWorldLocation() {
+	public WorldType getHomeWorldLocation() {
 		return homeWorldLocation;
 	}
 
@@ -20710,7 +20709,7 @@ public abstract class GameCharacter implements XMLSaving {
 		setLocation(character.getWorldLocation(), character.getLocation(), setAsHomeLocation);
 	}
 	
-	public void setLocation(AbstractWorldType worldLocation, Vector2i location, boolean setAsHomeLocation) {
+	public void setLocation(WorldType worldLocation, Vector2i location, boolean setAsHomeLocation) {
 		getCell().removeCharacterPresentId(this.getId());
 		
 		if(this.worldLocation != worldLocation && this.isPlayer()) {
@@ -20738,14 +20737,14 @@ public abstract class GameCharacter implements XMLSaving {
 		updateLocationListeners();
 	}
 
-	public void setRandomUnoccupiedLocation(AbstractWorldType worldType, PlaceType placeType, boolean setAsHomeLocation) {
+	public void setRandomUnoccupiedLocation(WorldType worldType, PlaceType placeType, boolean setAsHomeLocation) {
 		setLocation(worldType, Main.game.getWorlds().get(worldType).getRandomUnoccupiedCell(placeType).getLocation(), setAsHomeLocation);
 	}
 
 	/**
 	 * Moves this character to a random unoccupied cell, of one of the supplied placeTypes. If none of the placeTypes have an unoccupied cell, this character is moved to a random occupied one instead.
 	 */
-	public void setRandomUnoccupiedLocation(AbstractWorldType worldType, boolean setAsHomeLocation, PlaceType... placeTypes) {
+	public void setRandomUnoccupiedLocation(WorldType worldType, boolean setAsHomeLocation, PlaceType... placeTypes) {
 		List<Cell> unoccupiedCells = new ArrayList<>();
 		List<Cell> occupiedCells = new ArrayList<>();
 		
@@ -20765,11 +20764,11 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 	}
 
-	public void setRandomLocation(AbstractWorldType worldType, PlaceType placeType) {
+	public void setRandomLocation(WorldType worldType, PlaceType placeType) {
 		setRandomLocation(worldType, placeType, false);
 	}
 	
-	public void setRandomLocation(AbstractWorldType worldType, PlaceType placeType, boolean setAsHomeLocation) {
+	public void setRandomLocation(WorldType worldType, PlaceType placeType, boolean setAsHomeLocation) {
 		setLocation(worldType, Main.game.getWorlds().get(worldType).getRandomCell(placeType).getLocation(), setAsHomeLocation);
 	}
 
@@ -20777,11 +20776,11 @@ public abstract class GameCharacter implements XMLSaving {
 		setNearestLocation(this.getWorldLocation(), placeType, false);
 	}
 	
-	public void setNearestLocation(AbstractWorldType worldType, PlaceType placeType) {
+	public void setNearestLocation(WorldType worldType, PlaceType placeType) {
 		setNearestLocation(worldType, placeType, false);
 	}
 	
-	public void setNearestLocation(AbstractWorldType worldType, PlaceType placeType, boolean setAsHomeLocation) {
+	public void setNearestLocation(WorldType worldType, PlaceType placeType, boolean setAsHomeLocation) {
 		setLocation(worldType, Main.game.getWorlds().get(worldType).getClosestCell(this.getLocation(), placeType).getLocation(), setAsHomeLocation);
 	}
 	
@@ -20789,11 +20788,11 @@ public abstract class GameCharacter implements XMLSaving {
 		setLocation(cell.getType(), cell.getLocation(), false);
 	}
 	
-	public void setLocation(AbstractWorldType worldType, PlaceType placeType) {
+	public void setLocation(WorldType worldType, PlaceType placeType) {
 		setLocation(worldType, placeType, false);
 	}
 	
-	public void setLocation(AbstractWorldType worldType, PlaceType placeType, boolean setAsHomeLocation) {
+	public void setLocation(WorldType worldType, PlaceType placeType, boolean setAsHomeLocation) {
 		setLocation(worldType, Main.game.getWorlds().get(worldType).getClosestCell(this.getLocation(), placeType).getLocation(), setAsHomeLocation);
 	}
 	
@@ -20841,11 +20840,11 @@ public abstract class GameCharacter implements XMLSaving {
 		setHomeLocation(this.getWorldLocation(), this.getLocation());
 	}
 	
-	public void setHomeLocation(AbstractWorldType homeWorldLocation, PlaceType placeType) {
+	public void setHomeLocation(WorldType homeWorldLocation, PlaceType placeType) {
 		setHomeLocation(homeWorldLocation, Main.game.getWorlds().get(homeWorldLocation).getCell(placeType).getLocation());
 	}
 	
-	public void setHomeLocation(AbstractWorldType homeWorldLocation, Vector2i location) {
+	public void setHomeLocation(WorldType homeWorldLocation, Vector2i location) {
 		getHomeCell().removeCharacterHomeId(this.getId());
 		this.homeWorldLocation = homeWorldLocation;
 		

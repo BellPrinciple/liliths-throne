@@ -109,7 +109,7 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
+import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -146,7 +146,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			AbstractSubspecies startingSubspecies,
 			RaceStage stage,
 			CharacterInventory inventory,
-			AbstractWorldType worldLocation,
+			WorldType worldLocation,
 			PlaceType startingPlace,
 			boolean addedToContacts,
 			NPCGenerationFlag... generationFlags) {

@@ -30,7 +30,7 @@ public class Generation extends Task<Boolean> {
 		int maxSize = WorldType.getAllWorldTypes().size();
 		int count = 0;
 		
-		for(AbstractWorldType wt : WorldType.getAllWorldTypes()) {
+		for(var wt : WorldType.getAllWorldTypes()) {
 			if(debug) {
 				System.out.println(wt);
 			}
@@ -42,7 +42,7 @@ public class Generation extends Task<Boolean> {
 		return true;
 	}
 
-	public World worldGeneration(AbstractWorldType worldType) {
+	public World worldGeneration(WorldType worldType) {
 //		System.out.println(worldType);
 		if(worldType.isUsesFile()) {
 			try {

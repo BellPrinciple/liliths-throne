@@ -1184,12 +1184,12 @@ public interface WorldType {
 	};
 
 	@Deprecated
-	static List<AbstractWorldType> getAllWorldTypes() {
+	static List<WorldType> getAllWorldTypes() {
 		return table.list();
 	}
 
 	@Deprecated
-	static AbstractWorldType getWorldTypeFromId(String id) {
+	static WorldType getWorldTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -1203,11 +1203,11 @@ public interface WorldType {
 	}
 
 	@Deprecated
-	static String getIdFromWorldType(AbstractWorldType placeType) {
+	static String getIdFromWorldType(WorldType placeType) {
 		return placeType.getId();
 	}
 
-	Table<AbstractWorldType> table = new Table<>(WorldType::sanitize) {{
+	Table<WorldType> table = new Table<>(WorldType::sanitize) {{
 		// Modded world types:
 		forEachMod("/maps",null,"worldType",(f,n,a)->{
 			var k = n.replace("_worldType","");

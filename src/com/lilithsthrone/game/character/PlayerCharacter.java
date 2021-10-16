@@ -86,7 +86,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
@@ -114,7 +113,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	
 	//Discoveries:
 	private List<String> charactersEncountered;
-	private Set<AbstractWorldType> worldsVisited;
+	private Set<WorldType> worldsVisited;
 	
 	private Set<AbstractSubspecies> racesDiscoveredFromBook;
 	
@@ -128,7 +127,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	private SizedStack<ShopTransaction> buybackStack;
 
 	
-	public PlayerCharacter(NameTriplet nameTriplet, int level, LocalDateTime birthday, Gender gender, AbstractSubspecies startingSubspecies, RaceStage stage, AbstractWorldType startingWorld, PlaceType startingPlace) {
+	public PlayerCharacter(NameTriplet nameTriplet, int level, LocalDateTime birthday, Gender gender, AbstractSubspecies startingSubspecies, RaceStage stage, WorldType startingWorld, PlaceType startingPlace) {
 		super(nameTriplet, "", "", level, Main.game.getDateNow().minusYears(22), gender, startingSubspecies, stage, new CharacterInventory(0), startingWorld, startingPlace);
 
 		this.setSexualOrientation(SexualOrientation.AMBIPHILIC);
@@ -239,7 +238,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		
 		Element worldsVisitedElement = doc.createElement("worldsVisited");
 		playerSpecific.appendChild(worldsVisitedElement);
-		for(AbstractWorldType world : this.getWorldsVisited()) {
+		for(var world : this.getWorldsVisited()) {
 			Element element = doc.createElement("world");
 			worldsVisitedElement.appendChild(element);
 			
@@ -794,7 +793,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	}
 	
 	@Override
-	public void setLocation(AbstractWorldType worldLocation, Vector2i location, boolean setAsHomeLocation) {
+	public void setLocation(WorldType worldLocation, Vector2i location, boolean setAsHomeLocation) {
 		if(this.getWorldsVisited()!=null && !this.getWorldsVisited().contains(worldLocation)) {
 			this.getWorldsVisited().add(worldLocation);
 			if(Main.game.isStarted()) {
@@ -814,7 +813,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 			List<GameCharacter> clubbers = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
 			clubbers.removeIf((npc) -> !(npc instanceof DominionClubNPC));
 			
-			AbstractWorldType worldLocationInitial = this.getWorldLocation();
+			WorldType worldLocationInitial = this.getWorldLocation();
 			Vector2i locationInitial = this.getLocation();
 			
 			super.setLocation(worldLocation, location, setAsHomeLocation);
@@ -1755,7 +1754,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		return friendlyOccupants.remove(occupant.getId());
 	}
 
-	public Set<AbstractWorldType> getWorldsVisited() {
+	public Set<WorldType> getWorldsVisited() {
 		return worldsVisited;
 	}
 	

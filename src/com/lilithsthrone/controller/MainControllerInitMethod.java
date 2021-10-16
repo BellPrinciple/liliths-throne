@@ -221,7 +221,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
@@ -6031,7 +6030,7 @@ public class MainControllerInitMethod {
 			}
 			
 			if (Main.game.getCurrentDialogueNode().equals(PhoneDialogue.MAP)) {
-				AbstractWorldType worldType = PhoneDialogue.worldTypeMap;
+				var worldType = PhoneDialogue.worldTypeMap;
 				Cell[][] grid = Main.game.getWorlds().get(worldType).getGrid();
 
 				for(int i=grid[0].length-1; i>=0; i--) {

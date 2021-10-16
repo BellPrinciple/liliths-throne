@@ -242,7 +242,6 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.time.DateAndTime;
 import com.lilithsthrone.utils.time.DayPeriod;
 import com.lilithsthrone.utils.time.SolarElevationAngle;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.Generation;
 import com.lilithsthrone.world.Season;
@@ -287,9 +286,9 @@ public class Game implements XMLSaving {
 	private Map<String, OffspringSeed> OffspringSeedMap;
 
 	/** Key is the world to which the Enforcers patrol. Value is a List of Enforcer groups who are patrolling. */
-	private Map<AbstractWorldType, List<List<String>>> savedEnforcers;
+	private Map<WorldType,List<List<String>>> savedEnforcers;
 	
-	private Map<AbstractWorldType, World> worlds;
+	private Map<WorldType,World> worlds;
 	private long lastAutoSaveTime = 0;
 	private long secondsPassed; // Seconds passed since the start of the game
 	private LocalDateTime startingDate;
@@ -351,7 +350,7 @@ public class Game implements XMLSaving {
 
 	public Game() {
 		worlds = new HashMap<>();
-		for(AbstractWorldType type : WorldType.getAllWorldTypes()) {
+		for(var type : WorldType.getAllWorldTypes()) {
 			worlds.put(type, null);
 		}
 		
@@ -605,7 +604,7 @@ public class Game implements XMLSaving {
 
 			Element savedEnforcersNode = doc.createElement("savedEnforcers");
 			game.appendChild(savedEnforcersNode);
-			for(Entry<AbstractWorldType, List<List<String>>> entrySet : Main.game.savedEnforcers.entrySet()) {
+			for(var entrySet : Main.game.savedEnforcers.entrySet()) {
 				Element element = doc.createElement("world");
 				savedEnforcersNode.appendChild(element);
 				XMLUtil.addAttribute(doc, element, "type", WorldType.getIdFromWorldType(entrySet.getKey()));
@@ -839,7 +838,7 @@ public class Game implements XMLSaving {
 					NodeList nodes = savedEnforcersNode.getElementsByTagName("world");
 					for (int i=0; i < nodes.getLength(); i++) {
 						Element world = (Element) nodes.item(i);
-						AbstractWorldType worldType = WorldType.getWorldTypeFromId(world.getAttribute("type"));
+						var worldType = WorldType.getWorldTypeFromId(world.getAttribute("type"));
 						
 						List<List<String>> loadedEnforcers = new ArrayList<>();
 						
@@ -936,7 +935,7 @@ public class Game implements XMLSaving {
 				
 				// Add missing world types:
 				Generation gen = new Generation();
-//				if(Main.isVersionOlderThan(loadingVersion, "0.1.99.5")) { 
+//				if(Main.isVersionOlderThan(loadingVersion, "0.1.99.5")) {
 //					Main.game.getWorlds().put(WorldType.SHOPPING_ARCADE, gen.worldGeneration(WorldType.SHOPPING_ARCADE));
 //				}
 				if(Main.isVersionOlderThan(loadingVersion, "0.2.1.5")) {
@@ -994,7 +993,7 @@ public class Game implements XMLSaving {
 					Main.game.getWorlds().put(WorldType.getWorldTypeFromId("innoxia_fields_elis_town"), gen.worldGeneration(WorldType.getWorldTypeFromId("innoxia_fields_elis_town")));
 					Main.game.getWorlds().put(WorldType.getWorldTypeFromId("innoxia_fields_elis_tavern_f1"), gen.worldGeneration(WorldType.getWorldTypeFromId("innoxia_fields_elis_tavern_f1")));
 				}
-				for(AbstractWorldType wt : WorldType.getAllWorldTypes()) {
+				for(var wt : WorldType.getAllWorldTypes()) {
 					if(Main.game.worlds.get(wt)==null) {
 						Main.game.getWorlds().put(wt, gen.worldGeneration(wt));
 					}
@@ -3685,11 +3684,11 @@ public class Game implements XMLSaving {
 					break;
 			}
 		}
-		
+
 		if(response instanceof ResponseSex && ((ResponseSex)response).isNonConWarning()) {
 			iconRightTop = "<div class='response-icon-rightTop'>"+SVGImages.SVG_IMAGE_PROVIDER.getResponseSubResist()+"</div>";
 		}
-		
+
 		if(response.isSexActionSwitch()) {
 			iconRightBottom = "<div class='response-icon-rightBottom'>"+SVGImages.SVG_IMAGE_PROVIDER.getResponseSexSwitch()+"</div>";
 			
@@ -4027,7 +4026,7 @@ public class Game implements XMLSaving {
 		return charactersHome;
 	}
 	
-	public List<NPC> getCharactersPresent(AbstractWorldType worldType, PlaceType placeType) {
+	public List<NPC> getCharactersPresent(WorldType worldType, PlaceType placeType) {
 		Cell cell = worlds.get(worldType).getCell(placeType);
 		
 		return getCharactersPresent(cell);
@@ -4037,7 +4036,7 @@ public class Game implements XMLSaving {
 		return getCharactersPresent(cell.getType(), cell.getLocation());
 	}
 	
-	public List<NPC> getCharactersPresent(AbstractWorldType worldType, Vector2i location) {
+	public List<NPC> getCharactersPresent(WorldType worldType, Vector2i location) {
 		List<NPC> charactersPresent = new ArrayList<>();
 		
 		if(getWorlds().get(worldType).getCell(location).getCharactersPresentIds()!=null) {
@@ -4147,7 +4146,7 @@ public class Game implements XMLSaving {
 		return worlds.get(player.getWorldLocation());
 	}
 
-	public Map<AbstractWorldType, World> getWorlds() {
+	public Map<WorldType,World> getWorlds() {
 		return worlds;
 	}
 
@@ -4778,17 +4777,17 @@ public class Game implements XMLSaving {
 		return i;
 	}
 
-	public List<List<String>> getSavedEnforcers(AbstractWorldType worldType) {
+	public List<List<String>> getSavedEnforcers(WorldType worldType) {
 		savedEnforcers.putIfAbsent(worldType, new ArrayList<>());
 		return savedEnforcers.get(worldType);
 	}
 	
-	public void addSavedEnforcers(AbstractWorldType worldType, List<String> enforcerIds) {
+	public void addSavedEnforcers(WorldType worldType, List<String> enforcerIds) {
 		savedEnforcers.putIfAbsent(worldType, new ArrayList<>());
 		savedEnforcers.get(worldType).add(enforcerIds);
 	}
 	
-	public void removeSavedEnforcers(AbstractWorldType worldType, List<String> enforcerIds) {
+	public void removeSavedEnforcers(WorldType worldType, List<String> enforcerIds) {
 		savedEnforcers.putIfAbsent(worldType, new ArrayList<>());
 		savedEnforcers.get(worldType).removeIf((innerList) -> !Collections.disjoint(innerList, enforcerIds));
 	}
