@@ -730,6 +730,11 @@ public abstract class AbstractSubspecies implements Subspecies {
 	}
 
 	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
 	public Map<PersonalityTrait, Float> getPersonalityTraitChances() {
 		Map<PersonalityTrait, Float> map = new HashMap<>();
 		
@@ -756,9 +761,9 @@ public abstract class AbstractSubspecies implements Subspecies {
 		}
 	}
 
-	public static AbstractSubspecies getMainSubspeciesOfRace(AbstractRace race) {
-		AbstractSubspecies backup = Subspecies.HUMAN;
-		for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
+	public static Subspecies getMainSubspeciesOfRace(AbstractRace race) {
+		Subspecies backup = Subspecies.HUMAN;
+		for(var sub : Subspecies.getAllSubspecies()) {
 			if(sub.getRace()==race) {
 				if(sub.isMainSubspecies()) {
 					return sub;
@@ -791,12 +796,12 @@ public abstract class AbstractSubspecies implements Subspecies {
 		return 0;
 	}
 	
-	public static AbstractSubspecies getSubspeciesFromBody(Body body, AbstractRace race) {
-		AbstractSubspecies subspecies = null;
+	public static Subspecies getSubspeciesFromBody(Body body, AbstractRace race) {
+		Subspecies subspecies = null;
 		
 		int highestWeighting = 0;
 		int newWeighting;
-		for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
+		for(var sub : Subspecies.getAllSubspecies()) {
 			newWeighting = sub.getSubspeciesWeighting(body, race);
 			if(newWeighting>highestWeighting
 					&& (!body.isFeral() || sub.isFeralConfigurationAvailable())) {
@@ -918,10 +923,10 @@ public abstract class AbstractSubspecies implements Subspecies {
 	 */
 	public static Body getPreGeneratedBody(GameCharacter linkedCharacter,
 			Gender startingGender,
-			AbstractSubspecies motherSubspecies,
-			AbstractSubspecies motherHalfDemonSubspecies,
-			AbstractSubspecies fatherSubspecies,
-			AbstractSubspecies fatherHalfDemonSubspecies) {
+			Subspecies motherSubspecies,
+			Subspecies motherHalfDemonSubspecies,
+			Subspecies fatherSubspecies,
+			Subspecies fatherHalfDemonSubspecies) {
 		
 		if(startingGender==null) {
 			startingGender = Math.random()>0.5f?Gender.F_V_B_FEMALE:Gender.M_P_MALE;
@@ -1637,12 +1642,12 @@ public abstract class AbstractSubspecies implements Subspecies {
 		return baseSlaveValue;
 	}
 	
-	public static Map<AbstractSubspecies, Integer> getGenericSexPartnerSubspeciesMap(Gender gender, AbstractSubspecies... subspeciesToExclude) {
-		Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-		List<AbstractSubspecies> subspecies = new ArrayList<>(Subspecies.getAllSubspecies());
+	public static Map<Subspecies,Integer> getGenericSexPartnerSubspeciesMap(Gender gender, Subspecies... subspeciesToExclude) {
+		var availableRaces = new HashMap<Subspecies,Integer>();
+		var subspecies = new ArrayList<>(Subspecies.getAllSubspecies());
 		subspecies.removeAll(Arrays.asList(subspeciesToExclude));
 		
-		for(AbstractSubspecies s : subspecies) {
+		for(var s : subspecies) {
 			if(s==Subspecies.REINDEER_MORPH
 					&& Main.game.getSeason()==Season.WINTER
 					&& Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hasSnowedThisWinter)) {
@@ -1666,21 +1671,20 @@ public abstract class AbstractSubspecies implements Subspecies {
 		return availableRaces;
 	}
 
-	public static AbstractSubspecies getRandomSubspeciesFromWeightedMap(Map<AbstractSubspecies, Integer> availableRaces) {
+	public static Subspecies getRandomSubspeciesFromWeightedMap(Map<Subspecies,Integer> availableRaces) {
 		return getRandomSubspeciesFromWeightedMap(availableRaces, Subspecies.HUMAN);
 	}
 
-	public static AbstractSubspecies getRandomSubspeciesFromWeightedMap(Map<AbstractSubspecies, Integer> availableRaces, AbstractSubspecies fallback) {
-		AbstractSubspecies species = Util.getRandomObjectFromWeightedMap(availableRaces);
-
+	public static Subspecies getRandomSubspeciesFromWeightedMap(Map<Subspecies,Integer> availableRaces, Subspecies fallback) {
+		var species = Util.getRandomObjectFromWeightedMap(availableRaces);
 		return species != null ? species : fallback;
 	}
 
-	public static void addToSubspeciesMap(int weight, Gender gender, AbstractSubspecies subspecies, Map<AbstractSubspecies, Integer> map) {
+	public static void addToSubspeciesMap(int weight, Gender gender, Subspecies subspecies, Map<Subspecies,Integer> map) {
 		addToSubspeciesMap(weight, gender, subspecies, map, null);
 	}
 	
-	public static void addToSubspeciesMap(int weight, Gender gender, AbstractSubspecies subspecies, Map<AbstractSubspecies, Integer> map, SubspeciesPreference userPreferenceOverride) {
+	public static void addToSubspeciesMap(int weight, Gender gender, Subspecies subspecies, Map<Subspecies,Integer> map, SubspeciesPreference userPreferenceOverride) {
 		if(gender.isFeminine()) {
 			if((Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().get(subspecies)!=FurryPreference.HUMAN && Main.getProperties().getSubspeciesFemininePreferencesMap().get(subspecies).getValue()>0)
 					|| userPreferenceOverride!=null) {

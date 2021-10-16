@@ -3,7 +3,6 @@ package com.lilithsthrone.game.character.npc.dominion;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -68,8 +67,8 @@ public class SlaveInStocks extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			var availableRaces = new HashMap<Subspecies,Integer>();
+			for(var s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}
@@ -179,10 +178,10 @@ public class SlaveInStocks extends NPC {
 				if(!Main.game.getCharactersPresent().contains(this)) {
 					Gender gender = Gender.getGenderFromUserPreferences(false, true);
 					
-					Map<AbstractSubspecies, Integer> availableRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(gender);
+					var availableRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(gender);
 					
-					AbstractSubspecies subspecies = Subspecies.HUMAN;
-					AbstractSubspecies halfDemonSubspecies = null;
+					Subspecies subspecies = Subspecies.HUMAN;
+					Subspecies halfDemonSubspecies = null;
 					if(!availableRaces.isEmpty()) {
 						subspecies = Util.getRandomObjectFromWeightedMap(availableRaces);
 					}

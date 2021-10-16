@@ -10,7 +10,6 @@ import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesSpawnRarity;
@@ -51,10 +50,10 @@ public class Library {
 		DESERT;
 	}
 	
-	private static Set<AbstractSubspecies> getAisleSubspecies(LibraryAisle aisle) {
-		Set<AbstractSubspecies> aisleSubspecies = new HashSet<>();
+	private static Set<Subspecies> getAisleSubspecies(LibraryAisle aisle) {
+		var aisleSubspecies = new HashSet<Subspecies>();
 
-		for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+		for(var subspecies : Subspecies.getAllSubspecies()) {
 			List<WorldRegion> mostCommonRegion = Util.newArrayListOfValues(WorldRegion.DOMINION);
 			SubspeciesSpawnRarity highestRarity = SubspeciesSpawnRarity.ZERO_EXTREMELY_RARE;
 			for(Entry<WorldRegion, SubspeciesSpawnRarity> entry : subspecies.getRegionLocations().entrySet()) {
@@ -272,7 +271,7 @@ public class Library {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.readBookSlavery, true);
 						}
 					};
-	
+
 				} else if (index == 7 && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.readBookSlavery)) {
 					if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("acexp_dungeon_found"))) {
 						return new Response("Lilaya's dungeon",
@@ -285,7 +284,7 @@ public class Library {
 								Main.game.getPlayer().setLocation(WorldType.getWorldTypeFromId("acexp_dungeon"), PlaceType.getPlaceTypeFromId("acexp_dungeon_stairs"), false);
 							}
 						};
-						
+
 					} else {
 						return new Response("'Lilaya's Dirty Secrets'", "A thick book bearing the title 'Lilaya's Dirty Secrets' has caught your eye...", DUNGEON_TRIGGER) {
 							@Override
@@ -294,7 +293,7 @@ public class Library {
 							}
 						};
 					}
-	
+
 				} else if(index>=8 && index-8<charactersPresent.size()) {
 					NPC slave = charactersPresent.get(index-8);
 					return new Response(UtilText.parse(slave, "[npc.Name]"), UtilText.parse(slave, "Interact with [npc.name]."), SlaveDialogue.SLAVE_START) {
@@ -542,7 +541,7 @@ public class Library {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
 				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.DEMON)) {
+				for(var subspecies : getAisleSubspecies(LibraryAisle.DEMON)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(ELDER_RACES, subspecies));
 					}
@@ -591,7 +590,7 @@ public class Library {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
 				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.DOMINION)) {
+				for(var subspecies : getAisleSubspecies(LibraryAisle.DOMINION)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(DOMINION_RACES, subspecies));
 					}
@@ -636,7 +635,7 @@ public class Library {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
 				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.FIELDS)) {
+				for(var subspecies : getAisleSubspecies(LibraryAisle.FIELDS)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(FIELDS_BOOKS, subspecies));
 					}
@@ -677,7 +676,7 @@ public class Library {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
 				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.JUNGLE)) {
+				for(var subspecies : getAisleSubspecies(LibraryAisle.JUNGLE)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(JUNGLE_BOOKS, subspecies));
 					}
@@ -718,7 +717,7 @@ public class Library {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
 				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.MOUNTAIN)) {
+				for(var subspecies : getAisleSubspecies(LibraryAisle.MOUNTAIN)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(MOUNTAIN_BOOKS, subspecies));
 					}
@@ -759,7 +758,7 @@ public class Library {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
 				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.SEA)) {
+				for(var subspecies : getAisleSubspecies(LibraryAisle.SEA)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(SEA_BOOKS, subspecies));
 					}
@@ -801,7 +800,7 @@ public class Library {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
 				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.DESERT)) {
+				for(var subspecies : getAisleSubspecies(LibraryAisle.DESERT)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(DESERT_BOOKS, subspecies));
 					}
@@ -821,7 +820,7 @@ public class Library {
 		}
 	};
 	
-	private static Response bookResponse(DialogueNode nodeToReturnTo, AbstractSubspecies subspecies) {
+	private static Response bookResponse(DialogueNode nodeToReturnTo, Subspecies subspecies) {
 		AbstractItemType book = ItemType.getLoreBook(subspecies);
 
 		if(Main.getProperties().isAdvancedRaceKnowledgeDiscovered(subspecies)) {

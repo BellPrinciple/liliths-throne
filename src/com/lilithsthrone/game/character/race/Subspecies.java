@@ -118,6 +118,7 @@ public interface Subspecies {
 //		}
 //	};
 
+	String getId();
 
 	/**
 	 * @return
@@ -980,7 +981,7 @@ public interface Subspecies {
 			if(character==null || character.getHalfDemonSubspecies()==null) {
 				return Subspecies.HUMAN.getHalfDemonSVGString(character);
 			}
-			AbstractSubspecies coreSubspecies = character.getHalfDemonSubspecies();
+			var coreSubspecies = character.getHalfDemonSubspecies();
 			if(coreSubspecies==Subspecies.HALF_DEMON) {
 				coreSubspecies = Subspecies.HUMAN;
 			}
@@ -992,7 +993,7 @@ public interface Subspecies {
 			if(character==null || character.getHalfDemonSubspecies()==null) {
 				return Subspecies.HUMAN.getSVGStringDesaturated(character);
 			}
-			AbstractSubspecies coreSubspecies = character.getHalfDemonSubspecies();
+			var coreSubspecies = character.getHalfDemonSubspecies();
 			if(coreSubspecies==Subspecies.HALF_DEMON) {
 				coreSubspecies = Subspecies.HUMAN;
 			}
@@ -4414,7 +4415,7 @@ public interface Subspecies {
 		@Override
 		public String getStatusEffectDescription(GameCharacter character) {
 			if(character!=null) {
-				AbstractSubspecies coreSubspecies = character.getBody().getFleshSubspecies();
+				var coreSubspecies = character.getBody().getFleshSubspecies();
 				if(character.getSubspeciesOverrideRace()==Race.DEMON) {
 					return UtilText.parse(character,
 							"Due to [npc.her] soft, slimy body, [npc.nameIsFull] almost completely immune to physical damage, but [npc.she] is also unable to inflict any serious unarmed damage."
@@ -4433,7 +4434,7 @@ public interface Subspecies {
 			if(body ==null) {
 				return super.getName(body);
 			}
-			AbstractSubspecies coreSubspecies = body.getFleshSubspecies();
+			var coreSubspecies = body.getFleshSubspecies();
 			if(coreSubspecies==Subspecies.HUMAN) {
 				return super.getName(body);
 			} else if(coreSubspecies==Subspecies.DEMON && body.getSubspeciesOverride()==null) {
@@ -4447,7 +4448,7 @@ public interface Subspecies {
 			if(body ==null) {
 				return super.getNamePlural(body);
 			}
-			AbstractSubspecies coreSubspecies = body.getFleshSubspecies();
+			var coreSubspecies = body.getFleshSubspecies();
 			if(coreSubspecies==Subspecies.HUMAN) {
 				return super.getNamePlural(body);
 			} else if(coreSubspecies==Subspecies.DEMON && body.getSubspeciesOverride()==null) {
@@ -4461,7 +4462,7 @@ public interface Subspecies {
 			if(body ==null) {
 				return super.getSingularMaleName(body);
 			}
-			AbstractSubspecies coreSubspecies = body.getFleshSubspecies();
+			var coreSubspecies = body.getFleshSubspecies();
 			if(coreSubspecies==Subspecies.HUMAN) {
 				return super.getSingularMaleName(body);
 			} else if(coreSubspecies==Subspecies.DEMON && body.getSubspeciesOverride()==null) {
@@ -4475,7 +4476,7 @@ public interface Subspecies {
 			if(body ==null) {
 				return super.getSingularFemaleName(body);
 			}
-			AbstractSubspecies coreSubspecies = body.getFleshSubspecies();
+			var coreSubspecies = body.getFleshSubspecies();
 			if(coreSubspecies==Subspecies.HUMAN) {
 				return super.getSingularFemaleName(body);
 			} else if(coreSubspecies==Subspecies.DEMON && body.getSubspeciesOverride()==null) {
@@ -4489,7 +4490,7 @@ public interface Subspecies {
 			if(body ==null) {
 				return super.getPluralMaleName(body);
 			}
-			AbstractSubspecies coreSubspecies = body.getFleshSubspecies();
+			var coreSubspecies = body.getFleshSubspecies();
 			if(coreSubspecies==Subspecies.HUMAN) {
 				return super.getPluralMaleName(body);
 			} else if(coreSubspecies==Subspecies.DEMON && body.getSubspeciesOverride()==null) {
@@ -4503,7 +4504,7 @@ public interface Subspecies {
 			if(body ==null) {
 				return super.getPluralFemaleName(body);
 			}
-			AbstractSubspecies coreSubspecies = body.getFleshSubspecies();
+			var coreSubspecies = body.getFleshSubspecies();
 			if(coreSubspecies==Subspecies.HUMAN) {
 				return super.getPluralFemaleName(body);
 			} else if(coreSubspecies==Subspecies.DEMON && body.getSubspeciesOverride()==null) {
@@ -5549,7 +5550,7 @@ public interface Subspecies {
 									"<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getRaceWisp()+"</div>");
 					return wispSVG;
 				}
-				AbstractSubspecies passiveForm = ((Elemental)character).getPassiveForm();
+				var passiveForm = (AbstractSubspecies)((Elemental)character).getPassiveForm();
 				if (passiveForm.SVGString == null) {
 					passiveForm.initSVGStrings();
 				}
@@ -5627,7 +5628,7 @@ public interface Subspecies {
 							"<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getRaceWisp()+"</div>");
 					return wispSVG;
 				}
-				AbstractSubspecies passiveForm = ((Elemental)character).getPassiveForm();
+				var passiveForm = (AbstractSubspecies)((Elemental)character).getPassiveForm();
 				if (passiveForm.SVGString == null) {
 					passiveForm.initSVGStrings();
 				}
@@ -5706,7 +5707,7 @@ public interface Subspecies {
 									"<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getRaceWisp()+"</div>");
 					return wispSVG;
 				}
-				AbstractSubspecies passiveForm = ((Elemental)character).getPassiveForm();
+				var passiveForm = (AbstractSubspecies)((Elemental)character).getPassiveForm();
 				if (passiveForm.SVGString == null) {
 					passiveForm.initSVGStrings();
 				}
@@ -5784,7 +5785,7 @@ public interface Subspecies {
 									"<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getRaceWisp()+"</div>");
 					return wispSVG;
 				}
-				AbstractSubspecies passiveForm = ((Elemental)character).getPassiveForm();
+				var passiveForm = (AbstractSubspecies)((Elemental)character).getPassiveForm();
 				if (passiveForm.SVGString == null) {
 					passiveForm.initSVGStrings();
 				}
@@ -5862,7 +5863,7 @@ public interface Subspecies {
 									"<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getRaceWisp()+"</div>");
 					return wispSVG;
 				}
-				AbstractSubspecies passiveForm = ((Elemental)character).getPassiveForm();
+				var passiveForm = (AbstractSubspecies)((Elemental)character).getPassiveForm();
 				if (passiveForm.SVGString == null) {
 					passiveForm.initSVGStrings();
 				}
@@ -5884,12 +5885,12 @@ public interface Subspecies {
 		}
 	};
 
-	/*private*/Map<WorldRegion, Map<AbstractSubspecies, SubspeciesSpawnRarity>> regionSpecies = new HashMap<>();
-	/*private*/Map<WorldType, Map<AbstractSubspecies, SubspeciesSpawnRarity>> worldSpecies = new HashMap<>();
-	/*private*/Map<PlaceType, Map<AbstractSubspecies, SubspeciesSpawnRarity>> placeSpecies = new HashMap<>();
+	/*private*/Map<WorldRegion,Map<Subspecies,SubspeciesSpawnRarity>> regionSpecies = new HashMap<>();
+	/*private*/Map<WorldType,Map<Subspecies,SubspeciesSpawnRarity>> worldSpecies = new HashMap<>();
+	/*private*/Map<PlaceType,Map<Subspecies,SubspeciesSpawnRarity>> placeSpecies = new HashMap<>();
 
 	@Deprecated
-	static AbstractSubspecies getSubspeciesFromId(String id) {
+	static Subspecies getSubspeciesFromId(String id) {
 		return table.of(id);
 	}
 
@@ -5909,11 +5910,11 @@ public interface Subspecies {
 	}
 
 	@Deprecated
-	static String getIdFromSubspecies(AbstractSubspecies subspecies) {
-		return subspecies.id;
+	static String getIdFromSubspecies(Subspecies subspecies) {
+		return subspecies.getId();
 	}
 
-	Table<AbstractSubspecies> table = new Table<>(Subspecies::sanitize) {{
+	Table<Subspecies> table = new Table<>(Subspecies::sanitize) {{
 
 		// Modded subspecies:
 		forEachMod("/race","subspecies",null,(f,n,a)->{
@@ -5934,7 +5935,7 @@ public interface Subspecies {
 		// Hard-coded:
 		addFields(Subspecies.class,AbstractSubspecies.class,(k,v)->v.id=k);
 
-		for(AbstractSubspecies species : list()) {
+		for(var species : list()) {
 			
 			for(Entry<WorldRegion, SubspeciesSpawnRarity> type : species.getRegionLocations().entrySet()) {
 				regionSpecies.putIfAbsent(type.getKey(), new HashMap<>());
@@ -5955,17 +5956,17 @@ public interface Subspecies {
 
 	}};
 
-	static List<AbstractSubspecies> getAllSubspecies() {
+	static List<Subspecies> getAllSubspecies() {
 		return table.list().stream()
 		.sorted(Comparator.comparing(s->s.getRace().getName(false)))
 		.collect(Collectors.toList());
 	}
 
-	static Map<AbstractSubspecies, SubspeciesSpawnRarity> getWorldSpecies(WorldType worldType, PlaceType placeType, boolean onlyCoreRaceSpecies, AbstractSubspecies... subspeciesToExclude) {
+	static Map<Subspecies,SubspeciesSpawnRarity> getWorldSpecies(WorldType worldType, PlaceType placeType, boolean onlyCoreRaceSpecies, Subspecies... subspeciesToExclude) {
 		return getWorldSpecies(worldType, placeType, onlyCoreRaceSpecies, true, subspeciesToExclude);
 	}
 
-	static Map<AbstractSubspecies, SubspeciesSpawnRarity> getWorldSpecies(WorldType worldType, PlaceType placeType, boolean onlyCoreRaceSpecies, boolean includeRegionSpecies, AbstractSubspecies... subspeciesToExclude) {
+	static Map<Subspecies,SubspeciesSpawnRarity> getWorldSpecies(WorldType worldType, PlaceType placeType, boolean onlyCoreRaceSpecies, boolean includeRegionSpecies, Subspecies... subspeciesToExclude) {
 		return getWorldSpecies(worldType, placeType, onlyCoreRaceSpecies, includeRegionSpecies, Arrays.asList(subspeciesToExclude));
 	}
 	
@@ -5977,13 +5978,13 @@ public interface Subspecies {
 	 * @param subspeciesToExclude Any Subspecies that should be excluded from the returned map.
 	 * @return A weighted map of subspecies that can spawn in that world, region and/or place.
 	 */
-	static Map<AbstractSubspecies, SubspeciesSpawnRarity> getWorldSpecies(WorldType worldType, PlaceType placeType, boolean onlyCoreRaceSpecies, boolean includeRegionSpecies, List<AbstractSubspecies> subspeciesToExclude) {
+	static Map<Subspecies, SubspeciesSpawnRarity> getWorldSpecies(WorldType worldType, PlaceType placeType, boolean onlyCoreRaceSpecies, boolean includeRegionSpecies, List<Subspecies> subspeciesToExclude) {
 		worldSpecies.putIfAbsent(worldType, new HashMap<>());
 		regionSpecies.putIfAbsent(worldType.getWorldRegion(), new HashMap<>());
 		
-		Map<AbstractSubspecies, SubspeciesSpawnRarity> map = new HashMap<>(worldSpecies.get(worldType));
+		var map = new HashMap<>(worldSpecies.get(worldType));
 		if (includeRegionSpecies) {
-			for(Entry<AbstractSubspecies, SubspeciesSpawnRarity> regionEntry : regionSpecies.get(worldType.getWorldRegion()).entrySet()) {
+			for(var regionEntry : regionSpecies.get(worldType.getWorldRegion()).entrySet()) {
 				if(!map.containsKey(regionEntry.getKey())) {
 					map.put(regionEntry.getKey(), regionEntry.getValue());
 				}
@@ -5992,13 +5993,13 @@ public interface Subspecies {
 		if(placeType!=null) {
 			placeSpecies.putIfAbsent(placeType, new HashMap<>());
 			regionSpecies.putIfAbsent(placeType.getWorldRegion(), new HashMap<>());
-		    for(Entry<AbstractSubspecies, SubspeciesSpawnRarity> placeEntry : placeSpecies.get(placeType).entrySet()) {
+			for(var placeEntry : placeSpecies.get(placeType).entrySet()) {
 		        if(!map.containsKey(placeEntry.getKey())) {
 		            map.put(placeEntry.getKey(), placeEntry.getValue());
 		        }
 		    }
 			if (includeRegionSpecies && regionSpecies.get(placeType.getWorldRegion())!=null) {
-			    for(Entry<AbstractSubspecies, SubspeciesSpawnRarity> regionEntry : regionSpecies.get(placeType.getWorldRegion()).entrySet()) {
+				for(var regionEntry : regionSpecies.get(placeType.getWorldRegion()).entrySet()) {
 			        if(!map.containsKey(regionEntry.getKey())) {
 			            map.put(regionEntry.getKey(), regionEntry.getValue());
 			        }
@@ -6006,18 +6007,15 @@ public interface Subspecies {
 			}
 		}
 		
-		Map<AbstractSubspecies, SubspeciesSpawnRarity> filteredMap = new HashMap<>(map);
+		var filteredMap = new HashMap<>(map);
 		if(onlyCoreRaceSpecies) {
-			for(AbstractSubspecies sub : map.keySet()) {
+			for(var sub : map.keySet()) {
 				if(AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace())!=sub) {
 					filteredMap.remove(sub);
 				}
 			}
 		}
-
-		for(AbstractSubspecies sub : subspeciesToExclude) {
-			filteredMap.remove(sub);
-		}
+		filteredMap.keySet().removeAll(subspeciesToExclude);
 		
 		return filteredMap;
 	}
@@ -6026,8 +6024,8 @@ public interface Subspecies {
 	 * @param onlyCoreRaceSpecies true if only core Subspecies should be returned. (e.g. Cat-morph would be returned, but not Lion-morph, Tiger-morph, etc.)
 	 * @param subspeciesToExclude Any Subspecies that should be excluded from the returned map.
 	 */
-	static Map<AbstractSubspecies, SubspeciesSpawnRarity> getDominionStormImmuneSpecies(boolean onlyCoreRaceSpecies, AbstractSubspecies... subspeciesToExclude) {
-		Map<AbstractSubspecies, SubspeciesSpawnRarity> map = new HashMap<>();
+	static Map<Subspecies,SubspeciesSpawnRarity> getDominionStormImmuneSpecies(boolean onlyCoreRaceSpecies, Subspecies... subspeciesToExclude) {
+		var map = new HashMap<Subspecies,SubspeciesSpawnRarity>();
 		for(var s : table.list()) {
 			if(s.getRace()!=Race.DEMON
 					|| onlyCoreRaceSpecies && AbstractSubspecies.getMainSubspeciesOfRace(s.getRace())!=s
@@ -6043,7 +6041,7 @@ public interface Subspecies {
 		return map;
 	}
 
-	static List<AbstractSubspecies> getSubspeciesOfRace(AbstractRace race) {
+	static List<Subspecies> getSubspeciesOfRace(AbstractRace race) {
 		return table.list().stream()
 		.filter(s->race.equals(s.getRace()))
 		.sorted(Comparator.comparing(s->s.getName(null)))

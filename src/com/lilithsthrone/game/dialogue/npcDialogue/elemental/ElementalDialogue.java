@@ -8,7 +8,6 @@ import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.NPCFlagValue;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -342,8 +341,7 @@ public class ElementalDialogue {
 			}
 			
 			List<Response> responses = new ArrayList<>();
-			List<AbstractSubspecies> subspecies = new ArrayList<>();
-			subspecies.addAll(Subspecies.getAllSubspecies());
+			var subspecies = new ArrayList<>(Subspecies.getAllSubspecies());
 			subspecies.removeIf(s -> !s.getRace().isFeralPartsAvailable());
 			subspecies.removeIf(s -> s.getRace()==Race.DEMON || s.getRace()==Race.ELEMENTAL || s.getRace()==Race.SLIME);
 			subspecies.removeIf(s -> s.isNonBiped()); // Otherwise centaurs get added as well as horse-morphs
@@ -361,7 +359,7 @@ public class ElementalDialogue {
 				});
 			}
 			
-			for(AbstractSubspecies sub : subspecies) {
+			for(var sub : subspecies) {
 				String feralName = sub.getFeralName(getElemental().getBody());
 				if(getElemental().getPassiveForm()==sub) {
 					responses.add(new Response(Util.capitaliseSentence(feralName), "[el.Name] is already assuming the passive form of a small, feral "+feralName+"!", null));

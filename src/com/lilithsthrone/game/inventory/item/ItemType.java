@@ -2419,7 +2419,7 @@ public class ItemType {
 	private static List<AbstractItemType> essences = new ArrayList<>();
 	private static List<AbstractItemType> allItems = new ArrayList<>();
 	private static List<AbstractItemType> moddedItems = new ArrayList<>();
-	private static Map<AbstractSubspecies, String> subspeciesBookId = new HashMap<>();
+	private static Map<Subspecies,String> subspeciesBookId = new HashMap<>();
 	
 	/**
 	 * If you're looking for spell books, their id is:<br/>
@@ -2545,7 +2545,7 @@ public class ItemType {
 		return idToItemMap.get("SPELL_SCROLL_"+school);
 	}
 	
-	public static AbstractItemType getLoreBook(AbstractSubspecies subspecies) {
+	public static AbstractItemType getLoreBook(Subspecies subspecies) {
 		return idToItemMap.get(subspeciesBookId.get(subspecies));
 	}
 	
@@ -2947,20 +2947,20 @@ public class ItemType {
 		
 		// Race books:
 		
-		Map<String, List<AbstractSubspecies>> subspeciesLoreMap = new HashMap<>();
-		for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
+		var subspeciesLoreMap = new HashMap<String,List<Subspecies>>();
+		for(var sub : Subspecies.getAllSubspecies()) {
 			subspeciesLoreMap.putIfAbsent(sub.getAdvancedDescriptionId(), new ArrayList<>());
 			subspeciesLoreMap.get(sub.getAdvancedDescriptionId()).add(sub);
 		}
 		
 		// Add effects from here, as Subspecies and ItemEffectType are dependent on one another to be initialised.
-		for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
+		for(var sub : Subspecies.getAllSubspecies()) {
 			subspeciesLoreMap.putIfAbsent(sub.getAdvancedDescriptionId(), new ArrayList<>());
 			subspeciesLoreMap.get(sub.getAdvancedDescriptionId()).add(sub);
 		}
 		
-		for(Entry<String, List<AbstractSubspecies>> entry : subspeciesLoreMap.entrySet()) {
-			AbstractSubspecies mainSubspecies = entry.getValue().contains(AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace()))
+		for(var entry : subspeciesLoreMap.entrySet()) {
+			var mainSubspecies = entry.getValue().contains(AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace()))
 											?AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace())
 											:entry.getValue().get(0);
 			
@@ -2979,7 +2979,7 @@ public class ItemType {
 							Util.newArrayListOfValues(ItemTag.BOOK)) {
 				@Override
 				public List<ItemEffect> getEffects() {
-					AbstractSubspecies mainSubspecies = entry.getValue().contains(AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace()))
+					var mainSubspecies = entry.getValue().contains(AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace()))
 							?AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace())
 							:entry.getValue().get(0);
 					String id = "BOOK_READ_"+Subspecies.getIdFromSubspecies(mainSubspecies);
@@ -3027,7 +3027,7 @@ public class ItemType {
 			itemToIdMap.put(loreBook, id);
 			idToItemMap.put(id, loreBook);
 			
-			for(AbstractSubspecies subspecies : entry.getValue()) {
+			for(var subspecies : entry.getValue()) {
 				subspeciesBookId.put(subspecies, id);
 			}
 			
@@ -3160,7 +3160,7 @@ public class ItemType {
 		}
 	}
 	
-	private static AbstractItemEffectType generateBookEffect(AbstractSubspecies mainSubspecies, List<AbstractSubspecies> additionalUnlockSubspecies) {
+	private static AbstractItemEffectType generateBookEffect(Subspecies mainSubspecies, List<Subspecies> additionalUnlockSubspecies) {
 		return new AbstractItemEffectType(Util.newArrayListOfValues(
 				"Adds "+mainSubspecies.getName(null)+" encyclopedia entry.",
 				"[style.boldExcellent(+10)] <b style='color:"+mainSubspecies.getColour(null).toWebHexString()+";'>"+mainSubspecies.getDamageMultiplier().getName()+"</b>"),
@@ -3172,9 +3172,9 @@ public class ItemType {
 		};
 	}
 	
-	private static Map<AbstractSubspecies, String> essenceMap = new HashMap<>();
+	private static Map<Subspecies,String> essenceMap = new HashMap<>();
 	
-	private static String getEssenceSvg(AbstractSubspecies subspecies) {
+	private static String getEssenceSvg(Subspecies subspecies) {
 		if(essenceMap.containsKey(subspecies)) {
 			return essenceMap.get(subspecies);
 		}
@@ -3220,7 +3220,7 @@ public class ItemType {
 		return finalImage;
 	}
 
-	private static String getEssenceEffectSvg(AbstractSubspecies subspecies) {
+	private static String getEssenceEffectSvg(Subspecies subspecies) {
 		String background = "";
 		Colour colour = subspecies.getColour(null);
 		try {

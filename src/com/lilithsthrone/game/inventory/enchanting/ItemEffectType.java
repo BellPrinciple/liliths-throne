@@ -2137,7 +2137,7 @@ public class ItemEffectType {
 				return "<p style='text-align:center'>[style.italicsDisabled(This item does not work on non-slave unique characters...)]</p>";
 			}
 			
-			AbstractSubspecies sub = target.getBody().getFleshSubspecies();
+			var sub = target.getBody().getFleshSubspecies();
 			if(sub.getRace()!=Race.DEMON) {
 				target.setBody(Main.game.getCharacterUtils().generateHalfDemonBody(target, target.getGender(), sub, true), false);
 				return UtilText.parse(target, "<p style='text-align:center; color:"+PresetColour.RACE_DEMON.toWebHexString()+";'><i>[npc.Name] is now [npc.a_race]!</i></p>");
@@ -2526,7 +2526,7 @@ public class ItemEffectType {
 	}
 	
 	// set in ItemType
-	public static AbstractItemEffectType getBookEffectFromSubspecies(AbstractSubspecies subspecies) {
+	public static AbstractItemEffectType getBookEffectFromSubspecies(Subspecies subspecies) {
 		String id = Util.getClosestStringMatch("BOOK_READ_"+Subspecies.getIdFromSubspecies(subspecies), idToItemEffectTypeMap.keySet());
 		return idToItemEffectTypeMap.get(id);
 	}

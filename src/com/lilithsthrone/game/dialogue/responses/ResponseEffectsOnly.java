@@ -6,7 +6,7 @@ import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.fetishes.Fetish;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
+import com.lilithsthrone.game.character.race.Subspecies;
 
 /**
  * A Response class that does not progress to a new DialogueNode.<br/><br/>
@@ -29,7 +29,7 @@ public class ResponseEffectsOnly extends Response {
 			CorruptionLevel corruptionBypass,
 			List<AbstractPerk> perksRequired,
 			Femininity femininityRequired,
-			List<AbstractSubspecies> subspeciesRequired) {
+			List<Subspecies> subspeciesRequired) {
 		super(title,
 				tooltipText,
 				null,

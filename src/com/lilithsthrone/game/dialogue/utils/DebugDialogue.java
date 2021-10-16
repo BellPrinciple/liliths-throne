@@ -28,7 +28,6 @@ import com.lilithsthrone.game.character.npc.submission.SubmissionAttacker;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -650,7 +649,7 @@ public class DebugDialogue {
 							float spawn;
 							float spawnMasculine;
 							float spawnFeminine;
-							for (AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+							for(var s : Subspecies.getAllSubspecies()) {
 								if (Subspecies.getWorldSpecies(Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocationPlace().getPlaceType(), false).containsKey(s)) {
 									spawn = (1000 * Subspecies.getWorldSpecies(Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocationPlace().getPlaceType(), false).get(s).getChanceMultiplier());
 									spawnTotalMasculine += (spawn * Main.getProperties().getSubspeciesMasculinePreferencesMap().get(s).getValue());
@@ -659,7 +658,7 @@ public class DebugDialogue {
 								}
 							}
 							boolean even = false;
-							for (AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+							for(var s : Subspecies.getAllSubspecies()) {
 								if (Subspecies.getWorldSpecies(Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocationPlace().getPlaceType(), false).containsKey(s)) {
 									spawn = (1000 * Subspecies.getWorldSpecies(Main.game.getPlayer().getWorldLocation(), Main.game.getPlayer().getLocationPlace().getPlaceType(), false).get(s).getChanceMultiplier());
 									spawnMasculine = (spawn * Main.getProperties().getSubspeciesMasculinePreferencesMap().get(s).getValue());
@@ -1250,7 +1249,7 @@ public class DebugDialogue {
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			List<AbstractSubspecies> availableSubspecies = new ArrayList<>(Subspecies.getAllSubspecies());
+			var availableSubspecies = new ArrayList<>(Subspecies.getAllSubspecies());
 			availableSubspecies.removeIf(s->
 					s.getRace()==Race.ELEMENTAL
 //					|| s==Subspecies.LILIN
@@ -1259,7 +1258,7 @@ public class DebugDialogue {
 					);
 			
 			if (index!=0 && index<availableSubspecies.size()+1) {
-				AbstractSubspecies subspecies = availableSubspecies.get(index - 1);
+				var subspecies = availableSubspecies.get(index - 1);
 				String name = subspecies.getName(null);
 				
 				return new ResponseEffectsOnly(
@@ -1331,7 +1330,7 @@ public class DebugDialogue {
 					+ "</p>"
 					+ "<p>"
 					+ "<b>IDs:</b><br/>");
-			for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
+			for(var sub : Subspecies.getAllSubspecies()) {
 				sb.append("<span style='color:"+sub.getColour(Main.game.getPlayer()).toWebHexString()+";'>"+Util.capitaliseSentence(sub.getName(Main.game.getPlayer().getBody()))+"</span>: "+Subspecies.getIdFromSubspecies(sub));
 				sb.append("</br>");
 			}
@@ -1360,12 +1359,11 @@ public class DebugDialogue {
 		
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			List<AbstractSubspecies> availableSubspecies = new ArrayList<>();
-			availableSubspecies.addAll(Subspecies.getAllSubspecies());
+			var availableSubspecies = new ArrayList<>(Subspecies.getAllSubspecies());
 			availableSubspecies.removeIf(s->s.getRace()==Race.ELEMENTAL);
 			
 			if (index!=0 && index<availableSubspecies.size()+1) {
-				AbstractSubspecies subspecies = availableSubspecies.get(index - 1);
+				var subspecies = availableSubspecies.get(index - 1);
 				String name = subspecies.getName(null);
 				
 				return new Response(

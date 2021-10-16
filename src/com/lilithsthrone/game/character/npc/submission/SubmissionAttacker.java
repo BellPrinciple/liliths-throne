@@ -79,9 +79,9 @@ public class SubmissionAttacker extends NPC {
 			
 			int slimeChance = Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slimeQueenHelped) && Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_SLIME_QUEEN) ? 2000 : 800;
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
-				Map<AbstractSubspecies, SubspeciesSpawnRarity> worldSpeciesMap = Subspecies.getWorldSpecies(WorldType.SUBMISSION, PlaceType.SUBMISSION_TUNNELS, false);
+			var availableRaces = new HashMap<Subspecies,Integer>();
+			for(var s : Subspecies.getAllSubspecies()) {
+				var worldSpeciesMap = Subspecies.getWorldSpecies(WorldType.SUBMISSION, PlaceType.SUBMISSION_TUNNELS, false);
 				if(s==Subspecies.SLIME) {
 					AbstractSubspecies.addToSubspeciesMap(slimeChance, gender, s, availableRaces, SubspeciesPreference.FOUR_ABUNDANT);
 					
@@ -94,7 +94,7 @@ public class SubmissionAttacker extends NPC {
 				}
 			}
 
-			AbstractSubspecies randomSpecies = Util.getRandomObjectFromWeightedMap(availableRaces);
+			var randomSpecies = Util.getRandomObjectFromWeightedMap(availableRaces);
 			if(randomSpecies==Subspecies.SLIME || randomSpecies==Subspecies.IMP || randomSpecies==Subspecies.IMP_ALPHA) {
 				this.setBody(gender, randomSpecies, RaceStage.GREATER, true);
 				

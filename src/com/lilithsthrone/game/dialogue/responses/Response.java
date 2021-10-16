@@ -14,7 +14,6 @@ import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.dialogue.DialogueManager;
@@ -47,7 +46,7 @@ public class Response {
 	protected CorruptionLevel corruptionBypass;
 	private List<AbstractPerk> perksRequired;
 	private Femininity femininityRequired;
-	private List<AbstractSubspecies> subspeciesRequired;
+	private List<Subspecies> subspeciesRequired;
 
 	private AbstractCombatMove combatMove;
 	
@@ -99,7 +98,7 @@ public class Response {
 			CorruptionLevel corruptionBypass,
 			List<AbstractPerk> perksRequired,
 			Femininity femininityRequired,
-			List<AbstractSubspecies> subspeciesRequired) {
+			List<Subspecies> subspeciesRequired) {
 		this(title, tooltipText, nextDialogue,
 				fetishesForUnlock, corruptionBypass,
 				perksRequired, femininityRequired, subspeciesRequired,
@@ -113,7 +112,7 @@ public class Response {
 			CorruptionLevel corruptionBypass,
 			List<AbstractPerk> perksRequired,
 			Femininity femininityRequired,
-			List<AbstractSubspecies> subspeciesRequired,
+			List<Subspecies> subspeciesRequired,
 			SexActionType sexActionType,
 			GameCharacter characterPenetrating,
 			Collection<SexAreaInterface> sexAreaAccessRequiredForPerformer,
@@ -587,7 +586,7 @@ public class Response {
 			}
 
 			SB.append(" (Subspecies): ");
-			for(AbstractSubspecies subspecies : getSubspeciesRequired()) {
+			for(var subspecies : getSubspeciesRequired()) {
 				SB.append("<span style='color:"+subspecies.getColour(Main.game.getPlayer()).toWebHexString()+";'>"+Util.capitaliseSentence(subspecies.getName(Main.game.getPlayer().getBody()))+"</span>");
 			}
 		}
@@ -1010,7 +1009,7 @@ public class Response {
 		return femininityRequired;
 	}
 
-	public List<AbstractSubspecies> getSubspeciesRequired() {
+	public List<Subspecies> getSubspeciesRequired() {
 		if(fromExternalFile && subspeciesRequired==null && subspeciesRequiredId!=null && !subspeciesRequiredId.isEmpty()) {
 			subspeciesRequired = new ArrayList<>();
 			for(String subspeciesId : subspeciesRequiredId) {

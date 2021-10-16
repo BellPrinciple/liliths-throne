@@ -73,14 +73,14 @@ public class NPCOffspring extends NPC {
 
 		// Set random level from 1 to 3:
 		setLevel(Util.random.nextInt(3) + 1);
-		
+
 		setSexualOrientation(RacialBody.valueOfRace(this.getRace()).getSexualOrientation(getGender()));
-		
+
 		if(os.getMother()!=null) {
 			this.setMother(os.getMother());
 			this.setAffection(os.getMother(), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
 		}
-		
+
 		if(os.getFather()!=null) {
 			this.setFather(os.getFather());
 			this.setAffection(os.getFather(), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
@@ -100,7 +100,7 @@ public class NPCOffspring extends NPC {
 		// ADDING FETISHES:
 		
 		Main.game.getCharacterUtils().addFetishes(this);
-		
+
 		// BODY RANDOMISATION:
 		
 		Main.game.getCharacterUtils().randomiseBody(this, false);
@@ -113,11 +113,11 @@ public class NPCOffspring extends NPC {
 		inventory.setMoney(10 + Util.random.nextInt(getLevel()*10) + 1);
 		
 		Main.game.getCharacterUtils().applyMakeup(this, true);
-		
+
 		initHealthAndManaToMax();
-		
+
 		this.setEnslavementDialogue(SlaveDialogue.DEFAULT_ENSLAVEMENT_DIALOGUE, true);
-		
+
 		String npcId = Main.game.safeAddNPC(this, false);
 		if(os.getMother()!=null) {
 			os.getMother().swapLitters(os.getId(), npcId);
@@ -131,7 +131,7 @@ public class NPCOffspring extends NPC {
 		Main.game.getOffspring().add(this);
 		Main.game.removeOffspringSeed(os);
 	}
-	
+
 	@Override
 	public void loadFromXML(Element parentElement, Document doc, CharacterImportSetting... settings) {
 		loadNPCVariablesFromXML(this, null, parentElement, doc, settings);

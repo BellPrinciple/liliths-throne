@@ -136,7 +136,7 @@ public class Body implements XMLSaving {
 	private Leg leg;
 	private Torso torso;
 	private BodyMaterial bodyMaterial;
-	protected AbstractSubspecies fleshSubspecies;
+	protected Subspecies fleshSubspecies;
 
 	// Optional:
 	private Antenna antenna;
@@ -156,11 +156,11 @@ public class Body implements XMLSaving {
 	private boolean feral;
 	
 	private Map<AbstractRace, Integer> raceWeightMap = new ConcurrentHashMap<>();
-	private AbstractSubspecies subspecies;
+	private Subspecies subspecies;
 	private RaceStage raceStage;
 	private boolean piercedStomach = false;
-	private AbstractSubspecies subspeciesOverride = null;
-	private AbstractSubspecies halfDemonSubspecies = null;
+	private Subspecies subspeciesOverride;
+	private Subspecies halfDemonSubspecies;
 	private int height;
 	private int femininity;
 	private int bodySize;
@@ -863,7 +863,7 @@ public class Body implements XMLSaving {
 			feralBody = Boolean.valueOf(element.getAttribute("feral"));
 		}
 		
-		AbstractSubspecies importedSubspeciesOverride = null;
+		Subspecies importedSubspeciesOverride = null;
 		try {
 			if(element.getAttribute("subspeciesOverride") != null && !element.getAttribute("subspeciesOverride").isEmpty()) {
 				importedSubspeciesOverride = Subspecies.getSubspeciesFromId(element.getAttribute("subspeciesOverride"));
@@ -3439,7 +3439,7 @@ public class Body implements XMLSaving {
 		return subspecies.getRace();
 	}
 	
-	public AbstractSubspecies getSubspecies() {
+	public Subspecies getSubspecies() {
 		return subspecies;
 	}
 	
@@ -3447,15 +3447,15 @@ public class Body implements XMLSaving {
 		return raceStage;
 	}
 
-	public AbstractSubspecies getSubspeciesOverride() {
+	public Subspecies getSubspeciesOverride() {
 		return subspeciesOverride;
 	}
 
-	public void setSubspeciesOverride(AbstractSubspecies subspeciesOverride) {
+	public void setSubspeciesOverride(Subspecies subspeciesOverride) {
 		this.subspeciesOverride = subspeciesOverride;
 	}
 
-	public AbstractSubspecies getHalfDemonSubspecies() {
+	public Subspecies getHalfDemonSubspecies() {
 		if (halfDemonSubspecies == null) {
 			halfDemonSubspecies = AbstractSubspecies.getSubspeciesFromBody(this, getRaceFromPartWeighting(true));
 		}
@@ -6279,9 +6279,9 @@ public class Body implements XMLSaving {
 	}
 	
 	/**
-	 * @param subspecies Pass in the AbstractSubspecies to which this character should be transformed into a feral version of. Pass in null to transform back from feral to a standard anthro.
+	 * @param subspecies Pass in the Subspecies to which this character should be transformed into a feral version of. Pass in null to transform back from feral to a standard anthro.
 	 */
-	public void setFeral(AbstractSubspecies subspecies) {
+	public void setFeral(Subspecies subspecies) {
 		this.feral = subspecies!=null;
 		
 		FeralAttributes attributes = subspecies==null?null:subspecies.getFeralAttributes();
@@ -6630,14 +6630,14 @@ public class Body implements XMLSaving {
 	 * @return The subspecies which this character appears to be if they were made of flesh.
 	 *  Use getTrueSubspecies() or do some checks with getSubspeciesOverride() to get their true Subspecies, but for 99.9% of the time, that won't be necessary and this method is fine to use.
 	 */
-	public AbstractSubspecies getFleshSubspecies() {
+	public Subspecies getFleshSubspecies() {
 		if(fleshSubspecies==null) {
 			fleshSubspecies = AbstractSubspecies.getSubspeciesFromBody(this, this.getRaceFromPartWeighting());
 		}
 		return fleshSubspecies;
 	}
 
-	public void setFleshSubspecies(AbstractSubspecies fleshSubspecies) {
+	public void setFleshSubspecies(Subspecies fleshSubspecies) {
 		this.fleshSubspecies = fleshSubspecies;
 	}
 

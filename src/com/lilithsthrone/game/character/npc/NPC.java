@@ -67,7 +67,6 @@ import com.lilithsthrone.game.character.npc.misc.PrologueMale;
 import com.lilithsthrone.game.character.persona.NameTriplet;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.race.AbstractRacialBody;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
@@ -131,7 +130,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 	protected Set<SexSlot> sexPositionPreferences;
 	
 	protected Gender genderPreference = null;
-	protected AbstractSubspecies subspeciesPreference = null;
+	protected Subspecies subspeciesPreference = null;
 	protected RaceStage raceStagePreference = null;
 	
 	protected NPC(boolean isImported,
@@ -143,7 +142,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			int birthDay,
 			int level,
 			Gender startingGender,
-			AbstractSubspecies startingSubspecies,
+			Subspecies startingSubspecies,
 			RaceStage stage,
 			CharacterInventory inventory,
 			WorldType worldLocation,
@@ -1292,7 +1291,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		return genderPreference;
 	}
 	
-	public AbstractSubspecies getSubspeciesPreference() {
+	public Subspecies getSubspeciesPreference() {
 		if(subspeciesPreference == null) {
 			generatePartnerPreferences();
 		}
@@ -1339,10 +1338,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		}
 		
 		if(Main.getProperties().getForcedTFPreference() != FurryPreference.HUMAN) {
-			AbstractSubspecies transformationItemSubspecies = cannotTransformPreference
-																	?target.getSubspecies()
-																	:getSubspeciesPreference();
-					
+			var transformationItemSubspecies = cannotTransformPreference?target.getSubspecies():getSubspeciesPreference();
 			itemType = transformationItemSubspecies.getTransformativeItem(this);
 			if(itemType==null || transformationItemSubspecies==Subspecies.SLIME) {
 				itemType = ItemType.getItemTypeFromId("innoxia_race_human_bread_roll");
@@ -2023,7 +2019,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		
 		// Preferred race:
 		
-		AbstractSubspecies species = getSubspecies();
+		var species = getSubspecies();
 		RaceStage stage = getRaceStage();
 		
 		if(Main.getProperties().getForcedTFPreference()==FurryPreference.HUMAN) {
@@ -2036,26 +2032,24 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 				species = Subspecies.HARPY;
 			}
 			if((getRace()==Race.WOLF_MORPH || getRace()==Race.DOG_MORPH) && Math.random()>0.8f) {
-				List<AbstractSubspecies> availableRaces = new ArrayList<>();
-				availableRaces.add(Subspecies.CAT_MORPH);
-				availableRaces.add(Subspecies.HARPY);
-				availableRaces.add(Subspecies.COW_MORPH);
-				availableRaces.add(Subspecies.SQUIRREL_MORPH);
-				species = availableRaces.get(Util.random.nextInt(availableRaces.size()));
+				species = Util.randomItemFromValues(
+					Subspecies.CAT_MORPH,
+					Subspecies.HARPY,
+					Subspecies.COW_MORPH,
+					Subspecies.SQUIRREL_MORPH);
 			}
 			
 			// Chance for race to be random:
 			if(Math.random() <= Main.getProperties().getRandomRacePercentage()) {
-				List<AbstractSubspecies> availableRaces = new ArrayList<>();
-				availableRaces.add(Subspecies.CAT_MORPH);
-				availableRaces.add(Subspecies.DOG_MORPH);
-				availableRaces.add(Subspecies.HARPY);
-				availableRaces.add(Subspecies.HORSE_MORPH);
-				availableRaces.add(Subspecies.HUMAN);
-				availableRaces.add(Subspecies.SQUIRREL_MORPH);
-				availableRaces.add(Subspecies.COW_MORPH);
-				availableRaces.add(Subspecies.WOLF_MORPH);
-				species = availableRaces.get(Util.random.nextInt(availableRaces.size()));
+				species = Util.randomItemFromValues(
+					Subspecies.CAT_MORPH,
+					Subspecies.DOG_MORPH,
+					Subspecies.HARPY,
+					Subspecies.HORSE_MORPH,
+					Subspecies.HUMAN,
+					Subspecies.SQUIRREL_MORPH,
+					Subspecies.COW_MORPH,
+					Subspecies.WOLF_MORPH);
 			}
 			
 			// Preferred race stage:

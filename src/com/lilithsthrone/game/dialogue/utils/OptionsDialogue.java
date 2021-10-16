@@ -29,7 +29,6 @@ import com.lilithsthrone.game.character.gender.PronounType;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.persona.SexualOrientationPreference;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesPreference;
@@ -1840,7 +1839,7 @@ public class OptionsDialogue {
 											+ "</div>");
 
 			int i=0;
-			for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+			for(var subspecies : Subspecies.getAllSubspecies()) {
 				if(subspecies.isDisplayedInFurryPreferences()) {
 					UtilText.nodeContentSB.append(getSubspeciesPreferencesPanel(subspecies, i%2==0));
 					i++;
@@ -1865,7 +1864,7 @@ public class OptionsDialogue {
 				return new Response("Defaults", "Reset all furry and spawn preferences to their default settings.", FURRY_PREFERENCE) {
 					@Override
 					public void effects() {
-						for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+						for(var subspecies : Subspecies.getAllSubspecies()) {
 							Main.getProperties().setFeminineFurryPreference(subspecies, subspecies.getDefaultFemininePreference());
 							Main.getProperties().setMasculineFurryPreference(subspecies, subspecies.getDefaultMasculinePreference());
 
@@ -1927,7 +1926,7 @@ public class OptionsDialogue {
 		}
 	}
 	
-	private static String getSubspeciesPreferencesPanel(AbstractSubspecies s, boolean altColour) {
+	private static String getSubspeciesPreferencesPanel(Subspecies s, boolean altColour) {
 		StringBuilder sb = new StringBuilder();
 		String baseStyle = "max-width:30px; width:14%; margin:0 1%; padding:0;";
 		String subspeciesId = Subspecies.getIdFromSubspecies(s);

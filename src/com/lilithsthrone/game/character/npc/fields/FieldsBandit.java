@@ -4,7 +4,6 @@ import java.time.Month;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -67,9 +66,9 @@ public class FieldsBandit extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
+			var availableRaces = new HashMap<Subspecies,Integer>();
 			var placeType = Main.game.getPlayer().getLocationPlace().getPlaceType();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			for(var s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}

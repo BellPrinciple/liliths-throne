@@ -196,7 +196,6 @@ import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.AbstractRacialBody;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FeralAttributes;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Race;
@@ -358,7 +357,7 @@ public abstract class GameCharacter implements XMLSaving {
 	protected Map<CoverableArea, Set<String>> areasKnownByCharactersMap;
 	protected Map<SexAreaOrifice, List<FluidStored>> fluidsStoredMap;
 
-	
+
 	// Inventory:
 	protected CharacterInventory inventory;
 	private List<Outfit> savedOutfits;
@@ -415,15 +414,15 @@ public abstract class GameCharacter implements XMLSaving {
 	// Used as a backup for when motherId is pointing to a null NPC:
 	protected String motherName = "???";
 	protected Femininity motherFemininity = Femininity.FEMININE;
-	protected AbstractSubspecies motherSubspecies = Subspecies.HUMAN;
+	protected Subspecies motherSubspecies = Subspecies.HUMAN;
 	 // Used as a backup for when fatherId is pointing to a null NPC:
 	protected String fatherName = "???";
 	protected Femininity fatherFemininity = Femininity.MASCULINE;
-	protected AbstractSubspecies fatherSubspecies = Subspecies.HUMAN;
+	protected Subspecies fatherSubspecies = Subspecies.HUMAN;
 	 // Used as a backup for when incubatorId is pointing to a null NPC:
 	protected String incubatorName = "???";
 	protected Femininity incubatorFemininity = Femininity.ANDROGYNOUS;
-	protected AbstractSubspecies incubatorSubspecies = Subspecies.HUMAN;
+	protected Subspecies incubatorSubspecies = Subspecies.HUMAN;
 	
 	
 	// Slavery:
@@ -520,7 +519,7 @@ public abstract class GameCharacter implements XMLSaving {
 			int level,
 			LocalDateTime birthday,
 			Gender startingGender,
-			AbstractSubspecies startingSubspecies,
+			Subspecies startingSubspecies,
 			RaceStage stage,
 			CharacterInventory inventory,
 			WorldType worldLocation,
@@ -3852,7 +3851,7 @@ public abstract class GameCharacter implements XMLSaving {
 		postTransformationCalculation();
 	}
 	
-	public void setBody(Gender startingGender, AbstractSubspecies startingSpeciesType, RaceStage stage, boolean additionalSetups) {
+	public void setBody(Gender startingGender, Subspecies startingSpeciesType, RaceStage stage, boolean additionalSetups) {
 		body = Main.game.getCharacterUtils().generateBody(this, startingGender, startingSpeciesType, stage);
 		
 		if(additionalSetups) {
@@ -3862,7 +3861,7 @@ public abstract class GameCharacter implements XMLSaving {
 		postTransformationCalculation();
 	}
 	
-	protected void additionalBodySetup(Gender gender, AbstractRacialBody startingRace, AbstractSubspecies startingSpeciesType) {
+	protected void additionalBodySetup(Gender gender, AbstractRacialBody startingRace, Subspecies startingSpeciesType) {
 		if(this.surname==null || this.surname.isEmpty()) {
 			this.surname = Name.getSurname(this);
 		}
@@ -3905,7 +3904,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 * @param subspeciesMap
 	 * @param additionalSetups true if personality, sexual orientation
 	 */
-	public void setBodyFromSubspeciesPreference(Gender gender, Map<AbstractSubspecies, Integer> subspeciesMap, boolean additionalSetups, boolean includeHumanChance) {
+	public void setBodyFromSubspeciesPreference(Gender gender, Map<Subspecies,Integer> subspeciesMap, boolean additionalSetups, boolean includeHumanChance) {
 		double humanChance = 0;
 		
 		subspeciesMap.remove(Subspecies.HUMAN);
@@ -3915,13 +3914,13 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 		
 		if(gender.isFeminine()) {
-			for(Entry<AbstractSubspecies, FurryPreference> entry : Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().entrySet()) {
+			for(var entry : Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().entrySet()) {
 				if(entry.getValue() == FurryPreference.HUMAN) {
 					subspeciesMap.remove(entry.getKey());
 				}
 			}
 		} else {
-			for(Entry<AbstractSubspecies, FurryPreference> entry : Main.getProperties().getSubspeciesMasculineFurryPreferencesMap().entrySet()) {
+			for(var entry : Main.getProperties().getSubspeciesMasculineFurryPreferencesMap().entrySet()) {
 				if(entry.getValue() == FurryPreference.HUMAN) {
 					subspeciesMap.remove(entry.getKey());
 				}
@@ -3937,7 +3936,7 @@ public abstract class GameCharacter implements XMLSaving {
 			setBody(gender, RacialBody.HUMAN, RaceStage.HUMAN, additionalSetups);
 			
 		} else {
-			AbstractSubspecies species = Util.getRandomObjectFromWeightedMap(subspeciesMap);
+			var species = Util.getRandomObjectFromWeightedMap(subspeciesMap);
 			
 			if(gender.isFeminine()) {
 				RaceStage stage = Main.game.getCharacterUtils().getRaceStageFromPreferences(Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().get(species), gender, species);
@@ -5640,7 +5639,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return motherFemininity;
 	}
 
-	public AbstractSubspecies getMotherSubspecies() {
+	public Subspecies getMotherSubspecies() {
 		return motherSubspecies;
 	}
 	
@@ -5679,7 +5678,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return fatherFemininity;
 	}
 
-	public AbstractSubspecies getFatherSubspecies() {
+	public Subspecies getFatherSubspecies() {
 		return fatherSubspecies;
 	}
 	
@@ -5721,7 +5720,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return incubatorFemininity;
 	}
 
-	public AbstractSubspecies getIncubatorSubspecies() {
+	public Subspecies getIncubatorSubspecies() {
 		return incubatorSubspecies;
 	}
 	
@@ -7899,8 +7898,8 @@ public abstract class GameCharacter implements XMLSaving {
 	public String calculateGenericSexEffects(boolean isDom,
 			boolean includesOrgasm,
 			GameCharacter partner,
-			AbstractSubspecies subspeciesBackup,
-			AbstractSubspecies halfDemonSubspeciesBackup,
+			Subspecies subspeciesBackup,
+			Subspecies halfDemonSubspeciesBackup,
 			SexParticipantType asParticipant,
 			SexAreaInterface performingSexArea,
 			SexAreaInterface targetedSexArea,
@@ -7918,7 +7917,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 * @param flagsInput Any applicable flags to be taken into account.
 	 * @return A description of the sex that took place.
 	 */
-	public String calculateGenericSexEffects(boolean isDom, boolean includesOrgasm, GameCharacter partner, AbstractSubspecies subspeciesBackup, AbstractSubspecies halfDemonSubspeciesBackup, SexType sexType, GenericSexFlag... flagsInput) {
+	public String calculateGenericSexEffects(boolean isDom, boolean includesOrgasm, GameCharacter partner, Subspecies subspeciesBackup, Subspecies halfDemonSubspeciesBackup, SexType sexType, GenericSexFlag... flagsInput) {
 		List<GenericSexFlag> flags = Arrays.asList(flagsInput);
 		StringBuilder sexDescriptionSB = new StringBuilder();
 		String stretchDescription = "";
@@ -17974,7 +17973,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return ingestFluid(charactersFluid, charactersFluid.getSubspecies(), charactersFluid.getHalfDemonSubspecies(), fluid, orificeIngestedThrough, millilitres);
 	}
 
-	public String ingestFluid(GameCharacter charactersFluid, AbstractSubspecies subspecies, AbstractSubspecies halfDemonSubspecies, AbstractFluidType fluidType, SexAreaOrifice orificeIngestedThrough, float millilitres) {
+	public String ingestFluid(GameCharacter charactersFluid, Subspecies subspecies, Subspecies halfDemonSubspecies, AbstractFluidType fluidType, SexAreaOrifice orificeIngestedThrough, float millilitres) {
 		FluidInterface fluid = null;
 		switch(fluidType.getBaseType()) {
 			case CUM:
@@ -17996,7 +17995,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 * @param addictive Is this fluid addictive or not.
 	 * @return A <b>formatted paragraph</b> description of addiction increasing/satisfied, or an empty String if no addictive effects occur.
 	 */
-	public String ingestFluid(GameCharacter charactersFluid, AbstractSubspecies subspecies, AbstractSubspecies halfDemonSubspecies, FluidInterface fluid, SexAreaOrifice orificeIngestedThrough, float millilitres) {
+	public String ingestFluid(GameCharacter charactersFluid, Subspecies subspecies, Subspecies halfDemonSubspecies, FluidInterface fluid, SexAreaOrifice orificeIngestedThrough, float millilitres) {
 		StringBuilder fluidIngestionSB = new StringBuilder();
 		
 		List<FluidModifier> modifiers = fluid.getFluidModifiers();
@@ -19668,7 +19667,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 * @param directSexInsemination true if this method is calculated from someone directly cumming inside this character, as opposed to ingesting cum from a container.
 	 * @return
 	 */
-	public String rollForPregnancy(AbstractSubspecies partnerSubspecies, AbstractSubspecies partnerHalfDemonSubspecies, float cumQuantity, boolean directSexInsemination) {
+	public String rollForPregnancy(Subspecies partnerSubspecies, Subspecies partnerHalfDemonSubspecies, float cumQuantity, boolean directSexInsemination) {
 		if(partnerSubspecies.getRace()==Race.ELEMENTAL) {
 			return PregnancyDescriptor.NO_CHANCE.getDescriptor(this, null, directSexInsemination)
 					+"<p style='text-align:center;'>[style.italicsMinorBad(Elementals cannot impregnate anyone!)]<br/>[style.italicsDisabled(I will add support for impregnating/being impregnated by elementals later on!)]</p>";
@@ -23766,9 +23765,9 @@ public abstract class GameCharacter implements XMLSaving {
 	
 	/**
 	 * As feral transformations should be a special event, there is no associated generic transformation text.
-	 * @param feralAttributes Pass in the AbstractSubspecies to which this character should be transformed into a feral version of. Pass in null to transform back from feral to a standard anthro.
+	 * @param feralAttributes Pass in the Subspecies to which this character should be transformed into a feral version of. Pass in null to transform back from feral to a standard anthro.
 	 */
-	public void setFeral(AbstractSubspecies subspecies) {
+	public void setFeral(Subspecies subspecies) {
 		if(!subspecies.getFeralAttributes().isBreastsPresent()
 				&& this.hasIncubationLitter(SexAreaOrifice.NIPPLE)) {
 			this.endIncubationPregnancy(SexAreaOrifice.NIPPLE, true);
@@ -23821,7 +23820,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return att;
 	}
 	
-	public AbstractSubspecies getSubspeciesOverride() {
+	public Subspecies getSubspeciesOverride() {
 		try {
 			return body.getSubspeciesOverride();
 		} catch(Exception ex) {
@@ -23837,11 +23836,11 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 	}
 	
-	public void setSubspeciesOverride(AbstractSubspecies subspeciesOverride) {
+	public void setSubspeciesOverride(Subspecies subspeciesOverride) {
 		body.setSubspeciesOverride(subspeciesOverride);
 	}
 
-	public AbstractSubspecies getHalfDemonSubspecies() {
+	public Subspecies getHalfDemonSubspecies() {
 		return body.getHalfDemonSubspecies();
 	}
 	
@@ -24579,7 +24578,7 @@ public abstract class GameCharacter implements XMLSaving {
 	/**
 	 * @return The subspecies which this character appears to be. Use getTrueSubspecies() or do some checks with getSubspeciesOverride() to get their true Subspecies, but for 99.9% of the time, that won't be necessary and this method is fine to use.
 	 */
-	public AbstractSubspecies getSubspecies() {
+	public Subspecies getSubspecies() {
 		return body.getSubspecies();
 	}
 
@@ -24587,7 +24586,7 @@ public abstract class GameCharacter implements XMLSaving {
 	/**
 	 * @return This character's true subspecies. If this character does not have a subspecies override, this will be the same as getSubspecies(). If they do have an override, however, it will return that override.
 	 */
-	public AbstractSubspecies getTrueSubspecies() {
+	public Subspecies getTrueSubspecies() {
 		if(this.getSubspeciesOverride()!=null) {
 			return this.getSubspeciesOverride();
 		}

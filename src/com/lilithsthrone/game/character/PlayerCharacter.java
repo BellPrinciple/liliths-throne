@@ -115,19 +115,19 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	private List<String> charactersEncountered;
 	private Set<WorldType> worldsVisited;
 	
-	private Set<AbstractSubspecies> racesDiscoveredFromBook;
+	private Set<Subspecies> racesDiscoveredFromBook;
 	
 	private Set<AbstractItemType> itemsDiscovered;
 	private Set<AbstractWeaponType> weaponsDiscovered;
 	private Set<AbstractClothingType> clothingDiscovered;
-	private Set<AbstractSubspecies> subspeciesDiscovered;
-	private Set<AbstractSubspecies> subspeciesAdvancedKnowledge;
+	private Set<Subspecies> subspeciesDiscovered;
+	private Set<Subspecies> subspeciesAdvancedKnowledge;
 	
 	// Trader buy-back:
 	private SizedStack<ShopTransaction> buybackStack;
 
 	
-	public PlayerCharacter(NameTriplet nameTriplet, int level, LocalDateTime birthday, Gender gender, AbstractSubspecies startingSubspecies, RaceStage stage, WorldType startingWorld, PlaceType startingPlace) {
+	public PlayerCharacter(NameTriplet nameTriplet, int level, LocalDateTime birthday, Gender gender, Subspecies startingSubspecies, RaceStage stage, WorldType startingWorld, PlaceType startingPlace) {
 		super(nameTriplet, "", "", level, Main.game.getDateNow().minusYears(22), gender, startingSubspecies, stage, new CharacterInventory(0), startingWorld, startingPlace);
 
 		this.setSexualOrientation(SexualOrientation.AMBIPHILIC);
@@ -193,7 +193,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		
 		Element innerElement = doc.createElement("raceBooksDiscovered");
 		playerSpecific.appendChild(innerElement);
-		for(AbstractSubspecies subspecies : racesDiscoveredFromBook) {
+		for(var subspecies : racesDiscoveredFromBook) {
 			if(subspecies != null) {
 				Element e = doc.createElement("race");
 				innerElement.appendChild(e);
@@ -290,7 +290,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		
 		Element racesDiscovered = doc.createElement("racesDiscovered");
 		playerSpecific.appendChild(racesDiscovered);
-		for(AbstractSubspecies subspecies : this.subspeciesDiscovered) {
+		for(var subspecies : this.subspeciesDiscovered) {
 			if(!this.subspeciesAdvancedKnowledge.contains(subspecies)) {
 				Element element = doc.createElement("race");
 				racesDiscovered.appendChild(element);
@@ -299,7 +299,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		}
 		Element racesDiscoveredAdvanced = doc.createElement("racesDiscoveredAdvanced");
 		playerSpecific.appendChild(racesDiscoveredAdvanced);
-		for(AbstractSubspecies subspecies : this.subspeciesAdvancedKnowledge) {
+		for(var subspecies : this.subspeciesAdvancedKnowledge) {
 			Element element = doc.createElement("race");
 			racesDiscoveredAdvanced.appendChild(element);
 			element.setTextContent(Subspecies.getIdFromSubspecies(subspecies));
@@ -1221,11 +1221,11 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	
 	// Discoveries:
 	
-	public boolean addRaceDiscoveredFromBook(AbstractSubspecies subspecies) {
+	public boolean addRaceDiscoveredFromBook(Subspecies subspecies) {
 		return racesDiscoveredFromBook.add(subspecies);
 	}
 	
-	public Set<AbstractSubspecies> getRacesDiscoveredFromBook() {
+	public Set<Subspecies> getRacesDiscoveredFromBook() {
 		return racesDiscoveredFromBook;
 	}
 
@@ -1280,12 +1280,12 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	}
 
 	/** <b>You should be using the Properties class to add this!</b> */
-	public boolean addRaceDiscovered(AbstractSubspecies subspecies) {
+	public boolean addRaceDiscovered(Subspecies subspecies) {
 		return subspeciesDiscovered.add(subspecies);
 	}
 
 	/** <b>You should be using the Properties class to access this!</b> */
-	public boolean isRaceDiscovered(AbstractSubspecies subspecies) {
+	public boolean isRaceDiscovered(Subspecies subspecies) {
 		return subspeciesDiscovered.contains(subspecies);
 	}
 
@@ -1295,17 +1295,17 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	}
 
 	/** <b>You should be using the Properties class to add this!</b> */
-	public boolean addAdvancedRaceKnowledge(AbstractSubspecies subspecies) {
+	public boolean addAdvancedRaceKnowledge(Subspecies subspecies) {
 		return subspeciesAdvancedKnowledge.add(subspecies);
 	}
 
 	/** <b>You should be using the Properties class to access this!</b> */
-	public boolean isAdvancedRaceKnowledgeDiscovered(AbstractSubspecies subspecies) {
+	public boolean isAdvancedRaceKnowledgeDiscovered(Subspecies subspecies) {
 		if(subspeciesAdvancedKnowledge.contains(subspecies)) {
 			return true;
 		}
 		// If this subspecies shares a lore book with the parent subspecies, and that parent subspecies is unlocked, then return true:
-		AbstractSubspecies coreSubspecies = AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace());
+		var coreSubspecies = AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace());
 		if(ItemType.getLoreBook(subspecies).equals(ItemType.getLoreBook(coreSubspecies))) {
 			return subspeciesAdvancedKnowledge.contains(coreSubspecies);
 		}

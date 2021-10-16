@@ -4,7 +4,6 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 import org.w3c.dom.Document;
@@ -61,11 +60,11 @@ public class GenericSexualPartner extends NPC {
 		this(gender, worldLocation, location, isImported, null);
 	}
 
-	public GenericSexualPartner(Gender gender, WorldType worldLocation, PlaceType placeType, boolean isImported, Predicate<AbstractSubspecies> subspeciesRemovalFilter) {
+	public GenericSexualPartner(Gender gender, WorldType worldLocation, PlaceType placeType, boolean isImported, Predicate<?super Subspecies> subspeciesRemovalFilter) {
 		this(gender, worldLocation, Main.game.getWorlds().get(worldLocation).getCell(placeType).getLocation(), isImported, subspeciesRemovalFilter);
 	}
 	
-	public GenericSexualPartner(Gender gender, WorldType worldLocation, Vector2i location, boolean isImported, Predicate<AbstractSubspecies> subspeciesRemovalFilter) {
+	public GenericSexualPartner(Gender gender, WorldType worldLocation, Vector2i location, boolean isImported, Predicate<?super Subspecies> subspeciesRemovalFilter) {
 		super(isImported, null, null, "",
 				Util.random.nextInt(28)+18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
 				3,
@@ -79,15 +78,15 @@ public class GenericSexualPartner extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			List<AbstractSubspecies> availableSubspecies = new ArrayList<>();
+			var availableRaces = new HashMap<Subspecies,Integer>();
+			var availableSubspecies = new ArrayList<Subspecies>();
 			availableSubspecies.addAll(Subspecies.getAllSubspecies());
 			
 			if(subspeciesRemovalFilter!=null) {
 				availableSubspecies.removeIf(subspeciesRemovalFilter);
 			}
 			
-			for(AbstractSubspecies s : availableSubspecies) {
+			for(var s : availableSubspecies) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}

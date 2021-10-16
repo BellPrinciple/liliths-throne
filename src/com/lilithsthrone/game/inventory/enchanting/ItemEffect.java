@@ -11,7 +11,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -307,7 +306,7 @@ public class ItemEffect implements XMLSaving {
 					secondaryMod = TFModifier.TF_TYPE_1;
 				}
 				if(target.getSubspeciesOverride()==Subspecies.HALF_DEMON) {
-					AbstractSubspecies halfSubspecies = target.getHalfDemonSubspecies();
+					var halfSubspecies = target.getHalfDemonSubspecies();
 					switch(getPrimaryModifier()) {
 						case TF_EARS:
 						case TF_HAIR:

@@ -154,7 +154,6 @@ import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.AbstractRacialBody;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
@@ -9789,7 +9788,7 @@ public class UtilText {
 		for(RaceStage raceStage : RaceStage.values()) {
 			engine.put("RACE_STAGE_"+raceStage.toString(), raceStage);
 		}
-		for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+		for(var subspecies : Subspecies.getAllSubspecies()) {
 			engine.put("SUBSPECIES_"+Subspecies.getIdFromSubspecies(subspecies), subspecies);
 		}
 		for(Gender gender : Gender.values()) {
@@ -10654,7 +10653,7 @@ public class UtilText {
 				: UtilText.generateSingularDeterminer(input) + input;
 	}
 
-	private static String getSubspeciesName(AbstractSubspecies subspecies, GameCharacter character) {
+	private static String getSubspeciesName(Subspecies subspecies, GameCharacter character) {
 		if(subspecies==null) {
 			return "";
 		}
@@ -10666,7 +10665,7 @@ public class UtilText {
 		}
 	}
 	
-	private static String getSubspeciesNamePlural(AbstractSubspecies race, GameCharacter character) {
+	private static String getSubspeciesNamePlural(Subspecies race, GameCharacter character) {
 		if(race==null)
 			return "";
 		if (character.isFeminine()) {

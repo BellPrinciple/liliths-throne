@@ -3,7 +3,6 @@ package com.lilithsthrone.game.character.npc.submission;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -64,8 +63,8 @@ public class BatCavernLurkerAttacker extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			var availableRaces = new HashMap<Subspecies,Integer>();
+			for(var s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}
@@ -73,7 +72,7 @@ public class BatCavernLurkerAttacker extends NPC {
 					AbstractSubspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.BAT_CAVERNS, PlaceType.BAT_CAVERN_DARK, false, false, Subspecies.SLIME).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				}
 			}
-			AbstractSubspecies species = AbstractSubspecies.getRandomSubspeciesFromWeightedMap(availableRaces, Subspecies.BAT_MORPH);
+			var species = AbstractSubspecies.getRandomSubspeciesFromWeightedMap(availableRaces, Subspecies.BAT_MORPH);
 
 			RaceStage stage = Main.game.getCharacterUtils().getRaceStageFromPreferences(Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().get(species), gender, species);
 			if(!gender.isFeminine()) {

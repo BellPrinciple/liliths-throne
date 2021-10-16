@@ -5863,13 +5863,11 @@ public class Perk {
 	
 	private static void generateSubspeciesPerks() {
 		List<AbstractAttribute> resistancesAdded = new ArrayList<>();
-		for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
+		for(var sub : Subspecies.getAllSubspecies()) {
 			if(!resistancesAdded.contains(sub.getDamageMultiplier())) {
 				resistancesAdded.add(sub.getDamageMultiplier());
 				boolean mainSubspecies = sub.getDamageMultiplier()==AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace()).getDamageMultiplier();
-				AbstractSubspecies subToUse = mainSubspecies
-												?AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace())
-												:sub;
+				var subToUse = mainSubspecies?AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace()):sub;
 				
 				AbstractPerk racePerk = new AbstractPerk(20,
 						false,
@@ -5908,12 +5906,12 @@ public class Perk {
 		hiddenPerks.sort((p1, p2) -> p1.getRenderingPriority()-p2.getRenderingPriority());
 	}
 	
-	public static AbstractPerk getSubspeciesRelatedPerk(AbstractSubspecies subspecies) {
+	public static AbstractPerk getSubspeciesRelatedPerk(Subspecies subspecies) {
 		if(!subspeciesPerksGenerated) {
 			generateSubspeciesPerks();
 		}
 		
-		AbstractSubspecies subToUse = 
+		var subToUse =
 				subspecies.getDamageMultiplier()==AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace()).getDamageMultiplier()
 					?AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace())
 					:subspecies;

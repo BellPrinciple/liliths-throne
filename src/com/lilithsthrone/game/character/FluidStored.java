@@ -10,7 +10,6 @@ import com.lilithsthrone.game.character.body.FluidGirlCum;
 import com.lilithsthrone.game.character.body.FluidInterface;
 import com.lilithsthrone.game.character.body.FluidMilk;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.main.Main;
@@ -24,8 +23,8 @@ import com.lilithsthrone.utils.XMLSaving;
 public class FluidStored implements XMLSaving {
 	
 	private String charactersFluidID;
-	private AbstractSubspecies cumSubspecies; // used for calculating pregnancy.
-	private AbstractSubspecies cumHalfDemonSubspecies; // used for calculating pregnancy.
+	private Subspecies cumSubspecies; // used for calculating pregnancy.
+	private Subspecies cumHalfDemonSubspecies; // used for calculating pregnancy.
 	private float virility;
 	private boolean feral;
 	private FluidCum cum;
@@ -63,7 +62,7 @@ public class FluidStored implements XMLSaving {
 		this.millilitres = millilitres;
 	}
 	
-	public FluidStored(String charactersFluidID, AbstractSubspecies cumSubspecies, AbstractSubspecies cumHalfDemonSubspecies, FluidCum cum, float millilitres) {
+	public FluidStored(String charactersFluidID, Subspecies cumSubspecies, Subspecies cumHalfDemonSubspecies, FluidCum cum, float millilitres) {
 		this.charactersFluidID = charactersFluidID;
 		
 		this.cumSubspecies = cumSubspecies;
@@ -225,8 +224,8 @@ public class FluidStored implements XMLSaving {
 		}
 		
 		if(parentElement.getElementsByTagName("cum").item(0)!=null) {
-			AbstractSubspecies subspecies = Subspecies.HUMAN;
-			AbstractSubspecies halfDemonSubspecies = Subspecies.HUMAN;
+			Subspecies subspecies = Subspecies.HUMAN;
+			Subspecies halfDemonSubspecies = Subspecies.HUMAN;
 			try {
 				subspecies = Subspecies.getSubspeciesFromId(parentElement.getAttribute("cumSubspecies"));
 				halfDemonSubspecies = Subspecies.getSubspeciesFromId(parentElement.getAttribute("cumHalfDemonSubspecies"));
@@ -282,11 +281,11 @@ public class FluidStored implements XMLSaving {
 		return girlCum;
 	}
 
-	public AbstractSubspecies getCumSubspecies() {
+	public Subspecies getCumSubspecies() {
 		return cumSubspecies;
 	}
 
-	public AbstractSubspecies getCumHalfDemonSubspecies() {
+	public Subspecies getCumHalfDemonSubspecies() {
 		return cumHalfDemonSubspecies;
 	}
 	

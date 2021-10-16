@@ -44,7 +44,7 @@ public class OffspringSeed implements XMLSaving {
 	protected LocalDateTime birthday;
 	
 	// Body:
-	protected AbstractSubspecies subspecies;
+	protected Subspecies subspecies;
 	protected Body body;
 	
 	// Family:
@@ -55,15 +55,15 @@ public class OffspringSeed implements XMLSaving {
 	// Used as a backup for when motherId is pointing to a null NPC:
 	protected String motherName = "???";
 	protected Femininity motherFemininity = Femininity.FEMININE;
-	protected AbstractSubspecies motherSubspecies = Subspecies.HUMAN;
+	protected Subspecies motherSubspecies = Subspecies.HUMAN;
 	// Used as a backup for when fatherId is pointing to a null NPC:
 	protected String fatherName = "???";
 	protected Femininity fatherFemininity = Femininity.MASCULINE;
-	protected AbstractSubspecies fatherSubspecies = Subspecies.HUMAN;
+	protected Subspecies fatherSubspecies = Subspecies.HUMAN;
 	// Used as a backup for when incubatorId is pointing to a null NPC:
 	protected String incubatorName = "???";
 	protected Femininity incubatorFemininity = Femininity.ANDROGYNOUS;
-	protected AbstractSubspecies incubatorSubspecies = Subspecies.HUMAN;
+	protected Subspecies incubatorSubspecies = Subspecies.HUMAN;
 	
 	public OffspringSeed() {
 	}
@@ -136,7 +136,7 @@ public class OffspringSeed implements XMLSaving {
 		this(mother, father, father.getTrueSubspecies(), father.getHalfDemonSubspecies());
 	}
 	
-	public OffspringSeed(GameCharacter mother, GameCharacter father, AbstractSubspecies fatherSubspecies, AbstractSubspecies fatherHalfDemonSubspecies) {
+	public OffspringSeed(GameCharacter mother, GameCharacter father, Subspecies fatherSubspecies, Subspecies fatherHalfDemonSubspecies) {
 		
 		this.fromPlayer = (mother.isPlayer() || (father!=null && father.isPlayer()));
 		this.born = false;
@@ -429,7 +429,7 @@ public class OffspringSeed implements XMLSaving {
 		return motherFemininity;
 	}
 	
-	public AbstractSubspecies getMotherSubspecies() {
+	public Subspecies getMotherSubspecies() {
 		return motherSubspecies;
 	}
 	
@@ -467,7 +467,7 @@ public class OffspringSeed implements XMLSaving {
 		return fatherFemininity;
 	}
 	
-	public AbstractSubspecies getFatherSubspecies() {
+	public Subspecies getFatherSubspecies() {
 		return fatherSubspecies;
 	}
 	public String getIncubatorId() { return incubatorId; }
@@ -505,7 +505,7 @@ public class OffspringSeed implements XMLSaving {
 		return incubatorFemininity;
 	}
 	
-	public AbstractSubspecies getIncubatorSubspecies() {
+	public Subspecies getIncubatorSubspecies() {
 		return incubatorSubspecies;
 	}
 	
@@ -540,7 +540,7 @@ public class OffspringSeed implements XMLSaving {
 
 	public AbstractRace getRace() {	return getSubspecies().getRace(); }
 	
-	public AbstractSubspecies getSubspecies() { return subspecies; }
+	public Subspecies getSubspecies() { return subspecies; }
 	
 	public boolean isFeminine() {
 		return body==null || body.isFeminine();
@@ -554,7 +554,7 @@ public class OffspringSeed implements XMLSaving {
 		return body.isTakesAfterMother();
 	}
 	
-	public AbstractSubspecies getHalfDemonSubspecies() {
+	public Subspecies getHalfDemonSubspecies() {
 		return body.getHalfDemonSubspecies();
 	}
 	

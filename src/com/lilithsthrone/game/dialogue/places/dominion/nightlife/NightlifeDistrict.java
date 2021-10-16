@@ -22,8 +22,8 @@ import com.lilithsthrone.game.character.npc.dominion.Kruger;
 import com.lilithsthrone.game.character.npc.misc.GenericSexualPartner;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RaceStage;
+import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.places.dominion.DominionPlaces;
@@ -70,7 +70,7 @@ public class NightlifeDistrict {
 	
 	private static boolean isSearchingForASub = true;
 	private static Gender clubberGender;
-	private static AbstractSubspecies clubberSubspecies;
+	private static Subspecies clubberSubspecies;
 	private static RaceStage clubberRaceStage;
 	
 	private static boolean isClubOpen(int minutesPassedForNextScene) {
@@ -1057,14 +1057,14 @@ public class NightlifeDistrict {
 			}
 			int count = 1;
 			
-			Set<AbstractSubspecies> subspeciesSet = new HashSet<>();
+			var subspeciesSet = new HashSet<Subspecies>();
 			for(Population pop : Main.game.getPlayer().getLocationPlace().getPlaceType().getPopulation()) {
 				subspeciesSet.addAll(pop.getSpecies().keySet());
 			}
 			if(!subspeciesSet.isEmpty()) {
-				List<AbstractSubspecies> sortedSubspecies = new ArrayList<>(subspeciesSet);
+				var sortedSubspecies = new ArrayList<>(subspeciesSet);
 				sortedSubspecies.sort((s1, s2) -> s1.getRace().getName(false).compareTo(s2.getRace().getName(false)));
-				for(AbstractSubspecies subspecies : sortedSubspecies) {
+				for(var subspecies : sortedSubspecies) {
 					if(count==index) {
 						return new Response(Util.capitaliseSentence(subspecies.getName(null)),
 								"Look for "+UtilText.generateSingularDeterminer(subspecies.getName(null))+" "+subspecies.getName(null)+" in amongst the crowds of revellers.",

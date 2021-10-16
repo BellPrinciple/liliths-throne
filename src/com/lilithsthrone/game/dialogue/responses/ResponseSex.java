@@ -13,7 +13,7 @@ import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.fetishes.Fetish;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
+import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.utils.ParserTarget;
@@ -139,7 +139,7 @@ public class ResponseSex extends Response {
 			CorruptionLevel corruptionBypass,
 			List<AbstractPerk> perksRequired,
 			Femininity femininityRequired,
-			List<AbstractSubspecies> subspeciesRequired,
+			List<Subspecies> subspeciesRequired,
 			boolean consensual,
 			boolean subHasEqualControl,
 			List<GameCharacter> dominants,
@@ -418,7 +418,7 @@ public class ResponseSex extends Response {
 			CorruptionLevel corruptionBypass,
 			List<AbstractPerk> perksRequired,
 			Femininity femininityRequired,
-			List<AbstractSubspecies> subspeciesRequired,
+			List<Subspecies> subspeciesRequired,
 			boolean consensual,
 			boolean subHasEqualControl,
 			SMGeneric sexManager,
@@ -462,7 +462,7 @@ public class ResponseSex extends Response {
 			CorruptionLevel corruptionBypass,
 			List<AbstractPerk> perksRequired,
 			Femininity femininityRequired,
-			List<AbstractSubspecies> subspeciesRequired,
+			List<Subspecies> subspeciesRequired,
 			boolean consensual,
 			boolean subHasEqualControl,
 			SexManagerInterface sexManager,

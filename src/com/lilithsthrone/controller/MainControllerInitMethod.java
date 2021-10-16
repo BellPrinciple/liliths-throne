@@ -131,7 +131,6 @@ import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.persona.SexualOrientationPreference;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesPreference;
@@ -4811,7 +4810,7 @@ public class MainControllerInitMethod {
 						}, false);
 					}
 					
-					
+
 					id = BodyCoveringType.getIdFromBodyCoveringType(bct)+"_PRIMARY_GLOW_OFF";
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						
@@ -6201,7 +6200,7 @@ public class MainControllerInitMethod {
 		// Furry preferences:
 		if (Main.game.getCurrentDialogueNode() == OptionsDialogue.FURRY_PREFERENCE) {
 			
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			for(var s : Subspecies.getAllSubspecies()) {
 				id="SUBSPECIES_PREFERENCE_INFO_"+Subspecies.getIdFromSubspecies(s);
 
 				if (((EventTarget) MainController.document.getElementById(id)) != null) {
@@ -6484,7 +6483,7 @@ public class MainControllerInitMethod {
 				id = "ALL_FURRY_"+preference;
 				if (((EventTarget) MainController.document.getElementById(id)) != null) {
 					((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
-						for (AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+						for (var subspecies : Subspecies.getAllSubspecies()) {
 							Main.getProperties().setFeminineFurryPreference(subspecies, preference);
 							Main.getProperties().setMasculineFurryPreference(subspecies, preference);
 						}
@@ -6497,7 +6496,7 @@ public class MainControllerInitMethod {
 				id = "ALL_SPAWN_"+preference;
 				if (((EventTarget) MainController.document.getElementById(id)) != null) {
 					((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
-						for (AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+						for (var subspecies : Subspecies.getAllSubspecies()) {
 							Main.getProperties().setFeminineSubspeciesPreference(subspecies, preference);
 							Main.getProperties().setMasculineSubspeciesPreference(subspecies, preference);
 						}
@@ -6508,7 +6507,7 @@ public class MainControllerInitMethod {
 			}
 			
 			
-			for (AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+			for (var subspecies : Subspecies.getAllSubspecies()) {
 				String subspeciesId = Subspecies.getIdFromSubspecies(subspecies);
 				for(FurryPreference preference : FurryPreference.values()) {
 					id = "FEMININE_" + preference+"_"+subspeciesId;
@@ -7257,7 +7256,7 @@ public class MainControllerInitMethod {
 							OptionsDialogue.deleteConfirmationName = "";
 							Main.deleteGame(fileName);
 							Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
-							
+
 						} else {
 							OptionsDialogue.overwriteConfirmationName = "";
 							OptionsDialogue.loadConfirmationName = "";

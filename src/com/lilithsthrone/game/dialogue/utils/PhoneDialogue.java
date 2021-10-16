@@ -1259,7 +1259,7 @@ public class PhoneDialogue {
 			}
 			
 //			List<AbstractAttribute> encounteredAttributes = new ArrayList<>();
-//			for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+//			for(var subspecies : Subspecies.getAllSubspecies()) {
 //				AbstractAttribute damageModifier = subspecies.getDamageMultiplier();
 //				if(!encounteredAttributes.contains(damageModifier)) {
 //					UtilText.nodeContentSB.append(
@@ -3311,16 +3311,16 @@ public class PhoneDialogue {
 	};
 
 	private static List<AbstractRace> racesDiscovered = new ArrayList<>();
-	private static List<AbstractSubspecies> subspeciesDiscovered = new ArrayList<>();
+	private static List<Subspecies> subspeciesDiscovered = new ArrayList<>();
 	private static AbstractRace raceSelected;
-	private static AbstractSubspecies subspeciesSelected;
+	private static Subspecies subspeciesSelected;
 	private static StringBuilder subspeciesSB = new StringBuilder();
 	
 	public static void resetContentForRaces() {
 		
 		subspeciesDiscovered.clear();
 		
-		for (AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+		for(var subspecies : Subspecies.getAllSubspecies()) {
 			if(Main.getProperties().isRaceDiscovered(subspecies)) {
 				AbstractRace race = subspecies.getRace();
 				if(!racesDiscovered.contains(race)) {
@@ -3380,7 +3380,7 @@ public class PhoneDialogue {
 						raceSelected = racesDiscovered.get(index - 1);
 						subspeciesSelected = AbstractSubspecies.getMainSubspeciesOfRace(raceSelected);
 						if(!subspeciesDiscovered.contains(subspeciesSelected)) {
-							for(AbstractSubspecies sub : subspeciesDiscovered) {
+							for(var sub : subspeciesDiscovered) {
 								if(sub.getRace()==raceSelected) {
 									subspeciesSelected = sub;
 									break;
@@ -3401,7 +3401,7 @@ public class PhoneDialogue {
 		}
 	};
 	
-	private static List<String> getSubspeciesModifiersAsStringList(AbstractSubspecies subspecies) {
+	private static List<String> getSubspeciesModifiersAsStringList(Subspecies subspecies) {
 		LinkedHashMap<AbstractAttribute, Float> attMods;
 
 		attMods = new LinkedHashMap<>(subspecies.getStatusEffectAttributeModifiers(null));
@@ -3530,13 +3530,13 @@ public class PhoneDialogue {
 		
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			List<AbstractSubspecies> raceSubspecies = Subspecies.getSubspeciesOfRace(raceSelected);
+			var raceSubspecies = Subspecies.getSubspeciesOfRace(raceSelected);
 			
 			if (index == 0) {
 				return new Response("Back", "Return to the race selection screen.", RACES);
 			
 			} else if (index <= raceSubspecies.size()) {
-				AbstractSubspecies indexSubspecies = raceSubspecies.get(index - 1);
+				var indexSubspecies = raceSubspecies.get(index - 1);
 				if(!subspeciesDiscovered.contains(indexSubspecies)) {
 					return new Response(Util.capitaliseSentence(indexSubspecies.getName(null)),
 							"You haven't discovered this subspecies yet!",

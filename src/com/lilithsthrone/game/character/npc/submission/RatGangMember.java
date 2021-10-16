@@ -3,8 +3,6 @@ package com.lilithsthrone.game.character.npc.submission;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -22,11 +20,9 @@ import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
-import com.lilithsthrone.game.character.race.SubspeciesPreference;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.companions.SlaveDialogue;
@@ -71,13 +67,13 @@ public class RatGangMember extends NPC {
 		if(!isImported) {
 			// RACE:
 			
-			Map<AbstractSubspecies, Integer> subspeciesMap = new HashMap<>();
-			for(Entry<AbstractSubspecies, SubspeciesPreference> entry : gender.getGenderName().isHasPenis()?Main.getProperties().getSubspeciesMasculinePreferencesMap().entrySet():Main.getProperties().getSubspeciesFemininePreferencesMap().entrySet()) {
+			var subspeciesMap = new HashMap<Subspecies,Integer>();
+			for(var entry : gender.getGenderName().isHasPenis()?Main.getProperties().getSubspeciesMasculinePreferencesMap().entrySet():Main.getProperties().getSubspeciesFemininePreferencesMap().entrySet()) {
 				if(entry.getKey().getRace()==Race.RAT_MORPH) {
 					subspeciesMap.put(entry.getKey(), entry.getValue().getValue());
 				}
 			}
-			AbstractSubspecies subspecies = Util.getRandomObjectFromWeightedMap(subspeciesMap);
+			var subspecies = Util.getRandomObjectFromWeightedMap(subspeciesMap);
 			if(subspecies==null) {
 				subspecies = Subspecies.RAT_MORPH;
 			}

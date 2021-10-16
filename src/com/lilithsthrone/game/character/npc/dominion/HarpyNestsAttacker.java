@@ -4,7 +4,6 @@ import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import org.w3c.dom.Document;
@@ -69,14 +68,14 @@ public class HarpyNestsAttacker extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> subspeciesMap = new HashMap<>();
-//			for(Entry<AbstractSubspecies, SubspeciesPreference> entry : gender.getGenderName().isHasPenis()?Main.getProperties().getSubspeciesMasculinePreferencesMap().entrySet():Main.getProperties().getSubspeciesFemininePreferencesMap().entrySet()) {
+			var subspeciesMap = new HashMap<Subspecies,Integer>();
+//			for(var entry : gender.getGenderName().isHasPenis()?Main.getProperties().getSubspeciesMasculinePreferencesMap().entrySet():Main.getProperties().getSubspeciesFemininePreferencesMap().entrySet()) {
 //				if(entry.getKey().getRace()==Race.HARPY && Subspecies.getWorldSpecies(WorldType.HARPY_NEST, PlaceType.HARPY_NESTS_WALKWAYS, false).containsKey(entry.getKey())) {
 //					AbstractSubspecies.addToSubspeciesMap((int) (1000*Subspecies.getWorldSpecies(WorldType.HARPY_NEST, PlaceType.HARPY_NESTS_WALKWAYS, false).get(entry.getKey()).getChanceMultiplier()), gender, entry.getKey(), subspeciesMap);
 //				}
 //			}
-			
-			for(Entry<AbstractSubspecies, SubspeciesSpawnRarity> entry : Subspecies.getWorldSpecies(WorldType.HARPY_NEST, PlaceType.HARPY_NESTS_WALKWAYS, false).entrySet()) {
+
+			for(var entry : Subspecies.getWorldSpecies(WorldType.HARPY_NEST, PlaceType.HARPY_NESTS_WALKWAYS, false).entrySet()) {
 				if(entry.getKey().getRace()==Race.HARPY) {
 					AbstractSubspecies.addToSubspeciesMap((int) (1000*entry.getValue().getChanceMultiplier()), gender, entry.getKey(), subspeciesMap);
 				}
@@ -116,15 +115,15 @@ public class HarpyNestsAttacker extends NPC {
 	}
 	
 	@Override
-	public void setBodyFromSubspeciesPreference(Gender gender, Map<AbstractSubspecies, Integer> subspeciesMap, boolean additionalSetups, boolean includeHumanChance) {
+	public void setBodyFromSubspeciesPreference(Gender gender, Map<Subspecies,Integer> subspeciesMap, boolean additionalSetups, boolean includeHumanChance) {
 		if(gender.isFeminine()) {
-			for(Entry<AbstractSubspecies, FurryPreference> entry : Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().entrySet()) {
+			for(var entry : Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().entrySet()) {
 				if(entry.getValue() == FurryPreference.HUMAN) {
 					subspeciesMap.remove(entry.getKey());
 				}
 			}
 		} else {
-			for(Entry<AbstractSubspecies, FurryPreference> entry : Main.getProperties().getSubspeciesMasculineFurryPreferencesMap().entrySet()) {
+			for(var entry : Main.getProperties().getSubspeciesMasculineFurryPreferencesMap().entrySet()) {
 				if(entry.getValue() == FurryPreference.HUMAN) {
 					subspeciesMap.remove(entry.getKey());
 				}
@@ -136,7 +135,7 @@ public class HarpyNestsAttacker extends NPC {
 			total += i;
 		}
 
-		AbstractSubspecies species = Subspecies.HARPY;
+		Subspecies species = Subspecies.HARPY;
 		if(!subspeciesMap.isEmpty() && total>0) {
 			species = Util.getRandomObjectFromWeightedMap(subspeciesMap);
 		}

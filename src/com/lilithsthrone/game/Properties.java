@@ -169,11 +169,11 @@ public class Properties {
 
 	public Map<PronounType, Map<AgeCategory, Integer>> agePreferencesMap;
 	
-	private Map<AbstractSubspecies, FurryPreference> subspeciesFeminineFurryPreferencesMap;
-	private Map<AbstractSubspecies, FurryPreference> subspeciesMasculineFurryPreferencesMap;
+	private Map<Subspecies,FurryPreference> subspeciesFeminineFurryPreferencesMap;
+	private Map<Subspecies,FurryPreference> subspeciesMasculineFurryPreferencesMap;
 	
-	private Map<AbstractSubspecies, SubspeciesPreference> subspeciesFemininePreferencesMap;
-	private Map<AbstractSubspecies, SubspeciesPreference> subspeciesMasculinePreferencesMap;
+	private Map<Subspecies,SubspeciesPreference> subspeciesFemininePreferencesMap;
+	private Map<Subspecies,SubspeciesPreference> subspeciesMasculinePreferencesMap;
 	
 	// Transformation Settings
 	private FurryPreference forcedTFPreference;
@@ -184,8 +184,8 @@ public class Properties {
 	private Set<AbstractItemType> itemsDiscovered;
 	private Set<AbstractWeaponType> weaponsDiscovered;
 	private Set<AbstractClothingType> clothingDiscovered;
-	private Set<AbstractSubspecies> subspeciesDiscovered;
-	private Set<AbstractSubspecies> subspeciesAdvancedKnowledge;
+	private Set<Subspecies> subspeciesDiscovered;
+	private Set<Subspecies> subspeciesAdvancedKnowledge;
 
 	public Properties() {
 		values = new HashSet<>();
@@ -235,14 +235,14 @@ public class Properties {
 		
 		subspeciesFeminineFurryPreferencesMap = new HashMap<>();
 		subspeciesMasculineFurryPreferencesMap = new HashMap<>();
-		for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+		for(var s : Subspecies.getAllSubspecies()) {
 			subspeciesFeminineFurryPreferencesMap.put(s, s.getDefaultFemininePreference());
 			subspeciesMasculineFurryPreferencesMap.put(s, s.getDefaultMasculinePreference());
 		}
 		
 		subspeciesFemininePreferencesMap = new HashMap<>();
 		subspeciesMasculinePreferencesMap = new HashMap<>();
-		for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+		for(var s : Subspecies.getAllSubspecies()) {
 			subspeciesFemininePreferencesMap.put(s, s.getSubspeciesPreferenceDefault());
 			subspeciesMasculinePreferencesMap.put(s, s.getSubspeciesPreferenceDefault());
 		}
@@ -491,7 +491,7 @@ public class Properties {
 			// Race preferences:
 			Element racePreferences = doc.createElement("subspeciesPreferences");
 			properties.appendChild(racePreferences);
-			for (AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+			for(var subspecies : Subspecies.getAllSubspecies()) {
 				Element element = doc.createElement("preferenceFeminine");
 				racePreferences.appendChild(element);
 				
@@ -568,7 +568,7 @@ public class Properties {
 			
 			Element racesDiscovered = doc.createElement("racesDiscovered");
 			properties.appendChild(racesDiscovered);
-			for(AbstractSubspecies subspecies : this.subspeciesDiscovered) {
+			for(var subspecies : this.subspeciesDiscovered) {
 				if(!this.subspeciesAdvancedKnowledge.contains(subspecies)) {
 					Element element = doc.createElement("race");
 					racesDiscovered.appendChild(element);
@@ -577,7 +577,7 @@ public class Properties {
 			}
 			Element racesDiscoveredAdvanced = doc.createElement("racesDiscoveredAdvanced");
 			properties.appendChild(racesDiscoveredAdvanced);
-			for(AbstractSubspecies subspecies : this.subspeciesAdvancedKnowledge) {
+			for(var subspecies : this.subspeciesAdvancedKnowledge) {
 				Element element = doc.createElement("race");
 				racesDiscoveredAdvanced.appendChild(element);
 				element.setTextContent(Subspecies.getIdFromSubspecies(subspecies));
@@ -1265,7 +1265,7 @@ public class Properties {
 	}
 	
 	public void completeSharedEncyclopedia() {
-		for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+		for(var subspecies : Subspecies.getAllSubspecies()) {
 			this.addRaceDiscovered(subspecies);
 			this.addAdvancedRaceKnowledge(subspecies);
 		}
@@ -1392,7 +1392,7 @@ public class Properties {
 		return subspeciesDiscovered.size();
 	}
 	
-	public boolean addRaceDiscovered(AbstractSubspecies subspecies) {
+	public boolean addRaceDiscovered(Subspecies subspecies) {
 		boolean playerDiscovered = Main.game.getPlayer().addRaceDiscovered(subspecies);
 		if(subspeciesDiscovered.add(subspecies) || (!this.hasValue(PropertyValue.sharedEncyclopedia) && playerDiscovered)) {
 			Main.game.addEvent(new EventLogEntryEncyclopediaUnlock(subspecies.getName(null), subspecies.getColour(null)), true);
@@ -1403,7 +1403,7 @@ public class Properties {
 	}
 
 	/** This method <b>takes into account</b> the 'shared Encyclopedia' content setting. */
-	public boolean isRaceDiscovered(AbstractSubspecies subspecies) {
+	public boolean isRaceDiscovered(Subspecies subspecies) {
 		if(this.hasValue(PropertyValue.sharedEncyclopedia)) {
 			return subspeciesDiscovered.contains(subspecies);
 		}
@@ -1421,7 +1421,7 @@ public class Properties {
 		return subspeciesAdvancedKnowledge.size();
 	}
 	
-	public boolean addAdvancedRaceKnowledge(AbstractSubspecies subspecies) {
+	public boolean addAdvancedRaceKnowledge(Subspecies subspecies) {
 		boolean playerDiscovered = Main.game.getPlayer().addAdvancedRaceKnowledge(subspecies);
 		if(subspeciesAdvancedKnowledge.add(subspecies) || (!this.hasValue(PropertyValue.sharedEncyclopedia) && playerDiscovered)) {
 			Main.game.addEvent(new EventLogEntryEncyclopediaUnlock(subspecies.getName(null)+" (Advanced)", subspecies.getColour(null)), true);
@@ -1431,13 +1431,13 @@ public class Properties {
 	}
 
 	/** This method <b>takes into account</b> the 'shared Encyclopedia' content setting. */
-	public boolean isAdvancedRaceKnowledgeDiscovered(AbstractSubspecies subspecies) {
+	public boolean isAdvancedRaceKnowledgeDiscovered(Subspecies subspecies) {
 		if(this.hasValue(PropertyValue.sharedEncyclopedia)) {
 			if(subspeciesAdvancedKnowledge.contains(subspecies)) {
 				return true;
 			}
 			// If this subspecies shares a lore book with the parent subspecies, and that parent subspecies is unlocked, then return true:
-			AbstractSubspecies coreSubspecies = AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace());
+			var coreSubspecies = AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace());
 			if(ItemType.getLoreBook(subspecies).equals(ItemType.getLoreBook(coreSubspecies))) {
 				return subspeciesAdvancedKnowledge.contains(coreSubspecies);
 			}
@@ -1451,39 +1451,39 @@ public class Properties {
 		subspeciesAdvancedKnowledge.clear();
 	}
 	
-	public void setFeminineFurryPreference(AbstractSubspecies subspecies, FurryPreference furryPreference) {
+	public void setFeminineFurryPreference(Subspecies subspecies, FurryPreference furryPreference) {
 		if(subspecies.getRace().isAffectedByFurryPreference()) {
 			subspeciesFeminineFurryPreferencesMap.put(subspecies, furryPreference);
 		}
 	}
 	
-	public void setMasculineFurryPreference(AbstractSubspecies subspecies, FurryPreference furryPreference) {
+	public void setMasculineFurryPreference(Subspecies subspecies, FurryPreference furryPreference) {
 		if(subspecies.getRace().isAffectedByFurryPreference()) {
 			subspeciesMasculineFurryPreferencesMap.put(subspecies, furryPreference);
 		}
 	}
 	
-	public void setFeminineSubspeciesPreference(AbstractSubspecies subspecies, SubspeciesPreference subspeciesPreference) {
+	public void setFeminineSubspeciesPreference(Subspecies subspecies, SubspeciesPreference subspeciesPreference) {
 		subspeciesFemininePreferencesMap.put(subspecies, subspeciesPreference);
 	}
 	
-	public void setMasculineSubspeciesPreference(AbstractSubspecies subspecies, SubspeciesPreference subspeciesPreference) {
+	public void setMasculineSubspeciesPreference(Subspecies subspecies, SubspeciesPreference subspeciesPreference) {
 		subspeciesMasculinePreferencesMap.put(subspecies, subspeciesPreference);
 	}
 
-	public Map<AbstractSubspecies, FurryPreference> getSubspeciesFeminineFurryPreferencesMap() {
+	public Map<Subspecies,FurryPreference> getSubspeciesFeminineFurryPreferencesMap() {
 		return subspeciesFeminineFurryPreferencesMap;
 	}
 
-	public Map<AbstractSubspecies, FurryPreference> getSubspeciesMasculineFurryPreferencesMap() {
+	public Map<Subspecies,FurryPreference> getSubspeciesMasculineFurryPreferencesMap() {
 		return subspeciesMasculineFurryPreferencesMap;
 	}
 
-	public Map<AbstractSubspecies, SubspeciesPreference> getSubspeciesFemininePreferencesMap() {
+	public Map<Subspecies,SubspeciesPreference> getSubspeciesFemininePreferencesMap() {
 		return subspeciesFemininePreferencesMap;
 	}
 
-	public Map<AbstractSubspecies, SubspeciesPreference> getSubspeciesMasculinePreferencesMap() {
+	public Map<Subspecies,SubspeciesPreference> getSubspeciesMasculinePreferencesMap() {
 		return subspeciesMasculinePreferencesMap;
 	}
 

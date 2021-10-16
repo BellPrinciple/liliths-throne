@@ -2,7 +2,6 @@ package com.lilithsthrone.game.character;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.npc.misc.OffspringSeed;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -43,8 +42,8 @@ public class Litter implements XMLSaving {
 	
 	private String birthedDescription;
 	
-	private AbstractSubspecies motherRace;
-	private AbstractSubspecies fatherRace;
+	private Subspecies motherRace;
+	private Subspecies fatherRace;
 
 	public Litter(LocalDateTime conceptionDate, LocalDateTime birthDate, GameCharacter mother, GameCharacter father, List<OffspringSeed> offspring) {
 		this.id = mother.getId()+mother.getLittersGenerated();
@@ -97,7 +96,7 @@ public class Litter implements XMLSaving {
 			int sonsMother, int daughtersMother,
 			int sonsFather, int daughtersFather,
 			List<String> offspring,
-			AbstractSubspecies motherRace, AbstractSubspecies fatherRace,
+			Subspecies motherRace, Subspecies fatherRace,
 			String birthedDescription) {
 		this.id = id;
 
@@ -189,8 +188,8 @@ public class Litter implements XMLSaving {
 			offspring.add(e.getAttribute("id"));
 		}
 		
-		AbstractSubspecies motherRace = Subspecies.HUMAN;
-		AbstractSubspecies fatherRace = Subspecies.HUMAN;
+		Subspecies motherRace = Subspecies.HUMAN;
+		Subspecies fatherRace = Subspecies.HUMAN;
 		try {
 			motherRace = Subspecies.getSubspeciesFromId(parentElement.getAttribute("motherRace"));
 			fatherRace = Subspecies.getSubspeciesFromId(parentElement.getAttribute("fatherRace"));
@@ -354,7 +353,7 @@ public class Litter implements XMLSaving {
 	public boolean isFatherId(String fatherId) {
 		return this.fatherId.equals(fatherId);
 	}
-	
+
 	/**
 	 * This is currently unused, as usually offspring may be both GameCharacter and OffspringSeed classes.
 	 * To access all offspring, use getOffspring which returns the Id of the offspring as a string, and then check which one it is.
@@ -370,7 +369,7 @@ public class Litter implements XMLSaving {
 		}).filter(Objects::nonNull).forEach(result::add);
 		return result;
 	}
-	
+
 	/**
 	 * This method can only be used on Pregnant litters, as only in this case will all offspring be of the OffspringSeed class.
 	 * To access all offspring for other litters, use getOffspring which returns the Id of the offspring as a string. It can be
@@ -387,7 +386,7 @@ public class Litter implements XMLSaving {
 		}).filter(Objects::nonNull).forEach(result::add);
 		return result;
 	}
-	
+
 	public List<String> getOffspring() {
 		return offspring;
 	}
@@ -412,15 +411,15 @@ public class Litter implements XMLSaving {
 		return sonsMother + daughtersMother + sonsFather + daughtersFather;
 	}
 
-	public AbstractSubspecies getMotherRace() {
+	public Subspecies getMotherRace() {
 		return motherRace;
 	}
 
-	public AbstractSubspecies getFatherRace() {
+	public Subspecies getFatherRace() {
 		return fatherRace;
 	}
 
-	public void setFatherRace(AbstractSubspecies fatherSubspecies) {
+	public void setFatherRace(Subspecies fatherSubspecies) {
 		fatherRace = fatherSubspecies;
 	}
 	
@@ -430,9 +429,9 @@ public class Litter implements XMLSaving {
 		
 		for(String id : this.getOffspring()) {
 			try {
-				
+
 				OffspringSeed character = Main.game.getOffspringSeedById(id);
-				AbstractSubspecies subspecies = character.getSubspecies();
+				var subspecies = character.getSubspecies();
 				if(character.isFeminine()) {
 					String nameId = subspecies.getSingularFemaleName(character.getBody())+"|"+subspecies.getPluralFemaleName(character.getBody());
 					daughters.putIfAbsent(nameId, 0);

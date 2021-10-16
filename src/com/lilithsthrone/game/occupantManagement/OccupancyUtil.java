@@ -835,10 +835,10 @@ public class OccupancyUtil implements XMLSaving {
 						settingsEnabled = getSexSettingsEnabled(currentJob, slave);
 						
 						Gender gender = Gender.getGenderFromUserPreferences(false, true);
-						Map<AbstractSubspecies, Integer> availableRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(gender);
+						var availableRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(gender);
 						
-						AbstractSubspecies subspecies = Subspecies.HUMAN;
-						AbstractSubspecies halfDemonSubspecies = null;
+						Subspecies subspecies = Subspecies.HUMAN;
+						Subspecies halfDemonSubspecies = null;
 						if(!availableRaces.isEmpty()) {
 							subspecies = Util.getRandomObjectFromWeightedMap(availableRaces);
 						}
@@ -974,10 +974,8 @@ public class OccupancyUtil implements XMLSaving {
 					GenericSexualPartner partner = null;
 					String partnerName = "";
 					
-					Gender partnerGender = null;
-					Map<AbstractSubspecies, Integer> availablePartnerRaces = null;
-					AbstractSubspecies partnerSubspecies = Subspecies.HUMAN;
-					AbstractSubspecies partnerHalfDemonSubspecies = null;
+					Subspecies partnerSubspecies = Subspecies.HUMAN;
+					Subspecies partnerHalfDemonSubspecies = null;
 					
 					if(usingRealPartner) {
 						if(Math.random()<0.25f) {
@@ -993,8 +991,8 @@ public class OccupancyUtil implements XMLSaving {
 						}
 						
 					} else {
-						partnerGender = Gender.getGenderFromUserPreferences(false, true);
-						availablePartnerRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(partnerGender);
+						var partnerGender = Gender.getGenderFromUserPreferences(false, true);
+						var availablePartnerRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(partnerGender);
 						
 						if(!availablePartnerRaces.isEmpty()) {
 							partnerSubspecies = Util.getRandomObjectFromWeightedMap(availablePartnerRaces);
