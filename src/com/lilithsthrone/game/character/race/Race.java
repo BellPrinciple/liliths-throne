@@ -2,11 +2,12 @@ package com.lilithsthrone.game.character.race;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
@@ -32,7 +33,66 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4
  * @author Innoxia
  */
-public class Race {
+public interface Race {
+
+	String getId();
+
+	AbstractRacialBody getRacialBody();
+
+	/**
+	 * Applies any special racial changes to the body which is passed in. This is called <b>before</b> Subspecies.applySpeciesChanges()
+	 */
+	default void applyRaceChanges(Body body) {
+	}
+
+	boolean isFeralPartsAvailable();
+
+	boolean isFlyingRace();
+
+	boolean isAbleToSelfTransform();
+
+	String getName(Body body, boolean feral);
+
+	default String getName(boolean feral) {
+		return getName(null, feral);
+	}
+
+	String getNamePlural(Body body, boolean feral);
+
+	default String getNamePlural(boolean feral) {
+		return getNamePlural(null, feral);
+	}
+
+	String getFeralName(LegConfiguration legConfiguration, boolean plural);
+
+	String getDefaultTransformName();
+
+	Disposition getDisposition();
+
+	RacialClass getRacialClass();
+
+	CombatBehaviour getPreferredCombatBehaviour();
+
+	int getNumberOfOffspringLow();
+
+	int getNumberOfOffspringHigh();
+
+	Colour getColour();
+
+	boolean isAffectedByFurryPreference();
+
+	float getChanceForMaleOffspring();
+
+	/**
+	 * <b>Should only be used in Subspecies' getDamageMultiplier() method!</b>
+	 */
+	AbstractAttribute getDefaultDamageMultiplier();
+
+	FurryPreference getDefaultFemininePreference();
+
+	FurryPreference getDefaultMasculinePreference();
+
+	Map<Fetish,Map<String,Integer>> getRacialFetishModifiers();
 
 	public static AbstractRace NONE = new AbstractRace("no race",
 			"no race",
@@ -1390,26 +1450,22 @@ public class Race {
 	 * StatusEffect.LILIN);
 	 */
 
+	LinkedHashMap<String,AbstractRace> idToRaceMap = init();
 
-	public static List<AbstractRace> allRaces;
-	
-	public static Map<AbstractRace, String> raceToIdMap = new HashMap<>();
-	public static Map<String, AbstractRace> idToRaceMap = new HashMap<>();
-	
 	/**
 	 * @param id Will be in the format of: 'innoxia_hyena'.
 	 */
-	public static AbstractRace getRaceFromId(String id) {
+	static AbstractRace getRaceFromId(String id) {
 		id = Util.getClosestStringMatch(id, idToRaceMap.keySet());
 		return idToRaceMap.get(id);
 	}
-	
-	public static String getIdFromRace(AbstractRace race) {
-		return raceToIdMap.get(race);
+
+	static String getIdFromRace(AbstractRace race) {
+		return race.getId();
 	}
-	
-	static {
-		allRaces = new ArrayList<>();
+
+	static LinkedHashMap<String,AbstractRace> init() {
+		var idToRaceMap = new LinkedHashMap<String,AbstractRace>();
 		
 		// Modded races:
 		
@@ -1418,10 +1474,9 @@ public class Race {
 			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
 				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("race")) {
 					try {
-						AbstractRace race = new AbstractRace(innerEntry.getValue(), entry.getKey(), true) {};
+						var race = new AbstractRace(innerEntry.getValue(),entry.getKey(),true);
 						String id = innerEntry.getKey().replaceAll("_race", "");
-						allRaces.add(race);
-						raceToIdMap.put(race, id);
+						race.id = id;
 						idToRaceMap.put(id, race);
 //						System.out.println("race: "+id);
 					} catch(Exception ex) {
@@ -1440,10 +1495,9 @@ public class Race {
 			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
 				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("race")) {
 					try {
-						AbstractRace race = new AbstractRace(innerEntry.getValue(), entry.getKey(), false) {};
+						var race = new AbstractRace(innerEntry.getValue(),entry.getKey(),false);
 						String id = innerEntry.getKey().replaceAll("_race", "");
-						allRaces.add(race);
-						raceToIdMap.put(race, id);
+						race.id = id;
 						idToRaceMap.put(id, race);
 					} catch(Exception ex) {
 						System.err.println("Loading race failed at 'Race'. File path: "+innerEntry.getValue().getAbsolutePath());
@@ -1460,23 +1514,17 @@ public class Race {
 		
 		for(Field f : fields){
 			if (AbstractRace.class.isAssignableFrom(f.getType())) {
-				AbstractRace race;
 				try {
-					race = ((AbstractRace) f.get(null));
-
-					raceToIdMap.put(race, f.getName());
+					var race = ((AbstractRace) f.get(null));
+					race.id = f.getName();
 					idToRaceMap.put(f.getName(), race);
-					allRaces.add(race);
-					
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		
-		allRaces.sort((r1, r2) -> r1.getName(false).compareTo(r2.getName(false)));
-		
-		for(AbstractRace race : Race.getAllRaces()) {
+
+		for(AbstractRace race : idToRaceMap.values()) {
 			if(race!=Race.NONE) {
 				String name = race.getName(true);
 				AbstractAttribute racialAttribute = new AbstractAttribute(true, 0, -100, 100, name+" damage", Util.capitaliseSentence(name)+" damage", "swordIcon", race.getColour(), name+"-obliteration", name+"-mercy", null) {
@@ -1494,9 +1542,12 @@ public class Race {
 				Attribute.allAttributes.add(racialAttribute);
 			}
 		}
+		return idToRaceMap;
 	}
-	
-	public static List<AbstractRace> getAllRaces() {
-		return allRaces;
+
+	static List<AbstractRace> getAllRaces() {
+		return idToRaceMap.values().stream()
+		.sorted(Comparator.comparing(r->r.getName(false)))
+		.collect(Collectors.toList());
 	}
 }
