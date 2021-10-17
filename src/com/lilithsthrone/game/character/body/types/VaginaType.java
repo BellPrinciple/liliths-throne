@@ -14,7 +14,6 @@ import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.fetishes.Fetish;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -558,9 +557,9 @@ public class VaginaType {
 		return allVaginaTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractVaginaType>> typesMap = new HashMap<>();
+	private static Map<Race,List<AbstractVaginaType>> typesMap = new HashMap<>();
 	
-	public static List<AbstractVaginaType> getVaginaTypes(AbstractRace r) {
+	public static List<AbstractVaginaType> getVaginaTypes(Race r) {
 		if(typesMap.containsKey(r)) {
 			return typesMap.get(r);
 		}

@@ -13,7 +13,6 @@ import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -217,9 +216,9 @@ public class TentacleType {
 		return allTentacleTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractTentacleType>> typesMap = new HashMap<>();
+	private static Map<Race,List<AbstractTentacleType>> typesMap = new HashMap<>();
 	
-	public static List<AbstractTentacleType> getTentacleTypes(AbstractRace r) {
+	public static List<AbstractTentacleType> getTentacleTypes(Race r) {
 		if(typesMap.containsKey(r)) {
 			return typesMap.get(r);
 		}

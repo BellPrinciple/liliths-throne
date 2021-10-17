@@ -17,7 +17,6 @@ import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -857,8 +856,8 @@ public class LegType {
 		return allLegTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractLegType>> typesMap = new HashMap<>();
-	public static List<AbstractLegType> getLegTypes(AbstractRace r) {
+	private static Map<Race,List<AbstractLegType>> typesMap = new HashMap<>();
+	public static List<AbstractLegType> getLegTypes(Race r) {
 		if(typesMap.containsKey(r)) {
 			return typesMap.get(r);
 		}

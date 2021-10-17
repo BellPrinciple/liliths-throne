@@ -14,7 +14,6 @@ import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -30,7 +29,7 @@ public abstract class AbstractNippleType implements BodyPartTypeInterface {
 	private boolean fromExternalFile;
 
 	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private Race race;
 	
 	private List<String> descriptorsMasculine;
 	private List<String> descriptorsFeminine;
@@ -45,7 +44,7 @@ public abstract class AbstractNippleType implements BodyPartTypeInterface {
 	 * @param defaultRacialOrificeModifiers Which modifiers this nipple naturally spawns with.
 	 */
 	public AbstractNippleType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			Race race,
 			List<String> descriptorsMasculine,
 			List<String> descriptorsFeminine,
 			List<OrificeModifier> defaultRacialOrificeModifiers) {
@@ -216,7 +215,7 @@ public abstract class AbstractNippleType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

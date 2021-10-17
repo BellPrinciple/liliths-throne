@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.util.List;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
@@ -12,7 +9,6 @@ import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.markings.TattooCounterType;
 import com.lilithsthrone.game.character.markings.TattooType;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade.SuccubisSecrets;
@@ -235,9 +231,9 @@ public class CosmeticsDialogue {
 			
 			UtilText.nodeContentSB.append(getMoneyRemainingString());
 			
-			for(Entry<AbstractBodyCoveringType, Value<AbstractRace, List<String>>> entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
+			for(var entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
 				AbstractBodyCoveringType bct = entry.getKey();
-				AbstractRace race = entry.getValue().getKey();
+				var race = entry.getValue().getKey();
 				GameCharacter target = Main.game.getPlayer();
 				
 				Value<String, String> titleDescription = SuccubisSecrets.getCoveringTitleDescription(target, bct, entry.getValue().getValue());

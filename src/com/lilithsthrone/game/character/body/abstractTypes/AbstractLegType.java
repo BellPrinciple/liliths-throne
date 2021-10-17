@@ -33,7 +33,6 @@ import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
 import com.lilithsthrone.game.character.body.valueEnums.GenitalArrangement;
 import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.AbstractRacialBody;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
@@ -59,7 +58,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 	private boolean fromExternalFile;
 	
 	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private Race race;
 
 	private String transformationName;
 	
@@ -110,7 +109,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 	 * @param spinneret true if this leg type has a spinneret.
 	 */
 	public AbstractLegType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			Race race,
 			FootStructure defaultFootStructure,
 			AbstractFootType footType,
 			String determiner,
@@ -345,7 +344,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

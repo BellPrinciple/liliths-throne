@@ -15,7 +15,6 @@ import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.types.EarType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -34,7 +33,7 @@ public abstract class AbstractEarType implements BodyPartTypeInterface {
 	private String transformationName;
 
 	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private Race race;
 	
 	private String name;
 	private String namePlural;
@@ -60,7 +59,7 @@ public abstract class AbstractEarType implements BodyPartTypeInterface {
 	 * @param earBodyDescription A sentence or two to describe this ear type, as seen in the character view screen. It should follow the same format as all of the other entries in the EarType class.
 	 */
 	public AbstractEarType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			Race race,
 			String transformationName,
 			String name,
 			String namePlural,
@@ -189,7 +188,7 @@ public abstract class AbstractEarType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

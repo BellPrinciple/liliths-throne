@@ -16,7 +16,6 @@ import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.types.HairType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -33,7 +32,7 @@ public abstract class AbstractHairType implements BodyPartTypeInterface {
 	private boolean fromExternalFile;
 
 	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private Race race;
 
 	private String transformationName;
 	
@@ -66,7 +65,7 @@ public abstract class AbstractHairType implements BodyPartTypeInterface {
 	 * @param tags BodyPartTags whichshould be applied to this hair type.
 	 */
 	public AbstractHairType(AbstractBodyCoveringType skinType,
-			AbstractRace race,
+			Race race,
 			String transformationName,
 			String name,
 			String namePlural,
@@ -237,7 +236,7 @@ public abstract class AbstractHairType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

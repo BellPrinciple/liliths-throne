@@ -14,7 +14,6 @@ import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -31,7 +30,7 @@ public abstract class AbstractHornType implements BodyPartTypeInterface {
 	private boolean fromExternalFile;
 
 	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private Race race;
 
 	private String transformationName;
 
@@ -62,7 +61,7 @@ public abstract class AbstractHornType implements BodyPartTypeInterface {
 	 */
 	public AbstractHornType(
 			AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			Race race,
 			int defaultHornsPerRow,
 			String transformationName,
 			String name,
@@ -226,7 +225,7 @@ public abstract class AbstractHornType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

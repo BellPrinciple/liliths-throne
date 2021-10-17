@@ -14,7 +14,6 @@ import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -477,9 +476,9 @@ public class PenisType {
 		return allPenisTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractPenisType>> typesMap = new HashMap<>();
+	private static Map<Race,List<AbstractPenisType>> typesMap = new HashMap<>();
 	
-	public static List<AbstractPenisType> getPenisTypes(AbstractRace r) {
+	public static List<AbstractPenisType> getPenisTypes(Race r) {
 		if(typesMap.containsKey(r)) {
 			return typesMap.get(r);
 		}

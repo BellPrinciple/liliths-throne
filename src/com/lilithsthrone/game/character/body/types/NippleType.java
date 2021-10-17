@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractNippleType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -237,8 +236,8 @@ public class NippleType {
 		return allNippleTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractNippleType>> typesMap = new HashMap<>();
-	public static List<AbstractNippleType> getNippleTypes(AbstractRace r) {
+	private static Map<Race,List<AbstractNippleType>> typesMap = new HashMap<>();
+	public static List<AbstractNippleType> getNippleTypes(Race r) {
 		if(typesMap.containsKey(r)) {
 			return typesMap.get(r);
 		}

@@ -44,7 +44,6 @@ import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.fetishes.FetishLevel;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.combat.Attack;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
@@ -1541,14 +1540,14 @@ public class TooltipInformationEventListener implements EventListener {
 		TooltipUpdateThread.updateToolTip(-1,-1);
 	}
 
-	private String getBodyPartDiv(GameCharacter character, String name, AbstractRace race, AbstractBodyCoveringType covering, boolean feral) {
+	private String getBodyPartDiv(GameCharacter character, String name, Race race, AbstractBodyCoveringType covering, boolean feral) {
 		return getBodyPartDiv(character, name, race, covering, feral, null);
 	}
-	private String getBodyPartDiv(GameCharacter character, String name, AbstractRace race, AbstractBodyCoveringType covering, boolean feral, String size) {
+	private String getBodyPartDiv(GameCharacter character, String name, Race race, AbstractBodyCoveringType covering, boolean feral, String size) {
 		return getBodyPartDiv(character, name, race, owner.getCovering(covering), feral, size);
 	}
 	
-	private String getBodyPartDiv(GameCharacter character, String name, AbstractRace race, Covering covering, boolean feral, String size) {
+	private String getBodyPartDiv(GameCharacter character, String name, Race race, Covering covering, boolean feral, String size) {
 		String raceName;
 		raceName = race.getName(character.getBody(), feral);
 

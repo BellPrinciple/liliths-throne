@@ -8,7 +8,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.race.AbstractRace;
+import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 
@@ -76,7 +76,7 @@ public interface BodyPartTypeInterface {
 	}
 
 	/** @return The race of this body part. */
-	public AbstractRace getRace();
+	Race getRace();
 	
 	/** @return The TFModifier for this body part. */
 	public default TFModifier getTFModifier() {

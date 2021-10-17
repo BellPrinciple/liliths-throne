@@ -2,7 +2,6 @@ package com.lilithsthrone.game.dialogue.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -16,7 +15,6 @@ import com.lilithsthrone.game.character.body.types.WingType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.effects.Perk;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -241,10 +239,10 @@ public class BodyChanging {
 		}
 	}
 
-	private static final List<AbstractRace> allRaces = new ArrayList<>(Race.getAllRaces());
+	private static final List<Race> allRaces = new ArrayList<>(Race.getAllRaces());
 
-	private static List<AbstractRace> getFaceSkinDemonRaces() {
-		List<AbstractRace> faceSkinOptions = Util.newArrayListOfValues();
+	private static List<Race> getFaceSkinDemonRaces() {
+		var faceSkinOptions = new ArrayList<Race>();
 		GameCharacter target = BodyChanging.getTarget();
 		
 		if(target.isElemental()) {
@@ -272,8 +270,8 @@ public class BodyChanging {
 		return faceSkinOptions;
 	}
 	
-	private static List<AbstractRace> getArmLegDemonRaces() {
-		List<AbstractRace> armLegOptions = Util.newArrayListOfValues();
+	private static List<Race> getArmLegDemonRaces() {
+		var armLegOptions = new ArrayList<Race>();
 		GameCharacter target = BodyChanging.getTarget();
 		
 		if(target.isElemental()) {
@@ -303,8 +301,8 @@ public class BodyChanging {
 	 * @param isHalfSpeciesReplacement True if this is a part that should always be of the core race type (if not human). This is so that things like hellhounds will still have dog tails and ears.
 	 * @return List of races available to the target.
 	 */
-	private static List<AbstractRace> getMinorPartsDemonRaces(boolean isHalfSpeciesReplacement) {
-		List<AbstractRace> minorPartsOptions = Util.newArrayListOfValues();
+	private static List<Race> getMinorPartsDemonRaces(boolean isHalfSpeciesReplacement) {
+		var minorPartsOptions = new ArrayList<Race>();
 		GameCharacter target = BodyChanging.getTarget();
 		
 		if(target.isElemental()) {
@@ -450,12 +448,12 @@ public class BodyChanging {
 //		return coveringsNamesMap;
 //	}
 	
-	private static List<AbstractRace> getSlaveCustomisationRaceOptions() {
-		List<AbstractRace> list = new ArrayList<>();
+	private static List<Race> getSlaveCustomisationRaceOptions() {
+		var list = new ArrayList<Race>();
 		
 		list.add(Race.NONE);
 
-		for(AbstractRace race : Race.getAllRaces()) {
+		for(var race : Race.getAllRaces()) {
 			if(!race.isAbleToSelfTransform()
 					&& (Subspecies.getWorldSpecies(WorldType.DOMINION, PlaceType.SLAVER_ALLEY_SCARLETTS_SHOP, false).keySet().stream().anyMatch(s->s.getRace()==race)
 						|| Subspecies.getWorldSpecies(WorldType.SUBMISSION, PlaceType.SLAVER_ALLEY_SCARLETTS_SHOP, false).keySet().stream().anyMatch(s->s.getRace()==race))) {
@@ -466,7 +464,7 @@ public class BodyChanging {
 		return list;
 	}
 	
-	private static List<AbstractRace> getRacesForMinorPartSelfTransform() {
+	private static List<Race> getRacesForMinorPartSelfTransform() {
 		if(ScarlettsShop.isSlaveCustomisationMenu()) {
 			return getSlaveCustomisationRaceOptions();
 		}
@@ -740,9 +738,9 @@ public class BodyChanging {
 					+"</div>");
 			}
 			
-			for(Entry<AbstractBodyCoveringType, Value<AbstractRace, List<String>>> entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
+			for(var entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
 				AbstractBodyCoveringType bct = entry.getKey();
-				AbstractRace race = entry.getValue().getKey();
+				var race = entry.getValue().getKey();
 
 				Value<String, String> titleDescription = SuccubisSecrets.getCoveringTitleDescription(target, bct, entry.getValue().getValue());
 

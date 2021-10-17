@@ -1451,16 +1451,16 @@ public interface Race {
 	 * @param id Will be in the format of: 'innoxia_hyena'.
 	 */
 	@Deprecated
-	static AbstractRace getRaceFromId(String id) {
+	static Race getRaceFromId(String id) {
 		return table.of(id);
 	}
 
 	@Deprecated
-	static String getIdFromRace(AbstractRace race) {
+	static String getIdFromRace(Race race) {
 		return race.getId();
 	}
 
-	Table<AbstractRace> table = new Table<>(s->s) {{
+	Table<Race> table = new Table<>(s->s) {{
 
 		// Modded races:
 		forEachMod("/race",null,"race",(f,n,a)->{
@@ -1485,7 +1485,7 @@ public interface Race {
 		// Hard-coded:
 		addFields(Race.class,AbstractRace.class,(k,v)->v.id=k);
 
-		for(AbstractRace race : list()) {
+		for(var race : list()) {
 			if(race!=Race.NONE) {
 				String name = race.getName(true);
 				AbstractAttribute racialAttribute = new AbstractAttribute(true, 0, -100, 100, name+" damage", Util.capitaliseSentence(name)+" damage", "swordIcon", race.getColour(), name+"-obliteration", name+"-mercy", null) {
@@ -1505,7 +1505,7 @@ public interface Race {
 		}
 	}};
 
-	static List<AbstractRace> getAllRaces() {
+	static List<Race> getAllRaces() {
 		return table.list().stream()
 		.sorted(Comparator.comparing(r->r.getName(false)))
 		.collect(Collectors.toList());

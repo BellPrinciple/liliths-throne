@@ -15,7 +15,6 @@ import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -33,7 +32,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 	private boolean fromExternalFile;
 
 	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private Race race;
 
 	private String transformationName;
 	
@@ -83,7 +82,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 	 */
 	public AbstractTailType(
 			AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			Race race,
 			PenetrationGirth defaultGirth,
 			float defaultLengthAsPercentageOfHeight,
 			String transformationName,
@@ -300,7 +299,7 @@ public abstract class AbstractTailType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

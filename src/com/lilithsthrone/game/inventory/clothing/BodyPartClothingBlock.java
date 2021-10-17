@@ -3,7 +3,7 @@ package com.lilithsthrone.game.inventory.clothing;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lilithsthrone.game.character.race.AbstractRace;
+import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 
@@ -15,11 +15,11 @@ import com.lilithsthrone.game.inventory.ItemTag;
 public class BodyPartClothingBlock {
 
 	private List<InventorySlot> blockedSlots;
-	private AbstractRace race;
+	private Race race;
 	private String description;
 	private List<ItemTag> requiredTags;
 	
-	public BodyPartClothingBlock(List<InventorySlot> blockedSlots, AbstractRace race, String description, List<ItemTag> requiredTags) {
+	public BodyPartClothingBlock(List<InventorySlot> blockedSlots, Race race, String description, List<ItemTag> requiredTags) {
 		this.blockedSlots = blockedSlots;
 		this.race = race;
 		this.description = description;
@@ -35,7 +35,7 @@ public class BodyPartClothingBlock {
 		return blockedSlots;
 	}
 
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

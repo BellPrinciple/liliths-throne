@@ -19,7 +19,6 @@ import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.controller.xmlParsing.XMLLoadException;
 import com.lilithsthrone.controller.xmlParsing.XMLMissingTagException;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
@@ -74,7 +73,7 @@ public abstract class AbstractItemType extends AbstractCoreType {
 	
 	// For use in enchanting into a different item:
 	protected String potionDescriptor;
-	protected AbstractRace associatedRace;
+	protected Race associatedRace;
 	protected String enchantmentEffectId;
 	protected String enchantmentItemTypeId;
 	

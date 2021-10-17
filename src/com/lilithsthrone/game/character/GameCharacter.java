@@ -194,7 +194,6 @@ import com.lilithsthrone.game.character.persona.Relationship;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.AbstractRacialBody;
 import com.lilithsthrone.game.character.race.FeralAttributes;
 import com.lilithsthrone.game.character.race.FurryPreference;
@@ -19607,7 +19606,7 @@ public abstract class GameCharacter implements XMLSaving {
 				addStatusEffect(StatusEffect.PREGNANT_0, (60 * 60) * (4 + Util.random.nextInt(5)));
 			}
 			if (pregnancyChance>0 && Math.random() <= pregnancyChance) {
-				AbstractRace litterSizeBasedOn = null;
+				Race litterSizeBasedOn;
 				
 				if (this.getBodyMaterial() == BodyMaterial.SLIME) {
 					litterSizeBasedOn = Race.SLIME;
@@ -19705,7 +19704,7 @@ public abstract class GameCharacter implements XMLSaving {
 				addStatusEffect(StatusEffect.PREGNANT_0, (60 * 60) * (4 + Util.random.nextInt(5)));
 			}
 			if (Math.random() <= pregnancyChance) {
-				AbstractRace litterSizeBasedOn = null;
+				Race litterSizeBasedOn;
 				
 				if (this.getBodyMaterial() == BodyMaterial.SLIME) {
 					litterSizeBasedOn = Race.SLIME;
@@ -23828,7 +23827,7 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 	}
 
-	public AbstractRace getSubspeciesOverrideRace() {
+	public Race getSubspeciesOverrideRace() {
 		try {
 			return getSubspeciesOverride().getRace();
 		} catch (Exception ex) {
@@ -24561,14 +24560,14 @@ public abstract class GameCharacter implements XMLSaving {
 	/**
 	 * @return The race which this character appears to be. Use getTrueRace() or do some checks with getSubspeciesOverride() to get their true race, but for 99.9% of the time, that won't be necessary and this method is fine to use.
 	 */
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return getSubspecies().getRace();
 	}
 
 	/**
 	 * @return This character's true race. If this character does not have a subspecies override, this will be the same as getRace(). If they do have an override, however, it will return the race of that override.
 	 */
-	public AbstractRace getTrueRace() {
+	public Race getTrueRace() {
 		if(this.getSubspeciesOverride()!=null) {
 			return this.getSubspeciesOverride().getRace();
 		}
@@ -24629,71 +24628,71 @@ public abstract class GameCharacter implements XMLSaving {
 		return "";
 	}
 	
-	public AbstractRace getAntennaRace() {
+	public Race getAntennaRace() {
 		return body.getAntenna().getType().getRace();
 	}
 	
-	public AbstractRace getArmRace() {
+	public Race getArmRace() {
 		return body.getArm().getType().getRace();
 	}
 
-	public AbstractRace getAssRace() {
+	public Race getAssRace() {
 		return body.getAss().getType().getRace();
 	}
 
-	public AbstractRace getBreastRace() {
+	public Race getBreastRace() {
 		return body.getBreast().getType().getRace();
 	}
 
-	public AbstractRace getBreastCrotchRace() {
+	public Race getBreastCrotchRace() {
 		return body.getBreastCrotch().getType().getRace();
 	}
 
-	public AbstractRace getFaceRace() {
+	public Race getFaceRace() {
 		return body.getFace().getType().getRace();
 	}
 
-	public AbstractRace getEyeRace() {
+	public Race getEyeRace() {
 		return body.getEye().getType().getRace();
 	}
 
-	public AbstractRace getEarRace() {
+	public Race getEarRace() {
 		return body.getEar().getType().getRace();
 	}
 
-	public AbstractRace getHairRace() {
+	public Race getHairRace() {
 		return body.getHair().getType().getRace();
 	}
 
-	public AbstractRace getLegRace() {
+	public Race getLegRace() {
 		return body.getLeg().getType().getRace();
 	}
 
-	public AbstractRace getSkinRace() {
+	public Race getSkinRace() {
 		return body.getTorso().getType().getRace();
 	}
 
-	public AbstractRace getHornRace() {
+	public Race getHornRace() {
 		return body.getHorn().getType().getRace();
 	}
 
-	public AbstractRace getPenisRace() {
+	public Race getPenisRace() {
 		return getCurrentPenis().getType().getRace();
 	}
 
-	public AbstractRace getTailRace() {
+	public Race getTailRace() {
 		return body.getTail().getType().getRace();
 	}
 	
-	public AbstractRace getTongueRace() {
+	public Race getTongueRace() {
 		return body.getFace().getTongue().getType().getRace();
 	}
 
-	public AbstractRace getVaginaRace() {
+	public Race getVaginaRace() {
 		return body.getVagina().getType().getRace();
 	}
 
-	public AbstractRace getWingRace() {
+	public Race getWingRace() {
 		return body.getWing().getType().getRace();
 	}
 
@@ -24826,7 +24825,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return body.addBodyCoveringTypesDiscovered(bct);
 	}
 	
-	public AbstractBodyCoveringType getBodyHairCoveringType(AbstractRace race) {
+	public AbstractBodyCoveringType getBodyHairCoveringType(Race race) {
 		return Body.getBodyHairCoveringType(race);
 	}
 	
@@ -26174,7 +26173,7 @@ public abstract class GameCharacter implements XMLSaving {
 			} else if(this.getSubspeciesOverride()==Subspecies.HALF_DEMON) {
 				// If the character is a half-demon, revert some demon body parts to their core race:
 				boolean resetAreas = false;
-				AbstractRace race = this.getHalfDemonSubspecies().getRace();
+				var race = this.getHalfDemonSubspecies().getRace();
 				
 				if(this.getArmType().getRace()!=race) {
 					this.setArmType(Util.randomItemFrom(ArmType.getArmTypes(race)));

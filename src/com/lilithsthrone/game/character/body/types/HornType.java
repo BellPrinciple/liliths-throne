@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -286,7 +285,7 @@ public class HornType {
 		return allHornTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractHornType>> typesMap = new HashMap<>();
+	private static Map<Race,List<AbstractHornType>> typesMap = new HashMap<>();
 	
 	/**
 	 * 
@@ -294,7 +293,7 @@ public class HornType {
 	 * @param retainNone Whether to leave HornType.NONE in the list (true) or remove it if it's present (false).
 	 * @return A list of HornTypes which are available for this race to have <b>via transformation, not by default</b>. If you want to find out what HornTypes a race has by default, use their RacialBody's getHornTypes() method.
 	 */
-	public static List<AbstractHornType> getHornTypes(AbstractRace race, boolean retainNone) {
+	public static List<AbstractHornType> getHornTypes(Race race, boolean retainNone) {
 		if(!typesMap.containsKey(race)) {
 			List<AbstractHornType> allTypes = new ArrayList<>();
 			

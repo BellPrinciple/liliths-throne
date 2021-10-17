@@ -96,7 +96,6 @@ import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.AbstractRacialBody;
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FeralAttributes;
@@ -155,7 +154,7 @@ public class Body implements XMLSaving {
 	
 	private boolean feral;
 	
-	private Map<AbstractRace, Integer> raceWeightMap = new ConcurrentHashMap<>();
+	private Map<Race,Integer> raceWeightMap = new ConcurrentHashMap<>();
 	private Subspecies subspecies;
 	private RaceStage raceStage;
 	private boolean piercedStomach = false;
@@ -376,7 +375,7 @@ public class Body implements XMLSaving {
 		}
 	}
 	
-	public static AbstractBodyCoveringType getBodyHairCoveringType(AbstractRace race) {
+	public static AbstractBodyCoveringType getBodyHairCoveringType(Race race) {
 		return race.getRacialBody().getBodyHairType();
 	}
 	
@@ -3276,7 +3275,7 @@ public class Body implements XMLSaving {
 		return UtilText.parse(owner, sb.toString());
 	}
 
-	private void addRaceWeight(Map<AbstractRace, Integer> raceWeightMap, AbstractRace race, int weight) {
+	private void addRaceWeight(Map<Race,Integer> raceWeightMap, Race race, int weight) {
 		if(race!=null && race!=Race.NONE) {
 			raceWeightMap.putIfAbsent(race, 0);
 			raceWeightMap.put(race, raceWeightMap.get(race)+weight);
@@ -3294,7 +3293,7 @@ public class Body implements XMLSaving {
 //			target.removeStatusEffect(StatusEffect.SUBSPECIES_BONUS);
 //		}
 		
-		AbstractRace race = Race.HUMAN;
+		Race race = Race.HUMAN;
 		if(this.getBodyMaterial()==BodyMaterial.SLIME) {
 			race = Race.SLIME;
 			this.raceStage = RaceStage.GREATER;
@@ -3357,12 +3356,12 @@ public class Body implements XMLSaving {
 //		}
 	}
 
-	public AbstractRace getRaceFromPartWeighting() {
+	public Race getRaceFromPartWeighting() {
 		return getRaceFromPartWeighting(false);
 	}
 	
-	public AbstractRace getRaceFromPartWeighting(boolean ignoreOverride) {
-		AbstractRace race = Race.HUMAN;
+	public Race getRaceFromPartWeighting(boolean ignoreOverride) {
+		Race race = Race.HUMAN;
 		
 		raceWeightMap.clear();
 		
@@ -3393,7 +3392,7 @@ public class Body implements XMLSaving {
 		int max = 0;
 		boolean demonPartFound = false;
 		
-		for(Entry<AbstractRace, Integer> e : raceWeightMap.entrySet()) {
+		for(var e : raceWeightMap.entrySet()) {
 			if(e.getKey()!=null && e.getKey()==Race.DEMON) {
 				demonPartFound = true;
 				
@@ -3428,11 +3427,11 @@ public class Body implements XMLSaving {
 		}
 	}
 
-	public Map<AbstractRace, Integer> getRaceWeightMap() {
+	public Map<Race,Integer> getRaceWeightMap() {
 		return raceWeightMap;
 	}
 	
-	public AbstractRace getRace() {
+	public Race getRace() {
 		if(subspecies == null) {
 			calculateRace(null);
 		}
@@ -6449,7 +6448,7 @@ public class Body implements XMLSaving {
 		}
 		
 		if(updateBodyHairColours) {
-			for(AbstractRace race : Race.getAllRaces()) {
+			for(var race : Race.getAllRaces()) {
 				if(!HairType.getHairTypes(race).isEmpty()) {
 					coverings.put(race.getRacialBody().getBodyHairType(), new Covering(race.getRacialBody().getBodyHairType(), coverings.get(HairType.getHairTypes(race).get(0).getBodyCoveringType(this)).getPrimaryColour()));
 				}
@@ -6545,7 +6544,7 @@ public class Body implements XMLSaving {
 	}
 	
 	public void updateVaginaColouring() {
-		AbstractRace race = vagina.getType()!=VaginaType.NONE?vagina.getType().getRace():getRace();
+		var race = vagina.getType()!=VaginaType.NONE?vagina.getType().getRace():getRace();
 		if(race==Race.ANGEL) {
 			coverings.put(BodyCoveringType.VAGINA, new Covering(BodyCoveringType.VAGINA, CoveringPattern.ORIFICE_VAGINA, coverings.get(BodyCoveringType.ANGEL).getPrimaryColour(), false, PresetColour.ORIFICE_INTERIOR, false));
 			
@@ -6558,7 +6557,7 @@ public class Body implements XMLSaving {
 	}
 	
 	public void updatePenisColouring() {
-		AbstractRace race = penis.getType()!=PenisType.NONE?penis.getType().getRace():getRace();
+		var race = penis.getType()!=PenisType.NONE?penis.getType().getRace():getRace();
 		if(race==Race.ANGEL) {
 			coverings.put(BodyCoveringType.PENIS, new Covering(BodyCoveringType.PENIS, CoveringPattern.NONE, coverings.get(BodyCoveringType.ANGEL).getPrimaryColour(), false, PresetColour.ORIFICE_INTERIOR, false));
 			

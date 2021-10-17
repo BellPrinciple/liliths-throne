@@ -152,7 +152,6 @@ import com.lilithsthrone.game.character.persona.Relationship;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.AbstractRacialBody;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Race;
@@ -229,7 +228,7 @@ public class UtilText {
 	
 	private static AbstractClothingType clothingTypeForParsing;
 	private static Body body;
-	private static AbstractRace race;
+	private static Race race;
 	private static CharacterInventory inventory;
 	
 //	private static List<GameCharacter> specialNPCList = new ArrayList<>();
@@ -9779,7 +9778,7 @@ public class UtilText {
 		}
 
 		// Bodies:
-		for(AbstractRace race : Race.getAllRaces()) {
+		for(var race : Race.getAllRaces()) {
 			engine.put("RACE_"+Race.getIdFromRace(race), race);
 		}
 		for(AbstractRacialBody racialBody : RacialBody.getAllRacialBodies()) {
@@ -10762,11 +10761,11 @@ public class UtilText {
 		engine.put(tag, getBodyForParsing());
 	}
 
-	public static AbstractRace getRaceForParsing() {
+	public static Race getRaceForParsing() {
 		return race;
 	}
 	
-	public static void setRaceForParsing(String tag, AbstractRace race) {
+	public static void setRaceForParsing(String tag, Race race) {
 		UtilText.race = race;
 		if(engine==null) {
 			initScriptEngine();
