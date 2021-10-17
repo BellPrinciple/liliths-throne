@@ -34,7 +34,7 @@ public interface Race {
 
 	String getId();
 
-	AbstractRacialBody getRacialBody();
+	RacialBody getRacialBody();
 
 	/**
 	 * Applies any special racial changes to the body which is passed in. This is called <b>before</b> Subspecies.applySpeciesChanges()
@@ -107,7 +107,7 @@ public interface Race {
 			FurryPreference.NORMAL,
 			false) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.HUMAN;
 		}
 	};
@@ -133,7 +133,7 @@ public interface Race {
 			return false;
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.HUMAN;
 		}
 	};
@@ -163,7 +163,7 @@ public interface Race {
 			return false;
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.ANGEL;
 		}
 	};
@@ -293,7 +293,7 @@ public interface Race {
 //			return "demon";
 //		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.DEMON;
 		}
 	};
@@ -315,7 +315,7 @@ public interface Race {
 				FurryPreference.NORMAL,
 				true) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.COW_MORPH;
 		}
 		
@@ -353,7 +353,7 @@ public interface Race {
 			}
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.DOG_MORPH;
 		}
 	};
@@ -401,7 +401,7 @@ public interface Race {
 			}
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.WOLF_MORPH;
 		}
 	};
@@ -429,7 +429,7 @@ public interface Race {
 			}
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.FOX_MORPH;
 		}
 	};
@@ -472,7 +472,7 @@ public interface Race {
 			return super.getNamePlural(body, feral);
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.CAT_MORPH;
 		}
 	};
@@ -535,7 +535,7 @@ public interface Race {
 			}
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.HORSE_MORPH;
 		}
 	};
@@ -557,7 +557,7 @@ public interface Race {
 				FurryPreference.NORMAL,
 				true) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.REINDEER_MORPH;
 		}
 	};
@@ -579,7 +579,7 @@ public interface Race {
 				FurryPreference.NORMAL,
 				true) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.SQUIRREL_MORPH;
 		}
 	};
@@ -607,7 +607,7 @@ public interface Race {
 			}
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.RAT_MORPH;
 		}
 	};
@@ -628,7 +628,7 @@ public interface Race {
 				FurryPreference.NORMAL,
 				true) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.RABBIT_MORPH;
 		}
 		
@@ -666,7 +666,7 @@ public interface Race {
 			return true;
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.BAT_MORPH;
 		}
 	};
@@ -687,7 +687,7 @@ public interface Race {
 				FurryPreference.NORMAL,
 				true) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.ALLIGATOR_MORPH;
 		}
 	};
@@ -713,7 +713,7 @@ public interface Race {
 			return true;
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.HUMAN;
 		}
 	};
@@ -753,7 +753,7 @@ public interface Race {
 			return true;
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.HARPY;
 		}
 	};
@@ -781,7 +781,7 @@ public interface Race {
 			return true;
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.DEMON;
 		}
 	};

@@ -98,7 +98,6 @@ import com.lilithsthrone.game.character.persona.NameTriplet;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Race;
@@ -268,8 +267,8 @@ public class CharacterUtils {
 		boolean takesAfterMother = true;
 		GameCharacter parentTakesAfter = mother;
 		boolean raceFromMother = true;
-		AbstractRacialBody motherBody = RacialBody.valueOfRace(body==null?mother.getRace():body.getRace());//RacialBody.valueOfRace(Subspecies.getOffspringFromMotherSubspecies(mother, father).getRace());
-		AbstractRacialBody fatherBody = RacialBody.valueOfRace(body==null?(father==null?mother.getRace():father.getRace()):body.getRace());//RacialBody.valueOfRace(Subspecies.getOffspringFromFatherSubspecies(mother, father).getRace());
+		var motherBody = RacialBody.valueOfRace(body==null?mother.getRace():body.getRace());//RacialBody.valueOfRace(Subspecies.getOffspringFromMotherSubspecies(mother, father).getRace());
+		var fatherBody = RacialBody.valueOfRace(body==null?(father==null?mother.getRace():father.getRace()):body.getRace());//RacialBody.valueOfRace(Subspecies.getOffspringFromFatherSubspecies(mother, father).getRace());
 		var raceTakesAfter = mother.getSubspecies();
 		boolean feminineGender = startingGender.isFeminine();
 		NPC blankNPC = Main.game.getNpc(GenericAndrogynousNPC.class);
@@ -282,7 +281,7 @@ public class CharacterUtils {
 		boolean fatherHuman = fatherBody.getTorsoType().getRace()==Race.HUMAN;
 		
 		if(body==null) {
-			AbstractRacialBody startingBodyType = RacialBody.HUMAN;
+			RacialBody startingBodyType = RacialBody.HUMAN;
 			RaceStage stage = RaceStage.HUMAN;
 			
 			// Core body type is random:
@@ -980,7 +979,7 @@ public class CharacterUtils {
 			startingGender = Math.random()>0.5f?Gender.F_V_B_FEMALE:Gender.M_P_MALE;
 		}
 		RaceStage stage = overrideStage!=null?overrideStage:getRaceStageFromPreferences(Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().get(halfSubspecies), startingGender, halfSubspecies);
-		AbstractRacialBody demonBody = RacialBody.DEMON;
+		RacialBody demonBody = RacialBody.DEMON;
 		
 		if(linkedCharacter!=null) {
 //			startingGender = linkedCharacter.getGender();
@@ -1160,11 +1159,11 @@ public class CharacterUtils {
 		return generateBody(linkedCharacter, startingGender, RacialBody.valueOfRace(species.getRace()), species, stage);
 	}
 	
-	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, AbstractRacialBody startingBodyType, RaceStage stage) {
+	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, RacialBody startingBodyType, RaceStage stage) {
 		return generateBody(linkedCharacter, startingGender, startingBodyType, null, stage);
 	}
 	
-	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, AbstractRacialBody startingBodyType, Subspecies species, RaceStage stage) {
+	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, RacialBody startingBodyType, Subspecies species, RaceStage stage) {
 		boolean hasVagina = startingGender.getGenderName().isHasVagina();
 		boolean hasPenis = startingGender.getGenderName().isHasPenis();
 		boolean hasBreasts = startingGender.getGenderName().isHasBreasts();
@@ -1352,7 +1351,7 @@ public class CharacterUtils {
 			body.setSubspeciesOverride(null);
 		}
 		
-		AbstractRacialBody startingBodyType = RacialBody.valueOfRace(species.getRace());
+		var startingBodyType = RacialBody.valueOfRace(species.getRace());
 		
 		boolean hasVagina = startingGender.getGenderName().isHasVagina();
 		boolean hasPenis = startingGender.getGenderName().isHasPenis();
