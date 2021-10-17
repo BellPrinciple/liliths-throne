@@ -74,15 +74,15 @@ import com.lilithsthrone.game.character.persona.PersonalityCategory;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.persona.SexualOrientationPreference;
-import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.3.1
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractRacialBody {
-	
+public class AbstractRacialBody implements RacialBody {
+
+	String id;
 	private boolean mod;
 	private boolean fromExternalFile;
 	
@@ -671,10 +671,13 @@ public abstract class AbstractRacialBody {
 			}
 		}
 	}
-	
-	/**
-	 * @return A map of personality traits and the percentage chance that a member of this race will spawn with them.
-	 */
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
 	public Map<PersonalityTrait, Float> getPersonalityTraitChances() {
 		Map<PersonalityTrait, Float> map = new HashMap<>();
 		
@@ -702,7 +705,8 @@ public abstract class AbstractRacialBody {
 		
 		return map;
 	}
-	
+
+	@Override
 	public SexualOrientation getSexualOrientation(Gender gender) {
 		if(this.fromExternalFile) {
 			if(gender.isFeminine()) {
@@ -727,22 +731,8 @@ public abstract class AbstractRacialBody {
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
-	/**
-	 * @param includeTypeNONE Set as true if you want the returned AntennaType to possibly include AntennaType.NONE. (Will include NONE anyway if the list is empty.)
-	 * @return A random AntennaType from this race's possible antennaTypes.
-	 */
-	public AbstractAntennaType getRandomrAntennaType(boolean includeTypeNONE) {
-		List<AbstractAntennaType> antennaList = new ArrayList<>(antennaTypes);
-		
-		if(includeTypeNONE || antennaTypes.size()==1) {
-			return antennaTypes.get(Util.random.nextInt(antennaTypes.size()));
-		} else {
-			antennaList.remove(AntennaType.NONE);
-			return antennaList.get(Util.random.nextInt(antennaList.size()));
-		}
-	}
-	
+
+	@Override
 	public List<AbstractAntennaType> getAntennaTypes(boolean removeTypeNone) {
 		if(removeTypeNone) {
 			List<AbstractAntennaType> antennaList = new ArrayList<>(antennaTypes);
@@ -752,69 +742,77 @@ public abstract class AbstractRacialBody {
 		return antennaTypes;
 	}
 
+	@Override
 	public int getMaleAntennaLength() {
 		return maleAntennaLength;
 	}
 
+	@Override
 	public int getFemaleAntennaLength() {
 		return femaleAntennaLength;
 	}
 
+	@Override
 	public AbstractArmType getArmType() {
 		return armType;
 	}
 
+	@Override
 	public AbstractAssType getAssType() {
 		return assType;
 	}
 
+	@Override
 	public AbstractBreastType getBreastType() {
 		return breastType;
 	}
 
+	@Override
 	public List<BreastShape> getBreastShapes() {
 		return breastShapes;
 	}
 
+	@Override
 	public AbstractFaceType getFaceType() {
 		return faceType;
 	}
 
+	@Override
 	public AbstractEyeType getEyeType() {
 		return eyeType;
 	}
 
+	@Override
 	public AbstractEarType getEarType() {
 		return earType;
 	}
 
+	@Override
 	public AbstractHairType getHairType() {
 		return hairType;
 	}
 
-	public AbstractLegType getLegType() {
-		return getLegType(getLegConfiguration());
-	}
-	
-	/**
-	 * @return The default legType for this body when its LegConfiguration is the passed in configuration argument.
-	 */
+	@Override
 	public AbstractLegType getLegType(LegConfiguration configuration) {
 		return legType;
 	}
-	
+
+	@Override
 	public LegConfiguration getLegConfiguration() {
 		return legConfiguration;
 	}
 
+	@Override
 	public AbstractTorsoType getTorsoType() {
 		return torsoType;
 	}
-	
+
+	@Override
 	public BodyMaterial getBodyMaterial() {
 		return bodyMaterial;
 	}
-	
+
+	@Override
 	public AbstractBodyCoveringType getBodyHairType() {
 		if(this.isFromExternalFile()) {
 			return BodyCoveringType.getBodyCoveringTypeFromId(bodyHairId);
@@ -822,22 +820,8 @@ public abstract class AbstractRacialBody {
 			return bodyHairType;
 		}
 	}
-	
-	/**
-	 * @param includeTypeNONE Set as true if you want the returned HornType to possibly include HornType.NONE. (Will include NONE anyway if the list is empty.)
-	 * @return A random HornType from this race's possible hornTypes.
-	 */
-	public AbstractHornType getRandomHornType(boolean includeTypeNONE) {
-		List<AbstractHornType> hornList = new ArrayList<>(hornTypes);
-		
-		if(includeTypeNONE || hornTypes.size()==1) {
-			return hornTypes.get(Util.random.nextInt(hornTypes.size()));
-		} else {
-			hornList.remove(HornType.NONE);
-			return hornList.get(Util.random.nextInt(hornList.size()));
-		}
-	}
-	
+
+	@Override
 	public List<AbstractHornType> getHornTypes(boolean removeTypeNone) {
 		if(removeTypeNone) {
 			List<AbstractHornType> hornList = new ArrayList<>(hornTypes);
@@ -846,361 +830,413 @@ public abstract class AbstractRacialBody {
 		}
 		return hornTypes;
 	}
-	
+
+	@Override
 	public AbstractPenisType getPenisType() {
 		return penisType;
 	}
-	
-	/**
-	 * @param includeTypeNONE Set as true if you want the returned TailType to possibly include TailType.NONE. (Will include NONE anyway if the list is empty.)
-	 * @return A random TailType from this race's possible tailTypes.
-	 */
-	public AbstractTailType getRandomTailType(boolean includeTypeNONE) {
-		List<AbstractTailType> tailList = new ArrayList<>(tailTypes);
-		
-		if(includeTypeNONE || tailTypes.size()==1) {
-			return tailTypes.get(Util.random.nextInt(tailTypes.size()));
-		} else {
-			tailList.remove(TailType.NONE);
-			return tailList.get(Util.random.nextInt(tailList.size()));
-		}
-	}
-	
+
+	@Override
 	public List<AbstractTailType> getTailType() {
 		return tailTypes;
 	}
 
+	@Override
 	public AbstractTentacleType getTentacleType() {
 		return tentacleType;
 	}
-	
+
+	@Override
 	public AbstractVaginaType getVaginaType() {
 		return vaginaType;
 	}
 
-	/**
-	 * @param includeTypeNONE Set as true if you want the returned TailType to possibly include TailType.NONE. (Will include NONE anyway if the list is empty.)
-	 * @return A random TailType from this race's possible tailTypes.
-	 */
-	public AbstractWingType getRandomWingType(boolean includeTypeNONE) {
-		List<AbstractWingType> wingList = new ArrayList<>(wingTypes);
-		
-		if(includeTypeNONE || wingTypes.size()==1) {
-			return wingTypes.get(Util.random.nextInt(wingTypes.size()));
-		} else {
-			wingList.remove(WingType.NONE);
-			return wingList.get(Util.random.nextInt(wingList.size()));
-		}
-	}
-	
+	@Override
 	public List<AbstractWingType> getWingTypes() {
 		return wingTypes;
 	}
-	
+
+	@Override
 	public int getArmRows() {
 		return armRows;
 	}
-	
+
+	@Override
 	public float getAnusCapacity() {
 		return anusCapacity;
 	}
 
+	@Override
 	public int getAnusDepth() {
 		return anusDepth;
 	}
-	
+
+	@Override
 	public int getAnusWetness() {
 		return anusWetness;
 	}
 
+	@Override
 	public int getAnusElasticity() {
 		return anusElasticity;
 	}
-	
+
+	@Override
 	public int getAnusPlasticity() {
 		return anusPlasticity;
 	}
 
+	@Override
 	public int getMaleHeight() {
 		return maleHeight;
 	}
 
+	@Override
 	public int getMaleFemininity() {
 		return maleFemininity;
 	}
 
+	@Override
 	public int getMaleMuscle() {
 		return maleMuscle;
 	}
-	
+
+	@Override
 	public int getMaleBodySize() {
 		return maleBodySize;
 	}
 
+	@Override
 	public int getFemaleHeight() {
 		return femaleHeight;
 	}
 
+	@Override
 	public int getFemaleFemininity() {
 		return femaleFemininity;
 	}
-	
+
+	@Override
 	public int getFemaleBodySize() {
 		return femaleBodySize;
 	}
 
+	@Override
 	public int getFemaleMuscle() {
 		return femaleMuscle;
 	}
 
+	@Override
 	public int getMaleAssSize() {
 		return maleAssSize;
 	}
 
+	@Override
 	public int getFemaleAssSize() {
 		return femaleAssSize;
 	}
 
+	@Override
 	public int getMaleHipSize() {
 		return maleHipSize;
 	}
 
+	@Override
 	public int getFemaleHipSize() {
 		return femaleHipSize;
 	}
 
+	@Override
 	public int getMaleHairLength() {
 		return maleHairLength;
 	}
 
+	@Override
 	public int getFemaleHairLength() {
 		return femaleHairLength;
 	}
 
+	@Override
 	public int getMaleHornLength() {
 		return maleHornLength;
 	}
 
+	@Override
 	public int getFemaleHornLength() {
 		return femaleHornLength;
 	}
 
+	@Override
 	public int getNoBreastSize() {
 		return noBreastSize;
 	}
 
+	@Override
 	public int getBreastSize() {
 		return breastSize;
 	}
 
+	@Override
 	public int getMaleLactationRate() {
 		return maleLactationRate;
 	}
 
+	@Override
 	public int getFemaleLactationRate() {
 		return femaleLactationRate;
 	}
 
+	@Override
 	public int getFemaleBreastElasticity() {
 		return femaleBreastElasticity;
 	}
 
+	@Override
 	public int getMaleBreastElasticity() {
 		return maleBreastElasticity;
 	}
 
+	@Override
 	public int getFemaleBreastPlasticity() {
 		return femaleBreastPlasticity;
 	}
 
+	@Override
 	public int getMaleBreastPlasticity() {
 		return maleBreastPlasticity;
 	}
 
+	@Override
 	public float getFemaleBreastCapacity() {
 		return femaleBreastCapacity;
 	}
 
+	@Override
 	public float getMaleBreastCapacity() {
 		return maleBreastCapacity;
 	}
 
+	@Override
 	public int getFemaleBreastDepth() {
 		return femaleBreastDepth;
 	}
-	
+
+	@Override
 	public int getMaleBreastDepth() {
 		return maleBreastDepth;
 	}
-	
+
+	@Override
 	public int getMaleNippleSize() {
 		return maleNippleSize;
 	}
 
+	@Override
 	public int getFemaleNippleSize() {
 		return femaleNippleSize;
 	}
 
+	@Override
 	public NippleShape getMaleNippleShape() {
 		return maleNippleShape;
 	}
 
+	@Override
 	public NippleShape getFemaleNippleShape() {
 		return femaleNippleShape;
 	}
 
+	@Override
 	public int getMaleNippleCountPerBreast() {
 		return maleNippleCountPerBreast;
 	}
 
+	@Override
 	public int getFemaleNippleCountPerBreast() {
 		return femaleNippleCountPerBreast;
 	}
 
+	@Override
 	public int getMaleAreolaeSize() {
 		return maleAreolaeSize;
 	}
 
+	@Override
 	public int getFemaleAreolaeSize() {
 		return femaleAreolaeSize;
 	}
 
+	@Override
 	public AreolaeShape getMaleAreolaeShape() {
 		return maleAreolaeShape;
 	}
 
+	@Override
 	public AreolaeShape getFemaleAreolaeShape() {
 		return femaleAreolaeShape;
 	}
 
+	@Override
 	public AbstractBreastType getBreastCrotchType() {
 		return breastCrotchType;
 	}
 
+	@Override
 	public List<BreastShape> getBreastCrotchShapes() {
 		return breastCrotchShapes;
 	}
 
+	@Override
 	public int getBreastCrotchSize() {
 		return breastCrotchSize;
 	}
 
+	@Override
 	public int getBreastCrotchLactationRate() {
 		return breastCrotchLactationRate;
 	}
 
+	@Override
 	public float getBreastCrotchCapacity() {
 		return breastCrotchCapacity;
 	}
 
+	@Override
 	public int getBreastCrotchDepth() {
 		return breastCrotchDepth;
 	}
-	
+
+	@Override
 	public int getBreastCrotchElasticity() {
 		return breastCrotchElasticity;
 	}
 
+	@Override
 	public int getBreastCrotchPlasticity() {
 		return breastCrotchPlasticity;
 	}
 
+	@Override
 	public int getNippleCountPerBreastCrotch() {
 		return nippleCountPerBreastCrotch;
 	}
 
+	@Override
 	public int getBreastCrotchNippleSize() {
 		return breastCrotchNippleSize;
 	}
 
+	@Override
 	public NippleShape getBreastCrotchNippleShape() {
 		return breastCrotchNippleShape;
 	}
 
+	@Override
 	public int getBreastCrotchAreolaeSize() {
 		return breastCrotchAreolaeSize;
 	}
 
+	@Override
 	public AreolaeShape getBreastCrotchAreolaeShape() {
 		return breastCrotchAreolaeShape;
 	}
 
+	@Override
 	public int getBreastCrotchCount() {
 		return breastCrotchCount;
 	}
 
+	@Override
 	public int getClitSize() {
 		return clitSize;
 	}
 
+	@Override
 	public int getClitGirth() {
 		return clitGirth;
 	}
 
+	@Override
 	public int getPenisSize() {
 		return penisSize;
 	}
-	
+
+	@Override
 	public int getPenisGirth() {
 		return penisGirth;
 	}
 
+	@Override
 	public int getTesticleSize() {
 		return testicleSize;
 	}
 
+	@Override
 	public int getCumProduction() {
 		return cumProduction;
 	}
 
+	@Override
 	public float getVaginaCapacity() {
 		return vaginaCapacity;
 	}
-	
+
+	@Override
 	public int getVaginaDepth() {
 		return vaginaDepth;
 	}
 
+	@Override
 	public int getVaginaWetness() {
 		return vaginaWetness;
 	}
 
+	@Override
 	public int getVaginaElasticity() {
 		return vaginaElasticity;
 	}
-	
+
+	@Override
 	public int getVaginaPlasticity() {
 		return vaginaPlasticity;
 	}
 
+	@Override
 	public int getBreastCountMale() {
 		return breastCountMale;
 	}
 
+	@Override
 	public int getBreastCountFemale() {
 		return breastCountFemale;
 	}
 
+	@Override
 	public int getTesticleQuantity() {
 		return testicleQuantity;
 	}
 
+	@Override
 	public int getMaleLipSize() {
 		return maleLipSize;
 	}
 
+	@Override
 	public int getFemaleLipSize() {
 		return femaleLipSize;
 	}
 
+	@Override
 	public int getMaleWingSize() {
 		return maleWingSize;
 	}
 
+	@Override
 	public int getFemaleWingSize() {
 		return femaleWingSize;
 	}
 
+	@Override
 	public GenitalArrangement getGenitalArrangement() {
 		return genitalArrangement;
 	}
