@@ -152,7 +152,6 @@ import com.lilithsthrone.game.character.persona.Relationship;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
@@ -9781,7 +9780,7 @@ public class UtilText {
 		for(var race : Race.getAllRaces()) {
 			engine.put("RACE_"+Race.getIdFromRace(race), race);
 		}
-		for(AbstractRacialBody racialBody : RacialBody.getAllRacialBodies()) {
+		for(var racialBody : RacialBody.getAllRacialBodies()) {
 			engine.put("RACIAL_BODY_"+RacialBody.getIdFromRacialBody(racialBody), racialBody);
 		}
 		for(RaceStage raceStage : RaceStage.values()) {

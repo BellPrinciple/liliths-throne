@@ -96,7 +96,6 @@ import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FeralAttributes;
 import com.lilithsthrone.game.character.race.Race;
@@ -6315,7 +6314,7 @@ public class Body implements XMLSaving {
 		}
 		
 		// Set genital relative sizes:
-		AbstractRacialBody rb = subspecies.getRace().getRacialBody();
+		var rb = subspecies.getRace().getRacialBody();
 		float proportionSizeDifference = ((float)attributes.getSize())/(this.isFeminine()?rb.getFemaleHeight():rb.getMaleHeight());
 		this.getPenis().setPenisLength(null, (int) (rb.getPenisSize()*proportionSizeDifference));
 		this.getPenis().setPenisGirth(null, (int) (rb.getPenisGirth()*proportionSizeDifference));

@@ -33,7 +33,6 @@ import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
 import com.lilithsthrone.game.character.body.valueEnums.GenitalArrangement;
 import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.RacialBody;
@@ -515,7 +514,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 				if(applyEffects) {
 					applyExtraLegConfigurationTransformations(body, body.getLeg().getLegConfiguration(), legConfiguration.isLargeGenitals(), applyFullEffects); // revert feral parts based on current configuration
 					// Changing back to bipedal reverts crotch-boobs based on preferences:
-					AbstractRacialBody startingBodyType = RacialBody.valueOfRace(this.getRace());
+					var startingBodyType = RacialBody.valueOfRace(this.getRace());
 					if(body.getRaceStage()!=RaceStage.GREATER || Main.getProperties().getUddersLevel()<2 || !body.getGender().isFeminine()) {
 						body.setBreastCrotch(
 								new BreastCrotch(
@@ -628,7 +627,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 			case WINGED_BIPED:
 				if(applyEffects) {
 					applyExtraLegConfigurationTransformations(body, legConfiguration, legConfiguration.isLargeGenitals(), applyFullEffects);
-					AbstractRacialBody startingBodyType = RacialBody.valueOfRace(this.getRace());
+					var startingBodyType = RacialBody.valueOfRace(this.getRace());
 					body.setGenitalArrangement(startingBodyType.getGenitalArrangement());
 				}
 
@@ -680,7 +679,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 		}
 		
 		if(Main.getProperties().getUddersLevel()==0 && !body.isFeral()) {
-			AbstractRacialBody startingBodyType = RacialBody.valueOfRace(this.getRace());
+			var startingBodyType = RacialBody.valueOfRace(this.getRace());
 			body.setBreastCrotch(
 					new BreastCrotch(
 						BreastType.NONE,
@@ -810,7 +809,7 @@ public abstract class AbstractLegType implements BodyPartTypeInterface {
 	 * @param applyFullEffects Pass in true if you want the additional transformations to include attribute changes (such as penis resizing, vagina capacity resetting, etc.).
 	 **/
 	private void applyExtraLegConfigurationTransformations(Body body, LegConfiguration legConfiguration, boolean largeGenitals, boolean applyFullEffects) {
-		AbstractRacialBody startingBodyType = RacialBody.valueOfRace(this.getRace());
+		var startingBodyType = RacialBody.valueOfRace(this.getRace());
 		
 		boolean demon = body.getRace()==Race.DEMON;
 		

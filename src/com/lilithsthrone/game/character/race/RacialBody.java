@@ -888,7 +888,7 @@ public interface RacialBody {
 		}
 	};
 
-	static AbstractRacialBody valueOfRace(Race race) {
+	static RacialBody valueOfRace(Race race) {
 		return race.getRacialBody();
 	}
 
@@ -896,15 +896,15 @@ public interface RacialBody {
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
 	@Deprecated
-	static AbstractRacialBody getRacialBodyFromId(String id) {
+	static RacialBody getRacialBodyFromId(String id) {
 		return table.of(id);
 	}
 
-	static String getIdFromRacialBody(AbstractRacialBody perk) {
+	static String getIdFromRacialBody(RacialBody perk) {
 		return perk.getId();
 	}
 
-	Table<AbstractRacialBody> table = new Table<>(s->s) {{
+	Table<RacialBody> table = new Table<>(s->s) {{
 
 		// Modded racial bodies:
 		forEachMod("/race",null,"racialBody",(f,n,a)->{
@@ -927,7 +927,7 @@ public interface RacialBody {
 	}};
 
 	@Deprecated
-	static List<AbstractRacialBody> getAllRacialBodies() {
+	static List<RacialBody> getAllRacialBodies() {
 		return table.list();
 	}
 }

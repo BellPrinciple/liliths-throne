@@ -194,7 +194,6 @@ import com.lilithsthrone.game.character.persona.Relationship;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
 import com.lilithsthrone.game.character.race.FeralAttributes;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Race;
@@ -3840,7 +3839,7 @@ public abstract class GameCharacter implements XMLSaving {
 		postTransformationCalculation();
 	}
 	
-	public void setBody(Gender startingGender, AbstractRacialBody startingBodyType, RaceStage stage, boolean additionalSetups) {
+	public void setBody(Gender startingGender, RacialBody startingBodyType, RaceStage stage, boolean additionalSetups) {
 		body = Main.game.getCharacterUtils().generateBody(this, startingGender, startingBodyType, stage);
 
 		if(additionalSetups) {
@@ -3860,7 +3859,7 @@ public abstract class GameCharacter implements XMLSaving {
 		postTransformationCalculation();
 	}
 	
-	protected void additionalBodySetup(Gender gender, AbstractRacialBody startingRace, Subspecies startingSpeciesType) {
+	protected void additionalBodySetup(Gender gender, RacialBody startingRace, Subspecies startingSpeciesType) {
 		if(this.surname==null || this.surname.isEmpty()) {
 			this.surname = Name.getSurname(this);
 		}
@@ -8087,7 +8086,7 @@ public abstract class GameCharacter implements XMLSaving {
 							
 						} else {
 							if(includesOrgasm) {
-								AbstractRacialBody body = RacialBody.valueOfRace(subspeciesBackup.getRace());
+								var body = RacialBody.valueOfRace(subspeciesBackup.getRace());
 								getStretchDescription(null, Penis.getGenericDiameter(body.getPenisSize(), PenetrationGirth.getGirthFromInt(body.getPenisGirth())), this, (SexAreaOrifice)performingArea);
 								if(partnerCummedInside) {
 									this.incrementCumCount(null, new SexType(SexParticipantType.NORMAL, performingArea, SexAreaPenetration.PENIS));
@@ -8625,7 +8624,7 @@ public abstract class GameCharacter implements XMLSaving {
 										drinkAmount));
 							
 						} else {
-							AbstractRacialBody body = RacialBody.valueOfRace(subspeciesBackup.getRace());
+							var body = RacialBody.valueOfRace(subspeciesBackup.getRace());
 							if(partnerPresent && body.getVaginaWetness()>0) { // Assume female?
 								this.ingestFluid(null,
 										subspeciesBackup,
@@ -8662,7 +8661,7 @@ public abstract class GameCharacter implements XMLSaving {
 							partner.incrementBreastStoredMilk(-suckleAmount);
 							
 						} else {
-							AbstractRacialBody body = RacialBody.valueOfRace(subspeciesBackup.getRace());
+							var body = RacialBody.valueOfRace(subspeciesBackup.getRace());
 							if(partnerPresent && body.getFemaleLactationRate()>0) { // Assume female?
 								this.ingestFluid(null,
 										subspeciesBackup,
@@ -8699,7 +8698,7 @@ public abstract class GameCharacter implements XMLSaving {
 							partner.incrementBreastCrotchStoredMilk(-suckleAmount);
 							
 						} else {
-							AbstractRacialBody body = RacialBody.valueOfRace(subspeciesBackup.getRace());
+							var body = RacialBody.valueOfRace(subspeciesBackup.getRace());
 							if(partnerPresent && body.getFemaleLactationRate()>0) { // Assume female?
 								this.ingestFluid(null,
 										subspeciesBackup,

@@ -303,7 +303,7 @@ public class AbstractRace implements Race {
 	}
 
 	@Override
-	public AbstractRacialBody getRacialBody() {
+	public RacialBody getRacialBody() {
 		if(this.isFromExternalFile()) {
 			return RacialBody.getRacialBodyFromId(racialBodyId);
 		}
