@@ -173,7 +173,7 @@ public class OffspringSeed implements XMLSaving {
 			this.body = Main.game.getCharacterUtils().generateBody(template, gender, mother, father);
 		}
 
-		AbstractRace race;
+		Race race;
 		if(this.body.getBodyMaterial()==BodyMaterial.SLIME) {
         	race = Race.SLIME;
 		} else {
@@ -538,7 +538,7 @@ public class OffspringSeed implements XMLSaving {
 	
 	public void setName(NameTriplet nameTriplet) { this.nameTriplet = nameTriplet; }
 
-	public AbstractRace getRace() {	return getSubspecies().getRace(); }
+	public Race getRace() {	return getSubspecies().getRace(); }
 	
 	public Subspecies getSubspecies() { return subspecies; }
 	

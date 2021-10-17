@@ -14,8 +14,8 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
+import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
@@ -491,7 +491,7 @@ public interface SexManagerInterface {
 			subspeciesSet.addAll(pop.getSpecies().keySet());
 		}
 		if(!subspeciesSet.isEmpty()) {
-			List<AbstractRace> racesPresent = new ArrayList<>();
+			var racesPresent = new ArrayList<Race>();
 			for(var species : subspeciesSet) {
 				if(!racesPresent.contains(species.getRace())) {
 					racesPresent.add(species.getRace());

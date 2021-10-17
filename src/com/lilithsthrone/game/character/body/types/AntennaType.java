@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -122,8 +121,8 @@ public class AntennaType {
 		return allAntennaTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractAntennaType>> typesMap = new HashMap<>();
-	public static List<AbstractAntennaType> getAntennaTypes(AbstractRace r) {
+	private static Map<Race,List<AbstractAntennaType>> typesMap = new HashMap<>();
+	public static List<AbstractAntennaType> getAntennaTypes(Race r) {
 		if(typesMap.containsKey(r)) {
 			return typesMap.get(r);
 		}

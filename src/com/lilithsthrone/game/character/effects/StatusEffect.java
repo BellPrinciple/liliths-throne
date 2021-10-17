@@ -46,7 +46,6 @@ import com.lilithsthrone.game.character.npc.submission.Silence;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -3341,7 +3340,7 @@ public class StatusEffect {
 				long timeLeft = oneDayLater - now;
 				long hoursLeft = timeLeft / 60;
 				long minutesLeft = timeLeft % 60;
-				AbstractRace fluidRace = addiction.getFluid().getRace();
+				var fluidRace = addiction.getFluid().getRace();
 				extraEffects.add("<b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>: "
 						+ (timeLeft > 0
 								?" [style.colourGood("+hoursLeft+":"+String.format("%02d", minutesLeft)+")]"
@@ -3407,7 +3406,7 @@ public class StatusEffect {
 						long timeLeft = twoDaysLater - now;
 						long hoursLeft = timeLeft / 60;
 						long minutesLeft = timeLeft % 60;
-						AbstractRace fluidRace = addiction.getFluid().getRace();
+						var fluidRace = addiction.getFluid().getRace();
 						sb.append("<br/>"
 								+ "[style.boldArcane(Addictive)]"
 								+ " <b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>: "
@@ -3470,7 +3469,7 @@ public class StatusEffect {
 						long timeLeft = threeDaysLater - now;
 						long hoursLeft = timeLeft / 60;
 						long minutesLeft = timeLeft % 60;
-						AbstractRace fluidRace = addiction.getFluid().getRace();
+						var fluidRace = addiction.getFluid().getRace();
 						sb.append("<br/>"
 								+ "[style.boldArcane(Addictive)]"
 								+ " <b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>: "
@@ -3533,7 +3532,7 @@ public class StatusEffect {
 						long timeLeft = fourDaysLater - now;
 						long hoursLeft = timeLeft / 60;
 						long minutesLeft = timeLeft % 60;
-						AbstractRace fluidRace = addiction.getFluid().getRace();
+						var fluidRace = addiction.getFluid().getRace();
 						sb.append("<br/>"
 								+ "[style.boldArcane(Addictive)]"
 								+ " <b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>: "
@@ -3596,7 +3595,7 @@ public class StatusEffect {
 						long timeLeft = fiveDaysLater - now;
 						long hoursLeft = timeLeft / 60;
 						long minutesLeft = timeLeft % 60;
-						AbstractRace fluidRace = addiction.getFluid().getRace();
+						var fluidRace = addiction.getFluid().getRace();
 						sb.append("<br/>"
 								+ "[style.boldArcane(Addictive)]"
 								+ " <b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>: "
@@ -3655,7 +3654,7 @@ public class StatusEffect {
 					long now = Main.game.getMinutesPassed();
 					
 					if (fiveDaysLater <= now) {
-						AbstractRace fluidRace = addiction.getFluid().getRace();
+						var fluidRace = addiction.getFluid().getRace();
 						sb.append("<br/>"
 								+ "[style.boldArcane(Addictive)]"
 								+ " <b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>.");

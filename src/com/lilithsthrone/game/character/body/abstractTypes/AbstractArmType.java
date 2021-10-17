@@ -14,7 +14,6 @@ import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
@@ -35,7 +34,7 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 	private String transformationName;
 	
 	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private Race race;
 	
 	private boolean allowsFlight;
 
@@ -80,7 +79,7 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 	 * @param armBodyDescription A sentence or two to describe this arm type, as seen in the character view screen. It should follow the same format as all of the other entries in the ArmType class.
 	 */
 	public AbstractArmType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			Race race,
 			String name,
 			String namePlural,
 			List<String> descriptorsMasculine,
@@ -276,7 +275,7 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 	

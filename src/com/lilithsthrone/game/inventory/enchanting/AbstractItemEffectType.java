@@ -70,8 +70,8 @@ import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
 import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Subspecies;
+import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntryBookAddedToLibrary;
 import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
@@ -116,7 +116,7 @@ public abstract class AbstractItemEffectType {
 	/**
 	 * @return Usually null, but if this ItemEffectType has an associated Race, this is how to access it.
 	 */
-	public AbstractRace getAssociatedRace() {
+	public Race getAssociatedRace() {
 		return null;
 	}
 	
@@ -2184,9 +2184,9 @@ public abstract class AbstractItemEffectType {
 	}
 	
 	// Caching:
-	private static Map<AbstractRace, Map<TFModifier, LinkedHashMap<TFModifier, List<TFPotency>>>> racialPrimaryModSecondaryModPotencyGrid = new HashMap<>();
+	private static Map<Race,Map<TFModifier,LinkedHashMap<TFModifier,List<TFPotency>>>> racialPrimaryModSecondaryModPotencyGrid = new HashMap<>();
 	
-	protected static List<TFModifier> getRacialSecondaryModifiers(AbstractRace race, TFModifier primaryModifier) {
+	protected static List<TFModifier> getRacialSecondaryModifiers(Race race, TFModifier primaryModifier) {
 		if(racialPrimaryModSecondaryModPotencyGrid.containsKey(race) && racialPrimaryModSecondaryModPotencyGrid.get(race).containsKey(primaryModifier)) {
 			return new ArrayList<>(racialPrimaryModSecondaryModPotencyGrid.get(race).get(primaryModifier).keySet());
 		} else {
@@ -2195,7 +2195,7 @@ public abstract class AbstractItemEffectType {
 		}
 	}
 	
-	protected static List<TFPotency> getRacialPotencyModifiers(AbstractRace race, TFModifier primaryModifier, TFModifier secondaryModifier) {
+	protected static List<TFPotency> getRacialPotencyModifiers(Race race, TFModifier primaryModifier, TFModifier secondaryModifier) {
 		if(racialPrimaryModSecondaryModPotencyGrid.get(race).containsKey(primaryModifier)) {
 			return new ArrayList<>(racialPrimaryModSecondaryModPotencyGrid.get(race).get(primaryModifier).get(secondaryModifier));
 		} else {
@@ -2204,7 +2204,7 @@ public abstract class AbstractItemEffectType {
 		}
 	}
 	
-	private static void populateGrid(AbstractRace race, TFModifier primaryModifier) {
+	private static void populateGrid(Race race, TFModifier primaryModifier) {
 		LinkedHashMap<TFModifier, List<TFPotency>> secondaryModPotencyMap = new LinkedHashMap<>();
 		
 		switch(primaryModifier) {
@@ -2702,7 +2702,7 @@ public abstract class AbstractItemEffectType {
 		return 0;
 	}
 	
-	protected static RacialEffectUtil getRacialEffect(AbstractRace race, TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, GameCharacter user, GameCharacter target) {
+	protected static RacialEffectUtil getRacialEffect(Race race, TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, GameCharacter user, GameCharacter target) {
 		
 		switch(primaryModifier) {
 			case TF_ANTENNA:
@@ -5600,7 +5600,7 @@ public abstract class AbstractItemEffectType {
 		};
 	}
 
-	private static RacialEffectUtil getAntennaTypeRacialEffectUtil(AbstractRace race, GameCharacter target, int index) {
+	private static RacialEffectUtil getAntennaTypeRacialEffectUtil(Race race, GameCharacter target, int index) {
 		List<AbstractAntennaType> antennaTypes = RacialBody.valueOfRace(race).getAntennaTypes(true);
 		AbstractAntennaType selectedAntennaType = index >= antennaTypes.size() ? AntennaType.NONE : antennaTypes.get(index);
 		

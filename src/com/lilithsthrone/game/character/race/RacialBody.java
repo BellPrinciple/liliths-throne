@@ -636,7 +636,7 @@ public class RacialBody {
 		}
 	};
 	
-	public static AbstractRacialBody valueOfRace(AbstractRace race) {
+	public static AbstractRacialBody valueOfRace(Race race) {
 		return race.getRacialBody();
 	}
 	

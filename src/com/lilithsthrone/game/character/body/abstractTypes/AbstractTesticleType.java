@@ -14,7 +14,6 @@ import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.types.FluidType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -30,7 +29,7 @@ public abstract class AbstractTesticleType implements BodyPartTypeInterface {
 	private boolean fromExternalFile;
 
 	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private Race race;
 	private AbstractFluidType fluidType;
 	private boolean internal;
 	
@@ -48,7 +47,7 @@ public abstract class AbstractTesticleType implements BodyPartTypeInterface {
 	 * @param descriptors The descriptors that can be used for this testicle type.
 	 */
 	public AbstractTesticleType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			Race race,
 			AbstractFluidType fluidType,
 			boolean internal,
 			List<String> names,
@@ -66,7 +65,7 @@ public abstract class AbstractTesticleType implements BodyPartTypeInterface {
 	}
 	
 	public AbstractTesticleType(AbstractBodyCoveringType skinType,
-			AbstractRace race,
+			Race race,
 			AbstractFluidType fluidType,
 			boolean internal) {
 		this(skinType,
@@ -188,7 +187,7 @@ public abstract class AbstractTesticleType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 	

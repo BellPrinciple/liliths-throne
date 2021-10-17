@@ -1226,10 +1226,10 @@ public class PhoneDialogue {
 //				+"<div class='container-full-width'>"
 					+ "<p style='color:"+PresetColour.GENERIC_COMBAT.toWebHexString()+"; text-align:center;'><b>Racial Damage Attributes</b></p>");
 			
-			List<AbstractRace> raceListSorted = new ArrayList<>(Attribute.racialAttributes.keySet());
+			var raceListSorted = new ArrayList<>(Attribute.racialAttributes.keySet());
 			raceListSorted.sort((r1, r2) -> r1.getName(true).compareTo(r2.getName(true)));
 			
-			for(AbstractRace race : raceListSorted) {
+			for(var race : raceListSorted) {
 				AbstractAttribute attribute = Attribute.racialAttributes.get(race);
 				int damageModifier = (int) Main.game.getPlayer().getAttributeValue(attribute);
 				if(race==Race.DEMON) {
@@ -3310,9 +3310,9 @@ public class PhoneDialogue {
 		}
 	};
 
-	private static List<AbstractRace> racesDiscovered = new ArrayList<>();
+	private static List<Race> racesDiscovered = new ArrayList<>();
 	private static List<Subspecies> subspeciesDiscovered = new ArrayList<>();
-	private static AbstractRace raceSelected;
+	private static Race raceSelected;
 	private static Subspecies subspeciesSelected;
 	private static StringBuilder subspeciesSB = new StringBuilder();
 	
@@ -3322,7 +3322,7 @@ public class PhoneDialogue {
 		
 		for(var subspecies : Subspecies.getAllSubspecies()) {
 			if(Main.getProperties().isRaceDiscovered(subspecies)) {
-				AbstractRace race = subspecies.getRace();
+				var race = subspecies.getRace();
 				if(!racesDiscovered.contains(race)) {
 					racesDiscovered.add(race);
 				}
@@ -3349,11 +3349,10 @@ public class PhoneDialogue {
 						+ "You have encountered the following races in your travels:<br/>"
 						+ "(Discovered races are [style.boldGood(highlighted)], while undiscovered races are [style.colourDisabled(greyed out)].)"
 					+ "</p>");
-			List<AbstractRace> sortedRaces = new ArrayList<>();
-			sortedRaces.addAll(Race.getAllRaces());
+			var sortedRaces = new ArrayList<>(Race.getAllRaces());
 			sortedRaces.remove(Race.NONE);
 			sortedRaces.sort((r1, r2) -> r1.getName(false).compareTo(r2.getName(false)));
-			for(AbstractRace race : sortedRaces) {
+			for(var race : sortedRaces) {
 				UtilText.nodeContentSB.append("<div style='box-sizing: border-box; text-align:center; width:50%; padding:8px; margin:0; float:left;'>");
 				if(racesDiscovered.contains(race)) {
 					UtilText.nodeContentSB.append("<b style='color:"+race.getColour().toWebHexString()+";'>" + Util.capitaliseSentence(race.getName(false)) + "</b>");

@@ -91,7 +91,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 	private String basicDescriptionId;
 	private String advancedDescriptionId;
 	
-	private AbstractRace race;
+	private Race race;
 	private SubspeciesPreference subspeciesPreferenceDefault;
 	private String description;
 
@@ -254,7 +254,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 			String bookNamePlural,
 			String basicDescription,
 			String advancedDescription,
-			AbstractRace race,
+			Race race,
 			Map<PerkCategory, Integer> perkWeightingFeminine,
 			Map<PerkCategory, Integer> perkWeightingMasculine,
 			Colour colour,
@@ -761,7 +761,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 		}
 	}
 
-	public static Subspecies getMainSubspeciesOfRace(AbstractRace race) {
+	public static Subspecies getMainSubspeciesOfRace(Race race) {
 		Subspecies backup = Subspecies.HUMAN;
 		for(var sub : Subspecies.getAllSubspecies()) {
 			if(sub.getRace()==race) {
@@ -784,7 +784,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 //	}
 
 	@Override
-	public int getSubspeciesWeighting(Body body, AbstractRace race) {
+	public int getSubspeciesWeighting(Body body, Race race) {
 		if(this.isFromExternalFile() && Main.game.isStarted()) {
 			UtilText.setBodyForParsing("targetedBody", body);
 			UtilText.setRaceForParsing("targetedRace", race);
@@ -796,7 +796,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 		return 0;
 	}
 	
-	public static Subspecies getSubspeciesFromBody(Body body, AbstractRace race) {
+	public static Subspecies getSubspeciesFromBody(Body body, Race race) {
 		Subspecies subspecies = null;
 		
 		int highestWeighting = 0;
@@ -1287,7 +1287,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

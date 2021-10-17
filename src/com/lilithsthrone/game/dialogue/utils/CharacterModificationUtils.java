@@ -120,7 +120,6 @@ import com.lilithsthrone.game.character.markings.TattooWriting;
 import com.lilithsthrone.game.character.markings.TattooWritingStyle;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
@@ -1023,7 +1022,7 @@ public class CharacterModificationUtils {
 				false);
 	}
 	
-	public static String getSelfTransformTailChoiceDiv(List<AbstractRace> availableRaces, boolean removeNone) {
+	public static String getSelfTransformTailChoiceDiv(List<Race> availableRaces, boolean removeNone) {
 		contentSB.setLength(0);
 		
 		for(AbstractTailType tail : TailType.getAllTailTypes()) {
@@ -1285,7 +1284,7 @@ public class CharacterModificationUtils {
 				true);
 	}
 	
-	public static String getSelfTransformWingChoiceDiv(List<AbstractRace> availableRaces, boolean removeNone) {
+	public static String getSelfTransformWingChoiceDiv(List<Race> availableRaces, boolean removeNone) {
 		contentSB.setLength(0);
 		
 		List<AbstractWingType> sortedTypes = new ArrayList<>(WingType.getAllWingTypes());
@@ -1332,11 +1331,11 @@ public class CharacterModificationUtils {
 				true);
 	}
 	
-	public static String getSelfTransformHornChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformHornChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 
 		Set<AbstractHornType> types = new HashSet<>();
-		for(AbstractRace race : availableRaces) {
+		for(var race : availableRaces) {
 			types.addAll(RacialBody.valueOfRace(race).getHornTypes(false));
 		}
 		
@@ -1463,7 +1462,7 @@ public class CharacterModificationUtils {
 				true);
 	}
 	
-	public static String getSelfTransformAntennaChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformAntennaChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
 		for(AbstractAntennaType antenna : AntennaType.getAllAntennaTypes()) {
@@ -1576,7 +1575,7 @@ public class CharacterModificationUtils {
 				true);
 	}
 
-	public static String getSelfTransformHairChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformHairChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
 		for(AbstractHairType hair : HairType.getAllHairTypes()) {
@@ -1693,7 +1692,7 @@ public class CharacterModificationUtils {
 				false);
 	}
 	
-	public static String getSelfTransformAssChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformAssChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
 		for(AbstractAssType ass : AssType.getAllAssTypes()) {
@@ -1722,7 +1721,7 @@ public class CharacterModificationUtils {
 				false);
 	}
 	
-	public static String getSelfTransformBreastChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformBreastChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
 		for(AbstractBreastType breast : BreastType.getAllBreastTypes()) {
@@ -1750,7 +1749,7 @@ public class CharacterModificationUtils {
 				false);
 	}
 	
-	public static String getSelfTransformBreastCrotchChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformBreastCrotchChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
 		for(AbstractBreastType breast : BreastType.getAllBreastTypes()) {
@@ -1779,7 +1778,7 @@ public class CharacterModificationUtils {
 				false);
 	}
 	
-	public static String getSelfTransformArmChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformArmChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
 		for(AbstractArmType arm : ArmType.getAllArmTypes()) {
@@ -1833,7 +1832,7 @@ public class CharacterModificationUtils {
 				true);
 	}
 	
-	public static String getSelfTransformLegChoiceDiv(List<AbstractRace> availableRaces, boolean bypassRestrictions) {
+	public static String getSelfTransformLegChoiceDiv(List<Race> availableRaces, boolean bypassRestrictions) {
 		contentSB.setLength(0);
 		
 		for(AbstractLegType leg : LegType.getAllLegTypes()) {
@@ -1890,7 +1889,7 @@ public class CharacterModificationUtils {
 				true);
 	}
 	
-	public static String getSelfTransformFaceChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformFaceChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
 		for(AbstractFaceType face : FaceType.getAllFaceTypes()) {
@@ -1919,7 +1918,7 @@ public class CharacterModificationUtils {
 				true);
 	}
 	
-	public static String getSelfTransformBodyChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformBodyChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
 		for(AbstractTorsoType skin : TorsoType.getAllTorsoTypes()) {
@@ -2016,7 +2015,7 @@ public class CharacterModificationUtils {
 	}
 	
 	
-	public static String getSelfTransformEarChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformEarChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
 		for(AbstractEarType ear : EarType.getAllEarTypes()) {
@@ -2052,7 +2051,7 @@ public class CharacterModificationUtils {
 				false);
 	}
 	
-	public static String getSelfTransformEyeChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformEyeChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
 		for(AbstractEyeType eye : EyeType.getAllEyeTypes()) {
@@ -3520,7 +3519,7 @@ public class CharacterModificationUtils {
 				true);
 	}
 	
-	public static String getSelfTransformVaginaChoiceDiv(List<AbstractRace> availableRaces) {
+	public static String getSelfTransformVaginaChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
 		for(AbstractVaginaType vagina : VaginaType.getAllVaginaTypes()) {
@@ -4118,7 +4117,7 @@ public class CharacterModificationUtils {
 				true);
 	}
 	
-	public static String getSelfTransformPenisChoiceDiv(List<AbstractRace> availableRaces, boolean halfWidth) {
+	public static String getSelfTransformPenisChoiceDiv(List<Race> availableRaces, boolean halfWidth) {
 		contentSB.setLength(0);
 		
 		for(AbstractPenisType penis : PenisType.getAllPenisTypes()) {
@@ -5693,11 +5692,11 @@ public class CharacterModificationUtils {
 		coveringsToBeApplied = new HashMap<>();
 	}
 
-	public static String getKatesDivCoveringsNew(boolean withCost, AbstractRace race, AbstractBodyCoveringType coveringType, String title, String description, boolean withSecondary, boolean withGlow) {
+	public static String getKatesDivCoveringsNew(boolean withCost, Race race, AbstractBodyCoveringType coveringType, String title, String description, boolean withSecondary, boolean withGlow) {
 		return getKatesDivCoveringsNew(withCost, race, coveringType, title, description, withSecondary, withGlow, true);
 	}
 	
-	public static String getKatesDivCoveringsNew(boolean withCost, AbstractRace race, AbstractBodyCoveringType coveringType, String title, String description, boolean withSecondary, boolean withGlow, boolean withDyeAndExtraPatterns) {
+	public static String getKatesDivCoveringsNew(boolean withCost, Race race, AbstractBodyCoveringType coveringType, String title, String description, boolean withSecondary, boolean withGlow, boolean withDyeAndExtraPatterns) {
 		Main.game.getDialogueFlags().setFlag(DialogueFlagValue.coveringChangeListenersRequired, true);
 		
 		boolean disabledButton = !coveringsToBeApplied.containsKey(coveringType) || coveringsToBeApplied.get(coveringType).equals(BodyChanging.getTarget().getCovering(coveringType));

@@ -39,7 +39,6 @@ import com.lilithsthrone.game.character.markings.TattooType;
 import com.lilithsthrone.game.character.npc.dominion.Kate;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -67,7 +66,7 @@ public class SuccubisSecrets {
 
 	public static InventorySlot invSlotTattooToRemove = null;
 	
-	public static Map<AbstractBodyCoveringType, Value<AbstractRace, List<String>>> coveringsNamesMap;
+	public static Map<AbstractBodyCoveringType,Value<Race,List<String>>> coveringsNamesMap;
 	
 	private static StringBuilder descriptionSB;
 	
@@ -126,7 +125,7 @@ public class SuccubisSecrets {
 						|| (bp instanceof Wing && !target.hasWings())) {
 					addBpi = false;
 				}
-				AbstractRace race = bp.getType().getRace();
+				var race = bp.getType().getRace();
 				if(addBpi) {
 					AbstractBodyCoveringType coveringType = bp.getBodyCoveringType(target);
 					if(bp instanceof Ass) {
@@ -194,8 +193,8 @@ public class SuccubisSecrets {
 		
 		// Alter the map for if the target's body is not made of flesh:
 		if(BodyChanging.getTarget().getBodyMaterial()!=BodyMaterial.FLESH) {
-			Map<AbstractBodyCoveringType, Value<AbstractRace, List<String>>> altMaterialCoveringsNamesMap = new LinkedHashMap<>();
-			for(Entry<AbstractBodyCoveringType, Value<AbstractRace, List<String>>> entry : coveringsNamesMap.entrySet()) {
+			var altMaterialCoveringsNamesMap = new LinkedHashMap<AbstractBodyCoveringType,Value<Race,List<String>>>();
+			for(var entry : coveringsNamesMap.entrySet()) {
 				if(entry.getKey().getCategory().isInfluencedByMaterialType()) {
 					altMaterialCoveringsNamesMap.put(BodyCoveringType.getMaterialBodyCoveringType(BodyChanging.getTarget().getBodyMaterial(), entry.getKey().getCategory()), entry.getValue());
 				} else {
@@ -205,7 +204,7 @@ public class SuccubisSecrets {
 			coveringsNamesMap = altMaterialCoveringsNamesMap;
 		}
 
-		for(Entry<AbstractBodyCoveringType, Value<AbstractRace, List<String>>> entry : coveringsNamesMap.entrySet()) {
+		for(var entry : coveringsNamesMap.entrySet()) {
 			if(entry.getKey().getCategory()==BodyCoveringCategory.ANUS) {
 				entry.getValue().getValue().clear();
 				entry.getValue().getValue().add("anus");
@@ -742,9 +741,9 @@ public class SuccubisSecrets {
 			
 			UtilText.nodeContentSB.append(getMoneyRemainingString());
 			
-			for(Entry<AbstractBodyCoveringType, Value<AbstractRace, List<String>>> entry : coveringsNamesMap.entrySet()){
+			for(var entry : coveringsNamesMap.entrySet()){
 				AbstractBodyCoveringType bct = entry.getKey();
-				AbstractRace race = entry.getValue().getKey();
+				var race = entry.getValue().getKey();
 				GameCharacter target = Main.game.getPlayer();
 				
 				Value<String, String> titleDescription = getCoveringTitleDescription(target, bct, entry.getValue().getValue());

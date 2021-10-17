@@ -15,7 +15,6 @@ import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.types.WingType;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -32,7 +31,7 @@ public abstract class AbstractWingType implements BodyPartTypeInterface {
 	private boolean fromExternalFile;
 
 	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private Race race;
 
 	private String transformationName;
 	
@@ -67,7 +66,7 @@ public abstract class AbstractWingType implements BodyPartTypeInterface {
 	 */
 	public AbstractWingType(
 			AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			Race race,
 			boolean allowsFlight,
 			String transformationName,
 			String name,
@@ -221,7 +220,7 @@ public abstract class AbstractWingType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

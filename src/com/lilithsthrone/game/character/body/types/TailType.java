@@ -13,7 +13,6 @@ import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -1077,9 +1076,9 @@ public class TailType {
 		return allTailTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractTailType>> typesMap = new HashMap<>();
+	private static Map<Race,List<AbstractTailType>> typesMap = new HashMap<>();
 	
-	public static List<AbstractTailType> getTailTypes(AbstractRace r) {
+	public static List<AbstractTailType> getTailTypes(Race r) {
 		if(typesMap.containsKey(r)) {
 			return typesMap.get(r);
 		}

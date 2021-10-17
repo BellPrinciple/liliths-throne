@@ -12,7 +12,6 @@ import java.util.Map.Entry;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -498,9 +497,9 @@ public class ArmType {
 		return allArmTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractArmType>> typesMap = new HashMap<>();
+	private static Map<Race,List<AbstractArmType>> typesMap = new HashMap<>();
 	
-	public static List<AbstractArmType> getArmTypes(AbstractRace r) {
+	public static List<AbstractArmType> getArmTypes(Race r) {
 		if(typesMap.containsKey(r)) {
 			return typesMap.get(r);
 		}

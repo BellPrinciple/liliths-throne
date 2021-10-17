@@ -12,7 +12,6 @@ import java.util.Map.Entry;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -305,9 +304,9 @@ public class TorsoType {
 		return allTorsoTypes;
 	}
 	
-	private static Map<AbstractRace, List<AbstractTorsoType>> typesMap = new HashMap<>();
+	private static Map<Race,List<AbstractTorsoType>> typesMap = new HashMap<>();
 	
-	public static List<AbstractTorsoType> getTorsoTypes(AbstractRace r) {
+	public static List<AbstractTorsoType> getTorsoTypes(Race r) {
 		if(typesMap.containsKey(r)) {
 			return typesMap.get(r);
 		}

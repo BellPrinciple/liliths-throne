@@ -45,7 +45,6 @@ import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityCategory;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -357,7 +356,7 @@ public class Elemental extends NPC {
 	}
 
 	@Override
-	public AbstractRace getSubspeciesOverrideRace() {
+	public Race getSubspeciesOverrideRace() {
 		return Race.ELEMENTAL;
 	}
 	

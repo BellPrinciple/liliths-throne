@@ -14,7 +14,6 @@ import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -30,7 +29,7 @@ public abstract class AbstractAnusType implements BodyPartTypeInterface {
 	private boolean fromExternalFile;
 	
 	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private Race race;
 
 	private boolean assHairAllowed;
 	
@@ -52,7 +51,7 @@ public abstract class AbstractAnusType implements BodyPartTypeInterface {
 	 * @param defaultRacialOrificeModifiers Which modifiers this anus naturally spawns with.
 	 */
 	public AbstractAnusType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			Race race,
 			List<String> names,
 			List<String> namesPlural,
 			List<String> descriptorsMasculine,
@@ -189,7 +188,7 @@ public abstract class AbstractAnusType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

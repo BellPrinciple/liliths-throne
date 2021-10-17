@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.race.AbstractRace;
+import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -589,7 +589,7 @@ public class Attribute {
 	public static Map<String, AbstractAttribute> idToAttributeMap = new HashMap<>();
 	public static List<AbstractAttribute> allAttributes;
 	
-	public static Map<AbstractRace, AbstractAttribute> racialAttributes = new HashMap<>();
+	public static Map<Race,AbstractAttribute> racialAttributes = new HashMap<>();
 
 	private static Map<String, AbstractAttribute> oldConversionMapping = new HashMap<>();
 	static {
@@ -632,7 +632,7 @@ public class Attribute {
 		return allAttributes;
 	}
 	
-	public static AbstractAttribute getRacialDamageAttribute(AbstractRace race) {
+	public static AbstractAttribute getRacialDamageAttribute(Race race) {
 		return racialAttributes.get(race);
 	}
 	

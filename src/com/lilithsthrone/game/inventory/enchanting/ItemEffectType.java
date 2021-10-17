@@ -2497,14 +2497,14 @@ public class ItemEffectType {
 		}
 	};
 
-	public static AbstractItemEffectType getRacialEffectType(AbstractRace race) {
+	public static AbstractItemEffectType getRacialEffectType(Race race) {
 		return racialEffectTypes.get(race);
 	}
 	
 	public static Map<AbstractItemEffectType, String> itemEffectTypeToIdMap = new HashMap<>();
 	public static Map<String, AbstractItemEffectType> idToItemEffectTypeMap = new HashMap<>();
 	public static List<AbstractItemEffectType> allEffectTypes = new ArrayList<>();
-	public static Map<AbstractRace, AbstractItemEffectType> racialEffectTypes = new HashMap<>();
+	public static Map<Race,AbstractItemEffectType> racialEffectTypes = new HashMap<>();
 	
 	public static void addAbstractItemEffectToIds(String id, AbstractItemEffectType itemEffectType) {
 		allEffectTypes.add(itemEffectType);
@@ -2554,14 +2554,14 @@ public class ItemEffectType {
 			}
 		}
 		
-		for(AbstractRace race : Race.getAllRaces()) {
+		for(var race : Race.getAllRaces()) {
 			if(race==Race.SLIME) { // Special case for slimes:
 				racialEffectTypes.put(
 						race,
 						new AbstractItemEffectType(null,
 								race.getColour()) {
 							@Override
-							public AbstractRace getAssociatedRace() {
+							public Race getAssociatedRace() {
 								return race;
 							}
 							@Override
@@ -2592,7 +2592,7 @@ public class ItemEffectType {
 						new AbstractItemEffectType(null,
 								race.getColour()) {
 							@Override
-							public AbstractRace getAssociatedRace() {
+							public Race getAssociatedRace() {
 								return race;
 							}
 							@Override
@@ -2619,7 +2619,7 @@ public class ItemEffectType {
 			}
 		}
 		
-		for(Entry<AbstractRace, AbstractItemEffectType> entry : racialEffectTypes.entrySet()) {
+		for(var entry : racialEffectTypes.entrySet()) {
 			allEffectTypes.add(entry.getValue());
 			
 			String id = "RACE_"+Race.getIdFromRace(entry.getKey());

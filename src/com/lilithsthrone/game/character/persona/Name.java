@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.utils.Util;
@@ -709,7 +708,7 @@ public class Name {
 		return surnames[Util.random.nextInt(surnames.length)];
 	}
 	
-	public static NameTriplet getRandomTriplet(AbstractRace r) {
+	public static NameTriplet getRandomTriplet(Race r) {
 		NameTriplet name = Util.randomItemFrom(human);
 		// occasionally throw some "prostitute" names in there - about 10% of the time
 		if(Math.random()<0.1) {
