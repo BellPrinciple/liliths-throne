@@ -2,9 +2,8 @@ package com.lilithsthrone.world.places;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -25,6 +24,7 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
+import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
@@ -35,7 +35,96 @@ import com.lilithsthrone.world.WorldType;
  * @version 0.3.9
  * @author Innoxia
  */
-public class PlaceUpgrade {
+public interface PlaceUpgrade {
+
+	String getId();
+
+	/**
+	 * @param cell The cell to check for this upgrade's availability.
+	 * @return A value representing availability and reasoning of availability of this upgrade. If the key is false, and the value is an empty string, then this upgrade is not added to any of the available upgrade lists which are displayed in-game.
+	 */
+	Value<Boolean, String> getAvailability(Cell cell);
+
+	/**
+	 * @param cell The cell to check for this upgrade's availability.
+	 * @return A value representing availability of removal and reasoning of availability removal of this upgrade.
+	 */
+	default Value<Boolean, String> getRemovalAvailability(Cell cell) {
+		if(this.isCoreRoomUpgrade()) {
+			return new Value<>(false, "You cannot directly remove core upgrades. Instead, you'll have to purchase a different core modification in order to remove the current one.");
+		}
+		return new Value<>(true, "");
+	}
+
+	default boolean isSlaverUpgrade() {
+		return true;
+	}
+
+	boolean isCoreRoomUpgrade();
+
+	default ImmobilisationType getImmobilisationType() {
+		return null;
+	}
+
+	Colour getColour();
+
+	String getName();
+
+	String getRoomDescription(Cell c);
+
+	String getDescriptionForPurchase();
+
+	String getDescriptionAfterPurchase();
+
+	/**
+	 * @return An SVG that should be used for the cell's tile when this upgrade is in place. Returns null by default.
+	 */
+	default String getSVGOverride() {
+		return null;
+	}
+
+	int getInstallCost();
+
+	int getRemovalCost();
+
+	int getUpkeep();
+
+	int getCapacity();
+
+	float getHourlyAffectionGain();
+
+	float getHourlyObedienceGain();
+
+	default List<AbstractPlaceUpgrade> getPrerequisites() {
+		return List.of();
+	}
+
+	default boolean isPrerequisitesMet(GenericPlace place) {
+		return place.getPlaceUpgrades().containsAll(getPrerequisites());
+	}
+
+	default void applyInstallationEffects(Cell c) {
+	}
+
+	default void applyRemovalEffects(Cell c) {
+	}
+
+	/**public
+	 * @param c The cell which is being given this upgrade.
+	 * @return null by default. Override to return a DialogueNode if the installation of this upgrade should show the player a special scene.
+	 */
+	default DialogueNode getInstallationDialogue(Cell c) {
+		return null;
+	}
+
+	/**
+	 *
+	 * @return null by default. Override to return a DialogueNode if this upgrade should completely replace the room text instead of showing the usual room dialogue + upgrade descriptions.
+	 *  The returned DialogueNode will only have its getContent() method called.
+	 */
+	default DialogueNode getRoomDialogue(Cell c) {
+		return null;
+	}
 
 	//**** MISC. UPGRADES ****//
 	
@@ -50,8 +139,7 @@ public class PlaceUpgrade {
 			0,
 			1000,
 			-0.5f,
-			-0.5f,
-			null) {
+			-0.5f) {
 	};
 	
 	public static final AbstractPlaceUpgrade LILAYA_EMPTY_ROOM = new AbstractPlaceUpgrade(true,
@@ -65,8 +153,7 @@ public class PlaceUpgrade {
 			0,
 			0,
 			0,
-			0,
-			null) {
+			0) {
 		
 		@Override
 		public boolean isSlaverUpgrade() {
@@ -119,8 +206,7 @@ public class PlaceUpgrade {
 			0,
 			0,
 			0,
-			0,
-			null) {
+			0) {
 		@Override
 		public DialogueNode getInstallationDialogue(Cell c) {
 			return RoomArthur.ROOM_ARTHUR_INSTALLATION;
@@ -169,8 +255,7 @@ public class PlaceUpgrade {
 			0,
 			0,
 			0.2f,
-			-0.1f,
-			null) {
+			-0.1f) {
 		public Value<Boolean, String> getAvailability(Cell cell) {
 			return new Value<>(true, "");
 		}
@@ -194,8 +279,7 @@ public class PlaceUpgrade {
 			100,
 			1,
 			0,
-			0,
-			null) {
+			0) {
 		@Override
 		public String getSVGOverride() {
 			return AbstractPlaceType.getSVGOverride("dominion/lilayasHome/roomGuest", PresetColour.BASE_GREEN_LIGHT);
@@ -247,8 +331,7 @@ public class PlaceUpgrade {
 			100,
 			1,
 			0,
-			0,
-			null) {
+			0) {
 		@Override
 		public String getSVGOverride() {
 			return AbstractPlaceType.getSVGOverride("dominion/lilayasHome/roomSlave", PresetColour.BASE_CRIMSON);
@@ -315,8 +398,7 @@ public class PlaceUpgrade {
 			100,
 			2,
 			-0.05f,
-			-0.05f,
-			null) {
+			-0.05f) {
 		@Override
 		public String getSVGOverride() {
 			return AbstractPlaceType.getSVGOverride("dominion/lilayasHome/roomSlaveDouble", PresetColour.BASE_MAGENTA);
@@ -388,8 +470,7 @@ public class PlaceUpgrade {
 			100,
 			4,
 			-0.1f,
-			-0.2f,
-			null) {
+			-0.2f) {
 		@Override
 		public String getSVGOverride() {
 			return AbstractPlaceType.getSVGOverride("dominion/lilayasHome/roomSlaveQuadruple", PresetColour.BASE_MAGENTA);
@@ -463,8 +544,7 @@ public class PlaceUpgrade {
 			-10,
 			0,
 			-0.1f,
-			0.2f,
-			null) {
+			0.2f) {
 		@Override
 		public String getRoomDescription(Cell c) {
 			GenericPlace place = c.getPlace();
@@ -504,8 +584,7 @@ public class PlaceUpgrade {
 			25,
 			0,
 			0.2f,
-			-0.1f,
-			null) {
+			-0.1f) {
 		@Override
 		public String getRoomDescription(Cell c) {
 			GenericPlace place = c.getPlace();
@@ -549,8 +628,7 @@ public class PlaceUpgrade {
 			250,
 			0,
 			-0.2f,
-			0.4f,
-			null) {
+			0.4f) {
 	};
 	
 	public static final AbstractPlaceUpgrade LILAYA_SLAVE_ROOM_DOG_BOWLS = new AbstractPlaceUpgrade(false,
@@ -567,8 +645,7 @@ public class PlaceUpgrade {
 			10,
 			0,
 			-0.2f,
-			0.25f,
-			null) {
+			0.25f) {
 		@Override
 		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
 			if(cell.getPlace().getPlaceUpgrades().contains(LILAYA_SLAVE_ROOM_ROOM_SERVICE)) {
@@ -592,8 +669,7 @@ public class PlaceUpgrade {
 			250,
 			0,
 			0.4f,
-			-0.2f,
-			null) {
+			-0.2f) {
 		@Override
 		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
 			if(cell.getPlace().getPlaceUpgrades().contains(LILAYA_SLAVE_ROOM_DOG_BOWLS)) {
@@ -617,12 +693,11 @@ public class PlaceUpgrade {
 			-25,
 			0,
 			-0.1f,
-			0f,
-			null) {
+			0f) {
 	};
 
 	//**** DUNGEON UPGRADES ****//
-	
+
 	public static final AbstractPlaceUpgrade LILAYA_DUNGEON_CELL = new AbstractPlaceUpgrade(true,
 			PresetColour.BASE_MAGENTA,
 			"Dungeon Cell",
@@ -634,8 +709,7 @@ public class PlaceUpgrade {
 			10,
 			4,
 			-0.15f,
-			0.2f,
-			null) {
+			0.2f) {
 		@Override
 		public String getSVGOverride() {
 			return AbstractPlaceType.getSVGOverride("dominion/lilayasHome/roomSlaveQuadruple", PresetColour.BASE_MAGENTA);
@@ -643,25 +717,25 @@ public class PlaceUpgrade {
 		@Override
 		public String getRoomDescription(Cell c) {
 			GenericPlace place = c.getPlace();
-			
+
 			StringBuilder sb = new StringBuilder();
-			
+
 			sb.append("With the walls, floor, and ceiling being constructed out of large, grey stones, this cell has a gloomy, oppressive feel to it."
 					+ " A couple of metal sconces are fixed into opposite walls of the cell, with each one holding an arcane torch."
 					+ " Their perpetually-burning flames occasionally splutter and flicker, casting dancing shadows across the cell's interior."
 					+ " A small, barred window is set into the cell's heavy wooden door, allowing any unlucky slaves who are being held within to be monitored from the safety of the corridor.");
-			
+
 			if(!place.getPlaceUpgrades().contains(PlaceUpgrade.LILAYA_DUNGEON_CELL_UPGRADE_BED) && !place.getPlaceUpgrades().contains(PlaceUpgrade.LILAYA_DUNGEON_CELL_DOWNGRADE_BED)) {
 				sb.append("<br/><br/>"
 						+ "Four small, steel-framed beds are located within this cell, each of which holds a thin mattress, a couple of deflated pillows, and a ragged blanket."
 						+ " Old, wooden boxes positioned beside these beds serve as crude substitutes for bedside cabinets."
 						+ " Other than these beds and crates, there are no other pieces of furniture within the cell.");
 			}
-			
+
 			return sb.toString();
 		}
 	};
-	
+
 
 	public static final AbstractPlaceUpgrade LILAYA_DUNGEON_CELL_DOWNGRADE_BED = new AbstractPlaceUpgrade(false,
 			PresetColour.GENERIC_BAD,
@@ -676,14 +750,13 @@ public class PlaceUpgrade {
 			-5,
 			0,
 			-0.1f,
-			0.2f,
-			null) {
+			0.2f) {
 		@Override
 		public String getRoomDescription(Cell c) {
 			return "The four steel-framed beds in this room have all been removed and replaced with piles of straw."
 					+ " The old, wooden boxes which served as crude substitutes for bedside cabinets have also been replaced by the simple wooden frames which the straw was packaged in."
 					+ " Providing this cell's slaves with such uncomfortable places to sleep will definitely reinforce the fact that they're nothing but your property, but at the same time, they're bound to dislike you more...";
-				
+
 		}
 		@Override
 		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
@@ -693,7 +766,7 @@ public class PlaceUpgrade {
 			return super.getExtraConditionalAvailability(cell);
 		}
 	};
-	
+
 	public static final AbstractPlaceUpgrade LILAYA_DUNGEON_CELL_UPGRADE_BED = new AbstractPlaceUpgrade(false,
 			PresetColour.GENERIC_GOOD,
 			"Improved Bedding",
@@ -707,8 +780,7 @@ public class PlaceUpgrade {
 			5,
 			0,
 			0.05f,
-			-0.05f,
-			null) {
+			-0.05f) {
 		@Override
 		public String getRoomDescription(Cell c) {
 			return "The four beds in this cell have had their mattresses, pillows, and blankets replaced with more comfortable alternatives."
@@ -736,8 +808,7 @@ public class PlaceUpgrade {
 			10,
 			0,
 			-0.2f,
-			0.25f,
-			null) {
+			0.25f) {
 		@Override
 		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
 			if(cell.getPlace().getPlaceUpgrades().contains(LILAYA_DUNGEON_CELL_DECENT_FOOD)) {
@@ -746,7 +817,7 @@ public class PlaceUpgrade {
 			return super.getExtraConditionalAvailability(cell);
 		}
 	};
-	
+
 	public static final AbstractPlaceUpgrade LILAYA_DUNGEON_CELL_DECENT_FOOD = new AbstractPlaceUpgrade(false,
 			PresetColour.GENERIC_GOOD,
 			"Decent Food",
@@ -760,8 +831,7 @@ public class PlaceUpgrade {
 			100,
 			0,
 			0.1f,
-			-0.1f,
-			null) {
+			-0.1f) {
 		@Override
 		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
 			if(cell.getPlace().getPlaceUpgrades().contains(LILAYA_DUNGEON_CELL_DOG_BOWLS)) {
@@ -784,8 +854,7 @@ public class PlaceUpgrade {
 			10,
 			0,
 			-0.2f,
-			0.15f,
-			null) {
+			0.15f) {
 		@Override
 		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
 			if(cell.getPlace().getPlaceUpgrades().contains(LILAYA_DUNGEON_CELL_CHAINS)) {
@@ -798,7 +867,7 @@ public class PlaceUpgrade {
 			return ImmobilisationType.ROPE;
 		}
 	};
-	
+
 	public static final AbstractPlaceUpgrade LILAYA_DUNGEON_CELL_CHAINS = new AbstractPlaceUpgrade(false,
 			PresetColour.GENERIC_TERRIBLE,
 			"Chain Restraints",
@@ -812,8 +881,7 @@ public class PlaceUpgrade {
 			25,
 			0,
 			-0.25f,
-			0.3f,
-			null) {
+			0.3f) {
 		@Override
 		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
 			if(cell.getPlace().getPlaceUpgrades().contains(LILAYA_DUNGEON_CELL_ROPES)) {
@@ -826,8 +894,8 @@ public class PlaceUpgrade {
 			return ImmobilisationType.CHAINS;
 		}
 	};
-	
-	
+
+
 	//**** MILKING UPGRADES ****//
 	
 	public static final AbstractPlaceUpgrade LILAYA_MILKING_ROOM = new AbstractPlaceUpgrade(true,
@@ -845,8 +913,7 @@ public class PlaceUpgrade {
 			500,
 			0,
 			0,
-			0,
-			null) {
+			0) {
 		@Override
 		public DialogueNode getRoomDialogue(Cell c) {
 			return LilayaMilkingRoomDialogue.MILKING_ROOM;
@@ -906,8 +973,7 @@ public class PlaceUpgrade {
 			250,
 			0,
 			1f,
-			0.5f,
-			null) {
+			0.5f) {
 		@Override
 		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
 			if(cell.getPlace().getPlaceUpgrades().contains(LILAYA_MILKING_ROOM_INDUSTRIAL_MILKERS)) {
@@ -937,8 +1003,7 @@ public class PlaceUpgrade {
 			100,
 			0,
 			-1f,
-			0.5f,
-			null) {
+			0.5f) {
 		
 		@Override
 		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
@@ -960,8 +1025,7 @@ public class PlaceUpgrade {
 			10,
 			0,
 			0,
-			0,
-			null) {
+			0) {
 	};
 	
 	public static final AbstractPlaceUpgrade LILAYA_MILKING_ROOM_CUM_EFFICIENCY = new AbstractPlaceUpgrade(false,
@@ -975,8 +1039,7 @@ public class PlaceUpgrade {
 			10,
 			0,
 			0,
-			0,
-			null) {
+			0) {
 	};
 
 	public static final AbstractPlaceUpgrade LILAYA_MILKING_ROOM_GIRLCUM_EFFICIENCY = new AbstractPlaceUpgrade(false,
@@ -990,8 +1053,7 @@ public class PlaceUpgrade {
 			10,
 			0,
 			0,
-			0,
-			null) {
+			0) {
 	};
 
 	
@@ -1012,8 +1074,7 @@ public class PlaceUpgrade {
 			250,
 			0,
 			0,
-			0,
-			null) {
+			0) {
 		@Override
 		public DialogueNode getRoomDialogue(Cell c) {
 			return LilayaOfficeDialogue.ROOM_OFFICE;
@@ -1061,8 +1122,7 @@ public class PlaceUpgrade {
 			50,
 			0,
 			0.25f,
-			1f,
-			null) {
+			1f) {
 	};
 	
 	public static final AbstractPlaceUpgrade LILAYA_OFFICE_COFFEE_MACHINE = new AbstractPlaceUpgrade(false,
@@ -1077,8 +1137,7 @@ public class PlaceUpgrade {
 			250,
 			0,
 			0.1f,
-			0.05f,
-			null) {
+			0.05f) {
 	};
 	
 	public static final AbstractPlaceUpgrade LILAYA_OFFICE_PARTITIONING_WALLS = new AbstractPlaceUpgrade(false,
@@ -1092,8 +1151,7 @@ public class PlaceUpgrade {
 			0,
 			0,
 			0.05f,
-			0,
-			null) {
+			0) {
 	};
 	
 
@@ -1115,8 +1173,7 @@ public class PlaceUpgrade {
 			500,
 			0,
 			0,
-			0,
-			null) {
+			0) {
 		@Override
 		public DialogueNode getInstallationDialogue(Cell c) {
 			LilayaSpa.setCellInstallation(c);
@@ -1185,8 +1242,7 @@ public class PlaceUpgrade {
 			100,
 			0,
 			0.25f,
-			0,
-			null) {
+			0) {
 		@Override
 		public DialogueNode getInstallationDialogue(Cell c) {
 			return LilayaSpa.SPA_SAUNA_INSTALLATION;
@@ -1229,8 +1285,7 @@ public class PlaceUpgrade {
 			100,
 			0,
 			0.25f,
-			0,
-			null) {
+			0) {
 		@Override
 		public DialogueNode getInstallationDialogue(Cell c) {
 			return LilayaSpa.SPA_POOL_INSTALLATION;
@@ -1272,8 +1327,7 @@ public class PlaceUpgrade {
 			500,
 			0,
 			0.1f,
-			-0.2f,
-			null) {
+			-0.2f) {
 		@Override
 		protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
 			if(Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_GROUND_FLOOR).getCell(PlaceType.LILAYA_HOME_SPA)==null) {
@@ -1282,92 +1336,42 @@ public class PlaceUpgrade {
 			return super.getExtraConditionalAvailability(cell);
 		}
 	};
-	
-	
-	private static ArrayList<AbstractPlaceUpgrade> coreRoomUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> guestRoomUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> dungeonCellUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> slaveQuartersUpgradesSingle;
-	private static ArrayList<AbstractPlaceUpgrade> slaveQuartersUpgradesDouble;
-	private static ArrayList<AbstractPlaceUpgrade> slaveQuartersUpgradesQuadruple;
-	private static ArrayList<AbstractPlaceUpgrade> milkingRoomUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> officeUpgrades;
-	private static ArrayList<AbstractPlaceUpgrade> spaUpgrades;
-	
-	public static ArrayList<AbstractPlaceUpgrade> getCoreRoomUpgrades() {
-		return coreRoomUpgrades;
-	}
 
-	public static ArrayList<AbstractPlaceUpgrade> getGuestRoomUpgrades() {
-		return guestRoomUpgrades;
-	}
-
-	public static ArrayList<AbstractPlaceUpgrade> getDungeonCellUpgrades() {
-		return dungeonCellUpgrades;
-	}
-
-	public static ArrayList<AbstractPlaceUpgrade> getSlaveQuartersUpgradesSingle() {
-		return slaveQuartersUpgradesSingle;
-	}
-	
-	public static ArrayList<AbstractPlaceUpgrade> getSlaveQuartersUpgradesDouble() {
-		return slaveQuartersUpgradesDouble;
-	}
-
-	public static ArrayList<AbstractPlaceUpgrade> getSlaveQuartersUpgradesQuadruple() {
-		return slaveQuartersUpgradesQuadruple;
-	}
-	
-	public static ArrayList<AbstractPlaceUpgrade> getMilkingUpgrades() {
-		return milkingRoomUpgrades;
-	}
-	
-	public static ArrayList<AbstractPlaceUpgrade> getOfficeUpgrades() {
-		return officeUpgrades;
-	}
-
-	public static ArrayList<AbstractPlaceUpgrade> getSpaUpgrades() {
-		return spaUpgrades;
-	}
-	
-	
-	static {
-		coreRoomUpgrades = Util.newArrayListOfValues(
+	static ArrayList<AbstractPlaceUpgrade> getCoreRoomUpgrades() {
+		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_GUEST_ROOM,
 				PlaceUpgrade.LILAYA_SPA,
-				
-				PlaceUpgrade.LILAYA_SLAVE_ROOM,
-				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOUBLE,
-				PlaceUpgrade.LILAYA_SLAVE_ROOM_QUADRUPLE,
 
-				PlaceUpgrade.LILAYA_OFFICE,
-				PlaceUpgrade.LILAYA_MILKING_ROOM,
-				
+				PlaceUpgrade.LILAYA_SLAVE_ROOM, PlaceUpgrade.LILAYA_SLAVE_ROOM_DOUBLE, PlaceUpgrade.LILAYA_SLAVE_ROOM_QUADRUPLE,
+
+				PlaceUpgrade.LILAYA_OFFICE, PlaceUpgrade.LILAYA_MILKING_ROOM,
+
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
+	}
 
-		guestRoomUpgrades = Util.newArrayListOfValues(
+	static ArrayList<AbstractPlaceUpgrade> getGuestRoomUpgrades() {
+		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_EMPTY_ROOM);
+	}
 
-		dungeonCellUpgrades = Util.newArrayListOfValues(
-				PlaceUpgrade.LILAYA_DUNGEON_CELL_DECENT_FOOD,
-				PlaceUpgrade.LILAYA_DUNGEON_CELL_DOG_BOWLS,
-				
-				PlaceUpgrade.LILAYA_DUNGEON_CELL_UPGRADE_BED,
-				PlaceUpgrade.LILAYA_DUNGEON_CELL_DOWNGRADE_BED,
+	static ArrayList<AbstractPlaceUpgrade> getDungeonCellUpgrades() {
+		return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_DUNGEON_CELL_DECENT_FOOD, PlaceUpgrade.LILAYA_DUNGEON_CELL_DOG_BOWLS,
 
-				PlaceUpgrade.LILAYA_DUNGEON_CELL_ROPES,
-				PlaceUpgrade.LILAYA_DUNGEON_CELL_CHAINS,
-				
-				PlaceUpgrade.LILAYA_SLAVE_ROOM_ARCANE_INSTRUMENTS,
-				PlaceUpgrade.LILAYA_SLAVE_ROOM_OBEDIENCE_TRAINER);
-				
-		slaveQuartersUpgradesSingle = Util.newArrayListOfValues(
+				PlaceUpgrade.LILAYA_DUNGEON_CELL_UPGRADE_BED, PlaceUpgrade.LILAYA_DUNGEON_CELL_DOWNGRADE_BED,
+
+				PlaceUpgrade.LILAYA_DUNGEON_CELL_ROPES, PlaceUpgrade.LILAYA_DUNGEON_CELL_CHAINS,
+
+				PlaceUpgrade.LILAYA_SLAVE_ROOM_ARCANE_INSTRUMENTS, PlaceUpgrade.LILAYA_SLAVE_ROOM_OBEDIENCE_TRAINER);
+	}
+
+	static ArrayList<AbstractPlaceUpgrade> getSlaveQuartersUpgradesSingle() {
+		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_UPGRADE_BED,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOWNGRADE_BED,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ARCANE_INSTRUMENTS,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_OBEDIENCE_TRAINER,
 
@@ -1375,93 +1379,101 @@ public class PlaceUpgrade {
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_QUADRUPLE,
 				PlaceUpgrade.LILAYA_EMPTY_ROOM,
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
-		
-		slaveQuartersUpgradesDouble = Util.newArrayListOfValues(
+	}
+
+	static ArrayList<AbstractPlaceUpgrade> getSlaveQuartersUpgradesDouble() {
+		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_UPGRADE_BED,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOWNGRADE_BED,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ARCANE_INSTRUMENTS,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_OBEDIENCE_TRAINER,
 
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_QUADRUPLE,
 				PlaceUpgrade.LILAYA_EMPTY_ROOM,
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
-		
-		slaveQuartersUpgradesQuadruple = Util.newArrayListOfValues(
+	}
+
+	static ArrayList<AbstractPlaceUpgrade> getSlaveQuartersUpgradesQuadruple() {
+		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_UPGRADE_BED,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOWNGRADE_BED,
-				
+
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ARCANE_INSTRUMENTS,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_OBEDIENCE_TRAINER,
-				
+
 				PlaceUpgrade.LILAYA_EMPTY_ROOM,
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
-		
-		milkingRoomUpgrades = Util.newArrayListOfValues(
+	}
+
+	static ArrayList<AbstractPlaceUpgrade> getMilkingUpgrades() {
+		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_MILKING_ROOM_ARTISAN_MILKERS,
 				PlaceUpgrade.LILAYA_MILKING_ROOM_INDUSTRIAL_MILKERS,
 
 				PlaceUpgrade.LILAYA_MILKING_ROOM_MILK_EFFICIENCY,
 				PlaceUpgrade.LILAYA_MILKING_ROOM_CUM_EFFICIENCY,
 				PlaceUpgrade.LILAYA_MILKING_ROOM_GIRLCUM_EFFICIENCY,
-				
+
 				PlaceUpgrade.LILAYA_EMPTY_ROOM);
-		
-		officeUpgrades = Util.newArrayListOfValues(
+	}
+
+	static ArrayList<AbstractPlaceUpgrade> getOfficeUpgrades() {
+		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_OFFICE_EXECUTIVE_UPGRADE,
 				PlaceUpgrade.LILAYA_OFFICE_COFFEE_MACHINE,
 				PlaceUpgrade.LILAYA_OFFICE_PARTITIONING_WALLS,
-				
+
 				PlaceUpgrade.LILAYA_EMPTY_ROOM);
-		
-		spaUpgrades = Util.newArrayListOfValues(
+	}
+
+	static ArrayList<AbstractPlaceUpgrade> getSpaUpgrades() {
+		return Util.newArrayListOfValues(
 				//TODO
-//				PlaceUpgrade.LILAYA_SPA_SAUNA,
-//				PlaceUpgrade.LILAYA_SPA_POOL,
+				//PlaceUpgrade.LILAYA_SPA_SAUNA,
+				//PlaceUpgrade.LILAYA_SPA_POOL,
 				PlaceUpgrade.LILAYA_SPA_BAR);
 	}
-	
 
-	private static List<AbstractPlaceUpgrade> allPlaceUpgrades = new ArrayList<>();
-	private static Map<AbstractPlaceUpgrade, String> placeUpgradeToIdMap = new HashMap<>();
-	private static Map<String, AbstractPlaceUpgrade> idToPlaceUpgradeMap = new HashMap<>();
+	LinkedHashMap<String,AbstractPlaceUpgrade> idToPlaceUpgradeMap = init();
 
-	public static List<AbstractPlaceUpgrade> getAllPlaceUpgrades() {
-		return allPlaceUpgrades;
+	static List<AbstractPlaceUpgrade> getAllPlaceUpgrades() {
+		return List.copyOf(idToPlaceUpgradeMap.values());
 	}
-	
-	public static AbstractPlaceUpgrade getPlaceUpgradeFromId(String id) {
+
+	static AbstractPlaceUpgrade getPlaceUpgradeFromId(String id) {
 		id = Util.getClosestStringMatch(id, idToPlaceUpgradeMap.keySet());
 		return idToPlaceUpgradeMap.get(id);
 	}
 
-	public static String getIdFromPlaceUpgrade(AbstractPlaceUpgrade placeType) {
-		return placeUpgradeToIdMap.get(placeType);
+	static String getIdFromPlaceUpgrade(AbstractPlaceUpgrade placeType) {
+		return placeType.getId();
 	}
-	
-	static {
+
+	static LinkedHashMap<String,AbstractPlaceUpgrade> init() {
+		var idToPlaceUpgradeMap = new LinkedHashMap<String,AbstractPlaceUpgrade>();
+
 		Field[] fields = PlaceUpgrade.class.getFields();
-		
+
 		for(Field f : fields) {
 			if(AbstractPlaceUpgrade.class.isAssignableFrom(f.getType())) {
 				AbstractPlaceUpgrade placeType;
 				try {
 					placeType = ((AbstractPlaceUpgrade) f.get(null));
-
-					placeUpgradeToIdMap.put(placeType, f.getName());
+					placeType.id = f.getName();
 					idToPlaceUpgradeMap.put(f.getName(), placeType);
-					allPlaceUpgrades.add(placeType);
-					
+
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
 			}
 		}
+		return idToPlaceUpgradeMap;
 	}
 }

@@ -1,12 +1,7 @@
 package com.lilithsthrone.world.places;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.sex.ImmobilisationType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
@@ -17,8 +12,9 @@ import com.lilithsthrone.world.Cell;
  * @version 0.3.9
  * @author Innoxia
  */
-public abstract class AbstractPlaceUpgrade {
+public abstract class AbstractPlaceUpgrade implements PlaceUpgrade {
 
+	String id;
 	private boolean isCoreRoomUpgrade;
 	
 	protected String name;
@@ -35,9 +31,7 @@ public abstract class AbstractPlaceUpgrade {
 	
 	private float affectionGain;
 	private float obedienceGain;
-	
-	private List<AbstractPlaceUpgrade> prerequisites;
-	
+
 	public AbstractPlaceUpgrade(boolean isCoreRoomUpgrade,
 			Colour colour,
 			String name,
@@ -49,8 +43,7 @@ public abstract class AbstractPlaceUpgrade {
 			int upkeep,
 			int capacity,
 			float affectionGain,
-			float obedienceGain,
-			List<AbstractPlaceUpgrade> prerequisites) {
+			float obedienceGain) {
 		
 		this.isCoreRoomUpgrade = isCoreRoomUpgrade;
 		this.colour = colour;
@@ -67,13 +60,6 @@ public abstract class AbstractPlaceUpgrade {
 		this.affectionGain = affectionGain;
 		
 		this.obedienceGain = obedienceGain;
-		
-		if(prerequisites==null) {
-			this.prerequisites = new ArrayList<>();
-			
-		} else {
-			this.prerequisites = prerequisites;
-		}
 	}
 
 	/**
@@ -83,11 +69,17 @@ public abstract class AbstractPlaceUpgrade {
 	protected Value<Boolean, String> getExtraConditionalAvailability(Cell cell) {
 		return new Value<>(true, "");
 	}
-	
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
 	/**
 	 * @param cell The cell to check for this upgrade's availability.
 	 * @return A value representing availability and reasoning of availability of this upgrade. If the key is false, and the value is an empty string, then this upgrade is not added to any of the available upgrade lists which are displayed in-game.
 	 */
+	@Override
 	public Value<Boolean, String> getAvailability(Cell cell) {
 		if(!(Main.game.getPlayer().isHasSlaverLicense() || (Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ACCOMMODATION) && !this.isSlaverUpgrade()))) {
 			return new Value<>(false, "You are unable to purchase this upgrade without a slaver license!");
@@ -100,52 +92,45 @@ public abstract class AbstractPlaceUpgrade {
 	 * @param cell The cell to check for this upgrade's availability.
 	 * @return A value representing availability of removal and reasoning of availability removal of this upgrade.
 	 */
+	@Override
 	public Value<Boolean, String> getRemovalAvailability(Cell cell) {
 		if(this.isCoreRoomUpgrade()) {
 			return new Value<>(false, "You cannot directly remove core upgrades. Instead, you'll have to purchase a different core modification in order to remove the current one.");
 		}
 		return new Value<>(true, "");
 	}
-	
-	public boolean isSlaverUpgrade() {
-		return true;
-	}
-	
+
+	@Override
 	public boolean isCoreRoomUpgrade() {
 		return isCoreRoomUpgrade;
 	}
-	
-	public ImmobilisationType getImmobilisationType() {
-		return null;
-	}
 
+	@Override
 	public Colour getColour() {
 		return colour;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public String getRoomDescription(Cell c) {
 		return roomDescription;
 	}
 
+	@Override
 	public String getDescriptionForPurchase() {
 		return descriptionForPurchase;
 	}
 
+	@Override
 	public String getDescriptionAfterPurchase() {
 		return descriptionAfterPurchase;
 	}
 
-	/**
-	 * @return An SVG that should be used for the cell's tile when this upgrade is in place. Returns null by default.
-	 */
-	public String getSVGOverride() {
-		return null;
-	}
-	
+	@Override
 	public int getInstallCost() {
 		if(Main.game.getPlayer().hasTrait(Perk.JOB_PLAYER_CONSTRUCTION_WORKER, true)) {
 			return installCost/2;
@@ -153,6 +138,7 @@ public abstract class AbstractPlaceUpgrade {
 		return installCost;
 	}
 
+	@Override
 	public int getRemovalCost() {
 		if(Main.game.getPlayer().hasTrait(Perk.JOB_PLAYER_CONSTRUCTION_WORKER, true)) {
 			if(removalCost>0) {
@@ -163,50 +149,23 @@ public abstract class AbstractPlaceUpgrade {
 		return removalCost;
 	}
 
+	@Override
 	public int getUpkeep() {
 		return upkeep;
 	}
 
+	@Override
 	public int getCapacity() {
 		return capacity;
 	}
 
+	@Override
 	public float getHourlyAffectionGain() {
 		return affectionGain;
 	}
 
+	@Override
 	public float getHourlyObedienceGain() {
 		return obedienceGain;
-	}
-
-	public List<AbstractPlaceUpgrade> getPrerequisites() {
-		return prerequisites;
-	}
-	
-	public boolean isPrerequisitesMet(GenericPlace place) {
-		return place.getPlaceUpgrades().containsAll(prerequisites);
-	}
-	
-	public void applyInstallationEffects(Cell c) {
-	}
-
-	public void applyRemovalEffects(Cell c) {
-	}
-
-	/**
-	 * @param c The cell which is being given this upgrade.
-	 * @return null by default. Override to return a DialogueNode if the installation of this upgrade should show the player a special scene.
-	 */
-	public DialogueNode getInstallationDialogue(Cell c) {
-		return null;
-	}
-
-	/**
-	 * 
-	 * @return null by default. Override to return a DialogueNode if this upgrade should completely replace the room text instead of showing the usual room dialogue + upgrade descriptions.
-	 *  The returned DialogueNode will only have its getContent() method called.
-	 */
-	public DialogueNode getRoomDialogue(Cell c) {
-		return null;
 	}
 }
