@@ -42,7 +42,6 @@ import com.lilithsthrone.utils.colours.BaseColour;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
@@ -155,8 +154,8 @@ public class LilayaHomeGeneric {
 	}
 	
 	private static Response getRoomResponse(int responseTab, int index) {
-		AbstractPlaceUpgrade coreUpgrade = null;
-		for(AbstractPlaceUpgrade pu : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
+		PlaceUpgrade coreUpgrade = null;
+		for(var pu : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
 			if(pu.isCoreRoomUpgrade()) {
 				coreUpgrade = pu;
 			}
@@ -305,7 +304,7 @@ public class LilayaHomeGeneric {
 	public static String getRoomModificationsDescription(boolean includeDefaultRoomDescription) {
 		GenericPlace place = Main.game.getPlayer().getLocationPlace();
 		
-		for(AbstractPlaceUpgrade pu : place.getPlaceUpgrades()) {
+		for(var pu : place.getPlaceUpgrades()) {
 			DialogueNode dn = pu.getRoomDialogue(Main.game.getPlayerCell());
 			if(dn!=null) {
 				return dn.getContent();
@@ -318,7 +317,7 @@ public class LilayaHomeGeneric {
 			roomSB.append(getBaseRoomDescription());
 		}
 		
-		for(AbstractPlaceUpgrade pu : PlaceUpgrade.getAllPlaceUpgrades()) { // For consistent ordering.
+		for(var pu : PlaceUpgrade.getAllPlaceUpgrades()) { // For consistent ordering.
 			if(place.getPlaceUpgrades().contains(pu)) {
 				roomSB.append(formatRoomUpgrade(pu));
 			}
@@ -353,7 +352,7 @@ public class LilayaHomeGeneric {
 	}
 	
 
-	private static String formatRoomUpgrade(AbstractPlaceUpgrade upgrade) {
+	private static String formatRoomUpgrade(PlaceUpgrade upgrade) {
 		return "<p>"
 				+ "<b style='color:"+upgrade.getColour().toWebHexString()+";'>"+upgrade.getName()+"</b><br/>"
 				+ upgrade.getRoomDescription(Main.game.getPlayerCell())

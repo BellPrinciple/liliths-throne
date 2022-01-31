@@ -21,10 +21,10 @@ import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.XMLSaving;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.Aquatic;
 import com.lilithsthrone.world.places.Darkness;
 import com.lilithsthrone.world.places.GenericPlace;
+import com.lilithsthrone.world.places.PlaceUpgrade;
 
 /**
  * @since 0.1.0
@@ -225,11 +225,11 @@ public class Cell implements XMLSaving {
 		return getPlace().getDialogue(this, withRandomEncounter, forceEncounter);
 	}
 
-	public boolean addPlaceUpgrade(AbstractPlaceUpgrade upgrade) {
+	public boolean addPlaceUpgrade(PlaceUpgrade upgrade) {
 		return getPlace().addPlaceUpgrade(this, upgrade);
 	}
 	
-	public boolean removePlaceUpgrade(AbstractPlaceUpgrade upgrade) {
+	public boolean removePlaceUpgrade(PlaceUpgrade upgrade) {
 		return getPlace().removePlaceUpgrade(this, upgrade);
 	}
 	

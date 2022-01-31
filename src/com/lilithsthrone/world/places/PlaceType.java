@@ -160,7 +160,7 @@ public interface PlaceType {
 
 	Darkness getDarkness();
 
-	String getSVGString(Set<AbstractPlaceUpgrade> upgrades);
+	String getSVGString(Set<PlaceUpgrade> upgrades);
 
 	default void applyInventoryInit(CharacterInventory inventory) {
 	}
@@ -191,11 +191,11 @@ public interface PlaceType {
 		return "";
 	}
 
-	default ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+	default ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 		return new ArrayList<>();
 	}
 
-	default ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+	default ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 		return new ArrayList<>();
 	}
 
@@ -2055,7 +2055,7 @@ public interface PlaceType {
 		@Override
 		protected DialogueNode getBaseDialogue(Cell cell) {
 			if(cell!=null) {
-				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
+				for(var pu : cell.getPlace().getPlaceUpgrades()) {
 					if(pu.getRoomDialogue(cell)!=null) {
 						return pu.getRoomDialogue(cell);
 					}
@@ -2064,11 +2064,11 @@ public interface PlaceType {
 			return LilayaHomeGeneric.ROOM_WINDOW;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 			if(upgrades.contains(PlaceUpgrade.LILAYA_GUEST_ROOM)) {
 				return PlaceUpgrade.getGuestRoomUpgrades();
 				
@@ -2116,7 +2116,7 @@ public interface PlaceType {
 		@Override
 		protected DialogueNode getBaseDialogue(Cell cell) {
 			if(cell!=null) {
-				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
+				for(var pu : cell.getPlace().getPlaceUpgrades()) {
 					if(pu.getRoomDialogue(cell)!=null) {
 						return pu.getRoomDialogue(cell);
 					}
@@ -2125,11 +2125,11 @@ public interface PlaceType {
 			return LilayaHomeGeneric.ROOM_GARDEN_GROUND_FLOOR;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 			return LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR.getAvailablePlaceUpgrades(upgrades);
 		}
 		@Override
@@ -2155,7 +2155,7 @@ public interface PlaceType {
 		@Override
 		protected DialogueNode getBaseDialogue(Cell cell) {
 			if(cell!=null) {
-				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
+				for(var pu : cell.getPlace().getPlaceUpgrades()) {
 					if(pu.getRoomDialogue(cell)!=null) {
 						return pu.getRoomDialogue(cell);
 					}
@@ -2164,11 +2164,11 @@ public interface PlaceType {
 			return LilayaHomeGeneric.ROOM_WINDOW;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 			return LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR.getAvailablePlaceUpgrades(upgrades);
 		}
 		@Override
@@ -2194,7 +2194,7 @@ public interface PlaceType {
 		@Override
 		protected DialogueNode getBaseDialogue(Cell cell) {
 			if(cell!=null) {
-				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
+				for(var pu : cell.getPlace().getPlaceUpgrades()) {
 					if(pu.getRoomDialogue(cell)!=null) {
 						return pu.getRoomDialogue(cell);
 					}
@@ -2203,11 +2203,11 @@ public interface PlaceType {
 			return LilayaHomeGeneric.ROOM_GARDEN;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 			return LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR.getAvailablePlaceUpgrades(upgrades);
 		}
 		@Override
@@ -2234,7 +2234,7 @@ public interface PlaceType {
 		@Override
 		protected DialogueNode getBaseDialogue(Cell cell) {
 			if(cell!=null) {
-				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
+				for(var pu : cell.getPlace().getPlaceUpgrades()) {
 					if(pu.getRoomDialogue(cell)!=null) {
 						return pu.getRoomDialogue(cell);
 					}
@@ -2243,11 +2243,11 @@ public interface PlaceType {
 			return LilayaHomeGeneric.DUNGEON_CELL;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_DUNGEON_CELL);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 			return PlaceUpgrade.getDungeonCellUpgrades();
 		}
 		@Override
@@ -2484,7 +2484,7 @@ public interface PlaceType {
 			null, "in your room"
 			) {
 				@Override
-				public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+				public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 					return Util.newArrayListOfValues(
 							PlaceUpgrade.LILAYA_PLAYER_ROOM_BED);
 				}
@@ -3169,7 +3169,7 @@ public interface PlaceType {
 			}
 		}
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.kayCratesSearched)
 					|| !Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.RELATIONSHIP_NYAN_HELP, Quest.RELATIONSHIP_NYAN_3_STOCK_ISSUES_DOBERMANNS)) {
 				return SVGString;
@@ -3473,7 +3473,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in Slaver Alley"){
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.SLAVERY_ADMINISTRATION_CELLS);
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
@@ -3499,7 +3499,7 @@ public interface PlaceType {
 			return PresetColour.BASE_CRIMSON;
 		}
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			return getSVGOverride("dominion/slaverAlley/scarlettsStall", getColour());
 		}
 		@Override
@@ -4337,7 +4337,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressAlphaDefeated)) {
 				return getSVGOverride("submission/impFortress1", PresetColour.BASE_GREEN_LIGHT);
 			}
@@ -4355,7 +4355,7 @@ public interface PlaceType {
 			SubmissionGenericPlaces.TUNNEL,
 			Darkness.ALWAYS_DARK, Encounter.SUBMISSION_TUNNELS, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressAlphaDefeated)) {
 				return getSVGOverride("submission/impTunnels1Icon", PresetColour.BASE_GREY);
 			}
@@ -4413,7 +4413,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressDemonDefeated)) {
 				return getSVGOverride("submission/impFortress2", PresetColour.BASE_GREEN_LIGHT);
 			}
@@ -4431,7 +4431,7 @@ public interface PlaceType {
 			SubmissionGenericPlaces.TUNNEL,
 			Darkness.ALWAYS_DARK, Encounter.SUBMISSION_TUNNELS, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressDemonDefeated)) {
 				return getSVGOverride("submission/impTunnels2Icon", PresetColour.BASE_GREY);
 			}
@@ -4604,7 +4604,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressFemalesDefeated)) {
 				return getSVGOverride("submission/impFortress3", PresetColour.BASE_GREEN_LIGHT);
 			}
@@ -4622,7 +4622,7 @@ public interface PlaceType {
 			SubmissionGenericPlaces.TUNNEL,
 			Darkness.ALWAYS_DARK, Encounter.SUBMISSION_TUNNELS, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressFemalesDefeated)) {
 				return getSVGOverride("submission/impTunnels3Icon", PresetColour.BASE_GREY);
 			}
@@ -4680,7 +4680,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressMalesDefeated)) {
 				return getSVGOverride("submission/impFortress4", PresetColour.BASE_GREEN_LIGHT);
 			}
@@ -4698,7 +4698,7 @@ public interface PlaceType {
 			SubmissionGenericPlaces.TUNNEL,
 			Darkness.ALWAYS_DARK, Encounter.SUBMISSION_TUNNELS, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressMalesDefeated)) {
 				return getSVGOverride("submission/impTunnels4Icon", PresetColour.BASE_GREY);
 			}
