@@ -28,7 +28,6 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
@@ -726,8 +725,8 @@ public class OccupantManagementDialogue {
 											+ "<h6 style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+"; text-align:center;'>Modifications</h6>"
 											+ getRoomUpgradeHeader());
 			
-			List<AbstractPlaceUpgrade> coreUpgrades = new ArrayList<>();
-			for(AbstractPlaceUpgrade upgrade : place.getPlaceType().getAvailablePlaceUpgrades(place.getPlaceUpgrades())) {
+			var coreUpgrades = new ArrayList<PlaceUpgrade>();
+			for(var upgrade : place.getPlaceType().getAvailablePlaceUpgrades(place.getPlaceUpgrades())) {
 				if(upgrade.getAvailability(cellToInspect).getKey() || (!upgrade.getAvailability(cellToInspect).getValue().isEmpty())) { // Do not display upgrades that have no explanation as to why they're banned.
 					if(upgrade.isCoreRoomUpgrade()) {
 						coreUpgrades.add(upgrade);
@@ -760,7 +759,7 @@ public class OccupantManagementDialogue {
 //			}
 			
 			i = 0;
-			for (AbstractPlaceUpgrade upgrade : coreUpgrades) {
+			for(var upgrade : coreUpgrades) {
 				UtilText.nodeContentSB.append(getUpgradeEntry(cellToInspect, upgrade));
 				i++;
 			}
@@ -920,7 +919,7 @@ public class OccupantManagementDialogue {
 				+ "</div>";
 	}
 	
-	private static String getUpgradeEntry(Cell cell, AbstractPlaceUpgrade upgrade) {
+	private static String getUpgradeEntry(Cell cell, PlaceUpgrade upgrade) {
 		miscDialogueSB.setLength(0);
 		GenericPlace place = cell.getPlace();
 		float affectionChange = upgrade.getHourlyAffectionGain();
@@ -999,7 +998,7 @@ public class OccupantManagementDialogue {
 			}
 			if(canBuy) {
 				if(!upgrade.getPrerequisites().isEmpty()) {
-					for(AbstractPlaceUpgrade prereq : upgrade.getPrerequisites()) {
+					for(var prereq : upgrade.getPrerequisites()) {
 						if(!place.getPlaceUpgrades().contains(prereq)) {
 							canBuy = false;
 							break;
@@ -1045,7 +1044,7 @@ public class OccupantManagementDialogue {
 	}
 	
 	private static StringBuilder purchaseAvailability = new StringBuilder();
-	public static String getPurchaseAvailabilityTooltipText(Cell cell, AbstractPlaceUpgrade upgrade) {
+	public static String getPurchaseAvailabilityTooltipText(Cell cell, PlaceUpgrade upgrade) {
 		GenericPlace place = cell.getPlace();
 		boolean owned = place.getPlaceUpgrades().contains(upgrade);
 		
@@ -1067,7 +1066,7 @@ public class OccupantManagementDialogue {
 			
 			if(!upgrade.getPrerequisites().isEmpty()) {
 				purchaseAvailability.append("You need to purchase the following first:");
-				for(AbstractPlaceUpgrade prereq : upgrade.getPrerequisites()) {
+				for(var prereq : upgrade.getPrerequisites()) {
 					if(place.getPlaceUpgrades().contains(prereq)) {
 						purchaseAvailability.append("<br/><span style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>"+prereq.getName()+"</span>");
 					} else {

@@ -45,7 +45,6 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
 
@@ -161,7 +160,7 @@ public class SlaveDialogue {
 			@Override
 			public Map<ImmobilisationType, Map<GameCharacter, Set<GameCharacter>>> getStartingCharactersImmobilised() {
 				ImmobilisationType immobilisationType = null;
-				for(AbstractPlaceUpgrade upgrade : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
+				for(var upgrade : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
 					immobilisationType = upgrade.getImmobilisationType();
 					if(immobilisationType!=null) {
 						break;
@@ -185,7 +184,7 @@ public class SlaveDialogue {
 	
 	private static void applyImmobilisationText(List<GameCharacter> submissiveParticipants) {
 		ImmobilisationType immobilisationType = null;
-		for(AbstractPlaceUpgrade upgrade : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
+		for(var upgrade : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
 			immobilisationType = upgrade.getImmobilisationType();
 			if(immobilisationType!=null) {
 				break;

@@ -29,7 +29,7 @@ public class GenericPlace implements XMLSaving {
 	
 	private String name;
 	private PlaceType placeType;
-	private Set<AbstractPlaceUpgrade> placeUpgrades;
+	private Set<PlaceUpgrade> placeUpgrades;
 	
 	public static Map<PlaceType, Integer> placeCountMap = new HashMap<>();
 
@@ -47,7 +47,7 @@ public class GenericPlace implements XMLSaving {
 			if(placeType.getPlaceNameAppendFormat(placeCountMap.get(placeType))!=null && !placeType.getPlaceNameAppendFormat(placeCountMap.get(placeType)).isEmpty()) {
 				this.name = placeType.getName() + placeType.getPlaceNameAppendFormat(placeCountMap.get(placeType));
 			}
-			for(AbstractPlaceUpgrade pu : placeType.getStartingPlaceUpgrades()) {
+			for(var pu : placeType.getStartingPlaceUpgrades()) {
 				placeUpgrades.add(pu);
 			}
 			
@@ -69,7 +69,7 @@ public class GenericPlace implements XMLSaving {
 		if(!this.getPlaceUpgrades().isEmpty()) {
 			Element innerElement = doc.createElement("placeUpgrades");
 			element.appendChild(innerElement);
-			for(AbstractPlaceUpgrade upgrade : this.getPlaceUpgrades()) {
+			for(var upgrade : this.getPlaceUpgrades()) {
 				Element e = doc.createElement("upgrade");
 				innerElement.appendChild(e);
 				
@@ -99,8 +99,8 @@ public class GenericPlace implements XMLSaving {
 		
 		try {
 			if(parentElement.getElementsByTagName("placeUpgrades").getLength()>0 && ((Element) parentElement.getElementsByTagName("placeUpgrades").item(0)).getElementsByTagName("upgrade").getLength()>0) {
-				List<AbstractPlaceUpgrade> coreUpgrades = new ArrayList<>();
-				List<AbstractPlaceUpgrade> upgrades = new ArrayList<>();
+				var coreUpgrades = new ArrayList<PlaceUpgrade>();
+				var upgrades = new ArrayList<PlaceUpgrade>();
 				for(int i=0; i<((Element) parentElement.getElementsByTagName("placeUpgrades").item(0)).getElementsByTagName("upgrade").getLength(); i++){
 					Element e = (Element) ((Element) parentElement.getElementsByTagName("placeUpgrades").item(0)).getElementsByTagName("upgrade").item(i);
 					String placeUpgradeId = e.getAttribute("type");
@@ -108,7 +108,7 @@ public class GenericPlace implements XMLSaving {
 						Cell.refundMoney += 300_000;
 						
 					} else {
-						AbstractPlaceUpgrade upgrade = PlaceUpgrade.getPlaceUpgradeFromId(placeUpgradeId);
+						var upgrade = PlaceUpgrade.getPlaceUpgradeFromId(placeUpgradeId);
 						
 						if(upgrade.isCoreRoomUpgrade()) {
 							coreUpgrades.add(upgrade);
@@ -121,7 +121,7 @@ public class GenericPlace implements XMLSaving {
 				place.getPlaceUpgrades().clear();
 				
 				// Add core upgrades first:
-				for(AbstractPlaceUpgrade coreUpgrade : coreUpgrades) {
+				for(var coreUpgrade : coreUpgrades) {
 					if(coreUpgrade==PlaceUpgrade.LILAYA_EMPTY_ROOM && coreUpgrades.size()>1) {
 						continue;
 					}
@@ -133,7 +133,7 @@ public class GenericPlace implements XMLSaving {
 						}
 					}
 				}
-				for(AbstractPlaceUpgrade upgrade : upgrades) {
+				for(var upgrade : upgrades) {
 					if(!place.getPlaceUpgrades().contains(upgrade)) {
 						if(!place.addPlaceUpgrade(c, upgrade)) { // This line attempts to add the upgrade
 							System.err.println("WARNING: Import of GenericPlace ("+place.getPlaceType()+") was unable to add upgrade: "+upgrade.getName());
@@ -224,7 +224,7 @@ public class GenericPlace implements XMLSaving {
 		return placeType.getParentAlignment();
 	}
 	
-	public boolean addPlaceUpgrade(Cell c, AbstractPlaceUpgrade upgrade) {
+	public boolean addPlaceUpgrade(Cell c, PlaceUpgrade upgrade) {
 		if(placeUpgrades.add(upgrade)) {
 			upgrade.applyInstallationEffects(c);
 			return true;
@@ -233,7 +233,7 @@ public class GenericPlace implements XMLSaving {
 		}
 	}
 	
-	public boolean removePlaceUpgrade(Cell c, AbstractPlaceUpgrade upgrade) {
+	public boolean removePlaceUpgrade(Cell c, PlaceUpgrade upgrade) {
 		if(placeUpgrades.remove(upgrade)) {
 			upgrade.applyRemovalEffects(c);
 			return true;
@@ -246,12 +246,12 @@ public class GenericPlace implements XMLSaving {
 		return placeType.isAbleToBeUpgraded();
 	}
 	
-	public Set<AbstractPlaceUpgrade> getPlaceUpgrades() {
+	public Set<PlaceUpgrade> getPlaceUpgrades() {
 		return placeUpgrades;
 	}
 	
 	public boolean isSlaveCell() {
-		for(AbstractPlaceUpgrade upgrade : placeUpgrades) {
+		for(var upgrade : placeUpgrades) {
 			if(upgrade.isCoreRoomUpgrade() && upgrade.isSlaverUpgrade()) {
 				return true;
 			}
@@ -261,7 +261,7 @@ public class GenericPlace implements XMLSaving {
 	
 	public int getCapacity() {
 		int c = 0;
-		for(AbstractPlaceUpgrade pu : placeUpgrades) {
+		for(var pu : placeUpgrades) {
 			c+=pu.getCapacity();
 		}
 		return c;
@@ -269,7 +269,7 @@ public class GenericPlace implements XMLSaving {
 	
 	public int getUpkeep() {
 		int upkeep = 0;
-		for(AbstractPlaceUpgrade pu : placeUpgrades) {
+		for(var pu : placeUpgrades) {
 			upkeep+=pu.getUpkeep();
 		}
 		if(upkeep<0) {
@@ -280,7 +280,7 @@ public class GenericPlace implements XMLSaving {
 	
 	public float getHourlyAffectionChange() {
 		float affectionChange = 0;
-		for(AbstractPlaceUpgrade pu : placeUpgrades) {
+		for(var pu : placeUpgrades) {
 			affectionChange+=pu.getHourlyAffectionGain();
 		}
 		return affectionChange;
@@ -288,7 +288,7 @@ public class GenericPlace implements XMLSaving {
 	
 	public float getHourlyObedienceChange() {
 		float obedienceChange = 0;
-		for(AbstractPlaceUpgrade pu : placeUpgrades) {
+		for(var pu : placeUpgrades) {
 			obedienceChange+=pu.getHourlyObedienceGain();
 		}
 		return obedienceChange;

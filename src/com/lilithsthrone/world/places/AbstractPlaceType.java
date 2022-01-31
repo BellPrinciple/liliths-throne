@@ -663,8 +663,8 @@ public class AbstractPlaceType implements PlaceType {
 	}
 
 	@Override
-	public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
-		for(AbstractPlaceUpgrade upgrade : upgrades) {
+	public String getSVGString(Set<PlaceUpgrade> upgrades) {
+		for(var upgrade : upgrades) {
 			String s = upgrade.getSVGOverride();
 			if(s!=null) {
 				return s;

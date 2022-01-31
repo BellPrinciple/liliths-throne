@@ -94,7 +94,7 @@ public interface PlaceUpgrade {
 
 	float getHourlyObedienceGain();
 
-	default List<AbstractPlaceUpgrade> getPrerequisites() {
+	default List<PlaceUpgrade> getPrerequisites() {
 		return List.of();
 	}
 
@@ -167,7 +167,7 @@ public interface PlaceUpgrade {
 				Main.game.getOccupancyUtil().removeMilkingRoom(Main.game.getOccupancyUtil().getMilkingRoom(c.getType(), c.getLocation()));
 			}
 			
-			for(AbstractPlaceUpgrade upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
+			for(var upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
 				if(upgrade != LILAYA_EMPTY_ROOM) {
 					place.removePlaceUpgrade(c, upgrade);
 				}
@@ -214,7 +214,7 @@ public interface PlaceUpgrade {
 		public void applyInstallationEffects(Cell c) {
 			GenericPlace place = c.getPlace();
 			place.setPlaceType(PlaceType.LILAYA_HOME_ARTHUR_ROOM);
-			for(AbstractPlaceUpgrade upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
+			for(var upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
 				if(upgrade != LILAYA_ARTHUR_ROOM) {
 					place.removePlaceUpgrade(c, upgrade);
 				}
@@ -304,7 +304,7 @@ public interface PlaceUpgrade {
 		@Override
 		public void applyInstallationEffects(Cell c) {
 			GenericPlace place = c.getPlace();
-			for(AbstractPlaceUpgrade upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
+			for(var upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
 				if(upgrade != LILAYA_GUEST_ROOM) {
 					place.removePlaceUpgrade(c, upgrade);
 				}
@@ -373,7 +373,7 @@ public interface PlaceUpgrade {
 		@Override
 		public void applyInstallationEffects(Cell c) {
 			GenericPlace place = c.getPlace();
-			for(AbstractPlaceUpgrade upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
+			for(var upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
 				if(upgrade != LILAYA_SLAVE_ROOM) {
 					place.removePlaceUpgrade(c, upgrade);
 				}
@@ -444,7 +444,7 @@ public interface PlaceUpgrade {
 				place.removePlaceUpgrade(c, LILAYA_SLAVE_ROOM);
 				
 			} else {
-				for(AbstractPlaceUpgrade upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
+				for(var upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
 					if(upgrade != LILAYA_SLAVE_ROOM_DOUBLE) {
 						place.removePlaceUpgrade(c, upgrade);
 					}
@@ -521,7 +521,7 @@ public interface PlaceUpgrade {
 				place.removePlaceUpgrade(c, LILAYA_SLAVE_ROOM_DOUBLE);
 				
 			} else {
-				for(AbstractPlaceUpgrade upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
+				for(var upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
 					if(upgrade != LILAYA_SLAVE_ROOM_QUADRUPLE) {
 						place.removePlaceUpgrade(c, upgrade);
 					}
@@ -930,7 +930,7 @@ public interface PlaceUpgrade {
 		@Override
 		public void applyInstallationEffects(Cell c) {
 			GenericPlace place = c.getPlace();
-			for(AbstractPlaceUpgrade upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
+			for(var upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
 				if(upgrade != LILAYA_MILKING_ROOM) {
 					place.removePlaceUpgrade(c, upgrade);
 				}
@@ -1100,7 +1100,7 @@ public interface PlaceUpgrade {
 		@Override
 		public void applyInstallationEffects(Cell c) {
 			GenericPlace place = c.getPlace();
-			for(AbstractPlaceUpgrade upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
+			for(var upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
 				if(upgrade != LILAYA_OFFICE) {
 					place.removePlaceUpgrade(c, upgrade);
 				}
@@ -1221,7 +1221,7 @@ public interface PlaceUpgrade {
 		@Override
 		public void applyInstallationEffects(Cell cell) {
 			GenericPlace place = cell.getPlace();
-			for(AbstractPlaceUpgrade upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
+			for(var upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
 				if(upgrade != LILAYA_SPA) {
 					place.removePlaceUpgrade(cell, upgrade);
 				}
@@ -1336,7 +1336,7 @@ public interface PlaceUpgrade {
 		}
 	};
 
-	static ArrayList<AbstractPlaceUpgrade> getCoreRoomUpgrades() {
+	static ArrayList<PlaceUpgrade> getCoreRoomUpgrades() {
 		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_GUEST_ROOM,
 				PlaceUpgrade.LILAYA_SPA,
@@ -1348,12 +1348,12 @@ public interface PlaceUpgrade {
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
 	}
 
-	static ArrayList<AbstractPlaceUpgrade> getGuestRoomUpgrades() {
+	static ArrayList<PlaceUpgrade> getGuestRoomUpgrades() {
 		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_EMPTY_ROOM);
 	}
 
-	static ArrayList<AbstractPlaceUpgrade> getDungeonCellUpgrades() {
+	static ArrayList<PlaceUpgrade> getDungeonCellUpgrades() {
 		return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_DUNGEON_CELL_DECENT_FOOD, PlaceUpgrade.LILAYA_DUNGEON_CELL_DOG_BOWLS,
 
 				PlaceUpgrade.LILAYA_DUNGEON_CELL_UPGRADE_BED, PlaceUpgrade.LILAYA_DUNGEON_CELL_DOWNGRADE_BED,
@@ -1363,7 +1363,7 @@ public interface PlaceUpgrade {
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ARCANE_INSTRUMENTS, PlaceUpgrade.LILAYA_SLAVE_ROOM_OBEDIENCE_TRAINER);
 	}
 
-	static ArrayList<AbstractPlaceUpgrade> getSlaveQuartersUpgradesSingle() {
+	static ArrayList<PlaceUpgrade> getSlaveQuartersUpgradesSingle() {
 		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
@@ -1380,7 +1380,7 @@ public interface PlaceUpgrade {
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
 	}
 
-	static ArrayList<AbstractPlaceUpgrade> getSlaveQuartersUpgradesDouble() {
+	static ArrayList<PlaceUpgrade> getSlaveQuartersUpgradesDouble() {
 		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
@@ -1396,7 +1396,7 @@ public interface PlaceUpgrade {
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
 	}
 
-	static ArrayList<AbstractPlaceUpgrade> getSlaveQuartersUpgradesQuadruple() {
+	static ArrayList<PlaceUpgrade> getSlaveQuartersUpgradesQuadruple() {
 		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_ROOM_SERVICE,
 				PlaceUpgrade.LILAYA_SLAVE_ROOM_DOG_BOWLS,
@@ -1411,7 +1411,7 @@ public interface PlaceUpgrade {
 				PlaceUpgrade.LILAYA_ARTHUR_ROOM);
 	}
 
-	static ArrayList<AbstractPlaceUpgrade> getMilkingUpgrades() {
+	static ArrayList<PlaceUpgrade> getMilkingUpgrades() {
 		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_MILKING_ROOM_ARTISAN_MILKERS,
 				PlaceUpgrade.LILAYA_MILKING_ROOM_INDUSTRIAL_MILKERS,
@@ -1423,7 +1423,7 @@ public interface PlaceUpgrade {
 				PlaceUpgrade.LILAYA_EMPTY_ROOM);
 	}
 
-	static ArrayList<AbstractPlaceUpgrade> getOfficeUpgrades() {
+	static ArrayList<PlaceUpgrade> getOfficeUpgrades() {
 		return Util.newArrayListOfValues(
 				PlaceUpgrade.LILAYA_OFFICE_EXECUTIVE_UPGRADE,
 				PlaceUpgrade.LILAYA_OFFICE_COFFEE_MACHINE,
@@ -1432,7 +1432,7 @@ public interface PlaceUpgrade {
 				PlaceUpgrade.LILAYA_EMPTY_ROOM);
 	}
 
-	static ArrayList<AbstractPlaceUpgrade> getSpaUpgrades() {
+	static ArrayList<PlaceUpgrade> getSpaUpgrades() {
 		return Util.newArrayListOfValues(
 				//TODO
 				//PlaceUpgrade.LILAYA_SPA_SAUNA,
@@ -1441,21 +1441,21 @@ public interface PlaceUpgrade {
 	}
 
 	@Deprecated
-	static List<AbstractPlaceUpgrade> getAllPlaceUpgrades() {
+	static List<PlaceUpgrade> getAllPlaceUpgrades() {
 		return table.list();
 	}
 
 	@Deprecated
-	static AbstractPlaceUpgrade getPlaceUpgradeFromId(String id) {
+	static PlaceUpgrade getPlaceUpgradeFromId(String id) {
 		return table.of(id);
 	}
 
 	@Deprecated
-	static String getIdFromPlaceUpgrade(AbstractPlaceUpgrade placeType) {
+	static String getIdFromPlaceUpgrade(PlaceUpgrade placeType) {
 		return placeType.getId();
 	}
 
-	Table<AbstractPlaceUpgrade> table = new Table<>(s->s) {{
+	Table<PlaceUpgrade> table = new Table<>(s->s) {{
 		addFields(PlaceUpgrade.class,AbstractPlaceUpgrade.class,(k,v)->v.id=k);
 	}};
 }
