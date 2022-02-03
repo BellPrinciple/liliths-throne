@@ -1493,9 +1493,7 @@ public interface Race {
 				DamageAttribute racialAttribute = DamageAttribute.of(race);
 				String id = "DAMAGE_"+Race.getIdFromRace(race);
 //				System.out.println(name+", "+id);
-				Attribute.attributeToIdMap.put(racialAttribute, id);
-				Attribute.idToAttributeMap.put(id, racialAttribute);
-				Attribute.allAttributes.add(racialAttribute);
+				Attribute.register(id,racialAttribute);
 			}
 		}
 	}};
