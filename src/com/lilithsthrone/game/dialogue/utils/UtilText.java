@@ -9969,7 +9969,7 @@ public class UtilText {
 			engine.put("SE_"+StatusEffect.getIdFromStatusEffect(sa), sa);
 		}
 		for(AbstractAttribute att : Attribute.getAllAttributes()) {
-			engine.put("ATTRIBUTE_"+Attribute.getIdFromAttribute(att), att);
+			engine.put("ATTRIBUTE_"+att.getId(), att);
 		}
 		for(CorruptionLevel corruption : CorruptionLevel.values()) {
 			engine.put("CORRUPTION_LEVEL_"+corruption.toString(), corruption);

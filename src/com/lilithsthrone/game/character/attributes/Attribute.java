@@ -702,11 +702,6 @@ public interface Attribute {
 	}
 
 	@Deprecated
-	static String getIdFromAttribute(AbstractAttribute attribute) {
-		return attribute.id;
-	}
-
-	@Deprecated
 	static List<AbstractAttribute> getAllAttributes() {
 		return table.list();
 	}
