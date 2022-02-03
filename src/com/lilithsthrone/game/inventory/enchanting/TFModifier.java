@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
@@ -1609,7 +1608,7 @@ public enum TFModifier {
 	}
 	
 	private AttributeCategory attributeCategory;
-	private AbstractAttribute associatedAttribute;
+	private Attribute associatedAttribute;
 	
 	private String name;
 	private String description;
@@ -1621,7 +1620,7 @@ public enum TFModifier {
 	private Rarity rarity;
 	private Fetish fetish;
 	
-	private TFModifier(AttributeCategory attributeCategory, AbstractAttribute associatedAttribute, String description, String SVGString, Rarity rarity) {
+	private TFModifier(AttributeCategory attributeCategory, Attribute associatedAttribute, String description, String SVGString, Rarity rarity) {
 		this.attributeCategory=attributeCategory;
 		this.associatedAttribute=associatedAttribute;
 		this.name = associatedAttribute.getName();
@@ -1698,7 +1697,7 @@ public enum TFModifier {
 		return attributeCategory;
 	}
 
-	public AbstractAttribute getAssociatedAttribute() {
+	public Attribute getAssociatedAttribute() {
 		return associatedAttribute;
 	}
 

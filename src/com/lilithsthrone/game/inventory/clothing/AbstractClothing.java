@@ -17,7 +17,6 @@ import org.w3c.dom.NodeList;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.Penis;
@@ -744,7 +743,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 					for(int i = 0; i < modifierElements.getLength(); i++){
 						Element e = ((Element)modifierElements.item(i));
 						try {
-							AbstractAttribute att = Attribute.getAttributeFromId(e.getAttribute("attribute"));
+							var att = Attribute.getAttributeFromId(e.getAttribute("attribute"));
 							int value = Integer.valueOf(e.getAttribute("value"));
 							
 							TFPotency pot = TFPotency.BOOST;
@@ -972,7 +971,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 						}
 					}
 				}
-				for(Entry<AbstractAttribute, Integer> entry : this.getAttributeModifiers().entrySet()) {
+				for(var entry : this.getAttributeModifiers().entrySet()) {
 					descriptionSB.append("<br/><b>"+entry.getKey().getFormattedValue(entry.getValue())+"</b>");
 				}
 				descriptionSB.append("</p>");
@@ -1272,7 +1271,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 								+ "<b style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Enchantment Revealed:</b><br/>"+getDisplayName(true));
 			}
 
-			for(Entry<AbstractAttribute, Integer> att : getAttributeModifiers().entrySet()) {
+			for(var att : getAttributeModifiers().entrySet()) {
 				sb.append("<br/>"+att.getKey().getFormattedValue(att.getValue()));
 			}
 			
@@ -2127,10 +2126,10 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		return sb.toString();
 	}
 
-	public AbstractAttribute getCoreEnchantment() {
-		AbstractAttribute att = null;
+	public Attribute getCoreEnchantment() {
+		Attribute att = null;
 		int max = 0;
-		for(Entry<AbstractAttribute, Integer> entry : getAttributeModifiers().entrySet()) {
+		for(var entry : getAttributeModifiers().entrySet()) {
 			att = entry.getKey();
 			if(Math.abs(entry.getValue()) > max) {
 				att = entry.getKey();
@@ -2236,7 +2235,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	}
 	
 	@Override
-	public Map<AbstractAttribute, Integer> getAttributeModifiers() {
+	public Map<Attribute,Integer> getAttributeModifiers() {
 		attributeModifiers.clear();
 		
 		for(ItemEffect ie : getEffects()) {
@@ -2253,7 +2252,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	 * @return An integer value of the 'enchantment capacity cost' for this particular piece of clothing. Does not count negative attribute values, and values of Corruption are reversed (so reducing corruption costs enchantment stability).
 	 */
 	public int getEnchantmentCapacityCost() {
-		Map<AbstractAttribute, Integer> noCorruption = new HashMap<>();
+		var noCorruption = new HashMap<Attribute,Integer>();
 		getAttributeModifiers().entrySet().stream().filter(ent -> ent.getKey()!=Attribute.FERTILITY && ent.getKey()!=Attribute.VIRILITY).forEach(ent -> noCorruption.put(ent.getKey(), ent.getValue()*(ent.getKey()==Attribute.MAJOR_CORRUPTION?-1:1)));
 		return noCorruption.values().stream().reduce(0, (a, b) -> a + Math.max(0, b));
 	}

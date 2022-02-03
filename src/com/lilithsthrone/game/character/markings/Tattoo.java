@@ -14,7 +14,6 @@ import org.w3c.dom.NodeList;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
@@ -52,7 +51,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 	
 	protected List<ItemEffect> effects;
 	
-	protected Map<AbstractAttribute, Integer> attributeModifiers;
+	protected Map<Attribute,Integer> attributeModifiers;
 	
 	private static Map<Colour, String> SVGGlowMap = new HashMap<>();
 
@@ -311,17 +310,21 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 		return "";
 	}
 
-	public AbstractAttribute getCoreEnchantment() {
-		AbstractAttribute att = Attribute.MAJOR_PHYSIQUE;
+	public Attribute getCoreEnchantment() {
+		Attribute att = Attribute.MAJOR_PHYSIQUE;
 		int max = 0;
-		for(Entry<AbstractAttribute, Integer> entry : getAttributeModifiers().entrySet()) {
+		for(var entry : getAttributeModifiers().entrySet()) {
 			if(entry.getValue() > max) {
 				att = entry.getKey();
 				max = entry.getValue();
 			}
 		}
 		
-		return att;
+		return getAttributeModifiers().entrySet().stream()
+		.max(Entry.comparingByValue())
+		.filter(e->e.getValue() > 0)
+		.map(Entry::getKey)
+		.orElse(Attribute.MAJOR_PHYSIQUE);
 	}
 	
 	public boolean isBadEnchantment() {
@@ -343,7 +346,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 		return this.getEffects().stream().anyMatch(e -> e.getSecondaryModifier() == TFModifier.CLOTHING_SERVITUDE);
 	}
 	
-	public Map<AbstractAttribute, Integer> getAttributeModifiers() {
+	public Map<Attribute, Integer> getAttributeModifiers() {
 		attributeModifiers.clear();
 		
 		for(ItemEffect ie : getEffects()) {
@@ -363,7 +366,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 	 * @return An integer value of the 'enchantment capacity cost' for this particular tattoo. Does not count negative attribute values, nor values of Corruption.
 	 */
 	public int getEnchantmentCapacityCost() {
-		Map<AbstractAttribute, Integer> noCorruption = new HashMap<>();
+		var noCorruption = new HashMap<Attribute,Integer>();
 		attributeModifiers.entrySet().stream().filter(ent -> ent.getKey()!=Attribute.MAJOR_CORRUPTION && ent.getKey()!=Attribute.FERTILITY && ent.getKey()!=Attribute.VIRILITY).forEach(ent -> noCorruption.put(ent.getKey(), ent.getValue()));
 		return noCorruption.values().stream().reduce(0, (a, b) -> a + Math.max(0, b));
 	}

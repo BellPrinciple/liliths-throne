@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 import java.util.Stack;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.AppliedStatusEffect;
@@ -1568,7 +1567,7 @@ public class Combat {
 		turn++;
 	}
 
-	private String getShieldsDisplayValue(AbstractAttribute att, int shields) {
+	private String getShieldsDisplayValue(Attribute att, int shields) {
 		String valueForDisplay = String.valueOf(shields);
 		if(att.isInfiniteAtUpperLimit() && shields>=att.getUpperLimit()) {
 			valueForDisplay = UtilText.getInfinitySymbol(false);

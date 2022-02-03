@@ -13,7 +13,6 @@ import org.w3c.dom.events.EventListener;
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.ArousalLevel;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -96,7 +95,7 @@ public class TooltipInformationEventListener implements EventListener {
 	private FetishDesire desire;
 	private Spell spell;
 	private SpellUpgrade spellUpgrade;
-	private AbstractAttribute attribute;
+	private Attribute attribute;
 	private InventorySlot concealedSlot;
 	private LoadedEnchantment loadedEnchantment;
 	private AbstractCombatMove move;
@@ -1615,7 +1614,7 @@ public class TooltipInformationEventListener implements EventListener {
 			+ "</div>";
 	}
 
-	private String getAttributeDiv(GameCharacter owner, AbstractAttribute attribute) {
+	private String getAttributeDiv(GameCharacter owner, Attribute attribute) {
 		float value = owner.getAttributeValue(attribute);
 		
 		String valueForDisplay;
@@ -1648,7 +1647,7 @@ public class TooltipInformationEventListener implements EventListener {
 				+ "</div>";
 	}
 
-	private String getAttributeTableRowDiv(GameCharacter owner, String type, AbstractAttribute damage, AbstractAttribute resist) {
+	private String getAttributeTableRowDiv(GameCharacter owner, String type, Attribute damage, Attribute resist) {
 		float damageValue = owner.getAttributeValue(damage);
 		float resistValue = owner.getAttributeValue(resist);
 		
@@ -1788,7 +1787,7 @@ public class TooltipInformationEventListener implements EventListener {
 		return this;
 	}
 
-	public TooltipInformationEventListener setAttribute(AbstractAttribute attribute, GameCharacter owner) {
+	public TooltipInformationEventListener setAttribute(Attribute attribute, GameCharacter owner) {
 		resetFields();
 		this.attribute = attribute;
 		this.owner = owner;

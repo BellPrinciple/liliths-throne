@@ -32,7 +32,6 @@ import org.w3c.dom.Element;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.AffectionLevelBasic;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -9968,7 +9967,7 @@ public class UtilText {
 			engine.put("STATUS_EFFECT_"+StatusEffect.getIdFromStatusEffect(sa), sa);
 			engine.put("SE_"+StatusEffect.getIdFromStatusEffect(sa), sa);
 		}
-		for(AbstractAttribute att : Attribute.getAllAttributes()) {
+		for(var att : Attribute.getAllAttributes()) {
 			engine.put("ATTRIBUTE_"+att.getId(), att);
 		}
 		for(CorruptionLevel corruption : CorruptionLevel.values()) {

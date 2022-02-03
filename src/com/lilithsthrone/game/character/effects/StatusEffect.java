@@ -16,7 +16,6 @@ import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.PlayerCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.AlcoholLevel;
 import com.lilithsthrone.game.character.attributes.ArousalLevel;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -1891,18 +1890,15 @@ public class StatusEffect {
 			return Main.game.isInNewWorld();
 		}
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
-			LinkedHashMap<AbstractAttribute, Float> attMods;
-			
-			if(target.getSubspeciesOverride()!=null && target.getSubspeciesOverride()!=target.getSubspecies()) {
-				attMods = new LinkedHashMap<>(target.getSubspeciesOverride().getStatusEffectAttributeModifiers(target));
-			} else {
-				attMods = new LinkedHashMap<>(target.getSubspecies().getStatusEffectAttributeModifiers(target));
-			}
-			
+		public Map<Attribute,Float> getAttributeModifiers(GameCharacter target) {
+			var attMods = new LinkedHashMap<>((target.getSubspeciesOverride()!=null
+					? target.getSubspeciesOverride()
+					: target.getSubspecies())
+				.getStatusEffectAttributeModifiers(target));
+
 			BodyMaterial material = target.getBodyMaterial();
 			if(material.getAttributeModifiers(target)!=null) {
-				for(Entry<AbstractAttribute, Float> entry : material.getAttributeModifiers(target).entrySet()) {
+				for(var entry : material.getAttributeModifiers(target).entrySet()) {
 					attMods.putIfAbsent(entry.getKey(), 0f);
 					attMods.put(entry.getKey(), attMods.get(entry.getKey())+entry.getValue());
 				}
@@ -1919,14 +1915,11 @@ public class StatusEffect {
 		}
 		@Override
 		public List<String> getModifiersAsStringList(GameCharacter target) {
-			LinkedHashMap<AbstractAttribute, Float> attMods;
-
-			if(target.getSubspeciesOverride()!=null && target.getSubspeciesOverride()!=target.getSubspecies()) {
-				attMods = new LinkedHashMap<>(target.getSubspeciesOverride().getStatusEffectAttributeModifiers(target));
-			} else {
-				attMods = new LinkedHashMap<>(target.getSubspecies().getStatusEffectAttributeModifiers(target));
-			}
-			
+			var attMods = new LinkedHashMap<>(
+				(target.getSubspeciesOverride()!=null
+					? target.getSubspeciesOverride()
+					: target.getSubspecies())
+				.getStatusEffectAttributeModifiers(target));
 			ArrayList<String> fullModList = new ArrayList<>(attributeModifiersToStringList(attMods));
 			fullModList.addAll(getExtraEffects(target));
 			
@@ -5604,7 +5597,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -5724,7 +5717,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -5839,7 +5832,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -5949,7 +5942,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -6054,7 +6047,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -6178,7 +6171,7 @@ public class StatusEffect {
 			}
 		}
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -6294,7 +6287,7 @@ public class StatusEffect {
 					:"Yummy meal";
 		}
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -6363,7 +6356,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -8052,7 +8045,7 @@ public class StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -15f)),
 			null) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(target!=null && target.hasFetish(Fetish.FETISH_BONDAGE_VICTIM)) {
 				return Util.newHashMapOfValues(
 						new Value<>(Attribute.HEALTH_MAXIMUM, 10f),
@@ -8345,7 +8338,7 @@ public class StatusEffect {
 			return UtilText.parse(target, "Arcane-infused consumables are very common in this world, and as [npc.nameHasFull] found out, they can have some rather curious effects...");
 		}
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			return target.getPotionAttributes();
 		}
 		@Override
@@ -8355,7 +8348,7 @@ public class StatusEffect {
 			modifiersList.addAll(getExtraEffects(target));
 			
 			if (getAttributeModifiers(target) != null) {
-				for (Entry<AbstractAttribute, Float> e : getAttributeModifiers(target).entrySet()) {
+				for (var e : getAttributeModifiers(target).entrySet()) {
 					modifiersList.add("<b>" + (e.getValue() > 0 ? "+" : "") + e.getValue() + "</b>" + " <b style='color: " + e.getKey().getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(e.getKey().getAbbreviatedName()) + "</b>");
 				}
 			}

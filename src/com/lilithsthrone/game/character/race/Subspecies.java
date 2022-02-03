@@ -9,7 +9,6 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
 import com.lilithsthrone.game.character.body.Body;
@@ -273,7 +272,7 @@ public interface Subspecies {
 
 	String getStatusEffectDescription(GameCharacter character);
 
-	Map<AbstractAttribute,Float> getStatusEffectAttributeModifiers(GameCharacter character);
+	Map<Attribute,Float> getStatusEffectAttributeModifiers(GameCharacter character);
 
 	Map<PerkCategory,Integer> getPerkWeighting(GameCharacter character);
 
@@ -303,7 +302,7 @@ public interface Subspecies {
 
 	Race getRace();
 
-	default AbstractAttribute getDamageMultiplier() {
+	default Attribute getDamageMultiplier() {
 		return getRace().getDefaultDamageMultiplier();
 	}
 
@@ -618,7 +617,7 @@ public interface Subspecies {
 			return 0;
 		}
 		@Override
-		public AbstractAttribute getDamageMultiplier() {
+		public Attribute getDamageMultiplier() {
 			return Attribute.DAMAGE_ELDER_LILIN;
 		}
 	};
@@ -680,7 +679,7 @@ public interface Subspecies {
 			return 0;
 		}
 		@Override
-		public AbstractAttribute getDamageMultiplier() {
+		public Attribute getDamageMultiplier() {
 			return Attribute.DAMAGE_LILIN;
 		}
 	};
@@ -1069,7 +1068,7 @@ public interface Subspecies {
 			return true;
 		}
 		@Override
-		public AbstractAttribute getDamageMultiplier() {
+		public Attribute getDamageMultiplier() {
 			return Attribute.DAMAGE_IMP;
 		}
 		@Override
@@ -1142,7 +1141,7 @@ public interface Subspecies {
 			return true;
 		}
 		@Override
-		public AbstractAttribute getDamageMultiplier() {
+		public Attribute getDamageMultiplier() {
 			return Attribute.DAMAGE_IMP;
 		}
 		@Override
@@ -2141,7 +2140,7 @@ public interface Subspecies {
 		}
 
 		@Override
-		public Map<AbstractAttribute, Float> getStatusEffectAttributeModifiers(GameCharacter character) {
+		public Map<Attribute,Float> getStatusEffectAttributeModifiers(GameCharacter character) {
 			//TODO move the variable racial bonuses out of Subspecies and put them in the special youko perks
 			if(character!=null && character.getMaxTailCount()<9) {
 				return Util.newHashMapOfValues(
@@ -2281,7 +2280,7 @@ public interface Subspecies {
 		}
 
 		@Override
-		public Map<AbstractAttribute, Float> getStatusEffectAttributeModifiers(GameCharacter character) {
+		public Map<Attribute,Float> getStatusEffectAttributeModifiers(GameCharacter character) {
 			if(character!=null && character.getMaxTailCount()<9) {
 				return Util.newHashMapOfValues(
 						new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),
@@ -2417,7 +2416,7 @@ public interface Subspecies {
 			}
 		}
 		@Override
-		public Map<AbstractAttribute, Float> getStatusEffectAttributeModifiers(GameCharacter character) {
+		public Map<Attribute,Float> getStatusEffectAttributeModifiers(GameCharacter character) {
 			if(character!=null && character.getMaxTailCount()<9) {
 				return Util.newHashMapOfValues(
 						new Value<>(Attribute.MAJOR_PHYSIQUE, 5f),

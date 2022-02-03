@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
@@ -3094,7 +3093,7 @@ public class ItemType {
 					public List<String> getEffectsDescription(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target) {
 						List<String> list = super.getEffectsDescription(primaryModifier, secondaryModifier, potency, limit, user, target);
 						list.add("Applies <i style='color:"+statusEffect.getColour().toWebHexString()+";'>'"+Util.capitaliseSentence(statusEffect.getName(target))+"'</i>:");
-						for(Entry<AbstractAttribute, Float> entry : statusEffect.getAttributeModifiers(target).entrySet()) {
+						for(var entry : statusEffect.getAttributeModifiers(target).entrySet()) {
 							list.add("<i>"+entry.getKey().getFormattedValue(entry.getValue())+"</i>");
 						}
 						return list;

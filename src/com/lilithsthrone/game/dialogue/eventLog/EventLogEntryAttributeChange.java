@@ -1,6 +1,6 @@
 package com.lilithsthrone.game.dialogue.eventLog;
 
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
+import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -12,10 +12,10 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public class EventLogEntryAttributeChange extends EventLogEntry {
 	
-	private AbstractAttribute attribute;
+	private Attribute attribute;
 	private float change;
 	
-	public EventLogEntryAttributeChange(AbstractAttribute attribute, float change, boolean isCore) {
+	public EventLogEntryAttributeChange(Attribute attribute, float change, boolean isCore) {
 		super((isCore
 						?"<span style='color:"+attribute.getColour().toWebHexString()+";'>Core "+Util.capitaliseSentence(attribute.getName())+"</span>"
 						:"<span style='color:"+attribute.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(attribute.getName())+"</span>"),

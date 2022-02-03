@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.w3c.dom.Document;
@@ -16,7 +15,6 @@ import org.w3c.dom.NodeList;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.combat.Attack;
 import com.lilithsthrone.game.combat.DamageType;
@@ -56,7 +54,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 	
 	private DamageType damageType;
 	
-	private AbstractAttribute coreEnchantment;
+	private Attribute coreEnchantment;
 	
 	private List<Spell> spells;
 	private List<AbstractCombatMove> combatMoves;
@@ -136,7 +134,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		}
 		
 		int highestEnchantment = 0;
-		for (AbstractAttribute a : new HashSet<>(getAttributeModifiers().keySet())) {
+		for (var a : new HashSet<>(getAttributeModifiers().keySet())) {
 			if (getAttributeModifiers().get(a) > highestEnchantment) {
 				coreEnchantment = a;
 				highestEnchantment = getAttributeModifiers().get(a);
@@ -158,7 +156,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		this.setEffects(new ArrayList<>(weapon.getEffects()));
 		
 		int highestEnchantment = 0;
-		for (AbstractAttribute a : new HashSet<>(getAttributeModifiers().keySet())) {
+		for (var a : new HashSet<>(getAttributeModifiers().keySet())) {
 			if (getAttributeModifiers().get(a) > highestEnchantment) {
 				coreEnchantment = a;
 				highestEnchantment = getAttributeModifiers().get(a);
@@ -470,7 +468,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 			for (String s : this.getWeaponType().getExtraEffects()) {
 				descriptionSB.append("<br/>"+ s);
 			}
-			for(Entry<AbstractAttribute, Integer> entry : this.getAttributeModifiers().entrySet()) {
+			for(var entry : this.getAttributeModifiers().entrySet()) {
 				descriptionSB.append("<br/><b>"+entry.getKey().getFormattedValue(entry.getValue())+"</b>");
 			}
 			descriptionSB.append("</p>");
@@ -646,7 +644,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		return combatMoves;
 	}
 
-	public AbstractAttribute getCoreEnchantment() {
+	public Attribute getCoreEnchantment() {
 		return coreEnchantment;
 	}
 	
@@ -681,7 +679,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 	}
 	
 	@Override
-	public Map<AbstractAttribute, Integer> getAttributeModifiers() {
+	public Map<Attribute,Integer> getAttributeModifiers() {
 		attributeModifiers.clear();
 		
 		for(ItemEffect ie : getEffects()) {
@@ -702,7 +700,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 	 * @return An integer value of the 'enchantment capacity cost' for this particular weapon. Does not count negative attribute values, and values of Corruption are reversed (so reducing corruption costs enchantment stability).
 	 */
 	public int getEnchantmentCapacityCost() {
-		Map<AbstractAttribute, Integer> noCorruption = new HashMap<>();
+		var noCorruption = new HashMap<Attribute,Integer>();
 		getAttributeModifiers().entrySet().stream().filter(ent -> ent.getKey()!=Attribute.FERTILITY && ent.getKey()!=Attribute.VIRILITY).forEach(ent -> noCorruption.put(ent.getKey(), ent.getValue()*(ent.getKey()==Attribute.MAJOR_CORRUPTION?-1:1)));
 		return noCorruption.values().stream().reduce(0, (a, b) -> a + Math.max(0, b));
 	}

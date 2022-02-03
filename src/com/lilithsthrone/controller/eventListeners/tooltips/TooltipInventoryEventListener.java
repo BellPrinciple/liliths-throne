@@ -2,14 +2,12 @@ package com.lilithsthrone.controller.eventListeners.tooltips;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.Covering;
@@ -1051,7 +1049,7 @@ public class TooltipInventoryEventListener implements EventListener {
 				tooltipSB.append("<br/><b>"+s+"</b>");
 			}
 			
-			for(Entry<AbstractAttribute, Integer> entry : absWep.getAttributeModifiers().entrySet()) {
+			for(var entry : absWep.getAttributeModifiers().entrySet()) {
 				tooltipSB.append("<br/><b>"+entry.getKey().getFormattedValue(entry.getValue())+"</b>");
 			}
 		
@@ -1255,7 +1253,7 @@ public class TooltipInventoryEventListener implements EventListener {
 						}
 					}
 				}
-				for(Entry<AbstractAttribute, Integer> entry : absClothing.getAttributeModifiers().entrySet()) {
+				for(var entry : absClothing.getAttributeModifiers().entrySet()) {
 					tooltipSB.append("<br/><b>"+entry.getKey().getFormattedValue(entry.getValue())+"</b>");
 				}
 			}
@@ -1471,7 +1469,7 @@ public class TooltipInventoryEventListener implements EventListener {
 					i++;
 				}
 			}
-			for(Entry<AbstractAttribute, Integer> entry : tattoo.getAttributeModifiers().entrySet()) {
+			for(var entry : tattoo.getAttributeModifiers().entrySet()) {
 				tooltipSB.append((i>0?"<br/>":"")+"<b>"+entry.getKey().getFormattedValue(entry.getValue())+"</b>");
 				i++;
 			}
