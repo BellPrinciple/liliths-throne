@@ -2,7 +2,6 @@ package com.lilithsthrone.game.character.attributes;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
@@ -25,7 +24,6 @@ public abstract class AbstractAttribute implements Attribute {
 	private String positiveEnchantment;
 	private String negativeEnchantment;
 	private Colour colour;
-	private List<String> extraEffects;
 	private String SVGString;
 	
 	public AbstractAttribute(boolean percentage,
@@ -37,8 +35,7 @@ public abstract class AbstractAttribute implements Attribute {
 			String pathName,
 			Colour colour,
 			String positiveEnchantment,
-			String negativeEnchantment,
-			List<String> extraEffects) {
+			String negativeEnchantment) {
 		this.percentage = percentage;
 		this.baseValue = baseValue;
 		this.lowerLimit = lowerLimit;
@@ -48,7 +45,6 @@ public abstract class AbstractAttribute implements Attribute {
 		this.colour = colour;
 		this.positiveEnchantment = positiveEnchantment;
 		this.negativeEnchantment = negativeEnchantment;
-		this.extraEffects = extraEffects;
 
 		try {
 			InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/UIElements/" + pathName + ".svg");
@@ -106,17 +102,6 @@ public abstract class AbstractAttribute implements Attribute {
 	@Override
 	public Colour getColour() {
 		return colour;
-	}
-
-	@Override
-	public String getEffectsAsStringList() {
-		StringBuilder descriptionSB = new StringBuilder();
-
-		if (extraEffects != null)
-			for (String s : extraEffects)
-				descriptionSB.append("<br/>" + s);
-
-		return descriptionSB.toString();
 	}
 
 	@Override

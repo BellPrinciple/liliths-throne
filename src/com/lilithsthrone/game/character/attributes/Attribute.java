@@ -113,8 +113,7 @@ public interface Attribute {
 			"healthIcon",
 			PresetColour.ATTRIBUTE_HEALTH,
 			"health",
-			"sickness",
-			null) {
+			"sickness") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
@@ -133,8 +132,7 @@ public interface Attribute {
 			"manaIcon",
 			PresetColour.ATTRIBUTE_MANA,
 			"aura-boost",
-			"aura-drain",
-			null) {
+			"aura-drain") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
@@ -153,8 +151,7 @@ public interface Attribute {
 			"experienceIcon",
 			PresetColour.GENERIC_EXPERIENCE,
 			"learning",
-			"forgetfulness",
-			null) {
+			"forgetfulness") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
@@ -171,8 +168,7 @@ public interface Attribute {
 			"action_points",
 			PresetColour.GENERIC_ACTION_POINTS,
 			"initiative",
-			"lethargy",
-			null) {
+			"lethargy") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
@@ -189,8 +185,7 @@ public interface Attribute {
 			"arousalIcon",
 			PresetColour.ATTRIBUTE_AROUSAL,
 			"long-lasting",
-			"prematurity",
-			null) {
+			"prematurity") {
 		@Override
 		public boolean hasStatusEffect() {
 			return true;
@@ -214,8 +209,7 @@ public interface Attribute {
 			"arousalIcon",
 			PresetColour.ATTRIBUTE_LUST,
 			"passion",
-			"indifference",
-			null) {
+			"indifference") {
 		@Override
 		public boolean hasStatusEffect() {
 			return true;
@@ -241,8 +235,7 @@ public interface Attribute {
 			"arousalIcon",
 			PresetColour.ATTRIBUTE_LUST,
 			"passion",
-			"indifference",
-			null) {
+			"indifference") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "The amount of lust which [npc.name] naturally gravitates towards over a period of time.");
@@ -258,12 +251,14 @@ public interface Attribute {
 			"strengthIcon",
 			PresetColour.ATTRIBUTE_PHYSIQUE,
 			"power",
-			"weakness",
-			Util.newArrayListOfValues(
-					"<b>+2</b> <b style='color: " + PresetColour.ATTRIBUTE_HEALTH.toWebHexString() + "'>Energy</b> per 1 physique")) {
+			"weakness") {
 		@Override
 		public boolean hasStatusEffect() {
 			return true;
+		}
+		@Override
+		public String getEffectsAsStringList() {
+			return "<br /><b>+2</b> <b style='color: "+PresetColour.ATTRIBUTE_HEALTH.toWebHexString()+"'>Energy</b> per 1 physique";
 		}
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -282,12 +277,14 @@ public interface Attribute {
 			"intelligenceIcon",
 			PresetColour.ATTRIBUTE_ARCANE,
 			"arcane-boost",
-			"arcane-drain",
-			Util.newArrayListOfValues(
-					"<b>+2</b> <b style='color: " + PresetColour.ATTRIBUTE_MANA.toWebHexString() + "'>Aura</b> per 1 arcane")) {
+			"arcane-drain") {
 		@Override
 		public boolean hasStatusEffect() {
 			return true;
+		}
+		@Override
+		public String getEffectsAsStringList() {
+			return "<br /><b>+2</b> <b style='color: "+PresetColour.ATTRIBUTE_MANA.toWebHexString()+"'>Aura</b> per 1 arcane";
 		}
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -306,13 +303,15 @@ public interface Attribute {
 			"corruptionIcon",
 			PresetColour.ATTRIBUTE_CORRUPTION,
 			"corruption",
-			"purity",
-			Util.newArrayListOfValues(
-					"<b>-0.5</b> <b style='color: " + PresetColour.ATTRIBUTE_MANA.toWebHexString() + "'>arousal resistance</b> per 1 physical corruption",
-					"<b>+0.5</b> <b style='color: " + PresetColour.DAMAGE_TYPE_MANA.toWebHexString() + "'>arousal damage</b> per 1 physical corruption")) {
+			"purity") {
 		@Override
 		public boolean hasStatusEffect() {
 			return true;
+		}
+		@Override
+		public String getEffectsAsStringList() {
+			return "<br /><b>-0.5</b> <b style='color: " + PresetColour.ATTRIBUTE_MANA.toWebHexString() + "'>arousal resistance</b> per 1 physical corruption"
+			+"<br /><b>+0.5</b> <b style='color: " + PresetColour.DAMAGE_TYPE_MANA.toWebHexString() + "'>arousal damage</b> per 1 physical corruption";
 		}
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -337,8 +336,7 @@ public interface Attribute {
 			"enchantmentLimitIcon",
 			PresetColour.GENERIC_ENCHANTMENT,
 			"harnessing",
-			"clumsiness",
-			null) {
+			"clumsiness") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner,
@@ -346,21 +344,21 @@ public interface Attribute {
 		}
 	};
 	
-	public static AbstractAttribute FERTILITY = new AbstractAttribute(true, 10, -100, 100, "fertility", "Fertility", "shieldIcon", PresetColour.GENERIC_SEX, "fertility", "infertility", null) {
+	public static AbstractAttribute FERTILITY = new AbstractAttribute(true, 10, -100, 100, "fertility", "Fertility", "shieldIcon", PresetColour.GENERIC_SEX, "fertility", "infertility") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases the likelihood of becoming pregnant.";
 		}
 	};
 	
-	public static AbstractAttribute VIRILITY = new AbstractAttribute(true, 10, -100, 100, "virility", "Virility", "shieldIcon", PresetColour.GENERIC_SEX, "virility", "sterility", null) {
+	public static AbstractAttribute VIRILITY = new AbstractAttribute(true, 10, -100, 100, "virility", "Virility", "shieldIcon", PresetColour.GENERIC_SEX, "virility", "sterility") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases the likelihood of impregnating someone.";
 		}
 	};
 	
-	public static AbstractAttribute SPELL_COST_MODIFIER = new AbstractAttribute(true, 0, 0, 80, "spell efficiency", "Spell efficiency", "shieldIcon", PresetColour.ATTRIBUTE_MANA, "proficiency", "incompetence", null) {
+	public static AbstractAttribute SPELL_COST_MODIFIER = new AbstractAttribute(true, 0, 0, 80, "spell efficiency", "Spell efficiency", "shieldIcon", PresetColour.ATTRIBUTE_MANA, "proficiency", "incompetence") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Reduces the cost of casting spells.";
@@ -369,14 +367,14 @@ public interface Attribute {
 
 	// Combat attributes:
 
-	public static AbstractAttribute CRITICAL_DAMAGE = new AbstractAttribute(true, 150, 100, 500, "critical power", "Critical power", "shieldIcon", PresetColour.ATTRIBUTE_HEALTH, "impact", "failure", null) {
+	public static AbstractAttribute CRITICAL_DAMAGE = new AbstractAttribute(true, 150, 100, 500, "critical power", "Critical power", "shieldIcon", PresetColour.ATTRIBUTE_HEALTH, "impact", "failure") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Each point gives 1% extra critical power.";
 		}
 	};
 	
-	public static AbstractAttribute ENERGY_SHIELDING = new AbstractAttribute(false, 0, -100, 500, "health shielding", "Health shielding", "shieldIcon", PresetColour.ATTRIBUTE_HEALTH, "endurance", "vulnerability", null) {
+	public static AbstractAttribute ENERGY_SHIELDING = new AbstractAttribute(false, 0, -100, 500, "health shielding", "Health shielding", "shieldIcon", PresetColour.ATTRIBUTE_HEALTH, "endurance", "vulnerability") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "This value is applied to health shielding at the start of each combat turn.";
@@ -394,7 +392,7 @@ public interface Attribute {
 	
 	// Resistances:
 
-	public static AbstractAttribute RESISTANCE_PHYSICAL = new AbstractAttribute(false, 0, -100, 500, "physical shielding", "Physical shielding", "shieldIcon", PresetColour.DAMAGE_TYPE_PHYSICAL, "toughness", "softness", null) {
+	public static AbstractAttribute RESISTANCE_PHYSICAL = new AbstractAttribute(false, 0, -100, 500, "physical shielding", "Physical shielding", "shieldIcon", PresetColour.DAMAGE_TYPE_PHYSICAL, "toughness", "softness") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Reduces physical damage taken.";
@@ -409,7 +407,7 @@ public interface Attribute {
 		}
 	};
 	
-	public static AbstractAttribute RESISTANCE_LUST = new AbstractAttribute(false, 0, -100, 500, "lust shielding", "Lust shielding", "shieldIcon", PresetColour.GENERIC_SEX, "chastity", "temptation", null) {
+	public static AbstractAttribute RESISTANCE_LUST = new AbstractAttribute(false, 0, -100, 500, "lust shielding", "Lust shielding", "shieldIcon", PresetColour.GENERIC_SEX, "chastity", "temptation") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Reduces lust damage taken.";
@@ -424,7 +422,7 @@ public interface Attribute {
 		}
 	};
 	
-	public static AbstractAttribute RESISTANCE_FIRE = new AbstractAttribute(false, 0, -100, 500, "fire shielding", "Fire shielding", "shieldIcon", PresetColour.DAMAGE_TYPE_FIRE, "extinguishing", "flammability", null) {
+	public static AbstractAttribute RESISTANCE_FIRE = new AbstractAttribute(false, 0, -100, 500, "fire shielding", "Fire shielding", "shieldIcon", PresetColour.DAMAGE_TYPE_FIRE, "extinguishing", "flammability") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Reduces fire damage taken.";
@@ -439,7 +437,7 @@ public interface Attribute {
 		}
 	};
 	
-	public static AbstractAttribute RESISTANCE_ICE = new AbstractAttribute(false, 0, -100, 500, "cold shielding", "Cold shielding", "shieldIcon", PresetColour.DAMAGE_TYPE_COLD, "warmth", "frostbite", null) {
+	public static AbstractAttribute RESISTANCE_ICE = new AbstractAttribute(false, 0, -100, 500, "cold shielding", "Cold shielding", "shieldIcon", PresetColour.DAMAGE_TYPE_COLD, "warmth", "frostbite") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Reduces cold damage taken.";
@@ -454,7 +452,7 @@ public interface Attribute {
 		}
 	};
 	
-	public static AbstractAttribute RESISTANCE_POISON = new AbstractAttribute(false, 0, -100, 500, "poison shielding", "Poison shielding", "shieldIcon", PresetColour.DAMAGE_TYPE_POISON, "anti-venom", "sickness", null) {
+	public static AbstractAttribute RESISTANCE_POISON = new AbstractAttribute(false, 0, -100, 500, "poison shielding", "Poison shielding", "shieldIcon", PresetColour.DAMAGE_TYPE_POISON, "anti-venom", "sickness") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Reduces poison damage taken.";
@@ -472,63 +470,63 @@ public interface Attribute {
 	
 	// Damages:
 
-	public static AbstractAttribute DAMAGE_UNARMED = new AbstractAttribute(true, 0, -80, 100, "unarmed damage", "Unarmed damage", "swordIcon", PresetColour.DAMAGE_TYPE_UNARMED, "martial arts", "martial incompetence", null) {
+	public static AbstractAttribute DAMAGE_UNARMED = new AbstractAttribute(true, 0, -80, 100, "unarmed damage", "Unarmed damage", "swordIcon", PresetColour.DAMAGE_TYPE_UNARMED, "martial arts", "martial incompetence") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases damage dealt from unarmed attacks, including special attacks obtained from non-human bodyparts.";
 		}
 	};
 	
-	public static AbstractAttribute DAMAGE_MELEE_WEAPON = new AbstractAttribute(true, 0, -80, 100, "melee weapon damage", "Melee Weapon damage", "swordIcon", PresetColour.DAMAGE_TYPE_MELEE, "melee mastery", "melee incompetence", null) {
+	public static AbstractAttribute DAMAGE_MELEE_WEAPON = new AbstractAttribute(true, 0, -80, 100, "melee weapon damage", "Melee Weapon damage", "swordIcon", PresetColour.DAMAGE_TYPE_MELEE, "melee mastery", "melee incompetence") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases damage dealt from attacks by melee weapons.";
 		}
 	};
 	
-	public static AbstractAttribute DAMAGE_RANGED_WEAPON = new AbstractAttribute(true, 0, -80, 100, "ranged weapon damage", "Ranged weapon damage", "swordIcon", PresetColour.DAMAGE_TYPE_RANGED, "ranged mastery", "ranged incompetence", null) {
+	public static AbstractAttribute DAMAGE_RANGED_WEAPON = new AbstractAttribute(true, 0, -80, 100, "ranged weapon damage", "Ranged weapon damage", "swordIcon", PresetColour.DAMAGE_TYPE_RANGED, "ranged mastery", "ranged incompetence") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases damage dealt from attacks by ranged weapons.";
 		}
 	};
 	
-	public static AbstractAttribute DAMAGE_SPELLS = new AbstractAttribute(true, 0, -80, 100, "spell damage", "Spell damage", "swordIcon", PresetColour.ATTRIBUTE_MANA, "arcane power", "arcane dulling", null) {
+	public static AbstractAttribute DAMAGE_SPELLS = new AbstractAttribute(true, 0, -80, 100, "spell damage", "Spell damage", "swordIcon", PresetColour.ATTRIBUTE_MANA, "arcane power", "arcane dulling") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases spell damage.";
 		}
 	};
 
-	public static AbstractAttribute DAMAGE_PHYSICAL = new AbstractAttribute(true, 0, -80, 100, "physical damage", "Physical damage", "swordIcon", PresetColour.DAMAGE_TYPE_PHYSICAL, "force", "softness", null) {
+	public static AbstractAttribute DAMAGE_PHYSICAL = new AbstractAttribute(true, 0, -80, 100, "physical damage", "Physical damage", "swordIcon", PresetColour.DAMAGE_TYPE_PHYSICAL, "force", "softness") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases physical damage.";
 		}
 	};
 	
-	public static AbstractAttribute DAMAGE_LUST = new AbstractAttribute(true, 0, -80, 100, "lust damage", "Lust damage", "swordIcon", PresetColour.GENERIC_SEX, "seduction", "repulsion", null) {
+	public static AbstractAttribute DAMAGE_LUST = new AbstractAttribute(true, 0, -80, 100, "lust damage", "Lust damage", "swordIcon", PresetColour.GENERIC_SEX, "seduction", "repulsion") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases lust damage.";
 		}
 	};
 	
-	public static AbstractAttribute DAMAGE_FIRE = new AbstractAttribute(true, 0, -80, 100, "fire damage", "Fire damage", "swordIcon", PresetColour.DAMAGE_TYPE_FIRE, "inferno", "dying embers", null) {
+	public static AbstractAttribute DAMAGE_FIRE = new AbstractAttribute(true, 0, -80, 100, "fire damage", "Fire damage", "swordIcon", PresetColour.DAMAGE_TYPE_FIRE, "inferno", "dying embers") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases fire damage.";
 		}
 	};
 	
-	public static AbstractAttribute DAMAGE_ICE = new AbstractAttribute(true, 0, -80, 100, "cold damage", "Cold damage", "swordIcon", PresetColour.DAMAGE_TYPE_COLD, "blizzard", "slush", null) {
+	public static AbstractAttribute DAMAGE_ICE = new AbstractAttribute(true, 0, -80, 100, "cold damage", "Cold damage", "swordIcon", PresetColour.DAMAGE_TYPE_COLD, "blizzard", "slush") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases cold damage.";
 		}
 	};
 	
-	public static AbstractAttribute DAMAGE_POISON = new AbstractAttribute(true, 0, -80, 100, "poison damage", "Poison damage", "swordIcon", PresetColour.DAMAGE_TYPE_POISON, "venom", "dilution", null) {
+	public static AbstractAttribute DAMAGE_POISON = new AbstractAttribute(true, 0, -80, 100, "poison damage", "Poison damage", "swordIcon", PresetColour.DAMAGE_TYPE_POISON, "venom", "dilution") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases poison damage.";
@@ -538,129 +536,129 @@ public interface Attribute {
 	// From v0.4, these are automatically generated in the static block at the end of the Race.java class!
 //	// Racial:
 //	
-//	public static AbstractAttribute DAMAGE_ANGEL = new AbstractAttribute(true, 0, -100, 100, "angelic damage", "Angelic damage", "swordIcon", PresetColour.RACE_ANGEL, "angelic-obliteration", "angelic-mercy", null) {
+//	public static AbstractAttribute DAMAGE_ANGEL = new AbstractAttribute(true, 0, -100, 100, "angelic damage", "Angelic damage", "swordIcon", PresetColour.RACE_ANGEL, "angelic-obliteration", "angelic-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs angels.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_CAT_MORPH = new AbstractAttribute(true, 0, -100, 100, "cat-morph damage", "Cat-morph damage", "swordIcon", PresetColour.RACE_CAT_MORPH, "cat-morph-obliteration", "cat-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_CAT_MORPH = new AbstractAttribute(true, 0, -100, 100, "cat-morph damage", "Cat-morph damage", "swordIcon", PresetColour.RACE_CAT_MORPH, "cat-morph-obliteration", "cat-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs cat-morphs.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_COW_MORPH = new AbstractAttribute(true, 0, -100, 100, "cow-morph damage", "Cow-morph damage", "swordIcon", PresetColour.RACE_COW_MORPH, "cow-morph-obliteration", "cow-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_COW_MORPH = new AbstractAttribute(true, 0, -100, 100, "cow-morph damage", "Cow-morph damage", "swordIcon", PresetColour.RACE_COW_MORPH, "cow-morph-obliteration", "cow-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs cow-morphs.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_DEMON = new AbstractAttribute(true, 0, -100, 100, "demonic damage", "Demonic damage", "swordIcon", PresetColour.RACE_DEMON, "demonic-obliteration", "demonic-mercy", null) {
+//	public static AbstractAttribute DAMAGE_DEMON = new AbstractAttribute(true, 0, -100, 100, "demonic damage", "Demonic damage", "swordIcon", PresetColour.RACE_DEMON, "demonic-obliteration", "demonic-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs demons.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_DOG_MORPH = new AbstractAttribute(true, 0, -100, 100, "dog-morph damage", "Dog-morph damage", "swordIcon", PresetColour.RACE_DOG_MORPH, "dog-morph-obliteration", "dog-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_DOG_MORPH = new AbstractAttribute(true, 0, -100, 100, "dog-morph damage", "Dog-morph damage", "swordIcon", PresetColour.RACE_DOG_MORPH, "dog-morph-obliteration", "dog-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs dog-morphs.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_HARPY = new AbstractAttribute(true, 0, -100, 100, "harpy damage", "Harpy damage", "swordIcon", PresetColour.RACE_HARPY, "harpy-obliteration", "harpy-mercy", null) {
+//	public static AbstractAttribute DAMAGE_HARPY = new AbstractAttribute(true, 0, -100, 100, "harpy damage", "Harpy damage", "swordIcon", PresetColour.RACE_HARPY, "harpy-obliteration", "harpy-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs harpies.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_HORSE_MORPH = new AbstractAttribute(true, 0, -100, 100, "horse-morph damage", "Horse-morph damage", "swordIcon", PresetColour.RACE_HORSE_MORPH, "horse-morph-obliteration", "horse-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_HORSE_MORPH = new AbstractAttribute(true, 0, -100, 100, "horse-morph damage", "Horse-morph damage", "swordIcon", PresetColour.RACE_HORSE_MORPH, "horse-morph-obliteration", "horse-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs horse-morphs.";
 //		}
 //	};
-	public static AbstractAttribute DAMAGE_IMP = new AbstractAttribute(true, 0, -100, 100, "imp damage", "Imp damage", "swordIcon", PresetColour.RACE_IMP, "impish-obliteration", "impish-mercy", null) {
+	public static AbstractAttribute DAMAGE_IMP = new AbstractAttribute(true, 0, -100, 100, "imp damage", "Imp damage", "swordIcon", PresetColour.RACE_IMP, "impish-obliteration", "impish-mercy") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases damage vs imps.";
 		}
 	};
 
-	public static AbstractAttribute DAMAGE_LILIN = new AbstractAttribute(true, 0, -100, 100, "lilin damage", "Lilin damage", "swordIcon", PresetColour.RACE_LILIN, "lilin-obliteration", "lilin-mercy", null) {
+	public static AbstractAttribute DAMAGE_LILIN = new AbstractAttribute(true, 0, -100, 100, "lilin damage", "Lilin damage", "swordIcon", PresetColour.RACE_LILIN, "lilin-obliteration", "lilin-mercy") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases damage vs lilin.";
 		}
 	};
 
-	public static AbstractAttribute DAMAGE_ELDER_LILIN = new AbstractAttribute(true, 0, -100, 100, "elder lilin damage", "Elder lilin damage", "swordIcon", PresetColour.RACE_LILIN, "elder-lilin-obliteration", "elder-lilin-mercy", null) {
+	public static AbstractAttribute DAMAGE_ELDER_LILIN = new AbstractAttribute(true, 0, -100, 100, "elder lilin damage", "Elder lilin damage", "swordIcon", PresetColour.RACE_LILIN, "elder-lilin-obliteration", "elder-lilin-mercy") {
 		@Override
 		public String getDescription(GameCharacter owner) {
 			return "Increases damage vs elder lilin.";
 		}
 	};
-//	public static AbstractAttribute DAMAGE_REINDEER_MORPH = new AbstractAttribute(true, 0, -100, 100, "reindeer-morph damage", "Reindeer-morph damage", "swordIcon", PresetColour.RACE_REINDEER_MORPH, "reindeer-morph-obliteration", "reindeer-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_REINDEER_MORPH = new AbstractAttribute(true, 0, -100, 100, "reindeer-morph damage", "Reindeer-morph damage", "swordIcon", PresetColour.RACE_REINDEER_MORPH, "reindeer-morph-obliteration", "reindeer-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs reindeer-morphs.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_HUMAN = new AbstractAttribute(true, 0, -100, 100, "human damage", "Human damage", "swordIcon", PresetColour.RACE_HUMAN, "human-obliteration", "human-mercy", null) {
+//	public static AbstractAttribute DAMAGE_HUMAN = new AbstractAttribute(true, 0, -100, 100, "human damage", "Human damage", "swordIcon", PresetColour.RACE_HUMAN, "human-obliteration", "human-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs humans.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_SQUIRREL_MORPH = new AbstractAttribute(true, 0, -100, 100, "squirrel-morph damage", "Squirrel-morph damage", "swordIcon", PresetColour.RACE_SQUIRREL_MORPH, "squirrel-morph-obliteration", "squirrel-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_SQUIRREL_MORPH = new AbstractAttribute(true, 0, -100, 100, "squirrel-morph damage", "Squirrel-morph damage", "swordIcon", PresetColour.RACE_SQUIRREL_MORPH, "squirrel-morph-obliteration", "squirrel-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs squirrel-morphs.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_RAT_MORPH = new AbstractAttribute(true, 0, -100, 100, "rat-morph damage", "Rat-morph damage", "swordIcon", PresetColour.RACE_RAT_MORPH, "rat-morph-obliteration", "rat-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_RAT_MORPH = new AbstractAttribute(true, 0, -100, 100, "rat-morph damage", "Rat-morph damage", "swordIcon", PresetColour.RACE_RAT_MORPH, "rat-morph-obliteration", "rat-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs rat-morphs.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_RABBIT_MORPH = new AbstractAttribute(true, 0, -100, 100, "rabbit-morph damage", "Rabbit-morph damage", "swordIcon", PresetColour.RACE_RABBIT_MORPH, "rabbit-morph-obliteration", "rabbit-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_RABBIT_MORPH = new AbstractAttribute(true, 0, -100, 100, "rabbit-morph damage", "Rabbit-morph damage", "swordIcon", PresetColour.RACE_RABBIT_MORPH, "rabbit-morph-obliteration", "rabbit-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs rabbit-morphs.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_BAT_MORPH = new AbstractAttribute(true, 0, -100, 100, "bat-morph damage", "Bat-morph damage", "swordIcon", PresetColour.RACE_BAT_MORPH, "bat-morph-obliteration", "bat-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_BAT_MORPH = new AbstractAttribute(true, 0, -100, 100, "bat-morph damage", "Bat-morph damage", "swordIcon", PresetColour.RACE_BAT_MORPH, "bat-morph-obliteration", "bat-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs bat-morphs.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_ALLIGATOR_MORPH = new AbstractAttribute(true, 0, -100, 100, "alligator-morph damage", "Alligator-morph damage", "swordIcon", PresetColour.RACE_ALLIGATOR_MORPH, "alligator-morph-obliteration", "alligator-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_ALLIGATOR_MORPH = new AbstractAttribute(true, 0, -100, 100, "alligator-morph damage", "Alligator-morph damage", "swordIcon", PresetColour.RACE_ALLIGATOR_MORPH, "alligator-morph-obliteration", "alligator-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs alligator-morphs.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_WOLF_MORPH = new AbstractAttribute(true, 0, -100, 100, "wolf-morph damage", "Wolf-morph damage", "swordIcon", PresetColour.RACE_WOLF_MORPH, "wolf-morph-obliteration", "wolf-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_WOLF_MORPH = new AbstractAttribute(true, 0, -100, 100, "wolf-morph damage", "Wolf-morph damage", "swordIcon", PresetColour.RACE_WOLF_MORPH, "wolf-morph-obliteration", "wolf-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs wolf-morphs.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_FOX_MORPH = new AbstractAttribute(true, 0, -100, 100, "fox-morph damage", "Fox-morph damage", "swordIcon", PresetColour.RACE_FOX_MORPH, "fox-morph-obliteration", "fox-morph-mercy", null) {
+//	public static AbstractAttribute DAMAGE_FOX_MORPH = new AbstractAttribute(true, 0, -100, 100, "fox-morph damage", "Fox-morph damage", "swordIcon", PresetColour.RACE_FOX_MORPH, "fox-morph-obliteration", "fox-morph-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs fox-morphs.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_SLIME = new AbstractAttribute(true, 0, -100, 100, "slime damage", "Slime damage", "swordIcon", PresetColour.RACE_SLIME, "slime-obliteration", "slime-mercy", null) {
+//	public static AbstractAttribute DAMAGE_SLIME = new AbstractAttribute(true, 0, -100, 100, "slime damage", "Slime damage", "swordIcon", PresetColour.RACE_SLIME, "slime-obliteration", "slime-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs slimes.";
 //		}
 //	};
-//	public static AbstractAttribute DAMAGE_ELEMENTAL = new AbstractAttribute(true, 0, -100, 100, "elemental damage", "Elemental damage", "swordIcon", PresetColour.SPELL_SCHOOL_ARCANE, "elemental-obliteration", "elemental-mercy", null) {
+//	public static AbstractAttribute DAMAGE_ELEMENTAL = new AbstractAttribute(true, 0, -100, 100, "elemental damage", "Elemental damage", "swordIcon", PresetColour.SPELL_SCHOOL_ARCANE, "elemental-obliteration", "elemental-mercy") {
 //		@Override
 //		public String getDescription(GameCharacter owner) {
 //			return "Increases damage vs elementals.";
