@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.Litter;
 import com.lilithsthrone.game.character.PregnancyPossibility;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -649,7 +648,7 @@ public class ItemEffectType {
 			List<String> list = super.getEffectsDescription(primaryModifier, secondaryModifier, potency, limit, user, target);
 			AbstractStatusEffect se = StatusEffect.RECENTLY_SMOKED;
 			list.add("Applies <i style='color:"+se.getColour().toWebHexString()+";'>'"+Util.capitaliseSentence(se.getName(target))+"'</i>:");
-			for(Entry<AbstractAttribute, Float> entry : se.getAttributeModifiers(target).entrySet()) {
+			for(var entry : se.getAttributeModifiers(target).entrySet()) {
 				list.add("<i>"+entry.getKey().getFormattedValue(entry.getValue())+"</i>");
 			}
 			return list;

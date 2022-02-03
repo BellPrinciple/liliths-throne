@@ -5,10 +5,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.utils.Util;
 
@@ -818,7 +816,7 @@ public enum SpellUpgrade {
 	private String name;
 	private String description;
 
-	private HashMap<AbstractAttribute, Integer> attributeModifiers;
+	private HashMap<Attribute,Integer> attributeModifiers;
 	private List<String> extraEffects;
 	private List<String> modifiersList;
 	
@@ -829,7 +827,7 @@ public enum SpellUpgrade {
 			String pathName,
 			String name,
 			String description,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			HashMap<Attribute,Integer> attributeModifiers,
 			List<String> extraEffects) {
 		this(false, pointCost, spellSchool, pathName, name, description, attributeModifiers, extraEffects);
 	}
@@ -840,7 +838,7 @@ public enum SpellUpgrade {
 			String pathName,
 			String name,
 			String description,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			HashMap<Attribute,Integer> attributeModifiers,
 			List<String> extraEffects) {
 		
 		this.isAlwaysAvailable = isAlwaysAvailable;
@@ -855,7 +853,7 @@ public enum SpellUpgrade {
 		modifiersList = new ArrayList<>();
 		
 		if (attributeModifiers != null) {
-			for (Entry<AbstractAttribute, Integer> e : attributeModifiers.entrySet())
+			for (var e : attributeModifiers.entrySet())
 				modifiersList.add("<b>" + (e.getValue() > 0 ? "+" : "") + e.getValue() + "</b>"
 						+ " <b style='color: " + e.getKey().getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(e.getKey().getAbbreviatedName()) + "</b>");
 		}
@@ -910,7 +908,7 @@ public enum SpellUpgrade {
 		return modifiersList;
 	}
 
-	public HashMap<AbstractAttribute, Integer> getAttributeModifiers() {
+	public HashMap<Attribute,Integer> getAttributeModifiers() {
 		return attributeModifiers;
 	}
 

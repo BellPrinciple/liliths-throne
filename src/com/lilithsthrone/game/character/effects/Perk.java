@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
@@ -1616,7 +1615,7 @@ public class Perk {
 			null) {
 		
 		@Override
-		public HashMap<AbstractAttribute, Integer> getAttributeModifiers(GameCharacter character) {
+		public HashMap<Attribute,Integer> getAttributeModifiers(GameCharacter character) {
 			if(character!=null && character.isPlayer()) {
 				return Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_ARCANE, 20));
 			} else {
@@ -5862,7 +5861,7 @@ public class Perk {
 	}
 	
 	private static void generateSubspeciesPerks() {
-		List<AbstractAttribute> resistancesAdded = new ArrayList<>();
+		var resistancesAdded = new ArrayList<Attribute>();
 		for(var sub : Subspecies.getAllSubspecies()) {
 			if(!resistancesAdded.contains(sub.getDamageMultiplier())) {
 				resistancesAdded.add(sub.getDamageMultiplier());

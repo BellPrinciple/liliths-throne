@@ -39,7 +39,6 @@ import org.w3c.dom.NodeList;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.AffectionLevelBasic;
 import com.lilithsthrone.game.character.attributes.AlcoholLevel;
@@ -367,9 +366,9 @@ public abstract class GameCharacter implements XMLSaving {
 	
 	
 	// Attributes, perks & status effects:
-	protected Map<AbstractAttribute, Float> attributes;
-	protected Map<AbstractAttribute, Float> bonusAttributes;
-	protected Map<AbstractAttribute, Float> potionAttributes;
+	protected Map<Attribute,Float> attributes;
+	protected Map<Attribute,Float> bonusAttributes;
+	protected Map<Attribute,Float> potionAttributes;
 	protected List<AbstractPerk> traits;
 	protected Map<Integer, Set<AbstractPerk>> perks;
 	protected Set<AbstractPerk> specialPerks;
@@ -688,7 +687,7 @@ public abstract class GameCharacter implements XMLSaving {
 		psychoactiveFluidsIngested = new HashSet<>();
 		
 		// Start all attributes and bonus attributes at 0:
-		for(AbstractAttribute a : Attribute.getAllAttributes()) {
+		for(var a : Attribute.getAllAttributes()) {
 			attributes.put(a, (float) a.getBaseValue());
 			bonusAttributes.put(a, 0f);
 		}
@@ -969,7 +968,7 @@ public abstract class GameCharacter implements XMLSaving {
 		// Attributes:
 		Element characterCoreAttributes = doc.createElement("attributes");
 		properties.appendChild(characterCoreAttributes);
-		for(AbstractAttribute att : Attribute.getAllAttributes()){
+		for(var att : Attribute.getAllAttributes()){
 			if(this.getBaseAttributeValue(att) != att.getBaseValue()) {
 				Element element = doc.createElement("attribute");
 				characterCoreAttributes.appendChild(element);
@@ -981,7 +980,7 @@ public abstract class GameCharacter implements XMLSaving {
 		
 		Element characterPotionAttributes = doc.createElement("potionAttributes");
 		properties.appendChild(characterPotionAttributes);
-		for(Entry<AbstractAttribute, Float> entry : getPotionAttributes().entrySet()){
+		for(var entry : getPotionAttributes().entrySet()){
 			Element element = doc.createElement("attribute");
 			characterPotionAttributes.appendChild(element);
 			
@@ -1744,18 +1743,24 @@ public abstract class GameCharacter implements XMLSaving {
 			nodes = parentElement.getElementsByTagName("attributes");
 			Element attElement = (Element) nodes.item(0);
 			NodeList attributeList = attElement.getElementsByTagName("attribute");
-			for(AbstractAttribute att : Attribute.getAllAttributes()) {
+			for(var att : Attribute.getAllAttributes()) {
 				character.setAttribute(att, att.getBaseValue(), false);
 			}
+			var damageAtts = Set.of(
+					Attribute.DAMAGE_FIRE,
+					Attribute.DAMAGE_ICE,
+					Attribute.DAMAGE_LUST,
+					Attribute.DAMAGE_PHYSICAL,
+					Attribute.DAMAGE_POISON,
+					Attribute.DAMAGE_SPELLS);
 			for(int i=0; i<attributeList.getLength(); i++){
 				Element e = ((Element)attributeList.item(i));
 				
 				try {
-					AbstractAttribute attribute = Attribute.getAttributeFromId(e.getAttribute("type"));
+					var attribute = Attribute.getAttributeFromId(e.getAttribute("type"));
 					if(attribute!=null) {
 						if(!version.isEmpty() && (!Main.isVersionOlderThan(version, "0.3.3.6") && (!character.isPlayer() || !Main.isVersionOlderThan(version, "0.3.3.9")))) { // Reset all attributes at version 0.3.3.6
 							if(!version.isEmpty() && Main.isVersionOlderThan(version, "0.2.0")) {
-								List<AbstractAttribute> damageAtts = Util.newArrayListOfValues(Attribute.DAMAGE_FIRE, Attribute.DAMAGE_ICE, Attribute.DAMAGE_LUST, Attribute.DAMAGE_PHYSICAL, Attribute.DAMAGE_POISON, Attribute.DAMAGE_SPELLS);
 								if(damageAtts.contains(attribute)) {
 									character.setAttribute(attribute, Float.valueOf(e.getAttribute("value"))-100, false);
 								} else {
@@ -2141,7 +2146,7 @@ public abstract class GameCharacter implements XMLSaving {
 				Element e = ((Element)potionAttributesList.item(i));
 
 				try {
-					AbstractAttribute attribute = Attribute.getAttributeFromId(e.getAttribute("type"));
+					var attribute = Attribute.getAttributeFromId(e.getAttribute("type"));
 					if(attribute!=null) {
 						character.addPotionEffect(attribute, Float.valueOf(e.getAttribute("value")), false);
 						Main.game.getCharacterUtils().appendToImportLog(log, "<br/>Set Potion Attribute: "+attribute.getName() +" to "+ Float.valueOf(e.getAttribute("value")));
@@ -4230,7 +4235,7 @@ public abstract class GameCharacter implements XMLSaving {
 		// Revert attributes from old History:
 		if (this.occupation != null) {
 			if(this.occupation.getAssociatedPerk()!=null) {
-				for (AbstractAttribute att : this.occupation.getAssociatedPerk().getAttributeModifiers(this).keySet()) {
+				for (var att : this.occupation.getAssociatedPerk().getAttributeModifiers(this).keySet()) {
 					incrementBonusAttribute(att, -this.occupation.getAssociatedPerk().getAttributeModifiers(this).get(att));
 				}
 			}
@@ -4240,7 +4245,7 @@ public abstract class GameCharacter implements XMLSaving {
 
 		// Implement attributes from new History:
 		if(history.getAssociatedPerk()!=null) {
-			for (AbstractAttribute att : history.getAssociatedPerk().getAttributeModifiers(this).keySet()) {
+			for (var att : history.getAssociatedPerk().getAttributeModifiers(this).keySet()) {
 				incrementBonusAttribute(att, history.getAssociatedPerk().getAttributeModifiers(this).get(att));
 			}
 		}
@@ -5894,11 +5899,11 @@ public abstract class GameCharacter implements XMLSaving {
 		return CorruptionLevel.getCorruptionLevelFromValue(getAttributeValue(Attribute.MAJOR_CORRUPTION));
 	}
 
-	public float getBaseAttributeValue(AbstractAttribute attribute) {
+	public float getBaseAttributeValue(Attribute attribute) {
 		return Math.round((attributes.get(attribute))*100)/100f;
 	}
 
-	public float getBonusAttributeValue(AbstractAttribute attribute) {
+	public float getBonusAttributeValue(Attribute attribute) {
 		float value = 0;
 		
 		// Special case for health:
@@ -5917,7 +5922,7 @@ public abstract class GameCharacter implements XMLSaving {
 		// Increment over all status effects instead of using bonus attributes, as status effect's attribute values can vary depending on external factors:
 		for(AppliedStatusEffect se : statusEffects) {
 			if(se.getEffect().getAttributeModifiers(this)!=null) {
-				for(Entry<AbstractAttribute, Float> att : se.getEffect().getAttributeModifiers(this).entrySet()) {
+				for(var att : se.getEffect().getAttributeModifiers(this).entrySet()) {
 					if(att.getKey()==attribute) {
 						value+=att.getValue();
 					}
@@ -5938,7 +5943,7 @@ public abstract class GameCharacter implements XMLSaving {
 //		return Math.round(bonusAttributes.get(att)*100)/100f;
 	}
 
-	public float getAttributeValue(AbstractAttribute att) {
+	public float getAttributeValue(Attribute att) {
 		if(!Main.game.isInNewWorld() && att == Attribute.MAJOR_ARCANE) {
 			return 0;
 		}
@@ -6027,19 +6032,19 @@ public abstract class GameCharacter implements XMLSaving {
 		return Math.round(value * 100)/100f;
 	}
 
-	public String setAttribute(AbstractAttribute att, float value) {
+	public String setAttribute(Attribute att, float value) {
 		return setAttribute(att, value, true);
 	}
 	
-	public String setAttribute(AbstractAttribute att, float value, boolean appendAttributeChangeText) {
+	public String setAttribute(Attribute att, float value, boolean appendAttributeChangeText) {
 		return incrementAttribute(att, value - attributes.get(att), appendAttributeChangeText);
 	}
 
-	public String incrementAttribute(AbstractAttribute att, float increment) {
+	public String incrementAttribute(Attribute att, float increment) {
 		return incrementAttribute(att, increment, false);
 	}
 	
-	public String incrementAttribute(AbstractAttribute att, float increment, boolean appendAttributeChangeText) {
+	public String incrementAttribute(Attribute att, float increment, boolean appendAttributeChangeText) {
 		float value = attributes.get(att) + increment;
 
 		// For handling health, mana and stamina changes as a result of an attribute being changed:
@@ -6074,7 +6079,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return getAttributeChangeText(att, ((int)(increment * 100))/100f);
 	}
 
-	public String getAttributeChangeText(AbstractAttribute att, float value) {
+	public String getAttributeChangeText(Attribute att, float value) {
 		if (value > 0) {
 			return UtilText.parse(this,
 					"<p style='text-align:center;'>"
@@ -6096,7 +6101,7 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 	}
 
-	public void incrementBonusAttribute(AbstractAttribute att, float increment) {
+	public void incrementBonusAttribute(Attribute att, float increment) {
 		float value = bonusAttributes.get(att) + increment;
 
 		float healthPercentage = getHealthPercentage();
@@ -6112,15 +6117,15 @@ public abstract class GameCharacter implements XMLSaving {
 		updateAttributeListeners(att.hasStatusEffect());
 	}
 	
-	public Map<AbstractAttribute, Float> getPotionAttributes() {
+	public Map<Attribute,Float> getPotionAttributes() {
 		return potionAttributes;
 	}
 	
-	private void setPotionAttributes(Map<AbstractAttribute, Float> attributeMap) {
+	private void setPotionAttributes(Map<Attribute,Float> attributeMap) {
 		potionAttributes = attributeMap;
 	}
 	
-	public void setPotionAttribute(AbstractAttribute att, float value) {
+	public void setPotionAttribute(Attribute att, float value) {
 		if(this.hasTrait(Perk.JOB_CHEF, true)) {
 			value = Math.min(50, value);
 		} else {
@@ -6137,12 +6142,12 @@ public abstract class GameCharacter implements XMLSaving {
 		updateAttributeListeners(att.hasStatusEffect());
 	}
 
-	public String addPotionEffect(AbstractAttribute att, float value) {
+	public String addPotionEffect(Attribute att, float value) {
 		return addPotionEffect(att, value, true);
 	}
 	
-	public String addPotionEffect(AbstractAttribute att, float value, boolean withExtaEffects) {
-		Map<AbstractAttribute, Float> savedPotionEffects = new HashMap<>();
+	public String addPotionEffect(Attribute att, float value, boolean withExtaEffects) {
+		var savedPotionEffects = new HashMap<Attribute,Float>();
 		savedPotionEffects.putAll(getPotionAttributes());
 		
 		int potionTimeRemaining = 0;
@@ -6184,7 +6189,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return getPotionAttributeChangeText(att, value);
 	}
 
-	public String getPotionAttributeChangeText(AbstractAttribute att, float value) {
+	public String getPotionAttributeChangeText(Attribute att, float value) {
 		if(potionAttributes.get(att)==null) {
 			return "<p style='text-align:center;'>"
 					+ UtilText.parse(this,
@@ -6487,7 +6492,7 @@ public abstract class GameCharacter implements XMLSaving {
 	protected void applyPerkGainEffects(AbstractPerk perk) {
 		// Increment bonus attributes from this perk:
 		if (perk.getAttributeModifiers(this) != null) {
-			for (Entry<AbstractAttribute, Integer> e : perk.getAttributeModifiers(this).entrySet()) {
+			for (var e : perk.getAttributeModifiers(this).entrySet()) {
 				incrementBonusAttribute(e.getKey(), e.getValue());
 			}
 		}
@@ -6500,7 +6505,7 @@ public abstract class GameCharacter implements XMLSaving {
 		
 		// Reverse bonus attributes from this perk:
 		if (perk.getAttributeModifiers(this) != null) {
-			for (Entry<AbstractAttribute, Integer> e : perk.getAttributeModifiers(this).entrySet()) {
+			for (var e : perk.getAttributeModifiers(this).entrySet()) {
 				incrementBonusAttribute(e.getKey(), -e.getValue());
 			}
 		}
@@ -6594,7 +6599,7 @@ public abstract class GameCharacter implements XMLSaving {
 	private void applyFetishGainEffects(Fetish fetish) {
 		// Increment bonus attributes from this fetish:
 		if (fetish.getAttributeModifiers() != null) {
-			for (Entry<AbstractAttribute, Integer> e : fetish.getAttributeModifiers().entrySet()) {
+			for (var e : fetish.getAttributeModifiers().entrySet()) {
 				incrementBonusAttribute(e.getKey(), e.getValue());
 			}
 		}
@@ -6644,7 +6649,7 @@ public abstract class GameCharacter implements XMLSaving {
 	private void applyFetishLossEffects(Fetish fetish) {
 		// Reverse bonus attributes from this fetish:
 		if (fetish.getAttributeModifiers() != null) {
-			for (Entry<AbstractAttribute, Integer> e : fetish.getAttributeModifiers().entrySet()) {
+			for (var e : fetish.getAttributeModifiers().entrySet()) {
 				incrementBonusAttribute(e.getKey(), -e.getValue());
 			}
 		}
@@ -21056,14 +21061,14 @@ public abstract class GameCharacter implements XMLSaving {
 			
 			for(AbstractWeapon weapon : this.inventory.getMainWeaponArray()) {
 				if(weapon!=null) {
-					for (Entry<AbstractAttribute, Integer> e : weapon.getAttributeModifiers().entrySet()) {
+					for (var e : weapon.getAttributeModifiers().entrySet()) {
 						this.incrementBonusAttribute(e.getKey(), -e.getValue());
 					}
 				}
 			}
 			for(AbstractWeapon weapon : this.inventory.getOffhandWeaponArray()) {
 				if(weapon!=null) {
-					for (Entry<AbstractAttribute, Integer> e : weapon.getAttributeModifiers().entrySet()) {
+					for (var e : weapon.getAttributeModifiers().entrySet()) {
 						this.incrementBonusAttribute(e.getKey(), -e.getValue());
 					}
 				}
@@ -21080,14 +21085,14 @@ public abstract class GameCharacter implements XMLSaving {
 		
 		for(AbstractWeapon weapon : this.inventory.getMainWeaponArray()) {
 			if(weapon!=null) {
-				for (Entry<AbstractAttribute, Integer> e : weapon.getAttributeModifiers().entrySet()) {
+				for (var e : weapon.getAttributeModifiers().entrySet()) {
 					this.incrementBonusAttribute(e.getKey(), e.getValue());
 				}
 			}
 		}
 		for(AbstractWeapon weapon : this.inventory.getOffhandWeaponArray()) {
 			if(weapon!=null) {
-				for (Entry<AbstractAttribute, Integer> e : weapon.getAttributeModifiers().entrySet()) {
+				for (var e : weapon.getAttributeModifiers().entrySet()) {
 					this.incrementBonusAttribute(e.getKey(), e.getValue());
 				}
 			}
@@ -22195,7 +22200,7 @@ public abstract class GameCharacter implements XMLSaving {
 		s.append(weapon.onEquip(this));
 		// Apply its attribute bonuses:
 		if(weapon.getAttributeModifiers() != null) {
-			for(Entry<AbstractAttribute, Integer> e : weapon.getAttributeModifiers().entrySet()) {
+			for(var e : weapon.getAttributeModifiers().entrySet()) {
 				incrementBonusAttribute(e.getKey(), e.getValue());
 			}
 		}
@@ -22216,7 +22221,7 @@ public abstract class GameCharacter implements XMLSaving {
 		if(getMainWeapon(armRow) != null) {
 			// If weapon is unequipped, revert its attribute bonuses:
 			if (getMainWeapon(armRow).getAttributeModifiers() != null) {
-				for (Entry<AbstractAttribute, Integer> e : getMainWeapon(armRow).getAttributeModifiers().entrySet()) {
+				for (var e : getMainWeapon(armRow).getAttributeModifiers().entrySet()) {
 					incrementBonusAttribute(e.getKey(), -e.getValue());
 				}
 			}
@@ -22261,7 +22266,7 @@ public abstract class GameCharacter implements XMLSaving {
 		if(weapon != null) {
 			// If weapon is unequipped, revert its attribute bonuses:
 			if (weapon.getAttributeModifiers() != null) {
-				for (Entry<AbstractAttribute, Integer> e : weapon.getAttributeModifiers().entrySet()) {
+				for (var e : weapon.getAttributeModifiers().entrySet()) {
 					incrementBonusAttribute(e.getKey(), -e.getValue());
 				}
 			}
@@ -22363,7 +22368,7 @@ public abstract class GameCharacter implements XMLSaving {
 		s.append(weapon.onEquip(this));
 		// Apply its attribute bonuses:
 		if (weapon.getAttributeModifiers() != null) {
-			for (Entry<AbstractAttribute, Integer> e : weapon.getAttributeModifiers().entrySet()) {
+			for (var e : weapon.getAttributeModifiers().entrySet()) {
 				incrementBonusAttribute(e.getKey(), e.getValue());
 			}
 		}
@@ -22385,7 +22390,7 @@ public abstract class GameCharacter implements XMLSaving {
 		if(getOffhandWeapon(armRow) != null) {
 			// If weapon is unequipped, revert it's attribute bonuses:
 			if (getOffhandWeapon(armRow).getAttributeModifiers() != null)
-				for (Entry<AbstractAttribute, Integer> e : getOffhandWeapon(armRow).getAttributeModifiers().entrySet())
+				for (var e : getOffhandWeapon(armRow).getAttributeModifiers().entrySet())
 					incrementBonusAttribute(e.getKey(), -e.getValue());
 			
 			boolean mustDropToFloor = isInventoryFull() && !hasWeapon(getOffhandWeapon(armRow)) && getOffhandWeapon(armRow).getRarity()!=Rarity.QUEST;
@@ -22428,7 +22433,7 @@ public abstract class GameCharacter implements XMLSaving {
 		if (weapon != null) {
 			// If weapon is unequipped, revert its attribute bonuses:
 			if (weapon.getAttributeModifiers() != null) {
-				for (Entry<AbstractAttribute, Integer> e : weapon.getAttributeModifiers().entrySet()) {
+				for (var e : weapon.getAttributeModifiers().entrySet()) {
 					incrementBonusAttribute(e.getKey(), -e.getValue());
 				}
 			}
@@ -22654,7 +22659,7 @@ public abstract class GameCharacter implements XMLSaving {
 			newClothing.setUnlocked(false);
 		}
 		
-		for (Entry<AbstractAttribute, Integer> e : newClothing.getAttributeModifiers().entrySet()) {
+		for (var e : newClothing.getAttributeModifiers().entrySet()) {
 			incrementBonusAttribute(e.getKey(), e.getValue());
 		}
 		
@@ -22772,7 +22777,7 @@ public abstract class GameCharacter implements XMLSaving {
 			}
 		}
 		
-		for (Entry<AbstractAttribute, Integer> e : clothing.getAttributeModifiers().entrySet()) {
+		for (var e : clothing.getAttributeModifiers().entrySet()) {
 			incrementBonusAttribute(e.getKey(), -e.getValue());
 		}
 		
@@ -24968,7 +24973,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	private void applyEquipTattooEffects(Tattoo tattoo) {
-		for (Entry<AbstractAttribute, Integer> e : tattoo.getAttributeModifiers().entrySet()) {
+		for (var e : tattoo.getAttributeModifiers().entrySet()) {
 			incrementBonusAttribute(e.getKey(), e.getValue());
 		}
 		
@@ -25006,7 +25011,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	private void applyUnequipTattooEffects(Tattoo tattoo) {
-		for (Entry<AbstractAttribute, Integer> e : tattoo.getAttributeModifiers().entrySet()) {
+		for (var e : tattoo.getAttributeModifiers().entrySet()) {
 			incrementBonusAttribute(e.getKey(), -e.getValue());
 		}
 		

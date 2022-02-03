@@ -1107,7 +1107,7 @@ public class PhoneDialogue {
 		}
 	};
 
-	private static String getAttributeDisplayValue(AbstractAttribute att) {
+	private static String getAttributeDisplayValue(Attribute att) {
 		String valueForDisplay = Units.number(Main.game.getPlayer().getAttributeValue(att));
 		
 		if(att.isInfiniteAtUpperLimit() && Main.game.getPlayer().getAttributeValue(att)>=att.getUpperLimit()) {
@@ -2668,11 +2668,11 @@ public class PhoneDialogue {
 				+ "</b></div>";
 	}
 	
-	private static String getAttributeBox(GameCharacter owner, AbstractAttribute att, String effect) {
+	private static String getAttributeBox(GameCharacter owner, Attribute att, String effect) {
 		return getAttributeBox(owner, att, effect, false);
 	}
 	
-	private static String getAttributeBox(GameCharacter owner, AbstractAttribute att, String effect, boolean half) {
+	private static String getAttributeBox(GameCharacter owner, Attribute att, String effect, boolean half) {
 		float value = owner.getAttributeValue(att);
 
 		String valueForDisplay;
@@ -3401,9 +3401,7 @@ public class PhoneDialogue {
 	};
 	
 	private static List<String> getSubspeciesModifiersAsStringList(Subspecies subspecies) {
-		LinkedHashMap<AbstractAttribute, Float> attMods;
-
-		attMods = new LinkedHashMap<>(subspecies.getStatusEffectAttributeModifiers(null));
+		var attMods = new LinkedHashMap<Attribute,Float>(subspecies.getStatusEffectAttributeModifiers(null));
 		
 		ArrayList<String> fullModList = new ArrayList<>(getSubspeciesAttributeModifiersToStringList(attMods));
 		fullModList.addAll(subspecies.getExtraEffects(null));
@@ -3419,10 +3417,10 @@ public class PhoneDialogue {
 		return fullModList;
 	}
 
-	private static List<String> getSubspeciesAttributeModifiersToStringList(Map<AbstractAttribute, Float> attributeMap) {
+	private static List<String> getSubspeciesAttributeModifiersToStringList(Map<Attribute,Float> attributeMap) {
 		List<String> attributeModifiersList = new ArrayList<>();
 		if (attributeMap != null) {
-			for (Entry<AbstractAttribute, Float> e : attributeMap.entrySet()) {
+			for (var e : attributeMap.entrySet()) {
 				attributeModifiersList.add(e.getKey().getFormattedValue(e.getValue()));
 			}
 		}

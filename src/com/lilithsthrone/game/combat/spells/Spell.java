@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.EffectBenefit;
@@ -3072,7 +3071,7 @@ public enum Spell {
 	private List<SpellUpgrade> upgradeList;
 	private Map<Integer, List<TreeEntry<SpellSchool, SpellUpgrade>>> spellUpgradeTree;
 	
-	private HashMap<AbstractAttribute, Integer> attributeModifiers;
+	private HashMap<Attribute, Integer> attributeModifiers;
 	private List<String> extraEffects;
 	private List<String> modifiersList;
 
@@ -3092,7 +3091,7 @@ public enum Spell {
 			int spellCost,
 			Map<AbstractStatusEffect, Integer> statusEffects,
 			List<SpellUpgrade> upgradeList,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			HashMap<Attribute, Integer> attributeModifiers,
 			List<String> extraEffects) {
 		
 		this.forbiddenSpell = forbiddenSpell;
@@ -3126,7 +3125,7 @@ public enum Spell {
 		modifiersList = new ArrayList<>();
 		
 		if (attributeModifiers != null) {
-			for (Entry<AbstractAttribute, Integer> e : attributeModifiers.entrySet())
+			for (var e : attributeModifiers.entrySet())
 				modifiersList.add("<b>" + (e.getValue() > 0 ? "+" : "") + e.getValue() + "</b>"
 						+ " <b style='color: " + e.getKey().getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(e.getKey().getAbbreviatedName()) + "</b>");
 		}
@@ -3260,7 +3259,7 @@ public enum Spell {
 		return spellUpgradeTree;
 	}
 
-	public HashMap<AbstractAttribute, Integer> getAttributeModifiers() {
+	public HashMap<Attribute, Integer> getAttributeModifiers() {
 		return attributeModifiers;
 	}
 

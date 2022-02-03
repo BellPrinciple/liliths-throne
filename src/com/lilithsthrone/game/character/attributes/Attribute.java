@@ -669,7 +669,7 @@ public interface Attribute {
 	 * @return The Attribute that has an id closest to the supplied attributeId.
 	 *  <b>Will return null</b> if the matching distance is greater than 3 (which typically will be more than enough to catch spelling errors, indicating that the flag has been removed).
 	 */
-	public static AbstractAttribute getAttributeFromId(String attributeId) {
+	public static Attribute getAttributeFromId(String attributeId) {
 		return table.of(attributeId);
 	}
 
@@ -702,16 +702,16 @@ public interface Attribute {
 	}
 
 	@Deprecated
-	static List<AbstractAttribute> getAllAttributes() {
+	static List<Attribute> getAllAttributes() {
 		return table.list();
 	}
 
 	@Deprecated
-	public static AbstractAttribute getRacialDamageAttribute(Race race) {
+	public static Attribute getRacialDamageAttribute(Race race) {
 		return Race.DamageAttribute.of(race);
 	}
 
-	Table<AbstractAttribute> table = new Table<>(Attribute::sanitize) {{
+	Table<Attribute> table = new Table<>(Attribute::sanitize) {{
 
 		// Hard-coded attributes (all those up above):
 		addFields(Attribute.class,AbstractAttribute.class,(k,v)->v.id=k);
@@ -720,8 +720,7 @@ public interface Attribute {
 	}};
 
 	@Deprecated
-	static void register(String k, AbstractAttribute v) {
-		v.id = k;
-		table.add(k,v);
+	static void register(Attribute v) {
+		table.add(v.getId(),v);
 	}
 }

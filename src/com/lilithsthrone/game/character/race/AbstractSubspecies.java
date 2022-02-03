@@ -18,7 +18,6 @@ import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -82,7 +81,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 	private String statusEffectDescription;
 	private Map<PerkCategory, Integer> perkWeightingFeminine;
 	private Map<PerkCategory, Integer> perkWeightingMasculine;
-	private Map<AbstractAttribute, Float> statusEffectAttributeModifiers;
+	private Map<Attribute,Float> statusEffectAttributeModifiers;
 	private List<String> extraEffects;
 
 	private String bookName;
@@ -248,7 +247,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 			String pluralFemaleName,
 			FeralAttributes feralAttributes,
 			String statusEffectDescription,
-			Map<AbstractAttribute, Float> statusEffectAttributeModifiers,
+			Map<Attribute,Float> statusEffectAttributeModifiers,
 			List<String> extraEffects,
 			String bookName,
 			String bookNamePlural,
@@ -1206,7 +1205,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 	}
 
 	@Override
-	public Map<AbstractAttribute, Float> getStatusEffectAttributeModifiers(GameCharacter character) {
+	public Map<Attribute,Float> getStatusEffectAttributeModifiers(GameCharacter character) {
 		return statusEffectAttributeModifiers;
 	}
 

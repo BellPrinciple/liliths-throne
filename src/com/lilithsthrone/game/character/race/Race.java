@@ -84,7 +84,7 @@ public interface Race {
 	/**
 	 * <b>Should only be used in Subspecies' getDamageMultiplier() method!</b>
 	 */
-	default AbstractAttribute getDefaultDamageMultiplier() {
+	default Attribute getDefaultDamageMultiplier() {
 		return DamageAttribute.of(this);
 	}
 
@@ -1490,10 +1490,7 @@ public interface Race {
 
 		for(var race : list()) {
 			if(race!=Race.NONE) {
-				DamageAttribute racialAttribute = DamageAttribute.of(race);
-				String id = "DAMAGE_"+Race.getIdFromRace(race);
-//				System.out.println(name+", "+id);
-				Attribute.register(id,racialAttribute);
+				Attribute.register(DamageAttribute.of(race));
 			}
 		}
 	}};
@@ -1516,6 +1513,11 @@ public interface Race {
 		private DamageAttribute(Race r, String n) {
 			super(true,0,-100,100,n+" damage",Util.capitaliseSentence(n)+" damage","swordIcon",r.getColour(),n+"-obliteration",n+"-mercy");
 			race = r;
+		}
+
+		@Override
+		public String getId() {
+			return "DAMAGE_"+Race.getIdFromRace(race);
 		}
 
 		@Override

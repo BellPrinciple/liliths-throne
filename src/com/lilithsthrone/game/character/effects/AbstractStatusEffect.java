@@ -20,7 +20,6 @@ import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
@@ -78,7 +77,7 @@ public abstract class AbstractStatusEffect {
 	private String applyRemovalString;
 	private String applyPostRemovalString;
 	
-	private Map<AbstractAttribute, Float> attributeModifiers;
+	private Map<Attribute,Float> attributeModifiers;
 	private List<String> combatMoveIds;
 	private List<String> spellIds;
 	private List<ItemTag> tags;
@@ -92,7 +91,7 @@ public abstract class AbstractStatusEffect {
 			String pathName,
 			Colour colourShade,
 			boolean beneficial,
-			Map<AbstractAttribute, Float> attributeModifiers,
+			Map<Attribute,Float> attributeModifiers,
 			List<String> extraEffects) {
 		this(renderingPriority, name, pathName, colourShade, colourShade, colourShade, beneficial, attributeModifiers, extraEffects);
 	}
@@ -103,7 +102,7 @@ public abstract class AbstractStatusEffect {
 			Colour colourShade,
 			Colour colourShadeSecondary,
 			boolean beneficial,
-			Map<AbstractAttribute, Float> attributeModifiers,
+			Map<Attribute,Float> attributeModifiers,
 			List<String> extraEffects) {
 		this(renderingPriority, name, pathName, colourShade, colourShadeSecondary, colourShade, beneficial, attributeModifiers, extraEffects);
 	}
@@ -116,7 +115,7 @@ public abstract class AbstractStatusEffect {
 			Colour colourShadeSecondary,
 			Colour colourShadeTertiary,
 			boolean beneficial,
-			Map<AbstractAttribute, Float> attributeModifiers,
+			Map<Attribute,Float> attributeModifiers,
 			List<String> extraEffects) {
 		this(StatusEffectCategory.DEFAULT, renderingPriority, name, pathName, colourShade, colourShadeSecondary, colourShadeTertiary, beneficial, attributeModifiers, extraEffects);
 	}
@@ -129,7 +128,7 @@ public abstract class AbstractStatusEffect {
 			Colour colourShadeSecondary,
 			Colour colourShadeTertiary,
 			boolean beneficial,
-			Map<AbstractAttribute, Float> attributeModifiers,
+			Map<Attribute,Float> attributeModifiers,
 			List<String> extraEffects) {
 		
 		this.mod = false;
@@ -304,11 +303,11 @@ public abstract class AbstractStatusEffect {
 		return StatusEffect.getIdFromStatusEffect(this);
 	}
 	
-	protected List<String> attributeModifiersToStringList(Map<AbstractAttribute, Float> attributeMap) {
+	protected List<String> attributeModifiersToStringList(Map<Attribute,Float> attributeMap) {
 		List<String> attributeModifiersList = new ArrayList<>();
 		
 		if (attributeMap != null) {
-			for (Entry<AbstractAttribute, Float> e : attributeMap.entrySet()) {
+			for (var e : attributeMap.entrySet()) {
 				attributeModifiersList.add(e.getKey().getFormattedValue(e.getValue()));
 			}
 		}
@@ -496,7 +495,7 @@ public abstract class AbstractStatusEffect {
 		return beneficial;
 	}
 
-	public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+	public Map<Attribute,Float> getAttributeModifiers(GameCharacter target) {
 		return attributeModifiers;
 	}
 	

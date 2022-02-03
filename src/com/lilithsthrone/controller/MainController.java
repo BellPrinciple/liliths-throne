@@ -38,7 +38,6 @@ import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.CharacterChangeEventListener;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
@@ -1761,7 +1760,7 @@ public class MainController implements Initializable {
 			addEventListener(documentAttributes, id, "mouseenter", el2, false);
 		}
 		
-		AbstractAttribute[] attributes = {
+		Attribute[] attributes = {
 				Attribute.HEALTH_MAXIMUM,
 				Attribute.MANA_MAXIMUM,
 				Attribute.EXPERIENCE,
@@ -1788,7 +1787,7 @@ public class MainController implements Initializable {
 		for(GameCharacter character : charactersBeingRendered) {
 			String idModifier = (character.isPlayer()?"PLAYER_":"NPC_"+character.getId()+"_");
 			
-			for (AbstractAttribute a : attributes) {
+			for (var a : attributes) {
 				if (((EventTarget) documentAttributes.getElementById(idModifier+a.getName())) != null) {
 					if(a == Attribute.EXPERIENCE) {
 						((EventTarget) documentAttributes.getElementById(idModifier+a.getName())).addEventListener("click", e -> {
@@ -2146,7 +2145,8 @@ public class MainController implements Initializable {
 			}
 		}
 		
-		AbstractAttribute[] attributes = {
+		var attributes = RenderingEngine.ENGINE.isRenderingCharactersRightPanel()
+			? new Attribute[]{
 				Attribute.HEALTH_MAXIMUM,
 				Attribute.MANA_MAXIMUM,
 				Attribute.EXPERIENCE,
@@ -2154,10 +2154,9 @@ public class MainController implements Initializable {
 				Attribute.MAJOR_ARCANE,
 				Attribute.MAJOR_CORRUPTION,
 				Attribute.AROUSAL,
-				Attribute.LUST };
-		if(!RenderingEngine.ENGINE.isRenderingCharactersRightPanel()) {
-			attributes = new AbstractAttribute[] {Attribute.EXPERIENCE};
-		}
+				Attribute.LUST }
+			: new Attribute[] {
+				Attribute.EXPERIENCE};
 		
 		List<GameCharacter> charactersBeingRendered = new ArrayList<>();
 		if(Main.game.isInSex()) {
@@ -2198,7 +2197,7 @@ public class MainController implements Initializable {
 		for(GameCharacter character : charactersBeingRendered) {
 			String idModifier = character.getId()+"_";
 			
-			for (AbstractAttribute a : attributes) {
+			for (var a : attributes) {
 				if (((EventTarget) documentRight.getElementById("NPC_"+idModifier+a.getName())) != null) {
 					if(a == Attribute.EXPERIENCE) {
 						((EventTarget) documentRight.getElementById("NPC_"+idModifier+a.getName())).addEventListener("click", e -> {

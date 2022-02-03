@@ -5,10 +5,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.types.VaginaType;
@@ -1869,7 +1867,7 @@ public enum Fetish {
 	protected String name;
 	protected String shortDescriptor;
 	private int experienceGainFromSexAction;
-	private HashMap<AbstractAttribute, Integer> attributeModifiers;
+	private HashMap<Attribute,Integer> attributeModifiers;
 
 	private String SVGString;
 
@@ -1907,7 +1905,7 @@ public enum Fetish {
 			String pathName,
 			FetishExperience experienceGainFromSexAction,
 			Colour colourShade,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			HashMap<Attribute,Integer> attributeModifiers,
 			List<String> extraEffects,
 			List<Fetish> fetishesForAutomaticUnlock) {
 		this(renderingPriority,
@@ -1928,7 +1926,7 @@ public enum Fetish {
 			String pathName,
 			FetishExperience experienceGainFromSexAction,
 			List<Colour> colourShade,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			HashMap<Attribute,Integer> attributeModifiers,
 			List<String> extraEffects,
 			List<Fetish> fetishesForAutomaticUnlock) {
 
@@ -1966,7 +1964,7 @@ public enum Fetish {
 		modifiersList = new ArrayList<>();
 
 		if(attributeModifiers != null) {
-			for (Entry<AbstractAttribute, Integer> e : attributeModifiers.entrySet()) {
+			for (var e : attributeModifiers.entrySet()) {
 				modifiersList.add("<b>"+(e.getValue() > 0 ? "+" : "") + e.getValue() + "</b> <b style='color: "+ e.getKey().getColour().toWebHexString()+ ";'>"+ Util.capitaliseSentence(e.getKey().getAbbreviatedName())+ "</b>");
 			}
 		}
@@ -2031,7 +2029,7 @@ public enum Fetish {
 		return modList;
 	}
 
-	public HashMap<AbstractAttribute, Integer> getAttributeModifiers() {
+	public HashMap<Attribute,Integer> getAttributeModifiers() {
 		return attributeModifiers;
 	}
 
