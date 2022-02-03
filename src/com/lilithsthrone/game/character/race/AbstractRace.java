@@ -7,8 +7,6 @@ import java.util.Map;
 import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
-import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -416,11 +414,6 @@ public class AbstractRace implements Race {
 	@Override
 	public float getChanceForMaleOffspring() {
 		return chanceForMaleOffspring;
-	}
-
-	@Override
-	public AbstractAttribute getDefaultDamageMultiplier() {
-		return Attribute.getRacialDamageAttribute(this);
 	}
 
 	@Override
