@@ -2,9 +2,10 @@ package com.lilithsthrone.game.character.effects;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -26,8 +27,10 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.4
  * @author Innoxia
  */
-public class Perk {
-	
+public interface Perk {
+
+	String getId();
+
 	// NPC Histories:
 	
 	public static AbstractPerk JOB_MISC = new AbstractPerk(20,
@@ -5778,96 +5781,93 @@ public class Perk {
 		}
 	};
 	
-	
+	Collection collection = new Collection();
 
-	public static List<AbstractPerk> hiddenPerks;
-	public static List<AbstractPerk> allPerks;
-	
-	public static Map<AbstractPerk, String> perkToIdMap = new HashMap<>();
-	public static Map<String, AbstractPerk> idToPerkMap = new HashMap<>();
-	
-	private static boolean subspeciesPerksGenerated = false;
-	
-	public static AbstractPerk getPerkFromId(String id) {
-		if(!subspeciesPerksGenerated) {
+	final class Collection {
+
+		private final LinkedHashMap<String,AbstractPerk> map = new LinkedHashMap<>();
+		private final List<AbstractPerk> hidden = new ArrayList<>();
+		private boolean subspeciesPerksGenerated;
+
+		public AbstractPerk of(String id) {
 			generateSubspeciesPerks();
+			if(id.equalsIgnoreCase("MERAXIS")
+					|| id.equalsIgnoreCase("ARCANE_TATTOOIST")
+					|| id.equalsIgnoreCase("SLUT")
+					|| id.equalsIgnoreCase("ARCANE_TRAINING")
+					|| id.equalsIgnoreCase("ARCANE_ALLERGY")
+					|| id.equalsIgnoreCase("HEALTH_FANATIC")
+					|| id.equalsIgnoreCase("MARTIAL_BACKGROUND")) {
+				id = "SPECIAL_"+id;
+			} else if(id.equalsIgnoreCase("BRAWLER")) {
+				id = "FEROCIOUS_WARRIOR";
+			} else if(id.equalsIgnoreCase("ARCANE_BASE_NPC")) {
+				id = "ARCANE_BASE";
+			} else if(id.equalsIgnoreCase("PHYSIQUE_5")) {
+				id = "PHYSIQUE_BOOST_MAJOR";
+			} else if(id.equalsIgnoreCase("ARCANE_5")) {
+				id = "ARCANE_BOOST_MAJOR";
+			} else if(id.equalsIgnoreCase("SPELL_DAMAGE_5")) {
+				id = "SPELL_DAMAGE_MAJOR";
+			} else if(id.equalsIgnoreCase("ELEMENTALIST_5")) {
+				id = "ELEMENTAL_BOOST";
+			}
+
+			return map.get(Util.getClosestStringMatch(id,map.keySet()));
 		}
-//		System.out.print("ID: "+id);
-		if(id.equalsIgnoreCase("MERAXIS")
-				|| id.equalsIgnoreCase("ARCANE_TATTOOIST")
-				|| id.equalsIgnoreCase("SLUT")
-				|| id.equalsIgnoreCase("ARCANE_TRAINING")
-				|| id.equalsIgnoreCase("ARCANE_ALLERGY")
-				|| id.equalsIgnoreCase("HEALTH_FANATIC")
-				|| id.equalsIgnoreCase("MARTIAL_BACKGROUND")) {
-			id = "SPECIAL_"+id;
-		} else if(id.equalsIgnoreCase("BRAWLER")) {
-			id = "FEROCIOUS_WARRIOR";
-		} else if(id.equalsIgnoreCase("ARCANE_BASE_NPC")) {
-			id = "ARCANE_BASE";
-		} else if(id.equalsIgnoreCase("PHYSIQUE_5")) {
-			id = "PHYSIQUE_BOOST_MAJOR";
-		} else if(id.equalsIgnoreCase("ARCANE_5")) {
-			id = "ARCANE_BOOST_MAJOR";
-		} else if(id.equalsIgnoreCase("SPELL_DAMAGE_5")) {
-			id = "SPELL_DAMAGE_MAJOR";
-		} else if(id.equalsIgnoreCase("ELEMENTALIST_5")) {
-			id = "ELEMENTAL_BOOST";
-		}
-		
-		
-		id = Util.getClosestStringMatch(id, idToPerkMap.keySet());
-//		System.out.println("  set to: "+id);
-		return idToPerkMap.get(id);
-	}
-	
-	public static String getIdFromPerk(AbstractPerk perk) {
-		if(!subspeciesPerksGenerated) {
+
+		public List<AbstractPerk> all() {
 			generateSubspeciesPerks();
+			return List.copyOf(map.values());
 		}
-		return perkToIdMap.get(perk);
-	}
 
-	static {
-		hiddenPerks = new ArrayList<>();
-		allPerks = new ArrayList<>();
-		
-		Field[] fields = Perk.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractPerk.class.isAssignableFrom(f.getType())) {
-				
-				AbstractPerk perk;
-				
-				try {
-					perk = ((AbstractPerk) f.get(null));
+		public List<AbstractPerk> hidden() {
+			generateSubspeciesPerks();
+			return hidden;
+		}
 
-					// I feel like this is stupid :thinking:
-					perkToIdMap.put(perk, f.getName());
-					idToPerkMap.put(f.getName(), perk);
-					
-					allPerks.add(perk);
-					if(perk.isHiddenPerk()) {
-						hiddenPerks.add(perk);
+		private Collection() {
+
+			Field[] fields = Perk.class.getFields();
+
+			for(Field f : fields){
+				if (AbstractPerk.class.isAssignableFrom(f.getType())) {
+
+					AbstractPerk perk;
+
+					try {
+						perk = ((AbstractPerk) f.get(null));
+
+						// I feel like this is stupid :thinking:
+						perk.id = f.getName();
+						map.put(f.getName(), perk);
+
+						if(perk.isHiddenPerk()) {
+							hidden.add(perk);
+						}
+
+					} catch (IllegalArgumentException | IllegalAccessException e) {
+						e.printStackTrace();
 					}
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
 				}
 			}
+
+			hidden.sort((p1, p2) -> p1.getRenderingPriority()-p2.getRenderingPriority());
 		}
-		
-		hiddenPerks.sort((p1, p2) -> p1.getRenderingPriority()-p2.getRenderingPriority());
-	}
-	
-	private static void generateSubspeciesPerks() {
-		var resistancesAdded = new ArrayList<Attribute>();
-		for(var sub : Subspecies.getAllSubspecies()) {
-			if(!resistancesAdded.contains(sub.getDamageMultiplier())) {
-				resistancesAdded.add(sub.getDamageMultiplier());
-				boolean mainSubspecies = sub.getDamageMultiplier()==AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace()).getDamageMultiplier();
-				var subToUse = mainSubspecies?AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace()):sub;
-				
+
+		private void generateSubspeciesPerks() {
+			if(subspeciesPerksGenerated)
+				return;
+			var resistancesAdded = new ArrayList<Attribute>();
+			for(var sub : Subspecies.getAllSubspecies()) {
+				var m = sub.getDamageMultiplier();
+				if(resistancesAdded.contains(m))
+					continue;
+				resistancesAdded.add(m);
+				var main = AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace());
+				boolean mainSubspecies = m==main.getDamageMultiplier();
+				var subToUse = mainSubspecies?main:sub;
+
 				AbstractPerk racePerk = new AbstractPerk(20,
 						false,
 						Util.capitaliseSentence(mainSubspecies?sub.getRace().getName(false):subToUse.getName(null))+" knowledge",
@@ -5894,21 +5894,27 @@ public class Perk {
 						return true;
 					}
 				};
-//				System.out.println("Added perk: "+Subspecies.getIdFromSubspecies(subToUse)+" "+racePerk.getName(null)+" "+racePerk.hashCode());
-				perkToIdMap.put(racePerk, Subspecies.getIdFromSubspecies(subToUse));
-				idToPerkMap.put(Subspecies.getIdFromSubspecies(subToUse), racePerk);
-				allPerks.add(racePerk);
-				hiddenPerks.add(racePerk);
+				//				System.out.println("Added perk: "+Subspecies.getIdFromSubspecies(subToUse)+" "+racePerk.getName(null)+" "+racePerk.hashCode());
+				map.put(Subspecies.getIdFromSubspecies(subToUse), racePerk);
+				hidden.add(racePerk);
 			}
+			subspeciesPerksGenerated = true;
+			hidden.sort(Comparator.comparingInt(AbstractPerk::getRenderingPriority));
 		}
-		subspeciesPerksGenerated = true;
-		hiddenPerks.sort((p1, p2) -> p1.getRenderingPriority()-p2.getRenderingPriority());
 	}
 	
+	public static AbstractPerk getPerkFromId(String id) {
+		return collection.of(id);
+	}
+	
+	public static String getIdFromPerk(AbstractPerk perk) {
+		collection.generateSubspeciesPerks();
+		return perk.getId();
+	}
+
+
 	public static AbstractPerk getSubspeciesRelatedPerk(Subspecies subspecies) {
-		if(!subspeciesPerksGenerated) {
-			generateSubspeciesPerks();
-		}
+		collection.generateSubspeciesPerks();
 		
 		var subToUse =
 				subspecies.getDamageMultiplier()==AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace()).getDamageMultiplier()
@@ -5919,16 +5925,10 @@ public class Perk {
 	}
 	
 	public static List<AbstractPerk> getAllPerks() {
-		if(!subspeciesPerksGenerated) {
-			generateSubspeciesPerks();
-		}
-		return allPerks;
+		return collection.all();
 	}
 	
 	public static List<AbstractPerk> getHiddenPerks() {
-		if(!subspeciesPerksGenerated) {
-			generateSubspeciesPerks();
-		}
-		return hiddenPerks;
+		return collection.hidden();
 	}
 }

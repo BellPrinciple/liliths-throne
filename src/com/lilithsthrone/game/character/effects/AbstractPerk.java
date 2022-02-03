@@ -21,8 +21,9 @@ import com.lilithsthrone.utils.colours.Colour;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractPerk {
-	
+public abstract class AbstractPerk implements Perk {
+
+	String id;
 	private int renderingPriority;
 	protected String name;
 	private List<Colour> colours;
@@ -129,7 +130,12 @@ public abstract class AbstractPerk {
 		this.spellUpgrade = spellUpgrade;
 		this.school = school;
 	}
-	
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if(o instanceof AbstractPerk) {
