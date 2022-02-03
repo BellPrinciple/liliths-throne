@@ -1768,7 +1768,7 @@ public abstract class GameCharacter implements XMLSaving {
 								}
 								
 							} else {
-								if(attribute == Attribute.getRacialDamageAttribute(Race.ELEMENTAL)) {
+								if(attribute.equals(Race.DamageAttribute.of(Race.ELEMENTAL))) {
 									character.incrementAttribute(attribute, Float.valueOf(e.getAttribute("value")), false);
 								} else {
 									character.setAttribute(attribute, Float.valueOf(e.getAttribute("value")), false);

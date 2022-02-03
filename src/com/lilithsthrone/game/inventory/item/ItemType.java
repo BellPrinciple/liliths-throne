@@ -3064,7 +3064,7 @@ public class ItemType {
 											?Attribute.DAMAGE_LILIN
 											:mainSubspecies==Subspecies.ELDER_LILIN
 												?Attribute.DAMAGE_ELDER_LILIN
-												:Attribute.getRacialDamageAttribute(mainSubspecies.getRace())),
+												:Race.DamageAttribute.of(mainSubspecies.getRace())),
 									25f)),
 						null) {
 					@Override

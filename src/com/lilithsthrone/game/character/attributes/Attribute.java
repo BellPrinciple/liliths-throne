@@ -588,8 +588,6 @@ public class Attribute {
 	public static Map<AbstractAttribute, String> attributeToIdMap = new HashMap<>();
 	public static Map<String, AbstractAttribute> idToAttributeMap = new HashMap<>();
 	public static List<AbstractAttribute> allAttributes;
-	
-	public static Map<Race,AbstractAttribute> racialAttributes = new HashMap<>();
 
 	/**
 	 * @return The Attribute that has an id closest to the supplied attributeId.
@@ -633,9 +631,10 @@ public class Attribute {
 	public static List<AbstractAttribute> getAllAttributes() {
 		return allAttributes;
 	}
-	
+
+	@Deprecated
 	public static AbstractAttribute getRacialDamageAttribute(Race race) {
-		return racialAttributes.get(race);
+		return Race.DamageAttribute.of(race);
 	}
 	
 	static {

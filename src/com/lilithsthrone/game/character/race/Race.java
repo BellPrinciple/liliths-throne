@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.character.race;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -83,7 +84,9 @@ public interface Race {
 	/**
 	 * <b>Should only be used in Subspecies' getDamageMultiplier() method!</b>
 	 */
-	AbstractAttribute getDefaultDamageMultiplier();
+	default AbstractAttribute getDefaultDamageMultiplier() {
+		return DamageAttribute.of(this);
+	}
 
 	FurryPreference getDefaultFemininePreference();
 
@@ -1487,17 +1490,9 @@ public interface Race {
 
 		for(var race : list()) {
 			if(race!=Race.NONE) {
-				String name = race.getName(true);
-				AbstractAttribute racialAttribute = new AbstractAttribute(true, 0, -100, 100, name+" damage", Util.capitaliseSentence(name)+" damage", "swordIcon", race.getColour(), name+"-obliteration", name+"-mercy", null) {
-					@Override
-					public String getDescription(GameCharacter owner) {
-						return "Increases damage vs "+race.getNamePlural(true)+".";
-					}
-				};
+				DamageAttribute racialAttribute = DamageAttribute.of(race);
 				String id = "DAMAGE_"+Race.getIdFromRace(race);
 //				System.out.println(name+", "+id);
-
-				Attribute.racialAttributes.put(race, racialAttribute);
 				Attribute.attributeToIdMap.put(racialAttribute, id);
 				Attribute.idToAttributeMap.put(id, racialAttribute);
 				Attribute.allAttributes.add(racialAttribute);
@@ -1509,5 +1504,25 @@ public interface Race {
 		return table.list().stream()
 		.sorted(Comparator.comparing(r->r.getName(false)))
 		.collect(Collectors.toList());
+	}
+
+	class DamageAttribute extends AbstractAttribute {
+
+		private final Race race;
+		private static final HashMap<Race,DamageAttribute> map = new HashMap<>();
+
+		public static DamageAttribute of(Race r) {
+			return map.computeIfAbsent(r,k->new DamageAttribute(r,r.getName(true)));
+		}
+
+		private DamageAttribute(Race r, String n) {
+			super(true,0,-100,100,n+" damage",Util.capitaliseSentence(n)+" damage","swordIcon",r.getColour(),n+"-obliteration",n+"-mercy",null);
+			race = r;
+		}
+
+		@Override
+		public String getDescription(GameCharacter owner) {
+			return "Increases damage vs "+race.getNamePlural(true)+".";
+		}
 	}
 }
