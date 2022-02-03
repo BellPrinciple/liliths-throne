@@ -591,17 +591,6 @@ public class Attribute {
 	
 	public static Map<Race,AbstractAttribute> racialAttributes = new HashMap<>();
 
-	private static Map<String, AbstractAttribute> oldConversionMapping = new HashMap<>();
-	static {
-		oldConversionMapping.put("CORRUPTION", Attribute.MAJOR_CORRUPTION);
-		oldConversionMapping.put("STRENGTH", Attribute.MAJOR_PHYSIQUE);
-		oldConversionMapping.put("MAJOR_STRENGTH", Attribute.MAJOR_PHYSIQUE);
-		oldConversionMapping.put("INTELLIGENCE", Attribute.MAJOR_ARCANE);
-		oldConversionMapping.put("RESISTANCE_ATTACK", Attribute.RESISTANCE_PHYSICAL);
-		oldConversionMapping.put("RESISTANCE_MANA", Attribute.RESISTANCE_LUST);
-		oldConversionMapping.put("RESISTANCE_PURE", Attribute.ENERGY_SHIELDING);
-	}
-
 	/**
 	 * @return The Attribute that has an id closest to the supplied attributeId.
 	 *  <b>Will return null</b> if the matching distance is greater than 3 (which typically will be more than enough to catch spelling errors, indicating that the flag has been removed).
@@ -614,9 +603,22 @@ public class Attribute {
 		} else if(attributeId.startsWith("CRITICAL_CHANCE")) { // Critical chance was removed, so return damage instead as a replacement for old saves
 			attributeId = "CRITICAL_DAMAGE";
 		}
-		
-		if(oldConversionMapping.containsKey(attributeId)) {
-			return oldConversionMapping.get(attributeId);
+
+		//old conversions
+		switch(attributeId) {
+		case "CORRUPTION":
+			return MAJOR_CORRUPTION;
+		case "STRENGTH":
+		case "MAJOR_STRENGTH":
+			return MAJOR_PHYSIQUE;
+		case "INTELLIGENCE":
+			return MAJOR_ARCANE;
+		case "RESISTANCE_ATTACK":
+			return RESISTANCE_PHYSICAL;
+		case "RESISTANCE_MANA":
+			return RESISTANCE_LUST;
+		case "RESISTANCE_PURE":
+			return ENERGY_SHIELDING;
 		}
 
 		attributeId = Util.getClosestStringMatch(attributeId, idToAttributeMap.keySet(), 3);
