@@ -1,15 +1,14 @@
 package com.lilithsthrone.game.character.attributes;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
 /**
@@ -19,7 +18,92 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4
  * @author Innoxia
  */
-public class Attribute {
+public interface Attribute {
+
+	String getId();
+
+	default boolean hasStatusEffect() {
+		return false;
+	}
+
+	boolean isPercentage();
+
+	int getBaseValue();
+
+	int getLowerLimit();
+
+	int getUpperLimit();
+
+	/**
+	 * @return true if this Attribute should be treates as being 'infinite' when the upperLimit is reached. (Only used for shielding.)
+	 */
+	default boolean isInfiniteAtUpperLimit() {
+		return false;
+	}
+
+	default String getInfiniteDescription() {
+		return "";
+	}
+
+	String getName();
+
+	default String getColouredName(String tag) {
+		return "<"+tag+" style='color:"+getColour().toWebHexString()+";'>"+getName()+"</"+tag+">";
+	}
+
+	default String getFormattedValue(float value) {
+		return getFormattedValue(value, null);
+	}
+
+	default String getFormattedValue(float value, String htmlTag) {
+		String valueForDisplay;
+		if(((int)value)==value) {
+			valueForDisplay = String.valueOf(((int)value));
+		} else {
+			valueForDisplay = String.valueOf(value);
+		}
+		String returnValue = "";
+		if(this.isInfiniteAtUpperLimit() && value>=this.getUpperLimit()) {
+			if(!this.getInfiniteDescription().isEmpty()) {
+				returnValue = this.getInfiniteDescription();
+			} else {
+				returnValue = "[style.colourExcellent(Infinite)] <span style='color: "+ this.getColour().toWebHexString()+ ";'>"+ Util.capitaliseSentence(this.getAbbreviatedName())+ "</span>";
+			}
+
+		} else {
+			String minorColour = "";
+			if(this.isPercentage()){
+				minorColour = "Minor";
+				valueForDisplay = valueForDisplay+"%";
+			}
+			returnValue = (value>0?"[style.colour"+minorColour+"Good(+":"[style.colour"+minorColour+"Bad(")+valueForDisplay+")]"
+					+ " <span style='color:"+this.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(this.getAbbreviatedName())+"</span>";
+		}
+
+		if(htmlTag!=null) {
+			return "<"+htmlTag+">"+returnValue+"</"+htmlTag+">";
+		} else {
+			return returnValue;
+		}
+	}
+
+	String getAbbreviatedName();
+
+	String getDescription(GameCharacter owner);
+
+	Colour getColour();
+
+	default String getEffectsAsStringList() {
+		return "";
+	}
+
+	String getPositiveEnchantment();
+
+	String getNegativeEnchantment();
+
+	default String getSVGString() {
+		return null;
+	}
 
 	public static AbstractAttribute HEALTH_MAXIMUM = new AbstractAttribute(false,
 			0,
@@ -583,11 +667,9 @@ public class Attribute {
 //			return "Increases damage vs elementals.";
 //		}
 //	};
-	
-	
-	public static Map<AbstractAttribute, String> attributeToIdMap = new HashMap<>();
-	public static Map<String, AbstractAttribute> idToAttributeMap = new HashMap<>();
-	public static List<AbstractAttribute> allAttributes;
+
+	@Deprecated
+	LinkedHashMap<String,AbstractAttribute> idToAttributeMap = init();
 
 	/**
 	 * @return The Attribute that has an id closest to the supplied attributeId.
@@ -624,22 +706,24 @@ public class Attribute {
 		return idToAttributeMap.get(attributeId);
 	}
 
-	public static String getIdFromAttribute(AbstractAttribute attribute) {
-		return attributeToIdMap.get(attribute);
+	@Deprecated
+	static String getIdFromAttribute(AbstractAttribute attribute) {
+		return attribute.id;
 	}
 
-	public static List<AbstractAttribute> getAllAttributes() {
-		return allAttributes;
+	static List<AbstractAttribute> getAllAttributes() {
+		return List.copyOf(idToAttributeMap.values());
 	}
 
 	@Deprecated
 	public static AbstractAttribute getRacialDamageAttribute(Race race) {
 		return Race.DamageAttribute.of(race);
 	}
-	
-	static {
-		allAttributes = new ArrayList<>();
-		
+
+	@Deprecated
+	static LinkedHashMap<String,AbstractAttribute> init() {
+		var idToAttributeMap = new LinkedHashMap<String,AbstractAttribute>();
+
 		// Hard-coded attributes (all those up above):
 		
 		Field[] fields = Attribute.class.getFields();
@@ -650,17 +734,22 @@ public class Attribute {
 				try {
 					attribute = ((AbstractAttribute) f.get(null));
 
-					attributeToIdMap.put(attribute, f.getName());
-					idToAttributeMap.put(f.getName(), attribute);
-					allAttributes.add(attribute);
-					
+					attribute.id = f.getName();
+					idToAttributeMap.put(attribute.id,attribute);
+
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		
+
 		// NOTE: Racial attributes are added at the bottom of the static block in Race.java!
+		return idToAttributeMap;
 	}
-	
+
+	@Deprecated
+	static void register(String k, AbstractAttribute v) {
+		v.id = k;
+		idToAttributeMap.put(k,v);
+	}
 }
