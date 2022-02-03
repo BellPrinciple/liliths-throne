@@ -232,7 +232,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		XMLUtil.addAttribute(doc, element, "id", this.getWeaponType().getId());
 		XMLUtil.addAttribute(doc, element, "name", name);
 		XMLUtil.addAttribute(doc, element, "damageType", this.getDamageType().toString());
-		XMLUtil.addAttribute(doc, element, "coreEnchantment", (this.getCoreEnchantment()==null?"null":Attribute.getIdFromAttribute(this.getCoreEnchantment())));
+		XMLUtil.addAttribute(doc, element, "coreEnchantment", (this.getCoreEnchantment()==null?"null":getCoreEnchantment().getId()));
 
 		if(!this.getColours().isEmpty()) {
 			Element innerElement = doc.createElement("colours");

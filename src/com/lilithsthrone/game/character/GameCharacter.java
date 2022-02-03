@@ -974,7 +974,7 @@ public abstract class GameCharacter implements XMLSaving {
 				Element element = doc.createElement("attribute");
 				characterCoreAttributes.appendChild(element);
 				
-				XMLUtil.addAttribute(doc, element, "type", Attribute.getIdFromAttribute(att));
+				XMLUtil.addAttribute(doc, element, "type", att.getId());
 				XMLUtil.addAttribute(doc, element, "value", String.valueOf(this.getBaseAttributeValue(att)));
 			}
 		}
@@ -985,7 +985,7 @@ public abstract class GameCharacter implements XMLSaving {
 			Element element = doc.createElement("attribute");
 			characterPotionAttributes.appendChild(element);
 			
-			XMLUtil.addAttribute(doc, element, "type", Attribute.getIdFromAttribute(entry.getKey()));
+			XMLUtil.addAttribute(doc, element, "type", entry.getKey().getId());
 			XMLUtil.addAttribute(doc, element, "value", String.valueOf(entry.getValue()));
 		}
 		

@@ -71,7 +71,7 @@ public abstract class AbstractAttribute implements Attribute {
 	public String toString() {
 		System.err.println("Warning: AbstractAttribute's toString() method is being called!");
 //		throw new IllegalAccessError();
-		return Attribute.getIdFromAttribute(this);
+		return id;
 	}
 
 	public boolean isPercentage() {
