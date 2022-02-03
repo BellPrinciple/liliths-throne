@@ -1514,7 +1514,7 @@ public interface Race {
 		}
 
 		private DamageAttribute(Race r, String n) {
-			super(true,0,-100,100,n+" damage",Util.capitaliseSentence(n)+" damage","swordIcon",r.getColour(),n+"-obliteration",n+"-mercy",null);
+			super(true,0,-100,100,n+" damage",Util.capitaliseSentence(n)+" damage","swordIcon",r.getColour(),n+"-obliteration",n+"-mercy");
 			race = r;
 		}
 
