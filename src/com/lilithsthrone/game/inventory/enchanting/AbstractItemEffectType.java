@@ -12,10 +12,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.PlayerCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
 import com.lilithsthrone.game.character.body.types.AntennaType;
 import com.lilithsthrone.game.character.body.types.ArmType;
 import com.lilithsthrone.game.character.body.types.AssType;
@@ -70,12 +66,11 @@ import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
 import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.EffectBenefit;
 import com.lilithsthrone.game.character.effects.Perk;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
+import com.lilithsthrone.game.character.effects.StatusEffect;
+import com.lilithsthrone.game.character.race.Subspecies;
+import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntryBookAddedToLibrary;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -105,12 +100,10 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 		this.colour = colour;
 	}
 
-	@Override
 	public String getId() {
 		return id;
 	}
 
-	@Override
 	public List<String> getEffectsDescription(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target) {
 		if(effectsDescriptions==null) {
 			return new ArrayList<>();
@@ -118,7 +111,6 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 		return new ArrayList<>(effectsDescriptions);
 	}
 
-	@Override
 	public Colour getColour() {
 		return colour;
 	}
@@ -131,8 +123,8 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 		StringBuilder sb = new StringBuilder();
 		sb.append(itemEffectOverride(primaryModifier, secondaryModifier, potency, limit, user, target, timer));
 
-		for(Entry<AbstractStatusEffect, Integer> entry : getAppliedStatusEffects().entrySet()) {
-			AbstractStatusEffect se = entry.getKey();
+		for(Entry<StatusEffect, Integer> entry : getAppliedStatusEffects().entrySet()) {
+			StatusEffect se = entry.getKey();
 			int time = entry.getValue();
 			boolean added = target.addStatusEffect(se, time);
 			if(!added) {
@@ -164,19 +156,19 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 	 * @return A Map of status effects to be applied to the target, mapped to how long that status effect should be applied for, <b>in seconds</b>.
 	 */
 	@Override
-	public Map<AbstractStatusEffect, Integer> getAppliedStatusEffects() {
+	public Map<StatusEffect, Integer> getAppliedStatusEffects() {
 		return new HashMap<>();
 	}
 
-	public static String getBookEffect(GameCharacter reader, AbstractSubspecies mainSubspecies, List<AbstractSubspecies> additionalUnlockSubspecies, boolean withDescription) {
-		List<AbstractSubspecies> subsPlusMain = new ArrayList<>();
+	public static String getBookEffect(GameCharacter reader, Subspecies mainSubspecies, List<Subspecies> additionalUnlockSubspecies, boolean withDescription) {
+		List<Subspecies> subsPlusMain = new ArrayList<>();
 		subsPlusMain.add(mainSubspecies);
 		if(additionalUnlockSubspecies!=null) {
 			subsPlusMain.addAll(additionalUnlockSubspecies);
 		}
 		
 		String descriptionToReturn = "";
-		AbstractPerk perk = Perk.getSubspeciesRelatedPerk(mainSubspecies);
+		Perk perk = Perk.getSubspeciesRelatedPerk(mainSubspecies);
 		if(!reader.isPlayer() || ((PlayerCharacter) reader).addRaceDiscoveredFromBook(mainSubspecies) || !reader.hasPerkAnywhereInTree(perk)) {
 			descriptionToReturn = (withDescription
 						?("<p style='text-align:center; font-size:110%;margin-bottom:0;padding-bottom:0;'><b>"+mainSubspecies.getBookName()+"</b></p>"
@@ -196,13 +188,13 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 					+ "</p>";
 		}
 		
-		for(AbstractSubspecies subspecies : subsPlusMain) {
+		for(Subspecies subspecies : subsPlusMain) {
 			Main.getProperties().addRaceDiscovered(subspecies);
 			if(Main.getProperties().addAdvancedRaceKnowledge(subspecies) && ItemType.getLoreBook(subspecies)!=null) {
 				Main.game.addEvent(new EventLogEntryBookAddedToLibrary(ItemType.getLoreBook(subspecies)), true);
 			}
 		}
-		
+
 		return descriptionToReturn;
 	}
 	
@@ -2182,9 +2174,9 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 	}
 	
 	// Caching:
-	private static Map<AbstractRace, Map<TFModifier, LinkedHashMap<TFModifier, List<TFPotency>>>> racialPrimaryModSecondaryModPotencyGrid = new HashMap<>();
+	private static Map<Race,Map<TFModifier,LinkedHashMap<TFModifier,List<TFPotency>>>> racialPrimaryModSecondaryModPotencyGrid = new HashMap<>();
 	
-	protected static List<TFModifier> getRacialSecondaryModifiers(AbstractRace race, TFModifier primaryModifier) {
+	protected static List<TFModifier> getRacialSecondaryModifiers(Race race, TFModifier primaryModifier) {
 		if(racialPrimaryModSecondaryModPotencyGrid.containsKey(race) && racialPrimaryModSecondaryModPotencyGrid.get(race).containsKey(primaryModifier)) {
 			return new ArrayList<>(racialPrimaryModSecondaryModPotencyGrid.get(race).get(primaryModifier).keySet());
 		} else {
@@ -2193,7 +2185,7 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 		}
 	}
 	
-	protected static List<TFPotency> getRacialPotencyModifiers(AbstractRace race, TFModifier primaryModifier, TFModifier secondaryModifier) {
+	protected static List<TFPotency> getRacialPotencyModifiers(Race race, TFModifier primaryModifier, TFModifier secondaryModifier) {
 		if(racialPrimaryModSecondaryModPotencyGrid.get(race).containsKey(primaryModifier)) {
 			return new ArrayList<>(racialPrimaryModSecondaryModPotencyGrid.get(race).get(primaryModifier).get(secondaryModifier));
 		} else {
@@ -2202,7 +2194,7 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 		}
 	}
 	
-	private static void populateGrid(AbstractRace race, TFModifier primaryModifier) {
+	private static void populateGrid(Race race, TFModifier primaryModifier) {
 		LinkedHashMap<TFModifier, List<TFPotency>> secondaryModPotencyMap = new LinkedHashMap<>();
 		
 		switch(primaryModifier) {
@@ -2703,7 +2695,7 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 		return 0;
 	}
 	
-	protected static RacialEffectUtil getRacialEffect(AbstractRace race, TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, GameCharacter user, GameCharacter target) {
+	protected static RacialEffectUtil getRacialEffect(Race race, TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, GameCharacter user, GameCharacter target) {
 		
 		boolean revealTransformedPart = user!=null && target!=null && !user.equals(target);
 
@@ -2732,7 +2724,7 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 								return new RacialEffectUtil("Removes an extra pair of antennae.") { @Override public String applyEffect() { return target.incrementAntennaRows(singleDrain); } };
 							case MINOR_BOOST: default:
 								return new RacialEffectUtil("Adds an extra pair of antennae.") { @Override public String applyEffect() {
-									List<AbstractAntennaType> antennaTypesSuitableForTransformation = RacialBody.valueOfRace(race).getAntennaTypes(true);
+									List<AntennaType> antennaTypesSuitableForTransformation = RacialBody.valueOfRace(race).getAntennaTypes(true);
 									if(target.getAntennaType().equals(AntennaType.NONE) && !antennaTypesSuitableForTransformation.isEmpty()) {
 										return target.setAntennaType(antennaTypesSuitableForTransformation.get(0));
 									} else {
@@ -2764,8 +2756,8 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 						return getAntennaTypeRacialEffectUtil(race, target, index);
 							
 					default:
-						List<AbstractAntennaType> antennaTypes = RacialBody.valueOfRace(race).getAntennaTypes(true);
-						AbstractAntennaType antennaType = antennaTypes.isEmpty()?AntennaType.NONE:Util.randomItemFrom(antennaTypes);
+						List<AntennaType> antennaTypes = RacialBody.valueOfRace(race).getAntennaTypes(true);
+						AntennaType antennaType = antennaTypes.isEmpty()?AntennaType.NONE:Util.randomItemFrom(antennaTypes);
 						return new RacialEffectUtil(antennaType.equals(AntennaType.NONE)?"Removes antennae.":Util.capitaliseSentence(race.getName(false))+" antenna transformation.") {
 							@Override public String applyEffect() { return target.setAntennaType(antennaType); } };
 				}
@@ -3565,7 +3557,7 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 							@Override
 							public String applyEffect() {
 								List<TFModifier> availableModifiers = new ArrayList<>();
-								
+
 								// Only add TFModifiers which will do something:
 								for(TFModifier tfMod : TFModifier.getTFRacialBodyPartsList()) {
 									boolean add = false;
@@ -3629,14 +3621,14 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 										availableModifiers.add(tfMod);
 									}
 								}
-								
+
 								if(availableModifiers.isEmpty()) {
 									return UtilText.parse(target, "<p style='text-align:center'>[style.italicsDisabled([npc.NameHasFull] no more random "+race.getName(true)+" transformations available, so nothing happens...)]</p>");
 								}
-								
-								
+
+
 								TFModifier mod = availableModifiers.get(Util.random.nextInt(availableModifiers.size()));
-								
+
 								// If race does not have antenna, horns, tail, wings, or crotch-boobs, make sure that the TF is to remove:
 								if((mod==TFModifier.TF_ANTENNA && race.getRacialBody().getAntennaTypes(false).size()==1 && race.getRacialBody().getAntennaTypes(false).contains(AntennaType.NONE))
 										|| (mod==TFModifier.TF_HORNS && race.getRacialBody().getHornTypes(false).size()==1 && race.getRacialBody().getHornTypes(false).contains(HornType.NONE))
@@ -3948,8 +3940,8 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 						
 					case TF_TYPE_1: case TF_TYPE_2: case TF_TYPE_3: case TF_TYPE_4: case TF_TYPE_5: case TF_TYPE_6: case TF_TYPE_7: case TF_TYPE_8: case TF_TYPE_9: case TF_TYPE_10:
 						int index = modifierTypeToInt(secondaryModifier);
-						List<AbstractHornType> hornTypes = HornType.getHornTypes(race, false);
-						AbstractHornType selectedHornType = index >= hornTypes.size() ? HornType.NONE : hornTypes.get(index);
+						List<HornType> hornTypes = HornType.getHornTypes(race, false);
+						HornType selectedHornType = index >= hornTypes.size() ? HornType.NONE : hornTypes.get(index);
 						return new RacialEffectUtil(selectedHornType.equals(HornType.NONE)?"Removes horns.":"Grows "+selectedHornType.getTransformName()+" horn"+(selectedHornType==HornType.HORSE_STRAIGHT?"":"s")+".") {
 							@Override public String applyEffect() { return target.setHornType(selectedHornType); } };
 						
@@ -3975,7 +3967,7 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 								return new RacialEffectUtil("Removes an extra pair of horns.") { @Override public String applyEffect() { return target.incrementHornRows(singleDrain); } };
 							case MINOR_BOOST: default:
 								return new RacialEffectUtil("Adds an extra pair of horns.") { @Override public String applyEffect() {
-									List<AbstractHornType> hornTypesSuitableForTransformation = RacialBody.valueOfRace(race).getHornTypes(true);
+									List<HornType> hornTypesSuitableForTransformation = RacialBody.valueOfRace(race).getHornTypes(true);
 									if(target.getHornType().equals(HornType.NONE) && !hornTypesSuitableForTransformation.isEmpty()) {
 										return target.setHornType(hornTypesSuitableForTransformation.get(0));
 									} else {
@@ -4000,8 +3992,8 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 						}
 						
 					default:
-						List<AbstractHornType> defaultHornTypes = RacialBody.valueOfRace(race).getHornTypes(true);
-						AbstractHornType hornType = defaultHornTypes.isEmpty()?HornType.NONE:Util.randomItemFrom(defaultHornTypes);
+						List<HornType> defaultHornTypes = RacialBody.valueOfRace(race).getHornTypes(true);
+						HornType hornType = defaultHornTypes.isEmpty()?HornType.NONE:Util.randomItemFrom(defaultHornTypes);
 						return new RacialEffectUtil(hornType.equals(HornType.NONE)?"Removes horns.":Util.capitaliseSentence(race.getName(false))+" horn transformation.") {
 							@Override public String applyEffect() { return target.setHornType(hornType); } };
 				}
@@ -4551,7 +4543,7 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 								return new RacialEffectUtil("Removes an extra tail.") { @Override public String applyEffect() { return target.incrementTailCount(singleDrain, false); } };
 							case MINOR_BOOST: default:
 								return new RacialEffectUtil("Adds an extra tail.") { @Override public String applyEffect() {
-									List<AbstractTailType> tailTypesSuitableForTransformation = TailType.getTailTypesSuitableForTransformation(RacialBody.valueOfRace(race).getTailType());
+									List<TailType> tailTypesSuitableForTransformation = TailType.getTailTypesSuitableForTransformation(RacialBody.valueOfRace(race).getTailType());
 									if(target.getTailType()==TailType.NONE && !tailTypesSuitableForTransformation.isEmpty()) {
 										return target.setTailType(tailTypesSuitableForTransformation.get(0));
 									} else {
@@ -4719,7 +4711,7 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 						}
 							
 					default:
-						AbstractTailType tailType = RacialBody.valueOfRace(race).getRandomTailType(false);
+						TailType tailType = RacialBody.valueOfRace(race).getRandomTailType(false);
 						return new RacialEffectUtil(tailType==TailType.NONE?"Removes tail.":Util.capitaliseSentence(race.getName(false))+" tail transformation.") {
 							@Override public String applyEffect() { return target.setTailType(tailType); } };
 				}
@@ -5182,7 +5174,7 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 								return new RacialEffectUtil("[style.colourExcellent(++)] Wing size (+" + smallChangeMajorBoost + " wing size)") { @Override public String applyEffect() { return target.incrementWingSize(smallChangeMajorBoost); } };
 						}
 					default:
-						AbstractWingType wingType = RacialBody.valueOfRace(race).getRandomWingType(false);
+						WingType wingType = RacialBody.valueOfRace(race).getRandomWingType(false);
 						return new RacialEffectUtil(wingType==WingType.NONE?"Removes wings.":Util.capitaliseSentence(race.getName(false))+" wings transformation.") {
 							@Override public String applyEffect() { return target.setWingType(wingType); } };
 				}
@@ -5727,9 +5719,9 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 		};
 	}
 
-	private static RacialEffectUtil getAntennaTypeRacialEffectUtil(AbstractRace race, GameCharacter target, int index) {
-		List<AbstractAntennaType> antennaTypes = RacialBody.valueOfRace(race).getAntennaTypes(true);
-		AbstractAntennaType selectedAntennaType = index >= antennaTypes.size() ? AntennaType.NONE : antennaTypes.get(index);
+	private static RacialEffectUtil getAntennaTypeRacialEffectUtil(Race race, GameCharacter target, int index) {
+		List<AntennaType> antennaTypes = RacialBody.valueOfRace(race).getAntennaTypes(true);
+		AntennaType selectedAntennaType = index >= antennaTypes.size() ? AntennaType.NONE : antennaTypes.get(index);
 		
 		return new RacialEffectUtil("Grows "+selectedAntennaType.getTransformName()+" antennae.") {
 			@Override public String applyEffect() { return target.setAntennaType(selectedAntennaType); } };

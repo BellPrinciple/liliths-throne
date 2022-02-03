@@ -8,7 +8,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.utils.XMLSaving;
 
@@ -19,24 +18,24 @@ import com.lilithsthrone.utils.XMLSaving;
  */
 public class Addiction implements XMLSaving {
 
-	private AbstractFluidType fluid;
+	private FluidType fluid;
 	private long lastTimeSatisfied;
 	private Set<String> providerIDs;
 	
-	public Addiction(AbstractFluidType fluid, long lastTimeSatisfied) {
+	public Addiction(FluidType fluid, long lastTimeSatisfied) {
 		this.fluid = fluid;
 		this.lastTimeSatisfied = lastTimeSatisfied;
 		this.providerIDs = new HashSet<>();
 	}
 	
-	public Addiction(AbstractFluidType fluid, long lastTimeSatisfied, String providerID) {
+	public Addiction(FluidType fluid, long lastTimeSatisfied, String providerID) {
 		this.fluid = fluid;
 		this.lastTimeSatisfied = lastTimeSatisfied;
 		this.providerIDs = new HashSet<>();
 		this.providerIDs.add(providerID);
 	}
 	
-	public Addiction(AbstractFluidType fluid, long lastTimeSatisfied, Set<String> providerIDs) {
+	public Addiction(FluidType fluid, long lastTimeSatisfied, Set<String> providerIDs) {
 		this.fluid = fluid;
 		this.lastTimeSatisfied = lastTimeSatisfied;
 		this.providerIDs = providerIDs;
@@ -94,11 +93,11 @@ public class Addiction implements XMLSaving {
 				IDs);
 	}
 	
-	public AbstractFluidType getFluid() {
+	public FluidType getFluid() {
 		return fluid;
 	}
 	
-	public void setFluid(AbstractFluidType fluid) {
+	public void setFluid(FluidType fluid) {
 		this.fluid = fluid;
 	}
 	

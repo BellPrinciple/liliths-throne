@@ -3,11 +3,9 @@ package com.lilithsthrone.game.inventory.enchanting;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.main.Main;
@@ -1666,7 +1664,7 @@ public enum TFModifier {
 	}
 	
 	private AttributeCategory attributeCategory;
-	private AbstractAttribute associatedAttribute;
+	private Attribute associatedAttribute;
 	
 	private String name;
 	private String description;
@@ -1676,9 +1674,9 @@ public enum TFModifier {
 	
 	private Colour colour;
 	private Rarity rarity;
-	private AbstractFetish fetish;
+	private Fetish fetish;
 	
-	private TFModifier(AttributeCategory attributeCategory, AbstractAttribute associatedAttribute, String description, String SVGString, Rarity rarity) {
+	private TFModifier(AttributeCategory attributeCategory, Attribute associatedAttribute, String description, String SVGString, Rarity rarity) {
 		this.attributeCategory=attributeCategory;
 		this.associatedAttribute=associatedAttribute;
 		this.name = associatedAttribute.getName();
@@ -1707,7 +1705,7 @@ public enum TFModifier {
 		this.SVGString = null;
 	}
 	
-	private TFModifier(AbstractFetish f) {
+	private TFModifier(Fetish f) {
 		this.name = f.getName(null);
 		this.description = "Applies an effect related to the "+name+" fetish. ("+Util.capitaliseSentence(f.getShortDescriptor(null))+".)";
 		this.descriptor = name;
@@ -1755,7 +1753,7 @@ public enum TFModifier {
 		return attributeCategory;
 	}
 
-	public AbstractAttribute getAssociatedAttribute() {
+	public Attribute getAssociatedAttribute() {
 		return associatedAttribute;
 	}
 
@@ -1843,7 +1841,7 @@ public enum TFModifier {
 		return returnList;
 	}
 
-	public AbstractFetish getFetish() {
+	public Fetish getFetish() {
 		return fetish;
 	}
 

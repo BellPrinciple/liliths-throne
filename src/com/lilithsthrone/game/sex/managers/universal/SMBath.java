@@ -13,7 +13,6 @@ import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotTag;
@@ -36,7 +35,7 @@ public class SMBath extends SexManagerDefault {
 	/**
 	 * @param startingPosition Need to be either SexPosition.LYING_DOWN, SexPosition.SITTING, or SexPosition.ALL_FOURS.
 	 */
-	public SMBath(AbstractSexPosition startingPosition, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
+	public SMBath(SexPosition startingPosition, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
 		super(startingPosition,
 				dominants,
 				submissives);
@@ -70,8 +69,8 @@ public class SMBath extends SexManagerDefault {
 	}
 	
 	@Override
-	public List<AbstractSexPosition> getAllowedSexPositions() {
-		List<AbstractSexPosition> positions = Util.newArrayListOfValues(
+	public List<SexPosition> getAllowedSexPositions() {
+		List<SexPosition> positions = Util.newArrayListOfValues(
 				SexPosition.LYING_DOWN,
 				SexPosition.SITTING,
 				SexPosition.ALL_FOURS);

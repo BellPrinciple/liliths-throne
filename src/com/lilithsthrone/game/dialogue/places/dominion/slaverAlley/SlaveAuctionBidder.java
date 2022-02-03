@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -17,13 +16,13 @@ import com.lilithsthrone.utils.Util;
 public class SlaveAuctionBidder {
 
 	private String name;
-	private AbstractSubspecies subspecies;
+	private Subspecies subspecies;
 	private Gender gender;
 	private List<String> biddingComments;
 	private List<String> failedBidComments;
 	private List<String> successfulBidComments;
 	
-	public SlaveAuctionBidder(AbstractSubspecies subspecies, Gender gender, List<String> biddingComments, List<String> failedBidComments, List<String> successfulBidComments) {
+	public SlaveAuctionBidder(Subspecies subspecies, Gender gender, List<String> biddingComments, List<String> failedBidComments, List<String> successfulBidComments) {
 		super();
 		this.subspecies = subspecies;
 		this.gender = gender;
@@ -45,7 +44,7 @@ public class SlaveAuctionBidder {
 		return name;
 	}
 	
-	public AbstractSubspecies getRace() {
+	public Subspecies getRace() {
 		return subspecies;
 	}
 
@@ -79,7 +78,7 @@ public class SlaveAuctionBidder {
 	
 	public static SlaveAuctionBidder generateNewSlaveAuctionBidder(NPC slave) {
 		
-		List<AbstractSubspecies> races = Util.newArrayListOfValues(
+		var race = Util.randomItemFromValues(
 				Subspecies.CAT_MORPH,
 				Subspecies.COW_MORPH, 
 				Subspecies.DEMON,
@@ -92,7 +91,6 @@ public class SlaveAuctionBidder {
 		
 		List<Gender> genders = Util.newArrayListOfValues(Gender.F_V_B_FEMALE, Gender.F_P_V_B_FUTANARI, Gender.M_P_MALE);
 		
-		AbstractSubspecies race = Util.randomItemFrom(races);
 		Gender gender = Util.randomItemFrom(genders);
 		
 		List<String> biddingComments = Util.newArrayListOfValues(

@@ -12,7 +12,6 @@ import org.w3c.dom.NodeList;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
@@ -27,12 +26,12 @@ import com.lilithsthrone.utils.Util;
  */
 public class FluidCum implements FluidInterface {
 
-	protected AbstractFluidType type;
+	protected FluidType type;
 	protected FluidFlavour flavour;
 	protected Set<FluidModifier> fluidModifiers;
 	protected List<ItemEffect> transformativeEffects;
 
-	public FluidCum(AbstractFluidType type) {
+	public FluidCum(FluidType type) {
 		this.type = type;
 		this.flavour = type.getFlavour();
 		transformativeEffects = new ArrayList<>();
@@ -47,7 +46,7 @@ public class FluidCum implements FluidInterface {
 		this.fluidModifiers = new HashSet<>(cumToCopy.fluidModifiers);
 		this.transformativeEffects = new ArrayList<>(cumToCopy.transformativeEffects);
 	}
-	
+
 	public Element saveAsXML(String rootElementName, Element parentElement, Document doc) {
 		Element element = doc.createElement(rootElementName);
 		parentElement.appendChild(element);
@@ -74,17 +73,17 @@ public class FluidCum implements FluidInterface {
 	 * @param doc
 	 * @param baseType If you pass in a baseType, this method will ignore the saved type in parentElement.
 	 */
-	public static FluidCum loadFromXML(String rootElementName, Element parentElement, Document doc, AbstractFluidType baseType) {
+	public static FluidCum loadFromXML(String rootElementName, Element parentElement, Document doc, FluidType baseType) {
 		Element cum = (Element)parentElement.getElementsByTagName(rootElementName).item(0);
 
-		AbstractFluidType fluidType = FluidType.CUM_HUMAN;
+		FluidType fluidType = FluidType.CUM_HUMAN;
 		
 		if(baseType!=null) {
 			fluidType = baseType;
 			
 		} else {
 			try {
-				fluidType = FluidType.getFluidTypeFromId(cum.getAttribute("type"));
+				fluidType = FluidType.table.of(cum.getAttribute("type"));
 			} catch(Exception ex) {
 			}
 		}
@@ -113,7 +112,7 @@ public class FluidCum implements FluidInterface {
 				fluidCum.fluidModifiers.add(FluidModifier.valueOf(e.getTextContent()));
 			}
 		}
-		
+
 		return fluidCum;
 	}
 	
@@ -176,11 +175,11 @@ public class FluidCum implements FluidInterface {
 	}
 
 	@Override
-	public AbstractFluidType getType() {
+	public FluidType getType() {
 		return type;
 	}
 
-	public void setType(AbstractFluidType type) {
+	public void setType(FluidType type) {
 		this.type = type;
 	}
 

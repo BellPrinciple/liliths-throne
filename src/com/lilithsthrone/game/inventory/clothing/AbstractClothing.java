@@ -17,7 +17,6 @@ import org.w3c.dom.NodeList;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.Penis;
@@ -43,7 +42,6 @@ import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -64,7 +62,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public abstract class AbstractClothing extends AbstractCoreItem implements XMLSaving {
 
-	private AbstractClothingType clothingType;
+	private ClothingType clothingType;
 	
 	private InventorySlot slotEquippedTo;
 	
@@ -81,7 +79,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	
 	private List<DisplacementType> displacedList;
 	
-	public AbstractClothing(AbstractClothingType clothingType, List<Colour> colours, boolean allowRandomEnchantment) {
+	public AbstractClothing(ClothingType clothingType, List<Colour> colours, boolean allowRandomEnchantment) {
 		super(clothingType.getName(),
 				clothingType.getNamePlural(),
 				clothingType.getPathName(),
@@ -153,11 +151,11 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		}
 	}
 
-	public AbstractClothing(AbstractClothingType clothingType, Colour colour, Colour secondaryColour, Colour tertiaryColour, List<ItemEffect> effects) {
+	public AbstractClothing(ClothingType clothingType, Colour colour, Colour secondaryColour, Colour tertiaryColour, List<ItemEffect> effects) {
 		this(clothingType, Util.newArrayListOfValues(colour, secondaryColour, tertiaryColour), effects);
 	}
 	
-	public AbstractClothing(AbstractClothingType clothingType, List<Colour> colours, List<ItemEffect> effects) {
+	public AbstractClothing(ClothingType clothingType, List<Colour> colours, List<ItemEffect> effects) {
 		super(clothingType.getName(),
 				clothingType.getNamePlural(),
 				clothingType.getPathName(),
@@ -804,7 +802,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 					for(int i = 0; i < modifierElements.getLength(); i++){
 						Element e = ((Element)modifierElements.item(i));
 						try {
-							AbstractAttribute att = Attribute.getAttributeFromId(e.getAttribute("attribute"));
+							var att = Attribute.getAttributeFromId(e.getAttribute("attribute"));
 							int value = Integer.valueOf(e.getAttribute("value"));
 							
 							TFPotency pot = TFPotency.BOOST;
@@ -1044,7 +1042,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 						}
 					}
 				}
-				for(Entry<AbstractAttribute, Integer> entry : this.getAttributeModifiers().entrySet()) {
+				for(var entry : this.getAttributeModifiers().entrySet()) {
 					descriptionSB.append("<br/><b>"+entry.getKey().getFormattedValue(entry.getValue())+"</b>");
 				}
 				descriptionSB.append("</p>");
@@ -1059,7 +1057,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		return descriptionSB.toString();
 	}
 
-	public AbstractClothingType getClothingType() {
+	public ClothingType getClothingType() {
 		return clothingType;
 	}
 
@@ -1347,7 +1345,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 								+ "<b style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Enchantment Revealed:</b><br/>"+getDisplayName(true));
 			}
 
-			for(Entry<AbstractAttribute, Integer> att : getAttributeModifiers().entrySet()) {
+			for(var att : getAttributeModifiers().entrySet()) {
 				sb.append("<br/>"+att.getKey().getFormattedValue(att.getValue()));
 			}
 			
@@ -2225,10 +2223,10 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		return sb.toString();
 	}
 
-	public AbstractAttribute getCoreEnchantment() {
-		AbstractAttribute att = null;
+	public Attribute getCoreEnchantment() {
+		Attribute att = null;
 		int max = 0;
-		for(Entry<AbstractAttribute, Integer> entry : getAttributeModifiers().entrySet()) {
+		for(var entry : getAttributeModifiers().entrySet()) {
 			att = entry.getKey();
 			if(Math.abs(entry.getValue()) > max) {
 				att = entry.getKey();
@@ -2350,7 +2348,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	}
 	
 	@Override
-	public Map<AbstractAttribute, Integer> getAttributeModifiers() {
+	public Map<Attribute,Integer> getAttributeModifiers() {
 		attributeModifiers.clear();
 		
 		for(ItemEffect ie : getEffects()) {
@@ -2367,7 +2365,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	 * @return An integer value of the 'enchantment capacity cost' for this particular piece of clothing. Does not count negative attribute values, and values of Corruption are reversed (so reducing corruption costs enchantment stability).
 	 */
 	public int getEnchantmentCapacityCost() {
-		Map<AbstractAttribute, Integer> noCorruption = new HashMap<>();
+		var noCorruption = new HashMap<Attribute,Integer>();
 		getAttributeModifiers().entrySet().stream().filter(ent -> ent.getKey()!=Attribute.FERTILITY && ent.getKey()!=Attribute.VIRILITY).forEach(ent -> noCorruption.put(ent.getKey(), ent.getValue()*(ent.getKey()==Attribute.MAJOR_CORRUPTION?-1:1)));
 		return noCorruption.values().stream().reduce(0, (a, b) -> a + Math.max(0, b));
 	}
@@ -2378,7 +2376,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	}
 	
 	@Override
-	public AbstractItemEffectType getEnchantmentEffect() {
+	public ItemEffectType getEnchantmentEffect() {
 		return clothingType.getEnchantmentEffect();
 	}
 	
@@ -2665,7 +2663,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 					&& slotEquippedTo!=InventorySlot.PIERCING_VAGINA) { // Clothing in groin slots should always be fine, so don't replace their values.
 				boolean cAccess = replaceCrotchBoobAccess;
 				List<BlockedParts> modifiedBlockedParts = new ArrayList<>();
-				for(BlockedParts blockedparts : this.clothingType.blockedPartsMap.get(slotEquippedTo)) {
+				for(BlockedParts blockedparts : this.clothingType.getBlockedParts(slotEquippedTo)) {
 					BlockedParts copy = new BlockedParts(blockedparts);
 					
 					copy.blockedBodyParts = copy.blockedBodyParts.stream().filter(
@@ -2708,7 +2706,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 				return modifiedBlockedParts;
 			}
 		}
-		return clothingType.blockedPartsMap.get(slotEquippedTo);
+		return clothingType.getBlockedParts(slotEquippedTo);
 	}
 	
 	public boolean isConcealsSlot(GameCharacter character, InventorySlot slotEquippedTo, InventorySlot slotToCheck) {
@@ -2757,7 +2755,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 					break;
 			}
 			if(replace) {
-				List<InventorySlot> modifiedIncompatibleSlots = new ArrayList<>(clothingType.incompatibleSlotsMap.get(slotEquippedTo));
+				List<InventorySlot> modifiedIncompatibleSlots = new ArrayList<>(clothingType.getIncompatibleSlots(slotEquippedTo));
 				
 				if(InventorySlot.getHumanoidSlots().contains(slotEquippedTo)) {
 					modifiedIncompatibleSlots.removeIf(slot -> !InventorySlot.getHumanoidSlots().contains(slot));
@@ -2768,8 +2766,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 				return modifiedIncompatibleSlots;
 			}
 		}
-//		return clothingType.incompatibleSlotsMap.get(slotEquippedTo);
-		return clothingType.incompatibleSlotsMap.getOrDefault(slotEquippedTo, new ArrayList<>());
+		return clothingType.getIncompatibleSlots(slotEquippedTo);
 	}
 
 	public List<DisplacementType> getBlockedPartsKeysAsListWithoutNONE(GameCharacter character, InventorySlot slotEquippedTo) {
@@ -2811,7 +2808,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 					&& slotEquippedTo!=InventorySlot.PIERCING_VAGINA) { // Clothing in groin slots should always be fine, so don't replace their values.
 				boolean cAccess = replaceCrotchBoobAccess;
 				List<BlockedParts> modifiedBlockedParts = new ArrayList<>();
-				for(BlockedParts blockedparts : clothingType.blockedPartsMap.get(slotEquippedTo)) {
+				for(BlockedParts blockedparts : clothingType.getBlockedParts(slotEquippedTo)) {
 					BlockedParts copy = new BlockedParts(blockedparts);
 					
 					copy.blockedBodyParts = copy.blockedBodyParts.stream().filter(
@@ -2860,7 +2857,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 				return moddedDisplacementTypesAvailableWithoutNONE;
 			}
 		}
-		return clothingType.displacementTypesAvailableWithoutNONE.get(slotEquippedTo);
+		return clothingType.getDisplacementTypes(slotEquippedTo);
 	}
 	
 }

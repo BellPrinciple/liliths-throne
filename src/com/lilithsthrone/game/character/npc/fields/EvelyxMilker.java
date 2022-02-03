@@ -4,7 +4,6 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -32,7 +31,6 @@ import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.pregnancy.FertilisationType;
 import com.lilithsthrone.game.character.pregnancy.Litter;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -78,13 +76,13 @@ public class EvelyxMilker extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			var availableRaces = new HashMap<Subspecies,Integer>();
+			for(var s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0 || s==Subspecies.SLIME) { // Do not spawn demonic races, elementals, or youko (or slimes)
 					continue;
 				}
 				if(Subspecies.getWorldSpecies(WorldType.WORLD_MAP, PlaceType.WORLD_MAP_FIELDS, false).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.WORLD_MAP, PlaceType.WORLD_MAP_FIELDS, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.WORLD_MAP, PlaceType.WORLD_MAP_FIELDS, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				}
 			}
 			

@@ -6,7 +6,6 @@ import org.w3c.dom.events.MouseEvent;
 
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.controller.TooltipUpdateThread;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -114,7 +113,7 @@ public class TooltipResponseDescriptionEventListener implements EventListener {
 						tooltipSB.append("<div class='description'>" + response.getTooltipText() + "</div>");
 						
 					} else if(response.getAssociatedCombatMove()!=null) {
-						AbstractCombatMove move = response.getAssociatedCombatMove();
+						var move = response.getAssociatedCombatMove();
 						boolean coreMove = Main.game.getPlayer().getEquippedMoves().contains(move);
 						
 						tooltipSB.append("<div class='title'>"

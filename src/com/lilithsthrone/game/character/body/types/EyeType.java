@@ -6,11 +6,9 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.valueEnums.EyeShape;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -382,7 +380,7 @@ public interface EyeType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, int defaultPairCount, EyeShape defaultIrisShape, EyeShape defaultPupilShape, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String eyeTransformationDescription, String eyeBodyDescription) {
+		public Special(BodyCoveringType coveringType, Race race, int defaultPairCount, EyeShape defaultIrisShape, EyeShape defaultPupilShape, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String eyeTransformationDescription, String eyeBodyDescription) {
 			super(coveringType, race, defaultPairCount, defaultIrisShape, defaultPupilShape, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, eyeTransformationDescription, eyeBodyDescription);
 		}
 
@@ -394,7 +392,7 @@ public interface EyeType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractEyeType> table = new TypeTable<>(
+	TypeTable<EyeType> table = new TypeTable<>(
 		EyeType::sanitize,
 		EyeType.class,
 		AbstractEyeType.class,
@@ -406,7 +404,7 @@ public interface EyeType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractEyeType getEyeTypeFromId(String id) {
+	static EyeType getEyeTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -420,15 +418,15 @@ public interface EyeType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromEyeType(AbstractEyeType eyeType) {
+	static String getIdFromEyeType(EyeType eyeType) {
 		return eyeType.getId();
 	}
 
-	public static List<AbstractEyeType> getAllEyeTypes() {
+	static List<EyeType> getAllEyeTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractEyeType> getEyeTypes(AbstractRace r) {
+	static List<EyeType> getEyeTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	

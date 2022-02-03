@@ -6,12 +6,9 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTesticleType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -26,7 +23,7 @@ public interface PenisType extends BodyPartTypeInterface {
 
 	boolean isPubicHairAllowed();
 
-	AbstractTesticleType getTesticleType();
+	TesticleType getTesticleType();
 
 	List<PenetrationModifier> getDefaultRacialPenetrationModifiers();
 
@@ -429,11 +426,11 @@ public interface PenisType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, AbstractTesticleType testicleType, List<String> namesFeminine, List<String> namesPluralFeminine, List<String> namesMasculine, List<String> namesPluralMasculine, List<String> descriptors, String transformationDescription, String bodyDescription, List<PenetrationModifier> defaultRacialPenetrationModifiers) {
+		public Special(BodyCoveringType coveringType, Race race, TesticleType testicleType, List<String> namesFeminine, List<String> namesPluralFeminine, List<String> namesMasculine, List<String> namesPluralMasculine, List<String> descriptors, String transformationDescription, String bodyDescription, List<PenetrationModifier> defaultRacialPenetrationModifiers) {
 			super(coveringType, race, testicleType, namesFeminine, namesPluralFeminine, namesMasculine, namesPluralMasculine, descriptors, transformationDescription, bodyDescription, defaultRacialPenetrationModifiers);
 		}
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, AbstractTesticleType testicleType, String transformationDescription, String bodyDescription, List<PenetrationModifier> defaultRacialPenetrationModifiers) {
+		public Special(BodyCoveringType coveringType, Race race, TesticleType testicleType, String transformationDescription, String bodyDescription, List<PenetrationModifier> defaultRacialPenetrationModifiers) {
 			super(coveringType, race, testicleType, transformationDescription, bodyDescription, defaultRacialPenetrationModifiers);
 		}
 
@@ -445,7 +442,7 @@ public interface PenisType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractPenisType> table = new TypeTable<>(
+	TypeTable<PenisType> table = new TypeTable<>(
 		PenisType::sanitize,
 		PenisType.class,
 		AbstractPenisType.class,
@@ -457,7 +454,7 @@ public interface PenisType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractPenisType getPenisTypeFromId(String id) {
+	static PenisType getPenisTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -489,15 +486,15 @@ public interface PenisType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromPenisType(AbstractPenisType penisType) {
+	static String getIdFromPenisType(PenisType penisType) {
 		return penisType.getId();
 	}
 
-	public static List<AbstractPenisType> getAllPenisTypes() {
+	static List<PenisType> getAllPenisTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractPenisType> getPenisTypes(AbstractRace r) {
+	static List<PenisType> getPenisTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 

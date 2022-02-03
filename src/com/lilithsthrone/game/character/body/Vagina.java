@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
 import com.lilithsthrone.game.character.body.valueEnums.Capacity;
@@ -29,7 +28,7 @@ import com.lilithsthrone.utils.Util;
  */
 public class Vagina implements BodyPartInterface {
 	
-	protected AbstractVaginaType type;
+	protected VaginaType type;
 	protected Clitoris clitoris;
 	protected int labiaSize;
 	protected boolean pierced;
@@ -41,7 +40,7 @@ public class Vagina implements BodyPartInterface {
 	protected boolean hymen;
 	protected boolean squirter;
 
-	public Vagina(AbstractVaginaType type, int labiaSize, int clitSize, int clitGirth, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
+	public Vagina(VaginaType type, int labiaSize, int clitSize, int clitGirth, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
 		this.type = type;
 		this.labiaSize = labiaSize;
 		this.clitoris = new Clitoris(clitSize, clitGirth);
@@ -82,7 +81,7 @@ public class Vagina implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractVaginaType getType() {
+	public VaginaType getType() {
 		return type;
 	}
 
@@ -166,11 +165,11 @@ public class Vagina implements BodyPartInterface {
 		return Util.randomItemFrom(descriptorList);
 	}
 	
-	public String setType(GameCharacter owner, AbstractVaginaType type) {
+	public String setType(GameCharacter owner, VaginaType type) {
 		return setType(owner, type, false);
 	}
 	
-	public String setType(GameCharacter owner, AbstractVaginaType type, boolean overridePregnancyPrevention) {
+	public String setType(GameCharacter owner, VaginaType type, boolean overridePregnancyPrevention) {
 		if(this.type==VaginaType.NONE) {
 			this.orificeVagina.setStretchedCapacity(this.orificeVagina.getRawCapacityValue());
 			this.orificeUrethra.setStretchedCapacity(this.orificeUrethra.getRawCapacityValue());

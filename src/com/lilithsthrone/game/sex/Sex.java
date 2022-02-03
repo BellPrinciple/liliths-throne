@@ -41,7 +41,6 @@ import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.AbstractFetish;
@@ -61,7 +60,6 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.game.occupantManagement.MilkingRoom;
@@ -69,7 +67,7 @@ import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
 import com.lilithsthrone.game.sex.managers.SexManagerExternal;
 import com.lilithsthrone.game.sex.managers.SexManagerInterface;
 import com.lilithsthrone.game.sex.managers.SexManagerLoader;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.StandardSexActionInteractions;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
@@ -192,7 +190,7 @@ public class Sex {
 	private Value<GameCharacter, Value<GameCharacter, AbstractClothing>> clothingEquipInformation; // The character equipping clothing, the character targeted, and the clothing being equipped.
 	
 	private Value<GameCharacter, Value<GameCharacter, AbstractItem>> itemUseInformation; // The character using an item, the character targeted, and the item being used.
-	private Map<GameCharacter, Map<GameCharacter, List<AbstractItemType>>> itemUseDenials; // A map of item-using NPCs to a map of characters who they've tried, and failed, to use items on. This second map has the failed items in a List as its Value.
+	private Map<GameCharacter, Map<GameCharacter, List<ItemType>>> itemUseDenials; // A map of item-using NPCs to a map of characters who they've tried, and failed, to use items on. This second map has the failed items in a List as its Value.
 	
 	private SexManagerInterface sexManager;
 	private SexManagerInterface initialSexManager;
@@ -252,7 +250,7 @@ public class Sex {
 	
 	// Positioning, requests, tracking:
 	private Map<GameCharacter, List<SexType>> requestsBlocked;
-	private Map<GameCharacter, List<AbstractSexPosition>> positioningRequestsBlocked;
+	private Map<GameCharacter, List<SexPosition>> positioningRequestsBlocked;
 	private PositioningData positionRequest;
 	private Set<GameCharacter> charactersRequestingCreampie;
 	private Set<GameCharacter> charactersRequestingKnot;
@@ -1699,7 +1697,7 @@ public class Sex {
 				
 				endSexSB = new StringBuilder(UtilText.parse(participant, endSexSB.toString()));
 			}
-			for(AbstractStatusEffect se : new ArrayList<>(participant.getStatusEffects())) {
+			for(var se : new ArrayList<>(participant.getStatusEffects())) {
 				if(se.isRemoveAtEndOfSex()) {
 					participant.removeStatusEffect(se);
 				}
@@ -2577,7 +2575,7 @@ public class Sex {
 
 
 		// Arousal increments for related status effects:
-		for(AbstractStatusEffect se : activeCharacter.getStatusEffects()) {
+		for(var se : activeCharacter.getStatusEffects()) {
 			if(se.isSexEffect()) {
 				arousalIncrements.put(activeCharacter, arousalIncrements.get(activeCharacter) + se.getArousalPerTurnSelf(activeCharacter));
 				for(GameCharacter penetratingCharacter : Main.sex.getAllParticipants()) {
@@ -2591,7 +2589,7 @@ public class Sex {
 		
 		// Arousal increments for related fetishes:
 		if(sexAction.getFetishes(activeCharacter)!=null) {// && sexAction.getSexPace()!=SexPace.SUB_RESISTING) {
-			for(AbstractFetish f : sexAction.getFetishes(activeCharacter)) {
+			for(Fetish f : sexAction.getFetishes(activeCharacter)) {
 				if(activeCharacter.hasFetish(f)) {
 					arousalIncrements.put(activeCharacter, arousalIncrements.get(activeCharacter) + activeCharacter.getFetishLevel(f).getBonusArousalIncrease());
 					if(!Main.sex.isMasturbation()) {
@@ -2608,7 +2606,7 @@ public class Sex {
 		if(sexAction.getParticipantType()!=SexParticipantType.SELF) {
 			// Arousal increments for this target's related fetishes:
 			if(sexAction.getFetishesForTargetedPartner(activeCharacter)!=null && Main.sex.getSexPace(targetCharacter)!=SexPace.SUB_RESISTING) {
-				for(AbstractFetish f : sexAction.getFetishesForTargetedPartner(activeCharacter)) {
+				for(Fetish f : sexAction.getFetishesForTargetedPartner(activeCharacter)) {
 					if(targetCharacter.hasFetish(f)) {
 						arousalIncrements.put(targetCharacter, arousalIncrements.get(targetCharacter) + targetCharacter.getFetishLevel(f).getBonusArousalIncrease());
 						if(!Main.sex.isMasturbation()) {
@@ -3060,13 +3058,13 @@ public class Sex {
 									characterTarget.incrementLust(Math.max(-2.5f, Math.min(2.5f, (targetWeight*0.25f))), false);
 									
 									// Half xp from ongoing:
-									List<AbstractFetish> selfFetishes = sexAction.getFetishesFromPenetrationAndOrificeTypes(character, entry.getKey(), characterTarget, sArea, true);
-									List<AbstractFetish> targetFetishes = sexAction.getFetishesFromPenetrationAndOrificeTypes(character, entry.getKey(), characterTarget, sArea, false);
+									List<Fetish> selfFetishes = sexAction.getFetishesFromPenetrationAndOrificeTypes(character, entry.getKey(), characterTarget, sArea, true);
+									List<Fetish> targetFetishes = sexAction.getFetishesFromPenetrationAndOrificeTypes(character, entry.getKey(), characterTarget, sArea, false);
 									
-									for(AbstractFetish f : selfFetishes) {
+									for(Fetish f : selfFetishes) {
 										character.incrementFetishExperience(f, f.getExperienceGainFromSexAction()/2);
 									}
-									for(AbstractFetish f : targetFetishes) {
+									for(Fetish f : targetFetishes) {
 										characterTarget.incrementFetishExperience(f, f.getExperienceGainFromSexAction()/2);
 									}
 								}
@@ -4572,7 +4570,7 @@ public class Sex {
 	}
 	
 	public boolean isSexTypePossibleViaAvailablePositionsAndSlots(GameCharacter characterPerformingSexType, GameCharacter targetedCharacter, SexType sexType) {
-		for(AbstractSexPosition position : initialSexManager.getAllowedSexPositions()) {
+		for(var position : initialSexManager.getAllowedSexPositions()) {
 			for(Entry<SexSlot, Map<SexSlot, SexActionInteractions>> entry : position.getSlotTargets().entrySet()) {
 				// Check for interactions between characterPerformingSexType -> targetedCharacter
 				if(initialSexManager.isSlotAvailable(characterPerformingSexType, entry.getKey())) {
@@ -4629,17 +4627,17 @@ public class Sex {
 		}
 	}
 	
-	public List<AbstractSexPosition> getPositioningRequestsBlocked(GameCharacter character) {
+	public List<SexPosition> getPositioningRequestsBlocked(GameCharacter character) {
 		return positioningRequestsBlocked.get(character);
 	}
 
-	public void addPositioningRequestsBlocked(GameCharacter character, AbstractSexPosition position) {
+	public void addPositioningRequestsBlocked(GameCharacter character, SexPosition position) {
 		if(!positioningRequestsBlocked.get(character).contains(position)) {
 			positioningRequestsBlocked.get(character).add(position);
 		}
 	}
 	
-	public boolean isPositioningRequestBlocked(GameCharacter character, AbstractSexPosition position) {
+	public boolean isPositioningRequestBlocked(GameCharacter character, SexPosition position) {
 		return positioningRequestsBlocked.get(character).contains(position);
 	}
 
@@ -5062,7 +5060,7 @@ public class Sex {
 		return itemUseInformation;
 	}
 
-	public void addItemUseDenial(GameCharacter user, GameCharacter target, AbstractItemType itemType) {
+	public void addItemUseDenial(GameCharacter user, GameCharacter target, ItemType itemType) {
 		itemUseDenials.putIfAbsent(user, new HashMap<>());
 		itemUseDenials.get(user).putIfAbsent(target, new ArrayList<>());
 		itemUseDenials.get(user).get(target).add(itemType);
@@ -5071,7 +5069,7 @@ public class Sex {
 	/**
 	 * @return A list of AbstractItemTypes which the user has tried to give to the target, but have been refused.
 	 */
-	public List<AbstractItemType> getItemUseDenials(GameCharacter user, GameCharacter target) {
+	public List<ItemType> getItemUseDenials(GameCharacter user, GameCharacter target) {
 		itemUseDenials.putIfAbsent(user, new HashMap<>());
 		itemUseDenials.get(user).putIfAbsent(target, new ArrayList<>());
 		return itemUseDenials.get(user).get(target);
@@ -6209,7 +6207,7 @@ public class Sex {
 		sexCountMap.get(performer).get(partner).put(sexType, sexCountMap.get(performer).get(partner).get(sexType)+1);
 	}
 	
-	public AbstractSexPosition getPosition() {
+	public SexPosition getPosition() {
 		return sexManager.getPosition();
 	}
 
@@ -6319,7 +6317,7 @@ public class Sex {
 				return false;
 			}
 		}
-		for(AbstractStatusEffect se : charactersFeet.getStatusEffects()) {
+		for(var se : charactersFeet.getStatusEffects()) {
 			if(se.getTags().contains(ItemTag.SPREADS_FEET)) {
 				return false;
 			}

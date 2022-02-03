@@ -52,7 +52,6 @@ import com.lilithsthrone.game.dialogue.utils.OptionsDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
@@ -433,11 +432,11 @@ public class CharacterCreation {
 		generateClothingOnFloor(ClothingType.getClothingTypeFromId(clothingType), colour, null, null);
 	}
 	
-	private static void generateClothingOnFloor(AbstractClothingType clothingType, Colour colour) {
+	private static void generateClothingOnFloor(ClothingType clothingType, Colour colour) {
 		generateClothingOnFloor(clothingType, colour, null, null);
 	}
 	
-	private static void generateClothingOnFloor(AbstractClothingType clothingType, Colour colour, Colour colour2, Colour colour3) {
+	private static void generateClothingOnFloor(ClothingType clothingType, Colour colour, Colour colour2, Colour colour3) {
 		for(AbstractClothing clothing : Main.game.getPlayer().getClothingCurrentlyEquipped()) {
 			if(clothing.getClothingType()==clothingType) {
 				return;

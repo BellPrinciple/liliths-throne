@@ -10,15 +10,13 @@ import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.game.dialogue.encounters.Encounter;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
+import com.lilithsthrone.world.places.PlaceType;
 
 /**
  * @since 0.3.2
@@ -28,10 +26,10 @@ import com.lilithsthrone.world.places.AbstractPlaceType;
 public class OffspringMapDialogue {
 	
 	private static List<OffspringSeed> getOffspringList() {
-		AbstractWorldType worldType = Main.game.getPlayer().getWorldLocation();
-		AbstractPlaceType placeType = Main.game.getPlayer().getLocationPlace().getPlaceType();
+		WorldType worldType = Main.game.getPlayer().getWorldLocation();
+		PlaceType placeType = Main.game.getPlayer().getLocationPlace().getPlaceType();
 		
-		AbstractEncounter enc = Main.game.getPlayer().getLocationPlace().getPlaceType().getEncounterType();
+		Encounter enc = Main.game.getPlayer().getLocationPlace().getPlaceType().getEncounterType();
 		return Main.game.getOffspringNotSpawned(os->
 			os.getSubspecies().isAbleToNaturallySpawnInLocation(worldType, placeType)
 				&& (worldType==WorldType.HARPY_NEST

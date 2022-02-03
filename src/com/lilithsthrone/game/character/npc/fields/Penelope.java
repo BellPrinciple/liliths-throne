@@ -55,9 +55,7 @@ import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.main.Main;
@@ -302,7 +300,7 @@ public class Penelope extends NPC {
 	public void dailyUpdate() {
 		clearNonEquippedInventory(false);
 
-		for(AbstractItemType item : ItemType.getAllItems()) {
+		for(var item : ItemType.getAllItems()) {
 			if(item.getItemTags().contains(ItemTag.SOLD_BY_KATE)
 					&& (!item.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				this.addItem(Main.game.getItemGen().generateItem(item), !item.isConsumedOnUse()?1:(6+Util.random.nextInt(12)), false, false);
@@ -311,7 +309,7 @@ public class Penelope extends NPC {
 		
 		List<AbstractClothing> clothingToSell = new ArrayList<>();
 		
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(var clothing : ClothingType.getAllClothing()) {
 			if(clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_KATE)
 					&& (!clothing.getDefaultItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				clothingToSell.add(Main.game.getItemGen().generateClothing(clothing, false));

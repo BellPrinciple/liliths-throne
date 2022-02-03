@@ -16,7 +16,6 @@ import com.lilithsthrone.game.character.npc.dominion.ReindeerOverseer;
 import com.lilithsthrone.game.character.npc.dominion.RentalMommy;
 import com.lilithsthrone.game.character.npc.submission.Claire;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueManager;
@@ -697,18 +696,18 @@ public class DominionPlaces {
 
 	private static Set<Integer> viewedNewsIndexes = new HashSet<>();
 	private static boolean viewedAllNews = false;
-	
+
 	private static String getRandomNewsText() {
-		List<AbstractSubspecies> possibleSubspecies = new ArrayList<>();
-		for(AbstractSubspecies s : Subspecies.allSubspecies) {
+		List<Subspecies> possibleSubspecies = new ArrayList<>();
+		for(Subspecies s : Subspecies.getAllSubspecies()) {
 			if(s.getMostCommonWorldRegions().contains(WorldRegion.DOMINION)) {
 				possibleSubspecies.add(s);
 			}
 		}
-		
+
 		String randomFemalePerson = Util.randomItemFrom(possibleSubspecies).getSingularFemaleName(null);
 		String randomMalePerson = Util.randomItemFrom(possibleSubspecies).getSingularMaleName(null);
-		
+
 		List<String> strings = Util.newArrayListOfValues(
 				"A rough-looking "+randomMalePerson+" unrolls a large scroll, before clearing his throat and calling out,"
 						+ " [maleNPC.speech(By decree of Lilith, and in the interests of Dominion's security,"
@@ -727,7 +726,7 @@ public class DominionPlaces {
 							+ " There's really nothing of interest to be heard, and you soon find yourself turning away and moving on.",
 					Util.capitaliseSentence(UtilText.addDeterminer(randomFemalePerson))+" is currently reading out a list of advertisements for shops in the local area."
 							+ " There's really nothing of interest to be heard, and you soon find yourself turning away and moving on.");
-		
+
 		List<Integer> availableIndexes = new ArrayList<>();
 		for(int i=0; i<strings.size(); i++) {
 			availableIndexes.add(i);
@@ -740,17 +739,17 @@ public class DominionPlaces {
 			return "<p style='text-align:center;'>"
 						+ "[style.italicsDisabled(You've listened to everything that's being said...)]"
 					+ "</p>";
-			
+
 		} else {
 			int index = Util.randomItemFrom(availableIndexes);
 			viewedNewsIndexes.add(index);
-			
+
 			return "<p>"
 						+ strings.get(index)
 					+ "</p>";
 		}
 	}
-	
+
 	public static final DialogueNode DOMINION_PLAZA = new DialogueNode("Lilith's Plaza", "", false) {
 		@Override
 		public void applyPreParsingEffects() {
@@ -770,7 +769,7 @@ public class DominionPlaces {
 			if(index == 1) {
 				if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
 					return new Response("News", "Due to the ongoing arcane storm, there's nobody here at the moment...", null);
-					
+
 				} else if(viewedAllNews) {
 					return new Response("News", "You've listened to everything that's being said...", null);
 					

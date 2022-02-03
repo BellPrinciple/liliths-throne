@@ -67,7 +67,6 @@ import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -606,7 +605,7 @@ public class Evelyx extends NPC {
 		StringBuilder sbAppliedTransformation = new StringBuilder();
 		boolean anyFetishChangesAvailable = false;
 		
-		Map<AbstractFetish, String> fetishesToBeAdded = new HashMap<>();
+		Map<Fetish, String> fetishesToBeAdded = new HashMap<>();
 		
 		// Trainee values:
 		fetishesToBeAdded.put(Fetish.FETISH_LACTATION_SELF, "Cows should love to be milked.");
@@ -629,7 +628,7 @@ public class Evelyx extends NPC {
 			fetishesToBeAdded.put(Fetish.FETISH_SIZE_QUEEN, "No insertion is too big for a good cow.");
 		}
 		
-		for(Entry<AbstractFetish, String> fetishToAdd : fetishesToBeAdded.entrySet()) {
+		for(Entry<Fetish, String> fetishToAdd : fetishesToBeAdded.entrySet()) {
 			boolean applyFetish = !worker.hasFetish(fetishToAdd.getKey());
 			if(!anyFetishChangesAvailable) {
 				anyFetishChangesAvailable = applyFetish;

@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import javax.xml.transform.OutputKeys;
@@ -20,6 +19,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -47,10 +47,6 @@ import com.lilithsthrone.game.character.body.Tentacle;
 import com.lilithsthrone.game.character.body.Torso;
 import com.lilithsthrone.game.character.body.Vagina;
 import com.lilithsthrone.game.character.body.Wing;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
@@ -88,7 +84,6 @@ import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.fetishes.FetishPreference;
@@ -108,8 +103,6 @@ import com.lilithsthrone.game.character.persona.NameTriplet;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
@@ -121,7 +114,6 @@ import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.SetBonus;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.BlockedParts;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
@@ -249,7 +241,7 @@ public class CharacterUtils {
 		return importedCharacter;
 	}
 	
-	public RaceStage getRaceStageFromPreferences(FurryPreference preference, Gender gender, AbstractSubspecies species) {
+	public RaceStage getRaceStageFromPreferences(FurryPreference preference, Gender gender, Subspecies species) {
 		RaceStage raceStage = RaceStage.PARTIAL;
 		
 		switch(preference) {
@@ -271,13 +263,13 @@ public class CharacterUtils {
 	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, GameCharacter mother, GameCharacter father) {
 		return generateBody(linkedCharacter, startingGender, mother, father, father==null?null:father.getBody());
 	}
-	
+
 	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, GameCharacter mother, GameCharacter father, Body fatherBody) {
 		Body body = null;
 		boolean takesAfterMother = true;
 		boolean raceFromMother = true;
 		Body motherBody = mother.getBody();
-		
+
 		// If the mother is feral, preGeneratedBodies are not taken into account, as the offspring must be feral:
 		if(!mother.isFeral() && father!=null) {
 			body = AbstractSubspecies.getPreGeneratedBody(linkedCharacter, startingGender, motherBody, fatherBody);
@@ -286,10 +278,10 @@ public class CharacterUtils {
 		if(fatherBody==null) {
 			fatherBody = motherBody;
 		}
-		
-		AbstractRacialBody motherGenericBody = RacialBody.valueOfRace(body==null?motherBody.getTrueRace():body.getTrueRace());
-		AbstractRacialBody fatherGenericBody = RacialBody.valueOfRace(body==null?fatherBody.getTrueRace():body.getTrueRace());
-		AbstractSubspecies raceTakesAfter = mother.getTrueSubspecies();
+
+		RacialBody motherGenericBody = RacialBody.valueOfRace(body==null?motherBody.getTrueRace():body.getTrueRace());
+		RacialBody fatherGenericBody = RacialBody.valueOfRace(body==null?fatherBody.getTrueRace():body.getTrueRace());
+		Subspecies raceTakesAfter = mother.getTrueSubspecies();
 		
 		if(father==null) {
 			father = mother;
@@ -299,7 +291,7 @@ public class CharacterUtils {
 		boolean fatherHuman = fatherBody.getTorsoType().getRace()==Race.HUMAN;
 		
 		if(body==null) {
-			AbstractRacialBody startingBodyType = RacialBody.HUMAN;
+			RacialBody startingBodyType = RacialBody.HUMAN;
 			RaceStage stage = RaceStage.HUMAN;
 			
 			// Core body type is random:
@@ -366,20 +358,20 @@ public class CharacterUtils {
 		linkedCharacter.setGenderIdentity(startingGender);
 		body.setBodyMaterial(mother.getBodyMaterial());
 		
-		
+
 		applyGenetics(linkedCharacter, body, motherBody, fatherBody, raceFromMother);
-		
+
 		// The applyRaceChanges and applySpeciesChanges methods sometimes change covering colours and then call updateCoverings(), which will result in this character's covering colours being unrelated to genetics
 		// To fix, coverings are saved and then restored after the two methods have been called
-		Map<AbstractBodyCoveringType, Covering> preChangesCoverings = body.getCoverings();
+		Map<BodyCoveringType, Covering> preChangesCoverings = body.getCoverings();
 		raceTakesAfter.getRace().applyRaceChanges(body);
 		raceTakesAfter.applySpeciesChanges(body);
 		body.setCoverings(preChangesCoverings);
-		
-		
+
+
 		return body;
 	}
-	
+
 	/**
 	 * @param offspring The offspring GameCharacter.
 	 * @param body The body of the offspring to which genetics should be applied.
@@ -394,16 +386,16 @@ public class CharacterUtils {
 		boolean takesAfterMother = true;
 		Gender startingGender = body.getGender();
 		boolean feminineGender = startingGender.isFeminine();
-		AbstractRacialBody motherGenericBody = RacialBody.valueOfRace(body==null?motherBody.getTrueRace():body.getTrueRace());
-		AbstractRacialBody fatherGenericBody = RacialBody.valueOfRace(body==null?fatherBody.getTrueRace():body.getTrueRace());
-		
-		
+		RacialBody motherGenericBody = RacialBody.valueOfRace(body==null?motherBody.getTrueRace():body.getTrueRace());
+		RacialBody fatherGenericBody = RacialBody.valueOfRace(body==null?fatherBody.getTrueRace():body.getTrueRace());
+
+
 		// Takes other features from the parent closest to their femininity:
 		if(Math.abs(motherBody.getFemininity()-body.getFemininity()) > Math.abs(fatherBody.getFemininity()-body.getFemininity())) {
 			takesAfterMother = false;
 		}
 		body.setTakesAfterMother(takesAfterMother); // Even if race is inherited from father, can still take most features from mother
-		
+
 		// Non-biped parents:
 		if(takesAfterMother) {
 			if(body.getLeg().getType().isLegConfigurationAvailable(motherBody.getLegConfiguration())) {
@@ -417,7 +409,7 @@ public class CharacterUtils {
 		
 		float takesAfterMotherChance = takesAfterMother?0.75f:0.25f;
 		
-		List<AbstractBodyCoveringType> typesToInfluence = new ArrayList<>();
+		List<BodyCoveringType> typesToInfluence = new ArrayList<>();
 		// Skin & fur colours:
 		for(BodyPartInterface bp : body.getAllBodyParts()) {
 			if(bp.getBodyCoveringType(body)!=null && !(bp instanceof Eye)) { // Exclude eye as that's covered below
@@ -438,7 +430,7 @@ public class CharacterUtils {
 		}
 		
 		body.updateCoverings(false, false, true, false);
-		
+
 		// Iris colour:
 		if(Math.random()<=0.9f) {
 			if(Math.random()>=takesAfterMotherChance) {
@@ -453,7 +445,7 @@ public class CharacterUtils {
 								fatherBody.getCoveringFromType(fatherBody.getEye()).getSecondaryColour(), fatherBody.getCoveringFromType(fatherBody.getEye()).isSecondaryGlowing()));
 			}
 		}
-		
+
 		// Pupil colour:
 		if(Math.random()<=0.5f) {
 			if(Math.random()>=takesAfterMotherChance) {
@@ -951,8 +943,8 @@ public class CharacterUtils {
 		}
 	}
 	
-	private static List<AbstractBodyCoveringType> setCoveringColours(Body body, Body influencingCharacterBody, List<AbstractBodyCoveringType> typesToInfluence) {
-		List<AbstractBodyCoveringType> tempList = new ArrayList<>(typesToInfluence);
+	private static List<BodyCoveringType> setCoveringColours(Body body, Body influencingCharacterBody, List<BodyCoveringType> typesToInfluence) {
+		var tempList = new ArrayList<>(typesToInfluence);
 		
 		// Skin & fur colours:
 		for(BodyPartInterface bp : influencingCharacterBody.getAllBodyParts()){
@@ -969,13 +961,13 @@ public class CharacterUtils {
 			}
 		}
 		
-		List<AbstractBodyCoveringType> extraCoverings = new ArrayList<>();
+		var extraCoverings = new ArrayList<BodyCoveringType>();
 		extraCoverings.add(BodyCoveringType.ANUS);
 		extraCoverings.add(BodyCoveringType.NIPPLES);
 		extraCoverings.add(BodyCoveringType.MOUTH);
 		extraCoverings.add(BodyCoveringType.TONGUE);
 		
-		for(AbstractBodyCoveringType bct : extraCoverings) {
+		for(var bct : extraCoverings) {
 			if(tempList.contains(bct)) {
 				Covering covering = influencingCharacterBody.getCovering(bct, false);
 					body.getCoverings().put(
@@ -1011,17 +1003,17 @@ public class CharacterUtils {
 //		return (int) ((baseSize + (Math.signum(difference)*Util.random.nextInt(Math.abs(difference) +1)))*(0.9f+(Math.random()*0.2f)));
 	}
 
-	public Body generateHalfDemonBody(GameCharacter linkedCharacter, Gender startingGender, AbstractSubspecies halfSubspecies, boolean applyHalfDemonAttributeChanges) {
+	public Body generateHalfDemonBody(GameCharacter linkedCharacter, Gender startingGender, Subspecies halfSubspecies, boolean applyHalfDemonAttributeChanges) {
 		return generateHalfDemonBody(linkedCharacter, startingGender, halfSubspecies, applyHalfDemonAttributeChanges, null);
 	}
 	
-	public Body generateHalfDemonBody(GameCharacter linkedCharacter, Gender startingGender, AbstractSubspecies halfSubspecies, boolean applyHalfDemonAttributeChanges, RaceStage overrideStage) {
+	public Body generateHalfDemonBody(GameCharacter linkedCharacter, Gender startingGender, Subspecies halfSubspecies, boolean applyHalfDemonAttributeChanges, RaceStage overrideStage) {
 //		Gender startingGender;
 		if(startingGender==null) {
 			startingGender = Math.random()>0.5f?Gender.F_V_B_FEMALE:Gender.M_P_MALE;
 		}
 		RaceStage stage = overrideStage!=null?overrideStage:getRaceStageFromPreferences(Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().get(halfSubspecies), startingGender, halfSubspecies);
-		AbstractRacialBody demonBody = RacialBody.DEMON;
+		RacialBody demonBody = RacialBody.DEMON;
 		
 		if(linkedCharacter!=null) {
 //			startingGender = linkedCharacter.getGender();
@@ -1148,7 +1140,7 @@ public class CharacterUtils {
 		}
 		
 		
-		List<AbstractTailType> tailTypes = RacialBody.valueOfRace(halfSubspecies.getRace()).getTailType();
+		var tailTypes = RacialBody.valueOfRace(halfSubspecies.getRace()).getTailType();
 		if(tailTypes.size()==1 && tailTypes.get(0)==TailType.NONE) {
 			body.setTail(new Tail(demonBody.getRandomTailType(false)));
 		}
@@ -1199,36 +1191,36 @@ public class CharacterUtils {
 		return body;
 	}
 	
-	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, AbstractSubspecies species, RaceStage stage) {
+	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, Subspecies species, RaceStage stage) {
 		return generateBody(linkedCharacter, startingGender, RacialBody.valueOfRace(species.getRace()), species, stage);
 	}
 	
-	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, AbstractRacialBody startingBodyType, RaceStage stage) {
+	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, RacialBody startingBodyType, RaceStage stage) {
 		return generateBody(linkedCharacter, startingGender, startingBodyType, null, stage);
 	}
 	
-	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, AbstractRacialBody startingBodyType, AbstractSubspecies species, RaceStage stage) {
+	public Body generateBody(GameCharacter linkedCharacter, Gender startingGender, RacialBody startingBodyType, Subspecies species, RaceStage stage) {
 		boolean hasVagina = startingGender.getGenderName().isHasVagina();
 		boolean hasPenis = startingGender.getGenderName().isHasPenis();
 		boolean hasBreasts = startingGender.getGenderName().isHasBreasts();
 		boolean isSlime = species == Subspecies.SLIME;
 		boolean isHalfDemon = species == Subspecies.HALF_DEMON;
 		boolean isDoll = species == Subspecies.DOLL;
-		
+
 		if(isSlime || isHalfDemon) {
 			if(linkedCharacter==null || !linkedCharacter.isUnique()) {
-				List<AbstractSubspecies> slimeSubspecies = new ArrayList<>();
-				for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+				var slimeSubspecies = new ArrayList<Subspecies>();
+				for(var subspecies : Subspecies.getAllSubspecies()) {
 					// Special races that slimes/half-demons do not spawn as are slimes and any Subspecies which sets an override (so demons, elementals, or Youko):
 					if(!isSlime && subspecies.getSubspeciesOverridePriority()==0) {
 						if(startingGender.isFeminine()) {
-							for(Entry<AbstractSubspecies, FurryPreference> entry : Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().entrySet()) {
+							for(var entry : Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().entrySet()) {
 								if(entry.getValue() != FurryPreference.HUMAN) {
 									slimeSubspecies.add(subspecies);
 								}
 							}
 						} else {
-							for(Entry<AbstractSubspecies, FurryPreference> entry : Main.getProperties().getSubspeciesMasculineFurryPreferencesMap().entrySet()) {
+							for(var entry : Main.getProperties().getSubspeciesMasculineFurryPreferencesMap().entrySet()) {
 								if(entry.getValue() != FurryPreference.HUMAN) {
 									slimeSubspecies.add(subspecies);
 								}
@@ -1260,7 +1252,7 @@ public class CharacterUtils {
 		if(isDoll) { // Dolls spawn as human
 			species = Subspecies.HUMAN;
 		}
-		
+
 //		System.out.println(species+", "+stage);
 		
 		boolean furryHairCheck = stage.isFaceFurry() && startingBodyType.getFaceType().getTags().contains(BodyPartTag.FACE_NATURAL_BALDNESS_FURRY) && !startingBodyType.getHairType().getTags().contains(BodyPartTag.HAIR_IGNORE_PLAYER_SETTINGS);
@@ -1353,10 +1345,10 @@ public class CharacterUtils {
 								startingBodyType.getBreastCrotchCapacity(),
 								startingBodyType.getBreastCrotchDepth(),
 								startingBodyType.getBreastCrotchElasticity(),
-								startingBodyType.getBreastCrotchPlasticity(), 
+								startingBodyType.getBreastCrotchPlasticity(),
 								true))
 					.build();
-			
+
 		// Randomise skin colour if not greater by using skin preferences:
 		if(body.getRaceStage()!=RaceStage.GREATER && body.getRaceStage()!=RaceStage.FERAL) {
 			Colour skinColour = Util.randomItemFrom(BodyCoveringType.HUMAN.getNaturalColoursPrimary());
@@ -1371,7 +1363,7 @@ public class CharacterUtils {
 			// Set breast rows based on preferences:
 			if(Main.getProperties().multiBreasts==0 || Main.getProperties().multiBreasts==1) {
 				body.getBreast().setRows(null, 1);
-				
+
 			} else if(Main.getProperties().multiBreasts==2) {
 				if(body.getTorsoType()==TorsoType.HUMAN) {
 					body.getBreast().setRows(null, 1);
@@ -1423,18 +1415,18 @@ public class CharacterUtils {
 	/**
 	 * If you are wanting to change a newly-spawned NPC's body, then <b>you should consider using GameCharacter.setBody() instead</b>, as that method can also apply personality changes.
 	 */
-	public Body reassignBody(GameCharacter linkedCharacter, Body body, Gender startingGender, AbstractSubspecies species, RaceStage stage, boolean removeDemonOverride) {
+	public Body reassignBody(GameCharacter linkedCharacter, Body body, Gender startingGender, Subspecies species, RaceStage stage, boolean removeDemonOverride) {
 		if(removeDemonOverride) {
 			body.setSubspeciesOverride(null);
 		}
 		
-		AbstractRacialBody startingBodyType = RacialBody.valueOfRace(species.getRace());
+		var startingBodyType = RacialBody.valueOfRace(species.getRace());
 		
 		boolean hasVagina = startingGender.getGenderName().isHasVagina();
 		boolean hasPenis = startingGender.getGenderName().isHasPenis();
 		boolean hasBreasts = startingGender.getGenderName().isHasBreasts();
 		boolean[] virginities = null;
-		
+
 		// Save virginities to be restored after body reset:
 		if(linkedCharacter!=null) {
 			virginities = new boolean[] {
@@ -1451,7 +1443,7 @@ public class CharacterUtils {
 				linkedCharacter.hasHymen()
 			};
 		}
-		
+
 		body.setArm(new Arm((stage.isArmFurry()?startingBodyType.getArmType():ArmType.HUMAN), startingBodyType.getArmRows()));
 		
 		body.setAss(new Ass(stage.isAssFurry()?startingBodyType.getAssType():AssType.HUMAN,
@@ -1614,7 +1606,7 @@ public class CharacterUtils {
 			linkedCharacter.setVaginaVirgin(virginities[9]);
 			linkedCharacter.setHymen(virginities[10]);
 		}
-		
+
 		return body;
 	}
 	
@@ -1652,7 +1644,7 @@ public class CharacterUtils {
 		}
 		
 		boolean halfDemon = character.getSubspeciesOverride()==Subspecies.HALF_DEMON;
-		AbstractHairType furryHairType = Util.randomItemFrom(HairType.getHairTypes(character.getLegRace()));
+		var furryHairType = Util.randomItemFrom(HairType.getHairTypes(character.getLegRace()));
 		
 		switch(raceStage) {
 			case FERAL:
@@ -1716,7 +1708,7 @@ public class CharacterUtils {
 					character.setHornType(Util.randomItemFrom(character.getLegRace().getRacialBody().getHornTypes(false)));
 				}
 				
-				AbstractFaceType faceType = Util.randomItemFrom(FaceType.getFaceTypes(character.getLegRace()));
+				var faceType = Util.randomItemFrom(FaceType.getFaceTypes(character.getLegRace()));
 				boolean furryHairCheck = faceType.getTags().contains(BodyPartTag.FACE_NATURAL_BALDNESS_FURRY) && !furryHairType.getTags().contains(BodyPartTag.HAIR_IGNORE_PLAYER_SETTINGS);
 				boolean scalyHairCheck = faceType.getTags().contains(BodyPartTag.FACE_NATURAL_BALDNESS_SCALY) && !furryHairType.getTags().contains(BodyPartTag.HAIR_IGNORE_PLAYER_SETTINGS);
 				
@@ -2019,7 +2011,7 @@ public class CharacterUtils {
 		
 		// Body (height):
 		int height = character.getHeightValue()-15 + Util.random.nextInt(30) + 1;
-		
+
 		// Keep height within category if short stature:
 		if(character.getHeight()==Height.NEGATIVE_THREE_MINIMUM
 				|| character.getHeight()==Height.NEGATIVE_TWO_MINIMUM
@@ -2410,10 +2402,10 @@ public class CharacterUtils {
 	public void regenerateItemsInInventory(NPC character) {
 		generateItemsInInventory(character, character.isGenerateExtraItems(), character.isGenerateDisposableClothing(), character.isGenerateExtraClothing());
 	}
-	
+
 	/**
-	 * This method will always generate items, clothing, and weapons based on the character's items that are rewarded to the player via the method getLootItems() 
-	 * 
+	 * This method will always generate items, clothing, and weapons based on the character's items that are rewarded to the player via the method getLootItems()
+	 *
 	 * @param character The character who is to receive items and clothing in their inventory.
 	 * @param generateExtraItems true if you want this character to generate items that are not awarded via their getLootItems() method.  i.e. <b>pills</b>
 	 * @param generateDisposableClothing true if you want this character to generate disposable clothing that is not awarded via their getLootItems() method. i.e. <b>condoms</b>
@@ -2423,7 +2415,7 @@ public class CharacterUtils {
 		character.setGenerateExtraItems(generateExtraItems);
 		character.setGenerateDisposableClothing(generateDisposableClothing);
 		character.setGenerateExtraClothing(generateExtraClothing);
-		
+
 		List<AbstractCoreItem> items;
 		List<AbstractCoreItem> itemsRemoved = new ArrayList<>();
 		
@@ -2450,7 +2442,7 @@ public class CharacterUtils {
 		}
 
 		//**** ITEMS ****//
-		
+
 		// Pills:
 		if(character.getFetishDesire(Fetish.FETISH_PREGNANCY).isPositive()
 				&& !character.isPregnant()
@@ -2476,9 +2468,9 @@ public class CharacterUtils {
 		if(character.getFetishDesire(Fetish.FETISH_IMPREGNATION).isNegative() && character.hasPenisIgnoreDildo()) {
 			character.addItem(Main.game.getItemGen().generateItem("innoxia_pills_sterility"), 2+Util.random.nextInt(4), false, false);
 		}
-		
+
 		//**** CLOTHING ****//
-		
+
 		// Condoms:
 		if(character.hasPenis()
 				&& !character.getFetishDesire(Fetish.FETISH_PENIS_GIVING).isNegative() // doesn't mind using penis
@@ -2500,14 +2492,14 @@ public class CharacterUtils {
 			Colour condomColour = ClothingType.getClothingTypeFromId("innoxia_penis_condom").getColourReplacement(0).getRandomOfDefaultColours();
 			character.addClothing(Main.game.getItemGen().generateClothing("innoxia_penis_condom", condomColour, false), 1+Util.random.nextInt(3), false, false);
 		}
-		
+
 		int maxClothingCount = 1;
 		// Spawning additional clothing:
-		List<AbstractClothingType> availableClothing = new ArrayList<>();
+		List<ClothingType> availableClothing = new ArrayList<>();
 		// Only bondage fetishists spawn with BDSM clothing:
 		if(character.hasFetish(Fetish.FETISH_BONDAGE_APPLIER)) {
 			maxClothingCount+=1;
-			for(AbstractClothingType ct : ClothingType.getAllClothingInSet(SetBonus.getSetBonusFromId("innoxia_bdsm"))) {
+			for(ClothingType ct : ClothingType.getAllClothingInSet(SetBonus.getSetBonusFromId("innoxia_bdsm"))) {
 				InventorySlot defaultSlot = ct.getEquipSlots().get(0);
 				if(defaultSlot!=InventorySlot.VAGINA && defaultSlot!=InventorySlot.PENIS && defaultSlot!=InventorySlot.ANUS && defaultSlot!=InventorySlot.NIPPLE && defaultSlot!=InventorySlot.GROIN) {
 					availableClothing.add(ct); // Do not add clothing types which are sex toys, as conditionals for those are added in the next logic block
@@ -2517,7 +2509,7 @@ public class CharacterUtils {
 		// Sex toys:
 		if(character.getCorruptionLevel().getMinimumValue()>=CorruptionLevel.THREE_DIRTY.getMinimumValue()) { // Only 'dirty' corruption characters carry sex toys around
 			maxClothingCount+=1;
-			for(AbstractClothingType ct : ClothingType.getAllClothing()) {
+			for(ClothingType ct : ClothingType.getAllClothing()) {
 				InventorySlot defaultSlot = ct.getEquipSlots().get(0);
 				if(ct.getDefaultItemTags().contains(ItemTag.ENABLE_SEX_EQUIP)) {
 					// Conditionals for equipping sex toys are if this character is not averse to using the associated area
@@ -2548,13 +2540,13 @@ public class CharacterUtils {
 				}
 			}
 		}
-		
+
 		availableClothing.removeIf(ct->ct.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN) || ct.getDefaultItemTags().contains(ItemTag.CHEAT_ITEM) || ct.getRarity()==Rarity.QUEST);
-		
+
 		// Adding clothing to inventory:
 		maxClothingCount+=Util.random.nextInt(3);
 		Collections.shuffle(availableClothing);
-		for(AbstractClothingType ct : availableClothing) {
+		for(ClothingType ct : availableClothing) {
 			character.addClothing(Main.game.getItemGen().generateClothing(ct, false), 1, false, false);
 			maxClothingCount--;
 			if(maxClothingCount<=0) {
@@ -2645,10 +2637,10 @@ public class CharacterUtils {
 				false);
 	}
 	
-	private static List<AbstractFetish> getAllowedFetishes(GameCharacter character) {
-		List<AbstractFetish> allowedFetishes = new ArrayList<>();
+	private static List<Fetish> getAllowedFetishes(GameCharacter character) {
+		List<Fetish> allowedFetishes = new ArrayList<>();
 		
-		for(AbstractFetish f : Fetish.getAllFetishes()) {
+		for(Fetish f : Fetish.getAllFetishes()) {
 			if (Fetish.FETISH_PURE_VIRGIN.equals(f)) {
 				if (character.hasVagina() && (character.getHistory() != Occupation.NPC_PROSTITUTE || Math.random()<=0.25f))
 					allowedFetishes.add(f);
@@ -2676,11 +2668,11 @@ public class CharacterUtils {
 	 * @param character The character to add fetishes to.
 	 * @param exclusions Any fetishes that should not be modified.
 	 */
-	public void addFetishes(GameCharacter character, AbstractFetish... exclusions) {
+	public void addFetishes(GameCharacter character, Fetish... exclusions) {
 		
-		List<AbstractFetish> availableFetishes = getAllowedFetishes(character);
+		List<Fetish> availableFetishes = getAllowedFetishes(character);
 		// If player preference for a fetish is set to 'always', then always allow it to be added:
-		for(AbstractFetish fetish : Fetish.getAllFetishes()) {
+		for(Fetish fetish : Fetish.getAllFetishes()) {
 			if(Main.getProperties().fetishPreferencesMap.get(fetish)==FetishPreference.SIX_ALWAYS.getValue()) {
 				availableFetishes.add(fetish);
 			}
@@ -2715,12 +2707,12 @@ public class CharacterUtils {
 			availableFetishes.remove(Fetish.FETISH_KINK_GIVING);
 		}
 		
-		Map<AbstractFetish, Integer> fetishMap = new HashMap<>();
-		Map<AbstractFetish, Map<String, Integer>> raceModifiers = character.getRace().getRacialFetishModifiers();
-		for(AbstractFetish fetish : availableFetishes) {
+		Map<Fetish, Integer> fetishMap = new HashMap<>();
+		Map<Fetish, Map<String, Integer>> raceModifiers = character.getRace().getRacialFetishModifiers();
+		for(Fetish fetish : availableFetishes) {
 			if(Main.getProperties().fetishPreferencesMap.get(fetish)==FetishPreference.SIX_ALWAYS.getValue()) {
 				character.addFetish(fetish);
-				
+
 			} else {
 				int weight = 0;
 				if(raceModifiers.containsKey(fetish)) {
@@ -2735,7 +2727,7 @@ public class CharacterUtils {
 			}
 		}
 		while(fetishesAssigned < numberOfFetishes && !fetishMap.isEmpty()) {
-			AbstractFetish f = Util.getRandomObjectFromWeightedMap(fetishMap);
+			Fetish f = Util.getRandomObjectFromWeightedMap(fetishMap);
 			character.addFetish(f);
 			fetishMap.remove(f);
 			fetishesAssigned++;
@@ -2746,9 +2738,9 @@ public class CharacterUtils {
 	
 	public void generateDesires(GameCharacter character) {
 		
-		List<AbstractFetish> availableFetishes = getAllowedFetishes(character);
+		List<Fetish> availableFetishes = getAllowedFetishes(character);
 		availableFetishes.removeAll(character.getFetishes(false));
-		for(AbstractFetish f : character.getFetishes(false)) {
+		for(Fetish f : character.getFetishes(false)) {
 			// Related fetishes cannot be loved and disliked at the same time:
 			if (Fetish.FETISH_PREGNANCY.equals(f)) {
 				availableFetishes.remove(Fetish.FETISH_VAGINAL_RECEIVING);
@@ -2764,11 +2756,11 @@ public class CharacterUtils {
 		int numberOfNegativeDesires = Util.randomItemFrom(negDesireProb);
 		
 		int desiresAssigned = 0;
-		List<AbstractFetish> fetishesLiked = new ArrayList<>(character.getFetishes(false));
+		List<Fetish> fetishesLiked = new ArrayList<>(character.getFetishes(false));
 		
-		Map<AbstractFetish, Integer> desireMap = new HashMap<>();
-		Map<AbstractFetish, Map<String, Integer>> raceModifiers = character.getRace().getRacialFetishModifiers();
-		for(AbstractFetish fetish : availableFetishes) {
+		Map<Fetish, Integer> desireMap = new HashMap<>();
+		Map<Fetish, Map<String, Integer>> raceModifiers = character.getRace().getRacialFetishModifiers();
+		for(Fetish fetish : availableFetishes) {
 			int weight = 0;
 			if(raceModifiers.containsKey(fetish)) {
 				// Racial modifier acts as a multiplier so fetishes can be disabled by race or player preferences
@@ -2781,7 +2773,7 @@ public class CharacterUtils {
 			}
 		}
 		while(desiresAssigned < numberOfPositiveDesires && !desireMap.isEmpty()) {
-			AbstractFetish f = Util.getRandomObjectFromWeightedMap(desireMap);
+			Fetish f = Util.getRandomObjectFromWeightedMap(desireMap);
 			character.setFetishDesire(f, FetishDesire.THREE_LIKE);
 			availableFetishes.remove(f);
 			desireMap.remove(f);
@@ -2791,7 +2783,7 @@ public class CharacterUtils {
 		
 		// Disliked fetishes:
 		// Related fetishes cannot be liked and disliked at the same time:
-		for(AbstractFetish f : fetishesLiked) {
+		for(Fetish f : fetishesLiked) {
 			if (Fetish.FETISH_VAGINAL_RECEIVING.equals(f)) {
 				availableFetishes.remove(Fetish.FETISH_PENIS_RECEIVING);
 			} else if (Fetish.FETISH_VAGINAL_GIVING.equals(f)) {
@@ -2826,8 +2818,8 @@ public class CharacterUtils {
 		availableFetishes.remove(Fetish.FETISH_PENIS_GIVING);
 		availableFetishes.remove(Fetish.FETISH_VAGINAL_RECEIVING);
 		
-		Map<AbstractFetish, Integer> negativeMap = new HashMap<>();
-		for(AbstractFetish fetish : availableFetishes) {
+		Map<Fetish, Integer> negativeMap = new HashMap<>();
+		for(Fetish fetish : availableFetishes) {
 			int weight = 0;
 			FetishPreference fp = FetishPreference.valueOf(Main.getProperties().fetishPreferencesMap.get(fetish));
 			if(raceModifiers.containsKey(fetish)) {
@@ -2842,7 +2834,7 @@ public class CharacterUtils {
 			}
 		}
 		while(desiresAssigned < numberOfNegativeDesires && !negativeMap.isEmpty()) {
-			AbstractFetish f = Util.getRandomObjectFromWeightedMap(negativeMap);
+			Fetish f = Util.getRandomObjectFromWeightedMap(negativeMap);
 			int rnd = Util.random.nextInt(negativeMap.get(f))+1;
 			int weight = FetishPreference.valueOf(Main.getProperties().fetishPreferencesMap.get(f)).getHate();
 			if(raceModifiers.containsKey(f)) {
@@ -2943,7 +2935,7 @@ public class CharacterUtils {
 					// Don't add leg clothing if dress has been added
 				} else {
 					if((slot.isCoreClothing() || Math.random()>0.75f || (slot.isJewellery() && character.getBodyMaterial().isRequiresPiercing())) && !character.isSlotIncompatible(slot) && character.getClothingInSlot(slot)==null) {
-						List<AbstractClothingType> clothingToUse = ClothingType.getCommonClothingMapFemaleIncludingAndrogynous().get(slot);
+						var clothingToUse = ClothingType.getCommonClothingMapFemaleIncludingAndrogynous().get(slot);
 						if(character.getHistory()==Occupation.NPC_PROSTITUTE) {
 							clothingToUse = ClothingType.getSuitableFeminineClothing().get(Occupation.NPC_PROSTITUTE);
 						}
@@ -2961,7 +2953,7 @@ public class CharacterUtils {
 							
 							
 							if(!clothingToUse.isEmpty()) {
-								AbstractClothingType ct = getClothingTypeForSlot(character, slot, clothingToUse);
+								var ct = getClothingTypeForSlot(character, slot, clothingToUse);
 								
 								if(ct!=null) {
 									AbstractClothing clothingToAdd = Main.game.getItemGen().generateClothing(
@@ -2998,7 +2990,7 @@ public class CharacterUtils {
 				} else {
 					if((slot.isCoreClothing() || Math.random()>0.75f || (slot.isJewellery() && character.getBodyMaterial().isRequiresPiercing())) && !character.isSlotIncompatible(slot) && character.getClothingInSlot(slot)==null) {
 						
-						List<AbstractClothingType> clothingToUse = ClothingType.getCommonClothingMapMaleIncludingAndrogynous().get(slot);
+						var clothingToUse = ClothingType.getCommonClothingMapMaleIncludingAndrogynous().get(slot);
 						
 						if(!clothingToUse.isEmpty()) {
 							BodyPartClothingBlock block = slot.getBodyPartClothingBlock(character);
@@ -3013,7 +3005,7 @@ public class CharacterUtils {
 								).collect(Collectors.toList());
 							
 							if(!clothingToUse.isEmpty()) {
-								AbstractClothingType ct = getClothingTypeForSlot(character, slot, clothingToUse);
+								var ct = getClothingTypeForSlot(character, slot, clothingToUse);
 								
 								if(ct!=null) {
 									AbstractClothing clothingToAdd = Main.game.getItemGen().generateClothing(
@@ -3036,7 +3028,7 @@ public class CharacterUtils {
 	}
 	
 	public void equipPiercings(GameCharacter character, boolean replaceUnsuitableClothing) {
-		 Map<InventorySlot, List<AbstractClothingType>> clothingMap = ClothingType.getCommonClothingMapMaleIncludingAndrogynous();
+		var clothingMap = ClothingType.getCommonClothingMapMaleIncludingAndrogynous();
 		 
 		if(character.isFeminine() || character.hasFetish(Fetish.FETISH_CROSS_DRESSER)) {
 			clothingMap = ClothingType.getCommonClothingMapFemaleIncludingAndrogynous();
@@ -3055,10 +3047,10 @@ public class CharacterUtils {
 				if(!clothingMap.get(slot).isEmpty()) {
 
 					BodyPartClothingBlock block = slot.getBodyPartClothingBlock(character);
-					List<AbstractClothingType> clothingToUse = clothingMap.get(slot);
+					var clothingToUse = clothingMap.get(slot);
 					clothingToUse = clothingToUse.stream().filter((c) -> (block==null || !Collections.disjoint(c.getItemTags(slot), block.getRequiredTags()))).collect(Collectors.toList());
 					
-					AbstractClothingType ct = getClothingTypeForSlot(character, slot, clothingToUse);
+					var ct = getClothingTypeForSlot(character, slot, clothingToUse);
 					
 					if(ct!=null) {
 						character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ct, false), slot, true, character);
@@ -3068,16 +3060,14 @@ public class CharacterUtils {
 		}
 	}
 	
-	private static AbstractClothingType getClothingTypeForSlot(GameCharacter character, InventorySlot slot, List<AbstractClothingType> clothingOptions) {
-		List<AbstractClothingType> availableClothing = new ArrayList<>();
+	private static ClothingType getClothingTypeForSlot(GameCharacter character, InventorySlot slot, List<ClothingType> clothingOptions) {
+		var availableClothing = new ArrayList<ClothingType>();
 
-		boolean canEquip=true;
-		
-		for(AbstractClothingType ct : clothingOptions) {
+		for(var ct : clothingOptions) {
 			if(!ct.getEquipSlots().contains(slot)) {
 				continue;
 			}
-			canEquip=true;
+			boolean canEquip=true;
 			
 			if(slot==InventorySlot.CHEST && !character.hasBreasts()) {
 				canEquip = false;
@@ -3189,7 +3179,7 @@ public class CharacterUtils {
 		if(Math.random()>tattooChance) {
 			return;
 		}
-		
+
 		// Add tattoos:
 		// Colour selection:
 		Map<List<Colour>, Integer> colourMap = new HashMap<>();
@@ -3202,13 +3192,13 @@ public class CharacterUtils {
 			colourMap.put(Util.newArrayListOfValues(PresetColour.CLOTHING_BLUE, PresetColour.CLOTHING_BLUE_LIGHT, PresetColour.CLOTHING_BLUE_NAVY), 1);
 		}
 		List<Colour> colourList = Util.getRandomObjectFromWeightedMap(colourMap);
-		
-		List<AbstractTattooType> availableTypes = new ArrayList<>(TattooType.getAllTattooTypes());
+
+		List<TattooType> availableTypes = new ArrayList<>(TattooType.getAllTattooTypes());
 		availableTypes.remove(TattooType.getTattooTypeFromId("innoxia_misc_none"));
 		availableTypes.removeIf(tattoo->tattoo.isUnique());
-		
+
 		List<InventorySlot> commonSlots = new ArrayList<>(InventorySlot.getCommonTattooSlots());
-		
+
 		int tattooCount = 1 + Util.random.nextInt(maxTattooCount);
 //		System.out.println("Tattoos applied: "+tattooCount+"/"+maxTattooCount);
 		for(int i=0; i<tattooCount; i++) {
@@ -3216,7 +3206,7 @@ public class CharacterUtils {
 				break;
 			}
 			// Type selection:
-			AbstractTattooType tattooType = Util.randomItemFrom(availableTypes);
+			TattooType tattooType = Util.randomItemFrom(availableTypes);
 			if(tattooType.isLimitedSlotAvailability()) {
 				availableTypes.remove(tattooType);
 			}
@@ -3234,7 +3224,7 @@ public class CharacterUtils {
 								character.getFetishDesire(Fetish.FETISH_PREGNANCY).isPositive()?"Breed me!":null,
 								"Fuck me!",
 								"Hot Pussy"));
-						
+
 					} else {
 						writing = Util.randomItemFrom(Util.newArrayListOfValues(
 								character.getFetishDesire(Fetish.FETISH_SUBMISSIVE).isPositive()?"Dominate me":null,
@@ -3263,7 +3253,7 @@ public class CharacterUtils {
 			}
 		}
 	}
-	
+
 	public void applyDirtiness(GameCharacter character) {
 		ArrayList<InventorySlot> validSlots = new ArrayList<>();
 		
@@ -3285,7 +3275,7 @@ public class CharacterUtils {
 	public List<AbstractClothing> generateEnchantedClothingForTrader(GameCharacter trader, List<AbstractClothing> clothingToSell, int numberOfUncommonsToGenerate, int numberofRaresToGenerate) {
 
 		List<AbstractClothing> clothingGenerated = new ArrayList<>();
-		List<AbstractClothingType> enchantedClothingTypes = new ArrayList<>();
+		List<ClothingType> enchantedClothingTypes = new ArrayList<>();
 		
 		clothingToSell.forEach(c -> {
 			if(c.getClothingType().getEffects().isEmpty() && c.getClothingType().getRarity()==Rarity.COMMON)
@@ -3295,7 +3285,7 @@ public class CharacterUtils {
 			if(enchantedClothingTypes.isEmpty()) {
 				break;
 			}
-			AbstractClothingType type = Util.randomItemFrom(enchantedClothingTypes);
+			ClothingType type = Util.randomItemFrom(enchantedClothingTypes);
 			enchantedClothingTypes.remove(type);
 			AbstractClothing c = Main.game.getItemGen().generateClothingWithEnchantment(type);
 			c.setEnchantmentKnown(trader, true);
@@ -3305,7 +3295,7 @@ public class CharacterUtils {
 			if(enchantedClothingTypes.isEmpty()) {
 				break;
 			}
-			AbstractClothingType type = Util.randomItemFrom(enchantedClothingTypes);
+			ClothingType type = Util.randomItemFrom(enchantedClothingTypes);
 			enchantedClothingTypes.remove(type);
 			AbstractClothing c = Main.game.getItemGen().generateRareClothing(type);
 			c.setEnchantmentKnown(trader, true);

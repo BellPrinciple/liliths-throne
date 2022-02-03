@@ -11,7 +11,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.valueEnums.AgeCategory;
 import com.lilithsthrone.game.character.body.valueEnums.CupSize;
 import com.lilithsthrone.game.character.body.valueEnums.Lactation;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishPreference;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -19,7 +18,6 @@ import com.lilithsthrone.game.character.gender.PronounType;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.persona.SexualOrientationPreference;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesPreference;
@@ -104,7 +102,7 @@ public class OptionsController {
 	}
 	
 	public static void initFetishListeners() {
-		for (AbstractFetish f : Fetish.getAllFetishes()) {
+		for (Fetish f : Fetish.getAllFetishes()) {
 			if (!f.isContentEnabled()) {
 				continue;
 			}
@@ -142,7 +140,7 @@ public class OptionsController {
 	
 	public static void initFurryListeners() {
 		String id;
-		for (AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+		for (Subspecies s : Subspecies.getAllSubspecies()) {
 			id = "SUBSPECIES_PREFERENCE_INFO_"+Subspecies.getIdFromSubspecies(s);
 			if (MainController.document.getElementById(id) != null) {
 				MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(Util.capitaliseSentence(s.getName(null)), s.getDescription(null)));
@@ -282,7 +280,7 @@ public class OptionsController {
 			id = "ALL_FURRY_"+preference;
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
-					for (AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+					for (Subspecies subspecies : Subspecies.getAllSubspecies()) {
 						Main.getProperties().setFeminineFurryPreference(subspecies, preference);
 						Main.getProperties().setMasculineFurryPreference(subspecies, preference);
 					}
@@ -295,7 +293,7 @@ public class OptionsController {
 			id = "ALL_SPAWN_"+preference;
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
-					for (AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+					for (Subspecies subspecies : Subspecies.getAllSubspecies()) {
 						Main.getProperties().setFeminineSubspeciesPreference(subspecies, preference);
 						Main.getProperties().setMasculineSubspeciesPreference(subspecies, preference);
 					}
@@ -305,7 +303,7 @@ public class OptionsController {
 			}
 		}
 		
-		for (AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+		for (Subspecies subspecies : Subspecies.getAllSubspecies()) {
 			String subspeciesId = Subspecies.getIdFromSubspecies(subspecies);
 			for (FurryPreference preference : FurryPreference.values()) {
 				id = "FEMININE_"+preference+"_"+subspeciesId;

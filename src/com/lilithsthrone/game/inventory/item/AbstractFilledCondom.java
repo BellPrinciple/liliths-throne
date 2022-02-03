@@ -17,8 +17,8 @@ import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
 import com.lilithsthrone.game.character.race.RaceStage;
+import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
@@ -41,46 +41,46 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 	
 	private FluidStored cum;
 	
-	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, GameCharacter cumProvider, FluidCum cum, int millilitresStored) {
+	public AbstractFilledCondom(ItemType itemType, Colour colour, GameCharacter cumProvider, FluidCum cum, int millilitresStored) {
 //		super(itemType);
-//		
+//
 //		this.cumProvider = cumProvider.getId();
 //		this.cum = new FluidStored(cumProvider, new FluidCum(cum), millilitresStored);
 //		this.millilitresStored = millilitresStored;
-//		
+//
 //		this.setColour(0, colour);
 //		SVGString = getSVGString(itemType.getPathNameInformation().get(0).getPathName(), colour);
-		
+
 		this(itemType, colour, cumProvider, new FluidStored(cumProvider, new FluidCum(cum), millilitresStored), millilitresStored);
 	}
 
-	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, GameCharacter cumProvider, FluidStored cum, int millilitresStored) {
+	public AbstractFilledCondom(ItemType itemType, Colour colour, GameCharacter cumProvider, FluidStored cum, int millilitresStored) {
 //		super(itemType);
-//		
+//
 //		this.cumProvider = cumProvider.getId();
 //		this.cum = cum;
 //		this.millilitresStored = millilitresStored;
-//		
+//
 //		this.setColour(0, colour);
 //		SVGString = getSVGString(itemType.getPathNameInformation().get(0).getPathName(), colour);
 
 		this(itemType, colour, cum);
 	}
 
-	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, FluidStored cum) {
+	public AbstractFilledCondom(ItemType itemType, Colour colour, FluidStored cum) {
 		super(itemType);
 		
 		this.cum = cum;
-		
+
 		this.setColour(0, colour);
 		SVGString = getSVGString(itemType.getPathNameInformation().get(0).getPathName(), colour);
 	}
 	
-	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, String cumProviderId, Body cumProviderBody, FluidCum cum, int millilitresStored) {
+	public AbstractFilledCondom(ItemType itemType, Colour colour, String cumProviderId, Body cumProviderBody, FluidCum cum, int millilitresStored) {
 		super(itemType);
 		
 		this.cum = new FluidStored(cumProviderId, cumProviderBody, new FluidCum(cum), millilitresStored);
-		
+
 		this.setColour(0, colour);
 		SVGString = getSVGString(itemType.getPathNameInformation().get(0).getPathName(), colour);
 	}
@@ -133,24 +133,24 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 		float ml = parentElement.getAttribute("millilitresStored").isEmpty()
 				?25
 				:Float.valueOf(parentElement.getAttribute("millilitresStored"));
-		
+
 		FluidStored fs = null;;
 		if(parentElement.getElementsByTagName("fluidStored").item(0)!=null) {
 			fs = FluidStored.loadFromXML(null, (Element) parentElement.getElementsByTagName("fluidStored").item(0), doc);
-			
+
 		} else { // Old version support to generate Body based on cum type:
 			FluidCum fluidCum = ((Element) parentElement.getElementsByTagName("cum").item(0)==null
 					?new FluidCum(FluidType.CUM_HUMAN)
 					:FluidCum.loadFromXML("cum", (Element) parentElement.getElementsByTagName("cum").item(0), doc));
-			
-			AbstractRacialBody racialBody = fluidCum.getType().getRace().getRacialBody();
-			
+
+			RacialBody racialBody = fluidCum.getType().getRace().getRacialBody();
+
 			fs = new FluidStored(provider, Main.game.getCharacterUtils().generateBody(null, Gender.M_P_MALE, racialBody, RaceStage.GREATER), fluidCum, ml);
 		}
-		
-		
+
+
 		return new AbstractFilledCondom(
-				ItemType.getIdToItemMap().get(parentElement.getAttribute("id")),
+				ItemType.table.exact(parentElement.getAttribute("id")).orElse(null),
 				PresetColour.getColourFromId(parentElement.getAttribute("colour")),
 				fs);
 	}
@@ -249,7 +249,7 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 	public float getMillilitresStored() {
 		return getCum().getMillilitres();
 	}
-	
+
 	@Override
 	public boolean isAbleToBeUsed(GameCharacter user, GameCharacter target) {
 		if(!target.isPlayer() && target.isUnique() && !target.isSlave()) {

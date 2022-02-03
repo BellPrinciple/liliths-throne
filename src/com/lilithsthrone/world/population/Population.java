@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesSpawnRarity;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -23,7 +22,7 @@ public class Population {
 	private boolean pluralPopulation;
 	private AbstractPopulationType type;
 	private PopulationDensity density;
-	private Map<AbstractSubspecies, SubspeciesSpawnRarity> species; //TODO refactor this into a list of AbstractSubspecies as the SubspeciesSpawnRarity is never used
+	private Map<Subspecies,SubspeciesSpawnRarity> species; //TODO refactor this into a list of Subspecies as the SubspeciesSpawnRarity is never used
 	
 	// For use when loaded from external files:
 	
@@ -38,7 +37,7 @@ public class Population {
 	private List<String> subspeciesIdToAdd;
 	private List<String> subspeciesIdToRemove;
 	
-	public Population(boolean pluralPopulation, AbstractPopulationType type, PopulationDensity density, Map<AbstractSubspecies, SubspeciesSpawnRarity> species) {
+	public Population(boolean pluralPopulation, AbstractPopulationType type, PopulationDensity density, Map<Subspecies,SubspeciesSpawnRarity> species) {
 		this.pluralPopulation = pluralPopulation;
 		this.type = type;
 		this.density = density;
@@ -59,10 +58,10 @@ public class Population {
 		return density;
 	}
 
-	public Map<AbstractSubspecies, SubspeciesSpawnRarity> getSpecies() {
+	public Map<Subspecies,SubspeciesSpawnRarity> getSpecies() {
 		if(species==null) {
 			if(subspeciesWorldTypeId!=null && !subspeciesWorldTypeId.isEmpty()) {
-				List<AbstractSubspecies> remove = new ArrayList<>();
+				var remove = new ArrayList<Subspecies>();
 				if(subspeciesIdToRemove!=null) {
 					for(String id : subspeciesIdToRemove) {
 						remove.add(Subspecies.getSubspeciesFromId(id));

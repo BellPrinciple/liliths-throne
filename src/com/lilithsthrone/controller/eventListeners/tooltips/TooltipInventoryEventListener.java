@@ -11,7 +11,6 @@ import org.w3c.dom.events.EventListener;
 
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.Covering;
@@ -21,17 +20,17 @@ import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.types.WingType;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.markings.AbstractTattooType;
 import com.lilithsthrone.game.character.markings.Scar;
 import com.lilithsthrone.game.character.markings.Tattoo;
 import com.lilithsthrone.game.character.markings.TattooCountType;
 import com.lilithsthrone.game.character.markings.TattooCounter;
 import com.lilithsthrone.game.character.markings.TattooCounterType;
+import com.lilithsthrone.game.character.markings.TattooType;
 import com.lilithsthrone.game.character.markings.TattooWriting;
 import com.lilithsthrone.game.character.markings.TattooWritingStyle;
 import com.lilithsthrone.game.combat.Attack;
 import com.lilithsthrone.game.combat.DamageType;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
 import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
@@ -41,16 +40,16 @@ import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ShopTransaction;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
+import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.EnchantingUtils;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
+import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
+import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.Pattern;
 import com.lilithsthrone.rendering.RenderingEngine;
@@ -75,20 +74,20 @@ public class TooltipInventoryEventListener implements EventListener {
 	private InventorySlot invSlot;
 	
 	private AbstractItem item;
-	private AbstractItemType genericItem;
+	private ItemType genericItem;
 	
 	private AbstractWeapon weapon;
-	private AbstractWeaponType genericWeapon;
+	private WeaponType genericWeapon;
 	private DamageType dt;
 	private AbstractWeapon dyeWeapon;
 	private DamageType damageType;
 	
 	private AbstractClothing clothing;
-	private AbstractClothingType genericClothing;
+	private ClothingType genericClothing;
 	private AbstractClothing dyeClothing;
 
 	private Tattoo tattoo;
-	private AbstractTattooType genericTattoo;
+	private TattooType genericTattoo;
 	
 	private int colourIndex;
 	
@@ -646,7 +645,7 @@ public class TooltipInventoryEventListener implements EventListener {
 		}
 		boolean dirty = equippedToCharacter.isDirtySlot(invSlot);
 		boolean hasDescription = description!=null && !description.isEmpty();
-		
+
 		Map<GameCharacter, Integer> cummedOnInfo = new HashMap<>();
 		if(Main.game.isInSex()) {
 			for(Entry<GameCharacter, Map<InventorySlot, Integer>> entry : Main.sex.getAmountCummedOnByPartners(equippedToCharacter).entrySet()) {
@@ -664,21 +663,21 @@ public class TooltipInventoryEventListener implements EventListener {
 		}
 		Main.mainController.setTooltipSize(TOOLTIP_WIDTH, 60+(dirty||!cummedOnInfo.isEmpty()||hasDescription?8:0)+descHeight);
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append("<div class='title'>"
 						+ Util.capitaliseSentence(invSlot.getName())+(title!=null&&!title.isEmpty()?": "+title:"")
 				+ "</div>");
-		
+
 		if(dirty || !cummedOnInfo.isEmpty() || hasDescription) {
 			sb.append("<div class='description' style='min-height:0; height:"+descHeight+"px; text-align:center;'>");
-			
+
 			if(hasDescription) {
 				sb.append(description);
 				if(dirty) {
 					sb.append("<br/>");
 				}
 			}
-			
+
 			if(dirty) {
 				sb.append("[npc.NamePos] "+invSlot.getName()+" "+(invSlot.isPlural()?"have":"has")
 						+ " been [style.colourDirty(dirtied)] by sexual fluids!");
@@ -695,13 +694,13 @@ public class TooltipInventoryEventListener implements EventListener {
 					sb.append("[style.italicsDisabled(No fluid is available...)]");
 				}
 			}
-			
-			
-			
+
+
+
 			sb.append("</div>");
-			
+
 		}
-		
+
 		Main.mainController.setTooltipContent(UtilText.parse(equippedToCharacter, sb.toString()));
 	}
 	
@@ -731,7 +730,7 @@ public class TooltipInventoryEventListener implements EventListener {
 		return this;
 	}
 	
-	public TooltipInventoryEventListener setGenericItem(AbstractItemType genericItem) {
+	public TooltipInventoryEventListener setGenericItem(ItemType genericItem) {
 		resetVariables();
 		this.genericItem = genericItem;
 		return this;
@@ -776,27 +775,27 @@ public class TooltipInventoryEventListener implements EventListener {
 		return this;
 	}
 	
-	public TooltipInventoryEventListener setGenericClothing(AbstractClothingType genericClothing) {
+	public TooltipInventoryEventListener setGenericClothing(ClothingType genericClothing) {
 		resetVariables();
 		this.genericClothing = genericClothing;
 		return this;
 	}
 	
-	public TooltipInventoryEventListener setGenericClothing(AbstractClothingType genericClothing, Colour colour) {
+	public TooltipInventoryEventListener setGenericClothing(ClothingType genericClothing, Colour colour) {
 		resetVariables();
 		this.genericClothing = genericClothing;
 		this.colour = colour;
 		return this;
 	}
 	
-	public TooltipInventoryEventListener setGenericTattoo(AbstractTattooType genericTattoo) {
+	public TooltipInventoryEventListener setGenericTattoo(TattooType genericTattoo) {
 		resetVariables();
 		this.genericTattoo = genericTattoo;
 		invSlot = genericTattoo.getSlotAvailability().contains(InventorySlot.TORSO_UNDER)?InventorySlot.TORSO_UNDER:genericTattoo.getSlotAvailability().get(0);
 		return this;
 	}
 
-	public TooltipInventoryEventListener setGenericWeapon(AbstractWeaponType genericWeapon, DamageType dt) {
+	public TooltipInventoryEventListener setGenericWeapon(WeaponType genericWeapon, DamageType dt) {
 		resetVariables();
 		this.genericWeapon = genericWeapon;
 		this.dt = dt;
@@ -1135,7 +1134,7 @@ public class TooltipInventoryEventListener implements EventListener {
 				tooltipSB.append("<br/><b>"+s+"</b>");
 			}
 			
-			for(Entry<AbstractAttribute, Integer> entry : absWep.getAttributeModifiers().entrySet()) {
+			for(Entry<Attribute, Integer> entry : absWep.getAttributeModifiers().entrySet()) {
 				tooltipSB.append("<br/><b>"+entry.getKey().getFormattedValue(entry.getValue())+"</b>");
 			}
 		
@@ -1143,7 +1142,7 @@ public class TooltipInventoryEventListener implements EventListener {
 				tooltipSB.append("<br/>[style.boldSpell(Spell)]<b>:</b> <b style='color:"+s.getSpellSchool().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(s.getName())+"</b>");
 			}
 		
-			for(AbstractCombatMove cm : absWep.getCombatMoves()) {
+			for(CombatMove cm : absWep.getCombatMoves()) {
 				tooltipSB.append("<br/>[style.boldCombat(Move)]<b>:</b> "+Util.capitaliseSentence(cm.getName(0, Main.game.getPlayer())));
 			}
 			
@@ -1361,7 +1360,7 @@ public class TooltipInventoryEventListener implements EventListener {
 						}
 					}
 				}
-				for(Entry<AbstractAttribute, Integer> entry : absClothing.getAttributeModifiers().entrySet()) {
+				for(Entry<Attribute, Integer> entry : absClothing.getAttributeModifiers().entrySet()) {
 					tooltipSB.append("<br/><b>"+entry.getKey().getFormattedValue(entry.getValue())+"</b>");
 				}
 			}
@@ -1576,7 +1575,7 @@ public class TooltipInventoryEventListener implements EventListener {
 					i++;
 				}
 			}
-			for(Entry<AbstractAttribute, Integer> entry : tattoo.getAttributeModifiers().entrySet()) {
+			for(Entry<Attribute, Integer> entry : tattoo.getAttributeModifiers().entrySet()) {
 				tooltipSB.append((i>0?"<br/>":"")+"<b>"+entry.getKey().getFormattedValue(entry.getValue())+"</b>");
 				i++;
 			}
@@ -1598,7 +1597,7 @@ public class TooltipInventoryEventListener implements EventListener {
 		tooltipSB.append("</div>");
 
 		tooltipSB.append("</div>");
-		
+
 		tooltipSB.append("<div class='container-full-width' style='padding:8px; height:106px;'>");
 			tooltipSB.append(tattoo.getType().getDescription());
 		
@@ -1625,7 +1624,7 @@ public class TooltipInventoryEventListener implements EventListener {
 		
 		if (tattoo.getWriting()!=null && !tattoo.getWriting().getText().isEmpty()) {
 			int writingHeight = tattoo.getWriting().getText().split("<br/>").length;
-			
+
 			tooltipSB.append("<div class='container-full-width' style='padding:4px; height:"+(28 + writingHeight*LINE_HEIGHT)+"px; text-align:center;'>");
 			tooltipSB.append("The writing reads:<br/>");
 			tooltipSB.append(tattoo.getFormattedWritingOutput()

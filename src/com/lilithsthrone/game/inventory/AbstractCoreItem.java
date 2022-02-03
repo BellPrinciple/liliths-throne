@@ -5,16 +5,15 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
+import com.lilithsthrone.game.character.attributes.Attribute;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
+import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.XMLSaving;
@@ -34,7 +33,7 @@ public abstract class AbstractCoreItem implements XMLSaving {
 
 	protected List<Colour> colours;
 	
-	protected Map<AbstractAttribute, Integer> attributeModifiers;
+	protected Map<Attribute,Integer> attributeModifiers;
 	
 	protected Set<ItemTag> itemTags;
 
@@ -43,7 +42,7 @@ public abstract class AbstractCoreItem implements XMLSaving {
 			String SVGString,
 			Colour colour,
 			Rarity rarity,
-			Map<AbstractAttribute, Integer> attributeModifiers) {
+			Map<Attribute,Integer> attributeModifiers) {
 		this(name,
 				namePlural,
 				SVGString,
@@ -58,7 +57,7 @@ public abstract class AbstractCoreItem implements XMLSaving {
 			String SVGString,
 			Colour colour,
 			Rarity rarity,
-			Map<AbstractAttribute, Integer> attributeModifiers,
+			Map<Attribute,Integer> attributeModifiers,
 			Set<ItemTag> itemTags) {
 		super();
 		this.name = name;
@@ -71,7 +70,7 @@ public abstract class AbstractCoreItem implements XMLSaving {
 		this.itemTags = new HashSet<>();
 		
 		if (attributeModifiers != null) {
-			for (Entry<AbstractAttribute, Integer> e : attributeModifiers.entrySet()) {
+			for (var e : attributeModifiers.entrySet()) {
 				this.attributeModifiers.put(e.getKey(), e.getValue());
 			}
 		}
@@ -102,7 +101,7 @@ public abstract class AbstractCoreItem implements XMLSaving {
 		return 100;
 	}
 	
-	public AbstractItemEffectType getEnchantmentEffect() {
+	public ItemEffectType getEnchantmentEffect() {
 		return null;
 	}
 	
@@ -218,11 +217,11 @@ public abstract class AbstractCoreItem implements XMLSaving {
 		colours.add(index, colour);
 	}
 
-	public Map<AbstractAttribute, Integer> getAttributeModifiers() {
+	public Map<Attribute,Integer> getAttributeModifiers() {
 		return attributeModifiers;
 	}
 
-	public void setAttributeModifiers(Map<AbstractAttribute, Integer> attributeModifiers) {
+	public void setAttributeModifiers(Map<Attribute,Integer> attributeModifiers) {
 		this.attributeModifiers = attributeModifiers;
 	}
 	

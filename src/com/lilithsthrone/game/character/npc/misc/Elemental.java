@@ -36,7 +36,7 @@ import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
 import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
+import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -45,8 +45,6 @@ import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityCategory;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -66,7 +64,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class Elemental extends NPC {
 	private String summonerID;
-	private AbstractSubspecies passiveForm;
+	private Subspecies passiveForm;
 
 	public Elemental(boolean isImported) {
 		this(Gender.F_V_B_FEMALE, null, isImported);
@@ -327,7 +325,7 @@ public class Elemental extends NPC {
 	}
 	
 	@Override
-	public boolean addPerk(int row, AbstractPerk perk) {
+	public boolean addPerk(int row, Perk perk) {
 		perks.putIfAbsent(row, new HashSet<>());
 		
 		if (perks.get(row).contains(perk)) {
@@ -346,12 +344,12 @@ public class Elemental extends NPC {
 	}
 
 	@Override
-	public AbstractSubspecies getSubspeciesOverride() {
+	public Subspecies getSubspeciesOverride() {
 		return getSubspecies();
 	}
 
 	@Override
-	public AbstractRace getSubspeciesOverrideRace() {
+	public Race getSubspeciesOverrideRace() {
 		return Race.ELEMENTAL;
 	}
 	
@@ -359,8 +357,8 @@ public class Elemental extends NPC {
 		this.resetSpells();
 		
 		// Add spells:
-		for(Set<AbstractPerk> perkSet : this.getPerksMap().values()) {
-			for(AbstractPerk p : perkSet) {
+		for(var perkSet : this.getPerksMap().values()) {
+			for(var p : perkSet) {
 				if(p.getSchool()==school) {
 					if(p.getSpellUpgrade()!=null) {
 						this.addSpellUpgrade(p.getSpellUpgrade());
@@ -501,14 +499,14 @@ public class Elemental extends NPC {
 	/**
 	 * @return The passive, ethereal form which this elemental spends most of their time as. <b>Returns null</b> when the form should be the default 'wisp'.
 	 */
-	public AbstractSubspecies getPassiveForm() {
+	public Subspecies getPassiveForm() {
 		return passiveForm;
 	}
 
 	/**
 	 * @param passiveForm The passive, ethereal form which this elemental spends most of their time as. Pass in null for a default 'wisp' form.
 	 */
-	public void setPassiveForm(AbstractSubspecies passiveForm) {
+	public void setPassiveForm(Subspecies passiveForm) {
 		this.passiveForm = passiveForm;
 	}
 	

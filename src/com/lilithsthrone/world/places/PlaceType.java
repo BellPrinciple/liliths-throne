@@ -3,7 +3,6 @@ package com.lilithsthrone.world.places;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,13 +19,11 @@ import com.lilithsthrone.game.character.npc.submission.FortressFemalesLeader;
 import com.lilithsthrone.game.character.npc.submission.FortressMalesLeader;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesSpawnRarity;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.game.dialogue.encounters.Encounter;
 import com.lilithsthrone.game.dialogue.npcDialogue.dominion.DaddyDialogue;
 import com.lilithsthrone.game.dialogue.places.dominion.DemonHome;
@@ -96,7 +93,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Bearing;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.EntranceType;
@@ -129,8 +125,8 @@ public interface PlaceType {
 		return PresetColour.MAP_BACKGROUND;
 	}
 
-	default AbstractEncounter getEncounterType() {
-		var possibleEncountersMap = new HashMap<AbstractEncounter,Float>();
+	default Encounter getEncounterType() {
+		var possibleEncountersMap = new HashMap<Encounter,Float>();
 		for(var enc : Encounter.getAddedEncounters(getId()))
 			possibleEncountersMap.put(enc,enc.getTotalChanceValue());
 		// If a value of >100 is used for the encounter chance, then all other encounters with chances of <=100 are discarded
@@ -190,9 +186,9 @@ public interface PlaceType {
 
 	Darkness getDarkness();
 
-	default String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+	default String getSVGString(Set<PlaceUpgrade> upgrades) {
 		return upgrades.stream()
-		.map(AbstractPlaceUpgrade::getSVGOverride)
+		.map(PlaceUpgrade::getSVGOverride)
 		.filter(Objects::nonNull)
 		.findFirst()
 		.orElse(null);
@@ -211,11 +207,11 @@ public interface PlaceType {
 		return null;
 	}
 
-	default AbstractWorldType getParentWorldType() {
+	default WorldType getParentWorldType() {
 		return null;
 	}
 
-	default AbstractPlaceType getParentPlaceType() {
+	default PlaceType getParentPlaceType() {
 		return null;
 	}
 
@@ -227,11 +223,11 @@ public interface PlaceType {
 		return "";
 	}
 
-	default ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+	default ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 		return new ArrayList<>();
 	}
 
-	default ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+	default ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 		return new ArrayList<>();
 	}
 
@@ -270,7 +266,7 @@ public interface PlaceType {
 	}
 
 	/**
-	 * @return true if over-desk and on chair sex positions are available in this location. This overrides AbstractWorldType's method of the same name.
+	 * @return true if over-desk and on chair sex positions are available in this location. This overrides WorldType's method of the same name.
 	 */
 	default boolean isFurniturePresent() {
 		return false;
@@ -284,7 +280,7 @@ public interface PlaceType {
 	}
 
 	/**
-	 * @return The name which should be used in the against desk sex position, in the X place in: 'Against X'. This overrides AbstractWorldType's method of the same name.
+	 * @return The name which should be used in the against desk sex position, in the X place in: 'Against X'. This overrides WorldType's method of the same name.
 	 */
 	default String getDeskName() {
 		return "desk";
@@ -298,7 +294,7 @@ public interface PlaceType {
 	}
 
 	/**
-	 * @return true if the player is able to loiter in this location. This overrides AbstractWorldType's method of the same name.
+	 * @return true if the player is able to loiter in this location. This overrides WorldType's method of the same name.
 	 */
 	default boolean isLoiteringEnabled() {
 		return false;
@@ -316,7 +312,7 @@ public interface PlaceType {
 	}
 
 	/**
-	 * @return true if against wall position is available in this location. This overrides AbstractWorldType's method of the same name.
+	 * @return true if against wall position is available in this location. This overrides WorldType's method of the same name.
 	 */
 	default boolean isWallsPresent() {
 		return false;
@@ -330,7 +326,7 @@ public interface PlaceType {
 	}
 
 	/**
-	 * @return The name which should be used in the against wall sex position, in the X place in: 'Against X'. This overrides AbstractWorldType's method of the same name.
+	 * @return The name which should be used in the against wall sex position, in the X place in: 'Against X'. This overrides WorldType's method of the same name.
 	 */
 	default String getWallName() {
 		return "wall";
@@ -765,7 +761,7 @@ public interface PlaceType {
 			return DOMINION_STREET.getPopulation();
 		}
 	};
-	
+
 	public static final AbstractPlaceType DOMINION_STREET_HARPY_NESTS = new AbstractPlaceType(
 			WorldRegion.DOMINION,
 			"Dominion Streets",
@@ -1270,7 +1266,7 @@ public interface PlaceType {
 				return PresetColour.BASE_GREEN_LIGHT;
 			}
 			return PresetColour.BASE_CRIMSON;
-		} 
+		}
 		@Override
 		public List<Population> getPopulation() {
 			return Util.newArrayListOfValues(new Population(false, PopulationType.ENFORCER, PopulationDensity.ONE, Util.newHashMapOfValues(new Value<>(Subspecies.HORSE_MORPH, SubspeciesSpawnRarity.TEN))));
@@ -2173,7 +2169,7 @@ public interface PlaceType {
 		@Override
 		protected DialogueNode getBaseDialogue(Cell cell) {
 			if(cell!=null) {
-				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
+				for(PlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
 					if(pu.getRoomDialogue(cell)!=null) {
 						return pu.getRoomDialogue(cell);
 					}
@@ -2182,11 +2178,11 @@ public interface PlaceType {
 			return LilayaHomeGeneric.ROOM_WINDOW;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 			if(upgrades.contains(PlaceUpgrade.LILAYA_GUEST_ROOM)) {
 				return PlaceUpgrade.getGuestRoomUpgrades();
 				
@@ -2240,7 +2236,7 @@ public interface PlaceType {
 		@Override
 		protected DialogueNode getBaseDialogue(Cell cell) {
 			if(cell!=null) {
-				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
+				for(PlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
 					if(pu.getRoomDialogue(cell)!=null) {
 						return pu.getRoomDialogue(cell);
 					}
@@ -2249,11 +2245,11 @@ public interface PlaceType {
 			return LilayaHomeGeneric.ROOM_GARDEN_GROUND_FLOOR;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 			return LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR.getAvailablePlaceUpgrades(upgrades);
 		}
 		@Override
@@ -2279,7 +2275,7 @@ public interface PlaceType {
 		@Override
 		protected DialogueNode getBaseDialogue(Cell cell) {
 			if(cell!=null) {
-				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
+				for(PlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
 					if(pu.getRoomDialogue(cell)!=null) {
 						return pu.getRoomDialogue(cell);
 					}
@@ -2288,11 +2284,11 @@ public interface PlaceType {
 			return LilayaHomeGeneric.ROOM_WINDOW;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 			return LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR.getAvailablePlaceUpgrades(upgrades);
 		}
 		@Override
@@ -2318,7 +2314,7 @@ public interface PlaceType {
 		@Override
 		protected DialogueNode getBaseDialogue(Cell cell) {
 			if(cell!=null) {
-				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
+				for(PlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
 					if(pu.getRoomDialogue(cell)!=null) {
 						return pu.getRoomDialogue(cell);
 					}
@@ -2327,11 +2323,11 @@ public interface PlaceType {
 			return LilayaHomeGeneric.ROOM_GARDEN;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_EMPTY_ROOM);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 			return LILAYA_HOME_ROOM_WINDOW_GROUND_FLOOR.getAvailablePlaceUpgrades(upgrades);
 		}
 		@Override
@@ -2358,7 +2354,7 @@ public interface PlaceType {
 		@Override
 		protected DialogueNode getBaseDialogue(Cell cell) {
 			if(cell!=null) {
-				for(AbstractPlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
+				for(PlaceUpgrade pu : cell.getPlace().getPlaceUpgrades()) {
 					if(pu.getRoomDialogue(cell)!=null) {
 						return pu.getRoomDialogue(cell);
 					}
@@ -2367,11 +2363,11 @@ public interface PlaceType {
 			return LilayaHomeGeneric.DUNGEON_CELL;
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.LILAYA_DUNGEON_CELL);
 		}
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+		public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 			return PlaceUpgrade.getDungeonCellUpgrades();
 		}
 		@Override
@@ -2608,7 +2604,7 @@ public interface PlaceType {
 			null, "in your room"
 			) {
 				@Override
-				public ArrayList<AbstractPlaceUpgrade> getAvailablePlaceUpgrades(Set<AbstractPlaceUpgrade> upgrades) {
+				public ArrayList<PlaceUpgrade> getAvailablePlaceUpgrades(Set<PlaceUpgrade> upgrades) {
 					return Util.newArrayListOfValues(
 							PlaceUpgrade.LILAYA_PLAYER_ROOM_BED);
 				}
@@ -3293,7 +3289,7 @@ public interface PlaceType {
 			}
 		}
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.kayCratesSearched)
 					|| !Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.RELATIONSHIP_NYAN_HELP, Quest.RELATIONSHIP_NYAN_3_STOCK_ISSUES_DOBERMANNS)) {
 				return SVGString;
@@ -3662,7 +3658,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in Slaver Alley"){
 		@Override
-		public ArrayList<AbstractPlaceUpgrade> getStartingPlaceUpgrades() {
+		public ArrayList<PlaceUpgrade> getStartingPlaceUpgrades() {
 			return Util.newArrayListOfValues(PlaceUpgrade.SLAVERY_ADMINISTRATION_CELLS);
 		}
 	}.initWeatherImmune(Weather.MAGIC_STORM);
@@ -3688,7 +3684,7 @@ public interface PlaceType {
 			return PresetColour.BASE_CRIMSON;
 		}
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			return getSVGOverride("dominion/slaverAlley/scarlettsStall", getColour());
 		}
 		@Override
@@ -4530,7 +4526,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getNpc(FortressAlphaLeader.class).getWorldLocation()!=WorldType.IMP_FORTRESS_ALPHA) {
 				return getSVGOverride("submission/impFortress1", PresetColour.BASE_GREEN_LIGHT);
 			}
@@ -4548,7 +4544,7 @@ public interface PlaceType {
 			SubmissionGenericPlaces.TUNNEL,
 			Darkness.ALWAYS_DARK, Encounter.SUBMISSION_TUNNELS, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressAlphaDefeated)) {
 				return getSVGOverride("submission/impTunnels1Icon", PresetColour.BASE_GREY);
 			}
@@ -4606,7 +4602,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressDemonDefeated)) {
 				return getSVGOverride("submission/impFortress2", PresetColour.BASE_GREEN_LIGHT);
 			}
@@ -4624,7 +4620,7 @@ public interface PlaceType {
 			SubmissionGenericPlaces.TUNNEL,
 			Darkness.ALWAYS_DARK, Encounter.SUBMISSION_TUNNELS, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressDemonDefeated)) {
 				return getSVGOverride("submission/impTunnels2Icon", PresetColour.BASE_GREY);
 			}
@@ -4797,7 +4793,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getNpc(FortressFemalesLeader.class).getWorldLocation()!=WorldType.IMP_FORTRESS_FEMALES) {
 				return getSVGOverride("submission/impFortress3", PresetColour.BASE_GREEN_LIGHT);
 			}
@@ -4815,7 +4811,7 @@ public interface PlaceType {
 			SubmissionGenericPlaces.TUNNEL,
 			Darkness.ALWAYS_DARK, Encounter.SUBMISSION_TUNNELS, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressFemalesDefeated)) {
 				return getSVGOverride("submission/impTunnels3Icon", PresetColour.BASE_GREY);
 			}
@@ -4873,7 +4869,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getNpc(FortressMalesLeader.class).getWorldLocation()!=WorldType.IMP_FORTRESS_MALES) {
 				return getSVGOverride("submission/impFortress4", PresetColour.BASE_GREEN_LIGHT);
 			}
@@ -4891,7 +4887,7 @@ public interface PlaceType {
 			SubmissionGenericPlaces.TUNNEL,
 			Darkness.ALWAYS_DARK, Encounter.SUBMISSION_TUNNELS, "in Submission") {
 		@Override
-		public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+		public String getSVGString(Set<PlaceUpgrade> upgrades) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.impFortressMalesDefeated)) {
 				return getSVGOverride("submission/impTunnels4Icon", PresetColour.BASE_GREY);
 			}
@@ -5368,7 +5364,7 @@ public interface PlaceType {
 			null, "in the Gambling Den") {
 		@Override
 		public List<Population> getPopulation() {
-			Map<AbstractSubspecies, SubspeciesSpawnRarity> popComponent = new HashMap<>(Subspecies.getWorldSpecies(WorldType.SUBMISSION, this, false));
+			var popComponent = new HashMap<>(Subspecies.getWorldSpecies(WorldType.SUBMISSION, this, false));
 			Subspecies.getWorldSpecies(WorldType.DOMINION, this, false).forEach((key, value) -> popComponent.merge(key, value, (v1, v2) -> v1));
 			popComponent.remove(Subspecies.IMP);
 			popComponent.remove(Subspecies.IMP_ALPHA);
@@ -5696,7 +5692,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in the Rat Warrens") {
 		@Override
-		public AbstractEncounter getEncounterType() {
+		public Encounter getEncounterType() {
 			if(Main.game.getPlayer().isCaptive()) {
 				return Encounter.VENGAR_CAPTIVE_HALL;
 			}
@@ -5735,7 +5731,7 @@ public interface PlaceType {
 			null,
 			"in the Rat Warrens") {
 		@Override
-		public AbstractEncounter getEncounterType() {
+		public Encounter getEncounterType() {
 			if(Main.game.getPlayer().isCaptive()) {
 				return Encounter.VENGAR_CAPTIVE_BEDROOM;
 			}
@@ -5757,7 +5753,7 @@ public interface PlaceType {
 	}.initWeatherImmune();
 
 	// HLF Quest places:
-	
+
     public static final AbstractPlaceType REBEL_BASE_ENTRANCE = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Entrance",
@@ -5769,7 +5765,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_CORRIDOR = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Corridor",
@@ -5781,7 +5777,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_SLEEPING_AREA = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Abandoned Sleeping Area",
@@ -5793,7 +5789,7 @@ public interface PlaceType {
 			Encounter.REBEL_BASE,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_SLEEPING_AREA_SEARCHED = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Abandoned Sleeping Area",
@@ -5805,7 +5801,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_COMMON_AREA = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Abandoned Common Area",
@@ -5817,7 +5813,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_COMMON_AREA_SEARCHED = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Abandoned Common Area",
@@ -5841,7 +5837,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_ARMORY_SEARCHED = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"A Partly Caved-in Room",
@@ -5853,7 +5849,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
      public static final AbstractPlaceType REBEL_BASE_CAVED_IN_ROOM = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"A Mostly Caved-in Room",
@@ -5877,11 +5873,11 @@ public interface PlaceType {
 			"The further into the jungle one travels, the thicker the vegetation becomes, which allows particularly wild and dangerous predators to conceal themselves...",
 			new Colour(Util.newColour(0x6b8f7e)), null, null, "in the jungle") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
-	
+
 	public static final AbstractGlobalPlaceType WORLD_MAP_JUNGLE = new AbstractGlobalPlaceType(
 			WorldRegion.JUNGLE,
 			"jungle",
@@ -5889,7 +5885,7 @@ public interface PlaceType {
 			"Sparse, tropical foliage is home to many different jungle animal-morphs, not all of which are friendly.",
 			new Colour(Util.newColour(0x8fbfa8)), null, null, "in the jungle") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
@@ -5901,7 +5897,7 @@ public interface PlaceType {
 			"A sprawling, Mayan-like city, Itza'aak is the last bastion of civilisation before the sprawling, wild jungles of the north.",
 			new Colour(Util.newColour(0xb377b0)), null, null, "outside Itza'aak") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	};
@@ -5913,11 +5909,11 @@ public interface PlaceType {
 			"A steady increase in elevation leads to the rolling hills at the base of the Mountains of the Moon.",
 			PresetColour.BASE_BLACK, null, null, "in the foothills of the Mountains of the Moon") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
-	
+
 	public static final AbstractGlobalPlaceType WORLD_MAP_MOUNTAINS = new AbstractGlobalPlaceType(
 			WorldRegion.MOUNTAINS,
 			"mountains",
@@ -5925,7 +5921,7 @@ public interface PlaceType {
 			"The mountain range to the far west is known as the 'Mountains of the Moon', and is home to many alpine animal-morphs.",
 			PresetColour.BASE_GREY_DARK, null, null, "in the Mountains of the Moon") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
@@ -5937,7 +5933,7 @@ public interface PlaceType {
 			"The highest peaks of the Mountains of the Moon are capped in snow, and are home to several wild and aggressive races...",
 			PresetColour.BASE_GREY_LIGHT, null, null, "in the Mountains of the Moon") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
@@ -5949,11 +5945,11 @@ public interface PlaceType {
 			"This sheltered valley sees regular, heavy snowfall, and is home to numerous arctic races.",
 			new Colour(Util.newColour(0xeeeeee)), null, null, "in snowstorm valley") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
-	
+
 	public static final AbstractGlobalPlaceType WORLD_MAP_GLACIAL_LAKE = new AbstractGlobalPlaceType(
 			WorldRegion.SNOW,
 			"selkie lake",
@@ -5961,7 +5957,7 @@ public interface PlaceType {
 			"On the western side of snowstorm valley, there can be found a huge, partially-frozen lake.",
 			new Colour(Util.newColour(0xbbf0f1)), null, null, "at selkie lake") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous()
@@ -5985,13 +5981,13 @@ public interface PlaceType {
 			}
 		}
 		@Override
-		public AbstractWorldType getGlobalLinkedWorldType() {
+		public WorldType getGlobalLinkedWorldType() {
 			return WorldType.DOMINION;
 		}
 		@Override
 		public List<Population> getPopulation() {
 			List<Population> pop = new ArrayList<>();
-			
+
 			if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
 				pop.add(new Population(true, PopulationType.PERSON, PopulationDensity.COUPLE, Subspecies.getDominionStormImmuneSpecies(true)));
 				pop.add(new Population(false, PopulationType.ENFORCER, PopulationDensity.OCCASIONAL, Subspecies.getDominionStormImmuneSpecies(true, Subspecies.HUMAN)));
@@ -6000,7 +5996,7 @@ public interface PlaceType {
 				pop.add(new Population(false, PopulationType.ENFORCER, PopulationDensity.OCCASIONAL, Subspecies.getWorldSpecies(WorldType.DOMINION, this, true, Subspecies.HUMAN)));
 				pop.add(new Population(false, PopulationType.CENTAUR_CARTS, PopulationDensity.OCCASIONAL, Util.newHashMapOfValues(new Value<>(Subspecies.CENTAUR, SubspeciesSpawnRarity.TEN))));
 			}
-			
+
 			return pop;
 		}
 	}.initAquatic(Aquatic.MIXED);
@@ -6014,11 +6010,11 @@ public interface PlaceType {
 			FieldsDialogue.GRASSLAND_WILDERNESS,
 			null, "in the grassland wilderness of the Foloi Fields") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
-	
+
 	public static final AbstractGlobalPlaceType WORLD_MAP_FIELDS = new AbstractGlobalPlaceType(
 			WorldRegion.FIELDS,
 			"Foloi Fields",
@@ -6028,11 +6024,11 @@ public interface PlaceType {
 			FieldsDialogue.FOLOI_FIELDS,
 			null, "in the Foloi Fields") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
-	
+
 	public static final AbstractGlobalPlaceType WORLD_MAP_FOREST = new AbstractGlobalPlaceType(
 			WorldRegion.WOODLAND,
 			"forest",
@@ -6043,7 +6039,7 @@ public interface PlaceType {
 			FieldsDialogue.FOLOI_FOREST,
 			null, "in the forested parts of the Foloi Fields") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
@@ -6058,11 +6054,11 @@ public interface PlaceType {
 			FieldsDialogue.ELIS,
 			null, "outside Elis") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	};
-	
+
 	public static final AbstractGlobalPlaceType WORLD_MAP_RIVER = new AbstractGlobalPlaceType(
 			WorldRegion.RIVER,
 			"river Hubur",
@@ -6073,7 +6069,7 @@ public interface PlaceType {
 			FieldsDialogue.RIVER_HUBUR,
 			null, "at the river Huber") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initAquatic(Aquatic.MIXED)
@@ -6086,7 +6082,7 @@ public interface PlaceType {
 			"Far from Dominion, the river Hubur is a dangerous place in which to swim, as it is home to many wild freshwater races.",
 			new Colour(Util.newColour(0xc1f1ee)), null, null, "at the river Huber") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous()
@@ -6099,7 +6095,7 @@ public interface PlaceType {
 			"The Shinrin highlands are a range of low, forest-covered hills, which steadily increase in elevation the further west you go. The elusive youko live here.",
 			new Colour(Util.newColour(0x6ccc74)), null, null, "in the Shinrin highlands") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
@@ -6111,12 +6107,12 @@ public interface PlaceType {
 			"The aquatic races inhabiting Lilith's realm do not like to stray too far from shore, and so to them, the sea is considered to be endless.",
 			PresetColour.BASE_BLUE_DARK, null, null, "in the endless sea") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous()
 	.initAquatic(Aquatic.WATER_SURFACE);
-	
+
 	public static final AbstractGlobalPlaceType WORLD_MAP_SEA_CITY = new AbstractGlobalPlaceType(
 			WorldRegion.SEA_CITY,
 			"Lyonesse",
@@ -6124,7 +6120,7 @@ public interface PlaceType {
 			"The underwater city of Lyonesse is situated off the eastern coast, and, unsurprisingly, is particularly difficult for non-aquatic races to visit.",
 			new Colour(Util.newColour(0x8264b0)), null, null, "outside Lyonesse") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initAquatic(Aquatic.WATER_UNDER);
@@ -6136,11 +6132,11 @@ public interface PlaceType {
 			"To the south, the wild grassland starts to dry out, and is the preferred home for morphs such as lions, leopard, and zebras.",
 			PresetColour.BASE_YELLOW_LIGHT, null, null, "in the arid grasslands") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
-	
+
 	public static final AbstractGlobalPlaceType WORLD_MAP_ARID_SAVANNAH = new AbstractGlobalPlaceType(
 			WorldRegion.SAVANNAH,
 			"savannah",
@@ -6148,7 +6144,7 @@ public interface PlaceType {
 			"Sparse, open-canopy woodlands are scattered across this area, and are inhabited by the same races as those found in the arid grasslands.",
 			PresetColour.BASE_TAN, null, null, "in the savannah") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
@@ -6160,11 +6156,11 @@ public interface PlaceType {
 			"To the south of the arid grassland, all vegetation dies out, creating a hot, barren wasteland.",
 			new Colour(Util.newColour(0xffe7a7)), null, null, "in the desert") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
-	
+
 	public static final AbstractGlobalPlaceType WORLD_MAP_SAND_DUNES = new AbstractGlobalPlaceType(
 			WorldRegion.DESERT,
 			"sand dunes",
@@ -6172,11 +6168,11 @@ public interface PlaceType {
 			"At the southern edge of the desert, there lies a huge range of sand dunes, which are home to many dangerous races.",
 			new Colour(Util.newColour(0xffdb7a)), null, null, "in the sand dunes") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
-	
+
 	public static final AbstractGlobalPlaceType WORLD_MAP_DESERT_CITY = new AbstractGlobalPlaceType(
 			WorldRegion.DESERT_CITY,
 			"Thinis",
@@ -6184,7 +6180,7 @@ public interface PlaceType {
 			"A city resembling one of ancient Egypt, Thinis is the southern-most settlement in Lilith's realm, and is well known for its prestigious arcane university.",
 			new Colour(Util.newColour(0xd5445e)), null, null, "outside Thinis") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	};
@@ -6196,11 +6192,11 @@ public interface PlaceType {
 			"A huge volcano, perpetually oozing red-hot lava. Despite its name, dragons are just as rare a sight here as they are in the rest of Lilith's Realm.",
 			PresetColour.BASE_ORANGE, null, null, "at Dragon's Breath volcano") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
-	
+
 	public static final AbstractGlobalPlaceType WORLD_MAP_LAVA_FLOWS = new AbstractGlobalPlaceType(
 			WorldRegion.VOLCANO,
 			"lava flows",
@@ -6208,7 +6204,7 @@ public interface PlaceType {
 			"The lava which pours forth from the volcano slowly runs off in a southern direction.",
 			PresetColour.BASE_BLACK, null, null, "at the lava flows") {
 				@Override
-				public AbstractWorldType getGlobalLinkedWorldType() {
+				public WorldType getGlobalLinkedWorldType() {
 					return null;
 				}
 	}.initDangerous();
@@ -6216,11 +6212,11 @@ public interface PlaceType {
 	
 
 
-	public static List<AbstractPlaceType> getAllPlaceTypes() {
+	static List<PlaceType> getAllPlaceTypes() {
 		return table.list();
 	}
-	
-	public static AbstractPlaceType getPlaceTypeFromId(String id) {
+
+	static PlaceType getPlaceTypeFromId(String id) {
 		return table.of();
 	}
 	private static String sanitize(String id) {
@@ -6265,11 +6261,11 @@ public interface PlaceType {
 		return id;
 	}
 
-	public static String getIdFromPlaceType(AbstractPlaceType placeType) {
+	static String getIdFromPlaceType(PlaceType placeType) {
 		return placeType.getId();
 	}
-	
-	Table<AbstractPlaceType> table = new Table<>(PlaceType::sanitize) {{
+
+	Table<PlaceType> table = new Table<>(PlaceType::sanitize) {{
 		// Modded place types:
 		forEachMod("/maps","placeTypes",null,(f,n,a)->{
 			String k = n.replace("_placeTypes","");

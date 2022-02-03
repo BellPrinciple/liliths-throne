@@ -21,7 +21,6 @@ import org.w3c.dom.Element;
 
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
@@ -29,7 +28,6 @@ import com.lilithsthrone.game.character.markings.Tattoo;
 import com.lilithsthrone.game.character.markings.TattooCounterType;
 import com.lilithsthrone.game.character.markings.TattooType;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade.SuccubisSecrets;
@@ -253,9 +251,9 @@ public class CosmeticsDialogue {
 			
 			UtilText.nodeContentSB.append(getMoneyRemainingString());
 			
-			for(Entry<AbstractBodyCoveringType, Value<AbstractRace, List<String>>> entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
-				AbstractBodyCoveringType bct = entry.getKey();
-				AbstractRace race = entry.getValue().getKey();
+			for(Entry<BodyCoveringType, Value<Race, List<String>>> entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
+				BodyCoveringType bct = entry.getKey();
+				Race race = entry.getValue().getKey();
 				GameCharacter target = Main.game.getPlayer();
 				
 				Value<String, String> titleDescription = SuccubisSecrets.getCoveringTitleDescription(target, bct, entry.getValue().getValue());
@@ -381,7 +379,7 @@ public class CosmeticsDialogue {
 							:"")
 					);
 			
-			for(AbstractBodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
+			for(BodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
 				if((Main.game.isFacialHairEnabled() && Main.game.getPlayer().getFacialHairType().getType()==bct)
 						|| (Main.game.isBodyHairEnabled() && Main.game.getPlayer().getUnderarmHairType().getType()==bct)
 						|| (Main.game.isAssHairEnabled() &&  Main.game.getPlayer().getAssHairType().getType()==bct)
@@ -495,7 +493,7 @@ public class CosmeticsDialogue {
 						initTattooSaveLoadDialogue(BEAUTICIAN_TATTOOS_ADD);
 					}
 				};
-			
+
 			} else if(index==0) {
 				return new Response("Back", "Decide not to get this tattoo and return to the main selection screen.", BEAUTICIAN_TATTOOS);
 			}
@@ -507,7 +505,7 @@ public class CosmeticsDialogue {
 			return true;
 		}
 	};
-	
+
 	// Save/Load screen for tattoos:
 
 	private static DialogueNode returnToNodeFromTattooSaveLoad;
@@ -522,14 +520,14 @@ public class CosmeticsDialogue {
 		CharacterModificationUtils.tattoo.setName(CharacterModificationUtils.tattoo.getType().getName());
 		CosmeticsDialogue.returnToNodeFromTattooSaveLoad = returnToNodeFromTattooSaveLoad;
 	}
-	
+
 	public static DialogueNode getReturnToNodeFromTattooSaveLoad() {
 		return returnToNodeFromTattooSaveLoad;
 	}
 
 	public static void initSaveLoadMenu() {
 		loadedTattoosMap = new TreeMap<>();
-		
+
 		for(File f : getSavedTattoos()) {
 			try {
 				String name = Util.getFileIdentifier(f);
@@ -539,7 +537,7 @@ public class CosmeticsDialogue {
 			}
 		}
 	}
-	
+
 	public static Map<String, Tattoo> getLoadedTattoosMap() {
 		return loadedTattoosMap;
 	}
@@ -556,7 +554,7 @@ public class CosmeticsDialogue {
 		@Override
 		public String getHeaderContent(){
 			StringBuilder saveLoadSB = new StringBuilder();
-			
+
 			saveLoadSB.append(
 					"<div class='container-full-width' style='padding:0; margin:0 0 8px 0;'>"
 							+ "Only standard characters (letters and numbers) will work for save file names."
@@ -575,20 +573,20 @@ public class CosmeticsDialogue {
 					+ "</div>");
 
 			int i=0;
-			
+
 			saveLoadSB.append(getSaveLoadRow(null, null, i%2==0));
 			i++;
-			
+
 			for(Entry<String, Tattoo> entry : loadedTattoosMap.entrySet()){
 				saveLoadSB.append(getSaveLoadRow(entry.getKey(), entry.getValue(), i%2==0));
 				i++;
 			}
-			
+
 			saveLoadSB.append("<p id='hiddenPField' style='display:none;'></p>");
-			
+
 			return saveLoadSB.toString();
 		}
-		
+
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
@@ -603,7 +601,7 @@ public class CosmeticsDialogue {
 								?"<span style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>ON</span>"
 								:"<span style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>OFF</span>");
 					}
-					
+
 					@Override
 					public void effects() {
 						loadConfirmationName = "";
@@ -617,14 +615,14 @@ public class CosmeticsDialogue {
 			} else if (index == 0) {
 				return new Response("Back", "Back to the tattoo menu.", returnToNodeFromTattooSaveLoad);
 			}
-			
+
 			return null;
 		}
 	};
-	
+
 	public static List<File> getSavedTattoos() {
 		List<File> filesList = new ArrayList<>();
-		
+
 		File dir = new File("data/tattoos");
 		if (dir.isDirectory()) {
 			File[] directoryListing = dir.listFiles((path, name) -> name.endsWith(".xml"));
@@ -634,22 +632,22 @@ public class CosmeticsDialogue {
 		}
 
 		filesList.sort(Comparator.comparing(File::getName).reversed());
-		
+
 		return filesList;
 	}
 
 	private static String getSaveLoadRow(String baseName, Tattoo loadedTattoo, boolean altColour) {
 		if(loadedTattoo!=null){
 			String fileName = (baseName+".xml");
-			
+
 			boolean suitableSlot = loadedTattoo.getType().getSlotAvailability().contains(CharacterModificationUtils.tattooInventorySlot);
 			boolean specialEffectsLimitation = !Main.game.isInNewWorld()
 					&& (loadedTattoo.getCounter()!=null || loadedTattoo.isGlowing() || (loadedTattoo.getWriting()!=null && loadedTattoo.getWriting().isGlow()));
-			
+
 			return "<div class='container-full-width' style='padding:0; margin:0 0 4px 0;"+(altColour?"background:#222;":"")+" position:relative;'>"
-						
+
 						+ "<div class='container-full-width' style='width:calc(75% - 16px); background:transparent;'>"
-						
+
 							+ "<div class='container-full-width' style='width:10%; margin:0; padding:0; background:transparent; position:relative; float:left;'>"
 								+"<div class='inventoryImage' style='width:100%;'>"
 									+ "<div class='inventoryImage-content'>"
@@ -658,12 +656,12 @@ public class CosmeticsDialogue {
 									+ "<div class='overlay no-pointer' id='LOADED_TATTOO_" + baseName + "'></div>"
 								+ "</div>"
 							+ "</div>"
-						
+
 							+ "<div style='width:calc(90% - 8px); padding:0; margin:0 0 0 8px; position:relative; float:left;'>"
 								+ "<h6 style='margin:0; padding:2px;'>"+(!suitableSlot || specialEffectsLimitation?"[style.boldBad("+loadedTattoo.getName()+")]":loadedTattoo.getName())+"</h6>"
 								+ "<p style='margin:0; padding:2px;'>[style.colourDisabled(data/tattoos/)]"+baseName+"[style.colourDisabled(.xml)]</p>"
 							+"</div>"
-							
+
 						+ "</div>"
 						+ "<div class='container-full-width' style='width:calc(25% - 16px);text-align:center; background:transparent;'>"
 							+ (Main.game.isStarted() && !Main.game.isInCombat() && !Main.game.isInSex()
@@ -671,27 +669,27 @@ public class CosmeticsDialogue {
 										?"<div class='square-button saveIcon' id='OVERWRITE_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskSaveConfirm()+"</div></div>"
 										:"<div class='square-button saveIcon' id='OVERWRITE_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskOverwrite()+"</div></div>")
 									:"<div class='square-button saveIcon disabled'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskSaveDisabled()+"</div></div>")
-							
+
 							+ (suitableSlot && !specialEffectsLimitation
 									? (fileName.equals(loadConfirmationName)
 										?"<div class='square-button saveIcon' id='LOAD_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskLoadConfirm()+"</div></div>"
 										:"<div class='square-button saveIcon' id='LOAD_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskLoad()+"</div></div>")
 									:"<div class='square-button saveIcon disabled'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskLoadDisabled()+"</div></div>")
-	
-	
+
+
 							+ (fileName.equals(deleteConfirmationName)
 								?"<div class='square-button saveIcon' id='DELETE_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskDeleteConfirm()+"</div></div>"
 								:"<div class='square-button saveIcon' id='DELETE_" + baseName + "'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskDelete()+"</div></div>")
 						+ "</div>"
 					+ "</div>";
-			
+
 		} else { //TODO hmmmmmmm (also enchantment _CURRENT)
 			String svgString = CharacterModificationUtils.tattoo.getSVGString();
-			
+
 			return "<div class='container-full-width' style='padding:0; margin:0 0 4px 0;"+(altColour?"background:#222;":"")+"'>"
-					
+
 						+ "<div class='container-full-width' style='width:calc(75% - 16px); background:transparent;'>"
-					
+
 							+ "<div class='container-full-width' style='width:10%; margin:0; padding:0; background:transparent; position:relative; float:left;'>"
 								+"<div class='inventoryImage' style='width:100%;'>"
 									+ "<div class='inventoryImage-content'>"
@@ -700,18 +698,18 @@ public class CosmeticsDialogue {
 									+ "<div class='overlay no-pointer' id='LOADED_TATTOO_CURRENT'></div>"//TODO
 								+ "</div>"
 							+ "</div>"
-						
+
 							+ "<div style='width:calc(90% - 8px); padding:0; margin:0 0 0 8px; position:relative; float:left;'>"
 								+"<form style='padding:0;margin:0;text-align:center;'><input type='text' id='new_save_name' placeholder='Enter File Name' style='padding:0;margin:0;width:100%;'></form>"
 							+"</div>"
-							
+
 						+ "</div>"
-					
+
 						+ "<div class='container-full-width' style='width:calc(25% - 16px); text-align:center; background:transparent;'>"
 							+ "<div class='square-button saveIcon' id='NEW_SAVE' style='float:left;'><div class='square-button-content'>"+SVGImages.SVG_IMAGE_PROVIDER.getDiskSave()+"</div></div>"
 						+ "</div>"
 					+ "</div>";
-				
+
 		}
 	}
 
@@ -720,7 +718,7 @@ public class CosmeticsDialogue {
 		if(name.isEmpty()) {
 			return;
 		}
-		
+
 		File dir = new File("data/");
 		dir.mkdir();
 
@@ -744,38 +742,38 @@ public class CosmeticsDialogue {
 		try {
 			// Starting stuff:
 			Document doc = Main.getDocBuilder().newDocument();
-			
+
 			Element tattooCoreElement = doc.createElement("tattooSave");
-			
+
 			doc.appendChild(tattooCoreElement);
-			
+
 			Element tattooElement = CharacterModificationUtils.tattoo.saveAsXML(tattooCoreElement, doc);
-			
+
 			// Do not save item effects:
 			if(tattooElement.getElementsByTagName("effects").item(0)!=null) {
 				tattooElement.removeChild(tattooElement.getElementsByTagName("effects").item(0));
 			}
-			
-			
+
+
 			// Ending stuff:
-			
+
 			Transformer transformer1 = Main.transformerFactory.newTransformer();
 			transformer1.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 			StringWriter writer = new StringWriter();
 
 			transformer1.transform(new DOMSource(doc), new StreamResult(writer));
-			
+
 			// Save this xml:
 			Transformer transformer = Main.transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 			DOMSource source = new DOMSource(doc);
-			
+
 			String saveLocation = "data/tattoos/"+name+".xml";
 			StreamResult result = new StreamResult(saveLocation);
-			
+
 			transformer.transform(source, result);
-			
+
 		} catch (TransformerException tfe) {
 			tfe.printStackTrace();
 		}
@@ -793,29 +791,29 @@ public class CosmeticsDialogue {
 			if (file.exists()) {
 				try {
 					Document doc = Main.getDocBuilder().parse(file);
-					
+
 					// Cast magic:
 					doc.getDocumentElement().normalize();
 					Element rootElement = (Element) doc.getElementsByTagName("tattooSave").item(0);
-					
+
 					return Tattoo.loadFromXML((Element) rootElement.getElementsByTagName("tattoo").item(0), doc);
-					
+
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	public static boolean isLoadTattooAvailable(String name) {
 		File file = new File("data/tattoos/"+name+".xml");
 
 		if(!file.exists()) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -829,10 +827,10 @@ public class CosmeticsDialogue {
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-			
+
 		} else {
 			Main.game.flashMessage(PresetColour.GENERIC_BAD, "File not found...");
 		}
 	}
-	
+
 }

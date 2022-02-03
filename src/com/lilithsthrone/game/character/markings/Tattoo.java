@@ -12,12 +12,10 @@ import org.w3c.dom.NodeList;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.Rarity;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -36,7 +34,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
 public class Tattoo extends AbstractCoreItem implements XMLSaving {
 	
 
-	private AbstractTattooType type;
+	private TattooType type;
 	
 	private Colour primaryColour;
 	private Colour secondaryColour;
@@ -50,7 +48,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 	
 	protected List<ItemEffect> effects;
 	
-	protected Map<AbstractAttribute, Integer> attributeModifiers;
+	protected Map<Attribute, Integer> attributeModifiers;
 	
 	private static Map<Colour, String> SVGGlowMap = new HashMap<>();
 
@@ -76,7 +74,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 				TattooType.getTattooTypeFromId(typeId).getDefaultTertiaryColour(),
 				glowing, writing, counter);
 	}
-	
+
 	public Tattoo(String typeId,
 			Colour allThreeColours,
 			boolean glowing,
@@ -84,7 +82,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 			TattooCounter counter) {
 		this(TattooType.getTattooTypeFromId(typeId), allThreeColours, allThreeColours, allThreeColours, glowing, writing, counter);
 	}
-	
+
 	public Tattoo(String typeId,
 			Colour primaryColour,
 			Colour secondaryColour,
@@ -94,8 +92,8 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 			TattooCounter counter) {
 		this(TattooType.getTattooTypeFromId(typeId), primaryColour, secondaryColour, tertiaryColour, glowing, writing, counter);
 	}
-	
-	public Tattoo(AbstractTattooType type,
+
+	public Tattoo(TattooType type,
 			boolean glowing,
 			TattooWriting writing,
 			TattooCounter counter) {
@@ -105,8 +103,8 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 				type.getDefaultTertiaryColour(),
 				glowing, writing, counter);
 	}
-	
-	public Tattoo(AbstractTattooType type,
+
+	public Tattoo(TattooType type,
 			Colour primaryColour,
 			Colour secondaryColour,
 			Colour tertiaryColour,
@@ -307,7 +305,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 		if(baseName.trim().isEmpty()) {
 			baseName = this.getType().getName();
 		}
-		
+
 		if(!baseName.replaceAll("\u00A0"," ").equalsIgnoreCase(this.getType().getName().replaceAll("\u00A0"," "))) { // If this tattoo has a custom name, just display that:
 			return (withRarityColour
 						? " <span style='color: " + this.getRarity().getColour().toWebHexString() + ";'>" + baseName + "</span>"
@@ -356,10 +354,10 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 		return "";
 	}
 
-	public AbstractAttribute getCoreEnchantment() {
-		AbstractAttribute att = Attribute.MAJOR_PHYSIQUE;
+	public Attribute getCoreEnchantment() {
+		Attribute att = Attribute.MAJOR_PHYSIQUE;
 		int max = 0;
-		for(Entry<AbstractAttribute, Integer> entry : getAttributeModifiers().entrySet()) {
+		for(Entry<Attribute, Integer> entry : getAttributeModifiers().entrySet()) {
 			if(entry.getValue() > max) {
 				att = entry.getKey();
 				max = entry.getValue();
@@ -388,7 +386,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 		return this.getEffects().stream().anyMatch(e -> e.getSecondaryModifier() == TFModifier.CLOTHING_SERVITUDE);
 	}
 	
-	public Map<AbstractAttribute, Integer> getAttributeModifiers() {
+	public Map<Attribute, Integer> getAttributeModifiers() {
 		attributeModifiers.clear();
 		
 		for(ItemEffect ie : getEffects()) {
@@ -408,12 +406,12 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 	 * @return An integer value of the 'enchantment capacity cost' for this particular tattoo. Does not count negative attribute values, nor values of Corruption.
 	 */
 	public int getEnchantmentCapacityCost() {
-		Map<AbstractAttribute, Integer> noCorruption = new HashMap<>();
+		Map<Attribute, Integer> noCorruption = new HashMap<>();
 		attributeModifiers.entrySet().stream().filter(ent -> ent.getKey()!=Attribute.MAJOR_CORRUPTION && ent.getKey()!=Attribute.FERTILITY && ent.getKey()!=Attribute.VIRILITY).forEach(ent -> noCorruption.put(ent.getKey(), ent.getValue()));
 		return noCorruption.values().stream().reduce(0, (a, b) -> a + Math.max(0, b));
 	}
 	
-	public AbstractTattooType getType() {
+	public TattooType getType() {
 		return type;
 	}
 
@@ -502,7 +500,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 		return "<span style='color:"+getCounter().getColour().toWebHexString()+";'>"+(getCounter().isGlow()?UtilText.applyGlow(convertedInt, getCounter().getColour()):convertedInt)+"</span>";
 	}
 
-	public void setType(AbstractTattooType type) {
+	public void setType(TattooType type) {
 		this.type = type;
 	}
 
@@ -542,12 +540,12 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 	}
 	
 	@Override
-	public AbstractItemEffectType getEnchantmentEffect() {
+	public ItemEffectType getEnchantmentEffect() {
 		return ItemEffectType.TATTOO;
 	}
 	
 	@Override
-	public AbstractTattooType getEnchantmentItemType(List<ItemEffect> effects) {
+	public TattooType getEnchantmentItemType(List<ItemEffect> effects) {
 		return this.getType();
 	}
 }

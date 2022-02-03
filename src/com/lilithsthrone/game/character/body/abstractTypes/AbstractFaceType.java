@@ -10,12 +10,10 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.FaceType;
 import com.lilithsthrone.game.character.body.types.MouthType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -32,12 +30,12 @@ public abstract class AbstractFaceType implements FaceType {
 	
 	private String transformationName;
 	
-	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private BodyCoveringType coveringType;
+	private Race race;
 
 	private boolean facialHairAllowed;
 	
-	private AbstractMouthType mouthType;
+	private MouthType mouthType;
 	
 	private List<String> names;
 	private List<String> namesPlural;
@@ -55,9 +53,9 @@ public abstract class AbstractFaceType implements FaceType {
 
 	private List<BodyPartTag> tags;
 
-	public AbstractFaceType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
-			AbstractMouthType mouthType,
+	public AbstractFaceType(BodyCoveringType coveringType,
+			Race race,
+			MouthType mouthType,
 			List<String> names,
 			List<String> namesPlural,
 			List<String> descriptorsMasculine,
@@ -100,9 +98,9 @@ public abstract class AbstractFaceType implements FaceType {
 	 * @param faceBodyDescription A sentence or two to describe this face type, as seen in the character view screen. It should follow the same format as all of the other entries in the AssType class.
 	 * @param tags A list of tags which help to define the features of this face type.
 	 */
-	public AbstractFaceType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
-			AbstractMouthType mouthType,
+	public AbstractFaceType(BodyCoveringType coveringType,
+			Race race,
+			MouthType mouthType,
 			List<String> names,
 			List<String> namesPlural,
 			List<String> descriptorsMasculine,
@@ -156,8 +154,8 @@ public abstract class AbstractFaceType implements FaceType {
 				this.mod = mod;
 				this.fromExternalFile = true;
 				
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
 				this.facialHairAllowed = race.getRacialClass().isAnthroHair();
 				if(coreElement.getOptionalFirstOf("facialHairAllowed").isPresent()) {
@@ -166,7 +164,7 @@ public abstract class AbstractFaceType implements FaceType {
 				
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 				
-				this.mouthType = MouthType.getMouthTypeFromId(coreElement.getMandatoryFirstOf("mouthType").getTextContent());
+				this.mouthType = MouthType.table.of(coreElement.getMandatoryFirstOf("mouthType").getTextContent());
 
 				this.tags = new ArrayList<>();
 				if(coreElement.getOptionalFirstOf("tags").isPresent()) {
@@ -240,7 +238,7 @@ public abstract class AbstractFaceType implements FaceType {
 	}
 
 	@Override
-	public AbstractMouthType getMouthType() {
+	public MouthType getMouthType() {
 		return mouthType;
 	}
 
@@ -284,7 +282,7 @@ public abstract class AbstractFaceType implements FaceType {
 //	/**
 //	 * <b>This should never be used - the covering of a face is determined by the torso's covering!</b>
 //	 */
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 //		if(body!=null) {
 //			return body.getTorso().getBodyCoveringType(body);
 //		}
@@ -292,7 +290,7 @@ public abstract class AbstractFaceType implements FaceType {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

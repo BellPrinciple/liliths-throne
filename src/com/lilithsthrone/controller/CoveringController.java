@@ -2,7 +2,6 @@ package com.lilithsthrone.controller;
 
 import org.w3c.dom.events.EventTarget;
 
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
@@ -39,7 +38,7 @@ public class CoveringController {
 	
 	public static void initCoveringChangeListeners() {
 		String id;
-		for (AbstractBodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
+		for (BodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
 			id = "APPLY_COVERING_"+BodyCoveringType.getIdFromBodyCoveringType(bct);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{

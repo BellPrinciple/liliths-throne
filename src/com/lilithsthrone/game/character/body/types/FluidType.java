@@ -6,11 +6,10 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
+import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.character.body.valueEnums.FluidTypeBase;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -54,7 +53,7 @@ public interface FluidType extends BodyPartTypeInterface {
 	}
 
 	@Override
-	default AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	default BodyCoveringType getBodyCoveringType(Body body) {
 		return getBaseType().getCoveringType();
 	}
 
@@ -644,7 +643,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	TypeTable<AbstractFluidType> table = new TypeTable<>(
+	TypeTable<FluidType> table = new TypeTable<>(
 		FluidType::sanitize,
 		FluidType.class,
 		AbstractFluidType.class,
@@ -666,7 +665,7 @@ public interface FluidType extends BodyPartTypeInterface {
 		}
 	}};
 
-	public static AbstractFluidType getFluidTypeFromId(String id) {
+	static FluidType getFluidTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -687,15 +686,15 @@ public interface FluidType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromFluidType(AbstractFluidType fluidType) {
+	static String getIdFromFluidType(FluidType fluidType) {
 		return fluidType.getId();
 	}
 	
-	public static List<AbstractFluidType> getAllFluidTypes() {
+	static List<FluidType> getAllFluidTypes() {
 		return table.listByRace();
 	}
 
-	public static List<AbstractFluidType> getFluidTypes(AbstractRace r) {
+	static List<FluidType> getFluidTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

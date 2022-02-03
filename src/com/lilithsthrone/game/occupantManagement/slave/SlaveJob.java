@@ -27,11 +27,9 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.World;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
 
@@ -76,24 +74,24 @@ public enum SlaveJob {
 		private Cell getSlaveLoungeCell(GameCharacter slave) {
 			Random rnd = new Random();
 			rnd.setSeed(Main.game.getSecondsPassed()); // Make sure that the seed is consistent based on time so that both sendToWorkLocation() and getWorkDestinationCell() return the same cell during the same turn update
-			
+
 			if(!slave.hasSlavePermissionSetting(SlavePermissionSetting.GENERAL_HOUSE_FREEDOM) || rnd.nextFloat()<0.25f) { // 75% chance of using the lounge
 				return null;
 			}
-			
+
 			// If they're sleeping they will only rarely go to the lounge (5% chance)
 			int hour = Main.game.getHourOfDay();
 			if(slave.isSleepingAtHour(hour) || rnd.nextFloat()<0.05f) {
 				return null;
 			}
-			
+
 			// If they're overworked, they're more likely to be resting in their room
 			if((rnd.nextFloat()<0.25f && slave.hasStatusEffect(StatusEffect.OVERWORKED_1))
 					|| ( rnd.nextFloat()<0.5f && slave.hasStatusEffect(StatusEffect.OVERWORKED_2))
 					|| slave.hasStatusEffect(StatusEffect.OVERWORKED_3)) {
 				return null;
 			}
-			
+
 			List<Cell> cells = Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_GROUND_FLOOR).getCells(PlaceUpgrade.LILAYA_SLAVE_LOUNGE);
 			cells.addAll(Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_FIRST_FLOOR).getCells(PlaceUpgrade.LILAYA_SLAVE_LOUNGE));
 			cells.removeIf(c -> Main.game.getCharactersPresent(c).size() > 8); // If lounge is full then don't use it
@@ -155,7 +153,7 @@ public enum SlaveJob {
 			
 			} else {
 				// 50/50 of being upstairs or downstairs:
-				AbstractWorldType worldTypeToUse = WorldType.LILAYAS_HOUSE_FIRST_FLOOR;
+				WorldType worldTypeToUse = WorldType.LILAYAS_HOUSE_FIRST_FLOOR;
 				if(Math.random()>0.5f) {
 					worldTypeToUse = WorldType.LILAYAS_HOUSE_GROUND_FLOOR;
 				}
@@ -191,21 +189,21 @@ public enum SlaveJob {
 		private void moveToCorridor(GameCharacter slave) {
 			if(slave.getLocationPlace().getPlaceType().equals(PlaceType.LILAYA_HOME_CORRIDOR)) {
 				slave.moveToAdjacentMatchingCellType(false);
-			
+
 			} else {
 				// 50/50 of being upstairs or downstairs:
-				AbstractWorldType worldTypeToUse = WorldType.LILAYAS_HOUSE_FIRST_FLOOR;
+				WorldType worldTypeToUse = WorldType.LILAYAS_HOUSE_FIRST_FLOOR;
 				if(Math.random()>0.5f) {
 					worldTypeToUse = WorldType.LILAYAS_HOUSE_GROUND_FLOOR;
 				}
-				
+
 				slave.setRandomLocation(worldTypeToUse, PlaceType.LILAYA_HOME_CORRIDOR, false);
 			}
 		}
 		@Override
 		public void sendToWorkLocation(GameCharacter slave) {
 			Optional<NPC> guardAtEntrance = Main.game.getCharactersPresent(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL).stream().filter(npc->npc.isSlave() && npc.isAtWork()).findFirst();
-			
+
 			if(slave.getLocationPlaceType()==PlaceType.LILAYA_HOME_ENTRANCE_HALL
 					|| !guardAtEntrance.isPresent()
 					|| (guardAtEntrance.isPresent()
@@ -215,13 +213,13 @@ public enum SlaveJob {
 					moveToCorridor(guardAtEntrance.get());
 				}
 				slave.setLocation(WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_ENTRANCE_HALL, false);
-				
+
 			} else {
 				moveToCorridor(slave);
 			}
 		}
 	},
-	
+
 	LIBRARY(PresetColour.BASE_TEAL,
 			0.05f,
 			5,
@@ -284,7 +282,7 @@ public enum SlaveJob {
 					SlaveJobFlag.INTERACTION_BONDING,
 					SlaveJobFlag.GUEST_CAN_WORK),
 			WorldType.LILAYAS_HOUSE_GROUND_FLOOR, PlaceType.LILAYA_HOME_GARDEN),
-	
+
 	LAB_ASSISTANT(PresetColour.BASE_GREEN_LIME,
 			0.05f,
 			1,
@@ -416,7 +414,7 @@ public enum SlaveJob {
 			if(slave.getSlaveStationWorldType()==null || slave.getSlaveStationLocation()==null) {
 				// Use slave's birthday as the seed so that it will always be the same (and different from other slaves):
 				Random rnd = new Random(slave.getBirthday().getYear() + slave.getBirthday().getDayOfYear() + slave.getBirthday().getHour() + slave.getBirthday().getMinute());
-				AbstractWorldType worldType = rnd.nextFloat()<0.5f?WorldType.LILAYAS_HOUSE_GROUND_FLOOR:WorldType.LILAYAS_HOUSE_FIRST_FLOOR;
+				WorldType worldType = rnd.nextFloat()<0.5f?WorldType.LILAYAS_HOUSE_GROUND_FLOOR:WorldType.LILAYAS_HOUSE_FIRST_FLOOR;
 				World world = Main.game.getWorlds().get(worldType);
 				slave.setLocation(world.getRandomCell(PlaceType.LILAYA_HOME_CORRIDOR, rnd));
 			} else {
@@ -604,7 +602,7 @@ public enum SlaveJob {
 			return super.getAvailabilityText(hour, character);
 		}
 		@Override
-		public AbstractWorldType getWorldLocation(GameCharacter character) {
+		public WorldType getWorldLocation(GameCharacter character) {
 			Cell c = MilkingRoom.getMilkingCell(character, false);
 			if(c==null) {
 				return null;
@@ -612,7 +610,7 @@ public enum SlaveJob {
 			return c.getType();
 		}
 		@Override
-		public AbstractPlaceType getPlaceLocation(GameCharacter character) {
+		public PlaceType getPlaceLocation(GameCharacter character) {
 			Cell c = MilkingRoom.getMilkingCell(character, false);
 			if(c==null) {
 				return null;
@@ -714,13 +712,13 @@ public enum SlaveJob {
 				}
 				
 				MilkingRoom room = Main.game.getOccupancyUtil().getMilkingRoom(c.getType(), c.getLocation());
-				
+
 				for(AbstractClothing cl : clothingRemoved) {
 					if(cl.isMilkingEquipment()) {
 						slave.removeClothing(cl);
 					}
 				}
-				
+
 				clothingRemoved.removeIf(cl->cl.isMilkingEquipment());
 				
 				for(AbstractClothing clothing : clothingRemoved) {
@@ -840,7 +838,7 @@ public enum SlaveJob {
 		}
 		
 		@Override
-		public AbstractWorldType getWorldLocation(GameCharacter character) {
+		public WorldType getWorldLocation(GameCharacter character) {
 			Cell c = getOfficeCell();
 			if(c==null) {
 				return null;
@@ -849,7 +847,7 @@ public enum SlaveJob {
 		}
 		
 		@Override
-		public AbstractPlaceType getPlaceLocation(GameCharacter character) {
+		public PlaceType getPlaceLocation(GameCharacter character) {
 			Cell c = getOfficeCell();
 			if(c==null) {
 				return null;
@@ -959,7 +957,7 @@ public enum SlaveJob {
 			return super.getAvailabilityText(hour, character);
 		}
 		@Override
-		public AbstractWorldType getWorldLocation(GameCharacter character) {
+		public WorldType getWorldLocation(GameCharacter character) {
 			return WorldType.LILAYAS_HOUSE_GROUND_FLOOR;
 		}
 	},
@@ -1007,11 +1005,11 @@ public enum SlaveJob {
 			return super.getAvailabilityText(hour, character);
 		}
 		@Override
-		public AbstractWorldType getWorldLocation(GameCharacter character) {
+		public WorldType getWorldLocation(GameCharacter character) {
 			return WorldType.LILAYAS_HOUSE_GROUND_FLOOR;
 		}
 		@Override
-		public AbstractPlaceType getPlaceLocation(GameCharacter character) {
+		public PlaceType getPlaceLocation(GameCharacter character) {
 			if(Main.game.getWorlds().get(WorldType.LILAYAS_HOUSE_GROUND_FLOOR).getCells(PlaceUpgrade.LILAYA_SPA).isEmpty()) {
 				return PlaceType.LILAYA_HOME_FOUNTAIN;
 			}
@@ -1074,7 +1072,7 @@ public enum SlaveJob {
 			return null;
 		}
 		@Override
-		public AbstractWorldType getWorldLocation(GameCharacter character) {
+		public WorldType getWorldLocation(GameCharacter character) {
 			Cell c = getDiningHallCell();
 			if(c==null) {
 				return null;
@@ -1082,7 +1080,7 @@ public enum SlaveJob {
 			return c.getType();
 		}
 		@Override
-		public AbstractPlaceType getPlaceLocation(GameCharacter character) {
+		public PlaceType getPlaceLocation(GameCharacter character) {
 			Cell c = getDiningHallCell();
 			if(c==null) {
 				return null;
@@ -1139,8 +1137,8 @@ public enum SlaveJob {
 	private Map<String, List<SlaveJobSetting>> mutuallyExclusiveSettings;
 	private List<SlaveJobSetting> defaultMutuallyExclusiveSettings;
 	private List<SlaveJobFlag> flags;
-	private AbstractWorldType worldLocation;
-	private AbstractPlaceType placeLocation;
+	private WorldType worldLocation;
+	private PlaceType placeLocation;
 	
 	private SlaveJob(
 			Colour colour,
@@ -1160,8 +1158,8 @@ public enum SlaveJob {
 			Map<String, List<SlaveJobSetting>> mutuallyExclusiveSettings,
 			List<SlaveJobSetting> defaultMutuallyExclusiveSettings,
 			List<SlaveJobFlag> flags,
-			AbstractWorldType worldLocation,
-			AbstractPlaceType placeLocation) {
+			WorldType worldLocation,
+			PlaceType placeLocation) {
 		this.colour = colour;
 		this.hourlyEventChance = hourlyEventChance;
 		this.slaveLimit = slaveLimit;
@@ -1355,16 +1353,16 @@ public enum SlaveJob {
 		return flags.contains(flag);
 	}
 	
-	public AbstractWorldType getWorldLocation(GameCharacter character) {
+	public WorldType getWorldLocation(GameCharacter character) {
 		return worldLocation;
 	}
 
-	public AbstractPlaceType getPlaceLocation(GameCharacter character) {
+	public PlaceType getPlaceLocation(GameCharacter character) {
 		return placeLocation;
 	}
 	
 	public Cell getWorkDestinationCell(GameCharacter slave) {
-		AbstractWorldType wType = this.getWorldLocation(slave);
+		WorldType wType = this.getWorldLocation(slave);
 		if(wType==null) {
 			return null;
 		}
@@ -1408,7 +1406,7 @@ public enum SlaveJob {
 			
 		} else if(!character.isSlave() && character.isSleepingAtHour(hour)){
 			return UtilText.parse(character, "[npc.Name] is sleeping at this hour, and as [npc.she] is not your slave, you cannot force [npc.herHim] to work at this time!");
-			
+
 		} else {
 			return "This job is unavailable!";
 		}

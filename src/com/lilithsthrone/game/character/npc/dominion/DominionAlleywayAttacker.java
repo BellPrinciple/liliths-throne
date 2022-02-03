@@ -19,7 +19,6 @@ import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.NPCGenerationFlag;
 import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.Occupation;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesSpawnRarity;
@@ -38,7 +37,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.world.Season;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -73,7 +71,7 @@ public class DominionAlleywayAttacker extends NPC {
 
 		if(!isImported) {
 			boolean canalSpecies = false;
-			AbstractPlaceType pt = Main.game.getPlayerCell().getPlace().getPlaceType();
+			PlaceType pt = Main.game.getPlayerCell().getPlace().getPlaceType();
 			if(pt.equals(PlaceType.DOMINION_ALLEYS_CANAL_CROSSING)
 					|| pt.equals(PlaceType.DOMINION_CANAL)
 					|| pt.equals(PlaceType.DOMINION_CANAL_END)) {
@@ -85,23 +83,23 @@ public class DominionAlleywayAttacker extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			Map<Subspecies, Integer> availableRaces = new HashMap<>();
+			for(Subspecies s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}
 				if(s==Subspecies.REINDEER_MORPH) {
 					if(Main.game.getSeason()==Season.WINTER && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hasSnowedThisWinter)) {
-						AbstractSubspecies.addToSubspeciesMap((int) ((canalSpecies?500:10000)* SubspeciesSpawnRarity.FIVE.getChanceMultiplier()), gender, s, availableRaces);
+						Subspecies.addToSubspeciesMap((int) ((canalSpecies?500:10000)* SubspeciesSpawnRarity.FIVE.getChanceMultiplier()), gender, s, availableRaces);
 					}
 					
 				} else {
 					if(Subspecies.getWorldSpecies(WorldType.DOMINION, pt, false).containsKey(s)) {
-						AbstractSubspecies.addToSubspeciesMap((int) ((canalSpecies?2500:10000) * Subspecies.getWorldSpecies(WorldType.DOMINION, pt, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+						Subspecies.addToSubspeciesMap((int) ((canalSpecies?2500:10000) * Subspecies.getWorldSpecies(WorldType.DOMINION, pt, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 					}
 					if(canalSpecies && Subspecies.getWorldSpecies(WorldType.SUBMISSION, pt, false).containsKey(s)) {
 //						System.out.println(s.getName(null));
-						AbstractSubspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.SUBMISSION, pt, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+						Subspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.SUBMISSION, pt, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 					}
 				}
 			}
@@ -203,7 +201,7 @@ public class DominionAlleywayAttacker extends NPC {
 	public boolean isUnique() {
 		return false;
 	}
-	
+
 	@Override
 	public String getDescription() {
 		if(this.getHistory()==Occupation.NPC_PROSTITUTE) {
@@ -297,7 +295,7 @@ public class DominionAlleywayAttacker extends NPC {
 	}
 	
 	public boolean isStormAttacker() {
-		AbstractPlaceType pt = this.getLocationPlace().getPlaceType();
+		var pt = this.getLocationPlace().getPlaceType();
 		return this.getWorldLocation().equals(WorldType.DOMINION)
 				&& !pt.equals(PlaceType.DOMINION_BACK_ALLEYS)
 				&& !pt.equals(PlaceType.DOMINION_ALLEYS_CANAL_CROSSING)

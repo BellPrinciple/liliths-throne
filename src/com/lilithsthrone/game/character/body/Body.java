@@ -18,45 +18,12 @@ import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTongueType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringSkinToneColorHelper;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.body.types.AntennaType;
-import com.lilithsthrone.game.character.body.types.ArmType;
-import com.lilithsthrone.game.character.body.types.AssType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.EarType;
-import com.lilithsthrone.game.character.body.types.EyeType;
-import com.lilithsthrone.game.character.body.types.FaceType;
-import com.lilithsthrone.game.character.body.types.HairType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.TentacleType;
-import com.lilithsthrone.game.character.body.types.TorsoType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
+import com.lilithsthrone.game.character.body.types.*;
 import com.lilithsthrone.game.character.body.valueEnums.AgeCategory;
 import com.lilithsthrone.game.character.body.valueEnums.AreolaeShape;
 import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
@@ -99,9 +66,6 @@ import com.lilithsthrone.game.character.markings.TattooCounterType;
 import com.lilithsthrone.game.character.markings.TattooType;
 import com.lilithsthrone.game.character.pregnancy.Litter;
 import com.lilithsthrone.game.character.pregnancy.PregnancyPossibility;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FeralAttributes;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
@@ -143,7 +107,7 @@ public class Body implements XMLSaving {
 	private Leg leg;
 	private Torso torso;
 	private BodyMaterial bodyMaterial;
-	protected AbstractSubspecies fleshSubspecies;
+	protected Subspecies fleshSubspecies;
 
 	// Optional:
 	private Antenna antenna;
@@ -160,23 +124,23 @@ public class Body implements XMLSaving {
 	
 	private boolean feral;
 	
-	private Map<AbstractRace, Integer> raceWeightMap = new ConcurrentHashMap<>();
-	private AbstractSubspecies subspecies;
+	private Map<Race, Integer> raceWeightMap = new ConcurrentHashMap<>();
+	private Subspecies subspecies;
 	/** This keeps track of what this body's subspecies was at the moment of last being saved. it's only used in BodyChanging.java as part of save/load transformation presets. */
-	private AbstractSubspecies loadedSubspecies;
+	private Subspecies loadedSubspecies;
 	private RaceStage raceStage;
 	private boolean piercedStomach = false;
-	private AbstractSubspecies subspeciesOverride = null;
-	private AbstractSubspecies halfDemonSubspecies = null;
+	private Subspecies subspeciesOverride = null;
+	private Subspecies halfDemonSubspecies = null;
 	private int height;
 	private int femininity;
 	private int bodySize;
 	private int muscle;
 	private BodyHair pubicHair;
 
-	private Set<AbstractBodyCoveringType> heavyMakeup;
-	private Map<AbstractBodyCoveringType, Covering> coverings;
-	private Set<AbstractBodyCoveringType> coveringsDiscovered;
+	private Set<BodyCoveringType> heavyMakeup;
+	private Map<BodyCoveringType, Covering> coverings;
+	private Set<BodyCoveringType> coveringsDiscovered;
 
 	private List<BodyPartInterface> allBodyParts;
 	private List<BodyPartInterface> allBodyPartsExtended;
@@ -354,7 +318,7 @@ public class Body implements XMLSaving {
 		// Coverings:
 
 		this.coverings = new HashMap<>();
-		for(Entry<AbstractBodyCoveringType, Covering> entry : bodyToCopy.coverings.entrySet()) {
+		for(Entry<BodyCoveringType, Covering> entry : bodyToCopy.coverings.entrySet()) {
 			coverings.put(entry.getKey(), new Covering(entry.getValue()));
 		}
 		this.coveringsDiscovered = new HashSet<>(bodyToCopy.coveringsDiscovered);
@@ -436,7 +400,7 @@ public class Body implements XMLSaving {
 		}
 	}
 	
-	public static AbstractBodyCoveringType getBodyHairCoveringType(AbstractRace race) {
+	public static BodyCoveringType getBodyHairCoveringType(Race race) {
 		return race.getRacialBody().getBodyHairType();
 	}
 	
@@ -445,7 +409,7 @@ public class Body implements XMLSaving {
 		// Everything is based on human skin value:
 		StartingSkinTone tone = StartingSkinTone.values()[Util.random.nextInt(StartingSkinTone.values().length)];
 		
-		for(AbstractBodyCoveringType s : BodyCoveringType.getAllBodyCoveringTypes()) {
+		for(BodyCoveringType s : BodyCoveringType.getAllBodyCoveringTypes()) {
 			// Specials:
 			// orifice exterior/interior
 			// makeup
@@ -531,7 +495,7 @@ public class Body implements XMLSaving {
 		XMLUtil.addAttribute(doc, bodyCore, "subspecies", Subspecies.getIdFromSubspecies(this.getSubspecies()));
 		XMLUtil.addAttribute(doc, bodyCore, "takesAfterMother", String.valueOf(this.isTakesAfterMother()));
 		
-		for(AbstractBodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
+		for(BodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
 			Covering covering = this.coverings.get(bct);
 			if(this.isBodyCoveringTypesDiscovered(bct)
 					|| ((bct == BodyCoveringType.MAKEUP_BLUSHER
@@ -566,7 +530,7 @@ public class Body implements XMLSaving {
 		if(!heavyMakeup.isEmpty()) {
 			Element element = doc.createElement("heavyMakeup");
 			bodyCore.appendChild(element);
-			for(AbstractBodyCoveringType bct : heavyMakeup) {
+			for(BodyCoveringType bct : heavyMakeup) {
 				Element bctElement = doc.createElement("type");
 				element.appendChild(bctElement);
 				bctElement.setTextContent(BodyCoveringType.getIdFromBodyCoveringType(bct));
@@ -883,10 +847,10 @@ public class Body implements XMLSaving {
 	}
 
 	
-	private void setBodyCoveringForXMLImport(AbstractBodyCoveringType bct, CoveringPattern pattern, CoveringModifier modifier, Colour primary, boolean primaryGlow, Colour secondary, boolean secondaryGlow) {
+	private void setBodyCoveringForXMLImport(BodyCoveringType bct, CoveringPattern pattern, CoveringModifier modifier, Colour primary, boolean primaryGlow, Colour secondary, boolean secondaryGlow) {
 		this.getCoverings().put(bct, new Covering(bct, pattern, modifier, primary, primaryGlow, secondary, secondaryGlow));
 	}
-	private void setBodyCoveringForXMLImport(AbstractBodyCoveringType bct, CoveringPattern pattern, Colour primary, boolean primaryGlow, Colour secondary, boolean secondaryGlow) {
+	private void setBodyCoveringForXMLImport(BodyCoveringType bct, CoveringPattern pattern, Colour primary, boolean primaryGlow, Colour secondary, boolean secondaryGlow) {
 		this.getCoverings().put(bct, new Covering(bct, pattern, primary, primaryGlow, secondary, secondaryGlow));
 	}
 	
@@ -925,7 +889,7 @@ public class Body implements XMLSaving {
 			feralBody = Boolean.valueOf(element.getAttribute("feral"));
 		}
 		
-		AbstractSubspecies importedSubspeciesOverride = null;
+		Subspecies importedSubspeciesOverride = null;
 		try {
 			if(element.getAttribute("subspeciesOverride") != null && !element.getAttribute("subspeciesOverride").isEmpty()) {
 				importedSubspeciesOverride = Subspecies.getSubspeciesFromId(element.getAttribute("subspeciesOverride"));
@@ -933,7 +897,7 @@ public class Body implements XMLSaving {
 		} catch(Exception ex) {	
 		}
 
-		AbstractSubspecies importedLoadedSubspecies = null;
+		Subspecies importedLoadedSubspecies = null;
 		try {
 			if(element.getAttribute("subspecies") != null && !element.getAttribute("subspecies").isEmpty()) {
 				importedLoadedSubspecies = Subspecies.getSubspeciesFromId(element.getAttribute("subspecies"));
@@ -1401,7 +1365,7 @@ public class Body implements XMLSaving {
 		
 		Element leg = (Element)parentElement.getElementsByTagName("leg").item(0);
 
-		AbstractLegType legType = LegType.getLegTypeFromId(leg.getAttribute("type"));
+		LegType legType = LegType.getLegTypeFromId(leg.getAttribute("type"));
 		
 		LegConfiguration configuration = LegConfiguration.BIPEDAL;
 		try {
@@ -1609,7 +1573,7 @@ public class Body implements XMLSaving {
 		// **************** Tail **************** //
 		
 		Element tail = (Element)parentElement.getElementsByTagName("tail").item(0);
-		AbstractTailType tailType = TailType.getTailTypeFromId(tail.getAttribute("type"));
+		TailType tailType = TailType.getTailTypeFromId(tail.getAttribute("type"));
 		
 		Tail importedTail = new Tail(tailType);
 		
@@ -1644,7 +1608,7 @@ public class Body implements XMLSaving {
 		
 		Element tentacle = (Element)parentElement.getElementsByTagName("tentacle").item(0);
 		if(tentacle!=null) {
-			AbstractTentacleType tentacleType = TentacleType.getTentacleTypeFromId(tentacle.getAttribute("type"));
+			TentacleType tentacleType = TentacleType.getTentacleTypeFromId(tentacle.getAttribute("type"));
 	
 			importedTentacle = new Tentacle(tentacleType);
 			
@@ -1939,7 +1903,7 @@ public class Body implements XMLSaving {
 			} catch(Exception ex) {
 			}
 
-			AbstractBreastType crotchBoobType = BreastType.getBreastTypeFromId(breasts.getAttribute("type"));
+			BreastType crotchBoobType = BreastType.getBreastTypeFromId(breasts.getAttribute("type"));
 			if(oldPantherReplacement) {
 				if(crotchBoobType.getRace()==Race.CAT_MORPH) {
 					crotchBoobType = BreastType.getBreastTypes(Race.getRaceFromId("innoxia_panther")).get(0);
@@ -2115,7 +2079,7 @@ public class Body implements XMLSaving {
 					}
 				}
 
-				AbstractBodyCoveringType coveringType = BodyCoveringType.getBodyCoveringTypeFromId(type);
+				BodyCoveringType coveringType = BodyCoveringType.getBodyCoveringTypeFromId(type);
 				CoveringPattern loadedPattern = CoveringPattern.valueOf(e.getAttribute("pattern"));
 				if(!coveringType.getAllPatterns().containsKey(loadedPattern)) {
 					loadedPattern = Util.getRandomObjectFromWeightedMap(coveringType.getNaturalPatterns());
@@ -2182,8 +2146,8 @@ public class Body implements XMLSaving {
 		// Converting harpy bald eagles to raptor bald eagles:
 		if(Main.isVersionOlderThan(version, "0.4.2.5")) {
 			if(body.getRace()==Race.HARPY) {
-				AbstractBodyCoveringType feathers = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_FEATHER):BodyCoveringType.FEATHERS;
-				AbstractBodyCoveringType headFeathers = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.HAIR):BodyCoveringType.HAIR_HARPY;
+				BodyCoveringType feathers = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_FEATHER):BodyCoveringType.FEATHERS;
+				BodyCoveringType headFeathers = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.HAIR):BodyCoveringType.HAIR_HARPY;
 				
 				if(body.getCoverings().get(feathers).getPrimaryColour()==PresetColour.COVERING_BROWN_DARK && body.getCoverings().get(headFeathers).getPrimaryColour()==PresetColour.COVERING_WHITE) {
 
@@ -2245,7 +2209,7 @@ public class Body implements XMLSaving {
 		return body;
 	}
 	
-	private static void coveringCopyConversion(Body body, AbstractBodyCoveringType coveringTypeToCopy, AbstractBodyCoveringType newCoveringType) {
+	private static void coveringCopyConversion(Body body, BodyCoveringType coveringTypeToCopy, BodyCoveringType newCoveringType) {
 		Covering covering = body.getCovering(coveringTypeToCopy, false);
 		body.setBodyCoveringForXMLImport(newCoveringType,
 				covering.getPattern(),
@@ -3516,7 +3480,7 @@ public class Body implements XMLSaving {
 		return UtilText.parse(owner, sb.toString());
 	}
 
-	private void addRaceWeight(Map<AbstractRace, Integer> raceWeightMap, AbstractRace race, int weight) {
+	private void addRaceWeight(Map<Race, Integer> raceWeightMap, Race race, int weight) {
 		if(race!=null && race!=Race.NONE) {
 			raceWeightMap.putIfAbsent(race, 0);
 			raceWeightMap.put(race, raceWeightMap.get(race)+weight);
@@ -3534,7 +3498,7 @@ public class Body implements XMLSaving {
 //			target.removeStatusEffect(StatusEffect.SUBSPECIES_BONUS);
 //		}
 		
-		AbstractRace race = Race.HUMAN;
+		Race race = Race.HUMAN;
 		if(this.getBodyMaterial()==BodyMaterial.SLIME) {
 			race = Race.SLIME;
 			this.raceStage = RaceStage.GREATER;
@@ -3552,7 +3516,7 @@ public class Body implements XMLSaving {
 			this.raceStage = getRaceStageFromPartWeighting();
 		}
 		
-		subspecies = AbstractSubspecies.getSubspeciesFromBody(this, race);
+		subspecies = Subspecies.getSubspeciesFromBody(this, race);
 //		boolean overrideSubspecies = false;
 
 		halfDemonSubspecies = null; // reset so it will be recalculated when accessed
@@ -3601,12 +3565,12 @@ public class Body implements XMLSaving {
 //		}
 	}
 
-	public AbstractRace getRaceFromPartWeighting() {
+	public Race getRaceFromPartWeighting() {
 		return getRaceFromPartWeighting(false);
 	}
 	
-	public AbstractRace getRaceFromPartWeighting(boolean ignoreOverride) {
-		AbstractRace race = Race.HUMAN;
+	public Race getRaceFromPartWeighting(boolean ignoreOverride) {
+		Race race = Race.HUMAN;
 		
 		raceWeightMap.clear();
 		
@@ -3637,7 +3601,7 @@ public class Body implements XMLSaving {
 		int max = 0;
 		boolean demonPartFound = false;
 		
-		for(Entry<AbstractRace, Integer> e : raceWeightMap.entrySet()) {
+		for(Entry<Race, Integer> e : raceWeightMap.entrySet()) {
 			if(e.getKey()!=null && e.getKey()==Race.DEMON) {
 				demonPartFound = true;
 				
@@ -3672,11 +3636,11 @@ public class Body implements XMLSaving {
 		}
 	}
 
-	public Map<AbstractRace, Integer> getRaceWeightMap() {
+	public Map<Race, Integer> getRaceWeightMap() {
 		return raceWeightMap;
 	}
 	
-	public AbstractRace getRace() {
+	public Race getRace() {
 		if(subspecies == null) {
 			calculateRace(null);
 		}
@@ -3686,18 +3650,18 @@ public class Body implements XMLSaving {
 	/**
 	 * @return This body's true race. If this body does not have a subspecies override, this will be the same as getRace(). If they do have an override, however, it will return the race of that override.
 	 */
-	public AbstractRace getTrueRace() {
+	public Race getTrueRace() {
 		if(this.getSubspeciesOverride()!=null) {
 			return this.getSubspeciesOverride().getRace();
 		}
 		return getRace();
 	}
 
-	public AbstractSubspecies getSubspecies() {
+	public Subspecies getSubspecies() {
 		return subspecies;
 	}
 	
-	public AbstractSubspecies getLoadedSubspecies() {
+	public Subspecies getLoadedSubspecies() {
 		if(loadedSubspecies==null) {
 			return getSubspecies();
 		}
@@ -3707,7 +3671,7 @@ public class Body implements XMLSaving {
 	/**
 	 * @return This body's true subspecies. If this body does not have a subspecies override, this will be the same as getSubspecies(). If they do have an override, however, it will return that override.
 	 */
-	public AbstractSubspecies getTrueSubspecies() {
+	public Subspecies getTrueSubspecies() {
 		if(this.getSubspeciesOverride()!=null) {
 			return this.getSubspeciesOverride();
 		}
@@ -3718,17 +3682,17 @@ public class Body implements XMLSaving {
 		return raceStage;
 	}
 
-	public AbstractSubspecies getSubspeciesOverride() {
+	public Subspecies getSubspeciesOverride() {
 		return subspeciesOverride;
 	}
 
-	public void setSubspeciesOverride(AbstractSubspecies subspeciesOverride) {
+	public void setSubspeciesOverride(Subspecies subspeciesOverride) {
 		this.subspeciesOverride = subspeciesOverride;
 	}
 
-	public AbstractSubspecies getHalfDemonSubspecies() {
+	public Subspecies getHalfDemonSubspecies() {
 		if (halfDemonSubspecies == null) {
-			halfDemonSubspecies = AbstractSubspecies.getSubspeciesFromBody(this, getRaceFromPartWeighting(true));
+			halfDemonSubspecies = Subspecies.getSubspeciesFromBody(this, getRaceFromPartWeighting(true));
 		}
 		return halfDemonSubspecies;
 	}
@@ -3745,7 +3709,7 @@ public class Body implements XMLSaving {
 		return arm;
 	}
 
-	public AbstractArmType getArmType() {
+	public ArmType getArmType() {
 		return arm.getType();
 	}
 
@@ -3753,7 +3717,7 @@ public class Body implements XMLSaving {
 		return ass;
 	}
 
-	public AbstractAssType getAssType() {
+	public AssType getAssType() {
 		return ass.getType();
 	}
 	
@@ -3761,7 +3725,7 @@ public class Body implements XMLSaving {
 		return breast;
 	}
 
-	public AbstractBreastType getBreastType() {
+	public BreastType getBreastType() {
 		return breast.getType();
 	}
 	
@@ -3773,7 +3737,7 @@ public class Body implements XMLSaving {
 		return breastCrotch;
 	}
 
-	public AbstractBreastType getBreastCrotchType() {
+	public BreastType getBreastCrotchType() {
 		return breastCrotch.getType();
 	}
 	
@@ -3785,7 +3749,7 @@ public class Body implements XMLSaving {
 		return face;
 	}
 
-	public AbstractFaceType getFaceType() {
+	public FaceType getFaceType() {
 		return face.getType();
 	}
 	
@@ -3793,7 +3757,7 @@ public class Body implements XMLSaving {
 		return eye;
 	}
 
-	public AbstractEyeType getEyeType() {
+	public EyeType getEyeType() {
 		return eye.getType();
 	}
 
@@ -3801,7 +3765,7 @@ public class Body implements XMLSaving {
 		return ear;
 	}
 
-	public AbstractEarType getEarType() {
+	public EarType getEarType() {
 		return ear.getType();
 	}
 
@@ -3809,7 +3773,7 @@ public class Body implements XMLSaving {
 		return hair;
 	}
 
-	public AbstractHairType getHairType() {
+	public HairType getHairType() {
 		return hair.getType();
 	}
 
@@ -3817,7 +3781,7 @@ public class Body implements XMLSaving {
 		return horn;
 	}
 
-	public AbstractHornType getHornType() {
+	public HornType getHornType() {
 		return horn.getType();
 	}
 
@@ -3829,7 +3793,7 @@ public class Body implements XMLSaving {
 		return leg;
 	}
 
-	public AbstractLegType getLegType() {
+	public LegType getLegType() {
 		return leg.getType();
 	}
 
@@ -3845,7 +3809,7 @@ public class Body implements XMLSaving {
 		return penis;
 	}
 
-	public AbstractPenisType getPenisType() {
+	public PenisType getPenisType() {
 		return penis.getType();
 	}
 
@@ -3881,7 +3845,7 @@ public class Body implements XMLSaving {
 		return torso;
 	}
 
-	public AbstractTorsoType getTorsoType() {
+	public TorsoType getTorsoType() {
 		return torso.getType();
 	}
 
@@ -3889,7 +3853,7 @@ public class Body implements XMLSaving {
 		return tail;
 	}
 
-	public AbstractTailType getTailType() {
+	public TailType getTailType() {
 		return tail.getType();
 	}
 
@@ -3897,7 +3861,7 @@ public class Body implements XMLSaving {
 		return tentacle;
 	}
 
-	public AbstractTongueType getTongueType() {
+	public TongueType getTongueType() {
 		return face.getTongue().getType();
 	}
 
@@ -3905,7 +3869,7 @@ public class Body implements XMLSaving {
 		return vagina;
 	}
 
-	public AbstractVaginaType getVaginaType() {
+	public VaginaType getVaginaType() {
 		return vagina.getType();
 	}
 
@@ -3929,7 +3893,7 @@ public class Body implements XMLSaving {
 		return leg.getLegConfiguration().getMinimumWingSizeForFlight(this).getValue();
 	}
 
-	public AbstractWingType getWingType() {
+	public WingType getWingType() {
 		return wing.getType();
 	}
 
@@ -3941,11 +3905,11 @@ public class Body implements XMLSaving {
 		this.arm = arm;
 	}
 
-	public String setArmType(AbstractArmType type) {
+	public String setArmType(ArmType type) {
 		return this.arm.setType(null, type);
 	}
 
-	public String setArmType(GameCharacter owner, AbstractArmType type) {
+	public String setArmType(GameCharacter owner, ArmType type) {
 		return this.arm.setType(owner, type);
 	}
 
@@ -3961,7 +3925,7 @@ public class Body implements XMLSaving {
 		this.ass = ass;
 	}
 
-	public String setAssType(GameCharacter owner, AbstractAssType type) {
+	public String setAssType(GameCharacter owner, AssType type) {
 		return this.ass.setType(owner, type);
 	}
 	
@@ -3969,7 +3933,7 @@ public class Body implements XMLSaving {
 		this.breast = breast;
 	}
 
-	public String setBreastType(GameCharacter owner, AbstractBreastType type) {
+	public String setBreastType(GameCharacter owner, BreastType type) {
 		return this.breast.setType(owner, type);
 	}
 
@@ -3977,7 +3941,7 @@ public class Body implements XMLSaving {
 		this.breastCrotch = breastCrotch;
 	}
 
-	public String setBreastCrotchType(GameCharacter owner, AbstractBreastType type) {
+	public String setBreastCrotchType(GameCharacter owner, BreastType type) {
 		return this.breastCrotch.setType(owner, type);
 	}
 
@@ -3985,11 +3949,11 @@ public class Body implements XMLSaving {
 		this.face = face;
 	}
 
-	public String setFaceType(AbstractFaceType type) {
+	public String setFaceType(FaceType type) {
 		return face.setType(null, type);
 	}
 
-	public String setFaceType(GameCharacter owner, AbstractFaceType type) {
+	public String setFaceType(GameCharacter owner, FaceType type) {
 		return face.setType(owner, type);
 	}
 
@@ -3997,7 +3961,7 @@ public class Body implements XMLSaving {
 		this.eye = eye;
 	}
 
-	public String setEyeType(GameCharacter owner, AbstractEyeType type) {
+	public String setEyeType(GameCharacter owner, EyeType type) {
 		return this.eye.setType(owner, type);
 	}
 
@@ -4005,11 +3969,11 @@ public class Body implements XMLSaving {
 		this.ear = ear;
 	}
 
-	public String setEarType(AbstractEarType type) {
+	public String setEarType(EarType type) {
 		return this.ear.setType(null, type);
 	}
 
-	public String setEarType(GameCharacter owner, AbstractEarType type) {
+	public String setEarType(GameCharacter owner, EarType type) {
 		return this.ear.setType(owner, type);
 	}
 
@@ -4017,11 +3981,11 @@ public class Body implements XMLSaving {
 		this.hair = hair;
 	}
 
-	public String setHairType(AbstractHairType type) {
+	public String setHairType(HairType type) {
 		return this.hair.setType(null, type);
 	}
 
-	public String setHairType(GameCharacter owner, AbstractHairType type) {
+	public String setHairType(GameCharacter owner, HairType type) {
 		return this.hair.setType(owner, type);
 	}
 
@@ -4029,19 +3993,19 @@ public class Body implements XMLSaving {
 		this.leg = leg;
 	}
 
-	public String setLegType(AbstractLegType type) {
+	public String setLegType(LegType type) {
 		return this.leg.setType(null, type);
 	}
 
-	public String setLegType(GameCharacter owner, AbstractLegType type) {
+	public String setLegType(GameCharacter owner, LegType type) {
 		return this.leg.setType(owner, type);
 	}
 
-	public void setLegConfigurationForced(AbstractLegType type, LegConfiguration legConfiguration) {
+	public void setLegConfigurationForced(LegType type, LegConfiguration legConfiguration) {
 		this.leg.setLegConfigurationForced(type, legConfiguration);
 	}
 
-	public void setTongueType(AbstractTongueType type) {
+	public void setTongueType(TongueType type) {
 		this.face.getTongue().setType(type);
 	}
 
@@ -4049,11 +4013,11 @@ public class Body implements XMLSaving {
 		this.torso = torso;
 	}
 	
-	public String setTorsoType(AbstractTorsoType type) {
+	public String setTorsoType(TorsoType type) {
 		return this.torso.setType(null, type);
 	}
 
-	public String setTorsoType(GameCharacter owner, AbstractTorsoType type) {
+	public String setTorsoType(GameCharacter owner, TorsoType type) {
 		return this.torso.setType(owner, type);
 	}
 
@@ -4061,11 +4025,11 @@ public class Body implements XMLSaving {
 		this.horn = horn;
 	}
 
-	public String setHornType(AbstractHornType type) {
+	public String setHornType(HornType type) {
 		return this.horn.setType(null, type);
 	}
 
-	public String setHornType(GameCharacter owner, AbstractHornType type) {
+	public String setHornType(GameCharacter owner, HornType type) {
 		return this.horn.setType(owner, type);
 	}
 
@@ -4073,11 +4037,11 @@ public class Body implements XMLSaving {
 		this.penis = penis;
 	}
 
-	public String setPenisType(AbstractPenisType type) {
+	public String setPenisType(PenisType type) {
 		return this.penis.setType(null, type);
 	}
 
-	public String setPenisType(GameCharacter owner, AbstractPenisType type) {
+	public String setPenisType(GameCharacter owner, PenisType type) {
 		return this.penis.setType(owner, type);
 	}
 
@@ -4093,11 +4057,11 @@ public class Body implements XMLSaving {
 		this.tail = tail;
 	}
 
-	public String setTailType(AbstractTailType type) {
+	public String setTailType(TailType type) {
 		return this.tail.setType(null, type);
 	}
 
-	public String setTailType(GameCharacter owner, AbstractTailType type) {
+	public String setTailType(GameCharacter owner, TailType type) {
 		return this.tail.setType(owner, type);
 	}
 
@@ -4109,11 +4073,11 @@ public class Body implements XMLSaving {
 		this.vagina = vagina;
 	}
 
-	public String setVaginaType(AbstractVaginaType type) {
+	public String setVaginaType(VaginaType type) {
 		return this.vagina.setType(null, type);
 	}
 
-	public String setVaginaType(GameCharacter owner, AbstractVaginaType type) {
+	public String setVaginaType(GameCharacter owner, VaginaType type) {
 		return this.vagina.setType(owner, type);
 	}
 
@@ -4137,15 +4101,15 @@ public class Body implements XMLSaving {
 		return wing.setSize(owner, getMinimumWingSizeValueForFlight());
 	}
 
-	public String setWingType(AbstractWingType type) {
+	public String setWingType(WingType type) {
 		return this.wing.setType(null, type);
 	}
 
-	public String setWingType(GameCharacter owner, AbstractWingType type) {
+	public String setWingType(GameCharacter owner, WingType type) {
 		return this.wing.setType(owner, type);
 	}
 
-	public void applyLegConfigurationTransformation(AbstractLegType legType, LegConfiguration legConfiguration, boolean applyFullEffects) {
+	public void applyLegConfigurationTransformation(LegType legType, LegConfiguration legConfiguration, boolean applyFullEffects) {
 		this.setLegType(legType);
 		this.leg.getType().applyLegConfigurationTransformation(this, legConfiguration, applyFullEffects);
 	}
@@ -6552,10 +6516,10 @@ public class Body implements XMLSaving {
 	}
 
 	/**
-	 * @param subspecies Pass in the AbstractSubspecies to which this character should be transformed into a feral version of. Pass in null to transform back from feral to a standard anthro.
+	 * @param subspecies Pass in the Subspecies to which this character should be transformed into a feral version of. Pass in null to transform back from feral to a standard anthro.
 	 */
-	public void setFeral(GameCharacter target, AbstractSubspecies subspecies) {
-		AbstractSubspecies targetSubspecies = subspecies == null ? getSubspecies() : subspecies;
+	public void setFeral(GameCharacter target, Subspecies subspecies) {
+		Subspecies targetSubspecies = subspecies == null ? getSubspecies() : subspecies;
 		FeralAttributes attributes = targetSubspecies.getFeralAttributes(this);
 		if(attributes==null) {
 			System.err.println("Error in Body.setFeral(): subspecies '"+Subspecies.getIdFromSubspecies(targetSubspecies)+"' does not support FeralAttributes!");
@@ -6592,7 +6556,7 @@ public class Body implements XMLSaving {
 		}
 		
 		// Set genital relative sizes:
-		AbstractRacialBody rb = targetSubspecies.getRace().getRacialBody();
+		RacialBody rb = targetSubspecies.getRace().getRacialBody();
 		float proportionSizeDifference = ((float)attributes.getSize())/(this.isFeminine()?rb.getFemaleHeight():rb.getMaleHeight());
 		this.getPenis().setPenisLength(null, (int) (rb.getPenisSize()*proportionSizeDifference));
 		this.getPenis().setPenisGirth(null, (int) (rb.getPenisGirth()*proportionSizeDifference));
@@ -6612,7 +6576,7 @@ public class Body implements XMLSaving {
 	}
 
 	public void removeAllMakeup() {
-		for(AbstractBodyCoveringType makeup : BodyCoveringType.getAllMakeupTypes()) {
+		for(BodyCoveringType makeup : BodyCoveringType.getAllMakeupTypes()) {
 			if(coverings.containsKey(makeup)) {
 				coverings.put(makeup, new Covering(makeup, CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_NONE, false, PresetColour.COVERING_NONE, false));
 			}
@@ -6628,42 +6592,42 @@ public class Body implements XMLSaving {
 		this.piercedStomach = piercedStomach;
 	}
 
-	public Set<AbstractBodyCoveringType> getHeavyMakeup() {
+	public Set<BodyCoveringType> getHeavyMakeup() {
 		return heavyMakeup;
 	}
 
-	public boolean isHeavyMakeup(AbstractBodyCoveringType type) {
+	public boolean isHeavyMakeup(BodyCoveringType type) {
 		return heavyMakeup.contains(type);
 	}
 	
-	public void addHeavyMakeup(AbstractBodyCoveringType type) {
+	public void addHeavyMakeup(BodyCoveringType type) {
 		heavyMakeup.add(type);
 	}
 	
-	public boolean removeHeavyMakeup(AbstractBodyCoveringType type) {
+	public boolean removeHeavyMakeup(BodyCoveringType type) {
 		return heavyMakeup.remove(type);
 	}
 
-	public Map<AbstractBodyCoveringType, Covering> getCoverings() {
+	public Map<BodyCoveringType, Covering> getCoverings() {
 		return coverings;
 	}
 
 	/**
 	 * This should only be used in special cases, where the covering map needs to be overwritten for some reason!
 	 */
-	public void setCoverings(Map<AbstractBodyCoveringType, Covering> coverings) {
+	public void setCoverings(Map<BodyCoveringType, Covering> coverings) {
 		this.coverings = coverings;
 	}
 	
-	public void setCovering(AbstractBodyCoveringType coveringType, CoveringPattern pattern, CoveringModifier modifier, Colour primaryColor, boolean primaryGlow, Colour secondaryColor, boolean secondaryGlow) {
+	public void setCovering(BodyCoveringType coveringType, CoveringPattern pattern, CoveringModifier modifier, Colour primaryColor, boolean primaryGlow, Colour secondaryColor, boolean secondaryGlow) {
 		coverings.put(coveringType, new Covering(coveringType, pattern, modifier, primaryColor, primaryGlow, secondaryColor, secondaryGlow));
 	}
 
-	public void setCovering(AbstractBodyCoveringType coveringType, CoveringPattern pattern, Colour primaryColor, boolean primaryGlow, Colour secondaryColor, boolean secondaryGlow) {
+	public void setCovering(BodyCoveringType coveringType, CoveringPattern pattern, Colour primaryColor, boolean primaryGlow, Colour secondaryColor, boolean secondaryGlow) {
 		coverings.put(coveringType, new Covering(coveringType, pattern, primaryColor, primaryGlow, secondaryColor, secondaryGlow));
 	}
 
-	public AbstractBodyCoveringType getCoveringType(BodyPartInterface bodyPart) {
+	public BodyCoveringType getCoveringType(BodyPartInterface bodyPart) {
 		return bodyPart.getBodyCoveringType(this);
 	}
 
@@ -6671,37 +6635,37 @@ public class Body implements XMLSaving {
 		return getCovering(bodyPart.getBodyCoveringType(this), false);
 	}
 
-	public Covering getCovering(AbstractBodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
+	public Covering getCovering(BodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
 		if(!accountForNonFleshMaterial) {
 			return this.getCoverings().get(bodyCoveringType);
 		}
-		AbstractBodyCoveringType handledType = this.getBodyMaterial()!=BodyMaterial.FLESH
+		BodyCoveringType handledType = this.getBodyMaterial()!=BodyMaterial.FLESH
 												?BodyCoveringType.getMaterialBodyCoveringType(this.getBodyMaterial(), bodyCoveringType.getCategory())
 												:bodyCoveringType;
 		return this.getCoverings().get(handledType);
 	}
 
-	public CoveringModifier getCoveringModifier(AbstractBodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
+	public CoveringModifier getCoveringModifier(BodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
 		return getCovering(bodyCoveringType, accountForNonFleshMaterial).getModifier();
 	}
 
-	public void setCoveringModifier(AbstractBodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial, CoveringModifier modifier) {
+	public void setCoveringModifier(BodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial, CoveringModifier modifier) {
 		getCovering(bodyCoveringType, accountForNonFleshMaterial).setModifier(modifier);
 	}
 
-	public CoveringPattern getCoveringPattern(AbstractBodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
+	public CoveringPattern getCoveringPattern(BodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
 		return getCovering(bodyCoveringType, accountForNonFleshMaterial).getPattern();
 	}
 
-	public void setCoveringPattern(AbstractBodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial, CoveringPattern pattern) {
+	public void setCoveringPattern(BodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial, CoveringPattern pattern) {
 		getCovering(bodyCoveringType, accountForNonFleshMaterial).setPattern(pattern);
 	}
 
-	public boolean isBodyCoveringTypesDiscovered(AbstractBodyCoveringType bct) {
+	public boolean isBodyCoveringTypesDiscovered(BodyCoveringType bct) {
 		return coveringsDiscovered.contains(bct);
 	}
 
-	public boolean addBodyCoveringTypesDiscovered(AbstractBodyCoveringType bct) {
+	public boolean addBodyCoveringTypesDiscovered(BodyCoveringType bct) {
 		return coveringsDiscovered.add(bct);
 	}
 	
@@ -6740,7 +6704,7 @@ public class Body implements XMLSaving {
 		}
 		
 		if(updateBodyHairColours) {
-			for(AbstractRace race : Race.getAllRaces()) {
+			for(Race race : Race.getAllRaces()) {
 				if(!HairType.getHairTypes(race).isEmpty()) {
 					coverings.put(race.getRacialBody().getBodyHairType(), new Covering(race.getRacialBody().getBodyHairType(), coverings.get(HairType.getHairTypes(race).get(0).getBodyCoveringType(this)).getPrimaryColour()));
 				}
@@ -6751,12 +6715,12 @@ public class Body implements XMLSaving {
 		if(updateSkin) {
 			for(BodyMaterial mat : BodyMaterial.values()) { // Update all non-flesh parts to be the same colour as main skin:
 				if(mat!=BodyMaterial.FLESH) {
-					AbstractBodyCoveringType coreSlimeCovering = BodyCoveringType.getMaterialBodyCoveringType(mat, BodyCoveringCategory.MAIN_SKIN);
+					BodyCoveringType coreSlimeCovering = BodyCoveringType.getMaterialBodyCoveringType(mat, BodyCoveringCategory.MAIN_SKIN);
 					Covering currentCovering = this.getCovering(coreSlimeCovering, true);
 					
 					for(BodyCoveringCategory cat : BodyCoveringCategory.values()) {
 						if(cat.isInfluencedByMaterialType()) {
-							AbstractBodyCoveringType nonFleshCovering = BodyCoveringType.getMaterialBodyCoveringType(mat, cat);
+							BodyCoveringType nonFleshCovering = BodyCoveringType.getMaterialBodyCoveringType(mat, cat);
 							CoveringPattern pattern = currentCovering.getPattern();
 							if(!nonFleshCovering.getAllPatterns().keySet().contains(pattern)) {
 								pattern = nonFleshCovering.getNaturalPatterns().entrySet().iterator().next().getKey();
@@ -6847,7 +6811,7 @@ public class Body implements XMLSaving {
 	}
 	
 	public void updateVaginaColouring() {
-		AbstractRace race = vagina.getType()!=VaginaType.NONE?vagina.getType().getRace():getRace();
+		Race race = vagina.getType()!=VaginaType.NONE?vagina.getType().getRace():getRace();
 		if(race==Race.ANGEL) {
 			coverings.put(BodyCoveringType.VAGINA, new Covering(BodyCoveringType.VAGINA, CoveringPattern.ORIFICE_VAGINA, coverings.get(BodyCoveringType.ANGEL).getPrimaryColour(), false, PresetColour.ORIFICE_INTERIOR, false));
 			
@@ -6860,7 +6824,7 @@ public class Body implements XMLSaving {
 	}
 	
 	public void updatePenisColouring() {
-		AbstractRace race = penis.getType()!=PenisType.NONE?penis.getType().getRace():getRace();
+		Race race = penis.getType()!=PenisType.NONE?penis.getType().getRace():getRace();
 		if(race==Race.ANGEL) {
 			coverings.put(BodyCoveringType.PENIS, new Covering(BodyCoveringType.PENIS, CoveringPattern.NONE, coverings.get(BodyCoveringType.ANGEL).getPrimaryColour(), false, PresetColour.ORIFICE_INTERIOR, false));
 			
@@ -6930,18 +6894,18 @@ public class Body implements XMLSaving {
 	}
 
 	/**
-	 * This is reset to null after every transformation, and is then recalculated in AbstractSubspecies.
+	 * This is reset to null after every transformation, and is then recalculated in Subspecies.
 	 * @return The subspecies which this character appears to be if they were made of flesh.
 	 *  Use getTrueSubspecies() or do some checks with getSubspeciesOverride() to get their true Subspecies, but for 99.9% of the time, that won't be necessary and this method is fine to use.
 	 */
-	public AbstractSubspecies getFleshSubspecies() {
+	public Subspecies getFleshSubspecies() {
 		if(fleshSubspecies==null) {
-			fleshSubspecies = AbstractSubspecies.getSubspeciesFromBody(this, this.getRaceFromPartWeighting());
+			fleshSubspecies = Subspecies.getSubspeciesFromBody(this, this.getRaceFromPartWeighting());
 		}
 		return fleshSubspecies;
 	}
 
-	public void setFleshSubspecies(AbstractSubspecies fleshSubspecies) {
+	public void setFleshSubspecies(Subspecies fleshSubspecies) {
 		this.fleshSubspecies = fleshSubspecies;
 	}
 

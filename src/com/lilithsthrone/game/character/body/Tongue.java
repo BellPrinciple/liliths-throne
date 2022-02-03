@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTongueType;
+import com.lilithsthrone.game.character.body.types.TongueType;
 import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -23,12 +23,12 @@ import com.lilithsthrone.utils.Util;
 public class Tongue implements BodyPartInterface {
 
 	
-	protected AbstractTongueType type;
+	protected TongueType type;
 	protected Set<TongueModifier> tongueModifiers;
 	protected int tongueLength;
 	protected boolean pierced;
 
-	public Tongue(AbstractTongueType type) {
+	public Tongue(TongueType type) {
 		this.type = type;
 		pierced = false;
 		
@@ -47,7 +47,7 @@ public class Tongue implements BodyPartInterface {
 	}
 	
 	@Override
-	public AbstractTongueType getType() {
+	public TongueType getType() {
 		return type;
 	}
 	
@@ -85,7 +85,7 @@ public class Tongue implements BodyPartInterface {
 	/**
 	 * Tongue type is set when FaceType changes.
 	 */
-	public void setType(AbstractTongueType type) {
+	public void setType(TongueType type) {
 		this.type = type;
 		resetTongueModifiers();
 	}

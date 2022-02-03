@@ -16,7 +16,6 @@ import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Leg;
 import com.lilithsthrone.game.character.body.Tail;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.types.ArmType;
@@ -932,7 +931,7 @@ public class Lyssieth extends NPC {
 		return true;
 	}
 	
-	public void growCock(AbstractPenisType type) {
+	public void growCock(PenisType type) {
 		this.setPenisType(type);
 		this.setPenisVirgin(false);
 		if(type.getRace()==Race.HUMAN) {

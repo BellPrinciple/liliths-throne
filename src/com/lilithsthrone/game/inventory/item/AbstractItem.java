@@ -13,16 +13,16 @@ import org.w3c.dom.NodeList;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
+import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.effects.EffectBenefit;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.EnchantingUtils;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
+import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
@@ -36,10 +36,10 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving {
 
-	protected AbstractItemType itemType;
+	protected ItemType itemType;
 	protected List<ItemEffect> itemEffects;
 
-	public AbstractItem(AbstractItemType itemType) {
+	public AbstractItem(ItemType itemType) {
 		super(itemType.getName(false), itemType.getNamePlural(false), itemType.getSVGString(), itemType.getColourShades().get(0), itemType.getRarity(), null, itemType.getItemTags());
 
 		this.itemType = itemType;
@@ -89,7 +89,7 @@ public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving
 	
 	public static AbstractItem loadFromXML(Element parentElement, Document doc) {
 		try {
-			AbstractItemType it = ItemType.getItemTypeFromId(parentElement.getAttribute("id"));
+			ItemType it = ItemType.getItemTypeFromId(parentElement.getAttribute("id"));
 			if(it==null) {
 				System.err.println("Warning: An instance of AbstractItem was unable to be imported, due to AbstractItemType not existing. ("+parentElement.getAttribute("id")+")");
 				return null;
@@ -131,7 +131,7 @@ public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving
 		}
 	}
 
-	public AbstractItemType getItemType() {
+	public ItemType getItemType() {
 		return itemType;
 	}
 
@@ -162,8 +162,8 @@ public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving
 		sb.append(UtilText.parse(target, user, this.getItemType().getSpecialEffect()));
 		
 		if(this.getItemType().getAppliedStatusEffects()!=null) {
-			for(Entry<AbstractStatusEffect, Value<String, Integer>> entry : this.getItemType().getAppliedStatusEffects().entrySet()) {
-				AbstractStatusEffect se = entry.getKey();
+			for(Entry<StatusEffect, Value<String, Integer>> entry : this.getItemType().getAppliedStatusEffects().entrySet()) {
+				StatusEffect se = entry.getKey();
 				String conditional = entry.getValue().getKey();
 				boolean conditionalParsed = Boolean.valueOf(UtilText.parse(user, target, conditional).trim());
 				if(conditionalParsed) {
@@ -229,7 +229,7 @@ public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving
 				default:
 					break;
 			}
-			if(intoxicationLevel>0 && target.getRace()==Race.getRaceFromId("charisma_spider")) {
+			if(intoxicationLevel>0 && target.getRace()== Race.table.of("charisma_spider")) {
 				sb.append(UtilText.parse(target,
 						"<p style='text-align:center;'>"
 							+ "Due to [npc.her] spider physiology, the caffeine in the "+this.getName()+" acts in a similar manner to alcohol, and as a result [npc.she] [npc.verb(feel)] [npc.herself] getting [style.boldAlcohol(drunk)]..."
@@ -250,7 +250,7 @@ public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving
 	}
 	
 	@Override
-	public AbstractItemEffectType getEnchantmentEffect() {
+	public ItemEffectType getEnchantmentEffect() {
 		return itemType.getEnchantmentEffect();
 	}
 	

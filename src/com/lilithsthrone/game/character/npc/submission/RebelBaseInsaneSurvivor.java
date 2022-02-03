@@ -30,7 +30,7 @@ import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMoveType;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.npcDialogue.submission.RebelBaseInsaneSurvivorDialogue;
@@ -111,7 +111,7 @@ public class RebelBaseInsaneSurvivor extends NPC {
     }
 
     @Override
-    public float getMoveWeight(AbstractCombatMove move, List<GameCharacter> enemies, List<GameCharacter> allies) {
+    public float getMoveWeight(CombatMove move, List<GameCharacter> enemies, List<GameCharacter> allies) {
         // Death or Glory!
         if (move.getType() == CombatMoveType.TEASE || move.getType() == CombatMoveType.DEFEND) {
             return 0;

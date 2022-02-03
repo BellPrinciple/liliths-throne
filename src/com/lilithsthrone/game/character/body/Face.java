@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
+import com.lilithsthrone.game.character.body.types.FaceType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
 import com.lilithsthrone.game.character.body.valueEnums.Capacity;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
@@ -26,14 +26,14 @@ import com.lilithsthrone.main.Main;
  */
 public class Face implements BodyPartInterface {
 	
-	protected AbstractFaceType type;
+	protected FaceType type;
 	protected boolean piercedNose;
 	protected BodyHair facialHair;
 	
 	protected Mouth mouth;
 	protected Tongue tongue;
 
-	public Face(AbstractFaceType type, int lipSize) {
+	public Face(FaceType type, int lipSize) {
 		this.type = type;
 		piercedNose = false;
 		facialHair = BodyHair.ZERO_NONE;
@@ -69,7 +69,7 @@ public class Face implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractFaceType getType() {
+	public FaceType getType() {
 		return type;
 	}
 
@@ -113,7 +113,7 @@ public class Face implements BodyPartInterface {
 		return type.getNoseDescriptor(gc);
 	}
 	
-	public String setType(GameCharacter owner, AbstractFaceType type) {
+	public String setType(GameCharacter owner, FaceType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;
 			mouth.setType(type.getMouthType());

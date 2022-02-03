@@ -5,11 +5,8 @@ import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTesticleType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -20,7 +17,7 @@ import com.lilithsthrone.utils.Util;
  */
 public interface TesticleType extends BodyPartTypeInterface {
 
-	AbstractFluidType getFluidType();
+	FluidType getFluidType();
 
 	boolean isInternal();
 
@@ -43,7 +40,7 @@ public interface TesticleType extends BodyPartTypeInterface {
 	public static AbstractTesticleType NONE = new Special(null, Race.NONE, FluidType.CUM_HUMAN, false) {
 	};
 
-	public static AbstractTesticleType DILDO = new Special(BodyCoveringType.getBodyCoveringTypeFromId("RUBBER_MAIN_SKIN"), Race.NONE, FluidType.CUM_HUMAN, false) {
+	public static AbstractTesticleType DILDO = new Special(BodyCoveringType.table.of("RUBBER_MAIN_SKIN"), Race.NONE, FluidType.CUM_HUMAN, false) {
 	};
 	
 	public static AbstractTesticleType HUMAN = new Special(BodyCoveringType.PENIS, Race.HUMAN, FluidType.CUM_HUMAN, false) {
@@ -98,11 +95,11 @@ public interface TesticleType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, AbstractFluidType fluidType, boolean internal, List<String> names, List<String> namesPlural, List<String> descriptors) {
+		public Special(BodyCoveringType coveringType, Race race, FluidType fluidType, boolean internal, List<String> names, List<String> namesPlural, List<String> descriptors) {
 			super(coveringType, race, fluidType, internal, names, namesPlural, descriptors);
 		}
 
-		public Special(AbstractBodyCoveringType skinType, AbstractRace race, AbstractFluidType fluidType, boolean internal) {
+		public Special(BodyCoveringType skinType, Race race, FluidType fluidType, boolean internal) {
 			super(skinType, race, fluidType, internal);
 		}
 
@@ -114,7 +111,7 @@ public interface TesticleType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractTesticleType> table = new TypeTable<>(
+	TypeTable<TesticleType> table = new TypeTable<>(
 		s->s,
 		TesticleType.class,
 		AbstractTesticleType.class,
@@ -126,19 +123,19 @@ public interface TesticleType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractTesticleType getTesticleTypeFromId(String id) {
+	static TesticleType getTesticleTypeFromId(String id) {
 		return table.of(id);
 	}
 
-	public static String getIdFromTesticleType(AbstractTesticleType testicleType) {
+	static String getIdFromTesticleType(TesticleType testicleType) {
 		return testicleType.getId();
 	}
 
-	public static List<AbstractTesticleType> getAllTesticleTypes() {
+	static List<TesticleType> getAllTesticleTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractTesticleType> getTesticleTypes(AbstractRace r) {
+	static List<TesticleType> getTesticleTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	

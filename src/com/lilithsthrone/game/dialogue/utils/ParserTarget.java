@@ -1565,15 +1565,15 @@ public interface ParserTarget {
 		}
 	};
 
-	public static List<AbstractParserTarget> getAllParserTargets() {
+	public static List<ParserTarget> getAllParserTargets() {
 		return table.list();
 	}
-	
-	public static AbstractParserTarget getParserTargetFromId(String id) {
+
+	public static ParserTarget getParserTargetFromId(String id) {
 		return table.of(id);
 	}
 
-	public static String getIdFromParserTarget(AbstractParserTarget parserTarget) {
+	public static String getIdFromParserTarget(ParserTarget parserTarget) {
 		return parserTarget.getId();
 	}
 
@@ -1590,11 +1590,7 @@ public interface ParserTarget {
 				return target;
 			}
 		};
-		var existing = table.exact(tag);
-		if(existing.isPresent()) {
-//			System.err.println("Warning: Parser target of '"+tag+"' has been replaced!");
-			removeAdditionalParserTarget((NPC)existing.get().getCharacter(null, null));
-		}
+		table.exact(tag).ifPresent(existing -> removeAdditionalParserTarget((NPC)existing.getCharacter(null, null)));
 
 		newParserTarget.id = tag;
 		table.add(tag, newParserTarget);
@@ -1608,9 +1604,9 @@ public interface ParserTarget {
 	 * Removes map references to the specified NPC.
 	 */
 	public static void removeAdditionalParserTarget(NPC target) {
-		AbstractParserTarget targetToRemove = null;
+		ParserTarget targetToRemove = null;
 		
-		for(AbstractParserTarget parserTarget : table.list()) {
+		for(ParserTarget parserTarget : table.list()) {
 			if(!table.coreParserTargets.contains(parserTarget)) { // Do not remove core parser targets
 				GameCharacter targetFound = parserTarget.getCharacter("", new ArrayList<>());
 				if(targetFound!=null && targetFound.equals(target)) {
@@ -1631,10 +1627,10 @@ public interface ParserTarget {
 	
 	Collection table = new Collection();
 
-	final class Collection extends Table<AbstractParserTarget> {
+	final class Collection extends Table<ParserTarget> {
 
 		// A list of the hard-coded parser targets above.
-		private final List<AbstractParserTarget> coreParserTargets = new ArrayList<>();
+		private final List<ParserTarget> coreParserTargets = new ArrayList<>();
 
 		private Collection() {
 			super(s->s);

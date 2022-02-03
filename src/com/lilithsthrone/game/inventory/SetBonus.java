@@ -44,7 +44,7 @@ public interface SetBonus {
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
-	public static AbstractSetBonus getSetBonusFromId(String id) {
+	static SetBonus getSetBonusFromId(String id) {
 		return table.of(id);
 	}
 
@@ -71,11 +71,11 @@ public interface SetBonus {
 		};
 	}
 
-	public static String getIdFromSetBonus(AbstractSetBonus setBonus) {
+	static String getIdFromSetBonus(SetBonus setBonus) {
 		return setBonus.getId();
 	}
 
-	Table<AbstractSetBonus> table = new Table<>(SetBonus::sanitize) {{
+	Table<SetBonus> table = new Table<>(SetBonus::sanitize) {{
 
 		// Modded set bonus types:
 		forEachMod("/setBonuses",null,null,(f,n,a)->{
@@ -92,7 +92,7 @@ public interface SetBonus {
 		});
 	}};
 
-	public static List<AbstractSetBonus> getAllSetBonuses() {
+	static List<SetBonus> getAllSetBonuses() {
 		return table.list();
 	}
 

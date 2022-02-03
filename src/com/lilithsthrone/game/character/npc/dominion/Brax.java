@@ -67,7 +67,6 @@ import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.item.TransformativePotion;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
@@ -484,7 +483,7 @@ public class Brax extends NPC {
 
 	@Override
 	public TransformativePotion generateTransformativePotion(GameCharacter target) {
-		AbstractItemType itemType = ItemType.getItemTypeFromId("innoxia_race_wolf_meat_and_marrow");
+		var itemType = ItemType.getItemTypeFromId("innoxia_race_wolf_meat_and_marrow");
 		
 		List<PossibleItemEffect> effects = new ArrayList<>();
 		
@@ -545,7 +544,7 @@ public class Brax extends NPC {
 		return new TransformativePotion(itemType, effects);
 	}
 	
-	private static List<PossibleItemEffect> getFeminineEffects(GameCharacter target, AbstractItemType itemType) {
+	private static List<PossibleItemEffect> getFeminineEffects(GameCharacter target, ItemType itemType) {
 		List<PossibleItemEffect> effects = new ArrayList<>();
 		
 		for(int i=target.getFemininityValue(); i<Femininity.FEMININE_STRONG.getMinimumFemininity(); i+=15) { // Turn feminine:

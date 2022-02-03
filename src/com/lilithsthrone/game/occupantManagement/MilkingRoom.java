@@ -16,10 +16,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.body.FluidCum;
-import com.lilithsthrone.game.character.body.FluidGirlCum;
-import com.lilithsthrone.game.character.body.FluidMilk;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.character.body.valueEnums.FluidTypeBase;
@@ -36,7 +32,6 @@ import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
@@ -48,7 +43,7 @@ import com.lilithsthrone.world.places.PlaceUpgrade;
  */
 public class MilkingRoom implements XMLSaving {
 	
-	private AbstractWorldType worldType;
+	private WorldType worldType;
 	private Vector2i location;
 	
 	private List<FluidStored> fluidsStored;
@@ -71,7 +66,7 @@ public class MilkingRoom implements XMLSaving {
 	public static final int BASE_GIRLCUM_MILKING_AMOUNT = 50;
 	public static final int INDUSTRIAL_GIRLCUM_MILKING_AMOUNT = 100;
 	
-	public MilkingRoom(AbstractWorldType worldType, Vector2i location) {
+	public MilkingRoom(WorldType worldType, Vector2i location) {
 		this.worldType = worldType;
 		this.location = new Vector2i(location.getX(), location.getY());
 		
@@ -362,7 +357,7 @@ public class MilkingRoom implements XMLSaving {
 		return Math.min(getMaximumGirlcumPerHour(character), orgasmsPerHour * character.getVaginaWetness().getValue()*(character.isVaginaSquirter()?5:1));
 	}
 
-	public AbstractWorldType getWorldType() {
+	public WorldType getWorldType() {
 		return worldType;
 	}
 
@@ -443,19 +438,16 @@ public class MilkingRoom implements XMLSaving {
 		
 			for(FluidStored fluid : fluids) {
 				String idModifier = "";
-				AbstractFluidType type = null;
+				var type = fluid.getFluid().getType();
 				
 				if(fluid.isMilk()) {
 					idModifier = "MILK";
-					type = ((FluidMilk) fluid.getFluid()).getType();
-					
+
 				} else if(fluid.isCum()) {
 					idModifier = "CUM";
-					type = ((FluidCum) fluid.getFluid()).getType();
-					
+
 				} else if(fluid.isGirlCum()) {
 					idModifier = "GIRLCUM";
-					type = ((FluidGirlCum) fluid.getFluid()).getType();
 				}
 				
 				fluidsFound = true;

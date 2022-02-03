@@ -10,11 +10,9 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.TesticleType;
 import com.lilithsthrone.game.character.body.types.FluidType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -29,9 +27,9 @@ public abstract class AbstractTesticleType implements TesticleType {
 	private boolean mod;
 	private boolean fromExternalFile;
 
-	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
-	private AbstractFluidType fluidType;
+	private BodyCoveringType coveringType;
+	private Race race;
+	private FluidType fluidType;
 	private boolean internal;
 	
 	private List<String> names;
@@ -47,9 +45,9 @@ public abstract class AbstractTesticleType implements TesticleType {
 	 * @param namesPlural A list of plural names for this testicle type. Pass in null to use generic names.
 	 * @param descriptors The descriptors that can be used for this testicle type.
 	 */
-	public AbstractTesticleType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
-			AbstractFluidType fluidType,
+	public AbstractTesticleType(BodyCoveringType coveringType,
+			Race race,
+			FluidType fluidType,
 			boolean internal,
 			List<String> names,
 			List<String> namesPlural,
@@ -65,9 +63,9 @@ public abstract class AbstractTesticleType implements TesticleType {
 		this.descriptors = descriptors;
 	}
 	
-	public AbstractTesticleType(AbstractBodyCoveringType skinType,
-			AbstractRace race,
-			AbstractFluidType fluidType,
+	public AbstractTesticleType(BodyCoveringType skinType,
+			Race race,
+			FluidType fluidType,
 			boolean internal) {
 		this(skinType,
 				race,
@@ -88,9 +86,9 @@ public abstract class AbstractTesticleType implements TesticleType {
 
 				this.mod = mod;
 				this.fromExternalFile = true;
-				
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
 				this.fluidType = FluidType.getFluidTypeFromId(coreElement.getMandatoryFirstOf("fluidType").getTextContent());
 
@@ -131,7 +129,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 	}
 
 	@Override
-	public AbstractFluidType getFluidType() {
+	public FluidType getFluidType() {
 		return fluidType;
 	}
 
@@ -165,7 +163,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 //		if(body!=null) {
 //			return body.getTorso().getBodyCoveringType(body);
 //		}
@@ -173,7 +171,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 	

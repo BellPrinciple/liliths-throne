@@ -3,7 +3,6 @@ package com.lilithsthrone.game.character.npc.misc;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -18,7 +17,6 @@ import com.lilithsthrone.game.character.npc.dominion.Finch;
 import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.NameTriplet;
 import com.lilithsthrone.game.character.persona.Occupation;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -67,8 +65,8 @@ public class SlaveForSale extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			var availableRaces = new HashMap<Subspecies,Integer>();
+			for(var s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}
@@ -76,10 +74,10 @@ public class SlaveForSale extends NPC {
 					continue;
 				}
 				if(Subspecies.getWorldSpecies(WorldType.DOMINION, null, false).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.DOMINION, PlaceType.SLAVER_ALLEY_SLAVERY_ADMINISTRATION, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.DOMINION, PlaceType.SLAVER_ALLEY_SLAVERY_ADMINISTRATION, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				}
 				if(Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.SUBMISSION, PlaceType.SLAVER_ALLEY_SLAVERY_ADMINISTRATION, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.SUBMISSION, PlaceType.SLAVER_ALLEY_SLAVERY_ADMINISTRATION, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				}
 			}
 			

@@ -2,7 +2,7 @@ package com.lilithsthrone.game.sex.sexActions;
 
 import java.util.List;
 
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 
 /**
@@ -14,7 +14,7 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlot;
  */
 public class PositioningData {
 
-	private AbstractSexPosition position;
+	private SexPosition position;
 	private List<SexSlot> performerSlots;
 	private List<SexSlot> partnerSlots;
 	
@@ -22,7 +22,7 @@ public class PositioningData {
 	 * @param performerSlots Slot 0 is always used as the slot for the one performing the associated action.
 	 * @param partnerSlots Slot 0 is always used as the slot for the one targeted by the associated action.
 	 */
-	public PositioningData(AbstractSexPosition position, List<SexSlot> performerSlots, List<SexSlot> partnerSlots) {
+	public PositioningData(SexPosition position, List<SexSlot> performerSlots, List<SexSlot> partnerSlots) {
 		this.position = position;
 		this.performerSlots = performerSlots;
 		this.partnerSlots = partnerSlots;
@@ -45,7 +45,7 @@ public class PositioningData {
 		return result;
 	}
 	
-	public AbstractSexPosition getPosition() {
+	public SexPosition getPosition() {
 		return position;
 	}
 

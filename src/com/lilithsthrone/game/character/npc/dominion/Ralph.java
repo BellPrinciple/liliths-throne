@@ -40,12 +40,9 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
@@ -253,21 +250,21 @@ public class Ralph extends NPC {
 		this.addItem(Main.game.getItemGen().generateItem(ItemType.DYE_BRUSH), 25, false, false);
 		this.addItem(Main.game.getItemGen().generateItem(ItemType.REFORGE_HAMMER), 10, false, false);
 		
-		for(AbstractItemType item : ItemType.getAllItems()) {
+		for(ItemType item : ItemType.getAllItems()) {
 			if(item.getItemTags().contains(ItemTag.SOLD_BY_RALPH)
 					&& (!item.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				this.addItem(Main.game.getItemGen().generateItem(item), !item.isConsumedOnUse()?1:(6+Util.random.nextInt(12)), false, false);
 			}
 		}
 
-		for(AbstractWeaponType weapon : WeaponType.getAllWeapons()) {
+		for(WeaponType weapon : WeaponType.getAllWeapons()) {
 			if(weapon.getItemTags().contains(ItemTag.SOLD_BY_RALPH)
 					&& (!weapon.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				this.addWeapon(Main.game.getItemGen().generateWeapon(weapon), 1+Util.random.nextInt(5), false, false);
 			}
 		}
 		
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(ClothingType clothing : ClothingType.getAllClothing()) {
 			if(clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_RALPH)
 					&& (!clothing.getDefaultItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				if(clothing.isDefaultSlotCondom()) {
@@ -391,7 +388,7 @@ public class Ralph extends NPC {
 			return true;
 		}
 		if(item instanceof AbstractClothing) {
-			AbstractClothingType type = ((AbstractClothing)item).getClothingType();
+			ClothingType type = ((AbstractClothing)item).getClothingType();
 			return type.isDefaultSlotCondom();
 		}
 		
@@ -422,7 +419,7 @@ public class Ralph extends NPC {
 	}
 	
 	@Override
-	public String getCondomEquipEffects(AbstractClothingType condomClothingType, GameCharacter equipper, GameCharacter target, boolean rough) {
+	public String getCondomEquipEffects(ClothingType condomClothingType, GameCharacter equipper, GameCharacter target, boolean rough) {
 		if(!target.equals(equipper) && Main.game.isInSex()) {
 			if(Main.sex.getSexManager().getPosition() == SexPosition.OVER_DESK && target.equals(this)) {
 				AbstractClothing clothing = target.getClothingInSlot(InventorySlot.PENIS);

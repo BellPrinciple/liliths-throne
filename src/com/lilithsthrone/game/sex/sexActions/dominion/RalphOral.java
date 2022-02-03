@@ -12,7 +12,6 @@ import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.valueEnums.CumProduction;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.dominion.Ralph;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -369,7 +368,7 @@ public class RalphOral {
 			}
 		}
 		@Override
-		public List<AbstractFetish> getFetishes(GameCharacter character) {
+		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
 				return Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_PREGNANCY);
 			} else {
@@ -435,7 +434,7 @@ public class RalphOral {
 			}
 		}
 		@Override
-		public List<AbstractFetish> getFetishes(GameCharacter character) {
+		public List<Fetish> getFetishes(GameCharacter character) {
 			if(character.isPlayer()) {
 				return Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE, Fetish.FETISH_ANAL_RECEIVING);
 			} else {

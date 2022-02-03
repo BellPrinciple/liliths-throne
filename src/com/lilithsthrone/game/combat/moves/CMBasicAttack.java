@@ -50,7 +50,7 @@ public class CMBasicAttack {
 				if(!weaponsThrown.isEmpty()) {
 	    			int mainOrDualAttacksPerformed = 0;
 	    			int turnCountProgress = 0;
-	    			for(Value<GameCharacter, AbstractCombatMove> move : source.getSelectedMoves()) {
+	    			for(var move : source.getSelectedMoves()) {
 	    				if(turnCountProgress < turnIndex) {
 		    				if(move.getValue()==BASIC_STRIKE || move.getValue()==BASIC_TWIN_STRIKE) {
 		    					mainOrDualAttacksPerformed++;
@@ -410,7 +410,7 @@ public class CMBasicAttack {
 				if(!weaponsThrown.isEmpty()) {
 	    			int offhandOrDualAttacksPerformed = 0;
 	    			int turnCountProgress = 0;
-	    			for(Value<GameCharacter, AbstractCombatMove> move : source.getSelectedMoves()) {
+	    			for(var move : source.getSelectedMoves()) {
 	    				if(turnCountProgress < turnIndex) {
 		    				if(move.getValue()==BASIC_OFFHAND_STRIKE || move.getValue()==BASIC_TWIN_STRIKE) {
 		    					offhandOrDualAttacksPerformed++;
@@ -782,7 +782,7 @@ public class CMBasicAttack {
 				if(!weaponsThrown.isEmpty()) {
 	    			int mainOrDualAttacksPerformed = 0;
 	    			int turnCountProgress = 0;
-	    			for(Value<GameCharacter, AbstractCombatMove> move : source.getSelectedMoves()) {
+	    			for(var move : source.getSelectedMoves()) {
 	    				if(turnCountProgress < turnIndex) {
 		    				if(move.getValue()==BASIC_STRIKE || move.getValue()==BASIC_TWIN_STRIKE) {
 		    					mainOrDualAttacksPerformed++;
@@ -808,7 +808,7 @@ public class CMBasicAttack {
 				if(!weaponsThrown.isEmpty()) {
 	    			int offhandOrDualAttacksPerformed = 0;
 	    			int turnCountProgress = 0;
-	    			for(Value<GameCharacter, AbstractCombatMove> move : source.getSelectedMoves()) {
+	    			for(var move : source.getSelectedMoves()) {
 	    				if(turnCountProgress < turnIndex) {
 		    				if(move.getValue()==BASIC_OFFHAND_STRIKE || move.getValue()==BASIC_TWIN_STRIKE) {
 		    					offhandOrDualAttacksPerformed++;

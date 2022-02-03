@@ -22,7 +22,6 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.SetBonus;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -85,14 +84,14 @@ public interface ClothingType extends AbstractCoreType {
 	 * <b>You should probably be using AbstractClothing's version of this!</b>
 	 */
 	default boolean isConcealsSlot(GameCharacter character, InventorySlot slotToCheck) {
-		return Main.game.getItemGen().generateClothing((AbstractClothingType)this).isConcealsSlot(character, getEquipSlots().get(0), slotToCheck);
+		return Main.game.getItemGen().generateClothing(this).isConcealsSlot(character, getEquipSlots().get(0), slotToCheck);
 	}
 
 	/**
 	 * <b>You should probably be using AbstractClothing's version of this!</b>
 	 */
 	default boolean isConcealsCoverableArea(GameCharacter character, CoverableArea area) {
-		return Main.game.getItemGen().generateClothing((AbstractClothingType)this).isConcealsCoverableArea(character, getEquipSlots().get(0), area);
+		return Main.game.getItemGen().generateClothing(this).isConcealsCoverableArea(character, getEquipSlots().get(0), area);
 	}
 
 	String getPathName();
@@ -160,12 +159,12 @@ public interface ClothingType extends AbstractCoreType {
 		return 100;
 	}
 
-	default AbstractItemEffectType getEnchantmentEffect() {
+	default ItemEffectType getEnchantmentEffect() {
 		return ItemEffectType.CLOTHING;
 	}
 
-	default AbstractClothingType getEnchantmentItemType(List<ItemEffect> effects) {
-		return (AbstractClothingType)this;
+	default ClothingType getEnchantmentItemType(List<ItemEffect> effects) {
+		return this;
 	}
 
 	List<ItemTag> getItemTags(InventorySlot slotEquippedTo);
@@ -234,6 +233,21 @@ public interface ClothingType extends AbstractCoreType {
 
 	Set<OrificeModifier> getOrificeOtherModifiers();
 
+	default List<BlockedParts> getBlockedParts(InventorySlot slot) {
+		return List.of();
+	}
+
+	default List<InventorySlot> getIncompatibleSlots(InventorySlot slot) {
+		return List.of();
+	}
+
+	/**
+	 * @return
+	 * Collection of displacement types possible if clothing of this type is worn.
+	 */
+	default List<DisplacementType> getDisplacementTypes(InventorySlot slot) {
+		return List.of();
+	}
 	//TODO
 //	Replace tape crosses with special item "roll of tape"
 //		10 uses, and can:
@@ -1528,7 +1542,7 @@ public interface ClothingType extends AbstractCoreType {
 					null, null, null);
 		}
 	};
-	
+
 
 	// CLOTHING SETS:
 
@@ -1627,7 +1641,7 @@ public interface ClothingType extends AbstractCoreType {
 //									CoverableArea.VAGINA),
 //							Util.newArrayListOfValues(
 //									ClothingAccess.GROIN,
-//									ClothingAccess.ANUS), 
+//									ClothingAccess.ANUS),
 //							PresetConcealmentLists.CONCEALED_GROIN.getPresetInventorySlotList())),
 //			null,
 //			ColourListPresets.MAID,
@@ -1755,7 +1769,7 @@ public interface ClothingType extends AbstractCoreType {
 //					null, null, null);
 //		}
 //	};
-	
+
 //	public static AbstractClothingType MAID_HEELS = new AbstractClothingType(800,
 //			"a pair of",
 //			true,
@@ -1785,7 +1799,7 @@ public interface ClothingType extends AbstractCoreType {
 //			ColourListPresets.JUST_STEEL,
 //			ColourListPresets.ALL_METAL,
 //			Util.newArrayListOfValues(ItemTag.SOLD_BY_NYAN)){
-//		
+//
 //		@Override
 //		public String equipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 //			return getEquipDescriptions(clothingOwner, clothingRemover, rough,
@@ -1808,7 +1822,7 @@ public interface ClothingType extends AbstractCoreType {
 //					null, null, null);
 //		}
 //	};
-	
+
 //	public static AbstractClothingType MAID_SLEEVES = new AbstractClothingType(350,
 //			"a pair of",
 //			true,
@@ -2687,20 +2701,20 @@ public interface ClothingType extends AbstractCoreType {
 	
 	Collection table = new Collection();
 
-	final class Collection extends Table<AbstractClothingType> {
+	final class Collection extends Table<ClothingType> {
 
-		private final List<AbstractClothingType> moddedClothingList = new ArrayList<>();
+		private final List<ClothingType> moddedClothingList = new ArrayList<>();
 		private final List<InventorySlot> coreClothingSlots = new ArrayList<>();
 		private final List<InventorySlot> lingerieSlots = new ArrayList<>();
 
-		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMap = new EnumMap<>(InventorySlot.class);
-		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemale = new EnumMap<>(InventorySlot.class);
-		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMale = new EnumMap<>(InventorySlot.class);
-		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapAndrogynous = new EnumMap<>(InventorySlot.class);
-		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
-		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<ClothingType>> commonClothingMap = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<ClothingType>> commonClothingMapFemale = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<ClothingType>> commonClothingMapMale = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<ClothingType>> commonClothingMapAndrogynous = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<ClothingType>> commonClothingMapFemaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<ClothingType>> commonClothingMapMaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
 
-		private final Map<Occupation, ArrayList<AbstractClothingType>> suitableFeminineClothing = new HashMap<>();
+		private final Map<Occupation, ArrayList<ClothingType>> suitableFeminineClothing = new HashMap<>();
 
 		private Collection() {
 			super(ClothingType::convertOldId);
@@ -2745,7 +2759,7 @@ public interface ClothingType extends AbstractCoreType {
 			initialize(this);
 		}
 
-		private void categorize(AbstractClothingType v) {
+		private void categorize(ClothingType v) {
 			var slot = v.getEquipSlots().get(0);
 			commonClothingMap.get(slot).add(v);
 			if (v.getFemininityRestriction() == Femininity.FEMININE) {
@@ -2762,11 +2776,11 @@ public interface ClothingType extends AbstractCoreType {
 		}
 	}
 
-	public static AbstractClothingType getClothingTypeFromId(String id) {
+	static ClothingType getClothingTypeFromId(String id) {
 		return table.of(id);
 	}
 	
-	public static AbstractClothingType getClothingTypeFromId(String id, String slotHint) {
+	static ClothingType getClothingTypeFromId(String id, String slotHint) {
 //		System.out.print("ID: "+id);
 		
 		id = convertOldId(id);
@@ -2781,7 +2795,7 @@ public interface ClothingType extends AbstractCoreType {
 			// slotHint is present and valid, so filter the clothing map by items that can be equipped to that slot:
 			choice = table.list().parallelStream()
 					.filter(e->e.getEquipSlots().contains(slot))
-					.map(AbstractClothingType::getId)
+					.map(ClothingType::getId)
 					.collect(Collectors.toSet());
 		} catch (Exception ex) {
 			String validSlots = InventorySlot.getClothingSlots().stream()
@@ -2793,11 +2807,11 @@ public interface ClothingType extends AbstractCoreType {
 		return table.exact(Util.getClosestStringMatch(id,choice)).orElse(null);
 	}
 
-	public static String getIdFromClothingType(AbstractClothingType clothingType) {
+	static String getIdFromClothingType(ClothingType clothingType) {
 		return clothingType.getId();
 	}
 
-	public static Map<Occupation, ArrayList<AbstractClothingType>> getSuitableFeminineClothing() {
+	static Map<Occupation, ArrayList<ClothingType>> getSuitableFeminineClothing() {
 		return table.suitableFeminineClothing;
 	}
 
@@ -3059,48 +3073,48 @@ public interface ClothingType extends AbstractCoreType {
 						table.of("innoxia_piercing_basic_barbell"),
 						table.of("innoxia_piercing_ringed_barbell")));
 	}
-	
-	public static List<AbstractClothingType> getAllClothing() {
+
+	static List<ClothingType> getAllClothing() {
 		return table.list();
 	}
-	
-	public static List<AbstractClothingType> getAllClothingInSet(AbstractSetBonus setBonus) {
+
+	static List<ClothingType> getAllClothingInSet(SetBonus setBonus) {
 		return table.list().stream().filter(c -> setBonus.equals(c.getClothingSet())).toList();
 	}
 
-	public static List<AbstractClothingType> getModdedClothingList() {
+	static List<ClothingType> getModdedClothingList() {
 		return table.moddedClothingList;
 	}
 
-	public static List<InventorySlot> getCoreClothingSlots() {
+	static List<InventorySlot> getCoreClothingSlots() {
 		return table.coreClothingSlots;
 	}
 
-	public static List<InventorySlot> getLingerieSlots() {
+	static List<InventorySlot> getLingerieSlots() {
 		return table.lingerieSlots;
 	}
 	
-	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMap() {
+	static Map<InventorySlot, List<ClothingType>> getCommonClothingMap() {
 		return table.commonClothingMap;
 	}
 
-	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapFemale() {
+	static Map<InventorySlot, List<ClothingType>> getCommonClothingMapFemale() {
 		return table.commonClothingMapFemale;
 	}
 
-	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapMale() {
+	static Map<InventorySlot, List<ClothingType>> getCommonClothingMapMale() {
 		return table.commonClothingMapMale;
 	}
 
-	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapAndrogynous() {
+	static Map<InventorySlot, List<ClothingType>> getCommonClothingMapAndrogynous() {
 		return table.commonClothingMapAndrogynous;
 	}
 	
-	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapFemaleIncludingAndrogynous() {
+	static Map<InventorySlot, List<ClothingType>> getCommonClothingMapFemaleIncludingAndrogynous() {
 		return table.commonClothingMapFemaleIncludingAndrogynous;
 	}
 	
-	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapMaleIncludingAndrogynous() {
+	static Map<InventorySlot, List<ClothingType>> getCommonClothingMapMaleIncludingAndrogynous() {
 		return table.commonClothingMapMaleIncludingAndrogynous;
 	}
 

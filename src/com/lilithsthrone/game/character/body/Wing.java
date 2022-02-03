@@ -1,7 +1,6 @@
 package com.lilithsthrone.game.character.body;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
 import com.lilithsthrone.game.character.body.types.WingType;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
 import com.lilithsthrone.game.character.race.Race;
@@ -16,10 +15,10 @@ import com.lilithsthrone.utils.Util;
  */
 public class Wing implements BodyPartInterface {
 
-	protected AbstractWingType type;
+	protected WingType type;
 	protected int size;
 	
-	public Wing(AbstractWingType type, int size) {
+	public Wing(WingType type, int size) {
 		this.type = type;
 		this.size = size;
 	}
@@ -30,7 +29,7 @@ public class Wing implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractWingType getType() {
+	public WingType getType() {
 		return type;
 	}
 
@@ -59,11 +58,11 @@ public class Wing implements BodyPartInterface {
 		return type.getDescriptor(gc);
 	}
 
-	public void setType(AbstractWingType type) {
+	public void setType(WingType type) {
 		this.type = type;
 	}
 
-	public String setType(GameCharacter owner, AbstractWingType type) {
+	public String setType(GameCharacter owner, WingType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;
 			this.setSize(owner, this.getSizeValue());
@@ -136,7 +135,7 @@ public class Wing implements BodyPartInterface {
 		this.size = Math.max(0, Math.min(wingSize, WingSize.getLargest()));
 	}
 
-	public void setTypeAndSize(AbstractWingType type, int wingSize) {
+	public void setTypeAndSize(WingType type, int wingSize) {
 		setType(type);
 		setSize(wingSize);
 	}

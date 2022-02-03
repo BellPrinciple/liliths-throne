@@ -16,13 +16,11 @@ import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.fetishes.Fetish;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -39,6 +37,8 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @since 0.3.8.2
@@ -75,7 +75,7 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 	private String applyRemovalString;
 	private String applyPostRemovalString;
 	
-	private Map<AbstractAttribute, Float> attributeModifiers;
+	private Map<Attribute,Float> attributeModifiers;
 	private List<String> combatMoveIds;
 	private List<String> spellIds;
 	private List<ItemTag> tags;
@@ -89,7 +89,7 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 			String pathName,
 			Colour colourShade,
 			boolean beneficial,
-			Map<AbstractAttribute, Float> attributeModifiers,
+			Map<Attribute,Float> attributeModifiers,
 			List<String> extraEffects) {
 		this(renderingPriority, name, pathName, colourShade, colourShade, colourShade, beneficial, attributeModifiers, extraEffects);
 	}
@@ -100,7 +100,7 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 			Colour colourShade,
 			Colour colourShadeSecondary,
 			boolean beneficial,
-			Map<AbstractAttribute, Float> attributeModifiers,
+			Map<Attribute,Float> attributeModifiers,
 			List<String> extraEffects) {
 		this(renderingPriority, name, pathName, colourShade, colourShadeSecondary, colourShade, beneficial, attributeModifiers, extraEffects);
 	}
@@ -113,7 +113,7 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 			Colour colourShadeSecondary,
 			Colour colourShadeTertiary,
 			boolean beneficial,
-			Map<AbstractAttribute, Float> attributeModifiers,
+			Map<Attribute,Float> attributeModifiers,
 			List<String> extraEffects) {
 		this(StatusEffectCategory.DEFAULT, renderingPriority, name, pathName, colourShade, colourShadeSecondary, colourShadeTertiary, beneficial, attributeModifiers, extraEffects);
 	}
@@ -126,7 +126,7 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 			Colour colourShadeSecondary,
 			Colour colourShadeTertiary,
 			boolean beneficial,
-			Map<AbstractAttribute, Float> attributeModifiers,
+			Map<Attribute,Float> attributeModifiers,
 			List<String> extraEffects) {
 		
 		this.mod = false;
@@ -302,11 +302,11 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 		return id;
 	}
 	
-	protected List<String> attributeModifiersToStringList(Map<AbstractAttribute, Float> attributeMap) {
+	protected List<String> attributeModifiersToStringList(Map<Attribute,Float> attributeMap) {
 		List<String> attributeModifiersList = new ArrayList<>();
 		
 		if (attributeMap != null) {
-			for (Entry<AbstractAttribute, Float> e : attributeMap.entrySet()) {
+			for (var e : attributeMap.entrySet()) {
 				attributeModifiersList.add(e.getKey().getFormattedValue(e.getValue()));
 			}
 		}
@@ -489,21 +489,17 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 	}
 
 	@Override
-	public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+	public Map<Attribute,Float> getAttributeModifiers(GameCharacter target) {
 		return attributeModifiers;
 	}
 	
 	// This has to be overridden, as defining CombatMoves in a status effect's constructor can cause initialisation errors.
 	@Override
-	public List<AbstractCombatMove> getCombatMoves() {
+	public List<CombatMove> getCombatMoves() {
 		if(this.isFromExternalFile()) {
-			List<AbstractCombatMove> combatMoves = new ArrayList<>();
-			for(String moveID : combatMoveIds) {
-				combatMoves.add(CombatMove.getCombatMoveFromId(moveID));
-			}
-			return combatMoves;
+			return combatMoveIds.stream().map(CombatMove.table::of).collect(toList());
 		}
-		return new ArrayList<>();
+		return List.of();
 	}
 
 	// This has to be overridden, as defining Spells in a status effect's constructor can cause initialisation errors.

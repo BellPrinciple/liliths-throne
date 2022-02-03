@@ -40,14 +40,10 @@ import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.CharacterChangeEventListener;
 import com.lilithsthrone.game.character.FluidStored;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.GenderNames;
 import com.lilithsthrone.game.character.gender.GenderPronoun;
@@ -55,8 +51,8 @@ import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.dominion.Kay;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
 import com.lilithsthrone.game.character.persona.NameTriplet;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.character.race.Subspecies;
+import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
@@ -2133,7 +2129,7 @@ public class MainController implements Initializable {
 			addEventListener(documentAttributes, id, "mouseenter", el2, false);
 		}
 		
-		AbstractAttribute[] attributes = {
+		Attribute[] attributes = {
 				Attribute.HEALTH_MAXIMUM,
 				Attribute.MANA_MAXIMUM,
 				Attribute.EXPERIENCE,
@@ -2160,7 +2156,7 @@ public class MainController implements Initializable {
 		for(GameCharacter character : charactersBeingRendered) {
 			String idModifier = (character.isPlayer()?"PLAYER_":"NPC_"+character.getId()+"_");
 			
-			for (AbstractAttribute a : attributes) {
+			for (Attribute a : attributes) {
 				if (((EventTarget) documentAttributes.getElementById(idModifier+a.getName())) != null) {
 					if(a == Attribute.EXPERIENCE) {
 						((EventTarget) documentAttributes.getElementById(idModifier+a.getName())).addEventListener("click", e -> {
@@ -2279,7 +2275,7 @@ public class MainController implements Initializable {
 			
 			
 			// For status effect slots:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (StatusEffect se : character.getStatusEffects()) {
 				id = "SE_"+idModifier + se;
 				if (((EventTarget) documentAttributes.getElementById(id)) != null) {
 					addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
@@ -2323,7 +2319,7 @@ public class MainController implements Initializable {
 				}
 			}
 			if(character.isElementalSummoned() && !character.isElementalActive()) {
-				for (AbstractStatusEffect se : character.getElemental().getStatusEffects()) {
+				for (StatusEffect se : character.getElemental().getStatusEffects()) {
 					id = "SE_ELEMENTAL_"+idModifier + se;
 					if (((EventTarget) documentAttributes.getElementById(id)) != null) {
 						addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
@@ -2335,7 +2331,7 @@ public class MainController implements Initializable {
 				}
 			}
 			
-			for (AbstractPerk trait : character.getTraits()) {
+			for (Perk trait : character.getTraits()) {
 				id = "TRAIT_" + idModifier + Perk.getIdFromPerk(trait);
 				if (((EventTarget) documentAttributes.getElementById(id)) != null) {
 					addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
@@ -2344,7 +2340,7 @@ public class MainController implements Initializable {
 					addEventListener(documentAttributes, id, "mouseenter", el, false);
 				}
 			}
-			for (AbstractFetish f : character.getFetishes(true)) {
+			for (Fetish f : character.getFetishes(true)) {
 				if (((EventTarget) documentAttributes.getElementById("FETISH_"+idModifier + Fetish.getIdFromFetish(f))) != null) {
 					addEventListener(documentAttributes, "FETISH_"+idModifier + Fetish.getIdFromFetish(f), "mousemove", moveTooltipListener, false);
 					addEventListener(documentAttributes, "FETISH_"+idModifier + Fetish.getIdFromFetish(f), "mouseleave", hideTooltipListener, false);
@@ -2353,7 +2349,7 @@ public class MainController implements Initializable {
 					addEventListener(documentAttributes, "FETISH_"+idModifier + Fetish.getIdFromFetish(f), "mouseenter", el, false);
 				}
 			}
-			for (AbstractCombatMove combatMove : character.getAvailableMoves()) {
+			for (CombatMove combatMove : character.getAvailableMoves()) {
 				id = "CM_"+idModifier + combatMove.getIdentifier();
 				if (((EventTarget) documentAttributes.getElementById(id)) != null) {
 					addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
@@ -2518,7 +2514,7 @@ public class MainController implements Initializable {
 			}
 		}
 		
-		AbstractAttribute[] attributes = {
+		Attribute[] attributes = {
 				Attribute.HEALTH_MAXIMUM,
 				Attribute.MANA_MAXIMUM,
 				Attribute.EXPERIENCE,
@@ -2528,7 +2524,7 @@ public class MainController implements Initializable {
 				Attribute.AROUSAL,
 				Attribute.LUST };
 		if(!RenderingEngine.ENGINE.isRenderingCharactersRightPanel()) {
-			attributes = new AbstractAttribute[] {Attribute.EXPERIENCE};
+			attributes = new Attribute[] {Attribute.EXPERIENCE};
 		}
 		
 		List<GameCharacter> charactersBeingRendered = new ArrayList<>();
@@ -2558,7 +2554,7 @@ public class MainController implements Initializable {
 						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
 						addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
 						
-						Set<AbstractSubspecies> subspecies = new HashSet<>();
+						Set<Subspecies> subspecies = new HashSet<>();
 						subspecies.addAll(pop.getSpecies().keySet());
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setInformation(
 								"Races Present",
@@ -2576,7 +2572,7 @@ public class MainController implements Initializable {
 		for(GameCharacter character : charactersBeingRendered) {
 			String idModifier = character.getId()+"_";
 			
-			for (AbstractAttribute a : attributes) {
+			for (Attribute a : attributes) {
 				if (((EventTarget) documentRight.getElementById("NPC_"+idModifier+a.getName())) != null) {
 					if(a == Attribute.EXPERIENCE && (!character.isElemental() || ((Elemental)character).isActive())) {
 						((EventTarget) documentRight.getElementById("NPC_"+idModifier+a.getName())).addEventListener("click", e -> {
@@ -2639,7 +2635,7 @@ public class MainController implements Initializable {
 			
 			if(RenderingEngine.ENGINE.isRenderingCharactersRightPanel()) {
 				// For status effect slots:
-				for (AbstractStatusEffect se : character.getStatusEffects()) {
+				for (StatusEffect se : character.getStatusEffects()) {
 					id = "SE_NPC_"+idModifier + se;
 					if (((EventTarget) documentRight.getElementById(id)) != null) {
 						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
@@ -2679,7 +2675,7 @@ public class MainController implements Initializable {
 					}
 				}
 				if(character.isElementalSummoned() && !character.isElementalActive()) {
-					for (AbstractStatusEffect se : character.getElemental().getStatusEffects()) {
+					for (StatusEffect se : character.getElemental().getStatusEffects()) {
 						id = "SE_ELEMENTAL_NPC_"+idModifier + se;
 						if (((EventTarget) documentRight.getElementById(id)) != null) {
 							addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
@@ -2692,7 +2688,7 @@ public class MainController implements Initializable {
 				}
 				
 				// For perk slots:
-				for (AbstractPerk p : character.getMajorPerks()) {
+				for (Perk p : character.getMajorPerks()) {
 					id = "PERK_NPC_"+idModifier + Perk.getIdFromPerk(p);
 					if (((EventTarget) documentRight.getElementById(id)) != null) {
 						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
@@ -2702,7 +2698,7 @@ public class MainController implements Initializable {
 						addEventListener(documentRight, id, "mouseenter", el, false);
 					}
 				}
-				for (AbstractFetish f : character.getFetishes(true)) {
+				for (Fetish f : character.getFetishes(true)) {
 					if (((EventTarget) documentRight.getElementById("FETISH_NPC_"+idModifier + Fetish.getIdFromFetish(f))) != null) {
 						addEventListener(documentRight, "FETISH_NPC_"+idModifier + Fetish.getIdFromFetish(f), "mousemove", moveTooltipListener, false);
 						addEventListener(documentRight, "FETISH_NPC_"+idModifier + Fetish.getIdFromFetish(f), "mouseleave", hideTooltipListener, false);
@@ -2711,7 +2707,7 @@ public class MainController implements Initializable {
 						addEventListener(documentRight, "FETISH_NPC_"+idModifier + Fetish.getIdFromFetish(f), "mouseenter", el, false);
 					}
 				}
-				for (AbstractCombatMove combatMove : character.getAvailableMoves()) {
+				for (CombatMove combatMove : character.getAvailableMoves()) {
 					id = "CM_NPC_"+idModifier + combatMove.getIdentifier();
 					if (((EventTarget) documentRight.getElementById(id)) != null) {
 						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);

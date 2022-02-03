@@ -61,7 +61,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class ArcaneArts {
 	
-	private static AbstractItemType mealItemType;
+	private static ItemType mealItemType;
 	private static int mealResponseIndex = 0;
 	private static List<Value<String, String>> mealResponses;
 	private static int helpResponseIndex = 0;
@@ -623,7 +623,7 @@ public class ArcaneArts {
 								null);
 							
 					} else {
-						AbstractItemType itemTypeBeingOffered = ItemType.getItemTypeFromId("innoxia_race_wolf_meat_and_marrow");
+						ItemType itemTypeBeingOffered = ItemType.getItemTypeFromId("innoxia_race_wolf_meat_and_marrow");
 						mealItemType = itemTypeBeingOffered;
 						if(!Main.game.getPlayer().hasItemType("innoxia_race_wolf_meat_and_marrow")) {
 							itemTypeBeingOffered = ItemType.getItemTypeFromId("innoxia_race_panther_panthers_delight");
@@ -1293,7 +1293,7 @@ public class ArcaneArts {
 								return true;
 							}
 							@Override
-							public List<AbstractSexPosition> getAllowedSexPositions() {
+							public List<SexPosition> getAllowedSexPositions() {
 								return Util.newArrayListOfValues(
 										SexPosition.STANDING,
 										SexPosition.AGAINST_WALL);

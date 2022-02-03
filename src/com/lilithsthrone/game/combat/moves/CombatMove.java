@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.combat.DamageType;
 import com.lilithsthrone.game.combat.DamageVariance;
@@ -240,7 +239,7 @@ public interface CombatMove {
 		return null;
 	}
 
-	default Map<AbstractStatusEffect,Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
+	default Map<StatusEffect,Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 		return Map.of();
 	}
 
@@ -289,7 +288,7 @@ public interface CombatMove {
     	private Value<GameCharacter, AbstractItem> getItem(int turnIndex, GameCharacter source) {
             int index=0;
             int turnCount=0;
-            for(Value<GameCharacter, AbstractCombatMove> move : source.getSelectedMoves()) {
+            for(var move : source.getSelectedMoves()) {
             	if(turnCount==turnIndex) {
             		break;
             	}
@@ -366,9 +365,9 @@ public interface CombatMove {
 
 	Table table = new Table();
 
-	final class Table extends com.lilithsthrone.utils.Table<AbstractCombatMove> {
+	final class Table extends com.lilithsthrone.utils.Table<CombatMove> {
 
-		private static final EnumMap<CombatMoveCategory,List<AbstractCombatMove>> category = new EnumMap<>(CombatMoveCategory.class);
+		private static final EnumMap<CombatMoveCategory,List<CombatMove>> category = new EnumMap<>(CombatMoveCategory.class);
 
 		private Table() {
 			super(CombatMove::sanitize);
@@ -387,7 +386,7 @@ public interface CombatMove {
 	     =============================================*/
 	    // Automatically generates respective moves based on the Spell class.
 	    for(Spell spell : Spell.values()) {
-	    	AbstractCombatMove newCombatMove = new AbstractCombatMove(CombatMoveCategory.SPELL,
+	    	var newCombatMove = new AbstractCombatMove(CombatMoveCategory.SPELL,
 	                spell.getName(),
 	                spell.getCooldown(),
 	                spell.getAPCost(),
@@ -410,7 +409,7 @@ public interface CombatMove {
 	            }
 	
 	            @Override
-	            public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
+	            public Map<StatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
 	            	return getAssociatedSpell().getStatusEffects(caster, target, isCritical);
 	            }
 	            
@@ -507,7 +506,7 @@ public interface CombatMove {
 			});
 			for(CombatMoveCategory c : CombatMoveCategory.values())
 				category.put(c,new ArrayList<>());
-			for(AbstractCombatMove move : list())
+			for(var move : list())
 				category.get(move.getCategory()).add(move);
 		}
 	}
@@ -515,7 +514,7 @@ public interface CombatMove {
 	/**
 	 * @param id Will be in the format of: 'innoxia_quadruped_kick'.
 	 */
-	public static AbstractCombatMove getCombatMoveFromId(String id) {
+	static CombatMove getCombatMoveFromId(String id) {
 		return table.of(id);
 	}
 
@@ -610,15 +609,15 @@ public interface CombatMove {
 		return id;
 	}
 
-	public static String getIdFromCombatMove(AbstractCombatMove move) {
+	static String getIdFromCombatMove(CombatMove move) {
 		return move.getIdentifier();
 	}
 
-	public static List<AbstractCombatMove> getAllCombatMoves() {
+	static List<CombatMove> getAllCombatMoves() {
 		return table.list();
 	}
 
-	public static List<AbstractCombatMove> getAllCombatMovesInCategory(CombatMoveCategory category) {
+	static List<CombatMove> getAllCombatMovesInCategory(CombatMoveCategory category) {
 		return Table.category.get(category);
 	}
 }

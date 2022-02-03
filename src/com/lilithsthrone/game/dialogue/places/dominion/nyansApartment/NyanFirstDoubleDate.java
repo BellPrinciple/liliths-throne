@@ -15,9 +15,7 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -41,11 +39,11 @@ public class NyanFirstDoubleDate {
 		return ((NyanMum)Main.game.getNpc(NyanMum.class));
 	}
 	
-	private static void travelTo(AbstractWorldType worldType, AbstractPlaceType placeType) {
+	private static void travelTo(WorldType worldType, PlaceType placeType) {
 		travelTo(worldType, placeType, true);
 	}
 	
-	private static void travelTo(AbstractWorldType worldType, AbstractPlaceType placeType, boolean includeNyanMum) {
+	private static void travelTo(WorldType worldType, PlaceType placeType, boolean includeNyanMum) {
 		Main.game.getPlayer().setLocation(worldType, placeType);
 		getNyan().setLocation(Main.game.getPlayer(), false);
 		if(includeNyanMum) {

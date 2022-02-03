@@ -25,10 +25,8 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -36,7 +34,6 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldRegion;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
 
 /**
@@ -52,7 +49,7 @@ public abstract class AbstractOutfit {
 	private String name;
 	private String description;
 	private List<WorldRegion> worldRegions;
-	private List<AbstractWorldType> worldTypes;
+	private List<WorldType> worldTypes;
 	private Femininity femininity;
 	private List<OutfitType> outfitTypes;
 	private List<LegConfiguration> acceptableLegConfigurations;
@@ -407,14 +404,14 @@ public abstract class AbstractOutfit {
 				List<OutfitPotential> outfitPotentials = new ArrayList<>();
 				
 				for(Element genericClothingType : generationAttributes.getAllOf("genericClothingType")) {
-					List<AbstractClothingType> ctList = new ArrayList<>();
+					var ctList = new ArrayList<ClothingType>();
 					
 					boolean anyConditionalsFound = false;
 					
-					List<AbstractClothingType> clothingList = new ArrayList<>(ClothingType.getAllClothing());
+					var clothingList = new ArrayList<>(ClothingType.getAllClothing());
 					clothingList.removeIf(c->c.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN));
 					
-					for(AbstractClothingType ct : clothingList) {
+					for(var ct : clothingList) {
 						AbstractClothing defaultClothingExample = Main.game.getItemGen().generateClothing(ct);
 						// Check for required tags:
 						try {
@@ -546,12 +543,12 @@ public abstract class AbstractOutfit {
 				// Add clothing types:
 
 				for(Element clothingTypeElement : generationAttributes.getAllOf("clothingType")) {
-					List<AbstractClothingType> clothingTypeList = clothingTypeElement
+					var clothingTypeList = clothingTypeElement
 							.getMandatoryFirstOf("types")
 							.getAllOf("type")
 							.stream()
 							.map( e -> {
-								AbstractClothingType ct = ClothingType.getClothingTypeFromId(e.getTextContent());
+								var ct = ClothingType.getClothingTypeFromId(e.getTextContent());
 								AbstractClothing defaultClothingExample = Main.game.getItemGen().generateClothing(ct);
 								if(!defaultClothingExample.isAbleToBeEquipped(character, ct.getEquipSlots().get(0)).getKey()) {
 									return null;
@@ -562,7 +559,7 @@ public abstract class AbstractOutfit {
 							.collect(Collectors.toList());
 					
 					// Check conditional:
-					for(AbstractClothingType ct : new ArrayList<>(clothingTypeList)) {
+					for(var ct : new ArrayList<>(clothingTypeList)) {
 						try {
 							UtilText.setClothingTypeForParsing(ct);
 							String clothingConditional = clothingTypeElement.getMandatoryFirstOf("conditional").getTextContent();
@@ -587,7 +584,7 @@ public abstract class AbstractOutfit {
 				Collections.shuffle(outfitPotentials);
 				for(OutfitPotential ot : outfitPotentials) {
 					Collections.shuffle(ot.getTypes());
-					for(AbstractClothingType ct : ot.getTypes()) {
+					for(var ct : ot.getTypes()) {
 						if(character.getClothingInSlot(ct.getEquipSlots().get(0))==null
 								&& (ct.getEquipSlots().get(0).isCoreClothing() || settings.contains(EquipClothingSetting.ADD_ACCESSORIES))) {
 							if(!character.isSlotIncompatible(ct.getEquipSlots().get(0))) {
@@ -642,7 +639,7 @@ public abstract class AbstractOutfit {
 		}
 	}
 	
-	private OutfitPotential getOutfitPotential(List<AbstractClothingType> ctList, Element baseElement) {
+	private OutfitPotential getOutfitPotential(List<ClothingType> ctList, Element baseElement) {
 		List<List<Colour>> coloursList = new ArrayList<>();
 		
 		List<Colour> primaryColours = new ArrayList<>();
@@ -752,7 +749,7 @@ public abstract class AbstractOutfit {
 	
 	private AbstractWeapon getWeapon(Element baseElement) {
 		try {
-			AbstractWeaponType wt;
+			WeaponType wt;
 			List<DamageType> dtList;
 			DamageType dt = null;
 			
@@ -885,7 +882,7 @@ public abstract class AbstractOutfit {
 		return worldRegions;
 	}
 
-	public List<AbstractWorldType> getWorldTypes() {
+	public List<WorldType> getWorldTypes() {
 		return worldTypes;
 	}
 

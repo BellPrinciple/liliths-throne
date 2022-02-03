@@ -11,40 +11,8 @@ import com.lilithsthrone.main.Main;
 import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.AntennaType;
-import com.lilithsthrone.game.character.body.types.ArmType;
-import com.lilithsthrone.game.character.body.types.AssType;
-import com.lilithsthrone.game.character.body.types.BreastType;
-import com.lilithsthrone.game.character.body.types.EarType;
-import com.lilithsthrone.game.character.body.types.EyeType;
-import com.lilithsthrone.game.character.body.types.FaceType;
-import com.lilithsthrone.game.character.body.types.HairType;
-import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.body.types.LegType;
-import com.lilithsthrone.game.character.body.types.PenisType;
-import com.lilithsthrone.game.character.body.types.TailType;
-import com.lilithsthrone.game.character.body.types.TentacleType;
-import com.lilithsthrone.game.character.body.types.TorsoType;
-import com.lilithsthrone.game.character.body.types.VaginaType;
-import com.lilithsthrone.game.character.body.types.WingType;
+import com.lilithsthrone.game.character.body.types.*;
 import com.lilithsthrone.game.character.body.valueEnums.AreolaeShape;
 import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
 import com.lilithsthrone.game.character.body.valueEnums.AssSize;
@@ -87,16 +55,16 @@ public class AbstractRacialBody implements RacialBody {
 	private boolean fromExternalFile;
 	
 	// Antenna:
-	private List<AbstractAntennaType> antennaTypes;
+	private List<AntennaType> antennaTypes;
 	private int maleAntennaLength;
 	private int femaleAntennaLength;
 	
 	// Arms:
-	private AbstractArmType armType;
+	private ArmType armType;
 	private int armRows;
 
 	// Ass:
-	private AbstractAssType assType;
+	private AssType assType;
 	private float anusCapacity;
 	private int anusDepth;
 	private int anusWetness;
@@ -108,7 +76,7 @@ public class AbstractRacialBody implements RacialBody {
 	private int anusPlasticity;
 
 	// Breasts:
-	private AbstractBreastType breastType;
+	private BreastType breastType;
 	private List<BreastShape> breastShapes;
 	private NippleShape maleNippleShape;
 	private NippleShape femaleNippleShape;
@@ -136,7 +104,7 @@ public class AbstractRacialBody implements RacialBody {
 	private int breastCountFemale;
 
 	// BreastCrotchs/Crotch-boobs:
-	private AbstractBreastType breastCrotchType;
+	private BreastType breastCrotchType;
 	private List<BreastShape> breastCrotchShapes;
 	private int breastCrotchSize;
 	private int breastCrotchLactationRate;
@@ -152,10 +120,10 @@ public class AbstractRacialBody implements RacialBody {
 	private AreolaeShape breastCrotchAreolaeShape;
 
 	// Core:
-	private AbstractTorsoType torsoType;
+	private TorsoType torsoType;
 	private BodyMaterial bodyMaterial;
 	private String bodyHairId;
-	private AbstractBodyCoveringType bodyHairType;
+	private BodyCoveringType bodyHairType;
 	private GenitalArrangement genitalArrangement;
 	private int maleHeight;
 	private int femaleHeight;
@@ -167,28 +135,28 @@ public class AbstractRacialBody implements RacialBody {
 	private int femaleMuscle;
 	
 	// Hair:
-	private AbstractHairType hairType;
+	private HairType hairType;
 	private int maleHairLength;
 	private int femaleHairLength;
 
 	// Horns:
-	private List<AbstractHornType> hornTypes;
+	private List<HornType> hornTypes;
 	private int maleHornLength;
 	private int femaleHornLength;
 
 	// Face:
-	private AbstractFaceType faceType;
-	private AbstractEyeType eyeType;
-	private AbstractEarType earType;
+	private FaceType faceType;
+	private EyeType eyeType;
+	private EarType earType;
 	private int maleLipSize;
 	private int femaleLipSize;
 
 	// Legs:
-	private AbstractLegType legType;
+	private LegType legType;
 	private LegConfiguration legConfiguration;
 
 	// Penis:
-	private AbstractPenisType penisType;
+	private PenisType penisType;
 	private int penisSize;
 	private int penisGirth;
 	private int testicleSize;
@@ -196,13 +164,13 @@ public class AbstractRacialBody implements RacialBody {
 	private int cumProduction;
 
 	// Tail:
-	private List<AbstractTailType> tailTypes;
+	private List<TailType> tailTypes;
 	
 	// Tentacle:
-	private AbstractTentacleType tentacleType;
+	private TentacleType tentacleType;
 	
 	// Vagina:
-	private AbstractVaginaType vaginaType;
+	private VaginaType vaginaType;
 	private float vaginaCapacity;
 	private int vaginaDepth;
 	private int vaginaWetness;
@@ -212,7 +180,7 @@ public class AbstractRacialBody implements RacialBody {
 	private int vaginaPlasticity;
 
 	// Wings:
-	private List<AbstractWingType> wingTypes;
+	private List<WingType> wingTypes;
 	private int maleWingSize;
 	private int femaleWingSize;
 	
@@ -227,10 +195,10 @@ public class AbstractRacialBody implements RacialBody {
 	private int orientationMasculineAndrophilic;
 	
 	public AbstractRacialBody(
-			List<AbstractAntennaType> antennaTypes,
-			AbstractArmType armType,
+			List<AntennaType> antennaTypes,
+			ArmType armType,
 				int armRows,
-			AbstractAssType assType,
+			AssType assType,
 				AssSize maleAssSize,
 				AssSize femaleAssSize,
 				Wetness anusWetness,
@@ -238,7 +206,7 @@ public class AbstractRacialBody implements RacialBody {
 				OrificeDepth anusDepth,
 				OrificeElasticity anusElasticity,
 				OrificePlasticity anusPlasticity,
-			AbstractBreastType breastType,
+			BreastType breastType,
 				List<BreastShape> breastShapes,
 			CupSize noBreastSize,
 				int breastCountMale,
@@ -262,7 +230,7 @@ public class AbstractRacialBody implements RacialBody {
 				NippleShape femaleNippleShape,
 				AreolaeSize femaleAreolaeSize,
 				int femaleNippleCountPerBreast,
-			AbstractBreastType breastCrotchType,
+			BreastType breastCrotchType,
 				List<BreastShape> breastCrotchShapes,
 			CupSize breastCrotchSize,
 				int breastCrotchCount,
@@ -283,38 +251,38 @@ public class AbstractRacialBody implements RacialBody {
 				int femaleFemininity,
 				int femaleBodySize,
 				int femaleMuscle,
-			AbstractEarType earType,
-			AbstractEyeType eyeType,
-			AbstractFaceType faceType,
+			EarType earType,
+			EyeType eyeType,
+			FaceType faceType,
 				LipSize maleLipSize,
 				LipSize femaleLipSize,
-			AbstractHairType hairType,
+			HairType hairType,
 				HairLength maleHairLength,
 				HairLength femaleHairLength,
-			AbstractLegType legType,
+			LegType legType,
 				LegConfiguration legConfiguration,
-			AbstractTorsoType skinType,
+			TorsoType skinType,
 			BodyMaterial bodyMaterial,
-			AbstractBodyCoveringType bodyHairType,
+			BodyCoveringType bodyHairType,
 			HornLength maleHornLength,
 				HornLength femaleHornLength,
-				List<AbstractHornType> hornTypes,
-			AbstractPenisType penisType,
+				List<HornType> hornTypes,
+			PenisType penisType,
 				int penisSize,
 				PenetrationGirth penisGirth,
 				TesticleSize testicleSize,
 				int testicleQuantity,
 				CumProduction cumProduction,
-			List<AbstractTailType> tailTypes,
-			AbstractTentacleType tentacleType,
-			AbstractVaginaType vaginaType,
+			List<TailType> tailTypes,
+			TentacleType tentacleType,
+			VaginaType vaginaType,
 				Wetness vaginaWetness,
 				Capacity vaginaCapacity,
 				OrificeDepth vaginaDepth,
 				ClitorisSize clitSize,
 				OrificeElasticity vaginaElasticity,
 				OrificePlasticity vaginaPlasticity,
-			List<AbstractWingType> wingTypes,
+			List<WingType> wingTypes,
 				WingSize maleWingSize,
 				WingSize femaleWingSize,
 			GenitalArrangement genitalArrangement) {
@@ -483,17 +451,17 @@ public class AbstractRacialBody implements RacialBody {
 				// Antenna:
 				this.antennaTypes = new ArrayList<>();
 				for(Element e : coreElement.getMandatoryFirstOf("antennaTypes").getAllOf("type")) {
-					antennaTypes.add(AntennaType.getAntennaTypeFromId(e.getTextContent()));
+					antennaTypes.add(AntennaType.table.of(e.getTextContent()));
 				}
 				this.maleAntennaLength = Integer.valueOf(coreElement.getMandatoryFirstOf("maleAntennaLength").getTextContent());
 				this.femaleAntennaLength = Integer.valueOf(coreElement.getMandatoryFirstOf("femaleAntennaLength").getTextContent());
 				
 				// Arms:
-				this.armType = ArmType.getArmTypeFromId(coreElement.getMandatoryFirstOf("armType").getTextContent());
+				this.armType = ArmType.table.of(coreElement.getMandatoryFirstOf("armType").getTextContent());
 				this.armRows = Integer.valueOf(coreElement.getMandatoryFirstOf("armRows").getTextContent());
 				
 				// Ass:
-				this.assType = AssType.getAssTypeFromId(coreElement.getMandatoryFirstOf("assType").getTextContent());
+				this.assType = AssType.table.of(coreElement.getMandatoryFirstOf("assType").getTextContent());
 				this.anusCapacity = Float.valueOf(coreElement.getMandatoryFirstOf("anusCapacity").getTextContent());
 				this.anusDepth = Integer.valueOf(coreElement.getMandatoryFirstOf("anusDepth").getTextContent());
 				this.anusWetness = Integer.valueOf(coreElement.getMandatoryFirstOf("anusWetness").getTextContent());
@@ -513,7 +481,7 @@ public class AbstractRacialBody implements RacialBody {
 				this.anusPlasticity = Integer.valueOf(coreElement.getMandatoryFirstOf("anusPlasticity").getTextContent());
 				
 				// Breasts:
-				this.breastType = BreastType.getBreastTypeFromId(coreElement.getMandatoryFirstOf("breastType").getTextContent());
+				this.breastType = BreastType.table.of(coreElement.getMandatoryFirstOf("breastType").getTextContent());
 				this.breastShapes = new ArrayList<>();
 				String udderShapes = coreElement.getMandatoryFirstOf("breastShapes").getAttribute("udderShapes");
 				if(!udderShapes.isEmpty()) {
@@ -555,7 +523,7 @@ public class AbstractRacialBody implements RacialBody {
 				this.femaleNippleCountPerBreast = Integer.valueOf(coreElement.getMandatoryFirstOf("femaleNippleCountPerBreast").getTextContent());
 
 				// BreastCrotchs/Crotch-boobs:
-				this.breastCrotchType = BreastType.getBreastTypeFromId(coreElement.getMandatoryFirstOf("breastCrotchType").getTextContent());
+				this.breastCrotchType = BreastType.table.of(coreElement.getMandatoryFirstOf("breastCrotchType").getTextContent());
 				this.breastCrotchShapes = new ArrayList<>();
 				udderShapes = coreElement.getMandatoryFirstOf("breastCrotchShapes").getAttribute("udderShapes");
 				if(!udderShapes.isEmpty()) {
@@ -584,31 +552,31 @@ public class AbstractRacialBody implements RacialBody {
 				this.nippleCountPerBreastCrotch = Integer.valueOf(coreElement.getMandatoryFirstOf("nippleCountPerBreastCrotch").getTextContent());
 
 				// Face:
-				this.faceType = FaceType.getFaceTypeFromId(coreElement.getMandatoryFirstOf("faceType").getTextContent());
-				this.eyeType = EyeType.getEyeTypeFromId(coreElement.getMandatoryFirstOf("eyeType").getTextContent());
-				this.earType = EarType.getEarTypeFromId(coreElement.getMandatoryFirstOf("earType").getTextContent());
+				this.faceType = FaceType.table.of(coreElement.getMandatoryFirstOf("faceType").getTextContent());
+				this.eyeType = EyeType.table.of(coreElement.getMandatoryFirstOf("eyeType").getTextContent());
+				this.earType = EarType.table.of(coreElement.getMandatoryFirstOf("earType").getTextContent());
 				this.maleLipSize = Integer.valueOf(coreElement.getMandatoryFirstOf("maleLipSize").getTextContent());
 				this.femaleLipSize = Integer.valueOf(coreElement.getMandatoryFirstOf("femaleLipSize").getTextContent());
 
 				// Hair:
-				this.hairType = HairType.getHairTypeFromId(coreElement.getMandatoryFirstOf("hairType").getTextContent());
+				this.hairType = HairType.table.of(coreElement.getMandatoryFirstOf("hairType").getTextContent());
 				this.maleHairLength = Integer.valueOf(coreElement.getMandatoryFirstOf("maleHairLength").getTextContent());
 				this.femaleHairLength = Integer.valueOf(coreElement.getMandatoryFirstOf("femaleHairLength").getTextContent());
 
 				// Horns:
 				this.hornTypes = new ArrayList<>();
 				for(Element e : coreElement.getMandatoryFirstOf("hornTypes").getAllOf("type")) {
-					hornTypes.add(HornType.getHornTypeFromId(e.getTextContent()));
+					hornTypes.add(HornType.table.of(e.getTextContent()));
 				}
 				this.maleHornLength = Integer.valueOf(coreElement.getMandatoryFirstOf("maleHornLength").getTextContent());
 				this.femaleHornLength = Integer.valueOf(coreElement.getMandatoryFirstOf("femaleHornLength").getTextContent());
 				
 				// Leg:
-				this.legType = LegType.getLegTypeFromId(coreElement.getMandatoryFirstOf("legType").getTextContent());
+				this.legType = LegType.table.of(coreElement.getMandatoryFirstOf("legType").getTextContent());
 				this.legConfiguration = LegConfiguration.valueOf(coreElement.getMandatoryFirstOf("legConfiguration").getTextContent());
 				
 				// Penis:
-				this.penisType = PenisType.getPenisTypeFromId(coreElement.getMandatoryFirstOf("penisType").getTextContent());
+				this.penisType = PenisType.table.of(coreElement.getMandatoryFirstOf("penisType").getTextContent());
 				this.penisSize = Integer.valueOf(coreElement.getMandatoryFirstOf("penisLength").getTextContent());
 				this.penisGirth = Integer.valueOf(coreElement.getMandatoryFirstOf("penisGirth").getTextContent());
 				this.testicleSize = Integer.valueOf(coreElement.getMandatoryFirstOf("testicleSize").getTextContent());
@@ -618,17 +586,17 @@ public class AbstractRacialBody implements RacialBody {
 				// Tail:
 				this.tailTypes = new ArrayList<>();
 				for(Element e : coreElement.getMandatoryFirstOf("tailTypes").getAllOf("type")) {
-					tailTypes.add(TailType.getTailTypeFromId(e.getTextContent()));
+					tailTypes.add(TailType.table.of(e.getTextContent()));
 				}
 				
 				// Tentacle:
-				this.tentacleType = TentacleType.getTentacleTypeFromId(coreElement.getMandatoryFirstOf("tentacleType").getTextContent());
+				this.tentacleType = TentacleType.table.of(coreElement.getMandatoryFirstOf("tentacleType").getTextContent());
 
 				// Torso:
-				this.torsoType = TorsoType.getTorsoTypeFromId(coreElement.getMandatoryFirstOf("torsoType").getTextContent());
+				this.torsoType = TorsoType.table.of(coreElement.getMandatoryFirstOf("torsoType").getTextContent());
 				
 				// Vagina:
-				this.vaginaType = VaginaType.getVaginaTypeFromId(coreElement.getMandatoryFirstOf("vaginaType").getTextContent());
+				this.vaginaType = VaginaType.table.of(coreElement.getMandatoryFirstOf("vaginaType").getTextContent());
 				this.clitSize = Integer.valueOf(coreElement.getMandatoryFirstOf("clitSize").getTextContent());
 				this.clitGirth = Integer.valueOf(coreElement.getMandatoryFirstOf("clitGirth").getTextContent());
 				this.vaginaCapacity = Float.valueOf(coreElement.getMandatoryFirstOf("vaginaCapacity").getTextContent());
@@ -640,7 +608,7 @@ public class AbstractRacialBody implements RacialBody {
 				// Wings:
 				this.wingTypes = new ArrayList<>();
 				for(Element e : coreElement.getMandatoryFirstOf("wingTypes").getAllOf("type")) {
-					wingTypes.add(WingType.getWingTypeFromId(e.getTextContent()));
+					wingTypes.add(WingType.table.of(e.getTextContent()));
 				}
 				this.maleWingSize = Integer.valueOf(coreElement.getMandatoryFirstOf("maleWingSize").getTextContent());
 				this.femaleWingSize = Integer.valueOf(coreElement.getMandatoryFirstOf("femaleWingSize").getTextContent());
@@ -733,9 +701,9 @@ public class AbstractRacialBody implements RacialBody {
 	}
 
 	@Override
-	public List<AbstractAntennaType> getAntennaTypes(boolean removeTypeNone) {
+	public List<AntennaType> getAntennaTypes(boolean removeTypeNone) {
 		if(removeTypeNone) {
-			List<AbstractAntennaType> antennaList = new ArrayList<>(antennaTypes);
+			var antennaList = new ArrayList<>(antennaTypes);
 			antennaList.remove(AntennaType.NONE);
 			return antennaList;
 		}
@@ -753,17 +721,17 @@ public class AbstractRacialBody implements RacialBody {
 	}
 
 	@Override
-	public AbstractArmType getArmType() {
+	public ArmType getArmType() {
 		return armType;
 	}
 
 	@Override
-	public AbstractAssType getAssType() {
+	public AssType getAssType() {
 		return assType;
 	}
 
 	@Override
-	public AbstractBreastType getBreastType() {
+	public BreastType getBreastType() {
 		return breastType;
 	}
 
@@ -773,27 +741,27 @@ public class AbstractRacialBody implements RacialBody {
 	}
 
 	@Override
-	public AbstractFaceType getFaceType() {
+	public FaceType getFaceType() {
 		return faceType;
 	}
 
 	@Override
-	public AbstractEyeType getEyeType() {
+	public EyeType getEyeType() {
 		return eyeType;
 	}
 
 	@Override
-	public AbstractEarType getEarType() {
+	public EarType getEarType() {
 		return earType;
 	}
 
 	@Override
-	public AbstractHairType getHairType() {
+	public HairType getHairType() {
 		return hairType;
 	}
 
 	@Override
-	public AbstractLegType getLegType(LegConfiguration configuration) {
+	public LegType getLegType(LegConfiguration configuration) {
 		return legType;
 	}
 
@@ -803,7 +771,7 @@ public class AbstractRacialBody implements RacialBody {
 	}
 
 	@Override
-	public AbstractTorsoType getTorsoType() {
+	public TorsoType getTorsoType() {
 		return torsoType;
 	}
 
@@ -813,18 +781,18 @@ public class AbstractRacialBody implements RacialBody {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyHairType() {
+	public BodyCoveringType getBodyHairType() {
 		if(this.isFromExternalFile()) {
-			return BodyCoveringType.getBodyCoveringTypeFromId(bodyHairId);
+			return BodyCoveringType.table.of(bodyHairId);
 		} else {
 			return bodyHairType;
 		}
 	}
 
 	@Override
-	public List<AbstractHornType> getHornTypes(boolean removeTypeNone) {
+	public List<HornType> getHornTypes(boolean removeTypeNone) {
 		if(removeTypeNone) {
-			List<AbstractHornType> hornList = new ArrayList<>(hornTypes);
+			var hornList = new ArrayList<>(hornTypes);
 			hornList.remove(HornType.NONE);
 			return hornList;
 		}
@@ -832,27 +800,27 @@ public class AbstractRacialBody implements RacialBody {
 	}
 
 	@Override
-	public AbstractPenisType getPenisType() {
+	public PenisType getPenisType() {
 		return penisType;
 	}
 
 	@Override
-	public List<AbstractTailType> getTailType() {
+	public List<TailType> getTailType() {
 		return tailTypes;
 	}
 
 	@Override
-	public AbstractTentacleType getTentacleType() {
+	public TentacleType getTentacleType() {
 		return tentacleType;
 	}
 
 	@Override
-	public AbstractVaginaType getVaginaType() {
+	public VaginaType getVaginaType() {
 		return vaginaType;
 	}
 
 	@Override
-	public List<AbstractWingType> getWingTypes() {
+	public List<WingType> getWingTypes() {
 		return wingTypes;
 	}
 
@@ -1077,7 +1045,7 @@ public class AbstractRacialBody implements RacialBody {
 	}
 
 	@Override
-	public AbstractBreastType getBreastCrotchType() {
+	public BreastType getBreastCrotchType() {
 		return breastCrotchType;
 	}
 

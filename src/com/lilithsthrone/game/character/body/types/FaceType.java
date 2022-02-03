@@ -6,11 +6,8 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractMouthType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
@@ -24,7 +21,7 @@ public interface FaceType extends BodyPartTypeInterface {
 
 	boolean isFacialHairAllowed();
 
-	AbstractMouthType getMouthType();
+	MouthType getMouthType();
 
 	String getNoseNameSingular(GameCharacter gc);
 
@@ -516,11 +513,11 @@ public interface FaceType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, AbstractMouthType mouthType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String noseName, String noseNamePlural, List<String> noseDescriptorsMasculine, List<String> noseDescriptorsFeminine, String faceTransformationDescription, String faceBodyDescription, List<BodyPartTag> tags) {
+		public Special(BodyCoveringType coveringType, Race race, MouthType mouthType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String noseName, String noseNamePlural, List<String> noseDescriptorsMasculine, List<String> noseDescriptorsFeminine, String faceTransformationDescription, String faceBodyDescription, List<BodyPartTag> tags) {
 			super(coveringType, race, mouthType, names, namesPlural, descriptorsMasculine, descriptorsFeminine, noseName, noseNamePlural, noseDescriptorsMasculine, noseDescriptorsFeminine, faceTransformationDescription, faceBodyDescription, tags);
 		}
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, AbstractMouthType mouthType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String noseName, String noseNamePlural, List<String> noseDescriptorsMasculine, List<String> noseDescriptorsFeminine, String faceTransformationDescription, String faceBodyDescription, String faceBodyDescriptionFeral, List<BodyPartTag> tags) {
+		public Special(BodyCoveringType coveringType, Race race, MouthType mouthType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String noseName, String noseNamePlural, List<String> noseDescriptorsMasculine, List<String> noseDescriptorsFeminine, String faceTransformationDescription, String faceBodyDescription, String faceBodyDescriptionFeral, List<BodyPartTag> tags) {
 			super(coveringType, race, mouthType, names, namesPlural, descriptorsMasculine, descriptorsFeminine, noseName, noseNamePlural, noseDescriptorsMasculine, noseDescriptorsFeminine, faceTransformationDescription, faceBodyDescription, faceBodyDescriptionFeral, tags);
 		}
 
@@ -532,7 +529,7 @@ public interface FaceType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractFaceType> table = new TypeTable<>(
+	TypeTable<FaceType> table = new TypeTable<>(
 		FaceType::sanitize,
 		FaceType.class,
 		AbstractFaceType.class,
@@ -544,7 +541,7 @@ public interface FaceType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractFaceType getFaceTypeFromId(String id) {
+	static FaceType getFaceTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -565,15 +562,15 @@ public interface FaceType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromFaceType(AbstractFaceType faceType) {
+	static String getIdFromFaceType(FaceType faceType) {
 		return faceType.getId();
 	}
 
-	public static List<AbstractFaceType> getAllFaceTypes() {
+	static List<FaceType> getAllFaceTypes() {
 		return table.listByRace();
 	}
 
-	public static List<AbstractFaceType> getFaceTypes(AbstractRace r) {
+	static List<FaceType> getFaceTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

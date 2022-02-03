@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -15,7 +14,6 @@ import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -24,11 +22,9 @@ import com.lilithsthrone.game.character.npc.NPCGenerationFlag;
 import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.CombatBehaviour;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMoveType;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.npcDialogue.dominion.EnforcerAlleywayDialogue;
@@ -79,16 +75,16 @@ public class EnforcerPatrol extends NPC {
 		if(!isImported) {
 			setLevel(Util.random.nextInt(5)+3);
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			var availableRaces = new HashMap<Subspecies,Integer>();
+			for(var s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}
 				if(Subspecies.getWorldSpecies(WorldType.DOMINION, null, false, Subspecies.SLIME).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (5000 * Subspecies.getWorldSpecies(WorldType.DOMINION, null, false, Subspecies.SLIME).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (5000 * Subspecies.getWorldSpecies(WorldType.DOMINION, null, false, Subspecies.SLIME).get(s).getChanceMultiplier()), gender, s, availableRaces);
 					
 				} else if(Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false, Subspecies.SLIME).containsKey(s)) { // Add Submission races at only 20% of the chance of Dominion races
-					AbstractSubspecies.addToSubspeciesMap((int) (1000 * Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false, Subspecies.SLIME).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (1000 * Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false, Subspecies.SLIME).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				}
 			}
 			
@@ -117,7 +113,7 @@ public class EnforcerPatrol extends NPC {
 			
 			Main.game.getCharacterUtils().addFetishes(this, Fetish.FETISH_CROSS_DRESSER, Fetish.FETISH_EXHIBITIONIST); // Do not allow cross-dressing or exhibitionist, as otherwise it will mess with uniforms.
 			
-			List<AbstractFetish> fetishesForNonNegative = Util.newArrayListOfValues(
+			List<Fetish> fetishesForNonNegative = Util.newArrayListOfValues(
 					Fetish.FETISH_ANAL_GIVING,
 					Fetish.FETISH_ORAL_RECEIVING,
 					Fetish.FETISH_VAGINAL_GIVING,
@@ -125,7 +121,7 @@ public class EnforcerPatrol extends NPC {
 					Fetish.FETISH_PENIS_GIVING,
 					Fetish.FETISH_PENIS_RECEIVING,
 					Fetish.FETISH_DOMINANT);
-			for(AbstractFetish fetish : fetishesForNonNegative) {
+			for(Fetish fetish : fetishesForNonNegative) {
 				if(this.getFetishDesire(fetish).isNegative()) {
 					this.setFetishDesire(fetish, FetishDesire.TWO_NEUTRAL);
 				}
@@ -152,7 +148,7 @@ public class EnforcerPatrol extends NPC {
 
 			this.setLocation(Main.game.getPlayer(), false); // Move to player location
 			
-			for(AbstractCombatMove move : new ArrayList<>(this.getEquippedMoves())) {
+			for(var move : new ArrayList<>(this.getEquippedMoves())) {
 				if(move.getType()==CombatMoveType.TEASE) {
 					this.unequipMove(move.getIdentifier());
 				}

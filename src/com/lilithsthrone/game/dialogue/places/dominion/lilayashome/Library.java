@@ -9,7 +9,6 @@ import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.spells.Spell;
@@ -18,7 +17,6 @@ import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.RenderingEngine;
@@ -44,10 +42,10 @@ public class Library {
 		DESERT;
 	}
 	
-	private static Set<AbstractSubspecies> getAisleSubspecies(LibraryAisle aisle) {
-		Set<AbstractSubspecies> aisleSubspecies = new HashSet<>();
+	private static Set<Subspecies> getAisleSubspecies(LibraryAisle aisle) {
+		Set<Subspecies> aisleSubspecies = new HashSet<>();
 
-		for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+		for(Subspecies subspecies : Subspecies.getAllSubspecies()) {
 			List<WorldRegion> mostCommonRegion = subspecies.getMostCommonWorldRegions();
 			if(mostCommonRegion.isEmpty()) {
 				mostCommonRegion.add(WorldRegion.DOMINION);
@@ -485,8 +483,8 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.DEMON)) {
+				Set<ItemType> booksAdded = new HashSet<>();
+				for(Subspecies subspecies : getAisleSubspecies(LibraryAisle.DEMON)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(ELDER_RACES, subspecies));
 					}
@@ -534,8 +532,8 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.DOMINION)) {
+				Set<ItemType> booksAdded = new HashSet<>();
+				for(Subspecies subspecies : getAisleSubspecies(LibraryAisle.DOMINION)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(DOMINION_RACES, subspecies));
 					}
@@ -579,8 +577,8 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.FIELDS)) {
+				Set<ItemType> booksAdded = new HashSet<>();
+				for(Subspecies subspecies : getAisleSubspecies(LibraryAisle.FIELDS)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(FIELDS_BOOKS, subspecies));
 					}
@@ -620,8 +618,8 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.JUNGLE)) {
+				Set<ItemType> booksAdded = new HashSet<>();
+				for(Subspecies subspecies : getAisleSubspecies(LibraryAisle.JUNGLE)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(JUNGLE_BOOKS, subspecies));
 					}
@@ -661,8 +659,8 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.MOUNTAIN)) {
+				Set<ItemType> booksAdded = new HashSet<>();
+				for(Subspecies subspecies : getAisleSubspecies(LibraryAisle.MOUNTAIN)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(MOUNTAIN_BOOKS, subspecies));
 					}
@@ -702,8 +700,8 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.SEA)) {
+				Set<ItemType> booksAdded = new HashSet<>();
+				for(Subspecies subspecies : getAisleSubspecies(LibraryAisle.SEA)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(SEA_BOOKS, subspecies));
 					}
@@ -744,8 +742,8 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
-				for(AbstractSubspecies subspecies : getAisleSubspecies(LibraryAisle.DESERT)) {
+				Set<ItemType> booksAdded = new HashSet<>();
+				for(Subspecies subspecies : getAisleSubspecies(LibraryAisle.DESERT)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(DESERT_BOOKS, subspecies));
 					}
@@ -765,8 +763,8 @@ public class Library {
 		}
 	};
 	
-	private static Response bookResponse(DialogueNode nodeToReturnTo, AbstractSubspecies subspecies) {
-		AbstractItemType book = ItemType.getLoreBook(subspecies);
+	private static Response bookResponse(DialogueNode nodeToReturnTo, Subspecies subspecies) {
+		ItemType book = ItemType.getLoreBook(subspecies);
 
 		if(Main.getProperties().isAdvancedRaceKnowledgeDiscovered(subspecies)) {
 			return new Response(book.getName(false), book.getDescription(), nodeToReturnTo) {

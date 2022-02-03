@@ -25,7 +25,6 @@ import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
 import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -45,7 +44,6 @@ import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueManager;
@@ -60,7 +58,6 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJobSetting;
@@ -113,7 +110,7 @@ public class SlaverAlleyDialogue {
 			}
 		}
 		Main.game.getNpc(Finch.class).removeAllSlaves();
-		
+
 		// Female stall:
 		Gender[] genders = new Gender[] {Gender.F_V_B_FEMALE, Gender.F_V_B_FEMALE, Gender.F_P_V_B_FUTANARI};
 		for (Gender gender : genders) {
@@ -200,11 +197,11 @@ public class SlaverAlleyDialogue {
 				slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_bdsm_ringgag", false), true, Main.game.getNpc(Finch.class));
 			}
 			Main.game.getNpc(Finch.class).addSlave(slave);
-			
+
 			applySlaveEffectsOral(slave);
 		}
 	}
-	
+
 	private static void applySlaveEffectsFemale(GameCharacter slave) {
 		slave.addFetish(Fetish.FETISH_SUBMISSIVE);
 		slave.addFetish(Fetish.FETISH_VAGINAL_RECEIVING);
@@ -216,7 +213,7 @@ public class SlaverAlleyDialogue {
 		}
 		slave.setObedience(100);
 	}
-	
+
 	private static void applySlaveEffectsMale(GameCharacter slave) {
 		slave.addFetish(Fetish.FETISH_DOMINANT);
 		slave.addFetish(Fetish.FETISH_CUM_STUD);
@@ -226,13 +223,13 @@ public class SlaverAlleyDialogue {
 		}
 		slave.setObedience(75);
 	}
-	
+
 	private static void applySlaveEffectsAnal(GameCharacter slave) {
 		slave.setAssWetness(Util.randomItemFrom(Util.newArrayListOfValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
 		slave.setAssBleached(true);
 		slave.setAssCapacity(Util.random.nextInt((int) Capacity.ONE_EXTREMELY_TIGHT.getMaximumValue(false)), true);
 		slave.setAssVirgin(false);
-		
+
 		slave.addFetish(Fetish.FETISH_ANAL_GIVING);
 		slave.addFetish(Fetish.FETISH_ANAL_RECEIVING);
 		slave.setObedience(75);
@@ -242,12 +239,12 @@ public class SlaverAlleyDialogue {
 		slave.setVaginaWetness(Util.randomItemFrom(Util.newArrayListOfValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
 		slave.setVaginaCapacity(Util.random.nextInt((int) Capacity.ONE_EXTREMELY_TIGHT.getMaximumValue(false)), true);
 		slave.setVaginaVirgin(true);
-		
+
 		slave.addFetish(Fetish.FETISH_VAGINAL_RECEIVING);
 		slave.addFetish(Fetish.FETISH_VAGINAL_GIVING);
 		slave.setObedience(75);
 	}
-	
+
 	private static void applySlaveEffectsOral(GameCharacter slave) {
 		slave.setFaceWetness(Util.randomItemFrom(Util.newArrayListOfValues(Wetness.FOUR_SLIMY, Wetness.FIVE_SLOPPY, Wetness.SIX_SOPPING_WET, Wetness.SEVEN_DROOLING)).getValue());
 		slave.setFaceCapacity(Capacity.THREE_SLIGHTLY_LOOSE.getMedianValue(), true);
@@ -281,7 +278,7 @@ public class SlaverAlleyDialogue {
 		}
 	}
 	
-	
+
 	public static void stocksUpdate() {
 		float chanceToBeUsed = (12 - Main.game.getHourOfDay()%12)/12f;
 		for(NPC npc : Main.game.getCharactersPresent(Main.game.getWorlds().get(WorldType.SLAVER_ALLEY).getCell(PlaceType.SLAVER_ALLEY_PUBLIC_STOCKS))) {
@@ -289,11 +286,11 @@ public class SlaverAlleyDialogue {
 				if (Math.random()<chanceToBeUsed) {
 					if (!Main.game.getCharactersPresent().contains(npc)) {
 						Gender gender = Gender.getGenderFromUserPreferences(false, true);
-						
-						Map<AbstractSubspecies, Integer> availableRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(gender);
-						
-						AbstractSubspecies subspecies = Subspecies.HUMAN;
-						AbstractSubspecies halfDemonSubspecies = null;
+
+						Map<Subspecies, Integer> availableRaces = Subspecies.getGenericSexPartnerSubspeciesMap(gender);
+
+						Subspecies subspecies = Subspecies.HUMAN;
+						Subspecies halfDemonSubspecies = null;
 						if (!availableRaces.isEmpty()) {
 							subspecies = Util.getRandomObjectFromWeightedMap(availableRaces);
 						}
@@ -301,7 +298,7 @@ public class SlaverAlleyDialogue {
 							halfDemonSubspecies = subspecies;
 							subspecies = Subspecies.HALF_DEMON;
 						}
-						
+
 						if (npc.hasSlaveJobSetting(SlaveJob.PUBLIC_STOCKS, SlaveJobSetting.SEX_ORAL)) {
 							npc.calculateGenericSexEffects(false, true, null, subspecies, halfDemonSubspecies, new SexType(SexParticipantType.NORMAL, SexAreaOrifice.MOUTH, SexAreaPenetration.PENIS), GenericSexFlag.NO_DESCRIPTION_NEEDED);
 						}
@@ -316,7 +313,7 @@ public class SlaverAlleyDialogue {
 			}
 		}
 	}
-	
+
 	public static void stocksReset(){
 		banishSlavesInStocks();
 		
@@ -407,7 +404,7 @@ public class SlaverAlleyDialogue {
 		partners.get(0).removeFetish(Fetish.FETISH_ORAL_RECEIVING);
 		partners.get(0).removeFetish(Fetish.FETISH_VAGINAL_GIVING);
 		partners.get(0).removeFetish(Fetish.FETISH_ANAL_GIVING);
-		List<AbstractFetish> fetishes = Util.newArrayListOfValues(
+		List<Fetish> fetishes = Util.newArrayListOfValues(
 				target.isAbleToAccessCoverableArea(CoverableArea.MOUTH, true)
 				&& !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.slaverAlleyTwoPartners)
 					?Fetish.FETISH_ORAL_RECEIVING
@@ -1140,7 +1137,7 @@ public class SlaverAlleyDialogue {
 		}
 	};
 
-	private static Map<Integer, AbstractItemType> getCafeItems() {
+	private static Map<Integer, ItemType> getCafeItems() {
 		return Util.newHashMapOfValues(
 				new Value<>(1, ItemType.getItemTypeFromId("innoxia_race_human_vanilla_water")),
 				new Value<>(2, ItemType.getItemTypeFromId("innoxia_race_bat_fruit_bats_juice_box")),
@@ -1171,12 +1168,12 @@ public class SlaverAlleyDialogue {
 				slave.removePersonalityTrait(PersonalityTrait.STUTTER);
 				slave.removePersonalityTrait(PersonalityTrait.SLOVENLY);
 				slave.setSexualOrientation(SexualOrientation.AMBIPHILIC);
-				for(AbstractFetish fetish : Fetish.allFetishes) {
+				for(Fetish fetish : Fetish.getAllFetishes()) {
 					if(slave.getFetishDesire(fetish).isNegative()) {
 						slave.setFetishDesire(fetish, FetishDesire.TWO_NEUTRAL); // Remove all negative fetishes to make sure they don't start hating sex scenes
 					}
 				}
-				
+
 				if(Main.game.getPlayer().getLocationPlaceType()==PlaceType.SLAVER_ALLEY_CAFE) { //Oral:
 					applySlaveEffectsOral(slave);
 					slave.setLipstick(new Covering(BodyCoveringType.MAKEUP_LIPSTICK, CoveringPattern.NONE, CoveringModifier.METALLIC, PresetColour.COVERING_GOLD, false, PresetColour.COVERING_GOLD, false));
@@ -1185,19 +1182,19 @@ public class SlaverAlleyDialogue {
 
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_groin_vstring", PresetColour.CLOTHING_PURPLE_DARK, false), true, slave);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_chest_fullcup_bra", PresetColour.CLOTHING_PURPLE_DARK, false), true, slave);
-					
+
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_maid_dress", PresetColour.CLOTHING_BLUE_LIGHT, false), true, slave);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_maid_headpiece", PresetColour.CLOTHING_BLUE_LIGHT, false), true, slave);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_maid_sleeves", PresetColour.CLOTHING_BLUE_LIGHT, false), true, slave);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_maid_stockings", PresetColour.CLOTHING_BLUE_LIGHT, false), true, slave);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_maid_heels", PresetColour.CLOTHING_BLUE_LIGHT, false), true, slave);
-					
+
 					slave.setPiercedEar(true);
 					slave.setPiercedTongue(true);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_piercing_basic_barbell", PresetColour.CLOTHING_GOLD, false), true, slave);
 					slave.setPiercedLip(true);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_piercing_lip_double_ring", PresetColour.CLOTHING_GOLD, false), true, slave);
-					
+
 				} else if(Main.game.getPlayer().getLocationPlaceType()==PlaceType.SLAVER_ALLEY_CAFE_2) { //Masculine:
 					applySlaveEffectsMale(slave);
 					if(slave.getPenisSize().getMedianValue()<PenisLength.FOUR_HUGE.getMedianValue()) {
@@ -1212,12 +1209,12 @@ public class SlaverAlleyDialogue {
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_foot_work_boots", PresetColour.CLOTHING_BLACK, false), true, slave);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_leg_crotchless_chaps", PresetColour.CLOTHING_BLACK, false), true, slave);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_torso_tshirt", PresetColour.CLOTHING_BLUE_NAVY, false), true, slave);
-					
+
 				} else if(Main.game.getPlayer().getLocationPlaceType()==PlaceType.SLAVER_ALLEY_CAFE_3) { //Anal:
 					applySlaveEffectsAnal(slave);
 					slave.addFetish(Fetish.FETISH_SUBMISSIVE);
 					slave.removePersonalityTrait(PersonalityTrait.CONFIDENT);
-					
+
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_groin_briefs", PresetColour.CLOTHING_BLACK, false), true, slave);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_sock_socks", PresetColour.CLOTHING_BLACK, false), true, slave);
 
@@ -1229,7 +1226,7 @@ public class SlaverAlleyDialogue {
 
 					slave.addStatusEffect(StatusEffect.CHASTITY_4, -1);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_bdsm_chastity_cage", PresetColour.CLOTHING_PINK_LIGHT, false), true, slave);
-					
+
 				} else { //Feminine:
 					applySlaveEffectsFemale(slave);
 					if(slave.getBreastSize().getMeasurement()<CupSize.F.getMeasurement()) {
@@ -1244,7 +1241,7 @@ public class SlaverAlleyDialogue {
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ClothingType.HIPS_SUSPENDER_BELT, PresetColour.CLOTHING_BLACK, false), true, slave);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_hand_elbow_length_gloves", PresetColour.CLOTHING_BLACK, false), true, slave);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_foot_platform_boots", PresetColour.CLOTHING_RED_BURGUNDY, false), true, slave);
-					
+
 					slave.setPiercedEar(true);
 					slave.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_piercing_ear_hoops", PresetColour.CLOTHING_PLATINUM, false), true, slave);
 					slave.setPiercedNose(true);
@@ -1299,7 +1296,7 @@ public class SlaverAlleyDialogue {
 			}
 			
 			if(getCafeItems().containsKey(index)) {
-				AbstractItemType itemType = getCafeItems().get(index);
+				ItemType itemType = getCafeItems().get(index);
 				int itemValue = (int) (itemType.getValue()*1.8f);
 				if(responseTab==0) {
 					if(Main.game.getPlayer().getMoney()<itemValue) {

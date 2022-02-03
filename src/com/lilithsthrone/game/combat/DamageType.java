@@ -1,7 +1,6 @@
 package com.lilithsthrone.game.combat;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -137,12 +136,12 @@ public enum DamageType {
 	private String name;
 	private Colour colour;
 	private String weaponDescriptor;
-	private AbstractAttribute resistAttribute;
-	private AbstractAttribute multiplierAttribute;
+	private Attribute resistAttribute;
+	private Attribute multiplierAttribute;
 	private SpellSchool spellSchool;
 	private DamageType parentDamageType;
 
-	private DamageType(String name, Colour colour, String weaponDescriptor, AbstractAttribute resistAttribute, AbstractAttribute multiplierAttribute, SpellSchool spellSchool, DamageType parentDamageType) {
+	private DamageType(String name, Colour colour, String weaponDescriptor, Attribute resistAttribute, Attribute multiplierAttribute, SpellSchool spellSchool, DamageType parentDamageType) {
 		this.name = name;
 		this.colour = colour;
 		this.weaponDescriptor = weaponDescriptor;
@@ -172,11 +171,11 @@ public enum DamageType {
 		return weaponDescriptor;
 	}
 
-	public AbstractAttribute getResistAttribute() {
+	public Attribute getResistAttribute() {
 		return resistAttribute;
 	}
 
-	public AbstractAttribute getMultiplierAttribute() {
+	public Attribute getMultiplierAttribute() {
 		return multiplierAttribute;
 	}
 
@@ -211,7 +210,7 @@ public enum DamageType {
 			damageAmount = this.getParentDamageType(source, target).shieldCheckNoDamage(source, target, damageAmount);
 		}
 		if(target.getShields(this) > 0) {
-			AbstractAttribute resist = this.getResistAttribute();
+			var resist = this.getResistAttribute();
 			if(target.getAttributeValue(resist)>=resist.getUpperLimit() && resist.isInfiniteAtUpperLimit()) {
 				damageAmount = 0;
 			} else {
@@ -234,7 +233,7 @@ public enum DamageType {
 				damageAmount = this.getParentDamageType(source, target).shieldCheck(source, target, damageAmount);
 			}
 			if(target.getShields(this) > 0) {
-				AbstractAttribute resist = this.getResistAttribute();
+				var resist = this.getResistAttribute();
 				if(target.getAttributeValue(resist)>=resist.getUpperLimit() && resist.isInfiniteAtUpperLimit()) {
 					damageAmount = 0;
 				} else {

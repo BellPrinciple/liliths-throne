@@ -13,14 +13,13 @@ import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
+import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -33,7 +32,6 @@ import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -67,14 +65,14 @@ public class EvelyxSexualPartner extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			AbstractPlaceType placeType = Main.game.getPlayer().getLocationPlace().getPlaceType();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			Map<Subspecies, Integer> availableRaces = new HashMap<>();
+			PlaceType placeType = Main.game.getPlayer().getLocationPlace().getPlaceType();
+			for(Subspecies s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}
 				if(Subspecies.getWorldSpecies(WorldType.WORLD_MAP, placeType, false).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.WORLD_MAP, placeType, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.WORLD_MAP, placeType, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				}
 			}
 			
@@ -110,12 +108,12 @@ public class EvelyxSexualPartner extends NPC {
 			Main.game.getCharacterUtils().addFetishes(this);
 			
 			// Remove negative fetish desires as otherwise they might conflict with the sex type
-			for(AbstractFetish fetish : new ArrayList<>(this.getFetishes(false))) {
+			for(Fetish fetish : new ArrayList<>(this.getFetishes(false))) {
 				if(this.getFetishDesire(fetish).isNegative()) {
 					this.setFetishDesire(fetish, FetishDesire.TWO_NEUTRAL);
 				}
 			}
-			
+
 			// BODY RANDOMISATION:
 			
 			Main.game.getCharacterUtils().randomiseBody(this, true);
@@ -128,7 +126,7 @@ public class EvelyxSexualPartner extends NPC {
 			this.equipClothing(EquipClothingSetting.getAllClothingSettings());
 			Main.game.getCharacterUtils().applyMakeup(this, true);
 			Main.game.getCharacterUtils().applyTattoos(this, true);
-			
+
 			// Set starting attributes based on the character's race
 			initPerkTreeAndBackgroundPerks();
 			this.setStartingCombatMoves();

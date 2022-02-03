@@ -6,9 +6,7 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -216,7 +214,7 @@ public interface TorsoType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, List<String> descriptorsFeminine, List<String> descriptorsMasculine, String skinTransformationDescription, String skinBodyDescription) {
+		public Special(BodyCoveringType coveringType, Race race, List<String> descriptorsFeminine, List<String> descriptorsMasculine, String skinTransformationDescription, String skinBodyDescription) {
 			super(coveringType, race, descriptorsFeminine, descriptorsMasculine, skinTransformationDescription, skinBodyDescription);
 		}
 
@@ -228,7 +226,7 @@ public interface TorsoType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractTorsoType> table = new TypeTable<>(
+	TypeTable<TorsoType> table = new TypeTable<>(
 		TorsoType::sanitize,
 		TorsoType.class,
 		AbstractTorsoType.class,
@@ -240,7 +238,7 @@ public interface TorsoType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractTorsoType getTorsoTypeFromId(String id) {
+	static TorsoType getTorsoTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -259,15 +257,15 @@ public interface TorsoType extends BodyPartTypeInterface {
 		};
 	}
 
-	public static String getIdFromTorsoType(AbstractTorsoType torsoType) {
+	static String getIdFromTorsoType(TorsoType torsoType) {
 		return torsoType.getId();
 	}
 
-	public static List<AbstractTorsoType> getAllTorsoTypes() {
+	static List<TorsoType> getAllTorsoTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractTorsoType> getTorsoTypes(AbstractRace r) {
+	static List<TorsoType> getTorsoTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

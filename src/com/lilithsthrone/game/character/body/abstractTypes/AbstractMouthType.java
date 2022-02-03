@@ -10,12 +10,10 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.MouthType;
 import com.lilithsthrone.game.character.body.types.TongueType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -30,9 +28,9 @@ public abstract class AbstractMouthType implements MouthType {
 	private boolean mod;
 	private boolean fromExternalFile;
 	
-	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
-	private AbstractTongueType tongueType;
+	private BodyCoveringType coveringType;
+	private Race race;
+	private TongueType tongueType;
 	
 	private List<String> names;
 	private List<String> namesPlural;
@@ -52,7 +50,7 @@ public abstract class AbstractMouthType implements MouthType {
 	
 	List<OrificeModifier> defaultRacialOrificeModifiers;
 
-	public AbstractMouthType(AbstractRace race, AbstractTongueType tongueType) {
+	public AbstractMouthType(Race race, TongueType tongueType) {
 		this(BodyCoveringType.MOUTH,
 				race,
 				tongueType,
@@ -78,9 +76,9 @@ public abstract class AbstractMouthType implements MouthType {
 	 * @param mouthBodyDescription A sentence or two to describe this mouth type, as seen in the character view screen. It should follow the same format as all of the other entries in the MouthType class. Pass in null to use a generic description.
 	 * @param descriptorsFeminine The descriptors that can be used to describe a feminine form of this mouth type.
 	 */
-	public AbstractMouthType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
-			AbstractTongueType tongueType,
+	public AbstractMouthType(BodyCoveringType coveringType,
+			Race race,
+			TongueType tongueType,
 			List<String> names,
 			List<String> namesPlural,
 			List<String> descriptorsMasculine,
@@ -148,10 +146,10 @@ public abstract class AbstractMouthType implements MouthType {
 				this.mod = mod;
 				this.fromExternalFile = true;
 				
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
-				this.tongueType = TongueType.getTongueTypeFromId(coreElement.getMandatoryFirstOf("tongueType").getTextContent());
+				this.tongueType = TongueType.table.of(coreElement.getMandatoryFirstOf("tongueType").getTextContent());
 				
 				this.names = new ArrayList<>();
 				for(Element e : coreElement.getMandatoryFirstOf("names").getAllOf("name")) {
@@ -247,7 +245,7 @@ public abstract class AbstractMouthType implements MouthType {
 	}
 
 	@Override
-	public AbstractTongueType getTongueType() {
+	public TongueType getTongueType() {
 		return tongueType;
 	}
 
@@ -305,12 +303,12 @@ public abstract class AbstractMouthType implements MouthType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

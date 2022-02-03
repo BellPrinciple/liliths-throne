@@ -56,9 +56,7 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.sexActions.submission.SARoxySpecials;
@@ -77,7 +75,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class Roxy extends NPC {
 
-	private static List<AbstractItemType> itemsForSale = Util.newArrayListOfValues(
+	private static List<ItemType> itemsForSale = Util.newArrayListOfValues(
 			ItemType.CIGARETTE_PACK,
 			ItemType.FETISH_UNREFINED,
 			ItemType.MOO_MILKER_EMPTY,
@@ -88,7 +86,7 @@ public class Roxy extends NPC {
 			ItemType.PREGNANCY_TEST);
 
 	static {
-		for(AbstractItemType itemType : ItemType.getAllItems()) {
+		for(var itemType : ItemType.getAllItems()) {
 			if(!itemType.getItemTags().contains(ItemTag.NOT_FOR_SALE)
 					&& (itemType.getItemTags().contains(ItemTag.ATTRIBUTE_TF_ITEM) || itemType.getItemTags().contains(ItemTag.RACIAL_TF_ITEM))
 					&& (itemType.getItemTags().contains(ItemTag.SUBMISSION_TUNNEL_SPAWN) || itemType.getItemTags().contains(ItemTag.BAT_CAVERNS_SPAWN))) {
@@ -334,7 +332,7 @@ public class Roxy extends NPC {
 		this.addItem(Main.game.getItemGen().generateItem(ItemType.DYE_BRUSH), 25, false, false);
 		this.addItem(Main.game.getItemGen().generateItem(ItemType.REFORGE_HAMMER), 10, false, false);
 		
-		for (AbstractItemType item : itemsForSale) {
+		for (var item : itemsForSale) {
 			if(Main.game.isSillyMode() || !item.getItemTags().contains(ItemTag.SILLY_MODE)) {
 				for (int i = 0; i < 6 + (Util.random.nextInt(12)); i++) {
 					this.addItem(Main.game.getItemGen().generateItem(item), false);
@@ -347,9 +345,9 @@ public class Roxy extends NPC {
             this.addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_pbomb"), 10, false, false);
         }
 		
-		List<AbstractClothingType> clothingToAdd = new ArrayList<>();
+		var clothingToAdd = new ArrayList<ClothingType>();
 		
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(var clothing : ClothingType.getAllClothing()) {
 			if(clothing!=null
 					&& (clothing.getRarity()==Rarity.COMMON || clothing.isDefaultSlotCondom())
 					&& (clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_FINCH)

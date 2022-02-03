@@ -44,7 +44,7 @@ public class OffspringSeed implements XMLSaving {
 	protected LocalDateTime birthday;
 	
 	// Body:
-	protected AbstractSubspecies subspecies;
+	protected Subspecies subspecies;
 	protected Body body;
 	
 	// Family:
@@ -55,15 +55,15 @@ public class OffspringSeed implements XMLSaving {
 	// Used as a backup for when motherId is pointing to a null NPC:
 	protected String motherName = "???";
 	protected Femininity motherFemininity = Femininity.FEMININE;
-	protected AbstractSubspecies motherSubspecies = Subspecies.HUMAN;
+	protected Subspecies motherSubspecies = Subspecies.HUMAN;
 	// Used as a backup for when fatherId is pointing to a null NPC:
 	protected String fatherName = "???";
 	protected Femininity fatherFemininity = Femininity.MASCULINE;
-	protected AbstractSubspecies fatherSubspecies = Subspecies.HUMAN;
+	protected Subspecies fatherSubspecies = Subspecies.HUMAN;
 	// Used as a backup for when incubatorId is pointing to a null NPC:
 	protected String incubatorName = "???";
 	protected Femininity incubatorFemininity = Femininity.ANDROGYNOUS;
-	protected AbstractSubspecies incubatorSubspecies = Subspecies.HUMAN;
+	protected Subspecies incubatorSubspecies = Subspecies.HUMAN;
 	
 	public OffspringSeed() {
 	}
@@ -139,11 +139,11 @@ public class OffspringSeed implements XMLSaving {
 	public OffspringSeed(GameCharacter mother, Body fatherBody) {
 		this(mother, null, fatherBody);
 	}
-	
+
 	/**
 	 * The prioritiseFatherSubspecies variable should be set to true if the cum which is causing the impregnation is not coming directly from the father.
 	 * This is due to the possibility of the father having transformed after storing their cum, in which case the offspring would be generated as subspecies calculated from the father's current race instead of the stored cum race.
-	 * 
+	 *
 	 * @param mother The mother of this OffspringSeed.
 	 * @param father The father, which can be null.
 	 * @param fatherSubspecies The subspecies of the father. Will only be used if the father is null or if prioritiseFatherSubspecies is true.
@@ -193,14 +193,14 @@ public class OffspringSeed implements XMLSaving {
 		} else {
 			this.setSurname(""); // To make sure that surname is not null for the following check: this.surname.contains("martu")
 		}
-		
+
 		Gender gender = Gender.getGenderFromUserPreferences(Math.random()<mother.getRace().getChanceForMaleOffspring()?Femininity.MASCULINE:Femininity.FEMININE);
 		
 		Body preGeneratedBody;
 //		if(father!=null) {
 			preGeneratedBody = AbstractSubspecies.getPreGeneratedBody(template, gender, mother.getBody(), fatherBody);
 //		} else {
-//			preGeneratedBody = AbstractSubspecies.getPreGeneratedBody(template, gender, mother.getTrueSubspecies(), mother.getHalfDemonSubspecies(), fatherBody.getSubspecies(), fatherBody.getHalfDemonSubspecies());
+//			preGeneratedBody = Subspecies.getPreGeneratedBody(template, gender, mother.getTrueSubspecies(), mother.getHalfDemonSubspecies(), fatherBody.getSubspecies(), fatherBody.getHalfDemonSubspecies());
 //		}
 		if(preGeneratedBody!=null) {
 			setBody(preGeneratedBody);
@@ -208,13 +208,13 @@ public class OffspringSeed implements XMLSaving {
 			this.body = Main.game.getCharacterUtils().generateBody(template, gender, mother, father, fatherBody);
 		}
 
-		AbstractRace race;
+		Race race;
 		if(this.body.getBodyMaterial()==BodyMaterial.SLIME) {
         	race = Race.SLIME;
 		} else {
 			race = this.body.getRaceFromPartWeighting();
 		}
-		this.subspecies = AbstractSubspecies.getSubspeciesFromBody(this.body, race);
+		this.subspecies = Subspecies.getSubspeciesFromBody(this.body, race);
 
 		//For Imps, don't use any of the demon surnames but just a regular surname
 		if (this.surname.contains("martu") && (this.subspecies==Subspecies.IMP || this.subspecies==Subspecies.IMP_ALPHA)) {
@@ -464,7 +464,7 @@ public class OffspringSeed implements XMLSaving {
 		return motherFemininity;
 	}
 	
-	public AbstractSubspecies getMotherSubspecies() {
+	public Subspecies getMotherSubspecies() {
 		return motherSubspecies;
 	}
 	
@@ -502,7 +502,7 @@ public class OffspringSeed implements XMLSaving {
 		return fatherFemininity;
 	}
 	
-	public AbstractSubspecies getFatherSubspecies() {
+	public Subspecies getFatherSubspecies() {
 		return fatherSubspecies;
 	}
 	public String getIncubatorId() { return incubatorId; }
@@ -540,7 +540,7 @@ public class OffspringSeed implements XMLSaving {
 		return incubatorFemininity;
 	}
 	
-	public AbstractSubspecies getIncubatorSubspecies() {
+	public Subspecies getIncubatorSubspecies() {
 		return incubatorSubspecies;
 	}
 	
@@ -575,9 +575,9 @@ public class OffspringSeed implements XMLSaving {
 	
 	public void setName(NameTriplet nameTriplet) { this.nameTriplet = nameTriplet; }
 
-	public AbstractRace getRace() {	return getSubspecies().getRace(); }
+	public Race getRace() {	return getSubspecies().getRace(); }
 	
-	public AbstractSubspecies getSubspecies() { return subspecies; }
+	public Subspecies getSubspecies() { return subspecies; }
 	
 	public boolean isFeral() {
 		return getBody().isFeral();
@@ -594,7 +594,7 @@ public class OffspringSeed implements XMLSaving {
 		return body.isTakesAfterMother();
 	}
 	
-	public AbstractSubspecies getHalfDemonSubspecies() {
+	public Subspecies getHalfDemonSubspecies() {
 		return body.getHalfDemonSubspecies();
 	}
 	

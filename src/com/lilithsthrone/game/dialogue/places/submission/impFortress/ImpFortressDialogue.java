@@ -43,7 +43,6 @@ import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
@@ -60,10 +59,8 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -101,7 +98,7 @@ public class ImpFortressDialogue {
 		return getMainCompanion().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true);
 	}
 	
-	private static AbstractPlaceType getSubmissionFortress() {
+	private static PlaceType getSubmissionFortress() {
 		if(isAlphaFortress()) {
 			return PlaceType.SUBMISSION_IMP_FORTRESS_ALPHA;
 		} else if(isFemalesFortress()) {
@@ -217,7 +214,7 @@ public class ImpFortressDialogue {
 		clearBossGuards(Main.game.getPlayer().getWorldLocation());
 	}
 	
-	private static void clearBossGuards(AbstractWorldType fortress) {
+	private static void clearBossGuards(WorldType fortress) {
 		for(GameCharacter character : getImpBossGroup(fortress, true)) {
 			if(!character.equals(getBoss(fortress))) {
 				Main.game.banishNPC(character.getId());
@@ -229,7 +226,7 @@ public class ImpFortressDialogue {
 		clearFortress(Main.game.getPlayer().getWorldLocation());
 	}
 	
-	public static void clearFortress(AbstractWorldType fortress) {
+	public static void clearFortress(WorldType fortress) {
 		
 		banishImpGuards(fortress);
 		
@@ -279,7 +276,7 @@ public class ImpFortressDialogue {
 		}
 	}
 	
-	public static void resetFortress(AbstractWorldType fortress) {
+	public static void resetFortress(WorldType fortress) {
 		if(fortress==WorldType.IMP_FORTRESS_ALPHA) {
 			// Make sure everything is reset:
 			clearFortress(fortress);
@@ -515,7 +512,7 @@ public class ImpFortressDialogue {
 		return getImpBossGroup(Main.game.getPlayer().getWorldLocation(), includeBoss);
 	}
 	
-	public static List<GameCharacter> getImpBossGroup(AbstractWorldType fortress, boolean includeBoss) {
+	public static List<GameCharacter> getImpBossGroup(WorldType fortress, boolean includeBoss) {
 		List<GameCharacter> bossGroup = new ArrayList<>();
 		
 		if(fortress==WorldType.IMP_FORTRESS_ALPHA) {
@@ -548,7 +545,7 @@ public class ImpFortressDialogue {
 		return getImpGuards(Main.game.getPlayer().getWorldLocation());
 	}
 		
-	public static List<GameCharacter> getImpGuards(AbstractWorldType fortress) {
+	public static List<GameCharacter> getImpGuards(WorldType fortress) {
 		
 		List<GameCharacter> impGuards = new ArrayList<>();
 
@@ -582,7 +579,7 @@ public class ImpFortressDialogue {
 		return getBoss(Main.game.getPlayer().getWorldLocation());
 	}
 	
-	public static GameCharacter getBoss(AbstractWorldType fortress) {
+	public static GameCharacter getBoss(WorldType fortress) {
 		if(fortress==WorldType.IMP_FORTRESS_ALPHA) {
 			return Main.game.getNpc(FortressAlphaLeader.class);
 
@@ -600,7 +597,7 @@ public class ImpFortressDialogue {
 		return getImpGuardLeader(Main.game.getPlayer().getWorldLocation());
 	}
 	
-	public static ImpAttacker getImpGuardLeader(AbstractWorldType fortress) {
+	public static ImpAttacker getImpGuardLeader(WorldType fortress) {
 		return (ImpAttacker) getImpGuards(fortress).get(0);
 	}
 
@@ -608,7 +605,7 @@ public class ImpFortressDialogue {
 		banishImpGuards(Main.game.getPlayer().getWorldLocation());
 	}
 
-	public static void banishImpGuards(AbstractWorldType fortress) {
+	public static void banishImpGuards(WorldType fortress) {
 		for(GameCharacter imp : getImpGuards(fortress)) {
 			if(!imp.isSlave() && imp.getPartyLeader()==null) {
 				Main.game.banishNPC(imp.getId());
@@ -655,7 +652,7 @@ public class ImpFortressDialogue {
 		return allCharacters;
 	}
 	
-	public static void resetGuards(AbstractWorldType fortress) {
+	public static void resetGuards(WorldType fortress) {
 		List<String> impAdjectives = new ArrayList<>();
 		List<GameCharacter> impGroup = new ArrayList<>();
 
@@ -3136,7 +3133,7 @@ public class ImpFortressDialogue {
 				return new Response("Take key", UtilText.parse(getBoss(), "Take the key from [npc.name] and leave the keep."), KEEP_AFTER_SEX_AUDIENCE_KEY) {
 					@Override
 					public void effects() {
-						AbstractItemType keyType = ItemType.IMP_FORTRESS_ARCANE_KEY;
+						ItemType keyType = ItemType.IMP_FORTRESS_ARCANE_KEY;
 						if(isMalesFortress()) {
 							keyType = ItemType.IMP_FORTRESS_ARCANE_KEY_2;
 						} else if(isFemalesFortress()) {

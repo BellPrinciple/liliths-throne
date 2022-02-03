@@ -40,7 +40,6 @@ import com.lilithsthrone.game.character.npc.misc.GenericSexualPartner;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
@@ -77,7 +76,6 @@ import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.SexManagerInterface;
 import com.lilithsthrone.game.sex.managers.dominion.SMScarlettShopOral;
 import com.lilithsthrone.game.sex.managers.universal.SMStanding;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAgainstWall;
@@ -169,7 +167,7 @@ public class ScarlettsShop {
 		return (int) Units.roundTo(Main.game.getNpc(Scarlett.class).getValueAsSlave(false) * 2, 1000);
 	}
 	
-	private static SexManagerInterface getScarlettSleepoverSexManager(AbstractSexPosition position, SexSlot scarlettSlot, SexSlot playerSlot, SexType scarlettPreference, Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap) {
+	private static SexManagerInterface getScarlettSleepoverSexManager(SexPosition position, SexSlot scarlettSlot, SexSlot playerSlot, SexType scarlettPreference, Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap) {
 		return new SexManagerDefault(
 				false,
 				position,
@@ -261,7 +259,7 @@ public class ScarlettsShop {
 		};
 	}
 	
-	private static SexManagerInterface getScarlettCafeSexManager(AbstractSexPosition position, SexSlot scarlettSlot, SexSlot playerSlot, SexType scarlettPreference, Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap) {
+	private static SexManagerInterface getScarlettCafeSexManager(SexPosition position, SexSlot scarlettSlot, SexSlot playerSlot, SexType scarlettPreference, Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap) {
 		return new SexManagerDefault(
 				false,
 				position,
@@ -340,7 +338,7 @@ public class ScarlettsShop {
 		}
 		
 		int value = 25_000;
-		for(Entry<AbstractRace, Integer> entry : getSlaveForCustomisation().getBody().getRaceWeightMap().entrySet()) { // Add value for non-human parts:
+		for(var entry : getSlaveForCustomisation().getBody().getRaceWeightMap().entrySet()) { // Add value for non-human parts:
 			if(entry.getKey()!=Race.HUMAN) {
 				value += Math.min(5_000, 1_000*entry.getValue());
 			}

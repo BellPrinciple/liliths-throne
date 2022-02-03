@@ -10,7 +10,6 @@ import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.NPCFlagValue;
@@ -1221,7 +1220,7 @@ public class AlleywayAttackerDialogue {
 			// Response variables:
 			boolean forcedTF = getMugger().isUsingForcedTransform(Main.game.getPlayer());
 			boolean forcedFetish = getMugger().isUsingForcedFetish(Main.game.getPlayer());
-			List<AbstractFetish> applicableFetishes = Util.newArrayListOfValues(
+			List<Fetish> applicableFetishes = Util.newArrayListOfValues(
 					forcedTF && potion!=null
 						?Fetish.FETISH_TRANSFORMATION_RECEIVING
 						:null,

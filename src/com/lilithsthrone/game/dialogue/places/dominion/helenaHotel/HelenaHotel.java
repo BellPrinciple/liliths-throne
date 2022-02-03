@@ -35,7 +35,6 @@ import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.managers.OrgasmBehaviour;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.SexManagerInterface;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
@@ -185,7 +184,7 @@ public class HelenaHotel {
 	}
 
 	public static SexManagerInterface getHelenaSexManager(boolean helenaDom,
-			AbstractSexPosition position,
+			SexPosition position,
 			SexSlot helenaSlot,
 			SexSlot playerSlot,
 			SexType helenaPreference,
@@ -196,7 +195,7 @@ public class HelenaHotel {
 	public static SexManagerInterface getHelenaSexManager(boolean helenaDom,
 			boolean scarlettDom,
 			boolean playerDom,
-			AbstractSexPosition position,
+			SexPosition position,
 			SexSlot helenaSlot,
 			SexSlot scarlettSlot,
 			SexSlot playerSlot,

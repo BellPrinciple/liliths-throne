@@ -13,7 +13,6 @@ import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.types.EyeType;
@@ -405,7 +404,7 @@ public class Minotallys extends NPC {
 		Main.game.getDialogueFlags().setFlag(DialogueFlagValue.minotallys_tf_required, false);
 	}
 	
-	public void growCock(AbstractPenisType type) {
+	public void growCock(PenisType type) {
 		this.setPenisType(type);
 		this.setPenisVirgin(false);
 		if(type.getRace()==Race.HUMAN) {

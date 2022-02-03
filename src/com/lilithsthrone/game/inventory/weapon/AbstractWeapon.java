@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -17,11 +16,9 @@ import org.w3c.dom.NodeList;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.combat.Attack;
 import com.lilithsthrone.game.combat.DamageType;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
@@ -32,7 +29,6 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -51,19 +47,19 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSaving {
 	
-	private AbstractWeaponType weaponType;
+	private final WeaponType weaponType;
 	
 	protected List<ItemEffect> effects;
 	
 	private DamageType damageType;
 	
-	private AbstractAttribute coreEnchantment;
+	private Attribute coreEnchantment;
 	
 	private List<Spell> spells;
-	private List<AbstractCombatMove> combatMoves;
+	private List<CombatMove> combatMoves;
 
 	
-	public AbstractWeapon(AbstractWeaponType weaponType, DamageType damageType, List<Colour> colours) {
+	public AbstractWeapon(WeaponType weaponType, DamageType damageType, List<Colour> colours) {
 		super(weaponType.getName(), weaponType.getNamePlural(), weaponType.getPathName(), damageType.getMultiplierAttribute().getColour(), weaponType.getRarity(), null);
 		
 		this.weaponType = weaponType;
@@ -137,7 +133,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		}
 		
 		int highestEnchantment = 0;
-		for (AbstractAttribute a : new HashSet<>(getAttributeModifiers().keySet())) {
+		for (var a : new HashSet<>(getAttributeModifiers().keySet())) {
 			if (getAttributeModifiers().get(a) > highestEnchantment) {
 				coreEnchantment = a;
 				highestEnchantment = getAttributeModifiers().get(a);
@@ -159,7 +155,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		this.setEffects(new ArrayList<>(weapon.getEffects()));
 		
 		int highestEnchantment = 0;
-		for (AbstractAttribute a : new HashSet<>(getAttributeModifiers().keySet())) {
+		for (var a : new HashSet<>(getAttributeModifiers().keySet())) {
 			if (getAttributeModifiers().get(a) > highestEnchantment) {
 				coreEnchantment = a;
 				highestEnchantment = getAttributeModifiers().get(a);
@@ -233,7 +229,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		XMLUtil.addAttribute(doc, element, "id", this.getWeaponType().getId());
 		XMLUtil.addAttribute(doc, element, "name", name);
 		XMLUtil.addAttribute(doc, element, "damageType", this.getDamageType().toString());
-		XMLUtil.addAttribute(doc, element, "coreEnchantment", (this.getCoreEnchantment()==null?"null":Attribute.getIdFromAttribute(this.getCoreEnchantment())));
+		XMLUtil.addAttribute(doc, element, "coreEnchantment", (this.getCoreEnchantment()==null?"null":getCoreEnchantment().getId()));
 
 		if(!this.getColours().isEmpty()) {
 			Element innerElement = doc.createElement("colours");
@@ -253,7 +249,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		
 		Element innerElement = doc.createElement("effects");
 		element.appendChild(innerElement);
-		for(ItemEffect ie : this.getEffects()) {
+		for(var ie : this.getEffects()) {
 			ie.saveAsXML(innerElement, doc);
 		}
 		
@@ -267,7 +263,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 
 		innerElement = doc.createElement("combatMoves");
 		element.appendChild(innerElement);
-		for(AbstractCombatMove cm : this.getCombatMoves()) {
+		for(var cm : this.getCombatMoves()) {
 			Element move = doc.createElement("move");
 			innerElement.appendChild(move);
 			XMLUtil.addAttribute(doc, move, "value", cm.getIdentifier());
@@ -477,7 +473,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 			for (String s : this.getWeaponType().getExtraEffects()) {
 				descriptionSB.append("<br/>"+ s);
 			}
-			for(Entry<AbstractAttribute, Integer> entry : this.getAttributeModifiers().entrySet()) {
+			for(var entry : this.getAttributeModifiers().entrySet()) {
 				descriptionSB.append("<br/><b>"+entry.getKey().getFormattedValue(entry.getValue())+"</b>");
 			}
 			descriptionSB.append("</p>");
@@ -505,7 +501,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 			descriptionSB.append("<p>When equipped, "+(getWeaponType().isPlural()?"they unlock":"it unlocks")+" the move"+(combatMoves.size()==1?"":"s")+": ");
 			List<String> combatMoveNames = new ArrayList<>();
 			descriptionSB.append("[style.italicsCombat(");
-			for(AbstractCombatMove cm : combatMoves) {
+			for(var cm : combatMoves) {
 				combatMoveNames.add(cm.getName(0, character));
 			}
 			descriptionSB.append(Util.stringsToStringList(combatMoveNames, true));
@@ -603,7 +599,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		this.damageType = damageType;
 	}
 	
-	public AbstractWeaponType getWeaponType() {
+	public WeaponType getWeaponType() {
 		return weaponType;
 	}
 
@@ -653,11 +649,11 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		return spells;
 	}
 
-	public List<AbstractCombatMove> getCombatMoves() {
+	public List<CombatMove> getCombatMoves() {
 		return combatMoves;
 	}
 
-	public AbstractAttribute getCoreEnchantment() {
+	public Attribute getCoreEnchantment() {
 		return coreEnchantment;
 	}
 	
@@ -692,7 +688,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 	}
 	
 	@Override
-	public Map<AbstractAttribute, Integer> getAttributeModifiers() {
+	public Map<Attribute,Integer> getAttributeModifiers() {
 		attributeModifiers.clear();
 		
 		for(ItemEffect ie : getEffects()) {
@@ -713,7 +709,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 	 * @return An integer value of the 'enchantment capacity cost' for this particular weapon. Does not count negative attribute values, and values of Corruption are reversed (so reducing corruption costs enchantment stability).
 	 */
 	public int getEnchantmentCapacityCost() {
-		Map<AbstractAttribute, Integer> noCorruption = new HashMap<>();
+		var noCorruption = new HashMap<Attribute,Integer>();
 		getAttributeModifiers().entrySet().stream().filter(ent -> ent.getKey()!=Attribute.FERTILITY && ent.getKey()!=Attribute.VIRILITY).forEach(ent -> noCorruption.put(ent.getKey(), ent.getValue()*(ent.getKey()==Attribute.MAJOR_CORRUPTION?-1:1)));
 		return noCorruption.values().stream().reduce(0, (a, b) -> a + Math.max(0, b));
 	}
@@ -724,7 +720,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 	}
 	
 	@Override
-	public AbstractItemEffectType getEnchantmentEffect() {
+	public ItemEffectType getEnchantmentEffect() {
 		return weaponType.getEnchantmentEffect();
 	}
 	

@@ -8,7 +8,6 @@ import java.util.Map;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.sex.ArousalIncrease;
@@ -335,7 +334,7 @@ public class GloryHole {
 			Main.sex.setPositionRequest(data);
 		}
 		@Override
-		public List<AbstractFetish> getFetishes(GameCharacter character) {
+		public List<Fetish> getFetishes(GameCharacter character) {
 			if(Main.sex.getCharacterPerformingAction().equals(character)) {
 				return Util.newArrayListOfValues(Fetish.FETISH_VAGINAL_GIVING);
 				
@@ -384,7 +383,7 @@ public class GloryHole {
 			Main.sex.setPositionRequest(data);
 		}
 		@Override
-		public List<AbstractFetish> getFetishes(GameCharacter character) {
+		public List<Fetish> getFetishes(GameCharacter character) {
 			if(Main.sex.getCharacterPerformingAction().equals(character)) {
 				return Util.newArrayListOfValues(Fetish.FETISH_ANAL_GIVING);
 				
@@ -430,7 +429,7 @@ public class GloryHole {
 			Main.sex.setPositionRequest(data);
 		}
 		@Override
-		public List<AbstractFetish> getFetishes(GameCharacter character) {
+		public List<Fetish> getFetishes(GameCharacter character) {
 			if(Main.sex.getCharacterPerformingAction().equals(character)) {
 				return Util.newArrayListOfValues(Fetish.FETISH_ORAL_GIVING);
 				

@@ -19,21 +19,6 @@ import com.lilithsthrone.game.character.body.Eye;
 import com.lilithsthrone.game.character.body.Horn;
 import com.lilithsthrone.game.character.body.Tail;
 import com.lilithsthrone.game.character.body.Testicle;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
 import com.lilithsthrone.game.character.body.types.AntennaType;
 import com.lilithsthrone.game.character.body.types.ArmType;
 import com.lilithsthrone.game.character.body.types.AssType;
@@ -83,10 +68,8 @@ import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
-import com.lilithsthrone.game.character.markings.AbstractTattooType;
 import com.lilithsthrone.game.character.markings.Tattoo;
 import com.lilithsthrone.game.character.markings.TattooCountType;
 import com.lilithsthrone.game.character.markings.TattooCounter;
@@ -125,7 +108,7 @@ import com.lilithsthrone.utils.colours.Colour;
 public class CreationController {
 	// Antenna
 	public static void initAntennaTypeListeners() {
-		for (AbstractAntennaType antennaType : AntennaType.getAllAntennaTypes()) {
+		for (AntennaType antennaType : AntennaType.getAllAntennaTypes()) {
 			String id = "ANTENNA_"+AntennaType.getIdFromAntennaType(antennaType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -256,7 +239,7 @@ public class CreationController {
 	
 	// Arm
 	public static void initArmTypeListeners() {
-		for (AbstractArmType armType : ArmType.getAllArmTypes()) {
+		for (ArmType armType : ArmType.getAllArmTypes()) {
 			String id = "ARM_"+ArmType.getIdFromArmType(armType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -282,7 +265,7 @@ public class CreationController {
 	
 	// Ass
 	public static void initAssTypeListeners() {
-		for (AbstractAssType assType : AssType.getAllAssTypes()) {
+		for (AssType assType : AssType.getAllAssTypes()) {
 			String id = "ASS_"+AssType.getIdFromAssType(assType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -331,7 +314,7 @@ public class CreationController {
 	
 	// Breast
 	public static void initBreastTypeListeners() {
-		for (AbstractBreastType breastType : BreastType.getAllBreastTypes()) {
+		for (BreastType breastType : BreastType.getAllBreastTypes()) {
 			String id = "BREAST_"+BreastType.getIdFromBreastType(breastType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -784,7 +767,7 @@ public class CreationController {
 	
 	// Crotch-Breast
 	public static void initCrotchBreastTypeListeners() {
-		for (AbstractBreastType breastType : BreastType.getAllBreastTypes()) {
+		for (BreastType breastType : BreastType.getAllBreastTypes()) {
 			String id = "BREAST_CROTCH_"+BreastType.getIdFromBreastType(breastType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -1136,7 +1119,7 @@ public class CreationController {
 	
 	// Ear
 	public static void initEarTypeListeners() {
-		for (AbstractEarType earType : EarType.getAllEarTypes()) {
+		for (EarType earType : EarType.getAllEarTypes()) {
 			String id = "EAR_"+EarType.getIdFromEarType(earType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -1149,7 +1132,7 @@ public class CreationController {
 	
 	// Eye
 	public static void initEyeTypeListeners() {
-		for (AbstractEyeType eyeType : EyeType.getAllEyeTypes()) {
+		for (EyeType eyeType : EyeType.getAllEyeTypes()) {
 			String id = "EYE_"+EyeType.getIdFromEyeType(eyeType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -1195,7 +1178,7 @@ public class CreationController {
 	
 	// Face
 	public static void initFaceTypeListeners() {
-		for (AbstractFaceType faceType : FaceType.getAllFaceTypes()) {
+		for (FaceType faceType : FaceType.getAllFaceTypes()) {
 			String id = "FACE_"+FaceType.getIdFromFaceType(faceType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -1327,7 +1310,7 @@ public class CreationController {
 	
 	// Hair
 	public static void initHairTypeListeners() {
-		for (AbstractHairType hairType : HairType.getAllHairTypes()) {
+		for (HairType hairType : HairType.getAllHairTypes()) {
 			String id = "HAIR_"+HairType.getIdFromHairType(hairType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -1366,7 +1349,7 @@ public class CreationController {
 	
 	// Horn
 	public static void initHornTypeListeners() {
-		for (AbstractHornType hornType : HornType.getAllHornTypes()) {
+		for (HornType hornType : HornType.getAllHornTypes()) {
 			String id = "HORN_"+HornType.getIdFromHornType(hornType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -1417,7 +1400,7 @@ public class CreationController {
 	
 	// Leg
 	public static void initLegTypeListeners() {
-		for (AbstractLegType legType : LegType.getAllLegTypes()) {
+		for (LegType legType : LegType.getAllLegTypes()) {
 			String id = "LEG_"+LegType.getIdFromLegType(legType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -1454,7 +1437,7 @@ public class CreationController {
 	
 	// Penis
 	public static void initPenisTypeListeners() {
-		for (AbstractPenisType penisType : PenisType.getAllPenisTypes()) {
+		for (PenisType penisType : PenisType.getAllPenisTypes()) {
 			String id = "PENIS_"+PenisType.getIdFromPenisType(penisType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -1921,7 +1904,7 @@ public class CreationController {
 	
 	// Tail
 	public static void initTailTypeListeners() {
-		for (AbstractTailType tailType : TailType.getAllTailTypes()) {
+		for (TailType tailType : TailType.getAllTailTypes()) {
 			String id = "TAIL_"+TailType.getIdFromTailType(tailType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -2050,7 +2033,7 @@ public class CreationController {
 	
 	// Torso
 	public static void initTorsoTypeListeners() {
-		for (AbstractTorsoType torsoType : TorsoType.getAllTorsoTypes()) {
+		for (TorsoType torsoType : TorsoType.getAllTorsoTypes()) {
 			String id = "TORSO_"+TorsoType.getIdFromTorsoType(torsoType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -2063,7 +2046,7 @@ public class CreationController {
 	
 	// Vagina
 	public static void initVaginaTypeListeners() {
-		for (AbstractVaginaType vaginaType : VaginaType.getAllVaginaTypes()) {
+		for (VaginaType vaginaType : VaginaType.getAllVaginaTypes()) {
 			String id = "VAGINA_"+VaginaType.getIdFromVaginaType(vaginaType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -2410,7 +2393,7 @@ public class CreationController {
 	
 	// Wing
 	public static void initWingTypeListeners() {
-		for (AbstractWingType wingType : WingType.getAllWingTypes()) {
+		for (WingType wingType : WingType.getAllWingTypes()) {
 			String id = "WING_"+WingType.getIdFromWingType(wingType);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -2718,7 +2701,7 @@ public class CreationController {
 	}
 	
 	public static void initFetishListeners() {
-		for (AbstractFetish fetish : Fetish.getAllFetishes()) {
+		for (Fetish fetish : Fetish.getAllFetishes()) {
 			for (FetishDesire desire : FetishDesire.values()) {
 				String id = "FETISH_DESIRE_"+Fetish.getIdFromFetish(fetish)+desire;
 				if (MainController.document.getElementById(id) != null) {
@@ -3010,7 +2993,7 @@ public class CreationController {
 						sb.append(" (<i>You will need to click twice to remove it.</i>)");
 					}
 					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Remove tattoo", sb.toString(), 32));
-					
+
 				} else {
 					DialogueNode nextDialogue;
 					if (currentNode.equals(CharacterCreation.CHOOSE_ADVANCED_APPEARANCE_TATTOOS)) {
@@ -3036,7 +3019,7 @@ public class CreationController {
 					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Add tattoo", "Click to proceed to the tattoo customisation screen.", 16));
 				}
 			}
-			
+
 			id = "TATTOO_MODIFY_"+invSlot;
 			if (MainController.document.getElementById(id) != null) {
 				DialogueNode nextDialogue;
@@ -3089,7 +3072,7 @@ public class CreationController {
 					BodyChanging.getTarget()));
 		}
 		
-		for (AbstractTattooType type : TattooType.getAllTattooTypes()) {
+		for (TattooType type : TattooType.getAllTattooTypes()) {
 			id = "TATTOO_TYPE_"+type.getId();
 			if (MainController.document.getElementById(id) != null) {
 				if (type.getSlotAvailability().contains(CharacterModificationUtils.tattooInventorySlot)) {

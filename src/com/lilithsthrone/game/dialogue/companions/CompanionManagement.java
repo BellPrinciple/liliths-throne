@@ -11,7 +11,6 @@ import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.ObedienceLevel;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
@@ -22,7 +21,6 @@ import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.dominion.Brax;
 import com.lilithsthrone.game.character.npc.dominion.Scarlett;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -581,7 +579,7 @@ public class CompanionManagement {
 					return new Response("Set free",
 							UtilText.parse(characterSelected(), "Dolls cannot be set free..."),
 							null);
-					
+
 				} else if(!Main.game.getPlayer().hasItemType("innoxia_slavery_freedom_certification")) {
 					return new Response("Set free",
 							UtilText.parse(characterSelected(),
@@ -1189,20 +1187,20 @@ public class CompanionManagement {
 			for(SlavePermission permission : SlavePermission.values()) {
 				if(permission.isAvailableForCharacter(character)) {
 					UtilText.nodeContentSB.append("<div class='container-full-width inner' style='box-sizing:border-box; position:relative; width:98%; margin:4px 1%; background:"+PresetColour.BACKGROUND_ALT.toWebHexString()+";'>");
-					
+
 					for(SlavePermissionSetting setting : permission.getSettings()) {
 						if(setting.isAvailableForCharacter(character)) {
 							boolean settingActive = character.getSlavePermissionSettings().get(permission).contains(setting);
-							
+
 							String id = (permission.isMutuallyExclusiveSettings()
 											?(settingActive?setting+"_REMOVE_ME":setting+"_ADD")
 											:(settingActive?setting+"_REMOVE":setting+"_ADD"));
-							
+
 							String style = "width:23%; margin:1%;";
 							if(permission.getSettings().size()==5) {
 								style = "width:18%; margin:1%;"; // These settings can fit 5 on a line
 							}
-							
+
 							UtilText.nodeContentSB.append(
 									"<div id='"+id+"' class='normal-button"+(settingActive?" selected":"")+"' style='"+style+"text-align:center;"
 												+(settingActive
@@ -1390,7 +1388,7 @@ public class CompanionManagement {
 					"<h6 style='text-align:center;'>"
 						+ "You currently have "+UtilText.formatAsMoney(Main.game.getPlayer().getMoney(), "span")
 					+ "</h6>"
-					
+
 					+ (BodyChanging.getTarget().isDoll()
 							?""
 							:CharacterModificationUtils.getKatesDivHairLengths(true, "Hair Length", "Hair length determines what hair styles [npc.namePos] able to have. The longer [npc.her] [npc.hair(true)], the more styles are available."))
@@ -1540,9 +1538,9 @@ public class CompanionManagement {
 									+ "You currently have "+UtilText.formatAsMoney(Main.game.getPlayer().getMoney(), "span")
 								+ "</h6>");
 			
-			for(Entry<AbstractBodyCoveringType, Value<AbstractRace, List<String>>> entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
-				AbstractBodyCoveringType bct = entry.getKey();
-				AbstractRace race = entry.getValue().getKey();
+			for(Entry<BodyCoveringType, Value<Race, List<String>>> entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
+				BodyCoveringType bct = entry.getKey();
+				Race race = entry.getValue().getKey();
 				GameCharacter target = BodyChanging.getTarget();
 
 				Value<String, String> titleDescription = SuccubisSecrets.getCoveringTitleDescription(target, bct, entry.getValue().getValue());
@@ -1598,27 +1596,27 @@ public class CompanionManagement {
 						+ "You currently have "+UtilText.formatAsMoney(Main.game.getPlayer().getMoney(), "span")
 					+ "</h6>"
 					+CharacterModificationUtils.getKatesDivAnalBleaching());
-			
+
 			if(!BodyChanging.getTarget().isDoll()) {
 				UtilText.nodeContentSB.append((Main.game.isFacialHairEnabled()
-								? CharacterModificationUtils.getKatesDivFacialHair(true, "Facial hair", "The body hair found on [npc.namePos] face." 
+								? CharacterModificationUtils.getKatesDivFacialHair(true, "Facial hair", "The body hair found on [npc.namePos] face."
 										+ (Main.game.isFemaleFacialHairEnabled() ? "" : " Feminine characters cannot grow facial hair."))
 								:"")
-						
+
 						+(Main.game.isPubicHairEnabled()
 								?CharacterModificationUtils.getKatesDivPubicHair(true, "Pubic hair", "The body hair found in the genital area; located on and around [npc.namePos] sex organs and crotch.")
 								:"")
-						
+
 						+(Main.game.isBodyHairEnabled()
 								?CharacterModificationUtils.getKatesDivUnderarmHair(true, "Underarm hair", "The body hair found in [npc.namePos] armpits.")
 								:"")
-						
+
 						+(Main.game.isAssHairEnabled()
 								?CharacterModificationUtils.getKatesDivAssHair(true, "Ass hair", "The body hair found around [npc.namePos] asshole.")
 								:"")
 						);
 			
-				for(AbstractBodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
+				for(BodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
 					if((Main.game.isFacialHairEnabled() && BodyChanging.getTarget().getFacialHairType().getType()==bct)
 							|| (Main.game.isBodyHairEnabled() && BodyChanging.getTarget().getUnderarmHairType().getType()==bct)
 							|| (Main.game.isAssHairEnabled() && BodyChanging.getTarget().getAssHairType().getType()==bct)

@@ -8,11 +8,9 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -1722,7 +1720,7 @@ public interface TailType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, PenetrationGirth defaultGirth, float defaultLengthAsPercentageOfHeight, String transformationName, String determiner, String determinerPlural, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String tipName, String tipNamePlural, List<String> tipDescriptorsMasculine, List<String> tipDescriptorsFeminine, String tailTransformationDescription, String tailBodyDescription, List<BodyPartTag> tags, boolean spinneret) {
+		public Special(BodyCoveringType coveringType, Race race, PenetrationGirth defaultGirth, float defaultLengthAsPercentageOfHeight, String transformationName, String determiner, String determinerPlural, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String tipName, String tipNamePlural, List<String> tipDescriptorsMasculine, List<String> tipDescriptorsFeminine, String tailTransformationDescription, String tailBodyDescription, List<BodyPartTag> tags, boolean spinneret) {
 			super(coveringType, race, defaultGirth, defaultLengthAsPercentageOfHeight, transformationName, determiner, determinerPlural, name, namePlural, descriptorsMasculine, descriptorsFeminine, tipName, tipNamePlural, tipDescriptorsMasculine, tipDescriptorsFeminine, tailTransformationDescription, tailBodyDescription, tags, spinneret);
 		}
 
@@ -1734,7 +1732,7 @@ public interface TailType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractTailType> table = new TypeTable<>(
+	TypeTable<TailType> table = new TypeTable<>(
 		TailType::sanitize,
 		TailType.class,
 		AbstractTailType.class,
@@ -1746,7 +1744,7 @@ public interface TailType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractTailType getTailTypeFromId(String id) {
+	static TailType getTailTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -1760,24 +1758,24 @@ public interface TailType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromTailType(AbstractTailType tailType) {
+	static String getIdFromTailType(TailType tailType) {
 		return tailType.getId();
 	}
 
-	public static List<AbstractTailType> getAllTailTypes() {
+	static List<TailType> getAllTailTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractTailType> getTailTypes(AbstractRace r) {
+	static List<TailType> getTailTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	
-	public static List<AbstractTailType> getTailTypesSuitableForTransformation(List<AbstractTailType> options) {
+	static List<TailType> getTailTypesSuitableForTransformation(List<TailType> options) {
 		if (!options.contains(TailType.NONE)) {
 			return options;
 		}
 		
-		List<AbstractTailType> duplicatedOptions = new ArrayList<>(options);
+		var duplicatedOptions = new ArrayList<>(options);
 		duplicatedOptions.remove(TailType.NONE);
 		return duplicatedOptions;
 	}

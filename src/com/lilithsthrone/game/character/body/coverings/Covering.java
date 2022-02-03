@@ -21,7 +21,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public class Covering implements XMLSaving {
 	
-	protected AbstractBodyCoveringType type;
+	protected BodyCoveringType type;
 	protected CoveringPattern pattern;
 	protected CoveringModifier modifier;
 	
@@ -33,19 +33,19 @@ public class Covering implements XMLSaving {
 
 	// Constructors which call the ones below, just with Strings for the type id:
 	public Covering(String typeId) {
-		this(BodyCoveringType.getBodyCoveringTypeFromId(typeId));
+		this(BodyCoveringType.table.of(typeId));
 	}
 	public Covering(String typeId, Colour primaryColour) {
-		this(BodyCoveringType.getBodyCoveringTypeFromId(typeId), primaryColour);
+		this(BodyCoveringType.table.of(typeId), primaryColour);
 	}
 	public Covering(String typeId, Colour primaryColour, Colour secondaryColour) {
-		this(BodyCoveringType.getBodyCoveringTypeFromId(typeId), primaryColour, secondaryColour);
+		this(BodyCoveringType.table.of(typeId), primaryColour, secondaryColour);
 	}
 	public Covering(String typeId, CoveringPattern pattern, Colour primaryColour, boolean primaryGlowing, Colour secondaryColour, boolean secondaryGlowing) {
-		this(BodyCoveringType.getBodyCoveringTypeFromId(typeId), pattern, primaryColour, primaryGlowing, secondaryColour, secondaryGlowing);
+		this(BodyCoveringType.table.of(typeId), pattern, primaryColour, primaryGlowing, secondaryColour, secondaryGlowing);
 	}
 	public Covering(String typeId, CoveringPattern pattern, CoveringModifier modifier, Colour primaryColour, boolean primaryGlowing, Colour secondaryColour, boolean secondaryGlowing) {
-		this(BodyCoveringType.getBodyCoveringTypeFromId(typeId), pattern, modifier, primaryColour, primaryGlowing, secondaryColour, secondaryGlowing);
+		this(BodyCoveringType.table.of(typeId), pattern, modifier, primaryColour, primaryGlowing, secondaryColour, secondaryGlowing);
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class Covering implements XMLSaving {
 	 * Initialises CoveringPattern pattern to a random value, and boolean glowing to false.
 	 * @param type The BodyCoveringType to set this skin to.
 	 */
-	public Covering(AbstractBodyCoveringType type) {
+	public Covering(BodyCoveringType type) {
 		this(type,
 				Util.getRandomObjectFromWeightedMap(type.getNaturalPatterns()),
 				type.getNaturalColoursPrimary().get(Util.random.nextInt(type.getNaturalColoursPrimary().size())), false,
@@ -68,7 +68,7 @@ public class Covering implements XMLSaving {
 	 * @param type
 	 * @param primaryColour
 	 */
-	public Covering(AbstractBodyCoveringType type, Colour primaryColour) {
+	public Covering(BodyCoveringType type, Colour primaryColour) {
 		this(type,
 				Util.getHighestProbabilityEntryFromWeightedMap(type.getNaturalPatterns()),
 				primaryColour, false,
@@ -99,7 +99,7 @@ public class Covering implements XMLSaving {
 	 * @param type
 	 * @param primaryColour
 	 */
-	public Covering(AbstractBodyCoveringType type, Colour primaryColour, Colour secondaryColour) {
+	public Covering(BodyCoveringType type, Colour primaryColour, Colour secondaryColour) {
 		this(type,
 				Util.getHighestProbabilityEntryFromWeightedMap(type.getNaturalPatterns()),
 				primaryColour, false,
@@ -108,15 +108,15 @@ public class Covering implements XMLSaving {
 	
 	/**
 	 * Constructor.
-	 * @param type The AbstractBodyCoveringType to set this skin to.
+	 * @param type The BodyCoveringType to set this skin to.
 	 * @param pattern The CoveringPattern to set this skin to.
 	 * @param glowing Whether this skin is glowing or not.
 	 */
-	public Covering(AbstractBodyCoveringType type, CoveringPattern pattern, Colour primaryColour, boolean primaryGlowing, Colour secondaryColour, boolean secondaryGlowing) {
+	public Covering(BodyCoveringType type, CoveringPattern pattern, Colour primaryColour, boolean primaryGlowing, Colour secondaryColour, boolean secondaryGlowing) {
 		this(type, pattern, type.getNaturalModifiers().get(0), primaryColour, primaryGlowing, secondaryColour, secondaryGlowing);
 	}
 	
-	public Covering(AbstractBodyCoveringType type, CoveringPattern pattern, CoveringModifier modifier, Colour primaryColour, boolean primaryGlowing, Colour secondaryColour, boolean secondaryGlowing) {
+	public Covering(BodyCoveringType type, CoveringPattern pattern, CoveringModifier modifier, Colour primaryColour, boolean primaryGlowing, Colour secondaryColour, boolean secondaryGlowing) {
 		this.type = type;
 		this.pattern = pattern;
 		this.modifier = modifier;
@@ -141,7 +141,7 @@ public class Covering implements XMLSaving {
 		Element element = doc.createElement("covering");
 		parentElement.appendChild(element);
 		
-		XMLUtil.addAttribute(doc, element, "type", BodyCoveringType.getIdFromBodyCoveringType(type));
+		XMLUtil.addAttribute(doc, element, "type", type.getId());
 		XMLUtil.addAttribute(doc, element, "pat", this.pattern.toString());
 		XMLUtil.addAttribute(doc, element, "mod", this.modifier.toString());
 		XMLUtil.addAttribute(doc, element, "c1", this.primaryColour.getId());
@@ -158,7 +158,7 @@ public class Covering implements XMLSaving {
 	public static Covering loadFromXML(StringBuilder log, Element parentElement, Document doc) {
 		try {
 			return new Covering(
-					BodyCoveringType.getBodyCoveringTypeFromId(parentElement.getAttribute("type")),
+					BodyCoveringType.table.of(parentElement.getAttribute("type")),
 					CoveringPattern.valueOf(parentElement.getAttribute("pat")),
 					CoveringModifier.valueOf(parentElement.getAttribute("mod")),
 					PresetColour.getColourFromId(parentElement.getAttribute("c1")),
@@ -172,7 +172,7 @@ public class Covering implements XMLSaving {
 			
 		} catch(Exception ex) {
 			System.err.println(ex.getMessage());
-			return new Covering(BodyCoveringType.getBodyCoveringTypeFromId(parentElement.getAttribute("type")));
+			return new Covering(BodyCoveringType.table.of(parentElement.getAttribute("type")));
 		}
 	}
 	
@@ -538,11 +538,11 @@ public class Covering implements XMLSaving {
 		return result;
 	}
 
-	public AbstractBodyCoveringType getType() {
+	public BodyCoveringType getType() {
 		return type;
 	}
 
-	public void setType(AbstractBodyCoveringType type) {
+	public void setType(BodyCoveringType type) {
 		this.type = type;
 	}
 

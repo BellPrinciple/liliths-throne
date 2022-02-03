@@ -17,7 +17,7 @@ import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.character.body.valueEnums.HairLength;
 import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
 import com.lilithsthrone.game.character.body.valueEnums.HipSize;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
+import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.markings.Tattoo;
@@ -66,11 +66,11 @@ public class MiscDialogue {
 		@Override
 		public String getContent() {
 			StringBuilder sb = new StringBuilder();
-			for(Entry<Long, Map<AbstractStatusEffect, String>> entry : Main.game.getPlayer().getStatusEffectDescriptions().entrySet()){
+			for(Entry<Long, Map<StatusEffect, String>> entry : Main.game.getPlayer().getStatusEffectDescriptions().entrySet()){
 				if(!entry.getValue().isEmpty()) {
 					sb.append("<div class='container-full-width'>");
 						sb.append("<h6 style='text-align:center; margin:16px auto 0 auto; padding:0;'>"+Units.dateTime(Main.game.getStartingDate().plusSeconds(entry.getKey()))+":</h6>");
-						for(Entry<AbstractStatusEffect, String> innerEntry : entry.getValue().entrySet()) {
+						for(Entry<StatusEffect, String> innerEntry : entry.getValue().entrySet()) {
 							sb.append("<hr/>");
 							sb.append("<h6 style='text-align:center; margin:0; padding:0;'>");
 								sb.append(Util.capitaliseSentence(innerEntry.getKey()==null?"Miscellaneous Effects":innerEntry.getKey().getName(Main.game.getPlayer())));
@@ -179,7 +179,7 @@ public class MiscDialogue {
 							Main.sex.setSexStarted(true);
 						}
 					};
-					
+
 				} else {
 					return new ResponseEffectsOnly("Finished", "Return to your inventory screen.") {
 						@Override
@@ -207,47 +207,47 @@ public class MiscDialogue {
 			return true;
 		}
 	};
-	
+
 	// Condom use:
-	
+
 	// init for hook to condom and user/target:
 	private static GameCharacter condomOwner;
 	private static GameCharacter condomUser;
 	private static GameCharacter condomTarget;
 	private static AbstractFilledCondom usedCondom;
 	private static String condomUseDescription;
-	
+
 	public static DialogueNode getUsedCondomSelectionDialogue(GameCharacter condomOwner, GameCharacter condomUser, GameCharacter condomTarget, AbstractFilledCondom usedCondom, String condomUseDescription) {
 		boolean debug = false;
-		
+
 		MiscDialogue.condomOwner = condomOwner;
 		MiscDialogue.condomUser = condomUser;
 		MiscDialogue.condomTarget = condomTarget;
 		MiscDialogue.usedCondom = usedCondom;
 		MiscDialogue.condomUseDescription = condomUseDescription;
-		
+
 		if(debug) {
 			System.out.println("UsedCondomInit:");
 			System.out.println(UtilText.parse(condomOwner, "condomOwner: [npc.name]"));
 			System.out.println(UtilText.parse(condomUser, "condomUser: [npc.name]"));
 			System.out.println(UtilText.parse(condomTarget, "condomTarget: [npc.name]"));
 		}
-		
+
 		return USED_CONDOM_SELECTION;
 	}
-	
+
 	private static final DialogueNode USED_CONDOM_SELECTION = new DialogueNode("Used Condom", "", true) {
 		@Override
 		public String getHeaderContent() {
 			StringBuilder sb = new StringBuilder();
-			
+
 			FluidStored fs = usedCondom.getCum();
-			
+
 			sb.append("<p>");
 				sb.append(condomUseDescription);
 				sb.append(" The condom contains:");
 			sb.append("</p>");
-			
+
 			sb.append("<p style='text-align:center;'>");
 			sb.append("<b>[units.fluid("+fs.getMillilitres()+")]</b> of");
 			sb.append("<br/>");
@@ -285,7 +285,7 @@ public class MiscDialogue {
 					sb.append("The cum is cold and unappealing, making you question your decision to open the condom...");
 				}
 			sb.append("</p>");
-			
+
 			return sb.toString();
 		}
 		@Override
@@ -306,7 +306,7 @@ public class MiscDialogue {
 							condomOwner.addItem(usedCondom);
 						}
 					};
-					
+
 				} else {
 					return new ResponseEffectsOnly("Back", "Decide against using the condom's contents...") {
 						@Override
@@ -321,9 +321,9 @@ public class MiscDialogue {
 					};
 				}
 			}
-			
+
 			List<Response> responses = new ArrayList<>();
-			
+
 			if(!condomTarget.isSexAreaExposed(SexAreaOrifice.MOUTH)) {
 				responses.add(new Response("Swallow",
 						UtilText.parse(condomTarget, "[npc.NamePos] mouth is blocked..."),
@@ -334,7 +334,7 @@ public class MiscDialogue {
 							"Get [npc.name] to swallow the condom's contents",
 							(SexAreaOrifice.MOUTH)));
 			}
-			
+
 			if(!condomTarget.hasVagina()) {
 				responses.add(new Response("Pussy",
 						UtilText.parse(condomTarget, "[npc.Name] [npc.do]n't have a vagina..."),
@@ -362,7 +362,7 @@ public class MiscDialogue {
 								(SexAreaOrifice.ANUS)));
 				}
 			}
-			
+
 			if(Main.game.isNipplePenEnabled()) {
 				if(!condomTarget.isBreastFuckableNipplePenetration()) {
 					responses.add(new Response("Nipples",
@@ -378,7 +378,7 @@ public class MiscDialogue {
 							"Stuff the condom's contents into [npc.namePos] fuckable nipples...",
 							(SexAreaOrifice.NIPPLE)));
 				}
-				
+
 				if(Main.game.isUdderContentEnabled()) {
 					if(!condomTarget.isBreastCrotchFuckableNipplePenetration()) {
 						responses.add(new Response(condomTarget.getBreastCrotchShape()==BreastShape.UDDERS?"Udders":"Crotch-boobs",
@@ -396,7 +396,7 @@ public class MiscDialogue {
 					}
 				}
 			}
-			
+
 			if(Main.game.isUrethraEnabled()) {
 				if(!condomTarget.hasPenisIgnoreDildo() || !condomTarget.isUrethraFuckable()) {
 					responses.add(new Response("Penile urethra",
@@ -414,7 +414,7 @@ public class MiscDialogue {
 							"Stuff the condom's contents into [npc.namePos] [npc.urethraPenis+]...",
 							(SexAreaOrifice.URETHRA_PENIS)));
 				}
-				
+
 				if(!condomTarget.hasVagina() || !condomTarget.isVaginaUrethraFuckable()) {
 					responses.add(new Response("Vaginal urethra",
 							condomTarget.hasVagina()
@@ -447,13 +447,13 @@ public class MiscDialogue {
 							"Stuff the condom's contents into [npc.namePos] spinneret...",
 							(SexAreaOrifice.SPINNERET)));
 			}
-			
+
 			for(int i=0; i<responses.size(); i++) {
 				if(index-1==i) {
 					return responses.get(i);
 				}
 			}
-			
+
 			return null;
 		}
 		@Override
@@ -468,7 +468,7 @@ public class MiscDialogue {
 			return true;
 		}
 	};
-	
+
 	private static Response getUsedCondomResponse(String title, String descriptionSelf, String description, SexAreaOrifice orifice) {
 		if(Main.game.isInSex()) {
 			return new Response(
@@ -485,12 +485,12 @@ public class MiscDialogue {
 							+ Main.sex.calculateWetAreas(false));
 					Main.sex.endSexTurn(SexActionUtility.PLAYER_USE_ITEM);
 					Main.sex.setSexStarted(true);
-					
+
 				}
 			};
-			
+
 		} else {
-			return new ResponseEffectsOnly(title, 
+			return new ResponseEffectsOnly(title,
 					UtilText.parse(condomTarget, condomUser==condomTarget?descriptionSelf:description)) {
 				@Override
 				public void effects() {
@@ -506,7 +506,7 @@ public class MiscDialogue {
 			};
 		}
 	}
-	
+
 	private static String getAndApplyCondomUseDescription(SexAreaOrifice orifice) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<p>");
@@ -615,15 +615,15 @@ public class MiscDialogue {
 				break;
 		}
 		sb.append("</p>");
-		
+
 		sb.append(condomTarget.ingestFluid(usedCondom.getCum(), orifice));
-		
+
 		return sb.toString();
 	}
-	
-	
+
+
 	// Dolls:
-	
+
 	public static DialogueNode getDollCustomisationDialogue() {
 		return BODY_CHANGING_DOLL_CUSTOMISATION;
 	}
@@ -667,7 +667,7 @@ public class MiscDialogue {
 			return DialogueNodeType.PHONE;
 		}
 	};
-	
+
 	public static int dollOption = 0;
 	private static int[] dollCost = {200_000, 300_000, 600_000};
 	public static int genitalsOption = 0;
@@ -677,7 +677,7 @@ public class MiscDialogue {
 	public static int outfitOption = 0;
 	private static String[] outfitId = {null, "innoxia_rainbow", "innoxia_kitty", "innoxia_maid"};
 	private static int[] outfitCost = {0, 2_500, 5_000, 15_000};
-	
+
 	public static boolean barcodeRemoval = false;
 	private static int barcodeCost = 5_000;
 	public static boolean toySet = false;
@@ -686,36 +686,36 @@ public class MiscDialogue {
 	private static int hairCost = 25_000;
 	public static boolean deck = false;
 	public static int deckCost = 1_000_000;
-	
+
 	public static boolean fucked = false;
 	private static int fuckedCost = 1_000;
-	
-	private static AbstractSubspecies dollSubspecies = Subspecies.HUMAN;
-	
+
+	private static Subspecies dollSubspecies = Subspecies.HUMAN;
+
 	public static int getDollBrochureCost() {
 		int cost  = 0;
-		
+
 		cost += dollCost[dollOption];
 		cost += genitalCost[genitalsOption];
 		cost += ageCost[ageOption];
 		cost += outfitCost[outfitOption];
-		
+
 		cost += barcodeRemoval?barcodeCost:0;
 		cost += toySet?toyCost:0;
 		cost += hair?hairCost:0;
 		cost += deck?deckCost:0;
 
 		cost += fucked?fuckedCost:0;
-		
+
 		if(Main.game.getDialogueFlags().hasFlag("innoxia_sex_shop_discount")) {
 			cost *= 0.75f;
 		} else if(Main.game.getDialogueFlags().hasFlag("innoxia_sex_shop_penalty")) {
 			cost *= 2f;
 		}
-		
+
 		return cost;
 	}
-	
+
 	public static final DialogueNode DOLL_BROCHURE = new DialogueNode("Doll Brochure", "", true) {
 		@Override
 		public void applyPreParsingEffects() {
@@ -736,7 +736,7 @@ public class MiscDialogue {
 
 			//TODO Saellatrix comment, include discount/penalty
 			sb.append(Main.game.parseFromFile("txt/places/dominion/sex_shop/generic", "DOLL_BROCHURE"));
-			
+
 			sb.append(startWrapper("Model"));
 				sb.append(applyWrapper("DD", "Our standard model; the 'DD' comes with DD-cup breasts and a feminine figure.", PresetColour.GENERIC_GOOD, "DOLL_CORE_0", "Select", dollOption==0, dollCost[0], false));
 				sb.append(applyWrapper("HH", "Our premium model; the 'HH' comes with HH-cup breasts and a more womanly figure.", PresetColour.GENERIC_GOOD, "DOLL_CORE_1", "Select", dollOption==1, dollCost[1], false));
@@ -760,14 +760,14 @@ public class MiscDialogue {
 					sb.append(applyWrapper("60's", "And make them look *very* mature...", PresetColour.AGE_SIXTIES, "DOLL_AGE_5", "Select", ageOption==5, ageCost[5], true));
 				sb.append(endWrapper());
 			}
-			
+
 			sb.append(startWrapper("Outfits"));
 				sb.append(applyWrapper("Naked", "No clothes are supplied with your doll.", PresetColour.BASE_BLUE_STEEL, "DOLL_CLOTHING_0", "Select", outfitOption==0, outfitCost[0], true));
 				sb.append(applyWrapper("Rainbow", "Your doll will arrive wearing rainbow accessories.", PresetColour.BASE_INDIGO, "DOLL_CLOTHING_1", "Select", outfitOption==1, outfitCost[1], true));
 				sb.append(applyWrapper("Kitty lingerie", "Your doll will arrive wearing a full set of kitty lingerie.", PresetColour.BASE_PINK_LIGHT, "DOLL_CLOTHING_2", "Select", outfitOption==2, outfitCost[2], true));
 				sb.append(applyWrapper("Maid", "Your doll will arrive wearing a full maid's uniform.", PresetColour.BASE_PINK, "DOLL_CLOTHING_3", "Select", outfitOption==3, outfitCost[3], true));
 			sb.append(endWrapper());
-			
+
 			sb.append(startWrapper("Extras"));
 				sb.append(applyWrapper("Erase barcode", "We'll remove the barcode tattoo from your doll's forehead before delivery.", PresetColour.GENERIC_MINOR_GOOD, "DOLL_BARCODE", "Remove", barcodeRemoval, barcodeCost, true));
 				sb.append(applyWrapper("Toy set", "Your doll will come equipped with a selection of toys.", PresetColour.BASE_PINK, "DOLL_TOYS", "Add", toySet, toyCost, true));
@@ -782,7 +782,7 @@ public class MiscDialogue {
 			sb.append(startWrapper("Pre-delivery"));
 				sb.append(applyWrapper("Broken-in", "Don't like the idea of your doll being a virgin? Saellatrix will happily break in all of their holes.", PresetColour.BASE_PINK_DEEP, "DOLL_FUCKED", "Fucked", fucked, fuckedCost, true));
 			sb.append(endWrapper());
-			
+
 			return sb.toString();
 		}
 		@Override
@@ -805,11 +805,11 @@ public class MiscDialogue {
 							}
 						}
 					};
-					
+
 				} else {
 					return new Response("Continue ("+UtilText.formatAsMoneyUncoloured(getDollBrochureCost(), "span")+")", "You can't afford this...", null);
 				}
-				
+
 			} else if(index==2) {
 				return new Response("Back", "Decide against buying a doll after all.", DialogueManager.getDialogueFromId("innoxia_places_dominion_sex_shop_generic_counter"));
 			}
@@ -831,7 +831,7 @@ public class MiscDialogue {
 			return DOLL_BROCHURE.getResponse(responseTab, index);
 		}
 	};
-	
+
 	private static List<AbstractSubspecies> getProhibitedSubspecies() {
 		return Util.newArrayListOfValues(
 				Subspecies.ANGEL, // No angels
@@ -841,9 +841,9 @@ public class MiscDialogue {
 				Subspecies.DOLL // Silly!
 			);
 	}
-	
-	private static List<AbstractSubspecies> dollCompatibleSubspecies = new ArrayList<>();
-	private static List<AbstractSubspecies> getDollCompatibleSubspecies() {
+
+	private static List<Subspecies> dollCompatibleSubspecies = new ArrayList<>();
+	private static List<Subspecies> getDollCompatibleSubspecies() {
 		// check every subspecies for compatibility with dolls...
 		if(dollCompatibleSubspecies.isEmpty()) {
 			dollCompatibleSubspecies.addAll(Subspecies.getAllSubspecies());
@@ -854,7 +854,7 @@ public class MiscDialogue {
 					 || s.getRace().isAbleToSelfTransform() // Catch to make sure special future races aren't added
 					 || getProhibitedSubspecies().contains(s));
 			NPC doll = new BasicDoll();
-			for(AbstractSubspecies s : new ArrayList<>(dollCompatibleSubspecies)) {
+			for(Subspecies s : new ArrayList<>(dollCompatibleSubspecies)) {
 				doll.setBody(doll.getGender(), s, RaceStage.GREATER, true);
 				doll.setBodyMaterial(BodyMaterial.SILICONE);
 				if(doll.getFleshSubspecies()!=s) {
@@ -864,7 +864,7 @@ public class MiscDialogue {
 		}
 		return dollCompatibleSubspecies;
 	}
-	
+
 	public static final DialogueNode DOLL_BROCHURE_RACE_SELECTION = new DialogueNode("Doll Brochure", "", true) {
 		@Override
 		public String getContent() {
@@ -872,7 +872,7 @@ public class MiscDialogue {
 		}
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			List<AbstractSubspecies> availableSubspecies = getDollCompatibleSubspecies();//new ArrayList<>();
+			List<Subspecies> availableSubspecies = getDollCompatibleSubspecies();//new ArrayList<>();
 //			availableSubspecies.addAll(Subspecies.getAllSubspecies());
 //			availableSubspecies.removeIf(s->s.getRace()==Race.ELEMENTAL
 //					 || s.getRace()==Race.getRaceFromId("dsg_dragon") // They aren't able to capture dragons to TF
@@ -880,11 +880,11 @@ public class MiscDialogue {
 //					 || s.getRace()==Race.SLIME // This would make no sense
 //					 || s.getRace().isAbleToSelfTransform() // Catch to make sure special future races aren't added
 //					 || getProhibitedSubspecies().contains(s));
-			
+
 			if (index!=0 && index<availableSubspecies.size()+1) {
-				AbstractSubspecies subspecies = availableSubspecies.get(index - 1);
+				Subspecies subspecies = availableSubspecies.get(index - 1);
 				String name = subspecies.getSingularFemaleName(null);
-				
+
 				return new Response(
 						Util.capitaliseSentence(name),
 						"Choose "+UtilText.generateSingularDeterminer(name)+" "+name+" to be your doll's subspecies.",
@@ -895,14 +895,14 @@ public class MiscDialogue {
 						dollSubspecies = subspecies;
 					}
 				};
-				
+
 			} else if (index == 0) {
 				return new Response("Back", "Return to the previous page.", DOLL_BROCHURE_INTERNAL);
 			}
 			return null;
 		}
 	};
-	
+
 	public static final DialogueNode DOLL_BROCHURE_FINISHED = new DialogueNode("Doll Brochure", "", true) {
 		@Override
 		public String getContent() {
@@ -931,15 +931,15 @@ public class MiscDialogue {
 						initDoll();
 					}
 				};
-				
+
 			} else if (index == 2) {
 				return new Response("Back", "Return to the brochure.", DOLL_BROCHURE_INTERNAL);
 			}
-			
+
 			return null;
 		}
 	};
-	
+
 	public static final DialogueNode DOLL_BROCHURE_END = new DialogueNode("Doll Brochure", "", true) {
 		@Override
 		public String getContent() {
@@ -964,7 +964,7 @@ public class MiscDialogue {
 		if(dollOption!=2) {
 			dollSubspecies = Subspecies.HUMAN;
 		}
-		
+
 		doll.setBody(gender, dollSubspecies, RaceStage.GREATER, true);
 		doll.setBodyMaterial(BodyMaterial.SILICONE); // Birthday is set in here
 		doll.setBirthday(doll.getBirthday().minusDays(Util.random.nextInt(61))); // Creation date is 0-60 days before purchase
@@ -981,13 +981,13 @@ public class MiscDialogue {
 		}
 		doll.setPlayerKnowsName(true);
 
-		
+
 		doll.setName("Doll");
 		((Saellatrix)Main.game.getNpc(Saellatrix.class)).incrementDollsSold(1);
 		int dollCount = ((Saellatrix)Main.game.getNpc(Saellatrix.class)).getDollsSold();
 		String dollNumber = "#"+String.format("%05d", dollCount);
 		doll.setSurname(dollNumber);
-		
+
 		doll.addTattoo(InventorySlot.EYES,
 				new Tattoo("innoxia_property_barcode",
 						PresetColour.CLOTHING_WHITE,
@@ -997,11 +997,11 @@ public class MiscDialogue {
 								PresetColour.CLOTHING_WHITE,
 								false),
 						null));
-		
+
 		doll.setDescription("This doll was created in Lovienne's Luxuries.");
-		
+
 		doll.setPetName(Main.game.getPlayer(), "master");
-		
+
 		doll.setLocation(WorldType.getWorldTypeFromId("innoxia_dominion_sex_shop"), PlaceType.getPlaceTypeFromId("innoxia_dominion_sex_shop_dolls"), true);
 
 		if(dollOption==1) {
@@ -1009,16 +1009,16 @@ public class MiscDialogue {
 			doll.setHipSize(HipSize.FIVE_VERY_WIDE);
 			doll.setAssSize(AssSize.FIVE_HUGE);
 		}
-		
+
 		doll.unequipAllClothingIntoVoid(true, true);
 		doll.setMoney(0);
-		
+
 		if(outfitOption!=0) {
 			String id = outfitId[outfitOption];
-			AbstractSetBonus sb = SetBonus.getSetBonusFromId(id);
+			SetBonus sb = SetBonus.getSetBonusFromId(id);
 
 			if(ClothingType.getAllClothingInSet(sb)!=null) {
-				for (AbstractClothingType ct : ClothingType.getAllClothingInSet(sb)) {
+				for (ClothingType ct : ClothingType.getAllClothingInSet(sb)) {
 					AbstractClothing clothing = Main.game.getItemGen().generateClothing(ct);
 					for(int i=0; i<ct.getColourReplacements().size(); i++) {
 						ColourReplacement cr = ct.getColourReplacement(i);
@@ -1031,11 +1031,11 @@ public class MiscDialogue {
 				doll.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_foot_heels", PresetColour.CLOTHING_RED, PresetColour.CLOTHING_BLUE, PresetColour.CLOTHING_YELLOW, false), true, doll);
 			}
 		}
-		
+
 		if(barcodeRemoval) {
 			doll.clearTattoos();
 		}
-		
+
 		if(toySet) {
 			if(doll.hasVagina()) {
 				doll.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("norin_dildos_realistic_dildo", PresetColour.CLOTHING_PINK_LIGHT, false), true, doll);
@@ -1053,12 +1053,12 @@ public class MiscDialogue {
 			blindfold.setSealed(false);
 			doll.equipClothingFromNowhere(blindfold, true, doll);
 		}
-		
+
 		if(hair) {
 			doll.setHairLength(HairLength.FOUR_MID_BACK.getMedianValue());
 			doll.setHairStyle(HairStyle.STRAIGHT);
 		}
-		
+
 		if(deck) {
 			Main.game.appendToTextEndStringBuilder(Main.game.getPlayer().addItem(Main.game.getItemGen().generateItem(ItemType.DOLL_CONSOLE)));
 		}
@@ -1076,26 +1076,26 @@ public class MiscDialogue {
 			doll.setVirginityLoss(new SexType(SexAreaOrifice.ANUS, SexAreaPenetration.PENIS), saellatrix, "before being delivered to you");
 			doll.setVirginityLoss(new SexType(SexAreaOrifice.NIPPLE, SexAreaPenetration.PENIS), saellatrix, "before being delivered to you");
 		}
-		
+
 		try {
 			Main.game.addNPC(doll, false);
 			Main.game.getPlayer().addSlave(doll);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
+
 	}
-	
+
 	private static String startWrapper(String title) {
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append("<div class='cosmetics-inner-container' style='margin:1% 1%; width:98%; padding:1%; box-sizing:border-box; position:relative;'>");
 		sb.append("<b>"+title+"</b>");
-		
+
 		return sb.toString();
 	}
-	
+
 	private static String endWrapper() {
 		return "</div>";
 	}
@@ -1103,23 +1103,23 @@ public class MiscDialogue {
 	private static String applyWrapper(String title, String description, Colour buttonColour, String buttonId, String buttonText, boolean buttonActive, int cost, boolean isCostAdditional) {
 		return applyWrapper(title, description, buttonColour, buttonId, buttonText, buttonActive, cost, isCostAdditional, false);
 	}
-	
+
 	private static String applyWrapper(String title, String description, Colour buttonColour, String buttonId, String buttonText, boolean buttonActive, int cost, boolean isCostAdditional, boolean isDisabled) {
 		StringBuilder sb = new StringBuilder();
 
 		String border = "border: 1px solid "+(buttonActive?buttonColour:PresetColour.BASE_GREY_DARK).toWebHexString()+"55;";
 		String background = "";//buttonActive?"background:#555;":"";
 		String buttonStyle= "style='min-width:0; width:calc(100% - 8px); padding:4px; margin:0;'";
-		
+
 		buttonText = buttonActive?"&#10003;":"-";
-		
+
 		sb.append("<div class='container-full-width' style='width:100%; padding:0; margin:2px 0 2px 0; text-align:center; "+border+" "+background+"'>");
 			sb.append("<div class='container-full-width' style='width:20%; padding:0; margin:0;'>");
 				sb.append(isDisabled?"[style.boldDisabled(":"[style.bold(");
 					sb.append(title);
 				sb.append(")]");
 			sb.append("</div>");
-			
+
 			sb.append("<div class='container-full-width' style='width:55%; padding:0; margin:0;'>");
 				sb.append("<i>");
 					sb.append(description);
@@ -1132,13 +1132,13 @@ public class MiscDialogue {
 							"<div class='cosmetics-button disabled' "+buttonStyle+">"
 								+ buttonText
 							+ "</div>");
-					
+
 				} else if(buttonActive) {
 					sb.append(
 							"<div id='"+buttonId+"' class='cosmetics-button active' "+buttonStyle+">"
 								+ "<span style='color:"+buttonColour.toWebHexString()+";'>"+buttonText+"</span>"
 							+ "</div>");
-					
+
 				} else {
 					sb.append(
 							"<div id='"+buttonId+"' class='cosmetics-button' "+buttonStyle+">"
@@ -1146,7 +1146,7 @@ public class MiscDialogue {
 							+ "</div>");
 				}
 			sb.append("</div>");
-			
+
 			sb.append("<div class='container-full-width' style='width:20%; padding:0; margin:0;'>");
 				if(buttonActive) {
 					sb.append((isCostAdditional?"+":"")+UtilText.formatAsMoney(cost, "span"));
@@ -1154,7 +1154,7 @@ public class MiscDialogue {
 					sb.append("[style.colourDisabled("+(isCostAdditional?"+":"")+UtilText.formatAsMoneyUncoloured(cost, "span")+")]");
 				}
 			sb.append("</div>");
-		
+
 		sb.append("</div>");
 		return sb.toString();
 	}

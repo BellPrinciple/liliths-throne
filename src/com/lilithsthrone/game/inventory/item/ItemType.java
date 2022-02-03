@@ -15,7 +15,6 @@ import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.spells.Spell;
@@ -79,9 +78,9 @@ public interface ItemType extends AbstractCoreType {
 		return 100;
 	}
 
-	AbstractItemEffectType getEnchantmentEffect();
+	ItemEffectType getEnchantmentEffect();
 
-	AbstractItemType getEnchantmentItemType(List<ItemEffect> effects);
+	ItemType getEnchantmentItemType(List<ItemEffect> effects);
 
 	String getDeterminer();
 
@@ -171,7 +170,7 @@ public interface ItemType extends AbstractCoreType {
 
 	Set<ItemTag> getItemTags();
 
-	Map<AbstractStatusEffect, Value<String, Integer>> getAppliedStatusEffects();
+	Map<StatusEffect, Value<String, Integer>> getAppliedStatusEffects();
 
 	private static String getGenericUseDescription(GameCharacter user, GameCharacter target, String playerUseSelf, String playerUsePartner, String partnerUseSelf, String partnerUsePlayer) {
 		if (user!=null && user.isPlayer()) {
@@ -227,11 +226,11 @@ public interface ItemType extends AbstractCoreType {
 //			return true;
 //		}
 		@Override
-		public AbstractItemEffectType getEnchantmentEffect() {
+		public ItemEffectType getEnchantmentEffect() {
 			return ItemEffectType.FETISH_ENHANCEMENT;
 		}
 		@Override
-		public AbstractItemType getEnchantmentItemType(List<ItemEffect> effects) {
+		public ItemType getEnchantmentItemType(List<ItemEffect> effects) {
 			return FETISH_REFINED;
 		}
 		@Override
@@ -306,11 +305,11 @@ public interface ItemType extends AbstractCoreType {
 			return "drink";
 		}
 		@Override
-		public AbstractItemEffectType getEnchantmentEffect() {
+		public ItemEffectType getEnchantmentEffect() {
 			return ItemEffectType.ADDICTION_REMOVAL_REFINEMENT;
 		}
 		@Override
-		public AbstractItemType getEnchantmentItemType(List<ItemEffect> effects) {
+		public ItemType getEnchantmentItemType(List<ItemEffect> effects) {
 			return ADDICTION_REMOVAL_REFINED;
 		}
 		@Override
@@ -934,12 +933,12 @@ public interface ItemType extends AbstractCoreType {
 		}
 		
 		@Override
-		public AbstractItemEffectType getEnchantmentEffect() {
+		public ItemEffectType getEnchantmentEffect() {
 			return ItemEffectType.ORIENTATION_CHANGE;
 		}
 
 		@Override
-		public AbstractItemType getEnchantmentItemType(List<ItemEffect> effects) {
+		public ItemType getEnchantmentItemType(List<ItemEffect> effects) {
 			return ORIENTATION_HYPNO_WATCH;
 		}
 		
@@ -1638,12 +1637,12 @@ public interface ItemType extends AbstractCoreType {
 			Util.newArrayListOfValues(ItemTag.FOOD)) {
 
 		@Override
-		public AbstractItemEffectType getEnchantmentEffect() {
+		public ItemEffectType getEnchantmentEffect() {
 			return ItemEffectType.EGGPLANT_POTION;
 		}
 
 		@Override
-		public AbstractItemType getEnchantmentItemType(List<ItemEffect> effects) {
+		public ItemType getEnchantmentItemType(List<ItemEffect> effects) {
 			return EGGPLANT_POTION;
 		}
 		
@@ -2545,16 +2544,16 @@ public interface ItemType extends AbstractCoreType {
 
 	Table table = new Table();
 
-	final static class Table extends com.lilithsthrone.utils.Table<AbstractItemType> {
+	final static class Table extends com.lilithsthrone.utils.Table<ItemType> {
 
-		private final List<AbstractItemType> dominionAlleywayItems = new ArrayList<>();
-		private final List<AbstractItemType> submissionTunnelItems = new ArrayList<>();
-		private final List<AbstractItemType> batCavernItems = new ArrayList<>();
-		private final List<AbstractItemType> elisAlleywayItems = new ArrayList<>();
-		private final List<AbstractItemType> essences = new ArrayList<>();
-		private final List<AbstractItemType> moddedItems = new ArrayList<>();
-		private final Map<AbstractSubspecies,String> subspeciesBookId = new HashMap<>();
-		private final Map<AbstractSubspecies,String> essenceMap = new HashMap<>();
+		private final List<ItemType> dominionAlleywayItems = new ArrayList<>();
+		private final List<ItemType> submissionTunnelItems = new ArrayList<>();
+		private final List<ItemType> batCavernItems = new ArrayList<>();
+		private final List<ItemType> elisAlleywayItems = new ArrayList<>();
+		private final List<ItemType> essences = new ArrayList<>();
+		private final List<ItemType> moddedItems = new ArrayList<>();
+		private final Map<Subspecies,String> subspeciesBookId = new HashMap<>();
+		private final Map<Subspecies,String> essenceMap = new HashMap<>();
 
 		private Table() {
 			super(ItemType::sanitize);
@@ -2570,7 +2569,7 @@ public interface ItemType extends AbstractCoreType {
 				add(n,v);
 			});
 			// Initialise all SVGStrings so that initialisation methods do not conflict with one another in other places in the code.
-			for(AbstractItemType it : list())
+			for(ItemType it : list())
 				it.getSVGString();
 			addFields(ItemType.class,AbstractItemType.class,(k,v)->{
 				v.id = k;
@@ -2587,7 +2586,7 @@ public interface ItemType extends AbstractCoreType {
 		}
 	}
 
-	public static AbstractItemType getItemTypeFromId(String id) {
+	static ItemType getItemTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -2683,19 +2682,19 @@ public interface ItemType extends AbstractCoreType {
 		return id;
 	}
 	
-	public static String getIdFromItemType(AbstractItemType itemType) {
+	static String getIdFromItemType(ItemType itemType) {
 		return itemType.getId();
 	}
 	
-	public static AbstractItemType getSpellBookType(Spell s) {
+	static ItemType getSpellBookType(Spell s) {
 		return table.of("SPELL_BOOK_"+s);
 	}
 	
-	public static AbstractItemType getSpellScrollType(SpellSchool school) {
+	static ItemType getSpellScrollType(SpellSchool school) {
 		return table.of("SPELL_SCROLL_"+school);
 	}
 	
-	public static AbstractItemType getLoreBook(AbstractSubspecies subspecies) {
+	static ItemType getLoreBook(Subspecies subspecies) {
 		return table.of(table.subspeciesBookId.get(subspecies));
 	}
 
@@ -2730,7 +2729,10 @@ public interface ItemType extends AbstractCoreType {
 			
 			
 			AbstractItemEffectType effectType = new AbstractItemEffectType(effectsString, s.getSpellSchool().getColour()) {
-				
+				@Override
+				public String getId() {
+					return "EFFECT_SPELL_"+s;
+				}
 				@Override
 				public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 					boolean hasSpell = target.hasSpell(s);
@@ -2817,7 +2819,7 @@ public interface ItemType extends AbstractCoreType {
 				}
 			};
 			
-			ItemEffectType.addAbstractItemEffectToIds("EFFECT_SPELL_"+s, effectType);
+			ItemEffectType.table.add("EFFECT_SPELL_"+s, effectType);
 			
 			int value = 2500;
 			switch(s) {
@@ -2945,7 +2947,10 @@ public interface ItemType extends AbstractCoreType {
 			AbstractItemEffectType effectType = new AbstractItemEffectType(Util.newArrayListOfValues(
 							"[style.boldExcellent(+1)] to <span style='color:"+school.getColour().toWebHexString()+";'>"+school.getName()+"</span> upgrade points."),
 							school.getColour()) {
-						
+						@Override
+						public String getId() {
+							return "EFFECT_SCROLL_SCHOOL_"+school;
+						}
 						@Override
 						public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 							target.incrementSpellUpgradePoints(school, 1);
@@ -2956,7 +2961,7 @@ public interface ItemType extends AbstractCoreType {
 						}
 					};
 
-			ItemEffectType.addAbstractItemEffectToIds("EFFECT_SCROLL_SCHOOL_"+school, effectType);
+			ItemEffectType.table.add("EFFECT_SCROLL_SCHOOL_"+school, effectType);
 			
 			AbstractItemType scroll = new AbstractItemType(1000,
 					null,
@@ -3010,21 +3015,21 @@ public interface ItemType extends AbstractCoreType {
 		
 		// Race books:
 		
-		Map<String, List<AbstractSubspecies>> subspeciesLoreMap = new HashMap<>();
-		for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
+		Map<String, List<Subspecies>> subspeciesLoreMap = new HashMap<>();
+		for(Subspecies sub : Subspecies.getAllSubspecies()) {
 			subspeciesLoreMap.putIfAbsent(sub.getAdvancedDescriptionId(), new ArrayList<>());
 			subspeciesLoreMap.get(sub.getAdvancedDescriptionId()).add(sub);
 		}
 		
 		// Add effects from here, as Subspecies and ItemEffectType are dependent on one another to be initialised.
-		for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
+		for(Subspecies sub : Subspecies.getAllSubspecies()) {
 			subspeciesLoreMap.putIfAbsent(sub.getAdvancedDescriptionId(), new ArrayList<>());
 			subspeciesLoreMap.get(sub.getAdvancedDescriptionId()).add(sub);
 		}
 		
-		for(Entry<String, List<AbstractSubspecies>> entry : subspeciesLoreMap.entrySet()) {
-			AbstractSubspecies mainSubspecies = entry.getValue().contains(AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace()))
-											?AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace())
+		for(Entry<String, List<Subspecies>> entry : subspeciesLoreMap.entrySet()) {
+			Subspecies mainSubspecies = entry.getValue().contains(Subspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace()))
+											?Subspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace())
 											:entry.getValue().get(0);
 			
 			AbstractItemType loreBook = new AbstractItemType(250,
@@ -3047,13 +3052,13 @@ public interface ItemType extends AbstractCoreType {
 				}
 				@Override
 				public List<ItemEffect> getEffects() {
-					AbstractSubspecies mainSubspecies = entry.getValue().contains(AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace()))
-							?AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace())
+					Subspecies mainSubspecies = entry.getValue().contains(Subspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace()))
+							?Subspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace())
 							:entry.getValue().get(0);
-					String id = "BOOK_READ_"+Subspecies.getIdFromSubspecies(mainSubspecies);
+					String id = "BOOK_READ_"+mainSubspecies.getId();
 
 					if(ItemEffectType.table.exact(id).isEmpty()) {
-						ItemEffectType.addAbstractItemEffectToIds(id, generateBookEffect(id, mainSubspecies, entry.getValue()));
+						ItemEffectType.table.add(id, generateBookEffect(id, mainSubspecies, entry.getValue()));
 					}
 					
 					return Util.newArrayListOfValues(new ItemEffect(ItemEffectType.getBookEffectFromSubspecies(mainSubspecies)));
@@ -3091,7 +3096,7 @@ public interface ItemType extends AbstractCoreType {
 
 			table.add(loreBook.id = id, loreBook);
 			
-			for(AbstractSubspecies subspecies : entry.getValue()) {
+			for(Subspecies subspecies : entry.getValue()) {
 				table.subspeciesBookId.put(subspecies, id);
 			}
 
@@ -3154,7 +3159,11 @@ public interface ItemType extends AbstractCoreType {
 						"[style.boldGood(+1)] [style.boldArcane(Arcane essence)]"),
 						mainSubspecies.getColour(null)) {
 					@Override
-					public Map<AbstractStatusEffect, Integer> getAppliedStatusEffects() {
+					public String getId() {
+						return "BOTTLED_ESSENCE_"+mainSubspecies.getId().toUpperCase();
+					}
+					@Override
+					public Map<StatusEffect, Integer> getAppliedStatusEffects() {
 						return Util.newHashMapOfValues(new Value<>(statusEffect, 60*4*60));
 					}
 //					@Override
@@ -3183,7 +3192,7 @@ public interface ItemType extends AbstractCoreType {
 					}
 				};
 
-				ItemEffectType.addAbstractItemEffectToIds("BOTTLED_ESSENCE_"+Subspecies.getIdFromSubspecies(mainSubspecies).toUpperCase(), effectType);
+				ItemEffectType.table.add("BOTTLED_ESSENCE_"+Subspecies.getIdFromSubspecies(mainSubspecies).toUpperCase(), effectType);
 
 				AbstractItemType essence = new AbstractItemType(
 						Math.min(Math.max((mainSubspecies.getBaseSlaveValue(null) / 250), 40), 10000), // i.e. 48 flames for cat-morphs, minimum 40 flames, 10000 maximum
@@ -3230,7 +3239,7 @@ public interface ItemType extends AbstractCoreType {
 		}
 		
 		// Add items to spawn lists:
-		for(AbstractItemType item : table.list()) {
+		for(ItemType item : table.list()) {
 			if(item.getItemTags().contains(ItemTag.DOMINION_ALLEYWAY_SPAWN) || item.getItemTags().contains(ItemTag.ALL_AREAS_SPAWN)) {
 				table.dominionAlleywayItems.add(item);
 			}
@@ -3246,7 +3255,7 @@ public interface ItemType extends AbstractCoreType {
 		}
 	}
 	
-	private static AbstractItemEffectType generateBookEffect(String id, AbstractSubspecies mainSubspecies, List<AbstractSubspecies> additionalUnlockSubspecies) {
+	private static AbstractItemEffectType generateBookEffect(String id, Subspecies mainSubspecies, List<Subspecies> additionalUnlockSubspecies) {
 		return new AbstractItemEffectType(Util.newArrayListOfValues(
 				"Adds "+mainSubspecies.getName(null)+" encyclopedia entry and reveals racial status effect attributes",
 				"[style.boldExcellent(+10)] <b style='color:"+mainSubspecies.getColour(null).toWebHexString()+";'>"+mainSubspecies.getDamageMultiplier().getName()+"</b>"),
@@ -3262,7 +3271,7 @@ public interface ItemType extends AbstractCoreType {
 		};
 	}
 	
-	private static String getEssenceSvg(AbstractSubspecies subspecies) {
+	private static String getEssenceSvg(Subspecies subspecies) {
 		var value = table.essenceMap.get(subspecies);
 		if(value != null)
 			return value;
@@ -3298,7 +3307,7 @@ public interface ItemType extends AbstractCoreType {
 		return finalImage;
 	}
 
-	private static String getEssenceEffectSvg(AbstractSubspecies subspecies) {
+	private static String getEssenceEffectSvg(Subspecies subspecies) {
 		Colour colour = subspecies.getColour(null);
 		String backgroundImage = SvgUtil.loadFromResource("/com/lilithsthrone/res/items/essenceBackground.svg");
 		String background = SvgUtil.colourReplacement(subspecies.getName(null), colour, backgroundImage);
@@ -3317,36 +3326,36 @@ public interface ItemType extends AbstractCoreType {
 		return finalImage;
 	}
 
-	public static List<AbstractItemType> getDominionAlleywayItems() {
+	static List<ItemType> getDominionAlleywayItems() {
 		return table.dominionAlleywayItems;
 	}
 	
-	public static List<AbstractItemType> getSubmissionTunnelItems() {
+	static List<ItemType> getSubmissionTunnelItems() {
 		return table.submissionTunnelItems;
 	}
 	
-	public static List<AbstractItemType> getBatCavernItems() {
+	static List<ItemType> getBatCavernItems() {
 		return table.batCavernItems;
 	}
-	
-	public static List<AbstractItemType> getElisAlleywayItems() {
+
+	static List<ItemType> getElisAlleywayItems() {
 		return table.elisAlleywayItems;
 	}
-	
-	public static List<AbstractItemType> getEssences() {
+
+	static List<ItemType> getEssences() {
 		return table.essences;
 	}
-	
-	public static List<AbstractItemType> getAllItems() {
+
+	static List<ItemType> getAllItems() {
 		return table.list();
 	}
-	
-	public static Map<AbstractItemType, String> getItemToIdMap() {
-		return table.list().stream().collect(toMap(t->t,t->{var k=t.getId();if(k==null)System.err.println(t.getName(true));return k;}));
+
+	static Map<ItemType, String> getItemToIdMap() {
+		return table.list().stream().collect(toMap(t->t,ItemType::getId));
 	}
-	
-	public static Map<String, AbstractItemType> getIdToItemMap() {
-		return table.list().stream().collect(toMap(AbstractItemType::getId,t->t));
+
+	static Map<String, ItemType> getIdToItemMap() {
+		return table.list().stream().collect(toMap(ItemType::getId,t->t));
 	}
 
 }

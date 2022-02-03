@@ -14,7 +14,6 @@ import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.game.dialogue.encounters.Encounter;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.CharacterInventory;
@@ -52,7 +51,7 @@ public class AbstractPlaceType implements PlaceType {
 	protected Colour colour;
 	protected Colour backgroundColour;
 	protected DialogueNode dialogue;
-	protected AbstractEncounter encounterType;
+	protected Encounter encounterType;
 
 	protected boolean globalMapTile;
 	protected boolean dangerous;
@@ -103,7 +102,7 @@ public class AbstractPlaceType implements PlaceType {
 			Colour colour,
 			DialogueNode dialogue,
 			Darkness darkness,
-			AbstractEncounter encounterType,
+			Encounter encounterType,
 			String virginityLossDescription) {
 		this.worldRegion = worldRegion;
 		
@@ -205,7 +204,7 @@ public class AbstractPlaceType implements PlaceType {
 				if(coreElement.getOptionalFirstOf("encounterType").isPresent()) {
 					String encounterId = coreElement.getMandatoryFirstOf("encounterType").getTextContent().trim();
 					if(!encounterId.equals("null") && !encounterId.isEmpty()) {
-						this.encounterType = Encounter.getEncounterFromId(coreElement.getMandatoryFirstOf("encounterType").getTextContent().trim());
+						this.encounterType = Encounter.table.of(coreElement.getMandatoryFirstOf("encounterType").getTextContent().trim());
 					}
 				}
 				
@@ -489,13 +488,13 @@ public class AbstractPlaceType implements PlaceType {
 	}
 
 	@Override
-	public AbstractEncounter getEncounterType() {
-		Map<AbstractEncounter, Float> possibleEncountersMap = new HashMap<>();
+	public Encounter getEncounterType() {
+		Map<Encounter,Float> possibleEncountersMap = new HashMap<>();
 		
 		if(encounterType!=null && encounterType.getTotalChanceValue()>0) {
 			possibleEncountersMap.put(encounterType, encounterType.getTotalChanceValue());
 		}
-		for(AbstractEncounter enc : Encounter.getAddedEncounters(this.getId())) {
+		for(Encounter enc : Encounter.getAddedEncounters(this.getId())) {
 			if(enc.getTotalChanceValue()>0) {
 				possibleEncountersMap.put(enc, enc.getTotalChanceValue());
 			}
@@ -510,9 +509,7 @@ public class AbstractPlaceType implements PlaceType {
 			possibleEncountersMap.keySet().removeIf(en->!en.isAnyBaseTriggerChanceOverOneHundred());
 		}
 		
-		AbstractEncounter ae = Util.getRandomObjectFromWeightedFloatMap(possibleEncountersMap);
-
-		return ae;
+		return Util.getRandomObjectFromWeightedFloatMap(possibleEncountersMap);
 	}
 	
 	protected DialogueNode getBaseDialogue(Cell cell) {
@@ -522,7 +519,7 @@ public class AbstractPlaceType implements PlaceType {
 	@Override
 	public DialogueNode getDialogue(Cell cell, boolean withRandomEncounter, boolean forceEncounter) {
 		if(withRandomEncounter && Main.game.isStarted()) {
-			AbstractEncounter encounterType = getEncounterType();
+			Encounter encounterType = getEncounterType();
 			if(encounterType!=null) {
 				DialogueNode dn = encounterType.getRandomEncounter(forceEncounter);
 				if (dn != null) {
@@ -610,7 +607,7 @@ public class AbstractPlaceType implements PlaceType {
 	}
 
 	@Override
-	public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {
+	public String getSVGString(Set<PlaceUpgrade> upgrades) {
 		var s = PlaceType.super.getSVGString(upgrades);
 		return s != null ? s : SVGString;
 	}

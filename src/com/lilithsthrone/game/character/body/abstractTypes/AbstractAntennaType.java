@@ -10,10 +10,8 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.AntennaType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -34,8 +32,8 @@ public abstract class AbstractAntennaType implements AntennaType {
 	private String namePlural;
 	private String transformationName;
 	
-	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private BodyCoveringType coveringType;
+	private Race race;
 
 
 	private List<String> descriptorsMasculine;
@@ -56,8 +54,8 @@ public abstract class AbstractAntennaType implements AntennaType {
 	 * @param antennaBodyDescription A sentence or two to describe this antenna type, as seen in the character view screen. It should follow the same format as all of the other entries in the AntennaType class.
 	 */
 	public AbstractAntennaType(
-			AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			BodyCoveringType coveringType,
+			Race race,
 			String transformationName,
 			String name,
 			String namePlural,
@@ -98,8 +96,8 @@ public abstract class AbstractAntennaType implements AntennaType {
 				this.mod = mod;
 				this.fromExternalFile = true;
 
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
 				this.defaultAntennaePerRow = Integer.valueOf(coreElement.getMandatoryFirstOf("defaultAntennaePerRow").getTextContent());
 
@@ -173,12 +171,12 @@ public abstract class AbstractAntennaType implements AntennaType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

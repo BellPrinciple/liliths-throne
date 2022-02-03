@@ -20,7 +20,6 @@ import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.sex.InitialSexActionInformation;
 import com.lilithsthrone.game.sex.SexAreaInterface;
@@ -112,7 +111,7 @@ public class LilayasRoom {
 						null, null, null) {
 					@Override
 					public void effects() {
-						List<AbstractClothingType> panties = new ArrayList<>();
+						var panties = new ArrayList<ClothingType>();
 						panties.add(ClothingType.getClothingTypeFromId("innoxia_groin_lacy_panties"));
 						panties.add(ClothingType.getClothingTypeFromId("innoxia_groin_panties"));
 						panties.add(ClothingType.getClothingTypeFromId("innoxia_groin_shimapan"));

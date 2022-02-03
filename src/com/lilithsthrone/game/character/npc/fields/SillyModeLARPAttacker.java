@@ -19,11 +19,10 @@ import com.lilithsthrone.game.character.npc.NPCGenerationFlag;
 import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesSpawnRarity;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMoveType;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -80,14 +79,14 @@ public class SillyModeLARPAttacker extends NPC {
 			
 			// Race, name, personality/fetishes:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			Map<Subspecies, Integer> availableRaces = new HashMap<>();
+			for(Subspecies s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}
-				Map<AbstractSubspecies, SubspeciesSpawnRarity> subMap = Subspecies.getWorldSpecies(WorldType.getWorldTypeFromId("innoxia_fields_elis_town"), PlaceType.getPlaceTypeFromId("innoxia_fields_elis_town_alley"), false);
+				Map<Subspecies, SubspeciesSpawnRarity> subMap = Subspecies.getWorldSpecies(WorldType.getWorldTypeFromId("innoxia_fields_elis_town"), PlaceType.getPlaceTypeFromId("innoxia_fields_elis_town_alley"), false);
 				if(subMap.containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (10000 * subMap.get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (10000 * subMap.get(s).getChanceMultiplier()), gender, s, availableRaces);
 				}
 			}
 			
@@ -159,7 +158,7 @@ public class SillyModeLARPAttacker extends NPC {
 	
 	// Ace continues to be a lifesaver here
 	@Override
-	public float getMoveWeight(AbstractCombatMove move, List<GameCharacter> enemies, List<GameCharacter> allies) {
+	public float getMoveWeight(CombatMove move, List<GameCharacter> enemies, List<GameCharacter> allies) {
 	    if (move.getType() == CombatMoveType.TEASE || move.getType() == CombatMoveType.DEFEND) {
 	    	return 0;
 	    } else {

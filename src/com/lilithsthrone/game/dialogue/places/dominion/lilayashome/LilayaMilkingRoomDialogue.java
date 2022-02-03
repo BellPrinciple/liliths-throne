@@ -19,7 +19,6 @@ import com.lilithsthrone.game.occupantManagement.MilkingRoom;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.PlaceUpgrade;
 
 /**
@@ -56,7 +55,7 @@ public class LilayaMilkingRoomDialogue {
 			sb.append(room.getRoomDescription());
 			sb.append("<br/>");
 			
-			for(AbstractPlaceUpgrade up : Main.game.getPlayerCell().getPlace().getPlaceUpgrades()) {
+			for(var up : Main.game.getPlayerCell().getPlace().getPlaceUpgrades()) {
 				if(!up.isCoreRoomUpgrade()) {
 					sb.append("<p>"
 								+ "<b style='color:"+up.getColour().toWebHexString()+";'>"+up.getName()+"</b><br/>"

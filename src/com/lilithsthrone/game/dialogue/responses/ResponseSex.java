@@ -11,9 +11,9 @@ import java.util.Map.Entry;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
+import com.lilithsthrone.game.character.effects.Perk;
+import com.lilithsthrone.game.character.fetishes.Fetish;
+import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.utils.ParserTarget;
@@ -134,12 +134,12 @@ public class ResponseSex extends Response {
 	 */
 	public ResponseSex(String title,
 			String tooltipText,
-			List<AbstractFetish> fetishesForUnlock,
-			List<AbstractFetish> fetishesBlocking,
+			List<Fetish> fetishesForUnlock,
+			List<Fetish> fetishesBlocking,
 			CorruptionLevel corruptionBypass,
-			List<AbstractPerk> perksRequired,
+			List<Perk> perksRequired,
 			Femininity femininityRequired,
-			List<AbstractSubspecies> subspeciesRequired,
+			List<Subspecies> subspeciesRequired,
 			boolean consensual,
 			boolean subHasEqualControl,
 			List<GameCharacter> dominants,
@@ -413,12 +413,12 @@ public class ResponseSex extends Response {
 	
 	public ResponseSex(String title,
 			String tooltipText,
-			List<AbstractFetish> fetishesForUnlock,
-			List<AbstractFetish> fetishesBlocking,
+			List<Fetish> fetishesForUnlock,
+			List<Fetish> fetishesBlocking,
 			CorruptionLevel corruptionBypass,
-			List<AbstractPerk> perksRequired,
+			List<Perk> perksRequired,
 			Femininity femininityRequired,
-			List<AbstractSubspecies> subspeciesRequired,
+			List<Subspecies> subspeciesRequired,
 			boolean consensual,
 			boolean subHasEqualControl,
 			SMGeneric sexManager,
@@ -457,12 +457,12 @@ public class ResponseSex extends Response {
 	
 	public ResponseSex(String title,
 			String tooltipText,
-			List<AbstractFetish> fetishesForUnlock,
-			List<AbstractFetish> fetishesBlocking,
+			List<Fetish> fetishesForUnlock,
+			List<Fetish> fetishesBlocking,
 			CorruptionLevel corruptionBypass,
-			List<AbstractPerk> perksRequired,
+			List<Perk> perksRequired,
 			Femininity femininityRequired,
-			List<AbstractSubspecies> subspeciesRequired,
+			List<Subspecies> subspeciesRequired,
 			boolean consensual,
 			boolean subHasEqualControl,
 			SexManagerInterface sexManager,

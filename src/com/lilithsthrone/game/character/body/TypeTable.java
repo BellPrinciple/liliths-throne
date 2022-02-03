@@ -1,7 +1,6 @@
 package com.lilithsthrone.game.character.body;
 
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
@@ -17,7 +16,7 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class TypeTable <T extends BodyPartTypeInterface> extends Table<T> {
 
-	private final Map<AbstractRace,List<T>> byRace;
+	private final Map<Race,List<T>> byRace;
 	private final List<T> list;
 
 	@FunctionalInterface
@@ -76,7 +75,7 @@ public class TypeTable <T extends BodyPartTypeInterface> extends Table<T> {
 		.collect(Collectors.toUnmodifiableList());
 	}
 
-	public Optional<List<T>> of(AbstractRace r) {
+	public Optional<List<T>> of(Race r) {
 		return Optional.ofNullable(byRace.get(r));
 	}
 

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.types.VaginaType;
@@ -43,7 +42,7 @@ public interface Fetish {
 
 	List<Colour> getColourShades();
 
-	default List<AbstractFetish> getFetishesForAutomaticUnlock() {
+	default List<Fetish> getFetishesForAutomaticUnlock() {
 		return List.of();
 	}
 
@@ -63,7 +62,7 @@ public interface Fetish {
 		return getExtraEffects(owner);
 	}
 
-	default HashMap<AbstractAttribute, Integer> getAttributeModifiers() {
+	default HashMap<Attribute, Integer> getAttributeModifiers() {
 		return null;
 	}
 
@@ -71,7 +70,7 @@ public interface Fetish {
 		return true;
 	}
 
-	default AbstractFetish getOpposite() {
+	default Fetish getOpposite() {
 		return null;
 	}
 
@@ -159,7 +158,7 @@ public interface Fetish {
 		public boolean isContentEnabled() { return Main.game.isAnalContentEnabled(); }
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_ANAL_RECEIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_ANAL_RECEIVING; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -205,7 +204,7 @@ public interface Fetish {
 		public boolean isContentEnabled() { return Main.game.isAnalContentEnabled(); }
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_ANAL_GIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_ANAL_GIVING; }
 	};
 	
 	public static AbstractFetish FETISH_VAGINAL_GIVING = new AbstractFetish(60,
@@ -245,7 +244,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_VAGINAL_RECEIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_VAGINAL_RECEIVING; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -287,7 +286,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_VAGINAL_GIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_VAGINAL_GIVING; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -330,7 +329,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_ORAL_GIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_ORAL_GIVING; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -373,7 +372,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_ORAL_RECEIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_ORAL_RECEIVING; }
 	};
 	
 	public static AbstractFetish FETISH_BREASTS_OTHERS = new AbstractFetish(60,
@@ -413,7 +412,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_BREASTS_SELF; }
+		public Fetish getOpposite() { return Fetish.FETISH_BREASTS_SELF; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -456,7 +455,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_BREASTS_OTHERS; }
+		public Fetish getOpposite() { return Fetish.FETISH_BREASTS_OTHERS; }
 	};
 	
 	public static AbstractFetish FETISH_LACTATION_OTHERS = new AbstractFetish(60,
@@ -499,7 +498,7 @@ public interface Fetish {
 		public boolean isContentEnabled() { return Main.game.isLactationContentEnabled(); }
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_LACTATION_SELF; }
+		public Fetish getOpposite() { return Fetish.FETISH_LACTATION_SELF; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -545,7 +544,7 @@ public interface Fetish {
 		public boolean isContentEnabled() { return Main.game.isLactationContentEnabled(); }
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_LACTATION_OTHERS; }
+		public Fetish getOpposite() { return Fetish.FETISH_LACTATION_OTHERS; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -588,7 +587,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_STRUTTER; }
+		public Fetish getOpposite() { return Fetish.FETISH_STRUTTER; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -631,7 +630,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_LEG_LOVER; }
+		public Fetish getOpposite() { return Fetish.FETISH_LEG_LOVER; }
 	};
 	
 	public static AbstractFetish FETISH_FOOT_GIVING = new AbstractFetish(60,
@@ -674,7 +673,7 @@ public interface Fetish {
 		public boolean isContentEnabled() { return Main.game.isFootContentEnabled(); }
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_FOOT_RECEIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_FOOT_RECEIVING; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -720,7 +719,7 @@ public interface Fetish {
 		public boolean isContentEnabled() { return Main.game.isFootContentEnabled(); }
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_FOOT_GIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_FOOT_GIVING; }
 	};
 
 	public static AbstractFetish FETISH_ARMPIT_GIVING = new AbstractFetish(60,
@@ -760,7 +759,7 @@ public interface Fetish {
 		public boolean isContentEnabled() { return Main.game.isArmpitContentEnabled(); }
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_ARMPIT_RECEIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_ARMPIT_RECEIVING; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -803,7 +802,7 @@ public interface Fetish {
 		public boolean isContentEnabled() { return Main.game.isArmpitContentEnabled(); }
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_ARMPIT_GIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_ARMPIT_GIVING; }
 	};
 	
 	public static AbstractFetish FETISH_PENIS_GIVING = new AbstractFetish(60,
@@ -842,7 +841,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_PENIS_RECEIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_PENIS_RECEIVING; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -884,7 +883,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_PENIS_GIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_PENIS_GIVING; }
 	};
 	
 	public static AbstractFetish FETISH_CUM_STUD = new AbstractFetish(60,
@@ -921,7 +920,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_CUM_ADDICT; }
+		public Fetish getOpposite() { return Fetish.FETISH_CUM_ADDICT; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -964,7 +963,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_CUM_STUD; }
+		public Fetish getOpposite() { return Fetish.FETISH_CUM_STUD; }
 	};
 	
 	public static AbstractFetish FETISH_DEFLOWERING = new AbstractFetish(60,
@@ -998,7 +997,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_PURE_VIRGIN; }
+		public Fetish getOpposite() { return Fetish.FETISH_PURE_VIRGIN; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -1059,7 +1058,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_DEFLOWERING; }
+		public Fetish getOpposite() { return Fetish.FETISH_DEFLOWERING; }
 	};
 	
 	public static AbstractFetish FETISH_MASTURBATION = new AbstractFetish(60,
@@ -1137,7 +1136,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_PREGNANCY; }
+		public Fetish getOpposite() { return Fetish.FETISH_PREGNANCY; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -1180,7 +1179,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_IMPREGNATION; }
+		public Fetish getOpposite() { return Fetish.FETISH_IMPREGNATION; }
 	};
 
 	public static AbstractFetish FETISH_TRANSFORMATION_GIVING = new AbstractFetish(60,
@@ -1218,7 +1217,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_TRANSFORMATION_RECEIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_TRANSFORMATION_RECEIVING; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -1260,7 +1259,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_TRANSFORMATION_GIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_TRANSFORMATION_GIVING; }
 	};
 	
 	public static AbstractFetish FETISH_KINK_GIVING = new AbstractFetish(60,
@@ -1300,7 +1299,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_KINK_RECEIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_KINK_RECEIVING; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -1343,7 +1342,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_KINK_GIVING; }
+		public Fetish getOpposite() { return Fetish.FETISH_KINK_GIVING; }
 	};
 	
 	// Behaviour (organised roughly in active/passive pairs):
@@ -1383,7 +1382,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_DENIAL_SELF; }
+		public Fetish getOpposite() { return Fetish.FETISH_DENIAL_SELF; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -1425,7 +1424,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_DENIAL; }
+		public Fetish getOpposite() { return Fetish.FETISH_DENIAL; }
 	};
 	
 	public static AbstractFetish FETISH_DOMINANT = new AbstractFetish(60,
@@ -1465,7 +1464,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_SUBMISSIVE; }
+		public Fetish getOpposite() { return Fetish.FETISH_SUBMISSIVE; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -1508,7 +1507,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_DOMINANT; }
+		public Fetish getOpposite() { return Fetish.FETISH_DOMINANT; }
 	};
 	
 	public static AbstractFetish FETISH_INCEST = new AbstractFetish(60,
@@ -1593,7 +1592,7 @@ public interface Fetish {
 			return CorruptionLevel.THREE_DIRTY;
 		}
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_MASOCHIST; }
+		public Fetish getOpposite() { return Fetish.FETISH_MASOCHIST; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -1636,7 +1635,7 @@ public interface Fetish {
 			return CorruptionLevel.THREE_DIRTY;
 		}
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_SADIST; }
+		public Fetish getOpposite() { return Fetish.FETISH_SADIST; }
 	};
 	
 	public static AbstractFetish FETISH_NON_CON_DOM = new AbstractFetish(60,
@@ -1677,7 +1676,7 @@ public interface Fetish {
 		public boolean isContentEnabled() { return Main.game.isNonConEnabled(); }
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_NON_CON_SUB; }
+		public Fetish getOpposite() { return Fetish.FETISH_NON_CON_SUB; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -1721,7 +1720,7 @@ public interface Fetish {
 		public boolean isContentEnabled() { return Main.game.isNonConEnabled(); }
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_NON_CON_DOM; }
+		public Fetish getOpposite() { return Fetish.FETISH_NON_CON_DOM; }
 	};
 	
 	public static AbstractFetish FETISH_BONDAGE_APPLIER = new AbstractFetish(60,
@@ -1753,7 +1752,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_BONDAGE_VICTIM; }
+		public Fetish getOpposite() { return Fetish.FETISH_BONDAGE_VICTIM; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -1789,7 +1788,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_BONDAGE_APPLIER; }
+		public Fetish getOpposite() { return Fetish.FETISH_BONDAGE_APPLIER; }
 	};
 	
 	public static AbstractFetish FETISH_EXHIBITIONIST = new AbstractFetish(60,
@@ -1836,7 +1835,7 @@ public interface Fetish {
 		}
 
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_VOYEURIST; }
+		public Fetish getOpposite() { return Fetish.FETISH_VOYEURIST; }
 	};
 	
 	public static AbstractFetish FETISH_VOYEURIST = new AbstractFetish(60,
@@ -1873,7 +1872,7 @@ public interface Fetish {
 		}
 		
 		@Override
-		public AbstractFetish getOpposite() { return Fetish.FETISH_EXHIBITIONIST; }
+		public Fetish getOpposite() { return Fetish.FETISH_EXHIBITIONIST; }
 		
 		@Override
 		public boolean isTopFetish() { return true; }
@@ -2161,7 +2160,7 @@ public interface Fetish {
 					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Amplifies</span> <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>'broken virgin'</span>"),
 			null) {
 		@Override
-		public List<AbstractFetish> getFetishesForAutomaticUnlock() {
+		public List<Fetish> getFetishesForAutomaticUnlock() {
 			return Util.newArrayListOfValues(
 					Fetish.FETISH_PURE_VIRGIN,
 					Main.game.isAnalContentEnabled()
@@ -2196,29 +2195,29 @@ public interface Fetish {
 	
 	// Helper methods:
 	
-	private static String getAppliedFetishAttackLevelEffectDescription(GameCharacter character, AbstractFetish fetish, String fetishAttackName) {
+	private static String getAppliedFetishAttackLevelEffectDescription(GameCharacter character, Fetish fetish, String fetishAttackName) {
 		FetishLevel level = character.getFetishLevel(fetish);
 		return "+"+level.getBonusTeaseDamage()+" base damage to "+fetishAttackName;
 	}
 	
 	// Access methods:
 	
-	Table<AbstractFetish> table = new Table<>(s->s) {{
+	Table<Fetish> table = new Table<>(s->s) {{
 		addFields(Fetish.class,AbstractFetish.class,(k,v)->v.id=k);
 	}};
 
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
-	public static AbstractFetish getFetishFromId(String id) {
+	static Fetish getFetishFromId(String id) {
 		return table.of(id);
 	}
 	
-	public static String getIdFromFetish(AbstractFetish fetish) {
+	static String getIdFromFetish(Fetish fetish) {
 		return fetish.getId();
 	}
 	
-	public static List<AbstractFetish> getAllFetishes() {
+	static List<Fetish> getAllFetishes() {
 		return table.list();
 	}
 	

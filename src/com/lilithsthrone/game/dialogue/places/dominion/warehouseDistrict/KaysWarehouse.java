@@ -37,7 +37,6 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.InitialSexActionInformation;
@@ -50,7 +49,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
@@ -124,7 +122,7 @@ public class KaysWarehouse {
 		return isPlayerMouthFree() || isPlayerAssFree() || isPlayerVaginaFree();
 	}
 	
-	public static ResponseSex getDobermannsSexResponse(AbstractSexPosition position,
+	public static ResponseSex getDobermannsSexResponse(SexPosition position,
 			SexSlot slotWolfgang, SexAreaInterface sexAreaWolfgang,
 			SexSlot slotKarl, SexAreaInterface sexAreaKarl,
 			SexSlot slotPlayer,
@@ -329,7 +327,7 @@ public class KaysWarehouse {
 			String description,
 			DialogueNode postSexDialogue,
 			String startingText,
-			AbstractSexPosition position,
+			SexPosition position,
 			SexSlot slotKay, SexType sexTypeKay,
 			SexSlot slotPlayer,
 			List<CoverableArea> kayExposedParts,
@@ -354,7 +352,7 @@ public class KaysWarehouse {
 			String description,
 			DialogueNode postSexDialogue,
 			String startingText,
-			AbstractSexPosition position,
+			SexPosition position,
 			SexSlot slotKay, SexType sexTypeKay,
 			SexSlot slotPlayer,
 			List<CoverableArea> kayExposedParts,
@@ -537,7 +535,7 @@ public class KaysWarehouse {
 						public void effects() {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.kayCratesSearched, true);
 							
-							List<AbstractClothingType> clothingToGenerate = new ArrayList<>(ClothingType.getAllClothing());
+							var clothingToGenerate = new ArrayList<>(ClothingType.getAllClothing());
 							clothingToGenerate.removeIf((clothing) -> clothing.getRarity()!=Rarity.COMMON || !clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN) || clothing.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN));
 							
 							Main.game.getTextEndStringBuilder().append(

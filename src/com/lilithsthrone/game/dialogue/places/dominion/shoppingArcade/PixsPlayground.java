@@ -14,7 +14,7 @@ import com.lilithsthrone.world.places.PlaceType;
  * @author Innoxia
  */
 public class PixsPlayground {
-	
+
 	public static final DialogueNode GYM_EXTERIOR = new DialogueNode("Pix's Playground (Exterior)", "", false) {
 		@Override
 		public String getContent() {

@@ -19,16 +19,14 @@ import com.lilithsthrone.game.character.attributes.LustLevel;
 import com.lilithsthrone.game.character.attributes.PhysiqueLevel;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.markings.Tattoo;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
 import com.lilithsthrone.game.character.persona.Occupation;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.character.race.Subspecies;
+import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -51,7 +49,7 @@ import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
+import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.settings.KeyboardAction;
 import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
@@ -66,12 +64,10 @@ import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.colours.BaseColour;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.World;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractGlobalPlaceType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.population.Population;
 
@@ -221,7 +217,7 @@ public enum RenderingEngine {
 					+ "</div>");
 			
 		} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_1)!=null) {
-			AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_1);
+			WeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_1);
 			String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 			equippedPanelSB.append(
 					"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -246,7 +242,7 @@ public enum RenderingEngine {
 						+ "</div>");
 				
 			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_2)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_2);
+				WeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_2);
 				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 				equippedPanelSB.append(
 						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -269,7 +265,7 @@ public enum RenderingEngine {
 						+ "</div>");
 				
 			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_3)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_3);
+				WeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_3);
 				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 				equippedPanelSB.append(
 						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -295,7 +291,7 @@ public enum RenderingEngine {
 					+ "</div>");
 			
 		} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_1)!=null) {
-			AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_1);
+			WeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_1);
 			String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 			equippedPanelSB.append(
 					"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -322,7 +318,7 @@ public enum RenderingEngine {
 						+ "</div>");
 				
 			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_2)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_2);
+				WeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_2);
 				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 				equippedPanelSB.append(
 						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -347,7 +343,7 @@ public enum RenderingEngine {
 						+ "</div>");
 				
 			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_3)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_3);
+				WeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_3);
 				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 				equippedPanelSB.append(
 						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -517,7 +513,7 @@ public enum RenderingEngine {
 		if(!disabled && block!=null) {
 			return "<div class='inventory-item-slot "+(block.getRace()!=null?"disabled-light":"disabled")+"' style='"+weaponStyle+"'>"
 						+ (block.getRace()!=null
-								?"<div class='raceBlockIcon'>" + AbstractSubspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
+								?"<div class='raceBlockIcon'>" + Subspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
 								:"")
 						+ "<div class='overlay-inventory' id='" + slot.toString() + "Slot' style='cursor:default;'></div>"
 					+ "</div>";
@@ -554,7 +550,7 @@ public enum RenderingEngine {
 
 						equippedPanelSB.append(
 								(block!=null && block.getRace()!=null
-									?"<div class='raceBlockIcon'>" + AbstractSubspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
+									?"<div class='raceBlockIcon'>" + Subspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
 									:""));
 						
 						equippedPanelSB.append("<div class='inventory-icon-content'>"+clothing.getSVGEquippedString(charactersInventoryToRender)+"</div>");
@@ -590,7 +586,7 @@ public enum RenderingEngine {
 									+ (charactersInventoryToRender.isDirtySlot(invSlot) ? "<div class='cummedIcon'>" + SVGImages.SVG_IMAGE_PROVIDER.getDirtyIcon() + "</div>" : "")
 									+ "<div class='overlay' id='" + invSlot.toString() + "Slot'></div>"
 									+ (block.getRace()!=null
-											?"<div class='raceBlockIcon'>" + AbstractSubspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
+											?"<div class='raceBlockIcon'>" + Subspecies.getMainSubspeciesOfRace(block.getRace()).getSVGStringDesaturated(charactersInventoryToRender, PresetColour.BASE_BLACK) + "</div>"
 											:"")
 								+ "</div>");
 						
@@ -605,7 +601,7 @@ public enum RenderingEngine {
 				
 			} else { // Tattoos:
 				boolean disabled = !invSlot.isPhysicallyAvailable(charactersInventoryToRender) && invSlot!=InventorySlot.HAIR; // Exception for hair as this slot corresponds to the 'ears' slot for tattoos
-				
+
 				if(disabled) {
 					equippedPanelSB.append("<div class='"+inventorySlotId+" disabled' id='" + invSlot.toString() + "Slot'></div>");
 					
@@ -709,7 +705,7 @@ public enum RenderingEngine {
 				}
 			}
 			currentPage = pageRight;
-			
+
 		} else {
 //			renderQuestTab = charactersInventoryToRender.isPlayer();
 			hasQuestItems = charactersInventoryToRender.isCarryingQuestItems();
@@ -916,21 +912,21 @@ public enum RenderingEngine {
 						uniqueItemCount++;
 					}
 				}
-				
+
 				for(Entry<AbstractClothing, Integer> entry : Main.game.getPlayerCell().getInventory().getAllClothingInInventory().entrySet()) {
 					if(entry.getKey().getRarity()==Rarity.QUEST) {
 						pageSB.append(getInventoryItemDiv(Main.game.getPlayerCell().getInventory(), entry.getKey(), entry.getValue(), idModifier+"CLOTHING_"));
 						uniqueItemCount++;
 					}
 				}
-				
+
 				for(Entry<AbstractItem, Integer> entry : Main.game.getPlayerCell().getInventory().getAllItemsInInventory().entrySet()) {
 					if(entry.getKey().getRarity()==Rarity.QUEST) {
 						pageSB.append(getInventoryItemDiv(Main.game.getPlayerCell().getInventory(), entry.getKey(), entry.getValue(), idModifier+"ITEM_"));
 						uniqueItemCount++;
 					}
 				}
-				
+
 			} else {
 				for(Entry<AbstractWeapon, Integer> entry : Main.game.getPlayerCell().getInventory().getAllWeaponsInInventory().entrySet()) {
 					if(entry.getKey().getRarity()!=Rarity.QUEST) {
@@ -940,7 +936,7 @@ public enum RenderingEngine {
 						uniqueItemCount++;
 					}
 				}
-				
+
 				for(Entry<AbstractClothing, Integer> entry : Main.game.getPlayerCell().getInventory().getAllClothingInInventory().entrySet()) {
 					if(entry.getKey().getRarity()!=Rarity.QUEST) {
 						if(uniqueItemCount >= page*ITEMS_PER_PAGE && uniqueItemCount < (page+1)*ITEMS_PER_PAGE) {
@@ -949,7 +945,7 @@ public enum RenderingEngine {
 						uniqueItemCount++;
 					}
 				}
-				
+
 				for(Entry<AbstractItem, Integer> entry : Main.game.getPlayerCell().getInventory().getAllItemsInInventory().entrySet()) {
 					if(entry.getKey().getRarity()!=Rarity.QUEST) {
 						if(uniqueItemCount >= page*ITEMS_PER_PAGE && uniqueItemCount < (page+1)*ITEMS_PER_PAGE) {
@@ -1165,7 +1161,7 @@ public enum RenderingEngine {
 		return "";
 	}
 
-	private static String getThrownWeaponCountDiv(AbstractWeaponType weaponType, int amount) {
+	private static String getThrownWeaponCountDiv(WeaponType weaponType, int amount) {
 		if(!weaponType.isOneShot()) {
 			return "";
 		}
@@ -1207,7 +1203,7 @@ public enum RenderingEngine {
 						+ "</div>";
 				
 			} else {
-				AbstractPlaceType place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
+				PlaceType place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
 				
 				if(Main.game.getPlayer().getLocationPlace()!=null) {
 					place = Main.game.getPlayer().getLocationPlace().getPlaceType();
@@ -1243,7 +1239,7 @@ public enum RenderingEngine {
 			String mainTitle = Main.game.getPlayer().getWorldLocation().getName();
 			String mainTitleColour = Main.game.getPlayer().getWorldLocation().getColour().toWebHexString();
 	
-			AbstractPlaceType place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
+			PlaceType place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
 			
 			if(Main.game.getPlayer().getLocationPlace()!=null) {
 				place = Main.game.getPlayer().getLocationPlace().getPlaceType();
@@ -1396,7 +1392,7 @@ public enum RenderingEngine {
 					uiAttributeSB.append("<div class='item-inline' style='float:left;'>"
 											+SVGImages.SVG_IMAGE_PROVIDER.getCalendarIcon()
 										+ "</div>");
-					
+
 					uiAttributeSB.append((Main.getProperties().hasValue(PropertyValue.calendarDisplay)
 													? Main.game.getDisplayDate(false)
 													:"Day "+Main.game.getDayNumber()));
@@ -1442,7 +1438,7 @@ public enum RenderingEngine {
 			} else {
 				uiAttributeSB.append(Units.time(Main.game.getDateNow()));
 			}
-			
+
 			uiAttributeSB.append("</div>"
 						+ "</div>");
 			
@@ -1618,7 +1614,7 @@ public enum RenderingEngine {
 		} else {
 			uiAttributeSB.append("<div class='full'>");
 			
-			AbstractPlaceType place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
+			PlaceType place = Main.game.getPlayer().getWorldLocation().getStandardPlace();
 			if(Main.game.getPlayer().getLocationPlace()!=null) {
 				place = Main.game.getPlayer().getLocationPlace().getPlaceType();
 			}
@@ -1637,7 +1633,7 @@ public enum RenderingEngine {
 					charactersPresent.add(c.getElemental());
 				}
 			}
-			Set<AbstractSubspecies> subspeciesSet = new HashSet<>();
+			Set<Subspecies> subspeciesSet = new HashSet<>();
 			if(place.getPopulation()!=null) {
 				for(Population pop : place.getPopulation()) {
 					subspeciesSet.addAll(pop.getSpecies().keySet());
@@ -1840,10 +1836,10 @@ public enum RenderingEngine {
 		}
 	}
 
-	private String generateBackgroundStyle(AbstractPlaceType placeType, boolean dangerousTile, boolean discovered, double alpha) {
+	private String generateBackgroundStyle(PlaceType placeType, boolean dangerousTile, boolean discovered, double alpha) {
 		if(placeType.equals(PlaceType.GENERIC_IMPASSABLE)) {
 			return "background:transparent;";
-			
+
 		} else {
 			return dangerousTile && discovered //&& !worldMap
 					?getDangerousBackground(placeType)
@@ -1852,8 +1848,8 @@ public enum RenderingEngine {
 						:"background-color:"+PresetColour.MAP_BACKGROUND_UNEXPLORED.toRGBA(alpha)+";";
 		}
 	}
-	
-	public String getFullMap(AbstractWorldType world, boolean withFastTravel, boolean withNPCIcons) {
+
+	public String getFullMap(WorldType world, boolean withFastTravel, boolean withNPCIcons) {
 
 //		long t1 = System.nanoTime();
 		
@@ -1879,8 +1875,8 @@ public enum RenderingEngine {
 				boolean path = Pathing.getPathingCells().contains(c);
 				boolean endPath = Pathing.getEndPoint()!=null && new Vector2i(j, i).equals(Pathing.getEndPoint());
 				boolean dangerousTile = c.getPlace().getPlaceType().isDangerous();
-				AbstractPlaceType placeType = c.getPlace().getPlaceType();
-				
+				PlaceType placeType = c.getPlace().getPlaceType();
+
 				
 				if(!discovered || placeType.equals(PlaceType.GENERIC_IMPASSABLE)) {
 					mapSB.append("<div class='map-icon' style='width:"+(width-0.5)+"%; margin:0.25%; "+generateBackgroundStyle(placeType, dangerousTile, discovered, 1.0)+"'></div>");
@@ -2061,7 +2057,7 @@ public enum RenderingEngine {
 		}
 	}
 	
-	private static String getDangerousBackground(AbstractPlaceType placeType) {
+	private static String getDangerousBackground(PlaceType placeType) {
 		if(placeType instanceof AbstractGlobalPlaceType) {
 			return "background:"+placeType.getBackgroundColour().toWebHexString()+";";
 		}
@@ -2136,7 +2132,7 @@ public enum RenderingEngine {
 				boolean cellTravelDisabled = cellFocused!=null && cellFocused.getDialogue(false)==null && Main.game.isInNewWorld();
 				
 				if (x < Main.game.getActiveWorld().WORLD_WIDTH && x >= 0 && y < Main.game.getActiveWorld().WORLD_HEIGHT && y >= 0) {// If within  bounds of map:
-					AbstractPlaceType placeType = cellFocused.getPlace().getPlaceType();
+					var placeType = cellFocused.getPlace().getPlaceType();
 
 					if (cellFocused.isDiscovered() || Main.game.isMapReveal()) { // If the tile is discovered:
 						if (placeType.equals(PlaceType.GENERIC_IMPASSABLE)) {
@@ -2720,7 +2716,7 @@ public enum RenderingEngine {
 		
 		if(!Main.game.isInCombat()) {
 			// Infinite duration:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (StatusEffect se : character.getStatusEffects()) {
 				if (!se.isCombatEffect() && character.getStatusEffectDuration(se) == -1 && se.renderInEffectsPanel())
 					panelSB.append(
 							"<div class='icon effect'>"
@@ -2731,7 +2727,7 @@ public enum RenderingEngine {
 							+ "</div>");
 			}
 			// Timed:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (StatusEffect se : character.getStatusEffects()) {
 				if (!se.isCombatEffect() && character.getStatusEffectDuration(se) != -1 && se.renderInEffectsPanel()) {
 					int timerHeight = (int) ((character.getStatusEffectDuration(se)/(60*60*6f))*100);
 	
@@ -2758,7 +2754,7 @@ public enum RenderingEngine {
 			}
 			
 			if(!character.isPlayer()) {
-				for (AbstractFetish f : character.getFetishes(true)) {
+				for (Fetish f : character.getFetishes(true)) {
 					panelSB.append(
 						"<div class='icon effect'>"
 							+ "<div class='icon-content'>"
@@ -2771,7 +2767,7 @@ public enum RenderingEngine {
 		
 		} else {
 			// Infinite duration:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (StatusEffect se : character.getStatusEffects()) {
 				if (character.getStatusEffectDuration(se) == -1 && se.renderInEffectsPanel())
 					panelSB.append(
 							"<div class='icon effect' "+(se.isCombatEffect()?"style='border:1px solid "+se.getBeneficialStatus().getColour().toWebHexString()+";":"")+"'>"
@@ -2782,7 +2778,7 @@ public enum RenderingEngine {
 							+ "</div>");
 			}
 			// Timed:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (StatusEffect se : character.getStatusEffects()) {
 				if (character.getStatusEffectDuration(se) != -1 && se.renderInEffectsPanel() && se.isCombatEffect()) {
 					int timerHeight = (int) ((character.getStatusEffectDuration(se)/(60*60*6f))*100);
 
@@ -2808,7 +2804,7 @@ public enum RenderingEngine {
 				}
 			}
 			
-			for (AbstractCombatMove combatMove : character.getAvailableMoves()) {
+			for (CombatMove combatMove : character.getAvailableMoves()) {
 				int cooldown = character.getMoveCooldown(combatMove.getIdentifier());
 				if (cooldown > 0) {
 					int timerHeight = (int) ((Math.min(5, cooldown)/5f)*100);
@@ -2879,7 +2875,7 @@ public enum RenderingEngine {
 			
 			float iconWidth = 100/9f - 2;  // usual is 12.28 (7 per row)
 			// Infinite duration:
-			for(AbstractStatusEffect se : elemental.getStatusEffects()) {
+			for(StatusEffect se : elemental.getStatusEffects()) {
 				if (!se.isCombatEffect() && elemental.getStatusEffectDuration(se) == -1 && se.renderInEffectsPanel())
 					panelSB.append(
 							"<div class='icon effect' style='width:"+iconWidth+"%;'>"
@@ -2890,7 +2886,7 @@ public enum RenderingEngine {
 							+ "</div>");
 			}
 			// Timed:
-			for(AbstractStatusEffect se : elemental.getStatusEffects()) {
+			for(StatusEffect se : elemental.getStatusEffects()) {
 				if (!se.isCombatEffect() && elemental.getStatusEffectDuration(se) != -1 && se.renderInEffectsPanel()) {
 					int timerHeight = (int) ((elemental.getStatusEffectDuration(se)/(60*60*6f))*100);
 	
@@ -3025,7 +3021,7 @@ public enum RenderingEngine {
 	//		}
 			
 			// Infinite duration:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (StatusEffect se : character.getStatusEffects()) {
 				boolean pointer = false;
 				SexAreaInterface si = null;
 				if(se==StatusEffect.PENIS_STATUS) {
@@ -3066,7 +3062,7 @@ public enum RenderingEngine {
 				}
 			}
 			// Timed:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (StatusEffect se : character.getStatusEffects()) {
 				if (se.isSexEffect() && character.getStatusEffectDuration(se) != -1 && se.renderInEffectsPanel()) {
 					int timerHeight = (int) ((character.getStatusEffectDuration(se)/(60*60*6f))*100);
 	
@@ -3093,7 +3089,7 @@ public enum RenderingEngine {
 			}
 			
 			if(!character.isPlayer()) {
-				for (AbstractFetish f : character.getFetishes(true)) {
+				for (Fetish f : character.getFetishes(true)) {
 					panelSB.append(
 						"<div class='icon effect'>"
 							+ "<div class='icon-content'>"
@@ -3130,7 +3126,7 @@ public enum RenderingEngine {
 				return;
 			}
 		}
-		
+
 		if(charactersInventoryToRender==null) {
 			for(Entry<AbstractWeapon, Integer> entry : Main.game.getPlayer().getCell().getInventory().getAllWeaponsInInventory().entrySet()) {
 				if(entry.getKey().getRarity()!=Rarity.QUEST) {
@@ -3159,7 +3155,7 @@ public enum RenderingEngine {
 					uniqueItemCount++;
 				}
 			}
-			
+
 		} else {
 			for(Entry<AbstractWeapon, Integer> entry : charactersInventoryToRender.getAllWeaponsInInventory().entrySet()) {
 				if(entry.getKey().getRarity()!=Rarity.QUEST || !charactersInventoryToRender.isPlayer()) {
@@ -3204,7 +3200,7 @@ public enum RenderingEngine {
 				}
 			}
 		}
-		
+
 	}
 
 	public static int getPageRight() {

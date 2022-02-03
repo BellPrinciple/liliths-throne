@@ -21,11 +21,11 @@ import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.XMLSaving;
-import com.lilithsthrone.world.places.AbstractPlaceType;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.Aquatic;
 import com.lilithsthrone.world.places.Darkness;
 import com.lilithsthrone.world.places.GenericPlace;
+import com.lilithsthrone.world.places.PlaceUpgrade;
+import com.lilithsthrone.world.places.PlaceType;
 
 /**
  * @since 0.1.0
@@ -38,7 +38,7 @@ public class Cell implements XMLSaving {
 	
 	public static int refundMoney = 0;
 	
-	private AbstractWorldType type;
+	private WorldType type;
 
 	private Vector2i location;
 
@@ -50,7 +50,7 @@ public class Cell implements XMLSaving {
 	private Set<String> charactersHomeIds;
 	private Set<String> charactersGlobalIds;
 
-	public Cell(AbstractWorldType type, Vector2i location) {
+	public Cell(WorldType type, Vector2i location) {
 		this.type = type;
 		this.location = location;
 		
@@ -82,7 +82,7 @@ public class Cell implements XMLSaving {
 		return element;
 	}
 	
-	public static Cell loadFromXML(Element parentElement, Document doc, AbstractWorldType type) {
+	public static Cell loadFromXML(Element parentElement, Document doc, WorldType type) {
 		
 		Element locationElement = ((Element)parentElement.getElementsByTagName("location").item(0));
 		
@@ -136,11 +136,11 @@ public class Cell implements XMLSaving {
 		return WorldType.getIdFromWorldType(type)+"-X:"+location.getX()+"-Y:"+location.getY();
 	}
 
-	public AbstractWorldType getType() {
+	public WorldType getType() {
 		return type;
 	}
 
-	public void setType(AbstractWorldType type) {
+	public void setType(WorldType type) {
 		this.type = type;
 	}
 	
@@ -174,8 +174,8 @@ public class Cell implements XMLSaving {
 			place.getPlaceType().applyInventoryInit(this.getInventory());
 		}
 	}
-	
-	public AbstractPlaceType getPlaceType() {
+
+	public PlaceType getPlaceType() {
 		return getPlace().getPlaceType();
 	}
 
@@ -230,11 +230,11 @@ public class Cell implements XMLSaving {
 		return getPlace().getDialogue(this, withRandomEncounter, forceEncounter);
 	}
 
-	public boolean addPlaceUpgrade(AbstractPlaceUpgrade upgrade) {
+	public boolean addPlaceUpgrade(PlaceUpgrade upgrade) {
 		return getPlace().addPlaceUpgrade(this, upgrade);
 	}
 	
-	public boolean removePlaceUpgrade(AbstractPlaceUpgrade upgrade) {
+	public boolean removePlaceUpgrade(PlaceUpgrade upgrade) {
 		return getPlace().removePlaceUpgrade(this, upgrade);
 	}
 	

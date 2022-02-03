@@ -7,10 +7,8 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTongueType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -48,7 +46,7 @@ public interface TongueType extends BodyPartTypeInterface {
 	}
 
 	@Override
-	default AbstractBodyCoveringType getBodyCoveringType(Body b) {
+	default BodyCoveringType getBodyCoveringType(Body b) {
 		return BodyCoveringType.TONGUE;
 	}
 
@@ -243,7 +241,7 @@ public interface TongueType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, int defaultLength, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String tongueBodyDescription, List<TongueModifier> defaultRacialTongueModifiers) {
+		public Special(BodyCoveringType coveringType, Race race, int defaultLength, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String tongueBodyDescription, List<TongueModifier> defaultRacialTongueModifiers) {
 			super(coveringType, race, defaultLength, name, namePlural, descriptorsMasculine, descriptorsFeminine, tongueBodyDescription, defaultRacialTongueModifiers);
 		}
 
@@ -255,7 +253,7 @@ public interface TongueType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractTongueType> table = new TypeTable<>(
+	TypeTable<TongueType> table = new TypeTable<>(
 		TongueType::sanitize,
 		TongueType.class,
 		AbstractTongueType.class,
@@ -267,7 +265,7 @@ public interface TongueType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractTongueType getTongueTypeFromId(String id) {
+	static TongueType getTongueTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -280,15 +278,15 @@ public interface TongueType extends BodyPartTypeInterface {
 		};
 	}
 
-	public static String getIdFromTongueType(AbstractTongueType tongueType) {
+	static String getIdFromTongueType(TongueType tongueType) {
 		return tongueType.getId();
 	}
 
-	public static List<AbstractTongueType> getAllTongueTypes() {
+	static List<TongueType> getAllTongueTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractTongueType> getTongueTypes(AbstractRace r) {
+	static List<TongueType> getTongueTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 

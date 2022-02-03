@@ -1,7 +1,6 @@
 package com.lilithsthrone.game.character.body;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
 import com.lilithsthrone.game.character.body.types.HornType;
 import com.lilithsthrone.game.character.body.valueEnums.HornLength;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -18,12 +17,12 @@ public class Horn implements BodyPartInterface {
 	public static final int MAXIMUM_ROWS = 3;
 	public static final int MAXIMUM_HORNS_PER_ROW = 4;
 	
-	protected AbstractHornType type;
+	protected HornType type;
 	protected int rows;
 	protected int hornsPerRow;
 	protected int length;
 	
-	public Horn(AbstractHornType type, int length) {
+	public Horn(HornType type, int length) {
 		if(length<=0) {
 			this.length = 0;
 			this.type = HornType.NONE;
@@ -45,7 +44,7 @@ public class Horn implements BodyPartInterface {
 	}
 	
 	@Override
-	public AbstractHornType getType() {
+	public HornType getType() {
 		return type;
 	}
 	
@@ -74,11 +73,11 @@ public class Horn implements BodyPartInterface {
 		return type.getDescriptor(gc);
 	}
 
-	public void setType(AbstractHornType type) {
+	public void setType(HornType type) {
 		this.type = type;
 	}
 
-	public String setType(GameCharacter owner, AbstractHornType type) {
+	public String setType(GameCharacter owner, HornType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;
 			if(owner!=null) {
@@ -234,7 +233,7 @@ public class Horn implements BodyPartInterface {
 		this.length = Math.max(0, Math.min(length, HornLength.FOUR_MASSIVE.getMaximumValue()));
 	}
 
-	public void setTypeAndLength(AbstractHornType type, int length) {
+	public void setTypeAndLength(HornType type, int length) {
 		setType(type);
 		setHornLength(length);
 	}

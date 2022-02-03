@@ -7,7 +7,6 @@ import java.util.Map;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.inventory.ColourReplacement;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.SvgUtil;
@@ -354,7 +353,7 @@ public enum SVGImages {
 		stretching = load("/com/lilithsthrone/res/statusEffects/sexEffects/stretching.svg");
 		holeTooBig = load("/com/lilithsthrone/res/statusEffects/sexEffects/holeTooBig.svg");
 		activeSexBackground = load("/com/lilithsthrone/res/statusEffects/sexEffects/active_background.svg");
-		for(AbstractItemEffectType effect : ItemEffectType.getAllEffectTypes()) {
+		for(ItemEffectType effect : ItemEffectType.getAllEffectTypes()) {
 			String tempString = load("/com/lilithsthrone/res/items/refined_background.svg", effect.getColour());
 			refinedBackgroundMap.put(effect.getColour(), tempString);
 		}

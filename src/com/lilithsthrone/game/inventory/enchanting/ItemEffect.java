@@ -8,10 +8,8 @@ import org.w3c.dom.Element;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -31,14 +29,14 @@ public class ItemEffect implements XMLSaving {
 	public static final int SEALED_COST_DRAIN = 100;
 	public static final int SEALED_COST_MAJOR_DRAIN = 500;
 	
-	private AbstractItemEffectType itemEffectType;
+	private ItemEffectType itemEffectType;
 	private TFModifier primaryModifier;
 	private TFModifier secondaryModifier;
 	private TFPotency potency;
 	private int limit;
 	private ItemEffectTimer timer;
 	
-	public ItemEffect(AbstractItemEffectType itemEffectType) {
+	public ItemEffect(ItemEffectType itemEffectType) {
 		this.itemEffectType = itemEffectType;
 		this.primaryModifier = null;
 		this.secondaryModifier = null;
@@ -47,7 +45,7 @@ public class ItemEffect implements XMLSaving {
 		this.timer = new ItemEffectTimer();
 	}
 	
-	public ItemEffect(AbstractItemEffectType itemEffectType, TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit) {
+	public ItemEffect(ItemEffectType itemEffectType, TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit) {
 		this.itemEffectType = itemEffectType;
 		this.primaryModifier = primaryModifier;
 		this.secondaryModifier = secondaryModifier;
@@ -102,7 +100,7 @@ public class ItemEffect implements XMLSaving {
 		Element effect = doc.createElement("effect");
 		parentElement.appendChild(effect);
 
-		XMLUtil.addAttribute(doc, effect, "type", ItemEffectType.getIdFromItemEffectType(getItemEffectType()));
+		XMLUtil.addAttribute(doc, effect, "type", getItemEffectType().getId());
 		XMLUtil.addAttribute(doc, effect, "mod1", (getPrimaryModifier()==null?"null":getPrimaryModifier().toString()));
 		XMLUtil.addAttribute(doc, effect, "mod2", (getSecondaryModifier()==null?"null":getSecondaryModifier().toString()));
 		XMLUtil.addAttribute(doc, effect, "potency", (getPotency()==null?"null":getPotency().toString()));
@@ -315,7 +313,7 @@ public class ItemEffect implements XMLSaving {
 					secondaryMod = TFModifier.TF_TYPE_1;
 				}
 				if(target.getSubspeciesOverride()==Subspecies.HALF_DEMON) {
-					AbstractSubspecies halfSubspecies = target.getHalfDemonSubspecies();
+					var halfSubspecies = target.getHalfDemonSubspecies();
 					switch(getPrimaryModifier()) {
 						case TF_EARS:
 						case TF_HAIR:
@@ -334,7 +332,7 @@ public class ItemEffect implements XMLSaving {
 						case TF_SKIN:
 			 				return AbstractItemEffectType.getRacialEffect(halfSubspecies.getRace(), getPrimaryModifier(), secondaryMod, getPotency(), user, target).applyEffect();
 						case TF_TAIL:
-							List<AbstractTailType> tailTypes = RacialBody.valueOfRace(halfSubspecies.getRace()).getTailType();
+							List<TailType> tailTypes = RacialBody.valueOfRace(halfSubspecies.getRace()).getTailType();
 							if(tailTypes.size()==1 && tailTypes.get(0)==TailType.NONE) {
 				 				return AbstractItemEffectType.getRacialEffect(Race.DEMON, getPrimaryModifier(), secondaryMod, getPotency(), user, target).applyEffect();
 							} else {
@@ -385,11 +383,11 @@ public class ItemEffect implements XMLSaving {
 		return cost;
 	}
 	
-	public AbstractItemEffectType getItemEffectType() {
+	public ItemEffectType getItemEffectType() {
 		return itemEffectType;
 	}
 
-	public void setItemEffectType(AbstractItemEffectType itemEffectType) {
+	public void setItemEffectType(ItemEffectType itemEffectType) {
 		this.itemEffectType = itemEffectType;
 	}
 

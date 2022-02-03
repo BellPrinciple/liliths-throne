@@ -5,13 +5,10 @@ import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.fetishes.Fetish;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -25,7 +22,7 @@ public interface VaginaType extends BodyPartTypeInterface {
 
 	boolean isPubicHairAllowed();
 
-	AbstractFluidType getFluidType();
+	FluidType getFluidType();
 
 	boolean isEggLayer();
 
@@ -507,11 +504,11 @@ public interface VaginaType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractFluidType fluidType, AbstractRace race, boolean eggLayer, List<String> names, List<String> namesPlural, List<String> descriptors, String transformationDescription, String bodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
+		public Special(BodyCoveringType coveringType, FluidType fluidType, Race race, boolean eggLayer, List<String> names, List<String> namesPlural, List<String> descriptors, String transformationDescription, String bodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
 			super(coveringType, fluidType, race, eggLayer, names, namesPlural, descriptors, transformationDescription, bodyDescription, defaultRacialOrificeModifiers);
 		}
 
-		public Special(AbstractBodyCoveringType skinType, AbstractFluidType fluidType, AbstractRace race, boolean eggLayer, String transformationDescription, String bodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
+		public Special(BodyCoveringType skinType, FluidType fluidType, Race race, boolean eggLayer, String transformationDescription, String bodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
 			super(skinType, fluidType, race, eggLayer, transformationDescription, bodyDescription, defaultRacialOrificeModifiers);
 		}
 
@@ -523,7 +520,7 @@ public interface VaginaType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractVaginaType> table = new TypeTable<>(
+	TypeTable<VaginaType> table = new TypeTable<>(
 		VaginaType::sanitize,
 		VaginaType.class,
 		AbstractVaginaType.class,
@@ -535,7 +532,7 @@ public interface VaginaType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractVaginaType getVaginaTypeFromId(String id) {
+	static VaginaType getVaginaTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -547,15 +544,15 @@ public interface VaginaType extends BodyPartTypeInterface {
 		};
 	}
 
-	public static String getIdFromVaginaType(AbstractVaginaType vaginaType) {
+	static String getIdFromVaginaType(VaginaType vaginaType) {
 		return vaginaType.getId();
 	}
 
-	public static List<AbstractVaginaType> getAllVaginaTypes() {
+	static List<VaginaType> getAllVaginaTypes() {
 		return table.listByRace();
 	}
 
-	public static List<AbstractVaginaType> getVaginaTypes(AbstractRace r) {
+	static List<VaginaType> getVaginaTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

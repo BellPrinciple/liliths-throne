@@ -10,18 +10,15 @@ import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEv
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInventoryEventListener;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.effects.TreeEntry;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.NameTriplet;
 import com.lilithsthrone.game.combat.DamageType;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
@@ -42,20 +39,16 @@ import com.lilithsthrone.game.dialogue.utils.PhoneDialogue;
 import com.lilithsthrone.game.dialogue.utils.SpellManagement;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Pathing;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -433,7 +426,7 @@ public class MiscController {
 	}
 	
 	public static void initEncyclopediaClothingListeners() {
-		for (AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for (ClothingType clothing : ClothingType.getAllClothing()) {
 			String id = clothing.getId();
 			if (MainController.document.getElementById(id) != null) {
 				MainController.addTooltipListeners(id, new TooltipInventoryEventListener().setGenericClothing(clothing));
@@ -442,7 +435,7 @@ public class MiscController {
 	}
 	
 	public static void initEncyclopediaItemListeners() {
-		for (AbstractItemType item : ItemType.getAllItems()) {
+		for (ItemType item : ItemType.getAllItems()) {
 			String id = ItemType.getItemToIdMap().get(item);
 			if (MainController.document.getElementById(id) != null) {
 				MainController.addTooltipListeners(id, new TooltipInventoryEventListener().setGenericItem(item));
@@ -451,7 +444,7 @@ public class MiscController {
 	}
 	
 	public static void initEncyclopediaWeaponListeners() {
-		for (AbstractWeaponType weapon : WeaponType.getAllWeapons()) {
+		for (WeaponType weapon : WeaponType.getAllWeapons()) {
 			String id = weapon.getId();
 			if (MainController.document.getElementById(id) != null) {
 				MainController.addTooltipListeners(id, new TooltipInventoryEventListener().setGenericWeapon(weapon, weapon.getAvailableDamageTypes().get(0)));
@@ -532,7 +525,7 @@ public class MiscController {
 				&& !currentNode.equals(PhoneDialogue.CONTACTS_CHARACTER);
 		
 		String id;
-		for (AbstractPerk perk : Perk.getAllPerks()) {
+		for (Perk perk : Perk.getAllPerks()) {
 			if (perk.isHiddenPerk()) {
 				id = "HIDDEN_PERK_"+Perk.getIdFromPerk(perk);
 				if (MainController.document.getElementById(id) != null) {
@@ -565,8 +558,8 @@ public class MiscController {
 		}
 		
 		for (int i = 0; i<PerkManager.ROWS; i++) {
-			for (Map.Entry<PerkCategory, List<TreeEntry<PerkCategory, AbstractPerk>>> entry : PerkManager.MANAGER.getPerkTree(character).get(i).entrySet()) {
-				for (TreeEntry<PerkCategory, AbstractPerk> e : entry.getValue()) {
+			for (Map.Entry<PerkCategory, List<TreeEntry<PerkCategory, Perk>>> entry : PerkManager.MANAGER.getPerkTree(character).get(i).entrySet()) {
+				for (TreeEntry<PerkCategory, Perk> e : entry.getValue()) {
 					id = i+"_"+e.getCategory()+"_"+Perk.getIdFromPerk(e.getEntry());
 					if (MainController.document.getElementById(id) != null) {
 						MainController.addTooltipListeners(id, new TooltipInformationEventListener().setLevelUpPerk(i, e.getEntry(), character, availableForSelection));
@@ -600,7 +593,7 @@ public class MiscController {
 	}
 	
 	public static void initCombatMoveListeners() {
-		for (AbstractCombatMove move : CombatMove.getAllCombatMoves()) {
+		for (CombatMove move : CombatMove.getAllCombatMoves()) {
 			GameCharacter character = CombatMovesSetup.getTarget();
 			String id = "MOVE_"+move.getIdentifier();
 			if (MainController.document.getElementById(id) != null) {
@@ -624,7 +617,7 @@ public class MiscController {
 		} else {
 			targetedCharacter = Main.game.getPlayer();
 		}
-		for (AbstractFetish f : Fetish.getAllFetishes()) {
+		for (Fetish f : Fetish.getAllFetishes()) {
 			String id = "FETISH_"+Fetish.getIdFromFetish(f);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -663,7 +656,7 @@ public class MiscController {
 		}
 	}
 	
-	public static void initMapListeners(AbstractWorldType worldType, boolean interactive) {
+	public static void initMapListeners(WorldType worldType, boolean interactive) {
 		Cell[][] grid = Main.game.getWorlds().get(worldType).getGrid();
 		for (int i = grid[0].length-1; i>=0; i--) {
 			for (int j = 0; j<grid.length; j++) {
@@ -700,7 +693,7 @@ public class MiscController {
 		}
 	}
 	
-	static void initMapLocationListeners(AbstractWorldType worldType, Cell c, int i, int j, boolean interactive) {
+	static void initMapLocationListeners(WorldType worldType, Cell c, int i, int j, boolean interactive) {
 		String id = "MAP_NODE_"+i+"_"+j;
 		if (MainController.document.getElementById(id) != null) {
 			MainController.addTooltipListeners(id, new TooltipInformationEventListener().setCell(c));

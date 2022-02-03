@@ -14,7 +14,6 @@ import com.lilithsthrone.game.character.body.types.FootType;
 import com.lilithsthrone.game.character.body.types.HornType;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.combat.Attack;
@@ -46,7 +45,7 @@ public class CMSpecialAttack {
             false,
             true,
             false,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.DAZED, 1)),
+			Map.of(StatusEffect.DAZED, 1),
             Util.newHashMapOfValues()) {
         @Override
         public DamageType getDamageType(int turnIndex, GameCharacter source) {
@@ -128,7 +127,7 @@ public class CMSpecialAttack {
             false,
             true,
             false,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.VULNERABLE, 2))) {
+			Util.newHashMapOfValues(new Value<StatusEffect, Integer>(StatusEffect.VULNERABLE, 2))) {
         @Override
         public DamageType getDamageType(int turnIndex, GameCharacter source) {
         	return DamageType.UNARMED.getParentDamageType(source, null);
@@ -203,7 +202,7 @@ public class CMSpecialAttack {
             false,
             true,
             false,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.DAZED, 2))) {
+			Util.newHashMapOfValues(new Value<StatusEffect, Integer>(StatusEffect.DAZED, 2))) {
         @Override
         public DamageType getDamageType(int turnIndex, GameCharacter source) {
         	return DamageType.UNARMED.getParentDamageType(source, null);
@@ -281,7 +280,7 @@ public class CMSpecialAttack {
             false,
             true,
             false,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.VULNERABLE, 1))) {
+			Util.newHashMapOfValues(new Value<StatusEffect, Integer>(StatusEffect.VULNERABLE, 1))) {
         @Override
         public DamageType getDamageType(int turnIndex, GameCharacter source) {
         	return DamageType.UNARMED.getParentDamageType(source, null);
@@ -357,7 +356,7 @@ public class CMSpecialAttack {
             false,
             true,
             false,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.CRIPPLE, 3))) {
+			Util.newHashMapOfValues(new Value<StatusEffect, Integer>(StatusEffect.CRIPPLE, 3))) {
         @Override
         public DamageType getDamageType(int turnIndex, GameCharacter source) {
         	return DamageType.UNARMED.getParentDamageType(source, null);
@@ -433,7 +432,7 @@ public class CMSpecialAttack {
             false,
             true,
             false,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.DAZED, 2))) {
+			Util.newHashMapOfValues(new Value<StatusEffect, Integer>(StatusEffect.DAZED, 2))) {
         @Override
         public DamageType getDamageType(int turnIndex, GameCharacter source) {
         	return DamageType.UNARMED.getParentDamageType(source, null);
@@ -507,7 +506,7 @@ public class CMSpecialAttack {
             false,
             true,
             false,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.DAZED, 2))) {
+			Util.newHashMapOfValues(new Value<StatusEffect, Integer>(StatusEffect.DAZED, 2))) {
         @Override
         public DamageType getDamageType(int turnIndex, GameCharacter source) {
         	return DamageType.UNARMED.getParentDamageType(source, null);
@@ -581,14 +580,14 @@ public class CMSpecialAttack {
             false,
             true,
             false,
-			Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.CRIPPLE, 2))) {
+			Util.newHashMapOfValues(new Value<StatusEffect, Integer>(StatusEffect.CRIPPLE, 2))) {
         @Override
         public DamageType getDamageType(int turnIndex, GameCharacter source) {
         	return DamageType.UNARMED.getParentDamageType(source, null);
     	}
     	@Override
-        public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
-    		Map<AbstractStatusEffect, Integer> effects = Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.CRIPPLE, 2));
+        public Map<StatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
+    		Map<StatusEffect, Integer> effects = Util.newHashMapOfValues(new Value<>(StatusEffect.CRIPPLE, 2));
 
             if(caster.getFaceType().getTags().contains(BodyPartTag.FACE_VENOMOUS_TEETH)) {
             	effects.put(StatusEffect.POISONED, 6);
@@ -711,7 +710,7 @@ public class CMSpecialAttack {
             true,
             false,
             Util.newHashMapOfValues(),
-            Util.newHashMapOfValues(new Value<AbstractStatusEffect, Integer>(StatusEffect.VULNERABLE, 2))) {
+            Util.newHashMapOfValues(new Value<StatusEffect, Integer>(StatusEffect.VULNERABLE, 2))) {
         @Override
         public DamageType getDamageType(int turnIndex, GameCharacter source) {
         	return DamageType.UNARMED.getParentDamageType(source, null);

@@ -50,7 +50,6 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
@@ -152,15 +151,15 @@ public class Kazik extends NPC {
 		this.setBodySize(BodySize.TWO_AVERAGE.getMedianValue());
 
 		// Coverings:
-		this.setEyeCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_ferret_eye"), PresetColour.EYE_BLUE_DARK));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_ferret_fur"), CoveringPattern.MARKED, CoveringModifier.SILKEN, PresetColour.COVERING_BROWN_DARK, false, PresetColour.COVERING_GREY, false), true);
+		this.setEyeCovering(new Covering(BodyCoveringType.table.of("dsg_ferret_eye"), PresetColour.EYE_BLUE_DARK));
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("dsg_ferret_fur"), CoveringPattern.MARKED, CoveringModifier.SILKEN, PresetColour.COVERING_BROWN_DARK, false, PresetColour.COVERING_GREY, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, PresetColour.SKIN_DARK), true);
-		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_ferret_hair"), PresetColour.COVERING_BROWN_DARK), true);
+
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("dsg_ferret_hair"), PresetColour.COVERING_BROWN_DARK), true);
 		this.setHairLength(HairLength.ZERO_BALD.getMinimumValue());
 		this.setHairStyle(HairStyle.NONE);
 
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_ferret_body_hair"), PresetColour.COVERING_WHITE), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("dsg_ferret_body_hair"), PresetColour.COVERING_WHITE), false);
 		this.setUnderarmHair(BodyHair.FOUR_NATURAL);
 		this.setAssHair(BodyHair.FOUR_NATURAL);
 		this.setPubicHair(BodyHair.FOUR_NATURAL);
@@ -267,10 +266,10 @@ public class Kazik extends NPC {
 	public void dailyUpdate() {
 		clearNonEquippedInventory(false);
 
-		List<AbstractClothingType> clothingTypesToSell = new ArrayList<>();
+		var clothingTypesToSell = new ArrayList<ClothingType>();
 		List<InventorySlot> extraSlots = Util.newArrayListOfValues(InventorySlot.NECK, InventorySlot.WRIST, InventorySlot.FINGER, InventorySlot.ANKLE);
 		
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(var clothing : ClothingType.getAllClothing()) {
 			if((clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_KATE) || (clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN) && extraSlots.contains(clothing.getEquipSlots().get(0))))
 					&& clothing.getRarity() == Rarity.COMMON
 					&& clothing.getClothingSet() == null
@@ -284,7 +283,7 @@ public class Kazik extends NPC {
 			clothingTypesToSell.remove(Util.random.nextInt(clothingTypesToSell.size()));
 		}
 		
-		for(AbstractClothingType type : clothingTypesToSell) {
+		for(var type : clothingTypesToSell) {
 			this.addClothing(Main.game.getItemGen().generateClothing(type, false), false);
 		}
 		
@@ -292,7 +291,7 @@ public class Kazik extends NPC {
 		while(clothingTypesToSell.size() >= 5) { // 5 types left for enchanted items
 			clothingTypesToSell.remove(Util.random.nextInt(clothingTypesToSell.size()));
 		}
-		for(AbstractClothingType type : clothingTypesToSell) {
+		for(var type : clothingTypesToSell) {
 			AbstractClothing c = Main.game.getItemGen().generateClothingWithEnchantment(type);
 			c.setEnchantmentKnown(this, true);
 			this.addClothing(c, false);

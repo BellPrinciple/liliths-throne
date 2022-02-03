@@ -265,14 +265,11 @@ import com.lilithsthrone.game.inventory.ItemGeneration;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.occupantManagement.MilkingRoom;
 import com.lilithsthrone.game.occupantManagement.OccupancyUtil;
@@ -301,7 +298,6 @@ import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.time.DateAndTime;
 import com.lilithsthrone.utils.time.DayPeriod;
 import com.lilithsthrone.utils.time.SolarElevationAngle;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.Generation;
 import com.lilithsthrone.world.Season;
@@ -309,7 +305,6 @@ import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.World;
 import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
@@ -351,9 +346,9 @@ public class Game implements XMLSaving {
 	private Map<String, OffspringSeed> OffspringSeedMap;
 
 	/** Key is the world to which the Enforcers patrol. Value is a List of Enforcer groups who are patrolling. */
-	private Map<AbstractWorldType, List<List<String>>> savedEnforcers;
+	private Map<WorldType, List<List<String>>> savedEnforcers;
 	
-	private Map<AbstractWorldType, World> worlds;
+	private Map<WorldType, World> worlds;
 	private long lastAutoSaveTime = 0;
 	private long secondsPassed; // Seconds passed since the start of the game
 	private LocalDateTime startingDate;
@@ -418,7 +413,7 @@ public class Game implements XMLSaving {
 		id = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
 		
 		worlds = new HashMap<>();
-		for(AbstractWorldType type : WorldType.getAllWorldTypes()) {
+		for(WorldType type : WorldType.getAllWorldTypes()) {
 			worlds.put(type, null);
 		}
 		
@@ -802,7 +797,7 @@ public class Game implements XMLSaving {
 
 			Element savedEnforcersNode = doc.createElement("savedEnforcers");
 			game.appendChild(savedEnforcersNode);
-			for(Entry<AbstractWorldType, List<List<String>>> entrySet : Main.game.savedEnforcers.entrySet()) {
+			for(Entry<WorldType, List<List<String>>> entrySet : Main.game.savedEnforcers.entrySet()) {
 				Element element = doc.createElement("world");
 				savedEnforcersNode.appendChild(element);
 				XMLUtil.addAttribute(doc, element, "type", WorldType.getIdFromWorldType(entrySet.getKey()));
@@ -1040,7 +1035,7 @@ public class Game implements XMLSaving {
 					NodeList nodes = savedEnforcersNode.getElementsByTagName("world");
 					for (int i=0; i < nodes.getLength(); i++) {
 						Element world = (Element) nodes.item(i);
-						AbstractWorldType worldType = WorldType.getWorldTypeFromId(world.getAttribute("type"));
+						WorldType worldType = WorldType.getWorldTypeFromId(world.getAttribute("type"));
 						
 						List<List<String>> loadedEnforcers = new ArrayList<>();
 						
@@ -1216,7 +1211,7 @@ public class Game implements XMLSaving {
 				if(Main.isVersionOlderThan(loadingVersion, "0.4.9.1")) {
 					Main.game.getWorlds().put(WorldType.getWorldTypeFromId("innoxia_dominion_sex_shop"), gen.worldGeneration(WorldType.getWorldTypeFromId("innoxia_dominion_sex_shop")));
 				}
-				for(AbstractWorldType wt : WorldType.getAllWorldTypes()) {
+				for(WorldType wt : WorldType.getAllWorldTypes()) {
 					if(Main.game.worlds.get(wt)==null) {
 						Main.game.getWorlds().put(wt, gen.worldGeneration(wt));
 					}
@@ -3238,8 +3233,8 @@ public class Game implements XMLSaving {
 			}
 
 //			System.out.println("SE here");
-//			for(Map<AbstractStatusEffect, String> e : Main.game.getPlayer().getStatusEffectDescriptions().values()) {
-//				for(Entry<AbstractStatusEffect, String> entry : e.entrySet()) {
+//			for(Map<StatusEffect, String> e : Main.game.getPlayer().getStatusEffectDescriptions().values()) {
+//				for(Entry<StatusEffect, String> entry : e.entrySet()) {
 //					System.out.println(entry.getKey()+": "+entry.getValue());
 //				}
 //			}
@@ -4631,7 +4626,7 @@ public class Game implements XMLSaving {
 		return charactersHome;
 	}
 	
-	public List<NPC> getCharactersPresent(AbstractWorldType worldType, AbstractPlaceType placeType) {
+	public List<NPC> getCharactersPresent(WorldType worldType, PlaceType placeType) {
 		Cell cell = worlds.get(worldType).getCell(placeType);
 		
 		return getCharactersPresent(cell);
@@ -4641,7 +4636,7 @@ public class Game implements XMLSaving {
 		return getCharactersPresent(cell.getType(), cell.getLocation());
 	}
 	
-	public List<NPC> getCharactersPresent(AbstractWorldType worldType, Vector2i location) {
+	public List<NPC> getCharactersPresent(WorldType worldType, Vector2i location) {
 		List<NPC> charactersPresent = new ArrayList<>();
 		
 		if(getWorlds().get(worldType).getCell(location).getCharactersPresentIds()!=null) {
@@ -4755,7 +4750,7 @@ public class Game implements XMLSaving {
 		return worlds.get(player.getWorldLocation());
 	}
 
-	public Map<AbstractWorldType, World> getWorlds() {
+	public Map<WorldType, World> getWorlds() {
 		return worlds;
 	}
 
@@ -5449,17 +5444,17 @@ public class Game implements XMLSaving {
 		return i;
 	}
 
-	public List<List<String>> getSavedEnforcers(AbstractWorldType worldType) {
+	public List<List<String>> getSavedEnforcers(WorldType worldType) {
 		savedEnforcers.putIfAbsent(worldType, new ArrayList<>());
 		return savedEnforcers.get(worldType);
 	}
 	
-	public void addSavedEnforcers(AbstractWorldType worldType, List<String> enforcerIds) {
+	public void addSavedEnforcers(WorldType worldType, List<String> enforcerIds) {
 		savedEnforcers.putIfAbsent(worldType, new ArrayList<>());
 		savedEnforcers.get(worldType).add(enforcerIds);
 	}
 	
-	public void removeSavedEnforcers(AbstractWorldType worldType, List<String> enforcerIds) {
+	public void removeSavedEnforcers(WorldType worldType, List<String> enforcerIds) {
 		savedEnforcers.putIfAbsent(worldType, new ArrayList<>());
 		savedEnforcers.get(worldType).removeIf((innerList) -> !Collections.disjoint(innerList, enforcerIds));
 	}
@@ -6048,7 +6043,7 @@ public class Game implements XMLSaving {
 	
 	public void generateAlleywayItem() {
 		if(!Main.game.isSillyModeEnabled() || Math.random()<0.99f) {
-			List<AbstractItemType> itemsToDrawFrom = ItemType.getDominionAlleywayItems();
+			List<ItemType> itemsToDrawFrom = ItemType.getDominionAlleywayItems();
 			
 			if(Main.game.getPlayer().getWorldLocation()==WorldType.BAT_CAVERNS) {
 				itemsToDrawFrom = ItemType.getBatCavernItems();
@@ -6079,7 +6074,7 @@ public class Game implements XMLSaving {
 			Main.game.getPlayerCell().getInventory().addClothing((AbstractClothing) randomItem);
 			
 		} else {
-			List<AbstractClothingType> randomClothingList = new ArrayList<>(ClothingType.getAllClothing());
+			List<ClothingType> randomClothingList = new ArrayList<>(ClothingType.getAllClothing());
 			randomClothingList.removeIf((clothing) ->
 					(!clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_KATE)
 						&& !clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN)
@@ -6092,12 +6087,12 @@ public class Game implements XMLSaving {
 	}
 	
 	public void generateAlleywayWeapon() {
-		List<AbstractWeaponType> weapons = new ArrayList<>(WeaponType.getAllWeapons());
+		List<WeaponType> weapons = new ArrayList<>(WeaponType.getAllWeapons());
 		weapons.removeIf(w -> !w.getItemTags().contains(ItemTag.DOMINION_ALLEYWAY_SPAWN));
 		randomItem = Main.game.getItemGen().generateWeapon(weapons.get(Util.random.nextInt(weapons.size())));
 	}
 	
-	public boolean isOffspringEncounterAvailable(AbstractWorldType worldType, AbstractPlaceType placeType) {
+	public boolean isOffspringEncounterAvailable(WorldType worldType, PlaceType placeType) {
 		List<OffspringSeed> offspringAvailable = Main.game.getOffspringNotSpawned(
 				os-> (os.getSubspecies()==Subspecies.HALF_DEMON
 					?(os.getHalfDemonSubspecies().isAbleToNaturallySpawnInLocation(worldType, placeType))
@@ -6106,7 +6101,7 @@ public class Game implements XMLSaving {
 		return !offspringAvailable.isEmpty();
 	}
 	
-	public void initOffspringEncounter(AbstractWorldType worldType, AbstractPlaceType placeType) {
+	public void initOffspringEncounter(WorldType worldType, PlaceType placeType) {
 		List<OffspringSeed> offspringAvailable = Main.game.getOffspringNotSpawned(
 				os-> (os.getSubspecies()==Subspecies.HALF_DEMON
 					?(os.getHalfDemonSubspecies().isAbleToNaturallySpawnInLocation(worldType, placeType))
@@ -6240,8 +6235,8 @@ public class Game implements XMLSaving {
 	}
 	
 	public void initGamblersInElisTavern() {
-		AbstractWorldType wt = WorldType.getWorldTypeFromId("innoxia_fields_elis_tavern_alley");
-		AbstractPlaceType pt = PlaceType.getPlaceTypeFromId("innoxia_fields_elis_tavern_alley_dice_poker");
+		WorldType wt = WorldType.getWorldTypeFromId("innoxia_fields_elis_tavern_alley");
+		PlaceType pt = PlaceType.getPlaceTypeFromId("innoxia_fields_elis_tavern_alley_dice_poker");
 		
 		List<NPC> gamblersPresent = Main.game.getCharactersPresent(Main.game.getWorlds().get(wt).getCell(pt));
 		for(NPC npc : gamblersPresent) {
@@ -6264,12 +6259,12 @@ public class Game implements XMLSaving {
 	 * Moves the currently-used inventory from whatever bank it's in to the bank that the player is currently in.
 	 */
 	public void moveBankInventory() {
-		Map<AbstractWorldType, AbstractPlaceType> bankPlaces = new HashMap<>();
+		Map<WorldType, PlaceType> bankPlaces = new HashMap<>();
 		bankPlaces.put(WorldType.getWorldTypeFromId("innoxia_dominion_bank"), PlaceType.getPlaceTypeFromId("innoxia_dominion_bank_deposit_box"));
 		bankPlaces.put(WorldType.getWorldTypeFromId("innoxia_fields_elis_bank"), PlaceType.getPlaceTypeFromId("innoxia_fields_elis_bank_deposit_box"));
 		
 		CharacterInventory inventory = null;
-		for(Entry<AbstractWorldType, AbstractPlaceType> entry : bankPlaces.entrySet()) {
+		for(Entry<WorldType, PlaceType> entry : bankPlaces.entrySet()) {
 			CharacterInventory bankInventory = Main.game.getWorlds().get(entry.getKey()).getCell(entry.getValue()).getInventory();
 			if(!bankInventory.isEmpty()) {
 				inventory = new CharacterInventory(bankInventory);
@@ -6279,7 +6274,7 @@ public class Game implements XMLSaving {
 		}
 		
 		if(inventory!=null) {
-			for(Entry<AbstractWorldType, AbstractPlaceType> entry : bankPlaces.entrySet()) {
+			for(Entry<WorldType, PlaceType> entry : bankPlaces.entrySet()) {
 				if(Main.game.getPlayer().getWorldLocation()==entry.getKey()) {
 					Main.game.getWorlds().get(entry.getKey()).getCell(entry.getValue()).setInventory(inventory);
 				}

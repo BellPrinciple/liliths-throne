@@ -13,9 +13,8 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.XMLSaving;
-import com.lilithsthrone.world.places.AbstractPlaceType;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.PlaceType;
+import com.lilithsthrone.world.places.PlaceUpgrade;
 
 /**
  * @since 0.1.0
@@ -29,9 +28,9 @@ public class World implements XMLSaving {
 	public static final int CELL_SIZE = 64;
 	
 	private Cell[][] grid;
-	private AbstractWorldType worldType;
+	private WorldType worldType;
 
-	public World(int worldWidth, int worldHeight, Cell[][] grid, AbstractWorldType worldType) {
+	public World(int worldWidth, int worldHeight, Cell[][] grid, WorldType worldType) {
 		WORLD_WIDTH = worldWidth;
 		WORLD_HEIGHT = worldHeight;
 
@@ -62,9 +61,8 @@ public class World implements XMLSaving {
 	}
 	
 	public static World loadFromXML(Element parentElement, Document doc) {
-		AbstractWorldType type = WorldType.EMPTY;
 		String worldType = parentElement.getAttribute("worldType");
-		type = WorldType.getWorldTypeFromId(worldType);
+		var type = WorldType.getWorldTypeFromId(worldType);
 		
 		int width = Integer.valueOf(parentElement.getAttribute("width"));
 		int height = Integer.valueOf(parentElement.getAttribute("height"));
@@ -107,7 +105,7 @@ public class World implements XMLSaving {
 	 * @param place The AbstractPlaceType to find a Cell of.
 	 * @return A Cell of the PlaceType defined by the argument 'place'. If there are multiple Cells with the same PlaceType, the first one that is found is returned. Returns null if place type does not exist.
 	 */
-	public Cell getCell(AbstractPlaceType place) {
+	public Cell getCell(PlaceType place) {
 		for(int i=0; i<grid.length; i++) {
 			for(int j=0; j<grid[0].length; j++) {
 				if(grid[i][j].getPlace().getPlaceType().equals(place)) {
@@ -122,7 +120,7 @@ public class World implements XMLSaving {
 	 * @param place The AbstractPlaceType to find all Cells of.
 	 * @return A List of Cells of the PlaceType defined by the argument 'place'.
 	 */
-	public List<Cell> getCells(AbstractPlaceType place) {
+	public List<Cell> getCells(PlaceType place) {
 		List<Cell> cellsFound = new ArrayList<>();
 		
 		for(int i=0; i<grid.length; i++) {
@@ -140,7 +138,7 @@ public class World implements XMLSaving {
 	 * @param place The AbstractPlaceUpgrade to find all Cells of.
 	 * @return A List of Cells which have the specified upgrade.
 	 */
-	public List<Cell> getCells(AbstractPlaceUpgrade placeUpgrade) {
+	public List<Cell> getCells(PlaceUpgrade placeUpgrade) {
 		List<Cell> cellsFound = new ArrayList<>();
 		
 		for(int i=0; i<grid.length; i++) {
@@ -159,7 +157,7 @@ public class World implements XMLSaving {
 	 * @param place The place of the cell which is being looked for.
 	 * @return The cell which has the 'place' place type that's closest to the starting location. Will return null if no cell with the defined place type is found.
 	 */
-	public Cell getClosestCell(Vector2i location, AbstractPlaceType place) {
+	public Cell getClosestCell(Vector2i location, PlaceType place) {
 		float distance = 10000f;
 		Cell closestCell = null;
 		for(int i=0; i<grid.length; i++) {
@@ -181,7 +179,7 @@ public class World implements XMLSaving {
 	 * @param place The place of the cell which is being looked for.
 	 * @return The distance to the cell which has the 'place' place type that's closest to the starting location. Will return 10000 if no cell with the defined place type is found.
 	 */
-	public float getClosestCellDistance(Vector2i location, AbstractPlaceType place) {
+	public float getClosestCellDistance(Vector2i location, PlaceType place) {
 		float distance = 10000f;
 		for(int i=0; i<grid.length; i++) {
 			for(int j=0; j<grid[0].length; j++) {
@@ -200,7 +198,7 @@ public class World implements XMLSaving {
 	 * @param place The PlaceType to find a Cell of.
 	 * @return A random, unoccupied Cell of the PlaceType defined by the argument 'place'. If there are no unoccupied Cells with this PlaceType, a random occupied one is returned instead.
 	 */
-	public Cell getRandomUnoccupiedCell(AbstractPlaceType place) {
+	public Cell getRandomUnoccupiedCell(PlaceType place) {
 		List<Cell> cells = new ArrayList<>();
 		for(int i=0; i<grid.length; i++) {
 			for(int j=0; j<grid[0].length; j++) {
@@ -219,15 +217,15 @@ public class World implements XMLSaving {
 	}
 	
 
-	public Cell getRandomCell(AbstractPlaceType place) {
+	public Cell getRandomCell(PlaceType place) {
 		return getRandomCell(place, Util.random);
 	}
-	
+
 	/**
 	 * @param place The PlaceType to find a Cell of.
 	 * @return A Cell of the PlaceType defined by the argument 'place'. If there are multiple Cells with the same PlaceType, a random one is returned.
 	 */
-	public Cell getRandomCell(AbstractPlaceType place, Random random) {
+	public Cell getRandomCell(PlaceType place, Random random) {
 		List<Cell> corridorCells = new ArrayList<>();
 		for(int i=0; i<grid.length; i++) {
 			for(int j=0; j<grid[0].length; j++) {
@@ -247,11 +245,11 @@ public class World implements XMLSaving {
 		return grid;
 	}
 
-	public AbstractWorldType getWorldType() {
+	public WorldType getWorldType() {
 		return worldType;
 	}
 
-	public void setCellType(AbstractWorldType worldType) {
+	public void setCellType(WorldType worldType) {
 		this.worldType = worldType;
 	}
 

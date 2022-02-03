@@ -6,11 +6,8 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractMouthType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTongueType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -23,7 +20,7 @@ import static com.lilithsthrone.game.dialogue.utils.UtilText.parse;
  */
 public interface MouthType extends BodyPartTypeInterface {
 
-	AbstractTongueType getTongueType();
+	TongueType getTongueType();
 
 	@Override
 	default String getDeterminer(GameCharacter c) {
@@ -127,11 +124,11 @@ public interface MouthType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractRace race, AbstractTongueType tongueType) {
+		public Special(Race race, TongueType tongueType) {
 			super(race, tongueType);
 		}
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, AbstractTongueType tongueType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<String> lipNames, List<String> lipNamesPlural, List<String> lipDescriptorsMasculine, List<String> lipDescriptorsFeminine, String mouthBodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
+		public Special(BodyCoveringType coveringType, Race race, TongueType tongueType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<String> lipNames, List<String> lipNamesPlural, List<String> lipDescriptorsMasculine, List<String> lipDescriptorsFeminine, String mouthBodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
 			super(coveringType, race, tongueType, names, namesPlural, descriptorsMasculine, descriptorsFeminine, lipNames, lipNamesPlural, lipDescriptorsMasculine, lipDescriptorsFeminine, mouthBodyDescription, defaultRacialOrificeModifiers);
 		}
 
@@ -143,7 +140,7 @@ public interface MouthType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractMouthType> table = new TypeTable<>(
+	TypeTable<MouthType> table = new TypeTable<>(
 		MouthType::sanitize,
 		MouthType.class,
 		AbstractMouthType.class,
@@ -155,7 +152,7 @@ public interface MouthType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractMouthType getMouthTypeFromId(String id) {
+	static MouthType getMouthTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -167,15 +164,15 @@ public interface MouthType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromMouthType(AbstractMouthType mouthType) {
+	static String getIdFromMouthType(MouthType mouthType) {
 		return mouthType.getId();
 	}
 
-	public static List<AbstractMouthType> getAllMouthTypes() {
+	static List<MouthType> getAllMouthTypes() {
 		return table.listByRace();
 	}
 
-	public static List<AbstractMouthType> getMouthTypes(AbstractRace r) {
+	static List<MouthType> getMouthTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	

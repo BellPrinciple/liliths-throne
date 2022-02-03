@@ -9,18 +9,17 @@ import java.util.Set;
 
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.fetishes.Fetish;
-import com.lilithsthrone.game.character.markings.AbstractTattooType;
+import com.lilithsthrone.game.character.markings.TattooType;
 import com.lilithsthrone.game.character.markings.Tattoo;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
+import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
+import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.SVGImages;
 import com.lilithsthrone.utils.SvgUtil;
@@ -40,7 +39,7 @@ public class EnchantingUtils {
 	public static AbstractItem craftItem(AbstractCoreItem ingredient, List<ItemEffect> effects) {
 		AbstractItem craftedItem = null;
 		
-		craftedItem = Main.game.getItemGen().generateItem((AbstractItemType) ingredient.getEnchantmentItemType(effects));
+		craftedItem = Main.game.getItemGen().generateItem((ItemType) ingredient.getEnchantmentItemType(effects));
 		
 		List<ItemEffect> effectsToBeAdded = new ArrayList<>();
 		effectsToBeAdded.addAll(effects);
@@ -66,7 +65,7 @@ public class EnchantingUtils {
 		List<ItemEffect> effectsToBeAdded = new ArrayList<>(effects);
 		
 		craftedClothing = Main.game.getItemGen().generateClothing(
-				(AbstractClothingType) ingredient.getEnchantmentItemType(effects),
+				(ClothingType) ingredient.getEnchantmentItemType(effects),
 				((AbstractClothing)ingredient).getColours(),
 				effectsToBeAdded);
 		
@@ -122,7 +121,7 @@ public class EnchantingUtils {
 		effectsToBeAdded.addAll(effects);
 		
 		craftedWeapon = Main.game.getItemGen().generateWeapon(
-				(AbstractWeaponType) ingredient.getEnchantmentItemType(effects),
+				(WeaponType) ingredient.getEnchantmentItemType(effects),
 				((AbstractWeapon) ingredient).getDamageType(),
 				((AbstractWeapon)ingredient).getColours());
 		
@@ -140,9 +139,9 @@ public class EnchantingUtils {
 	
 	public static String getPotionName(AbstractCoreItem ingredient, List<ItemEffect> effects) {
 		
-		if(ingredient.getEnchantmentItemType(effects) instanceof AbstractClothingType
-				|| ingredient.getEnchantmentItemType(effects) instanceof AbstractTattooType
-				|| ingredient.getEnchantmentItemType(effects) instanceof AbstractWeaponType) {
+		if(ingredient.getEnchantmentItemType(effects) instanceof ClothingType
+				|| ingredient.getEnchantmentItemType(effects) instanceof TattooType
+				|| ingredient.getEnchantmentItemType(effects) instanceof WeaponType) {
 			return ingredient.getName();
 		}
 		
@@ -164,7 +163,7 @@ public class EnchantingUtils {
 			}
 		}
 		
-		String potionName = ((AbstractItemType) ingredient.getEnchantmentItemType(effects)).getName(false);
+		String potionName = ((ItemType) ingredient.getEnchantmentItemType(effects)).getName(false);
 		String potionDescriptor = "";
 		String potionSuffix = "";
 		String potionPreSuffix = "";
@@ -324,9 +323,9 @@ public class EnchantingUtils {
 	
 	public static String getSVGString(AbstractCoreItem ingredient, List<ItemEffect> effects) {
 		
-		if(ingredient.getEnchantmentItemType(effects) instanceof AbstractClothingType
-				|| ingredient.getEnchantmentItemType(effects) instanceof AbstractTattooType
-				|| ingredient.getEnchantmentItemType(effects) instanceof AbstractWeaponType) {
+		if(ingredient.getEnchantmentItemType(effects) instanceof ClothingType
+				|| ingredient.getEnchantmentItemType(effects) instanceof TattooType
+				|| ingredient.getEnchantmentItemType(effects) instanceof WeaponType) {
 			return ingredient.getSVGString();
 		}
 		
@@ -362,7 +361,7 @@ public class EnchantingUtils {
 		
 		SVGImageSB.append("<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getRefinedBackgroundMap().get(ingredient.getEnchantmentEffect().getColour())+"</div>");
 		
-		String s = ((AbstractItemType) ingredient.getEnchantmentItemType(effects)).getSVGString();
+		String s = ((ItemType) ingredient.getEnchantmentItemType(effects)).getSVGString();
 		
 		Colour colour = PresetColour.CLOTHING_BLUE_LIGHT;
 		

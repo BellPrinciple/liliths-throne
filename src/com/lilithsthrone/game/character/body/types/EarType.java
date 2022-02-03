@@ -6,10 +6,8 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
@@ -447,7 +445,7 @@ public interface EarType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String earTransformationDescription, String earBodyDescription) {
+		public Special(BodyCoveringType coveringType, Race race, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String earTransformationDescription, String earBodyDescription) {
 			super(coveringType, race, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, earTransformationDescription, earBodyDescription);
 		}
 
@@ -459,7 +457,7 @@ public interface EarType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractEarType> table = new TypeTable<>(
+	TypeTable<EarType> table = new TypeTable<>(
 		EarType::sanitize,
 		EarType.class,
 		AbstractEarType.class,
@@ -471,7 +469,7 @@ public interface EarType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractEarType getEarTypeFromId(String id) {
+	static EarType getEarTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -485,15 +483,15 @@ public interface EarType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromEarType(AbstractEarType earType) {
+	static String getIdFromEarType(EarType earType) {
 		return earType.getId();
 	}
 
-	public static List<AbstractEarType> getAllEarTypes() {
+	static List<EarType> getAllEarTypes() {
 		return table.listByRace();
 	}
 
-	public static List<AbstractEarType> getEarTypes(AbstractRace r) {
+	static List<EarType> getEarTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

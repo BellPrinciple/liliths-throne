@@ -6,10 +6,8 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
@@ -506,7 +504,7 @@ public interface ArmType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String handName, String handNamePlural, List<String> handDescriptorsMasculine, List<String> handDescriptorsFeminine, String fingerName, String fingerNamePlural, List<String> fingerDescriptorsMasculine, List<String> fingerDescriptorsFeminine, String armTransformationDescription, String armBodyDescription) {
+		public Special(BodyCoveringType coveringType, Race race, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String handName, String handNamePlural, List<String> handDescriptorsMasculine, List<String> handDescriptorsFeminine, String fingerName, String fingerNamePlural, List<String> fingerDescriptorsMasculine, List<String> fingerDescriptorsFeminine, String armTransformationDescription, String armBodyDescription) {
 			super(coveringType, race, name, namePlural, descriptorsMasculine, descriptorsFeminine, handName, handNamePlural, handDescriptorsMasculine, handDescriptorsFeminine, fingerName, fingerNamePlural, fingerDescriptorsMasculine, fingerDescriptorsFeminine, armTransformationDescription, armBodyDescription);
 		}
 
@@ -518,7 +516,7 @@ public interface ArmType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractArmType> table = new TypeTable<>(
+	TypeTable<ArmType> table = new TypeTable<>(
 		ArmType::sanitize,
 		ArmType.class,
 		AbstractArmType.class,
@@ -530,7 +528,7 @@ public interface ArmType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractArmType getArmTypeFromId(String id) {
+	static ArmType getArmTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -545,15 +543,15 @@ public interface ArmType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromArmType(AbstractArmType armType) {
+	static String getIdFromArmType(ArmType armType) {
 		return armType.getId();
 	}
 
-	public static List<AbstractArmType> getAllArmTypes() {
+	static List<ArmType> getAllArmTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractArmType> getArmTypes(AbstractRace r) {
+	static List<ArmType> getArmTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	

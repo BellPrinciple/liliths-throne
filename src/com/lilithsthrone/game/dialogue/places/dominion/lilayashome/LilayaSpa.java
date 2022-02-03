@@ -27,7 +27,6 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJobSetting;
@@ -77,7 +76,7 @@ public class LilayaSpa {
 	
 	private static boolean massageSlaveSex = false;
 	
-    private static List<AbstractItemType> getDrinks() {
+    private static List<ItemType> getDrinks() {
     	return Util.newArrayListOfValues(
     			ItemType.getItemTypeFromId("innoxia_race_human_vanilla_water"),
     			ItemType.getItemTypeFromId("innoxia_race_bat_fruit_bats_juice_box"),

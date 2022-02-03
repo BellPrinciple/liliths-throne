@@ -141,15 +141,15 @@ public class Nizhoni extends NPC {
 		this.setBodySize(BodySize.TWO_AVERAGE.getMedianValue());
 
 		// Coverings:
-		this.setEyeCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_raccoon_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_HAZEL, false, PresetColour.EYE_HAZEL, false));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_raccoon_fur"), CoveringPattern.MARKED, CoveringModifier.SMOOTH, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_WHITE, false), true);
+		this.setEyeCovering(new Covering(BodyCoveringType.table.of("dsg_raccoon_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_HAZEL, false, PresetColour.EYE_HAZEL, false));
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("dsg_raccoon_fur"), CoveringPattern.MARKED, CoveringModifier.SMOOTH, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_WHITE, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, PresetColour.SKIN_DARK), true);
 
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_raccoon_hair"), CoveringPattern.HIGHLIGHTS, CoveringModifier.FLUFFY, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_ORANGE, false), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("dsg_raccoon_hair"), CoveringPattern.HIGHLIGHTS, CoveringModifier.FLUFFY, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_ORANGE, false), false);
 		this.setHairLength(HairLength.THREE_SHOULDER_LENGTH.getMedianValue());
 		this.setHairStyle(HairStyle.PIXIE);
-		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_raccoon_body_hair"), PresetColour.COVERING_BLACK), false);
+
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("dsg_raccoon_body_hair"), PresetColour.COVERING_BLACK), false);
 		this.setUnderarmHair(BodyHair.FOUR_NATURAL);
 		this.setAssHair(BodyHair.FOUR_NATURAL);
 		this.setPubicHair(BodyHair.FOUR_NATURAL);

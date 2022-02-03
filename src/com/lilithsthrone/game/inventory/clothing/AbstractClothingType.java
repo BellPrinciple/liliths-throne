@@ -29,7 +29,6 @@ import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
 import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
@@ -128,7 +127,7 @@ public abstract class AbstractClothingType implements ClothingType {
 	protected Map<InventorySlot, List<InventorySlot>> incompatibleSlotsMap;
 	protected Map<InventorySlot, List<DisplacementType>> displacementTypesAvailableWithoutNONE;
 	
-	private AbstractSetBonus clothingSet;
+	private final SetBonus clothingSet;
 	private Rarity rarity;
 	private List<ColourReplacement> colourReplacements;
 	/** Key is the colour index which should copy another colour upon weapon generation. Value is the colour index which should be copied. */
@@ -156,7 +155,7 @@ public abstract class AbstractClothingType implements ClothingType {
 			Femininity femininityRestriction,
 			InventorySlot equipSlot,
 			Rarity rarity,
-			AbstractSetBonus clothingSet,
+			SetBonus clothingSet,
 			String pathName,
 			List<ItemEffect> effects,
 			List<BlockedParts> blockedPartsList,
@@ -204,7 +203,7 @@ public abstract class AbstractClothingType implements ClothingType {
 			Femininity femininityRestriction,
 			List<InventorySlot> equipSlots,
 			Rarity rarity,
-			AbstractSetBonus clothingSet,
+			SetBonus clothingSet,
 			String pathName,
 			Map<InventorySlot, String> pathNameEquipped,
 			List<ItemEffect> effects,
@@ -1344,16 +1343,16 @@ public abstract class AbstractClothingType implements ClothingType {
 		return baseValue;
 	}
 
-	static Map<AbstractSetBonus, List<AbstractClothingType>> clothingSetMap = new HashMap<>();
+	static Map<SetBonus, List<ClothingType>> clothingSetMap = new HashMap<>();
 
-	public static List<AbstractClothingType> getClothingInSet(AbstractSetBonus set) {
+	public static List<ClothingType> getClothingInSet(SetBonus set) {
 		if (clothingSetMap.get(set) != null) {
 			return clothingSetMap.get(set);
 		}
 
-		List<AbstractClothingType> setOfClothing = new ArrayList<>();
+		var setOfClothing = new ArrayList<ClothingType>();
 
-		for (AbstractClothingType c : ClothingType.getAllClothing()) {
+		for(var c : ClothingType.table.list()) {
 			if (c.getClothingSet() == set) {
 				setOfClothing.add(c);
 			}
@@ -2009,7 +2008,7 @@ public abstract class AbstractClothingType implements ClothingType {
 	}
 
 	@Override
-	public AbstractSetBonus getClothingSet() {
+	public SetBonus getClothingSet() {
 		return clothingSet;
 	}
 
@@ -2519,5 +2518,15 @@ public abstract class AbstractClothingType implements ClothingType {
 			return new HashSet<>();
 		}
 		return orificeOtherModifiers;
+	}
+
+	@Override
+	public List<BlockedParts> getBlockedParts(InventorySlot slot) {
+		return blockedPartsMap.getOrDefault(slot, List.of());
+	}
+
+	@Override
+	public List<InventorySlot> getIncompatibleSlots(InventorySlot slot) {
+		return incompatibleSlotsMap.getOrDefault(slot, List.of());
 	}
 }

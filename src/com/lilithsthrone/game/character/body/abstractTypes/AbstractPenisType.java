@@ -12,12 +12,10 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.TesticleType;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -37,14 +35,14 @@ public abstract class AbstractPenisType implements PenisType {
 	protected static final Map<String, Integer> BASE_NAMES_SINGULAR = Util.newHashMapOfValues(new Value<>("cock", 3), new Value<>("dick", 2), new Value<>("shaft", 1));
 	protected static final Map<String, Integer> BASE_NAMES_PLURAL = Util.newHashMapOfValues(new Value<>("cocks", 3), new Value<>("dicks", 2), new Value<>("shafts", 1));
 	
-	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private BodyCoveringType coveringType;
+	private Race race;
 
 	private String transformationName;
 
 	private boolean pubicHairAllowed;
 	
-	private AbstractTesticleType testicleType;
+	private TesticleType testicleType;
 	
 	private String additionalTransformationEffect;
 	
@@ -79,9 +77,9 @@ public abstract class AbstractPenisType implements PenisType {
 	 * @param bodyDescription A sentence or two to describe this penis type, as seen in the character view screen. It should follow the same format as all of the other entries in the PenisType class.
 	 * @param defaultRacialPenetrationModifiers Which modifiers this penis naturally spawns with.
 	 */
-	public AbstractPenisType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
-			AbstractTesticleType testicleType,
+	public AbstractPenisType(BodyCoveringType coveringType,
+			Race race,
+			TesticleType testicleType,
 			List<String> namesFeminine,
 			List<String> namesPluralFeminine,
 			List<String> namesMasculine,
@@ -116,9 +114,9 @@ public abstract class AbstractPenisType implements PenisType {
 		}
 	}
 	
-	public AbstractPenisType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
-			AbstractTesticleType testicleType,
+	public AbstractPenisType(BodyCoveringType coveringType,
+			Race race,
+			TesticleType testicleType,
 			String transformationDescription,
 			String bodyDescription,
 			List<PenetrationModifier> defaultRacialPenetrationModifiers) {
@@ -145,10 +143,10 @@ public abstract class AbstractPenisType implements PenisType {
 
 				this.mod = mod;
 				this.fromExternalFile = true;
-				
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
+
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 
@@ -224,7 +222,7 @@ public abstract class AbstractPenisType implements PenisType {
 	}
 
 	@Override
-	public AbstractTesticleType getTesticleType() {
+	public TesticleType getTesticleType() {
 		return testicleType;
 	}
 
@@ -326,12 +324,12 @@ public abstract class AbstractPenisType implements PenisType {
 	}
 	
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

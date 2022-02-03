@@ -19,7 +19,6 @@ import com.lilithsthrone.game.sex.ArousalIncrease;
 import com.lilithsthrone.game.sex.SexControl;
 import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAgainstWall;
@@ -47,7 +46,7 @@ import com.lilithsthrone.utils.Util.Value;
  */
 public class PositioningMenu {
 	
-	private static AbstractSexPosition position;
+	private static SexPosition position;
 	public static Map<GameCharacter, SexSlot> positioningSlots;
 	private static GameCharacter targetedCharacter;
 	private static List<SexSlot> availableSlots;

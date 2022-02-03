@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
@@ -362,10 +361,10 @@ public enum Occupation {
 
 	private String name;
 	private String description;
-	private AbstractPerk associatedPerk;
+	private Perk associatedPerk;
 	private List<OccupationTag> occupationTags;
 
-	private Occupation(AbstractPerk associatedPerk,
+	Occupation(Perk associatedPerk,
 			String name,
 			String description,
 			OccupationTag... occupationTags) {
@@ -394,7 +393,7 @@ public enum Occupation {
 		return occupationTags.contains(OccupationTag.PLAYER_ONLY);
 	}
 
-	public AbstractPerk getAssociatedPerk() {
+	public Perk getAssociatedPerk() {
 		return associatedPerk;
 	}
 	

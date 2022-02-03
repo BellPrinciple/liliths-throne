@@ -235,19 +235,19 @@ public interface FootType {
 		}
 	}
 
-	Table<AbstractFootType> table = new Table<>(s->s) {{
-		addFields(FootType.class,AbstractFootType.class);
+	Table<FootType> table = new Table<>(s->s) {{
+		addFields(FootType.class,FootType.class);
 	}};
 
-	public static AbstractFootType getFootTypeFromId(String id) {
+	static FootType getFootTypeFromId(String id) {
 		return table.of(id);
 	}
 
-	public static String getIdFromFootType(AbstractFootType footType) {
+	static String getIdFromFootType(FootType footType) {
 		return footType.getId();
 	}
 
-	public static List<AbstractFootType> getAllFootTypes() {
+	static List<FootType> getAllFootTypes() {
 		return table.list();
 	}
 }

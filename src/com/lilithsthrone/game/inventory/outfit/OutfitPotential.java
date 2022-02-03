@@ -3,7 +3,7 @@ package com.lilithsthrone.game.inventory.outfit;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
+import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 
@@ -14,11 +14,11 @@ import com.lilithsthrone.utils.colours.Colour;
  */
 public class OutfitPotential {
 
-	private List<AbstractClothingType> types;
+	private List<ClothingType> types;
 
 	private List<List<Colour>> colours;
 	
-	public OutfitPotential(List<AbstractClothingType> types, List<List<Colour>> colours) {
+	public OutfitPotential(List<ClothingType> types, List<List<Colour>> colours) {
 		if(types!=null) {
 			this.types = types;
 		} else {
@@ -28,7 +28,7 @@ public class OutfitPotential {
 	}
 	
 
-	public List<AbstractClothingType> getTypes() {
+	public List<ClothingType> getTypes() {
 		return types;
 	}
 

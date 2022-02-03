@@ -52,7 +52,6 @@ import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
 import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -69,8 +68,6 @@ import com.lilithsthrone.game.character.persona.NameTriplet;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.pregnancy.Litter;
 import com.lilithsthrone.game.character.pregnancy.PregnancyPossibility;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
@@ -87,14 +84,12 @@ import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.SetBonus;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.AbstractPotion;
 import com.lilithsthrone.game.inventory.item.FetishPotion;
 import com.lilithsthrone.game.inventory.item.ItemType;
@@ -106,7 +101,7 @@ import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexControl;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.SexType;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
@@ -116,8 +111,8 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
+import com.lilithsthrone.world.WorldType;
+import com.lilithsthrone.world.places.PlaceType;
 
 /**
  * @since 0.1.0
@@ -140,14 +135,14 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 	protected Set<SexSlot> sexPositionPreferences;
 	
 	protected Gender genderPreference = null;
-	protected AbstractSubspecies subspeciesPreference = null;
+	protected Subspecies subspeciesPreference = null;
 	protected RaceStage raceStagePreference = null;
 
 	// Tracks what items/clothing should be generated for this NPC:
 	protected boolean generateExtraItems;
 	protected boolean generateDisposableClothing;
 	protected boolean generateExtraClothing;
-	
+
 	protected NPC(boolean isImported,
 			NameTriplet nameTriplet,
 			String surname,
@@ -157,11 +152,11 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			int birthDay,
 			int level,
 			Gender startingGender,
-			AbstractSubspecies startingSubspecies,
+			Subspecies startingSubspecies,
 			RaceStage stage,
 			CharacterInventory inventory,
-			AbstractWorldType worldLocation,
-			AbstractPlaceType startingPlace,
+			WorldType worldLocation,
+			PlaceType startingPlace,
 			boolean addedToContacts,
 			NPCGenerationFlag... generationFlags) {
 		super(nameTriplet, surname, description, level,
@@ -177,7 +172,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		this.generateExtraItems = false;
 		this.generateDisposableClothing = false;
 		this.generateExtraClothing = false;
-		
+
 		sexPositionPreferences = new HashSet<>();
 		
 		buyModifier=0.75f;
@@ -342,7 +337,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		XMLUtil.createXMLElementWithValue(doc, npcSpecific, "generateExtraItems", String.valueOf(generateExtraItems));
 		XMLUtil.createXMLElementWithValue(doc, npcSpecific, "generateDisposableClothing", String.valueOf(generateDisposableClothing));
 		XMLUtil.createXMLElementWithValue(doc, npcSpecific, "generateExtraClothing", String.valueOf(generateExtraClothing));
-		
+
 		Element valuesElement = doc.createElement("NPCValues");
 		npcSpecific.appendChild(valuesElement);
 		for(NPCFlagValue value : NPCFlagValues) {
@@ -367,7 +362,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		
 		if(npcSpecificElement!=null) {
 			npc.setLastTimeEncountered(Long.valueOf(((Element)npcSpecificElement.getElementsByTagName("lastTimeEncountered").item(0)).getAttribute("value")));
-			
+
 			npc.setBuyModifier(Float.valueOf(((Element)npcSpecificElement.getElementsByTagName("buyModifier").item(0)).getAttribute("value")));
 			npc.setSellModifier(Float.valueOf(((Element)npcSpecificElement.getElementsByTagName("sellModifier").item(0)).getAttribute("value")));
 			if(((Element)npcSpecificElement.getElementsByTagName("playerSurrenderCount").item(0))!=null) {
@@ -385,7 +380,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			if(((Element)npcSpecificElement.getElementsByTagName("generateExtraClothing").item(0))!=null) {
 				npc.generateExtraClothing = (Boolean.valueOf(((Element)npcSpecificElement.getElementsByTagName("generateExtraClothing").item(0)).getAttribute("value")));
 			}
-	
+
 			NodeList npcValues = ((Element) npcSpecificElement.getElementsByTagName("NPCValues").item(0)).getElementsByTagName("NPCValue");
 			for(int i = 0; i < npcValues.getLength(); i++){
 				Element e = (Element) npcValues.item(i);
@@ -402,7 +397,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			} catch(Exception ex) {
 			}
 		}
-		// It seems, that upon loading an NPC, the fleshSubspecies unintentionally gets set to Subspecies.HUMAN, even if it's clearly not a human. 
+		// It seems, that upon loading an NPC, the fleshSubspecies unintentionally gets set to Subspecies.HUMAN, even if it's clearly not a human.
 		// This clears the cached value, so it's being recalculated just-in-time. ~Stadler76
 		npc.getBody().setFleshSubspecies(null);
 	}
@@ -432,7 +427,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 	public void hourlyUpdate() {
 		hourlyUpdate(Main.game.getHourOfDay());
 	}
-	
+
 	/**
 	 * Applies an hourly update to this NPC.
 	 * @param hour The hour (0-23) which is the currently active hour during the game's update loop.
@@ -1032,9 +1027,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			return Util.newArrayListOfValues(Main.game.getItemGen().generateItem(ItemType.ADDICTION_REMOVAL));
 			
 		} else {
-			AbstractItemType raceIngredient = getSubspecies().getAttributeItem(this);
-			AbstractItemType raceTFIngredient = getSubspecies().getTransformativeItem(this);
-			AbstractItemType book = getSubspecies().getBook();
+			ItemType raceIngredient = getSubspecies().getAttributeItem(this);
+			ItemType raceTFIngredient = getSubspecies().getTransformativeItem(this);
+			ItemType book = getSubspecies().getBook();
 			
 			
 			if(rnd<0.6 && raceTFIngredient!=null) {
@@ -1326,7 +1321,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			this.setVaginaUrethraVirgin(vaginaUrethraVirgin);
 			
 		} else {
-			AbstractRacialBody racialBody = RacialBody.valueOfRace(this.getBody().getFleshSubspecies().getRace());
+			RacialBody racialBody = RacialBody.valueOfRace(this.getBody().getFleshSubspecies().getRace());
 			if(this.getGenderIdentity().getType()==PronounType.FEMININE) {
 				this.setFemininity(racialBody.getFemaleFemininity());
 				
@@ -1481,7 +1476,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		return genderPreference;
 	}
 	
-	public AbstractSubspecies getSubspeciesPreference() {
+	public Subspecies getSubspeciesPreference() {
 		if(subspeciesPreference == null) {
 			generatePartnerPreferences();
 		}
@@ -1507,7 +1502,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		return Main.game.getPlayer().getFriendlyOccupants().contains(this.getId()) || (this.isSlave() && this.getOwner().isPlayer());
 	}
 	
-	public AbstractItemEffectType getItemEnchantmentEffect(AbstractItemType itemType, BodyPartInterface bodyPart) {
+	public ItemEffectType getItemEnchantmentEffect(ItemType itemType, BodyPartInterface bodyPart) {
 		if (Util.newArrayListOfValues(Race.HUMAN, Race.NONE).contains(bodyPart.getType().getRace())) {
 			return ItemEffectType.getRacialEffectType(Race.HUMAN);
 		}
@@ -1516,7 +1511,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 
 	public TransformativePotion generateTransformativePotion(GameCharacter target) {
 		List<PossibleItemEffect> possibleEffects = new ArrayList<>();
-		AbstractItemType itemType = ItemType.getItemTypeFromId("innoxia_race_human_bread_roll");
+		ItemType itemType = ItemType.getItemTypeFromId("innoxia_race_human_bread_roll");
 		int numberOfTransformations = (2+Util.random.nextInt(4)) * (target.hasFetish(Fetish.FETISH_TRANSFORMATION_RECEIVING)?2:1);
 		boolean cannotTransformPreference = getSubspeciesPreference().getRace()==Race.DEMON || getSubspeciesPreference().getRace()==Race.ANGEL;
 		
@@ -1528,7 +1523,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		}
 		
 		if(Main.getProperties().getForcedTFPreference() != FurryPreference.HUMAN) {
-			AbstractSubspecies transformationItemSubspecies = cannotTransformPreference
+			Subspecies transformationItemSubspecies = cannotTransformPreference
 																	?target.getSubspecies()
 																	:getSubspeciesPreference();
 			
@@ -1538,7 +1533,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			}
 		}
 		
-		AbstractItemType genitalsItemType = itemType;
+		ItemType genitalsItemType = itemType;
 		boolean skipGenitalsTF = false;
 		
 		Body body;
@@ -2278,7 +2273,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		
 		// Preferred race:
 		
-		AbstractSubspecies species = getSubspecies();
+		Subspecies species = getSubspecies();
 		RaceStage stage = getRaceStage();
 		
 		if(Main.getProperties().getForcedTFPreference()==FurryPreference.HUMAN) {
@@ -2291,7 +2286,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 				species = Subspecies.HARPY;
 			}
 			if((getRace()==Race.WOLF_MORPH || getRace()==Race.DOG_MORPH) && Math.random()>0.8f) {
-				List<AbstractSubspecies> availableRaces = new ArrayList<>();
+				List<Subspecies> availableRaces = new ArrayList<>();
 				availableRaces.add(Subspecies.CAT_MORPH);
 				availableRaces.add(Subspecies.HARPY);
 				availableRaces.add(Subspecies.COW_MORPH);
@@ -2301,7 +2296,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			
 			// Chance for race to be random:
 			if(Math.random() <= Main.getProperties().getRandomRacePercentage()) {
-				List<AbstractSubspecies> availableRaces = new ArrayList<>();
+				List<Subspecies> availableRaces = new ArrayList<>();
 				availableRaces.add(Subspecies.CAT_MORPH);
 				availableRaces.add(Subspecies.DOG_MORPH);
 				availableRaces.add(Subspecies.HARPY);
@@ -2363,9 +2358,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		
 		List<PossibleItemEffect> possibleEffects = new ArrayList<>();
 		
-		AbstractItemType itemType = ItemType.FETISH_UNREFINED;
+		ItemType itemType = ItemType.FETISH_UNREFINED;
 		
-		AbstractFetish currentTopFetish = null, currentBottomFetish = null;
+		Fetish currentTopFetish = null, currentBottomFetish = null;
 		TFModifier currentTopModifier = null, currentBottomModifier = null;
 		TFPotency currentTopPotency = null, currentBottomPotency = null, currentTopRemovePotency = null, currentBottomRemovePotency = null;;
 		
@@ -2412,7 +2407,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 				break;
 		}
 		
-		for(AbstractFetish fetish : Fetish.getAllFetishes()) {
+		for(Fetish fetish : Fetish.getAllFetishes()) {
 			// Skip bottom & solo fetishes, as well as the TF & Kink giving fetishes
 			// NPCs will otherwise always end up forcing them on the player
 			if (!fetish.isTopFetish() || fetish.equals(Fetish.FETISH_TRANSFORMATION_GIVING) || fetish.equals(Fetish.FETISH_KINK_GIVING)) {
@@ -2635,14 +2630,14 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		// currently, all unpaired fetishes seem like they are something the owner would want to share,
 		// but setting the second argument to false will cause the NPC to instead have an aversion to 
 		// giving the player the same fetish
-		Map<AbstractFetish, Boolean> unpairedFetishMap = new HashMap<>();
+		Map<Fetish, Boolean> unpairedFetishMap = new HashMap<>();
 
 		unpairedFetishMap.put(Fetish.FETISH_BIMBO, true);
 		unpairedFetishMap.put(Fetish.FETISH_CROSS_DRESSER, true);
 		unpairedFetishMap.put(Fetish.FETISH_INCEST, true);
 		unpairedFetishMap.put(Fetish.FETISH_MASTURBATION, true);
 		
-		for(Entry<AbstractFetish, Boolean> entry : unpairedFetishMap.entrySet()) {
+		for(Entry<Fetish, Boolean> entry : unpairedFetishMap.entrySet()) {
 			currentTopFetish = entry.getKey();
 			Boolean wantsToShare = entry.getValue();
 			
@@ -3039,7 +3034,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 					return new Value<>(condom, UtilText.parse(this, "[npc.Name] grabs a "+condom.getName()+" from out of [npc.her] inventory..."));
 				}
 			}
-			
+
 			// Other clothing (only doms equip clothing on sub partners during sex):
 			if(Main.sex.isDom(this) && !Main.sex.isDom(partner)) {
 				Map<AbstractClothing, Integer> availableClothingInInventory = new HashMap<>(this.getAllClothingInInventory());
@@ -3053,7 +3048,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 						}
 					}
 				}
-				
+
 				for(AbstractClothing clothing : availableClothingInInventory.keySet()) {
 					boolean wantsToEquip = false;
 					if(clothing.getClothingType().getDefaultItemTags().contains(ItemTag.ENABLE_SEX_EQUIP)) {
@@ -3084,7 +3079,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 							}
 							wantsToEquip = true;
 						}
-						
+
 						// BDSM:
 						if((clothing.getClothingType().getClothingSet()==SetBonus.getSetBonusFromId("innoxia_bdsm") || clothing.getClothingType().getClothingSet()==SetBonus.getSetBonusFromId("sage_ltxset"))) {
 							wantsToEquip = this.getFetishDesire(Fetish.FETISH_BONDAGE_APPLIER).isPositive();
@@ -3110,7 +3105,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		}
 		return null;
 	}
-	
+
 	public Value<AbstractItem, String> getSexItemToUse(GameCharacter partner) {
 		if(Main.game.isInSex() && !Main.sex.isCharacterInanimateFromImmobilisation(this)) {
 			List<GameCharacter> charactersPenetratingThisNpc = new ArrayList<>(Main.sex.getOngoingCharactersUsingAreas(this, SexAreaOrifice.VAGINA, SexAreaPenetration.PENIS));
@@ -3347,7 +3342,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 	 * @param target The person who is being interacted with in this slot.
 	 * @return Whether this NPC is happy to be in this SexSlot
 	 */
-	public boolean isHappyToBeInSlot(AbstractSexPosition position, SexSlot slot, SexSlot targetSlot, GameCharacter target) {
+	public boolean isHappyToBeInSlot(SexPosition position, SexSlot slot, SexSlot targetSlot, GameCharacter target) {
 		SexType targetSexPreference = Main.sex.getForeplayPreference(this, target);
 		
 		if(!Main.sex.isInForeplay(this)) {
@@ -3359,7 +3354,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		return slot.isMeetsPreferenceCriteria(this, position, targetSlot, targetSexPreference);
 	}
 	
-	public boolean isHappyToBeInSlot(AbstractSexPosition position, SexSlot slot, GameCharacter target) {
+	public boolean isHappyToBeInSlot(SexPosition position, SexSlot slot, GameCharacter target) {
 		return isHappyToBeInSlot(position, slot, null, target);
 	}
 

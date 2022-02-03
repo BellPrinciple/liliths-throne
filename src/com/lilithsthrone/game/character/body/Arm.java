@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
+import com.lilithsthrone.game.character.body.types.ArmType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
@@ -21,11 +21,11 @@ public class Arm implements BodyPartInterface {
 	
 	public static final int MAXIMUM_ROWS = 3;
 	
-	protected AbstractArmType type;
+	protected ArmType type;
 	protected int armRows;
 	protected BodyHair underarmHair;
 
-	public Arm(AbstractArmType type, int armRows) {
+	public Arm(ArmType type, int armRows) {
 		this.type = type;
 		this.armRows = armRows;
 		underarmHair = BodyHair.ZERO_NONE;
@@ -38,7 +38,7 @@ public class Arm implements BodyPartInterface {
 	}
 	
 	@Override
-	public AbstractArmType getType() {
+	public ArmType getType() {
 		return type;
 	}
 
@@ -73,7 +73,7 @@ public class Arm implements BodyPartInterface {
 		return Util.randomItemFrom(descriptorList);
 	}
 
-	public String setType(GameCharacter owner, AbstractArmType type) {
+	public String setType(GameCharacter owner, ArmType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;
 			if(owner!=null) {

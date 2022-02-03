@@ -14,7 +14,6 @@ import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.Name;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.RacialBody;
@@ -65,16 +64,16 @@ public class BatCavernLurkerAttacker extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			Map<Subspecies, Integer> availableRaces = new HashMap<>();
+			for(Subspecies s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}
 				if(Subspecies.getWorldSpecies(WorldType.BAT_CAVERNS, PlaceType.BAT_CAVERN_DARK, false, false, Subspecies.SLIME).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.BAT_CAVERNS, PlaceType.BAT_CAVERN_DARK, false, false, Subspecies.SLIME).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (10000 * Subspecies.getWorldSpecies(WorldType.BAT_CAVERNS, PlaceType.BAT_CAVERN_DARK, false, false, Subspecies.SLIME).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				}
 			}
-			AbstractSubspecies species = AbstractSubspecies.getRandomSubspeciesFromWeightedMap(availableRaces, Subspecies.BAT_MORPH);
+			Subspecies species = Subspecies.getRandomSubspeciesFromWeightedMap(availableRaces, Subspecies.BAT_MORPH);
 
 			RaceStage stage = Main.game.getCharacterUtils().getRaceStageFromPreferences(Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().get(species), gender, species);
 			if(!gender.isFeminine()) {

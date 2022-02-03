@@ -318,33 +318,33 @@ public class Aurokaris extends NPC {
 			clearNonEquippedInventory(false);
 			
 			// Clothing:
-			List<AbstractClothingType> clothingTypesToSell = new ArrayList<>();
+			List<ClothingType> clothingTypesToSell = new ArrayList<>();
 			clothingTypesToSell.add(ClothingType.getClothingTypeFromId("innoxia_torso_peplos"));
 			clothingTypesToSell.add(ClothingType.getClothingTypeFromId("innoxia_torsoOver_himation"));
 			clothingTypesToSell.add(ClothingType.getClothingTypeFromId("innoxia_foot_gladiator_sandals"));
 			clothingTypesToSell.add(ClothingType.getClothingTypeFromId("innoxia_finger_meander_ring"));
 			//TODO male clothing
-			for(AbstractClothingType type : clothingTypesToSell) {
+			for(ClothingType type : clothingTypesToSell) {
 				for(int i=0; i<Util.random.nextInt(4)+3; i++) {
 					this.addClothing(Main.game.getItemGen().generateClothing(type, false), false);
 				}
 			}
 			
 			// Weapons:
-			List<AbstractWeaponType> weaponTypesToSell = new ArrayList<>();
+			List<WeaponType> weaponTypesToSell = new ArrayList<>();
 			weaponTypesToSell.add(WeaponType.getWeaponTypeFromId("innoxia_spear_dory"));
 			weaponTypesToSell.add(WeaponType.getWeaponTypeFromId("innoxia_europeanSwords_xiphos"));
 			weaponTypesToSell.add(WeaponType.getWeaponTypeFromId("innoxia_bow_recurve"));
 	//		weaponTypesToSell.add(WeaponType.getWeaponTypeFromId("innoxia_europeanSwords_xiphos")); //TODO shield
-			for(AbstractWeaponType type : weaponTypesToSell) {
+			for(WeaponType type : weaponTypesToSell) {
 				for(int i=0; i<Util.random.nextInt(4)+2; i++) {
 					this.addWeapon(Main.game.getItemGen().generateWeapon(type), false);
 				}
 			}
 			
 			// Items:
-			List<AbstractItemType> itemTypesToSell = new ArrayList<>();
-			for(AbstractItemType item : ItemType.getAllItems()) {
+			List<ItemType> itemTypesToSell = new ArrayList<>();
+			for(ItemType item : ItemType.getAllItems()) {
 				if(item.getItemTags().contains(ItemTag.SOLD_BY_RALPH)
 						&& (!item.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())
 						&& !item.getItemTags().contains(ItemTag.ALCOHOLIC)
@@ -355,7 +355,7 @@ public class Aurokaris extends NPC {
 			Collections.shuffle(itemTypesToSell);
 			int listSize = itemTypesToSell.size();
 			itemTypesToSell.subList(0, itemTypesToSell.size()-(listSize<=8?1:8)).clear();
-			for(AbstractItemType type : itemTypesToSell) {
+			for(ItemType type : itemTypesToSell) {
 				this.addItem(Main.game.getItemGen().generateItem(type), !type.isConsumedOnUse()?1:(4+Util.random.nextInt(7)), false, false);
 			}
 			
@@ -363,7 +363,7 @@ public class Aurokaris extends NPC {
 			itemTypesToSell.clear();
 			itemTypesToSell.add(ItemType.getItemTypeFromId("innoxia_potions_amazonian_ambrosia"));
 			itemTypesToSell.add(ItemType.getItemTypeFromId("innoxia_potions_amazons_secret"));
-			for(AbstractItemType type : itemTypesToSell) {
+			for(ItemType type : itemTypesToSell) {
 				for(int i=0; i<Util.random.nextInt(6)+3; i++) {
 					this.addItem(Main.game.getItemGen().generateItem(type), false);
 				}

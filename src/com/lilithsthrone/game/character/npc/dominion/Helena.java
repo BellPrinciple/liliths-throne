@@ -60,10 +60,8 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -402,7 +400,7 @@ public class Helena extends NPC {
 	public String getGiftReaction(AbstractCoreItem gift, boolean applyEffects) {
 		String text = null;
 		if(gift instanceof AbstractItem) {
-			AbstractItemType type = ((AbstractItem)gift).getItemType();
+			var type = ((AbstractItem)gift).getItemType();
 			if(type.equals(ItemType.GIFT_CHOCOLATES)) {
 				text = UtilText.parseFromXMLFile("characters/dominion/helena", "GIFT_CHOCOLATES")
 						+(applyEffects
@@ -429,7 +427,7 @@ public class Helena extends NPC {
 			}
 			
 		} else if(gift instanceof AbstractClothing) {
-			AbstractClothingType type = ((AbstractClothing)gift).getClothingType();
+			var type = ((AbstractClothing)gift).getClothingType();
 			if(type.equals(ClothingType.getClothingTypeFromId("innoxia_hair_rose"))) {
 				text = UtilText.parseFromXMLFile("characters/dominion/helena", "GIFT_SINGLE_ROSE")
 						+(applyEffects

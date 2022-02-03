@@ -3,7 +3,6 @@ package com.lilithsthrone.game.character.attributes;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Table;
@@ -672,7 +671,7 @@ public interface Attribute {
 	 * @return The Attribute that has an id closest to the supplied attributeId.
 	 *  <b>Will return null</b> if the matching distance is greater than 3 (which typically will be more than enough to catch spelling errors, indicating that the flag has been removed).
 	 */
-	public static AbstractAttribute getAttributeFromId(String attributeId) {
+	static Attribute getAttributeFromId(String attributeId) {
 		return table.of(attributeId);
 	}
 
@@ -696,28 +695,23 @@ public interface Attribute {
 		};
 	}
 
-	public static String getIdFromAttribute(AbstractAttribute attribute) {
+	static String getIdFromAttribute(Attribute attribute) {
 		return attribute.getId();
 	}
 
-	public static List<AbstractAttribute> getAllAttributes() {
+	static List<Attribute> getAllAttributes() {
 		return table.list();
 	}
 
-	public static AbstractAttribute getRacialDamageAttribute(AbstractRace race) {
+	static Attribute getRacialDamageAttribute(Race race) {
 		return Race.DamageAttribute.of(race);
 	}
 
-	Table<AbstractAttribute> table = new Table<>(Attribute::sanitize) {{
+	Table<Attribute> table = new Table<>(Attribute::sanitize) {{
 
 		// Hard-coded attributes (all those up above):
 		addFields(Attribute.class,AbstractAttribute.class,(k,v)->v.id=k);
 
 		// NOTE: Racial attributes are added at the bottom of the static block in Race.java!
 	}};
-
-	@Deprecated
-	public static void addAttribute(String id, AbstractAttribute a) {
-		table.add(a.id=id,a);
-	}
 }

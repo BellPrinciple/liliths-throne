@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
 import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.valueEnums.Capacity;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
@@ -31,7 +30,7 @@ public class Penis implements BodyPartInterface {
 	
 	public static final float TWO_PENIS_SIZE_MULTIPLIER = 1.6f;
 
-	protected AbstractPenisType type;
+	protected PenisType type;
 	protected int length;
 	protected int girth;
 	protected boolean pierced;
@@ -41,7 +40,7 @@ public class Penis implements BodyPartInterface {
 	protected Testicle testicle;
 	protected Orifice orificeUrethra;
 
-	public Penis(AbstractPenisType type, int length, boolean usePenisSizePreference, int girth, int testicleSize, int cumProduction, int testicleCount) {
+	public Penis(PenisType type, int length, boolean usePenisSizePreference, int girth, int testicleSize, int cumProduction, int testicleCount) {
 		this.type = type;
 		if(usePenisSizePreference) {
 			this.length = Math.max(1, Math.min(PenisLength.SEVEN_STALLION.getMaximumValue(), length)+Main.getProperties().penisSizePreference);
@@ -75,7 +74,7 @@ public class Penis implements BodyPartInterface {
 	}
 	
 	@Override
-	public AbstractPenisType getType() {
+	public PenisType getType() {
 		return type;
 	}
 	
@@ -205,7 +204,7 @@ public class Penis implements BodyPartInterface {
 		return Util.randomItemFrom(list);
 	}
 	
-	public String setType(GameCharacter owner, AbstractPenisType type) {
+	public String setType(GameCharacter owner, PenisType type) {
 		if(this.type==PenisType.NONE) {
 			this.orificeUrethra.setStretchedCapacity(this.orificeUrethra.getRawCapacityValue());
 		}

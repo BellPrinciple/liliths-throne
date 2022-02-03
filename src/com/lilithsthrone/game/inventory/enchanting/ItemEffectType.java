@@ -10,7 +10,6 @@ import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.types.ArmType;
@@ -36,10 +35,8 @@ import com.lilithsthrone.game.character.body.valueEnums.CumProduction;
 import com.lilithsthrone.game.character.body.valueEnums.CupSize;
 import com.lilithsthrone.game.character.body.valueEnums.HipSize;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.npc.misc.GenericAndrogynousNPC;
@@ -48,8 +45,6 @@ import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.pregnancy.Litter;
 import com.lilithsthrone.game.character.pregnancy.PregnancyPossibility;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -63,9 +58,7 @@ import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.main.Main;
@@ -95,7 +88,7 @@ public interface ItemEffectType {
 	 * @return
 	 * Usually null, but if this ItemEffectType has an associated Race, this is how to access it.
 	 */
-	default AbstractRace getAssociatedRace() {
+	default Race getAssociatedRace() {
 		return null;
 	}
 
@@ -103,7 +96,7 @@ public interface ItemEffectType {
 
 	String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer);
 
-	default Map<AbstractStatusEffect, Integer> getAppliedStatusEffects() {
+	default Map<StatusEffect, Integer> getAppliedStatusEffects() {
 		return Map.of();
 	}
 
@@ -535,14 +528,14 @@ public interface ItemEffectType {
 			sb.append("<p>");
 			sb.append("[npc.Name] eagerly [npc.verb(gulp)] down the rich, creamy liquid; its delicious taste spurs [npc.herHim] on into quickly draining the entire bottle.");
 
-			Map<SexAreaOrifice, List<AbstractStatusEffect>> incubationEffectMap = Util.newHashMapOfValues(
+			Map<SexAreaOrifice, List<StatusEffect>> incubationEffectMap = Util.newHashMapOfValues(
 					new Value<>(SexAreaOrifice.VAGINA, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_WOMB_1, StatusEffect.INCUBATING_EGGS_WOMB_2, StatusEffect.INCUBATING_EGGS_WOMB_3)),
 					new Value<>(SexAreaOrifice.ANUS, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_STOMACH_1, StatusEffect.INCUBATING_EGGS_STOMACH_2, StatusEffect.INCUBATING_EGGS_STOMACH_3)),
 					new Value<>(SexAreaOrifice.NIPPLE, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_NIPPLES_1, StatusEffect.INCUBATING_EGGS_NIPPLES_2, StatusEffect.INCUBATING_EGGS_NIPPLES_3)),
 					new Value<>(SexAreaOrifice.NIPPLE_CROTCH, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_1, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_2, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_3)),
 					new Value<>(SexAreaOrifice.SPINNERET, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_SPINNERET_1, StatusEffect.INCUBATING_EGGS_SPINNERET_2, StatusEffect.INCUBATING_EGGS_SPINNERET_3)));
 			
-			for(Entry<SexAreaOrifice, List<AbstractStatusEffect>> entry : incubationEffectMap.entrySet()) {
+			for(Entry<SexAreaOrifice, List<StatusEffect>> entry : incubationEffectMap.entrySet()) {
 				Litter litter = target.getIncubationLitter(entry.getKey());
 				if(litter!=null) {
 					boolean advanced = false;
@@ -720,7 +713,7 @@ public interface ItemEffectType {
 	public static AbstractItemEffectType CIGARETTE = new AbstractItemEffectType(null,
 			PresetColour.BASE_PURPLE) {
 		@Override
-		public Map<AbstractStatusEffect, Integer> getAppliedStatusEffects() {
+		public Map<StatusEffect, Integer> getAppliedStatusEffects() {
 			return Util.newHashMapOfValues(new Value<>(StatusEffect.SMOKING, 60*5));
 		}
 		@Override
@@ -846,7 +839,7 @@ public interface ItemEffectType {
 			"[style.boldTfGeneric(Makes slime and orifice interiors glow)]"),
 			PresetColour.ATTRIBUTE_CORRUPTION) {
 		@Override
-		public Map<AbstractStatusEffect, Integer> getAppliedStatusEffects() {
+		public Map<StatusEffect, Integer> getAppliedStatusEffects() {
 			return Util.newHashMapOfValues(new Value<>(StatusEffect.PSYCHOACTIVE, 6*60*60));
 		}
 		@Override
@@ -867,7 +860,7 @@ public interface ItemEffectType {
 						sb.append(UtilText.parse(target, "[npc.NamePos] slimy body starts [style.boldTfGeneric(glowing)]!"));
 					}
 					
-					for(AbstractBodyCoveringType bct : BodyCoveringType.getAllSlimeTypes()) {
+					for(BodyCoveringType bct : BodyCoveringType.getAllSlimeTypes()) {
 						target.getCovering(bct).setPrimaryGlowing(true);
 						target.getCovering(bct).setSecondaryGlowing(true);
 					}
@@ -1081,12 +1074,12 @@ public interface ItemEffectType {
 		
 		@Override
 		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
-			List<AbstractItemType> items = new ArrayList<>();
+			List<ItemType> items = new ArrayList<>();
 			items.add(ItemType.getItemTypeFromId("innoxia_race_reindeer_rudolphs_egg_nog"));
 			items.add(ItemType.getItemTypeFromId("innoxia_race_none_mince_pie"));
 			items.add(ItemType.getItemTypeFromId("innoxia_race_reindeer_sugar_cookie"));
 			
-			Map<AbstractClothingType, Integer> clothingMap = new HashMap<>();
+			Map<ClothingType, Integer> clothingMap = new HashMap<>();
 			// Common clothing (55%):
 			clothingMap.put(ClothingType.getClothingTypeFromId("innoxia_head_antler_headband"), 11);
 			clothingMap.put(ClothingType.getClothingTypeFromId("innoxia_elemental_snowflake_necklace"), 11);
@@ -1111,7 +1104,7 @@ public interface ItemEffectType {
 			
 			// 50% chance for consumable, 50% for clothing:
 			if(Math.random()<0.5f) {
-				AbstractItemType itemType = items.get(Util.random.nextInt(items.size()));
+				ItemType itemType = items.get(Util.random.nextInt(items.size()));
 				
 				return "<p>"
 							+ "The present contained: <b>"+itemType.getDisplayName(true)+"</b>!"
@@ -1119,7 +1112,7 @@ public interface ItemEffectType {
 						+ user.addItem(Main.game.getItemGen().generateItem(itemType), false);
 				
 			} else {
-				AbstractClothingType clothingType = Util.getRandomObjectFromWeightedMap(clothingMap);
+				ClothingType clothingType = Util.getRandomObjectFromWeightedMap(clothingMap);
 				AbstractClothing clothing = Main.game.getItemGen().generateClothing(clothingType);
 				
 				if(!Main.game.getPlayerCell().getInventory().isInventoryFull()) {
@@ -1995,7 +1988,7 @@ public interface ItemEffectType {
 		public List<TFModifier> getSecondaryModifiers(AbstractCoreItem targetItem, TFModifier primaryModifier) {
 			List<TFModifier> list = new ArrayList<>();
 			list.add(TFModifier.NONE);
-			
+
 			if(primaryModifier == TFModifier.TF_MOD_FETISH_BEHAVIOUR) {
 				list.addAll(TFModifier.getTFBehaviouralFetishList());
 			}
@@ -2023,9 +2016,9 @@ public interface ItemEffectType {
 			if(primaryModifier==TFModifier.NONE) {
 				return Util.newArrayListOfValues("Adds or removes a [style.boldFetish(random fetish)].");
 			}
-			
+
 			String descriptor = "";
-			
+
 			if(primaryModifier==TFModifier.TF_MOD_FETISH_BODY_PART) {
 				descriptor = " body-part";
 			} else if(primaryModifier==TFModifier.TF_MOD_FETISH_BEHAVIOUR) {
@@ -2066,35 +2059,35 @@ public interface ItemEffectType {
 		public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 			// Completely random:
 			if(primaryModifier==TFModifier.NONE) {
-				List<AbstractFetish> fetishesToAdd = new ArrayList<>();
-				List<AbstractFetish> fetishesToRemove = new ArrayList<>();
-				for(AbstractFetish f : Fetish.getAllFetishes()) {
+				List<Fetish> fetishesToAdd = new ArrayList<>();
+				List<Fetish> fetishesToRemove = new ArrayList<>();
+				for(Fetish f : Fetish.getAllFetishes()) {
 					if(!f.isContentEnabled()) {
 						continue;
 					}
 					if(f.getFetishesForAutomaticUnlock().isEmpty()) {
 						if(target.hasFetish(f)) {
 							fetishesToRemove.add(f);
-							
+
 						} else if(f.isAvailable(target)) {
 							fetishesToAdd.add(f);
 						}
 					}
 				}
-				
+
 				if((Math.random()>0.33f && !fetishesToAdd.isEmpty()) || fetishesToRemove.isEmpty()) {
-					AbstractFetish f = fetishesToAdd.get(Util.random.nextInt(fetishesToAdd.size()));
+					Fetish f = fetishesToAdd.get(Util.random.nextInt(fetishesToAdd.size()));
 					return target.addFetish(f);
-					
+
 				} else {
-					AbstractFetish f = fetishesToRemove.get(Util.random.nextInt(fetishesToRemove.size()));
+					Fetish f = fetishesToRemove.get(Util.random.nextInt(fetishesToRemove.size()));
 					return target.removeFetish(f);
 				}
 			}
-			
+
 			// Based on body part or behaviour fetishes:
-			
-			List<AbstractFetish> availableFetishes = new ArrayList<>();
+
+			List<Fetish> availableFetishes = new ArrayList<>();
 			
 			if(primaryModifier==TFModifier.TF_MOD_FETISH_BEHAVIOUR) {
 				for(TFModifier mod : TFModifier.getTFBehaviouralFetishList()) {
@@ -2102,7 +2095,7 @@ public interface ItemEffectType {
 						availableFetishes.add(mod.getFetish());
 					}
 				}
-			} 
+			}
 			if(primaryModifier==TFModifier.TF_MOD_FETISH_BODY_PART) {
 				for(TFModifier mod : TFModifier.getTFBodyPartFetishList()) {
 					if(mod.getFetish()!=null) {
@@ -2113,8 +2106,8 @@ public interface ItemEffectType {
 			
 			if(potency==TFPotency.BOOST) {
 				if(secondaryModifier == TFModifier.NONE) {
-					List<AbstractFetish> fetishesToAdd = new ArrayList<>();
-					for(AbstractFetish f : availableFetishes) {
+					List<Fetish> fetishesToAdd = new ArrayList<>();
+					for(Fetish f : availableFetishes) {
 						if(f.getFetishesForAutomaticUnlock().isEmpty() && !target.hasFetish(f)) {
 							if(f.isAvailable(target)) {
 								fetishesToAdd.add(f);
@@ -2123,7 +2116,7 @@ public interface ItemEffectType {
 					}
 					
 					if(!fetishesToAdd.isEmpty()) {
-						AbstractFetish f = fetishesToAdd.get(Util.random.nextInt(fetishesToAdd.size()));
+						Fetish f = fetishesToAdd.get(Util.random.nextInt(fetishesToAdd.size()));
 						return target.addFetish(f);
 						
 					} else {
@@ -2133,15 +2126,15 @@ public interface ItemEffectType {
 					}
 					
 				} else {
-					AbstractFetish fetish = secondaryModifier.getFetish();
+					Fetish fetish = secondaryModifier.getFetish();
 					
 					return target.addFetish(fetish);
 				}
 				
 			} else if(potency==TFPotency.MINOR_BOOST) {
 				if(secondaryModifier == TFModifier.NONE) {
-					List<AbstractFetish> fetishesToBoost = new ArrayList<>();
-					for(AbstractFetish f : availableFetishes) {
+					List<Fetish> fetishesToBoost = new ArrayList<>();
+					for(Fetish f : availableFetishes) {
 						if(f.getFetishesForAutomaticUnlock().isEmpty() && !target.hasFetish(f)) {
 							if(f.isAvailable(target)) {
 								fetishesToBoost.add(f);
@@ -2150,7 +2143,7 @@ public interface ItemEffectType {
 					}
 					
 					if(!fetishesToBoost.isEmpty()) {
-						AbstractFetish f = fetishesToBoost.get(Util.random.nextInt(fetishesToBoost.size()));
+						Fetish f = fetishesToBoost.get(Util.random.nextInt(fetishesToBoost.size()));
 						FetishDesire newDesire = target.getFetishDesire(f).getNextDesire();
 						
 						return target.setFetishDesire(f, newDesire);
@@ -2162,7 +2155,7 @@ public interface ItemEffectType {
 					}
 					
 				} else {
-					AbstractFetish fetish = secondaryModifier.getFetish();
+					Fetish fetish = secondaryModifier.getFetish();
 					FetishDesire newDesire = target.getFetishDesire(fetish).getNextDesire();
 					
 					return target.setFetishDesire(fetish, newDesire);
@@ -2170,8 +2163,8 @@ public interface ItemEffectType {
 				
 			} else if(potency==TFPotency.MINOR_DRAIN) {
 				if(secondaryModifier == TFModifier.NONE) {
-					List<AbstractFetish> fetishesToDrain = new ArrayList<>();
-					for(AbstractFetish f : availableFetishes) {
+					List<Fetish> fetishesToDrain = new ArrayList<>();
+					for(Fetish f : availableFetishes) {
 						if(f.getFetishesForAutomaticUnlock().isEmpty() && !target.hasFetish(f)) {
 							if(f.isAvailable(target)) {
 								fetishesToDrain.add(f);
@@ -2180,7 +2173,7 @@ public interface ItemEffectType {
 					}
 					
 					if(!fetishesToDrain.isEmpty()) {
-						AbstractFetish f = fetishesToDrain.get(Util.random.nextInt(fetishesToDrain.size()));
+						Fetish f = fetishesToDrain.get(Util.random.nextInt(fetishesToDrain.size()));
 						FetishDesire newDesire = target.getFetishDesire(f).getPreviousDesire();
 						
 						return target.setFetishDesire(f, newDesire);
@@ -2192,7 +2185,7 @@ public interface ItemEffectType {
 					}
 					
 				} else {
-					AbstractFetish fetish = secondaryModifier.getFetish();
+					Fetish fetish = secondaryModifier.getFetish();
 					FetishDesire newDesire = target.getFetishDesire(fetish).getPreviousDesire();
 					
 					return target.setFetishDesire(fetish, newDesire);
@@ -2200,8 +2193,8 @@ public interface ItemEffectType {
 				
 			} else {
 				if(secondaryModifier == TFModifier.NONE) {
-					List<AbstractFetish> fetishesToRemove = new ArrayList<>();
-					for(AbstractFetish f : availableFetishes) {
+					List<Fetish> fetishesToRemove = new ArrayList<>();
+					for(Fetish f : availableFetishes) {
 						if(f.getFetishesForAutomaticUnlock().isEmpty()) {
 							if(target.hasFetish(f)) {
 								fetishesToRemove.add(f);
@@ -2210,7 +2203,7 @@ public interface ItemEffectType {
 					}
 					
 					if(!fetishesToRemove.isEmpty()) {
-						AbstractFetish f = fetishesToRemove.get(Util.random.nextInt(fetishesToRemove.size()));
+						Fetish f = fetishesToRemove.get(Util.random.nextInt(fetishesToRemove.size()));
 						return target.removeFetish(f);
 						
 					} else {
@@ -2220,7 +2213,7 @@ public interface ItemEffectType {
 					}
 					
 				} else {
-					AbstractFetish fetish = secondaryModifier.getFetish();
+					Fetish fetish = secondaryModifier.getFetish();
 					
 					return target.removeFetish(fetish);
 				}
@@ -2255,7 +2248,7 @@ public interface ItemEffectType {
 				return "<p style='text-align:center'>[style.italicsDisabled(This item does not work on non-slave unique characters...)]</p>";
 			}
 			
-			AbstractSubspecies sub = target.getBody().getFleshSubspecies();
+			Subspecies sub = target.getBody().getFleshSubspecies();
 			if(sub.getRace()!=Race.DEMON) {
 				target.setBody(Main.game.getCharacterUtils().generateHalfDemonBody(target, target.getGender(), sub, true), false);
 				return UtilText.parse(target, "<p style='text-align:center; color:"+PresetColour.RACE_DEMON.toWebHexString()+";'><i>[npc.Name] is now [npc.a_race]!</i></p>");
@@ -2322,7 +2315,7 @@ public interface ItemEffectType {
 				
 			} else if(primaryModifier == TFModifier.CLOTHING_CREAMPIE_RETENTION) {
 				return TFModifier.getClothingCreampieRetentionList();
-				
+
 			} else {
 				return getClothingTFSecondaryModifiers(primaryModifier);
 			}
@@ -2465,7 +2458,7 @@ public interface ItemEffectType {
 						break;
 				}
 				effectsList.add("[style.colourExcellent(Retains)] "+area+" creampies");
-				
+
 			} else {
 				return getClothingTFDescriptions(primaryModifier, secondaryModifier, potency, limit, user, target);
 			}
@@ -2521,7 +2514,7 @@ public interface ItemEffectType {
 				
 			} else if(primaryModifier == TFModifier.CLOTHING_CREAMPIE_RETENTION) {
 				return TFModifier.getClothingCreampieRetentionList();
-				
+
 			} else {
 				return getClothingTFSecondaryModifiers(primaryModifier);
 			}
@@ -2606,7 +2599,7 @@ public interface ItemEffectType {
 						break;
 				}
 				effectsList.add("[style.colourExcellent(Retains)] "+area+" creampies");
-				
+
 			} else {
 				return getClothingTFDescriptions(primaryModifier, secondaryModifier, potency, limit, user, target);
 			}
@@ -2691,7 +2684,7 @@ public interface ItemEffectType {
 		}
 	};
 
-	public static AbstractItemEffectType getRacialEffectType(AbstractRace race) {
+	static ItemEffectType getRacialEffectType(Race race) {
 		return table.racialEffectTypes.get(race);
 	}
 
@@ -2701,7 +2694,7 @@ public interface ItemEffectType {
 		table.add(id, itemEffectType);
 	}
 	
-	public static AbstractItemEffectType getItemEffectTypeFromId(String id) {
+	static ItemEffectType getItemEffectTypeFromId(String id) {
 		if(id.startsWith("RACE_")) {
 			return getRacialEffectType(Race.getRaceFromId(id.substring(5)));
 		}
@@ -2709,25 +2702,25 @@ public interface ItemEffectType {
 	}
 
 	@Deprecated
-	public static String getIdFromItemEffectType(AbstractItemEffectType itemEffectType) {
+	static String getIdFromItemEffectType(ItemEffectType itemEffectType) {
 		return itemEffectType.getId();
 	}
 	
 	// set in ItemType
-	public static AbstractItemEffectType getBookEffectFromSubspecies(AbstractSubspecies subspecies) {
+	static ItemEffectType getBookEffectFromSubspecies(Subspecies subspecies) {
 		return table.of("BOOK_READ_"+Subspecies.getIdFromSubspecies(subspecies));
 	}
 
 	@Deprecated
-	public static List<AbstractItemEffectType> getAllEffectTypes() {
+	static List<ItemEffectType> getAllEffectTypes() {
 		return table.list();
 	}
 
 	Collection table = new Collection();
 
-	final class Collection extends Table<AbstractItemEffectType> {
+	final class Collection extends Table<ItemEffectType> {
 
-		private final Map<AbstractRace,AbstractItemEffectType> racialEffectTypes = new HashMap<>();
+		private final Map<Race,ItemEffectType> racialEffectTypes = new HashMap<>();
 
 		private Collection() {
 			super(s->s);
@@ -2738,13 +2731,13 @@ public interface ItemEffectType {
 
 	private static void initialize(Collection table) {
 		
-		for(AbstractRace race : Race.getAllRaces()) {
+		for(Race race : Race.getAllRaces()) {
 			AbstractItemEffectType type;
 			if(race==Race.SLIME) { // Special case for slimes:
 				type = new AbstractItemEffectType(null,
 								race.getColour()) {
 							@Override
-							public AbstractRace getAssociatedRace() {
+							public Race getAssociatedRace() {
 								return race;
 							}
 							@Override
@@ -2777,7 +2770,7 @@ public interface ItemEffectType {
 				type = new AbstractItemEffectType(null,
 								race.getColour()) {
 							@Override
-							public AbstractRace getAssociatedRace() {
+							public Race getAssociatedRace() {
 								return race;
 							}
 							@Override
@@ -2803,7 +2796,7 @@ public interface ItemEffectType {
 						};
 			}
 			table.racialEffectTypes.put(race,type);
-			table.add("RACE_"+Race.getIdFromRace(race),type);
+			table.add(type.id="RACE_"+Race.getIdFromRace(race),type);
 		}
 	}
 	

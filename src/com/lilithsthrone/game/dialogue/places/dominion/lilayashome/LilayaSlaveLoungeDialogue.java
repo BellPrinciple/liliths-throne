@@ -40,7 +40,7 @@ public class LilayaSlaveLoungeDialogue {
 						+ PlaceUpgrade.LILAYA_SLAVE_LOUNGE.getRoomDescription(Main.game.getPlayerCell())
 					+ "</p>");
 			
-			for(AbstractPlaceUpgrade up : Main.game.getPlayerCell().getPlace().getPlaceUpgrades()) {
+			for(PlaceUpgrade up : Main.game.getPlayerCell().getPlace().getPlaceUpgrades()) {
 				if(!up.isCoreRoomUpgrade()) {
 					sb.append("<p>"
 								+ "<b style='color:"+up.getColour().toWebHexString()+";'>"+up.getName()+"</b><br/>"

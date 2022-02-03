@@ -7,7 +7,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -71,7 +70,7 @@ public interface AntennaType extends BodyPartTypeInterface {
 			}
 	};
 
-	TypeTable<AbstractAntennaType> table = new TypeTable<>(
+	TypeTable<AntennaType> table = new TypeTable<>(
 		s->s,
 		AntennaType.class,
 		AbstractAntennaType.class,
@@ -83,19 +82,19 @@ public interface AntennaType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractAntennaType getAntennaTypeFromId(String id) {
+	static AntennaType getAntennaTypeFromId(String id) {
 		return table.of(id);
 	}
 	
-	public static String getIdFromAntennaType(AbstractAntennaType antennaType) {
+	static String getIdFromAntennaType(AntennaType antennaType) {
 		return antennaType.getId();
 	}
 
-	public static List<AbstractAntennaType> getAllAntennaTypes() {
+	static List<AntennaType> getAllAntennaTypes() {
 		return table.listByRace();
 	}
 
-	public static List<AbstractAntennaType> getAntennaTypes(AbstractRace r) {
+	static List<AntennaType> getAntennaTypes(Race r) {
 		return table.of(r).orElse(List.of(NONE));
 	}
 }

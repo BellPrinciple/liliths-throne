@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
+import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.valueEnums.ClitorisSize;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
@@ -81,12 +81,12 @@ public class Clitoris implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(GameCharacter gc) {
+	public BodyCoveringType getBodyCoveringType(GameCharacter gc) {
 		return gc.getVaginaType().getBodyCoveringType(gc);
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return body.getVagina().getBodyCoveringType(body);
 	}
 	

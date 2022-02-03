@@ -14,7 +14,6 @@ import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.Occupation;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
@@ -63,24 +62,24 @@ public class SlaveInStocks extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+			Map<Subspecies, Integer> availableRaces = new HashMap<>();
+			for(Subspecies s : Subspecies.getAllSubspecies()) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}
 				if(s==Subspecies.REINDEER_MORPH
 						&& Main.game.getSeason()==Season.WINTER
 						&& Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hasSnowedThisWinter)) {
-					AbstractSubspecies.addToSubspeciesMap(50, gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap(50, gender, s, availableRaces);
 					
 				} else if(Subspecies.getWorldSpecies(WorldType.DOMINION, null, false).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (1000 * Subspecies.getWorldSpecies(WorldType.DOMINION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (1000 * Subspecies.getWorldSpecies(WorldType.DOMINION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 					
 				} else if(Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (1000 * Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (1000 * Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 					
 				} else if(Subspecies.getWorldSpecies(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_PUBLIC_STOCKS, false).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (1000 * Subspecies.getWorldSpecies(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_PUBLIC_STOCKS, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (1000 * Subspecies.getWorldSpecies(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_PUBLIC_STOCKS, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				}
 			}
 			
@@ -164,7 +163,7 @@ public class SlaveInStocks extends NPC {
 	public DialogueNode getEncounterDialogue() {
 		return null; //TODO
 	}
-	
+
 	public void initSlavePermissions() {
 		this.clearSlaveJobSettings(SlaveJob.PUBLIC_STOCKS);
 		

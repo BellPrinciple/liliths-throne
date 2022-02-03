@@ -10,7 +10,6 @@ import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.sex.ArousalIncrease;
 import com.lilithsthrone.game.sex.ImmobilisationType;
 import com.lilithsthrone.game.sex.SexParticipantType;
@@ -417,12 +416,12 @@ public class SexActionUtility {
 		}
 		@Override
 		public String getActionTitle() {
-			AbstractItemType item = Main.sex.getItemUseInformation().getValue().getValue().getItemType();
+			var item = Main.sex.getItemUseInformation().getValue().getValue().getItemType();
 			return "Accept "+item.getName(false);
 		}
 		@Override
 		public String getActionDescription() {
-			AbstractItemType item = Main.sex.getItemUseInformation().getValue().getValue().getItemType();
+			var item = Main.sex.getItemUseInformation().getValue().getValue().getItemType();
 			return Util.capitaliseSentence(item.getUseName())+" the "+item.getName(false)+" "+UtilText.parse(Main.sex.getItemUseInformation().getKey(), " [npc.name] is offering you.");
 		}
 		@Override
@@ -453,17 +452,17 @@ public class SexActionUtility {
 		}
 		@Override
 		public String getActionTitle() {
-			AbstractItemType item = Main.sex.getItemUseInformation().getValue().getValue().getItemType();
+			var item = Main.sex.getItemUseInformation().getValue().getValue().getItemType();
 			return "Refuse "+item.getName(false);
 		}
 		@Override
 		public String getActionDescription() {
-			AbstractItemType item = Main.sex.getItemUseInformation().getValue().getValue().getItemType();
+			var item = Main.sex.getItemUseInformation().getValue().getValue().getItemType();
 			return "Refuse to "+item.getUseName()+" the "+item.getName(false)+" "+UtilText.parse(Main.sex.getItemUseInformation().getKey(), " [npc.name] is offering you.");
 		}
 		@Override
 		public String getDescription() {
-			AbstractItemType item = Main.sex.getItemUseInformation().getValue().getValue().getItemType();
+			var item = Main.sex.getItemUseInformation().getValue().getValue().getItemType();
 			return UtilText.parse(Main.sex.getItemUseInformation().getKey(),
 					"You refuse to take the "+item.getName(false)+" from [npc.name]."
 					+ " Letting out a disappointed whine, [npc.she] puts "+(item.isPlural()?"them":"it")+" back into [npc.her] inventory...");

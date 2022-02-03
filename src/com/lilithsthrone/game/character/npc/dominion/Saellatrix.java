@@ -15,7 +15,6 @@ import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
@@ -64,7 +63,6 @@ import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -92,15 +90,12 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.SetBonus;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
@@ -368,7 +363,7 @@ public class Saellatrix extends NPC {
 	public String getSpeechColour() {
 		return "#eb6a91";
 	}
-	
+
 	public void incrementDollsSold(int increment) {
 		if(!Main.game.getDialogueFlags().hasSavedLong("saellatrix_dolls_sold")) {
 			Main.game.getDialogueFlags().setSavedLong("saellatrix_dolls_sold", 3109);
@@ -386,13 +381,13 @@ public class Saellatrix extends NPC {
 		
 		incrementDollsSold(1+Util.random.nextInt(4));
 		
-		for(AbstractWeaponType wt : WeaponType.getAllWeapons()) {
+		for(WeaponType wt : WeaponType.getAllWeapons()) {
 			if(wt.getItemTags().contains(ItemTag.SOLD_BY_FINCH)
 					&& (!wt.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				this.addWeapon(Main.game.getItemGen().generateWeapon(wt), false);
 			}
 		}
-		for(AbstractItemType item : ItemType.getAllItems()) {
+		for(ItemType item : ItemType.getAllItems()) {
 			if(item.getItemTags().contains(ItemTag.SOLD_BY_FINCH)
 					&& (!item.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				this.addItem(Main.game.getItemGen().generateItem(item), false);
@@ -401,7 +396,7 @@ public class Saellatrix extends NPC {
 		
 		List<AbstractClothing> clothingToSell = new ArrayList<>();
 		
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(ClothingType clothing : ClothingType.getAllClothing()) {
 			if((clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_FINCH)
 					|| clothing.getClothingSet()==SetBonus.getSetBonusFromId("sage_ltxset")
 					|| clothing.getClothingSet()==SetBonus.getSetBonusFromId("innoxia_bdsm"))
@@ -423,7 +418,7 @@ public class Saellatrix extends NPC {
 		for(AbstractClothing c : Main.game.getCharacterUtils().generateEnchantedClothingForTrader(this, clothingToSell, 4, 2)) {
 			this.addClothing(c, false);
 		}
-		
+
 		this.addItem(Main.game.getItemGen().generateItem("innoxia_race_doll_silic_oil"), 50, false, false);
 	}
 	
@@ -572,7 +567,7 @@ public class Saellatrix extends NPC {
 			doll.completeVirginityLoss();
 			
 			doll.setLocation(WorldType.getWorldTypeFromId("innoxia_dominion_sex_shop"), PlaceType.getPlaceTypeFromId("innoxia_dominion_sex_shop_display"), true);
-			AbstractBodyCoveringType dollCovering = BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SILICONE, BodyCoveringCategory.MAIN_SKIN);
+			BodyCoveringType dollCovering = BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SILICONE, BodyCoveringCategory.MAIN_SKIN);
 			doll.setSkinCovering(new Covering(dollCovering, CoveringPattern.NONE, CoveringModifier.GLOSSY, PresetColour.COVERING_PINK, false, PresetColour.COVERING_PINK, false), true);
 			
 			doll.addTattoo(InventorySlot.EYES,
@@ -611,7 +606,7 @@ public class Saellatrix extends NPC {
 	
 	public boolean isFactoryTourTimeUp(int additionalSecondsPassed) { // additionalSecondsPassed will normally be 30 to account for dialogue seconds passed, as the seconds are not incremented until after preParsingEffects, in which this method is used
 		long secondsAtStart = Main.game.getDialogueFlags().getSavedLong("saellatrix_tour_start");
-		long secondsRemaining = (10 * 60) - (Main.game.getSecondsPassed() - secondsAtStart) - additionalSecondsPassed; 
+		long secondsRemaining = (10 * 60) - (Main.game.getSecondsPassed() - secondsAtStart) - additionalSecondsPassed;
 		return secondsRemaining<=0;
 	}
 	
@@ -636,40 +631,40 @@ public class Saellatrix extends NPC {
 					+")]"
 				+ "</p>";
 	}
-	
-	
+
+
 	// Methods for during the actual factory side quest with Fiammetta:
-	
-	private static Map<AbstractFetish, String> sisterFetishesToFlagIds = Util.newHashMapOfValues(
+
+	private static Map<Fetish, String> sisterFetishesToFlagIds = Util.newHashMapOfValues(
 			new Value<>(Fetish.FETISH_ANAL_RECEIVING, "innoxia_doll_factory_succubus_seen_anal"),
 			new Value<>(Fetish.FETISH_PURE_VIRGIN, "innoxia_doll_factory_succubus_seen_virgin"),
 			new Value<>(Fetish.FETISH_ORAL_GIVING, "innoxia_doll_factory_succubus_seen_oral"),
 			new Value<>(Fetish.FETISH_BREASTS_SELF, "innoxia_doll_factory_succubus_seen_breasts"),
 			new Value<>(Fetish.FETISH_PENIS_GIVING, "innoxia_doll_factory_succubus_seen_penis"));
-	
-	public AbstractFetish getNextSisterSlaveFetish() {
+
+	public Fetish getNextSisterSlaveFetish() {
 //		return Fetish.FETISH_PENIS_GIVING;
-		List<AbstractFetish> fetishes = new ArrayList<>(sisterFetishesToFlagIds.keySet());
-		
-		for(Entry<AbstractFetish, String> entry : sisterFetishesToFlagIds.entrySet()) {
+		List<Fetish> fetishes = new ArrayList<>(sisterFetishesToFlagIds.keySet());
+
+		for(Entry<Fetish, String> entry : sisterFetishesToFlagIds.entrySet()) {
 			if(Main.game.getDialogueFlags().hasFlag(entry.getValue()) || (entry.getKey()==Fetish.FETISH_ANAL_RECEIVING && !Main.game.isAnalContentEnabled())) {
 				fetishes.remove(entry.getKey());
 			}
 		}
-		
+
 		if(!fetishes.isEmpty()) {
 			return Util.randomItemFrom(fetishes);
 		}
-		
+
 		return null;
 	}
-	
+
 	public boolean isAnySistersAvailable() {
 		return getNextSisterSlaveFetish()!=null;
 	}
 
 	public void generateSister() {
-		AbstractFetish fetish = getNextSisterSlaveFetish();
+		Fetish fetish = getNextSisterSlaveFetish();
 		DollFactorySuccubus sister = null;
 		for(NPC npc : Main.game.getCharactersPresent(WorldType.EMPTY, PlaceType.GENERIC_HOLDING_CELL)) {
 			if(npc instanceof DollFactorySuccubus && npc.hasFetish(fetish)) {
@@ -689,28 +684,28 @@ public class Saellatrix extends NPC {
 			}
 		}
 	}
-	
+
 //	private void initSister(DollFactorySuccubus sister) {
 //		initSister(sister, getNextSisterSlaveFetish());
 //	}
-	
-	private void initSister(DollFactorySuccubus sister, AbstractFetish fetishFocus) {
+
+	private void initSister(DollFactorySuccubus sister, Fetish fetishFocus) {
 		String chokerTopText = "worthless";
 		String chokerBottomText = "bitch";
 		String crimeText = "";
-		
+
 		sister.addFetish(fetishFocus);
 		Main.game.getDialogueFlags().setFlag(sisterFetishesToFlagIds.get(fetishFocus), true); // So that no repeats occur
-		
+
 		sister.setAffection(this, 100);
 		this.setAffection(sister, -100);
-		
+
 		sister.setMother(Main.game.getNpc(Lovienne.class));
-		
+
 		// Perks:
 		sister.resetSpecialPerksMap();
 		sister.addSpecialPerk(Perk.SPECIAL_MEGA_SLUT);
-		
+
 		PerkManager.initialisePerks(sister,
 				Util.newArrayListOfValues(
 						Perk.BARREN,
@@ -719,7 +714,7 @@ public class Saellatrix extends NPC {
 						new Value<>(PerkCategory.PHYSICAL, 0),
 						new Value<>(PerkCategory.LUST, 5),
 						new Value<>(PerkCategory.ARCANE, 1)));
-		
+
 		// Bald:
 		sister.setHairLength(0);
 		sister.setHairStyle(HairStyle.NONE);
@@ -729,7 +724,7 @@ public class Saellatrix extends NPC {
 		sister.setWingType(WingType.NONE);
 		sister.setTailType(TailType.DEMON_COMMON);
 		sister.setLegType(LegType.DEMON_HOOFED);
-		
+
 		sister.setAgeAppearanceAbsolute(24+Util.random.nextInt(11));
 
 		sister.setFaceVirgin(false);
@@ -737,19 +732,19 @@ public class Saellatrix extends NPC {
 		sister.setAssVirgin(false);
 		sister.setPenisVirgin(false);
 		sister.setVaginaVirgin(false);
-		
+
 		if(fetishFocus==Fetish.FETISH_ANAL_RECEIVING) {
 			// Anal-only pastie, dildo, puffy, dripping asshole and butt slut tattoo - crime of telling Saellatrix to kiss her ass
 			// Loss is doughnut face sitting
 			chokerTopText = "dumb";
 			chokerBottomText = "bitch";
 			crimeText = "Telling Saellatrix to kiss my ass";
-			
+
 			sister.setName("Raenix");
 			sister.setSpeechColour(PresetColour.BASE_PURPLE_LIGHT);
-			
+
 			sister.setVaginaSquirter(false);
-			
+
 			sister.setAssBleached(false);
 			sister.setAssSize(AssSize.SIX_MASSIVE);
 			sister.setHipSize(HipSize.SIX_EXTREMELY_WIDE);
@@ -761,13 +756,13 @@ public class Saellatrix extends NPC {
 			sister.addAssOrificeModifier(OrificeModifier.RIBBED);
 			sister.addAssOrificeModifier(OrificeModifier.MUSCLE_CONTROL);
 			sister.addAssOrificeModifier(OrificeModifier.PUFFY);
-			
+
 			initSisterCoverings(sister, PresetColour.EYE_YELLOW, PresetColour.SKIN_PURPLE, PresetColour.SKIN_EBONY, PresetColour.COVERING_BLACK);
-			
+
 			initSisterClothing(sister, PresetColour.CLOTHING_BLACK, PresetColour.CLOTHING_BLACK, PresetColour.CLOTHING_STEEL, null);
 			sister.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_vagina_sticker_anal_only", PresetColour.CLOTHING_BLACK, PresetColour.CLOTHING_PURPLE, PresetColour.CLOTHING_BLACK, false), true, sister);
 //			sister.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_anus_ribbed_dildo", PresetColour.CLOTHING_BLACK, false), true, sister);
-			
+
 			sister.addTattoo(InventorySlot.ANUS,
 					new Tattoo(
 						"innoxia_misc_none",
@@ -782,8 +777,8 @@ public class Saellatrix extends NPC {
 								TattooCountType.TALLY,
 								PresetColour.CLOTHING_PINK_HOT,
 								false)));
-			
-			
+
+
 		} else if(fetishFocus==Fetish.FETISH_PURE_VIRGIN) {
 			sister.addFetish(Fetish.FETISH_VAGINAL_RECEIVING);
 			// Pure virgin, pierced clit, ugly hairy musky pussy and free fuck tattoo - crime of gloating about her perfect, virgin pussy
@@ -794,7 +789,7 @@ public class Saellatrix extends NPC {
 
 			sister.setName("Jasmixia");
 			sister.setSpeechColour(PresetColour.BASE_PINK_LIGHT);
-			
+
 			PerkManager.initialisePerks(sister,
 					Util.newArrayListOfValues(
 							Perk.BARREN,
@@ -804,10 +799,10 @@ public class Saellatrix extends NPC {
 							new Value<>(PerkCategory.PHYSICAL, 0),
 							new Value<>(PerkCategory.LUST, 5),
 							new Value<>(PerkCategory.ARCANE, 1)));
-			
+
 			sister.setAgeAppearanceAbsolute(19);
 			sister.setFemininity(100);
-			
+
 			sister.setVaginaClitorisSize(ClitorisSize.TWO_LARGE);
 			sister.setVaginaLabiaSize(LabiaSize.FOUR_MASSIVE);
 			sister.setVaginaSquirter(true);
@@ -830,7 +825,7 @@ public class Saellatrix extends NPC {
 			initSisterClothing(sister, PresetColour.CLOTHING_PINK_HOT, PresetColour.CLOTHING_PINK_HOT, PresetColour.CLOTHING_STEEL, Util.newArrayListOfValues(InventorySlot.PIERCING_VAGINA));
 			sister.setPiercedVagina(true);
 			sister.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("norin_piercings_piercing_vagina_sex", PresetColour.CLOTHING_STEEL, PresetColour.CLOTHING_PINK_HOT, PresetColour.CLOTHING_PINK_HOT, false), true, sister);
-			
+
 			sister.addTattoo(InventorySlot.GROIN,
 					new Tattoo(
 						"innoxia_misc_none",
@@ -845,8 +840,8 @@ public class Saellatrix extends NPC {
 								TattooCountType.TALLY,
 								PresetColour.CLOTHING_PINK_HOT,
 								false)));
-			
-			
+
+
 		} else if(fetishFocus==Fetish.FETISH_BREASTS_SELF) {
 			sister.addFetish(Fetish.FETISH_LACTATION_SELF);
 			// Breast lover, 3 pairs of N-cup tits with piercings, huge nipples and tit cow tattoo - crime of calling Saellatrix a tit cow
@@ -857,10 +852,10 @@ public class Saellatrix extends NPC {
 
 			sister.setName("Niomia");
 			sister.setSpeechColour(PresetColour.BASE_INDIGO);
-			
+
 			sister.setAgeAppearanceAbsolute(24);
 			sister.setFemininity(95);
-			
+
 			sister.setBreastSize(CupSize.N.getMeasurement());
 			sister.setBreastRows(3);
 			sister.setBreastShape(BreastShape.POINTY);
@@ -901,7 +896,7 @@ public class Saellatrix extends NPC {
 								TattooCountType.TALLY,
 								PresetColour.CLOTHING_PINK_HOT,
 								false)));
-			
+
 		} else if(fetishFocus==Fetish.FETISH_PENIS_GIVING) {
 			// Penis fetish with massive cock, use me tattoo - crime of insulting Saellatrix's cock
 			// Loss is fucking player
@@ -910,10 +905,10 @@ public class Saellatrix extends NPC {
 			crimeText = "Called Saellatrix's cock disgusting";
 
 			sister.setName("Ellaxia");
-			
+
 			sister.setVaginaType(VaginaType.NONE);
 			sister.setSpeechColour(PresetColour.BASE_RED);
-			
+
 			sister.setPenisType(PenisType.DEMON_COMMON);
 			sister.setPenisGirth(PenetrationGirth.SIX_CHUBBY);
 			sister.setPenisSize(PenisLength.SIX_GIGANTIC);
@@ -940,9 +935,9 @@ public class Saellatrix extends NPC {
 			initSisterClothing(sister, PresetColour.CLOTHING_BLACK, PresetColour.CLOTHING_BLACK, PresetColour.CLOTHING_STEEL, null);
 			sister.setPiercedPenis(true);
 			sister.equipClothingFromNowhere(Main.game.getItemGen().generateClothing("innoxia_piercing_penis_ring", PresetColour.CLOTHING_GOLD, false), true, sister);
-			
+
 			sister.addItem(Main.game.getItemGen().generateItem(ItemType.REJUVENATION_POTION), 5, false, false);
-			
+
 			sister.addTattoo(InventorySlot.GROIN,
 					new Tattoo(
 						"innoxia_misc_none",
@@ -957,7 +952,7 @@ public class Saellatrix extends NPC {
 								TattooCountType.TALLY,
 								PresetColour.CLOTHING_PINK_HOT,
 								false)));
-			
+
 		} else if(fetishFocus==Fetish.FETISH_ORAL_GIVING) {
 			// Oral fetish with huge lips and massive tongue, feed me tattoo - crime of complaining about the food at Saellatrix's dinner party
 			// Loss is receive blowjob/cunnilingus
@@ -967,7 +962,7 @@ public class Saellatrix extends NPC {
 
 			sister.setName("Ionixis");
 			sister.setSpeechColour(PresetColour.BASE_LILAC);
-			
+
 			PerkManager.initialisePerks(sister,
 					Util.newArrayListOfValues(
 							Perk.BARREN,
@@ -977,9 +972,9 @@ public class Saellatrix extends NPC {
 							new Value<>(PerkCategory.PHYSICAL, 0),
 							new Value<>(PerkCategory.LUST, 5),
 							new Value<>(PerkCategory.ARCANE, 1)));
-			
+
 			sister.setVaginaSquirter(true);
-			
+
 			sister.setLipSize(LipSize.SEVEN_ABSURD);
 			sister.setFaceCapacity(Capacity.SEVEN_GAPING, true);
 			sister.setFaceDepth(OrificeDepth.SEVEN_FATHOMLESS.getValue());
@@ -996,7 +991,7 @@ public class Saellatrix extends NPC {
 			initSisterCoverings(sister, PresetColour.EYE_PINK_SALMON, PresetColour.SKIN_BLUE_LIGHT, PresetColour.SKIN_BLUE, PresetColour.COVERING_BLACK);
 
 			initSisterClothing(sister, PresetColour.CLOTHING_WHITE, PresetColour.CLOTHING_WHITE, PresetColour.CLOTHING_BLACK_STEEL, null);
-			
+
 			sister.addTattoo(InventorySlot.NECK,
 					new Tattoo(
 						"innoxia_misc_none",
@@ -1012,29 +1007,29 @@ public class Saellatrix extends NPC {
 								PresetColour.CLOTHING_PINK_HOT,
 								false)));
 		}
-		
+
 		// Add standard choker:
 		AbstractClothing choker = Main.game.getItemGen().generateClothing("innoxia_bdsm_choker", PresetColour.CLOTHING_RED_VERY_DARK, PresetColour.CLOTHING_SILVER, null, false);
 		choker.setSticker("top_txt", chokerTopText);
 		choker.setSticker("btm_txt", chokerBottomText);
-		
+
 		choker.clearEffects();
-		
+
 		choker.addEffect(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SEALING, TFPotency.MAJOR_DRAIN, 0));
 		choker.addEffect(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_ENSLAVEMENT, TFPotency.MINOR_BOOST, 0));
 		choker.addEffect(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.CLOTHING_SPECIAL, TFModifier.CLOTHING_SERVITUDE, TFPotency.MINOR_BOOST, 0));
-		
+
 		choker.addEffect(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BEHAVIOUR, TFModifier.TF_MOD_FETISH_SUBMISSIVE, TFPotency.MAJOR_BOOST, 0));
 		choker.addEffect(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BEHAVIOUR, TFModifier.TF_MOD_FETISH_NON_CON_SUB, TFPotency.MAJOR_BOOST, 0));
 		choker.addEffect(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BEHAVIOUR, TFModifier.TF_MOD_FETISH_SADIST, TFPotency.MAJOR_BOOST, 0));
 		choker.addEffect(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BEHAVIOUR, TFModifier.TF_MOD_FETISH_MASOCHIST, TFPotency.MAJOR_BOOST, 0));
 		choker.addEffect(new ItemEffect(ItemEffectType.CLOTHING, TFModifier.TF_MOD_FETISH_BEHAVIOUR, TFModifier.TF_MOD_FETISH_EXHIBITIONIST, TFPotency.MAJOR_BOOST, 0));
-		
+
 		choker.setName("Saellatrix's Gift");
-		
+
 		sister.equipClothingFromNowhere(choker, true, sister);
-		
-		
+
+
 		// Add standard crimes tattoo:
 		sister.addTattoo(InventorySlot.TORSO_UNDER,
 				new Tattoo(
@@ -1050,41 +1045,41 @@ public class Saellatrix extends NPC {
 							PresetColour.CLOTHING_GOLD,
 							false),
 					null));
-		
+
 		// Add slave after all clothing equipped so Saellatrix gets the keys
 		this.addSlave(sister);
 		sister.setObedience(100);
 	}
-	
+
 	private void initSisterCoverings(DollFactorySuccubus sister, Colour eye, Colour skin, Colour genitals, Colour horns) {
 		sister.setEyeCovering(new Covering(BodyCoveringType.EYE_DEMON_COMMON, eye));
 		sister.setSkinCovering(new Covering(BodyCoveringType.DEMON_COMMON, skin), true);
-		
+
 		sister.setSkinCovering(new Covering(BodyCoveringType.HORN, CoveringPattern.NONE, horns), false);
-		
+
 		sister.setSkinCovering(new Covering(BodyCoveringType.NIPPLES, CoveringPattern.ORIFICE_NIPPLE, genitals, false, PresetColour.ORIFICE_INTERIOR, false), false);
 		sister.setSkinCovering(new Covering(BodyCoveringType.VAGINA, CoveringPattern.ORIFICE_VAGINA, genitals, false, PresetColour.ORIFICE_INTERIOR, false), false);
 		sister.setSkinCovering(new Covering(BodyCoveringType.ANUS, CoveringPattern.ORIFICE_ANUS, genitals, false, PresetColour.ORIFICE_INTERIOR, false), false);
 		sister.setSkinCovering(new Covering(BodyCoveringType.PENIS, genitals), false);
 	}
-	
+
 	private void initSisterClothing(DollFactorySuccubus sister, Colour fishnetColour, Colour restraintsAndSkirtColour, Colour piercingsColour, List<InventorySlot> slotsToExclude) {
 		if(slotsToExclude==null) {
 			slotsToExclude = new ArrayList<>();
 		}
-		
+
 		// Basic equipment:
 		sister.equipMainWeaponFromNowhere(Main.game.getItemGen().generateWeapon("innoxia_bdsm_riding_crop", DamageType.PHYSICAL));
-		
+
 		Map<InventorySlot, AbstractClothing> clothingToEquip = new HashMap<>();
 		//TODO change
 		clothingToEquip.put(InventorySlot.TORSO_UNDER, Main.game.getItemGen().generateClothing(ClothingType.TORSO_FISHNET_TOP, fishnetColour, false));
 		clothingToEquip.put(InventorySlot.SOCK, Main.game.getItemGen().generateClothing("innoxia_sock_fishnets", fishnetColour, false));
 		clothingToEquip.put(InventorySlot.HAND, Main.game.getItemGen().generateClothing("innoxia_hand_fishnet_gloves", fishnetColour, false));
-		
+
 		clothingToEquip.put(InventorySlot.WRIST, Main.game.getItemGen().generateClothing("innoxia_bdsm_wrist_bracelets", restraintsAndSkirtColour, false));
 		clothingToEquip.put(InventorySlot.ANKLE, Main.game.getItemGen().generateClothing("innoxia_bdsm_wrist_bracelets", restraintsAndSkirtColour, false));
-		
+
 		if(Util.random.nextFloat()<0.5f) {
 			clothingToEquip.put(InventorySlot.LEG, Main.game.getItemGen().generateClothing("innoxia_leg_micro_skirt_pleated", restraintsAndSkirtColour, false));
 		} else {
@@ -1098,7 +1093,7 @@ public class Saellatrix extends NPC {
 		sister.setPiercedLip(true);
 		sister.setPiercedNavel(true);
 		sister.setPiercedNipples(true);
-		
+
 		if(Util.random.nextFloat()<0.5f) {
 			clothingToEquip.put(InventorySlot.PIERCING_EAR, Main.game.getItemGen().generateClothing("innoxia_piercing_ear_hoops", piercingsColour, false));
 		} else {
@@ -1117,20 +1112,20 @@ public class Saellatrix extends NPC {
 		} else {
 			clothingToEquip.put(InventorySlot.PIERCING_NIPPLE, Main.game.getItemGen().generateClothing("norin_piercings_heart_barbells", piercingsColour, piercingsColour, piercingsColour, false));
 		}
-		
+
 		for(Entry<InventorySlot, AbstractClothing> entry : clothingToEquip.entrySet()) {
 			if(!slotsToExclude.contains(entry.getKey())) {
 				sister.equipClothingOverride(entry.getValue(), entry.getKey(), true, false);
 			}
 		}
 	}
-	
+
 	// Methods for spawned sister detection:
-	
+
 	public boolean isAnySisterPresent() {
 		return getSisterPresent()!=null;
 	}
-	
+
 	public DollFactorySuccubus getSisterPresent() {
 		for(GameCharacter c : Main.game.getCharactersPresent()) {
 			if(c instanceof DollFactorySuccubus) {
@@ -1139,16 +1134,16 @@ public class Saellatrix extends NPC {
 		}
 		return null;
 	}
-	
+
 	public void removeSister(DollFactorySuccubus sister) {
-		for(Entry<AbstractFetish, String> entry : sisterFetishesToFlagIds.entrySet()) {
+		for(Entry<Fetish, String> entry : sisterFetishesToFlagIds.entrySet()) {
 			if(sister.hasFetish(entry.getKey())) {
 				Main.game.getDialogueFlags().setFlag(entry.getValue(), false);
 			}
 		}
 		sister.returnToHome();
 	}
-	
+
 //	/**
 //	 * For use when factory quest is completely finished.
 //	 */
@@ -1159,7 +1154,7 @@ public class Saellatrix extends NPC {
 //			}
 //		}
 //	}
-	
+
 	private static String[] toyNames = new String[]{"dildos", "anal beads", "cock rings", "strap-ons", "onaholes"};
 	private static Colour[] toyColours = new Colour[]{
 			PresetColour.CLOTHING_PURPLE,
@@ -1171,7 +1166,7 @@ public class Saellatrix extends NPC {
 			PresetColour.CLOTHING_BLUE_LIGHT,
 			PresetColour.CLOTHING_BROWN_DARK,
 			PresetColour.CLOTHING_BLACK};
-	
+
 	public void initFactoryMachineParsing() {
 		int toyIndex = Main.game.getPlayer().getLocation().getX()-3;
 		String toyNamePlural = "dildos";
@@ -1188,12 +1183,12 @@ public class Saellatrix extends NPC {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
 		Main.game.addSpecialParsingString(toyNamePlural, true);
 		Main.game.addSpecialParsingString(toyColourName, false);
 	}
-	
-	
+
+
 	public void generateSlimeMilker(String parserTag) {
 		GenericSexualPartner slime = new GenericSexualPartner();
 		try {
@@ -1206,7 +1201,7 @@ public class Saellatrix extends NPC {
 		// Perks:
 		slime.resetSpecialPerksMap();
 		slime.addSpecialPerk(Perk.SPECIAL_MEGA_SLUT);
-		
+
 		PerkManager.initialisePerks(slime,
 				Util.newArrayListOfValues(
 						Perk.BARREN,
@@ -1215,15 +1210,15 @@ public class Saellatrix extends NPC {
 						new Value<>(PerkCategory.PHYSICAL, 0),
 						new Value<>(PerkCategory.LUST, 1),
 						new Value<>(PerkCategory.ARCANE, 0)));
-		
+
 		// Fetishes:
 		slime.clearFetishDesires();
 		slime.clearFetishes();
 		slime.addFetish(Fetish.FETISH_LACTATION_SELF);
 		slime.addFetish(Fetish.FETISH_BIMBO);
-		
+
 		slime.setBody(Gender.F_P_V_B_FUTANARI, Subspecies.SLIME, RaceStage.GREATER, true);
-		
+
 //		slime.setSkinCovering(new Covering(BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_SKIN), PresetColour.COVERING_CLEAR), true);
 //		slime.setSkinCovering(new Covering(BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.EYE_IRIS), PresetColour.COVERING_CLEAR), false);
 //		slime.setSkinCovering(new Covering(BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.EYE_SCLERA), PresetColour.COVERING_CLEAR), false);
@@ -1239,9 +1234,9 @@ public class Saellatrix extends NPC {
 		slime.setSkinCovering(new Covering(BodyCoveringType.GIRL_CUM, CoveringPattern.FLUID, PresetColour.COVERING_CLEAR, false, PresetColour.COVERING_CLEAR, false), false);
 		slime.setSkinCovering(new Covering(BodyCoveringType.MILK, CoveringPattern.FLUID, PresetColour.COVERING_CLEAR, false, PresetColour.COVERING_CLEAR, false), false);
 		slime.setSkinCovering(new Covering(BodyCoveringType.CUM, CoveringPattern.FLUID, PresetColour.COVERING_CLEAR, false, PresetColour.COVERING_CLEAR, false), false);
-		
+
 		slime.setHeight(250);
-		
+
 		slime.setMuscle(0);
 		slime.setBodySize(100);
 
@@ -1250,13 +1245,13 @@ public class Saellatrix extends NPC {
 		slime.setPenisCumStorage(CumProduction.SEVEN_MONSTROUS.getMaximumValue());
 		slime.setPenisCumExpulsion(100);
 		slime.setPenisCumProductionRegeneration(FluidRegeneration.FOUR_VERY_RAPID.getMaximumRegenerationValuePerDay());
-		
+
 		slime.setBreastSize(CupSize.XX_N);
 		slime.setNippleSize(NippleSize.FOUR_MASSIVE);
 		slime.setAreolaeSize(AreolaeSize.FOUR_MASSIVE);
 		slime.setNippleCapacity(Capacity.FIVE_ROOMY.getMedianValue(), true);
 		slime.setBreastMilkStorage(Lactation.SEVEN_MONSTROUS_AMOUNT_POURING.getMaximumValue());
 		slime.setBreastLactationRegeneration(FluidRegeneration.FOUR_VERY_RAPID.getMaximumRegenerationValuePerDay());
-		
+
 	}
 }

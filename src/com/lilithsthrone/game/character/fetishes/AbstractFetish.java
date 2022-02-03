@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
+import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
@@ -25,7 +25,7 @@ public abstract class AbstractFetish implements Fetish {
 	protected String name;
 	protected String shortDescriptor;
 	private int experienceGainFromSexAction;
-	private HashMap<AbstractAttribute, Integer> attributeModifiers;
+	private HashMap<Attribute, Integer> attributeModifiers;
 
 	private String pathName;
 	private String SVGString;
@@ -35,7 +35,7 @@ public abstract class AbstractFetish implements Fetish {
 
 	private List<String> modifiersList;
 	
-	private List<AbstractFetish> fetishesForAutomaticUnlock;
+	private List<Fetish> fetishesForAutomaticUnlock;
 
 	protected static final String bimboString = SvgUtil.colourReplacement(
 			"FETISH_BIMBO",
@@ -53,9 +53,9 @@ public abstract class AbstractFetish implements Fetish {
 			String pathName,
 			FetishExperience experienceGainFromSexAction,
 			Colour colourShades,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			HashMap<Attribute, Integer> attributeModifiers,
 			List<String> extraEffects,
-			List<AbstractFetish> fetishesForAutomaticUnlock) {
+			List<Fetish> fetishesForAutomaticUnlock) {
 		this(renderingPriority,
 				name,
 				shortDescriptor,
@@ -74,9 +74,9 @@ public abstract class AbstractFetish implements Fetish {
 			String pathName,
 			FetishExperience experienceGainFromSexAction,
 			List<Colour> colourShades,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			HashMap<Attribute, Integer> attributeModifiers,
 			List<String> extraEffects,
-			List<AbstractFetish> fetishesForAutomaticUnlock) {
+			List<Fetish> fetishesForAutomaticUnlock) {
 
 		this.renderingPriority = renderingPriority;
 		this.name = name;
@@ -99,7 +99,7 @@ public abstract class AbstractFetish implements Fetish {
 		modifiersList = new ArrayList<>();
 
 		if(attributeModifiers != null) {
-			for (Entry<AbstractAttribute, Integer> e : attributeModifiers.entrySet()) {
+			for (Entry<Attribute, Integer> e : attributeModifiers.entrySet()) {
 				modifiersList.add("<b>"+(e.getValue() > 0 ? "+" : "") + e.getValue() + "</b> <b style='color: "+ e.getKey().getColour().toWebHexString()+ ";'>"+ Util.capitaliseSentence(e.getKey().getAbbreviatedName())+ "</b>");
 			}
 		}
@@ -111,7 +111,7 @@ public abstract class AbstractFetish implements Fetish {
 	}
 
 	@Override
-	public List<AbstractFetish> getFetishesForAutomaticUnlock() {
+	public List<Fetish> getFetishesForAutomaticUnlock() {
 		return fetishesForAutomaticUnlock;
 	}
 
@@ -156,7 +156,7 @@ public abstract class AbstractFetish implements Fetish {
 	}
 
 	@Override
-	public HashMap<AbstractAttribute, Integer> getAttributeModifiers() {
+	public HashMap<Attribute, Integer> getAttributeModifiers() {
 		return attributeModifiers;
 	}
 

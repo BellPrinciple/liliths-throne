@@ -49,12 +49,10 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
 import com.lilithsthrone.game.occupantManagement.slave.SlavePermissionSetting;
@@ -64,7 +62,6 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -73,6 +70,32 @@ import com.lilithsthrone.world.places.PlaceType;
  * @author Innoxia, DSG
  */
 public interface Encounter {
+
+	String getId();
+
+	default String getAuthor() {
+		return null;
+	}
+
+	default Map<EncounterType,Float> getDialogues() {
+		return Map.of();
+	}
+
+	boolean isAnyEncounterAvailable();
+
+	/**
+	 * Returns a random encounter from the list, or null if no encounter was selected.
+	 *
+	 * @param forceEncounter Forces an encounter to be selected. (Will still return null if the encounter list is empty.)
+	 * @return null if no encounter.
+	 */
+	DialogueNode getRandomEncounter(boolean forceEncounter);
+
+	boolean isAnyBaseTriggerChanceOverOneHundred();
+
+	float getTotalChanceValue();
+
+	List<String> getPlaceTypeIds();
 
 	public static AbstractEncounter LILAYAS_HOME_CORRIDOR = new AbstractEncounter() {
 		@Override
@@ -482,7 +505,7 @@ public interface Encounter {
 					Main.game.getPlayerCell().getInventory().addClothing((AbstractClothing) randomItem);
 					
 				} else {
-					List<AbstractClothingType> randomClothingList = new ArrayList<>(ClothingType.getAllClothing());
+					List<ClothingType> randomClothingList = new ArrayList<>(ClothingType.getAllClothing());
 					randomClothingList.removeIf((clothing) ->
 							(!clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_KATE)
 								&& !clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN)
@@ -496,7 +519,7 @@ public interface Encounter {
 				return DominionEncounterDialogue.ALLEY_FIND_ITEM;
 				
 			} else if(node == EncounterType.DOMINION_FIND_WEAPON) {
-				List<AbstractWeaponType> weapons = new ArrayList<>(WeaponType.getAllWeapons());
+				List<WeaponType> weapons = new ArrayList<>(WeaponType.getAllWeapons());
 				weapons.removeIf(w -> !w.getItemTags().contains(ItemTag.DOMINION_ALLEYWAY_SPAWN));
 				randomItem = Main.game.getItemGen().generateWeapon(weapons.get(Util.random.nextInt(weapons.size())));
 				
@@ -630,7 +653,7 @@ public interface Encounter {
 					Main.game.getPlayerCell().getInventory().addClothing((AbstractClothing) randomItem);
 					
 				} else {
-					List<AbstractClothingType> randomClothingList = new ArrayList<>(ClothingType.getAllClothing());
+					List<ClothingType> randomClothingList = new ArrayList<>(ClothingType.getAllClothing());
 					randomClothingList.removeIf((clothing) ->
 							(!clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_KATE)
 								&& !clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN)
@@ -644,7 +667,7 @@ public interface Encounter {
 				return DominionEncounterDialogue.ALLEY_FIND_ITEM;
 				
 			} else if(node == EncounterType.DOMINION_FIND_WEAPON) {
-				List<AbstractWeaponType> weapons = new ArrayList<>(WeaponType.getAllWeapons());
+				List<WeaponType> weapons = new ArrayList<>(WeaponType.getAllWeapons());
 				weapons.removeIf(w -> !w.getItemTags().contains(ItemTag.DOMINION_ALLEYWAY_SPAWN));
 				randomItem = Main.game.getItemGen().generateWeapon(weapons.get(Util.random.nextInt(weapons.size())));
 				
@@ -1075,7 +1098,7 @@ public interface Encounter {
                     && !Main.game.getPlayer().isQuestFailed(QuestLine.SIDE_REBEL_BASE)
                     && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_HANDLE_REFUSED)
                     && Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_PASSWORD_COMPLETE)) {
-            	AbstractPlaceType playerPlaceType = Main.game.getPlayerCell().getPlace().getPlaceType();
+            	PlaceType playerPlaceType = Main.game.getPlayerCell().getPlace().getPlaceType();
             	// Limit encounters for passwords to dark, light, and HLF base entrance tiles only:
             	if(playerPlaceType.equals(PlaceType.BAT_CAVERN_DARK) || playerPlaceType.equals(PlaceType.BAT_CAVERN_LIGHT) || playerPlaceType.equals(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_EXTERIOR)) {
 	            	// The player needs to find one password from a dark tile and one from a light tile, so if already found the password in their tile, do not enable Encounter
@@ -1398,7 +1421,7 @@ public interface Encounter {
 	 * @return A list of Encounters which are associated with the placeType (which have been added via external file).
 	 *  Returns an empty list if no associated encounters are found.
 	 */
-	static List<AbstractEncounter> getAddedEncounters(String placeTypeId) {
+	static List<Encounter> getAddedEncounters(String placeTypeId) {
 		return Table.addedEncounters.getOrDefault(placeTypeId,List.of());
 	}
 
@@ -1406,23 +1429,23 @@ public interface Encounter {
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
 	@Deprecated
-	static AbstractEncounter getEncounterFromId(String id) {
+	static Encounter getEncounterFromId(String id) {
 		return table.of(id);
 	}
 
 	@Deprecated
-	static String getIdFromEncounter(AbstractEncounter encounter) {
+	static String getIdFromEncounter(Encounter encounter) {
 		return encounter.getId();
 	}
 
 	@Deprecated
-	static List<AbstractEncounter> getAllEncounters() {
+	static List<Encounter> getAllEncounters() {
 		return table.list();
 	}
 
 	Table table = new Table();
-	final class Table extends com.lilithsthrone.utils.Table<AbstractEncounter> {
-		private static final Map<String,List<AbstractEncounter>> addedEncounters = new HashMap<>();
+	final class Table extends com.lilithsthrone.utils.Table<Encounter> {
+		private static final Map<String,List<Encounter>> addedEncounters = new HashMap<>();
 		private Table() {
 			super(s->s);
 		// Modded encounters:
@@ -1459,7 +1482,7 @@ public interface Encounter {
 		// Hard-coded encounters (all those up above):
 			addFields(Encounter.class,AbstractEncounter.class,(n,e)->e.id=n);
 		// Add additional place types which can trigger encounters to the 'addedEncounters' map
-			for(AbstractEncounter encounter : list()) {
+			for(Encounter encounter : list()) {
 				if(encounter.getPlaceTypeIds()!=null) {
 					for(String placeId : encounter.getPlaceTypeIds()) {
 						Table.addedEncounters.computeIfAbsent(placeId,k->new ArrayList<>()).add(encounter);

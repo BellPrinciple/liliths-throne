@@ -1,7 +1,7 @@
 package com.lilithsthrone.game.character.body;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
+import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 
 /**
@@ -48,11 +48,11 @@ public interface BodyPartInterface {
 		}
 	}
 	
-	public default AbstractBodyCoveringType getBodyCoveringType(GameCharacter gc) {
+	default BodyCoveringType getBodyCoveringType(GameCharacter gc) {
 		return getType().getBodyCoveringType(gc.getBody());
 	}
 	
-	public default AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	default BodyCoveringType getBodyCoveringType(Body body) {
 		return getType().getBodyCoveringType(body);
 	}
 	

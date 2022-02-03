@@ -34,7 +34,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
 
@@ -86,7 +85,7 @@ public class OccupantController {
 	
 	public static void initRoomUpgradesListeners() {
 		String id;
-		for (AbstractPlaceUpgrade placeUpgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
+		for (PlaceUpgrade placeUpgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
 			id = "ROOM_MOD_INFO_"+PlaceUpgrade.getIdFromPlaceUpgrade(placeUpgrade);
 			if (MainController.document.getElementById(id) != null) {
 				MainController.addTooltipListeners(id,

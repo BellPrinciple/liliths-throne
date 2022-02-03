@@ -50,7 +50,6 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
 
@@ -64,12 +63,12 @@ public class SlaveDialogue {
 	private static NPC slave;
 	private static NPC characterForSex;
 	private static NPC characterForSexSecondary;
-	
+
 	private static List<NPC> charactersPresent;
-	
+
 	private static boolean initFromCharactersPresent;
 	private static boolean dollStatueInterrupted;
-	
+
 	public static void initDialogue(NPC targetedSlave, boolean initFromCharactersPresent) {
 		CompanionManagement.initManagement(SLAVE_START, 2, targetedSlave);
 		slave = targetedSlave;
@@ -102,34 +101,34 @@ public class SlaveDialogue {
 	private static NPC getSlave() {
 		return slave;
 	}
-	
+
 	private static boolean isDoll() {
 		return getSlave().isDoll();
 	}
-	
+
 	private static boolean isDollStatue() {
 		return getSlave().isDollStatue();
 	}
-	
+
 	private static ResponseTag getDollSexTag() {
 		if(isDollStatue()) {
 			if(getSlave().hasSlaveJobSetting(SlaveJob.DOLL_STATUE, SlaveJobSetting.DOLL_STATUE_ALL_FOURS)) {
 				return ResponseTag.PREFER_DOGGY;
-				
+
 			} else if(getSlave().hasSlaveJobSetting(SlaveJob.DOLL_STATUE, SlaveJobSetting.DOLL_STATUE_MISSIONARY) || getSlave().hasSlaveJobSetting(SlaveJob.DOLL_STATUE, SlaveJobSetting.DOLL_STATUE_BRIDGE)) {
 				return ResponseTag.PREFER_MISSIONARY;
-				
+
 			} else if(getSlave().hasSlaveJobSetting(SlaveJob.DOLL_STATUE, SlaveJobSetting.DOLL_STATUE_SQUATTING)) {
 				return ResponseTag.PREFER_ORAL;
 			}
 		}
 		return null;
 	}
-	
+
 	public static boolean isDollStatueInterrupted() {
 		return dollStatueInterrupted;
 	}
-	
+
 	private static SlaveJob getCurrentJob() {
 		return getSlave().getSlaveJob(Main.game.getHourOfDay());
 	}
@@ -197,7 +196,7 @@ public class SlaveDialogue {
 						forcePlayerFullControl,
 						new HashMap<>());
 	}
-	
+
 	private static SMGeneric getGenericSlaveSexManager(
 			List<GameCharacter> dominantParticipants,
 			List<GameCharacter> submissiveParticipants,
@@ -233,7 +232,7 @@ public class SlaveDialogue {
 			@Override
 			public Map<ImmobilisationType, Map<GameCharacter, Set<GameCharacter>>> getStartingCharactersImmobilised() {
 				ImmobilisationType immobilisationType = null;
-				for(AbstractPlaceUpgrade upgrade : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
+				for(var upgrade : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
 					immobilisationType = upgrade.getImmobilisationType();
 					if(immobilisationType!=null) {
 						break;
@@ -250,7 +249,7 @@ public class SlaveDialogue {
 						}
 					}
 				}
-				
+
 				map.put(ImmobilisationType.COMMAND, new HashMap<>());
 				map.get(ImmobilisationType.COMMAND).put(dominantParticipants.get(0), new HashSet<>());
 				for(GameCharacter character : submissiveParticipants) {
@@ -266,7 +265,7 @@ public class SlaveDialogue {
 						map.get(ImmobilisationType.SLEEP).get(dominantParticipants.get(0)).add(character);
 					}
 				}
-				
+
 				return map;
 			}
 		};
@@ -276,7 +275,7 @@ public class SlaveDialogue {
 //	private static void applyImmobilisationText(List<GameCharacter> submissiveParticipants) {
 //		// Immobilisation from room upgrades:
 //		ImmobilisationType immobilisationType = null;
-//		for(AbstractPlaceUpgrade upgrade : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
+//		for(PlaceUpgrade upgrade : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
 //			immobilisationType = upgrade.getImmobilisationType();
 //			if(immobilisationType!=null) {
 //				break;
@@ -315,7 +314,7 @@ public class SlaveDialogue {
 //					}
 //					sb.append(" bound and unable to move!");
 //				sb.append(")]</p>");
-//				
+//
 //				Main.game.appendToTextEndStringBuilder(sb.toString());
 //			}
 //		}
@@ -339,10 +338,10 @@ public class SlaveDialogue {
 //				}
 //				sb.append(" remaining frozen in place!");
 //			sb.append(")]</p>");
-//			
+//
 //			Main.game.appendToTextEndStringBuilder(sb.toString());
 //		}
-//		
+//
 //		// Sleeping:
 //		slaveSubs = new ArrayList<>(submissiveParticipants);
 //		slaveSubs.removeIf(s->!s.isAsleep());
@@ -367,7 +366,7 @@ public class SlaveDialogue {
 //				}
 //				sb.append(" asleep!");
 //			sb.append(")]</p>");
-//			
+//
 //			Main.game.appendToTextEndStringBuilder(sb.toString());
 //		}
 //	}
@@ -510,7 +509,7 @@ public class SlaveDialogue {
 	
 	private static String getSlaveStartCoreContent() {
 		StringBuilder sb = new StringBuilder();
-		
+
 		if(!isDollStatue()) {
 			if(getSlave().isVisiblyPregnant()) {
 				// Pregnant encounters:
@@ -676,13 +675,13 @@ public class SlaveDialogue {
 			} else { // Standard repeat encounter:
 
 				sb.append("<p>");
-				
+
 				if(isDoll()) {
 					sb.append("[npc.speech(Good [style.morning], [pc.name],)] [npc.she] says in [npc.her] slightly robotic voice, [npc.speech(How may I serve you?)]");
-					
+
 				} else {
 					sb.append("As you look at the [npc.race], [npc.she] returns your gaze,");
-					
+
 					switch(AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()))) {
 						case DISLIKE:
 							switch(ObedienceLevelBasic.getObedienceLevelFromValue(getSlave().getObedienceValue())) {
@@ -734,7 +733,7 @@ public class SlaveDialogue {
 							break;
 					}
 				}
-				
+
 				sb.append("</p>");
 				sb.append(
 						"<p>"
@@ -742,12 +741,12 @@ public class SlaveDialogue {
 						+ "</p>");
 			}
 		}
-		
+
 		sb.append(getFooterText());
-		
+
 		return UtilText.parse(getSlave(), sb.toString());
 	}
-	
+
 	public static final DialogueNode SLAVE_START_NO_CONTENT = new DialogueNode("", "", true) {
 		@Override
 		public DialogueNodeType getDialogueNodeType() {
@@ -770,7 +769,7 @@ public class SlaveDialogue {
 			return SLAVE_START.getResponse(responseTab, index);
 		}
 	};
-	
+
 	private static Response getWakeUpResponse() {
 		return new Response(UtilText.parse(getSlave(), "Wake [npc.herHim]"),
 				UtilText.parse(getSlave(),
@@ -780,7 +779,7 @@ public class SlaveDialogue {
 			@Override
 			public void effects() {
 				getSlave().wakeUp();
-				
+
 				Main.game.appendToTextEndStringBuilder("<p>");
 					Main.game.appendToTextEndStringBuilder("Wanting to interact with [npc.name], you [pc.step] over to where [npc.sheIs] sleeping and ");
 					if(Main.game.getPlayer().isMute()) {
@@ -800,7 +799,7 @@ public class SlaveDialogue {
 			}
 		};
 	}
-	
+
 	public static final DialogueNode SLAVE_START = new DialogueNode("", ".", true) {
 		@Override
 		public DialogueNodeType getDialogueNodeType() {
@@ -813,7 +812,7 @@ public class SlaveDialogue {
 		@Override
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);
-			
+
 			UtilText.nodeContentSB.append("<p>");
 				if(getSlave().isAsleep()) {
 					UtilText.nodeContentSB.append("As [npc.name] is sleeping at this time, you'll need to wake [npc.herHim] up before interacting with [npc.herHim].");
@@ -833,7 +832,7 @@ public class SlaveDialogue {
 			if(!getSlave().isAsleep() && !isDollStatue()) {
 				UtilText.nodeContentSB.append(getSlaveStartCoreContent());
 			}
-			
+
 			return UtilText.parse(getSlave(), UtilText.nodeContentSB.toString());
 		}
 
@@ -873,7 +872,7 @@ public class SlaveDialogue {
 						}
 					};
 				}
-				
+
 				if(isDollStatue()) {
 					if(index == 1) {
 						return new Response("Stop statue",
@@ -889,7 +888,7 @@ public class SlaveDialogue {
 							}
 						};
 					}
-					
+
 				} else if(getSlave().isAsleep()) {
 					if(index == 1) {
 						return getWakeUpResponse();
@@ -916,7 +915,7 @@ public class SlaveDialogue {
 						} else {
 							return new Response("Background", UtilText.parse(getSlave(), "You've already talked with [npc.name] about this today..."), null);
 						}
-						
+
 					} else if(index == 2) {
 						if(!getSlave().NPCFlagValues.contains(NPCFlagValue.flagSlaveSmallTalk)) {
 							return new Response("Small talk", UtilText.parse(getSlave(), "Chat about this and that with [npc.name]."), SLAVE_MINOR) {
@@ -942,7 +941,7 @@ public class SlaveDialogue {
 						} else {
 							return new Response("Small talk", UtilText.parse(getSlave(), "You've already spent time talking with [npc.name] today."), null);
 						}
-						
+
 					} else if(index == 3
 							&& getSlave().equals(Main.game.getNpc(Scarlett.class))
 							&& !Main.getProperties().hasValue(PropertyValue.companionContent)
@@ -970,14 +969,14 @@ public class SlaveDialogue {
 								Main.game.getNpc(Helena.class).setLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_SCARLETTS_SHOP);
 							}
 						};
-						
+
 					} else if(index == 5 && Main.getProperties().hasValue(PropertyValue.companionContent)) {
 						if(!Main.game.getPlayer().hasCompanion(getSlave())) {
 							if(!getSlave().isCompanionAvailable(Main.game.getPlayer())) {
 								return new Response("Add to party",
 										UtilText.parse(getSlave(), "[npc.Name] cannot be added to your party!"),
 										null);
-									
+
 							} else if(Main.game.getPlayer().canHaveMoreCompanions()) {
 								return new Response("Add to party",
 										UtilText.parse(getSlave(), "Command [npc.name] to start following you around."),
@@ -1004,7 +1003,7 @@ public class SlaveDialogue {
 								}
 							};
 						}
-						
+
 					} else if(index == 6) {
 						if(!getSlave().NPCFlagValues.contains(NPCFlagValue.flagSlaveEncourage)) {
 							if(getCurrentJob()==SlaveJob.IDLE) {
@@ -1012,7 +1011,7 @@ public class SlaveDialogue {
 										UtilText.parse(getSlave(),
 												"[npc.Name] isn't currently doing any work...<br/>[style.italicsMinorBad(You can't ask [npc.name] about [npc.her] work while [npc.sheIs] idle!)]"),
 										null);
-								
+
 							} else {
 								return new Response("Work", UtilText.parse(getSlave(), "Ask [npc.name] about how [npc.her] work is going."), SLAVE_ENCOURAGE) {
 									@Override
@@ -1038,11 +1037,11 @@ public class SlaveDialogue {
 									}
 								};
 							}
-							
+
 						} else {
 							return new Response("Work", UtilText.parse(getSlave(), "You've talked to [npc.name] about [npc.her] work today."), null);
 						}
-						
+
 					} else if(index == 7) {
 						if(!getSlave().NPCFlagValues.contains(NPCFlagValue.flagSlaveHug)) {
 							return new Response("Hug", UtilText.parse(getSlave(), "Hug [npc.name]."), SLAVE_HUG) {
@@ -1050,7 +1049,7 @@ public class SlaveDialogue {
 								public void effects() {
 									applyReactionReset();
 									getSlave().NPCFlagValues.add(NPCFlagValue.flagSlaveHug);
-	
+
 									if(!isDoll()) {
 										switch(AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()))) {
 											case DISLIKE:
@@ -1072,7 +1071,7 @@ public class SlaveDialogue {
 						} else {
 							return new Response("Hug", UtilText.parse(getSlave(), "You've already spent time hugging [npc.name] today."), null);
 						}
-						
+
 					} else if(index == 8) {
 						if(!getSlave().NPCFlagValues.contains(NPCFlagValue.flagSlavePettings)) {
 							return new Response("Pettings", UtilText.parse(getSlave(), "Give [npc.name] some loving pettings."), SLAVE_PETTINGS) {
@@ -1080,7 +1079,7 @@ public class SlaveDialogue {
 								public void effects() {
 									applyReactionReset();
 									getSlave().NPCFlagValues.add(NPCFlagValue.flagSlavePettings);
-									
+
 									if(!isDoll()) {
 										switch(AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()))) {
 											case DISLIKE:
@@ -1102,7 +1101,7 @@ public class SlaveDialogue {
 						} else {
 							return new Response("Pettings", UtilText.parse(getSlave(), "You've already spent time petting [npc.name] today."), null);
 						}
-						
+
 					} else if(index == 9) {
 						if(Main.game.getPlayer().hasItemType(ItemType.PRESENT)) {
 							if(isDoll()) {
@@ -1113,18 +1112,18 @@ public class SlaveDialogue {
 								public void effects() {
 									applyReactionReset();
 									Main.game.getPlayer().removeItem(Main.game.getItemGen().generateItem(ItemType.PRESENT));
-	
+
 									if(!isDoll()) {
 										Main.game.getTextEndStringBuilder().append(getSlave().incrementAffection(Main.game.getPlayer(), 10));
 										Main.game.getTextEndStringBuilder().append(getSlave().incrementObedience(-2));
 									}
 								}
 							};
-							
+
 						} else {
 							return null;
 						}
-						
+
 					} else if(index == 11) {
 						if(!getSlave().NPCFlagValues.contains(NPCFlagValue.flagSlaveInspect)) {
 							return new Response("Inspect", UtilText.parse(getSlave(), "Make [npc.name] strip and parade around [npc.her] room for your inspection."), SLAVE_INSPECT) {
@@ -1132,7 +1131,7 @@ public class SlaveDialogue {
 								public void effects() {
 									applyReactionReset();
 									getSlave().NPCFlagValues.add(NPCFlagValue.flagSlaveInspect);
-		
+
 									getSlave().setAreaKnownByCharacter(CoverableArea.ANUS, Main.game.getPlayer(), true);
 									getSlave().setAreaKnownByCharacter(CoverableArea.ASS, Main.game.getPlayer(), true);
 									getSlave().setAreaKnownByCharacter(CoverableArea.BREASTS, Main.game.getPlayer(), true);
@@ -1142,7 +1141,7 @@ public class SlaveDialogue {
 									getSlave().setAreaKnownByCharacter(CoverableArea.PENIS, Main.game.getPlayer(), true);
 									getSlave().setAreaKnownByCharacter(CoverableArea.TESTICLES, Main.game.getPlayer(), true);
 									getSlave().setAreaKnownByCharacter(CoverableArea.VAGINA, Main.game.getPlayer(), true);
-	
+
 									if(!isDoll()) {
 										if(getSlave().getFetishDesire(Fetish.FETISH_MASOCHIST).isPositive() || getSlave().getFetishDesire(Fetish.FETISH_EXHIBITIONIST).isPositive()) {
 											Main.game.getTextEndStringBuilder().append(getSlave().incrementAffection(Main.game.getPlayer(), 10));
@@ -1156,7 +1155,7 @@ public class SlaveDialogue {
 						} else {
 							return new Response("Inspect", UtilText.parse(getSlave(), "You've already inspected [npc.name] today."), null);
 						}
-						
+
 					} else if(index == 12) {
 						if(!getSlave().NPCFlagValues.contains(NPCFlagValue.flagSlaveSpanking)) {
 							return new Response("Spanking", UtilText.parse(getSlave(), "Bend [npc.name] over your knee and give [npc.herHim] a rough spanking."), SLAVE_SPANKING) {
@@ -1177,7 +1176,7 @@ public class SlaveDialogue {
 						} else {
 							return new Response("Spanking", UtilText.parse(getSlave(), "You've already spanked [npc.name] today."), null);
 						}
-						
+
 					} else if(index == 13) {
 						if(!getSlave().NPCFlagValues.contains(NPCFlagValue.flagSlaveMolest)) {
 							return new Response("Molest", UtilText.parse(getSlave(), "Make [npc.name] sit still as you grope and molest [npc.her] body."), SLAVE_MOLEST) {
@@ -1185,12 +1184,12 @@ public class SlaveDialogue {
 								public void effects() {
 									applyReactionReset();
 									getSlave().NPCFlagValues.add(NPCFlagValue.flagSlaveMolest);
-	
+
 									if(!isDoll()) {
 										if(getSlave().isAttractedTo(Main.game.getPlayer())
 												&& (getSlave().getFetishDesire(Fetish.FETISH_SUBMISSIVE).isPositive() || getSlave().getFetishDesire(Fetish.FETISH_NON_CON_SUB).isPositive())) {
 											Main.game.getTextEndStringBuilder().append(getSlave().incrementAffection(Main.game.getPlayer(), 10));
-											
+
 										} else if(!getSlave().isAttractedTo(Main.game.getPlayer()) && !getSlave().hasFetish(Fetish.FETISH_SUBMISSIVE) && !getSlave().hasFetish(Fetish.FETISH_NON_CON_SUB)) {
 											Main.game.getTextEndStringBuilder().append(getSlave().incrementAffection(Main.game.getPlayer(), -10));
 										}
@@ -1201,15 +1200,15 @@ public class SlaveDialogue {
 						} else {
 							return new Response("Molest", UtilText.parse(getSlave(), "You've already molested [npc.name] today."), null);
 						}
-						
+
 					}
 				}
-				
+
 				return null;
-			
+
 			} else if(responseTab == 1) {
 				if(index == 0) {
-					return new Response("Leave", 
+					return new Response("Leave",
 							UtilText.parse(getSlave(),
 									isDollStatue()
 										?"Leave [npc.name] frozen in place and continue on your way."
@@ -1229,7 +1228,7 @@ public class SlaveDialogue {
 						}
 					};
 				}
-				
+
 				if(Main.game.getPlayer().getLocationPlace().getPlaceUpgrades().contains(PlaceUpgrade.LILAYA_MILKING_ROOM)) {
 					if(index == 1) {
 						if((!characterForSex.isSlave() || !characterForSex.getOwner().isPlayer())
@@ -1279,13 +1278,13 @@ public class SlaveDialogue {
 							};
 						}
 					}
-					
+
 				} else if(getSlave().isAsleep()) {
 					if(index == 1) {
 						if((!characterForSex.isSlave() || !characterForSex.getOwner().isPlayer())
 								&& !characterForSex.isAttractedTo(Main.game.getPlayer())) {
 							return new Response("Sleep sex", UtilText.parse(characterForSex, "[npc.Name] is not attracted to you, and you cannot force [npc.herHim] to have sex with you..."), null);
-							
+
 						} else if(Main.game.isNonConEnabled() && !characterForSex.isAttractedTo(Main.game.getPlayer())) {
 							if(!getSlave().hasTrait(Perk.HEAVY_SLEEPER, true)) {
 								return new Response("Sleep rape", UtilText.parse(characterForSex, "[npc.Name] is not a heavy sleeper, and so you can't have sleep sex with [npc.herHim]..."), null);
@@ -1293,7 +1292,7 @@ public class SlaveDialogue {
 							return new ResponseSex("Sleep rape",
 									UtilText.parse(characterForSex,
 											"[npc.Name] is definitely not interested in having sex with you, but it's not like [npc.sheHasFull] a choice in the matter."
-											+ " As [npc.sheIs] a heavy sleeper, you can gently fuck [npc.herHim] without waking [npc.herHim] up..."), 
+											+ " As [npc.sheIs] a heavy sleeper, you can gently fuck [npc.herHim] without waking [npc.herHim] up..."),
 									false, false,
 									getGenericSlaveSexManager(
 											Util.newArrayListOfValues(Main.game.getPlayer()),
@@ -1311,13 +1310,13 @@ public class SlaveDialogue {
 									//applyImmobilisationText(Util.newArrayListOfValues(characterForSex));
 								}
 							};
-						
+
 						} else {
 							if(!getSlave().hasTrait(Perk.HEAVY_SLEEPER, true)) {
 								return new Response("Sleep sex", UtilText.parse(characterForSex, "[npc.Name] is not a heavy sleeper, and so you can't have sleep sex with [npc.herHim]..."), null);
 							}
 							return new ResponseSex("Sleep sex",
-									UtilText.parse(characterForSex, "As [npc.sheIs] a heavy sleeper, you can gently fuck [npc.name] without waking [npc.herHim] up..."), 
+									UtilText.parse(characterForSex, "As [npc.sheIs] a heavy sleeper, you can gently fuck [npc.name] without waking [npc.herHim] up..."),
 									true, false,
 									getGenericSlaveSexManager(
 											Util.newArrayListOfValues(Main.game.getPlayer()),
@@ -1336,7 +1335,7 @@ public class SlaveDialogue {
 								}
 							};
 						}
-						
+
 					}
 					
 				} else {
@@ -1407,13 +1406,13 @@ public class SlaveDialogue {
 									UtilText.parse(characterForSexSecondary,
 											"As an immobile doll, [npc.name] cannot take a dominant role in sex..."),
 									null);
-							
+
 						} else if (characterForSexSecondary.isAsleep()) {
 							return new Response("Spitroast (front)",
 									UtilText.parse(characterForSexSecondary,
 											"As [npc.sheIsFull] currently asleep, [npc.name] cannot participate in sex..."),
 									null);
-							
+
 						} else if(!characterForSexSecondary.isAttractedTo(characterForSex)) {
 							return new Response("Spitroast (front)",
 									UtilText.parse(characterForSexSecondary, characterForSex,
@@ -1468,13 +1467,13 @@ public class SlaveDialogue {
 									UtilText.parse(characterForSexSecondary,
 											"As an immobile doll, [npc.name] cannot take a dominant role in sex..."),
 									null);
-							
+
 						} else if (characterForSexSecondary.isAsleep()) {
 							return new Response("Spitroast (behind)",
 									UtilText.parse(characterForSexSecondary,
 											"As [npc.sheIsFull] currently asleep, [npc.name] cannot participate in sex..."),
 									null);
-							
+
 						} else if(!characterForSexSecondary.isAttractedTo(characterForSex)) {
 							return new Response("Spitroast (behind)",
 									UtilText.parse(characterForSexSecondary, characterForSex,
@@ -1530,7 +1529,7 @@ public class SlaveDialogue {
 									UtilText.parse(characterForSexSecondary,
 											"As [npc.sheIsFull] currently asleep, [npc.name] cannot participate in sex..."),
 									null);
-							
+
 						} else if((!Main.game.isNonConEnabled() || !characterForSexSecondary.isSlave()) && !characterForSexSecondary.isAttractedTo(Main.game.getPlayer())) {
 							return new Response("Side-by-side (as dom)",
 									UtilText.parse(characterForSexSecondary,
@@ -1578,7 +1577,7 @@ public class SlaveDialogue {
 							return new Response("Gangbang (as dom)",
 											names+" "+(soloSleeper?"needs":"need")+" to be awake to participate in a gangbang!",
 									null);
-							
+
 						} else {
 							boolean isRape = charactersPresent.stream().anyMatch(c->!c.isAttractedTo(Main.game.getPlayer()));
 							// Handle attraction/non-con:
@@ -1651,7 +1650,7 @@ public class SlaveDialogue {
 									UtilText.parse(characterForSex,
 											"As an immobile doll, [npc.name] cannot take a dominant role in sex..."),
 									null);
-							
+
 						} else if(!characterForSex.isAttractedTo(Main.game.getPlayer())) {
 							return new Response("Submissive sex",
 									UtilText.parse(characterForSex, 
@@ -1697,19 +1696,19 @@ public class SlaveDialogue {
 									UtilText.parse(characterForSex,
 											"As an immobile doll, [npc.name] cannot take a dominant role in sex..."),
 									null);
-							
+
 						} else if (characterForSexSecondary.isAsleep()) {
 							return new Response("Spitroasted (front)",
 									UtilText.parse(characterForSexSecondary,
 											"As [npc.sheIsFull] currently asleep, [npc.name] cannot participate in sex..."),
 									null);
-							
+
 						} else if (characterForSexSecondary.isDollStatue()) {
 							return new Response("Spitroasted (front)",
 									UtilText.parse(characterForSexSecondary,
 											"As an immobile doll, [npc.name] cannot take a dominant role in sex..."),
 									null);
-							
+
 						} else if(!characterForSex.isAttractedTo(Main.game.getPlayer())) {
 							if(!characterForSexSecondary.isAttractedTo(Main.game.getPlayer())) {
 								return new Response("Spitroasted (front)",
@@ -1771,19 +1770,19 @@ public class SlaveDialogue {
 									UtilText.parse(characterForSex,
 											"As an immobile doll, [npc.name] cannot take a dominant role in sex..."),
 									null);
-							
+
 						} else if (characterForSexSecondary.isDollStatue()) {
 							return new Response("Spitroasted (behind)",
 									UtilText.parse(characterForSexSecondary,
 											"As an immobile doll, [npc.name] cannot take a dominant role in sex..."),
 									null);
-							
+
 						} else if (characterForSexSecondary.isAsleep()) {
 							return new Response("Spitroasted (behind)",
 									UtilText.parse(characterForSexSecondary,
 											"As [npc.sheIsFull] currently asleep, [npc.name] cannot participate in sex..."),
 									null);
-							
+
 						} else if(!characterForSex.isAttractedTo(Main.game.getPlayer())) {
 							if(!characterForSexSecondary.isAttractedTo(Main.game.getPlayer())) {
 								return new Response("Spitroasted (behind)",
@@ -1844,19 +1843,19 @@ public class SlaveDialogue {
 									UtilText.parse(characterForSex,
 											"As an immobile doll, [npc.name] cannot take a dominant role in sex..."),
 									null);
-							
+
 						} else if (characterForSexSecondary.isDollStatue()) {
 							return new Response("Side-by-side (as sub)",
 									UtilText.parse(characterForSexSecondary,
 											"As an immobile doll, [npc.name] cannot take a dominant role in sex..."),
 									null);
-							
+
 						} else if (characterForSexSecondary.isAsleep()) {
 							return new Response("Side-by-side (as sub)",
 									UtilText.parse(characterForSexSecondary,
 											"As [npc.sheIsFull] currently asleep, [npc.name] cannot participate in sex..."),
 									null);
-							
+
 						} else if(!characterForSex.isAttractedTo(Main.game.getPlayer())) {
 							if(!characterForSexSecondary.isAttractedTo(Main.game.getPlayer())) {
 								return new Response("Side-by-side (as sub)", UtilText.parse(characterForSexSecondary, characterForSex, "Neither [npc.name] nor [npc2.name] are attracted to you..."), null);
@@ -1907,14 +1906,14 @@ public class SlaveDialogue {
 									UtilText.parse(charactersPresent.stream().filter(c->c.isDollStatue()).findFirst().get(),
 											"As an immobile doll, [npc.name] cannot take a dominant role in sex..."),
 									null);
-							
+
 						} else if (charactersPresent.stream().anyMatch(c->c.isAsleep())) {
 							boolean soloSleeper = charactersPresent.stream().filter(c->c.isAsleep()).count()==1;
 							String names = Util.charactersToStringListOfNames(charactersPresent.stream().filter(c->c.isAsleep()).collect(Collectors.toList()));
 							return new Response("Gangbang (as sub)",
 											names+" "+(soloSleeper?"needs":"need")+" to be awake to participate in a gangbang!",
 									null);
-							
+
 						} else {
 							boolean isRape = charactersPresent.stream().anyMatch(c->!c.isAttractedTo(Main.game.getPlayer()));
 							// Handle attraction/non-con:
@@ -2027,7 +2026,7 @@ public class SlaveDialogue {
 					}
 				}
 				return null;
-				
+
 			} else if(responseTab == 2) {
 				if(isDollStatue()) {
 					if(index == 1) {
@@ -2048,11 +2047,11 @@ public class SlaveDialogue {
 						return CompanionManagement.getManagementResponses(index);
 					}
 					return null;
-					
+
 				} else if(getSlave().isAsleep()) {
 					if(index == 1) {
 						return getWakeUpResponse();
-						
+
 					} else if(index==0) {
 						return CompanionManagement.getManagementResponses(index);
 					}
@@ -2105,7 +2104,7 @@ public class SlaveDialogue {
 						+ "<p>"
 							+ "It doesn't sound like [npc.name] is going to be able to tell you anything you didn't already learn from Saellatrix, and so decide not to waste your time with any more questions on this subject..."
 						+ "</p>");
-				
+
 			} else {
 				UtilText.nodeContentSB.append(
 						"<p>"
@@ -2116,7 +2115,7 @@ public class SlaveDialogue {
 							+ " [pc.speech(I'd like to know a little more about your past, [npc.name]. What was your life like before coming here?)]"
 						+ "</p>"
 						+ "<p>");
-				
+
 				switch(AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()))) {
 					case DISLIKE:
 						switch(ObedienceLevelBasic.getObedienceLevelFromValue(getSlave().getObedienceValue())) {
@@ -2169,7 +2168,7 @@ public class SlaveDialogue {
 				}
 				UtilText.nodeContentSB.append("</p>");
 			}
-			
+
 			UtilText.nodeContentSB.append(getFooterText());
 			
 			return UtilText.parse(getSlave(), UtilText.nodeContentSB.toString());
@@ -2212,12 +2211,12 @@ public class SlaveDialogue {
 						+ "<p>"
 							+ "Having noticed this limitation of [npc.namePos] abilities, you allow the conversation to end, before wondering what to do next..."
 						+ "</p>");
-				
+
 			} else {
 				UtilText.nodeContentSB.append("<p>"
 							+ "You decide to try and make some small talk with [npc.name], and ask [npc.her] a series of questions ranging from how [npc.sheIs] finding life as your slave,"
 							+ " to what [npc.she] thinks of the peculiar arcane weather here in Dominion.");
-				
+
 				switch(AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()))) {
 					case DISLIKE:
 						switch(ObedienceLevelBasic.getObedienceLevelFromValue(getSlave().getObedienceValue())) {
@@ -2331,7 +2330,7 @@ public class SlaveDialogue {
 						break;
 				}
 			}
-			
+
 			UtilText.nodeContentSB.append(getFooterText());
 			
 			return UtilText.parse(getSlave(), UtilText.nodeContentSB.toString());
@@ -2375,10 +2374,10 @@ public class SlaveDialogue {
 						+ "<p>"
 							+ "It doesn't seem like you're going to get much out of [npc.name] on this topic..."
 						+ "</p>");
-				
+
 			} else {
 				UtilText.nodeContentSB.append("<p>");
-				
+
 				switch(getCurrentJob()) {
 					case CLEANING:
 						UtilText.nodeContentSB.append("Wanting to encourage [npc.name] to do [npc.her] best while working as your ");
@@ -2435,7 +2434,7 @@ public class SlaveDialogue {
 					case DOLL_STATUE:
 						break;
 				}
-				
+
 				switch(AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()))) {
 					case DISLIKE:
 						switch(ObedienceLevelBasic.getObedienceLevelFromValue(getSlave().getObedienceValue())) {
@@ -2600,20 +2599,20 @@ public class SlaveDialogue {
 						+ "<p>"
 							+ "[npc.speech(I hope that was to your satisfaction, [pc.name],)] [npc.she] says, before waiting to hear what it is you want of [npc.herHim] next..."
 						+ "</p>");
-				
+
 			} else {
 				AffectionLevelBasic slaveAffection = AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()));
-				
+
 				boolean silly = Main.game.isSillyMode() && Math.random()<0.25f && slaveAffection==AffectionLevelBasic.NEUTRAL;
-				
+
 				UtilText.nodeContentSB.append("<p>");
-				
+
 				if(silly) {
 					UtilText.nodeContentSB.append("Wanting [npc.name] to show you some physical affection, you ask [npc.herHim] to give you a hug.");
 				} else {
 					UtilText.nodeContentSB.append("You decide that [npc.name] is in need of some physical comfort, and, stepping forwards, you reach and take hold of [npc.herHim], before pulling [npc.herHim] into a tight hug.");
 				}
-				
+
 				switch(slaveAffection) {
 					case DISLIKE:
 						switch(ObedienceLevelBasic.getObedienceLevelFromValue(getSlave().getObedienceValue())) {
@@ -2769,7 +2768,7 @@ public class SlaveDialogue {
 						break;
 				}
 			}
-			
+
 			UtilText.nodeContentSB.append(getFooterText());
 			
 			return UtilText.parse(getSlave(), UtilText.nodeContentSB.toString());
@@ -2813,14 +2812,14 @@ public class SlaveDialogue {
 						+ "Although you continue to pet [npc.name] for a few more moments, [npc.her] cold, robotic response isn't quite what you were looking for."
 						+ " A blank, expressionless stare from your doll is the final straw, and you take your [pc.hand] away before wondering what to do next..."
 					+ "</p>");
-				
+
 			} else {
 				UtilText.nodeContentSB.append("<p>"
 								+ "Wanting to give [npc.name] some reassuring pettings, you reach up and place a [pc.hand] on [npc.her] head."
 								+ " Before [npc.she] can react, you start stroking [npc.her] [npc.hair+], before moving down to gently scratch behind one of [npc.her] [npc.ears]."
 							+ "</p>"
 							+ "<p>");
-				
+
 				switch(AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()))) {
 					case DISLIKE:
 						switch(ObedienceLevelBasic.getObedienceLevelFromValue(getSlave().getObedienceValue())) {
@@ -2934,7 +2933,7 @@ public class SlaveDialogue {
 						break;
 				}
 			}
-			
+
 			UtilText.nodeContentSB.append(getFooterText());
 			
 			return UtilText.parse(getSlave(), UtilText.nodeContentSB.toString());
@@ -3102,7 +3101,7 @@ public class SlaveDialogue {
 			String legsSpreading = getSlave().hasLegs()
 					?"spread [npc.her] [npc.legs] and present [npc.her] "
 					:"present you with [npc.her] ";
-			
+
 			if(isDoll()) {
 				UtilText.nodeContentSB.append(
 						(isSlaveNaked()
@@ -3119,7 +3118,7 @@ public class SlaveDialogue {
 					+ "<p>"
 						+ "Satisfied with [npc.her] appearance, you tell [npc.name] "+(isSlaveNaked()?"to step back up before you":"to get dressed again")+", and without a word of complaint, [npc.she] once more does exactly as you say."
 					+ "</p>");
-				
+
 			} else {
 				if(getSlave().getFetishDesire(Fetish.FETISH_MASOCHIST).isPositive() || getSlave().getFetishDesire(Fetish.FETISH_EXHIBITIONIST).isPositive()) {
 					switch(AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()))) {
@@ -3277,7 +3276,7 @@ public class SlaveDialogue {
 							"<p>"
 								+ "<i>[npc.Name] loves displaying [npc.herself] like this, and both [npc.her] affection towards you and [npc.her] obedience increases!</i>"
 							+ "</p>");
-					
+
 				} else {
 					switch(AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()))) {
 						case DISLIKE:
@@ -3498,13 +3497,13 @@ public class SlaveDialogue {
 						+ " Although [npc.she] squeals and pants in response, you can't help but feel that [npc.sheIs] putting it on for your benefit, and that the punishment isn't hurting [npc.herHim] at all."
 						+ " As such, you bring the spanking to and end..."
 					+ "</p>");
-				
+
 			} else {
 				UtilText.nodeContentSB.append("<p>"
 								+ "You feel like [npc.name] could do with a reminder of who's in charge, so, taking a seat, you order [npc.herHim] to strip and bend over in your lap."
 							+ "</p>"
 							+ "<p>");
-	
+
 				switch(AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()))) {
 					case DISLIKE:
 						switch(ObedienceLevelBasic.getObedienceLevelFromValue(getSlave().getObedienceValue())) {
@@ -3665,13 +3664,13 @@ public class SlaveDialogue {
 						}
 						break;
 				}
-	
+
 				if(getSlave().getFetishDesire(Fetish.FETISH_MASOCHIST).isPositive()) {
 					UtilText.nodeContentSB.append(
 							"<p>"
 								+ "<i>As [npc.name] is a masochist, spanking [npc.herHim] has actually made [npc.herHim] like you more, as well as increasing [npc.her] obedience!</i>"
 							+ "</p>");
-					
+
 				} else {
 					UtilText.nodeContentSB.append(
 							"<p>"
@@ -3681,7 +3680,7 @@ public class SlaveDialogue {
 							+ "</p>");
 				}
 			}
-			
+
 			UtilText.nodeContentSB.append(getFooterText());
 			
 			return UtilText.parse(getSlave(), UtilText.nodeContentSB.toString());
@@ -3725,24 +3724,24 @@ public class SlaveDialogue {
 							+ "Doing just that, you continue groping and molesting [npc.name], only stopping once you've had your fun and explored every inch of [npc.her] silicone body."
 							+ " [pc.Stepping] back, you wonder what to do next..."
 						+ "</p>");
-				
+
 			} else {
 				UtilText.nodeContentSB.append("<p>"
 							+ "Not being able to resist the allure of [npc.namePos] [npc.feminine] body, you walk around behind [npc.her] back, before stepping forwards and wrapping your [pc.arms] around [npc.herHim].");
-	
+
 				String firstCry = "a horrified cry";
 				String firstReaction = "instantly starts squirming and trying to pull away from your touch";
 				String firstSpeech = "Fuck off! Leave me alone!";
 				String firstPCReaction = "[npc.Her] words do nothing to deter your advance upon [npc.her] unwilling body";
-				
+
 				String secondReaction = "[npc.She] continues to shout and struggle";
 				String thirdReaction = ", despite [npc.her] protests,";
 				String secondSpeech = "[npc.speech(Stop it! F-Fuck off already!)]"
 							+ " [npc.she] shouts, [npc.her] words falling on deaf ears as you continue having your fun.";
-				
+
 				String finalDescription = "Eventually, you feel as though you've had enough, and, releasing [npc.name] to allow [npc.herHim] to dash across to the other side of the room, you look [npc.herHim] up and down, grinning."
 							+ " [npc.She] continues to spit curses and tell you to leave [npc.herHim] alone, and you wonder if you should do as your slave asks, or do something else with [npc.herHim]...";
-				
+
 				switch(AffectionLevelBasic.getAffectionLevelFromValue(getSlave().getAffection(Main.game.getPlayer()))) {
 					case DISLIKE:
 						switch(ObedienceLevelBasic.getObedienceLevelFromValue(getSlave().getObedienceValue())) {
@@ -3753,12 +3752,12 @@ public class SlaveDialogue {
 								firstReaction = "starts squirming and trying to shift [npc.her] body away from your touch";
 								firstSpeech = "C-Can you stop this now?!";
 								firstPCReaction = "[npc.Her] words do nothing to deter your advance upon [npc.her] unwilling body";
-								
+
 								secondReaction = "[npc.She] continues to struggle in discomfort";
 								thirdReaction = ", despite [npc.her] reluctance,";
 								secondSpeech = "[npc.speech(P-Please! S-Stop it now!)]"
 											+ " [npc.she] cries, [npc.her] words falling on deaf ears as you continue having your fun.";
-								
+
 								finalDescription = "Eventually, you feel as though you've had enough, and, releasing [npc.name] to allow [npc.herHim] to dash across to the other side of the room, you look [npc.herHim] up and down, grinning."
 											+ " [npc.She] avoids your gaze as [npc.she] asks you to leave [npc.herHim] alone, and you wonder if you should do as your slave requests, or do something else with [npc.herHim]...";
 								break;
@@ -3767,12 +3766,12 @@ public class SlaveDialogue {
 								firstReaction = "obediently holds [npc.her] body still for you";
 								firstSpeech = "I am yours to use, [npc.pcName].";
 								firstPCReaction = "[npc.Her] cold words do nothing to deter your advance upon [npc.her] body";
-								
+
 								secondReaction = "[npc.She] continues to obediently allow [npc.herself] to be used";
 								thirdReaction = ", despite [npc.her] cold attitude,";
 								secondSpeech = "[npc.speech(Is this to your satisfaction, [npc.pcName]?)]"
 											+ " [npc.she] dutifully asks, showing no sign of emotion as you continue having your fun.";
-								
+
 								finalDescription = "Eventually, you feel as though you've had enough, and, releasing [npc.name] to allow [npc.herHim] to take a step back, you look [npc.herHim] up and down, grinning."
 											+ " [npc.She] obediently asks you if there's anything else that's required of [npc.herHim], which makes you wonder if you should do something else with [npc.herHim]...";
 								break;
@@ -3785,12 +3784,12 @@ public class SlaveDialogue {
 								firstReaction = "starts squirming and trying to shift [npc.her] body away from your touch";
 								firstSpeech = "D-Do you have to do this?";
 								firstPCReaction = "[npc.Her] worried tone does nothing to deter your advance upon [npc.her] body";
-								
+
 								secondReaction = "[npc.She] continues to struggle a little";
 								thirdReaction = ", despite [npc.her] less-than-enthusiastic attitude,";
 								secondSpeech = "[npc.speech(How much longer is this going to do on for, [npc.pcName]?)]"
 											+ " [npc.she] asks, [npc.her] disobedient questioning receiving no answer as you continue having your fun.";
-								
+
 								finalDescription = "Eventually, you feel as though you've had enough, and, releasing [npc.name] to allow [npc.herHim] to take a few steps back, you look [npc.herHim] up and down, grinning."
 											+ " [npc.She] lets out a sigh of relief as [npc.she] asks you to leave [npc.herHim] alone now, and you wonder if you should do as your slave requests, or do something else with [npc.herHim]...";
 								break;
@@ -3799,12 +3798,12 @@ public class SlaveDialogue {
 								firstReaction = "starts squirming and trying to shift [npc.her] body away from your touch";
 								firstSpeech = "[npc.pcName], do you really have to do this?";
 								firstPCReaction = "[npc.Her] worried tone does nothing to deter your advance upon [npc.her] body";
-								
+
 								secondReaction = "[npc.She] continues to struggle a little";
 								thirdReaction = ", despite [npc.her] less-than-enthusiastic attitude,";
 								secondSpeech = "[npc.speech(Are you almost done, [npc.pcName]?)]"
 											+ " [npc.she] asks, [npc.her] disobedient questioning receiving no answer as you continue having your fun.";
-								
+
 								finalDescription = "Eventually, you feel as though you've had enough, and, releasing [npc.name] to allow [npc.herHim] to take a few steps back, you look [npc.herHim] up and down, grinning."
 											+ " [npc.She] lets out a little sigh of relief as [npc.she] avoids your gaze, and you wonder if you should do something else with [npc.herHim]...";
 								break;
@@ -3813,12 +3812,12 @@ public class SlaveDialogue {
 								firstReaction = "obediently holds [npc.her] body still for you";
 								firstSpeech = "I am yours to use, [npc.pcName].";
 								firstPCReaction = "[npc.Her] cold words do nothing to deter your advance upon [npc.her] body";
-								
+
 								secondReaction = "[npc.She] continues to obediently allow [npc.herself] to be used";
 								thirdReaction = ", despite [npc.her] cold attitude,";
 								secondSpeech = "[npc.speech(Is this to your satisfaction, [npc.pcName]?)]"
 											+ " [npc.she] dutifully asks, showing no sign of emotion as you continue having your fun.";
-								
+
 								finalDescription = "Eventually, you feel as though you've had enough, and, releasing [npc.name] to allow [npc.herHim] to take a step back, you look [npc.herHim] up and down, grinning."
 											+ " [npc.She] obediently asks you if there's anything else that's required of [npc.herHim], which makes you wonder if you should do something else with [npc.herHim]...";
 								break;
@@ -3831,12 +3830,12 @@ public class SlaveDialogue {
 								firstReaction = "starts squirming and trying to shift [npc.her] body away from your touch";
 								firstSpeech = "[npc.PcName]! I thought you liked me?! W-Why are you doing this?!";
 								firstPCReaction = "[npc.Her] distressed tone does nothing to deter your advance upon [npc.her] body";
-								
+
 								secondReaction = "[npc.She] continues to struggle a little";
 								thirdReaction = ", despite [npc.her] less-than-enthusiastic attitude,";
 								secondSpeech = "[npc.speech([npc.PcName], please! I-I just wanted a hug...)]"
 											+ " [npc.she] sighs, [npc.her] disobedient remark receiving no answer as you continue having your fun.";
-								
+
 								finalDescription = "Eventually, you feel as though you've had enough, and, releasing [npc.name] to allow [npc.herHim] to take a few steps back, you look [npc.herHim] up and down, grinning."
 											+ " [npc.She] lets out a sigh of relief as [npc.she] smiles up at you, and you wonder if you should do something else with [npc.herHim] now...";
 								break;
@@ -3845,12 +3844,12 @@ public class SlaveDialogue {
 								firstReaction = "holds [npc.her] body still for you";
 								firstSpeech = "[npc.PcName], do you really have to do this?";
 								firstPCReaction = "[npc.Her] worried tone does nothing to deter your advance upon [npc.her] body";
-								
+
 								secondReaction = "[npc.She] continues to hold still";
 								thirdReaction = ", despite [npc.her] slightly-disobedient attitude,";
 								secondSpeech = "[npc.speech(Is this to your liking, [npc.pcName]?)]"
 											+ " [npc.she] asks, [npc.her] questioning receiving no answer as you continue having your fun.";
-								
+
 								finalDescription = "Eventually, you feel as though you've had enough, and, releasing [npc.name] to allow [npc.herHim] to take a few steps back, you look [npc.herHim] up and down, grinning."
 											+ " [npc.She] lets out a little sigh of relief as [npc.she] avoids your gaze, and you wonder if you should do something else with [npc.herHim]...";
 								break;
@@ -3859,21 +3858,21 @@ public class SlaveDialogue {
 								firstReaction = "obediently holds [npc.her] body still for you";
 								firstSpeech = "I am yours to use, [npc.pcName].";
 								firstPCReaction = "[npc.Her] cold words do nothing to deter your advance upon [npc.her] body";
-								
+
 								secondReaction = "[npc.She] continues to obediently allow [npc.herself] to be used";
 								thirdReaction = ", despite [npc.her] cold attitude,";
 								secondSpeech = "[npc.speech(Is this to your satisfaction, [npc.pcName]?)]"
 											+ " [npc.she] dutifully asks, showing no sign of emotion as you continue having your fun.";
-								
+
 								finalDescription = "Eventually, you feel as though you've had enough, and, releasing [npc.name] to allow [npc.herHim] to take a step back, you look [npc.herHim] up and down, grinning."
 											+ " [npc.She] obediently asks you if there's anything else that's required of [npc.herHim], which makes you wonder if you should do something else with [npc.herHim]...";
 								break;
 						}
 						break;
 				}
-				
-				
-				
+
+
+
 				if(getSlave().hasBreasts()) {
 					UtilText.nodeContentSB.append(
 								" Your [pc.hands] reach up to cup and squeeze [npc.her] [npc.breasts+], drawing "+firstCry+" from [npc.namePos] mouth as [npc.she] "+firstReaction+","
@@ -3889,30 +3888,30 @@ public class SlaveDialogue {
 						+ "<p>"
 							+ firstPCReaction+", and, with one [pc.hand] still pressed against [npc.her] chest, you slip the other down #IF(npc.hasLegs())between [npc.her] [npc.legs]#ELSEto [npc.her] groin#ENDIF.");
 				}
-	
+
 				if(getSlave().hasVagina() && getSlave().hasPenis()) {
 					UtilText.nodeContentSB.append(
 								" "+secondReaction+" as you grope, stroke, and fondle [npc.her] [npc.penis+], and you can't help but [pc.moan] into your slave's [npc.ear] as"+thirdReaction+" you feel [npc.her] [npc.cock+] growing hard under your touch."
 								+ " Dropping your [pc.hand] down yet further, you shift your attention to [npc.her] [npc.pussy+],"
 									+ " grinning once again as you feel that your stimulation of [npc.her] [npc.clit+] and [npc.labia+] have already gotten [npc.her] wet."
 							+ "</p>");
-					
+
 				} else if(getSlave().hasVagina()) {
 					UtilText.nodeContentSB.append(
 							" "+secondReaction+" as you grope, stroke, and probe at [npc.her] [npc.clit+] and [npc.labia+], and you can't help but [pc.moan] into your slave's [npc.ear] as"+thirdReaction+" you feel [npc.her] [npc.pussy+]"
 									+ " is already wet from your touch."
 						+ "</p>");
-					
+
 				} else if(getSlave().hasPenis()) {
 					UtilText.nodeContentSB.append(
 							" "+secondReaction+" as you grope, stroke, and fondle [npc.her] [npc.penis+], and you can't help but [pc.moan] into your slave's [npc.ear] as"+thirdReaction+" you feel [npc.her] [npc.cock+] growing hard under your touch."
 						+ "</p>");
-					
+
 				} else {
 					UtilText.nodeContentSB.append(
 							" "+secondReaction+" as you grope, stroke, and probe at [npc.her] genderless mound, and you can't help but [pc.moan] into your slave's [npc.ear] as"+thirdReaction+" you feel [npc.herHim] thrust [npc.her] [npc.hips] out against your touch."
 						+ "</p>");
-					
+
 				}
 				UtilText.nodeContentSB.append(
 						"<p>"
@@ -3921,8 +3920,8 @@ public class SlaveDialogue {
 						+ "<p>"
 							+ finalDescription
 						+ "</p>");
-				
-				
+
+
 				UtilText.nodeContentSB.append(
 						"<p>"
 							+ "<i>Molesting [npc.name] has helped reinforce in [npc.her] mind that [npc.she] belongs to you, increasing [npc.her] obedience!");

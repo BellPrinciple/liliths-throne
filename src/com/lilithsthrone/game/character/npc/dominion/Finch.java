@@ -244,9 +244,9 @@ public class Finch extends NPC {
 //				this.addItem(Main.game.getItemGen().generateItem(item), false);
 //			}
 //		}
-//		
+//
 //		List<AbstractClothing> clothingToSell = new ArrayList<>();
-//		
+//
 //		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
 //			if(clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_FINCH)
 //					&& (!clothing.getDefaultItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
@@ -257,7 +257,7 @@ public class Finch extends NPC {
 //		for(AbstractClothing c : clothingToSell) {
 //			this.addClothing(c, 2+Util.random.nextInt(5), false, false);
 //		}
-//		
+//
 //		for(AbstractClothing c : Main.game.getCharacterUtils().generateEnchantedClothingForTrader(this, clothingToSell, 4, 2)) {
 //			this.addClothing(c, false);
 //		}

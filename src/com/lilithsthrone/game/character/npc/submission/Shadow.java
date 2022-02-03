@@ -49,7 +49,7 @@ import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.CombatBehaviour;
 import com.lilithsthrone.game.combat.DamageType;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.moves.CMBasicAttack;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -432,7 +432,7 @@ public class Shadow extends NPC {
 	}
 	
 	@Override
-	public float getMoveWeight(AbstractCombatMove move, List<GameCharacter> enemies, List<GameCharacter> allies) {
+	public float getMoveWeight(CombatMove move, List<GameCharacter> enemies, List<GameCharacter> allies) {
 		if((move==CMBasicAttack.BASIC_BLOCK || move==CMBasicAttack.BASIC_TEASE_BLOCK)
 				&& !Main.combat.getAllCombatants(false).contains(Main.game.getNpc(Silence.class))) { // Shadow does not block when beserk
 			return 0;

@@ -12,7 +12,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.ArousalIncrease;
@@ -43,8 +42,8 @@ public abstract class SexAction implements SexActionInterface {
 
 	protected SexParticipantType participantType;
 	protected SexPace associatedSexPace;
-	protected Map<GameCharacter, Set<AbstractFetish>> characterFetishes;
-	protected Map<GameCharacter, Set<AbstractFetish>> characterFetishesForPartner;
+	protected Map<GameCharacter, Set<Fetish>> characterFetishes;
+	protected Map<GameCharacter, Set<Fetish>> characterFetishesForPartner;
 	
 	// External file variables:
 
@@ -292,23 +291,23 @@ public abstract class SexAction implements SexActionInterface {
 	}
 	
 	@Override
-	public List<AbstractFetish> getFetishesForTargetedPartner(GameCharacter characterPerformingAction) {
+	public List<Fetish> getFetishesForTargetedPartner(GameCharacter characterPerformingAction) {
 		return getFetishesForEitherPartner(characterPerformingAction, false);
 	}
 
 	@Override
-	public List<AbstractFetish> getFetishes(GameCharacter characterPerformingAction) {
+	public List<Fetish> getFetishes(GameCharacter characterPerformingAction) {
 		return getFetishesForEitherPartner(characterPerformingAction, true);
 	}
 	
 	/**
 	 * To be overridden to add extra fetishes on top of the automatically-generated ones in getFetishes() and getFetishesForTargetedPartner().
 	 */
-	public List<AbstractFetish> getExtraFetishes(GameCharacter character) {
+	public List<Fetish> getExtraFetishes(GameCharacter character) {
 		return null;
 	}
 	
-	public List<AbstractFetish> getFetishesForEitherPartner(GameCharacter characterPerformingAction, boolean characterPerformingActionFetishes) {
+	public List<Fetish> getFetishesForEitherPartner(GameCharacter characterPerformingAction, boolean characterPerformingActionFetishes) {
 //		if(characterFetishes==null || characterFetishes.get(characterPerformingAction)==null) {
 			GameCharacter characterTarget = Main.sex.getTargetedPartner(characterPerformingAction);
 			
@@ -319,12 +318,12 @@ public abstract class SexAction implements SexActionInterface {
 			characterFetishesForPartner.putIfAbsent(characterPerformingAction, new HashSet<>());
 			
 			if(getExtraFetishes(characterPerformingAction)!=null) {
-				for(AbstractFetish f : getExtraFetishes(characterPerformingAction)) {
+				for(Fetish f : getExtraFetishes(characterPerformingAction)) {
 					characterFetishes.get(characterPerformingAction).add(f);
 				}
 			}
 			if(getExtraFetishes(characterTarget)!=null) {
-				for(AbstractFetish f : getExtraFetishes(characterTarget)) {
+				for(Fetish f : getExtraFetishes(characterTarget)) {
 					characterFetishesForPartner.get(characterPerformingAction).add(f);
 				}
 			}

@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractNippleType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
+import com.lilithsthrone.game.character.body.types.NippleType;
 import com.lilithsthrone.game.character.body.valueEnums.AreolaeShape;
 import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
 import com.lilithsthrone.game.character.body.valueEnums.Capacity;
@@ -27,7 +26,7 @@ import com.lilithsthrone.utils.Util;
  */
 public class Nipples implements BodyPartInterface {
 	
-	protected AbstractNippleType type;
+	protected NippleType type;
 	protected Orifice orificeNipples;
 	protected NippleShape nippleShape;
 	protected AreolaeShape areolaeShape;
@@ -36,7 +35,7 @@ public class Nipples implements BodyPartInterface {
 	protected boolean pierced;
 	protected boolean crotchNipples;
 
-	public Nipples(AbstractNippleType type, int nippleSize, NippleShape nippleShape, int areolaeSize, AreolaeShape areolaeShape, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin, boolean crotchNipples) {
+	public Nipples(NippleType type, int nippleSize, NippleShape nippleShape, int areolaeSize, AreolaeShape areolaeShape, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin, boolean crotchNipples) {
 		this.type = type;
 		this.nippleSize = nippleSize;
 		this.nippleShape = nippleShape;
@@ -172,11 +171,11 @@ public class Nipples implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractNippleType getType() {
+	public NippleType getType() {
 		return type;
 	}
 
-	public void setType(GameCharacter owner, AbstractNippleType type) {
+	public void setType(GameCharacter owner, NippleType type) {
 		this.type = type;
 	}
 
@@ -374,7 +373,7 @@ public class Nipples implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(GameCharacter gc) {
+	public BodyCoveringType getBodyCoveringType(GameCharacter gc) {
 		if(this.isCrotchNipples()) {
 			return BodyCoveringType.NIPPLES_CROTCH;
 		}
@@ -382,7 +381,7 @@ public class Nipples implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		if(this.isCrotchNipples()) {
 			return BodyCoveringType.NIPPLES_CROTCH;
 		}

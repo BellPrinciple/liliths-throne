@@ -10,11 +10,9 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.EarType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -31,8 +29,8 @@ public abstract class AbstractEarType implements EarType {
 
 	private String transformationName;
 
-	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private BodyCoveringType coveringType;
+	private Race race;
 	
 	private String name;
 	private String namePlural;
@@ -57,8 +55,8 @@ public abstract class AbstractEarType implements EarType {
 	 * @param earTransformationDescription A paragraph describing a character's ears transforming into this ear type. Parsing assumes that the character already has this ear type and associated skin covering.
 	 * @param earBodyDescription A sentence or two to describe this ear type, as seen in the character view screen. It should follow the same format as all of the other entries in the EarType class.
 	 */
-	public AbstractEarType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+	public AbstractEarType(BodyCoveringType coveringType,
+			Race race,
 			String transformationName,
 			String name,
 			String namePlural,
@@ -96,8 +94,8 @@ public abstract class AbstractEarType implements EarType {
 				this.mod = mod;
 				this.fromExternalFile = true;
 				
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 
@@ -170,12 +168,12 @@ public abstract class AbstractEarType implements EarType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

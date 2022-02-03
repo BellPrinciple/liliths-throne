@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
+import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.combat.spells.SpellUpgrade;
@@ -31,7 +31,7 @@ public abstract class AbstractPerk implements Perk {
 	private SpellSchool school;
 
 	// Attributes modified by this Virtue:
-	private HashMap<AbstractAttribute, Integer> attributeModifiers;
+	private HashMap<Attribute,Integer> attributeModifiers;
 
 	private PerkCategory perkCategory;
 
@@ -46,7 +46,7 @@ public abstract class AbstractPerk implements Perk {
 			PerkCategory perkCategory,
 			String pathName,
 			Colour colour,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			HashMap<Attribute,Integer> attributeModifiers,
 			List<String> extraEffects) {
 		this(renderingPriority,
 				major,
@@ -68,7 +68,7 @@ public abstract class AbstractPerk implements Perk {
 			PerkCategory perkCategory,
 			String pathName,
 			Colour colour,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			HashMap<Attribute,Integer> attributeModifiers,
 			List<String> extraEffects,
 			Spell spell,
 			SpellUpgrade spellUpgrade,
@@ -92,7 +92,7 @@ public abstract class AbstractPerk implements Perk {
 			PerkCategory perkCategory,
 			String pathName,
 			List<Colour> colours,
-			HashMap<AbstractAttribute, Integer> attributeModifiers,
+			HashMap<Attribute,Integer> attributeModifiers,
 			List<String> extraEffects,
 			Spell spell,
 			SpellUpgrade spellUpgrade,
@@ -175,7 +175,7 @@ public abstract class AbstractPerk implements Perk {
 	}
 
 	@Override
-	public HashMap<AbstractAttribute, Integer> getAttributeModifiers(GameCharacter character) {
+	public HashMap<Attribute,Integer> getAttributeModifiers(GameCharacter character) {
 		return attributeModifiers;
 	}
 

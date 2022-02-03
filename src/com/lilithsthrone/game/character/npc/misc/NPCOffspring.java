@@ -114,7 +114,7 @@ public class NPCOffspring extends NPC {
 		
 		Main.game.getCharacterUtils().applyMakeup(this, true);
 		Main.game.getCharacterUtils().applyTattoos(this, true);
-		
+
 		initHealthAndManaToMax();
 		
 		this.setEnslavementDialogue(SlaveDialogue.DEFAULT_ENSLAVEMENT_DIALOGUE, true);

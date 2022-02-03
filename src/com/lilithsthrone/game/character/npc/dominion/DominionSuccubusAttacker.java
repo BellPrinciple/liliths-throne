@@ -34,7 +34,6 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.outfit.OutfitType;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
@@ -80,7 +79,7 @@ public class DominionSuccubusAttacker extends NPC {
 
 			Main.game.getCharacterUtils().setHistoryAndPersonality(this, false);
 			this.setHistory(Occupation.NPC_MUGGER); // All demon alleyway attackers are muggers
-			
+
 			addFetish(Fetish.FETISH_DEFLOWERING);
 			addFetish(Fetish.FETISH_DOMINANT);
 			Main.game.getCharacterUtils().addFetishes(this);
@@ -238,7 +237,7 @@ public class DominionSuccubusAttacker extends NPC {
 	// ****************** Sex & Dirty talk: ***************************
 	
 	@Override
-	public String getCondomEquipEffects(AbstractClothingType condomClothingType, GameCharacter equipper, GameCharacter target, boolean rough) {
+	public String getCondomEquipEffects(ClothingType condomClothingType, GameCharacter equipper, GameCharacter target, boolean rough) {
 		if(!target.equals(equipper) && Main.game.isInSex()) {
 			if((Main.sex.isDom(Main.game.getPlayer()) || Main.sex.isSubHasEqualControl()) && !target.isPlayer()) {
 				if(condomClothingType.equals(ClothingType.getClothingTypeFromId("innoxia_penis_condom_webbing"))) {

@@ -14,7 +14,6 @@ import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -29,7 +28,6 @@ import com.lilithsthrone.game.character.npc.misc.Elemental;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.SVGImages;
@@ -38,11 +36,9 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Season;
 import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -85,7 +81,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 	private String statusEffectDescription;
 	private Map<PerkCategory, Integer> perkWeightingFeminine;
 	private Map<PerkCategory, Integer> perkWeightingMasculine;
-	private Map<AbstractAttribute, Float> statusEffectAttributeModifiers;
+	private Map<Attribute,Float> statusEffectAttributeModifiers;
 	private List<String> extraEffects;
 
 	private String bookName;
@@ -94,7 +90,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 	private String basicDescriptionId;
 	private String advancedDescriptionId;
 	
-	private AbstractRace race;
+	private Race race;
 	private Affinity affinity;
 	private SubspeciesPreference subspeciesPreferenceDefault;
 	private String description;
@@ -124,8 +120,8 @@ public abstract class AbstractSubspecies implements Subspecies {
 	protected String bookSVGString;
 
 	private Map<WorldRegion, SubspeciesSpawnRarity> regionLocations;
-	private Map<AbstractWorldType, SubspeciesSpawnRarity> worldLocations;
-	private Map<AbstractPlaceType, SubspeciesSpawnRarity> placeLocations;
+	private Map<WorldType, SubspeciesSpawnRarity> worldLocations;
+	private Map<PlaceType,SubspeciesSpawnRarity> placeLocations;
 	
 	private List<SubspeciesFlag> flags;
 
@@ -238,21 +234,21 @@ public abstract class AbstractSubspecies implements Subspecies {
 			FeralAttributes feralAttributes,
 			Nocturnality nocturnality,
 			String statusEffectDescription,
-			Map<AbstractAttribute, Float> statusEffectAttributeModifiers,
+			Map<Attribute,Float> statusEffectAttributeModifiers,
 			List<String> extraEffects,
 			String bookName,
 			String bookNamePlural,
 			String basicDescription,
 			String advancedDescription,
-			AbstractRace race,
+			Race race,
 			Map<PerkCategory, Integer> perkWeightingFeminine,
 			Map<PerkCategory, Integer> perkWeightingMasculine,
 			Colour colour,
 			SubspeciesPreference subspeciesPreferenceDefault,
 			String description,
 			Map<WorldRegion, SubspeciesSpawnRarity> regionLocations,
-			Map<AbstractWorldType, SubspeciesSpawnRarity> worldLocations,
-			Map<AbstractPlaceType, SubspeciesSpawnRarity> placeLocations, List<SubspeciesFlag> flags) {
+			Map<WorldType, SubspeciesSpawnRarity> worldLocations,
+			Map<PlaceType,SubspeciesSpawnRarity> placeLocations, List<SubspeciesFlag> flags) {
 		
 		this.mainSubspecies = mainSubspecies;
 		
@@ -263,7 +259,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 		this.shortStature = false;
 		this.bipedalSubspecies = true;
 		this.doesNotAge = false;
-		
+
 		this.attributeItemId = attributeItemId;
 		this.transformativeItemId = transformativeItemId;
 
@@ -283,7 +279,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 		
 		this.feralAttributes = feralAttributes;
 		this.nocturnality = nocturnality;
-		
+
 		this.statusEffectDescription = statusEffectDescription;
 		
 		this.statusEffectAttributeModifiers = statusEffectAttributeModifiers;
@@ -369,9 +365,9 @@ public abstract class AbstractSubspecies implements Subspecies {
 				this.mod = mod;
 				this.fromExternalFile = true;
 
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
 				this.affinity = coreElement.getOptionalFirstOf("affinity").isPresent() ? Affinity.getAffinityFromId(coreElement.getMandatoryFirstOf("affinity").getTextContent()) : Affinity.AMPHIBIOUS;
-				
+
 				String secondaryColourText = coreElement.getMandatoryFirstOf("secondaryColour").getTextContent();
 				String tertiaryColourText = coreElement.getMandatoryFirstOf("tertiaryColour").getTextContent();
 				this.colour = PresetColour.getColourFromId(coreElement.getMandatoryFirstOf("colour").getTextContent());
@@ -401,7 +397,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 				this.bipedalSubspecies = Boolean.valueOf(coreElement.getMandatoryFirstOf("bipedalSubspecies").getTextContent());
 				this.winged = coreElement.getOptionalFirstOf("winged").isPresent() ? Boolean.valueOf(coreElement.getMandatoryFirstOf("winged").getTextContent()) : false;
 				this.doesNotAge = coreElement.getOptionalFirstOf("doesNotAge").isPresent() ? Boolean.valueOf(coreElement.getMandatoryFirstOf("doesNotAge").getTextContent()) : false;
-				
+
 				personalityChanceOverrides = new HashMap<>();
 				if(coreElement.getOptionalFirstOf("personalityChances").isPresent()) {
 					for(Element e : coreElement.getMandatoryFirstOf("personalityChances").getAllOf("entry")) {
@@ -728,7 +724,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 	@Override
 	public String toString() {
 		new AccessException("WARNING: AbstractSubspecies is calling toString()!").printStackTrace(System.err);
-		return Subspecies.getIdFromSubspecies(this);
+		return id;
 	}
 
 	@Override
@@ -758,20 +754,6 @@ public abstract class AbstractSubspecies implements Subspecies {
 		}
 	}
 
-	public static AbstractSubspecies getMainSubspeciesOfRace(AbstractRace race) {
-		AbstractSubspecies backup = Subspecies.HUMAN;
-		for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
-			if(sub.getRace()==race) {
-				if(sub.isMainSubspecies()) {
-					return sub;
-				}
-				backup = sub;
-			}
-		}
-		System.err.println("Warning: getMainSubspeciesOfRace("+Race.getIdFromRace(race)+") did not find a main subspecies!");
-		return backup;
-	}
-	
 //	/**
 //	 * @return The race of this body if it were made from flesh. (i.e. The body's race ignoring slime/elemental modifiers.)
 //	 */
@@ -781,7 +763,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 //	}
 
 	@Override
-	public int getSubspeciesWeighting(Body body, AbstractRace race) {
+	public int getSubspeciesWeighting(Body body, Race race) {
 		if(this.isFromExternalFile() && Main.game.isStarted()) {
 			UtilText.setBodyForParsing("targetedBody", body);
 			UtilText.setRaceForParsing("targetedRace", race);
@@ -792,43 +774,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 		}
 		return 0;
 	}
-	
-	public static AbstractSubspecies getSubspeciesFromBody(Body body, AbstractRace race) {
-		AbstractSubspecies subspecies = null;
-		
-		int highestWeighting = 0;
-		int newWeighting;
-		// Look for subspecies within race
-		for(AbstractSubspecies sub : Subspecies.getSubspeciesOfRace(race)) {
-			newWeighting = sub.getSubspeciesWeighting(body, race);
-			if(newWeighting>highestWeighting
-					&& (!body.isFeral() || sub.isFeralConfigurationAvailable(body))) {
-				subspecies = sub;
-				highestWeighting = newWeighting;
-			}
-		}
-		// If that fails, search through all subspecies
-		if(subspecies==null && Main.game.isStarted()) {
-			highestWeighting = 0;
-			for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
-				newWeighting = sub.getSubspeciesWeighting(body, race);
-				if(newWeighting>highestWeighting
-						&& (!body.isFeral() || sub.isFeralConfigurationAvailable(body))) {
-					subspecies = sub;
-					highestWeighting = newWeighting;
-				}
-			}
-		}
-		if(subspecies==null) {
-			if(Main.game.isStarted()) { // Races get recalculated after the game starts in Game.handlePostGameInit(), so only show errors if the detection is still failing after that
-				System.err.println("Error: getSubspeciesFromBody() did not find a suitable Subspecies! (Race: "+(race==null?"null":race.getName(false))+")");
-				new Exception().printStackTrace();
-			}
-			return Subspecies.HUMAN;
-		}
-		return subspecies;
-	}
-	
+
 	protected static void applyFoxColoring(Body body) {
 		Colour c1 = body.getCoverings().get(BodyCoveringType.FOX_FUR).getPrimaryColour();
 		Colour c2 = PresetColour.COVERING_WHITE;
@@ -888,16 +834,16 @@ public abstract class AbstractSubspecies implements Subspecies {
 				
 		body.getCoverings().put(BodyCoveringType.FOX_FUR, new Covering(BodyCoveringType.FOX_FUR, pat, c1, false, c2, false));
 	}
-	
+
 
 //	public static Body getPreGeneratedBody(GameCharacter linkedCharacter, Gender startingGender, GameCharacter mother, GameCharacter father) {
 //		return getPreGeneratedBody(linkedCharacter, startingGender, mother.getTrueSubspecies(), mother.getHalfDemonSubspecies(), father.getTrueSubspecies(), father.getHalfDemonSubspecies());
 //	}
-	
+
 	/**
 	 * Only used for subspecies that have special offspring generation - i.e. demons.<br/>
 	 * <b>Please note:</b> If the mother is feral, this will be overridden in CharacterUtils.generateBody()!<br/><br/>
-	 * 
+	 *
 	 * <b>Demon breeding</b><br/>
 	 * Lilin<br/>
 	 * + lilin = lilin<br/>
@@ -935,18 +881,18 @@ public abstract class AbstractSubspecies implements Subspecies {
 			Gender startingGender,
 			Body motherBody,
 			Body fatherBody
-//			AbstractSubspecies motherSubspecies,
-//			AbstractSubspecies motherHalfDemonSubspecies,
-//			AbstractSubspecies fatherSubspecies,
-//			AbstractSubspecies fatherHalfDemonSubspecies
+//			Subspecies motherSubspecies,
+//			Subspecies motherHalfDemonSubspecies,
+//			Subspecies fatherSubspecies,
+//			Subspecies fatherHalfDemonSubspecies
 			) {
 
-		AbstractSubspecies motherSubspecies = motherBody.getTrueSubspecies();
-		AbstractSubspecies motherHalfDemonSubspecies = motherBody.getHalfDemonSubspecies();
-		AbstractSubspecies fatherSubspecies = fatherBody.getTrueSubspecies();
-		AbstractSubspecies fatherHalfDemonSubspecies = fatherBody.getHalfDemonSubspecies();
+		Subspecies motherSubspecies = motherBody.getTrueSubspecies();
+		Subspecies motherHalfDemonSubspecies = motherBody.getHalfDemonSubspecies();
+		Subspecies fatherSubspecies = fatherBody.getTrueSubspecies();
+		Subspecies fatherHalfDemonSubspecies = fatherBody.getHalfDemonSubspecies();
 
-		
+
 		if(startingGender==null) {
 			startingGender = Gender.getGenderFromUserPreferences(Math.random()<motherSubspecies.getRace().getChanceForMaleOffspring()?Femininity.MASCULINE:Femininity.FEMININE);
 		}
@@ -961,20 +907,20 @@ public abstract class AbstractSubspecies implements Subspecies {
 				} else {
 					preGeneratedBody = Main.game.getCharacterUtils().generateBody(linkedCharacter, startingGender, RacialBody.DEMON, RaceStage.GREATER);
 				}
-				
+
 			} else if(fatherSubspecies==Subspecies.DEMON) {
 				preGeneratedBody = Main.game.getCharacterUtils().generateBody(linkedCharacter, startingGender, RacialBody.DEMON, RaceStage.GREATER);
-				
+
 			} else if(fatherSubspecies==Subspecies.HALF_DEMON) {
 				preGeneratedBody = Main.game.getCharacterUtils().generateHalfDemonBody(linkedCharacter, startingGender, fatherHalfDemonSubspecies, true);
-				
+
 			} else if(fatherSubspecies==Subspecies.IMP || fatherSubspecies==Subspecies.IMP_ALPHA) {
 				preGeneratedBody = Main.game.getCharacterUtils().generateBody(linkedCharacter, startingGender, RacialBody.DEMON, Subspecies.IMP_ALPHA, RaceStage.GREATER);
-				
+
 			} else {
 				preGeneratedBody = Main.game.getCharacterUtils().generateHalfDemonBody(linkedCharacter, startingGender, fatherSubspecies, true);
 			}
-			
+
 		} else if(motherSubspecies==Subspecies.HALF_DEMON) {
 			if(motherHalfDemonSubspecies==Subspecies.HUMAN) {
 				if(fatherSubspecies==Subspecies.ELDER_LILIN || fatherSubspecies==Subspecies.LILIN || fatherSubspecies==Subspecies.DEMON || fatherSubspecies==Subspecies.HALF_DEMON) {
@@ -986,33 +932,33 @@ public abstract class AbstractSubspecies implements Subspecies {
 				} else {
 					preGeneratedBody = Main.game.getCharacterUtils().generateBody(linkedCharacter, startingGender, RacialBody.DEMON, Subspecies.IMP, RaceStage.GREATER);
 				}
-				
+
 			} else {
 				if(fatherSubspecies==Subspecies.ELDER_LILIN || fatherSubspecies==Subspecies.LILIN || fatherSubspecies==Subspecies.DEMON) {
 					preGeneratedBody = Main.game.getCharacterUtils().generateHalfDemonBody(linkedCharacter, startingGender, motherHalfDemonSubspecies, true);
-					
+
 				} else if(fatherSubspecies==Subspecies.HALF_DEMON) { // If both are non-human half-demons, it's random as to whose species is birthed
 					if(Math.random()<0.5f || fatherHalfDemonSubspecies==Subspecies.HUMAN) {
 						preGeneratedBody = Main.game.getCharacterUtils().generateHalfDemonBody(linkedCharacter, startingGender, motherHalfDemonSubspecies, true);
 					} else {
 						preGeneratedBody = Main.game.getCharacterUtils().generateHalfDemonBody(linkedCharacter, startingGender, fatherHalfDemonSubspecies, true);
 					}
-					
+
 				} else if(fatherSubspecies==Subspecies.IMP || fatherSubspecies==Subspecies.IMP_ALPHA) {
 					preGeneratedBody = Main.game.getCharacterUtils().generateBody(linkedCharacter, startingGender, RacialBody.DEMON, Subspecies.IMP_ALPHA, RaceStage.GREATER);
-					
+
 				} else {
 					preGeneratedBody = Main.game.getCharacterUtils().generateHalfDemonBody(linkedCharacter, startingGender, motherHalfDemonSubspecies, true);
 				}
 			}
-			
+
 		} else if(motherSubspecies==Subspecies.IMP_ALPHA || motherSubspecies==Subspecies.IMP) {
 			if(fatherSubspecies==Subspecies.IMP) {
 				preGeneratedBody = Main.game.getCharacterUtils().generateBody(linkedCharacter, startingGender, RacialBody.DEMON, Subspecies.IMP, RaceStage.GREATER);
 			} else {
 				preGeneratedBody = Main.game.getCharacterUtils().generateBody(linkedCharacter, startingGender, RacialBody.DEMON, Subspecies.IMP_ALPHA, RaceStage.GREATER);
 			}
-			
+
 		} else {
 			if(fatherSubspecies==Subspecies.ELDER_LILIN
 					|| fatherSubspecies==Subspecies.LILIN
@@ -1032,19 +978,19 @@ public abstract class AbstractSubspecies implements Subspecies {
 
 		return preGeneratedBody;
 	}
-	
+
 	@Override
 	public boolean isShortStature() {
 		return shortStature;
 	}
-	
+
 	@Override
 	public boolean isNonBiped() {
 		return !bipedalSubspecies;
 	}
 
 	// Items:
-	
+
 	@Override
 	public String getAttributeItemId() {
 		return attributeItemId;
@@ -1056,10 +1002,10 @@ public abstract class AbstractSubspecies implements Subspecies {
 	}
 
 	@Override
-	public AbstractItemType getBook() {
+	public ItemType getBook() {
 		return ItemType.getLoreBook(this);
 	}
-	
+
 	@Override
 	public boolean isMainSubspecies() {
 		return mainSubspecies;
@@ -1212,7 +1158,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 		}
 		return getAnthroNamesMap().get(null)[0];
 	}
-	
+
 	@Override
 	public String getFeralNamePlural(Body body) {
 		if(isFeralConfigurationAvailable(body)) {
@@ -1237,7 +1183,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 	}
 
 	@Override
-	public Map<AbstractAttribute, Float> getStatusEffectAttributeModifiers(GameCharacter character) {
+	public Map<Attribute, Float> getStatusEffectAttributeModifiers(GameCharacter character) {
 		return statusEffectAttributeModifiers;
 	}
 
@@ -1248,7 +1194,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 		}
 		return perkWeightingFeminine;
 	}
-	
+
 	@Override
 	public List<String> getExtraEffects(GameCharacter character) {
 		if(character!=null) {
@@ -1288,11 +1234,11 @@ public abstract class AbstractSubspecies implements Subspecies {
 	public String getBookNamePlural() {
 		return bookNamePlural;
 	}
-	
+
 	private File getXMLBookFile() {
 		return new File(bookIdFolderPath+System.getProperty("file.separator")+"bookEntries.xml");
 	}
-	
+
 	@Override
 	public String getBookAuthor() {
 		File bookFile = new File("res/txt/characters/raceInfo.xml");
@@ -1305,7 +1251,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 				// Cast magic:
 				doc.getDocumentElement().normalize();
 				Element coreElement = Element.getDocumentRootElement(bookFile); // Loads the document and returns the root element
-				
+
 				for(Element element : coreElement.getAllOf("htmlContent")) {
 					if(element.getAttribute("tag").equals(basicDescriptionId) && !element.getAttribute("author").isEmpty()) {
 						return element.getAttribute("author");
@@ -1317,7 +1263,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 		}
 		return "";
 	}
-	
+
 	@Override
 	public String getBasicDescription(GameCharacter character) {
 		if(this.isFromExternalFile() && getXMLBookFile().exists()) {
@@ -1333,7 +1279,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 		}
 		return UtilText.parseFromXMLFile("characters/raceInfo", getAdvancedDescriptionId());
 	}
-	
+
 	@Override
 	public String getBasicDescriptionId() {
 		return basicDescriptionId;
@@ -1345,7 +1291,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 
@@ -1388,32 +1334,32 @@ public abstract class AbstractSubspecies implements Subspecies {
 	public Colour getColour(GameCharacter character) {
 		return colour;
 	}
-	
+
 	@Override
 	public Colour getSecondaryColour() {
 		return secondaryColour;
 	}
-	
+
 	@Override
 	public Colour getTertiaryColour() {
 		return tertiaryColour;
 	}
-	
+
 	@Override
 	public SubspeciesPreference getSubspeciesPreferenceDefault() {
 		return subspeciesPreferenceDefault;
 	}
-	
+
 	@Override
 	public String getDescription(GameCharacter character) {
 		return description;
 	}
-	
+
 	@Override
 	public boolean isWinged() {
 		return winged;
 	}
-	
+
 	@Override
 	public boolean isDoesNotAge() {
 		return doesNotAge;
@@ -1442,12 +1388,12 @@ public abstract class AbstractSubspecies implements Subspecies {
 	public String getPathName() {
 		return pathName;
 	}
-	
+
 	@Override
 	public int getIconSize() {
 		return iconSize;
 	}
-	
+
 	@Override
 	public String getBackgroundPathName() {
 		return backgroundPathName;
@@ -1543,7 +1489,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 						PresetColour.RACE_SLIME,
 						"<div style='"+fullDivStyle+"'>" + SVGImages.SVG_IMAGE_PROVIDER.getRaceBackgroundSlime()+"</div>"
 						+ "<div style='"+fullDivStyle+"'>"+SVGStringUncolouredNoBackground+"</div>");
-				
+
 				dollSVGString = SvgUtil.colourReplacement(Subspecies.getIdFromSubspecies(this),
 						PresetColour.RACE_DOLL,
 						PresetColour.RACE_DOLL,
@@ -1552,13 +1498,13 @@ public abstract class AbstractSubspecies implements Subspecies {
 						+ (this==Subspecies.HUMAN
 							?""
 							:"<div style='"+fullDivStyle+"'>"+SVGStringUncolouredNoBackground+"</div>"));
-				
+
 				dollSVGStringDesaturated = SvgUtil.colourReplacement(Subspecies.getIdFromSubspecies(this),
 						PresetColour.BASE_GREY,
 						PresetColour.BASE_GREY,
 						PresetColour.BASE_GREY,
 						"<div style='"+fullDivStyle+"'>" + SVGImages.SVG_IMAGE_PROVIDER.getRaceBackgroundDoll()+"</div>");
-				
+
 				halfDemonSVGString = SvgUtil.colourReplacement(Subspecies.getIdFromSubspecies(this),
 						PresetColour.RACE_HALF_DEMON,
 						PresetColour.RACE_HALF_DEMON,
@@ -1590,7 +1536,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 			SVGString = "";
 		}
 	}
-	
+
 	@Override
 	public String getBookSVGString() {
 		if(bookSVGString==null) {
@@ -1606,7 +1552,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 		}
 		return getBipedBackground(SVGString, character, this.getColour(character), this.getSecondaryColour(), this.getTertiaryColour());
 	}
-	
+
 	@Override
 	public String getSVGStringNoBackground() {
 		if(SVGString==null) {
@@ -1619,7 +1565,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 	public String getSVGStringDesaturated(GameCharacter character) {
 		return getSVGStringDesaturated(character, PresetColour.BASE_GREY);
 	}
-	
+
 	@Override
 	public String getSVGStringDesaturated(GameCharacter character, Colour colour) {
 		if(SVGString==null) {
@@ -1670,12 +1616,12 @@ public abstract class AbstractSubspecies implements Subspecies {
 	}
 
 	@Override
-	public Map<AbstractWorldType, SubspeciesSpawnRarity> getWorldLocations() {
+	public Map<WorldType, SubspeciesSpawnRarity> getWorldLocations() {
 		return worldLocations;
 	}
 
 	@Override
-	public Map<AbstractPlaceType, SubspeciesSpawnRarity> getPlaceLocations() {
+	public Map<PlaceType, SubspeciesSpawnRarity> getPlaceLocations() {
 		return placeLocations;
 	}
 
@@ -1695,7 +1641,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 		}
 		return mostCommonRegion;
 	}
-	
+
 	public List<SubspeciesFlag> getFlags() {
 		return flags;
 	}
@@ -1752,63 +1698,5 @@ public abstract class AbstractSubspecies implements Subspecies {
 	@Override
 	public int getBaseSlaveValue(GameCharacter character) {
 		return baseSlaveValue;
-	}
-	
-	public static Map<AbstractSubspecies, Integer> getGenericSexPartnerSubspeciesMap(Gender gender, AbstractSubspecies... subspeciesToExclude) {
-		Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-		List<AbstractSubspecies> subspecies = new ArrayList<>(Subspecies.getAllSubspecies());
-		subspecies.removeAll(Arrays.asList(subspeciesToExclude));
-		
-		for(AbstractSubspecies s : subspecies) {
-			if(s==Subspecies.REINDEER_MORPH
-					&& Main.game.getSeason()==Season.WINTER
-					&& Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hasSnowedThisWinter)) {
-				addToSubspeciesMap(10, gender, s, availableRaces);
-				
-			} else if(s.getRace()!=Race.DEMON
-					&& s.getRace()!=Race.ANGEL
-					&& s.getRace()!=Race.ELEMENTAL
-					&& s!=Subspecies.FOX_ASCENDANT
-					&& s!=Subspecies.FOX_ASCENDANT_FENNEC
-					&& s!=Subspecies.FOX_ASCENDANT_ARCTIC
-					&& s!=Subspecies.SLIME) {
-				if(AbstractSubspecies.getMainSubspeciesOfRace(s.getRace())==s) {
-					addToSubspeciesMap(10, gender, s, availableRaces);
-				} else {
-					addToSubspeciesMap(3, gender, s, availableRaces);
-				}
-			}
-		}
-		
-		return availableRaces;
-	}
-
-	public static AbstractSubspecies getRandomSubspeciesFromWeightedMap(Map<AbstractSubspecies, Integer> availableRaces) {
-		return getRandomSubspeciesFromWeightedMap(availableRaces, Subspecies.HUMAN);
-	}
-
-	public static AbstractSubspecies getRandomSubspeciesFromWeightedMap(Map<AbstractSubspecies, Integer> availableRaces, AbstractSubspecies fallback) {
-		AbstractSubspecies species = Util.getRandomObjectFromWeightedMap(availableRaces);
-
-		return species != null ? species : fallback;
-	}
-
-	public static void addToSubspeciesMap(int weight, Gender gender, AbstractSubspecies subspecies, Map<AbstractSubspecies, Integer> map) {
-		addToSubspeciesMap(weight, gender, subspecies, map, null);
-	}
-	
-	public static void addToSubspeciesMap(int weight, Gender gender, AbstractSubspecies subspecies, Map<AbstractSubspecies, Integer> map, SubspeciesPreference userPreferenceOverride) {
-		if(gender.isFeminine()) {
-			if((Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().get(subspecies)!=FurryPreference.HUMAN && Main.getProperties().getSubspeciesFemininePreferencesMap().get(subspecies).getValue()>0)
-					|| userPreferenceOverride!=null) {
-				map.put(subspecies, weight*(userPreferenceOverride!=null?userPreferenceOverride:Main.getProperties().getSubspeciesFemininePreferencesMap().get(subspecies)).getValue());
-			}
-			
-		} else {
-			if((Main.getProperties().getSubspeciesMasculineFurryPreferencesMap().get(subspecies)!=FurryPreference.HUMAN && Main.getProperties().getSubspeciesMasculinePreferencesMap().get(subspecies).getValue()>0)
-					|| userPreferenceOverride!=null) {
-				map.put(subspecies, weight*(userPreferenceOverride!=null?userPreferenceOverride:Main.getProperties().getSubspeciesMasculinePreferencesMap().get(subspecies)).getValue());
-			}
-		}
 	}
 }

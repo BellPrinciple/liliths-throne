@@ -6,10 +6,8 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
@@ -303,7 +301,7 @@ public interface HairType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType skinType, AbstractRace race, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String hairTransformationDescription, String hairBodyDescription, List<BodyPartTag> tags) {
+		public Special(BodyCoveringType skinType, Race race, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String hairTransformationDescription, String hairBodyDescription, List<BodyPartTag> tags) {
 			super(skinType, race, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, hairTransformationDescription, hairBodyDescription, tags);
 		}
 
@@ -315,7 +313,7 @@ public interface HairType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractHairType> table = new TypeTable<>(
+	TypeTable<HairType> table = new TypeTable<>(
 		HairType::sanitize,
 		HairType.class,
 		AbstractHairType.class,
@@ -327,7 +325,7 @@ public interface HairType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractHairType getHairTypeFromId(String id) {
+	static HairType getHairTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -341,15 +339,15 @@ public interface HairType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromHairType(AbstractHairType hairType) {
+	static String getIdFromHairType(HairType hairType) {
 		return hairType.getId();
 	}
 
-	public static List<AbstractHairType> getAllHairTypes() {
+	static List<HairType> getAllHairTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractHairType> getHairTypes(AbstractRace r) {
+	static List<HairType> getHairTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

@@ -16,12 +16,12 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
+import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.clothing.Sticker;
 import com.lilithsthrone.game.inventory.clothing.StickerCategory;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
+import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.Pattern;
 import com.lilithsthrone.rendering.RenderingEngine;
@@ -265,7 +265,7 @@ public class InventoryController {
 	}
 	
 	public static void initClothingDyeListeners() {
-		AbstractClothingType clothing = InventoryDialogue.getClothing().getClothingType();
+		ClothingType clothing = InventoryDialogue.getClothing().getClothingType();
 		for (int i = 0; i<clothing.getColourReplacements().size(); i++) {
 			int index = i;
 			ColourReplacement cr = clothing.getColourReplacement(i);
@@ -300,7 +300,7 @@ public class InventoryController {
 	}
 	
 	public static void initPatternRecolourListeners() {
-		AbstractClothingType clothing = InventoryDialogue.getClothing().getClothingType();
+		ClothingType clothing = InventoryDialogue.getClothing().getClothingType();
 		for (int i = 0; i<clothing.getPatternColourReplacements().size(); i++) {
 			ColourReplacement cr = clothing.getPatternColourReplacement(i);
 			for (Colour c : cr.getAllColours()) {
@@ -319,7 +319,7 @@ public class InventoryController {
 	}
 	
 	public static void initStickerListeners() {
-		AbstractClothingType clothing = InventoryDialogue.getClothing().getClothingType();
+		ClothingType clothing = InventoryDialogue.getClothing().getClothingType();
 		for (Map.Entry<StickerCategory, List<Sticker>> stickerEntry : clothing.getStickers().entrySet()) {
 			for (Sticker s : stickerEntry.getValue()) {
 				String id = "ITEM_STICKER_"+stickerEntry.getKey().getId()+s.getId();
@@ -384,7 +384,7 @@ public class InventoryController {
 	}
 	
 	public static void initWeaponDyeListeners() {
-		AbstractWeaponType weapon = InventoryDialogue.getWeapon().getWeaponType();
+		WeaponType weapon = InventoryDialogue.getWeapon().getWeaponType();
 		for (int i = 0; i<weapon.getColourReplacements(false).size(); i++) {
 			int index = i;
 			ColourReplacement cr = weapon.getColourReplacement(false, i);
@@ -405,7 +405,7 @@ public class InventoryController {
 	}
 	
 	public static void initDamageTypeListeners() {
-		AbstractWeaponType weapon = InventoryDialogue.getWeapon().getWeaponType();
+		WeaponType weapon = InventoryDialogue.getWeapon().getWeaponType();
 		for (DamageType dt : weapon.getAvailableDamageTypes()) {
 			String id = "DAMAGE_TYPE_"+dt.toString();
 			if (MainController.document.getElementById(id) != null) {

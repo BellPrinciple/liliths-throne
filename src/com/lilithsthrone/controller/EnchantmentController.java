@@ -9,9 +9,9 @@ import com.lilithsthrone.game.character.markings.Tattoo;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.EnchantingUtils;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
+import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
@@ -54,7 +54,7 @@ public class EnchantmentController {
 			}
 		}
 		
-		AbstractItemEffectType effect = EnchantmentDialogue.getIngredient().getEnchantmentEffect();
+		ItemEffectType effect = EnchantmentDialogue.getIngredient().getEnchantmentEffect();
 		int maxLimit = effect.getMaximumLimit();
 		int currentLimit = EnchantmentDialogue.getLimit();
 		

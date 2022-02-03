@@ -7,11 +7,9 @@ import java.util.Map;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.spells.Spell;
@@ -64,12 +62,12 @@ public interface Perk {
 		var modifiersList = new ArrayList<String>();
 		var attributeModifiers = getAttributeModifiers(character);
 		if(attributeModifiers != null)
-			for(Map.Entry<AbstractAttribute,Integer> e : attributeModifiers.entrySet())
+			for(Map.Entry<Attribute,Integer> e : attributeModifiers.entrySet())
 				modifiersList.add(e.getKey().getFormattedValue(e.getValue()));
 		return Util.mergeLists(modifiersList, getExtraEffects());
 	}
 
-	default Map<AbstractAttribute,Integer> getAttributeModifiers(GameCharacter character) {
+	default Map<Attribute,Integer> getAttributeModifiers(GameCharacter character) {
 		return null;
 	}
 
@@ -6695,20 +6693,20 @@ public interface Perk {
 
 	Table table = new Table();
 
-	final class Table extends com.lilithsthrone.utils.Table<AbstractPerk> {
+	final class Table extends com.lilithsthrone.utils.Table<Perk> {
 
-		private final List<AbstractPerk> subspeciesKnowledgePerks = new ArrayList<>();
-		private final List<AbstractPerk> hidden = new ArrayList<>();
+		private final List<Perk> subspeciesKnowledgePerks = new ArrayList<>();
+		private final List<Perk> hidden = new ArrayList<>();
 		private boolean subspeciesPerksGenerated;
 
 		@Override
-		public AbstractPerk of(String id) {
+		public Perk of(String id) {
 			generateSubspeciesPerks();
 			return super.of(id);
 		}
 
 		@Override
-		public List<AbstractPerk> list() {
+		public List<Perk> list() {
 			generateSubspeciesPerks();
 			return super.list();
 		}
@@ -6726,15 +6724,15 @@ public interface Perk {
 		private void generateSubspeciesPerks() {
 			if(subspeciesPerksGenerated)
 				return;
-			List<AbstractAttribute> resistancesAdded = new ArrayList<>();
-			for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
-				var m = sub.getDamageMultiplier();
+			List<Attribute> resistancesAdded = new ArrayList<>();
+			for(Subspecies sub : Subspecies.getAllSubspecies()) {
+				Attribute m = sub.getDamageMultiplier();
 				if(resistancesAdded.contains(m))
 					continue;
 				resistancesAdded.add(m);
-				var main = AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace());
+				Subspecies main = Subspecies.getMainSubspeciesOfRace(sub.getRace());
 				boolean mainSubspecies = m==main.getDamageMultiplier();
-				AbstractSubspecies subToUse = mainSubspecies ? main : sub;
+				Subspecies subToUse = mainSubspecies ? main : sub;
 				AbstractPerk racePerk = new AbstractPerk(20,
 						false,
 						Util.capitaliseSentence(mainSubspecies?sub.getRace().getName(false):subToUse.getName(null))+" knowledge",
@@ -6767,40 +6765,40 @@ public interface Perk {
 				subspeciesKnowledgePerks.add(racePerk);
 			}
 			subspeciesPerksGenerated = true;
-			hidden.sort(Comparator.comparingInt(AbstractPerk::getRenderingPriority));
+			hidden.sort(Comparator.comparingInt(Perk::getRenderingPriority));
 		}
 	}
 
-	public static AbstractPerk getPerkFromId(String id) {
+	static Perk getPerkFromId(String id) {
 		return table.of(id);
 	}
 
-	public static String getIdFromPerk(AbstractPerk perk) {
+	static String getIdFromPerk(Perk perk) {
 		table.generateSubspeciesPerks();
 		return perk.getId();
 	}
 
-	public static AbstractPerk getSubspeciesRelatedPerk(AbstractSubspecies subspecies) {
+	static Perk getSubspeciesRelatedPerk(Subspecies subspecies) {
 		table.generateSubspeciesPerks();
 		
-		AbstractSubspecies subToUse =
-				subspecies.getDamageMultiplier()==AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace()).getDamageMultiplier()
-					?AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace())
+		Subspecies subToUse =
+				subspecies.getDamageMultiplier()==Subspecies.getMainSubspeciesOfRace(subspecies.getRace()).getDamageMultiplier()
+					?Subspecies.getMainSubspeciesOfRace(subspecies.getRace())
 					:subspecies;
 		
-		return Perk.getPerkFromId(Subspecies.getIdFromSubspecies(subToUse));
+		return Perk.getPerkFromId(subToUse.getId());
 	}
 
-	public static List<AbstractPerk> getAllPerks() {
+	static List<Perk> getAllPerks() {
 		return table.list();
 	}
 
-	public static List<AbstractPerk> getHiddenPerks() {
+	static List<Perk> getHiddenPerks() {
 		table.generateSubspeciesPerks();
 		return Collections.unmodifiableList(table.hidden);
 	}
 
-	public static List<AbstractPerk> getSubspeciesKnowledgePerks() {
+	static List<Perk> getSubspeciesKnowledgePerks() {
 		table.generateSubspeciesPerks();
 		return Collections.unmodifiableList(table.subspeciesKnowledgePerks);
 	}

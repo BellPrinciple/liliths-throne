@@ -58,7 +58,6 @@ import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.SetBonus;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
@@ -165,16 +164,16 @@ public class Yui extends NPC {
 
 		// Coverings:
 		this.setEyeCovering(new Covering(BodyCoveringType.EYE_DEMON_COMMON, CoveringPattern.EYE_IRISES, PresetColour.EYE_CRIMSON, true, PresetColour.EYE_CRIMSON, true));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("charisma_spider_chitinSmooth"), CoveringPattern.STRIPED, CoveringModifier.SMOOTH, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_YELLOW, false), true);
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("charisma_spider_chitinSmooth"), CoveringPattern.STRIPED, CoveringModifier.SMOOTH, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_YELLOW, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.DEMON_COMMON, PresetColour.SKIN_EBONY), true);
 
 		this.setSkinCovering(new Covering(BodyCoveringType.HORN, PresetColour.COVERING_BLACK), false);
-		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("charisma_spider_hair"), CoveringPattern.OMBRE, CoveringModifier.SILKEN, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_RED_DARK, false), true);
+
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("charisma_spider_hair"), CoveringPattern.OMBRE, CoveringModifier.SILKEN, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_RED_DARK, false), true);
 		this.setHairLength(HairLength.THREE_SHOULDER_LENGTH.getMedianValue());
 		this.setHairStyle(HairStyle.BUN);
-		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("charisma_spider_body_hair"), PresetColour.COVERING_BLACK), false);
+
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("charisma_spider_body_hair"), PresetColour.COVERING_BLACK), false);
 		this.setUnderarmHair(BodyHair.ZERO_NONE);
 		this.setAssHair(BodyHair.ZERO_NONE);
 		this.setPubicHair(BodyHair.ZERO_NONE);
@@ -279,9 +278,9 @@ public class Yui extends NPC {
 	public void dailyUpdate() {
 		clearNonEquippedInventory(false);
 
-		List<AbstractClothingType> clothingTypesToSell = new ArrayList<>();
+		var clothingTypesToSell = new ArrayList<ClothingType>();
 		
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(var clothing : ClothingType.getAllClothing()) {
 			if((clothing.getClothingSet() == SetBonus.getSetBonusFromId("innoxia_bdsm") || clothing.getClothingSet() == SetBonus.getSetBonusFromId("sage_ltxset") || clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_FINCH))
 					&& (!clothing.getDefaultItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				clothingTypesToSell.add(clothing);
@@ -293,7 +292,7 @@ public class Yui extends NPC {
 			clothingTypesToSell.remove(Util.random.nextInt(clothingTypesToSell.size()));
 		}
 		
-		for(AbstractClothingType type : clothingTypesToSell) {
+		for(var type : clothingTypesToSell) {
 			this.addClothing(Main.game.getItemGen().generateClothing(type, false), false);
 		}
 		

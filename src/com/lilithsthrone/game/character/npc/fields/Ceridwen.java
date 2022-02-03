@@ -47,12 +47,9 @@ import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -135,15 +132,15 @@ public class Ceridwen extends NPC {
 		this.setBodySize(BodySize.TWO_AVERAGE.getMedianValue());
 		
 		// Coverings:
-		this.setEyeCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_eye"), PresetColour.EYE_YELLOW));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_feathers"), CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_WHITE, false, PresetColour.COVERING_WHITE, false), true);
+		this.setEyeCovering(new Covering(BodyCoveringType.table.of("innoxia_raptor_eye"), PresetColour.EYE_YELLOW));
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("innoxia_raptor_feathers"), CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_WHITE, false, PresetColour.COVERING_WHITE, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, PresetColour.SKIN_PALE), true);
-		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_hair"), PresetColour.COVERING_WHITE), true);
+
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_raptor_hair"), PresetColour.COVERING_WHITE), true);
 		this.setHairLength(HairLength.ZERO_BALD.getMinimumValue());
 		this.setHairStyle(HairStyle.NONE);
 
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_body_hair"), PresetColour.COVERING_WHITE), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_raptor_body_hair"), PresetColour.COVERING_WHITE), false);
 		this.setUnderarmHair(BodyHair.FOUR_NATURAL);
 		this.setAssHair(BodyHair.FOUR_NATURAL);
 		this.setPubicHair(BodyHair.FOUR_NATURAL);
@@ -224,21 +221,21 @@ public class Ceridwen extends NPC {
 		this.addItem(Main.game.getItemGen().generateItem(ItemType.DYE_BRUSH), 25, false, false);
 		this.addItem(Main.game.getItemGen().generateItem(ItemType.REFORGE_HAMMER), 10, false, false);
 		
-		for(AbstractItemType item : ItemType.getAllItems()) {
+		for(var item : ItemType.getAllItems()) {
 			if(item.getItemTags().contains(ItemTag.SOLD_BY_RALPH)
 					&& (!item.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				this.addItem(Main.game.getItemGen().generateItem(item), !item.isConsumedOnUse()?1:(6+Util.random.nextInt(12)), false, false);
 			}
 		}
 
-		for(AbstractWeaponType weapon : WeaponType.getAllWeapons()) {
+		for(var weapon : WeaponType.getAllWeapons()) {
 			if(weapon.getItemTags().contains(ItemTag.SOLD_BY_RALPH)
 					&& (!weapon.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				this.addWeapon(Main.game.getItemGen().generateWeapon(weapon), 1+Util.random.nextInt(5), false, false);
 			}
 		}
 		
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(var clothing : ClothingType.table.list()) {
 			if(clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_RALPH)
 					&& (!clothing.getDefaultItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				if(clothing.isDefaultSlotCondom()) {
@@ -310,7 +307,7 @@ public class Ceridwen extends NPC {
 			return true;
 		}
 		if(item instanceof AbstractClothing) {
-			AbstractClothingType type = ((AbstractClothing)item).getClothingType();
+			var type = ((AbstractClothing)item).getClothingType();
 			return type.isDefaultSlotCondom();
 		}
 		

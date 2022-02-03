@@ -7,11 +7,9 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -358,7 +356,7 @@ public interface TentacleType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, PenetrationGirth defaultGirth, float defaultLengthAsPercentageOfHeight, String transformationName, String determiner, String determinerPlural, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String tipName, String tipNamePlural, List<String> tipDescriptorsMasculine, List<String> tipDescriptorsFeminine, String tentacleTransformationDescription, String tentacleBodyDescription, List<BodyPartTag> tags) {
+		public Special(BodyCoveringType coveringType, Race race, PenetrationGirth defaultGirth, float defaultLengthAsPercentageOfHeight, String transformationName, String determiner, String determinerPlural, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String tipName, String tipNamePlural, List<String> tipDescriptorsMasculine, List<String> tipDescriptorsFeminine, String tentacleTransformationDescription, String tentacleBodyDescription, List<BodyPartTag> tags) {
 			super(coveringType, race, defaultGirth, defaultLengthAsPercentageOfHeight, transformationName, determiner, determinerPlural, name, namePlural, descriptorsMasculine, descriptorsFeminine, tipName, tipNamePlural, tipDescriptorsMasculine, tipDescriptorsFeminine, tentacleTransformationDescription, tentacleBodyDescription, tags);
 		}
 
@@ -370,7 +368,7 @@ public interface TentacleType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractTentacleType> table = new TypeTable<>(
+	TypeTable<TentacleType> table = new TypeTable<>(
 		s->s,
 		TentacleType.class,
 		AbstractTentacleType.class,
@@ -382,28 +380,28 @@ public interface TentacleType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractTentacleType getTentacleTypeFromId(String id) {
+	static TentacleType getTentacleTypeFromId(String id) {
 		return table.of(id);
 	}
 
-	public static String getIdFromTentacleType(AbstractTentacleType tentacleType) {
+	static String getIdFromTentacleType(TentacleType tentacleType) {
 		return tentacleType.getId();
 	}
 
-	public static List<AbstractTentacleType> getAllTentacleTypes() {
+	static List<TentacleType> getAllTentacleTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractTentacleType> getTentacleTypes(AbstractRace r) {
+	static List<TentacleType> getTentacleTypes(Race r) {
 		return table.of(r).orElse(List.of(NONE));
 	}
 	
-	public static List<AbstractTentacleType> getTentacleTypesSuitableForTransformation(List<AbstractTentacleType> options) {
+	static List<TentacleType> getTentacleTypesSuitableForTransformation(List<TentacleType> options) {
 		if (!options.contains(TentacleType.NONE)) {
 			return options;
 		}
 		
-		List<AbstractTentacleType> duplicatedOptions = new ArrayList<>(options);
+		var duplicatedOptions = new ArrayList<>(options);
 		duplicatedOptions.remove(TentacleType.NONE);
 		return duplicatedOptions;
 	}

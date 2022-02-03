@@ -10,7 +10,6 @@ import com.lilithsthrone.game.dialogue.companions.OccupantManagementDialogue;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.PlaceUpgrade;
 
 /**
@@ -40,7 +39,7 @@ public class LilayaOfficeDialogue {
 						+ PlaceUpgrade.LILAYA_OFFICE.getRoomDescription(Main.game.getPlayerCell())
 					+ "</p>");
 			
-			for(AbstractPlaceUpgrade up : Main.game.getPlayerCell().getPlace().getPlaceUpgrades()) {
+			for(PlaceUpgrade up : Main.game.getPlayerCell().getPlace().getPlaceUpgrades()) {
 				if(!up.isCoreRoomUpgrade()) {
 					sb.append("<p>"
 								+ "<b style='color:"+up.getColour().toWebHexString()+";'>"+up.getName()+"</b><br/>"

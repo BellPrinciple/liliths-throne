@@ -4,7 +4,6 @@ import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.Name;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
@@ -16,10 +15,8 @@ import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Vector2i;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Season;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -48,15 +45,15 @@ public class ModdedCharacter extends NPC {
 		this(Gender.getGenderFromUserPreferences(false, false), WorldType.EMPTY, new Vector2i(0, 0), isImported);
 	}
 
-	public ModdedCharacter(Gender gender, AbstractWorldType worldLocation, Vector2i location, boolean isImported) {
+	public ModdedCharacter(Gender gender, WorldType worldLocation, Vector2i location, boolean isImported) {
 		this(gender, worldLocation, location, isImported, null);
 	}
 
-	public ModdedCharacter(Gender gender, AbstractWorldType worldLocation, AbstractPlaceType placeType, boolean isImported, Predicate<AbstractSubspecies> subspeciesRemovalFilter) {
+	public ModdedCharacter(Gender gender, WorldType worldLocation, PlaceType placeType, boolean isImported, Predicate<Subspecies> subspeciesRemovalFilter) {
 		this(gender, worldLocation, Main.game.getWorlds().get(worldLocation).getCell(placeType).getLocation(), isImported, subspeciesRemovalFilter);
 	}
 
-	public ModdedCharacter(Gender gender, AbstractWorldType worldLocation, Vector2i location, boolean isImported, Predicate<AbstractSubspecies> subspeciesRemovalFilter) {
+	public ModdedCharacter(Gender gender, WorldType worldLocation, Vector2i location, boolean isImported, Predicate<Subspecies> subspeciesRemovalFilter) {
 		super(isImported, null, null, "",
 				Util.random.nextInt(28)+18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
 				3,
@@ -72,27 +69,27 @@ public class ModdedCharacter extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			List<AbstractSubspecies> availableSubspecies = new ArrayList<>(Subspecies.getAllSubspecies());
+			Map<Subspecies, Integer> availableRaces = new HashMap<>();
+			List<Subspecies> availableSubspecies = new ArrayList<>(Subspecies.getAllSubspecies());
 			
 			if(subspeciesRemovalFilter!=null) {
 				availableSubspecies.removeIf(subspeciesRemovalFilter);
 			}
 			
-			for(AbstractSubspecies s : availableSubspecies) {
+			for(Subspecies s : availableSubspecies) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}
 				if(s==Subspecies.REINDEER_MORPH
 						&& Main.game.getSeason()==Season.WINTER
 						&& Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hasSnowedThisWinter)) {
-					AbstractSubspecies.addToSubspeciesMap(50, gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap(50, gender, s, availableRaces);
 				}
 				
 				if(Subspecies.getWorldSpecies(WorldType.DOMINION, null, false).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (1000*Subspecies.getWorldSpecies(WorldType.DOMINION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (1000*Subspecies.getWorldSpecies(WorldType.DOMINION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				} else if(Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (1000*Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (1000*Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				}
 			}
 			

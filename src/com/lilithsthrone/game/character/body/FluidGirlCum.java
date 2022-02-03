@@ -12,7 +12,6 @@ import org.w3c.dom.NodeList;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
@@ -27,12 +26,12 @@ import com.lilithsthrone.utils.Util;
  */
 public class FluidGirlCum implements FluidInterface {
 	
-	protected AbstractFluidType type;
+	protected FluidType type;
 	protected FluidFlavour flavour;
 	protected Set<FluidModifier> fluidModifiers;
 	protected List<ItemEffect> transformativeEffects;
 
-	public FluidGirlCum(AbstractFluidType type) {
+	public FluidGirlCum(FluidType type) {
 		this.type = type;
 		this.flavour = type.getFlavour();
 		transformativeEffects = new ArrayList<>();
@@ -47,7 +46,7 @@ public class FluidGirlCum implements FluidInterface {
 		this.fluidModifiers = new HashSet<>(fluidGirlCumToCopy.fluidModifiers);
 		this.transformativeEffects = new ArrayList<>(fluidGirlCumToCopy.transformativeEffects);
 	}
-	
+
 	public Element saveAsXML(String rootElementName, Element parentElement, Document doc) {
 		Element element = doc.createElement(rootElementName);
 		parentElement.appendChild(element);
@@ -74,18 +73,18 @@ public class FluidGirlCum implements FluidInterface {
 	 * @param doc
 	 * @param baseType If you pass in a baseType, this method will ignore the saved type in parentElement.
 	 */
-	public static FluidGirlCum loadFromXML(String rootElementName, Element parentElement, Document doc, AbstractFluidType baseType) {
+	public static FluidGirlCum loadFromXML(String rootElementName, Element parentElement, Document doc, FluidType baseType) {
 		
 		Element girlcum = (Element)parentElement.getElementsByTagName(rootElementName).item(0);
 
-		AbstractFluidType fluidType = FluidType.GIRL_CUM_HUMAN;
+		FluidType fluidType = FluidType.GIRL_CUM_HUMAN;
 		
 		if(baseType!=null) {
 			fluidType = baseType;
 			
 		} else {
 			try {
-				fluidType = FluidType.getFluidTypeFromId(girlcum.getAttribute("type"));
+				fluidType = FluidType.table.of(girlcum.getAttribute("type"));
 			} catch(Exception ex) {
 			}
 		}
@@ -107,7 +106,7 @@ public class FluidGirlCum implements FluidInterface {
 				Collection<FluidModifier> girlcumFluidModifiers = fluidGirlcum.fluidModifiers;
 				Body.handleLoadingOfModifiers(FluidModifier.values(), null, girlcumModifiersElement, girlcumFluidModifiers);
 			}
-			
+
 		} else {
 			NodeList mods = girlcum.getElementsByTagName("mod");
 			for(int i = 0; i < mods.getLength(); i++) {
@@ -115,7 +114,7 @@ public class FluidGirlCum implements FluidInterface {
 				fluidGirlcum.fluidModifiers.add(FluidModifier.valueOf(e.getTextContent()));
 			}
 		}
-		
+
 		return fluidGirlcum;
 	}
 
@@ -176,11 +175,11 @@ public class FluidGirlCum implements FluidInterface {
 	}
 
 	@Override
-	public AbstractFluidType getType() {
+	public FluidType getType() {
 		return type;
 	}
 
-	public void setType(AbstractFluidType type) {
+	public void setType(FluidType type) {
 		this.type = type;
 	}
 

@@ -7,7 +7,7 @@ import java.util.Map;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.combat.DamageType;
 import com.lilithsthrone.game.combat.DamageVariance;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
@@ -16,7 +16,6 @@ import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.SetBonus;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.utils.Table;
@@ -130,11 +129,11 @@ public interface WeaponType extends AbstractCoreType {
 
 	boolean isCombatMoveRegenOnDamageTypeChange();
 
-	Map<DamageType,List<AbstractCombatMove>> getCombatMoves();
+	Map<DamageType,List<CombatMove>> getCombatMoves();
 
-	default List<AbstractCombatMove> getCombatMoves(DamageType damageType) {
+	default List<CombatMove> getCombatMoves(DamageType damageType) {
 		var combatMoves = getCombatMoves();
-		var damageTypeCombatMoves = new ArrayList<AbstractCombatMove>();
+		var damageTypeCombatMoves = new ArrayList<CombatMove>();
 		if(combatMoves.containsKey(null))
 			damageTypeCombatMoves.addAll(combatMoves.get(null));
 		if(combatMoves.containsKey(damageType))
@@ -202,25 +201,25 @@ public interface WeaponType extends AbstractCoreType {
 		return 100;
 	}
 
-	default AbstractItemEffectType getEnchantmentEffect() {
+	default ItemEffectType getEnchantmentEffect() {
 		return ItemEffectType.WEAPON;
 	}
 
-	default AbstractWeaponType getEnchantmentItemType(List<ItemEffect> effects) {
-		return (AbstractWeaponType)this;
+	default WeaponType getEnchantmentItemType(List<ItemEffect> effects) {
+		return this;
 	}
 
 	List<ItemTag> getItemTags();
 
 	@Deprecated
-	public static AbstractWeaponType getWeaponTypeFromId(String id) {
+	static WeaponType getWeaponTypeFromId(String id) {
 		return getWeaponTypeFromId(id, true);
 	}
 	
 	/**
 	 * @param closestMatch Pass in true if you want to get whatever WeaponType has the closest match to the provided id, even if it's not exactly the same.
 	 */
-	public static AbstractWeaponType getWeaponTypeFromId(String id, boolean closestMatch) {
+	static WeaponType getWeaponTypeFromId(String id, boolean closestMatch) {
 		return closestMatch ? table.of(id) : table.exact(id).orElse(null);
 	}
 
@@ -285,11 +284,11 @@ public interface WeaponType extends AbstractCoreType {
 		return id;
 	}
 
-	public static String getIdFromWeaponType(AbstractWeaponType weaponType) {
+	static String getIdFromWeaponType(WeaponType weaponType) {
 		return weaponType.getId();
 	}
 
-	Table<AbstractWeaponType> table = new Table<>(WeaponType::sanitize) {{
+	Table<WeaponType> table = new Table<>(WeaponType::sanitize) {{
 
 		// Modded weapon types:
 		forEachMod("/items/weapons",null,null,(f,n,a)->{
@@ -306,11 +305,11 @@ public interface WeaponType extends AbstractCoreType {
 		});
 	}};
 
-	public static List<AbstractWeaponType> getAllWeapons() {
+	static List<WeaponType> getAllWeapons() {
 		return table.list();
 	}
 
-	public static List<AbstractWeaponType> getAllWeaponsInSet(AbstractSetBonus setBonus) {
+	static List<WeaponType> getAllWeaponsInSet(SetBonus setBonus) {
 		return table.list().stream().filter(w -> setBonus.equals(w.getClothingSet())).toList();
 	}
 }

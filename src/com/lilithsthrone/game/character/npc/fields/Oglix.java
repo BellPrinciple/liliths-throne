@@ -59,7 +59,6 @@ import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -314,10 +313,10 @@ public class Oglix extends NPC {
 			for(NPC npc : getBeerBitches()) {
 				if((npc.hasVagina() || Main.game.isAnalContentEnabled()) && Math.random()<0.8f) {
 					Gender gender = Gender.getGenderFromUserPreferences(false, true);
-					Map<AbstractSubspecies, Integer> availableRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(gender);
+					Map<Subspecies, Integer> availableRaces = Subspecies.getGenericSexPartnerSubspeciesMap(gender);
 					
-					AbstractSubspecies subspecies = Subspecies.HUMAN;
-					AbstractSubspecies halfDemonSubspecies = null;
+					Subspecies subspecies = Subspecies.HUMAN;
+					Subspecies halfDemonSubspecies = null;
 					if(!availableRaces.isEmpty()) {
 						subspecies = Util.getRandomObjectFromWeightedMap(availableRaces);
 					}
@@ -483,10 +482,10 @@ public class Oglix extends NPC {
 		NPC npc = this.getBeerBitches().get(0);
 		
 		Gender gender = Gender.getGenderFromUserPreferences(false, true);
-		Map<AbstractSubspecies, Integer> availableRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(gender);
+		Map<Subspecies, Integer> availableRaces = Subspecies.getGenericSexPartnerSubspeciesMap(gender);
 		
-		AbstractSubspecies subspecies = Subspecies.HUMAN;
-		AbstractSubspecies halfDemonSubspecies = null;
+		Subspecies subspecies = Subspecies.HUMAN;
+		Subspecies halfDemonSubspecies = null;
 		if(!availableRaces.isEmpty()) {
 			subspecies = Util.getRandomObjectFromWeightedMap(availableRaces);
 		}

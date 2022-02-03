@@ -6,7 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.utils.colours.Colour;
 
@@ -53,7 +52,7 @@ public interface TattooType extends AbstractCoreType {
 		return 100;
 	}
 
-	default AbstractItemEffectType getEnchantmentEffect() {
+	default ItemEffectType getEnchantmentEffect() {
 		return ItemEffectType.TATTOO;
 	}
 
@@ -113,24 +112,24 @@ public interface TattooType extends AbstractCoreType {
 //			null,
 //			null);
 
-	public static AbstractTattooType getTattooTypeFromId(String id) {
+	static TattooType getTattooTypeFromId(String id) {
 		return table.of(id);
 	}
 
-	public static String getIdFromTattooType(AbstractTattooType tattooType) {
+	static String getIdFromTattooType(TattooType tattooType) {
 		return tattooType.getId();
 	}
 
 	/**
 	 * @return A list of tattoos which the target has available to them.
 	 */
-	public static List<AbstractTattooType> getConditionalTattooTypes(GameCharacter target) {
-		List<AbstractTattooType> tattoos = getAllTattooTypes();
+	static List<TattooType> getConditionalTattooTypes(GameCharacter target) {
+		List<TattooType> tattoos = getAllTattooTypes();
 		tattoos.removeIf(tattoo -> !tattoo.isAvailable(target));
 		return tattoos;
 	}
 	
-	public static List<AbstractTattooType> getAllTattooTypes() {
+	static List<TattooType> getAllTattooTypes() {
 		var allTattoos = new ArrayList<>(table.list());
 		
 		allTattoos.sort((t1, t2) -> t1.equals(TattooType.getTattooTypeFromId("innoxia_misc_none"))?-1:(t1.getName().compareTo(t2.getName())));
@@ -140,7 +139,7 @@ public interface TattooType extends AbstractCoreType {
 	
 	Table table = new Table();
 
-	final class Table extends com.lilithsthrone.utils.Table<AbstractTattooType> {
+	final class Table extends com.lilithsthrone.utils.Table<TattooType> {
 		private Table() {
 			super(Table::sanitize);
 

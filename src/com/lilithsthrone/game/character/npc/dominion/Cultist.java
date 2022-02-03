@@ -32,7 +32,6 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
@@ -40,7 +39,7 @@ import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotUnique;
 import com.lilithsthrone.main.Main;
@@ -192,7 +191,7 @@ public class Cultist extends NPC {
 		Colour witchColour = colours.get(Util.random.nextInt(colours.size()));
 		
 		
-		List<AbstractClothingType> clothingChoices = new ArrayList<>();
+		var clothingChoices = new ArrayList<ClothingType>();
 		
 		clothingChoices.add(ClothingType.getClothingTypeFromId("innoxia_groin_crotchless_panties"));
 		clothingChoices.add(ClothingType.getClothingTypeFromId("innoxia_groin_crotchless_thong"));
@@ -368,7 +367,7 @@ public class Cultist extends NPC {
 	}
 
 	@Override
-	public boolean isHappyToBeInSlot(AbstractSexPosition position, SexSlot slot, GameCharacter target) {
+	public boolean isHappyToBeInSlot(SexPosition position, SexSlot slot, GameCharacter target) {
 		if(Main.sex.isInForeplay(this)) {
 			return slot==SexSlotUnique.MISSIONARY_ALTAR_KNEELING_BETWEEN_LEGS || slot==SexSlotUnique.MISSIONARY_ALTAR_SEALED_KNEELING_BETWEEN_LEGS;
 		} else {
@@ -405,7 +404,7 @@ public class Cultist extends NPC {
 	}
 	
 	@Override
-	public String getCondomEquipEffects(AbstractClothingType condomClothingType, GameCharacter equipper, GameCharacter target, boolean rough) {
+	public String getCondomEquipEffects(ClothingType condomClothingType, GameCharacter equipper, GameCharacter target, boolean rough) {
 		if(!target.equals(equipper) && Main.game.isInSex()) {
 			if((Main.sex.isDom(Main.game.getPlayer()) || Main.sex.isSubHasEqualControl()) && !target.isPlayer()) {
 				if(condomClothingType.equals(ClothingType.getClothingTypeFromId("innoxia_penis_condom_webbing"))) {

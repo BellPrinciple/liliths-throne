@@ -37,9 +37,7 @@ import com.lilithsthrone.game.sex.sexActions.baseActions.TongueVagina;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -61,7 +59,7 @@ public class NyanFirstDate {
 		return ((NyanMum)Main.game.getNpc(NyanMum.class));
 	}
 
-	private static void travelTo(AbstractWorldType worldType, AbstractPlaceType placeType) {
+	private static void travelTo(WorldType worldType, PlaceType placeType) {
 		Main.game.getPlayer().setLocation(worldType, placeType);
 		getNyan().setLocation(Main.game.getPlayer(), false);
 	}

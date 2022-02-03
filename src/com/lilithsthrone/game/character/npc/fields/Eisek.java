@@ -50,7 +50,6 @@ import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -286,7 +285,7 @@ public class Eisek extends NPC {
 		    if (Main.game.getDateNow().getDayOfMonth() >= 1 && Main.game.getDateNow().getDayOfMonth() <= 3) {
 				// Probably could reduce this to only update on the first day, but that might get annoying when adding items in future updates or for modders
 				clearNonEquippedInventory(false);	
-				for(AbstractItemType item : ItemType.getAllItems()) {
+				for(ItemType item : ItemType.getAllItems()) {
 					if(item.getItemTags().contains(ItemTag.SOLD_BY_EISEK)
 							&& (!item.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 						this.addItem(Main.game.getItemGen().generateItem(item), !item.isConsumedOnUse()?1:(2+Util.random.nextInt(2)), false, false);

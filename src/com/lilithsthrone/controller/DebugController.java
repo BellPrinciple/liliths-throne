@@ -4,21 +4,16 @@ import org.w3c.dom.events.EventTarget;
 
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInventoryEventListener;
-import com.lilithsthrone.game.character.markings.AbstractTattooType;
 import com.lilithsthrone.game.character.markings.TattooType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.DebugDialogue;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.SetBonus;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.outfit.AbstractOutfit;
 import com.lilithsthrone.game.inventory.outfit.OutfitType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 
@@ -30,7 +25,7 @@ import com.lilithsthrone.main.Main;
 public class DebugController {
 	public static void initSpawnItemListeners() {
 		String id;
-		for (AbstractClothingType clothingType : ClothingType.getAllClothing()) {
+		for (ClothingType clothingType : ClothingType.getAllClothing()) {
 			id = clothingType.getId()+"_SPAWN";
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -41,7 +36,7 @@ public class DebugController {
 			}
 		}
 		
-		for (AbstractWeaponType weaponType : WeaponType.getAllWeapons()) {
+		for (WeaponType weaponType : WeaponType.getAllWeapons()) {
 			id = weaponType.getId()+"_SPAWN";
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -52,7 +47,7 @@ public class DebugController {
 			}
 		}
 		
-		for (AbstractItemType itemType : ItemType.getAllItems()) {
+		for (ItemType itemType : ItemType.getAllItems()) {
 			id = itemType.getId()+"_SPAWN";
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
@@ -63,7 +58,7 @@ public class DebugController {
 			}
 		}
 		
-		for (AbstractTattooType tattooType : TattooType.getAllTattooTypes()) {
+		for (TattooType tattooType : TattooType.getAllTattooTypes()) {
 			id = tattooType.getId()+"_SPAWN";
 			if (MainController.document.getElementById(id) != null) {
 				MainController.addTooltipListeners(id, new TooltipInventoryEventListener().setGenericTattoo(tattooType));
@@ -123,17 +118,17 @@ public class DebugController {
 	}
 	
 	public static void initSpawnSetListeners() {
-		for (AbstractSetBonus sb : SetBonus.allSetBonuses) {
+		for (SetBonus sb : SetBonus.getAllSetBonuses()) {
 			String id = "SET_BONUS_"+SetBonus.getIdFromSetBonus(sb);
 			if (MainController.document.getElementById(id) != null) {
 				((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e->{
 					if(WeaponType.getAllWeaponsInSet(sb)!=null) {
-						for (AbstractWeaponType wt : WeaponType.getAllWeaponsInSet(sb)) {
+						for (WeaponType wt : WeaponType.getAllWeaponsInSet(sb)) {
 							Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getInventory().addWeapon(Main.game.getItemGen().generateWeapon(wt));
 						}
 					}
 					if(ClothingType.getAllClothingInSet(sb)!=null) {
-						for (AbstractClothingType ct : ClothingType.getAllClothingInSet(sb)) {
+						for (ClothingType ct : ClothingType.getAllClothingInSet(sb)) {
 							Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getInventory().addClothing(Main.game.getItemGen().generateClothing(ct));
 						}
 					}
@@ -163,5 +158,5 @@ public class DebugController {
 			}
 		}
 	}
-	
+
 }

@@ -5,7 +5,7 @@ import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
+import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.WorldRegion;
 
 /**
@@ -82,5 +82,5 @@ public abstract class AbstractGlobalPlaceType extends AbstractPlaceType {
 		return this;
 	}
 	
-	public abstract AbstractWorldType getGlobalLinkedWorldType();
+	public abstract WorldType getGlobalLinkedWorldType();
 }

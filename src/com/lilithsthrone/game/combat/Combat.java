@@ -8,9 +8,7 @@ import java.util.Map.Entry;
 import java.util.Stack;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.AppliedStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -19,7 +17,6 @@ import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.NPCFlagValue;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.Subspecies;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMoveType;
 import com.lilithsthrone.game.combat.spells.Spell;
@@ -35,7 +32,7 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
+import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
@@ -76,7 +73,7 @@ public class Combat {
 	
 	private Map<GameCharacter, Stack<Float>> manaBurnStack;
 	
-	private Map<GameCharacter, Map<AbstractStatusEffect, Integer>> statusEffectsToApply;
+	private Map<GameCharacter, Map<StatusEffect, Integer>> statusEffectsToApply;
 	
 	private Map<GameCharacter, List<String>> combatContent;
 	private Map<GameCharacter, List<String>> predictionContent;
@@ -87,7 +84,7 @@ public class Combat {
 	// Maps characters -> inventory slots (to track which slot the weapon was thrown from) -> weapon type and number of weapon type that has been thrown
 	private Map<GameCharacter, Map<InventorySlot, Map<AbstractWeapon, Integer>>> weaponsThrownDuringTurn;
 	private Map<GameCharacter, Map<InventorySlot, Map<AbstractWeapon, Integer>>> weaponsThrownDuringCombat;
-	private Map<GameCharacter, Map<InventorySlot, AbstractWeaponType>> thrownWeaponsDepleted; // Only for use in UI rendering
+	private Map<GameCharacter, Map<InventorySlot, WeaponType>> thrownWeaponsDepleted; // Only for use in UI rendering
 	
 	// Used if the ResponseCombat which initialises combat came from an external dialogue file:
 	private DialogueNode playerPostVictoryDialogue;
@@ -1016,7 +1013,7 @@ public class Combat {
 						
 				if(responseTab==0) {
 					if(Main.game.getPlayer().getEquippedMoves().size()>moveIndex) {
-						AbstractCombatMove move = Main.game.getPlayer().getEquippedMoves().get(moveIndex);
+						var move = Main.game.getPlayer().getEquippedMoves().get(moveIndex);
 						
 						return getMoveResponse(move, pcEnemies, pcAllies);
 						
@@ -1028,21 +1025,21 @@ public class Combat {
 					
 				} else if(responseTab==1) {
 					if(Main.game.getPlayer().getAvailableBasicMoves().size()>moveIndex) {
-						AbstractCombatMove move = Main.game.getPlayer().getAvailableBasicMoves().get(moveIndex);
+						var move = Main.game.getPlayer().getAvailableBasicMoves().get(moveIndex);
 						
 						return getMoveResponse(move, pcEnemies, pcAllies);
 					}
 					
 				} else if(responseTab==2) {
 					if(Main.game.getPlayer().getAvailableSpecialMoves().size()>moveIndex) {
-						AbstractCombatMove move = Main.game.getPlayer().getAvailableSpecialMoves().get(moveIndex);
+						var move = Main.game.getPlayer().getAvailableSpecialMoves().get(moveIndex);
 						
 						return getMoveResponse(move, pcEnemies, pcAllies);
 					}
 					
 				} else if(responseTab==3) {
 					if(Main.game.getPlayer().getAvailableSpellMoves().size()>moveIndex) {
-						AbstractCombatMove move = Main.game.getPlayer().getAvailableSpellMoves().get(moveIndex);
+						var move = Main.game.getPlayer().getAvailableSpellMoves().get(moveIndex);
 						
 						return getMoveResponse(move, pcEnemies, pcAllies);
 					}
@@ -1084,7 +1081,7 @@ public class Combat {
 									
 									// Figures out the new moves
 									int i = 0;
-									for(Value<GameCharacter, AbstractCombatMove> move : targetedAlly.getSelectedMoves()) {
+									for(var move : targetedAlly.getSelectedMoves()) {
 										move.getValue().performOnDeselection(i,
 												targetedAlly,
 												move.getKey(),
@@ -1126,7 +1123,7 @@ public class Combat {
 								
 								// Figures out the new moves
 								int i = 0;
-								for(Value<GameCharacter, AbstractCombatMove> move : targetedAlly.getSelectedMoves()) {
+								for(Value<GameCharacter, CombatMove> move : targetedAlly.getSelectedMoves()) {
 									move.getValue().performOnDeselection(i,
 											targetedAlly,
 											move.getKey(),
@@ -1186,7 +1183,7 @@ public class Combat {
 								
 								// Figures out the new moves
 								int i = 0;
-								for(Value<GameCharacter, AbstractCombatMove> move : targetedAlly.getSelectedMoves()) {
+								for(Value<GameCharacter, CombatMove> move : targetedAlly.getSelectedMoves()) {
 									move.getValue().performOnDeselection(i,
 											targetedAlly,
 											move.getKey(),
@@ -1268,7 +1265,7 @@ public class Combat {
 					public void effects() {
 						if(Main.game.isInCombat()) {
 							int i = 0;
-							for(Value<GameCharacter, AbstractCombatMove> move : Main.game.getPlayer().getSelectedMoves()) {
+							for(var move : Main.game.getPlayer().getSelectedMoves()) {
 								move.getValue().performOnDeselection(i,
 										Main.game.getPlayer(),
 										move.getKey(),
@@ -1295,7 +1292,7 @@ public class Combat {
 		}
 	};
 	
-	private Response getMoveResponse(AbstractCombatMove move, List<GameCharacter> pcEnemies, List<GameCharacter> pcAllies) {
+	private Response getMoveResponse(CombatMove move, List<GameCharacter> pcEnemies, List<GameCharacter> pcAllies) {
 		GameCharacter moveTarget = move.isCanTargetAllies()||move.isCanTargetSelf()?getTargetedAlliedCombatant():getTargetedCombatant();
 
 		int selectedMoveIndex = Main.game.getPlayer().getSelectedMoves().size();
@@ -1311,7 +1308,7 @@ public class Combat {
 		boolean isCrit = move.canCrit(selectedMoveIndex, Main.game.getPlayer(), moveTarget, pcEnemies, pcAllies);
 		
 		if(move.getStatusEffects(Main.game.getPlayer(), moveTarget, isCrit)!=null && !move.getStatusEffects(Main.game.getPlayer(), moveTarget, isCrit).isEmpty()) {
-			for(Entry<AbstractStatusEffect, Integer> entry : move.getStatusEffects(Main.game.getPlayer(), moveTarget, isCrit).entrySet()) {
+			for(var entry : move.getStatusEffects(Main.game.getPlayer(), moveTarget, isCrit).entrySet()) {
 				moveStatblock.append("Applies <b style='color:"+entry.getKey().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(entry.getKey().getName(moveTarget))+"</b>"
 						+ " for <b>"+entry.getValue()+(entry.getValue()==1?" turn":" turns")+"</b><br/>");
 			}
@@ -1336,7 +1333,7 @@ public class Combat {
 				// Reset prediction content as this selected move may have altered the prediction of previous moves:
 				predictionContent.put(Main.game.getPlayer(), new ArrayList<>());
 				int i=0;
-				for(Value<GameCharacter, AbstractCombatMove> selectedMove : Main.game.getPlayer().getSelectedMoves()) {
+				for(Value<GameCharacter, CombatMove> selectedMove : Main.game.getPlayer().getSelectedMoves()) {
 					predictionContent.get(Main.game.getPlayer()).add(selectedMove.getValue().getPrediction(i, Main.game.getPlayer(), selectedMove.getKey(), pcEnemies, pcAllies));
 					i++;
 				}
@@ -1346,7 +1343,7 @@ public class Combat {
 				return move.getColourByDamageType(selectedMoveIndex, Main.game.getPlayer());
 			}
 			@Override
-			public AbstractCombatMove getAssociatedCombatMove() {
+			public CombatMove getAssociatedCombatMove() {
 				return move;
 			}
 		};
@@ -1443,7 +1440,7 @@ public class Combat {
 		for(GameCharacter combatant : getAllCombatants(true)) {
 			if(getAllies(escapee).contains(combatant) || combatant.equals(escapee)) {
 				int i = 0;
-				for(Value<GameCharacter, AbstractCombatMove> move : combatant.getSelectedMoves()) {
+				for(var move : combatant.getSelectedMoves()) {
 					move.getValue().performOnDeselection(i,
 							combatant,
 							move.getKey(),
@@ -1576,7 +1573,7 @@ public class Combat {
 			// After all defensive and supportive moves have been made, apply the queued up status effects before the attacks start hitting, as they should only be defensive or supportive-based.
 			if(i==2) {
 				for(GameCharacter character : combatants) {
-					for(Entry<AbstractStatusEffect, Integer> entry : statusEffectsToApply.get(character).entrySet()) {
+					for(var entry : statusEffectsToApply.get(character).entrySet()) {
 						character.addStatusEffect(entry.getKey(), entry.getValue()+1);// Add 1 to the status effect duration, as it gets immediately decremented by 1 within the getCharactersTurnDiv() method (as it calls the applyEffects() method).
 					}
 					statusEffectsToApply.put(character, new HashMap<>());
@@ -1638,7 +1635,7 @@ public class Combat {
 		
 		// End turn effects:
 		for(GameCharacter character : combatants) {
-			for(Entry<AbstractStatusEffect, Integer> entry : statusEffectsToApply.get(character).entrySet()) {
+			for(var entry : statusEffectsToApply.get(character).entrySet()) {
 				character.addStatusEffect(entry.getKey(), entry.getValue());
 			}
 			statusEffectsToApply.put(character, new HashMap<>());
@@ -1720,7 +1717,7 @@ public class Combat {
 		turn++;
 	}
 
-	private String getShieldsDisplayValue(AbstractAttribute att, int shields) {
+	private String getShieldsDisplayValue(Attribute att, int shields) {
 		String valueForDisplay = String.valueOf(shields);
 		if(att.isInfiniteAtUpperLimit() && shields>=att.getUpperLimit()) {
 			valueForDisplay = UtilText.getInfinitySymbol(false);
@@ -1827,9 +1824,9 @@ public class Combat {
 	
 	private String applyEffects(GameCharacter character) {
 		endTurnStatusEffectText = new StringBuilder();
-		List<AbstractStatusEffect> effectsToRemove = new ArrayList<>();
+		var effectsToRemove = new ArrayList<StatusEffect>();
 		for (AppliedStatusEffect appliedSe : character.getAppliedStatusEffects()) {
-			AbstractStatusEffect se = appliedSe.getEffect();
+			var se = appliedSe.getEffect();
 			if (se.isCombatEffect()) {
 				appliedSe.setSecondsPassed(turn);
 				StringBuilder s = new StringBuilder();
@@ -1865,7 +1862,7 @@ public class Combat {
 				}
 			}
 		}
-		for (AbstractStatusEffect se : effectsToRemove) {
+		for (var se : effectsToRemove) {
 			endTurnStatusEffectText.append(character.removeStatusEffectCombat(se));
 		}
 		return endTurnStatusEffectText.toString();
@@ -1966,11 +1963,11 @@ public class Combat {
 		}
 	}
 	
-	public AbstractWeaponType getThrownWeaponsDepleted(GameCharacter user, InventorySlot slot) {
+	public WeaponType getThrownWeaponsDepleted(GameCharacter user, InventorySlot slot) {
 		return thrownWeaponsDepleted.get(user).get(slot);
 	}
 
-	public void addThrownWeaponsDepleted(GameCharacter user, InventorySlot slot, AbstractWeaponType weapon) {
+	public void addThrownWeaponsDepleted(GameCharacter user, InventorySlot slot, WeaponType weapon) {
 		thrownWeaponsDepleted.get(user).put(slot, weapon);
 	}
 
@@ -2172,14 +2169,14 @@ public class Combat {
 		return preferredTargets.get(character);
 	}
 	
-	public void addStatusEffectToApply(GameCharacter target, AbstractStatusEffect effect, int duration) {
+	public void addStatusEffectToApply(GameCharacter target, StatusEffect effect, int duration) {
 		statusEffectsToApply.get(target).put(effect, duration);
 //		statusEffectsToApply.get(target).putIfAbsent(effect, 0);
 //		
 //		statusEffectsToApply.get(target).put(effect, statusEffectsToApply.get(target).get(effect)+duration);
 	}
 
-	public Map<GameCharacter, Map<AbstractStatusEffect, Integer>> getStatusEffectsToApply() {
+	public Map<GameCharacter, Map<StatusEffect, Integer>> getStatusEffectsToApply() {
 		return statusEffectsToApply;
 	}
 

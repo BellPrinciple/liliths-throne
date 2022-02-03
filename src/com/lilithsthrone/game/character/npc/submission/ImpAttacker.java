@@ -32,7 +32,6 @@ import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
@@ -50,7 +49,6 @@ import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.item.TransformativePotion;
 import com.lilithsthrone.game.inventory.outfit.OutfitType;
@@ -75,11 +73,11 @@ public class ImpAttacker extends NPC {
 		this(Subspecies.IMP, Gender.F_V_B_FEMALE, isImported);
 	}
 	
-	public ImpAttacker(AbstractSubspecies subspecies, Gender gender) {
+	public ImpAttacker(Subspecies subspecies, Gender gender) {
 		this(subspecies, gender, false);
 	}
 	
-	public ImpAttacker(AbstractSubspecies subspecies, Gender gender, boolean isImported) {
+	public ImpAttacker(Subspecies subspecies, Gender gender, boolean isImported) {
 		super(isImported, null, null, "",
 				Util.random.nextInt(28)+18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
 				3, gender, subspecies, RaceStage.GREATER,
@@ -347,7 +345,7 @@ public class ImpAttacker extends NPC {
 	
 	@Override
 	public TransformativePotion generateTransformativePotion(GameCharacter target) {
-		AbstractItemType itemType = target.getSubspecies().getTransformativeItem(target);
+		var itemType = target.getSubspecies().getTransformativeItem(target);
         if(itemType==null || itemType.equals(ItemType.getItemTypeFromId("innoxia_race_slime_slime_quencher"))) {
             itemType = ItemType.getItemTypeFromId("innoxia_race_human_bread_roll");
         }
@@ -538,7 +536,7 @@ public class ImpAttacker extends NPC {
 		return new TransformativePotion(itemType, effects);
 	}
 	
-	private static List<PossibleItemEffect> getMasculineEffects(GameCharacter target, AbstractItemType itemType) {
+	private static List<PossibleItemEffect> getMasculineEffects(GameCharacter target, ItemType itemType) {
 		List<PossibleItemEffect> effects = new ArrayList<>();
 		
 		for(int i=target.getFemininityValue(); i>Femininity.MASCULINE.getMinimumFemininity(); i-=15) { // Turn masculine:
@@ -592,7 +590,7 @@ public class ImpAttacker extends NPC {
 		return effects;
 	}
 	
-	private static List<PossibleItemEffect> getFeminineEffects(GameCharacter target, AbstractItemType itemType) {
+	private static List<PossibleItemEffect> getFeminineEffects(GameCharacter target, ItemType itemType) {
 		List<PossibleItemEffect> effects = new ArrayList<>();
 		
 		for(int i=target.getFemininityValue(); i<Femininity.FEMININE.getMinimumFemininity(); i+=15) { // Turn feminine:

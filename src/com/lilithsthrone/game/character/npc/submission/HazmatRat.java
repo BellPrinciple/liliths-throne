@@ -49,7 +49,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class HazmatRat extends NPC {
 
-	private static List<AbstractItemType> itemsForSale = Util.newArrayListOfValues(
+	private static List<ItemType> itemsForSale = Util.newArrayListOfValues(
 			ItemType.CIGARETTE_PACK,
 			ItemType.FETISH_UNREFINED,
 			ItemType.MOO_MILKER_EMPTY,
@@ -62,7 +62,7 @@ public class HazmatRat extends NPC {
 	private static Map<Vector2i, Map<AbstractItem, Integer>> itemsAtVendingMachine = new HashMap<>();
 	
 	static {
-		for(AbstractItemType itemType : ItemType.getAllItems()) {
+		for(ItemType itemType : ItemType.getAllItems()) {
 			if(!itemType.getItemTags().contains(ItemTag.NOT_FOR_SALE)
 					&& (itemType.getItemTags().contains(ItemTag.ATTRIBUTE_TF_ITEM) || itemType.getItemTags().contains(ItemTag.RACIAL_TF_ITEM))
 					&& (itemType.getItemTags().contains(ItemTag.SUBMISSION_TUNNEL_SPAWN) || itemType.getItemTags().contains(ItemTag.BAT_CAVERNS_SPAWN))) {
@@ -209,12 +209,12 @@ public class HazmatRat extends NPC {
 		// Stocks random items each day:
 		for(Entry<Vector2i, Map<AbstractItem, Integer>> entry : itemsAtVendingMachine.entrySet()) {
 			entry.getValue().clear();
-			List<AbstractItemType> itemTypesToSell = new ArrayList<>(itemsForSale);
+			List<ItemType> itemTypesToSell = new ArrayList<>(itemsForSale);
 			Collections.shuffle(itemTypesToSell);
 			int listSize = itemTypesToSell.size();
 			int maxItemCount = 9;
 			itemTypesToSell.subList(0, itemTypesToSell.size()-(listSize<=maxItemCount?1:maxItemCount)).clear();
-			for(AbstractItemType type : itemTypesToSell) {
+			for(ItemType type : itemTypesToSell) {
 				entry.getValue().put(Main.game.getItemGen().generateItem(type), !type.isConsumedOnUse()?1:(4+Util.random.nextInt(7)));
 			}
 		}

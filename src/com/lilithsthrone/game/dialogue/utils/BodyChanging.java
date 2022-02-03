@@ -36,8 +36,6 @@ import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -242,10 +240,10 @@ public class BodyChanging {
 		}
 	}
 
-	private static final List<AbstractRace> allRaces = new ArrayList<>(Race.getAllRaces());
+	private static final List<Race> allRaces = new ArrayList<>(Race.getAllRaces());
 
-	private static List<AbstractRace> getFaceSkinDemonRaces() {
-		List<AbstractRace> faceSkinOptions = Util.newArrayListOfValues();
+	private static List<Race> getFaceSkinDemonRaces() {
+		List<Race> faceSkinOptions = Util.newArrayListOfValues();
 		GameCharacter target = BodyChanging.getTarget();
 		
 		if(target.isElemental()) {
@@ -267,8 +265,8 @@ public class BodyChanging {
 		return faceSkinOptions;
 	}
 	
-	private static List<AbstractRace> getArmLegDemonRaces() {
-		List<AbstractRace> armLegOptions = Util.newArrayListOfValues();
+	private static List<Race> getArmLegDemonRaces() {
+		List<Race> armLegOptions = Util.newArrayListOfValues();
 		GameCharacter target = BodyChanging.getTarget();
 		
 		if(target.isElemental()) {
@@ -292,8 +290,8 @@ public class BodyChanging {
 	 * @param isHalfSpeciesReplacement True if this is a part that should always be of the core race type (if not human). This is so that things like hellhounds will still have dog tails and ears.
 	 * @return List of races available to the target.
 	 */
-	private static List<AbstractRace> getMinorPartsDemonRaces(boolean isHalfSpeciesReplacement) {
-		List<AbstractRace> minorPartsOptions = Util.newArrayListOfValues();
+	private static List<Race> getMinorPartsDemonRaces(boolean isHalfSpeciesReplacement) {
+		List<Race> minorPartsOptions = Util.newArrayListOfValues();
 		GameCharacter target = BodyChanging.getTarget();
 		
 		if(target.isElemental()) {
@@ -433,12 +431,12 @@ public class BodyChanging {
 //		return coveringsNamesMap;
 //	}
 	
-	private static List<AbstractRace> getSlaveCustomisationRaceOptions() {
-		List<AbstractRace> list = new ArrayList<>();
+	private static List<Race> getSlaveCustomisationRaceOptions() {
+		List<Race> list = new ArrayList<>();
 		
 		list.add(Race.NONE);
 
-		for(AbstractRace race : Race.getAllRaces()) {
+		for(Race race : Race.getAllRaces()) {
 			if(!race.isAbleToSelfTransform()
 					&& (Subspecies.getWorldSpecies(WorldType.DOMINION, PlaceType.SLAVER_ALLEY_SCARLETTS_SHOP, false).keySet().stream().anyMatch(s->s.getRace()==race)
 						|| Subspecies.getWorldSpecies(WorldType.SUBMISSION, PlaceType.SLAVER_ALLEY_SCARLETTS_SHOP, false).keySet().stream().anyMatch(s->s.getRace()==race))) {
@@ -449,7 +447,7 @@ public class BodyChanging {
 		return list;
 	}
 	
-	private static List<AbstractRace> getRacesForMinorPartSelfTransform() {
+	private static List<Race> getRacesForMinorPartSelfTransform() {
 		if(ScarlettsShop.isSlaveCustomisationMenu()) {
 			return getSlaveCustomisationRaceOptions();
 		}
@@ -776,9 +774,9 @@ public class BodyChanging {
 					+"</div>");
 			}
 			
-			for(Entry<AbstractBodyCoveringType, Value<AbstractRace, List<String>>> entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
-				AbstractBodyCoveringType bct = entry.getKey();
-				AbstractRace race = entry.getValue().getKey();
+			for(Entry<BodyCoveringType, Value<Race, List<String>>> entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
+				BodyCoveringType bct = entry.getKey();
+				Race race = entry.getValue().getKey();
 
 				Value<String, String> titleDescription = SuccubisSecrets.getCoveringTitleDescription(target, bct, entry.getValue().getValue());
 
@@ -2063,7 +2061,7 @@ public class BodyChanging {
 				String nameReadable = Util.capitaliseSentence(name.replaceAll("_", " "));
 				Body loadedBody = loadBody(name);
 				Femininity fem = Femininity.valueOf(loadedBody.getFemininity());
-				AbstractSubspecies subspecies = loadedBody.getLoadedSubspecies();
+				Subspecies subspecies = loadedBody.getLoadedSubspecies();
 				String subspeciesName = loadedBody.isFeminine()?subspecies.getSingularFemaleName(loadedBody):subspecies.getSingularMaleName(loadedBody);
 				String displayName;
 				if(isPresetTransformationAvailable(loadedBody)) {
@@ -2556,15 +2554,15 @@ public class BodyChanging {
 	 * <br/>If the BodyChanging.getTarget() does not have covering colours saved which are present in the loaded body, then these loaded body's covering colours are retained.
 	 */
 	public static void applyLoadedBody(Body body) {
-		AbstractSubspecies subspeciesOverride = BodyChanging.getTarget().getSubspeciesOverride();
-		Map<AbstractBodyCoveringType, Covering> oldCoverings = BodyChanging.getTarget().getBody().getCoverings();
+		Subspecies subspeciesOverride = BodyChanging.getTarget().getSubspeciesOverride();
+		Map<BodyCoveringType, Covering> oldCoverings = BodyChanging.getTarget().getBody().getCoverings();
 		
 		BodyChanging.getTarget().setBody(body, false);
 		
 		BodyChanging.getTarget().setSubspeciesOverride(subspeciesOverride);
-		List<AbstractBodyCoveringType> currentlyActiveCoverings = new ArrayList<>();
+		List<BodyCoveringType> currentlyActiveCoverings = new ArrayList<>();
 		for(BodyPartInterface part : body.getAllBodyPartsWithAllOrifices()) {
-			AbstractBodyCoveringType bct = BodyChanging.getTarget().getCovering(part);
+			BodyCoveringType bct = BodyChanging.getTarget().getCovering(part);
 			if(bct==null) {
 //				System.out.println(part.getName(BodyChanging.getTarget()));
 				continue;
@@ -2578,7 +2576,7 @@ public class BodyChanging {
 			currentlyActiveCoverings.add(bct);
 		}
 		
-		for(Entry<AbstractBodyCoveringType, Covering> entry: oldCoverings.entrySet()) {
+		for(Entry<BodyCoveringType, Covering> entry: oldCoverings.entrySet()) {
 			if(!currentlyActiveCoverings.contains(entry.getKey())) {
 				BodyChanging.getTarget().getBody().getCoverings().put(entry.getKey(), entry.getValue());
 			}

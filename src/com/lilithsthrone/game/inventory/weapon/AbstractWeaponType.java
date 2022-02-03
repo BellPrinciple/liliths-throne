@@ -22,11 +22,9 @@ import com.lilithsthrone.controller.xmlParsing.XMLMissingTagException;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.combat.DamageType;
 import com.lilithsthrone.game.combat.DamageVariance;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
 import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
@@ -67,7 +65,7 @@ public abstract class AbstractWeaponType implements WeaponType {
 	private String attackTooltipDescription;
 	private String description;
 
-	private AbstractSetBonus clothingSet;
+	private SetBonus clothingSet;
 	private Rarity rarity;
 	private float physicalResistance;
 	
@@ -97,7 +95,7 @@ public abstract class AbstractWeaponType implements WeaponType {
 	private Map<DamageType, List<Spell>> spells;
 
 	private boolean combatMovesRegenOnDamageTypeChange;
-	private Map<DamageType, List<AbstractCombatMove>> combatMoves;
+	private Map<DamageType,List<CombatMove>> combatMoves;
 
 	protected List<ItemEffect> effects;
 	protected List<String> extraEffects;
@@ -245,7 +243,7 @@ public abstract class AbstractWeaponType implements WeaponType {
 					this.combatMovesRegenOnDamageTypeChange = Boolean.valueOf(coreAttributes.getMandatoryFirstOf("combatMoves").getAttribute("changeOnReforge"));
 					
 					for(Element e : coreAttributes.getMandatoryFirstOf("combatMoves").getAllOf("move")) {
-						AbstractCombatMove cm = CombatMove.getCombatMoveFromId(e.getTextContent());
+						var cm = CombatMove.getCombatMoveFromId(e.getTextContent());
 						
 						DamageType dt = null;
 						if(!e.getAttribute("damageType").isEmpty()) {
@@ -754,7 +752,7 @@ public abstract class AbstractWeaponType implements WeaponType {
 	}
 
 	@Override
-	public AbstractSetBonus getClothingSet() {
+	public SetBonus getClothingSet() {
 		return clothingSet;
 	}
 
@@ -830,7 +828,7 @@ public abstract class AbstractWeaponType implements WeaponType {
 	}
 
 	@Override
-	public Map<DamageType, List<AbstractCombatMove>> getCombatMoves() {
+	public Map<DamageType, List<CombatMove>> getCombatMoves() {
 		return combatMoves;
 	}
 

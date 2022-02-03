@@ -3,16 +3,16 @@ package com.lilithsthrone.game.inventory.enchanting;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lilithsthrone.game.character.markings.AbstractTattooType;
 import com.lilithsthrone.game.character.markings.Tattoo;
+import com.lilithsthrone.game.character.markings.TattooType;
 import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
+import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
+import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
+import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 
 /**
@@ -23,13 +23,13 @@ import com.lilithsthrone.main.Main;
 public class LoadedEnchantment {
 	
 	private String name;
-	private AbstractItemType itemType;
-	private AbstractClothingType clothingType;
-	private AbstractWeaponType weaponType;
-	private AbstractTattooType tattooType;
+	private ItemType itemType;
+	private ClothingType clothingType;
+	private WeaponType weaponType;
+	private TattooType tattooType;
 	private List<ItemEffect> effects;
 	
-	public LoadedEnchantment(String name, AbstractItemType itemType, List<ItemEffect> effects) {
+	public LoadedEnchantment(String name, ItemType itemType, List<ItemEffect> effects) {
 		this.name = name;
 		this.itemType = itemType;
 		this.clothingType = null;
@@ -38,7 +38,7 @@ public class LoadedEnchantment {
 		this.effects = effects;
 	}
 	
-	public LoadedEnchantment(String name, AbstractClothingType clothingType, List<ItemEffect> effects) {
+	public LoadedEnchantment(String name, ClothingType clothingType, List<ItemEffect> effects) {
 		this.name = name;
 		this.itemType = null;
 		this.clothingType = clothingType;
@@ -47,7 +47,7 @@ public class LoadedEnchantment {
 		this.effects = effects;
 	}
 	
-	public LoadedEnchantment(String name, AbstractWeaponType weaponType, List<ItemEffect> effects) {
+	public LoadedEnchantment(String name, WeaponType weaponType, List<ItemEffect> effects) {
 		this.name = name;
 		this.itemType = null;
 		this.clothingType = null;
@@ -56,7 +56,7 @@ public class LoadedEnchantment {
 		this.effects = effects;
 	}
 	
-	public LoadedEnchantment(String name, AbstractTattooType tattooType, List<ItemEffect> effects) {
+	public LoadedEnchantment(String name, TattooType tattooType, List<ItemEffect> effects) {
 		this.name = name;
 		this.itemType = null;
 		this.clothingType = null;
@@ -146,19 +146,19 @@ public class LoadedEnchantment {
 		return "";
 	}
 	
-	public AbstractItemType getItemType() {
+	public ItemType getItemType() {
 		return itemType;
 	}
 
-	public AbstractClothingType getClothingType() {
+	public ClothingType getClothingType() {
 		return clothingType;
 	}
 
-	public AbstractWeaponType getWeaponType() {
+	public WeaponType getWeaponType() {
 		return weaponType;
 	}
 
-	public AbstractTattooType getTattooType() {
+	public TattooType getTattooType() {
 		return tattooType;
 	}
 

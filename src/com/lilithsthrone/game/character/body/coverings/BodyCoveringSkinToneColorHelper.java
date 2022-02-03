@@ -18,7 +18,7 @@ import com.lilithsthrone.utils.colours.Colour;
  * @author Pimgd, Innoxia
  */
 public class BodyCoveringSkinToneColorHelper {
-	private static final List<AbstractBodyCoveringType> NOT_FOR_THESE_BCTS = 
+	private static final List<BodyCoveringType> NOT_FOR_THESE_BCTS =
 			Util.newArrayListOfValues(BodyCoveringType.MAKEUP_BLUSHER,
 					BodyCoveringType.MAKEUP_EYE_LINER,
 					BodyCoveringType.MAKEUP_EYE_SHADOW,
@@ -47,21 +47,21 @@ public class BodyCoveringSkinToneColorHelper {
 		
 	}
 	
-	private static Map<StartingSkinTone, Map<AbstractBodyCoveringType, FilteredColours>> filteredColours = new EnumMap<>(StartingSkinTone.class);
+	private static Map<StartingSkinTone, Map<BodyCoveringType, FilteredColours>> filteredColours = new EnumMap<>(StartingSkinTone.class);
 	
 	private BodyCoveringSkinToneColorHelper() {
 		//singleton via statics
 	}
 	
-	public static List<Colour> getAcceptableColoursForPrimary(StartingSkinTone tone, AbstractBodyCoveringType bct) {
+	public static List<Colour> getAcceptableColoursForPrimary(StartingSkinTone tone, BodyCoveringType bct) {
 		return getOrCreateFilteredColoursForCombination(tone, bct).getPrimary();
 	}
 	
-	public static List<Colour> getAcceptableColoursForSecondary(StartingSkinTone tone, AbstractBodyCoveringType bct) {
+	public static List<Colour> getAcceptableColoursForSecondary(StartingSkinTone tone, BodyCoveringType bct) {
 		return getOrCreateFilteredColoursForCombination(tone, bct).getSecondary();
 	}
 	
-	private static FilteredColours getOrCreateFilteredColoursForCombination(StartingSkinTone tone, AbstractBodyCoveringType bct) {
+	private static FilteredColours getOrCreateFilteredColoursForCombination(StartingSkinTone tone, BodyCoveringType bct) {
 		if (NOT_FOR_THESE_BCTS.contains(bct)) {
 			return new FilteredColours(new ArrayList<>(), new ArrayList<>());
 		}

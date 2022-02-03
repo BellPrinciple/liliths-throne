@@ -4440,15 +4440,15 @@ public interface SexPosition {
 	
 	
 
-	public static AbstractSexPosition getSexPositionFromId(String id) {
+	static SexPosition getSexPositionFromId(String id) {
 		return table.of(id);
 	}
-	
-	public static String getIdFromSexPosition(AbstractSexPosition perk) {
+
+	static String getIdFromSexPosition(SexPosition perk) {
 		return perk.getId();
 	}
 
-	Table<AbstractSexPosition> table = new Table<>(s->s) {{
+	Table<SexPosition> table = new Table<>(s->s) {{
 		// Hard-coded status effects:
 		// SexPosition:
 		addFields(SexPosition.class,AbstractSexPosition.class,(k,v)->v.id=k);
@@ -4456,7 +4456,7 @@ public interface SexPosition {
 		addFields(SexPositionUnique.class,AbstractSexPosition.class,(k,v)->v.id=k);
 	}};
 	
-	public static List<AbstractSexPosition> getAllSexPositions() {
+	static List<SexPosition> getAllSexPositions() {
 		return table.list();
 	}
 }

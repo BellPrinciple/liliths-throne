@@ -23,18 +23,17 @@ import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.body.valueEnums.GenitalArrangement;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.BlockedParts;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.clothing.ClothingAccess;
+import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.game.inventory.item.AbstractFilledBreastPump;
 import com.lilithsthrone.game.inventory.item.AbstractFilledCondom;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
+import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.RenderingEngine;
@@ -60,9 +59,9 @@ import com.lilithsthrone.world.World;
  */
 public class CharacterInventory implements XMLSaving {
 	
-	private final AbstractInventory<AbstractWeapon, AbstractWeaponType> weaponSubInventory;
-	private final AbstractInventory<AbstractClothing, AbstractClothingType> clothingSubInventory;
-	private final AbstractInventory<AbstractItem, AbstractItemType> itemSubInventory;
+	private final AbstractInventory<AbstractWeapon, WeaponType> weaponSubInventory;
+	private final AbstractInventory<AbstractClothing, ClothingType> clothingSubInventory;
+	private final AbstractInventory<AbstractItem, ItemType> itemSubInventory;
 
 	/**Maps character IDs to the slots which have free unlocks.*/
 	private final Map<String, List<InventorySlot>> unlockKeyMap;
@@ -84,7 +83,7 @@ public class CharacterInventory implements XMLSaving {
 	private List<AbstractClothing> clothingCurrentlyEquipped;
 
 	// ClothingSets being worn:
-	private final Map<AbstractSetBonus, Integer> clothingSetCount;
+	private final Map<SetBonus, Integer> clothingSetCount;
 
 	private int maxInventorySpace;
 
@@ -111,7 +110,7 @@ public class CharacterInventory implements XMLSaving {
 		
 		clothingCurrentlyEquipped = new ArrayList<>();
 		clothingSetCount = new HashMap<>();
-		for(AbstractSetBonus clothingSet : SetBonus.getAllSetBonuses()) {
+		for(var clothingSet : SetBonus.getAllSetBonuses()) {
 			clothingSetCount.put(clothingSet, 0);
 		}
 		
@@ -700,15 +699,15 @@ public class CharacterInventory implements XMLSaving {
 	/**
 	 * @return true if one of the items in this inventory has the same type as the Item provided.
 	 */
-	public boolean hasItemType(AbstractItemType item) {
+	public boolean hasItemType(ItemType item) {
 		return itemSubInventory.hasItemType(item);
 	}
 	
-	public boolean removeItemByType(AbstractItemType itemType) {
+	public boolean removeItemByType(ItemType itemType) {
 		return removeItemByType(itemType, 1);
 	}
 
-	public boolean removeItemByType(AbstractItemType itemType, int count) {
+	public boolean removeItemByType(ItemType itemType, int count) {
 		return itemSubInventory.removeItemByType(itemType, count);
 	}
 	
@@ -815,11 +814,11 @@ public class CharacterInventory implements XMLSaving {
 	/**
 	 * @return true if one of the weapons in this inventory has the same type as the Weapon provided.
 	 */
-	public boolean hasWeaponType(AbstractWeaponType weapon) {
+	public boolean hasWeaponType(WeaponType weapon) {
 		return weaponSubInventory.hasItemType(weapon);
 	}
 	
-	public boolean removeWeaponByType(AbstractWeaponType weaponType) {
+	public boolean removeWeaponByType(WeaponType weaponType) {
 		return weaponSubInventory.removeItemByType(weaponType, 1);
 	}
 	
@@ -975,15 +974,15 @@ public class CharacterInventory implements XMLSaving {
 	/**
 	 * @return true if one of the clothings in this inventory has the same type as the Clothing provided.
 	 */
-	public boolean hasClothingType(AbstractClothingType type, boolean includeEquipped) {
+	public boolean hasClothingType(ClothingType type, boolean includeEquipped) {
 		return clothingSubInventory.hasItemType(type) || (includeEquipped && hasEquippedClothingType(type));
 	}
 
-	public boolean hasEquippedClothingType(AbstractClothingType type) {
+	public boolean hasEquippedClothingType(ClothingType type) {
 		return getClothingCurrentlyEquipped().stream().anyMatch(c -> c.getClothingType().equals(type));
 	}
 	
-	public boolean removeClothingByType(AbstractClothingType clothingType) {
+	public boolean removeClothingByType(ClothingType clothingType) {
 		return clothingSubInventory.removeItemByType(clothingType, 1);
 	}
 	
@@ -1160,7 +1159,7 @@ public class CharacterInventory implements XMLSaving {
 	 * @return The number of clothes being worn that belong to the specified
 	 *         ClothingSet.
 	 */
-	public int getClothingSetCount(AbstractSetBonus clothingSet) {
+	public int getClothingSetCount(SetBonus clothingSet) {
 		return clothingSetCount.get(clothingSet);
 	}
 
@@ -1521,7 +1520,7 @@ public class CharacterInventory implements XMLSaving {
 				}
 				
 				// Check for clothing sets:
-				AbstractSetBonus clothingSetOfNewClothing = newClothing.getClothingType().getClothingSet();
+				var clothingSetOfNewClothing = newClothing.getClothingType().getClothingSet();
 				if (clothingSetOfNewClothing != null) {
 					clothingSetCount.merge(clothingSetOfNewClothing, 1, Integer::sum);
 				}

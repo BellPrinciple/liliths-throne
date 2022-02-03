@@ -3,7 +3,6 @@ package com.lilithsthrone.game.character.pregnancy;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.npc.misc.OffspringSeed;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.main.Main;
@@ -42,13 +41,13 @@ public class Litter implements XMLSaving {
 	private int daughtersFather;
 	
 	private FertilisationType fertilisationType;
-	
+
 	private List<String> offspring;
 	
 	private String birthedDescription;
 	
-	private AbstractSubspecies motherRace;
-	private AbstractSubspecies fatherRace;
+	private Subspecies motherRace;
+	private Subspecies fatherRace;
 
 	public Litter(LocalDateTime conceptionDate, LocalDateTime birthDate, GameCharacter mother, GameCharacter father, FertilisationType fertilisationType, List<OffspringSeed> offspring) {
 		this.id = mother.getId()+mother.getLittersGenerated();
@@ -58,7 +57,7 @@ public class Litter implements XMLSaving {
 		this.incubationStartDate = null;
 		
 		this.fertilisationType = fertilisationType;
-		
+
 		motherId = mother.getId();
 		motherRace = mother.getSubspecies();
 		if(father!=null) {
@@ -104,7 +103,7 @@ public class Litter implements XMLSaving {
 			int sonsMother, int daughtersMother,
 			int sonsFather, int daughtersFather,
 			List<String> offspring,
-			AbstractSubspecies motherRace, AbstractSubspecies fatherRace,
+			Subspecies motherRace, Subspecies fatherRace,
 			String birthedDescription) {
 		this.id = id;
 
@@ -117,7 +116,7 @@ public class Litter implements XMLSaving {
 		incubatorId = "";
 
 		this.fertilisationType = fertilisationType;
-		
+
 		this.sonsMother = sonsMother;
 		this.daughtersMother = daughtersMother;
 		this.sonsFather = sonsFather;
@@ -199,8 +198,8 @@ public class Litter implements XMLSaving {
 			offspring.add(e.getAttribute("id"));
 		}
 		
-		AbstractSubspecies motherRace = Subspecies.HUMAN;
-		AbstractSubspecies fatherRace = Subspecies.HUMAN;
+		Subspecies motherRace = Subspecies.HUMAN;
+		Subspecies fatherRace = Subspecies.HUMAN;
 		try {
 			motherRace = Subspecies.getSubspeciesFromId(parentElement.getAttribute("motherRace"));
 			fatherRace = Subspecies.getSubspeciesFromId(parentElement.getAttribute("fatherRace"));
@@ -369,7 +368,7 @@ public class Litter implements XMLSaving {
 	public boolean isFatherId(String fatherId) {
 		return this.fatherId.equals(fatherId);
 	}
-	
+
 	public FertilisationType getFertilisationType() {
 		return fertilisationType;
 	}
@@ -377,7 +376,7 @@ public class Litter implements XMLSaving {
 	public void setFertilisationType(FertilisationType fertilisationType) {
 		this.fertilisationType = fertilisationType;
 	}
-	
+
 	/**
 	 * This is currently unused, as usually offspring may be both GameCharacter and OffspringSeed classes.
 	 * To access all offspring, use getOffspring which returns the Id of the offspring as a string, and then check which one it is.
@@ -435,15 +434,15 @@ public class Litter implements XMLSaving {
 		return sonsMother + daughtersMother + sonsFather + daughtersFather;
 	}
 
-	public AbstractSubspecies getMotherRace() {
+	public Subspecies getMotherRace() {
 		return motherRace;
 	}
 
-	public AbstractSubspecies getFatherRace() {
+	public Subspecies getFatherRace() {
 		return fatherRace;
 	}
 
-	public void setFatherRace(AbstractSubspecies fatherSubspecies) {
+	public void setFatherRace(Subspecies fatherSubspecies) {
 		fatherRace = fatherSubspecies;
 	}
 	
@@ -453,12 +452,12 @@ public class Litter implements XMLSaving {
 		Map<String, Integer> daughters = new HashMap<>();
 		Map<String, Integer> feralDaughters = new HashMap<>();
 		String feralString = "<b style='color:" + RaceStage.FERAL.getColour().toWebHexString() + ";'>" + RaceStage.FERAL.getName() + "</b>";
-		
+
 		for(String id : this.getOffspring()) {
 			try {
 				
 				OffspringSeed offspring = Main.game.getOffspringSeedById(id);
-				AbstractSubspecies subspecies = offspring.getSubspecies();
+				Subspecies subspecies = offspring.getSubspecies();
 				if(offspring.isFeminine()) {
 					String nameId = subspecies.getSingularFemaleName(offspring.getBody())+"|"+subspecies.getPluralFemaleName(offspring.getBody());
 					if(offspring.isFeral()) {

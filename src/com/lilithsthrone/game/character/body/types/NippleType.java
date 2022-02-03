@@ -7,10 +7,8 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractNippleType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -28,7 +26,7 @@ public interface NippleType extends BodyPartTypeInterface {
 	}
 
 	@Override
-	default AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	default BodyCoveringType getBodyCoveringType(Body body) {
 		return BodyCoveringType.NIPPLES;
 	}
 
@@ -220,7 +218,7 @@ public interface NippleType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<OrificeModifier> defaultRacialOrificeModifiers) {
+		public Special(BodyCoveringType coveringType, Race race, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<OrificeModifier> defaultRacialOrificeModifiers) {
 			super(coveringType, race, descriptorsMasculine, descriptorsFeminine, defaultRacialOrificeModifiers);
 		}
 
@@ -241,7 +239,7 @@ public interface NippleType extends BodyPartTypeInterface {
 //		return valueOf(value);
 //	}
 	
-	TypeTable<AbstractNippleType> table = new TypeTable<>(
+	TypeTable<NippleType> table = new TypeTable<>(
 		NippleType::sanitize,
 		NippleType.class,
 		AbstractNippleType.class,
@@ -253,7 +251,7 @@ public interface NippleType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractNippleType getNippleTypeFromId(String id) {
+	static NippleType getNippleTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -265,15 +263,15 @@ public interface NippleType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromNippleType(AbstractNippleType nippleType) {
+	static String getIdFromNippleType(NippleType nippleType) {
 		return nippleType.getId();
 	}
 
-	public static List<AbstractNippleType> getAllNippleTypes() {
+	static List<NippleType> getAllNippleTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractNippleType> getNippleTypes(AbstractRace r) {
+	static List<NippleType> getNippleTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

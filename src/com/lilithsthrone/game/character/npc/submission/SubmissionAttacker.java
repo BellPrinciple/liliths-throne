@@ -21,7 +21,6 @@ import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.RacialBody;
@@ -85,22 +84,22 @@ public class SubmissionAttacker extends NPC {
 				slimeChance *= 4; // Increase chance of encountering slime if the player is at the start of the slime quest
 			}
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
-				Map<AbstractSubspecies, SubspeciesSpawnRarity> worldSpeciesMap = Subspecies.getWorldSpecies(WorldType.SUBMISSION, PlaceType.SUBMISSION_TUNNELS, false);
+			var availableRaces = new HashMap<Subspecies,Integer>();
+			for(var s : Subspecies.getAllSubspecies()) {
+				var worldSpeciesMap = Subspecies.getWorldSpecies(WorldType.SUBMISSION, PlaceType.SUBMISSION_TUNNELS, false);
 				if(s==Subspecies.SLIME) {
-					AbstractSubspecies.addToSubspeciesMap(slimeChance, gender, s, availableRaces, SubspeciesPreference.FOUR_ABUNDANT);
+					Subspecies.addToSubspeciesMap(slimeChance, gender, s, availableRaces, SubspeciesPreference.FOUR_ABUNDANT);
 					
 				} else if(worldSpeciesMap.containsKey(s)) {
 					if(s==Subspecies.IMP || s==Subspecies.IMP_ALPHA) {
-						AbstractSubspecies.addToSubspeciesMap((int) (1000 * worldSpeciesMap.get(s).getChanceMultiplier()), gender, s, availableRaces, SubspeciesPreference.FOUR_ABUNDANT);
+						Subspecies.addToSubspeciesMap((int) (1000 * worldSpeciesMap.get(s).getChanceMultiplier()), gender, s, availableRaces, SubspeciesPreference.FOUR_ABUNDANT);
 					} else {
-						AbstractSubspecies.addToSubspeciesMap((int) (1000 * worldSpeciesMap.get(s).getChanceMultiplier()), gender, s, availableRaces);
+						Subspecies.addToSubspeciesMap((int) (1000 * worldSpeciesMap.get(s).getChanceMultiplier()), gender, s, availableRaces);
 					}
 				}
 			}
 
-			AbstractSubspecies randomSpecies = Util.getRandomObjectFromWeightedMap(availableRaces);
+			var randomSpecies = Util.getRandomObjectFromWeightedMap(availableRaces);
 			if(randomSpecies==Subspecies.SLIME || randomSpecies==Subspecies.IMP || randomSpecies==Subspecies.IMP_ALPHA) {
 				this.setBody(gender, randomSpecies, RaceStage.GREATER, true);
 				

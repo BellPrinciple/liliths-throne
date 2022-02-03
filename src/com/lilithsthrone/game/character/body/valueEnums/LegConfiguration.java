@@ -17,7 +17,6 @@ import com.lilithsthrone.game.character.body.Tail;
 import com.lilithsthrone.game.character.body.Tentacle;
 import com.lilithsthrone.game.character.body.Testicle;
 import com.lilithsthrone.game.character.body.Vagina;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
 import com.lilithsthrone.game.character.body.types.LegType;
 import com.lilithsthrone.game.character.body.types.WingType;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -1000,11 +999,11 @@ public enum LegConfiguration {
 		throw new IllegalArgumentException("Demon legs for this leg configuration is not yet implemented!");
 	}
 
-	public void setLegsToAvailableDemonLegs(GameCharacter character, AbstractLegType legType) {
+	public void setLegsToAvailableDemonLegs(GameCharacter character, LegType legType) {
 		this.setLegsToAvailableDemonLegs(character, legType, LegType.DEMON_COMMON);
 	}
 
-	public void setLegsToAvailableDemonLegs(GameCharacter character, AbstractLegType legType, AbstractLegType fallBackLegType) {
+	public void setLegsToAvailableDemonLegs(GameCharacter character, LegType legType, LegType fallBackLegType) {
 		character.setLegType(legType.isAvailableForSelfTransformMenu(character) ? legType : fallBackLegType);
 	}
 

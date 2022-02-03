@@ -10,10 +10,8 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.HornType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -28,8 +26,8 @@ public abstract class AbstractHornType implements HornType {
 	private boolean mod;
 	private boolean fromExternalFile;
 
-	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private BodyCoveringType coveringType;
+	private Race race;
 
 	private String transformationName;
 
@@ -59,8 +57,8 @@ public abstract class AbstractHornType implements HornType {
 	 * @param hornBodyDescription A sentence or two to describe this horn type, as seen in the character view screen. It should follow the same format as all of the other entries in the HornType class.
 	 */
 	public AbstractHornType(
-			AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			BodyCoveringType coveringType,
+			Race race,
 			int defaultHornsPerRow,
 			String transformationName,
 			String name,
@@ -100,9 +98,9 @@ public abstract class AbstractHornType implements HornType {
 
 				this.mod = mod;
 				this.fromExternalFile = true;
-				
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				if(coreElement.getOptionalFirstOf("genericType").isPresent()) {
 					this.generic = Boolean.valueOf(coreElement.getMandatoryFirstOf("genericType").getTextContent());
@@ -182,12 +180,12 @@ public abstract class AbstractHornType implements HornType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

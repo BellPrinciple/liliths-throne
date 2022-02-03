@@ -3,8 +3,6 @@ package com.lilithsthrone.game.character.npc.submission;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -12,7 +10,6 @@ import org.w3c.dom.Element;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -23,11 +20,9 @@ import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
-import com.lilithsthrone.game.character.race.SubspeciesPreference;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.companions.SlaveDialogue;
@@ -72,13 +67,13 @@ public class RatGangMember extends NPC {
 		if(!isImported) {
 			// RACE:
 			
-			Map<AbstractSubspecies, Integer> subspeciesMap = new HashMap<>();
-			for(Entry<AbstractSubspecies, SubspeciesPreference> entry : gender.getGenderName().isHasPenis()?Main.getProperties().getSubspeciesMasculinePreferencesMap().entrySet():Main.getProperties().getSubspeciesFemininePreferencesMap().entrySet()) {
+			var subspeciesMap = new HashMap<Subspecies,Integer>();
+			for(var entry : gender.getGenderName().isHasPenis()?Main.getProperties().getSubspeciesMasculinePreferencesMap().entrySet():Main.getProperties().getSubspeciesFemininePreferencesMap().entrySet()) {
 				if(entry.getKey().getRace()==Race.RAT_MORPH) {
 					subspeciesMap.put(entry.getKey(), entry.getValue().getValue());
 				}
 			}
-			AbstractSubspecies subspecies = Util.getRandomObjectFromWeightedMap(subspeciesMap);
+			var subspecies = Util.getRandomObjectFromWeightedMap(subspeciesMap);
 			if(subspecies==null) {
 				subspecies = Subspecies.RAT_MORPH;
 			}
@@ -91,7 +86,7 @@ public class RatGangMember extends NPC {
 			
 			Main.game.getCharacterUtils().addFetishes(this);
 			// Do not give a negative fetish desire towards these fetishes, as otherwise it ends up in the gang members being gentle in sex, which doesn't really fit, or not using appropriate actions:
-			AbstractFetish[] fetishes = new AbstractFetish[] {
+			Fetish[] fetishes = new Fetish[] {
 					Fetish.FETISH_NON_CON_DOM,
 					Fetish.FETISH_SADIST,
 					Fetish.FETISH_DOMINANT,
@@ -100,7 +95,7 @@ public class RatGangMember extends NPC {
 					Fetish.FETISH_VAGINAL_GIVING,
 					Fetish.FETISH_VAGINAL_RECEIVING,
 					Fetish.FETISH_ORAL_RECEIVING};
-			for(AbstractFetish f : fetishes) {
+			for(Fetish f : fetishes) {
 				if(this.getFetishDesire(f).isNegative()) {
 					this.setFetishDesire(f, FetishDesire.TWO_NEUTRAL);
 				}

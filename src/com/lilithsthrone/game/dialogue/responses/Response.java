@@ -10,14 +10,11 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Subspecies;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -44,13 +41,13 @@ public class Response {
 	protected String tooltipText;
 	protected DialogueNode nextDialogue;
 	
-	protected List<AbstractFetish> fetishesRequired;
+	protected List<Fetish> fetishesRequired;
 	protected CorruptionLevel corruptionBypass;
-	private List<AbstractPerk> perksRequired;
+	private List<Perk> perksRequired;
 	private Femininity femininityRequired;
-	private List<AbstractSubspecies> subspeciesRequired;
+	private List<Subspecies> subspeciesRequired;
 
-	private AbstractCombatMove combatMove;
+	private CombatMove combatMove;
 	
 	// Sex action variables:
 	
@@ -96,11 +93,11 @@ public class Response {
 	public Response(String title,
 			String tooltipText,
 			DialogueNode nextDialogue,
-			List<AbstractFetish> fetishesForUnlock,
+			List<Fetish> fetishesForUnlock,
 			CorruptionLevel corruptionBypass,
-			List<AbstractPerk> perksRequired,
+			List<Perk> perksRequired,
 			Femininity femininityRequired,
-			List<AbstractSubspecies> subspeciesRequired) {
+			List<Subspecies> subspeciesRequired) {
 		this(title, tooltipText, nextDialogue,
 				fetishesForUnlock, corruptionBypass,
 				perksRequired, femininityRequired, subspeciesRequired,
@@ -110,11 +107,11 @@ public class Response {
 	public Response(String title,
 			String tooltipText,
 			DialogueNode nextDialogue, 
-			List<AbstractFetish> fetishesForUnlock,
+			List<Fetish> fetishesForUnlock,
 			CorruptionLevel corruptionBypass,
-			List<AbstractPerk> perksRequired,
+			List<Perk> perksRequired,
 			Femininity femininityRequired,
-			List<AbstractSubspecies> subspeciesRequired,
+			List<Subspecies> subspeciesRequired,
 			SexActionType sexActionType,
 			GameCharacter characterPenetrating,
 			Collection<SexAreaInterface> sexAreaAccessRequiredForPerformer,
@@ -285,7 +282,7 @@ public class Response {
 		return false;
 	}
 	
-	public AbstractCombatMove getAssociatedCombatMove() {
+	public CombatMove getAssociatedCombatMove() {
 		return combatMove;
 	}
 	
@@ -548,7 +545,7 @@ public class Response {
 		SB = new StringBuilder();
 		
 		if(getPerksRequired()!=null) {
-			for(AbstractPerk p : getPerksRequired()){
+			for(Perk p : getPerksRequired()){
 				if(p.isEquippableTrait()
 						?Main.game.getPlayer().hasTrait(p, true)
 						:Main.game.getPlayer().hasPerkAnywhereInTree(p)) {
@@ -589,7 +586,7 @@ public class Response {
 
 			SB.append(" (Subspecies): ");
 			List<String> subspeciesList = new ArrayList<>();
-			for(AbstractSubspecies subspecies : getSubspeciesRequired()) {
+			for(Subspecies subspecies : getSubspeciesRequired()) {
 				subspeciesList.add("<span style='color:"+subspecies.getColour(Main.game.getPlayer()).toWebHexString()+";'>"+Util.capitaliseSentence(subspecies.getName(Main.game.getPlayer().getBody()))+"</span>");
 			}
 			SB.append(Util.stringsToStringChoice(subspeciesList, false));
@@ -729,7 +726,7 @@ public class Response {
 		SB = new StringBuilder();
 		
 		if(getFetishesForUnlock()!=null) {
-			for(AbstractFetish f : getFetishesForUnlock()){
+			for(Fetish f : getFetishesForUnlock()){
 				if(Main.game.getPlayer().hasFetish(f)) {
 					SB.append("<br/>"
 							+"[style.colourFetish(Associated Fetish)]"
@@ -820,7 +817,7 @@ public class Response {
 			return false;
 		}
 		
-		for (AbstractFetish f : getFetishesForUnlock()) {
+		for (Fetish f : getFetishesForUnlock()) {
 			if(Main.game.getPlayer().hasFetish(f)) {
 				if(f==Fetish.FETISH_PURE_VIRGIN) {
 					if(Main.game.getPlayer().hasStatusEffect(StatusEffect.FETISH_PURE_VIRGIN)) { // Virginity fetish only blocks if player is still a virgin.
@@ -838,7 +835,7 @@ public class Response {
 		if(getPerksRequired()==null) {
 			return false;
 		}
-		for(AbstractPerk p : getPerksRequired()) {
+		for(Perk p : getPerksRequired()) {
 			if(p.isEquippableTrait()
 					?Main.game.getPlayer().hasTrait(p, true)
 					:Main.game.getPlayer().hasPerkAnywhereInTree(p)) {
@@ -979,7 +976,7 @@ public class Response {
 		return true;
 	}
 
-	public List<AbstractFetish> getFetishesForUnlock() {
+	public List<Fetish> getFetishesForUnlock() {
 		if(fromExternalFile && fetishesRequired==null && fetishesRequiredId!=null && !fetishesRequiredId.isEmpty()) {
 			fetishesRequired = new ArrayList<>();
 			for(String fetishId : fetishesRequiredId) {
@@ -996,7 +993,7 @@ public class Response {
 		return corruptionBypass;
 	}
 
-	public List<AbstractPerk> getPerksRequired() {
+	public List<Perk> getPerksRequired() {
 		if(fromExternalFile && perksRequired==null && perksRequiredId!=null && !perksRequiredId.isEmpty()) {
 			perksRequired = new ArrayList<>();
 			for(String perkId : perksRequiredId) {
@@ -1013,7 +1010,7 @@ public class Response {
 		return femininityRequired;
 	}
 
-	public List<AbstractSubspecies> getSubspeciesRequired() {
+	public List<Subspecies> getSubspeciesRequired() {
 		if(fromExternalFile && subspeciesRequired==null && subspeciesRequiredId!=null && !subspeciesRequiredId.isEmpty()) {
 			subspeciesRequired = new ArrayList<>();
 			for(String subspeciesId : subspeciesRequiredId) {

@@ -12,7 +12,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -50,17 +49,17 @@ public interface WorldType {
 		return false;
 	}
 
-	AbstractPlaceType getStandardPlace();
+	PlaceType getStandardPlace();
 
-	AbstractPlaceType getGlobalMapLocation();
+	PlaceType getGlobalMapLocation();
 
-	AbstractPlaceType getEntryFromGlobalMapLocation();
+	PlaceType getEntryFromGlobalMapLocation();
 
 	String getFileLocation();
 
 	boolean isUsesFile();
 
-	Map<Color,AbstractPlaceType> getPlacesMap();
+	Map<Color,PlaceType> getPlacesMap();
 
 	TeleportPermissions getTeleportPermissions();
 
@@ -1245,11 +1244,11 @@ public interface WorldType {
 		}
 	};
 
-	static List<AbstractWorldType> getAllWorldTypes() {
+	static List<WorldType> getAllWorldTypes() {
 		return table.list();
 	}
 
-	static AbstractWorldType getWorldTypeFromId(String id) {
+	static WorldType getWorldTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -1262,11 +1261,11 @@ public interface WorldType {
 		return id;
 	}
 
-	static String getIdFromWorldType(AbstractWorldType placeType) {
+	static String getIdFromWorldType(WorldType placeType) {
 		return placeType.getId();
 	}
 
-	Table<AbstractWorldType> table = new Table<>(WorldType::sanitize) {{
+	Table<WorldType> table = new Table<>(WorldType::sanitize) {{
 		// Modded world types:
 		forEachMod("/maps",null,"worldType",(f,n,a)->{
 			var k = n.replace("_worldType","");

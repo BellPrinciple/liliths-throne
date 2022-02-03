@@ -1,7 +1,7 @@
 package com.lilithsthrone.game.character.body;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
+import com.lilithsthrone.game.character.body.types.TorsoType;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 
@@ -12,9 +12,9 @@ import com.lilithsthrone.main.Main;
  */
 public class Torso implements BodyPartInterface {
 	
-	protected AbstractTorsoType type;
+	protected TorsoType type;
 
-	public Torso(AbstractTorsoType type) {
+	public Torso(TorsoType type) {
 		this.type = type;
 	}
 
@@ -23,7 +23,7 @@ public class Torso implements BodyPartInterface {
 	}
 	
 	@Override
-	public AbstractTorsoType getType() {
+	public TorsoType getType() {
 		return type;
 	}
 
@@ -52,7 +52,7 @@ public class Torso implements BodyPartInterface {
 		return type.getDescriptor(gc);
 	}
 
-	public String setType(GameCharacter owner, AbstractTorsoType type) {
+	public String setType(GameCharacter owner, TorsoType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;
 			if(owner!=null) {

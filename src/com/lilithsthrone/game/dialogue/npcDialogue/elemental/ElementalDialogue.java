@@ -5,12 +5,10 @@ import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.PerkManager;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.NPCFlagValue;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -354,8 +352,7 @@ public class ElementalDialogue {
 			}
 			
 			List<Response> responses = new ArrayList<>();
-			List<AbstractSubspecies> subspecies = new ArrayList<>();
-			subspecies.addAll(Subspecies.getAllSubspecies());
+			var subspecies = new ArrayList<>(Subspecies.getAllSubspecies());
 			subspecies.removeIf(s -> !s.getRace().isFeralPartsAvailable());
 			subspecies.removeIf(s -> s.getRace()==Race.DEMON || s.getRace()==Race.ELEMENTAL || s.getRace()==Race.SLIME);
 //			subspecies.removeIf(s -> s.isNonBiped());
@@ -375,14 +372,14 @@ public class ElementalDialogue {
 			}
 			
 			List<String> nameDuplicates = new ArrayList<>(); // Do not populate responses with duplicates. This should remove repeated instances of the same feral animal, e.g. "snake" 3 times from snake, lamia, and melusine
-			
-			for(AbstractSubspecies sub : subspecies) {
+
+			for(var sub : subspecies) {
 				String feralName = sub.getFeralName(getElemental().getBody());
 				if(!nameDuplicates.contains(feralName)) {
 					nameDuplicates.add(feralName);
 					if(getElemental().getPassiveForm()==sub) {
 						responses.add(new Response(Util.capitaliseSentence(feralName), "[el.Name] is already assuming the passive form of a small, feral "+feralName+"!", null));
-						
+
 					} else {
 						responses.add(new Response(Util.capitaliseSentence(feralName), "Tell [el.name] to assume the passive form of a small, feral "+feralName+".", UTIL_NO_CONTENT) {
 							@Override
@@ -522,7 +519,7 @@ public class ElementalDialogue {
 			sb.append("<div class='container-full-width' style='text-align:center; font-weight:bold; margin-top:16px;'><h6>Derived Fetishes</h6></div>");
 			sb.append("<div class='fetish-container'>");
 			
-			for(AbstractFetish fetish : Fetish.getAllFetishes()) {
+			for(Fetish fetish : Fetish.getAllFetishes()) {
 				if(!fetish.getFetishesForAutomaticUnlock().isEmpty()) {
 					sb.append(
 							"<div id='FETISH_" + Fetish.getIdFromFetish(fetish) + "' class='fetish-icon" + (Main.game.getPlayer().hasFetish(fetish)

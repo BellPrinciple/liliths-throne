@@ -6,10 +6,8 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAnusType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -188,8 +186,8 @@ public interface AnusType extends BodyPartTypeInterface {
 		private String id;
 
 		Special(
-				AbstractBodyCoveringType coveringType,
-				AbstractRace race,
+				BodyCoveringType coveringType,
+				Race race,
 				List<String> names,
 				List<String> namesPlural,
 				List<String> descriptorsMasculine,
@@ -206,7 +204,7 @@ public interface AnusType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractAnusType> table = new TypeTable<>(
+	TypeTable<AnusType> table = new TypeTable<>(
 		AnusType::sanitize,
 		AnusType.class,
 		AbstractAnusType.class,
@@ -218,7 +216,7 @@ public interface AnusType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractAnusType getAnusTypeFromId(String id) {
+	static AnusType getAnusTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -229,15 +227,15 @@ public interface AnusType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromAnusType(AbstractAnusType anusType) {
+	static String getIdFromAnusType(AnusType anusType) {
 		return anusType.getId();
 	}
 
-	public static List<AbstractAnusType> getAllAnusTypes() {
+	static List<AnusType> getAllAnusTypes() {
 		return table.listByRace();
 	}
 
-	public static List<AbstractAnusType> getAnusTypes(AbstractRace r) {
+	static List<AnusType> getAnusTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	

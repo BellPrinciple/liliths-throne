@@ -11,11 +11,9 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.valueEnums.EyeShape;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -32,8 +30,8 @@ public abstract class AbstractEyeType implements EyeType {
 
 	private String transformationName;
 
-	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private BodyCoveringType coveringType;
+	private Race race;
 
 	private int defaultPairCount;
 	
@@ -65,8 +63,8 @@ public abstract class AbstractEyeType implements EyeType {
 	 * @param eyeTransformationDescription A paragraph describing a character's eyes transforming into this eye type. Parsing assumes that the character already has this eye type and associated skin covering.
 	 * @param eyeBodyDescription A sentence or two to describe this eye type, as seen in the character view screen. It should follow the same format as all of the other entries in the EyeType class.
 	 */
-	public AbstractEyeType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+	public AbstractEyeType(BodyCoveringType coveringType,
+			Race race,
 			int defaultPairCount,
 			EyeShape defaultIrisShape,
 			EyeShape defaultPupilShape,
@@ -112,9 +110,9 @@ public abstract class AbstractEyeType implements EyeType {
 
 				this.mod = mod;
 				this.fromExternalFile = true;
-				
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 
@@ -207,12 +205,12 @@ public abstract class AbstractEyeType implements EyeType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

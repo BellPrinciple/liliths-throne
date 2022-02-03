@@ -32,10 +32,8 @@ import com.lilithsthrone.utils.comparators.SlaveNameComparator;
 import com.lilithsthrone.utils.comparators.SlaveRaceComparator;
 import com.lilithsthrone.utils.comparators.SlaveRoomComparator;
 import com.lilithsthrone.utils.comparators.SlaveValueComparator;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
@@ -603,8 +601,8 @@ public class OccupantManagementDialogue {
 	
 	public static List<Cell> getImportantCells() {
 		if(importantCells.isEmpty()) {
-			AbstractWorldType[] importantWorlds = new AbstractWorldType[] {WorldType.LILAYAS_HOUSE_GROUND_FLOOR, WorldType.LILAYAS_HOUSE_FIRST_FLOOR, WorldType.getWorldTypeFromId("acexp_dungeon")};
-			for(AbstractWorldType wt : importantWorlds) {
+			WorldType[] importantWorlds = new WorldType[] {WorldType.LILAYAS_HOUSE_GROUND_FLOOR, WorldType.LILAYAS_HOUSE_FIRST_FLOOR, WorldType.getWorldTypeFromId("acexp_dungeon")};
+			for(WorldType wt : importantWorlds) {
 				Cell[][] cellGrid = Main.game.getWorlds().get(wt).getCellGrid();
 				for(int i = 0; i< cellGrid.length; i++) {
 					for(int j = 0; j < cellGrid[0].length; j++) {
@@ -625,7 +623,7 @@ public class OccupantManagementDialogue {
 	
 	
 	
-	private static String getWorldRooms(AbstractWorldType worldType) {
+	private static String getWorldRooms(WorldType worldType) {
 		StringBuilder worldRoomSB = new StringBuilder();
 		
 		worldRoomSB.append(
@@ -754,8 +752,8 @@ public class OccupantManagementDialogue {
 											+ "<h6 style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+"; text-align:center;'>Modifications</h6>"
 											+ getRoomUpgradeHeader());
 			
-			List<AbstractPlaceUpgrade> coreUpgrades = new ArrayList<>();
-			for(AbstractPlaceUpgrade upgrade : place.getPlaceType().getAvailablePlaceUpgrades(place.getPlaceUpgrades())) {
+			List<PlaceUpgrade> coreUpgrades = new ArrayList<>();
+			for(PlaceUpgrade upgrade : place.getPlaceType().getAvailablePlaceUpgrades(place.getPlaceUpgrades())) {
 				if(upgrade.getAvailability(cellToInspect).getKey() || (!upgrade.getAvailability(cellToInspect).getValue().isEmpty())) { // Do not display upgrades that have no explanation as to why they're banned.
 					if(upgrade.isCoreRoomUpgrade()) {
 						coreUpgrades.add(upgrade);
@@ -788,7 +786,7 @@ public class OccupantManagementDialogue {
 //			}
 			
 			i = 0;
-			for (AbstractPlaceUpgrade upgrade : coreUpgrades) {
+			for (PlaceUpgrade upgrade : coreUpgrades) {
 				UtilText.nodeContentSB.append(getUpgradeEntry(cellToInspect, upgrade));
 				i++;
 			}
@@ -855,7 +853,7 @@ public class OccupantManagementDialogue {
 			}
 		}
 	};
-	
+
 	private static String getRoomUpgradeHeader() {
 		return "<div class='container-full-width' style='margin-bottom:0;'>"
 					+ "<div style='width:30%; float:left; font-weight:bold; margin:0; padding:0;'>"
@@ -882,7 +880,7 @@ public class OccupantManagementDialogue {
 				+ "</div>";
 	}
 	
-	private static String getUpgradeEntry(Cell cell, AbstractPlaceUpgrade upgrade) {
+	private static String getUpgradeEntry(Cell cell, PlaceUpgrade upgrade) {
 		miscDialogueSB.setLength(0);
 		GenericPlace place = cell.getPlace();
 		float affectionChange = upgrade.getHourlyAffectionGain();
@@ -961,7 +959,7 @@ public class OccupantManagementDialogue {
 			}
 			if(canBuy) {
 				if(!upgrade.getPrerequisites().isEmpty()) {
-					for(AbstractPlaceUpgrade prereq : upgrade.getPrerequisites()) {
+					for(PlaceUpgrade prereq : upgrade.getPrerequisites()) {
 						if(!place.getPlaceUpgrades().contains(prereq)) {
 							canBuy = false;
 							break;
@@ -1007,7 +1005,7 @@ public class OccupantManagementDialogue {
 	}
 	
 	private static StringBuilder purchaseAvailability = new StringBuilder();
-	public static String getPurchaseAvailabilityTooltipText(Cell cell, AbstractPlaceUpgrade upgrade) {
+	public static String getPurchaseAvailabilityTooltipText(Cell cell, PlaceUpgrade upgrade) {
 		GenericPlace place = cell.getPlace();
 		boolean owned = place.getPlaceUpgrades().contains(upgrade);
 		
@@ -1029,7 +1027,7 @@ public class OccupantManagementDialogue {
 			
 			if(!upgrade.getPrerequisites().isEmpty()) {
 				purchaseAvailability.append("You need to purchase the following first:");
-				for(AbstractPlaceUpgrade prereq : upgrade.getPrerequisites()) {
+				for(PlaceUpgrade prereq : upgrade.getPrerequisites()) {
 					if(place.getPlaceUpgrades().contains(prereq)) {
 						purchaseAvailability.append("<br/><span style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>"+prereq.getName()+"</span>");
 					} else {
@@ -1307,7 +1305,7 @@ public class OccupantManagementDialogue {
 	
 	private static String getSlaveryEntry(boolean slaveOwned, GenericPlace place, NPC slave, AffectionLevel affection, float affectionChange, ObedienceLevel obedience, float obedienceChange, boolean alternateBackground) {
 		boolean showWinged = (slave.hasWings() || slave.isArmWings()) && !slave.getFleshSubspecies().isWinged();
-		
+
 		miscDialogueSB.setLength(0);
 		miscDialogueSB.append(
 				"<div class='container-full-width inner' style='margin-bottom:0;"+(alternateBackground?"background:"+PresetColour.BACKGROUND_ALT.toWebHexString()+";'":"'")+"'>"

@@ -4,7 +4,6 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
 import org.w3c.dom.Document;
@@ -20,7 +19,6 @@ import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.Name;
 import com.lilithsthrone.game.character.persona.NameTriplet;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
@@ -32,17 +30,15 @@ import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotUnique;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Season;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -62,15 +58,15 @@ public class GenericSexualPartner extends NPC {
 		this(Gender.F_V_B_FEMALE, WorldType.EMPTY, new Vector2i(0, 0), isImported);
 	}
 
-	public GenericSexualPartner(Gender gender, AbstractWorldType worldLocation, Vector2i location, boolean isImported) {
+	public GenericSexualPartner(Gender gender, WorldType worldLocation, Vector2i location, boolean isImported) {
 		this(gender, worldLocation, location, isImported, null);
 	}
 
-	public GenericSexualPartner(Gender gender, AbstractWorldType worldLocation, AbstractPlaceType placeType, boolean isImported, Predicate<AbstractSubspecies> subspeciesRemovalFilter) {
+	public GenericSexualPartner(Gender gender, WorldType worldLocation, PlaceType placeType, boolean isImported, Predicate<?super Subspecies> subspeciesRemovalFilter) {
 		this(gender, worldLocation, Main.game.getWorlds().get(worldLocation).getCell(placeType).getLocation(), isImported, subspeciesRemovalFilter);
 	}
 	
-	public GenericSexualPartner(Gender gender, AbstractWorldType worldLocation, Vector2i location, boolean isImported, Predicate<AbstractSubspecies> subspeciesRemovalFilter) {
+	public GenericSexualPartner(Gender gender, WorldType worldLocation, Vector2i location, boolean isImported, Predicate<?super Subspecies> subspeciesRemovalFilter) {
 		super(isImported, null, null, "",
 				Util.random.nextInt(28)+18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
 				3,
@@ -86,28 +82,28 @@ public class GenericSexualPartner extends NPC {
 			
 			// RACE & NAME:
 			
-			Map<AbstractSubspecies, Integer> availableRaces = new HashMap<>();
-			List<AbstractSubspecies> availableSubspecies = new ArrayList<>();
+			var availableRaces = new HashMap<Subspecies,Integer>();
+			var availableSubspecies = new ArrayList<Subspecies>();
 			availableSubspecies.addAll(Subspecies.getAllSubspecies());
 			
 			if(subspeciesRemovalFilter!=null) {
 				availableSubspecies.removeIf(subspeciesRemovalFilter);
 			}
 			
-			for(AbstractSubspecies s : availableSubspecies) {
+			for(var s : availableSubspecies) {
 				if(s.getSubspeciesOverridePriority()>0) { // Do not spawn demonic races, elementals, or youko
 					continue;
 				}
 				if(s==Subspecies.REINDEER_MORPH
 						&& Main.game.getSeason()==Season.WINTER
 						&& Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.hasSnowedThisWinter)) {
-					AbstractSubspecies.addToSubspeciesMap(50, gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap(50, gender, s, availableRaces);
 				}
 				
 				if(Subspecies.getWorldSpecies(WorldType.DOMINION, null, false).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (1000*Subspecies.getWorldSpecies(WorldType.DOMINION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (1000*Subspecies.getWorldSpecies(WorldType.DOMINION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				} else if(Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false).containsKey(s)) {
-					AbstractSubspecies.addToSubspeciesMap((int) (1000*Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
+					Subspecies.addToSubspeciesMap((int) (1000*Subspecies.getWorldSpecies(WorldType.SUBMISSION, null, false).get(s).getChanceMultiplier()), gender, s, availableRaces);
 				}
 			}
 			
@@ -202,7 +198,7 @@ public class GenericSexualPartner extends NPC {
 	}
 	
 	@Override
-	public boolean isHappyToBeInSlot(AbstractSexPosition position, SexSlot slot, GameCharacter target) {
+	public boolean isHappyToBeInSlot(SexPosition position, SexSlot slot, GameCharacter target) {
 		if(!this.getLocationPlace().getPlaceType().equals(PlaceType.WATERING_HOLE_TOILETS) || playerRequested) {
 			return super.isHappyToBeInSlot(position, slot, target);
 			

@@ -8,10 +8,8 @@ import java.util.stream.Collectors;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
@@ -218,19 +216,19 @@ public interface WingType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, boolean allowsFlight, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String wingTransformationDescription, String wingBodyDescription) {
+		public Special(BodyCoveringType coveringType, Race race, boolean allowsFlight, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String wingTransformationDescription, String wingBodyDescription) {
 			super(coveringType, race, allowsFlight, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, wingTransformationDescription, wingBodyDescription);
 		}
 
 		@Override
 		public String getId() {
-			return id != null ? id : (id = Arrays.stream(WingType.class.getFields())
+			return id != null ? id : (id = Arrays.stream(LegType.class.getFields())
 			.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
 			.findAny().orElseThrow().getName());
 		}
 	}
 
-	TypeTable<AbstractWingType> table = new TypeTable<>(
+	TypeTable<WingType> table = new TypeTable<>(
 		WingType::sanitize,
 		WingType.class,
 		AbstractWingType.class,
@@ -242,7 +240,7 @@ public interface WingType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractWingType getWingTypeFromId(String id) {
+	static WingType getWingTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -254,17 +252,17 @@ public interface WingType extends BodyPartTypeInterface {
 		};
 	}
 
-	public static String getIdFromWingType(AbstractWingType wingType) {
+	static String getIdFromWingType(WingType wingType) {
 		return wingType.getId();
 	}
 
-	public static List<AbstractWingType> getAllWingTypes() {
+	static List<WingType> getAllWingTypes() {
 		return table.listByRace();
 	}
 
-	public static List<AbstractWingType> getWingTypes(AbstractRace r) {
+	static List<WingType> getWingTypes(Race r) {
 		return table.of(r).orElseGet(()->table.listByRace().stream()
-			.filter(AbstractWingType::isGeneric)
+			.filter(WingType::isGeneric)
 			.collect(Collectors.toList()));
 	}
 }

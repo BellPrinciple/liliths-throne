@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractMouthType;
+import com.lilithsthrone.game.character.body.types.MouthType;
 import com.lilithsthrone.game.character.body.valueEnums.LipSize;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -20,12 +20,12 @@ import com.lilithsthrone.utils.Util;
  */
 public class Mouth implements BodyPartInterface {
 	
-	protected AbstractMouthType type;
+	protected MouthType type;
 	protected Orifice orificeMouth;
 	protected int lipSize;
 	protected boolean piercedLip;
 
-	public Mouth(AbstractMouthType type, int lipSize, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
+	public Mouth(MouthType type, int lipSize, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
 		this.type = type;
 		this.lipSize = lipSize;
 		orificeMouth = new Orifice(Orifice.Type.MOUTH, wetness, capacity, depth, elasticity, plasticity, virgin, type.getDefaultRacialOrificeModifiers());
@@ -39,7 +39,7 @@ public class Mouth implements BodyPartInterface {
 	}
 	
 	@Override
-	public AbstractMouthType getType() {
+	public MouthType getType() {
 		return type;
 	}
 
@@ -108,7 +108,7 @@ public class Mouth implements BodyPartInterface {
 		return Util.randomItemFrom(descriptorList);
 	}
 
-	public void setType(AbstractMouthType type) {
+	public void setType(MouthType type) {
 		this.type = type;
 	}
 

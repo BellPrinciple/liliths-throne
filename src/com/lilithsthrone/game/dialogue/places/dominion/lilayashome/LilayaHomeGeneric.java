@@ -46,8 +46,6 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
-import com.lilithsthrone.world.places.AbstractPlaceUpgrade;
 import com.lilithsthrone.world.places.GenericPlace;
 import com.lilithsthrone.world.places.PlaceType;
 import com.lilithsthrone.world.places.PlaceUpgrade;
@@ -99,9 +97,9 @@ public class LilayaHomeGeneric {
 	private static boolean isPlayerHasDolls() {
 		return Main.game.getPlayer().getSlavesOwnedAsCharacters().stream().anyMatch(slave->slave.isDoll());
 	}
-	
+
 	public static String getLilayasHouseStandardResponseTabs(int i) {
-		AbstractPlaceType playerPlaceType = Main.game.getPlayer().getLocationPlace().getPlaceType();
+		PlaceType playerPlaceType = Main.game.getPlayer().getLocationPlace().getPlaceType();
 		switch(i) {
 			case 0:
 				return "Actions";
@@ -141,7 +139,7 @@ public class LilayaHomeGeneric {
 			boolean alreadyActive = doll.getSlaveStationWorldType()==Main.game.getPlayer().getWorldLocation() && Main.game.getPlayer().getLocation().equals(doll.getSlaveStationLocation());
 			responses.add(new Response(
 					UtilText.parse(doll, "[npc.Name]"),
-					UtilText.parse(doll, 
+					UtilText.parse(doll,
 							"Set this cell as <span style='color:"+doll.getFemininity().getColour().toWebHexString()+"'>[npc.name]"+(doll.hasSurname()?" [npc.surname]'s":"'s")+"</span> station for when [npc.sheIs] working as a statue."
 							+ "<br/>[style.italics("
 							+ (doll.getSlaveStationWorldType()==null
@@ -173,7 +171,7 @@ public class LilayaHomeGeneric {
 		}
 		return responses.get(index);
 	}
-	
+
 	public static Response getLilayasHouseFastTravelResponses(int index) {
 		 if (index == 1) {
 			if(Main.game.getPlayer().getLocationPlace().getPlaceType()==PlaceType.LILAYA_HOME_ROOM_PLAYER) {
@@ -240,8 +238,8 @@ public class LilayaHomeGeneric {
 	}
 	
 	private static Response getRoomResponse(int responseTab, int index) {
-		AbstractPlaceUpgrade coreUpgrade = null;
-		for(AbstractPlaceUpgrade pu : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
+		PlaceUpgrade coreUpgrade = null;
+		for(var pu : Main.game.getPlayer().getLocationPlace().getPlaceUpgrades()) {
 			if(pu.isCoreRoomUpgrade()) {
 				coreUpgrade = pu;
 			}
@@ -372,7 +370,7 @@ public class LilayaHomeGeneric {
 	public static String getRoomModificationsDescription(boolean includeDefaultRoomDescription) {
 		GenericPlace place = Main.game.getPlayer().getLocationPlace();
 		
-		for(AbstractPlaceUpgrade pu : place.getPlaceUpgrades()) {
+		for(PlaceUpgrade pu : place.getPlaceUpgrades()) {
 			DialogueNode dn = pu.getRoomDialogue(Main.game.getPlayerCell());
 			if(dn!=null) {
 				return dn.getContent();
@@ -385,7 +383,7 @@ public class LilayaHomeGeneric {
 			roomSB.append(getBaseRoomDescription());
 		}
 		
-		for(AbstractPlaceUpgrade pu : PlaceUpgrade.getAllPlaceUpgrades()) { // For consistent ordering.
+		for(PlaceUpgrade pu : PlaceUpgrade.getAllPlaceUpgrades()) { // For consistent ordering.
 			if(place.getPlaceUpgrades().contains(pu)) {
 				roomSB.append(formatRoomUpgrade(pu));
 			}
@@ -495,7 +493,7 @@ public class LilayaHomeGeneric {
 		
 		if(slave.getSlaveJob(Main.game.getHourOfDay())==SlaveJob.DOLL_STATUE) {
 			sb.append(UtilText.parse(slave, "Having been ordered to pose as a statue, <b style='color:"+slave.getFemininity().getColour().toWebHexString()+";'>[npc.name]</b> is present in this area."));
-			
+
 			for(SlaveJobSetting sjs : slave.getSlaveJobSettings(SlaveJob.DOLL_STATUE)) {
 				switch(sjs) {
 					case DOLL_STATUE_ALL_FOURS:
@@ -524,11 +522,11 @@ public class LilayaHomeGeneric {
 				}
 			}
 			sb.append(UtilText.parse(slave, ", and is completely and utterly motionless."));
-			
+
 		} else {
 			sb.append(UtilText.parse(slave, "Having been assigned to work as a "+(slave.getSlaveJob(Main.game.getHourOfDay()).getName(slave))
 					+", <b style='color:"+slave.getFemininity().getColour().toWebHexString()+";'>[npc.name]</b> is present in this area."));
-			
+
 			if(slave.hasSlavePermissionSetting(SlavePermissionSetting.GENERAL_CRAWLING)) {
 				sb.append(UtilText.parse(slave,
 						" As you've instructed [npc.herHim] to crawl, [npc.sheIs] down on all fours, and "));
@@ -559,7 +557,7 @@ public class LilayaHomeGeneric {
 		return sb.toString();
 	}
 
-	private static String formatRoomUpgrade(AbstractPlaceUpgrade upgrade) {
+	private static String formatRoomUpgrade(PlaceUpgrade upgrade) {
 		return "<p>"
 				+ "<b style='color:"+upgrade.getColour().toWebHexString()+";'>"+upgrade.getName()+"</b><br/>"
 				+ upgrade.getRoomDescription(Main.game.getPlayerCell())
@@ -727,7 +725,7 @@ public class LilayaHomeGeneric {
 			if(responseTab==2) {
 				return getLilayasHouseDollStationResponses(index);
 			}
-			
+
 			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
 			
 			if(index==0) {
@@ -1217,9 +1215,9 @@ public class LilayaHomeGeneric {
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);
 			List<NPC> charactersPresent = getSlavesAndOccupantsPresent();
-			
+
 			UtilText.nodeContentSB.append(UtilText.parseFromXMLFile("places/dominion/lilayasHome/generic", "FOUNTAIN"));
-			
+
 			if(!charactersPresent.isEmpty()) {
 				for(NPC slave : charactersPresent) {
 					if(slave.getSlaveJob(Main.game.getHourOfDay())==SlaveJob.GARDEN) {
@@ -1234,7 +1232,7 @@ public class LilayaHomeGeneric {
 					}
 				}
 			}
-			
+
 			return UtilText.nodeContentSB.toString();
 		}
 

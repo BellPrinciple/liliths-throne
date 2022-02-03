@@ -67,14 +67,12 @@ import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -319,7 +317,7 @@ public class Kate extends NPC {
 	public void dailyUpdate() {
 		clearNonEquippedInventory(false);
 
-		for(AbstractItemType item : ItemType.getAllItems()) {
+		for(ItemType item : ItemType.getAllItems()) {
 			if(item.getItemTags().contains(ItemTag.SOLD_BY_KATE)
 					&& (!item.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				this.addItem(Main.game.getItemGen().generateItem(item), !item.isConsumedOnUse()?1:(6+Util.random.nextInt(12)), false, false);
@@ -328,7 +326,7 @@ public class Kate extends NPC {
 		
 		List<AbstractClothing> clothingToSell = new ArrayList<>();
 		
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(ClothingType clothing : ClothingType.getAllClothing()) {
 			if(clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_KATE)
 					&& (!clothing.getDefaultItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				clothingToSell.add(Main.game.getItemGen().generateClothing(clothing, false));
@@ -457,7 +455,7 @@ public class Kate extends NPC {
 	}
 	
 	@Override
-	public String getCondomEquipEffects(AbstractClothingType condomClothingType, GameCharacter equipper, GameCharacter target, boolean rough) {
+	public String getCondomEquipEffects(ClothingType condomClothingType, GameCharacter equipper, GameCharacter target, boolean rough) {
 		if(!target.equals(equipper) && Main.game.isInSex()) {
 			if(!target.isPlayer()) {
 				if(condomClothingType.equals(ClothingType.getClothingTypeFromId("innoxia_penis_condom_webbing"))) {

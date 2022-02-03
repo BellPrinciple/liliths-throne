@@ -9,12 +9,10 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
@@ -30,8 +28,8 @@ public abstract class AbstractTailType implements TailType {
 	private boolean mod;
 	private boolean fromExternalFile;
 
-	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private BodyCoveringType coveringType;
+	private Race race;
 
 	private String transformationName;
 	
@@ -80,8 +78,8 @@ public abstract class AbstractTailType implements TailType {
 	 * @param spinneret true if this tail type has a spinneret.
 	 */
 	public AbstractTailType(
-			AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+			BodyCoveringType coveringType,
+			Race race,
 			PenetrationGirth defaultGirth,
 			float defaultLengthAsPercentageOfHeight,
 			String transformationName,
@@ -141,9 +139,9 @@ public abstract class AbstractTailType implements TailType {
 
 				this.mod = mod;
 				this.fromExternalFile = true;
-				
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 				
@@ -286,12 +284,12 @@ public abstract class AbstractTailType implements TailType {
 	}
 	
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

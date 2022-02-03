@@ -49,13 +49,10 @@ import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -151,17 +148,17 @@ public class Hale extends NPC {
 		this.setBodySize(BodySize.THREE_LARGE.getMedianValue());
 
 		// Coverings:
-		this.setEyeCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_YELLOW, true, PresetColour.EYE_YELLOW, true));
+		this.setEyeCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_YELLOW, true, PresetColour.EYE_YELLOW, true));
 		this.setEyeCovering(new Covering(BodyCoveringType.EYE_DEMON_COMMON, CoveringPattern.EYE_IRISES, PresetColour.EYE_YELLOW, true, PresetColour.EYE_YELLOW, true));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_fur"), CoveringPattern.MARKED, CoveringModifier.SHORT, PresetColour.COVERING_GREY, false, PresetColour.COVERING_DARK_GREY, false), true);
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_fur"), CoveringPattern.MARKED, CoveringModifier.SHORT, PresetColour.COVERING_GREY, false, PresetColour.COVERING_DARK_GREY, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, PresetColour.SKIN_TANNED), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HORN, PresetColour.COVERING_GREY), false);
-		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_hair"), PresetColour.COVERING_DARK_GREY), true);
+
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_hair"), PresetColour.COVERING_DARK_GREY), true);
 		this.setHairLength(HairLength.ZERO_BALD.getMinimumValue());
 		this.setHairStyle(HairStyle.NONE);
-		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_body_hair"), PresetColour.COVERING_DARK_GREY), false);
+
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_body_hair"), PresetColour.COVERING_DARK_GREY), false);
 		this.setUnderarmHair(BodyHair.FOUR_NATURAL);
 		this.setAssHair(BodyHair.FOUR_NATURAL);
 		this.setPubicHair(BodyHair.FOUR_NATURAL);
@@ -238,12 +235,12 @@ public class Hale extends NPC {
 	public void dailyUpdate() {
 		clearNonEquippedInventory(false);
 
-		List<AbstractWeaponType> weaponTypesToSell = new ArrayList<>();
-		List<AbstractClothingType> clothingTypesToSell = new ArrayList<>();
-		List<AbstractItemType> itemTypesToSell = new ArrayList<>();
+		var weaponTypesToSell = new ArrayList<WeaponType>();
+		var clothingTypesToSell = new ArrayList<ClothingType>();
+		var itemTypesToSell = new ArrayList<ItemType>();
 
 		// Weapons:
-		for(AbstractWeaponType weapon : WeaponType.getAllWeapons()) {
+		for(var weapon : WeaponType.getAllWeapons()) {
 			if(weapon.getItemTags().contains(ItemTag.SOLD_BY_VICKY)
 					&& !weapon.isMelee()
 					&& (!weapon.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
@@ -254,12 +251,12 @@ public class Hale extends NPC {
 		while(weaponTypesToSell.size() >= this.getMaximumInventorySpace() * 0.8) {
 			weaponTypesToSell.remove(Util.random.nextInt(weaponTypesToSell.size()));
 		}
-		for(AbstractWeaponType type : weaponTypesToSell) {
+		for(var type : weaponTypesToSell) {
 			this.addWeapon(Main.game.getItemGen().generateWeapon(type), 1+Util.random.nextInt(3), false, false);
 		}
 
 		// Items:
-		for(AbstractItemType item : ItemType.getAllItems()) {
+		for(var item : ItemType.getAllItems()) {
 			if(item.getItemTags().contains(ItemTag.SOLD_BY_VICKY)
 					&& (!item.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				itemTypesToSell.add(item);
@@ -269,13 +266,13 @@ public class Hale extends NPC {
 		while(itemTypesToSell.size() >= this.getMaximumInventorySpace() * 0.8) {
 			itemTypesToSell.remove(Util.random.nextInt(itemTypesToSell.size()));
 		}
-		for(AbstractItemType type : itemTypesToSell) {
+		for(var type : itemTypesToSell) {
 			this.addItem(Main.game.getItemGen().generateItem(type), 1+Util.random.nextInt(3), false, false);
 		}
 		this.addItem(Main.game.getItemGen().generateItem(ItemType.REFORGE_HAMMER), 5+Util.random.nextInt(6), false, false);
 		
 		// Clothing:
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(var clothing : ClothingType.getAllClothing()) {
 			if(clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_VICKY)
 					&& (!clothing.getDefaultItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				clothingTypesToSell.add(clothing);
@@ -285,7 +282,7 @@ public class Hale extends NPC {
 		while(clothingTypesToSell.size() >= this.getMaximumInventorySpace() * 0.8) {
 			clothingTypesToSell.remove(Util.random.nextInt(clothingTypesToSell.size()));
 		}
-		for(AbstractClothingType type : clothingTypesToSell) {
+		for(var type : clothingTypesToSell) {
 			this.addClothing(Main.game.getItemGen().generateClothing(type, false), false);
 		}
 		

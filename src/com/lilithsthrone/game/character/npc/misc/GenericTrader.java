@@ -15,7 +15,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.persona.NameTriplet;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -101,7 +100,7 @@ public class GenericTrader extends NPC {
 	/**
 	 * Resets this character's body and completely clears inventory.
 	 */
-	public void initTrader(Gender gender, AbstractSubspecies subspecies, RaceStage stage) {
+	public void initTrader(Gender gender, Subspecies subspecies, RaceStage stage) {
 		this.setBody(gender, subspecies, stage, false);
 		this.unequipAllClothingIntoVoid(true, true);
 		clearNonEquippedInventory(false);

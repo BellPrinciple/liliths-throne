@@ -13,7 +13,6 @@ import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.PlayerCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.AlcoholLevel;
 import com.lilithsthrone.game.character.attributes.ArousalLevel;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -24,7 +23,7 @@ import com.lilithsthrone.game.character.attributes.PhysiqueLevel;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.Penis;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
+import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
@@ -33,7 +32,6 @@ import com.lilithsthrone.game.character.body.valueEnums.CupSize;
 import com.lilithsthrone.game.character.body.valueEnums.FluidTypeBase;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -45,12 +43,11 @@ import com.lilithsthrone.game.character.npc.submission.Silence;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.DamageType;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.combat.spells.SpellUpgrade;
@@ -187,11 +184,11 @@ public interface StatusEffect {
 
 	EffectBenefit getBeneficialStatus();
 
-	default Map<AbstractAttribute,Float> getAttributeModifiers(GameCharacter target) {
+	default Map<Attribute,Float> getAttributeModifiers(GameCharacter target) {
 		return Map.of();
 	}
 
-	default List<AbstractCombatMove> getCombatMoves() {
+	default List<CombatMove> getCombatMoves() {
 		return List.of();
 	}
 
@@ -1702,7 +1699,7 @@ public interface StatusEffect {
 			}
 		}
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(target.isDoll()) {
 				return Util.newHashMapOfValues(new Value<>(Attribute.HEALTH_MAXIMUM, 1000f));
 			} else {
@@ -1762,7 +1759,7 @@ public interface StatusEffect {
 			sb.append("Huge streaks of pink and purple lightning arc through the sky as an arcane storm rages high above Dominion.");
 			if(target.isDoll()) {
 				sb.append(" As an arcane-powered sex doll, [npc.nameIsFull] filled with a colossal amount of energy!");
-				
+
 			} else {
 				sb.append(" [npc.NameIsFull] being heavily affected by the ongoing arcane storm, and can think of nothing but sex...");
 			}
@@ -1786,7 +1783,7 @@ public interface StatusEffect {
 			}
 		}
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(target.isDoll()) {
 				return Util.newHashMapOfValues(
 						new Value<>(Attribute.HEALTH_MAXIMUM, 1000f));
@@ -1847,7 +1844,7 @@ public interface StatusEffect {
 			sb.append("Huge streaks of pink and purple lightning arc through the sky as an arcane storm rages high above Dominion.");
 			if(target.isDoll()) {
 				sb.append(" Although [npc.nameIsFull] protected from the storm, [npc.sheIs] still able to absorb background arcane energy to power [npc.herself].");
-				
+
 			} else {
 				sb.append(" Although [npc.she] can still feel its effects taking the form of an increased libido, [npc.nameIsFull] currently protected from most of the storm's wrath.");
 			}
@@ -2096,8 +2093,8 @@ public interface StatusEffect {
 			return Main.game.isInNewWorld();
 		}
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
-			LinkedHashMap<AbstractAttribute, Float> attMods;
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
+			LinkedHashMap<Attribute, Float> attMods;
 			
 			if(target.getSubspeciesOverride()!=null && target.getSubspeciesOverride()!=target.getSubspecies()) {
 				attMods = new LinkedHashMap<>(target.getSubspeciesOverride().getStatusEffectAttributeModifiers(target));
@@ -2107,7 +2104,7 @@ public interface StatusEffect {
 			
 			BodyMaterial material = target.getBodyMaterial();
 			if(material.getAttributeModifiers(target)!=null) {
-				for(Entry<AbstractAttribute, Float> entry : material.getAttributeModifiers(target).entrySet()) {
+				for(Entry<Attribute, Float> entry : material.getAttributeModifiers(target).entrySet()) {
 					attMods.putIfAbsent(entry.getKey(), 0f);
 					attMods.put(entry.getKey(), attMods.get(entry.getKey())+entry.getValue());
 				}
@@ -2124,7 +2121,7 @@ public interface StatusEffect {
 		}
 		@Override
 		public List<String> getModifiersAsStringList(GameCharacter target) {
-			LinkedHashMap<AbstractAttribute, Float> attMods;
+			LinkedHashMap<Attribute, Float> attMods;
 
 			if(target.getSubspeciesOverride()!=null && target.getSubspeciesOverride()!=target.getSubspecies()) {
 				attMods = new LinkedHashMap<>(target.getSubspeciesOverride().getStatusEffectAttributeModifiers(target));
@@ -2698,7 +2695,7 @@ public interface StatusEffect {
 			return Main.game.isMuskContentEnabled() && target.getMuskMarker()!=null && !target.getMuskMarker().isEmpty();
 		}
 	};
-	
+
 	public static AbstractStatusEffect CLOTHING_ENCHANTMENT_OVER_LIMIT = new AbstractStatusEffect(80,
 			"unstable enchantments",
 			"unstable_enchantment_1",
@@ -3239,8 +3236,8 @@ public interface StatusEffect {
 							+ "</p>"
 							+target.incrementLust(25, false);
 				} else {
-					List<AbstractFluidType> list = new ArrayList<>(target.getPsychoactiveFluidsIngested());
-					AbstractFluidType fluid = list.get(Util.random.nextInt(list.size()));
+					List<FluidType> list = new ArrayList<>(target.getPsychoactiveFluidsIngested());
+					FluidType fluid = list.get(Util.random.nextInt(list.size()));
 					String npcName = UtilText.generateSingularDeterminer(fluid.getRace().getName(false))+" "+fluid.getRace().getName(false);
 					switch(fluid.getBaseType()) {
 						case CUM:
@@ -3616,7 +3613,7 @@ public interface StatusEffect {
 					+ " With [npc.her] thirst temporarily quenched, and with the memory of such a fine beverage still fresh in [npc.her] mind, [npc.sheIs] able to focus and concentrate on the task at hand.");
 		}
 	};
-	
+
 	public static AbstractStatusEffect DRUNK_1 = new AbstractStatusEffect(80,
 			"Intoxicated I - Tipsy",
 			"drunk1",
@@ -3810,7 +3807,7 @@ public interface StatusEffect {
 				long timeLeft = oneDayLater - now;
 				long hoursLeft = timeLeft / 60;
 				long minutesLeft = timeLeft % 60;
-				AbstractRace fluidRace = addiction.getFluid().getRace();
+				Race fluidRace = addiction.getFluid().getRace();
 				extraEffects.add("<b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>: "
 						+ (timeLeft > 0
 								?" [style.colourGood("+hoursLeft+":"+String.format("%02d", minutesLeft)+")]"
@@ -3876,7 +3873,7 @@ public interface StatusEffect {
 						long timeLeft = twoDaysLater - now;
 						long hoursLeft = timeLeft / 60;
 						long minutesLeft = timeLeft % 60;
-						AbstractRace fluidRace = addiction.getFluid().getRace();
+						Race fluidRace = addiction.getFluid().getRace();
 						sb.append("<br/>"
 								+ "[style.boldArcane(Addictive)]"
 								+ " <b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>: "
@@ -3939,7 +3936,7 @@ public interface StatusEffect {
 						long timeLeft = threeDaysLater - now;
 						long hoursLeft = timeLeft / 60;
 						long minutesLeft = timeLeft % 60;
-						AbstractRace fluidRace = addiction.getFluid().getRace();
+						Race fluidRace = addiction.getFluid().getRace();
 						sb.append("<br/>"
 								+ "[style.boldArcane(Addictive)]"
 								+ " <b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>: "
@@ -4002,7 +3999,7 @@ public interface StatusEffect {
 						long timeLeft = fourDaysLater - now;
 						long hoursLeft = timeLeft / 60;
 						long minutesLeft = timeLeft % 60;
-						AbstractRace fluidRace = addiction.getFluid().getRace();
+						Race fluidRace = addiction.getFluid().getRace();
 						sb.append("<br/>"
 								+ "[style.boldArcane(Addictive)]"
 								+ " <b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>: "
@@ -4065,7 +4062,7 @@ public interface StatusEffect {
 						long timeLeft = fiveDaysLater - now;
 						long hoursLeft = timeLeft / 60;
 						long minutesLeft = timeLeft % 60;
-						AbstractRace fluidRace = addiction.getFluid().getRace();
+						Race fluidRace = addiction.getFluid().getRace();
 						sb.append("<br/>"
 								+ "[style.boldArcane(Addictive)]"
 								+ " <b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>: "
@@ -4124,7 +4121,7 @@ public interface StatusEffect {
 					long now = Main.game.getMinutesPassed();
 					
 					if (fiveDaysLater <= now) {
-						AbstractRace fluidRace = addiction.getFluid().getRace();
+						Race fluidRace = addiction.getFluid().getRace();
 						sb.append("<br/>"
 								+ "[style.boldArcane(Addictive)]"
 								+ " <b style='color:"+fluidRace.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(fluidRace.getName(fluidRace!=Race.DEMON))+" "+addiction.getFluid().getBaseType().getNames().get(0)+"</b>.");
@@ -6125,7 +6122,7 @@ public interface StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -6258,7 +6255,7 @@ public interface StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -6386,7 +6383,7 @@ public interface StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -6507,7 +6504,7 @@ public interface StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -6622,7 +6619,7 @@ public interface StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -6755,7 +6752,7 @@ public interface StatusEffect {
 			}
 		}
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -6882,7 +6879,7 @@ public interface StatusEffect {
 					:"Yummy meal";
 		}
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -6961,7 +6958,7 @@ public interface StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -1f)),
 			Util.newArrayListOfValues("<b style='color: " + PresetColour.ATTRIBUTE_CORRUPTION.toWebHexString() + "'>Dirties clothing</b>")) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(isCumEffectPositive(target)) {
 				return Util.newHashMapOfValues(	new Value<>(Attribute.MAJOR_PHYSIQUE, 1f));
 				
@@ -8380,7 +8377,7 @@ public interface StatusEffect {
 	
 	
 	// JOB/OCCUPATION EFFECTS:
-	
+
 	public static AbstractStatusEffect COMBAT_JOB_SOLDIER = new AbstractStatusEffect(10,
 			"Controlled Aggression",
 			"res/perks/jobs/soldier",
@@ -8397,8 +8394,8 @@ public interface StatusEffect {
 			return true;
 		}
 	};
-	
-	
+
+
 	// CLOTHING SETS:
 	
 	public static AbstractStatusEffect SET_MAID = new AbstractStatusEffect(70,
@@ -8743,7 +8740,7 @@ public interface StatusEffect {
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, -15f)),
 			null) {
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			if(target!=null && target.hasFetish(Fetish.FETISH_BONDAGE_VICTIM)) {
 				return Util.newHashMapOfValues(
 						new Value<>(Attribute.HEALTH_MAXIMUM, 10f),
@@ -9024,7 +9021,7 @@ public interface StatusEffect {
 			return SetBonus.getSetBonusFromId("innoxia_sturdy_steed").isCharacterWearingCompleteSet(target);
 		}
 	};
-	
+
 	public static AbstractStatusEffect CLOTHING_EFFECT = new AbstractStatusEffect(70,
 			"clothing effects",
 			"combatHidden",
@@ -9063,7 +9060,7 @@ public interface StatusEffect {
 			return UtilText.parse(target, "Arcane-infused consumables are very common in this world, and as [npc.nameHasFull] found out, they can have some rather curious effects...");
 		}
 		@Override
-		public Map<AbstractAttribute, Float> getAttributeModifiers(GameCharacter target) {
+		public Map<Attribute, Float> getAttributeModifiers(GameCharacter target) {
 			return target.getPotionAttributes();
 		}
 		@Override
@@ -9073,7 +9070,7 @@ public interface StatusEffect {
 			modifiersList.addAll(getExtraEffects(target));
 			
 			if (getAttributeModifiers(target) != null) {
-				for (Entry<AbstractAttribute, Float> e : getAttributeModifiers(target).entrySet()) {
+				for (Entry<Attribute, Float> e : getAttributeModifiers(target).entrySet()) {
 					modifiersList.add("<b>" + (e.getValue() > 0 ? "+" : "") + e.getValue() + "</b>" + " <b style='color: " + e.getKey().getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(e.getKey().getAbbreviatedName()) + "</b>");
 				}
 			}
@@ -12054,9 +12051,9 @@ public interface StatusEffect {
 		@Override
 		public List<String> getModifiersAsStringList(GameCharacter target) {
 			List<String> modList = new ArrayList<>();
-			List<AbstractFetish> orderedFetishList = new ArrayList<>();
+			List<Fetish> orderedFetishList = new ArrayList<>();
 			
-			for(AbstractFetish f : Fetish.getAllFetishes()) {
+			for(Fetish f : Fetish.getAllFetishes()) {
 				FetishDesire desire = target.getFetishDesire(f);
 				if(desire!=FetishDesire.TWO_NEUTRAL) {
 					orderedFetishList.add(f);
@@ -12064,7 +12061,7 @@ public interface StatusEffect {
 			}
 			orderedFetishList.sort((e1, e2) -> target.getFetishDesire(e2).compareTo(target.getFetishDesire(e1)));
 
-			for(AbstractFetish f : orderedFetishList) {
+			for(Fetish f : orderedFetishList) {
 				FetishDesire desire = target.getFetishDesire(f);
 				modList.add("<b style='color:"+desire.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(desire.getNameAsVerb())+"</b>: "+Util.capitaliseSentence(f.getShortDescriptor(target)));
 			}
@@ -14765,7 +14762,7 @@ public interface StatusEffect {
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
-	public static AbstractStatusEffect getStatusEffectFromId(String id) {
+	public static StatusEffect getStatusEffectFromId(String id) {
 		return table.of(id);
 	}
 
@@ -14785,17 +14782,17 @@ public interface StatusEffect {
 		}
 		return id;
 	}
-	
+
 	public static String getIdFromStatusEffect(AbstractStatusEffect perk) {
 		return perk.getId();
 	}
 
 	Table table = new Table();
 
-	final class Table extends com.lilithsthrone.utils.Table<AbstractStatusEffect> {
-		private static final List<AbstractStatusEffect> allStatusEffectsRequiringApplicationCheck = new ArrayList<>();
-		private static final List<AbstractStatusEffect> allStatusEffectsRequiringApplicationCheckNonCombat = new ArrayList<>();
-		private static final List<AbstractStatusEffect> preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted = new ArrayList<>();
+	final class Table extends com.lilithsthrone.utils.Table<StatusEffect> {
+		private static final List<StatusEffect> allStatusEffectsRequiringApplicationCheck = new ArrayList<>();
+		private static final List<StatusEffect> allStatusEffectsRequiringApplicationCheckNonCombat = new ArrayList<>();
+		private static final List<StatusEffect> preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted = new ArrayList<>();
 		private Table() {
 			super(s->s);
 		// Modded status effects:
@@ -14818,12 +14815,12 @@ public interface StatusEffect {
 	static void add(AbstractStatusEffect e) {
 		table.add(e.getId(),e);
 	}
-	
-	public static List<AbstractStatusEffect> getAllStatusEffects() {
+
+	static List<StatusEffect> getAllStatusEffects() {
 		return table.list();
 	}
-	
-	public static List<AbstractStatusEffect> getAllStatusEffectsRequiringApplicationCheck() {
+
+	static List<StatusEffect> getAllStatusEffectsRequiringApplicationCheck() {
 		if(!Main.game.isStarted()) {
 			if(Table.preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted==null) {
 				Table.preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted.addAll(table.list());
@@ -14833,7 +14830,7 @@ public interface StatusEffect {
 		}
 		var allStatusEffectsRequiringApplicationCheck = Table.allStatusEffectsRequiringApplicationCheck;
 		if(allStatusEffectsRequiringApplicationCheck.isEmpty()) { // Initialise on first call
-			for(AbstractStatusEffect se : table.list()) {
+			for(StatusEffect se : table.list()) {
 				se.isConditionsMet(Main.game.getPlayer()); // To initialise the variable
 				if(se.isRequiresApplicationCheck()) {
 					allStatusEffectsRequiringApplicationCheck.add(se);

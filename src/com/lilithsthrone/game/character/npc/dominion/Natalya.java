@@ -65,7 +65,6 @@ import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.item.TransformativePotion;
 import com.lilithsthrone.game.sex.LubricationType;
@@ -491,7 +490,7 @@ public class Natalya extends NPC {
 	
 	@Override
 	public TransformativePotion generateTransformativePotion(GameCharacter target) {
-		AbstractItemType itemType = ItemType.getItemTypeFromId("innoxia_race_horse_sugar_carrot_cube");
+		var itemType = ItemType.getItemTypeFromId("innoxia_race_horse_sugar_carrot_cube");
 		
 		List<PossibleItemEffect> effects = new ArrayList<>();
 

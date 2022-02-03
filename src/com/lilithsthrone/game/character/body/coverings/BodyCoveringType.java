@@ -1064,7 +1064,7 @@ public interface BodyCoveringType {
 	
 	Table table = new Table();
 
-	public static AbstractBodyCoveringType getBodyCoveringTypeFromId(String id) {
+	static BodyCoveringType getBodyCoveringTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -1118,7 +1118,7 @@ public interface BodyCoveringType {
 		return id;
 	}
 	
-	public static String getIdFromBodyCoveringType(AbstractBodyCoveringType bct) {
+	static String getIdFromBodyCoveringType(BodyCoveringType bct) {
 		return bct.getId();
 	}
 	
@@ -1127,16 +1127,16 @@ public interface BodyCoveringType {
 	 * @param category The BodyCoveringCategory which you want to find the AbstractBodyCoveringType of.
 	 * @return The AbstractBodyCoveringType which corresponds to the supplied material and category.
 	 */
-	public static AbstractBodyCoveringType getMaterialBodyCoveringType(BodyMaterial material, BodyCoveringCategory category) {
-		return getBodyCoveringTypeFromId(material.toString()+"_"+category.toString());
+	static BodyCoveringType getMaterialBodyCoveringType(BodyMaterial material, BodyCoveringCategory category) {
+		return table.of(material.toString()+"_"+category.toString());
 	}
 
 
-	final class Table extends com.lilithsthrone.utils.Table<AbstractBodyCoveringType> {
+	final class Table extends com.lilithsthrone.utils.Table<BodyCoveringType> {
 
-		private static ArrayList<AbstractBodyCoveringType> allMakeupTypes = new ArrayList<>();
+		private static final ArrayList<BodyCoveringType> allMakeupTypes = new ArrayList<>();
 
-		private static ArrayList<AbstractBodyCoveringType> allSlimeTypes = new ArrayList<>();
+		private static final ArrayList<BodyCoveringType> allSlimeTypes = new ArrayList<>();
 
 		private static ArrayList<AbstractBodyCoveringType> allSiliconeTypes = new ArrayList<>();
 
@@ -1228,7 +1228,7 @@ public interface BodyCoveringType {
 							allSlimeTypes.add(bct);
 						}
 					}
-					
+
 				} else if(mat==BodyMaterial.SILICONE) { // Doll covering types:
 
 					for(BodyCoveringCategory cat : BodyCoveringCategory.values()) {
@@ -1408,7 +1408,7 @@ public interface BodyCoveringType {
 								case MAKEUP:
 									break;
 							}
-							AbstractBodyCoveringType bct = new AbstractBodyCoveringType(cat, BodyCoveringTemplateFactory.createElemental(name, modifier, pattern, naturalColours)) {};
+							var bct = new AbstractBodyCoveringType(cat, BodyCoveringTemplateFactory.createElemental(name, modifier, pattern, naturalColours)) {};
 							
 							add(bct.id=mat+"_"+cat,bct);
 						}
@@ -1417,18 +1417,18 @@ public interface BodyCoveringType {
 				
 			}
 		}
-		
+
 	}
-	
-	public static List<AbstractBodyCoveringType> getAllBodyCoveringTypes() {
+
+	static List<BodyCoveringType> getAllBodyCoveringTypes() {
 		return table.list();
 	}
 	
-	public static List<AbstractBodyCoveringType> getAllMakeupTypes() {
+	static List<BodyCoveringType> getAllMakeupTypes() {
 		return Table.allMakeupTypes;
 	}
 	
-	public static List<AbstractBodyCoveringType> getAllSlimeTypes() {
+	static List<BodyCoveringType> getAllSlimeTypes() {
 		return Table.allSlimeTypes;
 	}
 

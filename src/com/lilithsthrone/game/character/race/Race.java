@@ -19,7 +19,6 @@ import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.valueEnums.Affinity;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.combat.CombatBehaviour;
 import com.lilithsthrone.main.Main;
@@ -38,7 +37,7 @@ public interface Race {
 
 	String getId();
 
-	AbstractRacialBody getRacialBody();
+	RacialBody getRacialBody();
 
 	/**
 	 * Applies any special racial changes to the body which is passed in. This is called <b>before</b> Subspecies.applySpeciesChanges()
@@ -87,13 +86,15 @@ public interface Race {
 	/**
 	 * <b>Should only be used in Subspecies' getDamageMultiplier() method!</b>
 	 */
-	AbstractAttribute getDefaultDamageMultiplier();
+	default Attribute getDefaultDamageMultiplier() {
+		return DamageAttribute.of(this);
+	}
 
 	FurryPreference getDefaultFemininePreference();
 
 	FurryPreference getDefaultMasculinePreference();
 
-	Map<AbstractFetish,Map<String,Integer>> getRacialFetishModifiers();
+	Map<Fetish,Map<String,Integer>> getRacialFetishModifiers();
 
 	public static AbstractRace NONE = new AbstractRace("no race",
 			"no race",
@@ -111,7 +112,7 @@ public interface Race {
 			FurryPreference.NORMAL,
 			false) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.HUMAN;
 		}
 	};
@@ -137,7 +138,7 @@ public interface Race {
 			return false;
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.HUMAN;
 		}
 	};
@@ -167,7 +168,7 @@ public interface Race {
 			return false;
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.ANGEL;
 		}
 	};
@@ -236,7 +237,7 @@ public interface Race {
 //		@Override
 //		private String getFeralName(LegConfiguration legConfiguration, boolean plural) {
 //			AbstractRace r = character.getLegType().getRace();
-//			
+//
 //			if(plural) {
 //				switch(character.getLegConfiguration()) {
 //					case ARACHNID:
@@ -262,7 +263,7 @@ public interface Race {
 //								?"demonic-snakes"
 //								:"demonic-"+r.getNamePlural(character, true);
 //				}
-//				
+//
 //			} else {
 //				switch(character.getLegConfiguration()) {
 //					case ARACHNID:
@@ -291,7 +292,7 @@ public interface Race {
 //			}
 //			return "demon";
 //		}
-		
+
 //		@Override
 //		public String getName(GameCharacter character, boolean feral) {
 //			if(feral) {
@@ -311,7 +312,7 @@ public interface Race {
 //			return "demon";
 //		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.DEMON;
 		}
 	};
@@ -333,12 +334,12 @@ public interface Race {
 				FurryPreference.NORMAL,
 				true) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.COW_MORPH;
 		}
-		
+
 		@Override
-		public Map<AbstractFetish, Map<String, Integer>> getRacialFetishModifiers() {
+		public Map<Fetish, Map<String, Integer>> getRacialFetishModifiers() {
 			return Util.newHashMapOfValues(
 					new Value<>(Fetish.FETISH_BREASTS_SELF,
 							Util.newHashMapOfValues(
@@ -371,7 +372,7 @@ public interface Race {
 			}
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.DOG_MORPH;
 		}
 	};
@@ -419,11 +420,11 @@ public interface Race {
 			}
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.WOLF_MORPH;
 		}
 	};
-	
+
 	public static AbstractRace FOX_MORPH = new AbstractRace("fox-morph",
 				"fox-morphs",
 				"fox",
@@ -447,11 +448,11 @@ public interface Race {
 			}
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.FOX_MORPH;
 		}
 	};
-	
+
 
 	// FELINES:
 	public static AbstractRace CAT_MORPH = new AbstractRace("cat-morph",
@@ -490,7 +491,7 @@ public interface Race {
 			return super.getNamePlural(body, feral);
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.CAT_MORPH;
 		}
 	};
@@ -509,7 +510,7 @@ public interface Race {
 //			FurryPreference.NORMAL,
 //			FurryPreference.NORMAL,
 //			true),
-	
+
 	// EQUINE:
 	public static AbstractRace HORSE_MORPH = new AbstractRace("horse-morph",
 				"horse-morphs",
@@ -553,12 +554,12 @@ public interface Race {
 			}
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.HORSE_MORPH;
 		}
 	};
 
-	
+
 	public static AbstractRace REINDEER_MORPH = new AbstractRace("reindeer-morph",
 				"reindeer-morphs",
 				"reindeer",
@@ -575,11 +576,11 @@ public interface Race {
 				FurryPreference.NORMAL,
 				true) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.REINDEER_MORPH;
 		}
 	};
-			
+
 
 	public static AbstractRace SQUIRREL_MORPH = new AbstractRace("squirrel-morph",
 				"squirrel-morphs",
@@ -597,7 +598,7 @@ public interface Race {
 				FurryPreference.NORMAL,
 				true) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.SQUIRREL_MORPH;
 		}
 	};
@@ -625,7 +626,7 @@ public interface Race {
 			}
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.RAT_MORPH;
 		}
 	};
@@ -646,12 +647,12 @@ public interface Race {
 				FurryPreference.NORMAL,
 				true) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.RABBIT_MORPH;
 		}
-		
+
 		@Override
-		public Map<AbstractFetish, Map<String, Integer>> getRacialFetishModifiers() {
+		public Map<Fetish, Map<String, Integer>> getRacialFetishModifiers() {
 			return Util.newHashMapOfValues(
 					new Value<>(Fetish.FETISH_IMPREGNATION,
 							Util.newHashMapOfValues(
@@ -663,7 +664,7 @@ public interface Race {
 									new Value<>("like", 5))));
 		}
 	};
-	
+
 	public static AbstractRace BAT_MORPH = new AbstractRace("bat-morph",
 				"bat-morphs",
 				"bat",
@@ -684,11 +685,11 @@ public interface Race {
 			return true;
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.BAT_MORPH;
 		}
 	};
-	
+
 	public static AbstractRace ALLIGATOR_MORPH = new AbstractRace("alligator-morph",
 				"alligator-morphs",
 				"alligator",
@@ -705,7 +706,7 @@ public interface Race {
 				FurryPreference.NORMAL,
 				true) {
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.ALLIGATOR_MORPH;
 		}
 	};
@@ -745,15 +746,15 @@ public interface Race {
 			return true;
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.HARPY;
 		}
 	};
 	
-	
+
 	// ********** SPECIAL RACES ********** //
-	
-	
+
+
 	// SLIME:
 	public static AbstractRace SLIME = new AbstractRace("slime",
 			"slimes",
@@ -779,7 +780,7 @@ public interface Race {
 			return RacialBody.HUMAN;
 		}
 	};
-	
+
 	// DOLLS:
 	public static AbstractRace DOLL = new AbstractRace("doll",
 			"dolls",
@@ -805,7 +806,7 @@ public interface Race {
 			return RacialBody.HUMAN;
 		}
 	};
-	
+
 	// ELEMENTALS:
 	public static AbstractRace ELEMENTAL = new AbstractRace("elemental",
 				"elementals",
@@ -827,7 +828,7 @@ public interface Race {
 			return true;
 		}
 		@Override
-		public AbstractRacialBody getRacialBody() {
+		public RacialBody getRacialBody() {
 			return RacialBody.DEMON;
 		}
 	};
@@ -1496,15 +1497,15 @@ public interface Race {
 	/**
 	 * @param id Will be in the format of: 'innoxia_hyena'.
 	 */
-	public static AbstractRace getRaceFromId(String id) {
+	static Race getRaceFromId(String id) {
 		return table.of(id);
 	}
-	
-	public static String getIdFromRace(AbstractRace race) {
+
+	static String getIdFromRace(Race race) {
 		return race.getId();
 	}
-	
-	Table<AbstractRace> table = new Table<>(s->s) {{
+
+	Table<Race> table = new Table<>(s->s) {{
 		// Modded races:
 		forEachMod("/race",null,"race",(f,n,a)->{
 			if(!Util.getXmlRootElementName(f).equals("race"))
@@ -1526,17 +1527,15 @@ public interface Race {
 		// Hard-coded:
 		addFields(Race.class,AbstractRace.class,(k,v)->v.id=k);
 
-		for(AbstractRace race : list()) {
+		for(Race race : list()) {
 			if(race!=Race.NONE) {
-				var racialAttribute = new DamageAttribute(race);
-				String id = "DAMAGE_"+Race.getIdFromRace(race);
-				DamageAttribute.map.put(race,racialAttribute);
-				Attribute.addAttribute(id,racialAttribute);
+				var a = DamageAttribute.of(race);
+				Attribute.table.add(a.getId(),a);
 			}
 		}
 	}};
 
-	public static List<AbstractRace> getAllRaces() {
+	static List<Race> getAllRaces() {
 		return table.list().stream()
 		.sorted(Comparator.comparing(r->r.getName(false)))
 		.collect(Collectors.toList());
@@ -1549,13 +1548,18 @@ public interface Race {
 	 */
 	final class DamageAttribute extends AbstractAttribute {
 
-		private final AbstractRace race;
+		private final Race race;
 
-		private static final HashMap<AbstractRace,DamageAttribute> map = new HashMap<>();
+		private static final HashMap<Race,DamageAttribute> map = new HashMap<>();
 
-		private DamageAttribute(AbstractRace r) {
+		private DamageAttribute(Race r) {
 			super(true,0,-100,100,r.getName(true)+" damage",Util.capitaliseSentence(r.getName(true))+" damage","swordIcon",r.getColour(),r.getName(true)+"-obliteration",r.getName(true)+"-mercy",null);
 			race = r;
+		}
+
+		@Override
+		public String getId() {
+			return "DAMAGE_"+race.getId();
 		}
 
 		@Override
@@ -1563,7 +1567,7 @@ public interface Race {
 			return "Increases damage vs "+race.getNamePlural(true)+".";
 		}
 
-		public static DamageAttribute of(AbstractRace race) {
+		public static DamageAttribute of(Race race) {
 			return map.computeIfAbsent(race,DamageAttribute::new);
 		}
 	}

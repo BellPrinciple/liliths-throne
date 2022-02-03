@@ -11,7 +11,7 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.SexActionInteractions;
 import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexType;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.VariableInteractions;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.PositioningMenu;
 import com.lilithsthrone.main.Main;
@@ -138,7 +138,7 @@ public class SexSlot {
 		return Main.sex.getCharacterInPosition(targetedSlot);
 	}
 		
-	public boolean isMeetsPreferenceCriteria(GameCharacter character, AbstractSexPosition position, SexSlot targetedSlot, SexType preference) {
+	public boolean isMeetsPreferenceCriteria(GameCharacter character, SexPosition position, SexSlot targetedSlot, SexType preference) {
 		VariableInteractions.setCharacterForPositionTesting(character);
 		
 		if(position.getSlotTargets().containsKey(this)) {

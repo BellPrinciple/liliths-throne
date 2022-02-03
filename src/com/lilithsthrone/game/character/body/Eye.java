@@ -1,9 +1,9 @@
 package com.lilithsthrone.game.character.body;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
+import com.lilithsthrone.game.character.body.types.EyeType;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
 import com.lilithsthrone.game.character.body.valueEnums.EyeShape;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -18,12 +18,12 @@ public class Eye implements BodyPartInterface {
 
 	public static final int MAXIMUM_PAIRS = 4;
 	
-	protected AbstractEyeType type;
+	protected EyeType type;
 	protected int eyePairs;
 	protected EyeShape irisShape;
 	protected EyeShape pupilShape;
 	
-	public Eye(AbstractEyeType type) {
+	public Eye(EyeType type) {
 		this.type = type;
 		eyePairs = type.getDefaultPairCount();
 		irisShape = type.getDefaultIrisShape();
@@ -38,7 +38,7 @@ public class Eye implements BodyPartInterface {
 	}
 	
 	@Override
-	public AbstractEyeType getType() {
+	public EyeType getType() {
 		return type;
 	}
 	
@@ -67,7 +67,7 @@ public class Eye implements BodyPartInterface {
 		return type.getDescriptor(gc);
 	}
 	
-	public String setType(GameCharacter owner, AbstractEyeType type) {
+	public String setType(GameCharacter owner, EyeType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;
 			irisShape = type.getDefaultIrisShape();

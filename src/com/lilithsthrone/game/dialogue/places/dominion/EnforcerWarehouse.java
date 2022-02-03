@@ -3,8 +3,6 @@ package com.lilithsthrone.game.dialogue.places.dominion;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
@@ -16,7 +14,6 @@ import com.lilithsthrone.game.character.npc.submission.Claire;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -32,17 +29,14 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.sex.SexControl;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
@@ -88,10 +82,10 @@ public class EnforcerWarehouse {
 	
 	private static EnforcerWarehouseGuard generateGuard(Occupation occupation) {
 		Gender gender = Gender.getGenderFromUserPreferences(false, false);
-		Map<AbstractSubspecies, Integer> subspeciesMap = new HashMap<>();
+		var subspeciesMap = new HashMap<Subspecies,Integer>();
 		
 		// Make SWORD guards a predator subspecies:
-		List <AbstractSubspecies> subspeciesAvailable = Util.newArrayListOfValues(
+		var subspeciesAvailable = Util.newArrayListOfValues(
 				Subspecies.getSubspeciesFromId("innoxia_panther_subspecies_tiger"),
 				Subspecies.getSubspeciesFromId("innoxia_panther_subspecies_lion"),
 				Subspecies.getSubspeciesFromId("innoxia_panther_subspecies_leopard"),
@@ -100,7 +94,7 @@ public class EnforcerWarehouse {
 				Subspecies.FOX_MORPH,
 				Subspecies.WOLF_MORPH);
 		
-		for(AbstractSubspecies subspecies : subspeciesAvailable) {
+		for(var subspecies : subspeciesAvailable) {
 			if(gender.isFeminine()) {
 				if(Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().get(subspecies)!=FurryPreference.HUMAN
 						&& Main.getProperties().getSubspeciesFemininePreferencesMap().get(subspecies).getValue()>0) {
@@ -114,13 +108,13 @@ public class EnforcerWarehouse {
 			}
 		}
 		if(gender.isFeminine()) {
-			for(Entry<AbstractSubspecies, FurryPreference> entry : Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().entrySet()) {
+			for(var entry : Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().entrySet()) {
 				if(entry.getValue() == FurryPreference.HUMAN) {
 					subspeciesMap.remove(entry.getKey());
 				}
 			}
 		} else {
-			for(Entry<AbstractSubspecies, FurryPreference> entry : Main.getProperties().getSubspeciesMasculineFurryPreferencesMap().entrySet()) {
+			for(var entry : Main.getProperties().getSubspeciesMasculineFurryPreferencesMap().entrySet()) {
 				if(entry.getValue() == FurryPreference.HUMAN) {
 					subspeciesMap.remove(entry.getKey());
 				}
@@ -144,7 +138,7 @@ public class EnforcerWarehouse {
 			}
 			
 		} else {
-			AbstractSubspecies species = Util.getRandomObjectFromWeightedMap(subspeciesMap);
+			var species = Util.getRandomObjectFromWeightedMap(subspeciesMap);
 			RaceStage stage = RaceStage.GREATER;
 			if(gender.isFeminine()) {
 				stage = Main.game.getCharacterUtils().getRaceStageFromPreferences(Main.getProperties().getSubspeciesFeminineFurryPreferencesMap().get(species), gender, species);
@@ -590,7 +584,7 @@ public class EnforcerWarehouse {
 							
 							double rnd = Math.random();
 							if(rnd<0.25) {
-								List<AbstractClothingType> clothingToGenerate = new ArrayList<>(ClothingType.getAllClothing());
+								var clothingToGenerate = new ArrayList<>(ClothingType.getAllClothing());
 								clothingToGenerate.removeIf((clothing) -> !clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN));
 								
 								AbstractClothing clothing = Main.game.getItemGen().generateClothing(Util.randomItemFrom(clothingToGenerate), false);
@@ -602,7 +596,7 @@ public class EnforcerWarehouse {
 								Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(clothing, 1, false, true));
 								
 							} else if(rnd < 0.5) {
-								List<AbstractWeaponType> weaponToGenerate = new ArrayList<>(WeaponType.getAllWeapons());
+								var weaponToGenerate = new ArrayList<>(WeaponType.getAllWeapons());
 								weaponToGenerate.removeIf((weapon) -> (weapon.getRarity()!=Rarity.RARE && weapon.getRarity()!=Rarity.EPIC) || !weapon.getItemTags().contains(ItemTag.SOLD_BY_VICKY));
 								
 								AbstractWeapon weapon = Main.game.getItemGen().generateWeapon(Util.randomItemFrom(weaponToGenerate));
@@ -610,7 +604,7 @@ public class EnforcerWarehouse {
 								Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addWeapon(weapon, 1, false, true));
 								
 							} else {
-								List<AbstractItemType> itemTypes = Util.newArrayListOfValues(ItemType.getItemTypeFromId("BOTTLED_ESSENCE_DEMON"), ItemType.getItemTypeFromId("innoxia_race_demon_liliths_gift"), ItemType.FETISH_UNREFINED);
+								var itemTypes = Util.newArrayListOfValues(ItemType.getItemTypeFromId("BOTTLED_ESSENCE_DEMON"), ItemType.getItemTypeFromId("innoxia_race_demon_liliths_gift"), ItemType.FETISH_UNREFINED);
 								AbstractItem item = Main.game.getItemGen().generateItem(Util.randomItemFrom(itemTypes));
 								Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addItem(item, 3+Util.random.nextInt(6), false, true));
 							}

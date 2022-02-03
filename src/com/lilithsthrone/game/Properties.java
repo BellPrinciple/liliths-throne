@@ -23,7 +23,6 @@ import org.w3c.dom.NodeList;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.body.valueEnums.AgeCategory;
 import com.lilithsthrone.game.character.body.valueEnums.CupSize;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.AndrogynousIdentification;
 import com.lilithsthrone.game.character.gender.Gender;
@@ -31,18 +30,14 @@ import com.lilithsthrone.game.character.gender.GenderNames;
 import com.lilithsthrone.game.character.gender.GenderPronoun;
 import com.lilithsthrone.game.character.gender.PronounType;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesPreference;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntryEncyclopediaUnlock;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.settings.DifficultyLevel;
 import com.lilithsthrone.game.settings.ForcedFetishTendency;
@@ -101,13 +96,13 @@ public class Properties {
 	public static String[] multiBreastsDescriptions = new String[] {
 			"Randomly-generated NPCs will never have multiple rows of breasts, and most unique NPCs will no longer have multi-boobs."
 				+"<br/><i>Characters will no longer gain additional breasts via transformations.</i>",
-				
+
 			"Randomly-generated NPCs will never have multiple rows of breasts."
 				+"<br/><i>Characters can always gain additional breasts via transformations after they've spawned.</i>",
-				
+
 			"Randomly-generated NPCs will only have multiple rows of breasts if they have furry skin. (Default setting.)"
 				+"<br/><i>Characters can always gain additional breasts via transformations after they've spawned.</i>",
-				
+
 			"Randomly-generated NPCs will have multiple rows of breasts if their breast type is furry (starts at 'Minor morph' level)."
 				+"<br/><i>Characters can always gain additional breasts via transformations after they've spawned.</i>"};
 	
@@ -174,7 +169,7 @@ public class Properties {
 			"Only clothing which is marked as 'masculine' will retain its femininty value, resulting in masculine characters being able to wear any clothing without penalty.",
 			"Only clothing which is marked as 'feminine' will retain its femininty value, resulting in feminine characters being able to wear any clothing without penalty.",
 			"All clothing will have their intended femininity values, resulting in a negative status effect for characters who wear clothing that's either too masculine or too feminine for them."};
-	
+
 	public Set<PropertyValue> values;
 
 	// Difficulty settings
@@ -196,15 +191,15 @@ public class Properties {
 	public Map<Gender, Integer> genderPreferencesMap;
 	
 	public Map<SexualOrientation, Integer> orientationPreferencesMap;
-	public Map<AbstractFetish, Integer> fetishPreferencesMap;
+	public Map<Fetish, Integer> fetishPreferencesMap;
 
 	public Map<PronounType, Map<AgeCategory, Integer>> agePreferencesMap;
 	
-	private Map<AbstractSubspecies, FurryPreference> subspeciesFeminineFurryPreferencesMap;
-	private Map<AbstractSubspecies, FurryPreference> subspeciesMasculineFurryPreferencesMap;
+	private Map<Subspecies, FurryPreference> subspeciesFeminineFurryPreferencesMap;
+	private Map<Subspecies, FurryPreference> subspeciesMasculineFurryPreferencesMap;
 	
-	private Map<AbstractSubspecies, SubspeciesPreference> subspeciesFemininePreferencesMap;
-	private Map<AbstractSubspecies, SubspeciesPreference> subspeciesMasculinePreferencesMap;
+	private Map<Subspecies, SubspeciesPreference> subspeciesFemininePreferencesMap;
+	private Map<Subspecies, SubspeciesPreference> subspeciesMasculinePreferencesMap;
 
 	public Map<Colour, Integer> skinColourPreferencesMap;
 	
@@ -214,11 +209,11 @@ public class Properties {
 	private ForcedFetishTendency forcedFetishTendency;
 	
 	// Discoveries:
-	private Set<AbstractItemType> itemsDiscovered;
-	private Set<AbstractWeaponType> weaponsDiscovered;
-	private Set<AbstractClothingType> clothingDiscovered;
-	private Set<AbstractSubspecies> subspeciesDiscovered;
-	private Set<AbstractSubspecies> subspeciesAdvancedKnowledge;
+	private Set<ItemType> itemsDiscovered;
+	private Set<WeaponType> weaponsDiscovered;
+	private Set<ClothingType> clothingDiscovered;
+	private Set<Subspecies> subspeciesDiscovered;
+	private Set<Subspecies> subspeciesAdvancedKnowledge;
 
 	public Properties() {
 		values = new HashSet<>();
@@ -268,14 +263,14 @@ public class Properties {
 		
 		subspeciesFeminineFurryPreferencesMap = new HashMap<>();
 		subspeciesMasculineFurryPreferencesMap = new HashMap<>();
-		for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+		for(Subspecies s : Subspecies.getAllSubspecies()) {
 			subspeciesFeminineFurryPreferencesMap.put(s, s.getDefaultFemininePreference());
 			subspeciesMasculineFurryPreferencesMap.put(s, s.getDefaultMasculinePreference());
 		}
 		
 		subspeciesFemininePreferencesMap = new HashMap<>();
 		subspeciesMasculinePreferencesMap = new HashMap<>();
-		for(AbstractSubspecies s : Subspecies.getAllSubspecies()) {
+		for(Subspecies s : Subspecies.getAllSubspecies()) {
 			subspeciesFemininePreferencesMap.put(s, s.getSubspeciesPreferenceDefault());
 			subspeciesMasculinePreferencesMap.put(s, s.getSubspeciesPreferenceDefault());
 		}
@@ -362,7 +357,7 @@ public class Properties {
 			createXMLElementWithValue(doc, settings, "trapPenisSizePreference", String.valueOf(trapPenisSizePreference));
 
 			createXMLElementWithValue(doc, settings, "clothingFemininityLevel", String.valueOf(clothingFemininityLevel));
-			
+
 			createXMLElementWithValue(doc, settings, "forcedFetishPercentage", String.valueOf(forcedFetishPercentage));
 
 			createXMLElementWithValue(doc, settings, "difficultyLevel", difficultyLevel.toString());
@@ -494,7 +489,7 @@ public class Properties {
 			// Fetish preferences:
 			Element fetishPreferences = doc.createElement("fetishPreferences");
 			properties.appendChild(fetishPreferences);
-			for (AbstractFetish f : Fetish.getAllFetishes()) {
+			for (Fetish f : Fetish.getAllFetishes()) {
 				Element element = doc.createElement("preference");
 				fetishPreferences.appendChild(element);
 				
@@ -533,7 +528,7 @@ public class Properties {
 			// Race preferences:
 			Element racePreferences = doc.createElement("subspeciesPreferences");
 			properties.appendChild(racePreferences);
-			for (AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+			for (Subspecies subspecies : Subspecies.getAllSubspecies()) {
 				Element element = doc.createElement("preferenceFeminine");
 				racePreferences.appendChild(element);
 				
@@ -584,7 +579,7 @@ public class Properties {
 			// Discoveries:
 			Element itemsDiscovered = doc.createElement("itemsDiscovered");
 			properties.appendChild(itemsDiscovered);
-			for (AbstractItemType itemType : this.itemsDiscovered) {
+			for (ItemType itemType : this.itemsDiscovered) {
 				try {
 					if(itemType!=null) {
 						Element element = doc.createElement("type");
@@ -598,7 +593,7 @@ public class Properties {
 			
 			Element weaponsDiscovered = doc.createElement("weaponsDiscovered");
 			properties.appendChild(weaponsDiscovered);
-			for (AbstractWeaponType weaponType : this.weaponsDiscovered) {
+			for (WeaponType weaponType : this.weaponsDiscovered) {
 				try {
 					if(weaponType!=null) {
 						Element element = doc.createElement("type");
@@ -612,7 +607,7 @@ public class Properties {
 			
 			Element clothingDiscovered = doc.createElement("clothingDiscovered");
 			properties.appendChild(clothingDiscovered);
-			for (AbstractClothingType clothingType : this.clothingDiscovered) {
+			for (ClothingType clothingType : this.clothingDiscovered) {
 				try {
 					if(clothingType!=null) {
 						Element element = doc.createElement("type");
@@ -626,7 +621,7 @@ public class Properties {
 			
 			Element racesDiscovered = doc.createElement("racesDiscovered");
 			properties.appendChild(racesDiscovered);
-			for(AbstractSubspecies subspecies : this.subspeciesDiscovered) {
+			for(Subspecies subspecies : this.subspeciesDiscovered) {
 				if(!this.subspeciesAdvancedKnowledge.contains(subspecies)) {
 					Element element = doc.createElement("race");
 					racesDiscovered.appendChild(element);
@@ -635,7 +630,7 @@ public class Properties {
 			}
 			Element racesDiscoveredAdvanced = doc.createElement("racesDiscoveredAdvanced");
 			properties.appendChild(racesDiscoveredAdvanced);
-			for(AbstractSubspecies subspecies : this.subspeciesAdvancedKnowledge) {
+			for(Subspecies subspecies : this.subspeciesAdvancedKnowledge) {
 				Element element = doc.createElement("race");
 				racesDiscoveredAdvanced.appendChild(element);
 				element.setTextContent(Subspecies.getIdFromSubspecies(subspecies));
@@ -763,7 +758,7 @@ public class Properties {
 					if(Main.isVersionOlderThan(versionNumber, "0.4.9.6")) {
 						values.add(PropertyValue.lipLispContent);
 					}
-					
+
 					
 				} else {
 					// Old values support:
@@ -1363,33 +1358,33 @@ public class Properties {
 	
 	private void applyAdditionalDiscoveries(AbstractCoreType itemType) {
 		for(AbstractCoreType it : itemType.getAdditionalDiscoveryTypes()) {
-			if(it instanceof AbstractWeaponType) {
-				Main.game.getPlayer().addWeaponDiscovered((AbstractWeaponType)it);
-				weaponsDiscovered.add((AbstractWeaponType)it);
+			if(it instanceof WeaponType) {
+				Main.game.getPlayer().addWeaponDiscovered((WeaponType)it);
+				weaponsDiscovered.add((WeaponType)it);
 			}
-			if(it instanceof AbstractClothingType) {
-				Main.game.getPlayer().addClothingDiscovered((AbstractClothingType)it);
-				clothingDiscovered.add((AbstractClothingType)it);
+			if(it instanceof ClothingType) {
+				Main.game.getPlayer().addClothingDiscovered((ClothingType)it);
+				clothingDiscovered.add((ClothingType)it);
 			}
-			if(it instanceof AbstractItemType) {
-				Main.game.getPlayer().addItemDiscovered((AbstractItemType)it);
-				itemsDiscovered.add((AbstractItemType)it);
+			if(it instanceof ItemType) {
+				Main.game.getPlayer().addItemDiscovered((ItemType)it);
+				itemsDiscovered.add((ItemType)it);
 			}
 		}
 	}
 	
 	public void completeSharedEncyclopedia() {
-		for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+		for(Subspecies subspecies : Subspecies.getAllSubspecies()) {
 			this.addRaceDiscovered(subspecies);
 			this.addAdvancedRaceKnowledge(subspecies);
 		}
-		for(AbstractItemType itemType : ItemType.getAllItems()) {
+		for(ItemType itemType : ItemType.getAllItems()) {
 			this.addItemDiscovered(itemType);
 		}
-		for(AbstractClothingType clothingType : ClothingType.getAllClothing()) {
+		for(ClothingType clothingType : ClothingType.getAllClothing()) {
 			this.addClothingDiscovered(clothingType);
 		}
-		for(AbstractWeaponType weaponType : WeaponType.getAllWeapons()) {
+		for(WeaponType weaponType : WeaponType.getAllWeapons()) {
 			this.addWeaponDiscovered(weaponType);
 		}
 	}
@@ -1401,7 +1396,7 @@ public class Properties {
 		return itemsDiscovered.size();
 	}
 	
-	public boolean addItemDiscovered(AbstractItemType itemType) {
+	public boolean addItemDiscovered(ItemType itemType) {
 		if(itemType.getItemTags().contains(ItemTag.CHEAT_ITEM)
 				|| itemType.getItemTags().contains(ItemTag.SILLY_MODE)) {
 			return false;
@@ -1418,7 +1413,7 @@ public class Properties {
 	}
 
 	/** This method <b>takes into account</b> the 'shared Encyclopedia' content setting. */
-	public boolean isItemDiscovered(AbstractItemType itemType) {
+	public boolean isItemDiscovered(ItemType itemType) {
 		if(this.hasValue(PropertyValue.sharedEncyclopedia)) {
 			return itemsDiscovered.contains(itemType);
 		}
@@ -1436,7 +1431,7 @@ public class Properties {
 		return clothingDiscovered.size();
 	}
 	
-	public boolean addClothingDiscovered(AbstractClothingType clothingType) {
+	public boolean addClothingDiscovered(ClothingType clothingType) {
 		if(clothingType.getDefaultItemTags().contains(ItemTag.CHEAT_ITEM)
 				|| clothingType.getDefaultItemTags().contains(ItemTag.SILLY_MODE)) {
 			return false;
@@ -1453,7 +1448,7 @@ public class Properties {
 	}
 
 	/** This method <b>takes into account</b> the 'shared Encyclopedia' content setting. */
-	public boolean isClothingDiscovered(AbstractClothingType clothingType) {
+	public boolean isClothingDiscovered(ClothingType clothingType) {
 		if(this.hasValue(PropertyValue.sharedEncyclopedia)) {
 			return clothingDiscovered.contains(clothingType);
 		}
@@ -1471,7 +1466,7 @@ public class Properties {
 		return weaponsDiscovered.size();
 	}
 	
-	public boolean addWeaponDiscovered(AbstractWeaponType weaponType) {
+	public boolean addWeaponDiscovered(WeaponType weaponType) {
 		if(weaponType.getItemTags().contains(ItemTag.CHEAT_ITEM)
 				|| weaponType.getItemTags().contains(ItemTag.SILLY_MODE)) {
 			return false;
@@ -1488,7 +1483,7 @@ public class Properties {
 	}
 
 	/** This method <b>takes into account</b> the 'shared Encyclopedia' content setting. */
-	public boolean isWeaponDiscovered(AbstractWeaponType weaponType) {
+	public boolean isWeaponDiscovered(WeaponType weaponType) {
 		if(this.hasValue(PropertyValue.sharedEncyclopedia)) {
 			return weaponsDiscovered.contains(weaponType);
 		}
@@ -1506,7 +1501,7 @@ public class Properties {
 		return subspeciesDiscovered.size();
 	}
 	
-	public boolean addRaceDiscovered(AbstractSubspecies subspecies) {
+	public boolean addRaceDiscovered(Subspecies subspecies) {
 		boolean playerDiscovered = Main.game.getPlayer().addRaceDiscovered(subspecies);
 		if(subspeciesDiscovered.add(subspecies) || (!this.hasValue(PropertyValue.sharedEncyclopedia) && playerDiscovered)) {
 			Main.game.addEvent(new EventLogEntryEncyclopediaUnlock(subspecies.getName(null), subspecies.getColour(null)), true);
@@ -1517,7 +1512,7 @@ public class Properties {
 	}
 
 	/** This method <b>takes into account</b> the 'shared Encyclopedia' content setting. */
-	public boolean isRaceDiscovered(AbstractSubspecies subspecies) {
+	public boolean isRaceDiscovered(Subspecies subspecies) {
 		if(this.hasValue(PropertyValue.sharedEncyclopedia)) {
 			return subspeciesDiscovered.contains(subspecies);
 		}
@@ -1535,7 +1530,7 @@ public class Properties {
 		return subspeciesAdvancedKnowledge.size();
 	}
 	
-	public boolean addAdvancedRaceKnowledge(AbstractSubspecies subspecies) {
+	public boolean addAdvancedRaceKnowledge(Subspecies subspecies) {
 		boolean playerDiscovered = Main.game.getPlayer().addAdvancedRaceKnowledge(subspecies);
 		if(subspeciesAdvancedKnowledge.add(subspecies) || (!this.hasValue(PropertyValue.sharedEncyclopedia) && playerDiscovered)) {
 			Main.game.addEvent(new EventLogEntryEncyclopediaUnlock(subspecies.getName(null)+" (Advanced)", subspecies.getColour(null)), true);
@@ -1545,13 +1540,13 @@ public class Properties {
 	}
 
 	/** This method <b>takes into account</b> the 'shared Encyclopedia' content setting. */
-	public boolean isAdvancedRaceKnowledgeDiscovered(AbstractSubspecies subspecies) {
+	public boolean isAdvancedRaceKnowledgeDiscovered(Subspecies subspecies) {
 		if(this.hasValue(PropertyValue.sharedEncyclopedia)) {
 			if(subspeciesAdvancedKnowledge.contains(subspecies)) {
 				return true;
 			}
 			// If this subspecies shares a lore book with the parent subspecies, and that parent subspecies is unlocked, then return true:
-			AbstractSubspecies coreSubspecies = AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace());
+			Subspecies coreSubspecies = Subspecies.getMainSubspeciesOfRace(subspecies.getRace());
 			if(ItemType.getLoreBook(subspecies).equals(ItemType.getLoreBook(coreSubspecies))) {
 				return subspeciesAdvancedKnowledge.contains(coreSubspecies);
 			}
@@ -1565,39 +1560,39 @@ public class Properties {
 		subspeciesAdvancedKnowledge.clear();
 	}
 	
-	public void setFeminineFurryPreference(AbstractSubspecies subspecies, FurryPreference furryPreference) {
+	public void setFeminineFurryPreference(Subspecies subspecies, FurryPreference furryPreference) {
 		if(subspecies.getRace().isAffectedByFurryPreference()) {
 			subspeciesFeminineFurryPreferencesMap.put(subspecies, furryPreference);
 		}
 	}
 	
-	public void setMasculineFurryPreference(AbstractSubspecies subspecies, FurryPreference furryPreference) {
+	public void setMasculineFurryPreference(Subspecies subspecies, FurryPreference furryPreference) {
 		if(subspecies.getRace().isAffectedByFurryPreference()) {
 			subspeciesMasculineFurryPreferencesMap.put(subspecies, furryPreference);
 		}
 	}
 	
-	public void setFeminineSubspeciesPreference(AbstractSubspecies subspecies, SubspeciesPreference subspeciesPreference) {
+	public void setFeminineSubspeciesPreference(Subspecies subspecies, SubspeciesPreference subspeciesPreference) {
 		subspeciesFemininePreferencesMap.put(subspecies, subspeciesPreference);
 	}
 	
-	public void setMasculineSubspeciesPreference(AbstractSubspecies subspecies, SubspeciesPreference subspeciesPreference) {
+	public void setMasculineSubspeciesPreference(Subspecies subspecies, SubspeciesPreference subspeciesPreference) {
 		subspeciesMasculinePreferencesMap.put(subspecies, subspeciesPreference);
 	}
 
-	public Map<AbstractSubspecies, FurryPreference> getSubspeciesFeminineFurryPreferencesMap() {
+	public Map<Subspecies, FurryPreference> getSubspeciesFeminineFurryPreferencesMap() {
 		return subspeciesFeminineFurryPreferencesMap;
 	}
 
-	public Map<AbstractSubspecies, FurryPreference> getSubspeciesMasculineFurryPreferencesMap() {
+	public Map<Subspecies, FurryPreference> getSubspeciesMasculineFurryPreferencesMap() {
 		return subspeciesMasculineFurryPreferencesMap;
 	}
 
-	public Map<AbstractSubspecies, SubspeciesPreference> getSubspeciesFemininePreferencesMap() {
+	public Map<Subspecies, SubspeciesPreference> getSubspeciesFemininePreferencesMap() {
 		return subspeciesFemininePreferencesMap;
 	}
 
-	public Map<AbstractSubspecies, SubspeciesPreference> getSubspeciesMasculinePreferencesMap() {
+	public Map<Subspecies, SubspeciesPreference> getSubspeciesMasculinePreferencesMap() {
 		return subspeciesMasculinePreferencesMap;
 	}
 
@@ -1617,7 +1612,7 @@ public class Properties {
 
 	public void resetFetishPreferences() {
 		fetishPreferencesMap = new HashMap<>();
-		for(AbstractFetish f : Fetish.getAllFetishes()) {
+		for(Fetish f : Fetish.getAllFetishes()) {
 			fetishPreferencesMap.put(f, f.getFetishPreferenceDefault().getValue());
 		}
 	}

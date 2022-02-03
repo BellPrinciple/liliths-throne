@@ -14,8 +14,8 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
+import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
@@ -26,7 +26,6 @@ import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexControl;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.SexType;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
@@ -54,7 +53,7 @@ public interface SexManagerInterface {
 						:(Main.sex.getAllParticipants(false).size()>1?"Sex: ":"Masturbation: ")+getPosition().getName());
 	}
 	
-	public AbstractSexPosition getPosition();
+	public SexPosition getPosition();
 
 	public void assignNPCTarget(GameCharacter targeter);
 	
@@ -199,12 +198,12 @@ public interface SexManagerInterface {
 		return true;
 	}
 	
-	public default List<AbstractSexPosition> getAllowedSexPositions() {
+	default List<SexPosition> getAllowedSexPositions() {
 		if(Main.sex.getAllParticipants(false).stream().anyMatch(c->c.isAsleep())) {
 			return Util.newArrayListOfValues(Main.sex.getPosition()); // If asleep, do not allow changing out of current position
 		}
-		
-		List<AbstractSexPosition> positions = Util.newArrayListOfValues(
+
+		List<SexPosition> positions = Util.newArrayListOfValues(
 				SexPosition.ALL_FOURS,
 				SexPosition.LYING_DOWN,
 				SexPosition.STANDING);
@@ -503,13 +502,13 @@ public interface SexManagerInterface {
 	}
 	
 	public default String getPublicSexStartingDescription() {
-		Set<AbstractSubspecies> subspeciesSet = new HashSet<>();
+		var subspeciesSet = new HashSet<Subspecies>();
 		for(Population pop : Main.game.getPlayer().getLocationPlace().getPlaceType().getPopulation()) {
 			subspeciesSet.addAll(pop.getSpecies().keySet());
 		}
 		if(!subspeciesSet.isEmpty()) {
-			List<AbstractRace> racesPresent = new ArrayList<>();
-			for(AbstractSubspecies species : subspeciesSet) {
+			var racesPresent = new ArrayList<Race>();
+			for(var species : subspeciesSet) {
 				if(!racesPresent.contains(species.getRace())) {
 					racesPresent.add(species.getRace());
 				}
@@ -517,7 +516,7 @@ public interface SexManagerInterface {
 			Collections.shuffle(racesPresent);
 			List<String> raceNames = new ArrayList<>();
 			for(int i=0; i<racesPresent.size() && i<3;i++) {
-				raceNames.add(AbstractSubspecies.getMainSubspeciesOfRace(racesPresent.get(i)).getNamePlural(null));
+				raceNames.add(Subspecies.getMainSubspeciesOfRace(racesPresent.get(i)).getNamePlural(null));
 			}
 			if(raceNames.size() < racesPresent.size()) {
 				raceNames.add("many other races");

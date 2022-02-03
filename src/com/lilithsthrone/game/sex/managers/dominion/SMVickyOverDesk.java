@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.utils.Util;
@@ -29,7 +28,7 @@ public class SMVickyOverDesk extends SexManagerDefault {
 	}
 	
 	@Override
-	public List<AbstractSexPosition> getAllowedSexPositions() {
+	public List<SexPosition> getAllowedSexPositions() {
 		return Util.newArrayListOfValues(
 				SexPosition.OVER_DESK);
 	}

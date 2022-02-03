@@ -55,7 +55,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.AbstractPlaceType;
 import com.lilithsthrone.world.places.PlaceType;
 
 /**
@@ -263,7 +262,7 @@ public class Claire extends NPC {
 			this.setLocation(WorldType.SUBMISSION, Main.game.getWorlds().get(WorldType.SUBMISSION).getClosestCell(Main.game.getPlayer().getLocation(), PlaceType.SUBMISSION_ENTRANCE).getLocation(), true);
 			
 		} else if(Main.game.getPlayer().getWorldLocation()==WorldType.ENFORCER_WAREHOUSE) {
-			AbstractPlaceType pt = Main.game.getPlayerCell().getPlace().getPlaceType();
+			var pt = Main.game.getPlayerCell().getPlace().getPlaceType();
 			if(!pt.equals(PlaceType.ENFORCER_WAREHOUSE_ENCLOSURE)
 					&& !pt.equals(PlaceType.ENFORCER_WAREHOUSE_ENCLOSURE_TELEPORT_PADS)
 					&& !pt.equals(PlaceType.ENFORCER_WAREHOUSE_ENCLOSURE_TELEPORT_SHELVING)

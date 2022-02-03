@@ -30,7 +30,6 @@ import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.NPCFlagValue;
 import com.lilithsthrone.game.character.npc.dominion.Lilaya;
 import com.lilithsthrone.game.character.npc.misc.GenericSexualPartner;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
@@ -59,7 +58,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
@@ -958,10 +956,10 @@ public class OccupancyUtil implements XMLSaving {
 						settingsEnabled = getSexSettingsEnabled(currentJob, slave);
 						
 						Gender gender = Gender.getGenderFromUserPreferences(false, true);
-						Map<AbstractSubspecies, Integer> availableRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(gender);
+						Map<Subspecies, Integer> availableRaces = Subspecies.getGenericSexPartnerSubspeciesMap(gender);
 						
-						AbstractSubspecies subspecies = Subspecies.HUMAN;
-						AbstractSubspecies halfDemonSubspecies = null;
+						Subspecies subspecies = Subspecies.HUMAN;
+						Subspecies halfDemonSubspecies = null;
 						if(!availableRaces.isEmpty()) {
 							subspecies = Util.getRandomObjectFromWeightedMap(availableRaces);
 						}
@@ -1102,10 +1100,8 @@ public class OccupancyUtil implements XMLSaving {
 					GenericSexualPartner partner = null;
 					String partnerName = "";
 					
-					Gender partnerGender = null;
-					Map<AbstractSubspecies, Integer> availablePartnerRaces = null;
-					AbstractSubspecies partnerSubspecies = Subspecies.HUMAN;
-					AbstractSubspecies partnerHalfDemonSubspecies = null;
+					Subspecies partnerSubspecies = Subspecies.HUMAN;
+					Subspecies partnerHalfDemonSubspecies = null;
 					
 					if(usingRealPartner) {
 						if(Math.random()<0.25f) {
@@ -1121,8 +1117,8 @@ public class OccupancyUtil implements XMLSaving {
 						}
 						
 					} else {
-						partnerGender = Gender.getGenderFromUserPreferences(false, true);
-						availablePartnerRaces = AbstractSubspecies.getGenericSexPartnerSubspeciesMap(partnerGender);
+						Gender partnerGender = Gender.getGenderFromUserPreferences(false, true);
+						Map<Subspecies, Integer> availablePartnerRaces = Subspecies.getGenericSexPartnerSubspeciesMap(partnerGender);
 						
 						if(!availablePartnerRaces.isEmpty()) {
 							partnerSubspecies = Util.getRandomObjectFromWeightedMap(availablePartnerRaces);
@@ -1851,7 +1847,7 @@ public class OccupancyUtil implements XMLSaving {
 	}
 	
 	
-	public MilkingRoom getMilkingRoom(AbstractWorldType worldType, Vector2i location) {
+	public MilkingRoom getMilkingRoom(WorldType worldType, Vector2i location) {
 		for(MilkingRoom room : getMilkingRooms()) {
 			if(room.getWorldType() == worldType && room.getLocation().equals(location)) {
 				return room;

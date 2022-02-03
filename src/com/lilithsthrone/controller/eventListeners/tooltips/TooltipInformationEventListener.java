@@ -13,7 +13,6 @@ import org.w3c.dom.events.EventListener;
 import com.lilithsthrone.controller.TooltipUpdateThread;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.ArousalLevel;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -23,7 +22,6 @@ import com.lilithsthrone.game.character.attributes.PhysiqueLevel;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.types.AntennaType;
@@ -35,21 +33,18 @@ import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
+import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.fetishes.FetishLevel;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.combat.Attack;
-import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellUpgrade;
 import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.Library;
@@ -90,19 +85,19 @@ public class TooltipInformationEventListener implements EventListener {
 	private boolean availableForSelection = false;
 	
 	private GameCharacter owner;
-	private AbstractStatusEffect statusEffect;
-	private AbstractPerk perk;
-	private AbstractPerk levelUpPerk;
+	private StatusEffect statusEffect;
+	private Perk perk;
+	private Perk levelUpPerk;
 	private int perkRow;
-	private AbstractFetish fetish;
+	private Fetish fetish;
 	private boolean fetishExperience = false;
 	private FetishDesire desire;
 	private Spell spell;
 	private SpellUpgrade spellUpgrade;
-	private AbstractAttribute attribute;
+	private Attribute attribute;
 	private InventorySlot concealedSlot;
 	private LoadedEnchantment loadedEnchantment;
-	private AbstractCombatMove move;
+	private CombatMove move;
 	private Cell cell;
 	private GameCharacter moneyTransferTarget;
 	private int moneyTransferPercentage;
@@ -166,7 +161,7 @@ public class TooltipInformationEventListener implements EventListener {
 					}
 					effectsFound = true;
 				}
-				for (AbstractCombatMove cm : statusEffect.getCombatMoves()) {
+				for (var cm : statusEffect.getCombatMoves()) {
 					tooltipSB.append((effectsFound?"<br/>":"")+"[style.boldExcellent(Grants)] [style.boldCombat(Move)]: "+Util.capitaliseSentence(cm.getName(0, owner)));
 					effectsFound =true;
 				}
@@ -438,7 +433,7 @@ public class TooltipInformationEventListener implements EventListener {
 //			tooltipSB.append("<br/>Cooldown: "+"<span style='color:"+(cooldown==0?PresetColour.GENERIC_MINOR_GOOD:PresetColour.GENERIC_MINOR_BAD).toWebHexString()+";'>"+cooldown+(cooldown==1?" turn":" turns")+"</span>");
 			
 			if(move.getStatusEffects(owner, owner, false)!=null) {
-				for(Entry<AbstractStatusEffect, Integer> entry : move.getStatusEffects(owner, owner, false).entrySet()) {
+				for(var entry : move.getStatusEffects(owner, owner, false).entrySet()) {
 					tooltipSB.append("<br/>Applies: <span style='color:"+entry.getKey().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(entry.getKey().getName(null))+"</span> for "+entry.getValue()+(entry.getValue()==1?" turn":" turns"));
 				}
 			}
@@ -572,7 +567,7 @@ public class TooltipInformationEventListener implements EventListener {
 				// Requirements:
 				if(!fetish.getFetishesForAutomaticUnlock().isEmpty() || (!owner.hasFetish(fetish) && !fetish.getPerkRequirements(owner).isEmpty())) {
 					tooltipSB.append("<div class='subTitle' style='font-weight:normal;'><b>Requirements</b>");
-					for(AbstractFetish f : fetish.getFetishesForAutomaticUnlock()) {
+					for(Fetish f : fetish.getFetishesForAutomaticUnlock()) {
 						if(owner.hasFetish(f)) {
 							tooltipSB.append("<br/>[style.italicsGood(" + Util.capitaliseSentence(f.getName(owner))+")]");
 						} else {
@@ -716,7 +711,7 @@ public class TooltipInformationEventListener implements EventListener {
 					|| attribute == Attribute.MAJOR_CORRUPTION
 					|| attribute == Attribute.AROUSAL
 					|| attribute == Attribute.LUST) {
-				AbstractStatusEffect currentAttributeStatusEffect=null;
+				StatusEffect currentAttributeStatusEffect=null;
 				int minimumLevelValue=0;
 				int maximumLevelValue=0;
 				
@@ -1586,7 +1581,7 @@ public class TooltipInformationEventListener implements EventListener {
 			
 				
 			// GREATER:
-			AbstractBodyCoveringType covType = loadedBody.getFace().getBodyCoveringType(loadedBody);
+			BodyCoveringType covType = loadedBody.getFace().getBodyCoveringType(loadedBody);
 			if(loadedBody.getCovering(covType, true).getPattern()==CoveringPattern.FRECKLED_FACE) {
 				Covering c = loadedBody.getCovering(covType, true);
 				tooltipSB.append(getBodyPartDiv(loadedBody, "Face", loadedBody.getFace(), null,
@@ -1760,14 +1755,14 @@ public class TooltipInformationEventListener implements EventListener {
 		TooltipUpdateThread.updateToolTip(-1,-1);
 	}
 
-	private String getBodyPartDiv(GameCharacter character, String name, AbstractRace race, AbstractBodyCoveringType covering, boolean feral) {
+	private String getBodyPartDiv(GameCharacter character, String name, Race race, BodyCoveringType covering, boolean feral) {
 		return getBodyPartDiv(character, name, race, covering, feral, null);
 	}
-	private String getBodyPartDiv(GameCharacter character, String name, AbstractRace race, AbstractBodyCoveringType covering, boolean feral, String size) {
+	private String getBodyPartDiv(GameCharacter character, String name, Race race, BodyCoveringType covering, boolean feral, String size) {
 		return getBodyPartDiv(character, name, race, owner.getCovering(covering), feral, size);
 	}
 	
-	private String getBodyPartDiv(GameCharacter character, String name, AbstractRace race, Covering covering, boolean feral, String size) {
+	private String getBodyPartDiv(GameCharacter character, String name, Race race, Covering covering, boolean feral, String size) {
 		String raceName;
 		raceName = race.getName(character.getBody(), feral);
 
@@ -1836,7 +1831,7 @@ public class TooltipInformationEventListener implements EventListener {
 	private String getBodyPartDiv(Body body, String name, BodyPartInterface bodyPart, String size, Covering coveringOverride) {
 		String raceName;
 		boolean feral = bodyPart.isFeral(owner);
-		AbstractRace race = bodyPart.getType().getRace();
+		Race race = bodyPart.getType().getRace();
 		raceName = race.getName(body, feral);
 		
 		Covering covering;
@@ -1894,7 +1889,7 @@ public class TooltipInformationEventListener implements EventListener {
 			+ "</div>";
 	}
 
-	private String getAttributeDiv(GameCharacter owner, AbstractAttribute attribute) {
+	private String getAttributeDiv(GameCharacter owner, Attribute attribute) {
 		float value = owner.getAttributeValue(attribute);
 		
 		String valueForDisplay;
@@ -1927,7 +1922,7 @@ public class TooltipInformationEventListener implements EventListener {
 				+ "</div>";
 	}
 
-	private String getAttributeTableRowDiv(GameCharacter owner, String type, AbstractAttribute damage, AbstractAttribute resist) {
+	private String getAttributeTableRowDiv(GameCharacter owner, String type, Attribute damage, Attribute resist) {
 		float damageValue = owner.getAttributeValue(damage);
 		float resistValue = owner.getAttributeValue(resist);
 		
@@ -2007,28 +2002,28 @@ public class TooltipInformationEventListener implements EventListener {
 		this.owner = owner;
 		return this;
 	}
-	public TooltipInformationEventListener setStatusEffect(AbstractStatusEffect statusEffect, GameCharacter owner) {
+	public TooltipInformationEventListener setStatusEffect(StatusEffect statusEffect, GameCharacter owner) {
 		resetFields();
 		this.statusEffect = statusEffect;
 		this.owner = owner;
 		return this;
 	}
 
-	public TooltipInformationEventListener setPerk(AbstractPerk perk, GameCharacter owner) {
+	public TooltipInformationEventListener setPerk(Perk perk, GameCharacter owner) {
 		resetFields();
 		this.perk = perk;
 		this.owner = owner;
 		return this;
 	}
 	
-	public TooltipInformationEventListener setFetish(AbstractFetish fetish, GameCharacter owner) {
+	public TooltipInformationEventListener setFetish(Fetish fetish, GameCharacter owner) {
 		resetFields();
 		this.fetish = fetish;
 		this.owner = owner;
 		return this;
 	}
 
-	public TooltipInformationEventListener setFetishExperience(AbstractFetish fetish, GameCharacter owner) {
+	public TooltipInformationEventListener setFetishExperience(Fetish fetish, GameCharacter owner) {
 		resetFields();
 		fetishExperience = true;
 		this.fetish = fetish;
@@ -2036,7 +2031,7 @@ public class TooltipInformationEventListener implements EventListener {
 		return this;
 	}
 	
-	public TooltipInformationEventListener setFetishDesire(AbstractFetish fetish, FetishDesire desire, GameCharacter owner) {
+	public TooltipInformationEventListener setFetishDesire(Fetish fetish, FetishDesire desire, GameCharacter owner) {
 		resetFields();
 		this.desire = desire;
 		this.fetish = fetish;
@@ -2044,7 +2039,7 @@ public class TooltipInformationEventListener implements EventListener {
 		return this;
 	}
 
-	public TooltipInformationEventListener setLevelUpPerk(int perkRow, AbstractPerk levelUpPerk, GameCharacter owner, boolean availableForSelection) {
+	public TooltipInformationEventListener setLevelUpPerk(int perkRow, Perk levelUpPerk, GameCharacter owner, boolean availableForSelection) {
 		resetFields();
 		this.levelUpPerk = levelUpPerk;
 		this.perkRow = perkRow;
@@ -2067,7 +2062,7 @@ public class TooltipInformationEventListener implements EventListener {
 		return this;
 	}
 
-	public TooltipInformationEventListener setAttribute(AbstractAttribute attribute, GameCharacter owner) {
+	public TooltipInformationEventListener setAttribute(Attribute attribute, GameCharacter owner) {
 		resetFields();
 		this.attribute = attribute;
 		this.owner = owner;
@@ -2099,7 +2094,7 @@ public class TooltipInformationEventListener implements EventListener {
 		return this;
 	}
 
-	public TooltipInformationEventListener setCombatMove(AbstractCombatMove move, GameCharacter owner) {
+	public TooltipInformationEventListener setCombatMove(CombatMove move, GameCharacter owner) {
 		resetFields();
 		this.owner = owner;
 		this.move = move;

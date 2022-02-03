@@ -132,16 +132,16 @@ public class Ziva extends NPC {
 		this.setHornLength(HornLength.ZERO_TINY.getMedianValue());
 		
 		// Coverings:
-		this.setEyeCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_eye"), PresetColour.EYE_YELLOW));
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_fur"), CoveringPattern.HIGHLIGHTS, CoveringModifier.FURRY, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_GREY, false), true);
+		this.setEyeCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_eye"), PresetColour.EYE_YELLOW));
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_fur"), CoveringPattern.HIGHLIGHTS, CoveringModifier.FURRY, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_GREY, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, PresetColour.SKIN_EBONY), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HORN, PresetColour.COVERING_GREY), false);
-		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_hair"), CoveringPattern.HIGHLIGHTS, CoveringModifier.FURRY, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_GREY, false), true);
+
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_hair"), CoveringPattern.HIGHLIGHTS, CoveringModifier.FURRY, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_GREY, false), true);
 		this.setHairLength(HairLength.THREE_SHOULDER_LENGTH.getMedianValue());
 		this.setHairStyle(HairStyle.PONYTAIL);
 
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_body_hair"), PresetColour.COVERING_BLACK), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_body_hair"), PresetColour.COVERING_BLACK), false);
 		this.setUnderarmHair(BodyHair.FOUR_NATURAL);
 		this.setAssHair(BodyHair.FOUR_NATURAL);
 		this.setPubicHair(BodyHair.FOUR_NATURAL);

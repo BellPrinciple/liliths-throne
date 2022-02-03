@@ -52,7 +52,6 @@ import com.lilithsthrone.game.character.persona.NameTriplet;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -450,7 +449,7 @@ public class Sterope extends NPC {
 	// Centaur:
 	public void initCentaur(NPC centaur) {
 		if(Math.random()<0.75f) { // Standard centaur subspecies:
-			Map<AbstractSubspecies, Integer> taurSubspecies = new HashMap<>();
+			Map<Subspecies, Integer> taurSubspecies = new HashMap<>();
 			taurSubspecies.put(Subspecies.CENTAUR, 16);
 			taurSubspecies.put(Subspecies.UNITAUR, 4);
 			taurSubspecies.put(Subspecies.PEGATAUR, 4);
@@ -458,8 +457,8 @@ public class Sterope extends NPC {
 			centaur.setBodyFromSubspeciesPreference(Gender.getGenderFromUserPreferences(false, true), taurSubspecies, false, false);
 			
 		} else { // Other tauric races:
-			Map<AbstractSubspecies, Integer> taurSubspecies = new HashMap<>();
-			for(AbstractSubspecies subspecies : Subspecies.allSubspecies) {
+			Map<Subspecies, Integer> taurSubspecies = new HashMap<>();
+			for(Subspecies subspecies : Subspecies.getAllSubspecies()) {
 				if(subspecies.getRace().getRacialBody().getLegType().isLegConfigurationAvailable(LegConfiguration.QUADRUPEDAL)) {
 					taurSubspecies.put(subspecies, 1);
 				}

@@ -18,7 +18,6 @@ import com.lilithsthrone.game.character.body.Penis;
 import com.lilithsthrone.game.character.body.Tail;
 import com.lilithsthrone.game.character.body.Tentacle;
 import com.lilithsthrone.game.character.body.Vagina;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.AssType;
 import com.lilithsthrone.game.character.body.types.BreastType;
@@ -34,8 +33,6 @@ import com.lilithsthrone.game.character.body.valueEnums.GenitalArrangement;
 import com.lilithsthrone.game.character.body.valueEnums.Height;
 import com.lilithsthrone.game.character.body.valueEnums.LabiaSize;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractRacialBody;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.RacialBody;
@@ -58,13 +55,13 @@ public abstract class AbstractLegType implements LegType {
 	private boolean mod;
 	private boolean fromExternalFile;
 	
-	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private BodyCoveringType coveringType;
+	private Race race;
 
 	private String transformationName;
 	
 	private Map<LegConfiguration, FootStructure> defaultFootStructure;
-	private AbstractFootType footType;
+	private FootType footType;
 	
 	private String determiner;
 	
@@ -87,7 +84,7 @@ public abstract class AbstractLegType implements LegType {
 	
 	private boolean spinneret;
 
-	private AbstractTentacleType tentacleType;
+	private TentacleType tentacleType;
 	private int tentacleCount;
 	
 	/**
@@ -109,10 +106,10 @@ public abstract class AbstractLegType implements LegType {
 	 * @param allowedLegConfigurations A list of LegConfigurations that are allowed for this LegType.
 	 * @param spinneret true if this leg type has a spinneret.
 	 */
-	public AbstractLegType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+	public AbstractLegType(BodyCoveringType coveringType,
+			Race race,
 			FootStructure defaultFootStructure,
-			AbstractFootType footType,
+			FootType footType,
 			String determiner,
 			String name,
 			String namePlural,
@@ -172,9 +169,9 @@ public abstract class AbstractLegType implements LegType {
 
 				this.mod = mod;
 				this.fromExternalFile = true;
-				
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 				
@@ -334,17 +331,17 @@ public abstract class AbstractLegType implements LegType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 
 	@Override
-	public AbstractFootType getFootType() {
+	public FootType getFootType() {
 		return footType;
 	}
 
@@ -501,7 +498,7 @@ public abstract class AbstractLegType implements LegType {
 				if(applyEffects) {
 					applyExtraLegConfigurationTransformations(body, body.getLeg().getLegConfiguration(), legConfiguration.isLargeGenitals(), applyFullEffects); // revert feral parts based on current configuration
 					// Changing back to bipedal reverts crotch-boobs based on preferences:
-					AbstractRacialBody startingBodyType = RacialBody.valueOfRace(this.getRace());
+					var startingBodyType = RacialBody.valueOfRace(this.getRace());
 					if(body.getRaceStage()!=RaceStage.GREATER || Main.getProperties().getUddersLevel()<2 || !body.getGender().isFeminine()) {
 						body.setBreastCrotch(
 								new BreastCrotch(
@@ -614,7 +611,7 @@ public abstract class AbstractLegType implements LegType {
 			case WINGED_BIPED:
 				if(applyEffects) {
 					applyExtraLegConfigurationTransformations(body, legConfiguration, legConfiguration.isLargeGenitals(), applyFullEffects);
-					AbstractRacialBody startingBodyType = RacialBody.valueOfRace(this.getRace());
+					var startingBodyType = RacialBody.valueOfRace(this.getRace());
 					body.setGenitalArrangement(startingBodyType.getGenitalArrangement());
 				}
 
@@ -693,7 +690,7 @@ public abstract class AbstractLegType implements LegType {
 		}
 		
 		if(Main.getProperties().getUddersLevel()==0 && !body.isFeral()) {
-			AbstractRacialBody startingBodyType = RacialBody.valueOfRace(this.getRace());
+			var startingBodyType = RacialBody.valueOfRace(this.getRace());
 			body.setBreastCrotch(
 					new BreastCrotch(
 						BreastType.NONE,
@@ -823,7 +820,7 @@ public abstract class AbstractLegType implements LegType {
 	 * @param applyFullEffects Pass in true if you want the additional transformations to include attribute changes (such as penis resizing, vagina capacity resetting, etc.).
 	 **/
 	private void applyExtraLegConfigurationTransformations(Body body, LegConfiguration legConfiguration, boolean largeGenitals, boolean applyFullEffects) {
-		AbstractRacialBody startingBodyType = RacialBody.valueOfRace(this.getRace());
+		var startingBodyType = RacialBody.valueOfRace(this.getRace());
 		
 		boolean demon = body.getRace()==Race.DEMON;
 		
@@ -851,7 +848,7 @@ public abstract class AbstractLegType implements LegType {
 			}
 		}
 		if(legConfiguration.getFeralParts().contains(BreastCrotch.class)) { // Crotch-boobs:
-			AbstractBreastType crotchBoobType = BreastType.NONE;
+			BreastType crotchBoobType = BreastType.NONE;
 			if(body.isFeminine()) {
 				if(demon) {
 					crotchBoobType = BreastType.DEMON_COMMON;
@@ -973,7 +970,7 @@ public abstract class AbstractLegType implements LegType {
 	}
 
 	@Override
-	public AbstractTentacleType getTentacleType() {
+	public TentacleType getTentacleType() {
 		return tentacleType;
 	}
 

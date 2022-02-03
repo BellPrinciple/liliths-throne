@@ -45,7 +45,7 @@ public class Generation extends Task<Boolean> {
 		return true;
 	}
 
-	public World worldGeneration(AbstractWorldType worldType) {
+	public World worldGeneration(WorldType worldType) {
 //		System.out.println(worldType);
 		if(worldType.isUsesFile()) {
 			try {

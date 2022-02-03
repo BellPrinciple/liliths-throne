@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
@@ -27,10 +26,8 @@ import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.body.valueEnums.Capacity;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeDepth;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.fetishes.FetishLevel;
@@ -43,8 +40,6 @@ import com.lilithsthrone.game.character.pregnancy.PregnancyPossibility;
 import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.quests.QuestType;
-import com.lilithsthrone.game.character.race.AbstractRace;
-import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -58,11 +53,8 @@ import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
@@ -78,7 +70,6 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.AbstractWorldType;
 import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
 
@@ -1129,7 +1120,7 @@ public class PhoneDialogue {
 		}
 	};
 
-	private static String getAttributeDisplayValue(AbstractAttribute att) {
+	private static String getAttributeDisplayValue(Attribute att) {
 		String valueForDisplay = Units.number(Main.game.getPlayer().getAttributeValue(att));
 		
 		if(att.isInfiniteAtUpperLimit() && Main.game.getPlayer().getAttributeValue(att)>=att.getUpperLimit()) {
@@ -1145,9 +1136,9 @@ public class PhoneDialogue {
 		public String getContent() {
 			UtilText.nodeContentSB.setLength(0);
 			
-			AbstractStatusEffect physiqueSE = PhysiqueLevel.getPhysiqueLevelFromValue(Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_PHYSIQUE)).getRelatedStatusEffect();
-			AbstractStatusEffect arcaneSE = IntelligenceLevel.getIntelligenceLevelFromValue(Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_ARCANE)).getRelatedStatusEffect();
-			AbstractStatusEffect corruptionSE = CorruptionLevel.getCorruptionLevelFromValue(Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_CORRUPTION)).getRelatedStatusEffect();
+			StatusEffect physiqueSE = PhysiqueLevel.getPhysiqueLevelFromValue(Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_PHYSIQUE)).getRelatedStatusEffect();
+			StatusEffect arcaneSE = IntelligenceLevel.getIntelligenceLevelFromValue(Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_ARCANE)).getRelatedStatusEffect();
+			StatusEffect corruptionSE = CorruptionLevel.getCorruptionLevelFromValue(Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_CORRUPTION)).getRelatedStatusEffect();
 					
 			UtilText.nodeContentSB.append(
 				"<div class='container-full-width'>"
@@ -1248,11 +1239,11 @@ public class PhoneDialogue {
 //				+"<div class='container-full-width'>"
 					+ "<p style='color:"+PresetColour.GENERIC_COMBAT.toWebHexString()+"; text-align:center;'><b>Racial Damage Attributes</b></p>");
 			
-			List<AbstractRace> raceListSorted = new ArrayList<>(Race.table.list());
+			List<Race> raceListSorted = new ArrayList<>(Race.table.list());
 			raceListSorted.sort((r1, r2) -> r1.getName(true).compareTo(r2.getName(true)));
 			
-			for(AbstractRace race : raceListSorted) {
-				AbstractAttribute attribute = Attribute.getRacialDamageAttribute(race);
+			for(Race race : raceListSorted) {
+				Attribute attribute = Race.DamageAttribute.of(race);
 				int damageModifier = (int) Main.game.getPlayer().getAttributeValue(attribute);
 				if(race==Race.DEMON) {
 					// DEMON is split in IMP, DEMON, LILIN, and ELDER_LILIN damage
@@ -1280,9 +1271,9 @@ public class PhoneDialogue {
 				}
 			}
 			
-//			List<AbstractAttribute> encounteredAttributes = new ArrayList<>();
-//			for(AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
-//				AbstractAttribute damageModifier = subspecies.getDamageMultiplier();
+//			List<Attribute> encounteredAttributes = new ArrayList<>();
+//			for(Subspecies subspecies : Subspecies.getAllSubspecies()) {
+//				Attribute damageModifier = subspecies.getDamageMultiplier();
 //				if(!encounteredAttributes.contains(damageModifier)) {
 //					UtilText.nodeContentSB.append(
 //							getAttributeBox(Main.game.getPlayer(), damageModifier,
@@ -1905,7 +1896,7 @@ public class PhoneDialogue {
 							oddRow));
 
 			oddRow = !oddRow;
-			
+
 			sb.append((Main.game.isAnalContentEnabled()
 							?sexStatRow(PresetColour.AROUSAL_STAGE_TWO, "Anal sex",
 									Main.game.getPlayer().getTotalSexCount(new SexType(SexParticipantType.NORMAL, SexAreaPenetration.PENIS, SexAreaOrifice.ANUS)),
@@ -2015,7 +2006,7 @@ public class PhoneDialogue {
 		private void offspringTableLine(StringBuilder output, offspringTableLineSubject subject, boolean evenRow, boolean includeIncubationColumn) {
 			String color = subject.female ? PresetColour.FEMININE.toWebHexString() : PresetColour.MASCULINE.toWebHexString();
 			String feralString = "<span style='color:" + RaceStage.FERAL.getColour().toWebHexString() + ";'>" + Util.capitaliseSentence(RaceStage.FERAL.getName()) + "</span> ";
-			
+
 			String innerEntryStyle = "background:transparent; margin:0; padding:0; width:"+(includeIncubationColumn?"15":"20")+"%;";
 			String innerEntryStyle2 = "background:transparent; margin:0; padding:0; width:15%;";
 			String innerEntryStyleWide = "background:transparent; margin:0; padding:0; width:25%;";
@@ -2407,14 +2398,14 @@ public class PhoneDialogue {
 			noPregnancies=false;
 		}
 		
-		Map<SexAreaOrifice, List<AbstractStatusEffect>> incubationEffectMap = Util.newHashMapOfValues(
+		Map<SexAreaOrifice, List<StatusEffect>> incubationEffectMap = Util.newHashMapOfValues(
 				new Value<>(SexAreaOrifice.VAGINA, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_WOMB_1, StatusEffect.INCUBATING_EGGS_WOMB_2, StatusEffect.INCUBATING_EGGS_WOMB_3)),
 				new Value<>(SexAreaOrifice.ANUS, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_STOMACH_1, StatusEffect.INCUBATING_EGGS_STOMACH_2, StatusEffect.INCUBATING_EGGS_STOMACH_3)),
 				new Value<>(SexAreaOrifice.NIPPLE, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_NIPPLES_1, StatusEffect.INCUBATING_EGGS_NIPPLES_2, StatusEffect.INCUBATING_EGGS_NIPPLES_3)),
 				new Value<>(SexAreaOrifice.NIPPLE_CROTCH, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_1, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_2, StatusEffect.INCUBATING_EGGS_NIPPLES_CROTCH_3)),
 				new Value<>(SexAreaOrifice.SPINNERET, Util.newArrayListOfValues(StatusEffect.INCUBATING_EGGS_SPINNERET_1, StatusEffect.INCUBATING_EGGS_SPINNERET_2, StatusEffect.INCUBATING_EGGS_SPINNERET_3)));
 		
-		for(Entry<SexAreaOrifice, List<AbstractStatusEffect>> incubationEntry : incubationEffectMap.entrySet()) {
+		for(Entry<SexAreaOrifice, List<StatusEffect>> incubationEntry : incubationEffectMap.entrySet()) {
 			if(Main.game.getPlayer().hasStatusEffect(incubationEntry.getValue().get(0))
 					|| Main.game.getPlayer().hasStatusEffect(incubationEntry.getValue().get(1))
 					|| Main.game.getPlayer().hasStatusEffect(incubationEntry.getValue().get(2))) {
@@ -2569,7 +2560,7 @@ public class PhoneDialogue {
 			incubatorCharacters.add(litter.getIncubator());
 		}
 		for(GameCharacter incubator : incubatorCharacters) {
-			for(Entry<SexAreaOrifice, List<AbstractStatusEffect>> incubationEntry : incubationEffectMap.entrySet()) {
+			for(Entry<SexAreaOrifice, List<StatusEffect>> incubationEntry : incubationEffectMap.entrySet()) {
 				Litter litter = incubator.getIncubatingLitters().get(incubationEntry.getKey());
 				if(litter!=null) {
 					if(incubator.hasStatusEffect(incubationEntry.getValue().get(0))
@@ -2762,11 +2753,11 @@ public class PhoneDialogue {
 				+ "</b></div>";
 	}
 	
-	private static String getAttributeBox(GameCharacter owner, AbstractAttribute att, String effect) {
+	private static String getAttributeBox(GameCharacter owner, Attribute att, String effect) {
 		return getAttributeBox(owner, att, effect, false);
 	}
 	
-	private static String getAttributeBox(GameCharacter owner, AbstractAttribute att, String effect, boolean half) {
+	private static String getAttributeBox(GameCharacter owner, Attribute att, String effect, boolean half) {
 		float value = owner.getAttributeValue(att);
 
 		String valueForDisplay;
@@ -2783,7 +2774,7 @@ public class PhoneDialogue {
 		}
 		
 		float bonusAttributeValue = owner.getBonusAttributeValue(att) + (att==Attribute.RESISTANCE_PHYSICAL?owner.getPhysicalResistanceAttributeFromClothingAndWeapons():0);
-		
+
 		return "<div class='container-full-width' style='background:"+PresetColour.BACKGROUND_ALT.toWebHexString()+";'>"
 				
 					+ "<div class='container-full-width' style='background:transparent;margin:0;padding:0;width:30%;'>"
@@ -3072,9 +3063,9 @@ public class PhoneDialogue {
 		}
 	};
 
-	private static List<AbstractItemType> itemsDiscoveredList = new ArrayList<>();
-	private static List<AbstractClothingType> clothingDiscoveredList = new ArrayList<>();
-	private static List<AbstractWeaponType> weaponsDiscoveredList = new ArrayList<>();
+	private static List<ItemType> itemsDiscoveredList = new ArrayList<>();
+	private static List<ClothingType> clothingDiscoveredList = new ArrayList<>();
+	private static List<WeaponType> weaponsDiscoveredList = new ArrayList<>();
 	
 	private static Map<String, List<InventorySlot>> clothingSlotCategories;
 	private static String clothingSlotKey;
@@ -3175,7 +3166,7 @@ public class PhoneDialogue {
 			int rangedCount = 0;
 			int rangedKnownCount = 0;
 			
-			for(AbstractWeaponType weaponType : weaponsDiscoveredList) {
+			for(WeaponType weaponType : weaponsDiscoveredList) {
 				boolean discovered = Main.getProperties().isWeaponDiscovered(weaponType);
 				String entry = "<div class='inventory-item-slot unequipped' style='background-color:"+weaponType.getRarity().getBackgroundColour().toWebHexString()+"; width:78%; margin:1%; padding:0; '>"
 									+ "<div class='inventory-icon-content'>"+(discovered?weaponType.getSVGImage():"")+"</div>"
@@ -3261,7 +3252,7 @@ public class PhoneDialogue {
 				discoveredMap.put(slot, new Value<>(0, 0));
 			}
 			
-			for(AbstractClothingType clothingType : clothingDiscoveredList) {
+			for(ClothingType clothingType : clothingDiscoveredList) {
 				if(Collections.disjoint(clothingType.getEquipSlots(), slots)) {
 					continue;
 				}
@@ -3345,7 +3336,7 @@ public class PhoneDialogue {
 			int spellCount = 0;
 			int spellKnownCount = 0;
 			
-			for(AbstractItemType itemType : itemsDiscoveredList) {
+			for(ItemType itemType : itemsDiscoveredList) {
 				boolean discovered = Main.getProperties().isItemDiscovered(itemType);
 				String entry = "<div class='inventory-item-slot unequipped' style='background-color:"+itemType.getRarity().getBackgroundColour().toWebHexString()+"; width:8%;'>"
 									+ "<div class='inventory-icon-content'>"+(discovered?itemType.getSVGString():"")+"</div>"
@@ -3429,10 +3420,10 @@ public class PhoneDialogue {
 		}
 	};
 
-	private static List<AbstractRace> racesDiscovered = new ArrayList<>();
-	private static List<AbstractSubspecies> subspeciesDiscovered = new ArrayList<>();
-	private static AbstractRace raceSelected;
-	private static AbstractSubspecies subspeciesSelected;
+	private static List<Race> racesDiscovered = new ArrayList<>();
+	private static List<Subspecies> subspeciesDiscovered = new ArrayList<>();
+	private static Race raceSelected;
+	private static Subspecies subspeciesSelected;
 	private static Body bodyForSubspeciesSelected;
 	private static StringBuilder subspeciesSB = new StringBuilder();
 	
@@ -3440,9 +3431,9 @@ public class PhoneDialogue {
 		
 		subspeciesDiscovered.clear();
 		
-		for (AbstractSubspecies subspecies : Subspecies.getAllSubspecies()) {
+		for (Subspecies subspecies : Subspecies.getAllSubspecies()) {
 			if(Main.getProperties().isRaceDiscovered(subspecies)) {
-				AbstractRace race = subspecies.getRace();
+				Race race = subspecies.getRace();
 				if(!racesDiscovered.contains(race)) {
 					racesDiscovered.add(race);
 				}
@@ -3469,11 +3460,11 @@ public class PhoneDialogue {
 						+ "You have encountered the following races in your travels:<br/>"
 						+ "(Discovered races are [style.boldGood(highlighted)], while undiscovered races are [style.colourDisabled(greyed out)].)"
 					+ "</p>");
-			List<AbstractRace> sortedRaces = new ArrayList<>();
+			List<Race> sortedRaces = new ArrayList<>();
 			sortedRaces.addAll(Race.getAllRaces());
 			sortedRaces.remove(Race.NONE);
 			sortedRaces.sort((r1, r2) -> r1.getName(false).compareTo(r2.getName(false)));
-			for(AbstractRace race : sortedRaces) {
+			for(Race race : sortedRaces) {
 				UtilText.nodeContentSB.append("<div style='box-sizing: border-box; text-align:center; width:50%; padding:8px; margin:0; float:left;'>");
 				if(racesDiscovered.contains(race)) {
 					UtilText.nodeContentSB.append("<b style='color:"+race.getColour().toWebHexString()+";'>" + Util.capitaliseSentence(race.getName(false)) + "</b>");
@@ -3498,9 +3489,9 @@ public class PhoneDialogue {
 					@Override
 					public void effects() {
 						raceSelected = racesDiscovered.get(index - 1);
-						subspeciesSelected = AbstractSubspecies.getMainSubspeciesOfRace(raceSelected);
+						subspeciesSelected = Subspecies.getMainSubspeciesOfRace(raceSelected);
 						if(!subspeciesDiscovered.contains(subspeciesSelected)) {
-							for(AbstractSubspecies sub : subspeciesDiscovered) {
+							for(Subspecies sub : subspeciesDiscovered) {
 								if(sub.getRace()==raceSelected) {
 									subspeciesSelected = sub;
 									break;
@@ -3522,8 +3513,8 @@ public class PhoneDialogue {
 		}
 	};
 	
-	private static List<String> getSubspeciesModifiersAsStringList(AbstractSubspecies subspecies) {
-		LinkedHashMap<AbstractAttribute, Float> attMods;
+	private static List<String> getSubspeciesModifiersAsStringList(Subspecies subspecies) {
+		LinkedHashMap<Attribute, Float> attMods;
 
 		attMods = new LinkedHashMap<>(subspecies.getStatusEffectAttributeModifiers(null));
 		
@@ -3541,10 +3532,10 @@ public class PhoneDialogue {
 		return fullModList;
 	}
 
-	private static List<String> getSubspeciesAttributeModifiersToStringList(Map<AbstractAttribute, Float> attributeMap) {
+	private static List<String> getSubspeciesAttributeModifiersToStringList(Map<Attribute,Float> attributeMap) {
 		List<String> attributeModifiersList = new ArrayList<>();
 		if (attributeMap != null) {
-			for (Entry<AbstractAttribute, Float> e : attributeMap.entrySet()) {
+			for (Entry<Attribute, Float> e : attributeMap.entrySet()) {
 				attributeModifiersList.add(e.getKey().getFormattedValue(e.getValue()));
 			}
 		}
@@ -3629,7 +3620,7 @@ public class PhoneDialogue {
 					
 			subspeciesSB.append("<p>"
 					+ "<b style='color:"+subspeciesSelected.getColour(null).toWebHexString()+";'>"+Util.capitaliseSentence(subspeciesSelected.getName(null))+"</b>"
-					+ (AbstractSubspecies.getMainSubspeciesOfRace(raceSelected)==subspeciesSelected
+					+ (Subspecies.getMainSubspeciesOfRace(raceSelected)==subspeciesSelected
 							?" ([style.colourMinorGood(Core)] subspecies of <span style='color:"+raceSelected.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(raceSelected.getName(false))+"</span>)"
 							:" (Subspecies of <span style='color:"+raceSelected.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(raceSelected.getName(false))+"</span>)")
 					+ "<br/>"
@@ -3668,13 +3659,13 @@ public class PhoneDialogue {
 		
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			List<AbstractSubspecies> raceSubspecies = Subspecies.getSubspeciesOfRace(raceSelected);
+			List<Subspecies> raceSubspecies = Subspecies.getSubspeciesOfRace(raceSelected);
 			
 			if (index == 0) {
 				return new Response("Back", "Return to the race selection screen.", RACES);
 			
 			} else if (index <= raceSubspecies.size()) {
-				AbstractSubspecies indexSubspecies = raceSubspecies.get(index - 1);
+				Subspecies indexSubspecies = raceSubspecies.get(index - 1);
 				if(!subspeciesDiscovered.contains(indexSubspecies)) {
 					return new Response(Util.capitaliseSentence(indexSubspecies.getName(null)),
 							"You haven't discovered this subspecies yet!",
@@ -3682,13 +3673,13 @@ public class PhoneDialogue {
 				}
 				return new Response(Util.capitaliseSentence(indexSubspecies.getName(null)),
 						"Take a detailed look at what " + indexSubspecies.getNamePlural(null) + " are like."
-						+ (AbstractSubspecies.getMainSubspeciesOfRace(raceSelected)==indexSubspecies
+						+ (Subspecies.getMainSubspeciesOfRace(raceSelected)==indexSubspecies
 							?"<br/>This is the [style.colourMinorGood(core)] "+raceSelected.getName(false)+" subspecies."
 							:""),
 						SUBSPECIES){
 					@Override
 					public Colour getHighlightColour() {
-						if(AbstractSubspecies.getMainSubspeciesOfRace(raceSelected)==indexSubspecies) {
+						if(Subspecies.getMainSubspeciesOfRace(raceSelected)==indexSubspecies) {
 							return PresetColour.GENERIC_MINOR_GOOD;
 						}
 						return super.getHighlightColour();
@@ -3756,7 +3747,7 @@ public class PhoneDialogue {
 						Main.game.getPlayer().resetPerksMap(false, false);
 					}
 				};
-				
+
 			} else if (index == 0) {
 				return new Response("Back", "Return to your phone's main menu.", MENU);
 			}
@@ -3793,10 +3784,10 @@ public class PhoneDialogue {
 			// Normal fetishes:
 
 			journalSB.append("<div class='container-full-width' style='text-align:center; font-weight:bold;'><h6>Fetishes</h6></div>");
-			ArrayList<AbstractFetish> derivedFetishList = new ArrayList<>();
-			ArrayList<AbstractFetish> pairedFetishList = new ArrayList<>();
-			ArrayList<AbstractFetish> soloFetishList = new ArrayList<>();
-			for(AbstractFetish fetish : Fetish.getAllFetishes()) {
+			ArrayList<Fetish> derivedFetishList = new ArrayList<>();
+			ArrayList<Fetish> pairedFetishList = new ArrayList<>();
+			ArrayList<Fetish> soloFetishList = new ArrayList<>();
+			for(Fetish fetish : Fetish.getAllFetishes()) {
 				if(fetish.isContentEnabled()) {
 					if(!fetish.getFetishesForAutomaticUnlock().isEmpty()) {
 						derivedFetishList.add(fetish);
@@ -3808,7 +3799,7 @@ public class PhoneDialogue {
 				}
 			}
 			while (pairedFetishList.size() > 0) {
-				AbstractFetish fetish = pairedFetishList.remove(0);
+				Fetish fetish = pairedFetishList.remove(0);
 				if(fetish!=null) {
 					pairedFetishList.remove(fetish.getOpposite());
 					if (fetish.isTopFetish()) {
@@ -3819,20 +3810,20 @@ public class PhoneDialogue {
 				}
 			}
 			while (soloFetishList.size() > 0) {
-				AbstractFetish fetish = soloFetishList.remove(0);
-				AbstractFetish fetish2 = null;
+				Fetish fetish = soloFetishList.remove(0);
+				Fetish fetish2 = null;
 				if(soloFetishList.size() > 0) {
 					fetish2 = soloFetishList.remove(0);
 				}
 				journalSB.append(getFetishEntry(Main.game.getPlayer(), fetish, fetish2));
 			}
-			
+
 			// Derived fetishes:
 
 			journalSB.append("<div class='container-full-width' style='text-align:center; font-weight:bold; margin-top:16px;'><h6>Derived Fetishes</h6></div>");
 			journalSB.append("<div class='fetish-container'>");
 			
-			for(AbstractFetish fetish : derivedFetishList) {
+			for(Fetish fetish : derivedFetishList) {
 				journalSB.append(
 						"<div id='FETISH_" + Fetish.getIdFromFetish(fetish) + "' class='fetish-icon" + (Main.game.getPlayer().hasFetish(fetish)
 						? " owned' style='border:2px solid " + PresetColour.FETISH.getShades()[1] + ";'>"
@@ -3873,14 +3864,14 @@ public class PhoneDialogue {
 	};
 	
 	
-	public static String getFetishEntry(GameCharacter targetedCharacter, AbstractFetish othersFetish, AbstractFetish selfFetish) {
+	public static String getFetishEntry(GameCharacter targetedCharacter, Fetish othersFetish, Fetish selfFetish) {
 		return "<div class='container-full-width' style='background:transparent; margin:2px 0; width:100%;'>"
 				+getIndividualFetishEntry(targetedCharacter, othersFetish)
 				+(selfFetish == null?"":getIndividualFetishEntry(targetedCharacter, selfFetish))
 				+"</div>";
 	}
 	
-	private static String getIndividualFetishEntry(GameCharacter targetedCharacter, AbstractFetish fetish) {
+	private static String getIndividualFetishEntry(GameCharacter targetedCharacter, Fetish fetish) {
 		FetishLevel level = FetishLevel.getFetishLevelFromValue(targetedCharacter.getFetishExperience(fetish));
 		float experiencePercentage = ((targetedCharacter.getFetishExperience(fetish)) / (float)(level.getMaximumExperience()))*100;
 		
@@ -3925,7 +3916,7 @@ public class PhoneDialogue {
 				+ "</div>";
 	}
 	
-	private static String getFetishDesireEntry(GameCharacter targetedCharacter, AbstractFetish fetish, FetishDesire desire) {
+	private static String getFetishDesireEntry(GameCharacter targetedCharacter, Fetish fetish, FetishDesire desire) {
 		boolean disabled = desire!=FetishDesire.FOUR_LOVE && targetedCharacter.hasFetish(fetish);
 		
 		return "<div class='square-button"+(disabled?" disabled":"")+"' id='"+Fetish.getIdFromFetish(fetish)+"_"+desire+"'"
@@ -3941,10 +3932,10 @@ public class PhoneDialogue {
 			+ "</div>";
 	}
 	
-	public static AbstractWorldType worldTypeMap = WorldType.DOMINION;
+	public static WorldType worldTypeMap = WorldType.DOMINION;
 
 	private static void setMapResponseTabToCurrentMap() {
-		AbstractWorldType world = Main.game.getPlayer().getWorldLocation();
+		WorldType world = Main.game.getPlayer().getWorldLocation();
 		if(world.getWorldRegion()==WorldRegion.SUBMISSION) {
 			Main.game.setResponseTab(1);
 		} else if(world.getWorldRegion()==WorldRegion.FIELD_CITY) {
@@ -3987,13 +3978,13 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			int i=2;
-			List<AbstractWorldType> worldTypes = new ArrayList<>(Main.getProperties().hasValue(PropertyValue.mapReveal)?WorldType.getAllWorldTypes():Main.game.getPlayer().getWorldsVisited());
+			List<WorldType> worldTypes = new ArrayList<>(Main.getProperties().hasValue(PropertyValue.mapReveal)?WorldType.getAllWorldTypes():Main.game.getPlayer().getWorldsVisited());
 			
 			worldTypes.sort((w1, w2) -> (w1.getName().compareTo(w2.getName())));
 			
 			worldTypes.sort((w1, w2) -> w1.getMajorAreaIndex()-w2.getMajorAreaIndex());
 			
-			for(AbstractWorldType world : worldTypes) {
+			for(WorldType world : worldTypes) {
 				boolean correctRegion = false;
 				if(world.getWorldRegion()==WorldRegion.SUBMISSION) {
 					correctRegion = responseTab==1;
@@ -4094,7 +4085,7 @@ public class PhoneDialogue {
 			if (index == 0) {
 				return new Response("Back", "Decide against loitering in this area.", MENU);
 			}
-			
+
 			if(index == 1) {
 				return new ResponseEffectsOnly("5 minutes", "Loiter in this area for the next five minutes.") {
 					@Override
@@ -4102,7 +4093,7 @@ public class PhoneDialogue {
 						loiter(5);
 					}
 				};
-				
+
 			} else if(index == 2) {
 				return new ResponseEffectsOnly("15 minutes", "Loiter in this area for the next fifteen minutes.") {
 					@Override
@@ -4118,7 +4109,7 @@ public class PhoneDialogue {
 						loiter(30);
 					}
 				};
-				
+
 			} else if(index == 4) {
 				return new ResponseEffectsOnly("1 hour", "Loiter in this area for the next hour.") {
 					@Override
@@ -4134,7 +4125,7 @@ public class PhoneDialogue {
 						loiter(60*2);
 					}
 				};
-				
+
 			} else if(index == 6) {
 				return new ResponseEffectsOnly("4 hours", "Loiter in this area for the next four hours.") {
 					@Override
@@ -4150,7 +4141,7 @@ public class PhoneDialogue {
 						loiter(60*6);
 					}
 				};
-				
+
 			} else if(index == 8) {
 				return new ResponseEffectsOnly("8 hours", "Loiter in this area for the next eight hours.") {
 					@Override
@@ -4158,7 +4149,7 @@ public class PhoneDialogue {
 						loiter(60*8);
 					}
 				};
-				
+
 			} else if(index == 9) {
 				return new ResponseEffectsOnly("12 hours", "Loiter in this area for the next twelve hours.") {
 					@Override

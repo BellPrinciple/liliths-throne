@@ -7,13 +7,11 @@ import java.util.Map;
 import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
-import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.LegConfigurationAffinity;
 import com.lilithsthrone.game.character.body.valueEnums.Affinity;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.combat.CombatBehaviour;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -56,7 +54,7 @@ public class AbstractRace implements Race {
 	private FurryPreference defaultFemininePreference;
 	private FurryPreference defaultMasculinePreference;
 	private boolean affectedByFurryPreference;
-	private Map<AbstractFetish, Map<String, Integer>> racialFetishModifiers;
+	private Map<Fetish, Map<String, Integer>> racialFetishModifiers;
 
 	private boolean feralPartsAvailable;
 	private boolean ableToSelfTransform;
@@ -149,7 +147,7 @@ public class AbstractRace implements Race {
 		
 		this.affectedByFurryPreference = affectedByFurryPreference;
 		
-		this.racialFetishModifiers = new HashMap<AbstractFetish, Map<String, Integer>>();
+		this.racialFetishModifiers = new HashMap<>();
 
 		this.feralPartsAvailable = true;
 		this.ableToSelfTransform = false;
@@ -286,7 +284,7 @@ public class AbstractRace implements Race {
 				if(coreElement.getOptionalFirstOf("racialFetishModifiers").isPresent()) {
 					for(Element e : coreElement.getMandatoryFirstOf("racialFetishModifiers").getAllOf("fetish")) {
 						try {
-							AbstractFetish fetish = Fetish.getFetishFromId(e.getTextContent());
+							Fetish fetish = Fetish.getFetishFromId(e.getTextContent());
 							HashMap<String, Integer> weights = new HashMap<>();
 							if(!e.getAttribute("love").isEmpty()) {
 								weights.put("love", Integer.parseInt(e.getAttribute("love")));
@@ -333,9 +331,9 @@ public class AbstractRace implements Race {
 	}
 
 	@Override
-	public AbstractRacialBody getRacialBody() {
+	public RacialBody getRacialBody() {
 		if(this.isFromExternalFile()) {
-			return RacialBody.getRacialBodyFromId(racialBodyId);
+			return RacialBody.table.of(racialBodyId);
 		}
 		System.err.println("Warning: AbstractRacialBody is calling getRacialBody() where racialBodyId does not exist!");
 		return null;
@@ -449,8 +447,8 @@ public class AbstractRace implements Race {
 	}
 
 	@Override
-	public AbstractAttribute getDefaultDamageMultiplier() {
-		return Attribute.getRacialDamageAttribute(this);
+	public Attribute getDefaultDamageMultiplier() {
+		return Race.DamageAttribute.of(this);
 	}
 
 	@Override
@@ -464,7 +462,7 @@ public class AbstractRace implements Race {
 	}
 
 	@Override
-	public Map<AbstractFetish, Map<String, Integer>> getRacialFetishModifiers() {
+	public Map<Fetish, Map<String, Integer>> getRacialFetishModifiers() {
 		return racialFetishModifiers;
 	}
 }

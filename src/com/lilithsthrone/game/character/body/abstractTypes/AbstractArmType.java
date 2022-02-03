@@ -4,17 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lilithsthrone.game.character.body.types.ArmType;
 import com.lilithsthrone.main.Main;
 import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.race.AbstractRace;
+import com.lilithsthrone.game.character.body.types.ArmType;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -31,8 +29,8 @@ public abstract class AbstractArmType implements ArmType {
 
 	private String transformationName;
 	
-	private AbstractBodyCoveringType coveringType;
-	private AbstractRace race;
+	private BodyCoveringType coveringType;
+	private Race race;
 	
 	private boolean allowsFlight;
 
@@ -76,8 +74,8 @@ public abstract class AbstractArmType implements ArmType {
 	 * @param armTransformationDescription A paragraph describing a character's arms transforming into this arm type. Parsing assumes that the character already has this arm type and associated skin covering.
 	 * @param armBodyDescription A sentence or two to describe this arm type, as seen in the character view screen. It should follow the same format as all of the other entries in the ArmType class.
 	 */
-	public AbstractArmType(AbstractBodyCoveringType coveringType,
-			AbstractRace race,
+	public AbstractArmType(BodyCoveringType coveringType,
+			Race race,
 			String name,
 			String namePlural,
 			List<String> descriptorsMasculine,
@@ -135,9 +133,9 @@ public abstract class AbstractArmType implements ArmType {
 
 				this.mod = mod;
 				this.fromExternalFile = true;
-				
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+
+				this.race = Race.table.of(coreElement.getMandatoryFirstOf("race").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 
@@ -258,12 +256,12 @@ public abstract class AbstractArmType implements ArmType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 
 	@Override
-	public AbstractRace getRace() {
+	public Race getRace() {
 		return race;
 	}
 

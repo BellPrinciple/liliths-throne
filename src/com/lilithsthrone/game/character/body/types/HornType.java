@@ -8,9 +8,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
@@ -89,12 +87,12 @@ public interface HornType extends BodyPartTypeInterface {
 	}
 
 	@Override
-	default AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	default BodyCoveringType getBodyCoveringType(Body body) {
 		return BodyCoveringType.HORN;
 	}
 
 	@Override
-	default AbstractRace getRace() {
+	default Race getRace() {
 		return Race.NONE;
 	}
 
@@ -298,7 +296,7 @@ public interface HornType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, int defaultHornsPerRow, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String hornTransformationDescription, String hornBodyDescription) {
+		public Special(BodyCoveringType coveringType, Race race, int defaultHornsPerRow, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String hornTransformationDescription, String hornBodyDescription) {
 			super(coveringType, race, defaultHornsPerRow, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, hornTransformationDescription, hornBodyDescription);
 		}
 
@@ -310,7 +308,7 @@ public interface HornType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractHornType> table = new TypeTable<>(
+	TypeTable<HornType> table = new TypeTable<>(
 		HornType::sanitize,
 		HornType.class,
 		AbstractHornType.class,
@@ -322,7 +320,7 @@ public interface HornType extends BodyPartTypeInterface {
 			}
 		});
 
-	public static AbstractHornType getHornTypeFromId(String id) {
+	static HornType getHornTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -335,11 +333,11 @@ public interface HornType extends BodyPartTypeInterface {
 		return id;
 	}
 
-	public static String getIdFromHornType(AbstractHornType hornType) {
+	static String getIdFromHornType(HornType hornType) {
 		return hornType.getId();
 	}
 
-	public static List<AbstractHornType> getAllHornTypes() {
+	static List<HornType> getAllHornTypes() {
 		return table.listByRace();
 	}
 	
@@ -349,7 +347,7 @@ public interface HornType extends BodyPartTypeInterface {
 	 * @param retainNone Whether to leave HornType.NONE in the list (true) or remove it if it's present (false).
 	 * @return A list of HornTypes which are available for this race to have <b>via transformation, not by default</b>. If you want to find out what HornTypes a race has by default, use their RacialBody's getHornTypes() method.
 	 */
-	public static List<AbstractHornType> getHornTypes(AbstractRace race, boolean retainNone) {
+	static List<HornType> getHornTypes(Race race, boolean retainNone) {
 		var l = table.of(race).orElse(List.of());
 		if(retainNone)
 			return l;

@@ -275,7 +275,7 @@ public class Elizabeth extends NPC {
 				}
 				
 			} else {
-				AbstractPlaceType place = Main.game.getPlayer().getLocationPlaceType();
+				PlaceType place = Main.game.getPlayer().getLocationPlaceType();
 				if(place.equals(PlaceType.SUBMISSION_LILIN_PALACE_GATE) || place.equals(PlaceType.SUBMISSION_LILIN_PALACE)) {
 					this.setLocation(WorldType.SUBMISSION, place);
 				} else {
