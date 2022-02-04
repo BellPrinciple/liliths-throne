@@ -32,7 +32,6 @@ import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
@@ -87,8 +86,8 @@ public class TooltipInformationEventListener implements EventListener {
 	
 	private GameCharacter owner;
 	private AbstractStatusEffect statusEffect;
-	private AbstractPerk perk;
-	private AbstractPerk levelUpPerk;
+	private Perk perk;
+	private Perk levelUpPerk;
 	private int perkRow;
 	private Fetish fetish;
 	private boolean fetishExperience = false;
@@ -1734,7 +1733,7 @@ public class TooltipInformationEventListener implements EventListener {
 		return this;
 	}
 
-	public TooltipInformationEventListener setPerk(AbstractPerk perk, GameCharacter owner) {
+	public TooltipInformationEventListener setPerk(Perk perk, GameCharacter owner) {
 		resetFields();
 		this.perk = perk;
 		this.owner = owner;
@@ -1764,7 +1763,7 @@ public class TooltipInformationEventListener implements EventListener {
 		return this;
 	}
 
-	public TooltipInformationEventListener setLevelUpPerk(int perkRow, AbstractPerk levelUpPerk, GameCharacter owner, boolean availableForSelection) {
+	public TooltipInformationEventListener setLevelUpPerk(int perkRow, Perk levelUpPerk, GameCharacter owner, boolean availableForSelection) {
 		resetFields();
 		this.levelUpPerk = levelUpPerk;
 		this.perkRow = perkRow;

@@ -1,6 +1,6 @@
 package com.lilithsthrone.utils;
 
-import com.lilithsthrone.game.character.effects.AbstractPerk;
+import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.TreeEntry;
 
@@ -17,12 +17,12 @@ public class PerkNode {
 	// h = the estimated movement cost to move from this node to the final
 	// destination. This is often referred to as the heuristic, because it is a
 	// guess.
-	private TreeEntry<PerkCategory, AbstractPerk> perkTreeEntry;
+	private TreeEntry<PerkCategory,Perk> perkTreeEntry;
 	private int f, g, h;
 
-	public PerkNode(PerkNode parent, TreeEntry<PerkCategory, AbstractPerk> perkTreeEntry, int f, int g, int h) {
+	public PerkNode(PerkNode parent, TreeEntry<PerkCategory,Perk> perkTreeEntry, int f, int g, int h) {
 		this.parent = parent;
-		this.perkTreeEntry = new TreeEntry<PerkCategory, AbstractPerk>(perkTreeEntry.getCategory(), perkTreeEntry.getRow(), perkTreeEntry.getEntry());
+		this.perkTreeEntry = new TreeEntry<>(perkTreeEntry.getCategory(), perkTreeEntry.getRow(), perkTreeEntry.getEntry());
 		this.perkTreeEntry.setLinks(perkTreeEntry.getLinks());
 		this.f = f;
 		this.g = g;
@@ -61,11 +61,11 @@ public class PerkNode {
 		this.h = h;
 	}
 
-	public TreeEntry<PerkCategory, AbstractPerk> getPerkTreeEntry() {
+	public TreeEntry<PerkCategory,Perk> getPerkTreeEntry() {
 		return perkTreeEntry;
 	}
 
-	public void setPerkTreeEntry(TreeEntry<PerkCategory, AbstractPerk> perkTreeEntry) {
+	public void setPerkTreeEntry(TreeEntry<PerkCategory,Perk> perkTreeEntry) {
 		this.perkTreeEntry = perkTreeEntry;
 	}
 }

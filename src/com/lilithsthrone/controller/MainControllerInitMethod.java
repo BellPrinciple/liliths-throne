@@ -105,7 +105,6 @@ import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -5811,7 +5810,7 @@ public class MainControllerInitMethod {
 			}
 
 			
-			for(AbstractPerk perk : Perk.getAllPerks()) {
+			for(var perk : Perk.getAllPerks()) {
 				GameCharacter character = CharactersPresentDialogue.characterViewed;
 				if(Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_PERK_TREE || Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_APPEARANCE) {
 					character = Main.game.getPlayer();
@@ -5908,8 +5907,8 @@ public class MainControllerInitMethod {
 				}
 				
 				for(int i = 0; i<PerkManager.ROWS; i++) {
-					for(Entry<PerkCategory, List<TreeEntry<PerkCategory, AbstractPerk>>> entry : PerkManager.MANAGER.getPerkTree(character).get(i).entrySet()) {
-						for(TreeEntry<PerkCategory, AbstractPerk> e : entry.getValue()) {
+					for(var entry : PerkManager.MANAGER.getPerkTree(character).get(i).entrySet()) {
+						for(var e : entry.getValue()) {
 							id = i+"_"+e.getCategory()+"_"+Perk.getIdFromPerk(e.getEntry());
 	
 							if (((EventTarget) MainController.document.getElementById(id)) != null) {

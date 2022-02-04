@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
+import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueManager;
@@ -137,7 +137,7 @@ public class ResponseSex extends Response {
 			List<Fetish> fetishesForUnlock,
 			List<Fetish> fetishesBlocking,
 			CorruptionLevel corruptionBypass,
-			List<AbstractPerk> perksRequired,
+			List<Perk> perksRequired,
 			Femininity femininityRequired,
 			List<Subspecies> subspeciesRequired,
 			boolean consensual,
@@ -416,7 +416,7 @@ public class ResponseSex extends Response {
 			List<Fetish> fetishesForUnlock,
 			List<Fetish> fetishesBlocking,
 			CorruptionLevel corruptionBypass,
-			List<AbstractPerk> perksRequired,
+			List<Perk> perksRequired,
 			Femininity femininityRequired,
 			List<Subspecies> subspeciesRequired,
 			boolean consensual,
@@ -460,7 +460,7 @@ public class ResponseSex extends Response {
 			List<Fetish> fetishesForUnlock,
 			List<Fetish> fetishesBlocking,
 			CorruptionLevel corruptionBypass,
-			List<AbstractPerk> perksRequired,
+			List<Perk> perksRequired,
 			Femininity femininityRequired,
 			List<Subspecies> subspeciesRequired,
 			boolean consensual,

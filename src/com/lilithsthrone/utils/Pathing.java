@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
+import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.effects.TreeEntry;
@@ -369,12 +369,12 @@ public class Pathing {
 		return impossibleDestination;
 	}
 
-	public static List<TreeEntry<PerkCategory, AbstractPerk>> aStarPathingPerkTree(GameCharacter character, TreeEntry<PerkCategory, AbstractPerk> destination) {
-		List<TreeEntry<PerkCategory, AbstractPerk>> startingPerks = PerkManager.getStartingPerks(character);
+	public static List<TreeEntry<PerkCategory,Perk>> aStarPathingPerkTree(GameCharacter character, TreeEntry<PerkCategory,Perk> destination) {
+		List<TreeEntry<PerkCategory,Perk>> startingPerks = PerkManager.getStartingPerks(character);
 		
 		// Set starting point to the same category as the destination, if available:
-		TreeEntry<PerkCategory, AbstractPerk> start = startingPerks.get(0);
-		for(TreeEntry<PerkCategory, AbstractPerk> perk : startingPerks) {
+		var start = startingPerks.get(0);
+		for(var perk : startingPerks) {
 			if(perk.getCategory()==destination.getCategory()) {
 				start = perk;
 			}
@@ -386,16 +386,16 @@ public class Pathing {
 						destination);
 	}
 	
-	public static List<TreeEntry<PerkCategory, AbstractPerk>> aStarPathingPerkTree(
-			Map<Integer, Map<PerkCategory, List<TreeEntry<PerkCategory, AbstractPerk>>>> perkTree,
-			TreeEntry<PerkCategory, AbstractPerk> start,
-			TreeEntry<PerkCategory, AbstractPerk> destination) {
+	public static List<TreeEntry<PerkCategory,Perk>> aStarPathingPerkTree(
+			Map<Integer, Map<PerkCategory, List<TreeEntry<PerkCategory,Perk>>>> perkTree,
+			TreeEntry<PerkCategory,Perk> start,
+			TreeEntry<PerkCategory,Perk> destination) {
 
-		List<TreeEntry<PerkCategory, AbstractPerk>> perkList = new ArrayList<>();
+		var perkList = new ArrayList<TreeEntry<PerkCategory,Perk>>();
 		
-		for(Map<PerkCategory, List<TreeEntry<PerkCategory, AbstractPerk>>> entry1 : perkTree.values()) {
-			for(List<TreeEntry<PerkCategory, AbstractPerk>> entry2 : entry1.values()) {
-				for(TreeEntry<PerkCategory, AbstractPerk> entry3 : entry2) {
+		for(var entry1 : perkTree.values()) {
+			for(var entry2 : entry1.values()) {
+				for(var entry3 : entry2) {
 					if(entry3.getRow()>0) {
 						perkList.add(entry3);
 					}
@@ -403,7 +403,7 @@ public class Pathing {
 			}
 		}
 		
-		List<TreeEntry<PerkCategory, AbstractPerk>> path = new ArrayList<>();
+		var path = new ArrayList<TreeEntry<PerkCategory,Perk>>();
 		
 		List<PerkNode> nodeArray = new ArrayList<>();
 		PerkNode startNode = null;
@@ -446,7 +446,7 @@ public class Pathing {
 			}
 
 			// 2) c)
-			for(TreeEntry<PerkCategory, AbstractPerk> link : Util.mergeLists(n.getPerkTreeEntry().getSiblingLinks(), n.getPerkTreeEntry().getChildLinks())) {
+			for(var link : Util.mergeLists(n.getPerkTreeEntry().getSiblingLinks(), n.getPerkTreeEntry().getChildLinks())) {
 				boolean containsLink = false;
 				PerkNode closedNode = null;
 				for(PerkNode node : closedList) {

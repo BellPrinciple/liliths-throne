@@ -149,7 +149,6 @@ import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Addiction;
 import com.lilithsthrone.game.character.effects.AppliedStatusEffect;
@@ -369,9 +368,9 @@ public abstract class GameCharacter implements XMLSaving {
 	protected Map<Attribute,Float> attributes;
 	protected Map<Attribute,Float> bonusAttributes;
 	protected Map<Attribute,Float> potionAttributes;
-	protected List<AbstractPerk> traits;
-	protected Map<Integer, Set<AbstractPerk>> perks;
-	protected Set<AbstractPerk> specialPerks;
+	protected List<Perk> traits;
+	protected Map<Integer, Set<Perk>> perks;
+	protected Set<Perk> specialPerks;
 	protected Set<Fetish> fetishes;
 	protected Map<Fetish, FetishDesire> fetishDesireMap;
 	protected Map<Fetish, Integer> clothingFetishDesireModifiersMap;
@@ -992,7 +991,7 @@ public abstract class GameCharacter implements XMLSaving {
 		
 		Element characterEquippedPerks = doc.createElement("traits");
 		properties.appendChild(characterEquippedPerks);
-		for(AbstractPerk p : this.getTraits()){
+		for(var p : this.getTraits()){
 			Element element = doc.createElement("perk");
 			characterEquippedPerks.appendChild(element);
 			XMLUtil.addAttribute(doc, element, "type", Perk.getIdFromPerk(p));
@@ -1000,7 +999,7 @@ public abstract class GameCharacter implements XMLSaving {
 
 		Element characterSpecialPerks = doc.createElement("specialPerks");
 		properties.appendChild(characterSpecialPerks);
-		for(AbstractPerk p : this.getSpecialPerks()){
+		for(var p : this.getSpecialPerks()){
 			Element element = doc.createElement("perk");
 			characterSpecialPerks.appendChild(element);
 			XMLUtil.addAttribute(doc, element, "type", Perk.getIdFromPerk(p));
@@ -1008,8 +1007,8 @@ public abstract class GameCharacter implements XMLSaving {
 		
 		Element characterPerks = doc.createElement("perks");
 		properties.appendChild(characterPerks);
-		for(Entry<Integer, Set<AbstractPerk>> p : this.getPerksMap().entrySet()){
-			for(AbstractPerk perk : p.getValue()) {
+		for(var p : this.getPerksMap().entrySet()){
+			for(var perk : p.getValue()) {
 				Element element = doc.createElement("perk");
 				characterPerks.appendChild(element);
 	
@@ -2164,7 +2163,7 @@ public abstract class GameCharacter implements XMLSaving {
 			NodeList perkElements = element.getElementsByTagName("perk");
 			for(int i=0; i<perkElements.getLength(); i++){
 				Element e = ((Element)perkElements.item(i));
-				AbstractPerk p = Perk.getPerkFromId(e.getAttribute("type"));
+				var p = Perk.getPerkFromId(e.getAttribute("type"));
 				if(p.isEquippableTrait()
 						&& (!Main.isVersionOlderThan(version, "0.2.12") || PerkManager.MANAGER.isPerkAnywhereInAvailableTree(p, character))) { // If older than 0.2.12, check to see if the perk should actually be added.
 					character.addTrait(p);
@@ -2180,7 +2179,7 @@ public abstract class GameCharacter implements XMLSaving {
 			NodeList perkElements = element.getElementsByTagName("perk");
 			for(int i=0; i<perkElements.getLength(); i++){
 				Element e = ((Element)perkElements.item(i));
-				AbstractPerk p = Perk.getPerkFromId(e.getAttribute("type"));
+				var p = Perk.getPerkFromId(e.getAttribute("type"));
 				character.addSpecialPerk(p);
 				Main.game.getCharacterUtils().appendToImportLog(log, "<br/>Added Special Perk: "+Perk.getPerkFromId(e.getAttribute("type")).getName(character));
 			}
@@ -2200,7 +2199,7 @@ public abstract class GameCharacter implements XMLSaving {
 					type = type.replaceAll("STRENGTH_", "PHYSIQUE_");
 					try {
 						if(!type.equals("ELEMENTAL_CORE") && !type.equals("ELEMENTAL_CORRUPTION")) {
-							AbstractPerk p = Perk.getPerkFromId(type);
+							var p = Perk.getPerkFromId(type);
 							if(!Main.isVersionOlderThan(version, "0.2.12") || PerkManager.MANAGER.isPerkAnywhereInAvailableTree(p, character)) { // If older than 0.3, check to see if the perk should actually be added.
 								character.addPerk(Integer.valueOf(e.getAttribute("row")), p);
 								Main.game.getCharacterUtils().appendToImportLog(log, "<br/>Added Perk: "+p.getName(character));
@@ -2213,7 +2212,7 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 		if(!version.isEmpty() && Main.isVersionOlderThan(version, "0.3.8.2")) { // Reset perks map for characters who had no starting perks assigned to their tree:
 			boolean reset = true;
-			for(Set<AbstractPerk> a : character.perks.values()) {
+			for(var a : character.perks.values()) {
 				if(!a.isEmpty()) {
 					reset = false;
 					continue;
@@ -5803,11 +5802,11 @@ public abstract class GameCharacter implements XMLSaving {
 			sb.append("[npc.Name] [style.italicsTerrible(lost)] [style.italicsExperience("+levels+" level"+(levels==1?"":"s")+")]!");
 			// Get list of perks which are at the end of the tree's branches, and remove a random one, preferring to remove non-traits first
 			while(this.getPerkPoints()<0) {
-				Map<Integer, Set<AbstractPerk>> removalPerks = new HashMap<>();
-				Map<Integer, Set<AbstractPerk>> removalTraits = new HashMap<>();
+				var removalPerks = new HashMap<Integer,Set<Perk>>();
+				var removalTraits = new HashMap<Integer,Set<Perk>>();
 				
-				for(Entry<Integer, Set<AbstractPerk>> entry : this.getPerksMap().entrySet()) {
-					for(AbstractPerk perk : entry.getValue()) {
+				for(var entry : this.getPerksMap().entrySet()) {
+					for(var perk : entry.getValue()) {
 						if(PerkManager.MANAGER.isPerkEndOfTreeBranch(this, entry.getKey(), perk, true)) {
 							if(perk.isEquippableTrait()) {
 								removalTraits.putIfAbsent(entry.getKey(), new HashSet<>());
@@ -5823,13 +5822,13 @@ public abstract class GameCharacter implements XMLSaving {
 				// Remove perk/trait and return description of losing it
 				if(!removalPerks.isEmpty()) {
 					int rndKey = Util.randomItemFrom(removalPerks.keySet());
-					AbstractPerk rndPerk = Util.randomItemFrom(removalPerks.get(rndKey));
+					var rndPerk = Util.randomItemFrom(removalPerks.get(rndKey));
 					this.removePerk(rndKey, rndPerk);
 					sb.append("<br/>[npc.She] [style.italicsTerrible(lost)] [npc.her] '<i style='color:"+rndPerk.getColour().toWebHexString()+";'>"+rndPerk.getName(this)+"</i>' [style.italicsPerk(perk)]!");
 					
 				} else if(!removalTraits.isEmpty()) {
 					int rndKey = Util.randomItemFrom(removalTraits.keySet());
-					AbstractPerk rndPerk = Util.randomItemFrom(removalTraits.get(rndKey));
+					var rndPerk = Util.randomItemFrom(removalTraits.get(rndKey));
 					this.removeTrait(rndPerk);
 					this.removePerk(rndKey, rndPerk);
 					sb.append("<br/>[npc.She] [style.italicsTerrible(lost)] [npc.her] '<i style='color:"+rndPerk.getColour().toWebHexString()+";'>"+rndPerk.getName(this)+"</i>' [style.italicsTrait(trait)]!");
@@ -5871,8 +5870,8 @@ public abstract class GameCharacter implements XMLSaving {
 					&& (!this.isElemental() || !((Elemental)this).getSummoner().isPlayer())
 					&& !Main.game.getPlayer().getFriendlyOccupants().contains(this.id)){
 				// NPCs who are not 'controlled' by the player automatically level up their perks:
-				Set<AbstractPerk> perksAdded = PerkManager.initialisePerks(this, true);
-				for(AbstractPerk perk : perksAdded) {
+				var perksAdded = PerkManager.initialisePerks(this, true);
+				for(var perk : perksAdded) {
 					sb.append("<br/>[npc.She] [style.italicsExcellent(gained)] the '<i style='color:"+perk.getColour().toWebHexString()+";'>"+perk.getName(this)+"</i>'"
 							+ (perk.isEquippableTrait()
 									?" [style.italicsTrait(trait)]!"
@@ -6266,9 +6265,9 @@ public abstract class GameCharacter implements XMLSaving {
 		int physiquePointsOffset = 0;
 		int arcanePointsOffset = 0;
 		int lustPointsOffset = 0;
-		for(Entry<Integer, Set<AbstractPerk>> entry : this.getPerksMap().entrySet()) {
+		for(var entry : this.getPerksMap().entrySet()) {
 			count += entry.getValue().size();
-			for(AbstractPerk perk : entry.getValue()) {
+			for(var perk : entry.getValue()) {
 				if(perk.getPerkCategory()==PerkCategory.PHYSICAL && physiquePointsOffset<getAdditionalPerkCategoryPoints(PerkCategory.PHYSICAL)) {
 					physiquePointsOffset++;
 				} else if(perk.getPerkCategory()==PerkCategory.ARCANE && arcanePointsOffset<getAdditionalPerkCategoryPoints(PerkCategory.ARCANE)) {
@@ -6285,15 +6284,15 @@ public abstract class GameCharacter implements XMLSaving {
 		return Math.max(0, count);
 	}
 
-	public List<AbstractPerk> getTraits() {
+	public List<Perk> getTraits() {
 		return traits;
 	}
 	
-	public boolean hasTraitActivated(AbstractPerk perk) {
+	public boolean hasTraitActivated(Perk perk) {
 		return traits.contains(perk);
 	}
 
-	public boolean removeTrait(AbstractPerk perk) {
+	public boolean removeTrait(Perk perk) {
 		if(traits.remove(perk)) {
 			applyPerkRemovalEffects(perk);
 			return true;
@@ -6303,14 +6302,14 @@ public abstract class GameCharacter implements XMLSaving {
 	
 	public void clearTraits() {
 		if(traits!=null) {
-			for(AbstractPerk p : traits) {
+			for(var p : traits) {
 				applyPerkRemovalEffects(p);
 			}
 			traits.clear();
 		}
 	}
 	
-	public boolean addTrait(AbstractPerk perk) {
+	public boolean addTrait(Perk perk) {
 		if(traits.contains(perk) || traits.size()>=MAX_TRAITS) {
 			return false;
 		}
@@ -6320,16 +6319,10 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 
 	protected void completePerkReset() {
-		HashMap<Integer, Set<AbstractPerk>> currentPerks;
-		if(perks!=null) {
-			currentPerks = new HashMap<>(perks);
-		} else {
-			currentPerks = new HashMap<>();
-		}
-		
-		for(Entry<Integer, Set<AbstractPerk>> entry : currentPerks.entrySet()) {
-			Set<AbstractPerk> tooTiredToThink = new HashSet<>(entry.getValue());
-			for(AbstractPerk p : tooTiredToThink) {
+		if(perks==null)
+			return;
+		for(var entry : List.copyOf(perks.entrySet())) {
+			for(var p : List.copyOf(entry.getValue())) {
 				this.removePerk(entry.getKey(), p);
 			}
 		}
@@ -6359,14 +6352,14 @@ public abstract class GameCharacter implements XMLSaving {
 		PerkManager.initialisePerks(this, autoSelectPerks);
 	}
 	
-	public Map<Integer, Set<AbstractPerk>> getPerksMap() {
+	public Map<Integer, Set<Perk>> getPerksMap() {
 		return perks;
 	}
 	
 	public int getPerksInCategory(PerkCategory category) { //TODO should use category the perk is in, not its base category
 		int count = 0;
-		for(Set<AbstractPerk> perkSet : getPerksMap().values()) {
-			for(AbstractPerk perk : perkSet) {
+		for(var perkSet : getPerksMap().values()) {
+			for(var perk : perkSet) {
 				if(perk.getPerkCategory()==category) {
 					count++;
 				}
@@ -6375,20 +6368,20 @@ public abstract class GameCharacter implements XMLSaving {
 		return count;
 	}
 	
-	public List<AbstractPerk> getMajorPerks() {
-		List<AbstractPerk> tempPerkList = new ArrayList<>();
-		for(Entry<Integer, Set<AbstractPerk>> entry : perks.entrySet()) {
-			for(AbstractPerk p : entry.getValue()) {
+	public List<Perk> getMajorPerks() {
+		var tempPerkList = new ArrayList<Perk>();
+		for(var entry : perks.entrySet()) {
+			for(var p : entry.getValue()) {
 				if(p.isEquippableTrait()) {
 					tempPerkList.add(p);
 				}
 			}
 		}
-		tempPerkList.sort(Comparator.comparingInt(AbstractPerk::getRenderingPriority).reversed());
+		tempPerkList.sort(Comparator.comparingInt(Perk::getRenderingPriority).reversed());
 		return tempPerkList;
 	}
 	
-	public boolean hasTrait(AbstractPerk p, boolean equipped) {
+	public boolean hasTrait(Perk p, boolean equipped) {
 		if(p.isEquippableTrait()) {
 			if((p.getPerkCategory()==PerkCategory.JOB)) {
 				return getHistory().getAssociatedPerk()==p;
@@ -6401,13 +6394,13 @@ public abstract class GameCharacter implements XMLSaving {
 		return false;
 	}
 	
-	public boolean hasPerkAnywhereInTree(AbstractPerk p) {
-		for(Set<AbstractPerk> perkSet : this.getPerksMap().values()) {
+	public boolean hasPerkAnywhereInTree(Perk p) {
+		for(var perkSet : this.getPerksMap().values()) {
 			if(perkSet.contains(p)) {
 				return true;
 			}
 		}
-		for(AbstractPerk perk : this.getSpecialPerks()) {
+		for(var perk : this.getSpecialPerks()) {
 			if(perk.equals(p)) {
 				return true;
 			}
@@ -6415,18 +6408,18 @@ public abstract class GameCharacter implements XMLSaving {
 		return false;
 	}
 	
-	public boolean hasPerkInTree(int row, AbstractPerk p) {
+	public boolean hasPerkInTree(int row, Perk p) {
 		if(!perks.containsKey(row)) {
 			return false;
 		}
 		return perks.get(row).contains(p);
 	}
 
-	public boolean addPerk(AbstractPerk perk) {
+	public boolean addPerk(Perk perk) {
 		return addPerk(PerkManager.MANAGER.getPerkRow(this, perk), perk);
 	}
 	
-	public boolean addPerk(int row, AbstractPerk perk) {
+	public boolean addPerk(int row, Perk perk) {
 		perks.putIfAbsent(row, new HashSet<>());
 		
 		if (perks.get(row).contains(perk)) {
@@ -6442,7 +6435,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return true;
 	}
 
-	public boolean removePerk(int row, AbstractPerk perk) {
+	public boolean removePerk(int row, Perk perk) {
 		if (!perks.containsKey(row)) {
 			return false;
 		}
@@ -6461,16 +6454,16 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	public void resetSpecialPerksMap() {
-		for(AbstractPerk perk : new HashSet<>(specialPerks)) {
+		for(var perk : new HashSet<>(specialPerks)) {
 			this.removeSpecialPerk(perk);
 		}
 	}
 	
-	public Set<AbstractPerk> getSpecialPerks() {
+	public Set<Perk> getSpecialPerks() {
 		return specialPerks;
 	}
 	
-	public String addSpecialPerk(AbstractPerk perk) {
+	public String addSpecialPerk(Perk perk) {
 		if(specialPerks.add(perk)) {
 			applyPerkGainEffects(perk);
 			if(this.getBody()==null) {
@@ -6483,13 +6476,13 @@ public abstract class GameCharacter implements XMLSaving {
 		return "";
 	}
 	
-	public void removeSpecialPerk(AbstractPerk perk) {
+	public void removeSpecialPerk(Perk perk) {
 		if(specialPerks.remove(perk)) {
 			applyPerkRemovalEffects(perk);
 		}
 	}
 	
-	protected void applyPerkGainEffects(AbstractPerk perk) {
+	protected void applyPerkGainEffects(Perk perk) {
 		// Increment bonus attributes from this perk:
 		if (perk.getAttributeModifiers(this) != null) {
 			for (var e : perk.getAttributeModifiers(this).entrySet()) {
@@ -6501,7 +6494,7 @@ public abstract class GameCharacter implements XMLSaving {
 		updateAttributeListeners(true);
 	}
 	
-	private void applyPerkRemovalEffects(AbstractPerk perk) {
+	private void applyPerkRemovalEffects(Perk perk) {
 		
 		// Reverse bonus attributes from this perk:
 		if (perk.getAttributeModifiers(this) != null) {
@@ -29218,7 +29211,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return body.getTail().setTailCount(this, getTailCount() + increment, overrideYoukoLimitations);
 	}
 	public boolean isYouko() {
-        for(AbstractPerk perk : this.getSpecialPerks()) {
+        for(var perk : this.getSpecialPerks()) {
             if (perk.equals(Perk.SINGLE_TAILED_YOUKO)
             		|| perk.equals(Perk.TWO_TAILED_YOUKO)
             		|| perk.equals(Perk.THREE_TAILED_YOUKO)
