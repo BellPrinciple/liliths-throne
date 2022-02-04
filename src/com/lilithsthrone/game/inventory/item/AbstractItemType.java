@@ -37,7 +37,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.0
  * @author Innoxia
  */
-public abstract class AbstractItemType extends AbstractCoreType {
+public abstract class AbstractItemType implements AbstractCoreType {
 	
 	private String determiner;
 	private String name;

@@ -50,7 +50,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.2.1
  * @author Innoxia
  */
-public abstract class AbstractWeaponType extends AbstractCoreType {
+public abstract class AbstractWeaponType implements AbstractCoreType {
 	
 	private int baseValue;
 	private boolean mod;
