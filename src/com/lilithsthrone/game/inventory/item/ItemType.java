@@ -3038,6 +3038,7 @@ public class ItemType {
 				int override = mainSubspecies.getSubspeciesOverridePriority();
 				String raceName = (override>0?mainSubspecies.getName(null):mainSubspecies.getRace().getName(false));
 				String raceNamePlural = (override>0?mainSubspecies.getNamePlural(null):mainSubspecies.getRace().getNamePlural(false));
+				String effectId = "COMBAT_BONUS_"+Subspecies.getIdFromSubspecies(mainSubspecies).toUpperCase();
 
 				AbstractStatusEffect statusEffect = new AbstractStatusEffect(80,
 						(mainSubspecies.getRace()==Race.ANGEL
@@ -3067,6 +3068,10 @@ public class ItemType {
 									25f)),
 						null) {
 					@Override
+					public String getId() {
+						return effectId;
+					}
+					@Override
 					public String getDescription(GameCharacter target) {
 						if(target == null) {
 							return "";
@@ -3080,11 +3085,7 @@ public class ItemType {
 					}
 				};
 
-				String effect_id = "COMBAT_BONUS_"+Subspecies.getIdFromSubspecies(mainSubspecies).toUpperCase();
-
-				StatusEffect.statusEffectToIdMap.put(statusEffect, effect_id);
-				StatusEffect.idToStatusEffectMap.put(effect_id, statusEffect);
-				StatusEffect.allStatusEffects.add(statusEffect);
+				StatusEffect.add(statusEffect);
 
 				AbstractItemEffectType effectType = new AbstractItemEffectType(Util.newArrayListOfValues(
 						"[style.boldGood(+1)] [style.boldArcane(Arcane essence)]"),
