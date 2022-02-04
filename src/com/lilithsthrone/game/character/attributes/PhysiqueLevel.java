@@ -1,6 +1,5 @@
 package com.lilithsthrone.game.character.attributes;
 
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -14,42 +13,42 @@ public enum PhysiqueLevel {
 	
 	ZERO_WEAK("frail", 0, 10, PresetColour.PHYSIQUE_STAGE_ZERO) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_0;
 		}
 	},
 	
 	ONE_AVERAGE("average", 10, 30, PresetColour.PHYSIQUE_STAGE_ONE) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_1;
 		}
 	},
 	
 	TWO_STRONG("fit", 30, 50, PresetColour.PHYSIQUE_STAGE_TWO) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_2;
 		}
 	},
 	
 	THREE_POWERFUL("powerful", 50, 70, PresetColour.PHYSIQUE_STAGE_THREE) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_3;
 		}
 	},
 	
 	FOUR_MIGHTY("mighty", 70, 90, PresetColour.PHYSIQUE_STAGE_FOUR) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_4;
 		}
 	},
 	
 	FIVE_HERCULEAN("herculean", 90, 100, PresetColour.PHYSIQUE_STAGE_FIVE) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.PHYSIQUE_PERK_5;
 		}
 	};
@@ -65,7 +64,7 @@ public enum PhysiqueLevel {
 		this.colour = colour;
 	}
 	
-	public abstract AbstractStatusEffect getRelatedStatusEffect();
+	public abstract StatusEffect getRelatedStatusEffect();
 
 	public String getName() {
 		return name;

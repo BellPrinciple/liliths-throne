@@ -9,7 +9,6 @@ import java.util.Stack;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.AppliedStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -72,7 +71,7 @@ public class Combat {
 	
 	private Map<GameCharacter, Stack<Float>> manaBurnStack;
 	
-	private Map<GameCharacter, Map<AbstractStatusEffect, Integer>> statusEffectsToApply;
+	private Map<GameCharacter, Map<StatusEffect, Integer>> statusEffectsToApply;
 	
 	private Map<GameCharacter, List<String>> combatContent;
 	private Map<GameCharacter, List<String>> predictionContent;
@@ -1164,7 +1163,7 @@ public class Combat {
 		boolean isCrit = move.canCrit(selectedMoveIndex, Main.game.getPlayer(), moveTarget, pcEnemies, pcAllies);
 		
 		if(move.getStatusEffects(Main.game.getPlayer(), moveTarget, isCrit)!=null && !move.getStatusEffects(Main.game.getPlayer(), moveTarget, isCrit).isEmpty()) {
-			for(Entry<AbstractStatusEffect, Integer> entry : move.getStatusEffects(Main.game.getPlayer(), moveTarget, isCrit).entrySet()) {
+			for(var entry : move.getStatusEffects(Main.game.getPlayer(), moveTarget, isCrit).entrySet()) {
 				moveStatblock.append("Applies <b style='color:"+entry.getKey().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(entry.getKey().getName(moveTarget))+"</b>"
 						+ " for <b>"+entry.getValue()+(entry.getValue()==1?" turn":" turns")+"</b><br/>");
 			}
@@ -1423,7 +1422,7 @@ public class Combat {
 			// After all defensive and supportive moves have been made, apply the queued up status effects before the attacks start hitting, as they should only be defensive or supportive-based.
 			if(i==2) {
 				for(GameCharacter character : combatants) {
-					for(Entry<AbstractStatusEffect, Integer> entry : statusEffectsToApply.get(character).entrySet()) {
+					for(var entry : statusEffectsToApply.get(character).entrySet()) {
 						character.addStatusEffect(entry.getKey(), entry.getValue()+1);// Add 1 to the status effect duration, as it gets immediately decremented by 1 within the getCharactersTurnDiv() method (as it calls the applyEffects() method).
 					}
 					statusEffectsToApply.put(character, new HashMap<>());
@@ -1485,7 +1484,7 @@ public class Combat {
 		
 		// End turn effects:
 		for(GameCharacter character : combatants) {
-			for(Entry<AbstractStatusEffect, Integer> entry : statusEffectsToApply.get(character).entrySet()) {
+			for(var entry : statusEffectsToApply.get(character).entrySet()) {
 				character.addStatusEffect(entry.getKey(), entry.getValue());
 			}
 			statusEffectsToApply.put(character, new HashMap<>());
@@ -1674,9 +1673,9 @@ public class Combat {
 	
 	private String applyEffects(GameCharacter character) {
 		endTurnStatusEffectText = new StringBuilder();
-		List<AbstractStatusEffect> effectsToRemove = new ArrayList<>();
+		var effectsToRemove = new ArrayList<StatusEffect>();
 		for (AppliedStatusEffect appliedSe : character.getAppliedStatusEffects()) {
-			AbstractStatusEffect se = appliedSe.getEffect();
+			var se = appliedSe.getEffect();
 			if (se.isCombatEffect()) {
 				appliedSe.setSecondsPassed(turn);
 				StringBuilder s = new StringBuilder();
@@ -1709,7 +1708,7 @@ public class Combat {
 				}
 			}
 		}
-		for (AbstractStatusEffect se : effectsToRemove) {
+		for (var se : effectsToRemove) {
 			endTurnStatusEffectText.append(character.removeStatusEffectCombat(se));
 		}
 		return endTurnStatusEffectText.toString();
@@ -1995,14 +1994,14 @@ public class Combat {
 		return manaBurnStack;
 	}
 	
-	public void addStatusEffectToApply(GameCharacter target, AbstractStatusEffect effect, int duration) {
+	public void addStatusEffectToApply(GameCharacter target, StatusEffect effect, int duration) {
 		statusEffectsToApply.get(target).put(effect, duration);
 //		statusEffectsToApply.get(target).putIfAbsent(effect, 0);
 //		
 //		statusEffectsToApply.get(target).put(effect, statusEffectsToApply.get(target).get(effect)+duration);
 	}
 
-	public Map<GameCharacter, Map<AbstractStatusEffect, Integer>> getStatusEffectsToApply() {
+	public Map<GameCharacter, Map<StatusEffect, Integer>> getStatusEffectsToApply() {
 		return statusEffectsToApply;
 	}
 

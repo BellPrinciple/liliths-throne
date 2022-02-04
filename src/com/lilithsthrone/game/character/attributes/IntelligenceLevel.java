@@ -1,6 +1,5 @@
 package com.lilithsthrone.game.character.attributes;
 
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.colours.Colour;
@@ -15,7 +14,7 @@ public enum IntelligenceLevel {
 	
 	ZERO_AIRHEAD("arcane impotence", 0, 10, PresetColour.INTELLIGENCE_STAGE_ZERO) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			if(Main.game.isInNewWorld()) {
 				return StatusEffect.INTELLIGENCE_PERK_0;
 			} else {
@@ -26,35 +25,35 @@ public enum IntelligenceLevel {
 	
 	ONE_AVERAGE("arcane potential", 10, 30, PresetColour.INTELLIGENCE_STAGE_ONE) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.INTELLIGENCE_PERK_1;
 		}
 	},
 	
 	TWO_SMART("arcane proficiency", 30, 50, PresetColour.INTELLIGENCE_STAGE_TWO) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.INTELLIGENCE_PERK_2;
 		}
 	},
 	
 	THREE_BRAINY("arcane prowess", 50, 70, PresetColour.INTELLIGENCE_STAGE_THREE) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.INTELLIGENCE_PERK_3;
 		}
 	},
 	
 	FOUR_GENIUS("arcane mastery", 70, 90, PresetColour.INTELLIGENCE_STAGE_FOUR) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.INTELLIGENCE_PERK_4;
 		}
 	},
 	
 	FIVE_POLYMATH("arcane brilliance", 90, 100, PresetColour.INTELLIGENCE_STAGE_FIVE) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.INTELLIGENCE_PERK_5;
 		}
 	};
@@ -70,7 +69,7 @@ public enum IntelligenceLevel {
 		this.colour = colour;
 	}
 	
-	public abstract AbstractStatusEffect getRelatedStatusEffect();
+	public abstract StatusEffect getRelatedStatusEffect();
 
 	public String getName() {
 		return name;

@@ -16,7 +16,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.attributes.LustLevel;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.combat.Attack;
 import com.lilithsthrone.game.combat.CombatBehaviour;
@@ -85,8 +84,8 @@ public abstract class AbstractCombatMove {
     
     private String SVGString;
 
-	private Map<AbstractStatusEffect, Integer> statusEffects;
-	private Map<AbstractStatusEffect, Integer> statusEffectsCritical;
+	private Map<StatusEffect, Integer> statusEffects;
+	private Map<StatusEffect, Integer> statusEffectsCritical;
 
     private Spell associatedSpell;
     
@@ -100,7 +99,7 @@ public abstract class AbstractCombatMove {
     		boolean canTargetAllies,
     		boolean canTargetEnemies,
     		boolean canTargetSelf,
-    		Map<AbstractStatusEffect, Integer> statusEffects) {
+    		Map<StatusEffect, Integer> statusEffects) {
     	this(category, name, cooldown, APcost, 1, type, damageType, DamageVariance.NONE, pathName, null, canTargetAllies, canTargetEnemies, canTargetSelf, statusEffects, Util.newHashMapOfValues());
     }
 
@@ -115,7 +114,7 @@ public abstract class AbstractCombatMove {
     		boolean canTargetAllies,
     		boolean canTargetEnemies,
     		boolean canTargetSelf,
-    		Map<AbstractStatusEffect, Integer> statusEffects) {
+    		Map<StatusEffect, Integer> statusEffects) {
     	this(category, name, cooldown, APcost, 1, type, damageType, damageVariance, pathName, null, canTargetAllies, canTargetEnemies, canTargetSelf, statusEffects, Util.newHashMapOfValues());
     }
 
@@ -130,7 +129,7 @@ public abstract class AbstractCombatMove {
 			boolean canTargetAllies,
 			boolean canTargetEnemies,
 			boolean canTargetSelf,
-			Map<AbstractStatusEffect, Integer> statusEffects) {
+			Map<StatusEffect, Integer> statusEffects) {
 		this(category, name, cooldown, APcost, 1, type, damageType, DamageVariance.NONE, pathName, iconColours, canTargetAllies, canTargetEnemies, canTargetSelf, statusEffects, Util.newHashMapOfValues());
 	}
     
@@ -156,8 +155,8 @@ public abstract class AbstractCombatMove {
     		boolean canTargetAllies,
     		boolean canTargetEnemies,
     		boolean canTargetSelf,
-			Map<AbstractStatusEffect, Integer> statusEffects,
-			Map<AbstractStatusEffect, Integer> statusEffectsCritical) {
+			Map<StatusEffect, Integer> statusEffects,
+			Map<StatusEffect, Integer> statusEffectsCritical) {
     	this.fromExternalFile = false;
     	this.mod = false;
     	
@@ -296,7 +295,7 @@ public abstract class AbstractCombatMove {
 					for(Element e : coreElement.getMandatoryFirstOf("statusEffects").getAllOf("effect")) {
 						try {
 							int length = Integer.valueOf(e.getAttribute("turnLength"));
-							AbstractStatusEffect se = StatusEffect.getStatusEffectFromId(e.getTextContent());
+							var se = StatusEffect.getStatusEffectFromId(e.getTextContent());
 							if(Boolean.valueOf(e.getAttribute("onCrit"))) {
 								statusEffectsCritical.put(se, length);
 							} else {
@@ -826,7 +825,7 @@ public abstract class AbstractCombatMove {
         return SVGString;
     }
     
-    public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
+    public Map<StatusEffect,Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
     	if(isCritical) {
     		return statusEffectsCritical;
     	}
