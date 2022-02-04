@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.combat.spells.SpellUpgrade;
@@ -173,40 +172,23 @@ public abstract class AbstractPerk implements Perk {
 			e.printStackTrace();
 		}
 	}
-	
-	public boolean isAlwaysAvailable() {
-		return false;
-	}
 
-	/**
-	 * Override this and return true if the perk is one that is unlock via special in-game events.
-	 * @return true If this perk does not appear in the perk tree, but is otherwise obtainable through special means.
-	 */
-	public boolean isHiddenPerk() {
-		return false;
-	}
-	
-	/**
-	 * @return true if this a perk that's granted as part of an NPC's background.
-	 */
-	public boolean isBackgroundPerk() {
-		return false;
-	}
-	
+	@Override
 	public String getName(GameCharacter owner) {
 		return name;
 	}
 
+	@Override
 	public Colour getColour() {
 		return colours.get(0);
 	}
 
+	@Override
 	public boolean isEquippableTrait() {
 		return equippableTrait;
 	}
 
-	public abstract String getDescription(GameCharacter target);
-
+	@Override
 	public List<String> getModifiersAsStringList(GameCharacter character) {
 		modifiersList.clear();
 		
@@ -219,46 +201,42 @@ public abstract class AbstractPerk implements Perk {
 		return Util.mergeLists(modifiersList, getExtraEffects());
 	}
 
+	@Override
 	public HashMap<Attribute,Integer> getAttributeModifiers(GameCharacter character) {
 		return attributeModifiers;
 	}
 
-	public String applyPerkGained(GameCharacter character) {
-		return "";
-	};
-
-	public String applyPerkLost(GameCharacter character) {
-		return "";
-	};
-
-	public CorruptionLevel getAssociatedCorruptionLevel() {
-		return CorruptionLevel.ZERO_PURE;
-	}
-
+	@Override
 	public int getRenderingPriority() {
 		return renderingPriority;
 	}
 
+	@Override
 	public List<String> getExtraEffects() {
 		return extraEffects;
 	}
 
+	@Override
 	public String getSVGString(GameCharacter owner) {
 		return SVGString;
 	}
 
+	@Override
 	public PerkCategory getPerkCategory() {
 		return perkCategory;
 	}
 
+	@Override
 	public Spell getSpell() {
 		return spell;
 	}
 
+	@Override
 	public SpellUpgrade getSpellUpgrade() {
 		return spellUpgrade;
 	}
 
+	@Override
 	public SpellSchool getSchool() {
 		return school;
 	}

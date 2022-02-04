@@ -32,6 +32,63 @@ public interface Perk {
 
 	String getId();
 
+	default boolean isAlwaysAvailable() {
+		return false;
+	}
+
+	/**
+	 * Override this and return true if the perk is one that is unlock via special in-game events.
+	 * @return true If this perk does not appear in the perk tree, but is otherwise obtainable through special means.
+	 */
+	default boolean isHiddenPerk() {
+		return false;
+	}
+
+	/**
+	 * @return true if this a perk that's granted as part of an NPC's background.
+	 */
+	default boolean isBackgroundPerk() {
+		return false;
+	}
+
+	String getName(GameCharacter owner);
+
+	Colour getColour();
+
+	boolean isEquippableTrait();
+
+	String getDescription(GameCharacter target);
+
+	List<String> getModifiersAsStringList(GameCharacter character);
+
+	HashMap<Attribute,Integer> getAttributeModifiers(GameCharacter character);
+
+	default String applyPerkGained(GameCharacter character) {
+		return "";
+	};
+
+	default String applyPerkLost(GameCharacter character) {
+		return "";
+	};
+
+	default CorruptionLevel getAssociatedCorruptionLevel() {
+		return CorruptionLevel.ZERO_PURE;
+	}
+
+	int getRenderingPriority();
+
+	List<String> getExtraEffects();
+
+	String getSVGString(GameCharacter owner);
+
+	PerkCategory getPerkCategory();
+
+	Spell getSpell();
+
+	SpellUpgrade getSpellUpgrade();
+
+	SpellSchool getSchool();
+
 	// NPC Histories:
 	
 	public static AbstractPerk JOB_MISC = new AbstractPerk(20,
