@@ -41,7 +41,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -1962,7 +1961,7 @@ public class MainController implements Initializable {
 				}
 			}
 			
-			for (AbstractPerk trait : character.getTraits()) {
+			for (var trait : character.getTraits()) {
 				id = "TRAIT_" + idModifier + Perk.getIdFromPerk(trait);
 				if (((EventTarget) documentAttributes.getElementById(id)) != null) {
 					addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
@@ -2313,7 +2312,7 @@ public class MainController implements Initializable {
 				}
 				
 				// For perk slots:
-				for (AbstractPerk p : character.getMajorPerks()) {
+				for (var p : character.getMajorPerks()) {
 					id = "PERK_NPC_"+idModifier + Perk.getIdFromPerk(p);
 					if (((EventTarget) documentRight.getElementById(id)) != null) {
 						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);

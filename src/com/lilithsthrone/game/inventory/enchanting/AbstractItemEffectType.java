@@ -68,7 +68,6 @@ import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
 import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.Race;
@@ -190,7 +189,7 @@ public abstract class AbstractItemEffectType {
 			}
 		}
 
-		AbstractPerk perk = Perk.getSubspeciesRelatedPerk(mainSubspecies);
+		var perk = Perk.getSubspeciesRelatedPerk(mainSubspecies);
 		if(!reader.isPlayer() || ((PlayerCharacter) reader).addRaceDiscoveredFromBook(mainSubspecies) || !reader.hasPerkAnywhereInTree(perk)) {
 			return (withDescription
 						?mainSubspecies.getBasicDescription(null)

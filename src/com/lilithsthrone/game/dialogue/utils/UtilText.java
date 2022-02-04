@@ -122,7 +122,6 @@ import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
@@ -583,11 +582,11 @@ public class UtilText {
 	}
 	
 	// "Temporary" methods until I refine the way DialogueNodes work:
-	public static String getRequirementsDescription(AbstractPerk perkRequired) {
+	public static String getRequirementsDescription(Perk perkRequired) {
 		return ("You require the perk '<b style='color:"+perkRequired.getPerkCategory().getColour().toWebHexString()+";'>"+perkRequired.getName(Main.game.getPlayer())+"</b>'.");
 	}
 	
-	public static String getRequirementsDescription(AbstractPerk perkRequired, Gender... gendersRequired) {
+	public static String getRequirementsDescription(Perk perkRequired, Gender... gendersRequired) {
 		descriptionSB.setLength(0);
 		
 		descriptionSB.append("You require the perk '<b style='color:"+perkRequired.getPerkCategory().getColour().toWebHexString()+";'>"+perkRequired.getName(Main.game.getPlayer())+"</b>'");
@@ -613,7 +612,7 @@ public class UtilText {
 		return descriptionSB.toString();
 	}
 	
-	public static String getRequirementsDescription(CorruptionLevel corruptionNeeded, AbstractPerk... perkRequired) {
+	public static String getRequirementsDescription(CorruptionLevel corruptionNeeded, Perk... perkRequired) {
 		descriptionSB.setLength(0);
 		
 		descriptionSB.append("You require a corruption level of <b style='color:"+corruptionNeeded.getColour().toWebHexString()+";'>"+corruptionNeeded.getName()+"</b>");
@@ -9957,7 +9956,7 @@ public class UtilText {
 		for (OccupationTag occupationTag : OccupationTag.values()) {
 			engine.put("OCCUPATION_TAG_" + occupationTag.toString(), occupationTag);
 		}
-		for(AbstractPerk p : Perk.getAllPerks()) {
+		for(var p : Perk.getAllPerks()) {
 			engine.put("PERK_"+Perk.getIdFromPerk(p), p);
 		}
 		for(PerkCategory pk : PerkCategory.values()) {

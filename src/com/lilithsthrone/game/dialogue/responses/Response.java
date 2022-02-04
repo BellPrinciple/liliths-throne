@@ -10,7 +10,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -44,7 +43,7 @@ public class Response {
 	
 	protected List<Fetish> fetishesRequired;
 	protected CorruptionLevel corruptionBypass;
-	private List<AbstractPerk> perksRequired;
+	private List<Perk> perksRequired;
 	private Femininity femininityRequired;
 	private List<Subspecies> subspeciesRequired;
 
@@ -96,7 +95,7 @@ public class Response {
 			DialogueNode nextDialogue,
 			List<Fetish> fetishesForUnlock,
 			CorruptionLevel corruptionBypass,
-			List<AbstractPerk> perksRequired,
+			List<Perk> perksRequired,
 			Femininity femininityRequired,
 			List<Subspecies> subspeciesRequired) {
 		this(title, tooltipText, nextDialogue,
@@ -110,7 +109,7 @@ public class Response {
 			DialogueNode nextDialogue, 
 			List<Fetish> fetishesForUnlock,
 			CorruptionLevel corruptionBypass,
-			List<AbstractPerk> perksRequired,
+			List<Perk> perksRequired,
 			Femininity femininityRequired,
 			List<Subspecies> subspeciesRequired,
 			SexActionType sexActionType,
@@ -546,7 +545,7 @@ public class Response {
 		SB = new StringBuilder();
 		
 		if(getPerksRequired()!=null) {
-			for(AbstractPerk p : getPerksRequired()){
+			for(var p : getPerksRequired()){
 				if(p.isEquippableTrait()
 						?Main.game.getPlayer().hasTrait(p, true)
 						:Main.game.getPlayer().hasPerkAnywhereInTree(p)) {
@@ -834,7 +833,7 @@ public class Response {
 		if(getPerksRequired()==null) {
 			return false;
 		}
-		for(AbstractPerk p : getPerksRequired()) {
+		for(var p : getPerksRequired()) {
 			if(p.isEquippableTrait()
 					?Main.game.getPlayer().hasTrait(p, true)
 					:Main.game.getPlayer().hasPerkAnywhereInTree(p)) {
@@ -992,7 +991,7 @@ public class Response {
 		return corruptionBypass;
 	}
 
-	public List<AbstractPerk> getPerksRequired() {
+	public List<Perk> getPerksRequired() {
 		if(fromExternalFile && perksRequired==null && perksRequiredId!=null && !perksRequiredId.isEmpty()) {
 			perksRequired = new ArrayList<>();
 			for(String perkId : perksRequiredId) {

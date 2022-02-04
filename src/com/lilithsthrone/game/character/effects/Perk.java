@@ -5840,7 +5840,7 @@ public interface Perk {
 	};
 
 	@Deprecated
-	public static AbstractPerk getPerkFromId(String id) {
+	public static Perk getPerkFromId(String id) {
 		return table.of(id);
 	}
 
@@ -5871,17 +5871,17 @@ public interface Perk {
 
 	Collection table = new Collection();
 
-	final class Collection extends Table<AbstractPerk> {
+	final class Collection extends Table<Perk> {
 
-		private final List<AbstractPerk> hidden = new ArrayList<>();
+		private final List<Perk> hidden = new ArrayList<>();
 		private boolean subspeciesPerksGenerated;
 
-		public List<AbstractPerk> list() {
+		public List<Perk> list() {
 			generateSubspeciesPerks();
 			return super.list();
 		}
 
-		public List<AbstractPerk> hidden() {
+		public List<Perk> hidden() {
 			generateSubspeciesPerks();
 			return hidden;
 		}
@@ -5905,7 +5905,7 @@ public interface Perk {
 				boolean mainSubspecies = m==main.getDamageMultiplier();
 				var subToUse = mainSubspecies?main:sub;
 
-				AbstractPerk racePerk = new AbstractPerk(20,
+				Perk racePerk = new AbstractPerk(20,
 						false,
 						Util.capitaliseSentence(mainSubspecies?sub.getRace().getName(false):subToUse.getName(null))+" knowledge",
 						PerkCategory.LUST,
@@ -5936,17 +5936,17 @@ public interface Perk {
 				hidden.add(racePerk);
 			}
 			subspeciesPerksGenerated = true;
-			hidden.sort(Comparator.comparingInt(AbstractPerk::getRenderingPriority));
+			hidden.sort(Comparator.comparingInt(Perk::getRenderingPriority));
 		}
 	}
 	
-	public static String getIdFromPerk(AbstractPerk perk) {
+	public static String getIdFromPerk(Perk perk) {
 		table.generateSubspeciesPerks();
 		return perk.getId();
 	}
 
 
-	public static AbstractPerk getSubspeciesRelatedPerk(Subspecies subspecies) {
+	static Perk getSubspeciesRelatedPerk(Subspecies subspecies) {
 		table.generateSubspeciesPerks();
 		
 		var subToUse =
@@ -5958,11 +5958,11 @@ public interface Perk {
 	}
 
 	@Deprecated
-	public static List<AbstractPerk> getAllPerks() {
+	static List<Perk> getAllPerks() {
 		return table.list();
 	}
 
-	public static List<AbstractPerk> getHiddenPerks() {
+	static List<Perk> getHiddenPerks() {
 		return table.hidden();
 	}
 }

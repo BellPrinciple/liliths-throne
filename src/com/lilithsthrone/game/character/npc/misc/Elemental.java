@@ -36,7 +36,7 @@ import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
 import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
+import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -332,7 +332,7 @@ public class Elemental extends NPC {
 	}
 	
 	@Override
-	public boolean addPerk(int row, AbstractPerk perk) {
+	public boolean addPerk(int row, Perk perk) {
 		perks.putIfAbsent(row, new HashSet<>());
 		
 		if (perks.get(row).contains(perk)) {
@@ -364,8 +364,8 @@ public class Elemental extends NPC {
 		this.resetSpells();
 		
 		// Add spells:
-		for(Set<AbstractPerk> perkSet : this.getPerksMap().values()) {
-			for(AbstractPerk p : perkSet) {
+		for(var perkSet : this.getPerksMap().values()) {
+			for(var p : perkSet) {
 				if(p.getSchool()==school) {
 					if(p.getSpellUpgrade()!=null) {
 						this.addSpellUpgrade(p.getSpellUpgrade());

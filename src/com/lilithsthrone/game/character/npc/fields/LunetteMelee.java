@@ -27,7 +27,6 @@ import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
 import com.lilithsthrone.game.character.body.valueEnums.TesticleSize;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
-import com.lilithsthrone.game.character.effects.AbstractPerk;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -118,10 +117,10 @@ public class LunetteMelee extends NPC {
 	@Override
 	public void setupPerks(boolean autoSelectPerks) {
 		this.addSpecialPerk(Perk.SPECIAL_MELEE_EXPERT);
-		this.addSpecialPerk(Util.randomItemFrom(new AbstractPerk[] {
+		this.addSpecialPerk(Util.randomItemFromValues(
 				Perk.SPECIAL_MARTIAL_BACKGROUND,
 				Perk.SPECIAL_HEALTH_FANATIC
-		}));
+		));
 		PerkManager.initialisePerks(this,
 				Util.newArrayListOfValues(),
 				Util.newHashMapOfValues(
