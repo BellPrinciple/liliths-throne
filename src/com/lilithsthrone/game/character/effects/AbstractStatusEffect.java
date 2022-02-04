@@ -317,15 +317,12 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 		return attributeModifiersList;
 	}
 
+	@Override
 	public boolean isRequiresApplicationCheck() {
 		return requiresApplicationCheck;
 	}
 
-	/**
-	 * @param target
-	 * @return True if this status effect should be applied to the target.
-	 *  False if conditions are not met <b>or</b> this status effect is only for timed purposes (i.e. the only time it should be applied is with a time condition.).
-	 */
+	@Override
 	public boolean isConditionsMet(GameCharacter target) {
 		if(this.isFromExternalFile() && target!=null && Main.game.isStarted()) {
 			if(!shortConditionalCheck) {
@@ -347,53 +344,43 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 		}
 		return false;
 	}
-	
+
+	@Override
 	public int getApplicationLength() {
 		return applicationLength;
 	}
 
+	@Override
 	public boolean isConstantRefresh() {
 		return constantRefresh;
 	}
 
+	@Override
 	public boolean renderInEffectsPanel() {
 		return renderInEffectsPanel;
 	}
-	
+
+	@Override
 	public boolean isCombatEffect() {
 		return combatEffect;
 	}
-	
+
+	@Override
 	public boolean isSexEffect() {
 		return sexEffect;
 	}
-	
+
+	@Override
 	public boolean isRemoveAtEndOfSex() {
 		return removeAtEndOfSex;
 	}
 
+	@Override
 	public List<ItemTag> getTags() {
 		return tags;
 	}
-	
-	/**
-	 * If set to return true, this status effect will always be loaded from a saved file, regardless of whether or not it has no remaining time set.
-	 * This is only really used for status effects that will be superseded by other effects which have their isConditionsMet() method checked first.
-	 * At the time of creation, this method is only used for CHASTITY_4.
-	 */
-	public boolean forceLoad() {
-		return false;
-	}
-	
-	/**
-	 * This method id called once when the target initially gains this status effect.
-	 * @param target
-	 * @return A String describing any effects which are applied when the target first gains this StatusEffect.
-	 */
-	public String applyAdditionEffect(GameCharacter target) {
-		return "";
-	}
-	
+
+	@Override
 	public String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
 		if(this.isFromExternalFile() && target!=null) {
 			String parsedResult = UtilText.parse(target, applyEffectString.replaceAll("TOTAL_SECONDS_PASSED", String.valueOf(totalSecondsPassed)).replaceAll("SECONDS_PASSED", String.valueOf(secondsPassed)));
@@ -406,6 +393,7 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 		return "";
 	}
 
+	@Override
 	public final String applyRemoveStatusEffect(GameCharacter target) {
 		return extraRemovalEffects(target);
 	}
@@ -421,7 +409,8 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 		}
 		return "";
 	}
-	
+
+	@Override
 	public String applyPostRemovalStatusEffect(GameCharacter target) {
 		if(this.isFromExternalFile() && target!=null) {
 			String parsedResult = UtilText.parse(target, applyPostRemovalString);
@@ -433,23 +422,28 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 		}
 		return "";
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
-	
+
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
 
+	@Override
 	public StatusEffectCategory getCategory() {
 		return category;
 	}
 
+	@Override
 	public int getRenderingPriority() {
 		return renderingPriority;
 	}
 
+	@Override
 	public String getName(GameCharacter target) {
 		if(target!=null) {
 			return UtilText.parse(target, name);
@@ -457,6 +451,7 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 		return name;
 	}
 
+	@Override
 	public String getDescription(GameCharacter target) {
 		if(description!=null && target!=null) {
 			return UtilText.parse(target, description);
@@ -472,10 +467,7 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 		return null;
 	}
 	
-	/**
-	 * Used to display multiple extra effects in their own description boxes, such as ongoing sex descriptions.
-	 * @return A List of Values whose key is the line height and whose value is the String to be displayed.
-	 */
+	@Override
 	public List<Value<Integer, String>> getAdditionalDescriptions(GameCharacter target) {
 		Value<Integer, String> additional = getAdditionalDescription(target);
 		if(additional!=null) {
@@ -484,6 +476,7 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 		return null;
 	}
 
+	@Override
 	public List<String> getModifiersAsStringList(GameCharacter target) {
 		ArrayList<String> fullModList = new ArrayList<>(attributeModifiersToStringList(getAttributeModifiers(target)));
 		fullModList.addAll(getExtraEffects(target));
@@ -492,16 +485,19 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 		}
 		return fullModList;
 	}
-	
+
+	@Override
 	public EffectBenefit getBeneficialStatus() {
 		return beneficial;
 	}
 
+	@Override
 	public Map<Attribute,Float> getAttributeModifiers(GameCharacter target) {
 		return attributeModifiers;
 	}
 	
 	// This has to be overridden, as defining CombatMoves in a status effect's constructor can cause initialisation errors.
+	@Override
 	public List<AbstractCombatMove> getCombatMoves() {
 		if(this.isFromExternalFile()) {
 			List<AbstractCombatMove> combatMoves = new ArrayList<>();
@@ -514,6 +510,7 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 	}
 
 	// This has to be overridden, as defining Spells in a status effect's constructor can cause initialisation errors.
+	@Override
 	public List<Spell> getSpells() {
 		if(this.isFromExternalFile()) {
 			List<Spell> spells = new ArrayList<>();
@@ -524,23 +521,28 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 		}
 		return new ArrayList<>();
 	}
-	
+
+	@Override
 	public Colour getColour() {
 		return colourShades.get(0);
 	}
 
+	@Override
 	public List<Colour> getColourShades() {
 		return colourShades;
 	}
 
+	@Override
 	public int getEffectInterval() {
 		return effectInterval;
 	}
 
+	@Override
 	public List<String> getExtraEffects(GameCharacter target) {
 		return extraEffects;
 	}
 
+	@Override
 	public String getSVGString(GameCharacter owner) {
 		if(SVGString==null) {
 			if(pathName!=null && !pathName.isEmpty()) {
@@ -571,19 +573,6 @@ public abstract class AbstractStatusEffect implements StatusEffect {
 			}
 		}
 		return SVGString;
-	}
-	
-	
-	
-	
-	//******************************** Methods for sex effects: ********************************//
-	
-	public float getArousalPerTurnSelf(GameCharacter self) {
-		return 0;
-	}
-	
-	public float getArousalPerTurnPartner(GameCharacter self, GameCharacter target) {
-		return 0;
 	}
 	
 	public static float getPenetrationArousalPerTurn(GameCharacter target, SexAreaPenetration penetration) {

@@ -46,6 +46,7 @@ import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.DamageType;
+import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.combat.spells.SpellUpgrade;
@@ -83,6 +84,135 @@ import com.lilithsthrone.world.places.PlaceType;
 public interface StatusEffect {
 
 	String getId();
+
+	default boolean isRequiresApplicationCheck() {
+		return false;
+	}
+
+	/**
+	 * @param target
+	 * @return True if this status effect should be applied to the target.
+	 *  False if conditions are not met <b>or</b> this status effect is only for timed purposes (i.e. the only time it should be applied is with a time condition.).
+	 */
+	default boolean isConditionsMet(GameCharacter target) {
+		return false;
+	}
+
+	int getApplicationLength();
+
+	default boolean isConstantRefresh() {
+		return false;
+	}
+
+	default boolean renderInEffectsPanel() {
+		return false;
+	}
+
+	default boolean isCombatEffect() {
+		return false;
+	}
+
+	default boolean isSexEffect() {
+		return false;
+	}
+
+	default boolean isRemoveAtEndOfSex() {
+		return false;
+	}
+
+	default List<ItemTag> getTags() {
+		return List.of();
+	}
+
+	/**
+	 * If set to return true, this status effect will always be loaded from a saved file, regardless of whether or not it has no remaining time set.
+	 * This is only really used for status effects that will be superseded by other effects which have their isConditionsMet() method checked first.
+	 * At the time of creation, this method is only used for CHASTITY_4.
+	 */
+	default boolean forceLoad() {
+		return false;
+	}
+
+	/**
+	 * This method id called once when the target initially gains this status effect.
+	 * @param target
+	 * @return A String describing any effects which are applied when the target first gains this StatusEffect.
+	 */
+	default String applyAdditionEffect(GameCharacter target) {
+		return "";
+	}
+
+	default String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
+		return "";
+	}
+
+	String applyRemoveStatusEffect(GameCharacter target);
+
+	default String applyPostRemovalStatusEffect(GameCharacter target) {
+		return "";
+	}
+
+	default boolean isMod() {
+		return false;
+	}
+
+	default boolean isFromExternalFile() {
+		return false;
+	}
+
+	StatusEffectCategory getCategory();
+
+	int getRenderingPriority();
+
+	String getName(GameCharacter target);
+
+	String getDescription(GameCharacter target);
+
+	/**
+	 * Used to display multiple extra effects in their own description boxes, such as ongoing sex descriptions.
+	 * @return A List of Values whose key is the line height and whose value is the String to be displayed.
+	 */
+	default List<Value<Integer,String>> getAdditionalDescriptions(GameCharacter target) {
+		return List.of();
+	}
+
+	default List<String> getModifiersAsStringList(GameCharacter target) {
+		return List.of();
+	}
+
+	EffectBenefit getBeneficialStatus();
+
+	default Map<Attribute,Float> getAttributeModifiers(GameCharacter target) {
+		return Map.of();
+	}
+
+	default List<AbstractCombatMove> getCombatMoves() {
+		return List.of();
+	}
+
+	default List<Spell> getSpells() {
+		return List.of();
+	}
+
+	Colour getColour();
+
+	List<Colour> getColourShades();
+
+	int getEffectInterval();
+
+	List<String> getExtraEffects(GameCharacter target);
+
+	String getSVGString(GameCharacter owner);
+
+	//******************************** Methods for sex effects: ********************************//
+
+	default float getArousalPerTurnSelf(GameCharacter self) {
+		return 0;
+	}
+
+	default float getArousalPerTurnPartner(GameCharacter self, GameCharacter target) {
+		return 0;
+	}
 
 	// Attribute-related status effects:
 	// Strength:
