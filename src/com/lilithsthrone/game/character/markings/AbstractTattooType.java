@@ -17,10 +17,7 @@ import org.w3c.dom.NodeList;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
@@ -32,10 +29,11 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.2.6
  * @author Innoxia
  */
-public class AbstractTattooType implements AbstractCoreType {
+public class AbstractTattooType implements TattooType {
 	
 	private static List<InventorySlot> standardInventorySlots = new ArrayList<>(InventorySlot.getClothingSlots());
 
+	String id;
 	private boolean isMod;
 	
 	private int value;
@@ -279,16 +277,9 @@ public class AbstractTattooType implements AbstractCoreType {
 		return true;
 	}
 
+	@Override
 	public String getId() {
-		return TattooType.getIdFromTattooType(this);
-	}
-
-	public int getEnchantmentLimit() {
-		return 100;
-	}
-
-	public AbstractItemEffectType getEnchantmentEffect() {
-		return ItemEffectType.TATTOO;
+		return id;
 	}
 	
 	private void addSVGStringMapping(Colour colour, Colour colourSecondary, Colour colourTertiary, String s) {
