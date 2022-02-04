@@ -1,16 +1,15 @@
 package com.lilithsthrone.game.character.markings;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
-import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.game.inventory.InventorySlot;
+import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
+import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
+import com.lilithsthrone.utils.Table;
+import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 
 /**
@@ -18,7 +17,39 @@ import com.lilithsthrone.utils.colours.ColourListPresets;
  * @version 0.3.5.5
  * @author Innoxia
  */
-public class TattooType implements AbstractCoreType {
+public interface TattooType extends AbstractCoreType {
+
+	String getId();
+
+	boolean isMod();
+
+	int getValue();
+
+	String getName();
+
+	String getDescription();
+
+	List<Colour> getAvailablePrimaryColours();
+
+	List<Colour> getAvailableSecondaryColours();
+
+	List<Colour> getAvailableTertiaryColours();
+
+	List<InventorySlot> getSlotAvailability();
+
+	boolean isAvailable(GameCharacter target);
+
+	default int getEnchantmentLimit() {
+		return 100;
+	}
+
+	default AbstractItemEffectType getEnchantmentEffect() {
+		return ItemEffectType.TATTOO;
+	}
+
+	String getSVGImage(GameCharacter character, Colour colour, Colour colourSecondary, Colour colourTertiary);
+
+	String getPathName();
 
 	public static AbstractTattooType NONE = new AbstractTattooType(
 			"none",
@@ -64,19 +95,15 @@ public class TattooType implements AbstractCoreType {
 			null,
 			null,
 			null);
-	
-	private static Map<AbstractTattooType, String> tattooToIdMap = new HashMap<>();
-	private static Map<String, AbstractTattooType> idToTattooMap = new HashMap<>();
-	
+
+	@Deprecated
 	public static AbstractTattooType getTattooTypeFromId(String id) {
-//		System.out.print("ID: "+id);
-		id = Util.getClosestStringMatch(id, idToTattooMap.keySet());
-//		System.out.println("  set to: "+id);
-		return idToTattooMap.get(id);
+		return table.of(id);
 	}
-	
+
+	@Deprecated
 	public static String getIdFromTattooType(AbstractTattooType tattooType) {
-		return tattooToIdMap.get(tattooType);
+		return tattooType.getId();
 	}
 
 	/**
@@ -89,72 +116,30 @@ public class TattooType implements AbstractCoreType {
 	}
 	
 	public static List<AbstractTattooType> getAllTattooTypes() {
-		List<AbstractTattooType> allTattoos = new ArrayList<>(tattooToIdMap.keySet());
+		var allTattoos = new ArrayList<>(table.list());
 		
 		allTattoos.sort((t1, t2) -> t1.equals(TattooType.NONE)?-1:(t1.getName().compareTo(t2.getName())));
 		
 		return allTattoos;
 	}
 	
-	static {
-
+	Table<AbstractTattooType> table = new Table<>(s->s) {{
 		// Modded tattoo types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/items/tattoos");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractTattooType tattoo = new AbstractTattooType(innerEntry.getValue()) {};
-					tattooToIdMap.put(tattoo, innerEntry.getKey());
-					idToTattooMap.put(innerEntry.getKey(), tattoo);
-				} catch(Exception ex) {
-					System.err.println("Loading modded tattoo failed at 'TattooType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		// External res tattoo types:
+		forEachMod("/items/tattoos",null,null,(f,n,a)->{
+			var v = new AbstractTattooType(f) {};
+			v.id = n;
+			add(n,v);
+		});
 
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/tattoos");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractTattooType tattoo = new AbstractTattooType(innerEntry.getValue()) {};
-					tattooToIdMap.put(tattoo, innerEntry.getKey());
-					idToTattooMap.put(innerEntry.getKey(), tattoo);
-//					System.out.println("TT: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading tattoo failed at 'TattooType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
+		// External res tattoo types:
+		forEachExternal("res/tattoos",null,null,(f,n,a)->{
+			var v = new AbstractTattooType(f) {};
+			v.id = n;
+			add(n,v);
+		});
 
 		// Hard-coded tattoo types (all those up above):
-		
-		Field[] fields = TattooType.class.getFields();
-		
-		for(Field f : fields){
-			
-			if (AbstractTattooType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractTattooType ct;
-				try {
-					ct = ((AbstractTattooType) f.get(null));
-
-					// I feel like this is stupid :thinking:
-					tattooToIdMap.put(ct, f.getName());
-					idToTattooMap.put(f.getName(), ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-				
-			}
-		}
-	}
+		addFields(TattooType.class,AbstractTattooType.class,(k,v)->v.id=k);
+	}};
 	
 }
