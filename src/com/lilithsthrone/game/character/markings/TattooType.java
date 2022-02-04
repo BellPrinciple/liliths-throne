@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 
@@ -17,7 +18,7 @@ import com.lilithsthrone.utils.colours.ColourListPresets;
  * @version 0.3.5.5
  * @author Innoxia
  */
-public class TattooType {
+public class TattooType implements AbstractCoreType {
 
 	public static AbstractTattooType NONE = new AbstractTattooType(
 			"none",
@@ -96,7 +97,7 @@ public class TattooType {
 	}
 	
 	static {
-		
+
 		// Modded tattoo types:
 		
 		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/items/tattoos");

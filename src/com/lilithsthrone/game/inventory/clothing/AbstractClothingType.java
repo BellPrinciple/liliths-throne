@@ -59,7 +59,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.9.5
  * @author Innoxia, BlazingMagpie@gmail.com (or ping BlazingMagpie in Discord), Pimgd
  */
-public abstract class AbstractClothingType extends AbstractCoreType {
+public abstract class AbstractClothingType implements AbstractCoreType {
 	
 	public static final Colour DEFAULT_COLOUR_VALUE = PresetColour.CLOTHING_BLACK;
 	
