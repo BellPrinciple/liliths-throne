@@ -36,7 +36,6 @@ import com.lilithsthrone.game.character.body.valueEnums.GenitalArrangement;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeElasticity;
 import com.lilithsthrone.game.character.body.valueEnums.OrificePlasticity;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -1555,7 +1554,7 @@ public class Sex {
 				
 				endSexSB = new StringBuilder(UtilText.parse(participant, endSexSB.toString()));
 			}
-			for(AbstractStatusEffect se : new ArrayList<>(participant.getStatusEffects())) {
+			for(var se : new ArrayList<>(participant.getStatusEffects())) {
 				if(se.isRemoveAtEndOfSex()) {
 					participant.removeStatusEffect(se);
 				}
@@ -2430,7 +2429,7 @@ public class Sex {
 
 
 		// Arousal increments for related status effects:
-		for(AbstractStatusEffect se : activeCharacter.getStatusEffects()) {
+		for(var se : activeCharacter.getStatusEffects()) {
 			if(se.isSexEffect()) {
 				arousalIncrements.put(activeCharacter, arousalIncrements.get(activeCharacter) + se.getArousalPerTurnSelf(activeCharacter));
 				for(GameCharacter penetratingCharacter : Main.sex.getAllParticipants()) {
@@ -5775,7 +5774,7 @@ public class Sex {
 				return false;
 			}
 		}
-		for(AbstractStatusEffect se : charactersFeet.getStatusEffects()) {
+		for(var se : charactersFeet.getStatusEffects()) {
 			if(se.getTags().contains(ItemTag.SPREADS_FEET)) {
 				return false;
 			}

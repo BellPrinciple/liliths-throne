@@ -19,7 +19,6 @@ import com.lilithsthrone.game.character.attributes.LustLevel;
 import com.lilithsthrone.game.character.attributes.PhysiqueLevel;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.markings.Tattoo;
@@ -2656,7 +2655,7 @@ public enum RenderingEngine {
 		
 		if(!Main.game.isInCombat()) {
 			// Infinite duration:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (var se : character.getStatusEffects()) {
 				if (!se.isCombatEffect() && character.getStatusEffectDuration(se) == -1 && se.renderInEffectsPanel())
 					panelSB.append(
 							"<div class='icon effect'>"
@@ -2667,7 +2666,7 @@ public enum RenderingEngine {
 							+ "</div>");
 			}
 			// Timed:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (var se : character.getStatusEffects()) {
 				if (!se.isCombatEffect() && character.getStatusEffectDuration(se) != -1 && se.renderInEffectsPanel()) {
 					int timerHeight = (int) ((character.getStatusEffectDuration(se)/(60*60*6f))*100);
 	
@@ -2707,7 +2706,7 @@ public enum RenderingEngine {
 		
 		} else {
 			// Infinite duration:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (var se : character.getStatusEffects()) {
 				if (character.getStatusEffectDuration(se) == -1 && se.renderInEffectsPanel())
 					panelSB.append(
 							"<div class='icon effect' "+(se.isCombatEffect()?"style='border:1px solid "+se.getBeneficialStatus().getColour().toWebHexString()+";":"")+"'>"
@@ -2718,7 +2717,7 @@ public enum RenderingEngine {
 							+ "</div>");
 			}
 			// Timed:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (var se : character.getStatusEffects()) {
 				if (character.getStatusEffectDuration(se) != -1 && se.renderInEffectsPanel() && se.isCombatEffect()) {
 					int timerHeight = (int) ((character.getStatusEffectDuration(se)/(60*60*6f))*100);
 
@@ -2815,7 +2814,7 @@ public enum RenderingEngine {
 			
 			float iconWidth = 100/9f - 2;  // usual is 12.28 (7 per row)
 			// Infinite duration:
-			for(AbstractStatusEffect se : elemental.getStatusEffects()) {
+			for(var se : elemental.getStatusEffects()) {
 				if (!se.isCombatEffect() && elemental.getStatusEffectDuration(se) == -1 && se.renderInEffectsPanel())
 					panelSB.append(
 							"<div class='icon effect' style='width:"+iconWidth+"%;'>"
@@ -2826,7 +2825,7 @@ public enum RenderingEngine {
 							+ "</div>");
 			}
 			// Timed:
-			for(AbstractStatusEffect se : elemental.getStatusEffects()) {
+			for(var se : elemental.getStatusEffects()) {
 				if (!se.isCombatEffect() && elemental.getStatusEffectDuration(se) != -1 && se.renderInEffectsPanel()) {
 					int timerHeight = (int) ((elemental.getStatusEffectDuration(se)/(60*60*6f))*100);
 	
@@ -2970,7 +2969,7 @@ public enum RenderingEngine {
 	//		}
 			
 			// Infinite duration:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (var se : character.getStatusEffects()) {
 				boolean pointer = false;
 				SexAreaInterface si = null;
 				if(se==StatusEffect.PENIS_STATUS) {
@@ -3011,7 +3010,7 @@ public enum RenderingEngine {
 				}
 			}
 			// Timed:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (var se : character.getStatusEffects()) {
 				if (se.isSexEffect() && character.getStatusEffectDuration(se) != -1 && se.renderInEffectsPanel()) {
 					int timerHeight = (int) ((character.getStatusEffectDuration(se)/(60*60*6f))*100);
 	

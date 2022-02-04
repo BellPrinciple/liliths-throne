@@ -122,7 +122,6 @@ import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.body.valueEnums.PenisLength;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -9962,7 +9961,7 @@ public class UtilText {
 		for(PerkCategory pk : PerkCategory.values()) {
 			engine.put("PERK_CATEGORY_"+pk.toString(), pk);
 		}
-		for(AbstractStatusEffect sa : StatusEffect.getAllStatusEffects()) {
+		for(var sa : StatusEffect.getAllStatusEffects()) {
 			engine.put("STATUS_EFFECT_"+StatusEffect.getIdFromStatusEffect(sa), sa);
 			engine.put("SE_"+StatusEffect.getIdFromStatusEffect(sa), sa);
 		}

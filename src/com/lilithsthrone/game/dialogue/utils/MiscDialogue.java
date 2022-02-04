@@ -1,10 +1,6 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -26,11 +22,11 @@ public class MiscDialogue {
 		@Override
 		public String getContent() {
 			StringBuilder sb = new StringBuilder();
-			for(Entry<Long, Map<AbstractStatusEffect, String>> entry : Main.game.getPlayer().getStatusEffectDescriptions().entrySet()){
+			for(var entry : Main.game.getPlayer().getStatusEffectDescriptions().entrySet()){
 				if(!entry.getValue().isEmpty()) {
 					sb.append("<div class='container-full-width'>");
 						sb.append("<h6 style='text-align:center; margin:16px auto 0 auto; padding:0;'>"+Units.dateTime(Main.game.getStartingDate().plusSeconds(entry.getKey()))+":</h6>");
-						for(Entry<AbstractStatusEffect, String> innerEntry : entry.getValue().entrySet()) {
+						for(var innerEntry : entry.getValue().entrySet()) {
 							sb.append("<hr/>");
 							sb.append("<h6 style='text-align:center; margin:0; padding:0;'>");
 								sb.append(Util.capitaliseSentence(innerEntry.getKey()==null?"Miscellaneous Effects":innerEntry.getKey().getName(Main.game.getPlayer())));

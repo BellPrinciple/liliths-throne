@@ -32,7 +32,6 @@ import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
@@ -85,7 +84,7 @@ public class TooltipInformationEventListener implements EventListener {
 	private boolean availableForSelection = false;
 	
 	private GameCharacter owner;
-	private AbstractStatusEffect statusEffect;
+	private StatusEffect statusEffect;
 	private Perk perk;
 	private Perk levelUpPerk;
 	private int perkRow;
@@ -413,7 +412,7 @@ public class TooltipInformationEventListener implements EventListener {
 //			tooltipSB.append("<br/>Cooldown: "+"<span style='color:"+(cooldown==0?PresetColour.GENERIC_MINOR_GOOD:PresetColour.GENERIC_MINOR_BAD).toWebHexString()+";'>"+cooldown+(cooldown==1?" turn":" turns")+"</span>");
 			
 			if(move.getStatusEffects(owner, owner, false)!=null) {
-				for(Entry<AbstractStatusEffect, Integer> entry : move.getStatusEffects(owner, owner, false).entrySet()) {
+				for(var entry : move.getStatusEffects(owner, owner, false).entrySet()) {
 					tooltipSB.append("<br/>Applies: <span style='color:"+entry.getKey().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(entry.getKey().getName(null))+"</span> for "+entry.getValue()+(entry.getValue()==1?" turn":" turns"));
 				}
 			}
@@ -680,7 +679,7 @@ public class TooltipInformationEventListener implements EventListener {
 					|| attribute == Attribute.MAJOR_CORRUPTION
 					|| attribute == Attribute.AROUSAL
 					|| attribute == Attribute.LUST) {
-				AbstractStatusEffect currentAttributeStatusEffect=null;
+				StatusEffect currentAttributeStatusEffect=null;
 				int minimumLevelValue=0;
 				int maximumLevelValue=0;
 				
@@ -1726,7 +1725,7 @@ public class TooltipInformationEventListener implements EventListener {
 		this.owner = owner;
 		return this;
 	}
-	public TooltipInformationEventListener setStatusEffect(AbstractStatusEffect statusEffect, GameCharacter owner) {
+	public TooltipInformationEventListener setStatusEffect(StatusEffect statusEffect, GameCharacter owner) {
 		resetFields();
 		this.statusEffect = statusEffect;
 		this.owner = owner;

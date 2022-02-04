@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
@@ -26,42 +25,42 @@ public enum LustLevel {
 
 	ZERO_COLD("cold", 0, 10, 0.5f, PresetColour.LUST_STAGE_ZERO, SexPace.SUB_RESISTING, SexPace.DOM_GENTLE) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.LUST_PERK_0;
 		}
 	},
 
 	ONE_HORNY("horny", 10, 25, 0.75f, PresetColour.LUST_STAGE_ONE, SexPace.SUB_NORMAL, SexPace.DOM_NORMAL) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.LUST_PERK_1;
 		}
 	},
 
 	TWO_AMOROUS("sensual", 25, 50, 1f, PresetColour.LUST_STAGE_TWO, SexPace.SUB_NORMAL, SexPace.DOM_NORMAL) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.LUST_PERK_2;
 		}
 	},
 
 	THREE_LUSTFUL("amorous", 50, 75, 1.25f, PresetColour.LUST_STAGE_THREE, SexPace.SUB_NORMAL, SexPace.DOM_NORMAL) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.LUST_PERK_3;
 		}
 	},
 
 	FOUR_IMPASSIONED("lustful", 75, 90, 1.5f, PresetColour.LUST_STAGE_FOUR, SexPace.SUB_EAGER, SexPace.DOM_ROUGH) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.LUST_PERK_4;
 		}
 	},
 	
 	FIVE_BURNING("impassioned", 90, 100, 1.5f, PresetColour.LUST_STAGE_FIVE, SexPace.SUB_EAGER, SexPace.DOM_ROUGH) {
 		@Override
-		public AbstractStatusEffect getRelatedStatusEffect() {
+		public StatusEffect getRelatedStatusEffect() {
 			return StatusEffect.LUST_PERK_5;
 		}
 	};
@@ -84,7 +83,7 @@ public enum LustLevel {
 		this.sexPaceDominant = sexPaceDominant;
 	}
 
-	public abstract AbstractStatusEffect getRelatedStatusEffect();
+	public abstract StatusEffect getRelatedStatusEffect();
 
 	public String getName() {
 		return name;

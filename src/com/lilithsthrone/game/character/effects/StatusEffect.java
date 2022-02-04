@@ -14105,7 +14105,7 @@ public interface StatusEffect {
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
 	@Deprecated
-	public static AbstractStatusEffect getStatusEffectFromId(String id) {
+	public static StatusEffect getStatusEffectFromId(String id) {
 		return table.of(id);
 	}
 
@@ -14131,7 +14131,7 @@ public interface StatusEffect {
 		return perk.getId();
 	}
 
-	Table<AbstractStatusEffect> table = new Table<>(s->s) {{
+	Table<StatusEffect> table = new Table<>(s->s) {{
 
 		// Modded status effects:
 		forEachMod("/statusEffects",null,null,(f,n,a)->{
@@ -14152,11 +14152,11 @@ public interface StatusEffect {
 	}};
 
 	@Deprecated
-	public static List<AbstractStatusEffect> getAllStatusEffects() {
+	static List<StatusEffect> getAllStatusEffects() {
 		return table.list();
 	}
 
-	static void add(AbstractStatusEffect e) {
+	static void add(StatusEffect e) {
 		table.add(e.getId(),e);
 	}
 }

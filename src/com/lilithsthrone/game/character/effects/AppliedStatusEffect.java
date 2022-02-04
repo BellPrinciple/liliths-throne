@@ -7,19 +7,19 @@ package com.lilithsthrone.game.character.effects;
  */
 public class AppliedStatusEffect {
 	
-	private AbstractStatusEffect effect;
+	private StatusEffect effect;
 	private long lastTimeAppliedEffect;
 	private long secondsPassed;
 	private int secondsRemaining;
 	
-	public AppliedStatusEffect(AbstractStatusEffect effect, long lastTimeAppliedEffect, long secondsPassed, int secondsRemaining) {
+	public AppliedStatusEffect(StatusEffect effect, long lastTimeAppliedEffect, long secondsPassed, int secondsRemaining) {
 		this.effect = effect;
 		this.lastTimeAppliedEffect = lastTimeAppliedEffect;
 		this.secondsPassed = secondsPassed;
 		this.secondsRemaining = secondsRemaining;
 	}
 
-	public AbstractStatusEffect getEffect() {
+	public StatusEffect getEffect() {
 		return effect;
 	}
 

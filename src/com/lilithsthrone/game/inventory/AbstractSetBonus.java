@@ -9,7 +9,6 @@ import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
@@ -26,9 +25,9 @@ public abstract class AbstractSetBonus {
 	private int numberRequiredForCompleteSet;
 	private List<InventorySlot> blockedSlotsCountingTowardsFullSet;
 	private String statusEffectId;
-	private AbstractStatusEffect associatedStatusEffect;
+	private StatusEffect associatedStatusEffect;
 
-	public AbstractSetBonus(String name, AbstractStatusEffect associatedStatusEffect, int numberRequiredForCompleteSet, List<InventorySlot> blockedSlotsCountingTowardsFullSet) {
+	public AbstractSetBonus(String name, StatusEffect associatedStatusEffect, int numberRequiredForCompleteSet, List<InventorySlot> blockedSlotsCountingTowardsFullSet) {
 		this.name = name;
 		this.numberRequiredForCompleteSet = numberRequiredForCompleteSet;
 		
@@ -122,7 +121,7 @@ public abstract class AbstractSetBonus {
 		return numberRequiredForCompleteSet;
 	}
 
-	public AbstractStatusEffect getAssociatedStatusEffect() {
+	public StatusEffect getAssociatedStatusEffect() {
 		if(associatedStatusEffect==null) {
 			associatedStatusEffect = StatusEffect.getStatusEffectFromId(statusEffectId);
 		}

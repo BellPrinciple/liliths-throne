@@ -149,7 +149,6 @@ import com.lilithsthrone.game.character.body.valueEnums.TongueLength;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.character.body.valueEnums.Wetness;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Addiction;
 import com.lilithsthrone.game.character.effects.AppliedStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
@@ -378,7 +377,7 @@ public abstract class GameCharacter implements XMLSaving {
 	protected Map<Fetish, Integer> fetishExperienceMap;
 	protected List<AppliedStatusEffect> statusEffects;
 	/** Maps seconds passed to Maps of StatusEffect-descriptions. */
-	protected Map<Long, Map<AbstractStatusEffect, String>> statusEffectDescriptions;
+	protected Map<Long, Map<StatusEffect, String>> statusEffectDescriptions;
 	
 	protected boolean requiresAttributeStatusEffectCheck = true;
 	protected boolean requiresInventoryStatusEffectCheck = true;
@@ -2344,7 +2343,7 @@ public abstract class GameCharacter implements XMLSaving {
 			try {
 				if(e.hasAttribute("value")) { // Old version support:
 					if(Integer.valueOf(e.getAttribute("value")) != -1) {
-						AbstractStatusEffect effect = StatusEffect.getStatusEffectFromId(e.getAttribute("type"));
+						var effect = StatusEffect.getStatusEffectFromId(e.getAttribute("type"));
 						if(!noPregnancy || (effect!=StatusEffect.PREGNANT_0 && effect!=StatusEffect.PREGNANT_1 && effect!=StatusEffect.PREGNANT_2 && effect!=StatusEffect.PREGNANT_3)) {
 							int seconds = Integer.valueOf(e.getAttribute("value"));
 							if(Main.isVersionOlderThan(version, "0.3.0.6")) {
@@ -2357,7 +2356,7 @@ public abstract class GameCharacter implements XMLSaving {
 					
 				} else {
 					if(Integer.valueOf(e.getAttribute("sr"))!=-1 || !e.getAttribute("fl").isEmpty()) {
-						AbstractStatusEffect effect = StatusEffect.getStatusEffectFromId(e.getAttribute("type"));
+						var effect = StatusEffect.getStatusEffectFromId(e.getAttribute("type"));
 						
 						if(!noPregnancy || (effect!=StatusEffect.PREGNANT_0 && effect!=StatusEffect.PREGNANT_1 && effect!=StatusEffect.PREGNANT_2 && effect!=StatusEffect.PREGNANT_3)) {
 							character.addStatusEffect(effect, Long.valueOf(e.getAttribute("lta")), Long.valueOf(e.getAttribute("sp")), Integer.valueOf(e.getAttribute("sr")));
@@ -6790,10 +6789,10 @@ public abstract class GameCharacter implements XMLSaving {
 		float startHealth = this.getHealth();
 		float startMana = this.getMana();
 		
-		List<AbstractStatusEffect> tempListStatusEffects = new ArrayList<>();
+		var tempListStatusEffects = new ArrayList<StatusEffect>();
 		
 		for(AppliedStatusEffect appliedSe : new ArrayList<>(statusEffects)) {
-			AbstractStatusEffect se = appliedSe.getEffect();
+			var se = appliedSe.getEffect();
 			appliedSe.setSecondsPassed(appliedSe.getSecondsPassed() + secondsPassed);
 			StringBuilder sb = new StringBuilder();
 			if (!se.isCombatEffect()) {
@@ -6825,13 +6824,13 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 
 		// Remove all status effects that are no longer applicable:
-		for(AbstractStatusEffect se : tempListStatusEffects) {
+		for(var se : tempListStatusEffects) {
 			removeStatusEffect(se);
 		}
 		// Combat status effects are automatically removed at the end of combat (in Combat.java), so there's no need to remove them here.
 		
 		// Add all status effects that are applicable:
-		for (AbstractStatusEffect se : StatusEffect.getAllStatusEffects()) {
+		for (var se : StatusEffect.getAllStatusEffects()) {
 			if((se.getCategory()==StatusEffectCategory.DEFAULT && (!se.isFromExternalFile() || se.isMod())) // Modded SEs probably won't have taken into account category, so let them always be checked.
 					|| (se.getCategory()==StatusEffectCategory.INVENTORY && requiresInventoryStatusEffectCheck)
 					|| (se.getCategory()==StatusEffectCategory.ATTRIBUTE && requiresAttributeStatusEffectCheck)) {
@@ -6894,12 +6893,12 @@ public abstract class GameCharacter implements XMLSaving {
 	/**
 	 * The returned list is ordered by rendering priority.
 	 */
-	public List<AbstractStatusEffect> getStatusEffects() {
-		List<AbstractStatusEffect> tempListStatusEffects = new ArrayList<>();
+	public List<StatusEffect> getStatusEffects() {
+		var tempListStatusEffects = new ArrayList<StatusEffect>();
 		for(AppliedStatusEffect se : statusEffects) {
 			tempListStatusEffects.add(se.getEffect());
 		}
-		tempListStatusEffects.sort(Comparator.comparingInt(AbstractStatusEffect::getRenderingPriority).reversed());
+		tempListStatusEffects.sort(Comparator.comparingInt(StatusEffect::getRenderingPriority).reversed());
 		return tempListStatusEffects;
 	}
 	
@@ -6910,7 +6909,7 @@ public abstract class GameCharacter implements XMLSaving {
 	/**
 	 * @return The AppliedStatusEffect which has the AbstractStatusEffect of se. If none is found, returns null.
 	 */
-	public AppliedStatusEffect getAppliedStatusEffect(AbstractStatusEffect se) {
+	public AppliedStatusEffect getAppliedStatusEffect(StatusEffect se) {
 		for(AppliedStatusEffect appliedSe : statusEffects) {
 			if(appliedSe.getEffect()==se) {
 				return appliedSe;
@@ -6923,7 +6922,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return hasStatusEffect(StatusEffect.getStatusEffectFromId(statusEffectId));
 	}
 	
-	public boolean hasStatusEffect(AbstractStatusEffect se) {
+	public boolean hasStatusEffect(StatusEffect se) {
 		for(AppliedStatusEffect appliedSe : statusEffects) {
 			if(appliedSe.getEffect()==se) {
 				return true;
@@ -6941,7 +6940,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 
 
-	public boolean addStatusEffect(AbstractStatusEffect statusEffect, long lastTimeAppliedEffect, long secondsPassed, int secondsRemaining) {
+	public boolean addStatusEffect(StatusEffect statusEffect, long lastTimeAppliedEffect, long secondsPassed, int secondsRemaining) {
 		if(hasStatusEffect(statusEffect)){ // Refresh effect timer:
 			getAppliedStatusEffect(statusEffect).setSecondsRemaining(secondsRemaining);
 			return false;
@@ -6966,11 +6965,11 @@ public abstract class GameCharacter implements XMLSaving {
 		return true;
 	}
 	
-	public boolean addStatusEffect(AbstractStatusEffect statusEffect, int secondsRemaining) {
+	public boolean addStatusEffect(StatusEffect statusEffect, int secondsRemaining) {
 		return addStatusEffect(statusEffect, Main.game.getSecondsPassed(), 0, secondsRemaining);
 	}
 
-	public String removeStatusEffectCombat(AbstractStatusEffect se) {
+	public String removeStatusEffectCombat(StatusEffect se) {
 		if(!hasStatusEffect(se)) {
 			return "";
 		}
@@ -6991,7 +6990,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return removeStatusEffect(StatusEffect.getStatusEffectFromId(statusEffectId));
 	}
 	
-	public boolean removeStatusEffect(AbstractStatusEffect se) {
+	public boolean removeStatusEffect(StatusEffect se) {
 		if(!hasStatusEffect(se)) {
 			return false;
 		}
@@ -7014,7 +7013,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return true;
 	}
 
-	public int getStatusEffectDuration(AbstractStatusEffect se) {
+	public int getStatusEffectDuration(StatusEffect se) {
 		AppliedStatusEffect ase = getAppliedStatusEffect(se);
 		if(ase!=null) {
 			return ase.getSecondsRemaining();
@@ -7022,7 +7021,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return 0;
 	}
 
-	public boolean setCombatStatusEffectDuration(AbstractStatusEffect se, int turns) {
+	public boolean setCombatStatusEffectDuration(StatusEffect se, int turns) {
 		if(!hasStatusEffect(se)) {
 			return false;
 		}
@@ -7036,7 +7035,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return false;
 	}
 
-	public boolean incrementStatusEffectDuration(AbstractStatusEffect se, int secondsIncrement) {
+	public boolean incrementStatusEffectDuration(StatusEffect se, int secondsIncrement) {
 		AppliedStatusEffect ase = getAppliedStatusEffect(se);
 		if (!hasStatusEffect(se) || ase.getSecondsRemaining()==-1) {
 			return false;
@@ -7045,11 +7044,11 @@ public abstract class GameCharacter implements XMLSaving {
 		return true;
 	}
 
-	public Map<Long, Map<AbstractStatusEffect, String>> getStatusEffectDescriptions() {
+	public Map<Long, Map<StatusEffect, String>> getStatusEffectDescriptions() {
 		return statusEffectDescriptions;
 	}
 
-	public void addStatusEffectDescription(AbstractStatusEffect statusEffect, String description) {
+	public void addStatusEffectDescription(StatusEffect statusEffect, String description) {
 		if(!this.isPlayer()) {
 			return; // Only the player should ever have their status effect descriptions updated, as NPC logs are never able to be viewed.
 		}
@@ -7060,20 +7059,20 @@ public abstract class GameCharacter implements XMLSaving {
 		Main.game.addEvent(new EventLogEntry("[style.colourStatusEffect(Status effect)]", statusEffect==null?"Miscellaneous Effects":Util.capitaliseSentence(statusEffect.getName(this))), false);
 	}
 
-	public void removeStatusEffectDescription(AbstractStatusEffect statusEffect) {
-		for(Entry<Long, Map<AbstractStatusEffect, String>> entry : statusEffectDescriptions.entrySet()) {
+	public void removeStatusEffectDescription(StatusEffect statusEffect) {
+		for(var entry : statusEffectDescriptions.entrySet()) {
 			entry.getValue().remove(statusEffect);
 		}
 	}
 	
 	public void clearCombatStatusEffects() {
-		List<AbstractStatusEffect> removalList = new ArrayList<>();
+		var removalList = new ArrayList<StatusEffect>();
 		for (AppliedStatusEffect se : statusEffects) {
 			if (se.getEffect().isCombatEffect()) {
 				removalList.add(se.getEffect());
 			}
 		}
-		for (AbstractStatusEffect se : removalList) {
+		for (var se : removalList) {
 			removeStatusEffect(se);
 		}
 	}
@@ -18500,7 +18499,7 @@ public abstract class GameCharacter implements XMLSaving {
 	
 					if(move.getAssociatedSpell()==null // DO not apply status effects for spells, as they are handled in their applyEffect methods.
 							&& move.getStatusEffects(this, target, isCrit)!=null) {
-						for(Entry<AbstractStatusEffect, Integer> entry : move.getStatusEffects(this, target, isCrit).entrySet()) {
+						for(var entry : move.getStatusEffects(this, target, isCrit).entrySet()) {
 							int duration = entry.getValue();
 							if(isCrit) {
 								duration = (int) (duration*move.getCritStatusEffectDurationMultiplier());
@@ -18964,7 +18963,7 @@ public abstract class GameCharacter implements XMLSaving {
 				return UtilText.parse(this, "Escape is blocked due to the effect of [npc.namePos] "+clothing.getName()+"!");
 			}
 		}
-		for(AbstractStatusEffect se : this.getStatusEffects()) {
+		for(var se : this.getStatusEffects()) {
 			if(se.getTags().contains(ItemTag.PREVENTS_COMBAT_ESCAPE)) {
 				return UtilText.parse(this, "The effect <i>'"+se.getName(this)+"'</i> is preventing [npc.name] from escaping!");
 			}
@@ -19865,8 +19864,8 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 		
 		// Clear pregnancy status effects and descriptions:
-		List<AbstractStatusEffect> pregnancyStatusEffects = Util.newArrayListOfValues(StatusEffect.PREGNANT_1, StatusEffect.PREGNANT_2, StatusEffect.PREGNANT_3);
-		for(AbstractStatusEffect se : pregnancyStatusEffects) {
+		var pregnancyStatusEffects = List.of(StatusEffect.PREGNANT_1, StatusEffect.PREGNANT_2, StatusEffect.PREGNANT_3);
+		for(var se : pregnancyStatusEffects) {
 			removeStatusEffect(se);
 			this.removeStatusEffectDescription(se);
 		}
@@ -19992,7 +19991,7 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 
 		// Clear pregnancy status effects and descriptions:
-		List<AbstractStatusEffect> incubationStatusEffects = new ArrayList<>();
+		var incubationStatusEffects = new ArrayList<StatusEffect>();
 		switch(orifice) {
 			case ANUS:
 			case MOUTH:
@@ -20029,7 +20028,7 @@ public abstract class GameCharacter implements XMLSaving {
 			case URETHRA_VAGINA:
 				break;
 		}
-		for(AbstractStatusEffect se : incubationStatusEffects) {
+		for(var se : incubationStatusEffects) {
 			removeStatusEffect(se);
 			this.removeStatusEffectDescription(se);
 		}
@@ -20068,7 +20067,7 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 		
 		target.addIncubationLitter(orifice, implantedLitter);
-		AbstractStatusEffect incubationEffect = StatusEffect.INCUBATING_EGGS_STOMACH_1;
+		StatusEffect incubationEffect = StatusEffect.INCUBATING_EGGS_STOMACH_1;
 		switch(orifice) {
 			case ANUS:
 			case MOUTH:
@@ -20099,8 +20098,8 @@ public abstract class GameCharacter implements XMLSaving {
 		
 
 		// Clear pregnancy status effects and descriptions:
-		List<AbstractStatusEffect> pregnancyStatusEffects = Util.newArrayListOfValues(StatusEffect.PREGNANT_0, StatusEffect.PREGNANT_1, StatusEffect.PREGNANT_2, StatusEffect.PREGNANT_3);
-		for(AbstractStatusEffect se : pregnancyStatusEffects) {
+		var pregnancyStatusEffects = List.of(StatusEffect.PREGNANT_0, StatusEffect.PREGNANT_1, StatusEffect.PREGNANT_2, StatusEffect.PREGNANT_3);
+		for(var se : pregnancyStatusEffects) {
 			removeStatusEffect(se);
 			this.removeStatusEffectDescription(se);
 		}
@@ -20438,7 +20437,7 @@ public abstract class GameCharacter implements XMLSaving {
 		
 		boolean neet = this.hasTrait(Perk.JOB_UNEMPLOYED, true);
 		boolean emperorBed = Main.game.getPlayerCell().getPlace().getPlaceUpgrades().contains(PlaceUpgrade.LILAYA_PLAYER_ROOM_BED);
-		AbstractStatusEffect restedEffect = StatusEffect.WELL_RESTED;
+		StatusEffect restedEffect = StatusEffect.WELL_RESTED;
 		if(neet) {
 			if(emperorBed) {
 				restedEffect = StatusEffect.WELL_RESTED_BOOSTED_EXTRA;
@@ -20468,7 +20467,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 * @param statusEffectMinutes Default value should probably be 8*60
 	 * @return A description of the wash.
 	 */
-	public String applyWash(boolean washAllOrifices, boolean cleanAllClothing, AbstractStatusEffect effect, int statusEffectMinutes) {
+	public String applyWash(boolean washAllOrifices, boolean cleanAllClothing, StatusEffect effect, int statusEffectMinutes) {
 		StringBuilder sb = new StringBuilder();
 		
 		this.setHealth(this.getAttributeValue(Attribute.HEALTH_MAXIMUM));
@@ -20932,7 +20931,7 @@ public abstract class GameCharacter implements XMLSaving {
 				return UtilText.parse(this, "thanks to the fact that [npc.her] "+bpi.getType().getRace().getName(true)+" "+bpi.getName(this)+" "+(bpi.getType().isDefaultPlural(this)?"grant":"grants")+" [npc.herHim] thermal vision");
 			}
 		}
-		for(AbstractStatusEffect se : this.getStatusEffects()) {
+		for(var se : this.getStatusEffects()) {
 			if(se.getTags().contains(ItemTag.NIGHT_VISION_SELF) || se.getTags().contains(ItemTag.NIGHT_VISION_AREA)) {
 				return UtilText.parse(this, "thanks to the <i>'"+se.getName(this)+"'</i> effect that [npc.sheIsFull] currently experiencing");
 			}
@@ -20976,7 +20975,7 @@ public abstract class GameCharacter implements XMLSaving {
 		if(this.getBodyMaterial()==BodyMaterial.FIRE) {
 			return UtilText.parse(this, "thanks to the fact that [npc.namePos] body is made out of fire, and is therefore giving off a significant amount of light");
 		}
-		for(AbstractStatusEffect se : this.getStatusEffects()) {
+		for(var se : this.getStatusEffects()) {
 			if(se.getTags().contains(ItemTag.NIGHT_VISION_AREA)) {
 				return UtilText.parse(this, "thanks to the <i>'"+se.getName(this)+"'</i> effect that [npc.nameIsFull] currently experiencing");
 			}
@@ -21298,7 +21297,7 @@ public abstract class GameCharacter implements XMLSaving {
 				return true;
 			}
 		}
-		for(AbstractStatusEffect se : this.getStatusEffects()) {
+		for(var se : this.getStatusEffects()) {
 			if(se.getTags().contains(ItemTag.MUFFLES_SPEECH)) {
 				return true;
 			}
@@ -21312,7 +21311,7 @@ public abstract class GameCharacter implements XMLSaving {
 				return true;
 			}
 		}
-		for(AbstractStatusEffect se : this.getStatusEffects()) {
+		for(var se : this.getStatusEffects()) {
 			if(se.getTags().contains(ItemTag.BLOCKS_SIGHT)) {
 				return true;
 			}
@@ -21326,7 +21325,7 @@ public abstract class GameCharacter implements XMLSaving {
 				return true;
 			}
 		}
-		for(AbstractStatusEffect se : this.getStatusEffects()) {
+		for(var se : this.getStatusEffects()) {
 			if(se.getTags().contains(ItemTag.HINDERS_ARM_MOVEMENT)) {
 				return true;
 			}
@@ -21340,7 +21339,7 @@ public abstract class GameCharacter implements XMLSaving {
 				return true;
 			}
 		}
-		for(AbstractStatusEffect se : this.getStatusEffects()) {
+		for(var se : this.getStatusEffects()) {
 			if(se.getTags().contains(ItemTag.HINDERS_LEG_MOVEMENT)) {
 				return true;
 			}
@@ -28231,7 +28230,7 @@ public abstract class GameCharacter implements XMLSaving {
 					return false;
 				}
 			}
-			for(AbstractStatusEffect se : this.getStatusEffects()) {
+			for(var se : this.getStatusEffects()) {
 				if(se.getTags().contains(ItemTag.PREVENTS_ERECTION_OTHER)
 						|| se.getTags().contains(ItemTag.PREVENTS_ERECTION_PHYSICAL)) {
 					return false;
@@ -28251,7 +28250,7 @@ public abstract class GameCharacter implements XMLSaving {
 				return true;
 			}
 		}
-		for(AbstractStatusEffect se : this.getStatusEffects()) {
+		for(var se : this.getStatusEffects()) {
 			if(se.getTags().contains(ItemTag.PREVENTS_ERECTION_PHYSICAL)) {
 				return true;
 			}

@@ -41,7 +41,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
-import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -1905,7 +1904,7 @@ public class MainController implements Initializable {
 			
 			
 			// For status effect slots:
-			for (AbstractStatusEffect se : character.getStatusEffects()) {
+			for (var se : character.getStatusEffects()) {
 				id = "SE_"+idModifier + se;
 				if (((EventTarget) documentAttributes.getElementById(id)) != null) {
 					addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
@@ -1949,7 +1948,7 @@ public class MainController implements Initializable {
 				}
 			}
 			if(character.isElementalSummoned() && !character.isElementalActive()) {
-				for (AbstractStatusEffect se : character.getElemental().getStatusEffects()) {
+				for (var se : character.getElemental().getStatusEffects()) {
 					id = "SE_ELEMENTAL_"+idModifier + se;
 					if (((EventTarget) documentAttributes.getElementById(id)) != null) {
 						addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
@@ -2259,7 +2258,7 @@ public class MainController implements Initializable {
 			
 			if(RenderingEngine.ENGINE.isRenderingCharactersRightPanel()) {
 				// For status effect slots:
-				for (AbstractStatusEffect se : character.getStatusEffects()) {
+				for (var se : character.getStatusEffects()) {
 					id = "SE_NPC_"+idModifier + se;
 					if (((EventTarget) documentRight.getElementById(id)) != null) {
 						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
@@ -2299,7 +2298,7 @@ public class MainController implements Initializable {
 					}
 				}
 				if(character.isElementalSummoned() && !character.isElementalActive()) {
-					for (AbstractStatusEffect se : character.getElemental().getStatusEffects()) {
+					for (var se : character.getElemental().getStatusEffects()) {
 						id = "SE_ELEMENTAL_NPC_"+idModifier + se;
 						if (((EventTarget) documentRight.getElementById(id)) != null) {
 							addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
