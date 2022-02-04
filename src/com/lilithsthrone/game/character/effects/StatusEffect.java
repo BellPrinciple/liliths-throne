@@ -1,10 +1,7 @@
 package com.lilithsthrone.game.character.effects;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -67,6 +64,7 @@ import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.RenderingEngine;
 import com.lilithsthrone.rendering.SVGImages;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Units.ValueType;
 import com.lilithsthrone.utils.Util;
@@ -82,7 +80,9 @@ import com.lilithsthrone.world.places.PlaceType;
  * @version 0.3.8.2
  * @author Innoxia
  */
-public class StatusEffect {
+public interface StatusEffect {
+
+	String getId();
 
 	// Attribute-related status effects:
 	// Strength:
@@ -13970,105 +13970,63 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaPenetration.FINGER, SVGImages.SVG_IMAGE_PROVIDER.getPenetrationTypeFinger(), Util.newArrayListOfValues(SexAreaPenetration.FINGER));
 		}
 	};
-	
-	
-	public static List<AbstractStatusEffect> allStatusEffects;
-	
-	public static Map<AbstractStatusEffect, String> statusEffectToIdMap = new HashMap<>();
-	public static Map<String, AbstractStatusEffect> idToStatusEffectMap = new HashMap<>();
-	
+
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
+	@Deprecated
 	public static AbstractStatusEffect getStatusEffectFromId(String id) {
+		return table.of(id);
+	}
+
+	static String sanitize(String id) {
 		if(id.equals("innoxia_massaged")) {
-			return CLEANED_MASSAGED;
+			return "CLEANED_MASSAGED";
 		} else if(id.equals("BATH_BOOSTED") || id.equals("innoxia_cleaned_spa")) {
-			return CLEANED_SPA;
+			return "CLEANED_SPA";
 		} else if(id.equals("BATH") || id.equals("innoxia_cleaned_bath")) {
-			return CLEANED_BATH;
+			return "CLEANED_BATH";
 		} else if(id.equals("SHOWER") || id.equals("innoxia_cleaned_shower")) {
-			return CLEANED_SHOWER;
+			return "CLEANED_SHOWER";
 		}
 		
 		if(id.equals("innoxia_item_broodmother_pill")) {
-			return BROODMOTHER_PILL;
+			return "BROODMOTHER_PILL";
 		}
-		
-		id = Util.getClosestStringMatch(id, idToStatusEffectMap.keySet());
-		
-		return idToStatusEffectMap.get(id);
-	}
-	
-	public static String getIdFromStatusEffect(AbstractStatusEffect perk) {
-		return statusEffectToIdMap.get(perk);
+		return id;
 	}
 
-	static {
-		allStatusEffects = new ArrayList<>();
-		
+	@Deprecated
+	static String getIdFromStatusEffect(StatusEffect perk) {
+		return perk.getId();
+	}
+
+	Table<AbstractStatusEffect> table = new Table<>(s->s) {{
+
 		// Modded status effects:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/statusEffects");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractStatusEffect statusEffect = new AbstractStatusEffect(innerEntry.getValue(), entry.getKey(), true) {};
-					allStatusEffects.add(statusEffect);
-					statusEffectToIdMap.put(statusEffect, innerEntry.getKey());
-					idToStatusEffectMap.put(innerEntry.getKey(), statusEffect);
-//					System.out.println("modded SE: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading modded status effect failed at 'StatusEffect'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+		forEachMod("/statusEffects",null,null,(f,n,a)->{
+			var v = new AbstractStatusEffect(f,a,true) {};
+			v.id = n;
+			add(n,v);
+		});
+
 		// External res status effects:
+		forEachExternal("res/statusEffects",null,null,(f,n,a)->{
+			var v = new AbstractStatusEffect(f,a,true) {};
+			v.id = n;
+			add(n,v);
+		});
 
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/statusEffects");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractStatusEffect statusEffect = new AbstractStatusEffect(innerEntry.getValue(), entry.getKey(), false) {};
-					allStatusEffects.add(statusEffect);
-					statusEffectToIdMap.put(statusEffect, innerEntry.getKey());
-					idToStatusEffectMap.put(innerEntry.getKey(), statusEffect);
-//					System.out.println("res SE: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading status effect failed at 'StatusEffect'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
 		// Hard-coded status effects (all those up above):
-		
-		Field[] fields = StatusEffect.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractStatusEffect.class.isAssignableFrom(f.getType())) {
-				
-				AbstractStatusEffect statusEffect;
-				
-				try {
-					statusEffect = ((AbstractStatusEffect) f.get(null));
+		addFields(StatusEffect.class,AbstractStatusEffect.class,(k,v)->v.id=k);
+	}};
 
-					statusEffectToIdMap.put(statusEffect, f.getName());
-					idToStatusEffectMap.put(f.getName(), statusEffect);
-					allStatusEffects.add(statusEffect);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
+	@Deprecated
 	public static List<AbstractStatusEffect> getAllStatusEffects() {
-		return allStatusEffects;
+		return table.list();
+	}
+
+	static void add(AbstractStatusEffect e) {
+		table.add(e.getId(),e);
 	}
 }

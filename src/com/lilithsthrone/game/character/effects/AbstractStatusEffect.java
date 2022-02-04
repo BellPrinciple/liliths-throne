@@ -48,8 +48,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractStatusEffect {
+public abstract class AbstractStatusEffect implements StatusEffect {
 
+	String id;
 	private boolean mod;
 	private boolean fromExternalFile;
 	private int renderingPriority;
@@ -299,8 +300,9 @@ public abstract class AbstractStatusEffect {
 		}
 	}
 
+	@Override
 	public String getId() {
-		return StatusEffect.getIdFromStatusEffect(this);
+		return id;
 	}
 	
 	protected List<String> attributeModifiersToStringList(Map<Attribute,Float> attributeMap) {
