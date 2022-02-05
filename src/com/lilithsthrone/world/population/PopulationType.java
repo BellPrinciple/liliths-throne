@@ -1,13 +1,16 @@
 package com.lilithsthrone.world.population;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import static java.lang.reflect.Modifier.isStatic;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 /**
  * @since 0.2.12
@@ -16,11 +19,14 @@ import com.lilithsthrone.utils.Util;
  */
 public class PopulationType {
 
-	public static AbstractPopulationType PERSON = new AbstractPopulationType("person", "people") {};
+	private final String singular;
+	private final String plural;
+
+	public static PopulationType PERSON = new PopulationType("person", "people");
+
+	public static PopulationType FAN = new PopulationType("fan", "fans");
 	
-	public static AbstractPopulationType FAN = new AbstractPopulationType("fan", "fans") {};
-	
-	public static AbstractPopulationType HARPY = new AbstractPopulationType("harpy", "harpies") {
+	public static PopulationType HARPY = new PopulationType("harpy", "harpies") {
 		@Override
 		public String getName() {
 			if(Main.game.isSillyModeEnabled()) {
@@ -37,86 +43,100 @@ public class PopulationType {
 		}
 	};
 	
-	public static AbstractPopulationType CROWD = new AbstractPopulationType("crowd", "crowds") {};
+	public static PopulationType CROWD = new PopulationType("crowd", "crowds");
 
-	public static AbstractPopulationType PRIVATE_SECURITY_GUARD = new AbstractPopulationType("private security guard", "private security guards") {};
+	public static PopulationType PRIVATE_SECURITY_GUARD = new PopulationType("private security guard", "private security guards");
 	
-	public static AbstractPopulationType ENFORCER = new AbstractPopulationType("Enforcer", "Enforcers") {};
+	public static PopulationType ENFORCER = new PopulationType("Enforcer", "Enforcers");
 
-	public static AbstractPopulationType CENTAUR_CARTS = new AbstractPopulationType("centaur-pulled cart", "centaur-pulled carts") {};
+	public static PopulationType CENTAUR_CARTS = new PopulationType("centaur-pulled cart", "centaur-pulled carts");
 	
-	public static AbstractPopulationType SHOPPER = new AbstractPopulationType("shopper", "shoppers") {};
+	public static PopulationType SHOPPER = new PopulationType("shopper", "shoppers");
 	
-	public static AbstractPopulationType DINER = new AbstractPopulationType("diner", "diners") {};
+	public static PopulationType DINER = new PopulationType("diner", "diners");
 
-	public static AbstractPopulationType VIP = new AbstractPopulationType("VIP", "VIPs") {};
+	public static PopulationType VIP = new PopulationType("VIP", "VIPs");
 	
-	public static AbstractPopulationType GUARD = new AbstractPopulationType("guard", "guards") {};
+	public static PopulationType GUARD = new PopulationType("guard", "guards");
 
-	public static AbstractPopulationType MAID = new AbstractPopulationType("maid", "maids") {};
+	public static PopulationType MAID = new PopulationType("maid", "maids");
 
-	public static AbstractPopulationType CHEF = new AbstractPopulationType("chef", "chefs") {};
+	public static PopulationType CHEF = new PopulationType("chef", "chefs");
 
-	public static AbstractPopulationType SLAVE = new AbstractPopulationType("slave", "slaves") {};
+	public static PopulationType SLAVE = new PopulationType("slave", "slaves");
 	
-	public static AbstractPopulationType OFFICE_WORKER = new AbstractPopulationType("office worker", "office workers") {};
+	public static PopulationType OFFICE_WORKER = new PopulationType("office worker", "office workers");
 	
-	public static AbstractPopulationType TEXTILE_WORKER = new AbstractPopulationType("textile worker", "textile workers") {};
+	public static PopulationType TEXTILE_WORKER = new PopulationType("textile worker", "textile workers");
 	
-	public static AbstractPopulationType CONSTRUCTION_WORKER = new AbstractPopulationType("construction worker", "construction workers") {};
+	public static PopulationType CONSTRUCTION_WORKER = new PopulationType("construction worker", "construction workers");
 	
-	public static AbstractPopulationType RECEPTIONIST = new AbstractPopulationType("receptionist", "receptionists") {};
+	public static PopulationType RECEPTIONIST = new PopulationType("receptionist", "receptionists");
 
-	public static AbstractPopulationType GANG_MEMBER = new AbstractPopulationType("gang member", "gang members") {};
+	public static PopulationType GANG_MEMBER = new PopulationType("gang member", "gang members");
 
-	public static AbstractPopulationType STALL_HOLDER = new AbstractPopulationType("stallholder", "stallholders") {};
+	public static PopulationType STALL_HOLDER = new PopulationType("stallholder", "stallholders");
 
-	public static AbstractPopulationType MILKER = new AbstractPopulationType("milker", "milkers") {};
+	public static PopulationType MILKER = new PopulationType("milker", "milkers");
 	
-	public static AbstractPopulationType CASHIER = new AbstractPopulationType("cashier", "cashiers") {};
+	public static PopulationType CASHIER = new PopulationType("cashier", "cashiers");
 	
-	public static AbstractPopulationType MASSEUSE = new AbstractPopulationType("masseuse", "masseuses") {};
+	public static PopulationType MASSEUSE = new PopulationType("masseuse", "masseuses");
 
-	private static List<AbstractPopulationType> allPopulationTypes = new ArrayList<>();
-	private static Map<AbstractPopulationType, String> populationToIdMap = new HashMap<>();
-	private static Map<String, AbstractPopulationType> idToPlaceMap = new HashMap<>();
+	public PopulationType(String s, String p) {
+		singular = s;
+		plural = p;
+	}
 
-	public static List<AbstractPopulationType> getAllPopulationTypes() {
-		return allPopulationTypes;
+	public String getName() {
+		return singular;
+	}
+
+	public String getNamePlural() {
+		return plural;
+	}
+
+	public static List<PopulationType> getAllPopulationTypes() {
+		return stream(PopulationType.class.getFields())
+		.filter(f->PopulationType.class.isAssignableFrom(f.getType()))
+		.filter(f->isStatic(f.getModifiers()))
+		.map(f->{try{return(PopulationType)f.get(null);}catch(IllegalAccessException x){return null;}})
+		.filter(Objects::nonNull)
+		.collect(toUnmodifiableList());
 	}
 	
 	public static boolean hasId(String id) {
-		return idToPlaceMap.keySet().contains(id);
-	}
-	
-	public static AbstractPopulationType getPopulationTypeFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToPlaceMap.keySet());
-		return idToPlaceMap.get(id);
-	}
-
-	public static String getIdFromPopulationType(AbstractPopulationType populationType) {
-		return populationToIdMap.get(populationType);
-	}
-	
-	static {
-		// Hard-coded population types (all those up above):
-		
-		Field[] fields = PopulationType.class.getFields();
-		
-		for(Field f : fields) {
-			if(AbstractPopulationType.class.isAssignableFrom(f.getType())) {
-				AbstractPopulationType populationType;
-				try {
-					populationType = ((AbstractPopulationType) f.get(null));
-
-					populationToIdMap.put(populationType, f.getName());
-					idToPlaceMap.put(f.getName(), populationType);
-					allPopulationTypes.add(populationType);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		try {
+			var f = PopulationType.class.getField(id);
+			return isStatic(f.getModifiers()) && PopulationType.class.isAssignableFrom(f.getType());
 		}
+		catch(NoSuchFieldException x) {
+			return false;
+		}
+	}
+	
+	public static PopulationType getPopulationTypeFromId(String id) {
+		String match = Util.getClosestStringMatch(id,
+			stream(PopulationType.class.getFields())
+			.filter(f->PopulationType.class.isAssignableFrom(f.getType()))
+			.filter(f->isStatic(f.getModifiers()))
+			.map(Field::getName)
+			.collect(toList()));
+		try {
+			return (PopulationType)PopulationType.class.getField(match).get(null);
+		}
+		catch(NoSuchFieldException|IllegalAccessException x) {
+			x.printStackTrace();
+			return null;
+		}
+	}
+
+	public static String getIdFromPopulationType(PopulationType populationType) {
+		return stream(PopulationType.class.getFields())
+		.filter(f->PopulationType.class.isAssignableFrom(f.getType()))
+		.filter(f->isStatic(f.getModifiers()))
+		.filter(f->{try{return f.get(null).equals(populationType);}catch(IllegalAccessException x){return false;}})
+		.map(Field::getName)
+		.findAny().orElse(null);
 	}
 }
