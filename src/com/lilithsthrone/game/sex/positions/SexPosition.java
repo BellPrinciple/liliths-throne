@@ -1,6 +1,5 @@
 package com.lilithsthrone.game.sex.positions;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +53,7 @@ import com.lilithsthrone.game.sex.sexActions.universal.MissionaryDesk;
 import com.lilithsthrone.game.sex.sexActions.universal.SixtyNine;
 import com.lilithsthrone.game.sex.sexActions.universal.StocksSex;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 
@@ -64,8 +64,10 @@ import com.lilithsthrone.utils.Util.Value;
  * @version 0.3.4
  * @author Innoxia
  */
-public class SexPosition {
-	
+public interface SexPosition {
+
+	String getId();
+
 	public static final AbstractSexPosition MASTURBATION = new AbstractSexPosition("",
 			8,
 			true,
@@ -4083,48 +4085,22 @@ public class SexPosition {
 	
 	
 
-	public static List<AbstractSexPosition> allSexPositions;
-	
-	public static Map<AbstractSexPosition, String> sexPositionToIdMap = new HashMap<>();
-	public static Map<String, AbstractSexPosition> idToSexPositionMap = new HashMap<>();
-	
+	@Deprecated
 	public static AbstractSexPosition getSexPositionFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToSexPositionMap.keySet());
-		
-		return idToSexPositionMap.get(id);
+		return table.of(id);
 	}
-	
+
+	@Deprecated
 	public static String getIdFromSexPosition(AbstractSexPosition perk) {
-		return sexPositionToIdMap.get(perk);
+		return perk.getId();
 	}
 
-	static {
-		allSexPositions = new ArrayList<>();
-		
-		// Hard-coded status effects (all those up above):
-		
-		Field[] fields = SexPosition.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractSexPosition.class.isAssignableFrom(f.getType())) {
-				
-				AbstractSexPosition sexPosition;
-				
-				try {
-					sexPosition = ((AbstractSexPosition) f.get(null));
-
-					sexPositionToIdMap.put(sexPosition, f.getName());
-					idToSexPositionMap.put(f.getName(), sexPosition);
-					allSexPositions.add(sexPosition);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+	Table<AbstractSexPosition> table = new Table<>(s->s) {{
+		addFields(SexPosition.class,AbstractSexPosition.class,(k,v)->v.id=k);
+	}};
 	
+	@Deprecated
 	public static List<AbstractSexPosition> getAllSexPositions() {
-		return allSexPositions;
+		return table.list();
 	}
 }
