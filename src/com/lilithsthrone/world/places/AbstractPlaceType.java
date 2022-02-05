@@ -31,7 +31,6 @@ import com.lilithsthrone.world.Cell;
 import com.lilithsthrone.world.TeleportPermissions;
 import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldRegion;
-import com.lilithsthrone.world.population.AbstractPopulationType;
 import com.lilithsthrone.world.population.Population;
 import com.lilithsthrone.world.population.PopulationDensity;
 import com.lilithsthrone.world.population.PopulationType;
@@ -270,11 +269,11 @@ public class AbstractPlaceType implements PlaceType {
 							String populationTypeString = population.getMandatoryFirstOf("populationType").getTextContent();
 							boolean plural = Boolean.valueOf(population.getMandatoryFirstOf("populationType").getAttribute("plural"));
 							PopulationDensity density = PopulationDensity.valueOf(population.getMandatoryFirstOf("populationType").getAttribute("density"));
-							AbstractPopulationType popType;
+							PopulationType popType;
 							if(PopulationType.hasId(populationTypeString)) {
 								popType = PopulationType.getPopulationTypeFromId(populationTypeString);
 							} else {
-								popType = new AbstractPopulationType(populationTypeString, populationTypeString) {};
+								popType = new PopulationType(populationTypeString, populationTypeString) {};
 							}
 							
 							if(population.getMandatoryFirstOf("subspeciesPresent").getAttribute("worldType").isEmpty()) {

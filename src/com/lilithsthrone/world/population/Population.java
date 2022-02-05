@@ -20,7 +20,7 @@ import com.lilithsthrone.world.places.PlaceType;
 public class Population {
 	
 	private boolean pluralPopulation;
-	private AbstractPopulationType type;
+	private final PopulationType type;
 	private PopulationDensity density;
 	private Map<Subspecies,SubspeciesSpawnRarity> species; //TODO refactor this into a list of Subspecies as the SubspeciesSpawnRarity is never used
 	
@@ -37,7 +37,7 @@ public class Population {
 	private List<String> subspeciesIdToAdd;
 	private List<String> subspeciesIdToRemove;
 	
-	public Population(boolean pluralPopulation, AbstractPopulationType type, PopulationDensity density, Map<Subspecies,SubspeciesSpawnRarity> species) {
+	public Population(boolean pluralPopulation, PopulationType type, PopulationDensity density, Map<Subspecies,SubspeciesSpawnRarity> species) {
 		this.pluralPopulation = pluralPopulation;
 		this.type = type;
 		this.density = density;
@@ -50,7 +50,7 @@ public class Population {
 		return pluralPopulation;
 	}
 
-	public AbstractPopulationType getType() {
+	public PopulationType getType() {
 		return type;
 	}
 
