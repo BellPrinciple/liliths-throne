@@ -17,6 +17,7 @@ import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.combat.spells.SpellUpgrade;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
@@ -5780,45 +5781,47 @@ public interface Perk {
 					+" face find themselves falling under [npc.her] spell, and within moments, are completely consumed by a wild, animalistic lust.");
 		}
 	};
-	
-	Collection collection = new Collection();
 
-	final class Collection {
+	@Deprecated
+	public static AbstractPerk getPerkFromId(String id) {
+		return table.of(id);
+	}
 
-		private final LinkedHashMap<String,AbstractPerk> map = new LinkedHashMap<>();
+	static String sanitize(String id) {
+		if(id.equalsIgnoreCase("MERAXIS")
+				|| id.equalsIgnoreCase("ARCANE_TATTOOIST")
+				|| id.equalsIgnoreCase("SLUT")
+				|| id.equalsIgnoreCase("ARCANE_TRAINING")
+				|| id.equalsIgnoreCase("ARCANE_ALLERGY")
+				|| id.equalsIgnoreCase("HEALTH_FANATIC")
+				|| id.equalsIgnoreCase("MARTIAL_BACKGROUND")) {
+			id = "SPECIAL_"+id;
+		} else if(id.equalsIgnoreCase("BRAWLER")) {
+			id = "FEROCIOUS_WARRIOR";
+		} else if(id.equalsIgnoreCase("ARCANE_BASE_NPC")) {
+			id = "ARCANE_BASE";
+		} else if(id.equalsIgnoreCase("PHYSIQUE_5")) {
+			id = "PHYSIQUE_BOOST_MAJOR";
+		} else if(id.equalsIgnoreCase("ARCANE_5")) {
+			id = "ARCANE_BOOST_MAJOR";
+		} else if(id.equalsIgnoreCase("SPELL_DAMAGE_5")) {
+			id = "SPELL_DAMAGE_MAJOR";
+		} else if(id.equalsIgnoreCase("ELEMENTALIST_5")) {
+			id = "ELEMENTAL_BOOST";
+		}
+		return id;
+	}
+
+	Collection table = new Collection();
+
+	final class Collection extends Table<AbstractPerk> {
+
 		private final List<AbstractPerk> hidden = new ArrayList<>();
 		private boolean subspeciesPerksGenerated;
 
-		public AbstractPerk of(String id) {
+		public List<AbstractPerk> list() {
 			generateSubspeciesPerks();
-			if(id.equalsIgnoreCase("MERAXIS")
-					|| id.equalsIgnoreCase("ARCANE_TATTOOIST")
-					|| id.equalsIgnoreCase("SLUT")
-					|| id.equalsIgnoreCase("ARCANE_TRAINING")
-					|| id.equalsIgnoreCase("ARCANE_ALLERGY")
-					|| id.equalsIgnoreCase("HEALTH_FANATIC")
-					|| id.equalsIgnoreCase("MARTIAL_BACKGROUND")) {
-				id = "SPECIAL_"+id;
-			} else if(id.equalsIgnoreCase("BRAWLER")) {
-				id = "FEROCIOUS_WARRIOR";
-			} else if(id.equalsIgnoreCase("ARCANE_BASE_NPC")) {
-				id = "ARCANE_BASE";
-			} else if(id.equalsIgnoreCase("PHYSIQUE_5")) {
-				id = "PHYSIQUE_BOOST_MAJOR";
-			} else if(id.equalsIgnoreCase("ARCANE_5")) {
-				id = "ARCANE_BOOST_MAJOR";
-			} else if(id.equalsIgnoreCase("SPELL_DAMAGE_5")) {
-				id = "SPELL_DAMAGE_MAJOR";
-			} else if(id.equalsIgnoreCase("ELEMENTALIST_5")) {
-				id = "ELEMENTAL_BOOST";
-			}
-
-			return map.get(Util.getClosestStringMatch(id,map.keySet()));
-		}
-
-		public List<AbstractPerk> all() {
-			generateSubspeciesPerks();
-			return List.copyOf(map.values());
+			return super.list();
 		}
 
 		public List<AbstractPerk> hidden() {
@@ -5827,31 +5830,8 @@ public interface Perk {
 		}
 
 		private Collection() {
-
-			Field[] fields = Perk.class.getFields();
-
-			for(Field f : fields){
-				if (AbstractPerk.class.isAssignableFrom(f.getType())) {
-
-					AbstractPerk perk;
-
-					try {
-						perk = ((AbstractPerk) f.get(null));
-
-						// I feel like this is stupid :thinking:
-						perk.id = f.getName();
-						map.put(f.getName(), perk);
-
-						if(perk.isHiddenPerk()) {
-							hidden.add(perk);
-						}
-
-					} catch (IllegalArgumentException | IllegalAccessException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-
+			super(Perk::sanitize);
+			addFields(Perk.class,AbstractPerk.class,(k,v)->{v.id=k;if(v.isHiddenPerk())hidden.add(v);});
 			hidden.sort((p1, p2) -> p1.getRenderingPriority()-p2.getRenderingPriority());
 		}
 
@@ -5895,7 +5875,7 @@ public interface Perk {
 					}
 				};
 				//				System.out.println("Added perk: "+Subspecies.getIdFromSubspecies(subToUse)+" "+racePerk.getName(null)+" "+racePerk.hashCode());
-				map.put(Subspecies.getIdFromSubspecies(subToUse), racePerk);
+				add(subToUse.getId(), racePerk);
 				hidden.add(racePerk);
 			}
 			subspeciesPerksGenerated = true;
@@ -5903,18 +5883,14 @@ public interface Perk {
 		}
 	}
 	
-	public static AbstractPerk getPerkFromId(String id) {
-		return collection.of(id);
-	}
-	
 	public static String getIdFromPerk(AbstractPerk perk) {
-		collection.generateSubspeciesPerks();
+		table.generateSubspeciesPerks();
 		return perk.getId();
 	}
 
 
 	public static AbstractPerk getSubspeciesRelatedPerk(Subspecies subspecies) {
-		collection.generateSubspeciesPerks();
+		table.generateSubspeciesPerks();
 		
 		var subToUse =
 				subspecies.getDamageMultiplier()==AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace()).getDamageMultiplier()
@@ -5923,12 +5899,13 @@ public interface Perk {
 		
 		return Perk.getPerkFromId(Subspecies.getIdFromSubspecies(subToUse));
 	}
-	
+
+	@Deprecated
 	public static List<AbstractPerk> getAllPerks() {
-		return collection.all();
+		return table.list();
 	}
-	
+
 	public static List<AbstractPerk> getHiddenPerks() {
-		return collection.hidden();
+		return table.hidden();
 	}
 }
