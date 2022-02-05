@@ -166,7 +166,6 @@ import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.game.dialogue.encounters.Encounter;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
@@ -9739,7 +9738,7 @@ public class UtilText {
 		for(AbstractTattooType tattooType : TattooType.getAllTattooTypes()) {
 			engine.put("TATTOO_"+TattooType.getIdFromTattooType(tattooType), tattooType);
 		}
-		for(AbstractSetBonus setBonus : SetBonus.getAllSetBonuses()) {
+		for(var setBonus : SetBonus.table.list()) {
 			engine.put("SET_BONUS_"+SetBonus.getIdFromSetBonus(setBonus), setBonus);
 		}
 		for(AbstractOutfit outfit : OutfitType.getAllOutfits()) {
