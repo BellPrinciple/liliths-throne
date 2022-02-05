@@ -1,12 +1,8 @@
 package com.lilithsthrone.game.character.race;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -53,6 +49,7 @@ import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.SVGImages;
 import com.lilithsthrone.utils.SvgUtil;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
@@ -3729,7 +3726,7 @@ public interface Subspecies {
 					"demonic-centauresses"};
 		}
 		@Override
-		public int getSubspeciesWeighting(Body body, AbstractRace race) {	
+		public int getSubspeciesWeighting(Body body, AbstractRace race) {
 			if(race==Race.HORSE_MORPH && body.getLeg().getLegConfiguration()==LegConfiguration.QUADRUPEDAL) {
 				return 1000;
 			}
@@ -5264,7 +5261,7 @@ public interface Subspecies {
 			return 0;
 		}
 	};
-	
+
 //	public static AbstractSubspecies HARPY_BALD_EAGLE = new AbstractSubspecies(false,
 //			16000,
 //			"innoxia_race_harpy_harpy_perfume",
@@ -5339,7 +5336,7 @@ public interface Subspecies {
 //					"fury",
 //					"furies",
 //					"furies"};
-//			
+//
 //			if(character!=null && !character.getHalfDemonSubspecies().isNonBiped()) {
 //				names = new String[] {
 //					applyNonBipedNameChange(character, "fury", false, false),
@@ -5350,7 +5347,7 @@ public interface Subspecies {
 //					applyNonBipedNameChange(character, "fury", true, true)
 //				};
 //			}
-//			
+//
 //			return names;
 //		}
 //		@Override
@@ -5358,7 +5355,7 @@ public interface Subspecies {
 //			if(race==Race.HARPY) {
 //				AbstractBodyCoveringType feathers = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_FEATHER):BodyCoveringType.FEATHERS;
 //				AbstractBodyCoveringType headFeathers = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.HAIR):BodyCoveringType.HAIR_HARPY;
-//				
+//
 //				if(body.getCoverings().get(feathers).getPrimaryColour()==PresetColour.COVERING_BROWN_DARK
 //						&& body.getCoverings().get(headFeathers).getPrimaryColour()==PresetColour.COVERING_WHITE) {
 //					return 150;
@@ -5890,9 +5887,13 @@ public interface Subspecies {
 	/*private*/Map<WorldRegion, Map<AbstractSubspecies, SubspeciesSpawnRarity>> regionSpecies = new HashMap<>();
 	/*private*/Map<WorldType, Map<AbstractSubspecies, SubspeciesSpawnRarity>> worldSpecies = new HashMap<>();
 	/*private*/Map<PlaceType, Map<AbstractSubspecies, SubspeciesSpawnRarity>> placeSpecies = new HashMap<>();
-	LinkedHashMap<String,AbstractSubspecies> idToSubspeciesMap = init();
 
+	@Deprecated
 	static AbstractSubspecies getSubspeciesFromId(String id) {
+		return table.of(id);
+	}
+
+	static String sanitize(String id) {
 		if(id.equalsIgnoreCase("CAT_MORPH_LEOPARD_SNOW")) {
 			id = "innoxia_panther_subspecies_snow_leopard";
 		} else if(id.equalsIgnoreCase("CAT_MORPH_LEOPARD")) {
@@ -5904,75 +5905,36 @@ public interface Subspecies {
 		} else if(id.equalsIgnoreCase("HARPY_BALD_EAGLE")) {
 			id = "innoxia_raptor_subspecies_bald_eagle";
 		}
-		id = Util.getClosestStringMatch(id, idToSubspeciesMap.keySet());
-		return idToSubspeciesMap.get(id);
+		return id;
 	}
-	
+
+	@Deprecated
 	static String getIdFromSubspecies(AbstractSubspecies subspecies) {
 		return subspecies.id;
 	}
 
-	static LinkedHashMap<String,AbstractSubspecies> init() {
-		var idToSubspeciesMap = new LinkedHashMap<String,AbstractSubspecies>();
+	Table<AbstractSubspecies> table = new Table<>(Subspecies::sanitize) {{
 
 		// Modded subspecies:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "subspecies", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("subspecies")) {
-					try {
-						var subspecies = new AbstractSubspecies(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("_race", "");
-						subspecies.id = id;
-						idToSubspeciesMap.put(id, subspecies);
-//						System.out.println("subspecies: "+id);
-					} catch(Exception ex) {
-						System.err.println("Loading modded subspecies failed at 'Subspecies'. File path: "+innerEntry.getValue().getAbsolutePath());
-						System.err.println("Actual exception: ");
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
+		forEachMod("/race","subspecies",null,(f,n,a)->{
+			var k = n.replaceAll("_race","");
+			var v = new AbstractSubspecies(f,a,true) {};
+			v.id = k;
+			add(k,v);
+		});
+
 		// External res subspecies:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "subspecies", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("subspecies")) {
-					try {
-						var subspecies = new AbstractSubspecies(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("_race", "");
-						subspecies.id = id;
-						idToSubspeciesMap.put(id, subspecies);
-					} catch(Exception ex) {
-						System.err.println("Loading subspecies failed at 'Subspecies'. File path: "+innerEntry.getValue().getAbsolutePath());
-						System.err.println("Actual exception: ");
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
+		forEachExternal("res/race","subspecies",null,(f,n,a)->{
+			var k = n.replaceAll("_race","");
+			var v = new AbstractSubspecies(f,a,false) {};
+			v.id = k;
+			add(k,v);
+		});
+
 		// Hard-coded:
-		
-		Field[] fields = Subspecies.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractSubspecies.class.isAssignableFrom(f.getType())) {
-				try {
-					var subspecies = ((AbstractSubspecies) f.get(null));
-					subspecies.id = f.getName();
-					idToSubspeciesMap.put(f.getName(), subspecies);
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		for(AbstractSubspecies species : Subspecies.getAllSubspecies()) {
+		addFields(Subspecies.class,AbstractSubspecies.class,(k,v)->v.id=k);
+
+		for(AbstractSubspecies species : list()) {
 			
 			for(Entry<WorldRegion, SubspeciesSpawnRarity> type : species.getRegionLocations().entrySet()) {
 				regionSpecies.putIfAbsent(type.getKey(), new HashMap<>());
@@ -5991,11 +5953,10 @@ public interface Subspecies {
 			}
 		}
 
-		return idToSubspeciesMap;
-	}
-	
+	}};
+
 	static List<AbstractSubspecies> getAllSubspecies() {
-		return idToSubspeciesMap.values().stream()
+		return table.list().stream()
 		.sorted(Comparator.comparing(s->s.getRace().getName(false)))
 		.collect(Collectors.toList());
 	}
@@ -6053,7 +6014,7 @@ public interface Subspecies {
 				}
 			}
 		}
-		
+
 		for(AbstractSubspecies sub : subspeciesToExclude) {
 			filteredMap.remove(sub);
 		}
@@ -6067,7 +6028,7 @@ public interface Subspecies {
 	 */
 	static Map<AbstractSubspecies, SubspeciesSpawnRarity> getDominionStormImmuneSpecies(boolean onlyCoreRaceSpecies, AbstractSubspecies... subspeciesToExclude) {
 		Map<AbstractSubspecies, SubspeciesSpawnRarity> map = new HashMap<>();
-		for(var s : idToSubspeciesMap.values()) {
+		for(var s : table.list()) {
 			if(s.getRace()!=Race.DEMON
 					|| onlyCoreRaceSpecies && AbstractSubspecies.getMainSubspeciesOfRace(s.getRace())!=s
 					|| List.of(subspeciesToExclude).contains(s))
@@ -6083,7 +6044,7 @@ public interface Subspecies {
 	}
 
 	static List<AbstractSubspecies> getSubspeciesOfRace(AbstractRace race) {
-		return idToSubspeciesMap.values().stream()
+		return table.list().stream()
 		.filter(s->race.equals(s.getRace()))
 		.sorted(Comparator.comparing(s->s.getName(null)))
 		.collect(Collectors.toList());
