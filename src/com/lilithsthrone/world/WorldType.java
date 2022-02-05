@@ -1,15 +1,12 @@
 package com.lilithsthrone.world;
 
 import java.awt.Color;
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
@@ -100,7 +97,7 @@ public interface WorldType {
 	default String getWallName() {
 		return "wall";
 	}
-	
+
 	// Dominion:
 	
 	public static AbstractWorldType WORLD_MAP = new AbstractWorldType(WorldRegion.MISC,
@@ -113,36 +110,36 @@ public interface WorldType {
 					new Value<>(new Color(0x61997e), PlaceType.WORLD_MAP_THICK_JUNGLE), // thick jungle
 					new Value<>(new Color(0x81cca8), PlaceType.WORLD_MAP_JUNGLE), // jungle
 					new Value<>(new Color(0xb377b0), PlaceType.WORLD_MAP_JUNGLE_CITY), // jungle city
-					
+
 					new Value<>(new Color(0x696969), PlaceType.WORLD_MAP_FOOTHILLS), // foothills
 					new Value<>(new Color(0xc1c1c1), PlaceType.WORLD_MAP_MOUNTAINS), // low mountains
 					new Value<>(new Color(0xe0e0e0), PlaceType.WORLD_MAP_SNOWY_MOUNTAINS), // snowy mountains
-					
+
 					new Value<>(new Color(0xffffff), PlaceType.WORLD_MAP_SNOWY_VALLEY), // snowy valley
 					new Value<>(new Color(0xadffff), PlaceType.WORLD_MAP_GLACIAL_LAKE), // glacial lake
-					
+
 					new Value<>(new Color(0x8500ff), PlaceType.WORLD_MAP_DOMINION), // dominion
 
 					new Value<>(new Color(0xcbf1d5), PlaceType.WORLD_MAP_GRASSLANDS), // wild grasslands
 					new Value<>(new Color(0xe2ffd7), PlaceType.WORLD_MAP_FIELDS), // foloi fields
 					new Value<>(new Color(0xb4c490), PlaceType.WORLD_MAP_FOREST), // forest
 					new Value<>(new Color(0xd544ae), PlaceType.WORLD_MAP_FIELDS_CITY), // Elis
-					
+
 					new Value<>(new Color(0x98c488), PlaceType.WORLD_MAP_YOUKO_FOREST), // shinrin highland
-					
+
 					new Value<>(new Color(0x62e6d3), PlaceType.WORLD_MAP_WILD_RIVER), // dangerous river
 					new Value<>(new Color(0xa7fce8), PlaceType.WORLD_MAP_RIVER), // river
-					
+
 					new Value<>(new Color(0xc4fcff), PlaceType.WORLD_MAP_SEA), // endless sea
 					new Value<>(new Color(0x8264b0), PlaceType.WORLD_MAP_SEA_CITY), // sea city
-					
+
 					new Value<>(new Color(0xebffc4), PlaceType.WORLD_MAP_ARID_GRASSLAND), // arid grassland
 					new Value<>(new Color(0xd3e6b0), PlaceType.WORLD_MAP_ARID_SAVANNAH), // savannah
-					
+
 					new Value<>(new Color(0xffefc4), PlaceType.WORLD_MAP_DESERT), // desert
 					new Value<>(new Color(0xffce4a), PlaceType.WORLD_MAP_SAND_DUNES), // sand dunes
 					new Value<>(new Color(0xd5445e), PlaceType.WORLD_MAP_DESERT_CITY), // desert city
-					
+
 					new Value<>(new Color(0xff8100), PlaceType.WORLD_MAP_VOLCANO), // volcano
 					new Value<>(new Color(0x3b3b3b), PlaceType.WORLD_MAP_LAVA_FLOWS) // lava flows
 					)) {
@@ -161,33 +158,33 @@ public interface WorldType {
 			TeleportPermissions.BOTH,
 			"/com/lilithsthrone/res/map/dominion/dominion.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.DOMINION_PLAZA, Util.newHashMapOfValues(
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					
+
 					new Value<>(new Color(0x808080), PlaceType.DOMINION_STREET),
 					new Value<>(new Color(0x404040), PlaceType.DOMINION_BOULEVARD),
 					new Value<>(new Color(0x808000), PlaceType.DOMINION_EXIT_TO_SUBMISSION),
-					
+
 					new Value<>(new Color(0xbf8000), PlaceType.DOMINION_BACK_ALLEYS_SAFE),
 					new Value<>(new Color(0xc10000), PlaceType.DOMINION_BACK_ALLEYS),
 					new Value<>(new Color(0x5b0000), PlaceType.DOMINION_DARK_ALLEYS),
 					new Value<>(new Color(0x40b4ff), PlaceType.DOMINION_ALLEYS_CANAL_CROSSING),
-					
+
 					new Value<>(new Color(0x0080ff), PlaceType.DOMINION_CANAL),
 					new Value<>(new Color(0x004080), PlaceType.DOMINION_CANAL_END),
-					
+
 					new Value<>(new Color(0x000000), PlaceType.DOMINION_DEMON_HOME_GATE),
 					new Value<>(new Color(0xff80ff), PlaceType.DOMINION_DEMON_HOME),
 					new Value<>(new Color(0xff9100), PlaceType.DOMINION_DEMON_HOME_ARTHUR),
 					new Value<>(new Color(0x8000ff), PlaceType.DOMINION_CITY_HALL),
 					new Value<>(new Color(0xff00ff), PlaceType.DOMINION_LILITHS_TOWER),
-					
+
 					new Value<>(new Color(0x8080ff), PlaceType.DOMINION_EXIT_WEST),
 					new Value<>(new Color(0xff4a00), PlaceType.DOMINION_EXIT_NORTH),
 					new Value<>(new Color(0x008040), PlaceType.DOMINION_EXIT_EAST),
 					new Value<>(new Color(0xffff80), PlaceType.DOMINION_EXIT_SOUTH),
-					
+
 					new Value<>(new Color(0x008080), PlaceType.DOMINION_STREET_HARPY_NESTS),
 					new Value<>(new Color(0x00ff80), PlaceType.DOMINION_HARPY_NESTS_ENTRANCE),
-					
+
 					new Value<>(new Color(0x004000), PlaceType.DOMINION_PLAZA),
 					new Value<>(new Color(0x00ffff), PlaceType.DOMINION_AUNTS_HOME),
 					new Value<>(new Color(0xffff00), PlaceType.DOMINION_SHOPPING_ARCADE),
@@ -374,10 +371,10 @@ public interface WorldType {
 			TeleportPermissions.BOTH,
 			"/com/lilithsthrone/res/map/dominion/harpyNests/harpyNests.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.HARPY_NESTS_ENTRANCE_ENFORCER_POST, Util.newHashMapOfValues(
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					
+
 					new Value<>(new Color(0x808080), PlaceType.HARPY_NESTS_WALKWAYS),
 					new Value<>(new Color(0x404040), PlaceType.HARPY_NESTS_WALKWAYS_BRIDGE),
-					
+
 					new Value<>(new Color(0x00ff80), PlaceType.HARPY_NESTS_ENTRANCE_ENFORCER_POST),
 					new Value<>(new Color(0xff0000), PlaceType.HARPY_NESTS_HARPY_NEST_RED),
 					new Value<>(new Color(0xff00ff), PlaceType.HARPY_NESTS_HARPY_NEST_PINK),
@@ -395,24 +392,24 @@ public interface WorldType {
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
 					new Value<>(new Color(0x808080), PlaceType.SLAVER_ALLEY_PATH),
 					new Value<>(new Color(0xff0000), PlaceType.SLAVER_ALLEY_ENTRANCE),
-					
+
 					new Value<>(new Color(0xff80ff), PlaceType.SLAVER_ALLEY_STALL_FEMALES),
 					new Value<>(new Color(0x0080ff), PlaceType.SLAVER_ALLEY_STALL_MALES),
-					
+
 					new Value<>(new Color(0xff8000), PlaceType.SLAVER_ALLEY_STALL_ANAL),
 					new Value<>(new Color(0xff00ff), PlaceType.SLAVER_ALLEY_STALL_VAGINAL),
 					new Value<>(new Color(0xff8080), PlaceType.SLAVER_ALLEY_STALL_ORAL),
 					new Value<>(new Color(0x404040), PlaceType.SLAVER_ALLEY_STATUE),
-					
+
 					new Value<>(new Color(0x21bfc5), PlaceType.SLAVER_ALLEY_MARKET_STALL_EXCLUSIVE),
 					new Value<>(new Color(0x004080), PlaceType.SLAVER_ALLEY_MARKET_STALL_BULK),
 					new Value<>(new Color(0x008080), PlaceType.SLAVER_ALLEY_CAFE),
-					
+
 					new Value<>(new Color(0xbfff00), PlaceType.SLAVER_ALLEY_BOUNTY_HUNTERS),
-					
+
 					new Value<>(new Color(0x0000ff), PlaceType.SLAVER_ALLEY_SLAVERY_ADMINISTRATION),
 					new Value<>(new Color(0xff0080), PlaceType.SLAVER_ALLEY_SCARLETTS_SHOP),
-					
+
 					new Value<>(new Color(0xffff00), PlaceType.SLAVER_ALLEY_AUCTIONING_BLOCK),
 					new Value<>(new Color(0x00ff00), PlaceType.SLAVER_ALLEY_PUBLIC_STOCKS))) {
 	};
@@ -427,9 +424,9 @@ public interface WorldType {
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
 					new Value<>(new Color(0x808080), PlaceType.BOUNTY_HUNTER_LODGE_FLOOR),
 					new Value<>(new Color(0xff0000), PlaceType.BOUNTY_HUNTER_LODGE_ENTRANCE),
-					
+
 					new Value<>(new Color(0xff8000), PlaceType.BOUNTY_HUNTER_LODGE_BOUNTY_BOARD),
-					
+
 					new Value<>(new Color(0x00ff00), PlaceType.BOUNTY_HUNTER_LODGE_BAR),
 					new Value<>(new Color(0xffff00), PlaceType.BOUNTY_HUNTER_LODGE_SEATING),
 					new Value<>(new Color(0x00ffff), PlaceType.BOUNTY_HUNTER_LODGE_STAIRS))) {
@@ -525,16 +522,16 @@ public interface WorldType {
 					new Value<>(new Color(0x808080), PlaceType.ENFORCER_HQ_CORRIDOR),
 					new Value<>(new Color(0xb9b9b9), PlaceType.ENFORCER_HQ_CELLS_CORRIDOR),
 					new Value<>(new Color(0x00ff00), PlaceType.ENFORCER_HQ_STAIRS),
-					
+
 					new Value<>(new Color(0xff0000), PlaceType.ENFORCER_HQ_ENTRANCE),
 					new Value<>(new Color(0x8000ff), PlaceType.ENFORCER_HQ_WAITING_AREA),
 					new Value<>(new Color(0x0080ff), PlaceType.ENFORCER_HQ_RECEPTION_DESK),
-					
+
 					new Value<>(new Color(0xffff00), PlaceType.ENFORCER_HQ_GUARDED_DOOR),
 					new Value<>(new Color(0x808000), PlaceType.ENFORCER_HQ_REQUISITIONS_DOOR),
 					new Value<>(new Color(0xff0080), PlaceType.ENFORCER_HQ_LOCKED_DOOR),
 					new Value<>(new Color(0x800080), PlaceType.ENFORCER_HQ_LOCKED_DOOR_EDGE),
-					
+
 					new Value<>(new Color(0xff8000), PlaceType.ENFORCER_HQ_BRAXS_OFFICE),
 					new Value<>(new Color(0x00ffff), PlaceType.ENFORCER_HQ_OFFICE),
 					new Value<>(new Color(0xff8080), PlaceType.ENFORCER_HQ_CELLS_OFFICE),
@@ -570,9 +567,9 @@ public interface WorldType {
 					new Value<>(new Color(0x404040), PlaceType.ENFORCER_WAREHOUSE_ENCLOSURE),
 					new Value<>(new Color(0x00ff00), PlaceType.ENFORCER_WAREHOUSE_ENCLOSURE_TELEPORT_PADS),
 					new Value<>(new Color(0x00ffff), PlaceType.ENFORCER_WAREHOUSE_ENCLOSURE_TELEPORT_SHELVING),
-					
+
 					new Value<>(new Color(0xff0080), PlaceType.ENFORCER_WAREHOUSE_ENFORCER_GUARD_POST),
-					
+
 					new Value<>(new Color(0xff8000), PlaceType.ENFORCER_WAREHOUSE_CRATES),
 					new Value<>(new Color(0xffff00), PlaceType.ENFORCER_WAREHOUSE_CRATES_ARK),
 					new Value<>(new Color(0xff00ff), PlaceType.ENFORCER_WAREHOUSE_CRATES_LUST_WEAPON),
@@ -709,11 +706,11 @@ public interface WorldType {
 			TeleportPermissions.NONE,
 			"/com/lilithsthrone/res/map/dominion/nightLife/wateringHole.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.WATERING_HOLE_ENTRANCE, Util.newHashMapOfValues(
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					
+
 					new Value<>(new Color(0x00ff00), PlaceType.WATERING_HOLE_ENTRANCE),
-					
+
 					new Value<>(new Color(0x808080), PlaceType.WATERING_HOLE_MAIN_AREA),
-					
+
 					new Value<>(new Color(0x0080ff), PlaceType.WATERING_HOLE_SEATING_AREA),
 					new Value<>(new Color(0xff00ff), PlaceType.WATERING_HOLE_VIP_AREA),
 					new Value<>(new Color(0xff8000), PlaceType.WATERING_HOLE_BAR),
@@ -734,7 +731,7 @@ public interface WorldType {
 			TeleportPermissions.NONE,
 			"/com/lilithsthrone/res/map/dominion/daddy/apartment.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.DOMINION_DEMON_HOME_DADDY, Util.newHashMapOfValues(
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					
+
 					new Value<>(new Color(0x00ff00), PlaceType.DADDY_APARTMENT_ENTRANCE),
 					new Value<>(new Color(0xffff00), PlaceType.DADDY_APARTMENT_LOUNGE),
 					new Value<>(new Color(0x00ffff), PlaceType.DADDY_APARTMENT_KITCHEN),
@@ -795,10 +792,10 @@ public interface WorldType {
 			TeleportPermissions.NONE,
 			"/com/lilithsthrone/res/map/dominion/helenaApartment/apartment.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.DOMINION_HELENA_HOTEL, Util.newHashMapOfValues(
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					
+
 					new Value<>(new Color(0x808080), PlaceType.HELENA_APARTMENT_HALLWAY),
 					new Value<>(new Color(0x00ffff), PlaceType.HELENA_APARTMENT_BALCONY),
-					
+
 					new Value<>(new Color(0x00ff00), PlaceType.HELENA_APARTMENT_ENTRANCE),
 					new Value<>(new Color(0xff00ff), PlaceType.HELENA_APARTMENT_HELENA_BEDROOM),
 					new Value<>(new Color(0xff0080), PlaceType.HELENA_APARTMENT_SCARLETT_BEDROOM),
@@ -832,16 +829,16 @@ public interface WorldType {
 			TeleportPermissions.NONE,
 			"/com/lilithsthrone/res/map/dominion/nyanApartment/apartment.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.DOMINION_NYAN_APARTMENT, Util.newHashMapOfValues(
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
-					
+
 					new Value<>(new Color(0x808080), PlaceType.NYAN_APARTMENT_HALLWAY),
 					new Value<>(new Color(0x00ff00), PlaceType.NYAN_APARTMENT_ENTRANCE),
 
 					new Value<>(new Color(0xff8000), PlaceType.NYAN_APARTMENT_DINING_ROOM),
 					new Value<>(new Color(0xffff00), PlaceType.NYAN_APARTMENT_KITCHEN),
-					
+
 					new Value<>(new Color(0x0000ff), PlaceType.NYAN_APARTMENT_BATHROOM),
 					new Value<>(new Color(0x00ff80), PlaceType.NYAN_APARTMENT_LOUNGE),
-					
+
 					new Value<>(new Color(0xff00ff), PlaceType.NYAN_APARTMENT_SPARE_BEDROOM),
 					new Value<>(new Color(0xff0000), PlaceType.NYAN_APARTMENT_NYAN_BEDROOM),
 					new Value<>(new Color(0x00ffff), PlaceType.NYAN_APARTMENT_ENSUITE)
@@ -872,27 +869,27 @@ public interface WorldType {
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
 
 					new Value<>(new Color(0x808000), PlaceType.SUBMISSION_ENTRANCE),
-					
+
 					new Value<>(new Color(0x808080), PlaceType.SUBMISSION_WALKWAYS),
 					new Value<>(new Color(0xc10000), PlaceType.SUBMISSION_TUNNELS),
-					
+
 					new Value<>(new Color(0x008080), PlaceType.SUBMISSION_BAT_CAVERNS),
 					new Value<>(new Color(0xff9100), PlaceType.SUBMISSION_RAT_WARREN),
 					new Value<>(new Color(0xffff00), PlaceType.SUBMISSION_GAMBLING_DEN),
-					
+
 					new Value<>(new Color(0xff00ff), PlaceType.SUBMISSION_LILIN_PALACE),
 					new Value<>(new Color(0x000000), PlaceType.SUBMISSION_LILIN_PALACE_GATE),
 					new Value<>(new Color(0x404040), PlaceType.SUBMISSION_LILIN_PALACE_CAVERN),
-					
+
 					new Value<>(new Color(0x004fc9), PlaceType.SUBMISSION_IMP_FORTRESS_ALPHA),
 					new Value<>(new Color(0x658cc9), PlaceType.SUBMISSION_IMP_TUNNELS_ALPHA),
-					
+
 					new Value<>(new Color(0x6928c9), PlaceType.SUBMISSION_IMP_FORTRESS_DEMON),
 					new Value<>(new Color(0x8d65c9), PlaceType.SUBMISSION_IMP_TUNNELS_DEMON),
-					
+
 					new Value<>(new Color(0xa228c9), PlaceType.SUBMISSION_IMP_FORTRESS_FEMALES),
 					new Value<>(new Color(0xb065c9), PlaceType.SUBMISSION_IMP_TUNNELS_FEMALES),
-					
+
 					new Value<>(new Color(0x0096c9), PlaceType.SUBMISSION_IMP_FORTRESS_MALES),
 					new Value<>(new Color(0x65b0c9), PlaceType.SUBMISSION_IMP_TUNNELS_MALES))) {
 	};
@@ -914,7 +911,7 @@ public interface WorldType {
 					new Value<>(new Color(0xff8000), PlaceType.LYSSIETH_PALACE_HALL),
 					new Value<>(new Color(0x8000ff), PlaceType.LYSSIETH_PALACE_OFFICE),
 					new Value<>(new Color(0xff0080), PlaceType.LYSSIETH_PALACE_SIREN_OFFICE),
-					
+
 					new Value<>(new Color(0xff0000), PlaceType.LYSSIETH_PALACE_STAIRS_1),
 					new Value<>(new Color(0x0000ff), PlaceType.LYSSIETH_PALACE_STAIRS_2))) {
 		@Override
@@ -961,9 +958,9 @@ public interface WorldType {
 					new Value<>(new Color(0x65b0c9), PlaceType.FORTRESS_DEMON_WELL),
 					new Value<>(new Color(0xff8000), PlaceType.FORTRESS_DEMON_KEEP),
 					new Value<>(new Color(0x8000ff), PlaceType.FORTRESS_DEMON_CELLS),
-					
+
 					new Value<>(new Color(0x80ff00), PlaceType.FORTRESS_LAB),
-					
+
 					new Value<>(new Color(0xff00ff), PlaceType.FORTRESS_DEMON_TREASURY))){
 		@Override
 		public boolean isRevealedOnStart() {
@@ -1027,14 +1024,14 @@ public interface WorldType {
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
 
 					new Value<>(new Color(0x00ff00), PlaceType.BAT_CAVERN_ENTRANCE),
-					
+
 					new Value<>(new Color(0x008080), PlaceType.BAT_CAVERN_DARK),
 					new Value<>(new Color(0x808080), PlaceType.BAT_CAVERN_LIGHT),
-					
+
 					new Value<>(new Color(0x0080ff), PlaceType.BAT_CAVERN_RIVER),
 					new Value<>(new Color(0x40b4ff), PlaceType.BAT_CAVERN_RIVER_CROSSING),
 					new Value<>(new Color(0x004080), PlaceType.BAT_CAVERN_RIVER_END),
-					
+
 					new Value<>(new Color(0xff80ff), PlaceType.BAT_CAVERN_SLIME_QUEEN_LAIR))) {
 	};
 
@@ -1048,15 +1045,15 @@ public interface WorldType {
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
 
 					new Value<>(new Color(0x808080), PlaceType.SLIME_QUEENS_LAIR_CORRIDOR),
-					
+
 					new Value<>(new Color(0x00ff00), PlaceType.SLIME_QUEENS_LAIR_ENTRANCE),
 					new Value<>(new Color(0xff0000), PlaceType.SLIME_QUEENS_LAIR_STAIRS_UP),
-					
+
 					new Value<>(new Color(0xff8000), PlaceType.SLIME_QUEENS_LAIR_STORAGE_VATS),
 					new Value<>(new Color(0x40b4ff), PlaceType.SLIME_QUEENS_LAIR_ROOM),
-					
+
 					new Value<>(new Color(0xff80ff), PlaceType.SLIME_QUEENS_LAIR_ENTRANCE_GUARDS),
-					
+
 					new Value<>(new Color(0xffff00), PlaceType.SLIME_QUEENS_LAIR_SLIME_QUEEN))) {
 		@Override
 		public String getSexBlockedReason(GameCharacter character) {
@@ -1074,11 +1071,11 @@ public interface WorldType {
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
 
 					new Value<>(new Color(0x808080), PlaceType.SLIME_QUEENS_LAIR_CORRIDOR),
-					
+
 					new Value<>(new Color(0x00ff00), PlaceType.SLIME_QUEENS_LAIR_STAIRS_DOWN),
-					
+
 					new Value<>(new Color(0x40b4ff), PlaceType.SLIME_QUEENS_LAIR_ROOM),
-					
+
 					new Value<>(new Color(0xff00ff), PlaceType.SLIME_QUEENS_LAIR_ROYAL_GUARD),
 					new Value<>(new Color(0xffff00), PlaceType.SLIME_QUEENS_LAIR_SLIME_QUEEN))) {
 		@Override
@@ -1096,15 +1093,15 @@ public interface WorldType {
 			"/com/lilithsthrone/res/map/submission/gamblingDen/gamblingDen.png", PlaceType.WORLD_MAP_DOMINION, PlaceType.GAMBLING_DEN_ENTRANCE, Util.newHashMapOfValues(
 					new Value<>(new Color(0xFFFFFF), PlaceType.GENERIC_IMPASSABLE),
 					new Value<>(new Color(0x808080), PlaceType.GAMBLING_DEN_CORRIDOR),
-					
+
 					new Value<>(new Color(0x00ff00), PlaceType.GAMBLING_DEN_ENTRANCE),
-					
+
 					new Value<>(new Color(0x4bb1d0), PlaceType.GAMBLING_DEN_OFFICE),
-					
+
 					new Value<>(new Color(0xffff00), PlaceType.GAMBLING_DEN_TRADER),
-					
+
 					new Value<>(new Color(0x0080ff), PlaceType.GAMBLING_DEN_GAMBLING),
-					
+
 					new Value<>(new Color(0xff80ff), PlaceType.GAMBLING_DEN_PREGNANCY),
 					new Value<>(new Color(0xff00ff), PlaceType.GAMBLING_DEN_FUTA_PREGNANCY),
 					new Value<>(new Color(0xff8000), PlaceType.GAMBLING_DEN_PREGNANCY_ROULETTE)
@@ -1140,10 +1137,10 @@ public interface WorldType {
 
 					new Value<>(new Color(0x00ffff), PlaceType.RAT_WARRENS_CHECKPOINT_LEFT),
 					new Value<>(new Color(0x80ffff), PlaceType.RAT_WARRENS_CHECKPOINT_RIGHT),
-					
+
 					new Value<>(new Color(0xff8080), PlaceType.RAT_WARRENS_DORMITORY_LEFT),
 					new Value<>(new Color(0xff8000), PlaceType.RAT_WARRENS_DORMITORY_RIGHT),
-					
+
 					new Value<>(new Color(0x0000ff), PlaceType.RAT_WARRENS_DICE_DEN),
 					new Value<>(new Color(0xffff00), PlaceType.RAT_WARRENS_MILKING_ROOM),
 					new Value<>(new Color(0xffbf00), PlaceType.RAT_WARRENS_MILKING_STORAGE),
@@ -1186,81 +1183,48 @@ public interface WorldType {
 		}
 	};
 
-	LinkedHashMap<String,AbstractWorldType> idToWorldMap = init();
-
+	@Deprecated
 	static List<AbstractWorldType> getAllWorldTypes() {
-		return List.copyOf(idToWorldMap.values());
+		return table.list();
 	}
 
+	@Deprecated
 	static AbstractWorldType getWorldTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	static String sanitize(String id) {
 		id = id.replace("_worldType", "");
 		id.replaceAll("SEWERS", "SUBMISSION");
 		if(id.equals("SUPPLIER_DEN")) {
-			return TEXTILES_WAREHOUSE;
+			return "TEXTILES_WAREHOUSE";
 		}
-		id = Util.getClosestStringMatch(id, idToWorldMap.keySet());
-		return idToWorldMap.get(id);
+		return id;
 	}
 
+	@Deprecated
 	static String getIdFromWorldType(AbstractWorldType placeType) {
 		return placeType.getId();
 	}
 
-	static LinkedHashMap<String,AbstractWorldType> init() {
-		var idToWorldMap = new LinkedHashMap<String,AbstractWorldType>();
+	Table<AbstractWorldType> table = new Table<>(WorldType::sanitize) {{
 		// Modded world types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/maps", null, "worldType");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractWorldType worldType = new AbstractWorldType(innerEntry.getValue(), entry.getKey(), true) {};
-					String id = innerEntry.getKey().replace("_worldType", "");
-					worldType.id = id;
-					idToWorldMap.put(id, worldType);
-//					System.out.println("modded WT: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading modded world type failed at 'WorldType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+		forEachMod("/maps",null,"worldType",(f,n,a)->{
+			var k = n.replace("_worldType","");
+			var v = new AbstractWorldType(f,a,true) {};
+			v.id = k;
+			add(k,v);
+		});
+
 		// External res world types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/maps", null, "worldType");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractWorldType worldType = new AbstractWorldType(innerEntry.getValue(), entry.getKey(), false) {};
-					String id = innerEntry.getKey().replace("_worldType", "");
-					worldType.id = id;
-					idToWorldMap.put(id, worldType);
-//					System.out.println("res WT: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading world type failed at 'WorldType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+		forEachExternal("res/maps",null,"worldType",(f,n,a)->{
+			var k = n.replace("_worldType","");
+			var v = new AbstractWorldType(f,a,false) {};
+			v.id = k;
+			add(k,v);
+		});
+
 		// Hard-coded world types (all those up above):
-		
-		Field[] fields = WorldType.class.getFields();
-		
-		for(Field f : fields) {
-			if(AbstractWorldType.class.isAssignableFrom(f.getType())) {
-				try {
-					var worldType = ((AbstractWorldType) f.get(null));
-					worldType.id = f.getName();
-					idToWorldMap.put(f.getName(), worldType);
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return idToWorldMap;
-	}
+		addFields(WorldType.class,AbstractWorldType.class,(k,v)->v.id=k);
+	}};
 }
