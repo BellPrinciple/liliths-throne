@@ -30,7 +30,6 @@ import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
 import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
@@ -72,7 +71,7 @@ public abstract class AbstractWeaponType implements AbstractCoreType {
 	private String attackTooltipDescription;
 	private String description;
 
-	private AbstractSetBonus clothingSet;
+	private SetBonus clothingSet;
 	private Rarity rarity;
 	private float physicalResistance;
 	
@@ -762,7 +761,7 @@ public abstract class AbstractWeaponType implements AbstractCoreType {
 		return physicalResistance;
 	}
 
-	public AbstractSetBonus getClothingSet() {
+	public SetBonus getClothingSet() {
 		return clothingSet;
 	}
 

@@ -33,7 +33,6 @@ import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
 import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
@@ -128,7 +127,7 @@ public abstract class AbstractClothingType implements AbstractCoreType {
 	protected Map<InventorySlot, List<InventorySlot>> incompatibleSlotsMap;
 	protected Map<InventorySlot, List<DisplacementType>> displacementTypesAvailableWithoutNONE;
 	
-	private AbstractSetBonus clothingSet;
+	private final SetBonus clothingSet;
 	private Rarity rarity;
 	private List<ColourReplacement> colourReplacements;
 	/** Key is the colour index which should copy another colour upon weapon generation. Value is the colour index which should be copied. */
@@ -156,7 +155,7 @@ public abstract class AbstractClothingType implements AbstractCoreType {
 			Femininity femininityRestriction,
 			InventorySlot equipSlot,
 			Rarity rarity,
-			AbstractSetBonus clothingSet,
+			SetBonus clothingSet,
 			String pathName,
 			List<ItemEffect> effects,
 			List<BlockedParts> blockedPartsList,
@@ -204,7 +203,7 @@ public abstract class AbstractClothingType implements AbstractCoreType {
 			Femininity femininityRestriction,
 			List<InventorySlot> equipSlots,
 			Rarity rarity,
-			AbstractSetBonus clothingSet,
+			SetBonus clothingSet,
 			String pathName,
 			Map<InventorySlot, String> pathNameEquipped,
 			List<ItemEffect> effects,
@@ -1299,9 +1298,9 @@ public abstract class AbstractClothingType implements AbstractCoreType {
 		return baseValue;
 	}
 
-	static Map<AbstractSetBonus, List<AbstractClothingType>> clothingSetMap = new HashMap<>();
+	static Map<SetBonus, List<AbstractClothingType>> clothingSetMap = new HashMap<>();
 
-	public static List<AbstractClothingType> getClothingInSet(AbstractSetBonus set) {
+	public static List<AbstractClothingType> getClothingInSet(SetBonus set) {
 		if (clothingSetMap.get(set) != null) {
 			return clothingSetMap.get(set);
 		}
@@ -1935,7 +1934,7 @@ public abstract class AbstractClothingType implements AbstractCoreType {
 		return pathNameEquipped.get(invSlot);
 	}
 	
-	public AbstractSetBonus getClothingSet() {
+	public SetBonus getClothingSet() {
 		return clothingSet;
 	}
 

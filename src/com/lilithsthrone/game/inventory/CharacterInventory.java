@@ -83,7 +83,7 @@ public class CharacterInventory implements XMLSaving {
 	private List<AbstractClothing> clothingCurrentlyEquipped;
 
 	// ClothingSets being worn:
-	private final Map<AbstractSetBonus, Integer> clothingSetCount;
+	private final Map<SetBonus, Integer> clothingSetCount;
 
 	private int maxInventorySpace;
 
@@ -110,7 +110,7 @@ public class CharacterInventory implements XMLSaving {
 		
 		clothingCurrentlyEquipped = new ArrayList<>();
 		clothingSetCount = new HashMap<>();
-		for(AbstractSetBonus clothingSet : SetBonus.getAllSetBonuses()) {
+		for(var clothingSet : SetBonus.getAllSetBonuses()) {
 			clothingSetCount.put(clothingSet, 0);
 		}
 		
@@ -1152,7 +1152,7 @@ public class CharacterInventory implements XMLSaving {
 	 * @return The number of clothes being worn that belong to the specified
 	 *         ClothingSet.
 	 */
-	public int getClothingSetCount(AbstractSetBonus clothingSet) {
+	public int getClothingSetCount(SetBonus clothingSet) {
 		return clothingSetCount.get(clothingSet);
 	}
 
@@ -1514,7 +1514,7 @@ public class CharacterInventory implements XMLSaving {
 				}
 				
 				// Check for clothing sets:
-				AbstractSetBonus clothingSetOfNewClothing = newClothing.getClothingType().getClothingSet();
+				var clothingSetOfNewClothing = newClothing.getClothingType().getClothingSet();
 				if (clothingSetOfNewClothing != null) {
 					clothingSetCount.merge(clothingSetOfNewClothing, 1, Integer::sum);
 				}
