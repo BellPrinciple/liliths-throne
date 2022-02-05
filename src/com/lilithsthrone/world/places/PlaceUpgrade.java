@@ -1,8 +1,6 @@
 package com.lilithsthrone.world.places;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.lilithsthrone.game.character.effects.StatusEffect;
@@ -21,6 +19,7 @@ import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.RoomArthur;
 import com.lilithsthrone.game.occupantManagement.MilkingRoom;
 import com.lilithsthrone.game.sex.ImmobilisationType;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
@@ -1441,39 +1440,22 @@ public interface PlaceUpgrade {
 				PlaceUpgrade.LILAYA_SPA_BAR);
 	}
 
-	LinkedHashMap<String,AbstractPlaceUpgrade> idToPlaceUpgradeMap = init();
-
+	@Deprecated
 	static List<AbstractPlaceUpgrade> getAllPlaceUpgrades() {
-		return List.copyOf(idToPlaceUpgradeMap.values());
+		return table.list();
 	}
 
+	@Deprecated
 	static AbstractPlaceUpgrade getPlaceUpgradeFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToPlaceUpgradeMap.keySet());
-		return idToPlaceUpgradeMap.get(id);
+		return table.of(id);
 	}
 
+	@Deprecated
 	static String getIdFromPlaceUpgrade(AbstractPlaceUpgrade placeType) {
 		return placeType.getId();
 	}
 
-	static LinkedHashMap<String,AbstractPlaceUpgrade> init() {
-		var idToPlaceUpgradeMap = new LinkedHashMap<String,AbstractPlaceUpgrade>();
-
-		Field[] fields = PlaceUpgrade.class.getFields();
-
-		for(Field f : fields) {
-			if(AbstractPlaceUpgrade.class.isAssignableFrom(f.getType())) {
-				AbstractPlaceUpgrade placeType;
-				try {
-					placeType = ((AbstractPlaceUpgrade) f.get(null));
-					placeType.id = f.getName();
-					idToPlaceUpgradeMap.put(f.getName(), placeType);
-
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return idToPlaceUpgradeMap;
-	}
+	Table<AbstractPlaceUpgrade> table = new Table<>(s->s) {{
+		addFields(PlaceUpgrade.class,AbstractPlaceUpgrade.class,(k,v)->v.id=k);
+	}};
 }
