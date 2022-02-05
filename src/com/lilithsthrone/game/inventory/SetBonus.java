@@ -1,7 +1,11 @@
 package com.lilithsthrone.game.inventory;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.utils.Table;
 
 /**
@@ -12,6 +16,30 @@ import com.lilithsthrone.utils.Table;
 public interface SetBonus {
 
 	String getId();
+
+	boolean isMod();
+
+	String getName();
+
+	int getNumberRequiredForCompleteSet();
+
+	StatusEffect getAssociatedStatusEffect();
+
+	List<InventorySlot> getBlockedSlotsCountingTowardsFullSet();
+
+	default boolean isCharacterWearingCompleteSet(GameCharacter target) {
+		long countBlocked = getBlockedSlotsCountingTowardsFullSet().stream()
+		.filter(s->s.getBodyPartClothingBlock(target)!=null)
+		.count();
+		long countEquipped = target.getClothingCurrentlyEquipped().stream()
+		.filter(c->c.getClothingType().getClothingSet()==this)
+		.count();
+		long countWeapon = Stream.of(target.getMainWeaponArray(),target.getOffhandWeaponArray()).flatMap(Arrays::stream)
+		.filter(w->w!=null && w.getWeaponType().getClothingSet()==this)
+		.count();
+		return countEquipped + countWeapon > 0
+		&& countBlocked + countEquipped + Math.min(2, countWeapon) >= getNumberRequiredForCompleteSet();
+	}
 
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
