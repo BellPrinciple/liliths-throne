@@ -1,12 +1,11 @@
 package com.lilithsthrone.game.character.attributes;
 
-import java.lang.reflect.Field;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -668,14 +667,15 @@ public interface Attribute {
 //		}
 //	};
 
-	@Deprecated
-	LinkedHashMap<String,AbstractAttribute> idToAttributeMap = init();
-
 	/**
 	 * @return The Attribute that has an id closest to the supplied attributeId.
 	 *  <b>Will return null</b> if the matching distance is greater than 3 (which typically will be more than enough to catch spelling errors, indicating that the flag has been removed).
 	 */
 	public static AbstractAttribute getAttributeFromId(String attributeId) {
+		return table.of(attributeId);
+	}
+
+	static String sanitize(String attributeId) {
 		if(attributeId.startsWith("RESISTANCE_ELEMENTAL")) {
 			attributeId = "RESISTANCE_ELEMENTAL";
 		} else if(attributeId.startsWith("DAMAGE_ELEMENTAL")) {
@@ -687,23 +687,20 @@ public interface Attribute {
 		//old conversions
 		switch(attributeId) {
 		case "CORRUPTION":
-			return MAJOR_CORRUPTION;
+			return "MAJOR_CORRUPTION";
 		case "STRENGTH":
 		case "MAJOR_STRENGTH":
-			return MAJOR_PHYSIQUE;
+			return "MAJOR_PHYSIQUE";
 		case "INTELLIGENCE":
-			return MAJOR_ARCANE;
+			return "MAJOR_ARCANE";
 		case "RESISTANCE_ATTACK":
-			return RESISTANCE_PHYSICAL;
+			return "RESISTANCE_PHYSICAL";
 		case "RESISTANCE_MANA":
-			return RESISTANCE_LUST;
+			return "RESISTANCE_LUST";
 		case "RESISTANCE_PURE":
-			return ENERGY_SHIELDING;
+			return "ENERGY_SHIELDING";
 		}
-
-		attributeId = Util.getClosestStringMatch(attributeId, idToAttributeMap.keySet(), 3);
-		
-		return idToAttributeMap.get(attributeId);
+		return attributeId;
 	}
 
 	@Deprecated
@@ -711,8 +708,9 @@ public interface Attribute {
 		return attribute.id;
 	}
 
+	@Deprecated
 	static List<AbstractAttribute> getAllAttributes() {
-		return List.copyOf(idToAttributeMap.values());
+		return table.list();
 	}
 
 	@Deprecated
@@ -720,36 +718,17 @@ public interface Attribute {
 		return Race.DamageAttribute.of(race);
 	}
 
-	@Deprecated
-	static LinkedHashMap<String,AbstractAttribute> init() {
-		var idToAttributeMap = new LinkedHashMap<String,AbstractAttribute>();
+	Table<AbstractAttribute> table = new Table<>(Attribute::sanitize) {{
 
 		// Hard-coded attributes (all those up above):
-		
-		Field[] fields = Attribute.class.getFields();
-		
-		for(Field f : fields) {
-			if (AbstractAttribute.class.isAssignableFrom(f.getType())) {
-				AbstractAttribute attribute;
-				try {
-					attribute = ((AbstractAttribute) f.get(null));
-
-					attribute.id = f.getName();
-					idToAttributeMap.put(attribute.id,attribute);
-
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		addFields(Attribute.class,AbstractAttribute.class,(k,v)->v.id=k);
 
 		// NOTE: Racial attributes are added at the bottom of the static block in Race.java!
-		return idToAttributeMap;
-	}
+	}};
 
 	@Deprecated
 	static void register(String k, AbstractAttribute v) {
 		v.id = k;
-		idToAttributeMap.put(k,v);
+		table.add(k,v);
 	}
 }
