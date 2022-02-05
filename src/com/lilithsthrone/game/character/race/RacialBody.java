@@ -1,13 +1,9 @@
 package com.lilithsthrone.game.character.race;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.body.abstractTypes.*;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
@@ -59,6 +55,7 @@ import com.lilithsthrone.game.character.persona.PersonalityCategory;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.persona.SexualOrientationPreference;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -895,79 +892,42 @@ public interface RacialBody {
 		return race.getRacialBody();
 	}
 
-	LinkedHashMap<String,AbstractRacialBody> idToRacialBodyMap = init();
-
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
+	@Deprecated
 	static AbstractRacialBody getRacialBodyFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToRacialBodyMap.keySet());
-		return idToRacialBodyMap.get(id);
+		return table.of(id);
 	}
 
 	static String getIdFromRacialBody(AbstractRacialBody perk) {
 		return perk.getId();
 	}
 
-	static LinkedHashMap<String,AbstractRacialBody> init() {
-		var idToRacialBodyMap = new LinkedHashMap<String,AbstractRacialBody>();
+	Table<AbstractRacialBody> table = new Table<>(s->s) {{
 
 		// Modded racial bodies:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", null, "racialBody");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					var racialBody = new AbstractRacialBody(innerEntry.getValue(),entry.getKey(),true);
-					String id = innerEntry.getKey().replaceAll("_racialBody", "");
-					racialBody.id = id;
-					idToRacialBodyMap.put(id, racialBody);
-				} catch(Exception ex) {
-					System.err.println("Loading modded racialBody failed at 'RacialBody'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+		forEachMod("/race",null,"racialBody",(f,n,a)->{
+			var k = n.replaceAll("_racialBody","");
+			var v = new AbstractRacialBody(f,a,true);
+			v.id = k;
+			add(k,v);
+		});
+
 		// External res racial bodies:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", null, "racialBody");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					var racialBody = new AbstractRacialBody(innerEntry.getValue(),entry.getKey(),false);
-					String id = innerEntry.getKey().replaceAll("_racialBody", "");
-					racialBody.id = id;
-					idToRacialBodyMap.put(id, racialBody);
-				} catch(Exception ex) {
-					System.err.println("Loading racialBody failed at 'RacialBody'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+		forEachExternal("res/race",null,"racialBody",(f,n,a)->{
+			var k = n.replaceAll("_racialBody","");
+			var v = new AbstractRacialBody(f,a,false);
+			v.id = k;
+			add(k,v);
+		});
+
 		// Hard-coded:
-		
-		Field[] fields = RacialBody.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractRacialBody.class.isAssignableFrom(f.getType())) {
-				try {
-					var racialBody = ((AbstractRacialBody) f.get(null));
-					racialBody.id = f.getName();
-					idToRacialBodyMap.put(f.getName(),racialBody);
+		addFields(RacialBody.class,AbstractRacialBody.class,(k,v)->v.id=k);
+	}};
 
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return idToRacialBodyMap;
-	}
-
+	@Deprecated
 	static List<AbstractRacialBody> getAllRacialBodies() {
-		return List.copyOf(idToRacialBodyMap.values());
+		return table.list();
 	}
 }
