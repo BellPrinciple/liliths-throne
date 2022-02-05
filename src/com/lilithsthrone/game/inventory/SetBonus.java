@@ -1,30 +1,27 @@
 package com.lilithsthrone.game.inventory;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.Table;
 
 /**
  * @since 0.1.0
  * @version 0.3.8.2
  * @author Innoxia
  */
-public class SetBonus {
-	
-	public static List<AbstractSetBonus> allSetBonuses;
-	
-	public static Map<AbstractSetBonus, String> setBonusToIdMap = new HashMap<>();
-	public static Map<String, AbstractSetBonus> idToSetBonusMap = new HashMap<>();
-	
+public interface SetBonus {
+
+	String getId();
+
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
+	@Deprecated
 	public static AbstractSetBonus getSetBonusFromId(String id) {
+		return table.of(id);
+	}
+
+	static String sanitize(String id) {
 		if(id.equals("SLUTTY_ENFORCER")) {
 			id = "innoxia_slutty_enforcer";
 		}
@@ -76,64 +73,34 @@ public class SetBonus {
 		if(id.equals("LYSSIETH_GUARD")) {
 			id = "innoxia_lyssieth_guard";
 		}
-		
-		id = Util.getClosestStringMatch(id, idToSetBonusMap.keySet());
-		return idToSetBonusMap.get(id);
+		return id;
 	}
-	
+
+	@Deprecated
 	public static String getIdFromSetBonus(AbstractSetBonus setBonus) {
-		return setBonusToIdMap.get(setBonus);
+		return setBonus.getId();
 	}
 
-	static {
-		
-		allSetBonuses = new ArrayList<>();
-		
+	Table<AbstractSetBonus> table = new Table<>(SetBonus::sanitize) {{
+
 		// Modded set bonus types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/setBonuses");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey();
-					AbstractSetBonus setBonus = new AbstractSetBonus(innerEntry.getValue(), entry.getKey(), true) {};
-					allSetBonuses.add(setBonus);
-					setBonusToIdMap.put(setBonus, id);
-					idToSetBonusMap.put(id, setBonus);
-//					System.out.println("modded "+id);
-				} catch(Exception ex) {
-					System.err.println("Loading modded set bonus failed at 'SetBonusType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		// External res outfit types:
+		forEachMod("/setBonuses",null,null,(f,n,a)->{
+			var v = new AbstractSetBonus(f,a,true) {};
+			v.id = n;
+			add(n,v);
+		});
 
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/setBonuses");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey();
-					AbstractSetBonus setBonus = new AbstractSetBonus(innerEntry.getValue(), entry.getKey(), false) {};
-					allSetBonuses.add(setBonus);
-					setBonusToIdMap.put(setBonus, id);
-					idToSetBonusMap.put(id, setBonus);
-//					System.out.println("res "+id);
-//					System.out.println("SBT: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading set bonus failed at 'SetBonusType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-	}
-	
+		// External res outfit types:
+		forEachExternal("res/setBonuses",null,null,(f,n,a)->{
+			var v = new AbstractSetBonus(f,a,false) {};
+			v.id = n;
+			add(n,v);
+		});
+	}};
+
+	@Deprecated
 	public static List<AbstractSetBonus> getAllSetBonuses() {
-		return allSetBonuses;
+		return table.list();
 	}
 
 }

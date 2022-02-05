@@ -18,8 +18,9 @@ import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
  * @version 0.3.8.2
  * @author Innoxia
  */
-public abstract class AbstractSetBonus {
-	
+public abstract class AbstractSetBonus implements SetBonus {
+
+	String id;
 	private boolean mod;
 	private String name;
 	private int numberRequiredForCompleteSet;
@@ -72,7 +73,12 @@ public abstract class AbstractSetBonus {
 			}
 		}
 	}
-	
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
 	public boolean isMod() {
 		return mod;
 	}
