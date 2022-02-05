@@ -172,7 +172,6 @@ import com.lilithsthrone.game.dialogue.utils.PhoneDialogue;
 import com.lilithsthrone.game.dialogue.utils.SpellManagement;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
 import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
@@ -527,7 +526,7 @@ public class MainControllerInitMethod {
 		}
 
 		if(Main.game.getCurrentDialogueNode().equals(DebugDialogue.SPAWN_MENU_SET)) {
-			for(AbstractSetBonus sb : SetBonus.allSetBonuses) {
+			for(var sb : SetBonus.table.list()) {
 				id = "SET_BONUS_"+SetBonus.getIdFromSetBonus(sb);
 				if (((EventTarget) MainController.document.getElementById(id)) != null) {
 					((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {

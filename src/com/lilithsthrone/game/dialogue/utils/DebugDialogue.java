@@ -37,7 +37,6 @@ import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
@@ -1035,7 +1034,7 @@ public class DebugDialogue {
 			
 			inventorySB.append("<div class='container-full-width'>");
 			
-			for(AbstractSetBonus sb : SetBonus.allSetBonuses) {
+			for(var sb : SetBonus.table.list()) {
 				inventorySB.append("<div class='normal-button' id='SET_BONUS_"+SetBonus.getIdFromSetBonus(sb)+"' style='width:23%; margin:1%; padding:2px; font-size:0.9em; color:"+sb.getAssociatedStatusEffect().getColour().toWebHexString()+";'>");
 				inventorySB.append(sb.getName());
 				inventorySB.append("</div>");
