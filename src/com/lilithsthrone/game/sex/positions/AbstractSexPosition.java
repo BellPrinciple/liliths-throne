@@ -41,8 +41,9 @@ import com.lilithsthrone.utils.Util.Value;
  * @version 0.3.4.5
  * @author Innoxia
  */
-public abstract class AbstractSexPosition {
+public abstract class AbstractSexPosition implements SexPosition {
 
+	String id;
 	private String name;
 	private int maximumSlots;
 	private boolean addStandardActions;
@@ -64,7 +65,12 @@ public abstract class AbstractSexPosition {
 		this.positioningClasses = positioningClasses;
 		this.specialClasses = specialClasses;
 	}
-	
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
 	public String getName() {
 		return UtilText.parse(name);
 	}
