@@ -98,7 +98,7 @@ import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexControl;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.SexType;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.sexActions.SexAction;
 import com.lilithsthrone.game.sex.sexActions.SexActionInterface;
@@ -3016,7 +3016,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 	 * @param target The person who is being interacted with in this slot.
 	 * @return Whether this NPC is happy to be in this SexSlot
 	 */
-	public boolean isHappyToBeInSlot(AbstractSexPosition position, SexSlot slot, SexSlot targetSlot, GameCharacter target) {
+	public boolean isHappyToBeInSlot(SexPosition position, SexSlot slot, SexSlot targetSlot, GameCharacter target) {
 		SexType targetSexPreference = Main.sex.getForeplayPreference(this, target);
 		
 		if(!Main.sex.isInForeplay(this)) {
@@ -3028,7 +3028,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		return slot.isMeetsPreferenceCriteria(this, position, targetSlot, targetSexPreference);
 	}
 	
-	public boolean isHappyToBeInSlot(AbstractSexPosition position, SexSlot slot, GameCharacter target) {
+	public boolean isHappyToBeInSlot(SexPosition position, SexSlot slot, GameCharacter target) {
 		return isHappyToBeInSlot(position, slot, null, target);
 	}
 

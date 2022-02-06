@@ -9,7 +9,7 @@ import com.lilithsthrone.game.character.npc.dominion.Vanessa;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.sex.SexControl;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -22,7 +22,7 @@ import com.lilithsthrone.utils.Util.Value;
  */
 public class SMVanessaOral extends SexManagerDefault {
 	
-	public SMVanessaOral(AbstractSexPosition position, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
+	public SMVanessaOral(SexPosition position, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
 		super(position,
 				dominants,
 				submissives);

@@ -27,7 +27,6 @@ import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexControl;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.SexType;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
@@ -54,7 +53,7 @@ public interface SexManagerInterface {
 						:(Main.sex.getAllParticipants(false).size()>1?"Sex: ":"Masturbation: ")+getPosition().getName());
 	}
 	
-	public AbstractSexPosition getPosition();
+	public SexPosition getPosition();
 
 	public void assignNPCTarget(GameCharacter targeter);
 	
@@ -186,8 +185,8 @@ public interface SexManagerInterface {
 		return true;
 	}
 	
-	public default List<AbstractSexPosition> getAllowedSexPositions() {
-		List<AbstractSexPosition> positions = Util.newArrayListOfValues(
+	default List<SexPosition> getAllowedSexPositions() {
+		List<SexPosition> positions = Util.newArrayListOfValues(
 				SexPosition.ALL_FOURS,
 				SexPosition.LYING_DOWN,
 				SexPosition.STANDING);

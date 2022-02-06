@@ -76,7 +76,6 @@ import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.SexManagerInterface;
 import com.lilithsthrone.game.sex.managers.dominion.SMScarlettShopOral;
 import com.lilithsthrone.game.sex.managers.universal.SMStanding;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAgainstWall;
@@ -168,7 +167,7 @@ public class ScarlettsShop {
 		return (int) Units.roundTo(Main.game.getNpc(Scarlett.class).getValueAsSlave(false) * 2, 1000);
 	}
 	
-	private static SexManagerInterface getScarlettSleepoverSexManager(AbstractSexPosition position, SexSlot scarlettSlot, SexSlot playerSlot, SexType scarlettPreference, Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap) {
+	private static SexManagerInterface getScarlettSleepoverSexManager(SexPosition position, SexSlot scarlettSlot, SexSlot playerSlot, SexType scarlettPreference, Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap) {
 		return new SexManagerDefault(
 				false,
 				position,
@@ -260,7 +259,7 @@ public class ScarlettsShop {
 		};
 	}
 	
-	private static SexManagerInterface getScarlettCafeSexManager(AbstractSexPosition position, SexSlot scarlettSlot, SexSlot playerSlot, SexType scarlettPreference, Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap) {
+	private static SexManagerInterface getScarlettCafeSexManager(SexPosition position, SexSlot scarlettSlot, SexSlot playerSlot, SexType scarlettPreference, Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap) {
 		return new SexManagerDefault(
 				false,
 				position,

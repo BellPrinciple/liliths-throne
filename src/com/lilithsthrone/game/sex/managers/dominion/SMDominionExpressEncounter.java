@@ -11,7 +11,7 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.sex.SexControl;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -27,7 +27,7 @@ public class SMDominionExpressEncounter extends SexManagerDefault {
 	private Map<GameCharacter, SexType> preferences;
 	private Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap;
 	
-	public SMDominionExpressEncounter(AbstractSexPosition position,
+	public SMDominionExpressEncounter(SexPosition position,
 			Map<GameCharacter, SexSlot> dominants,
 			Map<GameCharacter, SexSlot> submissives,
 			Map<GameCharacter, SexType> preferences,

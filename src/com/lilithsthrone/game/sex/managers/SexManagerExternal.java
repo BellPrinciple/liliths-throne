@@ -29,7 +29,6 @@ import com.lilithsthrone.game.sex.SexControl;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotManager;
@@ -80,7 +79,7 @@ public class SexManagerExternal extends SexManagerDefault {
 	private String exposingReactionsString;
 	private boolean exposingReactions;
 	
-	private List<AbstractSexPosition> positionsAllowed;
+	private List<SexPosition> positionsAllowed;
 	private List<String> positionsAllowedIds;
 	private boolean positionsExclusive;
 
@@ -1170,7 +1169,7 @@ public class SexManagerExternal extends SexManagerDefault {
 		}
 	}
 	
-	public void initManager(AbstractSexPosition position, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
+	public void initManager(SexPosition position, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
 		this.position = position;
 		this.dominants = dominants;
 		this.submissives = submissives;
@@ -1320,7 +1319,7 @@ public class SexManagerExternal extends SexManagerDefault {
 	}
 
 	@Override
-	public List<AbstractSexPosition> getAllowedSexPositions() {
+	public List<SexPosition> getAllowedSexPositions() {
 		if(positionsAllowed==null || positionsAllowed.isEmpty()) {
 			return super.getAllowedSexPositions();
 		}

@@ -47,7 +47,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAgainstWall;
@@ -426,7 +425,7 @@ public class EnforcerAlleywayDialogue {
 		Main.game.banishNPC((NPC) getCriminalInTile());
 	}
 	
-	private static SexManagerDefault getSexManager(AbstractSexPosition position,
+	private static SexManagerDefault getSexManager(SexPosition position,
 			Map<GameCharacter, SexSlot> domSlots,
 			Map<GameCharacter, SexSlot> subSlots,
 			SexType preference,

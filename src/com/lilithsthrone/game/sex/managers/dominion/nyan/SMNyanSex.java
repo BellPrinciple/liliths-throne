@@ -119,9 +119,9 @@ public class SMNyanSex extends SexManagerDefault {
 	}
 	
 	@Override
-	public List<AbstractSexPosition> getAllowedSexPositions() {
+	public List<SexPosition> getAllowedSexPositions() {
 		//return Util.newArrayListOfValues(allowedPosition);
-		List<AbstractSexPosition> positions = Util.newArrayListOfValues(
+		List<SexPosition> positions = Util.newArrayListOfValues(
 				SexPosition.AGAINST_WALL,
 				SexPosition.ALL_FOURS,
 				SexPosition.LYING_DOWN,

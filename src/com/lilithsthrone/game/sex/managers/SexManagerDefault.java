@@ -11,7 +11,6 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.sex.*;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
@@ -38,17 +37,17 @@ import java.util.*;
  */
 public abstract class SexManagerDefault implements SexManagerInterface {
 
-	protected AbstractSexPosition position;
+	protected SexPosition position;
 	protected Map<GameCharacter, SexSlot> dominants;
 	protected Map<GameCharacter, SexSlot> submissives;
 	protected Map<GameCharacter, List<SexAreaInterface>> areasBannedMap;
 	protected boolean ableToSkipSexScene;
 
-	public SexManagerDefault(AbstractSexPosition position, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
+	public SexManagerDefault(SexPosition position, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
 		this(true, position, dominants, submissives);
 	}
 
-	public SexManagerDefault(boolean ableToSkipSexScene, AbstractSexPosition position, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
+	public SexManagerDefault(boolean ableToSkipSexScene, SexPosition position, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
 		this.ableToSkipSexScene = ableToSkipSexScene;
 		this.position = position;
 		this.dominants = dominants==null?new HashMap<>():dominants;
@@ -83,7 +82,7 @@ public abstract class SexManagerDefault implements SexManagerInterface {
 	}
 	
 	@Override
-	public AbstractSexPosition getPosition() {
+	public SexPosition getPosition() {
 		return position;
 	}
 

@@ -50,7 +50,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
@@ -124,7 +123,7 @@ public class KaysWarehouse {
 		return isPlayerMouthFree() || isPlayerAssFree() || isPlayerVaginaFree();
 	}
 	
-	public static ResponseSex getDobermannsSexResponse(AbstractSexPosition position,
+	public static ResponseSex getDobermannsSexResponse(SexPosition position,
 			SexSlot slotWolfgang, SexAreaInterface sexAreaWolfgang,
 			SexSlot slotKarl, SexAreaInterface sexAreaKarl,
 			SexSlot slotPlayer,
@@ -329,7 +328,7 @@ public class KaysWarehouse {
 			String description,
 			DialogueNode postSexDialogue,
 			String startingText,
-			AbstractSexPosition position,
+			SexPosition position,
 			SexSlot slotKay, SexType sexTypeKay,
 			SexSlot slotPlayer,
 			List<CoverableArea> kayExposedParts,
@@ -354,7 +353,7 @@ public class KaysWarehouse {
 			String description,
 			DialogueNode postSexDialogue,
 			String startingText,
-			AbstractSexPosition position,
+			SexPosition position,
 			SexSlot slotKay, SexType sexTypeKay,
 			SexSlot slotPlayer,
 			List<CoverableArea> kayExposedParts,

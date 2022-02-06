@@ -4285,21 +4285,21 @@ public interface SexPosition {
 	
 
 	@Deprecated
-	public static AbstractSexPosition getSexPositionFromId(String id) {
+	static SexPosition getSexPositionFromId(String id) {
 		return table.of(id);
 	}
 
 	@Deprecated
-	public static String getIdFromSexPosition(AbstractSexPosition perk) {
+	static String getIdFromSexPosition(SexPosition perk) {
 		return perk.getId();
 	}
 
-	Table<AbstractSexPosition> table = new Table<>(s->s) {{
+	Table<SexPosition> table = new Table<>(s->s) {{
 		addFields(SexPosition.class,AbstractSexPosition.class,(k,v)->v.id=k);
 	}};
 	
 	@Deprecated
-	public static List<AbstractSexPosition> getAllSexPositions() {
+	static List<SexPosition> getAllSexPositions() {
 		return table.list();
 	}
 }

@@ -36,7 +36,6 @@ import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.managers.SexManagerInterface;
 import com.lilithsthrone.game.sex.managers.universal.SMAllFours;
 import com.lilithsthrone.game.sex.managers.universal.SMStanding;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
@@ -68,7 +67,7 @@ public class HarpyNestHelena {
 	
 	private static float randomChance = 0f;
 	
-	private static SexManagerInterface getScarlettSexManager(AbstractSexPosition position,
+	private static SexManagerInterface getScarlettSexManager(SexPosition position,
 			SexSlot scarlettSlot,
 			SexSlot playerSlot,
 			SexType scarlettPreference,
