@@ -1,21 +1,19 @@
 package com.lilithsthrone.game.inventory.clothing;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.lilithsthrone.controller.xmlParsing.XMLLoadException;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
@@ -24,6 +22,7 @@ import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -33,7 +32,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.5.5
  * @author Innoxia
  */
-public class ClothingType {
+public interface ClothingType extends AbstractCoreType {
 	
 	private static String braEquipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 		return AbstractClothingType.getEquipDescriptions(clothingOwner, clothingRemover, rough,
@@ -4825,27 +4824,87 @@ public class ClothingType {
 		}
 	};
 	
+Collection table = new Collection();
 
-	private static List<AbstractClothingType> allClothing;
-	private static List<AbstractClothingType> moddedClothingList;
+	final class Collection extends Table<AbstractClothingType> {
 
-	private static List<InventorySlot> coreClothingSlots;
-	private static List<InventorySlot> lingerieSlots;
+		private final List<AbstractClothingType> moddedClothingList = new ArrayList<>();
 
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMap;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemale;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMale;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapAndrogynous;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemaleIncludingAndrogynous;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMaleIncludingAndrogynous;
+		private final List<InventorySlot> coreClothingSlots = new ArrayList<>();
+		private final List<InventorySlot> lingerieSlots = new ArrayList<>();
 
-	private static Map<Occupation, ArrayList<AbstractClothingType>> suitableFeminineClothing = new HashMap<>();
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMap = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemale = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMale = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapAndrogynous = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
 
-	private static Map<AbstractClothingType, String> clothingToIdMap = new HashMap<>();
-	private static Map<String, AbstractClothingType> idToClothingMap = new HashMap<>();
+		private final Map<Occupation, ArrayList<AbstractClothingType>> suitableFeminineClothing = new HashMap<>();
 
+		private Collection() {
+			super(ClothingType::convertOldId);
+			for(InventorySlot slot : InventorySlot.values()) {
+				commonClothingMap.put(slot, new ArrayList<>());
+				commonClothingMapFemale.put(slot, new ArrayList<>());
+				commonClothingMapMale.put(slot, new ArrayList<>());
+				commonClothingMapAndrogynous.put(slot, new ArrayList<>());
+				commonClothingMapFemaleIncludingAndrogynous.put(slot, new ArrayList<>());
+				commonClothingMapMaleIncludingAndrogynous.put(slot, new ArrayList<>());
+			}
+			coreClothingSlots.add(InventorySlot.TORSO_UNDER);
+			coreClothingSlots.add(InventorySlot.LEG);
+			lingerieSlots.add(InventorySlot.CHEST);
+			lingerieSlots.add(InventorySlot.GROIN);
+			lingerieSlots.add(InventorySlot.STOMACH);
+			lingerieSlots.add(InventorySlot.SOCK);
+			forEachMod("/items/clothing",null,null,(f,n,a)->{
+				var v = new AbstractClothingType(f,a) {};
+				v.id = n;
+				moddedClothingList.add(v);
+				add(n,v);
+				if(v.getRarity()==Rarity.COMMON
+						&& !v.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN))
+					categorize(v);
+			});
+			forEachExternal("res/clothing",null,null,(f,n,a)->{
+				var v = new AbstractClothingType(f,a) {};
+				v.id = n;
+				add(n,v);
+				if(v.getRarity()==Rarity.COMMON
+						&& !v.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN))
+					categorize(v);
+			});
+			addFields(ClothingType.class,AbstractClothingType.class,(k,v)->{
+				v.id = k;
+				if(!v.isDefaultSlotCondom()
+						&& v.getRarity()==Rarity.COMMON
+						&& !v.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN))
+					categorize(v);
+			});
+			initialize(this);
+		}
+
+		private void categorize(AbstractClothingType v) {
+			var slot = v.getEquipSlots().get(0);
+			commonClothingMap.get(slot).add(v);
+			if (v.getFemininityRestriction() == Femininity.FEMININE) {
+				commonClothingMapFemale.get(slot).add(v);
+				commonClothingMapFemaleIncludingAndrogynous.get(slot).add(v);
+			} else if (v.getFemininityRestriction() == Femininity.ANDROGYNOUS || v.getFemininityRestriction() == null) {
+				commonClothingMapAndrogynous.get(slot).add(v);
+				commonClothingMapFemaleIncludingAndrogynous.get(slot).add(v);
+				commonClothingMapMaleIncludingAndrogynous.get(slot).add(v);
+			} else if (v.getFemininityRestriction() == Femininity.MASCULINE) {
+				commonClothingMapMale.get(slot).add(v);
+				commonClothingMapMaleIncludingAndrogynous.get(slot).add(v);
+			}
+		}
+	}
+
+	@Deprecated
 	public static AbstractClothingType getClothingTypeFromId(String id) {
-		return getClothingTypeFromId(id, null);
+		return table.of(id);
 	}
 	
 	public static AbstractClothingType getClothingTypeFromId(String id, String slotHint) {
@@ -4853,36 +4912,35 @@ public class ClothingType {
 		
 		id = convertOldId(id);
 		
-		Map<String, AbstractClothingType> choiceMap = idToClothingMap;
-		if (slotHint!=null && !slotHint.isEmpty()) {
-			try {
-				InventorySlot slot = InventorySlot.valueOf(slotHint);
+		if (slotHint==null || slotHint.isEmpty())
+			return table.of(id);
+
+		Set<String> choice;
+		try {
+			InventorySlot slot = InventorySlot.valueOf(slotHint);
 				
-				// slotHint is present and valid, so filter the clothing map by items that can be equipped to that slot:
-				choiceMap = idToClothingMap.entrySet().parallelStream()
-						.filter(e -> e.getValue().getEquipSlots().contains(slot))
-						.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-			} catch (Exception ex) {
-				String validSlots = InventorySlot.getClothingSlots().stream()
-						.map(InventorySlot::toString).collect(Collectors.joining(", "));
-				System.err.println("Warning: getClothingTypeFromId() invalid slot hint: "
-						+ slotHint + ". Valid slots are: " + validSlots);
-			}
+			// slotHint is present and valid, so filter the clothing map by items that can be equipped to that slot:
+			choice = table.list().parallelStream()
+					.filter(e->e.getEquipSlots().contains(slot))
+					.map(AbstractClothingType::getId)
+					.collect(Collectors.toSet());
+		} catch (Exception ex) {
+			String validSlots = InventorySlot.getClothingSlots().stream()
+					.map(InventorySlot::toString).collect(Collectors.joining(", "));
+			System.err.println("Warning: getClothingTypeFromId() invalid slot hint: "
+					+ slotHint + ". Valid slots are: " + validSlots);
+			return table.of(id);
 		}
-
-		id = Util.getClosestStringMatch(id, choiceMap.keySet());
-
-//		System.out.println("  set to: "+id);
-
-		return idToClothingMap.get(id);
+		return table.exact(Util.getClosestStringMatch(id,choice)).orElse(null);
 	}
 
+	@Deprecated
 	public static String getIdFromClothingType(AbstractClothingType clothingType) {
-		return clothingToIdMap.get(clothingType);
+		return clothingType.getId();
 	}
 
 	public static Map<Occupation, ArrayList<AbstractClothingType>> getSuitableFeminineClothing() {
-		return suitableFeminineClothing;
+		return table.suitableFeminineClothing;
 	}
 
 	private static String convertOldId(String id) {
@@ -5048,159 +5106,9 @@ public class ClothingType {
 return id;
 	}
 
-	static {
-		commonClothingMap = new EnumMap<>(InventorySlot.class);
-		commonClothingMapFemale = new EnumMap<>(InventorySlot.class);
-		commonClothingMapMale = new EnumMap<>(InventorySlot.class);
-		commonClothingMapAndrogynous = new EnumMap<>(InventorySlot.class);
-		commonClothingMapFemaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
-		commonClothingMapMaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
-
-		for(InventorySlot slot : InventorySlot.values()) {
-			commonClothingMap.put(slot, new ArrayList<>());
-			commonClothingMapFemale.put(slot, new ArrayList<>());
-			commonClothingMapMale.put(slot, new ArrayList<>());
-			commonClothingMapAndrogynous.put(slot, new ArrayList<>());
-			commonClothingMapFemaleIncludingAndrogynous.put(slot, new ArrayList<>());
-			commonClothingMapMaleIncludingAndrogynous.put(slot, new ArrayList<>());
-		}
-
-		coreClothingSlots = Util.newArrayListOfValues(InventorySlot.TORSO_UNDER, InventorySlot.LEG);
-		lingerieSlots = Util.newArrayListOfValues(InventorySlot.CHEST, InventorySlot.GROIN, InventorySlot.STOMACH, InventorySlot.SOCK);
-
-
-		allClothing = new ArrayList<>();
-		moddedClothingList = new ArrayList<>();
-
-
-		// Modded clothing types:
-
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/items/clothing");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try{
-					String id = innerEntry.getKey();
-					AbstractClothingType ct = new AbstractClothingType(innerEntry.getValue(), entry.getKey()) {};
-					moddedClothingList.add(ct);
-					clothingToIdMap.put(ct, id);
-					idToClothingMap.put(id, ct);
-
-					if(ct.getRarity()==Rarity.COMMON && !ct.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN)) {
-						commonClothingMap.get(ct.getEquipSlots().get(0)).add(ct);
-
-						if (ct.getFemininityRestriction() == Femininity.FEMININE) {
-							commonClothingMapFemale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-
-						} else if (ct.getFemininityRestriction() == Femininity.ANDROGYNOUS || ct.getFemininityRestriction() == null) {
-							commonClothingMapAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-
-						} else if (ct.getFemininityRestriction() == Femininity.MASCULINE) {
-							commonClothingMapMale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-						}
-					}
-
-				} catch(XMLLoadException ex){ // we want to catch any errors here; we shouldn't want to load any mods that are invalid as that may cause severe bugs
-					System.err.println("Loading modded clothing failed at 'ClothingType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					System.err.println(ex);
-				}
-			}
-		}
-
-		allClothing.addAll(moddedClothingList);
-
-
-		// External res clothing types:
-
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/clothing");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey();
-					AbstractClothingType ct = new AbstractClothingType(innerEntry.getValue(), entry.getKey()) {};
-					allClothing.add(ct);
-					clothingToIdMap.put(ct, id);
-					idToClothingMap.put(id, ct);
-
-					if(ct.getRarity()==Rarity.COMMON && !ct.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN)) {
-						commonClothingMap.get(ct.getEquipSlots().get(0)).add(ct);
-
-						if (ct.getFemininityRestriction() == Femininity.FEMININE) {
-							commonClothingMapFemale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-
-						} else if (ct.getFemininityRestriction() == Femininity.ANDROGYNOUS || ct.getFemininityRestriction() == null) {
-							commonClothingMapAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-
-						} else if (ct.getFemininityRestriction() == Femininity.MASCULINE) {
-							commonClothingMapMale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-						}
-					}
-
-				} catch(Exception ex) {
-					System.err.println("Loading clothing failed at 'ClothingType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-
-
-		// Add in hard-coded clothing:
-
-		Field[] fields = ClothingType.class.getFields();
-
-		for(Field f : fields) {
-			if (AbstractClothingType.class.isAssignableFrom(f.getType())) {
-				AbstractClothingType ct;
-				try {
-					ct = ((AbstractClothingType) f.get(null));
-
-					// I feel like this is stupid :thinking:
-					clothingToIdMap.put(ct, f.getName());
-					idToClothingMap.put(f.getName(), ct);
-
-					allClothing.add(ct);
-
-					if(ct.isDefaultSlotCondom()) {
-						continue;
-					}
-
-					if(ct.getRarity()==Rarity.COMMON && !ct.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN)) {
-						commonClothingMap.get(ct.getEquipSlots().get(0)).add(ct);
-
-						if (ct.getFemininityRestriction() == Femininity.FEMININE) {
-							commonClothingMapFemale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-
-						} else if (ct.getFemininityRestriction() == Femininity.ANDROGYNOUS || ct.getFemininityRestriction() == null) {
-							commonClothingMapAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-
-						} else if (ct.getFemininityRestriction() == Femininity.MASCULINE) {
-							commonClothingMapMale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-						}
-					}
-
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-//  	System.out.println(allClothing.size());
-
+	private static void initialize(Collection table) {
 		//TODO shouldn't this be handled in outfit files?
-		suitableFeminineClothing.put(Occupation.NPC_PROSTITUTE,
+		table.suitableFeminineClothing.put(Occupation.NPC_PROSTITUTE,
 				Util.newArrayListOfValues(
 						ClothingType.getClothingTypeFromId("innoxia_ankle_anklet"),
 						ClothingType.getClothingTypeFromId("innoxia_chest_lacy_plunge_bra"),
@@ -5252,44 +5160,45 @@ return id;
 						ClothingType.getClothingTypeFromId("innoxia_piercing_ringed_barbell")));
 	}
 
+	@Deprecated
 	public static List<AbstractClothingType> getAllClothing() {
-		return allClothing;
+		return table.list();
 	}
 
 	public static List<AbstractClothingType> getModdedClothingList() {
-		return moddedClothingList;
+		return table.moddedClothingList;
 	}
 
 	public static List<InventorySlot> getCoreClothingSlots() {
-		return coreClothingSlots;
+		return table.coreClothingSlots;
 	}
 
 	public static List<InventorySlot> getLingerieSlots() {
-		return lingerieSlots;
+		return table.lingerieSlots;
 	}
 	
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMap() {
-		return commonClothingMap;
+		return table.commonClothingMap;
 	}
 
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapFemale() {
-		return commonClothingMapFemale;
+		return table.commonClothingMapFemale;
 	}
 
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapMale() {
-		return commonClothingMapMale;
+		return table.commonClothingMapMale;
 	}
 
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapAndrogynous() {
-		return commonClothingMapAndrogynous;
+		return table.commonClothingMapAndrogynous;
 	}
 	
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapFemaleIncludingAndrogynous() {
-		return commonClothingMapFemaleIncludingAndrogynous;
+		return table.commonClothingMapFemaleIncludingAndrogynous;
 	}
 	
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapMaleIncludingAndrogynous() {
-		return commonClothingMapMaleIncludingAndrogynous;
+		return table.commonClothingMapMaleIncludingAndrogynous;
 	}
 
 }
