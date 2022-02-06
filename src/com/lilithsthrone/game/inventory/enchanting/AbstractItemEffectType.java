@@ -89,8 +89,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractItemEffectType {
-	
+public abstract class AbstractItemEffectType implements ItemEffectType {
+
+	String id;
 	private List<String> effectsDescriptions;
 	private Colour colour;
 	
@@ -99,6 +100,10 @@ public abstract class AbstractItemEffectType {
 			Colour colour) {
 		this.effectsDescriptions = effectsDescriptions;
 		this.colour = colour;
+	}
+
+	public String getId() {
+		return id;
 	}
 	
 	public List<String> getEffectsDescription(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target) {
