@@ -3038,11 +3038,8 @@ public interface ItemType extends AbstractCoreType {
 							:entry.getValue().get(0);
 					String id = "BOOK_READ_"+Subspecies.getIdFromSubspecies(mainSubspecies);
 					
-					if(!ItemEffectType.idToItemEffectTypeMap.containsKey(id)) {
-						AbstractItemEffectType bookType = generateBookEffect(mainSubspecies, entry.getValue());
-						ItemEffectType.allEffectTypes.add(bookType);
-						ItemEffectType.itemEffectTypeToIdMap.put(bookType, id);
-						ItemEffectType.idToItemEffectTypeMap.put(id, bookType);
+					if(ItemEffectType.table.exact(id).isEmpty()) {
+						ItemEffectType.table.add(id,generateBookEffect(mainSubspecies,entry.getValue()));
 					}
 					
 					return Util.newArrayListOfValues(new ItemEffect(ItemEffectType.getBookEffectFromSubspecies(mainSubspecies)));

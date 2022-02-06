@@ -194,12 +194,13 @@ public class ItemEffect implements XMLSaving {
 			}
 			
 			// If there is no ItemEffectType with the id type, return null, as otherwise the game tries to load an incorrect ItemEffectType.
-			if(!ItemEffectType.idToItemEffectTypeMap.containsKey(itemEffectType)) {
+			var type = ItemEffectType.table.exact(itemEffectType);
+			if(type.isEmpty()) {
 				return null;
 			}
 			
 			ie = new ItemEffect(
-					ItemEffectType.getItemEffectTypeFromId(itemEffectType),
+					type.get(),
 					primary,
 					secondary,
 					(parentElement.getAttribute("potency").equals("null")?null:TFPotency.valueOf(parentElement.getAttribute("potency"))),

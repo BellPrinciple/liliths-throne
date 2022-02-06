@@ -1,6 +1,5 @@
 package com.lilithsthrone.game.inventory.enchanting;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -40,6 +39,7 @@ import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
@@ -49,7 +49,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.9
  * @author Innoxia
  */
-public class ItemEffectType {
+public interface ItemEffectType {
 	
 	public static AbstractItemEffectType TESTING = new AbstractItemEffectType(Util.newArrayListOfValues(
 			"Test item."),
@@ -2494,67 +2494,55 @@ public class ItemEffectType {
 	};
 
 	public static AbstractItemEffectType getRacialEffectType(Race race) {
-		return racialEffectTypes.get(race);
+		return table.racialEffectTypes.get(race);
 	}
-	
-	public static Map<AbstractItemEffectType, String> itemEffectTypeToIdMap = new HashMap<>();
-	public static Map<String, AbstractItemEffectType> idToItemEffectTypeMap = new HashMap<>();
-	public static List<AbstractItemEffectType> allEffectTypes = new ArrayList<>();
-	public static Map<Race,AbstractItemEffectType> racialEffectTypes = new HashMap<>();
-	
+
+	@Deprecated
 	public static void addAbstractItemEffectToIds(String id, AbstractItemEffectType itemEffectType) {
-		allEffectTypes.add(itemEffectType);
-		
-		itemEffectTypeToIdMap.put(itemEffectType, id);
-		idToItemEffectTypeMap.put(id, itemEffectType);
+		table.add(id, itemEffectType);
 	}
 	
 	public static AbstractItemEffectType getItemEffectTypeFromId(String id) {
 		if(id.startsWith("RACE_")) {
 			return getRacialEffectType(Race.getRaceFromId(id.substring(5)));
 		}
-		id = Util.getClosestStringMatch(id, idToItemEffectTypeMap.keySet());
-		return idToItemEffectTypeMap.get(id);
+		return table.of(id);
 	}
-	
+
+	@Deprecated
 	public static String getIdFromItemEffectType(AbstractItemEffectType itemEffectType) {
-		return itemEffectTypeToIdMap.get(itemEffectType);
+		return itemEffectType.getId();
 	}
 	
 	// set in ItemType
 	public static AbstractItemEffectType getBookEffectFromSubspecies(Subspecies subspecies) {
-		String id = Util.getClosestStringMatch("BOOK_READ_"+Subspecies.getIdFromSubspecies(subspecies), idToItemEffectTypeMap.keySet());
-		return idToItemEffectTypeMap.get(id);
+		return table.of("BOOK_READ_"+Subspecies.getIdFromSubspecies(subspecies));
 	}
-	
+
+	@Deprecated
 	public static List<AbstractItemEffectType> getAllEffectTypes() {
-		return allEffectTypes;
+		return table.list();
 	}
-	
-	static {
-		Field[] fields = ItemEffectType.class.getFields();
-		for(Field f : fields){
-			if (AbstractItemEffectType.class.isAssignableFrom(f.getType())) {
-				AbstractItemEffectType iet;
-				try {
-					iet = ((AbstractItemEffectType) f.get(null));
-					
-					allEffectTypes.add(iet);
-					
-					itemEffectTypeToIdMap.put(iet, f.getName());
-					idToItemEffectTypeMap.put(f.getName(), iet);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+
+	Collection table = new Collection();
+
+	final class Collection extends Table<AbstractItemEffectType> {
+
+		private final Map<Race,AbstractItemEffectType> racialEffectTypes = new HashMap<>();
+
+		private Collection() {
+			super(s->s);
+			addFields(ItemEffectType.class,AbstractItemEffectType.class,(k,v)->v.id=k);
+			initialize(this);
 		}
+	}
+
+	private static void initialize(Collection table) {
 		
 		for(var race : Race.getAllRaces()) {
+			AbstractItemEffectType type;
 			if(race==Race.SLIME) { // Special case for slimes:
-				racialEffectTypes.put(
-						race,
-						new AbstractItemEffectType(null,
+				type = new AbstractItemEffectType(null,
 								race.getColour()) {
 							@Override
 							public Race getAssociatedRace() {
@@ -2580,12 +2568,10 @@ public class ItemEffectType {
 							public String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 								return target.setBodyMaterial(BodyMaterial.FLESH);
 							}
-						});
+						};
 				
 			} else {
-				racialEffectTypes.put(
-						race,
-						new AbstractItemEffectType(null,
+				type = new AbstractItemEffectType(null,
 								race.getColour()) {
 							@Override
 							public Race getAssociatedRace() {
@@ -2611,16 +2597,10 @@ public class ItemEffectType {
 							public String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 								return getRacialEffect(race, primaryModifier, secondaryModifier, potency, user, target).applyEffect();
 							}
-						});
+						};
 			}
-		}
-		
-		for(var entry : racialEffectTypes.entrySet()) {
-			allEffectTypes.add(entry.getValue());
-			
-			String id = "RACE_"+Race.getIdFromRace(entry.getKey());
-			itemEffectTypeToIdMap.put(entry.getValue(), id);
-			idToItemEffectTypeMap.put(id, entry.getValue());
+			table.racialEffectTypes.put(race,type);
+			table.add("RACE_"+Race.getIdFromRace(race),type);
 		}
 	}
 	
