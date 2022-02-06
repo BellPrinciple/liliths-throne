@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -50,6 +51,124 @@ import static java.util.stream.Collectors.toMap;
  * @author Innoxia
  */
 public interface ItemType extends AbstractCoreType {
+
+	String getId();
+
+	boolean isMod();
+
+	boolean isFromExternalFile();
+
+	String getAuthorDescription();
+
+	List<ItemEffect> getEffects();
+
+	String getSpecialEffect();
+
+	String getPotionDescriptor();
+
+	default boolean isAbleToBeSold() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	default boolean isAbleToBeDropped() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	// Enchantments:
+
+	default int getEnchantmentLimit() {
+		return 100;
+	}
+
+	AbstractItemEffectType getEnchantmentEffect();
+
+	AbstractItemType getEnchantmentItemType(List<ItemEffect> effects);
+
+	String getDeterminer();
+
+	boolean isPlural();
+
+	default String getName(boolean displayName) {
+		// by default, the display name is capitalised, and the bare name is not
+		return getName(displayName,displayName);
+	}
+
+	String getName(boolean displayName, boolean capitalise);
+
+	default String getNamePlural(boolean displayName) {
+		// by default, the display name is capitalised, and the bare name is not
+		return getNamePlural(displayName,displayName);
+	}
+
+	String getNamePlural(boolean displayName, boolean capitalise);
+
+	String getDescription();
+
+	List<String> getEffectTooltipLines();
+
+	String getDisplayName(boolean withRarityColour);
+
+	List<SvgInformation> getPathNameInformation();
+
+	Colour getColour();
+
+	List<Colour> getColourShades();
+
+	int getValue(List<ItemEffect> effects);
+
+	String getSVGString();
+
+	Rarity getRarity();
+
+	String getUseName();
+
+	default String getUseTooltipDescription(GameCharacter user, GameCharacter target) {
+		if(user==null || target==null || user.equals(target)) {
+			return Util.capitaliseSentence(getUseName()) + " the " + getName(false) + ".";
+		} else {
+			return UtilText.parse(target, "Get [npc.name] to " + getUseName() + " the " + getName(false) + ".");
+		}
+	}
+
+	String getUseDescription(GameCharacter user, GameCharacter target);
+
+	default boolean isAbleToBeUsedFromInventory() {
+		return true;
+	}
+
+	default String getUnableToBeUsedFromInventoryDescription() {
+		return "This item cannot be used in this way!";
+	}
+
+	default boolean isAbleToBeUsed(GameCharacter target) {
+		return true;
+	}
+
+	default String getUnableToBeUsedDescription(GameCharacter target) {
+		return "This item cannot be used in this way!";
+	}
+
+	boolean isAbleToBeUsedInSex();
+
+	boolean isAbleToBeUsedInCombatAllies();
+
+	boolean isAbleToBeUsedInCombatEnemies();
+
+	boolean isConsumedOnUse();
+
+	default boolean isTransformative() {
+		return getItemTags().contains(ItemTag.RACIAL_TF_ITEM);
+	}
+
+	default boolean isGift() {
+		return false;
+	}
+
+	default boolean isFetishGiving() {
+		return false;
+	}
+
+	Set<ItemTag> getItemTags();
 	
 	private static String getGenericUseDescription(GameCharacter user, GameCharacter target, String playerUseSelf, String playerUsePartner, String partnerUseSelf, String partnerUsePlayer) {
 		if (user!=null && user.isPlayer()) {
