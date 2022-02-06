@@ -122,7 +122,9 @@ public interface ParserTarget {
 
 	GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList);
 
-	public static AbstractParserTarget STYLE = new AbstractParserTarget(Util.newArrayListOfValues(
+	enum Special implements ParserTarget {
+
+		STYLE(List.of(
 			"style",
 			"game",
 			"util"),
@@ -131,9 +133,9 @@ public interface ParserTarget {
 				public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
 					return Main.game.getPlayer();
 				}
-			};
+		},
 
-	public static AbstractParserTarget UNIT = new AbstractParserTarget(Util.newArrayListOfValues(
+		UNIT(List.of(
 			"unit",
 			"units",
 			"game"),
@@ -142,9 +144,9 @@ public interface ParserTarget {
 		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
 			return Main.game.getPlayer();
 		}
-	};
+		},
 
-	public static AbstractParserTarget PC = new AbstractParserTarget(Util.newArrayListOfValues(
+		PC(List.of(
 			"pc",
 			"player"),
 			"The player character.") {
@@ -152,7 +154,7 @@ public interface ParserTarget {
 				public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
 					return Main.game.getPlayer();
 				}
-			};
+		},
 	
 	/**
 	 * The main parser tag for getting a hook on npcs when using UtilText's {@code parseFromXMLFile()} methods.
@@ -160,7 +162,7 @@ public interface ParserTarget {
 	 * You should instead use the 'ncom' (standing for Non-COMpanion) parser tags to access npcs which are not members of the player's party, and 'com' (standing for COMpanion) tags for npcs which are members of the player's party.
 	 * These parser tags will always return characters in the same order, so they are far safer to use than this 'npc' tag, which should only be used in the context of UtilText's {@code parseFromXMLFile()} method.
 	 */
-	public static AbstractParserTarget NPC = new AbstractParserTarget(Util.newArrayListOfValues(
+		NPC(List.of(
 			"npc",
 			"npc1",
 			"npc2",
@@ -213,13 +215,13 @@ public interface ParserTarget {
 						throw new NullPointerException();
 					}
 				}
-			};
+		},
 	
 	/**
 	 * Returns npcs which are members of the player's party.
 	 * Ordering is based on the order in which companions were added to the party.
 	 */
-	public static AbstractParserTarget COMPANION = new AbstractParserTarget(Util.newArrayListOfValues(
+		COMPANION(List.of(
 			"com",
 			"com1",
 			"com2",
@@ -244,13 +246,13 @@ public interface ParserTarget {
 					}
 					throw new NullPointerException();
 				}
-			};
+		},
 
 	/**
 	 * Returns npcs which are not members of the player's party and which are present in the player's cell.
 	 * Ordering is based on the npcs' id, so ordering will remain consistent across multiple parsing calls.
 	 */
-	public static AbstractParserTarget NON_COMPANION = new AbstractParserTarget(Util.newArrayListOfValues(
+		NON_COMPANION(List.of(
 			"ncom",
 			"ncom1",
 			"ncom2",
@@ -278,9 +280,9 @@ public interface ParserTarget {
 					}
 					throw new NullPointerException();
 				}
-			};
+		},
 
-	public static AbstractParserTarget ELEMENTAL = new AbstractParserTarget(Util.newArrayListOfValues(
+		ELEMENTAL(List.of(
 			"el",
 			"elemental"),
 			"The player's elemental. <b>Should only ever be used when you know for certain that the player's elemental has been created!</b>") {
@@ -292,8 +294,31 @@ public interface ParserTarget {
 			}
 			return Main.game.getPlayer().getElemental();
 		}
-	};
+		};
 
+		private final List<String> tags;
+		private final String description;
+
+		Special(List<String> t, String d) {
+			tags = t;
+			description = d;
+		}
+
+		@Override
+		public String getId() {
+			return toString();
+		}
+
+		@Override
+		public List<String> getTags() {
+			return tags;
+		}
+
+		@Override
+		public String getDescription() {
+			return description;
+		}
+	}
 	public static AbstractParserTarget PROLOGUE_MALE = new AbstractParserTarget(Util.newArrayListOfValues("prologueMale"), "") {
 		public String getDescription() {
 			return Main.game.getNpc(PrologueMale.class).getDescription();
@@ -1447,10 +1472,10 @@ public interface ParserTarget {
 
 		private Collection() {
 			super(s->s);
-			addFields(ParserTarget.class,AbstractParserTarget.class,(k,v)->{
-				v.id = k;
-				coreParserTargets.add(v);
-			});
+			for(var v : Special.values())
+				add(v.getId(),v);
+			addFields(ParserTarget.class,AbstractParserTarget.class,(k,v)->v.id=k);
+			coreParserTargets.addAll(list());
 		}
 	}
 }
