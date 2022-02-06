@@ -4825,27 +4825,27 @@ public class ClothingType {
 		}
 	};
 	
-	
+
 	private static List<AbstractClothingType> allClothing;
 	private static List<AbstractClothingType> moddedClothingList;
-	
+
 	private static List<InventorySlot> coreClothingSlots;
 	private static List<InventorySlot> lingerieSlots;
-	
+
 	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMap;
 	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemale;
 	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMale;
 	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapAndrogynous;
 	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemaleIncludingAndrogynous;
 	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMaleIncludingAndrogynous;
-	
+
 	private static Map<Occupation, ArrayList<AbstractClothingType>> suitableFeminineClothing = new HashMap<>();
-	
+
 	private static Map<AbstractClothingType, String> clothingToIdMap = new HashMap<>();
 	private static Map<String, AbstractClothingType> idToClothingMap = new HashMap<>();
-	
+
 	private static Map<String, String> oldIdConversionMap = new HashMap<>();
-	
+
 	public static AbstractClothingType getClothingTypeFromId(String id) {
 		return getClothingTypeFromId(id, null);
 	}
@@ -4873,14 +4873,14 @@ public class ClothingType {
 						+ slotHint + ". Valid slots are: " + validSlots);
 			}
 		}
-		
+
 		id = Util.getClosestStringMatch(id, choiceMap.keySet());
-		
+
 //		System.out.println("  set to: "+id);
-		
+
 		return idToClothingMap.get(id);
 	}
-	
+
 	public static String getIdFromClothingType(AbstractClothingType clothingType) {
 		return clothingToIdMap.get(clothingType);
 	}
@@ -4894,7 +4894,7 @@ public class ClothingType {
 		oldIdConversionMap.put("NECK_SNOWFLAKE_NECKLACE", "innoxia_elemental_snowflake_necklace");
 		oldIdConversionMap.put("PIERCING_EAR_SNOW_FLAKES", "innoxia_elemental_piercing_ear_snowflakes");
 		oldIdConversionMap.put("PIERCING_NOSE_SNOWFLAKE_STUD", "innoxia_elemental_piercing_nose_snowflake");
-		
+
 		oldIdConversionMap.put("NECK_SUN_NECKLACE", "innoxia_elemental_sun_necklace");
 		oldIdConversionMap.put("PIERCING_EAR_SUN", "innoxia_elemental_piercing_ear_sun");
 		oldIdConversionMap.put("PIERCING_NOSE_SUN_STUD", "innoxia_elemental_piercing_nose_sun");
@@ -4917,7 +4917,7 @@ public class ClothingType {
 		oldIdConversionMap.put("BDSM_CHASTITY_BELT", "innoxia_bdsm_chastity_belt");
 		oldIdConversionMap.put("BDSM_CHASTITY_BELT_FULL", "innoxia_bdsm_chastity_belt_full");
 		oldIdConversionMap.put("BDSM_KARADA", "innoxia_bdsm_karada");
-		
+
 		oldIdConversionMap.put("WITCH_HAT", "innoxia_witch_witch_hat");
 		oldIdConversionMap.put("WITCH_DRESS", "innoxia_witch_witch_dress");
 		oldIdConversionMap.put("WITCH_BOOTS", "innoxia_witch_witch_boots");
@@ -4935,14 +4935,14 @@ public class ClothingType {
 		oldIdConversionMap.put("KIMONO_MENS_KIMONO", "innoxia_japanese_mens_kimono");
 		oldIdConversionMap.put("KIMONO_HAORI", "innoxia_japanese_haori");
 		oldIdConversionMap.put("KIMONO_MENS_GETA", "innoxia_japanese_mens_geta");
-		
+
 		// Standard items:
 		oldIdConversionMap.put("kobolds_belt_leather_belt", "innoxia_hips_leather_belt");
 		oldIdConversionMap.put("PENIS_CONDOM", "innoxia_penis_condom");
-		
+
 		oldIdConversionMap.put("ANKLE_BRACELET", "innoxia_ankle_anklet");
 		oldIdConversionMap.put("ANKLE_SHIN_GUARDS", "innoxia_ankle_shin_guards");
-		
+
 		oldIdConversionMap.put("PIERCING_EAR_RING", "innoxia_piercing_ear_ring");
 		oldIdConversionMap.put("PIERCING_EAR_BASIC_RING", "innoxia_piercing_ear_ring");
 		oldIdConversionMap.put("PIERCING_EAR_HOOPS", "innoxia_piercing_ear_hoops");
@@ -4959,7 +4959,7 @@ public class ClothingType {
 		oldIdConversionMap.put("EYES_PATCH", "innoxia_eye_patch");
 
 		oldIdConversionMap.put("MOUTH_BANDANA", "innoxia_mouth_bandana");
-		
+
 		oldIdConversionMap.put("HEAD_CHEATERS_CIRCLET", "innoxia_head_circlet");
 		oldIdConversionMap.put("HEAD_CIRCLET", "innoxia_head_circlet");
 		oldIdConversionMap.put("HEAD_TIARA", "innoxia_head_tiara");
@@ -4970,7 +4970,7 @@ public class ClothingType {
 		oldIdConversionMap.put("HEAD_COWBOY_HAT", "innoxia_head_cowboy_hat");
 		oldIdConversionMap.put("HEAD_ANTLER_HEADBAND", "innoxia_head_antler_headband");
 		oldIdConversionMap.put("HEAD_SLIME_QUEENS_TIARA", "innoxia_head_slime_queens_tiara");
-		
+
 		oldIdConversionMap.put("HAND_ELBOWLENGTH_GLOVES", "innoxia_hand_elbow_length_gloves");
 		oldIdConversionMap.put("HAND_GLOVES", "innoxia_hand_gloves");
 		oldIdConversionMap.put("HAND_FINGERLESS_GLOVES", "innoxia_hand_fingerless_gloves");
@@ -4989,7 +4989,7 @@ public class ClothingType {
 		oldIdConversionMap.put("NECK_SLAVE_COLLAR", "innoxia_bdsm_metal_collar");
 
 		oldIdConversionMap.put("CHEST_LACY_PLUNGE_BRA", "innoxia_chest_lacy_plunge_bra");
-		
+
 		oldIdConversionMap.put("LEG_SKIRT", "innoxia_leg_skirt");
 		oldIdConversionMap.put("LEG_PENCIL_SKIRT", "innoxia_leg_pencil_skirt");
 		oldIdConversionMap.put("LEG_MINI_SKIRT", "innoxia_leg_mini_skirt");
@@ -5008,7 +5008,7 @@ public class ClothingType {
 		oldIdConversionMap.put("LEG_CROTCHLESS_CHAPS", "innoxia_leg_crotchless_chaps");
 
 		oldIdConversionMap.put("GROIN_LACY_PANTIES", "innoxia_groin_lacy_panties");
-		
+
 		oldIdConversionMap.put("FOOT_ANKLE_BOOTS", "innoxia_foot_ankle_boots");
 		oldIdConversionMap.put("FOOT_CHELSEA_BOOTS", "innoxia_foot_chelsea_boots");
 		oldIdConversionMap.put("FOOT_HEELS", "innoxia_foot_heels");
@@ -5024,19 +5024,19 @@ public class ClothingType {
 		oldIdConversionMap.put("TORSO_OXFORD_SHIRT", "innoxia_torso_long_sleeved_shirt");
 		oldIdConversionMap.put("TORSO_SHORT_SLEEVE_SHIRT", "innoxia_torso_short_sleeved_shirt");
 		oldIdConversionMap.put("TORSO_BLOUSE", "innoxia_torso_blouse");
-		
+
 
 		oldIdConversionMap.put("STOMACH_LOWBACK_BODY", "innoxia_stomach_lowback_body");
 		oldIdConversionMap.put("STOMACH_UNDERBUST_CORSET", "innoxia_stomach_underbust_corset");
 		oldIdConversionMap.put("STOMACH_OVERBUST_CORSET", "innoxia_stomach_overbust_corset");
 		oldIdConversionMap.put("STOMACH_SARASHI", "innoxia_stomach_sarashi");
-		
+
 		//TODO
-		
+
 		oldIdConversionMap.put("TORSO_OVER_SUIT_JACKET", "innoxia_torsoOver_suit_jacket");
 		oldIdConversionMap.put("TORSO_OVER_WOMENS_LEATHER_JACKET", "innoxia_torsoOver_womens_leather_jacket");
-		
-		
+
+
 		oldIdConversionMap.put("SOCK_SOCKS", "innoxia_sock_socks");
 		oldIdConversionMap.put("SOCK_TRAINER_SOCKS", "innoxia_sock_trainer_socks");
 		oldIdConversionMap.put("SOCK_KNEEHIGH_SOCKS", "innoxia_sock_kneehigh_socks");
@@ -5050,15 +5050,15 @@ public class ClothingType {
 		oldIdConversionMap.put("innoxia_insertableVibrator_insertable_vibrator", "innoxia_vagina_insertable_dildo");
 
 		oldIdConversionMap.put("dsg_eep_servequipset_enfdjacket_pc", "dsg_eep_servequipset_enfdjacket");
-		
-		
+
+
 		commonClothingMap = new EnumMap<>(InventorySlot.class);
 		commonClothingMapFemale = new EnumMap<>(InventorySlot.class);
 		commonClothingMapMale = new EnumMap<>(InventorySlot.class);
 		commonClothingMapAndrogynous = new EnumMap<>(InventorySlot.class);
 		commonClothingMapFemaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
 		commonClothingMapMaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
-		
+
 		for(InventorySlot slot : InventorySlot.values()) {
 			commonClothingMap.put(slot, new ArrayList<>());
 			commonClothingMapFemale.put(slot, new ArrayList<>());
@@ -5067,17 +5067,17 @@ public class ClothingType {
 			commonClothingMapFemaleIncludingAndrogynous.put(slot, new ArrayList<>());
 			commonClothingMapMaleIncludingAndrogynous.put(slot, new ArrayList<>());
 		}
-		
+
 		coreClothingSlots = Util.newArrayListOfValues(InventorySlot.TORSO_UNDER, InventorySlot.LEG);
 		lingerieSlots = Util.newArrayListOfValues(InventorySlot.CHEST, InventorySlot.GROIN, InventorySlot.STOMACH, InventorySlot.SOCK);
 
-		
+
 		allClothing = new ArrayList<>();
 		moddedClothingList = new ArrayList<>();
-		
+
 
 		// Modded clothing types:
-		
+
 		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/items/clothing");
 		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
 			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
@@ -5090,22 +5090,22 @@ public class ClothingType {
 
 					if(ct.getRarity()==Rarity.COMMON && !ct.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN)) {
 						commonClothingMap.get(ct.getEquipSlots().get(0)).add(ct);
-						
+
 						if (ct.getFemininityRestriction() == Femininity.FEMININE) {
 							commonClothingMapFemale.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
+
 						} else if (ct.getFemininityRestriction() == Femininity.ANDROGYNOUS || ct.getFemininityRestriction() == null) {
 							commonClothingMapAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
+
 						} else if (ct.getFemininityRestriction() == Femininity.MASCULINE) {
 							commonClothingMapMale.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
 						}
 					}
-					
+
 				} catch(XMLLoadException ex){ // we want to catch any errors here; we shouldn't want to load any mods that are invalid as that may cause severe bugs
 					System.err.println("Loading modded clothing failed at 'ClothingType'. File path: "+innerEntry.getValue().getAbsolutePath());
 					System.err.println("Actual exception: ");
@@ -5113,10 +5113,10 @@ public class ClothingType {
 				}
 			}
 		}
-		
+
 		allClothing.addAll(moddedClothingList);
-		
-		
+
+
 		// External res clothing types:
 
 		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/clothing");
@@ -5131,22 +5131,22 @@ public class ClothingType {
 
 					if(ct.getRarity()==Rarity.COMMON && !ct.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN)) {
 						commonClothingMap.get(ct.getEquipSlots().get(0)).add(ct);
-						
+
 						if (ct.getFemininityRestriction() == Femininity.FEMININE) {
 							commonClothingMapFemale.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
+
 						} else if (ct.getFemininityRestriction() == Femininity.ANDROGYNOUS || ct.getFemininityRestriction() == null) {
 							commonClothingMapAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
+
 						} else if (ct.getFemininityRestriction() == Femininity.MASCULINE) {
 							commonClothingMapMale.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
 						}
 					}
-					
+
 				} catch(Exception ex) {
 					System.err.println("Loading clothing failed at 'ClothingType'. File path: "+innerEntry.getValue().getAbsolutePath());
 					System.err.println("Actual exception: ");
@@ -5154,12 +5154,12 @@ public class ClothingType {
 				}
 			}
 		}
-		
-		
+
+
 		// Add in hard-coded clothing:
-		
+
 		Field[] fields = ClothingType.class.getFields();
-		
+
 		for(Field f : fields) {
 			if (AbstractClothingType.class.isAssignableFrom(f.getType())) {
 				AbstractClothingType ct;
@@ -5169,39 +5169,39 @@ public class ClothingType {
 					// I feel like this is stupid :thinking:
 					clothingToIdMap.put(ct, f.getName());
 					idToClothingMap.put(f.getName(), ct);
-					
+
 					allClothing.add(ct);
-					
+
 					if(ct.isDefaultSlotCondom()) {
 						continue;
 					}
-					
+
 					if(ct.getRarity()==Rarity.COMMON && !ct.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN)) {
 						commonClothingMap.get(ct.getEquipSlots().get(0)).add(ct);
-						
+
 						if (ct.getFemininityRestriction() == Femininity.FEMININE) {
 							commonClothingMapFemale.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
+
 						} else if (ct.getFemininityRestriction() == Femininity.ANDROGYNOUS || ct.getFemininityRestriction() == null) {
 							commonClothingMapAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
+
 						} else if (ct.getFemininityRestriction() == Femininity.MASCULINE) {
 							commonClothingMapMale.get(ct.getEquipSlots().get(0)).add(ct);
 							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
 						}
 					}
-					
+
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		
+
 //  	System.out.println(allClothing.size());
-		
+
 		//TODO shouldn't this be handled in outfit files?
 		suitableFeminineClothing.put(Occupation.NPC_PROSTITUTE,
 				Util.newArrayListOfValues(
@@ -5254,7 +5254,7 @@ public class ClothingType {
 						ClothingType.getClothingTypeFromId("innoxia_piercing_basic_barbell"),
 						ClothingType.getClothingTypeFromId("innoxia_piercing_ringed_barbell")));
 	}
-	
+
 	public static List<AbstractClothingType> getAllClothing() {
 		return allClothing;
 	}
