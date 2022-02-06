@@ -2,9 +2,11 @@ package com.lilithsthrone.game.sex.positions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
@@ -16,6 +18,7 @@ import com.lilithsthrone.game.character.body.Tail;
 import com.lilithsthrone.game.character.body.Tentacle;
 import com.lilithsthrone.game.character.body.Torso;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.sex.OrgasmCumTarget;
 import com.lilithsthrone.game.sex.SexActionInteractions;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
@@ -36,6 +39,7 @@ import com.lilithsthrone.game.sex.positions.slots.SexSlotTag;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotUnique;
 import com.lilithsthrone.game.sex.sexActions.SexActionInterface;
 import com.lilithsthrone.game.sex.sexActions.SexActionPresets;
+import com.lilithsthrone.game.sex.sexActions.SexActionType;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.GenericOrgasms;
 import com.lilithsthrone.game.sex.sexActions.baseActionsMisc.PlayerTalk;
 import com.lilithsthrone.game.sex.sexActions.dominion.MasturbationPanties;
@@ -57,6 +61,8 @@ import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 
+import static java.util.Collections.disjoint;
+
 /**
  * AbstractSexPositions for taurs, including taur-biped interactions.
  * 
@@ -67,6 +73,199 @@ import com.lilithsthrone.utils.Util.Value;
 public interface SexPosition {
 
 	String getId();
+
+	String getName();
+
+	boolean isAddStandardActions();
+
+	List<Class<?>> getPositioningClasses();
+
+	List<Class<?>> getSpecialClasses();
+
+	String getDescription(Map<GameCharacter,SexSlot> occupiedSlots);
+
+	default Value<Boolean,String> isAcceptablePosition(Map<GameCharacter,SexSlot> positioningSlots) {
+		return new Value<>(true, "");
+	}
+
+	default Value<Boolean,String> isSlotUnlocked(GameCharacter characterToTakeSlot, SexSlot slot, Map<GameCharacter,SexSlot> positioningSlots) {
+		return new Value<>(true, "");
+	}
+
+	default boolean isActionBlocked(GameCharacter performer, GameCharacter target, SexActionInterface action) {
+		if(action.getActionType()!=SexActionType.START_ONGOING
+				&& action.getActionType()!=SexActionType.REQUIRES_NO_PENETRATION_AND_EXPOSED
+				&& action.getActionType()!=SexActionType.REQUIRES_NO_PENETRATION)
+			return false;
+
+		var interactions = action.getSexAreaInteractions();
+		var interactPerformer = interactions.keySet();
+		var interactTarget = interactions.values();
+
+		// Block penis+non-appendage-non-pussy actions if target's penis is already in use:
+		try {
+			// Trying to interact a penis with a character who is already using a penis:
+			if(interactPerformer.contains(SexAreaPenetration.PENIS)
+					&& disjoint(interactTarget,SexActionPresets.appendageAreas)) {
+				var ongoing = Main.sex.getOngoingSexAreas(target,SexAreaPenetration.PENIS,performer);
+				if(!SexActionPresets.allowedInterPenetrationAreas.containsAll(ongoing)
+						|| ongoing.contains(SexAreaOrifice.VAGINA)
+							&& !SexActionPresets.allowedInterPenetrationAreas.containsAll(interactTarget))
+					return true;
+			}
+		}
+		catch(Exception ex) {
+		}
+
+		try {
+			// Trying to interact a penis with a character who is already using a penis:
+			if(interactTarget.contains(SexAreaPenetration.PENIS)
+					&& disjoint(interactPerformer,SexActionPresets.appendageAreas)) {
+				var ongoing = Main.sex.getOngoingSexAreas(performer,SexAreaPenetration.PENIS,target);
+				if(!SexActionPresets.allowedInterPenetrationAreas.containsAll(ongoing)
+						|| ongoing.contains(SexAreaOrifice.VAGINA)
+							&& !SexActionPresets.allowedInterPenetrationAreas.containsAll(interactPerformer))
+					return true;
+			}
+		}
+		catch(Exception ex) {
+		}
+
+		var ongoingPerformer = Main.sex.getOngoingActionsMap(performer);
+		var ongoingTarget = Main.sex.getOngoingActionsMap(target);
+
+		// Block tribbing and thigh sex if ongoing penis/vagina or penis/anus penetration:
+		var impossibleTribbingAreas = List.of(SexAreaOrifice.ANUS, SexAreaOrifice.VAGINA, SexAreaOrifice.THIGHS);
+		var penisPerformer = ongoingPerformer.get(SexAreaPenetration.PENIS);
+		var penisTarget = ongoingTarget.get(SexAreaPenetration.PENIS);
+		if(interactPerformer.contains(SexAreaPenetration.CLIT)
+				&& interactTarget.contains(SexAreaPenetration.CLIT)
+				&& (penisPerformer != null
+						&& penisPerformer.values().stream().anyMatch((set)->!disjoint(set,impossibleTribbingAreas))
+					|| penisTarget != null
+						&& penisTarget.values().stream().anyMatch((set)->!disjoint(set,impossibleTribbingAreas))))
+			return true;
+		var clitPerformer = ongoingPerformer.get(SexAreaPenetration.CLIT);
+		var clitTarget = ongoingPerformer.get(SexAreaPenetration.CLIT);
+		if((interactPerformer.contains(SexAreaPenetration.PENIS)
+						&& !disjoint(interactTarget,impossibleTribbingAreas)
+					|| !disjoint(interactPerformer,impossibleTribbingAreas)
+						&& interactTarget.contains(SexAreaPenetration.PENIS))
+				&& (clitPerformer != null
+						&& clitPerformer.values().stream().anyMatch((set)->set.contains(SexAreaPenetration.CLIT))
+					|| clitTarget != null
+						&& clitTarget.values().stream().anyMatch((set)->set.contains(SexAreaPenetration.CLIT))))
+			return true;
+
+		if(!(Main.sex.getSexPositionSlot(performer).hasTag(SexSlotTag.SIXTY_NINE)
+					&& Main.sex.getSexPositionSlot(target).hasTag(SexSlotTag.LYING_DOWN)
+				|| Main.sex.getSexPositionSlot(target).hasTag(SexSlotTag.SIXTY_NINE)
+					&& Main.sex.getSexPositionSlot(performer).hasTag(SexSlotTag.LYING_DOWN)))
+			return false;
+
+		boolean ongoingGroinToGroin = ongoingTarget.entrySet().stream()
+			.filter(e->SexActionPresets.groinAreas.contains(e.getKey()))
+			.map(e->e.getValue().get(performer)).filter(Objects::nonNull)
+			.anyMatch(e->!disjoint(e,SexActionPresets.groinAreas))
+		|| ongoingPerformer.entrySet().stream()
+			.filter(e->SexActionPresets.groinAreas.contains(e.getKey()))
+			.map(e->e.getValue().get(target)).filter(Objects::nonNull)
+			.anyMatch(e->!disjoint(e,SexActionPresets.groinAreas));
+		boolean ongoingGroinToBreasts = ongoingTarget.entrySet().stream()
+			.filter(e->SexActionPresets.groinAreas.contains(e.getKey()))
+			.map(e->e.getValue().get(performer)).filter(Objects::nonNull)
+			.anyMatch(e->!disjoint(e,SexActionPresets.breastAreas))
+		|| ongoingPerformer.entrySet().stream()
+			.filter(e->SexActionPresets.groinAreas.contains(e.getKey()))
+			.map(e->e.getValue().get(target)).filter(Objects::nonNull)
+			.anyMatch(e->!disjoint(e,SexActionPresets.breastAreas));
+		boolean ongoingGroinToMouth = ongoingTarget.entrySet().stream()
+			.filter(e->SexActionPresets.groinAreas.contains(e.getKey()))
+			.map(e->e.getValue().get(performer)).filter(Objects::nonNull)
+			.anyMatch(e->!disjoint(e,SexActionPresets.mouthAreas))
+		|| ongoingPerformer.entrySet().stream()
+			.filter(e->SexActionPresets.groinAreas.contains(e.getKey()))
+			.map(e->e.getValue().get(target)).filter(Objects::nonNull)
+			.anyMatch(e->!disjoint(e,SexActionPresets.mouthAreas));
+
+		// Block oral + groin actions if there is any groin-groin or groin-breast action going on:
+		if(!(disjoint(interactPerformer,SexActionPresets.groinAreas)
+					|| disjoint(interactTarget,SexActionPresets.mouthAreas))
+				&& (disjoint(interactTarget,SexActionPresets.groinAreas)
+					|| disjoint(interactPerformer,SexActionPresets.mouthAreas)))
+			return ongoingGroinToGroin || ongoingGroinToBreasts;
+
+		// Block groin + breast actions if there is any groin-mouth or groin-groin action going on:
+		if(!(disjoint(interactPerformer,SexActionPresets.groinAreas)
+					|| disjoint(interactTarget,SexActionPresets.breastAreas))
+				&& (disjoint(interactTarget,SexActionPresets.groinAreas)
+					|| disjoint(interactPerformer,SexActionPresets.breastAreas)))
+			return ongoingGroinToGroin || ongoingGroinToMouth;
+
+		return false;
+	}
+
+	int getMaximumSlots();
+
+	default Set<SexSlot> getAllAvailableSexPositions() {
+		var positions = new HashSet<>(getSlotTargets().keySet());
+		getSlotTargets().forEach((k,v)->positions.addAll(v.keySet()));
+		return positions;
+	}
+
+	/**
+	 * Key is role position. Value is list of all slots that this slot can interact with.
+	 */
+	Map<SexSlot,Map<SexSlot,SexActionInteractions>> getSlotTargets();
+
+	default SexActionInteractions getSexInteractions(SexSlot performer, SexSlot target) {
+		var slotTargets = getSlotTargets().get(performer);
+		if(slotTargets != null) {
+			var t = slotTargets.get(target);
+			if(t != null)
+				return t;
+		}
+		// If the targeted sex position is not defined, allow cumming on floor:
+		return new SexActionInteractions(null, List.of(OrgasmCumTarget.FLOOR), List.of(OrgasmCumTarget.FLOOR));
+	}
+
+	/**
+	 * Override to set limitations on the amount of penetration types allowed in this position.
+	 * For example, the 'Mating Press' position defines fingers(i.e. hands) as being bottomMax-topMax for bottom, and topMax-bottomMax for top, as the one on top is pinning down as many of the bottom's hands as they can.
+	 * @param penetrator
+	 * Participates in this position.
+	 * @return
+	 * A map of penetration types, the value to which they are mapped representing the penetration count modifier. The value should always be a negative integer.
+	 */
+	default Map<SexAreaPenetration,Integer> getRestrictedPenetrationCounts(GameCharacter penetrator) {
+		return null;
+	}
+
+	/**
+	 * Taking into account the AbstractSexSlot of the two characters specified, as well as the body part being used, this method returns a list of areas which the cumTarget can force the cumProvider to cum inside of.
+	 * This is used in determining whether the 'leg-lock', 'tail-lock', 'tentacle-lock', or 'force creampie' actions (in the GenericOrgasms class) are available.
+	 * @param bodyPartUsed
+	 * The body part which the cumTarget is using to force the creampie. Will almost certainly be either:
+	 * <br/>
+	 * <b>{@link com.lilithsthrone.game.character.body.Arm}{@code .class}:</b> Always requires at least two free arms, and for arms to not be restricted.
+	 * <br/>
+	 * <b>{@link com.lilithsthrone.game.character.body.Leg}{@code .class}:</b> Always requires at least two free legs, and for legs to not be restricted.
+	 * <br/>
+	 * <b>{@link com.lilithsthrone.game.character.body.Tail}{@code .class}:</b> Requires tail(s), and for them to be prehensile.
+	 * <br/>
+	 * <b>{@link com.lilithsthrone.game.character.body.Tentacle}{@code .class}:</b> Requires tentacle(s).
+	 * <br/>
+	 * <b>{@link com.lilithsthrone.game.character.body.Torso}{@code .class}:</b> Used to represent the full body being used.
+	 * @param orifice
+	 * The orifice into which the creampie is to be forced.
+	 * @param cumTarget
+	 * The character who is both receiving and forcing the creampie.
+	 * @param cumProvider
+	 * The one who is being forced to cum inside the cumTarget.
+	 * @return
+	 * True if the orifice can be forcibly creampied by the supplied body part.
+	 */
+	boolean isForcedCreampieEnabled(Class<? extends BodyPartInterface> bodyPartUsed, SexAreaOrifice orifice, GameCharacter cumTarget, GameCharacter cumProvider);
 
 	public static final AbstractSexPosition MASTURBATION = new AbstractSexPosition("",
 			8,
