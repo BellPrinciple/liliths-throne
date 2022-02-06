@@ -122,6 +122,14 @@ public interface ParserTarget {
 
 	GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList);
 
+	Special STYLE = Special.STYLE;
+	Special UNIT = Special.UNIT;
+	Special PC = Special.PC;
+	Special NPC = Special.NPC;
+	Special COMPANION = Special.COMPANION;
+	Special NON_COMPANION = Special.NON_COMPANION;
+	Special ELEMENTAL = Special.ELEMENTAL;
+
 	enum Special implements ParserTarget {
 
 		STYLE(List.of(
@@ -319,1087 +327,455 @@ public interface ParserTarget {
 			return description;
 		}
 	}
-	public static AbstractParserTarget PROLOGUE_MALE = new AbstractParserTarget(Util.newArrayListOfValues("prologueMale"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(PrologueMale.class).getDescription();
-		}
+	enum CoreCharacter implements ParserTarget {
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(PrologueMale.class);
-		}
-	};
+		PROLOGUE_MALE(PrologueMale.class,
+			"prologueMale"),
 
-	public static AbstractParserTarget PROLOGUE_FEMALE = new AbstractParserTarget(Util.newArrayListOfValues("prologueFemale"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(PrologueFemale.class).getDescription();
-		}
+		PROLOGUE_FEMALE(PrologueFemale.class,
+			"prologueFemale"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(PrologueFemale.class);
-		}
-	};
-
-	public static AbstractParserTarget NPC_MALE = new AbstractParserTarget(Util.newArrayListOfValues(
+		NPC_MALE(GenericMaleNPC.class,
 			"NPCmale",
 			"maleNPC",
 			"genericMale",
-			"maleGeneric"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(GenericMaleNPC.class).getDescription();
-		}
+			"maleGeneric"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(GenericMaleNPC.class);
-		}
-	};
-
-	public static AbstractParserTarget NPC_FEMALE = new AbstractParserTarget(Util.newArrayListOfValues(
+		NPC_FEMALE(GenericFemaleNPC.class,
 			"NPCfemale",
 			"femaleNPC",
 			"genericFemale",
-			"femaleGeneric"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(GenericFemaleNPC.class).getDescription();
-		}
+			"femaleGeneric"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(GenericFemaleNPC.class);
-		}
-	};
-
-	public static AbstractParserTarget NPC_ANDROGYNOUS = new AbstractParserTarget(Util.newArrayListOfValues(
+		NPC_ANDROGYNOUS(GenericAndrogynousNPC.class,
 			"NPCandrogynous",
 			"androgynousNPC",
 			"NPCambiguous",
-			"ambiguousNPC"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(GenericAndrogynousNPC.class).getDescription();
-		}
+			"ambiguousNPC"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(GenericAndrogynousNPC.class);
-		}
-	};
-
-	public static AbstractParserTarget NPC_TRADER = new AbstractParserTarget(Util.newArrayListOfValues(
+		NPC_TRADER(GenericTrader.class,
 			"trader",
-			"genericTrader"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(GenericTrader.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(GenericTrader.class);
-		}
-	};
+			"genericTrader"),
 
-	public static AbstractParserTarget TEST_NPC = new AbstractParserTarget(Util.newArrayListOfValues(
+		TEST_NPC(TestNPC.class,
 			"testNPC",
-			"test"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(TestNPC.class).getDescription();
-		}
+			"test"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(TestNPC.class);
-		}
-	};
-
-	public static AbstractParserTarget LILAYA = new AbstractParserTarget(Util.newArrayListOfValues(
+		LILAYA(Lilaya.class,
 			"lilaya",
-			"aunt"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Lilaya.class).getDescription();
-		}
+			"aunt"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Lilaya.class);
-		}
-	};
+		ROSE(Rose.class,
+			"rose"),
 
-	public static AbstractParserTarget ROSE = new AbstractParserTarget(Util.newArrayListOfValues("rose"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Rose.class).getDescription();
-		}
+		KATE(Kate.class,
+			"kate"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Rose.class);
-		}
-	};
+		RALPH(Ralph.class,
+			"ralph"),
 
-	public static AbstractParserTarget KATE = new AbstractParserTarget(Util.newArrayListOfValues("kate"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Kate.class).getDescription();
-		}
+		NYAN(Nyan.class,
+			"nyan"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Kate.class);
-		}
-	};
+		NYAN_MUM(NyanMum.class,
+			"nyanmum",
+			"nyanmom",
+			"leotie"),
 
-	public static AbstractParserTarget RALPH = new AbstractParserTarget(Util.newArrayListOfValues("ralph"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Ralph.class).getDescription();
-		}
+		VICKY(Vicky.class,
+			"vicky"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Ralph.class);
-		}
-	};
+		PIX(Pix.class,
+			"pix"),
 
-	public static AbstractParserTarget NYAN = new AbstractParserTarget(Util.newArrayListOfValues("nyan"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Nyan.class).getDescription();
-		}
+		BRAX(Brax.class,
+			"brax"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Nyan.class);
-		}
-	};
+		CANDI(CandiReceptionist.class,
+			"candi"),
 
-	public static AbstractParserTarget NYAN_MUM = new AbstractParserTarget(Util.newArrayListOfValues("nyanmum", "nyanmom", "leotie"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(NyanMum.class).getDescription();
-		}
+		VANESSA(Vanessa.class,
+			"vanessa"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(NyanMum.class);
-		}
-	};
+		SCARLETT(Scarlett.class,
+			"scarlett"),
 
-	public static AbstractParserTarget VICKY = new AbstractParserTarget(Util.newArrayListOfValues("vicky"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Vicky.class).getDescription();
-		}
+		HELENA(Helena.class,
+			"helena"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Vicky.class);
-		}
-	};
-
-	public static AbstractParserTarget PIX = new AbstractParserTarget(Util.newArrayListOfValues("pix"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Pix.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Pix.class);
-		}
-	};
-
-	public static AbstractParserTarget BRAX = new AbstractParserTarget(Util.newArrayListOfValues("brax"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Brax.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Brax.class);
-		}
-	};
-
-	public static AbstractParserTarget CANDI = new AbstractParserTarget(Util.newArrayListOfValues("candi"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(CandiReceptionist.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(CandiReceptionist.class);
-		}
-	};
-
-	public static AbstractParserTarget VANESSA = new AbstractParserTarget(Util.newArrayListOfValues("vanessa"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Vanessa.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Vanessa.class);
-		}
-	};
-
-	public static AbstractParserTarget SCARLETT = new AbstractParserTarget(Util.newArrayListOfValues("scarlett"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Scarlett.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Scarlett.class);
-		}
-	};
-
-	public static AbstractParserTarget HELENA = new AbstractParserTarget(Util.newArrayListOfValues("helena"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Helena.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Helena.class);
-		}
-	};
-
-	public static AbstractParserTarget HARPY_BIMBO = new AbstractParserTarget(Util.newArrayListOfValues(
+		HARPY_BIMBO(HarpyBimbo.class,
 			"brittany",
 			"bimboHarpy",
-			"harpyBimbo"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(HarpyBimbo.class).getDescription();
-		}
+			"harpyBimbo"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(HarpyBimbo.class);
-		}
-	};
-
-	public static AbstractParserTarget HARPY_BIMBO_COMPANION = new AbstractParserTarget(Util.newArrayListOfValues(
+		HARPY_BIMBO_COMPANION(HarpyBimboCompanion.class,
 			"lauren",
 			"bimboHarpyCompanion",
-			"harpyBimboCompanion"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(HarpyBimboCompanion.class).getDescription();
-		}
+			"harpyBimboCompanion"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(HarpyBimboCompanion.class);
-		}
-	};
-
-	public static AbstractParserTarget HARPY_DOMINANT = new AbstractParserTarget(Util.newArrayListOfValues(
+		HARPY_DOMINANT(HarpyDominant.class,
 			"diana",
 			"dominantHarpy",
-			"harpyDominant"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(HarpyDominant.class).getDescription();
-		}
+			"harpyDominant"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(HarpyDominant.class);
-		}
-	};
-
-	public static AbstractParserTarget HARPY_DOMINANT_COMPANION = new AbstractParserTarget(Util.newArrayListOfValues(
+		HARPY_DOMINANT_COMPANION(HarpyDominantCompanion.class,
 			"harley",
 			"dominantHarpyCompanion",
-			"harpyDominantCompanion"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(HarpyDominantCompanion.class).getDescription();
-		}
+			"harpyDominantCompanion"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(HarpyDominantCompanion.class);
-		}
-	};
-
-	public static AbstractParserTarget HARPY_NYMPHO = new AbstractParserTarget(Util.newArrayListOfValues(
+		HARPY_NYMPHO(HarpyNympho.class,
 			"lexi",
 			"nymphoHarpy",
-			"harpyNympho"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(HarpyNympho.class).getDescription();
-		}
+			"harpyNympho"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(HarpyNympho.class);
-		}
-	};
-
-	public static AbstractParserTarget HARPY_NYMPHO_COMPANION = new AbstractParserTarget(Util.newArrayListOfValues(
+		HARPY_NYMPHO_COMPANION(HarpyNymphoCompanion.class,
 			"max",
 			"nymphoHarpyCompanion",
-			"harpyNymphoCompanion"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(HarpyNymphoCompanion.class).getDescription();
-		}
+			"harpyNymphoCompanion"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(HarpyNymphoCompanion.class);
-		}
-	};
+		PAZU(Pazu.class,
+			"pazu"),
 
-	public static AbstractParserTarget PAZU = new AbstractParserTarget(Util.newArrayListOfValues("pazu"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Pazu.class).getDescription();
-		}
+		FINCH(Finch.class,
+			"finch"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Pazu.class);
-		}
-	};
+		ZARANIX(Zaranix.class,
+			"zaranix"),
 
-	public static AbstractParserTarget FINCH = new AbstractParserTarget(Util.newArrayListOfValues("finch"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Finch.class).getDescription();
-		}
+		AMBER(Amber.class,
+			"amber"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Finch.class);
-		}
-	};
+		FELICIA(Felicia.class,
+			"felicia"),
 
-	public static AbstractParserTarget ZARANIX = new AbstractParserTarget(Util.newArrayListOfValues("zaranix"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Zaranix.class).getDescription();
-		}
+		ARTHUR(Arthur.class,
+			"arthur"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Zaranix.class);
-		}
-	};
+		KELLY(ZaranixMaidKelly.class,
+			"kelly"),
 
-	public static AbstractParserTarget AMBER = new AbstractParserTarget(Util.newArrayListOfValues("amber"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Amber.class).getDescription();
-		}
+		KATHERINE(ZaranixMaidKatherine.class,
+			"katherine"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Amber.class);
-		}
-	};
+		ASHLEY(Ashley.class,
+			"ashley"),
 
-	public static AbstractParserTarget FELICIA = new AbstractParserTarget(Util.newArrayListOfValues("felicia"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Felicia.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Felicia.class);
-		}
-	};
-
-	public static AbstractParserTarget ARTHUR = new AbstractParserTarget(Util.newArrayListOfValues("arthur"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Arthur.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Arthur.class);
-		}
-	};
-
-	public static AbstractParserTarget KELLY = new AbstractParserTarget(Util.newArrayListOfValues("kelly"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(ZaranixMaidKelly.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(ZaranixMaidKelly.class);
-		}
-	};
-
-	public static AbstractParserTarget KATHERINE = new AbstractParserTarget(Util.newArrayListOfValues("katherine"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(ZaranixMaidKatherine.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(ZaranixMaidKatherine.class);
-		}
-	};
-
-	public static AbstractParserTarget ASHLEY = new AbstractParserTarget(Util.newArrayListOfValues("ashley"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Ashley.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Ashley.class);
-		}
-	};
-
-	public static AbstractParserTarget WOLFGANG = new AbstractParserTarget(Util.newArrayListOfValues(
+		WOLFGANG(SupplierLeader.class,
 			"wolfgang",
-			"supplierLeader"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(SupplierLeader.class).getDescription();
-		}
+			"supplierLeader"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(SupplierLeader.class);
-		}
-	};
-
-	public static AbstractParserTarget KARL = new AbstractParserTarget(Util.newArrayListOfValues(
+		KARL(SupplierPartner.class,
 			"karl",
-			"supplierPartner"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(SupplierPartner.class).getDescription();
-		}
+			"supplierPartner"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(SupplierPartner.class);
-		}
-	};
+		ANGEL(Angel.class,
+			"angel"),
 
-	public static AbstractParserTarget ANGEL = new AbstractParserTarget(Util.newArrayListOfValues("angel"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Angel.class).getDescription();
-		}
+		BUNNY(Bunny.class,
+			"bunny"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Angel.class);
-		}
-	};
-
-	public static AbstractParserTarget BUNNY = new AbstractParserTarget(Util.newArrayListOfValues("bunny"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Bunny.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Bunny.class);
-		}
-	};
-
-	public static AbstractParserTarget LOPPY = new AbstractParserTarget(Util.newArrayListOfValues("loppy"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Loppy.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Loppy.class);
-		}
-	};
-
-	public static AbstractParserTarget LUMI = new AbstractParserTarget(Util.newArrayListOfValues("lumi"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Lumi.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Lumi.class);
-		}
-	};
-
-	public static AbstractParserTarget CLAIRE = new AbstractParserTarget(Util.newArrayListOfValues("claire"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Claire.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Claire.class);
-		}
-	};
-
-	public static AbstractParserTarget SLIME_QUEEN = new AbstractParserTarget(Util.newArrayListOfValues("slimeQueen"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(SlimeQueen.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(SlimeQueen.class);
-		}
-	};
+		LOPPY(Loppy.class,
+			"loppy"),
 	
-	public static AbstractParserTarget SLIME_GUARD_ICE = new AbstractParserTarget(Util.newArrayListOfValues("slimeGuardIce", "slimeIce", "crystal"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(SlimeGuardIce.class).getDescription();
-		}
+		LUMI(Lumi.class,
+			"lumi"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(SlimeGuardIce.class);
-		}
-	};
+		CLAIRE(Claire.class,
+			"claire"),
 	
-	public static AbstractParserTarget SLIME_GUARD_FIRE = new AbstractParserTarget(Util.newArrayListOfValues("slimeGuardFire", "slimeFire", "blaze"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(SlimeGuardFire.class).getDescription();
-		}
+		SLIME_QUEEN(SlimeQueen.class,
+			"slimeQueen"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(SlimeGuardFire.class);
-		}
-	};
+		SLIME_GUARD_ICE(SlimeGuardIce.class,
+			"slimeGuardIce", "slimeIce", "crystal"),
 	
-	public static AbstractParserTarget SLIME_ROYAL_GUARD = new AbstractParserTarget(Util.newArrayListOfValues("slimeRoyalGuard", "royalGuardSlime"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(SlimeRoyalGuard.class).getDescription();
-		}
+		SLIME_GUARD_FIRE(SlimeGuardFire.class,
+			"slimeGuardFire", "slimeFire", "blaze"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(SlimeRoyalGuard.class);
-		}
-	};
+		SLIME_ROYAL_GUARD(SlimeRoyalGuard.class,
+			"slimeRoyalGuard", "royalGuardSlime"),
 	
-	public static AbstractParserTarget ROXY = new AbstractParserTarget(Util.newArrayListOfValues("roxy"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Roxy.class).getDescription();
-		}
+		ROXY(Roxy.class,
+			"roxy"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Roxy.class);
-		}
-	};
+		AXEL(Axel.class,
+			"axel", "lexa"),
 	
-	public static AbstractParserTarget AXEL = new AbstractParserTarget(Util.newArrayListOfValues("axel", "lexa"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Axel.class).getDescription();
-		}
+		EPONA(Epona.class,
+			"epona"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Axel.class);
-		}
-	};
+		JULES(Jules.class,
+			"jules"),
 	
-	public static AbstractParserTarget EPONA = new AbstractParserTarget(Util.newArrayListOfValues("epona"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Epona.class).getDescription();
-		}
+		KRUGER(Kruger.class,
+			"kruger"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Epona.class);
-		}
-	};
+		KALAHARI(Kalahari.class,
+			"kalahari"),
 
-	public static AbstractParserTarget JULES = new AbstractParserTarget(Util.newArrayListOfValues("jules"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Jules.class).getDescription();
-		}
+		RENTAL_MOMMY(RentalMommy.class,
+			"rentalMommy"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Jules.class);
-		}
-	};
+		DADDY(Daddy.class,
+			"daddy", "desryth"),
 	
-	public static AbstractParserTarget KRUGER = new AbstractParserTarget(Util.newArrayListOfValues("kruger"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Kruger.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Kruger.class);
-		}
-	};
-
-	public static AbstractParserTarget KALAHARI = new AbstractParserTarget(Util.newArrayListOfValues("kalahari"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Kalahari.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Kalahari.class);
-		}
-	};
-
-	public static AbstractParserTarget RENTAL_MOMMY = new AbstractParserTarget(Util.newArrayListOfValues("rentalMommy"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(RentalMommy.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(RentalMommy.class);
-		}
-	};
-
-	public static AbstractParserTarget DADDY = new AbstractParserTarget(Util.newArrayListOfValues("daddy", "desryth"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Daddy.class).getDescription();
-		}
-
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Daddy.class);
-		}
-	};
-
 
 	// Submission:
 	
-	public static AbstractParserTarget IMP_FORTRESS_ALPHA_LEADER = new AbstractParserTarget(Util.newArrayListOfValues("impAlphaLeader"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(FortressAlphaLeader.class).getDescription();
-		}
+		IMP_FORTRESS_ALPHA_LEADER(FortressAlphaLeader.class,
+			"impAlphaLeader"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(FortressAlphaLeader.class);
-		}
-	};
+		IMP_FORTRESS_FEMALES_LEADER(FortressFemalesLeader.class,
+			"impFemalesLeader", "impFemaleLeader"),
 
-	public static AbstractParserTarget IMP_FORTRESS_FEMALES_LEADER = new AbstractParserTarget(Util.newArrayListOfValues("impFemalesLeader", "impFemaleLeader"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(FortressFemalesLeader.class).getDescription();
-		}
+		IMP_FORTRESS_MALES_LEADER(FortressMalesLeader.class,
+			"impMalesLeader", "impMaleLeader"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(FortressFemalesLeader.class);
-		}
-	};
+		DARK_SIREN(DarkSiren.class,
+			"darkSiren", "siren", "meraxis"),
 
-	public static AbstractParserTarget IMP_FORTRESS_MALES_LEADER = new AbstractParserTarget(Util.newArrayListOfValues("impMalesLeader", "impMaleLeader"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(FortressMalesLeader.class).getDescription();
-		}
+		CITADEL_ARCANIST(Takahashi.class,
+			"citadelArcanist", "youkoGuide", "hitomi", "takahashi"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(FortressMalesLeader.class);
-		}
-	};
+		LYSSIETH(Lyssieth.class,
+			"lyssieth"),
 
-	public static AbstractParserTarget DARK_SIREN = new AbstractParserTarget(Util.newArrayListOfValues("darkSiren", "siren", "meraxis"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(DarkSiren.class).getDescription();
-		}
+		ELIZABETH(Elizabeth.class,
+			"elizabeth"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(DarkSiren.class);
-		}
-	};
+		VENGAR(Vengar.class,
+			"vengar"),
 	
-	public static AbstractParserTarget CITADEL_ARCANIST = new AbstractParserTarget(Util.newArrayListOfValues("citadelArcanist", "youkoGuide", "hitomi", "takahashi"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Takahashi.class).getDescription();
-		}
+		SHADOW(Shadow.class,
+			"shadow"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Takahashi.class);
-		}
-	};
+		SILENCE(Silence.class,
+			"silence"),
 
-	public static AbstractParserTarget LYSSIETH = new AbstractParserTarget(Util.newArrayListOfValues("lyssieth"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Lyssieth.class).getDescription();
-		}
+		MURK(Murk.class,
+			"murk"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Lyssieth.class);
-		}
-	};
+		SEAN(Sean.class,
+			"sean"),
 	
-	public static AbstractParserTarget ELIZABETH = new AbstractParserTarget(Util.newArrayListOfValues("elizabeth"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Elizabeth.class).getDescription();
-		}
+		NATALYA(Natalya.class,
+			"natalya"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Elizabeth.class);
-		}
-	};
+		WES(Wes.class,
+			"wes", "wesley"),
 	
-	public static AbstractParserTarget VENGAR = new AbstractParserTarget(Util.newArrayListOfValues("vengar"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Vengar.class).getDescription();
-		}
+		ELLE(Elle.class,
+			"elle", "aellasys"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Vengar.class);
-		}
-	};
+		KAY(Kay.class,
+			"kay"),
 	
-	public static AbstractParserTarget SHADOW = new AbstractParserTarget(Util.newArrayListOfValues("shadow"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Shadow.class).getDescription();
-		}
+		FLASH(Flash.class,
+			"flash"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Shadow.class);
-		}
-	};
+		JESS(Jess.class,
+			"jess"),
 	
-	public static AbstractParserTarget SILENCE = new AbstractParserTarget(Util.newArrayListOfValues("silence"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Silence.class).getDescription();
-		}
+		ASTRAPI(Astrapi.class,
+			"astrapi"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Silence.class);
-		}
-	};
+		VRONTI(Vronti.class,
+			"vronti"),
 	
-	public static AbstractParserTarget MURK = new AbstractParserTarget(Util.newArrayListOfValues("murk"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Murk.class).getDescription();
-		}
+		ARION(Arion.class,
+			"arion"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Murk.class);
-		}
-	};
+		MINOTALLYS(Minotallys.class,
+			"minotallys"),
 	
-	public static AbstractParserTarget SEAN = new AbstractParserTarget(Util.newArrayListOfValues("sean"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Sean.class).getDescription();
-		}
+		FAE(Fae.class,
+			"fae"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Sean.class);
-		}
-	};
+		SILVIA(Silvia.class,
+			"silvia"),
 	
-	public static AbstractParserTarget NATALYA = new AbstractParserTarget(Util.newArrayListOfValues("natalya"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Natalya.class).getDescription();
-		}
+		KHEIRON(Kheiron.class,
+			"kheiron"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Natalya.class);
-		}
-	};
+		KAZIK(Kazik.class,
+			"kazik"),
 	
-	public static AbstractParserTarget WES = new AbstractParserTarget(Util.newArrayListOfValues("wes", "wesley"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Wes.class).getDescription();
-		}
+		YUI(Yui.class,
+			"yui"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Wes.class);
-		}
-	};
+		NIZHONI(Nizhoni.class,
+			"nizhoni"),
 	
-	public static AbstractParserTarget ELLE = new AbstractParserTarget(Util.newArrayListOfValues("elle", "aellasys"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Elle.class).getDescription();
-		}
+		MORENO(Moreno.class,
+			"moreno"),
 
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Elle.class);
-		}
-	};
+		HEATHER(Heather.class,
+			"heather"),
 	
-	public static AbstractParserTarget KAY = new AbstractParserTarget(Util.newArrayListOfValues("kay"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Kay.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Kay.class);
-		}
-	};
-	
-	public static AbstractParserTarget FLASH = new AbstractParserTarget(Util.newArrayListOfValues("flash"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Flash.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Flash.class);
-		}
-	};
-	
-	public static AbstractParserTarget JESS = new AbstractParserTarget(Util.newArrayListOfValues("jess"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Jess.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Jess.class);
-		}
-	};
-	
-	public static AbstractParserTarget ASTRAPI = new AbstractParserTarget(Util.newArrayListOfValues("astrapi"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Astrapi.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Astrapi.class);
-		}
-	};
-	
-	public static AbstractParserTarget VRONTI = new AbstractParserTarget(Util.newArrayListOfValues("vronti"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Vronti.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Vronti.class);
-		}
-	};
-	
-	public static AbstractParserTarget ARION = new AbstractParserTarget(Util.newArrayListOfValues("arion"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Arion.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Arion.class);
-		}
-	};
-	
-	public static AbstractParserTarget MINOTALLYS = new AbstractParserTarget(Util.newArrayListOfValues("minotallys"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Minotallys.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Minotallys.class);
-		}
-	};
-	
-	public static AbstractParserTarget FAE = new AbstractParserTarget(Util.newArrayListOfValues("fae"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Fae.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Fae.class);
-		}
-	};
-	
-	public static AbstractParserTarget SILVIA = new AbstractParserTarget(Util.newArrayListOfValues("silvia"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Silvia.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Silvia.class);
-		}
-	};
-	
-	public static AbstractParserTarget KHEIRON = new AbstractParserTarget(Util.newArrayListOfValues("kheiron"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Kheiron.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Kheiron.class);
-		}
-	};
-	
-	public static AbstractParserTarget KAZIK = new AbstractParserTarget(Util.newArrayListOfValues("kazik"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Kazik.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Kazik.class);
-		}
-	};
-	
-	public static AbstractParserTarget YUI = new AbstractParserTarget(Util.newArrayListOfValues("yui"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Yui.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Yui.class);
-		}
-	};
+		ZIVA(Ziva.class,
+			"ziva"),
 
-	public static AbstractParserTarget NIZHONI = new AbstractParserTarget(Util.newArrayListOfValues("nizhoni"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Nizhoni.class).getDescription();
+		MONICA(Monica.class,
+			"monica"),
+
+		EVELYX(Evelyx.class,
+			"evelyx"),
+
+		DALE(Dale.class,
+			"dale"),
+
+		HEADLESS_HORSEMAN(HeadlessHorseman.class,
+			"headlessHorseman", "headHorse"),
+
+		CERIDWEN(Ceridwen.class,
+			"ceridwen"),
+
+		IMSU(Imsu.class,
+			"imsu"),
+
+		HALE(Hale.class,
+			"hale"),
+
+		PENELOPE(Penelope.class,
+			"penelope"),
+
+		BELLE(Belle.class,
+			"belle"),
+
+		DAPHNE(Daphne.class,
+			"daphne"),
+
+		FARAH(Farah.class,
+			"farah"),
+		CALLIE(Callie.class,
+			"callie");
+
+		private final Class<?extends NPC> character;
+		private final List<String> tags;
+
+		CoreCharacter(Class<?extends NPC> c, String... t) {
+			character = c;
+			tags = List.of(t);
 		}
+
+		@Override
+		public String getId() {
+			return toString();
+		}
+
+		@Override
+		public List<String> getTags() {
+			return tags;
+		}
+
+		@Override
+		public String getDescription() {
+			return Main.game.getNpc(character).getDescription();
+		}
+
 		@Override
 		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Nizhoni.class);
+			return Main.game.getNpc(character);
 		}
-	};
+	}
 
-	public static AbstractParserTarget MORENO = new AbstractParserTarget(Util.newArrayListOfValues("moreno"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Moreno.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Moreno.class);
-		}
-	};
-
-	public static AbstractParserTarget HEATHER = new AbstractParserTarget(Util.newArrayListOfValues("heather"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Heather.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Heather.class);
-		}
-	};
-
-	public static AbstractParserTarget ZIVA = new AbstractParserTarget(Util.newArrayListOfValues("ziva"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Ziva.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Ziva.class);
-		}
-	};
-
-	public static AbstractParserTarget MONICA = new AbstractParserTarget(Util.newArrayListOfValues("monica"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Monica.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Monica.class);
-		}
-	};
-
-	public static AbstractParserTarget EVELYX = new AbstractParserTarget(Util.newArrayListOfValues("evelyx"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Evelyx.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Evelyx.class);
-		}
-	};
-
-	public static AbstractParserTarget DALE = new AbstractParserTarget(Util.newArrayListOfValues("dale"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Dale.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Dale.class);
-		}
-	};
-
-	public static AbstractParserTarget HEADLESS_HORSEMAN = new AbstractParserTarget(Util.newArrayListOfValues("headlessHorseman", "headHorse"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(HeadlessHorseman.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(HeadlessHorseman.class);
-		}
-	};
-
-	public static AbstractParserTarget CERIDWEN = new AbstractParserTarget(Util.newArrayListOfValues("ceridwen"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Ceridwen.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Ceridwen.class);
-		}
-	};
-
-	public static AbstractParserTarget IMSU = new AbstractParserTarget(Util.newArrayListOfValues("imsu"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Imsu.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Imsu.class);
-		}
-	};
-
-	public static AbstractParserTarget HALE = new AbstractParserTarget(Util.newArrayListOfValues("hale"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Hale.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Hale.class);
-		}
-	};
-
-	public static AbstractParserTarget PENELOPE = new AbstractParserTarget(Util.newArrayListOfValues("penelope"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Penelope.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Penelope.class);
-		}
-	};
-
-	public static AbstractParserTarget BELLE = new AbstractParserTarget(Util.newArrayListOfValues("belle"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Belle.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Belle.class);
-		}
-	};
-
-	public static AbstractParserTarget DAPHNE = new AbstractParserTarget(Util.newArrayListOfValues("daphne"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Daphne.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Daphne.class);
-		}
-	};
-
-	public static AbstractParserTarget FARAH = new AbstractParserTarget(Util.newArrayListOfValues("farah"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Farah.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Farah.class);
-		}
-	};
-
-	public static AbstractParserTarget CALLIE = new AbstractParserTarget(Util.newArrayListOfValues("callie"), "") {
-		public String getDescription() {
-			return Main.game.getNpc(Callie.class).getDescription();
-		}
-		@Override
-		public GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList) {
-			return Main.game.getNpc(Callie.class);
-		}
-	};
-
+	CoreCharacter PROLOGUE_MALE = CoreCharacter.PROLOGUE_MALE;
+	CoreCharacter PROLOGUE_FEMALE = CoreCharacter.PROLOGUE_FEMALE;
+	CoreCharacter NPC_MALE = CoreCharacter.NPC_MALE;
+	CoreCharacter NPC_FEMALE = CoreCharacter.NPC_FEMALE;
+	CoreCharacter NPC_ANDROGYNOUS = CoreCharacter.NPC_ANDROGYNOUS;
+	CoreCharacter NPC_TRADER = CoreCharacter.NPC_TRADER;
+	CoreCharacter TEST_NPC = CoreCharacter.TEST_NPC;
+	CoreCharacter LILAYA = CoreCharacter.LILAYA;
+	CoreCharacter ROSE = CoreCharacter.ROSE;
+	CoreCharacter KATE = CoreCharacter.KATE;
+	CoreCharacter RALPH = CoreCharacter.RALPH;
+	CoreCharacter NYAN = CoreCharacter.NYAN;
+	CoreCharacter NYAN_MUM = CoreCharacter.NYAN_MUM;
+	CoreCharacter VICKY = CoreCharacter.VICKY;
+	CoreCharacter PIX = CoreCharacter.PIX;
+	CoreCharacter BRAX = CoreCharacter.BRAX;
+	CoreCharacter CANDI = CoreCharacter.CANDI;
+	CoreCharacter VANESSA = CoreCharacter.VANESSA;
+	CoreCharacter SCARLETT = CoreCharacter.SCARLETT;
+	CoreCharacter HELENA = CoreCharacter.HELENA;
+	CoreCharacter HARPY_BIMBO = CoreCharacter.HARPY_BIMBO;
+	CoreCharacter HARPY_BIMBO_COMPANION = CoreCharacter.HARPY_BIMBO_COMPANION;
+	CoreCharacter HARPY_DOMINANT = CoreCharacter.HARPY_DOMINANT;
+	CoreCharacter HARPY_DOMINANT_COMPANION = CoreCharacter.HARPY_DOMINANT_COMPANION;
+	CoreCharacter HARPY_NYMPHO = CoreCharacter.HARPY_NYMPHO;
+	CoreCharacter HARPY_NYMPHO_COMPANION = CoreCharacter.HARPY_NYMPHO_COMPANION;
+	CoreCharacter PAZU = CoreCharacter.PAZU;
+	CoreCharacter FINCH = CoreCharacter.FINCH;
+	CoreCharacter ZARANIX = CoreCharacter.ZARANIX;
+	CoreCharacter AMBER = CoreCharacter.AMBER;
+	CoreCharacter FELICIA = CoreCharacter.FELICIA;
+	CoreCharacter ARTHUR = CoreCharacter.ARTHUR;
+	CoreCharacter KELLY = CoreCharacter.KELLY;
+	CoreCharacter KATHERINE = CoreCharacter.KATHERINE;
+	CoreCharacter ASHLEY = CoreCharacter.ASHLEY;
+	CoreCharacter WOLFGANG = CoreCharacter.WOLFGANG;
+	CoreCharacter KARL = CoreCharacter.KARL;
+	CoreCharacter ANGEL = CoreCharacter.ANGEL;
+	CoreCharacter BUNNY = CoreCharacter.BUNNY;
+	CoreCharacter LOPPY = CoreCharacter.LOPPY;
+	CoreCharacter LUMI = CoreCharacter.LUMI;
+	CoreCharacter CLAIRE = CoreCharacter.CLAIRE;
+	CoreCharacter SLIME_QUEEN = CoreCharacter.SLIME_QUEEN;
+	CoreCharacter SLIME_GUARD_ICE = CoreCharacter.SLIME_GUARD_ICE;
+	CoreCharacter SLIME_GUARD_FIRE = CoreCharacter.SLIME_GUARD_FIRE;
+	CoreCharacter SLIME_ROYAL_GUARD = CoreCharacter.SLIME_ROYAL_GUARD;
+	CoreCharacter ROXY = CoreCharacter.ROXY;
+	CoreCharacter AXEL = CoreCharacter.AXEL;
+	CoreCharacter EPONA = CoreCharacter.EPONA;
+	CoreCharacter JULES = CoreCharacter.JULES;
+	CoreCharacter KRUGER = CoreCharacter.KRUGER;
+	CoreCharacter KALAHARI = CoreCharacter.KALAHARI;
+	CoreCharacter RENTAL_MOMMY = CoreCharacter.RENTAL_MOMMY;
+	CoreCharacter DADDY = CoreCharacter.DADDY;
+	CoreCharacter IMP_FORTRESS_ALPHA_LEADER = CoreCharacter.IMP_FORTRESS_ALPHA_LEADER;
+	CoreCharacter IMP_FORTRESS_FEMALES_LEADER = CoreCharacter.IMP_FORTRESS_FEMALES_LEADER;
+	CoreCharacter IMP_FORTRESS_MALES_LEADER = CoreCharacter.IMP_FORTRESS_MALES_LEADER;
+	CoreCharacter DARK_SIREN = CoreCharacter.DARK_SIREN;
+	CoreCharacter CITADEL_ARCANIST = CoreCharacter.CITADEL_ARCANIST;
+	CoreCharacter LYSSIETH = CoreCharacter.LYSSIETH;
+	CoreCharacter ELIZABETH = CoreCharacter.ELIZABETH;
+	CoreCharacter VENGAR = CoreCharacter.VENGAR;
+	CoreCharacter SHADOW = CoreCharacter.SHADOW;
+	CoreCharacter SILENCE = CoreCharacter.SILENCE;
+	CoreCharacter MURK = CoreCharacter.MURK;
+	CoreCharacter SEAN = CoreCharacter.SEAN;
+	CoreCharacter NATALYA = CoreCharacter.NATALYA;
+	CoreCharacter WES = CoreCharacter.WES;
+	CoreCharacter ELLE = CoreCharacter.ELLE;
+	CoreCharacter KAY = CoreCharacter.KAY;
+	CoreCharacter FLASH = CoreCharacter.FLASH;
+	CoreCharacter JESS = CoreCharacter.JESS;
+	CoreCharacter ASTRAPI = CoreCharacter.ASTRAPI;
+	CoreCharacter VRONTI = CoreCharacter.VRONTI;
+	CoreCharacter ARION = CoreCharacter.ARION;
+	CoreCharacter MINOTALLYS = CoreCharacter.MINOTALLYS;
+	CoreCharacter FAE = CoreCharacter.FAE;
+	CoreCharacter SILVIA = CoreCharacter.SILVIA;
+	CoreCharacter KHEIRON = CoreCharacter.KHEIRON;
+	CoreCharacter KAZIK = CoreCharacter.KAZIK;
+	CoreCharacter YUI = CoreCharacter.YUI;
+	CoreCharacter NIZHONI = CoreCharacter.NIZHONI;
+	CoreCharacter MORENO = CoreCharacter.MORENO;
+	CoreCharacter HEATHER = CoreCharacter.HEATHER;
+	CoreCharacter ZIVA = CoreCharacter.ZIVA;
+	CoreCharacter MONICA = CoreCharacter.MONICA;
+	CoreCharacter EVELYX = CoreCharacter.EVELYX;
+	CoreCharacter DALE = CoreCharacter.DALE;
+	CoreCharacter HEADLESS_HORSEMAN = CoreCharacter.HEADLESS_HORSEMAN;
+	CoreCharacter CERIDWEN = CoreCharacter.CERIDWEN;
+	CoreCharacter IMSU = CoreCharacter.IMSU;
+	CoreCharacter HALE = CoreCharacter.HALE;
+	CoreCharacter PENELOPE = CoreCharacter.PENELOPE;
+	CoreCharacter BELLE = CoreCharacter.BELLE;
+	CoreCharacter DAPHNE = CoreCharacter.DAPHNE;
+	CoreCharacter FARAH = CoreCharacter.FARAH;
+	CoreCharacter CALLIE = CoreCharacter.CALLIE;
 
 	@Deprecated
 	public static List<ParserTarget> getAllParserTargets() {
@@ -1474,7 +850,8 @@ public interface ParserTarget {
 			super(s->s);
 			for(var v : Special.values())
 				add(v.getId(),v);
-			addFields(ParserTarget.class,AbstractParserTarget.class,(k,v)->v.id=k);
+			for(var v : CoreCharacter.values())
+				add(v.getId(),v);
 			coreParserTargets.addAll(list());
 		}
 	}
