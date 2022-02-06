@@ -4844,8 +4844,6 @@ public class ClothingType {
 	private static Map<AbstractClothingType, String> clothingToIdMap = new HashMap<>();
 	private static Map<String, AbstractClothingType> idToClothingMap = new HashMap<>();
 
-	private static Map<String, String> oldIdConversionMap = new HashMap<>();
-
 	public static AbstractClothingType getClothingTypeFromId(String id) {
 		return getClothingTypeFromId(id, null);
 	}
@@ -4853,9 +4851,7 @@ public class ClothingType {
 	public static AbstractClothingType getClothingTypeFromId(String id, String slotHint) {
 //		System.out.print("ID: "+id);
 		
-		if(oldIdConversionMap.containsKey(id)) {
-			id = oldIdConversionMap.get(id);
-		}
+		id = convertOldId(id);
 		
 		Map<String, AbstractClothingType> choiceMap = idToClothingMap;
 		if (slotHint!=null && !slotHint.isEmpty()) {
@@ -4889,169 +4885,170 @@ public class ClothingType {
 		return suitableFeminineClothing;
 	}
 
-	static {
+	private static String convertOldId(String id) {
+		switch(id) {
 		// Clothing set items:
-		oldIdConversionMap.put("NECK_SNOWFLAKE_NECKLACE", "innoxia_elemental_snowflake_necklace");
-		oldIdConversionMap.put("PIERCING_EAR_SNOW_FLAKES", "innoxia_elemental_piercing_ear_snowflakes");
-		oldIdConversionMap.put("PIERCING_NOSE_SNOWFLAKE_STUD", "innoxia_elemental_piercing_nose_snowflake");
+		case "NECK_SNOWFLAKE_NECKLACE": return "innoxia_elemental_snowflake_necklace";
+		case "PIERCING_EAR_SNOW_FLAKES": return "innoxia_elemental_piercing_ear_snowflakes";
+		case "PIERCING_NOSE_SNOWFLAKE_STUD": return "innoxia_elemental_piercing_nose_snowflake";
 
-		oldIdConversionMap.put("NECK_SUN_NECKLACE", "innoxia_elemental_sun_necklace");
-		oldIdConversionMap.put("PIERCING_EAR_SUN", "innoxia_elemental_piercing_ear_sun");
-		oldIdConversionMap.put("PIERCING_NOSE_SUN_STUD", "innoxia_elemental_piercing_nose_sun");
+		case "NECK_SUN_NECKLACE": return "innoxia_elemental_sun_necklace";
+		case "PIERCING_EAR_SUN": return "innoxia_elemental_piercing_ear_sun";
+		case "PIERCING_NOSE_SUN_STUD": return "innoxia_elemental_piercing_nose_sun";
 
-		oldIdConversionMap.put("CATTLE_NECK_COWBELL_COLLAR", "innoxia_cattle_cowbell_collar");
-		oldIdConversionMap.put("CATTLE_PIERCING_EAR_TAGS", "innoxia_cattle_piercing_ear_tag");
-		oldIdConversionMap.put("CATTLE_PIERCING_NOSE_BOVINE_RING", "innoxia_cattle_piercing_nose_ring");
+		case "CATTLE_NECK_COWBELL_COLLAR": return "innoxia_cattle_cowbell_collar";
+		case "CATTLE_PIERCING_EAR_TAGS": return "innoxia_cattle_piercing_ear_tag";
+		case "CATTLE_PIERCING_NOSE_BOVINE_RING": return "innoxia_cattle_piercing_nose_ring";
 
-		oldIdConversionMap.put("SOCK_RAINBOW_STOCKINGS", "innoxia_rainbow_stockings");
-		oldIdConversionMap.put("HAND_RAINBOW_FINGERLESS_GLOVES", "innoxia_rainbow_gloves");
+		case "SOCK_RAINBOW_STOCKINGS": return "innoxia_rainbow_stockings";
+		case "HAND_RAINBOW_FINGERLESS_GLOVES": return "innoxia_rainbow_gloves";
 
-		oldIdConversionMap.put("BDSM_CHASTITY_CAGE", "innoxia_bdsm_chastity_cage");
-		oldIdConversionMap.put("BDSM_PENIS_STRAPON", "innoxia_bdsm_penis_strapon");
-		oldIdConversionMap.put("innoxia_bdsmBracelets_wrist_bracelets", "innoxia_bdsm_wrist_bracelets");
-		oldIdConversionMap.put("BDSM_BALLGAG", "innoxia_bdsm_ballgag");
-		oldIdConversionMap.put("BDSM_RINGGAG", "innoxia_bdsm_ringgag");
-		oldIdConversionMap.put("BDSM_SPREADER_BAR", "innoxia_bdsm_spreaderbar");
-		oldIdConversionMap.put("BDSM_CHOKER", "innoxia_bdsm_choker");
-		oldIdConversionMap.put("BDSM_WRIST_RESTRAINTS", "innoxia_bdsm_wrist_restraints");
-		oldIdConversionMap.put("BDSM_CHASTITY_BELT", "innoxia_bdsm_chastity_belt");
-		oldIdConversionMap.put("BDSM_CHASTITY_BELT_FULL", "innoxia_bdsm_chastity_belt_full");
-		oldIdConversionMap.put("BDSM_KARADA", "innoxia_bdsm_karada");
+		case "BDSM_CHASTITY_CAGE": return "innoxia_bdsm_chastity_cage";
+		case "BDSM_PENIS_STRAPON": return "innoxia_bdsm_penis_strapon";
+		case "innoxia_bdsmBracelets_wrist_bracelets": return "innoxia_bdsm_wrist_bracelets";
+		case "BDSM_BALLGAG": return "innoxia_bdsm_ballgag";
+		case "BDSM_RINGGAG": return "innoxia_bdsm_ringgag";
+		case "BDSM_SPREADER_BAR": return "innoxia_bdsm_spreaderbar";
+		case "BDSM_CHOKER": return "innoxia_bdsm_choker";
+		case "BDSM_WRIST_RESTRAINTS": return "innoxia_bdsm_wrist_restraints";
+		case "BDSM_CHASTITY_BELT": return "innoxia_bdsm_chastity_belt";
+		case "BDSM_CHASTITY_BELT_FULL": return "innoxia_bdsm_chastity_belt_full";
+		case "BDSM_KARADA": return "innoxia_bdsm_karada";
 
-		oldIdConversionMap.put("WITCH_HAT", "innoxia_witch_witch_hat");
-		oldIdConversionMap.put("WITCH_DRESS", "innoxia_witch_witch_dress");
-		oldIdConversionMap.put("WITCH_BOOTS", "innoxia_witch_witch_boots");
-		oldIdConversionMap.put("WITCH_BOOTS_THIGH_HIGH", "innoxia_witch_witch_boots_thigh_high");
+		case "WITCH_HAT": return "innoxia_witch_witch_hat";
+		case "WITCH_DRESS": return "innoxia_witch_witch_dress";
+		case "WITCH_BOOTS": return "innoxia_witch_witch_boots";
+		case "WITCH_BOOTS_THIGH_HIGH": return "innoxia_witch_witch_boots_thigh_high";
 
-		oldIdConversionMap.put("EYES_SAFETY_GOGGLES", "innoxia_scientist_safety_goggles");
-		oldIdConversionMap.put("SCIENTIST_EYES_SAFETY_GOGGLES", "innoxia_scientist_safety_goggles");
-		oldIdConversionMap.put("SCIENTIST_TORSO_OVER_LAB_COAT", "innoxia_scientist_lab_coat");
+		case "EYES_SAFETY_GOGGLES": return "innoxia_scientist_safety_goggles";
+		case "SCIENTIST_EYES_SAFETY_GOGGLES": return "innoxia_scientist_safety_goggles";
+		case "SCIENTIST_TORSO_OVER_LAB_COAT": return "innoxia_scientist_lab_coat";
 
-		oldIdConversionMap.put("AMBERS_BITCH_CHOKER", "innoxia_neck_ambers_bitch_collar");
+		case "AMBERS_BITCH_CHOKER": return "innoxia_neck_ambers_bitch_collar";
 
-		oldIdConversionMap.put("KIMONO_HAIR_KANZASHI", "innoxia_japanese_kanzashi");
-		oldIdConversionMap.put("KIMONO_DRESS", "innoxia_japanese_kimono");
-		oldIdConversionMap.put("KIMONO_GETA", "innoxia_japanese_geta");
-		oldIdConversionMap.put("KIMONO_MENS_KIMONO", "innoxia_japanese_mens_kimono");
-		oldIdConversionMap.put("KIMONO_HAORI", "innoxia_japanese_haori");
-		oldIdConversionMap.put("KIMONO_MENS_GETA", "innoxia_japanese_mens_geta");
-
+		case "KIMONO_HAIR_KANZASHI": return "innoxia_japanese_kanzashi";
+		case "KIMONO_DRESS": return "innoxia_japanese_kimono";
+		case "KIMONO_GETA": return "innoxia_japanese_geta";
+		case "KIMONO_MENS_KIMONO": return "innoxia_japanese_mens_kimono";
+		case "KIMONO_HAORI": return "innoxia_japanese_haori";
+		case "KIMONO_MENS_GETA": return "innoxia_japanese_mens_geta";
 		// Standard items:
-		oldIdConversionMap.put("kobolds_belt_leather_belt", "innoxia_hips_leather_belt");
-		oldIdConversionMap.put("PENIS_CONDOM", "innoxia_penis_condom");
+		case "kobolds_belt_leather_belt": return "innoxia_hips_leather_belt";
+		case "PENIS_CONDOM": return "innoxia_penis_condom";
 
-		oldIdConversionMap.put("ANKLE_BRACELET", "innoxia_ankle_anklet");
-		oldIdConversionMap.put("ANKLE_SHIN_GUARDS", "innoxia_ankle_shin_guards");
+		case "ANKLE_BRACELET": return "innoxia_ankle_anklet";
+		case "ANKLE_SHIN_GUARDS": return "innoxia_ankle_shin_guards";
 
-		oldIdConversionMap.put("PIERCING_EAR_RING", "innoxia_piercing_ear_ring");
-		oldIdConversionMap.put("PIERCING_EAR_BASIC_RING", "innoxia_piercing_ear_ring");
-		oldIdConversionMap.put("PIERCING_EAR_HOOPS", "innoxia_piercing_ear_hoops");
-		oldIdConversionMap.put("PIERCING_NOSE_BASIC_RING", "innoxia_piercing_nose_ring");
-		oldIdConversionMap.put("PIERCING_LIP_RINGS", "innoxia_piercing_lip_double_ring");
-		oldIdConversionMap.put("PIERCING_TONGUE_BAR", "innoxia_piercing_basic_barbell");
-		oldIdConversionMap.put("PIERCING_NIPPLE_BARS", "innoxia_piercing_basic_barbell_pair");
-		oldIdConversionMap.put("PIERCING_NAVEL_GEM", "innoxia_piercing_gemstone_barbell");
-		oldIdConversionMap.put("PIERCING_VAGINA_BARBELL_RING", "innoxia_piercing_ringed_barbell");
-		oldIdConversionMap.put("PIERCING_PENIS_RING", "innoxia_piercing_penis_ring");
+		case "PIERCING_EAR_RING": return "innoxia_piercing_ear_ring";
+		case "PIERCING_EAR_BASIC_RING": return "innoxia_piercing_ear_ring";
+		case "PIERCING_EAR_HOOPS": return "innoxia_piercing_ear_hoops";
+		case "PIERCING_NOSE_BASIC_RING": return "innoxia_piercing_nose_ring";
+		case "PIERCING_LIP_RINGS": return "innoxia_piercing_lip_double_ring";
+		case "PIERCING_TONGUE_BAR": return "innoxia_piercing_basic_barbell";
+		case "PIERCING_NIPPLE_BARS": return "innoxia_piercing_basic_barbell_pair";
+		case "PIERCING_NAVEL_GEM": return "innoxia_piercing_gemstone_barbell";
+		case "PIERCING_VAGINA_BARBELL_RING": return "innoxia_piercing_ringed_barbell";
+		case "PIERCING_PENIS_RING": return "innoxia_piercing_penis_ring";
 
-		oldIdConversionMap.put("EYES_GLASSES", "innoxia_eye_glasses");
-		oldIdConversionMap.put("EYES_AVIATORS", "innoxia_eye_aviators");
-		oldIdConversionMap.put("EYES_PATCH", "innoxia_eye_patch");
+		case "EYES_GLASSES": return "innoxia_eye_glasses";
+		case "EYES_AVIATORS": return "innoxia_eye_aviators";
+		case "EYES_PATCH": return "innoxia_eye_patch";
 
-		oldIdConversionMap.put("MOUTH_BANDANA", "innoxia_mouth_bandana");
+		case "MOUTH_BANDANA": return "innoxia_mouth_bandana";
 
-		oldIdConversionMap.put("HEAD_CHEATERS_CIRCLET", "innoxia_head_circlet");
-		oldIdConversionMap.put("HEAD_CIRCLET", "innoxia_head_circlet");
-		oldIdConversionMap.put("HEAD_TIARA", "innoxia_head_tiara");
-		oldIdConversionMap.put("HEAD_CAP", "innoxia_head_cap");
-		oldIdConversionMap.put("HEAD_HEADBAND", "innoxia_head_headband");
-		oldIdConversionMap.put("HEAD_HEADBAND_BOW", "innoxia_head_headband_bow");
-		oldIdConversionMap.put("HEAD_SWEATBAND", "innoxia_head_sweatband");
-		oldIdConversionMap.put("HEAD_COWBOY_HAT", "innoxia_head_cowboy_hat");
-		oldIdConversionMap.put("HEAD_ANTLER_HEADBAND", "innoxia_head_antler_headband");
-		oldIdConversionMap.put("HEAD_SLIME_QUEENS_TIARA", "innoxia_head_slime_queens_tiara");
+		case "HEAD_CHEATERS_CIRCLET": return "innoxia_head_circlet";
+		case "HEAD_CIRCLET": return "innoxia_head_circlet";
+		case "HEAD_TIARA": return "innoxia_head_tiara";
+		case "HEAD_CAP": return "innoxia_head_cap";
+		case "HEAD_HEADBAND": return "innoxia_head_headband";
+		case "HEAD_HEADBAND_BOW": return "innoxia_head_headband_bow";
+		case "HEAD_SWEATBAND": return "innoxia_head_sweatband";
+		case "HEAD_COWBOY_HAT": return "innoxia_head_cowboy_hat";
+		case "HEAD_ANTLER_HEADBAND": return "innoxia_head_antler_headband";
+		case "HEAD_SLIME_QUEENS_TIARA": return "innoxia_head_slime_queens_tiara";
 
-		oldIdConversionMap.put("HAND_ELBOWLENGTH_GLOVES", "innoxia_hand_elbow_length_gloves");
-		oldIdConversionMap.put("HAND_GLOVES", "innoxia_hand_gloves");
-		oldIdConversionMap.put("HAND_FINGERLESS_GLOVES", "innoxia_hand_fingerless_gloves");
-		oldIdConversionMap.put("HAND_WRAPS", "innoxia_hand_wraps");
-		oldIdConversionMap.put("HAND_FISHNET_GLOVES", "innoxia_hand_fishnet_gloves");
+		case "HAND_ELBOWLENGTH_GLOVES": return "innoxia_hand_elbow_length_gloves";
+		case "HAND_GLOVES": return "innoxia_hand_gloves";
+		case "HAND_FINGERLESS_GLOVES": return "innoxia_hand_fingerless_gloves";
+		case "HAND_WRAPS": return "innoxia_hand_wraps";
+		case "HAND_FISHNET_GLOVES": return "innoxia_hand_fishnet_gloves";
 
-		oldIdConversionMap.put("FINGER_RING", "innoxia_finger_ring");
+		case "FINGER_RING": return "innoxia_finger_ring";
 
-		oldIdConversionMap.put("NECK_ANKH_NECKLACE", "innoxia_neck_ankh_necklace");
-		oldIdConversionMap.put("NECK_BELL_COLLAR", "innoxia_neck_bell_collar");
-		oldIdConversionMap.put("NECK_COLLAR_BOWTIE", "innoxia_neck_collar_bowtie");
-		oldIdConversionMap.put("NECK_HEART_NECKLACE", "innoxia_neck_heart_necklace");
-		oldIdConversionMap.put("NECK_SCARF", "innoxia_neck_scarf");
-		oldIdConversionMap.put("NECK_TIE", "innoxia_neck_tie");
-		oldIdConversionMap.put("NECK_BREEDER_COLLAR", "innoxia_neck_breeder_collar");
-		oldIdConversionMap.put("NECK_SLAVE_COLLAR", "innoxia_bdsm_metal_collar");
+		case "NECK_ANKH_NECKLACE": return "innoxia_neck_ankh_necklace";
+		case "NECK_BELL_COLLAR": return "innoxia_neck_bell_collar";
+		case "NECK_COLLAR_BOWTIE": return "innoxia_neck_collar_bowtie";
+		case "NECK_HEART_NECKLACE": return "innoxia_neck_heart_necklace";
+		case "NECK_SCARF": return "innoxia_neck_scarf";
+		case "NECK_TIE": return "innoxia_neck_tie";
+		case "NECK_BREEDER_COLLAR": return "innoxia_neck_breeder_collar";
+		case "NECK_SLAVE_COLLAR": return "innoxia_bdsm_metal_collar";
 
-		oldIdConversionMap.put("CHEST_LACY_PLUNGE_BRA", "innoxia_chest_lacy_plunge_bra");
+		case "CHEST_LACY_PLUNGE_BRA": return "innoxia_chest_lacy_plunge_bra";
 
-		oldIdConversionMap.put("LEG_SKIRT", "innoxia_leg_skirt");
-		oldIdConversionMap.put("LEG_PENCIL_SKIRT", "innoxia_leg_pencil_skirt");
-		oldIdConversionMap.put("LEG_MINI_SKIRT", "innoxia_leg_mini_skirt");
-		oldIdConversionMap.put("LEG_MICRO_SKIRT_PLEATED", "innoxia_leg_micro_skirt_pleated");
-		oldIdConversionMap.put("LEG_MICRO_SKIRT_BELTED", "innoxia_leg_micro_skirt_belted");
-		oldIdConversionMap.put("LEG_SHORTS", "innoxia_leg_shorts");
-		oldIdConversionMap.put("LEG_BIKE_SHORTS", "innoxia_leg_bike_shorts");
-		oldIdConversionMap.put("LEG_SPORT_SHORTS", "innoxia_leg_sport_shorts");
-		oldIdConversionMap.put("LEG_HOTPANTS", "innoxia_leg_hotpants");
-		oldIdConversionMap.put("LEG_TIGHT_TROUSERS", "innoxia_leg_tight_jeans");
-		oldIdConversionMap.put("LEG_JEANS", "innoxia_leg_jeans");
-		oldIdConversionMap.put("LEG_TROUSERS", "innoxia_leg_trousers");
-		oldIdConversionMap.put("LEG_CARGO_TROUSERS", "innoxia_leg_cargo_trousers");
-		oldIdConversionMap.put("LEG_YOGA_PANTS", "innoxia_leg_yoga_pants");
-		oldIdConversionMap.put("LEG_ASSLESS_CHAPS", "innoxia_leg_assless_chaps");
-		oldIdConversionMap.put("LEG_CROTCHLESS_CHAPS", "innoxia_leg_crotchless_chaps");
+		case "LEG_SKIRT": return "innoxia_leg_skirt";
+		case "LEG_PENCIL_SKIRT": return "innoxia_leg_pencil_skirt";
+		case "LEG_MINI_SKIRT": return "innoxia_leg_mini_skirt";
+		case "LEG_MICRO_SKIRT_PLEATED": return "innoxia_leg_micro_skirt_pleated";
+		case "LEG_MICRO_SKIRT_BELTED": return "innoxia_leg_micro_skirt_belted";
+		case "LEG_SHORTS": return "innoxia_leg_shorts";
+		case "LEG_BIKE_SHORTS": return "innoxia_leg_bike_shorts";
+		case "LEG_SPORT_SHORTS": return "innoxia_leg_sport_shorts";
+		case "LEG_HOTPANTS": return "innoxia_leg_hotpants";
+		case "LEG_TIGHT_TROUSERS": return "innoxia_leg_tight_jeans";
+		case "LEG_JEANS": return "innoxia_leg_jeans";
+		case "LEG_TROUSERS": return "innoxia_leg_trousers";
+		case "LEG_CARGO_TROUSERS": return "innoxia_leg_cargo_trousers";
+		case "LEG_YOGA_PANTS": return "innoxia_leg_yoga_pants";
+		case "LEG_ASSLESS_CHAPS": return "innoxia_leg_assless_chaps";
+		case "LEG_CROTCHLESS_CHAPS": return "innoxia_leg_crotchless_chaps";
 
-		oldIdConversionMap.put("GROIN_LACY_PANTIES", "innoxia_groin_lacy_panties");
+		case "GROIN_LACY_PANTIES": return "innoxia_groin_lacy_panties";
 
-		oldIdConversionMap.put("FOOT_ANKLE_BOOTS", "innoxia_foot_ankle_boots");
-		oldIdConversionMap.put("FOOT_CHELSEA_BOOTS", "innoxia_foot_chelsea_boots");
-		oldIdConversionMap.put("FOOT_HEELS", "innoxia_foot_heels");
-		oldIdConversionMap.put("FOOT_LOW_TOP_SKATER_SHOES", "innoxia_foot_low_top_skater_shoes");
-		oldIdConversionMap.put("FOOT_MENS_SMART_SHOES", "innoxia_foot_mens_smart_shoes");
-		oldIdConversionMap.put("FOOT_PLATFORM_BOOTS", "innoxia_foot_platform_boots");
-		oldIdConversionMap.put("FOOT_STILETTO_HEELS", "innoxia_foot_stiletto_heels");
-		oldIdConversionMap.put("FOOT_THIGH_HIGH_BOOTS", "innoxia_foot_thigh_high_boots");
-		oldIdConversionMap.put("FOOT_TRAINERS", "innoxia_foot_trainers");
-		oldIdConversionMap.put("FOOT_WORK_BOOTS", "innoxia_foot_work_boots");
+		case "FOOT_ANKLE_BOOTS": return "innoxia_foot_ankle_boots";
+		case "FOOT_CHELSEA_BOOTS": return "innoxia_foot_chelsea_boots";
+		case "FOOT_HEELS": return "innoxia_foot_heels";
+		case "FOOT_LOW_TOP_SKATER_SHOES": return "innoxia_foot_low_top_skater_shoes";
+		case "FOOT_MENS_SMART_SHOES": return "innoxia_foot_mens_smart_shoes";
+		case "FOOT_PLATFORM_BOOTS": return "innoxia_foot_platform_boots";
+		case "FOOT_STILETTO_HEELS": return "innoxia_foot_stiletto_heels";
+		case "FOOT_THIGH_HIGH_BOOTS": return "innoxia_foot_thigh_high_boots";
+		case "FOOT_TRAINERS": return "innoxia_foot_trainers";
+		case "FOOT_WORK_BOOTS": return "innoxia_foot_work_boots";
 
-		oldIdConversionMap.put("TORSO_TSHIRT", "innoxia_torso_tshirt");
-		oldIdConversionMap.put("TORSO_OXFORD_SHIRT", "innoxia_torso_long_sleeved_shirt");
-		oldIdConversionMap.put("TORSO_SHORT_SLEEVE_SHIRT", "innoxia_torso_short_sleeved_shirt");
-		oldIdConversionMap.put("TORSO_BLOUSE", "innoxia_torso_blouse");
+		case "TORSO_TSHIRT": return "innoxia_torso_tshirt";
+		case "TORSO_OXFORD_SHIRT": return "innoxia_torso_long_sleeved_shirt";
+		case "TORSO_SHORT_SLEEVE_SHIRT": return "innoxia_torso_short_sleeved_shirt";
+		case "TORSO_BLOUSE": return "innoxia_torso_blouse";
 
-
-		oldIdConversionMap.put("STOMACH_LOWBACK_BODY", "innoxia_stomach_lowback_body");
-		oldIdConversionMap.put("STOMACH_UNDERBUST_CORSET", "innoxia_stomach_underbust_corset");
-		oldIdConversionMap.put("STOMACH_OVERBUST_CORSET", "innoxia_stomach_overbust_corset");
-		oldIdConversionMap.put("STOMACH_SARASHI", "innoxia_stomach_sarashi");
-
+		case "STOMACH_LOWBACK_BODY": return "innoxia_stomach_lowback_body";
+		case "STOMACH_UNDERBUST_CORSET": return "innoxia_stomach_underbust_corset";
+		case "STOMACH_OVERBUST_CORSET": return "innoxia_stomach_overbust_corset";
+		case "STOMACH_SARASHI": return "innoxia_stomach_sarashi";
 		//TODO
 
-		oldIdConversionMap.put("TORSO_OVER_SUIT_JACKET", "innoxia_torsoOver_suit_jacket");
-		oldIdConversionMap.put("TORSO_OVER_WOMENS_LEATHER_JACKET", "innoxia_torsoOver_womens_leather_jacket");
+		case "TORSO_OVER_SUIT_JACKET": return "innoxia_torsoOver_suit_jacket";
+		case "TORSO_OVER_WOMENS_LEATHER_JACKET": return "innoxia_torsoOver_womens_leather_jacket";
 
 
-		oldIdConversionMap.put("SOCK_SOCKS", "innoxia_sock_socks");
-		oldIdConversionMap.put("SOCK_TRAINER_SOCKS", "innoxia_sock_trainer_socks");
-		oldIdConversionMap.put("SOCK_KNEEHIGH_SOCKS", "innoxia_sock_kneehigh_socks");
-		oldIdConversionMap.put("SOCK_STOCKINGS", "innoxia_sock_stockings");
-		oldIdConversionMap.put("SOCK_THIGHHIGH_SOCKS", "innoxia_sock_thighhigh_socks");
-		oldIdConversionMap.put("SOCK_THIGHHIGH_SOCKS_STRIPED", "innoxia_sock_thighhigh_socks_striped");
-		oldIdConversionMap.put("SOCK_TIGHTS", "innoxia_sock_pantyhose");
-		oldIdConversionMap.put("SOCK_FISHNET_STOCKINGS", "innoxia_sock_fishnets");
-		oldIdConversionMap.put("SOCK_TOELESS_STRIPED_STOCKINGS", "innoxia_sock_toeless_striped_stockings");
+		case "SOCK_SOCKS": return "innoxia_sock_socks";
+		case "SOCK_TRAINER_SOCKS": return "innoxia_sock_trainer_socks";
+		case "SOCK_KNEEHIGH_SOCKS": return "innoxia_sock_kneehigh_socks";
+		case "SOCK_STOCKINGS": return "innoxia_sock_stockings";
+		case "SOCK_THIGHHIGH_SOCKS": return "innoxia_sock_thighhigh_socks";
+		case "SOCK_THIGHHIGH_SOCKS_STRIPED": return "innoxia_sock_thighhigh_socks_striped";
+		case "SOCK_TIGHTS": return "innoxia_sock_pantyhose";
+		case "SOCK_FISHNET_STOCKINGS": return "innoxia_sock_fishnets";
+		case "SOCK_TOELESS_STRIPED_STOCKINGS": return "innoxia_sock_toeless_striped_stockings";
 
-		oldIdConversionMap.put("innoxia_insertableVibrator_insertable_vibrator", "innoxia_vagina_insertable_dildo");
+		case "innoxia_insertableVibrator_insertable_vibrator": return "innoxia_vagina_insertable_dildo";
 
-		oldIdConversionMap.put("dsg_eep_servequipset_enfdjacket_pc", "dsg_eep_servequipset_enfdjacket");
+		case "dsg_eep_servequipset_enfdjacket_pc": return "dsg_eep_servequipset_enfdjacket";
+}
+return id;
+	}
 
-
+	static {
 		commonClothingMap = new EnumMap<>(InventorySlot.class);
 		commonClothingMapFemale = new EnumMap<>(InventorySlot.class);
 		commonClothingMapMale = new EnumMap<>(InventorySlot.class);
