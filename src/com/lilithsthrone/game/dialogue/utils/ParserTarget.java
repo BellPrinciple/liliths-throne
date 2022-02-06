@@ -114,6 +114,14 @@ import com.lilithsthrone.utils.Util;
  */
 public interface ParserTarget {
 
+	String getId();
+
+	List<String> getTags();
+
+	String getDescription();
+
+	GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList);
+
 	public static AbstractParserTarget STYLE = new AbstractParserTarget(Util.newArrayListOfValues(
 			"style",
 			"game",
