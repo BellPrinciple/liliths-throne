@@ -32,7 +32,6 @@ import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
@@ -58,10 +57,11 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.9.5
  * @author Innoxia, BlazingMagpie@gmail.com (or ping BlazingMagpie in Discord), Pimgd
  */
-public abstract class AbstractClothingType implements AbstractCoreType {
+public abstract class AbstractClothingType implements ClothingType {
 	
 	public static final Colour DEFAULT_COLOUR_VALUE = PresetColour.CLOTHING_BLACK;
-	
+
+	String id;
 	private String determiner;
 	private String name;
 	private String namePlural;
@@ -1291,7 +1291,7 @@ public abstract class AbstractClothingType implements AbstractCoreType {
 
 	
 	public String getId() {
-		return ClothingType.getIdFromClothingType(this);
+		return id;
 	}
 
 	public int getBaseValue() {
