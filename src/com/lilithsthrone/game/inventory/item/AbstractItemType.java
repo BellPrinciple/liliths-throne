@@ -21,7 +21,6 @@ import com.lilithsthrone.controller.xmlParsing.XMLMissingTagException;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
@@ -37,8 +36,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.0
  * @author Innoxia
  */
-public abstract class AbstractItemType implements AbstractCoreType {
-	
+public abstract class AbstractItemType implements ItemType {
+
+	String id;
 	private String determiner;
 	private String name;
 	private String namePlural;
@@ -355,9 +355,9 @@ public abstract class AbstractItemType implements AbstractCoreType {
 		result = 31 * result + getEffects().hashCode();
 		return result;
 	}
-	
+
 	public String getId() {
-		return ItemType.getItemToIdMap().get(this);
+		return id;
 	}
 
 	public boolean isMod() {
