@@ -105,7 +105,6 @@ import com.lilithsthrone.game.character.npc.submission.Takahashi;
 import com.lilithsthrone.game.character.npc.submission.Vengar;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Table;
-import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.1.69.9
@@ -796,7 +795,16 @@ public interface ParserTarget {
 	 * Adds an associated between the tag and the target for parsing.
 	 */
 	public static void addAdditionalParserTarget(String tag, NPC target) {
-		var newParserTarget = new AbstractParserTarget(Util.newArrayListOfValues(tag), "") {
+		var newParserTarget = new ParserTarget() {
+			@Override
+			public String getId() {
+				return tag;
+			}
+			@Override
+			public List<String> getTags() {
+				return List.of(tag);
+			}
+			@Override
 			public String getDescription() {
 				return target.getDescription();
 			}
