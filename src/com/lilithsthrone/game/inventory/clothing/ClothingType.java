@@ -11,19 +11,26 @@ import java.util.stream.Collectors;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
+import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
+import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
+import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.SetBonus;
+import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
+import com.lilithsthrone.main.Main;
+import com.lilithsthrone.rendering.Pattern;
 import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -33,6 +40,178 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @author Innoxia
  */
 public interface ClothingType extends AbstractCoreType {
+
+	String getId();
+
+	int getBaseValue();
+
+	String equipText(GameCharacter clothingOwner, GameCharacter clothingEquipper, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects);
+
+	String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToUnequipFrom, boolean rough, AbstractClothing clothing, boolean applyEffects);
+
+	String displaceText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotClothingIsEquippedTo, DisplacementType dt, boolean rough);
+
+	String replaceText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotClothingIsEquippedTo, DisplacementType dt, boolean rough);
+
+	boolean isAppendColourName();
+
+	String getDeterminer();
+
+	Boolean isPlural();
+
+	String getName();
+
+	String getNamePlural();
+
+	String getDescription();
+
+	String getAuthorDescription();
+
+	int getFemininityMinimum();
+
+	int getFemininityMaximum();
+
+	Femininity getFemininityRestriction();
+
+	@Deprecated
+	default InventorySlot getSlot() {
+		return getEquipSlots().get(0);
+	}
+
+	List<InventorySlot> getEquipSlots();
+
+	/**
+	 * <b>You should probably be using AbstractClothing's version of this!</b>
+	 */
+	default boolean isConcealsSlot(GameCharacter character, InventorySlot slotToCheck) {
+		return Main.game.getItemGen().generateClothing((AbstractClothingType)this).isConcealsSlot(character, getEquipSlots().get(0), slotToCheck);
+	}
+
+	/**
+	 * <b>You should probably be using AbstractClothing's version of this!</b>
+	 */
+	default boolean isConcealsCoverableArea(GameCharacter character, CoverableArea area) {
+		return Main.game.getItemGen().generateClothing((AbstractClothingType)this).isConcealsCoverableArea(character, getEquipSlots().get(0), area);
+	}
+
+	String getPathName();
+
+	String getPathNameEquipped(InventorySlot invSlot);
+
+	SetBonus getClothingSet();
+
+	ColourReplacement getColourReplacement(int index);
+
+	List<ColourReplacement> getColourReplacements();
+
+	String getSVGImage();
+
+	String getSVGImageRandomColour(boolean randomPrimary, boolean randomSecondary, boolean randomTertiary);
+
+	/**
+	 * @param colours This needs to have at least one entry.
+	 */
+	String getSVGImage(InventorySlot slotEquippedTo, List<Colour> colours, String pattern, List<Colour> patternColours, Map<String,String> stickers);
+
+	/**
+	 * @param character The character this clothing is equipped to.
+	 * @param colours This needs to have at least one entry.
+	 */
+	String getSVGEquippedImage(GameCharacter character, InventorySlot slotEquippedTo, List<Colour> colours, String pattern, List<Colour> patternColours, Map<String,String> stickers);
+
+	boolean isPatternAvailable();
+
+	float getPatternChance();
+
+	List<Pattern> getDefaultPatterns();
+
+	ColourReplacement getPatternColourReplacement(int index);
+
+	List<ColourReplacement> getPatternColourReplacements();
+
+	Map<StickerCategory,List<Sticker>> getStickers();
+
+	Rarity getRarity();
+
+	List<ItemEffect> getEffects();
+
+	default boolean isAbleToBeSold() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	default boolean isAbleToBeDropped() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	float getPhysicalResistance();
+
+	// Enchantments:
+
+	default int getEnchantmentLimit() {
+		return 100;
+	}
+
+	default AbstractItemEffectType getEnchantmentEffect() {
+		return ItemEffectType.CLOTHING;
+	}
+
+	default AbstractClothingType getEnchantmentItemType(List<ItemEffect> effects) {
+		return (AbstractClothingType)this;
+	}
+
+	List<ItemTag> getItemTags(InventorySlot slotEquippedTo);
+
+	default List<ItemTag> getDefaultItemTags() {
+		return getItemTags(getEquipSlots().get(0));
+	}
+
+	default boolean isDefaultSlotCondom(InventorySlot slotEquippedTo) {
+		return getItemTags(slotEquippedTo).contains(ItemTag.CONDOM);
+	}
+
+	default boolean isDefaultSlotCondom() {
+		return getDefaultItemTags().contains(ItemTag.CONDOM);
+	}
+
+	boolean isColourDerivedFromPattern();
+
+	// Sex attributes:
+
+	int getPenetrationSelfLength();
+
+	int getPenetrationSelfGirth();
+
+	Set<PenetrationModifier> getPenetrationSelfModifiers();
+
+	int getPenetrationOtherLength();
+
+	int getPenetrationOtherGirth();
+
+	Set<PenetrationModifier> getPenetrationOtherModifiers();
+
+	int getOrificeSelfDepth();
+
+	float getOrificeSelfCapacity();
+
+	int getOrificeSelfElasticity();
+
+	int getOrificeSelfPlasticity();
+
+	int getOrificeSelfWetness();
+
+	Set<OrificeModifier> getOrificeSelfModifiers();
+
+	int getOrificeOtherDepth();
+
+	float getOrificeOtherCapacity();
+
+	int getOrificeOtherElasticity();
+
+	int getOrificeOtherPlasticity();
+
+	int getOrificeOtherWetness();
+
+	Set<OrificeModifier> getOrificeOtherModifiers();
 	
 	private static String braEquipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 		return AbstractClothingType.getEquipDescriptions(clothingOwner, clothingRemover, rough,
