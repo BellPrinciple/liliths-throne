@@ -1793,7 +1793,7 @@ public class DebugDialogue {
 					+ "[<i style='color:"+PresetColour.CLOTHING_BLUE_LIGHT.toWebHexString()+";'>target</i>.<i style='color:"+PresetColour.CLOTHING_PINK_LIGHT.toWebHexString()+";'>command</i>"
 							+ "<i style='color:"+PresetColour.CLOTHING_YELLOW.toWebHexString()+";'>(arguments)</i>]</p>");
 			
-			for(AbstractParserTarget character : ParserTarget.getAllParserTargets()) {
+			for(var character : ParserTarget.table.list()) {
 				UtilText.nodeContentSB.append("<hr/>"
 						+"<p>");
 				
