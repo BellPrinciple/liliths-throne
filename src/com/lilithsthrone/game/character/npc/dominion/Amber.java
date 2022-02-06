@@ -76,7 +76,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.managers.dominion.zaranix.SMAmberDoggyFucked;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
@@ -721,7 +720,7 @@ public class Amber extends NPC {
 	}
 	
 	@Override
-	public boolean isHappyToBeInSlot(AbstractSexPosition position, SexSlot slot, GameCharacter target) {
+	public boolean isHappyToBeInSlot(SexPosition position, SexSlot slot, GameCharacter target) {
 		if(Main.sex.getSexManager().getDominants().containsKey(Main.game.getNpc(Zaranix.class))) {
 			return slot==SexSlotSitting.PERFORMING_ORAL_TWO;
 		}

@@ -13,7 +13,6 @@ import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.main.Main;
@@ -34,7 +33,7 @@ public class SMShower extends SexManagerDefault {
 	/**
 	 * @param startingPosition Need to be either SexPosition.AGAINST_WALL or SexPosition.STANDING.
 	 */
-	public SMShower(AbstractSexPosition startingPosition, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
+	public SMShower(SexPosition startingPosition, Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
 		super(startingPosition,
 				dominants,
 				submissives);
@@ -52,8 +51,8 @@ public class SMShower extends SexManagerDefault {
 	}
 	
 	@Override
-	public List<AbstractSexPosition> getAllowedSexPositions() {
-		List<AbstractSexPosition> positions = Util.newArrayListOfValues(
+	public List<SexPosition> getAllowedSexPositions() {
+		List<SexPosition> positions = Util.newArrayListOfValues(
 				SexPosition.AGAINST_WALL,
 				SexPosition.STANDING);
 		

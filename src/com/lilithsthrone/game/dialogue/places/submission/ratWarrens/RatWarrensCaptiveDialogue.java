@@ -52,7 +52,6 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.managers.OrgasmBehaviour;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
@@ -136,7 +135,7 @@ public class RatWarrensCaptiveDialogue {
 	}
 	
 	private static ResponseSex getPlayerOwnerEscapeSexResponse(boolean lyingDown, DialogueNode node, String nodePathHandjob, String nodePathOral, String nodePathSex) {
-		AbstractSexPosition position;
+		SexPosition position;
 		Value<SexSlot, SexType> murkSexInfo;
 		SexSlot playerSlot;
 		String sexIntroTextPath;
@@ -350,7 +349,7 @@ public class RatWarrensCaptiveDialogue {
 				murkSexPreference, murkOrgasms, startingSexPace, false);
 	}
 	
-	private static SexManagerDefault getBasicSexManager(AbstractSexPosition position,
+	private static SexManagerDefault getBasicSexManager(SexPosition position,
 			Map<GameCharacter, SexSlot> dominants,
 			Map<GameCharacter, SexSlot> submissives,
 			SexType murkSexPreference,

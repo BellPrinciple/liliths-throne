@@ -9,7 +9,7 @@ import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.npc.submission.Axel;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.main.Main;
 
@@ -24,7 +24,7 @@ public class SMAxel extends SexManagerDefault {
 	private List<CoverableArea> exposeAxelAreas;
 	private List<CoverableArea> exposePlayerAreas;
 	
-	public SMAxel(AbstractSexPosition position,
+	public SMAxel(SexPosition position,
 			SexType axelSexTypePreference,
 			List<CoverableArea> exposeAxelAreas,
 			List<CoverableArea> exposePlayerAreas,

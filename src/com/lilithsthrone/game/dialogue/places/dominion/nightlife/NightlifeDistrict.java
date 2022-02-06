@@ -44,7 +44,6 @@ import com.lilithsthrone.game.sex.managers.dominion.gloryHole.SMGloryHole;
 import com.lilithsthrone.game.sex.managers.dominion.toiletStall.SMStallSex;
 import com.lilithsthrone.game.sex.managers.universal.SMGeneric;
 import com.lilithsthrone.game.sex.managers.universal.SMSitting;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
 import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotSitting;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
@@ -1315,7 +1314,7 @@ public class NightlifeDistrict {
 								return false;
 							}
 							@Override
-							public List<AbstractSexPosition> getAllowedSexPositions() {
+							public List<SexPosition> getAllowedSexPositions() {
 								return Util.newArrayListOfValues(SexPosition.SITTING);
 							}
 						};
@@ -1330,7 +1329,7 @@ public class NightlifeDistrict {
 									return false;
 								}
 								@Override
-								public List<AbstractSexPosition> getAllowedSexPositions() {
+								public List<SexPosition> getAllowedSexPositions() {
 									return Util.newArrayListOfValues(SexPosition.STANDING, SexPosition.SITTING);
 								}
 							};
@@ -1375,7 +1374,7 @@ public class NightlifeDistrict {
 								return false;
 							}
 							@Override
-							public List<AbstractSexPosition> getAllowedSexPositions() {
+							public List<SexPosition> getAllowedSexPositions() {
 								return Util.newArrayListOfValues(SexPosition.SITTING);
 							}
 						};
@@ -1391,7 +1390,7 @@ public class NightlifeDistrict {
 										return false;
 									}
 									@Override
-									public List<AbstractSexPosition> getAllowedSexPositions() {
+									public List<SexPosition> getAllowedSexPositions() {
 										return Util.newArrayListOfValues(SexPosition.STANDING, SexPosition.SITTING);
 									}
 								};
@@ -1407,7 +1406,7 @@ public class NightlifeDistrict {
 									return false;
 								}
 								@Override
-								public List<AbstractSexPosition> getAllowedSexPositions() {
+								public List<SexPosition> getAllowedSexPositions() {
 									return Util.newArrayListOfValues(SexPosition.STANDING, SexPosition.SITTING);
 								}
 							};
@@ -4972,7 +4971,7 @@ public class NightlifeDistrict {
 								return false;
 							}
 							@Override
-							public List<AbstractSexPosition> getAllowedSexPositions() {
+							public List<SexPosition> getAllowedSexPositions() {
 								return Util.newArrayListOfValues(SexPosition.SITTING);
 							}
 						};
@@ -4987,7 +4986,7 @@ public class NightlifeDistrict {
 									return false;
 								}
 								@Override
-								public List<AbstractSexPosition> getAllowedSexPositions() {
+								public List<SexPosition> getAllowedSexPositions() {
 									return Util.newArrayListOfValues(SexPosition.STANDING, SexPosition.SITTING);
 								}
 							};

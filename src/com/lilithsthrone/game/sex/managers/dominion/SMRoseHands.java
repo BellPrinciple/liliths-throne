@@ -6,7 +6,7 @@ import java.util.Map;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.SexPositionUnique;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.utils.Util;
@@ -46,7 +46,7 @@ public class SMRoseHands extends SexManagerDefault {
 	}
 
 	@Override
-	public List<AbstractSexPosition> getAllowedSexPositions() {
+	public List<SexPosition> getAllowedSexPositions() {
 		return Util.newArrayListOfValues(
 				SexPositionUnique.HANDS_ROSE);
 	}

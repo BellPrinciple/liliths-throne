@@ -10,7 +10,7 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.sex.SexControl;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.main.Main;
 
@@ -24,7 +24,7 @@ public class SMDominionExpress extends SexManagerDefault {
 	private Map<GameCharacter, SexType> preferences;
 	private Map<GameCharacter, List<CoverableArea>> exposeAtStartOfSexMap;
 	
-	public SMDominionExpress(AbstractSexPosition position,
+	public SMDominionExpress(SexPosition position,
 			Map<GameCharacter, SexSlot> dominants,
 			Map<GameCharacter, SexSlot> submissives,
 			Map<GameCharacter, SexType> preferences,

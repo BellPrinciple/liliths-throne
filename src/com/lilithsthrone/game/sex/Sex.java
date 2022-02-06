@@ -60,7 +60,7 @@ import com.lilithsthrone.game.occupantManagement.MilkingRoom;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
 import com.lilithsthrone.game.sex.managers.SexManagerInterface;
 import com.lilithsthrone.game.sex.managers.SexManagerLoader;
-import com.lilithsthrone.game.sex.positions.AbstractSexPosition;
+import com.lilithsthrone.game.sex.positions.SexPosition;
 import com.lilithsthrone.game.sex.positions.StandardSexActionInteractions;
 import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotGeneric;
@@ -239,7 +239,7 @@ public class Sex {
 	
 	// Positioning, requests, tracking:
 	private Map<GameCharacter, List<SexType>> requestsBlocked;
-	private Map<GameCharacter, List<AbstractSexPosition>> positioningRequestsBlocked;
+	private Map<GameCharacter, List<SexPosition>> positioningRequestsBlocked;
 	private PositioningData positionRequest;
 	private Set<GameCharacter> charactersRequestingCreampie;
 	private Set<GameCharacter> charactersRequestingKnot;
@@ -4184,7 +4184,7 @@ public class Sex {
 	}
 	
 	public boolean isSexTypePossibleViaAvailablePositionsAndSlots(GameCharacter characterPerformingSexType, GameCharacter targetedCharacter, SexType sexType) {
-		for(AbstractSexPosition position : initialSexManager.getAllowedSexPositions()) {
+		for(var position : initialSexManager.getAllowedSexPositions()) {
 			for(Entry<SexSlot, Map<SexSlot, SexActionInteractions>> entry : position.getSlotTargets().entrySet()) {
 				// Check for interactions between characterPerformingSexType -> targetedCharacter
 				if(initialSexManager.isSlotAvailable(characterPerformingSexType, entry.getKey())) {
@@ -4241,17 +4241,17 @@ public class Sex {
 		}
 	}
 	
-	public List<AbstractSexPosition> getPositioningRequestsBlocked(GameCharacter character) {
+	public List<SexPosition> getPositioningRequestsBlocked(GameCharacter character) {
 		return positioningRequestsBlocked.get(character);
 	}
 
-	public void addPositioningRequestsBlocked(GameCharacter character, AbstractSexPosition position) {
+	public void addPositioningRequestsBlocked(GameCharacter character, SexPosition position) {
 		if(!positioningRequestsBlocked.get(character).contains(position)) {
 			positioningRequestsBlocked.get(character).add(position);
 		}
 	}
 	
-	public boolean isPositioningRequestBlocked(GameCharacter character, AbstractSexPosition position) {
+	public boolean isPositioningRequestBlocked(GameCharacter character, SexPosition position) {
 		return positioningRequestsBlocked.get(character).contains(position);
 	}
 
@@ -5664,7 +5664,7 @@ public class Sex {
 		sexCountMap.get(performer).get(partner).put(sexType, sexCountMap.get(performer).get(partner).get(sexType)+1);
 	}
 	
-	public AbstractSexPosition getPosition() {
+	public SexPosition getPosition() {
 		return sexManager.getPosition();
 	}
 
