@@ -1,9 +1,26 @@
 package com.lilithsthrone.game.inventory.weapon;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.combat.DamageType;
+import com.lilithsthrone.game.combat.DamageVariance;
+import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.combat.spells.Spell;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
+import com.lilithsthrone.game.inventory.ColourReplacement;
+import com.lilithsthrone.game.inventory.ItemTag;
+import com.lilithsthrone.game.inventory.Rarity;
+import com.lilithsthrone.game.inventory.SetBonus;
+import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
+import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
+import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.utils.Table;
+import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.colours.Colour;
 
 /**
  * @since 0.1.84
@@ -11,6 +28,198 @@ import com.lilithsthrone.utils.Table;
  * @author Innoxia
  */
 public interface WeaponType extends AbstractCoreType {
+
+	String getId();
+
+	boolean isMod();
+
+	String equipText(GameCharacter character);
+
+	String unequipText(GameCharacter character);
+
+	default String getAttackDescription(GameCharacter character, GameCharacter target, boolean isHit, boolean critical) {
+		if(isHit) {
+			return UtilText.parse(character, target, getHitText(character, target, critical));
+		} else {
+			return UtilText.parse(character, target, getMissText(character, target));
+		}
+	}
+
+	String getHitText(GameCharacter character, GameCharacter target, boolean critical);
+
+	String getMissText(GameCharacter character, GameCharacter target);
+
+	String getOneShotEndTurnRecoveryDescription(GameCharacter character);
+
+	default boolean isAbleToBeUsed(GameCharacter user, GameCharacter target) {
+		return getArcaneCost() <= 0 || user.getEssenceCount() > 0;
+	}
+
+	default String getUnableToBeUsedDescription() {
+		return getArcaneCost() <= 0 ? "" : "You need at least [style.boldBad(one)] [style.boldArcane(arcane essence)] in order to use this weapon!";
+	}
+
+	String applyExtraEffects(GameCharacter user, GameCharacter target, boolean isHit, boolean isCritical);
+
+	int getBaseValue();
+
+	default boolean isUsingUnarmedCalculation() {
+		return getItemTags().contains(ItemTag.WEAPON_UNARMED);
+	}
+
+	boolean isMelee();
+
+	boolean isTwoHanded();
+
+	boolean isOneShot();
+
+	float getOneShotChanceToRecoverAfterTurn();
+
+	float getOneShotChanceToRecoverAfterCombat();
+
+	boolean isAppendDamageName();
+
+	String getDeterminer();
+
+	boolean isPlural();
+
+	String getName();
+
+	String getNamePlural();
+
+	String getAttackDescriptor();
+
+	String getAttackDescriptionPrefix(GameCharacter user, GameCharacter target);
+
+	String getAttackDescription(GameCharacter user, GameCharacter target);
+
+	String getDescription();
+
+	List<String> getExtraEffects();
+
+	String getAuthorDescription();
+
+	Rarity getRarity();
+
+	float getPhysicalResistance();
+
+	SetBonus getClothingSet();
+
+	String getPathName();
+
+	String getEquippedPathName();
+
+	default boolean isEquippedSVGImageDifferent() {
+		return !getPathName().equals(getEquippedPathName());
+	}
+
+	int getDamage();
+
+	DamageVariance getDamageVariance();
+
+	int getArcaneCost();
+
+	List<Util.Value<Integer, Integer>> getAoeDamage();
+
+	List<DamageType> getAvailableDamageTypes();
+
+	boolean isSpellRegenOnDamageTypeChange();
+
+	Map<DamageType,List<Spell>> getSpells();
+
+	List<Spell> getSpells(DamageType damageType);
+
+	boolean isCombatMoveRegenOnDamageTypeChange();
+
+	Map<DamageType,List<AbstractCombatMove>> getCombatMoves();
+
+	default List<AbstractCombatMove> getCombatMoves(DamageType damageType) {
+		var combatMoves = getCombatMoves();
+		var damageTypeCombatMoves = new ArrayList<AbstractCombatMove>();
+		if(combatMoves.containsKey(null))
+			damageTypeCombatMoves.addAll(combatMoves.get(null));
+		if(combatMoves.containsKey(damageType))
+			damageTypeCombatMoves.addAll(combatMoves.get(damageType));
+		return damageTypeCombatMoves;
+	}
+
+	default ColourReplacement getColourReplacement(boolean includeDamageTypeReplacement, int index) {
+		List<ColourReplacement> list = getColourReplacements(includeDamageTypeReplacement);
+		if(index>list.size()-1) {
+			return null;
+		}
+		return list.get(index);
+	}
+
+	List<ColourReplacement> getColourReplacements(boolean includeDamageTypeReplacement);
+
+	default String getSVGImage() {
+		DamageType dt = DamageType.PHYSICAL;
+		if (this.getAvailableDamageTypes() != null) {
+			if (!this.getAvailableDamageTypes().contains(dt)) {
+				dt = this.getAvailableDamageTypes().get(0);
+			}
+		}
+
+		List<Colour> colours = new ArrayList<>();
+
+		for(ColourReplacement cr : this.getColourReplacements(false)) {
+			colours.add(cr.getFirstOfDefaultColours());
+		}
+
+		return getSVGImage(dt, colours);
+	}
+
+	String getSVGImage(DamageType dt, List<Colour> colours);
+
+	String getSVGImageDesaturated();
+
+	default String getSVGEquippedImage() {
+		DamageType dt = DamageType.PHYSICAL;
+		if (this.getAvailableDamageTypes() != null) {
+			if (!this.getAvailableDamageTypes().contains(dt)) {
+				dt = this.getAvailableDamageTypes().get(0);
+			}
+		}
+
+		List<Colour> colours = new ArrayList<>();
+
+		for(ColourReplacement cr : this.getColourReplacements(false)) {
+			colours.add(cr.getFirstOfDefaultColours());
+		}
+
+		return getSVGEquippedImage(dt, colours);
+	}
+
+	String getSVGEquippedImage(DamageType dt, List<Colour> colours);
+
+	String getSVGEquippedImageDesaturated();
+
+	// Enchantments:
+
+	List<ItemEffect> getEffects();
+
+	default boolean isAbleToBeSold() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	default boolean isAbleToBeDropped() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	default int getEnchantmentLimit() {
+		return 100;
+	}
+
+	default AbstractItemEffectType getEnchantmentEffect() {
+		return ItemEffectType.WEAPON;
+	}
+
+	default AbstractWeaponType getEnchantmentItemType(List<ItemEffect> effects) {
+		return (AbstractWeaponType)this;
+	}
+
+	List<ItemTag> getItemTags();
 	
 	@Deprecated
 	public static AbstractWeaponType getWeaponTypeFromId(String id) {
