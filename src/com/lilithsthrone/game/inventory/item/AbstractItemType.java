@@ -356,48 +356,44 @@ public abstract class AbstractItemType implements ItemType {
 		return result;
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}
 
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
-	
+
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
 
+	@Override
 	public String getAuthorDescription() {
 		return authorDescription;
 	}
-	
+
+	@Override
 	public List<ItemEffect> getEffects() {
 		return effects;
 	}
-	
+
+	@Override
 	public String getSpecialEffect() {
 		return specialEffect;
 	}
 
+	@Override
 	public String getPotionDescriptor() {
 		return potionDescriptor;
 	}
 
-	public boolean isAbleToBeSold() {
-		return getRarity()!=Rarity.QUEST;
-	}
-	
-	public boolean isAbleToBeDropped() {
-		return getRarity()!=Rarity.QUEST;
-	}
-	
 	// Enchantments:
-	
-	public int getEnchantmentLimit() {
-		return 100;
-	}
-	
+
+	@Override
 	public AbstractItemEffectType getEnchantmentEffect() {
 		if(enchantmentEffectId==null || enchantmentEffectId.isEmpty()) {
 			return null;
@@ -408,7 +404,8 @@ public abstract class AbstractItemType implements ItemType {
 			return ItemEffectType.getItemEffectTypeFromId(enchantmentEffectId);
 		}
 	}
-	
+
+	@Override
 	public AbstractItemType getEnchantmentItemType(List<ItemEffect> effects) {
 		if(enchantmentItemTypeId==null || enchantmentItemTypeId.isEmpty()) {
 			return null;
@@ -418,19 +415,17 @@ public abstract class AbstractItemType implements ItemType {
 	
 	// Getters & setters:
 
+	@Override
 	public String getDeterminer() {
 		return (determiner!=null?determiner:"");
 	}
 
+	@Override
 	public boolean isPlural() {
 		return plural;
 	}
 
-	public String getName(boolean displayName) {
-		// by default, the display name is capitalised, and the bare name is not
-		return this.getName(displayName, displayName);
-	}
-	
+	@Override
 	public String getName(boolean displayName, boolean capitalise) {
 		String out;
 		if(displayName) {
@@ -444,12 +439,8 @@ public abstract class AbstractItemType implements ItemType {
 			return out;
 		}
 	}
-	
-	public String getNamePlural(boolean displayName) {
-		// by default, the display name is capitalised, and the bare name is not
-		return getNamePlural(displayName, displayName);
-	}
-	
+
+	@Override
 	public String getNamePlural(boolean displayName, boolean capitalise) {
 		String out;
 		if(displayName) {
@@ -464,10 +455,12 @@ public abstract class AbstractItemType implements ItemType {
 		}
 	}
 
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
+	@Override
 	public List<String> getEffectTooltipLines() {
 		List<String> parsed = new ArrayList<>();
 		for(String s : effectTooltipLines) {
@@ -476,28 +469,34 @@ public abstract class AbstractItemType implements ItemType {
 		return parsed;
 	}
 
+	@Override
 	public String getDisplayName(boolean withRarityColour) {
 		return Util.capitaliseSentence((determiner!=null?determiner:"") + (withRarityColour
 				? (" <span style='color: " + rarity.getColour().toWebHexString() + ";'>" + (this.isPlural()?getNamePlural(false):getName(false)) + "</span>")
 				: (this.isPlural()?getNamePlural(false):getName(false))));
 	}
 
+	@Override
 	public List<SvgInformation> getPathNameInformation() {
 		return svgPathInformation;
 	}
 
+	@Override
 	public Colour getColour() {
 		return colourShades.get(0);
 	}
 
+	@Override
 	public List<Colour> getColourShades() {
 		return colourShades;
 	}
 
+	@Override
 	public int getValue(List<ItemEffect> effects) {
 		return value;
 	}
 
+	@Override
 	public String getSVGString() {
 		if(SVGString==null) {
 			if(getPathNameInformation()!=null && !getPathNameInformation().isEmpty()) {
@@ -573,22 +572,17 @@ public abstract class AbstractItemType implements ItemType {
 		return SVGString;
 	}
 
+	@Override
 	public Rarity getRarity() {
 		return rarity;
 	}
 
+	@Override
 	public String getUseName() {
 		return useDescriptor;
 	}
-	
-	public String getUseTooltipDescription(GameCharacter user, GameCharacter target) {
-		if(user==null || target==null || user.equals(target)) {
-			return Util.capitaliseSentence(getUseName()) + " the " + getName(false) + ".";
-		} else {
-			return UtilText.parse(target, "Get [npc.name] to " + getUseName() + " the " + getName(false) + ".");
-		}
-	}
-	
+
+	@Override
 	public String getUseDescription(GameCharacter user, GameCharacter target) {
 		if(user.equals(target)) {
 			return "<p>"
@@ -601,50 +595,27 @@ public abstract class AbstractItemType implements ItemType {
 		}
 	}
 
-	public boolean isAbleToBeUsedFromInventory() {
-		return true;
-	}
-	
-	public String getUnableToBeUsedFromInventoryDescription() {
-		return "This item cannot be used in this way!";
-	}
-	
-	public boolean isAbleToBeUsed(GameCharacter target) {
-		return true;
-	}
-	
-	public String getUnableToBeUsedDescription(GameCharacter target) {
-		return "This item cannot be used in this way!";
-	}
-	
+	@Override
 	public boolean isAbleToBeUsedInSex() {
 		return sexUse;
 	}
-	
+
+	@Override
 	public boolean isAbleToBeUsedInCombatAllies() {
 		return combatUseAllies;
 	}
-	
+
+	@Override
 	public boolean isAbleToBeUsedInCombatEnemies() {
 		return combatUseEnemies;
 	}
-	
+
+	@Override
 	public boolean isConsumedOnUse() {
 		return consumedOnUse;
 	}
-	
-	public boolean isTransformative() {
-		return getItemTags().contains(ItemTag.RACIAL_TF_ITEM);
-	}
-	
-	public boolean isGift() {
-		return false;
-	}
-	
-	public boolean isFetishGiving() {
-		return false;
-	}
 
+	@Override
 	public Set<ItemTag> getItemTags() {
 		return itemTags;
 	}
