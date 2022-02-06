@@ -9,8 +9,9 @@ import com.lilithsthrone.game.character.GameCharacter;
  * @version 0.4.1
  * @author Innoxia
  */
-public abstract class AbstractParserTarget {
-	
+public abstract class AbstractParserTarget implements ParserTarget {
+
+	String id;
 	private String description;
 	private List<String> tags;
 	
@@ -18,11 +19,15 @@ public abstract class AbstractParserTarget {
 		this.tags = tags;
 		this.description = description;
 	}
-	
+
+	public String getId() {
+		return id;
+	}
+
 	public List<String> getTags() {
 		return tags;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
