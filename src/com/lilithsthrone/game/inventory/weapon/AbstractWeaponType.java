@@ -29,7 +29,6 @@ import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
@@ -49,8 +48,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.2.1
  * @author Innoxia
  */
-public abstract class AbstractWeaponType implements AbstractCoreType {
-	
+public abstract class AbstractWeaponType implements WeaponType {
+
+	String id;
 	private int baseValue;
 	private boolean mod;
 	
@@ -547,7 +547,7 @@ public abstract class AbstractWeaponType implements AbstractCoreType {
 	}
 
 	public String getId() {
-		return WeaponType.weaponToIdMap.get(this);
+		return id;
 	}
 
 	public String equipText(GameCharacter character) {

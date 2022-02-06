@@ -1,28 +1,18 @@
 package com.lilithsthrone.game.inventory.weapon;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.game.inventory.AbstractCoreType;
+import com.lilithsthrone.utils.Table;
 
 /**
  * @since 0.1.84
  * @version 0.3.7.4
  * @author Innoxia
  */
-public class WeaponType {
+public interface WeaponType extends AbstractCoreType {
 	
-	private static List<AbstractWeaponType> allWeapons = new ArrayList<>();
-	public static List<AbstractWeaponType> moddedWeapons = new ArrayList<>();
-	
-	public static Map<AbstractWeaponType, String> weaponToIdMap = new HashMap<>();
-	public static Map<String, AbstractWeaponType> idToWeaponMap = new HashMap<>();
-	
-
+	@Deprecated
 	public static AbstractWeaponType getWeaponTypeFromId(String id) {
 		return getWeaponTypeFromId(id, true);
 	}
@@ -30,8 +20,12 @@ public class WeaponType {
 	/**
 	 * @param closestMatch Pass in true if you want to get whatever WeaponType has the closest match to the provided id, even if it's not exactly the same.
 	 */
+	@Deprecated
 	public static AbstractWeaponType getWeaponTypeFromId(String id, boolean closestMatch) {
-//		System.out.print("ID: "+id);
+		return closestMatch ? table.of(id) : table.exact(id).orElse(null);
+	}
+
+	private static String sanitize(String id) {
 		
 		if(id.equals("RANGED_MUSKET")) {	
 			id = "innoxia_gun_arcane_musket";
@@ -89,65 +83,33 @@ public class WeaponType {
 			id = "innoxia_crystal_legendary";
 		}
 		
-		if(closestMatch) {
-			id = Util.getClosestStringMatch(id, idToWeaponMap.keySet());
-		}
-		
-		return idToWeaponMap.get(id);
-	}
-	
-	public static String getIdFromWeaponType(AbstractWeaponType weaponType) {
-		return weaponToIdMap.get(weaponType);
+		return id;
 	}
 
-	static {
+	@Deprecated
+	public static String getIdFromWeaponType(AbstractWeaponType weaponType) {
+		return weaponType.getId();
+	}
+
+	Table<AbstractWeaponType> table = new Table<>(WeaponType::sanitize) {{
 
 		// Modded weapon types:
-		
-		moddedWeapons = new ArrayList<>();
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/items/weapons");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey();
-					AbstractWeaponType ct = new AbstractWeaponType(innerEntry.getValue(), entry.getKey(), true) {};
-					moddedWeapons.add(ct);
-					weaponToIdMap.put(ct, id);
-					idToWeaponMap.put(id, ct);
-				} catch(Exception ex) {
-					System.err.println("Loading modded weapon failed at 'WeaponType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		allWeapons.addAll(moddedWeapons);
-		
+		forEachMod("/items/weapons",null,null,(f,n,a)->{
+			var v = new AbstractWeaponType(f,a,true) {};
+			v.id = n;
+			add(n,v);
+		});
+
 		// External res weapon types:
+		forEachExternal("res/weapons",null,null,(f,n,a)->{
+			var v = new AbstractWeaponType(f,a,false) {};
+			v.id = n;
+			add(n,v);
+		});
+	}};
 
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/weapons");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey();
-					AbstractWeaponType ct = new AbstractWeaponType(innerEntry.getValue(), entry.getKey(), false) {};
-					allWeapons.add(ct);
-					weaponToIdMap.put(ct, id);
-					idToWeaponMap.put(id, ct);
-//					System.out.println("WT: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading weapon failed at 'WeaponType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-	}
-
+	@Deprecated
 	public static List<AbstractWeaponType> getAllWeapons() {
-		return allWeapons;
+		return table.list();
 	}
 }
