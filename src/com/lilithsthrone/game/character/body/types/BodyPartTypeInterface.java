@@ -18,7 +18,12 @@ import com.lilithsthrone.game.inventory.enchanting.TFModifier;
  * @author Innoxia
  */
 public interface BodyPartTypeInterface {
-	
+
+	/**
+	 * Identifies this instance under those of the same type.
+	 */
+	String getId();
+
 	public default boolean isAvailableForSelfTransformMenu(GameCharacter gc) {
 		return true;
 	}

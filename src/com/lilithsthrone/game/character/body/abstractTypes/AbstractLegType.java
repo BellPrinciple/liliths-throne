@@ -20,7 +20,6 @@ import com.lilithsthrone.game.character.body.Vagina;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.AssType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.types.BreastType;
 import com.lilithsthrone.game.character.body.types.FootType;
 import com.lilithsthrone.game.character.body.types.LegType;
@@ -51,7 +50,7 @@ import com.lilithsthrone.utils.Util.Value;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractLegType implements BodyPartTypeInterface {
+public abstract class AbstractLegType implements LegType {
 
 	private boolean mod;
 	private boolean fromExternalFile;

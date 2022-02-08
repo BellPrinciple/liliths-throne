@@ -1,13 +1,9 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
@@ -20,11 +16,11 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.8.2
  * @author Innoxia
  */
-public class FluidType {
-	
+public interface FluidType extends BodyPartTypeInterface {
+
 	// Cum:
 	
-	 public static AbstractFluidType CUM_HUMAN = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_HUMAN = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.HUMAN,
 			null,
@@ -36,7 +32,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_ANGEL = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_ANGEL = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.ANGEL,
 			Util.newArrayListOfValues("angel-"),
@@ -48,7 +44,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_DEMON = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_DEMON = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.DEMON,
 			Util.newArrayListOfValues("demon-", "demonic-"),
@@ -60,7 +56,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_DOG_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_DOG_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.DOG_MORPH,
 			Util.newArrayListOfValues("dog-", "canine-"),
@@ -72,7 +68,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_WOLF_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_WOLF_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.WOLF_MORPH,
 			Util.newArrayListOfValues("wolf-", "lupine-"),
@@ -85,7 +81,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_FOX_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_FOX_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.FOX_MORPH,
 			Util.newArrayListOfValues("fox-", "vulpine-"),
@@ -97,7 +93,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_CAT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_CAT_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.CAT_MORPH,
 			Util.newArrayListOfValues("cat-", "feline-"),
@@ -109,7 +105,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_SQUIRREL_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_SQUIRREL_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.SQUIRREL_MORPH,
 			Util.newArrayListOfValues("squirrel-", "rodent-"),
@@ -121,7 +117,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_RAT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_RAT_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.RAT_MORPH,
 			Util.newArrayListOfValues("rat-", "rodent-"),
@@ -133,7 +129,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_RABBIT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_RABBIT_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.RABBIT_MORPH,
 			Util.newArrayListOfValues("rabbit-"),
@@ -145,7 +141,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_BAT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_BAT_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.BAT_MORPH,
 			Util.newArrayListOfValues("bat-"),
@@ -157,7 +153,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_ALLIGATOR_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_ALLIGATOR_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.ALLIGATOR_MORPH,
 			Util.newArrayListOfValues("alligator-", "reptilian-"),
@@ -169,7 +165,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_HORSE_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_HORSE_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.HORSE_MORPH,
 			Util.newArrayListOfValues("stallion-", "horse-", "equine-"),
@@ -182,7 +178,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_REINDEER_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_REINDEER_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.REINDEER_MORPH,
 			Util.newArrayListOfValues("reindeer-"),
@@ -195,7 +191,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_COW_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_COW_MORPH = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.COW_MORPH,
 			Util.newArrayListOfValues("bull-", "bovine-"),
@@ -208,7 +204,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_HARPY = new AbstractFluidType(FluidTypeBase.CUM,
+	 public static AbstractFluidType CUM_HARPY = new Special(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.HARPY,
 			Util.newArrayListOfValues("harpy-", "avian-"),
@@ -222,7 +218,7 @@ public class FluidType {
 
 	// Girl cum:
 	
-	 public static AbstractFluidType GIRL_CUM_HUMAN = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_HUMAN = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.HUMAN,
 			null,
@@ -233,7 +229,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_ANGEL = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_ANGEL = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.ANGEL,
 			null,
@@ -244,7 +240,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_DEMON = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_DEMON = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.DEMON,
 			null,
@@ -255,7 +251,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_DOG_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_DOG_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.DOG_MORPH,
 			null,
@@ -266,7 +262,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_WOLF_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_WOLF_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.WOLF_MORPH,
 			null,
@@ -277,7 +273,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_FOX_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_FOX_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.FOX_MORPH,
 			null,
@@ -288,7 +284,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_CAT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_CAT_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.CAT_MORPH,
 			null,
@@ -299,7 +295,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_SQUIRREL_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_SQUIRREL_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.SQUIRREL_MORPH,
 			null,
@@ -310,7 +306,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_RAT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_RAT_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.RAT_MORPH,
 			null,
@@ -321,7 +317,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_RABBIT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_RABBIT_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.RABBIT_MORPH,
 			null,
@@ -332,7 +328,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_BAT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_BAT_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.BAT_MORPH,
 			null,
@@ -343,7 +339,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_ALLIGATOR_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_ALLIGATOR_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.ALLIGATOR_MORPH,
 			null,
@@ -354,7 +350,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_HORSE_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_HORSE_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.HORSE_MORPH,
 			null,
@@ -365,7 +361,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_REINDEER_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_REINDEER_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.REINDEER_MORPH,
 			null,
@@ -376,7 +372,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_COW_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_COW_MORPH = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.COW_MORPH,
 			null,
@@ -387,7 +383,7 @@ public class FluidType {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_HARPY = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	 public static AbstractFluidType GIRL_CUM_HARPY = new Special(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.HARPY,
 			null,
@@ -400,7 +396,7 @@ public class FluidType {
 
 	// Milks:
 	
-	 public static AbstractFluidType MILK_HUMAN = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_HUMAN = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.HUMAN,
 			null,
@@ -410,7 +406,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_ANGEL = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_ANGEL = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.ANGEL,
 			null,
@@ -420,7 +416,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_COW_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_COW_MORPH = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.COW_MORPH,
 			null,
@@ -430,7 +426,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_DEMON = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_DEMON = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.DEMON,
 			null,
@@ -440,7 +436,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_DOG_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_DOG_MORPH = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.DOG_MORPH,
 			null,
@@ -450,7 +446,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_WOLF_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_WOLF_MORPH = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.WOLF_MORPH,
 			null,
@@ -460,7 +456,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_FOX_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_FOX_MORPH = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.FOX_MORPH,
 			null,
@@ -470,7 +466,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_CAT_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_CAT_MORPH = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.CAT_MORPH,
 			null,
@@ -480,7 +476,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_SQUIRREL_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_SQUIRREL_MORPH = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.SQUIRREL_MORPH,
 			null,
@@ -490,7 +486,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_RAT_MORPH = new AbstractFluidType(FluidTypeBase.MILK, // I don't get it. Everyone loves rats, but they don't wanna drink the rats' milk?
+	 public static AbstractFluidType MILK_RAT_MORPH = new Special(FluidTypeBase.MILK, // I don't get it. Everyone loves rats, but they don't wanna drink the rats' milk?
 			FluidFlavour.MILK,
 			Race.RAT_MORPH,
 			null,
@@ -500,7 +496,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_RABBIT_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_RABBIT_MORPH = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.RABBIT_MORPH,
 			null,
@@ -510,7 +506,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_BAT_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_BAT_MORPH = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.BAT_MORPH,
 			null,
@@ -520,7 +516,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_ALLIGATOR_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_ALLIGATOR_MORPH = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.ALLIGATOR_MORPH,
 			null,
@@ -530,7 +526,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_HORSE_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_HORSE_MORPH = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.HORSE_MORPH,
 			null,
@@ -540,7 +536,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_REINDEER_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_REINDEER_MORPH = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.REINDEER_MORPH,
 			null,
@@ -550,7 +546,7 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_HARPY = new AbstractFluidType(FluidTypeBase.MILK,
+	 public static AbstractFluidType MILK_HARPY = new Special(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.HARPY,
 			null,
@@ -560,76 +556,40 @@ public class FluidType {
 			Util.newArrayListOfValues()) {
 	};
 	
-	
-	private static List<AbstractFluidType> allFluidTypes;
-	private static Map<AbstractFluidType, String> fluidToIdMap = new HashMap<>();
-	private static Map<String, AbstractFluidType> idToFluidMap = new HashMap<>();
-	
-	static {
-		allFluidTypes = new ArrayList<>();
+	class Special extends AbstractFluidType {
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("fluid")) {
-					try {
-						AbstractFluidType type = new AbstractFluidType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allFluidTypes.add(type);
-						fluidToIdMap.put(type, id);
-						idToFluidMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("fluid")) {
-					try {
-						AbstractFluidType type = new AbstractFluidType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allFluidTypes.add(type);
-						fluidToIdMap.put(type, id);
-						idToFluidMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded fluid types:
-		
-		Field[] fields = FluidType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractFluidType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractFluidType ct;
-				try {
-					ct = ((AbstractFluidType) f.get(null));
+		private String id;
 
-					fluidToIdMap.put(ct, f.getName());
-					idToFluidMap.put(f.getName(), ct);
-					
-					allFluidTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		public Special(FluidTypeBase baseFluidType, FluidFlavour flavour, Race race, List<String> namesMasculine, List<String> namesFeminine, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<FluidModifier> defaultFluidModifiers) {
+			super(baseFluidType, flavour, race, namesMasculine, namesFeminine, descriptorsMasculine, descriptorsFeminine, defaultFluidModifiers);
+		}
+
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(FluidType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
 		}
 	}
-	
+
+	TypeTable<AbstractFluidType> table = new TypeTable<>(
+		FluidType::sanitize,
+		FluidType.class,
+		AbstractFluidType.class,
+		"fluid",
+		(f,n,a,m)->new AbstractFluidType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
+	@Deprecated
 	public static AbstractFluidType getFluidTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("CUM_IMP")) {
 			id = "CUM_DEMON";
 			
@@ -643,31 +603,20 @@ public class FluidType {
 			id = "MILK_DEMON";
 		}
 		
-		id = Util.getClosestStringMatch(id, idToFluidMap.keySet());
-		return idToFluidMap.get(id);
+		return id;
 	}
-	
+
+	@Deprecated
 	public static String getIdFromFluidType(AbstractFluidType fluidType) {
-		return fluidToIdMap.get(fluidType);
+		return fluidType.getId();
 	}
 	
 	public static List<AbstractFluidType> getAllFluidTypes() {
-		return allFluidTypes;
+		return table.listByRace();
 	}
-	
-	private static Map<Race,List<AbstractFluidType>> typesMap = new HashMap<>();
+
+	@Deprecated
 	public static List<AbstractFluidType> getFluidTypes(Race r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractFluidType> types = new ArrayList<>();
-		for(AbstractFluidType type : FluidType.getAllFluidTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of());
 	}
 }

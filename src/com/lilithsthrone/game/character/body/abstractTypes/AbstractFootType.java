@@ -3,6 +3,7 @@ package com.lilithsthrone.game.character.body.abstractTypes;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.types.FootType;
 import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 
@@ -11,7 +12,7 @@ import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
  * @version 0.3.1
  * @author Innoxia
  */
-public abstract class AbstractFootType {
+public abstract class AbstractFootType implements FootType {
 	
 	private String typeName;
 	

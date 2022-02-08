@@ -14,7 +14,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.TesticleType;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.race.Race;
@@ -27,7 +27,7 @@ import com.lilithsthrone.utils.Util.Value;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractPenisType implements BodyPartTypeInterface {
+public abstract class AbstractPenisType implements PenisType {
 
 	private boolean mod;
 	private boolean fromExternalFile;

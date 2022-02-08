@@ -1,15 +1,11 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAnusType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.race.Race;
@@ -20,9 +16,9 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.7
  * @author Innoxia
  */
-public class AnusType {
-	
-	public static AbstractAnusType HUMAN = new AbstractAnusType(BodyCoveringType.ANUS,
+public interface AnusType extends BodyPartTypeInterface {
+
+	public static AbstractAnusType HUMAN = new Special(BodyCoveringType.ANUS,
 			Race.HUMAN,
 			null,
 			null,
@@ -31,7 +27,7 @@ public class AnusType {
 			Util.newArrayListOfValues()){
 	};
 	
-	public static AbstractAnusType ANGEL = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType ANGEL = new Special(BodyCoveringType.ANUS,
 			Race.ANGEL,
 			null,
 			null,
@@ -40,7 +36,7 @@ public class AnusType {
 			Util.newArrayListOfValues()){
 	};
 	
-	public static AbstractAnusType DEMON_COMMON = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType DEMON_COMMON = new Special(BodyCoveringType.ANUS,
 			Race.DEMON,
 			null,
 			null,
@@ -49,7 +45,7 @@ public class AnusType {
 			Util.newArrayListOfValues(OrificeModifier.MUSCLE_CONTROL)){
 	};
 	
-	public static AbstractAnusType COW_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType COW_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.COW_MORPH,
 			null,
 			null,
@@ -58,7 +54,7 @@ public class AnusType {
 			Util.newArrayListOfValues(OrificeModifier.PUFFY)){
 	};
 	
-	public static AbstractAnusType DOG_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType DOG_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.DOG_MORPH,
 			null,
 			null,
@@ -67,7 +63,7 @@ public class AnusType {
 			Util.newArrayListOfValues()){
 	};
 	
-	public static AbstractAnusType FOX_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType FOX_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.FOX_MORPH,
 			null,
 			null,
@@ -76,7 +72,7 @@ public class AnusType {
 			Util.newArrayListOfValues()){
 	};
 	
-	public static AbstractAnusType SQUIRREL_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType SQUIRREL_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.SQUIRREL_MORPH,
 			null,
 			null,
@@ -85,7 +81,7 @@ public class AnusType {
 			Util.newArrayListOfValues()){
 	};
 	
-	public static AbstractAnusType RAT_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType RAT_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.RAT_MORPH,
 			null,
 			null,
@@ -94,7 +90,7 @@ public class AnusType {
 			Util.newArrayListOfValues()){
 	};
 	
-	public static AbstractAnusType RABBIT_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType RABBIT_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.RABBIT_MORPH,
 			null,
 			null,
@@ -103,7 +99,7 @@ public class AnusType {
 			Util.newArrayListOfValues()){
 	};
 	
-	public static AbstractAnusType BAT_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType BAT_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.BAT_MORPH,
 			null,
 			null,
@@ -112,7 +108,7 @@ public class AnusType {
 			Util.newArrayListOfValues()){
 	};
 	
-	public static AbstractAnusType WOLF_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType WOLF_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.BAT_MORPH,
 			null,
 			null,
@@ -121,7 +117,7 @@ public class AnusType {
 			Util.newArrayListOfValues()){
 	};
 	
-	public static AbstractAnusType CAT_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType CAT_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.CAT_MORPH,
 			null,
 			null,
@@ -130,7 +126,7 @@ public class AnusType {
 			Util.newArrayListOfValues()){
 	};
 	
-	public static AbstractAnusType HORSE_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType HORSE_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.HORSE_MORPH,
 			null,
 			null,
@@ -139,7 +135,7 @@ public class AnusType {
 			Util.newArrayListOfValues(OrificeModifier.PUFFY)){
 	};
 	
-	public static AbstractAnusType REINDEER_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType REINDEER_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.REINDEER_MORPH,
 			null,
 			null,
@@ -148,7 +144,7 @@ public class AnusType {
 			Util.newArrayListOfValues(OrificeModifier.PUFFY)){
 	};
 	
-	public static AbstractAnusType ALLIGATOR_MORPH = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType ALLIGATOR_MORPH = new Special(BodyCoveringType.ANUS,
 			Race.ALLIGATOR_MORPH,
 			null,
 			null,
@@ -157,121 +153,79 @@ public class AnusType {
 			Util.newArrayListOfValues()){
 	};
 	
-	public static AbstractAnusType HARPY = new AbstractAnusType(BodyCoveringType.ANUS,
+	public static AbstractAnusType HARPY = new Special(BodyCoveringType.ANUS,
 			Race.HARPY,
 			null,
 			null,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
+		@Override
+		public String getId() {
+			return "HARPY";
+		}
 	};
-	
-	
-	private static List<AbstractAnusType> allAnusTypes;
-	private static Map<AbstractAnusType, String> anusToIdMap = new HashMap<>();
-	private static Map<String, AbstractAnusType> idToAnusMap = new HashMap<>();
-	
-	static {
-		allAnusTypes = new ArrayList<>();
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("anus")) {
-					try {
-						AbstractAnusType type = new AbstractAnusType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allAnusTypes.add(type);
-						anusToIdMap.put(type, id);
-						idToAnusMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("anus")) {
-					try {
-						AbstractAnusType type = new AbstractAnusType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allAnusTypes.add(type);
-						anusToIdMap.put(type, id);
-						idToAnusMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded anus types:
-		Field[] fields = AnusType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractAnusType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractAnusType ct;
-				try {
-					ct = ((AbstractAnusType) f.get(null));
 
-					anusToIdMap.put(ct, f.getName());
-					idToAnusMap.put(f.getName(), ct);
-					
-					allAnusTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+	class Special extends AbstractAnusType {
+
+		private String id;
+
+		Special(
+				AbstractBodyCoveringType coveringType,
+				Race race,
+				List<String> names,
+				List<String> namesPlural,
+				List<String> descriptorsMasculine,
+				List<String> descriptorsFeminine,
+				List<OrificeModifier> defaultRacialOrificeModifiers) {
+			super(coveringType,race,names,namesPlural,descriptorsMasculine,descriptorsFeminine,defaultRacialOrificeModifiers);
 		}
-		
-		Collections.sort(allAnusTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
+
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(AnusType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
+		}
 	}
 	
+	TypeTable<AbstractAnusType> table = new TypeTable<>(
+		AnusType::sanitize,
+		AnusType.class,
+		AbstractAnusType.class,
+		"anus",
+		(f,n,a,m)->new AbstractAnusType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
+	@Deprecated
 	public static AbstractAnusType getAnusTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("IMP")) {
-			return AnusType.DEMON_COMMON;
+			return "DEMON_COMMON";
 		}
-		
-		id = Util.getClosestStringMatch(id, idToAnusMap.keySet());
-		return idToAnusMap.get(id);
+		return id;
 	}
-	
+
+	@Deprecated
 	public static String getIdFromAnusType(AbstractAnusType anusType) {
-		return anusToIdMap.get(anusType);
+		return anusType.getId();
 	}
-	
+
+	@Deprecated
 	public static List<AbstractAnusType> getAllAnusTypes() {
-		return allAnusTypes;
+		return table.listByRace();
 	}
-	
-	private static Map<Race,List<AbstractAnusType>> typesMap = new HashMap<>();
+
 	public static List<AbstractAnusType> getAnusTypes(Race r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractAnusType> types = new ArrayList<>();
-		for(AbstractAnusType type : AnusType.getAllAnusTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of());
 	}
 	
 }
