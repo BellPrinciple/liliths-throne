@@ -1,16 +1,13 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
+import com.lilithsthrone.game.character.body.abstractTypes.AbstractTesticleType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
@@ -23,9 +20,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.8.9
  * @author Innoxia
  */
-public class PenisType {
-	
-	public static AbstractPenisType NONE = new AbstractPenisType(null,
+public interface PenisType extends BodyPartTypeInterface {
+
+	public static AbstractPenisType NONE = new Special(null,
 			Race.NONE,
 			TesticleType.NONE,
 			"[npc.She] [npc.verb(squirm)] and [npc.moansVerb] as [npc.her] cock and balls rapidly shrink away, and within seconds, nothing's left to remind [npc.herHim] of [npc.her] manhood.<br/>"
@@ -41,7 +38,7 @@ public class PenisType {
 		}
 	};
 
-	public static AbstractPenisType DILDO = new AbstractPenisType(BodyCoveringType.DILDO,
+	public static AbstractPenisType DILDO = new Special(BodyCoveringType.DILDO,
 			Race.NONE,
 			TesticleType.DILDO,
 			Util.newArrayListOfValues("dildo"),
@@ -54,7 +51,7 @@ public class PenisType {
 			null) {
 	};
 	
-	public static AbstractPenisType HUMAN = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType HUMAN = new Special(BodyCoveringType.PENIS,
 			Race.HUMAN,
 			TesticleType.HUMAN,
 			"[npc.She] now [npc.has] a [style.boldHuman(human penis)], [npc.materialDescriptor] [npc.penisFullDescription(true)].<br/>"
@@ -64,7 +61,7 @@ public class PenisType {
 			null) {
 	};
 
-	public static AbstractPenisType ANGEL = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType ANGEL = new Special(BodyCoveringType.PENIS,
 			Race.ANGEL,
 			TesticleType.ANGEL,
 			Util.newArrayListOfValues("angel-"),
@@ -79,7 +76,7 @@ public class PenisType {
 			null) {
 	};
 
-	public static AbstractPenisType DEMON_COMMON = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType DEMON_COMMON = new Special(BodyCoveringType.PENIS,
 			Race.DEMON,
 			TesticleType.DEMON_COMMON,
 			Util.newArrayListOfValues("succubus-"),
@@ -110,7 +107,7 @@ public class PenisType {
 				PenetrationModifier.PREHENSILE)) {
 	};
 
-	public static AbstractPenisType COW_MORPH = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType COW_MORPH = new Special(BodyCoveringType.PENIS,
 			Race.COW_MORPH,
 			TesticleType.BOVINE,
 			Util.newArrayListOfValues("cow-"),
@@ -129,7 +126,7 @@ public class PenisType {
 				PenetrationModifier.SHEATHED)) {
 	};
 	
-	public static AbstractPenisType DOG_MORPH = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType DOG_MORPH = new Special(BodyCoveringType.PENIS,
 			Race.DOG_MORPH,
 			TesticleType.CANINE,
 			Util.newArrayListOfValues("dog-", "bitch-"),
@@ -156,7 +153,7 @@ public class PenisType {
 		}
 	};
 	
-	public static AbstractPenisType WOLF_MORPH = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType WOLF_MORPH = new Special(BodyCoveringType.PENIS,
 			Race.WOLF_MORPH,
 			TesticleType.LUPINE,
 			Util.newArrayListOfValues("wolf-"),
@@ -183,7 +180,7 @@ public class PenisType {
 		}
 	};
 	
-	public static AbstractPenisType FOX_MORPH = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType FOX_MORPH = new Special(BodyCoveringType.PENIS,
 			Race.FOX_MORPH,
 			TesticleType.FOX_MORPH,
 			Util.newArrayListOfValues("fox-", "vixen-"),
@@ -210,7 +207,7 @@ public class PenisType {
 		}
 	};
 
-	public static AbstractPenisType CAT_MORPH = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType CAT_MORPH = new Special(BodyCoveringType.PENIS,
 			Race.CAT_MORPH,
 			TesticleType.FELINE,
 			Util.newArrayListOfValues("cat-"),
@@ -229,7 +226,7 @@ public class PenisType {
 				PenetrationModifier.SHEATHED)) {
 	};
 
-	public static AbstractPenisType ALLIGATOR_MORPH = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType ALLIGATOR_MORPH = new Special(BodyCoveringType.PENIS,
 			Race.ALLIGATOR_MORPH,
 			TesticleType.ALLIGATOR_MORPH,
 			Util.newArrayListOfValues("alligator-"),
@@ -246,7 +243,7 @@ public class PenisType {
 				PenetrationModifier.BLUNT)) {
 	};
 
-	public static AbstractPenisType EQUINE = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType EQUINE = new Special(BodyCoveringType.PENIS,
 			Race.HORSE_MORPH,
 			TesticleType.EQUINE,
 			Util.newArrayListOfValues("mare-", "#IF(npc.getRace()==npc.getPenisRace())[npc.raceFeral]#ELSE[npc.cockRaceFeral]#ENDIF-", "equine-"),
@@ -265,7 +262,7 @@ public class PenisType {
 				PenetrationModifier.SHEATHED)) {
 	};
 
-	public static AbstractPenisType REINDEER_MORPH = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType REINDEER_MORPH = new Special(BodyCoveringType.PENIS,
 			Race.REINDEER_MORPH,
 			TesticleType.REINDEER_MORPH,
 			Util.newArrayListOfValues("reindeer-"),
@@ -283,7 +280,7 @@ public class PenisType {
 				PenetrationModifier.SHEATHED)) {
 	};
 
-	public static AbstractPenisType HARPY = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType HARPY = new Special(BodyCoveringType.PENIS,
 			Race.HARPY,
 			TesticleType.AVIAN,
 			Util.newArrayListOfValues("harpy-"),
@@ -299,7 +296,7 @@ public class PenisType {
 				PenetrationModifier.SHEATHED)) {
 	};
 	
-	public static AbstractPenisType SQUIRREL_MORPH = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType SQUIRREL_MORPH = new Special(BodyCoveringType.PENIS,
 			Race.SQUIRREL_MORPH,
 			TesticleType.SQUIRREL,
 			Util.newArrayListOfValues("squirrel-"),
@@ -315,7 +312,7 @@ public class PenisType {
 				PenetrationModifier.SHEATHED)) {
 	};
 	
-	public static AbstractPenisType RAT_MORPH = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType RAT_MORPH = new Special(BodyCoveringType.PENIS,
 			Race.RAT_MORPH,
 			TesticleType.RAT_MORPH,
 			Util.newArrayListOfValues("rat-"),
@@ -331,7 +328,7 @@ public class PenisType {
 				PenetrationModifier.SHEATHED)) {
 	};
 	
-	public static AbstractPenisType RABBIT_MORPH = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType RABBIT_MORPH = new Special(BodyCoveringType.PENIS,
 			Race.RABBIT_MORPH,
 			TesticleType.RABBIT_MORPH,
 			Util.newArrayListOfValues("rabbit-"),
@@ -347,7 +344,7 @@ public class PenisType {
 				PenetrationModifier.SHEATHED)) {
 	};
 	
-	public static AbstractPenisType BAT_MORPH = new AbstractPenisType(BodyCoveringType.PENIS,
+	public static AbstractPenisType BAT_MORPH = new Special(BodyCoveringType.PENIS,
 			Race.BAT_MORPH,
 			TesticleType.BAT_MORPH,
 			Util.newArrayListOfValues("bat-"),
@@ -363,134 +360,84 @@ public class PenisType {
 				PenetrationModifier.SHEATHED)) {
 	};
 	
-	
-	private static List<AbstractPenisType> allPenisTypes;
-	private static Map<AbstractPenisType, String> penisToIdMap = new HashMap<>();
-	private static Map<String, AbstractPenisType> idToPenisMap = new HashMap<>();
-	
-	static {
-		allPenisTypes = new ArrayList<>();
+	class Special extends AbstractPenisType {
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("penis")) {
-					try {
-						AbstractPenisType type = new AbstractPenisType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allPenisTypes.add(type);
-						penisToIdMap.put(type, id);
-						idToPenisMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("penis")) {
-					try {
-						AbstractPenisType type = new AbstractPenisType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allPenisTypes.add(type);
-						penisToIdMap.put(type, id);
-						idToPenisMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded penis types:
-		
-		Field[] fields = PenisType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractPenisType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractPenisType ct;
-				try {
-					ct = ((AbstractPenisType) f.get(null));
+		private String id;
 
-					penisToIdMap.put(ct, f.getName());
-					idToPenisMap.put(f.getName(), ct);
-					
-					allPenisTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		public Special(AbstractBodyCoveringType coveringType, Race race, AbstractTesticleType testicleType, List<String> namesFeminine, List<String> namesPluralFeminine, List<String> namesMasculine, List<String> namesPluralMasculine, List<String> descriptors, String transformationDescription, String bodyDescription, List<PenetrationModifier> defaultRacialPenetrationModifiers) {
+			super(coveringType, race, testicleType, namesFeminine, namesPluralFeminine, namesMasculine, namesPluralMasculine, descriptors, transformationDescription, bodyDescription, defaultRacialPenetrationModifiers);
 		}
-		
-		Collections.sort(allPenisTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
+
+		public Special(AbstractBodyCoveringType coveringType, Race race, AbstractTesticleType testicleType, String transformationDescription, String bodyDescription, List<PenetrationModifier> defaultRacialPenetrationModifiers) {
+			super(coveringType, race, testicleType, transformationDescription, bodyDescription, defaultRacialPenetrationModifiers);
+		}
+
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(LegType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
+		}
 	}
-	
+
+	TypeTable<AbstractPenisType> table = new TypeTable<>(
+		PenisType::sanitize,
+		PenisType.class,
+		AbstractPenisType.class,
+		"penis",
+		(f,n,a,m)->new AbstractPenisType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
+	@Deprecated
 	public static AbstractPenisType getPenisTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("IMP")) {
-			return PenisType.DEMON_COMMON;
+			return "DEMON_COMMON";
 		}
 		if(id.equals("BOVINE")) {
-			return PenisType.COW_MORPH;
+			return "COW_MORPH";
 		}
 		if(id.equals("CANINE")) {
-			return PenisType.DOG_MORPH;
+			return "DOG_MORPH";
 		}
 		if(id.equals("LUPINE")) {
-			return PenisType.WOLF_MORPH;
+			return "WOLF_MORPH";
 		}
 		if(id.equals("VULPINE")) {
-			return PenisType.FOX_MORPH;
+			return "FOX_MORPH";
 		}
 		if(id.equals("FELINE")) {
-			return PenisType.CAT_MORPH;
+			return "CAT_MORPH";
 		}
 		if(id.equals("AVIAN")) {
-			return PenisType.HARPY;
+			return "HARPY";
 		}
 		if(id.equals("SQUIRREL")) {
-			return PenisType.SQUIRREL_MORPH;
+			return "SQUIRREL_MORPH";
 		}
-		id = Util.getClosestStringMatch(id, idToPenisMap.keySet());
-		return idToPenisMap.get(id);
+		return id;
 	}
-	
+
+	@Deprecated
 	public static String getIdFromPenisType(AbstractPenisType penisType) {
-		return penisToIdMap.get(penisType);
+		return penisType.getId();
 	}
-	
+
+	@Deprecated
 	public static List<AbstractPenisType> getAllPenisTypes() {
-		return allPenisTypes;
+		return table.listByRace();
 	}
 	
-	private static Map<Race,List<AbstractPenisType>> typesMap = new HashMap<>();
-	
+	@Deprecated
 	public static List<AbstractPenisType> getPenisTypes(Race r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractPenisType> types = new ArrayList<>();
-		for(AbstractPenisType type : PenisType.getAllPenisTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of());
 	}
 
 }

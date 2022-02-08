@@ -1,15 +1,13 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFootType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -17,9 +15,11 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public class FootType {
+public interface FootType {
 
-	public static AbstractFootType NONE = new AbstractFootType("none",
+	String getId();
+
+	public static AbstractFootType NONE = new Special("none",
 			"none",
 			"none",
 			Util.newArrayListOfValues(""),
@@ -37,7 +37,7 @@ public class FootType {
 				}
 	};
 	
-	public static AbstractFootType HUMANOID = new AbstractFootType("humanoid",
+	public static AbstractFootType HUMANOID = new Special("humanoid",
 			"foot",
 			"feet",
 			Util.newArrayListOfValues("masculine"),
@@ -55,7 +55,7 @@ public class FootType {
 		}
 	};
 
-	public static AbstractFootType PAWS = new AbstractFootType("paw-like",
+	public static AbstractFootType PAWS = new Special("paw-like",
 			"paw",
 			"paws",
 			Util.newArrayListOfValues("masculine","padded"),
@@ -75,7 +75,7 @@ public class FootType {
 		}
 	};
 
-	public static AbstractFootType HOOFS = new AbstractFootType("hoof-like",
+	public static AbstractFootType HOOFS = new Special("hoof-like",
 			"hoof",
 			"hoofs",
 			Util.newArrayListOfValues("masculine","hard"),
@@ -94,7 +94,7 @@ public class FootType {
 		}
 	};
 
-	public static AbstractFootType REPTILIAN = new AbstractFootType("reptilian",
+	public static AbstractFootType REPTILIAN = new Special("reptilian",
 			"foot",
 			"feet",
 			Util.newArrayListOfValues("masculine","clawed"),
@@ -114,7 +114,7 @@ public class FootType {
 		}
 	};
 
-	public static AbstractFootType AMPHIBIAN = new AbstractFootType("amphibian",
+	public static AbstractFootType AMPHIBIAN = new Special("amphibian",
 			"foot",
 			"feet",
 			Util.newArrayListOfValues("masculine", "webbed"),
@@ -134,7 +134,7 @@ public class FootType {
 		}
 	};
 
-	public static AbstractFootType TALONS = new AbstractFootType("bird-like",
+	public static AbstractFootType TALONS = new Special("bird-like",
 			"talon",
 			"talons",
 			Util.newArrayListOfValues("masculine","clawed"),
@@ -153,7 +153,7 @@ public class FootType {
 		}
 	};
 
-	public static AbstractFootType ARACHNID = new AbstractFootType("arachnid",
+	public static AbstractFootType ARACHNID = new Special("arachnid",
 			"foot",
 			"feet",
 			Util.newArrayListOfValues("masculine","segmented"),
@@ -173,7 +173,7 @@ public class FootType {
 		}
 	};
 
-	public static AbstractFootType TENTACLE = new AbstractFootType("tentacle",
+	public static AbstractFootType TENTACLE = new Special("tentacle",
 			"tentacle",
 			"tentacles",
 			Util.newArrayListOfValues("masculine","strong"),
@@ -192,47 +192,38 @@ public class FootType {
 		}
 	};
 	
-	
+	abstract class Special extends AbstractFootType {
 
-	private static List<AbstractFootType> allFootTypes;
-	private static Map<AbstractFootType, String> footToIdMap = new HashMap<>();
-	private static Map<String, AbstractFootType> idToFootMap = new HashMap<>();
-	
-	static {
-		allFootTypes = new ArrayList<>();
-		
-		// Add in hard-coded foot types:
-		Field[] fields = FootType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractFootType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractFootType ct;
-				try {
-					ct = ((AbstractFootType) f.get(null));
+		private String id;
 
-					footToIdMap.put(ct, f.getName());
-					idToFootMap.put(f.getName(), ct);
-					
-					allFootTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		public Special(String typeName, String footName, String footNamePlural, List<String> footDescriptorsMasculine, List<String> footDescriptorsFeminine, String toeSingularName, String toePluralName, List<String> toesDescriptorsMasculine, List<String> toesDescriptorsFeminine, String footjobName, String footBodyDescription, List<FootStructure> permittedFootStructures) {
+			super(typeName, footName, footNamePlural, footDescriptorsMasculine, footDescriptorsFeminine, toeSingularName, toePluralName, toesDescriptorsMasculine, toesDescriptorsFeminine, footjobName, footBodyDescription, permittedFootStructures);
+		}
+
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(FootType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
 		}
 	}
-	
+
+	Table<AbstractFootType> table = new Table<>(s->s) {{
+		addFields(FootType.class,AbstractFootType.class);
+	}};
+
+	@Deprecated
 	public static AbstractFootType getFootTypeFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToFootMap.keySet());
-		return idToFootMap.get(id);
+		return table.of(id);
 	}
-	
+
+	@Deprecated
 	public static String getIdFromFootType(AbstractFootType footType) {
-		return footToIdMap.get(footType);
+		return footType.getId();
 	}
-	
+
+	@Deprecated
 	public static List<AbstractFootType> getAllFootTypes() {
-		return allFootTypes;
+		return table.list();
 	}
 }

@@ -1,16 +1,13 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractNippleType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
+import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
 
@@ -19,121 +16,135 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.8.2
  * @author Innoxia
  */
-public class NippleType {
+public interface NippleType extends BodyPartTypeInterface {
 
-	public static AbstractNippleType HUMAN = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType HUMAN = new Special(BodyCoveringType.NIPPLES,
 			Race.HUMAN,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType ANGEL = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType ANGEL = new Special(BodyCoveringType.NIPPLES,
 			Race.ANGEL,
 			Util.newArrayListOfValues("perfect", "flawless"),
 			Util.newArrayListOfValues("perfect", "flawless"),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType DEMON = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType DEMON = new Special(BodyCoveringType.NIPPLES,
 			Race.DEMON,
 			Util.newArrayListOfValues("perfect", "flawless"),
 			Util.newArrayListOfValues("perfect", "flawless"),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType DOG_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType DOG_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.DOG_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType WOLF_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType WOLF_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.WOLF_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType FOX_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType FOX_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.FOX_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType CAT_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType CAT_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.CAT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType COW_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType COW_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.COW_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType SQUIRREL_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType SQUIRREL_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.SQUIRREL_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType RAT_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType RAT_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.RAT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType BAT_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType BAT_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.BAT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType RABBIT_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType RABBIT_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.RABBIT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType ALLIGATOR_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType ALLIGATOR_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.ALLIGATOR_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType HORSE_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType HORSE_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.HORSE_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType REINDEER_MORPH = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType REINDEER_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.REINDEER_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType HARPY = new AbstractNippleType(BodyCoveringType.NIPPLES,
+	public static AbstractNippleType HARPY = new Special(BodyCoveringType.NIPPLES,
 			Race.HARPY,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	
+	class Special extends AbstractNippleType {
+
+		private String id;
+
+		public Special(AbstractBodyCoveringType coveringType, Race race, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<OrificeModifier> defaultRacialOrificeModifiers) {
+			super(coveringType, race, descriptorsMasculine, descriptorsFeminine, defaultRacialOrificeModifiers);
+		}
+
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(NippleType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
+		}
+	}
 //	/**
 //	 * Use instead of <i>valueOf()</i>.
 //	 */
@@ -144,111 +155,43 @@ public class NippleType {
 //		return valueOf(value);
 //	}
 	
-	private static List<AbstractNippleType> allNippleTypes;
-	private static Map<AbstractNippleType, String> nippleToIdMap = new HashMap<>();
-	private static Map<String, AbstractNippleType> idToNippleMap = new HashMap<>();
-	
-	static {
-		allNippleTypes = new ArrayList<>();
-		
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("nipple")) {
-					try {
-						AbstractNippleType type = new AbstractNippleType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allNippleTypes.add(type);
-						nippleToIdMap.put(type, id);
-						idToNippleMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
+	TypeTable<AbstractNippleType> table = new TypeTable<>(
+		NippleType::sanitize,
+		NippleType.class,
+		AbstractNippleType.class,
+		"nipple",
+		(f,n,a,m)->new AbstractNippleType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
 			}
-		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("nipple")) {
-					try {
-						AbstractNippleType type = new AbstractNippleType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allNippleTypes.add(type);
-						nippleToIdMap.put(type, id);
-						idToNippleMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded nipple types:
-		
-		Field[] fields = NippleType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractNippleType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractNippleType ct;
-				try {
-					ct = ((AbstractNippleType) f.get(null));
+		});
 
-					nippleToIdMap.put(ct, f.getName());
-					idToNippleMap.put(f.getName(), ct);
-					
-					allNippleTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		Collections.sort(allNippleTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
-	}
-	
+	@Deprecated
 	public static AbstractNippleType getNippleTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("IMP") || id.equals("DEMON_COMMON")) {
-			return NippleType.DEMON;
+			return "DEMON";
 		}
 		
-		id = Util.getClosestStringMatch(id, idToNippleMap.keySet());
-		return idToNippleMap.get(id);
+		return id;
 	}
-	
+
+	@Deprecated
 	public static String getIdFromNippleType(AbstractNippleType nippleType) {
-		return nippleToIdMap.get(nippleType);
+		return nippleType.getId();
 	}
-	
+
+	@Deprecated
 	public static List<AbstractNippleType> getAllNippleTypes() {
-		return allNippleTypes;
+		return table.listByRace();
 	}
 	
-	private static Map<Race,List<AbstractNippleType>> typesMap = new HashMap<>();
+	@Deprecated
 	public static List<AbstractNippleType> getNippleTypes(Race r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractNippleType> types = new ArrayList<>();
-		for(AbstractNippleType type : NippleType.getAllNippleTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of());
 	}
 }

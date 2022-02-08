@@ -1,15 +1,12 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
@@ -21,9 +18,9 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.8.9
  * @author Innoxia
  */
-public class TentacleType {
+public interface TentacleType extends BodyPartTypeInterface {
 	
-	public static final AbstractTentacleType NONE = new AbstractTentacleType(
+	public static final AbstractTentacleType NONE = new Special(
 			null,
 			Race.NONE,
 			PenetrationGirth.THREE_AVERAGE,
@@ -50,7 +47,7 @@ public class TentacleType {
 			Util.newArrayListOfValues()) {
 	};
 	
-	public static final AbstractTentacleType DEMON_COMMON = new AbstractTentacleType(
+	public static final AbstractTentacleType DEMON_COMMON = new Special(
 			BodyCoveringType.DEMON_COMMON,
 			Race.DEMON,
 			PenetrationGirth.ONE_SLENDER,
@@ -102,7 +99,7 @@ public class TentacleType {
 					BodyPartTag.TAIL_TAPERING_NONE)) {
 	};
 	
-	public static final AbstractTentacleType LEG_DEMON_OCTOPUS = new AbstractTentacleType(
+	public static final AbstractTentacleType LEG_DEMON_OCTOPUS = new Special(
 			BodyCoveringType.OCTOPUS_SKIN,
 			Race.DEMON,
 			PenetrationGirth.FOUR_GIRTHY,
@@ -127,113 +124,52 @@ public class TentacleType {
 					BodyPartTag.TAIL_TAPERING_NONE)) {
 	};
 	
+	class Special extends AbstractTentacleType {
 
-	private static List<AbstractTentacleType> allTentacleTypes;
-	private static Map<AbstractTentacleType, String> tentacleToIdMap = new HashMap<>();
-	private static Map<String, AbstractTentacleType> idToTentacleMap = new HashMap<>();
-	
-	static {
-		allTentacleTypes = new ArrayList<>();
+		private String id;
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("tentacle")) {
-					try {
-						AbstractTentacleType type = new AbstractTentacleType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allTentacleTypes.add(type);
-						tentacleToIdMap.put(type, id);
-						idToTentacleMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
+		public Special(AbstractBodyCoveringType coveringType, Race race, PenetrationGirth defaultGirth, float defaultLengthAsPercentageOfHeight, String transformationName, String determiner, String determinerPlural, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String tipName, String tipNamePlural, List<String> tipDescriptorsMasculine, List<String> tipDescriptorsFeminine, String tentacleTransformationDescription, String tentacleBodyDescription, List<BodyPartTag> tags) {
+			super(coveringType, race, defaultGirth, defaultLengthAsPercentageOfHeight, transformationName, determiner, determinerPlural, name, namePlural, descriptorsMasculine, descriptorsFeminine, tipName, tipNamePlural, tipDescriptorsMasculine, tipDescriptorsFeminine, tentacleTransformationDescription, tentacleBodyDescription, tags);
 		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("tentacle")) {
-					try {
-						AbstractTentacleType type = new AbstractTentacleType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allTentacleTypes.add(type);
-						tentacleToIdMap.put(type, id);
-						idToTentacleMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded tentacle types:
-		
-		Field[] fields = TentacleType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractTentacleType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractTentacleType ct;
-				try {
-					ct = ((AbstractTentacleType) f.get(null));
 
-					tentacleToIdMap.put(ct, f.getName());
-					idToTentacleMap.put(f.getName(), ct);
-					
-					allTentacleTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(TentacleType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
 		}
-		
-		Collections.sort(allTentacleTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
 	}
-	
+
+	TypeTable<AbstractTentacleType> table = new TypeTable<>(
+		s->s,
+		TentacleType.class,
+		AbstractTentacleType.class,
+		"tentacle",
+		(f,n,a,m)->new AbstractTentacleType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
+	@Deprecated
 	public static AbstractTentacleType getTentacleTypeFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToTentacleMap.keySet());
-		return idToTentacleMap.get(id);
+		return table.of(id);
 	}
-	
+
+	@Deprecated
 	public static String getIdFromTentacleType(AbstractTentacleType tentacleType) {
-		return tentacleToIdMap.get(tentacleType);
+		return tentacleType.getId();
 	}
-	
+
+	@Deprecated
 	public static List<AbstractTentacleType> getAllTentacleTypes() {
-		return allTentacleTypes;
+		return table.listByRace();
 	}
 	
-	private static Map<Race,List<AbstractTentacleType>> typesMap = new HashMap<>();
-	
+	@Deprecated
 	public static List<AbstractTentacleType> getTentacleTypes(Race r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractTentacleType> types = new ArrayList<>();
-		for(AbstractTentacleType type : TentacleType.getAllTentacleTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		if(types.isEmpty()) {
-			types.add(TentacleType.NONE);
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of(NONE));
 	}
 	
 	public static List<AbstractTentacleType> getTentacleTypesSuitableForTransformation(List<AbstractTentacleType> options) {

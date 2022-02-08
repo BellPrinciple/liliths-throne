@@ -14,7 +14,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.race.Race;
@@ -27,7 +27,7 @@ import com.lilithsthrone.utils.Util.Value;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractVaginaType implements BodyPartTypeInterface {
+public abstract class AbstractVaginaType implements VaginaType {
 	
 	// Maps the name to weighting for use in random selection:
 	protected static final Map<String, Integer> BASE_NAMES_SINGULAR = Util.newHashMapOfValues(

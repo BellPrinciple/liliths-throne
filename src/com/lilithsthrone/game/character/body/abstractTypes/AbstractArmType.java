@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lilithsthrone.game.character.body.types.ArmType;
 import com.lilithsthrone.main.Main;
 import org.w3c.dom.Document;
 
@@ -13,7 +14,6 @@ import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
@@ -26,7 +26,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.9.1
  * @author Innoxia
  */
-public abstract class AbstractArmType implements BodyPartTypeInterface {
+public abstract class AbstractArmType implements ArmType {
 
 	private boolean mod;
 	private boolean fromExternalFile;

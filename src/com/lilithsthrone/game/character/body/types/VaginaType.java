@@ -1,16 +1,13 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.TypeTable;
+import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -23,9 +20,9 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.8.9
  * @author Innoxia
  */
-public class VaginaType {
+public interface VaginaType extends BodyPartTypeInterface {
 
-	public static AbstractVaginaType NONE = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType NONE = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_HUMAN,
 			Race.NONE,
 			false,
@@ -71,7 +68,7 @@ public class VaginaType {
 		}
 	};
 
-	public static AbstractVaginaType HUMAN = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType HUMAN = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_HUMAN,
 			Race.HUMAN,
 			false,
@@ -86,7 +83,7 @@ public class VaginaType {
 			null) {
 	};
 
-	public static AbstractVaginaType ANGEL = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType ANGEL = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_ANGEL,
 			Race.ANGEL,
 			false,
@@ -101,7 +98,7 @@ public class VaginaType {
 			Util.newArrayListOfValues()) {
 	};
 
-	public static AbstractVaginaType DEMON_COMMON = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType DEMON_COMMON = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_DEMON,
 			Race.DEMON,
 			false,
@@ -132,7 +129,7 @@ public class VaginaType {
 				OrificeModifier.MUSCLE_CONTROL)) {
 	};
 
-//	public static AbstractVaginaType DEMON_EGGS = new AbstractVaginaType(BodyCoveringType.VAGINA,
+//	public static AbstractVaginaType DEMON_EGGS = new Special(BodyCoveringType.VAGINA,
 //			FluidType.GIRL_CUM_DEMON,
 //			Race.DEMON,
 //			true,
@@ -167,7 +164,7 @@ public class VaginaType {
 //		}
 //	};
 
-	public static AbstractVaginaType DOG_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType DOG_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_DOG_MORPH,
 			Race.DOG_MORPH,
 			false,
@@ -190,7 +187,7 @@ public class VaginaType {
 				OrificeModifier.PUFFY)) {
 	};
 
-	public static AbstractVaginaType WOLF_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType WOLF_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_WOLF_MORPH,
 			Race.WOLF_MORPH,
 			false,
@@ -213,7 +210,7 @@ public class VaginaType {
 				OrificeModifier.PUFFY)) {
 	};
 	
-	public static AbstractVaginaType FOX_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType FOX_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_FOX_MORPH,
 			Race.FOX_MORPH,
 			false,
@@ -236,7 +233,7 @@ public class VaginaType {
 				OrificeModifier.PUFFY)) {
 	};
 	
-	public static AbstractVaginaType CAT_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType CAT_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_CAT_MORPH,
 			Race.CAT_MORPH,
 			false,
@@ -258,7 +255,7 @@ public class VaginaType {
 			null) {
 	};
 
-	public static AbstractVaginaType SQUIRREL_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType SQUIRREL_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_SQUIRREL_MORPH,
 			Race.SQUIRREL_MORPH,
 			false,
@@ -280,7 +277,7 @@ public class VaginaType {
 			null) {
 	};
 
-	public static AbstractVaginaType RAT_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType RAT_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_RAT_MORPH,
 			Race.RAT_MORPH,
 			false,
@@ -302,7 +299,7 @@ public class VaginaType {
 			null) {
 	};
 
-	public static AbstractVaginaType RABBIT_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType RABBIT_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_RABBIT_MORPH,
 			Race.RABBIT_MORPH,
 			false,
@@ -324,7 +321,7 @@ public class VaginaType {
 			null) {
 	};
 
-	public static AbstractVaginaType BAT_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType BAT_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_BAT_MORPH,
 			Race.BAT_MORPH,
 			false,
@@ -346,7 +343,7 @@ public class VaginaType {
 			null) {
 	};
 	
-	public static AbstractVaginaType ALLIGATOR_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType ALLIGATOR_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_ALLIGATOR_MORPH,
 			Race.ALLIGATOR_MORPH,
 			true,
@@ -368,7 +365,7 @@ public class VaginaType {
 			null) {
 	};
 
-	public static AbstractVaginaType COW_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType COW_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_COW_MORPH,
 			Race.COW_MORPH,
 			false,
@@ -390,7 +387,7 @@ public class VaginaType {
 			null) {
 	};
 
-	public static AbstractVaginaType HORSE_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType HORSE_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_HORSE_MORPH,
 			Race.HORSE_MORPH,
 			false,
@@ -417,7 +414,7 @@ public class VaginaType {
 				OrificeModifier.MUSCLE_CONTROL)) {
 	};
 
-	public static AbstractVaginaType REINDEER_MORPH = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType REINDEER_MORPH = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_REINDEER_MORPH,
 			Race.REINDEER_MORPH,
 			false,
@@ -440,7 +437,7 @@ public class VaginaType {
 				OrificeModifier.PUFFY)) {
 	};
 
-	public static AbstractVaginaType HARPY = new AbstractVaginaType(BodyCoveringType.VAGINA,
+	public static AbstractVaginaType HARPY = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_HARPY,
 			Race.HARPY,
 			true,
@@ -462,115 +459,65 @@ public class VaginaType {
 			null) {
 	};
 	
-	
-	private static List<AbstractVaginaType> allVaginaTypes;
-	private static Map<AbstractVaginaType, String> vaginaToIdMap = new HashMap<>();
-	private static Map<String, AbstractVaginaType> idToVaginaMap = new HashMap<>();
-	
-	static {
-		allVaginaTypes = new ArrayList<>();
+	class Special extends AbstractVaginaType {
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("vagina")) {
-					try {
-						AbstractVaginaType type = new AbstractVaginaType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allVaginaTypes.add(type);
-						vaginaToIdMap.put(type, id);
-						idToVaginaMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("vagina")) {
-					try {
-						AbstractVaginaType type = new AbstractVaginaType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allVaginaTypes.add(type);
-						vaginaToIdMap.put(type, id);
-						idToVaginaMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded vagina types:
-		
-		Field[] fields = VaginaType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractVaginaType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractVaginaType ct;
-				try {
-					ct = ((AbstractVaginaType) f.get(null));
+		private String id;
 
-					vaginaToIdMap.put(ct, f.getName());
-					idToVaginaMap.put(f.getName(), ct);
-					
-					allVaginaTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		public Special(AbstractBodyCoveringType coveringType, AbstractFluidType fluidType, Race race, boolean eggLayer, List<String> names, List<String> namesPlural, List<String> descriptors, String transformationDescription, String bodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
+			super(coveringType, fluidType, race, eggLayer, names, namesPlural, descriptors, transformationDescription, bodyDescription, defaultRacialOrificeModifiers);
 		}
-		
-		Collections.sort(allVaginaTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
+
+		public Special(AbstractBodyCoveringType skinType, AbstractFluidType fluidType, Race race, boolean eggLayer, String transformationDescription, String bodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
+			super(skinType, fluidType, race, eggLayer, transformationDescription, bodyDescription, defaultRacialOrificeModifiers);
+		}
+
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(LegType.class.getFields())
+			.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+			.findAny().orElseThrow().getName());
+		}
 	}
-	
+
+	TypeTable<AbstractVaginaType> table = new TypeTable<>(
+		VaginaType::sanitize,
+		VaginaType.class,
+		AbstractVaginaType.class,
+		"vagina",
+		(f,n,a,m)->new AbstractVaginaType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
+	@Deprecated
 	public static AbstractVaginaType getVaginaTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("IMP") || id.equals("DEMON_EGGS")) {
-			return VaginaType.DEMON_COMMON;
+			return "DEMON_COMMON";
 		}
 		if(id.equals("NoStepOnSnek_snake_vagina_e")) {
 			id = "NoStepOnSnek_snake_vagina";
 		}
-		id = Util.getClosestStringMatch(id, idToVaginaMap.keySet());
-		return idToVaginaMap.get(id);
+		return id;
 	}
-	
+
+	@Deprecated
 	public static String getIdFromVaginaType(AbstractVaginaType vaginaType) {
-		return vaginaToIdMap.get(vaginaType);
+		return vaginaType.getId();
 	}
-	
+
+	@Deprecated
 	public static List<AbstractVaginaType> getAllVaginaTypes() {
-		return allVaginaTypes;
+		return table.listByRace();
 	}
-	
-	private static Map<Race,List<AbstractVaginaType>> typesMap = new HashMap<>();
-	
+
+	@Deprecated
 	public static List<AbstractVaginaType> getVaginaTypes(Race r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractVaginaType> types = new ArrayList<>();
-		for(AbstractVaginaType type : VaginaType.getAllVaginaTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of());
 	}
 }
