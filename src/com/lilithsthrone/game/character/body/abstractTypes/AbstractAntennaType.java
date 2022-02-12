@@ -132,10 +132,12 @@ public abstract class AbstractAntennaType implements AntennaType {
 		}
 	}
 
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
@@ -144,40 +146,10 @@ public abstract class AbstractAntennaType implements AntennaType {
 	public String getTransformationNameOverride() {
 		return transformationName;
 	}
-	
-	public int getDefaultAntennaePerRow() {
-		return defaultAntennaePerRow;
-	}
 
 	@Override
-	public String getDeterminer(GameCharacter gc) {
-		if(gc.getAntennaRows()==1) {
-			if(gc.getAntennaePerRow()==1) {
-				return "a solitary";
-			} else if(gc.getAntennaePerRow()==2) {
-				return "a pair of";
-			} else if(gc.getAntennaePerRow()==3) {
-				return "a trio of";
-			} else {
-				return "a quartet of";
-			}
-			
-		} else {
-			if(gc.getAntennaePerRow()==1) {
-				return Util.intToString(gc.getAntennaRows())+" vertically-aligned";
-			} else if(gc.getAntennaePerRow()==2) {
-				return Util.intToString(gc.getAntennaRows())+" pairs of";
-			} else if(gc.getAntennaePerRow()==3) {
-				return Util.intToString(gc.getAntennaRows())+" trios of";
-			} else {
-				return Util.intToString(gc.getAntennaRows())+" quartets of";
-			}
-		}
-	}
-	
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
+	public int getDefaultAntennaePerRow() {
+		return defaultAntennaePerRow;
 	}
 	
 	@Override
@@ -209,12 +181,12 @@ public abstract class AbstractAntennaType implements AntennaType {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, antennaBodyDescription);
 	}
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, antennaTransformationDescription);
 	}

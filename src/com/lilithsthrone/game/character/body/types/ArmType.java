@@ -3,12 +3,16 @@ package com.lilithsthrone.game.character.body.types;
 import java.util.Arrays;
 import java.util.List;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.inventory.InventorySlot;
+import com.lilithsthrone.game.inventory.ItemTag;
+import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -19,6 +23,105 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public interface ArmType extends BodyPartTypeInterface {
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	default boolean isUnderarmHairAllowed() {
+		return getRace().getRacialClass().isAnthroHair();
+	}
+
+	default boolean allowsFlight() {
+		return false;
+	}
+
+	default String getHandsNameSingular(GameCharacter c) {
+		return "hand";
+	}
+
+	default String getHandsNamePlural(GameCharacter c) {
+		return "hands";
+	}
+
+	default String getHandsDescriptor(GameCharacter c) {
+		return getDescriptor(c);
+	}
+
+	default String getFingersNameSingular(GameCharacter c) {
+		return "finger";
+	}
+
+	default String getFingersNamePlural(GameCharacter c) {
+		return "fingers";
+	}
+
+	default String getFingersDescriptor(GameCharacter c) {
+		return getHandsDescriptor(c);
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter c) {
+		return true;
+	}
+
+	@Override
+	default String getDeterminer(GameCharacter c) {
+		int armRows = c.getArmRows();
+		return armRows == 1 ? "a pair of" : Util.intToString(armRows)+" pairs of";
+	}
+
+	@Override
+	default String getNameSingular(GameCharacter c) {
+		return "arm";
+	}
+
+	@Override
+	default String getNamePlural(GameCharacter c) {
+		return "arms";
+	}
+
+	@Override
+	default String getDescriptor(GameCharacter c) {
+		return "";
+	}
+
+	@Override
+	default BodyPartClothingBlock getBodyPartClothingBlock() {
+		if(getTags().contains(BodyPartTag.ARM_WINGS_FEATHERED)) {
+			return new BodyPartClothingBlock(
+				List.of(
+					InventorySlot.HAND,
+					InventorySlot.WRIST,
+					InventorySlot.TORSO_OVER,
+					InventorySlot.TORSO_UNDER),
+				Race.HARPY,
+				"Due to the fact that [npc.nameHasFull] bird-like wings instead of arms, only specialist clothing can be worn in this slot.",
+				List.of(
+					ItemTag.FITS_FEATHERED_ARM_WINGS,
+					ItemTag.FITS_FEATHERED_ARM_WINGS_EXCLUSIVE,
+					ItemTag.FITS_ARM_WINGS,
+					ItemTag.FITS_ARM_WINGS_EXCLUSIVE
+				));
+		}
+		if(getTags().contains(BodyPartTag.ARM_WINGS_LEATHERY)) {
+			return new BodyPartClothingBlock(
+				List.of(
+					InventorySlot.HAND,
+					InventorySlot.WRIST,
+					InventorySlot.TORSO_OVER,
+					InventorySlot.TORSO_UNDER),
+				Race.BAT_MORPH,
+				"Due to the fact that [npc.nameHasFull] leathery wings instead of arms, only specialist clothing can be worn in this slot.",
+				List.of(
+					ItemTag.FITS_LEATHERY_ARM_WINGS,
+					ItemTag.FITS_LEATHERY_ARM_WINGS_EXCLUSIVE,
+					ItemTag.FITS_ARM_WINGS,
+					ItemTag.FITS_ARM_WINGS_EXCLUSIVE
+				));
+		}
+		return null;
+	}
 
 	public static AbstractArmType HUMAN = new Special(BodyCoveringType.HUMAN,
 			Race.HUMAN,

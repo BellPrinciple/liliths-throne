@@ -16,7 +16,6 @@ import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.EarType;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -134,15 +133,18 @@ public abstract class AbstractEarType implements EarType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public boolean isAbleToBeUsedAsHandlesInSex() {
 		return this.getTags().contains(BodyPartTag.EAR_HANDLES_IN_SEX);
 	}
@@ -150,16 +152,6 @@ public abstract class AbstractEarType implements EarType {
 	@Override
 	public String getTransformationNameOverride() {
 		return transformationName;
-	}
-
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "a pair of";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
 	}
 	
 	@Override
@@ -192,17 +184,12 @@ public abstract class AbstractEarType implements EarType {
 	}
 
 	@Override
-	public TFModifier getTFModifier() {
-		return getTFTypeModifier(EarType.getEarTypes(race));
-	}
-
-//	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, earBodyDescription);
 	}
 	
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, earTransformationDescription);
 	}

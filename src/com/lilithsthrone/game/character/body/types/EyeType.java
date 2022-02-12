@@ -3,6 +3,7 @@ package com.lilithsthrone.game.character.body.types;
 import java.util.Arrays;
 import java.util.List;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
@@ -18,6 +19,29 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public interface EyeType extends BodyPartTypeInterface {
+
+	int getDefaultPairCount();
+
+	EyeShape getDefaultIrisShape();
+
+	EyeShape getDefaultPupilShape();
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		if(gc.getEyePairs()==1) {
+			return "a pair of";
+		}
+		return Util.intToString(gc.getEyePairs())+" pairs of";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return true;
+	}
 
 	public static AbstractEyeType HUMAN = new Special(BodyCoveringType.EYE_HUMAN,
 			Race.HUMAN,

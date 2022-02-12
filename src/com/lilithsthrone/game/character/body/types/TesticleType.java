@@ -3,12 +3,14 @@ package com.lilithsthrone.game.character.body.types;
 import java.util.Arrays;
 import java.util.List;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTesticleType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.1.83
@@ -16,6 +18,26 @@ import com.lilithsthrone.game.character.race.Race;
  * @author Innoxia
  */
 public interface TesticleType extends BodyPartTypeInterface {
+
+	AbstractFluidType getFluidType();
+
+	boolean isInternal();
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		if(gc.getTesticleCount()==2) {
+			return "a pair of";
+		} else if(gc.getTesticleCount()==3) {
+			return "a trio of";
+		} else {
+			return Util.intToString(gc.getTesticleCount());
+		}
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return true;
+	}
 
 	public static AbstractTesticleType NONE = new Special(null, Race.NONE, FluidType.CUM_HUMAN, false) {
 	};

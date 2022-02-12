@@ -119,11 +119,13 @@ public abstract class AbstractTorsoType implements TorsoType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
@@ -131,16 +133,6 @@ public abstract class AbstractTorsoType implements TorsoType {
 	@Override
 	public String getTransformationNameOverride() {
 		return transformationName;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "a layer of";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
 	}
 	
 	@Override
@@ -172,13 +164,13 @@ public abstract class AbstractTorsoType implements TorsoType {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, skinBodyDescription);
 	}
 	
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, skinTransformationDescription);
 	}

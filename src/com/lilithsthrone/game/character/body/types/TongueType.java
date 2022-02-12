@@ -3,6 +3,7 @@ package com.lilithsthrone.game.character.body.types;
 import java.util.Arrays;
 import java.util.List;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTongueType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
@@ -17,7 +18,23 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public interface TongueType extends BodyPartTypeInterface {
-	
+
+	int getDefaultLength();
+
+	String getBodyDescription(GameCharacter owner);
+
+	List<TongueModifier> getDefaultRacialTongueModifiers();
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return false;
+	}
+
 	public static AbstractTongueType HUMAN = new Special(BodyCoveringType.TONGUE,
 			Race.HUMAN,
 			3,

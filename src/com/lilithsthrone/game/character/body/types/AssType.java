@@ -3,6 +3,7 @@ package com.lilithsthrone.game.character.body.types;
 import java.util.Arrays;
 import java.util.List;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAnusType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
@@ -17,6 +18,22 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public interface AssType extends BodyPartTypeInterface {
+
+	AbstractAnusType getAnusType();
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return false;
+	}
 
 	public static AbstractAssType HUMAN = new Special(BodyCoveringType.HUMAN,
 			Race.HUMAN,

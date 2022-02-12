@@ -134,27 +134,20 @@ public abstract class AbstractAnusType implements AnusType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public boolean isAssHairAllowed() {
 		return assHairAllowed;
-	}
-
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
 	}
 
 	@Override
@@ -192,6 +185,7 @@ public abstract class AbstractAnusType implements AnusType {
 		return race;
 	}
 
+	@Override
 	public List<OrificeModifier> getDefaultRacialOrificeModifiers() {
 		return defaultRacialOrificeModifiers;
 	}

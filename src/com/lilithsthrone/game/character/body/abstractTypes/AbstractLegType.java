@@ -39,7 +39,6 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
@@ -251,11 +250,13 @@ public abstract class AbstractLegType implements LegType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
@@ -265,7 +266,7 @@ public abstract class AbstractLegType implements LegType {
 	public String getTransformationNameOverride() {
 		return transformationName;
 	}
-	
+
 	@Override
 	public String getDeterminer(GameCharacter gc) {
 		if(gc==null) {
@@ -277,14 +278,6 @@ public abstract class AbstractLegType implements LegType {
 			return "a pair of";
 		}
 		return Util.intToString(gc.getLegCount());
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		if(gc==null) {
-			return true;
-		}
-		return gc.getLegCount()>1;
 	}
 
 	@Override
@@ -347,14 +340,11 @@ public abstract class AbstractLegType implements LegType {
 	}
 
 	@Override
-	public TFModifier getTFModifier() {
-		return getTFTypeModifier(LegType.getLegTypes(race));
-	}
-
 	public AbstractFootType getFootType() {
 		return footType;
 	}
 
+	@Override
 	public FootStructure getDefaultFootStructure(LegConfiguration legConfiguration) {
 		if(!defaultFootStructure.containsKey(legConfiguration)) {
 			return defaultFootStructure.get(LegConfiguration.BIPEDAL);
@@ -362,15 +352,17 @@ public abstract class AbstractLegType implements LegType {
 		return defaultFootStructure.get(legConfiguration);
 	}
 	
-	
+	@Override
 	public String getFootNameSingular(GameCharacter gc) {
 		return this.getFootType().getFootName();
 	}
-	
+
+	@Override
 	public String getFootNamePlural(GameCharacter gc) {
 		return this.getFootType().getFootNamePlural();
 	}
 
+	@Override
 	public String getFootDescriptor(GameCharacter gc) {
 		if (gc.isFeminine()) {
 			return Util.randomItemFrom(Util.mergeLists(this.getFootType().getFootDescriptorsFeminine(), footDescriptorsFeminine));
@@ -378,16 +370,19 @@ public abstract class AbstractLegType implements LegType {
 			return Util.randomItemFrom(Util.mergeLists(this.getFootType().getFootDescriptorsMasculine(), footDescriptorsMasculine));
 		}
 	}
-	
 
+
+	@Override
 	public String getToeNameSingular(GameCharacter gc) {
 		return this.getFootType().getToeSingularName();
 	}
-	
+
+	@Override
 	public String getToeNamePlural(GameCharacter gc) {
 		return this.getFootType().getToePluralName();
 	}
 
+	@Override
 	public String getToeDescriptor(GameCharacter gc) {
 		if (gc.isFeminine()) {
 			return Util.randomItemFrom(Util.mergeLists(this.getFootType().getToeDescriptorsFeminine(), toeDescriptorsFeminine));
@@ -397,36 +392,19 @@ public abstract class AbstractLegType implements LegType {
 	}
 	
 	
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, legBodyDescription);
 	}
 	
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, legTransformationDescription);
 	}
 
 
-	/**
-	 * Applies the related leg configuration transformation for this leg type, and returns a description of the changes.<br/><br/>
-	 * 
-	 * <b>When overriding, consider:</b><br/>
-	 * Ass.class (type)<br/>
-	 * BreastCrotch.class (type)<br/>
-	 * Tail.class (type)<br/>
-	 * Tentacle.class (type)<br/>
-	 * Penis.class (type, size, cloaca)<br/>
-	 * Vagina.class (type, capacity, cloaca)<br/>
-	 * 
-	 * @param configuration The leg configuration to be applied.
-	 * @param character The character which is being transformed.
-	 * @param applyEffects Whether the transformative effects should be applied. Pass in false to get the transformation description without applying any of the actual effects.
-	 * @param applyFullEffects Pass in true if you want the additional transformations to include attribute changes (such as penis resizing, vagina capacity resetting, etc.).
-	 * 
-	 * @return A description of the transformation.
-	 */
+	@Override
 	public String applyLegConfigurationTransformation(GameCharacter character, LegConfiguration legConfiguration, boolean applyEffects, boolean applyFullEffects) {
 		StringBuilder feralStringBuilder = new StringBuilder();
 
@@ -483,13 +461,7 @@ public abstract class AbstractLegType implements LegType {
 		return UtilText.parse(character, feralStringBuilder.toString());
 	}
 	
-	/**
-	 * For use in modifying bodies without an attached character. Outside of the Subspecies class, you should probably always be calling the version of this method that takes in a GameCharacter.
-	 * 
-	 * @param body The body to be modified.
-	 * @param legConfiguration The LegConfiguration to be applied.
-	 * @param applyFullEffects Pass in true if you want the additional transformations to include attribute changes (such as penis resizing, vagina capacity resetting, etc.).
-	 */
+	@Override
 	public void applyLegConfigurationTransformation(Body body, LegConfiguration legConfiguration, boolean applyFullEffects) {
 		handleLegConfigurationChanges(body, legConfiguration, true, applyFullEffects);
 		body.getLeg().setLegConfigurationForced(this, legConfiguration);
@@ -939,50 +911,30 @@ public abstract class AbstractLegType implements LegType {
 			}
 		}
  	}
-	
+
+	@Override
 	public List<LegConfiguration> getAllowedLegConfigurations() {
 		return allowedLegConfigurations;
 	}
 
-	/**
-	 * @param legConfiguration The configuration to check transformation availability of.
-	 * @return True if this configuration is allowed for this LegType.
-	 */
+	@Override
 	public boolean isLegConfigurationAvailable(LegConfiguration legConfiguration) {
 		return allowedLegConfigurations.contains(legConfiguration);
 	}
-	
+
+	@Override
 	public boolean hasSpinneret() {
 		return spinneret;
 	}
 
-	/**
-	 * @return Usually TentacleType.NONE. If it returns an actual TentacleType, then that means this LegType has tentacles in place of legs.
-	 */
+	@Override
 	public AbstractTentacleType getTentacleType() {
 		return tentacleType;
 	}
-	
-	public boolean isLegsReplacedByTentacles() {
-		return getTentacleType()!=TentacleType.NONE;
-	}
-	
+
+	@Override
 	public int getTentacleCount() {
 		return tentacleCount;
-	}
-	
-	/**
-	 * @return By default, LegTypes return a modification of 0, but if a LegType requires a modifier, then this can be overridden and its effects will be handled alongside LegConfiguration's getLandSpeedModifier().
-	 */
-	public int getLandSpeedModifier() {
-		return 0;
-	}
-
-	/**
-	 * @return By default, LegTypes return a modification of 0, but if a LegType requires a modifier, then this can be overridden and its effects will be handled alongside LegConfiguration's getWaterSpeedModifier().
-	 */
-	public int getWaterSpeedModifier() {
-		return 0;
 	}
 	
 	@Override

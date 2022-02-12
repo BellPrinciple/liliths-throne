@@ -130,29 +130,22 @@ public abstract class AbstractTongueType implements TongueType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public int getDefaultLength() {
 		return defaultLength;
 	}
 
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
-	}
-	
 	@Override
 	public String getNameSingular(GameCharacter gc) {
 		return name;
@@ -182,12 +175,12 @@ public abstract class AbstractTongueType implements TongueType {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, tongueBodyDescription);
 	}
 	
-	
+	@Override
 	public List<TongueModifier> getDefaultRacialTongueModifiers() {
 		return defaultRacialTongueModifiers;
 	}

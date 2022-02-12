@@ -15,7 +15,6 @@ import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BreastType;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.types.NippleType;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
@@ -185,19 +184,23 @@ public abstract class AbstractBreastType implements BreastType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public AbstractNippleType getNippleType() {
 		return nippleType;
 	}
 
+	@Override
 	public AbstractFluidType getFluidType() {
 		return fluidType;
 	}
@@ -205,23 +208,6 @@ public abstract class AbstractBreastType implements BreastType {
 	@Override
 	public String getTransformationNameOverride() {
 		return transformationName;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		if(gc.getBreastCrotchShape()==BreastShape.UDDERS) {
-			return "a set of";
-		}
-		if(gc.getBreastRows()==1) {
-			return "a pair of";
-		} else {
-			return Util.intToString(gc.getBreastRows())+" pairs of";
-		}
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
 	}
 
 	@Override
@@ -271,14 +257,6 @@ public abstract class AbstractBreastType implements BreastType {
 		}
 	}
 
-	public String getCrotchNameSingular(GameCharacter gc) {
-		return UtilText.returnStringAtRandom("crotch-breast", "crotch-boob", "crotch-boob", "crotch-boob", "crotch-tit");
-	}
-	
-	public String getCrotchNamePlural(GameCharacter gc) {
-		return UtilText.returnStringAtRandom("crotch-breasts", "crotch-boobs", "crotch-boobs", "crotch-boobs", "crotch-tits");
-	}
-
 	@Override
 	/**
 	 * <b>This should never be used - the covering of breasts is determined by the torso's covering!</b>
@@ -295,20 +273,22 @@ public abstract class AbstractBreastType implements BreastType {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, breastsBodyDescription);
 	}
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, breastsTransformationDescription);
 	}
 
+	@Override
 	public String getTransformationCrotchDescription(GameCharacter owner) {
 		return UtilText.parse(owner, breastsCrotchTransformationDescription);
 	}
-	
+
+	@Override
 	public String getBodyCrotchDescription(GameCharacter owner) {
 		return UtilText.parse(owner, breastsCrotchBodyDescription);
 	}

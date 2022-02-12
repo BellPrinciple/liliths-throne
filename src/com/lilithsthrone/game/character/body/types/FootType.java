@@ -7,6 +7,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFootType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
+import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 
@@ -18,6 +19,32 @@ import com.lilithsthrone.utils.Util;
 public interface FootType {
 
 	String getId();
+
+	String getTypeName();
+
+	String getFootName();
+
+	String getFootNamePlural();
+
+	List<String> getFootDescriptorsMasculine();
+
+	List<String> getFootDescriptorsFeminine();
+
+	String getToeSingularName();
+
+	String getToePluralName();
+
+	List<String> getToeDescriptorsMasculine();
+
+	List<String> getToeDescriptorsFeminine();
+
+	String getFootjobName();
+
+	String getFootBodyDescription();
+
+	String getFootNailPolishDescription(GameCharacter owner);
+
+	List<FootStructure> getPermittedFootStructures(LegConfiguration legConfiguration);
 
 	public static AbstractFootType NONE = new Special("none",
 			"none",

@@ -200,15 +200,18 @@ public abstract class AbstractVaginaType implements VaginaType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public boolean isPubicHairAllowed() {
 		return pubicHairAllowed;
 	}
@@ -218,26 +221,19 @@ public abstract class AbstractVaginaType implements VaginaType {
 		return transformationName;
 	}
 
+	@Override
 	public AbstractFluidType getFluidType() {
 		return fluidType;
 	}
-	
+
+	@Override
 	public boolean isEggLayer() {
 		return eggLayer;
 	}
 
+	@Override
 	public List<OrificeModifier> getDefaultRacialOrificeModifiers() {
 		return defaultRacialOrificeModifiers;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
 	}
 
 	@Override
@@ -324,21 +320,13 @@ public abstract class AbstractVaginaType implements VaginaType {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, bodyDescription);
 	}
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, transformationDescription);
-	}
-	
-	/**
-	 * This method is called immediately before and immediately after the target's vagina type is changed into into this type. When before, applicationAfterChangeApplied is false, and when after, applicationAfterChangeApplied is true.
-	 * It is not called if owner is null.
-	 */
-	public String applyAdditionalTransformationEffects(GameCharacter owner, boolean applicationAfterChangeApplied) {
-		return "";
 	}
 }

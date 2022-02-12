@@ -12,6 +12,7 @@ import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -21,6 +22,69 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @author Innoxia
  */
 public interface PenisType extends BodyPartTypeInterface {
+
+	boolean isPubicHairAllowed();
+
+	AbstractTesticleType getTesticleType();
+
+	List<PenetrationModifier> getDefaultRacialPenetrationModifiers();
+
+	default String getPenisHeadName(GameCharacter gc) {
+		return UtilText.returnStringAtRandom("head", "tip");
+	}
+
+	default String getPenisHeadDescriptor(GameCharacter gc) {
+		for(PenetrationModifier mod : PenetrationModifier.getPenetrationModifiers()) {
+			if(gc.getPenisModifiers().contains(mod)) {
+				switch(mod) {
+				case BLUNT:
+					return UtilText.returnStringAtRandom("blunt");
+				case FLARED:
+					return UtilText.returnStringAtRandom("wide", "flared", "flat");
+				case TAPERED:
+					return UtilText.returnStringAtRandom("tapered", "pointed");
+				case KNOTTED:
+				case PREHENSILE:
+				case RIBBED:
+				case SHEATHED:
+				case BARBED:
+				case TENTACLED:
+				case VEINY:
+				case OVIPOSITOR:
+					break;
+				}
+			}
+		}
+		return "";
+	}
+
+	default String getCumName(GameCharacter gc) {
+		return getTesticleType().getFluidType().getName(gc);
+	}
+
+	default String getCumDescriptor(GameCharacter gc) {
+		return getTesticleType().getFluidType().getDescriptor(gc);
+	}
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return false;
+	}
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	/**
+	 * This method is called immediately before and immediately after the target's penis type is changed into into this type. When before, applicationAfterChangeApplied is false, and when after, applicationAfterChangeApplied is true.
+	 * It is not called if owner is null.
+	 */
+	String applyAdditionalTransformationEffects(GameCharacter owner, boolean applicationAfterChangeApplied);
 
 	public static AbstractPenisType NONE = new Special(null,
 			Race.NONE,

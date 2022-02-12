@@ -155,23 +155,28 @@ public abstract class AbstractEyeType implements EyeType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
 
+	@Override
 	public int getDefaultPairCount() {
 		return defaultPairCount;
 	}
 
+	@Override
 	public EyeShape getDefaultIrisShape() {
 		return defaultIrisShape;
 	}
 
+	@Override
 	public EyeShape getDefaultPupilShape() {
 		return defaultPupilShape;
 	}
@@ -179,19 +184,6 @@ public abstract class AbstractEyeType implements EyeType {
 	@Override
 	public String getTransformationNameOverride() {
 		return transformationName;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		if(gc.getEyePairs()==1) {
-			return "a pair of";
-		}
-		return Util.intToString(gc.getEyePairs())+" pairs of";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
 	}
 	
 	@Override
@@ -223,13 +215,13 @@ public abstract class AbstractEyeType implements EyeType {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, eyeBodyDescription);
 	}
 	
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, eyeTransformationDescription);
 	}

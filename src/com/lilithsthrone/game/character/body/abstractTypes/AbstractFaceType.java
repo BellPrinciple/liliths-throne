@@ -17,7 +17,6 @@ import com.lilithsthrone.game.character.body.types.FaceType;
 import com.lilithsthrone.game.character.body.types.MouthType;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -223,19 +222,23 @@ public abstract class AbstractFaceType implements FaceType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public boolean isFacialHairAllowed() {
 		return facialHairAllowed;
 	}
 
+	@Override
 	public AbstractMouthType getMouthType() {
 		return mouthType;
 	}
@@ -245,16 +248,6 @@ public abstract class AbstractFaceType implements FaceType {
 		return transformationName;
 	}
 
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "";
-	}
-	
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
-	}
-	
 	@Override
 	public String getNameSingular(GameCharacter gc) {
 		if(names==null || names.isEmpty()) {
@@ -302,14 +295,17 @@ public abstract class AbstractFaceType implements FaceType {
 		return race;
 	}
 
+	@Override
 	public String getNoseNameSingular(GameCharacter gc) {
 		return noseName;
 	}
-	
+
+	@Override
 	public String getNoseNamePlural(GameCharacter gc) {
 		return noseNamePlural;
 	}
 
+	@Override
 	public String getNoseDescriptor(GameCharacter gc) {
 		if (gc.isFeminine()) {
 			return Util.randomItemFrom(noseDescriptorsFeminine);
@@ -318,19 +314,14 @@ public abstract class AbstractFaceType implements FaceType {
 		}
 	}
 	
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, owner.isFeral() ? faceBodyDescriptionFeral : faceBodyDescription);
 	}
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, faceTransformationDescription);
-	}
-
-	@Override
-	public TFModifier getTFModifier() {
-		return getTFTypeModifier(FaceType.getFaceTypes(race));
 	}
 
 	@Override

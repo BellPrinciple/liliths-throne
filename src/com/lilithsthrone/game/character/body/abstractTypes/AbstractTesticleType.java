@@ -118,37 +118,25 @@ public abstract class AbstractTesticleType implements TesticleType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public AbstractFluidType getFluidType() {
 		return fluidType;
 	}
 
+	@Override
 	public boolean isInternal() {
 		return internal;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		if(gc.getTesticleCount()==2) {
-			return "a pair of";
-		} else if(gc.getTesticleCount()==3) {
-			return "a trio of";
-		} else {
-			return Util.intToString(gc.getTesticleCount());
-		}
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
 	}
 
 	@Override

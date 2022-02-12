@@ -18,6 +18,20 @@ import com.lilithsthrone.utils.Util;
  */
 public interface TorsoType extends BodyPartTypeInterface {
 
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "a layer of";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return false;
+	}
+
 	public static AbstractTorsoType HUMAN = new Special(BodyCoveringType.HUMAN,
 			Race.HUMAN,
 			Util.newArrayListOfValues(""),

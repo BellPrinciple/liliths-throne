@@ -5,11 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
+import com.lilithsthrone.game.character.body.valueEnums.WingSize;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -18,6 +21,33 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public interface WingType extends BodyPartTypeInterface {
+
+	boolean allowsFlight();
+
+	boolean isGeneric();
+
+	WingSize getMinimumSize();
+
+	WingSize getMaximumSize();
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return true;
+	}
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "a pair of";
+	}
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(WingType.getWingTypes(getRace()));
+	}
 
 	// If any more wing types are added, check to see that the potion TFs still work. (5 types is currently the maximum.)
 	
@@ -37,6 +67,10 @@ public interface WingType extends BodyPartTypeInterface {
 			+ "#ENDIF"
 			+ "<br/>[npc.Name] now [npc.has] [style.boldTfGeneric(no wings)].",
 			"") {
+		@Override
+		public TFModifier getTFModifier() {
+			return TFModifier.REMOVAL;
+		}
 	};
 
 	// Angels:

@@ -10,6 +10,7 @@ import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -18,6 +19,31 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public interface HairType extends BodyPartTypeInterface {
+
+	default boolean isAbleToBeGrabbedInSex() {
+		return getTags().contains(BodyPartTag.HAIR_HANDLES_IN_SEX);
+	}
+
+	/**
+	 * @return
+	 * Chance for this hair type to spawn with neck fluff, from 0->1.0 representing 0->100%
+	 */
+	double getNeckFluffChance();
+
+	/**
+	 * @return
+	 * Neck fluff is only applied on spawn if the character is a greater morph.
+	 */
+	boolean isNeckFluffRequiresGreater();
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(HairType.getHairTypes(getRace()));
+	}
 
 	public static AbstractHairType HUMAN = new Special(BodyCoveringType.HAIR_HUMAN,
 			Race.HUMAN,

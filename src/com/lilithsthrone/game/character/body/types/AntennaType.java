@@ -8,6 +8,7 @@ import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.1.83
@@ -15,6 +16,43 @@ import com.lilithsthrone.game.character.race.Race;
  * @author Innoxia
  */
 public interface AntennaType extends BodyPartTypeInterface {
+
+	int getDefaultAntennaePerRow();
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return true;
+	}
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		if(gc.getAntennaRows()==1) {
+			if(gc.getAntennaePerRow()==1) {
+				return "a solitary";
+			} else if(gc.getAntennaePerRow()==2) {
+				return "a pair of";
+			} else if(gc.getAntennaePerRow()==3) {
+				return "a trio of";
+			} else {
+				return "a quartet of";
+			}
+
+		} else {
+			if(gc.getAntennaePerRow()==1) {
+				return Util.intToString(gc.getAntennaRows())+" vertically-aligned";
+			} else if(gc.getAntennaePerRow()==2) {
+				return Util.intToString(gc.getAntennaRows())+" pairs of";
+			} else if(gc.getAntennaePerRow()==3) {
+				return Util.intToString(gc.getAntennaRows())+" trios of";
+			} else {
+				return Util.intToString(gc.getAntennaRows())+" quartets of";
+			}
+		}
+	}
 
 	public static final AbstractAntennaType NONE = new AbstractAntennaType(
 			BodyCoveringType.ANTENNA,

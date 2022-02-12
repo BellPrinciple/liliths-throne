@@ -22,6 +22,36 @@ import com.lilithsthrone.utils.Util;
  */
 public interface VaginaType extends BodyPartTypeInterface {
 
+	boolean isPubicHairAllowed();
+
+	AbstractFluidType getFluidType();
+
+	boolean isEggLayer();
+
+	List<OrificeModifier> getDefaultRacialOrificeModifiers();
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	/**
+	 * This method is called immediately before and immediately after the target's vagina type is changed into into this type. When before, applicationAfterChangeApplied is false, and when after, applicationAfterChangeApplied is true.
+	 * It is not called if owner is null.
+	 */
+	default String applyAdditionalTransformationEffects(GameCharacter owner, boolean applicationAfterChangeApplied) {
+		return "";
+	}
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return false;
+	}
+
 	public static AbstractVaginaType NONE = new Special(BodyCoveringType.VAGINA,
 			FluidType.GIRL_CUM_HUMAN,
 			Race.NONE,
