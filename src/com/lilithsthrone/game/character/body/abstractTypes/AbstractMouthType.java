@@ -234,27 +234,20 @@ public abstract class AbstractMouthType implements MouthType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
-	public AbstractTongueType getTongueType() {
-		return tongueType;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "";
-	}
 
 	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
+	public AbstractTongueType getTongueType() {
+		return tongueType;
 	}
 
 	@Override
@@ -282,14 +275,17 @@ public abstract class AbstractMouthType implements MouthType {
 		}
 	}
 
+	@Override
 	public String getLipsNameSingular(GameCharacter gc) {
 		return Util.randomItemFrom(lipNames);
 	}
-	
+
+	@Override
 	public String getLipsNamePlural(GameCharacter gc) {
 		return Util.randomItemFrom(lipNamesPlural);
 	}
-	
+
+	@Override
 	public boolean isLipsDescriptorSizeAllowed(GameCharacter gc) {
 		if (gc.isFeminine()) {
 			return lipDescriptorsFeminineSizeAllowed;
@@ -297,7 +293,8 @@ public abstract class AbstractMouthType implements MouthType {
 			return lipDescriptorsMasculineSizeAllowed;
 		}
 	}
-	
+
+	@Override
 	public List<String> getLipsDescriptors(GameCharacter gc) {
 		if (gc.isFeminine()) {
 			return (lipDescriptorsFeminine);
@@ -316,7 +313,7 @@ public abstract class AbstractMouthType implements MouthType {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, mouthBodyDescription);
 	}

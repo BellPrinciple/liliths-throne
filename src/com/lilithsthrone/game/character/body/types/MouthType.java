@@ -20,6 +20,30 @@ import com.lilithsthrone.utils.Util;
  */
 public interface MouthType extends BodyPartTypeInterface {
 
+	AbstractTongueType getTongueType();
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return false;
+	}
+
+	String getLipsNameSingular(GameCharacter gc);
+
+	String getLipsNamePlural(GameCharacter gc);
+
+	boolean isLipsDescriptorSizeAllowed(GameCharacter gc);
+
+	List<String> getLipsDescriptors(GameCharacter gc);
+
+	String getBodyDescription(GameCharacter owner);
+
+	List<OrificeModifier> getDefaultRacialOrificeModifiers();
+
 	public static AbstractMouthType HUMAN = new Special(Race.HUMAN, TongueType.HUMAN) {};
 
 	public static AbstractMouthType ANGEL = new Special(Race.ANGEL, TongueType.ANGEL) {};

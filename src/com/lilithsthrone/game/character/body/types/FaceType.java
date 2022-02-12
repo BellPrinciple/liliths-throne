@@ -3,6 +3,7 @@ package com.lilithsthrone.game.character.body.types;
 import java.util.Arrays;
 import java.util.List;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractMouthType;
@@ -10,6 +11,7 @@ import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -18,6 +20,35 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public interface FaceType extends BodyPartTypeInterface {
+
+	boolean isFacialHairAllowed();
+
+	AbstractMouthType getMouthType();
+
+	String getNoseNameSingular(GameCharacter gc);
+
+	String getNoseNamePlural(GameCharacter gc);
+
+	String getNoseDescriptor(GameCharacter gc);
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return false;
+	}
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(FaceType.getFaceTypes(getRace()));
+	}
 
 	public static AbstractFaceType HUMAN = new Special(BodyCoveringType.HUMAN,
 			Race.HUMAN,

@@ -16,7 +16,6 @@ import com.lilithsthrone.game.character.body.types.WingType;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -154,32 +153,33 @@ public abstract class AbstractWingType implements WingType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "a pair of";
-	}
 
+	@Override
 	public boolean allowsFlight() {
 		return allowsFlight;
 	}
 
+	@Override
 	public boolean isGeneric() {
 		return generic;
 	}
 
+	@Override
 	public WingSize getMinimumSize() {
 		return minimumSize;
 	}
 
+	@Override
 	public WingSize getMaximumSize() {
 		return maximumSize;
 	}
@@ -187,11 +187,6 @@ public abstract class AbstractWingType implements WingType {
 	@Override
 	public String getTransformationNameOverride() {
 		return transformationName;
-	}
-	
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
 	}
 	
 	@Override
@@ -224,17 +219,12 @@ public abstract class AbstractWingType implements WingType {
 	}
 
 	@Override
-	public TFModifier getTFModifier() {
-		return this == WingType.NONE ? TFModifier.REMOVAL : getTFTypeModifier(WingType.getWingTypes(race));
-	}
-
-//	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, wingBodyDescription);
 	}
 	
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, wingTransformationDescription);
 	}

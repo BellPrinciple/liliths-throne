@@ -139,11 +139,13 @@ public abstract class AbstractFluidType implements FluidType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
@@ -157,16 +159,6 @@ public abstract class AbstractFluidType implements FluidType {
 	public String toString() {
 		System.err.println("Warning! AbstractFluidType is calling toString()");
 		return super.toString();
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "some";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
 	}
 
 	@Override
@@ -229,15 +221,18 @@ public abstract class AbstractFluidType implements FluidType {
 	public Race getRace() {
 		return race;
 	}
-	
+
+	@Override
 	public FluidTypeBase getBaseType() {
 		return baseFluidType;
 	}
-	
+
+	@Override
 	public FluidFlavour getFlavour() {
 		return flavour;
 	}
-	
+
+	@Override
 	public List<FluidModifier> getDefaultFluidModifiers() {
 		return defaultFluidModifiers;
 	}

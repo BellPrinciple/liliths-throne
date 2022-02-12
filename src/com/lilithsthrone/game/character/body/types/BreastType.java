@@ -3,13 +3,17 @@ package com.lilithsthrone.game.character.body.types;
 import java.util.Arrays;
 import java.util.List;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractNippleType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
+import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.1.0
@@ -17,6 +21,43 @@ import com.lilithsthrone.game.character.race.Race;
  * @author Innoxia
  */
 public interface BreastType extends BodyPartTypeInterface {
+
+	AbstractNippleType getNippleType();
+
+	AbstractFluidType getFluidType();
+
+	default String getCrotchNameSingular(GameCharacter gc) {
+		return UtilText.returnStringAtRandom("crotch-breast", "crotch-boob", "crotch-boob", "crotch-boob", "crotch-tit");
+	}
+
+	default String getCrotchNamePlural(GameCharacter gc) {
+		return UtilText.returnStringAtRandom("crotch-breasts", "crotch-boobs", "crotch-boobs", "crotch-boobs", "crotch-tits");
+	}
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	String getTransformationCrotchDescription(GameCharacter owner);
+
+	String getBodyCrotchDescription(GameCharacter owner);
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		if(gc.getBreastCrotchShape()== BreastShape.UDDERS) {
+			return "a set of";
+		}
+		if(gc.getBreastRows()==1) {
+			return "a pair of";
+		} else {
+			return Util.intToString(gc.getBreastRows())+" pairs of";
+		}
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return true;
+	}
 
 	// Only used for when lacking crotch breasts:
 	public static AbstractBreastType NONE = new Special(BodyCoveringType.HUMAN,

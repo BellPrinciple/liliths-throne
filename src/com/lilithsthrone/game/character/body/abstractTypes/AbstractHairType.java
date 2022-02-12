@@ -17,7 +17,6 @@ import com.lilithsthrone.game.character.body.types.HairType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -162,29 +161,23 @@ public abstract class AbstractHairType implements HairType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
-	public boolean isAbleToBeGrabbedInSex() {
-		return this.getTags().contains(BodyPartTag.HAIR_HANDLES_IN_SEX);
-	}
-	
-	/**
-	 * @return Chance for this hair type to spawn with neck fluff, from 0->1.0 representing 0->100%
-	 */
+
+	@Override
 	public double getNeckFluffChance() {
 		return neckFluffChance;
 	}
 
-	/**
-	 * @return true if neck fluff is only applied on spawn if the character is a greater morph.
-	 */
+	@Override
 	public boolean isNeckFluffRequiresGreater() {
 		return neckFluffRequiresGreater;
 	}
@@ -240,17 +233,12 @@ public abstract class AbstractHairType implements HairType {
 	}
 
 	@Override
-	public TFModifier getTFModifier() {
-		return getTFTypeModifier(HairType.getHairTypes(race));
-	}
-
-//	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, hairBodyDescription);
 	}
 	
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, hairTransformationDescription);
 	}

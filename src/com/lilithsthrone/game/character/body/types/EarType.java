@@ -3,12 +3,14 @@ package com.lilithsthrone.game.character.body.types;
 import java.util.Arrays;
 import java.util.List;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -17,6 +19,27 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public interface EarType extends BodyPartTypeInterface {
+
+	boolean isAbleToBeUsedAsHandlesInSex();
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "a pair of";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return true;
+	}
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(EarType.getEarTypes(getRace()));
+	}
 
 	public static AbstractEarType HUMAN = new Special(BodyCoveringType.HUMAN,
 			Race.HUMAN,

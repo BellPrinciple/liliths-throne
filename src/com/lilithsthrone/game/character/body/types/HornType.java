@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -18,6 +20,59 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public interface HornType extends BodyPartTypeInterface {
+
+	boolean isGeneric();
+
+	int getDefaultHornsPerRow();
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		if(gc.getHornRows()==1) {
+			if(gc.getHornsPerRow()==1) {
+				return "a solitary";
+			} else if(gc.getHornsPerRow()==2) {
+				return "a pair of";
+			} else if(gc.getHornsPerRow()==3) {
+				return "a trio of";
+			} else {
+				return "a quartet of";
+			}
+
+		} else {
+			if(gc.getHornsPerRow()==1) {
+				return Util.intToString(gc.getHornRows())+" vertically-aligned";
+			} else if(gc.getHornsPerRow()==2) {
+				return Util.intToString(gc.getHornRows())+" pairs of";
+			} else if(gc.getHornsPerRow()==3) {
+				return Util.intToString(gc.getHornRows())+" trios of";
+			} else {
+				return Util.intToString(gc.getHornRows())+" quartets of";
+			}
+		}
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return true;
+	}
+
+	@Override
+	default String getName(GameCharacter gc){
+		if(isDefaultPlural(gc) && (gc.getHornsPerRow()>1 || gc.getHornRows()>1)) {
+			return getNamePlural(gc);
+		} else {
+			return getNameSingular(gc);
+		}
+	}
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(HornType.getHornTypes(getRace(),false));
+	}
 
 	// If any more horn types are added, check to see that the potion TFs still work. (5 types is currently the maximum.)
 	
@@ -32,6 +87,10 @@ public interface HornType extends BodyPartTypeInterface {
 			new ArrayList<>(),
 			"<br/>[npc.Name] now [npc.has] [style.boldTfGeneric(no horns)].",
 			"") {
+		@Override
+		public TFModifier getTFModifier() {
+			return TFModifier.NONE;
+		}
 	};
 
 //	// Cows:

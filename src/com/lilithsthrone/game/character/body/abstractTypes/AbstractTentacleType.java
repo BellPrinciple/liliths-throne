@@ -17,7 +17,6 @@ import com.lilithsthrone.game.character.body.types.TentacleType;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -197,19 +196,23 @@ public abstract class AbstractTentacleType implements TentacleType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
 
+	@Override
 	public int getDefaultGirth() {
 		return defaultGirth;
 	}
 
+	@Override
 	public float getDefaultLengthAsPercentageOfHeight() {
 		return defaultLengthAsPercentageOfHeight;
 	}
@@ -236,20 +239,6 @@ public abstract class AbstractTentacleType implements TentacleType {
 	}
 	
 	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
-	}
-	
-	@Override
-	public String getName(GameCharacter gc){
-		if(isDefaultPlural(gc) || (gc!=null && gc.getTentacleCount()!=1)) {
-			return getNamePlural(gc);
-		} else {
-			return getNameSingular(gc);
-		}
-	}
-	
-	@Override
 	public String getNameSingular(GameCharacter gc) {
 		return name;
 	}
@@ -267,15 +256,18 @@ public abstract class AbstractTentacleType implements TentacleType {
 			return Util.randomItemFrom(descriptorsMasculine);
 		}
 	}
-	
+
+	@Override
 	public String getTentacleTipNameSingular(GameCharacter gc) {
 		return tipName;
 	}
-	
+
+	@Override
 	public String getTentacleTipNamePlural(GameCharacter gc) {
 		return tipNamePlural;
 	}
-	
+
+	@Override
 	public String getTentacleTipDescriptor(GameCharacter gc) {
 		if (gc.isFeminine()) {
 			return Util.randomItemFrom(tipDescriptorsFeminine);
@@ -294,209 +286,14 @@ public abstract class AbstractTentacleType implements TentacleType {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, tentacleBodyDescription);
 	}
 	
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, tentacleTransformationDescription);
-	}
-	
-	/**
-	 * @return A description of this tentacle's girth, based on the TYPE tag and the owner's girth.
-	 */
-	public String getGirthDescription(GameCharacter owner) {
-		StringBuilder sb = new StringBuilder();
-		
-		if(this.getTags().contains(BodyPartTag.TAIL_TYPE_FUR)) {
-			if(owner.getTentacleCount()>1) {
-				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tentacles] are"));
-			} else {
-				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tentacle] is"));
-			}
-			switch(owner.getTentacleGirth()) {
-				case ZERO_THIN:
-					sb.append(UtilText.parse(owner, " very thin and severely lacking in fluffiness in proportion to the rest of [npc.her] body."));
-					break;
-				case ONE_SLENDER:
-					sb.append(UtilText.parse(owner, " slender and lacking in fluffiness in proportion to the rest of [npc.her] body."));
-					break;
-				case TWO_NARROW:
-					sb.append(UtilText.parse(owner, " quite narrow and a little lacking in fluffiness in proportion to the rest of [npc.her] body."));
-					break;
-				case THREE_AVERAGE:
-					sb.append(UtilText.parse(owner, " of an average thickness and fluffiness in proportion to the rest of [npc.her] body."));
-					break;
-				case FOUR_GIRTHY:
-					sb.append(UtilText.parse(owner, " quite big and fluffy in proportion to the rest of [npc.her] body."));
-					break;
-				case FIVE_THICK:
-					sb.append(UtilText.parse(owner, " very big and fluffy in proportion to the rest of [npc.her] body."));
-					break;
-				case SIX_CHUBBY:
-					sb.append(UtilText.parse(owner, " incredibly thick and fluffy in proportion to the rest of [npc.her] body."));
-					break;
-				case SEVEN_FAT:
-					sb.append(UtilText.parse(owner, " extremely thick and fluffy in proportion to the rest of [npc.her] body."));
-					break;
-			}
-			
-		} else {
-			if(owner.getTentacleCount()>1) {
-				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tentacles] are"));
-			} else {
-				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tentacle] is"));
-			}
-			switch(owner.getTentacleGirth()) {
-				case ZERO_THIN:
-					sb.append(UtilText.parse(owner, " very thin in proportion to the rest of [npc.her] body."));
-					break;
-				case ONE_SLENDER:
-					sb.append(UtilText.parse(owner, " slender in proportion to the rest of [npc.her] body."));
-					break;
-				case TWO_NARROW:
-					sb.append(UtilText.parse(owner, " quite narrow in proportion to the rest of [npc.her] body."));
-					break;
-				case THREE_AVERAGE:
-					sb.append(UtilText.parse(owner, " of an average thickness in proportion to the rest of [npc.her] body."));
-					break;
-				case FOUR_GIRTHY:
-					sb.append(UtilText.parse(owner, " quite thick in proportion to the rest of [npc.her] body."));
-					break;
-				case FIVE_THICK:
-					sb.append(UtilText.parse(owner, " very thick in proportion to the rest of [npc.her] body."));
-					break;
-				case SIX_CHUBBY:
-					sb.append(UtilText.parse(owner, " incredibly thick and girthy in proportion to the rest of [npc.her] body."));
-					break;
-				case SEVEN_FAT:
-					sb.append(UtilText.parse(owner, " extremely thick and girthy in proportion to the rest of [npc.her] body."));
-					break;
-			}	
-		}
-		return sb.toString();
-	}
-
-	public String getGirthDescriptor(GameCharacter owner) {
-		return getGirthDescriptor(owner.getTentacleGirth());
-	}
-	
-	public String getGirthDescriptor(PenetrationGirth girth) {
-		if(this.getTags().contains(BodyPartTag.TAIL_TYPE_FUR)) {
-			switch(girth) {
-				case ZERO_THIN:
-					return "thin";
-				case ONE_SLENDER:
-					return "slender";
-				case TWO_NARROW:
-					return "narrow";
-				case THREE_AVERAGE:
-					return "fluffy";
-				case FOUR_GIRTHY:
-					return "very-fluffy";
-				case FIVE_THICK:
-					return "extra-fluffy";
-				case SIX_CHUBBY:
-					return "extremely-fluffy";
-				case SEVEN_FAT:
-					return "unbelievably-fluffy";
-			}
-			
-		} else {
-			switch(girth) {
-				case ZERO_THIN:
-					return "thin";
-				case ONE_SLENDER:
-					return "slender";
-				case TWO_NARROW:
-					return "narrow";
-				case THREE_AVERAGE:
-					return "average";
-				case FOUR_GIRTHY:
-					return "thick";
-				case FIVE_THICK:
-					return "extra-thick";
-				case SIX_CHUBBY:
-					return "extremely-thick";
-				case SEVEN_FAT:
-					return "unbelievably-thick";
-			}
-		}
-		
-		return girth.getName();
-	}
-	
-	public String getGirthTransformationDescription(GameCharacter owner, boolean positive) {
-		String tentacleText = "[npc.a_tentacleGirth] [npc.tentacle]";
-		if(owner.getTentacleCount()>1) {
-			tentacleText = "[npc.tentacleGirth] [npc.tentacles]";
-		}
-		
-		if(positive) {
-			return UtilText.parse(owner,
-					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] [npc.tentacles]."
-						+ " Without any further warning of what's to come, [npc.her]"
-						+(owner.getTentacleCount()>1
-								?" [npc.tentacles] suddenly [style.boldGrow(grow thicker)]."
-								:" [npc.tentacle] suddenly [style.boldGrow(grows thicker)].")
-						+ "<br/>"
-						+ "[npc.She] now [npc.has] [style.boldSex("+tentacleText+")]!"
-					+ "</p>");
-				
-		} else {
-			return UtilText.parse(owner,
-					"<p>"
-							+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] [npc.tentacles]."
-							+ " Without any further warning of what's to come, [npc.her]"
-							+(owner.getTentacleCount()>1
-									?" [npc.tentacles] suddenly [style.boldShrink(shrink down)]."
-									:" [npc.tentacle] suddenly [style.boldShrink(shrinks down)].")
-							+ "<br/>"
-						+ "[npc.She] now [npc.has] [style.boldSex("+tentacleText+")]!"
-					+ "</p>");
-		}
-	}
-	
-	public String getLengthTransformationDescription(GameCharacter owner, boolean positive) {
-		String heightPercentageDescription = " (length is "+((int)(owner.getTentacleLengthAsPercentageOfHeight()*100))+"% of [npc.namePos] height)";
-		if(positive) {
-			return UtilText.parse(owner,
-					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the [npc.tentacleTip] of each of [npc.her] [npc.tentacles]."
-						+ " Without any further warning of what's to come, [npc.her] [npc.tentacles] suddenly [style.boldGrow(grow longer)]."
-						+ "<br/>"
-						+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.tentacleLength] [npc.tentacles])]"+heightPercentageDescription+"!"
-					+ "</p>");
-				
-		} else {
-			return UtilText.parse(owner,
-					"<p>"
-						+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the [npc.tentacleTip] of each of [npc.her] [npc.tentacles]."
-						+ " Without any further warning of what's to come, [npc.her] [npc.tentacles] suddenly [style.boldShrink(shorten)]."
-						+ "<br/>"
-						+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.tentacleLength] [npc.tentacles])]"+heightPercentageDescription+"!"
-					+ "</p>");
-		}
-	}
-	
-	public boolean isPrehensile() {
-		return tags.contains(BodyPartTag.TAIL_PREHENSILE);
-	}
-	
-	public boolean isSuitableForPenetration() {
-		return this.isPrehensile() && tags.contains(BodyPartTag.TAIL_SUITABLE_FOR_PENETRATION);
-	}
-	
-	public boolean isSuitableForSleepHugging() {
-		return tags.contains(BodyPartTag.TAIL_SLEEP_HUGGING);
-	}
-
-	@Override
-	public TFModifier getTFModifier() {
-		return this==TentacleType.NONE ? TFModifier.REMOVAL : getTFTypeModifier(TentacleType.getTentacleTypes(race));
 	}
 }

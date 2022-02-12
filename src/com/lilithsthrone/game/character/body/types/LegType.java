@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFootType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
@@ -16,6 +17,7 @@ import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -24,6 +26,103 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public interface LegType extends BodyPartTypeInterface {
+
+	AbstractFootType getFootType();
+
+	FootStructure getDefaultFootStructure(LegConfiguration legConfiguration);
+
+	String getFootNameSingular(GameCharacter gc);
+
+	String getFootNamePlural(GameCharacter gc);
+
+	String getFootDescriptor(GameCharacter gc);
+
+	String getToeNameSingular(GameCharacter gc);
+
+	String getToeNamePlural(GameCharacter gc);
+
+	String getToeDescriptor(GameCharacter gc);
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	/**
+	 * Applies the related leg configuration transformation for this leg type, and returns a description of the changes.<br/><br/>
+	 *
+	 * <b>When overriding, consider:</b><br/>
+	 * Ass.class (type)<br/>
+	 * BreastCrotch.class (type)<br/>
+	 * Tail.class (type)<br/>
+	 * Tentacle.class (type)<br/>
+	 * Penis.class (type, size, cloaca)<br/>
+	 * Vagina.class (type, capacity, cloaca)<br/>
+	 * @param character
+	 * Is being transformed.
+	 * @param legConfiguration
+	 * To be applied.
+	 * @param applyEffects
+	 * Whether the transformative effects should be applied. Pass in false to get the transformation description without applying any of the actual effects.
+	 * @param applyFullEffects
+	 * Pass in true if you want the additional transformations to include attribute changes (such as penis resizing, vagina capacity resetting, etc.).
+	 * @return
+	 * A description of the transformation.
+	 */
+	String applyLegConfigurationTransformation(GameCharacter character, LegConfiguration legConfiguration, boolean applyEffects, boolean applyFullEffects);
+
+	/**
+	 * For use in modifying bodies without an attached character. Outside of the Subspecies class, you should probably always be calling the version of this method that takes in a GameCharacter.
+	 *
+	 * @param body
+	 * To be modified.
+	 * @param legConfiguration
+	 * To be applied.
+	 * @param applyFullEffects
+	 * Pass in true if you want the additional transformations to include attribute changes (such as penis resizing, vagina capacity resetting, etc.).
+	 */
+	void applyLegConfigurationTransformation(Body body, LegConfiguration legConfiguration, boolean applyFullEffects);
+
+	List<LegConfiguration> getAllowedLegConfigurations();
+
+	/**
+	 * @param legConfiguration The configuration to check transformation availability of.
+	 * @return True if this configuration is allowed for this LegType.
+	 */
+	boolean isLegConfigurationAvailable(LegConfiguration legConfiguration);
+
+	boolean hasSpinneret();
+
+	AbstractTentacleType getTentacleType();
+
+	default boolean isLegsReplacedByTentacles() {
+		return getTentacleType()!=TentacleType.NONE;
+	}
+
+	int getTentacleCount();
+
+	/**
+	 * @return By default, LegTypes return a modification of 0, but if a LegType requires a modifier, then this can be overridden and its effects will be handled alongside LegConfiguration's getLandSpeedModifier().
+	 */
+	default int getLandSpeedModifier() {
+		return 0;
+	}
+
+	/**
+	 * @return By default, LegTypes return a modification of 0, but if a LegType requires a modifier, then this can be overridden and its effects will be handled alongside LegConfiguration's getWaterSpeedModifier().
+	 */
+	default int getWaterSpeedModifier() {
+		return 0;
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return gc==null || gc.getLegCount()>1;
+	}
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(LegType.getLegTypes(getRace()));
+	}
 
 	public static AbstractLegType HUMAN = new Special(BodyCoveringType.HUMAN,
 			Race.HUMAN,

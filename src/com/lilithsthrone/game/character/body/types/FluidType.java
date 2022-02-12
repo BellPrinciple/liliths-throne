@@ -3,6 +3,7 @@ package com.lilithsthrone.game.character.body.types;
 import java.util.Arrays;
 import java.util.List;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
@@ -17,6 +18,22 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public interface FluidType extends BodyPartTypeInterface {
+
+	FluidTypeBase getBaseType();
+
+	FluidFlavour getFlavour();
+
+	List<FluidModifier> getDefaultFluidModifiers();
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "some";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return false;
+	}
 
 	// Cum:
 	
