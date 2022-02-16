@@ -37,7 +37,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
 public class Tattoo extends AbstractCoreItem implements XMLSaving {
 	
 
-	private AbstractTattooType type;
+	private TattooType type;
 	
 	private Colour primaryColour;
 	private Colour secondaryColour;
@@ -55,7 +55,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 	
 	private static Map<Colour, String> SVGGlowMap = new HashMap<>();
 
-	public Tattoo(AbstractTattooType type,
+	public Tattoo(TattooType type,
 			Colour primaryColour,
 			Colour secondaryColour,
 			Colour tertiaryColour,
@@ -371,7 +371,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 		return noCorruption.values().stream().reduce(0, (a, b) -> a + Math.max(0, b));
 	}
 	
-	public AbstractTattooType getType() {
+	public TattooType getType() {
 		return type;
 	}
 
@@ -442,7 +442,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 		return "<span style='color:"+getCounter().getColour().toWebHexString()+";'>"+(getCounter().isGlow()?UtilText.applyGlow(convertedInt, getCounter().getColour()):convertedInt)+"</span>";
 	}
 
-	public void setType(AbstractTattooType type) {
+	public void setType(TattooType type) {
 		this.type = type;
 	}
 
@@ -483,7 +483,7 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 	}
 	
 	@Override
-	public AbstractTattooType getEnchantmentItemType(List<ItemEffect> effects) {
+	public TattooType getEnchantmentItemType(List<ItemEffect> effects) {
 		return this.getType();
 	}
 }

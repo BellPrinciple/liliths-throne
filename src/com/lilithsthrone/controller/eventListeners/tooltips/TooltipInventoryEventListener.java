@@ -33,16 +33,16 @@ import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ShopTransaction;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
+import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.EnchantingUtils;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
+import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
+import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.Pattern;
 import com.lilithsthrone.rendering.RenderingEngine;
@@ -69,16 +69,16 @@ public class TooltipInventoryEventListener implements EventListener {
 	private Tattoo tattoo;
 	
 	private AbstractItem item;
-	private AbstractItemType genericItem;
+	private ItemType genericItem;
 	
 	private AbstractWeapon weapon;
-	private AbstractWeaponType genericWeapon;
+	private WeaponType genericWeapon;
 	private DamageType dt;
 	private AbstractWeapon dyeWeapon;
 	private DamageType damageType;
 	
 	private AbstractClothing clothing;
-	private AbstractClothingType genericClothing;
+	private ClothingType genericClothing;
 	private AbstractClothing dyeClothing;
 	
 	private int colourIndex;
@@ -658,7 +658,7 @@ public class TooltipInventoryEventListener implements EventListener {
 		return this;
 	}
 	
-	public TooltipInventoryEventListener setGenericItem(AbstractItemType genericItem) {
+	public TooltipInventoryEventListener setGenericItem(ItemType genericItem) {
 		resetVariables();
 		this.genericItem = genericItem;
 		return this;
@@ -703,20 +703,20 @@ public class TooltipInventoryEventListener implements EventListener {
 		return this;
 	}
 	
-	public TooltipInventoryEventListener setGenericClothing(AbstractClothingType genericClothing) {
+	public TooltipInventoryEventListener setGenericClothing(ClothingType genericClothing) {
 		resetVariables();
 		this.genericClothing = genericClothing;
 		return this;
 	}
 	
-	public TooltipInventoryEventListener setGenericClothing(AbstractClothingType genericClothing, Colour colour) {
+	public TooltipInventoryEventListener setGenericClothing(ClothingType genericClothing, Colour colour) {
 		resetVariables();
 		this.genericClothing = genericClothing;
 		this.colour = colour;
 		return this;
 	}
 
-	public TooltipInventoryEventListener setGenericWeapon(AbstractWeaponType genericWeapon, DamageType dt) {
+	public TooltipInventoryEventListener setGenericWeapon(WeaponType genericWeapon, DamageType dt) {
 		resetVariables();
 		this.genericWeapon = genericWeapon;
 		this.dt = dt;

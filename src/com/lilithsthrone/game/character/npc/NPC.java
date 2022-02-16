@@ -86,7 +86,6 @@ import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.AbstractPotion;
 import com.lilithsthrone.game.inventory.item.FetishPotion;
 import com.lilithsthrone.game.inventory.item.ItemType;
@@ -969,9 +968,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			return Util.newArrayListOfValues(Main.game.getItemGen().generateItem(ItemType.ADDICTION_REMOVAL));
 			
 		} else {
-			AbstractItemType raceIngredient = getSubspecies().getAttributeItem(this);
-			AbstractItemType raceTFIngredient = getSubspecies().getTransformativeItem(this);
-			AbstractItemType book = getSubspecies().getBook();
+			var raceIngredient = getSubspecies().getAttributeItem(this);
+			var raceTFIngredient = getSubspecies().getTransformativeItem(this);
+			var book = getSubspecies().getBook();
 			
 			
 			if(rnd<0.6 && raceTFIngredient!=null) {
@@ -1316,7 +1315,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		return Main.game.getPlayer().getFriendlyOccupants().contains(this.getId()) || (this.isSlave() && this.getOwner().isPlayer());
 	}
 	
-	public AbstractItemEffectType getItemEnchantmentEffect(AbstractItemType itemType, BodyPartInterface bodyPart) {
+	public AbstractItemEffectType getItemEnchantmentEffect(ItemType itemType, BodyPartInterface bodyPart) {
 		if (Util.newArrayListOfValues(Race.HUMAN, Race.NONE).contains(bodyPart.getType().getRace())) {
 			return ItemEffectType.getRacialEffectType(Race.HUMAN);
 		}
@@ -1325,7 +1324,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 
 	public TransformativePotion generateTransformativePotion(GameCharacter target) {
 		List<PossibleItemEffect> possibleEffects = new ArrayList<>();
-		AbstractItemType itemType = ItemType.getItemTypeFromId("innoxia_race_human_bread_roll");
+		ItemType itemType = ItemType.getItemTypeFromId("innoxia_race_human_bread_roll");
 		int numberOfTransformations = (2+Util.random.nextInt(4)) * (target.hasFetish(Fetish.FETISH_TRANSFORMATION_RECEIVING)?2:1);
 		boolean cannotTransformPreference = getSubspeciesPreference().getRace()==Race.DEMON || getSubspeciesPreference().getRace()==Race.ANGEL;
 		
@@ -1344,7 +1343,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 			}
 		}
 		
-		AbstractItemType genitalsItemType = itemType;
+		ItemType genitalsItemType = itemType;
 		boolean skipGenitalsTF = false;
 		
 		Body body;
@@ -2101,7 +2100,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		
 		List<PossibleItemEffect> possibleEffects = new ArrayList<>();
 		
-		AbstractItemType itemType = ItemType.FETISH_UNREFINED;
+		ItemType itemType = ItemType.FETISH_UNREFINED;
 		
 		Fetish currentTopFetish = null, currentBottomFetish = null;
 		TFModifier currentTopModifier = null, currentBottomModifier = null;

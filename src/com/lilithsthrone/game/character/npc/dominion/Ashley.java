@@ -30,7 +30,6 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -45,7 +44,7 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public class Ashley extends NPC {
 
-	private AbstractItemType[] itemsForSale = new AbstractItemType[] {
+	private ItemType[] itemsForSale = new ItemType[] {
 			ItemType.GIFT_CHOCOLATES,
 			ItemType.GIFT_PERFUME,
 			ItemType.GIFT_ROSE_BOUQUET,
@@ -249,7 +248,7 @@ public class Ashley extends NPC {
 	public void dailyUpdate() {
 		clearNonEquippedInventory(false);
 		
-		for (AbstractItemType item : itemsForSale) {
+		for (var item : itemsForSale) {
 			for (int i = 0; i < 3 + (Util.random.nextInt(6)); i++) {
 				this.addItem(Main.game.getItemGen().generateItem(item), false);
 			}

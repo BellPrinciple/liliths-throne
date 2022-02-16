@@ -97,25 +97,25 @@ public interface TattooType extends AbstractCoreType {
 			null);
 
 	@Deprecated
-	public static AbstractTattooType getTattooTypeFromId(String id) {
+	public static TattooType getTattooTypeFromId(String id) {
 		return table.of(id);
 	}
 
 	@Deprecated
-	public static String getIdFromTattooType(AbstractTattooType tattooType) {
+	static String getIdFromTattooType(TattooType tattooType) {
 		return tattooType.getId();
 	}
 
 	/**
 	 * @return A list of tattoos which the target has available to them.
 	 */
-	public static List<AbstractTattooType> getConditionalTattooTypes(GameCharacter target) {
-		List<AbstractTattooType> tattoos = getAllTattooTypes();
+	static List<TattooType> getConditionalTattooTypes(GameCharacter target) {
+		List<TattooType> tattoos = getAllTattooTypes();
 		tattoos.removeIf(tattoo -> !tattoo.isAvailable(target));
 		return tattoos;
 	}
 	
-	public static List<AbstractTattooType> getAllTattooTypes() {
+	static List<TattooType> getAllTattooTypes() {
 		var allTattoos = new ArrayList<>(table.list());
 		
 		allTattoos.sort((t1, t2) -> t1.equals(TattooType.NONE)?-1:(t1.getName().compareTo(t2.getName())));
@@ -123,7 +123,7 @@ public interface TattooType extends AbstractCoreType {
 		return allTattoos;
 	}
 	
-	Table<AbstractTattooType> table = new Table<>(s->s) {{
+	Table<TattooType> table = new Table<>(s->s) {{
 		// Modded tattoo types:
 		forEachMod("/items/tattoos",null,null,(f,n,a)->{
 			var v = new AbstractTattooType(f) {};

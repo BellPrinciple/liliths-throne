@@ -49,7 +49,6 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJobSetting;
@@ -1101,7 +1100,7 @@ public class SlaverAlleyDialogue {
 		}
 	};
 
-	private static List<AbstractItemType> getCafeItems() {
+	private static List<ItemType> getCafeItems() {
 		return Util.newArrayListOfValues(
 				ItemType.getItemTypeFromId("innoxia_race_human_vanilla_water"),
 				ItemType.getItemTypeFromId("innoxia_race_bat_fruit_bats_juice_box"),
@@ -1123,7 +1122,7 @@ public class SlaverAlleyDialogue {
 
 			sb.append("<div class='container-full-width' style='text-align:center;'>");
 				sb.append("<b>Menu</b>");
-				for(AbstractItemType itemType : getCafeItems()) {
+				for(var itemType : getCafeItems()) {
 					sb.append("<div class='container-full-width' style='width:100%; margin:4px 0; background:"+PresetColour.BACKGROUND.toWebHexString()+";'>");
 						sb.append("<div class='container-full-width' style='text-align:center; width:20%; background:transparent; margin:0; padding:0;'>");
 							sb.append("<span style='color:"+itemType.getRarity().getColour().toWebHexString()+";'>"+itemType.getName(false)+"</span>");
@@ -1171,7 +1170,7 @@ public class SlaverAlleyDialogue {
 			}
 			List<Response> responses = new ArrayList<>();
 			
-			for(AbstractItemType itemType : getCafeItems()) {
+			for(var itemType : getCafeItems()) {
 				if(responseTab==0) {
 					if(Main.game.getPlayer().getMoney()<itemType.getValue(null)*2) {
 						responses.add(new Response(itemType.getName(false), "You don't have enough money to order "+itemType.getDeterminer()+" "+itemType.getName(false)+"...", null));

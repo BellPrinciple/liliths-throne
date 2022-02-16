@@ -60,7 +60,6 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.game.sex.PregnancyDescriptor;
@@ -270,9 +269,9 @@ public class Fae extends NPC {
 	public void dailyUpdate() {
 		clearNonEquippedInventory(false);
 
-		List<AbstractClothingType> clothingTypesToSell = new ArrayList<>();
+		var clothingTypesToSell = new ArrayList<ClothingType>();
 		
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(var clothing : ClothingType.getAllClothing()) {
 			if(clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN)
 					&& clothing.getRarity() == Rarity.COMMON
 					&& clothing.getClothingSet() == null
@@ -286,7 +285,7 @@ public class Fae extends NPC {
 			clothingTypesToSell.remove(Util.random.nextInt(clothingTypesToSell.size()));
 		}
 		
-		for(AbstractClothingType type : clothingTypesToSell) {
+		for(var type : clothingTypesToSell) {
 			this.addClothing(Main.game.getItemGen().generateClothing(type, false), false);
 		}
 	}

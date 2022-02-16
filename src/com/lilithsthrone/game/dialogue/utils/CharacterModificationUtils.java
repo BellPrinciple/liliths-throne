@@ -110,7 +110,6 @@ import com.lilithsthrone.game.character.body.valueEnums.WingSize;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.fetishes.FetishDesire;
-import com.lilithsthrone.game.character.markings.AbstractTattooType;
 import com.lilithsthrone.game.character.markings.Tattoo;
 import com.lilithsthrone.game.character.markings.TattooCountType;
 import com.lilithsthrone.game.character.markings.TattooCounter;
@@ -6254,7 +6253,7 @@ public class CharacterModificationUtils {
 			contentSB.append("<div class='container-full-width' style='width:75%; margin:0; position:relative; text-align:center;'>");
 				contentSB.append("<h5 style='width:100%; text-align:center;'>Select Type</h5>");
 		
-				for(AbstractTattooType type : TattooType.getConditionalTattooTypes(BodyChanging.getTarget())) {
+				for(var type : TattooType.getConditionalTattooTypes(BodyChanging.getTarget())) {
 					if(type.getSlotAvailability().contains(tattooInventorySlot)) {
 						contentSB.append("<div style='width:18%; margin:1%; padding:0; display:inline-block;'>"
 											+ "<div class='normal-button"+(tattoo.getType()==type?" selected":"")+"' id='TATTOO_TYPE_"+type.getId()+"'"

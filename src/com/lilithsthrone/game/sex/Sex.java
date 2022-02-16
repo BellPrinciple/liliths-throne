@@ -53,7 +53,6 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.game.occupantManagement.MilkingRoom;
@@ -180,7 +179,7 @@ public class Sex {
 	
 	private Value<GameCharacter, Value<GameCharacter, AbstractClothing>> clothingSelfEquipInformation; // The character self-equipping clothing, the character targeted, and the clothing being equipped.
 	private Value<GameCharacter, Value<GameCharacter, AbstractItem>> itemUseInformation; // The character using an item, the character targeted, and the item being used.
-	private Map<GameCharacter, Map<GameCharacter, List<AbstractItemType>>> itemUseDenials; // A map of item-using NPCs to a map of characters who they've tried, and failed, to use items on. This second map has the failed items in a List as its Value.
+	private Map<GameCharacter, Map<GameCharacter, List<ItemType>>> itemUseDenials; // A map of item-using NPCs to a map of characters who they've tried, and failed, to use items on. This second map has the failed items in a List as its Value.
 	
 	private SexManagerInterface sexManager;
 	private SexManagerInterface initialSexManager;
@@ -4650,7 +4649,7 @@ public class Sex {
 		return itemUseInformation;
 	}
 
-	public void addItemUseDenial(GameCharacter user, GameCharacter target, AbstractItemType itemType) {
+	public void addItemUseDenial(GameCharacter user, GameCharacter target, ItemType itemType) {
 		itemUseDenials.putIfAbsent(user, new HashMap<>());
 		itemUseDenials.get(user).putIfAbsent(target, new ArrayList<>());
 		itemUseDenials.get(user).get(target).add(itemType);
@@ -4659,7 +4658,7 @@ public class Sex {
 	/**
 	 * @return A list of AbstractItemTypes which the user has tried to give to the target, but have been refused.
 	 */
-	public List<AbstractItemType> getItemUseDenials(GameCharacter user, GameCharacter target) {
+	public List<ItemType> getItemUseDenials(GameCharacter user, GameCharacter target) {
 		itemUseDenials.putIfAbsent(user, new HashMap<>());
 		itemUseDenials.get(user).putIfAbsent(target, new ArrayList<>());
 		return itemUseDenials.get(user).get(target);

@@ -32,10 +32,10 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving {
 
-	protected AbstractItemType itemType;
+	protected ItemType itemType;
 	protected List<ItemEffect> itemEffects;
 
-	public AbstractItem(AbstractItemType itemType) {
+	public AbstractItem(ItemType itemType) {
 		super(itemType.getName(false), itemType.getNamePlural(false), itemType.getSVGString(), itemType.getColourShades().get(0), itemType.getRarity(), null, itemType.getItemTags());
 
 		this.itemType = itemType;
@@ -83,7 +83,7 @@ public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving
 	
 	public static AbstractItem loadFromXML(Element parentElement, Document doc) {
 		try {
-			AbstractItemType it = ItemType.getItemTypeFromId(parentElement.getAttribute("id"));
+			ItemType it = ItemType.getItemTypeFromId(parentElement.getAttribute("id"));
 			if(it==null) {
 				System.err.println("Warning: An instance of AbstractItem was unable to be imported, due to AbstractItemType not existing. ("+parentElement.getAttribute("id")+")");
 				return null;
@@ -118,7 +118,7 @@ public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving
 		}
 	}
 
-	public AbstractItemType getItemType() {
+	public ItemType getItemType() {
 		return itemType;
 	}
 

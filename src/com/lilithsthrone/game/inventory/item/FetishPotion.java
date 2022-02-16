@@ -13,7 +13,7 @@ import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
  */
 public class FetishPotion extends AbstractPotion {
 
-	public FetishPotion(AbstractItemType itemType, List<PossibleItemEffect> effects) {
+	public FetishPotion(ItemType itemType, List<PossibleItemEffect> effects) {
 		super(itemType, effects);
 	}
 }

@@ -15,12 +15,12 @@ import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
 public class TransformativePotion extends AbstractPotion {
 	private final Body body;
 
-	public TransformativePotion(AbstractItemType itemType, List<PossibleItemEffect> effects, Body body) {
+	public TransformativePotion(ItemType itemType, List<PossibleItemEffect> effects, Body body) {
 		super(itemType, effects);
 		this.body = body;
 	}
 
-	public TransformativePotion(AbstractItemType itemType, List<PossibleItemEffect> effects) {
+	public TransformativePotion(ItemType itemType, List<PossibleItemEffect> effects) {
 		this(itemType, effects, null);
 	}
 

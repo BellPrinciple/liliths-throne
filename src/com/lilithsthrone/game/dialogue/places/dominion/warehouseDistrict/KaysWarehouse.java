@@ -37,7 +37,6 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.InitialSexActionInformation;
@@ -536,7 +535,7 @@ public class KaysWarehouse {
 						public void effects() {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.kayCratesSearched, true);
 							
-							List<AbstractClothingType> clothingToGenerate = new ArrayList<>(ClothingType.getAllClothing());
+							var clothingToGenerate = new ArrayList<>(ClothingType.getAllClothing());
 							clothingToGenerate.removeIf((clothing) -> clothing.getRarity()!=Rarity.COMMON || !clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN) || clothing.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN));
 							
 							Main.game.getTextEndStringBuilder().append(

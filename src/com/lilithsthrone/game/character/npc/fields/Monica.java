@@ -61,7 +61,6 @@ import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
@@ -399,7 +398,7 @@ public class Monica extends NPC {
 		commonAndrogynousLingerie.clear();
 		commonAndrogynousAccessories.clear();
 		
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(var clothing : ClothingType.getAllClothing()) {
 			try {
 				if(clothing!=null
 						&& clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN)

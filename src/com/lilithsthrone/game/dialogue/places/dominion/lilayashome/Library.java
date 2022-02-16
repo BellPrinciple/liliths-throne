@@ -20,7 +20,6 @@ import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.companions.SlaveDialogue;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
 import com.lilithsthrone.game.occupantManagement.slave.SlavePermissionSetting;
@@ -540,7 +539,7 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
+				var booksAdded = new HashSet<ItemType>();
 				for(var subspecies : getAisleSubspecies(LibraryAisle.DEMON)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(ELDER_RACES, subspecies));
@@ -589,7 +588,7 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
+				var booksAdded = new HashSet<ItemType>();
 				for(var subspecies : getAisleSubspecies(LibraryAisle.DOMINION)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(DOMINION_RACES, subspecies));
@@ -634,7 +633,7 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
+				var booksAdded = new HashSet<ItemType>();
 				for(var subspecies : getAisleSubspecies(LibraryAisle.FIELDS)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(FIELDS_BOOKS, subspecies));
@@ -675,7 +674,7 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
+				var booksAdded = new HashSet<ItemType>();
 				for(var subspecies : getAisleSubspecies(LibraryAisle.JUNGLE)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(JUNGLE_BOOKS, subspecies));
@@ -716,7 +715,7 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
+				var booksAdded = new HashSet<ItemType>();
 				for(var subspecies : getAisleSubspecies(LibraryAisle.MOUNTAIN)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(MOUNTAIN_BOOKS, subspecies));
@@ -757,7 +756,7 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
+				var booksAdded = new HashSet<ItemType>();
 				for(var subspecies : getAisleSubspecies(LibraryAisle.SEA)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(SEA_BOOKS, subspecies));
@@ -799,7 +798,7 @@ public class Library {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab==3) {
 				List<Response> raceResponses = new ArrayList<>();
-				Set<AbstractItemType> booksAdded = new HashSet<>();
+				var booksAdded = new HashSet<ItemType>();
 				for(var subspecies : getAisleSubspecies(LibraryAisle.DESERT)) {
 					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
 						raceResponses.add(bookResponse(DESERT_BOOKS, subspecies));
@@ -821,7 +820,7 @@ public class Library {
 	};
 	
 	private static Response bookResponse(DialogueNode nodeToReturnTo, Subspecies subspecies) {
-		AbstractItemType book = ItemType.getLoreBook(subspecies);
+		var book = ItemType.getLoreBook(subspecies);
 
 		if(Main.getProperties().isAdvancedRaceKnowledgeDiscovered(subspecies)) {
 			return new Response(book.getName(false), book.getDescription(), nodeToReturnTo) {

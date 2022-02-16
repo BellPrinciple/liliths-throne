@@ -226,14 +226,12 @@ import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.SetBonus;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.BlockedParts;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.clothing.DisplacementType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.outfit.Outfit;
 import com.lilithsthrone.game.inventory.outfit.OutfitSource;
@@ -9776,7 +9774,7 @@ public abstract class GameCharacter implements XMLSaving {
 	
 	// ****************** Sex & Dirty talk: ***************************
 	
-	public String getCondomEquipEffects(AbstractClothingType condomClothingType, GameCharacter equipper, GameCharacter target, boolean rough) {
+	public String getCondomEquipEffects(ClothingType condomClothingType, GameCharacter equipper, GameCharacter target, boolean rough) {
 		if(!target.equals(equipper)) {
 			if(Main.game.isInSex() && !target.isPlayer()) {
 				if(Main.sex.isDom(equipper) || Main.sex.isConsensual()) {
@@ -21144,7 +21142,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return UtilText.parse(this, returnString);
 	}
 
-	public String removedItemFromInventoryText(AbstractItemType item) {
+	public String removedItemFromInventoryText(ItemType item) {
 		return "<p style='text-align:center;'>" + "<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>You have lost the " + item.getName(false) + ".</span>" + "</p>";
 	}
 
@@ -21562,7 +21560,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public int getItemCount(AbstractItem item) {
 		return inventory.getItemCount(item);
 	}
-	public int getItemCount(AbstractItemType itemType) {
+	public int getItemCount(ItemType itemType) {
 		return getItemCount(Main.game.getItemGen().generateItem(itemType));
 	}
 	public int getUniqueQuestItemCount() {
@@ -21677,7 +21675,7 @@ public abstract class GameCharacter implements XMLSaving {
 	/**
 	 * @return true If one of the items in this inventory has the same type as the Item provided.
 	 */
-	public boolean hasItemType(AbstractItemType item) {
+	public boolean hasItemType(ItemType item) {
 		return inventory.hasItemType(item);
 	}
 	
@@ -21691,14 +21689,14 @@ public abstract class GameCharacter implements XMLSaving {
 	/**
 	 * @return true If an item was removed.
 	 */
-	public boolean removeItemByType(AbstractItemType item) {
+	public boolean removeItemByType(ItemType item) {
 		return removeItemByType(item, 1, false);
 	}
 	
 	/**
 	 * @return true If an item was removed.
 	 */
-	public boolean removeItemByType(AbstractItemType item, int count, boolean appendTextToEventLog) {
+	public boolean removeItemByType(ItemType item, int count, boolean appendTextToEventLog) {
 		if(appendTextToEventLog) {
 			Main.game.addEvent(new EventLogEntry("Lost", count+"x <span style='color:"+item.getRarity().getColour().toWebHexString()+";'>"+item.getName(false)+"</span>"), false);
 		}
@@ -21839,7 +21837,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 * @param includeEquipped true if you want to check equipped weapons as well as those in the character's inventory.
 	 * @return true if this character has a weapon of the type specified.
 	 */
-	public boolean hasWeaponType(AbstractWeaponType weaponType, boolean includeEquipped) {
+	public boolean hasWeaponType(WeaponType weaponType, boolean includeEquipped) {
 		for(AbstractWeapon weapon : inventory.getAllWeaponsInInventory().keySet()) {
 			if(weapon.getWeaponType().equals(weaponType)) {
 				return true;
@@ -21893,7 +21891,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return false;
 	}
 
-	public boolean hasWeaponEquipped(AbstractWeaponType weaponType) {
+	public boolean hasWeaponEquipped(WeaponType weaponType) {
 		for(AbstractWeapon equippedWeapon : inventory.getMainWeaponArray()) {
 			if(equippedWeapon!=null && equippedWeapon.getWeaponType()==weaponType) {
 				return true;
@@ -21939,7 +21937,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 * @param appendTextToEventLog true if text detailing the loss of this weaopnType should be added to the event log.
 	 * @return true if a weapon was found and removed.
 	 */
-	public boolean removeWeaponTypeIntoVoid(AbstractWeaponType weaponType, boolean includeNonEquippedWeapons, boolean includeEquippedWeapons, boolean appendTextToEventLog) {
+	public boolean removeWeaponTypeIntoVoid(WeaponType weaponType, boolean includeNonEquippedWeapons, boolean includeEquippedWeapons, boolean appendTextToEventLog) {
 		boolean weaponRemoved = false;
 		
 		if(includeNonEquippedWeapons) {
@@ -22510,7 +22508,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return removeClothing(clothing, 1);
 	}
 
-	public boolean removeClothingByType(AbstractClothingType clothingType) {
+	public boolean removeClothingByType(ClothingType clothingType) {
 		return inventory.removeClothingByType(clothingType);
 	}
 	
@@ -22534,7 +22532,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return inventory.hasClothing(clothing);
 	}
 
-	public boolean hasClothingType(AbstractClothingType type, boolean includeEquipped) {
+	public boolean hasClothingType(ClothingType type, boolean includeEquipped) {
 		return inventory.hasClothingType(type, includeEquipped);
 	}
 	

@@ -2,7 +2,7 @@ package com.lilithsthrone.utils.comparators;
 
 import java.util.Comparator;
 
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
+import com.lilithsthrone.game.inventory.clothing.ClothingType;
 
 /**
  * Compares by rarity, using the InventorySlot in index 0 of available equip slots.
@@ -11,9 +11,9 @@ import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
  * @version 0.3.4
  * @author Innoxia
  */
-public class ClothingTypeRarityComparator implements Comparator<AbstractClothingType> {
+public class ClothingTypeRarityComparator implements Comparator<ClothingType> {
 	@Override
-	public int compare(AbstractClothingType first, AbstractClothingType second) {
+	public int compare(ClothingType first, ClothingType second) {
 		int result = first.getRarity().compareTo(second.getRarity());
 		if (result != 0) {
 			return result;
