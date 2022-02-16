@@ -115,7 +115,6 @@ import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.fetishes.FetishPreference;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.gender.PronounType;
-import com.lilithsthrone.game.character.markings.AbstractTattooType;
 import com.lilithsthrone.game.character.markings.Tattoo;
 import com.lilithsthrone.game.character.markings.TattooCountType;
 import com.lilithsthrone.game.character.markings.TattooCounter;
@@ -177,7 +176,6 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.SetBonus;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.clothing.Sticker;
 import com.lilithsthrone.game.inventory.clothing.StickerCategory;
@@ -188,10 +186,8 @@ import com.lilithsthrone.game.inventory.enchanting.LoadedEnchantment;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.occupantManagement.MilkingRoom;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
@@ -424,7 +420,7 @@ public class MainControllerInitMethod {
 		if(Main.game.getCurrentDialogueNode().equals(DebugDialogue.SPAWN_MENU) || Main.game.getCurrentDialogueNode().equals(DebugDialogue.ITEM_VIEWER)) {
 			id = "";
 			
-			for(AbstractClothingType clothingType : ClothingType.getAllClothing()) {
+			for(var clothingType : ClothingType.getAllClothing()) {
 				id = clothingType.getId() + "_SPAWN";
 				if (((EventTarget) MainController.document.getElementById(id)) != null) {
 					((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
@@ -440,7 +436,7 @@ public class MainControllerInitMethod {
 				}
 			}
 			
-			for(AbstractWeaponType weaponType : WeaponType.getAllWeapons()) {
+			for(var weaponType : WeaponType.getAllWeapons()) {
 				id = weaponType.getId() + "_SPAWN";
 				if (((EventTarget) MainController.document.getElementById(id)) != null) {
 					((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
@@ -456,7 +452,7 @@ public class MainControllerInitMethod {
 				}
 			}
 			
-			for(AbstractItemType itemType : ItemType.getAllItems()) {
+			for(var itemType : ItemType.getAllItems()) {
 				id = itemType.getId() + "_SPAWN";
 				if (((EventTarget) MainController.document.getElementById(id)) != null) {
 					((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
@@ -530,12 +526,12 @@ public class MainControllerInitMethod {
 				id = "SET_BONUS_"+SetBonus.getIdFromSetBonus(sb);
 				if (((EventTarget) MainController.document.getElementById(id)) != null) {
 					((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
-						for(AbstractWeaponType wt : WeaponType.getAllWeapons()) {
+						for(var wt : WeaponType.getAllWeapons()) {
 							if(wt.getClothingSet()==sb) {
 								Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getInventory().addWeapon(Main.game.getItemGen().generateWeapon(wt));
 							}
 						}
-						for(AbstractClothingType ct : ClothingType.getAllClothing()) {
+						for(var ct : ClothingType.getAllClothing()) {
 							if(ct.getClothingSet()==sb) {
 								Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getInventory().addClothing(Main.game.getItemGen().generateClothing(ct));
 							}
@@ -5315,7 +5311,7 @@ public class MainControllerInitMethod {
 					MainController.addEventListener(MainController.document, id, "mouseenter", el, false);
 				}
 				
-				for(AbstractTattooType type : TattooType.getAllTattooTypes()) {
+				for(var type : TattooType.getAllTattooTypes()) {
 					id = "TATTOO_TYPE_"+type.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						if(type.getSlotAvailability().contains(CharacterModificationUtils.tattooInventorySlot)) {
@@ -5540,7 +5536,7 @@ public class MainControllerInitMethod {
 					|| Main.game.getCurrentDialogueNode()==InventoryDialogue.DYE_EQUIPPED_CLOTHING_CHARACTER_CREATION) {
 				
 				// Clothing recolouring:
-				AbstractClothingType clothing = InventoryDialogue.getClothing().getClothingType();
+				var clothing = InventoryDialogue.getClothing().getClothingType();
 				for(int i=0; i<clothing.getColourReplacements().size(); i++) {
 					int index = i;
 					ColourReplacement cr = clothing.getColourReplacement(i);
@@ -5683,7 +5679,7 @@ public class MainControllerInitMethod {
 			
 			if(Main.game.getCurrentDialogueNode()==InventoryDialogue.DYE_WEAPON
 					|| Main.game.getCurrentDialogueNode()==InventoryDialogue.DYE_EQUIPPED_WEAPON) {
-				AbstractWeaponType weapon = InventoryDialogue.getWeapon().getWeaponType();
+				var weapon = InventoryDialogue.getWeapon().getWeaponType();
 				for(int i=0; i<weapon.getColourReplacements(false).size(); i++) {
 					int index = i;
 					ColourReplacement cr = weapon.getColourReplacement(false, i);
@@ -5721,7 +5717,7 @@ public class MainControllerInitMethod {
 				}
 			}
 			
-			for (AbstractClothingType clothing : ClothingType.getAllClothing()) {
+			for (var clothing : ClothingType.getAllClothing()) {
 				if ((EventTarget) MainController.document.getElementById(clothing.getId()) != null) {
 					MainController.addEventListener(MainController.document, clothing.getId(), "mousemove", MainController.moveTooltipListener, false);
 					MainController.addEventListener(MainController.document, clothing.getId(), "mouseleave", MainController.hideTooltipListener, false);
@@ -5730,7 +5726,7 @@ public class MainControllerInitMethod {
 				}
 			}
 			
-			for (AbstractItemType item : ItemType.getAllItems()) {
+			for (var item : ItemType.getAllItems()) {
 				id = ItemType.getItemToIdMap().get(item);
 				if ((EventTarget) MainController.document.getElementById(id) != null) {
 					MainController.addEventListener(MainController.document, id, "mousemove", MainController.moveTooltipListener, false);
@@ -5740,7 +5736,7 @@ public class MainControllerInitMethod {
 				}
 			}
 			
-			for (AbstractWeaponType weapon : WeaponType.getAllWeapons()) {
+			for (var weapon : WeaponType.getAllWeapons()) {
 				if ((EventTarget) MainController.document.getElementById(weapon.getId()) != null) {
 					MainController.addEventListener(MainController.document, weapon.getId(), "mousemove", MainController.moveTooltipListener, false);
 					MainController.addEventListener(MainController.document, weapon.getId(), "mouseleave", MainController.hideTooltipListener, false);

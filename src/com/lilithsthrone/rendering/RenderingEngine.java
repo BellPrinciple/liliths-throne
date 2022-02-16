@@ -49,7 +49,7 @@ import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
+import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.settings.KeyboardAction;
 import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
@@ -216,7 +216,7 @@ public enum RenderingEngine {
 					+ "</div>");
 			
 		} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_1)!=null) {
-			AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_1);
+			var depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_1);
 			String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 			equippedPanelSB.append(
 					"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -241,7 +241,7 @@ public enum RenderingEngine {
 						+ "</div>");
 				
 			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_2)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_2);
+				var depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_2);
 				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 				equippedPanelSB.append(
 						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -264,7 +264,7 @@ public enum RenderingEngine {
 						+ "</div>");
 				
 			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_3)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_3);
+				var depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_MAIN_3);
 				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 				equippedPanelSB.append(
 						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -290,7 +290,7 @@ public enum RenderingEngine {
 					+ "</div>");
 			
 		} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_1)!=null) {
-			AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_1);
+			var depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_1);
 			String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 			equippedPanelSB.append(
 					"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -317,7 +317,7 @@ public enum RenderingEngine {
 						+ "</div>");
 				
 			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_2)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_2);
+				var depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_2);
 				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 				equippedPanelSB.append(
 						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -342,7 +342,7 @@ public enum RenderingEngine {
 						+ "</div>");
 				
 			} else if(Main.game.isInCombat() && Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_3)!=null) {
-				AbstractWeaponType depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_3);
+				var depletedWeapon = Main.combat.getThrownWeaponsDepleted(charactersInventoryToRender, InventorySlot.WEAPON_OFFHAND_3);
 				String weaponCount = getThrownWeaponCountDiv(depletedWeapon, 0);
 				equippedPanelSB.append(
 						"<div class='inventory-item-slot" + getClassRarityIdentifier(depletedWeapon.getRarity()) + "' style='"+weaponStyle+"'>"
@@ -1135,7 +1135,7 @@ public enum RenderingEngine {
 		return "";
 	}
 
-	private static String getThrownWeaponCountDiv(AbstractWeaponType weaponType, int amount) {
+	private static String getThrownWeaponCountDiv(WeaponType weaponType, int amount) {
 		if(!weaponType.isOneShot()) {
 			return "";
 		}

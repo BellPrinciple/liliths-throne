@@ -35,11 +35,8 @@ import com.lilithsthrone.game.character.race.SubspeciesPreference;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntryEncyclopediaUnlock;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.settings.DifficultyLevel;
 import com.lilithsthrone.game.settings.ForcedFetishTendency;
@@ -181,9 +178,9 @@ public class Properties {
 	private ForcedFetishTendency forcedFetishTendency;
 	
 	// Discoveries:
-	private Set<AbstractItemType> itemsDiscovered;
-	private Set<AbstractWeaponType> weaponsDiscovered;
-	private Set<AbstractClothingType> clothingDiscovered;
+	private Set<ItemType> itemsDiscovered;
+	private Set<WeaponType> weaponsDiscovered;
+	private Set<ClothingType> clothingDiscovered;
 	private Set<Subspecies> subspeciesDiscovered;
 	private Set<Subspecies> subspeciesAdvancedKnowledge;
 
@@ -526,7 +523,7 @@ public class Properties {
 			// Discoveries:
 			Element itemsDiscovered = doc.createElement("itemsDiscovered");
 			properties.appendChild(itemsDiscovered);
-			for (AbstractItemType itemType : this.itemsDiscovered) {
+			for (var itemType : this.itemsDiscovered) {
 				try {
 					if(itemType!=null) {
 						Element element = doc.createElement("type");
@@ -540,7 +537,7 @@ public class Properties {
 			
 			Element weaponsDiscovered = doc.createElement("weaponsDiscovered");
 			properties.appendChild(weaponsDiscovered);
-			for (AbstractWeaponType weaponType : this.weaponsDiscovered) {
+			for (var weaponType : this.weaponsDiscovered) {
 				try {
 					if(weaponType!=null) {
 						Element element = doc.createElement("type");
@@ -554,7 +551,7 @@ public class Properties {
 			
 			Element clothingDiscovered = doc.createElement("clothingDiscovered");
 			properties.appendChild(clothingDiscovered);
-			for (AbstractClothingType clothingType : this.clothingDiscovered) {
+			for (var clothingType : this.clothingDiscovered) {
 				try {
 					if(clothingType!=null) {
 						Element element = doc.createElement("type");
@@ -1249,17 +1246,17 @@ public class Properties {
 	
 	private void applyAdditionalDiscoveries(AbstractCoreType itemType) {
 		for(AbstractCoreType it : itemType.getAdditionalDiscoveryTypes()) {
-			if(it instanceof AbstractWeaponType) {
-				Main.game.getPlayer().addWeaponDiscovered((AbstractWeaponType)it);
-				weaponsDiscovered.add((AbstractWeaponType)it);
+			if(it instanceof WeaponType) {
+				Main.game.getPlayer().addWeaponDiscovered((WeaponType)it);
+				weaponsDiscovered.add((WeaponType)it);
 			}
-			if(it instanceof AbstractClothingType) {
-				Main.game.getPlayer().addClothingDiscovered((AbstractClothingType)it);
-				clothingDiscovered.add((AbstractClothingType)it);
+			if(it instanceof ClothingType) {
+				Main.game.getPlayer().addClothingDiscovered((ClothingType)it);
+				clothingDiscovered.add((ClothingType)it);
 			}
-			if(it instanceof AbstractItemType) {
-				Main.game.getPlayer().addItemDiscovered((AbstractItemType)it);
-				itemsDiscovered.add((AbstractItemType)it);
+			if(it instanceof ItemType) {
+				Main.game.getPlayer().addItemDiscovered((ItemType)it);
+				itemsDiscovered.add((ItemType)it);
 			}
 		}
 	}
@@ -1269,13 +1266,13 @@ public class Properties {
 			this.addRaceDiscovered(subspecies);
 			this.addAdvancedRaceKnowledge(subspecies);
 		}
-		for(AbstractItemType itemType : ItemType.getAllItems()) {
+		for(var itemType : ItemType.getAllItems()) {
 			this.addItemDiscovered(itemType);
 		}
-		for(AbstractClothingType clothingType : ClothingType.getAllClothing()) {
+		for(var clothingType : ClothingType.getAllClothing()) {
 			this.addClothingDiscovered(clothingType);
 		}
-		for(AbstractWeaponType weaponType : WeaponType.getAllWeapons()) {
+		for(var weaponType : WeaponType.getAllWeapons()) {
 			this.addWeaponDiscovered(weaponType);
 		}
 	}
@@ -1287,7 +1284,7 @@ public class Properties {
 		return itemsDiscovered.size();
 	}
 	
-	public boolean addItemDiscovered(AbstractItemType itemType) {
+	public boolean addItemDiscovered(ItemType itemType) {
 		if(itemType.getItemTags().contains(ItemTag.CHEAT_ITEM)
 				|| itemType.getItemTags().contains(ItemTag.SILLY_MODE)) {
 			return false;
@@ -1304,7 +1301,7 @@ public class Properties {
 	}
 
 	/** This method <b>takes into account</b> the 'shared Encyclopedia' content setting. */
-	public boolean isItemDiscovered(AbstractItemType itemType) {
+	public boolean isItemDiscovered(ItemType itemType) {
 		if(this.hasValue(PropertyValue.sharedEncyclopedia)) {
 			return itemsDiscovered.contains(itemType);
 		}
@@ -1322,7 +1319,7 @@ public class Properties {
 		return clothingDiscovered.size();
 	}
 	
-	public boolean addClothingDiscovered(AbstractClothingType clothingType) {
+	public boolean addClothingDiscovered(ClothingType clothingType) {
 		if(clothingType.getDefaultItemTags().contains(ItemTag.CHEAT_ITEM)
 				|| clothingType.getDefaultItemTags().contains(ItemTag.SILLY_MODE)) {
 			return false;
@@ -1339,7 +1336,7 @@ public class Properties {
 	}
 
 	/** This method <b>takes into account</b> the 'shared Encyclopedia' content setting. */
-	public boolean isClothingDiscovered(AbstractClothingType clothingType) {
+	public boolean isClothingDiscovered(ClothingType clothingType) {
 		if(this.hasValue(PropertyValue.sharedEncyclopedia)) {
 			return clothingDiscovered.contains(clothingType);
 		}
@@ -1357,7 +1354,7 @@ public class Properties {
 		return weaponsDiscovered.size();
 	}
 	
-	public boolean addWeaponDiscovered(AbstractWeaponType weaponType) {
+	public boolean addWeaponDiscovered(WeaponType weaponType) {
 		if(weaponType.getItemTags().contains(ItemTag.CHEAT_ITEM)
 				|| weaponType.getItemTags().contains(ItemTag.SILLY_MODE)) {
 			return false;
@@ -1374,7 +1371,7 @@ public class Properties {
 	}
 
 	/** This method <b>takes into account</b> the 'shared Encyclopedia' content setting. */
-	public boolean isWeaponDiscovered(AbstractWeaponType weaponType) {
+	public boolean isWeaponDiscovered(WeaponType weaponType) {
 		if(this.hasValue(PropertyValue.sharedEncyclopedia)) {
 			return weaponsDiscovered.contains(weaponType);
 		}

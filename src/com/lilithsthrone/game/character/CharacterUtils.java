@@ -109,7 +109,6 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.BlockedParts;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
@@ -2750,7 +2749,7 @@ public class CharacterUtils {
 					// Don't add leg clothing if dress has been added
 				} else {
 					if((slot.isCoreClothing() || Math.random()>0.75f || (slot.isJewellery() && character.getBodyMaterial().isRequiresPiercing())) && !character.isSlotIncompatible(slot) && character.getClothingInSlot(slot)==null) {
-						List<AbstractClothingType> clothingToUse = ClothingType.getCommonClothingMapFemaleIncludingAndrogynous().get(slot);
+						var clothingToUse = ClothingType.getCommonClothingMapFemaleIncludingAndrogynous().get(slot);
 						if(character.getHistory()==Occupation.NPC_PROSTITUTE) {
 							clothingToUse = ClothingType.getSuitableFeminineClothing().get(Occupation.NPC_PROSTITUTE);
 						}
@@ -2768,7 +2767,7 @@ public class CharacterUtils {
 							
 							
 							if(!clothingToUse.isEmpty()) {
-								AbstractClothingType ct = getClothingTypeForSlot(character, slot, clothingToUse);
+								var ct = getClothingTypeForSlot(character, slot, clothingToUse);
 								
 								if(ct!=null) {
 									AbstractClothing clothingToAdd = Main.game.getItemGen().generateClothing(
@@ -2805,7 +2804,7 @@ public class CharacterUtils {
 				} else {
 					if((slot.isCoreClothing() || Math.random()>0.75f || (slot.isJewellery() && character.getBodyMaterial().isRequiresPiercing())) && !character.isSlotIncompatible(slot) && character.getClothingInSlot(slot)==null) {
 						
-						List<AbstractClothingType> clothingToUse = ClothingType.getCommonClothingMapMaleIncludingAndrogynous().get(slot);
+						var clothingToUse = ClothingType.getCommonClothingMapMaleIncludingAndrogynous().get(slot);
 						
 						if(!clothingToUse.isEmpty()) {
 							BodyPartClothingBlock block = slot.getBodyPartClothingBlock(character);
@@ -2820,7 +2819,7 @@ public class CharacterUtils {
 								).collect(Collectors.toList());
 							
 							if(!clothingToUse.isEmpty()) {
-								AbstractClothingType ct = getClothingTypeForSlot(character, slot, clothingToUse);
+								var ct = getClothingTypeForSlot(character, slot, clothingToUse);
 								
 								if(ct!=null) {
 									AbstractClothing clothingToAdd = Main.game.getItemGen().generateClothing(
@@ -2843,7 +2842,7 @@ public class CharacterUtils {
 	}
 	
 	public void equipPiercings(GameCharacter character, boolean replaceUnsuitableClothing) {
-		 Map<InventorySlot, List<AbstractClothingType>> clothingMap = ClothingType.getCommonClothingMapMaleIncludingAndrogynous();
+		var clothingMap = ClothingType.getCommonClothingMapMaleIncludingAndrogynous();
 		 
 		if(character.isFeminine() || character.hasFetish(Fetish.FETISH_CROSS_DRESSER)) {
 			clothingMap = ClothingType.getCommonClothingMapFemaleIncludingAndrogynous();
@@ -2862,10 +2861,10 @@ public class CharacterUtils {
 				if(!clothingMap.get(slot).isEmpty()) {
 
 					BodyPartClothingBlock block = slot.getBodyPartClothingBlock(character);
-					List<AbstractClothingType> clothingToUse = clothingMap.get(slot);
+					var clothingToUse = clothingMap.get(slot);
 					clothingToUse = clothingToUse.stream().filter((c) -> (block==null || !Collections.disjoint(c.getItemTags(slot), block.getRequiredTags()))).collect(Collectors.toList());
 					
-					AbstractClothingType ct = getClothingTypeForSlot(character, slot, clothingToUse);
+					var ct = getClothingTypeForSlot(character, slot, clothingToUse);
 					
 					if(ct!=null) {
 						character.equipClothingFromNowhere(Main.game.getItemGen().generateClothing(ct, false), slot, true, character);
@@ -2875,16 +2874,14 @@ public class CharacterUtils {
 		}
 	}
 	
-	private static AbstractClothingType getClothingTypeForSlot(GameCharacter character, InventorySlot slot, List<AbstractClothingType> clothingOptions) {
-		List<AbstractClothingType> availableClothing = new ArrayList<>();
+	private static ClothingType getClothingTypeForSlot(GameCharacter character, InventorySlot slot, List<ClothingType> clothingOptions) {
+		var availableClothing = new ArrayList<ClothingType>();
 
-		boolean canEquip=true;
-		
-		for(AbstractClothingType ct : clothingOptions) {
+		for(var ct : clothingOptions) {
 			if(!ct.getEquipSlots().contains(slot)) {
 				continue;
 			}
-			canEquip=true;
+			boolean canEquip=true;
 			
 			if(slot==InventorySlot.CHEST && !character.hasBreasts()) {
 				canEquip = false;
@@ -2962,7 +2959,7 @@ public class CharacterUtils {
 	public List<AbstractClothing> generateEnchantedClothingForTrader(GameCharacter trader, List<AbstractClothing> clothingToSell, int numberOfUncommonsToGenerate, int numberofRaresToGenerate) {
 
 		List<AbstractClothing> clothingGenerated = new ArrayList<>();
-		List<AbstractClothingType> enchantedClothingTypes = new ArrayList<>();
+		var enchantedClothingTypes = new ArrayList<ClothingType>();
 		
 		clothingToSell.forEach(c -> {
 			if(c.getClothingType().getEffects().isEmpty() && c.getClothingType().getRarity()==Rarity.COMMON)
@@ -2972,7 +2969,7 @@ public class CharacterUtils {
 			if(enchantedClothingTypes.isEmpty()) {
 				break;
 			}
-			AbstractClothingType type = Util.randomItemFrom(enchantedClothingTypes);
+			var type = Util.randomItemFrom(enchantedClothingTypes);
 			enchantedClothingTypes.remove(type);
 			AbstractClothing c = Main.game.getItemGen().generateClothingWithEnchantment(type);
 			c.setEnchantmentKnown(trader, true);
@@ -2982,7 +2979,7 @@ public class CharacterUtils {
 			if(enchantedClothingTypes.isEmpty()) {
 				break;
 			}
-			AbstractClothingType type = Util.randomItemFrom(enchantedClothingTypes);
+			var type = Util.randomItemFrom(enchantedClothingTypes);
 			enchantedClothingTypes.remove(type);
 			AbstractClothing c = Main.game.getItemGen().generateRareClothing(type);
 			c.setEnchantmentKnown(trader, true);

@@ -1,6 +1,6 @@
 package com.lilithsthrone.game.dialogue.eventLog;
 
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
+import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -12,7 +12,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
 public class EventLogEntryBookAddedToLibrary extends EventLogEntry {
 
 	
-	public EventLogEntryBookAddedToLibrary(AbstractItemType book) {
+	public EventLogEntryBookAddedToLibrary(ItemType book) {
 		super("Added to Library", "<span style='color:"+book.getRarity().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(book.getName(false))+"</span>");
 	}
 	

@@ -43,7 +43,6 @@ import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.SVGImages;
@@ -172,7 +171,7 @@ public interface Subspecies {
 	 * @return
 	 * The ItemType which this Subspecies has as its attribute-related item. <b>Returns null if no item is defined.</b>
 	 */
-	default AbstractItemType getAttributeItem(GameCharacter owner) {
+	default ItemType getAttributeItem(GameCharacter owner) {
 		if(getAttributeItemId()==null || getAttributeItemId().isEmpty()) {
 			return null;
 		}
@@ -187,14 +186,14 @@ public interface Subspecies {
 	 * @return
 	 * The ItemType which this Subspecies has as its transformation-related item. <b>Returns null if no item is defined.</b>
 	 */
-	default AbstractItemType getTransformativeItem(GameCharacter owner) {
+	default ItemType getTransformativeItem(GameCharacter owner) {
 		if(getTransformativeItemId()==null || getTransformativeItemId().isEmpty()) {
 			return null;
 		}
 		return ItemType.getItemTypeFromId(getTransformativeItemId());
 	}
 
-	AbstractItemType getBook();
+	ItemType getBook();
 
 	default boolean isMainSubspecies() {
 		return false;
@@ -4396,7 +4395,7 @@ public interface Subspecies {
 			null, Util.newArrayListOfValues(
 					SubspeciesFlag.HIDDEN_FROM_PREFERENCES)) {
 		@Override
-		public AbstractItemType getTransformativeItem(GameCharacter owner) {
+		public ItemType getTransformativeItem(GameCharacter owner) {
 			if(getTransformativeItemId()==null || getTransformativeItemId().isEmpty()) {
 				return null;	
 			}
@@ -5531,7 +5530,7 @@ public interface Subspecies {
 		public int getSubspeciesOverridePriority() {
 			return 50_000;
 		}
-		public AbstractItemType getBook() {
+		public ItemType getBook() {
 			return ItemType.getLoreBook(this);
 		}
 		@Override

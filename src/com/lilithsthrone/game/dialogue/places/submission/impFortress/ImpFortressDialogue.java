@@ -43,7 +43,6 @@ import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
@@ -3059,7 +3058,7 @@ public class ImpFortressDialogue {
 				return new Response("Take key", UtilText.parse(getBoss(), "Take the key from [npc.name] and leave the keep."), KEEP_AFTER_SEX_AUDIENCE_KEY) {
 					@Override
 					public void effects() {
-						AbstractItemType keyType = ItemType.IMP_FORTRESS_ARCANE_KEY;
+						ItemType keyType = ItemType.IMP_FORTRESS_ARCANE_KEY;
 						if(isMalesFortress()) {
 							keyType = ItemType.IMP_FORTRESS_ARCANE_KEY_2;
 						} else if(isFemalesFortress()) {

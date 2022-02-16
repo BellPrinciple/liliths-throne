@@ -62,17 +62,14 @@ import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.EnchantingUtils;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
@@ -100,7 +97,7 @@ public class Vicky extends NPC {
 	private Map<AbstractItem, Integer> itemsForSale;
 	private Map<AbstractClothing, Integer> clothingForSale;
 	
-	private AbstractItemType[] availableIngredients = new AbstractItemType[] {
+	private ItemType[] availableIngredients = new ItemType[] {
 			ItemType.getItemTypeFromId("innoxia_race_cat_kittys_reward"),
 			ItemType.getItemTypeFromId("innoxia_race_dog_canine_crunch"),
 			ItemType.getItemTypeFromId("innoxia_race_harpy_bubblegum_lollipop"),
@@ -112,7 +109,7 @@ public class Vicky extends NPC {
 			ItemType.getItemTypeFromId("innoxia_race_reindeer_sugar_cookie"),
 			ItemType.getItemTypeFromId("innoxia_race_human_bread_roll")};
 	
-	private static List<AbstractItemType> availableSpellBooks = new ArrayList<>();
+	private static List<ItemType> availableSpellBooks = new ArrayList<>();
 	
 	static {
 		for(Spell s : Spell.values()) {
@@ -476,19 +473,19 @@ public class Vicky extends NPC {
 		
 		List<AbstractCoreType> types = new ArrayList<>();
 		
-		for(AbstractWeaponType wt : WeaponType.getAllWeapons()) {
+		for(var wt : WeaponType.getAllWeapons()) {
 			if(wt.getItemTags().contains(ItemTag.SOLD_BY_VICKY)
 					&& (!wt.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				types.add(wt);
 			}
 		}
-		for(AbstractItemType item : ItemType.getAllItems()) {
+		for(var item : ItemType.getAllItems()) {
 			if(item.getItemTags().contains(ItemTag.SOLD_BY_VICKY)
 					&& (!item.getItemTags().contains(ItemTag.SILLY_MODE) || Main.game.isSillyMode())) {
 				types.add(item);
 			}
 		}
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(var clothing : ClothingType.getAllClothing()) {
 			try {
 				if(clothing!=null
 						&& clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_VICKY)
@@ -502,14 +499,14 @@ public class Vicky extends NPC {
 		Collections.shuffle(types);
 		int count=0;
 		for(AbstractCoreType type : types) {
-			if(type instanceof AbstractWeaponType) {
-				weaponsForSale.put(Main.game.getItemGen().generateWeapon((AbstractWeaponType) type), 2+Util.random.nextInt(5));
+			if(type instanceof WeaponType) {
+				weaponsForSale.put(Main.game.getItemGen().generateWeapon((WeaponType) type), 2+Util.random.nextInt(5));
 				
-			} else if(type instanceof AbstractItemType) {
-				itemsForSale.put(Main.game.getItemGen().generateItem((AbstractItemType) type), 2+Util.random.nextInt(5));
+			} else if(type instanceof ItemType) {
+				itemsForSale.put(Main.game.getItemGen().generateItem((ItemType) type), 2+Util.random.nextInt(5));
 				
-			} else if(type instanceof AbstractClothingType) {
-				clothingForSale.put(Main.game.getItemGen().generateClothing((AbstractClothingType) type), 2+Util.random.nextInt(5));
+			} else if(type instanceof ClothingType) {
+				clothingForSale.put(Main.game.getItemGen().generateClothing((ClothingType) type), 2+Util.random.nextInt(5));
 			}
 			count++;
 			if(count>=this.getMaximumInventorySpace()-requiredRoomForMiscItems) {
@@ -534,7 +531,7 @@ public class Vicky extends NPC {
 			}
 		}
 		
-		for(AbstractItemType itemType : availableSpellBooks) {
+		for(var itemType : availableSpellBooks) {
 			itemsForSale.put(Main.game.getItemGen().generateItem(itemType), 1);
 		}
 		
@@ -544,7 +541,7 @@ public class Vicky extends NPC {
 		}
 		
 //		if(Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)) {
-			for(AbstractItemType itemType : ItemType.getEssences()) {
+			for(var itemType : ItemType.getEssences()) {
 				if (!itemType.getItemTags().contains(ItemTag.CONTRABAND_HEAVY)) {
 					AbstractItem item = Main.game.getItemGen().generateItem(itemType);
 					itemsForSale.put(item, 500+Util.random.nextInt(251));

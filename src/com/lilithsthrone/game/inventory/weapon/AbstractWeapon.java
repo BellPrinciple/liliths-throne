@@ -48,7 +48,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSaving {
 	
-	private AbstractWeaponType weaponType;
+	private final WeaponType weaponType;
 	
 	protected List<ItemEffect> effects;
 	
@@ -60,7 +60,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 	private List<AbstractCombatMove> combatMoves;
 
 	
-	public AbstractWeapon(AbstractWeaponType weaponType, DamageType damageType, List<Colour> colours) {
+	public AbstractWeapon(WeaponType weaponType, DamageType damageType, List<Colour> colours) {
 		super(weaponType.getName(), weaponType.getNamePlural(), weaponType.getPathName(), damageType.getMultiplierAttribute().getColour(), weaponType.getRarity(), null);
 		
 		this.weaponType = weaponType;
@@ -595,7 +595,7 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		this.damageType = damageType;
 	}
 	
-	public AbstractWeaponType getWeaponType() {
+	public WeaponType getWeaponType() {
 		return weaponType;
 	}
 

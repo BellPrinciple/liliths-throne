@@ -215,14 +215,14 @@ public interface WeaponType extends AbstractCoreType {
 		return ItemEffectType.WEAPON;
 	}
 
-	default AbstractWeaponType getEnchantmentItemType(List<ItemEffect> effects) {
-		return (AbstractWeaponType)this;
+	default WeaponType getEnchantmentItemType(List<ItemEffect> effects) {
+		return this;
 	}
 
 	List<ItemTag> getItemTags();
 	
 	@Deprecated
-	public static AbstractWeaponType getWeaponTypeFromId(String id) {
+	public static WeaponType getWeaponTypeFromId(String id) {
 		return getWeaponTypeFromId(id, true);
 	}
 	
@@ -230,7 +230,7 @@ public interface WeaponType extends AbstractCoreType {
 	 * @param closestMatch Pass in true if you want to get whatever WeaponType has the closest match to the provided id, even if it's not exactly the same.
 	 */
 	@Deprecated
-	public static AbstractWeaponType getWeaponTypeFromId(String id, boolean closestMatch) {
+	public static WeaponType getWeaponTypeFromId(String id, boolean closestMatch) {
 		return closestMatch ? table.of(id) : table.exact(id).orElse(null);
 	}
 
@@ -296,11 +296,11 @@ public interface WeaponType extends AbstractCoreType {
 	}
 
 	@Deprecated
-	public static String getIdFromWeaponType(AbstractWeaponType weaponType) {
+	public static String getIdFromWeaponType(WeaponType weaponType) {
 		return weaponType.getId();
 	}
 
-	Table<AbstractWeaponType> table = new Table<>(WeaponType::sanitize) {{
+	Table<WeaponType> table = new Table<>(WeaponType::sanitize) {{
 
 		// Modded weapon types:
 		forEachMod("/items/weapons",null,null,(f,n,a)->{
@@ -318,7 +318,7 @@ public interface WeaponType extends AbstractCoreType {
 	}};
 
 	@Deprecated
-	public static List<AbstractWeaponType> getAllWeapons() {
+	public static List<WeaponType> getAllWeapons() {
 		return table.list();
 	}
 }

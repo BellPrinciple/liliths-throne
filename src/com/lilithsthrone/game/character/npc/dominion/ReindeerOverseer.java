@@ -25,9 +25,7 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.outfit.OutfitType;
 import com.lilithsthrone.main.Main;
@@ -174,7 +172,7 @@ public class ReindeerOverseer extends NPC {
 					this.addItem(Main.game.getItemGen().generateItem(ItemType.PRESENT), false);
 				}
 				
-				for (AbstractItemType item : ItemType.getAllItems()) {
+				for (var item : ItemType.getAllItems()) {
 					if(item!=null && item.getItemTags().contains(ItemTag.REINDEER_GIFT)) {
 						for (int i = 0; i < 3 + (Util.random.nextInt(6)); i++) {
 							this.addItem(Main.game.getItemGen().generateItem(item), false);
@@ -182,7 +180,7 @@ public class ReindeerOverseer extends NPC {
 					}
 				}
 				
-				for (AbstractClothingType clothing : ClothingType.getAllClothing()) {
+				for (var clothing : ClothingType.getAllClothing()) {
 					if(clothing!=null && clothing.getDefaultItemTags().contains(ItemTag.REINDEER_GIFT)) {
 						for (int i = 0; i < 1 + (Util.random.nextInt(2)); i++) {
 							this.addClothing(Main.game.getItemGen().generateClothing(clothing), false);

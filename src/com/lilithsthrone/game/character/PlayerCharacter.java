@@ -62,11 +62,8 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.ShopTransaction;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.sex.CondomFailure;
 import com.lilithsthrone.game.sex.OrgasmCumTarget;
@@ -117,9 +114,9 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	
 	private Set<Subspecies> racesDiscoveredFromBook;
 	
-	private Set<AbstractItemType> itemsDiscovered;
-	private Set<AbstractWeaponType> weaponsDiscovered;
-	private Set<AbstractClothingType> clothingDiscovered;
+	private Set<ItemType> itemsDiscovered;
+	private Set<WeaponType> weaponsDiscovered;
+	private Set<ClothingType> clothingDiscovered;
 	private Set<Subspecies> subspeciesDiscovered;
 	private Set<Subspecies> subspeciesAdvancedKnowledge;
 	
@@ -248,7 +245,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		// Discoveries:
 		Element itemsDiscovered = doc.createElement("itemsDiscovered");
 		playerSpecific.appendChild(itemsDiscovered);
-		for (AbstractItemType itemType : this.itemsDiscovered) {
+		for (var itemType : this.itemsDiscovered) {
 			try {
 				if(itemType!=null) {
 					Element element = doc.createElement("type");
@@ -262,7 +259,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		
 		Element weaponsDiscovered = doc.createElement("weaponsDiscovered");
 		playerSpecific.appendChild(weaponsDiscovered);
-		for (AbstractWeaponType weaponType : this.weaponsDiscovered) {
+		for (var weaponType : this.weaponsDiscovered) {
 			try {
 				if(weaponType!=null) {
 					Element element = doc.createElement("type");
@@ -276,7 +273,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		
 		Element clothingDiscovered = doc.createElement("clothingDiscovered");
 		playerSpecific.appendChild(clothingDiscovered);
-		for (AbstractClothingType clothingType : this.clothingDiscovered) {
+		for (var clothingType : this.clothingDiscovered) {
 			try {
 				if(clothingType!=null) {
 					Element element = doc.createElement("type");
@@ -1235,12 +1232,12 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	}
 	
 	/** <b>You should be using the Properties class to add this!</b> */
-	public boolean addItemDiscovered(AbstractItemType itemType) {
+	public boolean addItemDiscovered(ItemType itemType) {
 		return itemsDiscovered.add(itemType);
 	}
 
 	/** <b>You should be using the Properties class to access this!</b> */
-	public boolean isItemDiscovered(AbstractItemType itemType) {
+	public boolean isItemDiscovered(ItemType itemType) {
 		return itemsDiscovered.contains(itemType);
 	}
 
@@ -1250,12 +1247,12 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	}
 	
 	/** <b>You should be using the Properties class to add this!</b> */
-	public boolean addClothingDiscovered(AbstractClothingType clothingType) {
+	public boolean addClothingDiscovered(ClothingType clothingType) {
 		return clothingDiscovered.add(clothingType);
 	}
 
 	/** <b>You should be using the Properties class to access this!</b> */
-	public boolean isClothingDiscovered(AbstractClothingType clothingType) {
+	public boolean isClothingDiscovered(ClothingType clothingType) {
 		return clothingDiscovered.contains(clothingType);
 	}
 
@@ -1265,12 +1262,12 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	}
 	
 	/** <b>You should be using the Properties class to add this!</b> */
-	public boolean addWeaponDiscovered(AbstractWeaponType weaponType) {
+	public boolean addWeaponDiscovered(WeaponType weaponType) {
 		return weaponsDiscovered.add(weaponType);
 	}
 
 	/** <b>You should be using the Properties class to access this!</b> */
-	public boolean isWeaponDiscovered(AbstractWeaponType weaponType) {
+	public boolean isWeaponDiscovered(WeaponType weaponType) {
 		return weaponsDiscovered.contains(weaponType);
 	}
 

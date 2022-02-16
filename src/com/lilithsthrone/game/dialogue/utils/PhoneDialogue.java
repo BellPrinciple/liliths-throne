@@ -32,11 +32,8 @@ import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
@@ -2951,9 +2948,9 @@ public class PhoneDialogue {
 		}
 	};
 
-	private static List<AbstractItemType> itemsDiscoveredList = new ArrayList<>();
-	private static List<AbstractClothingType> clothingDiscoveredList = new ArrayList<>();
-	private static List<AbstractWeaponType> weaponsDiscoveredList = new ArrayList<>();
+	private static List<ItemType> itemsDiscoveredList = new ArrayList<>();
+	private static List<ClothingType> clothingDiscoveredList = new ArrayList<>();
+	private static List<WeaponType> weaponsDiscoveredList = new ArrayList<>();
 
 	
 	private static Map<String, List<InventorySlot>> clothingSlotCategories;
@@ -3055,7 +3052,7 @@ public class PhoneDialogue {
 			int rangedCount = 0;
 			int rangedKnownCount = 0;
 			
-			for(AbstractWeaponType weaponType : weaponsDiscoveredList) {
+			for(var weaponType : weaponsDiscoveredList) {
 				boolean discovered = Main.getProperties().isWeaponDiscovered(weaponType);
 				String entry = "<div class='inventory-item-slot unequipped' style='background-color:"+weaponType.getRarity().getBackgroundColour().toWebHexString()+"; width:78%; margin:1%; padding:0; '>"
 									+ "<div class='inventory-icon-content'>"+(discovered?weaponType.getSVGImage():"")+"</div>"
@@ -3141,7 +3138,7 @@ public class PhoneDialogue {
 				discoveredMap.put(slot, new Value<>(0, 0));
 			}
 			
-			for(AbstractClothingType clothingType : clothingDiscoveredList) {
+			for(var clothingType : clothingDiscoveredList) {
 				if(Collections.disjoint(clothingType.getEquipSlots(), slots)) {
 					continue;
 				}
@@ -3225,7 +3222,7 @@ public class PhoneDialogue {
 			int spellCount = 0;
 			int spellKnownCount = 0;
 			
-			for(AbstractItemType itemType : itemsDiscoveredList) {
+			for(var itemType : itemsDiscoveredList) {
 				boolean discovered = Main.getProperties().isItemDiscovered(itemType);
 				String entry = "<div class='inventory-item-slot unequipped' style='background-color:"+itemType.getRarity().getBackgroundColour().toWebHexString()+"; width:8%;'>"
 									+ "<div class='inventory-icon-content'>"+(discovered?itemType.getSVGString():"")+"</div>"

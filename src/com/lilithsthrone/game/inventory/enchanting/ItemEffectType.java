@@ -33,9 +33,7 @@ import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.main.Main;
@@ -1040,12 +1038,12 @@ public interface ItemEffectType {
 		
 		@Override
 		public String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
-			List<AbstractItemType> items = new ArrayList<>();
+			var items = new ArrayList<ItemType>();
 			items.add(ItemType.getItemTypeFromId("innoxia_race_reindeer_rudolphs_egg_nog"));
 			items.add(ItemType.getItemTypeFromId("innoxia_race_none_mince_pie"));
 			items.add(ItemType.getItemTypeFromId("innoxia_race_reindeer_sugar_cookie"));
 			
-			Map<AbstractClothingType, Integer> clothingMap = new HashMap<>();
+			var clothingMap = new HashMap<ClothingType,Integer>();
 			// Common clothing (55%):
 			clothingMap.put(ClothingType.getClothingTypeFromId("innoxia_head_antler_headband"), 11);
 			clothingMap.put(ClothingType.getClothingTypeFromId("innoxia_elemental_snowflake_necklace"), 11);
@@ -1070,7 +1068,7 @@ public interface ItemEffectType {
 			
 			// 50% chance for consumable, 50% for clothing:
 			if(Math.random()<0.5f) {
-				AbstractItemType itemType = items.get(Util.random.nextInt(items.size()));
+				var itemType = items.get(Util.random.nextInt(items.size()));
 				
 				return "<p>"
 							+ "The present contained: <b>"+itemType.getDisplayName(true)+"</b>!"
@@ -1078,7 +1076,7 @@ public interface ItemEffectType {
 						+ user.addItem(Main.game.getItemGen().generateItem(itemType), false);
 				
 			} else {
-				AbstractClothingType clothingType = Util.getRandomObjectFromWeightedMap(clothingMap);
+				var clothingType = Util.getRandomObjectFromWeightedMap(clothingMap);
 				AbstractClothing clothing = Main.game.getItemGen().generateClothing(clothingType);
 				
 				if(!Main.game.getPlayerCell().getInventory().isInventoryFull()) {

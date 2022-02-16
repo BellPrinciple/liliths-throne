@@ -30,7 +30,6 @@ import com.lilithsthrone.game.character.npc.misc.Elemental;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.rendering.SVGImages;
@@ -1029,7 +1028,7 @@ public abstract class AbstractSubspecies implements Subspecies {
 	}
 
 	@Override
-	public AbstractItemType getBook() {
+	public ItemType getBook() {
 		return ItemType.getLoreBook(this);
 	}
 

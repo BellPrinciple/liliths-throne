@@ -12,15 +12,15 @@ import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
  * @author Stadler76
  */
 public abstract class AbstractPotion {
-	private final AbstractItemType itemType;
+	private final ItemType itemType;
 	private final List<PossibleItemEffect> effects;
 
-	public AbstractPotion(AbstractItemType itemType, List<PossibleItemEffect> effects) {
+	public AbstractPotion(ItemType itemType, List<PossibleItemEffect> effects) {
 		this.itemType = itemType;
 		this.effects = effects;
 	}
 
-	public AbstractItemType getItemType() {
+	public ItemType getItemType() {
 		return itemType;
 	}
 

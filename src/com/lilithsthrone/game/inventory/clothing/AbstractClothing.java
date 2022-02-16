@@ -63,7 +63,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  */
 public abstract class AbstractClothing extends AbstractCoreItem implements XMLSaving {
 
-	private AbstractClothingType clothingType;
+	private ClothingType clothingType;
 	
 	private InventorySlot slotEquippedTo;
 	
@@ -80,7 +80,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	
 	private List<DisplacementType> displacedList;
 	
-	public AbstractClothing(AbstractClothingType clothingType, List<Colour> colours, boolean allowRandomEnchantment) {
+	public AbstractClothing(ClothingType clothingType, List<Colour> colours, boolean allowRandomEnchantment) {
 		super(clothingType.getName(),
 				clothingType.getNamePlural(),
 				clothingType.getPathName(),
@@ -152,11 +152,11 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		}
 	}
 
-	public AbstractClothing(AbstractClothingType clothingType, Colour colour, Colour secondaryColour, Colour tertiaryColour, List<ItemEffect> effects) {
+	public AbstractClothing(ClothingType clothingType, Colour colour, Colour secondaryColour, Colour tertiaryColour, List<ItemEffect> effects) {
 		this(clothingType, Util.newArrayListOfValues(colour, secondaryColour, tertiaryColour), effects);
 	}
 	
-	public AbstractClothing(AbstractClothingType clothingType, List<Colour> colours, List<ItemEffect> effects) {
+	public AbstractClothing(ClothingType clothingType, List<Colour> colours, List<ItemEffect> effects) {
 		super(clothingType.getName(),
 				clothingType.getNamePlural(),
 				clothingType.getPathName(),
@@ -986,7 +986,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		return descriptionSB.toString();
 	}
 
-	public AbstractClothingType getClothingType() {
+	public ClothingType getClothingType() {
 		return clothingType;
 	}
 
@@ -2543,7 +2543,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 					&& slotEquippedTo!=InventorySlot.PIERCING_VAGINA) { // Clothing in groin slots should always be fine, so don't replace their values.
 				boolean cAccess = replaceCrotchBoobAccess;
 				List<BlockedParts> modifiedBlockedParts = new ArrayList<>();
-				for(BlockedParts blockedparts : this.clothingType.blockedPartsMap.get(slotEquippedTo)) {
+				for(BlockedParts blockedparts : this.clothingType.getBlockedParts(slotEquippedTo)) {
 					BlockedParts copy = new BlockedParts(blockedparts);
 					
 					copy.blockedBodyParts = copy.blockedBodyParts.stream().filter(
@@ -2586,7 +2586,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 				return modifiedBlockedParts;
 			}
 		}
-		return clothingType.blockedPartsMap.get(slotEquippedTo);
+		return clothingType.getBlockedParts(slotEquippedTo);
 	}
 	
 	public boolean isConcealsSlot(GameCharacter character, InventorySlot slotEquippedTo, InventorySlot slotToCheck) {
@@ -2635,7 +2635,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 					break;
 			}
 			if(replace) {
-				List<InventorySlot> modifiedIncompatibleSlots = new ArrayList<>(clothingType.incompatibleSlotsMap.get(slotEquippedTo));
+				List<InventorySlot> modifiedIncompatibleSlots = new ArrayList<>(clothingType.getIncompatibleSlots(slotEquippedTo));
 				
 				if(InventorySlot.getHumanoidSlots().contains(slotEquippedTo)) {
 					modifiedIncompatibleSlots.removeIf(slot -> !InventorySlot.getHumanoidSlots().contains(slot));
@@ -2646,7 +2646,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 				return modifiedIncompatibleSlots;
 			}
 		}
-		return clothingType.incompatibleSlotsMap.get(slotEquippedTo);
+		return clothingType.getIncompatibleSlots(slotEquippedTo);
 	}
 
 	public List<DisplacementType> getBlockedPartsKeysAsListWithoutNONE(GameCharacter character, InventorySlot slotEquippedTo) {
@@ -2688,7 +2688,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 					&& slotEquippedTo!=InventorySlot.PIERCING_VAGINA) { // Clothing in groin slots should always be fine, so don't replace their values.
 				boolean cAccess = replaceCrotchBoobAccess;
 				List<BlockedParts> modifiedBlockedParts = new ArrayList<>();
-				for(BlockedParts blockedparts : clothingType.blockedPartsMap.get(slotEquippedTo)) {
+				for(BlockedParts blockedparts : clothingType.getBlockedParts(slotEquippedTo)) {
 					BlockedParts copy = new BlockedParts(blockedparts);
 					
 					copy.blockedBodyParts = copy.blockedBodyParts.stream().filter(
@@ -2737,7 +2737,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 				return moddedDisplacementTypesAvailableWithoutNONE;
 			}
 		}
-		return clothingType.displacementTypesAvailableWithoutNONE.get(slotEquippedTo);
+		return clothingType.getDisplacementTypes(slotEquippedTo);
 	}
 	
 }

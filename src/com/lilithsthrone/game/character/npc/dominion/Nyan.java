@@ -64,10 +64,8 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
@@ -618,7 +616,7 @@ public class Nyan extends NPC {
 		
 		specials.clear();
 
-		for(AbstractClothingType clothing : ClothingType.getAllClothing()) {
+		for(var clothing : ClothingType.getAllClothing()) {
 			try {
 				if(clothing!=null
 						&& clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN)
@@ -754,7 +752,7 @@ public class Nyan extends NPC {
 	public String getGiftReaction(AbstractCoreItem gift, boolean applyEffects) {
 		String text = null;
 		if(gift instanceof AbstractItem) {
-			AbstractItemType type = ((AbstractItem)gift).getItemType();
+			var type = ((AbstractItem)gift).getItemType();
 			if(type.equals(ItemType.GIFT_CHOCOLATES)) {
 				text =  UtilText.parseFromXMLFile("characters/dominion/nyan", "NYAN_GIFT_CHOCOLATES")
 						+(applyEffects
@@ -781,7 +779,7 @@ public class Nyan extends NPC {
 			}
 			
 		} else if(gift instanceof AbstractClothing && ((AbstractClothing)gift).getEffects().isEmpty()) {
-			AbstractClothingType type = ((AbstractClothing)gift).getClothingType();
+			var type = ((AbstractClothing)gift).getClothingType();
 			if(type.equals(ClothingType.getClothingTypeFromId("innoxia_hair_rose"))) {
 				text = UtilText.parseFromXMLFile("characters/dominion/nyan", "NYAN_GIFT_SINGLE_ROSE")
 						+(applyEffects

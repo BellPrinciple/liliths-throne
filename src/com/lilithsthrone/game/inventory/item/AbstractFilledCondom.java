@@ -33,7 +33,7 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 	private FluidCum cum;
 	private int millilitresStored;
 	
-	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, GameCharacter cumProvider, FluidCum cum, int millilitresStored) {
+	public AbstractFilledCondom(ItemType itemType, Colour colour, GameCharacter cumProvider, FluidCum cum, int millilitresStored) {
 		super(itemType);
 		
 		this.cumProvider = cumProvider.getId();
@@ -47,7 +47,7 @@ public class AbstractFilledCondom extends AbstractItem implements XMLSaving {
 		this.millilitresStored = millilitresStored;
 	}
 	
-	public AbstractFilledCondom(AbstractItemType itemType, Colour colour, String cumProviderId, FluidCum cum, int millilitresStored) {
+	public AbstractFilledCondom(ItemType itemType, Colour colour, String cumProviderId, FluidCum cum, int millilitresStored) {
 		super(itemType);
 		
 		this.cumProvider = cumProviderId;

@@ -130,7 +130,6 @@ import com.lilithsthrone.game.character.fetishes.FetishDesire;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.gender.GenderPronoun;
 import com.lilithsthrone.game.character.gender.PronounType;
-import com.lilithsthrone.game.character.markings.AbstractTattooType;
 import com.lilithsthrone.game.character.markings.TattooType;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.NPCFlagValue;
@@ -171,13 +170,10 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.SetBonus;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.outfit.AbstractOutfit;
 import com.lilithsthrone.game.inventory.outfit.OutfitType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.occupantManagement.slave.SlavePermission;
 import com.lilithsthrone.game.occupantManagement.slave.SlavePermissionSetting;
@@ -220,7 +216,7 @@ public class UtilText {
 	private static List<ParserTag> parserTags;
 	private static List<String> parserVariableCalls = new ArrayList<>();
 	
-	private static AbstractClothingType clothingTypeForParsing;
+	private static ClothingType clothingTypeForParsing;
 	private static Body body;
 	private static Race race;
 	private static CharacterInventory inventory;
@@ -8735,7 +8731,7 @@ public class UtilText {
 				if(toy==null) {
 					return "toy";
 				}
-				AbstractClothingType toyType = toy.getClothingType();
+				var toyType = toy.getClothingType();
 				PenisLength length = PenisLength.getPenisLengthFromInt(toyType.getPenetrationSelfLength());
 				PenetrationGirth girth = PenetrationGirth.getGirthFromInt(toyType.getPenetrationSelfGirth());
 				return applyDescriptor(UtilText.returnStringAtRandom(length.getDescriptor(), girth.getName(), toy.getColourName()), toy.getName());
@@ -8801,7 +8797,7 @@ public class UtilText {
 				if(toy==null) {
 					return UtilText.returnStringAtRandom("toy");
 				}
-				AbstractClothingType toyType = toy.getClothingType();
+				var toyType = toy.getClothingType();
 				
 				// Length:
 				PenisLength length = PenisLength.getPenisLengthFromInt(toyType.getPenetrationSelfLength());
@@ -9725,17 +9721,17 @@ public class UtilText {
 		}
 		
 		// Items:
-		for(AbstractWeaponType weaponType : WeaponType.getAllWeapons()) {
+		for(var weaponType : WeaponType.getAllWeapons()) {
 			engine.put("WEAPON_"+WeaponType.getIdFromWeaponType(weaponType), weaponType);
 		}
-		for(AbstractClothingType clothingType : ClothingType.getAllClothing()) {
+		for(var clothingType : ClothingType.getAllClothing()) {
 			engine.put("CLOTHING_"+ClothingType.getIdFromClothingType(clothingType), clothingType);
 			engine.put("CT_"+ClothingType.getIdFromClothingType(clothingType), clothingType);
 		}
-		for(AbstractItemType itemType : ItemType.getAllItems()) {
+		for(var itemType : ItemType.getAllItems()) {
 			engine.put("ITEM_"+ItemType.getIdFromItemType(itemType), itemType);
 		}
-		for(AbstractTattooType tattooType : TattooType.getAllTattooTypes()) {
+		for(var tattooType : TattooType.getAllTattooTypes()) {
 			engine.put("TATTOO_"+TattooType.getIdFromTattooType(tattooType), tattooType);
 		}
 		for(var setBonus : SetBonus.table.list()) {
@@ -10731,11 +10727,11 @@ public class UtilText {
 		return sb.toString();
 	}
 
-	public static AbstractClothingType getClothingTypeForParsing() {
+	public static ClothingType getClothingTypeForParsing() {
 		return clothingTypeForParsing;
 	}
 
-	public static void setClothingTypeForParsing(AbstractClothingType clothingTypeForParsing) {
+	public static void setClothingTypeForParsing(ClothingType clothingTypeForParsing) {
 		UtilText.clothingTypeForParsing = clothingTypeForParsing;
 		if(engine==null) {
 			initScriptEngine();

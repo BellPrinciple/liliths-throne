@@ -31,7 +31,7 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 	private FluidMilk milk;
 	private int millilitresStored;
 	
-	public AbstractFilledBreastPump(AbstractItemType itemType, Colour colour, GameCharacter milkProvider, FluidMilk milk, int millilitresStored) {
+	public AbstractFilledBreastPump(ItemType itemType, Colour colour, GameCharacter milkProvider, FluidMilk milk, int millilitresStored) {
 		super(itemType);
 		
 		this.milkProvider = milkProvider.getId();
@@ -45,7 +45,7 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 		this.millilitresStored = millilitresStored;
 	}
 	
-	public AbstractFilledBreastPump(AbstractItemType itemType, Colour colour, String milkProviderId, FluidMilk milk, int millilitresStored) {
+	public AbstractFilledBreastPump(ItemType itemType, Colour colour, String milkProviderId, FluidMilk milk, int millilitresStored) {
 		super(itemType);
 		
 		this.milkProvider = milkProviderId;

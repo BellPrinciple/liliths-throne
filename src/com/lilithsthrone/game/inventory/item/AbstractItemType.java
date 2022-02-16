@@ -406,7 +406,7 @@ public abstract class AbstractItemType implements ItemType {
 	}
 
 	@Override
-	public AbstractItemType getEnchantmentItemType(List<ItemEffect> effects) {
+	public ItemType getEnchantmentItemType(List<ItemEffect> effects) {
 		if(enchantmentItemTypeId==null || enchantmentItemTypeId.isEmpty()) {
 			return null;
 		}

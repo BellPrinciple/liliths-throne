@@ -82,7 +82,7 @@ public interface ItemType extends AbstractCoreType {
 
 	AbstractItemEffectType getEnchantmentEffect();
 
-	AbstractItemType getEnchantmentItemType(List<ItemEffect> effects);
+	ItemType getEnchantmentItemType(List<ItemEffect> effects);
 
 	String getDeterminer();
 
@@ -228,7 +228,7 @@ public interface ItemType extends AbstractCoreType {
 		}
 
 		@Override
-		public AbstractItemType getEnchantmentItemType(List<ItemEffect> effects) {
+		public ItemType getEnchantmentItemType(List<ItemEffect> effects) {
 			return FETISH_REFINED;
 		}
 
@@ -308,7 +308,7 @@ public interface ItemType extends AbstractCoreType {
 			return ItemEffectType.ADDICTION_REMOVAL_REFINEMENT;
 		}
 		@Override
-		public AbstractItemType getEnchantmentItemType(List<ItemEffect> effects) {
+		public ItemType getEnchantmentItemType(List<ItemEffect> effects) {
 			return ADDICTION_REMOVAL_REFINED;
 		}
 		@Override
@@ -981,7 +981,7 @@ public interface ItemType extends AbstractCoreType {
 		}
 
 		@Override
-		public AbstractItemType getEnchantmentItemType(List<ItemEffect> effects) {
+		public ItemType getEnchantmentItemType(List<ItemEffect> effects) {
 			return ORIENTATION_HYPNO_WATCH;
 		}
 		
@@ -1636,7 +1636,7 @@ public interface ItemType extends AbstractCoreType {
 		}
 
 		@Override
-		public AbstractItemType getEnchantmentItemType(List<ItemEffect> effects) {
+		public ItemType getEnchantmentItemType(List<ItemEffect> effects) {
 			return EGGPLANT_POTION;
 		}
 		
@@ -2533,13 +2533,13 @@ public interface ItemType extends AbstractCoreType {
 
 	Collection table = new Collection();
 
-	final class Collection extends Table<AbstractItemType> {
+	final class Collection extends Table<ItemType> {
 
-		private final List<AbstractItemType> dominionAlleywayItems = new ArrayList<>();
-		private final List<AbstractItemType> submissionTunnelItems = new ArrayList<>();
-		private final List<AbstractItemType> batCavernItems = new ArrayList<>();
-		private final List<AbstractItemType> essences = new ArrayList<>();
-		private final List<AbstractItemType> moddedItems = new ArrayList<>();
+		private final List<ItemType> dominionAlleywayItems = new ArrayList<>();
+		private final List<ItemType> submissionTunnelItems = new ArrayList<>();
+		private final List<ItemType> batCavernItems = new ArrayList<>();
+		private final List<ItemType> essences = new ArrayList<>();
+		private final List<ItemType> moddedItems = new ArrayList<>();
 		private final Map<Subspecies,String> subspeciesBookId = new HashMap<>();
 		private final Map<Subspecies,String> essenceMap = new HashMap<>();
 
@@ -2557,7 +2557,7 @@ public interface ItemType extends AbstractCoreType {
 				add(n,v);
 			});
 			// Initialise all SVGStrings so that initialisation methods do not conflict with one another in other places in the code.
-			for(AbstractItemType it : list())
+			for(var it : list())
 				it.getSVGString();
 			addFields(ItemType.class,AbstractItemType.class,(k,v)->{
 				v.id = k;
@@ -2575,7 +2575,7 @@ public interface ItemType extends AbstractCoreType {
 	}
 
 	@Deprecated
-	public static AbstractItemType getItemTypeFromId(String id) {
+	public static ItemType getItemTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -2674,19 +2674,19 @@ public interface ItemType extends AbstractCoreType {
 	}
 
 	@Deprecated
-	public static String getIdFromItemType(AbstractItemType itemType) {
+	public static String getIdFromItemType(ItemType itemType) {
 		return itemType.getId();
 	}
 
-	public static AbstractItemType getSpellBookType(Spell s) {
+	public static ItemType getSpellBookType(Spell s) {
 		return table.of("SPELL_BOOK_"+s);
 	}
 	
-	public static AbstractItemType getSpellScrollType(SpellSchool school) {
+	public static ItemType getSpellScrollType(SpellSchool school) {
 		return table.of("SPELL_SCROLL_"+school);
 	}
 	
-	public static AbstractItemType getLoreBook(Subspecies subspecies) {
+	public static ItemType getLoreBook(Subspecies subspecies) {
 		return table.of(table.subspeciesBookId.get(subspecies));
 	}
 
@@ -3294,34 +3294,34 @@ public interface ItemType extends AbstractCoreType {
 		return finalImage;
 	}
 
-	public static List<AbstractItemType> getDominionAlleywayItems() {
+	public static List<ItemType> getDominionAlleywayItems() {
 		return table.dominionAlleywayItems;
 	}
 	
-	public static List<AbstractItemType> getSubmissionTunnelItems() {
+	public static List<ItemType> getSubmissionTunnelItems() {
 		return table.submissionTunnelItems;
 	}
 	
-	public static List<AbstractItemType> getBatCavernItems() {
+	public static List<ItemType> getBatCavernItems() {
 		return table.batCavernItems;
 	}
-	public static List<AbstractItemType> getEssences() {
+	public static List<ItemType> getEssences() {
 		return table.essences;
 	}
 
 	@Deprecated
-	public static List<AbstractItemType> getAllItems() {
+	public static List<ItemType> getAllItems() {
 		return table.list();
 	}
 
 	@Deprecated
-	public static Map<AbstractItemType, String> getItemToIdMap() {
-		return table.list().stream().collect(toMap(t->t,AbstractItemType::getId));
+	public static Map<ItemType, String> getItemToIdMap() {
+		return table.list().stream().collect(toMap(t->t,ItemType::getId));
 	}
 
 	@Deprecated
-	public static Map<String, AbstractItemType> getIdToItemMap() {
-		return table.list().stream().collect(toMap(AbstractItemType::getId,t->t));
+	public static Map<String, ItemType> getIdToItemMap() {
+		return table.list().stream().collect(toMap(ItemType::getId,t->t));
 	}
 
 }

@@ -1297,16 +1297,16 @@ public abstract class AbstractClothingType implements ClothingType {
 		return baseValue;
 	}
 
-	static Map<SetBonus, List<AbstractClothingType>> clothingSetMap = new HashMap<>();
+	static Map<SetBonus, List<ClothingType>> clothingSetMap = new HashMap<>();
 
-	public static List<AbstractClothingType> getClothingInSet(SetBonus set) {
+	public static List<ClothingType> getClothingInSet(SetBonus set) {
 		if (clothingSetMap.get(set) != null) {
 			return clothingSetMap.get(set);
 		}
 
-		List<AbstractClothingType> setOfClothing = new ArrayList<>();
+		var setOfClothing = new ArrayList<ClothingType>();
 
-		for (AbstractClothingType c : ClothingType.getAllClothing()) {
+		for(var c : ClothingType.table.list()) {
 			if (c.getClothingSet() == set) {
 				setOfClothing.add(c);
 			}

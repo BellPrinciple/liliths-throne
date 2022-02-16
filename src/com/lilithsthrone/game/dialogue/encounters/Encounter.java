@@ -47,12 +47,10 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
 import com.lilithsthrone.game.occupantManagement.slave.SlavePermissionSetting;
@@ -456,7 +454,7 @@ public class Encounter {
 					Main.game.getPlayerCell().getInventory().addClothing((AbstractClothing) randomItem);
 					
 				} else {
-					List<AbstractClothingType> randomClothingList = new ArrayList<>(ClothingType.getAllClothing());
+					var randomClothingList = new ArrayList<>(ClothingType.getAllClothing());
 					randomClothingList.removeIf((clothing) ->
 							(!clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_KATE)
 								&& !clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN)
@@ -470,7 +468,7 @@ public class Encounter {
 				return DominionEncounterDialogue.ALLEY_FIND_ITEM;
 				
 			} else if(node == EncounterType.DOMINION_FIND_WEAPON) {
-				List<AbstractWeaponType> weapons = new ArrayList<>(WeaponType.getAllWeapons());
+				var weapons = new ArrayList<>(WeaponType.getAllWeapons());
 				weapons.removeIf(w -> !w.getItemTags().contains(ItemTag.DOMINION_ALLEYWAY_SPAWN));
 				randomItem = Main.game.getItemGen().generateWeapon(weapons.get(Util.random.nextInt(weapons.size())));
 				
@@ -606,7 +604,7 @@ public class Encounter {
 					Main.game.getPlayerCell().getInventory().addClothing((AbstractClothing) randomItem);
 					
 				} else {
-					List<AbstractClothingType> randomClothingList = new ArrayList<>(ClothingType.getAllClothing());
+					var randomClothingList = new ArrayList<>(ClothingType.getAllClothing());
 					randomClothingList.removeIf((clothing) ->
 							(!clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_KATE)
 								&& !clothing.getDefaultItemTags().contains(ItemTag.SOLD_BY_NYAN)
@@ -620,7 +618,7 @@ public class Encounter {
 				return DominionEncounterDialogue.ALLEY_FIND_ITEM;
 				
 			} else if(node == EncounterType.DOMINION_FIND_WEAPON) {
-				List<AbstractWeaponType> weapons = new ArrayList<>(WeaponType.getAllWeapons());
+				var weapons = new ArrayList<>(WeaponType.getAllWeapons());
 				weapons.removeIf(w -> !w.getItemTags().contains(ItemTag.DOMINION_ALLEYWAY_SPAWN));
 				randomItem = Main.game.getItemGen().generateWeapon(weapons.get(Util.random.nextInt(weapons.size())));
 				

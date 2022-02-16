@@ -41,11 +41,8 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.SetBonus;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothingType;
 import com.lilithsthrone.game.inventory.clothing.ClothingType;
-import com.lilithsthrone.game.inventory.item.AbstractItemType;
 import com.lilithsthrone.game.inventory.item.ItemType;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
 import com.lilithsthrone.game.sex.SexAreaPenetration;
@@ -860,12 +857,12 @@ public class DebugDialogue {
 		}
 	};
 	
-	public static List<AbstractClothingType> clothingTotal = new ArrayList<>();
+	public static List<ClothingType> clothingTotal = new ArrayList<>();
 	public static InventorySlot activeSlot = null;
 	public static ItemTag itemTag = null;
 	public static int spawnCount = 1;
-	public static List<AbstractItemType> itemsTotal = new ArrayList<>();
-	public static List<AbstractWeaponType> weaponsTotal = new ArrayList<>();
+	public static List<ItemType> itemsTotal = new ArrayList<>();
+	public static List<WeaponType> weaponsTotal = new ArrayList<>();
 	static {
 		clothingTotal.addAll(ClothingType.getAllClothing());
 		clothingTotal.removeIf((c) -> c.getDefaultItemTags().contains(ItemTag.REMOVE_FROM_DEBUG_SPAWNER) || c.getDefaultItemTags().contains(ItemTag.CHEAT_ITEM));
@@ -903,7 +900,7 @@ public class DebugDialogue {
 			int count=0;
 			inventorySB.append("<div class='inventory-not-equipped'>");
 			if(itemTag==ItemTag.CHEAT_ITEM) {
-				for(AbstractClothingType c : ClothingType.getAllClothing()) {
+				for(var c : ClothingType.getAllClothing()) {
 					if(c.getDefaultItemTags().contains(ItemTag.CHEAT_ITEM)) {
 						inventorySB.append("<div class='inventory-item-slot unequipped' style='background-color:"+c.getRarity().getBackgroundColour().toWebHexString()+";'>"
 								+ "<div class='inventory-icon-content'>"
@@ -913,7 +910,7 @@ public class DebugDialogue {
 							+ "</div>");
 					}
 				}
-				for(AbstractWeaponType weaponType : WeaponType.getAllWeapons()) {
+				for(var weaponType : WeaponType.getAllWeapons()) {
 					if(weaponType.getItemTags().contains(ItemTag.CHEAT_ITEM)) {
 						inventorySB.append("<div class='inventory-item-slot unequipped' style='background-color:"+weaponType.getRarity().getBackgroundColour().toWebHexString()+";'>"
 								+ "<div class='inventory-icon-content'>"+weaponType.getSVGImage()
@@ -922,7 +919,7 @@ public class DebugDialogue {
 							+ "</div>");
 					}
 				}
-				for(AbstractItemType itemType : ItemType.getAllItems()) {
+				for(var itemType : ItemType.getAllItems()) {
 					if(itemType.getItemTags().contains(ItemTag.CHEAT_ITEM)) {
 						inventorySB.append("<div class='inventory-item-slot unequipped' style='background-color:"+itemType.getRarity().getBackgroundColour().toWebHexString()+";'>"
 								+ "<div class='inventory-icon-content'>"+itemType.getSVGString()+"</div>"
@@ -932,7 +929,7 @@ public class DebugDialogue {
 				}
 				
 			} else if(activeSlot == null) {
-				for(AbstractItemType itemType : itemsTotal) {
+				for(var itemType : itemsTotal) {
 					if((itemTag==null
 							&& (!itemType.getItemTags().contains(ItemTag.BOOK)
 							&& !itemType.getItemTags().contains(ItemTag.ESSENCE)
@@ -950,7 +947,7 @@ public class DebugDialogue {
 				}
 				
 			} else if(activeSlot.isWeapon()) {
-				for(AbstractWeaponType weaponType : weaponsTotal) {
+				for(var weaponType : weaponsTotal) {
 					if((weaponType.isMelee() && activeSlot==InventorySlot.WEAPON_MAIN_1)
 							|| (!weaponType.isMelee() && activeSlot==InventorySlot.WEAPON_OFFHAND_1)) {
 						Rarity rarity = Main.game.getItemGen().generateWeapon(weaponType).getRarity();
@@ -964,7 +961,7 @@ public class DebugDialogue {
 				}
 				
 			} else {
-				for(AbstractClothingType clothingType : clothingTotal) {
+				for(var clothingType : clothingTotal) {
 					if(clothingType.getEquipSlots().contains(activeSlot)) {
 						inventorySB.append("<div class='inventory-item-slot unequipped' style='background-color:"+clothingType.getRarity().getBackgroundColour().toWebHexString()+";'>"
 												+ "<div class='inventory-icon-content'>"
@@ -1083,7 +1080,7 @@ public class DebugDialogue {
 			if(!viewAllClothing && (viewAll || itemViewSlot == null)) {
 				inventorySB.append("<div class='inventory-not-equipped' style='-webkit-user-select:auto;'>"
 						+ "<h5>Total items: "+itemsTotal.size()+"</h5>");
-				for(AbstractItemType itemType : itemsTotal) {
+				for(var itemType : itemsTotal) {
 					if((itemTag==null
 							&& (!itemType.getItemTags().contains(ItemTag.BOOK)
 							&& !itemType.getItemTags().contains(ItemTag.ESSENCE)
@@ -1107,7 +1104,7 @@ public class DebugDialogue {
 			if(viewAll || (itemViewSlot!=null && itemViewSlot.isWeapon())) {
 				inventorySB.append("<div class='inventory-not-equipped' style='-webkit-user-select:auto;'>"
 						+ "<h5>Total weapons: "+weaponsTotal.size()+"</h5>");
-				for(AbstractWeaponType weaponType : weaponsTotal) {
+				for(var weaponType : weaponsTotal) {
 					inventorySB.append("<div class='container-full-width' style='width:"+width+"%; white-space: nowrap; word-wrap: break-word; font-size:0.75em; -webkit-user-select:auto; padding:0; margin:0;'>"
 											+ "<div class='inventory-item-slot unequipped' style='width:"+imgWidth+"%; box-sizing: border-box; padding:0; margin:0; background-color:"+weaponType.getRarity().getBackgroundColour().toWebHexString()+";'>"
 												+ "<div class='inventory-icon-content'>"+weaponType.getSVGImage()
@@ -1123,7 +1120,7 @@ public class DebugDialogue {
 			if(viewAll || viewAllClothing) {
 				inventorySB.append("<div class='inventory-not-equipped' style='-webkit-user-select:auto;'>"
 						+ "<h5>Total clothing: "+clothingTotal.size()+"</h5>");
-				for(AbstractClothingType clothingType : clothingTotal) {
+				for(var clothingType : clothingTotal) {
 					inventorySB.append("<div class='container-full-width' style='width:"+width+"%; white-space: nowrap; word-wrap: break-word; font-size:0.75em; -webkit-user-select:auto; padding:0; margin:0;'>"
 										+ "<div class='inventory-item-slot unequipped' style='width:"+imgWidth+"%; box-sizing: border-box; padding:0; margin:0; background-color:"+clothingType.getRarity().getBackgroundColour().toWebHexString()+";'>"
 											+ "<div class='inventory-icon-content'>"
@@ -1139,10 +1136,10 @@ public class DebugDialogue {
 				inventorySB.append("</div>");
 				
 			} else if(itemViewSlot!=null && !itemViewSlot.isWeapon()) {
-				List<AbstractClothingType> clothingToDisplay = clothingTotal.stream().filter((c) -> c.getEquipSlots().get(0)==itemViewSlot).collect(Collectors.toList());
+				var clothingToDisplay = clothingTotal.stream().filter((c) -> c.getEquipSlots().get(0)==itemViewSlot).collect(Collectors.toList());
 				inventorySB.append("<div class='inventory-not-equipped' style='-webkit-user-select:auto;'>"
 						+ "<h5>Total '"+itemViewSlot.getName()+"' slot clothing: "+clothingToDisplay.size()+"</h5>");
-				for(AbstractClothingType clothingType : clothingToDisplay) {
+				for(var clothingType : clothingToDisplay) {
 					inventorySB.append("<div class='container-full-width' style='width:"+width+"%; white-space: nowrap; word-wrap: break-word; font-size:0.75em; -webkit-user-select:auto; padding:0; margin:0;'>"
 							+ "<div class='inventory-item-slot unequipped' style='width:"+imgWidth+"%; box-sizing: border-box; padding:0; margin:0; background-color:"+clothingType.getRarity().getBackgroundColour().toWebHexString()+";'>"
 								+ "<div class='inventory-icon-content'>"
@@ -1427,7 +1424,7 @@ public class DebugDialogue {
 			
 			inventorySB.append("<div class='inventory-not-equipped' style='-webkit-user-select:auto;'>"
 					+ "<h5>Total items: "+itemsTotal.size()+"</h5>");
-			for(AbstractItemType itemType : itemsTotal) {
+			for(var itemType : itemsTotal) {
 				inventorySB.append("<div class='container-full-width' style='width:"+width+"%; white-space: nowrap; word-wrap: break-word; font-size:0.75em; -webkit-user-select:auto; padding:1px; margin:0;'>"
 										+ "<div class='inventory-item-slot unequipped' style='width:"+imgWidth+"%; box-sizing: border-box; padding:0; margin:0; background-color:"+itemType.getRarity().getBackgroundColour().toWebHexString()+";'>"
 											+ "<div class='inventory-icon-content'>"+itemType.getSVGString()+"</div>"
@@ -1439,7 +1436,7 @@ public class DebugDialogue {
 
 			inventorySB.append("<div class='inventory-not-equipped' style='-webkit-user-select:auto;'>"
 					+ "<h5>Total weapons: "+weaponsTotal.size()+"</h5>");
-			for(AbstractWeaponType weaponType : weaponsTotal) {
+			for(var weaponType : weaponsTotal) {
 				inventorySB.append("<div class='container-full-width' style='width:"+width+"%; white-space: nowrap; word-wrap: break-word; font-size:0.75em; -webkit-user-select:auto; padding:1px; margin:0;'>"
 										+ "<div class='inventory-item-slot unequipped' style='width:"+imgWidth+"%; box-sizing: border-box; padding:0; margin:0; background-color:"+weaponType.getRarity().getBackgroundColour().toWebHexString()+";'>"
 											+ "<div class='inventory-icon-content'>"+weaponType.getSVGImage()
@@ -1452,7 +1449,7 @@ public class DebugDialogue {
 
 			inventorySB.append("<div class='inventory-not-equipped' style='-webkit-user-select:auto;'>"
 					+ "<h5>Total clothing: "+clothingTotal.size()+"</h5>");
-			for(AbstractClothingType clothingType : clothingTotal) {
+			for(var clothingType : clothingTotal) {
 				inventorySB.append("<div class='container-full-width' style='width:"+width+"%; white-space: nowrap; word-wrap: break-word; font-size:0.75em; -webkit-user-select:auto; padding:1px; margin:0;'>"
 									+ "<div class='inventory-item-slot unequipped' style='width:"+imgWidth+"%; box-sizing: border-box; padding:0; margin:0; background-color:"+clothingType.getRarity().getBackgroundColour().toWebHexString()+";'>"
 										+ "<div class='inventory-icon-content'>"

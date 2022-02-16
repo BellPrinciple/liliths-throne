@@ -33,7 +33,7 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
+import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
@@ -82,7 +82,7 @@ public class Combat {
 	// Maps characters -> inventory slots (to track which slot the weapon was thrown from) -> weapon type and number of weapon type that has been thrown
 	private Map<GameCharacter, Map<InventorySlot, Map<AbstractWeapon, Integer>>> weaponsThrownDuringTurn;
 	private Map<GameCharacter, Map<InventorySlot, Map<AbstractWeapon, Integer>>> weaponsThrownDuringCombat;
-	private Map<GameCharacter, Map<InventorySlot, AbstractWeaponType>> thrownWeaponsDepleted; // Only for use in UI rendering
+	private Map<GameCharacter, Map<InventorySlot, WeaponType>> thrownWeaponsDepleted; // Only for use in UI rendering
 	
 	// Used if the ResponseCombat which initialises combat came from an external dialogue file:
 	private DialogueNode playerPostVictoryDialogue;
@@ -1809,11 +1809,11 @@ public class Combat {
 		}
 	}
 	
-	public AbstractWeaponType getThrownWeaponsDepleted(GameCharacter user, InventorySlot slot) {
+	public WeaponType getThrownWeaponsDepleted(GameCharacter user, InventorySlot slot) {
 		return thrownWeaponsDepleted.get(user).get(slot);
 	}
 
-	public void addThrownWeaponsDepleted(GameCharacter user, InventorySlot slot, AbstractWeaponType weapon) {
+	public void addThrownWeaponsDepleted(GameCharacter user, InventorySlot slot, WeaponType weapon) {
 		thrownWeaponsDepleted.get(user).put(slot, weapon);
 	}
 
