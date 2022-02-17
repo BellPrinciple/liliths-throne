@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.inventory.ColourReplacement;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.SvgUtil;
@@ -812,7 +811,7 @@ public enum SVGImages {
 			
 			
 			String tempString = "";
-			for(AbstractItemEffectType effect : ItemEffectType.getAllEffectTypes()) {
+			for(var effect : ItemEffectType.getAllEffectTypes()) {
 				is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/items/refined_background.svg");
 				tempString = Util.inputStreamToString(is);
 				tempString = setColour(tempString, effect.getColour());

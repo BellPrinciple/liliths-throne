@@ -6,7 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.colours.Colour;
@@ -43,7 +42,7 @@ public interface TattooType extends AbstractCoreType {
 		return 100;
 	}
 
-	default AbstractItemEffectType getEnchantmentEffect() {
+	default ItemEffectType getEnchantmentEffect() {
 		return ItemEffectType.TATTOO;
 	}
 

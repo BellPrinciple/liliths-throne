@@ -80,7 +80,7 @@ public interface ItemType extends AbstractCoreType {
 		return 100;
 	}
 
-	AbstractItemEffectType getEnchantmentEffect();
+	ItemEffectType getEnchantmentEffect();
 
 	ItemType getEnchantmentItemType(List<ItemEffect> effects);
 
@@ -223,7 +223,7 @@ public interface ItemType extends AbstractCoreType {
 		}
 		
 		@Override
-		public AbstractItemEffectType getEnchantmentEffect() {
+		public ItemEffectType getEnchantmentEffect() {
 			return ItemEffectType.FETISH_ENHANCEMENT;
 		}
 
@@ -304,7 +304,7 @@ public interface ItemType extends AbstractCoreType {
 			return "drink";
 		}
 		@Override
-		public AbstractItemEffectType getEnchantmentEffect() {
+		public ItemEffectType getEnchantmentEffect() {
 			return ItemEffectType.ADDICTION_REMOVAL_REFINEMENT;
 		}
 		@Override
@@ -976,7 +976,7 @@ public interface ItemType extends AbstractCoreType {
 		}
 		
 		@Override
-		public AbstractItemEffectType getEnchantmentEffect() {
+		public ItemEffectType getEnchantmentEffect() {
 			return ItemEffectType.ORIENTATION_CHANGE;
 		}
 
@@ -1631,7 +1631,7 @@ public interface ItemType extends AbstractCoreType {
 		
 
 		@Override
-		public AbstractItemEffectType getEnchantmentEffect() {
+		public ItemEffectType getEnchantmentEffect() {
 			return ItemEffectType.EGGPLANT_POTION;
 		}
 
