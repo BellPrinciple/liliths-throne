@@ -73,9 +73,7 @@ import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntryBookAddedToLibrary;
-import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
@@ -102,82 +100,22 @@ public abstract class AbstractItemEffectType implements ItemEffectType {
 		this.colour = colour;
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}
-	
+
+	@Override
 	public List<String> getEffectsDescription(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target) {
 		if(effectsDescriptions==null) {
 			return new ArrayList<>();
 		}
 		return new ArrayList<>(effectsDescriptions);
 	}
-	
+
+	@Override
 	public Colour getColour() {
 		return colour;
-	}
-	
-	/**
-	 * @return Usually null, but if this ItemEffectType has an associated Race, this is how to access it.
-	 */
-	public Race getAssociatedRace() {
-		return null;
-	}
-	
-	public abstract String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer);
-	
-	public String getPotionDescriptor() {
-		return "";
-	}
-	
-	/**
-	 * <b>This disables use in sex or combat automatically.</b>
-	 * @return true if the use of this item should exit inventory management. i.e. If it's meant to set the content to a specific scene.
-	 */
-	public boolean isBreakOutOfInventory() {
-		return false;
-	}
-	
-	public List<TFModifier> getPrimaryModifiers() {
-		return new ArrayList<>();
-	}
-	
-	public List<TFModifier> getSecondaryModifiers(AbstractCoreItem targetItem, TFModifier primaryModifier) {
-		return new ArrayList<>();
-	}
-	
-	public List<TFPotency> getPotencyModifiers(TFModifier primaryModifier, TFModifier secondaryModifier) {
-		return new ArrayList<>();
-	}
-	
-	public int getLimits(TFModifier primaryModifier, TFModifier secondaryModifier) {
-		return 0;
-	}
-
-	public int getSmallLimitChange() {
-		if (EnchantmentDialogue.getSecondaryMod() == TFModifier.TF_MOD_WETNESS
-				&& (EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS_CROTCH
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_PENIS)) {
-			// Increase small change for fluids
-			return 10;
-		}
-		return 1;
-	}
-
-	public int getLargeLimitChange() {
-		if (EnchantmentDialogue.getSecondaryMod() == TFModifier.TF_MOD_WETNESS
-				&& (EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS_CROTCH
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_PENIS)) {
-			// Decrease large change for fluids
-			return 500;
-		}
-		return Math.max(5, getMaximumLimit()/10);
-	}
-
-	public int getMaximumLimit() {
-		return getLimits(EnchantmentDialogue.getPrimaryMod(), EnchantmentDialogue.getSecondaryMod());
 	}
 	
 	public static String getBookEffect(GameCharacter reader, Subspecies mainSubspecies, List<Subspecies> additionalUnlockSubspecies, boolean withDescription) {

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.Litter;
@@ -26,6 +27,7 @@ import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.race.*;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.BodyChanging;
+import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
 import com.lilithsthrone.game.dialogue.utils.MiscDialogue;
 import com.lilithsthrone.game.dialogue.utils.OffspringMapDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -40,6 +42,7 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
 /**
@@ -48,6 +51,77 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @author Innoxia
  */
 public interface ItemEffectType {
+
+	String getId();
+
+	default List<String> getEffectsDescription(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target) {
+		return List.of();
+	}
+
+	Colour getColour();
+
+	/**
+	 * @return
+	 * Usually null, but if this ItemEffectType has an associated Race, this is how to access it.
+	 */
+	default Race getAssociatedRace() {
+		return null;
+	}
+
+	String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer);
+
+	default String getPotionDescriptor() {
+		return "";
+	}
+
+	/**
+	 * <b>This disables use in sex or combat automatically.</b>
+	 * @return
+	 * The use of this item should exit inventory management. i.e. If it's meant to set the content to a specific scene.
+	 */
+	default boolean isBreakOutOfInventory() {
+		return false;
+	}
+
+	default List<TFModifier> getPrimaryModifiers() {
+		return List.of();
+	}
+
+	default List<TFModifier> getSecondaryModifiers(AbstractCoreItem targetItem, TFModifier primaryModifier) {
+		return List.of();
+	}
+
+	default List<TFPotency> getPotencyModifiers(TFModifier primaryModifier, TFModifier secondaryModifier) {
+		return List.of();
+	}
+
+	default int getLimits(TFModifier primaryModifier, TFModifier secondaryModifier) {
+		return 0;
+	}
+
+	default int getSmallLimitChange() {
+		if(EnchantmentDialogue.getSecondaryMod() == TFModifier.TF_MOD_WETNESS
+				&& Set.of(TFModifier.TF_BREASTS,TFModifier.TF_BREASTS_CROTCH,TFModifier.TF_PENIS)
+					.contains(EnchantmentDialogue.getPrimaryMod())) {
+			// Increase small change for fluids
+			return 10;
+		}
+		return 1;
+	}
+
+	default int getLargeLimitChange() {
+		if(EnchantmentDialogue.getSecondaryMod() == TFModifier.TF_MOD_WETNESS
+				&& Set.of(TFModifier.TF_BREASTS,TFModifier.TF_BREASTS_CROTCH,TFModifier.TF_PENIS)
+					.contains(EnchantmentDialogue.getPrimaryMod())) {
+			// Decrease large change for fluids
+			return 500;
+		}
+		return Math.max(5, getMaximumLimit()/10);
+	}
+
+	default int getMaximumLimit() {
+		return getLimits(EnchantmentDialogue.getPrimaryMod(),EnchantmentDialogue.getSecondaryMod());
+	}
 	
 	public static AbstractItemEffectType TESTING = new AbstractItemEffectType(Util.newArrayListOfValues(
 			"Test item."),
