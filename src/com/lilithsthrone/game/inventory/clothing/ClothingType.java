@@ -21,7 +21,6 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.SetBonus;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -151,7 +150,7 @@ public interface ClothingType extends AbstractCoreType {
 		return 100;
 	}
 
-	default AbstractItemEffectType getEnchantmentEffect() {
+	default ItemEffectType getEnchantmentEffect() {
 		return ItemEffectType.CLOTHING;
 	}
 

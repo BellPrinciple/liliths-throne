@@ -29,14 +29,14 @@ public class ItemEffect implements XMLSaving {
 	public static final int SEALED_COST_DRAIN = 100;
 	public static final int SEALED_COST_MAJOR_DRAIN = 500;
 	
-	private AbstractItemEffectType itemEffectType;
+	private ItemEffectType itemEffectType;
 	private TFModifier primaryModifier;
 	private TFModifier secondaryModifier;
 	private TFPotency potency;
 	private int limit;
 	private ItemEffectTimer timer;
 	
-	public ItemEffect(AbstractItemEffectType itemEffectType) {
+	public ItemEffect(ItemEffectType itemEffectType) {
 		this.itemEffectType = itemEffectType;
 		this.primaryModifier = null;
 		this.secondaryModifier = null;
@@ -45,7 +45,7 @@ public class ItemEffect implements XMLSaving {
 		this.timer = new ItemEffectTimer();
 	}
 	
-	public ItemEffect(AbstractItemEffectType itemEffectType, TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit) {
+	public ItemEffect(ItemEffectType itemEffectType, TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit) {
 		this.itemEffectType = itemEffectType;
 		this.primaryModifier = primaryModifier;
 		this.secondaryModifier = secondaryModifier;
@@ -377,11 +377,11 @@ public class ItemEffect implements XMLSaving {
 		return cost;
 	}
 	
-	public AbstractItemEffectType getItemEffectType() {
+	public ItemEffectType getItemEffectType() {
 		return itemEffectType;
 	}
 
-	public void setItemEffectType(AbstractItemEffectType itemEffectType) {
+	public void setItemEffectType(ItemEffectType itemEffectType) {
 		this.itemEffectType = itemEffectType;
 	}
 

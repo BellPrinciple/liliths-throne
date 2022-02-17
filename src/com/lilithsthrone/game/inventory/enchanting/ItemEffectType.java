@@ -2565,16 +2565,16 @@ public interface ItemEffectType {
 		}
 	};
 
-	public static AbstractItemEffectType getRacialEffectType(Race race) {
+	public static ItemEffectType getRacialEffectType(Race race) {
 		return table.racialEffectTypes.get(race);
 	}
 
 	@Deprecated
-	public static void addAbstractItemEffectToIds(String id, AbstractItemEffectType itemEffectType) {
+	public static void addAbstractItemEffectToIds(String id, ItemEffectType itemEffectType) {
 		table.add(id, itemEffectType);
 	}
 	
-	public static AbstractItemEffectType getItemEffectTypeFromId(String id) {
+	public static ItemEffectType getItemEffectTypeFromId(String id) {
 		if(id.startsWith("RACE_")) {
 			return getRacialEffectType(Race.getRaceFromId(id.substring(5)));
 		}
@@ -2582,25 +2582,25 @@ public interface ItemEffectType {
 	}
 
 	@Deprecated
-	public static String getIdFromItemEffectType(AbstractItemEffectType itemEffectType) {
+	public static String getIdFromItemEffectType(ItemEffectType itemEffectType) {
 		return itemEffectType.getId();
 	}
 	
 	// set in ItemType
-	public static AbstractItemEffectType getBookEffectFromSubspecies(Subspecies subspecies) {
+	public static ItemEffectType getBookEffectFromSubspecies(Subspecies subspecies) {
 		return table.of("BOOK_READ_"+Subspecies.getIdFromSubspecies(subspecies));
 	}
 
 	@Deprecated
-	public static List<AbstractItemEffectType> getAllEffectTypes() {
+	public static List<ItemEffectType> getAllEffectTypes() {
 		return table.list();
 	}
 
 	Collection table = new Collection();
 
-	final class Collection extends Table<AbstractItemEffectType> {
+	final class Collection extends Table<ItemEffectType> {
 
-		private final Map<Race,AbstractItemEffectType> racialEffectTypes = new HashMap<>();
+		private final Map<Race,ItemEffectType> racialEffectTypes = new HashMap<>();
 
 		private Collection() {
 			super(s->s);

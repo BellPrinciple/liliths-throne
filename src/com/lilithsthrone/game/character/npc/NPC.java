@@ -79,7 +79,6 @@ import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.PossibleItemEffect;
@@ -1315,7 +1314,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		return Main.game.getPlayer().getFriendlyOccupants().contains(this.getId()) || (this.isSlave() && this.getOwner().isPlayer());
 	}
 	
-	public AbstractItemEffectType getItemEnchantmentEffect(ItemType itemType, BodyPartInterface bodyPart) {
+	public ItemEffectType getItemEnchantmentEffect(ItemType itemType, BodyPartInterface bodyPart) {
 		if (Util.newArrayListOfValues(Race.HUMAN, Race.NONE).contains(bodyPart.getType().getRace())) {
 			return ItemEffectType.getRacialEffectType(Race.HUMAN);
 		}
