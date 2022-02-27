@@ -10037,7 +10037,7 @@ public class UtilText {
 		for(QuestLine questLine : QuestLine.values()) {
 			engine.put("QUEST_LINE_"+questLine.toString(), questLine);
 		}
-		for(Quest quest : Quest.values()) {
+		for(Quest quest : Quest.table.list()) {
 			engine.put("QUEST_"+quest.toString(), quest);
 		}
 		for(SexualOrientation orientation : SexualOrientation.values()) {
