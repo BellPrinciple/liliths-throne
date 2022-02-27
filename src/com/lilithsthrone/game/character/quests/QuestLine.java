@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.character.quests;
 
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.TreeNode;
 
 /**
@@ -7,14 +8,44 @@ import com.lilithsthrone.utils.TreeNode;
  * @version 0.4
  * @author Innoxia
  */
-public enum QuestLine {
+public interface QuestLine {
 
-	// Main quests:
+	String getName();
 
-	MAIN("Lilith's Throne", "You have completed all main quest content in this version!",
-			QuestType.MAIN,
-			QuestTree.mainQuestTree),
+	String getCompletedDescription();
 
+	default QuestType getType() {
+		return QuestType.SIDE;
+	}
+
+	TreeNode<Quest> getQuestTree();
+
+	Main MAIN = Main.MAIN;
+	enum Main implements QuestLine {
+		MAIN;
+
+		@Override
+		public String getName() {
+			return "Lilith's Throne";
+		}
+
+		@Override
+		public String getCompletedDescription() {
+			return "You have completed all main quest content in this version!";
+		}
+
+		@Override
+		public QuestType getType() {
+			return QuestType.MAIN;
+		}
+
+		@Override
+		public TreeNode<Quest> getQuestTree() {
+			return QuestTree.mainQuestTree;
+		}
+	}
+
+	enum Special implements QuestLine {
 	// Side quests:
 
 //	SIDE_ITEM_DISCOVERY("Item Discovery", "You have found all the different items that are in this version!",
@@ -113,7 +144,7 @@ public enum QuestLine {
 	private QuestType type;
 	private TreeNode<Quest> questTree;
 
-	private QuestLine(String name, String completedDescription, QuestType type, TreeNode<Quest> questTree) {
+	Special(String name, String completedDescription, QuestType type, TreeNode<Quest> questTree) {
 		this.name = name;
 		this.completedDescription = completedDescription;
 		this.type = type;
@@ -135,5 +166,32 @@ public enum QuestLine {
 	public TreeNode<Quest> getQuestTree() {
 		return questTree;
 	}
+	}
 
+	Special SIDE_ENCHANTMENT_DISCOVERY = Special.SIDE_ENCHANTMENT_DISCOVERY;
+	Special SIDE_FIRST_TIME_PREGNANCY = Special.SIDE_FIRST_TIME_PREGNANCY;
+	Special SIDE_FIRST_TIME_INCUBATION = Special.SIDE_FIRST_TIME_INCUBATION;
+	Special SIDE_SLAVERY = Special.SIDE_SLAVERY;
+	Special SIDE_ACCOMMODATION = Special.SIDE_ACCOMMODATION;
+	Special SIDE_HYPNO_WATCH = Special.SIDE_HYPNO_WATCH;
+	Special SIDE_ARCANE_LIGHTNING = Special.SIDE_ARCANE_LIGHTNING;
+	Special SIDE_HARPY_PACIFICATION = Special.SIDE_HARPY_PACIFICATION;
+	Special SIDE_SLIME_QUEEN = Special.SIDE_SLIME_QUEEN;
+	Special SIDE_TELEPORTATION = Special.SIDE_TELEPORTATION;
+	Special SIDE_DADDY = Special.SIDE_DADDY;
+	Special SIDE_BUYING_BRAX = Special.SIDE_BUYING_BRAX;
+	Special SIDE_VENGAR = Special.SIDE_VENGAR;
+	Special SIDE_WES = Special.SIDE_WES;
+	Special SIDE_REBEL_BASE = Special.SIDE_REBEL_BASE;
+	Special SIDE_REBEL_BASE_FIREBOMBS = Special.SIDE_REBEL_BASE_FIREBOMBS;
+	Special RELATIONSHIP_NYAN_HELP = Special.RELATIONSHIP_NYAN_HELP;
+	Special ROMANCE_HELENA = Special.ROMANCE_HELENA;
+	Special ROMANCE_NATALYA = Special.ROMANCE_NATALYA;
+	Special ROMANCE_MONICA = Special.ROMANCE_MONICA;
+
+	Table<QuestLine> table = new Table<>(s->s){{
+		add("MAIN",MAIN);
+		for(Special q: Special.values())
+			add(q.name(),q);
+	}};
 }

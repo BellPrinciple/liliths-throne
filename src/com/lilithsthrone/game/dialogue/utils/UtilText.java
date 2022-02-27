@@ -10034,7 +10034,7 @@ public class UtilText {
 		for(SlavePermissionSetting permission : SlavePermissionSetting.values()) {
 			engine.put("SLAVE_PERMISSION_SETTING_"+permission.toString(), permission);
 		}
-		for(QuestLine questLine : QuestLine.values()) {
+		for(QuestLine questLine : QuestLine.table.list()) {
 			engine.put("QUEST_LINE_"+questLine.toString(), questLine);
 		}
 		for(Quest quest : Quest.table.list()) {
