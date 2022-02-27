@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -97,7 +96,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	
 	private int karma;
 
-	private Map<QuestLine, List<Quest>> quests;
+	private final HashMap<QuestLine,List<Quest>> quests = new HashMap<>();
 	private Map<QuestLine, Quest> questsFailed;
 
 	private boolean mainQuestUpdated;
@@ -134,8 +133,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 		karma = 0;
 		
 		this.setMaxCompanions(1);
-		
-		quests = new HashMap<>();
+
 		questsFailed = new HashMap<>();
 
 		mainQuestUpdated = false;
@@ -426,7 +424,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 							
 							try {
 								int progress = Integer.valueOf(e.getAttribute("progress"));
-								QuestLine questLine = QuestLine.valueOf(e.getAttribute("questLine"));
+								QuestLine questLine = QuestLine.table.exact(e.getAttribute("questLine")).orElseThrow();
 								TreeNode<Quest> q = questLine.getQuestTree();
 								
 								for(int it=0;it<progress;it++) {
@@ -471,7 +469,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 									questString = "MAIN_1_E_REPORT_TO_HELENA";
 								}
 								
-								QuestLine questLine = QuestLine.valueOf(questLineString);
+								QuestLine questLine = QuestLine.table.exact(questLineString).orElseThrow();
 								Quest quest = Quest.getQuestFromId(questString);
 								
 								List<Quest> questList = new ArrayList<>();
@@ -494,7 +492,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 						for(int i=0; i<questMapEntries.getLength(); i++){
 							Element e = (Element) questMapEntries.item(i);
 							String questLineString = e.getAttribute("questLine");
-							QuestLine questLine = QuestLine.valueOf(questLineString);
+							QuestLine questLine = QuestLine.table.exact(questLineString).orElseThrow();
 							String questString = e.getAttribute("q"+0);
 							if(questString.equals("MAIN_1_E_REPORT_TO_ALEXA")) {
 								questString = "MAIN_1_E_REPORT_TO_HELENA";
@@ -537,7 +535,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 					for(int i=0; i<questMapEntries.getLength(); i++){
 						Element e = (Element) questMapEntries.item(i);
 						String questLineString = e.getAttribute("questLine");
-						QuestLine questLine = QuestLine.valueOf(questLineString);
+						QuestLine questLine = QuestLine.table.exact(questLineString).orElseThrow();
 						String questString = e.getAttribute("q");
 						Quest quest = Quest.getQuestFromId(questString);
 						character.questsFailed.put(
@@ -904,7 +902,7 @@ public class PlayerCharacter extends GameCharacter implements XMLSaving {
 	// Quests:
 
 	public void resetAllQuests() {
-		quests = new EnumMap<>(QuestLine.class);
+		quests.clear();
 	}
 	
 	public boolean isMainQuestUpdated() {
