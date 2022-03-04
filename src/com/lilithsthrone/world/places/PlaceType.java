@@ -98,6 +98,8 @@ import com.lilithsthrone.world.population.Population;
 import com.lilithsthrone.world.population.PopulationDensity;
 import com.lilithsthrone.world.population.PopulationType;
 
+import static java.util.stream.Collectors.toMap;
+
 /**
  * @since 0.1.0
  * @version 0.4
@@ -115,9 +117,16 @@ public interface PlaceType {
 
 	Colour getColour();
 
-	Colour getBackgroundColour();
+	default Colour getBackgroundColour() {
+		return PresetColour.MAP_BACKGROUND;
+	}
 
-	AbstractEncounter getEncounterType();
+	default AbstractEncounter getEncounterType() {
+		var map = Encounter.getAddedEncounters(getId()).stream().collect(toMap(e->e,AbstractEncounter::getTotalChanceValue));
+		if(map.keySet().stream().anyMatch(AbstractEncounter::isAnyBaseTriggerChanceOverOneHundred))
+			map.keySet().removeIf(e->!e.isAnyBaseTriggerChanceOverOneHundred());
+		return Util.getRandomObjectFromWeightedFloatMap(map);
+	}
 
 	default DialogueNode getDialogue(boolean withRandomEncounter) {
 		return getDialogue(null, withRandomEncounter, false);
@@ -129,7 +138,9 @@ public interface PlaceType {
 
 	DialogueNode getDialogue(Cell cell, boolean withRandomEncounter, boolean forceEncounter);
 
-	List<Population> getPopulation();
+	default List<Population> getPopulation() {
+		return List.of();
+	}
 
 	default boolean isPopulated() {
 		if(getPopulation()!=null) {
@@ -142,9 +153,13 @@ public interface PlaceType {
 		return false;
 	}
 
-	boolean isStormImmune();
+	default boolean isStormImmune() {
+		return true;
+	}
 
-	Aquatic getAquatic();
+	default Aquatic getAquatic() {
+		return Aquatic.LAND;
+	}
 
 	default boolean isLand() {
 		return getAquatic().isLand();
@@ -154,9 +169,13 @@ public interface PlaceType {
 		return getAquatic().isWater();
 	}
 
-	boolean isDangerous();
+	default boolean isDangerous() {
+		return false;
+	}
 
-	boolean isItemsDisappear();
+	default boolean isItemsDisappear() {
+		return true;
+	}
 
 	Darkness getDarkness();
 
@@ -199,7 +218,9 @@ public interface PlaceType {
 		return new ArrayList<>();
 	}
 
-	String getSexBlockedReason(GameCharacter character);
+	default String getSexBlockedReason(GameCharacter character) {
+		return "";
+	}
 
 	default boolean isSexBlockedOverride(GameCharacter character) {
 		return getSexBlockedReason(character)!=null;
@@ -253,14 +274,20 @@ public interface PlaceType {
 	/**
 	 * @return true if this place type's isLoiteringEnabled() method should be used instead of the parent world type's.
 	 */
-	boolean isLoiteringEnabledOverride();
+	default boolean isLoiteringEnabledOverride() {
+		return false;
+	}
 
 	/**
 	 * @return true if the player is able to loiter in this location. This overrides AbstractWorldType's method of the same name.
 	 */
-	boolean isLoiteringEnabled();
+	default boolean isLoiteringEnabled() {
+		return false;
+	}
 
-	boolean isSexBlockedFromCharacterPresent();
+	default boolean isSexBlockedFromCharacterPresent() {
+		return true;
+	}
 
 	/**
 	 * @return true if this place type's isWallsPresent() method should be used instead of the parent world type's.
@@ -5545,7 +5572,7 @@ public interface PlaceType {
 	}.initWeatherImmune();
 
 	// HLF Quest places:
-	
+
     public static final AbstractPlaceType REBEL_BASE_ENTRANCE = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Entrance",
@@ -5557,7 +5584,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_CORRIDOR = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Corridor",
@@ -5569,7 +5596,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_SLEEPING_AREA = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Abandoned Sleeping Area",
@@ -5581,7 +5608,7 @@ public interface PlaceType {
 			Encounter.REBEL_BASE,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_SLEEPING_AREA_SEARCHED = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Abandoned Sleeping Area",
@@ -5593,7 +5620,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_COMMON_AREA = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Abandoned Common Area",
@@ -5605,7 +5632,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_COMMON_AREA_SEARCHED = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"Abandoned Common Area",
@@ -5629,7 +5656,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
     public static final AbstractPlaceType REBEL_BASE_ARMORY_SEARCHED = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"A Partly Caved-in Room",
@@ -5641,7 +5668,7 @@ public interface PlaceType {
 			null,
 			"in a mysterious artificial cave")
 	            .initWeatherImmune();
-    
+
      public static final AbstractPlaceType REBEL_BASE_CAVED_IN_ROOM = new AbstractPlaceType(
  			WorldRegion.SUBMISSION,
 			"A Mostly Caved-in Room",
