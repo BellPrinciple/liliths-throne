@@ -1,11 +1,8 @@
 package com.lilithsthrone.game.dialogue;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.*;
+import java.util.function.Supplier;
 
 import org.w3c.dom.Document;
 
@@ -20,6 +17,9 @@ import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.InitialSexActionInformation;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
+
+import static com.lilithsthrone.controller.MainController.RESPONSE_COUNT;
+import static java.util.stream.IntStream.range;
 
 /**
  * @since 0.1.0
@@ -41,7 +41,10 @@ public abstract class DialogueNode {
 	
 	private boolean travelDisabled;
 	private boolean continuesDialogue;
-	
+
+	private LinkedHashMap<Object,Mod> mods;
+	private static final String DEFAULT_TAB_TITLE = "Default";
+
 	public DialogueNode(String label, String description, boolean travelDisabled) {
 		this(label, description, travelDisabled, false);
 	}
@@ -584,46 +587,28 @@ public abstract class DialogueNode {
 							return UtilText.parseFromXMLFile(new ArrayList<>(), "res", finalFolderPath, finalDialogueTag, new ArrayList<>());
 						}
 						@Override
-						public String getResponseTabTitle(int index) {
-							if(responseTabs.get(index)!=null) {
-								String title = UtilText.parse(responseTabs.get(index)).trim();
-								if(!title.isEmpty()) {
-									return title;
-								}
-							}
-							if(copyFromDialogueFinalThanksJava!=null && !copyFromDialogueFinalThanksJava.isEmpty()) {
-								if(DialogueManager.getDialogueFromId(copyFromDialogueFinalThanksJava).getResponseTabTitle(index)!=null) {
-									return DialogueManager.getDialogueFromId(copyFromDialogueFinalThanksJava).getResponseTabTitle(index);
-								}
-							}
-							return null;
-						}
-						@Override
-						public Response getResponse(int responseTab, int index) {
-							if(loadedResponses.containsKey(responseTab)) {
-								for(Entry<String, List<Response>> entry : loadedResponses.get(responseTab).entrySet()) {
+						protected List<ResponseTab> responses() {
+							var failback = DialogueManager.getDialogueFromId(copyFromDialogueFinalThanksJava).getResponses();
+							var cap = Math.max(failback.size(),responseTabs.keySet().stream().mapToInt(i->i).max().orElse(1));
+							var result = new ResponseTab[cap];
+							for(var e : responseTabs.entrySet())
+								result[e.getKey()] = new ResponseTab(e.getValue());
+							for(int i = 0; i < failback.size(); i++)
+								if(result[i] == null)
+									result[i] = failback.get(i);
+							for(var e : loadedResponses.entrySet()) {
+								var r = result[e.getKey()];
+								for(var entry : e.getValue().entrySet()) {
 									int parsedIndex = Integer.valueOf(UtilText.parse(entry.getKey()).trim());
-									if(parsedIndex==index) {
-										for(Response response : entry.getValue()) {
-											if(response.isAvailableFromConditional()) {
-												return response;
-											}
-										}
+									for(var response : entry.getValue()) {
+										if(!response.isAvailableFromConditional())
+											continue;
+										r.set(parsedIndex,response);
 									}
 								}
-//								if(loadedResponses.get(responseTab).containsKey(index)) {
-//									for(Response response : loadedResponses.get(responseTab).get(index)) {
-//										if(response.isAvailableFromConditional()) {
-//											return response;
-//										}
-//									}
-//								}
 							}
-							if(copyFromDialogueFinalThanksJava!=null && !copyFromDialogueFinalThanksJava.isEmpty()) {
-								return DialogueManager.getDialogueFromId(copyFromDialogueFinalThanksJava).getResponse(responseTab, index);
-							}
-							return null;
-						};
+							return List.of(result);
+						}
 						@Override
 						public boolean isContinuesDialogue() {
 							return Boolean.valueOf(UtilText.parse(finalContinuesDialogue).trim());
@@ -766,7 +751,10 @@ public abstract class DialogueNode {
 	/**
 	 * Index starts at 0.
 	 * @return The title to be displayed on the response tab. Only indices that are defined as returning a title are displayed, so just return null as the fallback option.
+	 * @deprecated
+	 * Use or implement {@link #responses()} instead.
 	 */
+	@Deprecated
 	public String getResponseTabTitle(int index) {
 		return null;
 	}
@@ -776,8 +764,89 @@ public abstract class DialogueNode {
 	 * @param responseTab The tab in which the response is to be found.
 	 * @param index The index of the response.
 	 * @return A response, if a response is returned at the specified responseTab & index, or, if not, then null.
+	 * @deprecated
+	 * Use {@link #getResponses()} and implement {@link #responses()} instead.
 	 */
-	public abstract Response getResponse(int responseTab, int index);
+	@Deprecated
+	public Response getResponse(int responseTab, int index) {
+		return null;
+	}
+
+	/**
+	 * Collects available responses of the player to this node.
+	 * @return
+	 * Collection of responses, grouped into titled tabs.
+	 */
+	public final List<ResponseTab> getResponses() {
+		var r = responses();
+		for(Mod m : mods==null ? List.<Mod>of() : mods.values()) {
+			var n = m.response.get();
+			var t = r.stream()
+			.filter(s->m.tab.equals(s.title))
+			.findAny();
+			if(t.isEmpty()) {
+				ResponseTab tab = new ResponseTab(m.tab,n);
+				r.add(tab);
+				continue;
+			}
+			var a = t.get().response;
+			range(0,a.size())
+			.filter(i->a.get(i)==null)
+			.findFirst()
+			.ifPresentOrElse(i->a.set(i,n),()->a.add(n));
+		}
+		return r;
+	}
+
+	/**
+	 * Collects available responses of the player to this node.
+	 * Override this or {@link #responseTab()}.
+	 * This method is to be called only by {@link #getResponses()} or overriders.
+	 * @return
+	 * Collection of responses, grouped into titled tabs.
+	 * @see #getResponses()
+	 */
+	protected List<ResponseTab> responses() {
+		var r0 = responseTab();
+		if(r0 != null)
+			return List.of(new ResponseTab(DEFAULT_TAB_TITLE,r0));
+		var t0 = getResponseTabTitle(0);
+		var a0 = new LinkedList<Response>();
+		int e = RESPONSE_COUNT;
+		for(int j = 0; j < e; j++) {
+			var c = getResponse(0,j);
+			if(c != null && j + RESPONSE_COUNT >= e)
+				e += RESPONSE_COUNT;
+			a0.add(c);
+		}
+		var b0 = a0.toArray(Response[]::new);
+		if(t0 == null)
+			return List.of(new ResponseTab(DEFAULT_TAB_TITLE,b0));
+		var r = new LinkedList<ResponseTab>();
+		r.add(new ResponseTab(t0,b0));
+		for(int i = 1;; i++) {
+			var t = getResponseTabTitle(i);
+			if(t == null)
+				break;
+			var a = new LinkedList<Response>();
+			e = RESPONSE_COUNT;
+			for(int j = 0; j < e; j++) {
+				var c = getResponse(i,j);
+				if(c != null && j + RESPONSE_COUNT >= e)
+					e += RESPONSE_COUNT;
+				a.add(c);
+			}
+			r.add(new ResponseTab(t,a.toArray(Response[]::new)));
+		}
+		return r;
+	}
+
+	/**
+	 * Convenience method for when this node defines only one response tab.
+	 */
+	protected Response[] responseTab() {
+		return null;
+	}
 
 	/**
 	 * @return The type of dialogue that this is. Will almost always be {@code DialogueNodeType.NORMAL}.
@@ -827,6 +896,59 @@ public abstract class DialogueNode {
 	public final void specialPreParsingEffects() {
 		if(Main.game.isStarted()) {
 			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.coveringChangeListenersRequired, false);
+		}
+	}
+
+	/**
+	 * @param key
+	 * Identifies the entry for removal.
+	 * @param tab
+	 * Index of the tab to add the created response.
+	 * @param value
+	 * Produces a response anytime if needed.
+	 */
+	public final void addResponse(Object key, String tab, Supplier<Response> value) {
+		if(mods == null)
+			mods = new LinkedHashMap<>();
+		Object old = mods.putIfAbsent(key,new Mod(tab,value));
+		assert old == null;
+	}
+
+	/**
+	 * @param key
+	 * Used in {@link #addResponse(Object,String,Supplier)}.
+	 */
+	public final void removeResponse(Object key) {
+		Object old = mods.remove(key);
+		assert old != null;
+		if(mods.isEmpty())
+			mods = null;
+	}
+
+	public static final class ResponseTab {
+		public final String title;
+		public final ArrayList<Response> response = new ArrayList<>();
+		public ResponseTab(String t, Response... r) {
+			title = Objects.requireNonNull(t);
+			response.addAll(List.of(r));
+		}
+		public void set(int i, Response r) {
+			if(i < response.size()) {
+				response.set(i,r);
+				return;
+			}
+			while(response.size() < i)
+				response.add(null);
+			response.add(r);
+		}
+	}
+
+	private static final class Mod {
+		final String tab;
+		final Supplier<Response> response;
+		Mod(String t, Supplier<Response> r) {
+			tab = t;
+			response = r;
 		}
 	}
 }
