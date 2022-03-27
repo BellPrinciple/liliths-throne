@@ -41,12 +41,8 @@ public class ElementalDialogue {
 			return "";
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return ELEMENTAL_START.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return ELEMENTAL_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return ELEMENTAL_START.getResponses();
 		}
 	};
 	
@@ -257,12 +253,8 @@ public class ElementalDialogue {
 			return UtilText.parseFromXMLFile("characters/elemental", "ELEMENTAL_AFTER_SEX");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return ELEMENTAL_START.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return ELEMENTAL_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return ELEMENTAL_START.getResponses();
 		}
 	};
 
@@ -273,16 +265,13 @@ public class ElementalDialogue {
 					+ getElemental().getCharacterInformationScreen(false);
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return ELEMENTAL_START.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(ELEMENTAL_START.getResponse(responseTab, index)!=null
-					&& ELEMENTAL_START.getResponse(responseTab, index).getNextDialogue()==ELEMENTAL_INSPECT) {
-				return new Response("Inspect", "You are already taking a good look at [el.name].", null);
-			}
-			return ELEMENTAL_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			var r = ELEMENTAL_START.getResponses();
+			for(var t : r)
+				for(int i = 0; i < t.response.size(); i++)
+					if(null!=t.response.get(i) && t.response.get(i).getNextDialogue()==ELEMENTAL_INSPECT)
+						t.response.set(i,new Response("Inspect", "You are already taking a good look at [el.name].", null));
+			return r;
 		}
 	};
 
@@ -292,16 +281,13 @@ public class ElementalDialogue {
 			return UtilText.parseFromXMLFile("characters/elemental", "ELEMENTAL_TALK");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return ELEMENTAL_START.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(ELEMENTAL_START.getResponse(responseTab, index)!=null
-					&& ELEMENTAL_START.getResponse(responseTab, index).getNextDialogue()==ELEMENTAL_TALK) {
-				return new Response("Talk", "You are already talking to [el.name].", null);
-			}
-			return ELEMENTAL_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			var r = ELEMENTAL_START.getResponses();
+			for(var t : r)
+				for(int i = 0; i < t.response.size(); i++)
+					if(null!=t.response.get(i) && t.response.get(i).getNextDialogue()==ELEMENTAL_TALK)
+						t.response.set(i,new Response("Talk", "You are already talking to [el.name].", null));
+			return r;
 		}
 	};
 
@@ -311,16 +297,13 @@ public class ElementalDialogue {
 			return UtilText.parseFromXMLFile("characters/elemental", "ELEMENTAL_PETTING");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return ELEMENTAL_START.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(ELEMENTAL_START.getResponse(responseTab, index)!=null
-					&& ELEMENTAL_START.getResponse(responseTab, index).getNextDialogue()==ELEMENTAL_PETTING) {
-				return new Response("Petting", "You are already petting [el.name]!", null);
-			}
-			return ELEMENTAL_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			var r = ELEMENTAL_START.getResponses();
+			for(var t : r)
+				for(int i = 0; i < t.response.size(); i++)
+					if(null!=t.response.get(i) && t.response.get(i).getNextDialogue()==ELEMENTAL_PETTING)
+						t.response.set(i,new Response("Petting", "You are already petting [el.name]!", null));
+			return r;
 		}
 	};
 	
@@ -409,24 +392,19 @@ public class ElementalDialogue {
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return ELEMENTAL_START.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(ELEMENTAL_START.getResponse(responseTab, index)!=null
-					&& ELEMENTAL_START.getResponse(responseTab, index).getNextDialogue()==ELEMENTAL_PERKS) {
-				return new Response("Perks", "You are already assigning [el.namePos] perk points!", null);
-			}
-			if(responseTab==1 && index==9) {
-				return new Response("Reset perks", "Reset all perks and traits, refunding all points spent. (This is a temporary action while the perk tree is still under development.)", ELEMENTAL_PERKS) {
-					@Override
-					public void effects() {
-						getElemental().resetPerksMap(false, false);
-					}
-				};
-			}
-			return ELEMENTAL_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			var r = ELEMENTAL_START.getResponses();
+			for(var t : r)
+				for(int i = 0; i < t.response.size(); i++)
+					if(t.response.get(i) != null && t.response.get(i).getNextDialogue()==ELEMENTAL_PERKS)
+						t.response.set(i,new Response("Perks", "You are already assigning [el.namePos] perk points!", null));
+			r.get(1).response.set(9,new Response("Reset perks", "Reset all perks and traits, refunding all points spent. (This is a temporary action while the perk tree is still under development.)", ELEMENTAL_PERKS) {
+				@Override
+				public void effects() {
+					getElemental().resetPerksMap(false, false);
+				}
+			});
+			return r;
 		}
 	};
 	
@@ -493,16 +471,13 @@ public class ElementalDialogue {
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return ELEMENTAL_START.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(ELEMENTAL_START.getResponse(responseTab, index)!=null
-					&& ELEMENTAL_START.getResponse(responseTab, index).getNextDialogue()==ELEMENTAL_CHOOSE_NAME) {
-				return new Response("Perks", "You are already assigning [el.namePos] perk points!", null);
-			}
-			return ELEMENTAL_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			var r = ELEMENTAL_START.getResponses();
+			for(var t : r)
+				for(int i = 0; i < t.response.size(); i++)
+					if(null!=t.response.get(i) && t.response.get(i).getNextDialogue()==ELEMENTAL_CHOOSE_NAME)
+						t.response.set(i,new Response("Perks", "You are already assigning [el.namePos] perk points!", null));
+			return r;
 		}
 	};
 }

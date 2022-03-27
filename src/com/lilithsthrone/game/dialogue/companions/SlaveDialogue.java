@@ -1493,13 +1493,8 @@ public class SlaveDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SLAVE_START.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLAVE_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SLAVE_START.getResponses();
 		}
 	};
 	
@@ -1639,13 +1634,8 @@ public class SlaveDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SLAVE_START.getResponseTabTitle(index);
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLAVE_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SLAVE_START.getResponses();
 		}
 	};
 	
@@ -1835,13 +1825,8 @@ public class SlaveDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SLAVE_START.getResponseTabTitle(index);
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLAVE_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SLAVE_START.getResponses();
 		}
 	};
 	
@@ -2032,13 +2017,8 @@ public class SlaveDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SLAVE_START.getResponseTabTitle(index);
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLAVE_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SLAVE_START.getResponses();
 		}
 	};
 	
@@ -2181,13 +2161,8 @@ public class SlaveDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SLAVE_START.getResponseTabTitle(index);
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLAVE_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SLAVE_START.getResponses();
 		}
 	};
 	
@@ -2300,13 +2275,8 @@ public class SlaveDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SLAVE_START.getResponseTabTitle(index);
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLAVE_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SLAVE_START.getResponses();
 		}
 	};
 	
@@ -2659,13 +2629,8 @@ public class SlaveDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SLAVE_START.getResponseTabTitle(index);
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLAVE_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SLAVE_START.getResponses();
 		}
 	};
 	
@@ -2887,13 +2852,8 @@ public class SlaveDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SLAVE_START.getResponseTabTitle(index);
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLAVE_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SLAVE_START.getResponses();
 		}
 	};
 	
@@ -3151,13 +3111,8 @@ public class SlaveDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SLAVE_START.getResponseTabTitle(index);
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SLAVE_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SLAVE_START.getResponses();
 		}
 	};
 	

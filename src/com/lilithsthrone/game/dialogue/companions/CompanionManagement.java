@@ -837,15 +837,10 @@ public class CompanionManagement {
 		}
 		
 		@Override
-		public String getResponseTabTitle(int index) {
-			return coreNode.getResponseTabTitle(index);
+		protected List<ResponseTab> responses() {
+			return coreNode.getResponses();
 		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return coreNode.getResponse(responseTab, index);
-		}
-		
 		@Override
 		public boolean reloadOnRestore() {
 			return true;
@@ -1039,15 +1034,10 @@ public class CompanionManagement {
 		}
 		
 		@Override
-		public String getResponseTabTitle(int index) {
-			return coreNode.getResponseTabTitle(index);
+		protected List<ResponseTab> responses() {
+			return coreNode.getResponses();
 		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return coreNode.getResponse(responseTab, index);
-		}
-		
 		@Override
 		public boolean reloadOnRestore() {
 			return true;
@@ -1116,15 +1106,10 @@ public class CompanionManagement {
 		}
 		
 		@Override
-		public String getResponseTabTitle(int index) {
-			return coreNode.getResponseTabTitle(index);
+		protected List<ResponseTab> responses() {
+			return coreNode.getResponses();
 		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return coreNode.getResponse(responseTab, index);
-		}
-		
 		@Override
 		public boolean reloadOnRestore() {
 			return true;
@@ -1668,15 +1653,10 @@ public class CompanionManagement {
 		}
 		
 		@Override
-		public String getResponseTabTitle(int index) {
-			return coreNode.getResponseTabTitle(index);
+		protected List<ResponseTab> responses() {
+			return coreNode.getResponses();
 		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return coreNode.getResponse(responseTab, index);
-		}
-		
 		@Override
 		public boolean reloadOnRestore() {
 			return true;
@@ -1801,13 +1781,8 @@ public class CompanionManagement {
 		}
 		
 		@Override
-		public String getResponseTabTitle(int index) {
-			return coreNode.getResponseTabTitle(index);
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return coreNode.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return coreNode.getResponses();
 		}
 	};
 	
@@ -1963,8 +1938,8 @@ public class CompanionManagement {
 			return "";
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses();
 		}
 	};
 	

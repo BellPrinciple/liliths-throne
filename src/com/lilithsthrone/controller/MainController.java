@@ -787,7 +787,7 @@ public class MainController implements Initializable {
 												new Response("Save", "Save all the pronouns that are currently displayed.", OptionsDialogue.OPTIONS_PRONOUNS) {
 													@Override
 													public void effects() {
-														OptionsDialogue.OPTIONS_PRONOUNS.getResponse(0, 1).effects();
+														OptionsDialogue.savePronouns();
 													}
 												});
 										found = true;
@@ -803,7 +803,7 @@ public class MainController implements Initializable {
 													new Response("Save", "Save all the pronouns that are currently displayed.", OptionsDialogue.OPTIONS_PRONOUNS) {
 														@Override
 														public void effects() {
-															OptionsDialogue.OPTIONS_PRONOUNS.getResponse(0, 1).effects();
+															OptionsDialogue.savePronouns();
 														}
 													});
 										}
@@ -1133,15 +1133,19 @@ public class MainController implements Initializable {
 	}
 	
 	public static void setResponseEventListeners() {
-		
-		if(Main.game.getCurrentDialogueNode().getResponseTabTitle(0) != null && !Main.game.getCurrentDialogueNode().getResponseTabTitle(0).isEmpty()) {
-			int responsePageCounter = 0;
-			while (Main.game.getCurrentDialogueNode().getResponseTabTitle(responsePageCounter) != null){
-				setResponseTabListeners(responsePageCounter);
-				responsePageCounter++;
+		var r = Main.game.getCurrentDialogueNode().getResponses();
+		if(r.size() > 1) {
+			for(int i = 0; i < r.size(); i++) {
+				int j = i;
+				EventListener l = e -> {
+					Main.game.setResponseTab(j);
+					Main.game.updateResponses();
+				};
+				((EventTarget)document.getElementById("tab_"+i))
+				.addEventListener("click",l,false);
 			}
 		}
-		
+
 		// Responses:
 		for (int i = 0; i < RESPONSE_COUNT; i++) {
 			String id = "option_" + i;
@@ -1288,15 +1292,6 @@ public class MainController implements Initializable {
 				}, false);
 			}
 		}
-	}
-	
-	private static void setResponseTabListeners(int responsePageCounter) {
-		String id = "tab_" + responsePageCounter;
-
-		((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
-				Main.game.setResponseTab(responsePageCounter);
-				Main.game.updateResponses();
-			}, false);
 	}
 	
 	static void allocateWorkTime(int i) {

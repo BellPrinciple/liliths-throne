@@ -1387,12 +1387,8 @@ public class DominionExpress {
 			return UtilText.parseFromXMLFile("places/dominion/warehouseDistrict/dominionExpress", "STABLE_SHOWER");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return STABLES_INTERIOR.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return STABLES_INTERIOR.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return STABLES_INTERIOR.getResponses();
 		}
 	};
 	

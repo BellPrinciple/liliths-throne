@@ -1218,18 +1218,15 @@ public class OccupantManagementDialogue {
 		}
 		
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index == 0) {
-				if(Main.game.getCurrentDialogueNode()==SLAVE_LIST_MANAGEMENT) {
-					return new Response("Back", "Exit the slave management screen.", dialogueToExitTo==null?OCCUPANT_OVERVIEW:dialogueToExitTo);
-				} else {
-					return new Response("Back", "Return to the management screen.", SLAVE_LIST_MANAGEMENT);
-				}
-			}
-			if(Main.game.getDialogueFlags().getSlaveTrader()==null) {
-				return SLAVE_LIST.getResponse(responseTab, index);
-			}
-			return null;
+		protected List<ResponseTab> responses() {
+			var back = Main.game.getCurrentDialogueNode()==SLAVE_LIST_MANAGEMENT
+			? new Response("Back", "Exit the slave management screen.", dialogueToExitTo==null?OCCUPANT_OVERVIEW:dialogueToExitTo)
+			: new Response("Back", "Return to the management screen.", SLAVE_LIST_MANAGEMENT);
+			if(Main.game.getDialogueFlags().getSlaveTrader()!=null)
+				return List.of(new ResponseTab("",back));
+			var r = SLAVE_LIST.getResponses();
+			r.get(0).set(0,back);
+			return r;
 		}
 	};
 	

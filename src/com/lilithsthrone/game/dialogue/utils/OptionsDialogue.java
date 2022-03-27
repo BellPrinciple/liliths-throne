@@ -78,7 +78,21 @@ public class OptionsDialogue {
 	public static boolean startingNewGame = false;
 	
 	private static boolean alphabeticalFileSort = false;
-	
+
+	public static void savePronouns() {
+		for(GenderNames gn : GenderNames.values()) {
+			Main.getProperties().genderNameMale.put(gn, ((String) Main.mainController.getWebEngine().executeScript("document.getElementById('GENDER_NAME_MASCULINE_" + gn +"').value")).toLowerCase());
+			Main.getProperties().genderNameNeutral.put(gn, ((String) Main.mainController.getWebEngine().executeScript("document.getElementById('GENDER_NAME_ANDROGYNOUS_" + gn +"').value")).toLowerCase());
+			Main.getProperties().genderNameFemale.put(gn, ((String) Main.mainController.getWebEngine().executeScript("document.getElementById('GENDER_NAME_FEMININE_" + gn +"').value")).toLowerCase());
+		}
+		for (GenderPronoun gp : GenderPronoun.values()) {
+			Main.getProperties().genderPronounFemale.put(gp, ((String) Main.mainController.getWebEngine().executeScript("document.getElementById('feminine_" + gp +"').value")).toLowerCase());
+			Main.getProperties().genderPronounMale.put(gp, ((String) Main.mainController.getWebEngine().executeScript("document.getElementById('masculine_" + gp +"').value")).toLowerCase());
+		}
+		Main.saveProperties();
+		Main.game.flashMessage(PresetColour.GENERIC_GOOD, "Pronouns saved!");
+	}
+
 	public static final DialogueNode MENU = new DialogueNode("Menu", "Menu", true) {
 		
 		@Override
@@ -1045,17 +1059,7 @@ public class OptionsDialogue {
 				return new ResponseEffectsOnly("Save", "Save all the pronouns that are currently displayed.") {
 					@Override
 					public void effects() {
-						for(GenderNames gn : GenderNames.values()) {
-							Main.getProperties().genderNameMale.put(gn, ((String) Main.mainController.getWebEngine().executeScript("document.getElementById('GENDER_NAME_MASCULINE_" + gn +"').value")).toLowerCase());
-							Main.getProperties().genderNameNeutral.put(gn, ((String) Main.mainController.getWebEngine().executeScript("document.getElementById('GENDER_NAME_ANDROGYNOUS_" + gn +"').value")).toLowerCase());
-							Main.getProperties().genderNameFemale.put(gn, ((String) Main.mainController.getWebEngine().executeScript("document.getElementById('GENDER_NAME_FEMININE_" + gn +"').value")).toLowerCase());
-						}
-						for (GenderPronoun gp : GenderPronoun.values()) {
-							Main.getProperties().genderPronounFemale.put(gp, ((String) Main.mainController.getWebEngine().executeScript("document.getElementById('feminine_" + gp +"').value")).toLowerCase());
-							Main.getProperties().genderPronounMale.put(gp, ((String) Main.mainController.getWebEngine().executeScript("document.getElementById('masculine_" + gp +"').value")).toLowerCase());
-						}
-						Main.saveProperties();
-						Main.game.flashMessage(PresetColour.GENERIC_GOOD, "Pronouns saved!");
+						savePronouns();
 					}
 				};
 				

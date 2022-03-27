@@ -4,8 +4,9 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.DialogueNodeType;
-import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.main.Main;
+
+import java.util.List;
 
 /**
  * @since 0.3.4
@@ -88,19 +89,9 @@ public class CombatMovesSetup {
         }
 		
 		@Override
-		public String getResponseTabTitle(int index) {
-			return dialogueReturn.getResponseTabTitle(index);
+		protected List<ResponseTab> responses() {
+			return dialogueReturn.getResponses();
 		}
-        
-        @Override
-        public Response getResponse(int responseTab, int index) {
-        	return dialogueReturn.getResponse(responseTab, index);
-//            if (index == 0) {
-//                return new Response("Back", "Return to the previous menu.", dialogueReturn);
-//            } else {
-//                return null;
-//            }
-        }
 
         @Override
         public DialogueNodeType getDialogueNodeType() {

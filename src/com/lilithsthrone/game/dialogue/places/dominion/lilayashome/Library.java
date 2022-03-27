@@ -1,6 +1,5 @@
 package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
@@ -376,13 +375,8 @@ public class Library {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return LIBRARY.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return LIBRARY.getResponses();
 		}
 	};
 	
@@ -392,12 +386,8 @@ public class Library {
 			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "ARCANE_AROUSAL");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return LIBRARY.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return LIBRARY.getResponses();
 		}
 	};
 	
@@ -407,12 +397,8 @@ public class Library {
 			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "LILITHS_DYNASTY");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int lore) {
-			return LIBRARY.getResponse(responseTab, lore);
+		protected List<ResponseTab> responses() {
+			return LIBRARY.getResponses();
 		}
 	};
 	
@@ -422,12 +408,8 @@ public class Library {
 			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "DOMINION_HISTORY");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int lore) {
-			return LIBRARY.getResponse(responseTab, lore);
+		protected List<ResponseTab> responses() {
+			return LIBRARY.getResponses();
 		}
 	};
 	
@@ -437,12 +419,8 @@ public class Library {
 			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "PREGNANCY_INFO");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return LIBRARY.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return LIBRARY.getResponses();
 		}
 	};
 	
@@ -455,12 +433,8 @@ public class Library {
 			return sb.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return LIBRARY.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return LIBRARY.getResponses();
 		}
 	};
 
@@ -470,12 +444,8 @@ public class Library {
 			return "";
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return LIBRARY.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return LIBRARY.getResponses();
 		}
 	};
 
@@ -509,12 +479,8 @@ public class Library {
 			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/library", "DUNGEON_TRIGGER_BACK");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return LIBRARY.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return LIBRARY.getResponses();
 		}
 	};
 	
@@ -531,34 +497,20 @@ public class Library {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
+		protected List<ResponseTab> responses() {
+			var r = LIBRARY.getResponses();
+			var raceResponses = r.get(3).response;
+			raceResponses.clear();
+			raceResponses.add(new Response("Back", "Return to the race index.", LIBRARY));
+			var booksAdded = new HashSet<ItemType>();
+			for(var subspecies : getAisleSubspecies(LibraryAisle.DEMON)) {
+				if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
+					raceResponses.add(bookResponse(ELDER_RACES, subspecies));
+				}
+			}
+			return r;
 		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==3) {
-				List<Response> raceResponses = new ArrayList<>();
-				var booksAdded = new HashSet<ItemType>();
-				for(var subspecies : getAisleSubspecies(LibraryAisle.DEMON)) {
-					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
-						raceResponses.add(bookResponse(ELDER_RACES, subspecies));
-					}
-				}
-				if(index == 0) {
-					return new Response("Back", "Return to the race index.", LIBRARY);
-					
-				} else if(index>0 && index-1<raceResponses.size()) {
-					return raceResponses.get(index-1);
-				}
-				
-				return null;
-				
-			} else {
-				return LIBRARY.getResponse(responseTab, index);
-			}
-		}
-	
 	};
 	
 	public static final DialogueNode DOMINION_RACES = new DialogueNode("", "", false) {
@@ -580,34 +532,20 @@ public class Library {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
+		protected List<ResponseTab> responses() {
+			var r = LIBRARY.getResponses();
+			var raceResponses = r.get(3).response;
+			raceResponses.clear();
+			raceResponses.add(new Response("Back", "Return to the race index.", LIBRARY));
+			var booksAdded = new HashSet<ItemType>();
+			for(var subspecies : getAisleSubspecies(LibraryAisle.DOMINION)) {
+				if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
+					raceResponses.add(bookResponse(DOMINION_RACES, subspecies));
+				}
+			}
+			return r;
 		}
 
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==3) {
-				List<Response> raceResponses = new ArrayList<>();
-				var booksAdded = new HashSet<ItemType>();
-				for(var subspecies : getAisleSubspecies(LibraryAisle.DOMINION)) {
-					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
-						raceResponses.add(bookResponse(DOMINION_RACES, subspecies));
-					}
-				}
-				if(index == 0) {
-					return new Response("Back", "Return to the race index.", LIBRARY);
-					
-				} else if(index>0 && index-1<raceResponses.size()) {
-					return raceResponses.get(index-1);
-				}
-				
-				return null;
-				
-			} else {
-				return LIBRARY.getResponse(responseTab, index);
-			}
-		}
-	
 	};
 	
 	public static final DialogueNode FIELDS_BOOKS = new DialogueNode("", "", false) {
@@ -625,32 +563,18 @@ public class Library {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==3) {
-				List<Response> raceResponses = new ArrayList<>();
-				var booksAdded = new HashSet<ItemType>();
-				for(var subspecies : getAisleSubspecies(LibraryAisle.FIELDS)) {
-					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
-						raceResponses.add(bookResponse(FIELDS_BOOKS, subspecies));
-					}
+		protected List<ResponseTab> responses() {
+			var r = LIBRARY.getResponses();
+			var raceResponses = r.get(3).response;
+			raceResponses.clear();
+			raceResponses.add(new Response("Back", "Return to the race index.", LIBRARY));
+			var booksAdded = new HashSet<ItemType>();
+			for(var subspecies : getAisleSubspecies(LibraryAisle.FIELDS)) {
+				if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
+					raceResponses.add(bookResponse(FIELDS_BOOKS, subspecies));
 				}
-				if(index == 0) {
-					return new Response("Back", "Return to the race index.", LIBRARY);
-					
-				} else if(index>0 && index-1<raceResponses.size()) {
-					return raceResponses.get(index-1);
-				}
-				
-				return null;
-				
-			} else {
-				return LIBRARY.getResponse(responseTab, index);
 			}
+			return r;
 		}
 	};
 
@@ -667,31 +591,18 @@ public class Library {
 					+ "</p>";
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==3) {
-				List<Response> raceResponses = new ArrayList<>();
-				var booksAdded = new HashSet<ItemType>();
-				for(var subspecies : getAisleSubspecies(LibraryAisle.JUNGLE)) {
-					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
-						raceResponses.add(bookResponse(JUNGLE_BOOKS, subspecies));
-					}
+		protected List<ResponseTab> responses() {
+			var r = LIBRARY.getResponses();
+			var raceResponses = r.get(3).response;
+			raceResponses.clear();
+			raceResponses.add(new Response("Back", "Return to the race index.", LIBRARY));
+			var booksAdded = new HashSet<ItemType>();
+			for(var subspecies : getAisleSubspecies(LibraryAisle.JUNGLE)) {
+				if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
+					raceResponses.add(bookResponse(JUNGLE_BOOKS, subspecies));
 				}
-				if(index == 0) {
-					return new Response("Back", "Return to the race index.", LIBRARY);
-					
-				} else if(index>0 && index-1<raceResponses.size()) {
-					return raceResponses.get(index-1);
-				}
-				
-				return null;
-				
-			} else {
-				return LIBRARY.getResponse(responseTab, index);
 			}
+			return r;
 		}
 	};
 
@@ -708,31 +619,18 @@ public class Library {
 					+ "</p>";
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==3) {
-				List<Response> raceResponses = new ArrayList<>();
-				var booksAdded = new HashSet<ItemType>();
-				for(var subspecies : getAisleSubspecies(LibraryAisle.MOUNTAIN)) {
-					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
-						raceResponses.add(bookResponse(MOUNTAIN_BOOKS, subspecies));
-					}
+		protected List<ResponseTab> responses() {
+			var r = LIBRARY.getResponses();
+			var raceResponses = r.get(3).response;
+			raceResponses.clear();
+			raceResponses.add(new Response("Back", "Return to the race index.", LIBRARY));
+			var booksAdded = new HashSet<ItemType>();
+			for(var subspecies : getAisleSubspecies(LibraryAisle.MOUNTAIN)) {
+				if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
+					raceResponses.add(bookResponse(MOUNTAIN_BOOKS, subspecies));
 				}
-				if(index == 0) {
-					return new Response("Back", "Return to the race index.", LIBRARY);
-					
-				} else if(index>0 && index-1<raceResponses.size()) {
-					return raceResponses.get(index-1);
-				}
-				
-				return null;
-				
-			} else {
-				return LIBRARY.getResponse(responseTab, index);
 			}
+			return r;
 		}
 	};
 	
@@ -749,31 +647,18 @@ public class Library {
 					+ "</p>";
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==3) {
-				List<Response> raceResponses = new ArrayList<>();
-				var booksAdded = new HashSet<ItemType>();
-				for(var subspecies : getAisleSubspecies(LibraryAisle.SEA)) {
-					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
-						raceResponses.add(bookResponse(SEA_BOOKS, subspecies));
-					}
+		protected List<ResponseTab> responses() {
+			var r = LIBRARY.getResponses();
+			var raceResponses = r.get(3).response;
+			raceResponses.clear();
+			raceResponses.add(new Response("Back", "Return to the race index.", LIBRARY));
+			var booksAdded = new HashSet<ItemType>();
+			for(var subspecies : getAisleSubspecies(LibraryAisle.SEA)) {
+				if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
+					raceResponses.add(bookResponse(SEA_BOOKS, subspecies));
 				}
-				if(index == 0) {
-					return new Response("Back", "Return to the race index.", LIBRARY);
-					
-				} else if(index>0 && index-1<raceResponses.size()) {
-					return raceResponses.get(index-1);
-				}
-				
-				return null;
-				
-			} else {
-				return LIBRARY.getResponse(responseTab, index);
 			}
+			return r;
 		}
 	};
 	
@@ -791,31 +676,18 @@ public class Library {
 					+ "</p>";
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return LIBRARY.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==3) {
-				List<Response> raceResponses = new ArrayList<>();
-				var booksAdded = new HashSet<ItemType>();
-				for(var subspecies : getAisleSubspecies(LibraryAisle.DESERT)) {
-					if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
-						raceResponses.add(bookResponse(DESERT_BOOKS, subspecies));
-					}
+		protected List<ResponseTab> responses() {
+			var r = LIBRARY.getResponses();
+			var raceResponses = r.get(3).response;
+			raceResponses.clear();
+			raceResponses.add(new Response("Back", "Return to the race index.", LIBRARY));
+			var booksAdded = new HashSet<ItemType>();
+			for(var subspecies : getAisleSubspecies(LibraryAisle.DESERT)) {
+				if(booksAdded.add(ItemType.getLoreBook(subspecies))) {
+					raceResponses.add(bookResponse(DESERT_BOOKS, subspecies));
 				}
-				if(index == 0) {
-					return new Response("Back", "Return to the race index.", LIBRARY);
-					
-				} else if(index>0 && index-1<raceResponses.size()) {
-					return raceResponses.get(index-1);
-				}
-				
-				return null;
-				
-			} else {
-				return LIBRARY.getResponse(responseTab, index);
 			}
+			return r;
 		}
 	};
 	

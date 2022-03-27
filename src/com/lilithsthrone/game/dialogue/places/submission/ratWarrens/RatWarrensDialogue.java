@@ -887,42 +887,28 @@ public class RatWarrensDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			if(index == 0 || index == 1) {
-				return GUARD_COMBAT_VICTORY.getResponseTabTitle(index);
-			}
-			return null;
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
+		protected List<ResponseTab> responses() {
+			var r = GUARD_COMBAT_VICTORY.getResponses().subList(0,2);
 			if(getGuards(false).isEmpty()) {
-				if (index == 1) {
-					return new Response("Continue", "As you've enslaved all of the gang members who dared to fight you, there's nothing left to do but continue on your way...", Main.game.getDefaultDialogue(false)) {
+				return List.of(new ResponseTab(r.get(0).title,null,
+					new Response("Continue",
+							"As you've enslaved all of the gang members who dared to fight you, there's nothing left to do but continue on your way...",
+							Main.game.getDefaultDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_ALL_ENSLAVED"));
 						}
-					};
-				}
-				return null;
+					}));
 			}
-			if(responseTab==0) {
-				if (index == 1) {
-					return new Response("Scare off", "Scare the gang members off and continue on your way.", Main.game.getDefaultDialogue(false)) {
-						@Override
-						public void effects() {
-							banishGuards(true);
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_SCARE_OFF", getGuards(true)));
-						}
-					};
+			return List.of(new ResponseTab(r.get(0).title,null,new Response("Scare off",
+					"Scare the gang members off and continue on your way.",
+					Main.game.getDefaultDialogue(false)) {
+				@Override
+				public void effects() {
+					banishGuards(true);
+					Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_SCARE_OFF", getGuards(true)));
 				}
-				
-			} else if(responseTab==1) {
-				return GUARD_COMBAT_VICTORY.getResponse(responseTab, index);
-			}
-			
-			return null;
+			}), r.get(1));
 		}
 	};
 	

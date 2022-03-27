@@ -2055,35 +2055,23 @@ public class EnforcerAlleywayDialogue {
 			}
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			if(index == 0 || index == 1) {
-				return AFTER_COMBAT_VICTORY.getResponseTabTitle(index);
-			}
-			return null;
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==0) {
-				if (index == 1) {
-					return new Response("Leave",
-							"Leave the Enforcers behind and continue on your way."
-									+ "<br/>[style.italicsBad(This will permanently remove the Enforcers from the game!)]",
-							Main.game.getDefaultDialogue(false)) {
-						@Override
-						public Colour getHighlightColour() {
-							return PresetColour.GENERIC_NPC_REMOVAL;
-						}
-						@Override
-						public void effects() {
-							banishEnforcers(true);
-						}
-					};
+		protected List<ResponseTab> responses() {
+			var r = AFTER_COMBAT_VICTORY.getResponses().subList(0,2);
+			r.get(0).response.clear();
+			r.get(0).response.set(1,new Response("Leave",
+					"Leave the Enforcers behind and continue on your way."
+					+ "<br/>[style.italicsBad(This will permanently remove the Enforcers from the game!)]",
+					Main.game.getDefaultDialogue(false)) {
+				@Override
+				public Colour getHighlightColour() {
+					return PresetColour.GENERIC_NPC_REMOVAL;
 				}
-				
-			} else if(responseTab==1) {
-				return AFTER_COMBAT_VICTORY.getResponse(responseTab, index);
-			}
-			return null;
+				@Override
+				public void effects() {
+					banishEnforcers(true);
+				}
+			});
+			return r;
 		}
 	};
 	

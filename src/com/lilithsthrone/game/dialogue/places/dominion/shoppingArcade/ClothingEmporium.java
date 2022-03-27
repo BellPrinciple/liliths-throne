@@ -158,12 +158,8 @@ public class ClothingEmporium {
 			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/clothingEmporium", "SHOP_CLOTHING_STOCK_ROOM");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	
@@ -736,12 +732,8 @@ public class ClothingEmporium {
 			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/clothingEmporium", "SHOP_ENCHANTED_CLOTHING");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	
@@ -755,12 +747,8 @@ public class ClothingEmporium {
 			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/clothingEmporium", "SHOP_OFFER_HELP");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	
@@ -837,12 +825,8 @@ public class ClothingEmporium {
 			return "";
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	
@@ -856,12 +840,8 @@ public class ClothingEmporium {
 			return "";
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	
@@ -881,12 +861,8 @@ public class ClothingEmporium {
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	
@@ -906,12 +882,8 @@ public class ClothingEmporium {
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 
@@ -931,12 +903,8 @@ public class ClothingEmporium {
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	
@@ -956,12 +924,8 @@ public class ClothingEmporium {
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 
@@ -979,12 +943,8 @@ public class ClothingEmporium {
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	
@@ -1163,12 +1123,8 @@ public class ClothingEmporium {
 			return "";
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 
@@ -1189,12 +1145,8 @@ public class ClothingEmporium {
 			return UtilText.parseFromXMLFile("characters/dominion/nyan", "ROMANCE_DATE_REQUESTED");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	
@@ -1458,12 +1410,8 @@ public class ClothingEmporium {
 			return UtilText.parseFromXMLFile("characters/dominion/nyan", "POST_MAKEOUT");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	
@@ -1479,12 +1427,8 @@ public class ClothingEmporium {
 			return UtilText.parseFromXMLFile("characters/dominion/nyan", "POST_ORAL");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	
@@ -1494,12 +1438,8 @@ public class ClothingEmporium {
 			return "";
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SHOP_CLOTHING_REPEAT.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_CLOTHING_REPEAT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SHOP_CLOTHING_REPEAT.getResponses();
 		}
 	};
 	

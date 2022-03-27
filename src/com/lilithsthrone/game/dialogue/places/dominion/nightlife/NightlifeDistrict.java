@@ -3,7 +3,6 @@ package com.lilithsthrone.game.dialogue.places.dominion.nightlife;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
@@ -2382,13 +2381,8 @@ public class NightlifeDistrict {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponses();
 		}
 	};
 	
@@ -2411,13 +2405,8 @@ public class NightlifeDistrict {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponses();
 		}
 	};
 	
@@ -2439,13 +2428,8 @@ public class NightlifeDistrict {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponses();
 		}
 	};
 	
@@ -2467,13 +2451,8 @@ public class NightlifeDistrict {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponses();
 		}
 	};
 	
@@ -2495,13 +2474,8 @@ public class NightlifeDistrict {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponses();
 		}
 	};
 	
@@ -2523,13 +2497,8 @@ public class NightlifeDistrict {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponses();
 		}
 	};
 	
@@ -2549,15 +2518,10 @@ public class NightlifeDistrict {
 		public String getContent() {
 			return getClubberStatus(this.getSecondsPassed());
 		}
-		
+
 		@Override
-		public String getResponseTabTitle(int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponses();
 		}
 	};
 
@@ -2580,13 +2544,8 @@ public class NightlifeDistrict {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponses();
 		}
 	};
 	
@@ -2612,13 +2571,8 @@ public class NightlifeDistrict {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return WATERING_HOLE_BAR_KALAHARI_INTRO.getResponses();
 		}
 	};
 	
