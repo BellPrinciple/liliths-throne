@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -323,6 +324,7 @@ public class Game implements XMLSaving {
 	
 	// Dialogues:
 	private DialogueNode currentDialogueNode;
+	private List<DialogueNode.ResponseTab> currentResponses;
 	private DialogueNode savedDialogueNode = null;
 	
 	private String currentDialogue;
@@ -2849,7 +2851,7 @@ public class Game implements XMLSaving {
 		}
 		informationTooltips = new HashMap<>();
 		
-		Response response = currentDialogueNode.getResponse(responseTab, index);
+		Response response = getCurrentResponse(index);
 		
 		if (response != null) {
 			String corruptionGains = "";
@@ -3031,7 +3033,7 @@ public class Game implements XMLSaving {
 //										+ "</div>"
 									+ "</div>"
 									+"<div id='bottom-text'>Game saved!</div>"
-									+ getResponsesDiv(currentDialogueNode, resetPointer)
+									+ getResponsesDiv(resetPointer)
 								+ "</div>"
 							+ "</body>";
 
@@ -3058,7 +3060,7 @@ public class Game implements XMLSaving {
 //									+ "</div>"
 								+ "</div>"
 								+"<div id='bottom-text'>Game saved!</div>"
-								+ getResponsesDiv(currentDialogueNode, resetPointer)
+								+ getResponsesDiv(resetPointer)
 							+ "</div>"
 							+ "</body>";
 				}
@@ -3271,7 +3273,7 @@ public class Game implements XMLSaving {
 //							+ "</div>"
 						+ "</div>"
 						+"<div id='bottom-text'>Game saved!</div>"
-						+ getResponsesDiv(currentDialogueNode, resetPointer)
+						+ getResponsesDiv(resetPointer)
 					+ "</div>"
 				+ "</body>";
 
@@ -3298,7 +3300,7 @@ public class Game implements XMLSaving {
 //								+ "</div>"
 							+ "</div>"
 						+"<div id='bottom-text'>Game saved!</div>"
-						+ getResponsesDiv(currentDialogueNode, resetPointer)
+						+ getResponsesDiv(resetPointer)
 					+ "</div>"
 				+ "</body>";
 
@@ -3413,7 +3415,7 @@ public class Game implements XMLSaving {
 		responsePointer=responsePage*MainController.RESPONSE_COUNT;
 		
 		for (int i=responsePage*MainController.RESPONSE_COUNT; i<responsePage*MainController.RESPONSE_COUNT+(MainController.RESPONSE_COUNT-1); i++) {
-			if(currentDialogueNode.getResponse(responseTab, i) != null) {
+			if(getCurrentResponse(i) != null) {
 				responsePointer = i;
 				break;
 			}
@@ -3422,7 +3424,7 @@ public class Game implements XMLSaving {
 	
 	private void checkForResponsePage() {
 		for (int i = responsePage*MainController.RESPONSE_COUNT; i<responsePage*MainController.RESPONSE_COUNT+(MainController.RESPONSE_COUNT-1); i++) {
-			if(currentDialogueNode.getResponse(responseTab, i) != null) {
+			if(getCurrentResponse(i) != null) {
 				return;
 			}
 		}
@@ -3430,73 +3432,51 @@ public class Game implements XMLSaving {
 	}
 	
 	public boolean decrementResponseTab() {
-		for(int i = -1; i > -6; i--) {
-			if(currentDialogueNode.getResponseTabTitle(responseTab+i)!=null) {
-				responseTab+=i;
-				checkForResponsePage();
-				return true;
-			}
-		}
-		return false;
+		if(responseTab == 0)
+			return false;
+		responseTab--;
+		return true;
 	}
 	
 	public boolean incrementResponseTab() {
-		for(int i=1; i<6; i++) {
-			if(currentDialogueNode.getResponseTabTitle(responseTab+i)!=null) {
-				responseTab+=i;
-				checkForResponsePage();
-				return true;
-			}
-		}
-		return false;
+		if(responseTab + 1 == currentResponses.size())
+			return false;
+		responseTab++;
+		return true;
 	}
 	
 	private void checkForResponseTab() {
-		if(currentDialogueNode.getResponseTabTitle(responseTab)==null) {
+		if(responseTab >= currentResponses.size()) {
 			// I felt like it was more intuitive to go back to 0 rather than the nearest tab.
-//			for(int i=responseTab; i>0; i--) {
-//				if(currentDialogueNode.getResponseTabTitle(i)!=null) {
-//					responseTab = i;
-//					return;
-//				}
-//			}
 			responseTab=0;
 		}
 	}
 	
 	public void updateResponses() {
-		String content = getResponsesDiv(Main.game.getCurrentDialogueNode(), false);
+		String content = getResponsesDiv(false);
 		content=content.replaceAll("\r", "");
 		content=content.replaceAll("\n", "");
 		content=content.replaceAll("\"", "'");
 		Main.mainController.getWebEngine().executeScript("document.getElementById('RESPONSE_BOX').innerHTML = \""+content+"\"");
 		MainController.setResponseEventListeners();
 	}
-	
-	/**
-	 * Create the response box html.
-	 */
-	private String getResponsesDiv(DialogueNode node) {
-		return getResponsesDiv(node, true);
-	}
 
-	private String getResponsesDiv(DialogueNode node, boolean withPointerReset) {
+	private String getResponsesDiv(boolean withPointerReset) {
 		if(withPointerReset) {
 			resetResponsePointer();
 		}
-		
+
 		choicesDialogueSB = new StringBuilder();
 
 		choicesDialogueSB.append("<div id='RESPONSE_BOX'>");
 		
-		if(node.getResponseTabTitle(0) != null && !node.getResponseTabTitle(0).isEmpty()) {
+		if(currentResponses.size() > 1) {
 			choicesDialogueSB.append("<div class='response-container tabs'>");
 			
-			int responsePageCounter = 0;
-			while (node.getResponseTabTitle(responsePageCounter) != null){
+			for(int responsePageCounter = 0; responsePageCounter < currentResponses.size(); responsePageCounter++){
 				choicesDialogueSB.append(
 						"<div class='response-tab"+(responseTab==responsePageCounter?" selected'":"'")
-							+ (isResponseTabEmpty(node, responsePageCounter)
+							+ (currentResponses.get(responsePageCounter).response.stream().allMatch(Objects::isNull)
 									?"style='color:"+PresetColour.TEXT_GREY.toWebHexString()+";'"
 									:(responseTab==responsePageCounter
 										?""
@@ -3514,13 +3494,12 @@ public class Game implements XMLSaving {
 											: Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_TAB).getFullName()) + "</b>"
 									:""))
 //							+ (responseTab==responsePageCounter+1?"<b class='hotkey-icon'>" + KeyboardAction.RESPOND_PREVIOUS_PAGE + "</b>" : "" )
-							+ UtilText.parse(node.getResponseTabTitle(responsePageCounter))
+							+ UtilText.parse(currentResponses.get(responsePageCounter).title)
 						+"</div>");
-				responsePageCounter++;
 			}
 			choicesDialogueSB.append("</div>");
-			
-		} else {
+		}
+		else {
 			responseTab = 0;
 		}
 
@@ -3536,11 +3515,11 @@ public class Game implements XMLSaving {
 		}
 		
 		choicesDialogueSB.append("<div class='response-container'>");
-		
+
 		Response response;
 		if (responsePage == 0) {
 			for (int i = 1; i < MainController.RESPONSE_COUNT; i++) {
-				response = node.getResponse(responseTab, i);
+				response = getCurrentResponse(i);
 				if (response != null) {
 					choicesDialogueSB.append(getResponseBoxDiv(response, i));
 				} else
@@ -3548,7 +3527,7 @@ public class Game implements XMLSaving {
 												+ "<b class='hotkey-icon disabled'>" + getResponseHotkey(i) + "</b>"
 											+ "</div>");
 			}
-			response = node.getResponse(responseTab, 0);
+			response = getCurrentResponse(0);
 			if (response != null) {
 				choicesDialogueSB.append(getResponseBoxDiv(response, 0));
 
@@ -3559,7 +3538,7 @@ public class Game implements XMLSaving {
 			
 		} else {
 			for (int i = 0; i < (MainController.RESPONSE_COUNT-1); i++) {
-				response = node.getResponse(responseTab, i + (responsePage * MainController.RESPONSE_COUNT));
+				response = getCurrentResponse(i + (responsePage * MainController.RESPONSE_COUNT));
 				if (response != null) {
 					choicesDialogueSB.append(getResponseBoxDiv(response, i + 1));
 				} else {
@@ -3568,7 +3547,7 @@ public class Game implements XMLSaving {
 											+ "</div>");
 				}
 			}
-			response = node.getResponse(responseTab, MainController.RESPONSE_COUNT-1 + (responsePage * MainController.RESPONSE_COUNT));
+			response = getCurrentResponse(MainController.RESPONSE_COUNT-1 + (responsePage * MainController.RESPONSE_COUNT));
 			if (response != null) {
 				choicesDialogueSB.append(getResponseBoxDiv(response, 0));
 			} else {
@@ -3580,7 +3559,7 @@ public class Game implements XMLSaving {
 		}
 		choicesDialogueSB.append("</div>");
 		
-		if (node.getResponse(responseTab, ((responsePage + 1) * MainController.RESPONSE_COUNT)) != null){
+		if (getCurrentResponse(((responsePage + 1) * MainController.RESPONSE_COUNT)) != null){
 			choicesDialogueSB.append("<div class='response-switcher right' id='switch_right'><b class='hotkey-icon'>"
 					+ (Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_PAGE) == null ? "" : Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_PAGE).getFullName()) + "</b>" + "&#62</div>");
 			
@@ -3594,16 +3573,6 @@ public class Game implements XMLSaving {
 		choicesDialogueSB.append("</div>");
 		
 		return choicesDialogueSB.toString();
-	}
-	
-	private boolean isResponseTabEmpty(DialogueNode node, int responseTab) {
-		for (int i = 1; i < MainController.RESPONSE_COUNT; i++) {
-			if(node.getResponse(responseTab, i)!=null) {
-				return false;
-			}
-		}
-		
-		return true;
 	}
 
 	/**
@@ -3928,7 +3897,7 @@ public class Game implements XMLSaving {
 										: "")
 						+ "</div>"
 						+"<div id='bottom-text'>Game saved!</div>"
-						+ getResponsesDiv(currentDialogueNode)
+						+ getResponsesDiv(true)
 					+ "</div>"
 				+ "</body>";
 			
@@ -4930,6 +4899,11 @@ public class Game implements XMLSaving {
 		return currentDialogueNode;
 	}
 
+	public Response getCurrentResponse(int index) {
+		var r = currentResponses.get(responseTab).response;
+		return index >= r.size() ? null : r.get(index);
+	}
+
 	public String getCurrentDialogue() {
 		return currentDialogue;
 	}
@@ -4958,7 +4932,7 @@ public class Game implements XMLSaving {
 	}
 
 	public boolean isHasNextResponsePage() {
-		return currentDialogueNode.getResponse(responseTab, ((responsePage + 1) * MainController.RESPONSE_COUNT)) != null;
+		return getCurrentResponse(((responsePage + 1) * MainController.RESPONSE_COUNT)) != null;
 	}
 
 	public int getResponseTab() {

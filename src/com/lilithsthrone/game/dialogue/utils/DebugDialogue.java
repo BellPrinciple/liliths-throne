@@ -790,13 +790,8 @@ public class DebugDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return DEBUG_MENU.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return DEBUG_MENU.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return DEBUG_MENU.getResponses();
 		}
 	};
 	
@@ -1014,13 +1009,8 @@ public class DebugDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return DEBUG_MENU.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return DEBUG_MENU.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return DEBUG_MENU.getResponses();
 		}
 	};
 	
@@ -1046,12 +1036,8 @@ public class DebugDialogue {
 			return "";
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return DEBUG_MENU.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return DEBUG_MENU.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return DEBUG_MENU.getResponses();
 		}
 	};
 	
@@ -1159,13 +1145,8 @@ public class DebugDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return DEBUG_MENU.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return DEBUG_MENU.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return DEBUG_MENU.getResponses();
 		}
 	};
 	
@@ -2132,12 +2113,8 @@ public class DebugDialogue {
 			return spawnrateSB.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return DEBUG_MENU.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return DEBUG_MENU.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return DEBUG_MENU.getResponses();
 		}
 	};
 

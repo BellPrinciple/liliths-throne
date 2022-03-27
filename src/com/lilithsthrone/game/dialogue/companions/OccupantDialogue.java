@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -912,13 +913,8 @@ public class OccupantDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return OCCUPANT_START.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return OCCUPANT_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return OCCUPANT_START.getResponses();
 		}
 	};
 	
@@ -951,13 +947,8 @@ public class OccupantDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return OCCUPANT_START.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return OCCUPANT_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return OCCUPANT_START.getResponses();
 		}
 	};
 	
@@ -985,13 +976,8 @@ public class OccupantDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return OCCUPANT_START.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return OCCUPANT_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return OCCUPANT_START.getResponses();
 		}
 	};
 	
@@ -1027,13 +1013,8 @@ public class OccupantDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return OCCUPANT_START.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return OCCUPANT_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return OCCUPANT_START.getResponses();
 		}
 	};
 
@@ -1057,12 +1038,8 @@ public class OccupantDialogue {
 			return UtilText.parse(occupant(), UtilText.nodeContentSB.toString());
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return OCCUPANT_START.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return OCCUPANT_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return OCCUPANT_START.getResponses();
 		}
 	};
 
@@ -1086,12 +1063,8 @@ public class OccupantDialogue {
 			return UtilText.parse(occupant(), UtilText.nodeContentSB.toString());
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return OCCUPANT_START.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return OCCUPANT_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return OCCUPANT_START.getResponses();
 		}
 	};
 
@@ -1221,13 +1194,8 @@ public class OccupantDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return OCCUPANT_START.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return OCCUPANT_START.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return OCCUPANT_START.getResponses();
 		}
 	};
 	
@@ -1274,8 +1242,8 @@ public class OccupantDialogue {
 			return "";
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses();
 		}
 	};
 	
@@ -1360,13 +1328,8 @@ public class OccupantDialogue {
 		}
 		
 		@Override
-		public String getResponseTabTitle(int index) {
-			return OCCUPANT_APARTMENT.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return OCCUPANT_APARTMENT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return OCCUPANT_APARTMENT.getResponses();
 		}
 	};
 
@@ -1415,50 +1378,35 @@ public class OccupantDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			if(occupant().isAtHome()) {
-				if(index == 0) {
-					return "Talk";
-				} else if(index == 1) {
-					return UtilText.parse("[style.colourSex(Sex)]");
-				} else if(index == 2) {
-					return UtilText.parse("[style.colourCompanion(Manage)]");
-				}
-			}
-			
-			return null;
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(!occupant().isAtHome()) {
-				if(index==1) {
-					return new Response("Leave",
+		protected List<ResponseTab> responses() {
+			if(!occupant().isAtHome())
+				return List.of(new ResponseTab("",null,
+						new Response("Leave",
 							UtilText.parse(occupant(), "As [npc.name] is not at home right now, there's nothing left to do but head back out into Dominion."),
-							Main.game.getDefaultDialogue(false));
-				}
-				return null;
-			}
-			
-			if(responseTab == 0) {
-				if (index == 1) {
-					if(!occupant().NPCFlagValues.contains(NPCFlagValue.occupantTalkLife)) {
-						return new Response("Life", "Ask [npc.name] about [npc.her] past life.", OCCUPANT_APARTMENT_TALK_LIFE) {
+							Main.game.getDefaultDialogue(false))));
+
+			int timeUntilChange = Main.game.getMinutesUntilNextMorningOrEvening() + 5; // Add 5 minutes so that if the days are drawing in, you don't get stuck in a loop of always sleeping to sunset/sunrise
+			LocalDateTime[] sunriseSunset = DateAndTime.getTimeOfSolarElevationChange(Main.game.getDateNow(), SolarElevationAngle.SUN_ALTITUDE_SUNRISE_SUNSET, Game.DOMINION_LATITUDE, Game.DOMINION_LONGITUDE);
+			var tTalk = new ResponseTab("Talk",
+					new Response("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), Main.game.getDefaultDialogue(false)) {
+						@Override
+						public void effects() {
+							applyReactionReset();
+							exitDialogue();
+						}
+					},
+					!occupant().NPCFlagValues.contains(NPCFlagValue.occupantTalkLife)
+					? new Response("Life", "Ask [npc.name] about [npc.her] past life.", OCCUPANT_APARTMENT_TALK_LIFE) {
 							@Override
 							public void effects() {
 								applyReactionReset();
 								occupant().NPCFlagValues.add(NPCFlagValue.occupantTalkLife);
 								Main.game.getTextEndStringBuilder().append(occupant().incrementAffection(Main.game.getPlayer(), 5));
 							}
-						};
-						
-					} else {
-						return new Response("Life", "You've already talked with [npc.name] about [npc.her] past life today.", null);
-					}
-					
-				} else if (index == 2) {
-					if(!occupant().NPCFlagValues.contains(NPCFlagValue.occupantTalkJob)) {
-						return new Response("Job",
+						}
+					: new Response("Life", "You've already talked with [npc.name] about [npc.her] past life today.", null),
+					!occupant().NPCFlagValues.contains(NPCFlagValue.occupantTalkJob)
+					? new Response("Job",
 								UtilText.parse(occupant(), "Ask [npc.name] about [npc.her] job."),
 								OCCUPANT_APARTMENT_TALK_JOB) {
 							@Override
@@ -1467,16 +1415,9 @@ public class OccupantDialogue {
 								occupant().NPCFlagValues.add(NPCFlagValue.occupantTalkJob);
 								Main.game.getTextEndStringBuilder().append(occupant().incrementAffection(Main.game.getPlayer(), 5));
 							}
-						};
-						
-						
-					} else {
-						return new Response("Job", UtilText.parse(occupant(), "You've already asked [npc.name] about [npc.her] job today."), null);
-					}
-					
-				}
-				else if (index == 3) {
-					return new Response("Rest",
+						}
+					: new Response("Job", UtilText.parse(occupant(), "You've already asked [npc.name] about [npc.her] job today."), null),
+					new Response("Rest",
 							"Ask [npc.name] if you can crash on [npc.her] sofa for four hours."
 							+ " As well as replenishing your "+Attribute.HEALTH_MAXIMUM.getName()+" and "+Attribute.MANA_MAXIMUM.getName()+", you will also get the 'Well Rested' status effect.",
 							OCCUPANT_APARTMENT_SLEEP_OVER){
@@ -1490,12 +1431,8 @@ public class OccupantDialogue {
 							
 							RoomPlayer.applySleep(sleepTimeInMinutes);
 						}
-					};
-
-				} else if (index == 4) {
-					int timeUntilChange = Main.game.getMinutesUntilNextMorningOrEvening() + 5; // Add 5 minutes so that if the days are drawing in, you don't get stuck in a loop of always sleeping to sunset/sunrise
-					LocalDateTime[] sunriseSunset = DateAndTime.getTimeOfSolarElevationChange(Main.game.getDateNow(), SolarElevationAngle.SUN_ALTITUDE_SUNRISE_SUNSET, Game.DOMINION_LATITUDE, Game.DOMINION_LONGITUDE);
-					return new Response("Rest until " + (Main.game.isDayTime() ? "Sunset" : "Sunrise"),
+					},
+					new Response("Rest until " + (Main.game.isDayTime() ? "Sunset" : "Sunrise"),
 							"Ask [npc.name] if you can crash on [npc.her] sofa for " + (timeUntilChange >= 60 ?timeUntilChange / 60 + " hours " : " ")
 								+ (timeUntilChange % 60 != 0 ? timeUntilChange % 60 + " minutes" : "")
 								+ (Main.game.isDayTime()
@@ -1513,18 +1450,15 @@ public class OccupantDialogue {
 							
 							RoomPlayer.applySleep(sleepTimeInMinutes);
 						}
-					};
-
-				} else if (index == 5 && Main.getProperties().hasValue(PropertyValue.companionContent)) {
-					if(!Main.game.getPlayer().hasCompanion(occupant())) {
-						
-						if(!occupant().isCompanionAvailable(Main.game.getPlayer())) {
-							return new Response("Add to party",
+					},
+					Main.getProperties().hasValue(PropertyValue.companionContent)
+					? !Main.game.getPlayer().hasCompanion(occupant())
+					? !occupant().isCompanionAvailable(Main.game.getPlayer())
+					? new Response("Add to party",
 									UtilText.parse(occupant(), "[npc.Name] cannot be added to your party!"),
-									null);
-								
-						} else if(Main.game.getPlayer().canHaveMoreCompanions()) {
-							return new Response("Add to party",
+									null)
+					: Main.game.getPlayer().canHaveMoreCompanions()
+					? new Response("Add to party",
 									UtilText.parse(occupant(), "Ask [npc.name] if [npc.she] would like to accompany you for a while."),
 									OCCUPANT_APARTMENT){
 								@Override
@@ -1532,16 +1466,11 @@ public class OccupantDialogue {
 									applyReactionReset();
 									Main.game.getPlayer().addCompanion(occupant());
 								}
-							};
-							
-						} else {
-							return new Response("Add to party",
+							}
+					: new Response("Add to party",
 									"You are already at your party limit!",
-									null);
-						}
-						
-					} else {
-						return new Response("Remove from party",
+									null)
+					: new Response("Remove from party",
 								"Command [npc.name] to leave your party.",
 								OCCUPANT_APARTMENT){
 							@Override
@@ -1549,11 +1478,8 @@ public class OccupantDialogue {
 								applyReactionReset();
 								Main.game.getPlayer().removeCompanion(occupant());
 							}
-						};
-					}
-					
-				} else if (index == 6) {
-					return new Response(
+						}
+					: new Response(
 							hasJob()
 								?"Suggest job change"
 								:"Suggest job",
@@ -1566,11 +1492,12 @@ public class OccupantDialogue {
 						public void effects() {
 							applyReactionReset();
 						}
-					};
-					
-				} else if (index == 10) {
-					if(confirmKickOut) {
-						return new Response("Confirm removal", UtilText.parse(occupant(), "Tell [npc.name] that you need to move on, and that you won't see [npc.herHim] ever again.<br/>"
+					},
+					null,
+					null,
+					null,
+					confirmKickOut
+					? new Response("Confirm removal", UtilText.parse(occupant(), "Tell [npc.name] that you need to move on, and that you won't see [npc.herHim] ever again.<br/>"
 								+ "[style.italicsBad(This will permanently remove [npc.name] from the game!)]"),
 								OCCUPANT_APARTMENT_REMOVE) {
 							@Override
@@ -1585,52 +1512,30 @@ public class OccupantDialogue {
 								Main.game.banishNPC(occupant());
 								confirmKickOut = false;
 							}
-						};
-						
-					} else {
-						return new ResponseEffectsOnly("Remove character", UtilText.parse(occupant(), "Tell [npc.name] that you need to move on, and that you won't see [npc.herHim] ever again.<br/>"
+						}
+					: new ResponseEffectsOnly("Remove character", UtilText.parse(occupant(), "Tell [npc.name] that you need to move on, and that you won't see [npc.herHim] ever again.<br/>"
 								+ "[style.italicsMinorBad(After choosing this action, you'll need to click again to confirm that you want this character removed from the game forever.)]")) {
 							@Override
 							public void effects() {
 								confirmKickOut = true;
 							}
-						};
-					}
-					
-				} else if (index == 0) {
-					return new Response("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), Main.game.getDefaultDialogue(false)) {
-						@Override
-						public void effects() {
-							applyReactionReset();
-							exitDialogue();
-						}
-					};
-					
-				} else {
-					return null;
-				}
-			
-			} else if(responseTab == 1) {
-				if (index == 0) {
-					return new Response("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), Main.game.getDefaultDialogue(false)) {
+						});
+
+			var tSex = OCCUPANT_START.getResponses().get(1);
+			tSex.set(0,new Response("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), Main.game.getDefaultDialogue(false)) {
 						@Override
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile(getTextFilePath(), "APARTMENT_LEAVING", occupant()));
 							applyReactionReset();
 							exitDialogue();
 						}
-					};
-					
-				} else {
-					return OCCUPANT_START.getResponse(responseTab, index);
-				}
-				
-			} else if(responseTab == 2) {
-				return CompanionManagement.getManagementResponses(index);
-				
-			} else {
-				return null;
-			}
+					});
+
+			var tManage = new ResponseTab(UtilText.parse("[style.colourCompanion(Manage)]"));
+			for(int i = 0; i < MainController.RESPONSE_COUNT; i++)
+				tManage.response.add(CompanionManagement.getManagementResponses(i));
+
+			return List.of(tTalk,tSex,tManage);
 		}
 	};
 	
@@ -1658,13 +1563,8 @@ public class OccupantDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return OCCUPANT_APARTMENT.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return OCCUPANT_APARTMENT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return OCCUPANT_APARTMENT.getResponses();
 		}
 	};
 	
@@ -1692,13 +1592,8 @@ public class OccupantDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return OCCUPANT_APARTMENT.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return OCCUPANT_APARTMENT.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return OCCUPANT_APARTMENT.getResponses();
 		}
 	};
 	
@@ -1760,25 +1655,16 @@ public class OccupantDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			return OCCUPANT_APARTMENT.getResponseTabTitle(index);
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(!occupant().isAtHome()) {
-				if (index == 1) {
-					return new Response("Outside", "You find yourself back outside in the streets of Dominion.", Main.game.getDefaultDialogue(false)) {
+		protected List<ResponseTab> responses() {
+			var r = OCCUPANT_APARTMENT.getResponses();
+			r.set(0,new ResponseTab(r.get(0).title,null,
+					new Response("Outside", "You find yourself back outside in the streets of Dominion.", Main.game.getDefaultDialogue(false)) {
 						@Override
 						public void effects() {
 							exitDialogue();
 						}
-					};
-				}
-				return null;
-			}
-			
-			return OCCUPANT_APARTMENT.getResponse(responseTab, index);
+					}));
+			return r;
 		}
 	};
 	
@@ -1792,8 +1678,8 @@ public class OccupantDialogue {
 			return "";
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses();
 		}
 	};
 	

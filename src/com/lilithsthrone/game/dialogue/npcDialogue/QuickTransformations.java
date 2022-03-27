@@ -14,6 +14,8 @@ import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 
+import java.util.List;
+
 /**
  * @since 0.3.5.5
  * @version 0.3.5.5
@@ -360,8 +362,8 @@ public class QuickTransformations {
 		}
 		
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return endingNode.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return endingNode.getResponses();
 		}
 	};
 }

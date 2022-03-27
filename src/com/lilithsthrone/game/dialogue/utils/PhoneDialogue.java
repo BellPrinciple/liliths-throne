@@ -234,21 +234,10 @@ public class PhoneDialogue {
 			return UtilText.nodeContentSB.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			if(!Main.game.getPlayer().getIncubatingLitters().isEmpty()) {
-				if(index==0) {
-					return "Phone";
-				} else if(index==1) {
-					return "[style.colourYellowLight(Eggs)]";
-				}
-			}
-			return super.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==0) {
-				if (index == 1) {
-					return new Response(
+		protected List<ResponseTab> responses() {
+			String title = Main.game.isSillyMode()?"Delay":"Loiter";
+			ResponseTab t0 = new ResponseTab("Phone",null,
+					new Response(
 							(Main.game.getPlayer().isMainQuestUpdated() || Main.game.getPlayer().isSideQuestUpdated() || Main.game.getPlayer().isRelationshipQuestUpdated())
 								?"<span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>Quests</span>"
 								:"Quests",
@@ -257,10 +246,8 @@ public class PhoneDialogue {
 						public void effects() {
 							Main.game.getPlayer().setMainQuestUpdated(false);
 						}
-					};
-					
-				} else if (index == 2) {
-					return new Response(
+					},
+					new Response(
 							Main.getProperties().hasValue(PropertyValue.levelUpHightlight)
 								? "<span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>Perk Tree</span>"
 								:"Perk Tree",
@@ -269,40 +256,26 @@ public class PhoneDialogue {
 						public void effects() {
 							Main.getProperties().setValue(PropertyValue.levelUpHightlight, false);
 						}
-					};
-					
-				} else if (index == 3) {
-					return new Response("Spells", "View your spells page.", SpellManagement.CHARACTER_SPELLS_EARTH) {
+					},
+					new Response("Spells", "View your spells page.", SpellManagement.CHARACTER_SPELLS_EARTH) {
 						@Override
 						public void effects() {
 							SpellManagement.setSpellOwner(Main.game.getPlayer(), MENU);
 						}
-					};
-					
-				} else if (index == 4) {
-					return new Response("Fetishes", "View your fetishes page.", CHARACTER_FETISHES);
-					
-				} else if (index == 5) {
-					return new Response("Stats", "Take a detailed look at your stats.", CHARACTER_STATS);
-					
-				} else if (index == 6) {
-					return new Response("Selfie", "Take a selfie to get a good view of yourself.", CHARACTER_APPEARANCE);
-					
-				} else if (index == 7) {
-					if(Main.game.getPlayer().getCharactersEncountered().isEmpty()) {
-						return new Response("Contacts", "You haven't met anyone yet!", null);
-					} else {
-						return new Response("Contacts", "Even though you can't call anyone, on account of there being no phones in this world, you've still kept a record of all the people you've come into contact with.", CONTACTS) {
-							@Override
-							public void effects() {
-								Main.game.getPlayer().sortCharactersEncountered();
-								charactersEncountered = Main.game.getPlayer().getCharactersEncounteredAsGameCharacters(false);
-							}
-						};
-					}
-					
-				} else if (index == 8) {
-					return new Response(
+					},
+					new Response("Fetishes", "View your fetishes page.", CHARACTER_FETISHES),
+					new Response("Stats", "Take a detailed look at your stats.", CHARACTER_STATS),
+					new Response("Selfie", "Take a selfie to get a good view of yourself.", CHARACTER_APPEARANCE),
+					Main.game.getPlayer().getCharactersEncountered().isEmpty()
+					? new Response("Contacts", "You haven't met anyone yet!", null)
+					: new Response("Contacts", "Even though you can't call anyone, on account of there being no phones in this world, you've still kept a record of all the people you've come into contact with.", CONTACTS) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().sortCharactersEncountered();
+							charactersEncountered = Main.game.getPlayer().getCharactersEncounteredAsGameCharacters(false);
+						}
+					},
+					new Response(
 							(Main.getProperties().hasValue(PropertyValue.newWeaponDiscovered)
 									|| Main.getProperties().hasValue(PropertyValue.newClothingDiscovered)
 									|| Main.getProperties().hasValue(PropertyValue.newItemDiscovered)
@@ -314,56 +287,40 @@ public class PhoneDialogue {
 						public void effects() {
 							resetContentForRaces();
 						}
-					};
-					
-				} else if (index == 9) {
-					if(Main.game.getPlayer().isAbleToSelfTransform()) {
-						return new Response("Transform",
+					},
+					Main.game.getPlayer().isAbleToSelfTransform()
+					? new Response("Transform",
 								"Transform your body.",
 								BodyChanging.BODY_CHANGING_CORE) {
-							@Override
-							public void effects() {
-								BodyChanging.setTarget(Main.game.getPlayer());
-							}
-						};
-					} else {
-						return new Response("Transform", Main.game.getPlayer().getUnableToTransformDescription(), null);
+						@Override
+						public void effects() {
+							BodyChanging.setTarget(Main.game.getPlayer());
+						}
 					}
-					
-				} else if (index == 10) {
-					return new Response("Maps", "Take a look at maps of all the places you've visited.", MAP) {
+					: new Response("Transform", Main.game.getPlayer().getUnableToTransformDescription(), null),
+					new Response("Maps", "Take a look at maps of all the places you've visited.", MAP) {
 						@Override
 						public void effects() {
 							worldTypeMap = Main.game.getPlayer().getWorldLocation();
 						}
-					};
-					
-				} else if (index == 11) {
-					if(Main.game.isSavedDialogueNeutral()) {
-						return new Response("Combat Moves", "Adjust the core combat moves you are prepared to perform in combat.", CombatMovesSetup.COMBAT_MOVES_CORE) {
-							@Override
-							public void effects() {
-								CombatMovesSetup.setTarget(Main.game.getPlayer(), PhoneDialogue.MENU);
-							}
-						};
-					} else {
-						return new Response("Combat Moves", "You are too busy to change your core combat moves.", null);
+					},
+					Main.game.isSavedDialogueNeutral()
+					? new Response("Combat Moves", "Adjust the core combat moves you are prepared to perform in combat.", CombatMovesSetup.COMBAT_MOVES_CORE) {
+						@Override
+						public void effects() {
+							CombatMovesSetup.setTarget(Main.game.getPlayer(), PhoneDialogue.MENU);
+						}
 					}
-					
-				} else if (index == 12) {
-					if(!Main.game.isSavedDialogueNeutral()) {
-							return new Response("Masturbate", "You are too busy to masturbate right now. (Can only be performed in a neutral scene.)", null);
-							
-					} else if(!Main.game.getPlayer().getSexAvailabilityBasedOnLocation().getKey()) {
-						return new Response("Masturbate", Main.game.getPlayer().getSexAvailabilityBasedOnLocation().getValue(), null);
-						
-					} else if(Main.game.getPlayerCell().getPlace().isPopulated() && !Main.game.getPlayer().hasFetish(Fetish.FETISH_EXHIBITIONIST)) {
-						return new Response("Masturbate",
+					:	new Response("Combat Moves", "You are too busy to change your core combat moves.", null),
+					!Main.game.isSavedDialogueNeutral()
+					? new Response("Masturbate", "You are too busy to masturbate right now. (Can only be performed in a neutral scene.)", null)
+					: !Main.game.getPlayer().getSexAvailabilityBasedOnLocation().getKey()
+					? new Response("Masturbate", Main.game.getPlayer().getSexAvailabilityBasedOnLocation().getValue(), null)
+					: Main.game.getPlayerCell().getPlace().isPopulated() && !Main.game.getPlayer().hasFetish(Fetish.FETISH_EXHIBITIONIST)
+					? new Response("Masturbate",
 								"As you do not have the [style.colourFetish("+Fetish.FETISH_EXHIBITIONIST.getName(Main.game.getPlayer())+" fetish)], you are not comfortable with masturbating in a place where people could see you!",
-								null);
-						
-					} else {
-						return new ResponseSex("Masturbate",
+								null)
+					: new ResponseSex("Masturbate",
 								"Decide to take a break from what you're currently doing in order to masturbate.",
 								true,
 								true,
@@ -374,60 +331,50 @@ public class PhoneDialogue {
 									:null,
 								null,
 								AFTER_MASTURBATION,
-								UtilText.parseFromXMLFile("misc/misc", "MASTURBATION"));
-					}
-					
-				} else if (index == 13){
-					String title = Main.game.isSillyMode()?"Delay":"Loiter";
-					if(!Main.game.isSavedDialogueNeutral()) {
-						return new Response(title, "You can only loiter to pass the time when in a neutral dialogue scene!", null);
-					}
-					if(Main.game.getPlayerCell().getPlace().isDangerous()) {
-						return new Response(title, "You can only loiter to pass the time when in a safe area!", null);
-					}
-					if(Main.game.getPlayer().getLocationPlace().getPlaceType().isLoiteringEnabledOverride()) {
-						if(!Main.game.getPlayer().getLocationPlace().getPlaceType().isLoiteringEnabled()) {
-							return new Response(title, "This is not a suitable place in which to be loitering about!", null);
-						}
-					} else {
-						if(!Main.game.getPlayerCell().getType().isLoiteringEnabled()) {
-							return new Response(title, "This is not a suitable place in which to be loitering about!", null);
-						}
-					}
-					return new Response(title, "Think about loitering in this area for an as-yet undetermined length of time.", LOITER_SELECTION);
-					
-				} else if (index == 14){
-					if(!Main.game.getPlayer().isElementalSummoned()) {
-						if(Main.game.getPlayer().hasDiscoveredElemental()) {
-							return new Response("[el.Name]",
+								UtilText.parseFromXMLFile("misc/misc", "MASTURBATION")),
+					!Main.game.isSavedDialogueNeutral()
+					? new Response(title, "You can only loiter to pass the time when in a neutral dialogue scene!", null)
+					: Main.game.getPlayerCell().getPlace().isDangerous()
+					? new Response(title, "You can only loiter to pass the time when in a safe area!", null)
+					: !(Main.game.getPlayer().getLocationPlace().getPlaceType().isLoiteringEnabledOverride()
+							? Main.game.getPlayer().getLocationPlace().getPlaceType().isLoiteringEnabled()
+							: Main.game.getPlayerCell().getType().isLoiteringEnabled())
+					? new Response(title, "This is not a suitable place in which to be loitering about!", null)
+					: new Response(title, "Think about loitering in this area for an as-yet undetermined length of time.", LOITER_SELECTION),
+					!Main.game.getPlayer().isElementalSummoned()
+					? Main.game.getPlayer().hasDiscoveredElemental()
+					? new Response("[el.Name]",
 									"You have not summoned [el.name], so you cannot talk to [el.herHim]!"
 											+ "<br/>[style.italicsMinorGood(You can summon your elemental from your 'Spells' screen!)]",
-									null);
-						}
-						return new Response("Elemental",
+									null)
+					: new Response("Elemental",
 								"You have not summoned your elemental, so you cannot talk to them..."
 										+ "<br/>[style.italicsMinorGood(You can summon your elemental by learning an elemental-summoning spell and casting it from your 'Spells' screen!)]",
-								null);
-					}
-					if(!Main.game.isSavedDialogueNeutral()) {
-						return new Response("[el.Name]",
+								null)
+					: !Main.game.isSavedDialogueNeutral()
+					? new Response("[el.Name]",
 								Main.game.isInSex()
 									?"You cannot talk to [el.name] during sex!"
 									:(Main.game.isInCombat()
 										?"You cannot talk to [el.name] during combat!"
 										:"You cannot talk to [el.name] in this scene!"),
-								null);
-					}
-					return new Response("[el.Name]",
+								null)
+					: new Response("[el.Name]",
 							"Spend some time talking with [el.name].",
-							ElementalDialogue.ELEMENTAL_START);
-					
-				}
-				
-			} else if(responseTab==1) {
+							ElementalDialogue.ELEMENTAL_START));
+
+			if(Main.game.getPlayer().getIncubatingLitters().isEmpty())
+				return List.of(t0);
+
+			ResponseTab t1 = new ResponseTab("[style.colourYellowLight(Eggs)]");
 				Set<SexAreaOrifice> incubationAreas = Main.game.getPlayer().getIncubatingLitters().keySet();
 				List<Response> responses = new ArrayList<>();
-				
+				responses.add(new ResponseEffectsOnly("Back", "Put your phone away."){
+					@Override
+					public void effects() {
+						Main.game.restoreSavedContent(false);
+					}
+				});
 				if(incubationAreas.contains(SexAreaOrifice.VAGINA)) {
 					if(!Main.game.isSavedDialogueNeutral()) {
 						responses.add(new Response("Lay eggs (womb)", "You are too busy to lay eggs right now. (Can only be performed in a neutral scene.)", null));
@@ -568,10 +515,6 @@ public class PhoneDialogue {
 					}
 				}
 				
-				if(index>0 && index-1<responses.size()) {
-					return responses.get(index-1);
-				}
-				
 				// Removed due to description handling being too messy
 //				if(incubationAreas.size()>1) {
 //					Set<SexAreaOrifice> readyToLay = new HashSet<>();
@@ -602,18 +545,7 @@ public class PhoneDialogue {
 //						};
 //					}
 //				}
-			}
-			
-			if(index == 0) {
-				return new ResponseEffectsOnly("Back", "Put your phone away."){
-					@Override
-					public void effects() {
-						Main.game.restoreSavedContent(false);
-					}
-				};
-				
-			}
-			return null;
+			return List.of(t0,t1);
 		}
 
 		@Override

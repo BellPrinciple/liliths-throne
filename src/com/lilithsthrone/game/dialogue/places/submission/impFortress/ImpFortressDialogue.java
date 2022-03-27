@@ -1751,30 +1751,16 @@ public class ImpFortressDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			if(index == 0 || index == 1) {
-				return GUARDS_AFTER_COMBAT_VICTORY.getResponseTabTitle(index);
-			}
-			return null;
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==0) {
-				if (index == 1) {
-					return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
-						@Override
-						public void effects() {
-							banishImpGuards();
-						}
-					};
+		protected List<ResponseTab> responses() {
+			var r = GUARDS_AFTER_COMBAT_VICTORY.getResponses().subList(0,2);
+			r.get(0).response.clear();
+			r.get(0).set(1,new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
+				@Override
+				public void effects() {
+					banishImpGuards();
 				}
-				
-			} else if(responseTab==1) {
-				return GUARDS_AFTER_COMBAT_VICTORY.getResponse(responseTab, index);
-			}
-			
-			return null;
+			});
+			return r;
 		}
 	};
 	
@@ -3813,31 +3799,17 @@ public class ImpFortressDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			if(index == 0 || index == 1) {
-				return KEEP_AFTER_COMBAT_VICTORY.getResponseTabTitle(index);
-			}
-			return null;
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==0) {
-				if (index == 1) {
-					return new Response("Scare off", UtilText.parse(getBoss(), "Tell [npc.name] and [npc.her] imps to get out of here, and not come back."), KEEP_AFTER_SEX_VICTORY_SCARE_OFF) {
-						@Override
-						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/fortress"+getDialogueEncounterId(), "KEEP_AFTER_SEX_VICTORY_SCARE_OFF", getAllCharacters()));
-							clearFortress();
-						}
-					};
+		protected List<ResponseTab> responses() {
+			var r = KEEP_AFTER_COMBAT_VICTORY.getResponses().subList(0,2);
+			var rContinue = new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
+				@Override
+				public void effects() {
+					banishImpGuards();
 				}
-				
-			} else if(responseTab==1) {
-				return KEEP_AFTER_COMBAT_VICTORY.getResponse(responseTab, index);
-			}
-			
-			return null;
+			};
+			return List.of(
+				new ResponseTab(r.get(0).title,null,rContinue),
+				r.get(1));
 		}
 	};
 	

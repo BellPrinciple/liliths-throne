@@ -1627,13 +1627,8 @@ public class Sex {
 
 		@Override
 		public String getResponseTabTitle(int index) {
-			if(sexFinished
-					|| (getItemUseInformation()!=null && getItemUseInformation().getValue().getKey().isPlayer() && !isForcingItemUse(getItemUseInformation().getKey(), Main.game.getPlayer()))
-					|| isReadyToOrgasm(Main.game.getPlayer())
-					|| Main.sex.isCharacterDeniedOrgasm(Main.game.getPlayer())
-					|| (Main.sex.getTargetedPartner(Main.game.getPlayer())!=null && isReadyToOrgasm(Main.sex.getTargetedPartner(Main.game.getPlayer())))) {
+			if(irregular())
 				return null;
-			}
 			if(index==0) {
 				return "Misc. Actions";
 				
@@ -1984,12 +1979,23 @@ public class Sex {
 		
 		setOverridePlayerArousalRestriction(false);
 		
-		if(SEX_DIALOGUE.getResponseTabTitle(1)!=null && preOrgasmTargeting!=null) {
+		if(!irregular() && preOrgasmTargeting!=null) {
 			Main.game.setResponseTab(preOrgasmTargeting.getKey());
 			preOrgasmTargeting = null;
 		}
 		
 		turn++;
+	}
+
+	private boolean irregular() {
+		if(sexFinished)
+			return true;
+		var i = getItemUseInformation();
+		var player = Main.game.getPlayer();
+		return i!=null && i.getValue().getKey().isPlayer() && !isForcingItemUse(i.getKey(),player)
+		|| isReadyToOrgasm(player)
+		|| isCharacterDeniedOrgasm(player)
+		|| getTargetedPartner(player)!=null && isReadyToOrgasm(getTargetedPartner(player));
 	}
 
 	public void recalculateSexActions() {

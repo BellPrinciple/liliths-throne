@@ -195,18 +195,11 @@ public class RoomArthur {
 			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/arthursRoom", "ROOM_ARTHUR_LYSSIETH");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return ROOM_ARTHUR.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==0) {
-				if(index == 1) {
-					return new Response("Lyssieth", "You're already asking Arthur about Lyssieth.", null);
-					
-				}
-			}
-			return ROOM_ARTHUR.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			var r = ROOM_ARTHUR.getResponses();
+			r.get(0).response.clear();
+			r.get(0).response.set(1,new Response("Lyssieth", "You're already asking Arthur about Lyssieth.", null));
+			return r;
 		}
 	};
 	
@@ -220,17 +213,11 @@ public class RoomArthur {
 			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/arthursRoom", "ROOM_ARTHUR_LILAYA");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return ROOM_ARTHUR.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==0) {
-				if(index == 2) {
-					return new Response("Lilaya", "You're already asking Arthur about Lilaya.", null);
-				}
-			}
-			return ROOM_ARTHUR.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			var r = ROOM_ARTHUR.getResponses();
+			r.get(0).response.clear();
+			r.get(0).response.set(2,new Response("Lilaya", "You're already asking Arthur about Lilaya.", null));
+			return r;
 		}
 	};
 	
@@ -244,12 +231,8 @@ public class RoomArthur {
 			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/arthursRoom", "ROOM_ARTHUR_HYPNO_WATCH_START");
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return ROOM_ARTHUR.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return ROOM_ARTHUR.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return ROOM_ARTHUR.getResponses();
 		}
 	};
 	

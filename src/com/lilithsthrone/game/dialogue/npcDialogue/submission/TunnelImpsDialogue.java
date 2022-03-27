@@ -1257,30 +1257,16 @@ public class TunnelImpsDialogue {
 		}
 
 		@Override
-		public String getResponseTabTitle(int index) {
-			if(index == 0 || index == 1) {
-				return AFTER_COMBAT_VICTORY.getResponseTabTitle(index);
-			}
-			return null;
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(responseTab==0) {
-				if (index == 1) {
-					return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
-						@Override
-						public void effects() {
-							banishImpGroup();
-						}
-					};
+		protected List<ResponseTab> responses() {
+			var r = AFTER_COMBAT_VICTORY.getResponses().subList(0,2);
+			r.get(0).response.clear();
+			r.get(0).response.set(1,new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
+				@Override
+				public void effects() {
+					banishImpGroup();
 				}
-				
-			} else if(responseTab==1) {
-				return AFTER_COMBAT_VICTORY.getResponse(responseTab, index);
-			}
-			
-			return null;
+			});
+			return r;
 		}
 	};
 	

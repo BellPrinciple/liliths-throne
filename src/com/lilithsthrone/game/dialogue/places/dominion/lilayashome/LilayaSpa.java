@@ -1260,12 +1260,8 @@ public class LilayaSpa {
 			return sb.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SPA_RECEPTION.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SPA_RECEPTION.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SPA_RECEPTION.getResponses();
 		}
 	};
 
@@ -1286,12 +1282,8 @@ public class LilayaSpa {
 			return sb.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SPA_RECEPTION.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SPA_RECEPTION.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SPA_RECEPTION.getResponses();
 		}
 	};
 	
@@ -1733,12 +1725,8 @@ public class LilayaSpa {
 			return UtilText.parseFromXMLFile("places/dominion/lilayasHome/spa", "BATHING_AFTER_SEX", sexSlaves);
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SPA_CORE_BATHING.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SPA_CORE_BATHING.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SPA_CORE_BATHING.getResponses();
 		}
 	};
 
@@ -1764,12 +1752,8 @@ public class LilayaSpa {
 			return sb.toString();
 		}
 		@Override
-		public String getResponseTabTitle(int index) {
-			return SPA_CORE.getResponseTabTitle(index);
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SPA_CORE.getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return SPA_CORE.getResponses();
 		}
 	};
 
