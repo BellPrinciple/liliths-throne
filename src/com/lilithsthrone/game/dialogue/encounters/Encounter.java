@@ -5,8 +5,11 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
 
 import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.EquipClothingSetting;
@@ -60,6 +63,8 @@ import com.lilithsthrone.world.Weather;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import static java.util.stream.Collectors.toMap;
+
 /**
  * @since 0.1.0
  * @version 0.4
@@ -74,7 +79,13 @@ public interface Encounter {
 	}
 
 	default Map<EncounterType,Float> getDialogues() {
-		return Map.of();
+		return Mod.map.getOrDefault(this,List.of()).stream()
+		.collect(toMap(m->m,m->(float)m.chance.getAsDouble()));
+	}
+
+	default Scene initialiseEncounter(EncounterType node) {
+		assert node instanceof Mod;
+		return ((Mod)node).value.get();
 	}
 
 	boolean isAnyEncounterAvailable();
@@ -93,19 +104,30 @@ public interface Encounter {
 
 	List<String> getPlaceTypeIds();
 
+	default void add(Object key, DoubleSupplier chance, Supplier<Scene> value, boolean opportunistic) {
+		Mod.map.computeIfAbsent(this,k->new LinkedList<>())
+		.add(new Mod(key,chance,value,opportunistic));
+	}
+
+	default void remove(Object key) {
+		var t = Mod.map.get(this);
+		t.removeIf(m->key.equals(m.key));
+		if(t.isEmpty())
+			Mod.map.remove(this);
+	}
+
 	public static AbstractEncounter LILAYAS_HOME_CORRIDOR = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(
-					(Main.game.getCharactersPresent().isEmpty()
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USES_YOU, 5f)
-						:null),
-					(Main.game.getCharactersPresent().isEmpty()
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USING_OTHER_SLAVE, 5f)
-						:null));
+			var map = new HashMap<>(super.getDialogues());
+			if(Main.game.getCharactersPresent().isEmpty())
+				map.put(EncounterType.SLAVE_USES_YOU, 5f);
+			if(Main.game.getCharactersPresent().isEmpty())
+				map.put(EncounterType.SLAVE_USING_OTHER_SLAVE, 5f);
+			return map;
 		}
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.SLAVE_USES_YOU) {
 				List<NPC> slaves = new ArrayList<>();
 				List<NPC> hornySlaves = new ArrayList<>();
@@ -150,22 +172,21 @@ public interface Encounter {
 				}
 				return SlaveEncountersDialogue.getSlaveUsingOtherSlaveLilayaCorridor(slaves);
 
-			} else {
-				return null;
 			}
+			return super.initialiseEncounter(node);
 		}
 	};
 
 	public static AbstractEncounter LILAYAS_DUNGEON_PASSAGEWAY = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(
-					(Main.game.getCharactersPresent().isEmpty() && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("acexp_dungeon_explored"))
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USES_YOU, 5f)
-						:null));
+			var map = new HashMap<>(super.getDialogues());
+			if(Main.game.getCharactersPresent().isEmpty() && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.getDialogueFlagValueFromId("acexp_dungeon_explored")))
+				map.put(EncounterType.SLAVE_USES_YOU, 5f);
+			return map;
 		}
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.SLAVE_USES_YOU) {
 				List<NPC> slaves = new ArrayList<>();
 				List<NPC> hornySlaves = new ArrayList<>();
@@ -203,9 +224,8 @@ public interface Encounter {
 				
 				return null;
 
-			} else {
-				return null;
 			}
+			return super.initialiseEncounter(node);
 		}
 	};
 	
@@ -237,28 +257,24 @@ public interface Encounter {
 										&& Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_HARPY_PACIFICATION)
 										&& Main.game.getHourOfDay()>=17 && Main.game.getHourOfDay()<=21;
 			}
-
-			return Util.newHashMapOfValues(
-					Main.game.getCurrentWeather()==Weather.MAGIC_STORM
-						?new Value<EncounterType, Float>(EncounterType.DOMINION_STORM_ATTACK, 15f)
-						:null,
-					cultistAvailable
-						?new Value<EncounterType, Float>(EncounterType.SPECIAL_DOMINION_CULTIST, 5f)
-						:null,
-					Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
-						?new Value<EncounterType, Float>(EncounterType.DOMINION_EXPRESS_CENTAUR, 1f)
-						:null,
-					new Value<EncounterType, Float>(EncounterType.SLAVE_USES_YOU, 5f),
-					wesQuestAvailable
-						?new Value<EncounterType, Float>(EncounterType.WES_QUEST_START, 50f)
-						:null,
-					Main.game.getPlayer().getName(false).equalsIgnoreCase("Kinariu") && !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.foundHappiness)
-						?new Value<EncounterType, Float>(EncounterType.DOMINION_STREET_FIND_HAPPINESS, 10f)
-						:null);
+			var map = new HashMap<>(super.getDialogues());
+			if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM)
+				map.put(EncounterType.DOMINION_STORM_ATTACK, 15f);
+			if(cultistAvailable)
+				map.put(EncounterType.SPECIAL_DOMINION_CULTIST, 5f);
+			if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM)
+				map.put(EncounterType.DOMINION_EXPRESS_CENTAUR, 1f);
+			map.put(EncounterType.SLAVE_USES_YOU, 5f);
+			if(wesQuestAvailable)
+				map.put(EncounterType.WES_QUEST_START, 50f);
+			if(Main.game.getPlayer().getName(false).equalsIgnoreCase("Kinariu")
+					&& !Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.foundHappiness))
+				map.put(EncounterType.DOMINION_STREET_FIND_HAPPINESS, 10f);
+			return map;
 		}
 		
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.DOMINION_STORM_ATTACK && Main.game.getCurrentWeather() == Weather.MAGIC_STORM) {
 				NPC npc = new DominionAlleywayAttacker(Gender.getGenderFromUserPreferences(false, false));
 				try {
@@ -318,22 +334,23 @@ public interface Encounter {
 				return WesQuest.WES_QUEST_START;
 			}
 			
-			return null;
+			return super.initialiseEncounter(node);
 		}
 	};
 
 	public static AbstractEncounter DOMINION_BOULEVARD = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(
-					new Value<EncounterType, Float>(EncounterType.DOMINION_STREET_RENTAL_MOMMY, 10f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_STREET_PILL_HANDOUT, 5f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_EXPRESS_CENTAUR, 1f),
-					new Value<EncounterType, Float>(EncounterType.SLAVE_USES_YOU, 5f));
+			var map = new HashMap<>(super.getDialogues());
+			map.put(EncounterType.DOMINION_STREET_RENTAL_MOMMY, 10f);
+			map.put(EncounterType.DOMINION_STREET_PILL_HANDOUT, 5f);
+			map.put(EncounterType.DOMINION_EXPRESS_CENTAUR, 1f);
+			map.put(EncounterType.SLAVE_USES_YOU, 5f);
+			return map;
 		}
 		
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) { // None of these encounters work during a storm
 				return null;
 			}
@@ -382,24 +399,21 @@ public interface Encounter {
 				return SlaveEncountersDialogue.getSlaveUsesYouStreet(slave);
 			}
 			
-			return null;
+			return super.initialiseEncounter(node);
 		}
 	};
 
 	public static AbstractEncounter DOMINION_ALLEY = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			Map<EncounterType, Float> map = Util.newHashMapOfValues(
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_ITEM, 3f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_CLOTHING, 2f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_WEAPON, 1f),
-					(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USES_YOU, 5f)
-						:null),
-					(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USING_OTHER_SLAVE, 5f)
-						:null));
-
+			var map = new HashMap<>(super.getDialogues());
+			map.put(EncounterType.DOMINION_FIND_ITEM, 3f);
+			map.put(EncounterType.DOMINION_FIND_CLOTHING, 2f);
+			map.put(EncounterType.DOMINION_FIND_WEAPON, 1f);
+			if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM)
+				map.put(EncounterType.SLAVE_USES_YOU, 5f);
+			if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM)
+				map.put(EncounterType.SLAVE_USING_OTHER_SLAVE, 5f);
 			if(Main.game.isStarted() && DominionPlaces.isCloseToEnforcerHQ()) {
 				map.put(EncounterType.DOMINION_ALLEY_ATTACK, 10f);
 				if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
@@ -418,7 +432,7 @@ public interface Encounter {
 		}
 		
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.DOMINION_ALLEY_ATTACK) {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
@@ -518,60 +532,60 @@ public interface Encounter {
 				return SlaveEncountersDialogue.getSlaveUsingOtherSlaveAlleyway(slaves);
 			}
 			
-			return null;
+			return super.initialiseEncounter(node);
 		}
 	};
 
 	public static AbstractEncounter DOMINION_DARK_ALLEY = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-            Map<EncounterType, Float> map = new HashMap<>();
+			var map = new HashMap<>(super.getDialogues());
+			map.put(EncounterType.DOMINION_ALLEY_ATTACK, 15f);
+			return map;
+		}
+		@Override
+		public Scene initialiseEncounter(EncounterType node) {
+			if(node == EncounterType.DOMINION_ALLEY_ATTACK) {
+				// Prioritise re-encountering the NPC on this tile:
+				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
+				if(!encounterPossibilities.isEmpty()) {
+					NPC encounterNpc = Util.randomItemFrom(encounterPossibilities);
+					Main.game.setActiveNPC(encounterNpc);
+					return Main.game.getActiveNPC().getEncounterDialogue();
+				}
+				Main.game.setActiveNPC(new DominionSuccubusAttacker());
 
-            map.put(EncounterType.DOMINION_ALLEY_ATTACK, 15f);
-
-            return map;
-        }
-        @Override
-		protected Scene initialiseEncounter(EncounterType node) {
-
-			// Prioritise re-encountering the NPC on this tile:
-			List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
-			if(!encounterPossibilities.isEmpty()) {
-				NPC encounterNpc = Util.randomItemFrom(encounterPossibilities);
-				Main.game.setActiveNPC(encounterNpc);
+				try {
+					Main.game.addNPC(Main.game.getActiveNPC(), false);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
 				return Main.game.getActiveNPC().getEncounterDialogue();
 			}
-
-			Main.game.setActiveNPC(new DominionSuccubusAttacker());
-
-			try {
-				Main.game.addNPC(Main.game.getActiveNPC(), false);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return Main.game.getActiveNPC().getEncounterDialogue();
+			return super.initialiseEncounter(node);
 		}
 	};
 
 	public static AbstractEncounter DOMINION_CANAL = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(
-					new Value<EncounterType, Float>(EncounterType.DOMINION_ALLEY_ATTACK, 10f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_ITEM, 3f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_CLOTHING, 2f),
-					new Value<EncounterType, Float>(EncounterType.DOMINION_FIND_WEAPON, 1f),
-					Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
-							&& (!Main.game.getDialogueFlags().hasSavedLong("enforcer_encounter_minutes") || Main.game.getDialogueFlags().getSavedLong("enforcer_encounter_minutes")+(4*60)<Main.game.getMinutesPassed())
-						?new Value<EncounterType, Float>(EncounterType.DOMINION_ALLEY_ENFORCERS, 2.5f)
-						:null,
-					Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
-						?new Value<EncounterType, Float>(EncounterType.SLAVE_USES_YOU, 5f)
-						:null);
+			var map = new HashMap<>(super.getDialogues());
+			map.put(EncounterType.DOMINION_ALLEY_ATTACK, 10f);
+			map.put(EncounterType.DOMINION_FIND_ITEM, 3f);
+			map.put(EncounterType.DOMINION_FIND_CLOTHING, 2f);
+			map.put(EncounterType.DOMINION_FIND_WEAPON, 1f);
+			if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
+					&& (!Main.game.getDialogueFlags().hasSavedLong("enforcer_encounter_minutes")
+							|| Main.game.getDialogueFlags().getSavedLong("enforcer_encounter_minutes")+(4*60)<Main.game.getMinutesPassed()))
+				map.put(EncounterType.DOMINION_ALLEY_ENFORCERS, 2.5f);
+			if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM)
+				map.put(EncounterType.SLAVE_USES_YOU, 5f);
+			return map;
 		}
 		
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if(node==EncounterType.DOMINION_ALLEY_ATTACK) {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
@@ -661,37 +675,40 @@ public interface Encounter {
 				return SlaveEncountersDialogue.getSlaveUsesYouAlleyway(slave);
 			}
 			
-			return null;
+			return super.initialiseEncounter(node);
 		}
 	};
 	
 	public static AbstractEncounter DOMINION_EXPRESS = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(new Value<EncounterType, Float>(EncounterType.DOMINION_EXPRESS_CENTAUR, 10f));
+			var map = new HashMap<>(super.getDialogues());
+			map.put(EncounterType.DOMINION_EXPRESS_CENTAUR, 10f);
+			return map;
 		}
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if(node==EncounterType.DOMINION_EXPRESS_CENTAUR) {
 				AbstractClothing collar = Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK);
 				if(collar!=null && collar.getClothingType().getId().equals("innoxia_neck_filly_choker")) { // When wearing filly choker, get approached by horny centaurs:
 					return DominionExpressCentaurDialogue.initEncounter(); // Can return null if player cannot access mouth or anus.
 				}
 			}
-			return null;
+			return super.initialiseEncounter(node);
 		}
 	};
 
 	public static AbstractEncounter HARPY_NEST_WALKWAYS = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(
-					new Value<EncounterType, Float>(EncounterType.HARPY_NEST_ATTACK, 12f),
-					new Value<EncounterType, Float>(EncounterType.HARPY_NEST_FIND_ITEM, 4f));
+			var map = new HashMap<>(super.getDialogues());
+			map.put(EncounterType.HARPY_NEST_ATTACK, 12f);
+			map.put(EncounterType.HARPY_NEST_FIND_ITEM, 4f);
+			return map;
 		}
 		
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if (node == EncounterType.HARPY_NEST_ATTACK && !Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_HARPY_PACIFICATION)) {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
@@ -738,20 +755,21 @@ public interface Encounter {
 				
 			}
 			
-			return null;
+			return super.initialiseEncounter(node);
 		}
 	};
 
 	public static AbstractEncounter HARPY_NEST_LOOK_FOR_TROUBLE = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			return Util.newHashMapOfValues(
-					new Value<EncounterType, Float>(EncounterType.HARPY_NEST_ATTACK, 12f),
-					new Value<EncounterType, Float>(EncounterType.HARPY_NEST_FIND_ITEM, 4f));
+			var map = new HashMap<>(super.getDialogues());
+			map.put(EncounterType.HARPY_NEST_ATTACK, 12f);
+			map.put(EncounterType.HARPY_NEST_FIND_ITEM, 4f);
+			return map;
 		}
 
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if (node == EncounterType.HARPY_NEST_ATTACK) {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
@@ -798,22 +816,20 @@ public interface Encounter {
 				
 			}
 			
-			return null;
+			return super.initialiseEncounter(node);
 		}
 	};
 
 	public static AbstractEncounter SUBMISSION_TUNNELS = new AbstractEncounter() {
 		@Override
-                public Map<EncounterType, Float> getDialogues() {
-                    Map<EncounterType, Float> map = new HashMap<>();
-
-                    map.put(EncounterType.SUBMISSION_TUNNEL_ATTACK, 20f);
-                    map.put(EncounterType.SUBMISSION_FIND_ITEM, 10f);
-
-                    return map;
-                }
-                @Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Map<EncounterType, Float> getDialogues() {
+			var map = new HashMap<>(super.getDialogues());
+			map.put(EncounterType.SUBMISSION_TUNNEL_ATTACK, 20f);
+			map.put(EncounterType.SUBMISSION_FIND_ITEM, 10f);
+			return map;
+		}
+		@Override
+		public Scene initialiseEncounter(EncounterType node) {
 			
 			if(node == EncounterType.SUBMISSION_TUNNEL_ATTACK) {
 				List<String> impAdjectives = new ArrayList<>();
@@ -1037,16 +1053,15 @@ public interface Encounter {
 				Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getInventory().addItem((AbstractItem) randomItem);
 				return SubmissionEncounterDialogue.FIND_ITEM;
 
-			} else {
-				return null;
 			}
+			return super.initialiseEncounter(node);
 		}
 	};
 
 	public static AbstractEncounter BAT_CAVERN = new AbstractEncounter() {
         @Override
         public Map<EncounterType, Float> getDialogues() {
-            Map<EncounterType, Float> map = new HashMap<>();
+            Map<EncounterType, Float> map = new HashMap<>(super.getDialogues());
             
             map.put(EncounterType.BAT_CAVERN_LURKER_ATTACK, 8f);
             map.put(EncounterType.BAT_CAVERN_SLIME_ATTACK, 6f);
@@ -1122,7 +1137,7 @@ public interface Encounter {
         }
 
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if (node == EncounterType.BAT_CAVERN_LURKER_ATTACK) {
 
 				// Prioritise re-encountering the NPC on this tile:
@@ -1182,14 +1197,14 @@ public interface Encounter {
 				return BatCavernsEncounterDialogue.REBEL_BASE_PASSWORD_TWO;
 			}
 
-			return null;
+			return super.initialiseEncounter(node);
 		}
 	};
 
 	public static AbstractEncounter REBEL_BASE = new AbstractEncounter() {
         @Override
         public Map<EncounterType, Float> getDialogues() {
-            Map<EncounterType, Float> map = new HashMap<>();
+            Map<EncounterType, Float> map = new HashMap<>(super.getDialogues());
             if(Main.game.getPlayer().hasQuestInLine(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_EXPLORATION) &&
                     !Main.game.getDialogueFlags().values.contains(DialogueFlagValue.rebelBaseInsaneSurvivorEncountered)) {
                 map.put(EncounterType.REBEL_BASE_INSANE_SURVIVOR_ATTACK, 100f);
@@ -1197,7 +1212,7 @@ public interface Encounter {
             return map;
         }
         @Override
-        protected Scene initialiseEncounter(EncounterType node) {
+				public Scene initialiseEncounter(EncounterType node) {
             if(node == EncounterType.REBEL_BASE_INSANE_SURVIVOR_ATTACK) {
                 Main.game.setActiveNPC(new RebelBaseInsaneSurvivor(Gender.getGenderFromUserPreferences(false, false)));
                 try {
@@ -1207,16 +1222,15 @@ public interface Encounter {
                 }
                 return Main.game.getActiveNPC().getEncounterDialogue();
 
-            } else {
-                return null;
             }
-        }
+			return super.initialiseEncounter(node);
+		}
     };
 
 	public static AbstractEncounter VENGAR_CAPTIVE_HALL = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			Map<EncounterType, Float> map = new HashMap<>();// Silence delivers if pregnant
+			Map<EncounterType, Float> map = new HashMap<>(super.getDialogues());// Silence delivers if pregnant
 			
 			map.put(EncounterType.VENGAR_CAPTIVE_SERVE, 40f);
 			map.put(EncounterType.VENGAR_CAPTIVE_GROPED, 20f);
@@ -1247,7 +1261,7 @@ public interface Encounter {
 			return super.getBaseRandomEncounter(forceEncounter);
 		}
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.VENGAR_CAPTIVE_SERVE) {
 				return VengarCaptiveDialogue.VENGARS_HALL_SERVE;
 				
@@ -1264,14 +1278,14 @@ public interface Encounter {
 				return VengarCaptiveDialogue.VENGARS_HALL_GROUP_SEX;
 			}
 			
-			return null;
+			return super.initialiseEncounter(node);
 		}
 	};
 
 	public static AbstractEncounter VENGAR_CAPTIVE_BEDROOM = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
-			Map<EncounterType, Float> map = new HashMap<>();
+			Map<EncounterType, Float> map = new HashMap<>(super.getDialogues());
 			
 			if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.vengarCaptiveRoomCleaned)) {
 				map.put(EncounterType.VENGAR_CAPTIVE_CLEAN_ROOM, 50f);
@@ -1294,7 +1308,7 @@ public interface Encounter {
 			return super.getBaseRandomEncounter(forceEncounter);
 		}
 		@Override
-		protected Scene initialiseEncounter(EncounterType node) {
+		public Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.VENGAR_CAPTIVE_CLEAN_ROOM) {
 				return VengarCaptiveDialogue.VENGARS_BEDROOM_CLEAN;
 				
@@ -1305,7 +1319,7 @@ public interface Encounter {
 				return VengarCaptiveDialogue.VENGARS_BEDROOM_BARRED;
 			}
 			
-			return null;
+			return super.initialiseEncounter(node);
 		}
 	};
 
@@ -1342,32 +1356,14 @@ public interface Encounter {
 	Table<Encounter> table = new Table<>(s->s){{
 		// Modded encounters:
 		forEachMod("/encounters",null,null,(f,n,a)->{
-			var e = new AbstractEncounter(f,a,true){
-				@Override
-				protected Scene initialiseEncounter(EncounterType node) {
-					return null;
-				}
-				@Override
-				public Map<EncounterType, Float> getDialogues() {
-					return null;
-				}
-			};
+			var e = new AbstractEncounter(f,a,true);
 			e.id = n;
 			add(n,e);
 		});
 		// External res encounters:
 		forEachExternal("res/encounters",null,null,(f,n,a)->{
 			var id = "innoxia_"+n;
-			var e = new AbstractEncounter(f,a,false){
-				@Override
-				protected Scene initialiseEncounter(EncounterType node) {
-					return null;
-				}
-				@Override
-				public Map<EncounterType, Float> getDialogues() {
-					return null;
-				}
-			};
+			var e = new AbstractEncounter(f,a,false);
 			e.id = id;
 			add(id,e);
 		});
@@ -1384,4 +1380,17 @@ public interface Encounter {
 			}
 		}
 	}};
+
+	final class Mod extends EncounterType {
+		private static final HashMap<Encounter,List<Mod>> map = new HashMap<>();
+		private final Object key;
+		private final DoubleSupplier chance;
+		private final Supplier<DialogueNode> value;
+		private Mod(Object k, DoubleSupplier c, Supplier<DialogueNode> v, boolean o) {
+			super(o);
+			key = k;
+			chance = c;
+			value = v;
+		}
+	}
 }

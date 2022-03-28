@@ -37,7 +37,7 @@ import com.lilithsthrone.world.places.PlaceType;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractEncounter implements Encounter {
+public class AbstractEncounter implements Encounter {
 
 	String id;
 	protected static AbstractCoreItem randomItem;
@@ -367,8 +367,6 @@ public abstract class AbstractEncounter implements Encounter {
 		
 		return null;
 	}
-	
-	protected abstract Scene initialiseEncounter(EncounterType node);
 
 	@Override
 	public boolean isAnyEncounterAvailable() {
