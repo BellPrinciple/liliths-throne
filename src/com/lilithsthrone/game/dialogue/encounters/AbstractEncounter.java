@@ -44,9 +44,7 @@ public abstract class AbstractEncounter implements Encounter {
 	
 	protected static final double INCEST_ENCOUNTER_RATE = 0.2f;
 	protected static double IncestEncounterRate() { return INCEST_ENCOUNTER_RATE; }
-	
-	protected static Map<String, List<AbstractEncounter>> additionalPlaceTypeEncounters = new HashMap<>();
-	
+
 	private boolean mod;
 	private boolean fromExternalFile;
 	private String author;
@@ -144,10 +142,12 @@ public abstract class AbstractEncounter implements Encounter {
 		return fromExternalFile;
 	}
 
+	@Override
 	public String getAuthor() {
 		return author;
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -369,9 +369,8 @@ public abstract class AbstractEncounter implements Encounter {
 	}
 	
 	protected abstract Scene initialiseEncounter(EncounterType node);
-	
-	public abstract Map<EncounterType, Float> getDialogues();
 
+	@Override
 	public boolean isAnyEncounterAvailable() {
 		return getBaseRandomEncounter(true)!=null;
 	}
@@ -382,10 +381,12 @@ public abstract class AbstractEncounter implements Encounter {
 	 * @param forceEncounter Forces an encounter to be selected. (Will still return null if the encounter list is empty.)
 	 * @return null if no encounter.
 	 */
+	@Override
 	public Scene getRandomEncounter(boolean forceEncounter) {
 		return getBaseRandomEncounter(forceEncounter);
 	}
 
+	@Override
 	public boolean isAnyBaseTriggerChanceOverOneHundred() {
 		if(this.isFromExternalFile()) {
 			for(ExternalEncounterData data : possibleEncounters) {
@@ -407,6 +408,7 @@ public abstract class AbstractEncounter implements Encounter {
 	/**
 	 * @return The sum of all possible encounter chances which this AbstractEncounter contains. Will typically be a value under 100.
 	 */
+	@Override
 	public float getTotalChanceValue() {
 		float total = 0;
 		if(this.isFromExternalFile()) {
@@ -569,6 +571,7 @@ public abstract class AbstractEncounter implements Encounter {
 		return randomItem;
 	}
 
+	@Override
 	public List<String> getPlaceTypeIds() {
 		return placeTypeIds;
 	}

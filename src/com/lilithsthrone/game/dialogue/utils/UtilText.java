@@ -163,7 +163,6 @@ import com.lilithsthrone.game.dialogue.AbstractDialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.game.dialogue.encounters.Encounter;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.InventorySlot;
@@ -10079,8 +10078,8 @@ public class UtilText {
 		for(var upgrade : PlaceUpgrade.getAllPlaceUpgrades()) {
 			engine.put("PLACE_UPGRADE_"+PlaceUpgrade.getIdFromPlaceUpgrade(upgrade), upgrade);
 		}
-		for(AbstractEncounter encounter : Encounter.getAllEncounters()) {
-			engine.put("ENCOUNTER_"+Encounter.getIdFromEncounter(encounter), encounter);
+		for(var encounter : Encounter.table.list()) {
+			engine.put("ENCOUNTER_"+encounter.getId(),encounter);
 		}
 		for(InventoryInteraction interaction : InventoryInteraction.values()) {
 			engine.put("INVENTORY_INTERACTION_"+interaction.toString(), interaction);
