@@ -1,7 +1,7 @@
 package com.lilithsthrone.world.places;
 
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
+import com.lilithsthrone.game.dialogue.encounters.Encounter;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.world.WorldRegion;
 
@@ -18,7 +18,7 @@ public class AbstractGlobalPlaceType extends AbstractPlaceType {
 			String tooltipDescription,
 			Colour colour,
 			DialogueNode dialogue,
-			AbstractEncounter encounterType,
+			Encounter encounterType,
 			String virginityLossDescription) {
 		this(worldRegion, name, tooltipDescription, SVGPath, colour, colour, dialogue, encounterType, virginityLossDescription);
 	}
@@ -30,7 +30,7 @@ public class AbstractGlobalPlaceType extends AbstractPlaceType {
 			Colour colour,
 			Colour backgroundColour,
 			DialogueNode dialogue,
-			AbstractEncounter encounterType,
+			Encounter encounterType,
 			String virginityLossDescription) {
 		super(worldRegion, name, tooltipDescription, SVGPath, colour, dialogue, Darkness.DAYLIGHT, encounterType, virginityLossDescription);
 		if(backgroundColour!=null) {

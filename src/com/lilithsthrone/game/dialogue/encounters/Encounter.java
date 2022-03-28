@@ -67,6 +67,32 @@ import com.lilithsthrone.world.places.PlaceType;
  */
 public interface Encounter {
 
+	String getId();
+
+	default String getAuthor() {
+		return null;
+	}
+
+	default Map<EncounterType,Float> getDialogues() {
+		return Map.of();
+	}
+
+	boolean isAnyEncounterAvailable();
+
+	/**
+	 * Returns a random encounter from the list, or null if no encounter was selected.
+	 *
+	 * @param forceEncounter Forces an encounter to be selected. (Will still return null if the encounter list is empty.)
+	 * @return null if no encounter.
+	 */
+	DialogueNode getRandomEncounter(boolean forceEncounter);
+
+	boolean isAnyBaseTriggerChanceOverOneHundred();
+
+	float getTotalChanceValue();
+
+	List<String> getPlaceTypeIds();
+
 	public static AbstractEncounter LILAYAS_HOME_CORRIDOR = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
@@ -1145,7 +1171,7 @@ public interface Encounter {
 				Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getInventory().addItem((AbstractItem) randomItem);
 				
 				return BatCavernsEncounterDialogue.FIND_ITEM;
-			
+
 			} else if (node == EncounterType.BAT_CAVERN_REBEL_BASE_DISCOVERED) {
 				return BatCavernsEncounterDialogue.REBEL_BASE_DISCOVERED;
 
@@ -1284,13 +1310,13 @@ public interface Encounter {
 	};
 
 	//FIXME private
-	Map<String,List<AbstractEncounter>> addedEncounters = new HashMap<>();
+	Map<String,List<Encounter>> addedEncounters = new HashMap<>();
 	
 	/**
 	 * @return A list of Encounters which are associated with the placeType (which have been added via external file).
 	 *  Returns an empty list if no associated encounters are found.
 	 */
-	static List<AbstractEncounter> getAddedEncounters(String placeTypeId) {
+	static List<Encounter> getAddedEncounters(String placeTypeId) {
 		addedEncounters.putIfAbsent(placeTypeId, new ArrayList<>());
 		return addedEncounters.get(placeTypeId);
 	}
@@ -1299,21 +1325,21 @@ public interface Encounter {
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
 	@Deprecated
-	static AbstractEncounter getEncounterFromId(String id) {
+	static Encounter getEncounterFromId(String id) {
 		return table.of(id);
 	}
 
 	@Deprecated
-	static String getIdFromEncounter(AbstractEncounter encounter) {
+	static String getIdFromEncounter(Encounter encounter) {
 		return encounter.getId();
 	}
 
 	@Deprecated
-	static List<AbstractEncounter> getAllEncounters() {
+	static List<Encounter> getAllEncounters() {
 		return table.list();
 	}
 
-	Table<AbstractEncounter> table = new Table<>(s->s){{
+	Table<Encounter> table = new Table<>(s->s){{
 		// Modded encounters:
 		forEachMod("/encounters",null,null,(f,n,a)->{
 			var e = new AbstractEncounter(f,a,true){
@@ -1349,7 +1375,7 @@ public interface Encounter {
 		addFields(Encounter.class,AbstractEncounter.class,(n,e)->e.id=n);
 
 		// Add additional place types which can trigger encounters to the 'addedEncounters' map
-		for(AbstractEncounter encounter : list()) {
+		for(var encounter : list()) {
 			if(encounter.getPlaceTypeIds()!=null) {
 				for(String placeId : encounter.getPlaceTypeIds()) {
 					addedEncounters.putIfAbsent(placeId, new ArrayList<>());

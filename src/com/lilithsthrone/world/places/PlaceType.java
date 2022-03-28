@@ -19,7 +19,6 @@ import com.lilithsthrone.game.character.race.SubspeciesSpawnRarity;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueManager;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.game.dialogue.encounters.Encounter;
 import com.lilithsthrone.game.dialogue.npcDialogue.dominion.DaddyDialogue;
 import com.lilithsthrone.game.dialogue.places.dominion.DemonHome;
@@ -122,9 +121,9 @@ public interface PlaceType {
 		return PresetColour.MAP_BACKGROUND;
 	}
 
-	default AbstractEncounter getEncounterType() {
-		var map = Encounter.getAddedEncounters(getId()).stream().collect(toMap(e->e,AbstractEncounter::getTotalChanceValue));
-		if(map.keySet().stream().anyMatch(AbstractEncounter::isAnyBaseTriggerChanceOverOneHundred))
+	default Encounter getEncounterType() {
+		var map = Encounter.getAddedEncounters(getId()).stream().collect(toMap(e->e,Encounter::getTotalChanceValue));
+		if(map.keySet().stream().anyMatch(Encounter::isAnyBaseTriggerChanceOverOneHundred))
 			map.keySet().removeIf(e->!e.isAnyBaseTriggerChanceOverOneHundred());
 		return Util.getRandomObjectFromWeightedFloatMap(map);
 	}
@@ -5512,7 +5511,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in the Rat Warrens") {
 		@Override
-		public AbstractEncounter getEncounterType() {
+		public Encounter getEncounterType() {
 			if(Main.game.getPlayer().isCaptive()) {
 				return Encounter.VENGAR_CAPTIVE_HALL;
 			}
@@ -5551,7 +5550,7 @@ public interface PlaceType {
 			null,
 			"in the Rat Warrens") {
 		@Override
-		public AbstractEncounter getEncounterType() {
+		public Encounter getEncounterType() {
 			if(Main.game.getPlayer().isCaptive()) {
 				return Encounter.VENGAR_CAPTIVE_BEDROOM;
 			}
