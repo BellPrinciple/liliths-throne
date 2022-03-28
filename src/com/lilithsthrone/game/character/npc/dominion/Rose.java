@@ -7,6 +7,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.lilithsthrone.game.Game;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -335,7 +336,7 @@ public class Rose extends NPC {
 					}
 					
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true);
 					}
 				};

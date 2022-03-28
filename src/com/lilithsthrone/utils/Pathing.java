@@ -13,7 +13,6 @@ import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.effects.TreeEntry;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.MapTravelType;
 import com.lilithsthrone.main.Main;
@@ -218,7 +217,7 @@ public class Pathing {
 		int totalTimePassed = 0;
 		for(Cell c : getPathingCells()) {
 			Main.game.getPlayer().setLocation(c.getType(), c.getLocation(), false);
-			DialogueNode dialogue = c.getDialogue(true);
+			var dialogue = c.getDialogue(true);
 			
 			if(dialogue!=null) {
 				totalTimePassed += Main.game.getModifierTravelTime(c.getPlace().getPlaceType().isLand(), dialogue.getSecondsPassed());
@@ -298,7 +297,7 @@ public class Pathing {
 	private static int calculateTravelTime(List<Cell> cellRoute, boolean withModifiedTravelTime) {
 		int seconds = 0;
 		for(Cell c : cellRoute) {
-			DialogueNode dialogue = c.getDialogue(false);
+			var dialogue = c.getDialogue(false);
 			if(dialogue!=null) {
 				if(withModifiedTravelTime) {
 					seconds += Main.game.getModifierTravelTime(c.getPlace().getPlaceType().isLand(), dialogue.getSecondsPassed());

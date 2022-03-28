@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.places.dominion.harpyNests.HarpyNestBimbo;
 import com.lilithsthrone.game.dialogue.places.dominion.harpyNests.HarpyNestDominant;
@@ -50,7 +51,7 @@ public class DialogueManager {
 		return allDialogues;
 	}
 	
-	public static DialogueNode getDialogueFromId(String id) {
+	public static Scene getDialogueFromId(String id) {
 		id = id.trim(); // Just make sure that any parsed ids have been trimmed
 		if(id==null || id.equalsIgnoreCase("null") || id.equalsIgnoreCase("empty") || id.isEmpty()) {
 			return null;
@@ -62,10 +63,8 @@ public class DialogueManager {
 			return Main.game.getDefaultDialogue(true);
 			
 		} else if(id.equalsIgnoreCase("defaultForceEncounter")) {
-			DialogueNode dn = Main.game.getDefaultDialogue(true, true);
-//			System.out.println("Manager returning: "+dn.getId());
-			return dn;
-			
+			return Main.game.getDefaultDialogue(true, true);
+
 		}
 		
 		id = Util.getClosestStringMatch(id, idToDialogueMap.keySet());

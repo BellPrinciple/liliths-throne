@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
 import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -768,7 +769,7 @@ public class AlleywayProstituteDialogue {
 				if (index == 1) {
 					return new Response("Continue", "Carry on your way.", AFTER_COMBAT_DEFEAT){
 						@Override
-						public DialogueNode getNextDialogue() {
+						public Scene getNextDialogue() {
 							return Main.game.getDefaultDialogue(false);
 						}
 					};

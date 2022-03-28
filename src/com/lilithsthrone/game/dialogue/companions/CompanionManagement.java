@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import com.lilithsthrone.controller.MainController;
 import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.ObedienceLevel;
@@ -62,10 +63,10 @@ public class CompanionManagement {
 
 	private static DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 	
-	private static DialogueNode coreNode;
+	private static Scene coreNode;
 	private static int defaultResponseTab;
 	
-	public static DialogueNode getCoreNode() {
+	public static Scene getCoreNode() {
 		return coreNode;
 	}
 
@@ -73,7 +74,7 @@ public class CompanionManagement {
 		return defaultResponseTab;
 	}
 
-	public static void initManagement(DialogueNode coreNode, int defaultResponseTab, NPC targetedCharacter) {
+	public static void initManagement(Scene coreNode, int defaultResponseTab, NPC targetedCharacter) {
 		if(Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.NORMAL) {
 			Main.game.saveDialogueNode();
 		}

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -922,7 +923,7 @@ public class LilayaHomeGeneric {
 					}
 					
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true);
 					}
 				};

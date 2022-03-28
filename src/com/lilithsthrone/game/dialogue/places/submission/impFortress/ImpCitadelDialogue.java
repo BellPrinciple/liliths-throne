@@ -420,8 +420,8 @@ public class ImpCitadelDialogue {
 		}
 
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return PlaceType.SUBMISSION_IMP_FORTRESS_DEMON.getDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return PlaceType.SUBMISSION_IMP_FORTRESS_DEMON.getDialogue(false).getResponses();
 		}
 	};
 	
@@ -2085,8 +2085,8 @@ public class ImpCitadelDialogue {
 		}
 
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return PlaceType.SUBMISSION_IMP_FORTRESS_DEMON.getDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return PlaceType.SUBMISSION_IMP_FORTRESS_DEMON.getDialogue(false).getResponses();
 		}
 	};
 	
@@ -2354,8 +2354,8 @@ public class ImpCitadelDialogue {
 		}
 
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return PlaceType.SUBMISSION_IMP_FORTRESS_DEMON.getDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return PlaceType.SUBMISSION_IMP_FORTRESS_DEMON.getDialogue(false).getResponses();
 		}
 	};
 	

@@ -12,7 +12,7 @@ import org.w3c.dom.Node;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
-import com.lilithsthrone.game.dialogue.DialogueNode;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
@@ -217,11 +217,11 @@ public class Cell implements XMLSaving {
 				:getType().getWallName();
 	}
 	
-	public DialogueNode getDialogue(boolean withRandomEncounter) {
+	public Scene getDialogue(boolean withRandomEncounter) {
 		return getPlace().getDialogue(this, withRandomEncounter, false);
 	}
 	
-	public DialogueNode getDialogue(boolean withRandomEncounter, boolean forceEncounter) {
+	public Scene getDialogue(boolean withRandomEncounter, boolean forceEncounter) {
 		return getPlace().getDialogue(this, withRandomEncounter, forceEncounter);
 	}
 

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.npc.dominion.Daddy;
 import com.lilithsthrone.game.character.npc.dominion.Elle;
@@ -128,15 +129,15 @@ public interface PlaceType {
 		return Util.getRandomObjectFromWeightedFloatMap(map);
 	}
 
-	default DialogueNode getDialogue(boolean withRandomEncounter) {
+	default Scene getDialogue(boolean withRandomEncounter) {
 		return getDialogue(null, withRandomEncounter, false);
 	}
 
-	default DialogueNode getDialogue(Cell cell, boolean withRandomEncounter) {
+	default Scene getDialogue(Cell cell, boolean withRandomEncounter) {
 		return getDialogue(cell, withRandomEncounter, false);
 	}
 
-	DialogueNode getDialogue(Cell cell, boolean withRandomEncounter, boolean forceEncounter);
+	Scene getDialogue(Cell cell, boolean withRandomEncounter, boolean forceEncounter);
 
 	default List<Population> getPopulation() {
 		return List.of();
@@ -2013,7 +2014,7 @@ public interface PlaceType {
 			return HARPY_NESTS_WALKWAYS.getPopulation();
 		}
 		@Override
-		protected DialogueNode getBaseDialogue(Cell cell) {
+		protected Scene getBaseDialogue(Cell cell) {
 			return DialogueManager.getDialogueFromId("innoxia_places_dominion_harpy_nests_dominant_exterior");
 		}
 	};
@@ -2032,7 +2033,7 @@ public interface PlaceType {
 			return HARPY_NESTS_WALKWAYS.getPopulation();
 		}
 		@Override
-		protected DialogueNode getBaseDialogue(Cell cell) {
+		protected Scene getBaseDialogue(Cell cell) {
 			return DialogueManager.getDialogueFromId("innoxia_places_dominion_harpy_nests_nympho_exterior");
 		}
 	};
@@ -2051,7 +2052,7 @@ public interface PlaceType {
 			return HARPY_NESTS_WALKWAYS.getPopulation();
 		}
 		@Override
-		protected DialogueNode getBaseDialogue(Cell cell) {
+		protected Scene getBaseDialogue(Cell cell) {
 			return DialogueManager.getDialogueFromId("innoxia_places_dominion_harpy_nests_bimbo_exterior");
 		}
 	};
@@ -5341,7 +5342,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in the Rat Warrens") {
 		@Override
-		public DialogueNode getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
+		public Scene getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
 			if(Main.game.getPlayer().isCaptive()) {
 				return VengarCaptiveDialogue.CORRIDOR;
 			}
@@ -5472,7 +5473,7 @@ public interface PlaceType {
 			Darkness.ALWAYS_LIGHT,
 			null, "in the Rat Warrens") {
 		@Override
-		public DialogueNode getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
+		public Scene getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
 			if(Main.game.getPlayer().isCaptive()) {
 				dialogue = RatWarrensCaptiveDialogue.CAPTIVE_NIGHT;
 			} else {
@@ -5518,7 +5519,7 @@ public interface PlaceType {
 			return null;
 		}
 		@Override
-		public DialogueNode getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
+		public Scene getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
 			if(Main.game.getPlayer().isCaptive()) {
 				dialogue = VengarCaptiveDialogue.VENGARS_HALL;
 			} else {
@@ -5557,7 +5558,7 @@ public interface PlaceType {
 			return null;
 		}
 		@Override
-		public DialogueNode getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
+		public Scene getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
 			if(Main.game.getPlayer().isCaptive()) {
 				dialogue = VengarCaptiveDialogue.VENGARS_BEDROOM;
 			} else {
@@ -5759,7 +5760,7 @@ public interface PlaceType {
 			FieldsDialogue.DOMINION_EXTERIOR,
 			null, "in the outskirts of Dominion") {
 		@Override
-		protected DialogueNode getBaseDialogue(Cell cell) {
+		protected Scene getBaseDialogue(Cell cell) {
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.leftDominionFirstTime)) {
 				return FieldsDialogue.DOMINION_EXTERIOR;
 			} else {

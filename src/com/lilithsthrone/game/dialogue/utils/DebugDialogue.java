@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
@@ -112,7 +113,7 @@ public class DebugDialogue {
 			if(index == 0) {
 				return new Response("Back", "", DEBUG_MENU){
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
 					}
 				};

@@ -1117,8 +1117,8 @@ public class NightlifeDistrict {
 		}
 
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses();
 		}
 	};
 	
@@ -1184,8 +1184,8 @@ public class NightlifeDistrict {
 		}
 
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses();
 		}
 	};
 	
@@ -1215,8 +1215,8 @@ public class NightlifeDistrict {
 		}
 
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		public List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses();
 		}
 	};
 
@@ -5321,8 +5321,8 @@ public class NightlifeDistrict {
 			return "";
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue().getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue().getResponses();
 		}
 	};
 	

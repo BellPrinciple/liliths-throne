@@ -273,7 +273,7 @@ public class HarpyNestsDialogue {
 								}
 								@Override
 								public void effects() {
-									DialogueNode dn = Encounter.HARPY_NEST_LOOK_FOR_TROUBLE.getRandomEncounter(true);
+									var dn = Encounter.HARPY_NEST_LOOK_FOR_TROUBLE.getRandomEncounter(true);
 									Main.game.setContent(new Response("", "", dn));
 								}
 							};
@@ -288,7 +288,7 @@ public class HarpyNestsDialogue {
 								}
 								@Override
 								public void effects() {
-									DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
+									var dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
 									Main.game.setContent(new Response("", "", dn));
 								}
 							};

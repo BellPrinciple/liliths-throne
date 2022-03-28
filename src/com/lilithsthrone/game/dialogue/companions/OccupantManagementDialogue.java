@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.ObedienceLevel;
@@ -125,7 +126,7 @@ public class OccupantManagementDialogue {
 			} else if(Main.game.getOccupancyUtil().getGeneratedBalance()>0) {
 				return new Response("Collect: "+UtilText.formatAsMoney(Main.game.getOccupancyUtil().getGeneratedBalance(), "span"), "Collect the money that you've earned through your slaves' activities.",  OCCUPANT_OVERVIEW) {
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getCurrentDialogueNode();
 					}
 					@Override
@@ -142,7 +143,7 @@ public class OccupantManagementDialogue {
 				
 				return new Response("Pay: "+UtilText.formatAsMoney(Math.abs(Main.game.getOccupancyUtil().getGeneratedBalance()), "span", PresetColour.GENERIC_BAD), "Pay off the accumulated debt from the upkeep of your slaves and rooms.",  OCCUPANT_OVERVIEW) {
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getCurrentDialogueNode();
 					}
 					@Override
@@ -786,7 +787,7 @@ public class OccupantManagementDialogue {
 					return new Response("Collect: "+UtilText.formatAsMoney(Main.game.getOccupancyUtil().getGeneratedBalance(), "span"),
 							"Collect the money that you've earned through your slaves' activities.",  ROOM_UPGRADES) {
 						@Override
-						public DialogueNode getNextDialogue() {
+						public Scene getNextDialogue() {
 							return Main.game.getCurrentDialogueNode();
 						}
 						@Override
@@ -804,7 +805,7 @@ public class OccupantManagementDialogue {
 					return new Response("Pay: "+UtilText.formatAsMoney(Math.abs(Main.game.getOccupancyUtil().getGeneratedBalance()), "span", PresetColour.GENERIC_BAD),
 							"Pay off the accumulated debt from the upkeep of your slaves and rooms.",  ROOM_UPGRADES) {
 						@Override
-						public DialogueNode getNextDialogue() {
+						public Scene getNextDialogue() {
 							return Main.game.getCurrentDialogueNode();
 						}
 						@Override
@@ -817,7 +818,7 @@ public class OccupantManagementDialogue {
 			} else if(index==0) {
 				return new Response("Back", "Return to the previous screen.", ROOM_UPGRADES) {
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
@@ -856,7 +857,7 @@ public class OccupantManagementDialogue {
 					return new Response("Collect: "+UtilText.formatAsMoney(Main.game.getOccupancyUtil().getGeneratedBalance(), "span"),
 							"Collect the money that you've earned through your slaves' activities.",  ROOM_UPGRADES_MANAGEMENT) {
 						@Override
-						public DialogueNode getNextDialogue() {
+						public Scene getNextDialogue() {
 							return Main.game.getCurrentDialogueNode();
 						}
 						@Override
@@ -874,7 +875,7 @@ public class OccupantManagementDialogue {
 					return new Response("Pay: "+UtilText.formatAsMoney(Math.abs(Main.game.getOccupancyUtil().getGeneratedBalance()), "span", PresetColour.GENERIC_BAD),
 							"Pay off the accumulated debt from the upkeep of your slaves and rooms.",  ROOM_UPGRADES_MANAGEMENT) {
 						@Override
-						public DialogueNode getNextDialogue() {
+						public Scene getNextDialogue() {
 							return Main.game.getCurrentDialogueNode();
 						}
 						@Override

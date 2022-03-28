@@ -357,8 +357,8 @@ public class HelenaHotel {
 			return UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotel", "HOTEL_TRAVEL_TO_NEST");
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return PlaceType.HARPY_NESTS_HELENAS_NEST.getDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return PlaceType.HARPY_NESTS_HELENAS_NEST.getDialogue(false).getResponses();
 		}
 	};
 	
@@ -372,8 +372,8 @@ public class HelenaHotel {
 			return UtilText.parseFromXMLFile("places/dominion/helenaHotel/hotel", "HOTEL_TRAVEL_TO_DOMINION");
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return PlaceType.DOMINION_HELENA_HOTEL.getDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return PlaceType.DOMINION_HELENA_HOTEL.getDialogue(false).getResponses();
 		}
 	};
 	

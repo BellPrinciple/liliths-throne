@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -55,7 +56,7 @@ public class CultistDialogue {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/cultist", "ENCOUNTER_START_LEAVE", getCultist()));
 					}
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
@@ -221,7 +222,7 @@ public class CultistDialogue {
 			if(index==1) {
 				return new Response("Continue", "Leave the chapel and head back out into the streets of Dominion.", ENCOUNTER_CHAPEL_LEAVING){
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
@@ -237,7 +238,7 @@ public class CultistDialogue {
 						return PresetColour.GENERIC_NPC_REMOVAL;
 					}
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
 					}
 					@Override
@@ -417,7 +418,7 @@ public class CultistDialogue {
 			if(index==1) {
 				return new Response("Leave", "Turn around and head for the door.", ENCOUNTER_CHAPEL_POST_ORAL_SEX){
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
@@ -443,7 +444,7 @@ public class CultistDialogue {
 			if(index==1) {
 				return new Response("Leave", "Turn around and head for the door.", ENCOUNTER_CHAPEL_POST_VAGINAL_SEX){
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
@@ -470,7 +471,7 @@ public class CultistDialogue {
 			if(index==1) {
 				return new Response("Continue", "Continue on your way.", ENCOUNTER_CHAPEL_POST_VAGINAL_SEX){
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
@@ -496,7 +497,7 @@ public class CultistDialogue {
 			if(index==1) {
 				return new Response("Continue", "Continue on your way.", ENCOUNTER_CHAPEL_POST_ORAL_SEX){
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};

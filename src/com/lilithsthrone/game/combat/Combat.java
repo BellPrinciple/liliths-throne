@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.effects.AppliedStatusEffect;
@@ -85,8 +86,8 @@ public class Combat {
 	private Map<GameCharacter, Map<InventorySlot, WeaponType>> thrownWeaponsDepleted; // Only for use in UI rendering
 	
 	// Used if the ResponseCombat which initialises combat came from an external dialogue file:
-	private DialogueNode playerPostVictoryDialogue;
-	private DialogueNode playerPostDefeatDialogue;
+	private Scene playerPostVictoryDialogue;
+	private Scene playerPostDefeatDialogue;
 	
 	
 	public Combat() {
@@ -2005,19 +2006,19 @@ public class Combat {
 		return statusEffectsToApply;
 	}
 
-	public DialogueNode getPlayerPostVictoryDialogue() {
+	public Scene getPlayerPostVictoryDialogue() {
 		return playerPostVictoryDialogue;
 	}
 
-	public void setPlayerPostVictoryDialogue(DialogueNode playerPostVictoryDialogue) {
+	public void setPlayerPostVictoryDialogue(Scene playerPostVictoryDialogue) {
 		this.playerPostVictoryDialogue = playerPostVictoryDialogue;
 	}
 
-	public DialogueNode getPlayerPostDefeatDialogue() {
+	public Scene getPlayerPostDefeatDialogue() {
 		return playerPostDefeatDialogue;
 	}
 
-	public void setPlayerPostDefeatDialogue(DialogueNode playerPostDefeatDialogue) {
+	public void setPlayerPostDefeatDialogue(Scene playerPostDefeatDialogue) {
 		this.playerPostDefeatDialogue = playerPostDefeatDialogue;
 	}
 }
