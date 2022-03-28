@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.dialogue.encounters;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -9,7 +7,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.EquipClothingSetting;
@@ -55,6 +52,7 @@ import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
 import com.lilithsthrone.game.occupantManagement.slave.SlavePermissionSetting;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.Vector2i;
@@ -67,7 +65,7 @@ import com.lilithsthrone.world.places.PlaceType;
  * @version 0.4
  * @author Innoxia, DSG
  */
-public class Encounter {
+public interface Encounter {
 
 	public static AbstractEncounter LILAYAS_HOME_CORRIDOR = new AbstractEncounter() {
 		@Override
@@ -1285,18 +1283,14 @@ public class Encounter {
 		}
 	};
 
-	public static List<AbstractEncounter> allEncounters;
-
-	public static Map<AbstractEncounter, String> encounterToIdMap = new HashMap<>();
-	public static Map<String, AbstractEncounter> idToEncounterMap = new HashMap<>();
-
-	private static Map<String, List<AbstractEncounter>> addedEncounters = new HashMap<>();
+	//FIXME private
+	Map<String,List<AbstractEncounter>> addedEncounters = new HashMap<>();
 	
 	/**
 	 * @return A list of Encounters which are associated with the placeType (which have been added via external file).
 	 *  Returns an empty list if no associated encounters are found.
 	 */
-	public static List<AbstractEncounter> getAddedEncounters(String placeTypeId) {
+	static List<AbstractEncounter> getAddedEncounters(String placeTypeId) {
 		addedEncounters.putIfAbsent(placeTypeId, new ArrayList<>());
 		return addedEncounters.get(placeTypeId);
 	}
@@ -1304,102 +1298,58 @@ public class Encounter {
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
-	public static AbstractEncounter getEncounterFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToEncounterMap.keySet());
-
-		return idToEncounterMap.get(id);
+	@Deprecated
+	static AbstractEncounter getEncounterFromId(String id) {
+		return table.of(id);
 	}
 
-	public static String getIdFromEncounter(AbstractEncounter encounter) {
-		return encounterToIdMap.get(encounter);
+	@Deprecated
+	static String getIdFromEncounter(AbstractEncounter encounter) {
+		return encounter.getId();
 	}
 
-	public static List<AbstractEncounter> getAllEncounters() {
-		return allEncounters;
+	@Deprecated
+	static List<AbstractEncounter> getAllEncounters() {
+		return table.list();
 	}
 
-	static {
-		allEncounters = new ArrayList<>();
-
+	Table<AbstractEncounter> table = new Table<>(s->s){{
 		// Modded encounters:
-
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/encounters");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractEncounter encounter = new AbstractEncounter(innerEntry.getValue(), entry.getKey(), true) {
-						@Override
-						protected Scene initialiseEncounter(EncounterType node) {
-							return null;
-						}
-						@Override
-						public Map<EncounterType, Float> getDialogues() {
-							return null;
-						}};
-					allEncounters.add(encounter);
-					encounterToIdMap.put(encounter, innerEntry.getKey());
-					idToEncounterMap.put(innerEntry.getKey(), encounter);
-//					System.out.println("modded encounter: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading modded encounter failed at 'Encounter'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
+		forEachMod("/encounters",null,null,(f,n,a)->{
+			var e = new AbstractEncounter(f,a,true){
+				@Override
+				protected Scene initialiseEncounter(EncounterType node) {
+					return null;
 				}
-			}
-		}
-
+				@Override
+				public Map<EncounterType, Float> getDialogues() {
+					return null;
+				}
+			};
+			e.id = n;
+			add(n,e);
+		});
 		// External res encounters:
-
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/encounters");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractEncounter encounter = new AbstractEncounter(innerEntry.getValue(), entry.getKey(), false) {
-						@Override
-						protected Scene initialiseEncounter(EncounterType node) {
-							return null;
-						}
-						@Override
-						public Map<EncounterType, Float> getDialogues() {
-							return null;
-						}};
-					String id = "innoxia_"+innerEntry.getKey();
-					allEncounters.add(encounter);
-					encounterToIdMap.put(encounter, id);
-					idToEncounterMap.put(id, encounter);
-//					System.out.println("res encounter: "+id);
-				} catch(Exception ex) {
-					System.err.println("Loading encounter failed at 'Encounter'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
+		forEachExternal("res/encounters",null,null,(f,n,a)->{
+			var id = "innoxia_"+n;
+			var e = new AbstractEncounter(f,a,false){
+				@Override
+				protected Scene initialiseEncounter(EncounterType node) {
+					return null;
 				}
-			}
-		}
-
+				@Override
+				public Map<EncounterType, Float> getDialogues() {
+					return null;
+				}
+			};
+			e.id = id;
+			add(id,e);
+		});
 		// Hard-coded encounters (all those up above):
-
-		Field[] fields = Encounter.class.getFields();
-
-		for(Field f : fields){
-			if (AbstractEncounter.class.isAssignableFrom(f.getType())) {
-
-				AbstractEncounter encounter;
-
-				try {
-					encounter = ((AbstractEncounter) f.get(null));
-
-					encounterToIdMap.put(encounter, f.getName());
-					idToEncounterMap.put(f.getName(), encounter);
-					allEncounters.add(encounter);
-
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		addFields(Encounter.class,AbstractEncounter.class,(n,e)->e.id=n);
 
 		// Add additional place types which can trigger encounters to the 'addedEncounters' map
-		for(AbstractEncounter encounter : allEncounters) {
+		for(AbstractEncounter encounter : list()) {
 			if(encounter.getPlaceTypeIds()!=null) {
 				for(String placeId : encounter.getPlaceTypeIds()) {
 					addedEncounters.putIfAbsent(placeId, new ArrayList<>());
@@ -1407,5 +1357,5 @@ public class Encounter {
 				}
 			}
 		}
-	}
+	}};
 }
