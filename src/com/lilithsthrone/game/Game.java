@@ -2992,12 +2992,12 @@ public class Game implements XMLSaving {
 				if(node != currentDialogueNode) {
 					responsePage = 0;
 					currentDialogueNode = node;
-					
+
 				} else {
-					currentDialogueNode = node;
 					checkForResponsePage();
 					resetPointer = false;
 				}
+				fetchCurrentResponses();
 				checkForResponseTab();
 				
 				if(Main.game!=null
@@ -3237,10 +3237,10 @@ public class Game implements XMLSaving {
 			resetPointer = true;
 			
 		} else {
-			currentDialogueNode = node;
 			checkForResponsePage();
 			resetPointer = false;
 		}
+		fetchCurrentResponses();
 		checkForResponseTab();
 		
 		if(Main.game!=null
@@ -3472,30 +3472,23 @@ public class Game implements XMLSaving {
 		
 		if(currentResponses.size() > 1) {
 			choicesDialogueSB.append("<div class='response-container tabs'>");
-			
+
+			var prevTab = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_PREVIOUS_TAB);
+			var nextTab = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_TAB);
 			for(int responsePageCounter = 0; responsePageCounter < currentResponses.size(); responsePageCounter++){
-				choicesDialogueSB.append(
-						"<div class='response-tab"+(responseTab==responsePageCounter?" selected'":"'")
-							+ (currentResponses.get(responsePageCounter).response.stream().allMatch(Objects::isNull)
-									?"style='color:"+PresetColour.TEXT_GREY.toWebHexString()+";'"
-									:(responseTab==responsePageCounter
-										?""
-										:"style='color:"+PresetColour.TEXT_HALF_GREY.toWebHexString()+";'"))
-							+" id='tab_" + responsePageCounter + "'>"
-							+(responsePageCounter==responseTab-1
-								?"<b class='hotkey-icon'>"
-									+ (Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_PREVIOUS_TAB) == null
-										? "" 
-										: Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_PREVIOUS_TAB).getFullName()) + "</b>"
-								:(responsePageCounter==responseTab+1
-									?"<b class='hotkey-icon'>"
-										+ (Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_TAB) == null
-											? ""
-											: Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_TAB).getFullName()) + "</b>"
-									:""))
-//							+ (responseTab==responsePageCounter+1?"<b class='hotkey-icon'>" + KeyboardAction.RESPOND_PREVIOUS_PAGE + "</b>" : "" )
-							+ UtilText.parse(currentResponses.get(responsePageCounter).title)
-						+"</div>");
+				choicesDialogueSB.append("<div class='response-tab")
+				.append(responseTab == responsePageCounter ? " selected'" : "'")
+				.append(currentResponses.get(responsePageCounter).response.stream().allMatch(Objects::isNull)
+						? "style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'"
+						: (responseTab == responsePageCounter ? "" : "style='color:" + PresetColour.TEXT_HALF_GREY.toWebHexString() + ";'"))
+				.append(" id='tab_")
+				.append(responsePageCounter)
+				.append("'>")
+				.append(responsePageCounter == responseTab - 1
+						? "<b class='hotkey-icon'>" + (prevTab==null ? "" : prevTab.getFullName()) + "</b>"
+						: (responsePageCounter == responseTab + 1 ? "<b class='hotkey-icon'>" + (nextTab==null ? "" : nextTab.getFullName()) + "</b>" : ""))
+				.append(UtilText.parse(currentResponses.get(responsePageCounter).title))
+				.append("</div>");
 			}
 			choicesDialogueSB.append("</div>");
 		}
@@ -3503,75 +3496,58 @@ public class Game implements XMLSaving {
 			responseTab = 0;
 		}
 
-		choicesDialogueSB.append("<div class='response-full-container'>");
-		
-		if (responsePage > 0) {
-			choicesDialogueSB.append("<div class='response-switcher left' id='switch_left'><b class='hotkey-icon'>"
-					+ (Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_PREVIOUS_PAGE) == null ? "" : Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_PREVIOUS_PAGE).getFullName()) + "</b>&#60</div>");
-		} else {
-			choicesDialogueSB.append("<div class='response-switcher left disabled' id='switch_left'><b class='hotkey-icon disabled'>"
-					+ (Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_PREVIOUS_PAGE) == null ? "" : Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_PREVIOUS_PAGE).getFullName())
-					+ "</b><span class='option-disabled'>&#60</span></div>");
-		}
-		
-		choicesDialogueSB.append("<div class='response-container'>");
+		var prevPage = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_PREVIOUS_PAGE);
+		choicesDialogueSB.append("<div class='response-full-container'><div class='response-switcher left")
+		.append(responsePage > 0 ? "" : " disabled")
+		.append("' id='switch_left'><b class='hotkey-icon")
+		.append(responsePage > 0 ? "" : " disabled")
+		.append("'>")
+		.append(prevPage==null ? "" : prevPage.getFullName())
+		.append("</b>")
+		.append(responsePage > 0 ? "" : "<span class='option-disabled'>")
+		.append("&#60")
+		.append(responsePage > 0 ? "" : "</span>")
+		.append("</div><div class='response-container'>");
 
-		Response response;
-		if (responsePage == 0) {
-			for (int i = 1; i < MainController.RESPONSE_COUNT; i++) {
-				response = getCurrentResponse(i);
-				if (response != null) {
+		int offset = responsePage==0 ? 0 : responsePage * MainController.RESPONSE_COUNT - 1;
+		for(int i = 1; i < MainController.RESPONSE_COUNT; i++) {
+			Response response = getCurrentResponse(i + offset);
+			if(response != null)
 					choicesDialogueSB.append(getResponseBoxDiv(response, i));
-				} else
-					choicesDialogueSB.append("<div class='response-box disabled"+(responsePointer==i?" selected":"")+"' id='option_" + i + "'>"
-												+ "<b class='hotkey-icon disabled'>" + getResponseHotkey(i) + "</b>"
-											+ "</div>");
-			}
-			response = getCurrentResponse(0);
-			if (response != null) {
-				choicesDialogueSB.append(getResponseBoxDiv(response, 0));
+			else
+				choicesDialogueSB.append("<div class='response-box disabled")
+				.append(responsePointer == i + offset ? " selected" : "")
+				.append("' id='option_")
+				.append(i)
+				.append("'><b class='hotkey-icon disabled'>")
+				.append(getResponseHotkey(i))
+				.append("</b></div>");
+		}
 
-			} else
-				choicesDialogueSB.append("<div class='response-box disabled"+(responsePointer==0?" selected":"")+"' id='option_0'>"
-											+ "<b class='hotkey-icon disabled'>" + getResponseHotkey(0) + "</b>"
-										+ "</div>");
-			
-		} else {
-			for (int i = 0; i < (MainController.RESPONSE_COUNT-1); i++) {
-				response = getCurrentResponse(i + (responsePage * MainController.RESPONSE_COUNT));
-				if (response != null) {
-					choicesDialogueSB.append(getResponseBoxDiv(response, i + 1));
-				} else {
-					choicesDialogueSB.append("<div class='response-box disabled"+(responsePointer-(responsePage*MainController.RESPONSE_COUNT)==i?" selected":"")+"' id='option_" + (i + 1) + "'>"
-												+ "<b class='hotkey-icon disabled'>" + getResponseHotkey(i + 1) + "</b>"
-											+ "</div>");
-				}
-			}
-			response = getCurrentResponse(MainController.RESPONSE_COUNT-1 + (responsePage * MainController.RESPONSE_COUNT));
-			if (response != null) {
-				choicesDialogueSB.append(getResponseBoxDiv(response, 0));
-			} else {
-				choicesDialogueSB.append("<div class='response-box disabled"+(responsePointer-((responsePage+1)*MainController.RESPONSE_COUNT)+1==0?" selected":"")+"' id='option_0'>"
-												+ "<b class='hotkey-icon disabled'>" + getResponseHotkey(0) + "</b>"
-											+ "</div>");
-			}
-			
-		}
-		choicesDialogueSB.append("</div>");
-		
-		if (getCurrentResponse(((responsePage + 1) * MainController.RESPONSE_COUNT)) != null){
-			choicesDialogueSB.append("<div class='response-switcher right' id='switch_right'><b class='hotkey-icon'>"
-					+ (Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_PAGE) == null ? "" : Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_PAGE).getFullName()) + "</b>" + "&#62</div>");
-			
-		}else{
-			choicesDialogueSB.append("<div class='response-switcher right disabled' id='switch_right'><b class='hotkey-icon disabled'>"
-					+ (Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_PAGE) == null ? "" : Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_PAGE).getFullName())
-					+ "</b><span class='option-disabled'>&#62</span></div>");
-		}
-		
-		choicesDialogueSB.append("</div>");
-		choicesDialogueSB.append("</div>");
-		
+		int target = responsePage==0 ? 0 : MainController.RESPONSE_COUNT + offset;
+		Response response = getCurrentResponse(target);
+		if(response != null)
+			choicesDialogueSB.append(getResponseBoxDiv(response,0));
+		else
+			choicesDialogueSB.append("<div class='response-box disabled")
+			.append(responsePointer == target ? " selected" : "")
+			.append("' id='option_0'><b class='hotkey-icon disabled'>")
+			.append(getResponseHotkey(0))
+			.append("</b></div>");
+
+		boolean hasNext = getCurrentResponse(((responsePage + 1) * MainController.RESPONSE_COUNT)) != null;
+		var nextPage = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.RESPOND_NEXT_PAGE);
+		choicesDialogueSB.append("</div><div class='response-switcher right")
+		.append(hasNext ? "" : " disabled")
+		.append("' id='switch_right'><b class='hotkey-icon")
+		.append(hasNext ? "" : " disabled")
+		.append("'>")
+		.append(nextPage==null ? "" : nextPage.getFullName())
+		.append("</b>")
+		.append(hasNext ? "" : "<span class='option-disabled'>")
+		.append("&#62")
+		.append(hasNext ? "" : "</span>")
+		.append("</div></div></div>");
 		return choicesDialogueSB.toString();
 	}
 
@@ -3863,6 +3839,7 @@ public class Game implements XMLSaving {
 		responseTab = savedResponseTab;
 		
 		currentDialogueNode = savedDialogueNode;
+		fetchCurrentResponses();
 		
 		if(Main.game.isInSex()) {
 			Main.sex.recalculateSexActions();
@@ -4897,6 +4874,10 @@ public class Game implements XMLSaving {
 	
 	public DialogueNode getCurrentDialogueNode() {
 		return currentDialogueNode;
+	}
+
+	private void fetchCurrentResponses() {
+		currentResponses = currentDialogueNode.getResponses();
 	}
 
 	public Response getCurrentResponse(int index) {
