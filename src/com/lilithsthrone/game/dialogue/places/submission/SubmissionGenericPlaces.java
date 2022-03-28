@@ -134,8 +134,7 @@ public class SubmissionGenericPlaces {
 							}
 							@Override
 							public void effects() {
-								DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
-								Main.game.setContent(new Response("", "", dn));
+								Main.game.setContent(new Response("", "", Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true)));
 							}
 						};
 			} else {

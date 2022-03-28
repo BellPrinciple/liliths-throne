@@ -2739,8 +2739,8 @@ public class SlaverAlleyDialogue {
 			return UtilText.parseFromXMLFile("places/dominion/slaverAlley/genericDialogue", "PUBLIC_STOCKS_COMPLAIN_FREE_SLAVES_END");
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getPlayerCell().getDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getPlayerCell().getDialogue(false).getResponses();
 		}
 	};
 	

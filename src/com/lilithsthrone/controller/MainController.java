@@ -1198,7 +1198,7 @@ public class MainController implements Initializable {
 											Main.game.getPlayer().incrementMana(-Spell.TELEPORT.getModifiedCost(Main.game.getPlayer()));
 										}
 										Main.game.getPlayer().setLocation(PhoneDialogue.worldTypeMap, clickLocation, false);
-										DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true);
+										var dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true);
 										Main.game.getTextStartStringBuilder().append(
 												"<p style='text-align:center'>"
 													+ "[style.italicsArcane(Recalling what your destination looked like the last time you were there, you cast the teleportation spell, and in an instant, you appear there!)]"
@@ -1222,7 +1222,7 @@ public class MainController implements Initializable {
 												Main.game.flashMessage(PresetColour.GENERIC_BAD, "Cannot travel here!");
 											} else {
 												Main.game.getPlayer().setLocation(PhoneDialogue.worldTypeMap, new Vector2i(j, i), false);
-												DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true);
+												var dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true);
 												Main.game.getTextStartStringBuilder()
 													.append("<p style='text-align:center'>[style.italicsAir(")
 													.append(!Main.game.getPlayer().isAbleToFlyFromExtraParts() ? "With a flap of your wings, you" : "You")
@@ -2710,9 +2710,9 @@ public class MainController implements Initializable {
 						Main.game.getPlayer().setGlobalLocation(Main.game.getWorlds().get(WorldType.WORLD_MAP).getCell(Main.game.getPlayerCell().getType().getGlobalMapLocation()).getLocation());
 					}
 					Main.game.getPlayer().setLocation(new Vector2i(location.getX() + xOffset, location.getY() + yOffset));
-					
-					DialogueNode dn = Main.game.getPlayerCell().getDialogue(true);
-					
+
+					var dn = Main.game.getPlayerCell().getDialogue(true);
+
 					Main.game.setContent(new Response("", "", dn) {
 						@Override
 						public int getSecondsPassed() {

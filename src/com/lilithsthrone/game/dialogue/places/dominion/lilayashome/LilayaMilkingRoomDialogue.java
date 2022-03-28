@@ -3,6 +3,7 @@ package com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.FluidStored;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
@@ -477,7 +478,7 @@ public class LilayaMilkingRoomDialogue {
 							UtilText.parse(getMilkingTarget(), "[npc.NameIsFull] currently targeted as the person both to be milked and to have fluids pumped inside of [npc.herHim]. Activate this button to cycle between available targets."),
 							null) {
 						@Override
-						public DialogueNode getNextDialogue() {
+						public Scene getNextDialogue() {
 							return Main.game.getCurrentDialogueNode();
 						}
 						@Override
@@ -544,7 +545,7 @@ public class LilayaMilkingRoomDialogue {
 			if(index==1) {
 				return new Response("Continue", "Unstrap yourself from the milking machine and continue on your way.", MILKED) {
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
 					}
 				};

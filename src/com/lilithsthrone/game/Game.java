@@ -181,7 +181,6 @@ import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueFlags;
 import com.lilithsthrone.game.dialogue.DialogueManager;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.companions.OccupantManagementDialogue;
 import com.lilithsthrone.game.dialogue.encounters.Encounter;
@@ -308,8 +307,8 @@ public class Game implements XMLSaving {
 	private Encounter currentEncounter;
 	// Need to always return the same encounter at the same time in case it gets triggered multiple times in logic somewhere, so once it's been calculated at a certain time, reuse that result.
 	// These two variables are responsible for holding that information (and are located here as they need to be reset upon new game or loading a game).
-	public Value<Long, DialogueNode> forcedEncounterAtSeconds = new Value<>(-1l, null);
-	public Value<Long, DialogueNode> encounterAtSeconds = new Value<>(-1l, null);
+	public Value<Long,Scene> forcedEncounterAtSeconds = new Value<>(-1l, null);
+	public Value<Long,Scene> encounterAtSeconds = new Value<>(-1l, null);
 
 	private boolean started;
 	
@@ -323,9 +322,9 @@ public class Game implements XMLSaving {
 	private int responsePointer = 0;
 	
 	// Dialogues:
-	private DialogueNode currentDialogueNode;
-	private List<DialogueNode.ResponseTab> currentResponses;
-	private DialogueNode savedDialogueNode = null;
+	private Scene currentDialogueNode;
+	private List<Scene.ResponseTab> currentResponses;
+	private Scene savedDialogueNode = null;
 	
 	private String currentDialogue;
 	private String savedDialogue;
@@ -1735,7 +1734,7 @@ public class Game implements XMLSaving {
 		
 		Main.game.setRequestAutosave(false);
 		
-		DialogueNode startingDialogueNode = Main.game.getPlayerCell().getDialogue(false);
+		Scene startingDialogueNode = Main.game.getPlayerCell().getDialogue(false);
 		Main.game.addEvent(new EventLogEntry("[style.colourGood(Game loaded)]", "data/saves/"+Util.getFileName(file)+".xml"), false);
 		Main.game.setStarted(true); // Set started before setting content so that it parses correctly (as the scripting engine is initialised fully in the setStarted() method).
 		Main.game.setContent(new Response("", startingDialogueNode.getDescription(), startingDialogueNode), false);
@@ -1812,7 +1811,7 @@ public class Game implements XMLSaving {
 		return loadedGame;
 	}
 	
-	public void initNewGame(DialogueNode startingDialogueNode) {
+	public void initNewGame(Scene startingDialogueNode) {
 		NPCMap.clear();
 		OffspringSeedMap.clear();
 		initUniqueNPCs();
@@ -2223,7 +2222,7 @@ public class Game implements XMLSaving {
 		endTurn(secondsPassed, true);
 	}
 	
-	public void endTurn(Response response, DialogueNode dialogue) {
+	public void endTurn(Response response, Scene dialogue) {
 		int seconds = 0;
 		if(dialogue!=null) {
 			seconds = dialogue.getSecondsPassed();
@@ -2867,7 +2866,7 @@ public class Game implements XMLSaving {
 			}
 			
 			String chosenResponse = response.getTitle();
-			DialogueNode node = response.getNextDialogue();
+			Scene node = response.getNextDialogue();
 			if(node!=null || response instanceof ResponseCombat || response instanceof ResponseSex || response instanceof ResponseEffectsOnly || response instanceof ResponseTrade) {
 				response.applyEffects(); // Only apply effects if this response is a non-standard one or if the next response is not null
 			}
@@ -3092,7 +3091,7 @@ public class Game implements XMLSaving {
 	public void setContent(Response response, boolean allowTimeProgress, Colour flashMessageColour, String flashMessageText){
 		informationTooltips = new HashMap<>();
 		
-		DialogueNode node = response.getNextDialogue();
+		Scene node = response.getNextDialogue();
 		if(node!=null || response instanceof ResponseCombat || response instanceof ResponseSex || response instanceof ResponseEffectsOnly || response instanceof ResponseTrade) {
 			response.applyEffects(); // Only apply effects if this response is a non-standard one or if the next response is not null
 		}
@@ -3343,7 +3342,7 @@ public class Game implements XMLSaving {
 		
 	}
 	
-	private boolean requiresYScroll(DialogueNode node) {
+	private boolean requiresYScroll(Scene node) {
 		return currentDialogueNode.getDialogueNodeType()==DialogueNodeType.INVENTORY
 				&& (!node.equals(InventoryDialogue.DYE_CLOTHING)
 						&& !node.equals(InventoryDialogue.DYE_CLOTHING_CHARACTER_CREATION)
@@ -3353,7 +3352,7 @@ public class Game implements XMLSaving {
 						&& !node.equals(InventoryDialogue.DYE_WEAPON));
 	}
 	
-	private static boolean isContentScroll(DialogueNode node) {
+	private static boolean isContentScroll(Scene node) {
 		return (node.getDialogueNodeType()!=DialogueNodeType.CHARACTERS_PRESENT
 				&& !node.equals(PhoneDialogue.CHARACTER_APPEARANCE)
 				&& !node.equals(PhoneDialogue.CONTACTS_CHARACTER))
@@ -3393,7 +3392,7 @@ public class Game implements XMLSaving {
 	private String getMapDiv() {
 		return "";
 	}
-	
+
 	/**
 	 * Sets the content of the main WebView based on a DialogueNode.
 	 * 
@@ -4872,7 +4871,7 @@ public class Game implements XMLSaving {
 				|| Main.game.getCurrentDialogueNode().equals(Main.game.getDefaultDialogue(false));
 	}
 	
-	public DialogueNode getCurrentDialogueNode() {
+	public Scene getCurrentDialogueNode() {
 		return currentDialogueNode;
 	}
 
@@ -4925,7 +4924,7 @@ public class Game implements XMLSaving {
 		checkForResponsePage();
 	}
 
-	public DialogueNode getSavedDialogueNode() {
+	public Scene getSavedDialogueNode() {
 		return savedDialogueNode;
 	}
 
@@ -5222,15 +5221,15 @@ public class Game implements XMLSaving {
 	/**
 	 *  <b>Be careful using this</b>, as it has a chance to trigger the tile's random encounter.
 	 */
-	public DialogueNode getDefaultDialogue() {
+	public Scene getDefaultDialogue() {
 		return Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true);
 	}
 	
-	public DialogueNode getDefaultDialogue(boolean withRandomEncounter) {
+	public Scene getDefaultDialogue(boolean withRandomEncounter) {
 		return Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(withRandomEncounter);
 	}
 	
-	public DialogueNode getDefaultDialogue(boolean withRandomEncounter, boolean forceEncounter) {
+	public Scene getDefaultDialogue(boolean withRandomEncounter, boolean forceEncounter) {
 		return Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(withRandomEncounter, forceEncounter);
 	}
 
@@ -5276,7 +5275,7 @@ public class Game implements XMLSaving {
 //		System.out.println("Saved: "+character.getName());
 	}
 	
-	public void initCosmeticsDialogue(NPC beautician, GameCharacter target, DialogueNode returnToNode) {
+	public void initCosmeticsDialogue(NPC beautician, GameCharacter target, Scene returnToNode) {
 		CosmeticsDialogue.initDialogue(beautician, target, returnToNode);
 	}
 }

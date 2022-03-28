@@ -656,7 +656,7 @@ public class DominionExpress {
 								}
 								@Override
 								public void effects() {
-									DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
+									var dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
 									Main.game.setContent(new Response("", "", dn));
 								}
 							};
@@ -1981,8 +1981,8 @@ public class DominionExpress {
 			return "";
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses();
 		}
 	};
 	
@@ -2000,8 +2000,8 @@ public class DominionExpress {
 			return "";
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses();
 		}
 	};
 
@@ -2758,8 +2758,8 @@ public class DominionExpress {
 			return "";
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses();
 		}
 	};
 	

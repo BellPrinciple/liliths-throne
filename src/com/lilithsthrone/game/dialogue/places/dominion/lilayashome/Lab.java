@@ -115,7 +115,7 @@ public class Lab {
 				if(Main.game.getNpc(Lilaya.class).getLocationPlaceType()!=PlaceType.LILAYA_HOME_LAB || Main.game.getNpc(Arthur.class).getLocationPlaceType()==PlaceType.LILAYA_HOME_LAB) {
 					return null;
 				}
-				return DialogueManager.getDialogueFromId("acexp_dominion_lilaya_lab_voyeurism").getResponse(0, 1);
+				return DialogueManager.getDialogueFromId("acexp_dominion_lilaya_lab_voyeurism").getResponses().get(0).response.get(1);
 			}
 			return null;
 		}

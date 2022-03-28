@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
@@ -40,7 +41,7 @@ import com.lilithsthrone.world.places.PlaceType;
 public class BodyChanging {
 	
 	private static GameCharacter target;
-	private static DialogueNode coreNode;
+	private static Scene coreNode;
 	private static int defaultResponseTab;
 	private static boolean debugMenu;
 	
@@ -65,7 +66,7 @@ public class BodyChanging {
 		BodyChanging.debugMenu = false;
 	}
 
-	public static void setTarget(GameCharacter target, DialogueNode coreNode, int defaultResponseTab) {
+	public static void setTarget(GameCharacter target, Scene coreNode, int defaultResponseTab) {
 		BodyChanging.target = target;
 		BodyChanging.coreNode = coreNode;
 		BodyChanging.defaultResponseTab = defaultResponseTab;

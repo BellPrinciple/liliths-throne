@@ -19,6 +19,7 @@ import org.w3c.dom.NodeList;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.CharacterImportSetting;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
@@ -72,7 +73,6 @@ import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.spells.Spell;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
@@ -406,7 +406,7 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 	
 	public abstract void changeFurryLevel();
 	
-	public abstract DialogueNode getEncounterDialogue();
+	public abstract Scene getEncounterDialogue();
 	
 	public boolean isClothingStealable() {
 		return false;

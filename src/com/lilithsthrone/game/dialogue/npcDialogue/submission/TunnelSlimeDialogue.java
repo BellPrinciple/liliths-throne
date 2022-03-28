@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.submission;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
@@ -88,7 +89,7 @@ public class TunnelSlimeDialogue {
 								}
 							}
 							@Override
-							public DialogueNode getNextDialogue(){
+							public Scene getNextDialogue(){
 								return Main.game.getDefaultDialogue(false);
 							}
 						};
@@ -309,7 +310,7 @@ public class TunnelSlimeDialogue {
 			if (index == 1) {
 				return new Response("Continue", "Carry on your way.", AFTER_SLIME_SEX_AS_DOM){
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
@@ -346,7 +347,7 @@ public class TunnelSlimeDialogue {
 			if (index == 1) {
 				return new Response("Continue", "Carry on your way.", AFTER_SLIME_SEX_AS_SUB){
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
@@ -380,7 +381,7 @@ public class TunnelSlimeDialogue {
 						}
 					}
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
@@ -520,7 +521,7 @@ public class TunnelSlimeDialogue {
 				if (index == 1) {
 					return new Response("Continue", "Carry on your way.", AFTER_COMBAT_PLAYER_DEFEAT){
 						@Override
-						public DialogueNode getNextDialogue() {
+						public Scene getNextDialogue() {
 							return Main.game.getDefaultDialogue(false);
 						}
 					};
@@ -550,7 +551,7 @@ public class TunnelSlimeDialogue {
 			if (index == 1) {
 				return new Response("Continue", "Carry on your way.", OFFER_MONEY){
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
@@ -878,7 +879,7 @@ public class TunnelSlimeDialogue {
 				if (index == 1) {
 					return new Response("Continue", "Carry on your way.", AFTER_COMBAT_PLAYER_DEFEAT){
 						@Override
-						public DialogueNode getNextDialogue() {
+						public Scene getNextDialogue() {
 							return Main.game.getDefaultDialogue(false);
 						}
 					};
@@ -911,7 +912,7 @@ public class TunnelSlimeDialogue {
 			if (index == 1) {
 				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY){
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};
@@ -935,7 +936,7 @@ public class TunnelSlimeDialogue {
 						return PresetColour.GENERIC_NPC_REMOVAL;
 					}
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
 					}
 					@Override

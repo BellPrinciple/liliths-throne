@@ -872,8 +872,8 @@ public class NyanFirstDate {
 			return UtilText.parseFromXMLFile("places/dominion/nyansApartment/firstDate", "POST_DATE_APARTMENT_INTERVIEW_FAIL_LEAVE");
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index); //TODO test
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses(); //TODO test
 		}
 	};
 
@@ -1357,8 +1357,8 @@ public class NyanFirstDate {
 			return "";
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses();
 		}
 	};
 	

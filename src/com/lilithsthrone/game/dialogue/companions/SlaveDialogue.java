@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevelBasic;
 import com.lilithsthrone.game.character.attributes.ObedienceLevelBasic;
@@ -125,7 +126,7 @@ public class SlaveDialogue {
 	}
 	
 	private static GameCharacter enslavementTarget;
-	private static DialogueNode followupEnslavementDialogue;
+	private static Scene followupEnslavementDialogue;
 
 	public static GameCharacter getEnslavementTarget() {
 		return enslavementTarget;
@@ -135,11 +136,11 @@ public class SlaveDialogue {
 		SlaveDialogue.enslavementTarget = enslavementTarget;
 	}
 	
-	public static DialogueNode getFollowupEnslavementDialogue() {
+	public static Scene getFollowupEnslavementDialogue() {
 		return followupEnslavementDialogue;
 	}
 
-	public static void setFollowupEnslavementDialogue(DialogueNode followupEnslavementDialogue) {
+	public static void setFollowupEnslavementDialogue(Scene followupEnslavementDialogue) {
 		SlaveDialogue.followupEnslavementDialogue = followupEnslavementDialogue;
 	}
 	
@@ -314,7 +315,7 @@ public class SlaveDialogue {
 							enslavementTarget.setLocation(WorldType.SLAVER_ALLEY, PlaceType.SLAVER_ALLEY_SLAVERY_ADMINISTRATION, true);
 						}
 						@Override
-						public DialogueNode getNextDialogue(){
+						public Scene getNextDialogue(){
 							return SlaveDialogue.getFollowupEnslavementDialogue();
 						}
 					};
@@ -859,7 +860,7 @@ public class SlaveDialogue {
 				} else if(index == 0) {
 					return new Response("Leave", UtilText.parse(getSlave(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), SLAVE_START) {
 						@Override
-						public DialogueNode getNextDialogue() {
+						public Scene getNextDialogue() {
 							return Main.game.getDefaultDialogue(false);
 						}
 						@Override
@@ -1378,7 +1379,7 @@ public class SlaveDialogue {
 					} else if(index == 0) {
 						return new Response("Leave", UtilText.parse(getSlave(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), Main.game.getDefaultDialogue(false)) {
 							@Override
-							public DialogueNode getNextDialogue() {
+							public Scene getNextDialogue() {
 								return Main.game.getDefaultDialogue(false);
 							}
 							@Override

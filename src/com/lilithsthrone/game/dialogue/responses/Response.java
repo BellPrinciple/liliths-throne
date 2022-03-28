@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -16,7 +17,6 @@ import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.dialogue.DialogueManager;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.SexAreaInterface;
 import com.lilithsthrone.game.sex.SexControl;
@@ -39,7 +39,7 @@ public class Response {
 	
 	protected String title;
 	protected String tooltipText;
-	protected DialogueNode nextDialogue;
+	protected Scene nextDialogue;
 	
 	protected List<Fetish> fetishesRequired;
 	protected CorruptionLevel corruptionBypass;
@@ -84,7 +84,7 @@ public class Response {
 	
 	public Response(String title,
 			String tooltipText,
-			DialogueNode nextDialogue) {
+			Scene nextDialogue) {
 		this(title, tooltipText, nextDialogue,
 				null, null,
 				null, null, null);
@@ -92,7 +92,7 @@ public class Response {
 	
 	public Response(String title,
 			String tooltipText,
-			DialogueNode nextDialogue,
+			Scene nextDialogue,
 			List<Fetish> fetishesForUnlock,
 			CorruptionLevel corruptionBypass,
 			List<Perk> perksRequired,
@@ -106,7 +106,7 @@ public class Response {
 	
 	public Response(String title,
 			String tooltipText,
-			DialogueNode nextDialogue, 
+			Scene nextDialogue,
 			List<Fetish> fetishesForUnlock,
 			CorruptionLevel corruptionBypass,
 			List<Perk> perksRequired,
@@ -215,16 +215,14 @@ public class Response {
 		return tooltipText;
 	}
 
-	public DialogueNode getNextDialogue() {
+	public Scene getNextDialogue() {
 		if(isAvailable() || isAbleToBypass()) {
 			if(getDefaultPlaceTypeForNextDialogue()!=null && !getDefaultPlaceTypeForNextDialogue().isEmpty()) {
 //				System.out.println("getNextDialogue() place type return");
 				return PlaceType.getPlaceTypeFromId(getDefaultPlaceTypeForNextDialogue()).getDialogue(false);
 			}
 			if(fromExternalFile && nextDialogueId!=null) {
-				DialogueNode dn = DialogueManager.getDialogueFromId(UtilText.parse(nextDialogueId).trim());
-//				System.out.println("getNextDialogue(): "+(dn==null?"null":dn.getId()));
-				return dn;
+				return DialogueManager.getDialogueFromId(UtilText.parse(nextDialogueId).trim());
 			}
 //			System.out.println("getNextDialogue() (no external): "+(nextDialogue==null?"null":nextDialogue.getId()));
 			return nextDialogue;

@@ -4,6 +4,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lilithsthrone.game.Scene;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -423,7 +424,7 @@ public class Amber extends NPC {
 			if(index==1) {
 				return new Response("Continue", "Continue exploring Zaranix's house.", PlaceType.ZARANIX_GF_ENTRANCE.getDialogue(false)) {
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getPlayerCell().getDialogue(false);
 					}
 				};
@@ -526,7 +527,7 @@ public class Amber extends NPC {
 			if(index==1) {
 				return new Response("Continue", "Continue exploring Zaranix's house.", Main.game.getPlayerCell().getDialogue(false)) {
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getPlayerCell().getDialogue(false);
 					}
 				};

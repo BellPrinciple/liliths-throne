@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -92,7 +93,7 @@ public class ReindeerOverseerDialogue {
 					Main.game.getDialogueFlags().addReindeerEncountered(getReindeer().getId());
 				}
 				@Override
-				public DialogueNode getNextDialogue(){
+				public Scene getNextDialogue(){
 					return Main.game.getDefaultDialogue(false);
 				}
 			};

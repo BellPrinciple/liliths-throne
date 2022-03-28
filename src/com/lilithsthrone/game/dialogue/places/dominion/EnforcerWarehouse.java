@@ -541,8 +541,8 @@ public class EnforcerWarehouse {
 			return UtilText.parseFromXMLFile("places/dominion/enforcerWarehouse/generic", "ASK_CLAIRE_REPEAT_SEX");
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue().getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue().getResponses();
 		}
 	};
 	

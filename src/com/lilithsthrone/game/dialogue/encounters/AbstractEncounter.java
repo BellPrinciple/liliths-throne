@@ -13,6 +13,7 @@ import com.lilithsthrone.game.character.npc.misc.OffspringSeed;
 import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -21,7 +22,6 @@ import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.npc.dominion.EnforcerPatrol;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.dialogue.DialogueManager;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.occupantManagement.slave.SlaveJob;
@@ -192,7 +192,7 @@ public abstract class AbstractEncounter {
 		}
 	}
 	
-	protected static DialogueNode SpawnAndStartChildHere(List<OffspringSeed> offspringAvailable)  {
+	protected static Scene SpawnAndStartChildHere(List<OffspringSeed> offspringAvailable)  {
 		NPC offspring = new NPCOffspring(offspringAvailable.get(Util.random.nextInt(offspringAvailable.size())));
 
 		offspring.setLocation(Main.game.getPlayer(), true);
@@ -367,7 +367,7 @@ public abstract class AbstractEncounter {
 		return null;
 	}
 	
-	protected abstract DialogueNode initialiseEncounter(EncounterType node);
+	protected abstract Scene initialiseEncounter(EncounterType node);
 	
 	public abstract Map<EncounterType, Float> getDialogues();
 
@@ -381,7 +381,7 @@ public abstract class AbstractEncounter {
 	 * @param forceEncounter Forces an encounter to be selected. (Will still return null if the encounter list is empty.)
 	 * @return null if no encounter.
 	 */
-	public DialogueNode getRandomEncounter(boolean forceEncounter) {
+	public Scene getRandomEncounter(boolean forceEncounter) {
 		return getBaseRandomEncounter(forceEncounter);
 	}
 
@@ -422,7 +422,7 @@ public abstract class AbstractEncounter {
 		return total;
 	}
 
-	private void setEncounterDialogue(DialogueNode dialogueNode, boolean forced) {
+	private void setEncounterDialogue(Scene dialogueNode, boolean forced) {
 		if(forced) {
 			Main.game.forcedEncounterAtSeconds = new Value<>(Main.game.getSecondsPassed(), dialogueNode);
 		} else {
@@ -430,7 +430,7 @@ public abstract class AbstractEncounter {
 		}
 	}
 	
-	protected DialogueNode getBaseRandomEncounter(boolean forceEncounter) {
+	protected Scene getBaseRandomEncounter(boolean forceEncounter) {
 		if(forceEncounter) {
 			if(Main.game.forcedEncounterAtSeconds.getKey()==Main.game.getSecondsPassed()) {
 				return Main.game.forcedEncounterAtSeconds.getValue();
@@ -510,7 +510,7 @@ public abstract class AbstractEncounter {
 			
 			if(forceEncounter || Math.random()*(100+opportunisticIncrease)<total) {
 				ExternalEncounterData encounter;
-				DialogueNode dn = null;
+				Scene dn = null;
 				int tries = 0;
 				while(dn==null && tries<=3) { // As some Encounters rarely return null, try 3 times to get an Encounter. Yes this is not ideal, but it was either this or suffer performance issues in calculating Encounter availabilities.
 					tries++;
@@ -547,7 +547,7 @@ public abstract class AbstractEncounter {
 			
 			if(forceEncounter || Math.random()*(100+opportunisticIncrease)<total) {
 				EncounterType encounter;
-				DialogueNode dn = null;
+				Scene dn = null;
 				int tries = 0;
 				while(dn==null && tries<=3) { // As some Encounters rarely return null, try 3 times to get an Encounter. Yes this is not ideal, but it was either this or suffer performance issues in calculating Encounter availabilities.
 					tries++;

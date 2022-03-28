@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.ArousalLevel;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -30,7 +31,6 @@ import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntry;
 import com.lilithsthrone.game.dialogue.utils.CharactersPresentDialogue;
@@ -1160,7 +1160,7 @@ public enum RenderingEngine {
 	// DecimalFormat decimalFormatter = new DecimalFormat("#,###");
 	private StringBuilder uiAttributeSB = new StringBuilder();
 
-	private DialogueNode renderedDialogueNode = null;
+	private Scene renderedDialogueNode = null;
 	
 	private String getDefaultAttributeColumnHeader(boolean rightColumn) {
 		if(rightColumn) {

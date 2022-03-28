@@ -3066,8 +3066,8 @@ public class ImpFortressDialogue {
 		}
 
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getDefaultDialogue(false).getResponses();
 		}
 	};
 	

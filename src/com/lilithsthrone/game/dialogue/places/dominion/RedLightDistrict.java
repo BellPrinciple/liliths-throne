@@ -1088,7 +1088,7 @@ public class RedLightDistrict {
 						}
 						
 					} else if(Main.game.getDialogueFlags().hasFlag("acexp_horny_angel_found")) {
-						return DialogueManager.getDialogueFromId("acexp_dominion_angel_office_misc_sex_access_node").getResponse(0, 1);
+						return DialogueManager.getDialogueFromId("acexp_dominion_angel_office_misc_sex_access_node").getResponses().get(0).response.get(1);
 					}
 					
 				}

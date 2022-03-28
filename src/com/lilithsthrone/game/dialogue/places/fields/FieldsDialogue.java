@@ -200,7 +200,7 @@ public class FieldsDialogue {
 							}
 							@Override
 							public void effects() {
-								DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
+								var dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
 								Main.game.setContent(new Response("", "", dn));
 							}
 						};
@@ -267,7 +267,7 @@ public class FieldsDialogue {
 						}
 						@Override
 						public void effects() {
-							DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
+							var dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
 							Main.game.setContent(new Response("", "", dn));
 						}
 					};
@@ -306,7 +306,7 @@ public class FieldsDialogue {
 						}
 						@Override
 						public void effects() {
-							DialogueNode dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
+							var dn = Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getDialogue(true, true);
 							Main.game.setContent(new Response("", "", dn));
 						}
 					};

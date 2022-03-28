@@ -1,6 +1,7 @@
 package com.lilithsthrone.game.dialogue.utils;
 
 import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
@@ -33,9 +34,9 @@ public class CosmeticsDialogue {
 	public static InventorySlot invSlotTattooToRemove = null;
 	
 	private static NPC beautician;
-	private static DialogueNode returnToNode;
+	private static Scene returnToNode;
 	
-	public static void initDialogue(NPC beautician, GameCharacter target, DialogueNode returnToNode) {
+	public static void initDialogue(NPC beautician, GameCharacter target, Scene returnToNode) {
 		CosmeticsDialogue.beautician = beautician;
 		CosmeticsDialogue.returnToNode = returnToNode;
 		BodyChanging.setTarget(target);

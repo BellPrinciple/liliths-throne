@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.FluidStored;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.PlayerCharacter;
@@ -207,7 +208,7 @@ public class Sex {
 	private Map<GameCharacter, Map<GameCharacter, Set<SexActionInterface>>> actionsAvailable;
 	private Map<GameCharacter, Map<GameCharacter, Set<SexActionInterface>>> orgasmActionsAvailable;
 	
-	private DialogueNode postSexDialogue;
+	private Scene postSexDialogue;
 
 	private Map<GameCharacter, SexActionInterface> lastUsedSexAction;
 	
@@ -281,11 +282,11 @@ public class Sex {
 		sexActionManager = new SexActionManager();
 	}
 
-	public DialogueNode initialiseSex(
+	public Scene initialiseSex(
 			boolean consensual,
 			boolean subHasEqualControl,
 			SexManagerInterface sexManager,
-			DialogueNode postSexDialogue,
+			Scene postSexDialogue,
 			String sexStartDescription) {
 		return initialiseSex(consensual,
 				subHasEqualControl,
@@ -296,13 +297,13 @@ public class Sex {
 				sexStartDescription,
 				new ArrayList<>());
 	}
-	public DialogueNode initialiseSex(
+	public Scene initialiseSex(
 			boolean consensual,
 			boolean subHasEqualControl,
 			SexManagerInterface sexManager,
 			List<GameCharacter> dominantSpectators,
 			List<GameCharacter> submissiveSpectators,
-			DialogueNode postSexDialogue,
+			Scene postSexDialogue,
 			String sexStartDescription) {
 		return initialiseSex(consensual,
 				subHasEqualControl,
@@ -314,13 +315,13 @@ public class Sex {
 				new ArrayList<>());
 	}
 	
-	public DialogueNode initialiseSex(
+	public Scene initialiseSex(
 			boolean consensual,
 			boolean subHasEqualControl,
 			SexManagerInterface sexManager,
 			List<GameCharacter> dominantSpectators,
 			List<GameCharacter> submissiveSpectators,
-			DialogueNode postSexDialogue,
+			Scene postSexDialogue,
 			String sexStartDescription,
 			List<InitialSexActionInformation> startingSexActions) {
 		
@@ -5761,7 +5762,7 @@ public class Sex {
 		return repeatActionsPlayer;
 	}
 
-	public DialogueNode getPostSexDialogue() {
+	public Scene getPostSexDialogue() {
 		return postSexDialogue;
 	}
 

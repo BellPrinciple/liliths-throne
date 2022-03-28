@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.EquipClothingSetting;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -36,7 +37,6 @@ import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.npcDialogue.dominion.DominionExpressCentaurDialogue;
 import com.lilithsthrone.game.dialogue.npcDialogue.dominion.EnforcerAlleywayDialogue;
 import com.lilithsthrone.game.dialogue.npcDialogue.dominion.SlaveEncountersDialogue;
@@ -81,7 +81,7 @@ public class Encounter {
 						:null));
 		}
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.SLAVE_USES_YOU) {
 				List<NPC> slaves = new ArrayList<>();
 				List<NPC> hornySlaves = new ArrayList<>();
@@ -125,7 +125,7 @@ public class Encounter {
 					return null; // Return a null Encounter here instead of checking in getDialogues() due to performance issues
 				}
 				return SlaveEncountersDialogue.getSlaveUsingOtherSlaveLilayaCorridor(slaves);
-				
+
 			} else {
 				return null;
 			}
@@ -141,7 +141,7 @@ public class Encounter {
 						:null));
 		}
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.SLAVE_USES_YOU) {
 				List<NPC> slaves = new ArrayList<>();
 				List<NPC> hornySlaves = new ArrayList<>();
@@ -178,7 +178,7 @@ public class Encounter {
 				}
 				
 				return null;
-				
+
 			} else {
 				return null;
 			}
@@ -213,7 +213,7 @@ public class Encounter {
 										&& Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_HARPY_PACIFICATION)
 										&& Main.game.getHourOfDay()>=17 && Main.game.getHourOfDay()<=21;
 			}
-			
+
 			return Util.newHashMapOfValues(
 					Main.game.getCurrentWeather()==Weather.MAGIC_STORM
 						?new Value<EncounterType, Float>(EncounterType.DOMINION_STORM_ATTACK, 15f)
@@ -234,7 +234,7 @@ public class Encounter {
 		}
 		
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.DOMINION_STORM_ATTACK && Main.game.getCurrentWeather() == Weather.MAGIC_STORM) {
 				NPC npc = new DominionAlleywayAttacker(Gender.getGenderFromUserPreferences(false, false));
 				try {
@@ -309,7 +309,7 @@ public class Encounter {
 		}
 		
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) { // None of these encounters work during a storm
 				return null;
 			}
@@ -375,7 +375,7 @@ public class Encounter {
 					(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
 						?new Value<EncounterType, Float>(EncounterType.SLAVE_USING_OTHER_SLAVE, 5f)
 						:null));
-			
+
 			if(Main.game.isStarted() && DominionPlaces.isCloseToEnforcerHQ()) {
 				map.put(EncounterType.DOMINION_ALLEY_ATTACK, 10f);
 				if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM
@@ -394,7 +394,7 @@ public class Encounter {
 		}
 		
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.DOMINION_ALLEY_ATTACK) {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
@@ -504,12 +504,12 @@ public class Encounter {
             Map<EncounterType, Float> map = new HashMap<>();
 
             map.put(EncounterType.DOMINION_ALLEY_ATTACK, 15f);
-            
+
             return map;
         }
         @Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
-				
+		protected Scene initialiseEncounter(EncounterType node) {
+
 			// Prioritise re-encountering the NPC on this tile:
 			List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
 			if(!encounterPossibilities.isEmpty()) {
@@ -517,7 +517,7 @@ public class Encounter {
 				Main.game.setActiveNPC(encounterNpc);
 				return Main.game.getActiveNPC().getEncounterDialogue();
 			}
-			
+
 			Main.game.setActiveNPC(new DominionSuccubusAttacker());
 
 			try {
@@ -547,7 +547,7 @@ public class Encounter {
 		}
 		
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if(node==EncounterType.DOMINION_ALLEY_ATTACK) {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
@@ -647,7 +647,7 @@ public class Encounter {
 			return Util.newHashMapOfValues(new Value<EncounterType, Float>(EncounterType.DOMINION_EXPRESS_CENTAUR, 10f));
 		}
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if(node==EncounterType.DOMINION_EXPRESS_CENTAUR) {
 				AbstractClothing collar = Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK);
 				if(collar!=null && collar.getClothingType().getId().equals("innoxia_neck_filly_choker")) { // When wearing filly choker, get approached by horny centaurs:
@@ -667,7 +667,7 @@ public class Encounter {
 		}
 		
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if (node == EncounterType.HARPY_NEST_ATTACK && !Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_HARPY_PACIFICATION)) {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
@@ -727,7 +727,7 @@ public class Encounter {
 		}
 
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if (node == EncounterType.HARPY_NEST_ATTACK) {
 				// Prioritise re-encountering the NPC on this tile:
 				List<NPC> encounterPossibilities = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
@@ -782,14 +782,14 @@ public class Encounter {
 		@Override
                 public Map<EncounterType, Float> getDialogues() {
                     Map<EncounterType, Float> map = new HashMap<>();
-			
+
                     map.put(EncounterType.SUBMISSION_TUNNEL_ATTACK, 20f);
                     map.put(EncounterType.SUBMISSION_FIND_ITEM, 10f);
-                    
+
                     return map;
                 }
                 @Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			
 			if(node == EncounterType.SUBMISSION_TUNNEL_ATTACK) {
 				List<String> impAdjectives = new ArrayList<>();
@@ -1012,7 +1012,7 @@ public class Encounter {
 				
 				Main.game.getActiveWorld().getCell(Main.game.getPlayer().getLocation()).getInventory().addItem((AbstractItem) randomItem);
 				return SubmissionEncounterDialogue.FIND_ITEM;
-				
+
 			} else {
 				return null;
 			}
@@ -1027,7 +1027,7 @@ public class Encounter {
             map.put(EncounterType.BAT_CAVERN_LURKER_ATTACK, 8f);
             map.put(EncounterType.BAT_CAVERN_SLIME_ATTACK, 6f);
             map.put(EncounterType.BAT_CAVERN_FIND_ITEM, 6f);
-            
+
             if (!Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_REBEL_BASE)
                     && !Main.game.getPlayer().isQuestFailed(QuestLine.SIDE_REBEL_BASE)
                     && Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_HANDLE_REFUSED)
@@ -1044,7 +1044,7 @@ public class Encounter {
 	                }
             	}
             }
-            
+
             if (!Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_REBEL_BASE)
                     && !Main.game.getPlayer().isQuestFailed(QuestLine.SIDE_REBEL_BASE)
                     && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_HANDLE_REFUSED)
@@ -1055,7 +1055,7 @@ public class Encounter {
 	            	// The player needs to find one password from a dark tile and one from a light tile, so if already found the password in their tile, do not enable Encounter
 	            	boolean alreadyFound = (playerPlaceType.equals(PlaceType.BAT_CAVERN_DARK) && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.rebelBaseDarkPassFound))
 	            			|| (playerPlaceType.equals(PlaceType.BAT_CAVERN_LIGHT) && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.rebelBaseLightPassFound));
-	            	
+
 	            	if(!alreadyFound) {
 		            	EncounterType nextEncounter = EncounterType.BAT_CAVERN_REBEL_PASSWORD_TWO;
 		            	if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_PASSWORD_PART_TWO)) {
@@ -1069,7 +1069,7 @@ public class Encounter {
 	            	}
             	}
             }
-            
+
 //            if (!Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_REBEL_BASE)
 //                    && !Main.game.getPlayer().isQuestFailed(QuestLine.SIDE_REBEL_BASE)
 //                    && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_HANDLE_REFUSED)
@@ -1081,7 +1081,7 @@ public class Encounter {
 //                    map.put(EncounterType.BAT_CAVERN_REBEL_PASSWORD_ONE, 1f);
 //                }
 //            }
-//            
+//
 //            if (!Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_REBEL_BASE)
 //                    && !Main.game.getPlayer().isQuestFailed(QuestLine.SIDE_REBEL_BASE)
 //                    && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_PASSWORD_PART_ONE)
@@ -1093,12 +1093,12 @@ public class Encounter {
 //                    map.put(EncounterType.BAT_CAVERN_REBEL_PASSWORD_TWO, 1f);
 //                }
 //            }
-            
+
             return map;
         }
 
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if (node == EncounterType.BAT_CAVERN_LURKER_ATTACK) {
 
 				// Prioritise re-encountering the NPC on this tile:
@@ -1150,14 +1150,14 @@ public class Encounter {
 			
 			} else if (node == EncounterType.BAT_CAVERN_REBEL_BASE_DISCOVERED) {
 				return BatCavernsEncounterDialogue.REBEL_BASE_DISCOVERED;
-					
+
 			} else if (node == EncounterType.BAT_CAVERN_REBEL_PASSWORD_ONE) {
 				return BatCavernsEncounterDialogue.REBEL_BASE_PASSWORD_ONE;
-				
+
 			} else if (node == EncounterType.BAT_CAVERN_REBEL_PASSWORD_TWO) {
 				return BatCavernsEncounterDialogue.REBEL_BASE_PASSWORD_TWO;
 			}
-			
+
 			return null;
 		}
 	};
@@ -1169,11 +1169,11 @@ public class Encounter {
             if(Main.game.getPlayer().hasQuestInLine(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_EXPLORATION) &&
                     !Main.game.getDialogueFlags().values.contains(DialogueFlagValue.rebelBaseInsaneSurvivorEncountered)) {
                 map.put(EncounterType.REBEL_BASE_INSANE_SURVIVOR_ATTACK, 100f);
-            }               
+            }
             return map;
         }
         @Override
-        protected DialogueNode initialiseEncounter(EncounterType node) {
+        protected Scene initialiseEncounter(EncounterType node) {
             if(node == EncounterType.REBEL_BASE_INSANE_SURVIVOR_ATTACK) {
                 Main.game.setActiveNPC(new RebelBaseInsaneSurvivor(Gender.getGenderFromUserPreferences(false, false)));
                 try {
@@ -1182,13 +1182,13 @@ public class Encounter {
                     e.printStackTrace();
                 }
                 return Main.game.getActiveNPC().getEncounterDialogue();
-                
+
             } else {
                 return null;
             }
-        }           
+        }
     };
-    
+
 	public static AbstractEncounter VENGAR_CAPTIVE_HALL = new AbstractEncounter() {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
@@ -1210,7 +1210,7 @@ public class Encounter {
 			return map;
 		}
 		@Override
-		protected DialogueNode getBaseRandomEncounter(boolean forceEncounter) {
+		protected Scene getBaseRandomEncounter(boolean forceEncounter) {
 			if(!Main.game.isExtendedWorkTime()) {
 				return VengarCaptiveDialogue.VENGARS_HALL_NIGHT_TIME;
 			}
@@ -1223,7 +1223,7 @@ public class Encounter {
 			return super.getBaseRandomEncounter(forceEncounter);
 		}
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.VENGAR_CAPTIVE_SERVE) {
 				return VengarCaptiveDialogue.VENGARS_HALL_SERVE;
 				
@@ -1263,14 +1263,14 @@ public class Encounter {
 			return map;
 		}
 		@Override
-		protected DialogueNode getBaseRandomEncounter(boolean forceEncounter) {
+		protected Scene getBaseRandomEncounter(boolean forceEncounter) {
 			if(!Main.game.isExtendedWorkTime()) {
 				return VengarCaptiveDialogue.VENGARS_BEDROOM_NIGHT_TIME;
 			}
 			return super.getBaseRandomEncounter(forceEncounter);
 		}
 		@Override
-		protected DialogueNode initialiseEncounter(EncounterType node) {
+		protected Scene initialiseEncounter(EncounterType node) {
 			if(node == EncounterType.VENGAR_CAPTIVE_CLEAN_ROOM) {
 				return VengarCaptiveDialogue.VENGARS_BEDROOM_CLEAN;
 				
@@ -1286,10 +1286,10 @@ public class Encounter {
 	};
 
 	public static List<AbstractEncounter> allEncounters;
-	
+
 	public static Map<AbstractEncounter, String> encounterToIdMap = new HashMap<>();
 	public static Map<String, AbstractEncounter> idToEncounterMap = new HashMap<>();
-	
+
 	private static Map<String, List<AbstractEncounter>> addedEncounters = new HashMap<>();
 	
 	/**
@@ -1306,30 +1306,30 @@ public class Encounter {
 	 */
 	public static AbstractEncounter getEncounterFromId(String id) {
 		id = Util.getClosestStringMatch(id, idToEncounterMap.keySet());
-		
+
 		return idToEncounterMap.get(id);
 	}
-	
+
 	public static String getIdFromEncounter(AbstractEncounter encounter) {
 		return encounterToIdMap.get(encounter);
 	}
-	
+
 	public static List<AbstractEncounter> getAllEncounters() {
 		return allEncounters;
 	}
 
 	static {
 		allEncounters = new ArrayList<>();
-		
+
 		// Modded encounters:
-		
+
 		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/encounters");
 		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
 			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
 				try {
 					AbstractEncounter encounter = new AbstractEncounter(innerEntry.getValue(), entry.getKey(), true) {
 						@Override
-						protected DialogueNode initialiseEncounter(EncounterType node) {
+						protected Scene initialiseEncounter(EncounterType node) {
 							return null;
 						}
 						@Override
@@ -1347,7 +1347,7 @@ public class Encounter {
 				}
 			}
 		}
-		
+
 		// External res encounters:
 
 		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/encounters");
@@ -1356,7 +1356,7 @@ public class Encounter {
 				try {
 					AbstractEncounter encounter = new AbstractEncounter(innerEntry.getValue(), entry.getKey(), false) {
 						@Override
-						protected DialogueNode initialiseEncounter(EncounterType node) {
+						protected Scene initialiseEncounter(EncounterType node) {
 							return null;
 						}
 						@Override
@@ -1375,29 +1375,29 @@ public class Encounter {
 				}
 			}
 		}
-		
+
 		// Hard-coded encounters (all those up above):
-		
+
 		Field[] fields = Encounter.class.getFields();
-		
+
 		for(Field f : fields){
 			if (AbstractEncounter.class.isAssignableFrom(f.getType())) {
-				
+
 				AbstractEncounter encounter;
-				
+
 				try {
 					encounter = ((AbstractEncounter) f.get(null));
 
 					encounterToIdMap.put(encounter, f.getName());
 					idToEncounterMap.put(f.getName(), encounter);
 					allEncounters.add(encounter);
-					
+
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		
+
 		// Add additional place types which can trigger encounters to the 'addedEncounters' map
 		for(AbstractEncounter encounter : allEncounters) {
 			if(encounter.getPlaceTypeIds()!=null) {

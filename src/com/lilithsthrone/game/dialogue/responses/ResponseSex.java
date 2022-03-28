@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
@@ -15,7 +16,6 @@ import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueManager;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.utils.ParserTarget;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.sex.InitialSexActionInformation;
@@ -54,7 +54,7 @@ public class ResponseSex extends Response {
 	private SexManagerInterface sexManager;
 	private List<GameCharacter> dominantSpectators;
 	private List<GameCharacter> submissiveSpectators;
-	private DialogueNode postSexDialogue;
+	private Scene postSexDialogue;
 	private String sexStartDescription;
 	private ResponseTag[] tags;
 	
@@ -91,7 +91,7 @@ public class ResponseSex extends Response {
 			List<GameCharacter> submissives,
 			List<GameCharacter> dominantSpectators,
 			List<GameCharacter> submissiveSpectators,
-			DialogueNode postSexDialogue,
+			Scene postSexDialogue,
 			String sexStartDescription,
 			ResponseTag... tags) {
 		this(title,
@@ -146,7 +146,7 @@ public class ResponseSex extends Response {
 			List<GameCharacter> submissives,
 			List<GameCharacter> dominantSpectators,
 			List<GameCharacter> submissiveSpectators,
-			DialogueNode postSexDialogue,
+			Scene postSexDialogue,
 			String sexStartDescription,
 			ResponseTag... tags) {
 		this(title,
@@ -406,7 +406,7 @@ public class ResponseSex extends Response {
 			boolean consensual,
 			boolean subHasEqualControl,
 			SMGeneric sexManager,
-			DialogueNode postSexDialogue,
+			Scene postSexDialogue,
 			String sexStartDescription) {
 		this(title, tooltipText, null, null, null, null, null, null, consensual, subHasEqualControl, sexManager, postSexDialogue, sexStartDescription);
 	}
@@ -422,7 +422,7 @@ public class ResponseSex extends Response {
 			boolean consensual,
 			boolean subHasEqualControl,
 			SMGeneric sexManager,
-			DialogueNode postSexDialogue,
+			Scene postSexDialogue,
 			String sexStartDescription) {
 		this(title, tooltipText, fetishesForUnlock, fetishesBlocking, corruptionBypass, perksRequired, femininityRequired, subspeciesRequired, consensual, subHasEqualControl, sexManager, null, null, postSexDialogue, sexStartDescription);
 		this.dominantSpectators = sexManager.getDominantSpectators();
@@ -436,7 +436,7 @@ public class ResponseSex extends Response {
 			SexManagerInterface sexManager,
 			List<GameCharacter> dominantSpectators,
 			List<GameCharacter> submissiveSpectators,
-			DialogueNode postSexDialogue) {
+			Scene postSexDialogue) {
 		this(title, tooltipText, consensual, subHasEqualControl, sexManager, dominantSpectators, submissiveSpectators, postSexDialogue, "");
 	}
 
@@ -447,7 +447,7 @@ public class ResponseSex extends Response {
 			SexManagerInterface sexManager,
 			List<GameCharacter> dominantSpectators,
 			List<GameCharacter> submissiveSpectators,
-			DialogueNode postSexDialogue,
+			Scene postSexDialogue,
 			String sexStartDescription) {
 		this(title, tooltipText,
 				null, null, null, null,
@@ -468,7 +468,7 @@ public class ResponseSex extends Response {
 			SexManagerInterface sexManager,
 			List<GameCharacter> dominantSpectators,
 			List<GameCharacter> submissiveSpectators,
-			DialogueNode postSexDialogue,
+			Scene postSexDialogue,
 			String sexStartDescription) {
 		super(title, tooltipText, null,
 				fetishesForUnlock, corruptionBypass,
@@ -689,7 +689,7 @@ public class ResponseSex extends Response {
 		return new ArrayList<>();
 	}
 	
-	public DialogueNode initSex() {
+	public Scene initSex() {
 		if(isFromExternalFile) {
 			if(isUsingExternalManager) {
 				Map<GameCharacter, SexSlot> dominantPositions = new HashMap<>();

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -1850,7 +1851,7 @@ public class TunnelAttackDialogue {
 						return PresetColour.GENERIC_NPC_REMOVAL;
 					}
 					@Override
-					public DialogueNode getNextDialogue() {
+					public Scene getNextDialogue() {
 						return Main.game.getDefaultDialogue(false);
 					}
 					@Override
@@ -1893,7 +1894,7 @@ public class TunnelAttackDialogue {
 						}
 					}
 					@Override
-					public DialogueNode getNextDialogue(){
+					public Scene getNextDialogue(){
 						return Main.game.getDefaultDialogue(false);
 					}
 				};

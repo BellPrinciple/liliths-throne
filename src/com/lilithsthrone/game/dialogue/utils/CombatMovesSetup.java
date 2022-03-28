@@ -1,5 +1,6 @@
 package com.lilithsthrone.game.dialogue.utils;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -16,7 +17,7 @@ import java.util.List;
 public class CombatMovesSetup {
 
     private static GameCharacter target;
-    private static DialogueNode dialogueReturn;
+    private static Scene dialogueReturn;
     
     public static GameCharacter getTarget() {
         if(target==null) {
@@ -25,7 +26,7 @@ public class CombatMovesSetup {
         return target;
     }
 
-    public static void setTarget(GameCharacter target, DialogueNode dialogueReturn) {
+    public static void setTarget(GameCharacter target, Scene dialogueReturn) {
         CombatMovesSetup.target = target;
         CombatMovesSetup.dialogueReturn = dialogueReturn;
     }

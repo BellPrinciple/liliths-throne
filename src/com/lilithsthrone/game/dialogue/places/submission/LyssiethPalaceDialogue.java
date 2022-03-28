@@ -90,8 +90,8 @@ public class LyssiethPalaceDialogue {
 			return "";
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return PlaceType.SUBMISSION_LILIN_PALACE_CAVERN.getDialogue(false).getResponse(responseTab, index);
+		public List<ResponseTab> responses() {
+			return PlaceType.SUBMISSION_LILIN_PALACE_CAVERN.getDialogue(false).getResponses();
 		}
 	};
 	
@@ -2076,11 +2076,8 @@ public class LyssiethPalaceDialogue {
 			return UtilText.parseFromXMLFile("places/submission/lyssiethsPalace", "LILAYA_DEMON_TF_END");
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.meraxisRepeatDemonTF)) {
-				return SIREN_OFFICE.getResponse(responseTab, index);
-			}
-			return Main.game.getDefaultDialogue(false).getResponse(responseTab, index);
+		public List<ResponseTab> responses() {
+			return (Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.meraxisRepeatDemonTF) ? SIREN_OFFICE : Main.game.getDefaultDialogue(false)).getResponses();
 		}
 	};
 }

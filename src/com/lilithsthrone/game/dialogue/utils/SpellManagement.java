@@ -2,6 +2,7 @@ package com.lilithsthrone.game.dialogue.utils;
 
 import java.util.List;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
@@ -21,9 +22,9 @@ public class SpellManagement {
 
     private static GameCharacter spellOwner;
     private static GameCharacter spellTarget;
-    private static DialogueNode dialogueReturn;
+    private static Scene dialogueReturn;
     
-    private static DialogueNode spellScreenAfterCasting;
+    private static Scene spellScreenAfterCasting;
     
     private static Spell spell;
     
@@ -41,11 +42,11 @@ public class SpellManagement {
         return spellTarget;
     }
 
-    public static DialogueNode getDialogueReturn() {
+    public static Scene getDialogueReturn() {
         return dialogueReturn;
     }
     
-    public static void setSpellOwner(GameCharacter spellOwner, DialogueNode dialogueReturn) {
+    public static void setSpellOwner(GameCharacter spellOwner, Scene dialogueReturn) {
         SpellManagement.spellOwner = spellOwner;
         SpellManagement.spellTarget = spellOwner;
         SpellManagement.dialogueReturn = dialogueReturn;

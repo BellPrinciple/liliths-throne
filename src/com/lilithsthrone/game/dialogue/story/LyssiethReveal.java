@@ -29,6 +29,8 @@ import com.lilithsthrone.utils.Vector2i;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.List;
+
 /**
  * @since 0.3
  * @version 0.3.4
@@ -855,8 +857,8 @@ public class LyssiethReveal {
 		}
 
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return PlaceType.LYSSIETH_PALACE_CORRIDOR.getDialogue(false).getResponse(responseTab, index);
+		public List<ResponseTab> responses() {
+			return PlaceType.LYSSIETH_PALACE_CORRIDOR.getDialogue(false).getResponses();
 		}
 	};
 }

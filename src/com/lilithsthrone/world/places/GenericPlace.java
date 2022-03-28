@@ -13,7 +13,7 @@ import org.w3c.dom.Element;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
-import com.lilithsthrone.game.dialogue.DialogueNode;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
@@ -185,11 +185,11 @@ public class GenericPlace implements XMLSaving {
 		return placeType.getColour();
 	}
 
-	public DialogueNode getDialogue(Cell c, boolean withRandomEncounter) {
+	public Scene getDialogue(Cell c, boolean withRandomEncounter) {
 		return getDialogue(c, withRandomEncounter, false);
 	}
 	
-	public DialogueNode getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
+	public Scene getDialogue(Cell c, boolean withRandomEncounter, boolean forceEncounter) {
 		return placeType.getDialogue(c, withRandomEncounter, forceEncounter);
 	}
 

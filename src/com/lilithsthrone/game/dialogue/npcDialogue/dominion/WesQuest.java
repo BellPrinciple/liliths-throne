@@ -317,8 +317,8 @@ public class WesQuest {
 			return UtilText.parseFromXMLFile("characters/dominion/wes", "ELLE_SEARCH_CAVE_LEAVE");
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false).getResponses();
 		}
 	};
 
@@ -359,8 +359,8 @@ public class WesQuest {
 			return UtilText.parseFromXMLFile("characters/dominion/wes", "CANDI_ELLE_EVIDENCE");
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return Main.game.getPlayer().getLocationPlace().getPlaceType().getDialogue(false).getResponses();
 		}
 	};
 

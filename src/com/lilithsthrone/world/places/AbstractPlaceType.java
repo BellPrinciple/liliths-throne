@@ -15,9 +15,9 @@ import java.util.Set;
 import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.DialogueManager;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.game.dialogue.encounters.Encounter;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -54,7 +54,7 @@ public class AbstractPlaceType implements PlaceType {
 	protected String SVGString;
 	protected Colour colour;
 	protected Colour backgroundColour;
-	protected DialogueNode dialogue;
+	protected Scene dialogue;
 	protected AbstractEncounter encounterType;
 
 	protected boolean globalMapTile;
@@ -104,7 +104,7 @@ public class AbstractPlaceType implements PlaceType {
 			String tooltipDescription,
 			String SVGPath,
 			Colour colour,
-			DialogueNode dialogue,
+			Scene dialogue,
 			Darkness darkness,
 			AbstractEncounter encounterType,
 			String virginityLossDescription) {
@@ -551,16 +551,16 @@ public class AbstractPlaceType implements PlaceType {
 		return ae;
 	}
 	
-	protected DialogueNode getBaseDialogue(Cell cell) {
+	protected Scene getBaseDialogue(Cell cell) {
 		return dialogue;
 	}
 
 	@Override
-	public DialogueNode getDialogue(Cell cell, boolean withRandomEncounter, boolean forceEncounter) {
+	public Scene getDialogue(Cell cell, boolean withRandomEncounter, boolean forceEncounter) {
 		if(withRandomEncounter) {
 			AbstractEncounter encounterType = getEncounterType();
 			if(encounterType!=null) {
-				DialogueNode dn = encounterType.getRandomEncounter(forceEncounter);
+				var dn = encounterType.getRandomEncounter(forceEncounter);
 				if (dn != null) {
 					return dn;
 				}

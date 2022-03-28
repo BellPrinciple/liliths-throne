@@ -9,6 +9,8 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import java.util.List;
+
 /**
  * @since 0.3.8.9
  * @version 0.3.21
@@ -96,8 +98,8 @@ public class RebelBase {
 			return UtilText.parseFromXMLFile("places/submission/rebelBase", "REBEL_BASE_ESCAPE");
 		}
 		@Override
-		public Response getResponse(int responseTab, int index) {
-			return PlaceType.BAT_CAVERN_DARK.getDialogue(false).getResponse(responseTab, index);
+		protected List<ResponseTab> responses() {
+			return PlaceType.BAT_CAVERN_DARK.getDialogue(false).getResponses();
 		};
 	};
 	
