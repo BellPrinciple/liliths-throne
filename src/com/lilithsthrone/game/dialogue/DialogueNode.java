@@ -1,12 +1,17 @@
 package com.lilithsthrone.game.dialogue;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
@@ -26,7 +31,7 @@ import static java.util.stream.IntStream.range;
  * @version 0.4.1
  * @author Innoxia
  */
-public abstract class DialogueNode {
+public abstract class DialogueNode implements Scene {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -42,8 +47,7 @@ public abstract class DialogueNode {
 	private boolean travelDisabled;
 	private boolean continuesDialogue;
 
-	private LinkedHashMap<Object,Mod> mods;
-	private static final String DEFAULT_TAB_TITLE = "Default";
+	private LinkedList<Mod> mods;
 
 	public DialogueNode(String label, String description, boolean travelDisabled) {
 		this(label, description, travelDisabled, false);
@@ -651,41 +655,22 @@ public abstract class DialogueNode {
 		return fromExternalFile;
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * If this DialogueNode is accessed through a Response, then this method may be overwritten by the Response's own getSecondsPassed method.
-	 *  Due to this, it cannot be guaranteed that this method is used when determining how much time passes in a scene.
-	 * 
-	 * @return The number of seconds that pass when entering into this dialogue node.
-	 */
+	@Override
 	public int getSecondsPassed() {
 		return secondsPassed;
 	}
-
-	/**
-	 * Content that is set above the main content. It is not affected by fade-in effects.<br/>
-	 * <b>Append to Main.game.getTextStartStringBuilder() instead of using this!</b>
-	 */
-//	@Deprecated
-	public String getHeaderContent() {
-		return null;
-	}
-
-	/** The main content for this DialogueNode. If enabled in the options, it is affected by fade-in effects. */
-	public abstract String getContent();
 
 	@Override
 	public String toString() {
 		return label + ":" + description.substring(0, description.length() <= 20 ? description.length() : 20);
 	}
 	
-	/**
-	 * @return The label for the button proceeding to this dialogue node.<br/>
-	 * <b>Note:</b> In almost all instances, this is overridden by the Response class's getTitle() method.
-	 */
+	@Override
 	public String getLabel() {
 		if(label==null || label.isEmpty()) {
 			try {
@@ -701,51 +686,19 @@ public abstract class DialogueNode {
 		return this;
 	}
 	
-	/**
-	 * @return The description for the action proceeding to this dialogue node, to be displayed in the action tooltip.<br/>
-	 * <b>Note:</b> In almost all instances, this is overridden by the Response class's getTooltipText() method.
-	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
-	/**
-	 * @return True if this dialogue node should append to the current dialogue, instead of clearing the screen and displaying it as a new scene.
-	 */
+	@Override
 	public boolean isContinuesDialogue() {
 		return continuesDialogue;
 	}
 
-	/**
-	 * @return True if this dialogue node disables map movement.
-	 */
+	@Override
 	public boolean isTravelDisabled() {
 		return travelDisabled;
-	}
-
-	/**
-	 * @return True if this dialogue node disables inventory management. By default, this is disabled if {@code isTravelDisabled()} returns true.
-	 */
-	public boolean isInventoryDisabled() {
-		return isTravelDisabled();
-	}
-
-	/**
-	 * @return True if health and aura regeneration is disabled in this dialogue node.
-	 */
-	public boolean isRegenerationDisabled() {
-		return false;
-	}
-	
-	/**
-	 * @return True if this dialogue should display the actions title as part of a continuation of the scene, in this format:<br/><br/>
-	 * <i>...sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
-	 * <hr/>
-	 * > Accept<br/>
-	 * Lorem ipsum dolor sit amet, consectetur adipiscing elit...</i>
-	 */
-	public boolean isDisplaysActionTitleOnContinuesDialogue() {
-		return true;
 	}
 	
 	/**
@@ -772,21 +725,29 @@ public abstract class DialogueNode {
 		return null;
 	}
 
-	/**
-	 * Collects available responses of the player to this node.
-	 * @return
-	 * Collection of responses, grouped into titled tabs.
-	 */
+	@Override
 	public final List<ResponseTab> getResponses() {
-		var r = responses();
-		for(Mod m : mods==null ? List.<Mod>of() : mods.values()) {
-			var n = m.response.get();
+		var b = responses();
+		if(mods==null)
+			return b;
+		var r = mods.stream().allMatch(m->b.stream().anyMatch(x->x.title.equals(m.tab))) ? b : new ArrayList<>(b);
+		for(Mod m : mods) {
+			Response n;
+			try {
+				n = m.response.get();
+			}
+			catch(RuntimeException x) {
+				x.printStackTrace();
+				continue;
+			}
+			//ignore if instantiation failed due to unmet conditions
+			if(n==null)
+				continue;
 			var t = r.stream()
 			.filter(s->m.tab.equals(s.title))
 			.findAny();
 			if(t.isEmpty()) {
-				ResponseTab tab = new ResponseTab(m.tab,n);
-				r.add(tab);
+				r.add(new ResponseTab(m.tab,n));
 				continue;
 			}
 			var a = t.get().response;
@@ -809,7 +770,7 @@ public abstract class DialogueNode {
 	protected List<ResponseTab> responses() {
 		var r0 = responseTab();
 		if(r0 != null)
-			return List.of(new ResponseTab(DEFAULT_TAB_TITLE,r0));
+			return Scene.singleTab(r0);
 		var t0 = getResponseTabTitle(0);
 		var a0 = new LinkedList<Response>();
 		int e = RESPONSE_COUNT;
@@ -821,7 +782,7 @@ public abstract class DialogueNode {
 		}
 		var b0 = a0.toArray(Response[]::new);
 		if(t0 == null)
-			return List.of(new ResponseTab(DEFAULT_TAB_TITLE,b0));
+			return Scene.singleTab(b0);
 		var r = new LinkedList<ResponseTab>();
 		r.add(new ResponseTab(t0,b0));
 		for(int i = 1;; i++) {
@@ -849,22 +810,9 @@ public abstract class DialogueNode {
 	}
 
 	/**
-	 * @return The type of dialogue that this is. Will almost always be {@code DialogueNodeType.NORMAL}.
-	 */
-	public DialogueNodeType getDialogueNodeType() {
-		return DialogueNodeType.NORMAL;
-	}
-
-	/**
-	 * @return Whether the content of the dialogue should run through the parser. Will almost always be {@code true}.
-	 */
-	public boolean isContentParsed() {
-		return true;
-	}
-
-	/**
 	 * @return The author of the scene.
 	 */
+	@Override
 	public String getAuthor() {
 		return author;
 	}
@@ -873,30 +821,9 @@ public abstract class DialogueNode {
 		this.author = author;
 	}
 
-	/**
-	 * @return True if the header should not be run through the parsing engine.
-	 */
-	public boolean disableHeaderParsing() {
-		return false;
-	}
-
-	/**
-	 * @return True if this dialogue node should be re-run through the parser when it is restored (i.e. loaded from a saved dialogue node).
-	 */
-	public boolean reloadOnRestore() {
-		return false;
-	}
-	
-	/**
-	 * This method is called before the getContent() method is called.
-	 */
-	public void applyPreParsingEffects() {
-	}
-	
+	//does not allow overriding
 	public final void specialPreParsingEffects() {
-		if(Main.game.isStarted()) {
-			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.coveringChangeListenersRequired, false);
-		}
+		Scene.super.specialPreParsingEffects();
 	}
 
 	/**
@@ -909,9 +836,8 @@ public abstract class DialogueNode {
 	 */
 	public final void addResponse(Object key, String tab, Supplier<Response> value) {
 		if(mods == null)
-			mods = new LinkedHashMap<>();
-		Object old = mods.putIfAbsent(key,new Mod(tab,value));
-		assert old == null;
+			mods = new LinkedList<>();
+		mods.add(new Mod(key,tab,value));
 	}
 
 	/**
@@ -919,34 +845,17 @@ public abstract class DialogueNode {
 	 * Used in {@link #addResponse(Object,String,Supplier)}.
 	 */
 	public final void removeResponse(Object key) {
-		Object old = mods.remove(key);
-		assert old != null;
+		mods.removeIf(m->key.equals(m.key));
 		if(mods.isEmpty())
 			mods = null;
 	}
 
-	public static final class ResponseTab {
-		public final String title;
-		public final ArrayList<Response> response = new ArrayList<>();
-		public ResponseTab(String t, Response... r) {
-			title = Objects.requireNonNull(t);
-			response.addAll(List.of(r));
-		}
-		public void set(int i, Response r) {
-			if(i < response.size()) {
-				response.set(i,r);
-				return;
-			}
-			while(response.size() < i)
-				response.add(null);
-			response.add(r);
-		}
-	}
-
 	private static final class Mod {
+		final Object key;
 		final String tab;
 		final Supplier<Response> response;
-		Mod(String t, Supplier<Response> r) {
+		Mod(Object k, String t, Supplier<Response> r) {
+			key = k;
 			tab = t;
 			response = r;
 		}
