@@ -6,7 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
 
 import com.lilithsthrone.game.character.npc.misc.NPCOffspring;
 import com.lilithsthrone.game.character.npc.misc.OffspringSeed;
@@ -32,6 +33,8 @@ import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import static java.util.stream.Collectors.toMap;
+
 /**
  * @since 0.4
  * @version 0.4
@@ -50,47 +53,7 @@ public class AbstractEncounter implements Encounter {
 	private String author;
 
 	private List<String> placeTypeIds;
-	private List<ExternalEncounterData> possibleEncounters;
-
-	/**
-	 * Utility class to store data loaded from external files.
-	 */
-	private class ExternalEncounterData {
-		private String name;
-		private String triggerConditional;
-		private boolean opportunistic;
-		private String dialogueId;
-		
-		public ExternalEncounterData(String name, String triggerConditional, boolean opportunistic, String dialogueId) {
-			this.name = name;
-			this.triggerConditional = triggerConditional;
-			this.opportunistic = opportunistic;
-			this.dialogueId = dialogueId;
-		}
-		
-		public float getTriggerChance() {
-			try {
-				return Float.valueOf(UtilText.parse(this.getTriggerConditional()).trim());
-			} catch(Exception ex) {
-				System.err.println("Error in AbstractEncounter's ExternalEncounterData: getTriggerChance() for '"+getName()+"' failed to parse!");
-				ex.printStackTrace();
-				return 0f;
-			}
-		}
-		
-		public String getName() {
-			return name;
-		}
-		public String getTriggerConditional() {
-			return triggerConditional;
-		}
-		public boolean isOpportunistic() {
-			return opportunistic;
-		}
-		public String getDialogueId() {
-			return dialogueId;
-		}
-	}
+	private List<Mod> possibleEncounters;
 	
 	public AbstractEncounter() {
 	}
@@ -116,17 +79,29 @@ public class AbstractEncounter implements Encounter {
 					}
 				}
 				
-				this.possibleEncounters = new ArrayList<>();
+				var list = new ArrayList<Mod>();
 				for(Element e : coreElement.getMandatoryFirstOf("possibleEncounters").getAllOf("encounter")) {
 					String name = e.getMandatoryFirstOf("name").getTextContent();
 					String chanceToTrigger = e.getMandatoryFirstOf("chanceToTrigger").getTextContent();
 					boolean opportunistic = Boolean.valueOf(e.getMandatoryFirstOf("chanceToTrigger").getAttribute("opportunisticEncounter").trim());
 					String dialogueId = e.getMandatoryFirstOf("dialogueReturned").getTextContent();
-					
-					ExternalEncounterData data = new ExternalEncounterData(name, chanceToTrigger, opportunistic, dialogueId);
-					this.possibleEncounters.add(data);
+					list.add(new Mod(
+							name,
+							()->{
+								try {
+									return Double.parseDouble(UtilText.parse(chanceToTrigger).trim());
+								}
+								catch(Exception ex) {
+									System.err.println("Error in AbstractEncounter's ExternalEncounterData: getTriggerChance() for '"+name+"' failed to parse!");
+									ex.printStackTrace();
+									return 0f;
+							}},
+							()->DialogueManager.getDialogueFromId(UtilText.parse(dialogueId).trim()),
+							opportunistic));
 				}
-					
+				if(!list.isEmpty())
+					possibleEncounters = list;
+
 			} catch(Exception ex) {
 				ex.printStackTrace();
 				System.err.println("WorldType was unable to be loaded from file! (" + XMLFile.getName() + ")\n" + ex);
@@ -151,7 +126,13 @@ public class AbstractEncounter implements Encounter {
 	public String getId() {
 		return id;
 	}
-	
+
+	@Override
+	public Map<EncounterType,Float> getDialogues() {
+		return possibleEncounters == null ? Map.of()
+		: possibleEncounters.stream().collect(toMap(s->s,s->(float)s.chance.getAsDouble()));
+	}
+
 	protected static void spawnEnforcers() {
 		List<List<String>> savedEnforcerIds = Main.game.getSavedEnforcers(WorldType.DOMINION);
 		
@@ -367,203 +348,6 @@ public class AbstractEncounter implements Encounter {
 		
 		return null;
 	}
-
-	@Override
-	public boolean isAnyEncounterAvailable() {
-		return getBaseRandomEncounter(true)!=null;
-	}
-	
-	/**
-	 * Returns a random encounter from the list, or null if no encounter was selected.
-	 * 
-	 * @param forceEncounter Forces an encounter to be selected. (Will still return null if the encounter list is empty.)
-	 * @return null if no encounter.
-	 */
-	@Override
-	public Scene getRandomEncounter(boolean forceEncounter) {
-		return getBaseRandomEncounter(forceEncounter);
-	}
-
-	@Override
-	public boolean isAnyBaseTriggerChanceOverOneHundred() {
-		if(this.isFromExternalFile()) {
-			for(ExternalEncounterData data : possibleEncounters) {
-				if(data.getTriggerChance()>100) {
-					return true;
-				}
-			}
-			
-		} else {
-			for(Entry<EncounterType, Float> e : getDialogues().entrySet()) {
-				if(e.getValue()>100) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	/**
-	 * @return The sum of all possible encounter chances which this AbstractEncounter contains. Will typically be a value under 100.
-	 */
-	@Override
-	public float getTotalChanceValue() {
-		float total = 0;
-		if(this.isFromExternalFile()) {
-			for(ExternalEncounterData data : possibleEncounters) {
-				float weighting = data.getTriggerChance();
-				total += weighting;
-			}
-		} else {
-			for(Entry<EncounterType, Float> e : getDialogues().entrySet()) {
-				float weighting = e.getValue();
-				total += weighting;
-			}
-		}
-		return total;
-	}
-
-	private void setEncounterDialogue(Scene dialogueNode, boolean forced) {
-		if(forced) {
-			Main.game.forcedEncounterAtSeconds = new Value<>(Main.game.getSecondsPassed(), dialogueNode);
-		} else {
-			Main.game.encounterAtSeconds = new Value<>(Main.game.getSecondsPassed(), dialogueNode);
-		}
-	}
-	
-	protected Scene getBaseRandomEncounter(boolean forceEncounter) {
-		if(forceEncounter) {
-			if(Main.game.forcedEncounterAtSeconds.getKey()==Main.game.getSecondsPassed()) {
-				return Main.game.forcedEncounterAtSeconds.getValue();
-			}
-			
-		} else {
-			if(Main.game.encounterAtSeconds.getKey()==Main.game.getSecondsPassed()) {
-				return Main.game.encounterAtSeconds.getValue();
-			}
-		}
-		
-		float opportunisticMultiplier = 1;
-		if(Main.game.isOpportunisticAttackersEnabled()) {
-			// lust: linear boost; 25% max
-			opportunisticMultiplier += Main.game.getPlayer().getLust() / 200;
-			// health: linear boost; 25% (theoretical) max
-			opportunisticMultiplier += 0.25f - Main.game.getPlayer().getHealthPercentage() * 0.25f;
-			// smelly body: 25% boost
-			if(Main.game.getPlayer().hasStatusEffect(StatusEffect.BODY_CUM) || Main.game.getPlayer().hasStatusEffect(StatusEffect.BODY_CUM_MASOCHIST)) {
-				opportunisticMultiplier += 0.25f;
-			}
-			// smelly clothes: 25% boost
-			if(Main.game.getPlayer().hasStatusEffect(StatusEffect.CLOTHING_CUM) || Main.game.getPlayer().hasStatusEffect(StatusEffect.CLOTHING_CUM_MASOCHIST)) {
-				opportunisticMultiplier += 0.25f;
-			}
-			// exposure: 50% or 75% boost
-			if(!Collections.disjoint(
-					Util.newArrayListOfValues(
-						StatusEffect.EXPOSED_PLUS_BREASTS,
-						StatusEffect.FETISH_EXHIBITIONIST_PLUS_BREASTS),
-					Main.game.getPlayer().getStatusEffects())) {
-				opportunisticMultiplier += 0.75f;
-				
-			} else if(!Collections.disjoint(
-					Util.newArrayListOfValues(
-						StatusEffect.EXPOSED,
-						StatusEffect.EXPOSED_BREASTS,
-						StatusEffect.FETISH_EXHIBITIONIST,
-						StatusEffect.FETISH_EXHIBITIONIST_BREASTS),
-					Main.game.getPlayer().getStatusEffects())) {
-				opportunisticMultiplier += 0.5f;
-			}
-			// drunk: 50% boost
-			if(!Collections.disjoint(
-					Util.newArrayListOfValues(
-						StatusEffect.DRUNK_3,
-						StatusEffect.DRUNK_4,
-						StatusEffect.DRUNK_5),
-					Main.game.getPlayer().getStatusEffects())) {
-				opportunisticMultiplier += 0.5f;
-			}
-		}
-		
-		if(this.isFromExternalFile()) {
-//			System.out.println("--- Encounter Generation Start ---");
-			float total = 0;
-			float opportunisticIncrease = 0;
-			Map<ExternalEncounterData, Float> finalMap = new HashMap<>();
-			for(ExternalEncounterData data : possibleEncounters) {
-				float weighting = data.getTriggerChance();
-				if(!this.isAnyBaseTriggerChanceOverOneHundred() || data.getTriggerChance()>100) { // If a value of >100 is used for the encounter chance, then all other encounters with chances of <=100 are discarded
-					if(data.isOpportunistic()) {
-						weighting *= opportunisticMultiplier;
-						opportunisticIncrease+=opportunisticMultiplier;
-					}
-					total+=weighting;
-					finalMap.put(data, weighting);
-//					System.out.println("Weighting add: "+weighting+" ("+data.getName()+")");
-				}
-			}
-			if(total==0) {
-				setEncounterDialogue(null, forceEncounter);
-				return null;
-			}
-//			System.out.println("Final total: "+total);
-//			System.out.println("Final opportunisticIncrease: "+opportunisticIncrease);
-			
-			if(forceEncounter || Math.random()*(100+opportunisticIncrease)<total) {
-				ExternalEncounterData encounter;
-				Scene dn = null;
-				int tries = 0;
-				while(dn==null && tries<=3) { // As some Encounters rarely return null, try 3 times to get an Encounter. Yes this is not ideal, but it was either this or suffer performance issues in calculating Encounter availabilities.
-					tries++;
-					encounter = Util.getRandomObjectFromWeightedFloatMap(finalMap);
-					finalMap.remove(encounter);
-					dn = DialogueManager.getDialogueFromId(UtilText.parse(encounter.getDialogueId()).trim());
-				}
-//				System.out.println("Returning: "+dn.getId());
-//				System.out.println("--- END ---");
-				setEncounterDialogue(dn, forceEncounter);
-				return dn;
-			}
-//			System.out.println("--- END ---");
-			
-		} else {
-			float total = 0;
-			float opportunisticIncrease = 0;
-			Map<EncounterType, Float> finalMap = new HashMap<>();
-			for(Entry<EncounterType, Float> e : getDialogues().entrySet()) { // Iterate through the base encounter map, apply opportunisticMultiplier if applicable, and create a new 'finalMap' of these weighted chances.
-				float weighting = e.getValue();
-				if(!this.isAnyBaseTriggerChanceOverOneHundred() || weighting>100) { // If a value of >100 is used for the encounter chance, then all other encounters with chances of <=100 are discarded
-					if(e.getKey().isOpportunistic()) {
-						weighting *= opportunisticMultiplier;
-						opportunisticIncrease+=opportunisticMultiplier;
-					}
-					total+=weighting;
-					finalMap.put(e.getKey(), weighting);
-				}
-			}
-			if(total==0) {
-				setEncounterDialogue(null, forceEncounter);
-				return null;
-			}
-			
-			if(forceEncounter || Math.random()*(100+opportunisticIncrease)<total) {
-				EncounterType encounter;
-				Scene dn = null;
-				int tries = 0;
-				while(dn==null && tries<=3) { // As some Encounters rarely return null, try 3 times to get an Encounter. Yes this is not ideal, but it was either this or suffer performance issues in calculating Encounter availabilities.
-					tries++;
-					encounter = Util.getRandomObjectFromWeightedFloatMap(finalMap);
-					finalMap.remove(encounter);
-					dn = initialiseEncounter(encounter);
-				}
-				setEncounterDialogue(dn, forceEncounter);
-				return dn;
-			}
-		}
-
-		setEncounterDialogue(null, forceEncounter);
-		return null;
-	}
 	
 	public static AbstractCoreItem getRandomItem() {
 		return randomItem;
@@ -574,4 +358,17 @@ public class AbstractEncounter implements Encounter {
 		return placeTypeIds;
 	}
 
+	@Override
+	public void add(Object k, DoubleSupplier c, Supplier<Scene> v, boolean o) {
+		if(possibleEncounters == null)
+			possibleEncounters = new ArrayList<>();
+		possibleEncounters.add(new Mod(k,c,v,o));
+	}
+
+	@Override
+	public void remove(Object k) {
+		possibleEncounters.removeIf(m->k.equals(m.key));
+		if(possibleEncounters.isEmpty())
+			possibleEncounters = null;
+	}
 }

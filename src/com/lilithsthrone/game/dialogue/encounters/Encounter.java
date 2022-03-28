@@ -88,21 +88,132 @@ public interface Encounter {
 		return ((Mod)node).value.get();
 	}
 
-	boolean isAnyEncounterAvailable();
+	default boolean isAnyEncounterAvailable() {
+		return getRandomEncounter(true) != null;
+	}
 
 	/**
 	 * Returns a random encounter from the list, or null if no encounter was selected.
 	 *
-	 * @param forceEncounter Forces an encounter to be selected. (Will still return null if the encounter list is empty.)
-	 * @return null if no encounter.
+	 * @param force
+	 * Forces an encounter to be selected.
+	 * (Will still return null if the encounter list is empty.)
+	 * @return
+	 * Start dialogue of the selected encounter, if exists.
+	 * {@code null} otherwise.
 	 */
-	DialogueNode getRandomEncounter(boolean forceEncounter);
+	default Scene getRandomEncounter(boolean force) {
+		var atSeconds = force ? Main.game.forcedEncounterAtSeconds : Main.game.encounterAtSeconds;
+		var now = Main.game.getSecondsPassed();
+		if(atSeconds.getKey()==now)
+			return atSeconds.getValue();
 
-	boolean isAnyBaseTriggerChanceOverOneHundred();
+		var n = chooseRandomEncounter(force);
+		if(force)
+			Main.game.forcedEncounterAtSeconds = new Value<>(now,n);
+		else
+			Main.game.encounterAtSeconds = new Value<>(now,n);
+		return n;
+	}
 
-	float getTotalChanceValue();
+	private Scene chooseRandomEncounter(boolean force) {
 
-	List<String> getPlaceTypeIds();
+		float opportunisticMultiplier = 1;
+		if(Main.game.isOpportunisticAttackersEnabled()) {
+			// lust: linear boost; 25% max
+			opportunisticMultiplier += Main.game.getPlayer().getLust() / 200;
+			// health: linear boost; 25% (theoretical) max
+			opportunisticMultiplier += 0.25f - Main.game.getPlayer().getHealthPercentage() * 0.25f;
+			// smelly body: 25% boost
+			if(!Collections.disjoint(
+					List.of(
+							StatusEffect.BODY_CUM,
+							StatusEffect.BODY_CUM_MASOCHIST),
+					Main.game.getPlayer().getStatusEffects()))
+				opportunisticMultiplier += 0.25f;
+			// smelly clothes: 25% boost
+			if(!Collections.disjoint(
+					List.of(
+							StatusEffect.CLOTHING_CUM,
+							StatusEffect.CLOTHING_CUM_MASOCHIST),
+					Main.game.getPlayer().getStatusEffects()))
+				opportunisticMultiplier += 0.25f;
+			// exposure: 50% or 75% boost
+			if(!Collections.disjoint(
+					List.of(
+							StatusEffect.EXPOSED_PLUS_BREASTS,
+							StatusEffect.FETISH_EXHIBITIONIST_PLUS_BREASTS),
+					Main.game.getPlayer().getStatusEffects()))
+				opportunisticMultiplier += 0.75f;
+			else if(!Collections.disjoint(
+					List.of(
+							StatusEffect.EXPOSED,
+							StatusEffect.EXPOSED_BREASTS,
+							StatusEffect.FETISH_EXHIBITIONIST,
+							StatusEffect.FETISH_EXHIBITIONIST_BREASTS),
+					Main.game.getPlayer().getStatusEffects()))
+				opportunisticMultiplier += 0.5f;
+			// drunk: 50% boost
+			if(!Collections.disjoint(
+					List.of(
+							StatusEffect.DRUNK_3,
+							StatusEffect.DRUNK_4,
+							StatusEffect.DRUNK_5),
+					Main.game.getPlayer().getStatusEffects()))
+				opportunisticMultiplier += 0.5f;
+		}
+
+		boolean anyOver100 = isAnyBaseTriggerChanceOverOneHundred();
+
+		float total = 0;
+		float opportunisticIncrease = 0;
+		Map<EncounterType,Float> finalMap = new HashMap<>();
+		// Iterate through the base encounter map, apply opportunisticMultiplier if applicable, and create a new 'finalMap' of these weighted chances.
+		for(Map.Entry<EncounterType,Float> e : getDialogues().entrySet()) {
+			float weighting = e.getValue();
+			// If a value of >100 is used for the encounter chance, then all other encounters with chances of <=100 are discarded
+			if(!anyOver100 || weighting>100) {
+				if(e.getKey().isOpportunistic()) {
+					weighting *= opportunisticMultiplier;
+					opportunisticIncrease+=opportunisticMultiplier;
+				}
+				total+=weighting;
+				finalMap.put(e.getKey(), weighting);
+			}
+		}
+
+		if(total==0 || !force && Math.random()*(100+opportunisticIncrease)>=total)
+			return null;
+
+		EncounterType encounter;
+		Scene dn = null;
+		int tries = 0;
+		// As some Encounters rarely return null, try 3 times to get an Encounter.
+		// Yes this is not ideal, but it was either this or suffer performance issues in calculating Encounter availabilities.
+		while(dn==null && tries<=3) {
+			tries++;
+			encounter = Util.getRandomObjectFromWeightedFloatMap(finalMap);
+			finalMap.remove(encounter);
+			dn = initialiseEncounter(encounter);
+		}
+		return dn;
+	}
+
+	default boolean isAnyBaseTriggerChanceOverOneHundred() {
+		return getDialogues().values().stream().anyMatch(v->v>100);
+	}
+
+	/**
+	 * @return
+	 * The sum of all possible encounter chances which this AbstractEncounter contains. Will typically be a value under 100.
+	 */
+	default float getTotalChanceValue() {
+		return (float)getDialogues().values().stream().mapToDouble(x->x).sum();
+	}
+
+	default List<String> getPlaceTypeIds() {
+		return List.of();
+	}
 
 	default void add(Object key, DoubleSupplier chance, Supplier<Scene> value, boolean opportunistic) {
 		Mod.map.computeIfAbsent(this,k->new LinkedList<>())
@@ -1248,7 +1359,7 @@ public interface Encounter {
 			return map;
 		}
 		@Override
-		protected Scene getBaseRandomEncounter(boolean forceEncounter) {
+		public Scene getRandomEncounter(boolean forceEncounter) {
 			if(!Main.game.isExtendedWorkTime()) {
 				return VengarCaptiveDialogue.VENGARS_HALL_NIGHT_TIME;
 			}
@@ -1258,7 +1369,7 @@ public interface Encounter {
 			if(Main.game.getPlayer().hasCompanions() && Main.game.getPlayer().getMainCompanion().hasStatusEffect(StatusEffect.PREGNANT_3)) {
 				return VengarCaptiveDialogue.VENGARS_HALL_DELIVERY;
 			}
-			return super.getBaseRandomEncounter(forceEncounter);
+			return super.getRandomEncounter(forceEncounter);
 		}
 		@Override
 		public Scene initialiseEncounter(EncounterType node) {
@@ -1301,11 +1412,11 @@ public interface Encounter {
 			return map;
 		}
 		@Override
-		protected Scene getBaseRandomEncounter(boolean forceEncounter) {
+		public Scene getRandomEncounter(boolean forceEncounter) {
 			if(!Main.game.isExtendedWorkTime()) {
 				return VengarCaptiveDialogue.VENGARS_BEDROOM_NIGHT_TIME;
 			}
-			return super.getBaseRandomEncounter(forceEncounter);
+			return super.getRandomEncounter(forceEncounter);
 		}
 		@Override
 		public Scene initialiseEncounter(EncounterType node) {
@@ -1383,10 +1494,10 @@ public interface Encounter {
 
 	final class Mod extends EncounterType {
 		private static final HashMap<Encounter,List<Mod>> map = new HashMap<>();
-		private final Object key;
-		private final DoubleSupplier chance;
-		private final Supplier<DialogueNode> value;
-		private Mod(Object k, DoubleSupplier c, Supplier<DialogueNode> v, boolean o) {
+		public final Object key;
+		public final DoubleSupplier chance;
+		private final Supplier<Scene> value;
+		public Mod(Object k, DoubleSupplier c, Supplier<Scene> v, boolean o) {
 			super(o);
 			key = k;
 			chance = c;
