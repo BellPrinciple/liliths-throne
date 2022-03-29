@@ -415,7 +415,7 @@ public class CityHall {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day...", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day...");
 			}
 			return null;
 		}
@@ -433,7 +433,7 @@ public class CityHall {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day...", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day...");
 			}
 			return null;
 		}

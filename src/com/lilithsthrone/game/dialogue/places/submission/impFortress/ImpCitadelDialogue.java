@@ -537,17 +537,17 @@ public class ImpCitadelDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(getImpGroup().isEmpty()) {
 				if(index==1) {
-					return new Response("Continue", "As you've enslaved all of the imps, there's nothing left to do but continue on your way through the citadel...", Main.game.getDefaultDialogue(false));
+					return Response.back("Continue", "As you've enslaved all of the imps, there's nothing left to do but continue on your way through the citadel...");
 				}
 				return null;
 			}
 			if(!isCompanionDialogue()) {
 				if(responseTab == 0) {
 					if (index == 1) {
-						return new Response("Scare off", "Tell the imps to get out of here while they still can...", Main.game.getDefaultDialogue(false)) {
+						return new Response.Back("Scare off", "Tell the imps to get out of here while they still can...") {
 							@Override
 							public void effects() {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "IMP_COMBAT_VICTORY_SCARE_OFF", getImpGroup()));
+								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/impCitadel" + getDialogueEncounterId(), "IMP_COMBAT_VICTORY_SCARE_OFF", getImpGroup()));
 								banishImps();
 							}
 						};
@@ -642,10 +642,10 @@ public class ImpCitadelDialogue {
 			} else {
 				if(responseTab == 0) {
 					if (index == 1) {
-						return new Response("Scare off", "Tell the imps to get out of here while they still can...", Main.game.getDefaultDialogue(false)) {
+						return new Response.Back("Scare off", "Tell the imps to get out of here while they still can...") {
 							@Override
 							public void effects() {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "IMP_COMBAT_VICTORY_SCARE_OFF", getImpGroup()));
+								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/impCitadel" + getDialogueEncounterId(), "IMP_COMBAT_VICTORY_SCARE_OFF", getImpGroup()));
 								banishImps();
 							}
 						};
@@ -853,11 +853,11 @@ public class ImpCitadelDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(!Main.game.isNonConEnabled()) {
 				if(index==1) {
-					return new Response("Recover", "Take a moment to catch your breath, and then continue on your way.", Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Recover", "Take a moment to catch your breath, and then continue on your way.") {
 						@Override
 						public void effects() {
 							banishImps();
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "IMP_FIGHT_AFTER_COMBAT_DEFEAT_RECOVER", getAllCharacters()));
+							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/impCitadel" + getDialogueEncounterId(), "IMP_FIGHT_AFTER_COMBAT_DEFEAT_RECOVER", getAllCharacters()));
 						}
 					};
 				}
@@ -1027,7 +1027,7 @@ public class ImpCitadelDialogue {
 		protected List<ResponseTab> responses() {
 			var r = IMP_FIGHT_AFTER_COMBAT_VICTORY.getResponses().subList(0,2);
 			r.get(0).response.clear();
-			r.get(0).set(1,new Response("Scare off", "Scare the imps off and continue on your way.", Main.game.getDefaultDialogue(false)) {
+			r.get(0).set(1, new Response.Back("Scare off", "Scare the imps off and continue on your way.") {
 				@Override
 				public void effects() {
 					banishImps();
@@ -1072,11 +1072,11 @@ public class ImpCitadelDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Recover", "Take a moment to catch your breath, and then continue on your way.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Recover", "Take a moment to catch your breath, and then continue on your way.") {
 					@Override
 					public void effects() {
 						banishImps();
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/impCitadel"+getDialogueEncounterId(), "IMP_FIGHT_AFTER_SEX_DEFEAT_RECOVER", getAllCharacters()));
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/impCitadel" + getDialogueEncounterId(), "IMP_FIGHT_AFTER_SEX_DEFEAT_RECOVER", getAllCharacters()));
 					}
 				};
 				
@@ -1736,7 +1736,7 @@ public class ImpCitadelDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "");
 			}
 			return null;
 		}

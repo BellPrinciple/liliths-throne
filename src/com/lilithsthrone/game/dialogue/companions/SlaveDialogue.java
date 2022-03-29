@@ -858,11 +858,7 @@ public class SlaveDialogue {
 					}
 					
 				} else if(index == 0) {
-					return new Response("Leave", UtilText.parse(getSlave(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), SLAVE_START) {
-						@Override
-						public Scene getNextDialogue() {
-							return Main.game.getDefaultDialogue(false);
-						}
+					return new Response.Back("Leave", UtilText.parse(getSlave(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time.")) {
 						@Override
 						public void effects() {
 							Main.game.setResponseTab(0);
@@ -1377,11 +1373,7 @@ public class SlaveDialogue {
 						}
 
 					} else if(index == 0) {
-						return new Response("Leave", UtilText.parse(getSlave(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), Main.game.getDefaultDialogue(false)) {
-							@Override
-							public Scene getNextDialogue() {
-								return Main.game.getDefaultDialogue(false);
-							}
+						return new Response.Back("Leave", UtilText.parse(getSlave(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time.")) {
 							@Override
 							public void effects() {
 								Main.game.setResponseTab(0);

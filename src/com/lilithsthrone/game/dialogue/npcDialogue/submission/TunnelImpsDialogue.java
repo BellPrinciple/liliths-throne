@@ -790,17 +790,17 @@ public class TunnelImpsDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(getImpGroup().isEmpty()) {
 				if(index==1) {
-					return new Response("Continue", "As you've enslaved all of the imps, there's nothing left to do but continue on your way...", Main.game.getDefaultDialogue(false));
+					return Response.back("Continue", "As you've enslaved all of the imps, there's nothing left to do but continue on your way...");
 				}
 				return null;
 			}
 			if(!isCompanionDialogue()) {
 				if(responseTab == 0) {
 					if (index == 1) {
-						return new Response("Continue", "Leave the imps and continue on your way...", Main.game.getDefaultDialogue(false)) {
+						return new Response.Back("Continue", "Leave the imps and continue on your way...") {
 							@Override
 							public void effects() {
-								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/submission/impAttackCombatVictory"+(isCompanionDialogue()?"Companions":""), "IMP_ATTACK_COMBAT_VICTORY_CONTINUE", getImpGroup()));
+								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/submission/impAttackCombatVictory" + (isCompanionDialogue() ? "Companions" : ""), "IMP_ATTACK_COMBAT_VICTORY_CONTINUE", getImpGroup()));
 								banishImpGroup();
 							}
 						};
@@ -896,7 +896,7 @@ public class TunnelImpsDialogue {
 			} else {
 				if(responseTab == 0) {
 					if (index == 1) {
-						return new Response("Continue", "Leave the imps and continue on your way...", Main.game.getDefaultDialogue(false)) {
+						return new Response.Back("Continue", "Leave the imps and continue on your way...") {
 							@Override
 							public void effects() {
 								banishImpGroup();
@@ -1260,7 +1260,7 @@ public class TunnelImpsDialogue {
 		protected List<ResponseTab> responses() {
 			var r = AFTER_COMBAT_VICTORY.getResponses().subList(0,2);
 			r.get(0).response.clear();
-			r.get(0).response.set(1,new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
+			r.get(0).response.set(1, new Response.Back("Continue", "Carry on your way.") {
 				@Override
 				public void effects() {
 					banishImpGroup();
@@ -1294,10 +1294,10 @@ public class TunnelImpsDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", "Carry on your way.") {
 					@Override
 					public void effects() {
-						for(GameCharacter imp :getImpGroup()) {
+						for(GameCharacter imp : getImpGroup()) {
 							if(!Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true) && Main.game.getPlayer().isCharactersCumInOrifice(SexAreaOrifice.VAGINA, imp.getId())) {
 								Main.game.getPlayer().addDirtySlot(InventorySlot.HEAD);
 							}
@@ -1327,10 +1327,10 @@ public class TunnelImpsDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", "Carry on your way.") {
 					@Override
 					public void effects() {
-						for(GameCharacter imp :getImpGroup()) {
+						for(GameCharacter imp : getImpGroup()) {
 							if(!getMainCompanion().isAbleToAccessCoverableArea(CoverableArea.MOUTH, true) && getMainCompanion().isCharactersCumInOrifice(SexAreaOrifice.VAGINA, imp.getId())) {
 								getMainCompanion().addDirtySlot(InventorySlot.HEAD);
 							}

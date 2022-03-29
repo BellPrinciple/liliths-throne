@@ -1,6 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.submission;
 
-import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
@@ -79,7 +78,7 @@ public class TunnelSlimeDialogue {
 										new Value<>(getSlime(), "[npc.speech(Traitor! You'll pay for this!)] [npc.Name] cries out as [npc.she] prepares to defend [npc.herself].")));
 						
 					} else if (index == 2) {
-						return new Response("Leave", "Continue on your journey.", ATTACK) {
+						return new Response.Back("Leave", "Continue on your journey.") {
 							@Override
 							public void effects(){
 								if(getSlime().isAttractedTo(Main.game.getPlayer())) {
@@ -87,10 +86,6 @@ public class TunnelSlimeDialogue {
 								} else {
 									Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/tunnelSlime", "ATTACK_TRANSFORMER_PLAYER_SLIME_LEAVE"));
 								}
-							}
-							@Override
-							public Scene getNextDialogue(){
-								return Main.game.getDefaultDialogue(false);
 							}
 						};
 						
@@ -308,12 +303,7 @@ public class TunnelSlimeDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SLIME_SEX_AS_DOM){
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Carry on your way.");
 				
 			} else {
 				return null;
@@ -345,12 +335,7 @@ public class TunnelSlimeDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SLIME_SEX_AS_SUB){
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Carry on your way.");
 				
 			} else {
 				return null;
@@ -373,16 +358,12 @@ public class TunnelSlimeDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Leave", "Continue on your journey.", TRANSFORMED) {
+				return new Response.Back("Leave", "Continue on your journey.") {
 					@Override
 					public void effects(){
 						if(getSlime().isAttractedTo(Main.game.getPlayer())) {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/tunnelSlime", "ATTACK_TRANSFORMER_PLAYER_SLIME_TURN_DOWN_SEX"));
 						}
-					}
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
 					}
 				};
 				
@@ -519,12 +500,7 @@ public class TunnelSlimeDialogue {
 				
 			} else {
 				if (index == 1) {
-					return new Response("Continue", "Carry on your way.", AFTER_COMBAT_PLAYER_DEFEAT){
-						@Override
-						public Scene getNextDialogue() {
-							return Main.game.getDefaultDialogue(false);
-						}
-					};
+					return Response.back("Continue", "Carry on your way.");
 					
 				} else {
 					return null;
@@ -549,12 +525,7 @@ public class TunnelSlimeDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", OFFER_MONEY){
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Carry on your way.");
 				
 			} else {
 				return null;
@@ -586,7 +557,7 @@ public class TunnelSlimeDialogue {
 		public Response getResponse(int responseTab, int index) {
 		
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way...", Main.game.getDefaultDialogue(false)){
+				return new Response.Back("Continue", "Carry on your way...") {
 					@Override
 					public void effects() {
 						if(getSlime().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
@@ -744,19 +715,13 @@ public class TunnelSlimeDialogue {
 				};
 				
 			} else if (index == 10 && !getSlime().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
-				return new Response(
+				return new Response.Back(
 						"Remove character",
 						UtilText.parse(getSlime(), "Scare [npc.name] away."
-								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]"),
-						Main.game.getDefaultDialogue(false)){
+								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]")) {
 					@Override
 					public Colour getHighlightColour() {
 						return PresetColour.GENERIC_NPC_REMOVAL;
-					}
-					@Override
-					public void effects() {
-						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/tunnelSlime", "AFTER_COMBAT_VICTORY_BANISH_NPC", getSlime()));
-						Main.game.banishNPC(getSlime());
 					}
 				};
 				
@@ -877,12 +842,7 @@ public class TunnelSlimeDialogue {
 				
 			} else {
 				if (index == 1) {
-					return new Response("Continue", "Carry on your way.", AFTER_COMBAT_PLAYER_DEFEAT){
-						@Override
-						public Scene getNextDialogue() {
-							return Main.game.getDefaultDialogue(false);
-						}
-					};
+					return Response.back("Continue", "Carry on your way.");
 					
 				} else {
 					return null;
@@ -910,12 +870,7 @@ public class TunnelSlimeDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY){
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Carry on your way.");
 				
 			} else if (index == 6) {
 				return new ResponseEffectsOnly("Inventory", "There's nothing stopping you from helping yourself to [npc.namePos] clothing and items..."){
@@ -926,18 +881,13 @@ public class TunnelSlimeDialogue {
 				};
 				
 			} else if (index == 10) {
-				return new Response(
+				return new Response.Back(
 						"Remove character",
 						UtilText.parse(getSlime(), "Scare [npc.name] away."
-								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]"),
-						AFTER_COMBAT_PLAYER_VICTORY){
+								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]")){
 					@Override
 					public Colour getHighlightColour() {
 						return PresetColour.GENERIC_NPC_REMOVAL;
-					}
-					@Override
-					public Scene getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
 					}
 					@Override
 					public void effects() {

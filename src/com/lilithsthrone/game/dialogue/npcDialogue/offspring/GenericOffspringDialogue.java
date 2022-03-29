@@ -136,13 +136,7 @@ public class GenericOffspringDialogue {
 					};
 					
 				} else if (index == 0) {
-					return new Response("Leave", UtilText.parse(offspring(), "Tell [npc.name] that you'll come back some other time."), OFFSPRING_ENCOUNTER) {
-							@Override
-							public DialogueNode getNextDialogue() {
-								setOffspringFlags();
-								return Main.game.getDefaultDialogue(false);
-							}
-						};
+					return Response.back("Leave", UtilText.parse(offspring(), "Tell [npc.name] that you'll come back some other time."));
 					
 				} else {
 					return null;
@@ -263,11 +257,7 @@ public class GenericOffspringDialogue {
 					};
 					
 				} else if (index == 0 && offspring().hasFlag(NPCFlagValue.flagOffspringIntroduced)) {
-					return new Response("Leave", UtilText.parse(offspring(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), OFFSPRING_ENCOUNTER) {
-							@Override
-							public DialogueNode getNextDialogue() {
-								return Main.game.getDefaultDialogue(false);
-							}
+					return new Response.Back("Leave", UtilText.parse(offspring(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time.")) {
 							@Override
 							public void effects() {
 								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile(getTextFilePath(), "OFFSPRING_ENCOUNTER_LEAVE", offspring()));
@@ -310,12 +300,7 @@ public class GenericOffspringDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Give [npc.name] some time to think, and continue on your way.", OFFSPRING_ENCOUNTER_APOLOGY) {
-					@Override
-					public DialogueNode getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Give [npc.name] some time to think, and continue on your way.");
 				
 			} else {
 				return null;
@@ -369,15 +354,11 @@ public class GenericOffspringDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(Main.game.getDialogueFlags().offspringDialogueTokens<=0) {
 				if (index == 1) {
-					return new Response("Time to go", UtilText.parse(offspring(), "[npc.Name] has started glancing at the clock on the wall, giving you a clear indication that it's time to make your exit."), OFFSPRING_ENCOUNTER) {
+					return new Response.Back("Time to go", UtilText.parse(offspring(), "[npc.Name] has started glancing at the clock on the wall, giving you a clear indication that it's time to make your exit.")) {
 						@Override
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile(getTextFilePath(), "OFFSPRING_ENCOUNTER_TALKING_OUT_OF_TIME", offspring()));
 							offspring().setFlag(NPCFlagValue.flagOffspringApartmentIntroduced, true);
-						}
-						@Override
-						public DialogueNode getNextDialogue() {
-							return Main.game.getDefaultDialogue(false);
 						}
 					};
 					
@@ -533,15 +514,11 @@ public class GenericOffspringDialogue {
 					}
 					
 				} else if (index == 0) {
-					return new Response("Leave", UtilText.parse(offspring(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), OFFSPRING_ENCOUNTER) {
+					return new Response.Back("Leave", UtilText.parse(offspring(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time.")) {
 							@Override
 							public void effects() {
 								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile(getTextFilePath(), "OFFSPRING_ENCOUNTER_TALKING_LEAVE", offspring()));
 								offspring().setFlag(NPCFlagValue.flagOffspringApartmentIntroduced, true);
-							}
-							@Override
-							public DialogueNode getNextDialogue() {
-								return Main.game.getDefaultDialogue(false);
 							}
 						};
 					
@@ -946,11 +923,7 @@ public class GenericOffspringDialogue {
 		public Response getResponse(int responseTab, int index) {
 			
 			if (index == 1) {
-				return new Response("Apologise", "Maybe you went too far... Perhaps you should apologise?", null){
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
+				return new Response.Back("Apologise", "Maybe you went too far... Perhaps you should apologise?"){
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile(getTextFilePath(), "AFTER_COMBAT_VICTORY_APOLOGISE", offspring()));
@@ -1097,18 +1070,13 @@ public class GenericOffspringDialogue {
 				};
 				
 			} else if (index == 10) {
-				return new Response(
+				return new Response.Back(
 						"Remove character",
 						UtilText.parse(offspring(), "Scare [npc.name] away."
-								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]"),
-						AFTER_COMBAT_VICTORY){
+								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]")){
 					@Override
 					public Colour getHighlightColour() {
 						return PresetColour.GENERIC_NPC_REMOVAL;
-					}
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
 					}
 					@Override
 					public void effects() {
@@ -1119,11 +1087,7 @@ public class GenericOffspringDialogue {
 				};
 				
 			} else if (index == 0) {
-				return new Response("Leave", "Now that you've taught [npc.name] a lesson, you can be on your way...", AFTER_COMBAT_VICTORY){
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
+				return new Response.Back("Leave", "Now that you've taught [npc.name] a lesson, you can be on your way..."){
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile(getTextFilePath(), "AFTER_COMBAT_VICTORY_LEAVE", offspring()));
@@ -1210,11 +1174,7 @@ public class GenericOffspringDialogue {
 				
 			} else {
 				if (index == 1) {
-					return new Response("Continue", "You're left to continue on your way...", AFTER_COMBAT_DEFEAT){
-						@Override
-						public DialogueNode getNextDialogue(){
-							return Main.game.getDefaultDialogue(false);
-						}
+					return new Response.Back("Continue", "You're left to continue on your way..."){
 						@Override
 						public void effects() {
 							offspring().setFlag(NPCFlagValue.flagOffspringFightApologyNeeded, false);
@@ -1243,12 +1203,7 @@ public class GenericOffspringDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_CONSENSUAL){
-					@Override
-					public DialogueNode getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Carry on your way.");
 				
 			} else {
 				return null;
@@ -1271,14 +1226,10 @@ public class GenericOffspringDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY){
+				return new Response.Back("Continue", "Carry on your way."){
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile(getTextFilePath(), "AFTER_SEX_VICTORY_LEAVING", offspring()));
-					}
-					@Override
-					public DialogueNode getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
 					}
 				};
 				
@@ -1291,18 +1242,13 @@ public class GenericOffspringDialogue {
 				};
 				
 			} else if (index == 10 && Main.game.getPlayer().getLocationPlace().getPlaceType().equals(PlaceType.DOMINION_BACK_ALLEYS)) {
-				return new Response(
+				return new Response.Back(
 						"Remove character",
 						UtilText.parse(offspring(), "Scare [npc.name] away."
-								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]"),
-						AFTER_COMBAT_VICTORY){
+								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]")){
 					@Override
 					public Colour getHighlightColour() {
 						return PresetColour.GENERIC_NPC_REMOVAL;
-					}
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
 					}
 					@Override
 					public void effects() {
@@ -1338,12 +1284,7 @@ public class GenericOffspringDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY){
-					@Override
-					public DialogueNode getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Carry on your way.");
 				
 			} else {
 				return null;

@@ -1097,7 +1097,7 @@ public class DominionPlaces {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Continue on your way through the Enforcer Post.", Main.game.getDefaultDialogue(false)){
+				return new Response.Back("Continue", "Continue on your way through the Enforcer Post.") {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.visitedSubmission, true);
@@ -1144,7 +1144,7 @@ public class DominionPlaces {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().setLocation(WorldType.WORLD_MAP, Main.game.getPlayer().getGlobalLocation(), false);
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+							Main.game.setContent(Response.back("",""));
 						}
 					};
 					

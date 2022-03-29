@@ -843,7 +843,7 @@ public class Combat {
 							}
 							Main.game.setInCombat(false);
 							Main.game.setResponseTab(0);
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+							Main.game.setContent(Response.back("",""));
 						}
 					};
 				} else {

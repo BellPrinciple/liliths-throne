@@ -422,12 +422,7 @@ public class Amber extends NPC {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue exploring Zaranix's house.", PlaceType.ZARANIX_GF_ENTRANCE.getDialogue(false)) {
-					@Override
-					public Scene getNextDialogue() {
-						return Main.game.getPlayerCell().getDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Continue exploring Zaranix's house.");
 				
 			} if(index==2) {
 				return new ResponseSex("Use Amber",
@@ -525,12 +520,7 @@ public class Amber extends NPC {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue exploring Zaranix's house.", Main.game.getPlayerCell().getDialogue(false)) {
-					@Override
-					public Scene getNextDialogue() {
-						return Main.game.getPlayerCell().getDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Continue exploring Zaranix's house.");
 				
 			} else {
 				return null;

@@ -2467,7 +2467,7 @@ public class MainController implements Initializable {
 		if (lastKeysEqual(KeyCode.B, KeyCode.U, KeyCode.G, KeyCode.G, KeyCode.Y)) {
 			if(Main.game!=null) {
 				if(Main.game.isStarted() && Main.game.isInNewWorld() && Main.game.isPrologueFinished()) {
-					Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+					Main.game.setContent(Response.back("",""));
 					Main.game.saveDialogueNode();
 					Main.game.setContent(new Response("", "", DebugDialogue.DEBUG_MENU));
 				} else {

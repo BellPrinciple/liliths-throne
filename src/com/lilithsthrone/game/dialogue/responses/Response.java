@@ -1062,4 +1062,37 @@ public class Response {
 	public void setEffectsString(String effectsString) {
 		this.effectsString = effectsString;
 	}
+
+	/**
+	 * @param label
+	 * Caption for the response button.
+	 * @param description
+	 * Tooltip information for the response button.
+	 * @return
+	 * Leads the player back to the map.
+	 */
+	public static Back back(String label, String description) {
+		return new Back(label,description);
+	}
+
+	/**
+	 * Specialization of {@link Response} that leads the player back to the map.
+	 */
+	public static class Back extends Response {
+
+		/**
+		 * @param label
+		 * Caption for the response button.
+		 * @param description
+		 * Tooltip information for the response button.
+		 */
+		protected Back(String label, String description) {
+			super(label,description,null);
+		}
+
+		@Override
+		public Scene getNextDialogue() {
+			return Main.game.getDefaultDialogue(false);
+		}
+	}
 }

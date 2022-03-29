@@ -177,7 +177,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", "Continue on your way.") {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -249,7 +249,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", "Continue on your way.") {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -321,7 +321,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", "Continue on your way.") {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -393,7 +393,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", "Continue on your way.") {
 					@Override
 					public void effects() {
 						getSlave().returnToHome();
@@ -419,7 +419,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Ignore", "You don't care to find out who's responsible for making those lewd noises.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Ignore", "You don't care to find out who's responsible for making those lewd noises.") {
 					@Override
 					public void effects() {
 						SlaveryEventLogEntry event = OccupancyUtil.applySlaveSexWithOtherSlave(Main.game.getDayNumber(), Main.game.getHourOfDay(), slave, characterForSex);
@@ -478,7 +478,7 @@ public class SlaveEncountersDialogue {
 						UtilText.parseFromXMLFile("encounters/dominion/slaveEncounters", "SLAVE_USES_OTHER_SLAVE_ALLEYWAY_START_SEX_WATCHING", slave, characterForSex));
 				
 			} else if(index == 4) {
-				return new Response("Leave", "Leave your slaves to have their fun together and continue on your way...", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Leave", "Leave your slaves to have their fun together and continue on your way...") {
 					@Override
 					public void effects() {
 						SlaveryEventLogEntry event = OccupancyUtil.applySlaveSexWithOtherSlave(Main.game.getDayNumber(), Main.game.getHourOfDay(), slave, characterForSex);
@@ -507,7 +507,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way...", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", "Continue on your way...") {
 					@Override
 					public void effects() {
 						SlaveryEventLogEntry event = new SlaveryEventLogEntry(Main.game.getHourOfDay(),
@@ -556,7 +556,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Ignore", "You don't care to find out who's responsible for making those lewd noises.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Ignore", "You don't care to find out who's responsible for making those lewd noises.") {
 					@Override
 					public void effects() {
 						SlaveryEventLogEntry event = OccupancyUtil.applySlaveSexWithOtherSlave(Main.game.getDayNumber(), Main.game.getHourOfDay(), slave, characterForSex);
@@ -614,7 +614,7 @@ public class SlaveEncountersDialogue {
 						UtilText.parseFromXMLFile("encounters/dominion/slaveEncounters", "SLAVE_USES_OTHER_SLAVE_LILAYA_CORRIDOR_START_SEX_WATCHING", slave, characterForSex));
 				
 			} else if(index == 4) {
-				return new Response("Leave", "Leave your slaves to have their fun together and continue on your way...", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Leave", "Leave your slaves to have their fun together and continue on your way...") {
 					@Override
 					public void effects() {
 						SlaveryEventLogEntry event = OccupancyUtil.applySlaveSexWithOtherSlave(Main.game.getDayNumber(), Main.game.getHourOfDay(), slave, characterForSex);
@@ -642,7 +642,7 @@ public class SlaveEncountersDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Continue on your way...", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", "Continue on your way...") {
 					@Override
 					public void effects() {
 						SlaveryEventLogEntry event = new SlaveryEventLogEntry(Main.game.getHourOfDay(),

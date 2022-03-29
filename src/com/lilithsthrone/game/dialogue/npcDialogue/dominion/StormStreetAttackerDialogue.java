@@ -166,10 +166,9 @@ public class StormStreetAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue",
+				return new Response.Back("Continue",
 						"Leave [npc.name] behind and continue on your way..."
-								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]",
-						Main.game.getDefaultDialogue(false)){
+								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]"){
 					@Override
 					public Colour getHighlightColour() {
 						return PresetColour.GENERIC_NPC_REMOVAL;
@@ -437,9 +436,8 @@ public class StormStreetAttackerDialogue {
 							UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "START_DEFEATED_SEX_THREESOME_RESIST", getMugger()));
 					
 				} else if (index == 4 && !getMugger().isWillingToRape()) {
-					return new Response("Refuse",
-							UtilText.parse(getMugger(), "Refuse to have sex with [npc.name] and continue on your way."),
-							Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Refuse",
+							UtilText.parse(getMugger(), "Refuse to have sex with [npc.name] and continue on your way.")) {
 						@Override
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "DEFEATED_REFUSE_THREESOME", getMugger()));
@@ -495,9 +493,8 @@ public class StormStreetAttackerDialogue {
 							UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "START_DEFEATED_SEX_RESIST", getMugger()));
 					
 				} else if (index == 4 && !getMugger().isWillingToRape()) {
-					return new Response("Refuse",
-							UtilText.parse(getMugger(), "Refuse to have sex with [npc.name] and continue on your way."),
-							Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Refuse",
+							UtilText.parse(getMugger(), "Refuse to have sex with [npc.name] and continue on your way.")) {
 						@Override
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/stormStreetAttack", "DEFEATED_REFUSE_SEX", getMugger()));
@@ -526,10 +523,9 @@ public class StormStreetAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue",
+				return new Response.Back("Continue",
 						"Leave [npc.name] behind and continue on your way."
-								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]",
-						Main.game.getDefaultDialogue(false)){
+								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]"){
 					@Override
 					public Colour getHighlightColour() {
 						return PresetColour.GENERIC_NPC_REMOVAL;
@@ -568,10 +564,9 @@ public class StormStreetAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue",
+				return new Response.Back("Continue",
 						"Continue on your way."
-								+ "<br/>[style.italicsBad(This will permanently remove [npc.name] from the game!)]",
-						Main.game.getDefaultDialogue(false)) {
+								+ "<br/>[style.italicsBad(This will permanently remove [npc.name] from the game!)]") {
 					@Override
 					public Colour getHighlightColour() {
 						return PresetColour.GENERIC_NPC_REMOVAL;

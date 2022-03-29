@@ -431,7 +431,7 @@ public class OccupantDialogue {
 					};
 					
 				} else if (index == 0) {
-					return new Response("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time.")) {
 						@Override
 						public void effects() {
 							Main.game.setResponseTab(0);
@@ -864,7 +864,7 @@ public class OccupantDialogue {
 					}
 
 				} else if (index == 0) {
-					return new Response("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time.")) {
 						@Override
 						public void effects() {
 							Main.game.setResponseTab(0);
@@ -1223,7 +1223,7 @@ public class OccupantDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Leave", "Give [npc.name] some time to rest.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Leave", "Give [npc.name] some time to rest.") {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile(getTextFilePath(), "LEAVE_AFTER_SEX", occupant()));
@@ -1381,14 +1381,13 @@ public class OccupantDialogue {
 		protected List<ResponseTab> responses() {
 			if(!occupant().isAtHome())
 				return List.of(new ResponseTab("",null,
-						new Response("Leave",
-							UtilText.parse(occupant(), "As [npc.name] is not at home right now, there's nothing left to do but head back out into Dominion."),
-							Main.game.getDefaultDialogue(false))));
+						Response.back("Leave",
+							UtilText.parse(occupant(), "As [npc.name] is not at home right now, there's nothing left to do but head back out into Dominion."))));
 
 			int timeUntilChange = Main.game.getMinutesUntilNextMorningOrEvening() + 5; // Add 5 minutes so that if the days are drawing in, you don't get stuck in a loop of always sleeping to sunset/sunrise
 			LocalDateTime[] sunriseSunset = DateAndTime.getTimeOfSolarElevationChange(Main.game.getDateNow(), SolarElevationAngle.SUN_ALTITUDE_SUNRISE_SUNSET, Game.DOMINION_LATITUDE, Game.DOMINION_LONGITUDE);
 			var tTalk = new ResponseTab("Talk",
-					new Response("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), Main.game.getDefaultDialogue(false)) {
+					new Response.Back("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time.")) {
 						@Override
 						public void effects() {
 							applyReactionReset();
@@ -1522,7 +1521,7 @@ public class OccupantDialogue {
 						});
 
 			var tSex = OCCUPANT_START.getResponses().get(1);
-			tSex.set(0,new Response("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time."), Main.game.getDefaultDialogue(false)) {
+			tSex.set(0,new Response.Back("Leave", UtilText.parse(occupant(), "Tell [npc.name] that you'll catch up with [npc.herHim] some other time.")) {
 						@Override
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile(getTextFilePath(), "APARTMENT_LEAVING", occupant()));
@@ -1658,7 +1657,7 @@ public class OccupantDialogue {
 		protected List<ResponseTab> responses() {
 			var r = OCCUPANT_APARTMENT.getResponses();
 			r.set(0,new ResponseTab(r.get(0).title,null,
-					new Response("Outside", "You find yourself back outside in the streets of Dominion.", Main.game.getDefaultDialogue(false)) {
+					new Response.Back("Outside", "You find yourself back outside in the streets of Dominion.") {
 						@Override
 						public void effects() {
 							exitDialogue();
@@ -1706,7 +1705,7 @@ public class OccupantDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Leave", "Give [npc.name] some time to rest.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Leave", "Give [npc.name] some time to rest.") {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile(getTextFilePath(), "APARTMENT_LEAVE_AFTER_SEX", occupant()));

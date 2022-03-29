@@ -816,12 +816,7 @@ public class OccupantManagementDialogue {
 				}
 				
 			} else if(index==0) {
-				return new Response("Back", "Return to the previous screen.", ROOM_UPGRADES) {
-					@Override
-					public Scene getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Back", "Return to the previous screen.");
 			} else {
 				return null;
 			}

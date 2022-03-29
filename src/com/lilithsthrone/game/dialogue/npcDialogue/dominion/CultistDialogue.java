@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -50,14 +49,10 @@ public class CultistDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Leave", "Make your excuses and get away from this annoying cultist.", ENCOUNTER_START){
+				return new Response.Back("Leave", "Make your excuses and get away from this annoying cultist."){
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/cultist", "ENCOUNTER_START_LEAVE", getCultist()));
-					}
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
 					}
 				};
 				
@@ -220,26 +215,16 @@ public class CultistDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Leave the chapel and head back out into the streets of Dominion.", ENCOUNTER_CHAPEL_LEAVING){
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Leave the chapel and head back out into the streets of Dominion.");
 			
 			} else if(index==10) {
-				return new Response(
+				return new Response.Back(
 						"Remove character",
 						"Scare [npc.name] away."
-							+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]",
-						ENCOUNTER_CHAPEL_LEAVING) {
+							+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]") {
 					@Override
 					public Colour getHighlightColour() {
 						return PresetColour.GENERIC_NPC_REMOVAL;
-					}
-					@Override
-					public Scene getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
 					}
 					@Override
 					public void effects() {
@@ -416,12 +401,7 @@ public class CultistDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Leave", "Turn around and head for the door.", ENCOUNTER_CHAPEL_POST_ORAL_SEX){
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Leave", "Turn around and head for the door.");
 				
 			} else {
 				return null;
@@ -442,12 +422,7 @@ public class CultistDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Leave", "Turn around and head for the door.", ENCOUNTER_CHAPEL_POST_VAGINAL_SEX){
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Leave", "Turn around and head for the door.");
 				
 			} else {
 				return null;
@@ -469,12 +444,7 @@ public class CultistDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on your way.", ENCOUNTER_CHAPEL_POST_VAGINAL_SEX){
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Continue on your way.");
 				
 			} else {
 				return null;
@@ -495,12 +465,7 @@ public class CultistDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on your way.", ENCOUNTER_CHAPEL_POST_ORAL_SEX){
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Continue on your way.");
 				
 			} else {
 				return null;

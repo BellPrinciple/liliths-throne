@@ -126,7 +126,7 @@ public class OffspringMapDialogue {
 			offspringToShow.addAll(Main.game.getOffspringNotSpawned(npc->!getOffspringList().contains(npc)));
 			
 			if (index == 0) {
-				return new Response("Back", "Decide not to look for any of your offspring in this location after all.", Main.game.getDefaultDialogue(false));
+				return Response.back("Back", "Decide not to look for any of your offspring in this location after all.");
 				
 			} else if(index-1 < offspringToShow.size()) {
 				OffspringSeed offspring = offspringToShow.get(index-1);
