@@ -2511,4 +2511,13 @@ public abstract class AbstractClothingType implements ClothingType {
 		}
 		return orificeOtherModifiers;
 	}
+
+	@Override
+	public void modifyColours(List<Colour> colours) {
+		for(var entry : copyGenerationColours.entrySet()) {
+			var replacement = colours.get(entry.getValue());
+			colours.remove((int)entry.getKey());
+			colours.add(entry.getKey(), replacement);
+		}
+	}
 }

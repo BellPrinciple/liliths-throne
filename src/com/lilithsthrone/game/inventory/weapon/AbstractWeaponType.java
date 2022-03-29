@@ -1021,4 +1021,13 @@ public abstract class AbstractWeaponType implements WeaponType {
 	public List<ItemTag> getItemTags() {
 		return itemTags;
 	}
+
+	@Override
+	public void modifyColours(List<Colour> colours) {
+		for(var entry : copyGenerationColours.entrySet()) {
+			var replacement = colours.get(entry.getValue());
+			colours.remove((int)entry.getKey());
+			colours.add(entry.getKey(), replacement);
+		}
+	}
 }
