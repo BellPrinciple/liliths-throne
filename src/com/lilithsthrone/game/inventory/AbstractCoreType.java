@@ -1,5 +1,7 @@
 package com.lilithsthrone.game.inventory;
 
+import com.lilithsthrone.utils.colours.Colour;
+
 import java.util.List;
 
 /**
@@ -25,5 +27,12 @@ public interface AbstractCoreType {
 	 */
 	default List<AbstractCoreType> getAdditionalDiscoveryTypes() {
 		return List.of();
+	}
+
+	/**
+	 * @param colours
+	 * Modifiable palette for images.
+	 */
+	default void modifyColours(List<Colour> colours) {
 	}
 }

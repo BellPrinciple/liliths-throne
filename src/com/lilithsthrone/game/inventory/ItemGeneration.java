@@ -2,7 +2,6 @@ package com.lilithsthrone.game.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.FluidCum;
@@ -92,13 +91,9 @@ public class ItemGeneration {
 			index++;
 			cr = wt.getColourReplacement(false, index);
 		}
-		
-		for(Entry<Integer, Integer> entry : wt.copyGenerationColours.entrySet()) {
-			Colour replacement = colours.get(entry.getValue());
-			colours.remove((int)entry.getKey());
-			colours.add(entry.getKey(), replacement);
-		}
-		
+
+		wt.modifyColours(colours);
+
 		return new AbstractWeapon(wt, dt, colours) {
 			@Override
 			public String onEquip(GameCharacter character) {
@@ -156,11 +151,7 @@ public class ItemGeneration {
 			cr = clothingType.getColourReplacement(index);
 		}
 		
-		for(Entry<Integer, Integer> entry : clothingType.copyGenerationColours.entrySet()) {
-			Colour replacement = colours.get(entry.getValue());
-			colours.remove((int)entry.getKey());
-			colours.add(entry.getKey(), replacement);
-		}
+		clothingType.modifyColours(colours);
 		
 		return new AbstractClothing(clothingType, colours, allowRandomEnchantment) {};
 	}
@@ -218,13 +209,9 @@ public class ItemGeneration {
 			index++;
 			cr = clothingType.getColourReplacement(index);
 		}
-		
-		for(Entry<Integer, Integer> entry : clothingType.copyGenerationColours.entrySet()) {
-			Colour replacement = colours.get(entry.getValue());
-			colours.remove((int)entry.getKey());
-			colours.add(entry.getKey(), replacement);
-		}
-		
+
+		clothingType.modifyColours(colours);
+
 		return new AbstractClothing(clothingType, colours, effects) {};
 	}
 	
