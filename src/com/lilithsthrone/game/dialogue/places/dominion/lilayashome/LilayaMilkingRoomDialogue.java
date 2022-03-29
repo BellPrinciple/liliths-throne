@@ -543,12 +543,7 @@ public class LilayaMilkingRoomDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Unstrap yourself from the milking machine and continue on your way.", MILKED) {
-					@Override
-					public Scene getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Unstrap yourself from the milking machine and continue on your way.");
 			} else {
 				return null;
 			}

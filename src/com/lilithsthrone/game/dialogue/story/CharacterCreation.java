@@ -2048,7 +2048,7 @@ public class CharacterCreation {
 						applyGameStart();
 						applySkipPrologueStart(false);
 						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
-						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+						Main.game.setContent(Response.back("",""));
 					}
 				};
 				
@@ -2227,7 +2227,7 @@ public class CharacterCreation {
 						applyGameStart();
 						applySkipPrologueStart(true);
 						Main.game.getPlayer().setLocation(WorldType.LILAYAS_HOUSE_FIRST_FLOOR, PlaceType.LILAYA_HOME_ROOM_PLAYER);
-						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+						Main.game.setContent(Response.back("",""));
 					}
 				};
 				

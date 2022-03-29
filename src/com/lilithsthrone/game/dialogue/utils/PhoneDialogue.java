@@ -640,7 +640,7 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Having successfully laid your eggs, you're now free to continue on your way.", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Having successfully laid your eggs, you're now free to continue on your way.");
 			}
 			return null;
 		}
@@ -656,7 +656,7 @@ public class PhoneDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Continue on your way...", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Continue on your way...");
 
 			} else {
 				return null;

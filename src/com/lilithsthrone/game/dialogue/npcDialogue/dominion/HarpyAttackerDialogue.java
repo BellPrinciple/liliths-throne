@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import com.lilithsthrone.game.PropertyValue;
-import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
@@ -190,8 +189,8 @@ public class HarpyAttackerDialogue {
 								"You don't have enough money to offer to pay [npc.name] off. You'll have to either fight [npc.herHim] or offer [npc.herHim] your body!",
 								null);
 					} else {
-						return new Response("Offer money ("+UtilText.formatAsMoney(DialogueFlags.MUGGER_DEMAND_1, "span")+")",
-								"Offer to pay [npc.name] "+Util.intToString(DialogueFlags.MUGGER_DEMAND_1)+" flames to leave you alone.", Main.game.getDefaultDialogue(false)) {
+						return new Response.Back("Offer money ("+UtilText.formatAsMoney(DialogueFlags.MUGGER_DEMAND_1, "span")+")",
+								"Offer to pay [npc.name] "+Util.intToString(DialogueFlags.MUGGER_DEMAND_1)+" flames to leave you alone.") {
 							@Override
 							public void effects() {
 								applyPregnancyReactions();
@@ -512,9 +511,8 @@ public class HarpyAttackerDialogue {
 					};
 					
 				} else if (index == 0) {
-					return new Response("Leave",
-							"Tell [npc.name] that you're in a rush to be somewhere else, before continuing on your way.",
-							Main.game.getDefaultDialogue(false));
+					return Response.back("Leave",
+							"Tell [npc.name] that you're in a rush to be somewhere else, before continuing on your way.");
 				}
 				return null;
 			}
@@ -545,7 +543,7 @@ public class HarpyAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Let [npc.name] go.", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Let [npc.name] go.");
 			}
 			return null;
 		}
@@ -575,7 +573,7 @@ public class HarpyAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Let [npc.name] go and buy food.", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Let [npc.name] go and buy food.");
 			}
 			return null;
 		}
@@ -616,7 +614,7 @@ public class HarpyAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Let [npc.name] get settled in.", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Let [npc.name] get settled in.");
 			}
 			return null;
 		}
@@ -652,7 +650,7 @@ public class HarpyAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Carry on your way.");
 			}
 			return null;
 		}
@@ -668,7 +666,7 @@ public class HarpyAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Carry on your way.");
 			}
 			return null;
 		}
@@ -688,7 +686,7 @@ public class HarpyAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Carry on your way.");
 			}
 			return null;
 		}
@@ -716,7 +714,7 @@ public class HarpyAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way...", Main.game.getDefaultDialogue(false)){
+				return new Response.Back("Continue", "Carry on your way..."){
 					@Override
 					public void effects() {
 						if(getHarpy().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
@@ -883,11 +881,10 @@ public class HarpyAttackerDialogue {
 						QuickTransformations.initQuickTransformations("misc/quickTransformations", getHarpy(), AFTER_COMBAT_VICTORY));
 			
 			} else if (index == 10 && !getHarpy().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
-				return new Response(
+				return new Response.Back(
 						"Remove character",
 						UtilText.parse(getHarpy(), "Scare [npc.name] away."
-								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]"),
-						Main.game.getDefaultDialogue(false)){
+								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]")){
 					@Override
 					public Colour getHighlightColour() {
 						return PresetColour.GENERIC_NPC_REMOVAL;
@@ -989,9 +986,7 @@ public class HarpyAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue",
-						"Let [npc.name] go.",
-						Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Let [npc.name] go.");
 			}
 			return null;
 		}
@@ -1135,7 +1130,7 @@ public class HarpyAttackerDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(getHarpy().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
 				if (index == 1) {
-					return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Continue", "Carry on your way.") {
 						@Override
 						public void effects() {
 							Main.game.banishNPC(getHarpy());
@@ -1551,9 +1546,8 @@ public class HarpyAttackerDialogue {
 									UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "START_DEFEATED_SEX_THREESOME_RESIST", getAllCharacters()));
 							
 						} else if (index == 4 && !getHarpy().isWillingToRape()) {
-							return new Response("Refuse",
-									UtilText.parse(getHarpy(), "Refuse to have sex with [npc.name] and continue on your way."),
-									Main.game.getDefaultDialogue(false)) {
+							return new Response.Back("Refuse",
+									UtilText.parse(getHarpy(), "Refuse to have sex with [npc.name] and continue on your way.")) {
 								@Override
 								public void effects() {
 									Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "DEFEATED_REFUSE_THREESOME", getAllCharacters()));
@@ -1608,9 +1602,8 @@ public class HarpyAttackerDialogue {
 									UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "START_DEFEATED_SEX_SOLO_RESIST", getAllCharacters()));
 							
 						} else if (index == 4 && !getHarpy().isWillingToRape()) {
-							return new Response("Refuse",
-									UtilText.parse(getHarpy(), "Refuse to have sex with [npc.name] and continue on your way."),
-									Main.game.getDefaultDialogue(false)) {
+							return new Response.Back("Refuse",
+									UtilText.parse(getHarpy(), "Refuse to have sex with [npc.name] and continue on your way.")) {
 								@Override
 								public void effects() {
 									Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "DEFEATED_REFUSE_SEX_SOLO", getAllCharacters()));
@@ -1653,10 +1646,9 @@ public class HarpyAttackerDialogue {
 						}
 						
 					} else if (index == 1) {
-						return new Response(
+						return new Response.Back(
 								UtilText.parse(getMainCompanion(), "[npc.Name] refuses"),
-								UtilText.parse(getHarpy(), getMainCompanion(), "It looks like [npc2.name] is going to refuse to have sex with [npc.name]."),
-								Main.game.getDefaultDialogue(false)) {
+								UtilText.parse(getHarpy(), getMainCompanion(), "It looks like [npc2.name] is going to refuse to have sex with [npc.name].")) {
 							@Override
 							public void effects() {
 								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "DEFEATED_REFUSE_SEX_SOLO_COMPANION", getAllCharacters()));
@@ -1712,9 +1704,8 @@ public class HarpyAttackerDialogue {
 								UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "START_DEFEATED_SEX_RESIST", getAllCharacters()));
 						
 					} else if (index == 4 && !getHarpy().isWillingToRape()) {
-						return new Response("Refuse",
-								UtilText.parse(getHarpy(), "Refuse to have sex with [npc.name] and continue on your way."),
-								Main.game.getDefaultDialogue(false)) {
+						return new Response.Back("Refuse",
+								UtilText.parse(getHarpy(), "Refuse to have sex with [npc.name] and continue on your way.")) {
 							@Override
 							public void effects() {
 								Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "DEFEATED_REFUSE_SEX", getAllCharacters()));
@@ -1725,7 +1716,7 @@ public class HarpyAttackerDialogue {
 				}
 			}
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", "Carry on your way.") {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/harpyAttack", "DEFEATED_NO_SEX", getAllCharacters()));
@@ -1765,7 +1756,7 @@ public class HarpyAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)){
+				return new Response.Back("Continue", "Carry on your way."){
 					@Override
 					public void effects() {
 						if(getHarpy().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
@@ -1783,18 +1774,13 @@ public class HarpyAttackerDialogue {
 				};
 				
 			} else if (index == 10 && !getHarpy().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
-				return new Response(
+				return new Response.Back(
 						"Remove character",
 						UtilText.parse(getHarpy(), "Scare [npc.name] away."
-								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]"),
-						AFTER_COMBAT_VICTORY){
+								+ "<br/>[style.italicsBad(This will permanently remove [npc.herHim] from the game!)]")){
 					@Override
 					public Colour getHighlightColour() {
 						return PresetColour.GENERIC_NPC_REMOVAL;
-					}
-					@Override
-					public Scene getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
 					}
 					@Override
 					public void effects() {
@@ -1826,16 +1812,12 @@ public class HarpyAttackerDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", AFTER_SEX_VICTORY) {
+				return new Response.Back("Continue", "Carry on your way.") {
 					@Override
 					public void effects() {
 						if(getHarpy().hasFlag(NPCFlagValue.genericNPCBetrayedByPlayer)) {
 							Main.game.banishNPC(getHarpy());
 						}
-					}
-					@Override
-					public Scene getNextDialogue(){
-						return Main.game.getDefaultDialogue(false);
 					}
 				};
 			}

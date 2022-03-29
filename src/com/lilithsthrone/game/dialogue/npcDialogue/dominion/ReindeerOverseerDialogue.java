@@ -1,6 +1,5 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
-import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -85,16 +84,11 @@ public class ReindeerOverseerDialogue {
 			}
 			
 		} else if(index==0) {
-			return new Response("Leave",
-					UtilText.parse(getReindeer(), "Tell [npc.name] that you might come back another time, before taking your leave."),
-					ENCOUNTER_START){
+			return new Response.Back("Leave",
+					UtilText.parse(getReindeer(), "Tell [npc.name] that you might come back another time, before taking your leave.")){
 				@Override
 				public void effects() {
 					Main.game.getDialogueFlags().addReindeerEncountered(getReindeer().getId());
-				}
-				@Override
-				public Scene getNextDialogue(){
-					return Main.game.getDefaultDialogue(false);
 				}
 			};
 		}

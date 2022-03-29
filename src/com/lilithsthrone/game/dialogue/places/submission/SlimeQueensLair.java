@@ -467,7 +467,7 @@ public class SlimeQueensLair {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.SLIME_QUEENS_LAIR_FIRST_FLOOR, PlaceType.SLIME_QUEENS_LAIR_STAIRS_DOWN);
-						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+						Main.game.setContent(Response.back("",""));
 					}
 				};
 
@@ -496,7 +496,7 @@ public class SlimeQueensLair {
 					@Override
 					public void effects() {
 						Main.game.getPlayer().setLocation(WorldType.SLIME_QUEENS_LAIR_GROUND_FLOOR, PlaceType.SLIME_QUEENS_LAIR_STAIRS_UP);
-						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+						Main.game.setContent(Response.back("",""));
 					}
 				};
 

@@ -417,7 +417,7 @@ public class BatCaverns {
 								if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FOUR)) {
 									Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_SLIME_QUEEN, Quest.SLIME_QUEEN_FOUR));
 								}
-								Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+								Main.game.setContent(Response.back("",""));
 							}
 						};
 			}
@@ -501,7 +501,7 @@ public class BatCaverns {
 				};
 				
 			} else if (index == 2) {
-				return new Response("Don't enter", "No telling what's in that cave...", Main.game.getDefaultDialogue(false));
+				return Response.back("Don't enter", "No telling what's in that cave...");
 			}
 			return null;
 		}

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.lilithsthrone.game.PropertyValue;
-import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
@@ -111,12 +110,7 @@ public class DebugDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 0) {
-				return new Response("Back", "", DEBUG_MENU){
-					@Override
-					public Scene getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Back", "");
 			}
 			
 			if(responseTab==0) {
@@ -2001,11 +1995,10 @@ public class DebugDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				if(Main.sex.isDom(Main.game.getPlayer())) {
-					return new Response("Continue", "Now that you've put this bitch in [npc.her] place, you can continue with what you were doing...", Main.game.getDefaultDialogue(false));
-				} else {
-					return new Response("Continue", "Now that you've been put in your place like the bitch you are, you can continue with what you were doing...", Main.game.getDefaultDialogue(false));
-				}
+				return Response.back("Continue",
+						Main.sex.isDom(Main.game.getPlayer())
+								? "Now that you've put this bitch in [npc.her] place, you can continue with what you were doing..."
+								: "Now that you've been put in your place like the bitch you are, you can continue with what you were doing...");
 			}
 			return null;
 		}
@@ -2057,7 +2050,7 @@ public class DebugDialogue {
 						+ "</p>");
 				
 			} else if(index==0) {
-				return new Response("Nevermind", UtilText.parse(centaur, "Decide not to do anything with this [npc.race], and instead just continue with what you were doing..."), Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Nevermind", UtilText.parse(centaur, "Decide not to do anything with this [npc.race], and instead just continue with what you were doing...")) {
 					@Override
 					public void effects() {
 						Main.game.banishNPC(centaur);
@@ -2085,14 +2078,14 @@ public class DebugDialogue {
 			if(index==1) {
 				NPC centaur = Main.game.getActiveNPC();
 				if(Main.sex.isDom(Main.game.getPlayer())) {
-					return new Response("Continue", UtilText.parse(centaur, "Now that you've put this [npc.race] in [npc.her] place, you can continue with what you were doing..."), Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Continue", UtilText.parse(centaur, "Now that you've put this [npc.race] in [npc.her] place, you can continue with what you were doing...")) {
 						@Override
 						public void effects() {
 							Main.game.banishNPC(centaur);
 						}
 					};
 				} else {
-					return new Response("Continue", UtilText.parse(centaur, "Now that you've been put in your place by this [npc.race], you can continue with what you were doing..."), Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Continue", UtilText.parse(centaur, "Now that you've been put in your place by this [npc.race], you can continue with what you were doing...")) {
 						@Override
 						public void effects() {
 							Main.game.banishNPC(centaur);

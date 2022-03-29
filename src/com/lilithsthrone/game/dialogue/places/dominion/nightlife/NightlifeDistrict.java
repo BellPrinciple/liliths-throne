@@ -314,7 +314,7 @@ public class NightlifeDistrict {
 	private static Response getEndResponse(int index, int minutesPassedForNextScene) {
 		if(isPartnerLeaving()) {
 			if(index==1) {
-				return new Response("Continue", UtilText.parse(getClubbersPresent(), "Perhaps you should have treated [npc.name] a little better..."), Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", UtilText.parse(getClubbersPresent(), "Perhaps you should have treated [npc.name] a little better...")) {
 					@Override
 					public void effects() {
 						if(isPartnerSub()) {
@@ -329,7 +329,7 @@ public class NightlifeDistrict {
 			
 		} else if(isPartnerPassingOut()) {
 			if(index==1) {
-				return new Response("Continue", UtilText.parse(getClubbersPresent(), "[npc.Name] collapses!"), Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", UtilText.parse(getClubbersPresent(), "[npc.Name] collapses!")) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/nightlife/theWateringHole", "WATERING_HOLE_PARTNER_TOO_WASTED", getClubbersPresent()));
@@ -349,7 +349,7 @@ public class NightlifeDistrict {
 							saveClubbers();
 							
 							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+							Main.game.setContent(Response.back("",""));
 						}
 					};
 					
@@ -381,7 +381,7 @@ public class NightlifeDistrict {
 							removeClubbers();
 							
 							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+							Main.game.setContent(Response.back("",""));
 						}
 					};
 					
@@ -393,7 +393,7 @@ public class NightlifeDistrict {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+							Main.game.setContent(Response.back("",""));
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.kalahariWantsSex, false);
 						}
 					};
@@ -520,7 +520,7 @@ public class NightlifeDistrict {
 							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.julesIntroduced, true);
 							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
 							
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+							Main.game.setContent(Response.back("",""));
 						}
 					};
 					
@@ -576,7 +576,7 @@ public class NightlifeDistrict {
 							saveClubbers();
 							
 							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+							Main.game.setContent(Response.back("",""));
 						}
 					};
 					
@@ -606,7 +606,7 @@ public class NightlifeDistrict {
 							removeClubbers();
 							
 							Main.game.getPlayer().setLocation(WorldType.DOMINION, PlaceType.DOMINION_NIGHTLIFE_DISTRICT);
-							Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+							Main.game.setContent(Response.back("",""));
 						}
 					};
 					
@@ -998,7 +998,7 @@ public class NightlifeDistrict {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==0) {
-				return new Response("Back", "Decide against looking for someone to approach.", Main.game.getDefaultDialogue(false));
+				return Response.back("Back", "Decide against looking for someone to approach.");
 			}
 			int count = 1;
 			for(Gender gender : Gender.values()) {

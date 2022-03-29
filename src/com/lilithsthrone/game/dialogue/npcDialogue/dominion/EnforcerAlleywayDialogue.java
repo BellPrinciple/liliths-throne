@@ -842,7 +842,7 @@ public class EnforcerAlleywayDialogue {
 					if(wantsToSearch) {
 						return new Response("Leave", "The Enforcers aren't going to let you go without searching you first...", null);
 					} else {
-						return new Response("Leave", "Tell the Enforcers that you don't have any criminal activity to report to them and continue on your way.", Main.game.getDefaultDialogue(false)) {
+						return new Response.Back("Leave", "Tell the Enforcers that you don't have any criminal activity to report to them and continue on your way.") {
 							@Override
 							public void effects() {
 								if(hadSex) {
@@ -1480,15 +1480,14 @@ public class EnforcerAlleywayDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response(
+				return new Response.Back(
 						Main.game.getPlayer().isHasSlaverLicense()
 							?"Decline"
 							:"Continue",
 						UtilText.parse(getCriminalInTile(),
 							Main.game.getPlayer().isHasSlaverLicense()
 								?"Tell the Enforcers that you're not interested in gaining [npc.name] as you slave and leave them to go and enslave [npc.herHim] by themselves."
-								:"Leave the Enforcers to track down and enslave [npc.name] and continue on your way..."),
-						Main.game.getDefaultDialogue(false)) {
+								:"Leave the Enforcers to track down and enslave [npc.name] and continue on your way...")) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/enforcerAlleyway", "ENFORCER_ALLEYWAY_REPORT_CONTINUE", getEnforcersAndCriminal()));
@@ -1582,7 +1581,7 @@ public class EnforcerAlleywayDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "As the Enforcers have left to file a report on this incident, you're free to continue on your way...", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "As the Enforcers have left to file a report on this incident, you're free to continue on your way...");
 			}
 			return null;
 		}
@@ -1612,10 +1611,9 @@ public class EnforcerAlleywayDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(responseTab == 0) {
 				if (index == 1) {
-					return new Response("Leave",
+					return new Response.Back("Leave",
 							"Leave the Enforcers to recover and continue on your way..."
-									+ "<br/>[style.italicsBad(This will permanently remove the Enforcers from the game!)]",
-							Main.game.getDefaultDialogue(false)) {
+									+ "<br/>[style.italicsBad(This will permanently remove the Enforcers from the game!)]") {
 						@Override
 						public Colour getHighlightColour() {
 							return PresetColour.GENERIC_NPC_REMOVAL;
@@ -1981,7 +1979,7 @@ public class EnforcerAlleywayDialogue {
 				if(((NPC)getEnforcerLeader()).hasFlag(NPCFlagValue.knowsPlayerDemon)
 						|| getEnforcerLeader().getFoughtPlayerCount()>1) { // If demon, or know that Lilaya will bail you out, they leave you behind.
 					if (index == 1) {
-						return new Response("Continue", "Now that the Enforcers have left, you can recover and continue on your way...", Main.game.getDefaultDialogue(false)) {
+						return new Response.Back("Continue", "Now that the Enforcers have left, you can recover and continue on your way...") {
 							@Override
 							public void effects() {
 								banishEnforcers(false);
@@ -2009,7 +2007,7 @@ public class EnforcerAlleywayDialogue {
 			if(((NPC)getEnforcerLeader()).hasFlag(NPCFlagValue.knowsPlayerDemon)
 					|| getEnforcerLeader().getFoughtPlayerCount()>1) { // If demon, or know that Lilaya will bail you out, they leave you behind.
 				if (index == 1) {
-					return new Response("Continue", "Now that the Enforcers have left, you can recover and continue on your way...", Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Continue", "Now that the Enforcers have left, you can recover and continue on your way...") {
 						@Override
 						public void effects() {
 							banishEnforcers(false);
@@ -2058,10 +2056,9 @@ public class EnforcerAlleywayDialogue {
 		protected List<ResponseTab> responses() {
 			var r = AFTER_COMBAT_VICTORY.getResponses().subList(0,2);
 			r.get(0).response.clear();
-			r.get(0).response.set(1,new Response("Leave",
+			r.get(0).response.set(1,new Response.Back("Leave",
 					"Leave the Enforcers behind and continue on your way."
-					+ "<br/>[style.italicsBad(This will permanently remove the Enforcers from the game!)]",
-					Main.game.getDefaultDialogue(false)) {
+					+ "<br/>[style.italicsBad(This will permanently remove the Enforcers from the game!)]") {
 				@Override
 				public Colour getHighlightColour() {
 					return PresetColour.GENERIC_NPC_REMOVAL;
@@ -2102,7 +2099,7 @@ public class EnforcerAlleywayDialogue {
 			if(((NPC)getEnforcerLeader()).hasFlag(NPCFlagValue.knowsPlayerDemon)
 					|| getEnforcerLeader().getFoughtPlayerCount()>1) { // If demon, or know that Lilaya will bail you out, they leave you behind.
 				if (index == 1) {
-					return new Response("Continue", "Now that the Enforcers have left, you can recover and continue on your way...", Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Continue", "Now that the Enforcers have left, you can recover and continue on your way...") {
 						@Override
 						public void effects() {
 							banishEnforcers(false);

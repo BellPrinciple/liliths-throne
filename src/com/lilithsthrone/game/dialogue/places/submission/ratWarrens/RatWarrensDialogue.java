@@ -666,7 +666,7 @@ public class RatWarrensDialogue {
 		public Response getResponse(int responseTab, int index) {
 			if(getGuards(false).isEmpty()) {
 				if (index == 1) {
-					return new Response("Continue", "As you've enslaved all of the gang members who dared to fight you, there's nothing left to do but continue on your way...", Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Continue", "As you've enslaved all of the gang members who dared to fight you, there's nothing left to do but continue on your way...") {
 						@Override
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_ALL_ENSLAVED"));
@@ -677,7 +677,7 @@ public class RatWarrensDialogue {
 			}
 			if(responseTab == 0) {
 				if (index == 1) {
-					return new Response("Scare off", "Tell the gang members to get out of here while they still can...", Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Scare off", "Tell the gang members to get out of here while they still can...") {
 						@Override
 						public void effects() {
 							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_SCARE_OFF", getGuards(false)));
@@ -891,18 +891,14 @@ public class RatWarrensDialogue {
 			var r = GUARD_COMBAT_VICTORY.getResponses().subList(0,2);
 			if(getGuards(false).isEmpty()) {
 				return List.of(new ResponseTab(r.get(0).title,null,
-					new Response("Continue",
-							"As you've enslaved all of the gang members who dared to fight you, there's nothing left to do but continue on your way...",
-							Main.game.getDefaultDialogue(false)) {
-						@Override
-						public void effects() {
-							Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_ALL_ENSLAVED"));
-						}
-					}));
+						new Response.Back("Continue", "As you've enslaved all of the gang members who dared to fight you, there's nothing left to do but continue on your way...") {
+					@Override
+					public void effects() {
+						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/submission/ratWarrens/core", "GUARD_COMBAT_VICTORY_ALL_ENSLAVED"));
+					}
+				}));
 			}
-			return List.of(new ResponseTab(r.get(0).title,null,new Response("Scare off",
-					"Scare the gang members off and continue on your way.",
-					Main.game.getDefaultDialogue(false)) {
+			return List.of(new ResponseTab(r.get(0).title, null, new Response.Back("Scare off", "Scare the gang members off and continue on your way.") {
 				@Override
 				public void effects() {
 					banishGuards(true);
@@ -4285,7 +4281,7 @@ public class RatWarrensDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue", "Continue on your way...", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Continue on your way...");
 			}
 			return null;
 		}

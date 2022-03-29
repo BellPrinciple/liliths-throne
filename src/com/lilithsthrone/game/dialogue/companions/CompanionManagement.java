@@ -624,7 +624,7 @@ public class CompanionManagement {
 						}
 					};
 				}
-				return new Response("Leave", "Exit the occupant management screen.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Leave", "Exit the occupant management screen.") {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setManagementCompanion(null);
@@ -787,7 +787,7 @@ public class CompanionManagement {
 						}
 					};
 				}
-				return new Response("Leave", "Exit the occupant management screen.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Leave", "Exit the occupant management screen.") {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setManagementCompanion(null);
@@ -1819,9 +1819,8 @@ public class CompanionManagement {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue",
-						"With Scarlett having run off, there's nothing more for you to do except continue with your day...",
-						Main.game.getDefaultDialogue(false));
+				return Response.back("Continue",
+						"With Scarlett having run off, there's nothing more for you to do except continue with your day...");
 			}
 			return null;
 		}
@@ -1864,9 +1863,8 @@ public class CompanionManagement {
 		public Response getResponse(int responseTab, int index) {
 			if(freedSlaveDeleted) {
 				if(index == 1) {
-					return new Response("Continue",
-							"Now that your slave has been freed and left your life for good, there's little else for you to do except continue with your other plans for the day...",
-							Main.game.getDefaultDialogue(false)) {
+					return new Response.Back("Continue",
+							"Now that your slave has been freed and left your life for good, there's little else for you to do except continue with your other plans for the day...") {
 						@Override
 						public void effects() {
 							Main.game.getPlayer().removeItemByType(ItemType.getItemTypeFromId("innoxia_slavery_freedom_certification"));
@@ -1956,7 +1954,7 @@ public class CompanionManagement {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", UtilText.parse(characterSelected(), "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day..."), Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", UtilText.parse(characterSelected(), "Having left [npc.name] to get settled into [npc.her] new room, you continue with your plans for the day...")) {
 					@Override
 					public void effects() {
 						Main.game.getDialogueFlags().setManagementCompanion(null);

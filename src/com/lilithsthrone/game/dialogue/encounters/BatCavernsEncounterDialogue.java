@@ -58,7 +58,7 @@ public class BatCavernsEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Take", "Add the " + AbstractEncounter.getRandomItem().getName() + " to your inventory.", Main.game.getDefaultDialogue(false)){
+				return new Response.Back("Take", "Add the " + AbstractEncounter.getRandomItem().getName() + " to your inventory."){
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().addItem((AbstractItem) AbstractEncounter.getRandomItem(), true, true));
@@ -66,7 +66,7 @@ public class BatCavernsEncounterDialogue {
 				};
 				
 			} else if (index == 2) {
-				return new Response("Leave", "Leave the " + AbstractEncounter.getRandomItem().getName() + " on the floor.", Main.game.getDefaultDialogue(false));
+				return Response.back("Leave", "Leave the " + AbstractEncounter.getRandomItem().getName() + " on the floor.");
 				
 			} else {
 				return null;
@@ -170,7 +170,7 @@ public class BatCavernsEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "This is only one part of the password, you need to find the other", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "This is only one part of the password, you need to find the other");
 			}
 			return null;
 		}
@@ -205,7 +205,7 @@ public class BatCavernsEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "You've found both parts of the password, you can head back to the mysterious handle when you're ready.", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "You've found both parts of the password, you can head back to the mysterious handle when you're ready.");
 			}
 			return null;
 		}
@@ -250,7 +250,7 @@ public class BatCavernsEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "You win. Hooray.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue", "You win. Hooray.") {
 				    @Override
 				    public void effects() {
 						Main.game.getWorlds().get(WorldType.BAT_CAVERNS).getCell(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_HANDLE).getPlace().setPlaceType(PlaceType.BAT_CAVERNS_REBEL_BASE_ENTRANCE_EXTERIOR);

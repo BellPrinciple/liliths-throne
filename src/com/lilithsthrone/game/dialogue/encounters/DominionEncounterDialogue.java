@@ -42,7 +42,7 @@ public class DominionEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Take", "Add the " + AbstractEncounter.getRandomItem().getName() + " to your inventory.", Main.game.getDefaultDialogue(false)){
+				return new Response.Back("Take", "Add the " + AbstractEncounter.getRandomItem().getName() + " to your inventory."){
 					@Override
 					public void effects() {
 						if(AbstractEncounter.getRandomItem() instanceof AbstractWeapon) {
@@ -58,7 +58,7 @@ public class DominionEncounterDialogue {
 				};
 				
 			} else if (index == 2) {
-				return new Response("Leave", "Leave the " + AbstractEncounter.getRandomItem().getName() + " on the floor.", Main.game.getDefaultDialogue(false));
+				return Response.back("Leave", "Leave the " + AbstractEncounter.getRandomItem().getName() + " on the floor.");
 				
 			} else {
 				return null;
@@ -80,7 +80,7 @@ public class DominionEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Take", "Add the " + AbstractEncounter.getRandomItem().getName() + " to your inventory.", Main.game.getDefaultDialogue(false)){
+				return new Response.Back("Take", "Add the " + AbstractEncounter.getRandomItem().getName() + " to your inventory."){
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(Main.game.getPlayer().addItem((AbstractItem) AbstractEncounter.getRandomItem(), true, true));
@@ -88,7 +88,7 @@ public class DominionEncounterDialogue {
 				};
 				
 			} else if (index == 2) {
-				return new Response("Leave", "Leave the " + AbstractEncounter.getRandomItem().getName() + " on the floor.", Main.game.getDefaultDialogue(false));
+				return Response.back("Leave", "Leave the " + AbstractEncounter.getRandomItem().getName() + " on the floor.");
 				
 			} else {
 				return null;
@@ -108,7 +108,7 @@ public class DominionEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Continue on your way.");
 				
 			} else {
 				return null;
@@ -150,7 +150,7 @@ public class DominionEncounterDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Continue on your way.", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Continue on your way.");
 				
 			} else {
 				return null;

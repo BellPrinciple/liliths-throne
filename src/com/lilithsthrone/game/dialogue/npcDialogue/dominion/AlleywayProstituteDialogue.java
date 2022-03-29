@@ -1,7 +1,6 @@
 package com.lilithsthrone.game.dialogue.npcDialogue.dominion;
 
 import com.lilithsthrone.game.PropertyValue;
-import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -77,7 +76,7 @@ public class AlleywayProstituteDialogue {
 			int threesomeCost = isStorm()?0:prostitutePrice(true);
 			
 			if (index == 1) {
-				return new Response("Leave", "You're not at all interested in having sex with a prostitute. Walk around [npc.herHim] and continue on your way.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Leave", "You're not at all interested in having sex with a prostitute. Walk around [npc.herHim] and continue on your way.") {
 					@Override
 					public void effects() {
 						if(getProstitute().isVisiblyPregnant()){
@@ -449,7 +448,7 @@ public class AlleywayProstituteDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Knowing that you can now find [npc.name] at Angel's Kiss, you set off on your way once again...", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Knowing that you can now find [npc.name] at Angel's Kiss, you set off on your way once again...");
 			}
 			return null;
 		}
@@ -473,7 +472,7 @@ public class AlleywayProstituteDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Now that you've cleaned up this area of the city, you can continue on your way...", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Now that you've cleaned up this area of the city, you can continue on your way...");
 			}
 			return null;
 		}
@@ -510,7 +509,7 @@ public class AlleywayProstituteDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Feeling happy to have been able to help out one of Dominion's troubled citizens, you continue on your way...", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "Feeling happy to have been able to help out one of Dominion's troubled citizens, you continue on your way...");
 			}
 			return null;
 		}
@@ -550,7 +549,7 @@ public class AlleywayProstituteDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Leave", "Leave [npc.name] and carry on your way. <b>[npc.Name] will disappear from this area!</b>", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Leave", "Leave [npc.name] and carry on your way. <b>[npc.Name] will disappear from this area!</b>") {
 					@Override
 					public void effects() {
 						Main.game.banishNPC(getProstitute());
@@ -767,12 +766,7 @@ public class AlleywayProstituteDialogue {
 				
 			} else {
 				if (index == 1) {
-					return new Response("Continue", "Carry on your way.", AFTER_COMBAT_DEFEAT){
-						@Override
-						public Scene getNextDialogue() {
-							return Main.game.getDefaultDialogue(false);
-						}
-					};
+					return Response.back("Continue", "Carry on your way.");
 				}
 			}
 			return null;
@@ -814,9 +808,8 @@ public class AlleywayProstituteDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue",
-						UtilText.parse(getProstitute(), "Leave [npc.name] behind and continue on your way."),
-						Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue",
+						UtilText.parse(getProstitute(), "Leave [npc.name] behind and continue on your way.")) {
 					@Override
 					public void effects() {
 						if(inApartment) {
@@ -865,7 +858,7 @@ public class AlleywayProstituteDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Leave", "Leave [npc.name] and carry on your way. <b>[npc.Name] will disappear from this area!</b>", Main.game.getDefaultDialogue(false)){
+				return new Response.Back("Leave", "Leave [npc.name] and carry on your way. <b>[npc.Name] will disappear from this area!</b>"){
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_VICTORY_LEAVE", getProstitute()));
@@ -911,7 +904,7 @@ public class AlleywayProstituteDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Carry on your way.", Main.game.getDefaultDialogue(false)){
+				return new Response.Back("Continue", "Carry on your way."){
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/dominion/prostitute", "AFTER_SEX_DEFEAT_LEAVE", getProstitute()));

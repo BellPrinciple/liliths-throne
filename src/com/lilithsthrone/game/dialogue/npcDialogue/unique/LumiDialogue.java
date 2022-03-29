@@ -52,7 +52,7 @@ public class LumiDialogue {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/lumi", "LUMI_APPEARS_EVADE"));
-						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+						Main.game.setContent(Response.back("",""));
 					}
 				};
 				
@@ -121,7 +121,7 @@ public class LumiDialogue {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/lumi", "LUMI_LET_THEM_ESCAPE"));
-						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+						Main.game.setContent(Response.back("",""));
 					}
 				};
 				
@@ -215,11 +215,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Carry on your way...", null){
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
+				return new Response.Back("Continue", "Carry on your way..."){
 					@Override
 					public void effects() {
 						Main.game.getNpc(Lumi.class).setLocation(WorldType.EMPTY, PlaceType.GENERIC_HOLDING_CELL);
@@ -298,11 +294,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Carry on your way...", null){
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
+				return new Response.Back("Continue", "Carry on your way..."){
 					@Override
 					public void effects() {
 						Main.game.getNpc(Lumi.class).setLocation(WorldType.EMPTY, PlaceType.GENERIC_HOLDING_CELL);
@@ -330,11 +322,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Carry on your way...", null){
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
+				return new Response.Back("Continue", "Carry on your way..."){
 					@Override
 					public void effects() {
 						Main.game.getNpc(Lumi.class).setLocation(WorldType.EMPTY, PlaceType.GENERIC_HOLDING_CELL);
@@ -362,11 +350,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Carry on your way...", null){
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
+				return new Response.Back("Continue", "Carry on your way..."){
 					@Override
 					public void effects() {
 						Main.game.getNpc(Lumi.class).setLocation(WorldType.EMPTY, PlaceType.GENERIC_HOLDING_CELL);
@@ -442,12 +426,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Carry on your way...", null){
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Carry on your way...");
 				
 			} else {
 				return null;
@@ -470,12 +449,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Carry on your way...", null){
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Continue", "Carry on your way...");
 				
 			} else {
 				return null;
@@ -498,11 +472,7 @@ public class LumiDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index == 1) {
-				return new Response("Continue", "Carry on your way...", null){
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
+				return new Response.Back("Continue", "Carry on your way..."){
 					@Override
 					public void effects() {
 						Main.game.getNpc(Lumi.class).setLocation(WorldType.EMPTY, PlaceType.GENERIC_HOLDING_CELL);

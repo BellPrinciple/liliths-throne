@@ -113,9 +113,8 @@ public class DominionExpressCentaurDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Refuse",
-						UtilText.parse(centaur(), "Tell [npc.name] that you don't want to service [npc.herHim] right now and continue on your way..."),
-						Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Refuse",
+						UtilText.parse(centaur(), "Tell [npc.name] that you don't want to service [npc.herHim] right now and continue on your way...")) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/dominionExpressCentaur", "INITIAL_ENCOUNTER_REFUSED", centaur()));
@@ -238,9 +237,8 @@ public class DominionExpressCentaurDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if(index==1) {
-				return new Response("Continue",
-						UtilText.parse(centaur(), "Leave [npc.name] to get on with [npc.her] work and continue on your way..."),
-						Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Continue",
+						UtilText.parse(centaur(), "Leave [npc.name] to get on with [npc.her] work and continue on your way...")) {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/dominionExpressCentaur", "AFTER_SEX_LEAVE", centaur()));

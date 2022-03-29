@@ -50,11 +50,7 @@ public class RentalMommyDialogue {
 				};
 				
 			} else if(index==2) {
-				return new Response("Decline", "Tell the rental Mommy that you're not interested in hiring her right now.", ENCOUNTER) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
+				return new Response.Back("Decline", "Tell the rental Mommy that you're not interested in hiring her right now.") {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/rentalMommy", "DECLINE"));
@@ -173,11 +169,7 @@ public class RentalMommyDialogue {
 				};
 				
 			} else if(index==5) {
-				return new Response("Decline", "Decline Mommy's extra offers, and take your leave.", ENCOUNTER) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
+				return new Response.Back("Decline", "Decline Mommy's extra offers, and take your leave.") {
 					@Override
 					public void effects() {
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("characters/dominion/rentalMommy", "MOMMYS_EXTRAS_DECLINED"));
@@ -207,12 +199,7 @@ public class RentalMommyDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			 if(index==1) {
-				return new Response("Leave", "Thank Mommy and take your leave.", MOMMYS_EXTRAS_BREASTFEEDING) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Leave", "Thank Mommy and take your leave.");
 			} else {
 				return null;
 			}
@@ -233,12 +220,7 @@ public class RentalMommyDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			 if(index==1) {
-				return new Response("Leave", "Thank Mommy and take your leave.", MOMMYS_EXTRAS_BREASTFEEDING_PUBLIC) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Leave", "Thank Mommy and take your leave.");
 			} else {
 				return null;
 			}
@@ -266,12 +248,7 @@ public class RentalMommyDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			 if(index==1) {
-				return new Response("Leave", "Thank Mommy and take your leave.", AFTER_SEX_MOMMY_AS_DOM) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Leave", "Thank Mommy and take your leave.");
 			} else {
 				return null;
 			}
@@ -299,12 +276,7 @@ public class RentalMommyDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			 if(index==1) {
-				return new Response("Leave", "Thank Mommy and take your leave.", AFTER_SEX_MOMMY_AS_SUB) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
-				};
+				return Response.back("Leave", "Thank Mommy and take your leave.");
 			} else {
 				return null;
 			}

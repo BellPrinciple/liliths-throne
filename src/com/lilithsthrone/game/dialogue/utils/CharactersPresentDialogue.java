@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -254,11 +253,7 @@ public class CharactersPresentDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "Decide what to do next.", AFTER_SEX) {
-					@Override
-					public Scene getNextDialogue() {
-						return Main.game.getDefaultDialogue(false);
-					}
+				return new Response.Back("Continue", "Decide what to do next.") {
 					@Override
 					public void effects() {
 						Main.game.setActiveNPC(null);

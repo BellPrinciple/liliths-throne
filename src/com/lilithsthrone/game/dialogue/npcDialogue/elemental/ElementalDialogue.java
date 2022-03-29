@@ -225,7 +225,7 @@ public class ElementalDialogue {
 				}
 				
 			} else if(index==10) {
-				return new Response("Dispel", "Dispel [el.name]...",  Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Dispel", "Dispel [el.name]...") {
 					@Override
 					public void effects() {
 						getElemental().returnToHome();
@@ -235,7 +235,7 @@ public class ElementalDialogue {
 			}
 			
 			if(index==0) {
-				return new Response("Finished", "Tell [el.name] that you've finished talking with [el.herHim] and let [el.herHim] return to [el.her] passive form.", Main.game.getDefaultDialogue(false)) {
+				return new Response.Back("Finished", "Tell [el.name] that you've finished talking with [el.herHim] and let [el.herHim] return to [el.her] passive form.") {
 					@Override
 					public void effects() {
 						Main.game.setResponseTab(0);

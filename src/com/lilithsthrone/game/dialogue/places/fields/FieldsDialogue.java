@@ -118,7 +118,7 @@ public class FieldsDialogue {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1) {
-				return new Response("Continue", "With Meraxis having given her warning and departed, you're free to continue on your way out into the Fields.", Main.game.getDefaultDialogue(false));
+				return Response.back("Continue", "With Meraxis having given her warning and departed, you're free to continue on your way out into the Fields.");
 			}
 			return null;
 		}
@@ -146,7 +146,7 @@ public class FieldsDialogue {
 						
 						Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("places/global/globalPlaces", "ENTERING_DOMINION"));
 						
-						Main.game.setContent(new Response("", "", Main.game.getDefaultDialogue(false)));
+						Main.game.setContent(Response.back("",""));
 					}
 				};
 			}
