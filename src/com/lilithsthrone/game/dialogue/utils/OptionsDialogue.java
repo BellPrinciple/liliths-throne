@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.valueEnums.AgeCategory;
 import com.lilithsthrone.game.character.body.valueEnums.CupSize;
@@ -32,7 +33,6 @@ import com.lilithsthrone.game.character.persona.SexualOrientationPreference;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesPreference;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
@@ -61,8 +61,24 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.2
  * @author Innoxia, Maxis
  */
-public class OptionsDialogue {
-	
+public enum OptionsDialogue implements Scene {
+	MENU,
+	SAVE_LOAD,
+	IMPORT_EXPORT,
+	OPTIONS,
+	KEYBINDS,
+	OPTIONS_PRONOUNS,
+	PATCH_NOTES,
+	DISCLAIMER,
+	GENDER_PREFERENCE,
+	ORIENTATION_PREFERENCE,
+	FETISH_PREFERENCE,
+	AGE_PREFERENCE,
+	FURRY_PREFERENCE,
+	UNIT_PREFERENCE,
+	CONTENT_PREFERENCE,
+	CREDITS;
+
 	public enum ContentOptionsPage {
 		UNIT_PREFERENCE,
 		
@@ -93,15 +109,210 @@ public class OptionsDialogue {
 		Main.game.flashMessage(PresetColour.GENERIC_GOOD, "Pronouns saved!");
 	}
 
-	public static final DialogueNode MENU = new DialogueNode("Menu", "Menu", true) {
-		
-		@Override
-		public String getLabel() {
+	@Override
+	public String getAuthor() {
+		return "Innoxia";
+	}
+
+	@Override
+	public String getLabel() {
+		switch(this) {
+		case MENU:
+		case DISCLAIMER:
+			return "";
+		case SAVE_LOAD:
+			return "Save game files";
+		case IMPORT_EXPORT:
+			return "Export character";
+		case PATCH_NOTES:
+			return "Patch Notes";
+		case GENDER_PREFERENCE:
+			return "Gender preferences";
+		case ORIENTATION_PREFERENCE:
+			return "Orientation preferences";
+		case FETISH_PREFERENCE:
+			return "Fetish preferences";
+		case AGE_PREFERENCE:
+			return "Age preferences";
+		case FURRY_PREFERENCE:
+			return "Furry preferences";
+		case UNIT_PREFERENCE:
+			return "Unit preferences";
+		case CONTENT_PREFERENCE:
+			switch(contentOptionsPage) {
+			case BODIES:
+				return "Content Options (Bodies)";
+			case GAMEPLAY:
+				return "Content Options (Gameplay)";
+			case MISC:
+				return "Content Options (Misc.)";
+			case SEX:
+				return "Content Options (Sex & Fetishes)";
+			case UNIT_PREFERENCE:
+				break;
+			}
+			return "";
+		case CREDITS:
+			return "Credits";
+		default:
+			return "Options";
+		}
+	}
+
+	@Override
+	public String getDescription() {
+		switch(this) {
+		case MENU:
+			return "Menu";
+		case OPTIONS:
+		case KEYBINDS:
+		case OPTIONS_PRONOUNS:
+			return "Options";
+		case PATCH_NOTES:
+			return "Patch Notes";
+		default:
 			return "";
 		}
-		
-		@Override
-		public String getContent(){
+	}
+
+	@Override
+	public String getContent() {
+		switch(this) {
+		case MENU:
+			return contentMenu();
+		case OPTIONS:
+			return contentOptions();
+		case OPTIONS_PRONOUNS:
+			return contentPronouns();
+		case PATCH_NOTES:
+			return Main.getPatchNotes();
+		case DISCLAIMER:
+			return Main.disclaimer;
+		case CREDITS:
+			return contentCredits();
+		default:
+			return "";
+		}
+	}
+
+	@Override
+	public String getHeaderContent() {
+		switch(this) {
+		case SAVE_LOAD:
+			return contentSave();
+		case IMPORT_EXPORT:
+			return contentExport();
+		case KEYBINDS:
+			return contentKeybinds();
+		case GENDER_PREFERENCE:
+			return contentGender();
+		case ORIENTATION_PREFERENCE:
+			return contentOrientation();
+		case FETISH_PREFERENCE:
+			return contentFetish();
+		case AGE_PREFERENCE:
+			return contentAge();
+		case FURRY_PREFERENCE:
+			return contentFurry();
+		case UNIT_PREFERENCE:
+			return contentUnit();
+		case CONTENT_PREFERENCE:
+			return contentContent();
+		default:
+			return "";
+		}
+	}
+
+	@Override
+	public List<ResponseTab> getResponses() {
+		switch(this) {
+		case MENU:
+			return Scene.singleTab(
+					resume(),
+					newGame(), toSave(), toExport(), toDisclaimer(), quit(),
+					toOptions(), toContent(), toPatchNotes(), toCredits(), null,
+					blog(), github(), wiki());
+		case SAVE_LOAD:
+			return Scene.singleTab(back(), saveConfirmations(), saveSortDate(), saveSortName());
+		case IMPORT_EXPORT:
+			return Scene.singleTab(back(), exportConfirmations(), exportCharacter());
+		case OPTIONS:
+			return Scene.singleTab(
+					back(),
+					toKeybinds(), theme(), shrinkFont(), enlargeFont(), fadeIn(),
+					toPronouns(), toGender(), toOrientation(), toAge(), toFurry(),
+					toUnit(), difficulty(), toFetish());
+		case KEYBINDS:
+		{
+			// Load the presets if uninitialized
+			if(presets == null)
+				loadPresets();
+			var r = Scene.singleTab(
+					back(), preset(1), preset(2), preset(3), preset(4),
+					preset(5), preset(6), preset(7), preset(8), preset(9),
+					preset(10), preset(11), preset(12), preset(13), savePreset());
+			var t = r.get(0).response;
+			for(int i = 14; i <= presets.size(); i++)
+				t.add(preset(i));
+			return r;
+		}
+		case OPTIONS_PRONOUNS:
+			return Scene.singleTab(back(), pronounsSave(), resetPronouns(), cyclePronouns());
+		case GENDER_PREFERENCE:
+			return Scene.singleTab(back(), resetGender());
+		case ORIENTATION_PREFERENCE:
+			return Scene.singleTab(back(), resetOrientation());
+		case FETISH_PREFERENCE:
+			return Scene.singleTab(back(), resetFetish());
+		case AGE_PREFERENCE:
+			return Scene.singleTab(back(), resetAge());
+		case FURRY_PREFERENCE:
+			return Scene.singleTab(back(), resetFurry());
+		case CONTENT_PREFERENCE:
+			return Scene.singleTab(
+					back(),
+					miscellaneous(), gameplay(), sexFetish(), bodies(), null,
+					null, null, null, null, null,
+					resetContent());
+		case CREDITS:
+		{
+			var r = Scene.singleTab(back());
+			var t = r.get(0).response;
+			for(Artist artist : Artwork.allArtists) {
+				for(ArtistWebsite website : artist.getWebsites()) {
+					t.add(new ResponseEffectsOnly(
+							website.getName(),
+							"Opens the page:<br/><br/><i>"+website.getURL()+"</i><br/><br/><b>Externally in your default browser.</b>") {
+						@Override
+						public void effects() {
+							Util.openLinkInDefaultBrowser(website.getURL());
+						}
+					});
+				}
+			}
+			return r;
+		}
+		default:
+			return Scene.singleTab(back());
+		}
+	}
+
+	@Override
+	public DialogueNodeType getDialogueNodeType() {
+		return DialogueNodeType.OPTIONS;
+	}
+
+	@Override
+	public boolean isTravelDisabled() {
+		return true;
+	}
+
+	@Override
+	public boolean isContentParsed() {
+		return this!=PATCH_NOTES;
+	}
+
+	private static String contentMenu() {
 			return "<h1 class='special-text' style='font-size:48px; line-height:52px; text-align:center;'>"+Main.GAME_NAME+"</h1>"
 					+ "<h5 class='special-text' style='text-align:center;'>Created by "+Main.AUTHOR+"</h5>"
 					+ "<br/>"
@@ -129,11 +340,9 @@ public class OptionsDialogue {
 								+ "<p style='text-align:center;'>" + UtilText.formatAsMoney(Main.getProperties().money, "b") + "</p>"
 								+ "<div style='text-align:center; display:block; margin:auto;'>" + UtilText.formatAsEssences(Main.getProperties().arcaneEssences, "b", false) + "</div>"
 								+ "<p style='text-align:center;'>Quest: " + Util.capitaliseSentence(Main.getProperties().quest) + "</p>");
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			 if (index == 1) {
+	}
+
+	private static Response newGame() {
 				 if(confirmNewGame || !Main.game.isStarted()) {
 					return new ResponseEffectsOnly(
 							(!Main.game.isStarted()
@@ -179,8 +388,9 @@ public class OptionsDialogue {
 							}
 						};
 				 }
-				
-			} else if (index == 2) {
+	}
+
+	private static Response toSave() {
 				return new Response("Save/Load", "Open the save/load game window.", SAVE_LOAD){
 					@Override
 					public void effects() {
@@ -188,8 +398,9 @@ public class OptionsDialogue {
 						confirmNewGame=false;
 					}
 				};
-				
-			} else if (index == 3) {
+	}
+
+	private static Response toExport() {
 				return new Response("Export character", "Open the character export game window.", IMPORT_EXPORT){
 					@Override
 					public void effects() {
@@ -197,16 +408,18 @@ public class OptionsDialogue {
 						confirmNewGame=false;
 					}
 				};
-				
-			} else if (index == 4) {
+	}
+
+	private static Response toDisclaimer() {
 				return new Response("Disclaimer", "View the game's disclaimer.", DISCLAIMER){
 					@Override
 					public void effects() {
 						confirmNewGame=false;
 					}
 				};
-				
-			} else if (index == 5) {
+	}
+
+	private static Response quit() {
 				return new ResponseEffectsOnly("Quit", "Quits your current game and closes the program.<br/><br/><b>Remember to save your game first!</b>"){
 					@Override
 					public void effects() {
@@ -215,8 +428,9 @@ public class OptionsDialogue {
 						System.exit(0);
 					}
 				};
-				
-			} else if (index == 6) {
+	}
+
+	private static Response toOptions() {
 				return new Response("Options", "Open the options page.", OPTIONS){
 					@Override
 					public void effects() {
@@ -224,8 +438,9 @@ public class OptionsDialogue {
 						
 					}
 				};
+	}
 
-			} else if (index == 7) {
+	private static Response toContent() {
 				return new Response("Content Options", "Set your preferred content settings.", CONTENT_PREFERENCE){
 					@Override
 					public void effects() {
@@ -233,14 +448,17 @@ public class OptionsDialogue {
 						contentOptionsPage = ContentOptionsPage.MISC;
 					}
 				};
-			
-			} else if (index == 8) {
+	}
+
+	private static Response toPatchNotes() {
 				return new Response("Patch notes", "View the patch notes for this version.", PATCH_NOTES);
-			
-			} else if (index == 9) {
+	}
+
+	private static Response toCredits() {
 				return new Response("Credits", "View the game's credits screen.", CREDITS);
-				
-			} else if (index == 11) {
+	}
+
+	private static Response blog() {
 				return new ResponseEffectsOnly("Blog", "Opens the page:<br/><br/><i>https://lilithsthrone.blogspot.co.uk/</i><br/><br/><b>Externally in your default browser.</b>"){
 					@Override
 					public void effects() {
@@ -248,8 +466,9 @@ public class OptionsDialogue {
 						confirmNewGame=false;
 					}
 				};
-			
-			} else if (index == 12) {
+	}
+
+	private static Response github() {
 				return new ResponseEffectsOnly("Github", "Opens the page:<br/><br/><i>https://github.com/Innoxia/liliths-throne-public</i><br/><br/><b>Externally in your default browser.</b>"){
 					@Override
 					public void effects() {
@@ -257,8 +476,9 @@ public class OptionsDialogue {
 						confirmNewGame=false;
 					}
 				};
-			
-			} else if (index == 13) {
+	}
+
+	private static Response wiki() {
 				return new ResponseEffectsOnly("Wiki", "Opens the page:<br/><br/><i>https://www.lilithsthrone.com/wiki/doku.php</i><br/><br/><b>Externally in your default browser.</b>"){
 					@Override
 					public void effects() {
@@ -266,8 +486,9 @@ public class OptionsDialogue {
 						confirmNewGame=false;
 					}
 				};
-			
-			} else if (index == 0) {
+	}
+
+	private static Response resume() {
 				if(Main.game.isStarted()) {
 					return new ResponseEffectsOnly("Resume", "Return to whatever you were doing before opening this menu."){
 						@Override
@@ -294,18 +515,8 @@ public class OptionsDialogue {
 						return new Response("Resume", "Previously saved game (by the title '"+Main.getProperties().lastSaveLocation+"') not found in 'data/saves' folder.", null);
 					}
 				}
-				
-			} else {
-				return null;
-			}
-		}
+	}
 
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
-	
 	private static String getJavaVersionInformation() {
 		StringBuilder sb = new StringBuilder();
 		
@@ -350,15 +561,7 @@ public class OptionsDialogue {
 	public static String overwriteConfirmationName = "";
 	public static String deleteConfirmationName = "";
 	
-	public static final DialogueNode SAVE_LOAD = new DialogueNode("Save game files", "", true) {
-
-		@Override
-		public String getContent() {
-			return "";
-		}
-		
-		@Override
-		public String getHeaderContent(){
+	private static String contentSave() {
 			StringBuilder saveLoadSB = new StringBuilder();
 
 			saveLoadSB.append(
@@ -401,11 +604,9 @@ public class OptionsDialogue {
 			saveLoadSB.append("<p id='hiddenPField' style='display:none;'></p>");
 			
 			return saveLoadSB.toString();
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
+	}
+
+	private static Response saveConfirmations() {
 				return new Response("Confirmations: ",
 						"Toggle confirmations being shown when you click to load, overwrite, or delete a saved game."
 							+ " When turned on, it will take two clicks to apply any button press."
@@ -427,46 +628,31 @@ public class OptionsDialogue {
 						Main.getProperties().savePropertiesAsXML();
 					}
 				};
+	}
 
-			} else if (index == 2) {
+	private static Response saveSortDate() {
 				return new Response("Sort: Date", "Sort all of your saved games by their date.", SAVE_LOAD) {
 					@Override
 					public void effects() {
 						alphabeticalFileSort = false;
 					}
 				};
+	}
 
-			} else if (index == 3) {
+	private static Response saveSortName() {
 				return new Response("Sort: Name", "Sort all of your saved games by their name.", SAVE_LOAD) {
 					@Override
 					public void effects() {
 						alphabeticalFileSort = true;
 					}
 				};
+	}
 
-			} else if (index == 0) {
+	private static Response back() {
 				return new Response("Back", "Back to the main menu.", MENU);
+	}
 
-			} else {
-				return null;
-			}
-		}
-
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
-	
-	public static final DialogueNode IMPORT_EXPORT = new DialogueNode("Export character", "", true) {
-	
-		@Override
-		public String getContent() {
-			return "";
-		}
-		
-		@Override
-		public String getHeaderContent(){
+	private static String contentExport() {
 			StringBuilder saveLoadSB = new StringBuilder();
 	
 			saveLoadSB.append("<p>"
@@ -497,11 +683,9 @@ public class OptionsDialogue {
 			saveLoadSB.append("<p id='hiddenPField' style='display:none;'></p>");
 			
 			return saveLoadSB.toString();
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
+	}
+
+	private static Response exportConfirmations() {
 				return new Response("Confirmations: ",
 						"Toggle confirmations being shown when you click to load, overwrite, or delete a saved game."
 							+ " When turned on, it will take two clicks to apply any button press."
@@ -523,8 +707,9 @@ public class OptionsDialogue {
 						Main.getProperties().savePropertiesAsXML();
 					}
 				};
-	
-			} else if (index == 2) {
+	}
+
+	private static Response exportCharacter() {
 				if(Main.game.isStarted()) {
 					return new Response("Export character", "Exports your character file to the 'data/characters/' folder.", IMPORT_EXPORT){
 						@Override
@@ -536,21 +721,8 @@ public class OptionsDialogue {
 				} else {
 					return new Response("Export character", "You'll need to start a game first!", null);
 				}
-			
-			} else if (index == 0) {
-				return new Response("Back", "Back to the main menu.", OptionsDialogue.MENU);
-	
-			} else {
-				return null;
-			}
-		}
-	
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
-	
+	}
+
 	private static String getSaveLoadRow(String date, String name, boolean altColour) {
 		if(name!=null){
 			String baseName = Util.getFileName(name);
@@ -619,10 +791,7 @@ public class OptionsDialogue {
 	}
 	
 	
-	public static final DialogueNode OPTIONS = new DialogueNode("Options", "Options", true) {
-		
-		@Override
-		public String getContent(){
+	private static String contentOptions() {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
@@ -658,15 +827,13 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.append("</p>");
 			
 			return UtilText.nodeContentSB.toString();
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Keybinds", "Open the keybinds page, where you can customise all the game's key bindings.", KEYBINDS);
-				
-			} else if (index == 2) {
+	}
 
+	private static Response toKeybinds() {
+				return new Response("Keybinds", "Open the keybinds page, where you can customise all the game's key bindings.", KEYBINDS);
+	}
+
+	private static Response theme() {
 				if (Main.getProperties().hasValue(PropertyValue.lightTheme)) {
 					return new Response("Dark theme", "Switch the theme to the dark variant.", OPTIONS){
 						@Override
@@ -684,8 +851,9 @@ public class OptionsDialogue {
 						}
 					};
 				}
+	}
 
-			} else if (index == 3) {
+	private static Response shrinkFont() {
 				return new Response("Font-size -",
 						"Decrease the size of the game's font. Default value is 18. Current value is "+Main.getProperties().fontSize+".",
 								OPTIONS){
@@ -698,8 +866,9 @@ public class OptionsDialogue {
 						
 					}
 				};
-			
-			} else if (index == 4) {
+	}
+
+	private static Response enlargeFont() {
 				return new Response("Font-size +",
 						"Increase the size of the game's font. Default value is 18. Current value is "+Main.getProperties().fontSize+".",
 								OPTIONS){
@@ -712,8 +881,9 @@ public class OptionsDialogue {
 						
 					}
 				};
-			
-			} else if (index == 5) {
+	}
+
+	private static Response fadeIn() {
 				return new Response("Fade-in: " + (Main.getProperties().hasValue(PropertyValue.fadeInText)
 						? "[style.boldGood(ON)]"
 						: "[style.boldBad(OFF)]"), "Toggle the fading in of the game's text. If turned on, it may cause some minor lag in inventory screens.", OPTIONS) {
@@ -723,31 +893,38 @@ public class OptionsDialogue {
 						Main.saveProperties();
 					}
 				};
-				
-			} else if (index == 6) {
+	}
+
+	private static Response toPronouns() {
 				return new Response("Gender pronouns", "Customise all gender pronouns and names.", OPTIONS_PRONOUNS);
-				
-			} else if (index == 7) {
+	}
+
+	private static Response toGender() {
 				return new Response("Gender preferences", "Set your preferred gender encounter rates.", GENDER_PREFERENCE);
+	}
 
-			} else if (index == 8) {
+	private static Response toOrientation() {
 				return new Response("Orientation preferences", "Set your preferred sexual orientation encounter rates.", ORIENTATION_PREFERENCE);
-			
-			} else if (index == 9) {
-				return new Response("Age preferences", "Set your preferred age encounter rates.", AGE_PREFERENCE);
-				
-			} else if (index == 10) {
-				return new Response("Furry preferences", "Set your preferred transformation encounter rates.", FURRY_PREFERENCE);
+	}
 
-			} else if (index == 11) {
+	private static Response toAge() {
+				return new Response("Age preferences", "Set your preferred age encounter rates.", AGE_PREFERENCE);
+	}
+
+	private static Response toFurry() {
+				return new Response("Furry preferences", "Set your preferred transformation encounter rates.", FURRY_PREFERENCE);
+	}
+
+	private static Response toUnit() {
 				return new Response("Unit preferences", "Set your preferred measurement units.", UNIT_PREFERENCE) {
 					@Override
 					public void effects() {
 						contentOptionsPage = ContentOptionsPage.UNIT_PREFERENCE;
 					}
 				};
+	}
 
-			} else if (index == 12) {
+	private static Response difficulty() {
 				return new Response("Difficulty: "+Main.getProperties().difficultyLevel.getName(), "Cycle the game's difficulty.", OPTIONS){
 					@Override
 					public void effects() {
@@ -778,27 +955,13 @@ public class OptionsDialogue {
 						}
 					}
 				};
-			} else if (index == 13) {
+	}
+
+	private static Response toFetish() {
 				return new Response("Fetish preferences", "Set your preferred fetish encounter rates.", FETISH_PREFERENCE);
+	}
 
-			} else if (index == 0) {
-				return new Response("Back", "Back to the main menu.", MENU);
-
-			} else {
-				return null;
-			}
-		}
-
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
-	
-	public static final DialogueNode KEYBINDS = new DialogueNode("Options", "Options", true) {
-
-		@Override
-		public String getHeaderContent() {
+	private static String contentKeybinds() {
 			return "<p>"
 					+ "<table align='center'>"
 					+ "<tr><th>Action</th><th>Primary binding</th><th>Secondary binding</th></tr>"
@@ -853,16 +1016,11 @@ public class OptionsDialogue {
 					+ getKeybindTableRow(KeyboardAction.MOVE_RESPONSE_CURSOR_EAST)
 					+ "</table>"
 					+ "</p>";
-		}
-		
-		@Override
-		public String getContent(){
-			return "";
-		}
+	}
 
-		ArrayList<Properties> presets;
+	private static ArrayList<Properties> presets;
 
-		private void loadPresets() {
+	private static void loadPresets() {
 			presets = new ArrayList<>();
 
 			// Load all text files in the folder as properties
@@ -880,9 +1038,9 @@ public class OptionsDialogue {
 			} else {
 				presetFolder.mkdirs();
 			}
-		}
+	}
 
-		private void loadPreset(Properties preset) {
+	private static void loadPreset(Properties preset) {
 			// Clear existing mappings
 			Main.getProperties().hotkeyMapPrimary.clear();
 			Main.getProperties().hotkeyMapSecondary.clear();
@@ -895,9 +1053,9 @@ public class OptionsDialogue {
 					if (keys.length == 2) Main.getProperties().hotkeyMapSecondary.put(ka, KeyCodeWithModifiers.fromString(keys[1]));
 				}
 			}
-		}
+	}
 
-		private void savePreset(int index) {
+	private static void savePreset(int index) {
 			// Create new properties containing current key mappings
 			Properties preset = new Properties();
 			preset.setProperty("NAME", "Custom " + index);
@@ -922,17 +1080,11 @@ public class OptionsDialogue {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			// Load the presets if uninitialized
-			if (presets == null) loadPresets();
+	}
 
-			if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", OPTIONS);
-				
-			} else if (index <= presets.size()) {
+	private static Response	preset(int index) {
+		if(index >= presets.size())
+			return null;
 				Properties preset = presets.get(index - 1);
 				return new Response(preset.getProperty("NAME", "Custom " + index), preset.getProperty("DESCRIPTION", "Reapply your previously saved key bindings."), KEYBINDS) {
 					@Override
@@ -941,8 +1093,9 @@ public class OptionsDialogue {
 						Main.saveProperties();
 					}
 				};
-				
-			} else if (index == 14) {
+	}
+
+	private static Response savePreset() {
 				return new Response("Save preset",
 						"Store the current key bindings in a file. If you want to delete any saved presets, navigate to the 'res/keybinds' folder and delete the .txt files that you no longer want."
 								+ " (They will stop showing up in this list after a game restart.)",
@@ -953,15 +1106,7 @@ public class OptionsDialogue {
 						loadPresets();
 					}
 				};
-			}
-			return null;
-		}
-
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
+	}
 
 	private static String getKeybindTableRow(KeyboardAction action) {
 		return "<tr>"
@@ -1000,11 +1145,8 @@ public class OptionsDialogue {
 				+ "</td>"
 				+ "</tr>";
 	}
-	
-	public static final DialogueNode OPTIONS_PRONOUNS = new DialogueNode("Options", "Options", true) {
 
-		@Override
-		public String getContent() {
+	private static String contentPronouns() {
 			StringBuilder sb = new StringBuilder();
 			
 			sb.append("<p>"
@@ -1051,19 +1193,18 @@ public class OptionsDialogue {
 					+ "</p>");
 			
 			return sb.toString();	
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
+	}
+
+	private static Response pronounsSave() {
 				return new ResponseEffectsOnly("Save", "Save all the pronouns that are currently displayed.") {
 					@Override
 					public void effects() {
 						savePronouns();
 					}
 				};
-				
-			} else if (index == 2) {
+	}
+
+	private static Response resetPronouns() {
 				return new Response("Defaults", "Resets all pronouns to their default values.", OPTIONS_PRONOUNS){
 					@Override
 					public void effects() {
@@ -1080,8 +1221,9 @@ public class OptionsDialogue {
 						
 					}
 				};
-				
-			} else if (index == 3) {
+	}
+
+	private static Response cyclePronouns() {
 				return new Response("<span style='color:"+Main.getProperties().androgynousIdentification.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(Main.getProperties().androgynousIdentification.getName())+"</span>",
 						"Cycle the way the game treats androgynous bodies as described above.", OPTIONS_PRONOUNS){
 					@Override
@@ -1106,20 +1248,7 @@ public class OptionsDialogue {
 						Main.saveProperties();
 					}
 				};
-				
-			} else if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", OPTIONS);
-				
-			} else {
-				return null;
-			}
-		}
-		
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
+	}
 	
 	private static String getGenderNameTableRow(GenderNames name) {
 		return "<tr>"
@@ -1163,64 +1292,8 @@ public class OptionsDialogue {
 				+ "</td>"
 				+ "</tr>";
 	}
-	
-	
-	public static final DialogueNode PATCH_NOTES = new DialogueNode("Patch Notes", "Patch notes", true) {
-		
-		@Override
-		public String getContent(){
-			return Main.getPatchNotes();
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", MENU);
-				
-			}else {
-				return null;
-			}
-		}
 
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-
-		@Override
-		public boolean isContentParsed() {
-			return false;
-		}
-	};
-	
-	public static final DialogueNode DISCLAIMER = new DialogueNode("", "", true) {
-		
-		@Override
-		public String getContent(){
-			return Main.disclaimer;
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", MENU);
-				
-			}else {
-				return null;
-			}
-		}
-
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
-	
-	
-	public static final DialogueNode GENDER_PREFERENCE = new DialogueNode("Gender preferences", "", true) {
-		
-		@Override
-		public String getHeaderContent(){
+	private static String contentGender(){
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
@@ -1239,19 +1312,9 @@ public class OptionsDialogue {
 			
 			
 			return UtilText.nodeContentSB.toString();
-		}
-		
-		@Override
-		public String getContent(){
-			return "";
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			 if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", OPTIONS);
-				
-			} else if (index == 1) {
+	}
+
+	private static Response resetGender() {
 				return new Response("Defaults", "Restore all gender preferences to their default values.", GENDER_PREFERENCE) {
 					@Override
 					public void effects() {
@@ -1259,18 +1322,8 @@ public class OptionsDialogue {
 						Main.getProperties().savePropertiesAsXML();
 					}
 				};
-				
-			} else {
-				return null;
-			}
-		}
+	}
 
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
-	
 	private static String getGenderPreferencesPanel(PronounType type) {
 		int count = 0;
 		Colour colour = PresetColour.MASCULINE;
@@ -1347,10 +1400,7 @@ public class OptionsDialogue {
 		return sb.toString();
 	}
 	
-	public static final DialogueNode ORIENTATION_PREFERENCE = new DialogueNode("Orientation preferences", "", true) {
-		
-		@Override
-		public String getHeaderContent(){
+	private static String contentOrientation() {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
@@ -1370,19 +1420,9 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.append(getOrientationRepresentation() + "</div>");
 			
 			return UtilText.nodeContentSB.toString();
-		}
-		
-		@Override
-		public String getContent(){
-			return "";
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			 if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", OPTIONS);
-				
-			} else if (index == 1) {
+	}
+
+	private static Response resetOrientation() {
 				return new Response("Defaults", "Restore all orientation preferences to their default values.", ORIENTATION_PREFERENCE) {
 					@Override
 					public void effects() {
@@ -1390,22 +1430,9 @@ public class OptionsDialogue {
 						Main.getProperties().savePropertiesAsXML();
 					}
 				};
-				
-			} else {
-				return null;
-			}
-		}
+	}
 
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
-	
-	public static final DialogueNode FETISH_PREFERENCE = new DialogueNode("Fetish preferences", "", true) {
-		
-		@Override
-		public String getHeaderContent(){
+	private static String contentFetish() {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
@@ -1424,19 +1451,9 @@ public class OptionsDialogue {
 			
 			UtilText.nodeContentSB.append("</div>");
 			return UtilText.nodeContentSB.toString();
-		}
-		
-		@Override
-		public String getContent(){
-			return "";
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", OPTIONS);
-				
-			} else if(index == 1) {
+	}
+
+	private static Response resetFetish() {
 				return new Response("Defaults", "Reset all fetish preferences to their default settings.", FETISH_PREFERENCE) {
 					@Override
 					public void effects() {
@@ -1444,16 +1461,7 @@ public class OptionsDialogue {
 						Main.getProperties().savePropertiesAsXML();
 					}
 				};
-			} else {
-				return null;
-			}
-		}
-
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
+	}
 
 	private static String getOrientationPreferencesPanel(SexualOrientation orient) {
 		Colour colour = orient.getColour();
@@ -1589,10 +1597,7 @@ public class OptionsDialogue {
 		return sb.toString();
 	}
 	
-	public static final DialogueNode AGE_PREFERENCE = new DialogueNode("Age preferences", "", true) {
-		
-		@Override
-		public String getHeaderContent(){
+	private static String contentAge() {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
@@ -1608,19 +1613,9 @@ public class OptionsDialogue {
 			
 			
 			return UtilText.nodeContentSB.toString();
-		}
-		
-		@Override
-		public String getContent(){
-			return "";
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", OPTIONS);
-				
-			} else if (index == 1) {
+	}
+
+	private static Response resetAge() {
 				return new Response("Defaults", "Restore all age preferences to their default values.", AGE_PREFERENCE) {
 					@Override
 					public void effects() {
@@ -1628,18 +1623,8 @@ public class OptionsDialogue {
 						Main.getProperties().savePropertiesAsXML();
 					}
 				};
-				
-			} else {
-				return null;
-			}
-		}
+	}
 
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
-	
 	private static String getAgePreferencesPanel(PronounType type) {
 		
 		StringBuilder sb = new StringBuilder();
@@ -1705,11 +1690,8 @@ public class OptionsDialogue {
 		
 		return sb.toString();
 	}
-	
-	public static final DialogueNode FURRY_PREFERENCE = new DialogueNode("Furry preferences", "", true) {
-		
-		@Override
-		public String getHeaderContent(){
+
+	private static String contentFurry() {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
@@ -1852,19 +1834,9 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.append("</div>");
 			
 			return UtilText.nodeContentSB.toString();
-		}
-		
-		@Override
-		public String getContent(){
-			return "";
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			 if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", OPTIONS);
-				
-			} else if(index==1) {
+	}
+
+	private static Response resetFurry() {
 				return new Response("Defaults", "Reset all furry and spawn preferences to their default settings.", FURRY_PREFERENCE) {
 					@Override
 					public void effects() {
@@ -1878,16 +1850,7 @@ public class OptionsDialogue {
 						Main.saveProperties();
 					}
 				};
-			}
-			 
-			return null;
-		}
-
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
+	}
 
 	private static String getSpawnRateDiv(String id, Colour colour, String valueDisplay, int value, int minimum, int maximum) {
 		StringBuilder contentSB = new StringBuilder();
@@ -1993,10 +1956,7 @@ public class OptionsDialogue {
 		return sb.toString();
 	}
 
-	public static final DialogueNode UNIT_PREFERENCE = new DialogueNode("Unit preferences", "", true) {
-
-		@Override
-		public String getHeaderContent() {
+	private static String contentUnit() {
 			UtilText.nodeContentSB.setLength(0);
 
 			UtilText.nodeContentSB.append(
@@ -2051,45 +2011,9 @@ public class OptionsDialogue {
 					Main.getProperties().hasValue(PropertyValue.internationalDate)));
 
 			return UtilText.nodeContentSB.toString();
-		}
+	}
 
-		@Override
-		public String getContent() {
-			return "";
-		}
-
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", OPTIONS);
-
-			} else {
-				return null;
-			}
-		}
-	};
-	
-	
-	public static final DialogueNode CONTENT_PREFERENCE = new DialogueNode("Content Options", "", true) {
-		@Override
-		public String getLabel() {
-			switch(contentOptionsPage) {
-				case BODIES:
-					return "Content Options (Bodies)";
-				case GAMEPLAY:
-					return "Content Options (Gameplay)";
-				case MISC:
-					return "Content Options (Misc.)";
-				case SEX:
-					return "Content Options (Sex & Fetishes)";
-				case UNIT_PREFERENCE:
-					break;
-			}
-			return "";
-		}
-		
-		@Override
-		public String getHeaderContent(){
+	private static String contentContent() {
 			UtilText.nodeContentSB.setLength(0);
 			
 			if(contentOptionsPage==ContentOptionsPage.MISC) {
@@ -2697,16 +2621,9 @@ public class OptionsDialogue {
 			}
 			
 			return UtilText.nodeContentSB.toString();
-		}
-		
-		@Override
-		public String getContent(){
-			return "";
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if(index==1) {
+	}
+
+	private static Response miscellaneous() {
 				return new Response("Misc.",
 						contentOptionsPage==ContentOptionsPage.MISC
 							?"You are already viewing the miscellaneous content options!"
@@ -2719,8 +2636,9 @@ public class OptionsDialogue {
 						contentOptionsPage=ContentOptionsPage.MISC;
 					}
 				};
-				
-			} else if(index==2) {
+	}
+
+	private static Response gameplay() {
 				return new Response("Gameplay",
 						contentOptionsPage==ContentOptionsPage.GAMEPLAY
 							?"You are already viewing the gameplay content options!"
@@ -2733,8 +2651,9 @@ public class OptionsDialogue {
 						contentOptionsPage=ContentOptionsPage.GAMEPLAY;
 					}
 				};
-				
-			} else if(index==3) {
+	}
+
+	private static Response sexFetish() {
 				return new Response("Sex & Fetishes",
 						contentOptionsPage==ContentOptionsPage.SEX
 							?"You are already viewing the sex & fetishes content options!"
@@ -2747,8 +2666,9 @@ public class OptionsDialogue {
 						contentOptionsPage=ContentOptionsPage.SEX;
 					}
 				};
-				
-			} else if(index==4) {
+	}
+
+	private static Response bodies() {
 				return new Response("Bodies",
 						contentOptionsPage==ContentOptionsPage.BODIES
 							?"You are already viewing the bodies content options!"
@@ -2761,8 +2681,9 @@ public class OptionsDialogue {
 						contentOptionsPage=ContentOptionsPage.BODIES;
 					}
 				};
-				
-			} else if (index == 11) {
+	}
+
+	private static Response resetContent() {
 				return new Response("[style.colourBad(Reset)]", "Resets <b>all</b> content preferences to their default values!", CONTENT_PREFERENCE) {
 					@Override
 					public void effects() {
@@ -2773,21 +2694,7 @@ public class OptionsDialogue {
 						Main.saveProperties();
 					}
 				};
-				
-			} else if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", MENU);
-				
-			} else {
-				return null;
-			}
-		}
-
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
-	
+	}
 
 	/**
 	 * To be followed by two closing div elements.
@@ -2926,12 +2833,9 @@ public class OptionsDialogue {
 		
 		return contentSB.toString();
 	}
-	
-	
-	public static final DialogueNode CREDITS = new DialogueNode("Credits", "", true) {
-		
-		@Override
-		public String getContent(){
+
+
+	private static String contentCredits() {
 			UtilText.nodeContentSB.setLength(0);
 			
 			UtilText.nodeContentSB.append(
@@ -3067,35 +2971,5 @@ public class OptionsDialogue {
 			UtilText.nodeContentSB.append("</p>");
 			
 			return UtilText.nodeContentSB.toString();
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
-				return new Response("Back", "Go back to the options menu.", MENU);
-				
-			} else {
-				int i=1;
-				for(Artist artist : Artwork.allArtists) {
-					for(ArtistWebsite website : artist.getWebsites()) {
-						if(index==i) {
-							return new ResponseEffectsOnly(website.getName(), "Opens the page:<br/><br/><i>"+website.getURL()+"</i><br/><br/><b>Externally in your default browser.</b>"){
-								@Override
-								public void effects() {
-									Util.openLinkInDefaultBrowser(website.getURL());
-								}
-							};
-						}
-						i++;
-					}
-				}
-				return null;
-			}
-		}
-
-		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OPTIONS;
-		}
-	};
+	}
 }
