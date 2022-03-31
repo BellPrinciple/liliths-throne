@@ -25,7 +25,6 @@ import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellUpgrade;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -681,8 +680,8 @@ public class Combat {
 			}
 		}
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.NORMAL;
+		public Type getDialogueNodeType() {
+			return Type.NORMAL;
 		}
 	};
 
@@ -739,8 +738,8 @@ public class Combat {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.NORMAL;
+		public Type getDialogueNodeType() {
+			return Type.NORMAL;
 		}
 	};
 	public final DialogueNode SUBMIT_CONFIRM = new DialogueNode("Combat", "Submit", true) {
@@ -778,8 +777,8 @@ public class Combat {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.NORMAL;
+		public Type getDialogueNodeType() {
+			return Type.NORMAL;
 		}
 	};
 
@@ -1143,8 +1142,8 @@ public class Combat {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.NORMAL;
+		public Type getDialogueNodeType() {
+			return Type.NORMAL;
 		}
 	};
 	

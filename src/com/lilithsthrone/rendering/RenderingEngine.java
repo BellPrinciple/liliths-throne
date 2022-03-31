@@ -31,7 +31,6 @@ import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntry;
 import com.lilithsthrone.game.dialogue.utils.CharactersPresentDialogue;
 import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
@@ -1261,7 +1260,7 @@ public enum RenderingEngine {
 					+ "</div>"
 				+ "</div>"
 				+ "<div class='full-width-container' style='height: calc(100% - "
-									+(Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY && Main.game.isEnchantmentCapacityEnabled()
+									+(Main.game.getCurrentDialogueNode().getDialogueNodeType()== Scene.Type.INVENTORY && Main.game.isEnchantmentCapacityEnabled()
 										?"128"
 										:"134")
 									+"vw); overflow-y: auto;'>");
@@ -1290,7 +1289,7 @@ public enum RenderingEngine {
 					+ "</div>"
 				+ "</div>"
 				+ "<div class='full-width-container' style='height: calc(100% - "
-									+(Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY && Main.game.isEnchantmentCapacityEnabled()
+									+(Main.game.getCurrentDialogueNode().getDialogueNodeType()== Scene.Type.INVENTORY && Main.game.isEnchantmentCapacityEnabled()
 										?"128"
 										:"134")
 									+"vw); overflow-y: auto;'>");
@@ -1309,7 +1308,7 @@ public enum RenderingEngine {
 									+ getDefaultAttributeColumnHeader(false)
 									+"</div>"
 							+ "<div class='full-width-container' style='height:calc(100% - "
-									+(Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY && Main.game.isEnchantmentCapacityEnabled()
+									+(Main.game.getCurrentDialogueNode().getDialogueNodeType()== Scene.Type.INVENTORY && Main.game.isEnchantmentCapacityEnabled()
 										?"136"
 										:"142")
 									+"vw); overflow-y: auto;'>");
@@ -1345,7 +1344,7 @@ public enum RenderingEngine {
 		}
 		
 		uiAttributeSB.append("<div class='full-width-container' style='background-color:"+background.toWebHexString()+"; border-radius:5px; margin-bottom:1px; padding:4px;'>");
-		if(Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.INVENTORY && Main.game.isEnchantmentCapacityEnabled()) {
+		if(Main.game.getCurrentDialogueNode().getDialogueNodeType() == Scene.Type.INVENTORY && Main.game.isEnchantmentCapacityEnabled()) {
 			int enchantmentPointsUsed = Main.game.getPlayer().getEnchantmentPointsUsedTotal();
 			uiAttributeSB.append(UtilText.parse(
 					"<div class='full-width-container' style='text-align:center;'>"
@@ -1413,7 +1412,7 @@ public enum RenderingEngine {
 		}
 		uiAttributeSB.append("</div>");
 		
-		if(Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.INVENTORY || Main.game.isInCombat() || Main.game.isInSex()) {
+		if(Main.game.getCurrentDialogueNode().getDialogueNodeType() == Scene.Type.INVENTORY || Main.game.isInCombat() || Main.game.isInSex()) {
 			uiAttributeSB.append(getInventoryEquippedPanel(Main.game.getPlayer()));
 			
 		} else {
@@ -1435,7 +1434,7 @@ public enum RenderingEngine {
 	}
 	
 	public static GameCharacter getCharacterToRender() {
-		if(Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.CHARACTERS_PRESENT || Main.game.getCurrentDialogueNode() == PhoneDialogue.CONTACTS_CHARACTER) {
+		if(Main.game.getCurrentDialogueNode().getDialogueNodeType() == Scene.Type.CHARACTERS_PRESENT || Main.game.getCurrentDialogueNode() == PhoneDialogue.CONTACTS_CHARACTER) {
 			return (NPC) CharactersPresentDialogue.characterViewed;
 		}
 		
@@ -1450,7 +1449,7 @@ public enum RenderingEngine {
 			return Main.combat.getTargetedCombatant();
 		}
 		
-		if(InventoryDialogue.getInventoryNPC()!=null && Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.INVENTORY) {
+		if(InventoryDialogue.getInventoryNPC()!=null && Main.game.getCurrentDialogueNode().getDialogueNodeType() == Scene.Type.INVENTORY) {
 			return InventoryDialogue.getInventoryNPC();
 		}
 		
@@ -1472,10 +1471,10 @@ public enum RenderingEngine {
 		return Main.game.isInSex()
 				|| Main.game.isInCombat()
 				|| (getCharacterToRender()!=null
-					&& (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.CHARACTERS_PRESENT
+					&& (Main.game.getCurrentDialogueNode().getDialogueNodeType() == Scene.Type.CHARACTERS_PRESENT
 						|| Main.game.getCurrentDialogueNode() == PhoneDialogue.CONTACTS_CHARACTER
 						|| Main.game.getDialogueFlags().getManagementCompanion()!=null
-						|| (Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY && InventoryDialogue.getInventoryNPC()!=null)));
+						|| (Main.game.getCurrentDialogueNode().getDialogueNodeType()== Scene.Type.INVENTORY && InventoryDialogue.getInventoryNPC()!=null)));
 	}
 	
 	public void renderAttributesPanelRight() {
@@ -1549,7 +1548,7 @@ public enum RenderingEngine {
 			}
 
 			uiAttributeSB.append("<div class='full-width-container' style='background-color:"+PresetColour.BACKGROUND_DARK.toWebHexString()+"; border-radius:5px; margin-bottom:1px; padding:4px;'>");
-			if(Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.INVENTORY && Main.game.isEnchantmentCapacityEnabled() && getCharacterToRender()!=null) {
+			if(Main.game.getCurrentDialogueNode().getDialogueNodeType() == Scene.Type.INVENTORY && Main.game.isEnchantmentCapacityEnabled() && getCharacterToRender()!=null) {
 				int enchantmentPointsUsed = getCharacterToRender().getEnchantmentPointsUsedTotal();
 				uiAttributeSB.append(UtilText.parse(
 						"<div class='full-width-container' style='text-align:center;'>"
@@ -2392,9 +2391,9 @@ public enum RenderingEngine {
 				+ "</div>"
 
 				+ "<div class='quarterContainer'>"
-					+ "<div class='button" + (Main.game.getCharactersPresent().isEmpty() && Main.game.getCurrentDialogueNode().getDialogueNodeType() != DialogueNodeType.CHARACTERS_PRESENT ? " disabled" : "")
+					+ "<div class='button" + (Main.game.getCharactersPresent().isEmpty() && Main.game.getCurrentDialogueNode().getDialogueNodeType() != Scene.Type.CHARACTERS_PRESENT ? " disabled" : "")
 					+ "' id='charactersPresent'>" + SVGImages.SVG_IMAGE_PROVIDER.getPeopleIcon()
-						+ (Main.game.getCharactersPresent().isEmpty() && Main.game.getCurrentDialogueNode().getDialogueNodeType() != DialogueNodeType.CHARACTERS_PRESENT ? "<div class='disabledLayer'></div>" : "")
+						+ (Main.game.getCharactersPresent().isEmpty() && Main.game.getCurrentDialogueNode().getDialogueNodeType() != Scene.Type.CHARACTERS_PRESENT ? "<div class='disabledLayer'></div>" : "")
 					+ "</div>"
 				+ "</div>"
 

@@ -20,7 +20,6 @@ import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.companions.SlaveDialogue;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntry;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntryEncyclopediaUnlock;
@@ -835,8 +834,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 	
@@ -906,8 +905,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 	
@@ -2505,8 +2504,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 	
@@ -3698,8 +3697,8 @@ public class InventoryDialogue {
 		}
 		
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 	
@@ -5268,8 +5267,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 	
@@ -5695,8 +5694,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 	public static final DialogueNode CLOTHING_EQUIPPED = new DialogueNode("Clothing equipped", "", true) {
@@ -6521,8 +6520,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 	
@@ -7062,8 +7061,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 
@@ -7134,8 +7133,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 	
@@ -7183,8 +7182,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 
@@ -7227,8 +7226,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 
@@ -8080,8 +8079,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 
@@ -8318,8 +8317,8 @@ public class InventoryDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 	

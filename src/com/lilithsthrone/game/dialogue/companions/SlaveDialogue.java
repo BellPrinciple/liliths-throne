@@ -23,7 +23,6 @@ import com.lilithsthrone.game.character.quests.Quest;
 import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.places.dominion.slaverAlley.ScarlettsShop;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
@@ -334,8 +333,8 @@ public class SlaveDialogue {
 	
 	public static final DialogueNode SLAVE_START = new DialogueNode("", ".", true) {
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		@Override
 		public String getLabel() {
@@ -1406,8 +1405,8 @@ public class SlaveDialogue {
 	
 	public static final DialogueNode SLAVE_PROGRESSION = new DialogueNode("", "", true) {
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1493,8 +1492,8 @@ public class SlaveDialogue {
 	
 	public static final DialogueNode SLAVE_MINOR = new DialogueNode("", "", true) {
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1634,8 +1633,8 @@ public class SlaveDialogue {
 	
 	public static final DialogueNode SLAVE_ENCOURAGE = new DialogueNode("", "", true) {
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1825,8 +1824,8 @@ public class SlaveDialogue {
 	
 	public static final DialogueNode SLAVE_HUG = new DialogueNode("", "", true) {
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -2017,8 +2016,8 @@ public class SlaveDialogue {
 	
 	public static final DialogueNode SLAVE_PETTINGS = new DialogueNode("", "", true) {
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -2161,8 +2160,8 @@ public class SlaveDialogue {
 	
 	public static final DialogueNode SLAVE_PRESENT = new DialogueNode("", "", true) {
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -2282,8 +2281,8 @@ public class SlaveDialogue {
 	
 	public static final DialogueNode SLAVE_INSPECT = new DialogueNode("", "", true) {
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -2646,8 +2645,8 @@ public class SlaveDialogue {
 	
 	public static final DialogueNode SLAVE_SPANKING = new DialogueNode("", "", true) { //TODO
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -2852,8 +2851,8 @@ public class SlaveDialogue {
 	
 	public static final DialogueNode SLAVE_MOLEST = new DialogueNode("", "", true) {
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override

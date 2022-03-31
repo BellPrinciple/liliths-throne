@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.effects.EffectBenefit;
@@ -21,7 +22,6 @@ import com.lilithsthrone.game.combat.DamageType;
 import com.lilithsthrone.game.combat.DamageVariance;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMoveType;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.utils.SpellManagement;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
@@ -373,7 +373,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "While in combat, spells can only be cast as a combat move!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_FIRE?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_FIRE?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!= Scene.Type.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Spells can only be cast in a neutral scene!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner) && !owner.isSpellSchoolSpecialAbilityUnlocked(SpellSchool.FIRE)) {
@@ -666,7 +666,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "While in combat, spells can only be cast as a combat move!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_WATER?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_WATER?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!= Scene.Type.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Spells can only be cast in a neutral scene!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner)) {
@@ -834,7 +834,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "While in combat, spells can only be cast as a combat move!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_WATER?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_WATER?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!= Scene.Type.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Spells can only be cast in a neutral scene!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner)) {
@@ -1182,7 +1182,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "While in combat, spells can only be cast as a combat move!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_AIR?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_AIR?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!= Scene.Type.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Spells can only be cast in a neutral scene!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner)) {
@@ -1531,7 +1531,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "While in combat, spells can only be cast as a combat move!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_EARTH?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_EARTH?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!= Scene.Type.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Spells can only be cast in a neutral scene!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner)) {
@@ -2399,7 +2399,7 @@ public enum Spell {
 				return new Value<>(false, UtilText.parse(owner, "While in combat, spells can only be cast as a combat move!"));
 				
 			} else if(!Main.game.isSavedDialogueNeutral()
-					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_ARCANE?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!=DialogueNodeType.OCCUPANT_MANAGEMENT)) {
+					&& (Main.game.getCurrentDialogueNode()!=SpellManagement.CHARACTER_SPELLS_ARCANE?false:SpellManagement.getDialogueReturn().getDialogueNodeType()!= Scene.Type.OCCUPANT_MANAGEMENT)) {
 				return new Value<>(false, "Spells can only be cast in a neutral scene!");
 				
 			} else if(owner.getMana()<this.getModifiedCost(owner)) {

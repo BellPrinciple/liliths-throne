@@ -53,7 +53,6 @@ import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.companions.CompanionManagement;
 import com.lilithsthrone.game.dialogue.companions.OccupantManagementDialogue;
 import com.lilithsthrone.game.dialogue.npcDialogue.elemental.ElementalDialogue;
@@ -241,14 +240,14 @@ public class MainController implements Initializable {
 			return;
 		}
 		
-		if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.OPTIONS) {
+		if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.OPTIONS) {
 			Main.game.restoreSavedContent(false);
 			
 		} else {
-			DialogueNodeType currentDialogueNodeType = Main.game.getCurrentDialogueNode().getDialogueNodeType();
-			if (currentDialogueNodeType == DialogueNodeType.NORMAL
-					|| currentDialogueNodeType == DialogueNodeType.OCCUPANT_MANAGEMENT // This was commented out at some point, which was causing issues with the opening/closing of the main menu screen.
-					|| (!Main.game.isInNewWorld() && currentDialogueNodeType != DialogueNodeType.CHARACTERS_PRESENT)) {
+			com.lilithsthrone.game.Scene.Type currentDialogueNodeType = Main.game.getCurrentDialogueNode().getDialogueNodeType();
+			if (currentDialogueNodeType == com.lilithsthrone.game.Scene.Type.NORMAL
+					|| currentDialogueNodeType == com.lilithsthrone.game.Scene.Type.OCCUPANT_MANAGEMENT // This was commented out at some point, which was causing issues with the opening/closing of the main menu screen.
+					|| (!Main.game.isInNewWorld() && currentDialogueNodeType != com.lilithsthrone.game.Scene.Type.CHARACTERS_PRESENT)) {
 				Main.game.saveDialogueNode();
 			}
 			
@@ -269,11 +268,11 @@ public class MainController implements Initializable {
 			return;
 		}
 		
-		if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.PHONE) {
+		if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.PHONE) {
 			Main.game.restoreSavedContent(false);
 			
 		} else {
-			if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.NORMAL
+			if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.NORMAL
 //					|| Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.OCCUPANT_MANAGEMENT
 					) {
 				Main.game.saveDialogueNode();
@@ -291,12 +290,12 @@ public class MainController implements Initializable {
 		if(!Main.game.isInNewWorld() && !Main.game.isInSex()) {
 			return true;
 		}
-		if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.INVENTORY
+		if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.INVENTORY
 				|| Main.game.isInCombat()
 				/*|| Main.game.isInSex()*/) {
 			return false;
 			
-		} else if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.OPTIONS || Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.PHONE) {
+		} else if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.OPTIONS || Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.PHONE) {
 			if(Main.game.getSavedDialogueNode()==null) {
 				return true;
 			}
@@ -348,7 +347,7 @@ public class MainController implements Initializable {
 		InventoryDialogue.setInventoryNPC(npc);
 		InventoryDialogue.setNPCInventoryInteraction(interaction);
 		
-		if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.INVENTORY) {
+		if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.INVENTORY) {
 			if(Main.game.getDialogueFlags().getManagementCompanion() != null) {
 				Main.game.setContent(new Response("", "", CompanionManagement.getCoreNode()) {
 					@Override
@@ -367,7 +366,7 @@ public class MainController implements Initializable {
 			}
 
 		} else if(!isInventoryDisabled() || npc!=null) {
-			if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.NORMAL
+			if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.NORMAL
 //					|| Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.OCCUPANT_MANAGEMENT
 					) {
 				Main.game.saveDialogueNode();
@@ -393,7 +392,7 @@ public class MainController implements Initializable {
 		}
 		Main.game.getDialogueFlags().setFlag(DialogueFlagValue.coveringChangeListenersRequired, true);
 		if(characterViewed!=null && characterViewed != CharactersPresentDialogue.characterViewed) {
-			if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.NORMAL
+			if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.NORMAL
 //					|| Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.OCCUPANT_MANAGEMENT
 					) {
 				Main.game.saveDialogueNode();
@@ -403,11 +402,11 @@ public class MainController implements Initializable {
 			Main.game.setContent(new Response("", "", CharactersPresentDialogue.MENU));
 			
 		} else {
-			if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.CHARACTERS_PRESENT) {
+			if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.CHARACTERS_PRESENT) {
 				Main.game.restoreSavedContent(false);
 				
 			} else if (!Main.game.getCharactersPresent().isEmpty()) {
-				if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.NORMAL
+				if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.NORMAL
 //						|| Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.OCCUPANT_MANAGEMENT
 						) {
 					Main.game.saveDialogueNode();
@@ -1787,7 +1786,7 @@ public class MainController implements Initializable {
 							if(character.isPlayer()) {
 								// block when in character creation
 								if(Main.game.isInNewWorld()) {
-									if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.PHONE) {
+									if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.PHONE) {
 										if(Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_APPEARANCE) {
 											openPhone();
 										} else {
@@ -1795,7 +1794,7 @@ public class MainController implements Initializable {
 										}
 										
 									} else {
-										if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.NORMAL
+										if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.NORMAL
 //												|| Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.OCCUPANT_MANAGEMENT
 												) {
 											Main.game.saveDialogueNode();
@@ -1828,7 +1827,7 @@ public class MainController implements Initializable {
 								updateUI();
 								Main.game.updateResponses();
 								
-							} else if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.PHONE) {
+							} else if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.PHONE) {
 								if(Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_PERK_TREE) {
 									openPhone();
 								} else {
@@ -1836,7 +1835,7 @@ public class MainController implements Initializable {
 								}
 								
 							} else {
-								if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.NORMAL
+								if (Main.game.getCurrentDialogueNode().getDialogueNodeType() == com.lilithsthrone.game.Scene.Type.NORMAL
 //										|| Main.game.getCurrentDialogueNode().getDialogueNodeType() == DialogueNodeType.OCCUPANT_MANAGEMENT
 										) {
 									Main.game.saveDialogueNode();
@@ -2085,7 +2084,7 @@ public class MainController implements Initializable {
 			// Money on floor:
 			id = "MONEY_ON_FLOOR";
 			if (((EventTarget) documentRight.getElementById(id)) != null) {
-				if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY) {
+				if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()== com.lilithsthrone.game.Scene.Type.INVENTORY) {
 					addEventListener(documentRight, id, "click", e -> {
 						Main.mainController.openInventory();
 					}, false);
@@ -2096,7 +2095,7 @@ public class MainController implements Initializable {
 			for (Entry<AbstractWeapon, Integer> entry : Main.game.getPlayerCell().getInventory().getAllWeaponsInInventory().entrySet()) {
 				id = "WEAPON_FLOOR_" + entry.getKey().hashCode();
 				if (((EventTarget) documentRight.getElementById(id)) != null) {
-					if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY) {
+					if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()== com.lilithsthrone.game.Scene.Type.INVENTORY) {
 						InventorySelectedItemEventListener el = new InventorySelectedItemEventListener().setWeaponInventory(entry.getKey(), null);
 						addEventListener(documentRight, id, "click", el, false);
 					}
@@ -2111,7 +2110,7 @@ public class MainController implements Initializable {
 			for (Entry<AbstractClothing, Integer> entry : Main.game.getPlayerCell().getInventory().getAllClothingInInventory().entrySet()) {
 				id = "CLOTHING_FLOOR_" + entry.getKey().hashCode();
 				if (((EventTarget) documentRight.getElementById(id)) != null) {
-					if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY) {
+					if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()== com.lilithsthrone.game.Scene.Type.INVENTORY) {
 						InventorySelectedItemEventListener el = new InventorySelectedItemEventListener().setClothingInventory(entry.getKey(), null);
 						addEventListener(documentRight, id, "click", el, false);
 					}
@@ -2126,7 +2125,7 @@ public class MainController implements Initializable {
 			for (Entry<AbstractItem, Integer> entry : Main.game.getPlayerCell().getInventory().getAllItemsInInventory().entrySet()) {
 				id = "ITEM_FLOOR_" + entry.getKey().hashCode();
 				if (((EventTarget) documentRight.getElementById(id)) != null) {
-					if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY) {
+					if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()== com.lilithsthrone.game.Scene.Type.INVENTORY) {
 						InventorySelectedItemEventListener el = new InventorySelectedItemEventListener().setItemInventory(entry.getKey(), null);
 						addEventListener(documentRight, id, "click", el, false);
 					}

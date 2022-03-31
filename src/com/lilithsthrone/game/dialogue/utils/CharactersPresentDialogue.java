@@ -9,7 +9,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.PerkManager;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.companions.CompanionManagement;
 import com.lilithsthrone.game.dialogue.companions.OccupantDialogue;
 import com.lilithsthrone.game.dialogue.companions.SlaveDialogue;
@@ -104,8 +103,8 @@ public class CharactersPresentDialogue {
 	public static final DialogueNode MENU = new DialogueNode("", "", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.CHARACTERS_PRESENT;
+		public Type getDialogueNodeType() {
+			return Type.CHARACTERS_PRESENT;
 		}
 		
 		@Override
@@ -270,8 +269,8 @@ public class CharactersPresentDialogue {
 	public static final DialogueNode PERKS = new DialogueNode("", "", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.CHARACTERS_PRESENT;
+		public Type getDialogueNodeType() {
+			return Type.CHARACTERS_PRESENT;
 		}
 		
 		@Override

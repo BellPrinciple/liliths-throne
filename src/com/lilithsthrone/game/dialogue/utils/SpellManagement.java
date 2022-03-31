@@ -7,7 +7,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.main.Main;
@@ -185,11 +184,11 @@ public class SpellManagement {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
+		public Type getDialogueNodeType() {
 			if(getSpellOwner().isPlayer()) {
-				return DialogueNodeType.PHONE;
+				return Type.PHONE;
 			}
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 	};
 	
@@ -246,11 +245,11 @@ public class SpellManagement {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
+		public Type getDialogueNodeType() {
 			if(getSpellOwner().isPlayer()) {
-				return DialogueNodeType.PHONE;
+				return Type.PHONE;
 			}
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 	};
 	
@@ -307,11 +306,11 @@ public class SpellManagement {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
+		public Type getDialogueNodeType() {
 			if(getSpellOwner().isPlayer()) {
-				return DialogueNodeType.PHONE;
+				return Type.PHONE;
 			}
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 	};
 	
@@ -368,11 +367,11 @@ public class SpellManagement {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
+		public Type getDialogueNodeType() {
 			if(getSpellOwner().isPlayer()) {
-				return DialogueNodeType.PHONE;
+				return Type.PHONE;
 			}
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 	};
 	
@@ -428,11 +427,11 @@ public class SpellManagement {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
+		public Type getDialogueNodeType() {
 			if(getSpellOwner().isPlayer()) {
-				return DialogueNodeType.PHONE;
+				return Type.PHONE;
 			}
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 	};
 
@@ -481,11 +480,11 @@ public class SpellManagement {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
+		public Type getDialogueNodeType() {
 			if(getSpellOwner().isPlayer()) {
-				return DialogueNodeType.PHONE;
+				return Type.PHONE;
 			}
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 	};
 	
@@ -511,11 +510,11 @@ public class SpellManagement {
 			return null;
 		}
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
+		public Type getDialogueNodeType() {
 			if(getSpellOwner().isPlayer()) {
-				return DialogueNodeType.PHONE;
+				return Type.PHONE;
 			}
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 	};
 }

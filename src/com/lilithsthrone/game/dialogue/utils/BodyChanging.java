@@ -20,7 +20,6 @@ import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade.SuccubisSecrets;
 import com.lilithsthrone.game.dialogue.places.dominion.slaverAlley.ScarlettsShop;
 import com.lilithsthrone.game.dialogue.responses.Response;
@@ -778,8 +777,8 @@ public class BodyChanging {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -925,8 +924,8 @@ public class BodyChanging {
 			return getBodyChangingResponse(responseTab, index);
 		}
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -1032,8 +1031,8 @@ public class BodyChanging {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -1358,8 +1357,8 @@ public class BodyChanging {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -1424,8 +1423,8 @@ public class BodyChanging {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -1509,8 +1508,8 @@ public class BodyChanging {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -1611,8 +1610,8 @@ public class BodyChanging {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -1704,8 +1703,8 @@ public class BodyChanging {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -1790,8 +1789,8 @@ public class BodyChanging {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 
@@ -1842,8 +1841,8 @@ public class BodyChanging {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -1882,8 +1881,8 @@ public class BodyChanging {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	

@@ -4,7 +4,6 @@ import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.main.Main;
 
 import java.util.List;
@@ -95,8 +94,8 @@ public class CombatMovesSetup {
 		}
 
         @Override
-        public DialogueNodeType getDialogueNodeType() {
-            return DialogueNodeType.PHONE;
+        public Type getDialogueNodeType() {
+            return Type.PHONE;
         }
     };
 }

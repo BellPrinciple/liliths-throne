@@ -26,7 +26,6 @@ import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade.SuccubisSecrets;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
@@ -75,7 +74,7 @@ public class CompanionManagement {
 	}
 
 	public static void initManagement(Scene coreNode, int defaultResponseTab, NPC targetedCharacter) {
-		if(Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.NORMAL) {
+		if(Main.game.getCurrentDialogueNode().getDialogueNodeType()== Scene.Type.NORMAL) {
 			Main.game.saveDialogueNode();
 		}
 		CompanionManagement.coreNode = coreNode;
@@ -806,8 +805,8 @@ public class CompanionManagement {
 	public static final DialogueNode SLAVE_MANAGEMENT_INSPECT = new DialogueNode("Slave Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -851,8 +850,8 @@ public class CompanionManagement {
 	public static final DialogueNode SLAVE_MANAGEMENT_JOBS = new DialogueNode("Slave Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1048,8 +1047,8 @@ public class CompanionManagement {
 	public static final DialogueNode SLAVE_MANAGEMENT_PERMISSIONS = new DialogueNode("Slave Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1187,8 +1186,8 @@ public class CompanionManagement {
 	public static final DialogueNode SLAVE_MANAGEMENT_COSMETICS_MAKEUP = new DialogueNode("Slave Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1244,8 +1243,8 @@ public class CompanionManagement {
 	public static final DialogueNode SLAVE_MANAGEMENT_COSMETICS_HAIR = new DialogueNode("Slave Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1294,8 +1293,8 @@ public class CompanionManagement {
 	public static final DialogueNode SLAVE_MANAGEMENT_COSMETICS_PIERCINGS = new DialogueNode("Slave Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1334,8 +1333,8 @@ public class CompanionManagement {
 	public static final DialogueNode SLAVE_MANAGEMENT_COSMETICS_EYES = new DialogueNode("Slave Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1391,8 +1390,8 @@ public class CompanionManagement {
 	public static final DialogueNode SLAVE_MANAGEMENT_COSMETICS_COVERINGS = new DialogueNode("Slave Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1448,8 +1447,8 @@ public class CompanionManagement {
 	public static final DialogueNode SLAVE_MANAGEMENT_COSMETICS_OTHER = new DialogueNode("Slave Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1617,8 +1616,8 @@ public class CompanionManagement {
 	public static final DialogueNode SLAVE_MANAGEMENT_PERKS = new DialogueNode("", "", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1667,8 +1666,8 @@ public class CompanionManagement {
 	public static final DialogueNode OCCUPANT_CHOOSE_NAME = new DialogueNode("", "", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
