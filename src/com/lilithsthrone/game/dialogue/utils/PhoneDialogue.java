@@ -24,7 +24,6 @@ import com.lilithsthrone.game.character.quests.QuestType;
 import com.lilithsthrone.game.character.race.*;
 import com.lilithsthrone.game.combat.DamageType;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.npcDialogue.elemental.ElementalDialogue;
 import com.lilithsthrone.game.dialogue.places.dominion.lilayashome.LilayaBirthing;
 import com.lilithsthrone.game.dialogue.responses.Response;
@@ -549,8 +548,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -745,8 +744,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	public static final DialogueNode PLANNER_SIDE = new DialogueNode("Planner", "", true) {
@@ -846,8 +845,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	public static final DialogueNode PLANNER_RELATIONSHIP = new DialogueNode("Planner", "", true) {
@@ -935,8 +934,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 
@@ -1030,8 +1029,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 
@@ -1226,8 +1225,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -1684,8 +1683,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -1829,8 +1828,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -2103,8 +2102,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -2724,8 +2723,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -2769,8 +2768,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -2875,8 +2874,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 
@@ -3048,8 +3047,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -3128,8 +3127,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	public static final DialogueNode ITEM_CATALOGUE = new DialogueNode("", "View discovered items", true) {
@@ -3233,8 +3232,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 
@@ -3323,8 +3322,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -3492,8 +3491,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 
@@ -3553,8 +3552,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -3668,8 +3667,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -3868,8 +3867,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 	
@@ -3952,8 +3951,8 @@ public class PhoneDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 }

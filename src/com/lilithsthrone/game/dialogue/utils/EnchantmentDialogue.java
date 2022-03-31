@@ -26,7 +26,6 @@ import com.lilithsthrone.game.character.markings.Tattoo;
 import com.lilithsthrone.game.character.markings.TattooType;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.companions.CompanionManagement;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntry;
 import com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade.SuccubisSecrets;
@@ -588,8 +587,8 @@ public class EnchantmentDialogue {
 		}
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.INVENTORY;
+		public Type getDialogueNodeType() {
+			return Type.INVENTORY;
 		}
 	};
 	

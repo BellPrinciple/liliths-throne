@@ -1,7 +1,6 @@
 package com.lilithsthrone.game;
 
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.main.Main;
 
@@ -126,10 +125,10 @@ public interface Scene {
 	/**
 	 * @return
 	 * The type of dialogue that this is.
-	 * Will almost always be {@link DialogueNodeType#NORMAL NORMAL}.
+	 * Will almost always be {@link Type#NORMAL NORMAL}.
 	 */
-	default DialogueNodeType getDialogueNodeType() {
-		return DialogueNodeType.NORMAL;
+	default Type getDialogueNodeType() {
+		return Type.NORMAL;
 	}
 
 	/**
@@ -197,6 +196,27 @@ public interface Scene {
 			while(response.size() < i)
 				response.add(null);
 			response.add(r);
+		}
+	}
+
+	enum Type {
+		NORMAL("normal"),
+		STATUS_EFFECT_MESSAGE("statusEffectMessage"),
+		INVENTORY("inventory"),
+		PHONE("phone"),
+		CHARACTERS_PRESENT("characters present"),
+		OCCUPANT_MANAGEMENT("character management"),
+		OPTIONS("options"),
+		GIFT("gifts");
+
+		private final String name;
+
+		Type(String n) {
+			name = n;
+		}
+
+		public String getName() {
+			return name;
 		}
 	}
 }

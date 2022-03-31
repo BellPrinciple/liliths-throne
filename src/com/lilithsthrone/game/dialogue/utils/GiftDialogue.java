@@ -2,7 +2,6 @@ package com.lilithsthrone.game.dialogue.utils;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.main.Main;
@@ -57,8 +56,8 @@ public class GiftDialogue {
 			return null;
 		}
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.GIFT;
+		public Type getDialogueNodeType() {
+			return Type.GIFT;
 		}
 	};
 

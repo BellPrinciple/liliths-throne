@@ -33,7 +33,6 @@ import com.lilithsthrone.game.character.persona.SexualOrientationPreference;
 import com.lilithsthrone.game.character.race.FurryPreference;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.character.race.SubspeciesPreference;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.story.CharacterCreation;
@@ -298,8 +297,8 @@ public enum OptionsDialogue implements Scene {
 	}
 
 	@Override
-	public DialogueNodeType getDialogueNodeType() {
-		return DialogueNodeType.OPTIONS;
+	public Type getDialogueNodeType() {
+		return Type.OPTIONS;
 	}
 
 	@Override

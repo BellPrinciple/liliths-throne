@@ -181,7 +181,6 @@ import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueFlags;
 import com.lilithsthrone.game.dialogue.DialogueManager;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.companions.OccupantManagementDialogue;
 import com.lilithsthrone.game.dialogue.encounters.Encounter;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntry;
@@ -2703,7 +2702,7 @@ public class Game implements XMLSaving {
 				&& !Main.game.isInSex()
 				&& !Main.game.isInCombat()) {
 			
-			if(Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.NORMAL) {
+			if(Main.game.getCurrentDialogueNode().getDialogueNodeType()== Scene.Type.NORMAL) {
 				Main.game.saveDialogueNode();
 			}
 
@@ -2737,7 +2736,7 @@ public class Game implements XMLSaving {
 		
 		// Miscellaneous things:
 		
-		if(Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.NORMAL
+		if(Main.game.getCurrentDialogueNode().getDialogueNodeType()== Scene.Type.NORMAL
 				&& !Main.game.getCurrentDialogueNode().isTravelDisabled()) { // Catch slavery management NPC not correctly being assigned to null:
 			Main.game.getDialogueFlags().setManagementCompanion(null);
 		}
@@ -2946,23 +2945,23 @@ public class Game implements XMLSaving {
 						}
 
 						if(node.isDisplaysActionTitleOnContinuesDialogue()) {
-							if (currentDialogueNode.getDialogueNodeType() == DialogueNodeType.NORMAL) {
+							if (currentDialogueNode.getDialogueNodeType() == Scene.Type.NORMAL) {
 								positionAnchor++;
 							}
 						
 							pastDialogueSB.append("<hr id='position" + positionAnchor + "'/><p class='option-disabled' style='padding-bottom:0; margin-bottom:0;'>&gt " + chosenResponse + "</p>");
 						}
 						
-						if (getMapDisplay() == DialogueNodeType.NORMAL) {
+						if (getMapDisplay() == Scene.Type.NORMAL) {
 							initialPositionAnchor = positionAnchor;
 						}
 					} else {
 						dialogueTitle = UtilText.parse(node.getLabel());
 						
-						if (getMapDisplay() == DialogueNodeType.NORMAL)
+						if (getMapDisplay() == Scene.Type.NORMAL)
 							initialPositionAnchor = positionAnchor;
 
-						if (currentDialogueNode.getDialogueNodeType() == DialogueNodeType.NORMAL)
+						if (currentDialogueNode.getDialogueNodeType() == Scene.Type.NORMAL)
 							positionAnchor = 0;
 						
 						pastDialogueSB.setLength(0);
@@ -3155,7 +3154,7 @@ public class Game implements XMLSaving {
 		}
 		boolean resetPointer = false;
 		
-		if (getMapDisplay() == DialogueNodeType.NORMAL) {
+		if (getMapDisplay() == Scene.Type.NORMAL) {
 			initialPositionAnchor = positionAnchor;
 		}
 		
@@ -3185,7 +3184,7 @@ public class Game implements XMLSaving {
 				}
 				
 				if(node.isDisplaysActionTitleOnContinuesDialogue()) {
-					if (currentDialogueNode.getDialogueNodeType() == DialogueNodeType.NORMAL) {
+					if (currentDialogueNode.getDialogueNodeType() == Scene.Type.NORMAL) {
 						positionAnchor++;
 					}
 					
@@ -3199,7 +3198,7 @@ public class Game implements XMLSaving {
 
 			} else {
 				dialogueTitle = UtilText.parse(node.getLabel());
-				if (currentDialogueNode.getDialogueNodeType() == DialogueNodeType.NORMAL) {
+				if (currentDialogueNode.getDialogueNodeType() == Scene.Type.NORMAL) {
 					positionAnchor = 0;
 				}
 				
@@ -3343,7 +3342,7 @@ public class Game implements XMLSaving {
 	}
 	
 	private boolean requiresYScroll(Scene node) {
-		return currentDialogueNode.getDialogueNodeType()==DialogueNodeType.INVENTORY
+		return currentDialogueNode.getDialogueNodeType()== Scene.Type.INVENTORY
 				&& (!node.equals(InventoryDialogue.DYE_CLOTHING)
 						&& !node.equals(InventoryDialogue.DYE_CLOTHING_CHARACTER_CREATION)
 						&& !node.equals(InventoryDialogue.DYE_EQUIPPED_CLOTHING)
@@ -3353,7 +3352,7 @@ public class Game implements XMLSaving {
 	}
 	
 	private static boolean isContentScroll(Scene node) {
-		return (node.getDialogueNodeType()!=DialogueNodeType.CHARACTERS_PRESENT
+		return (node.getDialogueNodeType()!= Scene.Type.CHARACTERS_PRESENT
 				&& !node.equals(PhoneDialogue.CHARACTER_APPEARANCE)
 				&& !node.equals(PhoneDialogue.CONTACTS_CHARACTER))
 				|| node.equals(CharactersPresentDialogue.PERKS)
@@ -3903,7 +3902,7 @@ public class Game implements XMLSaving {
 		}
 		
 		setMainContentRegex(
-				(savedDialogueNode.getDialogueNodeType()!=DialogueNodeType.PHONE && savedDialogueNode.getDialogueNodeType()!=DialogueNodeType.CHARACTERS_PRESENT
+				(savedDialogueNode.getDialogueNodeType()!= Scene.Type.PHONE && savedDialogueNode.getDialogueNodeType()!= Scene.Type.CHARACTERS_PRESENT
 					?"<body onLoad='scrollToElement()'>"
 						+ "<script>function scrollToElement() {document.getElementById('content-block').scrollTop = document.getElementById('position" + (positionAnchor) + "').offsetTop -64;}</script>"
 					:"<body>"),
@@ -4888,7 +4887,7 @@ public class Game implements XMLSaving {
 		return currentDialogue;
 	}
 
-	public DialogueNodeType getMapDisplay() {
+	public Scene.Type getMapDisplay() {
 		if(currentDialogueNode != null) {
 			return currentDialogueNode.getDialogueNodeType();
 		}

@@ -16,7 +16,6 @@ import com.lilithsthrone.game.character.attributes.ObedienceLevel;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.eventLog.SlaveryEventLogEntry;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -170,8 +169,8 @@ public class OccupantManagementDialogue {
 	public static final DialogueNode OCCUPANT_OVERVIEW = new DialogueNode("Slavery Overview", ".", true) {
 		
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -449,8 +448,8 @@ public class OccupantManagementDialogue {
 	public static final DialogueNode ROOM_MANAGEMENT = new DialogueNode("Room Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -634,8 +633,8 @@ public class OccupantManagementDialogue {
 	public static final DialogueNode ROOM_UPGRADES = new DialogueNode("Room Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -828,8 +827,8 @@ public class OccupantManagementDialogue {
 	public static final DialogueNode ROOM_UPGRADES_MANAGEMENT = new DialogueNode("Room Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1084,8 +1083,8 @@ public class OccupantManagementDialogue {
 	public static final DialogueNode SLAVE_LIST = new DialogueNode("Slave & Occupant Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 		
 		@Override
@@ -1204,8 +1203,8 @@ public class OccupantManagementDialogue {
 	public static final DialogueNode SLAVE_LIST_MANAGEMENT = new DialogueNode("Slave Management", ".", true) {
 
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.OCCUPANT_MANAGEMENT;
+		public Type getDialogueNodeType() {
+			return Type.OCCUPANT_MANAGEMENT;
 		}
 
 		@Override

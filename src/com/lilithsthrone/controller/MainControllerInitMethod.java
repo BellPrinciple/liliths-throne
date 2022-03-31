@@ -18,6 +18,7 @@ import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInventoryEven
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.Properties;
 import com.lilithsthrone.game.PropertyValue;
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.FluidStored;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
@@ -140,7 +141,6 @@ import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.combat.spells.SpellUpgrade;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.companions.CompanionManagement;
 import com.lilithsthrone.game.dialogue.companions.OccupantManagementDialogue;
 import com.lilithsthrone.game.dialogue.npcDialogue.elemental.ElementalDialogue;
@@ -4762,7 +4762,7 @@ public class MainControllerInitMethod {
 								|| ScarlettsShop.isSlaveCustomisationMenu()
 								|| Main.game.getCurrentDialogueNode()==MiscDialogue.getMakeupDialogueForEqualityCheck()
 								|| Main.game.getCurrentDialogueNode()==RoomPlayer.AUNT_HOME_PLAYERS_ROOM_MAKEUP
-								|| Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.PHONE;
+								|| Main.game.getCurrentDialogueNode().getDialogueNodeType()== Scene.Type.PHONE;
 			
 			if(Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.coveringChangeListenersRequired)) {
 				for(AbstractBodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {

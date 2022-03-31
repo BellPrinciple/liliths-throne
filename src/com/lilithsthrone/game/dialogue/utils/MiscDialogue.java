@@ -4,7 +4,6 @@ import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.main.Main;
@@ -54,8 +53,8 @@ public class MiscDialogue {
 			return null;
 		}
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.STATUS_EFFECT_MESSAGE;
+		public Type getDialogueNodeType() {
+			return Type.STATUS_EFFECT_MESSAGE;
 		}
 	};
 
@@ -133,8 +132,8 @@ public class MiscDialogue {
 			return null;
 		}
 		@Override
-		public DialogueNodeType getDialogueNodeType() {
-			return DialogueNodeType.PHONE;
+		public Type getDialogueNodeType() {
+			return Type.PHONE;
 		}
 	};
 }

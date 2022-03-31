@@ -30,7 +30,6 @@ import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.Combat;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.DialogueNodeType;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.story.CharacterCreation;
 import com.lilithsthrone.game.dialogue.utils.MapTravelType;
@@ -774,7 +773,7 @@ public class Main extends Application {
 		return Main.game.isStarted()
 				&& !Main.game.isInCombat()
 				&& !Main.game.isInSex()
-				&& Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.NORMAL
+				&& Main.game.getCurrentDialogueNode().getDialogueNodeType()== com.lilithsthrone.game.Scene.Type.NORMAL
 				&& Main.game.isInNeutralDialogue();
 	}
 	
@@ -788,7 +787,7 @@ public class Main extends Application {
 		} else if (Main.game.isInSex()) {
 			return "You cannot save the game while in a sex scene!";
 			
-		} else if (Main.game.getCurrentDialogueNode().getDialogueNodeType()!=DialogueNodeType.NORMAL) {
+		} else if (Main.game.getCurrentDialogueNode().getDialogueNodeType()!= com.lilithsthrone.game.Scene.Type.NORMAL) {
 			return "You cannot save the game unless you are in a neutral scene!";
 			
 		} else if (!Main.game.isStarted() || !Main.game.isInNeutralDialogue()) {
