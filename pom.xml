@@ -4,8 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.lilithsthrone</groupId>
 	<artifactId>game</artifactId>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<version>1</version>
+	<modules>
+		<module>mod/rebelbase</module>
+	</modules>
 	<name>lilithsthrone</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
