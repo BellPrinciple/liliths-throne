@@ -2870,7 +2870,7 @@ public class Game implements XMLSaving {
 				response.applyEffects(); // Only apply effects if this response is a non-standard one or if the next response is not null
 			}
 			if(node!=null) {
-				node.specialPreParsingEffects();
+				specialPreParsingEffects();
 				node.applyPreParsingEffects();
 			}
 			
@@ -3095,7 +3095,7 @@ public class Game implements XMLSaving {
 			response.applyEffects(); // Only apply effects if this response is a non-standard one or if the next response is not null
 		}
 		if(node!=null) {
-			node.specialPreParsingEffects();
+			specialPreParsingEffects();
 			node.applyPreParsingEffects();
 		}
 		
@@ -5276,5 +5276,11 @@ public class Game implements XMLSaving {
 	
 	public void initCosmeticsDialogue(NPC beautician, GameCharacter target, Scene returnToNode) {
 		CosmeticsDialogue.initDialogue(beautician, target, returnToNode);
+	}
+
+	//NOTE was in DialogueNode
+	private void specialPreParsingEffects() {
+		if(started)
+			dialogueFlags.setFlag(DialogueFlagValue.coveringChangeListenersRequired,false);
 	}
 }

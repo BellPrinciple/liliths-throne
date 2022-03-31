@@ -821,11 +821,6 @@ public abstract class DialogueNode implements Scene {
 		this.author = author;
 	}
 
-	//does not allow overriding
-	public final void specialPreParsingEffects() {
-		Scene.super.specialPreParsingEffects();
-	}
-
 	/**
 	 * @param key
 	 * Identifies the entry for removal.

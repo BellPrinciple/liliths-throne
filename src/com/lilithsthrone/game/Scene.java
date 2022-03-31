@@ -1,8 +1,6 @@
 package com.lilithsthrone.game;
 
-import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.main.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,11 +159,6 @@ public interface Scene {
 	 * This method is called before {@link #getContent()}.
 	 */
 	default void applyPreParsingEffects() {
-	}
-
-	default void specialPreParsingEffects() {
-		if(Main.game.isStarted())
-			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.coveringChangeListenersRequired,false);
 	}
 
 	/**
