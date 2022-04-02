@@ -381,15 +381,6 @@ public class DialogueFlagValue {
 	public static AbstractDialogueFlagValue lyssiethNoCockDemonTF = new AbstractDialogueFlagValue();
 	public static AbstractDialogueFlagValue meraxisRepeatDemonTF = new AbstractDialogueFlagValue();
 	
-	
-	// Rebel base:
-
-	public static AbstractDialogueFlagValue rebelBaseDarkPassFound = new AbstractDialogueFlagValue();
-	public static AbstractDialogueFlagValue rebelBaseLightPassFound = new AbstractDialogueFlagValue();
-	public static AbstractDialogueFlagValue rebelBaseInsaneSurvivorEncountered = new AbstractDialogueFlagValue();
-	public static AbstractDialogueFlagValue rebelBaseElleCostumeEncountered = new AbstractDialogueFlagValue();
-    
-	
 	// Rat warrens:
 	
 	public static AbstractDialogueFlagValue ratWarrensEntry = new AbstractDialogueFlagValue();

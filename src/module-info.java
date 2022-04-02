@@ -45,6 +45,10 @@ module com.lilithsthrone {
 	exports com.lilithsthrone.game.dialogue.npcDialogue.submission;
 	exports com.lilithsthrone.game.dialogue.npcDialogue.unique;
 	exports com.lilithsthrone.game.dialogue.places;
+	exports com.lilithsthrone.game.dialogue.places.dominion;
+	exports com.lilithsthrone.game.dialogue.places.fields;
+	exports com.lilithsthrone.game.dialogue.places.submission;
+	exports com.lilithsthrone.game.dialogue.places.submission.gamblingDen;
 	exports com.lilithsthrone.game.dialogue.responses;
 	exports com.lilithsthrone.game.dialogue.story;
 	exports com.lilithsthrone.game.dialogue.utils;

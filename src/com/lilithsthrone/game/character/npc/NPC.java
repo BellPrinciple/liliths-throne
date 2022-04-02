@@ -328,7 +328,9 @@ public abstract class NPC extends GameCharacter implements XMLSaving {
 		return properties;
 	}
 	
-	public abstract void loadFromXML(Element parentElement, Document doc, CharacterImportSetting... settings);
+	public void loadFromXML(Element parentElement, Document doc, CharacterImportSetting... settings) {
+		loadNPCVariablesFromXML(this,null,parentElement,doc,settings);
+	}
 	
 	public static void loadNPCVariablesFromXML(NPC npc, StringBuilder log, Element parentElement, Document doc, CharacterImportSetting... settings) {
 		GameCharacter.loadGameCharacterVariablesFromXML(npc, log, parentElement, doc, settings);

@@ -46,9 +46,6 @@ public static final EncounterType HARPY_NEST_FIND_ITEM = new EncounterType();
 	public static final EncounterType BAT_CAVERN_LURKER_ATTACK = new EncounterType(true);
 	public static final EncounterType BAT_CAVERN_SLIME_ATTACK= new EncounterType(true);
 	public static final EncounterType BAT_CAVERN_FIND_ITEM = new EncounterType();
-	public static final EncounterType BAT_CAVERN_REBEL_BASE_DISCOVERED = new EncounterType();
-	public static final EncounterType BAT_CAVERN_REBEL_PASSWORD_ONE = new EncounterType();
-	public static final EncounterType BAT_CAVERN_REBEL_PASSWORD_TWO = new EncounterType();
 
 	public static final EncounterType REBEL_BASE_INSANE_SURVIVOR_ATTACK = new EncounterType();
 

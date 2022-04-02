@@ -112,11 +112,11 @@ public interface QuestLine {
 	SIDE_WES("The Rogue Enforcer", "You were able to successfully deal with the Enforcer Quartermaster.",
 			QuestType.SIDE,
 			QuestTree.wesTree),
-        
+        @Deprecated
     SIDE_REBEL_BASE("Grave Robbing", "You managed to escape the abandoned rebel hideout.",
             QuestType.SIDE,
             QuestTree.rebelBaseTree),
-    
+    @Deprecated
     SIDE_REBEL_BASE_FIREBOMBS("Spicy Meatballs", "You've gotten yourself a steady supply of Arcane Firebombs. At the usual premium, of course.",
             QuestType.SIDE,
             QuestTree.rebelBaseFirebombTree),
