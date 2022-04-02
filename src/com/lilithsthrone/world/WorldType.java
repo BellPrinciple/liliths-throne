@@ -2,7 +2,6 @@ package com.lilithsthrone.world;
 
 import java.awt.Color;
 import java.util.List;
-import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -22,7 +21,9 @@ public interface WorldType {
 
 	String getId();
 
-	boolean isFromExternalFile();
+	default boolean isFromExternalFile() {
+		return false;
+	}
 
 	WorldRegion getWorldRegion();
 
@@ -56,11 +57,15 @@ public interface WorldType {
 
 	String getFileLocation();
 
-	boolean isUsesFile();
+	default boolean isUsesFile() {
+		return true;
+	}
 
-	Map<Color,PlaceType> getPlacesMap();
+	PlaceType placeByColor(int color);
 
-	TeleportPermissions getTeleportPermissions();
+	default TeleportPermissions getTeleportPermissions() {
+		return TeleportPermissions.NONE;
+	}
 
 	boolean isFlightEnabled();
 
@@ -68,7 +73,9 @@ public interface WorldType {
 		return getSexBlockedReason(character)!=null && !getSexBlockedReason(character).isEmpty();
 	}
 
-	String getSexBlockedReason(GameCharacter character);
+	default String getSexBlockedReason(GameCharacter character) {
+		return "";
+	}
 
 	/**
 	 * @return true if over-desk and on chair sex positions are available in this location. This can be overridden in AbstractPlaceType's method of the same name.

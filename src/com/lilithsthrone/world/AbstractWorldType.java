@@ -252,9 +252,13 @@ public abstract class AbstractWorldType implements WorldType {
 		return usesFile;
 	}
 
-	@Override
 	public Map<Color,PlaceType> getPlacesMap() {
 		return placesMap;
+	}
+
+	@Override
+	public PlaceType placeByColor(int color) {
+		return placesMap.get(new Color(color));
 	}
 
 	@Override

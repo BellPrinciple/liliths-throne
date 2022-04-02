@@ -80,7 +80,7 @@ public class Generation extends Task<Boolean> {
 				
 				for(int w = 0 ; w < img.getWidth(); w++) {
 					for(int h = 0 ; h < img.getHeight(); h++) {
-						grid[w][img.getHeight()-1-h].setPlace(new GenericPlace(worldType.getPlacesMap().get(new Color(img.getRGB(w, h)))), true);
+						grid[w][img.getHeight()-1-h].setPlace(new GenericPlace(worldType.placeByColor(img.getRGB(w,h))), true);
 					}
 				}
 
