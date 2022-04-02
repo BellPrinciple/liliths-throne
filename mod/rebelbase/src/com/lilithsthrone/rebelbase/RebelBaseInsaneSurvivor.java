@@ -1,4 +1,4 @@
-package com.lilithsthrone.game.character.npc.submission;
+package com.lilithsthrone.rebelbase;
 
 import java.time.Month;
 import java.util.List;
@@ -33,7 +33,6 @@ import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMoveType;
 import com.lilithsthrone.game.dialogue.DialogueNode;
-import com.lilithsthrone.game.dialogue.npcDialogue.submission.RebelBaseInsaneSurvivorDialogue;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.CharacterInventory;
@@ -46,8 +45,6 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.PresetColour;
-import com.lilithsthrone.world.WorldType;
-import com.lilithsthrone.world.places.PlaceType;
 
 /**
  * @since 0.3.21
@@ -75,7 +72,7 @@ public class RebelBaseInsaneSurvivor extends NPC {
 				(Main.game.getDateNow().getYear() - RECRUITMENT_YEAR) + 18, Util.randomItemFrom(Month.values()), 1+Util.random.nextInt(25),
 				5,
 				gender, Subspecies.HUMAN, RaceStage.HUMAN,
-				new CharacterInventory(10), WorldType.REBEL_BASE, PlaceType.REBEL_BASE_SLEEPING_AREA, false);
+				new CharacterInventory(10),World.WORLD,Place.SLEEPING_AREA, false);
         
         if(!isImported) {
             this.setLocation(Main.game.getPlayer(), true);

@@ -1,7 +1,6 @@
-package com.lilithsthrone.game.dialogue.npcDialogue.submission;
+package com.lilithsthrone.rebelbase;
 
 import com.lilithsthrone.game.character.npc.NPC;
-import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
@@ -140,7 +139,7 @@ public class RebelBaseInsaneSurvivorDialogue {
 		public void applyPreParsingEffects() {
 			Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/submission/rebelBase/InsaneSurvivorAttack", "VICTORY", getAttacker()));
 			Main.game.banishNPC(getAttacker());
-			Main.game.getDialogueFlags().values.add(DialogueFlagValue.rebelBaseInsaneSurvivorEncountered);
+			Main.game.getDialogueFlags().values.add(Dialogue.insaneSurvivorEncountered);
 		}
 		@Override
 		public String getAuthor() {
@@ -169,7 +168,7 @@ public class RebelBaseInsaneSurvivorDialogue {
 			Main.game.getTextStartStringBuilder().append(UtilText.parseFromXMLFile("encounters/submission/rebelBase/InsaneSurvivorAttack", "DEFEATED", getAttacker()));
 			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().incrementMoney(-5000));
 			Main.game.banishNPC(getAttacker());
-			Main.game.getDialogueFlags().values.add(DialogueFlagValue.rebelBaseInsaneSurvivorEncountered);
+			Main.game.getDialogueFlags().values.add(Dialogue.insaneSurvivorEncountered);
 		}
 		@Override
 		public String getAuthor() {
