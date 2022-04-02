@@ -173,27 +173,6 @@ public abstract class AbstractWorldType implements WorldType {
 	}
 	
 	@Override
-	public boolean equals(Object o) { // Just placesMap and fileLocation should be enough to check for equality.
-		if(super.equals(o)){
-			if(o instanceof AbstractWorldType){
-				if(((AbstractWorldType)o).getPlacesMap().equals(getPlacesMap())
-						&& ((AbstractWorldType)o).getFileLocation().equals(getFileLocation())){
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	@Override
-	public int hashCode() { // Just placesMap and fileLocation should be enough to check for equality.
-		int result = 17;
-		result = 31 * result + getFileLocation().hashCode();
-		result = 31 * result + getPlacesMap().hashCode();
-		return result;
-	}
-	
-	@Override
 	public String toString() {
 //		throw new IllegalAccessError();
 		System.err.println("Warning: AbstractWorldType's toString() method is being called!");
