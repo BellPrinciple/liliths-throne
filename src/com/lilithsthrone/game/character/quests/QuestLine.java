@@ -112,14 +112,6 @@ public interface QuestLine {
 	SIDE_WES("The Rogue Enforcer", "You were able to successfully deal with the Enforcer Quartermaster.",
 			QuestType.SIDE,
 			QuestTree.wesTree),
-        @Deprecated
-    SIDE_REBEL_BASE("Grave Robbing", "You managed to escape the abandoned rebel hideout.",
-            QuestType.SIDE,
-            QuestTree.rebelBaseTree),
-    @Deprecated
-    SIDE_REBEL_BASE_FIREBOMBS("Spicy Meatballs", "You've gotten yourself a steady supply of Arcane Firebombs. At the usual premium, of course.",
-            QuestType.SIDE,
-            QuestTree.rebelBaseFirebombTree),
 	
 	// Romance quests:
 	
@@ -182,8 +174,6 @@ public interface QuestLine {
 	Special SIDE_BUYING_BRAX = Special.SIDE_BUYING_BRAX;
 	Special SIDE_VENGAR = Special.SIDE_VENGAR;
 	Special SIDE_WES = Special.SIDE_WES;
-	Special SIDE_REBEL_BASE = Special.SIDE_REBEL_BASE;
-	Special SIDE_REBEL_BASE_FIREBOMBS = Special.SIDE_REBEL_BASE_FIREBOMBS;
 	Special RELATIONSHIP_NYAN_HELP = Special.RELATIONSHIP_NYAN_HELP;
 	Special ROMANCE_HELENA = Special.ROMANCE_HELENA;
 	Special ROMANCE_NATALYA = Special.ROMANCE_NATALYA;

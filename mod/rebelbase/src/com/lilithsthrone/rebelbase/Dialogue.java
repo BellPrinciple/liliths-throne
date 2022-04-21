@@ -1,15 +1,15 @@
 package com.lilithsthrone.rebelbase;
 
 import com.lilithsthrone.game.Scene;
-import com.lilithsthrone.game.character.PlayerCharacter;
 import com.lilithsthrone.game.dialogue.AbstractDialogueFlagValue;
-import com.lilithsthrone.game.dialogue.places.submission.BatCaverns;
 import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.main.Main;
 
 import static com.lilithsthrone.game.character.persona.Occupation.SOLDIER;
 import static com.lilithsthrone.game.dialogue.DialogueFlagValue.axelExplainedVengar;
+import static com.lilithsthrone.game.dialogue.places.submission.BatCaverns.CAVERN_DARK;
+import static com.lilithsthrone.game.dialogue.places.submission.gamblingDen.RoxysShop.TRADER;
+import static com.lilithsthrone.game.dialogue.utils.UtilText.parse;
+import static com.lilithsthrone.main.Main.game;
 import static com.lilithsthrone.world.WorldType.BAT_CAVERNS;
 import static com.lilithsthrone.world.places.PlaceType.BAT_CAVERN_DARK;
 import static com.lilithsthrone.world.places.PlaceType.BAT_CAVERN_LIGHT;
@@ -40,6 +40,9 @@ public enum Dialogue implements Scene {
 	ARMORY_CACHE_OPEN,
 	ARMORY_SEARCHED,
 	CAVED_IN_ROOM,
+	FIREBOMBS,
+	FIREBOMBS_COMPLETE,
+	FIREBOMBS_FAILED,
 	;
 
 	@Override
@@ -89,6 +92,10 @@ public enum Dialogue implements Scene {
 			return "Partly Caved-in Room";
 		case CAVED_IN_ROOM:
 			return "Caved-in Room";
+		case FIREBOMBS:
+		case FIREBOMBS_COMPLETE:
+		case FIREBOMBS_FAILED:
+			return "Roxy's Fun Box";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -100,10 +107,10 @@ public enum Dialogue implements Scene {
 
 	@Override
 	public String getContent() {
-		PlayerCharacter pc = Main.game.getPlayer();
+		var pc = game.getPlayer();
 		switch(this) {
 		case ENTRANCE_HANDLE:
-			return BatCaverns.CAVERN_DARK.getContent()
+			return CAVERN_DARK.getContent()
 			+ "<p>"
 			+ "Once again you find yourself passing by the wall onto which the strange door handle is attached."
 			+ " If you didn't already know it was there, it'd be almost impossible to find, as it's only given away by its barely visible lichen-lit shadow."
@@ -112,7 +119,7 @@ public enum Dialogue implements Scene {
 			: " As you're now in possession of the password, you could try pulling the handle again...")
 			+ "</p>";
 		case DOOR_OPENED:
-			return UtilText.parse("<p>"
+			return parse("<p>"
 			+ "Armed with the complete password, you [pc.step] forwards and grab the handle once more."
 			+ " Just as before, the series of glowing letters light up across the wall in front of you, spelling out, [style.glowBlueLight('Fiat Justitia?')]"
 			+ "</p>"
@@ -130,7 +137,7 @@ public enum Dialogue implements Scene {
 			+ " You can just about see some clusters of glowing mushrooms inside, but nothing else."
 			+ "</p>");
 		case ENTRANCE_EXTERIOR:
-			return BatCaverns.CAVERN_DARK.getContent()
+			return CAVERN_DARK.getContent()
 			+	"<p>"
 			+ (pc.isQuestFailed(QuestLine.SIDE)
 						|| pc.isQuestCompleted(QuestLine.SIDE)
@@ -141,7 +148,7 @@ public enum Dialogue implements Scene {
 				+ " as by looking through the still-open doorway you can just about see a layer of completely undisturbed glowing mushrooms inside, but nothing else.")
 			+ "</p>";
 		case DISCOVERED:
-			return UtilText.parse("<p>"
+			return parse("<p>"
 			+ (pc.hasLegs()
 			? "With the weight of each of your footsteps"
 			: "With the weight of your [pc.legs]")
@@ -163,7 +170,7 @@ public enum Dialogue implements Scene {
 			: " Although this handle might activate some sort of trap, you're not sure whether you can leave such an extraordinary find behind without at least trying to pull it...")
 			+ "</p>");
 		case DOOR_NO_PASS:
-			return UtilText.parse("<p>"
+			return parse("<p>"
 			+ "Taking your chances, you grab the handle."
 			+ " To your surprise, the moment in which you make contact with what turns out to be cold metal,"
 			+ " a series of glowing, light-blue letters materialise across the cavern wall before you, spelling out the question [style.glowBlueLight('Fiat Justitia?')]"
@@ -179,7 +186,7 @@ public enum Dialogue implements Scene {
 		case PASSWORD_ONE:
 		case PASSWORD_TWO:
 			return "<p>"
-			+ UtilText.parse(
+			+ parse(
 					pc.getLocationPlace().getPlaceType()==BAT_CAVERN_LIGHT
 					? "[pc.Walking] through the bioluminescent forest, you find yourself passing by an absolutely gigantic specimen of mushroom-tree,"
 					+ " as as you do so, you just so happen to see something glinting by its base."
@@ -189,7 +196,7 @@ public enum Dialogue implements Scene {
 					+ " to yourself about the responsible disposal of slippery objects in a damp cave, you find the cause of your near-faceplant to be a piece of laminated paper.")
 			+ "</p>"
 			+ "<p>"
-			+ UtilText.parse(this==PASSWORD_ONE
+			+ parse(this==PASSWORD_ONE
 				? "Picking up the paper to take a closer look, you see that it appears be a page from a journal of some sort that someone laminated after it had already been torn out."
 				+ " Even more strangely, someone tore it in half after going through all the trouble of laminating it."
 				+ " Water has gotten inside the seal and rendered most of the page unreadable but you can still make out an entry:"
@@ -210,7 +217,7 @@ public enum Dialogue implements Scene {
 				+ "</p>"
 				+ "<p>"
 				+ "Annoyingly, the rest of the password has been torn away. You'll have to find the half of the page which matches up with this one in order to complete the password."
-				+ (Main.game.getDialogueFlags().hasFlag(darkPassFound)
+				+ (game.getDialogueFlags().hasFlag(darkPassFound)
 					? " You get the feeling that this missing half won't be found in these dark tunnels."
 					+ " Perhaps you should head into another part of the Bat Caverns and look in a place that's a little brighter?"
 					: " You get the feeling that this missing half won't be found in this bioluminescent forest."
@@ -247,7 +254,7 @@ public enum Dialogue implements Scene {
 			+ " Despite your best efforts, your search turns up nothing."
 			+ "</p>";
 		case PASSWORD_SILLY:
-			return UtilText.parse("<p>"
+			return parse("<p>"
 			+ "You rage at having been given yet another pointless side quest."
 			+ " [pc.speech(Can't they see I have things to see and people to do?)] you rant at nobody in particular,"
 			+ " [pc.speech(I bet there's not even anybody to fuck behind that stupid door!)]"
@@ -270,7 +277,7 @@ public enum Dialogue implements Scene {
 			+ " The cave's unsupported ceiling starts to collapse, bringing down a hundred thousand tonnes of rock with it."
 			+ "</p>";
 		case ESCAPE:
-			return UtilText.parse("<p>"
+			return parse("<p>"
 			+ "You run as fast as your [pc.legs] will carry you and manage to reach safety just in time."
 			+ " A thunderous boom echoes throughout the Bat Caverns,"
 			+ " and you thankfully manage to dart to one side just in time to avoid the cloud of dust and debris which is expelled from out of the collapsing cave's entrance."
@@ -406,7 +413,7 @@ public enum Dialogue implements Scene {
 			+ " The paint is flaking off and there's a huge dent in it, but it might still contain something of worth."
 			+ "</p>";
 		case COMMON_AREA_CACHE_OPEN:
-			return UtilText.parse("<p>"
+			return parse("<p>"
 			+ "[pc.Walking] over to the cabinet, and by having to apply more than a little force, you mange to pull the door open and find within:"
 			+ "</p>");
 		case COMMON_AREA_SEARCHED:
@@ -442,33 +449,104 @@ public enum Dialogue implements Scene {
 			+ " There's no sign of anything buried beneath the rock which almost completely fills this room,"
 			+ " and so there's really little else to do but turn around and continue your search elsewhere..."
 			+ "</p>";
+		case FIREBOMBS:
+			return parse("<p>"
+			+ "You think back to the arcane firebombs you got from the mysterious cave."
+			+ " Surely Roxy still has some connections from her time with Vengar's gang? "
+			+ " You bring out a firebomb and set it down on the counter."
+			+ "</p>"
+			+ "<p>"
+			+ "[roxy.speech(What's that yer got there?)] Roxy asks, raising an eyebrow,"
+			+ " [roxy.speech(The newest thing y'been jammin' up yer arse?)]"
+			+ "</p>"
+			+ "<p>"
+			+ "Rolling your eyes as Roxy chuckles at her own crude joke, you explain what the firebomb is and what it does."
+			+ " [roxy.speech(Yer mean it breaks when y'use et?"
+			+ " 'urts resale value."
+			+ " I'll take it off yer 'ands fer twenty an' not a fuckin' flame more.)]"
+			+ "</p>"
+			+ "<p>"
+			+ "[pc.speech(I'm not interested in just pawning it off to you,)] you reply,"
+			+ " [pc.speech(I don't have a way to get more of these."
+			+ " I was wondering if you know anyone who does.)]"
+			+ "</p>"
+			+ "<p>"
+			+ "Roxy frowns slightly at your question."
+			+ " [roxy.speech(I might. I might not. Tha' fuck do I get out ta' this?)]"
+			+ "</p>"
+			+ "<p>"
+			+ "[pc.speech(Nobody up in Dominion is going to carry something like this."
+			+ " Think about it, exclusive goods mean more business.)]"
+			+ "</p>"
+			+ "<p>"
+			+ "You tense up as Roxy grabs the firebomb and holds it perilously close to her lit cigarette while examining it."
+			+ " After a brief pause, she puts it under the counter."
+			+ " [roxy.speech(Yeah, alright, y'made yer fuckin' point. Gimme, say, two days an' I'll set somethin' up."
+			+ " Now, y'gonna buy anythin' or are yer gonna stand there gawpin'?)]"
+			+ "</p>");
+		case FIREBOMBS_COMPLETE:
+			return parse("<p>"
+			+ "Roxy gestures at a wooden crate full of familiar rag-stuffed glass bottles on a nearby shelf when you ask her about the firebomb you gave her."
+			+ " [roxy.speech(Y'blind? They's right there behind yer."
+			+ " Jus' came in, perfect copies o' the one yer gave me."
+			+ " Don't ask where I got 'em; all ya needs ta know is dat I's gonna be havin' ten o' dem fer sale every day.)]"
+			+ "</p>"
+			+ "<p>"
+			+ "Pausing to take a deep drag on her cigarette, she rudely blows smoke all over you as she cackles,"
+			+ " [roxy.speech(Now, y'gonna buy 'em or wot?)]"
+			+ "</p>");
+		case FIREBOMBS_FAILED:
+			return parse("<p>"
+			+ "Roxy is likely the only person who's going to be able to help you to get your [pc.hands] on more of those arcane firebombs."
+			+ " Surely she still has some connections from her time with Vengar's gang?"
+			+ " You ask the rat-girl if she's got any contacts who could make weapons of questionable legality."
+			+ " Leaning back in her chair and grinning at you, she replies,"
+			+ " [roxy.speech(Maybe I 'as, maybe I don't. Wot ya tryin' ta get yer grubby little mits on?)]"
+			+ "</p>"
+			+ "<p>"
+			+ "As you explain to Roxy the nature of the firebombs which you're no longer in possession of,"
+			+ " you watch in dismay as the rat-girl's expression turns to one of confusion and annoyance."
+			+ " Despite giving her a clear description of the firebombs' properties, she shakes her head and snarls,"
+			+ " [roxy.speech(Don't ya be wastin' me time with that shit."
+			+ " I ain't gonna bother me friends by askin' 'em ta fill a bottle with some kind o' burnin' stuff."
+			+ " An' besides, ain't nobody gonna buy weapons wot breaks when ya use 'em!"
+			+ " Don't fuckin' ask me fer such stupid shit again.)]"
+			+ "</p>"
+			+ "<p>"
+			+ "Taking a deep drag on her cigarette to help her calm down, the obnoxious rat-girl blows smoke all over you and sneers,"
+			+ " [roxy.speech(Now, ya gonna buy sumthin', or fuck off?)]"
+			+ "</p>"
+			+ "<p>"
+			+ "With your hopes of ever getting more firebombs dashed by Roxy's rude response, you wonder what to do now..."
+			+ "</p>");
 		}
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<ResponseTab> getResponses() {
+		var pc = game.getPlayer();
 		switch(this) {
 		case ENTRANCE_HANDLE:
 		{
-			var r = BatCaverns.CAVERN_DARK.getResponses();
+			var r = CAVERN_DARK.getResponses();
 			var t = r.get(0);
-			if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_PART_ONE)) {
+			if(pc.isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_PART_ONE)) {
 				r.set(0,new ResponseTab(t.title,null,
 						new Response("Pull the handle","What could possibly go wrong?",Dialogue.DOOR_NO_PASS)));
 				r.get(0).response.addAll(t.response.subList(1,t.response.size()));
 			}
-			else if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_PART_TWO)) {
+			else if(pc.isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_PART_TWO)) {
 				r.set(0,new ResponseTab(t.title,null,
 						new Response("Pull the handle", "The handle won't budge. Looks like you really do need the password.", null)));
 				r.get(0).response.addAll(t.response.subList(1,t.response.size()));
 			}
-			else if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_COMPLETE)) {
+			else if(pc.isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_COMPLETE)) {
 				r.set(0,new ResponseTab(t.title,null,
 						new Response("Pull the handle", "You don't have the complete password!", null)));
 				r.get(0).response.addAll(t.response.subList(1,t.response.size()));
 			}
-			else if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.EXPLORATION)) {
+			else if(pc.isQuestProgressLessThan(QuestLine.SIDE,Quest.EXPLORATION)) {
 				r.set(0,new ResponseTab(t.title,null,
 						new Response(
 								"Pull the handle",
@@ -476,8 +554,8 @@ public enum Dialogue implements Scene {
 								DOOR_OPENED) {
 							@Override
 							public void effects() {
-								Main.game.getPlayerCell().getPlace().setPlaceType(Place.ENTRANCE_EXTERIOR);
-								Main.game.getPlayerCell().getPlace().setName(Place.ENTRANCE_EXTERIOR.getName());
+								game.getPlayerCell().getPlace().setPlaceType(Place.ENTRANCE_EXTERIOR);
+								game.getPlayerCell().getPlace().setName(Place.ENTRANCE_EXTERIOR.getName());
 							}
 						}));
 				r.get(0).response.addAll(t.response.subList(1,t.response.size()));
@@ -492,26 +570,26 @@ public enum Dialogue implements Scene {
 						Place.ENTRANCE.getDialogue(false)) {
 						@Override
 						public void effects() {
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.EXPLORATION));
-							Main.game.getPlayer().setLocation(World.WORLD,Place.ENTRANCE);
+							game.getTextEndStringBuilder().append(game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.EXPLORATION));
+							game.getPlayer().setLocation(World.WORLD,Place.ENTRANCE);
 						}
 					},
 					Response.back("Don't enter", "No telling what's in that cave...")));
 		case ENTRANCE_EXTERIOR:
-		if(!Main.game.getPlayer().isQuestFailed(QuestLine.SIDE)
-				&& !Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE,Quest.EXPLORATION)) {
+		if(!pc.isQuestFailed(QuestLine.SIDE)
+				&& !pc.isQuestProgressGreaterThan(QuestLine.SIDE,Quest.EXPLORATION)) {
 			return List.of(new ResponseTab("",null,new Response(
 					"Enter",
 					"This cave is not a natural formation. Someone built it, so it must lead somewhere.",
 					Place.ENTRANCE.getDialogue(false)) {
 				@Override
 				public void effects() {
-					Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.EXPLORATION));
-					Main.game.getPlayer().setLocation(World.WORLD,Place.ENTRANCE);
+					game.getTextEndStringBuilder().append(game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.EXPLORATION));
+					game.getPlayer().setLocation(World.WORLD,Place.ENTRANCE);
 				}
 			}));
 		}
-		return BatCaverns.CAVERN_DARK.getResponses();
+		return CAVERN_DARK.getResponses();
 		case DISCOVERED:
 		return List.of(new ResponseTab("",null,
 				new Response("Pull the handle","What could possibly go wrong?",DOOR_NO_PASS),
@@ -531,13 +609,13 @@ public enum Dialogue implements Scene {
 				new Response.Back("Continue","You win. Hooray.") {
 					@Override
 					public void effects() {
-						Main.game.getWorlds().get(BAT_CAVERNS).getCell(Place.ENTRANCE_HANDLE).getPlace().setPlaceType(Place.ENTRANCE_EXTERIOR);
-						Main.game.getWorlds().get(BAT_CAVERNS).getCell(Place.ENTRANCE_EXTERIOR).getPlace().setName(Place.ENTRANCE_EXTERIOR.getName());
+						game.getWorlds().get(BAT_CAVERNS).getCell(Place.ENTRANCE_HANDLE).getPlace().setPlaceType(Place.ENTRANCE_EXTERIOR);
+						game.getWorlds().get(BAT_CAVERNS).getCell(Place.ENTRANCE_EXTERIOR).getPlace().setName(Place.ENTRANCE_EXTERIOR.getName());
 					}
 				}));
 		case ENTRANCE:
 		return List.of(new ResponseTab("",null,
-			Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_ESCAPE)
+			pc.isQuestProgressLessThan(QuestLine.SIDE, Quest.ESCAPE)
 			? new Response("[style.colourBad(Exit)]",
 				"This place looks seriously unstable, it could collapse at any moment."
 				+ " It might be best to leave whatever secrets are in here and leave while you still can."
@@ -553,12 +631,12 @@ public enum Dialogue implements Scene {
 			new Response("Run!", "Run for your life!", ESCAPE) {
 				@Override
 				public void effects() {
-					Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE,Quest.EXPLORATION)
-					? Main.game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.SIDE_UTIL_COMPLETE)
-					: Main.game.getPlayer().setQuestFailed(QuestLine.SIDE,Quest.FAILED));
-					Main.game.getPlayer().setLocation(BAT_CAVERNS, Place.ENTRANCE_EXTERIOR);
-					Main.game.getPlayerCell().getPlace().setPlaceType(BAT_CAVERN_DARK);
-					Main.game.getPlayerCell().getPlace().setName(BAT_CAVERN_DARK.getName());
+					game.getTextEndStringBuilder().append(game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE,Quest.EXPLORATION)
+					? game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.SIDE_UTIL_COMPLETE)
+					: game.getPlayer().setQuestFailed(QuestLine.SIDE,Quest.FAILED));
+					game.getPlayer().setLocation(BAT_CAVERNS, Place.ENTRANCE_EXTERIOR);
+					game.getPlayerCell().getPlace().setPlaceType(BAT_CAVERN_DARK);
+					game.getPlayerCell().getPlace().setName(BAT_CAVERN_DARK.getName());
 				}
 			}));
 		case ESCAPE:
@@ -568,16 +646,16 @@ public enum Dialogue implements Scene {
 				new Response("Open footlockers", "Open the footlockers.", SLEEPING_AREA_SEARCHED){
 				@Override
 				public void effects() {
-					Main.game.getTextEndStringBuilder().append(UtilText.parse("<p>"
+					game.getTextEndStringBuilder().append(parse("<p>"
 					+ "You rummage through the footlockers and find sets of uniforms, boots, and armbands of some sort that you don't recognize."
 					+ "</p>"))
-					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbooniehat", false), 2, false, true))
-					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rtunic", false), 2, false, true))
-					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rtrousers", false), 2, false, true))
-					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_vcboots", false), 2, false, true))
-					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbrassard", false), 5, false, true));
-					Main.game.getPlayerCell().getPlace().setPlaceType(Place.SLEEPING_AREA_SEARCHED);
-					Main.game.getPlayerCell().getPlace().setName(Place.SLEEPING_AREA_SEARCHED.getName());
+					.append(game.getPlayer().addClothing(game.getItemGen().generateClothing("dsg_hlf_equip_rbooniehat", false), 2, false, true))
+					.append(game.getPlayer().addClothing(game.getItemGen().generateClothing("dsg_hlf_equip_rtunic", false), 2, false, true))
+					.append(game.getPlayer().addClothing(game.getItemGen().generateClothing("dsg_hlf_equip_rtrousers", false), 2, false, true))
+					.append(game.getPlayer().addClothing(game.getItemGen().generateClothing("dsg_hlf_equip_vcboots", false), 2, false, true))
+					.append(game.getPlayer().addClothing(game.getItemGen().generateClothing("dsg_hlf_equip_rbrassard", false), 5, false, true));
+					game.getPlayerCell().getPlace().setPlaceType(Place.SLEEPING_AREA_SEARCHED);
+					game.getPlayerCell().getPlace().setName(Place.SLEEPING_AREA_SEARCHED.getName());
 				}
 			},
 			new Response("Read journal", "See what the journal contains.", SLEEPING_AREA_JOURNAL_OPEN)));
@@ -586,8 +664,8 @@ public enum Dialogue implements Scene {
 			new Response.Back("Close", "You've seen enough.") {
 				@Override
 				public void effects() {
-					if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_ESCAPE)) {
-						Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_ESCAPE));
+					if(game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE, Quest.ESCAPE)) {
+						game.getTextEndStringBuilder().append(game.getPlayer().setQuestProgress(QuestLine.SIDE, Quest.ESCAPE));
 					}
 				}
 			}));
@@ -600,11 +678,11 @@ public enum Dialogue implements Scene {
 			new Response("Open cabinet", "Open the metal cabinet.", COMMON_AREA_CACHE_OPEN) {
 				@Override
 				public void effects() {
-					Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rwebbing", false), 3, false, true))
-					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_sbandana", false), 1, false, true))
-					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbandolier", false), 3, false, true));
-					Main.game.getPlayerCell().getPlace().setPlaceType(Place.COMMON_AREA_SEARCHED);
-					Main.game.getPlayerCell().getPlace().setName(Place.COMMON_AREA_SEARCHED.getName());
+					game.getTextEndStringBuilder().append(game.getPlayer().addClothing(game.getItemGen().generateClothing("dsg_hlf_equip_rwebbing", false), 3, false, true))
+					.append(game.getPlayer().addClothing(game.getItemGen().generateClothing("dsg_hlf_equip_sbandana", false), 1, false, true))
+					.append(game.getPlayer().addClothing(game.getItemGen().generateClothing("dsg_hlf_equip_rbandolier", false), 3, false, true));
+					game.getPlayerCell().getPlace().setPlaceType(Place.COMMON_AREA_SEARCHED);
+					game.getPlayerCell().getPlace().setName(Place.COMMON_AREA_SEARCHED.getName());
 				}
 			}));
 		case COMMON_AREA_CACHE_OPEN:
@@ -617,29 +695,33 @@ public enum Dialogue implements Scene {
 			new Response("Open bags", "Open the plastic bags.", ARMORY_CACHE_OPEN){
 			@Override
 			public void effects() {
-				Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_pbsmg"), 3, false, true))
-				.append(Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_pboltrifle"), 2, false, true))
-				.append(Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_pbrevolver"), 5, false, true))
-				.append(Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_gbshotgun"), 1, false, true))
-				.append(Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_pbomb"), 10, false, true))
+				game.getTextEndStringBuilder().append(game.getPlayer().addWeapon(game.getItemGen().generateWeapon("dsg_hlf_weap_pbsmg"), 3, false, true))
+				.append(game.getPlayer().addWeapon(game.getItemGen().generateWeapon("dsg_hlf_weap_pboltrifle"), 2, false, true))
+				.append(game.getPlayer().addWeapon(game.getItemGen().generateWeapon("dsg_hlf_weap_pbrevolver"), 5, false, true))
+				.append(game.getPlayer().addWeapon(game.getItemGen().generateWeapon("dsg_hlf_weap_gbshotgun"), 1, false, true))
+				.append(game.getPlayer().addWeapon(game.getItemGen().generateWeapon("dsg_hlf_weap_pbomb"), 10, false, true))
 				.append("<p>")
-				.append(Main.game.getPlayer().getOccupation() == SOLDIER
+				.append(game.getPlayer().getOccupation() == SOLDIER
 				? "Having seen quite a few in improvised weapons training,"
 				: "Having seen them in use during riots on the news,")
 				.append(" you instantly recognise the disposable firebombs as being an arcane parody of Molotov cocktails."
 				+ " You don't have a way to get more and you doubt any honest shop would want to carry something so obviously illegal,"
 				+ " but perhaps a shopkeep with less scruples has the means to provide you with a supply of them..."
 				+ "</p>")
-				.append(!Main.game.getDialogueFlags().hasFlag(axelExplainedVengar)
+				.append(!game.getDialogueFlags().hasFlag(axelExplainedVengar)
 				? ""
-				: UtilText.parse("<p>"
+				: parse("<p>"
 				+ "[roxy.NamePos] shop would probably be a good place to start."
 				+ "</p>"))
-				.append(Main.game.getPlayer().startQuest(QuestLine.SIDE_REBEL_BASE_FIREBOMBS));
-				Main.game.getPlayerCell().getPlace().setPlaceType(Place.ARMORY_SEARCHED);
-				Main.game.getPlayerCell().getPlace().setName(Place.ARMORY_SEARCHED.getName());
+				.append(game.getPlayer().startQuest(QuestLine.FIREBOMBS));
+				game.getPlayerCell().getPlace().setPlaceType(Place.ARMORY_SEARCHED);
+				game.getPlayerCell().getPlace().setName(Place.ARMORY_SEARCHED.getName());
 			}
 		}));
+		case FIREBOMBS:
+		case FIREBOMBS_COMPLETE:
+		case FIREBOMBS_FAILED:
+		return TRADER.getResponses();
 		}
 		return List.of(new ResponseTab(""));
 	}
@@ -648,31 +730,31 @@ public enum Dialogue implements Scene {
 	public void applyPreParsingEffects() {
 		switch(this) {
 		case DOOR_OPENED:
-			Main.game.getPlayerCell().getPlace().setPlaceType(Place.ENTRANCE_EXTERIOR);
-			Main.game.getPlayerCell().getPlace().setName(Place.ENTRANCE_EXTERIOR.getName());
+			game.getPlayerCell().getPlace().setPlaceType(Place.ENTRANCE_EXTERIOR);
+			game.getPlayerCell().getPlace().setName(Place.ENTRANCE_EXTERIOR.getName());
 			break;
 		case DOOR_NO_PASS:
-			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.PASSWORD_PART_ONE));
+			game.getTextEndStringBuilder().append(game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.PASSWORD_PART_ONE));
 			break;
 		case DISCOVERED:
-			Main.game.getPlayerCell().getPlace().setPlaceType(Place.ENTRANCE_HANDLE);
-			Main.game.getPlayerCell().getPlace().setName(Place.ENTRANCE_HANDLE.getName());
-			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.HANDLE_REFUSED));
+			game.getPlayerCell().getPlace().setPlaceType(Place.ENTRANCE_HANDLE);
+			game.getPlayerCell().getPlace().setName(Place.ENTRANCE_HANDLE.getName());
+			game.getTextEndStringBuilder().append(game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.HANDLE_REFUSED));
 			break;
 		case PASSWORD_ONE:
-			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.PASSWORD_PART_TWO));
-			Main.game.getDialogueFlags().setFlag(
-					Main.game.getPlayer().getLocationPlace().getPlaceType()==BAT_CAVERN_DARK
-							|| Main.game.getPlayer().getLocationPlace().getPlaceType()==Place.ENTRANCE_HANDLE
+			game.getTextEndStringBuilder().append(game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.PASSWORD_PART_TWO));
+			game.getDialogueFlags().setFlag(
+					game.getPlayer().getLocationPlace().getPlaceType()==BAT_CAVERN_DARK
+							|| game.getPlayer().getLocationPlace().getPlaceType()==Place.ENTRANCE_HANDLE
 					? darkPassFound
 					: lightPassFound,
 					true);
 			break;
 		case PASSWORD_TWO:
-			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.PASSWORD_COMPLETE));
+			game.getTextEndStringBuilder().append(game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.PASSWORD_COMPLETE));
 			break;
 		case PASSWORD_SILLY:
-			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.SIDE_UTIL_COMPLETE));
+			game.getTextEndStringBuilder().append(game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.SIDE_UTIL_COMPLETE));
 			break;
 		}
 	}
@@ -689,6 +771,10 @@ public enum Dialogue implements Scene {
 		case COMMON_AREA_CACHE_OPEN:
 		case ARMORY_CACHE_OPEN:
 			return 2*60;
+		case FIREBOMBS:
+		case FIREBOMBS_COMPLETE:
+		case FIREBOMBS_FAILED:
+			return 0;
 		default:
 			return 30;
 		}
@@ -703,6 +789,9 @@ public enum Dialogue implements Scene {
 		case PASSWORD_TWO:
 		case COLLAPSE:
 		case SLEEPING_AREA_JOURNAL_OPEN:
+		case FIREBOMBS:
+		case FIREBOMBS_COMPLETE:
+		case FIREBOMBS_FAILED:
 			return true;
 		default:
 			return false;
@@ -715,6 +804,9 @@ public enum Dialogue implements Scene {
 		case DOOR_NO_PASS:
 		case PASSWORD_SEARCH_FAILED:
 		case ESCAPE:
+		case FIREBOMBS:
+		case FIREBOMBS_COMPLETE:
+		case FIREBOMBS_FAILED:
 			return true;
 		default:
 			return false;
