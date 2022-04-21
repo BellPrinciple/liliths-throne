@@ -13,129 +13,6 @@ import com.lilithsthrone.main.Main;
  * @author DSG
  */
 public class RebelBase {
-		
-	public static final DialogueNode REBEL_BASE_SLEEPING_AREA_JOURNAL_OPEN = new DialogueNode("Crumbling Journal", "", true) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			return "<p>"
-			+ "You try to gingerly open the journal, but as you'd expect for paper that's spent who knows how long in a damp cave,"
-			+ " most of the pages immediately crumble into illegible pieces."
-			+ " There's no way you can remove this journal from its resting place without destroying it."
-			+ " The light provided by the surrounding mushrooms is just enough for you to read some of the intact pages:"
-			+ "</p>"
-			+ "<p align=right>"
-			+ "<i>"
-			+ "8th August 1988"
-			+ "</i>"
-			+ "</p>"
-			+ "<p>"
-			+ "<i>"
-			+ "The day of reckoning is here!"
-			+ " At last the demons and their running dogs will answer for millennia of injustice."
-			+ " Already we're driving the Enforcers back into their holes, and they'll never emerge from them if we can help it."
-			+ " The adjutant would prefer that humans supplant the demons at the top, but that kind of thinking won't get us any allies among the non-humans."
-			+ " The hearts and minds of the people are what we need to win."
-			+ " We'll all crawl out from under the corpse of this corrupt society and then the Realm will be free!"
-			+ "</i>"
-			+ "</p>"
-			+ "<p align=right>"
-			+ "<i>"
-			+ "4th November 1989"
-			+ "</i>"
-			+ "</p>"
-			+ "<p>"
-			+ "<i>"
-			+ "We've kept Dominion under siege since our liberation began and have taken the outer boroughs,"
-			+ " but the inner boroughs are a tough nut to crack even with our numbers advantage."
-			+ " Command issued these collars imbued with angelic magic for interrogating prisoners as part of our initial assault kits and they've proven useful,"
-			+ " but the adjutant has started taking advantage of how docile and compliant they make the wearer."
-			+ " He's using some of the prisoners to relieve himself, or as he puts it, \"recreational procreation\"."
-			+ " I don't agree with his methods, but I can't argue with the results."
-			+ " More of his children swell our ranks every day, human and non-human."
-			+ " They're definitely the most gung-ho of any of us, I guess because they know only what we've told them,"
-			+ " and well...neither they nor anyone else need to know who their parents are or how they came to be."
-			+ "</i>"
-			+ "</p>"
-			+ "<p align=right>"
-			+ "<i>"
-			+ "20th December 1989"
-			+ "</i>"
-			+ "</p>"
-			+ "<p>"
-			+ "<i>"
-			+ "I always knew that our cause was just, but today a literal angel has returned to aid us!"
-			+ " Of course I'd heard the rumors from the old guard that they helped get this whole rebellion started, but I never ever thought I'd see one."
-			+ " Astrea is her name and I admit, she's more than just a pretty face."
-			+ " She's just the shot in the arm that we needed and under her we've broken the Thinis salient at last!"
-			+ " I am a little bit concerned though."
-			+ " She and the adjutant agree on more things than I'd like, namely what our post-Lilith society should look like."
-			+ " I think non-humans have earned their place at the table, why can't they see that?"
-			+ " Haven't they fought just as hard against the demons as us?"
-			+ " Haven't we all had enough of races stepping on each other?"
-			+ " And, another thing."
-			+ " A lot of the officers are starting to copy the adjutant's treatment of prisoners, to let off steam or so they say."
-			+ " This is going to come back to bite us when we win."
-			+ "</i>"
-			+ "</p>"
-			+ "<p align=right>"
-			+ "<i>"
-			+ "15th March 1991"
-			+ "</i>"
-			+ "</p>"
-			+ "<p>"
-			+ "<i>"
-			+ "It...is not easy for me to put down on paper what I am thinking right now."
-			+ " Last night during the block meeting, Astrea accused me and those who share my opinion on non-humans of being demon sympathizers."
-			+ " And of course the loudest accuser was the adjutant, just because I don't participate in his...recruitment activities."
-			+ " Well, it's true."
-			+ " I don't slap and choke and rape prisoners even if almost all of the other officers do."
-			+ " The collars do the work well enough."
-			+ " There is something wrong with these \"angels\"."
-			+ " Every night that Astrea and the adjutant spend together, he gets more animalistic in his hate for non-humans and in his lust for rape."
-			+ " She is not an angel, she can't be."
-			+ " And if she is, I want nothing to do with them."
-			+ " We are being sent away from here to train insurgents, but I am not going."
-			+ " The other accused and I have agreed, we're leaving this rebellion to start our own."
-			+ " To what end, I don't know, but I can't be a part of this one, not anymore."
-			+ "</i>"
-			+ "</p>";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1 && Main.game.getPlayerCell().getPlace().getPlaceType().equals(Place.SLEEPING_AREA)) {
-				return new Response("Close", "You've seen enough.", Dialogue.SLEEPING_AREA){
-						@Override
-						public void effects() {
-							if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_ESCAPE)) {
-								Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_ESCAPE));
-							}
-							
-						}
-				};
-				
-			} else if (index == 1 && Main.game.getPlayerCell().getPlace().getPlaceType().equals(Place.SLEEPING_AREA_SEARCHED)) {
-				return new Response("Close", "You've seen enough.", REBEL_BASE_SLEEPING_AREA_SEARCHED) {
-						@Override
-						public void effects() {
-							if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_ESCAPE)) {
-								Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_ESCAPE));
-							}
-						}
-				};
-				
-			} else {
-				return null;
-			}
-		};
-	};
 	
 	public static final DialogueNode REBEL_BASE_SLEEPING_AREA_SEARCHED = new DialogueNode("Abandoned Sleeping Area", "", false) {
 		@Override
@@ -164,7 +41,7 @@ public class RebelBase {
 				return new Response("Open footlockers", "You already opened the footlockers.", null);
 				
 			} else if (index ==2) {
-				return new Response("Read journal", "See what the journal contains.", REBEL_BASE_SLEEPING_AREA_JOURNAL_OPEN);
+				return new Response("Read journal", "See what the journal contains.", Dialogue.SLEEPING_AREA_JOURNAL_OPEN);
 				
 			} else {
 				return null;
