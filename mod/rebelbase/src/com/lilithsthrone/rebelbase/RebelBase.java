@@ -14,30 +14,6 @@ import com.lilithsthrone.main.Main;
  */
 public class RebelBase {
 	
-	public static final DialogueNode REBEL_BASE_CORRIDOR = new DialogueNode("Artificial Cave", "", false) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			return "<p>"
-			+ "Although made of the same stone and afflicted with the same damp as the Bat Caverns,"
-			+ " the wooden supports along the walls are clear signs that this cave is artificial."
-			+ " Although you see what look like hooks for placing lanterns or torches nailed into each support,"
-			+ " the sodden wood has been more or less taken over by bioluminescent mushrooms and wood ears, conveniently lighting the way."
-			+ "</p>";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return null;
-		};
-	};
-	
 	public static final DialogueNode REBEL_BASE_SLEEPING_AREA = new DialogueNode("Abandoned Sleeping Area", "", false) {
 		@Override
 		public String getAuthor() {

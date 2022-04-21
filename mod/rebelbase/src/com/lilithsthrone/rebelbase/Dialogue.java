@@ -27,6 +27,7 @@ public enum Dialogue implements Scene {
 	ENTRANCE,
 	COLLAPSE,
 	ESCAPE,
+	CORRIDOR,
 	;
 
 	@Override
@@ -59,6 +60,8 @@ public enum Dialogue implements Scene {
 			return "Uh oh...";
 		case ESCAPE:
 			return "";
+		case CORRIDOR:
+			return "Artificial Cave";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -254,6 +257,13 @@ public enum Dialogue implements Scene {
 			+ "<p>"
 			+ "By some sort of a miracle you've managed to escape completely unharmed, although there's now no way back into the hidden cave..."
 			+ "</p>");
+		case CORRIDOR:
+			return "<p>"
+			+ "Although made of the same stone and afflicted with the same damp as the Bat Caverns,"
+			+ " the wooden supports along the walls are clear signs that this cave is artificial."
+			+ " Although you see what look like hooks for placing lanterns or torches nailed into each support,"
+			+ " the sodden wood has been more or less taken over by bioluminescent mushrooms and wood ears, conveniently lighting the way."
+			+ "</p>";
 		}
 		throw new UnsupportedOperationException();
 	}
