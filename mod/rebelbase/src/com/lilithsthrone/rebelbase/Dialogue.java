@@ -39,6 +39,7 @@ public enum Dialogue implements Scene {
 	ARMORY,
 	ARMORY_CACHE_OPEN,
 	ARMORY_SEARCHED,
+	CAVED_IN_ROOM,
 	;
 
 	@Override
@@ -86,6 +87,8 @@ public enum Dialogue implements Scene {
 		case ARMORY_CACHE_OPEN:
 		case ARMORY_SEARCHED:
 			return "Partly Caved-in Room";
+		case CAVED_IN_ROOM:
+			return "Caved-in Room";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -432,6 +435,12 @@ public enum Dialogue implements Scene {
 			+ "</p>"
 			+ "<p>"
 			+ "The metal containers and plastic bags are now empty, leaving nothing else but rubble in this room."
+			+ "</p>";
+		case CAVED_IN_ROOM:
+			return "<p>"
+			+ "It's impossible to even hazard a guess as to what this room was once used for, as it's completely buried beneath hundreds of tonnes of rubble."
+			+ " There's no sign of anything buried beneath the rock which almost completely fills this room,"
+			+ " and so there's really little else to do but turn around and continue your search elsewhere..."
 			+ "</p>";
 		}
 		throw new UnsupportedOperationException();

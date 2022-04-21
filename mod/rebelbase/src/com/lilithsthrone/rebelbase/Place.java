@@ -167,7 +167,7 @@ public enum Place implements PlaceType {
 		case ARMORY_SEARCHED:
 			return Dialogue.ARMORY_SEARCHED;
 		case CAVED_IN_ROOM:
-			return RebelBase.REBEL_BASE_CAVED_IN_ROOM;
+			return Dialogue.CAVED_IN_ROOM;
 		}
 		throw new UnsupportedOperationException();
 	}
