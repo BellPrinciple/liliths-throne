@@ -6,9 +6,6 @@ import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.world.places.PlaceType;
-
-import java.util.List;
 
 /**
  * @since 0.3.8.9
@@ -16,38 +13,6 @@ import java.util.List;
  * @author DSG
  */
 public class RebelBase {
-	
-	public static final DialogueNode REBEL_BASE_ESCAPE = new DialogueNode("", "", false, true) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parse("<p>"
-			+ "You run as fast as your [pc.legs] will carry you and manage to reach safety just in time."
-			+ " A thunderous boom echoes throughout the Bat Caverns,"
-			+ " and you thankfully manage to dart to one side just in time to avoid the cloud of dust and debris which is expelled from out of the collapsing cave's entrance."
-			+ "</p>"
-			+ "<p>"
-			+ "The sudden cave-in thankfully doesn't show any sign of spreading out into the Bat Caverns,"
-			+ " and after a few moments have passed both the noise and vibrations have completely faded away."
-			+ " All that's left to remind you of the cave's existence is the metal handle,"
-			+ " which is lodged half-way up the huge pile of rubble which spews out of the place where the hidden door once sat."
-			+ "</p>"
-			+ "<p>"
-			+ "By some sort of a miracle you've managed to escape completely unharmed, although there's now no way back into the hidden cave..."
-			+ "</p>");
-		}
-		@Override
-		public List<ResponseTab> responses() {
-			return PlaceType.BAT_CAVERN_DARK.getDialogue(false).getResponses();
-		};
-	};
 	
 	public static final DialogueNode REBEL_BASE_CORRIDOR = new DialogueNode("Artificial Cave", "", false) {
 		@Override
