@@ -13,57 +13,6 @@ import com.lilithsthrone.main.Main;
  * @author DSG
  */
 public class RebelBase {
-	
-	public static final DialogueNode COMMON_AREA_CACHE_OPEN = new DialogueNode("Abandoned Common Area", "", false) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 2*60;
-		}
-		@Override
-		public String getContent() {
-			return UtilText.parse("<p>"
-			+ "[pc.Walking] over to the cabinet, and by having to apply more than a little force, you mange to pull the door open and find within:"
-			+ "</p>");
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return REBEL_BASE_COMMON_AREA_SEARCHED.getResponse(responseTab, index);
-		};
-	};
-		
-	public static final DialogueNode REBEL_BASE_COMMON_AREA_SEARCHED = new DialogueNode("Abandoned Common Area", "", false) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			return "<p>"
-			+ "This room appears to have been some kind of common area,"
-			+ " although the single table and a few chairs would have made for spartan accommodations even if they weren't covered in glowing lichen."
-			+ " The table has been split in two, right down the middle either intentionally or from too much weight."
-			+ "</p>"
-			+ "<p>"
-			+ "The cabinet in the far corner is now empty and there isn't anything left worth taking."
-			+ "</p>";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Open cabinet", "You've already opened the cabinet.", null);
-			} else {
-				return null;
-			}
-		};
-	};
 		
 	public static final DialogueNode REBEL_BASE_ARMORY = new DialogueNode("Partly Caved-in Room", "", false) {
 		@Override

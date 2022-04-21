@@ -32,6 +32,8 @@ public enum Dialogue implements Scene {
 	SLEEPING_AREA_JOURNAL_OPEN,
 	SLEEPING_AREA_SEARCHED,
 	COMMON_AREA,
+	COMMON_AREA_CACHE_OPEN,
+	COMMON_AREA_SEARCHED,
 	;
 
 	@Override
@@ -72,6 +74,8 @@ public enum Dialogue implements Scene {
 		case SLEEPING_AREA_JOURNAL_OPEN:
 			return "Crumbling Journal";
 		case COMMON_AREA:
+		case COMMON_AREA_CACHE_OPEN:
+		case COMMON_AREA_SEARCHED:
 			return "Abandoned Common Area";
 		}
 		throw new UnsupportedOperationException();
@@ -389,6 +393,19 @@ public enum Dialogue implements Scene {
 			+ "Looking over to the far corner of the room, you see a heavy metal cabinet."
 			+ " The paint is flaking off and there's a huge dent in it, but it might still contain something of worth."
 			+ "</p>";
+		case COMMON_AREA_CACHE_OPEN:
+			return UtilText.parse("<p>"
+			+ "[pc.Walking] over to the cabinet, and by having to apply more than a little force, you mange to pull the door open and find within:"
+			+ "</p>");
+		case COMMON_AREA_SEARCHED:
+			return "<p>"
+			+ "This room appears to have been some kind of common area,"
+			+ " although the single table and a few chairs would have made for spartan accommodations even if they weren't covered in glowing lichen."
+			+ " The table has been split in two, right down the middle either intentionally or from too much weight."
+			+ "</p>"
+			+ "<p>"
+			+ "The cabinet in the far corner is now empty and there isn't anything left worth taking."
+			+ "</p>";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -544,7 +561,7 @@ public enum Dialogue implements Scene {
 			new Response("Read journal", "See what the journal contains.", SLEEPING_AREA_JOURNAL_OPEN)));
 		case COMMON_AREA:
 		return List.of(new ResponseTab("",null,
-			new Response("Open cabinet", "Open the metal cabinet.", RebelBase.COMMON_AREA_CACHE_OPEN) {
+			new Response("Open cabinet", "Open the metal cabinet.", COMMON_AREA_CACHE_OPEN) {
 				@Override
 				public void effects() {
 					Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rwebbing", false), 3, false, true))
@@ -554,6 +571,9 @@ public enum Dialogue implements Scene {
 					Main.game.getPlayerCell().getPlace().setName(Place.COMMON_AREA_SEARCHED.getName());
 				}
 			}));
+		case COMMON_AREA_CACHE_OPEN:
+		return List.of(new ResponseTab("",null,
+			new Response("Open cabinet", "You've already opened the cabinet.", null)));
 		}
 		return List.of(new ResponseTab(""));
 	}
@@ -600,6 +620,8 @@ public enum Dialogue implements Scene {
 		case PASSWORD_SILLY:
 		case ESCAPE:
 			return 60;
+		case COMMON_AREA_CACHE_OPEN:
+			return 2*60;
 		default:
 			return 30;
 		}
