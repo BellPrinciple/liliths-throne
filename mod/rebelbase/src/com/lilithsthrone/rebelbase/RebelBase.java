@@ -13,41 +13,6 @@ import com.lilithsthrone.main.Main;
  * @author DSG
  */
 public class RebelBase {
-	
-	public static final DialogueNode REBEL_BASE_SLEEPING_AREA_SEARCHED = new DialogueNode("Abandoned Sleeping Area", "", false) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			return "<p>"
-			+ "From the bunk-beds scattered about the room, you guess that it was once used as a sleeping area."
-			+ " Some of the beds have been knocked over and all are unusable rotting husks covered in bioluminescent mushrooms."
-			+ " Piled high in the middle of the room are mysteriously stained pieces of fabric that might have been clothing at one point but are now home to yet more mushrooms."
-			+ "</p>"
-			+ "<p>"
-			+ "The waterproof footlockers now sit empty and what's left would give even Rose a real challenge."
-			+ " There is also what remains of someone's journal lying on one of the beds."
-			+ "</p>";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Open footlockers", "You already opened the footlockers.", null);
-				
-			} else if (index ==2) {
-				return new Response("Read journal", "See what the journal contains.", Dialogue.SLEEPING_AREA_JOURNAL_OPEN);
-				
-			} else {
-				return null;
-			}
-		};
-	};
 		
 	public static final DialogueNode REBEL_BASE_COMMON_AREA = new DialogueNode("Abandoned Common Area", "", false) {
 		@Override

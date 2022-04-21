@@ -30,6 +30,7 @@ public enum Dialogue implements Scene {
 	CORRIDOR,
 	SLEEPING_AREA,
 	SLEEPING_AREA_JOURNAL_OPEN,
+	SLEEPING_AREA_SEARCHED,
 	;
 
 	@Override
@@ -65,6 +66,7 @@ public enum Dialogue implements Scene {
 		case CORRIDOR:
 			return "Artificial Cave";
 		case SLEEPING_AREA:
+		case SLEEPING_AREA_SEARCHED:
 			return "Abandoned Sleeping Area";
 		case SLEEPING_AREA_JOURNAL_OPEN:
 			return "Crumbling Journal";
@@ -364,6 +366,16 @@ public enum Dialogue implements Scene {
 			+ " To what end, I don't know, but I can't be a part of this one, not anymore."
 			+ "</i>"
 			+ "</p>";
+		case SLEEPING_AREA_SEARCHED:
+			return "<p>"
+			+ "From the bunk-beds scattered about the room, you guess that it was once used as a sleeping area."
+			+ " Some of the beds have been knocked over and all are unusable rotting husks covered in bioluminescent mushrooms."
+			+ " Piled high in the middle of the room are mysteriously stained pieces of fabric that might have been clothing at one point but are now home to yet more mushrooms."
+			+ "</p>"
+			+ "<p>"
+			+ "The waterproof footlockers now sit empty and what's left would give even Rose a real challenge."
+			+ " There is also what remains of someone's journal lying on one of the beds."
+			+ "</p>";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -487,7 +499,7 @@ public enum Dialogue implements Scene {
 			return BAT_CAVERN_DARK.getDialogue(false).getResponses();
 		case SLEEPING_AREA:
 		return List.of(new ResponseTab("",null,
-				new Response("Open footlockers", "Open the footlockers.", RebelBase.REBEL_BASE_SLEEPING_AREA_SEARCHED){
+				new Response("Open footlockers", "Open the footlockers.", SLEEPING_AREA_SEARCHED){
 				@Override
 				public void effects() {
 					Main.game.getTextEndStringBuilder().append(UtilText.parse("<p>"
@@ -513,6 +525,10 @@ public enum Dialogue implements Scene {
 					}
 				}
 			}));
+		case SLEEPING_AREA_SEARCHED:
+		return List.of(new ResponseTab("",null,
+			new Response("Open footlockers", "You already opened the footlockers.", null),
+			new Response("Read journal", "See what the journal contains.", SLEEPING_AREA_JOURNAL_OPEN)));
 		}
 		return List.of(new ResponseTab(""));
 	}
