@@ -24,6 +24,7 @@ public enum Dialogue implements Scene {
 	PASSWORD_TWO,
 	PASSWORD_SEARCH_FAILED,
 	PASSWORD_SILLY,
+	ENTRANCE,
 	;
 
 	@Override
@@ -50,6 +51,8 @@ public enum Dialogue implements Scene {
 			return "No Luck";
 		case PASSWORD_SILLY:
 			return "The Value of Time";
+		case ENTRANCE:
+			return "Cave Entrance";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -217,6 +220,13 @@ public enum Dialogue implements Scene {
 			+ "As if in reply to your humble cry of anguish, a gust of wind howls through the caverns."
 			+ " You suddenly feel more accomplished but also terribly unsatisfied."
 			+ "</p>");
+		case ENTRANCE:
+			return "<p>"
+			+ "This area joins the hidden cave with the Bat Caverns outside."
+			+ " The air is heavy but not unpleasant."
+			+ " The way back was once hidden by a tight fitting stone panel and a clever arcane password lock, but you have since defeated these measures."
+			+ " The remaining light from outside and the dim glow from the inside are just enough for you to find your way."
+			+ "</p>";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -310,6 +320,19 @@ public enum Dialogue implements Scene {
 						Main.game.getWorlds().get(BAT_CAVERNS).getCell(Place.ENTRANCE_EXTERIOR).getPlace().setName(Place.ENTRANCE_EXTERIOR.getName());
 					}
 				}));
+		case ENTRANCE:
+		return List.of(new ResponseTab("",null,
+			Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_ESCAPE)
+			? new Response("[style.colourBad(Exit)]",
+				"This place looks seriously unstable, it could collapse at any moment."
+				+ " It might be best to leave whatever secrets are in here and leave while you still can."
+				+ "<br/>[style.italicsBad(You will not be able to return to this area after leaving!)]",
+				RebelBase.REBEL_BASE_COLLAPSE)
+			: new Response("[style.colourGood(Exit)]",
+				"You've had a look through everything that you could find."
+				+ " It might be best to leave while you still can."
+				+ "<br/><i>You will not be able to return to this area after leaving!</i>",
+				RebelBase.REBEL_BASE_COLLAPSE)));
 		}
 		return List.of(new ResponseTab(""));
 	}

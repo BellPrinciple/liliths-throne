@@ -18,43 +18,6 @@ import java.util.List;
  */
 public class RebelBase {
 	
-	public static final DialogueNode REBEL_BASE_ENTRANCE = new DialogueNode("Cave Entrance", "", false) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			return "<p>"
-			+ "This area joins the hidden cave with the Bat Caverns outside."
-			+ " The air is heavy but not unpleasant."
-			+ " The way back was once hidden by a tight fitting stone panel and a clever arcane password lock, but you have since defeated these measures."
-			+ " The remaining light from outside and the dim glow from the inside are just enough for you to find your way."
-			+ "</p>";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_ESCAPE)) {
-					return new Response("[style.colourBad(Exit)]",
-							"This place looks seriously unstable, it could collapse at any moment. It might be best to leave whatever secrets are in here and leave while you still can."
-									+ "<br/>[style.italicsBad(You will not be able to return to this area after leaving!)]",
-							REBEL_BASE_COLLAPSE);
-				} else {
-					return new Response("[style.colourGood(Exit)]",
-							"You've had a look through everything that you could find. It might be best to leave while you still can."
-								+ "<br/><i>You will not be able to return to this area after leaving!</i>",
-							REBEL_BASE_COLLAPSE);
-				}
-			}
-			return null;
-		};
-	};
-	
 	public static final DialogueNode REBEL_BASE_COLLAPSE = new DialogueNode("Uh oh...", "", true) {
 		@Override
 		public String getAuthor() {
