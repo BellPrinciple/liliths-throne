@@ -46,7 +46,6 @@ import com.lilithsthrone.game.character.persona.NameTriplet;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
-import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.DialogueNode;
@@ -339,12 +338,7 @@ public class Roxy extends NPC {
 				}
 			}
 		}
-                
-	    // Add a special case for firebombs
-        if (Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_REBEL_BASE_FIREBOMBS)) {
-            this.addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_pbomb"), 10, false, false);
-        }
-		
+
 		var clothingToAdd = new ArrayList<ClothingType>();
 		
 		for(var clothing : ClothingType.getAllClothing()) {

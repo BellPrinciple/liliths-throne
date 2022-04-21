@@ -1,20 +1,24 @@
 package com.lilithsthrone.rebelbase;
 
 import com.lilithsthrone.game.character.effects.Perk;
-import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.dialogue.AbstractDialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.main.Main;
+import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.utils.TreeNode;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Vector2i;
+import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
+import static com.lilithsthrone.game.character.gender.Gender.getGenderFromUserPreferences;
+import static com.lilithsthrone.game.dialogue.DialogueFlagValue.axelExplainedVengar;
 import static com.lilithsthrone.game.dialogue.encounters.Encounter.BAT_CAVERN;
 import static com.lilithsthrone.game.dialogue.places.submission.BatCaverns.CAVERN_DARK;
 import static com.lilithsthrone.game.dialogue.places.submission.BatCaverns.CAVERN_LIGHT;
+import static com.lilithsthrone.game.dialogue.places.submission.gamblingDen.RoxysShop.TRADER;
+import static com.lilithsthrone.main.Main.game;
+import static com.lilithsthrone.utils.Util.random;
+import static com.lilithsthrone.utils.colours.PresetColour.GENERIC_BAD;
 
 /**
  * Somewhere in the bat caverns beneath Dominion you may find a hidden vault,
@@ -67,6 +71,11 @@ public class Modification extends com.lilithsthrone.game.Modification {
 		node1.addChild(nodeBranchB);
 		node1 = new TreeNode<>(Quest.SIDE_UTIL_COMPLETE);
 		nodeBranchA.addChild(node1);
+
+		//TODO in Roxy#dailyUpdate():
+		//if(Main.game.getPlayer().isQuestCompleted(QuestLine.FIREBOMBS))
+		// this.addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_pbomb"), 10, false, false);
+		TRADER.addResponse(k,"",Modification::traderResponse);
 	}
 
 	@Override
@@ -76,23 +85,24 @@ public class Modification extends com.lilithsthrone.game.Modification {
 		BAT_CAVERN.remove(k);
 		CAVERN_LIGHT.removeResponse(k);
 		CAVERN_DARK.removeResponse(k);
+		TRADER.removeResponse(k);
 	}
 
 	private static Response searchPassword(AbstractDialogueFlagValue passFound) {
-		if(Main.game.getPlayer().getQuest(QuestLine.SIDE)!=Quest.PASSWORD_PART_ONE
-				&& Main.game.getPlayer().getQuest(QuestLine.SIDE)!=Quest.PASSWORD_PART_TWO)
+		if(game.getPlayer().getQuest(QuestLine.SIDE)!=Quest.PASSWORD_PART_ONE
+				&& game.getPlayer().getQuest(QuestLine.SIDE)!=Quest.PASSWORD_PART_TWO)
 			return null;
-		if(Main.game.getDialogueFlags().hasFlag(passFound))
+		if(game.getDialogueFlags().hasFlag(passFound))
 			return new Response(
 					"Search for password",
 					"You've already found the password in this area.",
 					null);
-		if(Util.random.nextInt(100) > 20 + (Main.game.getPlayer().hasTraitActivated(Perk.OBSERVANT) ? 30 : 0))
+		if(random.nextInt(100) > 20 + (game.getPlayer().hasTraitActivated(Perk.OBSERVANT) ? 30 : 0))
 			return new Response(
 					"Search for password",
 					"Peer into the darkness and search harder for the password to the mysterious door.",
 					Dialogue.PASSWORD_SEARCH_FAILED);
-		if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_PART_TWO))
+		if(game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_PART_TWO))
 			return new Response(
 					"Search for password",
 					"Peer into the darkness and search harder for the password to the mysterious door.",
@@ -104,9 +114,9 @@ public class Modification extends com.lilithsthrone.game.Modification {
 	}
 
 	private static Response sillyPassword() {
-		if(!Main.game.isSillyMode()
-				|| Main.game.getPlayer().getQuest(QuestLine.SIDE)!=Quest.PASSWORD_PART_ONE
-						&& Main.game.getPlayer().getQuest(QuestLine.SIDE)!=Quest.PASSWORD_PART_TWO)
+		if(!game.isSillyMode()
+				|| game.getPlayer().getQuest(QuestLine.SIDE)!=Quest.PASSWORD_PART_ONE
+						&& game.getPlayer().getQuest(QuestLine.SIDE)!=Quest.PASSWORD_PART_TWO)
 			return null;
 		return new Response(
 				"I'm a busy [pc.man]!",
@@ -116,25 +126,25 @@ public class Modification extends com.lilithsthrone.game.Modification {
 	}
 
 	private static double chanceDiscover() {
-		if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE)
-				|| Main.game.getPlayer().isQuestFailed(QuestLine.SIDE)
-				|| !Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.HANDLE_REFUSED)
-				|| !Main.game.getPlayerCell().getPlace().getPlaceType().equals(Place.BAT_CAVERN_DARK))
+		if(game.getPlayer().isQuestCompleted(QuestLine.SIDE)
+				|| game.getPlayer().isQuestFailed(QuestLine.SIDE)
+				|| !game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.HANDLE_REFUSED)
+				|| !game.getPlayerCell().getPlace().getPlaceType().equals(Place.BAT_CAVERN_DARK))
 			return 0;
 		// Make sure that the player is at least a distance of 3 tiles from the entrance before encountering the rebel base:
-		Vector2i playerLocation = Main.game.getPlayer().getLocation();
-		Vector2i entranceLocation = Main.game.getWorlds().get(WorldType.BAT_CAVERNS).getCell(Place.BAT_CAVERN_ENTRANCE).getLocation();
+		var playerLocation = game.getPlayer().getLocation();
+		var entranceLocation = game.getWorlds().get(WorldType.BAT_CAVERNS).getCell(Place.BAT_CAVERN_ENTRANCE).getLocation();
 		int distanceFromEntrance = (int)playerLocation.getDistanceToVector(entranceLocation);
-		return distanceFromEntrance<3 ? 0 : Main.game.getPlayer().hasTraitActivated(Perk.OBSERVANT)?10:5;
+		return distanceFromEntrance<3 ? 0 : game.getPlayer().hasTraitActivated(Perk.OBSERVANT)?10:5;
 	}
 
 	private static double chancePassword(boolean two) {
-		if(Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE)
-				|| Main.game.getPlayer().isQuestFailed(QuestLine.SIDE)
-				|| !Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE,Quest.HANDLE_REFUSED)
-				|| !Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_COMPLETE))
+		if(game.getPlayer().isQuestCompleted(QuestLine.SIDE)
+				|| game.getPlayer().isQuestFailed(QuestLine.SIDE)
+				|| !game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE,Quest.HANDLE_REFUSED)
+				|| !game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_COMPLETE))
 			return 0;
-		var playerPlaceType = Main.game.getPlayerCell().getPlace().getPlaceType();
+		var playerPlaceType = game.getPlayerCell().getPlace().getPlaceType();
 		// Limit encounters for passwords to dark, light, and HLF base entrance tiles only:
 		if(playerPlaceType.equals(Place.BAT_CAVERN_DARK)
 				|| playerPlaceType.equals(Place.BAT_CAVERN_LIGHT)
@@ -142,31 +152,85 @@ public class Modification extends com.lilithsthrone.game.Modification {
 			return 0;
 		// The player needs to find one password from a dark tile and one from a light tile, so if already found the password in their tile, do not enable Encounter
 		if(playerPlaceType.equals(Place.BAT_CAVERN_DARK)
-						&& Main.game.getDialogueFlags().hasFlag(Dialogue.darkPassFound)
+						&& game.getDialogueFlags().hasFlag(Dialogue.darkPassFound)
 				|| playerPlaceType.equals(Place.BAT_CAVERN_LIGHT)
-						&& Main.game.getDialogueFlags().hasFlag(Dialogue.lightPassFound))
+						&& game.getDialogueFlags().hasFlag(Dialogue.lightPassFound))
 			return 0;
-		if(two == Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_PART_TWO))
+		if(two == game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_PART_TWO))
 			return 0;
-		return Main.game.getPlayer().hasTraitActivated(Perk.OBSERVANT) ? 5 : 1;
+		return game.getPlayer().hasTraitActivated(Perk.OBSERVANT) ? 5 : 1;
 	}
 
 	private static double chanceInsaneSurvivor() {
-		return Main.game.getPlayer().hasQuestInLine(QuestLine.SIDE,Quest.EXPLORATION)
-				&& !Main.game.getDialogueFlags().values.contains(Dialogue.insaneSurvivorEncountered)
+		return game.getPlayer().hasQuestInLine(QuestLine.SIDE,Quest.EXPLORATION)
+				&& !game.getDialogueFlags().values.contains(Dialogue.insaneSurvivorEncountered)
 		? 100
 		: 0;
 	}
 
 	private static DialogueNode initInsaneSurvivor() {
-		var c = new RebelBaseInsaneSurvivor(Gender.getGenderFromUserPreferences(false,false));
-		Main.game.setActiveNPC(c);
+		var c = new RebelBaseInsaneSurvivor(getGenderFromUserPreferences(false,false));
+		game.setActiveNPC(c);
 		try {
-			Main.game.addNPC(c,false);
+			game.addNPC(c,false);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		return c.getEncounterDialogue();
 	}
+
+	private static Response traderResponse() {
+		if(!game.getDialogueFlags().values.contains(axelExplainedVengar)
+				|| !game.getPlayer().hasQuest(QuestLine.FIREBOMBS)
+				|| game.getPlayer().isQuestCompleted(QuestLine.FIREBOMBS)
+				|| game.getPlayer().isQuestFailed(QuestLine.FIREBOMBS))
+			return null;
+		if(!game.getPlayer().isQuestProgressLessThan(QuestLine.FIREBOMBS,Quest.FIREBOMBS_FINISH)) {
+			if(!game.getPlayer().isQuestProgressGreaterThan(QuestLine.FIREBOMBS,Quest.FIREBOMBS_START))
+				return null;
+			// Roxy needs 2 days to get firebombs
+			if((game.getMinutesPassed() - game.getDialogueFlags().getSavedLong(ROXY_TIMER)) < 2880)
+				return new Response("Firebombs", "Roxy hasn't had enough time to get more firebombs yet.", null);
+			return new Response("Firebombs", "It's been two days since you asked Roxy about getting more firebombs, better check in.", Dialogue.FIREBOMBS_COMPLETE);
+		}
+		if(game.getPlayer().hasWeaponType(WeaponType.getWeaponTypeFromId("dsg_hlf_weap_pbomb"), true))
+			return new Response("Firebombs", "As you don't have any firebombs on you, you're going to have to try describing them to Roxy in the hopes that she can find someone to replicate them. [style.boldBad(It would probably be best to have a physical example though.)]", Dialogue.FIREBOMBS_FAILED) {
+				@Override
+				public Colour getHighlightColour() {
+					return GENERIC_BAD;
+				}
+			};
+		return new Response("Firebombs", "Show Roxy the firebombs you recovered to see if she has a way of getting or making more.<br/>[style.boldBad(You will lose one firebomb.)] ", Dialogue.FIREBOMBS) {
+			@Override
+			public void effects() {
+				game.getTextEndStringBuilder().append(game.getPlayer().setQuestProgress(QuestLine.FIREBOMBS,Quest.FIREBOMBS_FINISH));
+				game.getDialogueFlags().setSavedLong(ROXY_TIMER, game.getMinutesPassed());
+				// Shuffle at least one instance of the arcane firebomb into the player's inventory if they've got one equipped but none in their inventory
+				if(!game.getPlayer().hasWeaponType(WeaponType.getWeaponTypeFromId("dsg_hlf_weap_pbomb"), false)) {
+					int armRow = 0;
+					boolean fireBombShuffled = false;
+					for(var weapon : game.getPlayer().getMainWeaponArray()) {
+						if(weapon.getWeaponType().equals(WeaponType.getWeaponTypeFromId("dsg_hlf_weap_pbomb"))) {
+							game.getPlayer().unequipMainWeapon(armRow, false, false);
+							break;
+						}
+						armRow++;
+					}
+					if(!fireBombShuffled) {
+						for(var weapon : game.getPlayer().getOffhandWeaponArray()) {
+							if(weapon.getWeaponType().equals(WeaponType.getWeaponTypeFromId("dsg_hlf_weap_pbomb"))) {
+								game.getPlayer().unequipOffhandWeapon(armRow, false, false);
+								break;
+							}
+							armRow++;
+						}
+					}
+				}
+				game.getPlayer().removeWeapon(game.getItemGen().generateWeapon(WeaponType.getWeaponTypeFromId("dsg_hlf_weap_pbomb")));
+			}
+		};
+	}
+
+	private static final String ROXY_TIMER = "rebel_base_roxy_timer";
 }
