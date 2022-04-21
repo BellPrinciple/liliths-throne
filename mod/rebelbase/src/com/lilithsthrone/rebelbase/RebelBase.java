@@ -6,7 +6,6 @@ import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.PlaceType;
 
 import java.util.List;
@@ -17,44 +16,6 @@ import java.util.List;
  * @author DSG
  */
 public class RebelBase {
-	
-	public static final DialogueNode REBEL_BASE_COLLAPSE = new DialogueNode("Uh oh...", "", true) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			return "<p>"
-			+ "As you make your way back out, you hear an ominious cracking sound from deep within the hidden cave."
-			+ " The rotting supports have finally given way!"
-			+ " The cave's unsupported ceiling starts to collapse, bringing down a hundred thousand tonnes of rock with it."
-			+ "</p>";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Run!", "Run for your life!", REBEL_BASE_ESCAPE) {
-					@Override
-					public void effects() {
-						if(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE,Quest.EXPLORATION)){
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.SIDE_UTIL_COMPLETE));
-						} else {
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().setQuestFailed(QuestLine.SIDE,Quest.FAILED));
-						}
-						Main.game.getPlayer().setLocation(WorldType.BAT_CAVERNS, Place.ENTRANCE_EXTERIOR);
-						Main.game.getPlayerCell().getPlace().setPlaceType(PlaceType.BAT_CAVERN_DARK);
-						Main.game.getPlayerCell().getPlace().setName(PlaceType.BAT_CAVERN_DARK.getName());
-					}
-				};
-			}
-			return null;
-		};
-	};
 	
 	public static final DialogueNode REBEL_BASE_ESCAPE = new DialogueNode("", "", false, true) {
 		@Override
