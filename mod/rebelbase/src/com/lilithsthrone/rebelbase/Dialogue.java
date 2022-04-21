@@ -31,6 +31,7 @@ public enum Dialogue implements Scene {
 	SLEEPING_AREA,
 	SLEEPING_AREA_JOURNAL_OPEN,
 	SLEEPING_AREA_SEARCHED,
+	COMMON_AREA,
 	;
 
 	@Override
@@ -70,6 +71,8 @@ public enum Dialogue implements Scene {
 			return "Abandoned Sleeping Area";
 		case SLEEPING_AREA_JOURNAL_OPEN:
 			return "Crumbling Journal";
+		case COMMON_AREA:
+			return "Abandoned Common Area";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -376,6 +379,16 @@ public enum Dialogue implements Scene {
 			+ "The waterproof footlockers now sit empty and what's left would give even Rose a real challenge."
 			+ " There is also what remains of someone's journal lying on one of the beds."
 			+ "</p>";
+		case COMMON_AREA:
+			return "<p>"
+			+ "This room appears to have been some kind of common area,"
+			+ " although the single table and a few chairs would have made for spartan accommodations even if they weren't covered in glowing lichen."
+			+ " The table has been split in two, right down the middle, either intentionally or from too much weight."
+			+ "</p>"
+			+ "<p>"
+			+ "Looking over to the far corner of the room, you see a heavy metal cabinet."
+			+ " The paint is flaking off and there's a huge dent in it, but it might still contain something of worth."
+			+ "</p>";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -529,6 +542,18 @@ public enum Dialogue implements Scene {
 		return List.of(new ResponseTab("",null,
 			new Response("Open footlockers", "You already opened the footlockers.", null),
 			new Response("Read journal", "See what the journal contains.", SLEEPING_AREA_JOURNAL_OPEN)));
+		case COMMON_AREA:
+		return List.of(new ResponseTab("",null,
+			new Response("Open cabinet", "Open the metal cabinet.", RebelBase.COMMON_AREA_CACHE_OPEN) {
+				@Override
+				public void effects() {
+					Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rwebbing", false), 3, false, true))
+					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_sbandana", false), 1, false, true))
+					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbandolier", false), 3, false, true));
+					Main.game.getPlayerCell().getPlace().setPlaceType(Place.COMMON_AREA_SEARCHED);
+					Main.game.getPlayerCell().getPlace().setName(Place.COMMON_AREA_SEARCHED.getName());
+				}
+			}));
 		}
 		return List.of(new ResponseTab(""));
 	}

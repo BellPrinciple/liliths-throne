@@ -13,47 +13,6 @@ import com.lilithsthrone.main.Main;
  * @author DSG
  */
 public class RebelBase {
-		
-	public static final DialogueNode REBEL_BASE_COMMON_AREA = new DialogueNode("Abandoned Common Area", "", false) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			return "<p>"
-			+ "This room appears to have been some kind of common area,"
-			+ " although the single table and a few chairs would have made for spartan accommodations even if they weren't covered in glowing lichen."
-			+ " The table has been split in two, right down the middle, either intentionally or from too much weight."
-			+ "</p>"
-			+ "<p>"
-			+ "Looking over to the far corner of the room, you see a heavy metal cabinet."
-			+ " The paint is flaking off and there's a huge dent in it, but it might still contain something of worth."
-			+ "</p>";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Open cabinet", "Open the metal cabinet.", COMMON_AREA_CACHE_OPEN) {
-					@Override
-					public void effects() {
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rwebbing", false), 3, false, true));
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_sbandana", false), 1, false, true));
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbandolier", false), 3, false, true));
-							Main.game.getPlayerCell().getPlace().setPlaceType(Place.COMMON_AREA_SEARCHED);
-							Main.game.getPlayerCell().getPlace().setName(Place.COMMON_AREA_SEARCHED.getName());
-					}
-				};
-				
-			} else {
-				return null;
-			}
-		};
-	};
 	
 	public static final DialogueNode COMMON_AREA_CACHE_OPEN = new DialogueNode("Abandoned Common Area", "", false) {
 		@Override
