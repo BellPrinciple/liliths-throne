@@ -26,6 +26,7 @@ public enum Dialogue implements Scene {
 	PASSWORD_SILLY,
 	ENTRANCE,
 	COLLAPSE,
+	ESCAPE,
 	;
 
 	@Override
@@ -56,6 +57,8 @@ public enum Dialogue implements Scene {
 			return "Cave Entrance";
 		case COLLAPSE:
 			return "Uh oh...";
+		case ESCAPE:
+			return "";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -236,6 +239,21 @@ public enum Dialogue implements Scene {
 			+ " The rotting supports have finally given way!"
 			+ " The cave's unsupported ceiling starts to collapse, bringing down a hundred thousand tonnes of rock with it."
 			+ "</p>";
+		case ESCAPE:
+			return UtilText.parse("<p>"
+			+ "You run as fast as your [pc.legs] will carry you and manage to reach safety just in time."
+			+ " A thunderous boom echoes throughout the Bat Caverns,"
+			+ " and you thankfully manage to dart to one side just in time to avoid the cloud of dust and debris which is expelled from out of the collapsing cave's entrance."
+			+ "</p>"
+			+ "<p>"
+			+ "The sudden cave-in thankfully doesn't show any sign of spreading out into the Bat Caverns,"
+			+ " and after a few moments have passed both the noise and vibrations have completely faded away."
+			+ " All that's left to remind you of the cave's existence is the metal handle,"
+			+ " which is lodged half-way up the huge pile of rubble which spews out of the place where the hidden door once sat."
+			+ "</p>"
+			+ "<p>"
+			+ "By some sort of a miracle you've managed to escape completely unharmed, although there's now no way back into the hidden cave..."
+			+ "</p>");
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -344,7 +362,7 @@ public enum Dialogue implements Scene {
 				COLLAPSE)));
 		case COLLAPSE:
 		return List.of(new ResponseTab("",null,
-			new Response("Run!", "Run for your life!", RebelBase.REBEL_BASE_ESCAPE) {
+			new Response("Run!", "Run for your life!", ESCAPE) {
 				@Override
 				public void effects() {
 					Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE,Quest.EXPLORATION)
@@ -355,6 +373,8 @@ public enum Dialogue implements Scene {
 					Main.game.getPlayerCell().getPlace().setName(BAT_CAVERN_DARK.getName());
 				}
 			}));
+		case ESCAPE:
+			return BAT_CAVERN_DARK.getDialogue(false).getResponses();
 		}
 		return List.of(new ResponseTab(""));
 	}
@@ -399,6 +419,7 @@ public enum Dialogue implements Scene {
 		case PASSWORD_TWO:
 		case PASSWORD_SEARCH_FAILED:
 		case PASSWORD_SILLY:
+		case ESCAPE:
 			return 60;
 		default:
 			return 30;
@@ -424,6 +445,7 @@ public enum Dialogue implements Scene {
 		switch(this) {
 		case DOOR_NO_PASS:
 		case PASSWORD_SEARCH_FAILED:
+		case ESCAPE:
 			return true;
 		default:
 			return false;
