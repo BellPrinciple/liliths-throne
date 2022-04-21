@@ -13,56 +13,6 @@ import com.lilithsthrone.main.Main;
  * @author DSG
  */
 public class RebelBase {
-	
-	public static final DialogueNode REBEL_BASE_SLEEPING_AREA = new DialogueNode("Abandoned Sleeping Area", "", false) {
-		@Override
-		public String getAuthor() {
-			return "DSG";
-		}
-		@Override
-		public int getSecondsPassed() {
-			return 30;
-		}
-		@Override
-		public String getContent() {
-			return "<p>"
-			+ "From the bunkbeds scattered about the room, you guess that it was once used as a sleeping area."
-			+ "Some of the beds have been knocked over and all are unusable rotting husks covered in bioluminescent mushrooms."
-			+ "Piled high in the middle of the room are mysteriously stained pieces of fabric that might have been clothing at one point but are now home to yet more mushrooms."
-			+ "</p>"
-			+ "<p>"
-			+ "You notice several waterproof footlockers next to some of the beds."
-			+ "They're pretty beaten up, but they might still be sealed."
-			+ "There is also what remains of someone's journal lying on one of the beds."
-			+ "</p>";
-		}
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				return new Response("Open footlockers", "Open the footlockers.", REBEL_BASE_SLEEPING_AREA_SEARCHED){
-					@Override
-					public void effects() {
-							Main.game.getTextEndStringBuilder().append(UtilText.parse("<p>"
-							+ "You rummage through the footlockers and find sets of uniforms, boots, and armbands of some sort that you don't recognize."
-							+ "</p>"))
-							.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbooniehat", false), 2, false, true))
-							.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rtunic", false), 2, false, true))
-							.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rtrousers", false), 2, false, true))
-							.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_vcboots", false), 2, false, true))
-							.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbrassard", false), 5, false, true));
-							Main.game.getPlayerCell().getPlace().setPlaceType(Place.SLEEPING_AREA_SEARCHED);
-							Main.game.getPlayerCell().getPlace().setName(Place.SLEEPING_AREA_SEARCHED.getName());
-					}
-				};
-				
-			} else if (index ==2) {
-				return new Response("Read journal", "See what the journal contains.", REBEL_BASE_SLEEPING_AREA_JOURNAL_OPEN);
-				
-			} else {
-				return null;
-			}
-		};
-	};
 		
 	public static final DialogueNode REBEL_BASE_SLEEPING_AREA_JOURNAL_OPEN = new DialogueNode("Crumbling Journal", "", true) {
 		@Override
@@ -161,7 +111,7 @@ public class RebelBase {
 		@Override
 		public Response getResponse(int responseTab, int index) {
 			if (index == 1 && Main.game.getPlayerCell().getPlace().getPlaceType().equals(Place.SLEEPING_AREA)) {
-				return new Response("Close", "You've seen enough.", REBEL_BASE_SLEEPING_AREA){
+				return new Response("Close", "You've seen enough.", Dialogue.SLEEPING_AREA){
 						@Override
 						public void effects() {
 							if(Main.game.getPlayer().isQuestProgressLessThan(QuestLine.SIDE_REBEL_BASE, Quest.REBEL_BASE_ESCAPE)) {

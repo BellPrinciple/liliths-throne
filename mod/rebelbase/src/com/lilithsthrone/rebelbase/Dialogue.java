@@ -28,6 +28,7 @@ public enum Dialogue implements Scene {
 	COLLAPSE,
 	ESCAPE,
 	CORRIDOR,
+	SLEEPING_AREA,
 	;
 
 	@Override
@@ -62,6 +63,8 @@ public enum Dialogue implements Scene {
 			return "";
 		case CORRIDOR:
 			return "Artificial Cave";
+		case SLEEPING_AREA:
+			return "Abandoned Sleeping Area";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -264,6 +267,17 @@ public enum Dialogue implements Scene {
 			+ " Although you see what look like hooks for placing lanterns or torches nailed into each support,"
 			+ " the sodden wood has been more or less taken over by bioluminescent mushrooms and wood ears, conveniently lighting the way."
 			+ "</p>";
+		case SLEEPING_AREA:
+			return "<p>"
+			+ "From the bunkbeds scattered about the room, you guess that it was once used as a sleeping area."
+			+ "Some of the beds have been knocked over and all are unusable rotting husks covered in bioluminescent mushrooms."
+			+ "Piled high in the middle of the room are mysteriously stained pieces of fabric that might have been clothing at one point but are now home to yet more mushrooms."
+			+ "</p>"
+			+ "<p>"
+			+ "You notice several waterproof footlockers next to some of the beds."
+			+ "They're pretty beaten up, but they might still be sealed."
+			+ "There is also what remains of someone's journal lying on one of the beds."
+			+ "</p>";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -385,6 +399,24 @@ public enum Dialogue implements Scene {
 			}));
 		case ESCAPE:
 			return BAT_CAVERN_DARK.getDialogue(false).getResponses();
+		case SLEEPING_AREA:
+		return List.of(new ResponseTab("",null,
+				new Response("Open footlockers", "Open the footlockers.", RebelBase.REBEL_BASE_SLEEPING_AREA_SEARCHED){
+				@Override
+				public void effects() {
+					Main.game.getTextEndStringBuilder().append(UtilText.parse("<p>"
+					+ "You rummage through the footlockers and find sets of uniforms, boots, and armbands of some sort that you don't recognize."
+					+ "</p>"))
+					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbooniehat", false), 2, false, true))
+					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rtunic", false), 2, false, true))
+					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rtrousers", false), 2, false, true))
+					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_vcboots", false), 2, false, true))
+					.append(Main.game.getPlayer().addClothing(Main.game.getItemGen().generateClothing("dsg_hlf_equip_rbrassard", false), 5, false, true));
+					Main.game.getPlayerCell().getPlace().setPlaceType(Place.SLEEPING_AREA_SEARCHED);
+					Main.game.getPlayerCell().getPlace().setName(Place.SLEEPING_AREA_SEARCHED.getName());
+				}
+			},
+			new Response("Read journal", "See what the journal contains.", RebelBase.REBEL_BASE_SLEEPING_AREA_JOURNAL_OPEN)));
 		}
 		return List.of(new ResponseTab(""));
 	}
