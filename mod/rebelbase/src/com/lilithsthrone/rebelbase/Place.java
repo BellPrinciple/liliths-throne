@@ -153,7 +153,7 @@ public enum Place implements PlaceType {
 		case ENTRANCE:
 			return Dialogue.ENTRANCE;
 		case CORRIDOR:
-			return RebelBase.REBEL_BASE_CORRIDOR;
+			return Dialogue.CORRIDOR;
 		case SLEEPING_AREA:
 			return RebelBase.REBEL_BASE_SLEEPING_AREA;
 		case SLEEPING_AREA_SEARCHED:
