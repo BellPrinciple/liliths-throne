@@ -25,6 +25,7 @@ public enum Dialogue implements Scene {
 	PASSWORD_SEARCH_FAILED,
 	PASSWORD_SILLY,
 	ENTRANCE,
+	COLLAPSE,
 	;
 
 	@Override
@@ -53,6 +54,8 @@ public enum Dialogue implements Scene {
 			return "The Value of Time";
 		case ENTRANCE:
 			return "Cave Entrance";
+		case COLLAPSE:
+			return "Uh oh...";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -227,6 +230,12 @@ public enum Dialogue implements Scene {
 			+ " The way back was once hidden by a tight fitting stone panel and a clever arcane password lock, but you have since defeated these measures."
 			+ " The remaining light from outside and the dim glow from the inside are just enough for you to find your way."
 			+ "</p>";
+		case COLLAPSE:
+			return "<p>"
+			+ "As you make your way back out, you hear an ominious cracking sound from deep within the hidden cave."
+			+ " The rotting supports have finally given way!"
+			+ " The cave's unsupported ceiling starts to collapse, bringing down a hundred thousand tonnes of rock with it."
+			+ "</p>";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -327,12 +336,25 @@ public enum Dialogue implements Scene {
 				"This place looks seriously unstable, it could collapse at any moment."
 				+ " It might be best to leave whatever secrets are in here and leave while you still can."
 				+ "<br/>[style.italicsBad(You will not be able to return to this area after leaving!)]",
-				RebelBase.REBEL_BASE_COLLAPSE)
+				COLLAPSE)
 			: new Response("[style.colourGood(Exit)]",
 				"You've had a look through everything that you could find."
 				+ " It might be best to leave while you still can."
 				+ "<br/><i>You will not be able to return to this area after leaving!</i>",
-				RebelBase.REBEL_BASE_COLLAPSE)));
+				COLLAPSE)));
+		case COLLAPSE:
+		return List.of(new ResponseTab("",null,
+			new Response("Run!", "Run for your life!", RebelBase.REBEL_BASE_ESCAPE) {
+				@Override
+				public void effects() {
+					Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.SIDE,Quest.EXPLORATION)
+					? Main.game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.SIDE_UTIL_COMPLETE)
+					: Main.game.getPlayer().setQuestFailed(QuestLine.SIDE,Quest.FAILED));
+					Main.game.getPlayer().setLocation(BAT_CAVERNS, Place.ENTRANCE_EXTERIOR);
+					Main.game.getPlayerCell().getPlace().setPlaceType(BAT_CAVERN_DARK);
+					Main.game.getPlayerCell().getPlace().setName(BAT_CAVERN_DARK.getName());
+				}
+			}));
 		}
 		return List.of(new ResponseTab(""));
 	}
@@ -390,6 +412,7 @@ public enum Dialogue implements Scene {
 		case DOOR_NO_PASS:
 		case PASSWORD_ONE:
 		case PASSWORD_TWO:
+		case COLLAPSE:
 			return true;
 		default:
 			return false;
