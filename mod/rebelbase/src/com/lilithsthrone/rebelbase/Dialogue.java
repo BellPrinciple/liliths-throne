@@ -8,6 +8,8 @@ import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
 
+import static com.lilithsthrone.game.character.persona.Occupation.SOLDIER;
+import static com.lilithsthrone.game.dialogue.DialogueFlagValue.axelExplainedVengar;
 import static com.lilithsthrone.world.WorldType.BAT_CAVERNS;
 import static com.lilithsthrone.world.places.PlaceType.BAT_CAVERN_DARK;
 import static com.lilithsthrone.world.places.PlaceType.BAT_CAVERN_LIGHT;
@@ -34,6 +36,9 @@ public enum Dialogue implements Scene {
 	COMMON_AREA,
 	COMMON_AREA_CACHE_OPEN,
 	COMMON_AREA_SEARCHED,
+	ARMORY,
+	ARMORY_CACHE_OPEN,
+	ARMORY_SEARCHED,
 	;
 
 	@Override
@@ -77,6 +82,10 @@ public enum Dialogue implements Scene {
 		case COMMON_AREA_CACHE_OPEN:
 		case COMMON_AREA_SEARCHED:
 			return "Abandoned Common Area";
+		case ARMORY:
+		case ARMORY_CACHE_OPEN:
+		case ARMORY_SEARCHED:
+			return "Partly Caved-in Room";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -406,6 +415,24 @@ public enum Dialogue implements Scene {
 			+ "<p>"
 			+ "The cabinet in the far corner is now empty and there isn't anything left worth taking."
 			+ "</p>";
+		case ARMORY:
+			return "<p>"
+			+ "You can't be sure what this room was used for, given that half of it has caved in."
+			+ " Poking out from rubble, there are two large metal containers."
+			+ " The containers have burst open from the pressure exerted by the rubble but you see glimpses of plastic bags inside."
+			+ "</p>";
+		case ARMORY_CACHE_OPEN:
+			return "<p>"
+			+ "Approaching the rubble-entombed metal containers, you're able to shift aside some of the rocks and pull several plastic bags free from the debris."
+			+ " Tearing these bags open, you find:"
+			+ "</p>";
+		case ARMORY_SEARCHED:
+			return "<p>"
+			+ "You can't be sure what this room was used for, given that half of it has caved in."
+			+ "</p>"
+			+ "<p>"
+			+ "The metal containers and plastic bags are now empty, leaving nothing else but rubble in this room."
+			+ "</p>";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -574,6 +601,36 @@ public enum Dialogue implements Scene {
 		case COMMON_AREA_CACHE_OPEN:
 		return List.of(new ResponseTab("",null,
 			new Response("Open cabinet", "You've already opened the cabinet.", null)));
+		case ARMORY:
+		case ARMORY_CACHE_OPEN:
+		case ARMORY_SEARCHED:
+		return List.of(new ResponseTab("",null,
+			new Response("Open bags", "Open the plastic bags.", ARMORY_CACHE_OPEN){
+			@Override
+			public void effects() {
+				Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_pbsmg"), 3, false, true))
+				.append(Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_pboltrifle"), 2, false, true))
+				.append(Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_pbrevolver"), 5, false, true))
+				.append(Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_gbshotgun"), 1, false, true))
+				.append(Main.game.getPlayer().addWeapon(Main.game.getItemGen().generateWeapon("dsg_hlf_weap_pbomb"), 10, false, true))
+				.append("<p>")
+				.append(Main.game.getPlayer().getOccupation() == SOLDIER
+				? "Having seen quite a few in improvised weapons training,"
+				: "Having seen them in use during riots on the news,")
+				.append(" you instantly recognise the disposable firebombs as being an arcane parody of Molotov cocktails."
+				+ " You don't have a way to get more and you doubt any honest shop would want to carry something so obviously illegal,"
+				+ " but perhaps a shopkeep with less scruples has the means to provide you with a supply of them..."
+				+ "</p>")
+				.append(!Main.game.getDialogueFlags().hasFlag(axelExplainedVengar)
+				? ""
+				: UtilText.parse("<p>"
+				+ "[roxy.NamePos] shop would probably be a good place to start."
+				+ "</p>"))
+				.append(Main.game.getPlayer().startQuest(QuestLine.SIDE_REBEL_BASE_FIREBOMBS));
+				Main.game.getPlayerCell().getPlace().setPlaceType(Place.ARMORY_SEARCHED);
+				Main.game.getPlayerCell().getPlace().setName(Place.ARMORY_SEARCHED.getName());
+			}
+		}));
 		}
 		return List.of(new ResponseTab(""));
 	}
@@ -621,6 +678,7 @@ public enum Dialogue implements Scene {
 		case ESCAPE:
 			return 60;
 		case COMMON_AREA_CACHE_OPEN:
+		case ARMORY_CACHE_OPEN:
 			return 2*60;
 		default:
 			return 30;
