@@ -3,8 +3,10 @@ package com.lilithsthrone.rebelbase;
 import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.dialogue.AbstractDialogueFlagValue;
 import com.lilithsthrone.game.dialogue.responses.Response;
+import com.lilithsthrone.game.dialogue.responses.ResponseCombat;
 
 import static com.lilithsthrone.game.character.persona.Occupation.SOLDIER;
+import static com.lilithsthrone.game.character.race.Race.DEMON;
 import static com.lilithsthrone.game.dialogue.DialogueFlagValue.axelExplainedVengar;
 import static com.lilithsthrone.game.dialogue.places.submission.BatCaverns.CAVERN_DARK;
 import static com.lilithsthrone.game.dialogue.places.submission.gamblingDen.RoxysShop.TRADER;
@@ -15,6 +17,7 @@ import static com.lilithsthrone.world.places.PlaceType.BAT_CAVERN_DARK;
 import static com.lilithsthrone.world.places.PlaceType.BAT_CAVERN_LIGHT;
 
 import java.util.List;
+import java.util.Map;
 
 public enum Dialogue implements Scene {
 	ENTRANCE_HANDLE,
@@ -43,6 +46,12 @@ public enum Dialogue implements Scene {
 	FIREBOMBS,
 	FIREBOMBS_COMPLETE,
 	FIREBOMBS_FAILED,
+	INSANE_SURVIVOR_ATTACK,
+	INSANE_SURVIVOR_TALK_ATTEMPT,
+	INSANE_SURVIVOR_BRIBE_ATTEMPT,
+	INSANE_SURVIVOR_SURRENDER_ATTEMPT,
+	INSANE_SURVIVOR_VICTORY,
+	INSANE_SURVIVOR_DEFEATED,
 	;
 
 	@Override
@@ -96,12 +105,30 @@ public enum Dialogue implements Scene {
 		case FIREBOMBS_COMPLETE:
 		case FIREBOMBS_FAILED:
 			return "Roxy's Fun Box";
+		case INSANE_SURVIVOR_ATTACK:
+			return "A Living Ghost";
+		case INSANE_SURVIVOR_TALK_ATTEMPT:
+			return "Talk Attempt";
+		case INSANE_SURVIVOR_BRIBE_ATTEMPT:
+			return "Bribe Attempt";
+		case INSANE_SURVIVOR_SURRENDER_ATTEMPT:
+			return "Surrendered!";
+		case INSANE_SURVIVOR_VICTORY:
+			return "Victory!";
+		case INSANE_SURVIVOR_DEFEATED:
+			return "Defeated!";
 		}
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getDescription() {
+		switch(this) {
+		case INSANE_SURVIVOR_ATTACK:
+			return "A strange figure in the corner.";
+		case INSANE_SURVIVOR_SURRENDER_ATTEMPT:
+			return "Know when to fold 'em.";
+		}
 		return "";
 	}
 
@@ -519,6 +546,85 @@ public enum Dialogue implements Scene {
 			+ "<p>"
 			+ "With your hopes of ever getting more firebombs dashed by Roxy's rude response, you wonder what to do now..."
 			+ "</p>");
+		case INSANE_SURVIVOR_ATTACK:
+			return parse(game.getActiveNPC(), "<p>"
+			+ "As you enter the room, you notice a ghostly figure crouched in the corner with [npc.her] back turned to you,"
+			+ "mumbling something inaudibly and seemingly unaware of your presence."
+			+ "While you deliberate whether or not to approach [npc.herHim], you must have made some sort of noise since [npc.she] suddenly jumps up and turns to face you."
+			+ "A half-eaten glowing mushroom falls from [npc.her] emaciated hands to the floor."
+			+ "</p>"
+			+ "<p>"
+			+ "You're not quite sure what to make of the stranger before you."
+			+ "[npc.She] is clearly mostly human, and corporeal at that,"
+			+ "but [npc.her] pale complexion and glowing skin can only mean [npc.sheHas] lived far from the sun's rays for a long time on a diet of nothing but the mushrooms growing in the cave."
+			+ "[npc.Her] clothing appears to have been some kind of uniform but is so covered in patches and stains that you're not sure if you've seen the style before or not."
+			+ "</p>"
+			+ "<p>"
+			+ "Whatever the case, [npc.her] initial shock wears off almost immediately and [npc.she] reflexively points some sort of submachine gun at you."
+			+ "</p>"
+			+ "<p>"
+			+ "[npc.speech(Come back to get me, huh?)] [npc.she] asks mockingly,"
+			+ "[npc.speech(You demonic fuckers always were shit at cleaning up after yourselves."
+			+ "Well, you're not turning me into a <i>fucking animal!</i>"
+			+ "And I won't be like you either, I'll die first!)]"
+			+ "</p>"
+			+ "<p>"
+			+ "[npc.She]'s got you square in [npc.her] sights and [npc.her] crazed, wild-eyed, expression gives you the impression [npc.she] might attack you at any moment."
+			+ "</p>");
+		case INSANE_SURVIVOR_TALK_ATTEMPT:
+			return parse(game.getActiveNPC(), "<p>"
+			+ "You make no move to defend yourself and instead try to explain calmly that you're not "
+			+ (game.getPlayer().getRace() != DEMON
+			? "a demon, to which the unstable stranger seems to take offense."
+			+ "</p>"
+			+ "<p>"
+			+ "[npc.speech(Do you think I'm a fucking idiot?"
+			+ "Your aura says 'demon' or worse all over it."
+			+ "Astrea already tried that bullshit, but that slut never fooled me, and neither will you.)]"
+			: "with Lilith, to which the unstable stranger can only let out a bitter laugh."
+			+ "</p>"
+			+ "<p>"
+			+ "[npc.speech(A demon with a fucking conscience?"
+			+ "Didn't your whore of a mother tell you?"
+			+ "You're a goddamn puppet and only Lilith can pull the strings!"
+			+ "Even Astrea never tried something <i>that</i> stupid, that slippery little slut.)]")
+			+ "</p>"
+			+ "<p>"
+			+ "Before you can say anything else, a round whizzes by your head."
+			+ "It would seem your attempt at diplomacy is over."
+			+ "</p>");
+		case INSANE_SURVIVOR_BRIBE_ATTEMPT:
+			return parse(game.getActiveNPC(), "<p>"
+			+ "You make no move to defend yourself and instead calmly offer up a healthy sum of money in exchange for lowering [npc.her] weapon."
+			+ "The unstable stranger blinks, as if not quite believing what you've just said, before letting out a bitter laugh."
+			+ "</p>"
+			+ "<p>"
+			+ "[npc.speech(Is that some kind of fucking joke?"
+			+ "Even <i>you</i> know we're not in this for the pay."
+			+ "Angels' mercy, they really do send the idiots in first.)]"
+			+ "</p>"
+			+ "<p>"
+			+ "Before you can say anything else, a round whizzes by your head."
+			+ "It would seem your attempt at diplomacy is over."
+			+ "</p>");
+		case INSANE_SURVIVOR_SURRENDER_ATTEMPT:
+			return parse(game.getActiveNPC(), "<p>"
+			+ "You make no move to defend yourself and instead raise your [pc.arms] in a gesture of surrender."
+			+ "The unstable stranger smirks."
+			+ "</p>"
+			+ "<p>"
+			+ "[npc.speech(Oldest trick in the goddamn book."
+			+ "Nobody's falling for <i>that</i> anymore, demon."
+			+ "Angels' mercy, they really do send the idiots in first."
+			+ "At least have the fucking decency to <i>try</i> putting up a fight.)]"
+			+ "</p>"
+			+ "<p>"
+			+ "Before you can do or say anything else, a round whizzes by your head."
+			+ "It would seem your surrender has been rejected."
+			+ "</p>");
+		case INSANE_SURVIVOR_VICTORY:
+		case INSANE_SURVIVOR_DEFEATED:
+			return "";
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -533,7 +639,7 @@ public enum Dialogue implements Scene {
 			var t = r.get(0);
 			if(pc.isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_PART_ONE)) {
 				r.set(0,new ResponseTab(t.title,null,
-						new Response("Pull the handle","What could possibly go wrong?",Dialogue.DOOR_NO_PASS)));
+						new Response("Pull the handle","What could possibly go wrong?",DOOR_NO_PASS)));
 				r.get(0).response.addAll(t.response.subList(1,t.response.size()));
 			}
 			else if(pc.isQuestProgressLessThan(QuestLine.SIDE,Quest.PASSWORD_PART_TWO)) {
@@ -722,6 +828,39 @@ public enum Dialogue implements Scene {
 		case FIREBOMBS_COMPLETE:
 		case FIREBOMBS_FAILED:
 		return TRADER.getResponses();
+		case INSANE_SURVIVOR_ATTACK:
+		return List.of(new ResponseTab("",null,
+			new ResponseCombat("Fight",
+				"[npc.She] seems determined to fight you. Oblige [npc.herHim].",
+				game.getActiveNPC(),
+				Map.of(game.getActiveNPC(), parse(game.getActiveNPC(), "[npc.speech(I'll fucking end you, demon scum!)]"))),
+			new Response("Talk", "You get the feeling [npc.she] is beyond reason but it might be worth a try.", INSANE_SURVIVOR_TALK_ATTEMPT),
+			game.getPlayer().getMoney() <= 0
+			? new Response("Offer money", "Your empty pockets don't give you the means to try this.", null)
+			: new Response("Offer money", "While [npc.she] probably isn't after money, a simple offer couldn't hurt...could it?", INSANE_SURVIVOR_BRIBE_ATTEMPT),
+		new Response("Surrender", "[npc.Her] kit might be ragged but it still looks serious. You might not be able to win this.", INSANE_SURVIVOR_SURRENDER_ATTEMPT)));
+		case INSANE_SURVIVOR_TALK_ATTEMPT:
+		return List.of(new ResponseTab("",null,
+			new ResponseCombat("Fight",
+				"[npc.She] can't be reasoned with. Defend yourself!",
+				game.getActiveNPC(),
+				Map.of(game.getActiveNPC(), parse(game.getActiveNPC(), "[npc.speech(I'll fucking end you, demon scum!)]")))));
+		case INSANE_SURVIVOR_BRIBE_ATTEMPT:
+		return List.of(new ResponseTab("",null,
+			new ResponseCombat("Fight",
+				"[npc.She] can't be bought. Defend yourself!",
+				game.getActiveNPC(),
+				Map.of(game.getActiveNPC(), parse(game.getActiveNPC(), "[npc.speech(I'll fucking end you, demon scum!)]")))));
+		case INSANE_SURVIVOR_SURRENDER_ATTEMPT:
+		return List.of(new ResponseTab("",null,
+			new ResponseCombat("Defend yourself",
+				"[npc.She] doesn't think your surrender is genuine, leaving you with little choice.",
+				game.getActiveNPC(),
+				Map.of(game.getActiveNPC(), parse(game.getActiveNPC(), "[npc.speech(I'll fucking end you, demon scum!)]")))));
+		case INSANE_SURVIVOR_VICTORY:
+		case INSANE_SURVIVOR_DEFEATED:
+		return List.of(new ResponseTab("",null,
+			Response.back("Continue", "There's no sign of the stranger anywhere. Might as well carry on your way...")));
 		}
 		return List.of(new ResponseTab(""));
 	}
@@ -756,6 +895,47 @@ public enum Dialogue implements Scene {
 		case PASSWORD_SILLY:
 			game.getTextEndStringBuilder().append(game.getPlayer().setQuestProgress(QuestLine.SIDE,Quest.SIDE_UTIL_COMPLETE));
 			break;
+		case INSANE_SURVIVOR_VICTORY:
+			game.getTextStartStringBuilder().append(parse(game.getActiveNPC(), "<p>"
+			+ "The oddly dressed stranger collapses before you, panting."
+			+ "It seems that even in [npc.her] state, [npc.she] is still susceptible to your aura."
+			+ "</p>"
+			+ "<p>"
+			+ "[npc.speech(No! Not like this! It can't end here!)] [npc.she] says, almost sobbing out the words, [npc.speech(It won't!)]"
+			+ "</p>"
+			+ "<p>"
+			+ "[npc.She] pulls out a strange looking vial filled with a clear liquid and with the last of [npc.her] strength, breaks it open."
+			+ "As soon as the liquid comes into contact with the air, it turns into a cloud of thick, blinding smoke."
+			+ "You think you can hear booted feet running off into distance but by the time the smoke clears, there is no one left in the room except for you."
+			+ "</p>"));
+			game.banishNPC(game.getActiveNPC());
+			game.getDialogueFlags().values.add(insaneSurvivorEncountered);
+		case INSANE_SURVIVOR_DEFEATED:
+		{
+			int money = game.getPlayer().getMoney();
+			game.getTextStartStringBuilder().append(parse(game.getActiveNPC(), "<p>"
+			+ "You fall to your knees before the oddly dressed stranger."
+			+ "[npc.She] wordlessly walks up to you and sends you into an inky unconsciousness with the butt of [npc.her] weapon..."
+			+ "</p>"
+			+ "<p>"
+			+ "When you wake a good fifteen minutes later, there's no one left in the room except for you."
+			+ "As you get up and dust yourself off, you notice that your pockets are "
+			+ (money > 20000
+			? "now feeling somewhat lighter"
+			: money > 10000
+			? "now feeling much lighter"
+			: money > 5000
+			? "now almost empty"
+			: money > 0
+			? "now totally empty"
+			: "totally empty like they were before, but obviously rummaged through,")
+			+ " and let out a sigh. Seems for all [npc.her] posturing, [npc.she] was perfectly happy to take your money after knocking you out..."
+			+ "</p>"));
+			game.getTextEndStringBuilder().append(game.getPlayer().incrementMoney(-5000));
+			game.banishNPC(game.getActiveNPC());
+			game.getDialogueFlags().values.add(insaneSurvivorEncountered);
+		}
+			break;
 		}
 	}
 
@@ -775,6 +955,12 @@ public enum Dialogue implements Scene {
 		case FIREBOMBS_COMPLETE:
 		case FIREBOMBS_FAILED:
 			return 0;
+		case INSANE_SURVIVOR_TALK_ATTEMPT:
+		case INSANE_SURVIVOR_BRIBE_ATTEMPT:
+		case INSANE_SURVIVOR_SURRENDER_ATTEMPT:
+			return 10;
+		case INSANE_SURVIVOR_DEFEATED:
+			return 15*60;
 		default:
 			return 30;
 		}
@@ -792,6 +978,12 @@ public enum Dialogue implements Scene {
 		case FIREBOMBS:
 		case FIREBOMBS_COMPLETE:
 		case FIREBOMBS_FAILED:
+		case INSANE_SURVIVOR_ATTACK:
+		case INSANE_SURVIVOR_TALK_ATTEMPT:
+		case INSANE_SURVIVOR_BRIBE_ATTEMPT:
+		case INSANE_SURVIVOR_SURRENDER_ATTEMPT:
+		case INSANE_SURVIVOR_VICTORY:
+		case INSANE_SURVIVOR_DEFEATED:
 			return true;
 		default:
 			return false;
