@@ -3,6 +3,7 @@ package com.lilithsthrone.rebelbase;
 import java.time.Month;
 import java.util.List;
 
+import com.lilithsthrone.game.Scene;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -32,7 +33,6 @@ import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMoveType;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.CharacterInventory;
@@ -229,8 +229,8 @@ public class RebelBaseInsaneSurvivor extends NPC {
     }
 
     @Override
-    public DialogueNode getEncounterDialogue() {
-        return RebelBaseInsaneSurvivorDialogue.INSANE_SURVIVOR_ATTACK;
+    public Scene getEncounterDialogue() {
+        return Dialogue.INSANE_SURVIVOR_ATTACK;
     }
 
     @Override
@@ -251,10 +251,10 @@ public class RebelBaseInsaneSurvivor extends NPC {
     @Override
     public Response endCombat(boolean applyEffects, boolean victory) {
         if(victory) {
-            return new Response("", "", RebelBaseInsaneSurvivorDialogue.INSANE_SURVIVOR_VICTORY);			
+            return new Response("", "", Dialogue.INSANE_SURVIVOR_VICTORY);
         
         } else {
-            return new Response("", "", RebelBaseInsaneSurvivorDialogue.INSANE_SURVIVOR_DEFEATED);
+            return new Response("", "", Dialogue.INSANE_SURVIVOR_DEFEATED);
         
         }
     }

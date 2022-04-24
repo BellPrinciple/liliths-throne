@@ -1,8 +1,8 @@
 package com.lilithsthrone.rebelbase;
 
+import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.dialogue.AbstractDialogueFlagValue;
-import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
 import com.lilithsthrone.utils.TreeNode;
@@ -168,7 +168,7 @@ public class Modification extends com.lilithsthrone.game.Modification {
 		: 0;
 	}
 
-	private static DialogueNode initInsaneSurvivor() {
+	private static Scene initInsaneSurvivor() {
 		var c = new RebelBaseInsaneSurvivor(getGenderFromUserPreferences(false,false));
 		game.setActiveNPC(c);
 		try {
