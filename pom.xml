@@ -8,6 +8,7 @@
 	<version>1</version>
 	<modules>
 		<module>mod/rebelbase</module>
+		<module>mod/hypnowatch</module>
 	</modules>
 	<name>lilithsthrone</name>
 	<properties>
