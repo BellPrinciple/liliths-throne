@@ -944,7 +944,7 @@ public interface ItemType extends AbstractCoreType {
 			return false;
 		}
 	};
-	
+
 	public static AbstractItemType ORIENTATION_HYPNO_WATCH = new AbstractItemType(50000,
 			"a",
 			false,
@@ -1684,41 +1684,6 @@ public interface ItemType extends AbstractCoreType {
 					"You force [npc.name] to drink the eggplant potion. The rich, complex flavour is surprisingly delicious.",
 					"[npc.Name] produces an eggplant potion, and then proceeds to drink it. The rich, complex flavour is surprisingly delicious.",
 					"[npc.Name] produces an eggplant potion, and then proceeds to force you to drink it. The rich, complex flavour is surprisingly delicious.");
-		}
-	};
-
-	public static AbstractItemType ARTHURS_PACKAGE = new AbstractItemType(0,
-			"",
-			false,
-			"Arthur's Package",
-			"Arthur's Packages",
-			"A package that you collected from Arcane Arts. You need to deliver this to Arthur.",
-			"arthursPackage",
-			PresetColour.ANDROGYNOUS,
-			null,
-			null,
-			Rarity.QUEST,
-			null,
-			null) {
-
-
-		@Override
-		public String getUseName() {
-			return "inspect";
-		}
-		
-		@Override
-		public String getUseDescription(GameCharacter user, GameCharacter target) {
-			return getGenericUseDescription(user, target,
-					"The package is quite small, measuring roughly "+Units.size(20)+" along each edge. It's constructed of brown cardboard, and sealed with packaging tape.",
-					"The package is quite small, measuring roughly "+Units.size(20)+" along each edge. It's constructed of brown cardboard, and sealed with packaging tape.",
-					"The package is quite small, measuring roughly "+Units.size(20)+" along each edge. It's constructed of brown cardboard, and sealed with packaging tape.",
-					"The package is quite small, measuring roughly "+Units.size(20)+" along each edge. It's constructed of brown cardboard, and sealed with packaging tape.");
-		}
-		
-		@Override
-		public boolean isConsumedOnUse() {
-			return false;
 		}
 	};
 

@@ -2,30 +2,16 @@ package com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade;
 
 import java.util.Map.Entry;
 
-import com.lilithsthrone.game.PropertyValue;
-import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.attributes.CorruptionLevel;
-import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.dominion.Vicky;
-import com.lilithsthrone.game.character.quests.Quest;
-import com.lilithsthrone.game.character.quests.QuestLine;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
-import com.lilithsthrone.game.dialogue.responses.ResponseSex;
 import com.lilithsthrone.game.dialogue.responses.ResponseTrade;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
-import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
-import com.lilithsthrone.game.sex.SexPace;
-import com.lilithsthrone.game.sex.managers.dominion.SMVickyOverDesk;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotDesk;
 import com.lilithsthrone.main.Main;
-import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 
 /**
  * @since 0.1.82
@@ -125,80 +111,6 @@ public class ArcaneArts {
 					}
 				};
 				
-			} else if(index==5) {
-				if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.arthursPackageObtained)) {
-					if(Main.game.getPlayer().getQuest(QuestLine.SIDE_HYPNO_WATCH)==Quest.SIDE_HYPNO_WATCH_VICKY) {
-						if(Main.game.getPlayer().isInventoryFull()) {
-							return new Response("Arthur's package", "You don't have enough room in your inventory for the package!", null);
-							
-						} else {
-							return new Response("Arthur's package", "Tell Vicky that you're here to collect Arthur's package.", ARTHURS_PACKAGE) {
-								@Override
-								public void effects() {
-									Main.game.getDialogueFlags().setFlag(DialogueFlagValue.vickyIntroduced, true);
-								}
-							};
-						}
-						
-					} else {
-						return null;
-					}
-					
-				} else {
-					if((!Main.game.isAnalContentEnabled() || !Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.ANUS, true))
-							&& (!Main.game.getPlayer().hasVagina() || !Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.VAGINA, true))) {
-						return new Response("Offer body",
-								"Vicky needs to be able to access your "
-									+ (Main.game.isAnalContentEnabled()?"anus":"")
-									+ (Main.game.getPlayer().hasVagina()?(Main.game.isAnalContentEnabled()?" or ":"")+"vagina":"")+"!",
-								null);
-						
-					} else {
-						return new ResponseSex("Offer body", "Let Vicky use your body.",
-								Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
-								true, false,
-								new SMVickyOverDesk(
-										Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vicky.class), SexSlotDesk.BETWEEN_LEGS)),
-										Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT))),
-								null,
-								null,
-								VICKY_POST_SEX,
-								UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "SHOP_WEAPONS_OFFER_BODY"));
-					}
-				}
-				
-			} else if (index == 6 && Main.getProperties().hasValue(PropertyValue.nonConContent) && Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.arthursPackageObtained)) {
-				if((!Main.game.isAnalContentEnabled() || !Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.ANUS, true))
-						&& (!Main.game.getPlayer().hasVagina() || !Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.VAGINA, true))) {
-					return new Response("Nervously leave",
-							"Vicky needs to be able to access your "
-								+ (Main.game.isAnalContentEnabled()?"anus":"")
-								+ (Main.game.getPlayer().hasVagina()?(Main.game.isAnalContentEnabled()?" or ":"")+"vagina":"")+"!",
-							null);
-					
-				} else {
-					return new ResponseSex("Nervously leave", "Vicky is far too intimidating for you... Turn around and try to escape from her gaze. [style.boldBad(You get the feeling that this will result in non-consensual sex...)]",
-							Util.newArrayListOfValues(
-									Fetish.FETISH_SUBMISSIVE,
-									Fetish.FETISH_NON_CON_SUB), null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
-							false, false,
-							new SMVickyOverDesk(
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vicky.class), SexSlotDesk.BETWEEN_LEGS)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT))) {
-								@Override
-								public SexPace getStartingSexPaceModifier(GameCharacter character) {
-									if(character.isPlayer()) {
-										return SexPace.SUB_RESISTING;
-									}
-									return null;
-								}
-							},
-							null,
-							null,
-							VICKY_POST_SEX_RAPE,
-							UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "SHOP_WEAPONS_RAPE"));
-				}
-				
 			} else if (index == 0) {
 				return new Response("Leave", "Leave Arcane Arts and head back out into the arcade.", EXTERIOR) {
 					@Override
@@ -211,143 +123,6 @@ public class ArcaneArts {
 			} else {
 				return null;
 			}
-		}
-	};
-	
-	public static final DialogueNode ARTHURS_PACKAGE = new DialogueNode("Arcane Arts", "-", true, true) {
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "ARTHURS_PACKAGE");
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			if (index == 1) {
-				if(Main.game.getPlayer().getMoney()>=100) {
-					return new Response("Pay ("+UtilText.formatAsMoney(100, "span")+")", "Pay Vicky 100 flames.", ARTHURS_PACKAGE_BOUGHT) {
-						@Override
-						public void effects() {
-							Main.game.getDialogueFlags().setFlag(DialogueFlagValue.arthursPackageObtained, true);
-							Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addItem(Main.game.getItemGen().generateItem(ItemType.ARTHURS_PACKAGE), false, true));
-							Main.game.getPlayer().incrementMoney(-100);
-						}
-					};
-				} else {
-					return new Response("Pay ("+UtilText.formatAsMoneyUncoloured(100, "span")+")", "You don't have enough money to pay the fee!", null);	
-				}
-				
-			} else if (index == 2) {
-				if((!Main.game.isAnalContentEnabled() || !Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.ANUS, true))
-						&& (!Main.game.getPlayer().hasVagina() || !Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.VAGINA, true))) {
-					return new Response("Offer body",
-							"Vicky needs to be able to access your "
-								+ (Main.game.isAnalContentEnabled()?"anus":"")
-								+ (Main.game.getPlayer().hasVagina()?(Main.game.isAnalContentEnabled()?" or ":"")+"vagina":"")+"!",
-							null);
-					
-				} else {
-					return new ResponseSex("Offer body", "Let Vicky use your body as payment for the fee.",
-							Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE), null, CorruptionLevel.TWO_HORNY, null, null, null,
-							true, false,
-							new SMVickyOverDesk(
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vicky.class), SexSlotDesk.BETWEEN_LEGS)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT))),
-							null,
-							null,
-							VICKY_POST_SEX_PACKAGE,
-							UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "ARTHURS_PACKAGE_SEX"));
-					
-				}
-				
-			} else if (index == 3 && Main.getProperties().hasValue(PropertyValue.nonConContent)) {
-				if((!Main.game.isAnalContentEnabled() || !Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.ANUS, true))
-						&& (!Main.game.getPlayer().hasVagina() || !Main.game.getPlayer().isAbleToAccessCoverableArea(CoverableArea.VAGINA, true))) {
-					return new Response("Weakly refuse",
-							"Vicky needs to be able to access your "
-								+ (Main.game.isAnalContentEnabled()?"anus":"")
-								+ (Main.game.getPlayer().hasVagina()?(Main.game.isAnalContentEnabled()?" or ":"")+"vagina":"")+"!",
-							null);
-					
-				} else {
-					return new ResponseSex(
-							"Weakly refuse",
-							"You can't bring yourself to say no to such an intimidating person... Try to wriggle free and leave..."
-									+ "<br/>[style.boldBad(You get the feeling that this will result in non-consensual sex...)]",
-							Util.newArrayListOfValues(
-									Fetish.FETISH_SUBMISSIVE,
-									Fetish.FETISH_NON_CON_SUB),
-							null, CorruptionLevel.FOUR_LUSTFUL, null, null, null,
-							false, false,
-							new SMVickyOverDesk(
-									Util.newHashMapOfValues(new Value<>(Main.game.getNpc(Vicky.class), SexSlotDesk.BETWEEN_LEGS)),
-									Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotDesk.OVER_DESK_ON_FRONT))) {
-								@Override
-								public SexPace getStartingSexPaceModifier(GameCharacter character) {
-									if(character.isPlayer()) {
-										return SexPace.SUB_RESISTING;
-									}
-									return null;
-								}
-							},
-							null,
-							null,
-							VICKY_POST_SEX_RAPE_PACKAGE,
-							UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "ARTHURS_PACKAGE_RAPE"));
-				}
-				
-			} else if (index == 0) {
-				return new Response("Leave", "Leave Arcane Arts and head back out into the arcade.", EXTERIOR) {
-					@Override
-					public void effects() {
-						Main.game.getDialogueFlags().setFlag(DialogueFlagValue.vickyIntroduced, true);
-						Main.game.getTextEndStringBuilder().append(UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "ARTHURS_PACKAGE_LEAVE"));
-					}
-				};
-				
-			} else {
-				return null;
-			}
-		}
-	};
-	
-	public static final DialogueNode ARTHURS_PACKAGE_BOUGHT = new DialogueNode("Arcane Arts", "-", true, true) {
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "ARTHURS_PACKAGE_BOUGHT");
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_WEAPONS.getResponse(responseTab, index);
-		}
-	};
-	
-	
-	public static final DialogueNode VICKY_POST_SEX_PACKAGE = new DialogueNode("Arcane Arts", "-", true) {
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_POST_SEX_PACKAGE");
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_WEAPONS.getResponse(responseTab, index);
-		}
-	};
-	
-	public static final DialogueNode VICKY_POST_SEX_RAPE_PACKAGE = new DialogueNode("Arcane Arts", "-", true) {
-
-		@Override
-		public String getContent() {
-			return UtilText.parseFromXMLFile("places/dominion/shoppingArcade/arcaneArts", "VICKY_POST_SEX_RAPE_PACKAGE");
-		}
-		
-		@Override
-		public Response getResponse(int responseTab, int index) {
-			return SHOP_WEAPONS.getResponse(responseTab, index);
 		}
 	};
 	

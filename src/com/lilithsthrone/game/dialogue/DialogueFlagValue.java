@@ -154,8 +154,6 @@ public class DialogueFlagValue {
 	public static AbstractDialogueFlagValue readBook4 = new AbstractDialogueFlagValue();
 	public static AbstractDialogueFlagValue readBookSlavery = new AbstractDialogueFlagValue();
 	
-	public static AbstractDialogueFlagValue arthursPackageObtained = new AbstractDialogueFlagValue();
-	
 	public static AbstractDialogueFlagValue givenLilayaPresent1 = new AbstractDialogueFlagValue();
 	public static AbstractDialogueFlagValue givenLilayaPresent2 = new AbstractDialogueFlagValue();
 	public static AbstractDialogueFlagValue givenLilayaPresent3 = new AbstractDialogueFlagValue();

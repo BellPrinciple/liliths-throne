@@ -1,13 +1,18 @@
-package com.lilithsthrone.game.sex.managers.dominion;
+package com.lilithsthrone.hypnowatch;
 
 import java.util.List;
 import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.npc.dominion.Vicky;
+import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.managers.SexManagerDefault;
 import com.lilithsthrone.game.sex.positions.SexPosition;
-import com.lilithsthrone.game.sex.positions.slots.SexSlot;
 import com.lilithsthrone.utils.Util;
+
+import static com.lilithsthrone.game.sex.positions.slots.SexSlotDesk.BETWEEN_LEGS;
+import static com.lilithsthrone.game.sex.positions.slots.SexSlotDesk.OVER_DESK_ON_FRONT;
+import static com.lilithsthrone.main.Main.game;
 
 /**
  * @since 0.1.97
@@ -16,10 +21,18 @@ import com.lilithsthrone.utils.Util;
  */
 public class SMVickyOverDesk extends SexManagerDefault {
 
-	public SMVickyOverDesk(Map<GameCharacter, SexSlot> dominants, Map<GameCharacter, SexSlot> submissives) {
+	private final boolean isNoncon;
+
+	public SMVickyOverDesk(boolean noncon) {
 		super(SexPosition.OVER_DESK,
-				dominants,
-				submissives);
+			Map.of(game.getNpc(Vicky.class),BETWEEN_LEGS),
+			Map.of(game.getPlayer(),OVER_DESK_ON_FRONT));
+		isNoncon = noncon;
+	}
+
+	@Override
+	public SexPace getStartingSexPaceModifier(GameCharacter character) {
+		return isNoncon && character.isPlayer() ? SexPace.SUB_RESISTING : null;
 	}
 	
 	@Override

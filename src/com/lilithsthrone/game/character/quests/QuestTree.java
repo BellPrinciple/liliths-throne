@@ -16,7 +16,6 @@ public class QuestTree {
 	public static TreeNode<Quest> incubationTree = new TreeNode<Quest>(Quest.SIDE_INCUBATION_WAITING);
 	public static TreeNode<Quest> slaveryTree = new TreeNode<Quest>(Quest.SIDE_SLAVER_NEED_RECOMMENDATION);
 	public static TreeNode<Quest> accommodationTree = new TreeNode<Quest>(Quest.SIDE_ACCOMMODATION_NEED_LILAYAS_PERMISSION);
-	public static TreeNode<Quest> hypnoWatchTree = new TreeNode<Quest>(Quest.SIDE_HYPNO_WATCH_VICKY);
 	public static TreeNode<Quest> arcaneLightningTree = new TreeNode<Quest>(Quest.LIGHTNING_SPELL_1_PAYMENT);
 	public static TreeNode<Quest> angryHarpyTree = new TreeNode<Quest>(Quest.HARPY_PACIFICATION_ONE);
 	public static TreeNode<Quest> slimeQueenTree = new TreeNode<Quest>(Quest.SLIME_QUEEN_ONE);
@@ -86,11 +85,6 @@ public class QuestTree {
 		
 		node1 = new TreeNode<Quest>(Quest.SIDE_SLAVER_RECOMMENDATION_OBTAINED);
 		slaveryTree.addChild(node1);
-		node2 = new TreeNode<Quest>(Quest.SIDE_UTIL_COMPLETE);
-		node1.addChild(node2);
-		
-		node1 = new TreeNode<Quest>(Quest.SIDE_HYPNO_WATCH_TEST_SUBJECT);
-		hypnoWatchTree.addChild(node1);
 		node2 = new TreeNode<Quest>(Quest.SIDE_UTIL_COMPLETE);
 		node1.addChild(node2);
 

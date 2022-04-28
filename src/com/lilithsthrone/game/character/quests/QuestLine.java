@@ -76,10 +76,6 @@ public interface QuestLine {
 			QuestType.SIDE,
 			QuestTree.accommodationTree),
 
-	SIDE_HYPNO_WATCH("Arthur's Experiment", "You helped Arthur to complete his research into an orientation-changing Hypno-Watch, which is now in your possession!",
-			QuestType.SIDE,
-			QuestTree.hypnoWatchTree),
-
 	SIDE_ARCANE_LIGHTNING("Arcane Lightning", "Arthur was able to extract the secrets of arcane lightning from the globe which you gave to him, allowing you to learn two incredibly powerful spells.",
 			QuestType.SIDE,
 			QuestTree.arcaneLightningTree),
@@ -165,7 +161,8 @@ public interface QuestLine {
 	Special SIDE_FIRST_TIME_INCUBATION = Special.SIDE_FIRST_TIME_INCUBATION;
 	Special SIDE_SLAVERY = Special.SIDE_SLAVERY;
 	Special SIDE_ACCOMMODATION = Special.SIDE_ACCOMMODATION;
-	Special SIDE_HYPNO_WATCH = Special.SIDE_HYPNO_WATCH;
+	@Deprecated
+	Special SIDE_HYPNO_WATCH = null;
 	Special SIDE_ARCANE_LIGHTNING = Special.SIDE_ARCANE_LIGHTNING;
 	Special SIDE_HARPY_PACIFICATION = Special.SIDE_HARPY_PACIFICATION;
 	Special SIDE_SLIME_QUEEN = Special.SIDE_SLIME_QUEEN;

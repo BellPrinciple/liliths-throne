@@ -54,7 +54,6 @@ import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
-import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.AbstractCoreItem;
@@ -653,14 +652,6 @@ public class Vicky extends NPC {
 
 	public Map<AbstractClothing, Integer> getClothingForSale() {
 		return clothingForSale;
-	}
-
-	@Override
-	public void endSex() {
-		if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.arthursPackageObtained)) {
-			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.arthursPackageObtained, true);
-			Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addItem(Main.game.getItemGen().generateItem(ItemType.ARTHURS_PACKAGE), false, true));
-		}
 	}
 	
 	// Sex:

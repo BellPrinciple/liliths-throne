@@ -600,45 +600,6 @@ public interface Quest {
 	
 	// Other:
 	
-	SIDE_HYPNO_WATCH_VICKY(QuestType.SIDE, 1, 10) {
-		@Override
-		public String getName() {
-			return "Order at Arcane Arts";
-		}
-
-		@Override
-		public String getDescription() {
-			return "Arthur informed you that he was instructed by Zaranix to find an arcane method of changing a person's sexual orientation."
-					+ " While he reassured you that he had no intention of ever using such an item himself, Arthur did express an interest in completing his research,"
-						+ " and asked you to fetch a special order from the store 'Arcane Arts' in the Shopping Arcade.";
-		}
-
-		@Override
-		public String getCompletedDescription() {
-			return "You retrieved the package from Arcane Arts, and brought it back to Arthur.";
-		}
-	},
-	
-	SIDE_HYPNO_WATCH_TEST_SUBJECT(QuestType.SIDE, 1, 10) {
-		@Override
-		public String getName() {
-			return "Test subject";
-		}
-
-		@Override
-		public String getDescription() {
-			return "After Lilaya followed Arthur's instructions to enchant the watch, she asked if it would be possible to test it on you...";
-//					+ " You could either offer yourself, or, if you own any slaves, offer one of those to Arthur instead.";
-		}
-
-		@Override
-		public String getCompletedDescription() {
-			return "The Hypno-Watch appeared to work, although Lilaya stopped the test before it had a permanent effect."
-					+ " She warned that it will have a strong corruptive effect upon the mind of the whoever is targeted, and disenchanted it for good measure, before handing it over to you.";
-		}
-	},
-	
-	
 	LIGHTNING_SPELL_1_PAYMENT(QuestType.SIDE, 1, 10) {
 		@Override
 		public String getName() {
@@ -1904,8 +1865,6 @@ public interface Quest {
 	Special SIDE_SLAVER_NEED_RECOMMENDATION = Special.SIDE_SLAVER_NEED_RECOMMENDATION;
 	Special SIDE_SLAVER_RECOMMENDATION_OBTAINED = Special.SIDE_SLAVER_RECOMMENDATION_OBTAINED;
 	Special SIDE_ACCOMMODATION_NEED_LILAYAS_PERMISSION = Special.SIDE_ACCOMMODATION_NEED_LILAYAS_PERMISSION;
-	Special SIDE_HYPNO_WATCH_VICKY = Special.SIDE_HYPNO_WATCH_VICKY;
-	Special SIDE_HYPNO_WATCH_TEST_SUBJECT = Special.SIDE_HYPNO_WATCH_TEST_SUBJECT;
 	Special LIGHTNING_SPELL_1_PAYMENT = Special.LIGHTNING_SPELL_1_PAYMENT;
 	Special LIGHTNING_SPELL_2_WAITING = Special.LIGHTNING_SPELL_2_WAITING;
 	Special HARPY_PACIFICATION_ONE = Special.HARPY_PACIFICATION_ONE;
