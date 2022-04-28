@@ -46,6 +46,8 @@ module com.lilithsthrone {
 	exports com.lilithsthrone.game.dialogue.npcDialogue.unique;
 	exports com.lilithsthrone.game.dialogue.places;
 	exports com.lilithsthrone.game.dialogue.places.dominion;
+	exports com.lilithsthrone.game.dialogue.places.dominion.lilayashome;
+	exports com.lilithsthrone.game.dialogue.places.dominion.shoppingArcade;
 	exports com.lilithsthrone.game.dialogue.places.fields;
 	exports com.lilithsthrone.game.dialogue.places.submission;
 	exports com.lilithsthrone.game.dialogue.places.submission.gamblingDen;
