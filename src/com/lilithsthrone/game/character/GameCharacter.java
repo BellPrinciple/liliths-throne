@@ -3726,39 +3726,13 @@ public abstract class GameCharacter implements XMLSaving {
 	public Colour getSpeechGlowColour() {
 		return null;
 	}
-	
+
+	/**
+	 * @return
+	 * Nonnull hexadecimal string describing a text color.
+	 */
 	public String getSpeechColour() {
-		if(speechColour!=null) {
-			return speechColour;
-		}
-		if(this.isPlayer()) {
-			switch(Femininity.valueOf(getFemininityValue())) {
-				case ANDROGYNOUS:
-					return PresetColour.ANDROGYNOUS.toWebHexString();
-				case FEMININE:
-					return PresetColour.FEMININE.toWebHexString();
-				case FEMININE_STRONG:
-					return PresetColour.FEMININE_PLUS.toWebHexString();
-				case MASCULINE:
-					return PresetColour.MASCULINE.toWebHexString();
-				case MASCULINE_STRONG:
-					return PresetColour.MASCULINE_PLUS.toWebHexString();
-			}
-		} else {
-			switch(Femininity.valueOf(getFemininityValue())) {
-				case ANDROGYNOUS:
-					return PresetColour.ANDROGYNOUS_NPC.toWebHexString();
-				case FEMININE:
-					return PresetColour.FEMININE_NPC.toWebHexString();
-				case FEMININE_STRONG:
-					return PresetColour.FEMININE_PLUS_NPC.toWebHexString();
-				case MASCULINE:
-					return PresetColour.MASCULINE_NPC.toWebHexString();
-				case MASCULINE_STRONG:
-					return PresetColour.MASCULINE_PLUS_NPC.toWebHexString();
-			}
-		}
-		return null;
+		return speechColour!=null ? speechColour : (isPlayer() ? getFemininity().getColour() : getFemininity().getSpeechColour()).toWebHexString();
 	}
 	
 	public void setSpeechColour(String speechColour) {

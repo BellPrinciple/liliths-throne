@@ -209,7 +209,6 @@ import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
  */
 public class UtilText {
 
-	private static String modifiedSentence;
 	public static StringBuilder nodeContentSB = new StringBuilder(4096);
 	private static StringBuilder descriptionSB = new StringBuilder();
 	private static List<ParserTag> parserTags;
@@ -440,10 +439,6 @@ public class UtilText {
 		return parseSpeech(text, Main.game.getPlayer());
 	}
 
-	private static String getGlowStyle(Colour colour) {
-		return colour==null?"":"text-shadow: 0px 0px 4px "+colour.getShadesRgbaFormat(0.75f)[1]+";";
-	}
-	
 	private static Boolean isPlayer(String target, GameCharacter character) {
 		return target.startsWith("npc") && character.isPlayer();
 	}
@@ -452,14 +447,14 @@ public class UtilText {
 		return parseSpeech(text, target, includePersonalityEffects, includeExtraEffects, true);
 	}
 	public static String parseSpeech(String text, GameCharacter target, boolean includePersonalityEffects, boolean includeExtraEffects, boolean canBeMuted) {
-		modifiedSentence = text.trim();
+		text = text.trim();
 		
-		String[] splitOnConditional = modifiedSentence.split("#THEN");
+		String[] splitOnConditional = text.split("#THEN");
 		
-		modifiedSentence = UtilText.parse(parsingCharactersForSpeech, splitOnConditional[splitOnConditional.length-1]);
+		text = UtilText.parse(parsingCharactersForSpeech, splitOnConditional[splitOnConditional.length-1]);
 		
 		if(target.hasPersonalityTrait(PersonalityTrait.MUTE) && canBeMuted) {
-			modifiedSentence = Util.replaceWithMute(modifiedSentence, Main.game.isInSex() && Main.sex.getAllParticipants().contains(target));
+			text = Util.replaceWithMute(text, Main.game.isInSex() && Main.sex.getAllParticipants().contains(target));
 			
 		} else if(includeExtraEffects
 				&& !parserTags.contains(ParserTag.SEX_ALLOW_MUFFLED_SPEECH)
@@ -467,36 +462,36 @@ public class UtilText {
 				&& Main.sex.getAllParticipants().contains(target)
 				&& target.isSpeechMuffled()) {
 			if(Main.sex.isOngoingActionsBlockingSpeech(target)) {
-				modifiedSentence = Util.replaceWithMuffle(modifiedSentence, 2);
+				text = Util.replaceWithMuffle(text, 2);
 			}
 			
 		} else {
 			if(includePersonalityEffects) {
 				if(target.hasFetish(Fetish.FETISH_BIMBO)) {
 					if(target.isFeminine()) {
-						modifiedSentence = Util.addBimbo(modifiedSentence, 6);
+						text = Util.addBimbo(text, 6);
 					} else {
-						modifiedSentence = Util.addBro(modifiedSentence, 6);
+						text = Util.addBro(text, 6);
 					}
 				}
 				
 				if(target.hasPersonalityTrait(PersonalityTrait.SLOVENLY)) {
-					modifiedSentence = Util.applySlovenlySpeech(modifiedSentence);
+					text = Util.applySlovenlySpeech(text);
 				}
 			}
 			
 			if(includeExtraEffects) {
 				if(target.getAlcoholLevel().getSlurredSpeechFrequency()>0) {
-					modifiedSentence = Util.addDrunkSlur(modifiedSentence, target.getAlcoholLevel().getSlurredSpeechFrequency());
+					text = Util.addDrunkSlur(text, target.getAlcoholLevel().getSlurredSpeechFrequency());
 				}
 				
 				// Apply speech effects:
 				if(target.isSpeechMuffled()) {
-					modifiedSentence = Util.addMuffle(modifiedSentence, 5);
+					text = Util.addMuffle(text, 5);
 					
 				} else if(Main.game.isInSex() && Main.sex.getAllParticipants().contains(target)) {
 					if(Main.sex.isCharacterEngagedInOngoingAction(target)) {
-						modifiedSentence = Util.addSexSounds(modifiedSentence, 6);
+						text = Util.addSexSounds(text, 6);
 					}
 					
 				}
@@ -504,35 +499,26 @@ public class UtilText {
 
 			if(includePersonalityEffects) {
 				if(target.getLipSize().isImpedesSpeech() || target.hasPersonalityTrait(PersonalityTrait.LISP)) {
-					modifiedSentence = Util.applyLisp(modifiedSentence);
+					text = Util.applyLisp(text);
 				}
 	
 				if(target.hasPersonalityTrait(PersonalityTrait.STUTTER)) {
-					modifiedSentence = Util.addStutter(modifiedSentence, 4);
+					text = Util.addStutter(text, 4);
 				}
 			}
 			
 			if(splitOnConditional.length>1) {
-				modifiedSentence = splitOnConditional[0]+"#THEN"+modifiedSentence;
+				text = splitOnConditional[0]+"#THEN"+text;
 			}
 		}
 		
 		Colour glow = target.getSpeechGlowColour();
-		if (target.getSpeechColour() != null) {
-			return "<span class='speech' style='color:" + target.getSpeechColour() + ";"+getGlowStyle(glow)+"'>"
-						+ modifiedSentence
-					+ "</span>";
-
-		} else {
-			if (Femininity.valueOf(target.getFemininityValue()) == Femininity.MASCULINE || Femininity.valueOf(target.getFemininityValue()) == Femininity.MASCULINE_STRONG) {
-				return "<span class='speech' style='color:" + PresetColour.MASCULINE_NPC.toWebHexString() + ";"+getGlowStyle(glow)+"'>" + modifiedSentence + "</span>";
-			} else if (Femininity.valueOf(target.getFemininityValue()) == Femininity.ANDROGYNOUS) {
-				return "<span class='speech' style='color:" + PresetColour.ANDROGYNOUS_NPC.toWebHexString() + ";"+getGlowStyle(glow)+"'>" + modifiedSentence + "</span>";
-			} else {
-				return "<span class='speech' style='color:" + PresetColour.FEMININE_NPC.toWebHexString() + ";"+getGlowStyle(glow)+"'>" + modifiedSentence + "</span>";
-			}
-		}
-	
+		return "<span class='speech' style='color:"
+		+ target.getSpeechColour()
+		+ (glow == null ? "" : ";text-shadow: 0px 0px 4px " + glow.getShadesRgbaFormat(0.75f)[1])
+		+";'>"
+		+ text
+		+ "</span>";
 	}
 	
 	public static String parseSpeech(String text, GameCharacter target) {
@@ -560,14 +546,13 @@ public class UtilText {
 	}
 
 	public static String parseNPCSpeech(String text, Femininity femininity, boolean bimbo, boolean stutter) {
-		modifiedSentence = text;
 		if (bimbo) {
-			modifiedSentence = Util.addBimbo(modifiedSentence, 6);
+			text = Util.addBimbo(text, 6);
 		}
 		if (stutter) {
-			modifiedSentence = Util.addStutter(modifiedSentence, 4);
+			text = Util.addStutter(text, 4);
 		}
-		return "<span class='speech' style='color:" + femininity.getSpeechColour().toWebHexString() + ";'>" + modifiedSentence + "</span>";
+		return "<span class='speech' style='color:" + femininity.getSpeechColour().toWebHexString() + ";'>" + text + "</span>";
 	}
 	
 	public static String getDisabledResponse(String label) {
