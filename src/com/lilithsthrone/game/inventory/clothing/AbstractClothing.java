@@ -1257,196 +1257,229 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	 * @return A description of this clothing being equipped.
 	 */
 	public String onEquipApplyEffects(GameCharacter clothingOwner, GameCharacter clothingEquipper, boolean rough) {
-		StringBuilder sb = new StringBuilder(); 
-		
-		if(!enchantmentKnown) {
+		var sb = MarkupWriter.string();
+
+		if(!enchantmentKnown)
 			this.setEnchantmentKnown(clothingOwner, true);
 
-			sb.append(getClothingType().equipText(clothingOwner, clothingEquipper, this.getSlotEquippedTo(), rough, this, true));
-			
-			if(this.isBadEnchantment()) {
-				sb.append("<p style='text-align:center;'>"
-								+ "<b style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Negative Enchantment Revealed:</b><br/>"+getDisplayName(true));
-				
-			} else {
-				sb.append("<p style='text-align:center;'>"
-								+ "<b style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Enchantment Revealed:</b><br/>"+getDisplayName(true));
+		sb.text(getClothingType().equipText(clothingOwner, clothingEquipper, this.getSlotEquippedTo(), rough, this, true));
+		if(!enchantmentKnown) {
+			try(var p = sb.center()) {
+				if(isBadEnchantment())
+					p.badBold("Negative Enchantment Revealed:");
+				else
+					p.goodBold("Enchantment Revealed:");
+				p.br().text(getDisplayName(true));
+				for(var att : getAttributeModifiers().entrySet())
+					p.br().text(att.getKey().getFormattedValue(att.getValue()));
 			}
-
-			for(var att : getAttributeModifiers().entrySet()) {
-				sb.append("<br/>"+att.getKey().getFormattedValue(att.getValue()));
-			}
-			
-			sb.append("</p>");
-			
-		} else {
-			sb.append(getClothingType().equipText(clothingOwner, clothingEquipper, this.getSlotEquippedTo(), rough, this, true));
 		}
-		
+
 		if(this.getItemTags().contains(ItemTag.DILDO_SELF)) {
 			int length = this.getClothingType().getPenetrationSelfLength();
 			PenisLength penisLength = PenisLength.getPenisLengthFromInt(length);
 			PenetrationGirth girth = PenetrationGirth.getGirthFromInt(this.getClothingType().getPenetrationSelfGirth());
 			float diameter = Penis.getGenericDiameter(length, girth);
-			
-			boolean lubed = true;
+
+			String part;
+			boolean lubed;
 			boolean plural = this.getClothingType().isPlural();
 			
-			sb.append("<p style='text-align:center;'>");
-			
-			String formattedName = "<span style='color:"+girth.getColour().toWebHexString()+";'>"+girth.getName()+"</span>,"
-					+ " <span style='color:"+penisLength.getColour().toWebHexString()+";'>[style.sizeShort("+length+")]</span> "+this.getClothingType().getName();
-			
-			if(this.getSlotEquippedTo()==InventorySlot.VAGINA) {
-				if(clothingOwner.hasHymen()) {
-					sb.append(UtilText.parse(clothingOwner,
-							"As the "+formattedName+" "+(plural?"push":"pushes")+" inside of [npc.namePos] [npc.pussy], "+(plural?"they":"it")+" [style.colourTerrible("+(plural?"tear":"tears")+" [npc.her] hymen)]!"));
-					
-					if(clothingOwner.hasFetish(Fetish.FETISH_PURE_VIRGIN)) {
-						sb.append("<br/>");
-						if(clothingOwner.isVaginaVirgin()) {
-							sb.append(UtilText.parse(clothingOwner,
-									"Although [npc.her] pussy can no longer be considered completely 'pure', [npc.nameIsFull] still considered to be a virgin, as [npc.sheHasFull] never been penetrated by another person before..."));
-						} else {
-							sb.append(UtilText.parse(clothingOwner,
-									"Having already had sex with someone in the past, the loss of [npc.namePos] hymen causes [npc.herHim] to now consider [npc.herself] a [style.colourTerrible(broken virgin)]!"));
-						}
-					}
-				}
-				
-				lubed = clothingOwner.getLust() >= clothingOwner.getVaginaWetness().getArousalNeededToGetAssWet();
-				//Size:
-				if(Main.game.isPenetrationLimitationsEnabled()) {
+			try(var p = sb.center()) {
+				String formattedName = MarkupWriter.string()
+				.span(girth.getColour(),girth.getName())
+				.text(", ")
+				.span(penisLength.getColour(),Units.size(length))
+				.text(" ",getClothingType().getName())
+				.build();
+				if(this.getSlotEquippedTo()==InventorySlot.VAGINA) {
+					part = clothingOwner.getVaginaName(false);
 					if(clothingOwner.hasHymen()) {
-						sb.append("<br/>");
-					}
-					if(length<=clothingOwner.getVaginaMaximumPenetrationDepthComfortable() || clothingOwner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-						sb.append(UtilText.parse(clothingOwner,
-								"The full length of the "+formattedName+" [style.colourMinorGood(comfortably fits)] inside of [npc.namePos] [npc.pussy]!"));
-						
-					} else {
-						if(clothingOwner.hasFetish(Fetish.FETISH_MASOCHIST)) {
-							sb.append(UtilText.parse(clothingOwner,
-									"The "+formattedName+" is [style.colourBad(too long)] to fit comfortably inside of [npc.namePos] [npc.pussy], but as [npc.sheIs] a masochist, [style.colourMinorGood([npc.she] [npc.do]n't mind the discomfort)]!"));
-						} else {
-							sb.append(UtilText.parse(clothingOwner,
-									"The "+formattedName+" is [style.colourBad(too long)] to fit comfortably inside of [npc.namePos] [npc.pussy], and is causing [npc.herHim] [style.colourBad(discomfort)]!"));
+						p.text("As the ",formattedName,plural?" push":" pushes"," inside of ",name(clothingOwner)," ",part,plural?", they ":", it ")
+						.terrible(plural?"tear ":"tears ",their(clothingOwner)," hymen")
+						.text("!");
+						if(clothingOwner.hasFetish(Fetish.FETISH_PURE_VIRGIN)) {
+							p.br();
+							if(clothingOwner.isVaginaVirgin())
+								p.text("Although ",their(clothingOwner)," pussy can no longer be considered completely 'pure', ",
+										name(clothingOwner)," ",are(clothingOwner)," still considered to be a virgin, as ",
+										they(clothingOwner)," ",have(clothingOwner)," never been penetrated by another person before...");
+							else
+								p.text("Having already had sex with someone in the past, the loss of ",name(clothingOwner),
+										"'s hymen causes ",their(clothingOwner)," to now consider ",themself(clothingOwner)," a ")
+								.terrible("broken virgin")
+								.text("!");
 						}
 					}
-				}
-				// Girth:
-				if(Capacity.isPenetrationDiameterTooBig(clothingOwner.getVaginaElasticity(), clothingOwner.getVaginaStretchedCapacity(), diameter, lubed)) {
+					lubed = clothingOwner.getLust() >= clothingOwner.getVaginaWetness().getArousalNeededToGetAssWet();
+					//Size:
 					if(Main.game.isPenetrationLimitationsEnabled()) {
-						sb.append("<br/>");
-					}
-					sb.append(UtilText.parse(clothingOwner,
-							(plural?"Their":"Its")+" <span style='color:"+girth.getColour().toWebHexString()+";'>[style.sizeShort("+diameter+")]</span>"
-									+ " diameter is [style.colourMinorBad(too wide)] for [npc.namePos] [npc.pussy], and is [style.colourBad(stretching)] [npc.herHim] out!"));
-				}
-				
-				clothingOwner.setHymen(false);
-				
-			} else if(this.getSlotEquippedTo()==InventorySlot.ANUS) {
-				lubed = clothingOwner.getLust() >= clothingOwner.getAssWetness().getArousalNeededToGetAssWet();
-				//Size:
-				if(Main.game.isPenetrationLimitationsEnabled()) {
-					if(length<=clothingOwner.getAssMaximumPenetrationDepthComfortable() || clothingOwner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-						sb.append(UtilText.parse(clothingOwner,
-								"The full length of the "+formattedName+" [style.colourMinorGood(comfortably fits)] inside of [npc.namePos] [npc.asshole]!"));
-						
-					} else {
-						if(clothingOwner.hasFetish(Fetish.FETISH_MASOCHIST)) {
-							sb.append(UtilText.parse(clothingOwner,
-									"The "+formattedName+" is [style.colourBad(too long)] to fit comfortably inside of [npc.namePos] [npc.asshole], but as [npc.sheIs] a masochist, [style.colourGood([npc.she] [npc.do]n't mind the discomfort)]!"));
+						if(clothingOwner.hasHymen()) {
+							p.br();
+						}
+						if(length<=clothingOwner.getVaginaMaximumPenetrationDepthComfortable() || clothingOwner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
+							p.text("The full length of the ",formattedName," ")
+							.goodMinor("comfortably fits")
+							.text(" inside of ",name(clothingOwner)," ",part,"!");
 						} else {
-							sb.append(UtilText.parse(clothingOwner,
-									"The "+formattedName+" is [style.colourBad(too long)] to fit comfortably inside of [npc.namePos] [npc.asshole], and is causing [npc.herHim] [style.colourBad(discomfort)]!"));
+							p.text("The ",formattedName," is ")
+							.bad("too long")
+							.text(" to fit comfortable inside of ",name(clothingOwner),"'s ",part);
+							if(clothingOwner.hasFetish(Fetish.FETISH_MASOCHIST))
+								p.text(", but as ",theyRe(clothingOwner)," a masochist, ")
+								.goodMinor(theyDo(clothingOwner),"n't mind the discomfort");
+							else
+								p.text(", and is causing ",them(clothingOwner)," ")
+								.bad("discomfort");
+							p.text("!");
 						}
 					}
-				}
-				// Girth:
-				if(Capacity.isPenetrationDiameterTooBig(clothingOwner.getAssElasticity(), clothingOwner.getAssStretchedCapacity(), diameter, lubed)) {
-					if(Main.game.isPenetrationLimitationsEnabled()) {
-						sb.append("<br/>");
+					// Girth:
+					if(Capacity.isPenetrationDiameterTooBig(clothingOwner.getVaginaElasticity(), clothingOwner.getVaginaStretchedCapacity(), diameter, lubed)) {
+						if(Main.game.isPenetrationLimitationsEnabled()) {
+							p.br();
+						}
+						p.text(plural?"Their ":"Its ")
+						.span(girth.getColour(),Units.size(diameter))
+						.text(" diameter is ")
+						.badMinor("too wide")
+						.text(" for ",name(clothingOwner),"'s ",part,", and is ")
+						.bad("stretching")
+						.text(" ",their(clothingOwner)," out!");
 					}
-					sb.append(UtilText.parse(clothingOwner,
-							(plural?"Their":"Its")+" <span style='color:"+girth.getColour().toWebHexString()+";'>[style.sizeShort("+diameter+")]</span>"
-									+ " diameter is [style.colourMinorBad(too wide)] for [npc.namePos] [npc.asshole], and is [style.colourBad(stretching)] [npc.herHim] out!"));
+					clothingOwner.setHymen(false);
 				}
-				
-			} else if(this.getSlotEquippedTo()==InventorySlot.NIPPLE) {
-				lubed = clothingOwner.getBreastRawStoredMilkValue()>0;
-				//Size:
-				if(Main.game.isPenetrationLimitationsEnabled()) {
-					if(length<=clothingOwner.getNippleMaximumPenetrationDepthComfortable() || clothingOwner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-						sb.append(UtilText.parse(clothingOwner,
-								"The full length of the "+formattedName+" [style.colourMinorGood(comfortably fits)] inside of [npc.namePos] [npc.nipple(true)]!"));
-						
-					} else {
-						if(clothingOwner.hasFetish(Fetish.FETISH_MASOCHIST)) {
-							sb.append(UtilText.parse(clothingOwner,
-									"The "+formattedName+" is [style.colourBad(too long)] to fit comfortably inside of [npc.namePos] [npc.nipple(true)], but as [npc.sheIs] a masochist, [style.colourGood([npc.she] [npc.do]n't mind the discomfort)]!"));
+				else if(this.getSlotEquippedTo()==InventorySlot.ANUS) {
+					part = clothingOwner.getAssName();
+					lubed = clothingOwner.getLust() >= clothingOwner.getAssWetness().getArousalNeededToGetAssWet();
+					//Size:
+					if(Main.game.isPenetrationLimitationsEnabled()) {
+						if(length<=clothingOwner.getAssMaximumPenetrationDepthComfortable() || clothingOwner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
+							p.text("The full length of the ",formattedName," ")
+							.goodMinor("comfortably fits")
+							.text(" inside of ",name(clothingOwner),"'s ",part,"!");
 						} else {
-							sb.append(UtilText.parse(clothingOwner,
-									"The "+formattedName+" is [style.colourBad(too long)] to fit comfortably inside of [npc.namePos] [npc.nipple(true)], and is causing [npc.herHim] [style.colourBad(discomfort)]!"));
+							p.text("The ",formattedName," is ")
+							.bad("too long");
+							if(clothingOwner.hasFetish(Fetish.FETISH_MASOCHIST)) {
+								p.text(", but as ",theyRe(clothingOwner)," a masochist, ")
+								.good(theyDo(clothingOwner),"n't mind the discomfort")
+								.text("!");
+							} else {
+								p.text(" to fit comfortably inside of ",name(clothingOwner),"'s ",part,", and is causing ",them(clothingOwner)," ")
+								.bad("discomfort")
+								.text("!");
+							}
 						}
 					}
-				}
-				// Girth:
-				if(Capacity.isPenetrationDiameterTooBig(clothingOwner.getNippleElasticity(), clothingOwner.getNippleStretchedCapacity(), diameter, lubed)) {
-					if(Main.game.isPenetrationLimitationsEnabled()) {
-						sb.append("<br/>");
+					// Girth:
+					if(Capacity.isPenetrationDiameterTooBig(clothingOwner.getAssElasticity(), clothingOwner.getAssStretchedCapacity(), diameter, lubed)) {
+						if(Main.game.isPenetrationLimitationsEnabled()) {
+							p.br();
+						}
+						p.text(plural?"Their ":"Its ")
+						.span(girth.getColour(),Units.size(diameter))
+						.text(" diameter is ")
+						.badMinor("too wide")
+						.text(" for ",name(clothingOwner),"'s ",part,", and is ")
+						.bad("stretching")
+						.text(" ",their(clothingOwner)," out!");
 					}
-					sb.append(UtilText.parse(clothingOwner,
-							(plural?"Their":"Its")+" <span style='color:"+girth.getColour().toWebHexString()+";'>[style.sizeShort("+diameter+")]</span>"
-									+ " diameter is [style.colourMinorBad(too wide)] for [npc.namePos] [npc.nipple(true)], and is [style.colourBad(stretching)] [npc.herHim] out!"));
 				}
-				
-			} else if(this.getSlotEquippedTo()==InventorySlot.MOUTH) {
-				lubed = true;
-				//Size:
-				if(Main.game.isPenetrationLimitationsEnabled()) {
-					if(length<=clothingOwner.getFaceMaximumPenetrationDepthComfortable() || clothingOwner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-						sb.append(UtilText.parse(clothingOwner,
-								"The full length of the "+formattedName+" [style.colourMinorGood(comfortably fits)] down [npc.namePos] throat!"));
-						
-					} else {
-						if(clothingOwner.hasFetish(Fetish.FETISH_MASOCHIST)) {
-							sb.append(UtilText.parse(clothingOwner,
-									"The "+formattedName+" is [style.colourBad(too long)] to fit comfortably down [npc.namePos] throat, but as [npc.sheIs] a masochist, [style.colourGood([npc.she] [npc.do]n't mind the discomfort)]!"));
+				else if(this.getSlotEquippedTo()==InventorySlot.NIPPLE) {
+					part = clothingOwner.getNippleNameSingular();
+					lubed = clothingOwner.getBreastRawStoredMilkValue()>0;
+					//Size:
+					if(Main.game.isPenetrationLimitationsEnabled()) {
+						if(length<=clothingOwner.getNippleMaximumPenetrationDepthComfortable() || clothingOwner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
+							p.text("The full length of the ",formattedName," ")
+							.span(PresetColour.GENERIC_MINOR_GOOD,"comfortably fits")
+							.text(" inside of ",name(clothingOwner),"'s ",part,"!");
 						} else {
-							sb.append(UtilText.parse(clothingOwner,
-									"The "+formattedName+" is [style.colourBad(too long)] to fit comfortably down [npc.namePos] throat, and is causing [npc.herHim] [style.colourBad(discomfort)]!"));
+							p.text("The ",formattedName," is ")
+							.span(PresetColour.GENERIC_BAD,"too long")
+							.text(" to fit comfortably inside of ",name(clothingOwner),"'s ",part);
+							if(clothingOwner.hasFetish(Fetish.FETISH_MASOCHIST))
+								p.text(", but as ",theyRe(clothingOwner)," a masochist, ")
+								.span(PresetColour.GENERIC_GOOD,theyDo(clothingOwner),"n't mind the discomfort")
+								.text("!");
+							else
+								p.text(", and is causing ",them(clothingOwner)," ")
+								.span(PresetColour.GENERIC_BAD,"discomfort")
+								.text("!");
 						}
 					}
-				}
-				// Girth:
-				if(Capacity.isPenetrationDiameterTooBig(clothingOwner.getFaceElasticity(), clothingOwner.getFaceStretchedCapacity(), diameter, lubed)) {
-					if(Main.game.isPenetrationLimitationsEnabled()) {
-						sb.append("<br/>");
+					// Girth:
+					if(Capacity.isPenetrationDiameterTooBig(clothingOwner.getNippleElasticity(), clothingOwner.getNippleStretchedCapacity(), diameter, lubed)) {
+						if(Main.game.isPenetrationLimitationsEnabled()) {
+							p.br();
+						}
+						p.text(plural?"Their ":"Its ")
+						.span(girth.getColour(),Units.size(diameter))
+						.text(" diameter is ")
+						.span(PresetColour.GENERIC_MINOR_BAD,"too wide")
+						.text(" for ",name(clothingOwner),"'s ",part,", and is ")
+						.span(PresetColour.GENERIC_BAD,"stretching")
+						.text(" ",them(clothingOwner)," out!");
 					}
-					sb.append(UtilText.parse(clothingOwner,
-							(plural?"Their":"Its")+" <span style='color:"+girth.getColour().toWebHexString()+";'>[style.sizeShort("+diameter+")]</span>"
-									+ " diameter is [style.colourMinorBad(too wide)] for [npc.namePos] throat, and is [style.colourBad(stretching)] [npc.herHim] out!"));
+				}
+				else if(this.getSlotEquippedTo()==InventorySlot.MOUTH) {
+					lubed = true;
+					//Size:
+					if(Main.game.isPenetrationLimitationsEnabled()) {
+						if(length<=clothingOwner.getFaceMaximumPenetrationDepthComfortable() || clothingOwner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
+							p.text("The full length of the ",formattedName," ")
+							.goodMinor("comfortably fits")
+							.text(" down ",name(clothingOwner),"'s throat!");
+						} else {
+							p.text("The ",formattedName," is ")
+							.bad("too long")
+							.text(" to fit comfortably down ",name(clothingOwner),"'s throat, ");
+							if(clothingOwner.hasFetish(Fetish.FETISH_MASOCHIST)) {
+								p.text("but as ",theyRe(clothingOwner)," a masochist, ")
+								.good(theyDo(clothingOwner),"n't mind the discomfort")
+								.text("!");
+							} else {
+								p.text("and is causing ",them(clothingOwner)," ")
+								.bad("discomfort")
+								.text("!");
+							}
+						}
+					}
+					// Girth:
+					if(Capacity.isPenetrationDiameterTooBig(clothingOwner.getFaceElasticity(), clothingOwner.getFaceStretchedCapacity(), diameter, lubed)) {
+						if(Main.game.isPenetrationLimitationsEnabled()) {
+							p.br();
+						}
+						p.text(plural?"Their ":"Its ")
+						.span(girth.getColour(),Units.size(diameter))
+						.text(" diameter is ")
+						.badMinor("too wide")
+						.text(" for ",name(clothingOwner),"'s throat, and is ")
+						.bad("stretching")
+						.text(" ",them(clothingOwner)," out!");
+					}
 				}
 			}
-			
-			sb.append("</p>");
 		}
 		if(this.getItemTags().contains(ItemTag.DILDO_OTHER)) {
 			int length = this.getClothingType().getPenetrationOtherLength();
 			PenisLength penisLength = PenisLength.getPenisLengthFromInt(length);
 			PenetrationGirth girth = PenetrationGirth.getGirthFromInt(this.getClothingType().getPenetrationOtherGirth());
-			sb.append("<p style='text-align:center;'>");
-				sb.append(UtilText.parse(clothingOwner,
-						"[npc.NameIsFull] now able to use [npc.her] <span style='color:"+girth.getColour().toWebHexString()+";'>"+girth.getName()+"</span>,"
-								+ " <span style='color:"+penisLength.getColour().toWebHexString()+";'>[style.sizeShort("+length+")]</span> "+this.getClothingType().getName()+" as a [style.colourSex(penetrative object during sex)]!"));
-			sb.append("</p>");
+			try(var p = sb.center()) {
+				p.text(Name(clothingOwner)," ",are(clothingOwner)," now able to use ",their(clothingOwner)," ")
+				.span(girth.getColour(),girth.getName())
+				.text(" ")
+				.span(penisLength.getColour(),Units.size(length))
+				.text(" ",getClothingType().getName()," as a ")
+				.span(PresetColour.GENERIC_SEX,"penetrative object during sex")
+				.text("!");
+			}
 		}
 		
 		//TODO append orifice text
 		
-		return sb.toString();
+		return sb.build();
 	}
 
 	/**
