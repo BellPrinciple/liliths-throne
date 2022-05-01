@@ -1256,9 +1256,9 @@ public class CharacterInventory implements XMLSaving {
 			equipTextSB.append("[style.colourBad(" + UtilText.parse(characterClothingOwner, block.getDescription()) + ")]");
 			return false;
 		}
-		
-		if (!newClothing.isAbleToBeEquipped(characterClothingOwner, slotToEquipInto).getKey()) {
-			equipTextSB.append("[style.colourBad(" + newClothing.isAbleToBeEquipped(characterClothingOwner, slotToEquipInto).getValue() + ")]");
+
+		if(!newClothing.isCanBeEquipped(characterClothingOwner,slotToEquipInto)) {
+			equipTextSB.append("[style.colourBad(" + newClothing.reasonUnequippable(characterClothingOwner,slotToEquipInto) + ")]");
 			return false;
 		}
 

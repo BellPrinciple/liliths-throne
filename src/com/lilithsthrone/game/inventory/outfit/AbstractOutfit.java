@@ -526,7 +526,7 @@ public abstract class AbstractOutfit {
 						if(!anyConditionalsFound) {
 							break;
 						}
-						if(defaultClothingExample.isAbleToBeEquipped(character, ct.getEquipSlots().get(0)).getKey()) {
+						if(defaultClothingExample.isCanBeEquipped(character, ct.getEquipSlots().get(0))) {
 							ctList.add(ct);
 						}
 					}
@@ -549,7 +549,7 @@ public abstract class AbstractOutfit {
 							.map( e -> {
 								var ct = ClothingType.getClothingTypeFromId(e.getTextContent());
 								AbstractClothing defaultClothingExample = Main.game.getItemGen().generateClothing(ct);
-								if(!defaultClothingExample.isAbleToBeEquipped(character, ct.getEquipSlots().get(0)).getKey()) {
+								if(!defaultClothingExample.isCanBeEquipped(character, ct.getEquipSlots().get(0))) {
 									return null;
 								}
 								return ct;
