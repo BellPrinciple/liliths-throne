@@ -1701,366 +1701,332 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 			tagsToBeDescribed = new HashSet<>(this.getItemTags(slotToBeEquippedTo));
 			tagsToBeDescribed.removeIf((it) -> universalTags.contains(it) && it!=ItemTag.DILDO_SELF);
 		}
-		
+
+		var target = equippedToCharacter==null ? player : equippedToCharacter;
+		var discomfort = equippedToCharacter==null
+		? null
+		: equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST)
+		? MarkupWriter.buffer().goodMinor("masochistic pleasure")
+		: MarkupWriter.buffer().bad("discomfort");
 		for(ItemTag tag : tagsToBeDescribed) {
-			if(tag.getClothingTooltipAdditions()!=null) {
-				for(String description : tag.getClothingTooltipAdditions()) {
-					if(tag==ItemTag.DILDO_SELF) {
-						int length = clothingType.getPenetrationSelfLength();
-						float diameter = Penis.getGenericDiameter(
-								clothingType.getPenetrationSelfLength(),
-								PenetrationGirth.getGirthFromInt(clothingType.getPenetrationSelfGirth()),
-								clothingType.getPenetrationSelfModifiers());
-						
-						PenisLength pl = PenisLength.getPenisLengthFromInt(length);
-						Capacity cap = Capacity.getCapacityFromValue(diameter);
-						
-						if(slotToBeEquippedTo==null) {
-							descriptionsList.add(MarkupWriter.string()
-								.text(description,": Length: ")
-								.span(pl.getColour(),Units.size(length))
-								.text(" Diameter: ")
-								.span(cap.getColour(),Units.size(diameter))
-								.build());
-						}
-						
-						boolean lubed = false;
-						if(slotToBeEquippedTo!=null) {
-							if(equippedToCharacter==null) {
-								switch(slotToBeEquippedTo) {
-									case ANUS:
-										if(Main.game.isPenetrationLimitationsEnabled() && !player.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(length>player.getAssMaximumPenetrationDepthComfortable()) {
-												var b = MarkupWriter.string();
-												if(verbose)
-													b.text(theyAre)
-													.bad("too long")
-													.text(" to be able to fit comfortably into your ass!");
-												else
-													b.terrible("Too long")
-													.text(" for comfortable insertion");
-												descriptionsList.add(b.build());
-											}
-										}
-										lubed = player.getLust() >= player.getAssWetness().getArousalNeededToGetAssWet();
-										if(Capacity.isPenetrationDiameterTooBig(player.getAssElasticity(), player.getAssStretchedCapacity(), diameter, lubed)) {
-											var b = MarkupWriter.string();
-											if(verbose)
-												b.text(theyAre)
-												.bad("too thick")
-												.text(" for your ",Capacity.getCapacityFromValue(player.getAssStretchedCapacity()).getDescriptor()," asshole, and would stretch it out if inserted!");
-											else
-												b.bad("Too thick")
-												.text(", will cause ")
-												.bad("stretching");
-											descriptionsList.add(b.build());
-										}
-										break;
-									case MOUTH:
-										if(Main.game.isPenetrationLimitationsEnabled() && !player.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(length>player.getFaceMaximumPenetrationDepthComfortable()) {
-												var b = MarkupWriter.string();
-												if(verbose)
-													b.text(theyAre)
-													.bad("too long")
-													.text(" to be able to fit comfortably down your throat!");
-												else
-													b.terrible("Too long")
-													.text(" for comfortable insertion");
-												descriptionsList.add(b.build());
-											}
-										}
-										lubed = true;
-										if(Capacity.isPenetrationDiameterTooBig(player.getFaceElasticity(), player.getFaceStretchedCapacity(), diameter, lubed)) {
-											var b = MarkupWriter.string();
-											if(verbose)
-												b.text(theyAre)
-												.bad("too thick")
-												.text(" for your throat, and would stretch it out if inserted!");
-											else
-												b.bad("Too thick")
-												.text(", will cause ")
-												.bad("stretching");
-											descriptionsList.add(b.build());
-										}
-										break;
-									case NIPPLE:
-										if(Main.game.isPenetrationLimitationsEnabled() && !player.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(length>player.getNippleMaximumPenetrationDepthComfortable()) {
-												var b = MarkupWriter.string();
-												if(verbose)
-													b.text(theyAre)
-													.bad("too long")
-													.text(" to be able to fit comfortably into your fuckable nipples!");
-												else
-													b.terrible("Too long")
-													.text(" for comfortable insertion");
-												descriptionsList.add(b.build());
-											}
-										}
-										lubed = player.getBreastRawStoredMilkValue()>0;
-										if(Capacity.isPenetrationDiameterTooBig(player.getNippleElasticity(), player.getNippleStretchedCapacity(), diameter, lubed)) {
-											var b = MarkupWriter.string();
-											if(verbose)
-												b.text(theyAre)
-												.bad("too thick")
-												.text(" for your ",Capacity.getCapacityFromValue(player.getNippleStretchedCapacity()).getDescriptor()," nipples, and would stretch them out if inserted!");
-											else
-												b.bad("Too thick")
-												.text(", will cause ")
-												.bad("stretching");
-											descriptionsList.add(b.build());
-										}
-										break;
-									case VAGINA:
-										{	var b = MarkupWriter.string();
-											if(verbose)
-												b.text(plural?"They will ":"It will ")
-												.terrible("tear the hymen")
-												.text(" of any pussy ",plural?"they are":"it is"," inserted into!");
-											else
-												b.terrible("Tears hymen")
-												.text(" of virgin pussies");
-											descriptionsList.add(b.build());
-										}
-										if(Main.game.isPenetrationLimitationsEnabled() && !player.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(player.hasVagina() && length>player.getVaginaMaximumPenetrationDepthComfortable()) {
-												var b = MarkupWriter.string();
-												if(verbose)
-													b.text(theyAre)
-													.bad("too long")
-													.text(" to be able to fit comfortably into your pussy!");
-												else
-													b.terrible("Too long")
-													.text(" for comfortable insertion");
-												descriptionsList.add(b.build());
-											}
-										}
-										lubed = player.getLust() >= player.getVaginaWetness().getArousalNeededToGetAssWet();
-										if(Capacity.isPenetrationDiameterTooBig(player.getVaginaElasticity(), player.getVaginaStretchedCapacity(), diameter, lubed)) {
-											var b = MarkupWriter.string();
-											if(verbose)
-												b.text(theyAre)
-												.bad("too thick")
-												.text(" for your ",Capacity.getCapacityFromValue(player.getVaginaStretchedCapacity()).getDescriptor()," pussy, and would stretch it out if inserted!");
-											else
-												b.bad("Too thick")
-												.text(", will cause ")
-												.bad("stretching");
-											descriptionsList.add(b.build());
-										}
-										break;
-									default:
-										break;
-								}
-								
-							} else {
-								var discomfort = equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST)
-								? MarkupWriter.buffer().goodMinor("masochistic pleasure")
-								: MarkupWriter.buffer().bad("discomfort");
-								switch(slotToBeEquippedTo) {
-									case ANUS:
-										if(Main.game.isPenetrationLimitationsEnabled() && !equippedToCharacter.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(length>equippedToCharacter.getAssMaximumPenetrationDepthComfortable()) {
-												var b = MarkupWriter.string();
-												if(verbose)
-													b.text(theyAre)
-													.bad("too deep")
-													.text(" in ",name(equippedToCharacter),"'s ass, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ",discomfort,"!");
-												else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
-													b.terrible("Too deep")
-													.text(", giving ")
-													.goodMinor("masochistic pleasure");
-												else
-													b.terrible("Too deep")
-													.text(", causing ")
-													.bad("discomfort");
-												descriptionsList.add(b.build());
-											}
-										}
-										lubed = equippedToCharacter.getLust() >= equippedToCharacter.getAssWetness().getArousalNeededToGetAssWet();
-										if(Capacity.isPenetrationDiameterTooBig(equippedToCharacter.getAssElasticity(), equippedToCharacter.getAssStretchedCapacity(), diameter, lubed)) {
-											var b = MarkupWriter.string();
-											if(verbose)
-												b.text(theyAre)
-												.bad("too thick")
-												.text(" for ",name(equippedToCharacter),"'s ",Capacity.getCapacityFromValue(equippedToCharacter.getAssStretchedCapacity()).getDescriptor()," asshole, and ",plural?"are ":"is ")
-												.bad("stretching")
-												.text(" it out!");
-											else
-												b.bad("Too thick")
-												.text(", causing ")
-												.bad("asshole to stretch");
-											descriptionsList.add(b.build());
-										}
-										break;
-									case MOUTH:
-										if(Main.game.isPenetrationLimitationsEnabled() && !equippedToCharacter.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(length>equippedToCharacter.getFaceMaximumPenetrationDepthComfortable()) {
-												var b = MarkupWriter.string();
-												if(verbose)
-													b.text(theyAre)
-													.bad("too deep")
-													.text(" down ",name(equippedToCharacter),"'s throat, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ",discomfort,"!");
-												else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
-													b.terrible("Too deep")
-													.text(", giving ")
-													.goodMinor("masochistic pleasure");
-												else
-													b.terrible("Too deep")
-													.text(", causing ")
-													.bad("discomfort");
-												descriptionsList.add(b.build());
-											}
-										}
-										lubed = true;
-										if(Capacity.isPenetrationDiameterTooBig(equippedToCharacter.getFaceElasticity(), equippedToCharacter.getFaceStretchedCapacity(), diameter, lubed)) {
-											var b = MarkupWriter.string();
-											if(verbose)
-												b.text(theyAre)
-												.bad("too thick")
-												.text(" for ",name(equippedToCharacter),"'s throat, and ",plural?"are ":"is ")
-												.bad("stretching")
-												.text(" it out!");
-											else
-												b.bad("Too thick")
-												.text(", causing ")
-												.bad("throat to stretch");
-											descriptionsList.add(b.build());
-										}
-										break;
-									case NIPPLE:
-										if(Main.game.isPenetrationLimitationsEnabled() && !equippedToCharacter.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(length>equippedToCharacter.getNippleMaximumPenetrationDepthComfortable()) {
-												var b = MarkupWriter.string();
-												if(verbose)
-													b.text(theyAre)
-													.bad("too deep")
-													.text(" in ",name(equippedToCharacter),"'s fuckable nipples, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ",discomfort,"!");
-												else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
-													b.terrible("Too deep")
-													.text(", giving ")
-													.goodMinor("masochistic pleasure");
-												else
-													b.terrible("Too deep")
-													.text(", causing ")
-													.bad("discomfort");
-												descriptionsList.add(b.build());
-											}
-										}
-										lubed = equippedToCharacter.getBreastRawStoredMilkValue()>0;
-										if(Capacity.isPenetrationDiameterTooBig(equippedToCharacter.getNippleElasticity(), equippedToCharacter.getNippleStretchedCapacity(), diameter, lubed)) {
-											var b = MarkupWriter.string();
-											if(verbose)
-												b.text(theyAre)
-												.bad("too thick")
-												.text(" for ",name(equippedToCharacter),"'s ",Capacity.getCapacityFromValue(equippedToCharacter.getNippleStretchedCapacity()).getDescriptor()," nipples, and ",plural?"are ":"is ")
-												.bad("stretching")
-												.text(" them out!");
-											else
-												b.bad("Too thick")
-												.text(", causing ")
-												.bad("nipples to stretch");
-											descriptionsList.add(b.build());
-										}
-										break;
-									case VAGINA:
-										if(Main.game.isPenetrationLimitationsEnabled() && !equippedToCharacter.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(equippedToCharacter.hasVagina() && length>equippedToCharacter.getVaginaMaximumPenetrationDepthComfortable()) {
-												var b = MarkupWriter.string();
-												if(verbose)
-													b.text(theyAre)
-													.bad("too deep")
-													.text(" in ",name(equippedToCharacter),"'s pussy, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ",discomfort,"!");
-												else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
-													b.terrible("Too deep")
-													.text(", giving ")
-													.goodMinor("masochistic pleasure");
-												else
-													b.terrible("Too deep")
-													.text(", causing ")
-													.bad("discomfort");
-												descriptionsList.add(b.build());
-											}
-										}
-										lubed = equippedToCharacter.getLust() >= equippedToCharacter.getVaginaWetness().getArousalNeededToGetAssWet();
-										if(Capacity.isPenetrationDiameterTooBig(equippedToCharacter.getVaginaElasticity(), equippedToCharacter.getVaginaStretchedCapacity(), diameter, lubed)) {
-											var b = MarkupWriter.string();
-											if(verbose)
-												b.text(theyAre)
-												.bad("too thick")
-												.text(" for ",name(equippedToCharacter),"'s ",Capacity.getCapacityFromValue(equippedToCharacter.getVaginaStretchedCapacity()).getDescriptor()," pussy, and ",plural?"are ":"is ")
-												.bad("stretching")
-												.text(" it out!");
-											else
-												b.bad("Too thick")
-												.text(", causing ")
-												.bad("pussy to stretch");
-											descriptionsList.add(b.build());
-										}
-										break;
-									default:
-										break;
-								}
-							}
-						}
-						
-					} else if(tag==ItemTag.DILDO_OTHER) {
-						int length = clothingType.getPenetrationOtherLength();
-						float diameter = Penis.getGenericDiameter(
-								clothingType.getPenetrationOtherLength(),
-								PenetrationGirth.getGirthFromInt(clothingType.getPenetrationOtherGirth()),
-								clothingType.getPenetrationOtherModifiers());
-								
-						PenisLength pl = PenisLength.getPenisLengthFromInt(length);
-						Capacity cap = Capacity.getCapacityFromValue(diameter);
-						
+			if(tag.getClothingTooltipAdditions()==null)
+				continue;
+			for(String description : tag.getClothingTooltipAdditions()) {
+				if(tag==ItemTag.DILDO_SELF) {
+					int length = clothingType.getPenetrationSelfLength();
+					float diameter = Penis.getGenericDiameter(
+						clothingType.getPenetrationSelfLength(),
+						PenetrationGirth.getGirthFromInt(clothingType.getPenetrationSelfGirth()),
+						clothingType.getPenetrationSelfModifiers());
+					PenisLength pl = PenisLength.getPenisLengthFromInt(length);
+					Capacity cap = Capacity.getCapacityFromValue(diameter);
+					if(slotToBeEquippedTo==null) {
 						descriptionsList.add(MarkupWriter.string()
 							.text(description,": Length: ")
 							.span(pl.getColour(),Units.size(length))
 							.text(" Diameter: ")
 							.span(cap.getColour(),Units.size(diameter))
 							.build());
-						
-					} else if(tag==ItemTag.ONAHOLE_SELF) {//TODO requires testing
-						OrificeElasticity elasticity = OrificeElasticity.getElasticityFromInt(clothingType.getOrificeSelfElasticity());
-						OrificePlasticity plasticity = OrificePlasticity.getElasticityFromInt(clothingType.getOrificeSelfPlasticity());
-						Wetness wetness = Wetness.valueOf(clothingType.getOrificeSelfWetness());
-						descriptionsList.add(MarkupWriter.string()
-							.text(description,
-								": Capacity: ",Units.size(clothingType.getPenetrationOtherLength()),
-								" Depth: ",Units.size(clothingType.getOrificeSelfDepth()))
-							.build());
-						descriptionsList.add(MarkupWriter.string()
-							.text("Elasticity: ")
-							.span(elasticity.getColour(),elasticity.getDescriptor())
-							.text(" Plasticity: ")
-							.span(plasticity.getColour(),plasticity.getDescriptor())
-							.text(" Wetness: ")
-							.span(wetness.getColour(),wetness.getDescriptor())
-							.build());
-						
-					} else if(tag==ItemTag.ONAHOLE_OTHER) {//TODO requires testing
-						OrificeElasticity elasticity = OrificeElasticity.getElasticityFromInt(clothingType.getOrificeOtherElasticity());
-						OrificePlasticity plasticity = OrificePlasticity.getElasticityFromInt(clothingType.getOrificeOtherPlasticity());
-						Wetness wetness = Wetness.valueOf(clothingType.getOrificeOtherWetness());
-						descriptionsList.add(MarkupWriter.string()
-							.text(description,
-								": Capacity: ",Units.size(clothingType.getPenetrationOtherLength()),
-								" Depth: ",Units.size(clothingType.getOrificeOtherDepth()))
-							.build());
-						descriptionsList.add(MarkupWriter.string()
-							.text("Elasticity: ")
-							.span(elasticity.getColour(),elasticity.getDescriptor())
-							.text(" Plasticity: ")
-							.span(plasticity.getColour(),plasticity.getDescriptor())
-							.text(" Wetness: ")
-							.span(wetness.getColour(),wetness.getDescriptor())
-							.build());
-						
-					} else {
-						descriptionsList.add(description);
+						continue;
 					}
+					switch(slotToBeEquippedTo) {
+					case ANUS:
+						if(Main.game.isPenetrationLimitationsEnabled()
+								&& !target.hasFetish(Fetish.FETISH_SIZE_QUEEN)
+								&& length > target.getAssMaximumPenetrationDepthComfortable()) {
+							var b = MarkupWriter.string();
+							if(equippedToCharacter==null) {
+								if(verbose)
+									b.text(theyAre)
+									.bad("too long")
+									.text(" to be able to fit comfortably into your ass!");
+								else
+									b.terrible("Too long")
+									.text(" for comfortable insertion");
+							}
+							else if(verbose)
+								b.text(theyAre)
+								.bad("too deep")
+								.text(" in ",name(equippedToCharacter),"'s ass, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ",discomfort,"!");
+							else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
+								b.terrible("Too deep")
+								.text(", giving ")
+								.goodMinor("masochistic pleasure");
+							else
+								b.terrible("Too deep")
+								.text(", causing ")
+								.bad("discomfort");
+							descriptionsList.add(b.build());
+						}
+						if(Capacity.isPenetrationDiameterTooBig(
+								target.getAssElasticity(),
+								target.getAssStretchedCapacity(),
+								diameter,
+								target.getLust() >= target.getAssWetness().getArousalNeededToGetAssWet())) {
+							var b = MarkupWriter.string();
+							if(equippedToCharacter==null) {
+								if(verbose)
+									b.text(theyAre)
+									.bad("too thick")
+									.text(" for your ",Capacity.getCapacityFromValue(player.getAssStretchedCapacity()).getDescriptor()," asshole, and would stretch it out if inserted!");
+								else
+									b.bad("Too thick")
+									.text(", will cause ")
+									.bad("stretching");
+							}
+							else if(verbose)
+								b.text(theyAre)
+								.bad("too thick")
+								.text(" for ",name(equippedToCharacter),"'s ",Capacity.getCapacityFromValue(equippedToCharacter.getAssStretchedCapacity()).getDescriptor()," asshole, and ",plural?"are ":"is ")
+								.bad("stretching")
+								.text(" it out!");
+							else
+								b.bad("Too thick")
+								.text(", causing ")
+								.bad("asshole to stretch");
+							descriptionsList.add(b.build());
+						}
+						break;
+					case MOUTH:
+						if(Main.game.isPenetrationLimitationsEnabled()
+								&& !target.hasFetish(Fetish.FETISH_SIZE_QUEEN)
+								&& length>target.getFaceMaximumPenetrationDepthComfortable()) {
+							var b = MarkupWriter.string();
+							if(equippedToCharacter==null) {
+								if(verbose)
+									b.text(theyAre)
+									.bad("too long")
+									.text(" to be able to fit comfortably down your throat!");
+								else
+									b.terrible("Too long")
+									.text(" for comfortable insertion");
+							}
+							else if(verbose)
+								b.text(theyAre)
+								.bad("too deep")
+								.text(" down ",name(equippedToCharacter),"'s throat, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ")
+								.append(discomfort)
+								.text("!");
+							else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
+								b.terrible("Too deep")
+								.text(", giving ")
+								.goodMinor("masochistic pleasure");
+							else
+								b.terrible("Too deep")
+								.text(", causing ")
+								.bad("discomfort");
+							descriptionsList.add(b.build());
+						}
+						if(Capacity.isPenetrationDiameterTooBig(
+								target.getFaceElasticity(),
+								target.getFaceStretchedCapacity(),
+								diameter,
+								true)) {
+							var b = MarkupWriter.string();
+							if(equippedToCharacter==null) {
+								if(verbose)
+									b.text(theyAre)
+									.bad("too thick")
+									.text(" for your throat, and would stretch it out if inserted!");
+								else
+									b.bad("Too thick")
+									.text(", will cause ")
+									.bad("stretching");
+							}
+							else if(verbose)
+								b.text(theyAre)
+								.bad("too thick")
+								.text(" for ",name(equippedToCharacter),"'s throat, and ",plural?"are ":"is ")
+								.bad("stretching")
+								.text(" it out!");
+							else
+								b.bad("Too thick")
+								.text(", causing ")
+								.bad("throat to stretch");
+							descriptionsList.add(b.build());
+						}
+						break;
+					case NIPPLE:
+						if(Main.game.isPenetrationLimitationsEnabled()
+								&& !target.hasFetish(Fetish.FETISH_SIZE_QUEEN)
+								&& length > target.getNippleMaximumPenetrationDepthComfortable()) {
+							var b = MarkupWriter.string();
+							if(equippedToCharacter==null) {
+								if(verbose)
+									b.text(theyAre)
+									.bad("too long")
+									.text(" to be able to fit comfortably into your fuckable nipples!");
+								else
+									b.terrible("Too long")
+									.text(" for comfortable insertion");
+							}
+							else if(verbose)
+								b.text(theyAre)
+								.bad("too deep")
+								.text(" in ",name(equippedToCharacter),"'s fuckable nipples, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ")
+								.append(discomfort)
+								.text("!");
+							else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
+								b.terrible("Too deep")
+								.text(", giving ")
+								.goodMinor("masochistic pleasure");
+							else
+								b.terrible("Too deep")
+								.text(", causing ")
+								.bad("discomfort");
+							descriptionsList.add(b.build());
+						}
+						if(Capacity.isPenetrationDiameterTooBig(
+								target.getNippleElasticity(),
+								target.getNippleStretchedCapacity(),
+								diameter,
+								0 < target.getBreastRawStoredMilkValue())) {
+							var b = MarkupWriter.string();
+							if(equippedToCharacter==null) {
+								if(verbose)
+									b.text(theyAre)
+									.bad("too thick")
+									.text(" for your ",Capacity.getCapacityFromValue(player.getNippleStretchedCapacity()).getDescriptor()," nipples, and would stretch them out if inserted!");
+								else
+									b.bad("Too thick")
+									.text(", will cause ")
+									.bad("stretching");
+							}
+							else if(verbose)
+								b.text(theyAre)
+								.bad("too thick")
+								.text(" for ",name(equippedToCharacter),"'s ",Capacity.getCapacityFromValue(equippedToCharacter.getNippleStretchedCapacity()).getDescriptor()," nipples, and ",plural?"are ":"is ")
+								.bad("stretching")
+								.text(" them out!");
+							else
+								b.bad("Too thick")
+								.text(", causing ")
+								.bad("nipples to stretch");
+							descriptionsList.add(b.build());
+						}
+						break;
+					case VAGINA:
+						if(equippedToCharacter==null) {
+							var b = MarkupWriter.string();
+							if(verbose)
+								b.text(plural?"They will ":"It will ")
+								.terrible("tear the hymen")
+								.text(" of any pussy ",plural?"they are":"it is"," inserted into!");
+							else
+								b.terrible("Tears hymen")
+								.text(" of virgin pussies");
+							descriptionsList.add(b.build());
+						}
+						if(Main.game.isPenetrationLimitationsEnabled()
+								&& !target.hasFetish(Fetish.FETISH_SIZE_QUEEN)
+								&& target.hasVagina()
+								&& length > target.getVaginaMaximumPenetrationDepthComfortable()) {
+							var b = MarkupWriter.string();
+							if(equippedToCharacter==null) {
+								if(verbose)
+									b.text(theyAre)
+									.bad("too long")
+									.text(" to be able to fit comfortably into your pussy!");
+								else
+									b.terrible("Too long")
+									.text(" for comfortable insertion");
+							}
+							else if(verbose)
+								b.text(theyAre)
+								.bad("too deep")
+								.text(" in ",name(equippedToCharacter),"'s pussy, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ")
+								.append(discomfort)
+								.text("!");
+							else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
+								b.terrible("Too deep")
+								.text(", giving ")
+								.goodMinor("masochistic pleasure");
+							else
+								b.terrible("Too deep")
+								.text(", causing ")
+								.bad("discomfort");
+							descriptionsList.add(b.build());
+						}
+						if(Capacity.isPenetrationDiameterTooBig(
+								player.getVaginaElasticity(),
+								player.getVaginaStretchedCapacity(),
+								diameter,
+								player.getLust() >= player.getVaginaWetness().getArousalNeededToGetAssWet())) {
+							var b = MarkupWriter.string();
+							if(equippedToCharacter==null) {
+								if(verbose)
+									b.text(theyAre)
+									.bad("too thick")
+									.text(" for your ",Capacity.getCapacityFromValue(player.getVaginaStretchedCapacity()).getDescriptor()," pussy, and would stretch it out if inserted!");
+								else
+									b.bad("Too thick")
+									.text(", will cause ")
+									.bad("stretching");
+							}
+							else if(verbose)
+								b.text(theyAre)
+								.bad("too thick")
+								.text(" for ",name(equippedToCharacter),"'s ",Capacity.getCapacityFromValue(equippedToCharacter.getVaginaStretchedCapacity()).getDescriptor()," pussy, and ",plural?"are ":"is ")
+								.bad("stretching")
+								.text(" it out!");
+							else
+								b.bad("Too thick")
+								.text(", causing ")
+								.bad("pussy to stretch");
+							descriptionsList.add(b.build());
+						}
+						break;
+					}
+				} else if(tag==ItemTag.DILDO_OTHER) {
+					int length = clothingType.getPenetrationOtherLength();
+					float diameter = Penis.getGenericDiameter(
+							clothingType.getPenetrationOtherLength(),
+							PenetrationGirth.getGirthFromInt(clothingType.getPenetrationOtherGirth()),
+							clothingType.getPenetrationOtherModifiers());
+					PenisLength pl = PenisLength.getPenisLengthFromInt(length);
+					Capacity cap = Capacity.getCapacityFromValue(diameter);
+					descriptionsList.add(MarkupWriter.string()
+						.text(description,": Length: ")
+						.span(pl.getColour(),Units.size(length))
+						.text(" Diameter: ")
+						.span(cap.getColour(),Units.size(diameter))
+						.build());
+				} else if(tag==ItemTag.ONAHOLE_SELF) {//TODO requires testing
+					OrificeElasticity elasticity = OrificeElasticity.getElasticityFromInt(clothingType.getOrificeSelfElasticity());
+					OrificePlasticity plasticity = OrificePlasticity.getElasticityFromInt(clothingType.getOrificeSelfPlasticity());
+					Wetness wetness = Wetness.valueOf(clothingType.getOrificeSelfWetness());
+					descriptionsList.add(MarkupWriter.string()
+						.text(description,
+							": Capacity: ",Units.size(clothingType.getPenetrationOtherLength()),
+							" Depth: ",Units.size(clothingType.getOrificeSelfDepth()))
+						.build());
+					descriptionsList.add(MarkupWriter.string()
+						.text("Elasticity: ")
+						.span(elasticity.getColour(),elasticity.getDescriptor())
+						.text(" Plasticity: ")
+						.span(plasticity.getColour(),plasticity.getDescriptor())
+						.text(" Wetness: ")
+						.span(wetness.getColour(),wetness.getDescriptor())
+						.build());
+				} else if(tag==ItemTag.ONAHOLE_OTHER) {//TODO requires testing
+					OrificeElasticity elasticity = OrificeElasticity.getElasticityFromInt(clothingType.getOrificeOtherElasticity());
+					OrificePlasticity plasticity = OrificePlasticity.getElasticityFromInt(clothingType.getOrificeOtherPlasticity());
+					Wetness wetness = Wetness.valueOf(clothingType.getOrificeOtherWetness());
+					descriptionsList.add(MarkupWriter.string()
+						.text(description,
+							": Capacity: ",Units.size(clothingType.getPenetrationOtherLength()),
+							" Depth: ",Units.size(clothingType.getOrificeOtherDepth()))
+						.build());
+					descriptionsList.add(MarkupWriter.string()
+						.text("Elasticity: ")
+						.span(elasticity.getColour(),elasticity.getDescriptor())
+						.text(" Plasticity: ")
+						.span(plasticity.getColour(),plasticity.getDescriptor())
+						.text(" Wetness: ")
+						.span(wetness.getColour(),wetness.getDescriptor())
+						.build());
+				} else {
+					descriptionsList.add(description);
 				}
 			}
 		}
