@@ -988,7 +988,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		return descriptionSB.toString();
 	}
 
-	public ClothingType getClothingType() {
+	public final ClothingType getClothingType() {
 		return clothingType;
 	}
 
@@ -1508,26 +1508,21 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	private static List<String> incompatibleClothing = new ArrayList<>();
 	
 	public String getDisplacementBlockingDescriptions(GameCharacter equippedToCharacter){
-		descriptionSB = new StringBuilder("<p><b>Displacement types:</b>");
-		for(BlockedParts bp : getBlockedPartsMap(equippedToCharacter, this.getSlotEquippedTo())){
-			descriptionSB.append("<br/><b>"+Util.capitaliseSentence(bp.displacementType.getDescription())+":</b> ");
-			if(bp.displacementType==DisplacementType.REMOVE_OR_EQUIP) {
-				if(equippedToCharacter.isAbleToUnequip(this, false, equippedToCharacter)) {
-					descriptionSB.append("<b style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>Available</b>");
+		var b = MarkupWriter.string();
+		try(var p = new MarkupWriter.Context(b,"p")) {
+			p.open("p").bold("Displacement types:");
+			for(BlockedParts bp : getBlockedPartsMap(equippedToCharacter,getSlotEquippedTo())){
+				p.br().bold(Util.capitaliseSentence(bp.displacementType.getDescription()),":").text(" ");
+				if(bp.displacementType==DisplacementType.REMOVE_OR_EQUIP
+						? equippedToCharacter.isAbleToUnequip(this,false,equippedToCharacter)
+						: equippedToCharacter.isAbleToBeDisplaced(this,bp.displacementType,false,false,equippedToCharacter)) {
+					p.goodBold("Available");
 				} else {
-					descriptionSB.append("<b style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Blocked</b> by "+equippedToCharacter.getBlockingClothing().getName()+"");
-				}
-			} else {
-				if(equippedToCharacter.isAbleToBeDisplaced(this, bp.displacementType, false, false, equippedToCharacter)) {
-					descriptionSB.append("<b style='color:"+PresetColour.GENERIC_GOOD.toWebHexString()+";'>Available</b>");
-				} else {
-					descriptionSB.append("<b style='color:"+PresetColour.GENERIC_BAD.toWebHexString()+";'>Blocked</b> by "+equippedToCharacter.getBlockingClothing().getName()+"");
+					p.badBold("Blocked").text(" by ",equippedToCharacter.getBlockingClothing().getName());
 				}
 			}
 		}
-		descriptionSB.append("</p>");
-		
-		return descriptionSB.toString();
+		return b.build();
 	}
 
 	/**
@@ -1540,23 +1535,29 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	 */
 	public List<String> getExtraDescriptions(GameCharacter equippedToCharacter, InventorySlot slotToBeEquippedTo, boolean verbose) {
 		List<String> descriptionsList = new ArrayList<>();
-		
-		boolean plural = this.getClothingType().isPlural();
-		
+		var player = Main.game.getPlayer();
+		boolean plural = clothingType.isPlural();
+		String theyAre = plural ? "They are " : "It is ";
 		if(slotToBeEquippedTo==null) {
 			if(this.isSealed() && enchantmentKnown) {
-				if(verbose) {
-					descriptionsList.add((plural?"They have":"It has")+" been enchanted so as to [style.boldSealed(seal "+(plural?"themselves":"itself")+")] onto the wearer!");
-				} else {
-					descriptionsList.add("[style.boldSealed(Sealed)]");
-				}
+				var b = MarkupWriter.string();
+				if(verbose)
+					b.text(plural?"They have":"It has"," been enchanted so as to ")
+					.bold(PresetColour.SEALED,"seal ",plural?"themselves":"itself")
+					.text(" onto the wearer!");
+				else
+					b.bold(PresetColour.SEALED,"Sealed");
+				descriptionsList.add(b.build());
 			}
 			if(dirty) {
-				if(verbose) {
-					descriptionsList.add((plural?"They have":"It has")+" been [style.boldDirty(dirtied)] by sexual fluids!");
-				} else {
-					descriptionsList.add("[style.boldDirty(Dirty)]");
-				}
+				var b = MarkupWriter.string();
+				if(verbose)
+					b.text(plural?"They have":"It has"," been ")
+					.bold(PresetColour.DIRTY,"dirtied")
+					.text(" by sexual fluids!");
+				else
+					b.bold(PresetColour.DIRTY,"Dirty");
+				descriptionsList.add(b.build());
 			}
 		}
 
@@ -1566,12 +1567,12 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 			if(slotToBeEquippedTo!=null) {
 				if(!getIncompatibleSlots(null, slotToBeEquippedTo).isEmpty()) {
 					for (InventorySlot invSlot : getIncompatibleSlots(null, slotToBeEquippedTo)) {
-						if(Main.game.getPlayer().getClothingInSlot(invSlot) != null) {
-							incompatibleClothing.add(Main.game.getPlayer().getClothingInSlot(invSlot).getClothingType().getName());
+						if(player.getClothingInSlot(invSlot) != null) {
+							incompatibleClothing.add(player.getClothingInSlot(invSlot).getClothingType().getName());
 						}
 					}
 				}
-				for(AbstractClothing c : Main.game.getPlayer().getClothingCurrentlyEquipped()) {
+				for(AbstractClothing c : player.getClothingCurrentlyEquipped()) {
 					for (InventorySlot invSlot : c.getIncompatibleSlots(null, c.getSlotEquippedTo())) {
 						if(slotToBeEquippedTo == invSlot) {
 							incompatibleClothing.add(c.getClothingType().getName());
@@ -1582,64 +1583,89 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 				List<InventorySlot> incompSlots = getIncompatibleSlots(null, slotToBeEquippedTo);
 				if(!incompSlots.isEmpty()) {
 					if(verbose) {
-						descriptionsList.add((plural?"They [style.boldBad(block":"It [style.boldBad(blocks")+")] the "+Util.inventorySlotsToStringList(incompSlots)+" slot"+(incompSlots.size()==1?"s":"")+"!");
+						descriptionsList.add(MarkupWriter.string()
+							.text(plural?"They ":"It ")
+							.badBold(plural?"block":"blocks")
+							.text(" the ",Util.inventorySlotsToStringList(incompSlots)," slot",incompSlots.size()==1?"s":"","!")
+							.build());
 					} else {
-						for(InventorySlot slot : incompSlots) {
-							descriptionsList.add("[style.boldBad(Blocks " + Util.capitaliseSentence(slot.getName()) + ")]");
-						}
+						for(InventorySlot slot : incompSlots)
+							descriptionsList.add(MarkupWriter.string()
+								.badBold("Blocks ",Util.capitaliseSentence(slot.getName()))
+								.build());
 					}
 				}
 			}
 			if(slotToBeEquippedTo==null) {
-				if(getClothingType().getFemininityMaximum()<Main.game.getPlayer().getFemininityValue() && !Main.game.getPlayer().hasFetish(Fetish.FETISH_CROSS_DRESSER)) {
-					if(verbose) {
-						descriptionsList.add((plural?"They are":"It is")+" [style.boldMasculine(too masculine)] for you to wear without feeling embarrassed!");
-					} else {
-						descriptionsList.add("[style.boldMasculine(Too masculine)]");
-					}
+				if(clothingType.getFemininityMaximum()<player.getFemininityValue() && !player.hasFetish(Fetish.FETISH_CROSS_DRESSER)) {
+					var b = MarkupWriter.string();
+					if(verbose)
+						b.text(theyAre)
+						.span(PresetColour.MASCULINE,"too masculine")
+						.text(" for you to wear without feeling embarrassed!");
+					else
+						b.span(PresetColour.MASCULINE,"Too masculine");
+					descriptionsList.add(b.build());
 				}
-				if(getClothingType().getFemininityMinimum()>Main.game.getPlayer().getFemininityValue() && !Main.game.getPlayer().hasFetish(Fetish.FETISH_CROSS_DRESSER)) {
-					if(verbose) {
-						descriptionsList.add((plural?"They are":"It is")+" [style.boldFeminine(Too feminine)] for you to wear without feeling embarrassed!");
-					} else {
-						descriptionsList.add("[style.boldFeminine(Too feminine)]");
-					}
+				if(clothingType.getFemininityMinimum()>player.getFemininityValue() && !player.hasFetish(Fetish.FETISH_CROSS_DRESSER)) {
+					var b = MarkupWriter.string();
+					if(verbose)
+						b.text(theyAre)
+						.span(PresetColour.FEMININE,"too feminine")
+						.text(" for you to wear without feeling embarrassed!");
+					else
+						b.span(PresetColour.FEMININE,"Too feminine");
+					descriptionsList.add(b.build());
 				}
 				if(!incompatibleClothing.isEmpty()) {
-					if(verbose) {
-						descriptionsList.add((plural?"They are":"It is")+" [style.boldBad(incompatible with)] your "+Util.stringsToStringList(incompatibleClothing, false)+"!");
-					} else {
-						descriptionsList.add("[style.boldBad(Incompatible with:)]");
+					var b = MarkupWriter.string();
+					if(verbose)
+						b.text(theyAre)
+						.badBold("incompatible with")
+						.text(" your ",Util.stringsToStringList(incompatibleClothing, false),"!");
+					else
+						b.badBold("Incompatible with:");
+					descriptionsList.add(b.build());
+					if(!verbose)
 						descriptionsList.addAll(incompatibleClothing);
-					}
 				}
 			}
 
 		} else { // Being worn:
 			if(slotToBeEquippedTo==null) {
-				if(getClothingType().getFemininityMaximum()<equippedToCharacter.getFemininityValue() && !equippedToCharacter.hasFetish(Fetish.FETISH_CROSS_DRESSER)) {
-					if(verbose) {
-						descriptionsList.add(UtilText.parse(equippedToCharacter, (plural?"They are":"It is")+" [style.boldMasculine(too masculine)] for [npc.name] to wear without feeling embarrassed!"));
-					} else {
-						descriptionsList.add("[style.boldMasculine(Too masculine)]");
-					}
+				if(clothingType.getFemininityMaximum()<equippedToCharacter.getFemininityValue() && !equippedToCharacter.hasFetish(Fetish.FETISH_CROSS_DRESSER)) {
+					var b = MarkupWriter.string();
+					if(verbose)
+						b.text(theyAre)
+						.bold(PresetColour.MASCULINE,"too masculine")
+						.text(" for ",name(equippedToCharacter)," to wear without feeling embarrassed!");
+					else
+						b.bold(PresetColour.MASCULINE,"Too masculine");
+					descriptionsList.add(b.build());
 				}
-				if(getClothingType().getFemininityMinimum() > equippedToCharacter.getFemininityValue() && !Main.game.getPlayer().hasFetish(Fetish.FETISH_CROSS_DRESSER)) {
-					if(verbose) {
-						descriptionsList.add(UtilText.parse(equippedToCharacter, (plural?"They are":"It is")+" [style.boldFeminine(too feminine)] for [npc.name] to wear without feeling embarrassed!"));
-					} else {
-						descriptionsList.add("[style.boldFeminine(Too feminine)]");
-					}
+				if(clothingType.getFemininityMinimum() > equippedToCharacter.getFemininityValue() && !player.hasFetish(Fetish.FETISH_CROSS_DRESSER)) {
+					var b = MarkupWriter.string();
+					if(verbose)
+						b.text(theyAre)
+						.bold(PresetColour.FEMININE,"too feminine")
+						.text(" for ",name(equippedToCharacter)," to wear without feeling embarrassed!");
+					else
+						b.bold(PresetColour.FEMININE,"Too feminine");
+					descriptionsList.add(b.build());
 				}
 			}
 			if(slotToBeEquippedTo!=null) {
 				List<InventorySlot> incompSlots = getIncompatibleSlots(equippedToCharacter, slotToBeEquippedTo);
 				if(!incompSlots.isEmpty()) {
 					if(verbose) {
-						descriptionsList.add((plural?"They [style.boldBad(block":"It [style.boldBad(blocks")+")] the "+Util.inventorySlotsToStringList(incompSlots)+" slot"+(incompSlots.size()==1?"s":"")+"!");
+						descriptionsList.add(MarkupWriter.string()
+							.text(plural?"They ":"It ")
+							.badBold(plural?"block":"blocks")
+							.text(" the ",Util.inventorySlotsToStringList(incompSlots)," slot",(incompSlots.size()==1?"s":""),"!")
+							.build());
 					} else {
 						for(InventorySlot slot : incompSlots) {
-							descriptionsList.add("[style.boldBad(Blocks " + Util.capitaliseSentence(slot.getName()) + ")]");
+							descriptionsList.add(MarkupWriter.string().badBold("Blocks ",Util.capitaliseSentence(slot.getName())).build());
 						}
 					}
 				}
@@ -1647,10 +1673,14 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 			if(slotToBeEquippedTo==null) {
 				if(!displacedList.isEmpty()) {
 					if(verbose) {
-						descriptionsList.add((plural?"They have":"It has")+" been [style.boldDisplaced("+Util.displacementTypesToStringList(displacedList)+")]!");
+						descriptionsList.add(MarkupWriter.string()
+							.text(plural?"They have been ":"It has been ")
+							.bold(PresetColour.DISPLACED,Util.displacementTypesToStringList(displacedList))
+							.text("!")
+							.build());
 					} else {
 						for(DisplacementType dt : displacedList) {
-							descriptionsList.add("[style.boldDisplaced(" + Util.capitaliseSentence(dt.getDescriptionPast()) + ")]");
+							descriptionsList.add(MarkupWriter.string().bold(PresetColour.DISPLACED,Util.capitaliseSentence(dt.getDescriptionPast())).build());
 						}
 					}
 				}
@@ -1658,8 +1688,8 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		}
 		
 		Set<ItemTag> universalTags = new HashSet<>(this.getItemTags());
-		for(int i=0; i<this.getClothingType().getEquipSlots().size();i++) {
-			Set<ItemTag> tags = this.getItemTags(this.getClothingType().getEquipSlots().get(i));
+		for(int i=0; i<clothingType.getEquipSlots().size();i++) {
+			Set<ItemTag> tags = this.getItemTags(clothingType.getEquipSlots().get(i));
 			universalTags.removeIf((it) -> !tags.contains(it));
 		}
 		
@@ -1676,105 +1706,148 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 			if(tag.getClothingTooltipAdditions()!=null) {
 				for(String description : tag.getClothingTooltipAdditions()) {
 					if(tag==ItemTag.DILDO_SELF) {
-						int length = this.getClothingType().getPenetrationSelfLength();
+						int length = clothingType.getPenetrationSelfLength();
 						float diameter = Penis.getGenericDiameter(
-								this.getClothingType().getPenetrationSelfLength(),
-								PenetrationGirth.getGirthFromInt(this.getClothingType().getPenetrationSelfGirth()),
-								this.getClothingType().getPenetrationSelfModifiers());
+								clothingType.getPenetrationSelfLength(),
+								PenetrationGirth.getGirthFromInt(clothingType.getPenetrationSelfGirth()),
+								clothingType.getPenetrationSelfModifiers());
 						
 						PenisLength pl = PenisLength.getPenisLengthFromInt(length);
 						Capacity cap = Capacity.getCapacityFromValue(diameter);
 						
 						if(slotToBeEquippedTo==null) {
-							descriptionsList.add(description
-									+ ": Length: <span style='color:"+pl.getColour().toWebHexString()+";'>"+Units.size(length)+"</span>"
-									+ " Diameter: <span style='color:"+cap.getColour().toWebHexString()+";'>"+Units.size(diameter)+"</span>");
+							descriptionsList.add(MarkupWriter.string()
+								.text(description,": Length: ")
+								.span(pl.getColour(),Units.size(length))
+								.text(" Diameter: ")
+								.span(cap.getColour(),Units.size(diameter))
+								.build());
 						}
 						
 						boolean lubed = false;
 						if(slotToBeEquippedTo!=null) {
-							String startString = plural?"They are":"It is";
 							if(equippedToCharacter==null) {
 								switch(slotToBeEquippedTo) {
 									case ANUS:
-										if(Main.game.isPenetrationLimitationsEnabled() && !Main.game.getPlayer().hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(length>Main.game.getPlayer().getAssMaximumPenetrationDepthComfortable()) {
-												if(verbose) {
-													descriptionsList.add(startString+" [style.colourBad(too long)] to be able to fit comfortably into your ass!");
-												} else {
-													descriptionsList.add("[style.colourTerrible(Too long)] for comfortable insertion");
-												}
+										if(Main.game.isPenetrationLimitationsEnabled() && !player.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
+											if(length>player.getAssMaximumPenetrationDepthComfortable()) {
+												var b = MarkupWriter.string();
+												if(verbose)
+													b.text(theyAre)
+													.bad("too long")
+													.text(" to be able to fit comfortably into your ass!");
+												else
+													b.terrible("Too long")
+													.text(" for comfortable insertion");
+												descriptionsList.add(b.build());
 											}
 										}
-										lubed = Main.game.getPlayer().getLust() >= Main.game.getPlayer().getAssWetness().getArousalNeededToGetAssWet();
-										if(Capacity.isPenetrationDiameterTooBig(Main.game.getPlayer().getAssElasticity(), Main.game.getPlayer().getAssStretchedCapacity(), diameter, lubed)) {
-											if(verbose) {
-												descriptionsList.add(startString+" [style.colourBad(too thick)] for your [pc.assCapacity] asshole, and would stretch it out if inserted!");
-											} else {
-												descriptionsList.add("[style.colourBad(Too thick)], will cause [style.colourBad(stretching)]");
-											}
+										lubed = player.getLust() >= player.getAssWetness().getArousalNeededToGetAssWet();
+										if(Capacity.isPenetrationDiameterTooBig(player.getAssElasticity(), player.getAssStretchedCapacity(), diameter, lubed)) {
+											var b = MarkupWriter.string();
+											if(verbose)
+												b.text(theyAre)
+												.bad("too thick")
+												.text(" for your ",Capacity.getCapacityFromValue(player.getAssStretchedCapacity()).getDescriptor()," asshole, and would stretch it out if inserted!");
+											else
+												b.bad("Too thick")
+												.text(", will cause ")
+												.bad("stretching");
+											descriptionsList.add(b.build());
 										}
 										break;
 									case MOUTH:
-										if(Main.game.isPenetrationLimitationsEnabled() && !Main.game.getPlayer().hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(length>Main.game.getPlayer().getFaceMaximumPenetrationDepthComfortable()) {
-												if(verbose) {
-													descriptionsList.add(startString+" [style.colourBad(too long)] to be able to fit comfortably down your throat!");
-												} else {
-													descriptionsList.add("[style.colourTerrible(Too long)] for comfortable insertion");
-												}
+										if(Main.game.isPenetrationLimitationsEnabled() && !player.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
+											if(length>player.getFaceMaximumPenetrationDepthComfortable()) {
+												var b = MarkupWriter.string();
+												if(verbose)
+													b.text(theyAre)
+													.bad("too long")
+													.text(" to be able to fit comfortably down your throat!");
+												else
+													b.terrible("Too long")
+													.text(" for comfortable insertion");
+												descriptionsList.add(b.build());
 											}
 										}
 										lubed = true;
-										if(Capacity.isPenetrationDiameterTooBig(Main.game.getPlayer().getFaceElasticity(), Main.game.getPlayer().getFaceStretchedCapacity(), diameter, lubed)) {
-											if(verbose) {
-												descriptionsList.add(startString+" [style.colourBad(too thick)] for your throat, and would stretch it out if inserted!");
-											} else {
-												descriptionsList.add("[style.colourBad(Too thick)], will cause [style.colourBad(stretching)]");
-											}
+										if(Capacity.isPenetrationDiameterTooBig(player.getFaceElasticity(), player.getFaceStretchedCapacity(), diameter, lubed)) {
+											var b = MarkupWriter.string();
+											if(verbose)
+												b.text(theyAre)
+												.bad("too thick")
+												.text(" for your throat, and would stretch it out if inserted!");
+											else
+												b.bad("Too thick")
+												.text(", will cause ")
+												.bad("stretching");
+											descriptionsList.add(b.build());
 										}
 										break;
 									case NIPPLE:
-										if(Main.game.isPenetrationLimitationsEnabled() && !Main.game.getPlayer().hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(length>Main.game.getPlayer().getNippleMaximumPenetrationDepthComfortable()) {
-												if(verbose) {
-													descriptionsList.add(startString+" [style.colourBad(too long)] to be able to fit comfortably into your fuckable nipples!");
-												} else {
-													descriptionsList.add("[style.colourTerrible(Too long)] for comfortable insertion");
-												}
+										if(Main.game.isPenetrationLimitationsEnabled() && !player.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
+											if(length>player.getNippleMaximumPenetrationDepthComfortable()) {
+												var b = MarkupWriter.string();
+												if(verbose)
+													b.text(theyAre)
+													.bad("too long")
+													.text(" to be able to fit comfortably into your fuckable nipples!");
+												else
+													b.terrible("Too long")
+													.text(" for comfortable insertion");
+												descriptionsList.add(b.build());
 											}
 										}
-										lubed = Main.game.getPlayer().getBreastRawStoredMilkValue()>0;
-										if(Capacity.isPenetrationDiameterTooBig(Main.game.getPlayer().getNippleElasticity(), Main.game.getPlayer().getNippleStretchedCapacity(), diameter, lubed)) {
-											if(verbose) {
-												descriptionsList.add(startString+" [style.colourBad(too thick)] for your [pc.breastCapacity] nipples, and would stretch them out if inserted!");
-											} else {
-												descriptionsList.add("[style.colourBad(Too thick)], will cause [style.colourBad(stretching)]");
-											}
+										lubed = player.getBreastRawStoredMilkValue()>0;
+										if(Capacity.isPenetrationDiameterTooBig(player.getNippleElasticity(), player.getNippleStretchedCapacity(), diameter, lubed)) {
+											var b = MarkupWriter.string();
+											if(verbose)
+												b.text(theyAre)
+												.bad("too thick")
+												.text(" for your ",Capacity.getCapacityFromValue(player.getNippleStretchedCapacity()).getDescriptor()," nipples, and would stretch them out if inserted!");
+											else
+												b.bad("Too thick")
+												.text(", will cause ")
+												.bad("stretching");
+											descriptionsList.add(b.build());
 										}
 										break;
 									case VAGINA:
-										if(verbose) {
-											descriptionsList.add((plural?"They":"It")+" will [style.colourTerrible(tear the hymen)] of any pussy "+(plural?"they are":"it is")+" inserted into!");
-										} else {
-											descriptionsList.add("[style.colourTerrible(Tears hymen)] of virgin pussies");
+										{	var b = MarkupWriter.string();
+											if(verbose)
+												b.text(plural?"They will ":"It will ")
+												.terrible("tear the hymen")
+												.text(" of any pussy ",plural?"they are":"it is"," inserted into!");
+											else
+												b.terrible("Tears hymen")
+												.text(" of virgin pussies");
+											descriptionsList.add(b.build());
 										}
-										if(Main.game.isPenetrationLimitationsEnabled() && !Main.game.getPlayer().hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-											if(Main.game.getPlayer().hasVagina() && length>Main.game.getPlayer().getVaginaMaximumPenetrationDepthComfortable()) {
-												if(verbose) {
-													descriptionsList.add(startString+" [style.colourBad(too long)] to be able to fit comfortably into your pussy!");
-												} else {
-													descriptionsList.add("[style.colourTerrible(Too long)] for comfortable insertion");
-												}
+										if(Main.game.isPenetrationLimitationsEnabled() && !player.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
+											if(player.hasVagina() && length>player.getVaginaMaximumPenetrationDepthComfortable()) {
+												var b = MarkupWriter.string();
+												if(verbose)
+													b.text(theyAre)
+													.bad("too long")
+													.text(" to be able to fit comfortably into your pussy!");
+												else
+													b.terrible("Too long")
+													.text(" for comfortable insertion");
+												descriptionsList.add(b.build());
 											}
 										}
-										lubed = Main.game.getPlayer().getLust() >= Main.game.getPlayer().getVaginaWetness().getArousalNeededToGetAssWet();
-										if(Capacity.isPenetrationDiameterTooBig(Main.game.getPlayer().getVaginaElasticity(), Main.game.getPlayer().getVaginaStretchedCapacity(), diameter, lubed)) {
-											if(verbose) {
-												descriptionsList.add(startString+" [style.colourBad(too thick)] for your [pc.pussyCapacity] pussy, and would stretch it out if inserted!");
-											} else {
-												descriptionsList.add("[style.colourBad(Too thick)], will cause [style.colourBad(stretching)]");
-											}
+										lubed = player.getLust() >= player.getVaginaWetness().getArousalNeededToGetAssWet();
+										if(Capacity.isPenetrationDiameterTooBig(player.getVaginaElasticity(), player.getVaginaStretchedCapacity(), diameter, lubed)) {
+											var b = MarkupWriter.string();
+											if(verbose)
+												b.text(theyAre)
+												.bad("too thick")
+												.text(" for your ",Capacity.getCapacityFromValue(player.getVaginaStretchedCapacity()).getDescriptor()," pussy, and would stretch it out if inserted!");
+											else
+												b.bad("Too thick")
+												.text(", will cause ")
+												.bad("stretching");
+											descriptionsList.add(b.build());
 										}
 										break;
 									default:
@@ -1782,109 +1855,148 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 								}
 								
 							} else {
-								String discomfort = "[style.colourBad(discomfort)]";
-								if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST)) {
-									discomfort = "[style.colourMinorGood(masochistic pleasure)]";
-								}
+								var discomfort = equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST)
+								? MarkupWriter.buffer().goodMinor("masochistic pleasure")
+								: MarkupWriter.buffer().bad("discomfort");
 								switch(slotToBeEquippedTo) {
 									case ANUS:
 										if(Main.game.isPenetrationLimitationsEnabled() && !equippedToCharacter.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 											if(length>equippedToCharacter.getAssMaximumPenetrationDepthComfortable()) {
-												if(verbose) {
-													descriptionsList.add(UtilText.parse(equippedToCharacter,
-															startString+" [style.colourBad(too deep)] in [npc.namePos] ass, and "+(plural?"are":"is")+" causing [npc.herHim] "+discomfort+"!"));
-												} else {
-													if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST)) {
-														descriptionsList.add("[style.colourTerrible(Too deep)], giving [style.colourMinorGood(masochistic pleasure)]");
-													} else {
-														descriptionsList.add("[style.colourTerrible(Too deep)], causing [style.colourBad(discomfort)]");
-													}
-												}
+												var b = MarkupWriter.string();
+												if(verbose)
+													b.text(theyAre)
+													.bad("too deep")
+													.text(" in ",name(equippedToCharacter),"'s ass, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ",discomfort,"!");
+												else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
+													b.terrible("Too deep")
+													.text(", giving ")
+													.goodMinor("masochistic pleasure");
+												else
+													b.terrible("Too deep")
+													.text(", causing ")
+													.bad("discomfort");
+												descriptionsList.add(b.build());
 											}
 										}
 										lubed = equippedToCharacter.getLust() >= equippedToCharacter.getAssWetness().getArousalNeededToGetAssWet();
 										if(Capacity.isPenetrationDiameterTooBig(equippedToCharacter.getAssElasticity(), equippedToCharacter.getAssStretchedCapacity(), diameter, lubed)) {
-											if(verbose) {
-												descriptionsList.add(UtilText.parse(equippedToCharacter,
-														startString+" [style.colourBad(too thick)] for [npc.namePos] [npc.assCapacity] asshole, and "+(plural?"are":"is")+" [style.colourBad(stretching)] it out!"));
-											} else {
-												descriptionsList.add("[style.colourBad(Too thick)], causing [style.colourBad(asshole to stretch)]");
-											}
+											var b = MarkupWriter.string();
+											if(verbose)
+												b.text(theyAre)
+												.bad("too thick")
+												.text(" for ",name(equippedToCharacter),"'s ",Capacity.getCapacityFromValue(equippedToCharacter.getAssStretchedCapacity()).getDescriptor()," asshole, and ",plural?"are ":"is ")
+												.bad("stretching")
+												.text(" it out!");
+											else
+												b.bad("Too thick")
+												.text(", causing ")
+												.bad("asshole to stretch");
+											descriptionsList.add(b.build());
 										}
 										break;
 									case MOUTH:
 										if(Main.game.isPenetrationLimitationsEnabled() && !equippedToCharacter.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 											if(length>equippedToCharacter.getFaceMaximumPenetrationDepthComfortable()) {
-												if(verbose) {
-													descriptionsList.add(UtilText.parse(equippedToCharacter,
-															startString+" [style.colourBad(too deep)] down [npc.namePos] throat, and "+(plural?"are":"is")+" causing [npc.herHim] "+discomfort+"!"));
-												} else {
-													if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST)) {
-														descriptionsList.add("[style.colourTerrible(Too deep)], giving [style.colourMinorGood(masochistic pleasure)]");
-													} else {
-														descriptionsList.add("[style.colourTerrible(Too deep)], causing [style.colourBad(discomfort)]");
-													}
-												}
+												var b = MarkupWriter.string();
+												if(verbose)
+													b.text(theyAre)
+													.bad("too deep")
+													.text(" down ",name(equippedToCharacter),"'s throat, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ",discomfort,"!");
+												else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
+													b.terrible("Too deep")
+													.text(", giving ")
+													.goodMinor("masochistic pleasure");
+												else
+													b.terrible("Too deep")
+													.text(", causing ")
+													.bad("discomfort");
+												descriptionsList.add(b.build());
 											}
 										}
 										lubed = true;
 										if(Capacity.isPenetrationDiameterTooBig(equippedToCharacter.getFaceElasticity(), equippedToCharacter.getFaceStretchedCapacity(), diameter, lubed)) {
-											if(verbose) {
-												descriptionsList.add(UtilText.parse(equippedToCharacter,
-														startString+" [style.colourBad(too thick)] for [npc.namePos] throat, and "+(plural?"are":"is")+" [style.colourBad(stretching)] it out!"));
-											} else {
-												descriptionsList.add("[style.colourBad(Too thick)], causing [style.colourBad(throat to stretch)]");
-											}
+											var b = MarkupWriter.string();
+											if(verbose)
+												b.text(theyAre)
+												.bad("too thick")
+												.text(" for ",name(equippedToCharacter),"'s throat, and ",plural?"are ":"is ")
+												.bad("stretching")
+												.text(" it out!");
+											else
+												b.bad("Too thick")
+												.text(", causing ")
+												.bad("throat to stretch");
+											descriptionsList.add(b.build());
 										}
 										break;
 									case NIPPLE:
 										if(Main.game.isPenetrationLimitationsEnabled() && !equippedToCharacter.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 											if(length>equippedToCharacter.getNippleMaximumPenetrationDepthComfortable()) {
-												if(verbose) {
-													descriptionsList.add(UtilText.parse(equippedToCharacter,
-															startString+" [style.colourBad(too deep)] in [npc.namePos] fuckable nipples, and "+(plural?"are":"is")+" causing [npc.herHim] "+discomfort+"!"));
-												} else {
-													if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST)) {
-														descriptionsList.add("[style.colourTerrible(Too deep)], giving [style.colourMinorGood(masochistic pleasure)]");
-													} else {
-														descriptionsList.add("[style.colourTerrible(Too deep)], causing [style.colourBad(discomfort)]");
-													}
-												}
+												var b = MarkupWriter.string();
+												if(verbose)
+													b.text(theyAre)
+													.bad("too deep")
+													.text(" in ",name(equippedToCharacter),"'s fuckable nipples, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ",discomfort,"!");
+												else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
+													b.terrible("Too deep")
+													.text(", giving ")
+													.goodMinor("masochistic pleasure");
+												else
+													b.terrible("Too deep")
+													.text(", causing ")
+													.bad("discomfort");
+												descriptionsList.add(b.build());
 											}
 										}
 										lubed = equippedToCharacter.getBreastRawStoredMilkValue()>0;
 										if(Capacity.isPenetrationDiameterTooBig(equippedToCharacter.getNippleElasticity(), equippedToCharacter.getNippleStretchedCapacity(), diameter, lubed)) {
-											if(verbose) {
-												descriptionsList.add(UtilText.parse(equippedToCharacter,
-														startString+" [style.colourBad(too thick)] for [npc.namePos] [npc.breastCapacity] nipples, and "+(plural?"are":"is")+" [style.colourBad(stretching)] them out!"));
-											} else {
-												descriptionsList.add("[style.colourBad(Too thick)], causing [style.colourBad(nipples to stretch)]");
-											}
+											var b = MarkupWriter.string();
+											if(verbose)
+												b.text(theyAre)
+												.bad("too thick")
+												.text(" for ",name(equippedToCharacter),"'s ",Capacity.getCapacityFromValue(equippedToCharacter.getNippleStretchedCapacity()).getDescriptor()," nipples, and ",plural?"are ":"is ")
+												.bad("stretching")
+												.text(" them out!");
+											else
+												b.bad("Too thick")
+												.text(", causing ")
+												.bad("nipples to stretch");
+											descriptionsList.add(b.build());
 										}
 										break;
 									case VAGINA:
 										if(Main.game.isPenetrationLimitationsEnabled() && !equippedToCharacter.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 											if(equippedToCharacter.hasVagina() && length>equippedToCharacter.getVaginaMaximumPenetrationDepthComfortable()) {
-												if(verbose) {
-													descriptionsList.add(UtilText.parse(equippedToCharacter,
-															startString+" [style.colourBad(too deep)] in [npc.namePos] pussy, and "+(plural?"are":"is")+" causing [npc.herHim] "+discomfort+"!"));
-												} else {
-													if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST)) {
-														descriptionsList.add("[style.colourTerrible(Too deep)], giving [style.colourMinorGood(masochistic pleasure)]");
-													} else {
-														descriptionsList.add("[style.colourTerrible(Too deep)], causing [style.colourBad(discomfort)]");
-													}
-												}
+												var b = MarkupWriter.string();
+												if(verbose)
+													b.text(theyAre)
+													.bad("too deep")
+													.text(" in ",name(equippedToCharacter),"'s pussy, and ",plural?"are":"is"," causing ",them(equippedToCharacter)," ",discomfort,"!");
+												else if(equippedToCharacter.hasFetish(Fetish.FETISH_MASOCHIST))
+													b.terrible("Too deep")
+													.text(", giving ")
+													.goodMinor("masochistic pleasure");
+												else
+													b.terrible("Too deep")
+													.text(", causing ")
+													.bad("discomfort");
+												descriptionsList.add(b.build());
 											}
 										}
 										lubed = equippedToCharacter.getLust() >= equippedToCharacter.getVaginaWetness().getArousalNeededToGetAssWet();
 										if(Capacity.isPenetrationDiameterTooBig(equippedToCharacter.getVaginaElasticity(), equippedToCharacter.getVaginaStretchedCapacity(), diameter, lubed)) {
-											if(verbose) {
-												descriptionsList.add(UtilText.parse(equippedToCharacter,
-														startString+" [style.colourBad(too thick)] for [npc.namePos] [npc.pussyCapacity] pussy, and "+(plural?"are":"is")+" [style.colourBad(stretching)] it out!"));
-											} else {
-												descriptionsList.add("[style.colourBad(Too thick)], causing [style.colourBad(pussy to stretch)]");
-											}
+											var b = MarkupWriter.string();
+											if(verbose)
+												b.text(theyAre)
+												.bad("too thick")
+												.text(" for ",name(equippedToCharacter),"'s ",Capacity.getCapacityFromValue(equippedToCharacter.getVaginaStretchedCapacity()).getDescriptor()," pussy, and ",plural?"are ":"is ")
+												.bad("stretching")
+												.text(" it out!");
+											else
+												b.bad("Too thick")
+												.text(", causing ")
+												.bad("pussy to stretch");
+											descriptionsList.add(b.build());
 										}
 										break;
 									default:
@@ -1894,44 +2006,57 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 						}
 						
 					} else if(tag==ItemTag.DILDO_OTHER) {
-						int length = this.getClothingType().getPenetrationOtherLength();
+						int length = clothingType.getPenetrationOtherLength();
 						float diameter = Penis.getGenericDiameter(
-								this.getClothingType().getPenetrationOtherLength(),
-								PenetrationGirth.getGirthFromInt(this.getClothingType().getPenetrationOtherGirth()),
-								this.getClothingType().getPenetrationOtherModifiers());
+								clothingType.getPenetrationOtherLength(),
+								PenetrationGirth.getGirthFromInt(clothingType.getPenetrationOtherGirth()),
+								clothingType.getPenetrationOtherModifiers());
 								
 						PenisLength pl = PenisLength.getPenisLengthFromInt(length);
 						Capacity cap = Capacity.getCapacityFromValue(diameter);
 						
-						descriptionsList.add(description
-								+ ": Length: <span style='color:"+pl.getColour().toWebHexString()+";'>"+Units.size(length)+"</span>"
-								+ " Diameter: <span style='color:"+cap.getColour().toWebHexString()+";'>"+Units.size(diameter)+"</span>");
+						descriptionsList.add(MarkupWriter.string()
+							.text(description,": Length: ")
+							.span(pl.getColour(),Units.size(length))
+							.text(" Diameter: ")
+							.span(cap.getColour(),Units.size(diameter))
+							.build());
 						
 					} else if(tag==ItemTag.ONAHOLE_SELF) {//TODO requires testing
-						OrificeElasticity elasticity = OrificeElasticity.getElasticityFromInt(this.getClothingType().getOrificeSelfElasticity());
-						OrificePlasticity plasticity = OrificePlasticity.getElasticityFromInt(this.getClothingType().getOrificeSelfPlasticity());
-						Wetness wetness = Wetness.valueOf(this.getClothingType().getOrificeSelfWetness());
-						descriptionsList.add(description
-								+ ": Capacity: "+Units.size(this.getClothingType().getPenetrationOtherLength())
-								+ " Depth: "+Units.size(this.getClothingType().getOrificeSelfDepth()));
-						descriptionsList.add(
-								"Elasticity: <span style='color:"+elasticity.getColour().toWebHexString()+";'>"+elasticity.getDescriptor()+"</span>"
-								+ " Plasticity: <span style='color:"+plasticity.getColour().toWebHexString()+";'>"+plasticity.getDescriptor()+"</span>"
-								+ " Wetness: <span style='color:"+wetness.getColour().toWebHexString()+";'>"+wetness.getDescriptor()+"</span>"
-								);
+						OrificeElasticity elasticity = OrificeElasticity.getElasticityFromInt(clothingType.getOrificeSelfElasticity());
+						OrificePlasticity plasticity = OrificePlasticity.getElasticityFromInt(clothingType.getOrificeSelfPlasticity());
+						Wetness wetness = Wetness.valueOf(clothingType.getOrificeSelfWetness());
+						descriptionsList.add(MarkupWriter.string()
+							.text(description,
+								": Capacity: ",Units.size(clothingType.getPenetrationOtherLength()),
+								" Depth: ",Units.size(clothingType.getOrificeSelfDepth()))
+							.build());
+						descriptionsList.add(MarkupWriter.string()
+							.text("Elasticity: ")
+							.span(elasticity.getColour(),elasticity.getDescriptor())
+							.text(" Plasticity: ")
+							.span(plasticity.getColour(),plasticity.getDescriptor())
+							.text(" Wetness: ")
+							.span(wetness.getColour(),wetness.getDescriptor())
+							.build());
 						
 					} else if(tag==ItemTag.ONAHOLE_OTHER) {//TODO requires testing
-						OrificeElasticity elasticity = OrificeElasticity.getElasticityFromInt(this.getClothingType().getOrificeOtherElasticity());
-						OrificePlasticity plasticity = OrificePlasticity.getElasticityFromInt(this.getClothingType().getOrificeOtherPlasticity());
-						Wetness wetness = Wetness.valueOf(this.getClothingType().getOrificeOtherWetness());
-						descriptionsList.add(description
-								+ ": Capacity: "+Units.size(this.getClothingType().getPenetrationOtherLength())
-								+ " Depth: "+Units.size(this.getClothingType().getOrificeOtherDepth()));
-						descriptionsList.add(
-								"Elasticity: <span style='color:"+elasticity.getColour().toWebHexString()+";'>"+elasticity.getDescriptor()+"</span>"
-								+ " Plasticity: <span style='color:"+plasticity.getColour().toWebHexString()+";'>"+plasticity.getDescriptor()+"</span>"
-								+ " Wetness: <span style='color:"+wetness.getColour().toWebHexString()+";'>"+wetness.getDescriptor()+"</span>"
-								);
+						OrificeElasticity elasticity = OrificeElasticity.getElasticityFromInt(clothingType.getOrificeOtherElasticity());
+						OrificePlasticity plasticity = OrificePlasticity.getElasticityFromInt(clothingType.getOrificeOtherPlasticity());
+						Wetness wetness = Wetness.valueOf(clothingType.getOrificeOtherWetness());
+						descriptionsList.add(MarkupWriter.string()
+							.text(description,
+								": Capacity: ",Units.size(clothingType.getPenetrationOtherLength()),
+								" Depth: ",Units.size(clothingType.getOrificeOtherDepth()))
+							.build());
+						descriptionsList.add(MarkupWriter.string()
+							.text("Elasticity: ")
+							.span(elasticity.getColour(),elasticity.getDescriptor())
+							.text(" Plasticity: ")
+							.span(plasticity.getColour(),plasticity.getDescriptor())
+							.text(" Wetness: ")
+							.span(wetness.getColour(),wetness.getDescriptor())
+							.build());
 						
 					} else {
 						descriptionsList.add(description);
