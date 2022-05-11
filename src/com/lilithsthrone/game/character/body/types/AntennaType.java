@@ -1,14 +1,18 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.dialogue.PronounUtility;
+import com.lilithsthrone.utils.MarkupWriter;
 import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.colours.PresetColour;
 
 /**
  * @since 0.1.83
@@ -54,26 +58,71 @@ public interface AntennaType extends BodyPartTypeInterface {
 		}
 	}
 
-	AntennaType NONE = new AbstractAntennaType(
-			BodyCoveringType.ANTENNA,
-			Race.NONE,
-			"none",
-			"",
-			"",
-			new ArrayList<>(),
-			new ArrayList<>(),
-			"<br/>[npc.Name] now [npc.has] [style.boldTfGeneric(no antennae)].",
-			"") {
-			@Override
-			public String getId() {
-				return "NONE";
-			}
-	};
+	AntennaType NONE = Special.NONE;
+
+	enum Special implements AntennaType {
+		NONE,
+		;
+
+		@Override
+		public String getId() {
+			return name();
+		}
+
+		@Override
+		public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+			return BodyCoveringType.ANTENNA;
+		}
+
+		@Override
+		public Race getRace() {
+			return Race.NONE;
+		}
+
+		@Override
+		public String getTransformationNameOverride() {
+			return "none";
+		}
+
+		@Override
+		public String getNameSingular(GameCharacter gc) {
+			return "";
+		}
+
+		@Override
+		public String getNamePlural(GameCharacter gc) {
+			return "";
+		}
+
+		@Override
+		public int getDefaultAntennaePerRow() {
+			return 2;
+		}
+
+		@Override
+		public String getDescriptor(GameCharacter gc) {
+			return null;
+		}
+
+		@Override
+		public String getBodyDescription(GameCharacter owner) {
+			return "";
+		}
+
+		@Override
+		public String getTransformationDescription(GameCharacter owner) {
+			return MarkupWriter.string()
+			.br()
+			.text(PronounUtility.Name(owner)," now ",PronounUtility.have(owner)," ")
+			.bold(PresetColour.TRANSFORMATION_GENERIC,"no antennae")
+			.text(".")
+			.build();
+		}
+	}
 
 	TypeTable<AntennaType> table = new TypeTable<>(
 		s->s,
-		AntennaType.class,
-		AbstractAntennaType.class,
+		Special.values(),
 		"antenna",
 		(f,n,a,m)->new AbstractAntennaType(f,a,m) {
 			@Override
