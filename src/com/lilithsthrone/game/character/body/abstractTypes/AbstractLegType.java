@@ -60,7 +60,7 @@ public abstract class AbstractLegType implements LegType {
 	private String transformationName;
 	
 	private Map<LegConfiguration, FootStructure> defaultFootStructure;
-	private AbstractFootType footType;
+	private FootType footType;
 	
 	private String determiner;
 	
@@ -83,7 +83,7 @@ public abstract class AbstractLegType implements LegType {
 	
 	private boolean spinneret;
 
-	private AbstractTentacleType tentacleType;
+	private TentacleType tentacleType;
 	private int tentacleCount;
 	
 	/**
@@ -108,7 +108,7 @@ public abstract class AbstractLegType implements LegType {
 	public AbstractLegType(AbstractBodyCoveringType coveringType,
 			Race race,
 			FootStructure defaultFootStructure,
-			AbstractFootType footType,
+			FootType footType,
 			String determiner,
 			String name,
 			String namePlural,
@@ -183,10 +183,10 @@ public abstract class AbstractLegType implements LegType {
 					this.defaultFootStructure.put(LegConfiguration.valueOf(e.getAttribute("legConfiguration")), FootStructure.valueOf(e.getTextContent()));
 				}
 				
-				this.footType = FootType.getFootTypeFromId(coreElement.getMandatoryFirstOf("footType").getTextContent());
+				this.footType = FootType.table.of(coreElement.getMandatoryFirstOf("footType").getTextContent());
 				this.spinneret = Boolean.valueOf(coreElement.getMandatoryFirstOf("spinneret").getTextContent());
 				
-				this.tentacleType = TentacleType.getTentacleTypeFromId(coreElement.getMandatoryFirstOf("tentacleType").getTextContent());
+				this.tentacleType = TentacleType.table.of(coreElement.getMandatoryFirstOf("tentacleType").getTextContent());
 				this.tentacleCount = Integer.valueOf(coreElement.getMandatoryFirstOf("tentacleCount").getTextContent());
 				
 				this.allowedLegConfigurations = new ArrayList<>();
@@ -340,7 +340,7 @@ public abstract class AbstractLegType implements LegType {
 	}
 
 	@Override
-	public AbstractFootType getFootType() {
+	public FootType getFootType() {
 		return footType;
 	}
 
@@ -808,7 +808,7 @@ public abstract class AbstractLegType implements LegType {
 			}
 		}
 		if(legConfiguration.getFeralParts().contains(BreastCrotch.class)) { // Crotch-boobs:
-			AbstractBreastType crotchBoobType = BreastType.NONE;
+			BreastType crotchBoobType = BreastType.NONE;
 			if(body.isFeminine()) {
 				if(demon) {
 					crotchBoobType = BreastType.DEMON_COMMON;
@@ -928,7 +928,7 @@ public abstract class AbstractLegType implements LegType {
 	}
 
 	@Override
-	public AbstractTentacleType getTentacleType() {
+	public TentacleType getTentacleType() {
 		return tentacleType;
 	}
 

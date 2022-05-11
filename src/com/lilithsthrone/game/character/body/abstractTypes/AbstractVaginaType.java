@@ -51,7 +51,7 @@ public abstract class AbstractVaginaType implements VaginaType {
 	private boolean fromExternalFile;
 	
 	private AbstractBodyCoveringType coveringType;
-	private AbstractFluidType fluidType;
+	private FluidType fluidType;
 	private Race race;
 
 	private String transformationName;
@@ -89,7 +89,7 @@ public abstract class AbstractVaginaType implements VaginaType {
 	 * @param defaultRacialPenetrationModifiers Which modifiers this vagina naturally spawns with.
 	 */
 	public AbstractVaginaType(AbstractBodyCoveringType coveringType,
-			AbstractFluidType fluidType,
+			FluidType fluidType,
 			Race race,
 			boolean eggLayer,
 			List<String> names,
@@ -123,7 +123,7 @@ public abstract class AbstractVaginaType implements VaginaType {
 	}
 	
 	public AbstractVaginaType(AbstractBodyCoveringType skinType,
-			AbstractFluidType fluidType,
+			FluidType fluidType,
 			Race race,
 			boolean eggLayer,
 			String transformationDescription,
@@ -164,7 +164,7 @@ public abstract class AbstractVaginaType implements VaginaType {
 					this.pubicHairAllowed = Boolean.valueOf(coreElement.getMandatoryFirstOf("pubicHairAllowed").getTextContent());
 				}
 				
-				this.fluidType = FluidType.getFluidTypeFromId(coreElement.getMandatoryFirstOf("fluidType").getTextContent());
+				this.fluidType = FluidType.table.of(coreElement.getMandatoryFirstOf("fluidType").getTextContent());
 				this.eggLayer = Boolean.valueOf(coreElement.getMandatoryFirstOf("eggLayer").getTextContent());
 				
 				this.names = new ArrayList<>();
@@ -222,7 +222,7 @@ public abstract class AbstractVaginaType implements VaginaType {
 	}
 
 	@Override
-	public AbstractFluidType getFluidType() {
+	public FluidType getFluidType() {
 		return fluidType;
 	}
 

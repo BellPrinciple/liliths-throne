@@ -36,7 +36,7 @@ public abstract class AbstractFaceType implements FaceType {
 
 	private boolean facialHairAllowed;
 	
-	private AbstractMouthType mouthType;
+	private MouthType mouthType;
 	
 	private List<String> names;
 	private List<String> namesPlural;
@@ -56,7 +56,7 @@ public abstract class AbstractFaceType implements FaceType {
 
 	public AbstractFaceType(AbstractBodyCoveringType coveringType,
 			Race race,
-			AbstractMouthType mouthType,
+			MouthType mouthType,
 			List<String> names,
 			List<String> namesPlural,
 			List<String> descriptorsMasculine,
@@ -101,7 +101,7 @@ public abstract class AbstractFaceType implements FaceType {
 	 */
 	public AbstractFaceType(AbstractBodyCoveringType coveringType,
 			Race race,
-			AbstractMouthType mouthType,
+			MouthType mouthType,
 			List<String> names,
 			List<String> namesPlural,
 			List<String> descriptorsMasculine,
@@ -165,7 +165,7 @@ public abstract class AbstractFaceType implements FaceType {
 				
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 				
-				this.mouthType = MouthType.getMouthTypeFromId(coreElement.getMandatoryFirstOf("mouthType").getTextContent());
+				this.mouthType = MouthType.table.of(coreElement.getMandatoryFirstOf("mouthType").getTextContent());
 
 				this.tags = new ArrayList<>();
 				if(coreElement.getOptionalFirstOf("tags").isPresent()) {
@@ -239,7 +239,7 @@ public abstract class AbstractFaceType implements FaceType {
 	}
 
 	@Override
-	public AbstractMouthType getMouthType() {
+	public MouthType getMouthType() {
 		return mouthType;
 	}
 

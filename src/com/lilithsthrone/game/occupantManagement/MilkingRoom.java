@@ -19,7 +19,7 @@ import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.FluidCum;
 import com.lilithsthrone.game.character.body.FluidGirlCum;
 import com.lilithsthrone.game.character.body.FluidMilk;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
+import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.character.body.valueEnums.FluidTypeBase;
@@ -424,7 +424,7 @@ public class MilkingRoom implements XMLSaving {
 		
 			for(FluidStored fluid : fluids) {
 				String idModifier = "";
-				AbstractFluidType type = null;
+				FluidType type = null;
 				
 				if(fluid.isMilk()) {
 					idModifier = "MILK";

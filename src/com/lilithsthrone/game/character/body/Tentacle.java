@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.TentacleType;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
@@ -25,12 +24,12 @@ public class Tentacle implements BodyPartInterface {
 	public static final float LENGTH_PERCENTAGE_MIN = 1f;
 	public static final float LENGTH_PERCENTAGE_MAX = 5f;
 	
-	protected AbstractTentacleType type;
+	protected TentacleType type;
 	protected int tentacleCount;
 	protected int girth;
 	protected float lengthAsPercentageOfHeight;
 
-	public Tentacle(AbstractTentacleType type) {
+	public Tentacle(TentacleType type) {
 		this.type = type;
 		this.tentacleCount = 1;
 		this.girth = type.getDefaultGirth();
@@ -38,7 +37,7 @@ public class Tentacle implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractTentacleType getType() {
+	public TentacleType getType() {
 		return type;
 	}
 	
@@ -78,7 +77,7 @@ public class Tentacle implements BodyPartInterface {
 	/**
 	 * @return A description as though the tentacle type is growing from the character's lower back.
 	 */
-	public String setType(GameCharacter owner, AbstractTentacleType type) {
+	public String setType(GameCharacter owner, TentacleType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			if(this.getLengthAsPercentageOfHeight()==this.getType().getDefaultLengthAsPercentageOfHeight()) {
 				this.setLengthAsPercentageOfHeight(owner, type.getDefaultLengthAsPercentageOfHeight());

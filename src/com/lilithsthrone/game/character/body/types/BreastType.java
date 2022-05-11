@@ -6,8 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractNippleType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
@@ -22,9 +20,9 @@ import com.lilithsthrone.utils.Util;
  */
 public interface BreastType extends BodyPartTypeInterface {
 
-	AbstractNippleType getNippleType();
+	NippleType getNippleType();
 
-	AbstractFluidType getFluidType();
+	FluidType getFluidType();
 
 	default String getCrotchNameSingular(GameCharacter gc) {
 		return UtilText.returnStringAtRandom("crotch-breast", "crotch-boob", "crotch-boob", "crotch-boob", "crotch-tit");
@@ -235,11 +233,11 @@ public interface BreastType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, AbstractNippleType nippleType, AbstractFluidType fluidType, List<String> namesFlat, List<String> namesFlatPlural, List<String> descriptorsFlat, List<String> namesBreasts, List<String> namesBreastsPlural, List<String> descriptorsBreasts, String breastsTransformationDescription, String breastsBodyDescription, String breastsCrotchTransformationDescription, String breastsCrotchBodyDescription) {
+		public Special(AbstractBodyCoveringType coveringType, Race race, NippleType nippleType, FluidType fluidType, List<String> namesFlat, List<String> namesFlatPlural, List<String> descriptorsFlat, List<String> namesBreasts, List<String> namesBreastsPlural, List<String> descriptorsBreasts, String breastsTransformationDescription, String breastsBodyDescription, String breastsCrotchTransformationDescription, String breastsCrotchBodyDescription) {
 			super(coveringType, race, nippleType, fluidType, namesFlat, namesFlatPlural, descriptorsFlat, namesBreasts, namesBreastsPlural, descriptorsBreasts, breastsTransformationDescription, breastsBodyDescription, breastsCrotchTransformationDescription, breastsCrotchBodyDescription);
 		}
 
-		public Special(AbstractBodyCoveringType skinType, Race race, AbstractNippleType nippleType, AbstractFluidType fluidType, String breastsTransformationDescription, String breastsBodyDescription, String breastsCrotchTransformationDescription, String breastsCrotchBodyDescription) {
+		public Special(AbstractBodyCoveringType skinType, Race race, NippleType nippleType, FluidType fluidType, String breastsTransformationDescription, String breastsBodyDescription, String breastsCrotchTransformationDescription, String breastsCrotchBodyDescription) {
 			super(skinType, race, nippleType, fluidType, breastsTransformationDescription, breastsBodyDescription, breastsCrotchTransformationDescription, breastsCrotchBodyDescription);
 		}
 
@@ -251,7 +249,7 @@ public interface BreastType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractBreastType> table = new TypeTable<>(
+	TypeTable<BreastType> table = new TypeTable<>(
 		BreastType::sanitize,
 		BreastType.class,
 		AbstractBreastType.class,
@@ -264,7 +262,7 @@ public interface BreastType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractBreastType getBreastTypeFromId(String id) {
+	static BreastType getBreastTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -280,17 +278,17 @@ public interface BreastType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromBreastType(AbstractBreastType breastType) {
+	static String getIdFromBreastType(BreastType breastType) {
 		return breastType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractBreastType> getAllBreastTypes() {
+	static List<BreastType> getAllBreastTypes() {
 		return table.listByRace();
 	}
 
 	@Deprecated
-	public static List<AbstractBreastType> getBreastTypes(Race r) {
+	static List<BreastType> getBreastTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	

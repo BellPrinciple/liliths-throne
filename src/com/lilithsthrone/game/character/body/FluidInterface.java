@@ -3,7 +3,7 @@ package com.lilithsthrone.game.character.body;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
+import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
@@ -16,7 +16,7 @@ import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 public interface FluidInterface extends BodyPartInterface {
 
 	@Override
-	public AbstractFluidType getType();
+	FluidType getType();
 	
 	public FluidFlavour getFlavour();
 	public String setFlavour(GameCharacter owner, FluidFlavour flavour);

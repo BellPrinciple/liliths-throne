@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAnusType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -19,7 +18,7 @@ import com.lilithsthrone.utils.Util;
  */
 public interface AssType extends BodyPartTypeInterface {
 
-	AbstractAnusType getAnusType();
+	AnusType getAnusType();
 
 	String getBodyDescription(GameCharacter owner);
 
@@ -216,7 +215,7 @@ public interface AssType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, AbstractAnusType anusType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String assTransformationDescription, String assBodyDescription) {
+		public Special(AbstractBodyCoveringType coveringType, Race race, AnusType anusType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String assTransformationDescription, String assBodyDescription) {
 			super(coveringType, race, anusType, names, namesPlural, descriptorsMasculine, descriptorsFeminine, assTransformationDescription, assBodyDescription);
 		}
 
@@ -228,7 +227,7 @@ public interface AssType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractAssType> table = new TypeTable<>(
+	TypeTable<AssType> table = new TypeTable<>(
 		AssType::sanitize,
 		AssType.class,
 		AbstractAssType.class,
@@ -241,7 +240,7 @@ public interface AssType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractAssType getAssTypeFromId(String id) {
+	static AssType getAssTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -254,16 +253,16 @@ public interface AssType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromAssType(AbstractAssType assType) {
+	static String getIdFromAssType(AssType assType) {
 		return assType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractAssType> getAllAssTypes() {
+	static List<AssType> getAllAssTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractAssType> getAssTypes(Race r) {
+	static List<AssType> getAssTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 

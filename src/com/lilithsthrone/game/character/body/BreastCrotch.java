@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
 import com.lilithsthrone.game.character.body.types.BreastType;
 import com.lilithsthrone.game.character.body.valueEnums.AreolaeShape;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
@@ -32,7 +31,7 @@ public class BreastCrotch implements BodyPartInterface {
 	public static final int MAXIMUM_BREAST_ROWS = 6;
 	public static final int MAXIMUM_NIPPLES_PER_BREAST = 4;
 	
-	protected AbstractBreastType type;
+	protected BreastType type;
 	protected BreastShape shape;
 	protected int size;
 	protected int rows;
@@ -44,7 +43,7 @@ public class BreastCrotch implements BodyPartInterface {
 	protected Nipples nipples;
 	protected FluidMilk milk;
 	
-	public BreastCrotch(AbstractBreastType type, BreastShape shape, int size, int milkStorage, int rows,
+	public BreastCrotch(BreastType type, BreastShape shape, int size, int milkStorage, int rows,
 			int nippleSize, NippleShape nippleShape, int areolaeSize, AreolaeShape areolaeShape, int nippleCountPerBreast, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
 		this.type = type;
 		this.shape = shape;
@@ -61,7 +60,7 @@ public class BreastCrotch implements BodyPartInterface {
 	}
 	
 	@Override
-	public AbstractBreastType getType() {
+	public BreastType getType() {
 		return type;
 	}
 
@@ -167,7 +166,7 @@ public class BreastCrotch implements BodyPartInterface {
 		return type!=BreastType.NONE;
 	}
 
-	public String setType(GameCharacter owner, AbstractBreastType type) {
+	public String setType(GameCharacter owner, BreastType type) {
 		this.shape = Util.randomItemFrom(RacialBody.valueOfRace(type.getRace()).getBreastCrotchShapes());
 		
 		if(!Main.game.isStarted() || owner==null) {

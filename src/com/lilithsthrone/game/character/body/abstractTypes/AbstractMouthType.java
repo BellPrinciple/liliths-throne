@@ -31,7 +31,7 @@ public abstract class AbstractMouthType implements MouthType {
 	
 	private AbstractBodyCoveringType coveringType;
 	private Race race;
-	private AbstractTongueType tongueType;
+	private TongueType tongueType;
 	
 	private List<String> names;
 	private List<String> namesPlural;
@@ -51,7 +51,7 @@ public abstract class AbstractMouthType implements MouthType {
 	
 	List<OrificeModifier> defaultRacialOrificeModifiers;
 
-	public AbstractMouthType(Race race, AbstractTongueType tongueType) {
+	public AbstractMouthType(Race race, TongueType tongueType) {
 		this(BodyCoveringType.MOUTH,
 				race,
 				tongueType,
@@ -79,7 +79,7 @@ public abstract class AbstractMouthType implements MouthType {
 	 */
 	public AbstractMouthType(AbstractBodyCoveringType coveringType,
 			Race race,
-			AbstractTongueType tongueType,
+			TongueType tongueType,
 			List<String> names,
 			List<String> namesPlural,
 			List<String> descriptorsMasculine,
@@ -150,7 +150,7 @@ public abstract class AbstractMouthType implements MouthType {
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
 				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
-				this.tongueType = TongueType.getTongueTypeFromId(coreElement.getMandatoryFirstOf("tongueType").getTextContent());
+				this.tongueType = TongueType.table.of(coreElement.getMandatoryFirstOf("tongueType").getTextContent());
 				
 				this.names = new ArrayList<>();
 				for(Element e : coreElement.getMandatoryFirstOf("names").getAllOf("name")) {
@@ -246,7 +246,7 @@ public abstract class AbstractMouthType implements MouthType {
 	}
 
 	@Override
-	public AbstractTongueType getTongueType() {
+	public TongueType getTongueType() {
 		return tongueType;
 	}
 

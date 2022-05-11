@@ -517,7 +517,7 @@ public interface ArmType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractArmType> table = new TypeTable<>(
+	TypeTable<ArmType> table = new TypeTable<>(
 		ArmType::sanitize,
 		ArmType.class,
 		AbstractArmType.class,
@@ -530,7 +530,7 @@ public interface ArmType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractArmType getArmTypeFromId(String id) {
+	static ArmType getArmTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -546,16 +546,16 @@ public interface ArmType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromArmType(AbstractArmType armType) {
+	static String getIdFromArmType(ArmType armType) {
 		return armType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractArmType> getAllArmTypes() {
+	static List<ArmType> getAllArmTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractArmType> getArmTypes(Race r) {
+	static List<ArmType> getArmTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	

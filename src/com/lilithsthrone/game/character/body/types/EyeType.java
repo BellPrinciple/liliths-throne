@@ -389,7 +389,7 @@ public interface EyeType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractEyeType> table = new TypeTable<>(
+	TypeTable<EyeType> table = new TypeTable<>(
 		EyeType::sanitize,
 		EyeType.class,
 		AbstractEyeType.class,
@@ -402,7 +402,7 @@ public interface EyeType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractEyeType getEyeTypeFromId(String id) {
+	static EyeType getEyeTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -417,17 +417,17 @@ public interface EyeType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromEyeType(AbstractEyeType eyeType) {
+	static String getIdFromEyeType(EyeType eyeType) {
 		return eyeType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractEyeType> getAllEyeTypes() {
+	static List<EyeType> getAllEyeTypes() {
 		return table.listByRace();
 	}
 	
 	@Deprecated
-	public static List<AbstractEyeType> getEyeTypes(Race r) {
+	static List<EyeType> getEyeTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	

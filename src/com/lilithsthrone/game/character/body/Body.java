@@ -20,22 +20,6 @@ import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.Litter;
 import com.lilithsthrone.game.character.PregnancyPossibility;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTongueType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringSkinToneColorHelper;
@@ -56,6 +40,7 @@ import com.lilithsthrone.game.character.body.types.LegType;
 import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.types.TentacleType;
+import com.lilithsthrone.game.character.body.types.TongueType;
 import com.lilithsthrone.game.character.body.types.TorsoType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.types.WingType;
@@ -514,7 +499,7 @@ public class Body implements XMLSaving {
 		// Antennae:
 		Element bodyAntennae = doc.createElement("antennae");
 		parentElement.appendChild(bodyAntennae);
-			XMLUtil.addAttribute(doc, bodyAntennae, "type", AntennaType.getIdFromAntennaType(this.antenna.getType()));
+			XMLUtil.addAttribute(doc, bodyAntennae, "type", antenna.getType().getId());
 			XMLUtil.addAttribute(doc, bodyAntennae, "rows", String.valueOf(this.antenna.getAntennaRows()));
 			XMLUtil.addAttribute(doc, bodyAntennae, "length", String.valueOf(this.antenna.length));
 			XMLUtil.addAttribute(doc, bodyAntennae, "antennaePerRow", String.valueOf(this.antenna.antennaePerRow));
@@ -522,14 +507,14 @@ public class Body implements XMLSaving {
 		// Arm:
 		Element bodyArm = doc.createElement("arm");
 		parentElement.appendChild(bodyArm);
-			XMLUtil.addAttribute(doc, bodyArm, "type", ArmType.getIdFromArmType(this.arm.getType()));
+			XMLUtil.addAttribute(doc, bodyArm, "type", arm.getType().getId());
 			XMLUtil.addAttribute(doc, bodyArm, "rows", String.valueOf(this.arm.getArmRows()));
 			XMLUtil.addAttribute(doc, bodyArm, "underarmHair", this.arm.getUnderarmHair().toString());
 		
 		// Ass:
 		Element bodyAss = doc.createElement("ass");
 		parentElement.appendChild(bodyAss);
-			XMLUtil.addAttribute(doc, bodyAss, "type", AssType.getIdFromAssType(this.ass.getType()));
+			XMLUtil.addAttribute(doc, bodyAss, "type", ass.getType().getId());
 			XMLUtil.addAttribute(doc, bodyAss, "assSize", String.valueOf(this.ass.getAssSize().getValue()));
 			XMLUtil.addAttribute(doc, bodyAss, "hipSize", String.valueOf(this.ass.getHipSize().getValue()));
 
@@ -553,7 +538,7 @@ public class Body implements XMLSaving {
 		// Breasts:
 		Element bodyBreast = doc.createElement("breasts");
 		parentElement.appendChild(bodyBreast);
-			XMLUtil.addAttribute(doc, bodyBreast, "type", BreastType.getIdFromBreastType(this.breast.getType()));
+			XMLUtil.addAttribute(doc, bodyBreast, "type", breast.getType().getId());
 			XMLUtil.addAttribute(doc, bodyBreast, "shape", this.breast.shape.toString());
 			XMLUtil.addAttribute(doc, bodyBreast, "size", String.valueOf(this.breast.size));
 			XMLUtil.addAttribute(doc, bodyBreast, "rows", String.valueOf(this.breast.rows));
@@ -586,7 +571,7 @@ public class Body implements XMLSaving {
 		// Crotch Breasts:
 		Element bodyCrotchBreast = doc.createElement("breastsCrotch");
 		parentElement.appendChild(bodyCrotchBreast);
-			XMLUtil.addAttribute(doc, bodyCrotchBreast, "type", BreastType.getIdFromBreastType(this.breastCrotch.getType()));
+			XMLUtil.addAttribute(doc, bodyCrotchBreast, "type", breastCrotch.getType().getId());
 			XMLUtil.addAttribute(doc, bodyCrotchBreast, "shape", this.breastCrotch.shape.toString());
 			XMLUtil.addAttribute(doc, bodyCrotchBreast, "size", String.valueOf(this.breastCrotch.size));
 			XMLUtil.addAttribute(doc, bodyCrotchBreast, "rows", String.valueOf(this.breastCrotch.rows));
@@ -620,13 +605,13 @@ public class Body implements XMLSaving {
 		// Ear:
 		Element bodyEar = doc.createElement("ear");
 		parentElement.appendChild(bodyEar);
-			XMLUtil.addAttribute(doc, bodyEar, "type", EarType.getIdFromEarType(this.ear.type));
+			XMLUtil.addAttribute(doc, bodyEar, "type", ear.getType().getId());
 			XMLUtil.addAttribute(doc, bodyEar, "pierced", String.valueOf(this.ear.pierced));
 
 		// Eye:
 		Element bodyEye = doc.createElement("eye");
 		parentElement.appendChild(bodyEye);
-			XMLUtil.addAttribute(doc, bodyEye, "type", EyeType.getIdFromEyeType(this.eye.type));
+			XMLUtil.addAttribute(doc, bodyEye, "type", eye.getType().getId());
 			XMLUtil.addAttribute(doc, bodyEye, "eyePairs", String.valueOf(this.eye.eyePairs));
 			XMLUtil.addAttribute(doc, bodyEye, "irisShape", this.eye.irisShape.toString());
 			XMLUtil.addAttribute(doc, bodyEye, "pupilShape", this.eye.pupilShape.toString());
@@ -634,7 +619,7 @@ public class Body implements XMLSaving {
 		// Face:
 		Element bodyFace = doc.createElement("face");
 		parentElement.appendChild(bodyFace);
-			XMLUtil.addAttribute(doc, bodyFace, "type", FaceType.getIdFromFaceType(this.face.type));
+			XMLUtil.addAttribute(doc, bodyFace, "type", face.getType().getId());
 			XMLUtil.addAttribute(doc, bodyFace, "piercedNose", String.valueOf(this.face.piercedNose));
 			XMLUtil.addAttribute(doc, bodyFace, "facialHair", this.face.facialHair.toString());
 
@@ -669,7 +654,7 @@ public class Body implements XMLSaving {
 		// Hair:
 		Element bodyHair = doc.createElement("hair");
 		parentElement.appendChild(bodyHair);
-			XMLUtil.addAttribute(doc, bodyHair, "type", HairType.getIdFromHairType(this.hair.type));
+			XMLUtil.addAttribute(doc, bodyHair, "type", hair.getType().getId());
 			XMLUtil.addAttribute(doc, bodyHair, "length", String.valueOf(this.hair.length));
 			XMLUtil.addAttribute(doc, bodyHair, "hairStyle", this.hair.style.toString());
 			XMLUtil.addAttribute(doc, bodyHair, "neckFluff", String.valueOf(this.hair.neckFluff));
@@ -677,7 +662,7 @@ public class Body implements XMLSaving {
 		// Horn:
 		Element bodyHorn = doc.createElement("horn");
 		parentElement.appendChild(bodyHorn);
-			XMLUtil.addAttribute(doc, bodyHorn, "type", HornType.getIdFromHornType(this.horn.type));
+			XMLUtil.addAttribute(doc, bodyHorn, "type", horn.getType().getId());
 			XMLUtil.addAttribute(doc, bodyHorn, "length", String.valueOf(this.horn.length));
 			XMLUtil.addAttribute(doc, bodyHorn, "rows", String.valueOf(this.horn.rows));
 			XMLUtil.addAttribute(doc, bodyHorn, "hornsPerRow", String.valueOf(this.horn.hornsPerRow));
@@ -685,14 +670,14 @@ public class Body implements XMLSaving {
 		// Leg:
 		Element bodyLeg = doc.createElement("leg");
 		parentElement.appendChild(bodyLeg);
-			XMLUtil.addAttribute(doc, bodyLeg, "type", LegType.getIdFromLegType(this.leg.type));
+			XMLUtil.addAttribute(doc, bodyLeg, "type", leg.getType().getId());
 			XMLUtil.addAttribute(doc, bodyLeg, "footStructure", this.leg.footStructure.toString());
 			XMLUtil.addAttribute(doc, bodyLeg, "configuration", this.leg.legConfiguration.toString());
 		
 		// Penis:
 		Element bodyPenis = doc.createElement("penis");
 		parentElement.appendChild(bodyPenis);
-			XMLUtil.addAttribute(doc, bodyPenis, "type", PenisType.getIdFromPenisType(this.penis.type));
+			XMLUtil.addAttribute(doc, bodyPenis, "type", penis.getType().getId());
 			XMLUtil.addAttribute(doc, bodyPenis, "size", String.valueOf(this.penis.length));
 			XMLUtil.addAttribute(doc, bodyPenis, "girth", String.valueOf(this.penis.girth));
 			XMLUtil.addAttribute(doc, bodyPenis, "pierced", String.valueOf(this.penis.pierced));
@@ -745,12 +730,12 @@ public class Body implements XMLSaving {
 		// Torso:
 		Element bodyTorso = doc.createElement("torso");
 		parentElement.appendChild(bodyTorso);
-			XMLUtil.addAttribute(doc, bodyTorso, "type", TorsoType.getIdFromTorsoType(this.torso.type));
+			XMLUtil.addAttribute(doc, bodyTorso, "type", torso.getType().getId());
 		
 		// Tail:
 		Element bodyTail = doc.createElement("tail");
 		parentElement.appendChild(bodyTail);
-			XMLUtil.addAttribute(doc, bodyTail, "type", TailType.getIdFromTailType(this.tail.type));
+			XMLUtil.addAttribute(doc, bodyTail, "type", tail.getType().getId());
 			XMLUtil.addAttribute(doc, bodyTail, "count", String.valueOf(this.tail.tailCount));
 			XMLUtil.addAttribute(doc, bodyTail, "girth", String.valueOf(this.tail.girth));
 			XMLUtil.addAttribute(doc, bodyTail, "length", String.valueOf(this.tail.lengthAsPercentageOfHeight));
@@ -758,7 +743,7 @@ public class Body implements XMLSaving {
 		// Tail:
 		Element bodyTentacle = doc.createElement("tentacle");
 		parentElement.appendChild(bodyTentacle);
-			XMLUtil.addAttribute(doc, bodyTentacle, "type", TentacleType.getIdFromTentacleType(this.tentacle.type));
+			XMLUtil.addAttribute(doc, bodyTentacle, "type", tentacle.getType().getId());
 			XMLUtil.addAttribute(doc, bodyTentacle, "count", String.valueOf(this.tentacle.tentacleCount));
 			XMLUtil.addAttribute(doc, bodyTentacle, "girth", String.valueOf(this.tentacle.girth));
 			XMLUtil.addAttribute(doc, bodyTentacle, "length", String.valueOf(this.tentacle.lengthAsPercentageOfHeight));
@@ -766,7 +751,7 @@ public class Body implements XMLSaving {
 		// Vagina
 		Element bodyVagina = doc.createElement("vagina");
 		parentElement.appendChild(bodyVagina);
-			XMLUtil.addAttribute(doc, bodyVagina, "type", VaginaType.getIdFromVaginaType(this.vagina.type));
+			XMLUtil.addAttribute(doc, bodyVagina, "type", vagina.getType().getId());
 			XMLUtil.addAttribute(doc, bodyVagina, "labiaSize", String.valueOf(this.vagina.labiaSize));
 			XMLUtil.addAttribute(doc, bodyVagina, "clitSize", String.valueOf(this.vagina.clitoris.clitSize));
 			XMLUtil.addAttribute(doc, bodyVagina, "clitGirth", String.valueOf(this.vagina.clitoris.girth));
@@ -810,7 +795,7 @@ public class Body implements XMLSaving {
 		// Wing:
 		Element bodyWing = doc.createElement("wing");
 		parentElement.appendChild(bodyWing);
-		XMLUtil.addAttribute(doc, bodyWing, "type", WingType.getIdFromWingType(this.wing.type));
+		XMLUtil.addAttribute(doc, bodyWing, "type", wing.getType().getId());
 		XMLUtil.addAttribute(doc, bodyWing, "size", String.valueOf(this.wing.size));
 
 //		System.out.println("Difference1: "+(System.nanoTime()-timeStart)/1000000000f);
@@ -874,7 +859,7 @@ public class Body implements XMLSaving {
 		
 		Element antennae = (Element)parentElement.getElementsByTagName("antennae").item(0);
 		
-		Antenna importedAntenna = new Antenna(AntennaType.getAntennaTypeFromId(antennae.getAttribute("type")), 0);
+		Antenna importedAntenna = new Antenna(AntennaType.table.of(antennae.getAttribute("type")), 0);
 		Main.game.getCharacterUtils().appendToImportLog(log, "<br/><br/>Body: Antennae:"+ "<br/>type: "+importedAntenna.getType());
 		importedAntenna.setAntennaRows(null, Integer.valueOf(antennae.getAttribute("rows")));
 		if(!antennae.getAttribute("length").isEmpty()) {
@@ -892,7 +877,7 @@ public class Body implements XMLSaving {
 		
 		Element arm = (Element)parentElement.getElementsByTagName("arm").item(0);
 		
-		Arm importedArm = new Arm(ArmType.getArmTypeFromId(arm.getAttribute("type")), Integer.valueOf(arm.getAttribute("rows")));
+		Arm importedArm = new Arm(ArmType.table.of(arm.getAttribute("type")), Integer.valueOf(arm.getAttribute("rows")));
 		
 		Main.game.getCharacterUtils().appendToImportLog(log, "<br/><br/>Body: Arm:"+ "<br/>type: "+importedArm.getType());
 
@@ -917,7 +902,7 @@ public class Body implements XMLSaving {
 			depth = Integer.valueOf(depthAttribute);
 		}
 		
-		Ass importedAss = new Ass(AssType.getAssTypeFromId(ass.getAttribute("type")),
+		Ass importedAss = new Ass(AssType.table.of(ass.getAttribute("type")),
 				Integer.valueOf(ass.getAttribute("assSize")),
 				Integer.valueOf(ass.getAttribute("hipSize")),
 				Integer.valueOf(anus.getAttribute("wetness")),
@@ -992,7 +977,7 @@ public class Body implements XMLSaving {
 			depth = Integer.valueOf(depthAttribute);
 		}
 		
-		Breast importedBreast = new Breast(BreastType.getBreastTypeFromId(breasts.getAttribute("type")),
+		Breast importedBreast = new Breast(BreastType.table.of(breasts.getAttribute("type")),
 				breastShape,
 				Integer.valueOf(breasts.getAttribute("size")),
 				milkStorage,
@@ -1064,7 +1049,7 @@ public class Body implements XMLSaving {
 		
 		Element ear = (Element)parentElement.getElementsByTagName("ear").item(0);
 
-		Ear importedEar = new Ear(EarType.getEarTypeFromId(ear.getAttribute("type")));
+		Ear importedEar = new Ear(EarType.table.of(ear.getAttribute("type")));
 		
 		importedEar.pierced = (Boolean.valueOf(ear.getAttribute("pierced")));
 		Main.game.getCharacterUtils().appendToImportLog(log, "<br/><br/>Body: Ear:"
@@ -1094,7 +1079,7 @@ public class Body implements XMLSaving {
 			eyeTypeFromSave = eyeTypeConverterMap.get(eyeTypeFromSave);
 		}
 		
-		Eye importedEye = new Eye(EyeType.getEyeTypeFromId(eyeTypeFromSave));
+		Eye importedEye = new Eye(EyeType.table.of(eyeTypeFromSave));
 		
 		if(Main.isVersionOlderThan(version, "0.3.9") && importedSubspeciesOverride==Subspecies.HALF_DEMON) { // Fix to taurs spawning with no demon parts at all in v0.3.8.9
 			importedEye = new Eye(EyeType.DEMON_COMMON);
@@ -1118,7 +1103,7 @@ public class Body implements XMLSaving {
 		
 		boolean oldPantherReplacement = face.getAttribute("type").equals("CAT_MORPH_PANTHER");
 		
-		Face importedFace = new Face(FaceType.getFaceTypeFromId(face.getAttribute("type")), Integer.valueOf(mouth.getAttribute("lipSize")));
+		Face importedFace = new Face(FaceType.table.of(face.getAttribute("type")), Integer.valueOf(mouth.getAttribute("lipSize")));
 		
 		importedFace.piercedNose = (Boolean.valueOf(face.getAttribute("piercedNose")));
 		try {
@@ -1218,7 +1203,7 @@ public class Body implements XMLSaving {
 			hairTypeFromSave = hairTypeConverterMap.get(hairTypeFromSave);
 		}
 		
-		Hair importedHair = new Hair(HairType.getHairTypeFromId(hairTypeFromSave),
+		Hair importedHair = new Hair(HairType.table.of(hairTypeFromSave),
 				Integer.valueOf(hair.getAttribute("length")),
 				HairStyle.valueOf(hair.getAttribute("hairStyle")),
 				null);
@@ -1262,7 +1247,7 @@ public class Body implements XMLSaving {
 			}
 		}
 		try {
-			importedHorn = new Horn(HornType.getHornTypeFromId(hornType), length);
+			importedHorn = new Horn(HornType.table.of(hornType), length);
 			importedHorn.rows = rows;
 			importedHorn.hornsPerRow = hornsPerRow;
 			Main.game.getCharacterUtils().appendToImportLog(log, "<br/><br/>Body: Horn: "
@@ -1292,7 +1277,7 @@ public class Body implements XMLSaving {
 		
 		Element leg = (Element)parentElement.getElementsByTagName("leg").item(0);
 
-		AbstractLegType legType = LegType.getLegTypeFromId(leg.getAttribute("type"));
+		var legType = LegType.table.of(leg.getAttribute("type"));
 		
 		LegConfiguration configuration = LegConfiguration.BIPEDAL;
 		try {
@@ -1334,7 +1319,7 @@ public class Body implements XMLSaving {
 		} catch(Exception ex) {
 		}
 		
-		Penis importedPenis = new Penis(PenisType.getPenisTypeFromId(penis.getAttribute("type")),
+		Penis importedPenis = new Penis(PenisType.table.of(penis.getAttribute("type")),
 				Integer.valueOf(penis.getAttribute("size")),
 				false,
 				girth,
@@ -1430,7 +1415,7 @@ public class Body implements XMLSaving {
 		}
 		String torsoTypeFromSave = torso.getAttribute("type");
 		
-		Torso importedTorso = new Torso(TorsoType.getTorsoTypeFromId(torsoTypeFromSave));
+		Torso importedTorso = new Torso(TorsoType.table.of(torsoTypeFromSave));
 		
 		Main.game.getCharacterUtils().appendToImportLog(log, "<br/><br/>Body: Torso: "
 				+ "<br/>type: "+importedTorso.getType());
@@ -1468,7 +1453,7 @@ public class Body implements XMLSaving {
 		// **************** Tail **************** //
 		
 		Element tail = (Element)parentElement.getElementsByTagName("tail").item(0);
-		AbstractTailType tailType = TailType.getTailTypeFromId(tail.getAttribute("type"));
+		var tailType = TailType.table.of(tail.getAttribute("type"));
 		
 		Tail importedTail = new Tail(tailType);
 		
@@ -1503,7 +1488,7 @@ public class Body implements XMLSaving {
 		
 		Element tentacle = (Element)parentElement.getElementsByTagName("tentacle").item(0);
 		if(tentacle!=null) {
-			AbstractTentacleType tentacleType = TentacleType.getTentacleTypeFromId(tentacle.getAttribute("type"));
+			var tentacleType = TentacleType.table.of(tentacle.getAttribute("type"));
 	
 			importedTentacle = new Tentacle(tentacleType);
 			
@@ -1537,7 +1522,7 @@ public class Body implements XMLSaving {
 			depth = Integer.valueOf(depthAttribute);
 		}
 		
-		Vagina importedVagina = new Vagina(VaginaType.getVaginaTypeFromId(vagina.getAttribute("type")),
+		Vagina importedVagina = new Vagina(VaginaType.table.of(vagina.getAttribute("type")),
 				(vagina.getAttribute("labiaSize").isEmpty()?1:Integer.valueOf(vagina.getAttribute("labiaSize"))),
 				Integer.valueOf(vagina.getAttribute("clitSize")),
 				vagina.hasAttribute("clitGirth")?Integer.valueOf(vagina.getAttribute("clitGirth")):PenetrationGirth.THREE_AVERAGE.getValue(),
@@ -1644,7 +1629,7 @@ public class Body implements XMLSaving {
 		if(!wing.getAttribute("size").isEmpty()) {
 			wingSize = Integer.valueOf(wing.getAttribute("size"));
 		}
-		Wing importedWing = new Wing(WingType.getWingTypeFromId(wing.getAttribute("type")), wingSize);
+		Wing importedWing = new Wing(WingType.table.of(wing.getAttribute("type")), wingSize);
 		Main.game.getCharacterUtils().appendToImportLog(log, "<br/><br/>Body: Wing: "
 				+ "<br/>type: "+importedWing.getType()+"<br/>"
 				+ "<br/>size: "+importedWing.getSizeValue()+"<br/>");
@@ -1772,7 +1757,7 @@ public class Body implements XMLSaving {
 			} catch(Exception ex) {
 			}
 
-			AbstractBreastType crotchBoobType = BreastType.getBreastTypeFromId(breasts.getAttribute("type"));
+			BreastType crotchBoobType = BreastType.table.of(breasts.getAttribute("type"));
 			if(oldPantherReplacement) {
 				if(crotchBoobType.getRace()==Race.CAT_MORPH) {
 					crotchBoobType = BreastType.getBreastTypes(Race.getRaceFromId("innoxia_panther")).get(0);
@@ -2022,7 +2007,7 @@ public class Body implements XMLSaving {
 						body.setFaceType(null, FaceType.getFaceTypes(Race.getRaceFromId("innoxia_raptor")).get(0));
 					}
 					if(body.getEyeType().getRace()==Race.HARPY) {
-						body.setEyeType(null, EyeType.getEyeTypeFromId("innoxia_raptor_eye"));
+						body.setEyeType(null, EyeType.table.of("innoxia_raptor_eye"));
 					}
 					if(body.getEarType().getRace()==Race.HARPY) {
 						body.setEarType(null, EarType.getEarTypes(Race.getRaceFromId("innoxia_raptor")).get(0));
@@ -2031,7 +2016,7 @@ public class Body implements XMLSaving {
 						body.setHairType(null, HairType.getHairTypes(Race.getRaceFromId("innoxia_raptor")).get(0));
 					}
 					if(body.getLegType().getRace()==Race.HARPY) {
-						body.setLegType(null, LegType.getLegTypeFromId("innoxia_raptor_leg_large"));
+						body.setLegType(null, LegType.table.of("innoxia_raptor_leg_large"));
 					}
 					if(body.getTorsoType().getRace()==Race.HARPY) {
 						body.setTorsoType(null, TorsoType.getTorsoTypes(Race.getRaceFromId("innoxia_raptor")).get(0));
@@ -3468,7 +3453,7 @@ public class Body implements XMLSaving {
 		return arm;
 	}
 
-	public AbstractArmType getArmType() {
+	public ArmType getArmType() {
 		return arm.getType();
 	}
 
@@ -3476,7 +3461,7 @@ public class Body implements XMLSaving {
 		return ass;
 	}
 
-	public AbstractAssType getAssType() {
+	public AssType getAssType() {
 		return ass.getType();
 	}
 	
@@ -3484,7 +3469,7 @@ public class Body implements XMLSaving {
 		return breast;
 	}
 
-	public AbstractBreastType getBreastType() {
+	public BreastType getBreastType() {
 		return breast.getType();
 	}
 	
@@ -3492,7 +3477,7 @@ public class Body implements XMLSaving {
 		return breastCrotch;
 	}
 
-	public AbstractBreastType getBreastCrotchType() {
+	public BreastType getBreastCrotchType() {
 		return breastCrotch.getType();
 	}
 
@@ -3500,7 +3485,7 @@ public class Body implements XMLSaving {
 		return face;
 	}
 
-	public AbstractFaceType getFaceType() {
+	public FaceType getFaceType() {
 		return face.getType();
 	}
 	
@@ -3508,7 +3493,7 @@ public class Body implements XMLSaving {
 		return eye;
 	}
 
-	public AbstractEyeType getEyeType() {
+	public EyeType getEyeType() {
 		return eye.getType();
 	}
 
@@ -3516,7 +3501,7 @@ public class Body implements XMLSaving {
 		return ear;
 	}
 
-	public AbstractEarType getEarType() {
+	public EarType getEarType() {
 		return ear.getType();
 	}
 
@@ -3524,7 +3509,7 @@ public class Body implements XMLSaving {
 		return hair;
 	}
 
-	public AbstractHairType getHairType() {
+	public HairType getHairType() {
 		return hair.getType();
 	}
 
@@ -3532,7 +3517,7 @@ public class Body implements XMLSaving {
 		return horn;
 	}
 
-	public AbstractHornType getHornType() {
+	public HornType getHornType() {
 		return horn.getType();
 	}
 
@@ -3540,7 +3525,7 @@ public class Body implements XMLSaving {
 		return leg;
 	}
 
-	public AbstractLegType getLegType() {
+	public LegType getLegType() {
 		return leg.getType();
 	}
 
@@ -3552,7 +3537,7 @@ public class Body implements XMLSaving {
 		return penis;
 	}
 
-	public AbstractPenisType getPenisType() {
+	public PenisType getPenisType() {
 		return penis.getType();
 	}
 
@@ -3572,7 +3557,7 @@ public class Body implements XMLSaving {
 		return torso;
 	}
 
-	public AbstractTorsoType getTorsoType() {
+	public TorsoType getTorsoType() {
 		return torso.getType();
 	}
 
@@ -3580,7 +3565,7 @@ public class Body implements XMLSaving {
 		return tail;
 	}
 
-	public AbstractTailType getTailType() {
+	public TailType getTailType() {
 		return tail.getType();
 	}
 
@@ -3588,7 +3573,7 @@ public class Body implements XMLSaving {
 		return tentacle;
 	}
 
-	public AbstractTongueType getTongueType() {
+	public TongueType getTongueType() {
 		return face.getTongue().getType();
 	}
 
@@ -3596,7 +3581,7 @@ public class Body implements XMLSaving {
 		return vagina;
 	}
 
-	public AbstractVaginaType getVaginaType() {
+	public VaginaType getVaginaType() {
 		return vagina.getType();
 	}
 
@@ -3612,7 +3597,7 @@ public class Body implements XMLSaving {
 		return wing.getSizeValue();
 	}
 
-	public AbstractWingType getWingType() {
+	public WingType getWingType() {
 		return wing.getType();
 	}
 
@@ -3624,11 +3609,11 @@ public class Body implements XMLSaving {
 		this.arm = arm;
 	}
 
-	public String setArmType(AbstractArmType type) {
+	public String setArmType(ArmType type) {
 		return this.arm.setType(null, type);
 	}
 
-	public String setArmType(GameCharacter owner, AbstractArmType type) {
+	public String setArmType(GameCharacter owner, ArmType type) {
 		return this.arm.setType(owner, type);
 	}
 
@@ -3644,7 +3629,7 @@ public class Body implements XMLSaving {
 		this.ass = ass;
 	}
 
-	public String setAssType(GameCharacter owner, AbstractAssType type) {
+	public String setAssType(GameCharacter owner, AssType type) {
 		return this.ass.setType(owner, type);
 	}
 	
@@ -3652,7 +3637,7 @@ public class Body implements XMLSaving {
 		this.breast = breast;
 	}
 
-	public String setBreastType(GameCharacter owner, AbstractBreastType type) {
+	public String setBreastType(GameCharacter owner, BreastType type) {
 		return this.breast.setType(owner, type);
 	}
 
@@ -3660,7 +3645,7 @@ public class Body implements XMLSaving {
 		this.breastCrotch = breastCrotch;
 	}
 
-	public String setBreastCrotchType(GameCharacter owner, AbstractBreastType type) {
+	public String setBreastCrotchType(GameCharacter owner, BreastType type) {
 		return this.breastCrotch.setType(owner, type);
 	}
 
@@ -3668,11 +3653,11 @@ public class Body implements XMLSaving {
 		this.face = face;
 	}
 
-	public String setFaceType(AbstractFaceType type) {
+	public String setFaceType(FaceType type) {
 		return face.setType(null, type);
 	}
 
-	public String setFaceType(GameCharacter owner, AbstractFaceType type) {
+	public String setFaceType(GameCharacter owner, FaceType type) {
 		return face.setType(owner, type);
 	}
 
@@ -3680,7 +3665,7 @@ public class Body implements XMLSaving {
 		this.eye = eye;
 	}
 
-	public String setEyeType(GameCharacter owner, AbstractEyeType type) {
+	public String setEyeType(GameCharacter owner, EyeType type) {
 		return this.eye.setType(owner, type);
 	}
 
@@ -3688,11 +3673,11 @@ public class Body implements XMLSaving {
 		this.ear = ear;
 	}
 
-	public String setEarType(AbstractEarType type) {
+	public String setEarType(EarType type) {
 		return this.ear.setType(null, type);
 	}
 
-	public String setEarType(GameCharacter owner, AbstractEarType type) {
+	public String setEarType(GameCharacter owner, EarType type) {
 		return this.ear.setType(owner, type);
 	}
 
@@ -3700,11 +3685,11 @@ public class Body implements XMLSaving {
 		this.hair = hair;
 	}
 
-	public String setHairType(AbstractHairType type) {
+	public String setHairType(HairType type) {
 		return this.hair.setType(null, type);
 	}
 
-	public String setHairType(GameCharacter owner, AbstractHairType type) {
+	public String setHairType(GameCharacter owner, HairType type) {
 		return this.hair.setType(owner, type);
 	}
 
@@ -3712,19 +3697,19 @@ public class Body implements XMLSaving {
 		this.leg = leg;
 	}
 
-	public String setLegType(AbstractLegType type) {
+	public String setLegType(LegType type) {
 		return this.leg.setType(null, type);
 	}
 
-	public String setLegType(GameCharacter owner, AbstractLegType type) {
+	public String setLegType(GameCharacter owner, LegType type) {
 		return this.leg.setType(owner, type);
 	}
 
-	public void setLegConfigurationForced(AbstractLegType type, LegConfiguration legConfiguration) {
+	public void setLegConfigurationForced(LegType type, LegConfiguration legConfiguration) {
 		this.leg.setLegConfigurationForced(type, legConfiguration);
 	}
 
-	public void setTongueType(AbstractTongueType type) {
+	public void setTongueType(TongueType type) {
 		this.face.getTongue().setType(type);
 	}
 
@@ -3732,11 +3717,11 @@ public class Body implements XMLSaving {
 		this.torso = torso;
 	}
 	
-	public String setTorsoType(AbstractTorsoType type) {
+	public String setTorsoType(TorsoType type) {
 		return this.torso.setType(null, type);
 	}
 
-	public String setTorsoType(GameCharacter owner, AbstractTorsoType type) {
+	public String setTorsoType(GameCharacter owner, TorsoType type) {
 		return this.torso.setType(owner, type);
 	}
 
@@ -3744,11 +3729,11 @@ public class Body implements XMLSaving {
 		this.horn = horn;
 	}
 
-	public String setHornType(AbstractHornType type) {
+	public String setHornType(HornType type) {
 		return this.horn.setType(null, type);
 	}
 
-	public String setHornType(GameCharacter owner, AbstractHornType type) {
+	public String setHornType(GameCharacter owner, HornType type) {
 		return this.horn.setType(owner, type);
 	}
 
@@ -3756,11 +3741,11 @@ public class Body implements XMLSaving {
 		this.penis = penis;
 	}
 
-	public String setPenisType(AbstractPenisType type) {
+	public String setPenisType(PenisType type) {
 		return this.penis.setType(null, type);
 	}
 
-	public String setPenisType(GameCharacter owner, AbstractPenisType type) {
+	public String setPenisType(GameCharacter owner, PenisType type) {
 		return this.penis.setType(owner, type);
 	}
 
@@ -3780,11 +3765,11 @@ public class Body implements XMLSaving {
 		this.tail = tail;
 	}
 
-	public String setTailType(AbstractTailType type) {
+	public String setTailType(TailType type) {
 		return this.tail.setType(null, type);
 	}
 
-	public String setTailType(GameCharacter owner, AbstractTailType type) {
+	public String setTailType(GameCharacter owner, TailType type) {
 		return this.tail.setType(owner, type);
 	}
 
@@ -3796,11 +3781,11 @@ public class Body implements XMLSaving {
 		this.vagina = vagina;
 	}
 
-	public String setVaginaType(AbstractVaginaType type) {
+	public String setVaginaType(VaginaType type) {
 		return this.vagina.setType(null, type);
 	}
 
-	public String setVaginaType(GameCharacter owner, AbstractVaginaType type) {
+	public String setVaginaType(GameCharacter owner, VaginaType type) {
 		return this.vagina.setType(owner, type);
 	}
 
@@ -3816,15 +3801,15 @@ public class Body implements XMLSaving {
 		return this.wing.setSize(owner, size);
 	}
 
-	public String setWingType(AbstractWingType type) {
+	public String setWingType(WingType type) {
 		return this.wing.setType(null, type);
 	}
 
-	public String setWingType(GameCharacter owner, AbstractWingType type) {
+	public String setWingType(GameCharacter owner, WingType type) {
 		return this.wing.setType(owner, type);
 	}
 
-	public void applyLegConfigurationTransformation(AbstractLegType legType, LegConfiguration legConfiguration, boolean applyFullEffects) {
+	public void applyLegConfigurationTransformation(LegType legType, LegConfiguration legConfiguration, boolean applyFullEffects) {
 		this.setLegType(legType);
 		this.leg.getType().applyLegConfigurationTransformation(this, legConfiguration, applyFullEffects);
 	}

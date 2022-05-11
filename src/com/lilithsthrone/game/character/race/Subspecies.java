@@ -13,7 +13,6 @@ import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.Wing;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -2648,7 +2647,7 @@ public interface Subspecies {
 		@Override
 		public int getSubspeciesWeighting(Body body, Race race) {
 			if(race==Race.CAT_MORPH) {
-				AbstractFaceType faceType = body.getFace().getType();
+				var faceType = body.getFace().getType();
 				AbstractBodyCoveringType felineFur = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_FUR):BodyCoveringType.FELINE_FUR;
 				
 				if((faceType == FaceType.CAT_MORPH || faceType == FaceType.HUMAN)
@@ -2753,7 +2752,7 @@ public interface Subspecies {
 		@Override
 		public int getSubspeciesWeighting(Body body, Race race) {
 			if(race==Race.CAT_MORPH) {
-				AbstractFaceType faceType = body.getFace().getType();
+				var faceType = body.getFace().getType();
 				AbstractBodyCoveringType felineFur = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_FUR):BodyCoveringType.FELINE_FUR;
 				
 				if((faceType == FaceType.CAT_MORPH || faceType == FaceType.HUMAN)

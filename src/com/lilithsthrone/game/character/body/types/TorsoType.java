@@ -227,7 +227,7 @@ public interface TorsoType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractTorsoType> table = new TypeTable<>(
+	TypeTable<TorsoType> table = new TypeTable<>(
 		TorsoType::sanitize,
 		TorsoType.class,
 		AbstractTorsoType.class,
@@ -240,7 +240,7 @@ public interface TorsoType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractTorsoType getTorsoTypeFromId(String id) {
+	static TorsoType getTorsoTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -260,17 +260,17 @@ public interface TorsoType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromTorsoType(AbstractTorsoType torsoType) {
+	static String getIdFromTorsoType(TorsoType torsoType) {
 		return torsoType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractTorsoType> getAllTorsoTypes() {
+	static List<TorsoType> getAllTorsoTypes() {
 		return table.listByRace();
 	}
 	
 	@Deprecated
-	public static List<AbstractTorsoType> getTorsoTypes(Race r) {
+	static List<TorsoType> getTorsoTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

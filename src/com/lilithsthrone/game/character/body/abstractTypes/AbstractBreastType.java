@@ -33,8 +33,8 @@ public abstract class AbstractBreastType implements BreastType {
 	
 	private AbstractBodyCoveringType coveringType;
 	private Race race;
-	private AbstractNippleType nippleType;
-	private AbstractFluidType fluidType;
+	private NippleType nippleType;
+	private FluidType fluidType;
 	
 	private List<String> namesFlat;
 	private List<String> namesFlatPlural;
@@ -67,8 +67,8 @@ public abstract class AbstractBreastType implements BreastType {
 	 */
 	public AbstractBreastType(AbstractBodyCoveringType coveringType,
 			Race race,
-			AbstractNippleType nippleType,
-			AbstractFluidType fluidType,
+			NippleType nippleType,
+			FluidType fluidType,
 			List<String> namesFlat,
 			List<String> namesFlatPlural,
 			List<String> descriptorsFlat,
@@ -104,8 +104,8 @@ public abstract class AbstractBreastType implements BreastType {
 	
 	public AbstractBreastType(AbstractBodyCoveringType skinType,
 			Race race,
-			AbstractNippleType nippleType,
-			AbstractFluidType fluidType,
+			NippleType nippleType,
+			FluidType fluidType,
 			String breastsTransformationDescription,
 			String breastsBodyDescription,
 			String breastsCrotchTransformationDescription,
@@ -139,8 +139,8 @@ public abstract class AbstractBreastType implements BreastType {
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 				
-				this.nippleType = NippleType.getNippleTypeFromId(coreElement.getMandatoryFirstOf("nippleType").getTextContent());
-				this.fluidType = FluidType.getFluidTypeFromId(coreElement.getMandatoryFirstOf("fluidType").getTextContent());
+				this.nippleType = NippleType.table.of(coreElement.getMandatoryFirstOf("nippleType").getTextContent());
+				this.fluidType = FluidType.table.of(coreElement.getMandatoryFirstOf("fluidType").getTextContent());
 				
 				this.namesBreasts = new ArrayList<>();
 				for(Element e : coreElement.getMandatoryFirstOf("names").getAllOf("name")) {
@@ -196,12 +196,12 @@ public abstract class AbstractBreastType implements BreastType {
 	}
 
 	@Override
-	public AbstractNippleType getNippleType() {
+	public NippleType getNippleType() {
 		return nippleType;
 	}
 
 	@Override
-	public AbstractFluidType getFluidType() {
+	public FluidType getFluidType() {
 		return fluidType;
 	}
 

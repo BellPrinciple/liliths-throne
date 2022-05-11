@@ -8,7 +8,6 @@ import org.w3c.dom.Element;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.Game;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.race.Race;
@@ -326,7 +325,7 @@ public class ItemEffect implements XMLSaving {
 						case TF_SKIN:
 			 				return AbstractItemEffectType.getRacialEffect(halfSubspecies.getRace(), getPrimaryModifier(), secondaryMod, getPotency(), user, target).applyEffect();
 						case TF_TAIL:
-							List<AbstractTailType> tailTypes = RacialBody.valueOfRace(halfSubspecies.getRace()).getTailType();
+							var tailTypes = RacialBody.valueOfRace(halfSubspecies.getRace()).getTailType();
 							if(tailTypes.size()==1 && tailTypes.get(0)==TailType.NONE) {
 				 				return AbstractItemEffectType.getRacialEffect(Race.DEMON, getPrimaryModifier(), secondaryMod, getPotency(), user, target).applyEffect();
 							} else {

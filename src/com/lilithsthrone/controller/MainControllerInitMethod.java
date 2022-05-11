@@ -32,21 +32,6 @@ import com.lilithsthrone.game.character.body.Eye;
 import com.lilithsthrone.game.character.body.Horn;
 import com.lilithsthrone.game.character.body.Tail;
 import com.lilithsthrone.game.character.body.Testicle;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
@@ -3241,8 +3226,8 @@ public class MainControllerInitMethod {
 
 				// ------------ Demonic/Slime transformations -------------- //
 				
-				for(AbstractArmType armType: ArmType.getAllArmTypes()) {
-					id = "CHANGE_ARM_"+ArmType.getIdFromArmType(armType);
+				for(var armType: ArmType.table.listByRace()) {
+					id = "CHANGE_ARM_"+armType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setArmType(armType);
@@ -3251,8 +3236,8 @@ public class MainControllerInitMethod {
 					}
 				}
 				
-				for(AbstractEyeType eyeType: EyeType.getAllEyeTypes()) {
-					id = "CHANGE_EYE_"+EyeType.getIdFromEyeType(eyeType);
+				for(var eyeType: EyeType.table.listByRace()) {
+					id = "CHANGE_EYE_"+eyeType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setEyeType(eyeType);
@@ -3261,8 +3246,8 @@ public class MainControllerInitMethod {
 					}
 				}
 				
-				for(AbstractEarType earType: EarType.getAllEarTypes()) {
-					id = "CHANGE_EAR_"+EarType.getIdFromEarType(earType);
+				for(var earType: EarType.table.listByRace()) {
+					id = "CHANGE_EAR_"+earType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setEarType(earType);
@@ -3271,8 +3256,8 @@ public class MainControllerInitMethod {
 					}
 				}
 				
-				for(AbstractHornType hornType: HornType.getAllHornTypes()) {
-					id = "CHANGE_HORN_"+HornType.getIdFromHornType(hornType);
+				for(var hornType: HornType.table.listByRace()) {
+					id = "CHANGE_HORN_"+hornType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setHornType(hornType);
@@ -3281,8 +3266,8 @@ public class MainControllerInitMethod {
 					}
 				}
 				
-				for(AbstractAntennaType antennaType: AntennaType.getAllAntennaTypes()) {
-					id = "CHANGE_ANTENNA_"+AntennaType.getIdFromAntennaType(antennaType);
+				for(var antennaType: AntennaType.table.list()) {
+					id = "CHANGE_ANTENNA_"+antennaType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setAntennaType(antennaType);
@@ -3291,8 +3276,8 @@ public class MainControllerInitMethod {
 					}
 				}
 
-				for(AbstractHairType hairType: HairType.getAllHairTypes()) {
-					id = "CHANGE_HAIR_"+HairType.getIdFromHairType(hairType);
+				for(var hairType: HairType.table.listByRace()) {
+					id = "CHANGE_HAIR_"+hairType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setHairType(hairType);
@@ -3302,8 +3287,8 @@ public class MainControllerInitMethod {
 				}
 				
 				
-				for(AbstractLegType legType: LegType.getAllLegTypes()) {
-					id = "CHANGE_LEG_"+LegType.getIdFromLegType(legType);
+				for(var legType: LegType.table.listByRace()) {
+					id = "CHANGE_LEG_"+legType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setLegType(legType);
@@ -3312,8 +3297,8 @@ public class MainControllerInitMethod {
 					}
 				}
 				
-				for(AbstractFaceType faceType: FaceType.getAllFaceTypes()) {
-					id = "CHANGE_FACE_"+FaceType.getIdFromFaceType(faceType);
+				for(var faceType: FaceType.table.listByRace()) {
+					id = "CHANGE_FACE_"+faceType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setFaceType(faceType);
@@ -3322,8 +3307,8 @@ public class MainControllerInitMethod {
 					}
 				}
 				
-				for(AbstractTorsoType skinType: TorsoType.getAllTorsoTypes()) {
-					id = "CHANGE_SKIN_"+TorsoType.getIdFromTorsoType(skinType);
+				for(var skinType: TorsoType.table.listByRace()) {
+					id = "CHANGE_SKIN_"+skinType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setTorsoType(skinType);
@@ -3362,8 +3347,8 @@ public class MainControllerInitMethod {
 					}
 				}
 				
-				for(AbstractTailType tailType: TailType.getAllTailTypes()) {
-					id = "CHANGE_TAIL_"+TailType.getIdFromTailType(tailType);
+				for(var tailType: TailType.table.listByRace()) {
+					id = "CHANGE_TAIL_"+tailType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setTailType(tailType);
@@ -3372,8 +3357,8 @@ public class MainControllerInitMethod {
 					}
 				}
 				
-				for(AbstractWingType wingType: WingType.getAllWingTypes()) {
-					id = "CHANGE_WING_"+WingType.getIdFromWingType(wingType);
+				for(var wingType: WingType.table.listByRace()) {
+					id = "CHANGE_WING_"+wingType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setWingType(wingType);
@@ -3382,8 +3367,8 @@ public class MainControllerInitMethod {
 					}
 				}
 
-				for(AbstractAssType assType: AssType.getAllAssTypes()) {
-					id = "CHANGE_ASS_"+AssType.getIdFromAssType(assType);
+				for(var assType: AssType.table.listByRace()) {
+					id = "CHANGE_ASS_"+assType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setAssType(assType);
@@ -3392,8 +3377,8 @@ public class MainControllerInitMethod {
 					}
 				}
 				
-				for(AbstractBreastType breastType: BreastType.getAllBreastTypes()) {
-					id = "CHANGE_BREAST_"+BreastType.getIdFromBreastType(breastType);
+				for(var breastType: BreastType.table.listByRace()) {
+					id = "CHANGE_BREAST_"+breastType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setBreastType(breastType);
@@ -4294,8 +4279,8 @@ public class MainControllerInitMethod {
 				
 				// Vagina:
 				
-				for(AbstractVaginaType vaginaType: VaginaType.getAllVaginaTypes()) {
-					id = "CHANGE_VAGINA_"+VaginaType.getIdFromVaginaType(vaginaType);
+				for(var vaginaType: VaginaType.table.listByRace()) {
+					id = "CHANGE_VAGINA_"+vaginaType.getId();
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 							BodyChanging.getTarget().setVaginaType(vaginaType);
@@ -4406,7 +4391,7 @@ public class MainControllerInitMethod {
 				
 				// Penis:
 				
-				for(AbstractPenisType penisType: PenisType.getAllPenisTypes()) {
+				for(var penisType: PenisType.table.listByRace()) {
 					id = "CHANGE_PENIS_"+PenisType.getIdFromPenisType(penisType);
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {

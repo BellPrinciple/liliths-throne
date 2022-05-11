@@ -205,7 +205,7 @@ public interface AnusType extends BodyPartTypeInterface {
 		}
 	}
 	
-	TypeTable<AbstractAnusType> table = new TypeTable<>(
+	TypeTable<AnusType> table = new TypeTable<>(
 		AnusType::sanitize,
 		AnusType.class,
 		AbstractAnusType.class,
@@ -218,7 +218,7 @@ public interface AnusType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractAnusType getAnusTypeFromId(String id) {
+	static AnusType getAnusTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -230,16 +230,16 @@ public interface AnusType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromAnusType(AbstractAnusType anusType) {
+	static String getIdFromAnusType(AnusType anusType) {
 		return anusType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractAnusType> getAllAnusTypes() {
+	static List<AnusType> getAllAnusTypes() {
 		return table.listByRace();
 	}
 
-	public static List<AbstractAnusType> getAnusTypes(Race r) {
+	static List<AnusType> getAnusTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	

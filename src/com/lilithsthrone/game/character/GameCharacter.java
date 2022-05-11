@@ -58,26 +58,6 @@ import com.lilithsthrone.game.character.body.FluidInterface;
 import com.lilithsthrone.game.character.body.FluidMilk;
 import com.lilithsthrone.game.character.body.Penis;
 import com.lilithsthrone.game.character.body.Testicle;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractMouthType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractNippleType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTongueType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -95,9 +75,12 @@ import com.lilithsthrone.game.character.body.types.FootType;
 import com.lilithsthrone.game.character.body.types.HairType;
 import com.lilithsthrone.game.character.body.types.HornType;
 import com.lilithsthrone.game.character.body.types.LegType;
+import com.lilithsthrone.game.character.body.types.MouthType;
+import com.lilithsthrone.game.character.body.types.NippleType;
 import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.types.TentacleType;
+import com.lilithsthrone.game.character.body.types.TongueType;
 import com.lilithsthrone.game.character.body.types.TorsoType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.types.WingType;
@@ -489,7 +472,7 @@ public abstract class GameCharacter implements XMLSaving {
 	// Fluids:
 	private float alcoholLevel = 0f;
 	private List<Addiction> addictions;
-	private Set<AbstractFluidType> psychoactiveFluidsIngested;
+	private Set<FluidType> psychoactiveFluidsIngested;
 	
 	
 	// Misc.:
@@ -1392,10 +1375,10 @@ public abstract class GameCharacter implements XMLSaving {
 		
 		Element psychoactives = doc.createElement("psychoactiveFluids");
 		characterAddictionsCore.appendChild(psychoactives);
-		for(AbstractFluidType ft : this.getPsychoactiveFluidsIngested()) {
+		for(var ft : this.getPsychoactiveFluidsIngested()) {
 			Element element = doc.createElement("fluid");
 			psychoactives.appendChild(element);
-			XMLUtil.addAttribute(doc, element, "value", FluidType.getIdFromFluidType(ft));
+			XMLUtil.addAttribute(doc, element, "value", ft.getId());
 		}
 
 
@@ -3132,7 +3115,7 @@ public abstract class GameCharacter implements XMLSaving {
 				for(int i=0; i<fluidElements.getLength(); i++){
 					Element e = ((Element)fluidElements.item(i));
 					
-					character.addPsychoactiveFluidIngested(FluidType.getFluidTypeFromId(e.getAttribute("value")));
+					character.addPsychoactiveFluidIngested(FluidType.table.of(e.getAttribute("value")));
 					Main.game.getCharacterUtils().appendToImportLog(log, "<br/>Added psychoactive fluid:"+e.getAttribute("value"));
 				}
 			}
@@ -3144,7 +3127,7 @@ public abstract class GameCharacter implements XMLSaving {
 				for(int i=0; i<addictionElements.getLength(); i++){
 					Element e = ((Element)addictionElements.item(i));
 					
-					character.setLastTimeSatisfiedAddiction(FluidType.getFluidTypeFromId(e.getAttribute("type")), Long.valueOf(e.getAttribute("value")));
+					character.setLastTimeSatisfiedAddiction(FluidType.table.of(e.getAttribute("type")), Long.parseLong(e.getAttribute("value")));
 					Main.game.getCharacterUtils().appendToImportLog(log, "<br/>Set satisfied time:"+e.getAttribute("type")+" "+e.getAttribute("value"));
 				}
 			}
@@ -17940,7 +17923,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return ingestFluid(charactersFluid, charactersFluid.getSubspecies(), charactersFluid.getHalfDemonSubspecies(), fluid, orificeIngestedThrough, millilitres);
 	}
 
-	public String ingestFluid(GameCharacter charactersFluid, Subspecies subspecies, Subspecies halfDemonSubspecies, AbstractFluidType fluidType, SexAreaOrifice orificeIngestedThrough, float millilitres) {
+	public String ingestFluid(GameCharacter charactersFluid, Subspecies subspecies, Subspecies halfDemonSubspecies, FluidType fluidType, SexAreaOrifice orificeIngestedThrough, float millilitres) {
 		FluidInterface fluid = null;
 		switch(fluidType.getBaseType()) {
 			case CUM:
@@ -18176,7 +18159,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return getAlcoholLevelValue()*100;
 	}
 	
-	public Addiction getAddiction(AbstractFluidType fluid) {
+	public Addiction getAddiction(FluidType fluid) {
 		for(Addiction add : addictions) {
 			if(add.getFluid() == fluid) {
 				return add;
@@ -18215,7 +18198,7 @@ public abstract class GameCharacter implements XMLSaving {
 	/**
 	 * <b>You should probably just be using addAddiction() instead!</b>
 	 */
-	public void setLastTimeSatisfiedAddiction(AbstractFluidType fluid, long minutes) {
+	public void setLastTimeSatisfiedAddiction(FluidType fluid, long minutes) {
 		for(Addiction add : addictions) {
 			if(add.getFluid() == fluid) {
 				add.setLastTimeSatisfied(minutes);
@@ -18224,7 +18207,7 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 	}
 	
-	public long getLastTimeSatisfiedAddiction(AbstractFluidType fluid) {
+	public long getLastTimeSatisfiedAddiction(FluidType fluid) {
 		for(Addiction add : addictions) {
 			if(add.getFluid() == fluid) {
 				return add.getLastTimeSatisfied();
@@ -18233,11 +18216,11 @@ public abstract class GameCharacter implements XMLSaving {
 		return 0;
 	}
 	
-	public Set<AbstractFluidType> getPsychoactiveFluidsIngested() {
+	public Set<FluidType> getPsychoactiveFluidsIngested() {
 		return psychoactiveFluidsIngested;
 	}
 	
-	public void addPsychoactiveFluidIngested(AbstractFluidType fluidType) {
+	public void addPsychoactiveFluidIngested(FluidType fluidType) {
 		psychoactiveFluidsIngested.add(fluidType);
 	}
 	
@@ -18246,7 +18229,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	public boolean hasIngestedPsychoactiveFluidType(FluidTypeBase baseType) {
-		for(AbstractFluidType type : getPsychoactiveFluidsIngested()) {
+		for(var type : getPsychoactiveFluidsIngested()) {
 			if(type.getBaseType()==baseType) {
 				return true;
 			}
@@ -19579,7 +19562,7 @@ public abstract class GameCharacter implements XMLSaving {
 				if (this.getBodyMaterial() == BodyMaterial.SLIME) {
 					litterSizeBasedOn = Race.SLIME;
 				} else {
-					AbstractVaginaType vaginaType = getVaginaType();
+					VaginaType vaginaType = getVaginaType();
 					if(vaginaType.getRace()==Race.HUMAN) {
 						litterSizeBasedOn = Optional.ofNullable(partner.getPenisType().getRace()).orElseGet(partner::getRace);
 					} else {
@@ -19677,7 +19660,7 @@ public abstract class GameCharacter implements XMLSaving {
 				if (this.getBodyMaterial() == BodyMaterial.SLIME) {
 					litterSizeBasedOn = Race.SLIME;
 				} else {
-					AbstractVaginaType vaginaType = getVaginaType();
+					VaginaType vaginaType = getVaginaType();
 					if (vaginaType.getRace()==Race.HUMAN) {
 						litterSizeBasedOn = partnerSubspecies.getRace();
 					} else {
@@ -25458,10 +25441,10 @@ public abstract class GameCharacter implements XMLSaving {
 	// ------------------------------ Antennae: ------------------------------ //
 	
 	// Type:
-	public AbstractAntennaType getAntennaType() {
+	public AntennaType getAntennaType() {
 		return body.getAntenna().getType();
 	}
-	public String setAntennaType(AbstractAntennaType antennaType) {
+	public String setAntennaType(AntennaType antennaType) {
 		return body.getAntenna().setType(this, antennaType);
 	}
 	public AbstractBodyCoveringType getAntennaCovering() {
@@ -25544,10 +25527,10 @@ public abstract class GameCharacter implements XMLSaving {
 		return !this.isFeral() || this.getFeralAttributes().isArmsOrWingsPresent();
 	}
 	// Type:
-	public AbstractArmType getArmType() {
+	public ArmType getArmType() {
 		return body.getArm().getType();
 	}
-	public String setArmType(AbstractArmType type) {
+	public String setArmType(ArmType type) {
 		return body.getArm().setType(this, type);
 	}
 	public List<BodyPartTag> getArmTypeTags() {
@@ -25663,10 +25646,10 @@ public abstract class GameCharacter implements XMLSaving {
 	// ------------------------------ Ass: ------------------------------ //
 	
 	// Type:
-	public AbstractAssType getAssType() {
+	public AssType getAssType() {
 		return body.getAss().getType();
 	}
-	public String setAssType(AbstractAssType type) {
+	public String setAssType(AssType type) {
 		return body.getAss().setType(this, type);
 	}
 	public AbstractBodyCoveringType getAssCovering() {
@@ -26216,7 +26199,7 @@ public abstract class GameCharacter implements XMLSaving {
 						resetAreas = true;
 					}
 				}
-				List<AbstractTailType> tailTypes = RacialBody.valueOfRace(race).getTailType();
+				List<TailType> tailTypes = RacialBody.valueOfRace(race).getTailType();
 				if(tailTypes.size()==1 && tailTypes.get(0)==TailType.NONE) {
 					if(this.getTailType().getRace()!=Race.DEMON && this.getTailType()!=TailType.NONE) {
 						this.setTailType(TailType.DEMON_COMMON);
@@ -26443,10 +26426,10 @@ public abstract class GameCharacter implements XMLSaving {
 		return body.getBreast().getNipples().isFeral(this);
 	}
 	// Type:
-	public AbstractBreastType getBreastType() {
+	public BreastType getBreastType() {
 		return body.getBreast().getType();
 	}
-	public String setBreastType(AbstractBreastType type) {
+	public String setBreastType(BreastType type) {
 		return body.getBreast().setType(this, type);
 	}
 	// Shape:
@@ -26600,7 +26583,7 @@ public abstract class GameCharacter implements XMLSaving {
 	
 	// Type:
 	/**NippleType is automatically changed when BreastType is set.*/
-	public AbstractNippleType getNippleType() {
+	public NippleType getNippleType() {
 		return body.getBreast().getNipples().getType();
 	}
 	// Names:
@@ -26761,7 +26744,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public FluidMilk getMilk() {
 		return body.getBreast().getMilk();
 	}
-	public AbstractFluidType getMilkType() {
+	public FluidType getMilkType() {
 		return body.getBreast().getMilk().getType();
 	}
 	public String getMilkName() {
@@ -26826,10 +26809,10 @@ public abstract class GameCharacter implements XMLSaving {
 		return body.getBreastCrotch().getNipples().isFeral(this);
 	}
 	// Type:
-	public AbstractBreastType getBreastCrotchType() {
+	public BreastType getBreastCrotchType() {
 		return body.getBreastCrotch().getType();
 	}
-	public String setBreastCrotchType(AbstractBreastType type) {
+	public String setBreastCrotchType(BreastType type) {
 		return body.getBreastCrotch().setType(this, type);
 	}
 	// Shape:
@@ -26973,7 +26956,7 @@ public abstract class GameCharacter implements XMLSaving {
 	
 	// Type:
 	/**NippleType is automatically changed when BreastCrotchType is set.*/
-	public AbstractNippleType getNippleCrotchType() {
+	public NippleType getNippleCrotchType() {
 		return body.getBreastCrotch().getNipples().getType();
 	}
 	// Names:
@@ -27134,7 +27117,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public FluidMilk getMilkCrotch() {
 		return body.getBreastCrotch().getMilk();
 	}
-	public AbstractFluidType getMilkCrotchType() {
+	public FluidType getMilkCrotchType() {
 		return body.getBreastCrotch().getMilk().getType();
 	}
 	public String getMilkCrotchName() {
@@ -27167,10 +27150,10 @@ public abstract class GameCharacter implements XMLSaving {
 	// ------------------------------ Ears: ------------------------------ //
 	
 	// Type:
-	public AbstractEarType getEarType() {
+	public EarType getEarType() {
 		return body.getEar().getType();
 	}
-	public String setEarType(AbstractEarType type) {
+	public String setEarType(EarType type) {
 		return body.getEar().setType(this, type);
 	}
 	public AbstractBodyCoveringType getEarCovering() {
@@ -27211,10 +27194,10 @@ public abstract class GameCharacter implements XMLSaving {
 	// ------------------------------ Eyes: ------------------------------ //
 	
 	// Type:
-	public AbstractEyeType getEyeType() {
+	public EyeType getEyeType() {
 		return body.getEye().getType();
 	}
-	public String setEyeType(AbstractEyeType type) {
+	public String setEyeType(EyeType type) {
 		return body.getEye().setType(this, type);
 	}
 	public AbstractBodyCoveringType getEyeCovering() {
@@ -27338,10 +27321,10 @@ public abstract class GameCharacter implements XMLSaving {
 	// ------------------------------ Face & Mouth: ------------------------------ //
 	
 	// Type:
-	public AbstractFaceType getFaceType() {
+	public FaceType getFaceType() {
 		return body.getFace().getType();
 	}
-	public String setFaceType(AbstractFaceType type) {
+	public String setFaceType(FaceType type) {
 		return body.getFace().setType(this, type);
 	}
 	public List<BodyPartTag> getFaceTypeTags() {
@@ -27371,7 +27354,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public boolean isFaceSharkTeeth() {
 		return body.getFace().isSharkTeeth();
 	}
-	public AbstractMouthType getMouthType() {
+	public MouthType getMouthType() {
 		return body.getFace().getMouth().getType();
 	}
 	// Names:
@@ -27720,10 +27703,10 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	// Type:
-	public AbstractHairType getHairType() {
+	public HairType getHairType() {
 		return body.getHair().getType();
 	}
-	public String setHairType(AbstractHairType type) {
+	public String setHairType(HairType type) {
 		return body.getHair().setType(this, type);
 	}
 	public AbstractBodyCoveringType getHairCovering() {
@@ -27815,10 +27798,10 @@ public abstract class GameCharacter implements XMLSaving {
 	// ------------------------------ Horns: ------------------------------ //
 	
 	// Type:
-	public AbstractHornType getHornType() {
+	public HornType getHornType() {
 		return body.getHorn().getType();
 	}
-	public String setHornType(AbstractHornType hornType) {
+	public String setHornType(HornType hornType) {
 		return body.getHorn().setType(this, hornType);
 	}
 	public AbstractBodyCoveringType getHornCovering() {
@@ -27923,7 +27906,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return this.getLegType().getWaterSpeedModifier() + this.getLegConfiguration().getWaterSpeedModifier();
 	}
 	// Type:
-	public AbstractLegType getLegType() {
+	public LegType getLegType() {
 		return body.getLeg().getType();
 	}
 	public int getLegCount() {
@@ -27936,7 +27919,7 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 		return getLegConfiguration().getNumberOfLegs();
 	}
-	public String setLegType(AbstractLegType type) {
+	public String setLegType(LegType type) {
 		return body.getLeg().setType(this, type);
 	}
 	public AbstractBodyCoveringType getLegCovering() {
@@ -27984,7 +27967,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 * @param applyFullEffects Pass in true if you want the additional transformations to include attribute changes (such as penis resizing, vagina capacity resetting, etc.).
 	 * @return A description of all the changes.
 	 */
-	public String setLegConfiguration(AbstractLegType legType, LegConfiguration legConfiguration, boolean applyFullEffects) {
+	public String setLegConfiguration(LegType legType, LegConfiguration legConfiguration, boolean applyFullEffects) {
 		if(this.isFeral()) {
 			return "<p style='text-align:center;'>"
 						+ "[style.italicsDisabled(As [npc.sheIsFull] a feral [npc.race], [npc.name] cannot have [npc.her] leg configuration transformed!)]"
@@ -28108,7 +28091,7 @@ public abstract class GameCharacter implements XMLSaving {
 	// ------------------------------ Tongue: ------------------------------ //
 	
 	// Type:
-	public AbstractTongueType getTongueType() {
+	public TongueType getTongueType() {
 		return body.getFace().getTongue().getType();
 	}
 	public AbstractBodyCoveringType getTongueCovering() {
@@ -28231,10 +28214,10 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	// Type:
-	public AbstractPenisType getPenisType() {
+	public PenisType getPenisType() {
 		return getCurrentPenis().getType();
 	}
-	public String setPenisType(AbstractPenisType type) {
+	public String setPenisType(PenisType type) {
 		String s = body.getPenis().setType(this, type);
 		
 		StringBuilder clothingRemovalSB = new StringBuilder();
@@ -28454,10 +28437,10 @@ public abstract class GameCharacter implements XMLSaving {
 	// ------------------------------ Second Penis: ------------------------------ //
 	
 	// Type:
-	public AbstractPenisType getSecondPenisType() {
+	public PenisType getSecondPenisType() {
 		return body.getSecondPenis().getType();
 	}
-	public String setSecondPenisType(AbstractPenisType type) {
+	public String setSecondPenisType(PenisType type) {
 		return body.getSecondPenis().setType(this, type);
 	}
 	public AbstractBodyCoveringType getSecondPenisCovering() {
@@ -28772,7 +28755,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public FluidCum getCum() {
 		return getCurrentPenis().getTesticle().getCum();
 	}
-	public AbstractFluidType getCumType() {
+	public FluidType getCumType() {
 		return getCurrentPenis().getTesticle().getCum().getType();
 	}
 	public String getCumName() {
@@ -28810,10 +28793,10 @@ public abstract class GameCharacter implements XMLSaving {
 	// ------------------------------ Torso: ------------------------------ //
 	
 	// Type:
-	public AbstractTorsoType getTorsoType() {
+	public TorsoType getTorsoType() {
 		return body.getTorso().getType();
 	}
-	public String setTorsoType(AbstractTorsoType type) {
+	public String setTorsoType(TorsoType type) {
 		return body.getTorso().setType(this, type);
 	}
 	public AbstractBodyCoveringType getTorsoCovering() {
@@ -29087,10 +29070,10 @@ public abstract class GameCharacter implements XMLSaving {
 		return body.getTail().isSuitableForPenetration();
 	}
 	// Type:
-	public AbstractTailType getTailType() {
+	public TailType getTailType() {
 		return body.getTail().getType();
 	}
-	public String setTailType(AbstractTailType type) {
+	public String setTailType(TailType type) {
 		return body.getTail().setType(this, type);
 	}
 	public AbstractBodyCoveringType getTailCovering() {
@@ -29207,10 +29190,10 @@ public abstract class GameCharacter implements XMLSaving {
 		return getTentacleType()!=TentacleType.NONE;
 	}
 	// Type:
-	public AbstractTentacleType getTentacleType() {
+	public TentacleType getTentacleType() {
 		return body.getTentacle().getType();
 	}
-	public String setTentacleType(AbstractTentacleType type) {
+	public String setTentacleType(TentacleType type) {
 		return body.getTentacle().setType(this, type);
 	}
 	public AbstractBodyCoveringType getTentacleCovering() {
@@ -29304,13 +29287,13 @@ public abstract class GameCharacter implements XMLSaving {
 	// ------------------------------ Vagina: ------------------------------ //
 	
 	// Type:
-	public AbstractVaginaType getVaginaType() {
+	public VaginaType getVaginaType() {
 		return body.getVagina().getType();
 	}
-	public String setVaginaType(AbstractVaginaType type, boolean overridePregnancyPrevention) {
+	public String setVaginaType(VaginaType type, boolean overridePregnancyPrevention) {
 		return body.getVagina().setType(this, type, overridePregnancyPrevention);
 	}
-	public String setVaginaType(AbstractVaginaType type) {
+	public String setVaginaType(VaginaType type) {
 		return body.getVagina().setType(this, type);
 	}
 	public AbstractBodyCoveringType getVaginaCovering() {
@@ -29561,7 +29544,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public FluidGirlCum getGirlcum() {
 		return body.getVagina().getGirlcum();
 	}
-	public AbstractFluidType getGirlcumType() {
+	public FluidType getGirlcumType() {
 		return body.getVagina().getGirlcum().getType();
 	}
 	public String getGirlcumName() {
@@ -29690,10 +29673,10 @@ public abstract class GameCharacter implements XMLSaving {
 		return getWingType().isGeneric();
 	}
 	// Type:
-	public AbstractWingType getWingType() {
+	public WingType getWingType() {
 		return body.getWing().getType();
 	}
-	public String setWingType(AbstractWingType type) {
+	public String setWingType(WingType type) {
 		return body.getWing().setType(this, type);
 	}
 	public AbstractBodyCoveringType getWingCovering() {

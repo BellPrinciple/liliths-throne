@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAnusType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
+import com.lilithsthrone.game.character.body.types.AnusType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyHair;
 import com.lilithsthrone.game.character.body.valueEnums.Capacity;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
@@ -22,12 +22,12 @@ import com.lilithsthrone.utils.Util;
 public class Anus implements BodyPartInterface {
 	
 	// Asshole variables:
-	protected AbstractAnusType type;
+	protected AnusType type;
 	protected OrificeAnus orificeAnus;
 	protected boolean bleached;
 	protected BodyHair assHair;
 
-	public Anus(AbstractAnusType type, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
+	public Anus(AnusType type, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
 		this.type = type;
 		
 		orificeAnus = new OrificeAnus(wetness, capacity, depth, elasticity, plasticity, virgin, type.getDefaultRacialOrificeModifiers());
@@ -91,11 +91,11 @@ public class Anus implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractAnusType getType() {
+	public AnusType getType() {
 		return type;
 	}
 	
-	public void setType(AbstractAnusType type) {
+	public void setType(AnusType type) {
 		this.type = type;
 	}
 	

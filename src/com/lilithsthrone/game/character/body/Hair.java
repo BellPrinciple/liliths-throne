@@ -1,7 +1,7 @@
 package com.lilithsthrone.game.character.body;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
+import com.lilithsthrone.game.character.body.types.HairType;
 import com.lilithsthrone.game.character.body.valueEnums.HairLength;
 import com.lilithsthrone.game.character.body.valueEnums.HairStyle;
 import com.lilithsthrone.game.character.race.RaceStage;
@@ -16,12 +16,12 @@ import com.lilithsthrone.utils.Units;
  */
 public class Hair implements BodyPartInterface {
 
-	protected AbstractHairType type;
+	protected HairType type;
 	protected int length;
 	protected HairStyle style;
 	protected boolean neckFluff;
 
-	public Hair(AbstractHairType type, int length, HairStyle style, RaceStage ownerRaceStage) {
+	public Hair(HairType type, int length, HairStyle style, RaceStage ownerRaceStage) {
 		this.type = type;
 		this.length = length;
 		this.style = style;
@@ -33,7 +33,7 @@ public class Hair implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractHairType getType() {
+	public HairType getType() {
 		return type;
 	}
 	
@@ -61,7 +61,7 @@ public class Hair implements BodyPartInterface {
 		return type.getDescriptor(owner);
 	}
 	
-	public String setType(GameCharacter owner, AbstractHairType type) {
+	public String setType(GameCharacter owner, HairType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;
 			if(owner!=null) {

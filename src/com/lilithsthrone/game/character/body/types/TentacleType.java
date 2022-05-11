@@ -369,7 +369,7 @@ public interface TentacleType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractTentacleType> table = new TypeTable<>(
+	TypeTable<TentacleType> table = new TypeTable<>(
 		s->s,
 		TentacleType.class,
 		AbstractTentacleType.class,
@@ -382,31 +382,30 @@ public interface TentacleType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractTentacleType getTentacleTypeFromId(String id) {
+	static TentacleType getTentacleTypeFromId(String id) {
 		return table.of(id);
 	}
 
 	@Deprecated
-	public static String getIdFromTentacleType(AbstractTentacleType tentacleType) {
+	static String getIdFromTentacleType(TentacleType tentacleType) {
 		return tentacleType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractTentacleType> getAllTentacleTypes() {
+	static List<TentacleType> getAllTentacleTypes() {
 		return table.listByRace();
 	}
-	
-	@Deprecated
-	public static List<AbstractTentacleType> getTentacleTypes(Race r) {
+
+	static List<TentacleType> getTentacleTypes(Race r) {
 		return table.of(r).orElse(List.of(NONE));
 	}
-	
-	public static List<AbstractTentacleType> getTentacleTypesSuitableForTransformation(List<AbstractTentacleType> options) {
+
+	static List<TentacleType> getTentacleTypesSuitableForTransformation(List<TentacleType> options) {
 		if (!options.contains(TentacleType.NONE)) {
 			return options;
 		}
 		
-		List<AbstractTentacleType> duplicatedOptions = new ArrayList<>(options);
+		var duplicatedOptions = new ArrayList<>(options);
 		duplicatedOptions.remove(TentacleType.NONE);
 		return duplicatedOptions;
 	}

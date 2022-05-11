@@ -30,7 +30,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 
 	private AbstractBodyCoveringType coveringType;
 	private Race race;
-	private AbstractFluidType fluidType;
+	private FluidType fluidType;
 	private boolean internal;
 	
 	private List<String> names;
@@ -48,7 +48,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 	 */
 	public AbstractTesticleType(AbstractBodyCoveringType coveringType,
 			Race race,
-			AbstractFluidType fluidType,
+			FluidType fluidType,
 			boolean internal,
 			List<String> names,
 			List<String> namesPlural,
@@ -66,7 +66,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 	
 	public AbstractTesticleType(AbstractBodyCoveringType skinType,
 			Race race,
-			AbstractFluidType fluidType,
+			FluidType fluidType,
 			boolean internal) {
 		this(skinType,
 				race,
@@ -91,7 +91,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
 				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
-				this.fluidType = FluidType.getFluidTypeFromId(coreElement.getMandatoryFirstOf("fluidType").getTextContent());
+				this.fluidType = FluidType.table.of(coreElement.getMandatoryFirstOf("fluidType").getTextContent());
 
 				this.internal = Boolean.valueOf(coreElement.getMandatoryFirstOf("internal").getTextContent());
 				
@@ -130,7 +130,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 	}
 
 	@Override
-	public AbstractFluidType getFluidType() {
+	public FluidType getFluidType() {
 		return fluidType;
 	}
 

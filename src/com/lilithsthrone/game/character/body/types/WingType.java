@@ -229,7 +229,7 @@ public interface WingType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractWingType> table = new TypeTable<>(
+	TypeTable<WingType> table = new TypeTable<>(
 		WingType::sanitize,
 		WingType.class,
 		AbstractWingType.class,
@@ -242,7 +242,7 @@ public interface WingType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractWingType getWingTypeFromId(String id) {
+	static WingType getWingTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -257,19 +257,19 @@ public interface WingType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromWingType(AbstractWingType wingType) {
+	static String getIdFromWingType(WingType wingType) {
 		return wingType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractWingType> getAllWingTypes() {
+	static List<WingType> getAllWingTypes() {
 		return table.listByRace();
 	}
 
 	@Deprecated
-	public static List<AbstractWingType> getWingTypes(Race r) {
+	static List<WingType> getWingTypes(Race r) {
 		return table.of(r).orElseGet(()->table.listByRace().stream()
-			.filter(AbstractWingType::isGeneric)
+			.filter(WingType::isGeneric)
 			.collect(Collectors.toList()));
 	}
 }

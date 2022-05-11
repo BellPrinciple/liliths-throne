@@ -456,7 +456,7 @@ public interface EarType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractEarType> table = new TypeTable<>(
+	TypeTable<EarType> table = new TypeTable<>(
 		EarType::sanitize,
 		EarType.class,
 		AbstractEarType.class,
@@ -469,7 +469,7 @@ public interface EarType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractEarType getEarTypeFromId(String id) {
+	static EarType getEarTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -484,17 +484,17 @@ public interface EarType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromEarType(AbstractEarType earType) {
+	static String getIdFromEarType(EarType earType) {
 		return earType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractEarType> getAllEarTypes() {
+	static List<EarType> getAllEarTypes() {
 		return table.listByRace();
 	}
 
 	@Deprecated
-	public static List<AbstractEarType> getEarTypes(Race r) {
+	static List<EarType> getEarTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

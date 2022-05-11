@@ -1,7 +1,7 @@
 package com.lilithsthrone.game.character.body;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
+import com.lilithsthrone.game.character.body.types.EarType;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
@@ -14,16 +14,16 @@ import com.lilithsthrone.main.Main;
  */
 public class Ear implements BodyPartInterface {
 	
-	protected AbstractEarType type;
+	protected EarType type;
 	protected boolean pierced;
 
-	public Ear(AbstractEarType type) {
+	public Ear(EarType type) {
 		this.type = type;
 		pierced = false;
 	}
 
 	@Override
-	public AbstractEarType getType() {
+	public EarType getType() {
 		return type;
 	}
 	
@@ -52,7 +52,7 @@ public class Ear implements BodyPartInterface {
 		return type.getDescriptor(gc);
 	}
 	
-	public String setType(GameCharacter owner, AbstractEarType type) {
+	public String setType(GameCharacter owner, EarType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;
 			if(owner!=null) {

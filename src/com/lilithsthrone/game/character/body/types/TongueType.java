@@ -238,7 +238,7 @@ public interface TongueType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractTongueType> table = new TypeTable<>(
+	TypeTable<TongueType> table = new TypeTable<>(
 		TongueType::sanitize,
 		TongueType.class,
 		AbstractTongueType.class,
@@ -251,7 +251,7 @@ public interface TongueType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractTongueType getTongueTypeFromId(String id) {
+	static TongueType getTongueTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -270,17 +270,17 @@ public interface TongueType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromTongueType(AbstractTongueType tongueType) {
+	static String getIdFromTongueType(TongueType tongueType) {
 		return tongueType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractTongueType> getAllTongueTypes() {
+	static List<TongueType> getAllTongueTypes() {
 		return table.listByRace();
 	}
 	
 	@Deprecated
-	public static List<AbstractTongueType> getTongueTypes(Race r) {
+	static List<TongueType> getTongueTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 

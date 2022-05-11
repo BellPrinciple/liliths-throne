@@ -43,7 +43,7 @@ public abstract class AbstractPenisType implements PenisType {
 
 	private boolean pubicHairAllowed;
 	
-	private AbstractTesticleType testicleType;
+	private TesticleType testicleType;
 	
 	private String additionalTransformationEffect;
 	
@@ -80,7 +80,7 @@ public abstract class AbstractPenisType implements PenisType {
 	 */
 	public AbstractPenisType(AbstractBodyCoveringType coveringType,
 			Race race,
-			AbstractTesticleType testicleType,
+			TesticleType testicleType,
 			List<String> namesFeminine,
 			List<String> namesPluralFeminine,
 			List<String> namesMasculine,
@@ -117,7 +117,7 @@ public abstract class AbstractPenisType implements PenisType {
 	
 	public AbstractPenisType(AbstractBodyCoveringType coveringType,
 			Race race,
-			AbstractTesticleType testicleType,
+			TesticleType testicleType,
 			String transformationDescription,
 			String bodyDescription,
 			List<PenetrationModifier> defaultRacialPenetrationModifiers) {
@@ -156,7 +156,7 @@ public abstract class AbstractPenisType implements PenisType {
 					this.pubicHairAllowed = Boolean.valueOf(coreElement.getMandatoryFirstOf("pubicHairAllowed").getTextContent());
 				}
 				
-				this.testicleType = TesticleType.getTesticleTypeFromId(coreElement.getMandatoryFirstOf("testicleType").getTextContent());
+				this.testicleType = TesticleType.table.of(coreElement.getMandatoryFirstOf("testicleType").getTextContent());
 				
 				this.additionalTransformationEffect = coreElement.getMandatoryFirstOf("additionalTransformationEffect").getTextContent();
 				
@@ -223,7 +223,7 @@ public abstract class AbstractPenisType implements PenisType {
 	}
 
 	@Override
-	public AbstractTesticleType getTesticleType() {
+	public TesticleType getTesticleType() {
 		return testicleType;
 	}
 

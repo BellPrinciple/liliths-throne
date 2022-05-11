@@ -6,9 +6,7 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.TypeTable;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFootType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
@@ -27,7 +25,7 @@ import com.lilithsthrone.utils.Util;
  */
 public interface LegType extends BodyPartTypeInterface {
 
-	AbstractFootType getFootType();
+	FootType getFootType();
 
 	FootStructure getDefaultFootStructure(LegConfiguration legConfiguration);
 
@@ -92,7 +90,7 @@ public interface LegType extends BodyPartTypeInterface {
 
 	boolean hasSpinneret();
 
-	AbstractTentacleType getTentacleType();
+	TentacleType getTentacleType();
 
 	default boolean isLegsReplacedByTentacles() {
 		return getTentacleType()!=TentacleType.NONE;
@@ -395,7 +393,7 @@ public interface LegType extends BodyPartTypeInterface {
 			return "demonic-octopus";
 		}
 		@Override
-		public AbstractTentacleType getTentacleType() {
+		public TentacleType getTentacleType() {
 			return TentacleType.LEG_DEMON_OCTOPUS;
 		}
 		public int getTentacleCount() {
@@ -861,7 +859,7 @@ public interface LegType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, FootStructure defaultFootStructure, AbstractFootType footType, String determiner, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<String> footDescriptorsMasculine, List<String> footDescriptorsFeminine, List<String> toeDescriptorsMasculine, List<String> toeDescriptorsFeminine, String legTransformationDescription, String legBodyDescription, List<LegConfiguration> allowedLegConfigurations, boolean spinneret) {
+		public Special(AbstractBodyCoveringType coveringType, Race race, FootStructure defaultFootStructure, FootType footType, String determiner, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<String> footDescriptorsMasculine, List<String> footDescriptorsFeminine, List<String> toeDescriptorsMasculine, List<String> toeDescriptorsFeminine, String legTransformationDescription, String legBodyDescription, List<LegConfiguration> allowedLegConfigurations, boolean spinneret) {
 			super(coveringType, race, defaultFootStructure, footType, determiner, name, namePlural, descriptorsMasculine, descriptorsFeminine, footDescriptorsMasculine, footDescriptorsFeminine, toeDescriptorsMasculine, toeDescriptorsFeminine, legTransformationDescription, legBodyDescription, allowedLegConfigurations, spinneret);
 		}
 
@@ -873,7 +871,7 @@ public interface LegType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractLegType> table = new TypeTable<>(
+	TypeTable<LegType> table = new TypeTable<>(
 		LegType::sanitize,
 		LegType.class,
 		AbstractLegType.class,
@@ -886,7 +884,7 @@ public interface LegType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractLegType getLegTypeFromId(String id) {
+	static LegType getLegTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -902,17 +900,17 @@ public interface LegType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromLegType(AbstractLegType legType) {
+	static String getIdFromLegType(LegType legType) {
 		return legType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractLegType> getAllLegTypes() {
+	static List<LegType> getAllLegTypes() {
 		return table.listByRace();
 	}
 
 	@Deprecated
-	public static List<AbstractLegType> getLegTypes(Race r) {
+	static List<LegType> getLegTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 

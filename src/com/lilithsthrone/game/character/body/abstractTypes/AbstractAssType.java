@@ -32,7 +32,7 @@ public abstract class AbstractAssType implements AssType {
 	
 	private AbstractBodyCoveringType coveringType;
 	private Race race;
-	private AbstractAnusType anusType;
+	private AnusType anusType;
 	
 	private List<String> names;
 	private List<String> namesPlural;
@@ -56,7 +56,7 @@ public abstract class AbstractAssType implements AssType {
 	 */
 	public AbstractAssType(AbstractBodyCoveringType coveringType,
 			Race race,
-			AbstractAnusType anusType,
+			AnusType anusType,
 			List<String> names,
 			List<String> namesPlural,
 			List<String> descriptorsMasculine,
@@ -98,7 +98,7 @@ public abstract class AbstractAssType implements AssType {
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 				
-				this.anusType = AnusType.getAnusTypeFromId(coreElement.getMandatoryFirstOf("anusType").getTextContent());
+				this.anusType = AnusType.table.of(coreElement.getMandatoryFirstOf("anusType").getTextContent());
 				
 				this.names = new ArrayList<>();
 				for(Element e : coreElement.getMandatoryFirstOf("names").getAllOf("name")) {
@@ -145,7 +145,7 @@ public abstract class AbstractAssType implements AssType {
 	}
 
 	@Override
-	public AbstractAnusType getAnusType() {
+	public AnusType getAnusType() {
 		return anusType;
 	}
 	

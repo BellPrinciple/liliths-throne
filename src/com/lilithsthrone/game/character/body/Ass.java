@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
+import com.lilithsthrone.game.character.body.types.AssType;
 import com.lilithsthrone.game.character.body.valueEnums.AssSize;
 import com.lilithsthrone.game.character.body.valueEnums.HipSize;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -18,13 +18,13 @@ import com.lilithsthrone.utils.Util;
  */
 public class Ass implements BodyPartInterface {
 
-	protected AbstractAssType type;
+	protected AssType type;
 	protected int assSize;
 	protected int hipSize;
 	
 	protected Anus anus;
 
-	public Ass(AbstractAssType type, int assSize, int hipSize, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
+	public Ass(AssType type, int assSize, int hipSize, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
 		this.type = type;
 		this.assSize = assSize;
 		this.hipSize = hipSize;
@@ -67,11 +67,11 @@ public class Ass implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractAssType getType() {
+	public AssType getType() {
 		return type;
 	}
 
-	public String setType(GameCharacter owner, AbstractAssType type) {
+	public String setType(GameCharacter owner, AssType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;
 			anus.setType(type.getAnusType());

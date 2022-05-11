@@ -589,7 +589,7 @@ public interface FluidType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractFluidType> table = new TypeTable<>(
+	TypeTable<FluidType> table = new TypeTable<>(
 		FluidType::sanitize,
 		FluidType.class,
 		AbstractFluidType.class,
@@ -602,7 +602,7 @@ public interface FluidType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractFluidType getFluidTypeFromId(String id) {
+	static FluidType getFluidTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -624,16 +624,17 @@ public interface FluidType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromFluidType(AbstractFluidType fluidType) {
+	static String getIdFromFluidType(FluidType fluidType) {
 		return fluidType.getId();
 	}
-	
-	public static List<AbstractFluidType> getAllFluidTypes() {
+
+	@Deprecated
+	static List<FluidType> getAllFluidTypes() {
 		return table.listByRace();
 	}
 
 	@Deprecated
-	public static List<AbstractFluidType> getFluidTypes(Race r) {
+	static List<FluidType> getFluidTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

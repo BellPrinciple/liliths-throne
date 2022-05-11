@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTesticleType;
+import com.lilithsthrone.game.character.body.types.TesticleType;
 import com.lilithsthrone.game.character.body.valueEnums.CumProduction;
 import com.lilithsthrone.game.character.body.valueEnums.FluidExpulsion;
 import com.lilithsthrone.game.character.body.valueEnums.FluidRegeneration;
@@ -29,7 +29,7 @@ public class Testicle implements BodyPartInterface {
 	public static final int MINIMUM_VALUE_FOR_ALL_CUM_TO_BE_EXPELLED = 5; //ml
 	
 	
-	protected AbstractTesticleType type;
+	protected TesticleType type;
 	protected int testicleSize;
 	protected int cumStorage;
 	protected float cumStored;
@@ -41,7 +41,7 @@ public class Testicle implements BodyPartInterface {
 	
 	protected FluidCum cum;
 
-	public Testicle(AbstractTesticleType type, int testicleSize, int cumStorage, int testicleCount) {
+	public Testicle(TesticleType type, int testicleSize, int cumStorage, int testicleCount) {
 		this.type = type;
 		this.testicleSize = Math.max(0, Math.min(testicleSize, TesticleSize.SEVEN_ABSURD.getValue()));
 		this.cumStorage = cumStorage;
@@ -61,7 +61,7 @@ public class Testicle implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractTesticleType getType() {
+	public TesticleType getType() {
 		return type;
 	}
 	
@@ -96,7 +96,7 @@ public class Testicle implements BodyPartInterface {
 		return Util.randomItemFrom(list);
 	}
 	
-	public void setType(GameCharacter owner, AbstractTesticleType type) {
+	public void setType(GameCharacter owner, TesticleType type) {
 		this.type = type;
 		cum.setType(type.getFluidType());
 	}

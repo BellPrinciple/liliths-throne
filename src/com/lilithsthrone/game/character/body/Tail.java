@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
@@ -27,12 +26,12 @@ public class Tail implements BodyPartInterface {
 	public static final float LENGTH_PERCENTAGE_MIN = 0.05f;
 	public static final float LENGTH_PERCENTAGE_MAX = 2.5f;
 	
-	protected AbstractTailType type;
+	protected TailType type;
 	protected int tailCount;
 	protected int girth;
 	protected float lengthAsPercentageOfHeight;
 
-	public Tail(AbstractTailType type) {
+	public Tail(TailType type) {
 		this.type = type;
 		this.tailCount = 1;
 		this.girth = type.getDefaultGirth();
@@ -40,7 +39,7 @@ public class Tail implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractTailType getType() {
+	public TailType getType() {
 		return type;
 	}
 	
@@ -77,7 +76,7 @@ public class Tail implements BodyPartInterface {
 		return Util.randomItemFrom(descriptors);
 	}
 
-	public String setType(GameCharacter owner, AbstractTailType type) {
+	public String setType(GameCharacter owner, TailType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			if(owner!=null && !owner.getLegConfiguration().isAbleToGrowTail()) {
 				type = TailType.NONE;

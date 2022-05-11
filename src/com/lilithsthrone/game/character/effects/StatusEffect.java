@@ -22,7 +22,6 @@ import com.lilithsthrone.game.character.attributes.LustLevel;
 import com.lilithsthrone.game.character.attributes.PhysiqueLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.Penis;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
@@ -3051,8 +3050,8 @@ public interface StatusEffect {
 							+ "</p>"
 							+target.incrementLust(25, false);
 				} else {
-					List<AbstractFluidType> list = new ArrayList<>(target.getPsychoactiveFluidsIngested());
-					AbstractFluidType fluid = list.get(Util.random.nextInt(list.size()));
+					var list = new ArrayList<>(target.getPsychoactiveFluidsIngested());
+					var fluid = list.get(Util.random.nextInt(list.size()));
 					String npcName = UtilText.generateSingularDeterminer(fluid.getRace().getName(false))+" "+fluid.getRace().getName(false);
 					switch(fluid.getBaseType()) {
 						case CUM:

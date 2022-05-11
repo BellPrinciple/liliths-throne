@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.lilithsthrone.game.character.body.abstractTypes.*;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.AntennaType;
@@ -78,44 +77,44 @@ public interface RacialBody {
 	 * @param includeTypeNONE Set as true if you want the returned AntennaType to possibly include AntennaType.NONE. (Will include NONE anyway if the list is empty.)
 	 * @return A random AntennaType from this race's possible antennaTypes.
 	 */
-	default AbstractAntennaType getRandomrAntennaType(boolean includeTypeNONE) {
+	default AntennaType getRandomrAntennaType(boolean includeTypeNONE) {
 		return Util.randomItemFrom(getAntennaTypes(includeTypeNONE));
 	}
 
-	List<AbstractAntennaType> getAntennaTypes(boolean removeTypeNone);
+	List<AntennaType> getAntennaTypes(boolean removeTypeNone);
 
 	int getMaleAntennaLength();
 
 	int getFemaleAntennaLength();
 
-	AbstractArmType getArmType();
+	ArmType getArmType();
 
-	AbstractAssType getAssType();
+	AssType getAssType();
 
-	AbstractBreastType getBreastType();
+	BreastType getBreastType();
 
 	List<BreastShape> getBreastShapes();
 
-	AbstractFaceType getFaceType();
+	FaceType getFaceType();
 
-	AbstractEyeType getEyeType();
+	EyeType getEyeType();
 
-	AbstractEarType getEarType();
+	EarType getEarType();
 
-	AbstractHairType getHairType();
+	HairType getHairType();
 
-	default AbstractLegType getLegType() {
+	default LegType getLegType() {
 		return getLegType(getLegConfiguration());
 	}
 
 	/**
 	 * @return The default legType for this body when its LegConfiguration is the passed in configuration argument.
 	 */
-	AbstractLegType getLegType(LegConfiguration configuration);
+	LegType getLegType(LegConfiguration configuration);
 
 	LegConfiguration getLegConfiguration();
 
-	AbstractTorsoType getTorsoType();
+	TorsoType getTorsoType();
 
 	BodyMaterial getBodyMaterial();
 
@@ -125,43 +124,43 @@ public interface RacialBody {
 	 * @param includeTypeNONE Set as true if you want the returned HornType to possibly include HornType.NONE. (Will include NONE anyway if the list is empty.)
 	 * @return A random HornType from this race's possible hornTypes.
 	 */
-	default AbstractHornType getRandomHornType(boolean includeTypeNONE) {
+	default HornType getRandomHornType(boolean includeTypeNONE) {
 		return Util.randomItemFrom(getHornTypes(includeTypeNONE));
 	}
 
-	List<AbstractHornType> getHornTypes(boolean removeTypeNone);
+	List<HornType> getHornTypes(boolean removeTypeNone);
 
-	AbstractPenisType getPenisType();
+	PenisType getPenisType();
 
 	/**
 	 * @param includeTypeNONE Set as true if you want the returned TailType to possibly include TailType.NONE. (Will include NONE anyway if the list is empty.)
 	 * @return A random TailType from this race's possible tailTypes.
 	 */
-	default AbstractTailType getRandomTailType(boolean includeTypeNONE) {
+	default TailType getRandomTailType(boolean includeTypeNONE) {
 		var tailList = new ArrayList<>(getTailType());
 		if(!includeTypeNONE && tailList.size()!=1)
 			tailList.remove(TailType.NONE);
 		return Util.randomItemFrom(tailList);
 	}
 
-	List<AbstractTailType> getTailType();
+	List<TailType> getTailType();
 
-	AbstractTentacleType getTentacleType();
+	TentacleType getTentacleType();
 
-	AbstractVaginaType getVaginaType();
+	VaginaType getVaginaType();
 
 	/**
 	 * @param includeTypeNONE Set as true if you want the returned TailType to possibly include TailType.NONE. (Will include NONE anyway if the list is empty.)
 	 * @return A random TailType from this race's possible tailTypes.
 	 */
-	default AbstractWingType getRandomWingType(boolean includeTypeNONE) {
-		List<AbstractWingType> wingList = new ArrayList<>(getWingTypes());
+	default WingType getRandomWingType(boolean includeTypeNONE) {
+		var wingList = new ArrayList<>(getWingTypes());
 		if(!includeTypeNONE && wingList.size()!=1)
 			wingList.remove(WingType.NONE);
 		return Util.randomItemFrom(wingList);
 	}
 
-	List<AbstractWingType> getWingTypes();
+	List<WingType> getWingTypes();
 
 	int getArmRows();
 
@@ -251,7 +250,7 @@ public interface RacialBody {
 
 	AreolaeShape getFemaleAreolaeShape();
 
-	AbstractBreastType getBreastCrotchType();
+	BreastType getBreastCrotchType();
 
 	List<BreastShape> getBreastCrotchShapes();
 
@@ -445,7 +444,7 @@ public interface RacialBody {
 			return SexualOrientationPreference.getSexualOrientationFromUserPreferences(0, 1, 0);
 		}
 		@Override
-		public AbstractLegType getLegType(LegConfiguration configuration) {
+		public LegType getLegType(LegConfiguration configuration) {
 			if(configuration==LegConfiguration.QUADRUPEDAL) {
 				return LegType.DEMON_HORSE_HOOFED;
 			}

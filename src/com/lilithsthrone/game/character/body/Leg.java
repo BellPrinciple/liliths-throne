@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
+import com.lilithsthrone.game.character.body.types.LegType;
 import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
@@ -24,14 +24,14 @@ public class Leg implements BodyPartInterface {
 	public static final float LENGTH_PERCENTAGE_MIN = 2f;
 	public static final float LENGTH_PERCENTAGE_MAX = 10f;
 	
-	protected AbstractLegType type;
+	protected LegType type;
 	protected FootStructure footStructure;
 	protected LegConfiguration legConfiguration;
 	
 	protected int girth;
 	protected float lengthAsPercentageOfHeight;
 
-	public Leg(AbstractLegType type, LegConfiguration legConfiguration) {
+	public Leg(LegType type, LegConfiguration legConfiguration) {
 		this.type = type;
 		this.legConfiguration = legConfiguration;
 		this.footStructure = type.getDefaultFootStructure(legConfiguration);
@@ -40,7 +40,7 @@ public class Leg implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractLegType getType() {
+	public LegType getType() {
 		return type;
 	}
 
@@ -113,7 +113,7 @@ public class Leg implements BodyPartInterface {
 		return legConfiguration;
 	}
 
-	public void setLegConfigurationForced(AbstractLegType type, LegConfiguration legConfiguration) {
+	public void setLegConfigurationForced(LegType type, LegConfiguration legConfiguration) {
 		this.type = type;
 		this.footStructure = type.getDefaultFootStructure(legConfiguration);
 		this.legConfiguration = legConfiguration;
@@ -151,7 +151,7 @@ public class Leg implements BodyPartInterface {
 		return Util.randomItemFrom(descriptorList);
 	}
 
-	public String setType(GameCharacter owner, AbstractLegType type) {
+	public String setType(GameCharacter owner, LegType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;
 			this.footStructure = type.getDefaultFootStructure(this.getLegConfiguration());

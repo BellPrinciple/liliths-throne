@@ -108,112 +108,112 @@ public interface NippleType extends BodyPartTypeInterface {
 		return "";
 	}
 
-	public static AbstractNippleType HUMAN = new Special(BodyCoveringType.NIPPLES,
+	NippleType HUMAN = new Special(BodyCoveringType.NIPPLES,
 			Race.HUMAN,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType ANGEL = new Special(BodyCoveringType.NIPPLES,
+	NippleType ANGEL = new Special(BodyCoveringType.NIPPLES,
 			Race.ANGEL,
 			Util.newArrayListOfValues("perfect", "flawless"),
 			Util.newArrayListOfValues("perfect", "flawless"),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType DEMON = new Special(BodyCoveringType.NIPPLES,
+	NippleType DEMON = new Special(BodyCoveringType.NIPPLES,
 			Race.DEMON,
 			Util.newArrayListOfValues("perfect", "flawless"),
 			Util.newArrayListOfValues("perfect", "flawless"),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType DOG_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType DOG_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.DOG_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType WOLF_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType WOLF_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.WOLF_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType FOX_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType FOX_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.FOX_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType CAT_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType CAT_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.CAT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType COW_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType COW_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.COW_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType SQUIRREL_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType SQUIRREL_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.SQUIRREL_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType RAT_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType RAT_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.RAT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType BAT_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType BAT_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.BAT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType RABBIT_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType RABBIT_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.RABBIT_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType ALLIGATOR_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType ALLIGATOR_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.ALLIGATOR_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType HORSE_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType HORSE_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.HORSE_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType REINDEER_MORPH = new Special(BodyCoveringType.NIPPLES,
+	NippleType REINDEER_MORPH = new Special(BodyCoveringType.NIPPLES,
 			Race.REINDEER_MORPH,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractNippleType HARPY = new Special(BodyCoveringType.NIPPLES,
+	NippleType HARPY = new Special(BodyCoveringType.NIPPLES,
 			Race.HARPY,
 			Util.newArrayListOfValues(""),
 			Util.newArrayListOfValues(""),
@@ -245,7 +245,7 @@ public interface NippleType extends BodyPartTypeInterface {
 //		return valueOf(value);
 //	}
 	
-	TypeTable<AbstractNippleType> table = new TypeTable<>(
+	TypeTable<NippleType> table = new TypeTable<>(
 		NippleType::sanitize,
 		NippleType.class,
 		AbstractNippleType.class,
@@ -258,7 +258,7 @@ public interface NippleType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractNippleType getNippleTypeFromId(String id) {
+	static NippleType getNippleTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -271,17 +271,17 @@ public interface NippleType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromNippleType(AbstractNippleType nippleType) {
+	static String getIdFromNippleType(NippleType nippleType) {
 		return nippleType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractNippleType> getAllNippleTypes() {
+	static List<NippleType> getAllNippleTypes() {
 		return table.listByRace();
 	}
 	
 	@Deprecated
-	public static List<AbstractNippleType> getNippleTypes(Race r) {
+	static List<NippleType> getNippleTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

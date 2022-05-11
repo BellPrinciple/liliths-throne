@@ -54,7 +54,7 @@ public interface AntennaType extends BodyPartTypeInterface {
 		}
 	}
 
-	public static final AbstractAntennaType NONE = new AbstractAntennaType(
+	AntennaType NONE = new AbstractAntennaType(
 			BodyCoveringType.ANTENNA,
 			Race.NONE,
 			"none",
@@ -70,7 +70,7 @@ public interface AntennaType extends BodyPartTypeInterface {
 			}
 	};
 
-	TypeTable<AbstractAntennaType> table = new TypeTable<>(
+	TypeTable<AntennaType> table = new TypeTable<>(
 		s->s,
 		AntennaType.class,
 		AbstractAntennaType.class,
@@ -83,21 +83,21 @@ public interface AntennaType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractAntennaType getAntennaTypeFromId(String id) {
+	static AntennaType getAntennaTypeFromId(String id) {
 		return table.of(id);
 	}
 	
 	@Deprecated
-	public static String getIdFromAntennaType(AbstractAntennaType antennaType) {
+	static String getIdFromAntennaType(AntennaType antennaType) {
 		return antennaType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractAntennaType> getAllAntennaTypes() {
+	static List<AntennaType> getAllAntennaTypes() {
 		return table.listByRace();
 	}
 
-	public static List<AbstractAntennaType> getAntennaTypes(Race r) {
+	static List<AntennaType> getAntennaTypes(Race r) {
 		return table.of(r).orElse(List.of(NONE));
 	}
 }

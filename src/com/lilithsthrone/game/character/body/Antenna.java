@@ -1,7 +1,6 @@
 package com.lilithsthrone.game.character.body;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
 import com.lilithsthrone.game.character.body.types.AntennaType;
 import com.lilithsthrone.game.character.body.valueEnums.HornLength;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -18,12 +17,12 @@ public class Antenna implements BodyPartInterface {
 	public static final int MAXIMUM_ROWS = 3;
 	public static final int MAXIMUM_ANTENNAE_PER_ROW = 4;
 	
-	protected AbstractAntennaType type;
+	protected AntennaType type;
 	protected int rows;
 	protected int antennaePerRow;
 	protected int length;
 	
-	public Antenna(AbstractAntennaType type, int length) {
+	public Antenna(AntennaType type, int length) {
 		this.type = type;
 		this.length = length;
 		rows = 1;
@@ -31,7 +30,7 @@ public class Antenna implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractAntennaType getType() {
+	public AntennaType getType() {
 		return type;
 	}
 	
@@ -60,7 +59,7 @@ public class Antenna implements BodyPartInterface {
 		return type.getDescriptor(gc);
 	}
 
-	public String setType(GameCharacter owner, AbstractAntennaType type) {
+	public String setType(GameCharacter owner, AntennaType type) {
 		if(!Main.game.isStarted() || owner==null) {
 			this.type = type;
 			if(owner!=null) {

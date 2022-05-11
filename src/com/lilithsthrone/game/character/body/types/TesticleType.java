@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTesticleType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -19,7 +18,7 @@ import com.lilithsthrone.utils.Util;
  */
 public interface TesticleType extends BodyPartTypeInterface {
 
-	AbstractFluidType getFluidType();
+	FluidType getFluidType();
 
 	boolean isInternal();
 
@@ -97,11 +96,11 @@ public interface TesticleType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, AbstractFluidType fluidType, boolean internal, List<String> names, List<String> namesPlural, List<String> descriptors) {
+		public Special(AbstractBodyCoveringType coveringType, Race race, FluidType fluidType, boolean internal, List<String> names, List<String> namesPlural, List<String> descriptors) {
 			super(coveringType, race, fluidType, internal, names, namesPlural, descriptors);
 		}
 
-		public Special(AbstractBodyCoveringType skinType, Race race, AbstractFluidType fluidType, boolean internal) {
+		public Special(AbstractBodyCoveringType skinType, Race race, FluidType fluidType, boolean internal) {
 			super(skinType, race, fluidType, internal);
 		}
 
@@ -113,7 +112,7 @@ public interface TesticleType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractTesticleType> table = new TypeTable<>(
+	TypeTable<TesticleType> table = new TypeTable<>(
 		s->s,
 		TesticleType.class,
 		AbstractTesticleType.class,
@@ -126,22 +125,22 @@ public interface TesticleType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractTesticleType getTesticleTypeFromId(String id) {
+	static TesticleType getTesticleTypeFromId(String id) {
 		return table.of(id);
 	}
 
 	@Deprecated
-	public static String getIdFromTesticleType(AbstractTesticleType testicleType) {
+	static String getIdFromTesticleType(TesticleType testicleType) {
 		return testicleType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractTesticleType> getAllTesticleTypes() {
+	static List<TesticleType> getAllTesticleTypes() {
 		return table.listByRace();
 	}
 	
 	@Deprecated
-	public static List<AbstractTesticleType> getTesticleTypes(Race r) {
+	static List<TesticleType> getTesticleTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	

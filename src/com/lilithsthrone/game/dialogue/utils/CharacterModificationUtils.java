@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import com.lilithsthrone.controller.eventListeners.tooltips.TooltipInformationEventListener;
 import com.lilithsthrone.game.Game;
@@ -30,21 +29,6 @@ import com.lilithsthrone.game.character.body.Leg;
 import com.lilithsthrone.game.character.body.Tail;
 import com.lilithsthrone.game.character.body.Tentacle;
 import com.lilithsthrone.game.character.body.Testicle;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
@@ -1024,7 +1008,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformTailChoiceDiv(List<Race> availableRaces, boolean removeNone) {
 		contentSB.setLength(0);
 		
-		for(AbstractTailType tail : TailType.getAllTailTypes()) {
+		for(var tail : TailType.table.listByRace()) {
 			if((tail.getRace() !=null && availableRaces.contains(tail.getRace()))
 					|| (!removeNone && tail==TailType.NONE)) {
 				if(!BodyChanging.getTarget().getLegConfiguration().isAbleToGrowTail() && tail!=TailType.NONE) {
@@ -1052,7 +1036,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_TAIL_"+TailType.getIdFromTailType(tail)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_TAIL_"+tail.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+c.getShades()[0]+";'>"+Util.capitaliseSentence(tail.getTransformName())+(tail.getTags().contains(BodyPartTag.TAIL_SUITABLE_FOR_PENETRATION)?"*":"")+(tail.isPrehensile()?"&#8314;":"")+"</span>"
 							+ "</div>");
 				}
@@ -1286,18 +1270,18 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformWingChoiceDiv(List<Race> availableRaces, boolean removeNone) {
 		contentSB.setLength(0);
 		
-		List<AbstractWingType> sortedTypes = new ArrayList<>(WingType.getAllWingTypes());
+		var sortedTypes = new ArrayList<>(WingType.table.listByRace());
 		/*
 		 * 'None' is first, then the rest of the 'no race' options.
 		 * Then, the races are sorted alphabetically.
 		 * Within a race (including 'no race'), options are sorted alphabetically.
 		 */
-		sortedTypes.sort(Comparator.comparingInt((AbstractWingType w) -> w == WingType.NONE ? 0 : 1)
+		sortedTypes.sort(Comparator.comparingInt((WingType w) -> w == WingType.NONE ? 0 : 1)
 				.thenComparingInt(w -> w.getRace() == Race.NONE ? 0 : 1)
 				.thenComparing(w -> w.getRace().getName(false))
-				.thenComparing(AbstractWingType::getTransformName));
+				.thenComparing(WingType::getTransformName));
 		
-		for(AbstractWingType wing : sortedTypes) {
+		for(var wing : sortedTypes) {
 			if((wing.getRace() !=null && availableRaces.contains(wing.getRace()))
 					|| (!removeNone && wing==WingType.NONE)) {
 				
@@ -1315,7 +1299,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_WING_"+WingType.getIdFromWingType(wing)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_WING_"+wing.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+c.getShades()[0]+";'>"+Util.capitaliseSentence(wing.getTransformName())+"</span>"
 							+ "</div>");
 				}
@@ -1333,24 +1317,24 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformHornChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 
-		Set<AbstractHornType> types = new HashSet<>();
+		var types = new HashSet<HornType>();
 		for(var race : availableRaces) {
 			types.addAll(RacialBody.valueOfRace(race).getHornTypes(false));
 		}
 		
 		
-		List<AbstractHornType> sortedTypes = new ArrayList<>(types);
+		var sortedTypes = new ArrayList<HornType>(types);
 		/*
 		 * 'None' is first, then the rest of the 'no race' options.
 		 * Then, the races are sorted alphabetically.
 		 * Within a race (including 'no race'), options are sorted alphabetically.
 		 */
-		sortedTypes.sort(Comparator.comparingInt((AbstractHornType h) -> h == HornType.NONE ? 0 : 1)
+		sortedTypes.sort(Comparator.comparingInt((HornType h) -> h == HornType.NONE ? 0 : 1)
 				.thenComparingInt(h -> h.getRace() == Race.NONE ? 0 : 1)
 				.thenComparing(h -> h.getRace().getName(false))
-				.thenComparing(AbstractHornType::getTransformName));
+				.thenComparing(HornType::getTransformName));
 		
-		for(AbstractHornType horn : sortedTypes) {
+		for(var horn : sortedTypes) {
 			if((horn.getRace()!=null && availableRaces.contains(horn.getRace()))
 					|| horn.equals(HornType.NONE)) {
 				
@@ -1368,7 +1352,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_HORN_"+HornType.getIdFromHornType(horn)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_HORN_"+horn.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+c.getShades()[0]+";'>"+Util.capitaliseSentence(horn.getTransformName())+"</span>"
 							+ "</div>");
 				}
@@ -1464,7 +1448,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformAntennaChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
-		for(AbstractAntennaType antenna : AntennaType.getAllAntennaTypes()) {
+		for(var antenna : AntennaType.table.list()) {
 			if((antenna.getRace()!=null && availableRaces.contains(antenna.getRace())) || antenna==AntennaType.NONE) {
 				
 				Colour c = PresetColour.TEXT_GREY;
@@ -1481,7 +1465,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_ANTENNA_"+AntennaType.getIdFromAntennaType(antenna)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_ANTENNA_"+antenna.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+c.getShades()[0]+";'>"+Util.capitaliseSentence(antenna.getTransformName())+"</span>"
 							+ "</div>");
 				}
@@ -1577,7 +1561,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformHairChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
-		for(AbstractHairType hair : HairType.getAllHairTypes()) {
+		for(var hair : HairType.table.listByRace()) {
 			if((hair.getRace() !=null && availableRaces.contains(hair.getRace()))) {
 				if(BodyChanging.getTarget().getHairType()==hair) {
 					contentSB.append(
@@ -1587,7 +1571,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_HAIR_"+HairType.getIdFromHairType(hair)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_HAIR_"+hair.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+hair.getRace().getColour().getShades()[0]+";'>"+Util.capitaliseSentence(hair.getTransformName())+"</span>"
 							+ "</div>");
 				}
@@ -1694,7 +1678,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformAssChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
-		for(AbstractAssType ass : AssType.getAllAssTypes()) {
+		for(var ass : AssType.table.listByRace()) {
 			if((ass.getRace() !=null && availableRaces.contains(ass.getRace()))) {
 				
 				if(BodyChanging.getTarget().getAssType().equals(ass)) {
@@ -1705,7 +1689,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_ASS_"+AssType.getIdFromAssType(ass)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_ASS_"+ass.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+ass.getRace().getColour().getShades()[0]+";'>"+Util.capitaliseSentence(ass.getTransformName())+"</span>"
 							+ "</div>");
 				}
@@ -1723,7 +1707,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformBreastChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
-		for(AbstractBreastType breast : BreastType.getAllBreastTypes()) {
+		for(var breast : BreastType.table.listByRace()) {
 			if((breast.getRace() !=null && breast.getRace()!=Race.NONE && availableRaces.contains(breast.getRace()))) {
 				if(BodyChanging.getTarget().getBreastType() == breast) {
 					contentSB.append(
@@ -1751,7 +1735,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformBreastCrotchChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
-		for(AbstractBreastType breast : BreastType.getAllBreastTypes()) {
+		for(var breast : BreastType.table.listByRace()) {
 			if((breast.getRace()==Race.NONE || availableRaces.contains(breast.getRace()))) {
 				if(BodyChanging.getTarget().getBreastCrotchType() == breast) {
 					contentSB.append(
@@ -1780,7 +1764,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformArmChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
-		for(AbstractArmType arm : ArmType.getAllArmTypes()) {
+		for(var arm : ArmType.table.listByRace()) {
 			if(arm.getRace() !=null && availableRaces.contains(arm.getRace())) {
 				if(BodyChanging.getTarget().getArmType().equals(arm)) {
 					contentSB.append(
@@ -1790,7 +1774,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_ARM_"+ArmType.getIdFromArmType(arm)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_ARM_"+arm.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+arm.getRace().getColour().getShades()[0]+";'>"+Util.capitaliseSentence(arm.getTransformName())+"</span>"
 							+ "</div>");
 				}
@@ -1834,7 +1818,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformLegChoiceDiv(List<Race> availableRaces, boolean bypassRestrictions) {
 		contentSB.setLength(0);
 		
-		for(AbstractLegType leg : LegType.getAllLegTypes()) {
+		for(var leg : LegType.table.listByRace()) {
 			if((leg.isAvailableForSelfTransformMenu(BodyChanging.getTarget()) || bypassRestrictions) && leg.getRace()!=null && availableRaces.contains(leg.getRace())) {
 				if(BodyChanging.getTarget().getLegType().equals(leg)) {
 					contentSB.append(
@@ -1844,7 +1828,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_LEG_"+LegType.getIdFromLegType(leg)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_LEG_"+leg.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+leg.getRace().getColour().getShades()[0]+";'>"+Util.capitaliseSentence(leg.getTransformName())+"</span>"
 							+ "</div>");
 				}
@@ -1891,7 +1875,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformFaceChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
-		for(AbstractFaceType face : FaceType.getAllFaceTypes()) {
+		for(var face : FaceType.table.listByRace()) {
 			if(face.getRace() !=null && availableRaces.contains(face.getRace())) {
 				if(BodyChanging.getTarget().getFaceType() == face) {
 					contentSB.append(
@@ -1901,7 +1885,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_FACE_"+FaceType.getIdFromFaceType(face)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_FACE_"+face.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+face.getRace().getColour().getShades()[0]+";'>"+Util.capitaliseSentence(face.getTransformName())+(face.getTags().contains(BodyPartTag.THERMAL_VISION)?"*":"")+"</span>"
 							+ "</div>");
 				}
@@ -1920,7 +1904,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformBodyChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
-		for(AbstractTorsoType skin : TorsoType.getAllTorsoTypes()) {
+		for(var skin : TorsoType.table.listByRace()) {
 			if(availableRaces.contains(skin.getRace())) {
 				if(BodyChanging.getTarget().getTorsoType() == skin) {
 					contentSB.append(
@@ -1930,7 +1914,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_SKIN_"+TorsoType.getIdFromTorsoType(skin)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_SKIN_"+skin.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+skin.getRace().getColour().getShades()[0]+";'>"+Util.capitaliseSentence(skin.getTransformName())+"</span>"
 							+ "</div>");
 				}
@@ -2017,7 +2001,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformEarChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
-		for(AbstractEarType ear : EarType.getAllEarTypes()) {
+		for(var ear : EarType.table.listByRace()) {
 			if(availableRaces.contains(ear.getRace())) {
 				if(BodyChanging.getTarget().getEarType().equals(ear)) {
 					contentSB.append(
@@ -2031,7 +2015,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_EAR_"+EarType.getIdFromEarType(ear)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_EAR_"+ear.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+ear.getRace().getColour().getShades()[0]+";'>"
 									+Util.capitaliseSentence(ear.getTransformName())
 									+(ear.isAbleToBeUsedAsHandlesInSex()?"*":"")
@@ -2053,7 +2037,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformEyeChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
-		for(AbstractEyeType eye : EyeType.getAllEyeTypes()) {
+		for(var eye : EyeType.table.listByRace()) {
 			if(availableRaces.contains(eye.getRace())) {
 				if(BodyChanging.getTarget().getEyeType() == eye) {
 					contentSB.append(
@@ -2063,7 +2047,7 @@ public class CharacterModificationUtils {
 					
 				} else {
 					contentSB.append(
-							"<div id='CHANGE_EYE_"+EyeType.getIdFromEyeType(eye)+"' class='cosmetics-button'>"
+							"<div id='CHANGE_EYE_"+eye.getId()+"' class='cosmetics-button'>"
 								+ "<span style='color:"+eye.getRace().getColour().getShades()[0]+";'>"+Util.capitaliseSentence(eye.getTransformName())+(eye.getTags().contains(BodyPartTag.NIGHT_VISION)?"*":"")+"</span>"
 							+ "</div>");
 				}
@@ -3521,7 +3505,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformVaginaChoiceDiv(List<Race> availableRaces) {
 		contentSB.setLength(0);
 		
-		for(AbstractVaginaType vagina : VaginaType.getAllVaginaTypes()) {
+		for(var vagina : VaginaType.table.listByRace()) {
 			if((vagina.getRace() !=null && availableRaces.contains(vagina.getRace()))
 					|| vagina==VaginaType.NONE) {
 				
@@ -3534,7 +3518,7 @@ public class CharacterModificationUtils {
 				
 				if(BodyChanging.getTarget().getVaginaType() == vagina) {
 					contentSB.append(
-							"<div id='CHANGE_VAGINA_"+VaginaType.getIdFromVaginaType(vagina)+"' class='cosmetics-button active'>"
+							"<div id='CHANGE_VAGINA_"+vagina.getId()+"' class='cosmetics-button active'>"
 								+ "<span style='color:"+c.toWebHexString()+";'>"
 									+Util.capitaliseSentence(vagina.getTransformName())+(vagina.isEggLayer()?"*":"")
 								+"</span>"
@@ -3544,7 +3528,7 @@ public class CharacterModificationUtils {
 					boolean cannotChoose = vagina==VaginaType.NONE
 							&& (BodyChanging.getTarget().isPregnant() || BodyChanging.getTarget().hasStatusEffect(StatusEffect.PREGNANT_0) || BodyChanging.getTarget().hasIncubationLitter(SexAreaOrifice.VAGINA));
 					contentSB.append(
-							"<div id='CHANGE_VAGINA_"+VaginaType.getIdFromVaginaType(vagina)+"' class='cosmetics-button"+(cannotChoose?" disabled":"")+"'>"
+							"<div id='CHANGE_VAGINA_"+vagina.getId()+"' class='cosmetics-button"+(cannotChoose?" disabled":"")+"'>"
 								+ "<span style='color:"+(cannotChoose?PresetColour.TEXT_GREY.toWebHexString():c.getShades()[0])+";'>"
 									+Util.capitaliseSentence(vagina.getTransformName())+(vagina.isEggLayer()?"*":"")
 								+"</span>"
@@ -4119,7 +4103,7 @@ public class CharacterModificationUtils {
 	public static String getSelfTransformPenisChoiceDiv(List<Race> availableRaces, boolean halfWidth) {
 		contentSB.setLength(0);
 		
-		for(AbstractPenisType penis : PenisType.getAllPenisTypes()) {
+		for(var penis : PenisType.table.listByRace()) {
 			if(((penis.getRace() !=null && availableRaces.contains(penis.getRace()))
 					|| penis==PenisType.NONE)
 					&& penis!=PenisType.DILDO) {

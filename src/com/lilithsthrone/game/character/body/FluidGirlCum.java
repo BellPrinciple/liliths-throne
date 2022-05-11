@@ -9,7 +9,6 @@ import org.w3c.dom.Element;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
@@ -25,12 +24,12 @@ import com.lilithsthrone.utils.XMLSaving;
  */
 public class FluidGirlCum implements FluidInterface, XMLSaving {
 	
-	protected AbstractFluidType type;
+	protected FluidType type;
 	protected FluidFlavour flavour;
 	protected List<FluidModifier> fluidModifiers;
 	protected List<ItemEffect> transformativeEffects;
 
-	public FluidGirlCum(AbstractFluidType type) {
+	public FluidGirlCum(FluidType type) {
 		this.type = type;
 		this.flavour = type.getFlavour();
 		transformativeEffects = new ArrayList<>();
@@ -43,7 +42,7 @@ public class FluidGirlCum implements FluidInterface, XMLSaving {
 		Element element = doc.createElement("girlcum");
 		parentElement.appendChild(element);
 
-		XMLUtil.addAttribute(doc, element, "type", FluidType.getIdFromFluidType(this.type));
+		XMLUtil.addAttribute(doc, element, "type", type.getId());
 		XMLUtil.addAttribute(doc, element, "flavour", this.flavour.toString());
 		
 		Element cumModifiers = doc.createElement("girlcumModifiers");
@@ -65,18 +64,18 @@ public class FluidGirlCum implements FluidInterface, XMLSaving {
 	 * @param doc
 	 * @param baseType If you pass in a baseType, this method will ignore the saved type in parentElement.
 	 */
-	public static FluidGirlCum loadFromXML(Element parentElement, Document doc, AbstractFluidType baseType) {
+	public static FluidGirlCum loadFromXML(Element parentElement, Document doc, FluidType baseType) {
 		
 		Element girlcum = (Element)parentElement.getElementsByTagName("girlcum").item(0);
 
-		AbstractFluidType fluidType = FluidType.GIRL_CUM_HUMAN;
+		FluidType fluidType = FluidType.GIRL_CUM_HUMAN;
 		
 		if(baseType!=null) {
 			fluidType = baseType;
 			
 		} else {
 			try {
-				fluidType = FluidType.getFluidTypeFromId(girlcum.getAttribute("type"));
+				fluidType = FluidType.table.of(girlcum.getAttribute("type"));
 			} catch(Exception ex) {
 			}
 		}
@@ -158,11 +157,11 @@ public class FluidGirlCum implements FluidInterface, XMLSaving {
 	}
 
 	@Override
-	public AbstractFluidType getType() {
+	public FluidType getType() {
 		return type;
 	}
 
-	public void setType(AbstractFluidType type) {
+	public void setType(FluidType type) {
 		this.type = type;
 	}
 

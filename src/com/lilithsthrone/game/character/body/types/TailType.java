@@ -1663,7 +1663,7 @@ public interface TailType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractTailType> table = new TypeTable<>(
+	TypeTable<TailType> table = new TypeTable<>(
 		TailType::sanitize,
 		TailType.class,
 		AbstractTailType.class,
@@ -1676,7 +1676,7 @@ public interface TailType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractTailType getTailTypeFromId(String id) {
+	static TailType getTailTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -1691,26 +1691,26 @@ public interface TailType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromTailType(AbstractTailType tailType) {
+	static String getIdFromTailType(TailType tailType) {
 		return tailType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractTailType> getAllTailTypes() {
+	static List<TailType> getAllTailTypes() {
 		return table.listByRace();
 	}
 	
 	@Deprecated
-	public static List<AbstractTailType> getTailTypes(Race r) {
+	static List<TailType> getTailTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 	
-	public static List<AbstractTailType> getTailTypesSuitableForTransformation(List<AbstractTailType> options) {
+	static List<TailType> getTailTypesSuitableForTransformation(List<TailType> options) {
 		if (!options.contains(TailType.NONE)) {
 			return options;
 		}
 		
-		List<AbstractTailType> duplicatedOptions = new ArrayList<>(options);
+		var duplicatedOptions = new ArrayList<>(options);
 		duplicatedOptions.remove(TailType.NONE);
 		return duplicatedOptions;
 	}

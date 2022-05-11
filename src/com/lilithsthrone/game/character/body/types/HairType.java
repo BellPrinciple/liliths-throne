@@ -314,7 +314,7 @@ public interface HairType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractHairType> table = new TypeTable<>(
+	TypeTable<HairType> table = new TypeTable<>(
 		HairType::sanitize,
 		HairType.class,
 		AbstractHairType.class,
@@ -327,7 +327,7 @@ public interface HairType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractHairType getHairTypeFromId(String id) {
+	static HairType getHairTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -342,16 +342,16 @@ public interface HairType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromHairType(AbstractHairType hairType) {
+	static String getIdFromHairType(HairType hairType) {
 		return hairType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractHairType> getAllHairTypes() {
+	static List<HairType> getAllHairTypes() {
 		return table.listByRace();
 	}
 	
-	public static List<AbstractHairType> getHairTypes(Race r) {
+	static List<HairType> getHairTypes(Race r) {
 		return table.of(r).orElse(List.of());
 	}
 }

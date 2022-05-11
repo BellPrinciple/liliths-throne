@@ -9,7 +9,6 @@ import org.w3c.dom.Element;
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
@@ -25,12 +24,12 @@ import com.lilithsthrone.utils.XMLSaving;
  */
 public class FluidCum implements FluidInterface, XMLSaving {
 
-	protected AbstractFluidType type;
+	protected FluidType type;
 	protected FluidFlavour flavour;
 	protected List<FluidModifier> fluidModifiers;
 	protected List<ItemEffect> transformativeEffects;
 
-	public FluidCum(AbstractFluidType type) {
+	public FluidCum(FluidType type) {
 		this.type = type;
 		this.flavour = type.getFlavour();
 		transformativeEffects = new ArrayList<>();
@@ -43,7 +42,7 @@ public class FluidCum implements FluidInterface, XMLSaving {
 		Element element = doc.createElement("cum");
 		parentElement.appendChild(element);
 
-		XMLUtil.addAttribute(doc, element, "type", FluidType.getIdFromFluidType(this.type));
+		XMLUtil.addAttribute(doc, element, "type", type.getId());
 		XMLUtil.addAttribute(doc, element, "flavour", this.flavour.toString());
 		
 		
@@ -66,22 +65,12 @@ public class FluidCum implements FluidInterface, XMLSaving {
 	 * @param doc
 	 * @param baseType If you pass in a baseType, this method will ignore the saved type in parentElement.
 	 */
-	public static FluidCum loadFromXML(Element parentElement, Document doc, AbstractFluidType baseType) {
+	public static FluidCum loadFromXML(Element parentElement, Document doc, FluidType baseType) {
 		
 		Element cum = (Element)parentElement.getElementsByTagName("cum").item(0);
 
-		AbstractFluidType fluidType = FluidType.CUM_HUMAN;
-		
-		if(baseType!=null) {
-			fluidType = baseType;
-			
-		} else {
-			try {
-				fluidType = FluidType.getFluidTypeFromId(cum.getAttribute("type"));
-			} catch(Exception ex) {
-			}
-		}
-		
+		var fluidType = baseType!=null ? baseType : FluidType.table.of(cum.getAttribute("type"));
+
 		FluidCum fluidCum = new FluidCum(fluidType);
 		
 		String flavourId = cum.getAttribute("flavour");
@@ -160,11 +149,11 @@ public class FluidCum implements FluidInterface, XMLSaving {
 	}
 
 	@Override
-	public AbstractFluidType getType() {
+	public FluidType getType() {
 		return type;
 	}
 
-	public void setType(AbstractFluidType type) {
+	public void setType(FluidType type) {
 		this.type = type;
 	}
 

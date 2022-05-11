@@ -46,9 +46,6 @@ import com.lilithsthrone.game.character.body.Tentacle;
 import com.lilithsthrone.game.character.body.Torso;
 import com.lilithsthrone.game.character.body.Vagina;
 import com.lilithsthrone.game.character.body.Wing;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
@@ -1104,7 +1101,7 @@ public class CharacterUtils {
 		}
 		
 		
-		List<AbstractTailType> tailTypes = RacialBody.valueOfRace(halfSubspecies.getRace()).getTailType();
+		var tailTypes = RacialBody.valueOfRace(halfSubspecies.getRace()).getTailType();
 		if(tailTypes.size()==1 && tailTypes.get(0)==TailType.NONE) {
 			body.setTail(new Tail(demonBody.getRandomTailType(false)));
 		}
@@ -1541,7 +1538,7 @@ public class CharacterUtils {
 		}
 		
 		boolean halfDemon = character.getSubspeciesOverride()==Subspecies.HALF_DEMON;
-		AbstractHairType furryHairType = Util.randomItemFrom(HairType.getHairTypes(character.getLegRace()));
+		var furryHairType = Util.randomItemFrom(HairType.getHairTypes(character.getLegRace()));
 		
 		switch(raceStage) {
 			case FERAL:
@@ -1605,7 +1602,7 @@ public class CharacterUtils {
 					character.setHornType(Util.randomItemFrom(character.getLegRace().getRacialBody().getHornTypes(false)));
 				}
 				
-				AbstractFaceType faceType = Util.randomItemFrom(FaceType.getFaceTypes(character.getLegRace()));
+				var faceType = Util.randomItemFrom(FaceType.getFaceTypes(character.getLegRace()));
 				boolean furryHairCheck = faceType.getTags().contains(BodyPartTag.FACE_NATURAL_BALDNESS_FURRY) && !furryHairType.getTags().contains(BodyPartTag.HAIR_IGNORE_PLAYER_SETTINGS);
 				boolean scalyHairCheck = faceType.getTags().contains(BodyPartTag.FACE_NATURAL_BALDNESS_SCALY) && !furryHairType.getTags().contains(BodyPartTag.HAIR_IGNORE_PLAYER_SETTINGS);
 				

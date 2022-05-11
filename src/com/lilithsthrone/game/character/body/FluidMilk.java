@@ -9,7 +9,6 @@ import org.w3c.dom.Element;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
@@ -25,14 +24,14 @@ import com.lilithsthrone.utils.Util;
 public class FluidMilk implements FluidInterface {
 
 	
-	protected AbstractFluidType type;
+	protected FluidType type;
 	protected FluidFlavour flavour;
 	protected List<FluidModifier> fluidModifiers;
 	protected List<ItemEffect> transformativeEffects;
 	
 	protected boolean crotchMilk;
 
-	public FluidMilk(AbstractFluidType type, boolean crotchMilk) {
+	public FluidMilk(FluidType type, boolean crotchMilk) {
 		this.type = type;
 		this.flavour = type.getFlavour();
 		transformativeEffects = new ArrayList<>();
@@ -47,7 +46,7 @@ public class FluidMilk implements FluidInterface {
 		Element element = doc.createElement(rootElementName);
 		parentElement.appendChild(element);
 
-		XMLUtil.addAttribute(doc, element, "type", FluidType.getIdFromFluidType(this.type));
+		XMLUtil.addAttribute(doc, element, "type", type.getId());
 		XMLUtil.addAttribute(doc, element, "flavour", this.flavour.toString());
 		
 		Element milkModifiers = doc.createElement("milkModifiers");
@@ -69,18 +68,18 @@ public class FluidMilk implements FluidInterface {
 	 * @param doc
 	 * @param baseType If you pass in a baseType, this method will ignore the saved type in parentElement.
 	 */
-	public static FluidMilk loadFromXML(String rootElementName, Element parentElement, Document doc, AbstractFluidType baseType, boolean crotchMilk) {
+	public static FluidMilk loadFromXML(String rootElementName, Element parentElement, Document doc, FluidType baseType, boolean crotchMilk) {
 		
 		Element milk = (Element)parentElement.getElementsByTagName(rootElementName).item(0);
 		
-		AbstractFluidType fluidType = FluidType.MILK_HUMAN;
+		FluidType fluidType = FluidType.MILK_HUMAN;
 		
 		if(baseType!=null) {
 			fluidType = baseType;
 			
 		} else {
 			try {
-				fluidType = FluidType.getFluidTypeFromId(milk.getAttribute("type"));
+				fluidType = FluidType.table.of(milk.getAttribute("type"));
 			} catch(Exception ex) {
 			}
 		}
@@ -161,11 +160,11 @@ public class FluidMilk implements FluidInterface {
 	}
 
 	@Override
-	public AbstractFluidType getType() {
+	public FluidType getType() {
 		return type;
 	}
 
-	public void setType(AbstractFluidType type) {
+	public void setType(FluidType type) {
 		this.type = type;
 	}
 

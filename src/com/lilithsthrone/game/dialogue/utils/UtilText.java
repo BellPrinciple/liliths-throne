@@ -42,29 +42,6 @@ import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.Penis;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAnusType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractAssType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEarType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractFootType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractMouthType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractNippleType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTesticleType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTongueType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractTorsoType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -9845,74 +9822,74 @@ public class UtilText {
 			engine.put("PLASTICITY_"+plasticity.toString(), plasticity);
 		}
 		// Types:
-		for(AbstractFluidType fluidType : FluidType.getAllFluidTypes()) {
-			engine.put("FLUID_TYPE_"+FluidType.getIdFromFluidType(fluidType), fluidType);
+		for(var fluidType : FluidType.table.list()) {
+			engine.put("FLUID_TYPE_"+fluidType.getId(), fluidType);
 		}
-		for(AbstractAntennaType type : AntennaType.getAllAntennaTypes()) {
-			engine.put("ANTENNA_TYPE_"+AntennaType.getIdFromAntennaType(type), type);
+		for(var type : AntennaType.table.list()) {
+			engine.put("ANTENNA_TYPE_"+type.getId(), type);
 		}
-		for(AbstractAnusType type : AnusType.getAllAnusTypes()) {
-			engine.put("ANUS_TYPE_"+AnusType.getIdFromAnusType(type), type);
+		for(var type : AnusType.table.list()) {
+			engine.put("ANUS_TYPE_"+type.getId(), type);
 		}
-		for(AbstractArmType type : ArmType.getAllArmTypes()) {
-			engine.put("ARM_TYPE_"+ArmType.getIdFromArmType(type), type);
+		for(var type : ArmType.table.list()) {
+			engine.put("ARM_TYPE_"+type.getId(), type);
 		}
-		for(AbstractAssType type : AssType.getAllAssTypes()) {
-			engine.put("ASS_TYPE_"+AssType.getIdFromAssType(type), type);
+		for(var type : AssType.table.list()) {
+			engine.put("ASS_TYPE_"+type.getId(), type);
 		}
-		for(AbstractBreastType type : BreastType.getAllBreastTypes()) {
-			engine.put("BREAST_TYPE_"+BreastType.getIdFromBreastType(type), type);
+		for(var type : BreastType.table.list()) {
+			engine.put("BREAST_TYPE_"+type.getId(), type);
 		}
-		for(AbstractEarType type : EarType.getAllEarTypes()) {
-			engine.put("EAR_TYPE_"+EarType.getIdFromEarType(type), type);
+		for(var type : EarType.table.list()) {
+			engine.put("EAR_TYPE_"+type.getId(), type);
 		}
-		for(AbstractEyeType type : EyeType.getAllEyeTypes()) {
-			engine.put("EYE_TYPE_"+EyeType.getIdFromEyeType(type), type);
+		for(var type : EyeType.table.list()) {
+			engine.put("EYE_TYPE_"+type.getId(), type);
 		}
-		for(AbstractFaceType type : FaceType.getAllFaceTypes()) {
-			engine.put("FACE_TYPE_"+FaceType.getIdFromFaceType(type), type);
+		for(var type : FaceType.table.list()) {
+			engine.put("FACE_TYPE_"+type.getId(), type);
 		}
-		for(AbstractFootType type : FootType.getAllFootTypes()) {
-			engine.put("FOOT_TYPE_"+FootType.getIdFromFootType(type), type);
+		for(var type : FootType.table.list()) {
+			engine.put("FOOT_TYPE_"+type.getId(), type);
 		}
-		for(AbstractHairType type : HairType.getAllHairTypes()) {
-			engine.put("HAIR_TYPE_"+HairType.getIdFromHairType(type), type);
+		for(var type : HairType.table.list()) {
+			engine.put("HAIR_TYPE_"+type.getId(), type);
 		}
-		for(AbstractHornType type : HornType.getAllHornTypes()) {
-			engine.put("HORN_TYPE_"+HornType.getIdFromHornType(type), type);
+		for(var type : HornType.table.list()) {
+			engine.put("HORN_TYPE_"+type.getId(), type);
 		}
-		for(AbstractLegType type : LegType.getAllLegTypes()) {
-			engine.put("LEG_TYPE_"+LegType.getIdFromLegType(type), type);
+		for(var type : LegType.table.list()) {
+			engine.put("LEG_TYPE_"+type.getId(), type);
 		}
-		for(AbstractMouthType type : MouthType.getAllMouthTypes()) {
-			engine.put("MOUTH_TYPE_"+MouthType.getIdFromMouthType(type), type);
+		for(var type : MouthType.table.list()) {
+			engine.put("MOUTH_TYPE_"+type.getId(), type);
 		}
-		for(AbstractNippleType type : NippleType.getAllNippleTypes()) {
-			engine.put("NIPPLE_TYPE_"+NippleType.getIdFromNippleType(type), type);
+		for(var type : NippleType.table.list()) {
+			engine.put("NIPPLE_TYPE_"+type.getId(), type);
 		}
-		for(AbstractPenisType type : PenisType.getAllPenisTypes()) {
-			engine.put("PENIS_TYPE_"+PenisType.getIdFromPenisType(type), type);
+		for(var type : PenisType.table.list()) {
+			engine.put("PENIS_TYPE_"+type.getId(), type);
 		}
-		for(AbstractTorsoType type : TorsoType.getAllTorsoTypes()) {
-			engine.put("TORSO_TYPE_"+TorsoType.getIdFromTorsoType(type), type);
+		for(var type : TorsoType.table.list()) {
+			engine.put("TORSO_TYPE_"+type.getId(), type);
 		}
-		for(AbstractTailType type : TailType.getAllTailTypes()) {
-			engine.put("TAIL_TYPE_"+TailType.getIdFromTailType(type), type);
+		for(var type : TailType.table.list()) {
+			engine.put("TAIL_TYPE_"+type.getId(), type);
 		}
-		for(AbstractTentacleType type : TentacleType.getAllTentacleTypes()) {
-			engine.put("TENTACLE_TYPE_"+TentacleType.getIdFromTentacleType(type), type);
+		for(var type : TentacleType.table.list()) {
+			engine.put("TENTACLE_TYPE_"+type.getId(), type);
 		}
-		for(AbstractTesticleType type : TesticleType.getAllTesticleTypes()) {
-			engine.put("TESTICLE_TYPE_"+TesticleType.getIdFromTesticleType(type), type);
+		for(var type : TesticleType.table.list()) {
+			engine.put("TESTICLE_TYPE_"+type.getId(), type);
 		}
-		for(AbstractTongueType type : TongueType.getAllTongueTypes()) {
-			engine.put("TONGUE_TYPE_"+TongueType.getIdFromTongueType(type), type);
+		for(var type : TongueType.table.list()) {
+			engine.put("TONGUE_TYPE_"+type.getId(), type);
 		}
-		for(AbstractVaginaType type : VaginaType.getAllVaginaTypes()) {
-			engine.put("VAGINA_TYPE_"+VaginaType.getIdFromVaginaType(type), type);
+		for(var type : VaginaType.table.list()) {
+			engine.put("VAGINA_TYPE_"+type.getId(), type);
 		}
-		for(AbstractWingType type : WingType.getAllWingTypes()) {
-			engine.put("WING_TYPE_"+WingType.getIdFromWingType(type), type);
+		for(var type : WingType.table.list()) {
+			engine.put("WING_TYPE_"+type.getId(), type);
 		}
 		for(WingSize size : WingSize.values()) {
 			engine.put("WING_SIZE_"+size.toString(), size.getValue());

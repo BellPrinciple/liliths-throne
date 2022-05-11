@@ -263,7 +263,7 @@ public interface HornType extends BodyPartTypeInterface {
 		}
 	}
 
-	TypeTable<AbstractHornType> table = new TypeTable<>(
+	TypeTable<HornType> table = new TypeTable<>(
 		HornType::sanitize,
 		HornType.class,
 		AbstractHornType.class,
@@ -276,7 +276,7 @@ public interface HornType extends BodyPartTypeInterface {
 		});
 
 	@Deprecated
-	public static AbstractHornType getHornTypeFromId(String id) {
+	static HornType getHornTypeFromId(String id) {
 		return table.of(id);
 	}
 
@@ -290,12 +290,12 @@ public interface HornType extends BodyPartTypeInterface {
 	}
 
 	@Deprecated
-	public static String getIdFromHornType(AbstractHornType hornType) {
+	static String getIdFromHornType(HornType hornType) {
 		return hornType.getId();
 	}
 
 	@Deprecated
-	public static List<AbstractHornType> getAllHornTypes() {
+	static List<HornType> getAllHornTypes() {
 		return table.listByRace();
 	}
 	
@@ -305,7 +305,7 @@ public interface HornType extends BodyPartTypeInterface {
 	 * @param retainNone Whether to leave HornType.NONE in the list (true) or remove it if it's present (false).
 	 * @return A list of HornTypes which are available for this race to have <b>via transformation, not by default</b>. If you want to find out what HornTypes a race has by default, use their RacialBody's getHornTypes() method.
 	 */
-	public static List<AbstractHornType> getHornTypes(Race race, boolean retainNone) {
+	static List<HornType> getHornTypes(Race race, boolean retainNone) {
 		var l = table.of(race).orElse(List.of());
 		if(retainNone)
 			return l;
