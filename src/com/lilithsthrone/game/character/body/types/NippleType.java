@@ -1,9 +1,9 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.util.Arrays;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractNippleType;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
@@ -11,7 +11,6 @@ import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.1.83
@@ -20,7 +19,9 @@ import com.lilithsthrone.utils.Util;
  */
 public interface NippleType extends BodyPartTypeInterface {
 
-	List<OrificeModifier> getDefaultRacialOrificeModifiers();
+	default List<OrificeModifier> getDefaultRacialOrificeModifiers() {
+		return List.of();
+	}
 
 	@Override
 	default String getDeterminer(GameCharacter gc) {
@@ -108,131 +109,99 @@ public interface NippleType extends BodyPartTypeInterface {
 		return "";
 	}
 
-	NippleType HUMAN = new Special(BodyCoveringType.NIPPLES,
-			Race.HUMAN,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType HUMAN = Special.HUMAN;
 
-	NippleType ANGEL = new Special(BodyCoveringType.NIPPLES,
-			Race.ANGEL,
-			Util.newArrayListOfValues("perfect", "flawless"),
-			Util.newArrayListOfValues("perfect", "flawless"),
-			Util.newArrayListOfValues()){
-	};
+	NippleType ANGEL = Special.ANGEL;
 
-	NippleType DEMON = new Special(BodyCoveringType.NIPPLES,
-			Race.DEMON,
-			Util.newArrayListOfValues("perfect", "flawless"),
-			Util.newArrayListOfValues("perfect", "flawless"),
-			Util.newArrayListOfValues()){
-	};
+	NippleType DEMON = Special.DEMON;
 
-	NippleType DOG_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.DOG_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType DOG_MORPH = Special.DOG_MORPH;
 
-	NippleType WOLF_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.WOLF_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType WOLF_MORPH = Special.WOLF_MORPH;
 
-	NippleType FOX_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.FOX_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType FOX_MORPH = Special.FOX_MORPH;
 
-	NippleType CAT_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.CAT_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType CAT_MORPH = Special.CAT_MORPH;
 
-	NippleType COW_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.COW_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType COW_MORPH = Special.COW_MORPH;
 
-	NippleType SQUIRREL_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.SQUIRREL_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType SQUIRREL_MORPH = Special.SQUIRREL_MORPH;
 
-	NippleType RAT_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.RAT_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType RAT_MORPH = Special.RAT_MORPH;
 
-	NippleType BAT_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.BAT_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType BAT_MORPH = Special.BAT_MORPH;
 
-	NippleType RABBIT_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.RABBIT_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType RABBIT_MORPH = Special.RABBIT_MORPH;
 
-	NippleType ALLIGATOR_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.ALLIGATOR_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType ALLIGATOR_MORPH = Special.ALLIGATOR_MORPH;
 
-	NippleType HORSE_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.HORSE_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType HORSE_MORPH = Special.HORSE_MORPH;
 
-	NippleType REINDEER_MORPH = new Special(BodyCoveringType.NIPPLES,
-			Race.REINDEER_MORPH,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType REINDEER_MORPH = Special.REINDEER_MORPH;
 
-	NippleType HARPY = new Special(BodyCoveringType.NIPPLES,
-			Race.HARPY,
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues(""),
-			Util.newArrayListOfValues()){
-	};
+	NippleType HARPY = Special.HARPY;
 
-	class Special extends AbstractNippleType {
-
-		private String id;
-
-		public Special(AbstractBodyCoveringType coveringType, Race race, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<OrificeModifier> defaultRacialOrificeModifiers) {
-			super(coveringType, race, descriptorsMasculine, descriptorsFeminine, defaultRacialOrificeModifiers);
-		}
+	enum Special implements NippleType {
+		HUMAN,
+		ANGEL,
+		DEMON,
+		DOG_MORPH,
+		WOLF_MORPH,
+		FOX_MORPH,
+		CAT_MORPH,
+		COW_MORPH,
+		SQUIRREL_MORPH,
+		RAT_MORPH,
+		BAT_MORPH,
+		RABBIT_MORPH,
+		ALLIGATOR_MORPH,
+		HORSE_MORPH,
+		REINDEER_MORPH,
+		HARPY,
+		;
 
 		@Override
 		public String getId() {
-			return id != null ? id : (id = Arrays.stream(NippleType.class.getFields())
-				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
-				.findAny().orElseThrow().getName());
+			return name();
+		}
+
+		@Override
+		public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+			return BodyCoveringType.NIPPLES;
+		}
+
+		@Override
+		public Race getRace() {
+			switch(this) {
+			case HUMAN: return Race.HUMAN;
+			case ANGEL: return Race.ANGEL;
+			case DEMON: return Race.DEMON;
+			case DOG_MORPH: return Race.DOG_MORPH;
+			case WOLF_MORPH: return Race.WOLF_MORPH;
+			case FOX_MORPH: return Race.FOX_MORPH;
+			case CAT_MORPH: return Race.CAT_MORPH;
+			case COW_MORPH: return Race.COW_MORPH;
+			case SQUIRREL_MORPH: return Race.SQUIRREL_MORPH;
+			case RAT_MORPH: return Race.RAT_MORPH;
+			case BAT_MORPH: return Race.BAT_MORPH;
+			case RABBIT_MORPH: return Race.RABBIT_MORPH;
+			case ALLIGATOR_MORPH: return Race.ALLIGATOR_MORPH;
+			case HORSE_MORPH: return Race.HORSE_MORPH;
+			case REINDEER_MORPH: return Race.REINDEER_MORPH;
+			case HARPY: return Race.HARPY;
+			}
+			throw new IllegalStateException();
+		}
+
+		@Override
+		public String getDescriptor(GameCharacter c) {
+			switch(this) {
+			case ANGEL:
+			case DEMON:
+				return UtilText.returnStringAtRandom("perfect", "flawless");
+			default:
+				return "";
+			}
 		}
 	}
 //	/**
@@ -247,8 +216,7 @@ public interface NippleType extends BodyPartTypeInterface {
 	
 	TypeTable<NippleType> table = new TypeTable<>(
 		NippleType::sanitize,
-		NippleType.class,
-		AbstractNippleType.class,
+		Special.values(),
 		"nipple",
 		(f,n,a,m)->new AbstractNippleType(f,a,m) {
 			@Override
