@@ -24,6 +24,33 @@ public class TypeTable <T extends BodyPartTypeInterface> extends Table<T> {
 		T construct(File source, String name, String author, boolean isMod);
 	}
 
+	public TypeTable(Function<String,String> s, T[] v, String r, Constructor<?extends T> c) {
+		super(s);
+		forEachMod("/race","bodyParts",null,(f,n,a)->{
+			if(!Util.getXmlRootElementName(f).equals(r))
+				return;
+			var k = n.replaceAll("bodyParts_","");
+			add(k,c.construct(f,k,a,true));
+		});
+		forEachExternal("res/race","bodyParts",null,(f,n,a)->{
+			if(!Util.getXmlRootElementName(f).equals(r))
+				return;
+			var k = n.replaceAll("bodyParts_","");
+			add(k,c.construct(f,k,a,false));
+		});
+		for(T x: v)
+			add(x.getId(),x);
+		byRace = list().stream()
+		.collect(groupingBy(BodyPartTypeInterface::getRace));
+		list = list().stream()
+		.sorted((t1,t2)->t1.getRace()== Race.NONE
+			? -1
+			: t2.getRace()==Race.NONE
+				? 1
+				: t1.getRace().getName(false).compareTo(t2.getRace().getName(false)))
+		.collect(Collectors.toUnmodifiableList());
+	}
+
 	/**
 	 * @param s
 	 * Transforms an identifier before lookup.
