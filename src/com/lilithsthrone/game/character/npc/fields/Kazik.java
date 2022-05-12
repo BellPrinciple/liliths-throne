@@ -151,15 +151,15 @@ public class Kazik extends NPC {
 		this.setBodySize(BodySize.TWO_AVERAGE.getMedianValue());
 
 		// Coverings:
-		this.setEyeCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_ferret_eye"), PresetColour.EYE_BLUE_DARK));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_ferret_fur"), CoveringPattern.MARKED, CoveringModifier.SILKEN, PresetColour.COVERING_BROWN_DARK, false, PresetColour.COVERING_GREY, false), true);
+		this.setEyeCovering(new Covering(BodyCoveringType.table.of("dsg_ferret_eye"), PresetColour.EYE_BLUE_DARK));
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("dsg_ferret_fur"), CoveringPattern.MARKED, CoveringModifier.SILKEN, PresetColour.COVERING_BROWN_DARK, false, PresetColour.COVERING_GREY, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, PresetColour.SKIN_DARK), true);
 		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_ferret_hair"), PresetColour.COVERING_BROWN_DARK), true);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("dsg_ferret_hair"), PresetColour.COVERING_BROWN_DARK), true);
 		this.setHairLength(HairLength.ZERO_BALD.getMinimumValue());
 		this.setHairStyle(HairStyle.NONE);
 
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("dsg_ferret_body_hair"), PresetColour.COVERING_WHITE), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("dsg_ferret_body_hair"), PresetColour.COVERING_WHITE), false);
 		this.setUnderarmHair(BodyHair.FOUR_NATURAL);
 		this.setAssHair(BodyHair.FOUR_NATURAL);
 		this.setPubicHair(BodyHair.FOUR_NATURAL);

@@ -147,17 +147,17 @@ public class Imsu extends NPC {
 		this.setBodySize(BodySize.THREE_LARGE.getMedianValue());
 
 		// Coverings:
-		this.setEyeCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_RED, true, PresetColour.EYE_RED, true));
+		this.setEyeCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_RED, true, PresetColour.EYE_RED, true));
 		this.setEyeCovering(new Covering(BodyCoveringType.EYE_DEMON_COMMON, CoveringPattern.EYE_IRISES, PresetColour.EYE_RED, true, PresetColour.EYE_RED, true));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_fur"), CoveringPattern.MARKED, CoveringModifier.SHORT, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_WHITE, false), true);
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_fur"), CoveringPattern.MARKED, CoveringModifier.SHORT, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_WHITE, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, PresetColour.SKIN_EBONY), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HORN, PresetColour.COVERING_DARK_GREY), false);
 		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_hair"), PresetColour.COVERING_BLACK), true);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_hair"), PresetColour.COVERING_BLACK), true);
 		this.setHairLength(HairLength.ZERO_BALD.getMinimumValue());
 		this.setHairStyle(HairStyle.NONE);
 		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_body_hair"), PresetColour.COVERING_BLACK), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_body_hair"), PresetColour.COVERING_BLACK), false);
 		this.setUnderarmHair(BodyHair.FOUR_NATURAL);
 		this.setAssHair(BodyHair.FOUR_NATURAL);
 		this.setPubicHair(BodyHair.FOUR_NATURAL);

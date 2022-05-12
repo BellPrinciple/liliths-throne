@@ -20,7 +20,6 @@ import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.Litter;
 import com.lilithsthrone.game.character.PregnancyPossibility;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringSkinToneColorHelper;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
@@ -150,9 +149,9 @@ public class Body implements XMLSaving {
 	private int muscle;
 	private BodyHair pubicHair;
 
-	private Set<AbstractBodyCoveringType> heavyMakeup;
-	private Map<AbstractBodyCoveringType, Covering> coverings;
-	private Set<AbstractBodyCoveringType> coveringsDiscovered;
+	private Set<BodyCoveringType> heavyMakeup;
+	private Map<BodyCoveringType, Covering> coverings;
+	private Set<BodyCoveringType> coveringsDiscovered;
 
 	private List<BodyPartInterface> allBodyParts;
 
@@ -359,7 +358,7 @@ public class Body implements XMLSaving {
 		}
 	}
 	
-	public static AbstractBodyCoveringType getBodyHairCoveringType(Race race) {
+	public static BodyCoveringType getBodyHairCoveringType(Race race) {
 		return race.getRacialBody().getBodyHairType();
 	}
 	
@@ -368,7 +367,7 @@ public class Body implements XMLSaving {
 		// Everything is based on human skin value:
 		StartingSkinTone tone = StartingSkinTone.values()[Util.random.nextInt(StartingSkinTone.values().length)];
 		
-		for(AbstractBodyCoveringType s : BodyCoveringType.getAllBodyCoveringTypes()) {
+		for(BodyCoveringType s : BodyCoveringType.table.list()) {
 			// Specials:
 			// orifice exterior/interior
 			// makeup
@@ -453,7 +452,7 @@ public class Body implements XMLSaving {
 		}
 		XMLUtil.addAttribute(doc, bodyCore, "takesAfterMother", String.valueOf(this.isTakesAfterMother()));
 		
-		for(AbstractBodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
+		for(BodyCoveringType bct : BodyCoveringType.table.list()) {
 			if(this.isBodyCoveringTypesDiscovered(bct)
 					|| ((bct == BodyCoveringType.MAKEUP_BLUSHER
 							|| bct == BodyCoveringType.MAKEUP_EYE_LINER
@@ -468,7 +467,7 @@ public class Body implements XMLSaving {
 				Element element = doc.createElement("bodyCovering");
 				bodyCore.appendChild(element);
 				
-				XMLUtil.addAttribute(doc, element, "type", BodyCoveringType.getIdFromBodyCoveringType(bct));
+				XMLUtil.addAttribute(doc, element, "type", bct.getId());
 				XMLUtil.addAttribute(doc, element, "pattern", this.coverings.get(bct).getPattern().toString());
 				XMLUtil.addAttribute(doc, element, "modifier", this.coverings.get(bct).getModifier().toString());
 				XMLUtil.addAttribute(doc, element, "c1", this.coverings.get(bct).getPrimaryColour().getId());
@@ -488,10 +487,10 @@ public class Body implements XMLSaving {
 		if(!heavyMakeup.isEmpty()) {
 			Element element = doc.createElement("heavyMakeup");
 			bodyCore.appendChild(element);
-			for(AbstractBodyCoveringType bct : heavyMakeup) {
+			for(BodyCoveringType bct : heavyMakeup) {
 				Element bctElement = doc.createElement("type");
 				element.appendChild(bctElement);
-				bctElement.setTextContent(BodyCoveringType.getIdFromBodyCoveringType(bct));
+				bctElement.setTextContent(bct.getId());
 			}
 		}
 		
@@ -804,10 +803,10 @@ public class Body implements XMLSaving {
 	}
 
 	
-	private void setBodyCoveringForXMLImport(AbstractBodyCoveringType bct, CoveringPattern pattern, CoveringModifier modifier, Colour primary, boolean primaryGlow, Colour secondary, boolean secondaryGlow) {
+	private void setBodyCoveringForXMLImport(BodyCoveringType bct, CoveringPattern pattern, CoveringModifier modifier, Colour primary, boolean primaryGlow, Colour secondary, boolean secondaryGlow) {
 		this.getCoverings().put(bct, new Covering(bct, pattern, modifier, primary, primaryGlow, secondary, secondaryGlow));
 	}
-	private void setBodyCoveringForXMLImport(AbstractBodyCoveringType bct, CoveringPattern pattern, Colour primary, boolean primaryGlow, Colour secondary, boolean secondaryGlow) {
+	private void setBodyCoveringForXMLImport(BodyCoveringType bct, CoveringPattern pattern, Colour primary, boolean primaryGlow, Colour secondary, boolean secondaryGlow) {
 		this.getCoverings().put(bct, new Covering(bct, pattern, primary, primaryGlow, secondary, secondaryGlow));
 	}
 	
@@ -1919,7 +1918,7 @@ public class Body implements XMLSaving {
 					}
 				}
 
-				AbstractBodyCoveringType coveringType = BodyCoveringType.getBodyCoveringTypeFromId(type);
+				BodyCoveringType coveringType = BodyCoveringType.table.of(type);
 				CoveringPattern loadedPattern = CoveringPattern.valueOf(e.getAttribute("pattern"));
 				if(!coveringType.getAllPatterns().containsKey(loadedPattern)) {
 					loadedPattern = Util.getRandomObjectFromWeightedMap(coveringType.getNaturalPatterns());
@@ -1946,18 +1945,18 @@ public class Body implements XMLSaving {
 				
 				if(oldPantherReplacement && coveringType==BodyCoveringType.FELINE_FUR) {
 					Covering felineCovering = body.getCovering(coveringType, false);
-					body.setBodyCoveringForXMLImport(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_panther_fur"),
+					body.setBodyCoveringForXMLImport(BodyCoveringType.table.of("innoxia_panther_fur"),
 							felineCovering.getPattern(),
 							felineCovering.getModifier(),
 							felineCovering.getPrimaryColour(),
 							felineCovering.isPrimaryGlowing(),
 							felineCovering.getSecondaryColour(),
 							felineCovering.isSecondaryGlowing());
-					body.addBodyCoveringTypesDiscovered(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_panther_fur"));
+					body.addBodyCoveringTypesDiscovered(BodyCoveringType.table.of("innoxia_panther_fur"));
 				}
 				
 //				if(!e.getAttribute("discovered").isEmpty() && Boolean.valueOf(e.getAttribute("discovered"))) {
-					body.addBodyCoveringTypesDiscovered(BodyCoveringType.getBodyCoveringTypeFromId(type));
+					body.addBodyCoveringTypesDiscovered(BodyCoveringType.table.of(type));
 //				}
 				
 				Main.game.getCharacterUtils().appendToImportLog(log, "<br/>Body: Set bodyCovering: "+colourPrimary+", "+colourSecondary);
@@ -1972,7 +1971,7 @@ public class Body implements XMLSaving {
 			NodeList bodyTypes = heavyMakeupElement.getElementsByTagName("type");
 			for(int i = 0; i < bodyTypes.getLength(); i++){
 				Element e = ((Element)bodyTypes.item(i));
-				body.addHeavyMakeup(BodyCoveringType.getBodyCoveringTypeFromId(e.getTextContent()));
+				body.addHeavyMakeup(BodyCoveringType.table.of(e.getTextContent()));
 			}
 		} catch(Exception ex) {	
 		}
@@ -1986,8 +1985,8 @@ public class Body implements XMLSaving {
 		// Converting harpy bald eagles to raptor bald eagles:
 		if(Main.isVersionOlderThan(version, "0.4.2.5")) {
 			if(body.getRace()==Race.HARPY) {
-				AbstractBodyCoveringType feathers = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_FEATHER):BodyCoveringType.FEATHERS;
-				AbstractBodyCoveringType headFeathers = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.HAIR):BodyCoveringType.HAIR_HARPY;
+				BodyCoveringType feathers = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_FEATHER):BodyCoveringType.FEATHERS;
+				BodyCoveringType headFeathers = body.getBodyMaterial()==BodyMaterial.SLIME?BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.HAIR):BodyCoveringType.HAIR_HARPY;
 				
 				if(body.getCoverings().get(feathers).getPrimaryColour()==PresetColour.COVERING_BROWN_DARK && body.getCoverings().get(headFeathers).getPrimaryColour()==PresetColour.COVERING_WHITE) {
 
@@ -2033,11 +2032,11 @@ public class Body implements XMLSaving {
 					}
 					
 					// coverings:
-					coveringCopyConversion(body, BodyCoveringType.FEATHERS, BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_feathers"));
-					coveringCopyConversion(body, BodyCoveringType.HARPY_SKIN, BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_skin"));
-					coveringCopyConversion(body, BodyCoveringType.BODY_HAIR_HARPY, BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_body_hair"));
-					coveringCopyConversion(body, BodyCoveringType.EYE_HARPY, BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_eye"));
-					coveringCopyConversion(body, BodyCoveringType.HAIR_HARPY, BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_hair"));
+					coveringCopyConversion(body, BodyCoveringType.FEATHERS, BodyCoveringType.table.of("innoxia_raptor_feathers"));
+					coveringCopyConversion(body, BodyCoveringType.HARPY_SKIN, BodyCoveringType.table.of("innoxia_raptor_skin"));
+					coveringCopyConversion(body, BodyCoveringType.BODY_HAIR_HARPY, BodyCoveringType.table.of("innoxia_raptor_body_hair"));
+					coveringCopyConversion(body, BodyCoveringType.EYE_HARPY, BodyCoveringType.table.of("innoxia_raptor_eye"));
+					coveringCopyConversion(body, BodyCoveringType.HAIR_HARPY, BodyCoveringType.table.of("innoxia_raptor_hair"));
 				}
 			}
 		}
@@ -2049,7 +2048,7 @@ public class Body implements XMLSaving {
 		return body;
 	}
 	
-	private static void coveringCopyConversion(Body body, AbstractBodyCoveringType coveringTypeToCopy, AbstractBodyCoveringType newCoveringType) {
+	private static void coveringCopyConversion(Body body, BodyCoveringType coveringTypeToCopy, BodyCoveringType newCoveringType) {
 		Covering covering = body.getCovering(coveringTypeToCopy, false);
 		body.setBodyCoveringForXMLImport(newCoveringType,
 				covering.getPattern(),
@@ -6319,7 +6318,7 @@ public class Body implements XMLSaving {
 	}
 
 	public void removeAllMakeup() {
-		for(AbstractBodyCoveringType makeup : BodyCoveringType.allMakeupTypes) {
+		for(var makeup : BodyCoveringType.getAllMakeupTypes()) {
 			if(coverings.containsKey(makeup)) {
 				coverings.put(makeup, new Covering(makeup, CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_NONE, false, PresetColour.COVERING_NONE, false));
 			}
@@ -6335,65 +6334,65 @@ public class Body implements XMLSaving {
 		this.piercedStomach = piercedStomach;
 	}
 
-	public Set<AbstractBodyCoveringType> getHeavyMakeup() {
+	public Set<BodyCoveringType> getHeavyMakeup() {
 		return heavyMakeup;
 	}
 
-	public boolean isHeavyMakeup(AbstractBodyCoveringType type) {
+	public boolean isHeavyMakeup(BodyCoveringType type) {
 		return heavyMakeup.contains(type);
 	}
 	
-	public void addHeavyMakeup(AbstractBodyCoveringType type) {
+	public void addHeavyMakeup(BodyCoveringType type) {
 		heavyMakeup.add(type);
 	}
 	
-	public boolean removeHeavyMakeup(AbstractBodyCoveringType type) {
+	public boolean removeHeavyMakeup(BodyCoveringType type) {
 		return heavyMakeup.remove(type);
 	}
 
-	public Map<AbstractBodyCoveringType, Covering> getCoverings() {
+	public Map<BodyCoveringType, Covering> getCoverings() {
 		return coverings;
 	}
 	
-	public void setCovering(AbstractBodyCoveringType coveringType, CoveringPattern pattern, CoveringModifier modifier, Colour primaryColor, boolean primaryGlow, Colour secondaryColor, boolean secondaryGlow) {
+	public void setCovering(BodyCoveringType coveringType, CoveringPattern pattern, CoveringModifier modifier, Colour primaryColor, boolean primaryGlow, Colour secondaryColor, boolean secondaryGlow) {
 		coverings.put(coveringType, new Covering(coveringType, pattern, modifier, primaryColor, primaryGlow, secondaryColor, secondaryGlow));
 	}
 
-	public void setCovering(AbstractBodyCoveringType coveringType, CoveringPattern pattern, Colour primaryColor, boolean primaryGlow, Colour secondaryColor, boolean secondaryGlow) {
+	public void setCovering(BodyCoveringType coveringType, CoveringPattern pattern, Colour primaryColor, boolean primaryGlow, Colour secondaryColor, boolean secondaryGlow) {
 		coverings.put(coveringType, new Covering(coveringType, pattern, primaryColor, primaryGlow, secondaryColor, secondaryGlow));
 	}
 	
-	public Covering getCovering(AbstractBodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
+	public Covering getCovering(BodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
 		if(!accountForNonFleshMaterial) {
 			return this.getCoverings().get(bodyCoveringType);
 		}
-		AbstractBodyCoveringType handledType = this.getBodyMaterial()!=BodyMaterial.FLESH
+		BodyCoveringType handledType = this.getBodyMaterial()!=BodyMaterial.FLESH
 												?BodyCoveringType.getMaterialBodyCoveringType(this.getBodyMaterial(), bodyCoveringType.getCategory())
 												:bodyCoveringType;
 		return this.getCoverings().get(handledType);
 	}
 
-	public CoveringModifier getCoveringModifier(AbstractBodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
+	public CoveringModifier getCoveringModifier(BodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
 		return getCovering(bodyCoveringType, accountForNonFleshMaterial).getModifier();
 	}
 
-	public void setCoveringModifier(AbstractBodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial, CoveringModifier modifier) {
+	public void setCoveringModifier(BodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial, CoveringModifier modifier) {
 		getCovering(bodyCoveringType, accountForNonFleshMaterial).setModifier(modifier);
 	}
 
-	public CoveringPattern getCoveringPattern(AbstractBodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
+	public CoveringPattern getCoveringPattern(BodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
 		return getCovering(bodyCoveringType, accountForNonFleshMaterial).getPattern();
 	}
 
-	public void setCoveringPattern(AbstractBodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial, CoveringPattern pattern) {
+	public void setCoveringPattern(BodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial, CoveringPattern pattern) {
 		getCovering(bodyCoveringType, accountForNonFleshMaterial).setPattern(pattern);
 	}
 
-	public boolean isBodyCoveringTypesDiscovered(AbstractBodyCoveringType bct) {
+	public boolean isBodyCoveringTypesDiscovered(BodyCoveringType bct) {
 		return coveringsDiscovered.contains(bct);
 	}
 
-	public boolean addBodyCoveringTypesDiscovered(AbstractBodyCoveringType bct) {
+	public boolean addBodyCoveringTypesDiscovered(BodyCoveringType bct) {
 		return coveringsDiscovered.add(bct);
 	}
 	
@@ -6443,11 +6442,11 @@ public class Body implements XMLSaving {
 		if(updateSkin) {
 			for(BodyMaterial mat : BodyMaterial.values()) { // Update all non-flesh parts to be the same colour as main skin:
 				if(mat!=BodyMaterial.FLESH) {
-					AbstractBodyCoveringType coreSlimeCovering = BodyCoveringType.getMaterialBodyCoveringType(mat, BodyCoveringCategory.MAIN_SKIN);
+					BodyCoveringType coreSlimeCovering = BodyCoveringType.getMaterialBodyCoveringType(mat, BodyCoveringCategory.MAIN_SKIN);
 					
 					for(BodyCoveringCategory cat : BodyCoveringCategory.values()) {
 						if(cat.isInfluencedByMaterialType()) {
-							AbstractBodyCoveringType slimeCovering = BodyCoveringType.getMaterialBodyCoveringType(mat, cat);
+							BodyCoveringType slimeCovering = BodyCoveringType.getMaterialBodyCoveringType(mat, cat);
 							coverings.put(slimeCovering,
 									new Covering(slimeCovering,
 											slimeCovering.getNaturalPatterns().entrySet().iterator().next().getKey(),

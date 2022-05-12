@@ -6,7 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAnusType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.race.Race;
@@ -187,7 +186,7 @@ public interface AnusType extends BodyPartTypeInterface {
 		private String id;
 
 		Special(
-				AbstractBodyCoveringType coveringType,
+				BodyCoveringType coveringType,
 				Race race,
 				List<String> names,
 				List<String> namesPlural,

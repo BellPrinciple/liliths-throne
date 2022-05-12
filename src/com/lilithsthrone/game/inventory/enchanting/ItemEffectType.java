@@ -11,7 +11,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.Litter;
 import com.lilithsthrone.game.character.PregnancyPossibility;
 import com.lilithsthrone.game.character.attributes.Attribute;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.types.*;
@@ -896,7 +895,7 @@ public interface ItemEffectType {
 						sb.append(UtilText.parse(target, "[npc.NamePos] slimy body starts [style.boldTfGeneric(glowing)]!"));
 					}
 					
-					for(AbstractBodyCoveringType bct : BodyCoveringType.getAllSlimeTypes()) {
+					for(var bct : BodyCoveringType.getAllSlimeTypes()) {
 						target.getCovering(bct).setPrimaryGlowing(true);
 						target.getCovering(bct).setSecondaryGlowing(true);
 					}

@@ -6,7 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.race.Race;
@@ -233,11 +232,11 @@ public interface BreastType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, NippleType nippleType, FluidType fluidType, List<String> namesFlat, List<String> namesFlatPlural, List<String> descriptorsFlat, List<String> namesBreasts, List<String> namesBreastsPlural, List<String> descriptorsBreasts, String breastsTransformationDescription, String breastsBodyDescription, String breastsCrotchTransformationDescription, String breastsCrotchBodyDescription) {
+		public Special(BodyCoveringType coveringType, Race race, NippleType nippleType, FluidType fluidType, List<String> namesFlat, List<String> namesFlatPlural, List<String> descriptorsFlat, List<String> namesBreasts, List<String> namesBreastsPlural, List<String> descriptorsBreasts, String breastsTransformationDescription, String breastsBodyDescription, String breastsCrotchTransformationDescription, String breastsCrotchBodyDescription) {
 			super(coveringType, race, nippleType, fluidType, namesFlat, namesFlatPlural, descriptorsFlat, namesBreasts, namesBreastsPlural, descriptorsBreasts, breastsTransformationDescription, breastsBodyDescription, breastsCrotchTransformationDescription, breastsCrotchBodyDescription);
 		}
 
-		public Special(AbstractBodyCoveringType skinType, Race race, NippleType nippleType, FluidType fluidType, String breastsTransformationDescription, String breastsBodyDescription, String breastsCrotchTransformationDescription, String breastsCrotchBodyDescription) {
+		public Special(BodyCoveringType skinType, Race race, NippleType nippleType, FluidType fluidType, String breastsTransformationDescription, String breastsBodyDescription, String breastsCrotchTransformationDescription, String breastsCrotchBodyDescription) {
 			super(skinType, race, nippleType, fluidType, breastsTransformationDescription, breastsBodyDescription, breastsCrotchTransformationDescription, breastsCrotchBodyDescription);
 		}
 

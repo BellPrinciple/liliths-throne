@@ -148,17 +148,17 @@ public class Hale extends NPC {
 		this.setBodySize(BodySize.THREE_LARGE.getMedianValue());
 
 		// Coverings:
-		this.setEyeCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_YELLOW, true, PresetColour.EYE_YELLOW, true));
+		this.setEyeCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_YELLOW, true, PresetColour.EYE_YELLOW, true));
 		this.setEyeCovering(new Covering(BodyCoveringType.EYE_DEMON_COMMON, CoveringPattern.EYE_IRISES, PresetColour.EYE_YELLOW, true, PresetColour.EYE_YELLOW, true));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_fur"), CoveringPattern.MARKED, CoveringModifier.SHORT, PresetColour.COVERING_GREY, false, PresetColour.COVERING_DARK_GREY, false), true);
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_fur"), CoveringPattern.MARKED, CoveringModifier.SHORT, PresetColour.COVERING_GREY, false, PresetColour.COVERING_DARK_GREY, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, PresetColour.SKIN_TANNED), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HORN, PresetColour.COVERING_GREY), false);
 		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_hair"), PresetColour.COVERING_DARK_GREY), true);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_hair"), PresetColour.COVERING_DARK_GREY), true);
 		this.setHairLength(HairLength.ZERO_BALD.getMinimumValue());
 		this.setHairStyle(HairStyle.NONE);
 		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_goat_body_hair"), PresetColour.COVERING_DARK_GREY), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_goat_body_hair"), PresetColour.COVERING_DARK_GREY), false);
 		this.setUnderarmHair(BodyHair.FOUR_NATURAL);
 		this.setAssHair(BodyHair.FOUR_NATURAL);
 		this.setPubicHair(BodyHair.FOUR_NATURAL);

@@ -6,7 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractVaginaType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.fetishes.Fetish;
@@ -492,11 +491,11 @@ public interface VaginaType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, FluidType fluidType, Race race, boolean eggLayer, List<String> names, List<String> namesPlural, List<String> descriptors, String transformationDescription, String bodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
+		public Special(BodyCoveringType coveringType, FluidType fluidType, Race race, boolean eggLayer, List<String> names, List<String> namesPlural, List<String> descriptors, String transformationDescription, String bodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
 			super(coveringType, fluidType, race, eggLayer, names, namesPlural, descriptors, transformationDescription, bodyDescription, defaultRacialOrificeModifiers);
 		}
 
-		public Special(AbstractBodyCoveringType skinType, FluidType fluidType, Race race, boolean eggLayer, String transformationDescription, String bodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
+		public Special(BodyCoveringType skinType, FluidType fluidType, Race race, boolean eggLayer, String transformationDescription, String bodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
 			super(skinType, fluidType, race, eggLayer, transformationDescription, bodyDescription, defaultRacialOrificeModifiers);
 		}
 

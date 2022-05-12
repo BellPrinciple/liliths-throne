@@ -10,7 +10,6 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.AnusType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
@@ -28,7 +27,7 @@ public abstract class AbstractAnusType implements AnusType {
 	private boolean mod;
 	private boolean fromExternalFile;
 	
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private Race race;
 
 	private boolean assHairAllowed;
@@ -50,7 +49,7 @@ public abstract class AbstractAnusType implements AnusType {
 	 * @param descriptorsFeminine The descriptors that can be used to describe a feminine form of this ass type.
 	 * @param defaultRacialOrificeModifiers Which modifiers this anus naturally spawns with.
 	 */
-	public AbstractAnusType(AbstractBodyCoveringType coveringType,
+	public AbstractAnusType(BodyCoveringType coveringType,
 			Race race,
 			List<String> names,
 			List<String> namesPlural,
@@ -90,7 +89,7 @@ public abstract class AbstractAnusType implements AnusType {
 				this.fromExternalFile = true;
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.assHairAllowed = race.getRacialClass().isAnthroHair();
 				if(coreElement.getOptionalFirstOf("assHairAllowed").isPresent()) {
@@ -176,7 +175,7 @@ public abstract class AbstractAnusType implements AnusType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 

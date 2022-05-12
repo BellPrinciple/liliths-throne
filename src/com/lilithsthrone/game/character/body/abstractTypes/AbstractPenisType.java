@@ -12,7 +12,6 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.TesticleType;
@@ -36,7 +35,7 @@ public abstract class AbstractPenisType implements PenisType {
 	protected static final Map<String, Integer> BASE_NAMES_SINGULAR = Util.newHashMapOfValues(new Value<>("cock", 3), new Value<>("dick", 2), new Value<>("shaft", 1));
 	protected static final Map<String, Integer> BASE_NAMES_PLURAL = Util.newHashMapOfValues(new Value<>("cocks", 3), new Value<>("dicks", 2), new Value<>("shafts", 1));
 	
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private Race race;
 
 	private String transformationName;
@@ -78,7 +77,7 @@ public abstract class AbstractPenisType implements PenisType {
 	 * @param bodyDescription A sentence or two to describe this penis type, as seen in the character view screen. It should follow the same format as all of the other entries in the PenisType class.
 	 * @param defaultRacialPenetrationModifiers Which modifiers this penis naturally spawns with.
 	 */
-	public AbstractPenisType(AbstractBodyCoveringType coveringType,
+	public AbstractPenisType(BodyCoveringType coveringType,
 			Race race,
 			TesticleType testicleType,
 			List<String> namesFeminine,
@@ -115,7 +114,7 @@ public abstract class AbstractPenisType implements PenisType {
 		}
 	}
 	
-	public AbstractPenisType(AbstractBodyCoveringType coveringType,
+	public AbstractPenisType(BodyCoveringType coveringType,
 			Race race,
 			TesticleType testicleType,
 			String transformationDescription,
@@ -147,7 +146,7 @@ public abstract class AbstractPenisType implements PenisType {
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 
@@ -325,7 +324,7 @@ public abstract class AbstractPenisType implements PenisType {
 	}
 	
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 

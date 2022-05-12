@@ -132,15 +132,15 @@ public class Ceridwen extends NPC {
 		this.setBodySize(BodySize.TWO_AVERAGE.getMedianValue());
 		
 		// Coverings:
-		this.setEyeCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_eye"), PresetColour.EYE_YELLOW));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_feathers"), CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_WHITE, false, PresetColour.COVERING_WHITE, false), true);
+		this.setEyeCovering(new Covering(BodyCoveringType.table.of("innoxia_raptor_eye"), PresetColour.EYE_YELLOW));
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("innoxia_raptor_feathers"), CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_WHITE, false, PresetColour.COVERING_WHITE, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, PresetColour.SKIN_PALE), true);
 		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_hair"), PresetColour.COVERING_WHITE), true);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_raptor_hair"), PresetColour.COVERING_WHITE), true);
 		this.setHairLength(HairLength.ZERO_BALD.getMinimumValue());
 		this.setHairStyle(HairStyle.NONE);
 
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_raptor_body_hair"), PresetColour.COVERING_WHITE), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_raptor_body_hair"), PresetColour.COVERING_WHITE), false);
 		this.setUnderarmHair(BodyHair.FOUR_NATURAL);
 		this.setAssHair(BodyHair.FOUR_NATURAL);
 		this.setPubicHair(BodyHair.FOUR_NATURAL);

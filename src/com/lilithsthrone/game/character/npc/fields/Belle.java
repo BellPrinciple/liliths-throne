@@ -136,16 +136,16 @@ public class Belle extends NPC {
 		this.setBodySize(BodySize.ONE_SLENDER.getMedianValue());
 
 		// Coverings:
-		this.setEyeCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_sheep_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_BLUE_LIGHT, false, PresetColour.EYE_BLUE_LIGHT, false));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_sheep_wool"), CoveringPattern.NONE, CoveringModifier.FLUFFY, PresetColour.COVERING_WHITE, false, PresetColour.COVERING_WHITE, false), true);
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_sheep_wool_face"), CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_WHITE, false, PresetColour.COVERING_WHITE, false), true);
+		this.setEyeCovering(new Covering(BodyCoveringType.table.of("innoxia_sheep_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_BLUE_LIGHT, false, PresetColour.EYE_BLUE_LIGHT, false));
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("innoxia_sheep_wool"), CoveringPattern.NONE, CoveringModifier.FLUFFY, PresetColour.COVERING_WHITE, false, PresetColour.COVERING_WHITE, false), true);
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("innoxia_sheep_wool_face"), CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_WHITE, false, PresetColour.COVERING_WHITE, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, PresetColour.SKIN_PALE), true);
 
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_sheep_hair"), CoveringPattern.NONE, CoveringModifier.FLUFFY, PresetColour.COVERING_WHITE, false, PresetColour.COVERING_WHITE, false), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_sheep_hair"), CoveringPattern.NONE, CoveringModifier.FLUFFY, PresetColour.COVERING_WHITE, false, PresetColour.COVERING_WHITE, false), false);
 		this.setHairLength(HairLength.THREE_SHOULDER_LENGTH.getMedianValue());
 		this.setHairStyle(HairStyle.WAVY);
 		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_sheep_body_hair"), PresetColour.COVERING_WHITE), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_sheep_body_hair"), PresetColour.COVERING_WHITE), false);
 		this.setUnderarmHair(BodyHair.ZERO_NONE);
 		this.setAssHair(BodyHair.ZERO_NONE);
 		this.setPubicHair(BodyHair.ZERO_NONE);

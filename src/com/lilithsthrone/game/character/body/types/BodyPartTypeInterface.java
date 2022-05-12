@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
+import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
@@ -78,12 +78,12 @@ public interface BodyPartTypeInterface {
 	 * <b>BodyCoveringType when assigned to a character should be checked through their appropriate methods!</b>
 	 * @param body The body that this covering type is a part of.
 	 * @return The type of skin that is covering this body part. */
-	AbstractBodyCoveringType getBodyCoveringType(Body body);
+	BodyCoveringType getBodyCoveringType(Body body);
 
 	/**
 	 * <b>BodyCoveringType when assigned to a character should be checked through their appropriate methods!</b>
 	 */
-	default AbstractBodyCoveringType getBodyCoveringType(GameCharacter gc) {
+	default BodyCoveringType getBodyCoveringType(GameCharacter gc) {
 		return getBodyCoveringType(gc.getBody());
 	}
 

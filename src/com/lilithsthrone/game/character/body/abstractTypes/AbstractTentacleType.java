@@ -10,7 +10,6 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.TentacleType;
@@ -29,7 +28,7 @@ public abstract class AbstractTentacleType implements TentacleType {
 	private boolean mod;
 	private boolean fromExternalFile;
 	
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private Race race;
 
 	private String transformationName;
@@ -76,7 +75,7 @@ public abstract class AbstractTentacleType implements TentacleType {
 	 * @param tags The tags which define this tentacle's properties.
 	 */
 	public AbstractTentacleType(
-			AbstractBodyCoveringType coveringType,
+			BodyCoveringType coveringType,
 			Race race,
 			PenetrationGirth defaultGirth,
 			float defaultLengthAsPercentageOfHeight,
@@ -136,7 +135,7 @@ public abstract class AbstractTentacleType implements TentacleType {
 				this.fromExternalFile = true;
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 				
@@ -277,7 +276,7 @@ public abstract class AbstractTentacleType implements TentacleType {
 	}
 	
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 

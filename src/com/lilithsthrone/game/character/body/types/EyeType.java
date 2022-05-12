@@ -6,7 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.valueEnums.EyeShape;
@@ -377,7 +376,7 @@ public interface EyeType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, int defaultPairCount, EyeShape defaultIrisShape, EyeShape defaultPupilShape, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String eyeTransformationDescription, String eyeBodyDescription) {
+		public Special(BodyCoveringType coveringType, Race race, int defaultPairCount, EyeShape defaultIrisShape, EyeShape defaultPupilShape, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String eyeTransformationDescription, String eyeBodyDescription) {
 			super(coveringType, race, defaultPairCount, defaultIrisShape, defaultPupilShape, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, eyeTransformationDescription, eyeBodyDescription);
 		}
 

@@ -6,7 +6,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractAntennaType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.PronounUtility;
@@ -70,7 +69,7 @@ public interface AntennaType extends BodyPartTypeInterface {
 		}
 
 		@Override
-		public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+		public BodyCoveringType getBodyCoveringType(Body body) {
 			return BodyCoveringType.ANTENNA;
 		}
 

@@ -7,7 +7,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
@@ -859,7 +858,7 @@ public interface LegType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, FootStructure defaultFootStructure, FootType footType, String determiner, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<String> footDescriptorsMasculine, List<String> footDescriptorsFeminine, List<String> toeDescriptorsMasculine, List<String> toeDescriptorsFeminine, String legTransformationDescription, String legBodyDescription, List<LegConfiguration> allowedLegConfigurations, boolean spinneret) {
+		public Special(BodyCoveringType coveringType, Race race, FootStructure defaultFootStructure, FootType footType, String determiner, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<String> footDescriptorsMasculine, List<String> footDescriptorsFeminine, List<String> toeDescriptorsMasculine, List<String> toeDescriptorsFeminine, String legTransformationDescription, String legBodyDescription, List<LegConfiguration> allowedLegConfigurations, boolean spinneret) {
 			super(coveringType, race, defaultFootStructure, footType, determiner, name, namePlural, descriptorsMasculine, descriptorsFeminine, footDescriptorsMasculine, footDescriptorsFeminine, toeDescriptorsMasculine, toeDescriptorsFeminine, legTransformationDescription, legBodyDescription, allowedLegConfigurations, spinneret);
 		}
 

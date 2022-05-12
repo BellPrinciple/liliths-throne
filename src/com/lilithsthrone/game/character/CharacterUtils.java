@@ -46,7 +46,6 @@ import com.lilithsthrone.game.character.body.Tentacle;
 import com.lilithsthrone.game.character.body.Torso;
 import com.lilithsthrone.game.character.body.Vagina;
 import com.lilithsthrone.game.character.body.Wing;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
@@ -365,7 +364,7 @@ public class CharacterUtils {
 		
 		float takesAfterMotherChance = takesAfterMother?0.75f:0.25f;
 		
-		List<AbstractBodyCoveringType> typesToInfluence = new ArrayList<>();
+		List<BodyCoveringType> typesToInfluence = new ArrayList<>();
 		// Skin & fur colours:
 		for(BodyPartInterface bp : body.getAllBodyParts()){
 			if(bp.getBodyCoveringType(body)!=null
@@ -905,8 +904,8 @@ public class CharacterUtils {
 		return body;
 	}
 	
-	private static List<AbstractBodyCoveringType> setCoveringColours(Body body, GameCharacter character, List<AbstractBodyCoveringType> typesToInfluence) {
-		List<AbstractBodyCoveringType> tempList = new ArrayList<>(typesToInfluence);
+	private static List<BodyCoveringType> setCoveringColours(Body body, GameCharacter character, List<BodyCoveringType> typesToInfluence) {
+		var tempList = new ArrayList<>(typesToInfluence);
 		
 		// Skin & fur colours:
 		for(BodyPartInterface bp : character.getAllBodyParts()){
@@ -923,13 +922,13 @@ public class CharacterUtils {
 			}
 		}
 		
-		List<AbstractBodyCoveringType> extraCoverings = new ArrayList<>();
+		List<BodyCoveringType> extraCoverings = new ArrayList<>();
 		extraCoverings.add(BodyCoveringType.ANUS);
 		extraCoverings.add(BodyCoveringType.NIPPLES);
 		extraCoverings.add(BodyCoveringType.MOUTH);
 		extraCoverings.add(BodyCoveringType.TONGUE);
 		
-		for(AbstractBodyCoveringType bct : extraCoverings) {
+		for(var bct : extraCoverings) {
 			if(tempList.contains(bct)) {
 				Covering covering = character.getCovering(bct);
 					body.getCoverings().put(

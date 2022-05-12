@@ -10,7 +10,6 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.TesticleType;
 import com.lilithsthrone.game.character.body.types.FluidType;
@@ -28,7 +27,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 	private boolean mod;
 	private boolean fromExternalFile;
 
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private Race race;
 	private FluidType fluidType;
 	private boolean internal;
@@ -46,7 +45,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 	 * @param namesPlural A list of plural names for this testicle type. Pass in null to use generic names.
 	 * @param descriptors The descriptors that can be used for this testicle type.
 	 */
-	public AbstractTesticleType(AbstractBodyCoveringType coveringType,
+	public AbstractTesticleType(BodyCoveringType coveringType,
 			Race race,
 			FluidType fluidType,
 			boolean internal,
@@ -64,7 +63,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 		this.descriptors = descriptors;
 	}
 	
-	public AbstractTesticleType(AbstractBodyCoveringType skinType,
+	public AbstractTesticleType(BodyCoveringType skinType,
 			Race race,
 			FluidType fluidType,
 			boolean internal) {
@@ -89,7 +88,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 				this.fromExternalFile = true;
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
 				this.fluidType = FluidType.table.of(coreElement.getMandatoryFirstOf("fluidType").getTextContent());
 
@@ -167,7 +166,7 @@ public abstract class AbstractTesticleType implements TesticleType {
 	/**
 	 * <b>This should never be used - the covering of testicles is determined by the torso's covering!</b>
 	 */
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		if(body!=null) {
 			return body.getTorso().getBodyCoveringType(body);
 		}

@@ -11,7 +11,6 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.AnusType;
 import com.lilithsthrone.game.character.race.Race;
@@ -30,7 +29,7 @@ public abstract class AbstractAssType implements AssType {
 
 	private String transformationName;
 	
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private Race race;
 	private AnusType anusType;
 	
@@ -54,7 +53,7 @@ public abstract class AbstractAssType implements AssType {
 	 * @param assTransformationDescription A paragraph describing a character's ass transforming into this ass type. Parsing assumes that the character already has this ass type and associated skin covering.
 	 * @param assBodyDescription A sentence or two to describe this ass type, as seen in the character view screen. It should follow the same format as all of the other entries in the AssType class.
 	 */
-	public AbstractAssType(AbstractBodyCoveringType coveringType,
+	public AbstractAssType(BodyCoveringType coveringType,
 			Race race,
 			AnusType anusType,
 			List<String> names,
@@ -94,7 +93,7 @@ public abstract class AbstractAssType implements AssType {
 				this.fromExternalFile = true;
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 				
@@ -183,7 +182,7 @@ public abstract class AbstractAssType implements AssType {
 	/**
 	 * <b>This should never be used - the covering of an ass is determined by the torso's covering!</b>
 	 */
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		if(body!=null) {
 			return body.getTorso().getBodyCoveringType(body);
 		}

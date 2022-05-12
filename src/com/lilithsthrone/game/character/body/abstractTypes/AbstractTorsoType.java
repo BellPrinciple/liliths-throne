@@ -10,7 +10,6 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.TorsoType;
@@ -28,7 +27,7 @@ public abstract class AbstractTorsoType implements TorsoType {
 	private boolean mod;
 	private boolean fromExternalFile;
 
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private Race race;
 
 	private String transformationName;
@@ -51,7 +50,7 @@ public abstract class AbstractTorsoType implements TorsoType {
 	 * @param skinTransformationDescription A paragraph describing a character's skins transforming into this skin type. Parsing assumes that the character already has this skin type and associated skin covering.
 	 * @param skinBodyDescription A sentence or two to describe this skin type, as seen in the character view screen. It should follow the same format as all of the other entries in the SkinType class.
 	 */
-	public AbstractTorsoType(AbstractBodyCoveringType coveringType,
+	public AbstractTorsoType(BodyCoveringType coveringType,
 			Race race,
 			List<String> descriptorsFeminine,
 			List<String> descriptorsMasculine,
@@ -86,7 +85,7 @@ public abstract class AbstractTorsoType implements TorsoType {
 				this.fromExternalFile = true;
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 				
@@ -155,7 +154,7 @@ public abstract class AbstractTorsoType implements TorsoType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 

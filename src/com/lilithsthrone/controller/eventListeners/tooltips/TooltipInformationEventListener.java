@@ -20,7 +20,6 @@ import com.lilithsthrone.game.character.attributes.IntelligenceLevel;
 import com.lilithsthrone.game.character.attributes.LustLevel;
 import com.lilithsthrone.game.character.attributes.PhysiqueLevel;
 import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.types.AntennaType;
@@ -1537,10 +1536,10 @@ public class TooltipInformationEventListener implements EventListener {
 		TooltipUpdateThread.updateToolTip(-1,-1);
 	}
 
-	private String getBodyPartDiv(GameCharacter character, String name, Race race, AbstractBodyCoveringType covering, boolean feral) {
+	private String getBodyPartDiv(GameCharacter character, String name, Race race, BodyCoveringType covering, boolean feral) {
 		return getBodyPartDiv(character, name, race, covering, feral, null);
 	}
-	private String getBodyPartDiv(GameCharacter character, String name, Race race, AbstractBodyCoveringType covering, boolean feral, String size) {
+	private String getBodyPartDiv(GameCharacter character, String name, Race race, BodyCoveringType covering, boolean feral, String size) {
 		return getBodyPartDiv(character, name, race, owner.getCovering(covering), feral, size);
 	}
 	

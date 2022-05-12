@@ -10,7 +10,6 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BreastType;
 import com.lilithsthrone.game.character.body.types.FluidType;
@@ -31,7 +30,7 @@ public abstract class AbstractBreastType implements BreastType {
 
 	private String transformationName;
 	
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private Race race;
 	private NippleType nippleType;
 	private FluidType fluidType;
@@ -65,7 +64,7 @@ public abstract class AbstractBreastType implements BreastType {
 	 * @param breastsCrotchTransformationDescription A paragraph describing a character's crotch-boobs transforming into this breasts type. Parsing assumes that the character already has this breasts type and associated skin covering.
 	 * @param breastsCrotchBodyDescription A sentence or two to describe this crotch-boob type, as seen in the character view screen. It should follow the same format as all of the other entries in the BreastType class.
 	 */
-	public AbstractBreastType(AbstractBodyCoveringType coveringType,
+	public AbstractBreastType(BodyCoveringType coveringType,
 			Race race,
 			NippleType nippleType,
 			FluidType fluidType,
@@ -102,7 +101,7 @@ public abstract class AbstractBreastType implements BreastType {
 		this.breastsCrotchBodyDescription = breastsCrotchBodyDescription;
 	}
 	
-	public AbstractBreastType(AbstractBodyCoveringType skinType,
+	public AbstractBreastType(BodyCoveringType skinType,
 			Race race,
 			NippleType nippleType,
 			FluidType fluidType,
@@ -135,7 +134,7 @@ public abstract class AbstractBreastType implements BreastType {
 				this.fromExternalFile = true;
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 				
@@ -261,7 +260,7 @@ public abstract class AbstractBreastType implements BreastType {
 	/**
 	 * <b>This should never be used - the covering of breasts is determined by the torso's covering!</b>
 	 */
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		if(body!=null) {
 			return body.getTorso().getBodyCoveringType(body);
 		}

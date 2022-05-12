@@ -164,16 +164,16 @@ public class Yui extends NPC {
 
 		// Coverings:
 		this.setEyeCovering(new Covering(BodyCoveringType.EYE_DEMON_COMMON, CoveringPattern.EYE_IRISES, PresetColour.EYE_CRIMSON, true, PresetColour.EYE_CRIMSON, true));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("charisma_spider_chitinSmooth"), CoveringPattern.STRIPED, CoveringModifier.SMOOTH, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_YELLOW, false), true);
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("charisma_spider_chitinSmooth"), CoveringPattern.STRIPED, CoveringModifier.SMOOTH, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_YELLOW, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.DEMON_COMMON, PresetColour.SKIN_EBONY), true);
 
 		this.setSkinCovering(new Covering(BodyCoveringType.HORN, PresetColour.COVERING_BLACK), false);
 		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("charisma_spider_hair"), CoveringPattern.OMBRE, CoveringModifier.SILKEN, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_RED_DARK, false), true);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("charisma_spider_hair"), CoveringPattern.OMBRE, CoveringModifier.SILKEN, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_RED_DARK, false), true);
 		this.setHairLength(HairLength.THREE_SHOULDER_LENGTH.getMedianValue());
 		this.setHairStyle(HairStyle.BUN);
 		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("charisma_spider_body_hair"), PresetColour.COVERING_BLACK), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("charisma_spider_body_hair"), PresetColour.COVERING_BLACK), false);
 		this.setUnderarmHair(BodyHair.ZERO_NONE);
 		this.setAssHair(BodyHair.ZERO_NONE);
 		this.setPubicHair(BodyHair.ZERO_NONE);

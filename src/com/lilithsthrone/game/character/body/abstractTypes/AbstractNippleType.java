@@ -10,7 +10,6 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.NippleType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
@@ -27,7 +26,7 @@ public abstract class AbstractNippleType implements NippleType {
 	private boolean mod;
 	private boolean fromExternalFile;
 
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private Race race;
 	
 	private List<String> descriptorsMasculine;
@@ -42,7 +41,7 @@ public abstract class AbstractNippleType implements NippleType {
 	 * @param descriptorsFeminine The descriptors that can be used to describe a feminine form of this ass type.
 	 * @param defaultRacialOrificeModifiers Which modifiers this nipple naturally spawns with.
 	 */
-	public AbstractNippleType(AbstractBodyCoveringType coveringType,
+	public AbstractNippleType(BodyCoveringType coveringType,
 			Race race,
 			List<String> descriptorsMasculine,
 			List<String> descriptorsFeminine,
@@ -75,7 +74,7 @@ public abstract class AbstractNippleType implements NippleType {
 				this.fromExternalFile = true;
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
 				this.descriptorsMasculine = new ArrayList<>();
 				if(coreElement.getOptionalFirstOf("descriptorsMasculine").isPresent()) {
@@ -125,7 +124,7 @@ public abstract class AbstractNippleType implements NippleType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 

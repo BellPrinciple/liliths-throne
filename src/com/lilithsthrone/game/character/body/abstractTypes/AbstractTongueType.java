@@ -10,7 +10,6 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.TongueType;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
@@ -28,7 +27,7 @@ public abstract class AbstractTongueType implements TongueType {
 	private boolean mod;
 	private boolean fromExternalFile;
 
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private Race race;
 
 	private int defaultLength;
@@ -54,7 +53,7 @@ public abstract class AbstractTongueType implements TongueType {
 	 * @param tongueBodyDescription A sentence or two to describe this tongue type, as seen in the character view screen. It should follow the same format as all of the other entries in the TongueType class.
 	 * @param defaultRacialTongueModifiers The default modifiers that this tongue type spawns with.
 	 */
-	public AbstractTongueType(AbstractBodyCoveringType coveringType,
+	public AbstractTongueType(BodyCoveringType coveringType,
 			Race race,
 			int defaultLength,
 			String name,
@@ -94,7 +93,7 @@ public abstract class AbstractTongueType implements TongueType {
 				this.fromExternalFile = true;
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
 				this.defaultLength = Integer.valueOf(coreElement.getMandatoryFirstOf("defaultLength").getTextContent());
 
@@ -166,7 +165,7 @@ public abstract class AbstractTongueType implements TongueType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 

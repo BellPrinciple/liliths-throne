@@ -25,7 +25,6 @@ import com.lilithsthrone.game.character.body.Tentacle;
 import com.lilithsthrone.game.character.body.Torso;
 import com.lilithsthrone.game.character.body.Vagina;
 import com.lilithsthrone.game.character.body.Wing;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
@@ -65,7 +64,7 @@ public class SuccubisSecrets {
 
 	public static InventorySlot invSlotTattooToRemove = null;
 	
-	public static Map<AbstractBodyCoveringType,Value<Race,List<String>>> coveringsNamesMap;
+	public static Map<BodyCoveringType,Value<Race,List<String>>> coveringsNamesMap;
 	
 	private static StringBuilder descriptionSB;
 	
@@ -76,13 +75,13 @@ public class SuccubisSecrets {
 	public static final int BASE_ANAL_BLEACHING_COST = 100;
 	public static final int BASE_BODY_HAIR_COST = 50;
 	
-	public static final HashMap<AbstractBodyCoveringType, Integer> cosmeticCostsMap = Util.newHashMapOfValues(
-			new Value<>(BodyCoveringType.MAKEUP_BLUSHER, 25),
-			new Value<>(BodyCoveringType.MAKEUP_EYE_LINER, 25),
-			new Value<>(BodyCoveringType.MAKEUP_EYE_SHADOW, 25),
-			new Value<>(BodyCoveringType.MAKEUP_LIPSTICK, 25),
-			new Value<>(BodyCoveringType.MAKEUP_NAIL_POLISH_FEET, 25),
-			new Value<>(BodyCoveringType.MAKEUP_NAIL_POLISH_HANDS, 25));
+	public static final Map<BodyCoveringType,Integer> cosmeticCostsMap = Map.of(
+			BodyCoveringType.MAKEUP_BLUSHER, 25,
+			BodyCoveringType.MAKEUP_EYE_LINER, 25,
+			BodyCoveringType.MAKEUP_EYE_SHADOW, 25,
+			BodyCoveringType.MAKEUP_LIPSTICK, 25,
+			BodyCoveringType.MAKEUP_NAIL_POLISH_FEET, 25,
+			BodyCoveringType.MAKEUP_NAIL_POLISH_HANDS, 25);
 
 	public static final HashMap<PiercingType, Integer> piercingCostsMap = Util.newHashMapOfValues(
 			new Value<>(PiercingType.EAR, 10),
@@ -126,7 +125,7 @@ public class SuccubisSecrets {
 				}
 				var race = bp.getType().getRace();
 				if(addBpi) {
-					AbstractBodyCoveringType coveringType = bp.getBodyCoveringType(target);
+					BodyCoveringType coveringType = bp.getBodyCoveringType(target);
 					if(bp instanceof Ass) {
 						coveringType = BodyCoveringType.ANUS;
 					} else if(bp instanceof Breast) {
@@ -192,7 +191,7 @@ public class SuccubisSecrets {
 		
 		// Alter the map for if the target's body is not made of flesh:
 		if(BodyChanging.getTarget().getBodyMaterial()!=BodyMaterial.FLESH) {
-			var altMaterialCoveringsNamesMap = new LinkedHashMap<AbstractBodyCoveringType,Value<Race,List<String>>>();
+			var altMaterialCoveringsNamesMap = new LinkedHashMap<BodyCoveringType,Value<Race,List<String>>>();
 			for(var entry : coveringsNamesMap.entrySet()) {
 				if(entry.getKey().getCategory().isInfluencedByMaterialType()) {
 					altMaterialCoveringsNamesMap.put(BodyCoveringType.getMaterialBodyCoveringType(BodyChanging.getTarget().getBodyMaterial(), entry.getKey().getCategory()), entry.getValue());
@@ -223,7 +222,7 @@ public class SuccubisSecrets {
 		}
 	}
 	
-	public static Value<String, String> getCoveringTitleDescription(GameCharacter target, AbstractBodyCoveringType coveringType, List<String> areasList) {
+	public static Value<String, String> getCoveringTitleDescription(GameCharacter target, BodyCoveringType coveringType, List<String> areasList) {
 		String title = Util.capitaliseSentence(coveringType.getNameTransformation(target));
 		
 		String description = "This is the "+coveringType.getName(target)+" that's currently covering [npc.namePos] "+Util.stringsToStringList(areasList, false)+".";
@@ -279,7 +278,7 @@ public class SuccubisSecrets {
 		return new Value<>(title, description);
 	}
 	
-	public static int getBodyCoveringTypeCost(AbstractBodyCoveringType type) {
+	public static int getBodyCoveringTypeCost(BodyCoveringType type) {
 		if(cosmeticCostsMap.containsKey(type)) {
 			return cosmeticCostsMap.get(type);
 		}
@@ -741,7 +740,7 @@ public class SuccubisSecrets {
 			UtilText.nodeContentSB.append(getMoneyRemainingString());
 			
 			for(var entry : coveringsNamesMap.entrySet()){
-				AbstractBodyCoveringType bct = entry.getKey();
+				var bct = entry.getKey();
 				var race = entry.getValue().getKey();
 				GameCharacter target = Main.game.getPlayer();
 				
@@ -898,7 +897,7 @@ public class SuccubisSecrets {
 							:"")
 					);
 			
-			for(AbstractBodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
+			for(var bct : BodyCoveringType.table.list()) {
 				if((Main.game.isFacialHairEnabled() && Main.game.getPlayer().getFacialHairType().getType()==bct)
 						|| (Main.game.isBodyHairEnabled() && Main.game.getPlayer().getUnderarmHairType().getType()==bct)
 						|| (Main.game.isAssHairEnabled() &&  Main.game.getPlayer().getAssHairType().getType()==bct)

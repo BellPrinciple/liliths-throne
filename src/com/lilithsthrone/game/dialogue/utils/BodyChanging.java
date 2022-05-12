@@ -6,7 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.PropertyValue;
 import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.FaceType;
@@ -739,7 +738,7 @@ public class BodyChanging {
 			}
 			
 			for(var entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
-				AbstractBodyCoveringType bct = entry.getKey();
+				var bct = entry.getKey();
 				var race = entry.getValue().getKey();
 
 				Value<String, String> titleDescription = SuccubisSecrets.getCoveringTitleDescription(target, bct, entry.getValue().getValue());

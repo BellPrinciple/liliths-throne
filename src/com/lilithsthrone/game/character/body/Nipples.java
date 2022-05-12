@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.NippleType;
 import com.lilithsthrone.game.character.body.valueEnums.AreolaeShape;
@@ -359,7 +358,7 @@ public class Nipples implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(GameCharacter gc) {
+	public BodyCoveringType getBodyCoveringType(GameCharacter gc) {
 		if(this.isCrotchNipples()) {
 			return BodyCoveringType.NIPPLES_CROTCH;
 		}
@@ -367,7 +366,7 @@ public class Nipples implements BodyPartInterface {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		if(this.isCrotchNipples()) {
 			return BodyCoveringType.NIPPLES_CROTCH;
 		}

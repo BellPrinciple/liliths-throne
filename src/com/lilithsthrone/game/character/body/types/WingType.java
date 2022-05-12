@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.WingSize;
 import com.lilithsthrone.game.character.race.Race;
@@ -217,7 +216,7 @@ public interface WingType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, boolean allowsFlight, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String wingTransformationDescription, String wingBodyDescription) {
+		public Special(BodyCoveringType coveringType, Race race, boolean allowsFlight, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String wingTransformationDescription, String wingBodyDescription) {
 			super(coveringType, race, allowsFlight, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, wingTransformationDescription, wingBodyDescription);
 		}
 

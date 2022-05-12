@@ -6,7 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractHairType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.Race;
@@ -302,7 +301,7 @@ public interface HairType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType skinType, Race race, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String hairTransformationDescription, String hairBodyDescription, List<BodyPartTag> tags) {
+		public Special(BodyCoveringType skinType, Race race, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String hairTransformationDescription, String hairBodyDescription, List<BodyPartTag> tags) {
 			super(skinType, race, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, hairTransformationDescription, hairBodyDescription, tags);
 		}
 

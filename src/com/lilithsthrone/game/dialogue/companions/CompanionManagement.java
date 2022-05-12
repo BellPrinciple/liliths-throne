@@ -12,7 +12,6 @@ import com.lilithsthrone.game.Scene;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AffectionLevel;
 import com.lilithsthrone.game.character.attributes.ObedienceLevel;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
@@ -1407,7 +1406,7 @@ public class CompanionManagement {
 								+ "</h6>");
 			
 			for(var entry : SuccubisSecrets.coveringsNamesMap.entrySet()){
-				AbstractBodyCoveringType bct = entry.getKey();
+				var bct = entry.getKey();
 				var race = entry.getValue().getKey();
 				GameCharacter target = BodyChanging.getTarget();
 
@@ -1483,7 +1482,7 @@ public class CompanionManagement {
 							:"")
 					);
 			
-			for(AbstractBodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
+			for(var bct : BodyCoveringType.table.list()) {
 				if((Main.game.isFacialHairEnabled() && BodyChanging.getTarget().getFacialHairType().getType()==bct)
 						|| (Main.game.isBodyHairEnabled() && BodyChanging.getTarget().getUnderarmHairType().getType()==bct)
 						|| (Main.game.isAssHairEnabled() && BodyChanging.getTarget().getAssHairType().getType()==bct)

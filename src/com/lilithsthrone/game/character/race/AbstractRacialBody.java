@@ -11,7 +11,6 @@ import com.lilithsthrone.main.Main;
 import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.AntennaType;
 import com.lilithsthrone.game.character.body.types.ArmType;
@@ -139,7 +138,7 @@ public class AbstractRacialBody implements RacialBody {
 	private TorsoType torsoType;
 	private BodyMaterial bodyMaterial;
 	private String bodyHairId;
-	private AbstractBodyCoveringType bodyHairType;
+	private BodyCoveringType bodyHairType;
 	private GenitalArrangement genitalArrangement;
 	private int maleHeight;
 	private int femaleHeight;
@@ -279,7 +278,7 @@ public class AbstractRacialBody implements RacialBody {
 				LegConfiguration legConfiguration,
 			TorsoType skinType,
 			BodyMaterial bodyMaterial,
-			AbstractBodyCoveringType bodyHairType,
+			BodyCoveringType bodyHairType,
 			HornLength maleHornLength,
 				HornLength femaleHornLength,
 				List<HornType> hornTypes,
@@ -797,9 +796,9 @@ public class AbstractRacialBody implements RacialBody {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyHairType() {
+	public BodyCoveringType getBodyHairType() {
 		if(this.isFromExternalFile()) {
-			return BodyCoveringType.getBodyCoveringTypeFromId(bodyHairId);
+			return BodyCoveringType.table.of(bodyHairId);
 		} else {
 			return bodyHairType;
 		}

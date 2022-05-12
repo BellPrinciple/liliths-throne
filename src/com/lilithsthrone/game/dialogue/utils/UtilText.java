@@ -42,7 +42,6 @@ import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.Penis;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
@@ -9760,8 +9759,8 @@ public class UtilText {
 		for(BodyMaterial material : BodyMaterial.values()) {
 			engine.put("BODY_MATERIAL_"+material.toString(), material);
 		}
-		for(AbstractBodyCoveringType bct : BodyCoveringType.getAllBodyCoveringTypes()) {
-			engine.put("BODY_COVERING_TYPE_"+BodyCoveringType.getIdFromBodyCoveringType(bct), bct);
+		for(var bct : BodyCoveringType.table.list()) {
+			engine.put("BODY_COVERING_TYPE_"+bct.getId(), bct);
 		}
 		for(BodyCoveringCategory coveringCategory : BodyCoveringCategory.values()) {
 			engine.put("BODY_COVERING_CATEGORY_"+coveringCategory, coveringCategory);

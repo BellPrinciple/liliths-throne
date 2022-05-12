@@ -6,7 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.Race;
@@ -514,11 +513,11 @@ public interface FaceType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, MouthType mouthType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String noseName, String noseNamePlural, List<String> noseDescriptorsMasculine, List<String> noseDescriptorsFeminine, String faceTransformationDescription, String faceBodyDescription, List<BodyPartTag> tags) {
+		public Special(BodyCoveringType coveringType, Race race, MouthType mouthType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String noseName, String noseNamePlural, List<String> noseDescriptorsMasculine, List<String> noseDescriptorsFeminine, String faceTransformationDescription, String faceBodyDescription, List<BodyPartTag> tags) {
 			super(coveringType, race, mouthType, names, namesPlural, descriptorsMasculine, descriptorsFeminine, noseName, noseNamePlural, noseDescriptorsMasculine, noseDescriptorsFeminine, faceTransformationDescription, faceBodyDescription, tags);
 		}
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, MouthType mouthType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String noseName, String noseNamePlural, List<String> noseDescriptorsMasculine, List<String> noseDescriptorsFeminine, String faceTransformationDescription, String faceBodyDescription, String faceBodyDescriptionFeral, List<BodyPartTag> tags) {
+		public Special(BodyCoveringType coveringType, Race race, MouthType mouthType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String noseName, String noseNamePlural, List<String> noseDescriptorsMasculine, List<String> noseDescriptorsFeminine, String faceTransformationDescription, String faceBodyDescription, String faceBodyDescriptionFeral, List<BodyPartTag> tags) {
 			super(coveringType, race, mouthType, names, namesPlural, descriptorsMasculine, descriptorsFeminine, noseName, noseNamePlural, noseDescriptorsMasculine, noseDescriptorsFeminine, faceTransformationDescription, faceBodyDescription, faceBodyDescriptionFeral, tags);
 		}
 

@@ -10,7 +10,6 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.types.FaceType;
@@ -31,7 +30,7 @@ public abstract class AbstractFaceType implements FaceType {
 	
 	private String transformationName;
 	
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private Race race;
 
 	private boolean facialHairAllowed;
@@ -54,7 +53,7 @@ public abstract class AbstractFaceType implements FaceType {
 
 	private List<BodyPartTag> tags;
 
-	public AbstractFaceType(AbstractBodyCoveringType coveringType,
+	public AbstractFaceType(BodyCoveringType coveringType,
 			Race race,
 			MouthType mouthType,
 			List<String> names,
@@ -99,7 +98,7 @@ public abstract class AbstractFaceType implements FaceType {
 	 * @param faceBodyDescription A sentence or two to describe this face type, as seen in the character view screen. It should follow the same format as all of the other entries in the AssType class.
 	 * @param tags A list of tags which help to define the features of this face type.
 	 */
-	public AbstractFaceType(AbstractBodyCoveringType coveringType,
+	public AbstractFaceType(BodyCoveringType coveringType,
 			Race race,
 			MouthType mouthType,
 			List<String> names,
@@ -156,7 +155,7 @@ public abstract class AbstractFaceType implements FaceType {
 				this.fromExternalFile = true;
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
 				this.facialHairAllowed = race.getRacialClass().isAnthroHair();
 				if(coreElement.getOptionalFirstOf("facialHairAllowed").isPresent()) {
@@ -283,7 +282,7 @@ public abstract class AbstractFaceType implements FaceType {
 //	/**
 //	 * <b>This should never be used - the covering of a face is determined by the torso's covering!</b>
 //	 */
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 //		if(body!=null) {
 //			return body.getTorso().getBodyCoveringType(body);
 //		}

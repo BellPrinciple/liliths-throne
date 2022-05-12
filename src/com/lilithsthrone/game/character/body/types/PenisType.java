@@ -6,7 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractPenisType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
@@ -427,11 +426,11 @@ public interface PenisType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, TesticleType testicleType, List<String> namesFeminine, List<String> namesPluralFeminine, List<String> namesMasculine, List<String> namesPluralMasculine, List<String> descriptors, String transformationDescription, String bodyDescription, List<PenetrationModifier> defaultRacialPenetrationModifiers) {
+		public Special(BodyCoveringType coveringType, Race race, TesticleType testicleType, List<String> namesFeminine, List<String> namesPluralFeminine, List<String> namesMasculine, List<String> namesPluralMasculine, List<String> descriptors, String transformationDescription, String bodyDescription, List<PenetrationModifier> defaultRacialPenetrationModifiers) {
 			super(coveringType, race, testicleType, namesFeminine, namesPluralFeminine, namesMasculine, namesPluralMasculine, descriptors, transformationDescription, bodyDescription, defaultRacialPenetrationModifiers);
 		}
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, TesticleType testicleType, String transformationDescription, String bodyDescription, List<PenetrationModifier> defaultRacialPenetrationModifiers) {
+		public Special(BodyCoveringType coveringType, Race race, TesticleType testicleType, String transformationDescription, String bodyDescription, List<PenetrationModifier> defaultRacialPenetrationModifiers) {
 			super(coveringType, race, testicleType, transformationDescription, bodyDescription, defaultRacialPenetrationModifiers);
 		}
 

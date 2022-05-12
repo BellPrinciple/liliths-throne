@@ -12,7 +12,6 @@ import org.w3c.dom.Document;
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.types.FluidType;
@@ -50,7 +49,7 @@ public abstract class AbstractVaginaType implements VaginaType {
 	private boolean mod;
 	private boolean fromExternalFile;
 	
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private FluidType fluidType;
 	private Race race;
 
@@ -88,7 +87,7 @@ public abstract class AbstractVaginaType implements VaginaType {
 	 * @param bodyDescription A sentence or two to describe this vagina type, as seen in the character view screen. It should follow the same format as all of the other entries in the PenisType class.
 	 * @param defaultRacialPenetrationModifiers Which modifiers this vagina naturally spawns with.
 	 */
-	public AbstractVaginaType(AbstractBodyCoveringType coveringType,
+	public AbstractVaginaType(BodyCoveringType coveringType,
 			FluidType fluidType,
 			Race race,
 			boolean eggLayer,
@@ -122,7 +121,7 @@ public abstract class AbstractVaginaType implements VaginaType {
 		}
 	}
 	
-	public AbstractVaginaType(AbstractBodyCoveringType skinType,
+	public AbstractVaginaType(BodyCoveringType skinType,
 			FluidType fluidType,
 			Race race,
 			boolean eggLayer,
@@ -155,7 +154,7 @@ public abstract class AbstractVaginaType implements VaginaType {
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 
@@ -311,7 +310,7 @@ public abstract class AbstractVaginaType implements VaginaType {
 	}
 	
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 

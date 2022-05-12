@@ -6,7 +6,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractArmType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.Race;
@@ -505,7 +504,7 @@ public interface ArmType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String handName, String handNamePlural, List<String> handDescriptorsMasculine, List<String> handDescriptorsFeminine, String fingerName, String fingerNamePlural, List<String> fingerDescriptorsMasculine, List<String> fingerDescriptorsFeminine, String armTransformationDescription, String armBodyDescription) {
+		public Special(BodyCoveringType coveringType, Race race, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String handName, String handNamePlural, List<String> handDescriptorsMasculine, List<String> handDescriptorsFeminine, String fingerName, String fingerNamePlural, List<String> fingerDescriptorsMasculine, List<String> fingerDescriptorsFeminine, String armTransformationDescription, String armBodyDescription) {
 			super(coveringType, race, name, namePlural, descriptorsMasculine, descriptorsFeminine, handName, handNamePlural, handDescriptorsMasculine, handDescriptorsFeminine, fingerName, fingerNamePlural, fingerDescriptorsMasculine, fingerDescriptorsFeminine, armTransformationDescription, armBodyDescription);
 		}
 

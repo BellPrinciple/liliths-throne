@@ -11,7 +11,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.types.BodyPartType;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
@@ -572,7 +571,7 @@ public class DebugDialogue {
 						public void effects() {
 							for(NPC npc : Main.game.getAllNPCs()) {
 								for(BodyPartInterface part : npc.getBody().getAllBodyParts()) {
-									AbstractBodyCoveringType bct = npc.getCovering(part);
+									var bct = npc.getCovering(part);
 									if(bct!=null
 											&& (bct.getNaturalModifiers().contains(CoveringModifier.FLUFFY) || bct.getExtraModifiers().contains(CoveringModifier.FLUFFY))) {
 										npc.getCovering(bct).setModifier(CoveringModifier.FLUFFY);

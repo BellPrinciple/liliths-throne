@@ -130,16 +130,16 @@ public class Farah extends NPC {
 		this.setBodySize(BodySize.THREE_LARGE.getMedianValue());
 
 		// Coverings:
-		this.setEyeCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_sheep_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_HAZEL, false, PresetColour.EYE_HAZEL, false));
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_sheep_wool"), CoveringPattern.NONE, CoveringModifier.FLUFFY, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_BLACK, false), true);
-		this.setSkinCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_sheep_wool_face"), CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_GREY, false, PresetColour.COVERING_GREY, false), true);
+		this.setEyeCovering(new Covering(BodyCoveringType.table.of("innoxia_sheep_eye"), CoveringPattern.EYE_IRISES, PresetColour.EYE_HAZEL, false, PresetColour.EYE_HAZEL, false));
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("innoxia_sheep_wool"), CoveringPattern.NONE, CoveringModifier.FLUFFY, PresetColour.COVERING_BLACK, false, PresetColour.COVERING_BLACK, false), true);
+		this.setSkinCovering(new Covering(BodyCoveringType.table.of("innoxia_sheep_wool_face"), CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_GREY, false, PresetColour.COVERING_GREY, false), true);
 		this.setSkinCovering(new Covering(BodyCoveringType.HUMAN, PresetColour.SKIN_EBONY), true);
 
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_sheep_hair"), CoveringPattern.NONE, CoveringModifier.FLUFFY, PresetColour.COVERING_JET_BLACK, false, PresetColour.COVERING_JET_BLACK, false), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_sheep_hair"), CoveringPattern.NONE, CoveringModifier.FLUFFY, PresetColour.COVERING_JET_BLACK, false, PresetColour.COVERING_JET_BLACK, false), false);
 		this.setHairLength(HairLength.FOUR_MID_BACK.getMedianValue());
 		this.setHairStyle(HairStyle.PONYTAIL);
 		
-		this.setHairCovering(new Covering(BodyCoveringType.getBodyCoveringTypeFromId("innoxia_sheep_body_hair"), PresetColour.COVERING_JET_BLACK), false);
+		this.setHairCovering(new Covering(BodyCoveringType.table.of("innoxia_sheep_body_hair"), PresetColour.COVERING_JET_BLACK), false);
 		this.setUnderarmHair(BodyHair.ZERO_NONE);
 		this.setAssHair(BodyHair.ZERO_NONE);
 		this.setPubicHair(BodyHair.ZERO_NONE);

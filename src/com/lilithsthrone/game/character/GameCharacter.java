@@ -58,7 +58,6 @@ import com.lilithsthrone.game.character.body.FluidInterface;
 import com.lilithsthrone.game.character.body.FluidMilk;
 import com.lilithsthrone.game.character.body.Penis;
 import com.lilithsthrone.game.character.body.Testicle;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringCategory;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.Covering;
@@ -24654,7 +24653,7 @@ public abstract class GameCharacter implements XMLSaving {
 		StringBuilder postTFSB = new StringBuilder();
 		// If this is the first time getting this covering type:
 		for(BodyPartInterface bp : this.getAllBodyParts()) {
-			AbstractBodyCoveringType bct = bp.getBodyCoveringType(this);
+			BodyCoveringType bct = bp.getBodyCoveringType(this);
 			
 			if(!this.isBodyCoveringTypesDiscovered(bct)) {
 				if(bct!=null) {
@@ -24768,19 +24767,19 @@ public abstract class GameCharacter implements XMLSaving {
 		body.removeAllMakeup();
 	}
 	
-	public boolean isBodyCoveringTypesDiscovered(AbstractBodyCoveringType bct) {
+	public boolean isBodyCoveringTypesDiscovered(BodyCoveringType bct) {
 		return body.isBodyCoveringTypesDiscovered(bct);
 	}
 
-	public boolean addBodyCoveringTypesDiscovered(AbstractBodyCoveringType bct) {
+	public boolean addBodyCoveringTypesDiscovered(BodyCoveringType bct) {
 		return body.addBodyCoveringTypesDiscovered(bct);
 	}
 	
-	public AbstractBodyCoveringType getBodyHairCoveringType(Race race) {
+	public BodyCoveringType getBodyHairCoveringType(Race race) {
 		return Body.getBodyHairCoveringType(race);
 	}
 	
-	public AbstractBodyCoveringType getBodyHairCoveringType() {
+	public BodyCoveringType getBodyHairCoveringType() {
 		return getBodyHairCoveringType(getRace());
 	}
 
@@ -25447,7 +25446,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setAntennaType(AntennaType antennaType) {
 		return body.getAntenna().setType(this, antennaType);
 	}
-	public AbstractBodyCoveringType getAntennaCovering() {
+	public BodyCoveringType getAntennaCovering() {
 		return getCovering(body.getAntenna());
 	}
 	public boolean isAntennaFeral() {
@@ -25536,7 +25535,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public List<BodyPartTag> getArmTypeTags() {
 		return body.getArm().getType().getTags();
 	}
-	public AbstractBodyCoveringType getArmCovering() {
+	public BodyCoveringType getArmCovering() {
 		return getCovering(body.getArm());
 	}
 	public boolean isArmFeral() {
@@ -25652,10 +25651,10 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setAssType(AssType type) {
 		return body.getAss().setType(this, type);
 	}
-	public AbstractBodyCoveringType getAssCovering() {
+	public BodyCoveringType getAssCovering() {
 		return getCovering(body.getAss());
 	}
-	public AbstractBodyCoveringType getAnusCovering() {
+	public BodyCoveringType getAnusCovering() {
 		return getCovering(body.getAss().getAnus());
 	}
 	public boolean isAssFeral() {
@@ -25920,15 +25919,15 @@ public abstract class GameCharacter implements XMLSaving {
 
 		if(type == BodyMaterial.SLIME) {
 			// Slimes can't wear makeup:
-			for(AbstractBodyCoveringType bct : BodyCoveringType.getAllMakeupTypes()) {
+			for(BodyCoveringType bct : BodyCoveringType.getAllMakeupTypes()) {
 				body.getCoverings().put(bct, new Covering(bct, CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_NONE, false, PresetColour.COVERING_NONE, false));
 			}
 			// Add discovery of all slime coverings:
-			for(AbstractBodyCoveringType bct : BodyCoveringType.getAllSlimeTypes()) {
+			for(BodyCoveringType bct : BodyCoveringType.getAllSlimeTypes()) {
 				this.addBodyCoveringTypesDiscovered(bct);
 			}
 			
-			AbstractBodyCoveringType baseSlimeCoveringType = BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_SKIN);
+			BodyCoveringType baseSlimeCoveringType = BodyCoveringType.getMaterialBodyCoveringType(BodyMaterial.SLIME, BodyCoveringCategory.MAIN_SKIN);
 			
 			String colourBasic = this.getCovering(baseSlimeCoveringType).getPrimaryColour().getName();
 			try {
@@ -26413,10 +26412,10 @@ public abstract class GameCharacter implements XMLSaving {
 	public boolean isBreastAbleToIncubateEggs() {
 		return body.getBreast().isAbleToIncubateEggs();
 	}
-	public AbstractBodyCoveringType getBreastCovering() {
+	public BodyCoveringType getBreastCovering() {
 		return getCovering(body.getBreast());
 	}
-	public AbstractBodyCoveringType getNippleCovering() {
+	public BodyCoveringType getNippleCovering() {
 		return getCovering(body.getBreast().getNipples());
 	}
 	public boolean isBreastFeral() {
@@ -26796,10 +26795,10 @@ public abstract class GameCharacter implements XMLSaving {
 	public boolean isBreastCrotchAbleToIncubateEggs() {
 		return body.getBreastCrotch().isAbleToIncubateEggs();
 	}
-	public AbstractBodyCoveringType getBreastCrotchCovering() {
+	public BodyCoveringType getBreastCrotchCovering() {
 		return getCovering(body.getBreastCrotch());
 	}
-	public AbstractBodyCoveringType getNippleCrotchCovering() {
+	public BodyCoveringType getNippleCrotchCovering() {
 		return getCovering(body.getBreastCrotch().getNipples());
 	}
 	public boolean isBreastCrotchFeral() {
@@ -27156,7 +27155,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setEarType(EarType type) {
 		return body.getEar().setType(this, type);
 	}
-	public AbstractBodyCoveringType getEarCovering() {
+	public BodyCoveringType getEarCovering() {
 		return getCovering(body.getEar());
 	}
 	public boolean isEarFeral() {
@@ -27200,7 +27199,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setEyeType(EyeType type) {
 		return body.getEye().setType(this, type);
 	}
-	public AbstractBodyCoveringType getEyeCovering() {
+	public BodyCoveringType getEyeCovering() {
 		return getCovering(body.getEye());
 	}
 	public boolean isEyeFeral() {
@@ -27330,10 +27329,10 @@ public abstract class GameCharacter implements XMLSaving {
 	public List<BodyPartTag> getFaceTypeTags() {
 		return body.getFace().getType().getTags();
 	}
-	public AbstractBodyCoveringType getFaceCovering() {
+	public BodyCoveringType getFaceCovering() {
 		return getCovering(body.getFace());
 	}
-	public AbstractBodyCoveringType getMouthCovering() {
+	public BodyCoveringType getMouthCovering() {
 		return getCovering(body.getFace().getMouth());
 	}
 	public boolean isFaceFeral() {
@@ -27709,7 +27708,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setHairType(HairType type) {
 		return body.getHair().setType(this, type);
 	}
-	public AbstractBodyCoveringType getHairCovering() {
+	public BodyCoveringType getHairCovering() {
 		return getCovering(body.getHair());
 	}
 	public boolean isHairFeral() {
@@ -27804,7 +27803,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setHornType(HornType hornType) {
 		return body.getHorn().setType(this, hornType);
 	}
-	public AbstractBodyCoveringType getHornCovering() {
+	public BodyCoveringType getHornCovering() {
 		return getCovering(body.getHorn());
 	}
 	public boolean isHornFeral() {
@@ -27922,7 +27921,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setLegType(LegType type) {
 		return body.getLeg().setType(this, type);
 	}
-	public AbstractBodyCoveringType getLegCovering() {
+	public BodyCoveringType getLegCovering() {
 		return getCovering(body.getLeg());
 	}
 	public boolean isLegFeral() {
@@ -28094,7 +28093,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public TongueType getTongueType() {
 		return body.getFace().getTongue().getType();
 	}
-	public AbstractBodyCoveringType getTongueCovering() {
+	public BodyCoveringType getTongueCovering() {
 		return getCovering(body.getFace().getTongue());
 	}
 	public boolean isTongueFeral() {
@@ -28236,7 +28235,7 @@ public abstract class GameCharacter implements XMLSaving {
 		
 		return s + clothingRemovalSB.toString();
 	}
-	public AbstractBodyCoveringType getPenisCovering() {
+	public BodyCoveringType getPenisCovering() {
 		return getCurrentPenis().getBodyCoveringType(this);
 	}
 	public boolean isPenisFeral() {
@@ -28443,7 +28442,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setSecondPenisType(PenisType type) {
 		return body.getSecondPenis().setType(this, type);
 	}
-	public AbstractBodyCoveringType getSecondPenisCovering() {
+	public BodyCoveringType getSecondPenisCovering() {
 		return getCovering(body.getSecondPenis());
 	}
 	public boolean isSecondPenisFeral() {
@@ -28581,7 +28580,7 @@ public abstract class GameCharacter implements XMLSaving {
 
 	// ------------------------------ Testicles: ------------------------------ //
 
-	public AbstractBodyCoveringType getTesticlesCovering() {
+	public BodyCoveringType getTesticlesCovering() {
 		return getCovering(body.getPenis().getTesticle());
 	}
 	public boolean isTesticlesFeral() {
@@ -28799,7 +28798,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setTorsoType(TorsoType type) {
 		return body.getTorso().setType(this, type);
 	}
-	public AbstractBodyCoveringType getTorsoCovering() {
+	public BodyCoveringType getTorsoCovering() {
 		return getCovering(body.getTorso());
 	}
 	public boolean isTorsoFeral() {
@@ -28824,22 +28823,22 @@ public abstract class GameCharacter implements XMLSaving {
 	public boolean isAbleToWearMakeup() {
 		return this.getBodyMaterial().isAbleToWearMakeup();
 	}
-	public Set<AbstractBodyCoveringType> getHeavyMakeup() {
+	public Set<BodyCoveringType> getHeavyMakeup() {
 		return body.getHeavyMakeup();
 	}
-	public boolean isHeavyMakeup(AbstractBodyCoveringType type) {
+	public boolean isHeavyMakeup(BodyCoveringType type) {
 		return body.isHeavyMakeup(type);
 	}
-	public void addHeavyMakeup(AbstractBodyCoveringType type) {
+	public void addHeavyMakeup(BodyCoveringType type) {
 		body.addHeavyMakeup(type);
 	}
-	public boolean removeHeavyMakeup(AbstractBodyCoveringType type) {
+	public boolean removeHeavyMakeup(BodyCoveringType type) {
 		return body.removeHeavyMakeup(type);
 	}
-	public AbstractBodyCoveringType getCovering(BodyPartInterface bodyPart) {
+	public BodyCoveringType getCovering(BodyPartInterface bodyPart) {
 		return bodyPart.getBodyCoveringType(this);
 	}
-	public Covering getCovering(AbstractBodyCoveringType bodyCoveringType) {
+	public Covering getCovering(BodyCoveringType bodyCoveringType) {
 		if(BodyCoveringType.getAllMakeupTypes().contains(bodyCoveringType)) {
 			return body.getCoverings().get(bodyCoveringType);
 		}
@@ -28876,7 +28875,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return body.getCoverings().get(bodyCoveringType);
 	}
 
-	public String setSkinCovering(AbstractBodyCoveringType bct, Colour colour, boolean updateAllSkinColours) {
+	public String setSkinCovering(BodyCoveringType bct, Colour colour, boolean updateAllSkinColours) {
 		return setSkinCovering(new Covering(bct, colour), updateAllSkinColours);
 	}
 	/**
@@ -28890,7 +28889,7 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 		
 		if(!getCovering(covering.getType()).equals(covering)) {
-			AbstractBodyCoveringType coveringType = covering.getType();
+			BodyCoveringType coveringType = covering.getType();
 			
 			body.getCoverings().put(coveringType, covering);
 			
@@ -28957,7 +28956,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public boolean hasSpinneret() {
 		return hasTailSpinneret() || hasLegSpinneret();
 	}
-	public AbstractBodyCoveringType getSpinneretCovering() {
+	public BodyCoveringType getSpinneretCovering() {
 		return BodyCoveringType.SPINNERET;
 	}
 	// Orifice stats:
@@ -29076,7 +29075,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setTailType(TailType type) {
 		return body.getTail().setType(this, type);
 	}
-	public AbstractBodyCoveringType getTailCovering() {
+	public BodyCoveringType getTailCovering() {
 		return getCovering(body.getTail());
 	}
 	public boolean isTailFeral() {
@@ -29196,7 +29195,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setTentacleType(TentacleType type) {
 		return body.getTentacle().setType(this, type);
 	}
-	public AbstractBodyCoveringType getTentacleCovering() {
+	public BodyCoveringType getTentacleCovering() {
 		return getCovering(body.getTentacle());
 	}
 	public boolean isTentacleFeral() {
@@ -29296,7 +29295,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setVaginaType(VaginaType type) {
 		return body.getVagina().setType(this, type);
 	}
-	public AbstractBodyCoveringType getVaginaCovering() {
+	public BodyCoveringType getVaginaCovering() {
 		return getCovering(body.getVagina());
 	}
 	public boolean isVaginaFeral() {
@@ -29679,7 +29678,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public String setWingType(WingType type) {
 		return body.getWing().setType(this, type);
 	}
-	public AbstractBodyCoveringType getWingCovering() {
+	public BodyCoveringType getWingCovering() {
 		return getCovering(body.getWing());
 	}
 	public boolean isWingFeral() {

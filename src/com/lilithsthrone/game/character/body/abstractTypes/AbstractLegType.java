@@ -17,7 +17,6 @@ import com.lilithsthrone.game.character.body.Penis;
 import com.lilithsthrone.game.character.body.Tail;
 import com.lilithsthrone.game.character.body.Tentacle;
 import com.lilithsthrone.game.character.body.Vagina;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.AssType;
 import com.lilithsthrone.game.character.body.types.BreastType;
@@ -54,7 +53,7 @@ public abstract class AbstractLegType implements LegType {
 	private boolean mod;
 	private boolean fromExternalFile;
 	
-	private AbstractBodyCoveringType coveringType;
+	private BodyCoveringType coveringType;
 	private Race race;
 
 	private String transformationName;
@@ -105,7 +104,7 @@ public abstract class AbstractLegType implements LegType {
 	 * @param allowedLegConfigurations A list of LegConfigurations that are allowed for this LegType.
 	 * @param spinneret true if this leg type has a spinneret.
 	 */
-	public AbstractLegType(AbstractBodyCoveringType coveringType,
+	public AbstractLegType(BodyCoveringType coveringType,
 			Race race,
 			FootStructure defaultFootStructure,
 			FootType footType,
@@ -170,7 +169,7 @@ public abstract class AbstractLegType implements LegType {
 				this.fromExternalFile = true;
 				
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
+				this.coveringType = BodyCoveringType.table.of(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 
 				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
 				
@@ -330,7 +329,7 @@ public abstract class AbstractLegType implements LegType {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
+	public BodyCoveringType getBodyCoveringType(Body body) {
 		return coveringType;
 	}
 

@@ -7,7 +7,6 @@ import java.util.List;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
@@ -251,7 +250,7 @@ public interface HornType extends BodyPartTypeInterface {
 
 		private String id;
 
-		public Special(AbstractBodyCoveringType coveringType, Race race, int defaultHornsPerRow, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String hornTransformationDescription, String hornBodyDescription) {
+		public Special(BodyCoveringType coveringType, Race race, int defaultHornsPerRow, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String hornTransformationDescription, String hornBodyDescription) {
 			super(coveringType, race, defaultHornsPerRow, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, hornTransformationDescription, hornBodyDescription);
 		}
 
