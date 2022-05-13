@@ -1,6 +1,5 @@
 package com.lilithsthrone.game.character.body.valueEnums;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
@@ -23,7 +22,6 @@ import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
-import com.lilithsthrone.utils.Util;
 
 import static com.lilithsthrone.game.dialogue.PronounUtility.nameHave;
 import static com.lilithsthrone.game.dialogue.PronounUtility.they;
@@ -51,27 +49,7 @@ public enum LegConfiguration {
 			"The most common type of lower body; the character's legs and groin are in the same configuration as that of a regular human.",
 			"Above [npc.her] groin, occupying the lower region of [npc.her] abdomen,",
 			TFModifier.TF_MOD_LEG_CONFIG_BIPEDAL,
-			"") {
-		@Override
-		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.NORMAL,
-					GenitalArrangement.CLOACA,
-					GenitalArrangement.CLOACA_BEHIND);
-		}
-		@Override
-		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues();
-		}
-		@Override
-		public void setLegsToDemon(GameCharacter character) {
-			character.setLegType(LegType.DEMON_COMMON);
-		}
-		@Override
-		public boolean isTailLostOnInitialTF() {
-			return false;
-		}
-	},
+			""),
 	
 	/**
 	 * This LegConfiguration is available for almost every mammalian race, with some notable exceptions being humans, demons, and angels.
@@ -89,27 +67,7 @@ public enum LegConfiguration {
 				+ " The most common example of this is the 'centaur', in which the character's legs and groin are replaced by the body and genitals of a horse.",
 			"Down beneath the groin of [npc.her] feral body,",
 			TFModifier.TF_MOD_LEG_CONFIG_TAUR,
-			"statusEffects/race/raceBackgroundLegQuadrupedal") {
-		@Override
-		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, BreastCrotch.class, Leg.class, Tail.class, Tentacle.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
-		}
-		@Override
-		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.NORMAL,
-					GenitalArrangement.CLOACA,
-					GenitalArrangement.CLOACA_BEHIND);
-		}
-		@Override
-		public void setLegsToDemon(GameCharacter character) {
-			this.setLegsToAvailableDemonLegs(character, LegType.DEMON_HORSE_HOOFED);
-		}
-		@Override
-		public boolean isTailLostOnInitialTF() {
-			return false;
-		}
-	},
+			"statusEffects/race/raceBackgroundLegQuadrupedal"),
 
 	/**
 	 * This LegConfiguration is available for snakes and eels.
@@ -127,66 +85,7 @@ public enum LegConfiguration {
 				+ " The most common example of this is the 'lamia', in which the character's legs and groin are replaced by the body and genitals of a snake.",
 			"Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,",
 			TFModifier.TF_MOD_LEG_CONFIG_TAIL_LONG,
-			"statusEffects/race/raceBackgroundLegTailLong") {
-		@Override
-		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
-		}
-		@Override
-		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.CLOACA,
-					GenitalArrangement.CLOACA_BEHIND); // Shouldn't ever spawn by default, but give player the option
-		}
-		@Override
-		public void setLegsToDemon(GameCharacter character) {
-			this.setLegsToAvailableDemonLegs(character, LegType.DEMON_SNAKE);
-		}
-		@Override
-		public boolean isTailLostOnInitialTF() {
-			return true;
-		}
-		@Override
-		public boolean isAbleToGrowTail() {
-			return false;
-		}
-		@Override
-		public boolean isThighSexAvailable() {
-			return false;
-		}
-		@Override
-		public String getMovementVerbPresentFirstPersonSingular() {
-			return "slither";
-		}
-		@Override
-		public String getMovementVerbPresentThirdPersonSingular() {
-			return "slithers";
-		}
-		@Override
-		public String getMovementVerbPresentParticiple() {
-			return "slithering";
-		}
-		@Override
-		public String getMovementVerbPastParticiple() {
-			return "slithered";
-		}
-		@Override
-		public String getIndividualMovementVerbPresentFirstPersonSingular() {
-			return "slide";
-		}
-		@Override
-		public String getIndividualMovementVerbPresentThirdPersonSingular() {
-			return "slides";
-		}
-		@Override
-		public String getIndividualMovementVerbPresentParticiple() {
-			return "sliding";
-		}
-		@Override
-		public String getIndividualMovementVerbPastParticiple() {
-			return "slid";
-		}
-	},
+			"statusEffects/race/raceBackgroundLegTailLong"),
 
 	/**
 	 * This LegConfiguration is available for fish.
@@ -204,34 +103,7 @@ public enum LegConfiguration {
 					+ " The most common example of this is the 'mermaid', in which the character's legs and groin are replaced by the body and genitals of a fish.",
 			"Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,",
 			TFModifier.TF_MOD_LEG_CONFIG_TAIL,
-			"statusEffects/race/raceBackgroundLegTailShort") {
-		@Override
-		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
-		}
-		@Override
-		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.CLOACA,
-					GenitalArrangement.CLOACA_BEHIND); // Shouldn't ever spawn by default, but give player the option
-		}
-		@Override
-		public void setLegsToDemon(GameCharacter character) {
-			this.setLegsToAvailableDemonLegs(character, LegType.DEMON_FISH);
-		}
-		@Override
-		public boolean isTailLostOnInitialTF() {
-			return true;
-		}
-		@Override
-		public boolean isAbleToGrowTail() {
-			return false;
-		}
-		@Override
-		public boolean isThighSexAvailable() {
-			return false;
-		}
-	},
+			"statusEffects/race/raceBackgroundLegTailShort"),
 
 	/**
 	 * This LegConfiguration is available for spiders and scorpions.
@@ -249,37 +121,7 @@ public enum LegConfiguration {
 					+ " The most common example of this is the 'arachne', in which the character's legs and groin are replaced by the body and genitals of a spider.",
 			"Occupying the lower region of [npc.her] humanoid abdomen,",
 			TFModifier.TF_MOD_LEG_CONFIG_ARACHNID,
-			"statusEffects/race/raceBackgroundLegArachnid") {
-		@Override
-		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
-		}
-		@Override
-		public List<FootStructure> getPermittedFootStructuresOverride() {
-			return Util.newArrayListOfValues(FootStructure.ARACHNOID);
-		}
-		@Override
-		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.NORMAL);
-		}
-		@Override
-		public boolean isGenitalsExposed(GameCharacter character) { // As genitals are beneath the arachnid body, they are not easily visible.
-			return false;
-		}
-		@Override
-		public void setLegsToDemon(GameCharacter character) {
-			this.setLegsToAvailableDemonLegs(character, LegType.DEMON_SPIDER);
-		}
-		@Override
-		public boolean isTailLostOnInitialTF() {
-			return true;
-		}
-		@Override
-		public boolean isThighSexAvailable() {
-			return false;
-		}
-	},
+			"statusEffects/race/raceBackgroundLegArachnid"),
 
 	/**
 	 * This LegConfiguration is available for octopuses and squids.<br/>
@@ -314,61 +156,7 @@ public enum LegConfiguration {
 					+ " The most common example of this is the 'kraken', in which the character's legs and groin are replaced by the body and genitals of a squid.",
 			"Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,",
 			TFModifier.TF_MOD_LEG_CONFIG_CEPHALOPOD,
-			"statusEffects/race/raceBackgroundLegCephalopod") {
-		@Override
-		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, Leg.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
-		}
-		@Override
-		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.CLOACA);
-		}
-		@Override
-		public boolean isGenitalsExposed(GameCharacter character) { // Genitals are under tentacles, so are not visible even when naked.
-			return false;
-		}
-		@Override
-		public void setLegsToDemon(GameCharacter character) {
-			this.setLegsToAvailableDemonLegs(character, LegType.DEMON_OCTOPUS);
-		}
-		@Override
-		public boolean isTailLostOnInitialTF() {
-			return true;
-		}
-		@Override
-		public String getMovementVerbPresentFirstPersonSingular() {
-			return "crawl";
-		}
-		@Override
-		public String getMovementVerbPresentThirdPersonSingular() {
-			return "crawls";
-		}
-		@Override
-		public String getMovementVerbPresentParticiple() {
-			return "crawling";
-		}
-		@Override
-		public String getMovementVerbPastParticiple() {
-			return "crawled";
-		}
-		@Override
-		public String getIndividualMovementVerbPresentFirstPersonSingular() {
-			return "slide";
-		}
-		@Override
-		public String getIndividualMovementVerbPresentThirdPersonSingular() {
-			return "slides";
-		}
-		@Override
-		public String getIndividualMovementVerbPresentParticiple() {
-			return "sliding";
-		}
-		@Override
-		public String getIndividualMovementVerbPastParticiple() {
-			return "slid";
-		}
-	},
+			"statusEffects/race/raceBackgroundLegCephalopod"),
 	
 
 	/**
@@ -387,25 +175,7 @@ public enum LegConfiguration {
 					+ " The most common example of this is the 'harpy-moa', in which a regular harpy's legs and groin are replaced by the feral body and genitals of a bird.",
 			"Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,",
 			TFModifier.TF_MOD_LEG_CONFIG_AVIAN,
-			"statusEffects/race/raceBackgroundLegAvian") {
-		@Override
-		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.CLOACA_BEHIND);
-		}
-		@Override
-		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, BreastCrotch.class, Leg.class, Tail.class, Tentacle.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
-		}
-		@Override
-		public void setLegsToDemon(GameCharacter character) {
-			this.setLegsToAvailableDemonLegs(character, LegType.DEMON_EAGLE);
-		}
-		@Override
-		public boolean isTailLostOnInitialTF() {
-			return false;
-		}
-	},
+			"statusEffects/race/raceBackgroundLegAvian"),
 
 	/**
 	 * This LegConfiguration is a configuration for feral biped-ish races with wings instead of forelegs.<br/>
@@ -424,27 +194,8 @@ public enum LegConfiguration {
 					+ " The most common examples of this are feral wyverns and feral bats, which both have wings instead of arms, and which use these arm-wings to walk on all fours.",
 			"Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,",
 			TFModifier.TF_MOD_LEG_CONFIG_WINGED_BIPED,
-			"statusEffects/race/raceBackgroundLegAvian") {
-		@Override
-		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
-			return Util.newArrayListOfValues(
-					GenitalArrangement.NORMAL,
-					GenitalArrangement.CLOACA,
-					GenitalArrangement.CLOACA_BEHIND);
-		}
-		@Override
-		public List<Class<? extends BodyPartInterface>> getFeralParts() {
-			return Util.newArrayListOfValues(Ass.class, Anus.class, BreastCrotch.class, Leg.class, Tail.class, Tentacle.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
-		}
-		@Override
-		public void setLegsToDemon(GameCharacter character) {
-			character.setLegType(LegType.DEMON_COMMON);
-		}
-		@Override
-		public boolean isTailLostOnInitialTF() {
-			return false;
-		}
-	};
+			"statusEffects/race/raceBackgroundLegAvian"),
+	;
 
 	private String name;
 	private int landSpeedModifier;
@@ -512,18 +263,32 @@ public enum LegConfiguration {
 	/**
 	 * @return A list of BodyPartInterface classes which are considered to be fully animalistic as part of this LegConfiguration. e.g. A taur's Tail, Ass, BreastCrotch, Penis, and Vagina are all animalistic.
 	 */
-	public abstract List<Class<? extends BodyPartInterface>> getFeralParts();
+	public List<Class<?extends BodyPartInterface>> getFeralParts() {
+		return switch(this) {
+			case BIPEDAL -> List.of();
+			case QUADRUPEDAL,AVIAN,WINGED_BIPED -> List.of(Ass.class,Anus.class,BreastCrotch.class,Leg.class,Tail.class,Tentacle.class,Penis.class,Testicle.class,Vagina.class,Clitoris.class);
+			case TAIL_LONG,TAIL,ARACHNID,CEPHALOPOD -> List.of(Ass.class,Anus.class,Leg.class,Penis.class,Testicle.class,Vagina.class,Clitoris.class);
+		};
+	}
 	
 	/**
 	 * @return true if this LegConfiguration removes the character's tail when applying its transformation.
 	 */
-	public abstract boolean isTailLostOnInitialTF();
+	public boolean isTailLostOnInitialTF() {
+		return switch(this) {
+			case BIPEDAL,QUADRUPEDAL,AVIAN,WINGED_BIPED -> false;
+			case TAIL_LONG,TAIL,ARACHNID,CEPHALOPOD -> true;
+		};
+	}
 	
 	/**
 	 * @return true if this LegConfiguration prevents the character from growing a tail.
 	 */
 	public boolean isAbleToGrowTail() {
-		return true;
+		return switch(this) {
+			case TAIL_LONG,TAIL -> false;
+			default -> true;
+		};
 	}
 	
 	public String getName() {
@@ -531,35 +296,63 @@ public enum LegConfiguration {
 	}
 
 	public String getMovementVerbPresentFirstPersonSingular() {
-		return "walk";
+		return switch(this) {
+			case TAIL_LONG -> "slither";
+			case CEPHALOPOD -> "crawl";
+			default -> "walk";
+		};
 	}
 
 	public String getMovementVerbPresentThirdPersonSingular() {
-		return "walks";
+		return switch(this) {
+			case TAIL_LONG -> "slithers";
+			case CEPHALOPOD -> "crawls";
+			default -> "walks";
+		};
 	}
 
 	public String getMovementVerbPresentParticiple() {
-		return "walking";
+		return switch(this) {
+			case TAIL_LONG -> "slithering";
+			case CEPHALOPOD -> "crawling";
+			default -> "walking";
+		};
 	}
 
 	public String getMovementVerbPastParticiple() {
-		return "walked";
+		return switch(this) {
+			case TAIL_LONG -> "slithered";
+			case CEPHALOPOD -> "crawled";
+			default -> "walked";
+		};
 	}
 
 	public String getIndividualMovementVerbPresentFirstPersonSingular() {
-		return "step";
+		return switch(this) {
+			case TAIL_LONG,CEPHALOPOD -> "slide";
+			default -> "step";
+		};
 	}
 
 	public String getIndividualMovementVerbPresentThirdPersonSingular() {
-		return "steps";
+		return switch(this) {
+			case TAIL_LONG,CEPHALOPOD -> "slides";
+			default -> "steps";
+		};
 	}
 
 	public String getIndividualMovementVerbPresentParticiple() {
-		return "stepping";
+		return switch(this) {
+			case TAIL_LONG,CEPHALOPOD -> "sliding";
+			default -> "stepping";
+		};
 	}
 
 	public String getIndividualMovementVerbPastParticiple() {
-		return "stepped";
+		return switch(this) {
+			case TAIL_LONG,CEPHALOPOD -> "slid";
+			default -> "stepped";
+		};
 	}
 	
 	public int getLandSpeedModifier() {
@@ -601,7 +394,10 @@ public enum LegConfiguration {
 	}
 
 	public boolean isThighSexAvailable() {
-		return true;
+		return switch(this) {
+			case TAIL_LONG,TAIL,ARACHNID -> false;
+			default -> true;
+		};
 	}
 	
 	public int getNumberOfLegs() {
@@ -609,14 +405,36 @@ public enum LegConfiguration {
 	}
 
 	public List<FootStructure> getPermittedFootStructuresOverride() {
-		return new ArrayList<>();
+		return this!=ARACHNID ? List.of() : List.of(FootStructure.ARACHNOID);
 	}
 	
 	public boolean isGenitalsExposed(GameCharacter character) {
-		return true;
+		return switch(this) {
+			// As genitals are beneath the arachnid body, they are not easily visible.
+			// Genitals are under tentacles, so are not visible even when naked.
+			case ARACHNID,CEPHALOPOD -> false;
+			default -> true;
+		};
 	}
 
-	public abstract List<GenitalArrangement> getAvailableGenitalConfigurations();
+	public List<GenitalArrangement> getAvailableGenitalConfigurations() {
+		return switch(this) {
+			case BIPEDAL,QUADRUPEDAL,WINGED_BIPED -> List.of(
+				GenitalArrangement.NORMAL,
+				GenitalArrangement.CLOACA,
+				GenitalArrangement.CLOACA_BEHIND);
+			case TAIL_LONG,TAIL -> List.of(
+				GenitalArrangement.CLOACA,
+				// Shouldn't ever spawn by default, but give player the option
+				GenitalArrangement.CLOACA_BEHIND);
+			case ARACHNID -> List.of(
+				GenitalArrangement.NORMAL);
+			case CEPHALOPOD -> List.of(
+					GenitalArrangement.CLOACA);
+			case AVIAN -> List.of(
+				GenitalArrangement.CLOACA_BEHIND);
+		};
+	}
 
 	public String getGenericDescription() {
 		return genericDescription;
@@ -631,7 +449,15 @@ public enum LegConfiguration {
 	}
 	
 	public void setLegsToDemon(GameCharacter character) {
-		throw new IllegalArgumentException("Demon legs for this leg configuration is not yet implemented!");
+		switch(this) {
+		case BIPEDAL,WINGED_BIPED -> character.setLegType(LegType.DEMON_COMMON);
+		case QUADRUPEDAL -> setLegsToAvailableDemonLegs(character,LegType.DEMON_HORSE_HOOFED);
+		case TAIL_LONG -> setLegsToAvailableDemonLegs(character,LegType.DEMON_SNAKE);
+		case TAIL -> setLegsToAvailableDemonLegs(character,LegType.DEMON_FISH);
+		case ARACHNID -> setLegsToAvailableDemonLegs(character,LegType.DEMON_SPIDER);
+		case CEPHALOPOD -> setLegsToAvailableDemonLegs(character,LegType.DEMON_OCTOPUS);
+		case AVIAN -> setLegsToAvailableDemonLegs(character,LegType.DEMON_EAGLE);
+		}
 	}
 
 	public void setLegsToAvailableDemonLegs(GameCharacter character, LegType legType) {
@@ -800,7 +626,7 @@ public enum LegConfiguration {
 		return generateSingularDeterminer(c.getLegRace().getName(true))+" "+c.getLegRace().getName(true);
 	}
 
-	protected String clothingBlocked(GameCharacter c) {
+	private String clothingBlocked(GameCharacter c) {
 		String type = switch(this) {
 			case BIPEDAL,WINGED_BIPED -> throw new UnsupportedOperationException();
 			case QUADRUPEDAL -> "taur";
@@ -817,7 +643,7 @@ public enum LegConfiguration {
 		return "Due to the fact that "+nameHave(c)+" the feral body of "+aLegRace(c)+", "+they(c)+" cannot wield regular weapons!";
 	}
 
-	protected String clothingBlockedFeral(GameCharacter c) {
+	private String clothingBlockedFeral(GameCharacter c) {
 		String type = switch(this) {
 			case BIPEDAL,WINGED_BIPED -> throw new UnsupportedOperationException();
 			case QUADRUPEDAL -> "quadrupedal-taurs or quadrupedal-ferals";
