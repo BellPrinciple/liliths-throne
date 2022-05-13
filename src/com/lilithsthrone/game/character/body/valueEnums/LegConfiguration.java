@@ -23,8 +23,7 @@ import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 
-import static com.lilithsthrone.game.dialogue.PronounUtility.nameHave;
-import static com.lilithsthrone.game.dialogue.PronounUtility.they;
+import static com.lilithsthrone.game.dialogue.PronounUtility.*;
 import static com.lilithsthrone.game.dialogue.utils.UtilText.generateSingularDeterminer;
 
 /**
@@ -331,12 +330,12 @@ public enum LegConfiguration {
 		};
 	}
 
-	public String getCrotchBoobLocationDescription() {
+	public String getCrotchBoobLocationDescription(GameCharacter c) {
 		return switch(this) {
-			case BIPEDAL -> "Above [npc.her] groin, occupying the lower region of [npc.her] abdomen,";
-			case QUADRUPEDAL -> "Down beneath the groin of [npc.her] feral body,";
-			case TAIL_LONG,TAIL,CEPHALOPOD,AVIAN,WINGED_BIPED -> "Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,";
-			case ARACHNID -> "Occupying the lower region of [npc.her] humanoid abdomen,";
+			case BIPEDAL -> "Above "+their(c)+" groin, occupying the lower region of "+their(c)+" abdomen,";
+			case QUADRUPEDAL -> "Down beneath the groin of "+their(c)+" feral body,";
+			case TAIL_LONG,TAIL,CEPHALOPOD,AVIAN,WINGED_BIPED -> "Above "+their(c)+" groin, occupying the lower region of "+their(c)+" humanoid abdomen,";
+			case ARACHNID -> "Occupying the lower region of "+their(c)+" humanoid abdomen,";
 		};
 	}
 

@@ -94,11 +94,15 @@ import com.lilithsthrone.game.sex.SexParticipantType;
 import com.lilithsthrone.game.sex.SexType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Builder;
+import com.lilithsthrone.utils.MarkupWriter;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import static com.lilithsthrone.game.dialogue.PronounUtility.*;
+import static com.lilithsthrone.utils.colours.PresetColour.GENERIC_SEX;
 
 /**
  * @since 0.1.0
@@ -4266,185 +4270,185 @@ public class Body implements XMLSaving {
 	}
 
 	public String getBreastCrotchDescription(GameCharacter owner, BreastCrotch viewedBreastCrotch) {
-		descriptionSB = new StringBuilder();
-		
+		var b = MarkupWriter.string();
+		String they = they(owner);
+		String them = them(owner);
+		String their = their(owner);
+		String theyAre = theyAre(owner);
+		String theyHave = theyHave(owner);
+		String crotchBoobs = viewedBreastCrotch.getName(owner);
+		Nipples nipples = viewedBreastCrotch.getNipples();
+		var orifice = nipples.getOrificeNipples();
+
 //		boolean playerKnowledgeOfUdders = owner.isAreaKnownByCharacter(CoverableArea.NIPPLES_CROTCH, Main.game.getPlayer());
 //		
 //		if(owner.isPlayer() || playerKnowledgeOfUdders) {
 			if(owner.isFeral()) {
 				if(owner.getLegConfiguration()==LegConfiguration.QUADRUPEDAL) {
-					descriptionSB.append("Down beneath the groin of [npc.her] feral body,");
+					b.text("Down beneath the groin of ",their," feral body,");
 				} else {
-					descriptionSB.append("Just above the groin of [npc.her] feral body,");
+					b.text("Just above the groin of ",their," feral body,");
 				}
 			} else {
-				descriptionSB.append(leg.getLegConfiguration().getCrotchBoobLocationDescription());
+				b.text(leg.getLegConfiguration().getCrotchBoobLocationDescription(owner));
 			}
 			if(breastCrotch.getShape()==BreastShape.UDDERS) {
 				if(breastCrotch.getRawSizeValue()>0){
-					descriptionSB.append(" [npc.she] [npc.has] [npc.a_crotchBoobsSize]");
+					String descriptor = viewedBreastCrotch.getSize().getDescriptor();
+					b.text(" ",theyHave," ",UtilText.generateSingularDeterminer(descriptor)," ",descriptor);
 				} else {
-					descriptionSB.append(" [npc.she] [npc.has] a completely flat");
+					b.text(" ",theyHave," a completely flat");
 				}
 				if(breastCrotch.getRows()>0) {
-					descriptionSB.append((breastCrotch.getRows()>1?" pairs":" pair")+" of udders.");
+					b.text(breastCrotch.getRows()>1?" pairs":" pair"," of udders.");
 					
 				} else {
-					descriptionSB.append(" udder,");
+					b.text(" udder,");
 				}
 				
 			} else {
+				b.text(" ",theyHave," ",viewedBreastCrotch.getRows());
 				if(breastCrotch.getRawSizeValue()>0){
-					descriptionSB.append(" [npc.she] [npc.has] [npc.crotchBoobsRows] [npc.crotchBoobsSize], [npc.crotchBoobsCups]-cup [npc.crotchBoobs]");
+					b.text(" ",viewedBreastCrotch.getSize().getDescriptor(),", ",viewedBreastCrotch.getSize().getCupSizeName(),"-cup ");
 				} else {
-					descriptionSB.append(" [npc.she] [npc.has] [npc.crotchBoobsRows] completely flat [npc.crotchBoobs]");
+					b.text(" completely flat ");
 				}
+				b.text(crotchBoobs);
 				if(leg.getLegConfiguration().isBipedalPositionedCrotchBoobs() && breastCrotch.getRows()>1) {
-					descriptionSB.append(", with the upper pair"+(breastCrotch.getRows()>2?"s":"")+" being positioned higher up on [npc.her] stomach.");
+					b.text(", with the upper pair",breastCrotch.getRows()>2?"s":""," being positioned higher up on ",their," stomach.");
 					
 				} else if(breastCrotch.getRows()>1) {
-					descriptionSB.append(", with the extra pair"+(breastCrotch.getRows()>2?"s":"")+" being positioned further towards [npc.her] underbelly.");
+					b.text(", with the extra pair",breastCrotch.getRows()>2?"s":""," being positioned further towards ",their," underbelly.");
 					
 				} else {
-					descriptionSB.append(".");
+					b.text(".");
 				}
 			}
 			
 			if(viewedBreastCrotch.getShape()==BreastShape.UDDERS) {
 				if(breastCrotch.getRows()>0) {
-					descriptionSB.append(" They are formed into [npc.totalCrotchBoobs] protrusions, upon each of which [npc.she] [npc.has] [npc.crotchBoobsNipplesPerBreast] [npc.crotchNippleSize], ");
+					b.text(" They are formed into ",Util.intToString(viewedBreastCrotch.getRows()*2)," protrusions, upon each of which ");
 				} else {
-					descriptionSB.append(" upon which [npc.sheHasFull] [npc.crotchBoobsNipplesPerBreast] [npc.crotchNippleSize], ");
+					b.text(" upon which ");
 				}
 			} else {
-				descriptionSB.append(" On each of [npc.her] [npc.totalCrotchBoobs] [npc.crotchBoobs], [npc.she] [npc.has] [npc.crotchBoobsNipplesPerBreast] [npc.crotchNippleSize], ");
+				b.text(" On each of ",their," ",Util.intToString(viewedBreastCrotch.getRows()*2)," ",crotchBoobs,", ");
 			}
-			
+			b.text(theyHave," ",Util.intToString(viewedBreastCrotch.getNippleCountPerBreast())," ",nipples.getNippleSize().getName(),
+				", ",owner.getCovering(viewedBreastCrotch.getBodyCoveringType(this)).getPrimaryColourDescriptor(true));
+
 			switch(owner.getNippleCrotchShape()) {
 				case NORMAL:
-					descriptionSB.append(" [npc.crotchNipplePrimaryColour(true)]");
 					break;
 				case INVERTED:
-					descriptionSB.append(" [npc.crotchNipplePrimaryColour(true)], inverted");
+					b.text(", inverted");
 					break;
 				case LIPS:
-					descriptionSB.append(" [npc.crotchNipplePrimaryColour(true)]-lipped");
-					break;
 				case VAGINA:
-					descriptionSB.append(" [npc.crotchNipplePrimaryColour(true)]-lipped");
+					b.text("-lipped");
 					break;
 			}
-			if(owner.getNippleCrotchCountPerBreast()>1) {
-				descriptionSB.append(" [npc.crotchNipples],");
+			if(viewedBreastCrotch.getNippleCountPerBreast()>1) {
+				b.text(" ",nipples.getName(owner));
 			} else {
-				descriptionSB.append(" [npc.crotchNipple(true)],");
+				b.text(" ",nipples.getNameSingular(owner));
 			}
-			
-			switch(owner.getAreolaeCrotchShape()) {
-				case NORMAL:
-					descriptionSB.append(" with [npc.crotchBoobsAreolaSize], circular areolae.");
-					break;
-				case HEART:
-					descriptionSB.append(" with [npc.crotchBoobsAreolaSize], heart-shaped areolae.");
-					break;
-				case STAR:
-					descriptionSB.append(" with [npc.crotchBoobsAreolaSize], star-shaped areolae.");
-					break;
-			}
-			if(owner.isFeral()) {
-				descriptionSB.append(" [style.colourFeral(As [npc.sheHasFull] a fully feral body, [npc.her] [npc.crotchBoobs] are identical in form to those found on a normal [npc.crotchBoobRace].)]");
-			} else if(breastCrotch.isFeral(owner)) {
-				descriptionSB.append(" [style.colourFeral(As [npc.sheHasFull] the lower body of an animal, [npc.her] [npc.crotchBoobs] are identical in form to those found on a feral [npc.crotchBoobRace].)]");
-			}
-			
+			b.text(", with ",nipples.getAreolaeSize().getName(),", ",
+				switch(nipples.getAreolaeShape()){case NORMAL->"circular";case HEART->"heart-shaped";case STAR->"star-shaped";},
+				" areolae. ")
+			.span(PresetColour.RACE_BESTIAL,"As ",theyHave,owner.isFeral()?" a fully feral body, ":" the lower body of an animal, ",
+				their," ",crotchBoobs," are identical in form to those found on a ",owner.isFeral()?"normal ":"feral ",
+				viewedBreastCrotch.getType().getRace().getName(this,viewedBreastCrotch.isFeral(owner)));
+
 			if(owner.isPiercedNippleCrotch()) {
-				descriptionSB.append(" They have been pierced.");
+				b.text(" They have been pierced.");
 			}
-			
+			var coveringNipples = owner.getCovering(nipples.getBodyCoveringType(this));
 			if(owner.getNippleCrotchCapacity() != Capacity.ZERO_IMPENETRABLE && Main.game.isNipplePenEnabled()) {
 				if (viewedBreastCrotch.isFuckable()) {
-					descriptionSB.append("<br/>[npc.Her] [npc.crotchBoobs] have internal, [npc.crotchNippleSecondaryColour(true)] channels, allowing [npc.her] [npc.crotchBoobsCapacity] [npc.crotchNipples] to be comfortably penetrated by objects of"
-								+ " [style.colourSex("+ Units.size(Capacity.getCapacityFromValue(viewedBreastCrotch.getNipples().getOrificeNipples().getStretchedCapacity()).getMaximumValue(true)) + ")] in diameter when lubricated.");
+					b.br().text(Their(owner)," ",crotchBoobs," have internal, ",coveringNipples.getSecondaryColourDescriptor(true),
+						" channels, allowing ",their," ",Capacity.getCapacityFromValue(orifice.getStretchedCapacity()).getDescriptor(),
+						" ",viewedBreastCrotch.getName(owner)," to be comfortably penetrated by objects of")
+					.span(GENERIC_SEX,Units.size(Capacity.getCapacityFromValue(orifice.getStretchedCapacity()).getMaximumValue(true)))
+					.text(" in diameter when lubricated.");
 
 					if(Main.game.isPenetrationLimitationsEnabled()) {
-						switch(owner.getNippleCrotchDepth()) {
-							default:
-								descriptionSB.append(" [npc.Her] fuckable [npc.crotchNipples] are <span style='color:"+owner.getNippleCrotchDepth().getColour().toWebHexString()+";'>[npc.crotchBreastDepth]</span>,");
-								break;
-							case TWO_AVERAGE:
-								descriptionSB.append(" [npc.Her] fuckable [npc.crotchNipples] are of an <span style='color:"+owner.getNippleCrotchDepth().getColour().toWebHexString()+";'>average depth</span>,");
-								break;
-						}
+						b.text(" ",their," fuckable ",nipples.getName(owner)," are ");
+						var depth = orifice.getDepth(owner);
+						if(depth == OrificeDepth.TWO_AVERAGE)
+							b.text(" of an ").span(depth.getColour(),"average depth").text(",");
+						else
+							b.span(depth.getColour(),depth.getDescriptor()).text(",");
 						if(owner.getBodyMaterial().isOrificesLimitedDepth()) {
 							if(owner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-								descriptionSB.append(" and as [npc.sheIsFull] a "+Fetish.FETISH_SIZE_QUEEN.getName(owner)+", [npc.she] can be pushed to [style.colourMinorGood(comfortably)] accommodate objects of a maximum length of "
-										+ " [style.colourSex("+Units.size(owner.getNippleCrotchMaximumPenetrationDepthUncomfortable())+")].");
+								b.text(" and as ",theyAre," a ",Fetish.FETISH_SIZE_QUEEN.getName(owner),", ",they," can be pushed to ")
+								.goodMinor("comfortably")
+								.text(" accommodate objects of a maximum length of ")
+								.span(GENERIC_SEX,Units.size(orifice.getMaximumPenetrationDepthUncomfortable(owner)))
+								.text(".");
 							} else {
-								descriptionSB.append(" allowing [npc.herHim] to [style.colourMinorGood(comfortably)] accommodate [style.colourSex("+Units.size(owner.getNippleCrotchMaximumPenetrationDepthComfortable())+")] of a penetrative object,"
-										+ " and [style.colourMinorBad(uncomfortably)] accommodate [style.colourSex("+Units.size(owner.getNippleCrotchMaximumPenetrationDepthUncomfortable())+")].");
+								b.text(" allowing ",them," to ")
+								.goodMinor("comfortably")
+								.text(" accommodate ")
+								.span(GENERIC_SEX,Units.size(orifice.getMaximumPenetrationDepthComfortable(owner)))
+								.text(" of a penetrative object, and ")
+								.badMinor("uncomfortably")
+								.text(" accommodate ")
+								.span(GENERIC_SEX,Units.size(orifice.getMaximumPenetrationDepthUncomfortable(owner)))
+								.text(".");
 							}
 							
 						} else {
 							if(owner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
-								descriptionSB.append(" and as [npc.sheIsFull] a "+Fetish.FETISH_SIZE_QUEEN.getName(owner)+", combined with the fact that [npc.her] body is made out of [npc.bodyMaterial],"
-										+ " [npc.she] can be pushed to [style.colourMinorGood(comfortably)] accommodate objects of [style.colourSex(any length)].");
+								b.text(" and as ",theyAre," a ",Fetish.FETISH_SIZE_QUEEN.getName(owner),", combined with the fact that ",their," body is made out of ",bodyMaterial.getName()," ",they," can be pushed to ")
+								.goodMinor("comfortably")
+								.text(" accommodate objects of ")
+								.span(GENERIC_SEX,"any length")
+								.text(".");
 							} else {
-								descriptionSB.append(" allowing [npc.herHim] to [style.colourMinorGood(comfortably)] accommodate [style.colourSex("+Units.size(owner.getNippleCrotchMaximumPenetrationDepthComfortable())+")] of a penetrative object,"
-										+ " and as [npc.her] body is made out of [npc.bodyMaterial], [npc.she] can be pushed to [style.colourMinorBad(uncomfortably)] accommodate objects of [style.colourSex(any length)].");
+								b.text(" allowing ",them," to ")
+								.goodMinor("comfortably")
+								.text(" accommodate ")
+								.span(GENERIC_SEX,Units.size(orifice.getMaximumPenetrationDepthComfortable(owner)))
+								.text(" of a penetrative object, and as ",their," body is made out of ",bodyMaterial.getName(),", ",they," can be pushed to ")
+								.badMinor("uncomfortably")
+								.text(" accommodate objects of ")
+								.span(GENERIC_SEX,"[style.colourSex(any length)].");
 							}
 						}
 					}
 					
 				} else {
-					descriptionSB.append("<br/>[npc.Her] [npc.crotchBoobs] have internal, [npc.crotchNippleSecondaryColour(true)] channels,"
-							+ " but [style.colourBad(they need to be at least C-cups)] before [npc.her] "
-							+ Capacity.getCapacityFromValue(viewedBreastCrotch.getNipples().getOrificeNipples().getStretchedCapacity()).getDescriptor(true)+ " [npc.crotchNipples] could be penetrated.");
+					b.br()
+					.text(Their(owner)," ",crotchBoobs," have internal, ",
+						coveringNipples.getSecondaryColourDescriptor(true)," channels, but ")
+					.bad("they need to be at least C-cups")
+					.text(" before ",their," ",Capacity.getCapacityFromValue(orifice.getStretchedCapacity()).getDescriptor(true)," ",nipples.getName(owner)," could be penetrated.");
 				}
 
 				// Nipple elasticity & plasticity:
-				switch (viewedBreastCrotch.getNipples().getOrificeNipples().getElasticity()) {
-					case ZERO_UNYIELDING:
-						descriptionSB.append(" They are [style.colourElasticity(extremely unyielding)],");
-						break;
-					case ONE_RIGID:
-						descriptionSB.append(" It [style.colourElasticity(takes a huge amount of effort to stretch them out)],");
-						break;
-					case TWO_FIRM:
-						descriptionSB.append(" They [style.colourElasticity(does not stretch very easily)],");
-						break;
-					case THREE_FLEXIBLE:
-						descriptionSB.append(" They [style.colourElasticity(reluctantly stretch out)] when used as a sexual orifice,");
-						break;
-					case FOUR_LIMBER:
-						descriptionSB.append(" They are [style.colourElasticity(somewhat resistant to being stretched out)],");
-						break;
-					case FIVE_STRETCHY:
-						descriptionSB.append(" They [style.colourElasticity(stretch out fairly easily)],");
-						break;
-					case SIX_SUPPLE:
-						descriptionSB.append(" They [style.colourElasticity(stretch out very easily)],");
-						break;
-					case SEVEN_ELASTIC:
-						descriptionSB.append(" They are [style.colourElasticity(extremely elastic)],");
-						break;
+				switch(orifice.getElasticity()) {
+				case ZERO_UNYIELDING -> b.text(" They are ").span(PresetColour.ELASTICITY,"extremely unyielding").text(",");
+				case ONE_RIGID ->
+				b.text(" It ").span(PresetColour.ELASTICITY,"takes a huge amount of effort to stretch them out").text(",");
+				case TWO_FIRM -> b.text(" They ").span(PresetColour.ELASTICITY,"does not stretch very easily").text(",");
+				case THREE_FLEXIBLE ->
+				b.text(" They ").span(PresetColour.ELASTICITY,"reluctantly stretch out").text(" when used as a sexual orifice,");
+				case FOUR_LIMBER ->
+				b.text(" They are ").span(PresetColour.ELASTICITY,"somewhat resistant to being stretched out").text(",");
+				case FIVE_STRETCHY -> b.text(" They ").span(PresetColour.ELASTICITY,"stretch out fairly easily").text(",");
+				case SIX_SUPPLE -> b.text(" They ").span(PresetColour.ELASTICITY,"stretch out very easily").text(",");
+				case SEVEN_ELASTIC -> b.text(" They are ").span(PresetColour.ELASTICITY,"extremely elastic").text(",");
 				}
-				descriptionSB.append(" and after being used, they "+viewedBreastCrotch.getNipples().getOrificeNipples().getPlasticity().getDescriptionPlural()+".");
+				b.text(" and after being used, they ",orifice.getPlasticity().getDescriptionPlural(),".");
 				
 				for(OrificeModifier om : OrificeModifier.values()) {
 					if(owner.hasNippleCrotchOrificeModifier(om)) {
 						switch(om) {
-							case MUSCLE_CONTROL:
-								descriptionSB.append(" [npc.She] [npc.has] a series of muscles lining the insides of [npc.her] [npc.crotchNipples], allowing [npc.herHim] to expertly squeeze and grip down on any intruding object.");
-								break;
-							case PUFFY:
-								descriptionSB.append(" [npc.Her] [npc.crotchNipples] have swollen up to be exceptionally plump and puffy.");
-								break;
-							case RIBBED:
-								descriptionSB.append(" The insides of [npc.her] [npc.crotchNipples] are lined with sensitive, fleshy ribs, which grant [npc.herHim] extra pleasure when stimulated.");
-								break;
-							case TENTACLED:
-								descriptionSB.append(" [npc.Her] [npc.crotchNipples] are filled with tiny little tentacles, which wriggle and squirm with a mind of their own.");
-								break;
+						case MUSCLE_CONTROL -> b.text(" ",TheyHave(owner)," a series of muscles lining the insides of ",their," ",nipples.getName(owner),", allowing ",them," to expertly squeeze and grip down on any intruding object.");
+						case PUFFY -> b.text(" ",Their(owner)," ",nipples.getName(owner)," have swollen up to be exceptionally plump and puffy.");
+						case RIBBED -> b.text(" The insides of ",their," ",nipples.getName(owner)," are lined with sensitive, fleshy ribs, which grant ",them," extra pleasure when stimulated.");
+						case TENTACLED -> b.text(" ",Their(owner)," ",nipples.getName(owner)," are filled with tiny little tentacles, which wriggle and squirm with a mind of their own.");
 						}
 					}
 				}
@@ -4454,82 +4458,66 @@ public class Body implements XMLSaving {
 					for(SexAreaPenetration pt : SexAreaPenetration.values()) {
 						if(pt.isTakesVirginity()) {
 							if(owner.getVirginityLoss(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.NIPPLE_CROTCH, pt))!=null) {
-								descriptionSB.append(" <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>"+ owner.getVirginityLossDescription(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.NIPPLE_CROTCH, pt)) + "</span>");
+								b.text(" ")
+								.span(PresetColour.GENERIC_ARCANE,owner.getVirginityLossDescription(new SexType(SexParticipantType.NORMAL, SexAreaOrifice.NIPPLE_CROTCH, pt)));
 								virginityLossFound = true;
 								break;
 							}
 						}
 					}
 					if(!virginityLossFound) {
-						descriptionSB.append(" <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>[npc.Name] [npc.has] lost [npc.her] [npc.crotchNipple] virginity.</span>");
+						b.text(" ").span(PresetColour.GENERIC_ARCANE,NameHave(owner)," lost ",their," ",nipples.getNameSingular(owner)," virginity.");
 					}
 					
 				} else {
-					descriptionSB.append(" [style.colourExcellent([npc.Name] [npc.has] retained [npc.her] [npc.crotchNipple] virginity.)]");
+					b.text(" ")
+					.span(PresetColour.GENERIC_EXCELLENT,NameHave(owner)," retained ",their," ",nipples.getNameSingular(owner)," virginity.");
 				}
 				
 			} else {
-				if(owner.hasNippleCrotchOrificeModifier(OrificeModifier.PUFFY)) {
-					descriptionSB.append(" [npc.Her] [npc.crotchNipples] have swollen up to be exceptionally plump and puffy.");
+				if(orifice.hasOrificeModifier(OrificeModifier.PUFFY)) {
+					b.text(" ",Their(owner)," ",nipples.getName(owner)," have swollen up to be exceptionally plump and puffy.");
 				}	
 			}
-			
+			var milk = viewedBreastCrotch.getMilk();
+			var coveringMilk = owner.getCovering(milk.getBodyCoveringType(this));
 			if (viewedBreastCrotch.getRawMilkStorageValue() > 0) {
-				descriptionSB.append("<br/>[npc.SheIsFull] currently producing "
-						+ Units.fluid(viewedBreastCrotch.getRawMilkStorageValue(), Units.UnitType.LONG) + " of [npc.crotchMilkPrimaryColour(true)] [npc.crotchMilk] ("
-						+ Units.fluid(viewedBreastCrotch.getRawStoredMilkValue(), Units.UnitType.LONG) + " currently stored) at [npc.a_crotchMilkRegen] rate.");
-				
-				switch(viewedBreastCrotch.getMilk().getFlavour()) {
-					case MILK:
-						descriptionSB.append(" [npc.Her] [npc.crotchMilkColour(true)] [npc.crotchMilk] tastes like regular milk.");
-						break;
-					case BUBBLEGUM:
-						descriptionSB.append(" [npc.Her] [npc.crotchMilkColour(true)] [npc.crotchMilk] has the fruity taste of bubblegum.");
-						break;
-					default:
-						descriptionSB.append(" [npc.Her] [npc.crotchMilkColour(true)] [npc.crotchMilk] tastes exactly like "+viewedBreastCrotch.getMilk().getFlavour().getName()+".");
-						break;
+				b.br().text(theyAre," currently producing ",
+					Units.fluid(viewedBreastCrotch.getRawMilkStorageValue(),Units.UnitType.LONG),
+					" of ",coveringMilk.getPrimaryColourDescriptor(true)," ",milk.getName(owner)," (",
+					Units.fluid(viewedBreastCrotch.getRawStoredMilkValue(),Units.UnitType.LONG)," currently stored) at [npc.a_crotchMilkRegen] rate.");
+
+				b.text(" ",Their(owner),
+					" ",coveringMilk.getColourDescriptor(owner,true,false),
+					" ",milk.getName(owner));
+				switch(milk.getFlavour()) {
+				case MILK -> b.text(" tastes like regular milk.");
+				case BUBBLEGUM -> b.text(" has the fruity taste of bubblegum.");
+				default -> b.text(" tastes exactly like " + milk.getFlavour().getName() + ".");
 				}
 				
 				for(FluidModifier fm : FluidModifier.values()) {
-					if(owner.hasMilkCrotchModifier(fm)) {
+					if(milk.hasFluidModifier(fm)) {
 						switch(fm) {
-							case ADDICTIVE:
-								descriptionSB.append(" It is highly addictive, and anyone who drinks too much will quickly become dependent on it.");
-								break;
-							case BUBBLING:
-								descriptionSB.append(" It fizzes and bubbles like a carbonated drink.");
-								break;
-							case HALLUCINOGENIC:
-								descriptionSB.append(" Anyone who ingests it suffers psychoactive effects, which can manifest in lactation-related hallucinations or sensitivity to hypnotic suggestion.");
-								break;
-							case MUSKY:
-								descriptionSB.append(" It has a strong, musky smell.");
-								break;
-							case SLIMY:
-								descriptionSB.append(" It has a slimy, oily texture.");
-								break;
-							case STICKY:
-								descriptionSB.append(" It's quite sticky, and is difficult to fully wash off without soap.");
-								break;
-							case VISCOUS:
-								descriptionSB.append(" It's quite viscous, and slowly drips in large globules, much like thick treacle.");
-								break;
-							case ALCOHOLIC:
-								descriptionSB.append(" It has a high alcohol content, and will get those who consume it very drunk.");
-								break;
-							case MINERAL_OIL:
-								descriptionSB.append(" It is rich in minerals good for your skin but not for latex.");
+						case ADDICTIVE -> b.text(" It is highly addictive, and anyone who drinks too much will quickly become dependent on it.");
+						case BUBBLING -> b.text(" It fizzes and bubbles like a carbonated drink.");
+						case HALLUCINOGENIC -> b.text(" Anyone who ingests it suffers psychoactive effects, which can manifest in lactation-related hallucinations or sensitivity to hypnotic suggestion.");
+						case MUSKY -> b.text(" It has a strong, musky smell.");
+						case SLIMY -> b.text(" It has a slimy, oily texture.");
+						case STICKY -> b.text(" It's quite sticky, and is difficult to fully wash off without soap.");
+						case VISCOUS -> b.text(" It's quite viscous, and slowly drips in large globules, much like thick treacle.");
+						case ALCOHOLIC -> b.text(" It has a high alcohol content, and will get those who consume it very drunk.");
+						case MINERAL_OIL -> b.text(" It is rich in minerals good for your skin but not for latex.");
 						}
 					}
 				}
 				
 			} else {
-				descriptionSB.append("<br/>[npc.SheIsFull] not producing any milk.");
+				b.br().text(theyAre," not producing any milk.");
 			}
 //		}
 
-		return UtilText.parse(owner, descriptionSB.toString());
+		return b.build();
 	}
 
 	public String getPenisDescription(GameCharacter owner) {
