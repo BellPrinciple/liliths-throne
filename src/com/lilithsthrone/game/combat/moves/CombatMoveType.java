@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.combat.moves;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.lilithsthrone.utils.colours.Colour;
@@ -15,58 +13,45 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @author Irbynx
  */
 public enum CombatMoveType {
-
-    ATTACK("Attack", PresetColour.DAMAGE_TYPE_PHYSICAL),
-    DEFEND("Defend", PresetColour.SPELL_SCHOOL_WATER),
-    TEASE("Tease", PresetColour.GENERIC_SEX),
-    SPELL("Spell", PresetColour.GENERIC_ARCANE),
-	POWER("Power", PresetColour.GENERIC_ARCANE),
+	ATTACK,
+	DEFEND,
+	TEASE,
+	SPELL,
+	POWER,
 //    SKILL("Skill", PresetColour.GENERIC_GOOD),
-    ATTACK_DEFEND("Defensive Attack", PresetColour.SPELL_SCHOOL_WATER, new ArrayList<>(Arrays.asList(CombatMoveType.ATTACK, CombatMoveType.DEFEND)));
+	ATTACK_DEFEND,
+	;
 
-    private String name;
-    private List<CombatMoveType> countsAsList;
-    private Colour colour;
+	public String getName() {
+		return switch(this) {
+			case ATTACK -> "Attack";
+			case DEFEND -> "Defend";
+			case TEASE -> "Tease";
+			case SPELL,POWER -> "Spell";
+			case ATTACK_DEFEND -> "Defensive Attack";
+		};
+	}
 
-    CombatMoveType(String name, Colour colour) {
-        this.name = name;
-        this.colour = colour;
-        countsAsList = new ArrayList<>();
-        countsAsList.add(this);
-    }
+	public Colour getColour() {
+		return switch(this) {
+			case ATTACK -> PresetColour.DAMAGE_TYPE_PHYSICAL;
+			case DEFEND,ATTACK_DEFEND -> PresetColour.SPELL_SCHOOL_WATER;
+			case TEASE -> PresetColour.GENERIC_SEX;
+			case SPELL,POWER -> PresetColour.GENERIC_ARCANE;
+		};
+	}
 
-    CombatMoveType(String name, Colour colour, List<CombatMoveType> countsAsList) {
-        this.name = name;
-        this.colour = colour;
-        this.countsAsList = countsAsList;
-    }
+	public List<CombatMoveType> getCountsAsList() {
+		return this!=ATTACK_DEFEND ? List.of(this) : List.of(CombatMoveType.ATTACK,CombatMoveType.DEFEND);
+	}
 
-    public String getName() {
-        return name;
-    }
-
-    public Colour getColour() {
-        return colour;
-    }
-
-    public List<CombatMoveType> getCountsAsList() {
-    	return countsAsList;
-    }
-
-    /**
-     * Returns true if the type can count as a different type. Use it for multitypes.
-     * @param moveTypeCompared Type to compare against
-     * @return
-     */
-    public boolean countsAs(CombatMoveType moveTypeCompared) {
-        if(this == moveTypeCompared){
-            return true;
-        }
-        for (CombatMoveType moveType: countsAsList) {
-            if(moveTypeCompared == moveType) {
-                return true;
-            }
-        }
-        return false;
-    }
+	/**
+	 * Returns true if the type can count as a different type. Use it for multitypes.
+	 * @param moveTypeCompared Type to compare against
+	 * @return
+	 *
+	 */
+	public boolean countsAs(CombatMoveType moveTypeCompared) {
+		return this == moveTypeCompared || getCountsAsList().contains(moveTypeCompared);
+	}
 }
