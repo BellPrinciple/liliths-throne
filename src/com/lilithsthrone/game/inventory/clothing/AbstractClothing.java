@@ -1295,18 +1295,18 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 				if(this.getSlotEquippedTo()==InventorySlot.VAGINA) {
 					part = clothingOwner.getVaginaName(false);
 					if(clothingOwner.hasHymen()) {
-						p.text("As the ",formattedName,plural?" push":" pushes"," inside of ",name(clothingOwner)," ",part,plural?", they ":", it ")
+						p.text("As the ",formattedName,plural?" push":" pushes"," inside of ",namePos(clothingOwner)," ",part,plural?", they ":", it ")
 						.terrible(plural?"tear ":"tears ",their(clothingOwner)," hymen")
 						.text("!");
 						if(clothingOwner.hasFetish(Fetish.FETISH_PURE_VIRGIN)) {
 							p.br();
 							if(clothingOwner.isVaginaVirgin())
 								p.text("Although ",their(clothingOwner)," pussy can no longer be considered completely 'pure', ",
-										name(clothingOwner)," ",are(clothingOwner)," still considered to be a virgin, as ",
-										they(clothingOwner)," ",have(clothingOwner)," never been penetrated by another person before...");
+										nameAre(clothingOwner)," still considered to be a virgin, as ",
+										theyHave(clothingOwner)," never been penetrated by another person before...");
 							else
-								p.text("Having already had sex with someone in the past, the loss of ",name(clothingOwner),
-										"'s hymen causes ",their(clothingOwner)," to now consider ",themself(clothingOwner)," a ")
+								p.text("Having already had sex with someone in the past, the loss of ",namePos(clothingOwner),
+										" hymen causes ",their(clothingOwner)," to now consider ",themself(clothingOwner)," a ")
 								.terrible("broken virgin")
 								.text("!");
 						}
@@ -1324,7 +1324,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 						} else {
 							p.text("The ",formattedName," is ")
 							.bad("too long")
-							.text(" to fit comfortable inside of ",name(clothingOwner),"'s ",part);
+							.text(" to fit comfortable inside of ",namePos(clothingOwner)," ",part);
 							if(clothingOwner.hasFetish(Fetish.FETISH_MASOCHIST))
 								p.text(", but as ",theyRe(clothingOwner)," a masochist, ")
 								.goodMinor(theyDo(clothingOwner),"n't mind the discomfort");
@@ -1343,7 +1343,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 						.span(girth.getColour(),Units.size(diameter))
 						.text(" diameter is ")
 						.badMinor("too wide")
-						.text(" for ",name(clothingOwner),"'s ",part,", and is ")
+						.text(" for ",namePos(clothingOwner)," ",part,", and is ")
 						.bad("stretching")
 						.text(" ",their(clothingOwner)," out!");
 					}
@@ -1357,7 +1357,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 						if(length<=clothingOwner.getAssMaximumPenetrationDepthComfortable() || clothingOwner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 							p.text("The full length of the ",formattedName," ")
 							.goodMinor("comfortably fits")
-							.text(" inside of ",name(clothingOwner),"'s ",part,"!");
+							.text(" inside of ",namePos(clothingOwner)," ",part,"!");
 						} else {
 							p.text("The ",formattedName," is ")
 							.bad("too long");
@@ -1366,7 +1366,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 								.good(theyDo(clothingOwner),"n't mind the discomfort")
 								.text("!");
 							} else {
-								p.text(" to fit comfortably inside of ",name(clothingOwner),"'s ",part,", and is causing ",them(clothingOwner)," ")
+								p.text(" to fit comfortably inside of ",namePos(clothingOwner)," ",part,", and is causing ",them(clothingOwner)," ")
 								.bad("discomfort")
 								.text("!");
 							}
@@ -1381,7 +1381,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 						.span(girth.getColour(),Units.size(diameter))
 						.text(" diameter is ")
 						.badMinor("too wide")
-						.text(" for ",name(clothingOwner),"'s ",part,", and is ")
+						.text(" for ",namePos(clothingOwner)," ",part,", and is ")
 						.bad("stretching")
 						.text(" ",their(clothingOwner)," out!");
 					}
@@ -1394,11 +1394,11 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 						if(length<=clothingOwner.getNippleMaximumPenetrationDepthComfortable() || clothingOwner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 							p.text("The full length of the ",formattedName," ")
 							.span(PresetColour.GENERIC_MINOR_GOOD,"comfortably fits")
-							.text(" inside of ",name(clothingOwner),"'s ",part,"!");
+							.text(" inside of ",namePos(clothingOwner)," ",part,"!");
 						} else {
 							p.text("The ",formattedName," is ")
 							.span(PresetColour.GENERIC_BAD,"too long")
-							.text(" to fit comfortably inside of ",name(clothingOwner),"'s ",part);
+							.text(" to fit comfortably inside of ",namePos(clothingOwner)," ",part);
 							if(clothingOwner.hasFetish(Fetish.FETISH_MASOCHIST))
 								p.text(", but as ",theyRe(clothingOwner)," a masochist, ")
 								.span(PresetColour.GENERIC_GOOD,theyDo(clothingOwner),"n't mind the discomfort")
@@ -1418,7 +1418,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 						.span(girth.getColour(),Units.size(diameter))
 						.text(" diameter is ")
 						.span(PresetColour.GENERIC_MINOR_BAD,"too wide")
-						.text(" for ",name(clothingOwner),"'s ",part,", and is ")
+						.text(" for ",namePos(clothingOwner)," ",part,", and is ")
 						.span(PresetColour.GENERIC_BAD,"stretching")
 						.text(" ",them(clothingOwner)," out!");
 					}
@@ -1430,11 +1430,11 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 						if(length<=clothingOwner.getFaceMaximumPenetrationDepthComfortable() || clothingOwner.hasFetish(Fetish.FETISH_SIZE_QUEEN)) {
 							p.text("The full length of the ",formattedName," ")
 							.goodMinor("comfortably fits")
-							.text(" down ",name(clothingOwner),"'s throat!");
+							.text(" down ",namePos(clothingOwner)," throat!");
 						} else {
 							p.text("The ",formattedName," is ")
 							.bad("too long")
-							.text(" to fit comfortably down ",name(clothingOwner),"'s throat, ");
+							.text(" to fit comfortably down ",namePos(clothingOwner)," throat, ");
 							if(clothingOwner.hasFetish(Fetish.FETISH_MASOCHIST)) {
 								p.text("but as ",theyRe(clothingOwner)," a masochist, ")
 								.good(theyDo(clothingOwner),"n't mind the discomfort")
@@ -1455,7 +1455,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 						.span(girth.getColour(),Units.size(diameter))
 						.text(" diameter is ")
 						.badMinor("too wide")
-						.text(" for ",name(clothingOwner),"'s throat, and is ")
+						.text(" for ",namePos(clothingOwner)," throat, and is ")
 						.bad("stretching")
 						.text(" ",them(clothingOwner)," out!");
 					}
@@ -1467,7 +1467,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 			PenisLength penisLength = PenisLength.getPenisLengthFromInt(length);
 			PenetrationGirth girth = PenetrationGirth.getGirthFromInt(this.getClothingType().getPenetrationOtherGirth());
 			try(var p = sb.center()) {
-				p.text(Name(clothingOwner)," ",are(clothingOwner)," now able to use ",their(clothingOwner)," ")
+				p.text(NameAre(clothingOwner)," now able to use ",their(clothingOwner)," ")
 				.span(girth.getColour(),girth.getName())
 				.text(" ")
 				.span(penisLength.getColour(),Units.size(length))
@@ -2649,7 +2649,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	}
 
 	private String reasonBlocked(GameCharacter owner, String part) {
-		return Name(owner)+" "+have(owner)+part+", which is blocking "+them(owner)+" from wearing the "+getName()+"!";
+		return NameHave(owner)+part+", which is blocking "+them(owner)+" from wearing the "+getName()+"!";
 	}
 
 	private String reasonMissing(GameCharacter owner, String part) {
@@ -2657,7 +2657,7 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	}
 
 	private String reasonUnpierced(GameCharacter owner, String partIs) {
-		return Name(owner)+"'s "+partIs+" not pierced, so "+they(owner)+" can't wear the "+getName()+"!";
+		return NamePos(owner)+" "+partIs+" not pierced, so "+they(owner)+" can't wear the "+getName()+"!";
 	}
 
 	public List<BlockedParts> getBlockedPartsMap(GameCharacter character, InventorySlot slotEquippedTo) {
