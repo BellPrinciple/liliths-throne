@@ -3,7 +3,9 @@ package com.lilithsthrone.game.inventory.clothing;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 
@@ -39,8 +41,8 @@ public class BodyPartClothingBlock {
 		return race;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescription(GameCharacter character) {
+		return UtilText.parse(character,description);
 	}
 
 	public List<ItemTag> getRequiredTags() {

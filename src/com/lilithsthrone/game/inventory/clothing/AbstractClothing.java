@@ -2515,14 +2515,14 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		boolean plural = this.getClothingType().isPlural();
 
 		if(this.getClothingType().getItemTags(slot).contains(ItemTag.UNIQUE_NO_NPC_EQUIP) && !clothingOwner.isPlayer()) {
-			return MarkupWriter.string().span(PresetColour.GENERIC_BAD,"Only you can equip this item of clothing!").build();
+			return MarkupWriter.string().bad("Only you can equip this item of clothing!").build();
 		}
 
 		if(!this.getClothingType().getEquipSlots().contains(slot)) {
-			return MarkupWriter.string().span(PresetColour.GENERIC_BAD,"The ",getName()," cannot be equipped into this slot!").build();
+			return MarkupWriter.string().bad("The ",getName()," cannot be equipped into this slot!").build();
 		}
 		if(block!=null && Collections.disjoint(block.getRequiredTags(), tags)) {
-			return MarkupWriter.string().span(PresetColour.GENERIC_BAD,UtilText.parse(clothingOwner,block.getDescription())).build();
+			return MarkupWriter.string().bad(block.getDescription(clothingOwner)).build();
 		}
 
 		if(tags.contains(ItemTag.FITS_TAUR_BODY) && clothingOwner.getLegConfiguration()!=LegConfiguration.QUADRUPEDAL) {

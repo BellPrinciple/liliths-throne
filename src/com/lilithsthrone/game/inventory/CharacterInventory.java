@@ -1165,7 +1165,7 @@ public class CharacterInventory implements XMLSaving {
 		for(AbstractClothing c : new ArrayList<>(clothingCurrentlyEquipped)) {
 			BodyPartClothingBlock block = c.getSlotEquippedTo().getBodyPartClothingBlock(character);
 			if (block != null && Collections.disjoint(block.getRequiredTags(), c.getItemTags())) { // Race:
-				transformationIncompatible(character, c, clothingToRemove, UtilText.parse(character, block.getDescription()));
+				transformationIncompatible(character, c, clothingToRemove, block.getDescription(character));
 				
 			} else if (!c.isCanBeEquipped(character, c.getSlotEquippedTo())) { // Clothing specials:
 				transformationIncompatible(character, c, clothingToRemove, c.getCannotBeEquippedText(character, c.getSlotEquippedTo()));
@@ -1253,7 +1253,7 @@ public class CharacterInventory implements XMLSaving {
 		// Check to see if any of the character's body parts are blocking equipping this item:
 		BodyPartClothingBlock block = slotToEquipInto.getBodyPartClothingBlock(characterClothingOwner);
 		if (block != null && Collections.disjoint(block.getRequiredTags(), newClothing.getItemTags())) {
-			equipTextSB.append("[style.colourBad(" + UtilText.parse(characterClothingOwner, block.getDescription()) + ")]");
+			equipTextSB.append("[style.colourBad(" + block.getDescription(characterClothingOwner) + ")]");
 			return false;
 		}
 

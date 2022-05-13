@@ -3,6 +3,7 @@ package com.lilithsthrone.controller.eventListeners.tooltips;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lilithsthrone.utils.MarkupWriter;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 
@@ -51,6 +52,8 @@ import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import static com.lilithsthrone.game.dialogue.PronounUtility.NameHave;
 
 /**
  * Shows the tooltip at the given element's position.
@@ -376,7 +379,7 @@ public class TooltipInventoryEventListener implements EventListener {
 									+ Util.stringsToStringList(clothingBlockingThisSlot, false) + ".");
 							
 						} else if (!renderingTattoos && block != null) {
-							setBlockedTooltipContent("<span style='color:" + PresetColour.GENERIC_MINOR_BAD.toWebHexString() + ";'>Restricted!</span>", UtilText.parse(equippedToCharacter, block.getDescription()));
+							setBlockedTooltipContent(MarkupWriter.string().badMinor("Restricted!").text(block.getDescription(equippedToCharacter)).build());
 							
 						} else {
 							boolean piercingBlocked=false;
@@ -1593,27 +1596,25 @@ public class TooltipInventoryEventListener implements EventListener {
 		int baseDamage = equippedToCharacter.getBaseUnarmedDamage();
 		int modifiedDamage = equippedToCharacter.getUnarmedDamage();
 		
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("<div class='title'>"
-						+title+" (Unarmed)"
-					+ "</div>"
-					+ "<div class='description' style='height:64px; text-align:center;'>"
-						+ UtilText.parse(equippedToCharacter,
-							"[npc.Name] [npc.has] a base unarmed damage value of "+baseDamage+", which is modified from attributes to deal:"
-							+ "<br/>[style.boldUnarmed("+modifiedDamage+" Unarmed damage)]")
-					+ "</div>");
+		var b = MarkupWriter.string()
+		.open("div").attr("class","title").text(" (Unarmed)").close("div");
+		try(var div = new MarkupWriter.Context(b,"div")) {
+			div.attr("class","description")
+			.attr("style","height:64px; text-align:center;")
+			.text(NameHave(equippedToCharacter)," a base unarmed damage value of ",baseDamage,", which is modified from attributes to deal:")
+			.br()
+			.bold(PresetColour.DAMAGE_TYPE_UNARMED,modifiedDamage," Unarmed damage");
+		}
 
 		if(block != null) {
-			sb.append(UtilText.parse(equippedToCharacter,
-					"<div class='title'>"
-						+ "<span style='color:" + PresetColour.GENERIC_MINOR_BAD.toWebHexString() + ";'>Restricted!</span>"
-					+ "</div>"
-					+"<div class='description' style='height:72px; text-align:center;'>"
-						+ UtilText.parse(equippedToCharacter, block.getDescription())
-					 +"</div>"));
+			b.open("div").attr("class","title").badMinor("Restricted!").close("div");
+			try(var div = new MarkupWriter.Context(b,"div")) {
+				div.attr("class","description")
+				.attr("style","height:72px; text-align:center;")
+				.text(block.getDescription(equippedToCharacter));
+			}
 		}
 		
-		Main.mainController.setTooltipContent(sb.toString());
+		Main.mainController.setTooltipContent(b.build());
 	}
 }

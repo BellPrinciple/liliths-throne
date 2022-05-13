@@ -40,6 +40,8 @@ import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
+import static com.lilithsthrone.utils.MarkupWriter.string;
+
 /**
  * @since 0.1.0
  * @version 0.3.7.9
@@ -737,11 +739,11 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		Set<ItemTag> tags = this.getItemTags();
 		
 		if(this.getWeaponType().getItemTags().contains(ItemTag.UNIQUE_NO_NPC_EQUIP) && !clothingOwner.isPlayer()) {
-			return new Value<>(false, UtilText.parse("[style.colourBad(Only you can equip this weapon!)]"));
+			return new Value<>(false, string().bad("Only you can equip this weapon!").build());
 		}
 		
 		if(block!=null && Collections.disjoint(block.getRequiredTags(), tags)) {
-			return new Value<>(false, UtilText.parse("[style.colourBad(" + UtilText.parse(clothingOwner, block.getDescription()) + ")]"));
+			return new Value<>(false, string().bad(block.getDescription(clothingOwner)).build());
 		}
 		return new Value<>(true, "");
 	}
