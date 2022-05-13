@@ -64,10 +64,6 @@ public enum LegConfiguration {
 			return Util.newArrayListOfValues();
 		}
 		@Override
-		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
-			return null; // Bipedal configuration doesn't block any slots by default.
-		}
-		@Override
 		public void setLegsToDemon(GameCharacter character) {
 			character.setLegType(LegType.DEMON_COMMON);
 		}
@@ -106,56 +102,6 @@ public enum LegConfiguration {
 					GenitalArrangement.CLOACA_BEHIND);
 		}
 		@Override
-		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
-			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
-											InventorySlot.TORSO_UNDER,
-											InventorySlot.CHEST,
-											InventorySlot.STOMACH,
-											InventorySlot.HAND,
-											InventorySlot.HIPS,
-											InventorySlot.LEG,
-											InventorySlot.FOOT,
-											InventorySlot.SOCK,
-											InventorySlot.GROIN),
-									character.getLegType().getRace(),
-									this::clothingBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.FITS_TAUR_BODY,
-											ItemTag.FITS_FERAL_ALL_BODY,
-											ItemTag.FITS_FERAL_QUADRUPED_BODY,
-											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
-											ItemTag.ONLY_FITS_FERAL_QUADRUPED_BODY)),
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
-											InventorySlot.WEAPON_MAIN_2,
-											InventorySlot.WEAPON_MAIN_3,
-											InventorySlot.WEAPON_OFFHAND_1,
-											InventorySlot.WEAPON_OFFHAND_2,
-											InventorySlot.WEAPON_OFFHAND_3),
-									character.getLegType().getRace(),
-									LegConfiguration::weaponBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
-				
-			} else {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.LEG,
-											InventorySlot.GROIN),
-									character.getLegType().getRace(),
-									this::clothingBlocked,
-									Util.newArrayListOfValues(
-											ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
-											ItemTag.FITS_TAUR_BODY)));
-			}
-		}
-		@Override
 		public void setLegsToDemon(GameCharacter character) {
 			this.setLegsToAvailableDemonLegs(character, LegType.DEMON_HORSE_HOOFED);
 		}
@@ -191,56 +137,6 @@ public enum LegConfiguration {
 			return Util.newArrayListOfValues(
 					GenitalArrangement.CLOACA,
 					GenitalArrangement.CLOACA_BEHIND); // Shouldn't ever spawn by default, but give player the option
-		}
-		@Override
-		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
-			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
-											InventorySlot.TORSO_UNDER,
-											InventorySlot.CHEST,
-											InventorySlot.STOMACH,
-											InventorySlot.HAND,
-											InventorySlot.HIPS,
-											InventorySlot.LEG,
-											InventorySlot.FOOT,
-											InventorySlot.SOCK,
-											InventorySlot.GROIN),
-									character.getLegType().getRace(),
-									this::clothingBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.FITS_LONG_TAIL_BODY,
-											ItemTag.FITS_FERAL_ALL_BODY,
-											ItemTag.FITS_FERAL_LONG_TAIL_BODY,
-											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
-											ItemTag.ONLY_FITS_FERAL_LONG_TAIL_BODY)),
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
-											InventorySlot.WEAPON_MAIN_2,
-											InventorySlot.WEAPON_MAIN_3,
-											InventorySlot.WEAPON_OFFHAND_1,
-											InventorySlot.WEAPON_OFFHAND_2,
-											InventorySlot.WEAPON_OFFHAND_3),
-									character.getLegType().getRace(),
-									LegConfiguration::weaponBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
-				
-			} else {
-				return Util.newArrayListOfValues(
-						new BodyPartClothingBlock(
-								Util.newArrayListOfValues(
-										InventorySlot.LEG,
-										InventorySlot.GROIN),
-								character.getLegType().getRace(),
-								this::clothingBlocked,
-								Util.newArrayListOfValues(
-										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
-										ItemTag.FITS_LONG_TAIL_BODY)));
-			}
 		}
 		@Override
 		public void setLegsToDemon(GameCharacter character) {
@@ -320,59 +216,6 @@ public enum LegConfiguration {
 					GenitalArrangement.CLOACA_BEHIND); // Shouldn't ever spawn by default, but give player the option
 		}
 		@Override
-		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
-			if(character.isFeral()) { // Tail races will never be feral, but just in case...
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
-											InventorySlot.TORSO_UNDER,
-											InventorySlot.CHEST,
-											InventorySlot.STOMACH,
-											InventorySlot.HAND,
-											InventorySlot.HIPS,
-											InventorySlot.LEG,
-											InventorySlot.FOOT,
-											InventorySlot.SOCK,
-											InventorySlot.GROIN),
-									character.getLegType().getRace(),
-									this::clothingBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.FITS_TAIL_BODY,
-											ItemTag.FITS_FERAL_ALL_BODY,
-											ItemTag.FITS_FERAL_TAIL_BODY,
-											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
-											ItemTag.ONLY_FITS_FERAL_TAIL_BODY)),
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
-											InventorySlot.WEAPON_MAIN_2,
-											InventorySlot.WEAPON_MAIN_3,
-											InventorySlot.WEAPON_OFFHAND_1,
-											InventorySlot.WEAPON_OFFHAND_2,
-											InventorySlot.WEAPON_OFFHAND_3),
-									character.getLegType().getRace(),
-									LegConfiguration::weaponBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
-				
-			} else if(character.hasStatusEffect(StatusEffect.AQUATIC_POSITIVE)) {
-				return Util.newArrayListOfValues(
-						new BodyPartClothingBlock(
-								Util.newArrayListOfValues(
-										InventorySlot.LEG,
-										InventorySlot.GROIN),
-								character.getLegType().getRace(),
-								this::clothingBlocked,
-								Util.newArrayListOfValues(
-										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
-										ItemTag.FITS_TAIL_BODY)));
-				
-			} else {
-				return null; // When in bipedal configuration, doesn't block any slots.
-			}
-		}
-		@Override
 		public void setLegsToDemon(GameCharacter character) {
 			this.setLegsToAvailableDemonLegs(character, LegType.DEMON_FISH);
 		}
@@ -419,59 +262,6 @@ public enum LegConfiguration {
 		public List<GenitalArrangement> getAvailableGenitalConfigurations() {
 			return Util.newArrayListOfValues(
 					GenitalArrangement.NORMAL);
-		}
-		@Override
-		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
-			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
-											InventorySlot.TORSO_UNDER,
-											InventorySlot.CHEST,
-											InventorySlot.STOMACH,
-											InventorySlot.HAND,
-											InventorySlot.HIPS,
-											InventorySlot.LEG,
-											InventorySlot.FOOT,
-											InventorySlot.SOCK,
-											InventorySlot.GROIN),
-									character.getLegType().getRace(),
-									this::clothingBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.FITS_ARACHNID_BODY,
-											ItemTag.FITS_FERAL_ALL_BODY,
-											ItemTag.FITS_FERAL_ARACHNID_BODY,
-											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
-											ItemTag.ONLY_FITS_FERAL_ARACHNID_BODY)),
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
-											InventorySlot.WEAPON_MAIN_2,
-											InventorySlot.WEAPON_MAIN_3,
-											InventorySlot.WEAPON_OFFHAND_1,
-											InventorySlot.WEAPON_OFFHAND_2,
-											InventorySlot.WEAPON_OFFHAND_3),
-									character.getLegType().getRace(),
-									LegConfiguration::weaponBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
-				
-			} else {
-				return Util.newArrayListOfValues(
-						new BodyPartClothingBlock(
-								Util.newArrayListOfValues(
-										InventorySlot.LEG,
-										InventorySlot.GROIN,
-		//								InventorySlot.ANKLE,
-										InventorySlot.FOOT,
-										InventorySlot.SOCK),
-								character.getLegType().getRace(),
-								this::clothingBlocked,
-								Util.newArrayListOfValues(
-										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
-										ItemTag.FITS_ARACHNID_BODY)));
-			}
 		}
 		@Override
 		public boolean isGenitalsExposed(GameCharacter character) { // As genitals are beneath the arachnid body, they are not easily visible.
@@ -534,60 +324,6 @@ public enum LegConfiguration {
 			return Util.newArrayListOfValues(
 					GenitalArrangement.CLOACA);
 		}
-		@Override
-		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
-			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
-											InventorySlot.TORSO_UNDER,
-											InventorySlot.CHEST,
-											InventorySlot.STOMACH,
-											InventorySlot.HAND,
-											InventorySlot.HIPS,
-											InventorySlot.LEG,
-											InventorySlot.FOOT,
-											InventorySlot.SOCK,
-											InventorySlot.GROIN),
-									character.getLegType().getRace(),
-									this::clothingBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.FITS_CEPHALOPOD_BODY,
-											ItemTag.FITS_FERAL_ALL_BODY,
-											ItemTag.FITS_FERAL_CEPHALOPOD_BODY,
-											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
-											ItemTag.ONLY_FITS_FERAL_CEPHALOPOD_BODY)),
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
-											InventorySlot.WEAPON_MAIN_2,
-											InventorySlot.WEAPON_MAIN_3,
-											InventorySlot.WEAPON_OFFHAND_1,
-											InventorySlot.WEAPON_OFFHAND_2,
-											InventorySlot.WEAPON_OFFHAND_3),
-									character.getLegType().getRace(),
-									LegConfiguration::weaponBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
-				
-			} else {
-				return Util.newArrayListOfValues(
-						new BodyPartClothingBlock(
-								Util.newArrayListOfValues(
-										InventorySlot.LEG,
-										InventorySlot.GROIN,
-		//								InventorySlot.ANKLE,
-										InventorySlot.FOOT,
-										InventorySlot.SOCK),
-								character.getLegType().getRace(),
-								this::clothingBlocked,
-								Util.newArrayListOfValues(
-										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
-										ItemTag.FITS_CEPHALOPOD_BODY)));
-			}
-		}
-		
 		@Override
 		public boolean isGenitalsExposed(GameCharacter character) { // Genitals are under tentacles, so are not visible even when naked.
 			return false;
@@ -662,66 +398,6 @@ public enum LegConfiguration {
 			return Util.newArrayListOfValues(Ass.class, Anus.class, BreastCrotch.class, Leg.class, Tail.class, Tentacle.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
 		}
 		@Override
-		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
-			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.TORSO_OVER,
-											InventorySlot.TORSO_UNDER,
-											InventorySlot.CHEST,
-											InventorySlot.STOMACH,
-											InventorySlot.HAND,
-											InventorySlot.HIPS,
-											InventorySlot.LEG,
-											InventorySlot.FOOT,
-											InventorySlot.SOCK,
-											InventorySlot.GROIN),
-									character.getLegType().getRace(),
-									this::clothingBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.FITS_CEPHALOPOD_BODY,
-											ItemTag.FITS_FERAL_ALL_BODY,
-											ItemTag.FITS_FERAL_CEPHALOPOD_BODY,
-											ItemTag.ONLY_FITS_FERAL_ALL_BODY,
-											ItemTag.ONLY_FITS_FERAL_CEPHALOPOD_BODY)),
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
-											InventorySlot.WEAPON_MAIN_2,
-											InventorySlot.WEAPON_MAIN_3,
-											InventorySlot.WEAPON_OFFHAND_1,
-											InventorySlot.WEAPON_OFFHAND_2,
-											InventorySlot.WEAPON_OFFHAND_3),
-									character.getLegType().getRace(),
-									LegConfiguration::weaponBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
-				
-			} else {
-				return Util.newArrayListOfValues(
-						new BodyPartClothingBlock(
-								Util.newArrayListOfValues(
-										InventorySlot.LEG,
-										InventorySlot.GROIN),
-								character.getLegType().getRace(),
-								this::clothingBlocked,
-								Util.newArrayListOfValues(
-										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
-										ItemTag.FITS_AVIAN_BODY))
-//						new BodyPartClothingBlock(
-//								Util.newArrayListOfValues(
-//										InventorySlot.FOOT,
-//										InventorySlot.SOCK),
-//								character.getLegType().getRace(),
-//								this::clothingBlocked,
-//								Util.newArrayListOfValues(
-//										ItemTag.FITS_TALONS_EXCLUSIVE,
-//										ItemTag.FITS_TALONS))
-						);
-			}
-		}
-		@Override
 		public void setLegsToDemon(GameCharacter character) {
 			this.setLegsToAvailableDemonLegs(character, LegType.DEMON_EAGLE);
 		}
@@ -759,28 +435,6 @@ public enum LegConfiguration {
 		@Override
 		public List<Class<? extends BodyPartInterface>> getFeralParts() {
 			return Util.newArrayListOfValues(Ass.class, Anus.class, BreastCrotch.class, Leg.class, Tail.class, Tentacle.class, Penis.class, Testicle.class, Vagina.class, Clitoris.class);
-		}
-		@Override
-		public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
-			if(character.isFeral()) {
-				return Util.newArrayListOfValues(
-							new BodyPartClothingBlock(
-									Util.newArrayListOfValues(
-											InventorySlot.WEAPON_MAIN_1,
-											InventorySlot.WEAPON_MAIN_2,
-											InventorySlot.WEAPON_MAIN_3,
-											InventorySlot.WEAPON_OFFHAND_1,
-											InventorySlot.WEAPON_OFFHAND_2,
-											InventorySlot.WEAPON_OFFHAND_3),
-									character.getLegType().getRace(),
-									LegConfiguration::weaponBlockedFeral,
-									Util.newArrayListOfValues(
-											ItemTag.FITS_ARM_WINGS,
-											ItemTag.FITS_ARM_WINGS_EXCLUSIVE)));
-				
-			} else {
-				return null; // This is a feral only leg configuration.
-			}
 		}
 		@Override
 		public void setLegsToDemon(GameCharacter character) {
@@ -996,7 +650,140 @@ public enum LegConfiguration {
 	/**
 	 * @return A list of BodyPartClothingBlock objects which define how this LegConfiguration is blocking InventorySlots. Returns null if it doesn't affect inventorySlots in any way.
 	 */
-	public abstract List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character);
+	public List<BodyPartClothingBlock> getBodyPartClothingBlock(GameCharacter character) {
+		if(character.isFeral()) {
+			var tagsClothingFeral = switch(this) {
+				case BIPEDAL,WINGED_BIPED -> null;
+				case QUADRUPEDAL -> List.of(
+					ItemTag.FITS_TAUR_BODY,
+					ItemTag.FITS_FERAL_ALL_BODY,
+					ItemTag.FITS_FERAL_QUADRUPED_BODY,
+					ItemTag.ONLY_FITS_FERAL_ALL_BODY,
+					ItemTag.ONLY_FITS_FERAL_QUADRUPED_BODY);
+				case TAIL_LONG -> List.of(
+					ItemTag.FITS_LONG_TAIL_BODY,
+					ItemTag.FITS_FERAL_ALL_BODY,
+					ItemTag.FITS_FERAL_LONG_TAIL_BODY,
+					ItemTag.ONLY_FITS_FERAL_ALL_BODY,
+					ItemTag.ONLY_FITS_FERAL_LONG_TAIL_BODY);
+				case TAIL -> List.of(
+					ItemTag.FITS_TAIL_BODY,
+					ItemTag.FITS_FERAL_ALL_BODY,
+					ItemTag.FITS_FERAL_TAIL_BODY,
+					ItemTag.ONLY_FITS_FERAL_ALL_BODY,
+					ItemTag.ONLY_FITS_FERAL_TAIL_BODY);
+				case ARACHNID -> List.of(
+					ItemTag.FITS_ARACHNID_BODY,
+					ItemTag.FITS_FERAL_ALL_BODY,
+					ItemTag.FITS_FERAL_ARACHNID_BODY,
+					ItemTag.ONLY_FITS_FERAL_ALL_BODY,
+					ItemTag.ONLY_FITS_FERAL_ARACHNID_BODY);
+				case CEPHALOPOD -> List.of(
+					ItemTag.FITS_CEPHALOPOD_BODY,
+					ItemTag.FITS_FERAL_ALL_BODY,
+					ItemTag.FITS_FERAL_CEPHALOPOD_BODY,
+					ItemTag.ONLY_FITS_FERAL_ALL_BODY,
+					ItemTag.ONLY_FITS_FERAL_CEPHALOPOD_BODY);
+				case AVIAN -> List.of(
+					ItemTag.FITS_AVIAN_BODY,
+					ItemTag.FITS_FERAL_ALL_BODY,
+					ItemTag.FITS_FERAL_AVIAN_BODY,
+					ItemTag.ONLY_FITS_FERAL_ALL_BODY,
+					ItemTag.ONLY_FITS_FERAL_AVIAN_BODY);
+			};
+			var tagsWeaponFeral = this==WINGED_BIPED
+				? List.of(ItemTag.WEAPON_FERAL_EQUIPPABLE)
+				: List.of(ItemTag.FITS_ARM_WINGS,ItemTag.FITS_ARM_WINGS_EXCLUSIVE);
+			var blockWeaponFeral = new BodyPartClothingBlock(
+				List.of(
+					InventorySlot.WEAPON_MAIN_1,
+					InventorySlot.WEAPON_MAIN_2,
+					InventorySlot.WEAPON_MAIN_3,
+					InventorySlot.WEAPON_OFFHAND_1,
+					InventorySlot.WEAPON_OFFHAND_2,
+					InventorySlot.WEAPON_OFFHAND_3),
+				character.getLegType().getRace(),
+				LegConfiguration::weaponBlockedFeral,
+				tagsWeaponFeral);
+			return switch(this) {
+				case BIPEDAL -> null;
+				// Tail races will never be feral, but just in case...
+				case QUADRUPEDAL,TAIL_LONG,TAIL,ARACHNID,CEPHALOPOD,AVIAN -> List.of(
+					new BodyPartClothingBlock(
+						List.of(
+							InventorySlot.TORSO_OVER,
+							InventorySlot.TORSO_UNDER,
+							InventorySlot.CHEST,
+							InventorySlot.STOMACH,
+							InventorySlot.HAND,
+							InventorySlot.HIPS,
+							InventorySlot.LEG,
+							InventorySlot.FOOT,
+							InventorySlot.SOCK,
+							InventorySlot.GROIN),
+						character.getLegType().getRace(),
+						this::clothingBlockedFeral,
+						tagsClothingFeral),
+					blockWeaponFeral);
+				case WINGED_BIPED -> List.of(blockWeaponFeral);
+			};
+		}
+		var tagsClothing = switch(this) {
+			case BIPEDAL,WINGED_BIPED -> null;
+			case QUADRUPEDAL -> List.of(
+				ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+				ItemTag.FITS_TAUR_BODY);
+			case TAIL_LONG -> List.of(
+				ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+				ItemTag.FITS_LONG_TAIL_BODY);
+			case TAIL -> List.of(
+				ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+				ItemTag.FITS_TAIL_BODY);
+			case ARACHNID -> List.of(
+				ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+				ItemTag.FITS_ARACHNID_BODY);
+			case CEPHALOPOD -> List.of(
+				ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+				ItemTag.FITS_CEPHALOPOD_BODY);
+			case AVIAN -> List.of(
+				ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
+				ItemTag.FITS_AVIAN_BODY);
+		};
+		var blockLegGroin = new BodyPartClothingBlock(
+			List.of(
+				InventorySlot.LEG,
+				InventorySlot.GROIN),
+			character.getLegType().getRace(),
+			this::clothingBlocked,
+			tagsClothing);
+		return switch(this) {
+		case QUADRUPEDAL,TAIL_LONG,AVIAN -> List.of(blockLegGroin);
+		// When in bipedal configuration, doesn't block any slots.
+		case TAIL -> character.hasStatusEffect(StatusEffect.AQUATIC_POSITIVE) ? List.of(blockLegGroin) : null;
+		case ARACHNID,CEPHALOPOD -> List.of(
+				new BodyPartClothingBlock(
+					List.of(
+						InventorySlot.LEG,
+						InventorySlot.GROIN,
+//						InventorySlot.ANKLE,
+						InventorySlot.FOOT,
+						InventorySlot.SOCK),
+					character.getLegType().getRace(),
+					this::clothingBlocked,
+					tagsClothing));
+//for AVIAN:
+//				new BodyPartClothingBlock(
+//					List.of(
+//						InventorySlot.FOOT,
+//						InventorySlot.SOCK),
+//					character.getLegType().getRace(),
+//					this::clothingBlocked,
+//					List.of(
+//						ItemTag.FITS_TALONS_EXCLUSIVE,
+//						ItemTag.FITS_TALONS))
+			default -> null;
+		};
+	}
 
 	public String getSubspeciesStatusEffectBackgroundPath() {
 		return subspeciesStatusEffectBackgroundPath;
