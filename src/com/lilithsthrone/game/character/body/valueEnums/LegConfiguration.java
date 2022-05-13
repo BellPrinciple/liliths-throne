@@ -37,91 +37,27 @@ public enum LegConfiguration {
 	/**
 	 * This LegConfiguration is the standard for humans, demons, angels, and the vast majority of animal-morphs.
 	 */
-	BIPEDAL("bipedal",
-			0,
-			0,
-			true,
-			true,
-			false,
-			WingSize.THREE_LARGE,
-			false,
-			2,
-			"The most common type of lower body; the character's legs and groin are in the same configuration as that of a regular human.",
-			"Above [npc.her] groin, occupying the lower region of [npc.her] abdomen,",
-			TFModifier.TF_MOD_LEG_CONFIG_BIPEDAL,
-			""),
+	BIPEDAL,
 	
 	/**
 	 * This LegConfiguration is available for almost every mammalian race, with some notable exceptions being humans, demons, and angels.
 	 */
-	QUADRUPEDAL("quadrupedal",
-			-50,
-			0,
-			false,
-			false,
-			true,
-			WingSize.FOUR_HUGE,
-			true,
-			4,
-			"A configuration in which the character's legs and groin are replaced by the quadrupedal, feral body of the associated animal-morph, with their genitals shifting to be found in the same place as their animal equivalent."
-				+ " The most common example of this is the 'centaur', in which the character's legs and groin are replaced by the body and genitals of a horse.",
-			"Down beneath the groin of [npc.her] feral body,",
-			TFModifier.TF_MOD_LEG_CONFIG_TAUR,
-			"statusEffects/race/raceBackgroundLegQuadrupedal"),
+	QUADRUPEDAL,
 
 	/**
 	 * This LegConfiguration is available for snakes and eels.
 	 */
-	TAIL_LONG("serpent-tailed",
-			0,
-			0,
-			true,
-			true,
-			false,
-			WingSize.FOUR_HUGE,
-			false,
-			0,
-			"A configuration in which the character's legs and groin are replaced by an extremely long tail of the associated animal-morph, with their genitals shifting to be located within a cloaca."
-				+ " The most common example of this is the 'lamia', in which the character's legs and groin are replaced by the body and genitals of a snake.",
-			"Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,",
-			TFModifier.TF_MOD_LEG_CONFIG_TAIL_LONG,
-			"statusEffects/race/raceBackgroundLegTailLong"),
+	TAIL_LONG,
 
 	/**
 	 * This LegConfiguration is available for fish.
 	 */
-	TAIL("mer-tailed",
-			25,
-			-95,
-			true,
-			true,
-			false,
-			WingSize.THREE_LARGE,
-			false, 
-			0,
-			"A configuration in which the character's legs and groin are replaced by a tail of the associated animal-morph, with their genitals shifting to be located within a cloaca."
-					+ " The most common example of this is the 'mermaid', in which the character's legs and groin are replaced by the body and genitals of a fish.",
-			"Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,",
-			TFModifier.TF_MOD_LEG_CONFIG_TAIL,
-			"statusEffects/race/raceBackgroundLegTailShort"),
+	TAIL,
 
 	/**
 	 * This LegConfiguration is available for spiders and scorpions.
 	 */
-	ARACHNID("arachnid",
-			-25,
-			100,
-			false,
-			true,
-			true,
-			WingSize.FOUR_HUGE,
-			true,
-			8,
-			"A configuration in which the character's legs and groin are replaced by the eight-legged, feral body of the associated arachnid-morph, with their genitals shifting to be found in the same place as their animal equivalent."
-					+ " The most common example of this is the 'arachne', in which the character's legs and groin are replaced by the body and genitals of a spider.",
-			"Occupying the lower region of [npc.her] humanoid abdomen,",
-			TFModifier.TF_MOD_LEG_CONFIG_ARACHNID,
-			"statusEffects/race/raceBackgroundLegArachnid"),
+	ARACHNID,
 
 	/**
 	 * This LegConfiguration is available for octopuses and squids.<br/>
@@ -142,116 +78,20 @@ public enum LegConfiguration {
 	 * Then once by man and angels to be seen,<br/>
 	 * In roaring he shall rise and on the surface die.</i>
 	 */
-	CEPHALOPOD("cephalopod",
-			50,
-			-75,
-			true,
-			true,
-			false,
-			WingSize.THREE_LARGE,
-			false,
-			8,
-			// I believe that "tentacled" is technically incorrect as a catch-all term for cephalopods, as octopuses have eight 'arms', while squids have eight arms plus two tentacles. Oh well.
-			"A configuration in which the character's legs and groin are replaced by the tentacled, feral body of the associated cephalopod-morph, with their genitals shifting to be found in the same place as their animal equivalent."
-					+ " The most common example of this is the 'kraken', in which the character's legs and groin are replaced by the body and genitals of a squid.",
-			"Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,",
-			TFModifier.TF_MOD_LEG_CONFIG_CEPHALOPOD,
-			"statusEffects/race/raceBackgroundLegCephalopod"),
+	CEPHALOPOD,
 	
 
 	/**
 	 * This LegConfiguration is a 'tauric' configuration for bird races.
 	 */
-	AVIAN("avian",
-			0,
-			0,
-			false,
-			true,
-			true,
-			WingSize.THREE_LARGE,
-			true,
-			2,
-			"A configuration in which the character's legs and groin are replaced by the avian body of the associated animal-morph, with their genitals shifting to be found in a rear-facing cloaca."
-					+ " The most common example of this is the 'harpy-moa', in which a regular harpy's legs and groin are replaced by the feral body and genitals of a bird.",
-			"Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,",
-			TFModifier.TF_MOD_LEG_CONFIG_AVIAN,
-			"statusEffects/race/raceBackgroundLegAvian"),
+	AVIAN,
 
 	/**
 	 * This LegConfiguration is a configuration for feral biped-ish races with wings instead of forelegs.<br/>
 	 * <b>This should only ever be used for ferals!</b>
 	 */
-	WINGED_BIPED("winged-biped",
-			0,
-			0,
-			true,
-			true,
-			false,
-			WingSize.THREE_LARGE,
-			false,
-			2,
-			"A configuration in which the character's legs and groin are replaced by the body of the associated animal-morph, while their arm-wings are used in place of forelegs."
-					+ " The most common examples of this are feral wyverns and feral bats, which both have wings instead of arms, and which use these arm-wings to walk on all fours.",
-			"Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,",
-			TFModifier.TF_MOD_LEG_CONFIG_WINGED_BIPED,
-			"statusEffects/race/raceBackgroundLegAvian"),
+	WINGED_BIPED,
 	;
-
-	private String name;
-	private int landSpeedModifier;
-	private int waterSpeedModifier;
-	private boolean bipedalPositionedGenitals;
-	private boolean bipedalPositionedCrotchBoobs;
-	private boolean largeGenitals;
-	
-	private WingSize minimumWingSizeForFlight;
-	private boolean wingsOnLegConfiguration;
-	
-	private int numberOfLegs;
-	
-	private String genericDescription;
-	private String crotchBoobLocationDescription;
-
-	private TFModifier tfModifier;
-
-	private String subspeciesStatusEffectBackgroundPath;
-	
-	private LegConfiguration(
-			String name,
-			int landSpeedModifier,
-			int waterSpeedModifier,
-			boolean bipedalPositionedGenitals,
-			boolean bipedalPositionedCrotchBoobs,
-			boolean largeGenitals,
-			WingSize minimumWingSizeForFlight,
-			boolean wingsOnLegConfiguration,
-			int numberOfLegs,
-			String genericDescription,
-			String crotchBoobLocationDescription,
-			TFModifier tfModifier,
-			String subspeciesStatusEffectBackgroundPath) {
-		
-		this.name = name;
-		
-		this.landSpeedModifier = landSpeedModifier;
-		this.waterSpeedModifier = waterSpeedModifier;
-		
-		this.bipedalPositionedGenitals = bipedalPositionedGenitals;
-		this.bipedalPositionedCrotchBoobs = bipedalPositionedCrotchBoobs;
-		this.largeGenitals = largeGenitals;
-		
-		this.minimumWingSizeForFlight=minimumWingSizeForFlight;
-		this.wingsOnLegConfiguration=wingsOnLegConfiguration;
-		
-		this.numberOfLegs = numberOfLegs;
-		
-		this.genericDescription = genericDescription;
-		this.crotchBoobLocationDescription = crotchBoobLocationDescription;
-
-		this.tfModifier = tfModifier;
-		
-		this.subspeciesStatusEffectBackgroundPath = subspeciesStatusEffectBackgroundPath;
-	}
 
 	public static LegConfiguration getValueFromString(String configuration) {
 		if(configuration.equalsIgnoreCase("TAUR")) {
@@ -292,7 +132,16 @@ public enum LegConfiguration {
 	}
 	
 	public String getName() {
-		return name;
+		return switch(this){
+			case BIPEDAL->"bipedal";
+			case QUADRUPEDAL->"quadrupedal";
+			case TAIL_LONG->"serpent-tailed";
+			case TAIL->"mer-tailed";
+			case ARACHNID->"arachnid";
+			case CEPHALOPOD->"cephalopod";
+			case AVIAN->"avian";
+			case WINGED_BIPED->"winged-biped";
+		};
 	}
 
 	public String getMovementVerbPresentFirstPersonSingular() {
@@ -356,11 +205,22 @@ public enum LegConfiguration {
 	}
 	
 	public int getLandSpeedModifier() {
-		return landSpeedModifier;
+		return switch(this) {
+			case QUADRUPEDAL -> -50;
+			case TAIL_LONG -> 25;
+			case ARACHNID -> -25;
+			case CEPHALOPOD -> 50;
+			default -> 0;
+		};
 	}
 
 	public int getWaterSpeedModifier() {
-		return waterSpeedModifier;
+		return switch(this) {
+			case TAIL -> -95;
+			case ARACHNID -> 100;
+			case CEPHALOPOD -> -75;
+			default -> 0;
+		};
 	}
 
 	/**
@@ -368,29 +228,38 @@ public enum LegConfiguration {
 	 * @return The minimum WingSize required for flight.
 	 */
 	public WingSize getMinimumWingSizeForFlight(Body body) {
-		return body.isFeral() ? WingSize.THREE_LARGE : minimumWingSizeForFlight;
+		return body.isFeral() ? WingSize.THREE_LARGE : minimumWingSizeForFlight();
 	}
 
 	public boolean isWingsOnLegConfiguration() {
-		return wingsOnLegConfiguration;
+		return switch(this) {
+			case QUADRUPEDAL,ARACHNID,AVIAN -> true;
+			default -> false;
+		};
 	}
 
 	/**
 	 * @return true If this leg configuration has genitals in roughly the same place as on a biped.
 	 */
 	public boolean isBipedalPositionedGenitals() {
-		return bipedalPositionedGenitals;
+		return switch(this) {
+			case QUADRUPEDAL,ARACHNID,AVIAN -> false;
+			default -> true;
+		};
 	}
 
 	/**
 	 * @return true If this leg configuration has crotch-boobs in roughly the same place as on a biped.
 	 */
 	public boolean isBipedalPositionedCrotchBoobs() {
-		return bipedalPositionedCrotchBoobs;
+		return this!=QUADRUPEDAL;
 	}
 
 	public boolean isLargeGenitals() {
-		return largeGenitals;
+		return switch(this) {
+			case QUADRUPEDAL,ARACHNID,AVIAN -> true;
+			default -> false;
+		};
 	}
 
 	public boolean isThighSexAvailable() {
@@ -401,7 +270,12 @@ public enum LegConfiguration {
 	}
 	
 	public int getNumberOfLegs() {
-		return numberOfLegs;
+		return switch(this) {
+			case QUADRUPEDAL -> 4;
+			case TAIL_LONG,TAIL -> 0;
+			case ARACHNID,CEPHALOPOD -> 8;
+			default -> 2;
+		};
 	}
 
 	public List<FootStructure> getPermittedFootStructuresOverride() {
@@ -437,15 +311,46 @@ public enum LegConfiguration {
 	}
 
 	public String getGenericDescription() {
-		return genericDescription;
+		return switch(this) {
+			case BIPEDAL -> "The most common type of lower body; the character's legs and groin are in the same configuration as that of a regular human.";
+			case QUADRUPEDAL -> "A configuration in which the character's legs and groin are replaced by the quadrupedal, feral body of the associated animal-morph, with their genitals shifting to be found in the same place as their animal equivalent."
+				+ " The most common example of this is the 'centaur', in which the character's legs and groin are replaced by the body and genitals of a horse.";
+			case TAIL_LONG -> "A configuration in which the character's legs and groin are replaced by an extremely long tail of the associated animal-morph, with their genitals shifting to be located within a cloaca."
+				+ " The most common example of this is the 'lamia', in which the character's legs and groin are replaced by the body and genitals of a snake.";
+			case TAIL -> "A configuration in which the character's legs and groin are replaced by a tail of the associated animal-morph, with their genitals shifting to be located within a cloaca."
+				+ " The most common example of this is the 'mermaid', in which the character's legs and groin are replaced by the body and genitals of a fish.";
+			case ARACHNID -> "A configuration in which the character's legs and groin are replaced by the eight-legged, feral body of the associated arachnid-morph, with their genitals shifting to be found in the same place as their animal equivalent."
+				+ " The most common example of this is the 'arachne', in which the character's legs and groin are replaced by the body and genitals of a spider.";
+			// I believe that "tentacled" is technically incorrect as a catch-all term for cephalopods, as octopuses have eight 'arms', while squids have eight arms plus two tentacles. Oh well.
+			case CEPHALOPOD -> "A configuration in which the character's legs and groin are replaced by the tentacled, feral body of the associated cephalopod-morph, with their genitals shifting to be found in the same place as their animal equivalent."
+				+ " The most common example of this is the 'kraken', in which the character's legs and groin are replaced by the body and genitals of a squid.";
+			case AVIAN -> "A configuration in which the character's legs and groin are replaced by the avian body of the associated animal-morph, with their genitals shifting to be found in a rear-facing cloaca."
+				+ " The most common example of this is the 'harpy-moa', in which a regular harpy's legs and groin are replaced by the feral body and genitals of a bird.";
+			case WINGED_BIPED -> "A configuration in which the character's legs and groin are replaced by the body of the associated animal-morph, while their arm-wings are used in place of forelegs."
+				+ " The most common examples of this are feral wyverns and feral bats, which both have wings instead of arms, and which use these arm-wings to walk on all fours.";
+		};
 	}
 
 	public String getCrotchBoobLocationDescription() {
-		return crotchBoobLocationDescription;
+		return switch(this) {
+			case BIPEDAL -> "Above [npc.her] groin, occupying the lower region of [npc.her] abdomen,";
+			case QUADRUPEDAL -> "Down beneath the groin of [npc.her] feral body,";
+			case TAIL_LONG,TAIL,CEPHALOPOD,AVIAN,WINGED_BIPED -> "Above [npc.her] groin, occupying the lower region of [npc.her] humanoid abdomen,";
+			case ARACHNID -> "Occupying the lower region of [npc.her] humanoid abdomen,";
+		};
 	}
 
 	public TFModifier getTFModifier() {
-		return tfModifier;
+		return switch(this) {
+			case BIPEDAL -> TFModifier.TF_MOD_LEG_CONFIG_BIPEDAL;
+			case QUADRUPEDAL -> TFModifier.TF_MOD_LEG_CONFIG_TAUR;
+			case TAIL_LONG -> TFModifier.TF_MOD_LEG_CONFIG_TAIL_LONG;
+			case TAIL -> TFModifier.TF_MOD_LEG_CONFIG_TAIL;
+			case ARACHNID -> TFModifier.TF_MOD_LEG_CONFIG_ARACHNID;
+			case CEPHALOPOD -> TFModifier.TF_MOD_LEG_CONFIG_CEPHALOPOD;
+			case AVIAN -> TFModifier.TF_MOD_LEG_CONFIG_AVIAN;
+			case WINGED_BIPED -> TFModifier.TF_MOD_LEG_CONFIG_WINGED_BIPED;
+		};
 	}
 	
 	public void setLegsToDemon(GameCharacter character) {
@@ -470,7 +375,7 @@ public enum LegConfiguration {
 
 	public void setWingsToDemon(GameCharacter character) {
 		character.setWingType(WingType.DEMON_COMMON);
-		character.setWingSize(this.minimumWingSizeForFlight.getValue());
+		character.setWingSize(minimumWingSizeForFlight().getValue());
 	}
 
 	/**
@@ -612,7 +517,15 @@ public enum LegConfiguration {
 	}
 
 	public String getSubspeciesStatusEffectBackgroundPath() {
-		return subspeciesStatusEffectBackgroundPath;
+		return switch(this) {
+			case BIPEDAL -> "";
+			case QUADRUPEDAL -> "statusEffects/race/raceBackgroundLegQuadrupedal";
+			case TAIL_LONG -> "statusEffects/race/raceBackgroundLegTailLong";
+			case TAIL -> "statusEffects/race/raceBackgroundLegTailShort";
+			case ARACHNID -> "statusEffects/race/raceBackgroundLegArachnid";
+			case CEPHALOPOD -> "statusEffects/race/raceBackgroundLegCephalopod";
+			case AVIAN,WINGED_BIPED -> "statusEffects/race/raceBackgroundLegAvian";
+		};
 	}
 	
 	/**
@@ -654,5 +567,12 @@ public enum LegConfiguration {
 			case AVIAN -> "avians or avian-ferals";
 		};
 		return "Due to the fact that "+nameHave(c)+" the feral body of "+aLegRace(c)+", only clothing suitable for "+type+" can be worn in this slot.";
+	}
+
+	private WingSize minimumWingSizeForFlight() {
+		return switch(this) {
+			case QUADRUPEDAL,TAIL_LONG,ARACHNID -> WingSize.FOUR_HUGE;
+			default -> WingSize.THREE_LARGE;
+		};
 	}
 }
