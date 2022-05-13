@@ -43,6 +43,8 @@ import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 
+import static com.lilithsthrone.game.dialogue.PronounUtility.namePos;
+
 /**
  * @since 0.3.1
  * @version 0.4
@@ -940,19 +942,19 @@ public abstract class AbstractLegType implements LegType {
 	public BodyPartClothingBlock getBodyPartClothingBlock() {
 		if(this.getFootType()==FootType.HOOFS) {
 			return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(
+					List.of(
 							InventorySlot.FOOT),
 					this.getRace(),
-					"Due to the shape of [npc.namePos] hoofs, only hoof-compatible clothing can be worn in this slot.",
-					Util.newArrayListOfValues(ItemTag.FITS_HOOFS, ItemTag.FITS_HOOFS_EXCLUSIVE));
+					c -> "Due to the shape of "+namePos(c)+" hoofs, only hoof-compatible clothing can be worn in this slot.",
+					List.of(ItemTag.FITS_HOOFS,ItemTag.FITS_HOOFS_EXCLUSIVE));
 		}
 		if(this.getFootType()==FootType.TALONS) {
 			return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(
+					List.of(
 							InventorySlot.FOOT),
 					this.getRace(),
-					"Due to the shape of [npc.namePos] talons, only talon-compatible clothing can be worn in this slot.",
-					Util.newArrayListOfValues(ItemTag.FITS_TALONS, ItemTag.FITS_TALONS_EXCLUSIVE));
+					c -> "Due to the shape of "+namePos(c)+" talons, only talon-compatible clothing can be worn in this slot.",
+					List.of(ItemTag.FITS_TALONS,ItemTag.FITS_TALONS_EXCLUSIVE));
 		}
 		return null;
 	}

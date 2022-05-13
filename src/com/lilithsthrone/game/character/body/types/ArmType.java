@@ -14,6 +14,8 @@ import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.utils.Util;
 
+import static com.lilithsthrone.game.dialogue.PronounUtility.nameHave;
+
 /**
  * Contains static instances of AbstractArmType.
  * 
@@ -95,7 +97,7 @@ public interface ArmType extends BodyPartTypeInterface {
 					InventorySlot.TORSO_OVER,
 					InventorySlot.TORSO_UNDER),
 				Race.HARPY,
-				"Due to the fact that [npc.nameHasFull] bird-like wings instead of arms, only specialist clothing can be worn in this slot.",
+				c -> "Due to the fact that "+nameHave(c)+" bird-like wings instead of arms, only specialist clothing can be worn in this slot.",
 				List.of(
 					ItemTag.FITS_FEATHERED_ARM_WINGS,
 					ItemTag.FITS_FEATHERED_ARM_WINGS_EXCLUSIVE,
@@ -111,7 +113,7 @@ public interface ArmType extends BodyPartTypeInterface {
 					InventorySlot.TORSO_OVER,
 					InventorySlot.TORSO_UNDER),
 				Race.BAT_MORPH,
-				"Due to the fact that [npc.nameHasFull] leathery wings instead of arms, only specialist clothing can be worn in this slot.",
+				c -> "Due to the fact that "+nameHave(c)+" leathery wings instead of arms, only specialist clothing can be worn in this slot.",
 				List.of(
 					ItemTag.FITS_LEATHERY_ARM_WINGS,
 					ItemTag.FITS_LEATHERY_ARM_WINGS_EXCLUSIVE,

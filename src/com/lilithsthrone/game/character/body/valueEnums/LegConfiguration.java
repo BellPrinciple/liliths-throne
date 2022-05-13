@@ -25,6 +25,10 @@ import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
+import static com.lilithsthrone.game.dialogue.PronounUtility.nameHave;
+import static com.lilithsthrone.game.dialogue.PronounUtility.they;
+import static com.lilithsthrone.game.dialogue.utils.UtilText.generateSingularDeterminer;
+
 /**
  * @since 0.3.1
  * @version 0.4.0
@@ -118,7 +122,7 @@ public enum LegConfiguration {
 											InventorySlot.SOCK,
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for quadrupedal-taurs or quadrupedal-ferals can be worn in this slot.",
+									this::clothingBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.FITS_TAUR_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
@@ -134,7 +138,7 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_2,
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
+									LegConfiguration::weaponBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
@@ -145,7 +149,7 @@ public enum LegConfiguration {
 											InventorySlot.LEG,
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only taur-suitable clothing can be worn in this slot.",
+									this::clothingBlocked,
 									Util.newArrayListOfValues(
 											ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
 											ItemTag.FITS_TAUR_BODY)));
@@ -205,7 +209,7 @@ public enum LegConfiguration {
 											InventorySlot.SOCK,
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for long-tails or long-tail-ferals can be worn in this slot.",
+									this::clothingBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.FITS_LONG_TAIL_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
@@ -221,7 +225,7 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_2,
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
+									LegConfiguration::weaponBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
@@ -232,7 +236,7 @@ public enum LegConfiguration {
 										InventorySlot.LEG,
 										InventorySlot.GROIN),
 								character.getLegType().getRace(),
-								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only long-tail-suitable clothing can be worn in this slot.",
+								this::clothingBlocked,
 								Util.newArrayListOfValues(
 										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
 										ItemTag.FITS_LONG_TAIL_BODY)));
@@ -332,7 +336,7 @@ public enum LegConfiguration {
 											InventorySlot.SOCK,
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for tails or tail-ferals can be worn in this slot.",
+									this::clothingBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.FITS_TAIL_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
@@ -348,7 +352,7 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_2,
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
+									LegConfiguration::weaponBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
@@ -359,7 +363,7 @@ public enum LegConfiguration {
 										InventorySlot.LEG,
 										InventorySlot.GROIN),
 								character.getLegType().getRace(),
-								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only tail-suitable clothing can be worn in this slot.",
+								this::clothingBlocked,
 								Util.newArrayListOfValues(
 										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
 										ItemTag.FITS_TAIL_BODY)));
@@ -433,7 +437,7 @@ public enum LegConfiguration {
 											InventorySlot.SOCK,
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for arachnids or arachnid-ferals can be worn in this slot.",
+									this::clothingBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.FITS_ARACHNID_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
@@ -449,7 +453,7 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_2,
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
+									LegConfiguration::weaponBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
@@ -463,7 +467,7 @@ public enum LegConfiguration {
 										InventorySlot.FOOT,
 										InventorySlot.SOCK),
 								character.getLegType().getRace(),
-								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only arachnid-suitable clothing can be worn in this slot.",
+								this::clothingBlocked,
 								Util.newArrayListOfValues(
 										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
 										ItemTag.FITS_ARACHNID_BODY)));
@@ -547,7 +551,7 @@ public enum LegConfiguration {
 											InventorySlot.SOCK,
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for cephalopods or cephalopod-ferals can be worn in this slot.",
+									this::clothingBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.FITS_CEPHALOPOD_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
@@ -563,7 +567,7 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_2,
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
+									LegConfiguration::weaponBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
@@ -577,7 +581,7 @@ public enum LegConfiguration {
 										InventorySlot.FOOT,
 										InventorySlot.SOCK),
 								character.getLegType().getRace(),
-								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only cephalopod-suitable clothing can be worn in this slot.",
+								this::clothingBlocked,
 								Util.newArrayListOfValues(
 										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
 										ItemTag.FITS_CEPHALOPOD_BODY)));
@@ -674,7 +678,7 @@ public enum LegConfiguration {
 											InventorySlot.SOCK,
 											InventorySlot.GROIN),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], only clothing suitable for avians or avian-ferals can be worn in this slot.",
+									this::clothingBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.FITS_CEPHALOPOD_BODY,
 											ItemTag.FITS_FERAL_ALL_BODY,
@@ -690,7 +694,7 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_2,
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
+									LegConfiguration::weaponBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.WEAPON_FERAL_EQUIPPABLE)));
 				
@@ -701,7 +705,7 @@ public enum LegConfiguration {
 										InventorySlot.LEG,
 										InventorySlot.GROIN),
 								character.getLegType().getRace(),
-								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only avian-suitable clothing can be worn in this slot.",
+								this::clothingBlocked,
 								Util.newArrayListOfValues(
 										ItemTag.FITS_NON_BIPED_BODY_HUMANOID,
 										ItemTag.FITS_AVIAN_BODY))
@@ -710,7 +714,7 @@ public enum LegConfiguration {
 //										InventorySlot.FOOT,
 //										InventorySlot.SOCK),
 //								character.getLegType().getRace(),
-//								"Due to the fact that [npc.nameHasFull] the lower body of [npc.a_legRace], only avian-suitable clothing can be worn in this slot.",
+//								this::clothingBlocked,
 //								Util.newArrayListOfValues(
 //										ItemTag.FITS_TALONS_EXCLUSIVE,
 //										ItemTag.FITS_TALONS))
@@ -769,7 +773,7 @@ public enum LegConfiguration {
 											InventorySlot.WEAPON_OFFHAND_2,
 											InventorySlot.WEAPON_OFFHAND_3),
 									character.getLegType().getRace(),
-									"Due to the fact that [npc.nameHasFull] the feral body of [npc.a_legRace], [npc.she] cannot wield regular weapons!",
+									LegConfiguration::weaponBlockedFeral,
 									Util.newArrayListOfValues(
 											ItemTag.FITS_ARM_WINGS,
 											ItemTag.FITS_ARM_WINGS_EXCLUSIVE)));
@@ -1003,5 +1007,39 @@ public enum LegConfiguration {
 	 */
 	public static int getDefaultSerpentTailLengthMultiplier() {
 		return 5;
+	}
+
+	private static String aLegRace(GameCharacter c) {
+		return generateSingularDeterminer(c.getLegRace().getName(true))+" "+c.getLegRace().getName(true);
+	}
+
+	protected String clothingBlocked(GameCharacter c) {
+		String type = switch(this) {
+			case BIPEDAL,WINGED_BIPED -> throw new UnsupportedOperationException();
+			case QUADRUPEDAL -> "taur";
+			case TAIL_LONG -> "long-tail";
+			case TAIL -> "tail";
+			case ARACHNID -> "arachnid";
+			case CEPHALOPOD -> "cephalopod";
+			case AVIAN -> "avian";
+		};
+		return "Due to the fact that "+nameHave(c)+" the lower body of "+aLegRace(c)+", only "+type+"-suitable clothing can be worn in this slot.";
+	}
+
+	private static String weaponBlockedFeral(GameCharacter c) {
+		return "Due to the fact that "+nameHave(c)+" the feral body of "+aLegRace(c)+", "+they(c)+" cannot wield regular weapons!";
+	}
+
+	protected String clothingBlockedFeral(GameCharacter c) {
+		String type = switch(this) {
+			case BIPEDAL,WINGED_BIPED -> throw new UnsupportedOperationException();
+			case QUADRUPEDAL -> "quadrupedal-taurs or quadrupedal-ferals";
+			case TAIL_LONG -> "long-tails or long-tail-ferals";
+			case TAIL -> "tails or tail-ferals";
+			case ARACHNID -> "arachnids or arachnid-ferals";
+			case CEPHALOPOD -> "cephalopods or cephalopod-ferals";
+			case AVIAN -> "avians or avian-ferals";
+		};
+		return "Due to the fact that "+nameHave(c)+" the feral body of "+aLegRace(c)+", only clothing suitable for "+type+" can be worn in this slot.";
 	}
 }

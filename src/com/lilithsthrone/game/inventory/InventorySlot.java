@@ -7,7 +7,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
-import com.lilithsthrone.utils.Util;
 
 /**
  * @since 0.1.0
@@ -335,10 +334,10 @@ public enum InventorySlot {
 			}
 			if(!isPhysicallyAvailable(character)) {
 				return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(this),
+					List.of(this),
 					null,
-					this.getPhysicallyUnavailableReason(character),
-					Util.newArrayListOfValues(ItemTag.REQUIRES_NO_PENIS));
+					this::getPhysicallyUnavailableReason,
+					List.of(ItemTag.REQUIRES_NO_PENIS));
 			}
 			// Leg configuration (takes into account feral):
 			List<BodyPartClothingBlock> blockedList = character.getLegConfiguration().getBodyPartClothingBlock(character);
@@ -383,10 +382,10 @@ public enum InventorySlot {
 			}
 			if(!isPhysicallyAvailable(character)) {
 				return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(this),
+					List.of(this),
 					null,
-					this.getPhysicallyUnavailableReason(character),
-					Util.newArrayListOfValues(ItemTag.REQUIRES_NO_VAGINA));
+					this::getPhysicallyUnavailableReason,
+					List.of(ItemTag.REQUIRES_NO_VAGINA));
 			}
 			// Leg configuration (takes into account feral):
 			List<BodyPartClothingBlock> blockedList = character.getLegConfiguration().getBodyPartClothingBlock(character);
@@ -747,10 +746,10 @@ public enum InventorySlot {
 //		}
 		if(!isPhysicallyAvailable(character)) {
 			return new BodyPartClothingBlock(
-				Util.newArrayListOfValues(this),
+				List.of(this),
 				null,
-				this.getPhysicallyUnavailableReason(character),
-				Util.newArrayListOfValues());
+				this::getPhysicallyUnavailableReason,
+				List.of());
 		}
 		
 		// Leg configuration (takes into account feral):
