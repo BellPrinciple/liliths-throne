@@ -1,59 +1,111 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractMouthType;
+import com.lilithsthrone.game.character.body.abstractTypes.AbstractTongueType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
+import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
+
+import static com.lilithsthrone.game.dialogue.utils.UtilText.parse;
 
 /**
  * @since 0.1.83
  * @version 0.3.7
  * @author Innoxia
  */
-public class MouthType {
-	
-	public static AbstractMouthType HUMAN = new AbstractMouthType(Race.HUMAN, TongueType.HUMAN) {};
+public interface MouthType extends BodyPartTypeInterface {
 
-	public static AbstractMouthType ANGEL = new AbstractMouthType(Race.ANGEL, TongueType.ANGEL) {};
+	AbstractTongueType getTongueType();
 
-	public static AbstractMouthType DEMON_COMMON = new AbstractMouthType(Race.DEMON, TongueType.DEMON_COMMON) {};
+	@Override
+	default String getDeterminer(GameCharacter c) {
+		return "";
+	}
 
-	public static AbstractMouthType DOG_MORPH = new AbstractMouthType(Race.DOG_MORPH, TongueType.DOG_MORPH) {};
+	@Override
+	default boolean isDefaultPlural(GameCharacter c) {
+		return false;
+	}
 
-	public static AbstractMouthType WOLF_MORPH = new AbstractMouthType(Race.WOLF_MORPH, TongueType.WOLF_MORPH) {};
+	default String getLipsNameSingular(GameCharacter c) {
+		return "lip";
+	}
 
-	public static AbstractMouthType FOX_MORPH = new AbstractMouthType(Race.FOX_MORPH, TongueType.FOX_MORPH) {};
+	default String getLipsNamePlural(GameCharacter c) {
+		return "lips";
+	}
 
-	public static AbstractMouthType CAT_MORPH = new AbstractMouthType(Race.CAT_MORPH, TongueType.CAT_MORPH) {};
+	default boolean isLipsDescriptorSizeAllowed(GameCharacter c) {
+		return true;
+	}
 
-	public static AbstractMouthType COW_MORPH = new AbstractMouthType(Race.COW_MORPH, TongueType.COW_MORPH) {};
+	default List<String> getLipsDescriptors(GameCharacter c) {
+		return List.of();
+	}
 
-	public static AbstractMouthType SQUIRREL_MORPH = new AbstractMouthType(Race.SQUIRREL_MORPH, TongueType.SQUIRREL_MORPH) {};
+	default String getBodyDescription(GameCharacter c) {
+		return parse(c, "[npc.SheHasFull] [npc.lipSize], [npc.mouthColourPrimary(true)] [npc.lips]"
+				+ "#IF(npc.isWearingLipstick())"
+				+ "#IF(npc.isPiercedLip()), which have been pierced, and#ELSE, which#ENDIF"
+				+ " are currently [npc.materialCompositionDescriptor]"
+				+ "#IF(npc.isHeavyMakeup(BODY_COVERING_TYPE_MAKEUP_LIPSTICK) && game.isLipstickMarkingEnabled())"
+				+ " a [style.colourPinkDeep(heavy layer)] of"
+				+ "#ENDIF"
+				+ " [#npc.getLipstick().getFullDescription(npc, true)]."
+				+ "#ELSE"
+				+ "#IF(npc.isPiercedLip()), which have been pierced#ENDIF."
+				+ "#ENDIF"
+				+ " [npc.Her] throat is [npc.mouthColourSecondary(true)] in colour.");
+	}
 
-	public static AbstractMouthType RAT_MORPH = new AbstractMouthType(Race.RAT_MORPH, TongueType.RAT_MORPH) {};
+	default List<OrificeModifier> getDefaultRacialOrificeModifiers() {
+		return List.of();
+	}
 
-	public static AbstractMouthType RABBIT_MORPH = new AbstractMouthType(Race.RABBIT_MORPH, TongueType.RABBIT_MORPH) {};
+	@Override
+	default String getNameSingular(GameCharacter c) {
+		return "mouth";
+	}
 
-	public static AbstractMouthType BAT_MORPH = new AbstractMouthType(Race.BAT_MORPH, TongueType.BAT_MORPH) {};
+	public static AbstractMouthType HUMAN = new Special(Race.HUMAN, TongueType.HUMAN) {};
 
-	public static AbstractMouthType ALLIGATOR_MORPH = new AbstractMouthType(Race.ALLIGATOR_MORPH, TongueType.ALLIGATOR_MORPH) {};
+	public static AbstractMouthType ANGEL = new Special(Race.ANGEL, TongueType.ANGEL) {};
 
-	public static AbstractMouthType HORSE_MORPH = new AbstractMouthType(Race.HORSE_MORPH, TongueType.HORSE_MORPH) {};
+	public static AbstractMouthType DEMON_COMMON = new Special(Race.DEMON, TongueType.DEMON_COMMON) {};
 
-	public static AbstractMouthType REINDEER_MORPH = new AbstractMouthType(Race.REINDEER_MORPH, TongueType.REINDEER_MORPH) {};
+	public static AbstractMouthType DOG_MORPH = new Special(Race.DOG_MORPH, TongueType.DOG_MORPH) {};
 
-	public static AbstractMouthType HARPY = new AbstractMouthType(BodyCoveringType.MOUTH,
+	public static AbstractMouthType WOLF_MORPH = new Special(Race.WOLF_MORPH, TongueType.WOLF_MORPH) {};
+
+	public static AbstractMouthType FOX_MORPH = new Special(Race.FOX_MORPH, TongueType.FOX_MORPH) {};
+
+	public static AbstractMouthType CAT_MORPH = new Special(Race.CAT_MORPH, TongueType.CAT_MORPH) {};
+
+	public static AbstractMouthType COW_MORPH = new Special(Race.COW_MORPH, TongueType.COW_MORPH) {};
+
+	public static AbstractMouthType SQUIRREL_MORPH = new Special(Race.SQUIRREL_MORPH, TongueType.SQUIRREL_MORPH) {};
+
+	public static AbstractMouthType RAT_MORPH = new Special(Race.RAT_MORPH, TongueType.RAT_MORPH) {};
+
+	public static AbstractMouthType RABBIT_MORPH = new Special(Race.RABBIT_MORPH, TongueType.RABBIT_MORPH) {};
+
+	public static AbstractMouthType BAT_MORPH = new Special(Race.BAT_MORPH, TongueType.BAT_MORPH) {};
+
+	public static AbstractMouthType ALLIGATOR_MORPH = new Special(Race.ALLIGATOR_MORPH, TongueType.ALLIGATOR_MORPH) {};
+
+	public static AbstractMouthType HORSE_MORPH = new Special(Race.HORSE_MORPH, TongueType.HORSE_MORPH) {};
+
+	public static AbstractMouthType REINDEER_MORPH = new Special(Race.REINDEER_MORPH, TongueType.REINDEER_MORPH) {};
+
+	public static AbstractMouthType HARPY = new Special(BodyCoveringType.MOUTH,
 			Race.HARPY,
 			TongueType.HARPY,
 			Util.newArrayListOfValues("beak"),
@@ -70,114 +122,61 @@ public class MouthType {
 			return false;
 		}
 	};
-	
-	private static List<AbstractMouthType> allMouthTypes;
-	private static Map<AbstractMouthType, String> mouthToIdMap = new HashMap<>();
-	private static Map<String, AbstractMouthType> idToMouthMap = new HashMap<>();
-	
-	static {
-		allMouthTypes = new ArrayList<>();
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("mouth")) {
-					try {
-						AbstractMouthType type = new AbstractMouthType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allMouthTypes.add(type);
-						mouthToIdMap.put(type, id);
-						idToMouthMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("mouth")) {
-					try {
-						AbstractMouthType type = new AbstractMouthType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allMouthTypes.add(type);
-						mouthToIdMap.put(type, id);
-						idToMouthMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded mouth types:
-		
-		Field[] fields = MouthType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractMouthType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractMouthType ct;
-				try {
-					ct = ((AbstractMouthType) f.get(null));
+	class Special extends AbstractMouthType {
 
-					mouthToIdMap.put(ct, f.getName());
-					idToMouthMap.put(f.getName(), ct);
-					
-					allMouthTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		private String id;
+
+		public Special(AbstractRace race, AbstractTongueType tongueType) {
+			super(race, tongueType);
 		}
-		
-		Collections.sort(allMouthTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
+
+		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, AbstractTongueType tongueType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<String> lipNames, List<String> lipNamesPlural, List<String> lipDescriptorsMasculine, List<String> lipDescriptorsFeminine, String mouthBodyDescription, List<OrificeModifier> defaultRacialOrificeModifiers) {
+			super(coveringType, race, tongueType, names, namesPlural, descriptorsMasculine, descriptorsFeminine, lipNames, lipNamesPlural, lipDescriptorsMasculine, lipDescriptorsFeminine, mouthBodyDescription, defaultRacialOrificeModifiers);
+		}
+
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(MouthType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
+		}
 	}
-	
+
+	TypeTable<AbstractMouthType> table = new TypeTable<>(
+		MouthType::sanitize,
+		MouthType.class,
+		AbstractMouthType.class,
+		"mouth",
+		(f,n,a,m)->new AbstractMouthType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
 	public static AbstractMouthType getMouthTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("IMP")) {
-			return MouthType.DEMON_COMMON;
+			return "DEMON_COMMON";
 		}
 		
-		id = Util.getClosestStringMatch(id, idToMouthMap.keySet());
-		return idToMouthMap.get(id);
+		return id;
 	}
-	
+
 	public static String getIdFromMouthType(AbstractMouthType mouthType) {
-		return mouthToIdMap.get(mouthType);
+		return mouthType.getId();
 	}
-	
+
 	public static List<AbstractMouthType> getAllMouthTypes() {
-		return allMouthTypes;
+		return table.listByRace();
 	}
-	
-	private static Map<AbstractRace, List<AbstractMouthType>> typesMap = new HashMap<>();
-	
+
 	public static List<AbstractMouthType> getMouthTypes(AbstractRace r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractMouthType> types = new ArrayList<>();
-		for(AbstractMouthType type : MouthType.getAllMouthTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of());
 	}
 	
 }

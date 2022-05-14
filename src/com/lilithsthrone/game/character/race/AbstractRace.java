@@ -27,8 +27,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.2
  * @author Innoxia, Maxis
  */
-public abstract class AbstractRace {
+public class AbstractRace implements Race {
 
+	String id;
 	private boolean mod;
 	private boolean fromExternalFile;
 	
@@ -326,6 +327,12 @@ public abstract class AbstractRace {
 		return fromExternalFile;
 	}
 
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
 	public AbstractRacialBody getRacialBody() {
 		if(this.isFromExternalFile()) {
 			return RacialBody.getRacialBodyFromId(racialBodyId);
@@ -334,28 +341,30 @@ public abstract class AbstractRace {
 		return null;
 	}
 
-	/**
-	 * Applies any special racial changes to the body which is passed in. This is called <b>before</b> Subspecies.applySpeciesChanges()
-	 */
+	@Override
 	public void applyRaceChanges(Body body) {
 		if(this.isFromExternalFile()) {
 			UtilText.setBodyForParsing("targetedBody", body);
 			UtilText.parse(raceChangeString);
 		}
 	}
-	
+
+	@Override
 	public boolean isFeralPartsAvailable() {
 		return feralPartsAvailable;
 	}
-	
+
+	@Override
 	public boolean isFlyingRace() {
 		return flyingRace;
 	}
 
+	@Override
 	public boolean isAbleToSelfTransform() {
 		return ableToSelfTransform;
 	}
-	
+
+	@Override
 	public String getName(Body body, boolean feral) {
 		if(feral) {
 			return getFeralName(new LegConfigurationAffinity(body), false);
@@ -365,11 +374,8 @@ public abstract class AbstractRace {
 		}
 		return name;
 	}
-	
-	public String getName(boolean feral) {
-		return getName(null, feral);
-	}
-	
+
+	@Override
 	public String getNamePlural(Body body, boolean feral) {
 		if(feral) {
 			return getFeralName(new LegConfigurationAffinity(body), true);
@@ -379,11 +385,8 @@ public abstract class AbstractRace {
 		}
 		return namePlural;
 	}
-	
-	public String getNamePlural(boolean feral) {
-		return getNamePlural(null, feral);
-	}
-	
+
+	@Override
 	public String getFeralName(LegConfigurationAffinity legConfigurationAffinity, boolean plural) {
 		if(plural) {
 			if(nameFeralPlural.containsKey(legConfigurationAffinity)) {
@@ -400,57 +403,67 @@ public abstract class AbstractRace {
 		}
 	}
 
+	@Override
 	public String getDefaultTransformName() {
 		return defaultTransformName;
 	}
 
+	@Override
 	public Disposition getDisposition() {
 		return disposition;
 	}
 
+	@Override
 	public RacialClass getRacialClass() {
 		return racialClass;
 	}
 
+	@Override
 	public CombatBehaviour getPreferredCombatBehaviour() {
 		return preferredCombatBehaviour;
 	}
 
+	@Override
 	public int getNumberOfOffspringLow() {
 		return numberOfOffspringLow;
 	}
 
+	@Override
 	public int getNumberOfOffspringHigh() {
 		return numberOfOffspringHigh;
 	}
-	
+
+	@Override
 	public Colour getColour() {
 		return colour;
 	}
-	
+
+	@Override
 	public boolean isAffectedByFurryPreference() {
 		return affectedByFurryPreference;
 	}
-	
+
+	@Override
 	public float getChanceForMaleOffspring() {
 		return chanceForMaleOffspring;
 	}
 
-	/**
-	 * <b>Should only be used in Subspecies' getDamageMultiplier() method!</b>
-	 */
+	@Override
 	public AbstractAttribute getDefaultDamageMultiplier() {
 		return Attribute.getRacialDamageAttribute(this);
 	}
 
+	@Override
 	public FurryPreference getDefaultFemininePreference() {
 		return defaultFemininePreference;
 	}
 
+	@Override
 	public FurryPreference getDefaultMasculinePreference() {
 		return defaultMasculinePreference;
 	}
 
+	@Override
 	public Map<AbstractFetish, Map<String, Integer>> getRacialFetishModifiers() {
 		return racialFetishModifiers;
 	}

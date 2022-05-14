@@ -1,18 +1,19 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractBreastType;
+import com.lilithsthrone.game.character.body.abstractTypes.AbstractFluidType;
+import com.lilithsthrone.game.character.body.abstractTypes.AbstractNippleType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
+import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -20,7 +21,44 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.8.2
  * @author Innoxia
  */
-public class BreastType {
+public interface BreastType extends BodyPartTypeInterface {
+
+	AbstractNippleType getNippleType();
+
+	AbstractFluidType getFluidType();
+
+	default String getCrotchNameSingular(GameCharacter gc) {
+		return UtilText.returnStringAtRandom("crotch-breast", "crotch-boob", "crotch-boob", "crotch-boob", "crotch-tit");
+	}
+
+	default String getCrotchNamePlural(GameCharacter gc) {
+		return UtilText.returnStringAtRandom("crotch-breasts", "crotch-boobs", "crotch-boobs", "crotch-boobs", "crotch-tits");
+	}
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	String getTransformationCrotchDescription(GameCharacter owner);
+
+	String getBodyCrotchDescription(GameCharacter owner);
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		if(gc.getBreastCrotchShape()== BreastShape.UDDERS) {
+			return "a set of";
+		}
+		if(gc.getBreastRows()==1) {
+			return "a pair of";
+		} else {
+			return Util.intToString(gc.getBreastRows())+" pairs of";
+		}
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return true;
+	}
 
 	// Only used for when lacking crotch breasts:
 	public static AbstractBreastType NONE = new AbstractBreastType(BodyCoveringType.HUMAN,
@@ -192,117 +230,39 @@ public class BreastType {
 			"[npc.She] now [npc.has] [style.boldHarpy(avian)], [npc.crotchNipplesFullDescription], and when lactating, [npc.she] will produce [style.boldHarpy(harpy milk)].",
 			"On each of [npc.her] [npc.crotchBoobSize] [npc.crotchBoobs], [npc.she] [npc.has] [npc.crotchNipplesPerBreast] avian, [npc.crotchNipplesFullDescription]."){
 	};
-	
-	
-	private static List<AbstractBreastType> allBreastTypes;
-	private static Map<AbstractBreastType, String> breastToIdMap = new HashMap<>();
-	private static Map<String, AbstractBreastType> idToBreastMap = new HashMap<>();
-	
-	static {
-		allBreastTypes = new ArrayList<>();
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("breast")) {
-					try {
-						AbstractBreastType type = new AbstractBreastType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allBreastTypes.add(type);
-						breastToIdMap.put(type, id);
-						idToBreastMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("breast")) {
-					try {
-						AbstractBreastType type = new AbstractBreastType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allBreastTypes.add(type);
-						breastToIdMap.put(type, id);
-						idToBreastMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded breast types:
-		
-		Field[] fields = BreastType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractBreastType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractBreastType ct;
-				try {
-					ct = ((AbstractBreastType) f.get(null));
+	TypeTable<AbstractBreastType> table = new TypeTable<>(
+			BreastType::sanitize,
+			BreastType.class,
+			AbstractBreastType.class,
+			"breast",
+			AbstractBreastType::new);
 
-					breastToIdMap.put(ct, f.getName());
-					idToBreastMap.put(f.getName(), ct);
-					
-					allBreastTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		Collections.sort(allBreastTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
-	}
-	
 	public static AbstractBreastType getBreastTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("IMP")) {
-			return BreastType.DEMON_COMMON;
+			return "DEMON_COMMON";
 		}
 		if(id.equals("LYCAN")) {
-			return BreastType.WOLF_MORPH;
+			return "WOLF_MORPH";
 		}
 
-		id = Util.getClosestStringMatch(id, idToBreastMap.keySet());
-		return idToBreastMap.get(id);
+		return id;
 	}
-	
+
 	public static String getIdFromBreastType(AbstractBreastType breastType) {
-		return breastToIdMap.get(breastType);
+		return breastType.getId();
 	}
 	
 	public static List<AbstractBreastType> getAllBreastTypes() {
-		return allBreastTypes;
+		return table.listByRace();
 	}
 	
-	private static Map<AbstractRace, List<AbstractBreastType>> typesMap = new HashMap<>();
 	public static List<AbstractBreastType> getBreastTypes(AbstractRace r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractBreastType> types = new ArrayList<>();
-		for(AbstractBreastType type : BreastType.getAllBreastTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of());
 	}
 	
 }

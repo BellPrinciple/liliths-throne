@@ -1,10 +1,10 @@
 package com.lilithsthrone.game.character.effects;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
@@ -29,8 +29,76 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.4
  * @author Innoxia
  */
-public class Perk {
-	
+public interface Perk {
+
+	String getId();
+
+	default boolean isAlwaysAvailable() {
+		return false;
+	}
+
+	/**
+	 * Override this and return true if the perk is one that is unlock via special in-game events.
+	 * @return true If this perk does not appear in the perk tree, but is otherwise obtainable through special means.
+	 */
+	default boolean isHiddenPerk() {
+		return false;
+	}
+
+	/**
+	 * @return true if this a perk that's granted as part of an NPC's background.
+	 */
+	default boolean isBackgroundPerk() {
+		return false;
+	}
+
+	String getName(GameCharacter owner);
+
+	Colour getColour();
+
+	boolean isEquippableTrait();
+
+	String getDescription(GameCharacter target);
+
+	default List<String> getModifiersAsStringList(GameCharacter character) {
+		var modifiersList = new ArrayList<String>();
+		var attributeModifiers = getAttributeModifiers(character);
+		if(attributeModifiers != null)
+			for(Map.Entry<AbstractAttribute,Integer> e : attributeModifiers.entrySet())
+				modifiersList.add(e.getKey().getFormattedValue(e.getValue()));
+		return Util.mergeLists(modifiersList, getExtraEffects());
+	}
+
+	default Map<AbstractAttribute,Integer> getAttributeModifiers(GameCharacter character) {
+		return null;
+	}
+
+	default String applyPerkGained(GameCharacter character) {
+		return "";
+	};
+
+	default String applyPerkLost(GameCharacter character) {
+		return "";
+	};
+
+	default CorruptionLevel getAssociatedCorruptionLevel() {
+		return CorruptionLevel.ZERO_PURE;
+	}
+
+	int getRenderingPriority();
+
+	List<String> getExtraEffects();
+
+	String getSVGString(GameCharacter owner);
+
+	PerkCategory getPerkCategory();
+
+	Spell getSpell();
+
+	SpellUpgrade getSpellUpgrade();
+
+	SpellSchool getSchool();
+
 	// NPC Histories:
 	
 	public static AbstractPerk JOB_MISC = new AbstractPerk(20,
@@ -561,7 +629,7 @@ public class Perk {
 			return UtilText.parse(owner, "[npc.NamePos] training has given [npc.herHim] some defence against Lilith's forces.");
 		}
 	};
-	
+
 	public static AbstractPerk JOB_NPC_FARMER = new AbstractPerk(20,
 			true,
 			"Feeding the World",
@@ -993,7 +1061,7 @@ public class Perk {
 					+ " [npc.She] will obey any command given to [npc.herHim], so long as it's not from a slave or another doll, with commands from [npc.her] owner taking priority.");
 		}
 	};
-	
+
 	public static AbstractPerk JOB_AMAZONIAN_QUEEN = new AbstractPerk(20,
 			true,
 			"Queen of Queens",
@@ -1015,7 +1083,7 @@ public class Perk {
 					"[npc.NameIsFull] the queen of the Amazons, and as such has lived a life full of rigorous physical activity and combat training.");
 		}
 	};
-	
+
 	public static AbstractPerk JOB_AMAZONIAN = new AbstractPerk(20,
 			true,
 			"Girl Power",
@@ -1054,8 +1122,8 @@ public class Perk {
 					"[npc.NameIsFull] a professional boxer, and as such is a fearsome opponent in a fight.");
 		}
 	};
-	
-	
+
+
 	public static AbstractPerk JOB_SLAVE = new AbstractPerk(20,
 			true,
 			"A life of servitude",
@@ -1657,7 +1725,7 @@ public class Perk {
 					+ " As [npc.sheIs] able to bend all the way down until [npc.her] head touches [npc.her] groin, [npc.sheIs] able to perform oral on [npc.herself].");
 		}
 	};
-	
+
 	public static AbstractPerk SPELL_DAMAGE = new AbstractPerk(20,
 			false,
 			"spell power",
@@ -1833,7 +1901,7 @@ public class Perk {
 			return "Everybody in this reality has an arcane aura, no matter how weak, and so at the very least has a tiny hint of arcane power available to them.";
 		}
 	};
-	
+
 	public static AbstractPerk ARCANE_BOOST = new AbstractPerk(20,
 			false,
 			"arcane training",
@@ -2426,7 +2494,7 @@ public class Perk {
 			return UtilText.parse(owner, "At the expense of some of [npc.namePos] "+Attribute.MANA_MAXIMUM.getName()+", the arcane's natural healing properties will now be amplified when in the presence of [npc.her] adrenaline.");
 		}
 	};
-	
+
 	public static AbstractPerk UNARMED_TRAINING = new AbstractPerk(20,
 			false,
 			"brawler",
@@ -2794,7 +2862,7 @@ public class Perk {
 			return true;
 		}
 	};
-	
+
 	public static AbstractPerk SPECIAL_MERAXIS = new AbstractPerk(20,
 			false,
 			"The Dark Siren",
@@ -3125,7 +3193,7 @@ public class Perk {
 			return true;
 		}
 	};
-	
+
 	public static AbstractPerk SPECIAL_CHILD_OF_THE_CRAG = new AbstractPerk(20,
 			true,
 			"Child of the Crag",
@@ -3141,7 +3209,7 @@ public class Perk {
 		public String getDescription(GameCharacter owner) {
 			return UtilText.parse(owner, "The blood of Cimryth runs through [npc.namePos] veins and [npc.she] is long inured to the cold of living so high up in the mountains. However, being so removed from [npc.her] desert kin has lessened [npc.her] natural resistance to fire.");
 		}
-		
+
 		@Override
 		public boolean isHiddenPerk() {
 			return true;
@@ -3171,7 +3239,7 @@ public class Perk {
 			return true;
 		}
 	};
-	
+
 	//**** Special perks which can be gained from in-game events: ****//
 
 	public static AbstractPerk PIX_TRAINING = new AbstractPerk(20,
@@ -3198,7 +3266,7 @@ public class Perk {
 			return true;
 		}
 	};
-	
+
 	public static AbstractPerk MARTIAL_ARTIST = new AbstractPerk(20,
 			false,
 			"martial artist",
@@ -3219,7 +3287,7 @@ public class Perk {
 			return true;
 		}
 	};
-	
+
 	public static AbstractPerk IMP_SLAYER = new AbstractPerk(20,
 			false,
 			"doomguy",
@@ -3304,10 +3372,10 @@ public class Perk {
 			return true;
 		}
 	};
-	
-	
+
+
 	//**** Elder lilin perks: ****//
-	
+
 	public static AbstractPerk POWER_OF_LIRECEA_1 = new AbstractPerk(20,
 			false,
 			"Lirecea's power",
@@ -3358,7 +3426,7 @@ public class Perk {
 			return true;
 		}
 	};
-	
+
 	public static AbstractPerk POWER_OF_LOVIENNE_2 = new AbstractPerk(21,
 			false,
 			"Lovienne's power",
@@ -3409,7 +3477,7 @@ public class Perk {
 			return true;
 		}
 	};
-	
+
 	public static AbstractPerk POWER_OF_LASIELLE_3 = new AbstractPerk(22,
 			false,
 			"Lasielle's power",
@@ -3430,7 +3498,7 @@ public class Perk {
 							?" Her power has additionally enabled you to transform others into demons!"
 							:" If you were a demon, this power would enable you to transform others into demons!"));
 		}
-		
+
 		@Override
 		public boolean isHiddenPerk() {
 			return true;
@@ -3635,7 +3703,7 @@ public class Perk {
 							?" Her power has additionally enabled you to transform your demonic body into that of reptilian and amphibian species!"
 							:" If you were a demon, this power would enable you to transform your body parts into those of reptilian and amphibian species!"));
 		}
-		
+
 		@Override
 		public boolean isHiddenPerk() {
 			return true;
@@ -3667,7 +3735,7 @@ public class Perk {
 			return true;
 		}
 	};
-	
+
 	public static AbstractPerk SINGLE_TAILED_YOUKO = new AbstractPerk(20,
 			false,
 			"Single tailed Youko",
@@ -6363,9 +6431,9 @@ public class Perk {
 					+" face find themselves falling under [npc.her] spell, and within moments, are completely consumed by a wild, animalistic lust.");
 		}
 	};
-	
+
 	// Doll perks:
-	
+
 	public static AbstractPerk DOLL_PHYSICAL_CORE = new AbstractPerk(20,
 			false,
 			"arcane-infused silicone",
@@ -6387,7 +6455,7 @@ public class Perk {
 						+ " As well as being able to slowly absorb and convert stored fluids to energy, this material is extraordinarily durable.");
 		}
 	};
-	
+
 	public static AbstractPerk DOLL_PHYSICAL_1 = new AbstractPerk(20,
 			false,
 			"hypermobility",
@@ -6403,7 +6471,7 @@ public class Perk {
 					"[npc.NamePos] body is exceptionally flexible, allowing [npc.herHim] to twist [npc.her] body into poses which would make a gymnast jealous.");
 		}
 	};
-	
+
 	public static AbstractPerk DOLL_PHYSICAL_2 = new AbstractPerk(20,
 			false,
 			"no means of reproduction",
@@ -6424,7 +6492,7 @@ public class Perk {
 					+ " [npc.Her] rubbery orifices are also inhospitable places for eggs.");
 		}
 	};
-	
+
 	public static AbstractPerk DOLL_PHYSICAL_3 = new AbstractPerk(20,
 			false,
 			"organs not included",
@@ -6515,7 +6583,7 @@ public class Perk {
 					"As an automaton who lacks free will, [npc.name] [npc.do] not have any opinion on different fetishes, and [npc.is] content to go along with whatever [npc.her] partner asks of [npc.herHim].");
 		}
 	};
-	
+
 	public static AbstractPerk DOLL_ARCANE_CORE = new AbstractPerk(20,
 			false,
 			"automaton",
@@ -6536,7 +6604,7 @@ public class Perk {
 					+ " If ordered to, [npc.she] can remain completely motionless for an unlimited amount of time.");
 		}
 	};
-	
+
 	public static AbstractPerk DOLL_ARCANE_1 = new AbstractPerk(20,
 			false,
 			"no aura",
@@ -6595,21 +6663,8 @@ public class Perk {
 						+ " Thanks to this, arcane storms grant [npc.herHim] a significant amount of vitality.");
 		}
 	};
-	
-	public static List<AbstractPerk> hiddenPerks;
-	public static List<AbstractPerk> allPerks;
-	public static List<AbstractPerk> subspeciesKnowledgePerks;
-	
-	public static Map<AbstractPerk, String> perkToIdMap = new HashMap<>();
-	public static Map<String, AbstractPerk> idToPerkMap = new HashMap<>();
-	
-	private static boolean subspeciesPerksGenerated = false;
-	
-	public static AbstractPerk getPerkFromId(String id) {
-		if(!subspeciesPerksGenerated) {
-			generateSubspeciesPerks();
-		}
-//		System.out.print("ID: "+id);
+
+	private static String sanitize(String id) {
 		if(id.equalsIgnoreCase("MERAXIS")
 				|| id.equalsIgnoreCase("ARCANE_TATTOOIST")
 				|| id.equalsIgnoreCase("SLUT")
@@ -6635,63 +6690,51 @@ public class Perk {
 		} else if(id.equalsIgnoreCase("CRITICAL_BOOST_ALT_2")) {
 			id = "CRITICAL_BOOST_ARCANE";
 		}
-		
-		
-		id = Util.getClosestStringMatch(id, idToPerkMap.keySet());
-//		System.out.println("  set to: "+id);
-		return idToPerkMap.get(id);
+		return id;
 	}
-	
-	public static String getIdFromPerk(AbstractPerk perk) {
-		if(!subspeciesPerksGenerated) {
+
+	Table table = new Table();
+
+	final class Table extends com.lilithsthrone.utils.Table<AbstractPerk> {
+
+		private final List<AbstractPerk> subspeciesKnowledgePerks = new ArrayList<>();
+		private final List<AbstractPerk> hidden = new ArrayList<>();
+		private boolean subspeciesPerksGenerated;
+
+		@Override
+		public AbstractPerk of(String id) {
 			generateSubspeciesPerks();
+			return super.of(id);
 		}
-		return perkToIdMap.get(perk);
-	}
 
-	static {
-		hiddenPerks = new ArrayList<>();
-		allPerks = new ArrayList<>();
-		subspeciesKnowledgePerks = new ArrayList<>();
-		
-		Field[] fields = Perk.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractPerk.class.isAssignableFrom(f.getType())) {
-				
-				AbstractPerk perk;
-				
-				try {
-					perk = ((AbstractPerk) f.get(null));
-
-					// I feel like this is stupid :thinking:
-					perkToIdMap.put(perk, f.getName());
-					idToPerkMap.put(f.getName(), perk);
-					
-					allPerks.add(perk);
-					if(perk.isHiddenPerk()) {
-						hiddenPerks.add(perk);
-					}
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		@Override
+		public List<AbstractPerk> list() {
+			generateSubspeciesPerks();
+			return super.list();
 		}
-		
-		hiddenPerks.sort((p1, p2) -> p1.getRenderingPriority()-p2.getRenderingPriority());
-	}
-	
-	private static void generateSubspeciesPerks() {
-		List<AbstractAttribute> resistancesAdded = new ArrayList<>();
-		for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
-			if(!resistancesAdded.contains(sub.getDamageMultiplier())) {
-				resistancesAdded.add(sub.getDamageMultiplier());
-				boolean mainSubspecies = sub.getDamageMultiplier()==AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace()).getDamageMultiplier();
-				AbstractSubspecies subToUse = mainSubspecies
-												?AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace())
-												:sub;
-				
+
+		private Table() {
+			super(Perk::sanitize);
+			addFields(Perk.class,AbstractPerk.class,(k,v)->{
+				v.id=k;
+				if(v.isHiddenPerk())
+					hidden.add(v);
+			});
+			hidden.sort((p1, p2) -> p1.getRenderingPriority()-p2.getRenderingPriority());
+		}
+
+		private void generateSubspeciesPerks() {
+			if(subspeciesPerksGenerated)
+				return;
+			List<AbstractAttribute> resistancesAdded = new ArrayList<>();
+			for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
+				var m = sub.getDamageMultiplier();
+				if(resistancesAdded.contains(m))
+					continue;
+				resistancesAdded.add(m);
+				var main = AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace());
+				boolean mainSubspecies = m==main.getDamageMultiplier();
+				AbstractSubspecies subToUse = mainSubspecies ? main : sub;
 				AbstractPerk racePerk = new AbstractPerk(20,
 						false,
 						Util.capitaliseSentence(mainSubspecies?sub.getRace().getName(false):subToUse.getName(null))+" knowledge",
@@ -6719,48 +6762,46 @@ public class Perk {
 					}
 				};
 //				System.out.println("Added perk: "+Subspecies.getIdFromSubspecies(subToUse)+" "+racePerk.getName(null)+" "+racePerk.hashCode());
-				perkToIdMap.put(racePerk, Subspecies.getIdFromSubspecies(subToUse));
-				idToPerkMap.put(Subspecies.getIdFromSubspecies(subToUse), racePerk);
-				allPerks.add(racePerk);
-				hiddenPerks.add(racePerk);
+				add(racePerk.id = Subspecies.getIdFromSubspecies(subToUse),racePerk);
+				hidden.add(racePerk);
 				subspeciesKnowledgePerks.add(racePerk);
 			}
+			subspeciesPerksGenerated = true;
+			hidden.sort(Comparator.comparingInt(AbstractPerk::getRenderingPriority));
 		}
-		subspeciesPerksGenerated = true;
-		hiddenPerks.sort((p1, p2) -> p1.getRenderingPriority()-p2.getRenderingPriority());
 	}
-	
+
+	public static AbstractPerk getPerkFromId(String id) {
+		return table.of(id);
+	}
+
+	public static String getIdFromPerk(AbstractPerk perk) {
+		table.generateSubspeciesPerks();
+		return perk.getId();
+	}
+
 	public static AbstractPerk getSubspeciesRelatedPerk(AbstractSubspecies subspecies) {
-		if(!subspeciesPerksGenerated) {
-			generateSubspeciesPerks();
-		}
+		table.generateSubspeciesPerks();
 		
-		AbstractSubspecies subToUse = 
+		AbstractSubspecies subToUse =
 				subspecies.getDamageMultiplier()==AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace()).getDamageMultiplier()
 					?AbstractSubspecies.getMainSubspeciesOfRace(subspecies.getRace())
 					:subspecies;
 		
 		return Perk.getPerkFromId(Subspecies.getIdFromSubspecies(subToUse));
 	}
-	
+
 	public static List<AbstractPerk> getAllPerks() {
-		if(!subspeciesPerksGenerated) {
-			generateSubspeciesPerks();
-		}
-		return allPerks;
+		return table.list();
 	}
-	
+
 	public static List<AbstractPerk> getHiddenPerks() {
-		if(!subspeciesPerksGenerated) {
-			generateSubspeciesPerks();
-		}
-		return hiddenPerks;
+		table.generateSubspeciesPerks();
+		return Collections.unmodifiableList(table.hidden);
 	}
 
 	public static List<AbstractPerk> getSubspeciesKnowledgePerks() {
-		if(!subspeciesPerksGenerated) {
-			generateSubspeciesPerks();
-		}
-		return subspeciesKnowledgePerks;
+		table.generateSubspeciesPerks();
+		return Collections.unmodifiableList(table.subspeciesKnowledgePerks);
 	}
 }

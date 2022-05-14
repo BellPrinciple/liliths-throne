@@ -37,8 +37,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4
  * @author Irbynx, Innoxia
  */
-public abstract class AbstractCombatMove {
+public abstract class AbstractCombatMove implements CombatMove {
 
+	String id;
 	private boolean mod;
 	private boolean fromExternalFile;
 	
@@ -301,7 +302,7 @@ public abstract class AbstractCombatMove {
 			}
 		}
 	}
-    
+
     protected boolean isTargetAtMaximumLust(GameCharacter target) {
     	return target!=null && target.hasStatusEffect(StatusEffect.DESPERATE_FOR_SEX);
     }
@@ -356,17 +357,7 @@ public abstract class AbstractCombatMove {
 		return UtilText.parse(source, target, sb.toString());
 	}
     
-    /**
-     * Returns weight of the action.
-     *  Used in calculations for AI to pick certain actions.
-     *  For every unspent AP, AI will try to select an action out of the available ones.
-     *  The AI will then pick the action with highest weight.
-     *  Randomness of action selection should be in the weight values itself!
-     * @param source Character that uses the weight function.
-     * @param enemies Enemies of the character
-     * @param allies Allies of the character
-     * @return Weight of the action. 1.0 is the expected normal weight; weigh the actions accordingly.
-     */
+	@Override
     public float getWeight(GameCharacter source, List<GameCharacter> enemies, List<GameCharacter> allies) {
         if(isCanTargetAllies() && !isCanTargetSelf() && !isCanTargetEnemies() && allies.isEmpty()) { //TODO test?
             return 0.0f;
@@ -441,13 +432,7 @@ public abstract class AbstractCombatMove {
         }
     }
 
-    /**
-     * Returns the preferred target for the action. Prefers to aim at targets with lowest HP values if not forced to select at random. Override for custom behaviour.
-     * @param source Character that uses the target function.
-     * @param enemies Enemies of the character
-     * @param allies Allies of the character
-     * @return Character to target with this action.
-     */
+	@Override
     public GameCharacter getPreferredTarget(GameCharacter source, List<GameCharacter> enemies, List<GameCharacter> allies) {
 		if(Main.game.isInCombat()) {
 	    	GameCharacter preferredTarget = Main.combat.getPreferredTarget(source);
@@ -455,7 +440,7 @@ public abstract class AbstractCombatMove {
 	    		return preferredTarget;
 	    	}
 		}
-		
+
         if(weightingText!=null && !weightingText.isEmpty()) {
         	float maxWeight = 0.0f;
         	GameCharacter target = null;
@@ -474,7 +459,7 @@ public abstract class AbstractCombatMove {
         		return target;
         	}
         }
-        
+		//TODO copy into CombatMove.super.getPreferredTarget(source,enemies,allies);
         if(isCanTargetEnemies()) {
             if(shouldBlunder() && enemies.stream().anyMatch(enemy->!Main.combat.isCombatantDefeated(enemy))) {
             	List<GameCharacter> nonDefeatedEnemies = new ArrayList<>(enemies);
@@ -515,15 +500,7 @@ public abstract class AbstractCombatMove {
     }
 
 
-    /**
-     * Gets a prediction that specifies what kind of action will be performed for the player (i.e "The catgirl will attack you for 10 damage" or "The horseboy is planning to buff his ally")
-     * @param turnIndex
-     * @param source Character that uses the action.
-     * @param source Target for the action.
-     * @param enemies Enemies of the character
-     * @param allies Allies of the character
-     * @return The string that describes the intent of the NPC that uses this action.
-     */
+	@Override
     public String getPrediction(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
     	String parseText;
     	if(target==null) {
@@ -544,14 +521,7 @@ public abstract class AbstractCombatMove {
         return UtilText.parse(source, target, parseText);
     }
 
-    /**
-     * Performs the action itself. Override to get actual abilities there.
-     * @param source Character that uses the action.
-     * @param source Target for the action.
-     * @param enemies Enemies of the character
-     * @param allies Allies of the character
-     * @return The string that describes the action that has been performed.
-     */
+	@Override
     public String perform(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
     	String parseText = performingText;
     	
@@ -580,56 +550,7 @@ public abstract class AbstractCombatMove {
         return UtilText.parse(source, target, parseText);
     }
 
-    /**
-     * Performs the action itself. Override to get actual abilities there. This is performed during selection of the action and not during the turn. Use for blocks, AP damage/gains or disrupts.
-     * @param source Character that uses the action.
-     * @param source Target for the action.
-     * @param enemies Enemies of the character
-     * @param allies Allies of the character
-     * @return The string that describes the action that has been performed.
-     */
-    public void performOnSelection(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-        // Nothing. Override it.
-    }
-    
-    /**
-     * Applies the reverse of the performOnSelection() method. Override whenever performOnSelection() is overridden. This is performed during deselection of the action and not during the turn.
-     * @param source Character that uses the action.
-     * @param source Target for the action.
-     * @param enemies Enemies of the character
-     * @param allies Allies of the character
-     * @return The string that describes the action that has been performed.
-     */
-    public void performOnDeselection(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-        // Nothing. Override it.
-    }
-
-    //TODO is this needed when the performOnDeselection() method above exists?
-    /**
-     * Cancel out the action's effects if it's disrupted or cancelled via AP loss. Is called for every action in the queue for every disruption caused; non disrupted actions get reapplied.
-     * @param source Character that uses the action.
-     * @param source Target for the action.
-     * @param enemies Enemies of the character
-     * @param allies Allies of the character
-     * @return The string that describes the action that has been performed.
-     */
-    public void applyDisruption(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-        source.setRemainingAP(source.getRemainingAP() + this.getAPcost(source) * -1, enemies, allies); // Normally this is the only thing that gets adjusted on selection.
-    }
-
-    /**
-     * Checks the source character to see if they will have to use the action already with a disruption.
-     * @param source
-     */
-    public boolean isAlreadyDisrupted(GameCharacter source) {
-        return source.disruptionByTypeCheck(this.getType());
-    }
-
-    /**
-     * Returns a string if the character has the move available to select even if they don't "own" it; for example, purity based moves are available to Pure Virgin fetishists without even unlocking them.
-     *
-     * String contains the reason for why the move is available to them. Otherwise returns null.
-     */
+	@Override
     public Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
     	if(fromExternalFile) {
     		boolean condition = Boolean.valueOf(UtilText.parse(source, availabilityCondition).trim());
@@ -638,39 +559,6 @@ public abstract class AbstractCombatMove {
         return null;
     }
 
-    /**
-     * Returns a string if action can't be used either due to special constraints or because of AP/cooldowns on a specified target; string specifies rejection reason. Returns null if action can be used without an issue.
-     * @param turnIndex The turn index in which this move is to be performed.
-     * @param source Character that uses the action.
-     * @param source Target for the action. Can be null.
-     * @param enemies Enemies of the character
-     * @param allies Allies of the character
-     */
-    public String isUsable(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
-        if(target != null) {
-            if(!canTargetSelf && source == target) {
-                return "This action can't be used on yourself!";
-            }
-
-            if(!canTargetAllies && allies.contains(target) && source != target) {
-                return "This action can't be used on your allies!";
-            }
-
-            if(!canTargetEnemies && enemies.contains(target)) {
-                return "This action can't be used on your enemies!";
-            }
-        }
-
-        if(source.getMoveCooldown(this.getIdentifier()) > 0) {
-            return "This action can't be used since it is still on cooldown! "+String.valueOf(source.getMoveCooldown(this.getIdentifier()))+" turns remaining.";
-        }
-
-        if(source.getRemainingAP() < this.getAPcost(source)) {
-            return "This action can't be used since you don't have enough AP!";
-        }
-
-        return null;
-    }
 
     /**
      * Returns true based on user settings on how often should the AI make "mistakes" and select actions irrationally.
@@ -680,14 +568,17 @@ public abstract class AbstractCombatMove {
         return Math.random() <= Main.getProperties().AIblunderRate;
     }
 
+	@Override
     public CombatMoveCategory getCategory() {
 		return category;
 	}
 
+	@Override
 	public String getIdentifier() {
-        return CombatMove.getIdFromCombatMove(this);
+        return id;
     }
 
+	@Override
 	public int getCooldown(GameCharacter source) {
 		int derivedCooldown = cooldown;
 		
@@ -705,6 +596,7 @@ public abstract class AbstractCombatMove {
         return derivedCooldown;
     }
 
+	@Override
     public int getBlock(GameCharacter source, boolean isCrit) {
 		int block = 0;
     	if(fromExternalFile) {
@@ -719,10 +611,12 @@ public abstract class AbstractCombatMove {
 		return block;
     }
     
+	@Override
     public CombatMoveType getType() {
         return type;
     }
 
+	@Override
     public DamageType getDamageType(int turnIndex, GameCharacter source) {
     	if(fromExternalFile) {
     		DamageType dt = DamageType.PHYSICAL;
@@ -762,10 +656,12 @@ public abstract class AbstractCombatMove {
         return (int) Attack.calculateSpecialAttackDamage(source, target, getType(), damageType, getBaseDamage(source), getDamageVariance(), isCrit);
     }
 
+	@Override
 	public DamageVariance getDamageVariance() {
 		return damageVariance;
 	}
 
+	@Override
 	public Spell getAssociatedSpell() {
         return associatedSpell;
     }
@@ -774,18 +670,22 @@ public abstract class AbstractCombatMove {
         this.associatedSpell = associatedSpell;
     }
 
+	@Override
     public boolean isCanTargetEnemies() {
         return canTargetEnemies;
     }
 
+	@Override
     public boolean isCanTargetAllies() {
         return canTargetAllies;
     }
 
+	@Override
     public boolean isCanTargetSelf() {
         return canTargetSelf;
     }
     
+	@Override
     public int getAPcost(GameCharacter source) {
 		int derivedAPCost = APcost;
 		
@@ -800,10 +700,12 @@ public abstract class AbstractCombatMove {
         return derivedAPCost + (!source.getEquippedMoves().contains(this)?1:0);
     }
 
+	@Override
     public String getName(int turnIndex, GameCharacter source) {
         return UtilText.parse(source, name);
     }
 
+	@Override
     public String getDescription(int turnIndex, GameCharacter source) {
     	String parseText = description;
     	
@@ -813,10 +715,12 @@ public abstract class AbstractCombatMove {
         return UtilText.parse(source, parseText);
     }
 
+	@Override
     public String getSVGString() {
         return SVGString;
     }
     
+	@Override
     public Map<AbstractStatusEffect, Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
     	if(isCritical) {
     		return statusEffectsCritical;
@@ -824,13 +728,16 @@ public abstract class AbstractCombatMove {
 		return statusEffects;
 	}
 
+	@Override
 	public List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
     	if(fromExternalFile) {
         	return Util.newArrayListOfValues(criticalDescription);
     	}
+		//TODO copy this into CombatMove.super.getCritRequirements(source, target, enemies, allies);
         return Util.newArrayListOfValues("It's the third time being used this turn.");
     }
     
+	@Override
     public boolean canCrit(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
     	if(fromExternalFile) {
         	String parseText = criticalCondition;
@@ -840,7 +747,7 @@ public abstract class AbstractCombatMove {
         	parseText = parseText.replaceAll("damageType", "DAMAGE_TYPE_"+this.getDamageType(turnIndex, source));
         	
             return Boolean.valueOf(UtilText.parse(source, target, parseText).trim());
-    		
+
     	} else {
 	        // Normally moves crit on every third use per turn.
 	        int thisMoveSelected = 0;
@@ -856,11 +763,8 @@ public abstract class AbstractCombatMove {
 	        return false;
     	}
     }
-    
-    public float getCritStatusEffectDurationMultiplier() {
-    	return 1;
-    }
-    
+
+	@Override
     public Colour getColour() {
     	if(this.getAssociatedSpell() != null) {
 			return this.getAssociatedSpell().getSpellSchool().getColour();
@@ -868,18 +772,11 @@ public abstract class AbstractCombatMove {
 		return this.getType().getColour();
     }
 
-	public Colour getColourByDamageType(int turnIndex, GameCharacter source) {
-		if (Util.newArrayListOfValues(CombatMoveType.SPELL, CombatMoveType.POWER).contains(type)) {
-			return getDamageType(turnIndex, source).getColour();
-		}
-
-		return type.getColour();
-	}
-
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public int getEquipWeighting() {
 		return equipWeighting;
 	}

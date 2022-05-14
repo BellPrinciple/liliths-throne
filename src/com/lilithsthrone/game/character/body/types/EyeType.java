@@ -1,15 +1,12 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractEyeType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.valueEnums.EyeShape;
@@ -22,9 +19,32 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.7
  * @author Innoxia
  */
-public class EyeType {
+public interface EyeType extends BodyPartTypeInterface {
 
-	public static AbstractEyeType HUMAN = new AbstractEyeType(BodyCoveringType.EYE_HUMAN,
+	int getDefaultPairCount();
+
+	EyeShape getDefaultIrisShape();
+
+	EyeShape getDefaultPupilShape();
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		if(gc.getEyePairs()==1) {
+			return "a pair of";
+		}
+		return Util.intToString(gc.getEyePairs())+" pairs of";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return true;
+	}
+
+	public static AbstractEyeType HUMAN = new Special(BodyCoveringType.EYE_HUMAN,
 			Race.HUMAN,
 			1,
 			EyeShape.ROUND,
@@ -40,7 +60,7 @@ public class EyeType {
 			"[npc.SheHasFull] [npc.eyePairs] normal, human eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 	};
 
-	public static AbstractEyeType ANGEL = new AbstractEyeType(BodyCoveringType.EYE_ANGEL,
+	public static AbstractEyeType ANGEL = new Special(BodyCoveringType.EYE_ANGEL,
 			Race.ANGEL,
 			1,
 			EyeShape.ROUND,
@@ -56,7 +76,7 @@ public class EyeType {
 			"[npc.SheHasFull] [npc.eyePairs] angelic eyes, with [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 	};
 
-	public static AbstractEyeType DEMON_COMMON = new AbstractEyeType(BodyCoveringType.EYE_DEMON_COMMON,
+	public static AbstractEyeType DEMON_COMMON = new Special(BodyCoveringType.EYE_DEMON_COMMON,
 			Race.DEMON,
 			1,
 			EyeShape.ROUND,
@@ -82,7 +102,7 @@ public class EyeType {
 		}
 	};
 
-	public static AbstractEyeType DEMON_OWL = new AbstractEyeType(BodyCoveringType.EYE_DEMON_COMMON,
+	public static AbstractEyeType DEMON_OWL = new Special(BodyCoveringType.EYE_DEMON_COMMON,
 			Race.DEMON,
 			1,
 			EyeShape.ROUND,
@@ -101,7 +121,7 @@ public class EyeType {
 		}
 	};
 
-	public static AbstractEyeType CAT_MORPH = new AbstractEyeType(BodyCoveringType.EYE_FELINE,
+	public static AbstractEyeType CAT_MORPH = new Special(BodyCoveringType.EYE_FELINE,
 			Race.CAT_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -122,7 +142,7 @@ public class EyeType {
 		}
 	};
 
-	public static AbstractEyeType COW_MORPH = new AbstractEyeType(BodyCoveringType.EYE_COW_MORPH,
+	public static AbstractEyeType COW_MORPH = new Special(BodyCoveringType.EYE_COW_MORPH,
 			Race.COW_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -143,7 +163,7 @@ public class EyeType {
 		}
 	};
 
-	public static AbstractEyeType DOG_MORPH = new AbstractEyeType(BodyCoveringType.EYE_DOG_MORPH,
+	public static AbstractEyeType DOG_MORPH = new Special(BodyCoveringType.EYE_DOG_MORPH,
 			Race.DOG_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -164,7 +184,7 @@ public class EyeType {
 		}
 	};
 
-	public static AbstractEyeType FOX_MORPH = new AbstractEyeType(BodyCoveringType.EYE_FOX_MORPH,
+	public static AbstractEyeType FOX_MORPH = new Special(BodyCoveringType.EYE_FOX_MORPH,
 			Race.FOX_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -185,7 +205,7 @@ public class EyeType {
 		}
 	};
 
-	public static AbstractEyeType WOLF_MORPH = new AbstractEyeType(BodyCoveringType.EYE_LYCAN,
+	public static AbstractEyeType WOLF_MORPH = new Special(BodyCoveringType.EYE_LYCAN,
 			Race.WOLF_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -206,7 +226,7 @@ public class EyeType {
 		}
 	};
 
-	public static AbstractEyeType SQUIRREL_MORPH = new AbstractEyeType(BodyCoveringType.EYE_SQUIRREL,
+	public static AbstractEyeType SQUIRREL_MORPH = new Special(BodyCoveringType.EYE_SQUIRREL,
 			Race.SQUIRREL_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -223,7 +243,7 @@ public class EyeType {
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 	};
 
-	public static AbstractEyeType RAT_MORPH = new AbstractEyeType(BodyCoveringType.EYE_RAT,
+	public static AbstractEyeType RAT_MORPH = new Special(BodyCoveringType.EYE_RAT,
 			Race.RAT_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -240,7 +260,7 @@ public class EyeType {
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 	};
 
-	public static AbstractEyeType RABBIT_MORPH = new AbstractEyeType(BodyCoveringType.EYE_RABBIT,
+	public static AbstractEyeType RABBIT_MORPH = new Special(BodyCoveringType.EYE_RABBIT,
 			Race.RABBIT_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -257,7 +277,7 @@ public class EyeType {
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 	};
 
-	public static AbstractEyeType BAT_MORPH = new AbstractEyeType(BodyCoveringType.EYE_BAT,
+	public static AbstractEyeType BAT_MORPH = new Special(BodyCoveringType.EYE_BAT,
 			Race.BAT_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -278,7 +298,7 @@ public class EyeType {
 		}
 	};
 
-	public static AbstractEyeType ALLIGATOR_MORPH = new AbstractEyeType(BodyCoveringType.EYE_ALLIGATOR_MORPH,
+	public static AbstractEyeType ALLIGATOR_MORPH = new Special(BodyCoveringType.EYE_ALLIGATOR_MORPH,
 			Race.ALLIGATOR_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -299,7 +319,7 @@ public class EyeType {
 		}
 	};
 
-	public static AbstractEyeType HORSE_MORPH = new AbstractEyeType(BodyCoveringType.EYE_HORSE_MORPH,
+	public static AbstractEyeType HORSE_MORPH = new Special(BodyCoveringType.EYE_HORSE_MORPH,
 			Race.HORSE_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -320,7 +340,7 @@ public class EyeType {
 		}
 	};
 
-	public static AbstractEyeType REINDEER_MORPH = new AbstractEyeType(BodyCoveringType.EYE_REINDEER_MORPH,
+	public static AbstractEyeType REINDEER_MORPH = new Special(BodyCoveringType.EYE_REINDEER_MORPH,
 			Race.REINDEER_MORPH,
 			1,
 			EyeShape.ROUND,
@@ -341,7 +361,7 @@ public class EyeType {
 		}
 	};
 
-	public static AbstractEyeType HARPY = new AbstractEyeType(BodyCoveringType.EYE_HARPY,
+	public static AbstractEyeType HARPY = new Special(BodyCoveringType.EYE_HARPY,
 			Race.HARPY,
 			1,
 			EyeShape.ROUND,
@@ -358,116 +378,58 @@ public class EyeType {
 				+ " They have [npc.irisShape], [npc.irisColour(true)] irises, [npc.pupilShape], [npc.pupilColour(true)] pupils, and [npc.scleraColour(true)] sclerae.") {
 	};
 	
+	class Special extends AbstractEyeType {
 
-	private static List<AbstractEyeType> allEyeTypes;
-	private static Map<AbstractEyeType, String> eyeToIdMap = new HashMap<>();
-	private static Map<String, AbstractEyeType> idToEyeMap = new HashMap<>();
-	
-	static {
-		allEyeTypes = new ArrayList<>();
+		private String id;
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("eye")) {
-					try {
-						AbstractEyeType type = new AbstractEyeType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allEyeTypes.add(type);
-						eyeToIdMap.put(type, id);
-						idToEyeMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
+		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, int defaultPairCount, EyeShape defaultIrisShape, EyeShape defaultPupilShape, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String eyeTransformationDescription, String eyeBodyDescription) {
+			super(coveringType, race, defaultPairCount, defaultIrisShape, defaultPupilShape, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, eyeTransformationDescription, eyeBodyDescription);
 		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("eye")) {
-					try {
-						AbstractEyeType type = new AbstractEyeType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allEyeTypes.add(type);
-						eyeToIdMap.put(type, id);
-						idToEyeMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded eye types:
-		
-		Field[] fields = EyeType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractEyeType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractEyeType ct;
-				try {
-					ct = ((AbstractEyeType) f.get(null));
 
-					eyeToIdMap.put(ct, f.getName());
-					idToEyeMap.put(f.getName(), ct);
-					
-					allEyeTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(EyeType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
 		}
-		
-		Collections.sort(allEyeTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
 	}
-	
+
+	TypeTable<AbstractEyeType> table = new TypeTable<>(
+		EyeType::sanitize,
+		EyeType.class,
+		AbstractEyeType.class,
+		"eye",
+		(f,n,a,m)->new AbstractEyeType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
 	public static AbstractEyeType getEyeTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("IMP")) {
-			return EyeType.DEMON_COMMON;
+			return "DEMON_COMMON";
 		}
 		if(id.equals("LYCAN")) {
-			return EyeType.WOLF_MORPH;
+			return "WOLF_MORPH";
 		}
-		id = Util.getClosestStringMatch(id, idToEyeMap.keySet());
-		return idToEyeMap.get(id);
+		return id;
 	}
-	
+
 	public static String getIdFromEyeType(AbstractEyeType eyeType) {
-		return eyeToIdMap.get(eyeType);
+		return eyeType.getId();
 	}
-	
+
 	public static List<AbstractEyeType> getAllEyeTypes() {
-		return allEyeTypes;
+		return table.listByRace();
 	}
-	
-	private static Map<AbstractRace, List<AbstractEyeType>> typesMap = new HashMap<>();
 	
 	public static List<AbstractEyeType> getEyeTypes(AbstractRace r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractEyeType> types = new ArrayList<>();
-		for(AbstractEyeType type : EyeType.getAllEyeTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of());
 	}
 	
 }

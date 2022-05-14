@@ -26,7 +26,6 @@ import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
-import com.lilithsthrone.game.character.npc.misc.GenericAndrogynousNPC;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.dialogue.DialogueFlagValue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -51,8 +50,9 @@ import com.lilithsthrone.world.places.PlaceType;
  * @version 0.4.0
  * @author Innoxia
  */
-public abstract class AbstractSubspecies {
+public abstract class AbstractSubspecies implements Subspecies {
 
+	String id;
 	private boolean mod;
 	private boolean fromExternalFile;
 
@@ -720,16 +720,18 @@ public abstract class AbstractSubspecies {
 		return fromExternalFile;
 	}
 
-	
+	@Override
+	public String getId() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
 		new AccessException("WARNING: AbstractSubspecies is calling toString()!").printStackTrace(System.err);
 		return Subspecies.getIdFromSubspecies(this);
 	}
 
-	/**
-	 * @return A map of personality traits and the percentage chance that a member of this race will spawn with them.
-	 */
+	@Override
 	public Map<PersonalityTrait, Float> getPersonalityTraitChances() {
 		Map<PersonalityTrait, Float> map = new HashMap<>();
 		
@@ -741,10 +743,8 @@ public abstract class AbstractSubspecies {
 		
 		return map;
 	}
-	
-	/**
-	 * Changes that should be applied to characters of this species upon generation. Called <b>after</b> this Subspecies' Race.applyRaceChanges().
-	 */
+
+	@Override
 	public void applySpeciesChanges(Body body) {
 		// Removed check for Main.game.isStarted() in v0.4.2.5 as it was causing NPCs to spawn in as incorrect subspecies
 		// Tested from new game and everything worked fine, but also added try/catch block to make sure that any unexpected errors don't cause the game to lock up
@@ -756,13 +756,6 @@ public abstract class AbstractSubspecies {
 				ex.printStackTrace();
 			}
 		}
-	}
-
-	/**
-	 * Changes that should be applied to any offspring of this species.
-	 */
-	public void applyOffspringSpeciesChanges(Body body) {
-		applySpeciesChanges(body);
 	}
 
 	public static AbstractSubspecies getMainSubspeciesOfRace(AbstractRace race) {
@@ -786,12 +779,8 @@ public abstract class AbstractSubspecies {
 //		return character.getFleshSubspecies();
 ////		return getSubspeciesFromBody(character.getBody(), character.getBody().getRaceFromPartWeighting());
 //	}
-	
-	/**
-	 * @param body The body being checked.
-	 * @param race The race of the body being checked.
-	 * @return 0 if this Subspecies' requirements are not met by the supplied body/race. Typically return 100 if they are met, or something higher if the Subspecies should have a higher priority.
-	 */
+
+	@Override
 	public int getSubspeciesWeighting(Body body, AbstractRace race) {
 		if(this.isFromExternalFile() && Main.game.isStarted()) {
 			UtilText.setBodyForParsing("targetedBody", body);
@@ -956,14 +945,14 @@ public abstract class AbstractSubspecies {
 		AbstractSubspecies motherHalfDemonSubspecies = motherBody.getHalfDemonSubspecies();
 		AbstractSubspecies fatherSubspecies = fatherBody.getTrueSubspecies();
 		AbstractSubspecies fatherHalfDemonSubspecies = fatherBody.getHalfDemonSubspecies();
-		
+
 		
 		if(startingGender==null) {
 			startingGender = Gender.getGenderFromUserPreferences(Math.random()<motherSubspecies.getRace().getChanceForMaleOffspring()?Femininity.MASCULINE:Femininity.FEMININE);
 		}
-		
+
 		Body preGeneratedBody = null;
-		
+
 		// Any type of demonic mother will result in special cases for offspring:
 		if(motherSubspecies==Subspecies.ELDER_LILIN || motherSubspecies==Subspecies.LILIN || motherSubspecies==Subspecies.DEMON) {
 			if(fatherSubspecies==Subspecies.ELDER_LILIN || fatherSubspecies==Subspecies.LILIN) {
@@ -990,7 +979,7 @@ public abstract class AbstractSubspecies {
 			if(motherHalfDemonSubspecies==Subspecies.HUMAN) {
 				if(fatherSubspecies==Subspecies.ELDER_LILIN || fatherSubspecies==Subspecies.LILIN || fatherSubspecies==Subspecies.DEMON || fatherSubspecies==Subspecies.HALF_DEMON) {
 					if(fatherSubspecies==Subspecies.HALF_DEMON && fatherHalfDemonSubspecies==Subspecies.HUMAN) {
-						preGeneratedBody = Main.game.getCharacterUtils().generateBody(linkedCharacter, startingGender, RacialBody.DEMON, Subspecies.IMP, RaceStage.GREATER);	
+						preGeneratedBody = Main.game.getCharacterUtils().generateBody(linkedCharacter, startingGender, RacialBody.DEMON, Subspecies.IMP, RaceStage.GREATER);
 					} else {
 						preGeneratedBody = Main.game.getCharacterUtils().generateHalfDemonBody(linkedCharacter, startingGender, motherHalfDemonSubspecies, true);
 					}
@@ -1035,75 +1024,48 @@ public abstract class AbstractSubspecies {
 				preGeneratedBody = getPreGeneratedBody(linkedCharacter, startingGender, fatherBody, motherBody);
 			}
 		}
-		
+
 		// Apply genetics:
 		if(preGeneratedBody!=null) {
 			Main.game.getCharacterUtils().applyGenetics(linkedCharacter, preGeneratedBody, motherBody, fatherBody, preGeneratedBody.getRace()==motherBody.getRace());
 		}
-		
+
 		return preGeneratedBody;
 	}
 	
+	@Override
 	public boolean isShortStature() {
 		return shortStature;
 	}
 	
+	@Override
 	public boolean isNonBiped() {
 		return !bipedalSubspecies;
 	}
-	
-	/**
-	 * @return true if this Subspecies is able to self-transform. Race.isAbleToSelfTransform() is factored into this.
-	 */
-	public boolean isAbleToSelfTransform() {
-		return this.getRace().isAbleToSelfTransform();
-	}
-	
+
 	// Items:
 	
+	@Override
 	public String getAttributeItemId() {
 		return attributeItemId;
 	}
-	
-	/**
-	 * @return The ItemType which this Subspecies has as its attribute-related item. <b>Returns null if no item is defined.</b>
-	 */
-	public AbstractItemType getAttributeItem(GameCharacter owner) {
-		if(getAttributeItemId()==null || getAttributeItemId().isEmpty()) {
-//			System.err.println("Warning: AbstractSubspecies is calling getAttributeItem() where attributeItemId does not exist!");
-			return null;	
-		}
-		return ItemType.getItemTypeFromId(getAttributeItemId());
-	}
-	
+
+	@Override
 	public String getTransformativeItemId() {
 		return transformativeItemId;
 	}
 
-	/**
-	 * @return The ItemType which this Subspecies has as its transformation-related item. <b>Returns null if no item is defined.</b>
-	 */
-	public AbstractItemType getTransformativeItem(GameCharacter owner) {
-		if(getTransformativeItemId()==null || getTransformativeItemId().isEmpty()) {
-//			System.err.println("Warning: AbstractSubspecies is calling getTransformativeItem() where transformativeItemId does not exist!");
-			return null;	
-		}
-		return ItemType.getItemTypeFromId(getTransformativeItemId());
-	}
-
+	@Override
 	public AbstractItemType getBook() {
 		return ItemType.getLoreBook(this);
 	}
 	
+	@Override
 	public boolean isMainSubspecies() {
 		return mainSubspecies;
 	}
-	
-	/**
-	 * @return An integer representing how important this Subspecies is to be defined as a character's Subspecies override (meaning that this Subspecies will always be their true Subspecies).
-	 * <b/>Default value is <b>0</b>, which, along with any negative integer value, means that this Subspecies does not set an Override.
-	 *  <br/>A Subspecies which has a higher value than a character's current Subspecies Override will replace the current Override with this one.
-	 */
+
+	@Override
 	public int getSubspeciesOverridePriority() {
 		return subspeciesOverridePriority;
 	}
@@ -1140,12 +1102,8 @@ public abstract class AbstractSubspecies {
 		}
 		return anthroNames;
 	}
- 	
-	/**
-	 * @param   The character whose subspecies's name is to be returned. Can pass in null.
-	 * @param body
-	 * @return  The singular name of this character's subspecies.
-	 */
+
+ 	@Override
 	public String getName(Body body) {
 		if(body !=null) {
 			if(this.isFeralConfigurationAvailable(body) && body.isFeral()) {
@@ -1162,11 +1120,7 @@ public abstract class AbstractSubspecies {
 		return getAnthroNamesMap().get(null)[0];
 	}
 
-	/**
-	 * @param   The character whose subspecies's pluralised name is to be returned. Can pass in null.
-	 * @param body
-	 * @return  The plural name of this character's subspecies.
-	 */
+	@Override
 	public String getNamePlural(Body body) {
 		if(body !=null) {
 			if(this.isFeralConfigurationAvailable(body) && body.isFeral()) {
@@ -1182,12 +1136,8 @@ public abstract class AbstractSubspecies {
 		}
 		return getAnthroNamesMap().get(null)[1];
 	}
-	
-	/**
-	 * @param   The character whose male subspecies name is to be returned. Can pass in null.
-	 * @param body
-	 * @return  The singular male name of this character's subspecies.
-	 */
+
+	@Override
 	public String getSingularMaleName(Body body) {
 		if(body !=null) {
 			if(this.isFeralConfigurationAvailable(body) && body.isFeral()) {
@@ -1204,11 +1154,7 @@ public abstract class AbstractSubspecies {
 		return getAnthroNamesMap().get(null)[2];
 	}
 
-	/**
-	 * @param   The character whose female subspecies name is to be returned. Can pass in null.
-	 * @param body
-	 * @return  The singular female name of this character's subspecies.
-	 */
+	@Override
 	public String getSingularFemaleName(Body body) {
 		if(body !=null) {
 			if(this.isFeralConfigurationAvailable(body) && body.isFeral()) {
@@ -1225,11 +1171,7 @@ public abstract class AbstractSubspecies {
 		return getAnthroNamesMap().get(null)[3];
 	}
 
-	/**
-	 * @param   The character whose male subspecies's pluralised name is to be returned. Can pass in null.
-	 * @param body
-	 * @return  The plural male name of this character's subspecies.
-	 */
+	@Override
 	public String getPluralMaleName(Body body) {
 		if(body !=null) {
 			if(this.isFeralConfigurationAvailable(body) && body.isFeral()) {
@@ -1246,11 +1188,7 @@ public abstract class AbstractSubspecies {
 		return getAnthroNamesMap().get(null)[4];
 	}
 
-	/**
-	 * @param   The character whose female subspecies's pluralised name is to be returned. Can pass in null.
-	 * @param body
-	 * @return  The plural female name of this character's subspecies.
-	 */
+	@Override
 	public String getPluralFemaleName(Body body) {
 		if(body !=null) {
 			if(this.isFeralConfigurationAvailable(body) && body.isFeral()) {
@@ -1267,10 +1205,7 @@ public abstract class AbstractSubspecies {
 		return getAnthroNamesMap().get(null)[5];
 	}
 
-	public String getNonBipedRaceName(Body body) {
-		return getFeralName(body);
-	}
-	
+	@Override
 	public String getFeralName(Body body) {
 		if(isFeralConfigurationAvailable(body)) {
 			return getFeralAttributes(body).getFeralName();
@@ -1278,6 +1213,7 @@ public abstract class AbstractSubspecies {
 		return getAnthroNamesMap().get(null)[0];
 	}
 	
+	@Override
 	public String getFeralNamePlural(Body body) {
 		if(isFeralConfigurationAvailable(body)) {
 			return getFeralAttributes(body).getFeralNamePlural();
@@ -1285,26 +1221,27 @@ public abstract class AbstractSubspecies {
 		return getAnthroNamesMap().get(null)[1];
 	}
 
+	@Override
 	public FeralAttributes getFeralAttributes(Body body) {
 		return feralAttributes;
 	}
 
+	@Override
 	public Nocturnality getNocturnality() {
 		return nocturnality;
 	}
-	
-	public boolean isFeralConfigurationAvailable(Body body) {
-		return getFeralAttributes(body)!=null;
-	}
 
+	@Override
 	public String getStatusEffectDescription(GameCharacter character) {
 		return UtilText.parse(character, statusEffectDescription);
 	}
 
+	@Override
 	public Map<AbstractAttribute, Float> getStatusEffectAttributeModifiers(GameCharacter character) {
 		return statusEffectAttributeModifiers;
 	}
 
+	@Override
 	public Map<PerkCategory, Integer> getPerkWeighting(GameCharacter character) {
 		if(character==null || !character.isFeminine()) {
 			return perkWeightingMasculine;
@@ -1312,6 +1249,7 @@ public abstract class AbstractSubspecies {
 		return perkWeightingFeminine;
 	}
 	
+	@Override
 	public List<String> getExtraEffects(GameCharacter character) {
 		if(character!=null) {
 			List<String> effectsModified = new ArrayList<>(extraEffects);
@@ -1340,20 +1278,13 @@ public abstract class AbstractSubspecies {
 		}
 		return extraEffects;
 	}
-	
-	public List<String> getFeralEffects() {
-		List<String> feralEffects = new ArrayList<>();
-		
-		feralEffects.add("[style.colourUnarmed(Base unarmed damage)] [style.colourExcellent(tripled)]");
-		feralEffects.add("[style.colourExcellent(Immune)] to [style.colourGenericTf(racial transformations)]");
 
-		return feralEffects;
-	}
-	
+	@Override
 	public String getBookName() {
 		return bookName;
 	}
 
+	@Override
 	public String getBookNamePlural() {
 		return bookNamePlural;
 	}
@@ -1362,6 +1293,7 @@ public abstract class AbstractSubspecies {
 		return new File(bookIdFolderPath+System.getProperty("file.separator")+"bookEntries.xml");
 	}
 	
+	@Override
 	public String getBookAuthor() {
 		File bookFile = new File("res/txt/characters/raceInfo.xml");
 		if(this.isFromExternalFile()) {
@@ -1386,6 +1318,7 @@ public abstract class AbstractSubspecies {
 		return "";
 	}
 	
+	@Override
 	public String getBasicDescription(GameCharacter character) {
 		if(this.isFromExternalFile() && getXMLBookFile().exists()) {
 			return UtilText.parseFromXMLFile(new ArrayList<>(), bookIdFolderPath, "bookEntries", getBasicDescriptionId(), new ArrayList<>());
@@ -1393,6 +1326,7 @@ public abstract class AbstractSubspecies {
 		return UtilText.parseFromXMLFile("characters/raceInfo", getBasicDescriptionId());
 	}
 
+	@Override
 	public String getAdvancedDescription(GameCharacter character) {
 		if(this.isFromExternalFile() && getXMLBookFile().exists()) {
 			return UtilText.parseFromXMLFile(new ArrayList<>(), bookIdFolderPath, "bookEntries", getAdvancedDescriptionId(), new ArrayList<>());
@@ -1400,22 +1334,27 @@ public abstract class AbstractSubspecies {
 		return UtilText.parseFromXMLFile("characters/raceInfo", getAdvancedDescriptionId());
 	}
 	
+	@Override
 	public String getBasicDescriptionId() {
 		return basicDescriptionId;
 	}
 
+	@Override
 	public String getAdvancedDescriptionId() {
 		return advancedDescriptionId;
 	}
 
+	@Override
 	public AbstractRace getRace() {
 		return race;
 	}
 
+	@Override
 	public Affinity getAffinity() {
 		return affinity;
 	}
 
+	@Override
 	public Affinity getAffinity(Body body) {
 		switch (body.getLegConfiguration()) {
 //			case ARACHNID:
@@ -1430,6 +1369,7 @@ public abstract class AbstractSubspecies {
 		}
 	}
 
+	@Override
 	public Affinity getAffinity(GameCharacter character) {
 		switch (character.getLegConfiguration()) {
 //			case ARACHNID:
@@ -1444,38 +1384,42 @@ public abstract class AbstractSubspecies {
 		}
 	}
 
-	public AbstractAttribute getDamageMultiplier() {
-		return getRace().getDefaultDamageMultiplier();
-	}
-	
+	@Override
 	public Colour getColour(GameCharacter character) {
 		return colour;
 	}
 	
+	@Override
 	public Colour getSecondaryColour() {
 		return secondaryColour;
 	}
 	
+	@Override
 	public Colour getTertiaryColour() {
 		return tertiaryColour;
 	}
 	
+	@Override
 	public SubspeciesPreference getSubspeciesPreferenceDefault() {
 		return subspeciesPreferenceDefault;
 	}
 	
+	@Override
 	public String getDescription(GameCharacter character) {
 		return description;
 	}
 	
+	@Override
 	public boolean isWinged() {
 		return winged;
 	}
 	
+	@Override
 	public boolean isDoesNotAge() {
 		return doesNotAge;
 	}
 
+	@Override
 	public boolean isAquatic() {
 		return getAffinity() == Affinity.AQUATIC;
 	}
@@ -1484,25 +1428,27 @@ public abstract class AbstractSubspecies {
 	 * @param body The body being checked
 	 * @return true if the supplied body has a LegConfiguration of type TAIL, or if its affinity is AQUATIC.
 	 */
+	@Override
 	public boolean isAquatic(Body body) {
 		return getAffinity(body) == Affinity.AQUATIC;
 	}
-	/**
-	 * @param character The character being checked
-	 * @return true if the supplied body has a LegConfiguration of type TAIL, or if its affinity is AQUATIC.
-	 */
+
+	@Override
 	public boolean isAquatic(GameCharacter character) {
 		return getAffinity(character) == Affinity.AQUATIC;
 	}
 
+	@Override
 	public String getPathName() {
 		return pathName;
 	}
 	
+	@Override
 	public int getIconSize() {
 		return iconSize;
 	}
 	
+	@Override
 	public String getBackgroundPathName() {
 		return backgroundPathName;
 	}
@@ -1645,29 +1591,15 @@ public abstract class AbstractSubspecies {
 		}
 	}
 	
+	@Override
 	public String getBookSVGString() {
 		if(bookSVGString==null) {
 			initBookSVGString();
 		}
 		return bookSVGString;
 	}
-	
-	public String getSVGStringFromBody(Body body) {
-		if(SVGString==null) {
-			initSVGStrings();
-		}
-		if(body.getLoadedSubspecies().getRace()==Race.ELEMENTAL) {
-			GameCharacter character = new Elemental(false);
-			character.setBody(body, true);
-			return getSVGString(character);
-			
-		} else {
-			GameCharacter character = new GenericAndrogynousNPC();
-			character.setBody(body, true);
-			return getSVGString(character);
-		}
-	}
-	
+
+	@Override
 	public String getSVGString(GameCharacter character) {
 		if(SVGString==null) {
 			initSVGStrings();
@@ -1675,6 +1607,7 @@ public abstract class AbstractSubspecies {
 		return getBipedBackground(SVGString, character, this.getColour(character), this.getSecondaryColour(), this.getTertiaryColour());
 	}
 	
+	@Override
 	public String getSVGStringNoBackground() {
 		if(SVGString==null) {
 			initSVGStrings();
@@ -1682,26 +1615,12 @@ public abstract class AbstractSubspecies {
 		return SVGStringNoBackground;
 	}
 
-	public String getSVGStringDesaturatedFromBody(Body body) {
-		if(SVGString==null) {
-			initSVGStrings();
-		}
-		if(body.getLoadedSubspecies().getRace()==Race.ELEMENTAL) {
-			GameCharacter character = new Elemental(false);
-			character.setBody(body, true);
-			return getSVGStringDesaturated(character);
-			
-		} else {
-			GameCharacter character = new GenericAndrogynousNPC();
-			character.setBody(body, true);
-			return getSVGStringDesaturated(character);
-		}
-	}
-
+	@Override
 	public String getSVGStringDesaturated(GameCharacter character) {
 		return getSVGStringDesaturated(character, PresetColour.BASE_GREY);
 	}
 	
+	@Override
 	public String getSVGStringDesaturated(GameCharacter character, Colour colour) {
 		if(SVGString==null) {
 			initSVGStrings();
@@ -1709,6 +1628,7 @@ public abstract class AbstractSubspecies {
 		return getBipedBackground(SVGStringDesaturated, character, colour);
 	}
 
+	@Override
 	public String getSlimeSVGString(GameCharacter character) {
 		if(SVGString==null) {
 			initSVGStrings();
@@ -1716,6 +1636,7 @@ public abstract class AbstractSubspecies {
 		return getBipedBackground(slimeSVGString, character, PresetColour.RACE_SLIME);
 	}
 
+	@Override
 	public String getDollSVGString(GameCharacter character) {
 		if(SVGString==null) {
 			initSVGStrings();
@@ -1723,6 +1644,7 @@ public abstract class AbstractSubspecies {
 		return getBipedBackground(dollSVGString, character, PresetColour.RACE_DOLL);
 	}
 
+	@Override
 	public String getDollSVGStringDesaturated(GameCharacter character) {
 		if(SVGString==null) {
 			initSVGStrings();
@@ -1730,6 +1652,7 @@ public abstract class AbstractSubspecies {
 		return getBipedBackground(dollSVGStringDesaturated, character, PresetColour.RACE_DOLL);
 	}
 
+	@Override
 	public String getHalfDemonSVGString(GameCharacter character) {
 		if(SVGString==null) {
 			initSVGStrings();
@@ -1741,30 +1664,24 @@ public abstract class AbstractSubspecies {
 		}
 	}
 
+	@Override
 	public Map<WorldRegion, SubspeciesSpawnRarity> getRegionLocations() {
 		return regionLocations;
 	}
 
+	@Override
 	public Map<AbstractWorldType, SubspeciesSpawnRarity> getWorldLocations() {
 		return worldLocations;
 	}
 
+	@Override
 	public Map<AbstractPlaceType, SubspeciesSpawnRarity> getPlaceLocations() {
 		return placeLocations;
 	}
-	
-	/**
-	 * @param worldType The world in which this species' spawn availability is to be checked.
-	 * @param placeType An optional place type, which can be null if not needed. If a non-null argument is passed in, this method will return true if either the worldType or the placeType allows for this subspecies to spawn.
-	 * @return true if this subspecies is able to spawn in the worldType, either due to having a spawn chance in that worldType directly, or in the WorldRegion in which that worldType is located.
-	 */
-	public boolean isAbleToNaturallySpawnInLocation(AbstractWorldType worldType, AbstractPlaceType placeType) {
-		return getRegionLocations().containsKey(worldType.getWorldRegion())
-				|| getWorldLocations().containsKey(worldType)
-				|| (placeType!=null && getPlaceLocations().containsKey(placeType));
-	}
-	
+
+	@Override
 	public List<WorldRegion> getMostCommonWorldRegions() {
+		//TODO super
 		List<WorldRegion> mostCommonRegion = Util.newArrayListOfValues();
 		SubspeciesSpawnRarity highestRarity = SubspeciesSpawnRarity.ONE;
 		for(Map.Entry<WorldRegion, SubspeciesSpawnRarity> entry : getRegionLocations().entrySet()) {
@@ -1782,21 +1699,8 @@ public abstract class AbstractSubspecies {
 	public List<SubspeciesFlag> getFlags() {
 		return flags;
 	}
-	
-	public boolean hasFlag(SubspeciesFlag flag) {
-		return getFlags().contains(flag);
-	}
-	
-	/**
-	 * @return A String array of length 6, consisting of:<br/>
-	 * <b>[0]:</b> Singular generic demon name<br/>
-	 * <b>[1]:</b> Plural generic demon name<br/>
-	 * <b>[2]:</b> Singular male demon name<br/>
-	 * <b>[3]:</b> Singular female demon name<br/>
-	 * <b>[4]:</b> Plural male demon name<br/>
-	 * <b>[5]:</b> Plural female demon name<br/>
-	 * @param body
-	 */
+
+	@Override
 	public String[] getHalfDemonName(Body body) {
 		String[] names = null;
 		
@@ -1845,41 +1749,7 @@ public abstract class AbstractSubspecies {
 		return names;
 	}
 
-	public FurryPreference getDefaultFemininePreference() {
-		if(this.isNonBiped()) {
-			return FurryPreference.MINIMUM;
-		}
-		return this.getRace().getDefaultFemininePreference();
-	}
-
-	public FurryPreference getDefaultMasculinePreference() {
-		if(this.isNonBiped()) {
-			return FurryPreference.MINIMUM;
-		}
-		return this.getRace().getDefaultMasculinePreference();
-	}
-
-	/**
-	 * @return true if this subspecies should be displayed in the furry preferences options screen.
-	 */
-	public boolean isDisplayedInFurryPreferences() {
-		return !this.hasFlag(SubspeciesFlag.HIDDEN_FROM_PREFERENCES);
-	}
-
-	/**
-	 * @return true if this subspecies can have its FurryPreference modified in the furry preferences options screen.
-	 */
-	public boolean isFurryPreferencesEnabled() {
-		return race.isAffectedByFurryPreference() && !hasFlag(SubspeciesFlag.DISABLE_FURRY_PREFERENCE);
-	}
-
-	/**
-	 * @return true if this subspecies can have its spawn frequency modified in the furry preferences options screen.
-	 */
-	public boolean isSpawnPreferencesEnabled() {
-		return !this.hasFlag(SubspeciesFlag.DISABLE_SPAWN_PREFERENCE);
-	}
-	
+	@Override
 	public int getBaseSlaveValue(GameCharacter character) {
 		return baseSlaveValue;
 	}

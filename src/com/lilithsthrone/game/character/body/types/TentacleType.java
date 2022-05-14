@@ -1,20 +1,20 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -22,9 +22,231 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.8.9
  * @author Innoxia
  */
-public class TentacleType {
-	
-	public static final AbstractTentacleType NONE = new AbstractTentacleType(
+public interface TentacleType extends BodyPartTypeInterface {
+
+	int getDefaultGirth();
+
+	float getDefaultLengthAsPercentageOfHeight();
+
+	String getTentacleTipNameSingular(GameCharacter gc);
+
+	String getTentacleTipNamePlural(GameCharacter gc);
+
+	String getTentacleTipDescriptor(GameCharacter gc);
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	/**
+	 * @return
+	 * A description of this tentacle's girth, based on the TYPE tag and the owner's girth.
+	 */
+	default String getGirthDescription(GameCharacter owner) {
+		StringBuilder sb = new StringBuilder();
+
+		if(getTags().contains(BodyPartTag.TAIL_TYPE_FUR)) {
+			if(owner.getTentacleCount()>1) {
+				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tentacles] are"));
+			} else {
+				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tentacle] is"));
+			}
+			switch(owner.getTentacleGirth()) {
+			case ZERO_THIN:
+				sb.append(UtilText.parse(owner, " very thin and severely lacking in fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case ONE_SLENDER:
+				sb.append(UtilText.parse(owner, " slender and lacking in fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case TWO_NARROW:
+				sb.append(UtilText.parse(owner, " quite narrow and a little lacking in fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case THREE_AVERAGE:
+				sb.append(UtilText.parse(owner, " of an average thickness and fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case FOUR_GIRTHY:
+				sb.append(UtilText.parse(owner, " quite big and fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			case FIVE_THICK:
+				sb.append(UtilText.parse(owner, " very big and fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			case SIX_CHUBBY:
+				sb.append(UtilText.parse(owner, " incredibly thick and fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			case SEVEN_FAT:
+				sb.append(UtilText.parse(owner, " extremely thick and fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			}
+
+		} else {
+			if(owner.getTentacleCount()>1) {
+				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tentacles] are"));
+			} else {
+				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tentacle] is"));
+			}
+			switch(owner.getTentacleGirth()) {
+			case ZERO_THIN:
+				sb.append(UtilText.parse(owner, " very thin in proportion to the rest of [npc.her] body."));
+				break;
+			case ONE_SLENDER:
+				sb.append(UtilText.parse(owner, " slender in proportion to the rest of [npc.her] body."));
+				break;
+			case TWO_NARROW:
+				sb.append(UtilText.parse(owner, " quite narrow in proportion to the rest of [npc.her] body."));
+				break;
+			case THREE_AVERAGE:
+				sb.append(UtilText.parse(owner, " of an average thickness in proportion to the rest of [npc.her] body."));
+				break;
+			case FOUR_GIRTHY:
+				sb.append(UtilText.parse(owner, " quite thick in proportion to the rest of [npc.her] body."));
+				break;
+			case FIVE_THICK:
+				sb.append(UtilText.parse(owner, " very thick in proportion to the rest of [npc.her] body."));
+				break;
+			case SIX_CHUBBY:
+				sb.append(UtilText.parse(owner, " incredibly thick and girthy in proportion to the rest of [npc.her] body."));
+				break;
+			case SEVEN_FAT:
+				sb.append(UtilText.parse(owner, " extremely thick and girthy in proportion to the rest of [npc.her] body."));
+				break;
+			}
+		}
+		return sb.toString();
+	}
+
+	default String getGirthDescriptor(GameCharacter owner) {
+		return getGirthDescriptor(owner.getTentacleGirth());
+	}
+
+	default String getGirthDescriptor(PenetrationGirth girth) {
+		if(this.getTags().contains(BodyPartTag.TAIL_TYPE_FUR)) {
+			switch(girth) {
+			case ZERO_THIN:
+				return "thin";
+			case ONE_SLENDER:
+				return "slender";
+			case TWO_NARROW:
+				return "narrow";
+			case THREE_AVERAGE:
+				return "fluffy";
+			case FOUR_GIRTHY:
+				return "very-fluffy";
+			case FIVE_THICK:
+				return "extra-fluffy";
+			case SIX_CHUBBY:
+				return "extremely-fluffy";
+			case SEVEN_FAT:
+				return "unbelievably-fluffy";
+			}
+		} else {
+			switch(girth) {
+			case ZERO_THIN:
+				return "thin";
+			case ONE_SLENDER:
+				return "slender";
+			case TWO_NARROW:
+				return "narrow";
+			case THREE_AVERAGE:
+				return "average";
+			case FOUR_GIRTHY:
+				return "thick";
+			case FIVE_THICK:
+				return "extra-thick";
+			case SIX_CHUBBY:
+				return "extremely-thick";
+			case SEVEN_FAT:
+				return "unbelievably-thick";
+			}
+		}
+		return girth.getName();
+	}
+
+	default String getGirthTransformationDescription(GameCharacter owner, boolean positive) {
+		String tentacleText = "[npc.a_tentacleGirth] [npc.tentacle]";
+		if(owner.getTentacleCount()>1) {
+			tentacleText = "[npc.tentacleGirth] [npc.tentacles]";
+		}
+
+		if(positive) {
+			return UtilText.parse(owner,
+			"<p>"
+			+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] [npc.tentacles]."
+			+ " Without any further warning of what's to come, [npc.her]"
+			+(owner.getTentacleCount()>1
+			?" [npc.tentacles] suddenly [style.boldGrow(grow thicker)]."
+			:" [npc.tentacle] suddenly [style.boldGrow(grows thicker)].")
+			+ "<br/>"
+			+ "[npc.She] now [npc.has] [style.boldSex("+tentacleText+")]!"
+			+ "</p>");
+
+		} else {
+			return UtilText.parse(owner,
+			"<p>"
+			+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] [npc.tentacles]."
+			+ " Without any further warning of what's to come, [npc.her]"
+			+(owner.getTentacleCount()>1
+			?" [npc.tentacles] suddenly [style.boldShrink(shrink down)]."
+			:" [npc.tentacle] suddenly [style.boldShrink(shrinks down)].")
+			+ "<br/>"
+			+ "[npc.She] now [npc.has] [style.boldSex("+tentacleText+")]!"
+			+ "</p>");
+		}
+	}
+
+	default String getLengthTransformationDescription(GameCharacter owner, boolean positive) {
+		String heightPercentageDescription = " (length is "+((int)(owner.getTentacleLengthAsPercentageOfHeight()*100))+"% of [npc.namePos] height)";
+		if(positive) {
+			return UtilText.parse(owner,
+			"<p>"
+			+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the [npc.tentacleTip] of each of [npc.her] [npc.tentacles]."
+			+ " Without any further warning of what's to come, [npc.her] [npc.tentacles] suddenly [style.boldGrow(grow longer)]."
+			+ "<br/>"
+			+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.tentacleLength] [npc.tentacles])]"+heightPercentageDescription+"!"
+			+ "</p>");
+
+		} else {
+			return UtilText.parse(owner,
+			"<p>"
+			+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the [npc.tentacleTip] of each of [npc.her] [npc.tentacles]."
+			+ " Without any further warning of what's to come, [npc.her] [npc.tentacles] suddenly [style.boldShrink(shorten)]."
+			+ "<br/>"
+			+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.tentacleLength] [npc.tentacles])]"+heightPercentageDescription+"!"
+			+ "</p>");
+		}
+	}
+
+	default boolean isPrehensile() {
+		return getTags().contains(BodyPartTag.TAIL_PREHENSILE);
+	}
+
+	default boolean isSuitableForPenetration() {
+		return isPrehensile() && getTags().contains(BodyPartTag.TAIL_SUITABLE_FOR_PENETRATION);
+	}
+
+	default boolean isSuitableForSleepHugging() {
+		return getTags().contains(BodyPartTag.TAIL_SLEEP_HUGGING);
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return false;
+	}
+
+	@Override
+	default String getName(GameCharacter gc){
+		if(isDefaultPlural(gc) || gc!=null && gc.getTentacleCount()!=1) {
+			return getNamePlural(gc);
+		} else {
+			return getNameSingular(gc);
+		}
+	}
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(TentacleType.getTentacleTypes(getRace()));
+	}
+
+	public static final AbstractTentacleType NONE = new Special(
 			null,
 			Race.NONE,
 			PenetrationGirth.THREE_AVERAGE,
@@ -49,9 +271,13 @@ public class TentacleType {
 				+ "[npc.Name] now [npc.has] [style.boldTfGeneric(no tentacles)].",
 			"[style.colourDisabled([npc.She] [npc.do] not have any tentacles.)]",
 			Util.newArrayListOfValues()) {
+		@Override
+		public TFModifier getTFModifier() {
+			return TFModifier.REMOVAL;
+		}
 	};
 	
-	public static final AbstractTentacleType DEMON_COMMON = new AbstractTentacleType(
+	public static final AbstractTentacleType DEMON_COMMON = new Special(
 			BodyCoveringType.DEMON_COMMON,
 			Race.DEMON,
 			PenetrationGirth.ONE_SLENDER,
@@ -103,7 +329,7 @@ public class TentacleType {
 					BodyPartTag.TAIL_TAPERING_NONE)) {
 	};
 	
-	public static final AbstractTentacleType LEG_DEMON_OCTOPUS = new AbstractTentacleType(
+	public static final AbstractTentacleType LEG_DEMON_OCTOPUS = new Special(
 			BodyCoveringType.OCTOPUS_SKIN,
 			Race.DEMON,
 			PenetrationGirth.FOUR_GIRTHY,
@@ -128,113 +354,48 @@ public class TentacleType {
 					BodyPartTag.TAIL_TAPERING_NONE)) {
 	};
 	
+	class Special extends AbstractTentacleType {
 
-	private static List<AbstractTentacleType> allTentacleTypes;
-	private static Map<AbstractTentacleType, String> tentacleToIdMap = new HashMap<>();
-	private static Map<String, AbstractTentacleType> idToTentacleMap = new HashMap<>();
-	
-	static {
-		allTentacleTypes = new ArrayList<>();
+		private String id;
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("tentacle")) {
-					try {
-						AbstractTentacleType type = new AbstractTentacleType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allTentacleTypes.add(type);
-						tentacleToIdMap.put(type, id);
-						idToTentacleMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
+		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, PenetrationGirth defaultGirth, float defaultLengthAsPercentageOfHeight, String transformationName, String determiner, String determinerPlural, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String tipName, String tipNamePlural, List<String> tipDescriptorsMasculine, List<String> tipDescriptorsFeminine, String tentacleTransformationDescription, String tentacleBodyDescription, List<BodyPartTag> tags) {
+			super(coveringType, race, defaultGirth, defaultLengthAsPercentageOfHeight, transformationName, determiner, determinerPlural, name, namePlural, descriptorsMasculine, descriptorsFeminine, tipName, tipNamePlural, tipDescriptorsMasculine, tipDescriptorsFeminine, tentacleTransformationDescription, tentacleBodyDescription, tags);
 		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("tentacle")) {
-					try {
-						AbstractTentacleType type = new AbstractTentacleType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allTentacleTypes.add(type);
-						tentacleToIdMap.put(type, id);
-						idToTentacleMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded tentacle types:
-		
-		Field[] fields = TentacleType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractTentacleType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractTentacleType ct;
-				try {
-					ct = ((AbstractTentacleType) f.get(null));
 
-					tentacleToIdMap.put(ct, f.getName());
-					idToTentacleMap.put(f.getName(), ct);
-					
-					allTentacleTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(TentacleType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
 		}
-		
-		Collections.sort(allTentacleTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
 	}
-	
+
+	TypeTable<AbstractTentacleType> table = new TypeTable<>(
+		s->s,
+		TentacleType.class,
+		AbstractTentacleType.class,
+		"tentacle",
+		(f,n,a,m)->new AbstractTentacleType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
 	public static AbstractTentacleType getTentacleTypeFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToTentacleMap.keySet());
-		return idToTentacleMap.get(id);
+		return table.of(id);
 	}
-	
+
 	public static String getIdFromTentacleType(AbstractTentacleType tentacleType) {
-		return tentacleToIdMap.get(tentacleType);
+		return tentacleType.getId();
 	}
-	
+
 	public static List<AbstractTentacleType> getAllTentacleTypes() {
-		return allTentacleTypes;
+		return table.listByRace();
 	}
-	
-	private static Map<AbstractRace, List<AbstractTentacleType>> typesMap = new HashMap<>();
 	
 	public static List<AbstractTentacleType> getTentacleTypes(AbstractRace r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractTentacleType> types = new ArrayList<>();
-		for(AbstractTentacleType type : TentacleType.getAllTentacleTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		if(types.isEmpty()) {
-			types.add(TentacleType.NONE);
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of(NONE));
 	}
 	
 	public static List<AbstractTentacleType> getTentacleTypesSuitableForTransformation(List<AbstractTentacleType> options) {

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lilithsthrone.game.character.body.types.ArmType;
 import com.lilithsthrone.main.Main;
 import org.w3c.dom.Document;
 
@@ -13,13 +14,9 @@ import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.ItemTag;
-import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -27,7 +24,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.9.1
  * @author Innoxia
  */
-public abstract class AbstractArmType implements BodyPartTypeInterface {
+public abstract class AbstractArmType implements ArmType {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -215,19 +212,23 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public boolean isUnderarmHairAllowed() {
 		return underarmHairAllowed;
 	}
 
+	@Override
 	public boolean allowsFlight() {
 		return allowsFlight;
 	}
@@ -235,20 +236,6 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 	@Override
 	public String getTransformationNameOverride() {
 		return transformationName;
-	}
-
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		if(gc.getArmRows()==1) {
-			return "a pair of";
-		} else {
-			return Util.intToString(gc.getArmRows())+" pairs of";
-		}
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
 	}
 
 	@Override
@@ -279,15 +266,18 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 	public AbstractRace getRace() {
 		return race;
 	}
-	
+
+	@Override
 	public String getHandsNameSingular(GameCharacter gc) {
 		return handName;
 	}
-	
+
+	@Override
 	public String getHandsNamePlural(GameCharacter gc) {
 		return handNamePlural;
 	}
 
+	@Override
 	public String getHandsDescriptor(GameCharacter gc) {
 		if (gc.isFeminine()) {
 			return Util.randomItemFrom(handDescriptorsFeminine);
@@ -295,15 +285,18 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 			return Util.randomItemFrom(handDescriptorsMasculine);
 		}
 	}
-	
+
+	@Override
 	public String getFingersNameSingular(GameCharacter gc) {
 		return fingerName;
 	}
-	
+
+	@Override
 	public String getFingersNamePlural(GameCharacter gc) {
 		return fingerNamePlural;
 	}
 
+	@Override
 	public String getFingersDescriptor(GameCharacter gc) {
 		if (gc.isFeminine()) {
 			return Util.randomItemFrom(fingerDescriptorsFeminine);
@@ -313,49 +306,12 @@ public abstract class AbstractArmType implements BodyPartTypeInterface {
 	}
 	
 	@Override
-	public BodyPartClothingBlock getBodyPartClothingBlock() {
-		if(this.getTags().contains(BodyPartTag.ARM_WINGS_FEATHERED)) {
-			return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(
-							InventorySlot.HAND,
-							InventorySlot.WRIST,
-							InventorySlot.TORSO_OVER,
-							InventorySlot.TORSO_UNDER),
-					Race.HARPY,
-					"Due to the fact that [npc.nameHasFull] bird-like wings instead of arms, only specialist clothing can be worn in this slot.",
-					Util.newArrayListOfValues(
-						ItemTag.FITS_FEATHERED_ARM_WINGS,
-						ItemTag.FITS_FEATHERED_ARM_WINGS_EXCLUSIVE,
-						ItemTag.FITS_ARM_WINGS,
-						ItemTag.FITS_ARM_WINGS_EXCLUSIVE
-					));
-		}
-		if(this.getTags().contains(BodyPartTag.ARM_WINGS_LEATHERY)) {
-			return new BodyPartClothingBlock(
-					Util.newArrayListOfValues(
-							InventorySlot.HAND,
-							InventorySlot.WRIST,
-							InventorySlot.TORSO_OVER,
-							InventorySlot.TORSO_UNDER),
-					Race.BAT_MORPH,
-					"Due to the fact that [npc.nameHasFull] leathery wings instead of arms, only specialist clothing can be worn in this slot.",
-					Util.newArrayListOfValues(
-						ItemTag.FITS_LEATHERY_ARM_WINGS,
-						ItemTag.FITS_LEATHERY_ARM_WINGS_EXCLUSIVE,
-						ItemTag.FITS_ARM_WINGS,
-						ItemTag.FITS_ARM_WINGS_EXCLUSIVE
-					));
-		}
-		return null;
-	}
-	
-//	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, armBodyDescription);
 	}
 	
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, armTransformationDescription);
 	}

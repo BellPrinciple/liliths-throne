@@ -1,19 +1,21 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.Body;
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractHornType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
+
+import static com.lilithsthrone.utils.Util.intToString;
 
 /**
  * 
@@ -21,11 +23,89 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public class HornType {
-	
+public interface HornType extends BodyPartTypeInterface {
+
+	boolean isGeneric();
+
+	int getDefaultHornsPerRow();
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return true;
+	}
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		if(gc.getHornRows()==1) {
+			switch(gc.getHornsPerRow()) {
+				case 1:
+					return "a solitary";
+				case 2:
+					return "a pair of";
+				case 3:
+					return "a trio of";
+			}
+			return "a quartet of";
+		}
+		String s;
+		switch(gc.getHornsPerRow()) {
+			case 1:
+				s = " vertically-aligned";
+				break;
+			case 2:
+				s = " pairs of";
+				break;
+			case 3:
+				s = " trios of";
+				break;
+			default:
+				s = " quartets of";
+				break;
+		}
+		return intToString(gc.getHornRows()) + s;
+	}
+
+	@Override
+	default String getName(GameCharacter gc){
+		if(isDefaultPlural(gc) && (gc.getHornsPerRow()>1 || gc.getHornRows()>1)) {
+			return getNamePlural(gc);
+		} else {
+			return getNameSingular(gc);
+		}
+	}
+
+	@Override
+	default String getNameSingular(GameCharacter c) {
+		return "horn";
+	}
+
+	@Override
+	default String getNamePlural(GameCharacter c) {
+		return "horns";
+	}
+
+	@Override
+	default AbstractBodyCoveringType getBodyCoveringType(Body body) {
+		return BodyCoveringType.HORN;
+	}
+
+	@Override
+	default AbstractRace getRace() {
+		return Race.NONE;
+	}
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(HornType.getHornTypes(getRace(),false));
+	}
+
 	// If any more horn types are added, check to see that the potion TFs still work. (5 types is currently the maximum.)
 	
-	public static final AbstractHornType NONE = new AbstractHornType(
+	public static final AbstractHornType NONE = new Special(
 			BodyCoveringType.HORN,
 			Race.NONE,
 			2,
@@ -36,11 +116,15 @@ public class HornType {
 			new ArrayList<>(),
 			"<br/>[npc.Name] now [npc.has] [style.boldTfGeneric(no horns)].",
 			"") {
+		@Override
+		public TFModifier getTFModifier() {
+			return TFModifier.NONE;
+		}
 	};
 
 //	// Cows:
-//	
-//	public static final AbstractHornType BOVINE_CURVED = new AbstractHornType(
+//
+//	public static final AbstractHornType BOVINE_CURVED = new Special(
 //			BodyCoveringType.HORN,
 //			Race.COW_MORPH,
 //			2,
@@ -54,7 +138,7 @@ public class HornType {
 //			"[npc.HornsDeterminer] [npc.hornSize], [npc.hornColour(true)], curved #IFnpc.getTotalHorns()==1#THEN[npc.horn] grows#ELSE[npc.horns] grow#ENDIF out of the #IFnpc.getHornsPerRow()==1#THENmiddle#ELSEupper sides#ENDIF of [npc.her] forehead.") {
 //	};
 //
-//	public static final AbstractHornType BOVINE_STRAIGHT = new AbstractHornType(
+//	public static final AbstractHornType BOVINE_STRAIGHT = new Special(
 //			BodyCoveringType.HORN,
 //			Race.COW_MORPH,
 //			2,
@@ -69,8 +153,8 @@ public class HornType {
 //	};
 
 	// Reindeer:
-	
-	public static final AbstractHornType REINDEER_RACK = new AbstractHornType(
+
+	public static final AbstractHornType REINDEER_RACK = new Special(
 			BodyCoveringType.ANTLER,
 			Race.REINDEER_MORPH,
 			2,
@@ -83,10 +167,10 @@ public class HornType {
 					+ "<br/>[npc.Name] now [npc.has] [npc.hornsDeterminer] [style.boldTfGeneric(reindeer-like #IFnpc.getTotalHorns()==1#THEN[npc.horn]#ELSE[npc.horns]#ENDIF)].",
 			"[npc.HornsDeterminer] [npc.hornSize], [npc.hornColour(true)], multi-branched #IFnpc.getTotalHorns()==1#THEN[npc.horn] grows#ELSE[npc.horns] grow#ENDIF out of the #IFnpc.getHornsPerRow()==1#THENmiddle#ELSEupper sides#ENDIF of [npc.her] forehead.") {
 	};
-	
+
 	// Horse:
-	
-	public static final AbstractHornType HORSE_STRAIGHT = new AbstractHornType(
+
+	public static final AbstractHornType HORSE_STRAIGHT = new Special(
 			BodyCoveringType.HORN,
 			Race.HORSE_MORPH,
 			1,
@@ -102,7 +186,7 @@ public class HornType {
 
 	// Generic:
 
-	public static final AbstractHornType ANTLERS = new AbstractHornType(
+	public static final AbstractHornType ANTLERS = new Special(
 			BodyCoveringType.ANTLER,
 			Race.NONE,
 			2,
@@ -119,8 +203,8 @@ public class HornType {
 			return true;
 		}
 	};
-	
-	public static final AbstractHornType CURLED = new AbstractHornType(
+
+	public static final AbstractHornType CURLED = new Special(
 			BodyCoveringType.HORN,
 			Race.NONE,
 			2,
@@ -137,8 +221,8 @@ public class HornType {
 			return true;
 		}
 	};
-	
-	public static final AbstractHornType SPIRAL = new AbstractHornType(
+
+	public static final AbstractHornType SPIRAL = new Special(
 			BodyCoveringType.HORN,
 			Race.NONE,
 			2,
@@ -155,8 +239,8 @@ public class HornType {
 			return true;
 		}
 	};
-	
-	public static final AbstractHornType CURVED = new AbstractHornType(
+
+	public static final AbstractHornType CURVED = new Special(
 			BodyCoveringType.HORN,
 			Race.NONE,
 			2,
@@ -173,8 +257,8 @@ public class HornType {
 			return true;
 		}
 	};
-	
-	public static final AbstractHornType SWEPT_BACK = new AbstractHornType(
+
+	public static final AbstractHornType SWEPT_BACK = new Special(
 			BodyCoveringType.HORN,
 			Race.NONE,
 			2,
@@ -191,8 +275,8 @@ public class HornType {
 			return true;
 		}
 	};
-	
-	public static final AbstractHornType STRAIGHT = new AbstractHornType(
+
+	public static final AbstractHornType STRAIGHT = new Special(
 			BodyCoveringType.HORN,
 			Race.NONE,
 			2,
@@ -209,102 +293,55 @@ public class HornType {
 			return true;
 		}
 	};
-	
-	
-	private static List<AbstractHornType> allHornTypes;
-	private static Map<AbstractHornType, String> hornToIdMap = new HashMap<>();
-	private static Map<String, AbstractHornType> idToHornMap = new HashMap<>();
-	
-	static {
-		allHornTypes = new ArrayList<>();
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("horn")) {
-					try {
-						AbstractHornType type = new AbstractHornType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allHornTypes.add(type);
-						hornToIdMap.put(type, id);
-						idToHornMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("horn")) {
-					try {
-						AbstractHornType type = new AbstractHornType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allHornTypes.add(type);
-						hornToIdMap.put(type, id);
-						idToHornMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded horn types:
-		
-		Field[] fields = HornType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractHornType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractHornType ct;
-				try {
-					ct = ((AbstractHornType) f.get(null));
+	class Special extends AbstractHornType {
 
-					hornToIdMap.put(ct, f.getName());
-					idToHornMap.put(f.getName(), ct);
-					
-					allHornTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		private String id;
+
+		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, int defaultHornsPerRow, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String hornTransformationDescription, String hornBodyDescription) {
+			super(coveringType, race, defaultHornsPerRow, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, hornTransformationDescription, hornBodyDescription);
 		}
-		
-		Collections.sort(allHornTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
+
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(HornType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
+		}
 	}
-	
+
+	TypeTable<AbstractHornType> table = new TypeTable<>(
+		HornType::sanitize,
+		HornType.class,
+		AbstractHornType.class,
+		"horn",
+		(f,n,a,m)->new AbstractHornType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
 	public static AbstractHornType getHornTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("BOVINE_CURVED")) {
-			return CURVED;
+			return "CURVED";
 		} else if(id.equals("BOVINE_STRAIGHT")) {
-			return STRAIGHT;
+			return "STRAIGHT";
 		}
-		id = Util.getClosestStringMatch(id, idToHornMap.keySet());
-		return idToHornMap.get(id);
+		return id;
 	}
-	
+
 	public static String getIdFromHornType(AbstractHornType hornType) {
-		return hornToIdMap.get(hornType);
+		return hornType.getId();
 	}
-	
+
 	public static List<AbstractHornType> getAllHornTypes() {
-		return allHornTypes;
+		return table.listByRace();
 	}
-	
-	private static Map<AbstractRace, List<AbstractHornType>> typesMap = new HashMap<>();
 	
 	/**
 	 * 
@@ -313,30 +350,11 @@ public class HornType {
 	 * @return A list of HornTypes which are available for this race to have <b>via transformation, not by default</b>. If you want to find out what HornTypes a race has by default, use their RacialBody's getHornTypes() method.
 	 */
 	public static List<AbstractHornType> getHornTypes(AbstractRace race, boolean retainNone) {
-		if(!typesMap.containsKey(race)) {
-			List<AbstractHornType> allTypes = new ArrayList<>();
-			
-			for(AbstractHornType type : HornType.getAllHornTypes()) {
-				if(type.getRace()==race) {
-					allTypes.add(type);
-				}
-			}
-			if(allTypes.isEmpty()) {
-				allTypes.add(HornType.NONE);
-				for(AbstractHornType type : HornType.getAllHornTypes()) {
-					if(type.isGeneric()) {
-						allTypes.add(type);
-					}
-				}
-			}
-			
-			typesMap.put(race, allTypes);
-		}
-		
-		List<AbstractHornType> types = new ArrayList<>(typesMap.get(race));
-		if(!retainNone) {
-			types.remove(HornType.NONE);
-		}
-		return types;
+		var l = table.of(race).orElse(List.of());
+		if(retainNone)
+			return l;
+		var a = new ArrayList<>(l);
+		a.remove(NONE);
+		return a;
 	}
 }

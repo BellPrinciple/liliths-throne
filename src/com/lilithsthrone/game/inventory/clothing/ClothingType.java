@@ -1,31 +1,37 @@
 package com.lilithsthrone.game.inventory.clothing;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.lilithsthrone.controller.xmlParsing.XMLLoadException;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.valueEnums.Femininity;
+import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
+import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.persona.Occupation;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.AbstractSetBonus;
+import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.SetBonus;
+import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.game.inventory.enchanting.TFPotency;
+import com.lilithsthrone.main.Main;
+import com.lilithsthrone.rendering.Pattern;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.ColourListPresets;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -34,8 +40,200 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.7.2
  * @author Innoxia
  */
-public class ClothingType {
-	
+public interface ClothingType extends AbstractCoreType {
+
+	String getId();
+
+	int getBaseValue();
+
+	String equipText(GameCharacter clothingOwner, GameCharacter clothingEquipper, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects);
+
+	String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToUnequipFrom, boolean rough, AbstractClothing clothing, boolean applyEffects);
+
+	String displaceText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotClothingIsEquippedTo, DisplacementType dt, boolean rough);
+
+	String replaceText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotClothingIsEquippedTo, DisplacementType dt, boolean rough);
+
+	boolean isAppendColourName();
+
+	String getDeterminer();
+
+	Boolean isPlural();
+
+	String getName();
+
+	String getNamePlural();
+
+	String getDescription();
+
+	String getAuthorDescription();
+
+	int getFemininityMinimum();
+
+	int getFemininityMaximum();
+
+	Femininity getFemininityRestriction();
+
+	@Deprecated
+	default InventorySlot getSlot() {
+		return getEquipSlots().get(0);
+	}
+
+	List<InventorySlot> getEquipSlots();
+
+	/**
+	 * <b>You should probably be using AbstractClothing's version of this!</b>
+	 */
+	default boolean isConcealsSlot(GameCharacter character, InventorySlot slotToCheck) {
+		return Main.game.getItemGen().generateClothing((AbstractClothingType)this).isConcealsSlot(character, getEquipSlots().get(0), slotToCheck);
+	}
+
+	/**
+	 * <b>You should probably be using AbstractClothing's version of this!</b>
+	 */
+	default boolean isConcealsCoverableArea(GameCharacter character, CoverableArea area) {
+		return Main.game.getItemGen().generateClothing((AbstractClothingType)this).isConcealsCoverableArea(character, getEquipSlots().get(0), area);
+	}
+
+	String getPathName();
+
+	String getPathNameEquipped(GameCharacter characterEquippedTo, InventorySlot invSlot);
+
+	SetBonus getClothingSet();
+
+	ColourReplacement getColourReplacement(int index);
+
+	List<ColourReplacement> getColourReplacements();
+
+	/**
+	 * Used in item generation.
+	 * @param list
+	 * Modifiable sequence of colors.
+	 */
+	default void applyGenerationColourReplacement(List<Colour> list) {
+	}
+
+	String getSVGImage();
+
+	String getSVGImageRandomColour(boolean randomPrimary, boolean randomSecondary, boolean randomTertiary);
+
+	/**
+	 * @param colours This needs to have at least one entry.
+	 */
+	String getSVGImage(InventorySlot slotEquippedTo, List<Colour> colours, String pattern, List<Colour> patternColours, Map<String,String> stickers);
+
+	/**
+	 * @param character The character this clothing is equipped to.
+	 * @param colours This needs to have at least one entry.
+	 */
+	String getSVGEquippedImage(GameCharacter character, InventorySlot slotEquippedTo, List<Colour> colours, String pattern, List<Colour> patternColours, Map<String,String> stickers);
+
+	boolean isPatternAvailable();
+
+	float getPatternChance();
+
+	List<Pattern> getDefaultPatterns();
+
+	ColourReplacement getPatternColourReplacement(int index);
+
+	List<ColourReplacement> getPatternColourReplacements();
+
+	Map<StickerCategory,List<Sticker>> getStickers();
+
+	Rarity getRarity();
+
+	List<ItemEffect> getEffects();
+
+	default boolean isAbleToBeSold() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	default boolean isAbleToBeDropped() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	float getPhysicalResistance();
+
+	// Enchantments:
+
+	default int getEnchantmentLimit() {
+		return 100;
+	}
+
+	default AbstractItemEffectType getEnchantmentEffect() {
+		return ItemEffectType.CLOTHING;
+	}
+
+	default AbstractClothingType getEnchantmentItemType(List<ItemEffect> effects) {
+		return (AbstractClothingType)this;
+	}
+
+	List<ItemTag> getItemTags(InventorySlot slotEquippedTo);
+
+	default List<ItemTag> getDefaultItemTags() {
+		return getItemTags(getEquipSlots().get(0));
+	}
+
+	default boolean isDefaultSlotCondom(InventorySlot slotEquippedTo) {
+		return getItemTags(slotEquippedTo).contains(ItemTag.CONDOM);
+	}
+
+	default boolean isDefaultSlotCondom() {
+		return getDefaultItemTags().contains(ItemTag.CONDOM);
+	}
+
+	boolean isColourDerivedFromPattern();
+
+	// Sex attributes:
+
+	int getPenetrationSelfLength();
+
+	int getPenetrationSelfGirth();
+
+	Set<PenetrationModifier> getPenetrationSelfModifiers();
+
+	int getPenetrationOtherLength();
+
+	int getPenetrationOtherGirth();
+
+	Set<PenetrationModifier> getPenetrationOtherModifiers();
+
+	int getOrificeSelfLabiaSize();
+
+	int getOrificeSelfClitSize();
+
+	int getOrificeSelfClitGirth();
+
+	int getOrificeSelfDepth();
+
+	float getOrificeSelfCapacity();
+
+	int getOrificeSelfElasticity();
+
+	int getOrificeSelfPlasticity();
+
+	int getOrificeSelfWetness();
+
+	Set<OrificeModifier> getOrificeSelfModifiers();
+
+	int getOrificeOtherLabiaSize();
+
+	int getOrificeOtherClitSize();
+
+	int getOrificeOtherClitGirth();
+
+	int getOrificeOtherDepth();
+
+	float getOrificeOtherCapacity();
+
+	int getOrificeOtherElasticity();
+
+	int getOrificeOtherPlasticity();
+
+	int getOrificeOtherWetness();
+
+	Set<OrificeModifier> getOrificeOtherModifiers();
+
 	//TODO
 //	Replace tape crosses with special item "roll of tape"
 //		10 uses, and can:
@@ -1120,7 +1318,7 @@ public class ClothingType {
 			}
 		}
 	};
-	
+
 	public static AbstractClothingType WRIST_SUIT_CUFFS = new AbstractClothingType(100,
 			"a pair of",
 			true,
@@ -2487,526 +2685,423 @@ public class ClothingType {
 		}
 	};
 	
-	
-	private static List<AbstractClothingType> allClothing;
-	private static List<AbstractClothingType> moddedClothingList;
-	private static Map<AbstractSetBonus, List<AbstractClothingType>> setClothing;
-	
-	private static List<InventorySlot> coreClothingSlots;
-	private static List<InventorySlot> lingerieSlots;
-	
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMap;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemale;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMale;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapAndrogynous;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemaleIncludingAndrogynous;
-	private static Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMaleIncludingAndrogynous;
-	
-	private static Map<Occupation, ArrayList<AbstractClothingType>> suitableFeminineClothing = new HashMap<>();
-	
-	private static Map<AbstractClothingType, String> clothingToIdMap = new HashMap<>();
-	private static Map<String, AbstractClothingType> idToClothingMap = new HashMap<>();
-	
-	private static Map<String, String> oldIdConversionMap = new HashMap<>();
-	
+	Collection table = new Collection();
+
+	final class Collection extends Table<AbstractClothingType> {
+
+		private final List<AbstractClothingType> moddedClothingList = new ArrayList<>();
+		private final List<InventorySlot> coreClothingSlots = new ArrayList<>();
+		private final List<InventorySlot> lingerieSlots = new ArrayList<>();
+
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMap = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemale = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMale = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapAndrogynous = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapFemaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
+		private final Map<InventorySlot, List<AbstractClothingType>> commonClothingMapMaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
+
+		private final Map<Occupation, ArrayList<AbstractClothingType>> suitableFeminineClothing = new HashMap<>();
+
+		private Collection() {
+			super(ClothingType::convertOldId);
+			for(InventorySlot slot : InventorySlot.values()) {
+				commonClothingMap.put(slot, new ArrayList<>());
+				commonClothingMapFemale.put(slot, new ArrayList<>());
+				commonClothingMapMale.put(slot, new ArrayList<>());
+				commonClothingMapAndrogynous.put(slot, new ArrayList<>());
+				commonClothingMapFemaleIncludingAndrogynous.put(slot, new ArrayList<>());
+				commonClothingMapMaleIncludingAndrogynous.put(slot, new ArrayList<>());
+			}
+			coreClothingSlots.add(InventorySlot.TORSO_UNDER);
+			coreClothingSlots.add(InventorySlot.LEG);
+			lingerieSlots.add(InventorySlot.CHEST);
+			lingerieSlots.add(InventorySlot.GROIN);
+			lingerieSlots.add(InventorySlot.STOMACH);
+			lingerieSlots.add(InventorySlot.SOCK);
+			forEachMod("/items/clothing",null,null,(f,n,a)->{
+				var v = new AbstractClothingType(f,a) {};
+				v.id = n;
+				moddedClothingList.add(v);
+				add(n,v);
+				if(v.getRarity()==Rarity.COMMON
+						&& !v.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN))
+					categorize(v);
+			});
+			forEachExternal("res/clothing",null,null,(f,n,a)->{
+				var v = new AbstractClothingType(f,a) {};
+				v.id = n;
+				add(n,v);
+				if(v.getRarity()==Rarity.COMMON
+						&& !v.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN))
+					categorize(v);
+			});
+			addFields(ClothingType.class,AbstractClothingType.class,(k,v)->{
+				v.id = k;
+				if(!v.isDefaultSlotCondom()
+						&& v.getRarity()==Rarity.COMMON
+						&& !v.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN))
+					categorize(v);
+			});
+			initialize(this);
+		}
+
+		private void categorize(AbstractClothingType v) {
+			var slot = v.getEquipSlots().get(0);
+			commonClothingMap.get(slot).add(v);
+			if (v.getFemininityRestriction() == Femininity.FEMININE) {
+				commonClothingMapFemale.get(slot).add(v);
+				commonClothingMapFemaleIncludingAndrogynous.get(slot).add(v);
+			} else if (v.getFemininityRestriction() == Femininity.ANDROGYNOUS || v.getFemininityRestriction() == null) {
+				commonClothingMapAndrogynous.get(slot).add(v);
+				commonClothingMapFemaleIncludingAndrogynous.get(slot).add(v);
+				commonClothingMapMaleIncludingAndrogynous.get(slot).add(v);
+			} else if (v.getFemininityRestriction() == Femininity.MASCULINE) {
+				commonClothingMapMale.get(slot).add(v);
+				commonClothingMapMaleIncludingAndrogynous.get(slot).add(v);
+			}
+		}
+	}
+
 	public static AbstractClothingType getClothingTypeFromId(String id) {
-		return getClothingTypeFromId(id, null);
+		return table.of(id);
 	}
 	
 	public static AbstractClothingType getClothingTypeFromId(String id, String slotHint) {
 //		System.out.print("ID: "+id);
 		
-		if(oldIdConversionMap.containsKey(id)) {
-			id = oldIdConversionMap.get(id);
-		}
+		id = convertOldId(id);
 		
-		Map<String, AbstractClothingType> choiceMap = idToClothingMap;
-		if (slotHint!=null && !slotHint.isEmpty()) {
-			try {
-				InventorySlot slot = InventorySlot.valueOf(slotHint);
+		if (slotHint==null || slotHint.isEmpty())
+			return table.of(id);
+
+		Set<String> choice;
+		try {
+			InventorySlot slot = InventorySlot.valueOf(slotHint);
 				
-				// slotHint is present and valid, so filter the clothing map by items that can be equipped to that slot:
-				choiceMap = idToClothingMap.entrySet().parallelStream()
-						.filter(e -> e.getValue().getEquipSlots().contains(slot))
-						.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-			} catch (Exception ex) {
-				String validSlots = InventorySlot.getClothingSlots().stream()
-						.map(InventorySlot::toString).collect(Collectors.joining(", "));
-				System.err.println("Warning: getClothingTypeFromId() invalid slot hint: "
-						+ slotHint + ". Valid slots are: " + validSlots);
-			}
+			// slotHint is present and valid, so filter the clothing map by items that can be equipped to that slot:
+			choice = table.list().parallelStream()
+					.filter(e->e.getEquipSlots().contains(slot))
+					.map(AbstractClothingType::getId)
+					.collect(Collectors.toSet());
+		} catch (Exception ex) {
+			String validSlots = InventorySlot.getClothingSlots().stream()
+					.map(InventorySlot::toString).collect(Collectors.joining(", "));
+			System.err.println("Warning: getClothingTypeFromId() invalid slot hint: "
+					+ slotHint + ". Valid slots are: " + validSlots);
+			return table.of(id);
 		}
-		
-		id = Util.getClosestStringMatch(id, choiceMap.keySet());
-		
-//		System.out.println("  set to: "+id);
-		
-		return idToClothingMap.get(id);
+		return table.exact(Util.getClosestStringMatch(id,choice)).orElse(null);
 	}
-	
+
 	public static String getIdFromClothingType(AbstractClothingType clothingType) {
-		return clothingToIdMap.get(clothingType);
+		return clothingType.getId();
 	}
 
 	public static Map<Occupation, ArrayList<AbstractClothingType>> getSuitableFeminineClothing() {
-		return suitableFeminineClothing;
+		return table.suitableFeminineClothing;
 	}
 
-	static {
-		// Clothing set items:
-		oldIdConversionMap.put("NECK_SNOWFLAKE_NECKLACE", "innoxia_elemental_snowflake_necklace");
-		oldIdConversionMap.put("PIERCING_EAR_SNOW_FLAKES", "innoxia_elemental_piercing_ear_snowflakes");
-		oldIdConversionMap.put("PIERCING_NOSE_SNOWFLAKE_STUD", "innoxia_elemental_piercing_nose_snowflake");
-		
-		oldIdConversionMap.put("NECK_SUN_NECKLACE", "innoxia_elemental_sun_necklace");
-		oldIdConversionMap.put("PIERCING_EAR_SUN", "innoxia_elemental_piercing_ear_sun");
-		oldIdConversionMap.put("PIERCING_NOSE_SUN_STUD", "innoxia_elemental_piercing_nose_sun");
+	private static String convertOldId(String id) {
+		return switch(id) {
+			// Clothing set items:
+			case "NECK_SNOWFLAKE_NECKLACE" -> "innoxia_elemental_snowflake_necklace";
+			case "PIERCING_EAR_SNOW_FLAKES" -> "innoxia_elemental_piercing_ear_snowflakes";
+			case "PIERCING_NOSE_SNOWFLAKE_STUD" -> "innoxia_elemental_piercing_nose_snowflake";
 
-		oldIdConversionMap.put("CATTLE_NECK_COWBELL_COLLAR", "innoxia_cattle_cowbell_collar");
-		oldIdConversionMap.put("CATTLE_PIERCING_EAR_TAGS", "innoxia_cattle_piercing_ear_tag");
-		oldIdConversionMap.put("CATTLE_PIERCING_NOSE_BOVINE_RING", "innoxia_cattle_piercing_nose_ring");
+			case "NECK_SUN_NECKLACE" -> "innoxia_elemental_sun_necklace";
+			case "PIERCING_EAR_SUN" -> "innoxia_elemental_piercing_ear_sun";
+			case "PIERCING_NOSE_SUN_STUD" -> "innoxia_elemental_piercing_nose_sun";
 
-		oldIdConversionMap.put("SOCK_RAINBOW_STOCKINGS", "innoxia_rainbow_stockings");
-		oldIdConversionMap.put("HAND_RAINBOW_FINGERLESS_GLOVES", "innoxia_rainbow_gloves");
+			case "CATTLE_NECK_COWBELL_COLLAR" -> "innoxia_cattle_cowbell_collar";
+			case "CATTLE_PIERCING_EAR_TAGS" -> "innoxia_cattle_piercing_ear_tag";
+			case "CATTLE_PIERCING_NOSE_BOVINE_RING" -> "innoxia_cattle_piercing_nose_ring";
 
-		oldIdConversionMap.put("BDSM_CHASTITY_CAGE", "innoxia_bdsm_chastity_cage");
-		oldIdConversionMap.put("BDSM_PENIS_STRAPON", "innoxia_bdsm_penis_strapon");
-		oldIdConversionMap.put("innoxia_bdsmBracelets_wrist_bracelets", "innoxia_bdsm_wrist_bracelets");
-		oldIdConversionMap.put("BDSM_BALLGAG", "innoxia_bdsm_ballgag");
-		oldIdConversionMap.put("BDSM_RINGGAG", "innoxia_bdsm_ringgag");
-		oldIdConversionMap.put("BDSM_SPREADER_BAR", "innoxia_bdsm_spreaderbar");
-		oldIdConversionMap.put("BDSM_CHOKER", "innoxia_bdsm_choker");
-		oldIdConversionMap.put("BDSM_WRIST_RESTRAINTS", "innoxia_bdsm_wrist_restraints");
-		oldIdConversionMap.put("BDSM_CHASTITY_BELT", "innoxia_bdsm_chastity_belt");
-		oldIdConversionMap.put("BDSM_CHASTITY_BELT_FULL", "innoxia_bdsm_chastity_belt_full");
-		oldIdConversionMap.put("BDSM_KARADA", "innoxia_bdsm_karada");
-		
-		oldIdConversionMap.put("WITCH_HAT", "innoxia_witch_witch_hat");
-		oldIdConversionMap.put("WITCH_DRESS", "innoxia_witch_witch_dress");
-		oldIdConversionMap.put("WITCH_BOOTS", "innoxia_witch_witch_boots");
-		oldIdConversionMap.put("WITCH_BOOTS_THIGH_HIGH", "innoxia_witch_witch_boots_thigh_high");
+			case "SOCK_RAINBOW_STOCKINGS" -> "innoxia_rainbow_stockings";
+			case "HAND_RAINBOW_FINGERLESS_GLOVES" -> "innoxia_rainbow_gloves";
 
-		oldIdConversionMap.put("EYES_SAFETY_GOGGLES", "innoxia_scientist_safety_goggles");
-		oldIdConversionMap.put("SCIENTIST_EYES_SAFETY_GOGGLES", "innoxia_scientist_safety_goggles");
-		oldIdConversionMap.put("SCIENTIST_TORSO_OVER_LAB_COAT", "innoxia_scientist_lab_coat");
+			case "BDSM_CHASTITY_CAGE" -> "innoxia_bdsm_chastity_cage";
+			case "BDSM_PENIS_STRAPON" -> "innoxia_bdsm_penis_strapon";
+			case "innoxia_bdsmBracelets_wrist_bracelets" -> "innoxia_bdsm_wrist_bracelets";
+			case "BDSM_BALLGAG" -> "innoxia_bdsm_ballgag";
+			case "BDSM_RINGGAG" -> "innoxia_bdsm_ringgag";
+			case "BDSM_SPREADER_BAR" -> "innoxia_bdsm_spreaderbar";
+			case "BDSM_CHOKER" -> "innoxia_bdsm_choker";
+			case "BDSM_WRIST_RESTRAINTS" -> "innoxia_bdsm_wrist_restraints";
+			case "BDSM_CHASTITY_BELT" -> "innoxia_bdsm_chastity_belt";
+			case "BDSM_CHASTITY_BELT_FULL" -> "innoxia_bdsm_chastity_belt_full";
+			case "BDSM_KARADA" -> "innoxia_bdsm_karada";
 
-		oldIdConversionMap.put("AMBERS_BITCH_CHOKER", "innoxia_neck_ambers_bitch_collar");
+			case "WITCH_HAT" -> "innoxia_witch_witch_hat";
+			case "WITCH_DRESS" -> "innoxia_witch_witch_dress";
+			case "WITCH_BOOTS" -> "innoxia_witch_witch_boots";
+			case "WITCH_BOOTS_THIGH_HIGH" -> "innoxia_witch_witch_boots_thigh_high";
 
-		oldIdConversionMap.put("KIMONO_HAIR_KANZASHI", "innoxia_japanese_kanzashi");
-		oldIdConversionMap.put("KIMONO_DRESS", "innoxia_japanese_kimono");
-		oldIdConversionMap.put("KIMONO_GETA", "innoxia_japanese_geta");
-		oldIdConversionMap.put("KIMONO_MENS_KIMONO", "innoxia_japanese_mens_kimono");
-		oldIdConversionMap.put("KIMONO_HAORI", "innoxia_japanese_haori");
-		oldIdConversionMap.put("KIMONO_MENS_GETA", "innoxia_japanese_mens_geta");
-		
-		oldIdConversionMap.put("MAID_HEADPIECE", "innoxia_maid_headpiece");
-		oldIdConversionMap.put("MAID_DRESS", "innoxia_maid_dress");
-		oldIdConversionMap.put("MAID_STOCKINGS", "innoxia_maid_stockings");
-		oldIdConversionMap.put("MAID_HEELS", "innoxia_maid_heels");
-		oldIdConversionMap.put("MAID_SLEEVES", "innoxia_maid_sleeves");
-		
-		// Standard items:
-		oldIdConversionMap.put("kobolds_belt_leather_belt", "innoxia_hips_leather_belt");
-		oldIdConversionMap.put("PENIS_CONDOM", "innoxia_penis_condom");
-		
-		oldIdConversionMap.put("ANKLE_BRACELET", "innoxia_ankle_anklet");
-		oldIdConversionMap.put("ANKLE_SHIN_GUARDS", "innoxia_ankle_shin_guards");
-		
-		oldIdConversionMap.put("PIERCING_EAR_RING", "innoxia_piercing_ear_ring");
-		oldIdConversionMap.put("PIERCING_EAR_BASIC_RING", "innoxia_piercing_ear_ring");
-		oldIdConversionMap.put("PIERCING_EAR_HOOPS", "innoxia_piercing_ear_hoops");
-		oldIdConversionMap.put("PIERCING_NOSE_BASIC_RING", "innoxia_piercing_nose_ring");
-		oldIdConversionMap.put("PIERCING_LIP_RINGS", "innoxia_piercing_lip_double_ring");
-		oldIdConversionMap.put("PIERCING_TONGUE_BAR", "innoxia_piercing_basic_barbell");
-		oldIdConversionMap.put("PIERCING_NIPPLE_BARS", "innoxia_piercing_basic_barbell_pair");
-		oldIdConversionMap.put("PIERCING_NAVEL_GEM", "innoxia_piercing_gemstone_barbell");
-		oldIdConversionMap.put("PIERCING_VAGINA_BARBELL_RING", "innoxia_piercing_ringed_barbell");
-		oldIdConversionMap.put("PIERCING_PENIS_RING", "innoxia_piercing_penis_ring");
+			case "EYES_SAFETY_GOGGLES" -> "innoxia_scientist_safety_goggles";
+			case "SCIENTIST_EYES_SAFETY_GOGGLES" -> "innoxia_scientist_safety_goggles";
+			case "SCIENTIST_TORSO_OVER_LAB_COAT" -> "innoxia_scientist_lab_coat";
 
-		oldIdConversionMap.put("EYES_GLASSES", "innoxia_eye_glasses");
-		oldIdConversionMap.put("EYES_AVIATORS", "innoxia_eye_aviators");
-		oldIdConversionMap.put("EYES_PATCH", "innoxia_eye_patch");
+			case "AMBERS_BITCH_CHOKER" -> "innoxia_neck_ambers_bitch_collar";
 
-		oldIdConversionMap.put("MOUTH_BANDANA", "innoxia_mouth_bandana");
-		
-		oldIdConversionMap.put("HEAD_CHEATERS_CIRCLET", "innoxia_head_circlet");
-		oldIdConversionMap.put("HEAD_CIRCLET", "innoxia_head_circlet");
-		oldIdConversionMap.put("HEAD_TIARA", "innoxia_head_tiara");
-		oldIdConversionMap.put("HEAD_CAP", "innoxia_head_cap");
-		oldIdConversionMap.put("HEAD_HEADBAND", "innoxia_head_headband");
-		oldIdConversionMap.put("HEAD_HEADBAND_BOW", "innoxia_head_headband_bow");
-		oldIdConversionMap.put("HEAD_SWEATBAND", "innoxia_head_sweatband");
-		oldIdConversionMap.put("HEAD_COWBOY_HAT", "innoxia_head_cowboy_hat");
-		oldIdConversionMap.put("HEAD_ANTLER_HEADBAND", "innoxia_head_antler_headband");
-		oldIdConversionMap.put("HEAD_SLIME_QUEENS_TIARA", "innoxia_head_slime_queens_tiara");
-		
-		oldIdConversionMap.put("HAND_ELBOWLENGTH_GLOVES", "innoxia_hand_elbow_length_gloves");
-		oldIdConversionMap.put("HAND_GLOVES", "innoxia_hand_gloves");
-		oldIdConversionMap.put("HAND_FINGERLESS_GLOVES", "innoxia_hand_fingerless_gloves");
-		oldIdConversionMap.put("HAND_WRAPS", "innoxia_hand_wraps");
-		oldIdConversionMap.put("HAND_FISHNET_GLOVES", "innoxia_hand_fishnet_gloves");
+			case "KIMONO_HAIR_KANZASHI" -> "innoxia_japanese_kanzashi";
+			case "KIMONO_DRESS" -> "innoxia_japanese_kimono";
+			case "KIMONO_GETA" -> "innoxia_japanese_geta";
+			case "KIMONO_MENS_KIMONO" -> "innoxia_japanese_mens_kimono";
+			case "KIMONO_HAORI" -> "innoxia_japanese_haori";
+			case "KIMONO_MENS_GETA" -> "innoxia_japanese_mens_geta";
 
-		oldIdConversionMap.put("FINGER_RING", "innoxia_finger_ring");
+			case "MAID_HEADPIECE" -> "innoxia_maid_headpiece";
+			case "MAID_DRESS" -> "innoxia_maid_dress";
+			case "MAID_STOCKINGS" -> "innoxia_maid_stockings";
+			case "MAID_HEELS" -> "innoxia_maid_heels";
+			case "MAID_SLEEVES" -> "innoxia_maid_sleeves";
 
-		oldIdConversionMap.put("NECK_ANKH_NECKLACE", "innoxia_neck_ankh_necklace");
-		oldIdConversionMap.put("NECK_BELL_COLLAR", "innoxia_neck_bell_collar");
-		oldIdConversionMap.put("NECK_COLLAR_BOWTIE", "innoxia_neck_collar_bowtie");
-		oldIdConversionMap.put("NECK_HEART_NECKLACE", "innoxia_neck_heart_necklace");
-		oldIdConversionMap.put("NECK_SCARF", "innoxia_neck_scarf");
-		oldIdConversionMap.put("NECK_TIE", "innoxia_neck_tie");
-		oldIdConversionMap.put("NECK_BREEDER_COLLAR", "innoxia_neck_breeder_collar");
-		oldIdConversionMap.put("NECK_SLAVE_COLLAR", "innoxia_bdsm_metal_collar");
+			// Standard items:
+			case "kobolds_belt_leather_belt" -> "innoxia_hips_leather_belt";
+			case "PENIS_CONDOM" -> "innoxia_penis_condom";
 
-		oldIdConversionMap.put("CHEST_LACY_PLUNGE_BRA", "innoxia_chest_lacy_plunge_bra");
-		oldIdConversionMap.put("CHEST_BIKINI", "innoxia_chest_bikini");
-		oldIdConversionMap.put("CHEST_CHEMISE", "innoxia_chest_chemise");
-		oldIdConversionMap.put("CHEST_CROPTOP_BRA", "innoxia_chest_croptop_bra");
-		oldIdConversionMap.put("CHEST_FULLCUP_BRA", "innoxia_chest_fullcup_bra");
-		oldIdConversionMap.put("CHEST_PLUNGE_BRA", "innoxia_chest_plunge_bra");
-		oldIdConversionMap.put("CHEST_NURSING_BRA", "innoxia_chest_nursing_bra");
-		oldIdConversionMap.put("CHEST_OPEN_CUP_BRA", "innoxia_chest_open_cup_bra");
-		oldIdConversionMap.put("CHEST_SARASHI", "innoxia_chest_sarashi");
-		oldIdConversionMap.put("CHEST_SPORTS_BRA", "innoxia_chest_sports_bra");
-		oldIdConversionMap.put("CHEST_STRIPED_BRA", "innoxia_chest_striped_bra");
-		oldIdConversionMap.put("CHEST_SWIMSUIT", "innoxia_chest_swimsuit");
-		oldIdConversionMap.put("CHEST_TUBE_TOP", "innoxia_chest_tube_top");
+			case "ANKLE_BRACELET" -> "innoxia_ankle_anklet";
+			case "ANKLE_SHIN_GUARDS" -> "innoxia_ankle_shin_guards";
 
-		oldIdConversionMap.put("NIPPLE_TAPE_CROSSES", "innoxia_nipple_tape_crosses");
-		
-		oldIdConversionMap.put("LEG_SKIRT", "innoxia_leg_skirt");
-		oldIdConversionMap.put("LEG_PENCIL_SKIRT", "innoxia_leg_pencil_skirt");
-		oldIdConversionMap.put("LEG_MINI_SKIRT", "innoxia_leg_mini_skirt");
-		oldIdConversionMap.put("LEG_MICRO_SKIRT_PLEATED", "innoxia_leg_micro_skirt_pleated");
-		oldIdConversionMap.put("LEG_MICRO_SKIRT_BELTED", "innoxia_leg_micro_skirt_belted");
-		oldIdConversionMap.put("LEG_SHORTS", "innoxia_leg_shorts");
-		oldIdConversionMap.put("LEG_BIKE_SHORTS", "innoxia_leg_bike_shorts");
-		oldIdConversionMap.put("LEG_SPORT_SHORTS", "innoxia_leg_sport_shorts");
-		oldIdConversionMap.put("LEG_HOTPANTS", "innoxia_leg_hotpants");
-		oldIdConversionMap.put("LEG_TIGHT_TROUSERS", "innoxia_leg_tight_jeans");
-		oldIdConversionMap.put("LEG_JEANS", "innoxia_leg_jeans");
-		oldIdConversionMap.put("LEG_TROUSERS", "innoxia_leg_trousers");
-		oldIdConversionMap.put("LEG_CARGO_TROUSERS", "innoxia_leg_cargo_trousers");
-		oldIdConversionMap.put("LEG_YOGA_PANTS", "innoxia_leg_yoga_pants");
-		oldIdConversionMap.put("LEG_ASSLESS_CHAPS", "innoxia_leg_assless_chaps");
-		oldIdConversionMap.put("LEG_CROTCHLESS_CHAPS", "innoxia_leg_crotchless_chaps");
+			case "PIERCING_EAR_RING" -> "innoxia_piercing_ear_ring";
+			case "PIERCING_EAR_BASIC_RING" -> "innoxia_piercing_ear_ring";
+			case "PIERCING_EAR_HOOPS" -> "innoxia_piercing_ear_hoops";
+			case "PIERCING_NOSE_BASIC_RING" -> "innoxia_piercing_nose_ring";
+			case "PIERCING_LIP_RINGS" -> "innoxia_piercing_lip_double_ring";
+			case "PIERCING_TONGUE_BAR" -> "innoxia_piercing_basic_barbell";
+			case "PIERCING_NIPPLE_BARS" -> "innoxia_piercing_basic_barbell_pair";
+			case "PIERCING_NAVEL_GEM" -> "innoxia_piercing_gemstone_barbell";
+			case "PIERCING_VAGINA_BARBELL_RING" -> "innoxia_piercing_ringed_barbell";
+			case "PIERCING_PENIS_RING" -> "innoxia_piercing_penis_ring";
 
-		oldIdConversionMap.put("GROIN_LACY_PANTIES", "innoxia_groin_lacy_panties");
-		oldIdConversionMap.put("GROIN_PANTIES", "innoxia_groin_panties");
-		oldIdConversionMap.put("GROIN_SHIMAPAN", "innoxia_groin_shimapan");
-		oldIdConversionMap.put("GROIN_VSTRING", "innoxia_groin_vstring");
-		oldIdConversionMap.put("GROIN_THONG", "innoxia_groin_thong");
-		oldIdConversionMap.put("GROIN_BIKINI", "innoxia_groin_bikini");
-		oldIdConversionMap.put("GROIN_BOYSHORTS", "innoxia_groin_boyshorts");
-		oldIdConversionMap.put("GROIN_BRIEFS", "innoxia_groin_briefs");
-		oldIdConversionMap.put("GROIN_BOXERS", "innoxia_groin_boxers");
-		oldIdConversionMap.put("GROIN_JOCKSTRAP", "innoxia_groin_jockstrap");
-		oldIdConversionMap.put("GROIN_BACKLESS_PANTIES", "innoxia_groin_backless_panties");
-		oldIdConversionMap.put("GROIN_CROTCHLESS_PANTIES", "innoxia_groin_crotchless_panties");
-		oldIdConversionMap.put("GROIN_CROTCHLESS_THONG", "innoxia_groin_crotchless_thong");
-		oldIdConversionMap.put("GROIN_CROTCHLESS_BRIEFS", "innoxia_groin_crotchless_briefs");
-		
-		oldIdConversionMap.put("FOOT_ANKLE_BOOTS", "innoxia_foot_ankle_boots");
-		oldIdConversionMap.put("FOOT_CHELSEA_BOOTS", "innoxia_foot_chelsea_boots");
-		oldIdConversionMap.put("FOOT_HEELS", "innoxia_foot_heels");
-		oldIdConversionMap.put("FOOT_LOW_TOP_SKATER_SHOES", "innoxia_foot_low_top_skater_shoes");
-		oldIdConversionMap.put("FOOT_MENS_SMART_SHOES", "innoxia_foot_mens_smart_shoes");
-		oldIdConversionMap.put("FOOT_PLATFORM_BOOTS", "innoxia_foot_platform_boots");
-		oldIdConversionMap.put("FOOT_STILETTO_HEELS", "innoxia_foot_stiletto_heels");
-		oldIdConversionMap.put("FOOT_THIGH_HIGH_BOOTS", "innoxia_foot_thigh_high_boots");
-		oldIdConversionMap.put("FOOT_TRAINERS", "innoxia_foot_trainers");
-		oldIdConversionMap.put("FOOT_WORK_BOOTS", "innoxia_foot_work_boots");
+			case "EYES_GLASSES" -> "innoxia_eye_glasses";
+			case "EYES_AVIATORS" -> "innoxia_eye_aviators";
+			case "EYES_PATCH" -> "innoxia_eye_patch";
 
-		oldIdConversionMap.put("TORSO_TSHIRT", "innoxia_torso_tshirt");
-		oldIdConversionMap.put("TORSO_OXFORD_SHIRT", "innoxia_torso_long_sleeved_shirt");
-		oldIdConversionMap.put("TORSO_SHORT_SLEEVE_SHIRT", "innoxia_torso_short_sleeved_shirt");
-		oldIdConversionMap.put("TORSO_BLOUSE", "innoxia_torso_blouse");
-		
-		oldIdConversionMap.put("STOMACH_LOWBACK_BODY", "innoxia_stomach_lowback_body");
-		oldIdConversionMap.put("STOMACH_UNDERBUST_CORSET", "innoxia_stomach_underbust_corset");
-		oldIdConversionMap.put("STOMACH_OVERBUST_CORSET", "innoxia_stomach_overbust_corset");
-		oldIdConversionMap.put("STOMACH_SARASHI", "innoxia_stomach_sarashi");
-		
-		oldIdConversionMap.put("TORSO_OVER_HOODIE", "innoxia_torsoOver_hoodie");
-		oldIdConversionMap.put("TORSO_OVER_OPEN_CARDIGAN", "innoxia_torsoOver_open_front_cardigan");
-		oldIdConversionMap.put("TORSO_OVER_BLAZER", "innoxia_torsoOver_blazer");
-		oldIdConversionMap.put("TORSO_OVER_COAT_DRESS", "innoxia_torsoOver_dress_coat");
-		oldIdConversionMap.put("TORSO_OVER_CLOAK", "innoxia_torsoOver_hooded_cloak");
-		oldIdConversionMap.put("TORSO_RIBBED_SWEATER", "innoxia_torsoOver_ribbed_jumper");
-		oldIdConversionMap.put("TORSO_OVER_CHRISTMAS_SWEATER", "innoxia_torsoOver_christmas_jumper");
-		oldIdConversionMap.put("TORSO_KEYHOLE_SWEATER", "innoxia_torsoOver_keyhole_jumper");
-		oldIdConversionMap.put("TORSO_OVER_SUIT_JACKET", "innoxia_torsoOver_suit_jacket");
-		oldIdConversionMap.put("TORSO_OVER_WOMENS_LEATHER_JACKET", "innoxia_torsoOver_womens_leather_jacket");
-		
-		oldIdConversionMap.put("SOCK_SOCKS", "innoxia_sock_socks");
-		oldIdConversionMap.put("SOCK_TRAINER_SOCKS", "innoxia_sock_trainer_socks");
-		oldIdConversionMap.put("SOCK_KNEEHIGH_SOCKS", "innoxia_sock_kneehigh_socks");
-		oldIdConversionMap.put("SOCK_STOCKINGS", "innoxia_sock_stockings");
-		oldIdConversionMap.put("SOCK_THIGHHIGH_SOCKS", "innoxia_sock_thighhigh_socks");
-		oldIdConversionMap.put("SOCK_THIGHHIGH_SOCKS_STRIPED", "innoxia_sock_thighhigh_socks_striped");
-		oldIdConversionMap.put("SOCK_TIGHTS", "innoxia_sock_pantyhose");
-		oldIdConversionMap.put("SOCK_FISHNET_STOCKINGS", "innoxia_sock_fishnets");
-		oldIdConversionMap.put("SOCK_TOELESS_STRIPED_STOCKINGS", "innoxia_sock_toeless_striped_stockings");
+			case "MOUTH_BANDANA" -> "innoxia_mouth_bandana";
 
-		oldIdConversionMap.put("WRIST_BANGLE", "innoxia_wrist_bangle");
-		
-		oldIdConversionMap.put("innoxia_insertableVibrator_insertable_vibrator", "innoxia_vagina_insertable_dildo");
+			case "HEAD_CHEATERS_CIRCLET" -> "innoxia_head_circlet";
+			case "HEAD_CIRCLET" -> "innoxia_head_circlet";
+			case "HEAD_TIARA" -> "innoxia_head_tiara";
+			case "HEAD_CAP" -> "innoxia_head_cap";
+			case "HEAD_HEADBAND" -> "innoxia_head_headband";
+			case "HEAD_HEADBAND_BOW" -> "innoxia_head_headband_bow";
+			case "HEAD_SWEATBAND" -> "innoxia_head_sweatband";
+			case "HEAD_COWBOY_HAT" -> "innoxia_head_cowboy_hat";
+			case "HEAD_ANTLER_HEADBAND" -> "innoxia_head_antler_headband";
+			case "HEAD_SLIME_QUEENS_TIARA" -> "innoxia_head_slime_queens_tiara";
 
-		oldIdConversionMap.put("dsg_eep_servequipset_enfdjacket_pc", "dsg_eep_servequipset_enfdjacket");
-		
-		
-		commonClothingMap = new EnumMap<>(InventorySlot.class);
-		commonClothingMapFemale = new EnumMap<>(InventorySlot.class);
-		commonClothingMapMale = new EnumMap<>(InventorySlot.class);
-		commonClothingMapAndrogynous = new EnumMap<>(InventorySlot.class);
-		commonClothingMapFemaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
-		commonClothingMapMaleIncludingAndrogynous = new EnumMap<>(InventorySlot.class);
-		
-		for(InventorySlot slot : InventorySlot.values()) {
-			commonClothingMap.put(slot, new ArrayList<>());
-			commonClothingMapFemale.put(slot, new ArrayList<>());
-			commonClothingMapMale.put(slot, new ArrayList<>());
-			commonClothingMapAndrogynous.put(slot, new ArrayList<>());
-			commonClothingMapFemaleIncludingAndrogynous.put(slot, new ArrayList<>());
-			commonClothingMapMaleIncludingAndrogynous.put(slot, new ArrayList<>());
-		}
-		
-		coreClothingSlots = Util.newArrayListOfValues(InventorySlot.TORSO_UNDER, InventorySlot.LEG);
-		lingerieSlots = Util.newArrayListOfValues(InventorySlot.CHEST, InventorySlot.GROIN, InventorySlot.STOMACH, InventorySlot.SOCK);
+			case "HAND_ELBOWLENGTH_GLOVES" -> "innoxia_hand_elbow_length_gloves";
+			case "HAND_GLOVES" -> "innoxia_hand_gloves";
+			case "HAND_FINGERLESS_GLOVES" -> "innoxia_hand_fingerless_gloves";
+			case "HAND_WRAPS" -> "innoxia_hand_wraps";
+			case "HAND_FISHNET_GLOVES" -> "innoxia_hand_fishnet_gloves";
 
-		
-		allClothing = new ArrayList<>();
-		moddedClothingList = new ArrayList<>();
-		
+			case "FINGER_RING" -> "innoxia_finger_ring";
 
-		// Modded clothing types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/items/clothing");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try{
-					String id = innerEntry.getKey();
-					AbstractClothingType ct = new AbstractClothingType(innerEntry.getValue(), entry.getKey()) {};
-					moddedClothingList.add(ct);
-					clothingToIdMap.put(ct, id);
-					idToClothingMap.put(id, ct);
+			case "NECK_ANKH_NECKLACE" -> "innoxia_neck_ankh_necklace";
+			case "NECK_BELL_COLLAR" -> "innoxia_neck_bell_collar";
+			case "NECK_COLLAR_BOWTIE" -> "innoxia_neck_collar_bowtie";
+			case "NECK_HEART_NECKLACE" -> "innoxia_neck_heart_necklace";
+			case "NECK_SCARF" -> "innoxia_neck_scarf";
+			case "NECK_TIE" -> "innoxia_neck_tie";
+			case "NECK_BREEDER_COLLAR" -> "innoxia_neck_breeder_collar";
+			case "NECK_SLAVE_COLLAR" -> "innoxia_bdsm_metal_collar";
 
-					if(ct.getRarity()==Rarity.COMMON && !ct.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN)) {
-						commonClothingMap.get(ct.getEquipSlots().get(0)).add(ct);
-						
-						if (ct.getFemininityRestriction() == Femininity.FEMININE) {
-							commonClothingMapFemale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
-						} else if (ct.getFemininityRestriction() == Femininity.ANDROGYNOUS || ct.getFemininityRestriction() == null) {
-							commonClothingMapAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
-						} else if (ct.getFemininityRestriction() == Femininity.MASCULINE) {
-							commonClothingMapMale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-						}
-					}
-					
-				} catch(XMLLoadException ex){ // we want to catch any errors here; we shouldn't want to load any mods that are invalid as that may cause severe bugs
-					System.err.println("Loading modded clothing failed at 'ClothingType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					System.err.println(ex);
-				}
-			}
-		}
-		
-		allClothing.addAll(moddedClothingList);
-		
-		
-		// External res clothing types:
+			case "CHEST_LACY_PLUNGE_BRA" -> "innoxia_chest_lacy_plunge_bra";
+			case "CHEST_BIKINI" -> "innoxia_chest_bikini";
+			case "CHEST_CHEMISE" -> "innoxia_chest_chemise";
+			case "CHEST_CROPTOP_BRA" -> "innoxia_chest_croptop_bra";
+			case "CHEST_FULLCUP_BRA" -> "innoxia_chest_fullcup_bra";
+			case "CHEST_PLUNGE_BRA" -> "innoxia_chest_plunge_bra";
+			case "CHEST_NURSING_BRA" -> "innoxia_chest_nursing_bra";
+			case "CHEST_OPEN_CUP_BRA" -> "innoxia_chest_open_cup_bra";
+			case "CHEST_SARASHI" -> "innoxia_chest_sarashi";
+			case "CHEST_SPORTS_BRA" -> "innoxia_chest_sports_bra";
+			case "CHEST_STRIPED_BRA" -> "innoxia_chest_striped_bra";
+			case "CHEST_SWIMSUIT" -> "innoxia_chest_swimsuit";
+			case "CHEST_TUBE_TOP" -> "innoxia_chest_tube_top";
 
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/clothing");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey();
-					AbstractClothingType ct = new AbstractClothingType(innerEntry.getValue(), entry.getKey()) {};
-					allClothing.add(ct);
-					clothingToIdMap.put(ct, id);
-					idToClothingMap.put(id, ct);
+			case "NIPPLE_TAPE_CROSSES" -> "innoxia_nipple_tape_crosses";
 
-					if(ct.getRarity()==Rarity.COMMON && !ct.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN)) {
-						commonClothingMap.get(ct.getEquipSlots().get(0)).add(ct);
-						
-						if (ct.getFemininityRestriction() == Femininity.FEMININE) {
-							commonClothingMapFemale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
-						} else if (ct.getFemininityRestriction() == Femininity.ANDROGYNOUS || ct.getFemininityRestriction() == null) {
-							commonClothingMapAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
-						} else if (ct.getFemininityRestriction() == Femininity.MASCULINE) {
-							commonClothingMapMale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-						}
-					}
-					
-				} catch(Exception ex) {
-					System.err.println("Loading clothing failed at 'ClothingType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		
-		// Add in hard-coded clothing:
-		
-		Field[] fields = ClothingType.class.getFields();
-		
-		for(Field f : fields) {
-			if (AbstractClothingType.class.isAssignableFrom(f.getType())) {
-				AbstractClothingType ct;
-				try {
-					ct = ((AbstractClothingType) f.get(null));
+			case "LEG_SKIRT" -> "innoxia_leg_skirt";
+			case "LEG_PENCIL_SKIRT" -> "innoxia_leg_pencil_skirt";
+			case "LEG_MINI_SKIRT" -> "innoxia_leg_mini_skirt";
+			case "LEG_MICRO_SKIRT_PLEATED" -> "innoxia_leg_micro_skirt_pleated";
+			case "LEG_MICRO_SKIRT_BELTED" -> "innoxia_leg_micro_skirt_belted";
+			case "LEG_SHORTS" -> "innoxia_leg_shorts";
+			case "LEG_BIKE_SHORTS" -> "innoxia_leg_bike_shorts";
+			case "LEG_SPORT_SHORTS" -> "innoxia_leg_sport_shorts";
+			case "LEG_HOTPANTS" -> "innoxia_leg_hotpants";
+			case "LEG_TIGHT_TROUSERS" -> "innoxia_leg_tight_jeans";
+			case "LEG_JEANS" -> "innoxia_leg_jeans";
+			case "LEG_TROUSERS" -> "innoxia_leg_trousers";
+			case "LEG_CARGO_TROUSERS" -> "innoxia_leg_cargo_trousers";
+			case "LEG_YOGA_PANTS" -> "innoxia_leg_yoga_pants";
+			case "LEG_ASSLESS_CHAPS" -> "innoxia_leg_assless_chaps";
+			case "LEG_CROTCHLESS_CHAPS" -> "innoxia_leg_crotchless_chaps";
 
-					// I feel like this is stupid :thinking:
-					clothingToIdMap.put(ct, f.getName());
-					idToClothingMap.put(f.getName(), ct);
-					
-					allClothing.add(ct);
-					
-					if(ct.isDefaultSlotCondom()) {
-						continue;
-					}
-					
-					if(ct.getRarity()==Rarity.COMMON && !ct.getDefaultItemTags().contains(ItemTag.NO_RANDOM_SPAWN)) {
-						commonClothingMap.get(ct.getEquipSlots().get(0)).add(ct);
-						
-						if (ct.getFemininityRestriction() == Femininity.FEMININE) {
-							commonClothingMapFemale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
-						} else if (ct.getFemininityRestriction() == Femininity.ANDROGYNOUS || ct.getFemininityRestriction() == null) {
-							commonClothingMapAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapFemaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-							
-						} else if (ct.getFemininityRestriction() == Femininity.MASCULINE) {
-							commonClothingMapMale.get(ct.getEquipSlots().get(0)).add(ct);
-							commonClothingMapMaleIncludingAndrogynous.get(ct.getEquipSlots().get(0)).add(ct);
-						}
-					}
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+			case "GROIN_LACY_PANTIES" -> "innoxia_groin_lacy_panties";
+			case "GROIN_PANTIES" -> "innoxia_groin_panties";
+			case "GROIN_SHIMAPAN" -> "innoxia_groin_shimapan";
+			case "GROIN_VSTRING" -> "innoxia_groin_vstring";
+			case "GROIN_THONG" -> "innoxia_groin_thong";
+			case "GROIN_BIKINI" -> "innoxia_groin_bikini";
+			case "GROIN_BOYSHORTS" -> "innoxia_groin_boyshorts";
+			case "GROIN_BRIEFS" -> "innoxia_groin_briefs";
+			case "GROIN_BOXERS" -> "innoxia_groin_boxers";
+			case "GROIN_JOCKSTRAP" -> "innoxia_groin_jockstrap";
+			case "GROIN_BACKLESS_PANTIES" -> "innoxia_groin_backless_panties";
+			case "GROIN_CROTCHLESS_PANTIES" -> "innoxia_groin_crotchless_panties";
+			case "GROIN_CROTCHLESS_THONG" -> "innoxia_groin_crotchless_thong";
+			case "GROIN_CROTCHLESS_BRIEFS" -> "innoxia_groin_crotchless_briefs";
 
-		setClothing = new HashMap<>();
-		for(AbstractClothingType ct : allClothing) {
-			if(ct.getClothingSet()!=null) {
-				setClothing.putIfAbsent(ct.getClothingSet(), new ArrayList<>());
-				setClothing.get(ct.getClothingSet()).add(ct);
-			}
-		}
-		
-//  	System.out.println(allClothing.size());
-		
+			case "FOOT_ANKLE_BOOTS" -> "innoxia_foot_ankle_boots";
+			case "FOOT_CHELSEA_BOOTS" -> "innoxia_foot_chelsea_boots";
+			case "FOOT_HEELS" -> "innoxia_foot_heels";
+			case "FOOT_LOW_TOP_SKATER_SHOES" -> "innoxia_foot_low_top_skater_shoes";
+			case "FOOT_MENS_SMART_SHOES" -> "innoxia_foot_mens_smart_shoes";
+			case "FOOT_PLATFORM_BOOTS" -> "innoxia_foot_platform_boots";
+			case "FOOT_STILETTO_HEELS" -> "innoxia_foot_stiletto_heels";
+			case "FOOT_THIGH_HIGH_BOOTS" -> "innoxia_foot_thigh_high_boots";
+			case "FOOT_TRAINERS" -> "innoxia_foot_trainers";
+			case "FOOT_WORK_BOOTS" -> "innoxia_foot_work_boots";
+
+			case "TORSO_TSHIRT" -> "innoxia_torso_tshirt";
+			case "TORSO_OXFORD_SHIRT" -> "innoxia_torso_long_sleeved_shirt";
+			case "TORSO_SHORT_SLEEVE_SHIRT" -> "innoxia_torso_short_sleeved_shirt";
+			case "TORSO_BLOUSE" -> "innoxia_torso_blouse";
+
+			case "STOMACH_LOWBACK_BODY" -> "innoxia_stomach_lowback_body";
+			case "STOMACH_UNDERBUST_CORSET" -> "innoxia_stomach_underbust_corset";
+			case "STOMACH_OVERBUST_CORSET" -> "innoxia_stomach_overbust_corset";
+			case "STOMACH_SARASHI" -> "innoxia_stomach_sarashi";
+
+			case "TORSO_OVER_HOODIE" -> "innoxia_torsoOver_hoodie";
+			case "TORSO_OVER_OPEN_CARDIGAN" -> "innoxia_torsoOver_open_front_cardigan";
+			case "TORSO_OVER_BLAZER" -> "innoxia_torsoOver_blazer";
+			case "TORSO_OVER_COAT_DRESS" -> "innoxia_torsoOver_dress_coat";
+			case "TORSO_OVER_CLOAK" -> "innoxia_torsoOver_hooded_cloak";
+			case "TORSO_RIBBED_SWEATER" -> "innoxia_torsoOver_ribbed_jumper";
+			case "TORSO_OVER_CHRISTMAS_SWEATER" -> "innoxia_torsoOver_christmas_jumper";
+			case "TORSO_KEYHOLE_SWEATER" -> "innoxia_torsoOver_keyhole_jumper";
+			case "TORSO_OVER_SUIT_JACKET" -> "innoxia_torsoOver_suit_jacket";
+			case "TORSO_OVER_WOMENS_LEATHER_JACKET" -> "innoxia_torsoOver_womens_leather_jacket";
+
+			case "SOCK_SOCKS" -> "innoxia_sock_socks";
+			case "SOCK_TRAINER_SOCKS" -> "innoxia_sock_trainer_socks";
+			case "SOCK_KNEEHIGH_SOCKS" -> "innoxia_sock_kneehigh_socks";
+			case "SOCK_STOCKINGS" -> "innoxia_sock_stockings";
+			case "SOCK_THIGHHIGH_SOCKS" -> "innoxia_sock_thighhigh_socks";
+			case "SOCK_THIGHHIGH_SOCKS_STRIPED" -> "innoxia_sock_thighhigh_socks_striped";
+			case "SOCK_TIGHTS" -> "innoxia_sock_pantyhose";
+			case "SOCK_FISHNET_STOCKINGS" -> "innoxia_sock_fishnets";
+			case "SOCK_TOELESS_STRIPED_STOCKINGS" -> "innoxia_sock_toeless_striped_stockings";
+
+			case "WRIST_BANGLE" -> "innoxia_wrist_bangle";
+
+			case "innoxia_insertableVibrator_insertable_vibrator" -> "innoxia_vagina_insertable_dildo";
+
+			case "dsg_eep_servequipset_enfdjacket_pc" -> "dsg_eep_servequipset_enfdjacket";
+			default -> id;
+		};
+	}
+
+	private static void initialize(Collection table) {
 		//TODO shouldn't this be handled in outfit files?
-		suitableFeminineClothing.put(Occupation.NPC_PROSTITUTE,
+		table.suitableFeminineClothing.put(Occupation.NPC_PROSTITUTE,
 				Util.newArrayListOfValues(
-						ClothingType.getClothingTypeFromId("innoxia_ankle_anklet"),
-						ClothingType.getClothingTypeFromId("innoxia_chest_lacy_plunge_bra"),
-						
-						ClothingType.getClothingTypeFromId("innoxia_chest_open_cup_bra"),
-						ClothingType.getClothingTypeFromId("innoxia_chest_plunge_bra"),
-						ClothingType.getClothingTypeFromId("innoxia_eye_aviators"),
-						ClothingType.getClothingTypeFromId("innoxia_finger_ring"),
-						ClothingType.getClothingTypeFromId("innoxia_foot_chelsea_boots"),
-						ClothingType.getClothingTypeFromId("innoxia_foot_ankle_boots"),
-						ClothingType.getClothingTypeFromId("innoxia_foot_heels"),
-						ClothingType.getClothingTypeFromId("innoxia_foot_thigh_high_boots"),
-						ClothingType.getClothingTypeFromId("innoxia_foot_stiletto_heels"),
-						ClothingType.getClothingTypeFromId("innoxia_groin_backless_panties"),
-						ClothingType.getClothingTypeFromId("innoxia_groin_crotchless_panties"),
-						ClothingType.getClothingTypeFromId("innoxia_groin_crotchless_thong"),
-						ClothingType.getClothingTypeFromId("innoxia_groin_lacy_panties"),
-						ClothingType.getClothingTypeFromId("innoxia_groin_thong"),
-						ClothingType.getClothingTypeFromId("innoxia_groin_vstring"),
-						ClothingType.getClothingTypeFromId("innoxia_hand_elbow_length_gloves"),
-						ClothingType.getClothingTypeFromId("innoxia_head_headband"),
-						ClothingType.getClothingTypeFromId("innoxia_head_headband_bow"),
-						ClothingType.getClothingTypeFromId("innoxia_leg_crotchless_chaps"),
-						ClothingType.getClothingTypeFromId("innoxia_leg_micro_skirt_belted"),
-						ClothingType.getClothingTypeFromId("innoxia_leg_micro_skirt_pleated"),
-						ClothingType.getClothingTypeFromId("innoxia_leg_mini_skirt"),
-						ClothingType.getClothingTypeFromId("innoxia_leg_skirt"),
-						ClothingType.getClothingTypeFromId("innoxia_neck_heart_necklace"),
-						ClothingType.getClothingTypeFromId("innoxia_neck_ankh_necklace"),
-						ClothingType.getClothingTypeFromId("innoxia_nipple_tape_crosses"),
-						ClothingType.getClothingTypeFromId("innoxia_hand_fishnet_gloves"),
-						ClothingType.getClothingTypeFromId("innoxia_sock_fishnets"),
-						ClothingType.getClothingTypeFromId("innoxia_sock_pantyhose"),
-						ClothingType.getClothingTypeFromId("innoxia_stomach_overbust_corset"),
-						ClothingType.getClothingTypeFromId("innoxia_stomach_underbust_corset"),
+						table.of("innoxia_ankle_anklet"),
+						table.of("innoxia_chest_lacy_plunge_bra"),
+
+						table.of("innoxia_chest_open_cup_bra"),
+						table.of("innoxia_chest_plunge_bra"),
+						table.of("innoxia_eye_aviators"),
+						table.of("innoxia_finger_ring"),
+						table.of("innoxia_foot_chelsea_boots"),
+						table.of("innoxia_foot_ankle_boots"),
+						table.of("innoxia_foot_heels"),
+						table.of("innoxia_foot_thigh_high_boots"),
+						table.of("innoxia_foot_stiletto_heels"),
+						table.of("innoxia_groin_backless_panties"),
+						table.of("innoxia_groin_crotchless_panties"),
+						table.of("innoxia_groin_crotchless_thong"),
+						table.of("innoxia_groin_lacy_panties"),
+						table.of("innoxia_groin_thong"),
+						table.of("innoxia_groin_vstring"),
+						table.of("innoxia_hand_elbow_length_gloves"),
+						table.of("innoxia_head_headband"),
+						table.of("innoxia_head_headband_bow"),
+						table.of("innoxia_leg_crotchless_chaps"),
+						table.of("innoxia_leg_micro_skirt_belted"),
+						table.of("innoxia_leg_micro_skirt_pleated"),
+						table.of("innoxia_leg_mini_skirt"),
+						table.of("innoxia_leg_skirt"),
+						table.of("innoxia_neck_heart_necklace"),
+						table.of("innoxia_neck_ankh_necklace"),
+						table.of("innoxia_nipple_tape_crosses"),
+						table.of("innoxia_hand_fishnet_gloves"),
+						table.of("innoxia_sock_fishnets"),
+						table.of("innoxia_sock_pantyhose"),
+						table.of("innoxia_stomach_overbust_corset"),
+						table.of("innoxia_stomach_underbust_corset"),
 						ClothingType.TORSO_FISHNET_TOP,
 						ClothingType.TORSO_KEYHOLE_CROPTOP,
 						ClothingType.TORSO_SHORT_CROPTOP,
 						ClothingType.getClothingTypeFromId("innoxia_wrist_bangle"),
 						ClothingType.WRIST_WOMENS_WATCH,
-						
-						ClothingType.getClothingTypeFromId("innoxia_piercing_ear_ring"),
-						ClothingType.getClothingTypeFromId("innoxia_piercing_lip_double_ring"),
-						ClothingType.getClothingTypeFromId("innoxia_piercing_gemstone_barbell"),
-						ClothingType.getClothingTypeFromId("innoxia_piercing_basic_barbell_pair"),
-						ClothingType.getClothingTypeFromId("innoxia_piercing_nose_ring"),
-						ClothingType.getClothingTypeFromId("innoxia_piercing_penis_ring"),
-						ClothingType.getClothingTypeFromId("innoxia_piercing_basic_barbell"),
-						ClothingType.getClothingTypeFromId("innoxia_piercing_ringed_barbell")));
+
+						table.of("innoxia_piercing_ear_ring"),
+						table.of("innoxia_piercing_lip_double_ring"),
+						table.of("innoxia_piercing_gemstone_barbell"),
+						table.of("innoxia_piercing_basic_barbell_pair"),
+						table.of("innoxia_piercing_nose_ring"),
+						table.of("innoxia_piercing_penis_ring"),
+						table.of("innoxia_piercing_basic_barbell"),
+						table.of("innoxia_piercing_ringed_barbell")));
 	}
 	
 	public static List<AbstractClothingType> getAllClothing() {
-		return allClothing;
+		return table.list();
 	}
 	
 	public static List<AbstractClothingType> getAllClothingInSet(AbstractSetBonus setBonus) {
-		return setClothing.get(setBonus);
+		return table.list().stream().filter(c -> setBonus.equals(c.getClothingSet())).toList();
 	}
 
 	public static List<AbstractClothingType> getModdedClothingList() {
-		return moddedClothingList;
+		return table.moddedClothingList;
 	}
 
 	public static List<InventorySlot> getCoreClothingSlots() {
-		return coreClothingSlots;
+		return table.coreClothingSlots;
 	}
 
 	public static List<InventorySlot> getLingerieSlots() {
-		return lingerieSlots;
+		return table.lingerieSlots;
 	}
 	
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMap() {
-		return commonClothingMap;
+		return table.commonClothingMap;
 	}
 
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapFemale() {
-		return commonClothingMapFemale;
+		return table.commonClothingMapFemale;
 	}
 
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapMale() {
-		return commonClothingMapMale;
+		return table.commonClothingMapMale;
 	}
 
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapAndrogynous() {
-		return commonClothingMapAndrogynous;
+		return table.commonClothingMapAndrogynous;
 	}
 	
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapFemaleIncludingAndrogynous() {
-		return commonClothingMapFemaleIncludingAndrogynous;
+		return table.commonClothingMapFemaleIncludingAndrogynous;
 	}
 	
 	public static Map<InventorySlot, List<AbstractClothingType>> getCommonClothingMapMaleIncludingAndrogynous() {
-		return commonClothingMapMaleIncludingAndrogynous;
+		return table.commonClothingMapMaleIncludingAndrogynous;
 	}
 
 }

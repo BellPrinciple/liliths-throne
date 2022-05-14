@@ -12,7 +12,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.AntennaType;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -23,7 +23,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractAntennaType implements BodyPartTypeInterface {
+public abstract class AbstractAntennaType implements AntennaType {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -97,7 +97,7 @@ public abstract class AbstractAntennaType implements BodyPartTypeInterface {
 
 				this.mod = mod;
 				this.fromExternalFile = true;
-				
+
 				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
 				this.coveringType = BodyCoveringType.getBodyCoveringTypeFromId(coreElement.getMandatoryFirstOf("coveringType").getTextContent());
 				
@@ -132,11 +132,13 @@ public abstract class AbstractAntennaType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
@@ -145,40 +147,10 @@ public abstract class AbstractAntennaType implements BodyPartTypeInterface {
 	public String getTransformationNameOverride() {
 		return transformationName;
 	}
-	
-	public int getDefaultAntennaePerRow() {
-		return defaultAntennaePerRow;
-	}
 
 	@Override
-	public String getDeterminer(GameCharacter gc) {
-		if(gc.getAntennaRows()==1) {
-			if(gc.getAntennaePerRow()==1) {
-				return "a solitary";
-			} else if(gc.getAntennaePerRow()==2) {
-				return "a pair of";
-			} else if(gc.getAntennaePerRow()==3) {
-				return "a trio of";
-			} else {
-				return "a quartet of";
-			}
-			
-		} else {
-			if(gc.getAntennaePerRow()==1) {
-				return Util.intToString(gc.getAntennaRows())+" vertically-aligned";
-			} else if(gc.getAntennaePerRow()==2) {
-				return Util.intToString(gc.getAntennaRows())+" pairs of";
-			} else if(gc.getAntennaePerRow()==3) {
-				return Util.intToString(gc.getAntennaRows())+" trios of";
-			} else {
-				return Util.intToString(gc.getAntennaRows())+" quartets of";
-			}
-		}
-	}
-	
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
+	public int getDefaultAntennaePerRow() {
+		return defaultAntennaePerRow;
 	}
 	
 	@Override
@@ -210,12 +182,12 @@ public abstract class AbstractAntennaType implements BodyPartTypeInterface {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, antennaBodyDescription);
 	}
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, antennaTransformationDescription);
 	}

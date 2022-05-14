@@ -1,12 +1,8 @@
 package com.lilithsthrone.game.dialogue.utils;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.npc.NPC;
@@ -125,6 +121,7 @@ import com.lilithsthrone.game.character.npc.submission.SlimeRoyalGuard;
 import com.lilithsthrone.game.character.npc.submission.Takahashi;
 import com.lilithsthrone.game.character.npc.submission.Vengar;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -132,8 +129,16 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4.2
  * @author Innoxia
  */
-public class ParserTarget {
-	
+public interface ParserTarget {
+
+	String getId();
+
+	List<String> getTags();
+
+	String getDescription();
+
+	GameCharacter getCharacter(String tag, List<GameCharacter> specialNPCList);
+
 	public static AbstractParserTarget STYLE = new AbstractParserTarget(Util.newArrayListOfValues(
 			"style",
 			"game",
@@ -1559,26 +1564,17 @@ public class ParserTarget {
 			return Main.game.getNpc(Fiammetta.class);
 		}
 	};
-	
-	
-	/** A list of the hard-coded parser targets above. */
-	private static List<AbstractParserTarget> coreParserTargets = new ArrayList<>();
-	
-	private static List<AbstractParserTarget> allParserTargets = new CopyOnWriteArrayList<>(); // Need this to be thread safe as it has elements added to it during Game.class's 'Load NPCs' section
-	private static Map<AbstractParserTarget, String> parserTargetToIdMap = new HashMap<>();
-	private static Map<String, AbstractParserTarget> idToParserTargetMap = new HashMap<>();
 
 	public static List<AbstractParserTarget> getAllParserTargets() {
-		return allParserTargets;
+		return table.list();
 	}
 	
 	public static AbstractParserTarget getParserTargetFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToParserTargetMap.keySet());
-		return idToParserTargetMap.get(id);
+		return table.of(id);
 	}
 
 	public static String getIdFromParserTarget(AbstractParserTarget parserTarget) {
-		return parserTargetToIdMap.get(parserTarget);
+		return parserTarget.getId();
 	}
 
 	/**
@@ -1594,15 +1590,15 @@ public class ParserTarget {
 				return target;
 			}
 		};
-		if(idToParserTargetMap.containsKey(tag)) {
+		var existing = table.exact(tag);
+		if(existing.isPresent()) {
 //			System.err.println("Warning: Parser target of '"+tag+"' has been replaced!");
-			removeAdditionalParserTarget((NPC) idToParserTargetMap.get(tag).getCharacter(null, null));
+			removeAdditionalParserTarget((NPC)existing.get().getCharacter(null, null));
 		}
-		
-		parserTargetToIdMap.put(newParserTarget, tag);
-		idToParserTargetMap.put(tag, newParserTarget);
-		allParserTargets.add(newParserTarget);
-		
+
+		newParserTarget.id = tag;
+		table.add(tag, newParserTarget);
+
 		target.setParserTarget(tag);
 		
 		UtilText.addNewParserTarget(tag, target); // Add this parser target to the scripting engine
@@ -1614,8 +1610,8 @@ public class ParserTarget {
 	public static void removeAdditionalParserTarget(NPC target) {
 		AbstractParserTarget targetToRemove = null;
 		
-		for(AbstractParserTarget parserTarget : allParserTargets) {
-			if(!coreParserTargets.contains(parserTarget)) { // Do not remove core parser targets
+		for(AbstractParserTarget parserTarget : table.list()) {
+			if(!table.coreParserTargets.contains(parserTarget)) { // Do not remove core parser targets
 				GameCharacter targetFound = parserTarget.getCharacter("", new ArrayList<>());
 				if(targetFound!=null && targetFound.equals(target)) {
 					targetToRemove = parserTarget;
@@ -1625,35 +1621,27 @@ public class ParserTarget {
 		}
 		
 		if(targetToRemove!=null) {
-			String idToRemove = parserTargetToIdMap.remove(targetToRemove);
-			idToParserTargetMap.remove(idToRemove);
-			allParserTargets.remove(targetToRemove);
+			var idToRemove = targetToRemove.getId();
+			table.remove(idToRemove);
 			UtilText.removeParserTarget(idToRemove); // Remove this parser target from the scripting engine
-			
+
 			target.setParserTarget(null);
 		}
 	}
 	
-	static {
-		// Hard-coded parserTarget types (all those up above):
-		
-		Field[] fields = ParserTarget.class.getFields();
-		
-		for(Field f : fields) {
-			if(AbstractParserTarget.class.isAssignableFrom(f.getType())) {
-				AbstractParserTarget parserTarget;
-				try {
-					parserTarget = ((AbstractParserTarget) f.get(null));
+	Collection table = new Collection();
 
-					parserTargetToIdMap.put(parserTarget, f.getName());
-					idToParserTargetMap.put(f.getName(), parserTarget);
-					allParserTargets.add(parserTarget);
-					coreParserTargets.add(parserTarget);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+	final class Collection extends Table<AbstractParserTarget> {
+
+		// A list of the hard-coded parser targets above.
+		private final List<AbstractParserTarget> coreParserTargets = new ArrayList<>();
+
+		private Collection() {
+			super(s->s);
+			addFields(ParserTarget.class,AbstractParserTarget.class,(k,v)->{
+				v.id = k;
+				coreParserTargets.add(v);
+			});
 		}
 	}
 }

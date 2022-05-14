@@ -12,12 +12,10 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.types.HornType;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -25,7 +23,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractHornType implements BodyPartTypeInterface {
+public abstract class AbstractHornType implements HornType {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -143,41 +141,18 @@ public abstract class AbstractHornType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
 
 	@Override
-	public String getDeterminer(GameCharacter gc) {
-		if(gc.getHornRows()==1) {
-			if(gc.getHornsPerRow()==1) {
-				return "a solitary";
-			} else if(gc.getHornsPerRow()==2) {
-				return "a pair of";
-			} else if(gc.getHornsPerRow()==3) {
-				return "a trio of";
-			} else {
-				return "a quartet of";
-			}
-			
-		} else {
-			if(gc.getHornsPerRow()==1) {
-				return Util.intToString(gc.getHornRows())+" vertically-aligned";
-			} else if(gc.getHornsPerRow()==2) {
-				return Util.intToString(gc.getHornRows())+" pairs of";
-			} else if(gc.getHornsPerRow()==3) {
-				return Util.intToString(gc.getHornRows())+" trios of";
-			} else {
-				return Util.intToString(gc.getHornRows())+" quartets of";
-			}
-		}
-	}
-
 	public int getDefaultHornsPerRow() {
 		return defaultHornsPerRow;
 	}
@@ -185,20 +160,6 @@ public abstract class AbstractHornType implements BodyPartTypeInterface {
 	@Override
 	public String getTransformationNameOverride() {
 		return transformationName;
-	}
-	
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
-	}
-
-	@Override
-	public String getName(GameCharacter gc){
-		if(isDefaultPlural(gc) && (gc.getHornsPerRow()>1 || gc.getHornRows()>1)) {
-			return getNamePlural(gc);
-		} else {
-			return getNameSingular(gc);
-		}
 	}
 	
 	@Override
@@ -230,22 +191,18 @@ public abstract class AbstractHornType implements BodyPartTypeInterface {
 		return race;
 	}
 
+	@Override
 	public boolean isGeneric() {
 		return generic;
 	}
 
 	@Override
-	public TFModifier getTFModifier() {
-		return this == HornType.NONE ? TFModifier.REMOVAL : getTFTypeModifier(HornType.getHornTypes(race, false));
-	}
-
-//	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, hornBodyDescription);
 	}
 	
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, hornTransformationDescription);
 	}

@@ -1,12 +1,10 @@
 package com.lilithsthrone.game.character.race;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
@@ -25,6 +23,7 @@ import com.lilithsthrone.game.character.fetishes.AbstractFetish;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.combat.CombatBehaviour;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
@@ -35,7 +34,66 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4
  * @author Innoxia
  */
-public class Race {
+public interface Race {
+
+	String getId();
+
+	AbstractRacialBody getRacialBody();
+
+	/**
+	 * Applies any special racial changes to the body which is passed in. This is called <b>before</b> Subspecies.applySpeciesChanges()
+	 */
+	default void applyRaceChanges(Body body) {
+	}
+
+	boolean isFeralPartsAvailable();
+
+	boolean isFlyingRace();
+
+	boolean isAbleToSelfTransform();
+
+	String getName(Body body, boolean feral);
+
+	default String getName(boolean feral) {
+		return getName(null, feral);
+	}
+
+	String getNamePlural(Body body, boolean feral);
+
+	default String getNamePlural(boolean feral) {
+		return getNamePlural(null, feral);
+	}
+
+	String getFeralName(LegConfigurationAffinity legConfigurationAffinity, boolean plural);
+
+	String getDefaultTransformName();
+
+	Disposition getDisposition();
+
+	RacialClass getRacialClass();
+
+	CombatBehaviour getPreferredCombatBehaviour();
+
+	int getNumberOfOffspringLow();
+
+	int getNumberOfOffspringHigh();
+
+	Colour getColour();
+
+	boolean isAffectedByFurryPreference();
+
+	float getChanceForMaleOffspring();
+
+	/**
+	 * <b>Should only be used in Subspecies' getDamageMultiplier() method!</b>
+	 */
+	AbstractAttribute getDefaultDamageMultiplier();
+
+	FurryPreference getDefaultFemininePreference();
+
+	FurryPreference getDefaultMasculinePreference();
+
+	Map<AbstractFetish,Map<String,Integer>> getRacialFetishModifiers();
 
 	public static AbstractRace NONE = new AbstractRace("no race",
 			"no race",
@@ -1435,113 +1493,78 @@ public class Race {
 	 * StatusEffect.LILIN);
 	 */
 
-
-	public static List<AbstractRace> allRaces;
-	
-	public static Map<AbstractRace, String> raceToIdMap = new HashMap<>();
-	public static Map<String, AbstractRace> idToRaceMap = new HashMap<>();
-	
 	/**
 	 * @param id Will be in the format of: 'innoxia_hyena'.
 	 */
 	public static AbstractRace getRaceFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToRaceMap.keySet());
-		return idToRaceMap.get(id);
+		return table.of(id);
 	}
 	
 	public static String getIdFromRace(AbstractRace race) {
-		return raceToIdMap.get(race);
+		return race.getId();
 	}
 	
-	static {
-		allRaces = new ArrayList<>();
-		
+	Table<AbstractRace> table = new Table<>(s->s) {{
 		// Modded races:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", null, "race");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("race")) {
-					try {
-						AbstractRace race = new AbstractRace(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("_race", "");
-						allRaces.add(race);
-						raceToIdMap.put(race, id);
-						idToRaceMap.put(id, race);
-//						System.out.println("race: "+id);
-					} catch(Exception ex) {
-						System.err.println("Loading modded race failed at 'Race'. File path: "+innerEntry.getValue().getAbsolutePath());
-						System.err.println("Actual exception: ");
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
+		forEachMod("/race",null,"race",(f,n,a)->{
+			if(!Util.getXmlRootElementName(f).equals("race"))
+				return;
+			var k = n.replaceAll("_race","");
+			var v = new AbstractRace(f,a,true);
+			v.id = k;
+			add(k,v);
+		});
 		// External res races:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", null, "race");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("race")) {
-					try {
-						AbstractRace race = new AbstractRace(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("_race", "");
-						allRaces.add(race);
-						raceToIdMap.put(race, id);
-						idToRaceMap.put(id, race);
-					} catch(Exception ex) {
-						System.err.println("Loading race failed at 'Race'. File path: "+innerEntry.getValue().getAbsolutePath());
-						System.err.println("Actual exception: ");
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
+		forEachExternal("res/race",null,"race",(f,n,a)->{
+			if(!Util.getXmlRootElementName(f).equals("race"))
+				return;
+			var k = n.replaceAll("_race","");
+			var v = new AbstractRace(f,a,false);
+			v.id = k;
+			add(k,v);
+		});
 		// Hard-coded:
-		
-		Field[] fields = Race.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractRace.class.isAssignableFrom(f.getType())) {
-				AbstractRace race;
-				try {
-					race = ((AbstractRace) f.get(null));
+		addFields(Race.class,AbstractRace.class,(k,v)->v.id=k);
 
-					raceToIdMap.put(race, f.getName());
-					idToRaceMap.put(f.getName(), race);
-					allRaces.add(race);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		allRaces.sort((r1, r2) -> r1.getName(false).compareTo(r2.getName(false)));
-		
-		for(AbstractRace race : Race.getAllRaces()) {
+		for(AbstractRace race : list()) {
 			if(race!=Race.NONE) {
-				String name = race.getName(true);
-				AbstractAttribute racialAttribute = new AbstractAttribute(true, 0, -100, 100, name+" damage", Util.capitaliseSentence(name)+" damage", "swordIcon", race.getColour(), name+"-obliteration", name+"-mercy", null) {
-					@Override
-					public String getDescription(GameCharacter owner) {
-						return "Increases damage vs "+race.getNamePlural(true)+".";
-					}
-				};
+				var racialAttribute = new DamageAttribute(race);
 				String id = "DAMAGE_"+Race.getIdFromRace(race);
-//				System.out.println(name+", "+id);
-				
-				Attribute.racialAttributes.put(race, racialAttribute);
-				Attribute.attributeToIdMap.put(racialAttribute, id);
-				Attribute.idToAttributeMap.put(id, racialAttribute);
-				Attribute.allAttributes.add(racialAttribute);
+				DamageAttribute.map.put(race,racialAttribute);
+				Attribute.addAttribute(id,racialAttribute);
 			}
 		}
-	}
-	
+	}};
+
 	public static List<AbstractRace> getAllRaces() {
-		return allRaces;
+		return table.list().stream()
+		.sorted(Comparator.comparing(r->r.getName(false)))
+		.collect(Collectors.toList());
+	}
+
+	/**
+	 * Instances are uniquely associated with a race
+	 * and describe the character's increased damage to enemies with that race.
+	 * By normal means, the player can increase these attributes once each by reading a specific book.
+	 */
+	final class DamageAttribute extends AbstractAttribute {
+
+		private final AbstractRace race;
+
+		private static final HashMap<AbstractRace,DamageAttribute> map = new HashMap<>();
+
+		private DamageAttribute(AbstractRace r) {
+			super(true,0,-100,100,r.getName(true)+" damage",Util.capitaliseSentence(r.getName(true))+" damage","swordIcon",r.getColour(),r.getName(true)+"-obliteration",r.getName(true)+"-mercy",null);
+			race = r;
+		}
+
+		@Override
+		public String getDescription(GameCharacter owner) {
+			return "Increases damage vs "+race.getNamePlural(true)+".";
+		}
+
+		public static DamageAttribute of(AbstractRace race) {
+			return map.computeIfAbsent(race,DamageAttribute::new);
+		}
 	}
 }

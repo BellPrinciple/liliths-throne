@@ -1,17 +1,15 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.Body;
+import com.lilithsthrone.game.character.body.TypeTable;
+import com.lilithsthrone.game.character.body.abstractTypes.AbstractFootType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTentacleType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
@@ -20,6 +18,7 @@ import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -27,9 +26,106 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.1
  * @author Innoxia
  */
-public class LegType {
-	
-	public static AbstractLegType HUMAN = new AbstractLegType(BodyCoveringType.HUMAN,
+public interface LegType extends BodyPartTypeInterface {
+
+	AbstractFootType getFootType();
+
+	FootStructure getDefaultFootStructure(LegConfiguration legConfiguration);
+
+	String getFootNameSingular(GameCharacter gc);
+
+	String getFootNamePlural(GameCharacter gc);
+
+	String getFootDescriptor(GameCharacter gc);
+
+	String getToeNameSingular(GameCharacter gc);
+
+	String getToeNamePlural(GameCharacter gc);
+
+	String getToeDescriptor(GameCharacter gc);
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	/**
+	 * Applies the related leg configuration transformation for this leg type, and returns a description of the changes.<br/><br/>
+	 *
+	 * <b>When overriding, consider:</b><br/>
+	 * Ass.class (type)<br/>
+	 * BreastCrotch.class (type)<br/>
+	 * Tail.class (type)<br/>
+	 * Tentacle.class (type)<br/>
+	 * Penis.class (type, size, cloaca)<br/>
+	 * Vagina.class (type, capacity, cloaca)<br/>
+	 * @param character
+	 * Is being transformed.
+	 * @param legConfiguration
+	 * To be applied.
+	 * @param applyEffects
+	 * Whether the transformative effects should be applied. Pass in false to get the transformation description without applying any of the actual effects.
+	 * @param applyFullEffects
+	 * Pass in true if you want the additional transformations to include attribute changes (such as penis resizing, vagina capacity resetting, etc.).
+	 * @return
+	 * A description of the transformation.
+	 */
+	String applyLegConfigurationTransformation(GameCharacter character, LegConfiguration legConfiguration, boolean applyEffects, boolean applyFullEffects);
+
+	/**
+	 * For use in modifying bodies without an attached character. Outside of the Subspecies class, you should probably always be calling the version of this method that takes in a GameCharacter.
+	 *
+	 * @param body
+	 * To be modified.
+	 * @param legConfiguration
+	 * To be applied.
+	 * @param applyFullEffects
+	 * Pass in true if you want the additional transformations to include attribute changes (such as penis resizing, vagina capacity resetting, etc.).
+	 */
+	void applyLegConfigurationTransformation(Body body, LegConfiguration legConfiguration, boolean applyFullEffects);
+
+	List<LegConfiguration> getAllowedLegConfigurations();
+
+	/**
+	 * @param legConfiguration The configuration to check transformation availability of.
+	 * @return True if this configuration is allowed for this LegType.
+	 */
+	boolean isLegConfigurationAvailable(LegConfiguration legConfiguration);
+
+	boolean hasSpinneret();
+
+	AbstractTentacleType getTentacleType();
+
+	default boolean isLegsReplacedByTentacles() {
+		return getTentacleType()!=TentacleType.NONE;
+	}
+
+	int getTentacleCount();
+
+	/**
+	 * @return By default, LegTypes return a modification of 0, but if a LegType requires a modifier, then this can be overridden and its effects will be handled alongside LegConfiguration's getLandSpeedModifier().
+	 */
+	default int getLandSpeedModifier() {
+		return 0;
+	}
+
+	/**
+	 * @return By default, LegTypes return a modification of 0, but if a LegType requires a modifier, then this can be overridden and its effects will be handled alongside LegConfiguration's getWaterSpeedModifier().
+	 */
+	default int getWaterSpeedModifier() {
+		return 0;
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return gc==null || gc.getLegCount()>1;
+	}
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(LegType.getLegTypes(getRace()));
+	}
+
+	public static AbstractLegType HUMAN = new Special(BodyCoveringType.HUMAN,
 			Race.HUMAN,
 			FootStructure.PLANTIGRADE,
 			FootType.HUMANOID,
@@ -49,7 +145,7 @@ public class LegType {
 					LegConfiguration.BIPEDAL), false) {
 	};
 	
-	public static AbstractLegType ANGEL = new AbstractLegType(BodyCoveringType.ANGEL,
+	public static AbstractLegType ANGEL = new Special(BodyCoveringType.ANGEL,
 			Race.ANGEL,
 			FootStructure.PLANTIGRADE,
 			FootType.HUMANOID,
@@ -71,7 +167,7 @@ public class LegType {
 					LegConfiguration.BIPEDAL), false) {
 	};
 
-	public static AbstractLegType DEMON_COMMON = new AbstractLegType(BodyCoveringType.DEMON_COMMON,
+	public static AbstractLegType DEMON_COMMON = new Special(BodyCoveringType.DEMON_COMMON,
 			Race.DEMON,
 			FootStructure.PLANTIGRADE,
 			FootType.HUMANOID,
@@ -108,7 +204,7 @@ public class LegType {
 		}
 	};
 
-	public static AbstractLegType DEMON_HOOFED = new AbstractLegType(BodyCoveringType.DEMON_COMMON,
+	public static AbstractLegType DEMON_HOOFED = new Special(BodyCoveringType.DEMON_COMMON,
 			Race.DEMON,
 			FootStructure.UNGULIGRADE,
 			FootType.HOOFS,
@@ -151,7 +247,7 @@ public class LegType {
 		}
 	};
 
-	public static AbstractLegType DEMON_HORSE_HOOFED = new AbstractLegType(BodyCoveringType.HORSE_HAIR,
+	public static AbstractLegType DEMON_HORSE_HOOFED = new Special(BodyCoveringType.HORSE_HAIR,
 			Race.DEMON,
 			FootStructure.UNGULIGRADE,
 			FootType.HOOFS,
@@ -187,7 +283,7 @@ public class LegType {
 		}
 	};
 
-	public static AbstractLegType DEMON_SNAKE = new AbstractLegType(BodyCoveringType.SNAKE_SCALES,
+	public static AbstractLegType DEMON_SNAKE = new Special(BodyCoveringType.SNAKE_SCALES,
 			Race.DEMON,
 			FootStructure.NONE,
 			FootType.NONE,
@@ -229,7 +325,7 @@ public class LegType {
 		}
 	};
 
-	public static AbstractLegType DEMON_SPIDER = new AbstractLegType(BodyCoveringType.SPIDER_CHITIN,
+	public static AbstractLegType DEMON_SPIDER = new Special(BodyCoveringType.SPIDER_CHITIN,
 			Race.DEMON,
 			FootStructure.DIGITIGRADE,
 			FootType.ARACHNID,
@@ -267,7 +363,7 @@ public class LegType {
 		}
 	};
 
-	public static AbstractLegType DEMON_OCTOPUS = new AbstractLegType(BodyCoveringType.OCTOPUS_SKIN,
+	public static AbstractLegType DEMON_OCTOPUS = new Special(BodyCoveringType.OCTOPUS_SKIN,
 			Race.DEMON,
 			FootStructure.TENTACLED,
 			FootType.TENTACLE,
@@ -312,7 +408,7 @@ public class LegType {
 		}
 	};
 
-	public static AbstractLegType DEMON_FISH = new AbstractLegType(BodyCoveringType.FISH_SCALES,
+	public static AbstractLegType DEMON_FISH = new Special(BodyCoveringType.FISH_SCALES,
 			Race.DEMON,
 			FootStructure.NONE,
 			FootType.NONE,
@@ -370,7 +466,7 @@ public class LegType {
 		}
 	};
 
-	public static AbstractLegType DEMON_EAGLE = new AbstractLegType(BodyCoveringType.FEATHERS,
+	public static AbstractLegType DEMON_EAGLE = new Special(BodyCoveringType.FEATHERS,
 			Race.DEMON,
 			FootStructure.DIGITIGRADE,
 			FootType.TALONS,
@@ -408,7 +504,7 @@ public class LegType {
 		}
 	};
 	
-	public static AbstractLegType COW_MORPH = new AbstractLegType(BodyCoveringType.BOVINE_FUR,
+	public static AbstractLegType COW_MORPH = new Special(BodyCoveringType.BOVINE_FUR,
 			Race.COW_MORPH,
 			FootStructure.UNGULIGRADE,
 			FootType.HOOFS,
@@ -432,7 +528,7 @@ public class LegType {
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
-	public static AbstractLegType DOG_MORPH = new AbstractLegType(BodyCoveringType.CANINE_FUR,
+	public static AbstractLegType DOG_MORPH = new Special(BodyCoveringType.CANINE_FUR,
 			Race.DOG_MORPH,
 			FootStructure.DIGITIGRADE,
 			FootType.PAWS,
@@ -455,7 +551,7 @@ public class LegType {
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
-	public static AbstractLegType WOLF_MORPH = new AbstractLegType(BodyCoveringType.LYCAN_FUR,
+	public static AbstractLegType WOLF_MORPH = new Special(BodyCoveringType.LYCAN_FUR,
 			Race.WOLF_MORPH,
 			FootStructure.DIGITIGRADE,
 			FootType.PAWS,
@@ -478,7 +574,7 @@ public class LegType {
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
-	public static AbstractLegType FOX_MORPH = new AbstractLegType(BodyCoveringType.FOX_FUR,
+	public static AbstractLegType FOX_MORPH = new Special(BodyCoveringType.FOX_FUR,
 			Race.FOX_MORPH,
 			FootStructure.DIGITIGRADE,
 			FootType.PAWS,
@@ -501,7 +597,7 @@ public class LegType {
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
-	public static AbstractLegType SQUIRREL_MORPH = new AbstractLegType(BodyCoveringType.SQUIRREL_FUR,
+	public static AbstractLegType SQUIRREL_MORPH = new Special(BodyCoveringType.SQUIRREL_FUR,
 			Race.SQUIRREL_MORPH,
 			FootStructure.PLANTIGRADE,
 			FootType.PAWS,
@@ -524,7 +620,7 @@ public class LegType {
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
-	public static AbstractLegType RAT_MORPH = new AbstractLegType(BodyCoveringType.RAT_FUR,
+	public static AbstractLegType RAT_MORPH = new Special(BodyCoveringType.RAT_FUR,
 			Race.RAT_MORPH,
 			FootStructure.PLANTIGRADE,
 			FootType.PAWS,
@@ -547,7 +643,7 @@ public class LegType {
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
-	public static AbstractLegType RABBIT_MORPH = new AbstractLegType(BodyCoveringType.RABBIT_FUR,
+	public static AbstractLegType RABBIT_MORPH = new Special(BodyCoveringType.RABBIT_FUR,
 			Race.RABBIT_MORPH,
 			FootStructure.PLANTIGRADE,
 			FootType.PAWS,
@@ -570,7 +666,7 @@ public class LegType {
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
-	public static AbstractLegType BAT_MORPH = new AbstractLegType(BodyCoveringType.BAT_FUR,
+	public static AbstractLegType BAT_MORPH = new Special(BodyCoveringType.BAT_FUR,
 			Race.BAT_MORPH,
 			FootStructure.DIGITIGRADE,
 			FootType.PAWS,
@@ -592,7 +688,7 @@ public class LegType {
 					LegConfiguration.BIPEDAL), false) {
 	};
 	
-	public static AbstractLegType CAT_MORPH = new AbstractLegType(BodyCoveringType.FELINE_FUR,
+	public static AbstractLegType CAT_MORPH = new Special(BodyCoveringType.FELINE_FUR,
 			Race.CAT_MORPH,
 			FootStructure.DIGITIGRADE,
 			FootType.PAWS,
@@ -615,7 +711,7 @@ public class LegType {
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
-	public static AbstractLegType ALLIGATOR_MORPH = new AbstractLegType(BodyCoveringType.ALLIGATOR_SCALES,
+	public static AbstractLegType ALLIGATOR_MORPH = new Special(BodyCoveringType.ALLIGATOR_SCALES,
 			Race.ALLIGATOR_MORPH,
 			FootStructure.PLANTIGRADE,
 			FootType.HUMANOID,
@@ -638,7 +734,7 @@ public class LegType {
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
-	public static AbstractLegType HORSE_MORPH = new AbstractLegType(BodyCoveringType.HORSE_HAIR,
+	public static AbstractLegType HORSE_MORPH = new Special(BodyCoveringType.HORSE_HAIR,
 			Race.HORSE_MORPH,
 			FootStructure.UNGULIGRADE,
 			FootType.HOOFS,
@@ -662,7 +758,7 @@ public class LegType {
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 
-//	public static AbstractLegType HORSE_FISH = new AbstractLegType(BodyCoveringType.FISH_SCALES,
+//	public static AbstractLegType HORSE_FISH = new Special(BodyCoveringType.FISH_SCALES,
 //			Race.HORSE_MORPH,
 //			FootStructure.PLANTIGRADE, // FootStructure and Type is for when legs are grown on land.
 //			FootType.HUMANOID,
@@ -713,7 +809,7 @@ public class LegType {
 //		}
 //	};
 	
-	public static AbstractLegType REINDEER_MORPH = new AbstractLegType(BodyCoveringType.REINDEER_FUR,
+	public static AbstractLegType REINDEER_MORPH = new Special(BodyCoveringType.REINDEER_FUR,
 			Race.REINDEER_MORPH,
 			FootStructure.UNGULIGRADE,
 			FootType.HOOFS,
@@ -737,7 +833,7 @@ public class LegType {
 					LegConfiguration.QUADRUPEDAL), false) {
 	};
 	
-	public static AbstractLegType HARPY = new AbstractLegType(BodyCoveringType.HARPY_SKIN,
+	public static AbstractLegType HARPY = new Special(BodyCoveringType.HARPY_SKIN,
 			Race.HARPY,
 			FootStructure.DIGITIGRADE,
 			FootType.TALONS,
@@ -761,116 +857,60 @@ public class LegType {
 						LegConfiguration.BIPEDAL,
 						LegConfiguration.AVIAN), false) {
 	};
-	
-	private static List<AbstractLegType> allLegTypes;
-	private static Map<AbstractLegType, String> legToIdMap = new HashMap<>();
-	private static Map<String, AbstractLegType> idToLegMap = new HashMap<>();
-	
-	static {
-		allLegTypes = new ArrayList<>();
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("leg")) {
-					try {
-						AbstractLegType type = new AbstractLegType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allLegTypes.add(type);
-						legToIdMap.put(type, id);
-						idToLegMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("leg")) {
-					try {
-						AbstractLegType type = new AbstractLegType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allLegTypes.add(type);
-						legToIdMap.put(type, id);
-						idToLegMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded leg types:
-		
-		Field[] fields = LegType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractLegType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractLegType ct;
-				try {
-					ct = ((AbstractLegType) f.get(null));
+	class Special extends AbstractLegType {
 
-					legToIdMap.put(ct, f.getName());
-					idToLegMap.put(f.getName(), ct);
-					
-					allLegTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		private String id;
+
+		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, FootStructure defaultFootStructure, AbstractFootType footType, String determiner, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, List<String> footDescriptorsMasculine, List<String> footDescriptorsFeminine, List<String> toeDescriptorsMasculine, List<String> toeDescriptorsFeminine, String legTransformationDescription, String legBodyDescription, List<LegConfiguration> allowedLegConfigurations, boolean spinneret) {
+			super(coveringType, race, defaultFootStructure, footType, determiner, name, namePlural, descriptorsMasculine, descriptorsFeminine, footDescriptorsMasculine, footDescriptorsFeminine, toeDescriptorsMasculine, toeDescriptorsFeminine, legTransformationDescription, legBodyDescription, allowedLegConfigurations, spinneret);
 		}
-		
-		Collections.sort(allLegTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
+
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(LegType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
+		}
 	}
-	
+
+	TypeTable<AbstractLegType> table = new TypeTable<>(
+		LegType::sanitize,
+		LegType.class,
+		AbstractLegType.class,
+		"leg",
+		(f,n,a,m)->new AbstractLegType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
 	public static AbstractLegType getLegTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("IMP")) {
-			return LegType.DEMON_COMMON;
+			return "DEMON_COMMON";
 		}
 		if(id.equals("LYCAN")) {
-			return LegType.WOLF_MORPH;
+			return "WOLF_MORPH";
 		}
 
-		id = Util.getClosestStringMatch(id, idToLegMap.keySet());
-		return idToLegMap.get(id);
+		return id;
 	}
-	
+
 	public static String getIdFromLegType(AbstractLegType legType) {
-		return legToIdMap.get(legType);
+		return legType.getId();
 	}
-	
+
 	public static List<AbstractLegType> getAllLegTypes() {
-		return allLegTypes;
+		return table.listByRace();
 	}
-	
-	private static Map<AbstractRace, List<AbstractLegType>> typesMap = new HashMap<>();
+
 	public static List<AbstractLegType> getLegTypes(AbstractRace r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractLegType> types = new ArrayList<>();
-		for(AbstractLegType type : LegType.getAllLegTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of());
 	}
 
 }

@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.dialogue.encounters;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -74,7 +72,7 @@ import com.lilithsthrone.world.places.PlaceType;
  * @version 0.4
  * @author Innoxia, DSG
  */
-public class Encounter {
+public interface Encounter {
 
 	public static AbstractEncounter LILAYAS_HOME_CORRIDOR = new AbstractEncounter() {
 		@Override
@@ -199,7 +197,7 @@ public class Encounter {
 						&& Main.game.getDateNow().getMonth().equals(Month.OCTOBER)
 						&& Main.game.getNumberOfWitches()<4
 						&& Main.game.getPlayerCell().getPlace().getPlaceType().equals(PlaceType.DOMINION_STREET);
-			
+
 			if(cultistAvailable) {
 				boolean cultistSuitableTile = true;
 				for(GameCharacter character : Main.game.getNonCompanionCharactersPresent()) {
@@ -248,7 +246,7 @@ public class Encounter {
 			}
 
 			AbstractClothing collar = Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK);
-			
+
 			return Util.newHashMapOfValues(
 					Main.game.getCurrentWeather()==Weather.MAGIC_STORM
 						?new Value<EncounterType, Float>(EncounterType.DOMINION_STORM_ATTACK, 15f)
@@ -286,13 +284,13 @@ public class Encounter {
 			
 			if(node == EncounterType.SPECIAL_DOMINION_CULTIST) {
 				Main.game.setActiveNPC(new Cultist());
-				
+
 				try {
 					Main.game.addNPC(Main.game.getActiveNPC(), false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-	
+
 				return Main.game.getActiveNPC().getEncounterDialogue();
 			}
 			
@@ -326,7 +324,7 @@ public class Encounter {
 		public Map<EncounterType, Float> getDialogues() {
 			Map<EncounterType, Float> dialogueMap = new HashMap<>();
 			LocalDateTime time = Main.game.getDateNow();
-			
+
 			// Mother's day timing, 2nd week of May:
 			if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM && time.getMonth().equals(Month.MAY) && time.getDayOfMonth()>7 && time.getDayOfMonth()<=14) {
 				if(!Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.mommyFound)) {
@@ -334,21 +332,21 @@ public class Encounter {
 				}
 				dialogueMap.put(EncounterType.DOMINION_STREET_PILL_HANDOUT, 5f);
 			}
-			
+
 			 // Father's day timing, 3rd week of June:
 			if(time.getMonth().equals(Month.JUNE) && time.getDayOfMonth()>14 && time.getDayOfMonth()<=21) {
 				dialogueMap.put(EncounterType.DOMINION_STREET_PILL_HANDOUT, 5f);
 			}
-			
+
 			AbstractClothing collar = Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK);
 			if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM && collar!=null && collar.getClothingType().getId().equals("innoxia_neck_filly_choker")) {
 				dialogueMap.put(EncounterType.DOMINION_EXPRESS_CENTAUR, 2.5f);
 			}
-			
+
 			if(Main.game.getCurrentWeather()!=Weather.MAGIC_STORM && getSlaveWantingToUseYouInDominion()!=null) {
 				dialogueMap.put(EncounterType.SLAVE_USES_YOU, 5f);
 			}
-			
+
 			return dialogueMap;
 		}
 		
@@ -357,7 +355,7 @@ public class Encounter {
 			if(node == EncounterType.DOMINION_STREET_RENTAL_MOMMY) {
 				Main.game.setActiveNPC(Main.game.getNpc(RentalMommy.class));
 				Main.game.getNpc(RentalMommy.class).setLocation(WorldType.DOMINION, Main.game.getPlayer().getLocation(), true);
-				
+
 				// v0.4.8.4: RentalMommy.class is already initialised as a unique NPC, so this is not needed and was throwing an error.
 //				try {
 //					Main.game.addNPC(Main.game.getActiveNPC(), false);
@@ -365,12 +363,12 @@ public class Encounter {
 //					e.printStackTrace();
 //				}
 				return Main.game.getActiveNPC().getEncounterDialogue();
-				
+
 			}
 			
 			if(node==EncounterType.DOMINION_STREET_PILL_HANDOUT) {
 				Main.game.getTextEndStringBuilder().append(Main.game.getPlayer().addItem(Main.game.getItemGen().generateItem("innoxia_pills_fertility"), 3+Util.random.nextInt(4), false, true));
-				
+
 				return DominionEncounterDialogue.DOMINION_STREET_PILL_HANDOUT;
 			}
 
@@ -1333,7 +1331,7 @@ public class Encounter {
 		@Override
 		public Map<EncounterType, Float> getDialogues() {
 			Map<EncounterType, Float> map = new HashMap<>();
-			
+
 			// If at least 2 park tiles have been travelled to,
 			// if it's between 09:00 and 15:00 and there's no storm,
 			// and if the player has either not started the Natalya quest or if they have fully completed it
@@ -1345,7 +1343,7 @@ public class Encounter {
 					&& (Main.game.getPlayer().isQuestCompleted(QuestLine.ROMANCE_NATALYA) || (!Main.game.getPlayer().hasQuest(QuestLine.ROMANCE_NATALYA) && !Main.game.getPlayer().hasItemType(ItemType.NATALYA_BUSINESS_CARD)))
 					&& Main.game.getWorlds().get(WorldType.DOMINION).getCells(PlaceType.DOMINION_PARK).stream().filter(c->c.isTravelledTo()).collect(Collectors.toList()).size()>=2) {
 				map.put(EncounterType.DOMINION_PARK_NATALYA, 100f);
-				
+
 			} else {
 				if(Main.game.getCurrentWeather()==Weather.MAGIC_STORM) {
 					map.put(EncounterType.DOMINION_STORM_ATTACK, 15f);
@@ -1356,7 +1354,7 @@ public class Encounter {
 					}
 				}
 			}
-			
+
 			return map;
 		}
 		@Override
@@ -1364,7 +1362,7 @@ public class Encounter {
 			if(node == EncounterType.DOMINION_PARK_NATALYA) {
 				return DominionPark.NATALYA_ENCOUNTER_START;
 			}
-			
+
 			if(node == EncounterType.DOMINION_STORM_ATTACK && Main.game.getCurrentWeather() == Weather.MAGIC_STORM) {
 				NPC npc = new DominionAlleywayAttacker(Gender.getGenderFromUserPreferences(false, false), false, NPCGenerationFlag.DIRTY);
 				try {
@@ -1376,14 +1374,14 @@ public class Encounter {
 				Main.game.setActiveNPC(npc);
 				return Main.game.getActiveNPC().getEncounterDialogue();
 			}
-			
+
 			if(node==EncounterType.DOMINION_EXPRESS_CENTAUR) {
 				AbstractClothing collar = Main.game.getPlayer().getClothingInSlot(InventorySlot.NECK);
 				if(collar!=null && collar.getClothingType().getId().equals("innoxia_neck_filly_choker")) { // When wearing filly choker, get approached by horny centaurs:
 					return DominionExpressCentaurDialogue.initEncounter(); // Can return null if player cannot access mouth or anus.
 				}
 			}
-			
+
 			if(node == EncounterType.SLAVE_USES_YOU) {
 				NPC slave = getSlaveWantingToUseYouInDominion();
 				if(slave==null) {
@@ -1391,54 +1389,45 @@ public class Encounter {
 				}
 				return SlaveEncountersDialogue.getSlaveUsesYouStreet(slave);
 			}
-			
+
 			return null;
 		}
 	};
 
-	public static List<AbstractEncounter> allEncounters;
-	
-	public static Map<AbstractEncounter, String> encounterToIdMap = new HashMap<>();
-	public static Map<String, AbstractEncounter> idToEncounterMap = new HashMap<>();
-	
-	private static Map<String, List<AbstractEncounter>> addedEncounters = new HashMap<>();
-	
 	/**
 	 * @return A list of Encounters which are associated with the placeType (which have been added via external file).
 	 *  Returns an empty list if no associated encounters are found.
 	 */
-	public static List<AbstractEncounter> getAddedEncounters(String placeTypeId) {
-		addedEncounters.putIfAbsent(placeTypeId, new ArrayList<>());
-		return addedEncounters.get(placeTypeId);
+	static List<AbstractEncounter> getAddedEncounters(String placeTypeId) {
+		return Table.addedEncounters.getOrDefault(placeTypeId,List.of());
 	}
 
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
-	public static AbstractEncounter getEncounterFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToEncounterMap.keySet());
-		
-		return idToEncounterMap.get(id);
-	}
-	
-	public static String getIdFromEncounter(AbstractEncounter encounter) {
-		return encounterToIdMap.get(encounter);
-	}
-	
-	public static List<AbstractEncounter> getAllEncounters() {
-		return allEncounters;
+	@Deprecated
+	static AbstractEncounter getEncounterFromId(String id) {
+		return table.of(id);
 	}
 
-	static {
-		allEncounters = new ArrayList<>();
-		
+	@Deprecated
+	static String getIdFromEncounter(AbstractEncounter encounter) {
+		return encounter.getId();
+	}
+
+	@Deprecated
+	static List<AbstractEncounter> getAllEncounters() {
+		return table.list();
+	}
+
+	Table table = new Table();
+	final class Table extends com.lilithsthrone.utils.Table<AbstractEncounter> {
+		private static final Map<String,List<AbstractEncounter>> addedEncounters = new HashMap<>();
+		private Table() {
+			super(s->s);
 		// Modded encounters:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/encounters");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractEncounter encounter = new AbstractEncounter(innerEntry.getValue(), entry.getKey(), true) {
+			forEachMod("/encounters",null,null,(f,n,a)->{
+				var e = new AbstractEncounter(f,a,true){
 						@Override
 						protected DialogueNode initialiseEncounter(EncounterType node) {
 							return null;
@@ -1446,26 +1435,15 @@ public class Encounter {
 						@Override
 						public Map<EncounterType, Float> getDialogues() {
 							return null;
-						}};
-					allEncounters.add(encounter);
-					encounterToIdMap.put(encounter, innerEntry.getKey());
-					idToEncounterMap.put(innerEntry.getKey(), encounter);
-//					System.out.println("modded encounter: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading modded encounter failed at 'Encounter'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+						}
+				};
+				e.id = n;
+				add(n,e);
+			});
 		// External res encounters:
-
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/encounters");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractEncounter encounter = new AbstractEncounter(innerEntry.getValue(), entry.getKey(), false) {
+			forEachExternal("res/encounters",null,null,(f,n,a)->{
+				var id = "innoxia_"+n;
+				var e = new AbstractEncounter(f,a,false){
 						@Override
 						protected DialogueNode initialiseEncounter(EncounterType node) {
 							return null;
@@ -1473,48 +1451,19 @@ public class Encounter {
 						@Override
 						public Map<EncounterType, Float> getDialogues() {
 							return null;
-						}};
-					String id = "innoxia_"+innerEntry.getKey();
-					allEncounters.add(encounter);
-					encounterToIdMap.put(encounter, id);
-					idToEncounterMap.put(id, encounter);
-//					System.out.println("res encounter: "+id);
-				} catch(Exception ex) {
-					System.err.println("Loading encounter failed at 'Encounter'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+						}
+				};
+				e.id = id;
+				add(id,e);
+			});
 		// Hard-coded encounters (all those up above):
-		
-		Field[] fields = Encounter.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractEncounter.class.isAssignableFrom(f.getType())) {
-				
-				AbstractEncounter encounter;
-				
-				try {
-					encounter = ((AbstractEncounter) f.get(null));
-
-					encounterToIdMap.put(encounter, f.getName());
-					idToEncounterMap.put(f.getName(), encounter);
-					allEncounters.add(encounter);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
+			addFields(Encounter.class,AbstractEncounter.class,(n,e)->e.id=n);
 		// Add additional place types which can trigger encounters to the 'addedEncounters' map
-		for(AbstractEncounter encounter : allEncounters) {
-			if(encounter.getPlaceTypeIds()!=null) {
-				for(String placeId : encounter.getPlaceTypeIds()) {
-					addedEncounters.putIfAbsent(placeId, new ArrayList<>());
-					addedEncounters.get(placeId).add(encounter);
+			for(AbstractEncounter encounter : list()) {
+				if(encounter.getPlaceTypeIds()!=null) {
+					for(String placeId : encounter.getPlaceTypeIds()) {
+						Table.addedEncounters.computeIfAbsent(placeId,k->new ArrayList<>()).add(encounter);
+					}
 				}
 			}
 		}

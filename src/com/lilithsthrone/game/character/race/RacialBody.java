@@ -1,14 +1,12 @@
 package com.lilithsthrone.game.character.race;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import com.lilithsthrone.game.character.body.abstractTypes.AbstractLegType;
+import com.lilithsthrone.game.character.body.abstractTypes.*;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.AntennaType;
 import com.lilithsthrone.game.character.body.types.ArmType;
@@ -26,6 +24,7 @@ import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.types.TentacleType;
 import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.types.WingType;
+import com.lilithsthrone.game.character.body.valueEnums.AreolaeShape;
 import com.lilithsthrone.game.character.body.valueEnums.AreolaeSize;
 import com.lilithsthrone.game.character.body.valueEnums.AssSize;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
@@ -56,6 +55,7 @@ import com.lilithsthrone.game.character.persona.PersonalityCategory;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.character.persona.SexualOrientationPreference;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -63,8 +63,260 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.7.1
  * @author Innoxia
  */
-public class RacialBody {
-	
+public interface RacialBody {
+
+	String getId();
+
+	/**
+	 * @return A map of personality traits and the percentage chance that a member of this race will spawn with them.
+	 */
+	Map<PersonalityTrait,Float> getPersonalityTraitChances();
+
+	SexualOrientation getSexualOrientation(Gender gender);
+
+	/**
+	 * @param includeTypeNONE Set as true if you want the returned AntennaType to possibly include AntennaType.NONE. (Will include NONE anyway if the list is empty.)
+	 * @return A random AntennaType from this race's possible antennaTypes.
+	 */
+	default AbstractAntennaType getRandomrAntennaType(boolean includeTypeNONE) {
+		return Util.randomItemFrom(getAntennaTypes(includeTypeNONE));
+	}
+
+	List<AbstractAntennaType> getAntennaTypes(boolean removeTypeNone);
+
+	int getMaleAntennaLength();
+
+	int getFemaleAntennaLength();
+
+	AbstractArmType getArmType();
+
+	AbstractAssType getAssType();
+
+	AbstractBreastType getBreastType();
+
+	List<BreastShape> getBreastShapes();
+
+	AbstractFaceType getFaceType();
+
+	AbstractEyeType getEyeType();
+
+	AbstractEarType getEarType();
+
+	AbstractHairType getHairType();
+
+	default AbstractLegType getLegType() {
+		return getLegType(getLegConfiguration());
+	}
+
+	/**
+	 * @return The default legType for this body when its LegConfiguration is the passed in configuration argument.
+	 */
+	AbstractLegType getLegType(LegConfiguration configuration);
+
+	LegConfiguration getLegConfiguration();
+
+	AbstractTorsoType getTorsoType();
+
+	BodyMaterial getBodyMaterial();
+
+	AbstractBodyCoveringType getBodyHairType();
+
+	/**
+	 * @param includeTypeNONE Set as true if you want the returned HornType to possibly include HornType.NONE. (Will include NONE anyway if the list is empty.)
+	 * @return A random HornType from this race's possible hornTypes.
+	 */
+	default AbstractHornType getRandomHornType(boolean includeTypeNONE) {
+		return Util.randomItemFrom(getHornTypes(includeTypeNONE));
+	}
+
+	List<AbstractHornType> getHornTypes(boolean removeTypeNone);
+
+	AbstractPenisType getPenisType();
+
+	/**
+	 * @param includeTypeNONE Set as true if you want the returned TailType to possibly include TailType.NONE. (Will include NONE anyway if the list is empty.)
+	 * @return A random TailType from this race's possible tailTypes.
+	 */
+	default AbstractTailType getRandomTailType(boolean includeTypeNONE) {
+		var tailList = new ArrayList<>(getTailType());
+		if(!includeTypeNONE && tailList.size()!=1)
+			tailList.remove(TailType.NONE);
+		return Util.randomItemFrom(tailList);
+	}
+
+	List<AbstractTailType> getTailType();
+
+	AbstractTentacleType getTentacleType();
+
+	AbstractVaginaType getVaginaType();
+
+	/**
+	 * @param includeTypeNONE Set as true if you want the returned TailType to possibly include TailType.NONE. (Will include NONE anyway if the list is empty.)
+	 * @return A random TailType from this race's possible tailTypes.
+	 */
+	default AbstractWingType getRandomWingType(boolean includeTypeNONE) {
+		List<AbstractWingType> wingList = new ArrayList<>(getWingTypes());
+		if(!includeTypeNONE && wingList.size()!=1)
+			wingList.remove(WingType.NONE);
+		return Util.randomItemFrom(wingList);
+	}
+
+	List<AbstractWingType> getWingTypes();
+
+	int getArmRows();
+
+	float getAnusCapacity();
+
+	int getAnusDepth();
+
+	int getAnusWetness();
+
+	int getAnusElasticity();
+
+	int getAnusPlasticity();
+
+	int getMaleHeight();
+
+	int getMaleFemininity();
+
+	int getMaleMuscle();
+
+	int getMaleBodySize();
+
+	int getFemaleHeight();
+
+	int getFemaleFemininity();
+
+	int getFemaleBodySize();
+
+	int getFemaleMuscle();
+
+	int getMaleAssSize();
+
+	int getFemaleAssSize();
+
+	int getMaleHipSize();
+
+	int getFemaleHipSize();
+
+	int getMaleHairLength();
+
+	int getFemaleHairLength();
+
+	int getMaleHornLength();
+
+	int getFemaleHornLength();
+
+	int getNoBreastSize();
+
+	int getBreastSize();
+
+	int getMaleLactationRate();
+
+	int getFemaleLactationRate();
+
+	int getFemaleBreastElasticity();
+
+	int getMaleBreastElasticity();
+
+	int getFemaleBreastPlasticity();
+
+	int getMaleBreastPlasticity();
+
+	float getFemaleBreastCapacity();
+
+	float getMaleBreastCapacity();
+
+	int getFemaleBreastDepth();
+
+	int getMaleBreastDepth();
+
+	int getMaleNippleSize();
+
+	int getFemaleNippleSize();
+
+	NippleShape getMaleNippleShape();
+
+	NippleShape getFemaleNippleShape();
+
+	int getMaleNippleCountPerBreast();
+
+	int getFemaleNippleCountPerBreast();
+
+	int getMaleAreolaeSize();
+
+	int getFemaleAreolaeSize();
+
+	AreolaeShape getMaleAreolaeShape();
+
+	AreolaeShape getFemaleAreolaeShape();
+
+	AbstractBreastType getBreastCrotchType();
+
+	List<BreastShape> getBreastCrotchShapes();
+
+	int getBreastCrotchSize();
+
+	int getBreastCrotchLactationRate();
+
+	float getBreastCrotchCapacity();
+
+	int getBreastCrotchDepth();
+
+	int getBreastCrotchElasticity();
+
+	int getBreastCrotchPlasticity();
+
+	int getNippleCountPerBreastCrotch();
+
+	int getBreastCrotchNippleSize();
+
+	NippleShape getBreastCrotchNippleShape();
+
+	int getBreastCrotchAreolaeSize();
+
+	AreolaeShape getBreastCrotchAreolaeShape();
+
+	int getBreastCrotchCount();
+
+	int getClitSize();
+
+	int getClitGirth();
+
+	int getPenisSize();
+
+	int getPenisGirth();
+
+	int getTesticleSize();
+
+	int getCumProduction();
+
+	float getVaginaCapacity();
+
+	int getVaginaDepth();
+
+	int getVaginaWetness();
+
+	int getVaginaElasticity();
+
+	int getVaginaPlasticity();
+
+	int getBreastCountMale();
+
+	int getBreastCountFemale();
+
+	int getTesticleQuantity();
+
+	int getMaleLipSize();
+
+	int getFemaleLipSize();
+
+	int getMaleWingSize();
+
+	int getFemaleWingSize();
+
+	GenitalArrangement getGenitalArrangement();
+
 	public static AbstractRacialBody HUMAN = new AbstractRacialBody(
 			Util.newArrayListOfValues(AntennaType.NONE),
 			ArmType.HUMAN, 1,
@@ -635,93 +887,48 @@ public class RacialBody {
 			return SexualOrientationPreference.getSexualOrientationFromUserPreferences(95, 5, 0);
 		}
 	};
-	
-	public static AbstractRacialBody valueOfRace(AbstractRace race) {
+
+	static AbstractRacialBody valueOfRace(AbstractRace race) {
 		return race.getRacialBody();
 	}
-	
-	public static List<AbstractRacialBody> allRacialBodies;
-	
-	public static Map<AbstractRacialBody, String> RacialBodyToIdMap = new HashMap<>();
-	public static Map<String, AbstractRacialBody> idToRacialBodyMap = new HashMap<>();
-	
+
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
-	public static AbstractRacialBody getRacialBodyFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToRacialBodyMap.keySet());
-		return idToRacialBodyMap.get(id);
-	}
-	
-	public static String getIdFromRacialBody(AbstractRacialBody perk) {
-		return RacialBodyToIdMap.get(perk);
+	@Deprecated
+	static AbstractRacialBody getRacialBodyFromId(String id) {
+		return table.of(id);
 	}
 
-	static {
-		allRacialBodies = new ArrayList<>();
+	@Deprecated
+	static String getIdFromRacialBody(AbstractRacialBody perk) {
+		return perk.getId();
+	}
+
+	Table<AbstractRacialBody> table = new Table<>(s->s) {{
 
 		// Modded racial bodies:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", null, "racialBody");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractRacialBody racialBody = new AbstractRacialBody(innerEntry.getValue(), entry.getKey(), true) {};
-					String id = innerEntry.getKey().replaceAll("_racialBody", "");
-					allRacialBodies.add(racialBody);
-					RacialBodyToIdMap.put(racialBody, id);
-					idToRacialBodyMap.put(id, racialBody);
-				} catch(Exception ex) {
-					System.err.println("Loading modded racialBody failed at 'RacialBody'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		// External res racial bodies:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", null, "racialBody");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractRacialBody racialBody = new AbstractRacialBody(innerEntry.getValue(), entry.getKey(), false) {};
-					String id = innerEntry.getKey().replaceAll("_racialBody", "");
-					allRacialBodies.add(racialBody);
-					RacialBodyToIdMap.put(racialBody, id);
-					idToRacialBodyMap.put(id, racialBody);
-				} catch(Exception ex) {
-					System.err.println("Loading racialBody failed at 'RacialBody'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		// Hard-coded:
-		
-		Field[] fields = RacialBody.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractRacialBody.class.isAssignableFrom(f.getType())) {
-				
-				AbstractRacialBody RacialBody;
-				
-				try {
-					RacialBody = ((AbstractRacialBody) f.get(null));
+		forEachMod("/race",null,"racialBody",(f,n,a)->{
+			var k = n.replaceAll("_racialBody","");
+			var v = new AbstractRacialBody(f,a,true);
+			v.id = k;
+			add(k,v);
+		});
 
-					RacialBodyToIdMap.put(RacialBody, f.getName());
-					idToRacialBodyMap.put(f.getName(), RacialBody);
-					allRacialBodies.add(RacialBody);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
-	public static List<AbstractRacialBody> getAllRacialBodies() {
-		return allRacialBodies;
+		// External res racial bodies:
+		forEachExternal("res/race",null,"racialBody",(f,n,a)->{
+			var k = n.replaceAll("_racialBody","");
+			var v = new AbstractRacialBody(f,a,false);
+			v.id = k;
+			add(k,v);
+		});
+
+		// Hard-coded:
+		addFields(RacialBody.class,AbstractRacialBody.class,(k,v)->v.id=k);
+	}};
+
+	@Deprecated
+	static List<AbstractRacialBody> getAllRacialBodies() {
+		return table.list();
 	}
 }

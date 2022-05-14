@@ -1,13 +1,11 @@
 package com.lilithsthrone.game.character.body.coverings;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringPattern;
@@ -22,8 +20,99 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.0
  * @author Innoxia
  */
-public class BodyCoveringType {
-	
+public interface BodyCoveringType {
+
+	String getId();
+
+	BodyCoveringCategory getCategory();
+
+	String getDeterminer(GameCharacter gc);
+
+	default boolean isDefaultPlural() {
+		return false;
+	}
+
+	String getNameSingular(GameCharacter gc);
+
+	String getNamePlural(GameCharacter gc);
+
+	/**
+	 *  @return The name of the covering for use in transformation menus. Will most likely return the same as getName(gc)
+	 */
+	default String getNameTransformation(GameCharacter gc) {
+		return getName(gc);
+	}
+
+	default String getName(GameCharacter gc) {
+		return isDefaultPlural() ? getNamePlural(gc) : getNameSingular(gc);
+	}
+
+	default Map<CoveringPattern,Integer> getNaturalPatterns() {
+		return Map.of();
+	}
+
+	default Map<CoveringPattern,Integer> getDyePatterns() {
+		return Map.of();
+	}
+
+	default Map<CoveringPattern,Integer> getAllPatterns() {
+		var r = new HashMap<>(getDyePatterns());
+		r.putAll(getNaturalPatterns());
+		return Map.copyOf(r);
+	}
+
+	default List<Colour> getNaturalColoursPrimary() {
+		return List.of();
+	}
+
+	default List<Colour> getDyeColoursPrimary() {
+		return List.of();
+	}
+
+	default List<Colour> getNaturalColoursSecondary() {
+		return List.of();
+	}
+
+	default List<Colour> getDyeColoursSecondary() {
+		return List.of();
+	}
+
+	default List<Colour> getAllColours() {
+		var r = new ArrayList<>(getAllPrimaryColours());
+		for(var c : getAllSecondaryColours())
+			if(!r.contains(c))
+				r.add(c);
+		return List.copyOf(r);
+	}
+
+	default List<Colour> getAllPrimaryColours() {
+		var r = new ArrayList<>(getNaturalColoursPrimary());
+		for(var c : getDyeColoursPrimary())
+			if(!r.contains(c))
+				r.add(c);
+		return List.copyOf(r);
+	}
+
+	default List<Colour> getAllSecondaryColours() {
+		var r = new ArrayList<>(getNaturalColoursSecondary());
+		for(var c : getDyeColoursSecondary())
+			if(!r.contains(c))
+				r.add(c);
+		return List.copyOf(r);
+	}
+
+	default List<CoveringModifier> getNaturalModifiers() {
+		return List.of();
+	}
+
+	default List<CoveringModifier> getExtraModifiers() {
+		return List.of();
+	}
+
+	default List<CoveringModifier> getAllModifiers() {
+		return List.of();
+	}
+
 	public static AbstractBodyCoveringType HUMAN = new AbstractBodyCoveringType(
 			BodyCoveringCategory.MAIN_SKIN,
 			BodyCoveringTemplateFactory.createSkin(
@@ -973,19 +1062,14 @@ public class BodyCoveringType {
 			PresetColour.allMakeupColours) {
 	};
 	
-	
-	public static List<AbstractBodyCoveringType> allBodyCoveringTypes;
-	
-	public static Map<AbstractBodyCoveringType, String> bodyCoveringTypesToIdMap = new HashMap<>();
-	public static Map<String, AbstractBodyCoveringType> idToBodyCoveringTypesMap = new HashMap<>();
+	Table table = new Table();
 
-	public static List<AbstractBodyCoveringType> allMakeupTypes;
-	public static List<AbstractBodyCoveringType> allSlimeTypes;
-	public static List<AbstractBodyCoveringType> allSiliconeTypes;
-	
-	
 	public static AbstractBodyCoveringType getBodyCoveringTypeFromId(String id) {
-		
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
+
 		// Imp changes:
 		if(id.equals("IMP")) {
 			id = "DEMON_COMMON";
@@ -1031,12 +1115,11 @@ public class BodyCoveringType {
 			id = "ANTLER";
 		}
 		
-		id = Util.getClosestStringMatch(id, idToBodyCoveringTypesMap.keySet());
-		return idToBodyCoveringTypesMap.get(id);
+		return id;
 	}
 	
 	public static String getIdFromBodyCoveringType(AbstractBodyCoveringType bct) {
-		return bodyCoveringTypesToIdMap.get(bct);
+		return bct.getId();
 	}
 	
 	/**
@@ -1047,78 +1130,40 @@ public class BodyCoveringType {
 	public static AbstractBodyCoveringType getMaterialBodyCoveringType(BodyMaterial material, BodyCoveringCategory category) {
 		return getBodyCoveringTypeFromId(material.toString()+"_"+category.toString());
 	}
-	
-	static {
-		allBodyCoveringTypes = new ArrayList<>();
-		allMakeupTypes = new ArrayList<>();
-		
+
+
+	final class Table extends com.lilithsthrone.utils.Table<AbstractBodyCoveringType> {
+
+		private static ArrayList<AbstractBodyCoveringType> allMakeupTypes = new ArrayList<>();
+
+		private static ArrayList<AbstractBodyCoveringType> allSlimeTypes = new ArrayList<>();
+
+		private static ArrayList<AbstractBodyCoveringType> allSiliconeTypes = new ArrayList<>();
+
+		private Table() {
+			super(BodyCoveringType::sanitize);
+
 		// Modded covering types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "coveringTypes", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractBodyCoveringType coveringType = new AbstractBodyCoveringType(innerEntry.getValue(), entry.getKey(), true) {};
-					String id = innerEntry.getKey().replaceAll("coveringTypes_", "");
-					allBodyCoveringTypes.add(coveringType);
-					bodyCoveringTypesToIdMap.put(coveringType, id);
-					idToBodyCoveringTypesMap.put(id, coveringType);
-				} catch(Exception ex) {
-					System.err.println("Loading modded bodyCoveringType failed at 'BodyCoveringType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+			forEachMod("/race","coveringTypes",null,(f,n,a)->{
+				var v = new AbstractBodyCoveringType(f,a,true) {};
+				add(v.id=n.replaceAll("coveringTypes_",""),v);
+			});
 		// External res covering types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "coveringTypes", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractBodyCoveringType coveringType = new AbstractBodyCoveringType(innerEntry.getValue(), entry.getKey(), false) {};
-					String id = innerEntry.getKey().replaceAll("coveringTypes_", "");
-					allBodyCoveringTypes.add(coveringType);
-					bodyCoveringTypesToIdMap.put(coveringType, id);
-					idToBodyCoveringTypesMap.put(id, coveringType);
-				} catch(Exception ex) {
-					System.err.println("Loading bodyCoveringType failed at 'BodyCoveringType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		Field[] fields = BodyCoveringType.class.getFields();
-		
-		for(Field f : fields){
-			if(AbstractBodyCoveringType.class.isAssignableFrom(f.getType())) {
-				AbstractBodyCoveringType bct;
-				
-				try {
-					bct = ((AbstractBodyCoveringType) f.get(null));
-					
-					if(bct.getCategory()==BodyCoveringCategory.MAKEUP) {
-						allMakeupTypes.add(bct);
-					}
-					
-					bodyCoveringTypesToIdMap.put(bct, f.getName());
-					idToBodyCoveringTypesMap.put(f.getName(), bct);
-					allBodyCoveringTypes.add(bct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
+			forEachExternal("res/race","coveringTypes",null,(f,n,a)->{
+				var v = new AbstractBodyCoveringType(f,a,false) {};
+				add(v.id=n.replaceAll("coveringTypes_",""),v);
+			});
+			addFields(BodyCoveringType.class,AbstractBodyCoveringType.class,(k,v)->{
+				v.id=k;
+				if(v.getCategory()==BodyCoveringCategory.MAKEUP)
+					allMakeupTypes.add(v);
+			});
 		// Automatically add AbstractBodyCoveringTypes for all non-flesh materials:
 		for(BodyMaterial mat : BodyMaterial.values()) {
-			if(mat!=BodyMaterial.FLESH) {
+				if(mat==BodyMaterial.FLESH)
+					continue;
 				if(mat==BodyMaterial.SLIME) {
-					allSlimeTypes = new ArrayList<>();
-					
+
 					for(BodyCoveringCategory cat : BodyCoveringCategory.values()) {
 						AbstractBodyCoveringType bct = null;
 						switch(cat) {
@@ -1179,17 +1224,13 @@ public class BodyCoveringType {
 						}
 						
 						if(bct!=null) {
-							String id =  mat.toString()+"_"+cat.toString();
-							bodyCoveringTypesToIdMap.put(bct,id);
-							idToBodyCoveringTypesMap.put(id, bct);
-							allBodyCoveringTypes.add(bct);
+							add(bct.id=mat+"_"+cat,bct);
 							allSlimeTypes.add(bct);
 						}
 					}
 					
 				} else if(mat==BodyMaterial.SILICONE) { // Doll covering types:
-					allSiliconeTypes = new ArrayList<>();
-					
+
 					for(BodyCoveringCategory cat : BodyCoveringCategory.values()) {
 						AbstractBodyCoveringType bct = null;
 						switch(cat) {
@@ -1227,7 +1268,7 @@ public class BodyCoveringType {
 										BodyCoveringTemplateFactory.createSilicone(CoveringPattern.EYE_SCLERA, Util.newHashMapOfValues(new Value<>(CoveringPattern.EYE_IRISES_HETEROCHROMATIC, 1)))) {
 								};
 								break;
-								
+
 							case ANUS:
 								bct = new AbstractBodyCoveringType(cat, BodyCoveringTemplateFactory.createSilicone(CoveringPattern.ORIFICE_ANUS, null)) {};
 								break;
@@ -1246,22 +1287,20 @@ public class BodyCoveringType {
 							case SPINNERET:
 								bct = new AbstractBodyCoveringType(cat, BodyCoveringTemplateFactory.createSilicone(CoveringPattern.ORIFICE_SPINNERET, null)) {};
 								break;
-								
+
 							case ARTIFICIAL:
 							case FLUID:
 							case MAKEUP:
 								break;
 						}
-						
+
 						if(bct!=null) {
 							String id =  mat.toString()+"_"+cat.toString();
-							bodyCoveringTypesToIdMap.put(bct,id);
-							idToBodyCoveringTypesMap.put(id, bct);
-							allBodyCoveringTypes.add(bct);
+							add(mat + "_" + cat, bct);
 							allSiliconeTypes.add(bct);
 						}
 					}
-					
+
 				} else {
 					String name = "";
 					CoveringModifier modifier = CoveringModifier.SMOOTH;
@@ -1371,10 +1410,7 @@ public class BodyCoveringType {
 							}
 							AbstractBodyCoveringType bct = new AbstractBodyCoveringType(cat, BodyCoveringTemplateFactory.createElemental(name, modifier, pattern, naturalColours)) {};
 							
-							String id =  mat.toString()+"_"+cat.toString();
-							bodyCoveringTypesToIdMap.put(bct, id);
-							idToBodyCoveringTypesMap.put(id, bct);
-							allBodyCoveringTypes.add(bct);
+							add(bct.id=mat+"_"+cat,bct);
 						}
 					}
 				}
@@ -1385,18 +1421,18 @@ public class BodyCoveringType {
 	}
 	
 	public static List<AbstractBodyCoveringType> getAllBodyCoveringTypes() {
-		return allBodyCoveringTypes;
+		return table.list();
 	}
 	
 	public static List<AbstractBodyCoveringType> getAllMakeupTypes() {
-		return allMakeupTypes;
+		return Table.allMakeupTypes;
 	}
 	
 	public static List<AbstractBodyCoveringType> getAllSlimeTypes() {
-		return allSlimeTypes;
+		return Table.allSlimeTypes;
 	}
-	
+
 	public static List<AbstractBodyCoveringType> getAllSiliconeTypes() {
-		return allSiliconeTypes;
+		return Table.allSiliconeTypes;
 	}
 }

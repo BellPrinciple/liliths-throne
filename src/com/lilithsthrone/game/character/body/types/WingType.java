@@ -1,18 +1,19 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractWingType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
+import com.lilithsthrone.game.character.body.valueEnums.WingSize;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -20,11 +21,38 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.8.2
  * @author Innoxia
  */
-public class WingType {
+public interface WingType extends BodyPartTypeInterface {
+
+	boolean allowsFlight();
+
+	boolean isGeneric();
+
+	WingSize getMinimumSize();
+
+	WingSize getMaximumSize();
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return true;
+	}
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "a pair of";
+	}
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(WingType.getWingTypes(getRace()));
+	}
 
 	// If any more wing types are added, check to see that the potion TFs still work. (5 types is currently the maximum.)
 	
-	public static final AbstractWingType NONE = new AbstractWingType(
+	public static final AbstractWingType NONE = new Special(
 			null,
 			Race.NONE,
 			false,
@@ -40,11 +68,15 @@ public class WingType {
 			+ "#ENDIF"
 			+ "<br/>[npc.Name] now [npc.has] [style.boldTfGeneric(no wings)].",
 			"") {
+		@Override
+		public TFModifier getTFModifier() {
+			return TFModifier.REMOVAL;
+		}
 	};
 
 	// Angels:
 	
-	public static final AbstractWingType ANGEL = new AbstractWingType(
+	public static final AbstractWingType ANGEL = new Special(
 			BodyCoveringType.ANGEL_FEATHER,
 			Race.ANGEL,
 			true,
@@ -65,7 +97,7 @@ public class WingType {
 
 	// Demons:
 	
-	public static final AbstractWingType DEMON_COMMON = new AbstractWingType(
+	public static final AbstractWingType DEMON_COMMON = new Special(
 			BodyCoveringType.DEMON_COMMON,
 			Race.DEMON,
 			true,
@@ -88,7 +120,7 @@ public class WingType {
 			"[npc.sheHasFull] a pair of [npc.wingSize], leathery, demonic wings, which are [npc.materialDescriptor] [npc.wingFullDescription(true)].") {
 	};
 
-	public static final AbstractWingType DEMON_FEATHERED = new AbstractWingType(
+	public static final AbstractWingType DEMON_FEATHERED = new Special(
 			BodyCoveringType.DEMON_FEATHER,
 			Race.DEMON,
 			true,
@@ -113,7 +145,7 @@ public class WingType {
 	
 	// Generic:
 
-	public static final AbstractWingType LEATHERY = new AbstractWingType(
+	public static final AbstractWingType LEATHERY = new Special(
 			BodyCoveringType.WING_LEATHER,
 			Race.NONE,
 			true,
@@ -136,7 +168,7 @@ public class WingType {
 		}
 	};
 
-	public static final AbstractWingType FEATHERED = new AbstractWingType(
+	public static final AbstractWingType FEATHERED = new Special(
 			BodyCoveringType.FEATHERS,
 			Race.NONE,
 			true,
@@ -159,7 +191,7 @@ public class WingType {
 		}
 	};
 
-	public static final AbstractWingType INSECT = new AbstractWingType(
+	public static final AbstractWingType INSECT = new Special(
 			BodyCoveringType.WING_CHITIN,
 			Race.NONE,
 			true,
@@ -182,122 +214,57 @@ public class WingType {
 		}
 	};
 
+	class Special extends AbstractWingType {
 
-	private static List<AbstractWingType> allWingTypes;
-	private static Map<AbstractWingType, String> wingToIdMap = new HashMap<>();
-	private static Map<String, AbstractWingType> idToWingMap = new HashMap<>();
-	
-	static {
-		allWingTypes = new ArrayList<>();
+		private String id;
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("wing")) {
-					try {
-						AbstractWingType type = new AbstractWingType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allWingTypes.add(type);
-						wingToIdMap.put(type, id);
-						idToWingMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
+		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, boolean allowsFlight, String transformationName, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String wingTransformationDescription, String wingBodyDescription) {
+			super(coveringType, race, allowsFlight, transformationName, name, namePlural, descriptorsMasculine, descriptorsFeminine, wingTransformationDescription, wingBodyDescription);
 		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("wing")) {
-					try {
-						AbstractWingType type = new AbstractWingType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allWingTypes.add(type);
-						wingToIdMap.put(type, id);
-						idToWingMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded wing types:
-		
-		Field[] fields = WingType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractWingType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractWingType ct;
-				try {
-					ct = ((AbstractWingType) f.get(null));
 
-					wingToIdMap.put(ct, f.getName());
-					idToWingMap.put(f.getName(), ct);
-					
-					allWingTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(WingType.class.getFields())
+			.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+			.findAny().orElseThrow().getName());
 		}
-		
-		Collections.sort(allWingTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
 	}
-	
+
+	TypeTable<AbstractWingType> table = new TypeTable<>(
+		WingType::sanitize,
+		WingType.class,
+		AbstractWingType.class,
+		"wing",
+		(f,n,a,m)->new AbstractWingType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
 	public static AbstractWingType getWingTypeFromId(String id) {
-		if(id.equals("IMP")) {
-			return WingType.DEMON_COMMON;
-		}
-		if(id.equals("PEGASUS")) {
-			return WingType.FEATHERED;
-		}
-		id = Util.getClosestStringMatch(id, idToWingMap.keySet());
-		return idToWingMap.get(id);
+		return table.of(id);
 	}
-	
+
+	private static String sanitize(String id) {
+		return switch(id) {
+			case "IMP" -> "DEMON_COMMON";
+			case "PEGASUS" -> "FEATHERED";
+			default -> id;
+		};
+	}
+
 	public static String getIdFromWingType(AbstractWingType wingType) {
-		return wingToIdMap.get(wingType);
+		return wingType.getId();
 	}
-	
+
 	public static List<AbstractWingType> getAllWingTypes() {
-		return allWingTypes;
+		return table.listByRace();
 	}
-	
-	private static Map<AbstractRace, List<AbstractWingType>> typesMap = new HashMap<>();
-	
+
 	public static List<AbstractWingType> getWingTypes(AbstractRace r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractWingType> types = new ArrayList<>();
-		for(AbstractWingType type : WingType.getAllWingTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		if(types.isEmpty()) {
-			for(AbstractWingType type : WingType.getAllWingTypes()) {
-				if(type.isGeneric()) {
-					types.add(type);
-				}
-			}
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElseGet(()->table.listByRace().stream()
+			.filter(AbstractWingType::isGeneric)
+			.collect(Collectors.toList()));
 	}
 }

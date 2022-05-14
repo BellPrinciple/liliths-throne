@@ -7,8 +7,6 @@ import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
-import com.lilithsthrone.game.character.attributes.CorruptionLevel;
-import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
@@ -20,8 +18,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.4.2
  * @author Innoxia
  */
-public abstract class AbstractFetish {
+public abstract class AbstractFetish implements Fetish {
 
+	String id;
 	private int renderingPriority;
 	protected String name;
 	protected String shortDescriptor;
@@ -37,8 +36,6 @@ public abstract class AbstractFetish {
 	private List<String> modifiersList;
 	
 	private List<AbstractFetish> fetishesForAutomaticUnlock;
-
-	protected static List<String> perkRequirementsList = new ArrayList<>();
 
 	protected static final String bimboString = SvgUtil.colourReplacement(
 			"FETISH_BIMBO",
@@ -108,36 +105,26 @@ public abstract class AbstractFetish {
 		}
 	}
 
+	@Override
 	public String getId() {
-		return Fetish.getIdFromFetish(this);
+		return id;
 	}
-	
+
+	@Override
 	public List<AbstractFetish> getFetishesForAutomaticUnlock() {
 		return fetishesForAutomaticUnlock;
 	}
-	
-	public boolean isAvailable(GameCharacter character) {
-		return true;
-	}
-	
-	public List<String> getPerkRequirements(GameCharacter character) {
-		perkRequirementsList.clear();
 
-		return perkRequirementsList;
-	}
-
+	@Override
 	public String getName(GameCharacter owner) {
 		return name;
 	}
-	
+
+	@Override
 	public String getShortDescriptor(GameCharacter target) {
 		return shortDescriptor;
 	}
 
-	public abstract String getDescription(GameCharacter target);
-	
-	public abstract String getFetishDesireDescription(GameCharacter target, FetishDesire desire);
-	
 	protected static String getGenericFetishDesireDescription(GameCharacter target, FetishDesire desire, String descriptor) {
 		switch(desire) {
 			case ZERO_HATE:
@@ -154,14 +141,12 @@ public abstract class AbstractFetish {
 		return "";
 	}
 
+	@Override
 	public int getExperienceGainFromSexAction() {
 		return experienceGainFromSexAction;
 	}
-	
-	public int getCost() {
-		return 5;
-	}
 
+	@Override
 	public List<String> getModifiersAsStringList(GameCharacter owner) {
 		List<String> modList = new ArrayList<>(modifiersList);
 		if(getExtraEffects(owner) != null) {
@@ -170,62 +155,27 @@ public abstract class AbstractFetish {
 		return modList;
 	}
 
+	@Override
 	public HashMap<AbstractAttribute, Integer> getAttributeModifiers() {
 		return attributeModifiers;
 	}
-	
-	public String getAppliedFetishLevelEffectDescription(GameCharacter character) {
-		return null;
-	}
-	
-	public String applyPerkGained(GameCharacter character) {
-		return "";
-	}
 
-	public String applyPerkLost(GameCharacter character){
-		return "";
-	}
-
-	public Fetish getPreviousLevelPerk() {
-		return null;
-	}
-
-	public Perk getNextLevelPerk() {
-		return null;
-	}
-	
-	public CorruptionLevel getAssociatedCorruptionLevel() {
-		return CorruptionLevel.ZERO_PURE;
-	}
-	
-	public boolean isContentEnabled() {
-		return true;
-	}
-	
-	public AbstractFetish getOpposite() {
-		return null;
-	}
-	
-	public boolean isTopFetish() {
-		return false;
-	}
-	
+	@Override
 	public int getRenderingPriority() {
 		return renderingPriority;
 	}
 
+	@Override
 	public List<String> getExtraEffects(GameCharacter owner) {
 		return extraEffects;
 	}
-	
-	public Colour getColour() {
-		return colourShades.get(0);
-	}
 
+	@Override
 	public List<Colour> getColourShades() {
 		return colourShades;
 	}
 
+	@Override
 	public String getSVGString(GameCharacter owner) {
 		if(SVGString==null) {
 			if(pathName!=null && !pathName.isEmpty()) {
@@ -248,9 +198,5 @@ public abstract class AbstractFetish {
 	
 	public static int getExperienceGainFromTakingOtherVirginity(GameCharacter owner) {
 		return owner.getLevel();
-	}
-	
-	public FetishPreference getFetishPreferenceDefault() {
-		return FetishPreference.THREE_NEUTRAL;
 	}
 }

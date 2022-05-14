@@ -1,15 +1,14 @@
 package com.lilithsthrone.game.character.attributes;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.race.AbstractRace;
+import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
 /**
@@ -19,7 +18,92 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4
  * @author Innoxia
  */
-public class Attribute {
+public interface Attribute {
+
+	String getId();
+
+	default boolean hasStatusEffect() {
+		return false;
+	}
+
+	boolean isPercentage();
+
+	int getBaseValue();
+
+	int getLowerLimit();
+
+	int getUpperLimit();
+
+	/**
+	 * @return true if this Attribute should be treates as being 'infinite' when the upperLimit is reached. (Only used for shielding.)
+	 */
+	default boolean isInfiniteAtUpperLimit() {
+		return false;
+	}
+
+	default String getInfiniteDescription() {
+		return "";
+	}
+
+	String getName();
+
+	default String getColouredName(String tag) {
+		return "<"+tag+" style='color:"+getColour().toWebHexString()+";'>"+getName()+"</"+tag+">";
+	}
+
+	default String getFormattedValue(float value) {
+		return getFormattedValue(value, null);
+	}
+
+	default String getFormattedValue(float value, String htmlTag) {
+		String valueForDisplay;
+		if(((int)value)==value) {
+			valueForDisplay = String.valueOf(((int)value));
+		} else {
+			valueForDisplay = String.valueOf(value);
+		}
+		String returnValue = "";
+		if(this.isInfiniteAtUpperLimit() && value>=this.getUpperLimit()) {
+			if(!this.getInfiniteDescription().isEmpty()) {
+				returnValue = this.getInfiniteDescription();
+			} else {
+				returnValue = "[style.colourExcellent(Infinite)] <span style='color: "+ this.getColour().toWebHexString()+ ";'>"+ Util.capitaliseSentence(this.getAbbreviatedName())+ "</span>";
+			}
+
+		} else {
+			String minorColour = "";
+			if(this.isPercentage()){
+				minorColour = "Minor";
+				valueForDisplay = valueForDisplay+"%";
+			}
+			returnValue = (value>0?"[style.colour"+minorColour+"Good(+":"[style.colour"+minorColour+"Bad(")+valueForDisplay+")]"
+					+ " <span style='color:"+this.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(this.getAbbreviatedName())+"</span>";
+		}
+
+		if(htmlTag!=null) {
+			return "<"+htmlTag+">"+returnValue+"</"+htmlTag+">";
+		} else {
+			return returnValue;
+		}
+	}
+
+	String getAbbreviatedName();
+
+	String getDescription(GameCharacter owner);
+
+	Colour getColour();
+
+	default String getEffectsAsStringList() {
+		return "";
+	}
+
+	String getPositiveEnchantment();
+
+	String getNegativeEnchantment();
+
+	default String getSVGString() {
+		return null;
+	}
 
 	public static AbstractAttribute HEALTH_MAXIMUM = new AbstractAttribute(false,
 			1,
@@ -583,30 +667,16 @@ public class Attribute {
 //			return "Increases damage vs elementals.";
 //		}
 //	};
-	
-	
-	public static Map<AbstractAttribute, String> attributeToIdMap = new HashMap<>();
-	public static Map<String, AbstractAttribute> idToAttributeMap = new HashMap<>();
-	public static List<AbstractAttribute> allAttributes;
-	
-	public static Map<AbstractRace, AbstractAttribute> racialAttributes = new HashMap<>();
-
-	private static Map<String, AbstractAttribute> oldConversionMapping = new HashMap<>();
-	static {
-		oldConversionMapping.put("CORRUPTION", Attribute.MAJOR_CORRUPTION);
-		oldConversionMapping.put("STRENGTH", Attribute.MAJOR_PHYSIQUE);
-		oldConversionMapping.put("MAJOR_STRENGTH", Attribute.MAJOR_PHYSIQUE);
-		oldConversionMapping.put("INTELLIGENCE", Attribute.MAJOR_ARCANE);
-		oldConversionMapping.put("RESISTANCE_ATTACK", Attribute.RESISTANCE_PHYSICAL);
-		oldConversionMapping.put("RESISTANCE_MANA", Attribute.RESISTANCE_LUST);
-		oldConversionMapping.put("RESISTANCE_PURE", Attribute.ENERGY_SHIELDING);
-	}
 
 	/**
 	 * @return The Attribute that has an id closest to the supplied attributeId.
 	 *  <b>Will return null</b> if the matching distance is greater than 3 (which typically will be more than enough to catch spelling errors, indicating that the flag has been removed).
 	 */
 	public static AbstractAttribute getAttributeFromId(String attributeId) {
+		return table.of(attributeId);
+	}
+
+	private static String sanitize(String attributeId) {
 		if(attributeId.startsWith("RESISTANCE_ELEMENTAL")) {
 			attributeId = "RESISTANCE_ELEMENTAL";
 		} else if(attributeId.startsWith("DAMAGE_ELEMENTAL")) {
@@ -614,52 +684,40 @@ public class Attribute {
 		} else if(attributeId.startsWith("CRITICAL_CHANCE")) { // Critical chance was removed, so return damage instead as a replacement for old saves
 			attributeId = "CRITICAL_DAMAGE";
 		}
-		
-		if(oldConversionMapping.containsKey(attributeId)) {
-			return oldConversionMapping.get(attributeId);
-		}
 
-		attributeId = Util.getClosestStringMatch(attributeId, idToAttributeMap.keySet(), 3);
-		
-		return idToAttributeMap.get(attributeId);
+		return switch(attributeId) {
+			case "CORRUPTION" -> "MAJOR_CORRUPTION";
+			case "STRENGTH", "MAJOR_STRENGTH" -> "MAJOR_PHYSIQUE";
+			case "INTELLIGENCE" -> "MAJOR_ARCANE";
+			case "RESISTANCE_ATTACK" -> "RESISTANCE_PHYSICAL";
+			case "RESISTANCE_MANA" -> "RESISTANCE_LUST";
+			case "RESISTANCE_PURE" -> "ENERGY_SHIELDING";
+			default -> attributeId;
+		};
 	}
 
 	public static String getIdFromAttribute(AbstractAttribute attribute) {
-		return attributeToIdMap.get(attribute);
+		return attribute.getId();
 	}
 
 	public static List<AbstractAttribute> getAllAttributes() {
-		return allAttributes;
+		return table.list();
 	}
-	
-	public static AbstractAttribute getRacialDamageAttribute(AbstractRace race) {
-		return racialAttributes.get(race);
-	}
-	
-	static {
-		allAttributes = new ArrayList<>();
-		
-		// Hard-coded attributes (all those up above):
-		
-		Field[] fields = Attribute.class.getFields();
-		
-		for(Field f : fields) {
-			if (AbstractAttribute.class.isAssignableFrom(f.getType())) {
-				AbstractAttribute attribute;
-				try {
-					attribute = ((AbstractAttribute) f.get(null));
 
-					attributeToIdMap.put(attribute, f.getName());
-					idToAttributeMap.put(f.getName(), attribute);
-					allAttributes.add(attribute);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		// NOTE: Racial attributes are added at the bottom of the static block in Race.java!
+	public static AbstractAttribute getRacialDamageAttribute(AbstractRace race) {
+		return Race.DamageAttribute.of(race);
 	}
-	
+
+	Table<AbstractAttribute> table = new Table<>(Attribute::sanitize) {{
+
+		// Hard-coded attributes (all those up above):
+		addFields(Attribute.class,AbstractAttribute.class,(k,v)->v.id=k);
+
+		// NOTE: Racial attributes are added at the bottom of the static block in Race.java!
+	}};
+
+	@Deprecated
+	public static void addAttribute(String id, AbstractAttribute a) {
+		table.add(a.id=id,a);
+	}
 }

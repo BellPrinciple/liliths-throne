@@ -12,10 +12,9 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.BreastType;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.types.NippleType;
-import com.lilithsthrone.game.character.body.valueEnums.BreastShape;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -26,8 +25,9 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractBreastType implements BodyPartTypeInterface {
+public class AbstractBreastType implements BreastType {
 
+	private String id;
 	private boolean mod;
 	private boolean fromExternalFile;
 
@@ -123,7 +123,8 @@ public abstract class AbstractBreastType implements BodyPartTypeInterface {
 				breastsCrotchBodyDescription);
 	}
 
-	public AbstractBreastType(File XMLFile, String author, boolean mod) {
+	public AbstractBreastType(File XMLFile, String id, String author, boolean mod) {
+		this.id = id;
 		if (XMLFile.exists()) {
 			try {
 				Document doc = Main.getDocBuilder().parse(XMLFile);
@@ -186,19 +187,33 @@ public abstract class AbstractBreastType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	//TODO visible only for BreastType
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public AbstractNippleType getNippleType() {
 		return nippleType;
 	}
 
+	@Override
 	public AbstractFluidType getFluidType() {
 		return fluidType;
 	}
@@ -206,23 +221,6 @@ public abstract class AbstractBreastType implements BodyPartTypeInterface {
 	@Override
 	public String getTransformationNameOverride() {
 		return transformationName;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		if(gc.getBreastCrotchShape()==BreastShape.UDDERS) {
-			return "a set of";
-		}
-		if(gc.getBreastRows()==1) {
-			return "a pair of";
-		} else {
-			return Util.intToString(gc.getBreastRows())+" pairs of";
-		}
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
 	}
 
 	@Override
@@ -272,14 +270,6 @@ public abstract class AbstractBreastType implements BodyPartTypeInterface {
 		}
 	}
 
-	public String getCrotchNameSingular(GameCharacter gc) {
-		return UtilText.returnStringAtRandom("crotch-breast", "crotch-boob", "crotch-boob", "crotch-boob", "crotch-tit");
-	}
-	
-	public String getCrotchNamePlural(GameCharacter gc) {
-		return UtilText.returnStringAtRandom("crotch-breasts", "crotch-boobs", "crotch-boobs", "crotch-boobs", "crotch-tits");
-	}
-
 	@Override
 	/**
 	 * <b>This should never be used - the covering of breasts is determined by the torso's covering!</b>
@@ -296,20 +286,22 @@ public abstract class AbstractBreastType implements BodyPartTypeInterface {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, breastsBodyDescription);
 	}
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, breastsTransformationDescription);
 	}
 
+	@Override
 	public String getTransformationCrotchDescription(GameCharacter owner) {
 		return UtilText.parse(owner, breastsCrotchTransformationDescription);
 	}
-	
+
+	@Override
 	public String getBodyCrotchDescription(GameCharacter owner) {
 		return UtilText.parse(owner, breastsCrotchBodyDescription);
 	}

@@ -29,16 +29,13 @@ import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.npc.NPC;
 import com.lilithsthrone.game.dialogue.utils.InventoryDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.AbstractSetBonus;
 import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.SetBonus;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
@@ -56,10 +53,11 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.9.5
  * @author Innoxia, BlazingMagpie@gmail.com (or ping BlazingMagpie in Discord), Pimgd
  */
-public abstract class AbstractClothingType extends AbstractCoreType {
+public abstract class AbstractClothingType implements ClothingType {
 	
 	public static final Colour DEFAULT_COLOUR_VALUE = PresetColour.CLOTHING_BLACK;
-	
+
+	String id;
 	private String determiner;
 	private String name;
 	private String namePlural;
@@ -1248,7 +1246,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 				}
 			}
 		}
-		
+
 		// Add blocked parts due to sealing or plugging:
 		for(Entry<InventorySlot, List<ItemTag>> entry : this.itemTags.entrySet()) { //TODO check
 			for(ItemTag tag : entry.getValue()) {
@@ -1334,13 +1332,14 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		result = 31 * result + getRarity().hashCode();
 		return result;
 	}
-	
 
-	
+
+	@Override
 	public String getId() {
-		return ClothingType.getIdFromClothingType(this);
+		return id;
 	}
 
+	@Override
 	public int getBaseValue() {
 		return baseValue;
 	}
@@ -1408,7 +1407,8 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 			}
 		}
 	}
-	
+
+	@Override
 	public String equipText(GameCharacter clothingOwner, GameCharacter clothingEquipper, InventorySlot slotToEquipInto, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 		if(clothing.isCondom(slotToEquipInto) && applyEffects) {
 			NPC interactingTarget;
@@ -1562,6 +1562,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		}
 	}
 
+	@Override
 	public String unequipText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotToUnequipFrom, boolean rough, AbstractClothing clothing, boolean applyEffects) {
 		if(clothingOwner==null || clothingRemover==null) {
 			return "";
@@ -1680,6 +1681,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		}
 	}
 
+	@Override
 	public String displaceText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotClothingIsEquippedTo, DisplacementType dt, boolean rough) {
 		if(clothingOwner==null || clothingRemover==null) {
 			return "";
@@ -1799,6 +1801,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		}
 	}
 
+	@Override
 	public String replaceText(GameCharacter clothingOwner, GameCharacter clothingRemover, InventorySlot slotClothingIsEquippedTo, DisplacementType dt, boolean rough) {
 		if(clothingOwner==null || clothingRemover==null) {
 			return "";
@@ -1919,18 +1922,22 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	
 	// Getters & setters:
 
+	@Override
 	public boolean isAppendColourName() {
 		return appendColourName;
 	}
-	
+
+	@Override
 	public String getDeterminer() {
 		return determiner;
 	}
 
+	@Override
 	public Boolean isPlural() {
 		return plural;
 	}
 
+	@Override
 	public String getName() {
 		if(isPlural()) {
 			return namePlural;
@@ -1938,18 +1945,22 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		return name;
 	}
 
+	@Override
 	public String getNamePlural() {
 		return namePlural;
 	}
 
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
+	@Override
 	public String getAuthorDescription() {
 		return authorDescription;
 	}
 
+	@Override
 	public int getFemininityMinimum() {
 		if(Main.getProperties().getClothingFemininityLevel()==0 || (Main.getProperties().getClothingFemininityLevel()==1 && femininityMinimum>0)) {
 			return 0;
@@ -1957,6 +1968,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		return femininityMinimum;
 	}
 
+	@Override
 	public int getFemininityMaximum() {
 		if(Main.getProperties().getClothingFemininityLevel()==0 || (Main.getProperties().getClothingFemininityLevel()==2 && femininityMinimum<100)) {
 			return 100;
@@ -1964,6 +1976,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		return femininityMaximum;
 	}
 
+	@Override
 	public Femininity getFemininityRestriction() {
 		if(Main.getProperties().getClothingFemininityLevel()==0
 				|| (Main.getProperties().getClothingFemininityLevel()==1 && femininityRestriction == Femininity.FEMININE)
@@ -1972,37 +1985,21 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		}
 		return femininityRestriction;
 	}
-	
-	@Deprecated
-	public InventorySlot getSlot() {
-		return equipSlots.get(0);
-	}
-	
+
+	@Override
 	public List<InventorySlot> getEquipSlots() {
 		return equipSlots;
 	}
-	
-	/**
-	 * <b>You should probably be using AbstractClothing's version of this!</b>
-	 */
-	public boolean isConcealsSlot(GameCharacter character, InventorySlot slotToCheck) {
-		return Main.game.getItemGen().generateClothing(this).isConcealsSlot(character, this.getEquipSlots().get(0), slotToCheck);
-	}
 
-	/**
-	 * <b>You should probably be using AbstractClothing's version of this!</b>
-	 */
-	public boolean isConcealsCoverableArea(GameCharacter character, CoverableArea area) {
-		return Main.game.getItemGen().generateClothing(this).isConcealsCoverableArea(character, this.getEquipSlots().get(0), area);
-	}
-	
+	@Override
 	public String getPathName() {
 		return pathName;
 	}
 
+	@Override
 	public String getPathNameEquipped(GameCharacter characterEquippedTo, InventorySlot invSlot) {
 		if(pathNameEquipped.get(invSlot)==null) {
-			return null;	
+			return null;
 		}
 		String parsedPath = UtilText.parse(characterEquippedTo, pathNameEquipped.get(invSlot)).trim();
 		if(parsedPath.isEmpty()) {
@@ -2010,26 +2007,38 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		}
 		return pathNamePrefix + parsedPath;
 	}
-	
+
+	@Override
 	public AbstractSetBonus getClothingSet() {
 		return clothingSet;
 	}
 
+	@Override
 	public ColourReplacement getColourReplacement(int index) {
 		if(index>colourReplacements.size()-1) {
 			return null;
 		}
 		return colourReplacements.get(index);
 	}
-	
+
+	@Override
 	public List<ColourReplacement> getColourReplacements() {
 		return colourReplacements;
+	}
+
+	@Override
+	public void applyGenerationColourReplacement(List<Colour> list) {
+		for(Entry<Integer, Integer> entry : copyGenerationColours.entrySet()) {
+			Colour replacement = list.get(entry.getValue());
+			list.remove((int)entry.getKey());
+			list.add(entry.getKey(), replacement);
+		}
 	}
 
 	private static String generateIdentifier(InventorySlot slotEquippedTo, List<Colour> colours, String pattern, List<Colour> patternColours, Map<String, String> stickers) {
 		return generateIdentifier(null, slotEquippedTo, colours, pattern, patternColours, stickers);
 	}
-	
+
 	private static String generateIdentifier(GameCharacter character, InventorySlot slotEquippedTo, List<Colour> colours, String pattern, List<Colour> patternColours, Map<String, String> stickers) {
 		StringBuilder sb = new StringBuilder(slotEquippedTo.toString());
 		if(character!=null) {
@@ -2068,7 +2077,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 //	private void addSVGStringEquippedMapping(GameCharacter character, InventorySlot slotEquippedTo, List<Colour> colours, String pattern, List<Colour> patternColours, Map<String, String> stickers, String svgString) {
 //		SVGStringEquippedMap.put(generateIdentifier(character, slotEquippedTo, colours, pattern, patternColours, stickers), svgString);
 //	}
-	
+
 	private String getSVGStringFromMap(InventorySlot slotEquippedTo, List<Colour> colours, String pattern, List<Colour> patternColours, Map<String, String> stickers) {
 		return SVGStringMap.get(generateIdentifier(slotEquippedTo, colours, pattern, patternColours, stickers));
 	}
@@ -2077,6 +2086,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		return SVGStringEquippedMap.get(generateIdentifier(character, slotEquippedTo, colours, pattern, patternColours, stickers));
 	}
 
+	@Override
 	public String getSVGImage() {
 		List<Colour> colours = new ArrayList<>();
 		
@@ -2087,6 +2097,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		return getSVGImage(null, this.getEquipSlots().get(0), colours, false, null, new ArrayList<>(), null);
 	}
 
+	@Override
 	public String getSVGImageRandomColour(boolean randomPrimary, boolean randomSecondary, boolean randomTertiary) {
 		List<Colour> colours = new ArrayList<>();
 		
@@ -2105,9 +2116,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		return getSVGImage(null, this.getEquipSlots().get(0), colours, false, null, new ArrayList<>(), null);
 	}
 	
-	/**
-	 * @param colours This needs to have at least one entry.
-	 */
+	@Override
 	public String getSVGImage(InventorySlot slotEquippedTo,
 			List<Colour> colours,
 			String pattern,
@@ -2115,11 +2124,8 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 			Map<String, String> stickers) {
 		return getSVGImage(null, slotEquippedTo, colours, false, pattern, patternColours, stickers);
 	}
-	
-	/**
-	 * @param character The character this clothing is equipped to.
-	 * @param colours This needs to have at least one entry.
-	 */
+
+	@Override
 	public String getSVGEquippedImage(GameCharacter character,
 			InventorySlot slotEquippedTo,
 			List<Colour> colours,
@@ -2301,7 +2307,8 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		
 		return finalSvg.toString();
 	}
-	
+
+	@Override
 	public boolean isPatternAvailable() {
 		if(!isPatternAvailable && !isPatternAvailableInitCompleted) {
 			isPatternAvailable = this.getSVGImage().contains("patternLayer");
@@ -2322,63 +2329,52 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		return SvgUtil.getSVGWithHandledPattern("Clothing causing error: "+this.getName(), s, pattern, patternColours, this.getPatternColourReplacements());
 	}
 
+	@Override
 	public float getPatternChance() {
 		return patternChance;
 	}
 
+	@Override
 	public List<Pattern> getDefaultPatterns() {
 		return defaultPatterns;
 	}
 
+	@Override
 	public ColourReplacement getPatternColourReplacement(int index) {
 		if(index>patternColourReplacements.size()-1) {
 			return null;
 		}
 		return patternColourReplacements.get(index);
 	}
-	
+
+	@Override
 	public List<ColourReplacement> getPatternColourReplacements() {
 		return patternColourReplacements;
 	}
 
+	@Override
 	public Map<StickerCategory, List<Sticker>> getStickers() {
 		return stickers;
 	}
 
+	@Override
 	public Rarity getRarity() {
 		return rarity;
 	}
 
+	@Override
 	public List<ItemEffect> getEffects() {
 		return effects;
 	}
-	
-	public boolean isAbleToBeSold() {
-		return getRarity()!=Rarity.QUEST;
-	}
-	
-	public boolean isAbleToBeDropped() {
-		return getRarity()!=Rarity.QUEST;
-	}
 
+	@Override
 	public float getPhysicalResistance() {
 		return physicalResistance;
 	}
 
 	// Enchantments:
-	
-	public int getEnchantmentLimit() {
-		return 100;
-	}
-	
-	public AbstractItemEffectType getEnchantmentEffect() {
-		return ItemEffectType.CLOTHING;
-	}
-	
-	public AbstractClothingType getEnchantmentItemType(List<ItemEffect> effects) {
-		return this;
-	}
 
+	@Override
 	public List<ItemTag> getItemTags(InventorySlot slotEquippedTo) {
 		if(!itemTags.containsKey(slotEquippedTo)) {
 			return new ArrayList<>();
@@ -2386,32 +2382,24 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		return itemTags.get(slotEquippedTo);
 	}
 
-	public List<ItemTag> getDefaultItemTags() {
-		return itemTags.get(this.equipSlots.get(0));
-	}
-
-	public boolean isDefaultSlotCondom(InventorySlot slotEquippedTo) {
-		return this.getItemTags(slotEquippedTo).contains(ItemTag.CONDOM);
-	}
-	
-	public boolean isDefaultSlotCondom() {
-		return this.getDefaultItemTags().contains(ItemTag.CONDOM);
-	}
-
+	@Override
 	public boolean isColourDerivedFromPattern() {
 		return isColourDerivedFromPattern;
 	}
 	
 	// Sex attributes:
-	
+
+	@Override
 	public int getPenetrationSelfLength() {
 		return penetrationSelfLength;
 	}
 
+	@Override
 	public int getPenetrationSelfGirth() {
 		return penetrationSelfGirth;
 	}
 
+	@Override
 	public Set<PenetrationModifier> getPenetrationSelfModifiers() {
 		if(penetrationSelfModifiers==null) {
 			return new HashSet<>();
@@ -2419,14 +2407,17 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		return penetrationSelfModifiers;
 	}
 
+	@Override
 	public int getPenetrationOtherLength() {
 		return penetrationOtherLength;
 	}
 
+	@Override
 	public int getPenetrationOtherGirth() {
 		return penetrationOtherGirth;
 	}
 
+	@Override
 	public Set<PenetrationModifier> getPenetrationOtherModifiers() {
 		if(penetrationOtherModifiers==null) {
 			return new HashSet<>();
@@ -2434,38 +2425,47 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		return penetrationOtherModifiers;
 	}
 
+	@Override
 	public int getOrificeSelfLabiaSize() {
 		return orificeSelfLabiaSize;
 	}
-	
+
+	@Override
 	public int getOrificeSelfClitSize() {
 		return orificeSelfClitSize;
 	}
-	
+
+	@Override
 	public int getOrificeSelfClitGirth() {
 		return orificeSelfClitGirth;
 	}
-	
+
+	@Override
 	public int getOrificeSelfDepth() {
 		return orificeSelfDepth;
 	}
 
+	@Override
 	public float getOrificeSelfCapacity() {
 		return orificeSelfCapacity;
 	}
 
+	@Override
 	public int getOrificeSelfElasticity() {
 		return orificeSelfElasticity;
 	}
 
+	@Override
 	public int getOrificeSelfPlasticity() {
 		return orificeSelfPlasticity;
 	}
 
+	@Override
 	public int getOrificeSelfWetness() {
 		return orificeSelfWetness;
 	}
 
+	@Override
 	public Set<OrificeModifier> getOrificeSelfModifiers() {
 		if(orificeSelfModifiers==null) {
 			return new HashSet<>();
@@ -2473,38 +2473,47 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		return orificeSelfModifiers;
 	}
 
+	@Override
 	public int getOrificeOtherLabiaSize() {
 		return orificeOtherLabiaSize;
 	}
-	
+
+	@Override
 	public int getOrificeOtherClitSize() {
 		return orificeOtherClitSize;
 	}
-	
+
+	@Override
 	public int getOrificeOtherClitGirth() {
 		return orificeOtherClitGirth;
 	}
-	
+
+	@Override
 	public int getOrificeOtherDepth() {
 		return orificeOtherDepth;
 	}
 
+	@Override
 	public float getOrificeOtherCapacity() {
 		return orificeOtherCapacity;
 	}
 
+	@Override
 	public int getOrificeOtherElasticity() {
 		return orificeOtherElasticity;
 	}
 
+	@Override
 	public int getOrificeOtherPlasticity() {
 		return orificeOtherPlasticity;
 	}
 
+	@Override
 	public int getOrificeOtherWetness() {
 		return orificeOtherWetness;
 	}
 
+	@Override
 	public Set<OrificeModifier> getOrificeOtherModifiers() {
 		if(orificeOtherModifiers==null) {
 			return new HashSet<>();

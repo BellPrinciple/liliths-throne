@@ -9,9 +9,6 @@ import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.Body;
-import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.valueEnums.FluidFlavour;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
@@ -25,7 +22,10 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractFluidType implements BodyPartTypeInterface {
+public abstract class AbstractFluidType implements FluidType {
+
+	//FIXME for now, this is exposed for FluidType only
+	public String id;
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -141,11 +141,13 @@ public abstract class AbstractFluidType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
@@ -160,19 +162,9 @@ public abstract class AbstractFluidType implements BodyPartTypeInterface {
 		System.err.println("Warning! AbstractFluidType is calling toString()");
 		return super.toString();
 	}
-	
-	public String getId() {
-		return FluidType.getIdFromFluidType(this);
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "some";
-	}
 
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
+	public String getId() {
+		return id;
 	}
 
 	@Override
@@ -181,33 +173,25 @@ public abstract class AbstractFluidType implements BodyPartTypeInterface {
 		
 		if(gc==null || gc.isFeminine()) {
 			if(namesFeminine==null || namesFeminine.isEmpty()) {
-				return Util.randomItemFrom(baseFluidType.getNames());
+				return FluidType.super.getNameSingular(gc);
 			}
 			name = Util.randomItemFrom(namesFeminine);
 			
 		} else {
 			if(namesMasculine==null || namesMasculine.isEmpty()) {
-				return Util.randomItemFrom(baseFluidType.getNames());
+				return FluidType.super.getNameSingular(gc);
 			}
 			name = Util.randomItemFrom(namesMasculine);
 		}
 		
 		if(name==null || name.isEmpty()) {
-			return Util.randomItemFrom(baseFluidType.getNames());
+			return FluidType.super.getNameSingular(gc);
 		}
 		if(name.endsWith("-")) {
-			if(Math.random()<0.25f) { // 25% chance to return this '-' name.
-				return name + Util.randomItemFrom(baseFluidType.getNames());
-			} else {
-				return Util.randomItemFrom(baseFluidType.getNames());
-			}
+			// 25% chance to return this '-' name.
+			return (Math.random()<0.25f ? name : "") + FluidType.super.getNameSingular(gc);
 		}
 		return name;
-	}
-	
-	@Override
-	public String getNamePlural(GameCharacter gc) {
-		return getNameSingular(gc);
 	}
 
 	@Override
@@ -227,27 +211,25 @@ public abstract class AbstractFluidType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public AbstractBodyCoveringType getBodyCoveringType(Body body) {
-		return baseFluidType.getCoveringType();
-	}
-
-	@Override
 	public AbstractRace getRace() {
 		return race;
 	}
-	
+
+	@Override
 	public FluidTypeBase getBaseType() {
 		return baseFluidType;
 	}
-	
+
+	@Override
 	public FluidFlavour getFlavour() {
 		return flavour;
 	}
-	
+
+	@Override
 	public List<FluidModifier> getDefaultFluidModifiers() {
 		return defaultFluidModifiers;
 	}
-	
+
 	public float getValueModifier() {
 		return 1f;
 	}

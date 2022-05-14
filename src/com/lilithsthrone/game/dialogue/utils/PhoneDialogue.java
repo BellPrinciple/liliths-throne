@@ -1248,11 +1248,11 @@ public class PhoneDialogue {
 //				+"<div class='container-full-width'>"
 					+ "<p style='color:"+PresetColour.GENERIC_COMBAT.toWebHexString()+"; text-align:center;'><b>Racial Damage Attributes</b></p>");
 			
-			List<AbstractRace> raceListSorted = new ArrayList<>(Attribute.racialAttributes.keySet());
+			List<AbstractRace> raceListSorted = new ArrayList<>(Race.table.list());
 			raceListSorted.sort((r1, r2) -> r1.getName(true).compareTo(r2.getName(true)));
 			
 			for(AbstractRace race : raceListSorted) {
-				AbstractAttribute attribute = Attribute.racialAttributes.get(race);
+				AbstractAttribute attribute = Attribute.getRacialDamageAttribute(race);
 				int damageModifier = (int) Main.game.getPlayer().getAttributeValue(attribute);
 				if(race==Race.DEMON) {
 					// DEMON is split in IMP, DEMON, LILIN, and ELDER_LILIN damage

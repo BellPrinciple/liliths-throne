@@ -12,7 +12,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.TesticleType;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
@@ -24,7 +24,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractTesticleType implements BodyPartTypeInterface {
+public abstract class AbstractTesticleType implements TesticleType {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -119,37 +119,25 @@ public abstract class AbstractTesticleType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public AbstractFluidType getFluidType() {
 		return fluidType;
 	}
 
+	@Override
 	public boolean isInternal() {
 		return internal;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		if(gc.getTesticleCount()==2) {
-			return "a pair of";
-		} else if(gc.getTesticleCount()==3) {
-			return "a trio of";
-		} else {
-			return Util.intToString(gc.getTesticleCount());
-		}
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
 	}
 
 	@Override

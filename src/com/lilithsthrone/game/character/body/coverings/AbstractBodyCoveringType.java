@@ -27,8 +27,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.0
  * @author Innoxia
  */
-public abstract class AbstractBodyCoveringType {
+public abstract class AbstractBodyCoveringType implements BodyCoveringType {
 
+	String id;
 	private boolean mod;
 	private boolean fromExternalFile;
 	
@@ -347,7 +348,12 @@ public abstract class AbstractBodyCoveringType {
 			}
 		}
 	}
-	
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
 	private void setupColourLists() {
 		allColours = new ArrayList<>();
 		allPrimaryColours = new ArrayList<>();
@@ -381,7 +387,7 @@ public abstract class AbstractBodyCoveringType {
 	@Override
 	public String toString() {
 		new AccessException("WARNING: AbstractBodyCoveringType is calling toString()!").printStackTrace(System.err);
-		return BodyCoveringType.getIdFromBodyCoveringType(this);
+		return id;
 	}
 	
 	public boolean isMod() {
@@ -392,29 +398,32 @@ public abstract class AbstractBodyCoveringType {
 		return fromExternalFile;
 	}
 
+	@Override
 	public BodyCoveringCategory getCategory() {
 		return category;
 	}
 
+	@Override
 	public String getDeterminer(GameCharacter gc) {
 		return determiner;
 	}
 
+	@Override
 	public boolean isDefaultPlural() {
 		return isDefaultPlural;
 	}
 	
+	@Override
 	public String getNameSingular(GameCharacter gc) {
 		return nameSingular;
 	}
 	
+	@Override
 	public String getNamePlural(GameCharacter gc) {
 		return namePlural;
 	}
-	
-	/**
-	 *  @return The name of the covering for use in transformation menus. Will most likely return the same as getName(gc)
-	 */
+
+	@Override
 	public String getNameTransformation(GameCharacter gc) {
 		if(nameTransformation==null) {
 			return getName(gc);
@@ -422,50 +431,52 @@ public abstract class AbstractBodyCoveringType {
 		return nameTransformation;
 	}
 	
-	public String getName(GameCharacter gc){
-		if(isDefaultPlural()) {
-			return getNamePlural(gc);
-		} else {
-			return getNameSingular(gc);
-		}
-	}
-	
+	@Override
 	public Map<CoveringPattern, Integer> getNaturalPatterns() {
 		return naturalPatterns;
 	}
 
+	@Override
 	public Map<CoveringPattern, Integer> getDyePatterns() {
 		return dyePatterns;
 	}
 
+	@Override
 	public Map<CoveringPattern, Integer> getAllPatterns() {
 		return allPatterns;
 	}
 	
+	@Override
 	public List<Colour> getNaturalColoursPrimary() {
 		return naturalColoursPrimary;
 	}
 
+	@Override
 	public List<Colour> getDyeColoursPrimary() {
 		return dyeColoursPrimary;
 	}
 
+	@Override
 	public List<Colour> getNaturalColoursSecondary() {
 		return naturalColoursSecondary;
 	}
 
+	@Override
 	public List<Colour> getDyeColoursSecondary() {
 		return dyeColoursSecondary;
 	}
 
+	@Override
 	public List<Colour> getAllColours() {
 		return allColours;
 	}
 	
+	@Override
 	public List<Colour> getAllPrimaryColours() {
 		return allPrimaryColours;
 	}
 	
+	@Override
 	public List<Colour> getAllSecondaryColours() {
 		return allSecondaryColours;
 	}
@@ -474,14 +485,17 @@ public abstract class AbstractBodyCoveringType {
 //		return this;
 //	}
 
+	@Override
 	public List<CoveringModifier> getNaturalModifiers() {
 		return naturalModifiers;
 	}
 
+	@Override
 	public List<CoveringModifier> getExtraModifiers() {
 		return extraModifiers;
 	}
 
+	@Override
 	public List<CoveringModifier> getAllModifiers() {
 		return allModifiers;
 	}

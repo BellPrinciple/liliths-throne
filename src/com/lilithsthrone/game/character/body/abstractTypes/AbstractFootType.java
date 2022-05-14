@@ -2,7 +2,7 @@ package com.lilithsthrone.game.character.body.abstractTypes;
 
 import java.util.List;
 
-import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.types.FootType;
 import com.lilithsthrone.game.character.body.valueEnums.FootStructure;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 
@@ -11,7 +11,7 @@ import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
  * @version 0.3.1
  * @author Innoxia
  */
-public abstract class AbstractFootType {
+public abstract class AbstractFootType implements FootType {
 	
 	private String typeName;
 	
@@ -78,52 +78,62 @@ public abstract class AbstractFootType {
 		this.permittedFootStructures = permittedFootStructures;
 	}
 
+	@Override
 	public String getTypeName() {
 		return typeName;
 	}
 
+	@Override
 	public String getFootName() {
 		return footName;
 	}
 
+	@Override
 	public String getFootNamePlural() {
 		return footNamePlural;
 	}
 
+	@Override
 	public List<String> getFootDescriptorsMasculine() {
 		return footDescriptorsMasculine;
 	}
 
+	@Override
 	public List<String> getFootDescriptorsFeminine() {
 		return footDescriptorsFeminine;
 	}
 
+	@Override
 	public String getToeSingularName() {
 		return toeSingularName;
 	}
 
+	@Override
 	public String getToePluralName() {
 		return toePluralName;
 	}
 
+	@Override
 	public List<String> getToeDescriptorsMasculine() {
 		return toesDescriptorsMasculine;
 	}
 
+	@Override
 	public List<String> getToeDescriptorsFeminine() {
 		return toesDescriptorsFeminine;
 	}
 
+	@Override
 	public String getFootjobName() {
 		return footjobName;
 	}
 
+	@Override
 	public String getFootBodyDescription() {
 		return footBodyDescription;
 	}
 
-	public abstract String getFootNailPolishDescription(GameCharacter owner);
-	
+	@Override
 	public List<FootStructure> getPermittedFootStructures(LegConfiguration legConfiguration) {
 		if(legConfiguration==null || legConfiguration.getPermittedFootStructuresOverride().isEmpty()) {
 			return permittedFootStructures;

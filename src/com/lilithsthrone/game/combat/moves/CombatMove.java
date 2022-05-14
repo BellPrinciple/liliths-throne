@@ -1,17 +1,15 @@
 package com.lilithsthrone.game.combat.moves;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.combat.DamageType;
+import com.lilithsthrone.game.combat.DamageVariance;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
@@ -19,7 +17,10 @@ import com.lilithsthrone.game.inventory.item.AbstractItem;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
+import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
+
+import static com.lilithsthrone.game.combat.moves.AbstractCombatMove.shouldBlunder;
 
 /**
  * A class containing logic for Combat Moves.
@@ -28,7 +29,249 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4
  * @author Irbynx, Innoxia
  */
-public class CombatMove {
+public interface CombatMove {
+
+	String getIdentifier();
+
+	String getName(int turnIndex, GameCharacter source);
+
+	String getDescription(int turnIndex, GameCharacter source);
+
+	String getSVGString();
+
+	int getCooldown(GameCharacter source);
+
+	int getEquipWeighting();
+
+	/**
+	 * Gets a prediction that specifies what kind of action will be performed for the player (i.e "The catgirl will attack you for 10 damage" or "The horseboy is planning to buff his ally")
+	 * @param turnIndex
+	 * @param source Character that uses the action.
+	 * @param source Target for the action.
+	 * @param enemies Enemies of the character
+	 * @param allies Allies of the character
+	 * @return The string that describes the intent of the NPC that uses this action.
+	 */
+	String getPrediction(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies);
+
+	/**
+	 * Performs the action itself. Override to get actual abilities there.
+	 * @param source Character that uses the action.
+	 * @param source Target for the action.
+	 * @param enemies Enemies of the character
+	 * @param allies Allies of the character
+	 * @return The string that describes the action that has been performed.
+	 */
+	String perform(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies);
+
+	/**
+	 * Performs the action itself. Override to get actual abilities there. This is performed during selection of the action and not during the turn. Use for blocks, AP damage/gains or disrupts.
+	 * @param source Character that uses the action.
+	 * @param source Target for the action.
+	 * @param enemies Enemies of the character
+	 * @param allies Allies of the character
+	 * @return The string that describes the action that has been performed.
+	 */
+	default void performOnSelection(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
+		// Nothing. Override it.
+	}
+
+	/**
+	 * Applies the reverse of the performOnSelection() method. Override whenever performOnSelection() is overridden. This is performed during deselection of the action and not during the turn.
+	 * @param source Character that uses the action.
+	 * @param source Target for the action.
+	 * @param enemies Enemies of the character
+	 * @param allies Allies of the character
+	 * @return The string that describes the action that has been performed.
+	 */
+	default void performOnDeselection(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
+		// Nothing. Override it.
+	}
+
+	default CombatMoveCategory getCategory() {
+		return CombatMoveCategory.BASIC;
+	}
+
+	default CombatMoveType getType() {
+		return CombatMoveType.ATTACK;
+	}
+
+	default DamageType getDamageType(int turnIndex, GameCharacter source) {
+		return DamageType.PHYSICAL;
+	}
+
+	default DamageVariance getDamageVariance() {
+		return DamageVariance.NONE;
+	}
+
+	default int getBlock(GameCharacter source, boolean isCrit) {
+		return 0;
+	}
+
+	default Spell getAssociatedSpell() {
+		return null;
+	}
+
+	default boolean isCanTargetEnemies() {
+		return false;
+	}
+
+	default boolean isCanTargetAllies() {
+		return false;
+	}
+
+	default boolean isCanTargetSelf() {
+		return false;
+	}
+
+	default int getAPcost(GameCharacter source) {
+		return source.getEquippedMoves().contains(this) ? 1 : 2;
+	}
+
+	/**
+	 * Returns weight of the action.
+	 *  Used in calculations for AI to pick certain actions.
+	 *  For every unspent AP, AI will try to select an action out of the available ones.
+	 *  The AI will then pick the action with highest weight.
+	 *  Randomness of action selection should be in the weight values itself!
+	 * @param source Character that uses the weight function.
+	 * @param enemies Enemies of the character
+	 * @param allies Allies of the character
+	 * @return Weight of the action. 1.0 is the expected normal weight; weigh the actions accordingly.
+	 */
+	default float getWeight(GameCharacter source, List<GameCharacter> enemies, List<GameCharacter> allies) {
+		return 0f;
+	}
+
+	/**
+	 * Returns the preferred target for the action. Prefers to aim at targets with lowest HP values if not forced to select at random. Override for custom behaviour.
+	 * @param source Character that uses the target function.
+	 * @param enemies Enemies of the character
+	 * @param allies Allies of the character
+	 * @return Character to target with this action.
+	 */
+	default GameCharacter getPreferredTarget(GameCharacter source, List<GameCharacter> enemies, List<GameCharacter> allies) {
+		if(isCanTargetEnemies()) {
+			if(shouldBlunder()) {
+				return enemies.get(Util.random.nextInt(enemies.size()));
+			} else {
+				float lowestHP = -1;
+				GameCharacter potentialCharacter = null;
+				for(GameCharacter character : enemies) {
+					if(lowestHP == -1 || character.getHealth() < lowestHP) {
+						potentialCharacter = character;
+						lowestHP = character.getHealth();
+					}
+				}
+				return potentialCharacter;
+			}
+		}
+		if(isCanTargetAllies() && !allies.isEmpty()) {
+			if(shouldBlunder()) {
+				return allies.get(Util.random.nextInt(allies.size()));
+			}
+			else {
+				float lowestHP = -1;
+				GameCharacter potentialCharacter = null;
+				for(GameCharacter character : allies) {
+					if(lowestHP == -1 || character.getHealth() < lowestHP)
+					{
+						potentialCharacter = character;
+						lowestHP = character.getHealth();
+					}
+				}
+				return potentialCharacter;
+			}
+		}
+		return source;
+	}
+
+	//TODO is this needed when the performOnDeselection() method above exists?
+	/**
+	 * Cancel out the action's effects if it's disrupted or cancelled via AP loss. Is called for every action in the queue for every disruption caused; non disrupted actions get reapplied.
+	 * @param source Character that uses the action.
+	 * @param source Target for the action.
+	 * @param enemies Enemies of the character
+	 * @param allies Allies of the character
+	 * @return The string that describes the action that has been performed.
+	 */
+	default void applyDisruption(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
+		source.setRemainingAP(source.getRemainingAP() + this.getAPcost(source) * -1, enemies, allies); // Normally this is the only thing that gets adjusted on selection.
+	}
+
+	/**
+	 * Checks the source character to see if they will have to use the action already with a disruption.
+	 * @param source
+	 */
+	default boolean isAlreadyDisrupted(GameCharacter source) {
+		return source.disruptionByTypeCheck(this.getType());
+	}
+
+	/**
+	 * Returns a string if the character has the move available to select even if they don't "own" it; for example, purity based moves are available to Pure Virgin fetishists without even unlocking them.
+	 *
+	 * String contains the reason for why the move is available to them. Otherwise returns null.
+	 */
+	default Value<Boolean, String> isAvailableFromSpecialCase(GameCharacter source) {
+		return null;
+	}
+
+	/**
+	 * Returns a string if action can't be used either due to special constraints or because of AP/cooldowns on a specified target; string specifies rejection reason. Returns null if action can be used without an issue.
+	 * @param turnIndex The turn index in which this move is to be performed.
+	 * @param source Character that uses the action.
+	 * @param source Target for the action. Can be null.
+	 * @param enemies Enemies of the character
+	 * @param allies Allies of the character
+	 */
+	default String isUsable(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
+		if(target != null) {
+			if(!isCanTargetSelf() && source == target)
+				return "This action can't be used on yourself!";
+			if(!isCanTargetAllies() && allies.contains(target) && source != target)
+				return "This action can't be used on your allies!";
+			if(!isCanTargetEnemies() && enemies.contains(target))
+				return "This action can't be used on your enemies!";
+		}
+		if(source.getMoveCooldown(this.getIdentifier()) > 0)
+			return "This action can't be used since it is still on cooldown! "+String.valueOf(source.getMoveCooldown(this.getIdentifier()))+" turns remaining.";
+		if(source.getRemainingAP() < this.getAPcost(source))
+			return "This action can't be used since you don't have enough AP!";
+		return null;
+	}
+
+	default Map<AbstractStatusEffect,Integer> getStatusEffects(GameCharacter caster, GameCharacter target, boolean isCritical) {
+		return Map.of();
+	}
+
+	default List<String> getCritRequirements(GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
+		return List.of("It's the third time being used.");
+	}
+
+	default boolean canCrit(int turnIndex, GameCharacter source, GameCharacter target, List<GameCharacter> enemies, List<GameCharacter> allies) {
+		// Normally moves crit on three hits in a row.
+		long thisMoveSelected = source.getSelectedMoves().stream().map(m->m.getValue().getIdentifier()).filter(getIdentifier()::equals).count();
+		return thisMoveSelected >= 3 && turnIndex % 3 == 2;
+	}
+
+	default float getCritStatusEffectDurationMultiplier() {
+		return 1;
+	}
+
+	default Colour getColour() {
+		if(this.getAssociatedSpell() != null) {
+			return this.getAssociatedSpell().getSpellSchool().getColour();
+		}
+		return this.getType().getColour();
+	}
+
+	default Colour getColourByDamageType(int turnIndex, GameCharacter source) {
+		if (Util.newArrayListOfValues(CombatMoveType.SPELL, CombatMoveType.POWER).contains(getType())) {
+			return getDamageType(turnIndex, source).getColour();
+		}
+
+		return getType().getColour();
+	}
 
     public static final AbstractCombatMove ITEM_USAGE = new AbstractCombatMove(CombatMoveCategory.SPECIAL,
             "use item",
@@ -120,84 +363,25 @@ public class CombatMove {
         	return false;
         }
     };
-    
-    public static List<AbstractCombatMove> allCombatMoves = new ArrayList<>();
-    public static Map<CombatMoveCategory, List<AbstractCombatMove>> combatMoveCategoryMap = new HashMap<>();
-    
-	public static Map<AbstractCombatMove, String> combatMoveToIdMap = new HashMap<>();
-	public static Map<String, AbstractCombatMove> idToCombatMoveMap = new HashMap<>();
-	
-    static {
+
+	Table table = new Table();
+
+	final class Table extends com.lilithsthrone.utils.Table<AbstractCombatMove> {
+
+		private static final EnumMap<CombatMoveCategory,List<AbstractCombatMove>> category = new EnumMap<>(CombatMoveCategory.class);
+
+		private Table() {
+			super(CombatMove::sanitize);
         /*=============================================
          *             BASIC MOVES
          =============================================*/
-	    Field[] fields = CMBasicAttack.class.getFields();
-		for(Field f : fields) {
-			if(AbstractCombatMove.class.isAssignableFrom(f.getType())) {
-				AbstractCombatMove combatMove;
-				try {
-					combatMove = ((AbstractCombatMove) f.get(null));
-					
-					CombatMove.idToCombatMoveMap.put(f.getName(), combatMove);
-					CombatMove.combatMoveToIdMap.put(combatMove, f.getName());
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-    	
+			addFields(CombatMove.class,AbstractCombatMove.class,(k,v)->v.id=k);
         /*=============================================
          *             RACIAL & FETISH
          =============================================*/
-	    fields = CMSpecialAttack.class.getFields();
-		for(Field f : fields) {
-			if(AbstractCombatMove.class.isAssignableFrom(f.getType())) {
-				AbstractCombatMove combatMove;
-				try {
-					combatMove = ((AbstractCombatMove) f.get(null));
-					
-					CombatMove.idToCombatMoveMap.put(f.getName(), combatMove);
-					CombatMove.combatMoveToIdMap.put(combatMove, f.getName());
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	
-		fields = CMFetishAttack.class.getFields();
-		for (Field f : fields) {
-			if(AbstractCombatMove.class.isAssignableFrom(f.getType())) {
-				AbstractCombatMove combatMove;
-				try {
-					combatMove = ((AbstractCombatMove) f.get(null));
-					
-					CombatMove.idToCombatMoveMap.put(f.getName(), combatMove);
-					CombatMove.combatMoveToIdMap.put(combatMove, f.getName());
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	
-		fields = CMWeaponSpecials.class.getFields();
-		for (Field f : fields) {
-			if(AbstractCombatMove.class.isAssignableFrom(f.getType())) {
-				AbstractCombatMove combatMove;
-				try {
-					combatMove = ((AbstractCombatMove) f.get(null));
-					
-					CombatMove.idToCombatMoveMap.put(f.getName(), combatMove);
-					CombatMove.combatMoveToIdMap.put(combatMove, f.getName());
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
+			addFields(CMSpecialAttack.class,AbstractCombatMove.class,(k,v)->v.id=k);
+			addFields(CMFetishAttack.class,AbstractCombatMove.class,(k,v)->v.id=k);
+			addFields(CMWeaponSpecials.class,AbstractCombatMove.class,(k,v)->v.id=k);
 	    /*=============================================
 	     *                   SPELLS
 	     =============================================*/
@@ -305,163 +489,136 @@ public class CombatMove {
 	            }
 	        };
 	        newCombatMove.setAssociatedSpell(spell);
-			CombatMove.idToCombatMoveMap.put("SPELL_"+spell.toString(), newCombatMove);
-			CombatMove.combatMoveToIdMap.put(newCombatMove, "SPELL_"+spell.toString());
+				add(newCombatMove.id="SPELL_"+spell.toString(),newCombatMove);
 	    }
 
 	    /*=============================================
 	     *              EXTERNAL FILES
 	     =============================================*/
 		// Modded Moves:
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/combatMove");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractCombatMove combatMove = new AbstractCombatMove(innerEntry.getValue(), entry.getKey(), true) {};
-					CombatMove.idToCombatMoveMap.put(innerEntry.getKey(), combatMove);
-					CombatMove.combatMoveToIdMap.put(combatMove, innerEntry.getKey());
-					
-				} catch(Exception ex) {
-					System.err.println("Loading modded combat move failed at 'CombatMove'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+			forEachMod("/combatMove",null,null,(f,n,a)->{
+				var v = new AbstractCombatMove(f,a,true) {};
+				add(v.id=n,v);
+			});
 		// External res Moves:
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res//combatMove");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractCombatMove combatMove = new AbstractCombatMove(innerEntry.getValue(), entry.getKey(), false) {};
-					CombatMove.idToCombatMoveMap.put(innerEntry.getKey(), combatMove);
-					CombatMove.combatMoveToIdMap.put(combatMove, innerEntry.getKey());
-					
-				} catch(Exception ex) {
-					System.err.println("Loading combat move failed at 'CombatMove'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
+			forEachExternal("res//combatMove",null,null,(f,n,a)->{
+				var v = new AbstractCombatMove(f,a,false) {};
+				add(v.id=n,v);
+			});
+			for(CombatMoveCategory c : CombatMoveCategory.values())
+				category.put(c,new ArrayList<>());
+			for(AbstractCombatMove move : list())
+				category.get(move.getCategory()).add(move);
 		}
-	    
-	    
-	    for(AbstractCombatMove move : combatMoveToIdMap.keySet()) {
-	    	allCombatMoves.add(move);
-	    	combatMoveCategoryMap.putIfAbsent(move.getCategory(), new ArrayList<>());
-	    	combatMoveCategoryMap.get(move.getCategory()).add(move);
-	    }
-    }
-    
+	}
+
 	/**
 	 * @param id Will be in the format of: 'innoxia_quadruped_kick'.
 	 */
 	public static AbstractCombatMove getCombatMoveFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		for(Spell spell : Spell.values()) {
 			if(id.equals(spell.name())) {
-				id = "SPELL_"+spell.toString();
-				id = Util.getClosestStringMatch(id, idToCombatMoveMap.keySet());
-				return idToCombatMoveMap.get(id);
+				return "SPELL_"+spell.toString();
 			}
 		}
 		
 		if(id.equals("item-usage")) {
-			return ITEM_USAGE;
+			return ITEM_USAGE.getIdentifier();
 		}
 		
 		if(id.equals("hoof-kick")) {
-			return CMSpecialAttack.HORSE_KICK;
+			return CMSpecialAttack.HORSE_KICK.getIdentifier();
 		} else if(id.equals("cat-scratch")) {
-			return CMSpecialAttack.CAT_SCRATCH;
+			return CMSpecialAttack.CAT_SCRATCH.getIdentifier();
 		} else if(id.equals("tail-swipe") || id.equals("ALLIGATOR_TAIL_SWIPE")) {
-			return CMSpecialAttack.TAIL_SWIPE;
+			return CMSpecialAttack.TAIL_SWIPE.getIdentifier();
 		} else if(id.equals("squirrel-scratch")) {
-			return CMSpecialAttack.SQUIRREL_SCRATCH;
+			return CMSpecialAttack.SQUIRREL_SCRATCH.getIdentifier();
 		} else if(id.equals("savage-attack")) {
-			return CMSpecialAttack.WOLF_SAVAGE;
+			return CMSpecialAttack.WOLF_SAVAGE.getIdentifier();
 		} else if(id.equals("antler-headbutt")) {
-			return CMSpecialAttack.ANTLER_HEADBUTT;
+			return CMSpecialAttack.ANTLER_HEADBUTT.getIdentifier();
 		} else if(id.equals("horn-headbutt")) {
-			return CMSpecialAttack.COW_HEADBUTT;
+			return CMSpecialAttack.COW_HEADBUTT.getIdentifier();
 		} else if(id.equals("bite")) {
-			return CMSpecialAttack.BITE;
+			return CMSpecialAttack.BITE.getIdentifier();
 		}
 		
 		if(id.equals("strike")) {
-			return CMBasicAttack.BASIC_STRIKE;
+			return CMBasicAttack.BASIC_STRIKE.getIdentifier();
 		} else if(id.equals("offhand-strike")) {
-			return CMBasicAttack.BASIC_OFFHAND_STRIKE;
+			return CMBasicAttack.BASIC_OFFHAND_STRIKE.getIdentifier();
 		} else if(id.equals("twin-strike")) {
-			return CMBasicAttack.BASIC_TWIN_STRIKE;
+			return CMBasicAttack.BASIC_TWIN_STRIKE.getIdentifier();
 		} else if(id.equals("block")) {
-			return CMBasicAttack.BASIC_BLOCK;
+			return CMBasicAttack.BASIC_BLOCK.getIdentifier();
 		} else if(id.equals("tease")) {
-			return CMBasicAttack.BASIC_TEASE;
+			return CMBasicAttack.BASIC_TEASE.getIdentifier();
 		} else if(id.equals("avert")) {
-			return CMBasicAttack.BASIC_TEASE_BLOCK;
+			return CMBasicAttack.BASIC_TEASE_BLOCK.getIdentifier();
 		} else if(id.equals("arcane-strike")) {
-			return CMBasicAttack.BASIC_ARCANE_STRIKE;
+			return CMBasicAttack.BASIC_ARCANE_STRIKE.getIdentifier();
 		}
 		
 		if(id.equals("buttslut-tease")) {
-			return CMFetishAttack.TEASE_ANAL_RECEIVING;
+			return CMFetishAttack.TEASE_ANAL_RECEIVING.getIdentifier();
 		} else if(id.equals("anal-tease")) {
-			return CMFetishAttack.TEASE_ANAL_GIVING;
+			return CMFetishAttack.TEASE_ANAL_GIVING.getIdentifier();
 		} else if(id.equals("pussy-slut-tease")) {
-			return CMFetishAttack.TEASE_VAGINAL_RECEIVING;
+			return CMFetishAttack.TEASE_VAGINAL_RECEIVING.getIdentifier();
 		} else if(id.equals("vaginal-tease")) {
-			return CMFetishAttack.TEASE_VAGINAL_GIVING;
+			return CMFetishAttack.TEASE_VAGINAL_GIVING.getIdentifier();
 		} else if(id.equals("incest-tease")) {
-			return CMFetishAttack.TEASE_INCEST;
+			return CMFetishAttack.TEASE_INCEST.getIdentifier();
 		} else if(id.equals("cum-stud-tease")) {
-			return CMFetishAttack.TEASE_CUM_STUD;
+			return CMFetishAttack.TEASE_CUM_STUD.getIdentifier();
 		} else if(id.equals("cum-addict-tease")) {
-			return CMFetishAttack.TEASE_CUM_ADDICT;
+			return CMFetishAttack.TEASE_CUM_ADDICT.getIdentifier();
 		} else if(id.equals("cock-addict-tease")) {
-			return CMFetishAttack.TEASE_PENIS_RECEIVING;
+			return CMFetishAttack.TEASE_PENIS_RECEIVING.getIdentifier();
 		} else if(id.equals("cock-stud-tease")) {
-			return CMFetishAttack.TEASE_PENIS_GIVING;
+			return CMFetishAttack.TEASE_PENIS_GIVING.getIdentifier();
 		} else if(id.equals("submissive-foot-tease")) {
-			return CMFetishAttack.TEASE_FOOT_RECEIVING;
+			return CMFetishAttack.TEASE_FOOT_RECEIVING.getIdentifier();
 		} else if(id.equals("dominant-foot-tease")) {
-			return CMFetishAttack.TEASE_FOOT_GIVING;
+			return CMFetishAttack.TEASE_FOOT_GIVING.getIdentifier();
 		} else if(id.equals("oral-tease")) {
-			return CMFetishAttack.TEASE_ORAL_RECEIVING;
+			return CMFetishAttack.TEASE_ORAL_RECEIVING.getIdentifier();
 		} else if(id.equals("oral-performer-tease")) {
-			return CMFetishAttack.TEASE_ORAL_GIVING;
+			return CMFetishAttack.TEASE_ORAL_GIVING.getIdentifier();
 		} else if(id.equals("breasts-lover-tease")) {
-			return CMFetishAttack.TEASE_BREASTS_OTHERS;
+			return CMFetishAttack.TEASE_BREASTS_OTHERS.getIdentifier();
 		} else if(id.equals("breasts-tease")) {
-			return CMFetishAttack.TEASE_BREASTS;
+			return CMFetishAttack.TEASE_BREASTS.getIdentifier();
 		} else if(id.equals("milk-lover-tease")) {
-			return CMFetishAttack.TEASE_LACTATION_OTHERS;
+			return CMFetishAttack.TEASE_LACTATION_OTHERS.getIdentifier();
 		} else if(id.equals("lactation-tease")) {
-			return CMFetishAttack.TEASE_LACTATION;
+			return CMFetishAttack.TEASE_LACTATION.getIdentifier();
 		} else if(id.equals("fertility-tease")) {
-			return CMFetishAttack.TEASE_FERTILITY;
+			return CMFetishAttack.TEASE_FERTILITY.getIdentifier();
 		} else if(id.equals("virility-tease")) {
-			return CMFetishAttack.TEASE_VIRILITY;
+			return CMFetishAttack.TEASE_VIRILITY.getIdentifier();
 		} else if(id.equals("dominant-tease")) {
-			return CMFetishAttack.TEASE_DOMINANT;
+			return CMFetishAttack.TEASE_DOMINANT.getIdentifier();
 		} else if(id.equals("submissive-tease")) {
-			return CMFetishAttack.TEASE_SUBMISSIVE;
+			return CMFetishAttack.TEASE_SUBMISSIVE.getIdentifier();
 		}
-		
-		id = Util.getClosestStringMatch(id, idToCombatMoveMap.keySet());
-		
-		return idToCombatMoveMap.get(id);
+		return id;
 	}
-	
+
 	public static String getIdFromCombatMove(AbstractCombatMove move) {
-		return combatMoveToIdMap.get(move);
+		return move.getIdentifier();
 	}
 
 	public static List<AbstractCombatMove> getAllCombatMoves() {
-		return allCombatMoves;
+		return table.list();
 	}
 
 	public static List<AbstractCombatMove> getAllCombatMovesInCategory(CombatMoveCategory category) {
-		return combatMoveCategoryMap.get(category);
+		return Table.category.get(category);
 	}
 }

@@ -26222,7 +26222,7 @@ public abstract class GameCharacter implements XMLSaving {
 		List<AbstractRace> races = new ArrayList<>();
 		
 		if(this instanceof Elemental) {
-			races.addAll(Race.allRaces);
+			races.addAll(Race.getAllRaces());
 		}
 		if(this.getSubspeciesOverrideRace()==Race.DEMON) {
 			races.add(Race.NONE);
@@ -26235,7 +26235,7 @@ public abstract class GameCharacter implements XMLSaving {
 			ArrayList<AbstractRace> unavailableRaces = Util.newArrayListOfValues(Race.ELEMENTAL, Race.SLIME); // Never have these TF options
 			
 			if(this.hasPerkAnywhereInTree(Perk.POWER_OF_LOVIENNE_2) || this.hasPerkAnywhereInTree(Perk.POWER_OF_LOVIENNE_2_DEMON)) { // I'm assuming you defeat Lovienne last
-				races.addAll(Race.allRaces);
+				races.addAll(Race.getAllRaces());
 				races.removeAll(unavailableRaces);
 			} else if(this.hasPerkAnywhereInTree(Perk.POWER_OF_LYSSIETH_4) || this.hasPerkAnywhereInTree(Perk.POWER_OF_LYSSIETH_4_DEMON)) {
 				races.add(Race.HUMAN);
@@ -28061,7 +28061,7 @@ public abstract class GameCharacter implements XMLSaving {
 			for(AbstractFetish f : fetishesFromClothing) {
 				this.applyFetishLossEffects(f); // Apply fetish loss effects from tattoos and clothing
 			}
-			for(AbstractFetish f : Fetish.allFetishes) {
+			for(AbstractFetish f : Fetish.getAllFetishes()) {
 				this.setFetishExperience(f, 0);
 			}
 			// Fluid effects:

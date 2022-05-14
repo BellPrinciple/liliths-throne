@@ -3,12 +3,9 @@ package com.lilithsthrone.game.character.effects;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
-import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.combat.spells.SpellUpgrade;
@@ -21,8 +18,9 @@ import com.lilithsthrone.utils.colours.Colour;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractPerk {
-	
+public abstract class AbstractPerk implements Perk {
+
+	String id;
 	private int renderingPriority;
 	protected String name;
 	private List<Colour> colours;
@@ -41,8 +39,6 @@ public abstract class AbstractPerk {
 	private String SVGString;
 
 	private List<String> extraEffects;
-
-	private List<String> modifiersList;
 	
 	public AbstractPerk(int renderingPriority,
 			boolean major,
@@ -122,14 +118,17 @@ public abstract class AbstractPerk {
 		if(pathName!=null) {
 			generateSVGImage(pathName, colours);
 		}
-		
-		modifiersList = new ArrayList<>();
-		
+
 		this.spell = spell;
 		this.spellUpgrade = spellUpgrade;
 		this.school = school;
 	}
-	
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if(o instanceof AbstractPerk) {
@@ -159,95 +158,58 @@ public abstract class AbstractPerk {
 				colours.size() >= 3 ? colours.get(2) : null,
 				SvgUtil.loadFromResource("/com/lilithsthrone/res/"+pathName+".svg"));
 	}
-	
-	public boolean isAlwaysAvailable() {
-		return false;
-	}
 
-	/**
-	 * Override this and return true if the perk is one that is unlock via special in-game events.
-	 * @return true If this perk does not appear in the perk tree, but is otherwise obtainable through special means.
-	 */
-	public boolean isHiddenPerk() {
-		return false;
-	}
-	
-	/**
-	 * @return true if this a perk that's granted as part of an NPC's background.
-	 */
-	public boolean isBackgroundPerk() {
-		return false;
-	}
-	
+	@Override
 	public String getName(GameCharacter owner) {
 		return name;
 	}
 
+	@Override
 	public Colour getColour() {
 		return colours.get(0);
 	}
 
+	@Override
 	public boolean isEquippableTrait() {
 		return equippableTrait;
 	}
 
-	public abstract String getDescription(GameCharacter target);
-
-	public List<String> getModifiersAsStringList(GameCharacter character) {
-		modifiersList.clear();
-		
-		if (this.getAttributeModifiers(character) != null) {
-			for (Entry<AbstractAttribute, Integer> e : this.getAttributeModifiers(character).entrySet()) {
-				modifiersList.add(e.getKey().getFormattedValue(e.getValue()));
-			}
-		}
-		
-		return Util.mergeLists(modifiersList, getExtraEffects());
-	}
-
-	/**
-	 * final because attributes are only accessed when perk is applied/removed to/from a character, so changing this while perk is applied will either not work or break attributes when the perk is removed.
-	 */
-	public final Map<AbstractAttribute, Integer> getAttributeModifiers(GameCharacter character) {
+	@Override
+	public HashMap<AbstractAttribute, Integer> getAttributeModifiers(GameCharacter character) {
 		return attributeModifiers;
 	}
-	
-	public String applyPerkGained(GameCharacter character) {
-		return "";
-	};
 
-	public String applyPerkLost(GameCharacter character) {
-		return "";
-	};
-
-	public CorruptionLevel getAssociatedCorruptionLevel() {
-		return CorruptionLevel.ZERO_PURE;
-	}
-
+	@Override
 	public int getRenderingPriority() {
 		return renderingPriority;
 	}
 
+	@Override
 	public List<String> getExtraEffects() {
 		return extraEffects;
 	}
 
+	@Override
 	public String getSVGString(GameCharacter owner) {
 		return SVGString;
 	}
 
+	@Override
 	public PerkCategory getPerkCategory() {
 		return perkCategory;
 	}
 
+	@Override
 	public Spell getSpell() {
 		return spell;
 	}
 
+	@Override
 	public SpellUpgrade getSpellUpgrade() {
 		return spellUpgrade;
 	}
 
+	@Override
 	public SpellSchool getSchool() {
 		return school;
 	}

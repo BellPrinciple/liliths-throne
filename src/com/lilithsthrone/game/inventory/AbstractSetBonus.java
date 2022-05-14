@@ -8,19 +8,17 @@ import com.lilithsthrone.main.Main;
 import org.w3c.dom.Document;
 
 import com.lilithsthrone.controller.xmlParsing.Element;
-import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.effects.AbstractStatusEffect;
 import com.lilithsthrone.game.character.effects.StatusEffect;
-import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
-import com.lilithsthrone.game.inventory.weapon.AbstractWeapon;
 
 /**
  * @since 0.3.8.2
  * @version 0.3.8.2
  * @author Innoxia
  */
-public abstract class AbstractSetBonus {
-	
+public abstract class AbstractSetBonus implements SetBonus {
+
+	String id;
 	private boolean mod;
 	private String name;
 	private int numberRequiredForCompleteSet;
@@ -73,55 +71,28 @@ public abstract class AbstractSetBonus {
 			}
 		}
 	}
-	
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
-	
-	public boolean isCharacterWearingCompleteSet(GameCharacter target) {
-		int setCount = 0;
-		
-		for(InventorySlot slot : this.getBlockedSlotsCountingTowardsFullSet()) {
-			if(slot.getBodyPartClothingBlock(target) != null) {
-				setCount++;
-			}
-		}
-		
-		boolean atLeastOneClothingFound = false;
-		for (AbstractClothing c : target.getClothingCurrentlyEquipped()) {
-			if (c.getClothingType().getClothingSet() == this) {
-				setCount++;
-				atLeastOneClothingFound = true;
-			}
-		}
-		
-		int weaponSetCount = 0;
-		for(AbstractWeapon weapon : target.getMainWeaponArray()) {
-			if(weapon!=null && weapon.getWeaponType().getClothingSet() == this) {
-				weaponSetCount++;
-				atLeastOneClothingFound = true;
-			}
-		}
-		for(AbstractWeapon weapon : target.getOffhandWeaponArray()) {
-			if(weapon!=null && weapon.getWeaponType().getClothingSet() == this) {
-				weaponSetCount++;
-				atLeastOneClothingFound = true;
-			}
-		}
-		
-		setCount += Math.min(2, weaponSetCount);
-		
-		return atLeastOneClothingFound && setCount >= this.getNumberRequiredForCompleteSet();
-	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public int getNumberRequiredForCompleteSet() {
 		return numberRequiredForCompleteSet;
 	}
 
+	@Override
 	public AbstractStatusEffect getAssociatedStatusEffect() {
 		if(associatedStatusEffect==null) {
 			associatedStatusEffect = StatusEffect.getStatusEffectFromId(statusEffectId);
@@ -129,6 +100,7 @@ public abstract class AbstractSetBonus {
 		return associatedStatusEffect;
 	}
 
+	@Override
 	public List<InventorySlot> getBlockedSlotsCountingTowardsFullSet() {
 		return blockedSlotsCountingTowardsFullSet;
 	}

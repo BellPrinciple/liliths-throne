@@ -13,12 +13,10 @@ import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
 import com.lilithsthrone.game.character.body.types.EarType;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -26,7 +24,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractEarType implements BodyPartTypeInterface {
+public abstract class AbstractEarType implements EarType {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -136,32 +134,20 @@ public abstract class AbstractEarType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
-	}
-	
-	public boolean isAbleToBeUsedAsHandlesInSex() {
-		return this.getTags().contains(BodyPartTag.EAR_HANDLES_IN_SEX);
 	}
 	
 	@Override
 	public String getTransformationNameOverride() {
 		return transformationName;
-	}
-
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "a pair of";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
 	}
 	
 	@Override
@@ -194,17 +180,12 @@ public abstract class AbstractEarType implements BodyPartTypeInterface {
 	}
 
 	@Override
-	public TFModifier getTFModifier() {
-		return getTFTypeModifier(EarType.getEarTypes(race));
-	}
-
-//	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, earBodyDescription);
 	}
 	
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, earTransformationDescription);
 	}

@@ -1,19 +1,18 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractFaceType;
+import com.lilithsthrone.game.character.body.abstractTypes.AbstractMouthType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -21,9 +20,38 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.9.1
  * @author Innoxia
  */
-public class FaceType {
-	
-	public static AbstractFaceType HUMAN = new AbstractFaceType(BodyCoveringType.HUMAN,
+public interface FaceType extends BodyPartTypeInterface {
+
+	boolean isFacialHairAllowed();
+
+	AbstractMouthType getMouthType();
+
+	String getNoseNameSingular(GameCharacter gc);
+
+	String getNoseNamePlural(GameCharacter gc);
+
+	String getNoseDescriptor(GameCharacter gc);
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	@Override
+	default String getDeterminer(GameCharacter gc) {
+		return "";
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return false;
+	}
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(FaceType.getFaceTypes(getRace()));
+	}
+
+	public static AbstractFaceType HUMAN = new Special(BodyCoveringType.HUMAN,
 			Race.HUMAN,
 			MouthType.HUMAN,
 			null,
@@ -41,7 +69,7 @@ public class FaceType {
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractFaceType ANGEL = new AbstractFaceType(BodyCoveringType.ANGEL,
+	public static AbstractFaceType ANGEL = new Special(BodyCoveringType.ANGEL,
 			Race.ANGEL,
 			MouthType.ANGEL,
 			null,
@@ -59,7 +87,7 @@ public class FaceType {
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractFaceType DEMON_COMMON = new AbstractFaceType(BodyCoveringType.DEMON_COMMON,
+	public static AbstractFaceType DEMON_COMMON = new Special(BodyCoveringType.DEMON_COMMON,
 			Race.DEMON,
 			MouthType.DEMON_COMMON,
 			null,
@@ -83,7 +111,7 @@ public class FaceType {
 			Util.newArrayListOfValues()){
 	};
 
-	public static AbstractFaceType ALLIGATOR_MORPH = new AbstractFaceType(BodyCoveringType.ALLIGATOR_SCALES,
+	public static AbstractFaceType ALLIGATOR_MORPH = new Special(BodyCoveringType.ALLIGATOR_SCALES,
 			Race.ALLIGATOR_MORPH,
 			MouthType.ALLIGATOR_MORPH,
 			null,
@@ -112,7 +140,7 @@ public class FaceType {
 				)){
 	};
 
-	public static AbstractFaceType BAT_MORPH = new AbstractFaceType(BodyCoveringType.BAT_FUR,
+	public static AbstractFaceType BAT_MORPH = new Special(BodyCoveringType.BAT_FUR,
 			Race.BAT_MORPH,
 			MouthType.BAT_MORPH,
 			null,
@@ -141,7 +169,7 @@ public class FaceType {
 				)){
 	};
 
-	public static AbstractFaceType CAT_MORPH = new AbstractFaceType(BodyCoveringType.FELINE_FUR,
+	public static AbstractFaceType CAT_MORPH = new Special(BodyCoveringType.FELINE_FUR,
 			Race.CAT_MORPH,
 			MouthType.CAT_MORPH,
 			null,
@@ -170,7 +198,7 @@ public class FaceType {
 				)){
 	};
 
-//	public static AbstractFaceType CAT_MORPH_PANTHER = new AbstractFaceType(BodyCoveringType.FELINE_FUR,
+//	public static AbstractFaceType CAT_MORPH_PANTHER = new Special(BodyCoveringType.FELINE_FUR,
 //			Race.CAT_MORPH,
 //			MouthType.CAT_MORPH,
 //			null,
@@ -199,7 +227,7 @@ public class FaceType {
 //				)){
 //	};
 
-	public static AbstractFaceType COW_MORPH = new AbstractFaceType(BodyCoveringType.BOVINE_FUR,
+	public static AbstractFaceType COW_MORPH = new Special(BodyCoveringType.BOVINE_FUR,
 			Race.COW_MORPH,
 			MouthType.COW_MORPH,
 			null,
@@ -227,7 +255,7 @@ public class FaceType {
 				)){
 	};
 
-	public static AbstractFaceType DOG_MORPH = new AbstractFaceType(BodyCoveringType.CANINE_FUR,
+	public static AbstractFaceType DOG_MORPH = new Special(BodyCoveringType.CANINE_FUR,
 			Race.DOG_MORPH,
 			MouthType.DOG_MORPH,
 			null,
@@ -256,7 +284,7 @@ public class FaceType {
 				)){
 	};
 
-	public static AbstractFaceType FOX_MORPH = new AbstractFaceType(BodyCoveringType.FOX_FUR,
+	public static AbstractFaceType FOX_MORPH = new Special(BodyCoveringType.FOX_FUR,
 			Race.FOX_MORPH,
 			MouthType.FOX_MORPH,
 			null,
@@ -285,7 +313,7 @@ public class FaceType {
 				)){
 	};
 
-	public static AbstractFaceType HARPY = new AbstractFaceType(BodyCoveringType.FEATHERS,
+	public static AbstractFaceType HARPY = new Special(BodyCoveringType.FEATHERS,
 			Race.HARPY,
 			MouthType.HARPY,
 			null,
@@ -315,7 +343,7 @@ public class FaceType {
 				)){
 	};
 
-	public static AbstractFaceType HORSE_MORPH = new AbstractFaceType(BodyCoveringType.HORSE_HAIR,
+	public static AbstractFaceType HORSE_MORPH = new Special(BodyCoveringType.HORSE_HAIR,
 			Race.HORSE_MORPH,
 			MouthType.HORSE_MORPH,
 			null,
@@ -343,7 +371,7 @@ public class FaceType {
 				)){
 	};
 
-	public static AbstractFaceType RABBIT_MORPH = new AbstractFaceType(BodyCoveringType.RABBIT_FUR,
+	public static AbstractFaceType RABBIT_MORPH = new Special(BodyCoveringType.RABBIT_FUR,
 			Race.RABBIT_MORPH,
 			MouthType.RABBIT_MORPH,
 			null,
@@ -371,7 +399,7 @@ public class FaceType {
 				)){
 	};
 
-	public static AbstractFaceType RAT_MORPH = new AbstractFaceType(BodyCoveringType.RAT_FUR,
+	public static AbstractFaceType RAT_MORPH = new Special(BodyCoveringType.RAT_FUR,
 			Race.RAT_MORPH,
 			MouthType.RAT_MORPH,
 			null,
@@ -399,7 +427,7 @@ public class FaceType {
 				)){
 	};
 
-	public static AbstractFaceType REINDEER_MORPH = new AbstractFaceType(BodyCoveringType.REINDEER_FUR,
+	public static AbstractFaceType REINDEER_MORPH = new Special(BodyCoveringType.REINDEER_FUR,
 			Race.REINDEER_MORPH,
 			MouthType.REINDEER_MORPH,
 			null,
@@ -427,7 +455,7 @@ public class FaceType {
 				)){
 	};
 
-	public static AbstractFaceType SQUIRREL_MORPH = new AbstractFaceType(BodyCoveringType.SQUIRREL_FUR,
+	public static AbstractFaceType SQUIRREL_MORPH = new Special(BodyCoveringType.SQUIRREL_FUR,
 			Race.SQUIRREL_MORPH,
 			MouthType.SQUIRREL_MORPH,
 			null,
@@ -455,7 +483,7 @@ public class FaceType {
 				)){
 	};
 
-	public static AbstractFaceType WOLF_MORPH = new AbstractFaceType(BodyCoveringType.LYCAN_FUR,
+	public static AbstractFaceType WOLF_MORPH = new Special(BodyCoveringType.LYCAN_FUR,
 			Race.WOLF_MORPH,
 			MouthType.WOLF_MORPH,
 			null,
@@ -484,122 +512,68 @@ public class FaceType {
 				)){
 	};
 	
+	class Special extends AbstractFaceType {
 
-	private static List<AbstractFaceType> allFaceTypes;
-	private static Map<AbstractFaceType, String> faceToIdMap = new HashMap<>();
-	private static Map<String, AbstractFaceType> idToFaceMap = new HashMap<>();
-	
-	static {
-		allFaceTypes = new ArrayList<>();
+		private String id;
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("face")) {
-					try {
-						AbstractFaceType type = new AbstractFaceType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allFaceTypes.add(type);
-						faceToIdMap.put(type, id);
-						idToFaceMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
+		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, AbstractMouthType mouthType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String noseName, String noseNamePlural, List<String> noseDescriptorsMasculine, List<String> noseDescriptorsFeminine, String faceTransformationDescription, String faceBodyDescription, List<BodyPartTag> tags) {
+			super(coveringType, race, mouthType, names, namesPlural, descriptorsMasculine, descriptorsFeminine, noseName, noseNamePlural, noseDescriptorsMasculine, noseDescriptorsFeminine, faceTransformationDescription, faceBodyDescription, tags);
 		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("face")) {
-					try {
-						AbstractFaceType type = new AbstractFaceType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allFaceTypes.add(type);
-						faceToIdMap.put(type, id);
-						idToFaceMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded face types:
-		
-		Field[] fields = FaceType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractFaceType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractFaceType ct;
-				try {
-					ct = ((AbstractFaceType) f.get(null));
 
-					faceToIdMap.put(ct, f.getName());
-					idToFaceMap.put(f.getName(), ct);
-					
-					allFaceTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, AbstractMouthType mouthType, List<String> names, List<String> namesPlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String noseName, String noseNamePlural, List<String> noseDescriptorsMasculine, List<String> noseDescriptorsFeminine, String faceTransformationDescription, String faceBodyDescription, String faceBodyDescriptionFeral, List<BodyPartTag> tags) {
+			super(coveringType, race, mouthType, names, namesPlural, descriptorsMasculine, descriptorsFeminine, noseName, noseNamePlural, noseDescriptorsMasculine, noseDescriptorsFeminine, faceTransformationDescription, faceBodyDescription, faceBodyDescriptionFeral, tags);
 		}
-		
-		Collections.sort(allFaceTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
+
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(FaceType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
+		}
 	}
-	
+
+	TypeTable<AbstractFaceType> table = new TypeTable<>(
+		FaceType::sanitize,
+		FaceType.class,
+		AbstractFaceType.class,
+		"face",
+		(f,n,a,m)->new AbstractFaceType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
 	public static AbstractFaceType getFaceTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("IMP")) {
-			return FaceType.DEMON_COMMON;
+			return "DEMON_COMMON";
 		}
 		if(id.equals("LYCAN")) {
-			return FaceType.WOLF_MORPH;
+			return "WOLF_MORPH";
 		}
 		if(id.equals("TENGU")) {
-			return FaceType.HARPY;
+			return "HARPY";
 		}
 		if(id.equals("CAT_MORPH_PANTHER")) {
-			id = "innoxia_panther_face";
+			return "innoxia_panther_face";
 		}
-		
-		id = Util.getClosestStringMatch(id, idToFaceMap.keySet());
-		return idToFaceMap.get(id);
+
+		return id;
 	}
-	
+
 	public static String getIdFromFaceType(AbstractFaceType faceType) {
-		return faceToIdMap.get(faceType);
+		return faceType.getId();
 	}
-	
+
 	public static List<AbstractFaceType> getAllFaceTypes() {
-		return allFaceTypes;
+		return table.listByRace();
 	}
-	
-	private static Map<AbstractRace, List<AbstractFaceType>> typesMap = new HashMap<>();
-	
+
 	public static List<AbstractFaceType> getFaceTypes(AbstractRace r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractFaceType> types = new ArrayList<>();
-		for(AbstractFaceType type : FaceType.getAllFaceTypes()) {
-			if(type.getRace()==r) {
-				types.add(type);
-			}
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of());
 	}
 }

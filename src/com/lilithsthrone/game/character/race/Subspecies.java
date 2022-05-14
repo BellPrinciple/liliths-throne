@@ -1,9 +1,8 @@
 package com.lilithsthrone.game.character.race;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +32,7 @@ import com.lilithsthrone.game.character.body.types.LegType;
 import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.TailType;
 import com.lilithsthrone.game.character.body.types.WingType;
+import com.lilithsthrone.game.character.body.valueEnums.Affinity;
 import com.lilithsthrone.game.character.body.valueEnums.BodyMaterial;
 import com.lilithsthrone.game.character.body.valueEnums.BodySize;
 import com.lilithsthrone.game.character.body.valueEnums.CoveringModifier;
@@ -48,6 +48,7 @@ import com.lilithsthrone.game.character.body.valueEnums.WingSize;
 import com.lilithsthrone.game.character.effects.PerkCategory;
 import com.lilithsthrone.game.character.fetishes.Fetish;
 import com.lilithsthrone.game.character.npc.misc.Elemental;
+import com.lilithsthrone.game.character.npc.misc.GenericAndrogynousNPC;
 import com.lilithsthrone.game.character.persona.PersonalityTrait;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.game.inventory.item.AbstractItemType;
@@ -64,12 +65,382 @@ import com.lilithsthrone.world.WorldRegion;
 import com.lilithsthrone.world.WorldType;
 import com.lilithsthrone.world.places.AbstractPlaceType;
 
+import static java.util.Comparator.comparingDouble;
+import static java.util.stream.Collectors.toList;
+
 /**
  * @since 0.1.91
  * @version 0.4.0
  * @author tukaima, Innoxia
  */
-public class Subspecies {
+public interface Subspecies {
+
+	String getId();
+
+	/**
+	 * @return
+	 * A map of personality traits and the percentage chance that a member of this race will spawn with them.
+	 */
+	default Map<PersonalityTrait,Float> getPersonalityTraitChances() {
+		return Map.of();
+	}
+
+	/**
+	 * Changes that should be applied to characters of this species upon generation.
+	 * Called <b>after</b> this Subspecies' Race.applyRaceChanges().
+	 */
+	default void applySpeciesChanges(Body body) {
+	}
+
+	/**
+	 * Changes that should be applied to any offspring of this species.
+	 */
+	default void applyOffspringSpeciesChanges(Body body) {
+		applySpeciesChanges(body);
+	}
+
+	/**
+	 * @param body The body being checked.
+	 * @param race The race of the body being checked.
+	 * @return 0 if this Subspecies' requirements are not met by the supplied body/race. Typically return 100 if they are met, or something higher if the Subspecies should have a higher priority.
+	 */
+	default int getSubspeciesWeighting(Body body, AbstractRace race) {
+		return 0;
+	}
+
+	boolean isShortStature();
+
+	boolean isNonBiped();
+
+	/**
+	 * @return
+	 * true if this Subspecies is able to self-transform. Race.isAbleToSelfTransform() is factored into this.
+	 */
+	default boolean isAbleToSelfTransform() {
+		return getRace().isAbleToSelfTransform();
+	}
+
+	// Items:
+
+	String getAttributeItemId();
+
+	/**
+	 * @param owner
+	 * Nullable set of properties to further specify.
+	 * @return
+	 * The ItemType which this Subspecies has as its attribute-related item. <b>Returns null if no item is defined.</b>
+	 */
+	default AbstractItemType getAttributeItem(GameCharacter owner) {
+		if(getAttributeItemId()==null || getAttributeItemId().isEmpty()) {
+			return null;
+		}
+		return ItemType.getItemTypeFromId(getAttributeItemId());
+	}
+
+	String getTransformativeItemId();
+
+	/**
+	 * @param owner
+	 * Nullable set of properties to further specify.
+	 * @return
+	 * The ItemType which this Subspecies has as its transformation-related item. <b>Returns null if no item is defined.</b>
+	 */
+	default AbstractItemType getTransformativeItem(GameCharacter owner) {
+		if(getTransformativeItemId()==null || getTransformativeItemId().isEmpty()) {
+			return null;
+		}
+		return ItemType.getItemTypeFromId(getTransformativeItemId());
+	}
+
+	AbstractItemType getBook();
+
+	default boolean isMainSubspecies() {
+		return false;
+	}
+
+	/**
+	 * @return
+	 * An integer representing how important this Subspecies is to be defined as a character's Subspecies override (meaning that this Subspecies will always be their true Subspecies).
+	 * <b/>Default value is <b>0</b>, which, along with any negative integer value, means that this Subspecies does not set an Override.
+	 * <br/>A Subspecies which has a higher value than a character's current Subspecies Override will replace the current Override with this one.
+	 */
+	int getSubspeciesOverridePriority();
+
+	/**
+	 * @param body
+	 * Nullable set of properties to further specify.
+	 * @return
+	 * The singular name of this character's subspecies.
+	 */
+	String getName(Body body);
+
+	/**
+	 * @param body
+	 * Nullable set of properties to further specify.
+	 * @return
+	 * The plural name of this character's subspecies.
+	 */
+	String getNamePlural(Body body);
+
+	/**
+	 * @param body
+	 * Nullable set of properties to further specify.
+	 * @return
+	 * The singular male name of this character's subspecies.
+	 */
+	String getSingularMaleName(Body body);
+
+	/**
+	 * @param body
+	 * Nullable set of properties to further specify.
+	 * @return
+	 * The singular female name of this character's subspecies.
+	 */
+	String getSingularFemaleName(Body body);
+
+	/**
+	 * @param body
+	 * Nullable set of properties to further specify.
+	 * @return
+	 * The plural male name of this character's subspecies.
+	 */
+	String getPluralMaleName(Body body);
+
+	/**
+	 * @param body
+	 * Nullable set of properties to further specify.
+	 * @return
+	 * The plural female name of this character's subspecies.
+	 */
+	String getPluralFemaleName(Body body);
+
+	default String getNonBipedRaceName(Body body) {
+		return getFeralName(body);
+	}
+
+	String getFeralName(Body body);
+
+	String getFeralNamePlural(Body body);
+
+	FeralAttributes getFeralAttributes(Body body);
+
+	default boolean isFeralConfigurationAvailable(Body body) {
+		return getFeralAttributes(body) != null;
+	}
+
+	default Nocturnality getNocturnality() {
+		return Nocturnality.DIURNAL;
+	}
+
+	String getStatusEffectDescription(GameCharacter character);
+
+	Map<AbstractAttribute,Float> getStatusEffectAttributeModifiers(GameCharacter character);
+
+	Map<PerkCategory,Integer> getPerkWeighting(GameCharacter character);
+
+	List<String> getExtraEffects(GameCharacter character);
+
+	default List<String> getFeralEffects() {
+		return List.of(
+				"[style.colourUnarmed(Base unarmed damage)] [style.colourExcellent(tripled)]",
+				"[style.colourExcellent(Immune)] to [style.colourGenericTf(racial transformations)]");
+	}
+
+	String getBookName();
+
+	String getBookNamePlural();
+
+	String getBookAuthor();
+
+	default String getBasicDescription(GameCharacter character) {
+		return UtilText.parseFromXMLFile("characters/raceInfo", getBasicDescriptionId());
+	}
+
+	default String getAdvancedDescription(GameCharacter character) {
+		return UtilText.parseFromXMLFile("characters/raceInfo", getAdvancedDescriptionId());
+	}
+
+	String getBasicDescriptionId();
+
+	String getAdvancedDescriptionId();
+
+	AbstractRace getRace();
+
+	Affinity getAffinity();
+
+	Affinity getAffinity(Body body);
+
+	Affinity getAffinity(GameCharacter character);
+
+	default AbstractAttribute getDamageMultiplier() {
+		return getRace().getDefaultDamageMultiplier();
+	}
+
+	Colour getColour(GameCharacter character);
+
+	Colour getSecondaryColour();
+
+	Colour getTertiaryColour();
+
+	SubspeciesPreference getSubspeciesPreferenceDefault();
+
+	String getDescription(GameCharacter character);
+
+	default boolean isWinged() {
+		return false;
+	}
+
+	default boolean isDoesNotAge() {
+		return false;
+	}
+
+	default boolean isAquatic() {
+		return getAffinity() == Affinity.AQUATIC;
+	}
+
+	default boolean isAquatic(Body body) {
+		return getAffinity(body) == Affinity.AQUATIC;
+	}
+
+	/**
+	 * @param character
+	 * The character being checked
+	 * @return
+	 * true if the supplied character has a LegConfiguration of type TAIL, or if the aquatic variable is set to true.
+	 */
+	default boolean isAquatic(GameCharacter character) {
+		return getAffinity(character) == Affinity.AQUATIC;
+	}
+
+	String getPathName();
+
+	int getIconSize();
+
+	String getBackgroundPathName();
+
+	String getBookSVGString();
+
+	default String getSVGStringFromBody(Body body) {
+		var character = body.getLoadedSubspecies().getRace()==Race.ELEMENTAL ? new Elemental(false) : new GenericAndrogynousNPC();
+		character.setBody(body, true);
+		return getSVGString(character);
+	}
+
+	String getSVGString(GameCharacter character);
+
+	String getSVGStringNoBackground();
+
+	default String getSVGStringDesaturatedFromBody(Body body) {
+		var character = body.getLoadedSubspecies().getRace()==Race.ELEMENTAL ? new Elemental(false) : new GenericAndrogynousNPC();
+		character.setBody(body, true);
+		return getSVGStringDesaturated(character);
+	}
+
+	String getSVGStringDesaturated(GameCharacter character);
+
+	String getSVGStringDesaturated(GameCharacter character, Colour colour);
+
+	String getSlimeSVGString(GameCharacter character);
+
+	String getDollSVGString(GameCharacter character);
+
+	String getDollSVGStringDesaturated(GameCharacter character);
+
+	String getHalfDemonSVGString(GameCharacter character);
+
+	Map<WorldRegion,SubspeciesSpawnRarity> getRegionLocations();
+
+	Map<AbstractWorldType,SubspeciesSpawnRarity> getWorldLocations();
+
+	Map<AbstractPlaceType,SubspeciesSpawnRarity> getPlaceLocations();
+
+	/**
+	 * @param worldType
+	 * The world in which this species' spawn availability is to be checked.
+	 * @param placeType
+	 * An optional place type, which can be null if not needed.
+	 * If a non-null argument is passed in, this method will return true if either the worldType or the placeType allows for this subspecies to spawn.
+	 * @return
+	 * true if this subspecies is able to spawn in the worldType, either due to having a spawn chance in that worldType directly, or in the WorldRegion in which that worldType is located.
+	 */
+	default boolean isAbleToNaturallySpawnInLocation(AbstractWorldType worldType, AbstractPlaceType placeType) {
+		return getRegionLocations().containsKey(worldType.getWorldRegion())
+				|| getWorldLocations().containsKey(worldType)
+				|| (placeType!=null && getPlaceLocations().containsKey(placeType));
+	}
+
+	default List<WorldRegion> getMostCommonWorldRegions() {
+		List<WorldRegion> mostCommonRegion = new ArrayList<>();
+		SubspeciesSpawnRarity highestRarity = SubspeciesSpawnRarity.ONE;
+		for(Map.Entry<WorldRegion, SubspeciesSpawnRarity> entry : getRegionLocations().entrySet()) {
+			if(entry.getValue().getChanceMultiplier()>=highestRarity.getChanceMultiplier()) {
+				if(entry.getValue().getChanceMultiplier()>highestRarity.getChanceMultiplier()) {
+					mostCommonRegion.clear();
+				}
+				mostCommonRegion.add(entry.getKey());
+				highestRarity = entry.getValue();
+			}
+		}
+		return mostCommonRegion;
+	}
+
+	List<SubspeciesFlag> getFlags();
+
+	default boolean hasFlag(SubspeciesFlag flag) {
+		return getFlags().contains(flag);
+	}
+
+	/**
+	 * @return
+	 * A String array of length 6, consisting of:<br/>
+	 * <b>[0]:</b> Singular generic demon name<br/>
+	 * <b>[1]:</b> Plural generic demon name<br/>
+	 * <b>[2]:</b> Singular male demon name<br/>
+	 * <b>[3]:</b> Singular female demon name<br/>
+	 * <b>[4]:</b> Plural male demon name<br/>
+	 * <b>[5]:</b> Plural female demon name<br/>
+	 */
+	String[] getHalfDemonName(Body body);
+
+	default FurryPreference getDefaultFemininePreference() {
+		if(isNonBiped()) {
+			return FurryPreference.MINIMUM;
+		}
+		return getRace().getDefaultFemininePreference();
+	}
+
+	default FurryPreference getDefaultMasculinePreference() {
+		if(isNonBiped()) {
+			return FurryPreference.MINIMUM;
+		}
+		return getRace().getDefaultMasculinePreference();
+	}
+
+	/**
+	 * @return
+	 * true if this subspecies should be displayed in the furry preferences options screen.
+	 */
+	default boolean isDisplayedInFurryPreferences() {
+		return !hasFlag(SubspeciesFlag.HIDDEN_FROM_PREFERENCES);
+	}
+
+	/**
+	 * @return
+	 * true if this subspecies can have its FurryPreference modified in the furry preferences options screen.
+	 */
+	default boolean isFurryPreferencesEnabled() {
+		return getRace().isAffectedByFurryPreference() && !hasFlag(SubspeciesFlag.DISABLE_FURRY_PREFERENCE);
+	}
+
+	/**
+	 * @return
+	 * true if this subspecies can have its spawn frequency modified in the furry preferences options screen.
+	 */
+	default boolean isSpawnPreferencesEnabled() {
+		return !hasFlag(SubspeciesFlag.DISABLE_SPAWN_PREFERENCE);
+	}
+
+	int getBaseSlaveValue(GameCharacter character);
 	
 	// ---- TODO planned races ---- //
 	
@@ -5918,20 +6289,12 @@ public class Subspecies {
 		}
 	};
 
+	@Deprecated
+	static AbstractSubspecies getSubspeciesFromId(String id) {
+		return table.of(id);
+	}
 
-	public static List<AbstractSubspecies> allSubspecies;
-	
-	public static Map<AbstractSubspecies, String> subspeciesToIdMap = new HashMap<>();
-	public static Map<String, AbstractSubspecies> idToSubspeciesMap = new HashMap<>();
-
-	private static Map<WorldRegion, Map<AbstractSubspecies, SubspeciesSpawnRarity>> regionSpecies;
-	private static Map<AbstractWorldType, Map<AbstractSubspecies, SubspeciesSpawnRarity>> worldSpecies;
-	private static Map<AbstractPlaceType, Map<AbstractSubspecies, SubspeciesSpawnRarity>> placeSpecies;
-	
-	protected static Map<AbstractSubspecies, SubspeciesSpawnRarity> dominionStormImmuneSpecies;
-	protected static Map<AbstractRace, List<AbstractSubspecies>> subspeciesFromRace;
-	
-	public static AbstractSubspecies getSubspeciesFromId(String id) {
+	private static String sanitize(String id) {
 		if(id.equalsIgnoreCase("CAT_MORPH_LEOPARD_SNOW")) {
 			id = "innoxia_panther_subspecies_snow_leopard";
 		} else if(id.equalsIgnoreCase("CAT_MORPH_LEOPARD")) {
@@ -5943,124 +6306,58 @@ public class Subspecies {
 		} else if(id.equalsIgnoreCase("HARPY_BALD_EAGLE")) {
 			id = "innoxia_raptor_subspecies_bald_eagle";
 		}
-		id = Util.getClosestStringMatch(id, idToSubspeciesMap.keySet());
-		return idToSubspeciesMap.get(id);
+		return id;
 	}
-	
+
 	public static String getIdFromSubspecies(AbstractSubspecies subspecies) {
-		return subspeciesToIdMap.get(subspecies);
+		return subspecies.id;
 	}
 
-	static {
-		allSubspecies = new ArrayList<>();
+	Table table = new Table();
 
-		// Modded subspecies:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "subspecies", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("subspecies")) {
-					try {
-						AbstractSubspecies subspecies = new AbstractSubspecies(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("_race", "");
-						allSubspecies.add(subspecies);
-						subspeciesToIdMap.put(subspecies, id);
-						idToSubspeciesMap.put(id, subspecies);
-//						System.out.println("subspecies: "+id);
-					} catch(Exception ex) {
-						System.err.println("Loading modded subspecies failed at 'Subspecies'. File path: "+innerEntry.getValue().getAbsolutePath());
-						System.err.println("Actual exception: ");
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// External res subspecies:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "subspecies", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("subspecies")) {
-					try {
-						AbstractSubspecies subspecies = new AbstractSubspecies(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("_race", "");
-						allSubspecies.add(subspecies);
-						subspeciesToIdMap.put(subspecies, id);
-						idToSubspeciesMap.put(id, subspecies);
-					} catch(Exception ex) {
-						System.err.println("Loading subspecies failed at 'Subspecies'. File path: "+innerEntry.getValue().getAbsolutePath());
-						System.err.println("Actual exception: ");
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Hard-coded:
-		
-		Field[] fields = Subspecies.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractSubspecies.class.isAssignableFrom(f.getType())) {
-				
-				AbstractSubspecies subspecies;
-				
-				try {
-					subspecies = ((AbstractSubspecies) f.get(null));
+	final class Table extends com.lilithsthrone.utils.Table<AbstractSubspecies> {
 
-					subspeciesToIdMap.put(subspecies, f.getName());
-					idToSubspeciesMap.put(f.getName(), subspecies);
-					allSubspecies.add(subspecies);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		worldSpecies = new HashMap<>();
-		regionSpecies = new HashMap<>();
-		placeSpecies = new HashMap<>();
-		dominionStormImmuneSpecies = new HashMap<>();
-		subspeciesFromRace = new HashMap<>();
-		
-		for(AbstractSubspecies species : Subspecies.getAllSubspecies()) {
-			subspeciesFromRace.putIfAbsent(species.getRace(), new ArrayList<>());
-			subspeciesFromRace.get(species.getRace()).add(species);
-			
-			for(Entry<WorldRegion, SubspeciesSpawnRarity> type : species.getRegionLocations().entrySet()) {
-				regionSpecies.putIfAbsent(type.getKey(), new HashMap<>());
-				regionSpecies.get(type.getKey()).put(species, type.getValue());
-			}
-			
-			for(Entry<AbstractWorldType, SubspeciesSpawnRarity> type : species.getWorldLocations().entrySet()) {
-				worldSpecies.putIfAbsent(type.getKey(), new HashMap<>());
-				worldSpecies.get(type.getKey()).put(species, type.getValue());
-				
-				try {
-					if(type.getKey()==WorldType.DOMINION && species.getRace()==Race.DEMON && species.getStatusEffectAttributeModifiers(null).get(Attribute.MAJOR_ARCANE)>=IntelligenceLevel.TWO_SMART.getMinimumValue()) {
-						dominionStormImmuneSpecies.put(species, type.getValue());
-					}
-				} catch(Exception ex) {	
-				}
-			}
-			
-			for(Entry<AbstractPlaceType, SubspeciesSpawnRarity> type : species.getPlaceLocations().entrySet()) {
-				placeSpecies.putIfAbsent(type.getKey(), new HashMap<>());
-				placeSpecies.get(type.getKey()).put(species, type.getValue());
-			}
-		}
-		
-		for(List<AbstractSubspecies> e : subspeciesFromRace.values()) {
-			e.sort((s1, s2) -> s1.getName(null).compareTo(s2.getName(null)));
-		}
+		private static final HashMap<WorldRegion,HashMap<AbstractSubspecies,SubspeciesSpawnRarity>> regionSpecies = new HashMap<>();
 
-		allSubspecies.sort((s1, s2) -> s1.getRace().getName(false).compareTo(s2.getRace().getName(false)));
+		private static final HashMap<AbstractWorldType,HashMap<AbstractSubspecies,SubspeciesSpawnRarity>> worldSpecies = new HashMap<>();
+
+		private static final HashMap<AbstractPlaceType,HashMap<AbstractSubspecies,SubspeciesSpawnRarity>> placeSpecies = new HashMap<>();
+
+		private Table() {
+			super(Subspecies::sanitize);
+			// Modded subspecies:
+			forEachMod("/race","subspecies",null,(f,n,a)->{
+				if(!Util.getXmlRootElementName(f).equals("subspecies"))
+					return;
+				var s = new AbstractSubspecies(f,n,true) {};
+				s.id = n.replaceAll("_race","");
+				add(s.id,s);
+			});
+			// External res subspecies:
+			forEachExternal("res/race","subspecies",null,(f,n,a)->{
+				if(!Util.getXmlRootElementName(f).equals("subspecies"))
+					return;
+				var s = new AbstractSubspecies(f,n,false) {};
+				s.id = n.replaceAll("_race","");
+				add(s.id,s);
+			});
+			// Hard-coded:
+			addFields(Subspecies.class,AbstractSubspecies.class,(k,v)->v.id=k);
+			for(var species : list()) {
+				for(var type : species.getRegionLocations().entrySet())
+					regionSpecies.computeIfAbsent(type.getKey(),k->new HashMap<>()).put(species,type.getValue());
+				for(var type : species.getWorldLocations().entrySet())
+					worldSpecies.computeIfAbsent(type.getKey(),k->new HashMap<>()).put(species,type.getValue());
+				for(var type : species.getPlaceLocations().entrySet())
+					placeSpecies.computeIfAbsent(type.getKey(),k->new HashMap<>()).put(species,type.getValue());
+			}
+		}
 	}
-	
+
 	public static List<AbstractSubspecies> getAllSubspecies() {
-		return allSubspecies;
+		return table.list().stream()
+		.sorted(Comparator.comparing(s->s.getRace().getName(false)))
+		.collect(toList());
 	}
 
 	public static Map<AbstractSubspecies, SubspeciesSpawnRarity> getWorldSpecies(AbstractWorldType worldType, AbstractPlaceType placeType, boolean onlyCoreRaceSpecies, AbstractSubspecies... subspeciesToExclude) {
@@ -6080,27 +6377,27 @@ public class Subspecies {
 	 * @return A weighted map of subspecies that can spawn in that world, region and/or place.
 	 */
 	public static Map<AbstractSubspecies, SubspeciesSpawnRarity> getWorldSpecies(AbstractWorldType worldType, AbstractPlaceType placeType, boolean onlyCoreRaceSpecies, boolean includeRegionSpecies, List<AbstractSubspecies> subspeciesToExclude) {
-		worldSpecies.putIfAbsent(worldType, new HashMap<>());
-		regionSpecies.putIfAbsent(worldType.getWorldRegion(), new HashMap<>());
+		Table.worldSpecies.putIfAbsent(worldType, new HashMap<>());
+		Table.regionSpecies.putIfAbsent(worldType.getWorldRegion(), new HashMap<>());
 		
-		Map<AbstractSubspecies, SubspeciesSpawnRarity> map = new HashMap<>(worldSpecies.get(worldType));
+		Map<AbstractSubspecies, SubspeciesSpawnRarity> map = new HashMap<>(Table.worldSpecies.get(worldType));
 		if (includeRegionSpecies) {
-			for(Entry<AbstractSubspecies, SubspeciesSpawnRarity> regionEntry : regionSpecies.get(worldType.getWorldRegion()).entrySet()) {
+			for(Entry<AbstractSubspecies, SubspeciesSpawnRarity> regionEntry : Table.regionSpecies.get(worldType.getWorldRegion()).entrySet()) {
 				if(!map.containsKey(regionEntry.getKey())) {
 					map.put(regionEntry.getKey(), regionEntry.getValue());
 				}
 			}
 		}
 		if(placeType!=null) {
-			placeSpecies.putIfAbsent(placeType, new HashMap<>());
-			regionSpecies.putIfAbsent(placeType.getWorldRegion(), new HashMap<>());
-		    for(Entry<AbstractSubspecies, SubspeciesSpawnRarity> placeEntry : placeSpecies.get(placeType).entrySet()) {
+			Table.placeSpecies.putIfAbsent(placeType, new HashMap<>());
+			Table.regionSpecies.putIfAbsent(placeType.getWorldRegion(), new HashMap<>());
+		    for(Entry<AbstractSubspecies, SubspeciesSpawnRarity> placeEntry : Table.placeSpecies.get(placeType).entrySet()) {
 		        if(!map.containsKey(placeEntry.getKey())) {
 		            map.put(placeEntry.getKey(), placeEntry.getValue());
 		        }
 		    }
-			if (includeRegionSpecies && regionSpecies.get(placeType.getWorldRegion())!=null) {
-			    for(Entry<AbstractSubspecies, SubspeciesSpawnRarity> regionEntry : regionSpecies.get(placeType.getWorldRegion()).entrySet()) {
+			if (includeRegionSpecies && Table.regionSpecies.get(placeType.getWorldRegion())!=null) {
+			    for(Entry<AbstractSubspecies, SubspeciesSpawnRarity> regionEntry : Table.regionSpecies.get(placeType.getWorldRegion()).entrySet()) {
 			        if(!map.containsKey(regionEntry.getKey())) {
 			            map.put(regionEntry.getKey(), regionEntry.getValue());
 			        }
@@ -6129,24 +6426,26 @@ public class Subspecies {
 	 * @param subspeciesToExclude Any Subspecies that should be excluded from the returned map.
 	 */
 	public static Map<AbstractSubspecies, SubspeciesSpawnRarity> getDominionStormImmuneSpecies(boolean onlyCoreRaceSpecies, AbstractSubspecies... subspeciesToExclude) {
-		Map<AbstractSubspecies, SubspeciesSpawnRarity> map = new HashMap<>(dominionStormImmuneSpecies);
-		
-		if(onlyCoreRaceSpecies) {
-			for(AbstractSubspecies sub : dominionStormImmuneSpecies.keySet()) {
-				if(AbstractSubspecies.getMainSubspeciesOfRace(sub.getRace())!=sub) {
-					map.remove(sub);
-				}
-			}
+		Map<AbstractSubspecies, SubspeciesSpawnRarity> map = new HashMap<>();
+		for(var s : table.list()) {
+			if(s.getRace()!=Race.DEMON
+					|| onlyCoreRaceSpecies && AbstractSubspecies.getMainSubspeciesOfRace(s.getRace())!=s
+					|| List.of(subspeciesToExclude).contains(s))
+				continue;
+			SubspeciesSpawnRarity t = s.getWorldLocations().get(WorldType.DOMINION);
+			if(null==t)
+				continue;
+			Float m = s.getStatusEffectAttributeModifiers(null).get(Attribute.MAJOR_ARCANE);
+			if(null!=m && m>=IntelligenceLevel.TWO_SMART.getMinimumValue())
+				map.put(s,t);
 		}
-		
-		for(AbstractSubspecies sub : subspeciesToExclude) {
-			map.remove(sub);
-		}
-		
 		return map;
 	}
 
 	public static List<AbstractSubspecies> getSubspeciesOfRace(AbstractRace race) {
-		return subspeciesFromRace.get(race);
+		return table.list().stream()
+		.filter(s->race.equals(s.getRace()))
+		.sorted(Comparator.comparing(s->s.getName(null)))
+		.collect(toList());
 	}
 }

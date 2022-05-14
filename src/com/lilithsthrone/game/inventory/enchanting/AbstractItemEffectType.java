@@ -78,9 +78,7 @@ import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.AbstractSubspecies;
 import com.lilithsthrone.game.character.race.RacialBody;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntryBookAddedToLibrary;
-import com.lilithsthrone.game.dialogue.utils.EnchantmentDialogue;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreItem;
 import com.lilithsthrone.game.inventory.item.ItemType;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Units;
@@ -94,8 +92,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractItemEffectType {
-	
+public abstract class AbstractItemEffectType implements ItemEffectType {
+
+	String id;
 	private List<String> effectsDescriptions;
 	private Colour colour;
 	
@@ -105,31 +104,33 @@ public abstract class AbstractItemEffectType {
 		this.effectsDescriptions = effectsDescriptions;
 		this.colour = colour;
 	}
-	
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
 	public List<String> getEffectsDescription(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target) {
 		if(effectsDescriptions==null) {
 			return new ArrayList<>();
 		}
 		return new ArrayList<>(effectsDescriptions);
 	}
-	
+
+	@Override
 	public Colour getColour() {
 		return colour;
 	}
-	
-	/**
-	 * @return Usually null, but if this ItemEffectType has an associated Race, this is how to access it.
-	 */
-	public AbstractRace getAssociatedRace() {
-		return null;
-	}
-	
+
+	@Override
 	public abstract String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer);
 
+	@Override
 	public final String applyEffect(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(itemEffectOverride(primaryModifier, secondaryModifier, potency, limit, user, target, timer));
-		
+
 		for(Entry<AbstractStatusEffect, Integer> entry : getAppliedStatusEffects().entrySet()) {
 			AbstractStatusEffect se = entry.getKey();
 			int time = entry.getValue();
@@ -148,78 +149,25 @@ public abstract class AbstractItemEffectType {
 			}
 			sb.append(UtilText.parse(target,
 					"<p style='text-align:center; padding-top:0; margin-top:0;'>"
-					+ "[npc.NameIsFull] now "
-					+(se.getBeneficialStatus()==EffectBenefit.DETRIMENTAL?"suffering from [style.italicsBad(":(se.getBeneficialStatus()==EffectBenefit.BENEFICIAL?"benefitting from [style.italicsGood(":"affected by "))
-					+se.getName(target)
-					+(se.getBeneficialStatus()==EffectBenefit.NEUTRAL?"":")]")
-					+ " for "+timeDesc+"!"
-					+ "</p>"));
+							+ "[npc.NameIsFull] now "
+							+(se.getBeneficialStatus()==EffectBenefit.DETRIMENTAL?"suffering from [style.italicsBad(":(se.getBeneficialStatus()==EffectBenefit.BENEFICIAL?"benefitting from [style.italicsGood(":"affected by "))
+							+se.getName(target)
+							+(se.getBeneficialStatus()==EffectBenefit.NEUTRAL?"":")]")
+							+ " for "+timeDesc+"!"
+							+ "</p>"));
 		}
-		
+
 		return sb.toString();
 	}
-	
-	public String getPotionDescriptor() {
-		return "";
-	}
-	
-	/**
-	 * <b>This disables use in sex or combat automatically.</b>
-	 * @return true if the use of this item should exit inventory management. i.e. If it's meant to set the content to a specific scene.
-	 */
-	public boolean isBreakOutOfInventory() {
-		return false;
-	}
-	
+
 	/**
 	 * @return A Map of status effects to be applied to the target, mapped to how long that status effect should be applied for, <b>in seconds</b>.
 	 */
+	@Override
 	public Map<AbstractStatusEffect, Integer> getAppliedStatusEffects() {
 		return new HashMap<>();
 	}
-	
-	public List<TFModifier> getPrimaryModifiers() {
-		return new ArrayList<>();
-	}
-	
-	public List<TFModifier> getSecondaryModifiers(AbstractCoreItem targetItem, TFModifier primaryModifier) {
-		return new ArrayList<>();
-	}
-	
-	public List<TFPotency> getPotencyModifiers(TFModifier primaryModifier, TFModifier secondaryModifier) {
-		return new ArrayList<>();
-	}
-	
-	public int getLimits(TFModifier primaryModifier, TFModifier secondaryModifier) {
-		return 0;
-	}
 
-	public int getSmallLimitChange() {
-		if (EnchantmentDialogue.getSecondaryMod() == TFModifier.TF_MOD_WETNESS
-				&& (EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS_CROTCH
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_PENIS)) {
-			// Increase small change for fluids
-			return 10;
-		}
-		return 1;
-	}
-
-	public int getLargeLimitChange() {
-		if (EnchantmentDialogue.getSecondaryMod() == TFModifier.TF_MOD_WETNESS
-				&& (EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_BREASTS_CROTCH
-						|| EnchantmentDialogue.getPrimaryMod() == TFModifier.TF_PENIS)) {
-			// Decrease large change for fluids
-			return 500;
-		}
-		return Math.max(5, getMaximumLimit()/10);
-	}
-
-	public int getMaximumLimit() {
-		return getLimits(EnchantmentDialogue.getPrimaryMod(), EnchantmentDialogue.getSecondaryMod());
-	}
-	
 	public static String getBookEffect(GameCharacter reader, AbstractSubspecies mainSubspecies, List<AbstractSubspecies> additionalUnlockSubspecies, boolean withDescription) {
 		List<AbstractSubspecies> subsPlusMain = new ArrayList<>();
 		subsPlusMain.add(mainSubspecies);
@@ -2758,7 +2706,7 @@ public abstract class AbstractItemEffectType {
 	protected static RacialEffectUtil getRacialEffect(AbstractRace race, TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, GameCharacter user, GameCharacter target) {
 		
 		boolean revealTransformedPart = user!=null && target!=null && !user.equals(target);
-		
+
 		switch(primaryModifier) {
 			case TF_ANTENNA:
 				switch(secondaryModifier) {
@@ -5289,7 +5237,7 @@ public abstract class AbstractItemEffectType {
 						return new RacialEffectUtil("Makes cum taste like blueberries.") { @Override public String applyEffect() { return target.setCumFlavour(FluidFlavour.BLUEBERRY); } };
 					case TF_MOD_FLAVOUR_BANANA:
 						return new RacialEffectUtil("Makes cum taste like bananas.") { @Override public String applyEffect() { return target.setCumFlavour(FluidFlavour.BANANA); } };
-	
+
 					case TF_MOD_FLUID_ADDICTIVE:
 						if(potency == TFPotency.MINOR_DRAIN) {
 							return new RacialEffectUtil("Removes addictive effect from cum.") { @Override public String applyEffect() { return target.removeCumModifier(FluidModifier.ADDICTIVE); } };
@@ -5419,7 +5367,7 @@ public abstract class AbstractItemEffectType {
 						return new RacialEffectUtil("Makes milk taste like blueberries.") { @Override public String applyEffect() { return target.setMilkFlavour(FluidFlavour.BLUEBERRY); } };
 					case TF_MOD_FLAVOUR_BANANA:
 						return new RacialEffectUtil("Makes milk taste like bananas.") { @Override public String applyEffect() { return target.setMilkFlavour(FluidFlavour.BANANA); } };
-						
+
 					case TF_MOD_FLUID_ADDICTIVE:
 						if(potency == TFPotency.MINOR_DRAIN) {
 							return new RacialEffectUtil("Removes addictive effect from milk.") { @Override public String applyEffect() { return target.removeMilkModifier(FluidModifier.ADDICTIVE); } };
@@ -5549,7 +5497,7 @@ public abstract class AbstractItemEffectType {
 						return new RacialEffectUtil("Makes udder-milk taste like blueberries.") { @Override public String applyEffect() { return target.setMilkCrotchFlavour(FluidFlavour.BLUEBERRY); } };
 					case TF_MOD_FLAVOUR_BANANA:
 						return new RacialEffectUtil("Makes udder-milk taste like bananas.") { @Override public String applyEffect() { return target.setMilkCrotchFlavour(FluidFlavour.BANANA); } };
-	
+
 					case TF_MOD_FLUID_ADDICTIVE:
 						if(potency == TFPotency.MINOR_DRAIN) {
 							return new RacialEffectUtil("Removes addictive effect from udder-milk.") { @Override public String applyEffect() { return target.removeMilkCrotchModifier(FluidModifier.ADDICTIVE); } };
@@ -5679,7 +5627,7 @@ public abstract class AbstractItemEffectType {
 						return new RacialEffectUtil("Makes girlcum taste like blueberries.") { @Override public String applyEffect() { return target.setGirlcumFlavour(FluidFlavour.BLUEBERRY); } };
 					case TF_MOD_FLAVOUR_BANANA:
 						return new RacialEffectUtil("Makes girlcum taste like bananas.") { @Override public String applyEffect() { return target.setGirlcumFlavour(FluidFlavour.BANANA); } };
-	
+
 					case TF_MOD_FLUID_ADDICTIVE:
 						if(potency == TFPotency.MINOR_DRAIN) {
 							return new RacialEffectUtil("Removes addictive effect from girlcum.") { @Override public String applyEffect() { return target.removeGirlcumModifier(FluidModifier.ADDICTIVE); } };

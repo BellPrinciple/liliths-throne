@@ -12,7 +12,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.TongueType;
 import com.lilithsthrone.game.character.body.valueEnums.TongueModifier;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
@@ -24,7 +24,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractTongueType implements BodyPartTypeInterface {
+public abstract class AbstractTongueType implements TongueType {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -131,29 +131,22 @@ public abstract class AbstractTongueType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public int getDefaultLength() {
 		return defaultLength;
 	}
 
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
-	}
-	
 	@Override
 	public String getNameSingular(GameCharacter gc) {
 		return name;
@@ -183,12 +176,12 @@ public abstract class AbstractTongueType implements BodyPartTypeInterface {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, tongueBodyDescription);
 	}
 	
-	
+	@Override
 	public List<TongueModifier> getDefaultRacialTongueModifiers() {
 		return defaultRacialTongueModifiers;
 	}

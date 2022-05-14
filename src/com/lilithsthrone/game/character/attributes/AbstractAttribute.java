@@ -2,7 +2,6 @@ package com.lilithsthrone.game.character.attributes;
 
 import java.util.List;
 
-import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
@@ -12,8 +11,9 @@ import com.lilithsthrone.utils.colours.Colour;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractAttribute {
+public abstract class AbstractAttribute implements Attribute {
 
+	String id;
 	private boolean percentage;
 	private int baseValue;
 	private	int lowerLimit;
@@ -52,18 +52,19 @@ public abstract class AbstractAttribute {
 				colour,
 				SvgUtil.loadFromResource("/com/lilithsthrone/res/UIElements/"+pathName+".svg"));
 	}
-	
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
 		System.err.println("Warning: AbstractAttribute's toString() method is being called!");
 //		throw new IllegalAccessError();
 		return Attribute.getIdFromAttribute(this);
 	}
-	
-	public boolean hasStatusEffect() {
-		return false;
-	}
-	
+
 	public boolean isPercentage() {
 		return percentage;
 	}
@@ -79,72 +80,22 @@ public abstract class AbstractAttribute {
 	public int getUpperLimit() {
 		return upperLimit;
 	}
-	
-	/**
-	 * @return true if this Attribute should be treates as being 'infinite' when the upperLimit is reached. (Only used for shielding.)
-	 */
-	public boolean isInfiniteAtUpperLimit() {
-		return false;
-	}
-	
-	public String getInfiniteDescription() {
-		return "";
-	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
-	public String getColouredName(String tag) {
-		return "<"+tag+" style='color:"+this.getColour().toWebHexString()+";'>"+name+"</"+tag+">";
-	}
 
-	public String getFormattedValue(float value) {
-		return getFormattedValue(value, null);
-	}
-	
-	public String getFormattedValue(float value, String htmlTag) {
-		String valueForDisplay;
-		if(((int)value)==value) {
-			valueForDisplay = String.valueOf(((int)value));
-		} else {
-			valueForDisplay = String.valueOf(value);
-		}
-		String returnValue = "";
-		if(this.isInfiniteAtUpperLimit() && value>=this.getUpperLimit()) {
-			if(!this.getInfiniteDescription().isEmpty()) {
-				returnValue = this.getInfiniteDescription();
-			} else {
-				returnValue = "[style.colourExcellent(Infinite)] <span style='color: "+ this.getColour().toWebHexString()+ ";'>"+ Util.capitaliseSentence(this.getAbbreviatedName())+ "</span>";
-			}
-			
-		} else {
-			String minorColour = "";
-			if(this.isPercentage()){
-				minorColour = "Minor";
-				valueForDisplay = valueForDisplay+"%";
-			}
-			returnValue = (value>0?"[style.colour"+minorColour+"Good(+":"[style.colour"+minorColour+"Bad(")+valueForDisplay+")]"
-					+ " <span style='color:"+this.getColour().toWebHexString()+";'>"+Util.capitaliseSentence(this.getAbbreviatedName())+"</span>";
-		}
-		
-		if(htmlTag!=null) {
-			return "<"+htmlTag+">"+returnValue+"</"+htmlTag+">";
-		} else {
-			return returnValue;
-		}
-	}
-
+	@Override
 	public String getAbbreviatedName() {
 		return nameAbbreviation;
 	}
 
-	public abstract String getDescription(GameCharacter owner);
-
+	@Override
 	public Colour getColour() {
 		return colour;
 	}
 
+	@Override
 	public String getEffectsAsStringList() {
 		StringBuilder descriptionSB = new StringBuilder();
 
@@ -155,14 +106,17 @@ public abstract class AbstractAttribute {
 		return descriptionSB.toString();
 	}
 
+	@Override
 	public String getPositiveEnchantment() {
 		return positiveEnchantment;
 	}
 
+	@Override
 	public String getNegativeEnchantment() {
 		return negativeEnchantment;
 	}
 
+	@Override
 	public String getSVGString() {
 		return SVGString;
 	}

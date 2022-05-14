@@ -6612,7 +6612,7 @@ public class Body implements XMLSaving {
 	}
 
 	public void removeAllMakeup() {
-		for(AbstractBodyCoveringType makeup : BodyCoveringType.allMakeupTypes) {
+		for(AbstractBodyCoveringType makeup : BodyCoveringType.getAllMakeupTypes()) {
 			if(coverings.containsKey(makeup)) {
 				coverings.put(makeup, new Covering(makeup, CoveringPattern.NONE, CoveringModifier.SMOOTH, PresetColour.COVERING_NONE, false, PresetColour.COVERING_NONE, false));
 			}

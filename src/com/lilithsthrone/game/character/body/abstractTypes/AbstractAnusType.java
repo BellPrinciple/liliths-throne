@@ -12,11 +12,10 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.AnusType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -24,7 +23,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractAnusType implements BodyPartTypeInterface {
+public abstract class AbstractAnusType implements AnusType {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -135,33 +134,26 @@ public abstract class AbstractAnusType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public boolean isAssHairAllowed() {
 		return assHairAllowed;
 	}
 
 	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
-	}
-
-	@Override
 	public String getNameSingular(GameCharacter gc) {
 		if(names==null || names.isEmpty()) {
-			return UtilText.returnStringAtRandom("asshole", "back door", "rear entrance");
+			return AnusType.super.getNameSingular(gc);
 		}
 		return Util.randomItemFrom(names);
 	}
@@ -169,7 +161,7 @@ public abstract class AbstractAnusType implements BodyPartTypeInterface {
 	@Override
 	public String getNamePlural(GameCharacter gc) {
 		if(namesPlural==null || namesPlural.isEmpty()) {
-			return UtilText.returnStringAtRandom("assholes", "back doors", "rear entrances");
+			return AnusType.super.getNamePlural(gc);
 		}
 		return Util.randomItemFrom(namesPlural);
 	}
@@ -193,6 +185,7 @@ public abstract class AbstractAnusType implements BodyPartTypeInterface {
 		return race;
 	}
 
+	@Override
 	public List<OrificeModifier> getDefaultRacialOrificeModifiers() {
 		return defaultRacialOrificeModifiers;
 	}

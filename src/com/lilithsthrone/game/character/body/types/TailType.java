@@ -1,20 +1,21 @@
 package com.lilithsthrone.game.character.body.types;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.body.Body;
+import com.lilithsthrone.game.character.body.TypeTable;
 import com.lilithsthrone.game.character.body.abstractTypes.AbstractTailType;
+import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.tags.BodyPartTag;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationGirth;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -22,9 +23,679 @@ import com.lilithsthrone.utils.Util;
  * @version 0.3.7
  * @author Innoxia
  */
-public class TailType {
-	
-	public static final AbstractTailType NONE = new AbstractTailType(
+public interface TailType extends BodyPartTypeInterface {
+
+	int getDefaultGirth();
+
+	float getDefaultLengthAsPercentageOfHeight();
+
+	String getTailTipNameSingular(GameCharacter gc);
+
+	String getTailTipNamePlural(GameCharacter gc);
+
+	String getTailTipDescriptor(GameCharacter gc);
+
+	String getBodyDescription(GameCharacter owner);
+
+	String getTransformationDescription(GameCharacter owner);
+
+	boolean hasSpinneret();
+
+	/**
+	 * @return
+	 * A description of this tail's girth, based on the TYPE tag and the owner's girth.
+	 */
+	default String getGirthDescription(GameCharacter owner) {
+		List<BodyPartTag> tags = getTags();
+		StringBuilder sb = new StringBuilder();
+		if(tags.contains(BodyPartTag.TAIL_TYPE_SKIN)
+				|| tags.contains(BodyPartTag.TAIL_TYPE_SCALES)) {
+			if(owner.getTailCount()>1) {
+				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tails] are"));
+			} else {
+				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tail] is"));
+			}
+			switch(owner.getTailGirth()) {
+			case ZERO_THIN:
+				sb.append(UtilText.parse(owner, " very thin in proportion to the rest of [npc.her] body."));
+				break;
+			case ONE_SLENDER:
+				sb.append(UtilText.parse(owner, " slender in proportion to the rest of [npc.her] body."));
+				break;
+			case TWO_NARROW:
+				sb.append(UtilText.parse(owner, " quite narrow in proportion to the rest of [npc.her] body."));
+				break;
+			case THREE_AVERAGE:
+				sb.append(UtilText.parse(owner, " of an average thickness in proportion to the rest of [npc.her] body."));
+				break;
+			case FOUR_GIRTHY:
+				sb.append(UtilText.parse(owner, " quite thick in proportion to the rest of [npc.her] body."));
+				break;
+			case FIVE_THICK:
+				sb.append(UtilText.parse(owner, " very thick in proportion to the rest of [npc.her] body."));
+				break;
+			case SIX_CHUBBY:
+				sb.append(UtilText.parse(owner, " incredibly thick and girthy in proportion to the rest of [npc.her] body."));
+				break;
+			case SEVEN_FAT:
+				sb.append(UtilText.parse(owner, " extremely thick and girthy in proportion to the rest of [npc.her] body."));
+				break;
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_FUR)) {
+			if(owner.getTailCount()>1) {
+				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tails] are"));
+			} else {
+				sb.append(UtilText.parse(owner, " [npc.Her] [npc.tail] is"));
+			}
+			switch(owner.getTailGirth()) {
+			case ZERO_THIN:
+				sb.append(UtilText.parse(owner, " very thin and severely lacking in fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case ONE_SLENDER:
+				sb.append(UtilText.parse(owner, " slender and lacking in fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case TWO_NARROW:
+				sb.append(UtilText.parse(owner, " quite narrow and a little lacking in fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case THREE_AVERAGE:
+				sb.append(UtilText.parse(owner, " of an average thickness and fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case FOUR_GIRTHY:
+				sb.append(UtilText.parse(owner, " quite big and very fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			case FIVE_THICK:
+				sb.append(UtilText.parse(owner, " very big and fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			case SIX_CHUBBY:
+				sb.append(UtilText.parse(owner, " incredibly thick and fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			case SEVEN_FAT:
+				sb.append(UtilText.parse(owner, " extremely thick and fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_TUFT)) {
+			if(owner.getTailCount()>1) {
+				sb.append(UtilText.parse(owner, " [npc.Her] tufted tails are"));
+			} else {
+				sb.append(UtilText.parse(owner, " [npc.Her] tufted tail is"));
+			}
+			switch(owner.getTailGirth()) {
+			case ZERO_THIN:
+				sb.append(UtilText.parse(owner, " very small and significantly lacking in fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case ONE_SLENDER:
+				sb.append(UtilText.parse(owner, " quite small and lacking in fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case TWO_NARROW:
+				sb.append(UtilText.parse(owner, " a little small and lacking in fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case THREE_AVERAGE:
+				sb.append(UtilText.parse(owner, " of an average size and fluffiness in proportion to the rest of [npc.her] body."));
+				break;
+			case FOUR_GIRTHY:
+				sb.append(UtilText.parse(owner, " quite big and very fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			case FIVE_THICK:
+				sb.append(UtilText.parse(owner, " very big and extremely fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			case SIX_CHUBBY:
+				sb.append(UtilText.parse(owner, " incredibly thick and fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			case SEVEN_FAT:
+				sb.append(UtilText.parse(owner, " extremely thick and fluffy in proportion to the rest of [npc.her] body."));
+				break;
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_HAIR)) {
+			if(owner.getTailCount()>1) {
+				sb.append(UtilText.parse(owner, " [npc.Her] horse tails are"));
+			} else {
+				sb.append(UtilText.parse(owner, " [npc.Her] horse tail is"));
+			}
+			switch(owner.getTailGirth()) {
+			case ZERO_THIN:
+				sb.append(UtilText.parse(owner, " very much lacking in volume in proportion to the rest of [npc.her] body."));
+				break;
+			case ONE_SLENDER:
+				sb.append(UtilText.parse(owner, " lacking in volume in proportion to the rest of [npc.her] body."));
+				break;
+			case TWO_NARROW:
+				sb.append(UtilText.parse(owner, " a little lacking in volume in proportion to the rest of [npc.her] body."));
+				break;
+			case THREE_AVERAGE:
+				sb.append(UtilText.parse(owner, " of an average volume in proportion to the rest of [npc.her] body."));
+				break;
+			case FOUR_GIRTHY:
+				sb.append(UtilText.parse(owner, " quite voluminous in proportion to the rest of [npc.her] body."));
+				break;
+			case FIVE_THICK:
+				sb.append(UtilText.parse(owner, " very voluminous in proportion to the rest of [npc.her] body."));
+				break;
+			case SIX_CHUBBY:
+				sb.append(UtilText.parse(owner, " incredibly voluminous in proportion to the rest of [npc.her] body."));
+				break;
+			case SEVEN_FAT:
+				sb.append(UtilText.parse(owner, " extremely voluminous in proportion to the rest of [npc.her] body."));
+				break;
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_FEATHER)) {
+			if(owner.getTailCount()>1) {
+				sb.append(UtilText.parse(owner, " [npc.Her] plumes of feathers are"));
+			} else {
+				sb.append(UtilText.parse(owner, " [npc.Her] plume of feathers is"));
+			}
+			switch(owner.getTailGirth()) {
+			case ZERO_THIN:
+				sb.append(UtilText.parse(owner, " very small and lacking in volume in proportion to the rest of [npc.her] body."));
+				break;
+			case ONE_SLENDER:
+				sb.append(UtilText.parse(owner, " small and somewhat lacking in volume in proportion to the rest of [npc.her] body."));
+				break;
+			case TWO_NARROW:
+				sb.append(UtilText.parse(owner, " a little narrow and lacking in volume in proportion to the rest of [npc.her] body."));
+				break;
+			case THREE_AVERAGE:
+				sb.append(UtilText.parse(owner, " of an average size and volume in proportion to the rest of [npc.her] body."));
+				break;
+			case FOUR_GIRTHY:
+				sb.append(UtilText.parse(owner, " quite large and voluminous in proportion to the rest of [npc.her] body."));
+				break;
+			case FIVE_THICK:
+				sb.append(UtilText.parse(owner, " very large and voluminous in proportion to the rest of [npc.her] body."));
+				break;
+			case SIX_CHUBBY:
+				sb.append(UtilText.parse(owner, " incredibly voluminous in proportion to the rest of [npc.her] body."));
+				break;
+			case SEVEN_FAT:
+				sb.append(UtilText.parse(owner, " extremely voluminous in proportion to the rest of [npc.her] body."));
+				break;
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_GENERIC)) {
+			if(owner.getTailCount()>1) {
+				sb.append(UtilText.parse(owner, " [npc.Her] tails are"));
+			} else {
+				sb.append(UtilText.parse(owner, " [npc.Her] tail is"));
+			}
+			switch(owner.getTailGirth()) {
+			case ZERO_THIN:
+				sb.append(UtilText.parse(owner, " very small in proportion to the rest of [npc.her] body."));
+				break;
+			case ONE_SLENDER:
+				sb.append(UtilText.parse(owner, " somewhat small in proportion to the rest of [npc.her] body."));
+				break;
+			case TWO_NARROW:
+				sb.append(UtilText.parse(owner, " a little narrow in proportion to the rest of [npc.her] body."));
+				break;
+			case THREE_AVERAGE:
+				sb.append(UtilText.parse(owner, " of an average size in proportion to the rest of [npc.her] body."));
+				break;
+			case FOUR_GIRTHY:
+				sb.append(UtilText.parse(owner, " quite large in proportion to the rest of [npc.her] body."));
+				break;
+			case FIVE_THICK:
+				sb.append(UtilText.parse(owner, " very large in proportion to the rest of [npc.her] body."));
+				break;
+			case SIX_CHUBBY:
+				sb.append(UtilText.parse(owner, " incredibly large in proportion to the rest of [npc.her] body."));
+				break;
+			case SEVEN_FAT:
+				sb.append(UtilText.parse(owner, " extremely large in proportion to the rest of [npc.her] body."));
+				break;
+			}
+		}
+		return sb.toString();
+	}
+
+	default String getGirthDescriptor(GameCharacter owner) {
+		return getGirthDescriptor(owner.getTailGirth());
+	}
+
+	default String getGirthDescriptor(Body body) {
+		return getGirthDescriptor(body.getTail().getGirth());
+	}
+
+	default String getGirthDescriptor(PenetrationGirth girth) {
+		List<BodyPartTag> tags = getTags();
+		if(tags.contains(BodyPartTag.TAIL_TYPE_SKIN)
+				|| tags.contains(BodyPartTag.TAIL_TYPE_SCALES)) {
+			switch(girth) {
+			case ZERO_THIN:
+				return "thin";
+			case ONE_SLENDER:
+				return "slender";
+			case TWO_NARROW:
+				return "narrow";
+			case THREE_AVERAGE:
+				return "average";
+			case FOUR_GIRTHY:
+				return "thick";
+			case FIVE_THICK:
+				return "extra-thick";
+			case SIX_CHUBBY:
+				return "extremely-thick";
+			case SEVEN_FAT:
+				return "unbelievably-thick";
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_FUR)) {
+			switch(girth) {
+			case ZERO_THIN:
+				return "thin";
+			case ONE_SLENDER:
+				return "slender";
+			case TWO_NARROW:
+				return "narrow";
+			case THREE_AVERAGE:
+				return "fluffy";
+			case FOUR_GIRTHY:
+				return "very-fluffy";
+			case FIVE_THICK:
+				return "extra-fluffy";
+			case SIX_CHUBBY:
+				return "extremely-fluffy";
+			case SEVEN_FAT:
+				return "unbelievably-fluffy";
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_TUFT)) {
+			switch(girth) {
+			case ZERO_THIN:
+				return "tiny";
+			case ONE_SLENDER:
+				return "small";
+			case TWO_NARROW:
+				return "narrow";
+			case THREE_AVERAGE:
+				return "fluffy";
+			case FOUR_GIRTHY:
+				return "very-fluffy";
+			case FIVE_THICK:
+				return "extra-fluffy";
+			case SIX_CHUBBY:
+				return "extremely-fluffy";
+			case SEVEN_FAT:
+				return "unbelievably-fluffy";
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_HAIR)) {
+			switch(girth) {
+			case ZERO_THIN:
+				return "thin";
+			case ONE_SLENDER:
+				return "small";
+			case TWO_NARROW:
+				return "narrow";
+			case THREE_AVERAGE:
+				return "average";
+			case FOUR_GIRTHY:
+				return "voluminous";
+			case FIVE_THICK:
+				return "extra-voluminous";
+			case SIX_CHUBBY:
+				return "extremely-voluminous";
+			case SEVEN_FAT:
+				return "unbelievably-voluminous";
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_FEATHER)) {
+			switch(girth) {
+			case ZERO_THIN:
+				return "thin";
+			case ONE_SLENDER:
+				return "small";
+			case TWO_NARROW:
+				return "narrow";
+			case THREE_AVERAGE:
+				return "average";
+			case FOUR_GIRTHY:
+				return "voluminous";
+			case FIVE_THICK:
+				return "extra-voluminous";
+			case SIX_CHUBBY:
+				return "extremely-voluminous";
+			case SEVEN_FAT:
+				return "unbelievably-voluminous";
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_GENERIC)) {
+			switch(girth) {
+			case ZERO_THIN:
+				return "tiny";
+			case ONE_SLENDER:
+				return "small";
+			case TWO_NARROW:
+				return "narrow";
+			case THREE_AVERAGE:
+				return "average";
+			case FOUR_GIRTHY:
+				return "large";
+			case FIVE_THICK:
+				return "huge";
+			case SIX_CHUBBY:
+				return "massive";
+			case SEVEN_FAT:
+				return "colossal";
+			}
+		}
+		return girth.getName();
+	}
+
+	default String getGirthTransformationDescription(GameCharacter owner, boolean positive) {
+		List<BodyPartTag> tags = getTags();
+		String tailText = owner.getTailCount()>1 ? "[npc.tailGirth] [npc.tails]" : "[npc.a_tailGirth] [npc.tail]";
+		if(tags.contains(BodyPartTag.TAIL_TYPE_SKIN)
+				|| tags.contains(BodyPartTag.TAIL_TYPE_SCALES)
+				|| tags.contains(BodyPartTag.TAIL_TYPE_FUR)) {
+			if(positive) {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldGrow(grow thicker)]."
+				:" [npc.tail] suddenly [style.boldGrow(grows thicker)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric("+tailText+")]!"
+				+ "</p>");
+
+			} else {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldShrink(shrink down)]."
+				:" [npc.tail] suddenly [style.boldShrink(shrinks down)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric("+tailText+")]!"
+				+ "</p>");
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_TUFT)) {
+			if(positive) {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldGrow(fluff up and grow bigger)]."
+				:" [npc.tail] suddenly [style.boldGrow(fluffs up and grows bigger)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric("+tailText+")]!"
+				+ "</p>");
+
+			} else {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldShrink(shrink down)]."
+				:" [npc.tail] suddenly [style.boldShrink(shrinks down)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric("+tailText+")]!"
+				+ "</p>");
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_HAIR)) {
+			if(positive) {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldGrow(fill out and expand in volume)]."
+				:" [npc.tail] suddenly [style.boldGrow(fills out and expands in volume)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric("+tailText+")]!"
+				+ "</p>");
+
+			} else {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldShrink(shrink down and lose volume)]."
+				:" [npc.tail] suddenly [style.boldShrink(shrinks down and loses volume)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric("+tailText+")]!"
+				+ "</p>");
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_FEATHER)) {
+			if(positive) {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldGrow(fill out and expand in volume)]."
+				:" [npc.tail] suddenly [style.boldGrow(fills out and expands in volume)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric("+tailText+")]!"
+				+ "</p>");
+
+			} else {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldShrink(shrink down and lose volume)]."
+				:" [npc.tail] suddenly [style.boldShrink(shrinks down and loses volume)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric("+tailText+")]!"
+				+ "</p>");
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_GENERIC)) {
+			if(positive) {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldGrow(grow larger)]."
+				:" [npc.tail] suddenly [style.boldGrow(grows larger)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric("+tailText+")]!"
+				+ "</p>");
+
+			} else {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldShrink(shrink down)]."
+				:" [npc.tail] suddenly [style.boldShrink(shrinks down)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric("+tailText+")]!"
+				+ "</p>");
+			}
+		}
+		return "";
+	}
+
+	default String getLengthTransformationDescription(GameCharacter owner, boolean positive) {
+		List<BodyPartTag> tags = getTags();
+		String heightPercentageDescription = " (length is "+((int)(owner.getTailLengthAsPercentageOfHeight()*100))+"% of [npc.namePos] height)";
+		if(tags.contains(BodyPartTag.TAIL_TYPE_SKIN)
+				|| tags.contains(BodyPartTag.TAIL_TYPE_SCALES)
+				|| tags.contains(BodyPartTag.TAIL_TYPE_FUR)) {
+			if(positive) {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldGrow(grow longer)]."
+				:" [npc.tail] suddenly [style.boldGrow(grows longer)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"
+				+ "</p>");
+
+			} else {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldShrink(shorten)]."
+				:" [npc.tail] suddenly [style.boldShrink(shortens)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"
+				+ "</p>");
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_TUFT)) {
+			if(positive) {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldGrow(fluff up and grow longer)]."
+				:" [npc.tail] suddenly [style.boldGrow(fluffs up and grows longer)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"
+				+ "</p>");
+
+			} else {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldShrink(shorten)]."
+				:" [npc.tail] suddenly [style.boldShrink(shortens)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"
+				+ "</p>");
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_HAIR)) {
+			if(positive) {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldGrow(grow longer)]."
+				:" [npc.tail] suddenly [style.boldGrow(grows longer)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"
+				+ "</p>");
+
+			} else {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldShrink(shorten)]."
+				:" [npc.tail] suddenly [style.boldShrink(shortens)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"
+				+ "</p>");
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_FEATHER)) {
+			if(positive) {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldGrow(grow longer)]."
+				:" [npc.tail] suddenly [style.boldGrow(grows longer)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"
+				+ "</p>");
+
+			} else {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldShrink(shorten)]."
+				:" [npc.tail] suddenly [style.boldShrink(shortens)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"
+				+ "</p>");
+			}
+		}
+		if(tags.contains(BodyPartTag.TAIL_TYPE_GENERIC)) {
+			if(positive) {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldGrow(grow longer)]."
+				:" [npc.tail] suddenly [style.boldGrow(grows longer)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"
+				+ "</p>");
+
+			} else {
+				return UtilText.parse(owner,
+				"<p>"
+				+ "[npc.Name] [npc.verb(let)] out [npc.a_moan+] as [npc.she] [npc.verb(feel)] a deep throbbing sensation building up at the base of [npc.her] spine."
+				+ " Without any further warning of what's to come, [npc.her]"
+				+(owner.getTailCount()>1
+				?" [npc.tails] suddenly [style.boldShrink(shorten)]."
+				:" [npc.tail] suddenly [style.boldShrink(shortens)].")
+				+ "<br/>"
+				+ "[npc.She] now [npc.has] [style.boldTfGeneric([npc.a_tailLength] [npc.tail])]"+heightPercentageDescription+"!"
+				+ "</p>");
+			}
+		}
+		return "";
+	}
+
+	default boolean isPrehensile() {
+		return getTags().contains(BodyPartTag.TAIL_PREHENSILE);
+	}
+
+	default boolean isSuitableForSleepHugging() {
+		return getTags().contains(BodyPartTag.TAIL_SLEEP_HUGGING);
+	}
+
+	default boolean isSuitableForAttack() {
+		return getTags().contains(BodyPartTag.TAIL_ATTACK);
+	}
+
+	default boolean isOvipositor() {
+		return getTags().contains(BodyPartTag.TAIL_OVIPOSITOR);
+	}
+
+	@Override
+	default boolean isDefaultPlural(GameCharacter gc) {
+		return false;
+	}
+
+	@Override
+	default String getName(GameCharacter gc) {
+		if(isDefaultPlural(gc) || (gc!=null && gc.getTailCount()!=1)) {
+			return getNamePlural(gc);
+		} else {
+			return getNameSingular(gc);
+		}
+	}
+
+	@Override
+	default TFModifier getTFModifier() {
+		return getTFTypeModifier(TailType.getTailTypes(getRace()));
+	}
+
+	public static final AbstractTailType NONE = new Special(
 			null,
 			Race.NONE,
 			PenetrationGirth.THREE_AVERAGE,
@@ -49,9 +720,13 @@ public class TailType {
 			+ "[npc.Name] now [npc.has] [style.boldTfGeneric(no tail)].",
 			"[style.colourDisabled([npc.She] [npc.do] not have a tail.)]",
 			Util.newArrayListOfValues(), false) {
+		@Override
+		public TFModifier getTFModifier() {
+			return TFModifier.REMOVAL;
+		}
 	};
 	
-	public static final AbstractTailType DEMON_COMMON = new AbstractTailType(
+	public static final AbstractTailType DEMON_COMMON = new Special(
 			BodyCoveringType.DEMON_COMMON,
 			Race.DEMON,
 			PenetrationGirth.ONE_SLENDER,
@@ -103,8 +778,8 @@ public class TailType {
 					BodyPartTag.TAIL_TYPE_SKIN,
 					BodyPartTag.TAIL_TAPERING_EXPONENTIAL), false) {
 	};
-	
-	public static final AbstractTailType DEMON_HAIR_TIP = new AbstractTailType(
+
+	public static final AbstractTailType DEMON_HAIR_TIP = new Special(
 			BodyCoveringType.DEMON_COMMON,
 			Race.DEMON,
 			PenetrationGirth.ONE_SLENDER,
@@ -158,7 +833,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 
-	public static final AbstractTailType DEMON_TAPERED = new AbstractTailType(
+	public static final AbstractTailType DEMON_TAPERED = new Special(
 			BodyCoveringType.DEMON_COMMON,
 			Race.DEMON,
 			PenetrationGirth.THREE_AVERAGE,
@@ -211,7 +886,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_LINEAR), false) {
 	};
 	
-	public static final AbstractTailType DEMON_HORSE = new AbstractTailType(
+	public static final AbstractTailType DEMON_HORSE = new Special(
 			BodyCoveringType.HORSE_HAIR,
 			Race.DEMON,
 			PenetrationGirth.THREE_AVERAGE,
@@ -263,7 +938,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 
-	public static final AbstractTailType DEMON_OVIPOSITOR = new AbstractTailType(
+	public static final AbstractTailType DEMON_OVIPOSITOR = new Special(
 			BodyCoveringType.DEMON_COMMON,
 			Race.DEMON,
 			PenetrationGirth.THREE_AVERAGE,
@@ -323,8 +998,8 @@ public class TailType {
 					BodyPartTag.TAIL_OVIPOSITOR),
 			false) {
 	};
-	
-	public static final AbstractTailType ALLIGATOR_MORPH = new AbstractTailType(
+
+	public static final AbstractTailType ALLIGATOR_MORPH = new Special(
 			BodyCoveringType.ALLIGATOR_SCALES,
 			Race.ALLIGATOR_MORPH,
 			PenetrationGirth.FIVE_THICK,
@@ -365,7 +1040,7 @@ public class TailType {
 					BodyPartTag.TAIL_ATTACK), false) {
 	};
 	
-	public static final AbstractTailType BAT_MORPH = new AbstractTailType(
+	public static final AbstractTailType BAT_MORPH = new Special(
 			BodyCoveringType.BAT_SKIN,
 			Race.BAT_MORPH,
 			PenetrationGirth.ONE_SLENDER,
@@ -405,7 +1080,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType CAT_MORPH = new AbstractTailType(
+	public static final AbstractTailType CAT_MORPH = new Special(
 			BodyCoveringType.FELINE_FUR,
 			Race.CAT_MORPH,
 			PenetrationGirth.TWO_NARROW,
@@ -445,7 +1120,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType CAT_MORPH_SHORT = new AbstractTailType(
+	public static final AbstractTailType CAT_MORPH_SHORT = new Special(
 			BodyCoveringType.FELINE_FUR,
 			Race.CAT_MORPH,
 			PenetrationGirth.THREE_AVERAGE,
@@ -484,7 +1159,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType CAT_MORPH_TUFTED = new AbstractTailType(
+	public static final AbstractTailType CAT_MORPH_TUFTED = new Special(
 			BodyCoveringType.FELINE_FUR,
 			Race.CAT_MORPH,
 			PenetrationGirth.THREE_AVERAGE,
@@ -525,7 +1200,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType COW_MORPH = new AbstractTailType(
+	public static final AbstractTailType COW_MORPH = new Special(
 			BodyCoveringType.BOVINE_FUR,
 			Race.COW_MORPH,
 			PenetrationGirth.TWO_NARROW,
@@ -563,7 +1238,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType DOG_MORPH = new AbstractTailType(
+	public static final AbstractTailType DOG_MORPH = new Special(
 			BodyCoveringType.CANINE_FUR,
 			Race.DOG_MORPH,
 			PenetrationGirth.THREE_AVERAGE,
@@ -601,7 +1276,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType DOG_MORPH_STUBBY = new AbstractTailType(
+	public static final AbstractTailType DOG_MORPH_STUBBY = new Special(
 			BodyCoveringType.CANINE_FUR,
 			Race.DOG_MORPH,
 			PenetrationGirth.THREE_AVERAGE,
@@ -639,7 +1314,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType FOX_MORPH = new AbstractTailType(
+	public static final AbstractTailType FOX_MORPH = new Special(
 			BodyCoveringType.FOX_FUR,
 			Race.FOX_MORPH,
 			PenetrationGirth.FOUR_GIRTHY,
@@ -678,7 +1353,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType FOX_MORPH_MAGIC = new AbstractTailType(
+	public static final AbstractTailType FOX_MORPH_MAGIC = new Special(
 			BodyCoveringType.FOX_FUR,
 			Race.FOX_MORPH,
 			PenetrationGirth.FOUR_GIRTHY,
@@ -729,7 +1404,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType HARPY = new AbstractTailType(
+	public static final AbstractTailType HARPY = new Special(
 			BodyCoveringType.FEATHERS,
 			Race.HARPY,
 			PenetrationGirth.FOUR_GIRTHY,
@@ -771,7 +1446,7 @@ public class TailType {
 					BodyPartTag.TAIL_NEVER_SUITABLE_FOR_PENETRATION), false) {
 	};
 	
-	public static final AbstractTailType HORSE_MORPH = new AbstractTailType(
+	public static final AbstractTailType HORSE_MORPH = new Special(
 			BodyCoveringType.HAIR_HORSE_HAIR,
 			Race.HORSE_MORPH,
 			PenetrationGirth.THREE_AVERAGE,
@@ -809,7 +1484,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType HORSE_MORPH_ZEBRA = new AbstractTailType(
+	public static final AbstractTailType HORSE_MORPH_ZEBRA = new Special(
 			BodyCoveringType.HAIR_HORSE_HAIR,
 			Race.HORSE_MORPH,
 			PenetrationGirth.TWO_NARROW,
@@ -847,7 +1522,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType RAT_MORPH = new AbstractTailType(
+	public static final AbstractTailType RAT_MORPH = new Special(
 			BodyCoveringType.RAT_SKIN,
 			Race.RAT_MORPH,
 			PenetrationGirth.THREE_AVERAGE,
@@ -888,7 +1563,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_LINEAR), false) {
 	};
 	
-	public static final AbstractTailType RABBIT_MORPH = new AbstractTailType(
+	public static final AbstractTailType RABBIT_MORPH = new Special(
 			BodyCoveringType.RABBIT_FUR,
 			Race.RABBIT_MORPH,
 			PenetrationGirth.FIVE_THICK,
@@ -927,7 +1602,7 @@ public class TailType {
 					BodyPartTag.TAIL_NEVER_SUITABLE_FOR_PENETRATION), false) {
 	};
 	
-	public static final AbstractTailType REINDEER_MORPH = new AbstractTailType(
+	public static final AbstractTailType REINDEER_MORPH = new Special(
 			BodyCoveringType.REINDEER_FUR,
 			Race.REINDEER_MORPH,
 			PenetrationGirth.FOUR_GIRTHY,
@@ -965,7 +1640,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType SQUIRREL_MORPH = new AbstractTailType(
+	public static final AbstractTailType SQUIRREL_MORPH = new Special(
 			BodyCoveringType.SQUIRREL_FUR,
 			Race.SQUIRREL_MORPH,
 			PenetrationGirth.FIVE_THICK,
@@ -1004,7 +1679,7 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	public static final AbstractTailType WOLF_MORPH = new AbstractTailType(
+	public static final AbstractTailType WOLF_MORPH = new Special(
 			BodyCoveringType.LYCAN_FUR,
 			Race.WOLF_MORPH,
 			PenetrationGirth.FOUR_GIRTHY,
@@ -1043,119 +1718,58 @@ public class TailType {
 					BodyPartTag.TAIL_TAPERING_NONE), false) {
 	};
 	
-	
-	private static List<AbstractTailType> allTailTypes;
-	private static Map<AbstractTailType, String> tailToIdMap = new HashMap<>();
-	private static Map<String, AbstractTailType> idToTailMap = new HashMap<>();
-	
-	static {
-		allTailTypes = new ArrayList<>();
+	class Special extends AbstractTailType {
 
-		// Modded types:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("tail")) {
-					try {
-						AbstractTailType type = new AbstractTailType(innerEntry.getValue(), entry.getKey(), true) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allTailTypes.add(type);
-						tailToIdMap.put(type, id);
-						idToTailMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// External res types:
-		
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/race", "bodyParts", null);
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				if(Util.getXmlRootElementName(innerEntry.getValue()).equals("tail")) {
-					try {
-						AbstractTailType type = new AbstractTailType(innerEntry.getValue(), entry.getKey(), false) {};
-						String id = innerEntry.getKey().replaceAll("bodyParts_", "");
-						allTailTypes.add(type);
-						tailToIdMap.put(type, id);
-						idToTailMap.put(id, type);
-					} catch(Exception ex) {
-						ex.printStackTrace(System.err);
-					}
-				}
-			}
-		}
-		
-		// Add in hard-coded tail types:
-		
-		Field[] fields = TailType.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractTailType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractTailType ct;
-				try {
-					ct = ((AbstractTailType) f.get(null));
+		private String id;
 
-					tailToIdMap.put(ct, f.getName());
-					idToTailMap.put(f.getName(), ct);
-					
-					allTailTypes.add(ct);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+		public Special(AbstractBodyCoveringType coveringType, AbstractRace race, PenetrationGirth defaultGirth, float defaultLengthAsPercentageOfHeight, String transformationName, String determiner, String determinerPlural, String name, String namePlural, List<String> descriptorsMasculine, List<String> descriptorsFeminine, String tipName, String tipNamePlural, List<String> tipDescriptorsMasculine, List<String> tipDescriptorsFeminine, String tailTransformationDescription, String tailBodyDescription, List<BodyPartTag> tags, boolean spinneret) {
+			super(coveringType, race, defaultGirth, defaultLengthAsPercentageOfHeight, transformationName, determiner, determinerPlural, name, namePlural, descriptorsMasculine, descriptorsFeminine, tipName, tipNamePlural, tipDescriptorsMasculine, tipDescriptorsFeminine, tailTransformationDescription, tailBodyDescription, tags, spinneret);
 		}
-		
-		Collections.sort(allTailTypes, (t1, t2)->
-			t1.getRace()==Race.NONE
-				?-1
-				:(t2.getRace()==Race.NONE
-					?1
-					:t1.getRace().getName(false).compareTo(t2.getRace().getName(false))));
+
+		@Override
+		public String getId() {
+			return id != null ? id : (id = Arrays.stream(TailType.class.getFields())
+				.filter(f->{try{return f.get(null).equals(this);}catch(ReflectiveOperationException x){return false;}})
+				.findAny().orElseThrow().getName());
+		}
 	}
-	
+
+	TypeTable<AbstractTailType> table = new TypeTable<>(
+		TailType::sanitize,
+		TailType.class,
+		AbstractTailType.class,
+		"tail",
+		(f,n,a,m)->new AbstractTailType(f,a,m) {
+			@Override
+			public String getId() {
+				return n;
+			}
+		});
+
 	public static AbstractTailType getTailTypeFromId(String id) {
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equals("IMP")) {
-			return TailType.DEMON_COMMON;
+			return "DEMON_COMMON";
 		}
 		if(id.equals("LYCAN")) {
-			return TailType.WOLF_MORPH;
+			return "WOLF_MORPH";
 		}
-		id = Util.getClosestStringMatch(id, idToTailMap.keySet());
-		return idToTailMap.get(id);
+		return id;
 	}
-	
+
 	public static String getIdFromTailType(AbstractTailType tailType) {
-		return tailToIdMap.get(tailType);
+		return tailType.getId();
 	}
-	
+
 	public static List<AbstractTailType> getAllTailTypes() {
-		return allTailTypes;
+		return table.listByRace();
 	}
-	
-	private static Map<AbstractRace, List<AbstractTailType>> typesMap = new HashMap<>();
 	
 	public static List<AbstractTailType> getTailTypes(AbstractRace r) {
-		if(typesMap.containsKey(r)) {
-			return typesMap.get(r);
-		}
-		
-		List<AbstractTailType> types = new ArrayList<>();
-		for(AbstractTailType type : TailType.getAllTailTypes()) {
-			if(type.getRace()==r && type!=TailType.FOX_MORPH_MAGIC) {
-				types.add(type);
-			}
-		}
-		if(types.isEmpty()) {
-			types.add(TailType.NONE);
-		}
-		typesMap.put(r, types);
-		return types;
+		return table.of(r).orElse(List.of());
 	}
 	
 	public static List<AbstractTailType> getTailTypesSuitableForTransformation(List<AbstractTailType> options) {

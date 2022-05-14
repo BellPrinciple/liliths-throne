@@ -1,20 +1,21 @@
 package com.lilithsthrone.game.character.fetishes;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.body.types.VaginaType;
+import com.lilithsthrone.game.character.effects.Perk;
 import com.lilithsthrone.game.character.persona.SexualOrientation;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.main.Main;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
+import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
 /**
@@ -22,7 +23,97 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.2
  * @author Innoxia, Maxis
  */
-public class Fetish {
+public interface Fetish {
+
+	String getId();
+
+	String getName(GameCharacter owner);
+
+	String getShortDescriptor(GameCharacter target);
+
+	String getDescription(GameCharacter target);
+
+	String getFetishDesireDescription(GameCharacter target, FetishDesire desire);
+
+	int getExperienceGainFromSexAction();
+
+	int getRenderingPriority();
+
+	List<String> getExtraEffects(GameCharacter owner);
+
+	List<Colour> getColourShades();
+
+	default List<AbstractFetish> getFetishesForAutomaticUnlock() {
+		return List.of();
+	}
+
+	default boolean isAvailable(GameCharacter character) {
+		return true;
+	}
+
+	default List<String> getPerkRequirements(GameCharacter character) {
+		return List.of();
+	}
+
+	default int getCost() {
+		return 5;
+	}
+
+	default List<String> getModifiersAsStringList(GameCharacter owner) {
+		return getExtraEffects(owner);
+	}
+
+	default HashMap<AbstractAttribute, Integer> getAttributeModifiers() {
+		return null;
+	}
+
+	default boolean isContentEnabled() {
+		return true;
+	}
+
+	default AbstractFetish getOpposite() {
+		return null;
+	}
+
+	default boolean isTopFetish() {
+		return false;
+	}
+
+	default String getAppliedFetishLevelEffectDescription(GameCharacter character) {
+		return null;
+	}
+
+	default String applyPerkGained(GameCharacter character) {
+		return "";
+	}
+
+	default String applyPerkLost(GameCharacter character){
+		return "";
+	}
+
+	default Fetish getPreviousLevelPerk() {
+		return null;
+	}
+
+	default Perk getNextLevelPerk() {
+		return null;
+	}
+
+	default CorruptionLevel getAssociatedCorruptionLevel() {
+		return CorruptionLevel.ZERO_PURE;
+	}
+
+	default Colour getColour() {
+		return getColourShades().get(0);
+	}
+
+	default String getSVGString(GameCharacter owner) {
+		return "";
+	}
+
+	default FetishPreference getFetishPreferenceDefault() {
+		return FetishPreference.THREE_NEUTRAL;
+	}
 	
 	// FETISHES:
 
@@ -955,21 +1046,11 @@ public class Fetish {
 
 		@Override
 		public List<String> getPerkRequirements(GameCharacter character) {
-			perkRequirementsList.clear();
-			
-			if(character.getVaginaType()==VaginaType.NONE) {
-				perkRequirementsList.add("[style.colourBad(Requires vagina)]");
-			} else {
-				perkRequirementsList.add("[style.colourGood(Requires vagina)]");
-			}
-			
-			if(!character.isVaginaVirgin()) {
-				perkRequirementsList.add("[style.colourBad(Requires vaginal virginity)]");
-			} else {
-				perkRequirementsList.add("[style.colourGood(Requires vaginal virginity)]");
-			}
-			
-			return perkRequirementsList;
+			String requiresVagina = character.getVaginaType() == VaginaType.NONE
+					? "[style.colourBad(Requires vagina)]" : "[style.colourGood(Requires vagina)]";
+			String requiresVaginalVirginity = character.isVaginaVirgin()
+					? "[style.colourGood(Requires vaginal virginity)]" : "[style.colourBad(Requires vaginal virginity)]";
+			return List.of(requiresVagina, requiresVaginalVirginity);
 		}
 		
 		@Override
@@ -2122,52 +2203,23 @@ public class Fetish {
 	
 	// Access methods:
 	
-	public static List<AbstractFetish> allFetishes;
-	
-	public static Map<AbstractFetish, String> fetishToIdMap = new HashMap<>();
-	public static Map<String, AbstractFetish> idToFetishMap = new HashMap<>();
-	
+	Table<AbstractFetish> table = new Table<>(s->s) {{
+		addFields(Fetish.class,AbstractFetish.class,(k,v)->v.id=k);
+	}};
+
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
 	public static AbstractFetish getFetishFromId(String id) {
-		id = Util.getClosestStringMatch(id, idToFetishMap.keySet());
-		
-		return idToFetishMap.get(id);
+		return table.of(id);
 	}
 	
 	public static String getIdFromFetish(AbstractFetish fetish) {
-		return fetishToIdMap.get(fetish);
-	}
-
-	static {
-		allFetishes = new ArrayList<>();
-		
-		// Hard-coded fetishes (all those up above):
-		
-		Field[] fields = Fetish.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractFetish.class.isAssignableFrom(f.getType())) {
-				
-				AbstractFetish fetish;
-				
-				try {
-					fetish = ((AbstractFetish) f.get(null));
-
-					fetishToIdMap.put(fetish, f.getName());
-					idToFetishMap.put(f.getName(), fetish);
-					allFetishes.add(fetish);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		return fetish.getId();
 	}
 	
 	public static List<AbstractFetish> getAllFetishes() {
-		return allFetishes;
+		return table.list();
 	}
 	
 }

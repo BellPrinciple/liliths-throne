@@ -12,10 +12,7 @@ import com.lilithsthrone.controller.xmlParsing.Element;
 import com.lilithsthrone.controller.xmlParsing.XMLMissingTagException;
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.InventorySlot;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.item.SvgInformation;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
@@ -28,10 +25,11 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.2.6
  * @author Innoxia
  */
-public class AbstractTattooType extends AbstractCoreType {
+public class AbstractTattooType implements TattooType {
 	
 	private static List<InventorySlot> standardInventorySlots = new ArrayList<>(InventorySlot.getClothingSlots());
-	
+
+	String id;
 	private boolean isMod;
 	
 	private int value;
@@ -299,11 +297,18 @@ public class AbstractTattooType extends AbstractCoreType {
 		
 		return result;
 	}
-	
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
 	public boolean isMod() {
 		return isMod;
 	}
 	
+	@Override
 	public int getValue() {
 		return value;
 	}
@@ -312,50 +317,62 @@ public class AbstractTattooType extends AbstractCoreType {
 		return svgPathInformation;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
+	@Override
 	public String getBodyOverviewDescription() {
 		return bodyOverviewDescription;
 	}
 
+	@Override
 	public List<Colour> getAvailablePrimaryColours() {
 		return availablePrimaryColours;
 	}
 
+	@Override
 	public List<Colour> getAvailableSecondaryColours() {
 		return availableSecondaryColours;
 	}
 
+	@Override
 	public List<Colour> getAvailableTertiaryColours() {
 		return availableTertiaryColours;
 	}
 
+	@Override
 	public Colour getDefaultPrimaryColour() {
 		return defaultPrimaryColour;
 	}
 
+	@Override
 	public Colour getDefaultSecondaryColour() {
 		return defaultSecondaryColour;
 	}
 
+	@Override
 	public Colour getDefaultTertiaryColour() {
 		return defaultTertiaryColour;
 	}
 
+	@Override
 	public List<InventorySlot> getSlotAvailability() {
 		return new ArrayList<>(slotAvailability);
 	}
 	
+	@Override
 	public boolean isLimitedSlotAvailability() {
 		return !slotAvailability.containsAll(standardInventorySlots);
 	}
 	
+	@Override
 	public boolean isAvailable(GameCharacter target) {
 		if(availabilityRequirements!=null && !availabilityRequirements.isEmpty()) {
 			return Boolean.valueOf(UtilText.parse(target, ("[#"+availabilityRequirements+"]").replaceAll("\u200b", "")));
@@ -363,22 +380,11 @@ public class AbstractTattooType extends AbstractCoreType {
 		return true;
 	}
 	
+	@Override
 	public boolean isUnique() {
 		return unique;
 	}
-	
-	public String getId() {
-		return TattooType.getIdFromTattooType(this);
-	}
-	
-	public int getEnchantmentLimit() {
-		return 100;
-	}
-	
-	public AbstractItemEffectType getEnchantmentEffect() {
-		return ItemEffectType.TATTOO;
-	}
-	
+
 	private void addSVGStringMapping(Colour colour, Colour colourSecondary, Colour colourTertiary, String s) {
 		if(SVGStringMap.get(colour)==null) {
 			SVGStringMap.put(colour, new HashMap<>());
@@ -406,10 +412,12 @@ public class AbstractTattooType extends AbstractCoreType {
 	/**
 	 * @return The svg using default colours.
 	 */
+	@Override
 	public String getSVGImage(GameCharacter character) {
 		return getSVGImage(character, getDefaultPrimaryColour(), getDefaultSecondaryColour(), getDefaultTertiaryColour());
 	}
 	
+	@Override
 	public String getSVGImage(GameCharacter character, Colour colour, Colour colourSecondary, Colour colourTertiary) {
 		if (svgPathInformation==null || svgPathInformation.isEmpty()) {
 			return "";
@@ -455,6 +463,7 @@ public class AbstractTattooType extends AbstractCoreType {
 		return s;
 	}
 
+	@Override
 	public String getPathName() {
 		return svgPathInformation.get(0).getPathName();
 	}

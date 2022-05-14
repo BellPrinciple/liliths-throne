@@ -14,7 +14,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.VaginaType;
 import com.lilithsthrone.game.character.body.types.FluidType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.race.AbstractRace;
@@ -28,7 +28,7 @@ import com.lilithsthrone.utils.Util.Value;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractVaginaType implements BodyPartTypeInterface {
+public abstract class AbstractVaginaType implements VaginaType {
 	
 	// Maps the name to weighting for use in random selection:
 	protected static final Map<String, Integer> BASE_NAMES_SINGULAR = Util.newHashMapOfValues(
@@ -201,15 +201,18 @@ public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public boolean isPubicHairAllowed() {
 		return pubicHairAllowed;
 	}
@@ -219,26 +222,19 @@ public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 		return transformationName;
 	}
 
+	@Override
 	public AbstractFluidType getFluidType() {
 		return fluidType;
 	}
-	
+
+	@Override
 	public boolean isEggLayer() {
 		return eggLayer;
 	}
 
+	@Override
 	public List<OrificeModifier> getDefaultRacialOrificeModifiers() {
 		return defaultRacialOrificeModifiers;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
 	}
 
 	@Override
@@ -325,21 +321,13 @@ public abstract class AbstractVaginaType implements BodyPartTypeInterface {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, bodyDescription);
 	}
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, transformationDescription);
-	}
-	
-	/**
-	 * This method is called immediately before and immediately after the target's vagina type is changed into this type. When before, applicationAfterChangeApplied is false, and when after, applicationAfterChangeApplied is true.
-	 * It is not called if owner is null.
-	 */
-	public String applyAdditionalTransformationEffects(GameCharacter owner, boolean applicationAfterChangeApplied) {
-		return "";
 	}
 }

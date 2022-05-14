@@ -1,10 +1,7 @@
 package com.lilithsthrone.game.character.effects;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -53,6 +50,7 @@ import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.combat.DamageType;
+import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.combat.spells.SpellSchool;
 import com.lilithsthrone.game.combat.spells.SpellUpgrade;
@@ -88,7 +86,138 @@ import com.lilithsthrone.world.places.PlaceType;
  * @version 0.3.8.2
  * @author Innoxia
  */
-public class StatusEffect {
+public interface StatusEffect {
+
+	String getId();
+
+	default boolean isRequiresApplicationCheck() {
+		return false;
+	}
+
+	/**
+	 * @param target
+	 * @return True if this status effect should be applied to the target.
+	 *  False if conditions are not met <b>or</b> this status effect is only for timed purposes (i.e. the only time it should be applied is with a time condition.).
+	 */
+	default boolean isConditionsMet(GameCharacter target) {
+		return false;
+	}
+
+	int getApplicationLength(GameCharacter target);
+
+	default boolean isConstantRefresh() {
+		return false;
+	}
+
+	default boolean renderInEffectsPanel() {
+		return false;
+	}
+
+	default boolean isCombatEffect() {
+		return false;
+	}
+
+	default boolean isSexEffect() {
+		return false;
+	}
+
+	default boolean isRemoveAtEndOfSex() {
+		return false;
+	}
+
+	default List<ItemTag> getTags() {
+		return List.of();
+	}
+
+	/**
+	 * If set to return true, this status effect will always be loaded from a saved file, regardless of whether or not it has no remaining time set.
+	 * This is only really used for status effects that will be superseded by other effects which have their isConditionsMet() method checked first.
+	 * At the time of creation, this method is only used for CHASTITY_4.
+	 */
+	default boolean forceLoad() {
+		return false;
+	}
+
+	/**
+	 * This method id called once when the target initially gains this status effect.
+	 * @param target
+	 * @return A String describing any effects which are applied when the target first gains this StatusEffect.
+	 */
+	default String applyAdditionEffect(GameCharacter target) {
+		return "";
+	}
+
+	default String applyEffect(GameCharacter target, int secondsPassed, long totalSecondsPassed) {
+		return "";
+	}
+
+	String applyRemoveStatusEffect(GameCharacter target);
+
+	default String applyPostRemovalStatusEffect(GameCharacter target) {
+		return "";
+	}
+
+	default boolean isMod() {
+		return false;
+	}
+
+	default boolean isFromExternalFile() {
+		return false;
+	}
+
+	StatusEffectCategory getCategory();
+
+	int getRenderingPriority();
+
+	String getName(GameCharacter target);
+
+	String getDescription(GameCharacter target);
+
+	/**
+	 * Used to display multiple extra effects in their own description boxes, such as ongoing sex descriptions.
+	 * @return A List of Values whose key is the line height and whose value is the String to be displayed.
+	 */
+	default List<Value<Integer,String>> getAdditionalDescriptions(GameCharacter target) {
+		return List.of();
+	}
+
+	default List<String> getModifiersAsStringList(GameCharacter target) {
+		return List.of();
+	}
+
+	EffectBenefit getBeneficialStatus();
+
+	default Map<AbstractAttribute,Float> getAttributeModifiers(GameCharacter target) {
+		return Map.of();
+	}
+
+	default List<AbstractCombatMove> getCombatMoves() {
+		return List.of();
+	}
+
+	default List<Spell> getSpells() {
+		return List.of();
+	}
+
+	Colour getColour();
+
+	List<Colour> getColourShades();
+
+	int getEffectInterval();
+
+	List<String> getExtraEffects(GameCharacter target);
+
+	String getSVGString(GameCharacter owner);
+
+	//******************************** Methods for sex effects: ********************************//
+
+	default float getArousalPerTurnSelf(GameCharacter self) {
+		return 0;
+	}
+
+	default float getArousalPerTurnPartner(GameCharacter self, GameCharacter target) {
+		return 0;
+	}
 
 	// Attribute-related status effects:
 	// Strength:
@@ -14632,128 +14761,84 @@ public class StatusEffect {
 			return getOrificeSVGString(owner, SexAreaPenetration.FINGER, SVGImages.SVG_IMAGE_PROVIDER.getPenetrationTypeFinger(), Util.newArrayListOfValues(SexAreaPenetration.FINGER));
 		}
 	};
-	
-	
-	public static List<AbstractStatusEffect> allStatusEffects;
-	public static List<AbstractStatusEffect> allStatusEffectsRequiringApplicationCheck;
-	public static List<AbstractStatusEffect> allStatusEffectsRequiringApplicationCheckNonCombat;
-	public static List<AbstractStatusEffect> preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted;
-	
-	public static Map<AbstractStatusEffect, String> statusEffectToIdMap = new HashMap<>();
-	public static Map<String, AbstractStatusEffect> idToStatusEffectMap = new HashMap<>();
-	
+
 	/**
 	 * @param id Will be in the format of: 'innoxia_maid'.
 	 */
 	public static AbstractStatusEffect getStatusEffectFromId(String id) {
+		return table.of(id);
+	}
+
+	static String sanitize(String id) {
 		if(id.equals("innoxia_massaged")) {
-			return CLEANED_MASSAGED;
+			return "CLEANED_MASSAGED";
 		} else if(id.equals("BATH_BOOSTED") || id.equals("innoxia_cleaned_spa")) {
-			return CLEANED_SPA;
+			return "CLEANED_SPA";
 		} else if(id.equals("BATH") || id.equals("innoxia_cleaned_bath")) {
-			return CLEANED_BATH;
+			return "CLEANED_BATH";
 		} else if(id.equals("SHOWER") || id.equals("innoxia_cleaned_shower")) {
-			return CLEANED_SHOWER;
+			return "CLEANED_SHOWER";
 		}
 		
 		if(id.equals("innoxia_item_broodmother_pill")) {
-			return BROODMOTHER_PILL;
+			return "BROODMOTHER_PILL";
 		}
-		
-		id = Util.getClosestStringMatch(id, idToStatusEffectMap.keySet());
-		
-		return idToStatusEffectMap.get(id);
+		return id;
 	}
 	
 	public static String getIdFromStatusEffect(AbstractStatusEffect perk) {
-		return statusEffectToIdMap.get(perk);
+		return perk.getId();
 	}
 
-	static {
-		allStatusEffects = new ArrayList<>();
-		allStatusEffectsRequiringApplicationCheck = new ArrayList<>();
-		allStatusEffectsRequiringApplicationCheckNonCombat = new ArrayList<>();
-		
+	Table table = new Table();
+
+	final class Table extends com.lilithsthrone.utils.Table<AbstractStatusEffect> {
+		private static final List<AbstractStatusEffect> allStatusEffectsRequiringApplicationCheck = new ArrayList<>();
+		private static final List<AbstractStatusEffect> allStatusEffectsRequiringApplicationCheckNonCombat = new ArrayList<>();
+		private static final List<AbstractStatusEffect> preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted = new ArrayList<>();
+		private Table() {
+			super(s->s);
 		// Modded status effects:
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/statusEffects");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractStatusEffect statusEffect = new AbstractStatusEffect(innerEntry.getValue(), entry.getKey(), true) {};
-					allStatusEffects.add(statusEffect);
-					statusEffectToIdMap.put(statusEffect, innerEntry.getKey());
-					idToStatusEffectMap.put(innerEntry.getKey(), statusEffect);
-//					System.out.println("modded SE: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading modded status effect failed at 'StatusEffect'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+			forEachMod("/statusEffects",null,null,(f,n,a)->{
+				var v = new AbstractStatusEffect(f,a,true) {};
+				v.id = n;
+				add(n,v);
+			});
 		// External res status effects:
-
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/statusEffects");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					AbstractStatusEffect statusEffect = new AbstractStatusEffect(innerEntry.getValue(), entry.getKey(), false) {};
-					allStatusEffects.add(statusEffect);
-					statusEffectToIdMap.put(statusEffect, innerEntry.getKey());
-					idToStatusEffectMap.put(innerEntry.getKey(), statusEffect);
-//					System.out.println("res SE: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading status effect failed at 'StatusEffect'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
+			forEachExternal("res/statusEffects",null,null,(f,n,a)->{
+				var v = new AbstractStatusEffect(f,a,true) {};
+				v.id = n;
+				add(n,v);
+			});
 		// Hard-coded status effects (all those up above):
-		
-		Field[] fields = StatusEffect.class.getFields();
-		
-		for(Field f : fields){
-			if (AbstractStatusEffect.class.isAssignableFrom(f.getType())) {
-				
-				AbstractStatusEffect statusEffect;
-				
-				try {
-					statusEffect = ((AbstractStatusEffect) f.get(null));
-
-					statusEffectToIdMap.put(statusEffect, f.getName());
-					idToStatusEffectMap.put(f.getName(), statusEffect);
-					allStatusEffects.add(statusEffect);
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
+			addFields(StatusEffect.class,AbstractStatusEffect.class,(k,v)->v.id=k);
 		}
+	};
+
+	static void add(AbstractStatusEffect e) {
+		table.add(e.getId(),e);
 	}
 	
 	public static List<AbstractStatusEffect> getAllStatusEffects() {
-		return allStatusEffects;
+		return table.list();
 	}
 	
 	public static List<AbstractStatusEffect> getAllStatusEffectsRequiringApplicationCheck() {
 		if(!Main.game.isStarted()) {
-			if(preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted==null) {
-				preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted = new ArrayList<>(allStatusEffects);
-				preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted.removeIf(se->se.isCombatEffect());
+			if(Table.preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted==null) {
+				Table.preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted.addAll(table.list());
+				Table.preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted.removeIf(se->se.isCombatEffect());
 			}
-			return preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted;
+			return Table.preGameNonCombatStatusEffectsAsDiscussedInDevelopersChannelAfterFindingTheBugWhichWasCausingManaBurnStacksToThrowErrorsBecauseCombatStatusEffectsWereAddedBeforeTheGameWasStarted;
 		}
+		var allStatusEffectsRequiringApplicationCheck = Table.allStatusEffectsRequiringApplicationCheck;
 		if(allStatusEffectsRequiringApplicationCheck.isEmpty()) { // Initialise on first call
-			for(AbstractStatusEffect se : allStatusEffects) {
+			for(AbstractStatusEffect se : table.list()) {
 				se.isConditionsMet(Main.game.getPlayer()); // To initialise the variable
 				if(se.isRequiresApplicationCheck()) {
 					allStatusEffectsRequiringApplicationCheck.add(se);
 					if(!se.isCombatEffect()) {
-						allStatusEffectsRequiringApplicationCheckNonCombat.add(se);
+						Table.allStatusEffectsRequiringApplicationCheckNonCombat.add(se);
 					}
 				}
 			}
@@ -14762,7 +14847,7 @@ public class StatusEffect {
 		if(Main.game.isInCombat()) {
 			return allStatusEffectsRequiringApplicationCheck;
 		} else {
-			return allStatusEffectsRequiringApplicationCheckNonCombat;
+			return Table.allStatusEffectsRequiringApplicationCheckNonCombat;
 		}
 	}
 }

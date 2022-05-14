@@ -14,7 +14,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.PenisType;
 import com.lilithsthrone.game.character.body.types.TesticleType;
 import com.lilithsthrone.game.character.body.valueEnums.PenetrationModifier;
 import com.lilithsthrone.game.character.race.AbstractRace;
@@ -28,7 +28,7 @@ import com.lilithsthrone.utils.Util.Value;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractPenisType implements BodyPartTypeInterface {
+public abstract class AbstractPenisType implements PenisType {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -202,15 +202,18 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public boolean isPubicHairAllowed() {
 		return pubicHairAllowed;
 	}
@@ -219,60 +222,15 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 	public String getTransformationNameOverride() {
 		return transformationName;
 	}
-	
+
+	@Override
 	public AbstractTesticleType getTesticleType() {
 		return testicleType;
 	}
 
+	@Override
 	public List<PenetrationModifier> getDefaultRacialPenetrationModifiers() {
 		return defaultRacialPenetrationModifiers;
-	}
-	
-	public String getPenisHeadName(GameCharacter gc) {
-		return UtilText.returnStringAtRandom("head", "tip");
-	}
-	
-	public String getPenisHeadDescriptor(GameCharacter gc) {
-		for(PenetrationModifier mod : PenetrationModifier.getPenetrationModifiers()) {
-			if(gc.getPenisModifiers().contains(mod)) {
-				switch(mod) {
-					case BLUNT:
-						return UtilText.returnStringAtRandom("blunt");
-					case FLARED:
-						return UtilText.returnStringAtRandom("wide", "flared", "flat");
-					case TAPERED:
-						return UtilText.returnStringAtRandom("tapered", "pointed");
-					case KNOTTED:
-					case PREHENSILE:
-					case RIBBED:
-					case SHEATHED:
-					case BARBED:
-					case TENTACLED:
-					case VEINY:
-					case OVIPOSITOR:
-						break;
-				}
-			}
-		}
-		return "";
-	}
-	
-	public String getCumName(GameCharacter gc) {
-		return this.getTesticleType().getFluidType().getName(gc);
-	}
-	
-	public String getCumDescriptor(GameCharacter gc) {
-		return this.getTesticleType().getFluidType().getDescriptor(gc);
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
 	}
 
 	@Override
@@ -377,12 +335,12 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, bodyDescription);
 	}
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, transformationDescription);
 	}
@@ -391,6 +349,7 @@ public abstract class AbstractPenisType implements BodyPartTypeInterface {
 	 * This method is called immediately before and immediately after the target's penis type is changed into this type. When before, applicationAfterChangeApplied is false, and when after, applicationAfterChangeApplied is true.
 	 * It is not called if owner is null.
 	 */
+	@Override
 	public String applyAdditionalTransformationEffects(GameCharacter owner, boolean applicationAfterChangeApplied) {
 		if(this.isFromExternalFile()) {
 			UtilText.addSpecialParsingString(String.valueOf(applicationAfterChangeApplied), true);

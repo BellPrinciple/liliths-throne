@@ -1,12 +1,11 @@
 package com.lilithsthrone.game.inventory.item;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -43,13 +42,137 @@ import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.places.PlaceType;
 
+import static java.util.stream.Collectors.toMap;
+
 /**
  * @since 0.1.84
  * @version 0.4.0
  * @author Innoxia
  */
-public class ItemType {
-	
+public interface ItemType extends AbstractCoreType {
+
+	String getId();
+
+	boolean isMod();
+
+	boolean isFromExternalFile();
+
+	String getAuthorDescription();
+
+	List<ItemEffect> getEffects();
+
+	String getSpecialEffect();
+
+	String getPotionDescriptor();
+
+	default boolean isAbleToBeSold() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	default boolean isAbleToBeDropped() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	// Enchantments:
+
+	default int getEnchantmentLimit() {
+		return 100;
+	}
+
+	AbstractItemEffectType getEnchantmentEffect();
+
+	AbstractItemType getEnchantmentItemType(List<ItemEffect> effects);
+
+	String getDeterminer();
+
+	boolean isPlural();
+
+	default String getName(boolean displayName) {
+		// by default, the display name is capitalised, and the bare name is not
+		return getName(displayName,displayName);
+	}
+
+	String getName(boolean displayName, boolean capitalise);
+
+	default String getNamePlural(boolean displayName) {
+		// by default, the display name is capitalised, and the bare name is not
+		return getNamePlural(displayName,displayName);
+	}
+
+	String getNamePlural(boolean displayName, boolean capitalise);
+
+	String getDescription();
+
+	default boolean isAppendItemEffectLinesToTooltip() {
+		return true;
+	}
+
+	List<String> getEffectTooltipLines();
+
+	String getDisplayName(boolean withRarityColour);
+
+	List<SvgInformation> getPathNameInformation();
+
+	Colour getColour();
+
+	List<Colour> getColourShades();
+
+	int getValue();
+
+	String getSVGString();
+
+	String getUseName();
+
+	default String getUseTooltipDescription(GameCharacter user, GameCharacter target) {
+		if(user==null || target==null || user.equals(target)) {
+			return Util.capitaliseSentence(getUseName()) + " the " + getName(false) + ".";
+		} else {
+			return UtilText.parse(target, "Get [npc.name] to " + getUseName() + " the " + getName(false) + ".");
+		}
+	}
+
+	String getUseDescription(GameCharacter user, GameCharacter target);
+
+	default boolean isAbleToBeUsedFromInventory() {
+		return true;
+	}
+
+	default String getUnableToBeUsedFromInventoryDescription() {
+		return "This item cannot be used in this way!";
+	}
+
+	default boolean isAbleToBeUsed(GameCharacter user, GameCharacter target) {
+		return true;
+	}
+
+	default String getUnableToBeUsedDescription(GameCharacter user, GameCharacter target) {
+		return "This item cannot be used in this way!";
+	}
+
+	boolean isAbleToBeUsedInSex();
+
+	boolean isAbleToBeUsedInCombatAllies();
+
+	boolean isAbleToBeUsedInCombatEnemies();
+
+	boolean isConsumedOnUse();
+
+	default boolean isTransformative() {
+		return getItemTags().contains(ItemTag.RACIAL_TF_ITEM);
+	}
+
+	default boolean isGift() {
+		return false;
+	}
+
+	default boolean isFetishGiving() {
+		return false;
+	}
+
+	Set<ItemTag> getItemTags();
+
+	Map<AbstractStatusEffect, Value<String, Integer>> getAppliedStatusEffects();
+
 	private static String getGenericUseDescription(GameCharacter user, GameCharacter target, String playerUseSelf, String playerUsePartner, String partnerUseSelf, String partnerUsePlayer) {
 		if (user!=null && user.isPlayer()) {
 			if(target!=null) {
@@ -2419,36 +2542,56 @@ public class ItemType {
 	public static int getMooMilkerMaxMilk() {
 		return 1000;
 	}
-	
-	private static List<AbstractItemType> dominionAlleywayItems = new ArrayList<>();
-	private static List<AbstractItemType> submissionTunnelItems = new ArrayList<>();
-	private static List<AbstractItemType> batCavernItems = new ArrayList<>();
-	private static List<AbstractItemType> elisAlleywayItems = new ArrayList<>();
-	
-	private static List<AbstractItemType> essences = new ArrayList<>();
-	private static List<AbstractItemType> allItems = new ArrayList<>();
-	private static List<AbstractItemType> moddedItems = new ArrayList<>();
-	private static Map<AbstractSubspecies, String> subspeciesBookId = new HashMap<>();
-	
-	/**
-	 * If you're looking for spell books, their id is:<br/>
-	 * SPELL_BOOK_"+spell.toString()<br/>
-	 * If you're looking for spell scrolls, their id is:<br/>
-	 * "SPELL_SCROLL_"+spellSchool.toString()
-	 */
-	private static Map<AbstractItemType, String> itemToIdMap = new HashMap<>();
 
-	/**
-	 * If you're looking for spell books, their id is:<br/>
-	 * SPELL_BOOK_"+spell.toString()<br/>
-	 * If you're looking for spell scrolls, their id is:<br/>
-	 * "SPELL_SCROLL_"+spellSchool.toString()
-	 */
-	private static Map<String, AbstractItemType> idToItemMap = new HashMap<>();
-	
+	Table table = new Table();
+
+	final static class Table extends com.lilithsthrone.utils.Table<AbstractItemType> {
+
+		private final List<AbstractItemType> dominionAlleywayItems = new ArrayList<>();
+		private final List<AbstractItemType> submissionTunnelItems = new ArrayList<>();
+		private final List<AbstractItemType> batCavernItems = new ArrayList<>();
+		private final List<AbstractItemType> elisAlleywayItems = new ArrayList<>();
+		private final List<AbstractItemType> essences = new ArrayList<>();
+		private final List<AbstractItemType> moddedItems = new ArrayList<>();
+		private final Map<AbstractSubspecies,String> subspeciesBookId = new HashMap<>();
+		private final Map<AbstractSubspecies,String> essenceMap = new HashMap<>();
+
+		private Table() {
+			super(ItemType::sanitize);
+			forEachMod("/items/items",null,null,(f,n,a)->{
+				var v = new AbstractItemType(f,a,true) {};
+				moddedItems.add(v);
+				v.id = n;
+				add(n,v);
+			});
+			forEachExternal("res/items",null,null,(f,n,a)->{
+				var v = new AbstractItemType(f,a,true) {};
+				v.id = n;
+				add(n,v);
+			});
+			// Initialise all SVGStrings so that initialisation methods do not conflict with one another in other places in the code.
+			for(AbstractItemType it : list())
+				it.getSVGString();
+			addFields(ItemType.class,AbstractItemType.class,(k,v)->{
+				v.id = k;
+				if(v.getItemTags().contains(ItemTag.DOMINION_ALLEYWAY_SPAWN))
+					dominionAlleywayItems.add(v);
+				if(v.getItemTags().contains(ItemTag.SUBMISSION_TUNNEL_SPAWN))
+					submissionTunnelItems.add(v);
+				if(v.getItemTags().contains(ItemTag.BAT_CAVERNS_SPAWN))
+					batCavernItems.add(v);
+				if(v.getItemTags().contains(ItemTag.ESSENCE))
+					essences.add(v);
+			});
+			initialize(this);
+		}
+	}
 
 	public static AbstractItemType getItemTypeFromId(String id) {
-		
+		return table.of(id);
+	}
+
+	private static String sanitize(String id) {
 		if(id.equalsIgnoreCase("PROMISCUITY_PILL")) {
 			id = "innoxia_pills_sterility";
 			
@@ -2537,98 +2680,28 @@ public class ItemType {
 			id = "innoxia_race_slime_biojuice_canister";
 		}
 		
-		id = Util.getClosestStringMatch(id, idToItemMap.keySet());
-		return idToItemMap.get(id);
+		return id;
 	}
 	
 	public static String getIdFromItemType(AbstractItemType itemType) {
-		return itemToIdMap.get(itemType);
+		return itemType.getId();
 	}
 	
 	public static AbstractItemType getSpellBookType(Spell s) {
-		return idToItemMap.get("SPELL_BOOK_"+s);
+		return table.of("SPELL_BOOK_"+s);
 	}
 	
 	public static AbstractItemType getSpellScrollType(SpellSchool school) {
-		return idToItemMap.get("SPELL_SCROLL_"+school);
+		return table.of("SPELL_SCROLL_"+school);
 	}
 	
 	public static AbstractItemType getLoreBook(AbstractSubspecies subspecies) {
-		return idToItemMap.get(subspeciesBookId.get(subspecies));
+		return table.of(table.subspeciesBookId.get(subspecies));
 	}
-	
-	static{
-		
+
+	private static void initialize(Table table) {
+
 		// Modded item types:
-
-		moddedItems = new ArrayList<>();
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/items/items");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey();
-					AbstractItemType ct = new AbstractItemType(innerEntry.getValue(), entry.getKey(), true) {};
-					moddedItems.add(ct);
-					itemToIdMap.put(ct, id);
-					idToItemMap.put(id, ct);
-				} catch(Exception ex) {
-					System.err.println("Loading modded item failed at 'ItemType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		allItems.addAll(moddedItems);
-		
-		// External res item types:
-
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/items");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey();
-					AbstractItemType ct = new AbstractItemType(innerEntry.getValue(), entry.getKey(), false) {};
-					allItems.add(ct);
-					itemToIdMap.put(ct, id);
-					idToItemMap.put(id, ct);
-//					System.out.println("IT: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading item failed at 'ItemType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		for(AbstractItemType it : allItems) {
-			it.getSVGString(); // Initialise all SVGStrings so that initialisation methods do not conflict with one another in other places in the code.
-		}
-		
-		Field[] fields = ItemType.class.getFields();
-		
-		for(Field f : fields){
-			
-			if (AbstractItemType.class.isAssignableFrom(f.getType())) {
-				
-				AbstractItemType item;
-				try {
-					item = ((AbstractItemType) f.get(null));
-					
-					itemToIdMap.put(item, f.getName());
-					idToItemMap.put(f.getName(), item);
-					
-					allItems.add(item);
-					
-					if(item.getItemTags().contains(ItemTag.ESSENCE)) {
-						essences.add(item);
-					}
-					
-				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 		
 		for(Spell s : Spell.values()) {
 			if(!s.isSpellBook()) {
@@ -2863,11 +2936,8 @@ public class ItemType {
 					return false;
 				}
 			};
-			
-			itemToIdMap.put(spellBook, "SPELL_BOOK_"+s);
-			idToItemMap.put("SPELL_BOOK_"+s, spellBook);
-			
-			allItems.add(spellBook);
+
+			table.add(spellBook.id = "SPELL_BOOK_"+s, spellBook);
 		}
 		
 		for(SpellSchool school : SpellSchool.values()) {
@@ -2934,11 +3004,8 @@ public class ItemType {
 					return false;
 				}
 			};
-			
-			itemToIdMap.put(scroll, "SPELL_SCROLL_"+school);
-			idToItemMap.put("SPELL_SCROLL_"+school, scroll);
-			
-			allItems.add(scroll);
+
+			table.add(scroll.id = "SPELL_SCROLL_"+school, scroll);
 		}
 		
 		// Race books:
@@ -2984,12 +3051,9 @@ public class ItemType {
 							?AbstractSubspecies.getMainSubspeciesOfRace(entry.getValue().get(0).getRace())
 							:entry.getValue().get(0);
 					String id = "BOOK_READ_"+Subspecies.getIdFromSubspecies(mainSubspecies);
-					
-					if(!ItemEffectType.idToItemEffectTypeMap.containsKey(id)) {
-						AbstractItemEffectType bookType = generateBookEffect(mainSubspecies, entry.getValue());
-						ItemEffectType.allEffectTypes.add(bookType);
-						ItemEffectType.itemEffectTypeToIdMap.put(bookType, id);
-						ItemEffectType.idToItemEffectTypeMap.put(id, bookType);
+
+					if(ItemEffectType.table.exact(id).isEmpty()) {
+						ItemEffectType.addAbstractItemEffectToIds(id, generateBookEffect(id, mainSubspecies, entry.getValue()));
 					}
 					
 					return Util.newArrayListOfValues(new ItemEffect(ItemEffectType.getBookEffectFromSubspecies(mainSubspecies)));
@@ -3024,15 +3088,12 @@ public class ItemType {
 			};
 			
 			String id = "BOOK_"+Subspecies.getIdFromSubspecies(mainSubspecies);
-					
-			itemToIdMap.put(loreBook, id);
-			idToItemMap.put(id, loreBook);
+
+			table.add(loreBook.id = id, loreBook);
 			
 			for(AbstractSubspecies subspecies : entry.getValue()) {
-				subspeciesBookId.put(subspecies, id);
+				table.subspeciesBookId.put(subspecies, id);
 			}
-			
-			allItems.add(loreBook);
 
 			// Essences
 			if(mainSubspecies!=Subspecies.CENTAUR) { // a CENTAUR essence is identical to a HORSE_MORPH essence
@@ -3040,6 +3101,7 @@ public class ItemType {
 				int override = mainSubspecies.getSubspeciesOverridePriority();
 				String raceName = (override>0?mainSubspecies.getFeralName(null):mainSubspecies.getRace().getName(true));
 				String raceNamePlural = (override>0?mainSubspecies.getFeralNamePlural(null):mainSubspecies.getRace().getNamePlural(true));
+				String effectId = "COMBAT_BONUS_"+Subspecies.getIdFromSubspecies(mainSubspecies).toUpperCase();
 
 				AbstractStatusEffect statusEffect = new AbstractStatusEffect(80,
 						(mainSubspecies.getRace()==Race.ANGEL
@@ -3069,6 +3131,10 @@ public class ItemType {
 									25f)),
 						null) {
 					@Override
+					public String getId() {
+						return effectId;
+					}
+					@Override
 					public String getDescription(GameCharacter target) {
 						if(target == null) {
 							return "";
@@ -3082,11 +3148,7 @@ public class ItemType {
 					}
 				};
 
-				String effect_id = "COMBAT_BONUS_"+Subspecies.getIdFromSubspecies(mainSubspecies).toUpperCase();
-
-				StatusEffect.statusEffectToIdMap.put(statusEffect, effect_id);
-				StatusEffect.idToStatusEffectMap.put(effect_id, statusEffect);
-				StatusEffect.allStatusEffects.add(statusEffect);
+				StatusEffect.add(statusEffect);
 
 				AbstractItemEffectType effectType = new AbstractItemEffectType(Util.newArrayListOfValues(
 						"[style.boldGood(+1)] [style.boldArcane(Arcane essence)]"),
@@ -3159,38 +3221,40 @@ public class ItemType {
 				};
 
 				String essence_id = "BOTTLED_ESSENCE_"+Subspecies.getIdFromSubspecies(mainSubspecies).toUpperCase();
+				essence.id = essence_id;
+				table.add(essence_id, essence);
 
-				itemToIdMap.put(essence, essence_id);
-				idToItemMap.put(essence_id, essence);
-
-				allItems.add(essence);
-				essences.add(essence);
+				table.essences.add(essence);
 			}
 
 		}
 		
 		// Add items to spawn lists:
-		for(AbstractItemType item : allItems) {
+		for(AbstractItemType item : table.list()) {
 			if(item.getItemTags().contains(ItemTag.DOMINION_ALLEYWAY_SPAWN) || item.getItemTags().contains(ItemTag.ALL_AREAS_SPAWN)) {
-				dominionAlleywayItems.add(item);
+				table.dominionAlleywayItems.add(item);
 			}
 			if(item.getItemTags().contains(ItemTag.SUBMISSION_TUNNEL_SPAWN) || item.getItemTags().contains(ItemTag.ALL_AREAS_SPAWN)) {
-				submissionTunnelItems.add(item);
+				table.submissionTunnelItems.add(item);
 			}
 			if(item.getItemTags().contains(ItemTag.BAT_CAVERNS_SPAWN) || item.getItemTags().contains(ItemTag.ALL_AREAS_SPAWN)) {
-				batCavernItems.add(item);
+				table.batCavernItems.add(item);
 			}
 			if(item.getItemTags().contains(ItemTag.ELIS_ALLEYWAY_SPAWN) || item.getItemTags().contains(ItemTag.ALL_AREAS_SPAWN)) {
-				elisAlleywayItems.add(item);
+				table.elisAlleywayItems.add(item);
 			}
 		}
 	}
 	
-	private static AbstractItemEffectType generateBookEffect(AbstractSubspecies mainSubspecies, List<AbstractSubspecies> additionalUnlockSubspecies) {
+	private static AbstractItemEffectType generateBookEffect(String id, AbstractSubspecies mainSubspecies, List<AbstractSubspecies> additionalUnlockSubspecies) {
 		return new AbstractItemEffectType(Util.newArrayListOfValues(
 				"Adds "+mainSubspecies.getName(null)+" encyclopedia entry and reveals racial status effect attributes",
 				"[style.boldExcellent(+10)] <b style='color:"+mainSubspecies.getColour(null).toWebHexString()+";'>"+mainSubspecies.getDamageMultiplier().getName()+"</b>"),
 				mainSubspecies.getColour(null)) {
+			@Override
+			public String getId() {
+				return id;
+			}
 			@Override
 			public String itemEffectOverride(TFModifier primaryModifier, TFModifier secondaryModifier, TFPotency potency, int limit, GameCharacter user, GameCharacter target, ItemEffectTimer timer) {
 				return getBookEffect(target, mainSubspecies, additionalUnlockSubspecies, true);
@@ -3198,12 +3262,10 @@ public class ItemType {
 		};
 	}
 	
-	private static Map<AbstractSubspecies, String> essenceMap = new HashMap<>();
-	
 	private static String getEssenceSvg(AbstractSubspecies subspecies) {
-		if(essenceMap.containsKey(subspecies)) {
-			return essenceMap.get(subspecies);
-		}
+		var value = table.essenceMap.get(subspecies);
+		if(value != null)
+			return value;
 		String background = "";
 		String bottle = "";
 		Colour colour = subspecies.getColour(null);
@@ -3230,8 +3292,8 @@ public class ItemType {
 							+ "<div style='width:60%;height:60%;position:absolute;left:20%;top:25%;'>"
 								+ bottle
 							+ "</div>";
-		
-		essenceMap.put(subspecies, finalImage);
+
+		table.essenceMap.put(subspecies, finalImage);
 		
 		return finalImage;
 	}
@@ -3256,35 +3318,35 @@ public class ItemType {
 	}
 
 	public static List<AbstractItemType> getDominionAlleywayItems() {
-		return dominionAlleywayItems;
+		return table.dominionAlleywayItems;
 	}
 	
 	public static List<AbstractItemType> getSubmissionTunnelItems() {
-		return submissionTunnelItems;
+		return table.submissionTunnelItems;
 	}
 	
 	public static List<AbstractItemType> getBatCavernItems() {
-		return batCavernItems;
+		return table.batCavernItems;
 	}
 	
 	public static List<AbstractItemType> getElisAlleywayItems() {
-		return elisAlleywayItems;
+		return table.elisAlleywayItems;
 	}
 	
 	public static List<AbstractItemType> getEssences() {
-		return essences;
+		return table.essences;
 	}
 	
 	public static List<AbstractItemType> getAllItems() {
-		return allItems;
+		return table.list();
 	}
 	
 	public static Map<AbstractItemType, String> getItemToIdMap() {
-		return itemToIdMap;
+		return table.list().stream().collect(toMap(t->t,t->{var k=t.getId();if(k==null)System.err.println(t.getName(true));return k;}));
 	}
 	
 	public static Map<String, AbstractItemType> getIdToItemMap() {
-		return idToItemMap;
+		return table.list().stream().collect(toMap(AbstractItemType::getId,t->t));
 	}
 
 }

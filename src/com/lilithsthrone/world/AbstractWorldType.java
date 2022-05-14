@@ -23,8 +23,9 @@ import com.lilithsthrone.world.places.PlaceType;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractWorldType {
+public abstract class AbstractWorldType implements WorldType {
 
+	String id;
 	private boolean mod;
 	private boolean fromExternalFile;
 	private String author;
@@ -91,13 +92,13 @@ public abstract class AbstractWorldType {
 		this.wallName = "wall";
 		
 		this.offspringTextFilePath = "characters/offspring/dominionAlleyway";
-		
+
 		this.teleportPermissions = teleportPermissions;
 		
 		this.fileLocation = fileLocation;
 		this.usesFile = true;
 		this.placesMap = placesMap;
-		
+
 		this.majorAreaIndex = 0;
 	}
 	
@@ -159,7 +160,7 @@ public abstract class AbstractWorldType {
 				} else {
 					majorAreaIndex = 0;
 				}
-				
+
 				this.loiteringEnabled = Boolean.valueOf(coreElement.getMandatoryFirstOf("loiteringEnabled").getTextContent().trim());
 				this.flightEnabled = Boolean.valueOf(coreElement.getMandatoryFirstOf("flightEnabled").getTextContent().trim());
 				this.discoveredOnStart = Boolean.valueOf(coreElement.getMandatoryFirstOf("visibleFromStart").getTextContent().trim());
@@ -186,7 +187,7 @@ public abstract class AbstractWorldType {
 						this.offspringTextFilePath = coreElement.getMandatoryFirstOf("offspringTextFilePath").getTextContent();
 					}
 				}
-				
+
 			} catch(Exception ex) {
 				ex.printStackTrace();
 				System.err.println("WorldType was unable to be loaded from file! (" + XMLFile.getName() + ")\n" + ex);
@@ -222,6 +223,7 @@ public abstract class AbstractWorldType {
 		return super.toString();
 	}
 
+	@Override
 	public String getOffspringTextFilePath(NPCOffspring o) {
 		return offspringTextFilePath;
 	}
@@ -230,6 +232,7 @@ public abstract class AbstractWorldType {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
@@ -238,76 +241,82 @@ public abstract class AbstractWorldType {
 		return author;
 	}
 
+	@Override
 	public String getId() {
-		return WorldType.getIdFromWorldType(this);
+		return id;
 	}
 
+	@Override
 	public WorldRegion getWorldRegion() {
 		return worldRegion;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public Colour getColour() {
 		return colour;
 	}
-	
+
+	@Override
 	public boolean isLoiteringEnabled() {
 		return loiteringEnabled;
 	}
-	
-	/**
-	 * Reveals all tiles as though the player knows about them, but has not travelled to them. Behaviour may be overridden by isRevealedOnStart().
-	 */
+
+	@Override
 	public boolean isDiscoveredOnStart() {
 		return discoveredOnStart;
 	}
-	
-	/**
-	 * Reveals all tiles as though the player has already travelled to them.
-	 */
+
+	@Override
 	public boolean isRevealedOnStart() {
 		return revealedOnStart;
 	}
 
+	@Override
 	public AbstractPlaceType getStandardPlace() {
 		return standardPlace;
 	}
 
+	@Override
 	public AbstractPlaceType getGlobalMapLocation() {
 		return globalMapLocation;
 	}
 
+	@Override
 	public AbstractPlaceType getEntryFromGlobalMapLocation() {
 		return entryFromGlobalMapLocation;
 	}
 
+	@Override
 	public String getFileLocation() {
 		return fileLocation;
 	}
 
+	@Override
 	public boolean isUsesFile() {
 		return usesFile;
 	}
 
+	@Override
 	public Map<Color, AbstractPlaceType> getPlacesMap() {
 		return placesMap;
 	}
 
+	@Override
 	public TeleportPermissions getTeleportPermissions() {
 		return teleportPermissions;
 	}
-	
+
+	@Override
 	public boolean isFlightEnabled() {
 		return flightEnabled;
 	}
-	
-	public boolean isSexBlocked(GameCharacter character) {
-		return getSexBlockedReason(character)!=null && !getSexBlockedReason(character).isEmpty();
-	}
-	
+
+	@Override
 	public String getSexBlockedReason(GameCharacter character) {
 		if(this.isFromExternalFile() && sexBlockedReason!=null) {
 			return UtilText.parse(character, sexBlockedReason);
@@ -315,45 +324,31 @@ public abstract class AbstractWorldType {
 		return sexBlockedReason;
 	}
 
-	/**
-	 * @return true if over-desk and on chair sex positions are available in this location. This can be overridden in AbstractPlaceType's method of the same name.
-	 */
+	@Override
 	public boolean isFurniturePresent() {
 		return furniturePresent;
 	}
-	
-	/**
-	 * @return The name which should be used in the over desk sex position, in the X place in: 'Over X'
-	 */
+
+	@Override
 	public String getDeskName() {
 		return deskName;
 	}
 
-	/**
-	 * @return true if against wall sex positions are available in this location. This can be overridden in AbstractPlaceType's method of the same name.
-	 */
+	@Override
 	public boolean isWallsPresent() {
 		return wallsPresent;
 	}
 
-	/**
-	 * @return The name which should be used in the against wall sex position, in the X place in: 'Against X'
-	 */
+	@Override
 	public String getWallName() {
 		return wallName;
 	}
 
-	/**
-	 * @return The index which this world should be placed at. Returns Integer.MAX_VALUE if it's not a major world which requires ordering.
-	 */
+	@Override
 	public int getMajorAreaIndex() {
 		if(majorAreaIndex<=0) {
 			return Integer.MAX_VALUE;
 		}
 		return majorAreaIndex;
-	}
-	
-	public boolean isMajorArea() {
-		return getMajorAreaIndex()>0 && getMajorAreaIndex()!=Integer.MAX_VALUE;
 	}
 }

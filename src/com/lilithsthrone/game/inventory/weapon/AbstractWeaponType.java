@@ -26,15 +26,12 @@ import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
 import com.lilithsthrone.game.combat.moves.CombatMove;
 import com.lilithsthrone.game.combat.spells.Spell;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.AbstractSetBonus;
 import com.lilithsthrone.game.inventory.ColourReplacement;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.SetBonus;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
-import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
@@ -47,8 +44,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.2.1
  * @author Innoxia
  */
-public abstract class AbstractWeaponType extends AbstractCoreType {
-	
+public abstract class AbstractWeaponType implements WeaponType {
+
+	String id;
 	private int baseValue;
 	private boolean mod;
 	
@@ -192,14 +190,14 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 				this.unequipText = coreAttributes.getMandatoryFirstOf("unequipText").getTextContent();
 				
 				this.pathNamePrefix = weaponXMLFile.getParentFile().getAbsolutePath() + "/";
-				
+
 				this.pathName = pathNamePrefix + coreAttributes.getMandatoryFirstOf("imageName").getTextContent();
 
 				Predicate<Element> filterEmptyElements = element -> !element.getTextContent().isEmpty(); //helper function to filter out empty elements.
 				
 				this.pathNameEquipped = coreAttributes.getOptionalFirstOf("imageEquippedName")
 					.filter(filterEmptyElements)
-					.map(o -> o.getTextContent()) // weaponXMLFile.getParentFile().getAbsolutePath() + "/" + 
+					.map(o -> o.getTextContent()) // weaponXMLFile.getParentFile().getAbsolutePath() + "/" +
 					.orElse(pathName);
 
 				this.damage = Integer.valueOf(coreAttributes.getMandatoryFirstOf("damage").getTextContent());
@@ -537,31 +535,28 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public String getId() {
-		return WeaponType.weaponToIdMap.get(this);
+		return id;
 	}
 
+	@Override
 	public String equipText(GameCharacter character) {
 		return UtilText.parse(character, equipText);
 	}
 
+	@Override
 	public String unequipText(GameCharacter character) {
 		return UtilText.parse(character, unequipText);
 	}
-	
-	public String getAttackDescription(GameCharacter character, GameCharacter target, boolean isHit, boolean critical) {
-		if(isHit) {
-			return UtilText.parse(character, target, getHitText(character, target, critical));
-		} else {
-			return UtilText.parse(character, target, getMissText(character, target));
-		}
-	}
 
+	@Override
 	public String getHitText(GameCharacter character, GameCharacter target, boolean critical) {
 		if(critical && !hitCriticalDescriptions.isEmpty()) {
 			return UtilText.parse(character, target, Util.randomItemFrom(hitCriticalDescriptions));
@@ -570,10 +565,12 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 		}
 	}
 
+	@Override
 	public String getMissText(GameCharacter character, GameCharacter target) {
 		return UtilText.parse(character, target, Util.randomItemFrom(missDescriptions));
 	}
 
+	@Override
 	public String getOneShotEndTurnRecoveryDescription(GameCharacter character) {
 		return UtilText.parse(character, Util.randomItemFrom(oneShotEndTurnRecoveryDescriptions));
 	}
@@ -637,23 +634,7 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 		}
 	}
 
-
-	public boolean isAbleToBeUsed(GameCharacter user, GameCharacter target) {
-		if(this.getArcaneCost()>0) {
-			return user.getEssenceCount() > 0;
-		} else {
-			return true;
-		}
-	}
-
-	public String getUnableToBeUsedDescription() {
-		if(this.getArcaneCost()>0) {
-			return "You need at least [style.boldBad(one)] [style.boldArcane(arcane essence)] in order to use this weapon!";
-		} else {
-			return "";
-		}
-	}
-	
+	@Override
 	public String applyExtraEffects(GameCharacter user, GameCharacter target, boolean isHit, boolean isCritical) {
 		StringBuilder sb = new StringBuilder();
 		
@@ -673,98 +654,116 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 		
 		return sb.toString();
 	}
-	
+
+	@Override
 	public int getBaseValue() {
 		return baseValue;
 	}
 
-	public boolean isUsingUnarmedCalculation() {
-		return this.getItemTags().contains(ItemTag.WEAPON_UNARMED);
-	}
-	
+	@Override
 	public boolean isMelee() {
 		return melee;
 	}
 
+	@Override
 	public boolean isTwoHanded() {
 		return twoHanded;
 	}
 
+	@Override
 	public boolean isOneShot() {
 		return oneShot;
 	}
 
+	@Override
 	public float getOneShotChanceToRecoverAfterTurn() {
 		return oneShotChanceToRecoverAfterTurn;
 	}
 
+	@Override
 	public float getOneShotChanceToRecoverAfterCombat() {
 		return oneShotChanceToRecoverAfterCombat;
 	}
-	
+
+	@Override
 	public boolean isAppendDamageName() {
 		return appendDamageName;
 	}
 
+	@Override
 	public String getDeterminer() {
 		return determiner;
 	}
-	
+
+	@Override
 	public boolean isPlural() {
 		return plural;
 	}
 
+	@Override
 	public String getName() {
 		if(isPlural()) {
 			return namePlural;
 		}
 		return name;
 	}
-	
+
+	@Override
 	public String getNamePlural() {
 		return namePlural;
 	}
 
+	@Override
 	public String getAttackDescriptor() {
 		return attackDescriptor;
 	}
 
+	@Override
 	public String getAttackDescriptionPrefix(GameCharacter user, GameCharacter target) {
 		return attackDescriptionPrefix;
 	}
-	
+
+	@Override
 	public String getAttackDescription(GameCharacter user, GameCharacter target) {
 		return UtilText.parse(user, target, attackTooltipDescription);
 	}
 
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
+	@Override
 	public List<String> getExtraEffects() {
 		return extraEffects;
 	}
 
+	@Override
 	public String getAuthorDescription() {
 		return authorDescription;
 	}
-	
+
+	@Override
 	public Rarity getRarity() {
 		return rarity;
 	}
 
+	@Override
 	public float getPhysicalResistance() {
 		return physicalResistance;
 	}
 
+	@Override
 	public AbstractSetBonus getClothingSet() {
 		return clothingSet;
 	}
 
+	@Override
 	public String getPathName() {
 		return pathName;
 	}
 
+	@Override
 	public String getEquippedPathName(GameCharacter characterEquippedTo) {
 		String parsedPath = UtilText.parse(characterEquippedTo, pathNameEquipped).trim();
 		if(parsedPath.isEmpty()) {
@@ -773,38 +772,47 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 		return pathNamePrefix + parsedPath;
 	}
 	
+	@Override
 	public boolean isEquippedSVGImageDifferent() {
 		return !getPathName().equals(pathNameEquipped);
 	}
 	
+	@Override
 	public int getDamage() {
 		return damage;
 	}
 
+	@Override
 	public DamageVariance getDamageVariance() {
 		return damageVariance;
 	}
 
+	@Override
 	public int getArcaneCost() {
 		return arcaneCost;
 	}
 
+	@Override
 	public List<Value<Integer, Integer>> getAoeDamage() {
 		return aoeDamage;
 	}
-	
+
+	@Override
 	public List<DamageType> getAvailableDamageTypes() {
 		return availableDamageTypes;
 	}
-	
+
+	@Override
 	public boolean isSpellRegenOnDamageTypeChange() {
 		return spellRegenOnDamageTypeChange;
 	}
 
+	@Override
 	public Map<DamageType, List<Spell>> getSpells() {
 		return spells;
 	}
-	
+
+	@Override
 	public List<Spell> getSpells(DamageType damageType) {
 		List<Spell> damageTypeSpells = new ArrayList<>();
 		if(spells.containsKey(null)) {
@@ -815,34 +823,18 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 		}
 		return damageTypeSpells;
 	}
-	
+
+	@Override
 	public boolean isCombatMoveRegenOnDamageTypeChange() {
 		return combatMovesRegenOnDamageTypeChange;
 	}
 
+	@Override
 	public Map<DamageType, List<AbstractCombatMove>> getCombatMoves() {
 		return combatMoves;
 	}
-	
-	public List<AbstractCombatMove> getCombatMoves(DamageType damageType) {
-		List<AbstractCombatMove> damageTypeCombatMoves = new ArrayList<>();
-		if(combatMoves.containsKey(null)) {
-			damageTypeCombatMoves.addAll(combatMoves.get(null));
-		}
-		if(combatMoves.containsKey(damageType)) {
-			damageTypeCombatMoves.addAll(combatMoves.get(damageType));
-		}
-		return damageTypeCombatMoves;
-	}
 
-	public ColourReplacement getColourReplacement(boolean includeDamageTypeReplacement, int index) {
-		List<ColourReplacement> list = getColourReplacements(includeDamageTypeReplacement);
-		if(index>list.size()-1) {
-			return null;
-		}
-		return list.get(index);
-	}
-	
+	@Override
 	public List<ColourReplacement> getColourReplacements(boolean includeDamageTypeReplacement) {
 		if(includeDamageTypeReplacement) {
 			return colourReplacements;
@@ -852,10 +844,19 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 		return removeZeroList;
 	}
 
+	@Override
+	public void applyGenerationColourReplacement(List<Colour> list) {
+		for(var entry : copyGenerationColours.entrySet()) {
+			Colour replacement = list.get(entry.getValue());
+			list.remove((int)entry.getKey());
+			list.add(entry.getKey(),replacement);
+		}
+	}
+
 	private static String generateIdentifier(DamageType dt, List<Colour> colours) {
 		return generateIdentifier(null, dt, colours);
 	}
-	
+
 	private static String generateIdentifier(GameCharacter character, DamageType dt, List<Colour> colours) {
 		StringBuilder sb = new StringBuilder(dt.toString());
 		if(character!=null) {
@@ -874,7 +875,8 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 	private String getSVGStringFromMap(DamageType dt, List<Colour> colours) {
 		return SVGStringMap.get(generateIdentifier(dt, colours));
 	}
-	
+
+	@Override
 	public String getSVGImage() {
 		DamageType dt = DamageType.PHYSICAL;
 		if (this.getAvailableDamageTypes() != null) {
@@ -891,7 +893,8 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 		
 		return getSVGImage(dt, colours);
 	}
-	
+
+	@Override
 	public String getSVGImage(DamageType dt, List<Colour> colours) {
 		if(!getAvailableDamageTypes().contains(dt))
 			return "";
@@ -906,6 +909,7 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 		return s;
 	}
 
+	@Override
 	public String getSVGImageDesaturated() {
 		if(SVGStringDesaturated!=null)
 			return SVGStringDesaturated;
@@ -922,6 +926,7 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 		return SVGStringEquippedMap.get(generateIdentifier(character, dt, colours));
 	}
 	
+	@Override
 	public String getSVGEquippedImage(GameCharacter characterEquipped) {
 		DamageType dt = DamageType.PHYSICAL;
 		if (this.getAvailableDamageTypes() != null) {
@@ -938,7 +943,8 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 		
 		return getSVGEquippedImage(characterEquipped, dt, colours);
 	}
-	
+
+	@Override
 	public String getSVGEquippedImage(GameCharacter characterEquipped, DamageType dt, List<Colour> colours) {
 		if(!isEquippedSVGImageDifferent())
 			return getSVGImage(dt, colours);
@@ -955,8 +961,8 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 //		addSVGStringEquippedMapping(characterEquipped, dt, colours, s);
 		return s;
 	}
-	
 
+	@Override
 	public String getSVGEquippedImageDesaturated(GameCharacter characterEquipped) {
 		if(SVGStringEquippedDesaturated!=null)
 			return SVGStringEquippedDesaturated;
@@ -969,30 +975,12 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 	
 	// Enchantments:
 
+	@Override
 	public List<ItemEffect> getEffects() {
 		return effects;
 	}
-	
-	public boolean isAbleToBeSold() {
-		return getRarity()!=Rarity.QUEST;
-	}
-	
-	public boolean isAbleToBeDropped() {
-		return getRarity()!=Rarity.QUEST;
-	}
-	
-	public int getEnchantmentLimit() {
-		return 100;
-	}
-	
-	public AbstractItemEffectType getEnchantmentEffect() {
-		return ItemEffectType.WEAPON;
-	}
-	
-	public AbstractWeaponType getEnchantmentItemType(List<ItemEffect> effects) {
-		return this;
-	}
 
+	@Override
 	public List<ItemTag> getItemTags() {
 		return itemTags;
 	}

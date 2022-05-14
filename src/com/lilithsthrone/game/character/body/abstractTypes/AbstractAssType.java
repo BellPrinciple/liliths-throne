@@ -13,7 +13,7 @@ import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
 import com.lilithsthrone.game.character.body.types.AnusType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.AssType;
 import com.lilithsthrone.game.character.body.valueEnums.LegConfiguration;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
@@ -25,7 +25,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractAssType implements BodyPartTypeInterface {
+public abstract class AbstractAssType implements AssType {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -135,15 +135,18 @@ public abstract class AbstractAssType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
+
+	@Override
 	public AbstractAnusType getAnusType() {
 		return anusType;
 	}
@@ -151,16 +154,6 @@ public abstract class AbstractAssType implements BodyPartTypeInterface {
 	@Override
 	public String getTransformationNameOverride() {
 		return transformationName;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "";
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
 	}
 
 	@Override
@@ -207,12 +200,12 @@ public abstract class AbstractAssType implements BodyPartTypeInterface {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, assBodyDescription);
 	}
 	
-//	@Override
+	@Override
 	public String getTransformationDescription(GameCharacter owner) {
 		return UtilText.parse(owner, assTransformationDescription);
 	}

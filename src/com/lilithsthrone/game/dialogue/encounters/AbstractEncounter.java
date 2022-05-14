@@ -37,8 +37,9 @@ import com.lilithsthrone.world.places.PlaceType;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractEncounter {
+public abstract class AbstractEncounter implements Encounter {
 
+	String id;
 	protected static AbstractCoreItem randomItem;
 	
 	protected static final double INCEST_ENCOUNTER_RATE = 0.2f;
@@ -52,7 +53,7 @@ public abstract class AbstractEncounter {
 
 	private List<String> placeTypeIds;
 	private List<ExternalEncounterData> possibleEncounters;
-	
+
 	/**
 	 * Utility class to store data loaded from external files.
 	 */
@@ -148,7 +149,7 @@ public abstract class AbstractEncounter {
 	}
 
 	public String getId() {
-		return Encounter.getIdFromEncounter(this);
+		return id;
 	}
 	
 	protected static void spawnEnforcers() {

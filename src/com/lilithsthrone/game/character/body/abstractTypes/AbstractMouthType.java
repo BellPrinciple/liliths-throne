@@ -12,7 +12,7 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.MouthType;
 import com.lilithsthrone.game.character.body.types.TongueType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.race.AbstractRace;
@@ -25,7 +25,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractMouthType implements BodyPartTypeInterface {
+public abstract class AbstractMouthType implements MouthType {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -235,27 +235,20 @@ public abstract class AbstractMouthType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
-	
-	public AbstractTongueType getTongueType() {
-		return tongueType;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		return "";
-	}
 
 	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return false;
+	public AbstractTongueType getTongueType() {
+		return tongueType;
 	}
 
 	@Override
@@ -283,14 +276,17 @@ public abstract class AbstractMouthType implements BodyPartTypeInterface {
 		}
 	}
 
+	@Override
 	public String getLipsNameSingular(GameCharacter gc) {
 		return Util.randomItemFrom(lipNames);
 	}
-	
+
+	@Override
 	public String getLipsNamePlural(GameCharacter gc) {
 		return Util.randomItemFrom(lipNamesPlural);
 	}
-	
+
+	@Override
 	public boolean isLipsDescriptorSizeAllowed(GameCharacter gc) {
 		if (gc.isFeminine()) {
 			return lipDescriptorsFeminineSizeAllowed;
@@ -298,7 +294,8 @@ public abstract class AbstractMouthType implements BodyPartTypeInterface {
 			return lipDescriptorsMasculineSizeAllowed;
 		}
 	}
-	
+
+	@Override
 	public List<String> getLipsDescriptors(GameCharacter gc) {
 		if (gc.isFeminine()) {
 			return (lipDescriptorsFeminine);
@@ -317,7 +314,7 @@ public abstract class AbstractMouthType implements BodyPartTypeInterface {
 		return race;
 	}
 
-//	@Override
+	@Override
 	public String getBodyDescription(GameCharacter owner) {
 		return UtilText.parse(owner, mouthBodyDescription);
 	}

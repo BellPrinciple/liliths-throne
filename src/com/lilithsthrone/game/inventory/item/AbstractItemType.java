@@ -21,7 +21,6 @@ import com.lilithsthrone.game.character.effects.StatusEffect;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
@@ -38,8 +37,9 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.4.0
  * @author Innoxia
  */
-public abstract class AbstractItemType extends AbstractCoreType {
-	
+public abstract class AbstractItemType implements ItemType {
+
+	String id;
 	private String determiner;
 	private String name;
 	private String namePlural;
@@ -424,48 +424,44 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		return result;
 	}
 	
+	@Override
 	public String getId() {
-		return ItemType.getItemToIdMap().get(this);
+		return id;
 	}
 
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 	
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
 	}
 
+	@Override
 	public String getAuthorDescription() {
 		return authorDescription;
 	}
 	
+	@Override
 	public List<ItemEffect> getEffects() {
 		return effects;
 	}
 	
+	@Override
 	public String getSpecialEffect() {
 		return specialEffect;
 	}
 
+	@Override
 	public String getPotionDescriptor() {
 		return potionDescriptor;
 	}
 
-	public boolean isAbleToBeSold() {
-		return getRarity()!=Rarity.QUEST;
-	}
-	
-	public boolean isAbleToBeDropped() {
-		return getRarity()!=Rarity.QUEST;
-	}
-	
 	// Enchantments:
-	
-	public int getEnchantmentLimit() {
-		return 100;
-	}
-	
+
+	@Override
 	public AbstractItemEffectType getEnchantmentEffect() {
 		if(enchantmentEffectId==null || enchantmentEffectId.isEmpty()) {
 			return null;
@@ -477,6 +473,7 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		}
 	}
 	
+	@Override
 	public AbstractItemType getEnchantmentItemType(List<ItemEffect> effects) {
 		if(enchantmentItemTypeId==null || enchantmentItemTypeId.isEmpty()) {
 			return null;
@@ -486,19 +483,17 @@ public abstract class AbstractItemType extends AbstractCoreType {
 	
 	// Getters & setters:
 
+	@Override
 	public String getDeterminer() {
 		return (determiner!=null?determiner:"");
 	}
 
+	@Override
 	public boolean isPlural() {
 		return plural;
 	}
 
-	public String getName(boolean displayName) {
-		// by default, the display name is capitalised, and the bare name is not
-		return this.getName(displayName, displayName);
-	}
-	
+	@Override
 	public String getName(boolean displayName, boolean capitalise) {
 		String out;
 		if(displayName) {
@@ -512,12 +507,8 @@ public abstract class AbstractItemType extends AbstractCoreType {
 			return out;
 		}
 	}
-	
-	public String getNamePlural(boolean displayName) {
-		// by default, the display name is capitalised, and the bare name is not
-		return getNamePlural(displayName, displayName);
-	}
-	
+
+	@Override
 	public String getNamePlural(boolean displayName, boolean capitalise) {
 		String out;
 		if(displayName) {
@@ -532,14 +523,12 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		}
 	}
 
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
-	public boolean isAppendItemEffectLinesToTooltip() {
-		return true;
-	}
-	
+	@Override
 	public List<String> getEffectTooltipLines() {
 		List<String> parsed = new ArrayList<>();
 		for(String s : effectTooltipLines) {
@@ -597,28 +586,34 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		return parsed;
 	}
 
+	@Override
 	public String getDisplayName(boolean withRarityColour) {
 		return Util.capitaliseSentence((determiner!=null?determiner:"") + (withRarityColour
 				? (" <span style='color: " + rarity.getColour().toWebHexString() + ";'>" + (this.isPlural()?getNamePlural(false):getName(false)) + "</span>")
 				: (this.isPlural()?getNamePlural(false):getName(false))));
 	}
 
+	@Override
 	public List<SvgInformation> getPathNameInformation() {
 		return svgPathInformation;
 	}
 
+	@Override
 	public Colour getColour() {
 		return colourShades.get(0);
 	}
 
+	@Override
 	public List<Colour> getColourShades() {
 		return colourShades;
 	}
 
+	@Override
 	public int getValue() {
 		return value;
 	}
 
+	@Override
 	public String getSVGString() {
 		if(SVGString!=null)
 			return SVGString;
@@ -659,22 +654,17 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		return SVGString = SvgUtil.colourReplacement(this.getId(), getColourShades(), null, SVGString);
 	}
 
+	@Override
 	public Rarity getRarity() {
 		return rarity;
 	}
 
+	@Override
 	public String getUseName() {
 		return useDescriptor;
 	}
-	
-	public String getUseTooltipDescription(GameCharacter user, GameCharacter target) {
-		if(user==null || target==null || user.equals(target)) {
-			return Util.capitaliseSentence(getUseName()) + " the " + getName(false) + ".";
-		} else {
-			return UtilText.parse(target, "Get [npc.name] to " + getUseName() + " the " + getName(false) + ".");
-		}
-	}
-	
+
+	@Override
 	public String getUseDescription(GameCharacter user, GameCharacter target) {
 		if(user.equals(target)) {
 			return "<p>"
@@ -687,50 +677,27 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		}
 	}
 
-	public boolean isAbleToBeUsedFromInventory() {
-		return true;
-	}
-	
-	public String getUnableToBeUsedFromInventoryDescription() {
-		return "This item cannot be used in this way!";
-	}
-	
-	public boolean isAbleToBeUsed(GameCharacter user, GameCharacter target) {
-		return true;
-	}
-	
-	public String getUnableToBeUsedDescription(GameCharacter user, GameCharacter target) {
-		return "This item cannot be used in this way!";
-	}
-	
+	@Override
 	public boolean isAbleToBeUsedInSex() {
 		return sexUse;
 	}
 	
+	@Override
 	public boolean isAbleToBeUsedInCombatAllies() {
 		return combatUseAllies;
 	}
 	
+	@Override
 	public boolean isAbleToBeUsedInCombatEnemies() {
 		return combatUseEnemies;
 	}
 	
+	@Override
 	public boolean isConsumedOnUse() {
 		return consumedOnUse;
 	}
-	
-	public boolean isTransformative() {
-		return getItemTags().contains(ItemTag.RACIAL_TF_ITEM);
-	}
-	
-	public boolean isGift() {
-		return false;
-	}
-	
-	public boolean isFetishGiving() {
-		return false;
-	}
 
+	@Override
 	public Set<ItemTag> getItemTags() {
 		return itemTags;
 	}
@@ -738,6 +705,7 @@ public abstract class AbstractItemType extends AbstractCoreType {
 	/**
 	 * @return null if this ItemType is hard-coded, but will return a (potentially empty) Map if it's been generated from an xml file.
 	 */
+	@Override
 	public Map<AbstractStatusEffect, Value<String, Integer>> getAppliedStatusEffects() {
 		return appliedStatusEffects;
 	}

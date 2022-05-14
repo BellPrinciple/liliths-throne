@@ -1,31 +1,218 @@
 package com.lilithsthrone.game.inventory.weapon;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
+import com.lilithsthrone.game.character.GameCharacter;
+import com.lilithsthrone.game.combat.DamageType;
+import com.lilithsthrone.game.combat.DamageVariance;
+import com.lilithsthrone.game.combat.moves.AbstractCombatMove;
+import com.lilithsthrone.game.combat.spells.Spell;
+import com.lilithsthrone.game.dialogue.utils.UtilText;
+import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.AbstractSetBonus;
+import com.lilithsthrone.game.inventory.ColourReplacement;
+import com.lilithsthrone.game.inventory.ItemTag;
+import com.lilithsthrone.game.inventory.Rarity;
+import com.lilithsthrone.game.inventory.SetBonus;
+import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
+import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
+import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
+import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
+import com.lilithsthrone.utils.colours.Colour;
 
 /**
  * @since 0.1.84
  * @version 0.3.7.4
  * @author Innoxia
  */
-public class WeaponType {
-	
-	private static List<AbstractWeaponType> allWeapons = new ArrayList<>();
-	public static List<AbstractWeaponType> moddedWeapons = new ArrayList<>();
+public interface WeaponType extends AbstractCoreType {
 
-	public static Map<AbstractSetBonus, List<AbstractWeaponType>> setWeapons = new HashMap<>();
-	
-	public static Map<AbstractWeaponType, String> weaponToIdMap = new HashMap<>();
-	public static Map<String, AbstractWeaponType> idToWeaponMap = new HashMap<>();
-	
+	String getId();
 
+	boolean isMod();
+
+	String equipText(GameCharacter character);
+
+	String unequipText(GameCharacter character);
+
+	default String getAttackDescription(GameCharacter character, GameCharacter target, boolean isHit, boolean critical) {
+		if(isHit) {
+			return UtilText.parse(character, target, getHitText(character, target, critical));
+		} else {
+			return UtilText.parse(character, target, getMissText(character, target));
+		}
+	}
+
+	String getHitText(GameCharacter character, GameCharacter target, boolean critical);
+
+	String getMissText(GameCharacter character, GameCharacter target);
+
+	String getOneShotEndTurnRecoveryDescription(GameCharacter character);
+
+	default boolean isAbleToBeUsed(GameCharacter user, GameCharacter target) {
+		return getArcaneCost() <= 0 || user.getEssenceCount() > 0;
+	}
+
+	default String getUnableToBeUsedDescription() {
+		return getArcaneCost() <= 0 ? "" : "You need at least [style.boldBad(one)] [style.boldArcane(arcane essence)] in order to use this weapon!";
+	}
+
+	String applyExtraEffects(GameCharacter user, GameCharacter target, boolean isHit, boolean isCritical);
+
+	int getBaseValue();
+
+	default boolean isUsingUnarmedCalculation() {
+		return getItemTags().contains(ItemTag.WEAPON_UNARMED);
+	}
+
+	boolean isMelee();
+
+	boolean isTwoHanded();
+
+	boolean isOneShot();
+
+	float getOneShotChanceToRecoverAfterTurn();
+
+	float getOneShotChanceToRecoverAfterCombat();
+
+	boolean isAppendDamageName();
+
+	String getDeterminer();
+
+	boolean isPlural();
+
+	String getName();
+
+	String getNamePlural();
+
+	String getAttackDescriptor();
+
+	String getAttackDescriptionPrefix(GameCharacter user, GameCharacter target);
+
+	String getAttackDescription(GameCharacter user, GameCharacter target);
+
+	String getDescription();
+
+	List<String> getExtraEffects();
+
+	String getAuthorDescription();
+
+	Rarity getRarity();
+
+	float getPhysicalResistance();
+
+	SetBonus getClothingSet();
+
+	String getPathName();
+
+	String getEquippedPathName(GameCharacter characterEquippedTo);
+
+	boolean isEquippedSVGImageDifferent();
+
+	int getDamage();
+
+	DamageVariance getDamageVariance();
+
+	int getArcaneCost();
+
+	List<Util.Value<Integer, Integer>> getAoeDamage();
+
+	List<DamageType> getAvailableDamageTypes();
+
+	boolean isSpellRegenOnDamageTypeChange();
+
+	Map<DamageType,List<Spell>> getSpells();
+
+	List<Spell> getSpells(DamageType damageType);
+
+	boolean isCombatMoveRegenOnDamageTypeChange();
+
+	Map<DamageType,List<AbstractCombatMove>> getCombatMoves();
+
+	default List<AbstractCombatMove> getCombatMoves(DamageType damageType) {
+		var combatMoves = getCombatMoves();
+		var damageTypeCombatMoves = new ArrayList<AbstractCombatMove>();
+		if(combatMoves.containsKey(null))
+			damageTypeCombatMoves.addAll(combatMoves.get(null));
+		if(combatMoves.containsKey(damageType))
+			damageTypeCombatMoves.addAll(combatMoves.get(damageType));
+		return damageTypeCombatMoves;
+	}
+
+	default ColourReplacement getColourReplacement(boolean includeDamageTypeReplacement, int index) {
+		List<ColourReplacement> list = getColourReplacements(includeDamageTypeReplacement);
+		if(index>list.size()-1) {
+			return null;
+		}
+		return list.get(index);
+	}
+
+	List<ColourReplacement> getColourReplacements(boolean includeDamageTypeReplacement);
+
+	/**
+	 * @param list
+	 * Modifiable sequence of colors.
+	 */
+	default void applyGenerationColourReplacement(List<Colour> list) {
+	}
+
+	default String getSVGImage() {
+		DamageType dt = DamageType.PHYSICAL;
+		if (this.getAvailableDamageTypes() != null) {
+			if (!this.getAvailableDamageTypes().contains(dt)) {
+				dt = this.getAvailableDamageTypes().get(0);
+			}
+		}
+
+		List<Colour> colours = new ArrayList<>();
+
+		for(ColourReplacement cr : this.getColourReplacements(false)) {
+			colours.add(cr.getFirstOfDefaultColours());
+		}
+
+		return getSVGImage(dt, colours);
+	}
+
+	String getSVGImage(DamageType dt, List<Colour> colours);
+
+	String getSVGImageDesaturated();
+
+	String getSVGEquippedImage(GameCharacter characterEquipped);
+
+	String getSVGEquippedImage(GameCharacter characterEquipped, DamageType dt, List<Colour> colours);
+
+	String getSVGEquippedImageDesaturated(GameCharacter characterEquipped);
+
+	// Enchantments:
+
+	List<ItemEffect> getEffects();
+
+	default boolean isAbleToBeSold() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	default boolean isAbleToBeDropped() {
+		return getRarity()!=Rarity.QUEST;
+	}
+
+	default int getEnchantmentLimit() {
+		return 100;
+	}
+
+	default AbstractItemEffectType getEnchantmentEffect() {
+		return ItemEffectType.WEAPON;
+	}
+
+	default AbstractWeaponType getEnchantmentItemType(List<ItemEffect> effects) {
+		return (AbstractWeaponType)this;
+	}
+
+	List<ItemTag> getItemTags();
+
+	@Deprecated
 	public static AbstractWeaponType getWeaponTypeFromId(String id) {
 		return getWeaponTypeFromId(id, true);
 	}
@@ -34,7 +221,10 @@ public class WeaponType {
 	 * @param closestMatch Pass in true if you want to get whatever WeaponType has the closest match to the provided id, even if it's not exactly the same.
 	 */
 	public static AbstractWeaponType getWeaponTypeFromId(String id, boolean closestMatch) {
-//		System.out.print("ID: "+id);
+		return closestMatch ? table.of(id) : table.exact(id).orElse(null);
+	}
+
+	private static String sanitize(String id) {
 		
 		if(id.equals("RANGED_MUSKET")) {	
 			id = "innoxia_gun_arcane_musket";
@@ -92,76 +282,35 @@ public class WeaponType {
 			id = "innoxia_crystal_legendary";
 		}
 		
-		if(closestMatch) {
-			id = Util.getClosestStringMatch(id, idToWeaponMap.keySet());
-		}
-		
-		return idToWeaponMap.get(id);
-	}
-	
-	public static String getIdFromWeaponType(AbstractWeaponType weaponType) {
-		return weaponToIdMap.get(weaponType);
+		return id;
 	}
 
-	static {
+	public static String getIdFromWeaponType(AbstractWeaponType weaponType) {
+		return weaponType.getId();
+	}
+
+	Table<AbstractWeaponType> table = new Table<>(WeaponType::sanitize) {{
 
 		// Modded weapon types:
-		
-		moddedWeapons = new ArrayList<>();
-		
-		Map<String, Map<String, File>> moddedFilesMap = Util.getExternalModFilesById("/items/weapons");
-		for(Entry<String, Map<String, File>> entry : moddedFilesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey();
-					AbstractWeaponType ct = new AbstractWeaponType(innerEntry.getValue(), entry.getKey(), true) {};
-					moddedWeapons.add(ct);
-					weaponToIdMap.put(ct, id);
-					idToWeaponMap.put(id, ct);
-				} catch(Exception ex) {
-					System.err.println("Loading modded weapon failed at 'WeaponType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		allWeapons.addAll(moddedWeapons);
-		
-		// External res weapon types:
+		forEachMod("/items/weapons",null,null,(f,n,a)->{
+			var v = new AbstractWeaponType(f,a,true) {};
+			v.id = n;
+			add(n,v);
+		});
 
-		Map<String, Map<String, File>> filesMap = Util.getExternalFilesById("res/weapons");
-		for(Entry<String, Map<String, File>> entry : filesMap.entrySet()) {
-			for(Entry<String, File> innerEntry : entry.getValue().entrySet()) {
-				try {
-					String id = innerEntry.getKey();
-					AbstractWeaponType ct = new AbstractWeaponType(innerEntry.getValue(), entry.getKey(), false) {};
-					allWeapons.add(ct);
-					weaponToIdMap.put(ct, id);
-					idToWeaponMap.put(id, ct);
-//					System.out.println("WT: "+innerEntry.getKey());
-				} catch(Exception ex) {
-					System.err.println("Loading weapon failed at 'WeaponType'. File path: "+innerEntry.getValue().getAbsolutePath());
-					System.err.println("Actual exception: ");
-					ex.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		setWeapons = new HashMap<>();
-		for(AbstractWeaponType wt : allWeapons) {
-			if(wt.getClothingSet()!=null) {
-				setWeapons.putIfAbsent(wt.getClothingSet(), new ArrayList<>());
-				setWeapons.get(wt.getClothingSet()).add(wt);
-			}
-		}
-	}
+		// External res weapon types:
+		forEachExternal("res/weapons",null,null,(f,n,a)->{
+			var v = new AbstractWeaponType(f,a,false) {};
+			v.id = n;
+			add(n,v);
+		});
+	}};
 
 	public static List<AbstractWeaponType> getAllWeapons() {
-		return allWeapons;
+		return table.list();
 	}
-	
+
 	public static List<AbstractWeaponType> getAllWeaponsInSet(AbstractSetBonus setBonus) {
-		return setWeapons.get(setBonus);
+		return table.list().stream().filter(w -> setBonus.equals(w.getClothingSet())).toList();
 	}
 }

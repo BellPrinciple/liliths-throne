@@ -50,7 +50,6 @@ import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.responses.ResponseSex;
-import com.lilithsthrone.game.inventory.AbstractSetBonus;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
@@ -455,7 +454,7 @@ public class DebugDialogue {
 							Main.saveProperties();
 						}
 					};
-					
+
 				} else if (index == 15) {
 					return new Response("Reset virginities", "Removes all of your virginity loss information as well as resetting all orifices to being 'virgin'.", DEBUG_MENU){
 						@Override
@@ -463,7 +462,7 @@ public class DebugDialogue {
 							Main.game.getPlayer().completeVirginityReset();
 						}
 					};
-					
+
 				}
 				
 			} else if(responseTab==2) {
@@ -596,7 +595,7 @@ public class DebugDialogue {
 								}
 							}
 						};
-						
+
 					} else {
 						return new Response("Get slaver license", "You've already completed the side quest to obtain a slaver license.", null);
 					}
@@ -761,16 +760,16 @@ public class DebugDialogue {
 							Perk.POWER_OF_LUNETTE_5_DEMON,
 							Perk.POWER_OF_LYXIAS_6_DEMON,
 							Perk.POWER_OF_LISOPHIA_7_DEMON);
-					
+
 					AbstractPerk perk = powerPerks.get(index-20);
 					AbstractPerk perkDemon = powerPerksDemon.get(index-20);
-					
+
 					return new Response("Elder Lilin perk", "Toggle perk.", DEBUG_MENU) {
 						@Override
 						public String getTitle() {
 							return perk.getName(null)+": "+(Main.game.getPlayer().hasPerkAnywhereInTree(perk) || Main.game.getPlayer().hasPerkAnywhereInTree(perkDemon)?"[style.colourGood(ON)]":"[style.colourDisabled(OFF)]");
 						}
-						
+
 						@Override
 						public void effects() {
 							if(Main.game.getPlayer().hasPerkAnywhereInTree(perk) || Main.game.getPlayer().hasPerkAnywhereInTree(perkDemon)) {
@@ -953,7 +952,7 @@ public class DebugDialogue {
 						};
 					}
 				}
-				
+
 			} else if(responseTab==4) {
 				List<PersonalityTrait> pt = Arrays.asList(PersonalityTrait.values());
 				for(int i=1; i<=pt.size();i++) {
@@ -1095,7 +1094,7 @@ public class DebugDialogue {
 
 		tattoosTotal.addAll(TattooType.getAllTattooTypes());
 		Collections.sort(tattoosTotal, (i1, i2) -> i1.getRarity().compareTo(i2.getRarity()));
-		
+
 		itemsTotal.addAll(ItemType.getAllItems());
 		itemsTotal.removeIf((i) -> i.getItemTags().contains(ItemTag.REMOVE_FROM_DEBUG_SPAWNER) || i.getItemTags().contains(ItemTag.CHEAT_ITEM));
 		Collections.sort(itemsTotal, (i1, i2) -> i1.getRarity().compareTo(i2.getRarity()));
@@ -1255,9 +1254,9 @@ public class DebugDialogue {
 			
 			inventorySB.append("<div class='container-full-width'>");
 			
-			List<AbstractSetBonus> bonuses = new ArrayList<>(SetBonus.allSetBonuses);
+			List<AbstractSetBonus> bonuses = new ArrayList<>(SetBonus.table.list());
 			bonuses.sort((sb1, sb2) -> sb1.getName().compareTo(sb2.getName()));
-			
+
 			for(AbstractSetBonus sb : bonuses) {
 				inventorySB.append("<div class='normal-button' id='SET_BONUS_"+SetBonus.getIdFromSetBonus(sb)+"' style='text-align:center;width:23%; margin:1%; padding:2px; font-size:0.9em;'>");
 				inventorySB.append("<b style='color:"+sb.getAssociatedStatusEffect().getColour().toWebHexString()+";'>#</b>");
@@ -1381,7 +1380,7 @@ public class DebugDialogue {
 										+ "</div>");
 				}
 				inventorySB.append("</div>");
-				
+
 			} else if(itemViewSlot!=null && !itemViewSlot.isWeapon()) {
 				List<AbstractClothingType> clothingToDisplay = clothingTotal.stream().filter((c) -> c.getEquipSlots().get(0)==itemViewSlot).collect(Collectors.toList());
 				inventorySB.append("<div class='inventory-not-equipped' style='-webkit-user-select:auto;'>"
@@ -1399,7 +1398,7 @@ public class DebugDialogue {
 				}
 				inventorySB.append("</div>");
 			}
-			
+
 			return inventorySB.toString();
 		}
 
@@ -1730,7 +1729,7 @@ public class DebugDialogue {
 							
 							if(subspecies==Subspecies.DEMON) {
 								stage = RaceStage.GREATER;
-								
+
 								DialogueFlags dialogueFlags = Main.game.getDialogueFlags();
 								if(!dialogueFlags.hasFlag("innoxia_child_of_lyssieth")
 										&& !dialogueFlags.hasFlag("innoxia_child_of_lunette")

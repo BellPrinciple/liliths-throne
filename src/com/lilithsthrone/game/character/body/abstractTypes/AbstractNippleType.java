@@ -12,11 +12,10 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.coverings.AbstractBodyCoveringType;
 import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
-import com.lilithsthrone.game.character.body.types.BodyPartTypeInterface;
+import com.lilithsthrone.game.character.body.types.NippleType;
 import com.lilithsthrone.game.character.body.valueEnums.OrificeModifier;
 import com.lilithsthrone.game.character.race.AbstractRace;
 import com.lilithsthrone.game.character.race.Race;
-import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.Util;
 
 /**
@@ -24,7 +23,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractNippleType implements BodyPartTypeInterface {
+public abstract class AbstractNippleType implements NippleType {
 
 	private boolean mod;
 	private boolean fromExternalFile;
@@ -106,99 +105,15 @@ public abstract class AbstractNippleType implements BodyPartTypeInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	public boolean isMod() {
 		return mod;
 	}
 
+	@Override
 	public boolean isFromExternalFile() {
 		return fromExternalFile;
-	}
-	
-	@Override
-	public String getDeterminer(GameCharacter gc) {
-		if(gc.getBreastRows()==1) {
-			return "a pair of";
-		} else if(gc.getBreastRows()==2) {
-			return "two pairs of";
-		} else {
-			return "three pairs of";
-		}
-	}
-
-	@Override
-	public boolean isDefaultPlural(GameCharacter gc) {
-		return true;
-	}
-
-	@Override
-	public String getNameSingular(GameCharacter gc) {
-		switch(gc.getNippleShape()) {
-			case LIPS:
-				return  UtilText.returnStringAtRandom("lipple", "nipple-lip");
-			case INVERTED:
-			case NORMAL:
-				if(gc.hasBreasts()) {
-					return UtilText.returnStringAtRandom("nipple", "teat");
-				} else {
-					return "nipple";
-				}
-			case VAGINA:
-				return UtilText.returnStringAtRandom("nipple-cunt", "nipple-pussy");
-		}
-		return "";
-	}
-	
-	@Override
-	public String getNamePlural(GameCharacter gc) {
-		switch(gc.getNippleShape()) {
-			case LIPS:
-				return  UtilText.returnStringAtRandom("lipples", "nipple-lips");
-			case INVERTED:
-			case NORMAL:
-				if(gc.hasBreasts()) {
-					return UtilText.returnStringAtRandom("nipples", "teats");
-				} else {
-					return "nipples";
-				}
-			case VAGINA:
-				return UtilText.returnStringAtRandom("nipple-cunts", "nipple-pussies");
-		}
-		return "";
-	}
-
-	public String getNameCrotchSingular(GameCharacter gc) {
-		switch(gc.getNippleCrotchShape()) {
-			case LIPS:
-				return  UtilText.returnStringAtRandom("lipple", "nipple-lip");
-			case INVERTED:
-			case NORMAL:
-				if(gc.hasBreasts()) {
-					return UtilText.returnStringAtRandom("nipple", "teat");
-				} else {
-					return "nipple";
-				}
-			case VAGINA:
-				return UtilText.returnStringAtRandom("nipple-cunt", "nipple-pussy");
-		}
-		return "";
-	}
-	
-	public String getNameCrotchPlural(GameCharacter gc) {
-		switch(gc.getNippleCrotchShape()) {
-			case LIPS:
-				return  UtilText.returnStringAtRandom("lipples", "nipple-lips");
-			case INVERTED:
-			case NORMAL:
-				if(gc.hasBreasts()) {
-					return UtilText.returnStringAtRandom("nipples", "teats");
-				} else {
-					return "nipples";
-				}
-			case VAGINA:
-				return UtilText.returnStringAtRandom("nipple-cunts", "nipple-pussies");
-		}
-		return "";
 	}
 	
 	@Override
@@ -220,6 +135,7 @@ public abstract class AbstractNippleType implements BodyPartTypeInterface {
 		return race;
 	}
 
+	@Override
 	public List<OrificeModifier> getDefaultRacialOrificeModifiers() {
 		return defaultRacialOrificeModifiers;
 	}
