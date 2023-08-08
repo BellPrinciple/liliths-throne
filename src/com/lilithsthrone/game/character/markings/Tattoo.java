@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.character.markings;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -274,29 +272,16 @@ public class Tattoo extends AbstractCoreItem implements XMLSaving {
 	
 	private String getSVGGlow() {
 		String stringFromMap = SVGGlowMap.get(this.getPrimaryColour());
-		if (stringFromMap!=null) {
+		if(stringFromMap!=null)
 			return stringFromMap;
-			
-		} else {
-			try {
-				InputStream is;
-				String s;
-				
-				is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/tattoos/glow.svg");
-				s = Util.inputStreamToString(is);
-				is.close();
-				
-				s = SvgUtil.colourReplacement("tattooGlow"+this.getPrimaryColour().getId(), this.getPrimaryColour(), this.getPrimaryColour(), this.getPrimaryColour(), s);
-				
-				SVGGlowMap.put(this.getPrimaryColour(), s);
-				
-				return s;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	
-		return "";
+		String s = SvgUtil.colourReplacement(
+				"tattooGlow"+getPrimaryColour().getId(),
+				getPrimaryColour(),
+				getPrimaryColour(),
+				getPrimaryColour(),
+				SvgUtil.loadFromResource("/com/lilithsthrone/res/tattoos/glow.svg"));
+		SVGGlowMap.put(getPrimaryColour(), s);
+		return s;
 	}
 
 	public Rarity getRarity() {

@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.character.fetishes;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +9,6 @@ import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.character.attributes.CorruptionLevel;
 import com.lilithsthrone.game.character.effects.Perk;
-import com.lilithsthrone.game.character.race.Subspecies;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Util;
@@ -42,31 +39,15 @@ public abstract class AbstractFetish {
 	private List<AbstractFetish> fetishesForAutomaticUnlock;
 
 	protected static List<String> perkRequirementsList = new ArrayList<>();
-	
-	protected static String bimboString = "";
-	protected static String broString = "";
-	
-	static {
-		try {
-			InputStream is = Subspecies.class.getResourceAsStream("/com/lilithsthrone/res/fetishes/fetish_bimbo.svg");
-			if(is==null) {
-				System.err.println("Error! Fetish icon file does not exist (Trying to read from 'com/lilithsthrone/res/fetishes/fetish_bimbo')!");
-			}
-			bimboString = Util.inputStreamToString(is);
-			bimboString = SvgUtil.colourReplacement("FETISH_BIMBO", PresetColour.BASE_PINK, bimboString);
-			is.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			InputStream is = Subspecies.class.getResourceAsStream("/com/lilithsthrone/res/fetishes/fetish_bro.svg");
-			broString = Util.inputStreamToString(is);
-			broString = SvgUtil.colourReplacement("FETISH_BRO", PresetColour.BASE_BLUE, broString);
-			is.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
+	protected static final String bimboString = SvgUtil.colourReplacement(
+			"FETISH_BIMBO",
+			PresetColour.BASE_PINK,
+			SvgUtil.loadFromResource("/com/lilithsthrone/res/fetishes/fetish_bimbo.svg"));
+	protected static final String broString = SvgUtil.colourReplacement(
+			"FETISH_BRO",
+			PresetColour.BASE_BLUE,
+			SvgUtil.loadFromResource("/com/lilithsthrone/res/fetishes/fetish_bro.svg"));
 
 	public AbstractFetish(
 			int renderingPriority,
@@ -248,19 +229,12 @@ public abstract class AbstractFetish {
 	public String getSVGString(GameCharacter owner) {
 		if(SVGString==null) {
 			if(pathName!=null && !pathName.isEmpty()) {
-				try {
-					InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/fetishes/" + pathName + ".svg");
-					if(is==null) {
-						System.err.println("Error! Fetish icon file does not exist (Trying to read from '"+pathName+"')!");
-					}
-					SVGString = Util.inputStreamToString(is);
-					SVGString = SvgUtil.colourReplacement(this.getId(), colourShades, null, SVGString);
-//					SVGString = SvgUtil.colourReplacement(this.getId(), colourShades.get(0), colourShades.size()>=2?colourShades.get(1):null, colourShades.size()>=3?colourShades.get(2):null, SVGString);
-					is.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
+				SVGString = SvgUtil.colourReplacement(
+						getId(),
+						colourShades,
+						null,
+						SvgUtil.loadFromResource("fetishes/"+pathName));
+//				SVGString = SvgUtil.colourReplacement(this.getId(), colourShades.get(0), colourShades.size()>=2?colourShades.get(1):null, colourShades.size()>=3?colourShades.get(2):null, SVGString);
 			} else {
 				SVGString = "";
 			}

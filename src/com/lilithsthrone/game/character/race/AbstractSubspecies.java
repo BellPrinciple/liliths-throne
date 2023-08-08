@@ -1,10 +1,6 @@
 package com.lilithsthrone.game.character.race;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.rmi.AccessException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -85,7 +81,7 @@ public abstract class AbstractSubspecies {
 	private FeralAttributes feralAttributes;
 	
 	private Nocturnality nocturnality;
-	
+
 	private String statusEffectDescription;
 	private Map<PerkCategory, Integer> perkWeightingFeminine;
 	private Map<PerkCategory, Integer> perkWeightingMasculine;
@@ -199,56 +195,30 @@ public abstract class AbstractSubspecies {
 		youkoIconMap = new HashMap<>();
 		youkoHalfDemonIconMap = new HashMap<>();
 		for(int i=1; i<=9; i++) {
-			try {
-				String SVGStringBackground = "";
-				InputStream is = Subspecies.class.getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceBackground.svg");
-				if(is==null) {
-					System.err.println("Error! Subspecies background icon file does not exist (Trying to read from 'statusEffects/race/raceBackground')! (Code 1f)");
-				}
-				SVGStringBackground = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+Util.inputStreamToString(is)+"</div>";
-
-				is.close();
-				
-				String baseSVGString = SVGStringBackground + "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getFoxTail(i)+"</div>";
-				youkoIconMap.put(i, baseSVGString);
-
-				baseSVGString = SvgUtil.colourReplacement("youkohalfDemon"+i,
-							PresetColour.RACE_HALF_DEMON,
-							PresetColour.RACE_HALF_DEMON,
-							PresetColour.RACE_HALF_DEMON,
-							"<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>" + SVGImages.SVG_IMAGE_PROVIDER.getRaceBackgroundDemon()+"</div>"
-								+ "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getFoxTailDemon(i)+"</div>");
-				youkoHalfDemonIconMap.put(i, baseSVGString);
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			String SVGStringBackground = SvgUtil.loadFromResource(
+					"/com/lilithsthrone/res/statusEffects/race/raceBackground.svg");
+			SVGStringBackground = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGStringBackground+"</div>";
+			String baseSVGString = SVGStringBackground + "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getFoxTail(i)+"</div>";
+			youkoIconMap.put(i, baseSVGString);
+			baseSVGString = SvgUtil.colourReplacement("youkohalfDemon"+i,
+						PresetColour.RACE_HALF_DEMON,
+						PresetColour.RACE_HALF_DEMON,
+						PresetColour.RACE_HALF_DEMON,
+						"<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>" + SVGImages.SVG_IMAGE_PROVIDER.getRaceBackgroundDemon()+"</div>"
+							+ "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getFoxTailDemon(i)+"</div>");
+			youkoHalfDemonIconMap.put(i, baseSVGString);
 		}
 		youkoDesaturatedIconMap = new HashMap<>();
 		for(int i=1; i<=9; i++) {
-			try {
-				String SVGStringBackground = "";
-				InputStream is = Subspecies.class.getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceBackground.svg");
-				if(is==null) {
-					System.err.println("Error! Subspecies background icon file does not exist (Trying to read from 'statusEffects/race/raceBackground')! (Code 2f)");
-				}
-				SVGStringBackground = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+Util.inputStreamToString(is)+"</div>";
-				
-				is.close();
-				
-				String baseSVGString = SVGStringBackground + "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getFoxTailDesaturated(i)+"</div>";
-				
-				baseSVGString = SvgUtil.colourReplacement("youkoGradient"+i,
-						PresetColour.BASE_GREY,
-						PresetColour.BASE_GREY,
-						PresetColour.BASE_GREY,
-						baseSVGString);
-				
-				youkoDesaturatedIconMap.put(i, baseSVGString);
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			String SVGStringBackground = SvgUtil.loadFromResource("/com/lilithsthrone/res/statusEffects/race/raceBackground.svg");
+			SVGStringBackground = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGStringBackground+"</div>";
+			String baseSVGString = SVGStringBackground + "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGImages.SVG_IMAGE_PROVIDER.getFoxTailDesaturated(i)+"</div>";
+			baseSVGString = SvgUtil.colourReplacement("youkoGradient"+i,
+					PresetColour.BASE_GREY,
+					PresetColour.BASE_GREY,
+					PresetColour.BASE_GREY,
+					baseSVGString);
+			youkoDesaturatedIconMap.put(i, baseSVGString);
 		}
 	}
 	
@@ -1547,39 +1517,25 @@ public abstract class AbstractSubspecies {
 		if(character!=null) {
 			//character.isTorsoFeral() 
 			if(character.isFeral() || (character.isElemental() && ((Elemental)character).getSummoner()!=null && !((Elemental)character).getSummoner().isElementalActive())) {
-				try {
-					String feralBackground = "";
-					InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/statusEffects/race/raceBackgroundFeral.svg");
-					feralBackground = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+Util.inputStreamToString(is)+"</div>";
-					is.close();
-					feralBackground = SvgUtil.colourReplacement(Subspecies.getIdFromSubspecies(this)+"FERAL",
-							colour,
-							secondaryColour,
-							tertiaryColour,
-							feralBackground);
-					
-					returnString = returnString + "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>" + feralBackground +"</div>";
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
+				String feralBackground = SvgUtil.loadFromResource("/com/lilithsthrone/res/statusEffects/race/raceBackgroundFeral.svg");
+				feralBackground = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+feralBackground+"</div>";
+				feralBackground = SvgUtil.colourReplacement(Subspecies.getIdFromSubspecies(this)+"FERAL",
+						colour,
+						secondaryColour,
+						tertiaryColour,
+						feralBackground);
+				returnString = returnString + "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>" + feralBackground +"</div>";
 			} else {
 				String backgroundPath = character.getLegConfiguration().getSubspeciesStatusEffectBackgroundPath();
 				if(!backgroundPath.isEmpty()) {
-					try {
-						String SVGStringLegConfigurationBackground = "";
-						InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/"+backgroundPath+".svg");
-						SVGStringLegConfigurationBackground = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+Util.inputStreamToString(is)+"</div>";
-						is.close();
-						SVGStringLegConfigurationBackground = SvgUtil.colourReplacement(Subspecies.getIdFromSubspecies(this)+"NBPID",
-								colour,
-								secondaryColour,
-								tertiaryColour,
-								SVGStringLegConfigurationBackground);
-						returnString = SVGStringLegConfigurationBackground + "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>" + svg +"</div>";
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+					String SVGStringLegConfigurationBackground = SvgUtil.loadFromResource("/com/lilithsthrone/res/"+backgroundPath+".svg");
+					SVGStringLegConfigurationBackground = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+SVGStringLegConfigurationBackground+"</div>";
+					SVGStringLegConfigurationBackground = SvgUtil.colourReplacement(Subspecies.getIdFromSubspecies(this)+"NBPID",
+							colour,
+							secondaryColour,
+							tertiaryColour,
+							SVGStringLegConfigurationBackground);
+					returnString = SVGStringLegConfigurationBackground + "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>" + svg +"</div>";
 				}
 			}
 		}
@@ -1587,81 +1543,43 @@ public abstract class AbstractSubspecies {
 	}
 
 	protected void initBookSVGString() {
-		try {
-			if(this.isFromExternalFile()) {
-				List<String> lines = Files.readAllLines(Paths.get(bookPathName + ".svg"));
-				StringBuilder sb = new StringBuilder();
-				for(String line : lines) {
-					sb.append(line);
-				}
-				bookSVGString = sb.toString();
-				
-			} else {
-				InputStream is = this.getClass().getResourceAsStream(bookPathName + ".svg");
-				if(is==null) {
-					System.err.println("Error! Subspecies book icon file does not exist (Trying to read from '"+bookPathName+"')! (Code 1)");
-				}
-				bookSVGString = Util.inputStreamToString(is);
-				is.close();
-			}
-			
-			bookSVGString = SvgUtil.colourReplacement(Subspecies.getIdFromSubspecies(this),
-					colour,
-					getSecondaryColour(),
-					getTertiaryColour(),
-					"<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+bookSVGString+"</div>");
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(this.isFromExternalFile()) {
+			bookSVGString = Util.getFileContent(bookPathName + ".svg");
+		} else {
+			bookSVGString = SvgUtil.loadFromResource(bookPathName + ".svg");
 		}
+		bookSVGString = SvgUtil.colourReplacement(Subspecies.getIdFromSubspecies(this),
+				colour,
+				getSecondaryColour(),
+				getTertiaryColour(),
+				"<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;'>"+bookSVGString+"</div>");
 	}
 	
 	protected void initSVGStrings() {
 		if(getPathName()!=null) {
 			String fullDivStyle = "width:100%;height:100%;margin:0;padding:0;position:absolute;left:0;bottom:0;";
-			
-			try {
-				if(this.isFromExternalFile() || getPathName().startsWith("res")) {
-					List<String> lines = Files.readAllLines(Paths.get(getPathName()+".svg"));
-					StringBuilder sb = new StringBuilder();
-					for(String line : lines) {
-						sb.append(line);
-					}
-					SVGStringUncoloured = sb.toString();
-					float iconResizeBorder = (100-getIconSize())/2f;
-					SVGStringUncoloured = "<div style='width:"+getIconSize()+"%;height:"+getIconSize()+"%;position:absolute;left:"+iconResizeBorder+"%;bottom:"+iconResizeBorder+"%;'>"+SVGStringUncoloured+"</div>";
-					
-				} else {
-					InputStream is = this.getClass().getResourceAsStream(getPathName() + ".svg");
-					if(is==null) {
-						System.err.println("Error! Subspecies icon file does not exist (Trying to read from '"+getPathName()+"')! (Code 1)");
-					}
-					SVGStringUncoloured = Util.inputStreamToString(is);
-					is.close();
-				}
-				
-				
-				String SVGStringBackground = "";
 
-				if(this.externalFileBackground) {
-					List<String> lines = Files.readAllLines(Paths.get(getBackgroundPathName()+".svg"));
-					StringBuilder sb = new StringBuilder();
-					for(String line : lines) {
-						sb.append(line);
-					}
-					SVGStringBackground = "<div style='"+fullDivStyle+"'>"+sb.toString()+"</div>";
-					
-				} else {
-					if(!getBackgroundPathName().isEmpty()) {
-						InputStream is = this.getClass().getResourceAsStream(getBackgroundPathName() + ".svg");
-						if(is==null) {
-							System.err.println("Error! Subspecies background icon file does not exist (Trying to read from '"+getBackgroundPathName()+"')! (Code 1)");
-						}
-						SVGStringBackground = "<div style='"+fullDivStyle+"'>"+Util.inputStreamToString(is)+"</div>";
-						
-						is.close();
-					}
+			String path = getPathName() + ".svg";
+			if(this.isFromExternalFile() || getPathName().startsWith("res")) {
+				String image = Util.getFileContent(path);
+				float iconResizeBorder = (100-getIconSize())/2f;
+				SVGStringUncoloured = "<div style='width:"+getIconSize()+"%;height:"+getIconSize()+"%;position:absolute;left:"+iconResizeBorder+"%;bottom:"+iconResizeBorder+"%;'>"+image+"</div>";
+			} else {
+				SVGStringUncoloured = SvgUtil.loadFromResource(path);
+			}
+
+			String backgroundPath = getBackgroundPathName() + ".svg";
+			String SVGStringBackground = "";
+			if(this.externalFileBackground) {
+				String image = Util.getFileContent(backgroundPath);
+				SVGStringBackground = "<div style='"+fullDivStyle+"'>"+image+"</div>";
+			} else {
+				if(!getBackgroundPathName().isEmpty()) {
+					SVGStringBackground = SvgUtil.loadFromResource(backgroundPath);
+					SVGStringBackground = "<div style='"+fullDivStyle+"'>"+SVGStringBackground+"</div>";
 				}
-				
+			}
+
 				initBookSVGString();
 				
 				SVGStringNoBackground = SvgUtil.colourReplacement(Subspecies.getIdFromSubspecies(this),
@@ -1720,10 +1638,7 @@ public abstract class AbstractSubspecies {
 						getSecondaryColour(),
 						getTertiaryColour(),
 						SVGStringUncoloured);
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+
 			
 		} else {
 			SVGString = "";

@@ -1,10 +1,6 @@
 package com.lilithsthrone.game.combat.moves;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -160,49 +156,34 @@ public abstract class AbstractCombatMove {
     		boolean canTargetSelf,
 			Map<AbstractStatusEffect, Integer> statusEffects,
 			Map<AbstractStatusEffect, Integer> statusEffectsCritical) {
-    	this.fromExternalFile = false;
-    	this.mod = false;
-    	
-    	this.category = category;
-        this.name = name;
-        this.description = "This action does nothing.";
-        this.performingText = "The move is performed.";
-        
-        this.cooldown = cooldown;
-        this.APcost = APcost;
-        this.equipWeighting = equipWeighting;
-        this.type = type;
-        this.baseDamage = 0;
-        this.damageType = damageType;
+		this.fromExternalFile = false;
+		this.mod = false;
+
+		this.category = category;
+		this.name = name;
+		this.description = "This action does nothing.";
+		this.performingText = "The move is performed.";
+
+		this.cooldown = cooldown;
+		this.APcost = APcost;
+		this.equipWeighting = equipWeighting;
+		this.type = type;
+		this.baseDamage = 0;
+		this.damageType = damageType;
 		this.damageVariance = damageVariance;
-        this.canTargetEnemies = canTargetEnemies;
-        this.canTargetAllies = canTargetAllies;
-        this.canTargetSelf = canTargetSelf;
-        
-        this.statusEffects = statusEffects;
-        this.statusEffectsCritical = statusEffectsCritical;
+		this.canTargetEnemies = canTargetEnemies;
+		this.canTargetAllies = canTargetAllies;
+		this.canTargetSelf = canTargetSelf;
 
-        this.associatedSpell = null;
-        
-        try {
-            InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/" + pathName + ".svg");
-            if(is==null) {
-                System.err.println("Error! CombatMove icon file does not exist (Trying to read from '"+pathName+"')!");
-            }
-            SVGString = Util.inputStreamToString(is);
-            
-            if(iconColours!=null) {
-            	SVGString = SvgUtil.colourReplacement("CM", iconColours.get(0), iconColours.size()>1?iconColours.get(1):null, iconColours.size()>2?iconColours.get(2):null, SVGString);
-            } else {
-            	SVGString = SvgUtil.colourReplacement("CM", type.getColour(), SVGString);
-            }
+		this.statusEffects = statusEffects;
+		this.statusEffectsCritical = statusEffectsCritical;
 
-            is.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		this.associatedSpell = null;
+		String image = SvgUtil.loadFromResource("/com/lilithsthrone/res/" + pathName + ".svg");
+		SVGString = iconColours != null
+				? SvgUtil.colourReplacement("CM", iconColours.get(0), iconColours.size() > 1 ? iconColours.get(1) : null, iconColours.size() > 2 ? iconColours.get(2) : null, image)
+				: SvgUtil.colourReplacement("CM", type.getColour(), image);
+	}
 
 	public AbstractCombatMove(File XMLFile, String author, boolean mod) {
 		if (XMLFile.exists()) {
@@ -277,21 +258,8 @@ public abstract class AbstractCombatMove {
 					colourShadeTertiary = PresetColour.getColourFromId(coreElement.getMandatoryFirstOf("colourTertiary").getTextContent());
 				}
 				List<Colour> colourShades = Util.newArrayListOfValues(colourShade, colourShadeSecondary, colourShadeTertiary);
-				
-
-		        try {
-					List<String> lines = Files.readAllLines(Paths.get(pathName));
-					StringBuilder sb = new StringBuilder();
-					for(String line : lines) {
-						sb.append(line);
-					}
-					SVGString = sb.toString();
-					SVGString = SvgUtil.colourReplacement(this.getIdentifier(), colourShades, null, SVGString);
-					
-				} catch (IOException e) {
-		            e.printStackTrace();
-		        }
-				
+				SVGString = Util.getFileContent(pathName);
+				SVGString = SvgUtil.colourReplacement(getIdentifier(), colourShades, null, SVGString);
 				this.statusEffects = new HashMap<>();
 				this.statusEffectsCritical = new HashMap<>();
 				if(coreElement.getOptionalFirstOf("statusEffects").isPresent()) {

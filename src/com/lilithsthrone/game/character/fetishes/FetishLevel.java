@@ -1,10 +1,6 @@
 package com.lilithsthrone.game.character.fetishes;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.lilithsthrone.utils.SvgUtil;
-import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -45,21 +41,8 @@ public enum FetishLevel {
 		this.minimumExperience = minimumExperience;
 		this.maximumExperience = maximumExperience;
 		this.colour = colour;
-		
-		try {
-			InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/fetishes/" + pathName + ".svg");
-			if(is==null) {
-				System.err.println("Error! FetishLevel icon file does not exist (Trying to read from '"+pathName+"')!");
-			}
-			SVGImageOverlay = Util.inputStreamToString(is);
-			
-			SVGImageOverlay = SvgUtil.colourReplacement(this.toString(), PresetColour.BASE_PINK, SVGImageOverlay);
-
-			is.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		SVGImageOverlay = SvgUtil.loadFromResource("/com/lilithsthrone/res/fetishes/" + pathName + ".svg");
+		SVGImageOverlay = SvgUtil.colourReplacement(this.toString(), PresetColour.BASE_PINK, SVGImageOverlay);
 	}
 
 	public String getName() {

@@ -1,8 +1,6 @@
 package com.lilithsthrone.rendering;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -110,18 +108,8 @@ public class Pattern {
 		
 		baseSVGString = "";
 		if(!name.equals("none")) {
-			try {
-				String fileName = xmlFile.getParent() + File.separator + name + ".svg";
-				File patternFile = new File(fileName);
-				List<String> lines = Files.readAllLines(patternFile.toPath());
-				StringBuilder sb = new StringBuilder();
-				for(String line : lines) {
-					sb.append(line);
-				}
-				baseSVGString = sb.toString();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			String fileName = xmlFile.getParent() + File.separator + name + ".svg";
+			baseSVGString = Util.getFileContent(fileName);
 		}
 		
 	}

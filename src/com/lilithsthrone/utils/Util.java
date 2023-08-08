@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -381,7 +382,19 @@ public class Util {
 		}
 		return "Unknown";
 	}
-	
+
+	public static String getFileContent(String path) {
+		List<String> lines;
+		try {
+			lines = Files.readAllLines(Paths.get(path));
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+			return "";
+		}
+		return String.join("",lines);
+	}
+
 	/**
 	 * @param values The values to add to the new list.
 	 * @return A list of provided values, with nulls stripped.

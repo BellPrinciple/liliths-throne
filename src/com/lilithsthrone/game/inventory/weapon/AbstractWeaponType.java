@@ -1,9 +1,6 @@
 package com.lilithsthrone.game.inventory.weapon;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -896,64 +893,25 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 	}
 	
 	public String getSVGImage(DamageType dt, List<Colour> colours) {
-		if (!this.getAvailableDamageTypes().contains(dt)) {
+		if(!getAvailableDamageTypes().contains(dt))
 			return "";
-		}
-		
 		String stringFromMap = getSVGStringFromMap(dt, colours);
-		if(stringFromMap!=null) {
+		if(stringFromMap!=null)
 			return stringFromMap;
-		}
-		
-		try {
-			String s;
-			List<String> lines = Files.readAllLines(Paths.get(pathName));
-			StringBuilder sb = new StringBuilder();
-			for(String line : lines) {
-				sb.append(line);
-			}
-			s = sb.toString();
-				
-			List<Colour> coloursPlusDT = Util.newArrayListOfValues(dt.getColour());
-			coloursPlusDT.addAll(colours);
-			s = SvgUtil.colourReplacement(this.getId(), coloursPlusDT, this.getColourReplacements(true), s);
-			
-			addSVGStringMapping(dt, colours, s);
-			
-			return s;
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-			
-		return "";
+		String s = Util.getFileContent(pathName);
+		List<Colour> coloursPlusDT = Util.newArrayListOfValues(dt.getColour());
+		coloursPlusDT.addAll(colours);
+		s = SvgUtil.colourReplacement(getId(), coloursPlusDT, getColourReplacements(true), s);
+		addSVGStringMapping(dt, colours, s);
+		return s;
 	}
 
 	public String getSVGImageDesaturated() {
-		if(SVGStringDesaturated!=null) {
+		if(SVGStringDesaturated!=null)
 			return SVGStringDesaturated;
-		}
-		
-		try {
-			String s;
-			List<String> lines = Files.readAllLines(Paths.get(pathName));
-			StringBuilder sb = new StringBuilder();
-			for(String line : lines) {
-				sb.append(line);
-			}
-			s = sb.toString();
-			
-			s = SvgUtil.colourReplacement(this.getId()+"DS", Util.newArrayListOfValues(PresetColour.BASE_GREY, PresetColour.BASE_GREY, PresetColour.BASE_GREY), this.getColourReplacements(true), s);
-			
-			SVGStringDesaturated = s;
-			
-			return s;
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-			
-		return "";
+		String s = Util.getFileContent(pathName);
+		s = SvgUtil.colourReplacement(this.getId()+"DS", Util.newArrayListOfValues(PresetColour.BASE_GREY, PresetColour.BASE_GREY, PresetColour.BASE_GREY), this.getColourReplacements(true), s);
+		return SVGStringDesaturated = s;
 	}
 	
 //	private void addSVGStringEquippedMapping(GameCharacter character, DamageType dt, List<Colour> colours, String s) {
@@ -982,69 +940,31 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 	}
 	
 	public String getSVGEquippedImage(GameCharacter characterEquipped, DamageType dt, List<Colour> colours) {
-		if(!isEquippedSVGImageDifferent()) {
+		if(!isEquippedSVGImageDifferent())
 			return getSVGImage(dt, colours);
-		}
-		if (!this.getAvailableDamageTypes().contains(dt)) {
+		if(!getAvailableDamageTypes().contains(dt))
 			return "";
-		}
-		
 		String stringFromMap = getSVGStringEquippedFromMap(characterEquipped, dt, colours);
-		if(stringFromMap!=null) {
+		if(stringFromMap!=null)
 			return stringFromMap;
-		}
-		
-		try {
-			String s;
-			List<String> lines = Files.readAllLines(Paths.get(getEquippedPathName(characterEquipped)));
-			StringBuilder sb = new StringBuilder();
-			for(String line : lines) {
-				sb.append(line);
-			}
-			s = sb.toString();
-			
-			List<Colour> coloursPlusDT = Util.newArrayListOfValues(dt.getColour());
-			coloursPlusDT.addAll(colours);
-			s = SvgUtil.colourReplacement(this.getId()+"Equipped", coloursPlusDT, this.getColourReplacements(true), s);
-
-			// Don't save icon as it can vary based on character changes...
-//			addSVGStringEquippedMapping(characterEquipped, dt, colours, s);
-			
-			return s;
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-			
-		return "";
+		String s = Util.getFileContent(getEquippedPathName(characterEquipped));
+		List<Colour> coloursPlusDT = Util.newArrayListOfValues(dt.getColour());
+		coloursPlusDT.addAll(colours);
+		s = SvgUtil.colourReplacement(getId()+"Equipped", coloursPlusDT, getColourReplacements(true), s);
+		// Don't save icon as it can vary based on character changes...
+//		addSVGStringEquippedMapping(characterEquipped, dt, colours, s);
+		return s;
 	}
 	
 
 	public String getSVGEquippedImageDesaturated(GameCharacter characterEquipped) {
-		if(SVGStringEquippedDesaturated!=null) {
+		if(SVGStringEquippedDesaturated!=null)
 			return SVGStringEquippedDesaturated;
-		}
-		
-		try {
-			String s;
-			List<String> lines = Files.readAllLines(Paths.get(getEquippedPathName(characterEquipped)));
-			StringBuilder sb = new StringBuilder();
-			for(String line : lines) {
-				sb.append(line);
-			}
-			s = sb.toString();
-			
-			s = SvgUtil.colourReplacement(this.getId()+"EquippedDS", Util.newArrayListOfValues(PresetColour.BASE_GREY, PresetColour.BASE_GREY, PresetColour.BASE_GREY), this.getColourReplacements(true), s);
-			
-			SVGStringEquippedDesaturated = s;
-			
-			return s;
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-			
-		return "";
+		return SVGStringEquippedDesaturated = SvgUtil.colourReplacement(
+				getId()+"EquippedDS",
+				Util.newArrayListOfValues(PresetColour.BASE_GREY, PresetColour.BASE_GREY, PresetColour.BASE_GREY),
+				getColourReplacements(true),
+				Util.getFileContent(getEquippedPathName(characterEquipped)));
 	}
 	
 	// Enchantments:

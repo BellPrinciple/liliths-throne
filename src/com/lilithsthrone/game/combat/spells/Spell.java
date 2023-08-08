@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.combat.spells;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -3135,20 +3133,8 @@ public enum Spell {
 		
 		// SVG:
 		this.pathName = pathName;
-		try {
-			InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/combat/spell/" + pathName + ".svg");
-			if(is==null) {
-				System.err.println("Error! Spell icon file does not exist (Trying to read from '"+pathName+"')!");
-			}
-			SVGString = Util.inputStreamToString(is);
-			
-			SVGString = SvgUtil.colourReplacement(this.toString(), damageType.getMultiplierAttribute().getColour(), SVGString);
-			
-			is.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		SVGString = SvgUtil.loadFromResource("/com/lilithsthrone/res/combat/spell/" + pathName + ".svg");
+		SVGString = SvgUtil.colourReplacement(this.toString(), damageType.getMultiplierAttribute().getColour(), SVGString);
 	}
     
     protected boolean isTargetAtMaximumLust(GameCharacter target) {

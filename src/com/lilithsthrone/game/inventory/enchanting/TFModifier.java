@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.inventory.enchanting;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1776,36 +1774,18 @@ public enum TFModifier {
 	public String getSVGString() {
 		if(SVGString==null) {
 			// Set this item's file image:
-			try {
-				InputStream is = TFModifier.class.getResourceAsStream("/com/lilithsthrone/res/crafting/" + path + ".svg");
-				if(is==null) {
-					System.err.println("Error! TFModifier icon file does not exist (Trying to read from '"+path+"')! (Code 2)");
-				}
-				String s = Util.inputStreamToString(is);
-
-				is.close();
-				
-				if(path.contains("flavour")) {
-					String SVGStringBackground = "";
-					is = TFModifier.class.getResourceAsStream("/com/lilithsthrone/res/crafting/flavours/background.svg");
-					if(is==null) {
-						System.err.println("Error! Subspecies background icon file does not exist (Trying to read from 'flavours/background')!");
-					}
-					SVGStringBackground = "<div style='width:80%;height:80%;position:absolute;left:10%;bottom:10%;'>"+SvgUtil.colourReplacement(this.toString()+"_B", this.getColour(), Util.inputStreamToString(is))+"</div>";
-					
-					s = SVGStringBackground + "<div style='width:50%;height:50%;position:absolute;left:25%;bottom:25%;'>" + SvgUtil.colourReplacement(this.toString(), this.getColour(), s)+"</div>";
-					
-				} else {
-					s = SvgUtil.colourReplacement(this.toString(), this.getColour(), s);
-				}
-				
-				this.SVGString = s;
-
-				is.close();
-
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			String s = SvgUtil.loadFromResource("/com/lilithsthrone/res/crafting/" + path + ".svg");
+			s = SvgUtil.colourReplacement(toString(), getColour(), s);
+			if(path.contains("flavour")) {
+				String image = SvgUtil.loadFromResource("/com/lilithsthrone/res/crafting/flavours/background.svg");
+				s = "<div style='width:80%;height:80%;position:absolute;left:10%;bottom:10%;'>"
+						+ SvgUtil.colourReplacement(this+"_B", getColour(), image)
+						+ "</div>"
+						+ "<div style='width:50%;height:50%;position:absolute;left:25%;bottom:25%;'>"
+						+ s
+						+ "</div>";
 			}
+			this.SVGString = s;
 		}
 		return SVGString;
 	}

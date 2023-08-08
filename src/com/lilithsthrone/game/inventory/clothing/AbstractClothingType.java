@@ -1,13 +1,10 @@
 package com.lilithsthrone.game.inventory.clothing;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -2138,221 +2135,119 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 			boolean equippedVariant,
 			String pattern,
 			List<Colour> patternColours,
-			Map<String, String> stickers) {
-		
-		if(stickers==null) { // If stickers are null, display default stickers
+			Map<String, String> stickersMap) {
+		Map<String,String> stickers;
+		if(stickersMap != null) {
+			stickers = stickersMap;
+		} else { // If stickers are null, display default stickers
 			stickers = new HashMap<>();
-			
-			for(Entry<StickerCategory, List<Sticker>> entry : this.getStickers().entrySet()) {
+			for(Entry<StickerCategory, List<Sticker>> entry : getStickers().entrySet()) {
 				if(!stickers.containsKey(entry.getKey().getId())) {
-					Sticker sticker = null;
-					for(Sticker s : entry.getValue()) {
-						if(sticker==null || s.isDefaultSticker()) {
-							sticker = s;
-						}
-					}
-					if(sticker!=null) {
-						stickers.put(entry.getKey().getId(), sticker.getId());
-					}
+					entry.getValue().stream().filter(Sticker::isDefaultSticker).findFirst()
+							.ifPresent(sticker -> stickers.put(entry.getKey().getId(),sticker.getId()));
 				}
 			}
 		}
-		
-		if(this.equals(ClothingType.HIPS_CONDOMS)) {
+		if(equals(ClothingType.HIPS_CONDOMS)) {
 			if(!colours.isEmpty()) {
-				try {
-					InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/clothing/belt_used_condoms_base_back.svg");
-					String s = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>"+Util.inputStreamToString(is)+"</div>";
-					is.close();
+				String back = SvgUtil.loadFromResource("/com/lilithsthrone/res/clothing/belt_used_condoms_base_back.svg");
+				String front = SvgUtil.loadFromResource("/com/lilithsthrone/res/clothing/belt_used_condoms_base_front.svg");
+				String s = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>" + back + "</div>";
+				s = getSVGWithHandledPattern(s, pattern, patternColours);
+				s = SvgUtil.colourReplacement(getId(), colours, getColourReplacements(), s);
+				if(!equippedVariant) {
+					s += "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>" + front + "</div>";
 					s = getSVGWithHandledPattern(s, pattern, patternColours);
-					s = SvgUtil.colourReplacement(this.getId(), colours, this.getColourReplacements(), s);
-
-					if(!equippedVariant) {
-						is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/clothing/belt_used_condoms_base_front.svg");
-						s += "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>" + Util.inputStreamToString(is) + "</div>";
-						s = getSVGWithHandledPattern(s, pattern, patternColours);
-						s = SvgUtil.colourReplacement(this.getId(), colours, this.getColourReplacements(), s);
-						is.close();
-						
-						addSVGStringEquippedMapping(slotEquippedTo, colours, pattern, patternColours, stickers, s);
-						
-						return s;
-						
-					} else {
-						List<Colour> condomColours = new ArrayList<>();
-						// Draw all backs:
-						for(AbstractItem item : character.getAllItemsInInventory().keySet()) {
-							if(item.getItemType().equals(ItemType.CONDOM_USED)) {
-								for(int count=0; count<character.getItemCount(item); count++) {
-									if(condomColours.size()<8) {
-										condomColours.add(item.getColour(0));
-										
-										is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/clothing/belt_used_condoms_"+condomColours.size()+"_back.svg");
-										s += "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>" + Util.inputStreamToString(is) + "</div>";
-										s = getSVGWithHandledPattern(s, pattern, patternColours);
-										s = SvgUtil.colourReplacement(this.getId(),
-												Util.newArrayListOfValues(item.getColour(0)),
-												Util.newArrayListOfValues(new ColourReplacement(true, ColourReplacement.DEFAULT_PRIMARY_REPLACEMENTS, ColourListPresets.ALL, null)),
-												s);
-										is.close();
-									}
-								}
+					s = SvgUtil.colourReplacement(getId(), colours, getColourReplacements(), s);
+					addSVGStringEquippedMapping(slotEquippedTo, colours, pattern, patternColours, stickers, s);
+					return s;
+				}
+				List<Colour> condomColours = new ArrayList<>();
+				// Draw all backs:
+				for(AbstractItem item : character.getAllItemsInInventory().keySet()) {
+					if(item.getItemType().equals(ItemType.CONDOM_USED)) {
+						for(int count = 0; count < character.getItemCount(item); count++) {
+							if(condomColours.size() < 8) {
+								condomColours.add(item.getColour(0));
+								String image = SvgUtil.loadFromResource("/com/lilithsthrone/res/clothing/belt_used_condoms_"+condomColours.size()+"_back.svg");
+								s += "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>" + image + "</div>";
+								s = getSVGWithHandledPattern(s, pattern, patternColours);
+								s = SvgUtil.colourReplacement(getId(),
+										Util.newArrayListOfValues(item.getColour(0)),
+										Util.newArrayListOfValues(new ColourReplacement(true, ColourReplacement.DEFAULT_PRIMARY_REPLACEMENTS, ColourListPresets.ALL, null)),
+										s);
 							}
 						}
-						
-						is.close();
-						is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/clothing/belt_used_condoms_base_front.svg");
-						s += "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>" + Util.inputStreamToString(is) + "</div>";
-						s = getSVGWithHandledPattern(s, pattern, patternColours);
-						s = SvgUtil.colourReplacement(this.getId(), colours, this.getColourReplacements(), s);
-						is.close();
-						
-						int i = 1;
-						for(Colour c : condomColours) {
-							is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/clothing/belt_used_condoms_"+i+"_front.svg");
-							s += "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>" + Util.inputStreamToString(is) + "</div>";
-							s = getSVGWithHandledPattern(s, pattern, patternColours);
-							s = SvgUtil.colourReplacement(this.getId(),
-									Util.newArrayListOfValues(c),
-									Util.newArrayListOfValues(new ColourReplacement(true, ColourReplacement.DEFAULT_PRIMARY_REPLACEMENTS, ColourListPresets.ALL, null)),
-									s);
-							is.close();
-							i++;
-						}
-						
-						return s;
 					}
-					
-				} catch (IOException e) {
-					e.printStackTrace();
 				}
+				s += "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>" + front + "</div>";
+				s = getSVGWithHandledPattern(s, pattern, patternColours);
+				s = SvgUtil.colourReplacement(getId(), colours, getColourReplacements(), s);
+				int i = 1;
+				for(Colour c : condomColours) {
+					String image = SvgUtil.loadFromResource("/com/lilithsthrone/res/clothing/belt_used_condoms_"+i+"_front.svg");
+					s += "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0'>" + image + "</div>";
+					s = getSVGWithHandledPattern(s, pattern, patternColours);
+					s = SvgUtil.colourReplacement(getId(),
+							Util.newArrayListOfValues(c),
+							Util.newArrayListOfValues(new ColourReplacement(true, ColourReplacement.DEFAULT_PRIMARY_REPLACEMENTS, ColourListPresets.ALL, null)),
+							s);
+					i++;
+				}
+				return s;
 			}
-			
 		} else {
-			
 			// Handle empty stickers when defaults are needed:
 			HashMap<String, String> handledStickers = new HashMap<>(stickers);
-			for(Entry<StickerCategory, List<Sticker>> entry : this.getStickers().entrySet()) {
-				if(!stickers.containsKey(entry.getKey().getId())) {
-					Sticker sticker = null;
-					for(Sticker s : entry.getValue()) {
-						if(sticker==null || s.isDefaultSticker()) {
-							sticker = s;
-						}
-					}
-					handledStickers.put(entry.getKey().getId(), sticker.getId());
-				}
-			}
-			
-			if(equippedVariant && pathNameEquipped!=null && getPathNameEquipped(character, slotEquippedTo)!=null) {
-				String stringFromMap = getSVGStringFromEquippedMap(character, slotEquippedTo, colours, pattern, patternColours, handledStickers);
-				if (stringFromMap!=null && !this.equals(ClothingType.WRIST_WOMENS_WATCH) && !this.equals(ClothingType.WRIST_MENS_WATCH)) {
-					return stringFromMap;
-					
+			for(Entry<StickerCategory, List<Sticker>> entry : getStickers().entrySet())
+				if(!stickers.containsKey(entry.getKey().getId()))
+					entry.getValue().stream().filter(Sticker::isDefaultSticker).findFirst()
+							.ifPresent(sticker -> handledStickers.put(entry.getKey().getId(), sticker.getId()));
+			boolean hasEquippedVariant = equippedVariant
+					&& pathNameEquipped != null
+					&& getPathNameEquipped(character, slotEquippedTo) != null;
+			String stringFromMap = hasEquippedVariant
+					? getSVGStringFromEquippedMap(character, slotEquippedTo, colours, pattern, patternColours, handledStickers)
+					: getSVGStringFromMap(slotEquippedTo, colours, pattern, patternColours, handledStickers);
+			if(stringFromMap != null
+					&& !equals(ClothingType.WRIST_WOMENS_WATCH)
+					&& !equals(ClothingType.WRIST_MENS_WATCH))
+				return stringFromMap;
+			if(!colours.isEmpty()) {
+				String path = hasEquippedVariant ? getPathNameEquipped(character, slotEquippedTo) : pathName;
+				String s;
+				if(isMod) {
+					s = Util.getFileContent(path);
 				} else {
-					if(!colours.isEmpty()) {
-						try {
-							InputStream is;
-							String s;
-							if(isMod) {
-								List<String> lines = Files.readAllLines(Paths.get(getPathNameEquipped(character, slotEquippedTo)));
-								StringBuilder sb = new StringBuilder();
-								for(String line : lines) {
-									sb.append(line);
-								}
-								s = sb.toString();
-							} else {
-								is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/" + getPathNameEquipped(character, slotEquippedTo) + ".svg");
-								s = Util.inputStreamToString(is);
-								is.close();
-							}
-							
-							s = getSVGWithHandledPattern(s, pattern, patternColours);
-//							s = SvgUtil.colourReplacement(this.getId(), colours, this.getColourReplacements(), s);
-							
-							// Handle stickers:
-							s = getSVGWithHandledStickers(slotEquippedTo, s, handledStickers);
-							
-							s = SvgUtil.colourReplacement(this.getId(), colours, this.getColourReplacements(), s); //TODO moved from above
-							
-							// Add minute and hour hands to women's and men's watches:
-							s += (this.equals(ClothingType.WRIST_WOMENS_WATCH)
-									? "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + ((Main.game.getMinutesPassed() % (60 * 24)) / 2f) + "deg);'>"
-										+ SVGImages.SVG_IMAGE_PROVIDER.getWomensWatchHourHand(colours, this.getColourReplacements()) + "</div>"
-										+ "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + (Main.game.getMinutesPassed() % (60)) * 6 + "deg);'>"
-										+ SVGImages.SVG_IMAGE_PROVIDER.getWomensWatchMinuteHand(colours, this.getColourReplacements()) + "</div>"
-									: "")
-									+ (this.equals(ClothingType.WRIST_MENS_WATCH)
-										? "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + ((Main.game.getMinutesPassed() % (60 * 24)) / 2f) + "deg);'>"
-											+ SVGImages.SVG_IMAGE_PROVIDER.getMensWatchHourHand(colours, this.getColourReplacements()) + "</div>"
-											+ "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + (Main.game.getMinutesPassed() % (60)) * 6
-											+ "deg);'>" + SVGImages.SVG_IMAGE_PROVIDER.getMensWatchMinuteHand(colours, this.getColourReplacements()) + "</div>"
-										: "");
-
-							// Don't save icon as it can vary based on character changes...
-//							addSVGStringEquippedMapping(character, slotEquippedTo, colours, pattern, patternColours, stickers, s);
-							
-							return s;
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
+					s = SvgUtil.loadFromResource(path);
 				}
-				
-			} else {
-				String stringFromMap = getSVGStringFromMap(slotEquippedTo, colours, pattern, patternColours, handledStickers);
-				if (stringFromMap!=null && !this.equals(ClothingType.WRIST_WOMENS_WATCH) && !this.equals(ClothingType.WRIST_MENS_WATCH)) {
-					return stringFromMap;
-					
+				s = getSVGWithHandledPattern(s, pattern, patternColours);
+//				s = SvgUtil.colourReplacement(getId(),colours,getColourReplacements(),s);
+				// Handle stickers:
+				s = getSVGWithHandledStickers(slotEquippedTo, s, handledStickers);
+				s = SvgUtil.colourReplacement(getId(), colours, getColourReplacements(), s); //TODO moved from above
+				if(equals(ClothingType.WRIST_WOMENS_WATCH))
+					s += "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + ((Main.game.getMinutesPassed() % (60 * 24)) / 2f) + "deg);'>"
+							+ SVGImages.SVG_IMAGE_PROVIDER.getWomensWatchHourHand(colours, getColourReplacements())
+							+ "</div>"
+							+ "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + (Main.game.getMinutesPassed() % (60)) * 6 + "deg);'>"
+							+ SVGImages.SVG_IMAGE_PROVIDER.getWomensWatchMinuteHand(colours, getColourReplacements())
+							+ "</div>";
+				if(equals(ClothingType.WRIST_MENS_WATCH))
+					s += "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + ((Main.game.getMinutesPassed() % (60 * 24)) / 2f) + "deg);'>"
+							+ SVGImages.SVG_IMAGE_PROVIDER.getMensWatchHourHand(colours, getColourReplacements())
+							+ "</div>"
+							+ "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + (Main.game.getMinutesPassed() % (60)) * 6
+							+ "deg);'>" + SVGImages.SVG_IMAGE_PROVIDER.getMensWatchMinuteHand(colours, getColourReplacements())
+							+ "</div>";
+				// Add minute and hour hands to women's and men's watches:
+				if(hasEquippedVariant) {
+					// Don't save icon as it can vary based on character changes...
+//					addSVGStringEquippedMapping(character, slotEquippedTo, colours, pattern, patternColours, stickers, s);
 				} else {
-					if(!colours.isEmpty()) {
-						try {
-							InputStream is;
-							String s;
-							if(isMod) {
-								List<String> lines = Files.readAllLines(Paths.get(pathName));
-								StringBuilder sb = new StringBuilder();
-								for(String line : lines) {
-									sb.append(line);
-								}
-								s = sb.toString();
-							} else {
-								is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/" + pathName + ".svg");
-								s = Util.inputStreamToString(is);
-								is.close();
-							}
-							
-							s = getSVGWithHandledPattern(s, pattern, patternColours);
-							
-//							s = SvgUtil.colourReplacement(this.getId(), colours, this.getColourReplacements(), s);
-							
-							// Handle stickers:
-							s = getSVGWithHandledStickers(slotEquippedTo, s, handledStickers);
-							
-							s = SvgUtil.colourReplacement(this.getId(), colours, this.getColourReplacements(), s); //TODO moved from above
-							
-							// Add minute and hour hands to women's and men's watches:
-							s += (this.equals(ClothingType.WRIST_WOMENS_WATCH)
-									? "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + ((Main.game.getMinutesPassed() % (60 * 24)) / 2f) + "deg);'>"
-										+ SVGImages.SVG_IMAGE_PROVIDER.getWomensWatchHourHand(colours, this.getColourReplacements()) + "</div>"
-										+ "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + (Main.game.getMinutesPassed() % (60)) * 6 + "deg);'>"
-										+ SVGImages.SVG_IMAGE_PROVIDER.getWomensWatchMinuteHand(colours, this.getColourReplacements()) + "</div>"
-									: "")
-									+ (this.equals(ClothingType.WRIST_MENS_WATCH)
-										? "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + ((Main.game.getMinutesPassed() % (60 * 24)) / 2f) + "deg);'>"
-											+ SVGImages.SVG_IMAGE_PROVIDER.getMensWatchHourHand(colours, this.getColourReplacements()) + "</div>"
-											+ "<div style='width:100%;height:100%;position:absolute;left:0;top:0;-webkit-transform: rotate(" + (Main.game.getMinutesPassed() % (60)) * 6
-											+ "deg);'>" + SVGImages.SVG_IMAGE_PROVIDER.getMensWatchMinuteHand(colours, this.getColourReplacements()) + "</div>"
-										: "");
-							
-							addSVGStringMapping(slotEquippedTo, colours, pattern, patternColours, stickers, s);
-		
-							return s;
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
+					addSVGStringMapping(slotEquippedTo, colours, pattern, patternColours, stickers, s);
 				}
+				return s;
 			}
 		}
 		return "";
@@ -2376,52 +2271,35 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		}
 		
 		// Order by zLayer:
-		Collections.sort(svgRendering, (v1, v2) -> v1.getKey()-v2.getKey());
+		svgRendering.sort(Comparator.comparingInt(Value::getKey));
 
-		String finalSvg = "";
+		StringBuilder finalSvg = new StringBuilder();
 		for(Value<Integer, String> entry : svgRendering) {
-//			System.out.println(entry.getKey());
 			if(entry.getKey()>=0) {
 				break;
 			}
 			if(!entry.getValue().isEmpty()) {
-				try {
-					List<String> lines = Files.readAllLines(Paths.get(entry.getValue()));
-					StringBuilder sb = new StringBuilder();
-					for(String line : lines) {
-						sb.append(line);
-					}
-					finalSvg += "<div style='width:100%;height:100%;position:absolute;left:0;top:0;'>"+sb.toString()+"</div>";
-				} catch(IOException ex) {
-					System.err.println("Error: getSVGWithHandledStickers() Code 2");
-					ex.printStackTrace();
-				}
+				String image = Util.getFileContent(entry.getValue());
+				finalSvg.append("<div style='width:100%;height:100%;position:absolute;left:0;top:0;'>")
+						.append(image)
+						.append("</div>");
 			}
 		}
 
-		s = finalSvg + "<div style='width:100%;height:100%;position:absolute;left:0;top:0;'>"+s+"</div>";
+		finalSvg.append("<div style='width:100%;height:100%;position:absolute;left:0;top:0;'>")
+				.append(s)
+				.append("</div>");
 
-		finalSvg = "";
 		for(Value<Integer, String> entry : svgRendering) {
-//			System.out.println(entry.getKey());
 			if(entry.getKey()>0 && !entry.getValue().isEmpty()) {
-				try {
-					List<String> lines = Files.readAllLines(Paths.get(entry.getValue()));
-					StringBuilder sb = new StringBuilder();
-					for(String line : lines) {
-						sb.append(line);
-					}
-					finalSvg += "<div style='width:100%;height:100%;position:absolute;left:0;top:0;'>"+sb.toString()+"</div>";
-				} catch(IOException ex) {
-					System.err.println("Error: getSVGWithHandledStickers() Code 2");
-					ex.printStackTrace();
-				}
+				String image = Util.getFileContent(entry.getValue());
+				finalSvg.append("<div style='width:100%;height:100%;position:absolute;left:0;top:0;'>")
+						.append(image)
+						.append("</div>");
 			}
 		}
-
-		s = s + finalSvg;
 		
-		return s;
+		return finalSvg.toString();
 	}
 	
 	public boolean isPatternAvailable() {

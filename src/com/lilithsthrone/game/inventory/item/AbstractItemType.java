@@ -1,12 +1,8 @@
 package com.lilithsthrone.game.inventory.item;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -116,7 +112,7 @@ public abstract class AbstractItemType extends AbstractCoreType {
 				effects,
 				itemTags);
 	}
-	
+
 	public AbstractItemType(
 			int value,
 			String determiner,
@@ -172,10 +168,10 @@ public abstract class AbstractItemType extends AbstractCoreType {
 		enchantmentItemTypeId = null;
 		
 		this.colourShades = colourShades;
-		
+
 		SVGString = null;
 	}
-	
+
 	private static List<Colour> initNewColourShades(Colour colourPrimary, Colour colourSecondary, Colour colourTertiary) {
 		List<Colour> newColourShades = new ArrayList<>();
 		
@@ -624,78 +620,43 @@ public abstract class AbstractItemType extends AbstractCoreType {
 	}
 
 	public String getSVGString() {
-		if(SVGString==null) {
-			if(getPathNameInformation()!=null && !getPathNameInformation().isEmpty()) {
-				try {
-					if(isFromExternalFile()) {
-						Collections.sort(svgPathInformation, (i1, i2)->i1.getZLayer()-i2.getZLayer());
-						
-						StringBuilder svgBuilder = new StringBuilder();
-						for(SvgInformation info : getPathNameInformation()) {
-							List<String> lines = Files.readAllLines(Paths.get(info.getPathName()));
-							StringBuilder sb = new StringBuilder();
-							for(String line : lines) {
-								sb.append(line);
-							}
-							int sizeOffset = (100-info.getImageSize())/2;
-							svgBuilder.append("<div style='"
-									+ "width:"+info.getImageSize()+"%;"
-									+ "height:"+info.getImageSize()+"%;"
-									+ "transform:rotate("+info.getImageRotation()+"deg);"
-									+ "position:absolute;"
-									+ "left:"+sizeOffset+"%;"
-									+ "bottom:"+sizeOffset+"%;"
-									+ "padding:0;"
-									+ "margin:0;'>");
-							String finalSvg = sb.toString();
-							for(Entry<String, String> entry : info.getReplacements().entrySet()) {
-								finalSvg = finalSvg.replaceAll(entry.getKey(), entry.getValue());
-							}
-							svgBuilder.append(finalSvg);
-							svgBuilder.append("</div>");
-						}
-
-						SVGString = svgBuilder.toString();
-						SVGString = SvgUtil.colourReplacement(this.getId(), getColourShades(), null, SVGString);
-						
-//						List<String> lines = Files.readAllLines(Paths.get(pathName));
-//						StringBuilder sb = new StringBuilder();
-//						for(String line : lines) {
-//							sb.append(line);
-//						}
-//						SVGString = sb.toString();
-//						
-//						if(!backgroundPathName.isEmpty()) {
-//							lines = Files.readAllLines(Paths.get(backgroundPathName));
-//							sb = new StringBuilder();
-//							for(String line : lines) {
-//								sb.append(line);
-//							}
-//							int sizeOffset = (100-imageSize)/2;
-//							SVGString = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0;'>"+sb.toString()+"</div>"
-//									+ "<div style='width:"+imageSize+"%;height:"+imageSize+"%;transform:rotate("+imageRotation+"deg);position:absolute;left:"+sizeOffset+"%;bottom:"+sizeOffset+"%;padding:0;margin:0;'>"+SVGString+"</div>";
-//						}
-//						
-//						SVGString = SvgUtil.colourReplacement(this.getId(), colourShades, null, SVGString);
-						
-					} else {
-						InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/items/" + svgPathInformation.get(0).getPathName() + ".svg");
-						if(is==null) {
-							System.err.println("Error! AbstractItemType icon file does not exist (Trying to read from '"+svgPathInformation.get(0).getPathName()+"')!");
-						}
-						String s = Util.inputStreamToString(is);
-						SVGString = SvgUtil.colourReplacement(this.getId(), getColourShades(), null, s);
-						is.close();
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-			} else {
-				SVGString = "";
-			}
+		if(SVGString!=null)
+			return SVGString;
+		if(getPathNameInformation()==null || getPathNameInformation().isEmpty())
+			return SVGString = "";
+		if(!isFromExternalFile()) {
+			String s = SvgUtil.loadFromResource("/com/lilithsthrone/res/items/" + svgPathInformation.get(0).getPathName() + ".svg");
+			return SVGString = SvgUtil.colourReplacement(this.getId(), getColourShades(), null, s);
 		}
-		return SVGString;
+		svgPathInformation.sort(Comparator.comparingInt(SvgInformation::getZLayer));
+		StringBuilder svgBuilder = new StringBuilder();
+		for(SvgInformation info : getPathNameInformation()) {
+			String finalSvg = Util.getFileContent(info.getPathName());
+			int sizeOffset = (100-info.getImageSize())/2;
+			svgBuilder.append("<div style='"
+					+ "width:"+info.getImageSize()+"%;"
+					+ "height:"+info.getImageSize()+"%;"
+					+ "transform:rotate("+info.getImageRotation()+"deg);"
+					+ "position:absolute;"
+					+ "left:"+sizeOffset+"%;"
+					+ "bottom:"+sizeOffset+"%;"
+					+ "padding:0;"
+					+ "margin:0;'>");
+			for(Entry<String, String> entry : info.getReplacements().entrySet()) {
+				finalSvg = finalSvg.replaceAll(entry.getKey(), entry.getValue());
+			}
+			svgBuilder.append(finalSvg);
+			svgBuilder.append("</div>");
+		}
+		SVGString = svgBuilder.toString();
+//		SVGString = Util.getFileContent(pathName);
+//		if(!backgroundPathName.isEmpty()) {
+//			String background = Util.getFileContent(backgroundPathName);
+//			int sizeOffset = (100-imageSize)/2;
+//			SVGString = "<div style='width:100%;height:100%;position:absolute;left:0;bottom:0;padding:0;margin:0;'>"+background+"</div>"
+//					+ "<div style='width:"+imageSize+"%;height:"+imageSize+"%;transform:rotate("+imageRotation+"deg);position:absolute;left:"+sizeOffset+"%;bottom:"+sizeOffset+"%;padding:0;margin:0;'>"+SVGString+"</div>";
+//		}
+		return SVGString = SvgUtil.colourReplacement(this.getId(), getColourShades(), null, SVGString);
 	}
 
 	public Rarity getRarity() {

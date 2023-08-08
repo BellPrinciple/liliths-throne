@@ -1,10 +1,6 @@
 package com.lilithsthrone.game.character.effects;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -543,30 +539,12 @@ public abstract class AbstractStatusEffect {
 	public String getSVGString(GameCharacter owner) {
 		if(SVGString==null) {
 			if(pathName!=null && !pathName.isEmpty()) {
-				try {
-					if(isFromExternalFile()) {
-						List<String> lines = Files.readAllLines(Paths.get(pathName));
-						StringBuilder sb = new StringBuilder();
-						for(String line : lines) {
-							sb.append(line);
-						}
-						SVGString = sb.toString();
-						SVGString = SvgUtil.colourReplacement(this.getId(), colourShades, null, SVGString);
-						
-					} else {
-						String path = "/com/lilithsthrone/res/statusEffects/" + pathName + ".svg";
-						if(pathName.startsWith("res/")) {
-							path = "/com/lilithsthrone/"+pathName+".svg";
-						}
-						InputStream is = this.getClass().getResourceAsStream(path);
-						if(is==null) {
-							System.err.println("Error! StatusEffect icon file does not exist (Trying to read from '"+pathName+"')!");
-						}
-						SVGString = SvgUtil.colourReplacement(this.getId(), colourShades, null, Util.inputStreamToString(is));
-						is.close();
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
+				if(isFromExternalFile()) {
+					SVGString = Util.getFileContent(pathName);
+					SVGString = SvgUtil.colourReplacement(this.getId(), colourShades, null, SVGString);
+				} else {
+					String path = "/com/lilithsthrone/" + (pathName.startsWith("res/") ? "" : "res/statusEffects/") + pathName + ".svg";
+					SVGString = SvgUtil.colourReplacement(this.getId(), colourShades, null, SvgUtil.loadFromResource(path));
 				}
 				
 			} else {

@@ -1,10 +1,6 @@
 package com.lilithsthrone.world.places;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -146,27 +142,9 @@ public class AbstractPlaceType {
 		this.teleportPermissions = TeleportPermissions.BOTH;
 		
 		if(SVGPath!=null) {
-			try {
-				InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/map/" + SVGPath + ".svg");
-				if(is==null) {
-					System.err.println("Error! PlaceType icon file does not exist (Trying to read from '"+SVGPath+"')! (Code 1)");
-				}
-				String s = Util.inputStreamToString(is);
-				
-				try {
-					s = SvgUtil.colourReplacement("placeColour"+colourReplacementId, colour, s);
-					colourReplacementId++;
-				} catch(Exception ex) {
-					System.err.println(SVGPath+" error!");
-				}
-				
-				SVGString = s;
-				
-				is.close();
-				
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			String s = SvgUtil.loadFromResource("/com/lilithsthrone/res/map/"+SVGPath+".svg");
+			SVGString = SvgUtil.colourReplacement("placeColour"+colourReplacementId, colour, s);
+			colourReplacementId++;
 		} else {
 			SVGString = null;
 		}
@@ -396,32 +374,15 @@ public class AbstractPlaceType {
 				}
 //				
 				if(new File(svgPath).exists()) {
-					try {
-						// Background circle:
-						InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/map/iconBackground.svg");
-						SVGString = Util.inputStreamToString(is);
-						is.close();
-						
-						// Icon:
-						List<String> lines = Files.readAllLines(Paths.get(svgPath));
-						StringBuilder sb = new StringBuilder();
-						
-						sb.append("<div style='width:100%;height:100%;position:absolute;left:0;top:0;margin:0;padding:0;'>");
-							sb.append(SVGString);
-						sb.append("</div>");
-						
-						sb.append("<div style='width:70%;height:70%;position:absolute;left:15%;top:15%;margin:0;padding:0;'>");
-							for(String line : lines) {
-								sb.append(line);
-							}
-						sb.append("</div>");
-						
-						SVGString = sb.toString();
-						SVGString = SvgUtil.colourReplacement(XMLFile.getName().replace("\\.svg", ""), colour, PresetColour.BASE_WHITE, null, SVGString);
-						
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+					SVGString = "<div style='width:100%;height:100%;position:absolute;left:0;top:0;margin:0;padding:0;'>"
+							// Background circle:
+							+ SvgUtil.loadFromResource("/com/lilithsthrone/res/map/iconBackground.svg")
+							+ "</div>"
+							+ "<div style='width:70%;height:70%;position:absolute;left:15%;top:15%;margin:0;padding:0;'>"
+							// Icon:
+							+ Util.getFileContent(svgPath)
+							+ "</div>";
+					SVGString = SvgUtil.colourReplacement(XMLFile.getName().replace("\\.svg", ""), colour, PresetColour.BASE_WHITE, null, SVGString);
 				} else {
 					SVGString = null;
 				}
@@ -652,34 +613,14 @@ public class AbstractPlaceType {
 	}
 	
 	public static String getSVGOverride(String pathName, Colour colourPrimary, Colour colourSecondary, Colour colourTertiary) {
-		if(!SVGOverrides.keySet().contains(pathName+colourPrimary.getId())) {
-			try {
-				InputStream is = colourPrimary.getClass().getResourceAsStream("/com/lilithsthrone/res/map/" + pathName + ".svg");
-				if(is==null) {
-					System.err.println("Error! PlaceType icon file does not exist (Trying to read from '"+pathName+"')! (Code 2)");
-				}
-				String s = Util.inputStreamToString(is);
-				
-
-				try {
-					s = SvgUtil.colourReplacement("placeColour"+colourReplacementId, colourPrimary, colourSecondary, colourTertiary, s);
-					colourReplacementId++;
-				} catch(Exception ex) {
-					System.err.println(pathName+" error!");
-				}
-				
-				SVGOverrides.put(pathName+colourPrimary.getId(), s);
-	
-				is.close();
-	
-			} catch (Exception e1) {
-				System.err.println("Error! AbstractPlaceType: PlaceType.getSVGOverride()");
-				e1.printStackTrace();
-				return "";
-			}
-		}
-		
-		return SVGOverrides.get(pathName+colourPrimary.getId());
+		String find = SVGOverrides.get(pathName+colourPrimary.getId());
+		if(find != null)
+			return find;
+		String newGraphic = SvgUtil.colourReplacement("placeColour"+colourReplacementId, colourPrimary,
+				SvgUtil.loadFromResource("com/lilithsthrone/res/map/"+pathName+".svg"));
+		colourReplacementId++;
+		SVGOverrides.put(pathName+colourPrimary.getId(), newGraphic);
+		return newGraphic;
 	}
 	
 	public String getSVGString(Set<AbstractPlaceUpgrade> upgrades) {

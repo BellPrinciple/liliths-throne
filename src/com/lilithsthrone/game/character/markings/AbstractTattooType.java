@@ -1,12 +1,8 @@
 package com.lilithsthrone.game.character.markings;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -420,59 +416,43 @@ public class AbstractTattooType extends AbstractCoreType {
 		}
 		
 		String stringFromMap = getSVGStringFromMap(colour, colourSecondary, colourTertiary);
-		if (stringFromMap!=null) {
+		if (stringFromMap!=null)
 			return stringFromMap;
-			
-		} else {
-			try {
-				InputStream is;
-				String s;
-				if(isMod) {
-					Collections.sort(svgPathInformation, (i1, i2)->i1.getZLayer()-i2.getZLayer());
-					StringBuilder svgBuilder = new StringBuilder();
-					for(SvgInformation info : getSvgPathInformation()) {
-						List<String> lines = Files.readAllLines(Paths.get(info.getPathName()));
-						StringBuilder sb = new StringBuilder();
-						for(String line : lines) {
-							sb.append(line);
-						}
-						int sizeOffset = (100-info.getImageSize())/2;
-						svgBuilder.append("<div style='"
-								+ "width:"+info.getImageSize()+"%;"
-								+ "height:"+info.getImageSize()+"%;"
-								+ "transform:rotate("+info.getImageRotation()+"deg);"
-								+ "position:absolute;"
-								+ "left:"+sizeOffset+"%;"
-								+ "bottom:"+sizeOffset+"%;"
-								+ "padding:0;"
-								+ "margin:0;'>");
-						String finalSvg = sb.toString();
-						for(Entry<String, String> entry : info.getReplacements().entrySet()) {
-							finalSvg = finalSvg.replaceAll(entry.getKey(), entry.getValue());
-						}
-						svgBuilder.append(finalSvg);
-						svgBuilder.append("</div>");
-					}
 
-					s = svgBuilder.toString();
-					
-				} else {
-					is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/tattoos/" + getPathName() + ".svg");
-					s = Util.inputStreamToString(is);
-					is.close();
+		String s;
+		if(isMod) {
+			svgPathInformation.sort(Comparator.comparingInt(SvgInformation::getZLayer));
+			StringBuilder svgBuilder = new StringBuilder();
+			for(SvgInformation info : getSvgPathInformation()) {
+				String finalSvg = Util.getFileContent(info.getPathName());
+				int sizeOffset = (100-info.getImageSize())/2;
+				svgBuilder.append("<div style='"
+						+ "width:"+info.getImageSize()+"%;"
+						+ "height:"+info.getImageSize()+"%;"
+						+ "transform:rotate("+info.getImageRotation()+"deg);"
+						+ "position:absolute;"
+						+ "left:"+sizeOffset+"%;"
+						+ "bottom:"+sizeOffset+"%;"
+						+ "padding:0;"
+						+ "margin:0;'>");
+				for(Entry<String, String> entry : info.getReplacements().entrySet()) {
+					finalSvg = finalSvg.replaceAll(entry.getKey(), entry.getValue());
 				}
-				
-				s = SvgUtil.colourReplacement(this.getId(), colour, colourSecondary, colourTertiary, s);
-				
-				addSVGStringMapping(colour, colourSecondary, colourTertiary, s);
-				
-				return s;
-			} catch (IOException e) {
-				e.printStackTrace();
+				svgBuilder.append(finalSvg);
+				svgBuilder.append("</div>");
 			}
+
+			s = svgBuilder.toString();
+
+		} else {
+			s = SvgUtil.loadFromResource("/com/lilithsthrone/res/tattoos/" + getPathName() + ".svg");
 		}
-	
-		return "";
+
+		s = SvgUtil.colourReplacement(this.getId(), colour, colourSecondary, colourTertiary, s);
+
+		addSVGStringMapping(colour, colourSecondary, colourTertiary, s);
+
+		return s;
 	}
 
 	public String getPathName() {

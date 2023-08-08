@@ -1,8 +1,6 @@
 package com.lilithsthrone.game.inventory.item;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -3209,22 +3207,12 @@ public class ItemType {
 		String background = "";
 		String bottle = "";
 		Colour colour = subspecies.getColour(null);
-		try {
-			InputStream is = ItemType.class.getResourceAsStream("/com/lilithsthrone/res/items/essenceBackground.svg");
-			String s = Util.inputStreamToString(is);
-			
-			background = SvgUtil.colourReplacement(subspecies.getName(null), colour, s);
-			is.close();
-			
-			is = ItemType.class.getResourceAsStream("/com/lilithsthrone/res/items/essenceBottle.svg");
-			s = Util.inputStreamToString(is);
-			bottle = SvgUtil.colourReplacement(subspecies.getName(null), colour, s);
-			is.close();
 
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
+		String backgroundImage = SvgUtil.loadFromResource("/com/lilithsthrone/res/items/essenceBackground.svg");
+		background = SvgUtil.colourReplacement(subspecies.getName(null), colour, backgroundImage);
+		String foregroundImage = SvgUtil.loadFromResource("/com/lilithsthrone/res/items/essenceBottle.svg");
+		bottle = SvgUtil.colourReplacement(subspecies.getName(null), colour, foregroundImage);
+
 		String subspeciesIcon = subspecies.getSVGStringNoBackground();
 		subspeciesIcon = subspeciesIcon.replaceAll("fill=\"#(.*?)\"", "fill=\""+colour.getShades()[1]+"\"");
 //		subspeciesIcon = subspeciesIcon.replaceAll(colour.getShades()[1], colour.getShades()[0]);
@@ -3249,18 +3237,9 @@ public class ItemType {
 	}
 
 	private static String getEssenceEffectSvg(AbstractSubspecies subspecies) {
-		String background = "";
 		Colour colour = subspecies.getColour(null);
-		try {
-			InputStream is = ItemType.class.getResourceAsStream("/com/lilithsthrone/res/items/essenceBackground.svg");
-			String s = Util.inputStreamToString(is);
-
-			background = SvgUtil.colourReplacement(subspecies.getName(null), colour, s);
-			is.close();
-
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		String backgroundImage = SvgUtil.loadFromResource("/com/lilithsthrone/res/items/essenceBackground.svg");
+		String background = SvgUtil.colourReplacement(subspecies.getName(null), colour, backgroundImage);
 
 		String subspeciesIcon = subspecies.getSVGStringNoBackground();
 		subspeciesIcon = subspeciesIcon.replaceAll("fill=\"#(.*?)\"", "fill=\""+colour.getShades()[1]+"\"");

@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.character.effects;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -154,20 +152,12 @@ public abstract class AbstractPerk {
 	}
 	
 	protected void generateSVGImage(String pathName, List<Colour> colours) {
-		try {
-			InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/" + pathName + ".svg");
-			if(is==null) {
-				System.err.println("Error! Perk icon file does not exist (Trying to read from '"+pathName+"')!");
-			}
-			SVGString = Util.inputStreamToString(is);
-			
-			SVGString = SvgUtil.colourReplacement(name.replaceAll(" ", ""), colours.get(0), colours.size()>=2?colours.get(1):null, colours.size()>=3?colours.get(2):null, SVGString);
-
-			is.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		SVGString = SvgUtil.colourReplacement(
+				name.replaceAll(" ", ""),
+				colours.get(0),
+				colours.size() >= 2 ? colours.get(1) : null,
+				colours.size() >= 3 ? colours.get(2) : null,
+				SvgUtil.loadFromResource("/com/lilithsthrone/res/"+pathName+".svg"));
 	}
 	
 	public boolean isAlwaysAvailable() {

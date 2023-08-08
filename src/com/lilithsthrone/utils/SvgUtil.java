@@ -1,5 +1,6 @@
 package com.lilithsthrone.utils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,18 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @author Innoxia
  */
 public class SvgUtil {
+
+	public static String loadFromResource(String path) {
+		try(var stream = SvgUtil.class.getResourceAsStream(path)) {
+			if(stream != null)
+				return Util.inputStreamToString(stream);
+			throw new IOException(String.format("inaccessible resource '%s'",path));
+		}
+		catch(IOException x) {
+			x.printStackTrace();
+		}
+		return "";
+	}
 
 	public static String colourReplacementPattern(String gradientReplacementID, List<Colour> patternColours, List<ColourReplacement> patternColourReplacements, String inputString) {
 		String s = inputString;

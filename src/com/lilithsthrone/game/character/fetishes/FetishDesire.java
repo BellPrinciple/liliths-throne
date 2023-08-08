@@ -1,7 +1,5 @@
 package com.lilithsthrone.game.character.fetishes;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,28 +44,9 @@ public enum FetishDesire {
 		
 		modifiersList = new ArrayList<>();
 		modifiersList.add("Modifies sex actions' [style.boldLust("+ Util.capitaliseSentence(Attribute.LUST.getAbbreviatedName())+ " increments)]");
-
-		
-		try {
-			InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/fetishes/" + pathName + ".svg");
-			if(is==null) {
-				System.err.println("Error! FetishDesire icon file does not exist (Trying to read from '"+pathName+"')!");
-			}
-			String base = Util.inputStreamToString(is);
-
-			SVGImage = base;
-			
-			SVGImage = SvgUtil.colourReplacement(this.toString(), colour, SVGImage);
-			
-			SVGImageDesaturated = base;
-			
-			SVGImageDesaturated = SvgUtil.colourReplacement(this.toString(), PresetColour.BASE_GREY, SVGImageDesaturated);
-
-			is.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		String base = SvgUtil.loadFromResource("/com/lilithsthrone/res/fetishes/" + pathName + ".svg");
+		SVGImage = SvgUtil.colourReplacement(toString(),colour,base);
+		SVGImageDesaturated = SvgUtil.colourReplacement(toString(),PresetColour.BASE_GREY,base);
 	}
 	
 	public boolean isNegative() {

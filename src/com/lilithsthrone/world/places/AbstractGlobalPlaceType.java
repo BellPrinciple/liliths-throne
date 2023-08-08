@@ -1,12 +1,8 @@
 package com.lilithsthrone.world.places;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.lilithsthrone.game.dialogue.DialogueNode;
 import com.lilithsthrone.game.dialogue.encounters.AbstractEncounter;
 import com.lilithsthrone.utils.SvgUtil;
-import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.world.AbstractWorldType;
@@ -58,27 +54,11 @@ public abstract class AbstractGlobalPlaceType extends AbstractPlaceType {
 		this.globalMapTile = true;
 		
 		if(SVGPath!=null) {
-			try {
-				InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/map/" + SVGPath + ".svg");
-				if(is==null) {
-					System.err.println("Error! PlaceType icon file does not exist (Trying to read from '"+SVGPath+"')! (Code 1)");
-				}
-				String s = Util.inputStreamToString(is);
-				
-				try {
-					s = SvgUtil.colourReplacement("placeColour"+colourReplacementId, colour, s);
-					colourReplacementId++;
-				} catch(Exception ex) {
-					System.err.println(SVGPath+" error!");
-				}
-				
-				SVGString = s;
-	
-				is.close();
-	
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			SVGString = SvgUtil.colourReplacement(
+					"placeColour"+colourReplacementId,
+					colour,
+					SvgUtil.loadFromResource("/com/lilithsthrone/res/map/" + SVGPath + ".svg"));
+			colourReplacementId++;
 		} else {
 			SVGString = null;
 		}

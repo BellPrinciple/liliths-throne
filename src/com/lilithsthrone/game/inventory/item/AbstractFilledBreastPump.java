@@ -1,8 +1,5 @@
 package com.lilithsthrone.game.inventory.item;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -119,21 +116,9 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 	}
 	
 	private String getSVGString(String pathName, Colour colour) {
-		try {
-			InputStream is = this.getClass().getResourceAsStream("/com/lilithsthrone/res/items/" + pathName + ".svg");
-			String s = Util.inputStreamToString(is);
-			
-			s = SvgUtil.colourReplacement(String.valueOf(this.hashCode()), colour, s);
-			
-			is.close();
-			
-			return s;
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
-		return "";
+		String s = SvgUtil.loadFromResource("/com/lilithsthrone/res/items/" + pathName + ".svg");
+		s = SvgUtil.colourReplacement(String.valueOf(hashCode()), colour, s);
+		return s;
 	}
 	
 	@Override
