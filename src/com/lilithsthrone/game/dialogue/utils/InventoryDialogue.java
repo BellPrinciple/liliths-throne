@@ -3835,102 +3835,13 @@ public class InventoryDialogue {
 			} else {
 				// ****************************** Interacting with the ground ******************************
 				if(inventoryNPC == null) {
-
-					boolean inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasClothing(clothing) && clothing.getRarity()!=Rarity.QUEST;
 					switch(interactionType) {
 						case CHARACTER_CREATION:
 							return getClothingResponseDuringCharacterCreation(responseTab, index);
 					case SEX:
 						return getClothingResponseDuringSex(responseTab, index);
 					default:
-						if(index == 1) {
-							if(inventoryFull) {
-								return new Response("Take (1)", "Your inventory is already full!", null);
-							}
-							return new Response("Take (1)", "Take one " + clothing.getName() + " from the ground.", INVENTORY_MENU){
-								@Override
-								public void effects(){
-									pickUpClothing(Main.game.getPlayer(), clothing, 1);
-								}
-							};
-							
-						} else if(index == 2) {
-							if(inventoryFull) {
-								return new Response("Take (5)", "Your inventory is already full!", null);
-							}
-							if(Main.game.getPlayerCell().getInventory().getClothingCount(clothing) >= 5) {
-								return new Response("Take (5)", "Take five of the " + clothing.getNamePlural() + " from the ground.", INVENTORY_MENU){
-									@Override
-									public void effects(){
-										pickUpClothing(Main.game.getPlayer(), clothing, 5);
-									}
-								};
-							} else {
-								return new Response("Take (5)", "There aren't five " + clothing.getNamePlural() + " on the ground!", null);
-							}
-							
-						} else if(index == 3) {
-							if(inventoryFull) {
-								return new Response("Take (All)", "Your inventory is already full!", null);
-							}
-							return new Response("Take (All)", "Take all of the " + clothing.getNamePlural() + " from the ground.", INVENTORY_MENU){
-								@Override
-								public void effects(){
-									pickUpClothing(Main.game.getPlayer(), clothing, Main.game.getPlayerCell().getInventory().getClothingCount(clothing));
-								}
-							};
-							
-						} else if (index==4) {
-							if (Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH) || Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)) {
-								boolean hasFullInventory = Main.game.getPlayerCell().getInventory().isInventoryFull();
-								boolean isDyeingStackItem = Main.game.getPlayerCell().getInventory().getAllClothingInInventory().get(clothing) > 1;
-								boolean canDye = !(isDyeingStackItem && hasFullInventory);
-								if (canDye) {
-									return new Response("Dye", 
-											Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
-												?"Use your proficiency with [style.colourEarth(Earth spells)] to dye this item."
-												:"Use a dye-brush to dye this item of clothing.",
-											DYE_CLOTHING) {
-										@Override
-										public void effects() {
-											resetClothingDyeColours();
-										}
-									};
-								} else {
-									return new Response("Dye", "Your inventory is full, so you can't dye this item of clothing.", null);
-								}
-							} else {
-								return new Response("Dye", "You'll need to find a dye-brush if you want to dye your clothes.", null);
-							}
-							
-						} else if(index == 5) {
-							if(clothing.isCondom()) {
-								if(clothing.getCondomEffect().getPotency().isNegative()) {
-									return new Response("Repair (<i>1 Essence</i>)", "You can't repair condoms on the ground!", null);
-								}
-								return new Response("Sabotage", "You can't sabotage condoms on the ground!", null);
-							}
-							return new Response("Enchant", "You can't enchant clothing on the ground!", null);
-	
-						} else if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) {
-							InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-6);
-							if(clothing.isCanBeEquipped(Main.game.getPlayer(), slot)) {
-								return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "Equip the " + clothing.getName() + ".", INVENTORY_MENU){
-									@Override
-									public void effects(){
-										Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>" + equipClothingFromGround(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing) + "</p>");
-									}
-								};
-							} else {
-								return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-							}
-							
-						} else if (index == 10) {
-							return getQuickTradeResponse();
-							
-						} else {
-							return null;
-						}
+						return getClothingResponse(responseTab, index);
 					}
 					
 				// ****************************** Interacting with an NPC ******************************
@@ -8781,6 +8692,71 @@ public class InventoryDialogue {
 					Main.mainController.openInventory();
 					Main.sex.endSexTurn(SexActionUtility.CLOTHING_REMOVAL);
 					Main.sex.setSexStarted(true);
+				}
+			};
+		}
+		if(index == 10)
+			return getQuickTradeResponse();
+		return null;
+	}
+
+	private static Response getClothingResponse(int ignoredResponseTab, int index) {
+		if(index == 1 || index == 2 || index == 3) {
+			boolean inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasClothing(clothing) && clothing.getRarity()!=Rarity.QUEST;
+			var title = index == 1 ? "Take (1)" : index == 2 ? "Take (5)" : "Take (All)";
+			if(inventoryFull)
+				return new Response(title, "Your inventory is already full!", null);
+			if(index == 2 && Main.game.getPlayerCell().getInventory().getClothingCount(clothing) < 5)
+				return new Response(title, "There aren't five " + clothing.getNamePlural() + " on the ground!", null);
+			return new Response(title, "Take one " + (index == 1 ? "one " : index == 2 ? "five of the " : "all of the ") + clothing.getName() + " from the ground.", INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					var count = index == 1 ? 1 : index == 2 ? 5 : Main.game.getPlayerCell().getInventory().getClothingCount(clothing);
+					pickUpClothing(Main.game.getPlayer(), clothing, count);
+				}
+			};
+		}
+		if(index==4) {
+			if(!Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH)
+					&& !Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
+				return new Response("Dye", "You'll need to find a dye-brush if you want to dye your clothes.", null);
+			boolean hasFullInventory = Main.game.getPlayerCell().getInventory().isInventoryFull();
+			boolean isDyeingStackItem = Main.game.getPlayerCell().getInventory().getAllClothingInInventory().get(clothing) > 1;
+			if(isDyeingStackItem && hasFullInventory)
+				return new Response("Dye", "Your inventory is full, so you can't dye this item of clothing.", null);
+			return new Response("Dye",
+					Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
+							? "Use your proficiency with [style.colourEarth(Earth spells)] to dye this item."
+							: "Use a dye-brush to dye this item of clothing.",
+					DYE_CLOTHING) {
+				@Override
+				public void effects() {
+					resetClothingDyeColours();
+				}
+			};
+		}
+		if(index == 5) {
+			if(clothing.isCondom()) {
+				boolean broken = clothing.getCondomEffect().getPotency().isNegative();
+				return new Response(
+						broken ? "Repair (<i>1 Essence</i>)" : "Sabotage",
+						"You can't " + (broken ? "repair" : "sabotage") + " condoms on the ground!",
+						null);
+			}
+			return new Response("Enchant", "You can't enchant clothing on the ground!", null);
+		}
+		if(index >= 6 && index <= 9 && index - 6 < clothing.getClothingType().getEquipSlots().size()) {
+			var slot = clothing.getClothingType().getEquipSlots().get(index-6);
+			var title = "Equip: " + Util.capitaliseSentence(slot.getName());
+			if(!clothing.isCanBeEquipped(Main.game.getPlayer(), slot))
+				return new Response(title, clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
+			return new Response(title, "Equip the " + clothing.getName() + ".", INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					Main.game.getTextEndStringBuilder()
+					.append("<p style='text-align:center;'>")
+							.append(equipClothingFromGround(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing))
+					.append("</p>");
 				}
 			};
 		}
