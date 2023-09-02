@@ -3849,40 +3849,7 @@ public class InventoryDialogue {
 					boolean inventoryFull = false;
 					switch(interactionType) {
 						case COMBAT:
-							if(index == 1) {
-								return new Response("Take (1)", "You can't take someone clothing while fighting them!", null);
-								
-							} else if(index == 2) {
-								return new Response("Take (5)", "You can't take someone clothing while fighting them!", null);
-								
-							} else if(index == 3) {
-								return new Response("Take (All)", "You can't take someone clothing while fighting them!", null);
-								
-							} else if(index == 4) {
-								return new Response("Dye", "You can't dye someone's clothing while fighting them!", null);
-								
-							} else if(index == 5) {
-								if(clothing.isCondom()) {
-									if(clothing.getCondomEffect().getPotency().isNegative()) {
-										return new Response("Repair (<i>1 Essence</i>)", "You can't repair someone else's condom, especially not when fighting them!", null);
-									}
-									return new Response("Sabotage", "You can't sabotage someone else's condom, especially not while fighting them!", null);
-								}
-								return new Response("Enchant", "You can't enchant someone else's clothing, especially not while fighting them!", null);
-								
-							} else if(index == 6) {
-								return new Response("Equip (Self)", "You can't use someone else's clothing while fighting them!", null);
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else if(index == 11) {
-								return new Response(UtilText.parse(inventoryNPC, "Equip: ([npc.HerHim])"), "You can't make someone wear clothing while fighting them!", null);
-								
-							} else {
-								return null;
-							}
-							
+							return getClothingResponseToNPCDuringCombat(responseTab, index);
 						case FULL_MANAGEMENT: case CHARACTER_CREATION:
 							inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasClothing(clothing) && clothing.getRarity()!=Rarity.QUEST;
 						
@@ -8762,6 +8729,30 @@ public class InventoryDialogue {
 		}
 		if(index == 10)
 			return getQuickTradeResponse();
+		return null;
+	}
+
+	private static Response getClothingResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
+		if(index == 1 || index == 2 || index == 3)
+			return new Response(index == 1 ? "Take (1)" : index == 2 ? "Take (5)" : "Take (All)", "You can't take someone clothing while fighting them!", null);
+		if(index == 4)
+			return new Response("Dye", "You can't dye someone's clothing while fighting them!", null);
+		if(index == 5) {
+			if(clothing.isCondom()) {
+				boolean broken = clothing.getCondomEffect().getPotency().isNegative();
+				return new Response(
+						broken ? "Repair (<i>1 Essence</i>)" : "Sabotage",
+						"You can't " + (broken ? "repair" : "sabotage") + " someone else's condom, especially not while fighting them!",
+						null);
+			}
+			return new Response("Enchant", "You can't enchant someone else's clothing, especially not while fighting them!", null);
+		}
+		if(index == 6)
+			return new Response("Equip (Self)", "You can't use someone else's clothing while fighting them!", null);
+		if(index == 10)
+			return getQuickTradeResponse();
+		if(index == 11)
+			return new Response(UtilText.parse(inventoryNPC, "Equip: ([npc.HerHim])"), "You can't make someone wear clothing while fighting them!", null);
 		return null;
 	}
 }
