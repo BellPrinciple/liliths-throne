@@ -3810,68 +3810,7 @@ public class InventoryDialogue {
 
 					switch(interactionType) {
 						case SEX:
-							String dropTitle = owner.getLocationPlace().isItemsDisappear()?"Drop ":"Store";
-							if(index == 1) {
-								return new Response(dropTitle+"(1)", "You can't drop clothing while masturbating.", null);
-								
-							} else if(index == 2) {
-								return new Response(dropTitle+"(5)", "You can't drop clothing while masturbating.", null);
-								
-							} else if(index == 3) {
-								return new Response(dropTitle+"(All)", "You can't drop clothing while masturbating.", null);
-								
-							} else if(index == 4) {
-								return new Response("Dye", "You can't dye your clothing while masturbating.", null);
-								
-							} else if(index == 5) {
-								if(clothing.isCondom()) {
-									if(clothing.getCondomEffect().getPotency().isNegative()) {
-										return new Response("Repair (<i>1 Essence</i>)", "You can't repair the condom while masturbating.", null);
-									}
-									return new Response("Sabotage", "You can't sabotage the condom while masturbating.", null);
-								}
-								return new Response("Enchant", "You can't enchant clothing while masturbating.", null);
-
-							} else if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) {
-								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-6);
-								if(clothing.isCanBeEquipped(Main.game.getPlayer(), slot)) {
-									if(clothing.isAbleToBeEquippedDuringSex(slot).getKey()) {
-										if(!Main.sex.getInitialSexManager().isAbleToEquipSexClothing(Main.game.getPlayer(), Main.game.getPlayer(), clothing)) {
-											return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "As this is a special sex scene, you cannot equip clothing during it!", null);
-										}
-										if(!Main.sex.isClothingEquipAvailable(Main.game.getPlayer(), slot, clothing)) {
-											return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "This slot is involved with an ongoing sex action, so you cannot equip clothing into it!", null);
-										}
-										if(Main.game.getPlayer().isAbleToEquip(clothing, slot, false, Main.game.getPlayer())) {
-											return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "Equip the " + clothing.getName() + ".", Main.sex.SEX_DIALOGUE){
-												@Override
-												public void effects(){
-													AbstractClothing c = clothing;
-													equipClothingFromInventory(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing);
-													Main.sex.setEquipClothingText(c, Main.game.getPlayer().getUnequipDescription());
-													Main.mainController.openInventory();
-													Main.sex.endSexTurn(SexActionUtility.CLOTHING_REMOVAL);
-													Main.sex.setSexStarted(true);
-												}
-											};
-										} else {
-											return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), getClothingBlockingRemovalText(Main.game.getPlayer(), "equip"), null);
-										}
-										
-									} else {
-										return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), clothing.isAbleToBeEquippedDuringSex(slot).getValue(), null);
-									}
-									
-								} else {
-									return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-								}
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-
-							} else {
-								return null;
-							}
+							return getPlayerClothingResponseDuringSex(responseTab, index);
 					default:
 							if(index == 1) {
 								if(owner.getLocationPlace().isItemsDisappear()) {
@@ -9022,4 +8961,59 @@ public class InventoryDialogue {
 		interactionType = npcInventoryInteraction;
 	}
 
+
+	// Clothing Inventory
+
+	private static Response getPlayerClothingResponseDuringSex(int ignoredResponseTab, int index) {
+		if(index == 1 || index == 2 || index == 3) {
+			var disappear = owner.getLocationPlace().isItemsDisappear();
+			var title = switch(index) {
+				case 1 -> disappear ? "Drop (1)" : "Store (1)";
+				case 2 -> disappear ? "Drop (5)" : "Store (5)";
+				default -> disappear ? "Drop (All)" : "Store (All)";
+			};
+			return new Response(title, "You can't drop clothing while masturbating.", null);
+		}
+		if(index == 4)
+			return new Response("Dye", "You can't dye your clothing while masturbating.", null);
+		if(index == 5) {
+			if(clothing.isCondom()) {
+				boolean broken = clothing.getCondomEffect().getPotency().isNegative();
+				return new Response(
+						broken ? "Repair (<i>1 Essence</i>)" : "Sabotage",
+						"You can't " + (broken ? "repair" : "sabotage") + " the condom while masturbating.",
+						null);
+			}
+			return new Response("Enchant", "You can't enchant clothing while masturbating.", null);
+		}
+		if(index >= 6 && index <= 9 && index - 6 < clothing.getClothingType().getEquipSlots().size()) {
+			var player = Main.game.getPlayer();
+			var slot = clothing.getClothingType().getEquipSlots().get(index - 6);
+			var title = "Equip: " + Util.capitaliseSentence(slot.getName());
+			if(!clothing.isCanBeEquipped(player, slot))
+				return new Response(title, clothing.getCannotBeEquippedText(player, slot), null);
+			if(!clothing.isAbleToBeEquippedDuringSex(slot).getKey())
+				return new Response(title, clothing.isAbleToBeEquippedDuringSex(slot).getValue(), null);
+			if(!Main.sex.getInitialSexManager().isAbleToEquipSexClothing(player, player, clothing))
+				return new Response(title, "As this is a special sex scene, you cannot equip clothing during it!", null);
+			if(!Main.sex.isClothingEquipAvailable(player, slot, clothing))
+				return new Response(title, "This slot is involved with an ongoing sex action, so you cannot equip clothing into it!", null);
+			if(!player.isAbleToEquip(clothing, slot, false, player))
+				return new Response(title, getClothingBlockingRemovalText(player, "equip"), null);
+			return new Response(title, "Equip the " + clothing.getName() + ".", Main.sex.SEX_DIALOGUE) {
+				@Override
+				public void effects() {
+					var c = clothing;
+					equipClothingFromInventory(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing);
+					Main.sex.setEquipClothingText(c, Main.game.getPlayer().getUnequipDescription());
+					Main.mainController.openInventory();
+					Main.sex.endSexTurn(SexActionUtility.CLOTHING_REMOVAL);
+					Main.sex.setSexStarted(true);
+				}
+			};
+		}
+		if(index == 10)
+			return getQuickTradeResponse();
+		return null;
+	}
 }
