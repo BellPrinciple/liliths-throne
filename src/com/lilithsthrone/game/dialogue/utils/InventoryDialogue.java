@@ -2610,35 +2610,7 @@ public class InventoryDialogue {
 					
 					switch(interactionType) {
 						case SEX:
-							String dropTitle = owner.getLocationPlace().isItemsDisappear()?"Drop ":"Store";
-							if(index == 1) {
-								return new Response(dropTitle+"(1)", "You can't drop your weapons while masturbating.", null);
-								
-							} else if(index == 2) {
-								return new Response(dropTitle+"(5)", "You can't drop your weapons while masturbating.", null);
-								
-							} else if(index == 3) {
-								return new Response(dropTitle+"(All)", "You can't drop your weapons while masturbating.", null);
-								
-							} else if(index == 4) {
-								return new Response("Dye/Reforge", "You can't dye or reforge your weapons while masturbating.", null);
-								
-							} else if(index == 5) {
-								return new Response("Enchant", "You can't enchant weapons while masturbating.", null);
-								
-							} else if(index == 6) {
-								return new Response("Equip Main (Self)", "You can't equip weapons while masturbating.", null);
-								
-							} else if(index == 7) {
-								return new Response("Equip Offhand (Self)", "You can't equip weapons while masturbating.", null);
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else {
-								return null;
-							}
-							
+							return getPlayerWeaponResponseDuringSex(responseTab, index);
 						default:
 							if(index == 1) {
 								if(owner.getLocationPlace().isItemsDisappear()) {
@@ -7307,7 +7279,27 @@ public class InventoryDialogue {
 		
 		resetPostAction();
 	}
-	
+
+	private static Response getPlayerWeaponResponseDuringSex(int ignoredResponseTab, int index) {
+		String dropTitle = owner.getLocationPlace().isItemsDisappear() ? "Drop " : "Store ";
+		if(index == 1)
+			return new Response(dropTitle+"(1)", "You can't drop your weapons while masturbating.", null);
+		if(index == 2)
+			return new Response(dropTitle+"(5)", "You can't drop your weapons while masturbating.", null);
+		if(index == 3)
+			return new Response(dropTitle+"(All)", "You can't drop your weapons while masturbating.", null);
+		if(index == 4)
+			return new Response("Dye/Reforge", "You can't dye or reforge your weapons while masturbating.", null);
+		if(index == 5)
+			return new Response("Enchant", "You can't enchant weapons while masturbating.", null);
+		if(index == 6)
+			return new Response("Equip Main (Self)", "You can't equip weapons while masturbating.", null);
+		if(index == 7)
+			return new Response("Equip Offhand (Self)", "You can't equip weapons while masturbating.", null);
+		if(index == 10)
+			return getQuickTradeResponse();
+		return null;
+	}
 	
 	// Clothing:
 	
