@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 
 import com.lilithsthrone.game.character.GameCharacter;
@@ -3821,233 +3822,7 @@ public class InventoryDialogue {
 							return getPlayerClothingResponseToNPCDuringCombat(responseTab, index);
 							
 						case FULL_MANAGEMENT: case CHARACTER_CREATION:
-							boolean inventoryFull = inventoryNPC.isInventoryFull() && !inventoryNPC.hasClothing(clothing);
-							
-							if(index == 1) {
-								if(!clothing.getClothingType().isAbleToBeDropped()) {
-									return new Response("Give (1)", "You cannot give away the " + clothing.getName() + "!", null);
-									
-								} else if(inventoryFull) {
-									return new Response("Give (1)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
-								}
-								return new Response("Give (1)", UtilText.parse(inventoryNPC, "Give [npc.name] the " + clothing.getName() + "."), INVENTORY_MENU){
-									@Override
-									public void effects(){
-										transferClothing(Main.game.getPlayer(), inventoryNPC, clothing, 1);
-									}
-								};
-								
-							} else if(index == 2) {
-								if(!clothing.getClothingType().isAbleToBeDropped()) {
-									return new Response("Give (5)", "You cannot give away the " + clothing.getName() + "!", null);
-									
-								} else if(inventoryFull) {
-									return new Response("Give (5)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
-								}
-								if(Main.game.getPlayer().getClothingCount(clothing) >= 5) {
-									return new Response("Give (5)", UtilText.parse(inventoryNPC, "Give [npc.name] five of your " + clothing.getNamePlural() + "."), INVENTORY_MENU){
-										@Override
-										public void effects(){
-											transferClothing(Main.game.getPlayer(), inventoryNPC, clothing, 5);
-										}
-									};
-								} else {
-									return new Response("Give (5)", "You don't have five " + clothing.getNamePlural() + " to give!", null);
-								}
-								
-							} else if(index == 3) {
-								if(!clothing.getClothingType().isAbleToBeDropped()) {
-									return new Response("Give (All)", "You cannot give away the " + clothing.getName() + "!", null);
-									
-								} else if(inventoryFull) {
-									return new Response("Give (All)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
-								}
-								return new Response("Give (All)", UtilText.parse(inventoryNPC, "Give [npc.name] all of your " + clothing.getNamePlural() + "."), INVENTORY_MENU){
-									@Override
-									public void effects(){
-										transferClothing(Main.game.getPlayer(), inventoryNPC, clothing, Main.game.getPlayer().getClothingCount(clothing));
-									}
-								};
-								
-							} else if (index==4) {
-								if (Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH) || Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)) {
-									boolean hasFullInventory = Main.game.getPlayer().isInventoryFull();
-									boolean isDyeingStackItem = Main.game.getPlayer().getAllClothingInInventory().get(clothing) > 1;
-									boolean canDye = !(isDyeingStackItem && hasFullInventory);
-									if (canDye) {
-										return new Response("Dye",
-												Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
-													?"Use your proficiency with [style.colourEarth(Earth spells)] to dye this item."
-													:"Use a dye-brush to dye this item of clothing.",
-												DYE_CLOTHING) {
-											@Override
-											public void effects() {
-												resetClothingDyeColours();
-											}
-										};
-									} else {
-										return new Response("Dye", "Your inventory is full, so you can't dye this item of clothing.", null);
-									}
-								} else {
-									return new Response("Dye", "You'll need to find a dye-brush if you want to dye your clothes.", null);
-								}
-								
-							} else if(index == 5) {
-								if(clothing.isCondom()) {
-									return getCondomSabotageResponse(clothing);
-								}
-								if(Main.game.isDebugMode()
-										|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY) && Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
-									if(clothing.getEnchantmentItemType(null)==null || clothing.getItemTags().contains(ItemTag.UNENCHANTABLE)) {
-										return new Response("Enchant", "This clothing cannot be enchanted!", null);
-										
-									} else if(!clothing.isEnchantmentKnown()) {
-										if(Main.game.getPlayer().getEssenceCount() >= IDENTIFICATION_ESSENCE_PRICE) {
-											return new Response("Identify ([style.italicsArcane("+IDENTIFICATION_ESSENCE_PRICE+" Essences)])",
-													"To identify the "+clothing.getName()+", you can either spend "+IDENTIFICATION_ESSENCE_PRICE+" arcane essences to do it yourself,"
-															+ " or go to a vendor and pay "+IDENTIFICATION_PRICE+" flames to have them do it for you.",
-													CLOTHING_INVENTORY) {
-												@Override
-												public void effects() {
-													Main.game.getPlayer().incrementEssenceCount(-IDENTIFICATION_ESSENCE_PRICE, false);
-
-													String enchantmentRemovedString = clothing.setEnchantmentKnown(owner, true);
-													
-													clothing = AbstractClothing.enchantmentRemovedClothing;
-													
-													Main.game.getTextEndStringBuilder().append(
-															"<p>"
-																+ "You channel the power of "+Util.intToString(IDENTIFICATION_ESSENCE_PRICE)+" of your arcane essences into the "+clothing.getName()
-																	+", and as it emits a faint purple glow, you find yourself able to detect what sort of enchantment it has!"
-															+ "</p>"
-															+ enchantmentRemovedString
-															+ "<p style='text-align:center;'>"
-																+ "Identifying the "+clothing.getName()+" has cost you [style.boldBad("+Util.intToString(IDENTIFICATION_ESSENCE_PRICE)+")] [style.boldArcane(Arcane Essences)]!"
-															+ "</p>");
-													RenderingEngine.setPage(Main.game.getPlayer(), clothing);
-												}
-											};
-										} else {
-											return new Response("Identify (<i>"+IDENTIFICATION_ESSENCE_PRICE+" Essences</i>)",
-													"To identify the "+clothing.getName()+", you can either spend "+IDENTIFICATION_ESSENCE_PRICE+" arcane essences to do it yourself ([style.italicsBad(which you don't have)]),"
-															+ " or go to a vendor and pay "+IDENTIFICATION_PRICE+" flames to have them do it for you.", null);
-										}
-									}
-									return new Response("Enchant", "Enchant this clothing.", EnchantmentDialogue.ENCHANTMENT_MENU) {
-										@Override
-										public DialogueNode getNextDialogue() {
-											return EnchantmentDialogue.getEnchantmentMenu(clothing);
-										}
-									};
-									
-								} else {
-									return new Response("Enchant", getEnchantmentNotDiscoveredText("clothing"), null);
-								}
-								
-							} else if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) {
-								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-6);
-								if(clothing.isCanBeEquipped(Main.game.getPlayer(), slot)) {
-									return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "Equip the " + clothing.getName() + ".", INVENTORY_MENU) {
-										@Override
-										public void effects(){
-											Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>" + equipClothingFromInventory(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing) + "</p>");
-										}
-									};
-								} else {
-									return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-								}
-									
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else if(index >= 11 && index <= 14 && index-11<clothing.getClothingType().getEquipSlots().size()) {
-								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-11);
-//								if(!clothing.getClothingType().isAbleToBeDropped()) {
-//									return new Response(
-//											UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
-//											"You cannot give away the " + clothing.getName() + "!",
-//											null);
-//								}
-								Value<Boolean, String> equipAllowed = inventoryNPC.isInventoryEquipAllowed(clothing, slot);
-								if(!equipAllowed.getKey()) {
-									return new Response(
-											UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
-											UtilText.parse(inventoryNPC, equipAllowed.getValue()),
-											null);
-								}
-								if(clothing.isCanBeEquipped(inventoryNPC, slot)) {
-									if(inventoryNPC.isAbleToEquip(clothing, slot, true, Main.game.getPlayer()) && clothing.isEnslavementClothing() && (!inventoryNPC.isSlave() || !inventoryNPC.getOwner().isPlayer())) {
-										boolean willEnslave = !inventoryNPC.isSlave() && inventoryNPC.isAbleToBeEnslaved() && Main.game.getPlayer().isHasSlaverLicense();
-										return new Response(
-												UtilText.parse(inventoryNPC,
-														!willEnslave
-															?"[style.colourMinorBad(Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim]))]"
-															:"[style.colourArcane(Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim]))]"),
-												UtilText.parse(inventoryNPC,
-														"Make [npc.name] equip the "+clothing.getName()+"."
-														+(!willEnslave
-															?"<br/><i>Despite the fact that the "+clothing.getName()+" "
-																	+(clothing.getClothingType().isPlural()?"have an enslavement enchantment, they":"has an enslavement enchantment, it")
-																	+" [style.colourMinorBad(will not enslave [npc.name])], as"
-																	+ (Main.game.getPlayer().isHasSlaverLicense()
-																			?" [npc.sheIsFull] not a suitable target for enslavement"
-																			:" you do not possess a slaver license")
-																	+"!</i>"
-															:"<br/><i>Thanks to the fact that the "+clothing.getName()+" "
-																	+(clothing.getClothingType().isPlural()?"have an enslavement enchantment, they":"has an enslavement enchantment, it")
-																	+" [style.colourArcane(will enslave [npc.name])], making you [npc.her] new owner!</i>")),
-												INVENTORY_MENU){
-											@Override
-											public DialogueNode getNextDialogue() {
-												if(inventoryNPC.getEnslavementDialogue(clothing)!=null) {
-													return inventoryNPC.getEnslavementDialogue(clothing);
-													
-												} else {
-													return INVENTORY_MENU;
-												}
-											}
-											@Override
-											public void effects() {
-												List<NPC> enslavementTargets = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
-//												enslavementTargets.removeIf((npc) -> Main.game.getPlayer().getFriendlyOccupants().contains(npc.getId()));
-												enslavementTargets.removeIf((npc) -> !Main.combat.getEnemies(Main.game.getPlayer()).contains(npc));
-												if(enslavementTargets.size()<=1) {
-													SlaveDialogue.setFollowupEnslavementDialogue(Main.game.getDefaultDialogue(false));
-												} else {
-													SlaveDialogue.setFollowupEnslavementDialogue(Main.game.getSavedDialogueNode());
-												}
-												if(inventoryNPC.getEnslavementDialogue(clothing)==null) {
-													Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>" + equipClothingFromInventory(inventoryNPC, slot, Main.game.getPlayer(), clothing) + "</p>");
-													
-												} else {
-													equipClothingFromInventory(inventoryNPC, slot, Main.game.getPlayer(), clothing);
-												}
-											}
-										};
-										
-									} else {
-										return new Response(
-												UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
-												UtilText.parse(inventoryNPC, "Make [npc.name] equip the "+clothing.getName()+"!"),
-												INVENTORY_MENU){
-											@Override
-											public void effects(){
-												Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>" + equipClothingFromInventory(inventoryNPC, slot, Main.game.getPlayer(), clothing) + "</p>");
-											}
-										};
-									}
-									
-								} else {
-									return new Response(
-											UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
-											clothing.getCannotBeEquippedText(inventoryNPC, slot),
-											null);
-								}
-							
-							} else {
-								return null;
-							}
-							
+							return getPlayerClothingResponseToNPCDuringManagement(responseTab, index);
 						case SEX:
 							if(index == 1) {
 								return new Response("Give (1)", "You can't give someone clothing while having sex with them!", null);
@@ -8932,6 +8707,187 @@ public class InventoryDialogue {
 		if(index >= 11 && index <= 14 && index-11<clothing.getClothingType().getEquipSlots().size()) {
 			InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-11);
 			return new Response("Equip: "+Util.capitaliseSentence(slot.getName())+" (Opponent)", "You can't make your opponent equip clothing while fighting them!", null);
+		}
+		return null;
+	}
+
+	private static Response getPlayerClothingResponseToNPCDuringManagement(int ignoredResponseTab, int index) {
+		boolean inventoryFull = inventoryNPC.isInventoryFull() && !inventoryNPC.hasClothing(clothing);
+		if(index == 1 || index == 2 || index == 3) {
+			var title = index == 1 ? "Give (1)" : index == 2 ? "Give (5)" : "Give (All)";
+			if(!clothing.getClothingType().isAbleToBeDropped())
+				return new Response(title, "You cannot give away the " + clothing.getName() + "!", null);
+			if(inventoryFull)
+				return new Response(title, UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
+			if(index == 2 && Main.game.getPlayer().getClothingCount(clothing) < 5)
+				return new Response(title, "You don't have five " + clothing.getNamePlural() + " to give!", null);
+			return new Response(
+					title,
+					UtilText.parse(inventoryNPC, "Give [npc.name]" + (index == 1 ? "" : index == 2 ? " five of" : " all of") + " your " + clothing.getName() + "."),
+					INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					var count = index == 1 ? 1 : index == 2 ? 5 : Main.game.getPlayer().getClothingCount(clothing);
+					transferClothing(Main.game.getPlayer(), inventoryNPC, clothing, count);
+				}
+			};
+		}
+		if(index==4) {
+			if(!Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH)
+					&& !Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
+				return new Response("Dye", "You'll need to find a dye-brush if you want to dye your clothes.", null);
+			boolean hasFullInventory = Main.game.getPlayer().isInventoryFull();
+			boolean isDyeingStackItem = Main.game.getPlayer().getAllClothingInInventory().get(clothing) > 1;
+			if (isDyeingStackItem && hasFullInventory)
+				return new Response("Dye", "Your inventory is full, so you can't dye this item of clothing.", null);
+			return new Response("Dye",
+					Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
+							? "Use your proficiency with [style.colourEarth(Earth spells)] to dye this item."
+							: "Use a dye-brush to dye this item of clothing.",
+					DYE_CLOTHING) {
+				@Override
+				public void effects() {
+					resetClothingDyeColours();
+				}
+			};
+		}
+		if(index == 5) {
+			if(clothing.isCondom())
+				return getCondomSabotageResponse(clothing);
+			if(Main.game.isDebugMode()
+					|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)
+							&& Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
+				if(clothing.getEnchantmentItemType(null) == null || clothing.getItemTags().contains(ItemTag.UNENCHANTABLE))
+					return new Response("Enchant", "This clothing cannot be enchanted!", null);
+				if(!clothing.isEnchantmentKnown()) {
+					if(Main.game.getPlayer().getEssenceCount() < IDENTIFICATION_ESSENCE_PRICE)
+						return new Response("Identify (<i>"+IDENTIFICATION_ESSENCE_PRICE+" Essences</i>)",
+								"To identify the "+clothing.getName()+", you can either spend "+IDENTIFICATION_ESSENCE_PRICE+" arcane essences to do it yourself ([style.italicsBad(which you don't have)]),"
+										+ " or go to a vendor and pay "+IDENTIFICATION_PRICE+" flames to have them do it for you.", null);
+					return new Response("Identify ([style.italicsArcane("+IDENTIFICATION_ESSENCE_PRICE+" Essences)])",
+							"To identify the "+clothing.getName()+", you can either spend "+IDENTIFICATION_ESSENCE_PRICE+" arcane essences to do it yourself,"
+									+ " or go to a vendor and pay "+IDENTIFICATION_PRICE+" flames to have them do it for you.",
+							CLOTHING_INVENTORY) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().incrementEssenceCount(-IDENTIFICATION_ESSENCE_PRICE, false);
+							String enchantmentRemovedString = clothing.setEnchantmentKnown(owner, true);
+							clothing = AbstractClothing.enchantmentRemovedClothing;
+							Main.game.getTextEndStringBuilder()
+							.append("<p>")
+									.append("You channel the power of ")
+									.append(Util.intToString(IDENTIFICATION_ESSENCE_PRICE))
+									.append(" of your arcane essences into the ")
+									.append(clothing.getName())
+									.append(", and as it emits a faint purple glow, you find yourself able to detect what sort of enchantment it has!")
+							.append("</p>")
+							.append(enchantmentRemovedString)
+							.append("<p style='text-align:center;'>")
+									.append("Identifying the ")
+									.append(clothing.getName())
+									.append(" has cost you [style.boldBad(")
+									.append(Util.intToString(IDENTIFICATION_ESSENCE_PRICE))
+									.append(")] [style.boldArcane(Arcane Essences)]!")
+							.append("</p>");
+							RenderingEngine.setPage(Main.game.getPlayer(), clothing);
+						}
+					};
+				}
+				return new Response("Enchant", "Enchant this clothing.", EnchantmentDialogue.ENCHANTMENT_MENU) {
+					@Override
+					public DialogueNode getNextDialogue() {
+						return EnchantmentDialogue.getEnchantmentMenu(clothing);
+					}
+				};
+			}
+			return new Response("Enchant", getEnchantmentNotDiscoveredText("clothing"), null);
+		}
+		if(index >= 6 && index <= 9 && index - 6 < clothing.getClothingType().getEquipSlots().size()) {
+			var slot = clothing.getClothingType().getEquipSlots().get(index - 6);
+			if(!clothing.isCanBeEquipped(Main.game.getPlayer(), slot))
+				return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
+			return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "Equip the " + clothing.getName() + ".", INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					Main.game.getTextEndStringBuilder()
+					.append("<p style='text-align:center;'>")
+							.append(equipClothingFromInventory(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing))
+					.append("</p>");
+				}
+			};
+		}
+		if(index == 10)
+			return getQuickTradeResponse();
+		if(index >= 11 && index <= 14 && index-11<clothing.getClothingType().getEquipSlots().size()) {
+			var slot = clothing.getClothingType().getEquipSlots().get(index-11);
+//			if(!clothing.getClothingType().isAbleToBeDropped())
+//				return new Response(
+//						UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
+//						"You cannot give away the " + clothing.getName() + "!",
+//						null);
+			var equipAllowed = inventoryNPC.isInventoryEquipAllowed(clothing, slot);
+			if(!equipAllowed.getKey())
+				return new Response(
+						UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
+						UtilText.parse(inventoryNPC, equipAllowed.getValue()),
+						null);
+			if(!clothing.isCanBeEquipped(inventoryNPC, slot))
+				return new Response(
+						UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
+						clothing.getCannotBeEquippedText(inventoryNPC, slot),
+						null);
+			if(!inventoryNPC.isAbleToEquip(clothing, slot, true, Main.game.getPlayer()) || !clothing.isEnslavementClothing() || (inventoryNPC.isSlave() && inventoryNPC.getOwner().isPlayer()))
+				return new Response(
+						UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
+						UtilText.parse(inventoryNPC, "Make [npc.name] equip the "+clothing.getName()+"!"),
+						INVENTORY_MENU) {
+					@Override
+					public void effects() {
+						Main.game.getTextEndStringBuilder()
+						.append("<p style='text-align:center;'>")
+								.append(equipClothingFromInventory(inventoryNPC, slot, Main.game.getPlayer(), clothing))
+						.append("</p>");
+					}
+				};
+			boolean willEnslave = !inventoryNPC.isSlave() && inventoryNPC.isAbleToBeEnslaved() && Main.game.getPlayer().isHasSlaverLicense();
+			return new Response(
+					UtilText.parse(inventoryNPC,
+							!willEnslave
+									?"[style.colourMinorBad(Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim]))]"
+									:"[style.colourArcane(Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim]))]"),
+					UtilText.parse(inventoryNPC,
+							"Make [npc.name] equip the "+clothing.getName()+"."
+									+(!willEnslave
+									?"<br/><i>Despite the fact that the "+clothing.getName()+" "
+									+(clothing.getClothingType().isPlural()?"have an enslavement enchantment, they":"has an enslavement enchantment, it")
+									+" [style.colourMinorBad(will not enslave [npc.name])], as"
+									+ (Main.game.getPlayer().isHasSlaverLicense()
+									?" [npc.sheIsFull] not a suitable target for enslavement"
+									:" you do not possess a slaver license")
+									+"!</i>"
+									:"<br/><i>Thanks to the fact that the "+clothing.getName()+" "
+											+(clothing.getClothingType().isPlural()?"have an enslavement enchantment, they":"has an enslavement enchantment, it")
+											+" [style.colourArcane(will enslave [npc.name])], making you [npc.her] new owner!</i>")),
+					INVENTORY_MENU) {
+				@Override
+				public DialogueNode getNextDialogue() {
+					var enslavementDialogue = inventoryNPC.getEnslavementDialogue(clothing);
+					return Objects.requireNonNullElse(enslavementDialogue, INVENTORY_MENU);
+				}
+				@Override
+				public void effects() {
+					var enslavementTargets = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
+//					enslavementTargets.removeIf((npc) -> Main.game.getPlayer().getFriendlyOccupants().contains(npc.getId()));
+					enslavementTargets.removeIf((npc) -> !Main.combat.getEnemies(Main.game.getPlayer()).contains(npc));
+					SlaveDialogue.setFollowupEnslavementDialogue(enslavementTargets.size() <= 1 ? Main.game.getDefaultDialogue(false) : Main.game.getSavedDialogueNode());
+					var description = equipClothingFromInventory(inventoryNPC, slot, Main.game.getPlayer(), clothing);
+					if(inventoryNPC.getEnslavementDialogue(clothing) == null)
+						Main.game.getTextEndStringBuilder()
+						.append("<p style='text-align:center;'>")
+								.append(description)
+						.append("</p>");
+				}
+			};
 		}
 		return null;
 	}
