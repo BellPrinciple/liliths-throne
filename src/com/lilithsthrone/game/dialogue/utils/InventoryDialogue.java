@@ -3839,61 +3839,7 @@ public class InventoryDialogue {
 					boolean inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasClothing(clothing) && clothing.getRarity()!=Rarity.QUEST;
 					switch(interactionType) {
 						case CHARACTER_CREATION:
-							if (index == 1) {
-								if(Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.NIPPLES)
-										|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.ANUS)
-										|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.PENIS)
-										|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.VAGINA)
-										|| (Main.game.getPlayer().getClothingInSlot(InventorySlot.FOOT)==null && Main.game.getPlayer().getLegType().equals(LegType.HUMAN))) {
-									return new Response("To the stage", "You need to be wearing clothing that covers your body, as well as a pair of shoes.", null);
-									
-								} else {
-									return new Response("To the stage", "You're ready to approach the stage now.", CharacterCreation.CHOOSE_BACKGROUND) {
-										@Override
-										public void effects() {
-											CharacterCreation.moveNPCIntoPlayerTile();
-										}
-									};
-								}
-								
-							} else if(index == 4) {
-								if(Main.game.getPlayer().getClothingCurrentlyEquipped().isEmpty()){
-									return new Response("Unequip all", "You're currently naked, there's nothing to be unequipped.", null);
-								}
-								else{
-									return new Response("Unequip all", "Remove as much of your clothing as possible.", INVENTORY_MENU){
-										@Override
-										public void effects(){
-											Main.game.getTextEndStringBuilder().append(unequipAll(Main.game.getPlayer()));
-										}
-									};
-								}
-								
-							} else if(index == 5) {
-								return new Response("Change colour", "Change the colour of this item of clothing.", DYE_CLOTHING_CHARACTER_CREATION) {
-									@Override
-									public void effects() {
-										resetClothingDyeColours();
-									}
-								};
-							} else if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) {
-								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-6);
-								if(clothing.isCanBeEquipped(Main.game.getPlayer(), slot)) {
-									return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "Equip the " + clothing.getName() + ".", INVENTORY_MENU){
-										@Override
-										public void effects(){
-											equipClothingFromGround(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing);
-										}
-									};
-									
-								} else {
-									return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-								}
-							
-							} else {
-								return null;
-							}
-					
+							return getClothingResponseDuringCharacterCreation(responseTab, index);
 					case SEX:
 						if(index == 1) {
 							return new Response("Take (1)", "You can't pick up clothing while masturbating.", null);
@@ -8805,6 +8751,54 @@ public class InventoryDialogue {
 					UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
 					UtilText.parse(inventoryNPC, "[npc.Name] doesn't want to wear your clothing."),
 					null);
+		}
+		return null;
+	}
+
+	private static Response getClothingResponseDuringCharacterCreation(int ignoredResponseTab, int index) {
+		if(index == 1) {
+			if(Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.NIPPLES)
+					|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.ANUS)
+					|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.PENIS)
+					|| Main.game.getPlayer().isCoverableAreaVisible(CoverableArea.VAGINA)
+					|| (Main.game.getPlayer().getClothingInSlot(InventorySlot.FOOT) == null
+							&& Main.game.getPlayer().getLegType().equals(LegType.HUMAN)))
+				return new Response("To the stage", "You need to be wearing clothing that covers your body, as well as a pair of shoes.", null);
+			return new Response("To the stage", "You're ready to approach the stage now.", CharacterCreation.CHOOSE_BACKGROUND) {
+				@Override
+				public void effects() {
+					CharacterCreation.moveNPCIntoPlayerTile();
+				}
+			};
+		}
+		if(index == 4) {
+			if(Main.game.getPlayer().getClothingCurrentlyEquipped().isEmpty())
+				return new Response("Unequip all", "You're currently naked, there's nothing to be unequipped.", null);
+			return new Response("Unequip all", "Remove as much of your clothing as possible.", INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					Main.game.getTextEndStringBuilder().append(unequipAll(Main.game.getPlayer()));
+				}
+			};
+		}
+		if(index == 5)
+			return new Response("Change colour", "Change the colour of this item of clothing.", DYE_CLOTHING_CHARACTER_CREATION) {
+				@Override
+				public void effects() {
+					resetClothingDyeColours();
+				}
+			};
+		if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) {
+			var slot = clothing.getClothingType().getEquipSlots().get(index-6);
+			var title = "Equip: "+Util.capitaliseSentence(slot.getName());
+			if(!clothing.isCanBeEquipped(Main.game.getPlayer(), slot))
+				return new Response(title, clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
+			return new Response(title, "Equip the " + clothing.getName() + ".", INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					equipClothingFromGround(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing);
+				}
+			};
 		}
 		return null;
 	}
