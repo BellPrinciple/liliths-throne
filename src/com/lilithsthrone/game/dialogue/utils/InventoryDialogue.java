@@ -3818,41 +3818,7 @@ public class InventoryDialogue {
 				} else {
 					switch(interactionType) {
 						case COMBAT:
-							if(index == 1) {
-								return new Response("Give (1)", "You can't give someone clothing while fighting them!", null);
-								
-							} else if(index == 2) {
-								return new Response("Give (5)", "You can't give someone clothing while fighting them!", null);
-								
-							} else if(index == 3) {
-								return new Response("Give (All)", "You can't give someone clothing while fighting them!", null);
-								
-							} else if(index == 4) {
-								return new Response("Dye", "You can't dye your clothing while fighting someone!", null);
-								
-							} else if(index == 5) {
-								if(clothing.isCondom()) {
-									if(clothing.getCondomEffect().getPotency().isNegative()) {
-										return new Response("Repair (<i>1 Essence</i>)", "You can't repair the condom while fighting someone!", null);
-									}
-									return new Response("Sabotage", "You can't sabotage the condom while fighting someone!", null);
-								}
-								return new Response("Enchant", "You can't enchant clothing while fighting someone!", null);
-								
-							} else if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) {
-								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-6);
-								return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "You cannot change your clothes while fighting someone!", null);
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-
-							} else if(index >= 11 && index <= 14 && index-11<clothing.getClothingType().getEquipSlots().size()) {
-								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-11);
-								return new Response("Equip: "+Util.capitaliseSentence(slot.getName())+" (Opponent)", "You can't make your opponent equip clothing while fighting them!", null);
-								
-							} else {
-								return null;
-							}
+							return getPlayerClothingResponseToNPCDuringCombat(responseTab, index);
 							
 						case FULL_MANAGEMENT: case CHARACTER_CREATION:
 							boolean inventoryFull = inventoryNPC.isInventoryFull() && !inventoryNPC.hasClothing(clothing);
@@ -8919,18 +8885,54 @@ public class InventoryDialogue {
 			return new Response("Enchant", getEnchantmentNotDiscoveredText("clothing"), null);
 		}
 		if(index >= 6 && index <= 9 && index - 6 < clothing.getClothingType().getEquipSlots().size()) {
-			InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index - 6);
+			var slot = clothing.getClothingType().getEquipSlots().get(index - 6);
+			var title = "Equip: " + Util.capitaliseSentence(slot.getName());
 			if(!clothing.isCanBeEquipped(Main.game.getPlayer(), slot))
-				return new Response("Equip: " + Util.capitaliseSentence(slot.getName()), clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-			return new Response("Equip: " + Util.capitaliseSentence(slot.getName()), "Equip the " + clothing.getName() + ".", INVENTORY_MENU) {
+				return new Response(title, clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
+			return new Response(title, "Equip the " + clothing.getName() + ".", INVENTORY_MENU) {
 				@Override
 				public void effects() {
-					Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>" + equipClothingFromInventory(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing) + "</p>");
+					Main.game.getTextEndStringBuilder()
+					.append("<p style='text-align:center;'>")
+							.append(equipClothingFromInventory(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing))
+					.append("</p>");
 				}
 			};
 		}
 		if(index == 10)
 			return getQuickTradeResponse();
+		return null;
+	}
+
+	private static Response getPlayerClothingResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
+		if(index == 1)
+			return new Response("Give (1)", "You can't give someone clothing while fighting them!", null);
+		if(index == 2)
+			return new Response("Give (5)", "You can't give someone clothing while fighting them!", null);
+		if(index == 3)
+			return new Response("Give (All)", "You can't give someone clothing while fighting them!", null);
+		if(index == 4)
+			return new Response("Dye", "You can't dye your clothing while fighting someone!", null);
+		if(index == 5) {
+			if(clothing.isCondom()) {
+				boolean broken = clothing.getCondomEffect().getPotency().isNegative();
+				return new Response(
+						broken ? "Repair (<i>1 Essence</i>)" : "Sabotage",
+						"You can't " + (broken ? "repair" : "sabotage") + " the condom while fighting someone!",
+						null);
+			}
+			return new Response("Enchant", "You can't enchant clothing while fighting someone!", null);
+		}
+		if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) {
+			InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-6);
+			return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "You cannot change your clothes while fighting someone!", null);
+		}
+		if(index == 10)
+			return getQuickTradeResponse();
+		if(index >= 11 && index <= 14 && index-11<clothing.getClothingType().getEquipSlots().size()) {
+			InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-11);
+			return new Response("Equip: "+Util.capitaliseSentence(slot.getName())+" (Opponent)", "You can't make your opponent equip clothing while fighting them!", null);
+		}
 		return null;
 	}
 }
