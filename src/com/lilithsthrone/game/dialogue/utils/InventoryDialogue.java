@@ -3826,194 +3826,7 @@ public class InventoryDialogue {
 						case SEX:
 							return getPlayerClothingResponseToNPCDuringSex(responseTab, index);
 						case TRADING:
-							if(index == 1) {
-								if(!clothing.getClothingType().isAbleToBeSold()) {
-									return new Response("Sell (1)", "You cannot sell the " + clothing.getName() + "!", null);
-									
-								} else if (inventoryNPC.willBuy(clothing)) {
-									int sellPrice = clothing.getPrice(inventoryNPC.getBuyModifier());
-									return new Response("Sell (1) (" + UtilText.formatAsMoney(sellPrice, "span") + ")", "Sell the " + clothing.getName() + " for " + UtilText.formatAsMoney(sellPrice) + ".", INVENTORY_MENU){
-										@Override
-										public void effects(){
-											sellClothing(Main.game.getPlayer(), inventoryNPC, clothing, 1, sellPrice);
-										}
-									};
-								} else {
-									return new Response("Sell (1)", inventoryNPC.getName("The") + " doesn't want to buy this.", null);
-								}
-								
-							} else if(index == 2) {
-								if(!clothing.getClothingType().isAbleToBeSold()) {
-									return new Response("Sell (5)", "You cannot sell the " + clothing.getName() + "!", null);
-									
-								} else if(Main.game.getPlayer().getClothingCount(clothing) >= 5) {
-									if (inventoryNPC.willBuy(clothing)) {
-										int sellPrice = clothing.getPrice(inventoryNPC.getBuyModifier());
-										return new Response("Sell (5) (" + UtilText.formatAsMoney(sellPrice*5, "span") + ")", "Sell five of your " + clothing.getNamePlural() + " for " + UtilText.formatAsMoney(sellPrice*5) + ".", INVENTORY_MENU){
-											@Override
-											public void effects(){
-												sellClothing(Main.game.getPlayer(), inventoryNPC, clothing, 5, sellPrice);
-											}
-										};
-									} else {
-										return new Response("Sell (5)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
-									}
-									
-								} else {
-									return new Response("Sell (5)", "You don't have five " + clothing.getNamePlural() + " to sell!", null);
-								}
-								
-							} else if(index == 3) {
-								if(!clothing.getClothingType().isAbleToBeSold()) {
-									return new Response("Sell (All)", "You cannot sell the " + clothing.getName() + "!", null);
-									
-								} else if (inventoryNPC.willBuy(clothing)) {
-									int sellPrice = clothing.getPrice(inventoryNPC.getBuyModifier());
-									return new Response("Sell (All) (" + UtilText.formatAsMoney(sellPrice*Main.game.getPlayer().getClothingCount(clothing), "span") + ")",
-											"Sell the " + clothing.getName() + " for " + UtilText.formatAsMoney(sellPrice*Main.game.getPlayer().getClothingCount(clothing)) + ".", INVENTORY_MENU){
-										@Override
-										public void effects(){
-											sellClothing(Main.game.getPlayer(), inventoryNPC, clothing, Main.game.getPlayer().getClothingCount(clothing), sellPrice);
-										}
-									};
-								} else {
-									return new Response("Sell (All)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
-								}
-								
-							} else if (index==4) {
-								if (Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH) || Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)) {
-									boolean hasFullInventory = Main.game.getPlayer().isInventoryFull() && clothing.getRarity()!=Rarity.QUEST;
-									boolean isDyeingStackItem = Main.game.getPlayer().getAllClothingInInventory().get(clothing) > 1;
-									boolean canDye = !(isDyeingStackItem && hasFullInventory);
-									if (canDye) {
-										return new Response("Dye", 
-												Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
-													?"Use your proficiency with [style.colourEarth(Earth spells)] to dye this item."
-													:"Use a dye-brush to dye this item of clothing.",
-												DYE_CLOTHING) {
-											@Override
-											public void effects() {
-												resetClothingDyeColours();
-											}
-										};
-									} else {
-										return new Response("Dye", "Your inventory is full, so you can't dye this item of clothing.", null);
-									}
-								} else {
-									return new Response("Dye", "You'll need to find a dye-brush if you want to dye your clothes.", null);
-								}
-								
-							} else if(index == 5) {
-								if(clothing.isCondom()) {
-									return getCondomSabotageResponse(clothing);
-								}
-								if(Main.game.isDebugMode()
-										|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY) && Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
-									if(clothing.getEnchantmentItemType(null)==null || clothing.getItemTags().contains(ItemTag.UNENCHANTABLE)) {
-										return new Response("Enchant", "This clothing cannot be enchanted!", null);
-										
-									} else if(!clothing.isEnchantmentKnown()) {
-										if(Main.game.getPlayer().getEssenceCount() >= IDENTIFICATION_ESSENCE_PRICE) {
-											return new Response("Identify ([style.italicsArcane("+IDENTIFICATION_ESSENCE_PRICE+" Essences)])",
-													"To identify the "+clothing.getName()+", you can either spend "+IDENTIFICATION_ESSENCE_PRICE+" arcane essences to do it yourself,"
-															+ " or go to a vendor and pay "+IDENTIFICATION_PRICE+" flames to have them do it for you.",
-													CLOTHING_INVENTORY) {
-												@Override
-												public void effects() {
-													Main.game.getPlayer().incrementEssenceCount(-IDENTIFICATION_ESSENCE_PRICE, false);
-
-													String enchantmentRemovedString = clothing.setEnchantmentKnown(owner, true);
-													
-													clothing = AbstractClothing.enchantmentRemovedClothing;
-													
-													Main.game.getTextEndStringBuilder().append(
-															"<p>"
-																+ "You channel the power of "+Util.intToString(IDENTIFICATION_ESSENCE_PRICE)+" of your arcane essences into the "+clothing.getName()
-																	+", and as it emits a faint purple glow, you find yourself able to detect what sort of enchantment it has!"
-															+ "</p>"
-															+ enchantmentRemovedString
-															+ "<p style='text-align:center;'>"
-																+ "Identifying the "+clothing.getName()+" has cost you [style.boldBad("+Util.intToString(IDENTIFICATION_ESSENCE_PRICE)+")] [style.boldArcane(Arcane Essences)]!"
-															+ "</p>");
-													RenderingEngine.setPage(Main.game.getPlayer(), clothing);
-												}
-											};
-										} else {
-											return new Response("Identify (<i>"+IDENTIFICATION_ESSENCE_PRICE+" Essences</i>)",
-													"To identify the "+clothing.getName()+", you can either spend "+IDENTIFICATION_ESSENCE_PRICE+" arcane essences to do it yourself ([style.italicsBad(which you don't have)]),"
-															+ " or go to a vendor and pay "+IDENTIFICATION_PRICE+" flames to have them do it for you.", null);
-										}
-									}
-									return new Response("Enchant", "Enchant this clothing.", EnchantmentDialogue.ENCHANTMENT_MENU) {
-										@Override
-										public DialogueNode getNextDialogue() {
-											return EnchantmentDialogue.getEnchantmentMenu(clothing);
-										}
-									};
-									
-								} else {
-									return new Response("Enchant", getEnchantmentNotDiscoveredText("clothing"), null);
-								}
-
-							} else if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) {
-								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-6);
-								if(clothing.isCanBeEquipped(Main.game.getPlayer(), slot)) {
-									return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "Equip the " + clothing.getName() + ".", INVENTORY_MENU){
-											@Override
-											public void effects(){
-												Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>" + equipClothingFromInventory(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing) + "</p>");
-											}
-										};
-								} else {
-									return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-								}
-								
-							} else if (index == 9) {
-								return getBuybackResponse();
-								
-							}
-//							else if (index == 10) {
-//								return getQuickTradeResponse();
-//
-//							}
-							else if(index >= 11 && index <= 14 && index-11<clothing.getClothingType().getEquipSlots().size()) {
-								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-11);
-								return new Response(UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"), UtilText.parse(inventoryNPC, "[npc.Name] doesn't want to wear your clothing."), null);
-								
-							} else if (index == 10 && !clothing.isEnchantmentKnown()) {
-								if(!inventoryNPC.willBuy(clothing)) {
-									return new Response("Identify", inventoryNPC.getName("The") + " can't identify clothing!", null);
-									
-								} else if(Main.game.getPlayer().getMoney() < IDENTIFICATION_PRICE){
-									// don't format as money because we don't want to highlight non-selectable choices
-									return new Response("Identify (" + UtilText.formatAsMoneyUncoloured(IDENTIFICATION_PRICE, "span") + ")", "You don't have enough money!", null);
-									
-								}else {
-									return new Response("Identify (" + UtilText.formatAsMoney(IDENTIFICATION_PRICE, "span") + ")",
-												"Have the " + clothing.getName() + " identified for " + UtilText.formatAsMoney(IDENTIFICATION_PRICE, "span") + ".", CLOTHING_INVENTORY){
-										@Override
-										public void effects(){
-											Main.game.getPlayer().incrementMoney(-IDENTIFICATION_PRICE);
-
-											String enchantmentRemovedString = clothing.setEnchantmentKnown(owner, true);
-											
-											clothing = AbstractClothing.enchantmentRemovedClothing;
-											
-											Main.game.getTextEndStringBuilder().append(
-													"<p style='text-align:center;'>"
-														+ UtilText.parse(inventoryNPC,
-																"You hand over " + UtilText.formatAsMoney(IDENTIFICATION_PRICE) + " to [npc.name],"
-																		+ " who promptly feeds several bottles of arcane essence into a specialist identification device, before using it to reveal the enchantment on your "+clothing.getName()+".")
-													+ "</p>"
-													+enchantmentRemovedString);
-											
-											RenderingEngine.setPage(Main.game.getPlayer(), clothing);
-										}
-									};
-								}
-							} else {
-								return null;
-							}
+							return getPlayerClothingResponseToNPCDuringTrade(responseTab, index);
 					}
 				}
 				
@@ -8848,6 +8661,150 @@ public class InventoryDialogue {
 					Main.sex.setSexStarted(true);
 				}
 			};
+		}
+		return null;
+	}
+
+	private static Response getPlayerClothingResponseToNPCDuringTrade(int ignoredResponseTab, int index) {
+		if(index == 1 || index == 2 || index == 3) {
+			var title = index == 1 ? "Sell (1)" : index == 2 ? "Sell (5)" : "Sell (All)";
+			if(!clothing.getClothingType().isAbleToBeSold())
+				return new Response(title, "You cannot sell the " + clothing.getName() + "!", null);
+			if(index == 2 && Main.game.getPlayer().getClothingCount(clothing) < 5)
+				return new Response(title, "You don't have five " + clothing.getNamePlural() + " to sell!", null);
+			if(!inventoryNPC.willBuy(clothing))
+				return new Response(title, inventoryNPC.getName("The") + " doesn't want to buy this.", null);
+			var count = index == 1 ? 1 : index == 2 ? 5 : Main.game.getPlayer().getClothingCount(clothing);
+			int sellPrice = clothing.getPrice(inventoryNPC.getBuyModifier());
+			return new Response(
+					title + " (" + UtilText.formatAsMoney(count * sellPrice, "span") + ")",
+					"Sell" + (index != 2 ? "" : " five of") + " your " + clothing.getName() + " for " + UtilText.formatAsMoney(count * sellPrice) + ".",
+					INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					sellClothing(Main.game.getPlayer(), inventoryNPC, clothing, count, sellPrice);
+				}
+			};
+		}
+		if(index == 4) {
+			if(!Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH)
+					&& !Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
+				return new Response("Dye", "You'll need to find a dye-brush if you want to dye your clothes.", null);
+			boolean hasFullInventory = Main.game.getPlayer().isInventoryFull() && clothing.getRarity() != Rarity.QUEST;
+			boolean isDyeingStackItem = Main.game.getPlayer().getAllClothingInInventory().get(clothing) > 1;
+			if (isDyeingStackItem && hasFullInventory)
+				return new Response("Dye", "Your inventory is full, so you can't dye this item of clothing.", null);
+			return new Response("Dye",
+					Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
+							? "Use your proficiency with [style.colourEarth(Earth spells)] to dye this item."
+							: "Use a dye-brush to dye this item of clothing.",
+					DYE_CLOTHING) {
+				@Override
+				public void effects() {
+					resetClothingDyeColours();
+				}
+			};
+		}
+		if(index == 5) {
+			if(clothing.isCondom())
+				return getCondomSabotageResponse(clothing);
+			if(Main.game.isDebugMode()
+					|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY) && Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
+				if(clothing.getEnchantmentItemType(null)==null || clothing.getItemTags().contains(ItemTag.UNENCHANTABLE))
+					return new Response("Enchant", "This clothing cannot be enchanted!", null);
+				if(!clothing.isEnchantmentKnown()) {
+					if(Main.game.getPlayer().getEssenceCount() < IDENTIFICATION_ESSENCE_PRICE)
+						return new Response("Identify (<i>"+IDENTIFICATION_ESSENCE_PRICE+" Essences</i>)",
+								"To identify the "+clothing.getName()+", you can either spend "+IDENTIFICATION_ESSENCE_PRICE+" arcane essences to do it yourself ([style.italicsBad(which you don't have)]),"
+										+ " or go to a vendor and pay "+IDENTIFICATION_PRICE+" flames to have them do it for you.", null);
+					return new Response("Identify ([style.italicsArcane("+IDENTIFICATION_ESSENCE_PRICE+" Essences)])",
+							"To identify the "+clothing.getName()+", you can either spend "+IDENTIFICATION_ESSENCE_PRICE+" arcane essences to do it yourself,"
+									+ " or go to a vendor and pay "+IDENTIFICATION_PRICE+" flames to have them do it for you.",
+							CLOTHING_INVENTORY) {
+						@Override
+						public void effects() {
+							Main.game.getPlayer().incrementEssenceCount(-IDENTIFICATION_ESSENCE_PRICE, false);
+							String enchantmentRemovedString = clothing.setEnchantmentKnown(owner, true);
+							clothing = AbstractClothing.enchantmentRemovedClothing;
+							Main.game.getTextEndStringBuilder()
+							.append("<p>")
+									.append("You channel the power of ")
+									.append(Util.intToString(IDENTIFICATION_ESSENCE_PRICE))
+									.append(" of your arcane essences into the ")
+									.append(clothing.getName())
+									.append(", and as it emits a faint purple glow, you find yourself able to detect what sort of enchantment it has!")
+							.append("</p>")
+							.append(enchantmentRemovedString)
+							.append("<p style='text-align:center;'>")
+									.append("Identifying the ")
+									.append(clothing.getName())
+									.append(" has cost you [style.boldBad(")
+									.append(Util.intToString(IDENTIFICATION_ESSENCE_PRICE))
+									.append(")] [style.boldArcane(Arcane Essences)]!")
+							.append("</p>");
+							RenderingEngine.setPage(Main.game.getPlayer(), clothing);
+						}
+					};
+				}
+				return new Response("Enchant", "Enchant this clothing.", EnchantmentDialogue.ENCHANTMENT_MENU) {
+					@Override
+					public DialogueNode getNextDialogue() {
+						return EnchantmentDialogue.getEnchantmentMenu(clothing);
+					}
+				};
+			}
+			return new Response("Enchant", getEnchantmentNotDiscoveredText("clothing"), null);
+		}
+		if(index >= 6 && index <= 9 && index - 6 < clothing.getClothingType().getEquipSlots().size()) {
+			var slot = clothing.getClothingType().getEquipSlots().get(index-6);
+			var title = "Equip: "+Util.capitaliseSentence(slot.getName());
+			if(!clothing.isCanBeEquipped(Main.game.getPlayer(), slot))
+				return new Response(title, clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
+			return new Response(title, "Equip the " + clothing.getName() + ".", INVENTORY_MENU){
+				@Override
+				public void effects(){
+					Main.game.getTextEndStringBuilder()
+					.append("<p style='text-align:center;'>")
+							.append(equipClothingFromInventory(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing))
+					.append("</p>");
+				}
+			};
+		}
+		if(index == 9)
+			return getBuybackResponse();
+//		if(index == 10)
+//			return getQuickTradeResponse();
+		if(index == 10 && !clothing.isEnchantmentKnown()) {
+			if(!inventoryNPC.willBuy(clothing))
+				return new Response("Identify", inventoryNPC.getName("The") + " can't identify clothing!", null);
+			if(Main.game.getPlayer().getMoney() < IDENTIFICATION_PRICE)
+				// don't format as money because we don't want to highlight non-selectable choices
+				return new Response("Identify (" + UtilText.formatAsMoneyUncoloured(IDENTIFICATION_PRICE, "span") + ")", "You don't have enough money!", null);
+			return new Response(
+					"Identify (" + UtilText.formatAsMoney(IDENTIFICATION_PRICE, "span") + ")",
+					"Have the " + clothing.getName() + " identified for " + UtilText.formatAsMoney(IDENTIFICATION_PRICE, "span") + ".",
+					CLOTHING_INVENTORY) {
+				@Override
+				public void effects() {
+					Main.game.getPlayer().incrementMoney(-IDENTIFICATION_PRICE);
+					String enchantmentRemovedString = clothing.setEnchantmentKnown(owner, true);
+					clothing = AbstractClothing.enchantmentRemovedClothing;
+					Main.game.getTextEndStringBuilder()
+							.append("<p style='text-align:center;'>")
+							.append(UtilText.parse(inventoryNPC, "You hand over " + UtilText.formatAsMoney(IDENTIFICATION_PRICE) + " to [npc.name],"
+									+ " who promptly feeds several bottles of arcane essence into a specialist identification device, before using it to reveal the enchantment on your " + clothing.getName() + "."))
+							.append("</p>")
+							.append(enchantmentRemovedString);
+					RenderingEngine.setPage(Main.game.getPlayer(), clothing);
+				}
+			};
+		}
+		if(index >= 11 && index <= 14 && index - 11 < clothing.getClothingType().getEquipSlots().size()) {
+			var slot = clothing.getClothingType().getEquipSlots().get(index-11);
+			return new Response(
+					UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
+					UtilText.parse(inventoryNPC, "[npc.Name] doesn't want to wear your clothing."),
+					null);
 		}
 		return null;
 	}
