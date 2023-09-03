@@ -2623,159 +2623,7 @@ public class InventoryDialogue {
 						case SEX:
 							return getPlayerWeaponResponseToNPCDuringSex(responseTab, index);
 						case TRADING:
-							if(index == 1) {
-								if(!weapon.getWeaponType().isAbleToBeSold()) {
-									return new Response("Sell (1)", "You cannot sell the " + weapon.getName() + "!", null);
-									
-								} else if (inventoryNPC.willBuy(weapon)) {
-									int sellPrice = weapon.getPrice(inventoryNPC.getBuyModifier());
-									return new Response("Sell (1) (" + UtilText.formatAsMoney(sellPrice, "span") + ")", "Sell the " + weapon.getName() + " for " + UtilText.formatAsMoney(sellPrice) + ".", INVENTORY_MENU){
-										@Override
-										public void effects(){
-											sellWeapons(Main.game.getPlayer(), inventoryNPC, weapon, 1, sellPrice);
-										}
-									};
-								} else {
-									return new Response("Sell (1)", inventoryNPC.getName("The") + " doesn't want to buy this.", null);
-								}
-								
-							} else if(index == 2) {
-								if(Main.game.getPlayer().getWeaponCount(weapon) >= 5) {
-									if(!weapon.getWeaponType().isAbleToBeSold()) {
-										return new Response("Sell (5)", "You cannot sell the " + weapon.getName() + "!", null);
-										
-									} else if (inventoryNPC.willBuy(weapon)) {
-										int sellPrice = weapon.getPrice(inventoryNPC.getBuyModifier());
-										return new Response("Sell (5) (" + UtilText.formatAsMoney(sellPrice*5, "span") + ")", "Sell five of your " + weapon.getNamePlural() + " for " + UtilText.formatAsMoney(sellPrice*5) + ".", INVENTORY_MENU){
-											@Override
-											public void effects(){
-												sellWeapons(Main.game.getPlayer(), inventoryNPC, weapon, 5, sellPrice);
-											}
-										};
-									} else {
-										return new Response("Sell (5)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
-									}
-									
-								} else {
-									return new Response("Sell (5)", "You don't have five " + weapon.getNamePlural() + " to sell!", null);
-								}
-								
-							} else if(index == 3) {
-								if(!weapon.getWeaponType().isAbleToBeSold()) {
-									return new Response("Sell (All)", "You cannot sell the " + weapon.getName() + "!", null);
-									
-								} else if (inventoryNPC.willBuy(weapon)) {
-									int sellPrice = weapon.getPrice(inventoryNPC.getBuyModifier());
-									return new Response("Sell (All) (" + UtilText.formatAsMoney(sellPrice*Main.game.getPlayer().getWeaponCount(weapon), "span") + ")",
-											"Sell the " + weapon.getName() + " for " + UtilText.formatAsMoney(sellPrice*Main.game.getPlayer().getWeaponCount(weapon)) + ".", INVENTORY_MENU){
-										@Override
-										public void effects(){
-											sellWeapons(Main.game.getPlayer(), inventoryNPC, weapon, Main.game.getPlayer().getWeaponCount(weapon), sellPrice);
-										}
-									};
-								} else {
-									return new Response("Sell (All)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
-								}
-								
-							} else if (index==4) {
-								if (Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH)
-										|| Main.game.getPlayer().hasItemType(ItemType.REFORGE_HAMMER)
-										|| Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)) {
-									boolean hasFullInventory = Main.game.getPlayer().isInventoryFull() && weapon.getRarity()!=Rarity.QUEST;
-									boolean isDyeingStackItem = Main.game.getPlayer().getAllWeaponsInInventory().get(weapon) > 1;
-									boolean canDye = !(isDyeingStackItem && hasFullInventory);
-									if (canDye) {
-										return new Response("Dye/Reforge",
-												Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
-													?"Use your proficiency with [style.colourEarth(Earth spells)] to dye or reforge this item."
-													:"Use a dye-brush or reforge hammer to alter this weapon's properties.",
-												DYE_WEAPON) {
-											@Override
-											public void effects() {
-												resetWeaponDyeColours();
-											}
-										};
-									} else {
-										return new Response("Dye/Reforge", "Your inventory is full, so you can't alter this weapon's properties.", null);
-									}
-								} else {
-									return new Response("Dye/Reforge", "You'll need to find a dye-brush or reforge hammer if you want to alter this weapon's properties.", null);
-								}
-								
-							} else if(index == 5) {
-								if(weapon.getEnchantmentItemType(null)==null || weapon.getItemTags().contains(ItemTag.UNENCHANTABLE)) {
-									return new Response("Enchant", "This weapon cannot be enchanted!", null);
-									
-								} else if(Main.game.isDebugMode()
-										|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY) && Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
-									return new Response("Enchant", "Enchant this weapon.", EnchantmentDialogue.ENCHANTMENT_MENU) {
-										@Override
-										public DialogueNode getNextDialogue() {
-											return EnchantmentDialogue.getEnchantmentMenu(weapon);
-										}
-									};
-									
-								} else {
-									return new Response("Enchant", getEnchantmentNotDiscoveredText("weapons"), null);
-								}
-								
-							} else if(index == 6) {
-								InventorySlot slot = InventorySlot.mainWeaponSlots[Main.game.getPlayer().getMainWeaponIndexToEquipTo(weapon)];
-								if(weapon.isCanBeEquipped(Main.game.getPlayer(), slot)) {
-									return new Response("Equip Main (Self)", "Equip the " + weapon.getName() + " as your main weapon.", INVENTORY_MENU){
-										@Override
-										public void effects(){
-											Main.game.getTextEndStringBuilder().append(
-												"<p style='text-align:center;'>"
-													+ Main.game.getPlayer().equipMainWeaponFromInventory(weapon, Main.game.getPlayer())
-												+ "</p>");
-											resetPostAction();
-										}
-									};
-								} else {
-									return new Response("Equip Main (Self)", weapon.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-								}
-									
-							} else if(index == 7) {
-								if(weapon.getWeaponType().isTwoHanded()) {
-									return new Response("Equip Offhand (Self)",
-											(weapon.getWeaponType().isPlural()
-												?"As the " + weapon.getName() + " require two hands to wield, they can only be equipped in the main slot!"
-												:"As the " + weapon.getName() + " is a two-handed weapon, it can only be equipped in the main slot!"),
-											null);
-								}
-								
-								InventorySlot slot = InventorySlot.offhandWeaponSlots[Main.game.getPlayer().getOffhandWeaponIndexToEquipTo(weapon)];
-								if(weapon.isCanBeEquipped(Main.game.getPlayer(), slot)) {
-									return new Response("Equip Offhand (Self)", "Equip the " + weapon.getName() + " as your offhand weapon.", INVENTORY_MENU){
-										@Override
-										public void effects(){
-											Main.game.getTextEndStringBuilder().append(
-												"<p style='text-align:center;'>"
-													+ Main.game.getPlayer().equipOffhandWeaponFromInventory(weapon, Main.game.getPlayer())
-												+ "</p>");
-											resetPostAction();
-										}
-									};
-								} else {
-									return new Response("Equip Offhand (Self)", weapon.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-								}
-								
-							} else if (index == 9) {
-								return getBuybackResponse();
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else if(index == 11) {
-								return new Response(UtilText.parse(inventoryNPC, "Equip Main ([npc.HerHim])"), UtilText.parse(inventoryNPC, "[npc.Name] doesn't want to use your weapons."), null);
-								
-							} else if(index == 12) {
-								return new Response(UtilText.parse(inventoryNPC, "Equip Offhand ([npc.HerHim])"), UtilText.parse(inventoryNPC, "[npc.Name] doesn't want to use your weapons."), null);
-								
-							} else {
-								return null;
-							}
+							return getPlayerWeaponResponseToNPCDuringTrading(responseTab, index);
 					}
 				}
 				
@@ -7135,6 +6983,114 @@ public class InventoryDialogue {
 			return getQuickTradeResponse();
 		if(index == 11)
 			return new Response(UtilText.parse(inventoryNPC, "Equip ([npc.HerHim])"), "You can't equip weapons while having sex with someone!", null);
+		return null;
+	}
+
+	private static Response getPlayerWeaponResponseToNPCDuringTrading(int ignoredResponseTab, int index) {
+		if(index == 1 || index == 2 || index == 3) {
+			var title = index == 1 ? "Sell (1)" : index == 2 ? "Sell (5)" : "Sell (All)";
+			if(!weapon.getWeaponType().isAbleToBeSold())
+				return new Response(title, "You cannot sell the " + weapon.getName() + "!", null);
+			if(index == 2 && Main.game.getPlayer().getWeaponCount(weapon) < 5)
+				return new Response(title, "You don't have five " + weapon.getNamePlural() + " to sell!", null);
+			if(!inventoryNPC.willBuy(weapon))
+				return new Response(title, inventoryNPC.getName("The") + " doesn't want to buy this.", null);
+			var count = index == 1 ? 1 : index == 2 ? 5 : Main.game.getPlayer().getWeaponCount(weapon);
+			int sellPrice = weapon.getPrice(inventoryNPC.getBuyModifier());
+			return new Response(
+					title + " (" + UtilText.formatAsMoney(count * sellPrice, "span") + ")",
+					"Sell" + (index != 2 ? "" : " five of") + " your " + weapon.getName() + " for " + UtilText.formatAsMoney(count * sellPrice) + ".",
+					INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					sellWeapons(Main.game.getPlayer(), inventoryNPC, weapon, count, sellPrice);
+				}
+			};
+		}
+		if(index == 4) {
+			if (!Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH)
+					&& !Main.game.getPlayer().hasItemType(ItemType.REFORGE_HAMMER)
+					&& !Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
+				return new Response("Dye/Reforge", "You'll need to find a dye-brush or reforge hammer if you want to alter this weapon's properties.", null);
+			boolean hasFullInventory = Main.game.getPlayer().isInventoryFull() && weapon.getRarity()!=Rarity.QUEST;
+			boolean isDyeingStackItem = Main.game.getPlayer().getAllWeaponsInInventory().get(weapon) > 1;
+			if(isDyeingStackItem && hasFullInventory)
+				return new Response("Dye/Reforge", "Your inventory is full, so you can't alter this weapon's properties.", null);
+			return new Response("Dye/Reforge",
+					Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
+							?"Use your proficiency with [style.colourEarth(Earth spells)] to dye or reforge this item."
+							:"Use a dye-brush or reforge hammer to alter this weapon's properties.",
+					DYE_WEAPON) {
+				@Override
+				public void effects() {
+					resetWeaponDyeColours();
+				}
+			};
+		}
+		if(index == 5) {
+			if(weapon.getEnchantmentItemType(null)==null || weapon.getItemTags().contains(ItemTag.UNENCHANTABLE))
+				return new Response("Enchant", "This weapon cannot be enchanted!", null);
+			if(Main.game.isDebugMode()
+					|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)
+					&& Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)))
+				return new Response("Enchant", "Enchant this weapon.", EnchantmentDialogue.ENCHANTMENT_MENU) {
+					@Override
+					public DialogueNode getNextDialogue() {
+						return EnchantmentDialogue.getEnchantmentMenu(weapon);
+					}
+				};
+			return new Response("Enchant", getEnchantmentNotDiscoveredText("weapons"), null);
+		}
+		if(index == 6) {
+			var slot = InventorySlot.mainWeaponSlots[Main.game.getPlayer().getMainWeaponIndexToEquipTo(weapon)];
+			if(!weapon.isCanBeEquipped(Main.game.getPlayer(), slot))
+				return new Response("Equip Main (Self)", weapon.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
+			return new Response("Equip Main (Self)", "Equip the " + weapon.getName() + " as your main weapon.", INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					Main.game.getTextEndStringBuilder()
+					.append("<p style='text-align:center;'>")
+							.append(Main.game.getPlayer().equipMainWeaponFromInventory(weapon, Main.game.getPlayer()))
+					.append("</p>");
+					resetPostAction();
+				}
+			};
+		}
+		if(index == 7) {
+			if(weapon.getWeaponType().isTwoHanded())
+				return new Response("Equip Offhand (Self)",
+						"As the " + weapon.getName() + (weapon.getWeaponType().isPlural()
+								? " require two hands to wield, they can only be equipped in the main slot!"
+								: " is a two-handed weapon, it can only be equipped in the main slot!"),
+						null);
+			var slot = InventorySlot.offhandWeaponSlots[Main.game.getPlayer().getOffhandWeaponIndexToEquipTo(weapon)];
+			if(!weapon.isCanBeEquipped(Main.game.getPlayer(), slot))
+				return new Response("Equip Offhand (Self)", weapon.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
+			return new Response("Equip Offhand (Self)", "Equip the " + weapon.getName() + " as your offhand weapon.", INVENTORY_MENU){
+				@Override
+				public void effects(){
+					Main.game.getTextEndStringBuilder()
+					.append("<p style='text-align:center;'>")
+							.append(Main.game.getPlayer().equipOffhandWeaponFromInventory(weapon, Main.game.getPlayer()))
+					.append("</p>");
+					resetPostAction();
+				}
+			};
+		}
+		if(index == 9)
+			return getBuybackResponse();
+		if (index == 10)
+			return getQuickTradeResponse();
+		if(index == 11)
+			return new Response(
+					UtilText.parse(inventoryNPC, "Equip Main ([npc.HerHim])"),
+					UtilText.parse(inventoryNPC, "[npc.Name] doesn't want to use your weapons."),
+					null);
+		if(index == 12)
+			return new Response(
+					UtilText.parse(inventoryNPC, "Equip Offhand ([npc.HerHim])"),
+					UtilText.parse(inventoryNPC, "[npc.Name] doesn't want to use your weapons."),
+					null);
 		return null;
 	}
 
