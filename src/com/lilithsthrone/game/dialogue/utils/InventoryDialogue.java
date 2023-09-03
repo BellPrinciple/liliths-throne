@@ -2621,37 +2621,7 @@ public class InventoryDialogue {
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							return getPlayerWeaponResponseToNPCDuringManagement(responseTab, index);
 						case SEX:
-							if(index == 1) {
-								return new Response("Give (1)", "You can't give someone weapons while having sex with them!", null);
-								
-							} else if(index == 2) {
-								return new Response("Give (5)", "You can't give someone weapons while having sex with them!", null);
-								
-							} else if(index == 3) {
-								return new Response("Give (All)", "You can't give someone weapons while having sex with them!", null);
-								
-							} else if(index == 4) {
-								return new Response("Dye", "You can't dye your weapons while having sex with someone!", null);
-								
-							} else if(index == 5) {
-								return new Response("Enchant", "You can't enchant weapons while having sex with someone!", null);
-								
-							} else if(index == 6) {
-								return new Response("Equip Main (Self)", "You can't equip weapons while having sex with someone!", null);
-								
-							} else if(index == 7) {
-								return new Response("Equip Offhand (Self)", "You can't equip weapons while having sex with someone!", null);
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else if(index == 11) {
-								return new Response(UtilText.parse(inventoryNPC, "Equip ([npc.HerHim])"), "You can't equip weapons while having sex with someone!", null);
-								
-							} else {
-								return null;
-							}
-							
+							return getPlayerWeaponResponseToNPCDuringSex(responseTab, index);
 						case TRADING:
 							if(index == 1) {
 								if(!weapon.getWeaponType().isAbleToBeSold()) {
@@ -7143,6 +7113,28 @@ public class InventoryDialogue {
 				}
 			};
 		}
+		return null;
+	}
+
+	private static Response getPlayerWeaponResponseToNPCDuringSex(int ignoredResponseTab, int index) {
+		if(index == 1)
+			return new Response("Give (1)", "You can't give someone weapons while having sex with them!", null);
+		if(index == 2)
+			return new Response("Give (5)", "You can't give someone weapons while having sex with them!", null);
+		if(index == 3)
+			return new Response("Give (All)", "You can't give someone weapons while having sex with them!", null);
+		if(index == 4)
+			return new Response("Dye", "You can't dye your weapons while having sex with someone!", null);
+		if(index == 5)
+			return new Response("Enchant", "You can't enchant weapons while having sex with someone!", null);
+		if(index == 6)
+			return new Response("Equip Main (Self)", "You can't equip weapons while having sex with someone!", null);
+		if(index == 7)
+			return new Response("Equip Offhand (Self)", "You can't equip weapons while having sex with someone!", null);
+		if (index == 10)
+			return getQuickTradeResponse();
+		if(index == 11)
+			return new Response(UtilText.parse(inventoryNPC, "Equip ([npc.HerHim])"), "You can't equip weapons while having sex with someone!", null);
 		return null;
 	}
 
