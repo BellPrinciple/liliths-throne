@@ -2648,40 +2648,7 @@ public class InventoryDialogue {
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							return getWeaponResponseToNPCDuringManagement(responseTab, index);
 						case SEX:
-							if(index == 1) {
-								return new Response("Take (1)", "You can't take someone's weapons while having sex with them!", null);
-								
-							} else if(index == 2) {
-								return new Response("Take (5)", "You can't take someone's weapons while having sex with them!", null);
-								
-							} else if(index == 3) {
-								return new Response("Take (All)", "You can't take someone's weapons while having sex with them!", null);
-								
-							} else if(index == 4) {
-								return new Response("Dye", "You can't dye someone's weapons while having sex with them!", null);
-								
-							} else if(index == 5) {
-								return new Response("Enchant", "You can't enchant someone else's weapons, especially not while having sex with them!", null);
-								
-							} else if(index == 6) {
-								return new Response("Equip Main (Self)", "You can't use someone else's weapons while having sex with them!", null);
-								
-							} else if(index == 7) {
-								return new Response("Equip Offhand (Self)", "You can't use someone else's weapons while having sex with them!", null);
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else if(index == 11) {
-								return new Response("Equip Main (Opponent)", "You can't use make someone use a weapon while having sex with them!", null);
-								
-							} else if(index == 12) {
-								return new Response("Equip Offhand (Opponent)", "You can't use make someone use a weapon while having sex with them!", null);
-								
-							} else {
-								return null;
-							}
-							
+							return getWeaponResponseToNPCDuringSex(responseTab, index);
 						case TRADING:
 							inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasWeapon(weapon) && weapon.getRarity()!=Rarity.QUEST;
 							
@@ -7013,6 +6980,30 @@ public class InventoryDialogue {
 				}
 			};
 		}
+		return null;
+	}
+
+	private static Response getWeaponResponseToNPCDuringSex(int ignoredResponseTab, int index) {
+		if(index == 1)
+			return new Response("Take (1)", "You can't take someone's weapons while having sex with them!", null);
+		if(index == 2)
+			return new Response("Take (5)", "You can't take someone's weapons while having sex with them!", null);
+		if(index == 3)
+			return new Response("Take (All)", "You can't take someone's weapons while having sex with them!", null);
+		if(index == 4)
+			return new Response("Dye", "You can't dye someone's weapons while having sex with them!", null);
+		if(index == 5)
+			return new Response("Enchant", "You can't enchant someone else's weapons, especially not while having sex with them!", null);
+		if(index == 6)
+			return new Response("Equip Main (Self)", "You can't use someone else's weapons while having sex with them!", null);
+		if(index == 7)
+			return new Response("Equip Offhand (Self)", "You can't use someone else's weapons while having sex with them!", null);
+		if(index == 10)
+			return getQuickTradeResponse();
+		if(index == 11)
+			return new Response("Equip Main (Opponent)", "You can't use make someone use a weapon while having sex with them!", null);
+		if(index == 12)
+			return new Response("Equip Offhand (Opponent)", "You can't use make someone use a weapon while having sex with them!", null);
 		return null;
 	}
 
