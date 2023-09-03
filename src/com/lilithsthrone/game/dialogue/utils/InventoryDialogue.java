@@ -2617,37 +2617,7 @@ public class InventoryDialogue {
 				} else {
 					switch(interactionType) {
 						case COMBAT:
-							if(index == 1) {
-								return new Response("Give (1)", "You can't give someone weapons while fighting them!", null);
-								
-							} else if(index == 2) {
-								return new Response("Give (5)", "You can't give someone weapons while fighting them!", null);
-								
-							} else if(index == 3) {
-								return new Response("Give (All)", "You can't give someone weapons while fighting them!", null);
-								
-							} else if(index == 4) {
-								return new Response("Dye", "You can't dye your weapons while fighting someone!", null);
-								
-							} else if(index == 5) {
-								return new Response("Enchant", "You can't enchant weapons while fighting someone!", null);
-								
-							} else if(index == 6) {
-								return new Response("Equip Main (Self)", "You can't change weapons while fighting someone!", null);
-									
-							} else if(index == 7) {
-								return new Response("Equip Offhand (Self)", "You can't change weapons while fighting someone!", null);
-									
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else if(index == 11) {
-								return new Response("Equip (Opponent)", "You can't make your opponent equip a weapon!", null);
-								
-							} else {
-								return null;
-							}
-							
+							return getPlayerWeaponResponseToNPCDuringCombat(responseTab, index);
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							boolean inventoryFull = inventoryNPC.isInventoryFull() && !inventoryNPC.hasWeapon(weapon);
 							
@@ -7194,6 +7164,28 @@ public class InventoryDialogue {
 		}
 		if(index == 10)
 			return getQuickTradeResponse();
+		return null;
+	}
+
+	private static Response getPlayerWeaponResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
+		if(index == 1)
+			return new Response("Give (1)", "You can't give someone weapons while fighting them!", null);
+		if(index == 2)
+			return new Response("Give (5)", "You can't give someone weapons while fighting them!", null);
+		if(index == 3)
+			return new Response("Give (All)", "You can't give someone weapons while fighting them!", null);
+		if(index == 4)
+			return new Response("Dye", "You can't dye your weapons while fighting someone!", null);
+		if(index == 5)
+			return new Response("Enchant", "You can't enchant weapons while fighting someone!", null);
+		if(index == 6)
+			return new Response("Equip Main (Self)", "You can't change weapons while fighting someone!", null);
+		if(index == 7)
+			return new Response("Equip Offhand (Self)", "You can't change weapons while fighting someone!", null);
+		if(index == 10)
+			return getQuickTradeResponse();
+		if(index == 11)
+			return new Response("Equip (Opponent)", "You can't make your opponent equip a weapon!", null);
 		return null;
 	}
 
