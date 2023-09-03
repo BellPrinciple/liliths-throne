@@ -607,6 +607,11 @@ public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSavi
 		return weaponType;
 	}
 
+	@Override
+	public final AbstractWeaponType getType() {
+		return weaponType;
+	}
+
 	public String getName(boolean withDeterminer, boolean withRarityColour) {
 		return (withDeterminer
 					?(!weaponType.getDeterminer().equalsIgnoreCase("a") && !weaponType.getDeterminer().equalsIgnoreCase("an")

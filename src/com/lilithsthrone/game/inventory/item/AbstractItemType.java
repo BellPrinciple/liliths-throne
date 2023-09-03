@@ -421,14 +421,6 @@ public abstract class AbstractItemType extends AbstractCoreType {
 	public String getPotionDescriptor() {
 		return potionDescriptor;
 	}
-
-	public boolean isAbleToBeSold() {
-		return getRarity()!=Rarity.QUEST;
-	}
-	
-	public boolean isAbleToBeDropped() {
-		return getRarity()!=Rarity.QUEST;
-	}
 	
 	// Enchantments:
 	

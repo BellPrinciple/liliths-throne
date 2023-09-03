@@ -91,6 +91,8 @@ public abstract class AbstractCoreItem implements XMLSaving {
 		return null;
 	}
 	
+	public abstract AbstractCoreType getType();
+
 	// Enchantments:
 	
 	public boolean isAbleToBeEnchanted() {

@@ -1016,6 +1016,11 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		return clothingType;
 	}
 
+	@Override
+	public final AbstractClothingType getType() {
+		return clothingType;
+	}
+
 	public InventorySlot getSlotEquippedTo() {
 		return slotEquippedTo;
 	}

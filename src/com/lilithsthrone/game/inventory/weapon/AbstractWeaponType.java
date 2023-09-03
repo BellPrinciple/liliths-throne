@@ -1053,14 +1053,6 @@ public abstract class AbstractWeaponType extends AbstractCoreType {
 		return effects;
 	}
 	
-	public boolean isAbleToBeSold() {
-		return getRarity()!=Rarity.QUEST;
-	}
-	
-	public boolean isAbleToBeDropped() {
-		return getRarity()!=Rarity.QUEST;
-	}
-	
 	public int getEnchantmentLimit() {
 		return 100;
 	}

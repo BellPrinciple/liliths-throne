@@ -135,6 +135,11 @@ public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving
 		return itemType;
 	}
 
+	@Override
+	public final AbstractItemType getType() {
+		return itemType;
+	}
+
 	public boolean isBreakOutOfInventory() {
 		for(ItemEffect effect : this.getEffects()) {
 			if(effect.getItemEffectType().isBreakOutOfInventory()) {

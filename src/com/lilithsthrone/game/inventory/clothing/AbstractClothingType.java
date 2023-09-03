@@ -2474,14 +2474,6 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	public List<ItemEffect> getEffects() {
 		return effects;
 	}
-	
-	public boolean isAbleToBeSold() {
-		return getRarity()!=Rarity.QUEST;
-	}
-	
-	public boolean isAbleToBeDropped() {
-		return getRarity()!=Rarity.QUEST;
-	}
 
 	public float getPhysicalResistance() {
 		return physicalResistance;
