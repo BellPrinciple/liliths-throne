@@ -2636,34 +2636,7 @@ public class InventoryDialogue {
 
 					switch(interactionType) {
 						case SEX:
-							if(index == 1) {
-								return new Response("Take (1)", "You can't pick up weapons while masturbating.", null);
-								
-							} else if(index == 2) {
-								return new Response("Take (5)", "You can't pick up weapons while masturbating.", null);
-								
-							} else if(index == 3) {
-								return new Response("Take (All)", "You can't pick up weapons while masturbating.", null);
-								
-							} else if(index == 4) {
-								return new Response("Dye", "You can't dye weapons while masturbating.", null);
-								
-							} else if(index == 5) {
-								return new Response("Enchant", "You can't enchant weapons while masturbating.", null);
-								
-							} else if(index == 6) {
-								return new Response("Equip Main (Self)", "You can't equip weapons while masturbating.", null);
-								
-							} else if(index == 7) {
-								return new Response("Equip Offhand (Self)", "You can't equip weapons while masturbating.", null);
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else {
-								return null;
-							}
-							
+							return getWeaponResponseDuringSex(responseTab, index);
 						default:
 							if(index == 1) {
 								if(inventoryFull) {
@@ -7091,6 +7064,26 @@ public class InventoryDialogue {
 					UtilText.parse(inventoryNPC, "Equip Offhand ([npc.HerHim])"),
 					UtilText.parse(inventoryNPC, "[npc.Name] doesn't want to use your weapons."),
 					null);
+		return null;
+	}
+
+	private static Response getWeaponResponseDuringSex(int ignoredResponseTab, int index) {
+		if(index == 1)
+			return new Response("Take (1)", "You can't pick up weapons while masturbating.", null);
+		if(index == 2)
+			return new Response("Take (5)", "You can't pick up weapons while masturbating.", null);
+		if(index == 3)
+			return new Response("Take (All)", "You can't pick up weapons while masturbating.", null);
+		if(index == 4)
+			return new Response("Dye", "You can't dye weapons while masturbating.", null);
+		if(index == 5)
+			return new Response("Enchant", "You can't enchant weapons while masturbating.", null);
+		if(index == 6)
+			return new Response("Equip Main (Self)", "You can't equip weapons while masturbating.", null);
+		if(index == 7)
+			return new Response("Equip Offhand (Self)", "You can't equip weapons while masturbating.", null);
+		if(index == 10)
+			return getQuickTradeResponse();
 		return null;
 	}
 
