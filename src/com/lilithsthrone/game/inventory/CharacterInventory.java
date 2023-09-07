@@ -3,6 +3,7 @@ package com.lilithsthrone.game.inventory;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.lilithsthrone.utils.colours.Colour;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -44,9 +46,6 @@ import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.PresetColour;
 import com.lilithsthrone.utils.comparators.ClothingRarityComparator;
 import com.lilithsthrone.utils.comparators.ClothingZLayerComparator;
-import com.lilithsthrone.utils.comparators.InventoryClothingComparator;
-import com.lilithsthrone.utils.comparators.InventoryItemComparator;
-import com.lilithsthrone.utils.comparators.InventoryWeaponComparator;
 import com.lilithsthrone.utils.comparators.ReverseClothingZLayerComparator;
 import com.lilithsthrone.world.World;
 
@@ -88,6 +87,42 @@ public class CharacterInventory implements XMLSaving {
 
 	private int maxInventorySpace;
 
+	private static final Comparator<AbstractWeapon> weaponComparator = Comparator
+			.comparing(AbstractWeapon::getRarity)
+			.thenComparing(
+					AbstractWeapon::getType,
+					Comparator.comparing(
+							AbstractWeaponType::getClothingSet,
+							Comparator.nullsFirst(
+									Comparator.comparing(AbstractSetBonus::getName)))
+					.thenComparing(AbstractWeaponType::toString))
+			.thenComparing(
+					Comparator.nullsFirst(
+							Comparator.comparing(w -> w.getColour(0),
+									Comparator.comparing(Colour::getName))));
+	private static final Comparator<AbstractClothing> clothingComparator = Comparator
+			.comparingInt((AbstractClothing c) -> c.isEnchantmentKnown() ? 0 : 1)
+			.thenComparing(AbstractClothing::getRarity)
+			.thenComparing(
+					AbstractClothing::getType,
+					Comparator.comparing(
+									AbstractClothingType::getClothingSet,
+									Comparator.nullsFirst(
+											Comparator.comparing(AbstractSetBonus::getName)))
+							.thenComparing(AbstractClothingType::toString))
+			.thenComparing(
+					Comparator.nullsFirst(
+							Comparator.comparing(w -> w.getColour(0),
+									Comparator.comparing(Colour::getName))));
+	private static final Comparator<AbstractItem> itemComparator = Comparator
+			.comparing(AbstractItem::getRarity)
+			.thenComparing(AbstractItem::getItemType,
+					Comparator.comparing(AbstractItemType::toString))
+			.thenComparing(
+					Comparator.nullsFirst(
+							Comparator.comparing(w -> w.getColour(0),
+									Comparator.comparing(Colour::getName))));
+
 	public CharacterInventory(int money) {
 		this(money, 32);
 	}
@@ -95,9 +130,9 @@ public class CharacterInventory implements XMLSaving {
 	public CharacterInventory(int money, int maxInventorySpace) {
 		this.money = money;
 
-		weaponSubInventory = new AbstractInventory<>(new InventoryWeaponComparator(), AbstractWeapon::getWeaponType);
-		clothingSubInventory = new AbstractInventory<>(new InventoryClothingComparator(), AbstractClothing::getClothingType);
-		itemSubInventory = new AbstractInventory<>(new InventoryItemComparator(), AbstractItem::getItemType);
+		weaponSubInventory = new AbstractInventory<>(weaponComparator, AbstractWeapon::getWeaponType);
+		clothingSubInventory = new AbstractInventory<>(clothingComparator, AbstractClothing::getClothingType);
+		itemSubInventory = new AbstractInventory<>(itemComparator, AbstractItem::getItemType);
 		
 		
 		dirtySlots = new HashSet<>();
