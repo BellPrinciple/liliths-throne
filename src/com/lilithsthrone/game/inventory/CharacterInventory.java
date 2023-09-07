@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -58,10 +59,8 @@ import com.lilithsthrone.world.World;
  * @author Innoxia
  */
 public class CharacterInventory implements XMLSaving {
-	
-	private final AbstractInventory<AbstractWeapon, AbstractWeaponType> weaponSubInventory;
-	private final AbstractInventory<AbstractClothing, AbstractClothingType> clothingSubInventory;
-	private final AbstractInventory<AbstractItem, AbstractItemType> itemSubInventory;
+
+	private final Map<AbstractCoreItem, Integer> countMap = new HashMap<>();
 
 	/**Maps character IDs to the slots which have free unlocks.*/
 	private final Map<String, List<InventorySlot>> unlockKeyMap;
@@ -130,11 +129,6 @@ public class CharacterInventory implements XMLSaving {
 	public CharacterInventory(int money, int maxInventorySpace) {
 		this.money = money;
 
-		weaponSubInventory = new AbstractInventory<>(weaponComparator, AbstractWeapon::getWeaponType);
-		clothingSubInventory = new AbstractInventory<>(clothingComparator, AbstractClothing::getClothingType);
-		itemSubInventory = new AbstractInventory<>(itemComparator, AbstractItem::getItemType);
-		
-		
 		dirtySlots = new HashSet<>();
 		
 		essenceCount = 0;
@@ -156,10 +150,8 @@ public class CharacterInventory implements XMLSaving {
 	public CharacterInventory(CharacterInventory inventoryToCopy) {
 		this.money = inventoryToCopy.money;
 
-		weaponSubInventory = new AbstractInventory<>(inventoryToCopy.weaponSubInventory);
-		clothingSubInventory = new AbstractInventory<>(inventoryToCopy.clothingSubInventory);
-		itemSubInventory = new AbstractInventory<>(inventoryToCopy.itemSubInventory);
-		
+		countMap.putAll(inventoryToCopy.countMap);
+
 		dirtySlots = new HashSet<>(inventoryToCopy.getDirtySlots());
 		
 		essenceCount = inventoryToCopy.essenceCount;
@@ -399,7 +391,6 @@ public class CharacterInventory implements XMLSaving {
 		nodes = parentElement.getElementsByTagName("itemsInInventory");
 		if(nodes.getLength()>0 && nodes.item(0)!=null) {
 			NodeList itemsInInventory = ((Element) nodes.item(0)).getElementsByTagName("item");
-			Map<AbstractItem, Integer> itemMapToAdd = new HashMap<>();
 			for(int i=0; i<itemsInInventory.getLength(); i++){
 				Element e = ((Element)itemsInInventory.item(i));
 				
@@ -409,19 +400,18 @@ public class CharacterInventory implements XMLSaving {
 					inventory.addClothing(Main.game.getItemGen().generateClothing("innoxia_hair_rose", PresetColour.CLOTHING_RED_DARK, PresetColour.CLOTHING_GREEN_DARK, null, false), count);
 					
 				} else if(id.equals(ItemType.getIdFromItemType(ItemType.CONDOM_USED)) || id.equals(ItemType.getIdFromItemType(ItemType.CONDOM_USED_WEBBING))) {
-					itemMapToAdd.put(AbstractFilledCondom.loadFromXML(e, doc), count);
+					inventory.add(AbstractFilledCondom.loadFromXML(e, doc), count);
 					
 				} else if(id.equals(ItemType.getIdFromItemType(ItemType.MOO_MILKER_FULL))) {
-					itemMapToAdd.put(AbstractFilledBreastPump.loadFromXML(e, doc), count);
+					inventory.add(AbstractFilledBreastPump.loadFromXML(e, doc), count);
 					
 				} else {
 					AbstractItem itemLoadedFromXML = AbstractItem.loadFromXML(e, doc);
 					if (itemLoadedFromXML != null) {
-						itemMapToAdd.put(itemLoadedFromXML, count);
+						inventory.add(itemLoadedFromXML, count);
 					}
 				}
 			}
-			inventory.addItems(itemMapToAdd);
 		}
 
 		nodes = parentElement.getElementsByTagName("clothingInInventory");
@@ -466,9 +456,7 @@ public class CharacterInventory implements XMLSaving {
 			}
 		}
 		return money == 0
-				&& clothingSubInventory.isEmpty()
-				&& weaponSubInventory.isEmpty()
-				&& itemSubInventory.isEmpty()
+				&& countMap.isEmpty()
 				&& essenceCount == 0
 				&& dirtySlots.isEmpty()
 				&& clothingCurrentlyEquipped.isEmpty();
@@ -538,9 +526,7 @@ public class CharacterInventory implements XMLSaving {
 	}
 	
 	public void clearNonEquippedInventory(boolean clearMoney) {
-		clothingSubInventory.clear();
-		weaponSubInventory.clear();
-		itemSubInventory.clear();
+		countMap.clear();
 		if(clearMoney) {
 			money = 0;
 		}
@@ -583,23 +569,8 @@ public class CharacterInventory implements XMLSaving {
 	public BlockedParts getExtraBlockedParts() {
 		return extraBlockedParts;
 	}
-	
-	private void sortItemDuplicates() {
-		itemSubInventory.sort();
-	}
-
-	private void sortWeaponDuplicates() {
-		weaponSubInventory.sort();
-	}
-
-	private void sortClothingDuplicates() {
-		clothingSubInventory.sort();
-	}
 
 	public void sortInventory() {
-		sortItemDuplicates();
-		sortWeaponDuplicates();
-		sortClothingDuplicates();
 	}
 	
 	/**
@@ -639,61 +610,93 @@ public class CharacterInventory implements XMLSaving {
 		}
 		return value;
 	}
-	
-	
+
+
+	// -------------------- Generic -------------------- //
+
+	private <T extends AbstractCoreItem> Map<T, Integer> getMapOfCategory(Class<T> cls, Comparator<T> comparator) {
+		var list = new ArrayList<T>();
+		for(var item : countMap.keySet())
+			if(cls.isInstance(item))
+				list.add(cls.cast(item));
+		list.sort(comparator);
+		var map = new LinkedHashMap<T, Integer>();
+		for(var item : list)
+			map.put(item, countMap.get(item));
+		return Collections.unmodifiableMap(map);
+	}
+
+	private int getTotalCountOfCategory(Class<?> cls) {
+		return countMap.entrySet().stream().filter(e -> cls.isInstance(e.getKey())).mapToInt(Entry::getValue).sum();
+	}
+
+	private int getUniqueCountOfCategory(Class<?> cls) {
+		return (int) countMap.keySet().stream().filter(cls::isInstance).count();
+	}
+
+	private int getQuestCountOfCategory(Class<?> cls) {
+		return (int) countMap.keySet().stream()
+				.filter(cls::isInstance)
+				.filter(i -> i.getRarity() == Rarity.QUEST)
+				.count();
+	}
+
+
 	// -------------------- Items -------------------- //
 	
 	/**
-	 * <b>DO NOT MODIFY!</b>
+	 * @return Immutable map from all contained items to the positive number of duplicates in this inventory.
 	 */
 	public Map<AbstractItem, Integer> getAllItemsInInventory() {
-		return itemSubInventory.getDuplicateCounts();
+		return getMapOfCategory(AbstractItem.class, itemComparator);
 	}
 
-	public int getTotalItemCount() {
-		return itemSubInventory.getTotalItemCount();
-	}
-	
-	public int getUniqueItemCount() {
-		return itemSubInventory.getUniqueItemCount();
-	}
-	
-	public int getUniqueQuestItemCount() {
-		return itemSubInventory.getQuestEntryCount();
-	}
-	
-	public int getItemCount(AbstractItem item) {
-		return itemSubInventory.getItemCount(item);
-	}
-	
 	/**
-	 * For internal use only. Adds multiple items. Does not check size limits.
-	 * @param itemMap
+	 * @return Number of duplicates of items in this inventory.
 	 */
-	private void addItems(Map<AbstractItem, Integer> itemMap) {
-		itemSubInventory.addFromMap(itemMap);
+	public int getTotalItemCount() {
+		return getTotalCountOfCategory(AbstractItem.class);
+	}
 
-		if (Main.game.isStarted()) {
-			sortItemDuplicates();
-		}
+	/**
+	 * @return Number of different items in this inventory, not taking duplicates into account.
+	 */
+	public int getUniqueItemCount() {
+		return getUniqueCountOfCategory(AbstractItem.class);
+	}
+
+	/**
+	 * @return Number of different quest items in this inventory, not counting duplicates.
+	 */
+	public int getUniqueQuestItemCount() {
+		return getQuestCountOfCategory(AbstractItem.class);
+	}
+
+	/**
+	 * @param item Identifies a regular item in this game.
+	 * @return Number of duplicates of {@code item}.  Zero if not contained.
+	 */
+	public int getItemCount(AbstractCoreItem item) {
+		return countMap.getOrDefault(item, 0);
+	}
+
+	private void add(AbstractCoreItem item, int count) {
+		if(count > 0)
+			countMap.merge(item, count, Integer::sum);
 	}
 	
 	/**
 	 * Add an item to this inventory.
 	 * @return true if added, false if inventory was full.
 	 */
-	public boolean addItem(AbstractItem item, int count) {
+	public boolean addItem(AbstractCoreItem item, int count) {
 		if(item==null) {
 			return false;
 		}
 
 		boolean canAddItem = canAddItem(item);
 		if (canAddItem) {
-			itemSubInventory.addItem(item, count);
-
-			if (Main.game.isStarted()) {
-				sortItemDuplicates();
-			}
+			add(item, count);
 		}
 
 		return canAddItem;
@@ -703,11 +706,11 @@ public class CharacterInventory implements XMLSaving {
 	 * Add an item to this inventory.
 	 * @return true if added, false if inventory was full.
 	 */
-	public boolean addItem(AbstractItem item) {
+	public boolean addItem(AbstractCoreItem item) {
 		return addItem(item, 1);
 	}
 	
-	public boolean canAddItem(AbstractItem item) {
+	public boolean canAddItem(AbstractCoreItem item) {
 		return !isInventoryFull() || hasItem(item) || item.getRarity()==Rarity.QUEST;
 	}
 	
@@ -715,7 +718,7 @@ public class CharacterInventory implements XMLSaving {
 	 * @param item The item to be removed.
 	 * @return true if an item was removed, false if no item was found.
 	 */
-	public boolean removeItem(AbstractItem item) {
+	public boolean removeItem(AbstractCoreItem item) {
 		return removeItem(item, 1);
 	}
 
@@ -724,39 +727,71 @@ public class CharacterInventory implements XMLSaving {
 	 * @param count The number of items matching this item to be removed.
 	 * @return true if an item was removed, false if no item was found.
 	 */
-	public boolean removeItem(AbstractItem item, int count) {
-		return itemSubInventory.removeItem(item, count);
+	public boolean removeItem(AbstractCoreItem item, int count) {
+		if(count <= 0)
+			return false;
+		Integer oldCount = countMap.get(item);
+		if(oldCount == null)
+			return false;
+		if(oldCount > count)
+			countMap.put(item, oldCount - count);
+		else
+			countMap.remove(item);
+		return true;
 	}
-	
-	public boolean hasItem(AbstractItem item) {
-		return itemSubInventory.hasItem(item);
+
+	/**
+	 * @param item The item in question.
+	 * @return This inventory contains at least one duplicate of {@code item}.
+	 */
+	public boolean hasItem(AbstractCoreItem item) {
+		return countMap.containsKey(item);
 	}
 	
 	/**
 	 * @return true if one of the items in this inventory has the same type as the Item provided.
 	 */
-	public boolean hasItemType(AbstractItemType item) {
-		return itemSubInventory.hasItemType(item);
-	}
-	
-	public boolean removeItemByType(AbstractItemType itemType) {
-		return removeItemByType(itemType, 1);
+	public boolean hasItemType(AbstractCoreType type) {
+		return countMap.keySet().stream().anyMatch(i -> i.getType().equals(type));
 	}
 
-	public boolean removeItemByType(AbstractItemType itemType, int count) {
-		return itemSubInventory.removeItemByType(itemType, count);
+	/**
+	 * Removes one duplicate of some item from this inventory.
+	 * @param type Type of items.
+	 * @return Duplicates were removed.
+	 */
+	public boolean removeItemByType(AbstractCoreType type) {
+		return removeItemByType(type, 1);
+	}
+
+	/**
+	 * Tries to remove a certain number of duplicates of some item from this inventory.
+	 * @param type Type of items.
+	 * @param count Non-negative number of duplicates to remove.
+	 * @return Items were removed.
+	 */
+	public boolean removeItemByType(AbstractCoreType type, int count) {
+		var item = countMap.keySet().stream().filter(i -> i.getType().equals(type)).findAny();
+		if(item.isEmpty())
+			return false;
+		var oldValue = countMap.get(item.get());
+		if(oldValue > count)
+			countMap.put(item.get(), oldValue - count);
+		else
+			countMap.remove(item.get());
+		return true;
 	}
 	
 	public boolean removeAllItemsByRarity(Rarity rarity) {
-		return itemSubInventory.removeAllItemsByRarity(rarity);
+		return countMap.keySet().removeIf(i -> i.getRarity().equals(rarity));
 	}
 
-	public boolean dropItem(AbstractItem item, World world, Vector2i location) {
+	public boolean dropItem(AbstractCoreItem item, World world, Vector2i location) {
 		return dropItem(item, 1, world, location);
 	}
 	
 	
-	public boolean dropItem(AbstractItem item, int count, World world, Vector2i location) {
+	public boolean dropItem(AbstractCoreItem item, int count, World world, Vector2i location) {
 		if(hasItem(item)) {
 			world.getCell(location).getInventory().addItem(item, count);
 			removeItem(item, count);
@@ -773,23 +808,23 @@ public class CharacterInventory implements XMLSaving {
 	 * <b>DO NOT MODIFY!</b>
 	 */
 	public Map<AbstractWeapon, Integer> getAllWeaponsInInventory() {
-		return weaponSubInventory.getDuplicateCounts();
+		return getMapOfCategory(AbstractWeapon.class, weaponComparator);
 	}
 
 	public int getTotalWeaponCount() {
-		return weaponSubInventory.getTotalItemCount();
+		return getTotalCountOfCategory(AbstractWeapon.class);
 	}
 
 	public int getUniqueWeaponCount() {
-		return weaponSubInventory.getUniqueItemCount();
+		return getUniqueCountOfCategory(AbstractWeapon.class);
 	}
 	
 	public int getUniqueQuestWeaponCount() {
-		return weaponSubInventory.getQuestEntryCount();
+		return getQuestCountOfCategory(AbstractWeapon.class);
 	}
 	
 	public int getWeaponCount(AbstractWeapon weapon) {
-		return weaponSubInventory.getItemCount(weapon);
+		return getItemCount(weapon);
 	}
 	
 	/**
@@ -797,21 +832,7 @@ public class CharacterInventory implements XMLSaving {
 	 * @return true if added, false if inventory was full.
 	 */
 	public boolean addWeapon(AbstractWeapon weapon, int count) {
-		if(weapon==null) {
-			return false;
-		}
-		
-		if(canAddWeapon(weapon)) {
-			weaponSubInventory.addItem(weapon, count);
-
-			if(Main.game.isStarted()) {
-				sortWeaponDuplicates();
-			}
-			
-			return true;
-		}
-		
-		return false;
+		return addItem(weapon, count);
 	}
 	
 	/**
@@ -823,7 +844,7 @@ public class CharacterInventory implements XMLSaving {
 	}
 	
 	public boolean canAddWeapon(AbstractWeapon weapon) {
-		return !isInventoryFull() || hasWeapon(weapon) || weapon.getRarity()==Rarity.QUEST;
+		return canAddItem(weapon);
 	}
 
 	/**
@@ -840,26 +861,26 @@ public class CharacterInventory implements XMLSaving {
 	 * @return true if a weapon was removed, false if no weapon was found.
 	 */
 	public boolean removeWeapon(AbstractWeapon weapon, int count) {
-		return weaponSubInventory.removeItem(weapon, count);
+		return removeItem(weapon, count);
 	}
 
 	public boolean hasWeapon(AbstractWeapon weapon) {
-		return weaponSubInventory.hasItem(weapon);
+		return hasItem(weapon);
 	}
 	
 	/**
 	 * @return true if one of the weapons in this inventory has the same type as the Weapon provided.
 	 */
 	public boolean hasWeaponType(AbstractWeaponType weapon) {
-		return weaponSubInventory.hasItemType(weapon);
+		return hasItemType(weapon);
 	}
 	
 	public boolean removeWeaponByType(AbstractWeaponType weaponType) {
-		return weaponSubInventory.removeItemByType(weaponType, 1);
+		return removeItemByType(weaponType, 1);
 	}
 	
 	public boolean removeAllWeaponsByRarity(Rarity rarity) {
-		return weaponSubInventory.removeAllItemsByRarity(rarity);
+		return removeAllItemsByRarity(rarity);
 	}
 
 	public boolean dropWeapon(AbstractWeapon weapon, World world, Vector2i location) {
@@ -933,23 +954,23 @@ public class CharacterInventory implements XMLSaving {
 	 * <b>DO NOT MODIFY!</b>
 	 */
 	public Map<AbstractClothing, Integer> getAllClothingInInventory() {
-		return clothingSubInventory.getDuplicateCounts();
+		return getMapOfCategory(AbstractClothing.class, clothingComparator);
 	}
 
 	public int getTotalClothingCount() {
-		return clothingSubInventory.getTotalItemCount();
+		return getTotalCountOfCategory(AbstractClothing.class);
 	}
 
 	public int getUniqueClothingCount() {
-		return clothingSubInventory.getUniqueItemCount();
+		return getUniqueCountOfCategory(AbstractClothing.class);
 	}
 
 	public int getUniqueQuestClothingCount() {
-		return clothingSubInventory.getQuestEntryCount();
+		return getQuestCountOfCategory(AbstractClothing.class);
 	}
 	
 	public int getClothingCount(AbstractClothing clothing) {
-		return clothingSubInventory.getItemCount(clothing);
+		return getItemCount(clothing);
 	}
 
 	/**
@@ -957,21 +978,7 @@ public class CharacterInventory implements XMLSaving {
 	 * @return true if added, false if inventory was full.
 	 */
 	public boolean addClothing(AbstractClothing clothing, int count) {
-		if(clothing==null) {
-			return false;
-		}
-		
-		if(canAddClothing(clothing)) {
-			clothingSubInventory.addItem(clothing, count);
-
-			if(Main.game.isStarted()) {
-				sortClothingDuplicates();
-			}
-			
-			return true;
-		}
-		
-		return false;
+		return addItem(clothing, count);
 	}
 	
 	/**
@@ -1000,18 +1007,18 @@ public class CharacterInventory implements XMLSaving {
 	 * @return true if a clothing was removed, false if no clothing was found.
 	 */
 	public boolean removeClothing(AbstractClothing clothing, int count) {
-		return clothingSubInventory.removeItem(clothing, count);
+		return removeItem(clothing, count);
 	}
 
 	public boolean hasClothing(AbstractClothing clothing) {
-		return clothingSubInventory.hasItem(clothing);
+		return hasItem(clothing);
 	}
 	
 	/**
 	 * @return true if one of the clothings in this inventory has the same type as the Clothing provided.
 	 */
 	public boolean hasClothingType(AbstractClothingType type, boolean includeEquipped) {
-		return clothingSubInventory.hasItemType(type) || (includeEquipped && hasEquippedClothingType(type));
+		return hasItemType(type) || (includeEquipped && hasEquippedClothingType(type));
 	}
 
 	public boolean hasEquippedClothingType(AbstractClothingType type) {
@@ -1019,11 +1026,11 @@ public class CharacterInventory implements XMLSaving {
 	}
 	
 	public boolean removeClothingByType(AbstractClothingType clothingType) {
-		return clothingSubInventory.removeItemByType(clothingType, 1);
+		return removeItemByType(clothingType, 1);
 	}
 	
 	public boolean removeAllClothingByRarity(Rarity rarity) {
-		return clothingSubInventory.removeAllItemsByRarity(rarity);
+		return removeAllItemsByRarity(rarity);
 	}
 
 	public boolean dropClothing(AbstractClothing clothing, World world, Vector2i location) {
@@ -1055,10 +1062,11 @@ public class CharacterInventory implements XMLSaving {
 		}
 		
 		if(includeNotEquippedClothing) {
-			clothingSubInventory.transform(c -> {
-				c.setDirty(null, false);
-				return c;
-			});
+			for(var item : countMap.keySet()) {
+				if(item instanceof AbstractClothing clothing) {
+					clothing.setDirty(null, false);
+				}
+			}
 		}
 		
 		for(AbstractClothing c : clothingCurrentlyEquipped) {

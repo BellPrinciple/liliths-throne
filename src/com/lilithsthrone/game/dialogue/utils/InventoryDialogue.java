@@ -994,35 +994,35 @@ public class InventoryDialogue {
 				// ****************************** Interacting with the ground ******************************
 				if(inventoryNPC == null) {
 					boolean areaFull = Main.game.isPlayerTileFull() && !Main.game.getPlayerCell().getInventory().hasItem(item);
-					
+
 					switch(interactionType) {
 						case SEX:
 							String dropTitle = owner.getLocationPlace().isItemsDisappear()?"Drop ":"Store";
 							if(index == 1) {
 								return new Response(dropTitle+"(1)", "You can't drop items while masturbating.", null);
-								
+
 							} else if(index == 2) {
 								return new Response(dropTitle+"(5)", "You can't drop items while masturbating.", null);
-								
+
 							} else if(index == 3) {
 								return new Response(dropTitle+"(All)", "You can't drop items while masturbating.", null);
-								
+
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant items while masturbating.", null);
-								
+
 							} else if(index == 6) {
 								if(!Main.sex.isItemUseAvailable()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "Items cannot be used during this sex scene!", null);
-									
+
 								} else if (!item.isAbleToBeUsedInSex()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You cannot use this during sex!", null);
-									
+
 								} else if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
@@ -1038,17 +1038,17 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 7) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "You can only use one item at a time during sex!", null);
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else {
 								return null;
 							}
-						
+
 						default:
 							if(index == 1) {
 								if(owner.getLocationPlace().isItemsDisappear()) {
@@ -1078,18 +1078,18 @@ public class InventoryDialogue {
 										};
 									}
 								}
-								
+
 							} else if(index == 2) {
 								if(owner.getLocationPlace().isItemsDisappear()) {
 									if(owner.getItemCount(item) < 5) {
 										return new Response("Drop (5)", "You don't have five " + item.getNamePlural() + " to give!", null);
-										
+
 									} else if(!item.getItemType().isAbleToBeDropped()) {
 										return new Response("Drop (5)", "You cannot drop the " + item.getName() + "!", null);
-										
+
 									} else if(areaFull) {
 										return new Response("Drop (5)", "This area is full, so you can't drop your " + item.getNamePlural() + " here!", null);
-										
+
 									} else {
 										return new Response("Drop (5)", "Drop five of your " + item.getNamePlural() + ".", INVENTORY_MENU){
 											@Override
@@ -1101,13 +1101,13 @@ public class InventoryDialogue {
 								} else {
 									if(owner.getItemCount(item) < 5) {
 										return new Response("Store (5)", "You don't have five " + item.getNamePlural() + " to give!", null);
-										
+
 									} else if(!item.getItemType().isAbleToBeDropped()) {
 										return new Response("Store (5)", "You cannot drop the " + item.getName() + "!", null);
-										
+
 									} else if(areaFull) {
 										return new Response("Store (5)", "This area is full, so you can't store your " + item.getNamePlural() + " here!", null);
-										
+
 									} else {
 										return new Response("Store (5)", "Store five of your " + item.getNamePlural() + " in this area.", INVENTORY_MENU){
 											@Override
@@ -1117,7 +1117,7 @@ public class InventoryDialogue {
 										};
 									}
 								}
-								
+
 							} else if(index == 3) {
 								if(owner.getLocationPlace().isItemsDisappear()) {
 									if(!item.getItemType().isAbleToBeDropped()) {
@@ -1146,11 +1146,11 @@ public class InventoryDialogue {
 										};
 									}
 								}
-								
+
 							} else if(index == 5) {
 								if(item.getEnchantmentItemType(null)==null || item.getItemTags().contains(ItemTag.UNENCHANTABLE)) {
 									return new Response("Enchant", "This item cannot be enchanted!", null);
-									
+
 								} else if(Main.game.isDebugMode()
 										|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY) && Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
 									return new Response("Enchant", "Enchant this item.", EnchantmentDialogue.ENCHANTMENT_MENU) {
@@ -1159,15 +1159,15 @@ public class InventoryDialogue {
 											return EnchantmentDialogue.getEnchantmentMenu(item);
 										}
 									};
-									
+
 								} else {
 									return new Response("Enchant", getEnchantmentNotDiscoveredText("items"), null);
 								}
-								
+
 							} else if(index == 6) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
 								} else {
@@ -1193,14 +1193,14 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 7) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if(!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									if(item.isBreakOutOfInventory()) {
 										return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "As this item has special effects, you can only use one at a time!", null);
@@ -1220,10 +1220,10 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else {
 								return null;
 							}
@@ -1235,35 +1235,35 @@ public class InventoryDialogue {
 						case COMBAT:
 							if(index == 1) {
 								return new Response("Give (1)", "You can't give someone items while fighting them!", null);
-								
+
 							} else if(index == 2) {
 								return new Response("Give (5)", "You can't give someone items while fighting them!", null);
-								
+
 							} else if(index == 3) {
 								return new Response("Give (All)", "You can't give someone items while fighting them!", null);
-								
+
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant items while fighting someone!", null);
-								
+
 							} else if(index == 6) {
 								if(Main.game.getPlayer().isStunned()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You cannot use any items while you're stunned!", null);
-									
+
 								} else if(Main.combat.isCombatantDefeated(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You cannot use any items while you're defeated!", null);
-									
+
 								} else if(Main.game.getPlayer().getRemainingAP()<CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You need at least "+CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer())+" AP to use this actions!", null);
-									
+
 								} else if (!item.isAbleToBeUsedInCombatAllies()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You cannot use this during combat!", null);
-									
+
 								} else if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
@@ -1277,29 +1277,29 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 7) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "You can only use one item at a time during combat!", null);
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else if(index == 11) {//TODO on ally though???
 								if(Main.game.getPlayer().isStunned()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Opponent)", "You cannot use any items while you're stunned!", null);
-									
+
 								} else if(Main.combat.isCombatantDefeated(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Opponent)", "You cannot use any items while you're defeated!", null);
-									
+
 								} else if(Main.game.getPlayer().getRemainingAP()<CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Opponent)", "You need at least "+CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer())+" AP to use this actions!", null);
-									
+
 								} else if (!item.isAbleToBeUsedInCombatEnemies()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Opponent)", "You cannot use this during combat!", null);
-									
+
 								} else if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Opponent)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(inventoryNPC)) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Opponent)", item.getUnableToBeUsedDescription(inventoryNPC), null);
 
@@ -1336,7 +1336,7 @@ public class InventoryDialogue {
 											Main.mainController.openInventory();
 										}
 									};
-									
+
 								} else {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Opponent)",
@@ -1350,17 +1350,17 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 12) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Opponent)", "You can only use one item at a time during combat!", null);
-								
+
 							} else {
 								return null;
 							}
-							
+
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							boolean inventoryFull = inventoryNPC.isInventoryFull() && !inventoryNPC.hasItem(item);
-							
+
 							if(index == 1) {
 								if(!item.getItemType().isAbleToBeDropped()) {
 									return new Response("Give (1)", "You cannot give away the " + item.getName() + "!", null);
@@ -1373,7 +1373,7 @@ public class InventoryDialogue {
 										transferItems(Main.game.getPlayer(), inventoryNPC, item, 1);
 									}
 								};
-								
+
 							} else if(index == 2) {
 								if(!item.getItemType().isAbleToBeDropped()) {
 									return new Response("Give (5)", "You cannot give away the " + item.getName() + "!", null);
@@ -1390,7 +1390,7 @@ public class InventoryDialogue {
 								} else {
 									return new Response("Give (5)", "You don't have five " + item.getNamePlural() + " to give!", null);
 								}
-								
+
 							} else if(index == 3) {
 								if(!item.getItemType().isAbleToBeDropped()) {
 									return new Response("Give (All)", "You cannot give away the " + item.getName() + "!", null);
@@ -1403,11 +1403,11 @@ public class InventoryDialogue {
 										transferItems(Main.game.getPlayer(), inventoryNPC, item, Main.game.getPlayer().getItemCount(item));
 									}
 								};
-								
+
 							} else if(index == 5) {
 								if(item.getEnchantmentItemType(null)==null || item.getItemTags().contains(ItemTag.UNENCHANTABLE)) {
 									return new Response("Enchant", "This item cannot be enchanted!", null);
-									
+
 								} else if(Main.game.isDebugMode()
 											|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY) && Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
 										return new Response("Enchant", "Enchant this item.", EnchantmentDialogue.ENCHANTMENT_MENU) {
@@ -1416,18 +1416,18 @@ public class InventoryDialogue {
 												return EnchantmentDialogue.getEnchantmentMenu(item);
 											}
 										};
-								
+
 								} else {
 									return new Response("Enchant", getEnchantmentNotDiscoveredText("items"), null);
 								}
-							
+
 							} else if(index == 6) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									if(item.isBreakOutOfInventory()) {
 										return new ResponseEffectsOnly(
@@ -1451,14 +1451,14 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 7) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if(!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									if(item.isBreakOutOfInventory()) {
 										return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "As this item has special effects, you can only use one at a time!", null);
@@ -1478,17 +1478,17 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else if(index == 11) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"), item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(inventoryNPC)) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"), item.getUnableToBeUsedDescription(inventoryNPC), null);
-									
+
 								} else if(item.isBreakOutOfInventory()) {
 									return new ResponseEffectsOnly(
 											Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
@@ -1499,7 +1499,7 @@ public class InventoryDialogue {
 											resetPostAction();
 										}
 									};
-									
+
 								} else if(item.getItemType().isFetishGiving()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
@@ -1530,7 +1530,7 @@ public class InventoryDialogue {
 											resetPostAction();
 										}
 									};
-									
+
 								} else {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
@@ -1545,13 +1545,13 @@ public class InventoryDialogue {
 							} else if(index == 12) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"), item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if(!item.isAbleToBeUsed(inventoryNPC)) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"), item.getUnableToBeUsedDescription(inventoryNPC), null);
-									
+
 								} else if(item.isBreakOutOfInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"), "As this item has special effects, you can only use one at a time!", null);
-									
+
 								} else if(item.getItemType().isFetishGiving()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC)
@@ -1590,7 +1590,7 @@ public class InventoryDialogue {
 											resetPostAction();
 										}
 									};
-									
+
 								} else {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
 											item.getItemType().getUseTooltipDescription(owner, inventoryNPC)
@@ -1606,37 +1606,37 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else {
 								return null;
 							}
-							
+
 						case SEX:
 							if(index == 1) {
 								return new Response("Give (1)", "You can't give someone items while having sex with them!", null);
-								
+
 							} else if(index == 2) {
 								return new Response("Give (5)", "You can't give someone items while having sex with them!", null);
-								
+
 							} else if(index == 3) {
 								return new Response("Give (All)", "You can't give someone items while having sex with them!", null);
-								
+
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant items while having sex with someone!", null);
-								
+
 							} else if(index == 6) {
 								if(!Main.sex.isItemUseAvailable()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "Items cannot be used during this sex scene!", null);
-									
+
 								} else if (!item.isAbleToBeUsedInSex()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You cannot use this during sex!", null);
-									
+
 								} else if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
@@ -1652,26 +1652,26 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 7) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "You can only use one item at a time during sex!", null);
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else if(index == 11) {
 								if(!Main.sex.isItemUseAvailable()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (partner)", "Items cannot be used during this sex scene!", null);
-									
+
 								} else if (!item.isAbleToBeUsedInSex()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (partner)", "You cannot use this during sex!", null);
-									
+
 								} else if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (partner)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(inventoryNPC)) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)", item.getUnableToBeUsedDescription(inventoryNPC), null);
-									
+
 								} else if(item.getItemType().isFetishGiving()) {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)",
@@ -1691,7 +1691,7 @@ public class InventoryDialogue {
 											Main.sex.setSexStarted(true);
 										}
 									};
-									
+
 								} else if(item.getItemType().isTransformative()) {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)",
@@ -1711,7 +1711,7 @@ public class InventoryDialogue {
 											Main.sex.setSexStarted(true);
 										}
 									};
-									
+
 								} else {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)",
@@ -1727,19 +1727,19 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 12) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (partner)", "You can only use one item at a time during sex!", null);
-								
+
 							} else {
 								return null;
 							}
-							
+
 						case TRADING:
 							if(index == 1) {
 								if(!item.getItemType().isAbleToBeSold()) {
 									return new Response("Sell (1)", "You cannot sell the " + item.getName() + "!", null);
-									
+
 								} else if (inventoryNPC.willBuy(item)) {
 									int sellPrice = item.getPrice(inventoryNPC.getBuyModifier());
 									return new Response("Sell (1) (" + UtilText.formatAsMoney(sellPrice, "span") + ")", "Sell the " + item.getName() + " for " + UtilText.formatAsMoney(sellPrice) + ".", INVENTORY_MENU){
@@ -1751,12 +1751,12 @@ public class InventoryDialogue {
 								} else {
 									return new Response("Sell (1)", inventoryNPC.getName("The") + " doesn't want to buy this.", null);
 								}
-								
+
 							} else if(index == 2) {
 								if(Main.game.getPlayer().getItemCount(item) >= 5) {
 									if(!item.getItemType().isAbleToBeSold()) {
 										return new Response("Sell (5)", "You cannot sell the " + item.getName() + "!", null);
-										
+
 									} else if (inventoryNPC.willBuy(item)) {
 										int sellPrice = item.getPrice(inventoryNPC.getBuyModifier());
 										return new Response("Sell (5) (" + UtilText.formatAsMoney(sellPrice*5, "span") + ")", "Sell five of your " + item.getNamePlural() + " for " + UtilText.formatAsMoney(sellPrice*5) + ".", INVENTORY_MENU){
@@ -1768,15 +1768,15 @@ public class InventoryDialogue {
 									} else {
 										return new Response("Sell (5)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
 									}
-									
+
 								} else {
 									return new Response("Sell (5)", "You don't have five " + item.getNamePlural() + " to sell!", null);
 								}
-								
+
 							} else if(index == 3) {
 								if(!item.getItemType().isAbleToBeSold()) {
 									return new Response("Sell (All)", "You cannot sell the " + item.getName() + "!", null);
-									
+
 								} else if (inventoryNPC.willBuy(item)) {
 									int sellPrice = item.getPrice(inventoryNPC.getBuyModifier());
 									return new Response("Sell (All) (" + UtilText.formatAsMoney(sellPrice*Main.game.getPlayer().getItemCount(item), "span") + ")",
@@ -1789,11 +1789,11 @@ public class InventoryDialogue {
 								} else {
 									return new Response("Sell (All)", inventoryNPC.getName("The") + " doesn't want to buy these.", null);
 								}
-								
+
 							} else if(index == 5) {
 								if(item.getEnchantmentItemType(null)==null || item.getItemTags().contains(ItemTag.UNENCHANTABLE)) {
 									return new Response("Enchant", "This item cannot be enchanted!", null);
-									
+
 								} else if(Main.game.isDebugMode()
 										|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY) && Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
 									return new Response("Enchant", "Enchant this item.", EnchantmentDialogue.ENCHANTMENT_MENU) {
@@ -1802,18 +1802,18 @@ public class InventoryDialogue {
 											return EnchantmentDialogue.getEnchantmentMenu(item);
 										}
 									};
-									
+
 								} else {
 									return new Response("Enchant", getEnchantmentNotDiscoveredText("items"), null);
 								}
-								
+
 							} else if(index == 6) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									if(item.isBreakOutOfInventory()) {
 										return new ResponseEffectsOnly(
@@ -1836,14 +1836,14 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 7) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if(!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									if(item.isBreakOutOfInventory()) {
 										return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "As this item has special effects, you can only use one at a time!", null);
@@ -1863,19 +1863,19 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if (index == 9) {
 								return getBuybackResponse();
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else if(index == 11) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"), UtilText.parse(inventoryNPC, "[npc.Name] doesn't want to use your items."), null);
-								
+
 							} else if(index == 12) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"), UtilText.parse(inventoryNPC, "[npc.Name] doesn't want to use your items."), null);
-								
+
 							} else {
 								return null;
 							}
@@ -1888,34 +1888,34 @@ public class InventoryDialogue {
 				// ****************************** Interacting with the ground ******************************
 				if(inventoryNPC == null) {
 					boolean inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasItem(item) && item.getRarity()!=Rarity.QUEST;
-					
+
 					switch(interactionType) {
 						case SEX:
 							if(index == 1) {
 								return new Response("Take (1)", "You can't pick up items while masturbating.", null);
-								
+
 							} else if(index == 2) {
 								return new Response("Take (5)", "You can't pick up items while masturbating.", null);
-								
+
 							} else if(index == 3) {
 								return new Response("Take (All)", "You can't pick up items while masturbating.", null);
-								
+
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant items while masturbating.", null);
-								
+
 							} else if(index == 6) {
 								if(!Main.sex.isItemUseAvailable()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "Items cannot be used during this sex scene!", null);
-									
+
 								} else if (!item.isAbleToBeUsedInSex()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You cannot use this during sex!", null);
-									
+
 								} else if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
@@ -1931,17 +1931,17 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 7) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "You can only use one item at a time during sex!", null);
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else {
 								return null;
 							}
-					
+
 						default:
 							if(index == 1) {
 								if(inventoryFull) {
@@ -1953,7 +1953,7 @@ public class InventoryDialogue {
 										pickUpItems(Main.game.getPlayer(), item, 1);
 									}
 								};
-								
+
 							} else if(index == 2) {
 								if(inventoryFull) {
 									return new Response("Take (5)", "Your inventory is already full!", null);
@@ -1968,7 +1968,7 @@ public class InventoryDialogue {
 								} else {
 									return new Response("Take (5)", "There aren't five " + item.getNamePlural() + " on the ground!", null);
 								}
-								
+
 							} else if(index == 3) {
 								if(inventoryFull) {
 									return new Response("Take (All)", "Your inventory is already full!", null);
@@ -1979,17 +1979,17 @@ public class InventoryDialogue {
 										pickUpItems(Main.game.getPlayer(), item, Main.game.getPlayerCell().getInventory().getItemCount(item));
 									}
 								};
-								
+
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant items on the ground!", null);
-								
+
 							} else if(index == 6) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									if(item.isBreakOutOfInventory()) {
 										return new ResponseEffectsOnly(
@@ -2013,14 +2013,14 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 7) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if(!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									if(item.isBreakOutOfInventory()) {
 										return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" all (Self)", "As this item has special effects, you can only use one at a time!", null);
@@ -2040,10 +2040,10 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else {
 								return null;
 							}
@@ -2056,38 +2056,38 @@ public class InventoryDialogue {
 						case COMBAT:
 							if(index == 1) {
 								return new Response("Take (1)", "You can't take someone items while fighting them!", null);
-								
+
 							} else if(index == 2) {
 								return new Response("Take (5)", "You can't take someone items while fighting them!", null);
-								
+
 							} else if(index == 3) {
 								return new Response("Take (All)", "You can't take someone items while fighting them!", null);
-								
+
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant someone else's items, especially not while fighting them!", null);
-								
+
 							} else if(index == 6) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", "You can't use someone else's items while fighting them!", null);
-								
+
 							} else if(index == 7) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" all (Self)", "You can't use someone else's items while fighting them!", null);
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else if(index == 11) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Opponent)", "You can't use make someone use an item while fighting them!", null);
-								
+
 							} else if(index == 12) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" all (Opponent)", "You can't use make someone use an item while fighting them!", null);
-								
+
 							} else {
 								return null;
 							}
-							
+
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasItem(item) && item.getRarity()!=Rarity.QUEST;
-						
+
 							if(index == 1) {
 								if(inventoryFull) {
 									return new Response("Take (1)", "Your inventory is already full!", null);
@@ -2098,7 +2098,7 @@ public class InventoryDialogue {
 										transferItems(inventoryNPC, Main.game.getPlayer(), item, 1);
 									}
 								};
-								
+
 							} else if(index == 2) {
 								if(inventoryFull) {
 									return new Response("Take (5)", "Your inventory is already full!", null);
@@ -2113,7 +2113,7 @@ public class InventoryDialogue {
 								} else {
 									return new Response("Take (5)", UtilText.parse(inventoryNPC, "[npc.Name] doesn't have five " + item.getNamePlural() + "!"), null);
 								}
-								
+
 							} else if(index == 3) {
 								if(inventoryFull) {
 									return new Response("Take (All)", "Your inventory is already full!", null);
@@ -2124,17 +2124,17 @@ public class InventoryDialogue {
 										transferItems(inventoryNPC, Main.game.getPlayer(), item, inventoryNPC.getItemCount(item));
 									}
 								};
-								
+
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant items owned by someone else!", null);
-								
+
 							} else if(index == 6) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
@@ -2150,14 +2150,14 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 7) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if(!item.isAbleToBeUsed(Main.game.getPlayer())) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
+
 								} else {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)",
@@ -2177,17 +2177,17 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else if(index == 11) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"), item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if (!item.isAbleToBeUsed(inventoryNPC)) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"), item.getUnableToBeUsedDescription(inventoryNPC), null);
-									
+
 								} else if(item.isBreakOutOfInventory()) {
 									return new ResponseEffectsOnly(
 											Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
@@ -2198,7 +2198,7 @@ public class InventoryDialogue {
 											resetPostAction();
 										}
 									};
-									
+
 								} else if(item.getItemType().isFetishGiving()) {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
@@ -2231,7 +2231,7 @@ public class InventoryDialogue {
 											resetPostAction();
 										}
 									};
-									
+
 								} else {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
@@ -2244,17 +2244,17 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else if(index == 12) {
 								if (!item.isAbleToBeUsedFromInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"), item.getUnableToBeUsedFromInventoryDescription(), null);
-									
+
 								} else if(!item.isAbleToBeUsed(inventoryNPC)) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"), item.getUnableToBeUsedDescription(inventoryNPC), null);
-									
+
 								} else if(item.isBreakOutOfInventory()) {
 									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"), "As this item has special effects, you can only use one at a time!", null);
-									
+
 								} else if(item.getItemType().isFetishGiving()) {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
@@ -2275,7 +2275,7 @@ public class InventoryDialogue {
 											resetPostAction();
 										}
 									};
-									
+
 								} else if(item.getItemType().isTransformative()) {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
@@ -2296,7 +2296,7 @@ public class InventoryDialogue {
 											resetPostAction();
 										}
 									};
-									
+
 								} else {
 									return new Response(
 											Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
@@ -2313,36 +2313,36 @@ public class InventoryDialogue {
 										}
 									};
 								}
-								
+
 							} else {
 								return null;
 							}
-							
+
 						case SEX:
 							if(index == 1) {
 								return new Response("Take (1)", "You can't take someone's items while having sex with them!", null);
-								
+
 							} else if(index == 2) {
 								return new Response("Take (5)", "You can't take someone's items while having sex with them!", null);
-								
+
 							} else if(index == 3) {
 								return new Response("Take (All)", "You can't take someone's items while having sex with them!", null);
-								
+
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant someone else's items, especially not while having sex with them!", null);
-								
+
 							} else if(index == 6) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You can't use your partner's items during sex!", null);
 								//TODO
 //								if (!item.isAbleToBeUsedInSex()) {
 //									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "This cannot be used during sex!", null);
-//									
+//
 //								} else if (!item.isAbleToBeUsedFromInventory()) {
 //									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-//									
+//
 //								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
 //									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-//									
+//
 //								} else {
 //									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
 //											Util.capitaliseSentence(item.getItemType().getUseName()) + " the " + item.getName() + ".", Main.sex.SEX_DIALOGUE){
@@ -2356,25 +2356,25 @@ public class InventoryDialogue {
 //										}
 //									};
 //								}
-								
+
 							} else if(index == 7) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "You can only use one item at a time during sex!", null);
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else if(index == 11) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (partner)", "You can't use your partner's items during sex!", null);
 								//TODO
 //								if (!item.isAbleToBeUsedInSex()) {
 //									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (partner)", "This cannot be used during sex!", null);
-//									
+//
 //								} else if (!item.isAbleToBeUsedFromInventory()) {
 //									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (partner)", item.getUnableToBeUsedFromInventoryDescription(), null);
-//									
+//
 //								} else if (!item.isAbleToBeUsed(inventoryNPC)) {
 //									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)", item.getUnableToBeUsedDescription(inventoryNPC), null);
-//									
+//
 //								} else if(item.getItemType().isFetishGiving()) {
 //									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)",
 //											"Get "+inventoryNPC.getName("the")+" to "+ item.getItemType().getUseName() + " the " + item.getName() + ".",
@@ -2411,7 +2411,7 @@ public class InventoryDialogue {
 //											Main.sex.setSexStarted(true);
 //										}
 //									};
-//									
+//
 //								} else {
 //									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)",
 //											"Get "+inventoryNPC.getName("the")+" to "+ item.getItemType().getUseName() + " the " + item.getName() + ".", Main.sex.SEX_DIALOGUE){
@@ -2425,17 +2425,17 @@ public class InventoryDialogue {
 //										}
 //									};
 //								}
-								
+
 							} else if(index == 12) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (partner)", "You can only use one item at a time during sex!", null);
-								
+
 							} else {
 								return null;
 							}
-							
+
 						case TRADING:
 							inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasItem(item)  && item.getRarity()!=Rarity.QUEST;
-							
+
 							if(index == 1) {
 								int sellPrice = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getPrice():item.getPrice(inventoryNPC.getSellModifier(item));
 								if(inventoryFull) {
@@ -2450,7 +2450,7 @@ public class InventoryDialogue {
 										sellItems(inventoryNPC, Main.game.getPlayer(), item, 1, sellPrice);
 									}
 								};
-								
+
 							} else if(index == 2) {
 								int sellPrice = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getPrice():item.getPrice(inventoryNPC.getSellModifier(item));
 								if((buyback && Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getCount()<5)
@@ -2469,7 +2469,7 @@ public class InventoryDialogue {
 										sellItems(inventoryNPC, Main.game.getPlayer(), item, 5, sellPrice);
 									}
 								};
-								
+
 							} else if(index == 3) {
 								int sellPrice = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getPrice():item.getPrice(inventoryNPC.getSellModifier(item));
 								int count = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getCount():inventoryNPC.getItemCount(item);
@@ -2497,32 +2497,32 @@ public class InventoryDialogue {
 										sellItems(inventoryNPC, Main.game.getPlayer(), item, count, sellPrice);
 									}
 								};
-								
+
 							} else if(index == 5) {
 								return new Response("Enchant", "You can't enchant someone else's item!", null);
-								
+
 							} else if(index == 6) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", UtilText.parse(inventoryNPC, "[npc.Name] isn't going to let you use [npc.her] items without buying them first."), null);
-								
+
 							} else if(index == 7) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" all (Self)", UtilText.parse(inventoryNPC, "[npc.Name] isn't going to let you use [npc.her] items without buying them first."), null);
-								
+
 							} else if (index == 9) {
 								return getBuybackResponse();
-								
+
 							} else if (index == 10) {
 								return getQuickTradeResponse();
-								
+
 							} else if(index == 11) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
 										UtilText.parse(inventoryNPC, "[npc.Name] isn't going to use the items that [npc.sheIs] trying to sell!"),
 										null);
-								
+
 							} else if(index == 12) {
 								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
 										UtilText.parse(inventoryNPC, "[npc.Name] isn't going to use the items that [npc.sheIs] trying to sell!"),
 										null);
-								
+
 							} else {
 								return null;
 							}
@@ -6092,12 +6092,12 @@ public class InventoryDialogue {
 					null);
 		}
 	}
-	
-	
-	
+
+
+
 	// Items:
-	
-	private static void transferItems(GameCharacter from, GameCharacter to, AbstractItem item, int count) {
+
+	private static void transferItems(GameCharacter from, GameCharacter to, AbstractCoreItem item, int count) {
 		if (!to.isInventoryFull() || to.hasItem(item) || item.getRarity()==Rarity.QUEST) {
 			from.removeItem(item, count);
 			to.addItem(item, count, false, to.isPlayer());
@@ -6105,64 +6105,59 @@ public class InventoryDialogue {
 		resetPostAction();
 	}
 	
-	private static void dropItems(GameCharacter from, AbstractItem item, int count) {
+	private static void dropItems(GameCharacter from, AbstractCoreItem item, int count) {
 		if (!Main.game.getPlayerCell().getInventory().isInventoryFull() || Main.game.getPlayerCell().getInventory().hasItem(item)) {
 			from.dropItem(item, count, from.isPlayer());
 		}
 		resetPostAction();
 	}
 	
-	private static void pickUpItems(GameCharacter to, AbstractItem item, int count) {
+	private static void pickUpItems(GameCharacter to, AbstractCoreItem item, int count) {
 		if (!to.isInventoryFull() || to.hasItem(item) || item.getRarity()==Rarity.QUEST) {
 			to.addItem(item, count, true, to.isPlayer());
 		}
 		resetPostAction();
 	}
 	
-	private static void sellItems(GameCharacter from, GameCharacter to, AbstractItem item, int count, int itemPrice) {
+	private static void sellItems(GameCharacter from, GameCharacter to, AbstractCoreItem item, int count, int itemPrice) {
 		Main.game.getDialogueFlags().setFlag(DialogueFlagValue.removeTraderDescription, false);
-		
-		if (!to.isPlayer() || !to.isInventoryFull() || to.hasItem(item) || item.getRarity()==Rarity.QUEST) {
+		if(!to.isPlayer() || !to.isInventoryFull() || to.hasItem(item) || item.getRarity() == Rarity.QUEST) {
 			from.incrementMoney(itemPrice*count);
 			to.incrementMoney(-itemPrice*count);
-			
+			var itemCopy = buyback && to.isPlayer() || !from.isPlayer()
+					? item instanceof AbstractClothing c ? new AbstractClothing(c) {}
+							: item instanceof AbstractWeapon w ? Main.game.getItemGen().generateWeapon(w) : item
+					: null;
 			if(buyback && to.isPlayer()) {
-				Main.game.getPlayer().addItem(item, count, false, true);
+				Main.game.getPlayer().addItem(itemCopy, count, false, true);
 				Main.game.getPlayer().getBuybackStack().get(buyBackIndex).incrementCount(-count);
 				if(Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getCount()<=0) {	
 					Main.game.getPlayer().getBuybackStack().remove(buyBackIndex);
 				}
-				
 			} else {
 				if(from.isPlayer()) {
 					Main.game.getPlayer().getBuybackStack().push(new ShopTransaction(item, itemPrice, count));
 				} else {
-					to.addItem(item, count, false, true);
+					to.addItem(itemCopy, count, false, true);
 				}
 				from.removeItem(item, count);
 			}
-			
 			if(from.isPlayer()) {
-				Main.game.addEvent(new EventLogEntry("Sold",
-								count+"x <span style='color:"+item.getRarity().getColour().toWebHexString()+";'>"+(count==1?item.getName():item.getNamePlural())+"</span> for "+UtilText.formatAsMoney(itemPrice*count)),
-						false);
+				var description = count + "x <span style='color:" + item.getRarity().getColour().toWebHexString()
+						+ ";'>" + (count == 1 ? item.getName() : item.getNamePlural()) + "</span> for "
+						+ UtilText.formatAsMoney(itemPrice*count);
+				Main.game.addEvent(new EventLogEntry("Sold", description), false);
 			}
-			
 			if(to.isPlayer()) {
 				//((NPC) from).handleSellingEffects(item, count, itemPrice); // Delete: This was replaced by applyItemTransactionEffects
-				Main.game.addEvent(new EventLogEntry("Bought",
-								count+"x <span style='color:"+item.getRarity().getColour().toWebHexString()+";'>"+(count==1?item.getName():item.getNamePlural())+"</span> for "+UtilText.formatAsMoney(itemPrice*count)),
-						false);
+				var description = count + "x <span style='color:" + item.getRarity().getColour().toWebHexString()
+						+ ";'>" + (count == 1 ? item.getName() : item.getNamePlural()) + "</span> for "
+						+ UtilText.formatAsMoney(itemPrice*count);
+				Main.game.addEvent(new EventLogEntry("Bought", description), false);
 			}
-			
-			if(!from.isPlayer()) {
-				((NPC)from).applyItemTransactionEffects(item, count, itemPrice, true);
-				
-			} else {
-				((NPC)to).applyItemTransactionEffects(item, count, itemPrice, false);
-			}
+			var receiver = (NPC) (from.isPlayer() ? to : from);
+			receiver.applyItemTransactionEffects(item, count, itemPrice, !from.isPlayer());
 		}
-		
 		resetPostAction();
 	}
 	

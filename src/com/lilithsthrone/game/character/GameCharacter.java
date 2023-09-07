@@ -22200,7 +22200,7 @@ public abstract class GameCharacter implements XMLSaving {
 	public int getItemCount() {
 		return inventory.getTotalItemCount();
 	}
-	public int getItemCount(AbstractItem item) {
+	public int getItemCount(AbstractCoreItem item) {
 		return inventory.getItemCount(item);
 	}
 	public int getItemCount(AbstractItemType itemType) {
@@ -22243,15 +22243,15 @@ public abstract class GameCharacter implements XMLSaving {
 	 * @param item The item to add to this character's inventory.
 	 * @return A description of the item being added.
 	 */
-	public String addItem(AbstractItem item) {
+	public String addItem(AbstractCoreItem item) {
 		return addItem(item, 1, false, this.isPlayer());
 	}
 	
-	public String addItem(AbstractItem item, boolean removingFromFloor) {
+	public String addItem(AbstractCoreItem item, boolean removingFromFloor) {
 		return addItem(item, 1, removingFromFloor, false);
 	}
 	
-	public String addItem(AbstractItem item, boolean removingFromFloor, boolean appendTextToEventLog) {
+	public String addItem(AbstractCoreItem item, boolean removingFromFloor, boolean appendTextToEventLog) {
 		return addItem(item, 1, removingFromFloor, appendTextToEventLog);
 	}
 		
@@ -22261,7 +22261,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 * @param removingFromFloor true if this item should be removed from the floor of the area the character is currently in on a successful pick up.
 	 * @return Description of what happened.
 	 */
-	public String addItem(AbstractItem item, int count, boolean removingFromFloor, boolean appendTextToEventLog) {
+	public String addItem(AbstractCoreItem item, int count, boolean removingFromFloor, boolean appendTextToEventLog) {
 		if(item==null) {
 			System.err.println("Warning: item is returning null in GameCharacter.addItem()!");
 			return "";
@@ -22292,15 +22292,15 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 	}
 
-	public void removeItem(AbstractItem item) {
+	public void removeItem(AbstractCoreItem item) {
 		removeItem(item, 1);
 	}
 
-	public void removeItem(AbstractItem item, int count) {
+	public void removeItem(AbstractCoreItem item, int count) {
 		removeItem(item, count, false);
 	}
 
-	public void removeItem(AbstractItem item, int count, boolean appendTextToEventLog) {
+	public void removeItem(AbstractCoreItem item, int count, boolean appendTextToEventLog) {
 		if(appendTextToEventLog) {
 			Main.game.addEvent(new EventLogEntry("Lost", count+"x <span style='color:"+item.getRarity().getColour().toWebHexString()+";'>"+item.getName()+"</span>"), false);
 		}
@@ -22311,7 +22311,7 @@ public abstract class GameCharacter implements XMLSaving {
 	/**
 	 * @return true If this item is in the character's inventory.
 	 */
-	public boolean hasItem(AbstractItem item) {
+	public boolean hasItem(AbstractCoreItem item) {
 		return inventory.hasItem(item);
 	}
 	
@@ -22351,7 +22351,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return removed;
 	}
 
-	public String dropItem(AbstractItem item, boolean appendTextToEventLog) {
+	public String dropItem(AbstractCoreItem item, boolean appendTextToEventLog) {
 		return dropItem(item, 1, appendTextToEventLog);
 	}
 	
@@ -22359,7 +22359,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 * Drops the item in the cell this character is currently in.
 	 * @return Description of what happened.
 	 */
-	public String dropItem(AbstractItem item, int count, boolean appendTextToEventLog) {
+	public String dropItem(AbstractCoreItem item, int count, boolean appendTextToEventLog) {
 		if(inventory.dropItem(item, count, Main.game.getWorlds().get(this.worldLocation), location)) {
 			if(appendTextToEventLog) {
 				Main.game.addEvent(new EventLogEntry("Dropped", count+"x <span style='color:"+item.getRarity().getColour().toWebHexString()+";'>"+item.getName()+"</span>"), false);
