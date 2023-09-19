@@ -1007,258 +1007,7 @@ public class InventoryDialogue {
 						case COMBAT:
 							return getPlayerItemResponseToNPCDuringCombat(responseTab, index);
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
-							boolean inventoryFull = inventoryNPC.isInventoryFull() && !inventoryNPC.hasItem(item);
-							
-							if(index == 1) {
-								if(!item.getItemType().isAbleToBeDropped()) {
-									return new Response("Give (1)", "You cannot give away the " + item.getName() + "!", null);
-								} else if(inventoryFull) {
-									return new Response("Give (1)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
-								}
-								return new Response("Give (1)", UtilText.parse(inventoryNPC, "Give [npc.name] one " + item.getName() + "."), INVENTORY_MENU){
-									@Override
-									public void effects(){
-										transferItems(Main.game.getPlayer(), inventoryNPC, item, 1);
-									}
-								};
-								
-							} else if(index == 2) {
-								if(!item.getItemType().isAbleToBeDropped()) {
-									return new Response("Give (5)", "You cannot give away the " + item.getName() + "!", null);
-								} else if(inventoryFull) {
-									return new Response("Give (5)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
-								}
-								if(Main.game.getPlayer().getItemCount(item) >= 5) {
-									return new Response("Give (5)", UtilText.parse(inventoryNPC, "Give [npc.name] five of your " + item.getNamePlural() + "."), INVENTORY_MENU){
-										@Override
-										public void effects(){
-											transferItems(Main.game.getPlayer(), inventoryNPC, item, 5);
-										}
-									};
-								} else {
-									return new Response("Give (5)", "You don't have five " + item.getNamePlural() + " to give!", null);
-								}
-								
-							} else if(index == 3) {
-								if(!item.getItemType().isAbleToBeDropped()) {
-									return new Response("Give (All)", "You cannot give away the " + item.getName() + "!", null);
-								} else if(inventoryFull) {
-									return new Response("Give (All)", UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
-								}
-								return new Response("Give (All)", UtilText.parse(inventoryNPC, "Give [npc.name] all of your " + item.getNamePlural() + "."), INVENTORY_MENU){
-									@Override
-									public void effects(){
-										transferItems(Main.game.getPlayer(), inventoryNPC, item, Main.game.getPlayer().getItemCount(item));
-									}
-								};
-								
-							} else if(index == 5) {
-								if(item.getEnchantmentItemType(null)==null || item.getItemTags().contains(ItemTag.UNENCHANTABLE)) {
-									return new Response("Enchant", "This item cannot be enchanted!", null);
-									
-								} else if(Main.game.isDebugMode()
-											|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY) && Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
-										return new Response("Enchant", "Enchant this item.", EnchantmentDialogue.ENCHANTMENT_MENU) {
-											@Override
-											public DialogueNode getNextDialogue() {
-												return EnchantmentDialogue.getEnchantmentMenu(item);
-											}
-										};
-								
-								} else {
-									return new Response("Enchant", getEnchantmentNotDiscoveredText("items"), null);
-								}
-							
-							} else if(index == 6) {
-								if (!item.isAbleToBeUsedFromInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
-								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
-								} else {
-									if(item.isBreakOutOfInventory()) {
-										return new ResponseEffectsOnly(
-												Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
-												item.getItemType().getUseTooltipDescription(owner, owner)){
-											@Override
-											public void effects(){
-												Main.game.getPlayer().useItem(item, Main.game.getPlayer(), false);
-												resetPostAction();
-											}
-										};
-									}
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
-											item.getItemType().getUseTooltipDescription(owner, owner),
-											INVENTORY_MENU){
-										@Override
-										public void effects(){
-											Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>" + Main.game.getPlayer().useItem(item, Main.game.getPlayer(), false) + "</p>");
-											resetPostAction();
-										}
-									};
-								}
-								
-							} else if(index == 7) {
-								if (!item.isAbleToBeUsedFromInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
-								} else if(!item.isAbleToBeUsed(Main.game.getPlayer())) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
-								} else {
-									if(item.isBreakOutOfInventory()) {
-										return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "As this item has special effects, you can only use one at a time!", null);
-									}
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)",
-											item.getItemType().getUseTooltipDescription(owner, owner)
-												+"<br/>[style.italicsMinorGood(Repeat this for all of the " + item.getNamePlural() + " which are in your inventory.)]",
-											INVENTORY_MENU){
-										@Override
-										public void effects(){
-											int itemCount = Main.game.getPlayer().getItemCount(item);
-											for(int i=0;i<itemCount;i++) {
-												Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>" + Main.game.getPlayer().useItem(item, Main.game.getPlayer(), false) + "</p>");
-											}
-											resetPostAction();
-										}
-									};
-								}
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else if(index == 11) {
-								if (!item.isAbleToBeUsedFromInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"), item.getUnableToBeUsedFromInventoryDescription(), null);
-									
-								} else if (!item.isAbleToBeUsed(inventoryNPC)) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"), item.getUnableToBeUsedDescription(inventoryNPC), null);
-									
-								} else if(item.isBreakOutOfInventory()) {
-									return new ResponseEffectsOnly(
-											Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
-											item.getItemType().getUseTooltipDescription(owner, owner)){
-										@Override
-										public void effects(){
-											Main.game.getPlayer().useItem(item, inventoryNPC, false);
-											resetPostAction();
-										}
-									};
-									
-								} else if(item.getItemType().isFetishGiving()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
-											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_KINK_GIVING),
-											Fetish.FETISH_KINK_GIVING.getAssociatedCorruptionLevel(),
-											null,
-											null,
-											null){
-										@Override
-										public void effects(){
-											Main.game.getTextEndStringBuilder().append(inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC).getValue());
-											resetPostAction();
-										}
-									};
-								} else if(item.getItemType().isTransformative()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
-											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
-											Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
-											null,
-											null,
-											null){
-										@Override
-										public void effects(){
-											Main.game.getTextEndStringBuilder().append(inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC).getValue());
-											resetPostAction();
-										}
-									};
-									
-								} else {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
-											INVENTORY_MENU){
-										@Override
-										public void effects(){
-											Main.game.getTextEndStringBuilder().append(inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC).getValue());
-											resetPostAction();
-										}
-									};
-								}
-							} else if(index == 12) {
-								if (!item.isAbleToBeUsedFromInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"), item.getUnableToBeUsedFromInventoryDescription(), null);
-									
-								} else if(!item.isAbleToBeUsed(inventoryNPC)) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"), item.getUnableToBeUsedDescription(inventoryNPC), null);
-									
-								} else if(item.isBreakOutOfInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"), "As this item has special effects, you can only use one at a time!", null);
-									
-								} else if(item.getItemType().isFetishGiving()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC)
-												+"<br/>[style.italicsMinorGood(Repeat this for all of the " + item.getNamePlural() + " which are in your inventory.)]",
-											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_KINK_GIVING),
-											Fetish.FETISH_KINK_GIVING.getAssociatedCorruptionLevel(),
-											null,
-											null,
-											null){
-										@Override
-										public void effects(){
-											int itemCount = Main.game.getPlayer().getItemCount(item);
-											for(int i=0;i<itemCount;i++) {
-												Main.game.getTextEndStringBuilder().append(inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC).getValue());
-											}
-											resetPostAction();
-										}
-									};
-								} else if(item.getItemType().isTransformative()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC)
-												+"<br/>[style.italicsMinorGood(Repeat this for all of the " + item.getNamePlural() + " which are in your inventory.)]",
-											INVENTORY_MENU,
-											Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
-											Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
-											null,
-											null,
-											null){
-										@Override
-										public void effects(){
-											int itemCount = Main.game.getPlayer().getItemCount(item);
-											for(int i=0;i<itemCount;i++) {
-												Main.game.getTextEndStringBuilder().append(inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC).getValue());
-											}
-											resetPostAction();
-										}
-									};
-									
-								} else {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC)
-												+"<br/>[style.italicsMinorGood(Repeat this for all of the " + item.getNamePlural() + " which are in your inventory.)]",
-											INVENTORY_MENU){
-										@Override
-										public void effects(){
-											int itemCount = Main.game.getPlayer().getItemCount(item);
-											for(int i=0;i<itemCount;i++) {
-												Main.game.getTextEndStringBuilder().append(inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC).getValue());
-											}
-											resetPostAction();
-										}
-									};
-								}
-								
-							} else {
-								return null;
-							}
-							
+							return getPlayerItemResponseToNPCDuringManagement(responseTab, index);
 						case SEX:
 							if(index == 1) {
 								return new Response("Give (1)", "You can't give someone items while having sex with them!", null);
@@ -6004,6 +5753,173 @@ public class InventoryDialogue {
 					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Opponent)",
 					"You can only use one item at a time during combat!",
 					null);
+		return null;
+	}
+
+	private static Response getPlayerItemResponseToNPCDuringManagement(int ignoredResponseTab, int index) {
+		if(index == 1 || index == 2 || index == 3) {
+			String title = index == 1 ? "Give (1)" : index == 2 ? "Give (5)" : "Give (All)";
+			if(!item.getItemType().isAbleToBeDropped())
+				return new Response(title, "You cannot give away the " + item.getName() + "!", null);
+			if(inventoryNPC.isInventoryFull() && !inventoryNPC.hasItem(item))
+				return new Response(
+						title,
+						UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"),
+						null);
+			if(Main.game.getPlayer().getItemCount(item) < 5)
+				return new Response(title, "You don't have five " + item.getNamePlural() + " to give!", null);
+			String someOf = index == 1 ? "" : index == 2 ? "five of " : "all of ";
+			return new Response(
+					title,
+					UtilText.parse(inventoryNPC, "Give [npc.name] " + someOf + "your " + item.getNamePlural() + "."),
+					INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					int count = index == 1 ? 1 : index == 2 ? 5 : Main.game.getPlayer().getItemCount(item);
+					transferItems(Main.game.getPlayer(), inventoryNPC, item, count);
+				}
+			};
+		}
+		if(index == 5) {
+			if(item.getEnchantmentItemType(null)==null || item.getItemTags().contains(ItemTag.UNENCHANTABLE)) {
+				return new Response("Enchant", "This item cannot be enchanted!", null);
+			} else if(Main.game.isDebugMode()
+					|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)
+							&& Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
+				return new Response("Enchant", "Enchant this item.", EnchantmentDialogue.ENCHANTMENT_MENU) {
+					@Override
+					public DialogueNode getNextDialogue() {
+						return EnchantmentDialogue.getEnchantmentMenu(item);
+					}
+				};
+			} else {
+				return new Response("Enchant", getEnchantmentNotDiscoveredText("items"), null);
+			}
+		}
+		if(index == 6) {
+			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " (Self)";
+			if(!item.isAbleToBeUsedFromInventory())
+				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
+				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
+			String description = item.getItemType().getUseTooltipDescription(owner, owner);
+			if(item.isBreakOutOfInventory())
+				return new ResponseEffectsOnly(title, description) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().useItem(item, Main.game.getPlayer(), false);
+						resetPostAction();
+					}
+				};
+			return new Response(title, description, INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					Main.game.getTextEndStringBuilder()
+							.append("<p style='text-align:center;'>")
+							.append(Main.game.getPlayer().useItem(item, Main.game.getPlayer(), false))
+							.append("</p>");
+					resetPostAction();
+				}
+			};
+		}
+		if(index == 7) {
+			String title = Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)";
+			if(!item.isAbleToBeUsedFromInventory())
+				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
+				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
+			if(item.isBreakOutOfInventory())
+				return new Response(title, "As this item has special effects, you can only use one at a time!", null);
+			return new Response(
+					title,
+					item.getItemType().getUseTooltipDescription(owner, owner)
+							+ "<br/>[style.italicsMinorGood(Repeat this for all of the "
+							+ item.getNamePlural()
+							+ " which are in your inventory.)]",
+					INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					int itemCount = Main.game.getPlayer().getItemCount(item);
+					for(int i = 0; i < itemCount; i++)
+						Main.game.getTextEndStringBuilder()
+								.append("<p style='text-align:center;'>")
+								.append(Main.game.getPlayer().useItem(item, Main.game.getPlayer(), false))
+								.append("</p>");
+					resetPostAction();
+				}
+			};
+		}
+		if(index == 10)
+			return getQuickTradeResponse();
+		if(index == 11) {
+			String title = Util.capitaliseSentence(item.getItemType().getUseName())
+					+ UtilText.parse(inventoryNPC, " ([npc.HerHim])");
+			if(!item.isAbleToBeUsedFromInventory())
+				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!item.isAbleToBeUsed(inventoryNPC))
+				return new Response(title, item.getUnableToBeUsedDescription(inventoryNPC), null);
+			if(item.isBreakOutOfInventory())
+				return new ResponseEffectsOnly(
+						title,
+						item.getItemType().getUseTooltipDescription(owner, owner)){
+					@Override
+					public void effects(){
+						Main.game.getPlayer().useItem(item, inventoryNPC, false);
+						resetPostAction();
+					}
+				};
+			var fetish = item.getItemType().isFetishGiving() ? Fetish.FETISH_KINK_GIVING
+					: item.getItemType().isTransformative() ? Fetish.FETISH_TRANSFORMATION_GIVING : null;
+			return new Response(
+					title,
+					item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
+					INVENTORY_MENU,
+					fetish == null ? null : List.of(fetish),
+					fetish == null ? null : fetish.getAssociatedCorruptionLevel(),
+					null,
+					null,
+					null) {
+				@Override
+				public void effects() {
+					var reaction = inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC);
+					Main.game.getTextEndStringBuilder().append(reaction.getValue());
+					resetPostAction();
+				}
+			};
+		}
+		if(index == 12) {
+			String title = Util.capitaliseSentence(item.getItemType().getUseName())
+					+ UtilText.parse(inventoryNPC, " all ([npc.HerHim])");
+			if(!item.isAbleToBeUsedFromInventory())
+				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!item.isAbleToBeUsed(inventoryNPC))
+				return new Response(title, item.getUnableToBeUsedDescription(inventoryNPC), null);
+			if(item.isBreakOutOfInventory())
+				return new Response(title, "As this item has special effects, you can only use one at a time!", null);
+			var fetish = item.getItemType().isFetishGiving() ? Fetish.FETISH_KINK_GIVING
+					: item.getItemType().isTransformative() ? Fetish.FETISH_TRANSFORMATION_GIVING : null;
+			return new Response(
+					title,
+					item.getItemType().getUseTooltipDescription(owner, inventoryNPC)
+							+ "<br/>[style.italicsMinorGood(Repeat this for all of the "
+							+ item.getNamePlural()
+							+ " which are in your inventory.)]",
+					INVENTORY_MENU,
+					fetish == null ? null : List.of(fetish),
+					fetish == null ? null : fetish.getAssociatedCorruptionLevel(),
+					null,
+					null,
+					null) {
+				@Override
+				public void effects() {
+					int itemCount = Main.game.getPlayer().getItemCount(item);
+					var reaction = inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC);
+					for(int i = 0; i < itemCount; i++)
+						Main.game.getTextEndStringBuilder().append(reaction.getValue());
+					resetPostAction();
+				}
+			};
+		}
 		return null;
 	}
 
