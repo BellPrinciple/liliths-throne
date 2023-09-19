@@ -1009,129 +1009,7 @@ public class InventoryDialogue {
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							return getPlayerItemResponseToNPCDuringManagement(responseTab, index);
 						case SEX:
-							if(index == 1) {
-								return new Response("Give (1)", "You can't give someone items while having sex with them!", null);
-								
-							} else if(index == 2) {
-								return new Response("Give (5)", "You can't give someone items while having sex with them!", null);
-								
-							} else if(index == 3) {
-								return new Response("Give (All)", "You can't give someone items while having sex with them!", null);
-								
-							} else if(index == 5) {
-								return new Response("Enchant", "You can't enchant items while having sex with someone!", null);
-								
-							} else if(index == 6) {
-								if(!Main.sex.isItemUseAvailable()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "Items cannot be used during this sex scene!", null);
-									
-								} else if (!item.isAbleToBeUsedInSex()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You cannot use this during sex!", null);
-									
-								} else if (!item.isAbleToBeUsedFromInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
-								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
-								} else {
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
-											item.getItemType().getUseTooltipDescription(owner, owner),
-											Main.sex.SEX_DIALOGUE){
-										@Override
-										public void effects(){
-											Main.sex.setUsingItemText(((NPC)Main.sex.getTargetedPartner(Main.game.getPlayer())).getItemUseEffects(item, owner, Main.game.getPlayer(), Main.game.getPlayer()).getValue());
-											resetPostAction();
-											Main.mainController.openInventory();
-											Main.sex.endSexTurn(SexActionUtility.PLAYER_USE_ITEM);
-											Main.sex.setSexStarted(true);
-										}
-									};
-								}
-								
-							} else if(index == 7) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "You can only use one item at a time during sex!", null);
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else if(index == 11) {
-								if(!Main.sex.isItemUseAvailable()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (partner)", "Items cannot be used during this sex scene!", null);
-									
-								} else if (!item.isAbleToBeUsedInSex()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (partner)", "You cannot use this during sex!", null);
-									
-								} else if (!item.isAbleToBeUsedFromInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (partner)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
-								} else if (!item.isAbleToBeUsed(inventoryNPC)) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)", item.getUnableToBeUsedDescription(inventoryNPC), null);
-									
-								} else if(item.getItemType().isFetishGiving()) {
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)",
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
-											Main.sex.SEX_DIALOGUE,
-											Util.newArrayListOfValues(Fetish.FETISH_KINK_GIVING),
-											Fetish.FETISH_KINK_GIVING.getAssociatedCorruptionLevel(),
-											null,
-											null,
-											null){
-										@Override
-										public void effects(){
-											Main.sex.setUsingItemText(inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC).getValue());
-											resetPostAction();
-											Main.mainController.openInventory();
-											Main.sex.endSexTurn(SexActionUtility.PLAYER_USE_ITEM);
-											Main.sex.setSexStarted(true);
-										}
-									};
-									
-								} else if(item.getItemType().isTransformative()) {
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)",
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
-											Main.sex.SEX_DIALOGUE,
-											Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
-											Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
-											null,
-											null,
-											null){
-										@Override
-										public void effects(){
-											Main.sex.setUsingItemText(inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC).getValue());
-											resetPostAction();
-											Main.mainController.openInventory();
-											Main.sex.endSexTurn(SexActionUtility.PLAYER_USE_ITEM);
-											Main.sex.setSexStarted(true);
-										}
-									};
-									
-								} else {
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName()) +" (partner)",
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
-											Main.sex.SEX_DIALOGUE){
-										@Override
-										public void effects(){
-											Main.sex.setUsingItemText(inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC).getValue());
-											resetPostAction();
-											Main.mainController.openInventory();
-											Main.sex.endSexTurn(SexActionUtility.PLAYER_USE_ITEM);
-											Main.sex.setSexStarted(true);
-										}
-									};
-								}
-								
-							} else if(index == 12) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (partner)", "You can only use one item at a time during sex!", null);
-								
-							} else {
-								return null;
-							}
-							
+							return getPlayerItemResponseToNPCDuringSex(responseTab, index);
 						case TRADING:
 							if(index == 1) {
 								if(!item.getItemType().isAbleToBeSold()) {
@@ -5920,6 +5798,88 @@ public class InventoryDialogue {
 				}
 			};
 		}
+		return null;
+	}
+
+	private static Response getPlayerItemResponseToNPCDuringSex(int ignoredResponseTab, int index) {
+		if(index == 1)
+			return new Response("Give (1)", "You can't give someone items while having sex with them!", null);
+		if(index == 2)
+			return new Response("Give (5)", "You can't give someone items while having sex with them!", null);
+		if(index == 3)
+			return new Response("Give (All)", "You can't give someone items while having sex with them!", null);
+		if(index == 5)
+			return new Response("Enchant", "You can't enchant items while having sex with someone!", null);
+		if(index == 6) {
+			String title = Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)";
+			if(!Main.sex.isItemUseAvailable())
+				return new Response(title, "Items cannot be used during this sex scene!", null);
+			if(!item.isAbleToBeUsedInSex())
+				return new Response(title, "You cannot use this during sex!", null);
+			if(!item.isAbleToBeUsedFromInventory())
+				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
+				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
+			return new Response(
+					title,
+					item.getItemType().getUseTooltipDescription(owner, owner),
+					Main.sex.SEX_DIALOGUE) {
+				@Override
+				public void effects() {
+					var text = ((NPC) Main.sex.getTargetedPartner(Main.game.getPlayer()))
+							.getItemUseEffects(item, owner, Main.game.getPlayer(), Main.game.getPlayer());
+					Main.sex.setUsingItemText(text.getValue());
+					resetPostAction();
+					Main.mainController.openInventory();
+					Main.sex.endSexTurn(SexActionUtility.PLAYER_USE_ITEM);
+					Main.sex.setSexStarted(true);
+				}
+			};
+		}
+		if(index == 7)
+			return new Response(
+					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Self)",
+					"You can only use one item at a time during sex!",
+					null);
+		if(index == 10)
+			return getQuickTradeResponse();
+		if(index == 11) {
+			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " (partner)";
+			if(!Main.sex.isItemUseAvailable())
+				return new Response(title, "Items cannot be used during this sex scene!", null);
+			if(!item.isAbleToBeUsedInSex())
+				return new Response(title, "You cannot use this during sex!", null);
+			if(!item.isAbleToBeUsedFromInventory())
+				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!item.isAbleToBeUsed(inventoryNPC))
+				return new Response(title, item.getUnableToBeUsedDescription(inventoryNPC), null);
+			var fetish = item.getItemType().isFetishGiving() ? Fetish.FETISH_KINK_GIVING
+					: item.getItemType().isTransformative() ? Fetish.FETISH_TRANSFORMATION_GIVING : null;
+			return new Response(
+					title,
+					item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
+					Main.sex.SEX_DIALOGUE,
+					fetish == null ? null : List.of(fetish),
+					fetish == null ? null : fetish.getAssociatedCorruptionLevel(),
+					null,
+					null,
+					null) {
+				@Override
+				public void effects() {
+					var reaction = inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC);
+					Main.sex.setUsingItemText(reaction.getValue());
+					resetPostAction();
+					Main.mainController.openInventory();
+					Main.sex.endSexTurn(SexActionUtility.PLAYER_USE_ITEM);
+					Main.sex.setSexStarted(true);
+				}
+			};
+		}
+		if(index == 12)
+			return new Response(
+					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (partner)",
+					"You can only use one item at a time during sex!",
+					null);
 		return null;
 	}
 
