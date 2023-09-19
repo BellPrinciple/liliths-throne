@@ -1024,57 +1024,7 @@ public class InventoryDialogue {
 					
 					switch(interactionType) {
 						case SEX:
-							if(index == 1) {
-								return new Response("Take (1)", "You can't pick up items while masturbating.", null);
-								
-							} else if(index == 2) {
-								return new Response("Take (5)", "You can't pick up items while masturbating.", null);
-								
-							} else if(index == 3) {
-								return new Response("Take (All)", "You can't pick up items while masturbating.", null);
-								
-							} else if(index == 5) {
-								return new Response("Enchant", "You can't enchant items while masturbating.", null);
-								
-							} else if(index == 6) {
-								if(!Main.sex.isItemUseAvailable()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "Items cannot be used during this sex scene!", null);
-									
-								} else if (!item.isAbleToBeUsedInSex()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You cannot use this during sex!", null);
-									
-								} else if (!item.isAbleToBeUsedFromInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
-								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
-								} else {
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
-											item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), Main.game.getPlayer()),
-											Main.sex.SEX_DIALOGUE){
-										@Override
-										public void effects(){
-											Main.sex.setUsingItemText(Main.game.getPlayer().useItem(item, Main.game.getPlayer(), true));
-											resetPostAction();
-											Main.mainController.openInventory();
-											Main.sex.endSexTurn(SexActionUtility.PLAYER_USE_ITEM);
-											Main.sex.setSexStarted(true);
-										}
-									};
-								}
-								
-							} else if(index == 7) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "You can only use one item at a time during sex!", null);
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else {
-								return null;
-							}
-					
+							return getItemResponseDuringSex(responseTab, index);
 						default:
 							if(index == 1) {
 								if(inventoryFull) {
@@ -5854,6 +5804,49 @@ public class InventoryDialogue {
 							+ UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
 					UtilText.parse(inventoryNPC, "[npc.Name] doesn't want to use your items."),
 					null);
+		return null;
+	}
+
+	private static Response getItemResponseDuringSex(int ignoredResponseTab, int index) {
+		if(index == 1)
+			return new Response("Take (1)", "You can't pick up items while masturbating.", null);
+		if(index == 2)
+			return new Response("Take (5)", "You can't pick up items while masturbating.", null);
+		if(index == 3)
+			return new Response("Take (All)", "You can't pick up items while masturbating.", null);
+		if(index == 5)
+			return new Response("Enchant", "You can't enchant items while masturbating.", null);
+		if(index == 6) {
+			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " (Self)";
+			if(!Main.sex.isItemUseAvailable())
+				return new Response(title, "Items cannot be used during this sex scene!", null);
+			if(!item.isAbleToBeUsedInSex())
+				return new Response(title, "You cannot use this during sex!", null);
+			if(!item.isAbleToBeUsedFromInventory())
+				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
+				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
+			return new Response(
+					title,
+					item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), Main.game.getPlayer()),
+					Main.sex.SEX_DIALOGUE) {
+				@Override
+				public void effects() {
+					Main.sex.setUsingItemText(Main.game.getPlayer().useItem(item, Main.game.getPlayer(), true));
+					resetPostAction();
+					Main.mainController.openInventory();
+					Main.sex.endSexTurn(SexActionUtility.PLAYER_USE_ITEM);
+					Main.sex.setSexStarted(true);
+				}
+			};
+		}
+		if(index == 7)
+			return new Response(
+					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Self)",
+					"You can only use one item at a time during sex!",
+					null);
+		if(index == 10)
+			return getQuickTradeResponse();
 		return null;
 	}
 
