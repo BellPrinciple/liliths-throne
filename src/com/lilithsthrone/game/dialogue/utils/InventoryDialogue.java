@@ -1032,37 +1032,7 @@ public class InventoryDialogue {
 					boolean inventoryFull = false;
 					switch(interactionType) {
 						case COMBAT:
-							if(index == 1) {
-								return new Response("Take (1)", "You can't take someone items while fighting them!", null);
-								
-							} else if(index == 2) {
-								return new Response("Take (5)", "You can't take someone items while fighting them!", null);
-								
-							} else if(index == 3) {
-								return new Response("Take (All)", "You can't take someone items while fighting them!", null);
-								
-							} else if(index == 5) {
-								return new Response("Enchant", "You can't enchant someone else's items, especially not while fighting them!", null);
-								
-							} else if(index == 6) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", "You can't use someone else's items while fighting them!", null);
-								
-							} else if(index == 7) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" all (Self)", "You can't use someone else's items while fighting them!", null);
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else if(index == 11) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Opponent)", "You can't use make someone use an item while fighting them!", null);
-								
-							} else if(index == 12) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" all (Opponent)", "You can't use make someone use an item while fighting them!", null);
-								
-							} else {
-								return null;
-							}
-							
+							return getItemResponseToNPCDuringCombat(responseTab, index);
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasItem(item) && item.getRarity()!=Rarity.QUEST;
 						
@@ -5830,6 +5800,43 @@ public class InventoryDialogue {
 		}
 		if(index == 10)
 			return getQuickTradeResponse();
+		return null;
+	}
+
+	private static Response getItemResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
+		if(index == 1)
+			return new Response("Take (1)", "You can't take someone items while fighting them!", null);
+		if(index == 2)
+			return new Response("Take (5)", "You can't take someone items while fighting them!", null);
+		if(index == 3)
+			return new Response("Take (All)", "You can't take someone items while fighting them!", null);
+		if(index == 5)
+			return new Response(
+					"Enchant",
+					"You can't enchant someone else's items, especially not while fighting them!",
+					null);
+		if(index == 6)
+			return new Response(
+					Util.capitaliseSentence(item.getItemType().getUseName()) + " (Self)",
+					"You can't use someone else's items while fighting them!",
+					null);
+		if(index == 7)
+			return new Response(
+					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Self)",
+					"You can't use someone else's items while fighting them!",
+					null);
+		if(index == 10)
+			return getQuickTradeResponse();
+		if(index == 11)
+			return new Response(
+					Util.capitaliseSentence(item.getItemType().getUseName()) + " (Opponent)",
+					"You can't use make someone use an item while fighting them!",
+					null);
+		if(index == 12)
+			return new Response(
+					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Opponent)",
+					"You can't use make someone use an item while fighting them!",
+					null);
 		return null;
 	}
 
