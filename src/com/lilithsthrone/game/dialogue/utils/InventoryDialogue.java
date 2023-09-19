@@ -1005,131 +1005,7 @@ public class InventoryDialogue {
 				} else {
 					switch(interactionType) {
 						case COMBAT:
-							if(index == 1) {
-								return new Response("Give (1)", "You can't give someone items while fighting them!", null);
-								
-							} else if(index == 2) {
-								return new Response("Give (5)", "You can't give someone items while fighting them!", null);
-								
-							} else if(index == 3) {
-								return new Response("Give (All)", "You can't give someone items while fighting them!", null);
-								
-							} else if(index == 5) {
-								return new Response("Enchant", "You can't enchant items while fighting someone!", null);
-								
-							} else if(index == 6) {
-								if(Main.game.getPlayer().isStunned()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You cannot use any items while you're stunned!", null);
-									
-								} else if(Main.combat.isCombatantDefeated(Main.game.getPlayer())) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You cannot use any items while you're defeated!", null);
-									
-								} else if(Main.game.getPlayer().getRemainingAP()<CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer())) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You need at least "+CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer())+" AP to use this actions!", null);
-									
-								} else if (!item.isAbleToBeUsedInCombatAllies()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", "You cannot use this during combat!", null);
-									
-								} else if (!item.isAbleToBeUsedFromInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
-								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
-								} else {
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
-											item.getItemType().getUseTooltipDescription(owner, owner),
-											Main.combat.ENEMY_ATTACK){
-										@Override
-										public void effects(){
-											Main.combat.addItemToBeUsed(owner, owner, item);
-											resetPostAction();
-											Main.mainController.openInventory();
-										}
-									};
-								}
-								
-							} else if(index == 7) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", "You can only use one item at a time during combat!", null);
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else if(index == 11) {//TODO on ally though???
-								if(Main.game.getPlayer().isStunned()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Opponent)", "You cannot use any items while you're stunned!", null);
-									
-								} else if(Main.combat.isCombatantDefeated(Main.game.getPlayer())) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Opponent)", "You cannot use any items while you're defeated!", null);
-									
-								} else if(Main.game.getPlayer().getRemainingAP()<CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer())) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Opponent)", "You need at least "+CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer())+" AP to use this actions!", null);
-									
-								} else if (!item.isAbleToBeUsedInCombatEnemies()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Opponent)", "You cannot use this during combat!", null);
-									
-								} else if (!item.isAbleToBeUsedFromInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Opponent)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
-								} else if (!item.isAbleToBeUsed(inventoryNPC)) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Opponent)", item.getUnableToBeUsedDescription(inventoryNPC), null);
-
-								} else if(item.getItemType().isFetishGiving()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Opponent)",
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
-											Main.combat.ENEMY_ATTACK,
-											Util.newArrayListOfValues(Fetish.FETISH_KINK_GIVING),
-											Fetish.FETISH_KINK_GIVING.getAssociatedCorruptionLevel(),
-											null,
-											null,
-											null){
-										@Override
-										public void effects(){
-											Main.combat.addItemToBeUsed(owner, inventoryNPC, item);
-											resetPostAction();
-											Main.mainController.openInventory();
-										}
-									};
-								} else if(item.getItemType().isTransformative()) {
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Opponent)",
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
-											Main.combat.ENEMY_ATTACK,
-											Util.newArrayListOfValues(Fetish.FETISH_TRANSFORMATION_GIVING),
-											Fetish.FETISH_TRANSFORMATION_GIVING.getAssociatedCorruptionLevel(),
-											null,
-											null,
-											null){
-										@Override
-										public void effects(){
-											Main.combat.addItemToBeUsed(owner, inventoryNPC, item);
-											resetPostAction();
-											Main.mainController.openInventory();
-										}
-									};
-									
-								} else {
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Opponent)",
-											item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
-											Main.combat.ENEMY_ATTACK){
-										@Override
-										public void effects(){
-											Main.combat.addItemToBeUsed(owner, inventoryNPC, item);
-											resetPostAction();
-											Main.mainController.openInventory();
-										}
-									};
-								}
-								
-							} else if(index == 12) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Opponent)", "You can only use one item at a time during combat!", null);
-								
-							} else {
-								return null;
-							}
-							
+							return getPlayerItemResponseToNPCDuringCombat(responseTab, index);
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							boolean inventoryFull = inventoryNPC.isInventoryFull() && !inventoryNPC.hasItem(item);
 							
@@ -6043,6 +5919,91 @@ public class InventoryDialogue {
 		}
 		if(index == 10)
 			return getQuickTradeResponse();
+		return null;
+	}
+
+	private static Response getPlayerItemResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
+		if(index == 1)
+			return new Response("Give (1)", "You can't give someone items while fighting them!", null);
+		if(index == 2)
+			return new Response("Give (5)", "You can't give someone items while fighting them!", null);
+		if(index == 3)
+			return new Response("Give (All)", "You can't give someone items while fighting them!", null);
+		if(index == 5)
+			return new Response("Enchant", "You can't enchant items while fighting someone!", null);
+		if(index == 6) {
+			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " (Self)";
+			if(Main.game.getPlayer().isStunned())
+				return new Response(title, "You cannot use any items while you're stunned!", null);
+			if(Main.combat.isCombatantDefeated(Main.game.getPlayer()))
+				return new Response(title, "You cannot use any items while you're defeated!", null);
+			int cost = CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer());
+			if(Main.game.getPlayer().getRemainingAP() < cost)
+				return new Response(title, "You need at least " + cost + " AP to use this actions!", null);
+			if(!item.isAbleToBeUsedInCombatAllies())
+				return new Response(title, "You cannot use this during combat!", null);
+			if(!item.isAbleToBeUsedFromInventory())
+				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
+				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
+			return new Response(
+					title,
+					item.getItemType().getUseTooltipDescription(owner, owner),
+					Main.combat.ENEMY_ATTACK) {
+				@Override
+				public void effects() {
+					Main.combat.addItemToBeUsed(owner, owner, item);
+					resetPostAction();
+					Main.mainController.openInventory();
+				}
+			};
+		}
+		if(index == 7)
+			return new Response(
+					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Self)",
+					"You can only use one item at a time during combat!",
+					null);
+		if(index == 10)
+			return getQuickTradeResponse();
+		if(index == 11) {//TODO on ally though???
+			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " (Opponent)";
+			if(Main.game.getPlayer().isStunned())
+				return new Response(title, "You cannot use any items while you're stunned!", null);
+			if(Main.combat.isCombatantDefeated(Main.game.getPlayer()))
+				return new Response(title, "You cannot use any items while you're defeated!", null);
+			int cost = CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer());
+			if(Main.game.getPlayer().getRemainingAP() < cost)
+				return new Response(title, "You need at least " + cost + " AP to use this actions!", null);
+			if(!item.isAbleToBeUsedInCombatEnemies())
+				return new Response(title, "You cannot use this during combat!", null);
+			if(!item.isAbleToBeUsedFromInventory())
+				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!item.isAbleToBeUsed(inventoryNPC))
+				return new Response(title, item.getUnableToBeUsedDescription(inventoryNPC), null);
+			var fetish = item.getItemType().isFetishGiving() ? Fetish.FETISH_KINK_GIVING
+					: item.getItemType().isTransformative() ? Fetish.FETISH_TRANSFORMATION_GIVING : null;
+			return new Response(
+					title,
+					item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
+					Main.combat.ENEMY_ATTACK,
+					fetish == null ? null : List.of(fetish),
+					fetish == null ? null : fetish.getAssociatedCorruptionLevel(),
+					null,
+					null,
+					null) {
+				@Override
+				public void effects() {
+					Main.combat.addItemToBeUsed(owner, inventoryNPC, item);
+					resetPostAction();
+					Main.mainController.openInventory();
+				}
+			};
+		}
+		if(index == 12)
+			return new Response(
+					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Opponent)",
+					"You can only use one item at a time during combat!",
+					null);
 		return null;
 	}
 
