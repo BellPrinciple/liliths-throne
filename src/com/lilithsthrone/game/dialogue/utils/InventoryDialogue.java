@@ -1020,116 +1020,11 @@ public class InventoryDialogue {
 			} else {
 				// ****************************** Interacting with the ground ******************************
 				if(inventoryNPC == null) {
-					boolean inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasItem(item) && item.getRarity()!=Rarity.QUEST;
-					
 					switch(interactionType) {
 						case SEX:
 							return getItemResponseDuringSex(responseTab, index);
 						default:
-							if(index == 1) {
-								if(inventoryFull) {
-									return new Response("Take (1)", "Your inventory is already full!", null);
-								}
-								return new Response("Take (1)", "Take one " + item.getName() + " from the ground.", INVENTORY_MENU){
-									@Override
-									public void effects(){
-										pickUpItems(Main.game.getPlayer(), item, 1);
-									}
-								};
-								
-							} else if(index == 2) {
-								if(inventoryFull) {
-									return new Response("Take (5)", "Your inventory is already full!", null);
-								}
-								if(Main.game.getPlayerCell().getInventory().getItemCount(item) >= 5) {
-									return new Response("Take (5)", "Take five of the " + item.getNamePlural() + " from the ground.", INVENTORY_MENU){
-										@Override
-										public void effects(){
-											pickUpItems(Main.game.getPlayer(), item, 5);
-										}
-									};
-								} else {
-									return new Response("Take (5)", "There aren't five " + item.getNamePlural() + " on the ground!", null);
-								}
-								
-							} else if(index == 3) {
-								if(inventoryFull) {
-									return new Response("Take (All)", "Your inventory is already full!", null);
-								}
-								return new Response("Take (All)", "Take all of the " + item.getNamePlural() + " from the ground.", INVENTORY_MENU){
-									@Override
-									public void effects(){
-										pickUpItems(Main.game.getPlayer(), item, Main.game.getPlayerCell().getInventory().getItemCount(item));
-									}
-								};
-								
-							} else if(index == 5) {
-								return new Response("Enchant", "You can't enchant items on the ground!", null);
-								
-							} else if(index == 6) {
-								if (!item.isAbleToBeUsedFromInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
-								} else if (!item.isAbleToBeUsed(Main.game.getPlayer())) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
-								} else {
-									if(item.isBreakOutOfInventory()) {
-										return new ResponseEffectsOnly(
-												Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
-												item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), Main.game.getPlayer())){
-											@Override
-											public void effects(){
-												Main.game.getPlayer().useItem(item, Main.game.getPlayer(), true);
-												resetPostAction();
-											}
-										};
-									}
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)",
-											item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), Main.game.getPlayer()),
-											INVENTORY_MENU){
-										@Override
-										public void effects(){
-											Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>" + Main.game.getPlayer().useItem(item, Main.game.getPlayer(), true) + "</p>");
-											resetPostAction();
-										}
-									};
-								}
-								
-							} else if(index == 7) {
-								if (!item.isAbleToBeUsedFromInventory()) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedFromInventoryDescription(), null);
-									
-								} else if(!item.isAbleToBeUsed(Main.game.getPlayer())) {
-									return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)", item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-									
-								} else {
-									if(item.isBreakOutOfInventory()) {
-										return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" all (Self)", "As this item has special effects, you can only use one at a time!", null);
-									}
-									return new Response(
-											Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)",
-											item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), Main.game.getPlayer())
-											+"<br/>[style.italicsMinorGood(Repeat this for all of the " + item.getNamePlural() + " which are in this area.)]",
-											INVENTORY_MENU){
-										@Override
-										public void effects(){
-											int itemCount = Main.game.getPlayerCell().getInventory().getItemCount(item);
-											for(int i=0;i<itemCount;i++) {
-												Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>" + Main.game.getPlayer().useItem(item, Main.game.getPlayer(), true) + "</p>");
-											}
-											resetPostAction();
-										}
-									};
-								}
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else {
-								return null;
-							}
+							return getItemResponse(responseTab, index);
 					}
 					
 				// ****************************** Interacting with an NPC ******************************
@@ -5845,6 +5740,94 @@ public class InventoryDialogue {
 					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Self)",
 					"You can only use one item at a time during sex!",
 					null);
+		if(index == 10)
+			return getQuickTradeResponse();
+		return null;
+	}
+
+	private static Response getItemResponse(int ignoredResponseTab, int index) {
+		if(index == 1 || index == 2 || index == 3) {
+			String title = index == 1 ? "Take (1)" : index == 2 ? "Take (5)" : "Take (All)";
+			String name = index == 1 ? item.getName() : item.getNamePlural();
+			int itemCount = Main.game.getPlayerCell().getInventory().getItemCount(item);
+			if(index == 2 && itemCount < 5)
+				return new Response(title, "There aren't five " + name + " on the ground!", null);
+			if(Main.game.getPlayer().isInventoryFull()
+					&& !Main.game.getPlayer().hasItem(item)
+					&& item.getRarity() != Rarity.QUEST)
+				return new Response(title, "Your inventory is already full!", null);
+			return new Response(
+					title,
+					String.format("Take %s %s from the ground.",
+							index == 1 ? "one " : index == 2 ? "five of your " : "all of your ",
+							name),
+					INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					int count = index == 1 ? 1 : index == 2 ? 5 : itemCount;
+					pickUpItems(Main.game.getPlayer(), item, count);
+				}
+			};
+		}
+		if(index == 5)
+			return new Response("Enchant", "You can't enchant items on the ground!", null);
+		if(index == 6) {
+			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " (Self)";
+			if(!item.isAbleToBeUsedFromInventory())
+				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
+				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
+			if(item.isBreakOutOfInventory())
+				return new ResponseEffectsOnly(
+						title,
+						item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), Main.game.getPlayer())) {
+					@Override
+					public void effects() {
+						Main.game.getPlayer().useItem(item, Main.game.getPlayer(), true);
+						resetPostAction();
+					}
+				};
+			return new Response(
+					title,
+					item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), Main.game.getPlayer()),
+					INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					Main.game.getTextEndStringBuilder()
+							.append("<p style='text-align:center;'>")
+							.append(Main.game.getPlayer().useItem(item, Main.game.getPlayer(), true))
+							.append("</p>");
+					resetPostAction();
+				}
+			};
+		}
+		if(index == 7) {
+			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Self)";
+			if(!item.isAbleToBeUsedFromInventory())
+				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
+				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
+			if(item.isBreakOutOfInventory())
+				return new Response(title, "As this item has special effects, you can only use one at a time!", null);
+			return new Response(
+					title,
+					item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), Main.game.getPlayer())
+							+"<br/>[style.italicsMinorGood(Repeat this for all of the "
+							+ item.getNamePlural()
+							+ " which are in this area.)]",
+					INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					int itemCount = Main.game.getPlayerCell().getInventory().getItemCount(item);
+					for(int i = 0; i < itemCount; i++)
+						Main.game.getTextEndStringBuilder()
+								.append("<p style='text-align:center;'>")
+								.append(Main.game.getPlayer().useItem(item, Main.game.getPlayer(), true))
+								.append("</p>");
+					resetPostAction();
+				}
+			};
+		}
 		if(index == 10)
 			return getQuickTradeResponse();
 		return null;
