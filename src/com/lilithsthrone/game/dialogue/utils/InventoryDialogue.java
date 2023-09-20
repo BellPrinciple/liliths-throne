@@ -1029,7 +1029,6 @@ public class InventoryDialogue {
 					
 				// ****************************** Interacting with an NPC ******************************
 				} else {
-					boolean inventoryFull = false;
 					switch(interactionType) {
 						case COMBAT:
 							return getItemResponseToNPCDuringCombat(responseTab, index);
@@ -1038,98 +1037,7 @@ public class InventoryDialogue {
 						case SEX:
 							return getItemResponseToNPCDuringSex(responseTab, index);
 						case TRADING:
-							inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasItem(item)  && item.getRarity()!=Rarity.QUEST;
-							
-							if(index == 1) {
-								int sellPrice = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getPrice():item.getPrice(inventoryNPC.getSellModifier(item));
-								if(inventoryFull) {
-									return new Response("Buy (1) ("+UtilText.formatAsMoneyUncoloured(sellPrice, "span")+")", "Your inventory is already full!", null);
-								}
-								if(Main.game.getPlayer().getMoney() < sellPrice) {
-									return new Response("Buy (1) ("+UtilText.formatAsMoneyUncoloured(sellPrice, "span")+")", "You can't afford to buy this!", null);
-								}
-								return new Response("Buy (1) (" + UtilText.formatAsMoney(sellPrice, "span") + ")", "Buy the " + item.getName() + " for " + UtilText.formatAsMoney(sellPrice) + ".", INVENTORY_MENU){
-									@Override
-									public void effects(){
-										sellItems(inventoryNPC, Main.game.getPlayer(), item, 1, sellPrice);
-									}
-								};
-								
-							} else if(index == 2) {
-								int sellPrice = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getPrice():item.getPrice(inventoryNPC.getSellModifier(item));
-								if((buyback && Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getCount()<5)
-										|| (!buyback && inventoryNPC.getItemCount(item) < 5)) {
-									return new Response("Buy (5) ("+UtilText.formatAsMoneyUncoloured(sellPrice*5, "span")+")", UtilText.parse(inventoryNPC, "[npc.Name] doesn't have five "+item.getNamePlural()+"."), null);
-								}
-								if(inventoryFull) {
-									return new Response("Buy (5) ("+UtilText.formatAsMoneyUncoloured(sellPrice*5, "span")+")", "Your inventory is already full!", null);
-								}
-								if(Main.game.getPlayer().getMoney() < sellPrice*5) {
-									return new Response("Buy (5) ("+UtilText.formatAsMoneyUncoloured(sellPrice*5, "span")+")", "You can't afford to buy this!", null);
-								}
-								return new Response("Buy (5) (" + UtilText.formatAsMoney(sellPrice*5, "span") + ")", "Buy the " + item.getName() + " for " + UtilText.formatAsMoney(sellPrice*5) + ".", INVENTORY_MENU){
-									@Override
-									public void effects(){
-										sellItems(inventoryNPC, Main.game.getPlayer(), item, 5, sellPrice);
-									}
-								};
-								
-							} else if(index == 3) {
-								int sellPrice = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getPrice():item.getPrice(inventoryNPC.getSellModifier(item));
-								int count = buyback?Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getCount():inventoryNPC.getItemCount(item);
-								if(inventoryFull) {
-									return new Response("Buy (All) ("+UtilText.formatAsMoneyUncoloured(sellPrice*count, "span")+")", "Your inventory is already full!", null);
-								}
-								if(Main.game.getPlayer().getMoney() < sellPrice*count) {
-									int affordableCount = Main.game.getPlayer().getMoney() / sellPrice;
-									if(affordableCount > 0) {
-										return new Response("Buy (Max " + affordableCount + ") (" + UtilText.formatAsMoney(sellPrice * affordableCount, "span") + ")",
-												"Buy the " + item.getName() + " for " + UtilText.formatAsMoney(sellPrice * affordableCount) + ".", INVENTORY_MENU) {
-											@Override
-											public void effects() {
-												sellItems(inventoryNPC, Main.game.getPlayer(), item, affordableCount, sellPrice);
-											}
-										};
-									} else {
-										return new Response("Buy (All) ("+UtilText.formatAsMoneyUncoloured(sellPrice*count, "span")+")", "You can't afford to buy this!", null);
-									}
-								}
-								return new Response("Buy (All) (" + UtilText.formatAsMoney(sellPrice*count, "span") + ")",
-										"Buy the " + item.getName() + " for " + UtilText.formatAsMoney(sellPrice*count) + ".", INVENTORY_MENU){
-									@Override
-									public void effects(){
-										sellItems(inventoryNPC, Main.game.getPlayer(), item, count, sellPrice);
-									}
-								};
-								
-							} else if(index == 5) {
-								return new Response("Enchant", "You can't enchant someone else's item!", null);
-								
-							} else if(index == 6) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" (Self)", UtilText.parse(inventoryNPC, "[npc.Name] isn't going to let you use [npc.her] items without buying them first."), null);
-								
-							} else if(index == 7) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName()) +" all (Self)", UtilText.parse(inventoryNPC, "[npc.Name] isn't going to let you use [npc.her] items without buying them first."), null);
-								
-							} else if (index == 9) {
-								return getBuybackResponse();
-								
-							} else if (index == 10) {
-								return getQuickTradeResponse();
-								
-							} else if(index == 11) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
-										UtilText.parse(inventoryNPC, "[npc.Name] isn't going to use the items that [npc.sheIs] trying to sell!"),
-										null);
-								
-							} else if(index == 12) {
-								return new Response(Util.capitaliseSentence(item.getItemType().getUseName())+UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
-										UtilText.parse(inventoryNPC, "[npc.Name] isn't going to use the items that [npc.sheIs] trying to sell!"),
-										null);
-								
-							} else {
-								return null;
-							}
+							return getItemResponseToNPC(responseTab, index);
 					}
 				}
 			}
@@ -5743,6 +5651,80 @@ public class InventoryDialogue {
 			return new Response(
 					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (partner)",
 					"You can only use one item at a time during sex!",
+					null);
+		return null;
+	}
+
+	private static Response getItemResponseToNPC(int ignoredResponseTab, int index) {
+		if(index == 1 || index == 2 || index == 3) {
+			String title = index == 1 ? "Buy (1) (" : index == 2 ? "Buy (5) (" : "Buy (All) (";
+			String name = index == 1 ? item.getName() : item.getNamePlural();
+			int sellPrice = buyback
+					? Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getPrice()
+					: item.getPrice(inventoryNPC.getSellModifier(item));
+			int count = buyback
+					? Main.game.getPlayer().getBuybackStack().get(buyBackIndex).getCount()
+					: inventoryNPC.getItemCount(item);
+			if(index == 2 && count < 5)
+				return new Response(
+						title + UtilText.formatAsMoneyUncoloured(sellPrice*5, "span") + ")",
+						UtilText.parse(inventoryNPC, "[npc.Name] doesn't have five " + name + "."),
+						null);
+			if(Main.game.getPlayer().isInventoryFull()
+					&& !Main.game.getPlayer().hasItem(item)
+					&& item.getRarity()!=Rarity.QUEST)
+				return new Response(
+						title + UtilText.formatAsMoneyUncoloured(sellPrice, "span") + ")",
+						"Your inventory is already full!",
+						null);
+			int affordableCount = Integer.min(count, Main.game.getPlayer().getMoney() / sellPrice);
+			if(affordableCount == 0)
+				return new Response(
+						title + UtilText.formatAsMoneyUncoloured(sellPrice, "span") + ")",
+						"You can't afford to buy this!",
+						null);
+			return new Response(
+					(affordableCount == count ? title : "Buy (Max " + affordableCount + ") (")
+							+ UtilText.formatAsMoney(sellPrice * affordableCount, "span") + ")",
+					"Buy the " + name + " for " + UtilText.formatAsMoney(sellPrice * affordableCount) + ".",
+					INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					sellItems(inventoryNPC, Main.game.getPlayer(), item, affordableCount, sellPrice);
+				}
+			};
+		}
+		if(index == 5)
+			return new Response("Enchant", "You can't enchant someone else's item!", null);
+		if(index == 6)
+			return new Response(
+					Util.capitaliseSentence(item.getItemType().getUseName()) + " (Self)",
+					UtilText.parse(inventoryNPC,
+							"[npc.Name] isn't going to let you use [npc.her] items without buying them first."),
+					null);
+		if(index == 7)
+			return new Response(
+					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Self)",
+					UtilText.parse(inventoryNPC,
+							"[npc.Name] isn't going to let you use [npc.her] items without buying them first."),
+					null);
+		if(index == 9)
+			return getBuybackResponse();
+		if(index == 10)
+			return getQuickTradeResponse();
+		if(index == 11)
+			return new Response(
+					Util.capitaliseSentence(
+							item.getItemType().getUseName()) + UtilText.parse(inventoryNPC, " ([npc.HerHim])"),
+					UtilText.parse(inventoryNPC,
+							"[npc.Name] isn't going to use the items that [npc.sheIs] trying to sell!"),
+					null);
+		if(index == 12)
+			return new Response(
+					Util.capitaliseSentence(
+							item.getItemType().getUseName()) + UtilText.parse(inventoryNPC, " all ([npc.HerHim])"),
+					UtilText.parse(inventoryNPC,
+							"[npc.Name] isn't going to use the items that [npc.sheIs] trying to sell!"),
 					null);
 		return null;
 	}
