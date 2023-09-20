@@ -1031,7 +1031,7 @@ public class InventoryDialogue {
 				} else {
 					switch(interactionType) {
 						case COMBAT:
-							return getItemResponseToNPCDuringCombat(responseTab, index);
+							return getItemResponseToNPCDuringCombat(item, responseTab, index);
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							return getItemResponseToNPCDuringManagement(responseTab, index);
 						case SEX:
@@ -1155,7 +1155,7 @@ public class InventoryDialogue {
 				} else {
 					switch(interactionType) {
 						case COMBAT:
-							return getWeaponResponseToNPCDuringCombat(responseTab, index);
+							return getItemResponseToNPCDuringCombat(weapon, responseTab, index);
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							return getWeaponResponseToNPCDuringManagement(responseTab, index);
 						case SEX:
@@ -1289,7 +1289,7 @@ public class InventoryDialogue {
 				} else {
 					switch(interactionType) {
 						case COMBAT:
-							return getClothingResponseToNPCDuringCombat(responseTab, index);
+							return getItemResponseToNPCDuringCombat(clothing, responseTab, index);
 						case FULL_MANAGEMENT: case CHARACTER_CREATION:
 							return getClothingResponseToNPCDuringManagement(responseTab, index);
 						case SEX:
@@ -6050,40 +6050,64 @@ public class InventoryDialogue {
 		return null;
 	}
 
-	private static Response getItemResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
-		if(index == 1)
-			return new Response("Take (1)", "You can't take someone items while fighting them!", null);
-		if(index == 2)
-			return new Response("Take (5)", "You can't take someone items while fighting them!", null);
-		if(index == 3)
-			return new Response("Take (All)", "You can't take someone items while fighting them!", null);
-		if(index == 5)
+	private static Response getItemResponseToNPCDuringCombat(AbstractCoreItem x, int ignoredResponseTab, int index) {
+		if(index == 1 || index == 2 || index == 3) {
+			var itemString = x instanceof AbstractClothing ? "clothing" : x instanceof AbstractWeapon ? "weapons" : "items";
+			var title = index == 1 ? "Take (1)" : index == 2 ? "Take (5)" : "Take (All)";
+			return new Response(title, "You can't take someone's " + itemString + " while fighting them!", null);
+		}
+		if(index == 4 && x instanceof AbstractClothing)
+			return new Response("Dye", "You can't dye someone's clothing while fighting them!", null);
+		if(index == 4 && x instanceof AbstractWeapon)
+			return new Response("Dye", "You can't dye someone's weapons while fighting them!", null);
+		if(index == 5) {
+			if(x instanceof AbstractClothing c && c.isCondom()) {
+				boolean broken = c.getCondomEffect().getPotency().isNegative();
+				return new Response(
+						broken ? "Repair (<i>1 Essence</i>)" : "Sabotage",
+						"You can't " + (broken ? "repair" : "sabotage")
+								+ " someone else's condom, especially not while fighting them!",
+						null);
+			}
+			var itemString = x instanceof AbstractClothing ? "clothing" : x instanceof AbstractWeapon ? "weapons" : "items";
 			return new Response(
 					"Enchant",
-					"You can't enchant someone else's items, especially not while fighting them!",
+					"You can't enchant someone else's " + itemString + ", especially not while fighting them!",
 					null);
-		if(index == 6)
+		}
+		if((index == 6 || index == 7) && x instanceof AbstractItem i) {
+			boolean once = index == 6;
 			return new Response(
-					Util.capitaliseSentence(item.getItemType().getUseName()) + " (Self)",
+					Util.capitaliseSentence(i.getItemType().getUseName()) + (once ? " (Self)" : " all (Self)"),
 					"You can't use someone else's items while fighting them!",
 					null);
-		if(index == 7)
-			return new Response(
-					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Self)",
-					"You can't use someone else's items while fighting them!",
-					null);
+		}
+		if(index == 6 && x instanceof AbstractClothing)
+			return new Response("Equip (Self)", "You can't use someone else's clothing while fighting them!", null);
+		if((index == 6 || index == 7) && x instanceof AbstractWeapon) {
+			boolean main = index == 6;
+			var title = main ? "Equip Main (Self)" : "Equip Offhand (Self)";
+			return new Response(title, "You can't use someone else's weapons while fighting them!", null);
+		}
 		if(index == 10)
 			return getQuickTradeResponse();
-		if(index == 11)
+		if((index == 11 || index == 12) && x instanceof AbstractItem i) {
+			boolean once = index == 11;
 			return new Response(
-					Util.capitaliseSentence(item.getItemType().getUseName()) + " (Opponent)",
+					Util.capitaliseSentence(i.getItemType().getUseName()) + (once ? " (Opponent)" : " all (Opponent)"),
 					"You can't use make someone use an item while fighting them!",
 					null);
-		if(index == 12)
+		}
+		if(index == 11 && x instanceof AbstractClothing)
 			return new Response(
-					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Opponent)",
-					"You can't use make someone use an item while fighting them!",
+					UtilText.parse(inventoryNPC, "Equip: ([npc.HerHim])"),
+					"You can't make someone wear clothing while fighting them!",
 					null);
+		if((index == 11 || index == 12) && x instanceof AbstractWeapon) {
+			boolean main = index == 11;
+			var title = main ? "Equip Main (Opponent)" : "Equip Offhand (Opponent)";
+			return new Response(title, "You can't use make someone use a weapon while fighting them!", null);
+		}
 		return null;
 	}
 
@@ -6547,30 +6571,6 @@ public class InventoryDialogue {
 		
 		
 		resetPostAction();
-	}
-
-	private static Response getWeaponResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
-		if(index == 1)
-			return new Response("Take (1)", "You can't take someone weapons while fighting them!", null);
-		if(index == 2)
-			return new Response("Take (5)", "You can't take someone weapons while fighting them!", null);
-		if(index == 3)
-			return new Response("Take (All)", "You can't take someone weapons while fighting them!", null);
-		if(index == 4)
-			return new Response("Dye", "You can't dye someone's weapons while fighting them!", null);
-		if(index == 5)
-			return new Response("Enchant", "You can't enchant someone else's weapons, especially not while fighting them!", null);
-		if(index == 6)
-			return new Response("Equip Main (Self)", "You can't use someone else's weapons while fighting them!", null);
-		if(index == 7)
-			return new Response("Equip Offhand (Self)", "You can't use someone else's weapons while fighting them!", null);
-		if(index == 10)
-			return getQuickTradeResponse();
-		if(index == 11)
-			return new Response("Equip Main (Opponent)", "You can't use make someone use a weapon while fighting them!", null);
-		if(index == 12)
-			return new Response("Equip Offhand (Opponent)", "You can't use make someone use a weapon while fighting them!", null);
-		return null;
 	}
 
 	private static Response getWeaponResponseToNPCDuringManagement(int ignoredResponseTab, int index) {
@@ -7109,30 +7109,6 @@ public class InventoryDialogue {
 				}
 			};
 		}
-		return null;
-	}
-
-	private static Response getClothingResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
-		if(index == 1 || index == 2 || index == 3)
-			return new Response(index == 1 ? "Take (1)" : index == 2 ? "Take (5)" : "Take (All)", "You can't take someone clothing while fighting them!", null);
-		if(index == 4)
-			return new Response("Dye", "You can't dye someone's clothing while fighting them!", null);
-		if(index == 5) {
-			if(clothing.isCondom()) {
-				boolean broken = clothing.getCondomEffect().getPotency().isNegative();
-				return new Response(
-						broken ? "Repair (<i>1 Essence</i>)" : "Sabotage",
-						"You can't " + (broken ? "repair" : "sabotage") + " someone else's condom, especially not while fighting them!",
-						null);
-			}
-			return new Response("Enchant", "You can't enchant someone else's clothing, especially not while fighting them!", null);
-		}
-		if(index == 6)
-			return new Response("Equip (Self)", "You can't use someone else's clothing while fighting them!", null);
-		if(index == 10)
-			return getQuickTradeResponse();
-		if(index == 11)
-			return new Response(UtilText.parse(inventoryNPC, "Equip: ([npc.HerHim])"), "You can't make someone wear clothing while fighting them!", null);
 		return null;
 	}
 
