@@ -1024,7 +1024,7 @@ public class InventoryDialogue {
 						case SEX:
 							return getItemResponseDuringSex(item, responseTab, index);
 						default:
-							return getItemResponse(responseTab, index);
+							return getItemResponse(item, responseTab, index);
 					}
 					
 				// ****************************** Interacting with an NPC ******************************
@@ -1148,7 +1148,7 @@ public class InventoryDialogue {
 						case SEX:
 							return getItemResponseDuringSex(weapon, responseTab, index);
 						default:
-							return getWeaponResponse(responseTab, index);
+							return getItemResponse(weapon, responseTab, index);
 					}
 					
 				// ****************************** Interacting with an NPC ******************************
@@ -1282,7 +1282,7 @@ public class InventoryDialogue {
 					case SEX:
 						return getItemResponseDuringSex(clothing, responseTab, index);
 					default:
-						return getClothingResponse(responseTab, index);
+						return getItemResponse(clothing, responseTab, index);
 					}
 					
 				// ****************************** Interacting with an NPC ******************************
@@ -5881,85 +5881,166 @@ public class InventoryDialogue {
 		return null;
 	}
 
-	private static Response getItemResponse(int ignoredResponseTab, int index) {
+	private static Response getItemResponse(AbstractCoreItem x, int ignoredResponseTab, int index) {
+		var player = Main.game.getPlayer();
 		if(index == 1 || index == 2 || index == 3) {
-			String title = index == 1 ? "Take (1)" : index == 2 ? "Take (5)" : "Take (All)";
-			String name = index == 1 ? item.getName() : item.getNamePlural();
-			int itemCount = Main.game.getPlayerCell().getInventory().getItemCount(item);
-			if(index == 2 && itemCount < 5)
+			var title = index == 1 ? "Take (1)" : index == 2 ? "Take (5)" : "Take (All)";
+			var name = index == 1 ? x.getName() : x.getNamePlural();
+			int availableCount = Main.game.getPlayerCell().getInventory().getItemCount(x);
+			if(index == 2 && availableCount < 5)
 				return new Response(title, "There aren't five " + name + " on the ground!", null);
-			if(Main.game.getPlayer().isInventoryFull()
-					&& !Main.game.getPlayer().hasItem(item)
-					&& item.getRarity() != Rarity.QUEST)
+			if(player.isInventoryFull()
+					&& !player.hasItem(x)
+					&& x.getRarity() != Rarity.QUEST)
 				return new Response(title, "Your inventory is already full!", null);
 			return new Response(
 					title,
 					String.format("Take %s %s from the ground.",
-							index == 1 ? "one " : index == 2 ? "five of your " : "all of your ",
+							index == 1 ? "one" : index == 2 ? "five of your" : "all of your",
 							name),
 					INVENTORY_MENU) {
 				@Override
 				public void effects() {
-					int count = index == 1 ? 1 : index == 2 ? 5 : itemCount;
-					pickUpItems(Main.game.getPlayer(), item, count);
+					int count = index == 1 ? 1 : index == 2 ? 5 : availableCount;
+					pickUpItems(player, x, count);
 				}
 			};
 		}
-		if(index == 5)
-			return new Response("Enchant", "You can't enchant items on the ground!", null);
-		if(index == 6) {
-			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " (Self)";
-			if(!item.isAbleToBeUsedFromInventory())
-				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
-			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
-				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-			if(item.isBreakOutOfInventory())
+		if(index == 4 && x instanceof AbstractClothing c) {
+			if(!player.hasItemType(ItemType.DYE_BRUSH)
+					&& !player.isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
+				return new Response("Dye", "You'll need to find a dye-brush if you want to dye your clothes.", null);
+			if(Main.game.getPlayerCell().getInventory().getAllClothingInInventory().get(clothing) > 1
+					&& Main.game.getPlayerCell().getInventory().isInventoryFull())
+				return new Response("Dye", "Your inventory is full, so you can't dye this item of clothing.", null);
+			return new Response("Dye",
+					player.isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
+							? "Use your proficiency with [style.colourEarth(Earth spells)] to dye this item."
+							: "Use a dye-brush to dye this item of clothing.",
+					DYE_CLOTHING) {
+				@Override
+				public void effects() {
+					resetClothingDyeColours();
+				}
+			};
+		}
+		if(index == 4 && x instanceof AbstractWeapon w) {
+			if(!player.hasItemType(ItemType.DYE_BRUSH)
+					&& !player.hasItemType(ItemType.REFORGE_HAMMER)
+					&& !player.isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
+				return new Response(
+						"Dye/Reforge",
+						"You'll need to find a dye-brush or reforge hammer"
+								+ " if you want to alter this weapon's properties.",
+						null);
+			if(Main.game.getPlayerCell().getInventory().getAllWeaponsInInventory().get(w) > 1
+					&& Main.game.getPlayerCell().getInventory().isInventoryFull()
+					&& w.getRarity() != Rarity.QUEST)
+				return new Response(
+						"Dye/Reforge",
+						"Your inventory is full, so you can't alter this weapon's properties.",
+						null);
+			return new Response("Dye/Reforge",
+					player.isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
+							? "Use your proficiency with [style.colourEarth(Earth spells)] to dye or reforge this item."
+							: "Use a dye-brush or reforge hammer to alter this weapon's properties.",
+					DYE_WEAPON) {
+				@Override
+				public void effects() {
+					resetWeaponDyeColours();
+				}
+			};
+		}
+		if(index == 5) {
+			if(x instanceof AbstractClothing c && c.isCondom()) {
+				boolean broken = c.getCondomEffect().getPotency().isNegative();
+				return new Response(
+						broken ? "Repair (<i>1 Essence</i>)" : "Sabotage",
+						"You can't " + (broken ? "repair" : "sabotage") + " condoms on the ground!",
+						null);
+			}
+			var itemString = x instanceof AbstractClothing ? "clothing" : x instanceof AbstractWeapon ? "weapons" : "items";
+			return new Response("Enchant", "You can't enchant " + itemString + " on the ground!", null);
+		}
+		if((index == 6 || index == 7) && x instanceof AbstractItem i) {
+			boolean once = index == 6;
+			var title = Util.capitaliseSentence(i.getItemType().getUseName()) + (once ? "" : " all") + " (Self)";
+			if(!i.isAbleToBeUsedFromInventory())
+				return new Response(title, i.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!i.isAbleToBeUsed(player))
+				return new Response(title, i.getUnableToBeUsedDescription(player), null);
+			boolean breakOut = i.isBreakOutOfInventory();
+			if(!once && breakOut)
+				return new Response(title, "As this item has special effects, you can only use one at a time!", null);
+			if(breakOut)
 				return new ResponseEffectsOnly(
 						title,
-						item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), Main.game.getPlayer())) {
+						i.getItemType().getUseTooltipDescription(player, player)) {
 					@Override
 					public void effects() {
-						Main.game.getPlayer().useItem(item, Main.game.getPlayer(), true);
+						player.useItem(i, player, true);
 						resetPostAction();
 					}
 				};
 			return new Response(
 					title,
-					item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), Main.game.getPlayer()),
+					i.getItemType().getUseTooltipDescription(player, player)
+							+ (once ? ""
+									: "<br/>[style.italicsMinorGood(Repeat this for all of the "
+											+ i.getNamePlural()
+											+ " which are in this area.)]"),
 					INVENTORY_MENU) {
 				@Override
 				public void effects() {
-					Main.game.getTextEndStringBuilder()
-							.append("<p style='text-align:center;'>")
-							.append(Main.game.getPlayer().useItem(item, Main.game.getPlayer(), true))
-							.append("</p>");
+					int itemCount = once ? 1 : Main.game.getPlayerCell().getInventory().getItemCount(i);
+					for(int j = 0; j < itemCount; j++)
+						Main.game.getTextEndStringBuilder()
+								.append("<p style='text-align:center;'>")
+								.append(player.useItem(i, player, true))
+								.append("</p>");
 					resetPostAction();
 				}
 			};
 		}
-		if(index == 7) {
-			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Self)";
-			if(!item.isAbleToBeUsedFromInventory())
-				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
-			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
-				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-			if(item.isBreakOutOfInventory())
-				return new Response(title, "As this item has special effects, you can only use one at a time!", null);
-			return new Response(
-					title,
-					item.getItemType().getUseTooltipDescription(Main.game.getPlayer(), Main.game.getPlayer())
-							+"<br/>[style.italicsMinorGood(Repeat this for all of the "
-							+ item.getNamePlural()
-							+ " which are in this area.)]",
-					INVENTORY_MENU) {
+		if(index >= 6 && index <= 9 && x instanceof AbstractClothing c
+				&& index - 6 < c.getClothingType().getEquipSlots().size()) {
+			var slot = c.getClothingType().getEquipSlots().get(index-6);
+			var title = "Equip: " + Util.capitaliseSentence(slot.getName());
+			if(!c.isCanBeEquipped(player, slot))
+				return new Response(title, c.getCannotBeEquippedText(player, slot), null);
+			return new Response(title, "Equip the " + c.getName() + ".", INVENTORY_MENU) {
 				@Override
 				public void effects() {
-					int itemCount = Main.game.getPlayerCell().getInventory().getItemCount(item);
-					for(int i = 0; i < itemCount; i++)
-						Main.game.getTextEndStringBuilder()
-								.append("<p style='text-align:center;'>")
-								.append(Main.game.getPlayer().useItem(item, Main.game.getPlayer(), true))
-								.append("</p>");
+					Main.game.getTextEndStringBuilder()
+							.append("<p style='text-align:center;'>")
+							.append(equipClothingFromGround(player, slot, player, c))
+							.append("</p>");
+				}
+			};
+		}
+		if((index == 6 || index == 7) && x instanceof AbstractWeapon w) {
+			boolean main = index == 6;
+			var title = main ? "Equip Main (Self)" : "Equip Offhand (Self)";
+			var slot = main
+					? InventorySlot.mainWeaponSlots[player.getMainWeaponIndexToEquipTo(w)]
+					: InventorySlot.offhandWeaponSlots[player.getOffhandWeaponIndexToEquipTo(w)];
+			if(!w.isCanBeEquipped(player, slot))
+				return new Response(title, w.getCannotBeEquippedText(player, slot), null);
+			if(!main && w.getWeaponType().isTwoHanded())
+				return new Response(
+						title,
+						"As the " + w.getName() + (w.getWeaponType().isPlural()
+								? " require two hands to wield, they can only be equipped in the main slot!"
+								: " is a two-handed weapon, it can only be equipped in the main slot!"),
+						null);
+			return new Response(title, "Equip the " + w.getName() + " as your main weapon.", INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					var text = main ? player.equipMainWeaponFromFloor(w) : player.equipOffhandWeaponFromFloor(w);
+					Main.game.getTextEndStringBuilder()
+							.append("<p style='text-align:center;'>")
+							.append(text)
+							.append("</p>");
 					resetPostAction();
 				}
 			};
@@ -6466,85 +6547,6 @@ public class InventoryDialogue {
 		
 		
 		resetPostAction();
-	}
-
-	private static Response getWeaponResponse(int ignoredResponseTab, int index) {
-		if(index <= 3 && index >= 1) {
-			boolean inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasWeapon(weapon) && weapon.getRarity()!=Rarity.QUEST;
-			var title = index == 1 ? "Take (1)" : index == 2 ? "Take (5)" : "Take (All)";
-			if(inventoryFull)
-				return new Response(title, "Your inventory is already full!", null);
-			if(index == 2 && Main.game.getPlayerCell().getInventory().getWeaponCount(weapon) < 5)
-				return new Response(title, "There aren't five " + weapon.getNamePlural() + " on the ground!", null);
-			return new Response(title, "Take one " + weapon.getName() + " from the ground.", INVENTORY_MENU) {
-				@Override
-				public void effects() {
-					int count = index == 1 ? 1 : index == 2 ? 5 : Main.game.getPlayerCell().getInventory().getWeaponCount(weapon);
-					pickUpWeapons(Main.game.getPlayer(), weapon, count);
-				}
-			};
-		}
-		if(index == 4) {
-			if(!Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH)
-					&& !Main.game.getPlayer().hasItemType(ItemType.REFORGE_HAMMER)
-					&& !Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
-				return new Response("Dye/Reforge", "You'll need to find a dye-brush or reforge hammer if you want to alter this weapon's properties.", null);
-			boolean hasFullInventory = Main.game.getPlayerCell().getInventory().isInventoryFull() && weapon.getRarity()!=Rarity.QUEST;
-			boolean isDyeingStackItem = Main.game.getPlayerCell().getInventory().getAllWeaponsInInventory().get(weapon) > 1;
-			if(isDyeingStackItem && hasFullInventory)
-				return new Response("Dye/Reforge", "Your inventory is full, so you can't alter this weapon's properties.", null);
-			return new Response("Dye/Reforge",
-					Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
-							?"Use your proficiency with [style.colourEarth(Earth spells)] to dye or reforge this item."
-							:"Use a dye-brush or reforge hammer to alter this weapon's properties.",
-					DYE_WEAPON) {
-				@Override
-				public void effects() {
-					resetWeaponDyeColours();
-				}
-			};
-		}
-		if(index == 5)
-			return new Response("Enchant", "You can't enchant weapons on the ground!", null);
-		if(index == 6) {
-			var slot = InventorySlot.mainWeaponSlots[Main.game.getPlayer().getMainWeaponIndexToEquipTo(weapon)];
-			if(!weapon.isCanBeEquipped(Main.game.getPlayer(), slot))
-				return new Response("Equip Main (Self)", weapon.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-			return new Response("Equip Main (Self)", "Equip the " + weapon.getName() + " as your main weapon.", INVENTORY_MENU) {
-				@Override
-				public void effects() {
-					Main.game.getTextEndStringBuilder()
-					.append("<p style='text-align:center;'>")
-							.append(Main.game.getPlayer().equipMainWeaponFromFloor(weapon))
-					.append("</p>");
-					resetPostAction();
-				}
-			};
-		}
-		if(index == 7) {
-			var slot = InventorySlot.mainWeaponSlots[Main.game.getPlayer().getMainWeaponIndexToEquipTo(weapon)];
-			if(!weapon.isCanBeEquipped(Main.game.getPlayer(), slot))
-				return new Response("Equip Offhand (Self)", weapon.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-			if(weapon.getWeaponType().isTwoHanded())
-				return new Response("Equip Offhand (Self)",
-						"As the " + weapon.getName() + (weapon.getWeaponType().isPlural()
-								? " require two hands to wield, they can only be equipped in the main slot!"
-								: " is a two-handed weapon, it can only be equipped in the main slot!"),
-						null);
-			return new Response("Equip Offhand (Self)", "Equip the " + weapon.getName() + " as your offhand weapon.", INVENTORY_MENU) {
-				@Override
-				public void effects() {
-					Main.game.getTextEndStringBuilder()
-					.append("<p style='text-align:center;'>")
-							.append(Main.game.getPlayer().equipOffhandWeaponFromFloor(weapon))
-					.append("</p>");
-					resetPostAction();
-				}
-			};
-		}
-		if(index == 10)
-			return getQuickTradeResponse();
-		return null;
 	}
 
 	private static Response getWeaponResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
@@ -7107,71 +7109,6 @@ public class InventoryDialogue {
 				}
 			};
 		}
-		return null;
-	}
-
-	private static Response getClothingResponse(int ignoredResponseTab, int index) {
-		if(index == 1 || index == 2 || index == 3) {
-			boolean inventoryFull = Main.game.getPlayer().isInventoryFull() && !Main.game.getPlayer().hasClothing(clothing) && clothing.getRarity()!=Rarity.QUEST;
-			var title = index == 1 ? "Take (1)" : index == 2 ? "Take (5)" : "Take (All)";
-			if(inventoryFull)
-				return new Response(title, "Your inventory is already full!", null);
-			if(index == 2 && Main.game.getPlayerCell().getInventory().getClothingCount(clothing) < 5)
-				return new Response(title, "There aren't five " + clothing.getNamePlural() + " on the ground!", null);
-			return new Response(title, "Take one " + (index == 1 ? "one " : index == 2 ? "five of the " : "all of the ") + clothing.getName() + " from the ground.", INVENTORY_MENU) {
-				@Override
-				public void effects() {
-					var count = index == 1 ? 1 : index == 2 ? 5 : Main.game.getPlayerCell().getInventory().getClothingCount(clothing);
-					pickUpClothing(Main.game.getPlayer(), clothing, count);
-				}
-			};
-		}
-		if(index==4) {
-			if(!Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH)
-					&& !Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
-				return new Response("Dye", "You'll need to find a dye-brush if you want to dye your clothes.", null);
-			boolean hasFullInventory = Main.game.getPlayerCell().getInventory().isInventoryFull();
-			boolean isDyeingStackItem = Main.game.getPlayerCell().getInventory().getAllClothingInInventory().get(clothing) > 1;
-			if(isDyeingStackItem && hasFullInventory)
-				return new Response("Dye", "Your inventory is full, so you can't dye this item of clothing.", null);
-			return new Response("Dye",
-					Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
-							? "Use your proficiency with [style.colourEarth(Earth spells)] to dye this item."
-							: "Use a dye-brush to dye this item of clothing.",
-					DYE_CLOTHING) {
-				@Override
-				public void effects() {
-					resetClothingDyeColours();
-				}
-			};
-		}
-		if(index == 5) {
-			if(clothing.isCondom()) {
-				boolean broken = clothing.getCondomEffect().getPotency().isNegative();
-				return new Response(
-						broken ? "Repair (<i>1 Essence</i>)" : "Sabotage",
-						"You can't " + (broken ? "repair" : "sabotage") + " condoms on the ground!",
-						null);
-			}
-			return new Response("Enchant", "You can't enchant clothing on the ground!", null);
-		}
-		if(index >= 6 && index <= 9 && index - 6 < clothing.getClothingType().getEquipSlots().size()) {
-			var slot = clothing.getClothingType().getEquipSlots().get(index-6);
-			var title = "Equip: " + Util.capitaliseSentence(slot.getName());
-			if(!clothing.isCanBeEquipped(Main.game.getPlayer(), slot))
-				return new Response(title, clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-			return new Response(title, "Equip the " + clothing.getName() + ".", INVENTORY_MENU) {
-				@Override
-				public void effects() {
-					Main.game.getTextEndStringBuilder()
-					.append("<p style='text-align:center;'>")
-							.append(equipClothingFromGround(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing))
-					.append("</p>");
-				}
-			};
-		}
-		if(index == 10)
-			return getQuickTradeResponse();
 		return null;
 	}
 
