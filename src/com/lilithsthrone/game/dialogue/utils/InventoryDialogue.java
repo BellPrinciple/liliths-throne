@@ -1007,7 +1007,7 @@ public class InventoryDialogue {
 						case COMBAT:
 							return getPlayerItemResponseToNPCDuringCombat(item, responseTab, index);
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
-							return getPlayerItemResponseToNPCDuringManagement(responseTab, index);
+							return getPlayerItemResponseToNPCDuringManagement(item, responseTab, index);
 						case SEX:
 							return getPlayerItemResponseToNPCDuringSex(responseTab, index);
 						case TRADING:
@@ -1131,7 +1131,7 @@ public class InventoryDialogue {
 						case COMBAT:
 							return getPlayerItemResponseToNPCDuringCombat(weapon, responseTab, index);
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
-							return getPlayerWeaponResponseToNPCDuringManagement(responseTab, index);
+							return getPlayerItemResponseToNPCDuringManagement(weapon, responseTab, index);
 						case SEX:
 							return getPlayerWeaponResponseToNPCDuringSex(responseTab, index);
 						case TRADING:
@@ -1263,7 +1263,7 @@ public class InventoryDialogue {
 						case COMBAT:
 							return getPlayerItemResponseToNPCDuringCombat(clothing, responseTab, index);
 						case FULL_MANAGEMENT: case CHARACTER_CREATION:
-							return getPlayerClothingResponseToNPCDuringManagement(responseTab, index);
+							return getPlayerItemResponseToNPCDuringManagement(clothing, responseTab, index);
 						case SEX:
 							return getPlayerClothingResponseToNPCDuringSex(responseTab, index);
 						case TRADING:
@@ -5036,167 +5036,330 @@ public class InventoryDialogue {
 		return null;
 	}
 
-	private static Response getPlayerItemResponseToNPCDuringManagement(int ignoredResponseTab, int index) {
+	private static Response getPlayerItemResponseToNPCDuringManagement(AbstractCoreItem x, int ignoredResponseTab, int index) {
+		var player = Main.game.getPlayer();
+		var itemString = x instanceof AbstractWeapon ? "weapon" : "item";
 		if(index == 1 || index == 2 || index == 3) {
-			String title = index == 1 ? "Give (1)" : index == 2 ? "Give (5)" : "Give (All)";
-			if(!item.getItemType().isAbleToBeDropped())
-				return new Response(title, "You cannot give away the " + item.getName() + "!", null);
-			if(inventoryNPC.isInventoryFull() && !inventoryNPC.hasItem(item))
+			var title = index == 1 ? "Give (1)" : index == 2 ? "Give (5)" : "Give (All)";
+			var name = index == 1 ? x.getName() : x.getNamePlural();
+			int availableCount = player.getItemCount(x);
+			if(index == 2 && availableCount < 5)
+				return new Response(title, "You don't have five " + name + " to give!", null);
+			if(!x.getType().isAbleToBeDropped())
+				return new Response(title, "You cannot give away the " + name + "!", null);
+			if(inventoryNPC.isInventoryFull() && !inventoryNPC.hasItem(x))
 				return new Response(
 						title,
 						UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"),
 						null);
-			if(Main.game.getPlayer().getItemCount(item) < 5)
-				return new Response(title, "You don't have five " + item.getNamePlural() + " to give!", null);
-			String someOf = index == 1 ? "" : index == 2 ? "five of " : "all of ";
+			var someOf = index == 1 ? "" : index == 2 ? "five of " : "all of ";
 			return new Response(
 					title,
-					UtilText.parse(inventoryNPC, "Give [npc.name] " + someOf + "your " + item.getNamePlural() + "."),
+					UtilText.parse(inventoryNPC, "Give [npc.name] " + someOf + "your " + name + "."),
 					INVENTORY_MENU) {
 				@Override
 				public void effects() {
-					int count = index == 1 ? 1 : index == 2 ? 5 : Main.game.getPlayer().getItemCount(item);
-					transferItems(Main.game.getPlayer(), inventoryNPC, item, count);
+					int count = index == 1 ? 1 : index == 2 ? 5 : availableCount;
+					transferItems(player, inventoryNPC, x, count);
+				}
+			};
+		}
+		if(index == 4 && x instanceof AbstractClothing c) {
+			if(!player.hasItemType(ItemType.DYE_BRUSH)
+					&& !player.isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
+				return new Response("Dye", "You'll need to find a dye-brush if you want to dye your clothes.", null);
+			boolean hasFullInventory = player.isInventoryFull();
+			boolean isDyeingStackItem = player.getAllClothingInInventory().get(c) > 1;
+			if (isDyeingStackItem && hasFullInventory)
+				return new Response("Dye", "Your inventory is full, so you can't dye this item of clothing.", null);
+			return new Response("Dye",
+					player.isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
+							? "Use your proficiency with [style.colourEarth(Earth spells)] to dye this item."
+							: "Use a dye-brush to dye this item of clothing.",
+					DYE_CLOTHING) {
+				@Override
+				public void effects() {
+					resetClothingDyeColours();
+				}
+			};
+		}
+		if(index == 4 && x instanceof AbstractWeapon w) {
+			if(!player.hasItemType(ItemType.DYE_BRUSH)
+					&& !player.hasItemType(ItemType.REFORGE_HAMMER)
+					&& !player.isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
+				return new Response(
+						"Dye/Reforge",
+						"You'll need to find a dye-brush or reforge hammer"
+								+ " if you want to alter this weapon's properties.",
+						null);
+			if(player.getAllWeaponsInInventory().get(w) > 1
+					&& player.isInventoryFull()
+					&& w.getRarity() != Rarity.QUEST)
+				return new Response(
+						"Dye/Reforge",
+						"Your inventory is full, so you can't alter this weapon's properties.",
+						null);
+			return new Response("Dye/Reforge",
+					player.isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
+							? "Use your proficiency with [style.colourEarth(Earth spells)] to dye or reforge this item."
+							: "Use a dye-brush or reforge hammer to alter this weapon's properties.",
+					DYE_WEAPON) {
+				@Override
+				public void effects() {
+					resetWeaponDyeColours();
+				}
+			};
+		}
+		if(index == 5 && x instanceof AbstractClothing c) {
+			if(c.isCondom())
+				return getCondomSabotageResponse(c);
+			if(!Main.game.isDebugMode()
+					&& (!player.hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)
+							|| !player.isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)))
+				return new Response("Enchant", getEnchantmentNotDiscoveredText("clothing"), null);
+			if(c.getEnchantmentItemType(null) == null || c.getItemTags().contains(ItemTag.UNENCHANTABLE))
+				return new Response("Enchant", "This clothing cannot be enchanted!", null);
+			if(!c.isEnchantmentKnown()) {
+				int essencePrice = IDENTIFICATION_ESSENCE_PRICE;
+				boolean sufficient = player.getEssenceCount() >= essencePrice;
+				var description = "To identify the " + c.getName() + ", you can either spend " + essencePrice
+						+ " arcane essences to do it yourself"
+						+ (sufficient ? "" : " ([style.italicsBad(which you don't have)])")
+						+ ", or go to a vendor and pay " + IDENTIFICATION_PRICE + " flames to have them do it for you.";
+				if(!sufficient)
+					return new Response("Identify (<i>"+essencePrice+" Essences</i>)", description, null);
+				return new Response(
+						"Identify ([style.italicsArcane("+essencePrice+" Essences)])",
+						description,
+						CLOTHING_INVENTORY) {
+					@Override
+					public void effects() {
+						player.incrementEssenceCount(-essencePrice, false);
+						String enchantmentRemovedString = c.setEnchantmentKnown(owner, true);
+						clothing = AbstractClothing.enchantmentRemovedClothing;
+						Main.game.getTextEndStringBuilder()
+								.append("<p>")
+								.append("You channel the power of ")
+								.append(Util.intToString(essencePrice))
+								.append(" of your arcane essences into the ")
+								.append(c.getName())
+								.append(", and as it emits a faint purple glow,")
+								.append(" you find yourself able to detect what sort of enchantment it has!")
+								.append("</p>")
+								.append(enchantmentRemovedString)
+								.append("<p style='text-align:center;'>")
+								.append("Identifying the ")
+								.append(clothing.getName())
+								.append(" has cost you [style.boldBad(")
+								.append(Util.intToString(essencePrice))
+								.append(")] [style.boldArcane(Arcane Essences)]!")
+								.append("</p>");
+						RenderingEngine.setPage(player, clothing);
+					}
+				};
+			}
+			return new Response("Enchant", "Enchant this clothing.", EnchantmentDialogue.ENCHANTMENT_MENU) {
+				@Override
+				public DialogueNode getNextDialogue() {
+					return EnchantmentDialogue.getEnchantmentMenu(clothing);
 				}
 			};
 		}
 		if(index == 5) {
-			if(item.getEnchantmentItemType(null)==null || item.getItemTags().contains(ItemTag.UNENCHANTABLE)) {
-				return new Response("Enchant", "This item cannot be enchanted!", null);
-			} else if(Main.game.isDebugMode()
-					|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)
-							&& Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
-				return new Response("Enchant", "Enchant this item.", EnchantmentDialogue.ENCHANTMENT_MENU) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return EnchantmentDialogue.getEnchantmentMenu(item);
-					}
-				};
-			} else {
-				return new Response("Enchant", getEnchantmentNotDiscoveredText("items"), null);
-			}
+			if(x.getEnchantmentItemType(null) == null || x.getItemTags().contains(ItemTag.UNENCHANTABLE))
+				return new Response("Enchant", "This " + itemString + " cannot be enchanted!", null);
+			if(Main.game.isDebugMode()
+					|| (player.hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)
+							&& player.isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)))
+				return new Response("Enchant", getEnchantmentNotDiscoveredText(itemString + "s"), null);
+			return new Response("Enchant", "Enchant this " + itemString + ".", EnchantmentDialogue.ENCHANTMENT_MENU) {
+				@Override
+				public DialogueNode getNextDialogue() {
+					return EnchantmentDialogue.getEnchantmentMenu(x);
+				}
+			};
 		}
-		if(index == 6) {
-			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " (Self)";
-			if(!item.isAbleToBeUsedFromInventory())
-				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
-			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
-				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-			String description = item.getItemType().getUseTooltipDescription(owner, owner);
-			if(item.isBreakOutOfInventory())
-				return new ResponseEffectsOnly(title, description) {
+		if((index == 6 || index == 7 || index == 11 || index == 12) && x instanceof AbstractItem i) {
+			boolean once = index == 6 || index == 11;
+			boolean self = index == 6 || index == 7;
+			String title = Util.capitaliseSentence(i.getItemType().getUseName())
+					+ (once ? "" : " all")
+					+ (self ? " (Self)" : UtilText.parse(inventoryNPC, " ([npc.HerHim])"));
+			if(!i.isAbleToBeUsedFromInventory())
+				return new Response(title, i.getUnableToBeUsedFromInventoryDescription(), null);
+			var target = self ? player : inventoryNPC;
+			if(!i.isAbleToBeUsed(target))
+				return new Response(title, i.getUnableToBeUsedDescription(target), null);
+			boolean breakOut = i.isBreakOutOfInventory();
+			if(!once && breakOut)
+				return new Response(title, "As this item has special effects, you can only use one at a time!", null);
+			if(breakOut)
+				return new ResponseEffectsOnly(title, i.getItemType().getUseTooltipDescription(owner, owner)) {
 					@Override
 					public void effects() {
-						Main.game.getPlayer().useItem(item, Main.game.getPlayer(), false);
+						player.useItem(i, target, false);
 						resetPostAction();
 					}
 				};
-			return new Response(title, description, INVENTORY_MENU) {
+			var fetish = self ? null
+					: i.getItemType().isFetishGiving() ? Fetish.FETISH_KINK_GIVING
+					: i.getItemType().isTransformative() ? Fetish.FETISH_TRANSFORMATION_GIVING : null;
+			return new Response(
+					title,
+					i.getItemType().getUseTooltipDescription(owner, self ? owner : inventoryNPC)
+							+ (once ? ""
+									: "<br/>[style.italicsMinorGood(Repeat this for all of the "
+											+ i.getNamePlural()
+											+ " which are in your inventory.)]"),
+					INVENTORY_MENU,
+					fetish == null ? null : List.of(fetish),
+					fetish == null ? null : fetish.getAssociatedCorruptionLevel(),
+					null,
+					null,
+					null) {
 				@Override
 				public void effects() {
-					Main.game.getTextEndStringBuilder()
-							.append("<p style='text-align:center;'>")
-							.append(Main.game.getPlayer().useItem(item, Main.game.getPlayer(), false))
-							.append("</p>");
+					int itemCount = once ? 1 : player.getItemCount(i);
+					for(int j = 0; j < itemCount; j++) {
+						if (self)
+							Main.game.getTextEndStringBuilder()
+									.append("<p style='text-align:center;'>")
+									.append(player.useItem(i, player, false))
+									.append("</p>");
+						else
+							Main.game.getTextEndStringBuilder()
+									.append(inventoryNPC.getItemUseEffects(i, owner, player, inventoryNPC).getValue());
+					}
 					resetPostAction();
 				}
 			};
 		}
-		if(index == 7) {
-			String title = Util.capitaliseSentence(item.getItemType().getUseName())+" all (Self)";
-			if(!item.isAbleToBeUsedFromInventory())
-				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
-			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
-				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-			if(item.isBreakOutOfInventory())
-				return new Response(title, "As this item has special effects, you can only use one at a time!", null);
+		if(index >= 6 && index <= 9 && x instanceof AbstractClothing c
+				&& index - 6 < c.getClothingType().getEquipSlots().size()) {
+			var slot = c.getClothingType().getEquipSlots().get(index - 6);
+			var title = "Equip: " + Util.capitaliseSentence(slot.getName());
+			if(!c.isCanBeEquipped(player, slot))
+				return new Response(title, c.getCannotBeEquippedText(player, slot), null);
+			return new Response(title, "Equip the " + c.getName() + ".", INVENTORY_MENU) {
+				@Override
+				public void effects() {
+					Main.game.getTextEndStringBuilder()
+							.append("<p style='text-align:center;'>")
+							.append(equipClothingFromInventory(player, slot, player, c))
+							.append("</p>");
+				}
+			};
+		}
+		if((index == 6 || index == 7 || index == 11 || index == 12) && x instanceof AbstractWeapon w) {
+			boolean main = index == 6 || index == 11;
+			boolean self = index == 6 || index == 7;
+			var title = (main ? "Equip Main " : "Equip Offhand ")
+					+ (self ? " (Self)" : UtilText.parse(inventoryNPC, " ([npc.HerHim])"));
+//			if(!w.getWeaponType().isAbleToBeDropped())
+//				return new Response(title, "You cannot give away the " + w.getName() + "!", null);
+			if(!main && w.getWeaponType().isTwoHanded())
+				return new Response(title,
+						"As the " + w.getName() + (w.getWeaponType().isPlural()
+								? " require two hands to wield, they can only be equipped in the main slot!"
+								: " is a two-handed weapon, it can only be equipped in the main slot!"),
+						null);
+			var target = self ? player : inventoryNPC;
+			var slot = main
+					? InventorySlot.mainWeaponSlots[target.getMainWeaponIndexToEquipTo(w)]
+					: InventorySlot.offhandWeaponSlots[target.getOffhandWeaponIndexToEquipTo(w)];
+			if(!w.isCanBeEquipped(target, slot))
+				return new Response(title, w.getCannotBeEquippedText(target, slot), null);
+			var description = (self
+					? "Equip the " + w.getName() + " as your "
+					: UtilText.parse(inventoryNPC, "Make [npc.name] equip the " + w.getName() + " as [npc.her] "))
+					+ (main ? "main" : "offhand") + " weapon.";
 			return new Response(
 					title,
-					item.getItemType().getUseTooltipDescription(owner, owner)
-							+ "<br/>[style.italicsMinorGood(Repeat this for all of the "
-							+ item.getNamePlural()
-							+ " which are in your inventory.)]",
+					description,
 					INVENTORY_MENU) {
 				@Override
 				public void effects() {
-					int itemCount = Main.game.getPlayer().getItemCount(item);
-					for(int i = 0; i < itemCount; i++)
-						Main.game.getTextEndStringBuilder()
-								.append("<p style='text-align:center;'>")
-								.append(Main.game.getPlayer().useItem(item, Main.game.getPlayer(), false))
-								.append("</p>");
+					var text = main
+							? target.equipMainWeaponFromInventory(w, player)
+							: target.equipOffhandWeaponFromInventory(w, player);
+					Main.game.getTextEndStringBuilder()
+							.append("<p style='text-align:center;'>")
+							.append(text)
+							.append("</p>");
 					resetPostAction();
 				}
 			};
 		}
 		if(index == 10)
 			return getQuickTradeResponse();
-		if(index == 11) {
-			String title = Util.capitaliseSentence(item.getItemType().getUseName())
-					+ UtilText.parse(inventoryNPC, " ([npc.HerHim])");
-			if(!item.isAbleToBeUsedFromInventory())
-				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
-			if(!item.isAbleToBeUsed(inventoryNPC))
-				return new Response(title, item.getUnableToBeUsedDescription(inventoryNPC), null);
-			if(item.isBreakOutOfInventory())
-				return new ResponseEffectsOnly(
+		if(index >= 11 && index <= 14 && x instanceof AbstractClothing c
+				&& index - 11 < c.getClothingType().getEquipSlots().size()) {
+			var slot = c.getClothingType().getEquipSlots().get(index-11);
+			var title = UtilText.parse(inventoryNPC,
+					"Equip: " + Util.capitaliseSentence(slot.getName()) + " ([npc.HerHim])");
+//			if(!c.getClothingType().isAbleToBeDropped())
+//				return new Response(title, "You cannot give away the " + clothing.getName() + "!", null);
+			var equipAllowed = inventoryNPC.isInventoryEquipAllowed(clothing, slot);
+			if(!equipAllowed.getKey())
+				return new Response(title, UtilText.parse(inventoryNPC, equipAllowed.getValue()), null);
+			if(!clothing.isCanBeEquipped(inventoryNPC, slot))
+				return new Response(title, clothing.getCannotBeEquippedText(inventoryNPC, slot), null);
+			if(!inventoryNPC.isAbleToEquip(clothing, slot, true, player)
+					|| !clothing.isEnslavementClothing()
+					|| (inventoryNPC.isSlave() && inventoryNPC.getOwner().isPlayer()))
+				return new Response(
 						title,
-						item.getItemType().getUseTooltipDescription(owner, owner)){
+						UtilText.parse(inventoryNPC, "Make [npc.name] equip the "+clothing.getName()+"!"),
+						INVENTORY_MENU) {
 					@Override
-					public void effects(){
-						Main.game.getPlayer().useItem(item, inventoryNPC, false);
-						resetPostAction();
+					public void effects() {
+						Main.game.getTextEndStringBuilder()
+								.append("<p style='text-align:center;'>")
+								.append(equipClothingFromInventory(inventoryNPC, slot, player, clothing))
+								.append("</p>");
 					}
 				};
-			var fetish = item.getItemType().isFetishGiving() ? Fetish.FETISH_KINK_GIVING
-					: item.getItemType().isTransformative() ? Fetish.FETISH_TRANSFORMATION_GIVING : null;
+			boolean willEnslave = !inventoryNPC.isSlave()
+					&& inventoryNPC.isAbleToBeEnslaved()
+					&& player.isHasSlaverLicense();
+			var description = "Make [npc.name] equip the "+clothing.getName()+".<br/><i>"
+					+ (willEnslave ? "Thanks to" : "Despite")
+					+ "the fact that the " + clothing.getName() + " "
+					+ (clothing.getClothingType().isPlural()
+							? "have an enslavement enchantment, they"
+							: "has an enslavement enchantment, it")
+					+ (willEnslave
+							? " [style.colourArcane(will enslave [npc.name])], making you [npc.her] new owner"
+							: " [style.colourMinorBad(will not enslave [npc.name])], as"
+									+ (player.isHasSlaverLicense()
+											? " [npc.sheIsFull] not a suitable target for enslavement"
+											: " you do not possess a slaver license"))
+					+ "!</i>";
 			return new Response(
-					title,
-					item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
-					INVENTORY_MENU,
-					fetish == null ? null : List.of(fetish),
-					fetish == null ? null : fetish.getAssociatedCorruptionLevel(),
-					null,
-					null,
-					null) {
+					UtilText.parse(inventoryNPC,
+							(willEnslave ? "[style.colourArcane(Equip: " : "[style.colourMinorBad(Equip: ")
+									+ Util.capitaliseSentence(slot.getName())+" ([npc.HerHim]))]"),
+					UtilText.parse(inventoryNPC, description),
+					INVENTORY_MENU) {
 				@Override
-				public void effects() {
-					var reaction = inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC);
-					Main.game.getTextEndStringBuilder().append(reaction.getValue());
-					resetPostAction();
+				public DialogueNode getNextDialogue() {
+					var enslavementDialogue = inventoryNPC.getEnslavementDialogue(clothing);
+					return Objects.requireNonNullElse(enslavementDialogue, INVENTORY_MENU);
 				}
-			};
-		}
-		if(index == 12) {
-			String title = Util.capitaliseSentence(item.getItemType().getUseName())
-					+ UtilText.parse(inventoryNPC, " all ([npc.HerHim])");
-			if(!item.isAbleToBeUsedFromInventory())
-				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
-			if(!item.isAbleToBeUsed(inventoryNPC))
-				return new Response(title, item.getUnableToBeUsedDescription(inventoryNPC), null);
-			if(item.isBreakOutOfInventory())
-				return new Response(title, "As this item has special effects, you can only use one at a time!", null);
-			var fetish = item.getItemType().isFetishGiving() ? Fetish.FETISH_KINK_GIVING
-					: item.getItemType().isTransformative() ? Fetish.FETISH_TRANSFORMATION_GIVING : null;
-			return new Response(
-					title,
-					item.getItemType().getUseTooltipDescription(owner, inventoryNPC)
-							+ "<br/>[style.italicsMinorGood(Repeat this for all of the "
-							+ item.getNamePlural()
-							+ " which are in your inventory.)]",
-					INVENTORY_MENU,
-					fetish == null ? null : List.of(fetish),
-					fetish == null ? null : fetish.getAssociatedCorruptionLevel(),
-					null,
-					null,
-					null) {
 				@Override
 				public void effects() {
-					int itemCount = Main.game.getPlayer().getItemCount(item);
-					var reaction = inventoryNPC.getItemUseEffects(item, owner, Main.game.getPlayer(), inventoryNPC);
-					for(int i = 0; i < itemCount; i++)
-						Main.game.getTextEndStringBuilder().append(reaction.getValue());
-					resetPostAction();
+					var enslavementTargets = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
+//					enslavementTargets.removeIf(npc -> player.getFriendlyOccupants().contains(npc));
+					enslavementTargets.removeIf(npc -> !Main.combat.getEnemies(player).contains(npc));
+					SlaveDialogue.setFollowupEnslavementDialogue(enslavementTargets.size() <= 1
+							? Main.game.getDefaultDialogue(false)
+							: Main.game.getSavedDialogueNode());
+					var description = equipClothingFromInventory(inventoryNPC, slot, player, clothing);
+					if(inventoryNPC.getEnslavementDialogue(clothing) == null)
+						Main.game.getTextEndStringBuilder()
+								.append("<p style='text-align:center;'>")
+								.append(description)
+								.append("</p>");
 				}
 			};
 		}
@@ -6031,146 +6194,6 @@ public class InventoryDialogue {
 		resetPostAction();
 	}
 
-	private static Response getPlayerWeaponResponseToNPCDuringManagement(int ignoredResponseTab, int index) {
-		if(index == 1 || index == 2 || index == 3) {
-			boolean inventoryFull = inventoryNPC.isInventoryFull() && !inventoryNPC.hasWeapon(weapon);
-			var title = index == 1 ? "Give (1)" : index == 2 ? "Give (5)" : "Give (All)";
-			if(!weapon.getWeaponType().isAbleToBeDropped())
-				return new Response(title, "You cannot give away the " + weapon.getName() + "!", null);
-			if(inventoryFull)
-				return new Response(title, UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
-			if(index == 2 && Main.game.getPlayer().getWeaponCount(weapon) < 5)
-				return new Response(title, "You don't have five " + weapon.getNamePlural() + " to give!", null);
-			return new Response(
-					title,
-					UtilText.parse(inventoryNPC, "Give [npc.name] "
-							+ (index == 1 ? "one " : index == 2 ? "five of your " : "all of your ")
-							+ weapon.getName() + "."),
-					INVENTORY_MENU) {
-				@Override
-				public void effects() {
-					int count = index == 1 ? 1 : index == 2 ? 5 : Main.game.getPlayer().getWeaponCount(weapon);
-					transferWeapons(Main.game.getPlayer(), inventoryNPC, weapon, count);
-				}
-			};
-		}
-		if(index == 4) {
-			if(!Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH)
-					&& !Main.game.getPlayer().hasItemType(ItemType.REFORGE_HAMMER)
-					&& !Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
-				return new Response("Dye/Reforge", "You'll need to find a dye-brush or reforge hammer if you want to alter this weapon's properties.", null);
-			boolean hasFullInventory = Main.game.getPlayer().isInventoryFull() && weapon.getRarity()!=Rarity.QUEST;
-			boolean isDyeingStackItem = Main.game.getPlayer().getAllWeaponsInInventory().get(weapon) > 1;
-			if (isDyeingStackItem && hasFullInventory)
-				return new Response("Dye/Reforge", "Your inventory is full, so you can't alter this weapon's properties.", null);
-			return new Response("Dye/Reforge",
-					Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
-							? "Use your proficiency with [style.colourEarth(Earth spells)] to dye or reforge this item."
-							: "Use a dye-brush or reforge hammer to alter this weapon's properties.",
-					DYE_WEAPON) {
-				@Override
-				public void effects() {
-					resetWeaponDyeColours();
-				}
-			};
-		}
-		if(index == 5) {
-			if(weapon.getEnchantmentItemType(null)==null || weapon.getItemTags().contains(ItemTag.UNENCHANTABLE))
-				return new Response("Enchant", "This weapon cannot be enchanted!", null);
-			if(Main.game.isDebugMode()
-					|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)
-							&& Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)))
-				return new Response("Enchant", "Enchant this weapon.", EnchantmentDialogue.ENCHANTMENT_MENU) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return EnchantmentDialogue.getEnchantmentMenu(weapon);
-					}
-				};
-			return new Response("Enchant", getEnchantmentNotDiscoveredText("weapons"), null);
-		}
-		if(index == 6) {
-			var slot = InventorySlot.mainWeaponSlots[Main.game.getPlayer().getMainWeaponIndexToEquipTo(weapon)];
-			if(!weapon.isCanBeEquipped(Main.game.getPlayer(), slot))
-				return new Response("Equip Main (Self)", weapon.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-			return new Response("Equip Main (Self)", "Equip the " + weapon.getName() + " as your main weapon.", INVENTORY_MENU) {
-				@Override
-				public void effects() {
-					Main.game.getTextEndStringBuilder()
-					.append("<p style='text-align:center;'>")
-							.append(Main.game.getPlayer().equipMainWeaponFromInventory(weapon, Main.game.getPlayer()))
-					.append("</p>");
-					resetPostAction();
-				}
-			};
-		}
-		if(index == 7) {
-			if(weapon.getWeaponType().isTwoHanded())
-				return new Response("Equip Offhand (Self)",
-						"As the " + weapon.getName() + (weapon.getWeaponType().isPlural()
-								? " require two hands to wield, they can only be equipped in the main slot!"
-								: " is a two-handed weapon, it can only be equipped in the main slot!"),
-						null);
-			var slot = InventorySlot.offhandWeaponSlots[Main.game.getPlayer().getOffhandWeaponIndexToEquipTo(weapon)];
-			if(weapon.isCanBeEquipped(Main.game.getPlayer(), slot))
-				return new Response("Equip Offhand (Self)", "Equip the " + weapon.getName() + " as your offhand weapon.", INVENTORY_MENU){
-					@Override
-					public void effects() {
-						Main.game.getTextEndStringBuilder()
-						.append("<p style='text-align:center;'>")
-								.append(Main.game.getPlayer().equipOffhandWeaponFromInventory(weapon, Main.game.getPlayer()))
-						.append("</p>");
-						resetPostAction();
-					}
-				};
-			return new Response("Equip Offhand (Self)", weapon.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-		}
-		if(index == 10)
-			return getQuickTradeResponse();
-		if(index == 11) {
-			var title = UtilText.parse(inventoryNPC, "Equip Main ([npc.HerHim])");
-//			if(!weapon.getWeaponType().isAbleToBeDropped())
-//				return new Response(title, "You cannot give away the " + weapon.getName() + "!", null);
-			var slot = InventorySlot.mainWeaponSlots[inventoryNPC.getMainWeaponIndexToEquipTo(weapon)];
-			if(!weapon.isCanBeEquipped(inventoryNPC, slot))
-				return new Response(title, weapon.getCannotBeEquippedText(inventoryNPC, slot), null);
-			return new Response(title, UtilText.parse(inventoryNPC, "Make [npc.name] equip the "+weapon.getName()+" as [npc.her] main weapon."), INVENTORY_MENU) {
-				@Override
-				public void effects() {
-					Main.game.getTextEndStringBuilder()
-					.append("<p style='text-align:center;'>")
-							.append(inventoryNPC.equipMainWeaponFromInventory(weapon, Main.game.getPlayer()))
-					.append("</p>");
-					resetPostAction();
-				}
-			};
-		}
-		if(index == 12) {
-			var title = UtilText.parse(inventoryNPC, "Equip Offhand ([npc.HerHim])");
-//			if(!weapon.getWeaponType().isAbleToBeDropped())
-//				return new Response(title, "You cannot give away the " + weapon.getName() + "!", null);
-			if(weapon.getWeaponType().isTwoHanded())
-				return new Response(title,
-						"As the " + weapon.getName() + (weapon.getWeaponType().isPlural()
-								? " require two hands to wield, they can only be equipped in the main slot!"
-								: " is a two-handed weapon, it can only be equipped in the main slot!"),
-						null);
-			var slot = InventorySlot.offhandWeaponSlots[inventoryNPC.getOffhandWeaponIndexToEquipTo(weapon)];
-			if(!weapon.isCanBeEquipped(inventoryNPC, slot))
-				return new Response(title, weapon.getCannotBeEquippedText(inventoryNPC, slot), null);
-			return new Response(title, UtilText.parse(inventoryNPC, "Make [npc.name] equip the "+weapon.getName()+" as [npc.her] offhand weapon."), INVENTORY_MENU){
-				@Override
-				public void effects() {
-					Main.game.getTextEndStringBuilder()
-					.append("<p style='text-align:center;'>")
-							.append(inventoryNPC.equipOffhandWeaponFromInventory(weapon, Main.game.getPlayer()))
-					.append("</p>");
-					resetPostAction();
-				}
-			};
-		}
-		return null;
-	}
-
 	private static Response getPlayerWeaponResponseToNPCDuringSex(int ignoredResponseTab, int index) {
 		if(index == 1)
 			return new Response("Give (1)", "You can't give someone weapons while having sex with them!", null);
@@ -6896,187 +6919,6 @@ public class InventoryDialogue {
 
 
 	// Clothing Inventory
-
-	private static Response getPlayerClothingResponseToNPCDuringManagement(int ignoredResponseTab, int index) {
-		boolean inventoryFull = inventoryNPC.isInventoryFull() && !inventoryNPC.hasClothing(clothing);
-		if(index == 1 || index == 2 || index == 3) {
-			var title = index == 1 ? "Give (1)" : index == 2 ? "Give (5)" : "Give (All)";
-			if(!clothing.getClothingType().isAbleToBeDropped())
-				return new Response(title, "You cannot give away the " + clothing.getName() + "!", null);
-			if(inventoryFull)
-				return new Response(title, UtilText.parse(inventoryNPC, "[npc.NamePos] inventory is already full!"), null);
-			if(index == 2 && Main.game.getPlayer().getClothingCount(clothing) < 5)
-				return new Response(title, "You don't have five " + clothing.getNamePlural() + " to give!", null);
-			return new Response(
-					title,
-					UtilText.parse(inventoryNPC, "Give [npc.name]" + (index == 1 ? "" : index == 2 ? " five of" : " all of") + " your " + clothing.getName() + "."),
-					INVENTORY_MENU) {
-				@Override
-				public void effects() {
-					var count = index == 1 ? 1 : index == 2 ? 5 : Main.game.getPlayer().getClothingCount(clothing);
-					transferClothing(Main.game.getPlayer(), inventoryNPC, clothing, count);
-				}
-			};
-		}
-		if(index==4) {
-			if(!Main.game.getPlayer().hasItemType(ItemType.DYE_BRUSH)
-					&& !Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH))
-				return new Response("Dye", "You'll need to find a dye-brush if you want to dye your clothes.", null);
-			boolean hasFullInventory = Main.game.getPlayer().isInventoryFull();
-			boolean isDyeingStackItem = Main.game.getPlayer().getAllClothingInInventory().get(clothing) > 1;
-			if (isDyeingStackItem && hasFullInventory)
-				return new Response("Dye", "Your inventory is full, so you can't dye this item of clothing.", null);
-			return new Response("Dye",
-					Main.game.getPlayer().isSpellSchoolSpecialAbilityUnlocked(SpellSchool.EARTH)
-							? "Use your proficiency with [style.colourEarth(Earth spells)] to dye this item."
-							: "Use a dye-brush to dye this item of clothing.",
-					DYE_CLOTHING) {
-				@Override
-				public void effects() {
-					resetClothingDyeColours();
-				}
-			};
-		}
-		if(index == 5) {
-			if(clothing.isCondom())
-				return getCondomSabotageResponse(clothing);
-			if(Main.game.isDebugMode()
-					|| (Main.game.getPlayer().hasQuest(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)
-							&& Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY))) {
-				if(clothing.getEnchantmentItemType(null) == null || clothing.getItemTags().contains(ItemTag.UNENCHANTABLE))
-					return new Response("Enchant", "This clothing cannot be enchanted!", null);
-				if(!clothing.isEnchantmentKnown()) {
-					if(Main.game.getPlayer().getEssenceCount() < IDENTIFICATION_ESSENCE_PRICE)
-						return new Response("Identify (<i>"+IDENTIFICATION_ESSENCE_PRICE+" Essences</i>)",
-								"To identify the "+clothing.getName()+", you can either spend "+IDENTIFICATION_ESSENCE_PRICE+" arcane essences to do it yourself ([style.italicsBad(which you don't have)]),"
-										+ " or go to a vendor and pay "+IDENTIFICATION_PRICE+" flames to have them do it for you.", null);
-					return new Response("Identify ([style.italicsArcane("+IDENTIFICATION_ESSENCE_PRICE+" Essences)])",
-							"To identify the "+clothing.getName()+", you can either spend "+IDENTIFICATION_ESSENCE_PRICE+" arcane essences to do it yourself,"
-									+ " or go to a vendor and pay "+IDENTIFICATION_PRICE+" flames to have them do it for you.",
-							CLOTHING_INVENTORY) {
-						@Override
-						public void effects() {
-							Main.game.getPlayer().incrementEssenceCount(-IDENTIFICATION_ESSENCE_PRICE, false);
-							String enchantmentRemovedString = clothing.setEnchantmentKnown(owner, true);
-							clothing = AbstractClothing.enchantmentRemovedClothing;
-							Main.game.getTextEndStringBuilder()
-							.append("<p>")
-									.append("You channel the power of ")
-									.append(Util.intToString(IDENTIFICATION_ESSENCE_PRICE))
-									.append(" of your arcane essences into the ")
-									.append(clothing.getName())
-									.append(", and as it emits a faint purple glow, you find yourself able to detect what sort of enchantment it has!")
-							.append("</p>")
-							.append(enchantmentRemovedString)
-							.append("<p style='text-align:center;'>")
-									.append("Identifying the ")
-									.append(clothing.getName())
-									.append(" has cost you [style.boldBad(")
-									.append(Util.intToString(IDENTIFICATION_ESSENCE_PRICE))
-									.append(")] [style.boldArcane(Arcane Essences)]!")
-							.append("</p>");
-							RenderingEngine.setPage(Main.game.getPlayer(), clothing);
-						}
-					};
-				}
-				return new Response("Enchant", "Enchant this clothing.", EnchantmentDialogue.ENCHANTMENT_MENU) {
-					@Override
-					public DialogueNode getNextDialogue() {
-						return EnchantmentDialogue.getEnchantmentMenu(clothing);
-					}
-				};
-			}
-			return new Response("Enchant", getEnchantmentNotDiscoveredText("clothing"), null);
-		}
-		if(index >= 6 && index <= 9 && index - 6 < clothing.getClothingType().getEquipSlots().size()) {
-			var slot = clothing.getClothingType().getEquipSlots().get(index - 6);
-			if(!clothing.isCanBeEquipped(Main.game.getPlayer(), slot))
-				return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), clothing.getCannotBeEquippedText(Main.game.getPlayer(), slot), null);
-			return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "Equip the " + clothing.getName() + ".", INVENTORY_MENU) {
-				@Override
-				public void effects() {
-					Main.game.getTextEndStringBuilder()
-					.append("<p style='text-align:center;'>")
-							.append(equipClothingFromInventory(Main.game.getPlayer(), slot, Main.game.getPlayer(), clothing))
-					.append("</p>");
-				}
-			};
-		}
-		if(index == 10)
-			return getQuickTradeResponse();
-		if(index >= 11 && index <= 14 && index-11<clothing.getClothingType().getEquipSlots().size()) {
-			var slot = clothing.getClothingType().getEquipSlots().get(index-11);
-//			if(!clothing.getClothingType().isAbleToBeDropped())
-//				return new Response(
-//						UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
-//						"You cannot give away the " + clothing.getName() + "!",
-//						null);
-			var equipAllowed = inventoryNPC.isInventoryEquipAllowed(clothing, slot);
-			if(!equipAllowed.getKey())
-				return new Response(
-						UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
-						UtilText.parse(inventoryNPC, equipAllowed.getValue()),
-						null);
-			if(!clothing.isCanBeEquipped(inventoryNPC, slot))
-				return new Response(
-						UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
-						clothing.getCannotBeEquippedText(inventoryNPC, slot),
-						null);
-			if(!inventoryNPC.isAbleToEquip(clothing, slot, true, Main.game.getPlayer()) || !clothing.isEnslavementClothing() || (inventoryNPC.isSlave() && inventoryNPC.getOwner().isPlayer()))
-				return new Response(
-						UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim])"),
-						UtilText.parse(inventoryNPC, "Make [npc.name] equip the "+clothing.getName()+"!"),
-						INVENTORY_MENU) {
-					@Override
-					public void effects() {
-						Main.game.getTextEndStringBuilder()
-						.append("<p style='text-align:center;'>")
-								.append(equipClothingFromInventory(inventoryNPC, slot, Main.game.getPlayer(), clothing))
-						.append("</p>");
-					}
-				};
-			boolean willEnslave = !inventoryNPC.isSlave() && inventoryNPC.isAbleToBeEnslaved() && Main.game.getPlayer().isHasSlaverLicense();
-			return new Response(
-					UtilText.parse(inventoryNPC,
-							!willEnslave
-									?"[style.colourMinorBad(Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim]))]"
-									:"[style.colourArcane(Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.HerHim]))]"),
-					UtilText.parse(inventoryNPC,
-							"Make [npc.name] equip the "+clothing.getName()+"."
-									+(!willEnslave
-									?"<br/><i>Despite the fact that the "+clothing.getName()+" "
-									+(clothing.getClothingType().isPlural()?"have an enslavement enchantment, they":"has an enslavement enchantment, it")
-									+" [style.colourMinorBad(will not enslave [npc.name])], as"
-									+ (Main.game.getPlayer().isHasSlaverLicense()
-									?" [npc.sheIsFull] not a suitable target for enslavement"
-									:" you do not possess a slaver license")
-									+"!</i>"
-									:"<br/><i>Thanks to the fact that the "+clothing.getName()+" "
-											+(clothing.getClothingType().isPlural()?"have an enslavement enchantment, they":"has an enslavement enchantment, it")
-											+" [style.colourArcane(will enslave [npc.name])], making you [npc.her] new owner!</i>")),
-					INVENTORY_MENU) {
-				@Override
-				public DialogueNode getNextDialogue() {
-					var enslavementDialogue = inventoryNPC.getEnslavementDialogue(clothing);
-					return Objects.requireNonNullElse(enslavementDialogue, INVENTORY_MENU);
-				}
-				@Override
-				public void effects() {
-					var enslavementTargets = new ArrayList<>(Main.game.getNonCompanionCharactersPresent());
-//					enslavementTargets.removeIf((npc) -> Main.game.getPlayer().getFriendlyOccupants().contains(npc.getId()));
-					enslavementTargets.removeIf((npc) -> !Main.combat.getEnemies(Main.game.getPlayer()).contains(npc));
-					SlaveDialogue.setFollowupEnslavementDialogue(enslavementTargets.size() <= 1 ? Main.game.getDefaultDialogue(false) : Main.game.getSavedDialogueNode());
-					var description = equipClothingFromInventory(inventoryNPC, slot, Main.game.getPlayer(), clothing);
-					if(inventoryNPC.getEnslavementDialogue(clothing) == null)
-						Main.game.getTextEndStringBuilder()
-						.append("<p style='text-align:center;'>")
-								.append(description)
-						.append("</p>");
-				}
-			};
-		}
-		return null;
-	}
 
 	private static Response getPlayerClothingResponseToNPCDuringSex(int ignoredResponseTab, int index) {
 		if(index == 1 || index == 2 || index == 3)
