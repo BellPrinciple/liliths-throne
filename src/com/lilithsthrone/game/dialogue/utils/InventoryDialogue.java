@@ -1005,7 +1005,7 @@ public class InventoryDialogue {
 				} else {
 					switch(interactionType) {
 						case COMBAT:
-							return getPlayerItemResponseToNPCDuringCombat(responseTab, index);
+							return getPlayerItemResponseToNPCDuringCombat(item, responseTab, index);
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							return getPlayerItemResponseToNPCDuringManagement(responseTab, index);
 						case SEX:
@@ -1129,7 +1129,7 @@ public class InventoryDialogue {
 				} else {
 					switch(interactionType) {
 						case COMBAT:
-							return getPlayerWeaponResponseToNPCDuringCombat(responseTab, index);
+							return getPlayerItemResponseToNPCDuringCombat(weapon, responseTab, index);
 						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
 							return getPlayerWeaponResponseToNPCDuringManagement(responseTab, index);
 						case SEX:
@@ -1261,8 +1261,7 @@ public class InventoryDialogue {
 				} else {
 					switch(interactionType) {
 						case COMBAT:
-							return getPlayerClothingResponseToNPCDuringCombat(responseTab, index);
-							
+							return getPlayerItemResponseToNPCDuringCombat(clothing, responseTab, index);
 						case FULL_MANAGEMENT: case CHARACTER_CREATION:
 							return getPlayerClothingResponseToNPCDuringManagement(responseTab, index);
 						case SEX:
@@ -4946,69 +4945,55 @@ public class InventoryDialogue {
 		return null;
 	}
 
-	private static Response getPlayerItemResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
-		if(index == 1)
-			return new Response("Give (1)", "You can't give someone items while fighting them!", null);
-		if(index == 2)
-			return new Response("Give (5)", "You can't give someone items while fighting them!", null);
-		if(index == 3)
-			return new Response("Give (All)", "You can't give someone items while fighting them!", null);
-		if(index == 5)
-			return new Response("Enchant", "You can't enchant items while fighting someone!", null);
-		if(index == 6) {
-			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " (Self)";
-			if(Main.game.getPlayer().isStunned())
-				return new Response(title, "You cannot use any items while you're stunned!", null);
-			if(Main.combat.isCombatantDefeated(Main.game.getPlayer()))
-				return new Response(title, "You cannot use any items while you're defeated!", null);
-			int cost = CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer());
-			if(Main.game.getPlayer().getRemainingAP() < cost)
-				return new Response(title, "You need at least " + cost + " AP to use this actions!", null);
-			if(!item.isAbleToBeUsedInCombatAllies())
-				return new Response(title, "You cannot use this during combat!", null);
-			if(!item.isAbleToBeUsedFromInventory())
-				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
-			if(!item.isAbleToBeUsed(Main.game.getPlayer()))
-				return new Response(title, item.getUnableToBeUsedDescription(Main.game.getPlayer()), null);
-			return new Response(
-					title,
-					item.getItemType().getUseTooltipDescription(owner, owner),
-					Main.combat.ENEMY_ATTACK) {
-				@Override
-				public void effects() {
-					Main.combat.addItemToBeUsed(owner, owner, item);
-					resetPostAction();
-					Main.mainController.openInventory();
-				}
-			};
+	private static Response getPlayerItemResponseToNPCDuringCombat(AbstractCoreItem x, int ignoredResponseTab, int index) {
+		if(index == 1 || index == 2 || index == 3) {
+			String title = index == 1 ? "Give (1)" : index == 2 ? "Give (5)" : "Give (All)";
+			var itemString = x instanceof AbstractClothing ? "clothing" : x instanceof AbstractWeapon ? "weapons" : "items";
+			return new Response(title, "You can't give someone " + itemString + " while fighting them!", null);
 		}
-		if(index == 7)
-			return new Response(
-					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Self)",
-					"You can only use one item at a time during combat!",
-					null);
-		if(index == 10)
-			return getQuickTradeResponse();
-		if(index == 11) {//TODO on ally though???
-			String title = Util.capitaliseSentence(item.getItemType().getUseName()) + " (Opponent)";
-			if(Main.game.getPlayer().isStunned())
+		if(index == 4 && x instanceof AbstractClothing)
+			return new Response("Dye", "You can't dye your clothing while fighting someone!", null);
+		if(index == 4 && x instanceof AbstractWeapon)
+			return new Response("Dye", "You can't dye your weapons while fighting someone!", null);
+		if(index == 5) {
+			if(x instanceof AbstractClothing c && c.isCondom()) {
+				boolean broken = c.getCondomEffect().getPotency().isNegative();
+				return new Response(
+						broken ? "Repair (<i>1 Essence</i>)" : "Sabotage",
+						"You can't " + (broken ? "repair" : "sabotage") + " the condom while fighting someone!",
+						null);
+			}
+			var itemString = x instanceof AbstractClothing ? "clothing" : x instanceof AbstractWeapon ? "weapons" : "items";
+			return new Response("Enchant", "You can't enchant " + itemString + " while fighting someone!", null);
+		}
+		if((index == 6 || index == 7 || index == 11 || index == 12) && x instanceof AbstractItem i) {//TODO on ally though???
+			boolean self = index == 6 || index == 7;
+			boolean once = index == 6 || index == 11;
+			var player = Main.game.getPlayer();
+			var title = Util.capitaliseSentence(i.getItemType().getUseName())
+					+ (once ? "" : " all")
+					+ (self ? " (Self)" : " (Opponent)");
+			if(!once)
+				return new Response(title, "You can only use one item at a time during combat!", null);
+			if(player.isStunned())
 				return new Response(title, "You cannot use any items while you're stunned!", null);
-			if(Main.combat.isCombatantDefeated(Main.game.getPlayer()))
+			if(Main.combat.isCombatantDefeated(player))
 				return new Response(title, "You cannot use any items while you're defeated!", null);
-			int cost = CombatMove.ITEM_USAGE.getAPcost(Main.game.getPlayer());
-			if(Main.game.getPlayer().getRemainingAP() < cost)
+			int cost = CombatMove.ITEM_USAGE.getAPcost(player);
+			if(player.getRemainingAP() < cost)
 				return new Response(title, "You need at least " + cost + " AP to use this actions!", null);
-			if(!item.isAbleToBeUsedInCombatEnemies())
+			if(self ? !i.isAbleToBeUsedInCombatAllies() : !i.isAbleToBeUsedInCombatEnemies())
 				return new Response(title, "You cannot use this during combat!", null);
-			if(!item.isAbleToBeUsedFromInventory())
-				return new Response(title, item.getUnableToBeUsedFromInventoryDescription(), null);
-			if(!item.isAbleToBeUsed(inventoryNPC))
-				return new Response(title, item.getUnableToBeUsedDescription(inventoryNPC), null);
-			var fetish = item.getItemType().isFetishGiving() ? Fetish.FETISH_KINK_GIVING
-					: item.getItemType().isTransformative() ? Fetish.FETISH_TRANSFORMATION_GIVING : null;
+			if(!i.isAbleToBeUsedFromInventory())
+				return new Response(title, i.getUnableToBeUsedFromInventoryDescription(), null);
+			if(!i.isAbleToBeUsed(player))
+				return new Response(title, i.getUnableToBeUsedDescription(self ? player : inventoryNPC), null);
+			var fetish = self ? null
+					: i.getItemType().isFetishGiving() ? Fetish.FETISH_KINK_GIVING
+							: i.getItemType().isTransformative() ? Fetish.FETISH_TRANSFORMATION_GIVING : null;
 			return new Response(
 					title,
-					item.getItemType().getUseTooltipDescription(owner, inventoryNPC),
+					i.getItemType().getUseTooltipDescription(owner, self ? owner : inventoryNPC),
 					Main.combat.ENEMY_ATTACK,
 					fetish == null ? null : List.of(fetish),
 					fetish == null ? null : fetish.getAssociatedCorruptionLevel(),
@@ -5017,17 +5002,37 @@ public class InventoryDialogue {
 					null) {
 				@Override
 				public void effects() {
-					Main.combat.addItemToBeUsed(owner, inventoryNPC, item);
+					Main.combat.addItemToBeUsed(owner, self ? owner : inventoryNPC, i);
 					resetPostAction();
 					Main.mainController.openInventory();
 				}
 			};
 		}
-		if(index == 12)
+		if(index >= 6 && index <= 9 && x instanceof AbstractClothing c
+				&& index - 6 < c.getClothingType().getEquipSlots().size()) {
+			var slot = c.getClothingType().getEquipSlots().get(index-6);
 			return new Response(
-					Util.capitaliseSentence(item.getItemType().getUseName()) + " all (Opponent)",
-					"You can only use one item at a time during combat!",
+					"Equip: " + Util.capitaliseSentence(slot.getName()),
+					"You cannot change your clothes while fighting someone!",
 					null);
+		}
+		if((index == 6 || index == 7) && x instanceof AbstractWeapon) {
+			boolean main = index == 6;
+			var title = main ? "Equip Main (Self)" : "Equip Offhand (Self)";
+			return new Response(title, "You can't change weapons while fighting someone!", null);
+		}
+		if(index == 10)
+			return getQuickTradeResponse();
+		if(index >= 11 && index <= 14 && x instanceof AbstractClothing c
+				&& index - 11 < c.getClothingType().getEquipSlots().size()) {
+			var slot = c.getClothingType().getEquipSlots().get(index-11);
+			return new Response(
+					"Equip: " + Util.capitaliseSentence(slot.getName()) + " (Opponent)",
+					"You can't make your opponent equip clothing while fighting them!",
+					null);
+		}
+		if(index == 11 && x instanceof AbstractWeapon)
+			return new Response("Equip (Opponent)", "You can't make your opponent equip a weapon!", null);
 		return null;
 	}
 
@@ -6026,28 +6031,6 @@ public class InventoryDialogue {
 		resetPostAction();
 	}
 
-	private static Response getPlayerWeaponResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
-		if(index == 1)
-			return new Response("Give (1)", "You can't give someone weapons while fighting them!", null);
-		if(index == 2)
-			return new Response("Give (5)", "You can't give someone weapons while fighting them!", null);
-		if(index == 3)
-			return new Response("Give (All)", "You can't give someone weapons while fighting them!", null);
-		if(index == 4)
-			return new Response("Dye", "You can't dye your weapons while fighting someone!", null);
-		if(index == 5)
-			return new Response("Enchant", "You can't enchant weapons while fighting someone!", null);
-		if(index == 6)
-			return new Response("Equip Main (Self)", "You can't change weapons while fighting someone!", null);
-		if(index == 7)
-			return new Response("Equip Offhand (Self)", "You can't change weapons while fighting someone!", null);
-		if(index == 10)
-			return getQuickTradeResponse();
-		if(index == 11)
-			return new Response("Equip (Opponent)", "You can't make your opponent equip a weapon!", null);
-		return null;
-	}
-
 	private static Response getPlayerWeaponResponseToNPCDuringManagement(int ignoredResponseTab, int index) {
 		if(index == 1 || index == 2 || index == 3) {
 			boolean inventoryFull = inventoryNPC.isInventoryFull() && !inventoryNPC.hasWeapon(weapon);
@@ -6913,38 +6896,6 @@ public class InventoryDialogue {
 
 
 	// Clothing Inventory
-
-	private static Response getPlayerClothingResponseToNPCDuringCombat(int ignoredResponseTab, int index) {
-		if(index == 1)
-			return new Response("Give (1)", "You can't give someone clothing while fighting them!", null);
-		if(index == 2)
-			return new Response("Give (5)", "You can't give someone clothing while fighting them!", null);
-		if(index == 3)
-			return new Response("Give (All)", "You can't give someone clothing while fighting them!", null);
-		if(index == 4)
-			return new Response("Dye", "You can't dye your clothing while fighting someone!", null);
-		if(index == 5) {
-			if(clothing.isCondom()) {
-				boolean broken = clothing.getCondomEffect().getPotency().isNegative();
-				return new Response(
-						broken ? "Repair (<i>1 Essence</i>)" : "Sabotage",
-						"You can't " + (broken ? "repair" : "sabotage") + " the condom while fighting someone!",
-						null);
-			}
-			return new Response("Enchant", "You can't enchant clothing while fighting someone!", null);
-		}
-		if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) {
-			InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-6);
-			return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "You cannot change your clothes while fighting someone!", null);
-		}
-		if(index == 10)
-			return getQuickTradeResponse();
-		if(index >= 11 && index <= 14 && index-11<clothing.getClothingType().getEquipSlots().size()) {
-			InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-11);
-			return new Response("Equip: "+Util.capitaliseSentence(slot.getName())+" (Opponent)", "You can't make your opponent equip clothing while fighting them!", null);
-		}
-		return null;
-	}
 
 	private static Response getPlayerClothingResponseToNPCDuringManagement(int ignoredResponseTab, int index) {
 		boolean inventoryFull = inventoryNPC.isInventoryFull() && !inventoryNPC.hasClothing(clothing);
