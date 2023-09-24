@@ -1029,12 +1029,14 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 		this.slotEquippedTo = slotEquippedTo;
 	}
 
+	@Deprecated
 	public boolean isCanBeEquipped(GameCharacter clothingOwner, InventorySlot slot) {
-		return this.isAbleToBeEquipped(clothingOwner, slot).getKey();
+		return getReasonUnequipable(clothingOwner, slot).isEmpty();
 	}
 
+	@Deprecated
 	public String getCannotBeEquippedText(GameCharacter clothingOwner, InventorySlot slot) {
-		return UtilText.parse(clothingOwner, this.isAbleToBeEquipped(clothingOwner, slot).getValue());
+		return UtilText.parse(clothingOwner, getReasonUnequipable(clothingOwner, slot));
 	}
 	
 	@Override
@@ -2236,16 +2238,23 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	/**
 	 * @return A Value whose key is true if this clothing can be equipped during sex. If false, the Value's value is a description of why it cannot be equipped
 	 */
+	@Deprecated
 	public Value<Boolean, String> isAbleToBeEquippedDuringSex(InventorySlot slotEquippedTo) {
-		if(getItemTags(slotEquippedTo).contains(ItemTag.ENABLE_SEX_EQUIP)) {
-			if(isEnslavementClothing()) {
-				return new Value<>(false, "Clothing with enslavement enchantments cannot be equipped during sex!");
-			}
-			return new Value<>(true, "");
-		}
-		return new Value<>(false, "This item of clothing cannot be equipped during sex!");
+		String reason = getReasonUnequipableDuringSex(slotEquippedTo);
+		return new Value<>(reason.isEmpty(), reason);
 	}
-	
+
+	/**
+	 * @return Any reason why this item cannot be equipped during sex, or the empty string, if there is none.
+	 */
+	public final String getReasonUnequipableDuringSex(InventorySlot slotEquippedTo) {
+		if(!getItemTags(slotEquippedTo).contains(ItemTag.ENABLE_SEX_EQUIP))
+			return "This item of clothing cannot be equipped during sex!";
+		if(isEnslavementClothing())
+			return "Clothing with enslavement enchantments cannot be equipped during sex!";
+		return "";
+	}
+
 	public Value<Boolean, String> isAbleToBeEquippedDuringSexInAnySlot() {
 		for(InventorySlot slot : this.getClothingType().getEquipSlots()) {
 			if(getItemTags(slot).contains(ItemTag.ENABLE_SEX_EQUIP)) {
@@ -2415,148 +2424,111 @@ public abstract class AbstractClothing extends AbstractCoreItem implements XMLSa
 	public boolean isDiscardedOnUnequip(InventorySlot slotEquippedTo) {
 		return getItemTags(slotEquippedTo).contains(ItemTag.DISCARDED_WHEN_UNEQUIPPED);
 	}
-	
-	public Value<Boolean, String> isAbleToBeEquipped(GameCharacter clothingOwner, InventorySlot slot) {
+
+	@Deprecated
+	public Value<Boolean, String> isAbleToBeEquipped(GameCharacter owner, InventorySlot slot) {
+		String reason = getReasonUnequipable(owner, slot);
+		return new Value<>(reason.isEmpty(), UtilText.parse(owner, reason));
+	}
+
+	/**
+	 * Checks this clothing's tags, valid equip slots and the slot's availability.
+	 * @param clothingOwner Character to equip this item of clothing.
+	 * @param slot Equip slot of {@code clothingOwner} to equip to.
+	 * @return Non-empty string to be parsed with {@code clothingOwner} as {@code npc1},
+	 * describing at least one reason why this clothing cannot be equipped to the character's equip slot.
+	 * Returns an empty string, if the clothing can be equipped.
+	 */
+	public String getReasonUnequipable(GameCharacter clothingOwner, InventorySlot slot) {
 		BodyPartClothingBlock block = slot.getBodyPartClothingBlock(clothingOwner);
 		Set<ItemTag> tags = this.getItemTags(slot);
 		
 		boolean plural = this.getClothingType().isPlural();
 		
 		if(this.getClothingType().getItemTags(slot).contains(ItemTag.UNIQUE_NO_NPC_EQUIP) && !clothingOwner.isPlayer()) {
-			return new Value<>(false, UtilText.parse("[style.colourBad(Only you can equip this item of clothing!)]"));
+			return "[style.colourBad(Only you can equip this item of clothing!)]";
 		}
 		
 		if(!this.getClothingType().getEquipSlots().contains(slot)) {
-			return new Value<>(false, UtilText.parse("[style.colourBad(The "+this.getName()+" cannot be equipped into this slot!)]"));
+			return "[style.colourBad(The " + getName() + " cannot be equipped into this slot!)]";
 		}
 		if(block!=null && Collections.disjoint(block.getRequiredTags(), tags)) {
-			return new Value<>(false, UtilText.parse("[style.colourBad(" + UtilText.parse(clothingOwner, block.getDescription()) + ")]"));
+			return "[style.colourBad(" + block.getDescription() + ")]";
 		}
-
-		if(tags.contains(ItemTag.FITS_MUZZLES_EXCLUSIVE) && !clothingOwner.isFaceMuzzle()) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for muzzles, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.FITS_BEAKS_EXCLUSIVE) && !clothingOwner.isFaceBeak()) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for beaks, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		
-		if(tags.contains(ItemTag.FITS_TAUR_BODY) && clothingOwner.getLegConfiguration()!=LegConfiguration.QUADRUPEDAL) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for taur bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.FITS_LONG_TAIL_BODY) && clothingOwner.getLegConfiguration()!=LegConfiguration.TAIL_LONG) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for long-tailed bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.FITS_TAIL_BODY) && clothingOwner.getLegConfiguration()!=LegConfiguration.TAIL) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for tailed bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.FITS_ARACHNID_BODY) && clothingOwner.getLegConfiguration()!=LegConfiguration.ARACHNID) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for arachnid bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.FITS_CEPHALOPOD_BODY) && clothingOwner.getLegConfiguration()!=LegConfiguration.CEPHALOPOD) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for cephalopod bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.FITS_AVIAN_BODY) && clothingOwner.getLegConfiguration()!=LegConfiguration.AVIAN) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for avian bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-
-		if(tags.contains(ItemTag.ONLY_FITS_FERAL_ALL_BODY) && !clothingOwner.isFeral()) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for feral bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.ONLY_FITS_FERAL_QUADRUPED_BODY) && (!clothingOwner.isFeral() || clothingOwner.getLegConfiguration()!=LegConfiguration.QUADRUPEDAL)) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for feral quadrupedal bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.ONLY_FITS_FERAL_ARACHNID_BODY) && (!clothingOwner.isFeral() || clothingOwner.getLegConfiguration()!=LegConfiguration.ARACHNID)) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for feral arachnid bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.ONLY_FITS_FERAL_AVIAN_BODY) && (!clothingOwner.isFeral() || clothingOwner.getLegConfiguration()!=LegConfiguration.AVIAN)) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for feral avian bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.ONLY_FITS_FERAL_CEPHALOPOD_BODY) && (!clothingOwner.isFeral() || clothingOwner.getLegConfiguration()!=LegConfiguration.CEPHALOPOD)) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for feral cephalopod bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.ONLY_FITS_FERAL_TAIL_BODY) && (!clothingOwner.isFeral() || clothingOwner.getLegConfiguration()!=LegConfiguration.TAIL)) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for feral tailed bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.ONLY_FITS_FERAL_LONG_TAIL_BODY) && (!clothingOwner.isFeral() || clothingOwner.getLegConfiguration()!=LegConfiguration.TAIL_LONG)) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for feral long-tailed bodies, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		
-		if(tags.contains(ItemTag.FITS_ARM_WINGS_EXCLUSIVE) && !clothingOwner.getArmTypeTags().contains(BodyPartTag.ARM_WINGS)) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for arm-wings, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.FITS_FEATHERED_ARM_WINGS_EXCLUSIVE) && !clothingOwner.getArmTypeTags().contains(BodyPartTag.ARM_WINGS_FEATHERED)) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for feathered arm-wings, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.FITS_LEATHERY_ARM_WINGS_EXCLUSIVE) && !clothingOwner.getArmTypeTags().contains(BodyPartTag.ARM_WINGS_LEATHERY)) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for leathery arm-wings, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.FITS_HOOFS_EXCLUSIVE) && clothingOwner.getLegType().getFootType()!=FootType.HOOFS) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for hoofs, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
-		}
-		if(tags.contains(ItemTag.FITS_TALONS_EXCLUSIVE) && clothingOwner.getLegType().getFootType()!=FootType.TALONS) {
-			return new Value<>(false, UtilText.parse(clothingOwner,"The "+this.getName()+" "+(plural?"are":"is")+" only suitable for talons, and as such, [npc.name] cannot wear "+(plural?"them":"it")+"."));
+		for(ItemTag tag : tags) {
+			String reasonByTag = switch(tag) {
+				case FITS_MUZZLES_EXCLUSIVE -> clothingOwner.isFaceMuzzle() ? "" : "muzzles";
+				case FITS_BEAKS_EXCLUSIVE -> clothingOwner.isFaceBeak() ? "" : "beaks";
+				case FITS_TAUR_BODY -> clothingOwner.getLegConfiguration()==LegConfiguration.QUADRUPEDAL ? "" : "taur bodies";
+				case FITS_LONG_TAIL_BODY -> clothingOwner.getLegConfiguration()==LegConfiguration.TAIL_LONG ? "" : "long-tailed bodies";
+				case FITS_TAIL_BODY -> clothingOwner.getLegConfiguration()==LegConfiguration.TAIL ? "" : "tailed bodies";
+				case FITS_ARACHNID_BODY -> clothingOwner.getLegConfiguration()==LegConfiguration.ARACHNID ? "" : "arachnid bodies";
+				case FITS_CEPHALOPOD_BODY -> clothingOwner.getLegConfiguration()==LegConfiguration.CEPHALOPOD ? "" : "cephalopod bodies";
+				case FITS_AVIAN_BODY -> clothingOwner.getLegConfiguration()==LegConfiguration.AVIAN ? "" : "avian bodies";
+				case ONLY_FITS_FERAL_ALL_BODY -> clothingOwner.isFeral() ? "" : "feral bodies";
+				case ONLY_FITS_FERAL_QUADRUPED_BODY -> clothingOwner.isFeral() && clothingOwner.getLegConfiguration()==LegConfiguration.QUADRUPEDAL ? "" : "feral quadrupedal bodies";
+				case ONLY_FITS_FERAL_ARACHNID_BODY -> clothingOwner.isFeral() && clothingOwner.getLegConfiguration()==LegConfiguration.ARACHNID ? "" : "feral arachnid bodies";
+				case ONLY_FITS_FERAL_AVIAN_BODY -> clothingOwner.isFeral() && clothingOwner.getLegConfiguration()==LegConfiguration.AVIAN ? "" : "feral avian bodies";
+				case ONLY_FITS_FERAL_CEPHALOPOD_BODY -> clothingOwner.isFeral() && clothingOwner.getLegConfiguration()==LegConfiguration.CEPHALOPOD ? "" : "feral cephalopod bodies";
+				case ONLY_FITS_FERAL_TAIL_BODY -> clothingOwner.isFeral() && clothingOwner.getLegConfiguration()==LegConfiguration.TAIL ? "" : "feral tailed bodies";
+				case ONLY_FITS_FERAL_LONG_TAIL_BODY -> clothingOwner.isFeral() && clothingOwner.getLegConfiguration()==LegConfiguration.TAIL_LONG ? "" : "feral long-tailed bodies";
+				case FITS_ARM_WINGS_EXCLUSIVE -> clothingOwner.getArmTypeTags().contains(BodyPartTag.ARM_WINGS) ? "" : "arm-wings";
+				case FITS_FEATHERED_ARM_WINGS_EXCLUSIVE -> clothingOwner.getArmTypeTags().contains(BodyPartTag.ARM_WINGS_FEATHERED) ? "" : "feathered arm-wings";
+				case FITS_LEATHERY_ARM_WINGS_EXCLUSIVE -> clothingOwner.getArmTypeTags().contains(BodyPartTag.ARM_WINGS_LEATHERY) ? "" : "leathery arm-wings";
+				case FITS_HOOFS_EXCLUSIVE -> clothingOwner.getLegType().getFootType()==FootType.HOOFS ? "" : "hoofs";
+				case FITS_TALONS_EXCLUSIVE -> clothingOwner.getLegType().getFootType()==FootType.TALONS ? "" : "talons";
+				default -> "";
+			};
+			if(!reasonByTag.isEmpty())
+				return "The " + getName() + (plural ? " are" : " is") + " only suitable for " + reasonByTag
+						+ ", and as such, [npc.name] cannot wear " + (plural ? "them." : "it.");
 		}
 		if(clothingOwner.hasPenisIgnoreDildo() && tags.contains(ItemTag.REQUIRES_NO_PENIS)) {
-			return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NameHasFull] a penis, which is blocking [npc.herHim] from wearing the "+this.getName()+"!"));
+			return "[npc.NameHasFull] a penis, which is blocking [npc.herHim] from wearing the " + getName() + "!";
 		}
 		if(clothingOwner.hasDildo() && tags.contains(ItemTag.REQUIRES_NO_PENIS)) {
-			return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NameHasFull] equipped a dildo, which is blocking [npc.herHim] from wearing the "+this.getName()+"!"));
+			return "[npc.NameHasFull] equipped a dildo, which is blocking [npc.herHim] from wearing the " + getName() + "!";
 		}
 		if(!clothingOwner.hasPenisIgnoreDildo() && tags.contains(ItemTag.REQUIRES_PENIS)) {
-			return new Value<>(false, UtilText.parse(clothingOwner, "[npc.Name] [npc.do]n't have a penis, so [npc.she] can't wear the "+this.getName()+"!"));
+			return "[npc.Name] [npc.do]n't have a penis, so [npc.she] can't wear the " + getName() + "!";
 		}
 		if(clothingOwner.hasVagina() && tags.contains(ItemTag.REQUIRES_NO_VAGINA)) {
-			return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NameHasFull] a vagina, which is blocking [npc.herHim] from wearing the "+this.getName()+"!"));
+			return "[npc.NameHasFull] a vagina, which is blocking [npc.herHim] from wearing the " + getName() + "!";
 		}
 		if(!clothingOwner.hasVagina() && tags.contains(ItemTag.REQUIRES_VAGINA)) {
-			return new Value<>(false, UtilText.parse(clothingOwner, "[npc.Name] [npc.do]n't have a vagina, so [npc.she] can't wear the "+this.getName()+"!"));
+			return "[npc.Name] [npc.do]n't have a vagina, so [npc.she] can't wear the " + getName() + "!";
 		}
 		if(!clothingOwner.isBreastFuckableNipplePenetration() && tags.contains(ItemTag.REQUIRES_FUCKABLE_NIPPLES)) {
-			return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NamePos] nipples are not fuckable, so [npc.she] can't wear the "+this.getName()+"!"));
+			return "[npc.NamePos] nipples are not fuckable, so [npc.she] can't wear the " + getName() + "!";
 		}
 		if(clothingOwner.getBody().getBodyMaterial().isRequiresPiercing()) {
-			if(slot==InventorySlot.PIERCING_EAR && !clothingOwner.isPiercedEar()){
-				return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NamePos] ears are not pierced, so [npc.she] can't wear the "+this.getName()+"!"));
-		
-			} else if(slot==InventorySlot.PIERCING_LIP && !clothingOwner.isPiercedLip()){
-				return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NamePos] lips are not pierced, so [npc.she] can't wear the "+this.getName()+"!"));
-				
-			} else if(slot==InventorySlot.PIERCING_NIPPLE && !clothingOwner.isPiercedNipple()){
-				return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NamePos] nipples are not pierced, so [npc.she] can't wear the "+this.getName()+"!"));
-				
-			} else if(slot==InventorySlot.PIERCING_NOSE && !clothingOwner.isPiercedNose()){
-				return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NamePos] nose is not pierced, so [npc.she] can't wear the "+this.getName()+"!"));
-				
-			} else if(slot==InventorySlot.PIERCING_PENIS && !clothingOwner.isPiercedPenis()){
-				return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NamePos] penis is not pierced, so [npc.she] can't wear the "+this.getName()+"!"));
-				
-			} else if(slot==InventorySlot.PIERCING_STOMACH && !clothingOwner.isPiercedNavel()){
-				return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NamePos] navel is not pierced, so [npc.she] can't wear the "+this.getName()+"!"));
-				
-			} else if(slot==InventorySlot.PIERCING_TONGUE && !clothingOwner.isPiercedTongue()){
-				return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NamePos] tongue is not pierced, so [npc.she] can't wear the "+this.getName()+"!"));
-				
-			} else if(slot==InventorySlot.PIERCING_VAGINA && !clothingOwner.isPiercedVagina()){
-				return new Value<>(false, UtilText.parse(clothingOwner, "[npc.NamePos] vagina is not pierced, so [npc.she] can't wear the "+this.getName()+"!"));
-			}
+			String reasonByPiercedSlot = switch(slot) {
+				case PIERCING_EAR -> clothingOwner.isPiercedEar() ? "" : "ears are";
+				case PIERCING_LIP -> clothingOwner.isPiercedLip() ? "" : "lips are";
+				case PIERCING_NIPPLE -> clothingOwner.isPiercedNipple() ? "" : "nipples are";
+				case PIERCING_NOSE -> clothingOwner.isPiercedNose() ? "" : "nose is";
+				case PIERCING_PENIS -> clothingOwner.isPiercedPenis() ? "" : "penis is";
+				case PIERCING_STOMACH -> clothingOwner.isPiercedNavel() ? "" : "navel is";
+				case PIERCING_TONGUE -> clothingOwner.isPiercedTongue() ? "" : "tongue is";
+				case PIERCING_VAGINA -> clothingOwner.isPiercedVagina() ? "" : "vagina is";
+				default -> "";
+			};
+			if(!reasonByPiercedSlot.isEmpty())
+				return "[npc.NamePos] " + reasonByPiercedSlot + " not pierced, so [npc.she] can't wear the " + getName() + "!";
 		}
-		if(slot==InventorySlot.PIERCING_PENIS && !clothingOwner.hasPenisIgnoreDildo()){
-			return new Value<>(false, UtilText.parse(clothingOwner, "[npc.Name] [npc.do] not have a penis, so [npc.she] can't wear the "+this.getName()+"!"));
-			
-		} else if(slot==InventorySlot.PIERCING_VAGINA && !clothingOwner.hasVagina()){
-			return new Value<>(false, UtilText.parse(clothingOwner, "[npc.Name] [npc.do] not have a vagina, so [npc.she] can't wear the "+this.getName()+"!"));
-		}
-		
-		if (slot == InventorySlot.WINGS && clothingOwner.getWingType()==WingType.NONE) {
-			return new Value<>(false, UtilText.parse(clothingOwner, "[npc.Name] [npc.do] not have any wings, so [npc.she] can't wear the "+this.getName()+"!"));
-		}
-		if (slot == InventorySlot.HORNS && clothingOwner.getHornType().equals(HornType.NONE)) {
-			return new Value<>(false, UtilText.parse(clothingOwner, "[npc.Name] [npc.do] not have any horns, so [npc.she] can't wear the "+this.getName()+"!"));
-		}
-		if (slot == InventorySlot.TAIL && clothingOwner.getTailType()==TailType.NONE) {
-			return new Value<>(false, UtilText.parse(clothingOwner, "[npc.Name] [npc.do] not have a tail, so [npc.she] can't wear the "+this.getName()+"!"));
-		}
-		return new Value<>(true, "");
+		return switch(slot) {
+			case PIERCING_PENIS -> clothingOwner.hasPenisIgnoreDildo() ? ""
+					: "[npc.Name] [npc.do] not have a penis, so [npc.she] can't wear the " + getName() + "!";
+			case PIERCING_VAGINA -> clothingOwner.hasVagina() ? ""
+					: "[npc.Name] [npc.do] not have a vagina, so [npc.she] can't wear the " + getName() + "!";
+			case WINGS -> clothingOwner.getWingType()!=WingType.NONE ? ""
+					: "[npc.Name] [npc.do] not have any wings, so [npc.she] can't wear the " + getName() + "!";
+			case HORNS -> clothingOwner.getHornType()!=HornType.NONE ? ""
+					: "[npc.Name] [npc.do] not have any horns, so [npc.she] can't wear the " + getName() + "!";
+			case TAIL -> clothingOwner.getTailType()!=TailType.NONE ? ""
+					: "[npc.Name] [npc.do] not have a tail, so [npc.she] can't wear the " + getName() + "!";
+			default -> "";
+		};
 	}
 
 	public List<BlockedParts> getBlockedPartsMap(GameCharacter character, InventorySlot slotEquippedTo) {

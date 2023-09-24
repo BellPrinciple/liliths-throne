@@ -1215,8 +1215,11 @@ public class CharacterInventory implements XMLSaving {
 			if (block != null && Collections.disjoint(block.getRequiredTags(), c.getItemTags())) { // Race:
 				transformationIncompatible(character, c, clothingToRemove, UtilText.parse(character, block.getDescription()));
 				
-			} else if (!c.isCanBeEquipped(character, c.getSlotEquippedTo())) { // Clothing specials:
-				transformationIncompatible(character, c, clothingToRemove, c.getCannotBeEquippedText(character, c.getSlotEquippedTo()));
+			} else {
+				String clothingReasonUnequipable = c.getReasonUnequipable(character, c.getSlotEquippedTo());
+				if(!clothingReasonUnequipable.isEmpty()) {
+					transformationIncompatible(character, c, clothingToRemove, clothingReasonUnequipable);
+				}
 			}
 		}
 		
@@ -1303,9 +1306,9 @@ public class CharacterInventory implements XMLSaving {
 			equipTextSB.append("[style.colourBad(" + UtilText.parse(characterClothingOwner, block.getDescription()) + ")]");
 			return false;
 		}
-		
-		if (!newClothing.isAbleToBeEquipped(characterClothingOwner, slotToEquipInto).getKey()) {
-			equipTextSB.append("[style.colourBad(" + newClothing.isAbleToBeEquipped(characterClothingOwner, slotToEquipInto).getValue() + ")]");
+		String reasonUnequippable = newClothing.getReasonUnequipable(characterClothingOwner, slotToEquipInto);
+		if (!reasonUnequippable.isEmpty()) {
+			equipTextSB.append("[style.colourBad(" + UtilText.parse(characterClothingOwner, reasonUnequippable) + ")]");
 			return false;
 		}
 
