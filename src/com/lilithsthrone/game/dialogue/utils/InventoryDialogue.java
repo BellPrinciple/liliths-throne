@@ -983,65 +983,21 @@ public class InventoryDialogue {
 		
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
+			if(index==0)
 				return getCloseInventoryResponse();
-			}
-			if(responseTab==0) {
+			if(responseTab==0)
 				return INVENTORY_MENU.getResponse(responseTab, index);
+			if(inventoryNPC==null) {
+				if(Objects.requireNonNull(interactionType) == InventoryInteraction.SEX)
+					return getSexResponse(item, index, true);
+				return getGroundResponse(item, responseTab, index);
 			}
-			// ****************************** ITEM BELONGS TO THE PLAYER ******************************
-			if(owner != null && owner.isPlayer()) {
-				
-				// ****************************** Interacting with the ground ******************************
-				if(inventoryNPC == null) {
-					switch(interactionType) {
-						case SEX:
-							return getSexResponse(item, index, true);
-						default:
-							return getGroundResponse(item, responseTab, index);
-					}
-					
-				// ****************************** Interacting with an NPC ******************************
-				} else {
-					switch(interactionType) {
-						case COMBAT:
-							return getCombatResponse(item, index);
-						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
-							return getManagementResponse(item, index);
-						case SEX:
-							return getSexResponse(item, index, false);
-						case TRADING:
-							return getTradingResponse(item, responseTab, index);
-					}
-				}
-				
-			// ****************************** ITEM DOES NOT BELONG TO PLAYER ******************************
-				
-			} else {
-				// ****************************** Interacting with the ground ******************************
-				if(inventoryNPC == null) {
-					switch(interactionType) {
-						case SEX:
-							return getSexResponse(item, index, true);
-						default:
-							return getGroundResponse(item, responseTab, index);
-					}
-					
-				// ****************************** Interacting with an NPC ******************************
-				} else {
-					switch(interactionType) {
-						case COMBAT:
-							return getCombatResponse(item, index);
-						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
-							return getManagementResponse(item, index);
-						case SEX:
-							return getSexResponse(item, index, false);
-						case TRADING:
-							return getTradingResponse(item, responseTab, index);
-					}
-				}
-			}
-			return null;
+			return switch(interactionType) {
+				case COMBAT -> getCombatResponse(item, index);
+				case FULL_MANAGEMENT, CHARACTER_CREATION -> getManagementResponse(item, index);
+				case SEX -> getSexResponse(item, index, false);
+				case TRADING -> getTradingResponse(item, responseTab, index);
+			};
 		}
 
 		@Override
@@ -1106,66 +1062,21 @@ public class InventoryDialogue {
 		
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
+			if(index==0)
 				return getCloseInventoryResponse();
-			}
-			if(responseTab==0) {
+			if(responseTab==0)
 				return INVENTORY_MENU.getResponse(responseTab, index);
+			if(inventoryNPC==null) {
+				if(interactionType==InventoryInteraction.SEX)
+					return getSexResponse(weapon, index, true);
+				return getGroundResponse(weapon, responseTab, index);
 			}
-			
-			// ****************************** ITEM BELONGS TO THE PLAYER ******************************
-			if(owner != null && owner.isPlayer()) {
-				
-				// ****************************** Interacting with the ground ******************************
-				if(inventoryNPC == null) {
-					switch(interactionType) {
-						case SEX:
-							return getSexResponse(weapon, index, true);
-						default:
-							return getGroundResponse(weapon, responseTab, index);
-					}
-					
-				// ****************************** Interacting with an NPC ******************************
-				} else {
-					switch(interactionType) {
-						case COMBAT:
-							return getCombatResponse(weapon, index);
-						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
-							return getManagementResponse(weapon, index);
-						case SEX:
-							return getSexResponse(weapon, index, false);
-						case TRADING:
-							return getTradingResponse(weapon, responseTab, index);
-					}
-				}
-				
-			// ****************************** ITEM DOES NOT BELONG TO PLAYER ******************************
-				
-			} else {
-				// ****************************** Interacting with the ground ******************************
-				if(inventoryNPC == null) {
-					switch(interactionType) {
-						case SEX:
-							return getSexResponse(weapon, index, true);
-						default:
-							return getGroundResponse(weapon, responseTab, index);
-					}
-					
-				// ****************************** Interacting with an NPC ******************************
-				} else {
-					switch(interactionType) {
-						case COMBAT:
-							return getCombatResponse(weapon, index);
-						case FULL_MANAGEMENT:  case CHARACTER_CREATION:
-							return getManagementResponse(weapon, index);
-						case SEX:
-							return getSexResponse(weapon, index, false);
-						case TRADING:
-							return getTradingResponse(weapon, responseTab, index);
-					}
-				}
-			}
-			return null;
+			return switch(interactionType) {
+				case COMBAT -> getCombatResponse(weapon, index);
+				case FULL_MANAGEMENT, CHARACTER_CREATION -> getManagementResponse(weapon, index);
+				case SEX -> getSexResponse(weapon, index, false);
+				case TRADING -> getTradingResponse(weapon, responseTab, index);
+			};
 		}
 		
 		@Override
@@ -1237,70 +1148,23 @@ public class InventoryDialogue {
 		
 		@Override
 		public Response getResponse(int responseTab, int index) {
-			if (index == 0) {
+			if(index==0)
 				return getCloseInventoryResponse();
-			}
-			if(responseTab==0) {
+			if(responseTab==0)
 				return INVENTORY_MENU.getResponse(responseTab, index);
+			if(inventoryNPC == null) {
+				if(owner==null || !owner.isPlayer() && interactionType==InventoryInteraction.CHARACTER_CREATION)
+					return getClothingResponseDuringCharacterCreation(responseTab, index);
+				if(interactionType==InventoryInteraction.SEX)
+					return getSexResponse(clothing, index, true);
+				return getGroundResponse(clothing, responseTab, index);
 			}
-			
-			// ****************************** ITEM BELONGS TO THE PLAYER ******************************
-			if(owner != null && owner.isPlayer()) {
-				
-				// ****************************** Interacting with the ground ******************************
-				if(inventoryNPC == null) {
-
-					switch(interactionType) {
-						case SEX:
-							return getSexResponse(clothing, index, true);
-						default:
-							return getGroundResponse(clothing, responseTab, index);
-					}
-					
-				// ****************************** Interacting with an NPC ******************************
-				} else {
-					switch(interactionType) {
-						case COMBAT:
-							return getCombatResponse(clothing, index);
-						case FULL_MANAGEMENT: case CHARACTER_CREATION:
-							return getManagementResponse(clothing, index);
-						case SEX:
-							return getSexResponse(clothing, index, false);
-						case TRADING:
-							return getTradingResponse(clothing, responseTab, index);
-					}
-				}
-				
-			// ****************************** ITEM DOES NOT BELONG TO PLAYER ******************************
-				
-			} else {
-				// ****************************** Interacting with the ground ******************************
-				if(inventoryNPC == null) {
-					switch(interactionType) {
-						case CHARACTER_CREATION:
-							return getClothingResponseDuringCharacterCreation(responseTab, index);
-					case SEX:
-						return getSexResponse(clothing, index, true);
-						default:
-							return getGroundResponse(clothing, responseTab, index);
-					}
-					
-				// ****************************** Interacting with an NPC ******************************
-				} else {
-					switch(interactionType) {
-						case COMBAT:
-							return getCombatResponse(clothing, index);
-						case FULL_MANAGEMENT: case CHARACTER_CREATION:
-							return getManagementResponse(clothing, index);
-						case SEX:
-							return getSexResponse(clothing, index, false);
-						case TRADING:
-							return getTradingResponse(clothing, responseTab, index);
-					}
-				}
-			}
-			return null;
-			
+			return switch(interactionType) {
+				case COMBAT -> getCombatResponse(clothing, index);
+				case FULL_MANAGEMENT, CHARACTER_CREATION -> getManagementResponse(clothing, index);
+				case SEX -> getSexResponse(clothing, index, false);
+				case TRADING -> getTradingResponse(clothing, responseTab, index);
+			};
 		}
 
 		@Override
