@@ -31,6 +31,7 @@ import com.lilithsthrone.game.inventory.AbstractCoreType;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.ItemTag;
 import com.lilithsthrone.game.inventory.Rarity;
+import com.lilithsthrone.game.inventory.Weapon;
 import com.lilithsthrone.game.inventory.clothing.BodyPartClothingBlock;
 import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
@@ -40,7 +41,6 @@ import com.lilithsthrone.game.inventory.enchanting.TFPotency;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
-import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -49,7 +49,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.7.9
  * @author Innoxia
  */
-public abstract class AbstractWeapon extends AbstractCoreItem implements XMLSaving {
+public abstract class AbstractWeapon extends AbstractCoreItem implements Weapon {
 	
 	private AbstractWeaponType weaponType;
 	

@@ -13,11 +13,8 @@ import org.w3c.dom.Element;
 
 import com.lilithsthrone.game.character.attributes.AbstractAttribute;
 import com.lilithsthrone.game.dialogue.utils.UtilText;
-import com.lilithsthrone.game.inventory.enchanting.AbstractItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
-import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 
 /**
@@ -25,7 +22,7 @@ import com.lilithsthrone.utils.colours.Colour;
  * @version 0.3.9
  * @author Innoxia
  */
-public abstract class AbstractCoreItem implements XMLSaving {
+public abstract class AbstractCoreItem implements CoreItem {
 
 	protected String name;
 	protected String namePlural;
@@ -90,30 +87,13 @@ public abstract class AbstractCoreItem implements XMLSaving {
 		System.err.print("Error: Tried to import an abstract item!");
 		return null;
 	}
-	
-	public abstract AbstractCoreType getType();
 
 	// Enchantments:
-	
+
+	@Override
 	public boolean isAbleToBeEnchanted() {
 		return getEnchantmentEffect() != null
 				&& getEnchantmentItemType(null) != null;
-	}
-	
-	public int getEnchantmentLimit() {
-		return 100;
-	}
-	
-	public AbstractItemEffectType getEnchantmentEffect() {
-		return null;
-	}
-	
-	public AbstractCoreType getEnchantmentItemType(List<ItemEffect> effects) {
-		return null;
-	}
-	
-	public AbstractCoreItem enchant(TFModifier primaryModifier, TFModifier secondaryModifier) {
-		return this;
 	}
 	
 	// Other:
@@ -152,51 +132,58 @@ public abstract class AbstractCoreItem implements XMLSaving {
 		}
 		return result;
 	}
-	
+
+	@Override
 	public String getName() {
 		return name;
 	}
 	
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	@Override
 	public String getNamePlural() {
 		return namePlural;
 	}
 
+	@Override
 	public String getDisplayName(boolean withRarityColour) {
 		return Util.capitaliseSentence(UtilText.generateSingularDeterminer(name))+ " "+ (withRarityColour ? ("<span style='color: " + rarity.getColour().toWebHexString() + ";'>" + name + "</span>") : name);
 	}
-	
+
+	@Override
 	public String getDisplayNamePlural(boolean withRarityColour) {
 		return Util.capitaliseSentence((withRarityColour ? ("<span style='color: " + rarity.getColour().toWebHexString() + ";'>" + namePlural + "</span>") : namePlural));
 	}
-	
+
+	@Override
 	public String getSVGString() {
 		return SVGString;
 	}
 	
+	@Override
 	public void setSVGString(String SVGString) {
 		this.SVGString = SVGString;
 	}
 
-	public abstract String getDescription();
-
-	public abstract int getValue();
-	
+	@Override
 	public int getPrice(float modifier) {
 		return (int) (getValue() * modifier);
 	}
 
+	@Override
 	public void setRarity(Rarity rarity) {
 		this.rarity = rarity;
 	}
 
+	@Override
 	public Rarity getRarity() {
 		return rarity;
 	}
 
+	@Override
 	public Colour getColour(int index) {
 		try {
 			return colours.get(index);
@@ -205,14 +192,17 @@ public abstract class AbstractCoreItem implements XMLSaving {
 		}
 	}
 	
+	@Override
 	public List<Colour> getColours() {
 		return colours;
 	}
 
+	@Override
 	public void setColours(List<Colour> colours) {
 		this.colours = new ArrayList<>(colours);
 	}
 	
+	@Override
 	public void setColour(int index, Colour colour) {
 		if(colours.size()>index) {
 			colours.remove(index);
@@ -220,18 +210,22 @@ public abstract class AbstractCoreItem implements XMLSaving {
 		colours.add(index, colour);
 	}
 
+	@Override
 	public Map<AbstractAttribute, Integer> getAttributeModifiers() {
 		return attributeModifiers;
 	}
 
+	@Override
 	public void setAttributeModifiers(Map<AbstractAttribute, Integer> attributeModifiers) {
 		this.attributeModifiers = attributeModifiers;
 	}
 	
+	@Override
 	public List<ItemEffect> getEffects() {
 		return new ArrayList<ItemEffect>();
 	}
 
+	@Override
 	public Set<ItemTag> getItemTags() {
 		return itemTags;
 	}

@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
 
+import com.lilithsthrone.game.inventory.Item;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -26,7 +27,6 @@ import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
-import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.PresetColour;
 
 /**
@@ -34,7 +34,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.9.2
  * @author Innoxia
  */
-public abstract class AbstractItem extends AbstractCoreItem implements XMLSaving {
+public abstract class AbstractItem extends AbstractCoreItem implements Item {
 
 	protected AbstractItemType itemType;
 	protected List<ItemEffect> itemEffects;
