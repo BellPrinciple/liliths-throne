@@ -22,6 +22,10 @@ public final class UIMarkup implements Markup<UIMarkup> {
 	// -----------------------------------------------------------------------------------------------------------------
 	// Elements
 
+	public UIMarkup br() {
+		return child("br");
+	}
+
 	public Element paragraph() {
 		return element("p");
 	}
@@ -33,6 +37,10 @@ public final class UIMarkup implements Markup<UIMarkup> {
 
 	public Element div() {
 		return element("div");
+	}
+
+	public Element div(String cls) {
+		return element("div").attribute("class", cls);
 	}
 
 	public UIMarkup div(
@@ -47,6 +55,16 @@ public final class UIMarkup implements Markup<UIMarkup> {
 	public UIMarkup span(
 			Printable<UIMarkup> printable) {
 		return element("span", printable);
+	}
+
+	public UIMarkup bold(
+			Printable<UIMarkup> printable) {
+		return element("b", printable);
+	}
+
+	public UIMarkup italic(
+			Printable<UIMarkup> printable) {
+		return element("i", printable);
 	}
 
 	public UIMarkup element(
@@ -71,17 +89,96 @@ public final class UIMarkup implements Markup<UIMarkup> {
 		return attribute("class", cls);
 	}
 
-	public UIMarkup color(
+	public UIMarkup absolutePosition() {
+		return style("position:absolute;");
+	}
+
+	public UIMarkup relativePosition() {
+		return style("position:relative;");
+	}
+
+	public UIMarkup margin(
+			int top,
+			int right,
+			int bottom,
+			int left) {
+		return style("margin:", top, "px ", right, "px ", bottom, "px ", left, "px;");
+	}
+
+	public UIMarkup margin(
+			int vertical,
+			int horizontal) {
+		return style("margin:", horizontal, "px ", vertical, "px;");
+	}
+
+	public UIMarkup margin(
+			int px) {
+		return style("margin:", px, "px;");
+	}
+
+	public UIMarkup margin() {
+		return style("margin:2px;");
+	}
+
+	public UIMarkup border(
+			Colour colour,
+			int px) {
+		return style("border:", px, "px solid ", colour.toWebHexString(), ";");
+	}
+
+	public UIMarkup background(
 			Colour colour) {
-		return style("color:", colour.toWebHexString(), ";");
+		return style("background-color:", colour.toWebHexString(), ";");
+	}
+
+	public UIMarkup padding(
+			int px) {
+		return style("padding:", px, "px;");
+	}
+
+	public UIMarkup maxHeight(
+			int px) {
+		return style("maxHeight:", px, "px;");
+	}
+
+	public UIMarkup minHeight(
+			int px) {
+		return style("minHeight:", px, "px;");
+	}
+
+	public UIMarkup height(
+			int px) {
+		return style("height:", px, "px;");
+	}
+
+	public UIMarkup width(
+			int px) {
+		return style("width:", px, "px;");
+	}
+
+	public UIMarkup fullWidth() {
+		return style("width:100%;");
+	}
+
+	public UIMarkup halfWidth() {
+		return style("width:50%;");
 	}
 
 	public UIMarkup center() {
 		return style("text-align:center;");
 	}
 
+	public UIMarkup color(
+			Colour colour) {
+		return style("color:", colour.toWebHexString(), ";");
+	}
+
 	public UIMarkup bold() {
 		return style("font-weight:bold;");
+	}
+
+	public UIMarkup normal() {
+		return style("font-weight:normal;");
 	}
 
 	public UIMarkup italic() {
