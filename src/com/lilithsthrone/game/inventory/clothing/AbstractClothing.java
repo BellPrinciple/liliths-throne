@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.lilithsthrone.game.inventory.Clothing;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -51,7 +52,6 @@ import com.lilithsthrone.rendering.Pattern;
 import com.lilithsthrone.utils.Units;
 import com.lilithsthrone.utils.Util;
 import com.lilithsthrone.utils.Util.Value;
-import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -60,7 +60,7 @@ import com.lilithsthrone.utils.colours.PresetColour;
  * @version 0.3.9.5
  * @author Innoxia
  */
-public abstract class AbstractClothing extends AbstractCoreItem implements XMLSaving {
+public abstract class AbstractClothing extends AbstractCoreItem implements Clothing {
 
 	private ClothingType clothingType;
 	
