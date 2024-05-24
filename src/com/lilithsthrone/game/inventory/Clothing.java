@@ -112,7 +112,7 @@ public interface Clothing extends CoreItem {
 	boolean isHindersLegMovement(InventorySlot slotEquippedTo);
 	boolean isHindersArmMovement(InventorySlot slotEquippedTo);
 	boolean isDiscardedOnUnequip(InventorySlot slotEquippedTo);
-	Value<Boolean, String> isAbleToBeEquipped(GameCharacter clothingOwner, InventorySlot slot);
+	List<String> getReasonsUnequippable(GameCharacter clothingOwner, InventorySlot slot);
 	List<BlockedParts> getBlockedPartsMap(GameCharacter character, InventorySlot slotEquippedTo);
 	boolean isConcealsSlot(GameCharacter character, InventorySlot slotEquippedTo, InventorySlot slotToCheck);
 	boolean isConcealsCoverableArea(GameCharacter character, InventorySlot slotEquippedTo, CoverableArea area);
