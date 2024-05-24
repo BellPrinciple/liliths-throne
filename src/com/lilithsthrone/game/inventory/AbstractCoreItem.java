@@ -16,7 +16,6 @@ import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffectType;
 import com.lilithsthrone.game.inventory.enchanting.TFModifier;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.XMLSaving;
 import com.lilithsthrone.utils.colours.Colour;
 
 /**
@@ -24,7 +23,7 @@ import com.lilithsthrone.utils.colours.Colour;
  * @version 0.3.9
  * @author Innoxia
  */
-public abstract class AbstractCoreItem implements XMLSaving {
+public abstract class AbstractCoreItem implements CoreItem {
 
 	protected String name;
 	protected String namePlural;
