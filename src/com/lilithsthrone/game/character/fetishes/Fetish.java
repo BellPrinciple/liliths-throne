@@ -178,7 +178,7 @@ public interface Fetish {
 			"performing anal",
 			"fetish_anal_giving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -223,7 +223,7 @@ public interface Fetish {
 			"receiving anal",
 			"fetish_anal_receiving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -266,7 +266,7 @@ public interface Fetish {
 			"performing vaginal",
 			"fetish_vaginal_giving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -308,7 +308,7 @@ public interface Fetish {
 			"receiving vaginal",
 			"fetish_vaginal_receiving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -349,7 +349,7 @@ public interface Fetish {
 			"receiving oral",
 			"fetish_oral_receiving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -391,7 +391,7 @@ public interface Fetish {
 			"giving oral",
 			"fetish_oral_giving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -431,7 +431,7 @@ public interface Fetish {
 			"others' breasts",
 			"fetish_breasts_others",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -473,7 +473,7 @@ public interface Fetish {
 			"self breast play",
 			"fetish_breasts_self",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -513,7 +513,7 @@ public interface Fetish {
 			"being breast-fed",
 			"fetish_lactation_others",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -558,7 +558,7 @@ public interface Fetish {
 			"lactating",
 			"fetish_lactation_self",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -603,7 +603,7 @@ public interface Fetish {
 			"partner's legs",
 			"fetish_leg_lover",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -645,7 +645,7 @@ public interface Fetish {
 			"having legs used",
 			"fetish_strutter",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -686,7 +686,7 @@ public interface Fetish {
 			"using feet",
 			"fetish_foot_giving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -731,7 +731,7 @@ public interface Fetish {
 			"using partner's feet",
 			"fetish_foot_receiving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -774,7 +774,7 @@ public interface Fetish {
 			"performing armpit",
 			"fetish_armpit_giving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -815,7 +815,7 @@ public interface Fetish {
 			"receiving armpit",
 			"fetish_armpit_receiving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -854,7 +854,7 @@ public interface Fetish {
 			"using their cock",
 			"fetish_dick_dealer",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -896,7 +896,7 @@ public interface Fetish {
 			"others' cocks",
 			"fetish_cock_addict",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -936,7 +936,7 @@ public interface Fetish {
 			"cumming",
 			"fetish_cum",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -975,7 +975,7 @@ public interface Fetish {
 			"cum-play",
 			"fetish_cum_addict",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
-			PresetColour.CLOTHING_WHITE,
+			null,
 			null,
 			null,
 			null) {
@@ -1016,7 +1016,7 @@ public interface Fetish {
 			"deflowering",
 			"fetish_deflowering",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1055,7 +1055,7 @@ public interface Fetish {
 			"retaining vaginal virginity",
 			"fetish_virginity",
 			FetishExperience.BASE_VERY_RARE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1114,7 +1114,7 @@ public interface Fetish {
 			"masturbating",
 			"fetish_masturbation",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1152,7 +1152,7 @@ public interface Fetish {
 			"impregnating",
 			"fetish_impregnation",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1194,7 +1194,7 @@ public interface Fetish {
 			"being pregnant",
 			"fetish_pregnancy",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1234,7 +1234,7 @@ public interface Fetish {
 			"transforming others",
 			"fetish_transformation_giving",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1275,7 +1275,7 @@ public interface Fetish {
 			"being transformed",
 			"fetish_transformation_receiving",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1315,7 +1315,7 @@ public interface Fetish {
 //			"fetish_transformation_giving",
 			"fetish_kink_giving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1357,7 +1357,7 @@ public interface Fetish {
 //			"fetish_transformation_receiving",
 			"fetish_kink_receiving",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1399,7 +1399,7 @@ public interface Fetish {
 			"denying orgasms",
 			"fetish_denial",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1440,7 +1440,7 @@ public interface Fetish {
 			"being denied",
 			"fetish_denial_self",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1479,7 +1479,7 @@ public interface Fetish {
 			"acting dominantly",
 			"fetish_dominant",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1522,7 +1522,7 @@ public interface Fetish {
 			"acting submissively",
 			"fetish_submissive",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1562,7 +1562,7 @@ public interface Fetish {
 			"incestuous sex",
 			"fetish_incest",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1606,7 +1606,7 @@ public interface Fetish {
 			"inflicting pain",
 			"fetish_sadist",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1646,7 +1646,7 @@ public interface Fetish {
 			"pain and humiliation",
 			"fetish_masochist",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1680,7 +1680,7 @@ public interface Fetish {
 			"raping",
 			"fetish_noncon_dom",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1724,7 +1724,7 @@ public interface Fetish {
 			"being raped",
 			"fetish_noncon_sub",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1766,7 +1766,7 @@ public interface Fetish {
 			"applying bondage",
 			"fetish_bondage_applier",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			Util.newArrayListOfValues(PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_GOLD, PresetColour.CLOTHING_GOLD),
+			null,
 			null,
 			null,
 			null) {
@@ -1801,7 +1801,7 @@ public interface Fetish {
 			"being bound",
 			"fetish_bondage_victim",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			Util.newArrayListOfValues(PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_GOLD, PresetColour.CLOTHING_GOLD),
+			null,
 			null,
 			null,
 			null) {
@@ -1833,7 +1833,7 @@ public interface Fetish {
 			"exposing themself",
 			"fetish_exhibitionist",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1880,7 +1880,7 @@ public interface Fetish {
 			"watching others",
 			"fetish_voyeurist",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -1921,7 +1921,7 @@ public interface Fetish {
 			"being a bimbo",
 			null,
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -2000,7 +2000,7 @@ public interface Fetish {
 			"cross dressing",
 			"fetish_cross_dresser",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -2037,7 +2037,7 @@ public interface Fetish {
 			"deep penetrations",
 			"fetish_size_queen",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			Util.newArrayListOfValues(PresetColour.BASE_YELLOW, PresetColour.BASE_PINK),
+			null,
 			null,
 			null,
 			null) {
@@ -2074,7 +2074,7 @@ public interface Fetish {
 			"being a switch",
 			"fetish_switch",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -2110,7 +2110,7 @@ public interface Fetish {
 			"breeding",
 			"fetish_breeder",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -2146,7 +2146,7 @@ public interface Fetish {
 			"sadomasochism",
 			"fetish_sadomasochist",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -2182,7 +2182,7 @@ public interface Fetish {
 			"lusty maiden",
 			"fetish_lusty_maiden",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
-			PresetColour.GENERIC_ARCANE,
+			null,
 			null,
 			null,
 			null) {
@@ -2215,7 +2215,6 @@ public interface Fetish {
 		private final String shortDescriptor;
 		private final int experienceGainFromSexAction;
 		private final String SVGString;
-		private final List<Colour> colourShades;
 		private static final List<String> perkRequirementsList = new ArrayList<>();
 		private static final String bimboString = loadSVGString("fetish_bimbo", "FETISH_BIMBO", List.of(PresetColour.BASE_PINK));
 		private static final String broString = loadSVGString("fetish_bro", "FETISH_BRO", List.of(PresetColour.BASE_BLUE));
@@ -2225,27 +2224,7 @@ public interface Fetish {
 				String shortDescriptor,
 				String pathName,
 				FetishExperience experienceGainFromSexAction,
-				Colour colourShades,
-				Void attributeModifiers,
-				Void extraEffects,
-				Void fetishesForAutomaticUnlock) {
-			this(renderingPriority,
-					name,
-					shortDescriptor,
-					pathName,
-					experienceGainFromSexAction,
-					Util.newArrayListOfValues(colourShades),
-					attributeModifiers,
-					extraEffects,
-					fetishesForAutomaticUnlock);
-		}
-		Core(
-				int renderingPriority,
-				String name,
-				String shortDescriptor,
-				String pathName,
-				FetishExperience experienceGainFromSexAction,
-				List<Colour> colourShades,
+				Void colourShades,
 				Void attributeModifiers,
 				Void extraEffects,
 				Void fetishesForAutomaticUnlock) {
@@ -2253,8 +2232,7 @@ public interface Fetish {
 			this.name = name;
 			this.shortDescriptor = shortDescriptor;
 			this.experienceGainFromSexAction = experienceGainFromSexAction.getExperience();
-			this.colourShades = colourShades;
-			SVGString = pathName==null || pathName.isEmpty() ? "" : loadSVGString(pathName, getId(), colourShades);
+			SVGString = pathName==null || pathName.isEmpty() ? "" : loadSVGString(pathName, getId(), getColourShades());
 		}
 		@Override
 		public final String getId() {
@@ -2460,8 +2438,13 @@ public interface Fetish {
 			};
 		}
 		@Override
-		public List<Colour> getColourShades() {
-			return colourShades;
+		public final List<Colour> getColourShades() {
+			return switch(this) {
+				case CUM_ADDICT -> List.of(PresetColour.CLOTHING_WHITE);
+				case BONDAGE_APPLIER, BONDAGE_VICTIM -> List.of(PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_GOLD, PresetColour.CLOTHING_GOLD);
+				case SIZE_QUEEN -> List.of(PresetColour.BASE_YELLOW, PresetColour.BASE_PINK);
+				default -> List.of(PresetColour.GENERIC_ARCANE);
+			};
 		}
 		@Override
 		public String getSVGString(GameCharacter owner) {
