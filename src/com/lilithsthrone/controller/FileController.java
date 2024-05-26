@@ -202,13 +202,11 @@ public class FileController {
 			} else {
 				id = "OVERWRITE_"+fileIdentifier+"_DISABLED";
 				if (MainController.document.getElementById(id) != null) {
-					MainController.addEventListener(MainController.document, id, "mousemove", MainController.moveTooltipListener, false);
-					MainController.addEventListener(MainController.document, id, "mouseleave", MainController.hideTooltipListener, false);
 					TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Overwrite (Disabled)",
 							(!Main.game.isStarted()
 									?"You need to have started a game before you can overwrite a save!"
 									:"You cannot overwrite save files unless you are in a tile's default scene!"));
-					MainController.addEventListener(MainController.document, id, "mouseenter", el2, false);
+					MainController.addTooltipListeners(id, el2);
 				}
 			}
 			id = "LOAD_"+fileIdentifier;

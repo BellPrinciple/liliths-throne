@@ -1144,7 +1144,13 @@ public class MainController implements Initializable {
 	}
 	
 	static void addEventListener(Document document, String ID, String type, EventListener listener, boolean useCapture) {
-		((EventTarget) document.getElementById(ID)).addEventListener(type, listener, useCapture);
+		Object element = document.getElementById(ID);
+		if(element instanceof EventTarget target)
+			addEventListener(document, ID, target, type, listener, useCapture);
+	}
+
+	private static void addEventListener(Document document, String ID, EventTarget target, String type, EventListener listener, boolean useCapture) {
+		target.addEventListener(type, listener, useCapture);
 		EventListenerDataMap.get(document).add(new EventListenerData(ID, type, listener, useCapture));
 	}
 	
@@ -1153,14 +1159,20 @@ public class MainController implements Initializable {
 	}
 	
 	public static void addTooltipListeners(String id, EventListener tooltip, EventListener click, boolean capture) {
-		addEventListener(document, id, "mousemove", moveTooltipListener, false);
-		addEventListener(document, id, "mouseleave", hideTooltipListener, false);
-		addEventListener(document, id, "mouseenter", tooltip, false);
+		addTooltipListeners(document, id, tooltip, click, capture);
+	}
+
+	public static void addTooltipListeners(Document document, String id, EventListener tooltip, EventListener click, boolean capture) {
+		Object element = document.getElementById(id);
+		if(!(element instanceof EventTarget target))
+			return;
+		addEventListener(document, id, target, "mousemove", moveTooltipListener, false);
+		addEventListener(document, id, target, "mouseleave", hideTooltipListener, false);
+		addEventListener(document, id, target, "mouseenter", tooltip, false);
 		if(click !=null) {
-			addEventListener(document, id, "click", click, capture);
+			addEventListener(document, id, target, "click", click, capture);
 		}
 	}
-	
 	public static Document document, documentButtonsLeft, documentButtonsRight, documentAttributes, documentRight, documentInventory, documentMap, documentMapTitle;
 	private boolean debugAllowListeners = true;
 	/**
@@ -1313,14 +1325,14 @@ public class MainController implements Initializable {
 		if (Main.game.isStarted() && DicePoker.progress>0) {
 			for (int i = 0; i<DicePoker.getPlayerDice().size(); i++) {
 				String id = "DICE_PLAYER_"+i;
-				if ((MainController.document.getElementById(id)) != null) {
+				if ((document.getElementById(id)) != null) {
 					int finalI = i;
-					((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
+					((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
 						if(DicePoker.isAbleToSelectReroll()) {
 							DicePoker.setReroll(DicePoker.getPlayerDice().get(finalI));
 						}
 					}, false);
-					MainController.addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
+					addTooltipListeners(id, new TooltipInformationEventListener().setInformation(
 							"Mark for reroll",
 							DicePoker.isAbleToSelectReroll()?"":"[style.italicsBad(You cannot mark your dice for reroll in this scene!)]"));
 				}
@@ -1760,23 +1772,14 @@ public class MainController implements Initializable {
 		
 		// Responses:
 		for (int i = 0; i < RESPONSE_COUNT; i++) {
-			String id = "option_" + i;
-			if (((EventTarget) document.getElementById(id)) != null) {
-				SetContentEventListener el = new SetContentEventListener().setIndex(i);
-				((EventTarget) document.getElementById(id)).addEventListener("click", el, false);
-				
-				addEventListener(document, id, "mousemove", responseTooltipListener, false);
-				addEventListener(document, id, "mouseleave", hideTooltipListener, false);
-				TooltipResponseDescriptionEventListener el2 = new TooltipResponseDescriptionEventListener().setIndex(i);
-				addEventListener(document, id, "mouseenter", el2, false);
-			}
+			addTooltipListeners(
+					"option_" + i,
+					new TooltipResponseDescriptionEventListener().setIndex(i),
+					new SetContentEventListener().setIndex(i),
+					false);
 		}
-		if (((EventTarget) document.getElementById("switch_right")) != null) {
-			addEventListener(document, "switch_right", "click", nextResponsePageListener, false);
-		}
-		if (((EventTarget) document.getElementById("switch_left")) != null) {
-			addEventListener(document, "switch_left", "click", previousResponsePageListener, false);
-		}
+		addEventListener(document, "switch_right", "click", nextResponsePageListener, false);
+		addEventListener(document, "switch_left", "click", previousResponsePageListener, false);
 	}
 	
 	private static void setResponseTabListeners(int responsePageCounter) {
@@ -1790,7 +1793,7 @@ public class MainController implements Initializable {
 	
 	static void setInventoryPageLeft(int i) {
 		String id = "INV_PAGE_LEFT_"+i;
-		if (((EventTarget) document.getElementById(id)) != null) {
+		if(document.getElementById(id) != null) {
 			if(i!=5 || Main.game.getPlayer().isCarryingQuestItems()) {
 				((EventTarget) document.getElementById(id)).addEventListener("click", e -> {
 					RenderingEngine.setPageLeft(i);
@@ -1798,17 +1801,14 @@ public class MainController implements Initializable {
 				}, false);
 			}
 			if(i==5) {
-				MainController.addEventListener(MainController.document, id, "mousemove", MainController.moveTooltipListener, false);
-				MainController.addEventListener(MainController.document, id, "mouseleave", MainController.hideTooltipListener, false);
-				TooltipInformationEventListener el2 =  new TooltipInformationEventListener().setInformation("Unique Items", "");
-				MainController.addEventListener(MainController.document, id, "mouseenter", el2, false);
+				addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Unique Items", ""));
 			}
 		}
 	}
 	
 	static void setInventoryPageRight(int i) {
 		String id = "INV_PAGE_RIGHT_"+i;
-		if (((EventTarget) document.getElementById(id)) != null) {
+		if(document.getElementById(id) != null) {
 			if(i!=5
 				|| (InventoryDialogue.getInventoryNPC()==null
 					?Main.game.getPlayer().getCell().getInventory().isAnyQuestItemPresent()
@@ -1819,10 +1819,7 @@ public class MainController implements Initializable {
 				}, false);
 			}
 			if(i==5) {
-				MainController.addEventListener(MainController.document, id, "mousemove", MainController.moveTooltipListener, false);
-				MainController.addEventListener(MainController.document, id, "mouseleave", MainController.hideTooltipListener, false);
-				TooltipInformationEventListener el2 =  new TooltipInformationEventListener().setInformation("Unique Items", "");
-				MainController.addEventListener(MainController.document, id, "mouseenter", el2, false);
+				addTooltipListeners(id, new TooltipInformationEventListener().setInformation("Unique Items", ""));
 			}
 		}
 	}
@@ -1830,43 +1827,43 @@ public class MainController implements Initializable {
 	private void manageButtonLeftListeners() {
 		documentButtonsLeft = (Document) webEngineButtonsLeft.executeScript("document");
 		EventListenerDataMap.put(documentButtonsLeft, new ArrayList<>());
-		
+		Map<KeyboardAction, KeyCodeWithModifiers> hotkeyMapPrimary = Main.getProperties().hotkeyMapPrimary;
 		KeyCodeWithModifiers hotKey;
-		if(((EventTarget) documentButtonsLeft.getElementById("mainMenu"))!=null) {
-			addEventListener(documentButtonsLeft, "mainMenu", "click", menuButtonListener, true);
-			MainController.addEventListener(documentButtonsLeft, "mainMenu", "mousemove", MainController.moveTooltipListener, false);
-			MainController.addEventListener(documentButtonsLeft, "mainMenu", "mouseleave", MainController.hideTooltipListener, false);
-			hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.MENU);
-			MainController.addEventListener(documentButtonsLeft, "mainMenu", "mouseenter", new TooltipInformationEventListener().setInformation("Main Menu"+(hotKey==null?"":" ("+hotKey.getFullName()+")"), ""), false);
-		}
-		if(((EventTarget) documentButtonsLeft.getElementById("inventory"))!=null) {
-			addEventListener(documentButtonsLeft, "inventory", "click", inventoryButtonListener, true);
-			MainController.addEventListener(documentButtonsLeft, "inventory", "mousemove", MainController.moveTooltipListener, false);
-			MainController.addEventListener(documentButtonsLeft, "inventory", "mouseleave", MainController.hideTooltipListener, false);
-			hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.INVENTORY);
-			MainController.addEventListener(documentButtonsLeft, "inventory", "mouseenter", new TooltipInformationEventListener().setInformation("Inventory"+(hotKey==null?"":" ("+hotKey.getFullName()+")"), ""), false);
-		}
-		if(((EventTarget) documentButtonsLeft.getElementById("journal"))!=null) {
-			addEventListener(documentButtonsLeft, "journal", "click", journalButtonListener, true);
-			MainController.addEventListener(documentButtonsLeft, "journal", "mousemove", MainController.moveTooltipListener, false);
-			MainController.addEventListener(documentButtonsLeft, "journal", "mouseleave", MainController.hideTooltipListener, false);
-			hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.JOURNAL);
-			MainController.addEventListener(documentButtonsLeft, "journal", "mouseenter", new TooltipInformationEventListener().setInformation("Phone"+(hotKey==null?"":" ("+hotKey.getFullName()+")"), ""), false);
-		}
-		if(((EventTarget) documentButtonsLeft.getElementById("charactersPresent"))!=null) {
-			addEventListener(documentButtonsLeft, "charactersPresent", "click", charactersPresentButtonListener, true);
-			MainController.addEventListener(documentButtonsLeft, "charactersPresent", "mousemove", MainController.moveTooltipListener, false);
-			MainController.addEventListener(documentButtonsLeft, "charactersPresent", "mouseleave", MainController.hideTooltipListener, false);
-			hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.CHARACTERS);
-			MainController.addEventListener(documentButtonsLeft, "charactersPresent", "mouseenter", new TooltipInformationEventListener().setInformation("Characters Present"+(hotKey==null?"":" ("+hotKey.getFullName()+")"), ""), false);
-		}
-		if(((EventTarget) documentButtonsLeft.getElementById("mapZoom"))!=null) {
-			addEventListener(documentButtonsLeft, "mapZoom", "click", zoomButtonListener, true);
-			MainController.addEventListener(documentButtonsLeft, "mapZoom", "mousemove", MainController.moveTooltipListener, false);
-			MainController.addEventListener(documentButtonsLeft, "mapZoom", "mouseleave", MainController.hideTooltipListener, false);
-			hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.ZOOM);
-			MainController.addEventListener(documentButtonsLeft, "mapZoom", "mouseenter", new TooltipInformationEventListener().setInformation("Minimap Zoom"+(hotKey==null?"":" ("+hotKey.getFullName()+")"), ""), false);
-		}
+		hotKey = hotkeyMapPrimary.get(KeyboardAction.MENU);
+		addTooltipListeners(
+				documentButtonsLeft,
+				"mainMenu",
+				new TooltipInformationEventListener().setInformation("Main Menu"+(hotKey==null?"":" ("+hotKey.getFullName()+")"), ""),
+				menuButtonListener,
+				true);
+		hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.INVENTORY);
+		addTooltipListeners(
+				documentButtonsLeft,
+				"inventory",
+				new TooltipInformationEventListener().setInformation("Inventory"+(hotKey==null?"":" ("+hotKey.getFullName()+")"), ""),
+				inventoryButtonListener,
+				true);
+		hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.JOURNAL);
+		addTooltipListeners(
+				documentButtonsLeft,
+				"journal",
+				new TooltipInformationEventListener().setInformation("Phone"+(hotKey==null?"":" ("+hotKey.getFullName()+")"), ""),
+				journalButtonListener,
+				true);
+		hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.CHARACTERS);
+		addTooltipListeners(
+				documentButtonsLeft,
+				"charactersPresent",
+				new TooltipInformationEventListener().setInformation("Characters Present"+(hotKey==null?"":" ("+hotKey.getFullName()+")"), ""),
+				charactersPresentButtonListener,
+				true);
+		hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.ZOOM);
+		addTooltipListeners(
+				documentButtonsLeft,
+				"mapZoom",
+				new TooltipInformationEventListener().setInformation("Minimap Zoom"+(hotKey==null?"":" ("+hotKey.getFullName()+")"), ""),
+				zoomButtonListener,
+				true);
 	}
 	
 	private void manageButtonRightListeners() {
@@ -1877,15 +1874,10 @@ public class MainController implements Initializable {
 		boolean quickLoadAvailable = Main.isLoadGameAvailable(Main.getQuickSaveName()) && Main.game.isInNewWorld();
 		KeyCodeWithModifiers hotKey;
 		
-		if(((EventTarget) documentButtonsRight.getElementById("quickSave"))!=null) {
-			addEventListener(documentButtonsRight, "quickSave", "click", e -> {
-				Main.quickSaveGame();
-			}, false);
-		
-			MainController.addEventListener(documentButtonsRight, "quickSave", "mousemove", MainController.moveTooltipListener, false);
-			MainController.addEventListener(documentButtonsRight, "quickSave", "mouseleave", MainController.hideTooltipListener, false);
+		if(documentButtonsRight.getElementById("quickSave") !=null) {
+			EventListener onClick = e -> Main.quickSaveGame();
 			hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.QUICKSAVE);
-			MainController.addEventListener(documentButtonsRight, "quickSave", "mouseenter", new TooltipInformationEventListener().setInformation(
+			TooltipInformationEventListener tooltipListener = new TooltipInformationEventListener().setInformation(
 					quickSaveAvailable
 						?"[style.colourGood(Quick Save"+(hotKey==null?"":" ("+hotKey.getFullName()+")")+")]"
 						:"[style.colourBad(Quick Save"+(hotKey==null?"":" ("+hotKey.getFullName()+")")+")]",
@@ -1895,19 +1887,16 @@ public class MainController implements Initializable {
 							:"<br/>You can also quick save by pressing the '"+hotKey.getFullName()+"' key.")
 						+ (quickSaveAvailable
 							?"<br/>[style.italicsGood(You can save the game in this scene!)]"
-							:"<br/>[style.italicsBad("+Main.getQuickSaveUnavailabilityDescription()+")]")),
-					false);
+							:"<br/>[style.italicsBad("+Main.getQuickSaveUnavailabilityDescription()+")]"));
+			addTooltipListeners(documentButtonsRight, "quickSave", tooltipListener, onClick, false);
 		}
 		
-		if(((EventTarget) documentButtonsRight.getElementById("quickLoad"))!=null) {
-			addEventListener(documentButtonsRight, "quickLoad", "click", e -> {
+		if(documentButtonsRight.getElementById("quickLoad") != null) {
+			EventListener onClick = e -> {
 				Main.quickLoadGame();
-			}, false);
-		
-			MainController.addEventListener(documentButtonsRight, "quickLoad", "mousemove", MainController.moveTooltipListener, false);
-			MainController.addEventListener(documentButtonsRight, "quickLoad", "mouseleave", MainController.hideTooltipListener, false);
+			};
 			hotKey = Main.getProperties().hotkeyMapPrimary.get(KeyboardAction.QUICKLOAD);
-			MainController.addEventListener(documentButtonsRight, "quickLoad", "mouseenter", new TooltipInformationEventListener().setInformation(
+			TooltipInformationEventListener tooltipListener = new TooltipInformationEventListener().setInformation(
 					quickLoadAvailable
 						?"[style.colourGood(Quick Load"+(hotKey==null?"":" ("+hotKey.getFullName()+")")+")]"
 						:"[style.colourBad(Quick Load"+(hotKey==null?"":" ("+hotKey.getFullName()+")")+")]",
@@ -1917,54 +1906,46 @@ public class MainController implements Initializable {
 							:"<br/>You can also quick load by pressing the '"+hotKey.getFullName()+"' key.")
 						+(quickLoadAvailable
 							?"<br/>[style.italicsGood(Quick save file is detected for this character!)]"
-							:"<br/>[style.italicsBad(No quick save file detected for this character!)]")),
-					false);
+							:"<br/>[style.italicsBad(No quick save file detected for this character!)]"));
+			addTooltipListeners(documentButtonsRight, "quickLoad", tooltipListener, onClick, false);
 		}
 		
-		String id = "copyContent";
-		if(((EventTarget) documentButtonsRight.getElementById(id))!=null) {
-			MainController.addEventListener(documentButtonsRight, id, "click", copyDialogueButtonListener, false);
-			MainController.addEventListener(documentButtonsRight, id, "mousemove", moveTooltipListener, false);
-			MainController.addEventListener(documentButtonsRight, id, "mouseleave", hideTooltipListener, false);
-			
-
-			MainController.addEventListener(documentButtonsRight, id, "mouseenter", new TooltipInformationEventListener().setInformation(
+		if(documentButtonsRight.getElementById("copyContent") != null) {
+			TooltipInformationEventListener el = new TooltipInformationEventListener().setInformation(
 					Main.game.getCurrentDialogueNode().getLabel() == "" || Main.game.getCurrentDialogueNode().getLabel() == null ? "-" : Main.game.getCurrentDialogueNode().getLabel(),
 					"Click to copy the currently displayed dialogue to your clipboard. You can then paste the output into a text editor, save it as a <i>.html</i> file, then open that file in a browser to retain the game's formatting.<br/>"
-					+ "This scene was written by: <b>"+Main.game.getCurrentDialogueNode().getAuthor()+"</b>",
-					80), false);
-			
+							+ "This scene was written by: <b>"+Main.game.getCurrentDialogueNode().getAuthor()+"</b>",
+					80);
+			addTooltipListeners(documentButtonsRight, "copyContent", el, copyDialogueButtonListener, false);
 		}
 		
-		id = "exportCharacter";
-		if(((EventTarget) documentButtonsRight.getElementById(id))!=null) {
+		if(documentButtonsRight.getElementById("exportCharacter") != null) {
 			boolean exportAvailable = Main.game.isStarted()
 					&& (Main.game.getCurrentDialogueNode().equals(CharactersPresentDialogue.MENU)
 						|| Main.game.getCurrentDialogueNode().equals(PhoneDialogue.CHARACTER_APPEARANCE)
 						|| Main.game.getCurrentDialogueNode().equals(PhoneDialogue.CONTACTS_CHARACTER));
-			
-
-			MainController.addEventListener(documentButtonsRight, id, "mousemove", MainController.moveTooltipListener, false);
-			MainController.addEventListener(documentButtonsRight, id, "mouseleave", MainController.hideTooltipListener, false);
-			
+			EventListener onClick;
+			TooltipInformationEventListener tooltipListener;
 			if(exportAvailable) {
 				GameCharacter exportCharacter = Main.game.getCurrentDialogueNode().equals(PhoneDialogue.CHARACTER_APPEARANCE)?Main.game.getPlayer():CharactersPresentDialogue.characterViewed;
 				String name = "<span style='color:"+exportCharacter.getFemininity().getColour().toWebHexString()+";'>"+exportCharacter.getName(false)+"</span>";
-				MainController.addEventListener(documentButtonsRight, id, "click", e -> {
+				onClick = e -> {
 					Game.exportCharacter(exportCharacter);
 					Main.game.flashMessage(PresetColour.GENERIC_EXCELLENT, "Character Exported!");
-				}, false);
-				MainController.addEventListener(documentButtonsRight, id, "mouseenter", new TooltipInformationEventListener().setInformation(
+				};
+				tooltipListener = new TooltipInformationEventListener().setInformation(
 						"Export Character",
 						"Export "+name+" to the 'data/characters' folder. Exported characters can be imported at the auction block in Slaver Alley.",
-						48), false);
+						48);
 				
 			} else {
-				MainController.addEventListener(documentButtonsRight, id, "mouseenter", new TooltipInformationEventListener().setInformation(
+				onClick = null;
+				tooltipListener = new TooltipInformationEventListener().setInformation(
 						"Export Character",
 						"To export any character, including your own, you need to be viewing them in your phone's 'Characters Present' screen.",
-						48), false);
+						48);
 			}
+			addTooltipListeners(documentButtonsRight, "exportCharacter", tooltipListener, onClick, false);
 		}
 	}
 	
@@ -1973,100 +1954,73 @@ public class MainController implements Initializable {
 		EventListenerDataMap.put(documentAttributes, new ArrayList<>());
 		
 		// Map:
-		if (((EventTarget) documentAttributes.getElementById("upButton")) != null) {
-			addEventListener(documentAttributes, "upButton", "click", moveNorthListener, true);
-		}
-		if (((EventTarget) documentAttributes.getElementById("downButton")) != null) {
-			addEventListener(documentAttributes, "downButton", "click", moveSouthListener, true);
-		}
-		if (((EventTarget) documentAttributes.getElementById("leftButton")) != null) {
-			addEventListener(documentAttributes, "leftButton", "click", moveWestListener, true);
-		}
-		if (((EventTarget) documentAttributes.getElementById("rightButton")) != null) {
-			addEventListener(documentAttributes, "rightButton", "click", moveEastListener, true);
-		}
-		
+		addEventListener(documentAttributes, "upButton", "click", moveNorthListener, true);
+		addEventListener(documentAttributes, "downButton", "click", moveSouthListener, true);
+		addEventListener(documentAttributes, "leftButton", "click", moveWestListener, true);
+		addEventListener(documentAttributes, "rightButton", "click", moveEastListener, true);
+
 		// Inventory:
 		// For all equipped clothing slots:
 		String id;
 		for (InventorySlot invSlot : InventorySlot.values()) {
 			id = invSlot.toString() + "Slot";
-			if (!invSlot.isWeapon()) {
-				if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-					if(!RenderingEngine.ENGINE.isRenderingTattoosLeft() || invSlot.isJewellery()) {
-						InventorySelectedItemEventListener el = new InventorySelectedItemEventListener().setClothingEquipped(Main.game.getPlayer(), invSlot);
-						addEventListener(documentAttributes, id, "click", el, false);
-					}
-					addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-					addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
-					TooltipInventoryEventListener el2 = new TooltipInventoryEventListener().setInventorySlot(invSlot, Main.game.getPlayer());
-					addEventListener(documentAttributes, id, "mouseenter", el2, false);
+			if(documentAttributes.getElementById(id) != null) {
+				InventorySelectedItemEventListener onClick;
+				if(!invSlot.isWeapon()) {
+					onClick = RenderingEngine.ENGINE.isRenderingTattoosLeft() && !invSlot.isJewellery()
+							? null : new InventorySelectedItemEventListener().setClothingEquipped(Main.game.getPlayer(), invSlot);
+				} else {
+					onClick = new InventorySelectedItemEventListener().setWeaponEquipped(Main.game.getPlayer(),invSlot);
 				}
-			} else {
-				if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-					InventorySelectedItemEventListener el = new InventorySelectedItemEventListener().setWeaponEquipped(Main.game.getPlayer(),invSlot);
-					addEventListener(documentAttributes, id, "click", el, false);
-					addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-					addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
-					TooltipInventoryEventListener el2 = new TooltipInventoryEventListener().setInventorySlot(invSlot, Main.game.getPlayer());
-					addEventListener(documentAttributes, id, "mouseenter", el2, false);
-				}
+				TooltipInventoryEventListener tooltipListener = new TooltipInventoryEventListener().setInventorySlot(invSlot, Main.game.getPlayer());
+				addTooltipListeners(documentAttributes, id, tooltipListener, onClick, false);
 			}
 		}
 		
 		id = "TATTOO_SWITCH_LEFT";
-		if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-			((EventTarget) documentAttributes.getElementById(id)).addEventListener("click", e -> {
+		if(documentAttributes.getElementById(id) != null) {
+			EventListener onClick = e -> {
 				RenderingEngine.ENGINE.setRenderingTattoosLeft(!RenderingEngine.ENGINE.isRenderingTattoosLeft());
-				this.updateUILeftPanel();
-			}, false);
-			addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-			addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
+				updateUILeftPanel();
+			};
 			TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation(
 					!RenderingEngine.ENGINE.isRenderingTattoosLeft()
 						?"Switch to tattoos"
 						:"Switch to clothing",
 					"");
-			addEventListener(documentAttributes, id, "mouseenter", el2, false);
+			addTooltipListeners(documentAttributes, id, el2, onClick, false);
 		}
 		
 		id = "INVENTORY_ENCHANTMENT_LIMIT";
-		if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-			addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-			addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
+		if(documentAttributes.getElementById(id) != null) {
 			TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation(
 					Util.capitaliseSentence(Attribute.ENCHANTMENT_LIMIT.getName()),
 					"The total amount of weapon, clothing, and tattoo attribute enchantments you're able to handle without incurring massive penalties."
 					+" Your limit is calculated from: <i>10 + (level) + (perk gains)</i>");
-			addEventListener(documentAttributes, id, "mouseenter", el2, false);
+			addTooltipListeners(documentAttributes, id, el2, null, false);
 		}
 		
 		id = "INVENTORY_ENCHANTMENT_LIMIT_NPC";
-		if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-			addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-			addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
+		if(documentAttributes.getElementById(id) != null) {
 			TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation(
 					Util.capitaliseSentence(Attribute.ENCHANTMENT_LIMIT.getName()),
 					UtilText.parse(RenderingEngine.getCharacterToRender(),
 							"The total amount of weapon, clothing, and tattoo attribute enchantments you're able to handle without incurring massive penalties."
 								+" [npc.Her] maximum is calculated from: <i>10 + (level) + (perk gains)</i>"));
-			addEventListener(documentAttributes, id, "mouseenter", el2, false);
+			addTooltipListeners(documentAttributes, id, el2, null, false);
 		}
 
 		boolean dateKnown = Main.game.getDialogueFlags().hasFlag(DialogueFlagValue.knowsDate) || !Main.game.isInNewWorld();
 		
 		id = "DATE_DISPLAY_TOGGLE";
-		if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-			((EventTarget) documentAttributes.getElementById(id)).addEventListener("click", e -> {
+		if(documentAttributes.getElementById(id) != null) {
+			EventListener onClick = e -> {
 				if(!Main.game.isBadEnd()) {
 					Main.getProperties().setValue(PropertyValue.calendarDisplay, !Main.getProperties().hasValue(PropertyValue.calendarDisplay));
 					Main.saveProperties();
-					MainController.updateUI();
+					updateUI();
 				}
-			}, false);
-			
-			addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-			addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
+			};
 			String day = Main.game.getDateNow().getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
 			StringBuilder dateSB = new StringBuilder();
 			if(Main.game.isBadEnd()) {
@@ -2084,27 +2038,23 @@ public class MainController implements Initializable {
 			}
 			TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("Toggle Calendar Display",
 						dateSB.toString());
-			addEventListener(documentAttributes, id, "mouseenter", el2, false);
+			addTooltipListeners(documentAttributes, id, el2, onClick, false);
 		}
 		
 		id = "TWENTY_FOUR_HOUR_TIME_TOGGLE";
-		if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-			((EventTarget) documentAttributes.getElementById(id)).addEventListener("click", e -> {
+		if (documentAttributes.getElementById(id) != null) {
+			EventListener onClick = e -> {
 				if(!Main.game.isBadEnd()) {
 				    overrideAutoLocale();
 					Main.getProperties().setValue(PropertyValue.twentyFourHourTime, !Main.getProperties().hasValue(PropertyValue.twentyFourHourTime));
 					Main.saveProperties();
 					Units.FORMATTER.updateTimeFormat(Main.getProperties().hasValue(PropertyValue.autoLocale));
-					MainController.updateUI();
+					updateUI();
 				}
-			}, false);
+			};
 			
 			DayPeriod dp = DateAndTime.getDayPeriod(Main.game.getDateNow(), Game.DOMINION_LATITUDE, Game.DOMINION_LONGITUDE);
 			LocalDateTime[] ldt = DateAndTime.getTimeOfSolarElevationChange(Main.game.getDateNow(), SolarElevationAngle.SUN_ALTITUDE_SUNRISE_SUNSET, Game.DOMINION_LATITUDE, Game.DOMINION_LONGITUDE);
-			
-			
-			addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-			addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
 			StringBuilder timeSB = new StringBuilder();
 			if(Main.game.isBadEnd()) {
 				timeSB.append("[style.italicsBad(Given your current situation, you've lost track of what time it is...)]");
@@ -2117,16 +2067,13 @@ public class MainController implements Initializable {
 			TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation(
 					(Main.game.isDayTime()?"Day-time":"Night-time"),
 					timeSB.toString());
-			addEventListener(documentAttributes, id, "mouseenter", el2, false);
+			addTooltipListeners(documentAttributes, id, el2, onClick, false);
 		}
 
 		id = "ESSENCE_ICON";
-		if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-			addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-			addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
-			
+		if(documentAttributes.getElementById(id) != null) {
 			TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation("[style.boldArcane(Arcane Essences)]", "");
-			addEventListener(documentAttributes, id, "mouseenter", el2, false);
+			addTooltipListeners(documentAttributes, id, el2, null, false);
 		}
 		
 		Attribute[] attributes = {
@@ -2157,9 +2104,10 @@ public class MainController implements Initializable {
 			String idModifier = (character.isPlayer()?"PLAYER_":"NPC_"+character.getId()+"_");
 			
 			for (Attribute a : attributes) {
-				if (((EventTarget) documentAttributes.getElementById(idModifier+a.getName())) != null) {
+				if(documentAttributes.getElementById(idModifier+a.getName()) != null) {
+					EventListener onClick;
 					if(a == Attribute.EXPERIENCE) {
-						((EventTarget) documentAttributes.getElementById(idModifier+a.getName())).addEventListener("click", e -> {
+						onClick = e -> {
 							if(character.isPlayer()) {
 								// block when in character creation
 								if(Main.game.isInNewWorld()) {
@@ -2184,18 +2132,17 @@ public class MainController implements Initializable {
 							} else {
 								openCharactersPresent(character);
 							}
-						}, false);
+						};
+					} else {
+						onClick = null;
 					}
-					addEventListener(documentAttributes, idModifier+a.getName(), "mousemove", moveTooltipListener, false);
-					addEventListener(documentAttributes, idModifier+a.getName(), "mouseleave", hideTooltipListener, false);
-					
 					TooltipInformationEventListener el = new TooltipInformationEventListener().setAttribute(a, character);
-					addEventListener(documentAttributes, idModifier+a.getName(), "mouseenter", el, false);
+					addTooltipListeners(documentAttributes, idModifier+a.getName(), el, onClick, false);
 				}
 			}
 			
-			if(((EventTarget) documentAttributes.getElementById(idModifier+"ATTRIBUTES"))!=null){
-				((EventTarget) documentAttributes.getElementById(idModifier+"ATTRIBUTES")).addEventListener("click", e -> {
+			if(documentAttributes.getElementById(idModifier+"ATTRIBUTES") !=null){
+				EventListener onClick = e -> {
 					if(character.isPlayer()) {
 						// block when in character creation
 						if(Main.game.isInNewWorld()) {
@@ -2238,49 +2185,39 @@ public class MainController implements Initializable {
 							openCharactersPresent(character);
 						}
 					}
-				}, false);
-				addEventListener(documentAttributes, idModifier+"ATTRIBUTES", "mousemove", moveTooltipListener, false);
-				addEventListener(documentAttributes, idModifier+"ATTRIBUTES", "mouseleave", hideTooltipListener, false);
-	
+				};
 				TooltipInformationEventListener el = new TooltipInformationEventListener().setExtraAttributes(character);
-				addEventListener(documentAttributes, idModifier+"ATTRIBUTES", "mouseenter", el, false);
+				addTooltipListeners(documentAttributes, idModifier+"ATTRIBUTES", el, onClick, false);
 			}
 			
 			// Elemental:
 			id = idModifier+"ELEMENTAL_"+Attribute.EXPERIENCE.getName();
-			if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-				((EventTarget) documentAttributes.getElementById(id)).addEventListener("click", e -> {
+			if(documentAttributes.getElementById(id) != null) {
+				EventListener onClick = e -> {
 					if(character.isPlayer() && Main.game.isInNeutralDialogue()) {
 						Main.game.setContent(new Response("", "", ElementalDialogue.ELEMENTAL_START));
 					}
-				}, false);
-				addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-				addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
+				};
 				TooltipInformationEventListener el = new TooltipInformationEventListener().setAttribute(Attribute.EXPERIENCE, character.getElemental());
-				addEventListener(documentAttributes, id, "mouseenter", el, false);
+				addTooltipListeners(documentAttributes, id, el, onClick, false);
 			}
 			
 			id = idModifier+"ELEMENTAL_ATTRIBUTES";
-			if(((EventTarget) documentAttributes.getElementById(id))!=null){
-				((EventTarget) documentAttributes.getElementById(id)).addEventListener("click", e -> {
+			if(documentAttributes.getElementById(id) != null){
+				EventListener onClick = e -> {
 					if(character.isPlayer() && Main.game.isInNeutralDialogue()) {
 						Main.game.setContent(new Response("", "", ElementalDialogue.ELEMENTAL_START));
 					}
-				}, false);
-				addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-				addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
+				};
 				TooltipInformationEventListener el = new TooltipInformationEventListener().setExtraAttributes(character.getElemental());
-				addEventListener(documentAttributes, id, "mouseenter", el, false);
+				addTooltipListeners(documentAttributes, id, el, onClick, false);
 			}
 			
 			
 			// For status effect slots:
 			for (StatusEffect se : character.getStatusEffects()) {
 				id = "SE_"+idModifier + se;
-				if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-					addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-					addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
-					
+				if(documentAttributes.getElementById(id) != null) {
 					// Set target to whoever is interacting with this area:
 					if(Main.game.isInSex()) { //TODO add click helper text //TODO add border or something to show that it's clickable
 						SexAreaInterface si = null;
@@ -2315,57 +2252,45 @@ public class MainController implements Initializable {
 					}
 					
 					TooltipInformationEventListener el = new TooltipInformationEventListener().setStatusEffect(se, character);
-					addEventListener(documentAttributes, id, "mouseenter", el, false);
+					addTooltipListeners(documentAttributes, id, el, null, false);
 				}
 			}
 			if(character.isElementalSummoned() && !character.isElementalActive()) {
 				for (StatusEffect se : character.getElemental().getStatusEffects()) {
 					id = "SE_ELEMENTAL_"+idModifier + se;
-					if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-						addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-						addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
-						
+					if(documentAttributes.getElementById(id) != null) {
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setStatusEffect(se, character.getElemental());
-						addEventListener(documentAttributes, id, "mouseenter", el, false);
+						addTooltipListeners(documentAttributes, id, el, null, false);
 					}
 				}
 			}
 			
 			for (Perk trait : character.getTraits()) {
 				id = "TRAIT_" + idModifier + Perk.getIdFromPerk(trait);
-				if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-					addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-					addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
+				if(documentAttributes.getElementById(id) != null) {
 					TooltipInformationEventListener el = new TooltipInformationEventListener().setPerk(trait, character);
-					addEventListener(documentAttributes, id, "mouseenter", el, false);
+					addTooltipListeners(documentAttributes, id, el, null, false);
 				}
 			}
 			for (Fetish f : character.getFetishes(true)) {
-				if (((EventTarget) documentAttributes.getElementById("FETISH_"+idModifier + Fetish.getIdFromFetish(f))) != null) {
-					addEventListener(documentAttributes, "FETISH_"+idModifier + Fetish.getIdFromFetish(f), "mousemove", moveTooltipListener, false);
-					addEventListener(documentAttributes, "FETISH_"+idModifier + Fetish.getIdFromFetish(f), "mouseleave", hideTooltipListener, false);
-
+				id = "FETISH_"+idModifier + Fetish.getIdFromFetish(f);
+				if(documentAttributes.getElementById(id) != null) {
 					TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, character);
-					addEventListener(documentAttributes, "FETISH_"+idModifier + Fetish.getIdFromFetish(f), "mouseenter", el, false);
+					addTooltipListeners(documentAttributes, id, el, null, false);
 				}
 			}
 			for (CombatMove combatMove : character.getAvailableMoves()) {
 				id = "CM_"+idModifier + combatMove.getIdentifier();
-				if (((EventTarget) documentAttributes.getElementById(id)) != null) {
-					addEventListener(documentAttributes, id, "mousemove", moveTooltipListener, false);
-					addEventListener(documentAttributes, id, "mouseleave", hideTooltipListener, false);
-	
+				if(documentAttributes.getElementById(id) != null) {
 					TooltipInformationEventListener el = new TooltipInformationEventListener().setCombatMove(combatMove, character);
-					addEventListener(documentAttributes, id, "mouseenter", el, false);
+					addTooltipListeners(documentAttributes, id, el, null, false);
 				}
 			}
 			for (Spell s : character.getAllSpells()) {
-				if (((EventTarget) documentAttributes.getElementById("SPELL_"+idModifier + s)) != null) {
-					addEventListener(documentAttributes, "SPELL_"+idModifier + s, "mousemove", moveTooltipListener, false);
-					addEventListener(documentAttributes, "SPELL_"+idModifier + s, "mouseleave", hideTooltipListener, false);
-
+				id = "SPELL_"+idModifier + s;
+				if(documentAttributes.getElementById(id) != null) {
 					TooltipInformationEventListener el = new TooltipInformationEventListener().setSpell(s, character);
-					addEventListener(documentAttributes, "SPELL_"+idModifier + s, "mouseenter", el, false);
+					addTooltipListeners(documentAttributes, id, el, null, false);
 				}
 			}
 		}
@@ -2408,59 +2333,48 @@ public class MainController implements Initializable {
 		for (InventorySlot invSlot : InventorySlot.values()) {
 			id = invSlot.toString() + "Slot";
 			if (!invSlot.isWeapon()) {
-				if (((EventTarget) documentRight.getElementById(id)) != null) {
+				if(documentRight.getElementById(id) != null) {
+					EventListener onTooltip, onClick;
 					if(concealedSlots.keySet().contains(invSlot)) {
-						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-						addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
-						TooltipInformationEventListener el2 = new TooltipInformationEventListener().setConcealedSlot(invSlot);
-						addEventListener(documentRight, id, "mouseenter", el2, false);
-						
+						onTooltip = new TooltipInformationEventListener().setConcealedSlot(invSlot);
+						onClick = null;
 					} else {
 						if(!RenderingEngine.ENGINE.isRenderingTattoosRight() || invSlot.isJewellery()) {
-							InventorySelectedItemEventListener el = new InventorySelectedItemEventListener().setClothingEquipped(RenderingEngine.getCharacterToRender(), invSlot);
-							addEventListener(documentRight, id, "click", el, false);
+							onClick = new InventorySelectedItemEventListener().setClothingEquipped(RenderingEngine.getCharacterToRender(), invSlot);
+						} else {
+							onClick = null;
 						}
-						
-						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-						addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
-						TooltipInventoryEventListener el2 = new TooltipInventoryEventListener().setInventorySlot(invSlot, RenderingEngine.getCharacterToRender());
-						addEventListener(documentRight, id, "mouseenter", el2, false);
+						onTooltip = new TooltipInventoryEventListener().setInventorySlot(invSlot, RenderingEngine.getCharacterToRender());
 					}
+					addTooltipListeners(documentRight, id, onTooltip, onClick, false);
 				}
 			} else {
-				if (((EventTarget) documentRight.getElementById(id)) != null) {
-					
+				if(documentRight.getElementById(id) != null) {
 					InventorySelectedItemEventListener el = new InventorySelectedItemEventListener().setWeaponEquipped(RenderingEngine.getCharacterToRender(), invSlot);
-					addEventListener(documentRight, id, "click", el, false);
-					
-					addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-					addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
 					TooltipInventoryEventListener el2 = new TooltipInventoryEventListener().setInventorySlot(invSlot, RenderingEngine.getCharacterToRender());
-					addEventListener(documentRight, id, "mouseenter", el2, false);
+					addTooltipListeners(documentRight, id, el2, el, false);
 				}
 			}
 		}
 		
 		id = "TATTOO_SWITCH_RIGHT";
-		if (((EventTarget) documentRight.getElementById(id)) != null) {
-			((EventTarget) documentRight.getElementById(id)).addEventListener("click", e -> {
+		if(documentRight.getElementById(id) != null) {
+			EventListener onClick = e -> {
 				RenderingEngine.ENGINE.setRenderingTattoosRight(!RenderingEngine.ENGINE.isRenderingTattoosRight());
 				updateUIRightPanel();
-			}, false);
-			addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-			addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
+			};
 			TooltipInformationEventListener el2 = new TooltipInformationEventListener().setInformation(
 					!RenderingEngine.ENGINE.isRenderingTattoosRight()
 						?"Switch to tattoos"
 						:"Switch to clothing",
 					"");
-			addEventListener(documentRight, id, "mouseenter", el2, false);
+			addTooltipListeners(documentRight, id, el2, onClick, false);
 		}
 		
 		if(Main.game.getPlayer()!=null) {
 			// Money on floor:
 			id = "MONEY_ON_FLOOR";
-			if (((EventTarget) documentRight.getElementById(id)) != null) {
+			if(documentRight.getElementById(id) != null) {
 				if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY) {
 					addEventListener(documentRight, id, "click", e -> {
 						Main.mainController.openInventory();
@@ -2471,45 +2385,45 @@ public class MainController implements Initializable {
 			// Weapons on floor:
 			for (Entry<AbstractWeapon, Integer> entry : Main.game.getPlayerCell().getInventory().getAllWeaponsInInventory().entrySet()) {
 				id = "WEAPON_FLOOR_" + entry.getKey().hashCode();
-				if (((EventTarget) documentRight.getElementById(id)) != null) {
+				if(documentRight.getElementById(id) != null) {
+					EventListener onClick;
 					if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY) {
-						InventorySelectedItemEventListener el = new InventorySelectedItemEventListener().setWeaponInventory(entry.getKey(), null);
-						addEventListener(documentRight, id, "click", el, false);
+						onClick = new InventorySelectedItemEventListener().setWeaponInventory(entry.getKey(), null);
+					} else {
+						onClick = null;
 					}
-					addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-					addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
 					TooltipInventoryEventListener el2 = new TooltipInventoryEventListener().setWeapon(entry.getKey(), null, false);
-					addEventListener(documentRight, id, "mouseenter", el2, false);
+					addTooltipListeners(documentRight, id, el2, onClick, false);
 				}
 			}
 			
 			// Clothing on floor:
 			for (Entry<AbstractClothing, Integer> entry : Main.game.getPlayerCell().getInventory().getAllClothingInInventory().entrySet()) {
 				id = "CLOTHING_FLOOR_" + entry.getKey().hashCode();
-				if (((EventTarget) documentRight.getElementById(id)) != null) {
+				if(documentRight.getElementById(id) != null) {
+					EventListener onClick;
 					if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY) {
-						InventorySelectedItemEventListener el = new InventorySelectedItemEventListener().setClothingInventory(entry.getKey(), null);
-						addEventListener(documentRight, id, "click", el, false);
+						onClick = new InventorySelectedItemEventListener().setClothingInventory(entry.getKey(), null);
+					} else {
+						onClick = null;
 					}
-					addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-					addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
 					TooltipInventoryEventListener el2 = new TooltipInventoryEventListener().setClothing(entry.getKey(), null, null);
-					addEventListener(documentRight, id, "mouseenter", el2, false);
+					addTooltipListeners(documentRight, id, el2, onClick, false);
 				}
 			}
 			
 			// Items on floor:
 			for (Entry<AbstractItem, Integer> entry : Main.game.getPlayerCell().getInventory().getAllItemsInInventory().entrySet()) {
 				id = "ITEM_FLOOR_" + entry.getKey().hashCode();
-				if (((EventTarget) documentRight.getElementById(id)) != null) {
+				if(documentRight.getElementById(id) != null) {
+					EventListener onClick;
 					if(!Main.game.getCurrentDialogueNode().isInventoryDisabled() || Main.game.getCurrentDialogueNode().getDialogueNodeType()==DialogueNodeType.INVENTORY) {
-						InventorySelectedItemEventListener el = new InventorySelectedItemEventListener().setItemInventory(entry.getKey(), null);
-						addEventListener(documentRight, id, "click", el, false);
+						onClick = new InventorySelectedItemEventListener().setItemInventory(entry.getKey(), null);
+					} else {
+						onClick = null;
 					}
-					addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-					addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
 					TooltipInventoryEventListener el2 = new TooltipInventoryEventListener().setItem(entry.getKey(), null, null);
-					addEventListener(documentRight, id, "mouseenter", el2, false);
+					addTooltipListeners(documentRight, id, el2, onClick, false);
 				}
 			}
 		}
@@ -2550,17 +2464,14 @@ public class MainController implements Initializable {
 				int i=0;
 				for(Population pop : Main.game.getPlayer().getLocationPlace().getPlaceType().getPopulation()) {
 					id = "PLACE_POPULATION_"+i;
-					if (((EventTarget) documentRight.getElementById(id)) != null) {
-						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-						addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
-						
+					if(documentRight.getElementById(id) != null) {
 						Set<Subspecies> subspecies = new HashSet<>();
 						subspecies.addAll(pop.getSpecies().keySet());
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setInformation(
 								"Races Present",
 								Util.subspeciesToStringList(subspecies, true)+".",
 								16 + ((subspecies.size()/3)*16));
-						addEventListener(documentRight, id, "mouseenter", el, false);
+						addTooltipListeners(documentRight, id, el, null, false);
 					}
 					i++;
 				}
@@ -2573,74 +2484,67 @@ public class MainController implements Initializable {
 			String idModifier = character.getId()+"_";
 			
 			for (Attribute a : attributes) {
-				if (((EventTarget) documentRight.getElementById("NPC_"+idModifier+a.getName())) != null) {
+				id = "NPC_"+idModifier+a.getName();
+				if(documentRight.getElementById(id) != null) {
+					EventListener onClick;
 					if(a == Attribute.EXPERIENCE && (!character.isElemental() || ((Elemental)character).isActive())) {
-						((EventTarget) documentRight.getElementById("NPC_"+idModifier+a.getName())).addEventListener("click", e -> {
+						onClick = e -> {
 							openCharactersPresent(character);
-						}, false);
+						};
+					} else {
+						onClick = null;
 					}
-					addEventListener(documentRight, "NPC_"+idModifier+a.getName(), "mousemove", moveTooltipListener, false);
-					addEventListener(documentRight, "NPC_"+idModifier+a.getName(), "mouseleave", hideTooltipListener, false);
-					
 					TooltipInformationEventListener el = new TooltipInformationEventListener().setAttribute(a, character);
-					addEventListener(documentRight, "NPC_"+idModifier+a.getName(), "mouseenter", el, false);
+					addTooltipListeners(documentRight, id, el, onClick, false);
 				}
 			}
 			
 			// Extra attribute info:
-			if(((EventTarget) documentRight.getElementById("NPC_"+idModifier+"ATTRIBUTES"))!=null){
+			id = "NPC_"+idModifier+"ATTRIBUTES";
+			if(documentRight.getElementById(id) !=null) {
+				EventListener onClick;
 				if(!RenderingEngine.ENGINE.isRenderingCharactersRightPanel() && (!character.isElemental() || ((Elemental)character).isActive())) {
-					((EventTarget) documentRight.getElementById("NPC_"+idModifier+"ATTRIBUTES")).addEventListener("click", e -> {
+					onClick = e -> {
 						openCharactersPresent(character);
-					}, false);
-					
+					};
 				} else if(Main.game.isInSex()) {
-					((EventTarget) documentRight.getElementById("NPC_"+idModifier+"ATTRIBUTES")).addEventListener("click", e -> {
+					onClick = e -> {
 						Main.sex.setTargetedPartner(Main.game.getPlayer(), character);
 						Main.sex.recalculateSexActions();
 						updateUI();
 						Main.game.updateResponses();
-					}, false);
-					
+					};
 				} else if(Main.game.isInCombat()) {
-					((EventTarget) documentRight.getElementById("NPC_"+idModifier+"ATTRIBUTES")).addEventListener("click", e -> {
+					onClick = e -> {
 						Main.combat.setTargetedCombatant((NPC) character);
 						updateUI();
 						Main.game.updateResponses();
-					}, false);
+					};
+				} else {
+					onClick = null;
 				}
-				addEventListener(documentRight, "NPC_"+idModifier+"ATTRIBUTES", "mousemove", moveTooltipListener, false);
-				addEventListener(documentRight, "NPC_"+idModifier+"ATTRIBUTES", "mouseleave", hideTooltipListener, false);
-	
 				TooltipInformationEventListener el = new TooltipInformationEventListener().setExtraAttributes(character);
-				addEventListener(documentRight, "NPC_"+idModifier+"ATTRIBUTES", "mouseenter", el, false);
+				addTooltipListeners(documentRight, id, el, onClick, false);
 			}
 			
 			// Elemental:
 			id = "NPC_"+idModifier+"ELEMENTAL_"+Attribute.EXPERIENCE.getName();
-			if (((EventTarget) documentRight.getElementById(id)) != null) {
-				addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-				addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
+			if(documentRight.getElementById(id) != null) {
 				TooltipInformationEventListener el = new TooltipInformationEventListener().setAttribute(Attribute.EXPERIENCE, character.getElemental());
-				addEventListener(documentRight, id, "mouseenter", el, false);
+				addTooltipListeners(documentRight, id, el, null, false);
 			}
 			
 			id = "NPC_"+idModifier+"ELEMENTAL_ATTRIBUTES";
-			if(((EventTarget) documentRight.getElementById(id))!=null){
-				addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-				addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
+			if(documentRight.getElementById(id) !=null){
 				TooltipInformationEventListener el = new TooltipInformationEventListener().setExtraAttributes(character.getElemental());
-				addEventListener(documentRight, id, "mouseenter", el, false);
+				addTooltipListeners(documentRight, id, el, null, false);
 			}
 			
 			if(RenderingEngine.ENGINE.isRenderingCharactersRightPanel()) {
 				// For status effect slots:
 				for (StatusEffect se : character.getStatusEffects()) {
 					id = "SE_NPC_"+idModifier + se;
-					if (((EventTarget) documentRight.getElementById(id)) != null) {
-						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-						addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
-		
+					if(documentRight.getElementById(id) != null) {
 						// Set target to whoever is interacting with this area:
 						if(Main.game.isInSex()) { //TODO add click helper text
 							SexAreaInterface si = null;
@@ -2671,18 +2575,15 @@ public class MainController implements Initializable {
 						}
 						
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setStatusEffect(se, character);
-						addEventListener(documentRight, id, "mouseenter", el, false);
+						addTooltipListeners(documentRight, id, el, null, false);
 					}
 				}
 				if(character.isElementalSummoned() && !character.isElementalActive()) {
 					for (StatusEffect se : character.getElemental().getStatusEffects()) {
 						id = "SE_ELEMENTAL_NPC_"+idModifier + se;
-						if (((EventTarget) documentRight.getElementById(id)) != null) {
-							addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-							addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
-							
+						if(documentRight.getElementById(id) != null) {
 							TooltipInformationEventListener el = new TooltipInformationEventListener().setStatusEffect(se, character.getElemental());
-							addEventListener(documentRight, id, "mouseenter", el, false);
+							addTooltipListeners(documentRight, id, el, null, false);
 						}
 					}
 				}
@@ -2690,40 +2591,30 @@ public class MainController implements Initializable {
 				// For perk slots:
 				for (Perk p : character.getMajorPerks()) {
 					id = "PERK_NPC_"+idModifier + Perk.getIdFromPerk(p);
-					if (((EventTarget) documentRight.getElementById(id)) != null) {
-						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-						addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
-		
+					if(documentRight.getElementById(id) != null) {
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setPerk(p, character);
-						addEventListener(documentRight, id, "mouseenter", el, false);
+						addTooltipListeners(documentRight, id, el, null, false);
 					}
 				}
 				for (Fetish f : character.getFetishes(true)) {
-					if (((EventTarget) documentRight.getElementById("FETISH_NPC_"+idModifier + Fetish.getIdFromFetish(f))) != null) {
-						addEventListener(documentRight, "FETISH_NPC_"+idModifier + Fetish.getIdFromFetish(f), "mousemove", moveTooltipListener, false);
-						addEventListener(documentRight, "FETISH_NPC_"+idModifier + Fetish.getIdFromFetish(f), "mouseleave", hideTooltipListener, false);
-	
+					id = "FETISH_NPC_"+idModifier + Fetish.getIdFromFetish(f);
+					if(documentRight.getElementById(id) != null) {
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setFetish(f, character);
-						addEventListener(documentRight, "FETISH_NPC_"+idModifier + Fetish.getIdFromFetish(f), "mouseenter", el, false);
+						addTooltipListeners(documentRight, id, el, null, false);
 					}
 				}
 				for (CombatMove combatMove : character.getAvailableMoves()) {
 					id = "CM_NPC_"+idModifier + combatMove.getIdentifier();
-					if (((EventTarget) documentRight.getElementById(id)) != null) {
-						addEventListener(documentRight, id, "mousemove", moveTooltipListener, false);
-						addEventListener(documentRight, id, "mouseleave", hideTooltipListener, false);
-		
+					if(documentRight.getElementById(id) != null) {
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setCombatMove(combatMove, character);
-						addEventListener(documentRight, id, "mouseenter", el, false);
+						addTooltipListeners(documentRight, id, el, null, false);
 					}
 				}
 				for (Spell s : character.getAllSpells()) {
-					if (((EventTarget) documentRight.getElementById("SPELL_"+idModifier + s)) != null) {
-						addEventListener(documentRight, "SPELL_"+idModifier + s, "mousemove", moveTooltipListener, false);
-						addEventListener(documentRight, "SPELL_"+idModifier + s, "mouseleave", hideTooltipListener, false);
-	
+					id = "SPELL_"+idModifier + s;
+					if(documentRight.getElementById(id) != null) {
 						TooltipInformationEventListener el = new TooltipInformationEventListener().setSpell(s, character);
-						addEventListener(documentRight, "SPELL_"+idModifier + s, "mouseenter", el, false);
+						addTooltipListeners(documentRight, id, el, null, false);
 					}
 				}
 			}
@@ -3223,7 +3114,7 @@ public class MainController implements Initializable {
 	}
 
 	public void setFlashMessageColour(Colour flashMessageColour) {
-		MainController.flashMessageColour = flashMessageColour;
+		flashMessageColour = flashMessageColour;
 	}
 
 	public String getFlashMessageText() {
@@ -3231,7 +3122,7 @@ public class MainController implements Initializable {
 	}
 
 	public void setFlashMessageText(String flashMessageText) {
-		MainController.flashMessageText = flashMessageText;
+		flashMessageText = flashMessageText;
 	}
 
 }

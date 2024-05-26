@@ -3230,11 +3230,8 @@ public class CreationController {
 						}
 					});
 				}, false);
-				
-				MainController.addEventListener(MainController.document, id, "mousemove", MainController.moveTooltipListener, false);
-				MainController.addEventListener(MainController.document, id, "mouseleave", MainController.hideTooltipListener, false);
 				TooltipInformationEventListener el = new TooltipInformationEventListener().setInformation(Util.capitaliseSentence(counterType.getName()), counterType.getDescription());
-				MainController.addEventListener(MainController.document, id, "mouseenter", el, false);
+				MainController.addTooltipListeners(id, el);
 			}
 		}
 		

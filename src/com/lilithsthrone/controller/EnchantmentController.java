@@ -41,17 +41,13 @@ public class EnchantmentController {
 		
 		for (TFPotency potency : TFPotency.values()) {
 			id = "POTENCY_"+potency;
-			if (MainController.document.getElementById(id) != null) {
-				MainController.addEventListener(MainController.document, id, "click", new EnchantmentEventListener().setPotency(potency), false);
-			}
+			MainController.addEventListener(MainController.document, id, "click", new EnchantmentEventListener().setPotency(potency), false);
 		}
 		for (int effectCount = 0; effectCount<EnchantmentDialogue.getEffects().size(); effectCount++) {
 			id = "DELETE_EFFECT_"+effectCount;
-			if (MainController.document.getElementById(id) != null) {
-				MainController.addTooltipListeners(id,
+			MainController.addTooltipListeners(id,
 						new TooltipInformationEventListener().setInformation("Delete Effect", ""),
 						new EnchantmentEventListener().removeEffect(effectCount), false);
-			}
 		}
 		
 		ItemEffectType effect = EnchantmentDialogue.getIngredient().getEnchantmentEffect();
