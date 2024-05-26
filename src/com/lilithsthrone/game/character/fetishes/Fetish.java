@@ -182,9 +182,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>anal tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>buttslut tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -229,9 +227,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>buttslut tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>anal tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -274,9 +270,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>pussy worship tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>pussy slut tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -318,9 +312,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>pussy slut tease</span> (Requires vagina)",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>pussy worship tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -361,9 +353,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>oral tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>oral performer tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -405,9 +395,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>oral performer tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>oral tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -447,9 +435,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>breasts lover tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>breasts tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -491,9 +477,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>breasts tease</span> (Requires breasts)",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>breasts lover tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -533,9 +517,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>milk-lover tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>lactation tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -580,9 +562,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>lactation tease</span> (Requires breasts)",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>milk-lover tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -627,9 +607,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>leg lover tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>strutter tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -671,9 +649,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>strutter tease</span> (Requires legs)",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>leg lover tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -714,9 +690,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>dominant foot tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>submissive foot tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -761,9 +735,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>submissive foot tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>dominant foot tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -806,9 +778,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>armpit worship tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>armpit slut tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -849,9 +819,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>armpit slut tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>armpit worship tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -890,8 +858,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues("<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cock stud tease</span> (Requires penis)",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cock addict tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -933,8 +900,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues("<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cock addict tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cock stud tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -974,8 +940,7 @@ public interface Fetish {
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues("<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cum stud tease</span> (Requires penis)",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cum addict tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1014,8 +979,7 @@ public interface Fetish {
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.CLOTHING_WHITE,
 			null,
-			Util.newArrayListOfValues("<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cum addict tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cum stud tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1056,7 +1020,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues("Gain <span style='color:" + PresetColour.GENERIC_EXPERIENCE.toWebHexString() + ";'>xp</span> from <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>taking virginities</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1095,9 +1059,7 @@ public interface Fetish {
 			FetishExperience.BASE_VERY_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"[style.colourGood(Gain)] [style.colourExcellent(Pure Virgin)] status effect",
-					"[style.colourBad(Suffer)] [style.colourTerrible(Broken Virgin)] status effect"),
+			null,
 			null) {
 
 		@Override
@@ -1156,8 +1118,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>No special abilities</span>"),
+			null,
 			null) {
 
 		@Override
@@ -1195,9 +1156,7 @@ public interface Fetish {
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			Util.newHashMapOfValues(new Value<>(Attribute.VIRILITY, 5)),
-			Util.newArrayListOfValues("<span style='color:"
-							+ PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>virility tease</span> (Requires penis)",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>fertility tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1239,9 +1198,7 @@ public interface Fetish {
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			Util.newHashMapOfValues(new Value<>(Attribute.FERTILITY, 5)),
-			Util.newArrayListOfValues("<span style='color:"
-							+ PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>fertility tease</span> (Requires vagina)",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>virility tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1281,8 +1238,7 @@ public interface Fetish {
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Halves cost of all potion making</span>"),
+			null,
 			null) {
 
 		@Override
@@ -1323,9 +1279,7 @@ public interface Fetish {
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"[style.boldGood(Increases potency)] <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>of receiving forced transformations</span>",
-					"[style.boldBad(Disables)] ability to spit out TF potions"),
+			null,
 			null) {
 
 		@Override
@@ -1365,9 +1319,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					// Unclear what extra effects this fetish should provide, other than triggering forced fetishes
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Enjoy making others try new things!</span>"),
+			null,
 			null) {
 
 		@Override
@@ -1409,9 +1361,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					// Unclear what extra effects this fetish should provide, other than not taking corruption from receiving forced fetishes
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Removes corruption gain when a fetish is forced on you.</span>"),
+			null,
 			null) {
 
 		@Override
@@ -1535,9 +1485,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			Util.newHashMapOfValues(new Value<>(Attribute.MANA_MAXIMUM, 5)),
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>dominant tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>submissive tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1580,9 +1528,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 2)),
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>submissive tease</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>dominant tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1622,8 +1568,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"Unlocks <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>incest tease</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1667,14 +1612,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 5)),
-			Util.newArrayListOfValues(
-					"[style.boldExcellent(Unlocks)] sadistic [style.colourSex(sex actions)]",
-					"[style.boldExcellent(+5%)] to all [style.colourHealth(" + Attribute.HEALTH_MAXIMUM.getName() + " damage)]",
-					"10% of all inflicted",
-					"[style.colourHealth(" + Attribute.HEALTH_MAXIMUM.getName() + " damage)] is dealt",
-					"back to you as <span style='color:" + Attribute.DAMAGE_LUST.getColour().toWebHexString() + ";'>lust damage</span>",
-					"[style.boldArcane(+1 essence)] when critically",
-					" hitting enemies"),
+			null,
 			null) {
 
 		@Override
@@ -1714,13 +1652,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, 2)),
-			Util.newArrayListOfValues(
-					"[style.boldSex(Enjoys)] [style.boldTerrible(painful sex actions)]",
-					"25% of all incoming",
-					"<span style='color:"+ PresetColour.ATTRIBUTE_HEALTH.toWebHexString()+ ";'>"+Attribute.HEALTH_MAXIMUM.getName()+" damage</span>"+ " is converted",
-					" to <span style='color:"+ Attribute.DAMAGE_LUST.getColour().toWebHexString()+ ";'>lust damage</span>",
-					"[style.boldArcane(+1 essence)] when you're",
-					" critically hit"),
+			null,
 			null) {
 
 		@Override
@@ -1754,8 +1686,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Increases</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>arousal gain when partner is resisting sex</span>"),
+			null,
 			null) {
 
 		@Override
@@ -1799,8 +1730,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Increases</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>arousal gain when you are resisting sex</span>"),
+			null,
 			null) {
 
 		@Override
@@ -1842,8 +1772,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			Util.newArrayListOfValues(PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_GOLD, PresetColour.CLOTHING_GOLD),
 			null,
-			Util.newArrayListOfValues(
-					"[style.colourGood(Removes essence cost for sealing, servitude, and enslavement enchantments)]"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1878,9 +1807,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			Util.newArrayListOfValues(PresetColour.CLOTHING_BLACK_STEEL, PresetColour.CLOTHING_GOLD, PresetColour.CLOTHING_GOLD),
 			null,
-			Util.newArrayListOfValues(
-					"[style.colourTerrible(5x cost)] to [style.colourSeal(unseal)] self-worn clothing",
-					"BDSM set bonus applies [style.colourGood(positive effects)]"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -1912,9 +1839,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Replaces</span> <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>exposed status effects</span>"
-							+ " <span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>with beneficial versions</span>"),
+			null,
 			null) {
 
 		@Override
@@ -1961,8 +1886,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>Arousal boost</span> while watching sex scenes"),
+			null,
 			null) {
 
 		@Override
@@ -2003,7 +1927,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 10)),
-			Util.newArrayListOfValues("<span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>Talk like a bimbo</span>"),
+			null,
 			null) {
 
 		@Override
@@ -2082,7 +2006,7 @@ public interface Fetish {
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues("<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Immune to clothing femininity status effects</span>"),
+			null,
 			null) {
 
 		@Override
@@ -2120,9 +2044,7 @@ public interface Fetish {
 			Util.newArrayListOfValues(PresetColour.BASE_YELLOW, PresetColour.BASE_PINK),
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.RESISTANCE_PHYSICAL, 1)),
-			Util.newArrayListOfValues(
-					"[style.colourGood(Enjoys)] [style.colourSex(being stretched)]",
-					"Treats [style.colourSex('uncomfortably deep')] insertions as being [style.colourGood('comfortable')]"),
+			null,
 			null) {
 
 		@Override
@@ -2272,9 +2194,7 @@ public interface Fetish {
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
 			null,
-			Util.newArrayListOfValues(
-					"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Empowers</span> <span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>'pure virgin'</span>",
-					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Amplifies</span> <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>'broken virgin'</span>"),
+			null,
 			null) {
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2307,7 +2227,6 @@ public interface Fetish {
 		private final HashMap<Attribute, Integer> attributeModifiers;
 		private final String SVGString;
 		private final List<Colour> colourShades;
-		private final List<String> extraEffects;
 		private final List<String> modifiersList;
 		private static final List<String> perkRequirementsList = new ArrayList<>();
 		private static final String bimboString = loadSVGString("fetish_bimbo", "FETISH_BIMBO", List.of(PresetColour.BASE_PINK));
@@ -2320,7 +2239,7 @@ public interface Fetish {
 				FetishExperience experienceGainFromSexAction,
 				Colour colourShades,
 				HashMap<Attribute, Integer> attributeModifiers,
-				List<String> extraEffects,
+				Void extraEffects,
 				Void fetishesForAutomaticUnlock) {
 			this(renderingPriority,
 					name,
@@ -2340,14 +2259,13 @@ public interface Fetish {
 				FetishExperience experienceGainFromSexAction,
 				List<Colour> colourShades,
 				HashMap<Attribute, Integer> attributeModifiers,
-				List<String> extraEffects,
+				Void extraEffects,
 				Void fetishesForAutomaticUnlock) {
 			this.renderingPriority = renderingPriority;
 			this.name = name;
 			this.shortDescriptor = shortDescriptor;
 			this.experienceGainFromSexAction = experienceGainFromSexAction.getExperience();
 			this.attributeModifiers = attributeModifiers;
-			this.extraEffects = extraEffects;
 			this.colourShades = colourShades;
 			modifiersList = new ArrayList<>();
 			if(attributeModifiers != null) {
@@ -2378,9 +2296,7 @@ public interface Fetish {
 		@Override
 		public List<String> getModifiersAsStringList(GameCharacter owner) {
 			List<String> modList = new ArrayList<>(modifiersList);
-			if(getExtraEffects(owner) != null) {
-				modList.addAll(getExtraEffects(owner));
-			}
+			modList.addAll(getExtraEffects(owner));
 			return modList;
 		}
 		@Override
@@ -2393,7 +2309,140 @@ public interface Fetish {
 		}
 		@Override
 		public List<String> getExtraEffects(GameCharacter owner) {
-			return extraEffects;
+			return switch(this) {
+				case ANAL_GIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>anal tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>buttslut tease</span>");
+				case ANAL_RECEIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>buttslut tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>anal tease</span>");
+				case VAGINAL_GIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>pussy worship tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>pussy slut tease</span>");
+				case VAGINAL_RECEIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>pussy slut tease</span> (Requires vagina)",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>pussy worship tease</span>");
+				case ORAL_RECEIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>oral tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>oral performer tease</span>");
+				case ORAL_GIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>oral performer tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>oral tease</span>");
+				case BREASTS_OTHERS -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>breasts lover tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>breasts tease</span>");
+				case BREASTS_SELF -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>breasts tease</span> (Requires breasts)",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>breasts lover tease</span>");
+				case LACTATION_OTHERS -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>milk-lover tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>lactation tease</span>");
+				case LACTATION_SELF -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>lactation tease</span> (Requires breasts)",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>milk-lover tease</span>");
+				case LEG_LOVER -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>leg lover tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>strutter tease</span>");
+				case STRUTTER -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>strutter tease</span> (Requires legs)",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>leg lover tease</span>");
+				case FOOT_GIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>dominant foot tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>submissive foot tease</span>");
+				case FOOT_RECEIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>submissive foot tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>dominant foot tease</span>");
+				case ARMPIT_GIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>armpit worship tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>armpit slut tease</span>");
+				case ARMPIT_RECEIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>armpit slut tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>armpit worship tease</span>");
+				case PENIS_GIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cock stud tease</span> (Requires penis)",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cock addict tease</span>");
+				case PENIS_RECEIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cock addict tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cock stud tease</span>");
+				case CUM_STUD -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cum stud tease</span> (Requires penis)",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cum addict tease</span>");
+				case CUM_ADDICT -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cum addict tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>cum stud tease</span>");
+				case DEFLOWERING -> List.of(
+						"Gain <span style='color:" + PresetColour.GENERIC_EXPERIENCE.toWebHexString() + ";'>xp</span> from <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>taking virginities</span>");
+				case PURE_VIRGIN -> List.of(
+						"[style.colourGood(Gain)] [style.colourExcellent(Pure Virgin)] status effect",
+						"[style.colourBad(Suffer)] [style.colourTerrible(Broken Virgin)] status effect");
+				case MASTURBATION -> List.of(
+						"<span style='color:" + PresetColour.TEXT_GREY.toWebHexString() + ";'>No special abilities</span>");
+				case IMPREGNATION -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>virility tease</span> (Requires penis)",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>fertility tease</span>");
+				case PREGNANCY -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>fertility tease</span> (Requires vagina)",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>virility tease</span>");
+				case TRANSFORMATION_GIVING -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Halves cost of all potion making</span>");
+				case TRANSFORMATION_RECEIVING -> List.of(
+						"[style.boldGood(Increases potency)] <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>of receiving forced transformations</span>",
+						"[style.boldBad(Disables)] ability to spit out TF potions");
+				case KINK_GIVING -> List.of(
+						// Unclear what extra effects this fetish should provide, other than triggering forced fetishes
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Enjoy making others try new things!</span>");
+				case KINK_RECEIVING -> List.of(
+						// Unclear what extra effects this fetish should provide, other than not taking corruption from receiving forced fetishes
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Removes corruption gain when a fetish is forced on you.</span>");
+				case DOMINANT -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>dominant tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>submissive tease</span>");
+				case SUBMISSIVE -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Unlocks</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>submissive tease</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Weak to</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>dominant tease</span>");
+				case INCEST -> List.of(
+						"Unlocks <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>incest tease</span>");
+				case SADIST -> List.of(
+						"[style.boldExcellent(Unlocks)] sadistic [style.colourSex(sex actions)]",
+						"[style.boldExcellent(+5%)] to all [style.colourHealth(" + Attribute.HEALTH_MAXIMUM.getName() + " damage)]",
+						"10% of all inflicted",
+						"[style.colourHealth(" + Attribute.HEALTH_MAXIMUM.getName() + " damage)] is dealt",
+						"back to you as <span style='color:" + Attribute.DAMAGE_LUST.getColour().toWebHexString() + ";'>lust damage</span>",
+						"[style.boldArcane(+1 essence)] when critically",
+						" hitting enemies");
+				case MASOCHIST -> List.of(
+						"[style.boldSex(Enjoys)] [style.boldTerrible(painful sex actions)]",
+						"25% of all incoming",
+						"<span style='color:"+ PresetColour.ATTRIBUTE_HEALTH.toWebHexString()+ ";'>"+Attribute.HEALTH_MAXIMUM.getName()+" damage</span>"+ " is converted",
+						" to <span style='color:"+ Attribute.DAMAGE_LUST.getColour().toWebHexString()+ ";'>lust damage</span>",
+						"[style.boldArcane(+1 essence)] when you're",
+						" critically hit");
+				case NON_CON_DOM -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Increases</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>arousal gain when partner is resisting sex</span>");
+				case NON_CON_SUB -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Increases</span> <span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>arousal gain when you are resisting sex</span>");
+				case BONDAGE_APPLIER -> List.of(
+						"[style.colourGood(Removes essence cost for sealing, servitude, and enslavement enchantments)]");
+				case BONDAGE_VICTIM -> List.of(
+						"[style.colourTerrible(5x cost)] to [style.colourSeal(unseal)] self-worn clothing",
+						"BDSM set bonus applies [style.colourGood(positive effects)]");
+				case EXHIBITIONIST -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Replaces</span> <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>exposed status effects</span>"
+								+ " <span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>with beneficial versions</span>");
+				case VOYEURIST -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>Arousal boost</span> while watching sex scenes");
+				case BIMBO -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_SEX.toWebHexString() + ";'>Talk like a bimbo</span>");
+				case CROSS_DRESSER -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Immune to clothing femininity status effects</span>");
+				case SIZE_QUEEN -> List.of(
+						"[style.colourGood(Enjoys)] [style.colourSex(being stretched)]",
+						"Treats [style.colourSex('uncomfortably deep')] insertions as being [style.colourGood('comfortable')]");
+				case LUSTY_MAIDEN -> List.of(
+						"<span style='color:" + PresetColour.GENERIC_GOOD.toWebHexString() + ";'>Empowers</span> <span style='color:" + PresetColour.GENERIC_EXCELLENT.toWebHexString() + ";'>'pure virgin'</span>",
+						"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Amplifies</span> <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>'broken virgin'</span>");
+				default -> List.of();
+			};
 		}
 		@Override
 		public List<Colour> getColourShades() {

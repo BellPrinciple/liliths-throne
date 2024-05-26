@@ -149,9 +149,7 @@ public abstract class AbstractFetish implements Fetish {
 	@Override
 	public List<String> getModifiersAsStringList(GameCharacter owner) {
 		List<String> modList = new ArrayList<>(modifiersList);
-		if(getExtraEffects(owner) != null) {
-			modList.addAll(getExtraEffects(owner));
-		}
+		modList.addAll(getExtraEffects(owner));
 		return modList;
 	}
 
