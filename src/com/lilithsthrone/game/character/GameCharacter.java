@@ -54,7 +54,7 @@ import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.character.body.CoverableArea;
 import com.lilithsthrone.game.character.body.FluidCum;
 import com.lilithsthrone.game.character.body.FluidGirlCum;
-import com.lilithsthrone.game.character.body.FluidInterface;
+import com.lilithsthrone.game.character.body.Fluid;
 import com.lilithsthrone.game.character.body.FluidMilk;
 import com.lilithsthrone.game.character.body.Penis;
 import com.lilithsthrone.game.character.body.Testicle;
@@ -18942,7 +18942,7 @@ public abstract class GameCharacter implements XMLSaving {
 		return ingestFluid(fluidOwner, fluid.getBody(), fluid.getFluid(), orificeIngestedThrough, millilitres);
 	}
 	
-	public String ingestFluid(GameCharacter charactersFluid, FluidInterface fluid, SexAreaOrifice orificeIngestedThrough, float millilitres) {
+	public String ingestFluid(GameCharacter charactersFluid, Fluid fluid, SexAreaOrifice orificeIngestedThrough, float millilitres) {
 		return ingestFluid(charactersFluid, charactersFluid.getBody(), fluid, orificeIngestedThrough, millilitres);
 	}
 
@@ -18958,7 +18958,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 
 	public String ingestFluid(GameCharacter charactersFluid, Body body, FluidType fluidType, SexAreaOrifice orificeIngestedThrough, float millilitres) {
-		FluidInterface fluid = null;
+		Fluid fluid = null;
 		switch(fluidType.getBaseType()) {
 			case CUM:
 				fluid = new FluidCum(fluidType);
@@ -18992,7 +18992,7 @@ public abstract class GameCharacter implements XMLSaving {
 	 * @param millilitres The amount of fluid being ingested.
 	 * @return A <b>formatted paragraph</b> description of addiction increasing/satisfied, or an empty String if no addictive effects occur.
 	 */
-	public String ingestFluid(GameCharacter charactersFluid, Body cumBody, FluidInterface fluid, SexAreaOrifice orificeIngestedThrough, float millilitres) {
+	public String ingestFluid(GameCharacter charactersFluid, Body cumBody, Fluid fluid, SexAreaOrifice orificeIngestedThrough, float millilitres) {
 		StringBuilder fluidIngestionSB = new StringBuilder();
 		
 		Set<FluidModifier> modifiers = new HashSet<>(fluid.getFluidModifiers());

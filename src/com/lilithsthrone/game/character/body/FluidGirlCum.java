@@ -24,7 +24,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4.9.7
  * @author Innoxia
  */
-public class FluidGirlCum implements FluidInterface {
+public class FluidGirlCum implements Fluid {
 	
 	protected FluidType type;
 	protected FluidFlavour flavour;

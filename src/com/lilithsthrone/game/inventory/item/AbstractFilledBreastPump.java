@@ -103,13 +103,14 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 		if(provider.isEmpty()) {
 			provider = parentElement.getAttribute("milkProvidor"); // Support for old versions in which I could not spell
 		}
+		Object milk = parentElement.getElementsByTagName("milk").item(0);
 		return new AbstractFilledBreastPump(
 				ItemType.table.exact(parentElement.getAttribute("id")).orElse(null),
 				PresetColour.getColourFromId(parentElement.getAttribute("colour")),
 				provider,
-				((Element) parentElement.getElementsByTagName("milk").item(0)==null
+				(milk==null
 					?new FluidMilk(FluidType.MILK_HUMAN, false)
-					:FluidMilk.loadFromXML("milk", (Element) parentElement.getElementsByTagName("milk").item(0), doc)),
+					:FluidMilk.loadFromXML("milk", (Element) milk, doc)),
 				(parentElement.getAttribute("millilitresStored").isEmpty()
 					?25
 					:Integer.valueOf(parentElement.getAttribute("millilitresStored"))));

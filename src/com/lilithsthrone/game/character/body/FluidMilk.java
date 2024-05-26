@@ -24,7 +24,7 @@ import com.lilithsthrone.utils.Util;
  * @version 0.4.9.7
  * @author Innoxia
  */
-public class FluidMilk implements FluidInterface {
+public class FluidMilk implements Fluid {
 
 	
 	protected FluidType type;

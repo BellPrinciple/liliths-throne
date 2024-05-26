@@ -10,7 +10,7 @@ import com.lilithsthrone.game.character.attributes.Attribute;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.FluidCum;
 import com.lilithsthrone.game.character.body.FluidGirlCum;
-import com.lilithsthrone.game.character.body.FluidInterface;
+import com.lilithsthrone.game.character.body.Fluid;
 import com.lilithsthrone.game.character.body.FluidMilk;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.character.body.valueEnums.FluidTypeBase;
@@ -35,7 +35,7 @@ public class FluidStored implements XMLSaving {
 	private boolean cumVirile;
 	private float virility;
 	private boolean feral;
-	private FluidInterface fluid;
+	private Fluid fluid;
 	private float millilitres;
 	
 	public FluidStored(GameCharacter character, FluidCum cum, float millilitres) {
@@ -339,7 +339,7 @@ public class FluidStored implements XMLSaving {
 		return fluid.getType().getBaseType() == FluidTypeBase.GIRLCUM;
 	}
 	
-	public FluidInterface getFluid() {
+	public Fluid getFluid() {
 		return fluid;
 	}
 

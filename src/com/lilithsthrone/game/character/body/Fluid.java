@@ -15,7 +15,7 @@ import com.lilithsthrone.utils.XMLSaving;
  * @version 0.3.8.2
  * @author Innoxia
  */
-public interface FluidInterface extends BodyPartInterface, XMLSaving {
+public interface Fluid extends BodyPartInterface, XMLSaving {
 
 	@Override
 	FluidType getType();
