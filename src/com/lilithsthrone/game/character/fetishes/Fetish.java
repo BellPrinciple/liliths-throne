@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +18,6 @@ import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.SvgUtil;
 import com.lilithsthrone.utils.Table;
 import com.lilithsthrone.utils.Util;
-import com.lilithsthrone.utils.Util.Value;
 import com.lilithsthrone.utils.colours.Colour;
 import com.lilithsthrone.utils.colours.PresetColour;
 
@@ -68,8 +66,8 @@ public interface Fetish {
 		return getExtraEffects(owner);
 	}
 
-	default HashMap<Attribute, Integer> getAttributeModifiers() {
-		return null;
+	default Map<Attribute, Integer> getAttributeModifiers() {
+		return Map.of();
 	}
 
 	default boolean isContentEnabled() {
@@ -1155,7 +1153,7 @@ public interface Fetish {
 			"fetish_impregnation",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.VIRILITY, 5)),
+			null,
 			null,
 			null) {
 		@Override
@@ -1197,7 +1195,7 @@ public interface Fetish {
 			"fetish_pregnancy",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.FERTILITY, 5)),
+			null,
 			null,
 			null) {
 		@Override
@@ -1443,9 +1441,7 @@ public interface Fetish {
 			"fetish_denial_self",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 1),
-					new Value<>(Attribute.RESISTANCE_LUST, 2)),
+			null,
 			null,
 			null) {
 
@@ -1484,7 +1480,7 @@ public interface Fetish {
 			"fetish_dominant",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.MANA_MAXIMUM, 5)),
+			null,
 			null,
 			null) {
 		@Override
@@ -1527,7 +1523,7 @@ public interface Fetish {
 			"fetish_submissive",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.MAJOR_PHYSIQUE, 2)),
+			null,
 			null,
 			null) {
 		@Override
@@ -1611,7 +1607,7 @@ public interface Fetish {
 			"fetish_sadist",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_PHYSICAL, 5)),
+			null,
 			null,
 			null) {
 
@@ -1651,7 +1647,7 @@ public interface Fetish {
 			"fetish_masochist",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.RESISTANCE_PHYSICAL, 2)),
+			null,
 			null,
 			null) {
 
@@ -1926,7 +1922,7 @@ public interface Fetish {
 			null,
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(new Value<>(Attribute.DAMAGE_LUST, 10)),
+			null,
 			null,
 			null) {
 
@@ -2042,8 +2038,7 @@ public interface Fetish {
 			"fetish_size_queen",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			Util.newArrayListOfValues(PresetColour.BASE_YELLOW, PresetColour.BASE_PINK),
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 1)),
+			null,
 			null,
 			null) {
 
@@ -2080,8 +2075,7 @@ public interface Fetish {
 			"fetish_switch",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.MAJOR_PHYSIQUE, 5)),
+			null,
 			null,
 			null) {
 
@@ -2117,9 +2111,7 @@ public interface Fetish {
 			"fetish_breeder",
 			FetishExperience.BASE_RARE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.FERTILITY, 25),
-					new Value<>(Attribute.VIRILITY, 25)),
+			null,
 			null,
 			null) {
 
@@ -2155,9 +2147,7 @@ public interface Fetish {
 			"fetish_sadomasochist",
 			FetishExperience.BASE_EXPERIENCE_GAIN,
 			PresetColour.GENERIC_ARCANE,
-			Util.newHashMapOfValues(
-					new Value<>(Attribute.RESISTANCE_PHYSICAL, 3),
-					new Value<>(Attribute.DAMAGE_PHYSICAL, 10)),
+			null,
 			null,
 			null) {
 
@@ -2224,10 +2214,8 @@ public interface Fetish {
 		private final String name;
 		private final String shortDescriptor;
 		private final int experienceGainFromSexAction;
-		private final HashMap<Attribute, Integer> attributeModifiers;
 		private final String SVGString;
 		private final List<Colour> colourShades;
-		private final List<String> modifiersList;
 		private static final List<String> perkRequirementsList = new ArrayList<>();
 		private static final String bimboString = loadSVGString("fetish_bimbo", "FETISH_BIMBO", List.of(PresetColour.BASE_PINK));
 		private static final String broString = loadSVGString("fetish_bro", "FETISH_BRO", List.of(PresetColour.BASE_BLUE));
@@ -2238,7 +2226,7 @@ public interface Fetish {
 				String pathName,
 				FetishExperience experienceGainFromSexAction,
 				Colour colourShades,
-				HashMap<Attribute, Integer> attributeModifiers,
+				Void attributeModifiers,
 				Void extraEffects,
 				Void fetishesForAutomaticUnlock) {
 			this(renderingPriority,
@@ -2258,21 +2246,14 @@ public interface Fetish {
 				String pathName,
 				FetishExperience experienceGainFromSexAction,
 				List<Colour> colourShades,
-				HashMap<Attribute, Integer> attributeModifiers,
+				Void attributeModifiers,
 				Void extraEffects,
 				Void fetishesForAutomaticUnlock) {
 			this.renderingPriority = renderingPriority;
 			this.name = name;
 			this.shortDescriptor = shortDescriptor;
 			this.experienceGainFromSexAction = experienceGainFromSexAction.getExperience();
-			this.attributeModifiers = attributeModifiers;
 			this.colourShades = colourShades;
-			modifiersList = new ArrayList<>();
-			if(attributeModifiers != null) {
-				for (Map.Entry<Attribute, Integer> e : attributeModifiers.entrySet()) {
-					modifiersList.add("<b>"+(e.getValue() > 0 ? "+" : "") + e.getValue() + "</b> <b style='color: "+ e.getKey().getColour().toWebHexString()+ ";'>"+ Util.capitaliseSentence(e.getKey().getAbbreviatedName())+ "</b>");
-				}
-			}
 			SVGString = pathName==null || pathName.isEmpty() ? "" : loadSVGString(pathName, getId(), colourShades);
 		}
 		@Override
@@ -2295,13 +2276,47 @@ public interface Fetish {
 		}
 		@Override
 		public List<String> getModifiersAsStringList(GameCharacter owner) {
-			List<String> modList = new ArrayList<>(modifiersList);
+			List<String> modList = new ArrayList<>();
+			for(Map.Entry<Attribute, Integer> e : getAttributeModifiers().entrySet())
+				modList.add(String.format("<b>%+d</b> <b style='color:%s;'>%s</b>",
+						e.getValue(),
+						e.getKey().getColour().toWebHexString(),
+						Util.capitaliseSentence(e.getKey().getAbbreviatedName())));
 			modList.addAll(getExtraEffects(owner));
 			return modList;
 		}
 		@Override
-		public HashMap<Attribute, Integer> getAttributeModifiers() {
-			return attributeModifiers;
+		public Map<Attribute, Integer> getAttributeModifiers() {
+			return switch(this) {
+				case IMPREGNATION -> Map.of(
+						Attribute.VIRILITY, 5);
+				case PREGNANCY -> Map.of(
+						Attribute.FERTILITY, 5);
+				case DENIAL -> Map.of(
+						Attribute.RESISTANCE_PHYSICAL, 1,
+						Attribute.RESISTANCE_LUST, 2);
+				case DOMINANT -> Map.of(
+						Attribute.MANA_MAXIMUM, 5);
+				case SUBMISSIVE -> Map.of(
+						Attribute.MAJOR_PHYSIQUE, 2);
+				case SADIST -> Map.of(
+						Attribute.DAMAGE_PHYSICAL, 5);
+				case MASOCHIST -> Map.of(
+						Attribute.RESISTANCE_PHYSICAL, 2);
+				case BIMBO -> Map.of(
+						Attribute.DAMAGE_LUST, 10);
+				case SIZE_QUEEN -> Map.of(
+						Attribute.RESISTANCE_PHYSICAL, 1);
+				case SWITCH -> Map.of(
+						Attribute.MAJOR_PHYSIQUE, 5);
+				case BREEDER -> Map.of(
+						Attribute.FERTILITY, 25,
+						Attribute.VIRILITY, 25);
+				case SADOMASOCHIST -> Map.of(
+						Attribute.RESISTANCE_PHYSICAL, 3,
+						Attribute.DAMAGE_PHYSICAL, 10);
+				default -> Map.of();
+			};
 		}
 		@Override
 		public int getRenderingPriority() {

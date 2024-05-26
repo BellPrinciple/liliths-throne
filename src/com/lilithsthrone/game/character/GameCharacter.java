@@ -7246,12 +7246,10 @@ public abstract class GameCharacter implements XMLSaving {
 	
 	private void applyFetishGainEffects(Fetish fetish) {
 		// Increment bonus attributes from this fetish:
-		if (fetish.getAttributeModifiers() != null) {
-			for (Entry<Attribute, Integer> e : fetish.getAttributeModifiers().entrySet()) {
-				incrementBonusAttribute(e.getKey(), e.getValue());
-			}
+		for (Entry<Attribute, Integer> e : fetish.getAttributeModifiers().entrySet()) {
+			incrementBonusAttribute(e.getKey(), e.getValue());
 		}
-		
+
 		recalculateAvailableCombatMoves();
 		updateAttributeListeners(true);
 		calculateSpecialFetishes();
@@ -7296,12 +7294,10 @@ public abstract class GameCharacter implements XMLSaving {
 	
 	private void applyFetishLossEffects(Fetish fetish) {
 		// Reverse bonus attributes from this fetish:
-		if (fetish.getAttributeModifiers() != null) {
-			for (Entry<Attribute, Integer> e : fetish.getAttributeModifiers().entrySet()) {
-				incrementBonusAttribute(e.getKey(), -e.getValue());
-			}
+		for (Entry<Attribute, Integer> e : fetish.getAttributeModifiers().entrySet()) {
+			incrementBonusAttribute(e.getKey(), -e.getValue());
 		}
-		
+
 		recalculateAvailableCombatMoves();
 		updateAttributeListeners(true);
 		calculateSpecialFetishes();
