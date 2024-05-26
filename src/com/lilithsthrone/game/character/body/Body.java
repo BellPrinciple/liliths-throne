@@ -608,7 +608,7 @@ public class Body implements XMLSaving {
 				bodyNipple.appendChild(mod);
 			}
 			
-		this.breast.milk.saveAsXML("milk", parentElement, doc);
+		this.breast.milk.saveAsXML(parentElement, doc);
 		
 		// Crotch Breasts:
 		Element bodyCrotchBreast = doc.createElement("breastsCrotch");
@@ -641,7 +641,7 @@ public class Body implements XMLSaving {
 				bodyCrotchNipple.appendChild(mod);
 			}
 			
-		this.breastCrotch.milk.saveAsXML("milkCrotch", parentElement, doc);
+		this.breastCrotch.milk.saveAsXML(parentElement, doc);
 		
 		
 		// Ear:

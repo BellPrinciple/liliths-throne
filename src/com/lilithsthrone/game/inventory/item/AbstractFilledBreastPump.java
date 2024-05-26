@@ -93,7 +93,7 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 
 		innerElement = doc.createElement("milk");
 		element.appendChild(innerElement);
-		this.getMilk().saveAsXML("milk", innerElement, doc);
+		this.getMilk().saveAsXML(innerElement, doc);
 		
 		return element;
 	}

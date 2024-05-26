@@ -13,6 +13,7 @@ import com.lilithsthrone.game.character.body.FluidGirlCum;
 import com.lilithsthrone.game.character.body.FluidInterface;
 import com.lilithsthrone.game.character.body.FluidMilk;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
+import com.lilithsthrone.game.character.body.valueEnums.FluidTypeBase;
 import com.lilithsthrone.game.character.gender.Gender;
 import com.lilithsthrone.game.character.race.RaceStage;
 import com.lilithsthrone.game.character.race.Subspecies;
@@ -34,9 +35,7 @@ public class FluidStored implements XMLSaving {
 	private boolean cumVirile;
 	private float virility;
 	private boolean feral;
-	private FluidCum cum;
-	private FluidMilk milk;
-	private FluidGirlCum girlCum;
+	private FluidInterface fluid;
 	private float millilitres;
 	
 	public FluidStored(GameCharacter character, FluidCum cum, float millilitres) {
@@ -55,15 +54,15 @@ public class FluidStored implements XMLSaving {
 			this.feral = false;
 		}
 		
-		this.cum = new FluidCum(cum.getType());
-		this.cum.clearFluidModifiers();
+		fluid = new FluidCum(cum.getType());
+		fluid.clearFluidModifiers();
 		
-		this.cum.setFlavour(null, cum.getFlavour());
+		fluid.setFlavour(null, cum.getFlavour());
 		for(FluidModifier fm : cum.getFluidModifiers()) {
-			this.cum.addFluidModifier(null, fm);
+			fluid.addFluidModifier(null, fm);
 		}
 		for(ItemEffect ie : cum.getTransformativeEffects()) {
-			this.cum.addTransformativeEffect(ie);
+			fluid.addTransformativeEffect(ie);
 		}
 		
 		this.millilitres = millilitres;
@@ -82,15 +81,15 @@ public class FluidStored implements XMLSaving {
 			this.feral = false;
 		}
 		
-		this.cum = new FluidCum(cum.getType());
-		this.cum.clearFluidModifiers();
+		fluid = new FluidCum(cum.getType());
+		fluid.clearFluidModifiers();
 		
-		this.cum.setFlavour(null, cum.getFlavour());
+		fluid.setFlavour(null, cum.getFlavour());
 		for(FluidModifier fm : cum.getFluidModifiers()) {
-			this.cum.addFluidModifier(null, fm);
+			fluid.addFluidModifier(null, fm);
 		}
 		for(ItemEffect ie : cum.getTransformativeEffects()) {
-			this.cum.addTransformativeEffect(ie);
+			fluid.addTransformativeEffect(ie);
 		}
 		
 		this.millilitres = millilitres;
@@ -109,15 +108,15 @@ public class FluidStored implements XMLSaving {
 			this.feral = false;
 		}
 		
-		this.milk = new FluidMilk(milk.getType(), milk.isCrotchMilk());
-		this.milk.clearFluidModifiers();
+		fluid = new FluidMilk(milk.getType(), milk.isCrotchMilk());
+		fluid.clearFluidModifiers();
 		
-		this.milk.setFlavour(null, milk.getFlavour());
+		fluid.setFlavour(null, milk.getFlavour());
 		for(FluidModifier fm : milk.getFluidModifiers()) {
-			this.milk.addFluidModifier(null, fm);
+			fluid.addFluidModifier(null, fm);
 		}
 		for(ItemEffect ie : milk.getTransformativeEffects()) {
-			this.milk.addTransformativeEffect(ie);
+			fluid.addTransformativeEffect(ie);
 		}
 		
 		this.millilitres = millilitres;
@@ -136,15 +135,15 @@ public class FluidStored implements XMLSaving {
 			this.feral = false;
 		}
 		
-		this.girlCum = new FluidGirlCum(girlCum.getType());
-		this.girlCum.clearFluidModifiers();
+		fluid = new FluidGirlCum(girlCum.getType());
+		fluid.clearFluidModifiers();
 		
-		this.girlCum.setFlavour(null, girlCum.getFlavour());
+		fluid.setFlavour(null, girlCum.getFlavour());
 		for(FluidModifier fm : girlCum.getFluidModifiers()) {
-			this.girlCum.addFluidModifier(null, fm);
+			fluid.addFluidModifier(null, fm);
 		}
 		for(ItemEffect ie : girlCum.getTransformativeEffects()) {
-			this.girlCum.addTransformativeEffect(ie);
+			fluid.addTransformativeEffect(ie);
 		}
 		
 		this.millilitres = millilitres;
@@ -206,13 +205,13 @@ public class FluidStored implements XMLSaving {
 			Element bodyElement = doc.createElement("body");
 			fluidStoredElement.appendChild(bodyElement);
 			body.saveAsXML(bodyElement, doc);
-			cum.saveAsXML("fluidCum", fluidStoredElement, doc);
+			fluid.saveAsXML("fluidCum", fluidStoredElement, doc);
 		}
 		if(isMilk()) {
-			milk.saveAsXML("fluidMilk", fluidStoredElement, doc);
+			fluid.saveAsXML("fluidMilk", fluidStoredElement, doc);
 		}
 		if(isGirlCum()) {
-			girlCum.saveAsXML("fluidGirlCum", fluidStoredElement, doc);
+			fluid.saveAsXML("fluidGirlCum", fluidStoredElement, doc);
 		}
 		
 		return fluidStoredElement;
@@ -329,25 +328,19 @@ public class FluidStored implements XMLSaving {
 	}
 	
 	public boolean isCum() {
-		return cum!=null;
+		return fluid.getType().getBaseType() == FluidTypeBase.CUM;
 	}
 
 	public boolean isMilk() {
-		return milk!=null;
+		return fluid.getType().getBaseType() == FluidTypeBase.MILK;
 	}
 
 	public boolean isGirlCum() {
-		return girlCum!=null;
+		return fluid.getType().getBaseType() == FluidTypeBase.GIRLCUM;
 	}
 	
 	public FluidInterface getFluid() {
-		if(isCum()) {
-			return cum;
-		}
-		if(isMilk()) {
-			return milk;
-		}
-		return girlCum;
+		return fluid;
 	}
 
 	/**
