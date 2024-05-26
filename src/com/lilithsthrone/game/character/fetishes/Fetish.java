@@ -3,10 +3,10 @@ package com.lilithsthrone.game.character.fetishes;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import com.lilithsthrone.game.character.GameCharacter;
 import com.lilithsthrone.game.character.attributes.Attribute;
@@ -2007,16 +2007,6 @@ public interface Fetish {
 			null) {
 
 		@Override
-		public String getName(GameCharacter owner) {
-			if(owner == null || owner.isFeminine()) {
-				return "bimbo";
-			}
-			else {
-				return "bro";
-			}
-		}
-
-		@Override
 		public String getShortDescriptor(GameCharacter target) {
 			if(target == null || target.isFeminine()) {
 				return "being a bimbo";
@@ -2171,9 +2161,7 @@ public interface Fetish {
 			Util.newHashMapOfValues(
 					new Value<>(Attribute.MAJOR_PHYSIQUE, 5)),
 			null,
-			Util.newArrayListOfValues(
-					DOMINANT,
-					SUBMISSIVE)) {
+			null) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2211,9 +2199,7 @@ public interface Fetish {
 					new Value<>(Attribute.FERTILITY, 25),
 					new Value<>(Attribute.VIRILITY, 25)),
 			null,
-			Util.newArrayListOfValues(
-					PREGNANCY,
-					IMPREGNATION)) {
+			null) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2251,9 +2237,7 @@ public interface Fetish {
 					new Value<>(Attribute.RESISTANCE_PHYSICAL, 3),
 					new Value<>(Attribute.DAMAGE_PHYSICAL, 10)),
 			null,
-			Util.newArrayListOfValues(
-					SADIST,
-					MASOCHIST)) {
+			null) {
 
 		@Override
 		public String getDescription(GameCharacter owner) {
@@ -2293,17 +2277,6 @@ public interface Fetish {
 					"<span style='color:" + PresetColour.GENERIC_BAD.toWebHexString() + ";'>Amplifies</span> <span style='color:" + PresetColour.GENERIC_ARCANE.toWebHexString() + ";'>'broken virgin'</span>"),
 			null) {
 		@Override
-		public List<Fetish> getFetishesForAutomaticUnlock() {
-			return Util.newArrayListOfValues(
-					PURE_VIRGIN,
-					Main.game.isAnalContentEnabled()
-							? ANAL_RECEIVING
-							: null,
-					ORAL_GIVING,
-					BREASTS_SELF);
-		}
-
-		@Override
 		public String getDescription(GameCharacter owner) {
 			if(owner == null) {
 				return "This fetish relates to a person's desire for retaining their vaginal virginity while using their ass, breasts, or mouth to get their partners to climax.";
@@ -2336,7 +2309,6 @@ public interface Fetish {
 		private final List<Colour> colourShades;
 		private final List<String> extraEffects;
 		private final List<String> modifiersList;
-		private final List<Fetish> fetishesForAutomaticUnlock;
 		private static final List<String> perkRequirementsList = new ArrayList<>();
 		private static final String bimboString = loadSVGString("fetish_bimbo", "FETISH_BIMBO", List.of(PresetColour.BASE_PINK));
 		private static final String broString = loadSVGString("fetish_bro", "FETISH_BRO", List.of(PresetColour.BASE_BLUE));
@@ -2349,7 +2321,7 @@ public interface Fetish {
 				Colour colourShades,
 				HashMap<Attribute, Integer> attributeModifiers,
 				List<String> extraEffects,
-				List<Fetish> fetishesForAutomaticUnlock) {
+				Void fetishesForAutomaticUnlock) {
 			this(renderingPriority,
 					name,
 					shortDescriptor,
@@ -2369,14 +2341,13 @@ public interface Fetish {
 				List<Colour> colourShades,
 				HashMap<Attribute, Integer> attributeModifiers,
 				List<String> extraEffects,
-				List<Fetish> fetishesForAutomaticUnlock) {
+				Void fetishesForAutomaticUnlock) {
 			this.renderingPriority = renderingPriority;
 			this.name = name;
 			this.shortDescriptor = shortDescriptor;
 			this.experienceGainFromSexAction = experienceGainFromSexAction.getExperience();
 			this.attributeModifiers = attributeModifiers;
 			this.extraEffects = extraEffects;
-			this.fetishesForAutomaticUnlock = Objects.requireNonNullElseGet(fetishesForAutomaticUnlock, ArrayList::new);
 			this.colourShades = colourShades;
 			modifiersList = new ArrayList<>();
 			if(attributeModifiers != null) {
@@ -2387,15 +2358,13 @@ public interface Fetish {
 			SVGString = pathName==null || pathName.isEmpty() ? "" : loadSVGString(pathName, getId(), colourShades);
 		}
 		@Override
-		public String getId() {
+		public final String getId() {
 			return "FETISH_" + name();
 		}
 		@Override
-		public List<Fetish> getFetishesForAutomaticUnlock() {
-			return fetishesForAutomaticUnlock;
-		}
-		@Override
-		public String getName(GameCharacter owner) {
+		public final String getName(GameCharacter owner) {
+			if(this == BIMBO)
+				return owner == null || owner.isFeminine() ? "bimbo" : "bro";
 			return name;
 		}
 		@Override
@@ -2433,6 +2402,26 @@ public interface Fetish {
 		@Override
 		public String getSVGString(GameCharacter owner) {
 			return SVGString;
+		}
+		@Override
+		public final List<Fetish> getFetishesForAutomaticUnlock() {
+			return switch(this) {
+				case SWITCH -> List.of(
+						DOMINANT,
+						SUBMISSIVE);
+				case BREEDER -> List.of(
+						PREGNANCY,
+						IMPREGNATION);
+				case SADOMASOCHIST -> List.of(
+						SADIST,
+						MASOCHIST);
+				case LUSTY_MAIDEN -> Arrays.asList(
+						PURE_VIRGIN,
+						Main.game.isAnalContentEnabled() ? ANAL_RECEIVING : null,
+						ORAL_GIVING,
+						BREASTS_SELF);
+				default -> List.of();
+			};
 		}
 		private static String loadSVGString(String name, String id, List<Colour> colourShades) {
 			try(InputStream is = Fetish.class.getResourceAsStream("/com/lilithsthrone/res/fetishes/" + name + ".svg")) {
