@@ -18984,9 +18984,12 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	/**
+	 * @param charactersFluid The creator of the fluid, or null if unknown.
+	 * @param subspecies The subspecies of the unknown character.
+	 * @param halfDemonSubspecies The half-demon subspecies of the unknown character.
 	 * @param fluid The FluidType to be ingested.
 	 * @param orificeIngestedThrough Orifice through which the fluid is being ingested.
-	 * @param addictive Is this fluid addictive or not.
+	 * @param millilitres The amount of fluid being ingested.
 	 * @return A <b>formatted paragraph</b> description of addiction increasing/satisfied, or an empty String if no addictive effects occur.
 	 */
 	public String ingestFluid(GameCharacter charactersFluid, Body cumBody, FluidInterface fluid, SexAreaOrifice orificeIngestedThrough, float millilitres) {
@@ -19176,7 +19179,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 
 	/**
-	 * @param alcoholLevelIncrement A float from 0 to 1, corresponding to 0% to 100% intoxication.
+	 * @param alcoholLevel A float from 0 to 1, corresponding to 0% to 100% intoxication.
 	 * @return A formatted description of the character's intoxication level increasing.
 	 */
 	public String setAlcoholLevel(float alcoholLevel) {
@@ -19431,9 +19434,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 
 	/**
-	 * Used by isAlreadyDisrupted function of CombatMove to figure out if a move of it's type is already disrupted.
-	 * @param type
-	 * @return
+	 * Used by isAlreadyDisrupted function of CombatMove to figure out if a move of its type is already disrupted.
 	 */
 	public boolean disruptionByTypeCheck(CombatMoveType typeBase) {
 		for(CombatMoveType type : typeBase.getCountsAsList()) {
@@ -22752,8 +22753,8 @@ public abstract class GameCharacter implements XMLSaving {
 	 * TODO Not currently used. Not sure where it was meant to be used...
 	 * 
 	 * @param outfit The outfit to load onto this character.
-	 * @param oldClothingSentTo Where the clothing this character is currently wearing should be sent to.
-	 * @param newClothingDrawnFrom Where the clothing to be loaded from the outfit is coming from.
+	 * @param oldClothingAndWeaponsSentTo Where the clothing this character is currently wearing should be sent to.
+	 * @param newClothingAndWeaponsDrawnFrom Where the clothing to be loaded from the outfit is coming from.
 	 */
 	public void loadOutfit(Outfit outfit, OutfitSource oldClothingAndWeaponsSentTo, OutfitSource newClothingAndWeaponsDrawnFrom) {
 		if(oldClothingAndWeaponsSentTo==OutfitSource.NOWHERE) {
@@ -25301,7 +25302,7 @@ public abstract class GameCharacter implements XMLSaving {
 	
 	/**
 	 * As feral transformations should be a special event, there is no associated generic transformation text.
-	 * @param feralAttributes Pass in the Subspecies to which this character should be transformed into a feral version of. Pass in null to transform back from feral to a standard anthro.
+	 * @param subspecies Pass in the Subspecies to which this character should be transformed into a feral version of. Pass in null to transform back from feral to a standard anthro.
 	 */
 	public void setFeral(Subspecies subspecies) {
 		if(subspecies!=null
