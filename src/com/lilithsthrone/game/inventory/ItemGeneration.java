@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.FluidCum;
-import com.lilithsthrone.game.character.body.FluidMilk;
+import com.lilithsthrone.game.character.body.Fluid;
 import com.lilithsthrone.game.combat.DamageType;
 import com.lilithsthrone.game.dialogue.eventLog.EventLogEntryEncyclopediaUnlock;
 import com.lilithsthrone.game.inventory.clothing.AbstractClothing;
@@ -43,11 +42,11 @@ public class ItemGeneration {
 		return new AbstractItem(itemType) {};
 	}
 	
-	public AbstractItem generateFilledCondom(ItemType filledCondomType, Colour colour, GameCharacter character, FluidCum cum, int millilitres) {
+	public AbstractItem generateFilledCondom(ItemType filledCondomType, Colour colour, GameCharacter character, Fluid cum, int millilitres) {
 		return new AbstractFilledCondom(filledCondomType, colour, character, cum, millilitres) {};
 	}
 
-	public AbstractItem generateFilledBreastPump(Colour colour, GameCharacter character, FluidMilk milk, int quantity) {
+	public AbstractItem generateFilledBreastPump(Colour colour, GameCharacter character, Fluid milk, int quantity) {
 		return new AbstractFilledBreastPump(ItemType.MOO_MILKER_FULL, colour, character, milk, quantity) {};
 	}
 	

@@ -38,7 +38,7 @@ public class Testicle implements BodyPartInterface {
 	protected int cumExpulsion;
 	protected boolean internal;
 	
-	protected FluidCum cum;
+	protected Fluid cum;
 
 	public Testicle(TesticleType type, int testicleSize, int cumStorage, int testicleCount) {
 		this.type = type;
@@ -52,7 +52,7 @@ public class Testicle implements BodyPartInterface {
 		
 		internal = type.isInternal();
 		
-		cum = new FluidCum(type.getFluidType());
+		cum = new Fluid(type.getFluidType(), false);
 	}
 
 	public Testicle(Testicle testicleToCopy) {
@@ -62,19 +62,19 @@ public class Testicle implements BodyPartInterface {
 		this.cumStored = testicleToCopy.cumStored;
 		this.cumRegeneration = testicleToCopy.cumRegeneration;
 		this.cumExpulsion = testicleToCopy.cumExpulsion;
-		
+
 		this.testicleCount = testicleToCopy.testicleCount;
-		
+
 		this.internal = testicleToCopy.internal;
-		
-		this.cum = new FluidCum(testicleToCopy.cum);
+
+		this.cum = new Fluid(testicleToCopy.cum);
 	}
 
 	public void setCum(FluidCum cum) {
 		this.cum = cum;
 	}
-	
-	public FluidCum getCum() {
+
+	public Fluid getCum() {
 		return cum;
 	}
 

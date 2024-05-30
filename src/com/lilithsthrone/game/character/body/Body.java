@@ -1107,10 +1107,10 @@ public class Body implements XMLSaving {
 				importedBreast.nipples.orificeNipples.addOrificeModifier(null, OrificeModifier.valueOf(e.getTextContent()));
 			}
 		}
-		
+
 		Main.game.getCharacterUtils().appendToImportLog(log, "<br/><br/>Milk:");
 		
-		importedBreast.milk = FluidMilk.loadFromXML("milk", parentElement, doc, importedBreast.getType().getFluidType(), false);
+		importedBreast.milk = Fluid.loadFromXML("milk", parentElement, importedBreast.getType().getFluidType(), false);
 		if(Main.isVersionOlderThan(Main.VERSION_NUMBER, "0.2.5.1")) {
 			importedBreast.milk.type = importedBreast.getType().getFluidType();
 		}
@@ -1269,8 +1269,8 @@ public class Body implements XMLSaving {
 					importedFace.tongue.tongueModifiers.add(TongueModifier.valueOf(e.getTextContent()));
 				}
 			}
-			
-			
+
+
 		// **************** Hair **************** //
 		
 		Element hair = (Element)parentElement.getElementsByTagName("hair").item(0);
@@ -1491,7 +1491,7 @@ public class Body implements XMLSaving {
 				importedPenis.orificeUrethra.addOrificeModifier(null, OrificeModifier.valueOf(e.getTextContent()));
 			}
 		}
-		
+
 		importedPenis.testicle.internal = (Boolean.valueOf(testicles.getAttribute("internal")));
 		
 		try {
@@ -1513,7 +1513,7 @@ public class Body implements XMLSaving {
 		
 		Main.game.getCharacterUtils().appendToImportLog(log, "<br/><br/>Cum:");
 		
-		importedPenis.testicle.cum = FluidCum.loadFromXML("cum", parentElement, doc, importedPenis.getType().getTesticleType().getFluidType());
+		importedPenis.testicle.cum = Fluid.loadFromXML("cum", parentElement, importedPenis.getType().getTesticleType().getFluidType(), false);
 
 		
 		// **************** Skin **************** //
@@ -1672,7 +1672,7 @@ public class Body implements XMLSaving {
 				importedVagina.getClitoris().addClitorisModifier(null, PenetrationModifier.valueOf(e.getTextContent()));
 			}
 		}
-		
+
 		importedVagina.pierced = (Boolean.valueOf(vagina.getAttribute("pierced")));
 		
 		if(vagina.hasAttribute("eggLayer")) {
@@ -1724,7 +1724,7 @@ public class Body implements XMLSaving {
 				importedVagina.orificeVagina.addOrificeModifier(null, OrificeModifier.valueOf(e.getTextContent()));
 			}
 		}
-		
+
 		try {
 			depth = OrificeDepth.TWO_AVERAGE.getValue();
 			depthAttribute = vagina.getAttribute("urethraDepth");
@@ -1766,7 +1766,7 @@ public class Body implements XMLSaving {
 		
 		Main.game.getCharacterUtils().appendToImportLog(log, "<br/><br/>Girlcum:");
 		
-		importedVagina.girlcum = FluidGirlCum.loadFromXML("girlcum", parentElement, doc, importedVagina.getType().getFluidType());
+		importedVagina.girlcum = Fluid.loadFromXML("girlcum", parentElement, importedVagina.getType().getFluidType(), false);
 		
 		// **************** Wing **************** //
 		
@@ -1996,11 +1996,8 @@ public class Body implements XMLSaving {
 
 			Main.game.getCharacterUtils().appendToImportLog(log, "<br/><br/>Milk:");
 
-			if(parentElement.getElementsByTagName("milkCrotch").item(0)==null) {
-				importedCrotchBreast.milk = FluidMilk.loadFromXML("milk", parentElement, doc, importedCrotchBreast.getType().getFluidType(), true);
-			} else {
-				importedCrotchBreast.milk = FluidMilk.loadFromXML("milkCrotch", parentElement, doc, importedCrotchBreast.getType().getFluidType(), true);
-			}
+			boolean crotchMilk = parentElement.getElementsByTagName("milkCrotch").item(0) != null;
+			importedCrotchBreast.milk = Fluid.loadFromXML(crotchMilk ? "milkCrotch" : "milk", parentElement, importedCrotchBreast.getType().getFluidType(), true);
 			if(Main.isVersionOlderThan(Main.VERSION_NUMBER, "0.2.5.1")) {
 				importedCrotchBreast.milk.type = importedCrotchBreast.getType().getFluidType();
 			}

@@ -52,10 +52,7 @@ import com.lilithsthrone.game.character.body.Arm;
 import com.lilithsthrone.game.character.body.Body;
 import com.lilithsthrone.game.character.body.BodyPartInterface;
 import com.lilithsthrone.game.character.body.CoverableArea;
-import com.lilithsthrone.game.character.body.FluidCum;
-import com.lilithsthrone.game.character.body.FluidGirlCum;
 import com.lilithsthrone.game.character.body.Fluid;
-import com.lilithsthrone.game.character.body.FluidMilk;
 import com.lilithsthrone.game.character.body.Penis;
 import com.lilithsthrone.game.character.body.Testicle;
 import com.lilithsthrone.game.character.body.Vagina;
@@ -8843,7 +8840,7 @@ public abstract class GameCharacter implements XMLSaving {
 									ingestFluidSB.append(this.ingestFluid(null,
 											subspeciesBackup,
 											halfDemonSubspeciesBackup,
-											new FluidCum(body.getPenisType().getTesticleType().getFluidType()),
+											new Fluid(body.getPenisType().getTesticleType().getFluidType(), false),
 											(SexAreaOrifice)performingArea,
 											(float) (body.getCumProduction()*(0.5+Math.random()))));
 								}
@@ -9386,7 +9383,7 @@ public abstract class GameCharacter implements XMLSaving {
 								this.ingestFluid(null,
 										subspeciesBackup,
 										halfDemonSubspeciesBackup,
-										new FluidGirlCum(body.getVaginaType().getFluidType()),
+										new Fluid(body.getVaginaType().getFluidType(), false),
 										(SexAreaOrifice)performingArea,
 										(float) Math.max(5, Math.min(25, body.getVaginaWetness()*5)));
 							}
@@ -9423,7 +9420,7 @@ public abstract class GameCharacter implements XMLSaving {
 								this.ingestFluid(null,
 										subspeciesBackup,
 										halfDemonSubspeciesBackup,
-										new FluidCum(body.getBreastType().getFluidType()),
+										new Fluid(body.getBreastType().getFluidType(), false),
 										(SexAreaOrifice)performingArea,
 										(float) Math.min(500, (body.getFemaleLactationRate()*(0.5+Math.random()))));
 							}
@@ -9460,7 +9457,7 @@ public abstract class GameCharacter implements XMLSaving {
 								this.ingestFluid(null,
 										subspeciesBackup,
 										halfDemonSubspeciesBackup,
-										new FluidCum(body.getBreastType().getFluidType()),
+										new Fluid(body.getBreastType().getFluidType(), false),
 										(SexAreaOrifice)performingArea,
 										(float) Math.min(500, (body.getFemaleLactationRate()*(0.5+Math.random()))));
 							}
@@ -18958,18 +18955,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 
 	public String ingestFluid(GameCharacter charactersFluid, Body body, FluidType fluidType, SexAreaOrifice orificeIngestedThrough, float millilitres) {
-		Fluid fluid = null;
-		switch(fluidType.getBaseType()) {
-			case CUM:
-				fluid = new FluidCum(fluidType);
-				break;
-			case GIRLCUM:
-				fluid = new FluidGirlCum(fluidType);
-				break;
-			case MILK:
-				fluid = new FluidMilk(fluidType, false);
-				break;
-		}
+		Fluid fluid = new Fluid(fluidType, false);
 		return ingestFluid(charactersFluid, body, fluid, orificeIngestedThrough, millilitres);
 	}
 
@@ -19003,19 +18989,13 @@ public abstract class GameCharacter implements XMLSaving {
 			millilitres = Math.min(millilitres, Body.MAXIMUM_CREAMPIE_WHILE_PREGNANT-this.getTotalFluidInArea(orificeIngestedThrough));
 		}
 		
-		FluidStored newFluid;
-		if(fluid instanceof FluidCum) {
-			if(charactersFluid!=null) {
-				newFluid = new FluidStored(charactersFluid, ((FluidCum) fluid), millilitres);
-			} else {
-				newFluid = new FluidStored("", cumBody, ((FluidCum) fluid), millilitres);
-			}
-		} else if(fluid instanceof FluidMilk) {
-			newFluid = new FluidStored(charactersFluid==null?null:charactersFluid.getId(), ((FluidMilk)fluid), millilitres);
-		} else {
-			newFluid = new FluidStored(charactersFluid==null?null:charactersFluid.getId(), ((FluidGirlCum)fluid), millilitres);
-		}
-		
+		FluidStored newFluid = switch(fluid.getType().getBaseType()) {
+			case CUM -> charactersFluid != null
+					? new FluidStored(charactersFluid, fluid, millilitres)
+					: new FluidStored("", cumBody, fluid, millilitres);
+			case MILK, GIRLCUM -> new FluidStored(charactersFluid == null ? null : charactersFluid.getId(), fluid, millilitres);
+		};
+
 		if(fluid.getType().getBaseType()==FluidTypeBase.CUM) {
 			if(Main.game.isInSex() && Main.sex.getAllParticipants().contains(this) && Main.sex.getAllParticipants().contains(charactersFluid)) {
 				Main.sex.addLubrication(this, orificeIngestedThrough, charactersFluid, LubricationType.CUM);
@@ -19036,7 +19016,7 @@ public abstract class GameCharacter implements XMLSaving {
 						new FluidStored(
 								charactersFluid==null?"":charactersFluid.getId(),
 								cumBody,
-								(FluidCum)fluid, millilitres));
+								fluid, millilitres));
 			}
 			
 		} else if(fluid.getType().getBaseType()==FluidTypeBase.MILK) {
@@ -19054,7 +19034,7 @@ public abstract class GameCharacter implements XMLSaving {
 				}
 			}
 			if(!found) {
-				this.addFluidStored(orificeIngestedThrough, new FluidStored(charactersFluid==null?"":charactersFluid.getId(), (FluidMilk)fluid, millilitres));
+				this.addFluidStored(orificeIngestedThrough, new FluidStored(charactersFluid==null?"":charactersFluid.getId(), fluid, millilitres));
 			}
 			
 		} else if(fluid.getType().getBaseType()==FluidTypeBase.GIRLCUM) {
@@ -19072,7 +19052,7 @@ public abstract class GameCharacter implements XMLSaving {
 				}
 			}
 			if(!found) {
-				this.addFluidStored(orificeIngestedThrough, new FluidStored(charactersFluid==null?"":charactersFluid.getId(), (FluidGirlCum)fluid, millilitres));
+				this.addFluidStored(orificeIngestedThrough, new FluidStored(charactersFluid==null?"":charactersFluid.getId(), fluid, millilitres));
 			}
 		}
 		
@@ -21704,11 +21684,11 @@ public abstract class GameCharacter implements XMLSaving {
 			float drainAmount = Math.min(drain, f.getMillilitres());
 			
 			if(f.isCum()) {
-				fluidsDrained.add(new FluidStored(f.getCharactersFluidID(), f.getBody(), (FluidCum)f.getFluid(), Math.min(f.getMillilitres(), drainAmount)));
+				fluidsDrained.add(new FluidStored(f.getCharactersFluidID(), f.getBody(), f.getFluid(), Math.min(f.getMillilitres(), drainAmount)));
 			} else if(f.isGirlCum()) {
-				fluidsDrained.add(new FluidStored(f.getCharactersFluidID(), (FluidGirlCum)f.getFluid(), Math.min(f.getMillilitres(), drainAmount)));
+				fluidsDrained.add(new FluidStored(f.getCharactersFluidID(), f.getFluid(), Math.min(f.getMillilitres(), drainAmount)));
 			} else if(f.isMilk()) {
-				fluidsDrained.add(new FluidStored(f.getCharactersFluidID(), (FluidMilk)f.getFluid(), Math.min(f.getMillilitres(), drainAmount)));
+				fluidsDrained.add(new FluidStored(f.getCharactersFluidID(), f.getFluid(), Math.min(f.getMillilitres(), drainAmount)));
 			}
 			
 			f.incrementMillilitres(-drainAmount);
@@ -30656,7 +30636,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	// Cum:
-	public FluidCum getCum() {
+	public Fluid getCum() {
 		return getCurrentPenis().getTesticle().getCum();
 	}
 	public FluidType getCumType() {
@@ -31497,7 +31477,7 @@ public abstract class GameCharacter implements XMLSaving {
 	}
 	
 	// Girlcum:
-	public FluidGirlCum getGirlcum() {
+	public Fluid getGirlcum() {
 		return body.getVagina().getGirlcum();
 	}
 	public FluidType getGirlcumType() {

@@ -35,7 +35,7 @@ public class Vagina implements BodyPartInterface {
 	protected boolean eggLayer;
 	
 	protected Orifice orificeVagina;
-	protected FluidGirlCum girlcum;
+	protected Fluid girlcum;
 	protected Orifice orificeUrethra;
 	protected boolean hymen;
 	protected boolean squirter;
@@ -48,7 +48,7 @@ public class Vagina implements BodyPartInterface {
 		this.eggLayer = type.isEggLayer();
 		orificeVagina = new Orifice(Orifice.Type.VAGINA, wetness, capacity, depth, elasticity, plasticity, virgin, type.getDefaultRacialOrificeModifiers());
 		orificeUrethra = new Orifice(Orifice.Type.VAGINA_URETHRA, Wetness.TWO_MOIST.getValue(), 0, 2, OrificeElasticity.ZERO_UNYIELDING.getValue(), OrificePlasticity.THREE_RESILIENT.getValue(), true, new ArrayList<>());
-		girlcum = new FluidGirlCum(type.getFluidType());
+		girlcum = new Fluid(type.getFluidType(), false);
 		hymen = virgin;
 		squirter = wetness > Wetness.THREE_WET.getValue();
 	}
@@ -72,7 +72,7 @@ public class Vagina implements BodyPartInterface {
 		this.girlcum = girlcum;
 	}
 
-	public FluidGirlCum getGirlcum() {
+	public Fluid getGirlcum() {
 		return girlcum;
 	}
 	

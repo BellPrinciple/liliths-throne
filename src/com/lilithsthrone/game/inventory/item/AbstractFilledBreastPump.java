@@ -1,12 +1,12 @@
 package com.lilithsthrone.game.inventory.item;
 
+import com.lilithsthrone.game.character.body.valueEnums.FluidTypeBase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.lilithsthrone.controller.xmlParsing.XMLUtil;
 import com.lilithsthrone.game.character.GameCharacter;
-import com.lilithsthrone.game.character.body.FluidMilk;
-import com.lilithsthrone.game.character.body.types.FluidType;
+import com.lilithsthrone.game.character.body.Fluid;
 import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.inventory.enchanting.ItemEffect;
 import com.lilithsthrone.game.sex.SexAreaOrifice;
@@ -25,14 +25,14 @@ import com.lilithsthrone.utils.colours.PresetColour;
 public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving {
 	
 	private String milkProvider;
-	private FluidMilk milk;
+	private Fluid milk;
 	private int millilitresStored;
 	
-	public AbstractFilledBreastPump(ItemType itemType, Colour colour, GameCharacter milkProvider, FluidMilk milk, int millilitresStored) {
+	public AbstractFilledBreastPump(ItemType itemType, Colour colour, GameCharacter milkProvider, Fluid milk, int millilitresStored) {
 		super(itemType);
 		
 		this.milkProvider = milkProvider.getId();
-		this.milk = new FluidMilk(milk.getType(), milk.isCrotchMilk());
+		this.milk = new Fluid(milk.getType(), milk.isCrotchMilk());
 		this.milk.setFlavour(milkProvider, milk.getFlavour());
 		for(FluidModifier fm : milk.getFluidModifiers()) {
 			this.milk.addFluidModifier(milkProvider, fm);
@@ -42,11 +42,11 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 		this.millilitresStored = millilitresStored;
 	}
 	
-	public AbstractFilledBreastPump(ItemType itemType, Colour colour, String milkProviderId, FluidMilk milk, int millilitresStored) {
+	public AbstractFilledBreastPump(ItemType itemType, Colour colour, String milkProviderId, Fluid milk, int millilitresStored) {
 		super(itemType);
 		
 		this.milkProvider = milkProviderId;
-		this.milk = new FluidMilk(milk.getType(), milk.isCrotchMilk());
+		this.milk = new Fluid(milk.getType(), milk.isCrotchMilk());
 		this.milk.setFlavour(null, milk.getFlavour());
 		for(FluidModifier fm : milk.getFluidModifiers()) {
 			this.milk.addFluidModifier(null, fm);
@@ -103,14 +103,11 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 		if(provider.isEmpty()) {
 			provider = parentElement.getAttribute("milkProvidor"); // Support for old versions in which I could not spell
 		}
-		Object milk = parentElement.getElementsByTagName("milk").item(0);
 		return new AbstractFilledBreastPump(
 				ItemType.table.exact(parentElement.getAttribute("id")).orElse(null),
 				PresetColour.getColourFromId(parentElement.getAttribute("colour")),
 				provider,
-				(milk==null
-					?new FluidMilk(FluidType.MILK_HUMAN, false)
-					:FluidMilk.loadFromXML("milk", (Element) milk, doc)),
+				Fluid.loadFromXML("milk", parentElement, FluidTypeBase.MILK, false),
 				(parentElement.getAttribute("millilitresStored").isEmpty()
 					?25
 					:Integer.valueOf(parentElement.getAttribute("millilitresStored"))));
@@ -141,7 +138,7 @@ public class AbstractFilledBreastPump extends AbstractItem implements XMLSaving 
 		}
 	}
 
-	public FluidMilk getMilk() {
+	public Fluid getMilk() {
 		return milk;
 	}
 

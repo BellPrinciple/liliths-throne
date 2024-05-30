@@ -40,11 +40,11 @@ public class Breast implements BodyPartInterface {
 	protected int nippleCountPerBreast;
 	
 	protected Nipples nipples;
-	protected FluidMilk milk;
+	protected Fluid milk;
 	
 	/**
 	 * @param size in inches from bust to underbust using the UK system.
-	 * @param lactation in mL.
+	 * @param milkStorage in mL.
 	 */
 	public Breast(BreastType type, BreastShape shape, int size, int milkStorage, int rows,
 			int nippleSize, NippleShape nippleShape, int areolaeSize, AreolaeShape areolaeShape, int nippleCountPerBreast, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
@@ -58,8 +58,8 @@ public class Breast implements BodyPartInterface {
 		this.nippleCountPerBreast = nippleCountPerBreast;
 		
 		this.nipples = new Nipples(type.getNippleType(), nippleSize, nippleShape, areolaeSize, areolaeShape, Lactation.getLactationFromInt(milkStorage).getAssociatedWetness().getValue(), capacity, depth, elasticity, plasticity, virgin, false);
-		
-		this.milk = new FluidMilk(type.getFluidType(), false);
+
+		this.milk = new Fluid(type.getFluidType(), false);
 	}
 
 	public Breast(Breast breastToCopy) {
@@ -71,10 +71,10 @@ public class Breast implements BodyPartInterface {
 		this.milkRegeneration = breastToCopy.milkRegeneration;
 		this.rows = breastToCopy.rows;
 		this.nippleCountPerBreast = breastToCopy.nippleCountPerBreast;
-		
+
 		this.nipples = new Nipples(breastToCopy.nipples);
-		
-		this.milk = new FluidMilk(breastToCopy.milk);
+
+		this.milk = new Fluid(breastToCopy.milk);
 	}
 	
 	@Override
@@ -120,7 +120,7 @@ public class Breast implements BodyPartInterface {
 		this.milk = milk;
 	}
 
-	public FluidMilk getMilk() {
+	public Fluid getMilk() {
 		return milk;
 	}
 	
