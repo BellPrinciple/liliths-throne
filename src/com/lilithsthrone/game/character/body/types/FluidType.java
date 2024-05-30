@@ -58,8 +58,8 @@ public interface FluidType extends BodyPartTypeInterface {
 	}
 
 	// Cum:
-	
-	 public static AbstractFluidType CUM_HUMAN = new AbstractFluidType(FluidTypeBase.CUM,
+
+	public static AbstractFluidType CUM_HUMAN = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.HUMAN,
 			null,
@@ -99,7 +99,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_DEMON = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_DEMON = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.DEMON,
 			Util.newArrayListOfValues("demon-", "demonic-"),
@@ -111,7 +111,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_DOG_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_DOG_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.DOG_MORPH,
 			Util.newArrayListOfValues("dog-", "canine-"),
@@ -123,7 +123,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_WOLF_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_WOLF_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.WOLF_MORPH,
 			Util.newArrayListOfValues("wolf-", "lupine-"),
@@ -136,7 +136,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_FOX_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_FOX_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.FOX_MORPH,
 			Util.newArrayListOfValues("fox-", "vulpine-"),
@@ -148,7 +148,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_CAT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_CAT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.CAT_MORPH,
 			Util.newArrayListOfValues("cat-", "feline-"),
@@ -160,7 +160,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_SQUIRREL_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_SQUIRREL_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.SQUIRREL_MORPH,
 			Util.newArrayListOfValues("squirrel-", "rodent-"),
@@ -172,7 +172,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_RAT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_RAT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.RAT_MORPH,
 			Util.newArrayListOfValues("rat-", "rodent-"),
@@ -184,7 +184,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_RABBIT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_RABBIT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.RABBIT_MORPH,
 			Util.newArrayListOfValues("rabbit-"),
@@ -196,7 +196,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_BAT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_BAT_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.BAT_MORPH,
 			Util.newArrayListOfValues("bat-"),
@@ -208,7 +208,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_ALLIGATOR_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_ALLIGATOR_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.ALLIGATOR_MORPH,
 			Util.newArrayListOfValues("alligator-", "reptilian-"),
@@ -220,7 +220,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_HORSE_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_HORSE_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.HORSE_MORPH,
 			Util.newArrayListOfValues("stallion-", "horse-", "equine-"),
@@ -233,7 +233,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_REINDEER_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_REINDEER_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.REINDEER_MORPH,
 			Util.newArrayListOfValues("reindeer-"),
@@ -246,7 +246,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_COW_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_COW_MORPH = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.COW_MORPH,
 			Util.newArrayListOfValues("bull-", "bovine-"),
@@ -259,7 +259,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType CUM_HARPY = new AbstractFluidType(FluidTypeBase.CUM,
+	public static AbstractFluidType CUM_HARPY = new AbstractFluidType(FluidTypeBase.CUM,
 			FluidFlavour.CUM,
 			Race.HARPY,
 			Util.newArrayListOfValues("harpy-", "avian-"),
@@ -272,8 +272,8 @@ public interface FluidType extends BodyPartTypeInterface {
 	};
 
 	// Girl cum:
-	
-	 public static AbstractFluidType GIRL_CUM_HUMAN = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+
+	public static AbstractFluidType GIRL_CUM_HUMAN = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.HUMAN,
 			null,
@@ -311,7 +311,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_DEMON = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_DEMON = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.DEMON,
 			null,
@@ -322,7 +322,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_DOG_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_DOG_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.DOG_MORPH,
 			null,
@@ -333,7 +333,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_WOLF_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_WOLF_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.WOLF_MORPH,
 			null,
@@ -344,7 +344,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_FOX_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_FOX_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.FOX_MORPH,
 			null,
@@ -355,7 +355,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_CAT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_CAT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.CAT_MORPH,
 			null,
@@ -366,7 +366,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_SQUIRREL_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_SQUIRREL_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.SQUIRREL_MORPH,
 			null,
@@ -377,7 +377,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_RAT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_RAT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.RAT_MORPH,
 			null,
@@ -388,7 +388,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_RABBIT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_RABBIT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.RABBIT_MORPH,
 			null,
@@ -399,7 +399,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_BAT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_BAT_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.BAT_MORPH,
 			null,
@@ -410,7 +410,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_ALLIGATOR_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_ALLIGATOR_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.ALLIGATOR_MORPH,
 			null,
@@ -421,7 +421,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_HORSE_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_HORSE_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.HORSE_MORPH,
 			null,
@@ -432,7 +432,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_REINDEER_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_REINDEER_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.REINDEER_MORPH,
 			null,
@@ -443,7 +443,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_COW_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_COW_MORPH = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.COW_MORPH,
 			null,
@@ -454,7 +454,7 @@ public interface FluidType extends BodyPartTypeInterface {
 					FluidModifier.SLIMY)) {
 	};
 
-	 public static AbstractFluidType GIRL_CUM_HARPY = new AbstractFluidType(FluidTypeBase.GIRLCUM,
+	public static AbstractFluidType GIRL_CUM_HARPY = new AbstractFluidType(FluidTypeBase.GIRLCUM,
 			FluidFlavour.GIRL_CUM,
 			Race.HARPY,
 			null,
@@ -466,8 +466,8 @@ public interface FluidType extends BodyPartTypeInterface {
 	};
 
 	// Milks:
-	
-	 public static AbstractFluidType MILK_HUMAN = new AbstractFluidType(FluidTypeBase.MILK,
+
+	public static AbstractFluidType MILK_HUMAN = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.HUMAN,
 			null,
@@ -503,7 +503,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_COW_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_COW_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.COW_MORPH,
 			null,
@@ -513,7 +513,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_DEMON = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_DEMON = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.DEMON,
 			null,
@@ -523,7 +523,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_DOG_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_DOG_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.DOG_MORPH,
 			null,
@@ -533,7 +533,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_WOLF_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_WOLF_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.WOLF_MORPH,
 			null,
@@ -543,7 +543,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_FOX_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_FOX_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.FOX_MORPH,
 			null,
@@ -553,7 +553,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_CAT_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_CAT_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.CAT_MORPH,
 			null,
@@ -563,7 +563,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_SQUIRREL_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_SQUIRREL_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.SQUIRREL_MORPH,
 			null,
@@ -573,7 +573,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_RAT_MORPH = new AbstractFluidType(FluidTypeBase.MILK, // I don't get it. Everyone loves rats, but they don't wanna drink the rats' milk?
+	public static AbstractFluidType MILK_RAT_MORPH = new AbstractFluidType(FluidTypeBase.MILK, // I don't get it. Everyone loves rats, but they don't wanna drink the rats' milk?
 			FluidFlavour.MILK,
 			Race.RAT_MORPH,
 			null,
@@ -583,7 +583,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_RABBIT_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_RABBIT_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.RABBIT_MORPH,
 			null,
@@ -593,7 +593,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_BAT_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_BAT_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.BAT_MORPH,
 			null,
@@ -603,7 +603,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_ALLIGATOR_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_ALLIGATOR_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.ALLIGATOR_MORPH,
 			null,
@@ -613,7 +613,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_HORSE_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_HORSE_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.HORSE_MORPH,
 			null,
@@ -623,7 +623,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_REINDEER_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_REINDEER_MORPH = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.REINDEER_MORPH,
 			null,
@@ -633,7 +633,7 @@ public interface FluidType extends BodyPartTypeInterface {
 			Util.newArrayListOfValues()) {
 	};
 
-	 public static AbstractFluidType MILK_HARPY = new AbstractFluidType(FluidTypeBase.MILK,
+	public static AbstractFluidType MILK_HARPY = new AbstractFluidType(FluidTypeBase.MILK,
 			FluidFlavour.MILK,
 			Race.HARPY,
 			null,
@@ -644,15 +644,15 @@ public interface FluidType extends BodyPartTypeInterface {
 	};
 
 	TypeTable<FluidType> table = new TypeTable<>(
-		FluidType::sanitize,
+			FluidType::sanitize,
 		FluidType.class,
-		AbstractFluidType.class,
-		"fluid",
-		(f,n,a,m)->{
-			AbstractFluidType t = new AbstractFluidType(f,a,m) {};
-			t.id = n;
-			return t;
-		});
+			AbstractFluidType.class,
+			"fluid",
+			(f, n, a, m) -> {
+				AbstractFluidType t = new AbstractFluidType(f, a, m) {};
+				t.id = n;
+				return t;
+			});
 	//TODO remove this
 	Object initializer = new Object() {{
 		for(java.lang.reflect.Field field : FluidType.class.getDeclaredFields()) {
@@ -670,26 +670,18 @@ public interface FluidType extends BodyPartTypeInterface {
 	}
 
 	private static String sanitize(String id) {
-		if(id.equals("CUM_IMP")) {
-			id = "CUM_DEMON";
-			
-		} else if(id.equals("GIRL_CUM_IMP")) {
-			id = "GIRL_CUM_DEMON";
-			
-		} else if(id.equals("MILK_IMP")) {
-			id = "MILK_DEMON";
-			
-		} else if(id.equals("MILK_DEMON_COMMON")) {
-			id = "MILK_DEMON";
-		}
-		
-		return id;
+		return switch(id) {
+			case "CUM_IMP" -> "CUM_DEMON";
+			case "GIRL_CUM_IMP" -> "GIRL_CUM_DEMON";
+			case "MILK_IMP", "MILK_DEMON_COMMON" -> "MILK_DEMON";
+			default -> id;
+		};
 	}
 
 	static String getIdFromFluidType(FluidType fluidType) {
 		return fluidType.getId();
 	}
-	
+
 	static List<FluidType> getAllFluidTypes() {
 		return table.listByRace();
 	}
