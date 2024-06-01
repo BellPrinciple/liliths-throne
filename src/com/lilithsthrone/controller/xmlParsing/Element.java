@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
+import java.util.function.Function;
 
 import com.lilithsthrone.main.Main;
 import org.w3c.dom.DOMException;
@@ -113,7 +116,16 @@ public class Element {
 			return "";
 		}
 	}
-	
+
+	/**
+	 * Returns the raw text inside a child element.
+	 * @param tagName String tag of the child element.
+	 * @return The content of the specified child, or an empty string.
+	 */
+	public String getTextContent(String tagName) {
+		return getOptionalFirstOf(tagName).map(Element::getTextContent).orElse("");
+	}
+
 	/**
 	 * Returns inner element. Used to support legacy code
 	 * 
@@ -215,5 +227,189 @@ public class Element {
 			}
 		}
 		return returnList;
+	}
+
+	/**
+	 * Iterates the {@code <item>} elements of a single {@code <collection>} element.
+	 * @param collection Names a direct child of this element.
+	 * @param item Classifies the elements of interest inside the {@code collection} element.
+	 * @return All specified grand-child elements in document order.
+	 */
+	public List<Element> getAllOf(String collection, String item) {
+		Optional<Element> e = getOptionalFirstOf(collection);
+		return e.isEmpty() ? List.of() : e.get().getAllOf(item);
+	}
+
+	/**
+	 * Tries to parse an attribute.
+	 * @param key Names the attribute of this element.
+	 * @param parser Transforms strings to values.
+	 * @return The parsed value, if existing and valid.
+	 */
+	public <Value> Optional<Value> attribute(String key, Function<String, Value> parser) {
+		return parseGeneric(getAttribute(key), parser);
+	}
+
+	/**
+	 * Tries to parse the text content.
+	 * @param parser Transforms strings to values.
+	 * @return The parsed value, if existing and valid.
+	 */
+	public <Value> Optional<Value> text(Function<String, Value> parser) {
+		return parseGeneric(getTextContent().trim(), parser);
+	}
+
+	/**
+	 * Tries to parse the text content of a child element.
+	 * @param tagName Classifies direct child elements.
+	 * @param parser Transforms strings to values.
+	 * @return The parsed value, if existing and valid.
+	 */
+	public <Value> Optional<Value> text(String tagName, Function<String, Value> parser) {
+		return parseGeneric(getTextContent(tagName).trim(), parser);
+	}
+
+	private static <Value> Optional<Value> parseGeneric(String value, Function<String, Value> parser) {
+		if(value.isEmpty())
+			return Optional.empty();
+		try {
+			return Optional.ofNullable(parser.apply(value));
+		}
+		catch(RuntimeException x) {
+			x.printStackTrace();
+			return Optional.empty();
+		}
+	}
+
+	/**
+	 * Tries to parse an attribute as boolean.
+	 * @param key Names the attribute of this element.
+	 * @return The value is {@code "true"}, case-insensitive.
+	 */
+	public boolean attributeTrue(String key) {
+		return Boolean.parseBoolean(getAttribute(key));
+	}
+
+	/**
+	 * Tries to parse the text content as a boolean.
+	 * @return The value is {@code "true"}, case-insensitive.
+	 */
+	public boolean textTrue() {
+		return Boolean.parseBoolean(getTextContent().trim());
+	}
+
+	/**
+	 * Tries to parse the text content of a child element as boolean.
+	 * @param tagName Classifies direct child elements.
+	 * @return The value is {@code "true"}, case-insensitive.
+	 */
+	public boolean textTrue(String tagName) {
+		return Boolean.parseBoolean(getTextContent(tagName).trim());
+	}
+
+	/**
+	 * Tries to parse an attribute as boolean.
+	 * @param key Names the attribute of this element.
+	 * @return The value is anything but {@code "false"}, case-insensitive.
+	 */
+	public boolean attributeNotFalse(String key) {
+		return notFalse(getAttribute(key));
+	}
+
+	/**
+	 * Tries to parse the text content as a boolean.
+	 * @return The value is anything but {@code "false"}, case-insensitive.
+	 */
+	public boolean textNotFalse() {
+		return notFalse(getTextContent().trim());
+	}
+
+	/**
+	 * Tries to parse the text content of a child element as boolean.
+	 * @param tagName Classifies direct child elements.
+	 * @return The value is anything but {@code "false"}, case-insensitive.
+	 */
+	public boolean textNotFalse(String tagName) {
+		return notFalse(getTextContent(tagName).trim());
+	}
+
+	private static boolean notFalse(String value) {
+		return !value.isEmpty() && Boolean.parseBoolean(value);
+	}
+
+	/**
+	 * Tries to parse an attribute as integer.
+	 * @param key Names the attribute of this element.
+	 * @return The parsed value, if existing and valid.
+	 */
+	public OptionalInt attributeInt(String key) {
+		return parseInt(getAttribute(key));
+	}
+
+	/**
+	 * Tries to parse the text content as an integer.
+	 * @return The parsed value, if existing and valid.
+	 */
+	public OptionalInt textInt() {
+		return parseInt(getTextContent().trim());
+	}
+
+	/**
+	 * Tries to parse the text content of a child element as an integer.
+	 * @param tagName Classifies direct child elements.
+	 * @return The parsed value, if existing and valid.
+	 */
+	public OptionalInt textInt(String tagName) {
+		return parseInt(getTextContent(tagName).trim());
+	}
+
+	private static OptionalInt parseInt(String value) {
+		if(value.isEmpty())
+			return OptionalInt.empty();
+		try {
+			return OptionalInt.of(Integer.parseInt(value));
+		}
+		catch(NumberFormatException x) {
+			x.printStackTrace();
+			return OptionalInt.empty();
+		}
+	}
+
+	/**
+	 * Tries to parse an attribute as floating point number.
+	 * @param key Names the attribute of this element.
+	 * @return The parsed value, if existing and valid.
+	 */
+	public OptionalDouble attributeFloat(String key) {
+		return parseFloat(getAttribute(key));
+	}
+
+	/**
+	 * Tries to parse the text content as a floating-point number.
+	 * @return The parsed value, if existing and valid.
+	 */
+	public OptionalDouble textFloat() {
+		return parseFloat(getTextContent().trim());
+	}
+
+	/**
+	 * Tries to parse the text content of a child element as a floating-point number.
+	 * @param tagName Classifies direct child elements.
+	 * @return The parsed value, if existing and valid.
+	 */
+	public OptionalDouble textFloat(String tagName) {
+		return parseFloat(getTextContent(tagName).trim());
+	}
+
+	private static OptionalDouble parseFloat(String value) {
+		if(value.isEmpty())
+			return OptionalDouble.empty();
+		try {
+			return OptionalDouble.of(Double.parseDouble(value));
+		}
+		catch(NumberFormatException x) {
+			x.printStackTrace();
+			return OptionalDouble.empty();
+		}
 	}
 }
