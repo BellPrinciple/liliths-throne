@@ -213,11 +213,7 @@ public interface FluidType extends BodyPartTypeInterface {
 		FluidType.class,
 			AbstractFluidType.class,
 			"fluid",
-			(f, n, a, m) -> {
-				AbstractFluidType t = new AbstractFluidType(f, a, m) {};
-				t.id = n;
-				return t;
-			});
+			AbstractFluidType::new);
 	//TODO remove this
 	Object initializer = new Object() {{
 		for(CoreFluidType t : CoreFluidType.values())

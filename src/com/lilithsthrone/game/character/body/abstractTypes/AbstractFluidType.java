@@ -1,9 +1,12 @@
 package com.lilithsthrone.game.character.body.abstractTypes;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lilithsthrone.controller.xmlParsing.XMLLoadException;
+import com.lilithsthrone.controller.xmlParsing.XMLMissingTagException;
 import com.lilithsthrone.main.Main;
 import org.w3c.dom.Document;
 
@@ -15,128 +18,64 @@ import com.lilithsthrone.game.character.body.valueEnums.FluidModifier;
 import com.lilithsthrone.game.character.body.valueEnums.FluidTypeBase;
 import com.lilithsthrone.game.character.race.Race;
 import com.lilithsthrone.utils.Util;
+import org.xml.sax.SAXException;
 
 /**
  * @since 0.3.8.2
  * @version 0.4
  * @author Innoxia
  */
-public abstract class AbstractFluidType implements FluidType {
+public class AbstractFluidType implements FluidType {
 
-	//FIXME for now, this is exposed for FluidType only
-	public String id;
+	private final String id;
 
-	private boolean mod;
-	private boolean fromExternalFile;
+	private final boolean mod;
 
-	private String transformationName;
+	private final String transformationName;
 	
-	private FluidTypeBase baseFluidType;
-	private FluidFlavour flavour;
-	private Race race;
+	private final FluidTypeBase baseFluidType;
+	private final FluidFlavour flavour;
+	private final Race race;
 	
-	private List<String> namesMasculine;
-	private List<String> namesFeminine;
+	private final List<String> namesMasculine = new ArrayList<>();
+	private final List<String> namesFeminine = new ArrayList<>();
 	
-	private List<String> descriptorsMasculine;
-	private List<String> descriptorsFeminine;
+	private final List<String> descriptorsMasculine = new ArrayList<>();
+	private final List<String> descriptorsFeminine = new ArrayList<>();
 	
-	List<FluidModifier> defaultFluidModifiers;
+	final List<FluidModifier> defaultFluidModifiers = new ArrayList<>();
 	
-	/**
-	 * @param baseFluidType The base type of this fluid (milk, cum, or girlcum).
-	 * @param flavour The default flavour for this fluid.
-	 * @param race What race has this fluid type.
-	 * @param names A list of singular names for this fluid type.
-	 *  Pass in null to use generic names.
-	 *  Empty values also use generic names.
-	 *  Names ending in '-' are handled in a special manner by appending a generic fluid name to the end of it before returning.
-	 * @param namesPlural A list of plural names for this fluid type.
-	 *  Pass in null to use generic names.
-	 *  Empty values also use generic names.
-	 *  Names ending in '-' are handled in a special manner by appending a generic fluid name to the end of it before returning.
-	 * @param descriptorsMasculine The descriptors that can be used to describe a masculine form of this fluid type.
-	 * @param descriptorsFeminine The descriptors that can be used to describe a feminine form of this fluid type.
-	 * @param defaultFluidModifiers Which modifiers this fluid naturally spawns with.
-	 */
-	public AbstractFluidType(
-			FluidTypeBase baseFluidType,
-			FluidFlavour flavour,
-			Race race,
-			List<String> namesMasculine,
-			List<String> namesFeminine,
-			List<String> descriptorsMasculine,
-			List<String> descriptorsFeminine,
-			List<FluidModifier> defaultFluidModifiers) {
-		
-		this.baseFluidType = baseFluidType;
-		this.flavour = flavour;
-		this.race = race;
-		
-		this.transformationName = null; // Use default race transformation name
-		
-		this.namesMasculine = namesMasculine;
-		this.namesFeminine = namesFeminine;
-		
-		this.descriptorsMasculine = descriptorsMasculine;
-		this.descriptorsFeminine = descriptorsFeminine;
-		
-		this.defaultFluidModifiers = defaultFluidModifiers;
-	}
-	
-	public AbstractFluidType(File XMLFile, String author, boolean mod) {
-		if (XMLFile.exists()) {
-			try {
-				Document doc = Main.getDocBuilder().parse(XMLFile);
-				
-				// Cast magic:
-				doc.getDocumentElement().normalize();
-				
-				Element coreElement = Element.getDocumentRootElement(XMLFile);
-
-				this.mod = mod;
-				this.fromExternalFile = true;
-
-				this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
-				this.baseFluidType = FluidTypeBase.valueOf(coreElement.getMandatoryFirstOf("baseFluidType").getTextContent());
-				this.flavour = FluidFlavour.valueOf(coreElement.getMandatoryFirstOf("flavour").getTextContent());
-				
-				this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
-				
-				this.namesMasculine = new ArrayList<>();
-				for(Element e : coreElement.getMandatoryFirstOf("namesMasculine").getAllOf("name")) {
-					namesMasculine.add(e.getTextContent());
-				}
-				
-				this.namesFeminine = new ArrayList<>();
-				for(Element e : coreElement.getMandatoryFirstOf("namesFeminine").getAllOf("name")) {
-					namesFeminine.add(e.getTextContent());
-				}
-				
-				this.descriptorsMasculine = new ArrayList<>();
-				if(coreElement.getOptionalFirstOf("descriptorsMasculine").isPresent()) {
-					for(Element e : coreElement.getMandatoryFirstOf("descriptorsMasculine").getAllOf("descriptor")) {
-						descriptorsMasculine.add(e.getTextContent());
-					}
-				}
-				
-				this.descriptorsFeminine = new ArrayList<>();
-				if(coreElement.getOptionalFirstOf("descriptorsFeminine").isPresent()) {
-					for(Element e : coreElement.getMandatoryFirstOf("descriptorsFeminine").getAllOf("descriptor")) {
-						descriptorsFeminine.add(e.getTextContent());
-					}
-				}
-				
-				this.defaultFluidModifiers = new ArrayList<>();
-				if(coreElement.getOptionalFirstOf("defaultFluidModifiers").isPresent()) {
-					for(Element e : coreElement.getMandatoryFirstOf("defaultFluidModifiers").getAllOf("modifier")) {
-						defaultFluidModifiers.add(FluidModifier.valueOf(e.getTextContent()));
-					}
-				}
-				
-			} catch(Exception ex) {
-				ex.printStackTrace();
-				System.err.println("AbstractFluidType was unable to be loaded from file! (" + XMLFile.getName() + ")\n" + ex);
+	public AbstractFluidType(File XMLFile, String id, String author, boolean mod)
+			throws XMLLoadException, IOException, SAXException, XMLMissingTagException {
+		this.id = id;
+		Document doc = Main.getDocBuilder().parse(XMLFile);
+		// Cast magic:
+		doc.getDocumentElement().normalize();
+		Element coreElement = Element.getDocumentRootElement(XMLFile);
+		this.mod = mod;
+		this.race = Race.getRaceFromId(coreElement.getMandatoryFirstOf("race").getTextContent());
+		this.baseFluidType = FluidTypeBase.valueOf(coreElement.getMandatoryFirstOf("baseFluidType").getTextContent());
+		this.flavour = FluidFlavour.valueOf(coreElement.getMandatoryFirstOf("flavour").getTextContent());
+		this.transformationName = coreElement.getMandatoryFirstOf("transformationName").getTextContent();
+		for(Element e : coreElement.getMandatoryFirstOf("namesMasculine").getAllOf("name")) {
+			namesMasculine.add(e.getTextContent());
+		}
+		for(Element e : coreElement.getMandatoryFirstOf("namesFeminine").getAllOf("name")) {
+			namesFeminine.add(e.getTextContent());
+		}
+		if(coreElement.getOptionalFirstOf("descriptorsMasculine").isPresent()) {
+			for(Element e : coreElement.getMandatoryFirstOf("descriptorsMasculine").getAllOf("descriptor")) {
+				descriptorsMasculine.add(e.getTextContent());
+			}
+		}
+		if(coreElement.getOptionalFirstOf("descriptorsFeminine").isPresent()) {
+			for(Element e : coreElement.getMandatoryFirstOf("descriptorsFeminine").getAllOf("descriptor")) {
+				descriptorsFeminine.add(e.getTextContent());
+			}
+		}
+		if(coreElement.getOptionalFirstOf("defaultFluidModifiers").isPresent()) {
+			for(Element e : coreElement.getMandatoryFirstOf("defaultFluidModifiers").getAllOf("modifier")) {
+				defaultFluidModifiers.add(FluidModifier.valueOf(e.getTextContent()));
 			}
 		}
 	}
@@ -148,7 +87,7 @@ public abstract class AbstractFluidType implements FluidType {
 
 	@Override
 	public boolean isFromExternalFile() {
-		return fromExternalFile;
+		return true;
 	}
 	
 	@Override
@@ -227,9 +166,5 @@ public abstract class AbstractFluidType implements FluidType {
 	@Override
 	public List<FluidModifier> getDefaultFluidModifiers() {
 		return defaultFluidModifiers;
-	}
-
-	public float getValueModifier() {
-		return 1f;
 	}
 }
