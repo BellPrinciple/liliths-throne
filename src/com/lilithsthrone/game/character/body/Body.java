@@ -131,7 +131,7 @@ public class Body implements XMLSaving {
 	
 	/** This determines the maximum amount of fluid (in mL) that can be stored in the SexAreaOrifice.VAGINA and SexAreaOrifice.URETHRA_VAGINA while pregnant. */
 	public static final int MAXIMUM_CREAMPIE_WHILE_PREGNANT = 250;
-	
+
 	// Required:
 	private Arm arm;
 	private Ass ass;
@@ -150,13 +150,12 @@ public class Body implements XMLSaving {
 	private BreastCrotch breastCrotch;
 	private Horn horn;
 	private Penis penis;
+	private Spinneret spinneret;
 	private Tail tail;
 	private Tentacle tentacle;
 	private Vagina vagina;
 	private Wing wing;
 
-	private OrificeSpinneret spinneret;
-	
 	private GenitalArrangement genitalArrangement;
 	
 	private boolean feral;
@@ -210,7 +209,7 @@ public class Body implements XMLSaving {
 		private Tentacle tentacle = new Tentacle(TentacleType.NONE);
 		private Vagina vagina = new Vagina(VaginaType.NONE, 0, 0, 0, 0, 0, 2, 3, 3, true);
 		private Wing wing = new Wing(WingType.NONE, 0);
-		private OrificeSpinneret spinneret = new OrificeSpinneret();
+		private Spinneret spinneret = new Spinneret();
 
 		public BodyBuilder(Arm arm, Ass ass, Breast breast, Face face, Eye eye, Ear ear, Hair hair, Leg leg, Torso torso, BodyMaterial bodyMaterial, GenitalArrangement genitalArrangement, int height, int femininity, int bodySize, int muscle) {
 			this.arm = arm;
@@ -270,7 +269,7 @@ public class Body implements XMLSaving {
 			return this;
 		}
 
-		public BodyBuilder spinneret(OrificeSpinneret spinneret) {
+		public BodyBuilder spinneret(Spinneret spinneret) {
 			this.spinneret = spinneret;
 			return this;
 		}
@@ -351,19 +350,19 @@ public class Body implements XMLSaving {
 		this.pubicHair = bodyToCopy.getPubicHair();
 		this.bodyMaterial = bodyToCopy.getBodyMaterial();
 		this.takesAfterMother = bodyToCopy.isTakesAfterMother();
-		
+
 		// Coverings:
-		
+
 		this.coverings = new HashMap<>();
 		for(Entry<AbstractBodyCoveringType, Covering> entry : bodyToCopy.coverings.entrySet()) {
 			coverings.put(entry.getKey(), new Covering(entry.getValue()));
 		}
 		this.coveringsDiscovered = new HashSet<>(bodyToCopy.coveringsDiscovered);
-		
+
 		this.heavyMakeup = new HashSet<>(bodyToCopy.heavyMakeup);
-		
+
 		// Body parts:
-		
+
 		this.antenna = new Antenna(bodyToCopy.antenna);
 		this.arm = new Arm(bodyToCopy.arm);
 		this.ass = new Ass(bodyToCopy.ass);
@@ -376,7 +375,7 @@ public class Body implements XMLSaving {
 		this.horn = new Horn(bodyToCopy.horn);
 		this.leg = new Leg(bodyToCopy.leg);
 		this.penis = new Penis(bodyToCopy.penis);
-		this.spinneret = new OrificeSpinneret(bodyToCopy.spinneret);
+		this.spinneret = new Spinneret(bodyToCopy.spinneret);
 		this.torso = new Torso(bodyToCopy.torso);
 		this.tail = new Tail(bodyToCopy.tail);
 		this.tentacle = new Tentacle(bodyToCopy.tentacle);
@@ -386,7 +385,7 @@ public class Body implements XMLSaving {
 		handleAllBodyPartsList();
 		calculateRace(null);
 	}
-	
+
 	public void handleAllBodyPartsList() {
 		allBodyParts = new ArrayList<>();
 		allBodyParts.add(antenna);
@@ -794,14 +793,14 @@ public class Body implements XMLSaving {
 		// Spinneret:
 		Element bodySpinneret = doc.createElement("spinneret");
 		parentElement.appendChild(bodySpinneret);
-			XMLUtil.addAttribute(doc, bodySpinneret, "wetness", String.valueOf(this.spinneret.wetness));
-			XMLUtil.addAttribute(doc, bodySpinneret, "depth", String.valueOf(this.spinneret.depth));
-			XMLUtil.addAttribute(doc, bodySpinneret, "elasticity", String.valueOf(this.spinneret.elasticity));
-			XMLUtil.addAttribute(doc, bodySpinneret, "plasticity", String.valueOf(this.spinneret.plasticity));
-			XMLUtil.addAttribute(doc, bodySpinneret, "capacity", String.valueOf(this.spinneret.capacity));
-			XMLUtil.addAttribute(doc, bodySpinneret, "stretchedCapacity", String.valueOf(this.spinneret.stretchedCapacity));
-			XMLUtil.addAttribute(doc, bodySpinneret, "virgin", String.valueOf(this.spinneret.virgin));
-			for(OrificeModifier om : this.spinneret.getOrificeModifiers()) {
+			XMLUtil.addAttribute(doc, bodySpinneret, "wetness", String.valueOf(this.spinneret.orifice.wetness));
+			XMLUtil.addAttribute(doc, bodySpinneret, "depth", String.valueOf(this.spinneret.orifice.depth));
+			XMLUtil.addAttribute(doc, bodySpinneret, "elasticity", String.valueOf(this.spinneret.orifice.elasticity));
+			XMLUtil.addAttribute(doc, bodySpinneret, "plasticity", String.valueOf(this.spinneret.orifice.plasticity));
+			XMLUtil.addAttribute(doc, bodySpinneret, "capacity", String.valueOf(this.spinneret.orifice.capacity));
+			XMLUtil.addAttribute(doc, bodySpinneret, "stretchedCapacity", String.valueOf(this.spinneret.orifice.stretchedCapacity));
+			XMLUtil.addAttribute(doc, bodySpinneret, "virgin", String.valueOf(this.spinneret.orifice.virgin));
+			for(OrificeModifier om : this.spinneret.orifice.getOrificeModifiers()) {
 				Element mod = doc.createElement("mod");
 				mod.setTextContent(om.toString());
 				bodySpinneret.appendChild(mod);
@@ -850,8 +849,8 @@ public class Body implements XMLSaving {
 			XMLUtil.addAttribute(doc, bodyVagina, "capacity", String.valueOf(this.vagina.orificeVagina.capacity));
 			XMLUtil.addAttribute(doc, bodyVagina, "stretchedCapacity", String.valueOf(this.vagina.orificeVagina.stretchedCapacity));
 			XMLUtil.addAttribute(doc, bodyVagina, "virgin", String.valueOf(this.vagina.orificeVagina.virgin));
-			XMLUtil.addAttribute(doc, bodyVagina, "hymen", String.valueOf(this.vagina.orificeVagina.hymen));
-			XMLUtil.addAttribute(doc, bodyVagina, "squirter", String.valueOf(this.vagina.orificeVagina.squirter));
+			XMLUtil.addAttribute(doc, bodyVagina, "hymen", String.valueOf(this.vagina.hymen));
+			XMLUtil.addAttribute(doc, bodyVagina, "squirter", String.valueOf(this.vagina.squirter));
 			for(OrificeModifier om : this.vagina.orificeVagina.getOrificeModifiers()) {
 				Element mod = doc.createElement("mod");
 				mod.setTextContent(om.toString());
@@ -1037,7 +1036,7 @@ public class Body implements XMLSaving {
 					}
 					handleLoadingOfModifiers(OrificeModifier.values(), log, anusModifiersElement, anusModifiers);
 				}
-				
+
 			} else {
 				NodeList mods = anus.getElementsByTagName("mod");
 				for(int i = 0; i < mods.getLength(); i++) {
@@ -1136,7 +1135,7 @@ public class Body implements XMLSaving {
 				}
 				handleLoadingOfModifiers(OrificeModifier.values(), log, nippleModifiersElement, nippleOrificeModifiers);
 			}
-	
+
 		} else {
 			NodeList mods = nipples.getElementsByTagName("mod");
 			for(int i = 0; i < mods.getLength(); i++) {
@@ -1265,7 +1264,7 @@ public class Body implements XMLSaving {
 				}
 				handleLoadingOfModifiers(OrificeModifier.values(), log, mouthModifiersElement, mouthOrificeModifiers);
 			}
-			
+
 		} else {
 			NodeList mods = mouth.getElementsByTagName("mod");
 			for(int i = 0; i < mods.getLength(); i++) {
@@ -1298,7 +1297,7 @@ public class Body implements XMLSaving {
 						}
 					}
 				}
-				
+
 			} else {
 				NodeList mods = tongue.getElementsByTagName("mod");
 				for(int i = 0; i < mods.getLength(); i++) {
@@ -1476,7 +1475,7 @@ public class Body implements XMLSaving {
 			if (penisModifiersElement != null) {
 				handleLoadingOfModifiers(PenetrationModifier.values(), log, penisModifiersElement, penisModifiers);
 			}
-			
+
 		} else {
 			NodeList mods = penis.getElementsByTagName("mod");
 			for(int i = 0; i < mods.getLength(); i++) {
@@ -1484,7 +1483,7 @@ public class Body implements XMLSaving {
 				importedPenis.addPenisModifier(null, PenetrationModifier.valueOf(e.getTextContent()));
 			}
 		}
-		
+
 		depth = OrificeDepth.TWO_AVERAGE.getValue();
 		depthAttribute = penis.getAttribute("depth");
 		if(!depthAttribute.isEmpty()) {
@@ -1520,7 +1519,7 @@ public class Body implements XMLSaving {
 				}
 				handleLoadingOfModifiers(OrificeModifier.values(), log, urethraModifiersElement, urethraOrificeModifiers);
 			}
-			
+
 		} else {
 			NodeList mods = penis.getElementsByTagName("modUrethra");
 			for(int i = 0; i < mods.getLength(); i++) {
@@ -1573,36 +1572,36 @@ public class Body implements XMLSaving {
 		
 		Element spinneret = (Element)parentElement.getElementsByTagName("spinneret").item(0);
 
-		OrificeSpinneret importedSpinneret = new OrificeSpinneret();
+		Spinneret importedSpinneret = new Spinneret();
 		
 		if(spinneret!=null) {
-			importedSpinneret.wetness = Integer.valueOf(spinneret.getAttribute("wetness"));
-			importedSpinneret.capacity = handleCapacityLoading(Float.valueOf(spinneret.getAttribute("capacity")));
+			importedSpinneret.orifice.wetness = Integer.valueOf(spinneret.getAttribute("wetness"));
+			importedSpinneret.orifice.capacity = handleCapacityLoading(Float.valueOf(spinneret.getAttribute("capacity")));
 			depth = OrificeDepth.TWO_AVERAGE.getValue();
 			depthAttribute = spinneret.getAttribute("depth");
 			if(!depthAttribute.isEmpty()) {
 				depth = Integer.valueOf(depthAttribute);
 			}
-			importedSpinneret.depth = depth;
-			importedSpinneret.elasticity = Integer.valueOf(spinneret.getAttribute("elasticity"));
-			importedSpinneret.plasticity = Integer.valueOf(spinneret.getAttribute("plasticity"));
-			importedSpinneret.virgin = Boolean.valueOf(spinneret.getAttribute("virgin"));
+			importedSpinneret.orifice.depth = depth;
+			importedSpinneret.orifice.elasticity = Integer.valueOf(spinneret.getAttribute("elasticity"));
+			importedSpinneret.orifice.plasticity = Integer.valueOf(spinneret.getAttribute("plasticity"));
+			importedSpinneret.orifice.virgin = Boolean.valueOf(spinneret.getAttribute("virgin"));
 			
-			importedSpinneret.stretchedCapacity = handleCapacityLoading(Float.valueOf(spinneret.getAttribute("stretchedCapacity")));
+			importedSpinneret.orifice.stretchedCapacity = handleCapacityLoading(Float.valueOf(spinneret.getAttribute("stretchedCapacity")));
 
 			if(Main.isVersionOlderThan(version, "0.4.9.7")) {
 				Element spinneretModifiers = (Element)spinneret.getElementsByTagName("spinneretModifiers").item(0);
-				Collection<OrificeModifier> spinneretOrificeModifiers = importedSpinneret.orificeModifiers;
+				Collection<OrificeModifier> spinneretOrificeModifiers = importedSpinneret.orifice.orificeModifiers;
 				spinneretOrificeModifiers.clear();
 				if(spinneretModifiers!=null) {
 					handleLoadingOfModifiers(OrificeModifier.values(), log, spinneretModifiers, spinneretOrificeModifiers);
 				}
-				
+
 			} else {
 				NodeList mods = spinneret.getElementsByTagName("mod");
 				for(int i = 0; i < mods.getLength(); i++) {
 					Element e = ((Element)mods.item(i));
-					importedSpinneret.addOrificeModifier(null, OrificeModifier.valueOf(e.getTextContent()));
+					importedSpinneret.getOrifice().addOrificeModifier(null, OrificeModifier.valueOf(e.getTextContent()));
 				}
 			}
 		}
@@ -1698,10 +1697,10 @@ public class Body implements XMLSaving {
 				if (clitModifiersElement != null) {
 					handleLoadingOfModifiers(PenetrationModifier.values(), log, clitModifiersElement, clitModifiers);
 				}
-				
+
 			} catch(Exception ex) {
 			}
-			
+
 		} else {
 			NodeList mods = vagina.getElementsByTagName("modClit");
 			for(int i = 0; i < mods.getLength(); i++) {
@@ -1720,14 +1719,14 @@ public class Body implements XMLSaving {
 		
 		importedVagina.orificeVagina.stretchedCapacity = handleCapacityLoading(Float.valueOf(vagina.getAttribute("stretchedCapacity")));
 		try {
-			importedVagina.orificeVagina.squirter = (Boolean.valueOf(vagina.getAttribute("squirter")));
+			importedVagina.squirter = (Boolean.valueOf(vagina.getAttribute("squirter")));
 		} catch(Exception ex) {
 		}
 		if(Main.isVersionOlderThan(version, "0.3.6.9")) {
-			importedVagina.orificeVagina.hymen = importedVagina.getOrificeVagina().isVirgin();
+			importedVagina.hymen = importedVagina.getOrificeVagina().isVirgin();
 			
 		} else {
-			importedVagina.orificeVagina.hymen = Boolean.valueOf(vagina.getAttribute("hymen"));
+			importedVagina.hymen = Boolean.valueOf(vagina.getAttribute("hymen"));
 		}
 		
 		Main.game.getCharacterUtils().appendToImportLog(log, "<br/><br/>Body: Vagina: "
@@ -1753,7 +1752,7 @@ public class Body implements XMLSaving {
 				}
 				handleLoadingOfModifiers(OrificeModifier.values(), log, vaginaModifiers, vaginaOrificeModifiers);
 			}
-			
+
 		} else {
 			NodeList mods = vagina.getElementsByTagName("mod");
 			for(int i = 0; i < mods.getLength(); i++) {
@@ -1789,7 +1788,7 @@ public class Body implements XMLSaving {
 					}
 					handleLoadingOfModifiers(OrificeModifier.values(), log, urethraModifiersElement, vaginaUrethraOrificeModifiers);
 				}
-				
+
 			} else {
 				NodeList mods = vagina.getElementsByTagName("modUrethra");
 				for(int i = 0; i < mods.getLength(); i++) {
@@ -1797,7 +1796,7 @@ public class Body implements XMLSaving {
 					importedVagina.orificeUrethra.addOrificeModifier(null, OrificeModifier.valueOf(e.getTextContent()));
 				}
 			}
-			
+
 		} catch(Exception ex) {
 		}
 		
@@ -2022,7 +2021,7 @@ public class Body implements XMLSaving {
 					}
 					handleLoadingOfModifiers(OrificeModifier.values(), log, nippleModifiersElement, nippleOrificeModifiers);
 				}
-				
+
 			} else {
 				NodeList mods = nipples.getElementsByTagName("mod");
 				for(int i = 0; i < mods.getLength(); i++) {
@@ -2097,7 +2096,7 @@ public class Body implements XMLSaving {
 				if(colourSecondary.isEmpty()) {
 					colourSecondary = colourPrimary; // If secondary colour is missing, then it's the same as the primary
 				}
-				
+
 				if(type.startsWith("HAIR_")) {
 					if(colourPrimary.equals("COVERING_TAN")) {
 						colourPrimary = "COVERING_DIRTY_BLONDE";
@@ -3693,7 +3692,7 @@ public class Body implements XMLSaving {
 		}
 		return getRace();
 	}
-	
+
 	public AbstractSubspecies getSubspecies() {
 		return subspecies;
 	}
@@ -3714,7 +3713,7 @@ public class Body implements XMLSaving {
 		}
 		return getSubspecies();
 	}
-	
+
 	public RaceStage getRaceStage() {
 		return raceStage;
 	}
@@ -3733,7 +3732,7 @@ public class Body implements XMLSaving {
 		}
 		return halfDemonSubspecies;
 	}
-	
+
 	public boolean isDoll() {
 		return this.getRace()==Race.DOLL;
 	}
@@ -3825,7 +3824,7 @@ public class Body implements XMLSaving {
 	public boolean hasGenericHorns() {
 		return getHorn().getType().isGeneric();
 	}
-	
+
 	public Leg getLeg() {
 		return leg;
 	}
@@ -3841,7 +3840,7 @@ public class Body implements XMLSaving {
 	public boolean isTaur() {
 		return !getLegConfiguration().isBipedalPositionedGenitals();
 	}
-	
+
 	public Penis getPenis() {
 		return penis;
 	}
@@ -3862,7 +3861,7 @@ public class Body implements XMLSaving {
 		return hasPenisIgnoreDildo();
 	}
 	
-	public OrificeSpinneret getSpinneret() {
+	public Spinneret getSpinneret() {
 		return spinneret;
 	}
 	
@@ -4170,7 +4169,7 @@ public class Body implements XMLSaving {
 	public boolean hasWings() {
 		return getWingType() != WingType.NONE;
 	}
-	
+
 	public boolean hasGenericWings() {
 		return getWingType().isGeneric();
 	}
@@ -5355,7 +5354,7 @@ public class Body implements XMLSaving {
 		descriptionSB.append("<br/>");
 		if(viewedVagina.getOrificeVagina().isVirgin()) {
 			if(isPlayer || !hallucinating) {
-				if(viewedVagina.getOrificeVagina().hasHymen()) {
+				if(viewedVagina.hasHymen()) {
 					descriptionSB.append(" Within [npc.her] " + Capacity.getCapacityFromValue(viewedVagina.getOrificeVagina().getStretchedCapacity()).getDescriptor(true)
 							+ " [npc.pussy], [style.colourMinorGood([npc.her] hymen is still intact)], and [style.colourExcellent([npc.she] [npc.has] retained [npc.her] vaginal virginity)].");
 					
@@ -5384,7 +5383,7 @@ public class Body implements XMLSaving {
 			if(!virginityLossFound) {
 				descriptionSB.append(" [style.colourArcane([npc.Name] [npc.has] lost [npc.her] virginity.)]");
 			}
-			if(viewedVagina.getOrificeVagina().hasHymen()) {
+			if(viewedVagina.hasHymen()) {
 				descriptionSB.append(" Although [npc.sheIsFull] no longer a virgin, [style.colourMinorGood([npc.she] [npc.has] an intact hymen)] within [npc.her] pussy.");
 			} else {
 				if(owner.isDoll()) {
@@ -5458,7 +5457,7 @@ public class Body implements XMLSaving {
 				break;
 		}
 		
-		if(viewedVagina.getOrificeVagina().isSquirter()) {
+		if(viewedVagina.isSquirter()) {
 			descriptionSB.append(" [npc.She] [npc.is] a [style.colourArcane(squirter)], and [style.colourWetness([npc.verb(produce)] a considerable amount of female ejaculate)] each time [npc.she] [npc.verb(orgasm)].");
 		}
 		
@@ -5714,7 +5713,7 @@ public class Body implements XMLSaving {
 		descriptionSB.append("[npc.she] [npc.has] a [npc.spinneretFullDescription(true)]. It is not only capable of producing strong webbing, but can also be used as a sexual orifice.");
 		
 		// Virgin/capacity:
-		if(spinneret.isVirgin()) {
+		if(spinneret.orifice.isVirgin()) {
 			descriptionSB.append(" [npc.She] [npc.has] [style.colourExcellent(retained [npc.her] spinneret virginity)].");
 			
 		} else {
@@ -5733,8 +5732,8 @@ public class Body implements XMLSaving {
 			}
 		}
 		
-		descriptionSB.append(" [npc.Her] spinneret is " + Capacity.getCapacityFromValue(spinneret.getStretchedCapacity()).getDescriptor(true)+" and when lubricated can comfortably accommodate objects of up to"
-				+ " [style.colourSex("+ Units.size(Capacity.getMaximumComfortableDiameter(spinneret.getElasticity(), spinneret.getRawCapacityValue(), true)) + ")] in diameter.");
+		descriptionSB.append(" [npc.Her] spinneret is " + Capacity.getCapacityFromValue(spinneret.orifice.getStretchedCapacity()).getDescriptor(true)+" and when lubricated can comfortably accommodate objects of up to"
+				+ " [style.colourSex("+ Units.size(Capacity.getMaximumComfortableDiameter(spinneret.orifice.getElasticity(), spinneret.orifice.getRawCapacityValue(), true)) + ")] in diameter.");
 
 		if(Main.game.isPenetrationLimitationsEnabled()) {
 			switch(owner.getSpinneretDepth()) {
@@ -5766,7 +5765,7 @@ public class Body implements XMLSaving {
 		}
 		
 		// Wetness:
-		switch (spinneret.getWetness(owner)) {
+		switch (spinneret.orifice.getWetness(owner)) {
 			case ZERO_DRY:
 				descriptionSB.append(" It's [style.colourWetness(completely dry and never gets wet)], no matter how aroused [npc.she] [npc.is].");
 				break;
@@ -5794,7 +5793,7 @@ public class Body implements XMLSaving {
 		}
 		
 		// Elasticity & plasticity:
-		switch (spinneret.getElasticity()) {
+		switch (spinneret.orifice.getElasticity()) {
 			case ZERO_UNYIELDING:
 				descriptionSB.append(" It is [style.colourElasticity(extremely unyielding)],");
 				break;
@@ -5820,7 +5819,7 @@ public class Body implements XMLSaving {
 				descriptionSB.append(" It is [style.colourElasticity(extremely elastic)],");
 				break;
 		}
-		descriptionSB.append(" and after being used, it "+spinneret.getPlasticity().getDescription()+".");
+		descriptionSB.append(" and after being used, it "+spinneret.orifice.getPlasticity().getDescription()+".");
 		
 		for(OrificeModifier om : OrificeModifier.values()) {
 			if(owner.hasSpinneretOrificeModifier(om)) {
@@ -6383,11 +6382,11 @@ public class Body implements XMLSaving {
 	public boolean isShortStature() {
 		return this.getHeight().isShortStature();
 	}
-	
+
 	public boolean isFairySized() {
 		return this.getHeight().isFairySized();
 	}
-	
+
 	/** Height is measured in cm. **/
 	public int getHeightValue() {
 		return height;
@@ -6671,7 +6670,7 @@ public class Body implements XMLSaving {
 	public Covering getCoveringFromType(BodyPartInterface bodyPart) {
 		return getCovering(bodyPart.getBodyCoveringType(this), false);
 	}
-	
+
 	public Covering getCovering(AbstractBodyCoveringType bodyCoveringType, boolean accountForNonFleshMaterial) {
 		if(!accountForNonFleshMaterial) {
 			return this.getCoverings().get(bodyCoveringType);

@@ -30922,100 +30922,100 @@ public abstract class GameCharacter implements XMLSaving {
 	// Orifice stats:
 	// Wetness:
 	public Wetness getSpinneretWetness() {
-		return body.getSpinneret().getWetness(this);
+		return body.getSpinneret().getOrifice().getWetness(this);
 	}
 	public String setSpinneretWetness(int wetness) {
-		return body.getSpinneret().setWetness(this, wetness);
+		return body.getSpinneret().getOrifice().setWetness(this, wetness);
 	}
 	public String setSpinneretWetness(Wetness wetness) {
-		return body.getSpinneret().setWetness(this, wetness.getValue());
+		return body.getSpinneret().getOrifice().setWetness(this, wetness.getValue());
 	}
 	public String incrementSpinneretWetness(int increment) {
-		return body.getSpinneret().setWetness(this, getSpinneretWetness().getValue() + increment);
+		return body.getSpinneret().getOrifice().setWetness(this, getSpinneretWetness().getValue() + increment);
 	}
 	// Capacity:
 	public Capacity getSpinneretCapacity() {
-		return body.getSpinneret().getCapacity();
+		return body.getSpinneret().getOrifice().getCapacity();
 	}
 	public float getSpinneretRawCapacityValue() {
-		return body.getSpinneret().getRawCapacityValue();
+		return body.getSpinneret().getOrifice().getRawCapacityValue();
 	}
 	public float getSpinneretStretchedCapacity() {
-		return body.getSpinneret().getStretchedCapacity();
+		return body.getSpinneret().getOrifice().getStretchedCapacity();
 	}
 	public void setSpinneretStretchedCapacity(float capacity){
-		body.getSpinneret().setStretchedCapacity(capacity);
+		body.getSpinneret().getOrifice().setStretchedCapacity(capacity);
 	}
 	public void incrementSpinneretStretchedCapacity(float increment){
-		body.getSpinneret().setStretchedCapacity(getSpinneretStretchedCapacity() + increment);
+		body.getSpinneret().getOrifice().setStretchedCapacity(getSpinneretStretchedCapacity() + increment);
 	}
 	public String setSpinneretCapacity(float capacity, boolean setStretchedValueToNewValue) {
-		return body.getSpinneret().setCapacity(this, capacity, setStretchedValueToNewValue);
+		return body.getSpinneret().getOrifice().setCapacity(this, capacity, setStretchedValueToNewValue);
 	}
 	public String setSpinneretCapacity(Capacity capacity, boolean setStretchedValueToNewValue) {
-		return body.getSpinneret().setCapacity(this, capacity.getMedianValue(), setStretchedValueToNewValue);
+		return body.getSpinneret().getOrifice().setCapacity(this, capacity.getMedianValue(), setStretchedValueToNewValue);
 	}
 	public String incrementSpinneretCapacity(float increment, boolean setStretchedValueToNewValue) {
 		return setSpinneretCapacity(getSpinneretRawCapacityValue() + increment, setStretchedValueToNewValue);
 	}
 	// Depth:
 	public int getSpinneretMaximumPenetrationDepthComfortable() {
-		return body.getSpinneret().getMaximumPenetrationDepthComfortable(this);
+		return body.getSpinneret().getOrifice().getMaximumPenetrationDepthComfortable(this);
 	}
 	public int getSpinneretMaximumPenetrationDepthUncomfortable() {
-		return body.getSpinneret().getMaximumPenetrationDepthUncomfortable(this);
+		return body.getSpinneret().getOrifice().getMaximumPenetrationDepthUncomfortable(this);
 	}
 	public OrificeDepth getSpinneretDepth() {
-		return body.getSpinneret().getDepth(this);
+		return body.getSpinneret().getOrifice().getDepth(this);
 	}
 	public String setSpinneretDepth(int depth) {
-		return body.getSpinneret().setDepth(this, depth);
+		return body.getSpinneret().getOrifice().setDepth(this, depth);
 	}
 	public String incrementSpinneretDepth(int increment) {
 		return setSpinneretDepth(getSpinneretDepth().getValue() + increment);
 	}
 	// Elasticity:
 	public OrificeElasticity getSpinneretElasticity() {
-		return body.getSpinneret().getElasticity();
+		return body.getSpinneret().getOrifice().getElasticity();
 	}
 	public String setSpinneretElasticity(int elasticity) {
-		return body.getSpinneret().setElasticity(this, elasticity);
+		return body.getSpinneret().getOrifice().setElasticity(this, elasticity);
 	}
 	public String incrementSpinneretElasticity(int increment) {
 		return setSpinneretElasticity(getSpinneretElasticity().getValue() + increment);
 	}
 	// Plasticity:
 	public OrificePlasticity getSpinneretPlasticity() {
-		return body.getSpinneret().getPlasticity();
+		return body.getSpinneret().getOrifice().getPlasticity();
 	}
 	public String setSpinneretPlasticity(int plasticity) {
-		return body.getSpinneret().setPlasticity(this, plasticity);
+		return body.getSpinneret().getOrifice().setPlasticity(this, plasticity);
 	}
 	public String incrementSpinneretPlasticity(int increment) {
 		return setSpinneretPlasticity(getSpinneretPlasticity().getValue() + increment);
 	}
 	// Virginity:
 	public boolean isSpinneretVirgin() {
-		return body.getSpinneret().isVirgin();
+		return body.getSpinneret().getOrifice().isVirgin();
 	}
 	public void setSpinneretVirgin(boolean virgin) {
-		body.getSpinneret().setVirgin(virgin);
+		body.getSpinneret().getOrifice().setVirgin(virgin);
 	}
 	// Modifiers:
 	public Set<OrificeModifier> getSpinneretOrificeModifiers() {
-		return body.getSpinneret().getOrificeModifiers();
+		return body.getSpinneret().getOrifice().getOrificeModifiers();
 	}
 	public boolean hasSpinneretOrificeModifier(OrificeModifier modifier) {
-		return body.getSpinneret().hasOrificeModifier(modifier);
+		return body.getSpinneret().getOrifice().hasOrificeModifier(modifier);
 	}
 	public String addSpinneretOrificeModifier(OrificeModifier modifier) {
-		return body.getSpinneret().addOrificeModifier(this, modifier);
+		return body.getSpinneret().getOrifice().addOrificeModifier(this, modifier);
 	}
 	public String removeSpinneretOrificeModifier(OrificeModifier modifier) {
-		return body.getSpinneret().removeOrificeModifier(this, modifier);
+		return body.getSpinneret().getOrifice().removeOrificeModifier(this, modifier);
 	}
 	public void clearSpinneretOrificeModifiers() {
-		body.getSpinneret().clearOrificeModifiers();
+		body.getSpinneret().getOrifice().clearOrificeModifiers();
 	}
 	
 	
@@ -31445,17 +31445,17 @@ public abstract class GameCharacter implements XMLSaving {
 		if(this.isDoll()) {
 			setHymen(false);
 		}
-		return body.getVagina().getOrificeVagina().hasHymen();
+		return body.getVagina().hasHymen();
 	}
 	public String setHymen(boolean hymen) {
-		return body.getVagina().getOrificeVagina().setHymen(this, hymen);
+		return body.getVagina().setHymen(this, hymen);
 	}
 	// Squirter:
 	public boolean isVaginaSquirter() {
-		return body.getVagina().getOrificeVagina().isSquirter();
+		return body.getVagina().isSquirter();
 	}
 	public String setVaginaSquirter(boolean squirter) {
-		return body.getVagina().getOrificeVagina().setSquirter(this, squirter);
+		return body.getVagina().setSquirter(this, squirter);
 	}
 	// Modifiers:
 	public Set<OrificeModifier> getVaginaOrificeModifiers() {

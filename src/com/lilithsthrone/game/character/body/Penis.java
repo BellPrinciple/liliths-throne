@@ -39,7 +39,7 @@ public class Penis implements BodyPartInterface {
 	protected Set<PenetrationModifier> penisModifiers;
 	
 	protected Testicle testicle;
-	protected OrificePenisUrethra orificeUrethra;
+	protected Orifice orificeUrethra;
 
 	public Penis(AbstractPenisType type, int length, boolean usePenisSizePreference, int girth, int testicleSize, int cumProduction, int testicleCount) {
 		this.type = type;
@@ -54,7 +54,7 @@ public class Penis implements BodyPartInterface {
 		
 		testicle = new Testicle(type.getTesticleType(), testicleSize, cumProduction, testicleCount);
 		
-		orificeUrethra = new OrificePenisUrethra(testicle.getCumStorage().getAssociatedWetness().getValue(), 0, 2, OrificeElasticity.ZERO_UNYIELDING.getValue(), OrificePlasticity.THREE_RESILIENT.getValue(), true, new ArrayList<>());
+		orificeUrethra = new Orifice(Orifice.Type.PENIS_URETHRA, testicle.getCumStorage().getAssociatedWetness().getValue(), 0, 2, OrificeElasticity.ZERO_UNYIELDING.getValue(), OrificePlasticity.THREE_RESILIENT.getValue(), true, new ArrayList<>());
 		
 		this.penisModifiers = new HashSet<>();
 		this.penisModifiers.addAll(type.getDefaultRacialPenetrationModifiers());
@@ -69,7 +69,7 @@ public class Penis implements BodyPartInterface {
 		
 		this.testicle = new Testicle(penisToCopy.testicle);
 		
-		this.orificeUrethra = new OrificePenisUrethra(penisToCopy.orificeUrethra);
+		this.orificeUrethra = new Orifice(penisToCopy.orificeUrethra);
 		
 		this.penisModifiers = new HashSet<>(penisToCopy.penisModifiers);
 	}
@@ -83,7 +83,7 @@ public class Penis implements BodyPartInterface {
 		return testicle;
 	}
 	
-	public OrificePenisUrethra getOrificeUrethra() {
+	public Orifice getOrificeUrethra() {
 		return orificeUrethra;
 	}
 	

@@ -28,7 +28,7 @@ import com.lilithsthrone.utils.Util;
 public class Nipples implements BodyPartInterface {
 	
 	protected AbstractNippleType type;
-	protected OrificeNipples orificeNipples;
+	protected Orifice orificeNipples;
 	protected NippleShape nippleShape;
 	protected AreolaeShape areolaeShape;
 	protected int areolaeSize;
@@ -42,7 +42,7 @@ public class Nipples implements BodyPartInterface {
 		this.nippleShape = nippleShape;
 		this.areolaeShape = areolaeShape;
 		this.areolaeSize = areolaeSize;
-		orificeNipples = new OrificeNipples(wetness, capacity, depth, elasticity, plasticity, virgin, crotchNipples, type.getDefaultRacialOrificeModifiers());
+		orificeNipples = new Orifice(crotchNipples ? Orifice.Type.CROTCH_NIPPLES : Orifice.Type.NIPPLES, wetness, capacity, depth, elasticity, plasticity, virgin, type.getDefaultRacialOrificeModifiers());
 		this.crotchNipples = crotchNipples;
 	}
 
@@ -52,7 +52,7 @@ public class Nipples implements BodyPartInterface {
 		this.nippleShape = nipplesToCopy.nippleShape;
 		this.areolaeShape = nipplesToCopy.areolaeShape;
 		this.areolaeSize = nipplesToCopy.areolaeSize;
-		this.orificeNipples = new OrificeNipples(nipplesToCopy.orificeNipples);
+		this.orificeNipples = new Orifice(nipplesToCopy.orificeNipples);
 		this.pierced = nipplesToCopy.pierced;
 		this.crotchNipples = nipplesToCopy.crotchNipples;
 	}
@@ -300,7 +300,7 @@ public class Nipples implements BodyPartInterface {
 		return UtilText.parse(owner, transformation);
 	}
 
-	public OrificeNipples getOrificeNipples() {
+	public Orifice getOrificeNipples() {
 		return orificeNipples;
 	}
 

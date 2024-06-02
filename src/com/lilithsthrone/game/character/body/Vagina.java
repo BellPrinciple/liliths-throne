@@ -35,9 +35,11 @@ public class Vagina implements BodyPartInterface {
 	protected boolean pierced;
 	protected boolean eggLayer;
 	
-	protected OrificeVagina orificeVagina;
+	protected Orifice orificeVagina;
 	protected FluidGirlCum girlcum;
-	protected OrificeVaginaUrethra orificeUrethra;
+	protected Orifice orificeUrethra;
+	protected boolean hymen;
+	protected boolean squirter;
 
 	public Vagina(AbstractVaginaType type, int labiaSize, int clitSize, int clitGirth, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
 		this.type = type;
@@ -45,9 +47,11 @@ public class Vagina implements BodyPartInterface {
 		this.clitoris = new Clitoris(clitSize, clitGirth);
 		this.pierced = false;
 		this.eggLayer = type.isEggLayer();
-		orificeVagina = new OrificeVagina(wetness, capacity, depth, elasticity, plasticity, virgin, type.getDefaultRacialOrificeModifiers());
-		orificeUrethra = new OrificeVaginaUrethra(Wetness.TWO_MOIST.getValue(), 0, 2, OrificeElasticity.ZERO_UNYIELDING.getValue(), OrificePlasticity.THREE_RESILIENT.getValue(), true, new ArrayList<>());
+		orificeVagina = new Orifice(Orifice.Type.VAGINA, wetness, capacity, depth, elasticity, plasticity, virgin, type.getDefaultRacialOrificeModifiers());
+		orificeUrethra = new Orifice(Orifice.Type.VAGINA_URETHRA, Wetness.TWO_MOIST.getValue(), 0, 2, OrificeElasticity.ZERO_UNYIELDING.getValue(), OrificePlasticity.THREE_RESILIENT.getValue(), true, new ArrayList<>());
 		girlcum = new FluidGirlCum(type.getFluidType());
+		hymen = virgin;
+		squirter = wetness > Wetness.THREE_WET.getValue();
 	}
 
 	public Vagina(Vagina vaginaToCopy) {
@@ -56,12 +60,12 @@ public class Vagina implements BodyPartInterface {
 		this.clitoris = new Clitoris(vaginaToCopy.clitoris);
 		this.pierced = vaginaToCopy.pierced;
 		this.eggLayer = vaginaToCopy.eggLayer;
-		this.orificeVagina = new OrificeVagina(vaginaToCopy.orificeVagina);
-		this.orificeUrethra = new OrificeVaginaUrethra(vaginaToCopy.orificeUrethra);
+		this.orificeVagina = new Orifice(vaginaToCopy.orificeVagina);
+		this.orificeUrethra = new Orifice(vaginaToCopy.orificeUrethra);
 		this.girlcum = new FluidGirlCum(vaginaToCopy.girlcum);
 	}
-	
-	public OrificeVagina getOrificeVagina() {
+
+	public Orifice getOrificeVagina() {
 		return orificeVagina;
 	}
 
@@ -73,7 +77,7 @@ public class Vagina implements BodyPartInterface {
 		return girlcum;
 	}
 	
-	public OrificeVaginaUrethra getOrificeUrethra() {
+	public Orifice getOrificeUrethra() {
 		return orificeUrethra;
 	}
 
@@ -170,7 +174,7 @@ public class Vagina implements BodyPartInterface {
 		if(this.type==VaginaType.NONE) {
 			this.orificeVagina.setStretchedCapacity(this.orificeVagina.getRawCapacityValue());
 			this.orificeUrethra.setStretchedCapacity(this.orificeUrethra.getRawCapacityValue());
-			this.orificeVagina.hymen=true;
+			this.hymen=true;
 		}
 		
 		if(!Main.game.isStarted() || owner==null) {// This always overrides pregnancy prevention, as the only times where this is true are for utility methods:
@@ -492,6 +496,64 @@ public class Vagina implements BodyPartInterface {
 
 	public Clitoris getClitoris() {
 		return clitoris;
+	}
+
+	public boolean isSquirter() {
+		return squirter;
+	}
+
+	public String setSquirter(GameCharacter owner, boolean squirter) {
+		if(owner == null) {
+			this.squirter = squirter;
+			return "";
+		}
+		if(this.squirter == squirter || !owner.hasVagina()) {
+			return "<p style='text-align:center;'>[style.colourDisabled(Nothing happens...)]</p>";
+		}
+
+		this.squirter = squirter;
+
+		if(squirter) {
+			return UtilText.parse(owner,
+					"<p>"
+							+ "[npc.NameIsFull] now a [style.boldGrow(squirter)]!"
+							+ "</p>");
+
+		} else {
+			return UtilText.parse(owner,
+					"<p>"
+							+ "[npc.NameIsFull] no longer a [style.boldShrink(squirter)]!"
+							+ "</p>");
+		}
+	}
+
+	public boolean hasHymen() {
+		return hymen;
+	}
+
+	public String setHymen(GameCharacter owner, boolean hymen) {
+		if(owner == null) {
+			this.hymen = hymen;
+			return "";
+		}
+		if(this.hymen == hymen || !owner.hasVagina()) {
+			return "<p style='text-align:center;'>[style.colourDisabled(Nothing happens...)]</p>";
+		}
+
+		this.hymen = hymen;
+
+		if(hymen) {
+			return UtilText.parse(owner,
+					"<p>"
+							+ "[npc.Name] [style.verb(feel)] an intense tightening sensation shooting down into [npc.her] [npc.pussy+], and [npc.she] can't help but let out a high-pitched whine as [npc.her] [style.boldGrow(hymen regenerates)]!"
+							+ "</p>");
+
+		} else {
+			return UtilText.parse(owner,
+					"<p>"
+							+ "[npc.NamePos] [npc.pussy+] suddenly starts to ache, and [npc.she] can't help but let out a high-pitched whine as [npc.her] [style.boldShrink(hymen disappears)]!"
+							+ "</p>");
+		}
 	}
 
 	@Override

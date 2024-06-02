@@ -21,20 +21,20 @@ import com.lilithsthrone.utils.Util;
 public class Mouth implements BodyPartInterface {
 	
 	protected AbstractMouthType type;
-	protected OrificeMouth orificeMouth;
+	protected Orifice orificeMouth;
 	protected int lipSize;
 	protected boolean piercedLip;
 
 	public Mouth(AbstractMouthType type, int lipSize, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
 		this.type = type;
 		this.lipSize = lipSize;
-		orificeMouth = new OrificeMouth(wetness, capacity, depth, elasticity, plasticity, virgin, type.getDefaultRacialOrificeModifiers());
+		orificeMouth = new Orifice(Orifice.Type.MOUTH, wetness, capacity, depth, elasticity, plasticity, virgin, type.getDefaultRacialOrificeModifiers());
 	}
 
 	public Mouth(Mouth mouthToCopy) {
 		this.type = mouthToCopy.type;
 		this.lipSize = mouthToCopy.lipSize;
-		this.orificeMouth = new OrificeMouth(mouthToCopy.orificeMouth);
+		this.orificeMouth = new Orifice(mouthToCopy.orificeMouth);
 		this.piercedLip = mouthToCopy.piercedLip;
 	}
 	
@@ -43,7 +43,7 @@ public class Mouth implements BodyPartInterface {
 		return type;
 	}
 
-	public OrificeMouth getOrificeMouth() {
+	public Orifice getOrificeMouth() {
 		return orificeMouth;
 	}
 	

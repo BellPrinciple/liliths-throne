@@ -23,14 +23,14 @@ public class Anus implements BodyPartInterface {
 	
 	// Asshole variables:
 	protected AbstractAnusType type;
-	protected OrificeAnus orificeAnus;
+	protected Orifice orificeAnus;
 	protected boolean bleached;
 	protected BodyHair assHair;
 
 	public Anus(AbstractAnusType type, int wetness, float capacity, int depth, int elasticity, int plasticity, boolean virgin) {
 		this.type = type;
 		
-		orificeAnus = new OrificeAnus(wetness, capacity, depth, elasticity, plasticity, virgin, type.getDefaultRacialOrificeModifiers());
+		orificeAnus = new Orifice(Orifice.Type.ANUS, wetness, capacity, depth, elasticity, plasticity, virgin, type.getDefaultRacialOrificeModifiers());
 		
 		bleached = false;
 		assHair = BodyHair.ZERO_NONE;
@@ -39,7 +39,7 @@ public class Anus implements BodyPartInterface {
 	public Anus(Anus anusToCopy) {
 		this.type = anusToCopy.type;
 		
-		this.orificeAnus = new OrificeAnus(anusToCopy.orificeAnus);
+		this.orificeAnus = new Orifice(anusToCopy.orificeAnus);
 		
 		this.bleached = anusToCopy.bleached;
 		this.assHair = anusToCopy.assHair;
@@ -112,7 +112,7 @@ public class Anus implements BodyPartInterface {
 		this.type = type;
 	}
 	
-	public OrificeAnus getOrificeAnus() {
+	public Orifice getOrificeAnus() {
 		return orificeAnus;
 	}
 
